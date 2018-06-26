@@ -52,6 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private bool _running;
         private readonly Guid _actionId;
 
+        private readonly object historyLock = new object();
         private readonly Stack<string> _progressHistory = new Stack<string>();
 
         public int PercentComplete
@@ -70,7 +71,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         public List<string> ProgressHistory
         {
-            get { return _progressHistory.Reverse().ToList(); }
+            get
+            {
+                lock (historyLock)
+                    return _progressHistory.Reverse().ToList();
+            }
         }
 
         protected PlanAction()
@@ -85,7 +90,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             try
             {
-                _progressHistory.Clear();
+                lock (historyLock)
+                    _progressHistory.Clear();
                 _running = true;
                 PercentComplete = 0;
                 _Run();
@@ -115,33 +121,43 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         public string CurrentProgressStep
         {
-            get { return _progressHistory.Count > 0 ? _progressHistory.Peek() : string.Empty; }
+            get
+            {
+                lock (historyLock)
+                    return _progressHistory.Count > 0 ? _progressHistory.Peek() : string.Empty;
+            }
         }
 
         protected void AddProgressStep(string step)
         {
-            if (_progressHistory.Count > 0)
+            lock (historyLock)
             {
-                var popped = _progressHistory.Pop();
-                _progressHistory.Push(popped + Messages.DONE);
+                if (_progressHistory.Count > 0)
+                {
+                    var popped = _progressHistory.Pop();
+                    _progressHistory.Push(popped + Messages.DONE);
+                }
+
+                if (step != null)
+                    _progressHistory.Push(step);
+
+                if (OnProgressChange != null)
+                    OnProgressChange(this);
             }
-
-            if (step != null)
-                _progressHistory.Push(step);
-
-            if (OnProgressChange != null)
-                OnProgressChange(this);
         }
 
         protected void ReplaceProgressStep(string step)
         {
-            if (_progressHistory.Count > 0)
-                _progressHistory.Pop();
+            lock (historyLock)
+            {
+                if (_progressHistory.Count > 0)
+                    _progressHistory.Pop();
 
-            _progressHistory.Push(step);
+                _progressHistory.Push(step);
 
-            if (OnProgressChange != null)
-                OnProgressChange(this);
+                if (OnProgressChange != null)
+                    OnProgressChange(this);
+            }
         }
 
         protected string PollTaskForResultAndDestroy(IXenConnection connection, ref Session session, XenRef<Task> task)
