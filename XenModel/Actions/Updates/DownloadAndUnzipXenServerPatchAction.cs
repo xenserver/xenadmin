@@ -47,7 +47,7 @@ namespace XenAdmin.Actions
         Error
     };
 
-    public class DownloadAndUnzipXenServerPatchAction : AsyncAction
+    public class DownloadAndUnzipXenServerPatchAction : AsyncAction, IByteProgressAction
     {
         private static readonly log4net.ILog log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -69,6 +69,8 @@ namespace XenAdmin.Actions
         private Exception patchDownloadError;
 
         public string PatchPath { get; private set; }
+
+        public string ByteProgressDescription { get; set; }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, bool suppressHist,
             params string[] updateFileExtensions)
@@ -293,7 +295,7 @@ namespace XenAdmin.Actions
             var descr = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
                                             Util.DiskSizeString(e.BytesReceived),
                                             Util.DiskSizeString(e.TotalBytesToReceive));
-            DownloadProgressDescription = descr;
+            ByteProgressDescription = descr;
             Tick(pc, descr);
         }
 
@@ -328,6 +330,5 @@ namespace XenAdmin.Actions
         {
         }
 
-        public string DownloadProgressDescription { get; private set; }
     }
 }

@@ -41,17 +41,18 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class UploadSupplementalPackAction : AsyncAction
+    public class UploadSupplementalPackAction : AsyncAction, IByteProgressAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private List<SR> srList = new List<SR>();
 
         private readonly string suppPackFilePath;
-        private readonly long diskSize;
+        private readonly long _totalUpdateSize;
         private readonly List<Host> servers;
 
-        private Pool_update poolUpdate = null;
+        private Pool_update poolUpdate;
+        private readonly string _updateName;
 
         public Dictionary<Host, SR> SrUploadedUpdates = new Dictionary<Host, SR>();
 
@@ -61,9 +62,6 @@ namespace XenAdmin.Actions
         }
 
 
-        /// <summary>
-        /// This constructor is used to upload a single supplemental pack file
-        /// </summary>
         public UploadSupplementalPackAction(IXenConnection connection, List<Host> selectedServers, string path, bool suppressHistory)
             : base(connection, null, Messages.SUPP_PACK_UPLOADING, suppressHistory)
         {
@@ -78,17 +76,14 @@ namespace XenAdmin.Actions
             
             Host = master;
             suppPackFilePath = path;
-            diskSize = FileSize(suppPackFilePath);
+            _updateName = Path.GetFileNameWithoutExtension(suppPackFilePath);
+            _totalUpdateSize = (new FileInfo(path)).Length;
             servers = selectedServers;
         }
 
         public readonly Dictionary<Host, XenRef<VDI>> VdiRefsToCleanUp = new Dictionary<Host, XenRef<VDI>>();
 
-        private static long FileSize(string path)
-        {
-            FileInfo fileInfo = new FileInfo(path);
-            return fileInfo.Length;
-        }
+        public string ByteProgressDescription { get; set; }
 
         protected override void Run()
         {
@@ -116,10 +111,10 @@ namespace XenAdmin.Actions
 
         private string UploadSupplementalPack(SR sr)
         {
-            this.Description = String.Format(Messages.SUPP_PACK_UPLOADING_TO, sr.Name());
+            this.Description = String.Format(Messages.SUPP_PACK_UPLOADING_TO, _updateName, sr.Name());
 
             String result;
-            log.DebugFormat("Creating vdi of size {0} bytes on SR '{1}'", diskSize, sr.Name());
+            log.DebugFormat("Creating vdi of size {0} bytes on SR '{1}'", _totalUpdateSize, sr.Name());
 
             VDI vdi = NewVDI(sr);
             XenRef<VDI> vdiRef = null;
@@ -155,8 +150,13 @@ namespace XenAdmin.Actions
             {
                 HTTP.UpdateProgressDelegate progressDelegate = delegate(int percent)
                 {
-                    var actionPercent = (int)(((totalUploaded * 100) + percent) / totalCount);
-                    Tick(actionPercent, Description);
+                    var sr1 = sr;
+                    var descr = string.Format(Messages.UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION, _updateName, sr1.Name(),
+                        Util.DiskSizeString(percent * _totalUpdateSize / 100), Util.DiskSizeString(_totalUpdateSize));
+
+                    var actionPercent = (int)((totalUploaded * 100 + percent) / totalCount);
+                    ByteProgressDescription = descr;
+                    Tick(actionPercent, descr);
                 };
 
                 Session session = NewSession();
@@ -189,7 +189,7 @@ namespace XenAdmin.Actions
                 if (ex is TargetInvocationException && ex.InnerException != null)
                     throw ex.InnerException;
                 else
-                    throw ex; 
+                    throw; 
             }
             finally
             {
@@ -273,7 +273,7 @@ namespace XenAdmin.Actions
             vdi.Connection = Connection;
             vdi.read_only = false;
             vdi.SR = new XenRef<SR>(sr);
-            vdi.virtual_size = diskSize;
+            vdi.virtual_size = _totalUpdateSize;
             vdi.name_label = new FileInfo(suppPackFilePath).Name;
             vdi.name_description = Helpers.ElyOrGreater(Connection) ? Messages.UPDATE_TEMP_VDI_DESCRIPTION : Messages.SUPP_PACK_TEMP_VDI_DESCRIPTION;
             vdi.sharable = false;
@@ -362,7 +362,7 @@ namespace XenAdmin.Actions
 
         private bool SrHasEnoughFreeSpace(SR sr)
         {
-            return sr.FreeSpace() >= diskSize; 
+            return sr.FreeSpace() >= _totalUpdateSize; 
         }
     }
 }

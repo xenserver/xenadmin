@@ -83,6 +83,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (Helpers.ElyOrGreater(master))
                 {
                     var uploadIsoAction = new UploadSupplementalPackAction(session.Connection, new List<Host>() {master}, path, true);
+                    uploadIsoAction.Changed += uploadAction_Changed;
+                    uploadIsoAction.Completed += uploadAction_Completed;
                     inProgressAction = uploadIsoAction;
                     uploadIsoAction.RunExternal(session);
 
@@ -104,6 +106,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     checkSpaceForUpload.RunExternal(session);
 
                     var uploadPatchAction = new UploadPatchAction(session.Connection, path, true, false);
+                    uploadPatchAction.Changed += uploadAction_Changed;
+                    uploadPatchAction.Completed += uploadAction_Completed;
                     inProgressAction = uploadPatchAction;
                     uploadPatchAction.RunExternal(session);
 
@@ -124,6 +128,31 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (!mappings.Contains(newMapping))
                     mappings.Add(newMapping);
             }
+        }
+
+        private void uploadAction_Changed(ActionBase action)
+        {
+            if (action == null)
+                return;
+
+            if (Cancelling)
+                action.Cancel();
+
+            var bpAction = action as IByteProgressAction;
+            if (bpAction == null)
+                return;
+
+            if (!string.IsNullOrEmpty(bpAction.ByteProgressDescription))
+                ReplaceProgressStep(bpAction.ByteProgressDescription);
+        }
+
+        private void uploadAction_Completed(ActionBase action)
+        {
+            if (action == null)
+                return;
+
+            action.Changed -= uploadAction_Changed;
+            action.Completed -= uploadAction_Completed;
         }
 
         public override void Cancel()

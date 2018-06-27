@@ -1880,9 +1880,6 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALL_UPDATES_APPLIED" xml:space="preserve">
     <value>All Updates Applied</value>
   </data>
-  <data name="ALL_UPDATES_UPLOADED" xml:space="preserve">
-    <value>All Updates Uploaded</value>
-  </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
 
@@ -2310,7 +2307,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Canceling Tasks</value>
   </data>
   <data name="CANCELLED_BY_USER" xml:space="preserve">
-    <value>Cancelled by user</value>
+    <value>Canceled by user</value>
   </data>
   <data name="CANCEL_CONNECT" xml:space="preserve">
     <value>Cancel Connect</value>
@@ -9367,7 +9364,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION" xml:space="preserve">
-    <value>The update process was cancelled.</value>
+    <value>The update process was canceled.</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it.</value>
@@ -9765,7 +9762,7 @@ File not found</value>
     <value> done.</value>
   </data>
   <data name="PLAN_ACTION_CANCELLED_BY_USER" xml:space="preserve">
-    <value> cancelled by user.</value>
+    <value> canceled by user.</value>
   </data>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> error.</value>
@@ -10586,7 +10583,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>No longer connected to {0}. Please review your selection and try again.</value>
   </data>
   <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
-    <value>The rolling pool upgrade process was cancelled.</value>
+    <value>The rolling pool upgrade process was canceled.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
@@ -11489,7 +11486,7 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>Uploading file</value>
   </data>
   <data name="SUPP_PACK_UPLOADING_TO" xml:space="preserve">
-    <value>Uploading to '{0}'</value>
+    <value>Uploading update '{0}' to '{1}'</value>
   </data>
   <data name="SUPP_PACK_VERSIONS_DIFFER" xml:space="preserve">
     <value>{0} (not the same version on all hosts)</value>
@@ -12290,13 +12287,22 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Uploading...</value>
   </data>
   <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
-    <value>Update successfully uploaded to selected server(s)</value>
+    <value>Update successfully uploaded to the selected server(s)</value>
   </data>
   <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
     <value>Upload</value>
   </data>
-  <data name="UPLOAD_PATCH_UPLOADED" xml:space="preserve">
-    <value>Uploaded</value>
+  <data name="UPLOAD_PATCH_UPLOADED_DESCRIPTION" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="UPLOAD_PATCH_UPLOADING_DESCRIPTION" xml:space="preserve">
+    <value>Uploading update {0}...</value>
+  </data>
+  <data name="UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION" xml:space="preserve">
+    <value>Uploading update {0} ({1} of {2})...</value>
+  </data>
+  <data name="UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION" xml:space="preserve">
+    <value>Uploading update '{0}' to '{1}' ({2} of {3})...</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
