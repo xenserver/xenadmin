@@ -12149,7 +12149,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading update {0} ({1} of {2}).
+        ///   Looks up a localized string similar to Downloading update {0} ({1} of {2})....
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC {
             get {
@@ -27187,15 +27187,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}....
-        /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT", resourceCulture);
             }
         }
         

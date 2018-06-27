@@ -4315,7 +4315,7 @@ This will also delete its subfolders.</value>
     <value>Downloading update {0}</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC" xml:space="preserve">
-    <value>Downloading update {0} ({1} of {2})</value>
+    <value>Downloading update {0} ({1} of {2})...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC" xml:space="preserve">
     <value>Download canceled</value>
@@ -9380,9 +9380,6 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE" xml:space="preserve">
     <value>The following error occurred while automated updates were in progress:</value>
-  </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT" xml:space="preserve">
-    <value>{0}...</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY" xml:space="preserve">
     <value>All automated updates processes were completed successfuly.</value>
