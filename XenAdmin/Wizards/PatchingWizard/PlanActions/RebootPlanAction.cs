@@ -81,6 +81,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Connection.ExpectDisruption = true;
             try
             {
+                AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
                 WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
                 foreach (var host in Connection.Cache.Hosts)
                     host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts

@@ -66,18 +66,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var hostObj = GetResolvedHost();
 
             var vms = hostObj.GetRunningVMs();
-            if (vms.Count > 0)
-            {
-                AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
-                PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObj.resident_VMs));
-            }
-
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, hostObj.Name()));
             log.DebugFormat("Disabling host {0}", hostObj.Name());
             Host.disable(session, HostXenRef.opaque_ref);
 
             if (vms.Count > 0)
             {
+                PBD.CheckPlugPBDsForVMs(Connection, vms);
                 AddProgressStep(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
                 log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
                 XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
@@ -87,15 +82,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected void BringBabiesBack(ref Session session, List<XenRef<VM>> vmrefs, bool enableOnly)
         {
-            AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
-            PBD.CheckAndBestEffortPlugPBDsFor(Connection, vmrefs);
-
-            //
             // CA-17428: Apply hotfixes to a pool of hosts through XenCenter fails.
-            //
             // Hosts do reenable themselves anyway, so just wait 1 min for that,  
             // occasionally poking it.
-            //
             var hostObj = GetResolvedHost();
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, hostObj.Name()));
 
@@ -103,7 +92,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             while (!Host.get_enabled(session, HostXenRef.opaque_ref))
             {
                 retries++;
-
                 Thread.Sleep(5000);
 
                 try
@@ -127,6 +115,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             
             hostObj = GetResolvedHost();
             AddProgressStep(string.Format(Messages.PLAN_ACTION_STATUS_REPATRIATING_VMS, hostObj.Name()));
+            PBD.CheckPlugPBDsForVMs(Connection, vmrefs, true);
 
             foreach (var vmRef in vmrefs)
             {
