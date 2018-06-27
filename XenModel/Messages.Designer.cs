@@ -5103,15 +5103,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Updates Uploaded.
-        /// </summary>
-        public static string ALL_UPDATES_UPLOADED {
-            get {
-                return ResourceManager.GetString("ALL_UPDATES_UPLOADED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Allow to continue.
         /// </summary>
         public static string ALLOW_TO_CONTINUE {
@@ -6330,7 +6321,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancelled by user.
+        ///   Looks up a localized string similar to Canceled by user.
         /// </summary>
         public static string CANCELLED_BY_USER {
             get {
@@ -27146,7 +27137,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update process was cancelled..
+        ///   Looks up a localized string similar to The update process was canceled..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION {
             get {
@@ -28062,7 +28053,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  cancelled by user..
+        ///   Looks up a localized string similar to  canceled by user..
         /// </summary>
         public static string PLAN_ACTION_CANCELLED_BY_USER {
             get {
@@ -30452,7 +30443,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The rolling pool upgrade process was cancelled..
+        ///   Looks up a localized string similar to The rolling pool upgrade process was canceled..
         /// </summary>
         public static string ROLLING_UPGRADE_CANCELLATION {
             get {
@@ -33134,7 +33125,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading to &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Uploading update &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
         public static string SUPP_PACK_UPLOADING_TO {
             get {
@@ -35480,7 +35471,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update successfully uploaded to selected server(s).
+        ///   Looks up a localized string similar to Update successfully uploaded to the selected server(s).
         /// </summary>
         public static string UPLOAD_PATCH_END_DESCRIPTION {
             get {
@@ -35498,11 +35489,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploaded.
+        ///   Looks up a localized string similar to Completed.
         /// </summary>
-        public static string UPLOAD_PATCH_UPLOADED {
+        public static string UPLOAD_PATCH_UPLOADED_DESCRIPTION {
             get {
-                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADED", resourceCulture);
+                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading update {0}....
+        /// </summary>
+        public static string UPLOAD_PATCH_UPLOADING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading update {0} ({1} of {2})....
+        /// </summary>
+        public static string UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading update &apos;{0}&apos; to &apos;{1}&apos; ({2} of {3})....
+        /// </summary>
+        public static string UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION", resourceCulture);
             }
         }
         

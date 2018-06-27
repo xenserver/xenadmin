@@ -73,9 +73,9 @@ namespace XenAdmin.Diagnostics.Hotfixing
             {
                 var master = Helpers.GetMaster(host.Connection);
                 var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.Update));
-                var action = new Actions.UploadPatchAction(master.Connection, filePath);
+                var action = new Actions.UploadPatchAction(master.Connection, filePath, false, false);
                 action.RunExternal(session);
-                patch = action.PatchRefs[master];
+                patch = action.Patch;
             }
             Pool_patch.apply(session, patch.opaque_ref, host.opaque_ref);
         }

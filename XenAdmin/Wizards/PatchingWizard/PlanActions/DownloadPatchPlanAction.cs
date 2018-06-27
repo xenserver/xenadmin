@@ -94,17 +94,20 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             downloadAction.RunExternal(session);
         }
 
-        private void downloadAndUnzipXenServerPatchAction_Changed(ActionBase sender)
+        private void downloadAndUnzipXenServerPatchAction_Changed(ActionBase action)
         {
-            var downloadAction = sender as DownloadAndUnzipXenServerPatchAction;
-            if (downloadAction == null)
+            if (action == null)
                 return;
 
             if (Cancelling)
-                downloadAction.Cancel();
+                action.Cancel();
 
-            if (!string.IsNullOrEmpty(downloadAction.DownloadProgressDescription))
-                ReplaceProgressStep(downloadAction.DownloadProgressDescription);
+            var bpAction = action as IByteProgressAction;
+            if (bpAction == null)
+                return;
+
+            if (!string.IsNullOrEmpty(bpAction.ByteProgressDescription))
+                ReplaceProgressStep(bpAction.ByteProgressDescription);
         }
 
 
