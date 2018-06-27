@@ -104,15 +104,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 downloadAction.Cancel();
 
             if (!string.IsNullOrEmpty(downloadAction.DownloadProgressDescription))
-            {
-                ReplaceProgressStep(string.Format(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT, downloadAction.DownloadProgressDescription));
-            }
+                ReplaceProgressStep(downloadAction.DownloadProgressDescription);
         }
 
 
         private void downloadAndUnzipXenServerPatchAction_Completed(ActionBase sender)
         {
-            var action = sender as AsyncAction;
+            var action = sender as DownloadAndUnzipXenServerPatchAction;
             if (action == null)
                 return;
 
@@ -120,10 +118,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             action.Completed -= downloadAndUnzipXenServerPatchAction_Completed;
 
             if (action.Succeeded)
-            {
-                if (action is DownloadAndUnzipXenServerPatchAction)
-                    AllDownloadedPatches[patch] = (action as DownloadAndUnzipXenServerPatchAction).PatchPath;
-            }
+                AllDownloadedPatches[patch] = action.PatchPath;
         }
     }
 }
