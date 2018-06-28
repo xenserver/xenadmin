@@ -151,7 +151,7 @@ namespace XenAdmin.Actions
         private void UpdateProgress(int percent)
         {
             var descr = string.Format(Messages.UPLOAD_PATCH_UPLOADING_PROGRESS_DESCRIPTION, _patchName,
-                Util.DiskSizeString(percent * _totalPatchSize / 100), Util.DiskSizeString(_totalPatchSize));
+                Util.DiskSizeString(percent * _totalPatchSize / 100, "F1"), Util.DiskSizeString(_totalPatchSize));
 
             ByteProgressDescription = descr;
             Tick(percent, descr);

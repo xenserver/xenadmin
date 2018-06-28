@@ -152,7 +152,7 @@ namespace XenAdmin.Actions
                 {
                     var sr1 = sr;
                     var descr = string.Format(Messages.UPLOAD_PATCH_UPLOADING_TO_SR_PROGRESS_DESCRIPTION, _updateName, sr1.Name(),
-                        Util.DiskSizeString(percent * _totalUpdateSize / 100), Util.DiskSizeString(_totalUpdateSize));
+                        Util.DiskSizeString(percent * _totalUpdateSize / 100, "F1"), Util.DiskSizeString(_totalUpdateSize));
 
                     var actionPercent = (int)((totalUploaded * 100 + percent) / totalCount);
                     ByteProgressDescription = descr;
