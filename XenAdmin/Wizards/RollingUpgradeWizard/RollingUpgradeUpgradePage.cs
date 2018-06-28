@@ -29,10 +29,10 @@
  * SUCH DAMAGE.
  */
 
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
@@ -103,7 +103,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             //add a revert pre-check action for this pool
-            var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hostNeedUpgrade.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
+            var problemsToRevert = ProblemsResolvedPreCheck.Where(p =>
+            {
+                var hostCheck = p.Check as HostCheck;
+                if (hostCheck != null)
+                    return hostNeedUpgrade.Select(h => h.uuid).Contains(hostCheck.Host.uuid);
+                return false;
+            }).ToList();
             if (problemsToRevert.Count > 0)
                 finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
         }

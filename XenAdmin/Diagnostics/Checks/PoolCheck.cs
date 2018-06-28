@@ -30,7 +30,6 @@
  */
 
 using XenAdmin.Core;
-using XenAdmin.Diagnostics.Problems;
 using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
@@ -38,7 +37,6 @@ namespace XenAdmin.Diagnostics.Checks
     public abstract class PoolCheck : Check
     {
         protected PoolCheck(Pool pool)
-            : base(Helpers.GetMaster(pool.Connection))
         {
             _pool = pool;
         }

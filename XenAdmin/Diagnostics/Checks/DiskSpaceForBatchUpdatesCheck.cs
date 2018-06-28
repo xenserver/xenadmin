@@ -41,7 +41,7 @@ using System.Linq;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class DiskSpaceForAutomatedUpdatesCheck : Check
+    class DiskSpaceForAutomatedUpdatesCheck : HostCheck
     {
         private readonly Dictionary<Host, List<XenServerPatch>> updateSequence;
 

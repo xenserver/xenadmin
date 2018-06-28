@@ -35,7 +35,7 @@ using XenAdmin.Diagnostics.Problems.HostProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class HostMaintenanceModeCheck : Check
+    class HostMaintenanceModeCheck : HostCheck
     {
         public HostMaintenanceModeCheck(Host host) : base(host)
         {

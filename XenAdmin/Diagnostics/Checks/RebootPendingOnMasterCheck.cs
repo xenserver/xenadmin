@@ -40,7 +40,7 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class RestartHostOrToolstackPendingOnMasterCheck : Check
+    class RestartHostOrToolstackPendingOnMasterCheck : HostCheck
     {
         public string UpdateUuid { get; private set; }
         private readonly Pool pool;

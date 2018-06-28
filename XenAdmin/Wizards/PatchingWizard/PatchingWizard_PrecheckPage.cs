@@ -246,7 +246,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     // this host is no longer live -> remove all previous problems regarding this host
                     Problem curProblem = problem;
-                    ProblemsResolvedPreCheck.RemoveAll(p => p.Check.Host == curProblem.Check.Host);
+                    ProblemsResolvedPreCheck.RemoveAll(p =>
+                    {
+                        var hostCheck = p.Check as HostCheck;
+                        var curHostCheck = curProblem.Check as HostCheck;
+                        if (hostCheck != null && curHostCheck != null)
+                            return hostCheck.Host.Equals(curHostCheck.Host);
+                        return false;
+                    });
                 }
 
                 if (ProblemsResolvedPreCheck.Contains(problem))
@@ -730,9 +737,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     description = _check.SuccessfulCheckDescription;
                     if (string.IsNullOrEmpty(description))
-                        description = _check.Host != null
-                            ? String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name(), _check.Description)
+                    {
+                        var hostCheck = _check as HostCheck;
+                        description = hostCheck != null
+                            ? String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, hostCheck.Host.Name(), _check.Description)
                             : String.Format(Messages.PATCHING_WIZARD_CHECK_OK, _check.Description);
+                    }
                 }
                 
                 if (description != string.Empty)

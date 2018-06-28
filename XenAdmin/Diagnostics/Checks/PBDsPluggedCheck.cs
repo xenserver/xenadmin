@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
@@ -38,7 +37,7 @@ using XenAdmin.Diagnostics.Problems.SRProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class PBDsPluggedCheck : Check
+    public class PBDsPluggedCheck : HostCheck
     {
         SR srUploadedUpdates;
 

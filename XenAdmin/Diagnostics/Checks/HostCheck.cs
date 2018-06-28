@@ -29,50 +29,24 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
-using XenAdmin.Actions;
-using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Dialogs;
+using System.Diagnostics;
+using XenAPI;
 
-namespace XenAdmin.Diagnostics.Problems.UtilityProblem
+namespace XenAdmin.Diagnostics.Checks
 {
-    class CfuNotAvailableProblem : Problem
+    public abstract class HostCheck : Check
     {
-        public CfuNotAvailableProblem(Check check)
-            : base(check)
+        private readonly Host _host;
+
+        protected HostCheck(Host host)
         {
+            Debug.Assert(host != null);
+            _host = host;
         }
 
-        public override string Description
+        public Host Host
         {
-            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
-        }
-
-        protected override AsyncAction CreateAction(out bool cancelled)
-        {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
-            {
-                dlg.ShowDialog();
-            }
-
-            cancelled = true;
-            return null;
-        }
-
-        public override string HelpMessage
-        {
-            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
-        }
-
-        public sealed override string Title
-        {
-            get { return string.Empty; }
-        }
-
-        public override bool IsFixable
-        {
-            get { return false; }
+            get { return _host; }
         }
     }
 }

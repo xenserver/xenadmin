@@ -39,7 +39,7 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class ServerSelectionCheck : Check
+    class ServerSelectionCheck : HostCheck
     {
         private readonly Pool_update update;
         private readonly Pool pool;

@@ -39,12 +39,9 @@ using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems.VMProblem;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 
-using System.Linq;
-using XenAdmin.Wizards.PatchingWizard;
-
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class AssertCanEvacuateCheck : Check
+    public class AssertCanEvacuateCheck : HostCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
