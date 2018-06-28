@@ -453,8 +453,9 @@ namespace XenAdmin.TabPages
         {
             List<string> result = new List<string>();
 
-            foreach (Pool_patch patch in host.AppliedPatches())
-                result.Add(patch.Name());
+            result.AddRange(Helpers.ElyOrGreater(host)
+                ? host.AppliedUpdates().Select(u => u.Name())
+                : host.AppliedPatches().Select(p => p.Name()));
 
             result.Sort(StringUtility.NaturalCompare);
             return string.Join(", ", result.ToArray());
