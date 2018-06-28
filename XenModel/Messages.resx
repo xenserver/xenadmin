@@ -9079,6 +9079,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
     <value>The VM is not agile. Restart cannot be guaranteed.</value>
   </data>
+  <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
+    <value>The VM has one or more SR-IOV VFs attached. Restart cannot be guaranteed.</value>
+  </data>
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM has one or more virtual GPUs. Restart cannot be guaranteed.</value>
   </data>
