@@ -38,7 +38,7 @@ using XenAdmin.Diagnostics.Problems.PoolProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class HAOffCheck : Check
+    public class HAOffCheck : HostCheck
     {
 
         public HAOffCheck(Host host)

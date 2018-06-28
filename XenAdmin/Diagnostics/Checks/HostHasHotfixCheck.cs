@@ -29,8 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Linq;
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
@@ -39,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class HostHasHotfixCheck : Check
+    class HostHasHotfixCheck : HostCheck
     {
         private readonly HotfixFactory hotfixFactory = new HotfixFactory();
         public HostHasHotfixCheck(Host host)

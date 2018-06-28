@@ -33,11 +33,10 @@ using System.Collections.Generic;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
-using XenAdmin.Wizards.PatchingWizard;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class HostNeedsRebootCheck : Check
+    public class HostNeedsRebootCheck : HostCheck
     {
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
         private readonly List<after_apply_guidance> patchGuidance;

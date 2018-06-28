@@ -37,20 +37,18 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class AutomatedUpdatesLicenseCheck : Check
+    class AutomatedUpdatesLicenseCheck : PoolCheck
     {
-        private readonly Pool pool;
 
         public AutomatedUpdatesLicenseCheck(Pool pool)
-            : base(Helpers.GetMaster(pool.Connection))
+            : base(pool)
         {
-            this.pool = pool;
         }
 
         protected override Problem RunCheck()
         {
-            if (pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
-                return new NotLicensedForAutomatedUpdatesWarning(this, pool);
+            if (Pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+                return new NotLicensedForAutomatedUpdatesWarning(this, Pool);
 
             return null;
         }
@@ -64,7 +62,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
             get
             {
-                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, pool.Name(), Description);
+                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Pool.Name(), Description);
             }
         }
     }

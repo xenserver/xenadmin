@@ -30,20 +30,12 @@
  */
 
 using System.Collections.Generic;
-using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 
 namespace XenAdmin.Diagnostics.Checks
 {
     public abstract class Check
     {
-        protected Check(Host host)
-        {
-            _host = host;
-        }
-
-        protected Check(){ }
-
         protected abstract Problem RunCheck();
 
         // By default, most Checks return zero or one Problems: but a
@@ -63,13 +55,5 @@ namespace XenAdmin.Diagnostics.Checks
         {
             get { return string.Empty; }
         }
-
-        private readonly Host _host = null;
-        public Host Host
-        {
-            get{ return _host;}
-        }
-
     }
-
 }

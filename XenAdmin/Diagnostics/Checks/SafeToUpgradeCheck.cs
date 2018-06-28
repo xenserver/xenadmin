@@ -38,7 +38,7 @@ using System.Collections.Generic;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class SafeToUpgradeCheck : Check
+    public class SafeToUpgradeCheck : HostCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

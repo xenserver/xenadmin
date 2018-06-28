@@ -35,6 +35,7 @@ using XenAPI;
 using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Alerts;
+using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -130,7 +131,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //add a revert pre-check action for this pool
-            var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
+            var problemsToRevert = ProblemsResolvedPreCheck.Where(p =>
+            {
+                var hostCheck = p.Check as HostCheck;
+                if (hostCheck != null)
+                    return hosts.Select(h => h.uuid).Contains(hostCheck.Host.uuid);
+                return false;
+            }).ToList();
             if (problemsToRevert.Count > 0)
                 finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
         }

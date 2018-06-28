@@ -34,11 +34,10 @@ using XenAdmin.Diagnostics.Problems.SRProblem;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
-using XenAdmin.Core;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class HostHasUnsupportedStorageLinkSRCheck : Check
+    class HostHasUnsupportedStorageLinkSRCheck : HostCheck
     {
 
         public HostHasUnsupportedStorageLinkSRCheck(Host host)
