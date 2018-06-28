@@ -37291,7 +37291,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot sched&amp;ules ....
+        ///   Looks up a localized string similar to Snapsh&amp;ot schedules ....
         /// </summary>
         public static string VMSS_CONTEXT_MENU {
             get {
@@ -37354,7 +37354,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Snaps&amp;hot Schedules....
+        ///   Looks up a localized string similar to VM Snapsh&amp;ot Schedules....
         /// </summary>
         public static string VMSS_MAIN_MENU {
             get {

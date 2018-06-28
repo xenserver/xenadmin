@@ -12667,7 +12667,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>{0}. {1}: {2}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
-    <value>Snapshot sched&amp;ules ...</value>
+    <value>Snapsh&amp;ot schedules ...</value>
   </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
@@ -12688,7 +12688,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>Pool master unreachable</value>
   </data>
   <data name="VMSS_MAIN_MENU" xml:space="preserve">
-    <value>VM Snaps&amp;hot Schedules...</value>
+    <value>VM Snapsh&amp;ot Schedules...</value>
   </data>
   <data name="VMSS_NAME" xml:space="preserve">
     <value>Schedule Name</value>
