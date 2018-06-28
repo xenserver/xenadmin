@@ -187,13 +187,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 334</value>
-  </data>
-  <data name="labelProgress.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 334</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>570, 22</value>
+    <value>564, 22</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -240,14 +237,11 @@
   <data name="&gt;&gt;buttonResolveAll.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="checkBoxViewPrecheckFailuresOnly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="checkBoxViewPrecheckFailuresOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="checkBoxViewPrecheckFailuresOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 314</value>
+    <value>3, 308</value>
   </data>
   <data name="checkBoxViewPrecheckFailuresOnly.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 17</value>
