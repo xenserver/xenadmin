@@ -57,6 +57,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            AddProgressStep(string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name));
+
+            //if we are updating multiple pools at the same time, we only need to download the patch for
+            // the first pool, hence we lock it to prevent the plan action of the other pools to run
             lock (patch)
             {
                 if (Cancelling)
@@ -90,7 +94,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             downloadAction.Changed += downloadAndUnzipXenServerPatchAction_Changed;
             downloadAction.Completed += downloadAndUnzipXenServerPatchAction_Completed;
 
-            AddProgressStep(string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name));
             downloadAction.RunExternal(session);
         }
 
