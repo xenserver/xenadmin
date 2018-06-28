@@ -107,7 +107,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
             }
 
-            if (enableOnly)
+            if (enableOnly || vmrefs.Count == 0)
                 return;
 
             int vmCount = vmrefs.Count;
