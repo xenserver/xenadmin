@@ -26146,6 +26146,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VM has one or more SR-IOV VFs attached. Restart cannot be guaranteed..
+        /// </summary>
+        public static string NOT_AGILE_VM_HAS_SRIOV_VIF {
+            get {
+                return ResourceManager.GetString("NOT_AGILE_VM_HAS_SRIOV_VIF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM has one or more virtual GPUs. Restart cannot be guaranteed..
         /// </summary>
         public static string NOT_AGILE_VM_HAS_VGPU {
