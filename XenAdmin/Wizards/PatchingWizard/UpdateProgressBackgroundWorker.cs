@@ -45,7 +45,25 @@ namespace XenAdmin.Wizards.PatchingWizard
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
         public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
         public string Name { get; set; }
-        public int ProgressIncrement { get; set; }
+        
+        private double _percentComplete;
+        private readonly object _percentLock = new object();
+
+        public double PercentComplete
+        {
+            get
+            {
+                lock (_percentLock)
+                    return _percentComplete;
+            }
+            set
+            {
+                lock (_percentLock)
+                    _percentComplete = value;
+            }
+        }
+
+        public double ProgressIncrement { get; set; }
 
         public UpdateProgressBackgroundWorker(List<HostPlan> planActions, List<PlanAction> finalActions)
         {
@@ -54,7 +72,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             CleanupActions = FinalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
         }
 
-        public void RunPlanAction(PlanAction action, ref DoWorkEventArgs e)
+        public void RunPlanAction(PlanAction action, ref DoWorkEventArgs e, bool skip = false)
         {
             if (CancellationPending)
             {
@@ -70,14 +88,24 @@ namespace XenAdmin.Wizards.PatchingWizard
             DoneActions.Remove(action);
             action.Error = null;
 
-            action.OnProgressChange += action_OnProgressChange;
-            action.Run();
-            action.OnProgressChange -= action_OnProgressChange;
+            if (skip)
+            {
+                //skip running it, but still need to report progress, mainly for the progress bar
+                PercentComplete += ProgressIncrement * 100;
+                ReportProgress((int)PercentComplete, action);
+            }
+            else
+            {
+                action.OnProgressChange += action_OnProgressChange;
+                action.Run();
+                action.OnProgressChange -= action_OnProgressChange;
+            }
         }
 
         private void action_OnProgressChange(PlanAction planAction)
         {
-            ReportProgress(planAction.IsComplete ? ProgressIncrement : 0, planAction);
+            PercentComplete += planAction.IsComplete ? ProgressIncrement * 100 : 0;
+            ReportProgress((int)PercentComplete, planAction);
         }
 
         public new void CancelAsync()
@@ -102,17 +130,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.CancelAsync();
         }
 
-        private int FinalActionsPercentage
+        private double FinalActionsPercentage
         {
             get
             {
                 if (FinalActions == null || FinalActions.Count < 1)
                     return 0;
-                return 4;
+                return 0.4;
             }
         }
 
-        public int FinalActionsIncrement
+        private double HostPlansPercentage
+        {
+            get
+            {
+                if (HostPlans == null || HostPlans.Count < 1)
+                    return 0;
+                return 1 - FinalActionsPercentage;
+            }
+        }
+
+        public double FinalActionsIncrement
         {
             get
             {
@@ -122,19 +160,29 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public int InitialActionsIncrement(HostPlan hp)
+        public double HostPlansIncrement
         {
-            return hp.InitialActionsIncrement / HostPlans.Count;
+            get
+            {
+                if (HostPlans == null || HostPlans.Count < 1)
+                    return 0;
+                return HostPlansPercentage / HostPlans.Count;
+            }
         }
 
-        public int UpdatesActionsIncrement(HostPlan hp)
+        public double InitialActionsIncrement(HostPlan hp)
         {
-            return hp.UpdatesActionsIncrement / HostPlans.Count;
+            return hp.InitialActionsIncrement * HostPlansIncrement;
         }
 
-        public int DelayedActionsIncrement(HostPlan hp)
+        public double UpdatesActionsIncrement(HostPlan hp)
         {
-            return hp.DelayedActionsIncrement / HostPlans.Count;
+            return hp.UpdatesActionsIncrement * HostPlansIncrement;
+        }
+
+        public double DelayedActionsIncrement(HostPlan hp)
+        {
+            return hp.DelayedActionsIncrement * HostPlansIncrement;
         }
     }
 
@@ -153,37 +201,37 @@ namespace XenAdmin.Wizards.PatchingWizard
             DelayedPlanActions = delayedActions ?? new List<PlanAction>();
         }
 
-        private int InitialActionsPercentage
+        private double InitialActionsPercentage
         {
             get
             {
                 if (InitialPlanActions == null || InitialPlanActions.Count < 1)
                     return 0;
-                return 30;
+                return 0.3;
             }
         }
 
-        private int UpdatesActionsPercentage
+        private double UpdatesActionsPercentage
         {
             get
             {
                 if (UpdatesPlanActions == null || UpdatesPlanActions.Count < 1)
                     return 0;
-                return 90 - InitialActionsPercentage;
+                return 0.9 - InitialActionsPercentage;
             }
         }
 
-        private int DelayedActionsPercentage
+        private double DelayedActionsPercentage
         {
             get
             {
                 if (DelayedPlanActions == null || DelayedPlanActions.Count < 1)
                     return 0;
-                return 96 - InitialActionsPercentage - UpdatesActionsPercentage;
+                return 1 - InitialActionsPercentage - UpdatesActionsPercentage;
             }
         }
 
-        public int InitialActionsIncrement
+        public double InitialActionsIncrement
         {
             get
             {
@@ -193,7 +241,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public int UpdatesActionsIncrement
+        public double UpdatesActionsIncrement
         {
             get
             {
@@ -203,7 +251,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public int DelayedActionsIncrement
+        public double DelayedActionsIncrement
         {
             get
             {

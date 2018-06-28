@@ -201,20 +201,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             // remove the successful action from the cleanup actions (we are running the cleanup actions in case of failures or if the user cancelled the process, but we shouldn't re-run the actions that have already been run)
                             actionsWorker.CleanupActions.Remove(action);
-
-                            // only increase the progress if the action succeeded
-                            int newVal = progressBar.Value + e.ProgressPercentage / backgroundWorkers.Count;
-                            progressBar.Value = newVal > 100 ? 100 : newVal;
                         }
                     }
                 }
 
-                UpdateStatusTextBox();
+                UpdateStatus();
             }
         }
 
-        private void UpdateStatusTextBox()
+        private void UpdateStatus()
         {
+            // only increase the progress if the action succeeded
+            var newVal = backgroundWorkers.Sum(b => b.PercentComplete) / backgroundWorkers.Count;
+            if (newVal < 0)
+                newVal = 0;
+            else if (newVal > 100)
+                newVal = 100;
+            progressBar.Value = (int)newVal;
+
             var allsb = new StringBuilder();
 
             foreach (var bgw in backgroundWorkers)
@@ -352,13 +356,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         else
                         {
                             //skip running it, but still need to report progress, mainly for the progress bar
-                            if (bgw.CancellationPending)
-                            {
-                                doWorkEventArgs.Cancel = true;
-                                return;
-                            }
-
-                            bgw.ReportProgress(bgw.ProgressIncrement, action);
+                            bgw.RunPlanAction(action, ref doWorkEventArgs, true);
                         }
                     }
                 }
@@ -384,7 +382,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 doWorkEventArgs.Result = new Exception(action.CurrentProgressStep, e);
 
                 failedWorkers.Add(bgw);
-                bgw.ReportProgress(0);
             }
         }
 
@@ -407,11 +404,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var bgw = sender as UpdateProgressBackgroundWorker;
                 if (bgw != null)
                 {
+                    var workerSucceeded = true;
+
                     if (bgw.DoneActions.Any(a => a.Error != null && !(a.Error is CancelledException)))
+                    {
+                        workerSucceeded = false;
                         _someWorkersFailed = true;
+                    }
 
                     if (bgw.DoneActions.Any(a => a.Error is CancelledException))
+                    {
+                        workerSucceeded = false;
                         someWorkersCancelled = true;
+                    }
+
+                    if (workerSucceeded)
+                        bgw.PercentComplete = 100;
                 }
                 //if all finished
                 if (backgroundWorkers.All(w => !w.IsBusy))
@@ -443,7 +451,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            UpdateStatusTextBox();
+            UpdateStatus();
             OnPageUpdated();
         }
 
