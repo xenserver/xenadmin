@@ -857,7 +857,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void ExecuteSolution(PreCheckHostRow preCheckHostRow)
         {
             bool cancelled;
-            resolvePrechecksAction = preCheckHostRow.Problem.SolveImmediately(out cancelled);
+            resolvePrechecksAction = preCheckHostRow.Problem.GetSolutionAction(out cancelled);
 
             if (resolvePrechecksAction != null)
             {
@@ -903,7 +903,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (preCheckHostRow != null && preCheckHostRow.Problem != null)
                 {
                     bool cancelled;
-                    AsyncAction action = preCheckHostRow.Problem.SolveImmediately(out cancelled);
+                    AsyncAction action = preCheckHostRow.Problem.GetSolutionAction(out cancelled);
                     if (action != null)
                     {
                         preCheckHostRow.Enabled = false;

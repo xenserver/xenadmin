@@ -43,7 +43,6 @@ using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Diagnostics.Checks.DR;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
-using XenAdmin.Properties;
 using XenAPI;
 
 using XenAdmin.Actions.DR;
@@ -476,17 +475,16 @@ namespace XenAdmin.Wizards.DRWizards
             return warnings;
         }
 
-        private ActionProgressDialog _progressDialog = null;
 
         private void ExecuteSolution(PreCheckItemRow preCheckRow)
         {
             bool cancelled;
-            AsyncAction action = preCheckRow.Problem.SolveImmediately(out cancelled);
+            AsyncAction action = preCheckRow.Problem.GetSolutionAction(out cancelled);
             if (action != null)
             {
                 action.Completed += action_Completed;
-                _progressDialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks);
-                _progressDialog.ShowDialog(this);
+                using (var progressDialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+                    progressDialog.ShowDialog(this);
                 if (action.Succeeded)
                 {
                     var revertAction = preCheckRow.Problem.UnwindChanges();
@@ -531,7 +529,7 @@ namespace XenAdmin.Wizards.DRWizards
                 if (preCheckRow != null && preCheckRow.Problem != null)
                 {
                     bool cancelled;
-                    AsyncAction action = preCheckRow.Problem.SolveImmediately(out cancelled);
+                    AsyncAction action = preCheckRow.Problem.GetSolutionAction(out cancelled);
                     if (action != null)
                     {
                         actions.Add(action, preCheckRow.Problem.UnwindChanges());
@@ -540,8 +538,8 @@ namespace XenAdmin.Wizards.DRWizards
             }
             foreach (var asyncAction in actions.Keys)
             {
-                _progressDialog = new ActionProgressDialog(asyncAction, ProgressBarStyle.Blocks);
-                _progressDialog.ShowDialog(this);
+                using (var progressDialog = new ActionProgressDialog(asyncAction, ProgressBarStyle.Blocks))
+                    progressDialog.ShowDialog(this);
 
                 if (asyncAction.Succeeded && actions[asyncAction] != null)
                     RevertActions.Add(actions[asyncAction]);
