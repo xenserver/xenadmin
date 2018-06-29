@@ -723,23 +723,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     ? Images.GetImage16For(Icons.Ok)
                     : Problem.Image;
 
-                string description = string.Empty;
+                string description = null;
 
                 if (Problem != null)
                     description = Problem.Description;
                 else if (_check != null)
-                {
                     description = _check.SuccessfulCheckDescription;
-                    if (string.IsNullOrEmpty(description))
-                    {
-                        var hostCheck = _check as HostCheck;
-                        description = hostCheck != null
-                            ? String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, hostCheck.Host.Name(), _check.Description)
-                            : String.Format(Messages.PATCHING_WIZARD_CHECK_OK, _check.Description);
-                    }
-                }
                 
-                if (description != string.Empty)
+                if (!string.IsNullOrEmpty(description))
                     _descriptionCell.Value = String.Format(Messages.PATCHING_WIZARD_DESC_CELL_INDENT, null, description);
 
                 _solutionCell.Value = Problem == null ? string.Empty : Problem.HelpMessage;

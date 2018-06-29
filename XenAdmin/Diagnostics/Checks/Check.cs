@@ -49,11 +49,16 @@ namespace XenAdmin.Diagnostics.Checks
             return list;
         }
 
-        public abstract string Description{ get;}
+        public abstract string Description { get; }
 
-        public virtual string SuccessfulCheckDescription 
+        public virtual string SuccessfulCheckDescription
         {
-            get { return string.Empty; }
+            get
+            {
+                return string.IsNullOrEmpty(Description)
+                    ? string.Empty
+                    : string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description);
+            }
         }
     }
 }

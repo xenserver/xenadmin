@@ -48,5 +48,15 @@ namespace XenAdmin.Diagnostics.Checks
         {
             get { return _host; }
         }
+
+        public override string SuccessfulCheckDescription 
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Description)
+                    ? string.Empty
+                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Host.Name(), Description);
+            }
+        }
     }
 }
