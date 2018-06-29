@@ -80,7 +80,7 @@ namespace XenAdmin.Diagnostics.Problems
             return null;
         }
 
-        public AsyncAction SolveImmediately(out bool cancelled)
+        public AsyncAction GetSolutionAction(out bool cancelled)
         {
             DeregisterSolutionActionEvent();
             solutionAction = CreateAction(out cancelled);
