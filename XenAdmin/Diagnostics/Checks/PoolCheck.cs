@@ -32,6 +32,7 @@
 using XenAdmin.Core;
 using XenAPI;
 
+
 namespace XenAdmin.Diagnostics.Checks
 {
     public abstract class PoolCheck : Check
@@ -45,6 +46,16 @@ namespace XenAdmin.Diagnostics.Checks
         public Pool Pool
         {
             get { return _pool; }
+        }
+
+        public override string SuccessfulCheckDescription
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Description)
+                    ? string.Empty
+                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Helpers.GetPoolOfOne(_pool.Connection), Description);
+            }
         }
     }
 }
