@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly object _update_grid_lock = new object();
         private BackgroundWorker _worker;
         public List<Host> SelectedServers = new List<Host>();
-        public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
+        private readonly List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
         private AsyncAction resolvePrechecksAction;
         public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
 
@@ -636,9 +636,23 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
 
+        public List<AsyncAction> GetUnwindChangesActions()
+        {
+            if (ProblemsResolvedPreCheck == null)
+                return null;
+
+            var actions = from problem in ProblemsResolvedPreCheck
+                where problem.SolutionActionCompleted
+                let action = problem.UnwindChanges()
+                where action != null && action.Connection != null && action.Connection.IsConnected
+                select action;
+
+            return actions.ToList();
+        }
+
         #region Nested classes and enums
 
-        internal enum PreCheckResult { OK, Info, Warning, Failed }
+        private enum PreCheckResult { OK, Info, Warning, Failed }
 
         private abstract class PreCheckGridRow : XenAdmin.Controls.DataGridViewEx.DataGridViewExRow
         {

@@ -33,15 +33,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using System.Threading;
 using log4net;
 using XenAdmin.Controls;
-using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 using System.Linq;
 using XenAdmin.Core;
 using System.Text;
+using XenAdmin.Actions;
+
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -53,7 +53,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool _thisPageIsCompleted = false;
         private bool _someWorkersFailed = false;
 
-        public List<Problem> ProblemsResolvedPreCheck { get; set; }
+        public List<AsyncAction> UnwindChangesActions { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
         public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
@@ -131,7 +131,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected abstract string FailureMessagePerPool(bool multipleErrors);
         protected abstract string UserCancellationMessage();
 
-        protected virtual void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions) { }
+        protected abstract List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts);
 
         protected virtual bool SkipInitialPlanActions(Host host)
         {
@@ -148,10 +148,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var pool in SelectedPools)
             {
-                var planActions = new List<HostPlan>();
+                List<Host> applicableHosts;
+                var planActions = GenerateHostPlans(pool, out applicableHosts);
+
                 var finalActions = new List<PlanAction>();
 
-                GeneratePlanActions(pool, planActions, finalActions);
+                //add a revert pre-check action for this pool
+                var curPool = pool;
+                var problemsToRevert = UnwindChangesActions.Where(a => Helpers.GetPoolOfOne(a.Connection).Equals(curPool)).ToList();
+
+                if (problemsToRevert.Count > 0)
+                    finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
 
                 if (planActions.Count > 0)
                 {
