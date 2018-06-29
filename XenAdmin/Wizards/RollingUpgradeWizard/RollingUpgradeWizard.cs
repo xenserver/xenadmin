@@ -132,7 +132,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
                 RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
-                RollingUpgradeUpgradePage.ProblemsResolvedPreCheck = RollingUpgradeWizardPrecheckPage.ProblemsResolvedPreCheck;
+                RollingUpgradeUpgradePage.UnwindChangesActions = RollingUpgradeWizardPrecheckPage.GetUnwindChangesActions();
         }
 
         protected override void OnShown(System.EventArgs e)
@@ -143,23 +143,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 NextStep();
         }
 
-        private List<AsyncAction> GetUnwindChangesActions()
-        {
-            if (RollingUpgradeWizardPrecheckPage.ProblemsResolvedPreCheck == null)
-                return null;
-
-            var actionList = (from problem in RollingUpgradeWizardPrecheckPage.ProblemsResolvedPreCheck
-                              where problem.SolutionActionCompleted
-                              select problem.UnwindChanges());
-
-            return actionList.Where(action => action != null &&
-                                              action.Connection != null &&
-                                              action.Connection.IsConnected).ToList();
-        }
-
         private void RevertResolvedPreChecks()
         {
-            List<AsyncAction> subActions = GetUnwindChangesActions();
+            var subActions = RollingUpgradeWizardPrecheckPage.GetUnwindChangesActions();
             if (subActions.Count > 0)
             {
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, Messages.REVERT_WIZARD_CHANGES,

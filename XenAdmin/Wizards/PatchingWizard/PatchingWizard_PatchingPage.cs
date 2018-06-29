@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool IsAutomaticMode { private get; set; }
         public bool RemoveUpdateFile { private get; set; }
         public string SelectedNewPatch { private get; set; }
-        public List<Problem> ProblemsResolvedPreCheck { private get; set; }
+        public List<AsyncAction> UnwindChangesActions { private get; set; }
         public Dictionary<Host, VDI> SuppPackVdis { private get; set; }
         #endregion
 
@@ -239,13 +239,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             } //end pool in foreach
 
-            planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));
+            planActions.Add(new UnwindProblemsAction(UnwindChangesActions));
 
             actionsWorker = new BackgroundWorker();
-            actionsWorker.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
+            actionsWorker.DoWork += PatchingWizardAutomaticPatchWork;
             actionsWorker.WorkerReportsProgress = true;
-            actionsWorker.ProgressChanged += new ProgressChangedEventHandler(actionsWorker_ProgressChanged);
-            actionsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(actionsWorker_RunWorkerCompleted);
+            actionsWorker.ProgressChanged += actionsWorker_ProgressChanged;
+            actionsWorker.RunWorkerCompleted += actionsWorker_RunWorkerCompleted;
             actionsWorker.WorkerSupportsCancellation = true;
             actionsWorker.RunWorkerAsync(planActions);
         }

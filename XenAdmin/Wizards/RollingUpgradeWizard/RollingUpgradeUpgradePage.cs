@@ -32,11 +32,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
-using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
 using XenAPI;
+
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
@@ -92,26 +92,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return Messages.ROLLING_UPGRADE_CANCELLATION;
         }
 
-        protected override void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
+        protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
             //Add masters first, then the slaves that are not ugpraded
-            var hostNeedUpgrade = pool.HostsToUpgrade();
-            
-            foreach (var host in hostNeedUpgrade)
-            {
-                planActions.Add(GetSubTasksFor(host));
-            }
-
-            //add a revert pre-check action for this pool
-            var problemsToRevert = ProblemsResolvedPreCheck.Where(p =>
-            {
-                var hostCheck = p.Check as HostCheck;
-                if (hostCheck != null)
-                    return hostNeedUpgrade.Select(h => h.uuid).Contains(hostCheck.Host.uuid);
-                return false;
-            }).ToList();
-            if (problemsToRevert.Count > 0)
-                finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
+            applicableHosts = pool.HostsToUpgrade();
+            return applicableHosts.Select(GetSubTasksFor).ToList();
         }
 
         protected override bool SkipInitialPlanActions(Host host)

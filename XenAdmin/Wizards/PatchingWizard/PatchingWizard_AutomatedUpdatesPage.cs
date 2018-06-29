@@ -30,12 +30,11 @@
  */
 
 using System.Collections.Generic;
-using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Alerts;
-using XenAdmin.Diagnostics.Checks;
+
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -108,7 +107,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION;
         }
 
-        protected override void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
+        protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
             bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
@@ -117,29 +116,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 : Updates.GetMinimalPatches(pool.Connection);
 
             if (minimalPatches == null)
-                return;
+            {
+                applicableHosts = new List<Host>();
+                return new List<HostPlan>();
+            }
 
             var uploadedPatches = new List<XenServerPatch>();
             var hosts = pool.Connection.Cache.Hosts.ToList();
             hosts.Sort();//master first
 
-            foreach (var host in hosts)
-            {
-                var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, PatchFromDisk);
-                if (hostActions.UpdatesPlanActions != null && hostActions.UpdatesPlanActions.Count > 0)
-                    planActions.Add(hostActions);
-            }
-
-            //add a revert pre-check action for this pool
-            var problemsToRevert = ProblemsResolvedPreCheck.Where(p =>
-            {
-                var hostCheck = p.Check as HostCheck;
-                if (hostCheck != null)
-                    return hosts.Select(h => h.uuid).Contains(hostCheck.Host.uuid);
-                return false;
-            }).ToList();
-            if (problemsToRevert.Count > 0)
-                finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
+            applicableHosts = new List<Host>(hosts);
+            return hosts.Select(h => GetUpdatePlanActionsForHost(h, hosts, minimalPatches, uploadedPatches, PatchFromDisk)).ToList();
         }
         #endregion
     }

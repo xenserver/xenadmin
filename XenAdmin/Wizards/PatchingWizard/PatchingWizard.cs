@@ -212,10 +212,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_PrecheckPage))
             {
-                PatchingWizard_PatchingPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
+                PatchingWizard_PatchingPage.UnwindChangesActions = PatchingWizard_PrecheckPage.GetUnwindChangesActions();;
                 PatchingWizard_PatchingPage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
                 PatchingWizard_ModePage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
-                PatchingWizard_AutomatedUpdatesPage.ProblemsResolvedPreCheck = PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck;
+                PatchingWizard_AutomatedUpdatesPage.UnwindChangesActions = PatchingWizard_PrecheckPage.GetUnwindChangesActions();
             }
         }
 
@@ -231,20 +231,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     result.AddRange(list);
             }
             return result;
-        }
-
-        private List<AsyncAction> GetUnwindChangesActions()
-        {
-            if (PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck == null)
-                return null;
-
-            var actionList = (from problem in PatchingWizard_PrecheckPage.ProblemsResolvedPreCheck
-                              where problem.SolutionActionCompleted
-                              select problem.UnwindChanges());
-
-            return actionList.Where(action => action != null &&
-                                              action.Connection != null &&
-                                              action.Connection.IsConnected).ToList();
         }
 
         private List<AsyncAction> GetRemovePatchActions(List<Pool_patch> patchesToRemove)
@@ -310,7 +296,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             base.OnCancel();
 
-            List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions, GetRemoveVdiActions, GetCleanUpPoolUpdateActions);
+            var subActions = BuildSubActions(PatchingWizard_PrecheckPage.GetUnwindChangesActions,
+                GetRemovePatchActions, GetRemoveVdiActions, GetCleanUpPoolUpdateActions);
+
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 

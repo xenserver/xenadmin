@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using XenAdmin.Actions;
-using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Network;
 
 
@@ -39,12 +38,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class UnwindProblemsAction : PlanAction
     {
-        private readonly List<Problem> _problems;
+        private readonly List<AsyncAction> _actions;
         private readonly IXenConnection _connection;
 
-        public UnwindProblemsAction(List<Problem> problems, IXenConnection connection = null)
+        public UnwindProblemsAction(List<AsyncAction> actions, IXenConnection connection = null)
         {
-            _problems = problems;
+            _actions = actions;
             _connection = connection;
         }
 
@@ -53,16 +52,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var msg = _connection == null
                 ? Messages.REVERTING_RESOLVED_PRECHECKS
                 : string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, _connection.Name);
+
             AddProgressStep(msg);
 
             int completed = 0;
-            foreach (Problem p in _problems)
+            foreach (var a in _actions)
             {
-                AsyncAction unwind = p.SolutionActionCompleted ? p.UnwindChanges() : null;
-                if (unwind != null)
-                    unwind.RunExternal(null);
+                a.RunExternal(null);
                 completed++;
-                PercentComplete = (completed * 100) / _problems.Count;
+                PercentComplete = completed * 100 / _actions.Count;
             }
         }
     }
