@@ -299,7 +299,7 @@ namespace XenAdmin.Actions
             {
                 if (_percentComplete != value)
                 {
-                    System.Diagnostics.Trace.Assert(0 <= value && value <= 100);
+                    System.Diagnostics.Debug.Assert(0 <= value && value <= 100, string.Format("value percent is {0}", value));
 
                     var percent = value;
                     if (percent < 0)
