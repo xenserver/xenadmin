@@ -62,13 +62,25 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
-                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name()));
+                try
+                {
+                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name,
+                        host.Name()));
 
-                var task = mapping.Pool_patch == null
-                    ? Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref)
-                    : Pool_patch.async_apply(session, mapping.Pool_patch.opaque_ref, host.opaque_ref);
+                    var task = mapping.Pool_patch == null
+                        ? Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref)
+                        : Pool_patch.async_apply(session, mapping.Pool_patch.opaque_ref, host.opaque_ref);
 
-                PollTaskForResultAndDestroy(Connection, ref session, task);
+                    PollTaskForResultAndDestroy(Connection, ref session, task);
+                }
+                catch (Failure f)
+                {
+                    if (f.ErrorDescription.Count > 1 && (f.ErrorDescription[0] == Failure.PATCH_ALREADY_APPLIED || f.ErrorDescription[0] == Failure.UPDATE_ALREADY_APPLIED))
+                        log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.",
+                            xenServerPatch.Name, host.Name());
+                    else
+                        throw;
+                }
             }
             else
             {
