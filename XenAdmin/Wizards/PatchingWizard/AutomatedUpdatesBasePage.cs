@@ -514,13 +514,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings));
                 planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
 
-                if (patch.GuidanceMandatory)
-                {
-                    var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
-                        ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
-                        : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
+                var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
+                       ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
+                       : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
 
-                    if (action != null)
+                if (action != null)
+                {
+                    if (patch.GuidanceMandatory)
                     {
                         planActionsPerHost.Add(action);
                         // remove all delayed actions of the same kind that has already been added
@@ -528,13 +528,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         // it will run immediately, making delayed ones obsolete)
                         delayedActionsPerHost.RemoveAll(a => action.GetType() == a.GetType());
                     }
-                }
-                else
-                {
-                    var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-                    // add the action if it's not already in the list
-                    if (action != null && delayedActionsPerHost.All(a => a.GetType() != action.GetType()))
-                        delayedActionsPerHost.Add(action);
+                    else
+                    {
+                        // add the action if it's not already in the list
+                        if (delayedActionsPerHost.All(a => a.GetType() != action.GetType()))
+                            delayedActionsPerHost.Add(action);
+                    }
                 }
 
                 var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
