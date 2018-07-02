@@ -29,41 +29,30 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Network;
 
-
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace XenAdmin.Wizards
 {
-    public class UnwindProblemsAction : PlanAction
+    public class UpdateUpgradeWizard : XenWizardBase
     {
-        private readonly List<Problem> _problems;
-        private readonly IXenConnection _connection;
-
-        public UnwindProblemsAction(List<Problem> problems, IXenConnection connection = null)
+        protected List<AsyncAction> GetUnwindChangesActions(List<Problem> problems)
         {
-            _problems = problems;
-            _connection = connection;
-        }
+            if (problems == null)
+                return null;
 
-        protected override void _Run()
-        {
-            var msg = _connection == null
-                ? Messages.REVERTING_RESOLVED_PRECHECKS
-                : string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, _connection.Name);
+            var actions = from problem in problems
+                          where problem.SolutionActionCompleted
+                          let action = problem.CreateUnwindChangesAction()
+                          where action != null && action.Connection != null && action.Connection.IsConnected
+                          select action;
 
-            AddProgressStep(msg);
-
-            for (int i = 0; i < _problems.Count; i++)
-            {
-                var action = _problems[i].CreateUnwindChangesAction();
-                if (action != null && action.Connection != null && action.Connection.IsConnected)
-                    action.RunExternal(null);
-                PercentComplete = i * 100 / _problems.Count;
-            }
+            return actions.ToList();
         }
     }
 }
