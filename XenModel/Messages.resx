@@ -9409,7 +9409,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Restart these VMs:</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
-    <value>Restart XAPI agent in this order (master always first):</value>
+    <value>Restart toolstack in this order (master always first):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>Update Mode</value>
@@ -12111,13 +12111,13 @@ Check your settings and try again.</value>
     <value>Click here to repair</value>
   </data>
   <data name="UPDATES_WIZARD_RESTARTED_AGENT" xml:space="preserve">
-    <value>Restarted agent</value>
+    <value>Restarted toolstack</value>
   </data>
   <data name="UPDATES_WIZARD_RESTARTING_AGENT" xml:space="preserve">
-    <value>Restarting agent in {0} ... </value>
+    <value>Restarting toolstack in {0} ... </value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_AGENT" xml:space="preserve">
-    <value>Restart agent</value>
+    <value>Restart toolstack</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
     <value>Reboot these servers:
