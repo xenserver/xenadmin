@@ -27272,7 +27272,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart XAPI agent in this order (master always first):.
+        ///   Looks up a localized string similar to Restart toolstack in this order (master always first):.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_RESTARTXAPI {
             get {
@@ -35109,7 +35109,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart agent.
+        ///   Looks up a localized string similar to Restart toolstack.
         /// </summary>
         public static string UPDATES_WIZARD_RESTART_AGENT {
             get {
@@ -35138,7 +35138,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restarted agent.
+        ///   Looks up a localized string similar to Restarted toolstack.
         /// </summary>
         public static string UPDATES_WIZARD_RESTARTED_AGENT {
             get {
@@ -35147,7 +35147,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restarting agent in {0} ... .
+        ///   Looks up a localized string similar to Restarting toolstack in {0} ... .
         /// </summary>
         public static string UPDATES_WIZARD_RESTARTING_AGENT {
             get {
