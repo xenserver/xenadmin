@@ -493,14 +493,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            if (patch != null || WizardMode == WizardMode.AutomatedUpdates)
-            {
-                var restartChecks = new List<Check>();
-                foreach (var pool in SelectedPools)
-                    restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : patch.uuid));
+            //Checking if a reboot is pending on master
+            var restartChecks = new List<Check>();
+            foreach (var pool in SelectedPools)
+                restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, patch == null ? null : patch.uuid));
 
-                groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
-            }
+            groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
             return groups;
         }
@@ -560,15 +558,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            if (update != null || WizardMode == WizardMode.AutomatedUpdates)
-            {
-                var restartChecks = new List<Check>();
-
-                foreach (var pool in SelectedPools)
-                    restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : update.uuid));
-
-                groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
-            }
+            //Checking if a reboot is pending on master
+             var restartChecks = new List<Check>();
+            foreach (var pool in SelectedPools)
+                restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, update == null ? null : update.uuid));
+            groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
             return groups;
         }
