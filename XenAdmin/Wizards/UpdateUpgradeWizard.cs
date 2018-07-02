@@ -44,7 +44,7 @@ namespace XenAdmin.Wizards
         protected List<AsyncAction> GetUnwindChangesActions(List<Problem> problems)
         {
             if (problems == null)
-                return null;
+                return new List<AsyncAction>();
 
             var actions = from problem in problems
                           where problem.SolutionActionCompleted
