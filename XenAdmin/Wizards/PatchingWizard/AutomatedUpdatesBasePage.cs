@@ -94,7 +94,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 Status = Status.Cancelled;
                 backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
-                backgroundWorkers.Clear();
             }
 
             base.PageCancelled();
@@ -144,8 +143,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         #region background workers
         private bool StartUpgradeWorkers()
         {
+            //reset the background workers
+            backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
             bool atLeastOneWorkerStarted = false;
-
+            
             foreach (var pool in SelectedPools)
             {
                 List<Host> applicableHosts;
@@ -172,13 +173,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void StartNewWorker(string poolName, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
-            var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions) { Name = poolName };
-            backgroundWorkers.Add(bgw);
+            var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions)
+            {
+                Name = poolName,
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
             bgw.DoWork += WorkerDoWork;
-            bgw.WorkerReportsProgress = true;
             bgw.ProgressChanged += WorkerProgressChanged;
             bgw.RunWorkerCompleted += WorkerCompleted;
-            bgw.WorkerSupportsCancellation = true;
+            backgroundWorkers.Add(bgw);
             bgw.RunWorkerAsync();
         }
 
@@ -218,7 +222,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateStatus()
         {
-            // only increase the progress if the action succeeded
             var newVal = backgroundWorkers.Sum(b => b.PercentComplete) / backgroundWorkers.Count;
             if (newVal < 0)
                 newVal = 0;
