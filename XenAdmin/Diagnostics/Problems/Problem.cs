@@ -73,6 +73,7 @@ namespace XenAdmin.Diagnostics.Problems
         public abstract string Title { get; }
         public abstract string Description { get; }
         public bool SolutionActionCompleted { get; private set; }
+        public AsyncAction SolutionAction { get { return solutionAction; } }
 
         protected virtual AsyncAction CreateAction(out bool cancelled)
         {

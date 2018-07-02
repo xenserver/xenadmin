@@ -40,7 +40,7 @@ using XenAPI;
 using System.Linq;
 using XenAdmin.Core;
 using System.Text;
-using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Problems;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -53,7 +53,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool _thisPageIsCompleted = false;
         private bool _someWorkersFailed = false;
 
-        public List<AsyncAction> UnwindChangesActions { private get; set; }
+        public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
         public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
@@ -156,7 +156,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 //add a revert pre-check action for this pool
                 var curPool = pool;
-                var problemsToRevert = UnwindChangesActions.Where(a => Helpers.GetPoolOfOne(a.Connection).Equals(curPool)).ToList();
+                var problemsToRevert = PrecheckProblemsActuallyResolved.Where(a =>
+                    a.SolutionAction != null && Helpers.GetPoolOfOne(a.SolutionAction.Connection).Equals(curPool)).ToList();
 
                 if (problemsToRevert.Count > 0)
                     finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));

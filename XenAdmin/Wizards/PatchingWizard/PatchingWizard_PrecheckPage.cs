@@ -642,18 +642,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
 
-        public List<AsyncAction> GetUnwindChangesActions()
+        public List<Problem> PrecheckProblemsActuallyResolved
         {
-            if (ProblemsResolvedPreCheck == null)
-                return null;
-
-            var actions = from problem in ProblemsResolvedPreCheck
-                where problem.SolutionActionCompleted
-                let action = problem.CreateUnwindChangesAction()
-                where action != null && action.Connection != null && action.Connection.IsConnected
-                select action;
-
-            return actions.ToList();
+            get { return ProblemsResolvedPreCheck.Where(p => p.SolutionActionCompleted).ToList(); }
         }
 
         #region Nested classes and enums

@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     /// we are not allow to override equals. YOU SHOULD NOT USE ANY OPERATION THAT IMPLIES CALL EQUALS OF Pool_patch or Host_patch
     /// You should do it manually or use delegates.
     /// </summary>
-    public partial class PatchingWizard : XenWizardBase
+    public partial class PatchingWizard : UpdateUpgradeWizard
     {
         private readonly PatchingWizard_PatchingPage PatchingWizard_PatchingPage;
         private readonly PatchingWizard_SelectPatchPage PatchingWizard_SelectPatchPage;
@@ -212,26 +212,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_PrecheckPage))
             {
-                PatchingWizard_PatchingPage.UnwindChangesActions = PatchingWizard_PrecheckPage.GetUnwindChangesActions();;
+                PatchingWizard_PatchingPage.PrecheckProblemsActuallyResolved = PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved;
                 PatchingWizard_PatchingPage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
                 PatchingWizard_ModePage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
-                PatchingWizard_AutomatedUpdatesPage.UnwindChangesActions = PatchingWizard_PrecheckPage.GetUnwindChangesActions();
+                PatchingWizard_AutomatedUpdatesPage.PrecheckProblemsActuallyResolved = PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved;
             }
         }
 
         private delegate List<AsyncAction> GetActionsDelegate();
-
-        private List<AsyncAction> BuildSubActions(params GetActionsDelegate[] getActionsDelegate)
-        {
-            List<AsyncAction> result = new List<AsyncAction>();
-            foreach (GetActionsDelegate getActionDelegate in getActionsDelegate)
-            {
-                var list = getActionDelegate();
-                if (list != null && list.Count > 0)
-                    result.AddRange(list);
-            }
-            return result;
-        }
 
         private List<AsyncAction> GetRemovePatchActions(List<Pool_patch> patchesToRemove)
         {
@@ -296,8 +284,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             base.OnCancel();
 
-            var subActions = BuildSubActions(PatchingWizard_PrecheckPage.GetUnwindChangesActions,
-                GetRemovePatchActions, GetRemoveVdiActions, GetCleanUpPoolUpdateActions);
+            var subActions = new List<AsyncAction>();
+            subActions.AddRange(GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
+            subActions.AddRange(GetRemovePatchActions());
+            subActions.AddRange(GetRemoveVdiActions());
+            subActions.AddRange(GetCleanUpPoolUpdateActions());
 
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);

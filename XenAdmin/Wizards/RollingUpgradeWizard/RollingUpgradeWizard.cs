@@ -43,7 +43,7 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
-    public partial class RollingUpgradeWizard : XenWizardBase
+    public partial class RollingUpgradeWizard : UpdateUpgradeWizard
     {
         private readonly RollingUpgradeUpgradePage RollingUpgradeUpgradePage;
         private readonly RollingUpgradeWizardSelectPool RollingUpgradeWizardSelectPool;
@@ -132,7 +132,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
                 RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
-                RollingUpgradeUpgradePage.UnwindChangesActions = RollingUpgradeWizardPrecheckPage.GetUnwindChangesActions();
+                RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
         }
 
         protected override void OnShown(System.EventArgs e)
@@ -145,7 +145,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void RevertResolvedPreChecks()
         {
-            var subActions = RollingUpgradeWizardPrecheckPage.GetUnwindChangesActions();
+            var subActions = GetUnwindChangesActions(RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved);
             if (subActions.Count > 0)
             {
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, Messages.REVERT_WIZARD_CHANGES,
