@@ -96,7 +96,7 @@ namespace XenAdmin.Diagnostics.Problems
             get { return _check; }
         }
 
-        public virtual AsyncAction UnwindChanges()
+        public virtual AsyncAction CreateUnwindChangesAction()
         {
             return null;
         }

@@ -487,7 +487,7 @@ namespace XenAdmin.Wizards.DRWizards
                     progressDialog.ShowDialog(this);
                 if (action.Succeeded)
                 {
-                    var revertAction = preCheckRow.Problem.UnwindChanges();
+                    var revertAction = preCheckRow.Problem.CreateUnwindChangesAction();
                     if (revertAction != null)
                         RevertActions.Add(revertAction);
                 }
@@ -532,7 +532,7 @@ namespace XenAdmin.Wizards.DRWizards
                     AsyncAction action = preCheckRow.Problem.GetSolutionAction(out cancelled);
                     if (action != null)
                     {
-                        actions.Add(action, preCheckRow.Problem.UnwindChanges());
+                        actions.Add(action, preCheckRow.Problem.CreateUnwindChangesAction());
                     }
                 }
             }

@@ -643,7 +643,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var actions = from problem in ProblemsResolvedPreCheck
                 where problem.SolutionActionCompleted
-                let action = problem.UnwindChanges()
+                let action = problem.CreateUnwindChangesAction()
                 where action != null && action.Connection != null && action.Connection.IsConnected
                 select action;
 
