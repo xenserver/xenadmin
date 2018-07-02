@@ -219,12 +219,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private delegate List<AsyncAction> GetActionsDelegate();
-
         private List<AsyncAction> GetRemovePatchActions(List<Pool_patch> patchesToRemove)
         {
             if (patchesToRemove == null || patchesToRemove.Count == 0)
-                return null;
+                return new List<AsyncAction>();
 
             List<AsyncAction> list = new List<AsyncAction>();
             foreach (Pool_patch patch in patchesToRemove)
@@ -252,7 +250,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<AsyncAction> GetRemoveVdiActions(List<VDI> vdisToRemove)
         {
             if (vdisToRemove == null || vdisToRemove.Count == 0)
-                return null;
+                return new List<AsyncAction>();
 
             var list = (from vdi in vdisToRemove
                         where vdi.Connection != null && vdi.Connection.IsConnected
@@ -285,10 +283,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.OnCancel();
 
             var subActions = new List<AsyncAction>();
-            subActions.AddRange(GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
-            subActions.AddRange(GetRemovePatchActions());
-            subActions.AddRange(GetRemoveVdiActions());
-            subActions.AddRange(GetCleanUpPoolUpdateActions());
+            subActions.AddRange(GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved) ?? new List<AsyncAction>());
+            subActions.AddRange(GetRemovePatchActions() ?? new List<AsyncAction>());
+            subActions.AddRange(GetRemoveVdiActions() ?? new List<AsyncAction>());
+            subActions.AddRange(GetCleanUpPoolUpdateActions() ?? new List<AsyncAction>());
 
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
