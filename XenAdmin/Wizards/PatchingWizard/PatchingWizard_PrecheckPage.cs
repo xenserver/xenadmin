@@ -55,10 +55,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private readonly object _lock = new object();
         private readonly object _update_grid_lock = new object();
-        private BackgroundWorker _worker;
         public List<Host> SelectedServers = new List<Host>();
         private readonly List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
         private AsyncAction resolvePrechecksAction;
+
+        private bool _isRecheckQueued;
         public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
 
         protected List<Pool> SelectedPools
@@ -162,13 +163,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected void RefreshRechecks()
         {
-            _worker = null;
-            _worker = new BackgroundWorker();
-            _worker.DoWork += worker_DoWork;
-            _worker.WorkerReportsProgress = true;
-            _worker.WorkerSupportsCancellation = true;
-            _worker.ProgressChanged += worker_ProgressChanged;
-            _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
+            if (IsCheckInProgress)
+            {
+                _isRecheckQueued = true;
+                return;
+            }
             
             if (Patch != null)
                 _worker.RunWorkerAsync(Patch);
@@ -183,6 +182,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 progressBar1.Value = 100;
                 labelProgress.Text = string.Empty;
                 OnPageUpdated();
+
+                if (_isRecheckQueued)
+                {
+                    _isRecheckQueued = false;
+                    RefreshRechecks();
+                }
             }
         }
 
@@ -220,7 +225,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool IsCheckInProgress
         {
-            get { return _worker != null && _worker.IsBusy; }
+            get { return _worker.IsBusy; }
         }
 
         private bool IsResolveActionInProgress
@@ -271,9 +276,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            var bgw = sender as BackgroundWorker;
+            if (bgw == null)
+                return;
+
             lock (_lock)
             {
-                _worker.ReportProgress(0, null);
+                bgw.ReportProgress(0, null);
                 Program.Invoke(this, () =>
                                          {
                                              dataGridView1.Rows.Clear();
@@ -295,7 +304,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var group in groups)
                 {
-                    if (_worker.CancellationPending)
+                    if (bgw.CancellationPending)
                     {
                         e.Cancel = true;
                         return;
@@ -303,14 +312,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     var headerRow = new PreCheckHeaderRow(string.Format(Messages.PATCHING_WIZARD_PRECHECK_STATUS, group.Key));
                     //multiply with 100 first, otherwise the quotient is 0
-                    _worker.ReportProgress(doneCheckIndex*100/totalChecks, headerRow);
+                    bgw.ReportProgress(doneCheckIndex * 100 / totalChecks, headerRow);
 
                     PreCheckResult precheckResult = PreCheckResult.OK;
                     var checks = group.Value;
 
                     foreach (var check in checks)
                     {
-                        if (_worker.CancellationPending)
+                        if (bgw.CancellationPending)
                         {
                             e.Cancel = true;
                             return;
@@ -325,7 +334,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 precheckResult = row.PrecheckResult;
 
                             //multiply with 100 first, otherwise the quotient is 0
-                            _worker.ReportProgress(doneCheckIndex*100/totalChecks, row);
+                            bgw.ReportProgress(doneCheckIndex * 100 / totalChecks, row);
                         }
                     }
 
@@ -573,8 +582,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageCancelled()
         {
             DeregisterEventHandlers();
-            if (_worker != null)
-                _worker.CancelAsync();
+            _worker.CancelAsync();
             if (resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted)
                 resolvePrechecksAction.Cancel();
         }
@@ -582,11 +590,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             DeregisterEventHandlers();
-            if (direction == PageLoadedDirection.Back && _worker != null)
-            {
+            if (direction == PageLoadedDirection.Back)
                 _worker.CancelAsync();
-                _worker = null;
-            }
         }
 
         public override bool EnablePrevious()
