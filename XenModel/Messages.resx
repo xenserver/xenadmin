@@ -2557,6 +2557,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_SAFE_TO_UPGRADE" xml:space="preserve">
     <value>Checking partition layout</value>
   </data>
+  <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
+    <value>Host partition layout check</value>
+  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
   </data>

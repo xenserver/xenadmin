@@ -36,7 +36,7 @@ using XenAdmin.Diagnostics.Problems.HostProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class HostNeedsRebootCheck : HostCheck
+    class HostNeedsRebootCheck : HostPostLivenessCheck
     {
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
         private readonly List<after_apply_guidance> patchGuidance;
@@ -58,11 +58,8 @@ namespace XenAdmin.Diagnostics.Checks
             patchGuidance = guidance;
         }
 
-        protected override Problem RunCheck()
+        protected override Problem RunHostCheck()
         {
-            if (!Host.IsLive())
-                return new HostNotLiveWarning(this, Host);
-
             // when livepatching is available, no restart is expected
             if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) &&
                 livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete)
