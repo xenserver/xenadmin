@@ -893,7 +893,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the sriov_physical_PIF_of field of the given PIF.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -907,7 +907,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the sriov_logical_PIF_of field of the given PIF.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -921,7 +921,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PCI field of the given PIF.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -2334,7 +2334,7 @@ namespace XenAPI
 
         /// <summary>
         /// Indicates which network_sriov this interface is physical of
-        /// First published in Unreleased.
+        /// First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<Network_sriov>))]
         public virtual List<XenRef<Network_sriov>> sriov_physical_PIF_of
@@ -2354,7 +2354,7 @@ namespace XenAPI
 
         /// <summary>
         /// Indicates which network_sriov this interface is logical of
-        /// First published in Unreleased.
+        /// First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<Network_sriov>))]
         public virtual List<XenRef<Network_sriov>> sriov_logical_PIF_of
@@ -2374,7 +2374,7 @@ namespace XenAPI
 
         /// <summary>
         /// Link to underlying PCI device
-        /// First published in Unreleased.
+        /// First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<PCI>))]
         public virtual XenRef<PCI> PCI
