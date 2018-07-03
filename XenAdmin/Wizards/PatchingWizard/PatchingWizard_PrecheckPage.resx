@@ -429,6 +429,9 @@
   <data name="&gt;&gt;labelPrechecksFirstLine.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="_worker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -455,6 +458,12 @@
   </data>
   <data name="&gt;&gt;ColumnSolution.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_worker.Name" xml:space="preserve">
+    <value>_worker</value>
+  </data>
+  <data name="&gt;&gt;_worker.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_PrecheckPage</value>

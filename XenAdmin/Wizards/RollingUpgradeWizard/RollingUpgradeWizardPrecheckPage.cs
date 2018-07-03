@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void connection_ConnectionChanged(object sender, EventArgs eventArgs)
         {
-            Program.Invoke(Program.MainWindow, RefreshRechecks);
+            Program.Invoke(this, RefreshRechecks);
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
