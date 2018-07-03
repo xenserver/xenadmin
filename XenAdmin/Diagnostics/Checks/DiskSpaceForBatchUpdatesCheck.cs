@@ -41,7 +41,7 @@ using System.Linq;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class DiskSpaceForAutomatedUpdatesCheck : HostCheck
+    class DiskSpaceForAutomatedUpdatesCheck : HostPostLivenessCheck
     {
         private readonly Dictionary<Host, List<XenServerPatch>> updateSequence;
 
@@ -51,11 +51,8 @@ namespace XenAdmin.Diagnostics.Checks
             this.updateSequence = updateSequence;
         }
 
-        protected override Problem RunCheck()
+        protected override Problem RunHostCheck()
         {
-            if (!Host.IsLive())
-                return new HostNotLiveWarning(this, Host);
-
             if (!Host.Connection.IsConnected)
                 throw new EndOfStreamException(Helpers.GetName(Host.Connection));
 

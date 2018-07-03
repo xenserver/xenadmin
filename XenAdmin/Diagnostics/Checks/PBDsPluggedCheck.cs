@@ -37,7 +37,7 @@ using XenAdmin.Diagnostics.Problems.SRProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class PBDsPluggedCheck : HostCheck
+    class PBDsPluggedCheck : HostPostLivenessCheck
     {
         SR srUploadedUpdates;
 
@@ -46,11 +46,8 @@ namespace XenAdmin.Diagnostics.Checks
             srUploadedUpdates = sr;
         }
 
-        protected override Problem RunCheck()
+        protected override Problem RunHostCheck()
         {
-            if (!Host.IsLive())
-                return new HostNotLiveWarning(this, Host);
-
             foreach (VM vm in Host.Connection.Cache.VMs)
             {
                 if (vm.power_state != vm_power_state.Running && vm.power_state != vm_power_state.Paused)

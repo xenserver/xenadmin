@@ -41,7 +41,7 @@ using XenAdmin.Diagnostics.Problems.HostProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class AssertCanEvacuateCheck : HostCheck
+    class AssertCanEvacuateCheck : HostPostLivenessCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
@@ -258,11 +258,8 @@ namespace XenAdmin.Diagnostics.Checks
         // This function only tests certain host-wide conditions.
         // Further per-VM conditions are in CheckHost().
         // See RunAllChecks() for how we combine them.
-        protected override Problem RunCheck()
+        protected override Problem RunHostCheck()
         {
-            if (!Host.IsLive())
-                return new HostNotLiveWarning(this, Host);
-
             Pool pool = Helpers.GetPool(Host.Connection);
             if (pool != null)
             {

@@ -7055,6 +7055,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host partition layout check.
+        /// </summary>
+        public static string CHECKING_SAFE_TO_UPGRADE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CHECKING_SAFE_TO_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking reboots required.
         /// </summary>
         public static string CHECKING_SERVER_NEEDS_REBOOT {
