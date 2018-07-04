@@ -2533,14 +2533,11 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
     
 Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
-  <data name="CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS" xml:space="preserve">
-    <value>Checking automated updates license status</value>
+  <data name="CHECKING_AUTOMATED_UPDATES_POSSIBLE" xml:space="preserve">
+    <value>Checking automated updates can be applied</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>Checking VM migration status</value>
-  </data>
-  <data name="CHECKING_CFU_STATUS" xml:space="preserve">
-    <value>Checking ability to download updates</value>
   </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>

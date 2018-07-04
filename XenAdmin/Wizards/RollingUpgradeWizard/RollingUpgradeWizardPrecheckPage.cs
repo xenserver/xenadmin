@@ -215,18 +215,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
 
-            //Checking automated updates license if apply updates checkbox is ticked
+            //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)
             {
-                var automatedUpdateLicenseChecks = new List<Check>();
+                var automatedUpdateChecks = new List<Check>();
                 foreach (var pool in SelectedPools)
-                    automatedUpdateLicenseChecks.Add(new AutomatedUpdatesLicenseCheck(pool));
+                    automatedUpdateChecks.Add(new AutomatedUpdatesLicenseCheck(pool));
 
-                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS,
-                    automatedUpdateLicenseChecks));
+                automatedUpdateChecks.Add(new CfuAvailabilityCheck());
 
-                var cfuCheck = new List<Check> {new CfuAvailabilityCheck()};
-                groups.Add(new CheckGroup(Messages.CHECKING_CFU_STATUS, cfuCheck));
+                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_POSSIBLE,
+                    automatedUpdateChecks));
             }
 
             return groups;
