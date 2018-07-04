@@ -6983,11 +6983,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking automated updates license status.
+        ///   Looks up a localized string similar to Checking automated updates can be applied.
         /// </summary>
-        public static string CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS {
+        public static string CHECKING_AUTOMATED_UPDATES_POSSIBLE {
             get {
-                return ResourceManager.GetString("CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS", resourceCulture);
+                return ResourceManager.GetString("CHECKING_AUTOMATED_UPDATES_POSSIBLE", resourceCulture);
             }
         }
         
@@ -6997,15 +6997,6 @@ namespace XenAdmin {
         public static string CHECKING_CANEVACUATE_STATUS {
             get {
                 return ResourceManager.GetString("CHECKING_CANEVACUATE_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking ability to download updates.
-        /// </summary>
-        public static string CHECKING_CFU_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_CFU_STATUS", resourceCulture);
             }
         }
         
