@@ -6968,6 +6968,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking clustering status.
+        /// </summary>
+        public static string CHECKING_CLUSTERING_STATUS {
+            get {
+                return ResourceManager.GetString("CHECKING_CLUSTERING_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for pending restart.
         /// </summary>
         public static string CHECKING_FOR_PENDING_RESTART {
@@ -16268,6 +16277,33 @@ namespace XenAdmin {
         public static string GFS2_SR_ATTACHED {
             get {
                 return ResourceManager.GetString("GFS2_SR_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool {0} cannot have clustering enabled..
+        /// </summary>
+        public static string GFS2_UPDATE_UPGRADE_CLUSTER_ERROR {
+            get {
+                return ResourceManager.GetString("GFS2_UPDATE_UPGRADE_CLUSTER_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool {0} cannot have clustering enabled or a thinly provisioned (GFS2) SR present..
+        /// </summary>
+        public static string GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR {
+            get {
+                return ResourceManager.GetString("GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool {0} cannot have a thinly provisioned (GFS2) SR present..
+        /// </summary>
+        public static string GFS2_UPDATE_UPGRADE_SR_ERROR {
+            get {
+                return ResourceManager.GetString("GFS2_UPDATE_UPGRADE_SR_ERROR", resourceCulture);
             }
         }
         

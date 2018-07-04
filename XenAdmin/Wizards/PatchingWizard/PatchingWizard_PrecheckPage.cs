@@ -436,6 +436,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
+            if (WizardMode == WizardMode.NewVersion)
+            {
+                var gfs2Checks = new List<Check>();
+
+                foreach (Pool pool in SelectedPools.Where(p => Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))
+                    gfs2Checks.Add(new PoolHasKolkataGFS2SR(pool));
+
+                if (gfs2Checks.Count > 0)
+                {
+                    groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks)); 
+                }
+                
+            }
+
             return groups;
         }
 

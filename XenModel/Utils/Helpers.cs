@@ -423,6 +423,23 @@ namespace XenAdmin.Core
             return platform_version != null && productVersionCompare(platform_version, "2.5.50") >= 0;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool LimaOrGreater(IXenConnection conn)
+        {
+            return conn == null || LimaOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Lima platform version is 2.7.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool LimaOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return platform_version != null && productVersionCompare(platform_version, "2.6.50") >= 0;
+        }
+
         /// <summary>
         /// Cream (Creedence SP1) has API version 2.4
         /// </summary>

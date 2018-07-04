@@ -708,6 +708,7 @@
     <Compile Include="TabPages\UsbPage.Designer.cs">
       <DependentUpon>UsbPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnableToUpdateOrUpgradeToLimaProblem.cs" />
     <Compile Include="Wizards\BallooningWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -994,6 +995,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
+	<Compile Include="Diagnostics\Checks\PoolHasKolkataGFS2SR.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
     <Compile Include="Dialogs\FolderChangeDialog.cs">
