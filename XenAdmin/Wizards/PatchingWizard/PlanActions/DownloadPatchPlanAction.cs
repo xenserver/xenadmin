@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if ((AllDownloadedPatches.ContainsKey(patch) && File.Exists(AllDownloadedPatches[patch])) 
                     || (patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value)))
                 {
-                    AddProgressStep(string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name));
+                    ReplaceProgressStep(string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name));
                 }
                 else
                 {
