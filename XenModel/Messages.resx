@@ -2480,6 +2480,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CD_DRIVE" xml:space="preserve">
     <value>DVD drive on {0}</value>
   </data>
+  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Ability to download updates</value>
+  </data>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
   </data>
@@ -2580,9 +2583,6 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
     <value>Checking [XenCenter] version</value>
-  </data>
-  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Ability to download updates</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>Pool '{0}' cannot have WLB enabled</value>
@@ -9758,15 +9758,6 @@ File not found</value>
   <data name="PII_YES" xml:space="preserve">
     <value>These files will contain personally identifiable information.</value>
   </data>
-  <data name="PLAN_ACTION_DONE" xml:space="preserve">
-    <value> done.</value>
-  </data>
-  <data name="PLAN_ACTION_CANCELLED_BY_USER" xml:space="preserve">
-    <value> canceled by user.</value>
-  </data>
-  <data name="PLAN_ACTION_ERROR" xml:space="preserve">
-    <value> error.</value>
-  </data>
   <data name="PLANACTION_VMS_MIGRATE" xml:space="preserve">
     <value>Migrate VMs from Server</value>
   </data>
@@ -9784,6 +9775,15 @@ File not found</value>
   </data>
   <data name="PLANACTION_VMS_REBOOTING" xml:space="preserve">
     <value>Rebooting VM {0}...</value>
+  </data>
+  <data name="PLAN_ACTION_CANCELLED_BY_USER" xml:space="preserve">
+    <value> canceled by user.</value>
+  </data>
+  <data name="PLAN_ACTION_DONE" xml:space="preserve">
+    <value> done.</value>
+  </data>
+  <data name="PLAN_ACTION_ERROR" xml:space="preserve">
+    <value> error.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing [XenServer] on '{0}'...</value>
@@ -10576,14 +10576,14 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_TEST" xml:space="preserve">
     <value>&amp;Test</value>
   </data>
+  <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
+    <value>The rolling pool upgrade process was canceled.</value>
+  </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>
   </data>
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>No longer connected to {0}. Please review your selection and try again.</value>
-  </data>
-  <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
-    <value>The rolling pool upgrade process was canceled.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
@@ -11823,9 +11823,6 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATED_PROPERTIES" xml:space="preserve">
     <value>Updating complete.</value>
   </data>
-  <data name="UPDATE_SERVER_NOT_REACHABLE" xml:space="preserve">
-    <value>Update server unreachable or network connectivity error. Please deselect the updates application checkbox on the previous page and try again.</value>
-  </data>
   <data name="UPDATES" xml:space="preserve">
     <value>Updates</value>
   </data>
@@ -12136,6 +12133,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_SERVER_SELECTION_PROBLEM" xml:space="preserve">
     <value>{0}: The update needs to be applied on all servers in the pool.</value>
   </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
+    <value>Skipping update {0}. Already applied on {1}... </value>
+  </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
   </data>
@@ -12189,6 +12189,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPDATE_PROPERTIES" xml:space="preserve">
     <value>Updating '{0}'</value>
+  </data>
+  <data name="UPDATE_SERVER_NOT_REACHABLE" xml:space="preserve">
+    <value>Update server unreachable or network connectivity error. Please deselect the updates application checkbox on the previous page and try again.</value>
   </data>
   <data name="UPDATE_TEMP_VDI_DESCRIPTION" xml:space="preserve">
     <value>Temporary virtual disk used for the installation of an update</value>

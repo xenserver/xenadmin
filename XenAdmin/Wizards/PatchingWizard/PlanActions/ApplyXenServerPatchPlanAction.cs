@@ -76,8 +76,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 catch (Failure f)
                 {
                     if (f.ErrorDescription.Count > 1 && (f.ErrorDescription[0] == Failure.PATCH_ALREADY_APPLIED || f.ErrorDescription[0] == Failure.UPDATE_ALREADY_APPLIED))
-                        log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.",
-                            xenServerPatch.Name, host.Name());
+                    {
+                        log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.", xenServerPatch.Name, host.Name());
+                        ReplaceProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPDATE, xenServerPatch.Name, host.Name()));
+                    }
                     else
                         throw;
                 }
