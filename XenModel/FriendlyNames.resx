@@ -1539,7 +1539,7 @@
     <value>[XenServer product] Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>[XenServer product] for XenDesktop</value>
+    <value>[XenServer product] for [Citrix] Virtual Desktops</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>Help on AD</value>
@@ -1638,10 +1638,10 @@
     <value>Help on Licensing</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>XenApp/XenDesktop</value>
+    <value>[Citrix] Virtual Apps/Desktops</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>XenApp/XenDesktop Platinum</value>
+    <value>[Citrix] Virtual Apps/Desktops Platinum</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>Installed supplemental packs</value>
@@ -1740,10 +1740,10 @@
     <value>Volume manager logs</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Ultimate Edition</value>
+    <value>[Citrix XenServer] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Basic Edition</value>
+    <value>[Citrix XenServer] Basic Edition</value>
   </data>
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>Container management logs</value>
@@ -1755,7 +1755,7 @@
     <value>Connection test</value>
   </data>
   <data name="Label-host.edition-standard" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Standard Edition</value>
+    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>Required Updates</value>
@@ -1842,6 +1842,6 @@
     <value>GFS2</value>
   </data>
   <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
-    <value>XenApp/XenDesktop [Citrix] Cloud</value>
+    <value>[Citrix] Virtual Apps/Desktops [Citrix] Cloud</value>
   </data>
 </root>

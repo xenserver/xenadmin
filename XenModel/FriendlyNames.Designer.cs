@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyNames {
@@ -781,7 +781,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Basic Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Basic Edition.
         /// </summary>
         public static string Label_host_edition_basic {
             get {
@@ -790,7 +790,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop.
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps/Desktops.
         /// </summary>
         public static string Label_host_edition_desktop {
             get {
@@ -799,7 +799,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] Cloud.
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps/Desktops [Citrix] Cloud.
         /// </summary>
         public static string Label_host_edition_desktop_cloud {
             get {
@@ -808,7 +808,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop Platinum.
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps/Desktops Platinum.
         /// </summary>
         public static string Label_host_edition_desktop_plus {
             get {
@@ -853,7 +853,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Ultimate Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Ultimate Edition.
         /// </summary>
         public static string Label_host_edition_premium {
             get {
@@ -862,7 +862,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Standard Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Standard Edition.
         /// </summary>
         public static string Label_host_edition_standard {
             get {
@@ -880,7 +880,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] for XenDesktop.
+        ///   Looks up a localized string similar to [XenServer product] for [Citrix] Virtual Desktops.
         /// </summary>
         public static string Label_host_edition_xendesktop {
             get {
@@ -1596,6 +1596,15 @@ namespace XenAdmin {
         public static string Label_performance_cpu_avg {
             get {
                 return ResourceManager.GetString("Label-performance.cpu_avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPU {0} Average Frequency.
+        /// </summary>
+        public static string Label_performance_cpu_avg_freq {
+            get {
+                return ResourceManager.GetString("Label-performance.cpu-avg-freq", resourceCulture);
             }
         }
         

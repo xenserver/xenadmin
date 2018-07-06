@@ -3055,9 +3055,9 @@ Would you like to carry out the operation at this time?</value>
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>Connection to server {0} restricted - a connection to a [Citrix] [XenServer product] Express Edition server ({1}) already exists.
+    <value>Connection to server {0} restricted - a connection to a [Citrix XenServer] Express Edition server ({1}) already exists.
 
-You can only connect to a single [Citrix] [XenServer product] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
+You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>Cannot connect to {0} because of license restriction</value>
@@ -7105,15 +7105,15 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenAdd/XenDesktop [Citrix] Cloud features enabled</value>
+[Citrix] Virtual Apps/Desktops [Citrix] Cloud features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenApp/XenDesktop features enabled</value>
+[Citrix] Virtual Apps/Desktops features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenApp/XenDesktop Platinum features enabled</value>
+[Citrix] Virtual Apps/Desktops Platinum features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -8799,10 +8799,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Assign a virtual GPU</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>This pool is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This pool is only licensed for [Citrix] Virtual Apps/Desktops workloads</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>This server is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This server is only licensed for [Citrix] Virtual Apps/Desktops workloads</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -9702,7 +9702,7 @@ File not found</value>
     <value>Permission Denied</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Per-&amp;Socket ({0} required)</value>
+    <value>[Citrix XenServer] Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>Physical device</value>
