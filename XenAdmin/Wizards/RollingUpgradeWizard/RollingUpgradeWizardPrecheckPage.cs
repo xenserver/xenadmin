@@ -142,22 +142,32 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             var groups = new List<CheckGroup>();
 
+            List<Host> hostsToUpgrade = new List<Host>();
+            List<Host> hostsToUpgradeOrUpdate = new List<Host>();
+            foreach (var pool in SelectedPools)
+            {
+                var poolHostsToUpgrade = pool.HostsToUpgrade();
+                hostsToUpgrade.AddRange(poolHostsToUpgrade);
+                hostsToUpgradeOrUpdate.AddRange(ApplyUpdatesToNewVersion
+                    ? HostsToUpgradeOrUpdate(pool)
+                    : poolHostsToUpgrade);
+            }
+
             //XenCenter version check (if any of the selected server version is not the latest)
             var latestCrVersion = Updates.XenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
             if (latestCrVersion != null &&
-                SelectedServers.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
+                hostsToUpgradeOrUpdate.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
             {
                 groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
             }
 
-            //HostMaintenanceModeCheck checks
+            //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated
             var livenessChecks = new List<Check>();
-            foreach (Host host in SelectedServers)
+            foreach (Host host in hostsToUpgradeOrUpdate)
                 livenessChecks.Add(new HostMaintenanceModeCheck(host));
-
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
-            //HA checks
+            //HA checks - for each pool
             var haChecks = new List<Check>();
             foreach (Pool pool in SelectedPools)
             {
@@ -170,23 +180,22 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
-            //Checking can evacuate host
+            //Checking can evacuate host - for hosts that will be upgraded or updated
             var evacuateChecks = new List<Check>();
-            foreach (Host host in SelectedServers)
+            foreach (Host host in hostsToUpgradeOrUpdate)
                 evacuateChecks.Add(new AssertCanEvacuateUpgradeCheck(host));
-
             groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
 
-            //PBDsPluggedCheck
+            //PBDsPluggedCheck -  for hosts that will be upgraded or updated
             var pbdChecks = new List<Check>();
-            foreach (Host host in SelectedServers)
+            foreach (Host host in hostsToUpgradeOrUpdate)
                 pbdChecks.Add(new PBDsPluggedCheck(host));
             groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
 
 
-            //HotfixesCheck required for MNR, Cowley, Boston and Sanibel
+            //HotfixesCheck - for hosts that will be upgraded
             var hotfixChecks = new List<Check>();
-            foreach (var host in SelectedServers)
+            foreach (var host in hostsToUpgrade)
             {
                 if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
                     hotfixChecks.Add(new HostHasHotfixCheck(host));
@@ -196,7 +205,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
 
             //iSL (StorageLink) check - CA-223486: only for pre-Creedence
-            var preCreedenceServers = SelectedServers.Where(h => !Helpers.CreedenceOrGreater(h)).ToList();
+            var preCreedenceServers = hostsToUpgrade.Where(h => !Helpers.CreedenceOrGreater(h)).ToList();
             if (preCreedenceServers.Any())
             {
                 var srLinkChecks = new List<Check>();
@@ -205,13 +214,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_STORAGELINK_STATUS, srLinkChecks));
             }
 
-            //SafeToUpgradeCheck - in automatic mode only
+            //SafeToUpgradeCheck - in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
             {
                 var upgradeChecks = new List<Check>();
-                foreach (Host host in SelectedServers)
+                foreach (var host in hostsToUpgrade)
                     upgradeChecks.Add(new SafeToUpgradeCheck(host));
-
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
 
@@ -233,5 +241,44 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public IEnumerable<Host> SelectedMasters { private get; set; }
         public bool ManualModeSelected { private get; set; }
+
+        #region private methods
+        public static List<Host> HostsToUpgradeOrUpdate(Pool pool)
+        {
+            var result = new List<Host>();
+
+            if (pool == null)
+                return result;
+
+            var master = Helpers.GetMaster(pool);
+            if (master == null)
+                return result;
+
+            if (pool.IsMasterUpgraded())
+            {
+                foreach (var h in pool.Connection.Cache.Hosts)
+                {
+                    if (h.LongProductVersion() != master.LongProductVersion()) // host needs to be upgraded
+                        result.Add(h); // host 
+                    else
+                    {
+                        //check update sequence for already-upgraded hosts
+                        var us = Updates.GetPatchSequenceForHost(h, Updates.GetMinimalPatches(master));
+                        if (us != null && us.Count > 0)
+                        {
+                            result.Add(h);
+                        }
+                    }
+                }
+            }
+            else
+                result.AddRange(pool.Connection.Cache.Hosts);
+
+            result.Sort();
+
+            return result;
+        }
+        #endregion
+
     }
 }
