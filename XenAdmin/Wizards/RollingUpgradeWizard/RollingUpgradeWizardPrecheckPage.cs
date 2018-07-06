@@ -168,16 +168,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
             //HA checks - for each pool
-            var haChecks = new List<Check>();
-            foreach (Pool pool in SelectedPools)
-            {
-                Host host = pool.Connection.Resolve(pool.master);
-
-                if (host == null)
-                    continue;
-
-                haChecks.Add(new HAOffCheck(host));
-            }
+            var haChecks = (from Host server in SelectedServers
+                where server.IsMaster()
+                select new HAOffCheck(server) as Check).ToList();
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //Checking can evacuate host - for hosts that will be upgraded or updated
@@ -226,9 +219,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)
             {
-                var automatedUpdateChecks = new List<Check>();
-                foreach (var pool in SelectedPools)
-                    automatedUpdateChecks.Add(new AutomatedUpdatesLicenseCheck(pool));
+                var automatedUpdateChecks = (from Host server in SelectedServers
+                    where server.IsMaster()
+                    select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
 
                 automatedUpdateChecks.Add(new CfuAvailabilityCheck());
 
