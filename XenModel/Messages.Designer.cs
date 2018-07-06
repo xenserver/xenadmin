@@ -27678,15 +27678,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The same update cannot be applied to {0} and {1} versions of [XenServer].
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {

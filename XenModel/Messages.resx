@@ -9543,9 +9543,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
     <value>The server is unreachable</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS" xml:space="preserve">
-    <value>The same update cannot be applied to {0} and {1} versions of [XenServer]</value>
-  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
     <value>One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version.</value>
   </data>
