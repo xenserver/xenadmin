@@ -77,7 +77,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_PrecheckPage()
         {
             InitializeComponent();
-            dataGridView1.BackgroundColor = dataGridView1.DefaultCellStyle.BackColor;
         }
 
         public override string PageTitle
@@ -124,36 +123,28 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            try
+            RegisterEventHandlers();
+            if (direction == PageLoadedDirection.Back)
+                return;
+
+            if (WizardMode == WizardMode.AutomatedUpdates)
             {
-                RegisterEventHandlers();
-                if (direction == PageLoadedDirection.Back)
-                    return;
-
-                if (WizardMode == WizardMode.AutomatedUpdates)
-                {
-                    labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
-                }
-                else
-                {
-                    string patchName = null;
-                    if (Patch != null)
-                        patchName = Patch.Name();
-                    if (PoolUpdate != null)
-                        patchName = PoolUpdate.Name();
-
-                    labelPrechecksFirstLine.Text = patchName != null
-                        ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, patchName)
-                        : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
-                }
-
-                RefreshRechecks();
+                labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
             }
-            catch (Exception e)
+            else
             {
-                log.Error(e, e);
-                throw;//better throw an exception rather than closing the wizard suddenly and silently
+                string patchName = null;
+                if (Patch != null)
+                    patchName = Patch.Name();
+                if (PoolUpdate != null)
+                    patchName = PoolUpdate.Name();
+
+                labelPrechecksFirstLine.Text = patchName != null
+                    ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, patchName)
+                    : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
             }
+
+            RefreshRechecks();
         }
 
         public override void SelectDefaultControl()
@@ -655,9 +646,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             protected PreCheckGridRow(DataGridViewCell solutionCell)
             {
                 _solutionCell = solutionCell;
-                Cells.Add(_iconCell);
-                Cells.Add(_descriptionCell);
-                Cells.Add(_solutionCell);
+                Cells.AddRange(_iconCell, _descriptionCell, _solutionCell);
             }
         }
 
