@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
@@ -43,7 +42,7 @@ using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Alerts;
 using System.Linq;
-using System.Diagnostics;
+
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -94,7 +93,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-
             poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
 
             switch (WizardMode)
@@ -125,13 +123,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Pool pool = Helpers.GetPool(xenConnection);
                 bool hasPool = pool != null;
                 PatchingHostsDataGridViewRow poolRow = null;
-                int poolRowIndex = -1;
-                bool hasDisabledRow = false;
 
                 if (hasPool)
                 {
                     poolRow = new PatchingHostsDataGridViewRow(pool);
-                    poolRowIndex = dataGridViewHosts.Rows.Add(poolRow);
+                    dataGridViewHosts.Rows.Add(poolRow);
                     poolRow.Enabled = false;
                 }
 
@@ -146,39 +142,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 Array.Sort(hosts);
+                PatchingHostsDataGridViewRow masterRow = null;
+
                 foreach (Host host in hosts)
                 {
-                    var hostRow = new PatchingHostsDataGridViewRow(host, hasPool, !poolSelectionOnly);
-                    int index = dataGridViewHosts.Rows.Add(hostRow);
-                    EnableRow(host, index);
+                    var hostRow = new PatchingHostsDataGridViewRow(host, hasPool, !poolSelectionOnly) {ParentPoolRow = poolRow};
+                    dataGridViewHosts.Rows.Add(hostRow);
+                    string tooltipText;
+                    hostRow.Enabled = CanEnableRow(host, out tooltipText);
+                    hostRow.Cells[3].ToolTipText = tooltipText;
+
                     //Enable the pool row
-                    if (poolRow != null && hostRow.Enabled && !poolRow.Enabled)
+                    if (poolRow != null && hostRow.Enabled)
                         poolRow.Enabled = true;
-                    if (!hostRow.Enabled && !hasDisabledRow)
-                        hasDisabledRow = true;
+
+                    if (masterRow == null) //this will be true for the first iteration
+                        masterRow = hostRow;
                 }
 
-                if (poolRow != null)
-                {
-                    var masterRow = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[poolRowIndex + 1];
-
-                    if (!poolRow.Enabled)
-                    {
-                        poolRow.Cells[3].ToolTipText = masterRow.Cells[3].ToolTipText;
-                    }
-                    else if (hasDisabledRow && WizardMode == WizardMode.NewVersion && masterRow.Enabled)
-                    {
-                        for (int i = poolRowIndex; i < dataGridViewHosts.Rows.Count; i++)
-                        {
-                            var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[i];
-                            if (row.Enabled)
-                            {
-                                row.Enabled = false;
-                                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS;
-                            }
-                        }
-                    }
-                }
+                if (poolRow != null && !poolRow.Enabled && masterRow != null)
+                    poolRow.Cells[3].ToolTipText = masterRow.Cells[3].ToolTipText;
             }
 
             if (WizardMode == WizardMode.NewVersion && licensedPoolCount > 0) // in NewVersion mode and at least one pool licensed for automated updates 
@@ -201,169 +184,124 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             dataGridViewHosts.Select();
         }
-        
-        private void EnableRow(Host host, int index)
+
+        private bool CanEnableRow(Host host, out string tooltipText)
         {
-            var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
-
-            var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
-
-            if (WizardMode == WizardMode.AutomatedUpdates)
-            {
-                // This check is first because it generally can't be fixed, it's a property of the host
-                if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden()) // Forbids update auto restarts
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATED_UPDATES;
-                    return;
-                }
-
-                var pool = Helpers.GetPool(host.Connection);
-                if (pool != null && !pool.IsPoolFullyUpgraded()) //partially upgraded pool is not supported
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED;
-
-                    return;
-                }
-
-                //check updgrade sequences
-                var minimalPatches = Updates.GetMinimalPatches(host.Connection);
-                if (minimalPatches == null) //version not supported
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
-
-                    return;
-                }
-
-                //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
-                if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
-
-                    return;
-                }
-
-                var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
-                if (us == null)
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
-
-                    return;
-                }
-
-                //if host is up to date
-                if (us.Count == 0)
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
-
-                    return;
-                }
-
-                //if host is unreachable
-                if (!host.IsLive())
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
-                    return;
-                }
-
-                return;
-            }
-
-            List<Host> applicableHosts = null;
-            if (SelectedUpdateAlert != null)
-            {
-                applicableHosts = SelectedUpdateAlert.DistinctHosts;
-            }
-            else if (FileFromDiskAlert != null)
-            {
-                applicableHosts = FileFromDiskAlert.DistinctHosts;
-            }
-
-            if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
-            {
-                row.Enabled = false;
-                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
-                return;
-            }
-
+            //if host is unreachable
             if (!host.IsLive())
             {
-                row.Enabled = false;
-                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
-                return;
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
+                return false;
+            }
+
+            return WizardMode == WizardMode.AutomatedUpdates
+                ? CanEnableRowAutomatedUpdates(host, out tooltipText)
+                : CanEnableRowNonAutomated(host, out tooltipText);
+        }
+
+        private bool CanEnableRowAutomatedUpdates(Host host, out string tooltipText)
+        {
+            var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
+
+            // This check is first because it generally can't be fixed, it's a property of the host
+            if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden()) // Forbids update auto restarts
+            {
+                tooltipText = Messages.POOL_FORBIDS_AUTOMATED_UPDATES;
+                return false;
+            }
+
+            var pool = Helpers.GetPool(host.Connection);
+            if (WizardMode != WizardMode.NewVersion && pool != null && !pool.IsPoolFullyUpgraded()) //partially upgraded pool is not supported
+            {
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED;
+                return false;
+            }
+
+            //check updgrade sequences
+            var minimalPatches = WizardMode == WizardMode.NewVersion
+                ? Updates.GetMinimalPatches(host)
+                : Updates.GetMinimalPatches(host.Connection);
+            if (minimalPatches == null) //version not supported
+            {
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
+                return false;
+            }
+
+            //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
+            if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+            {
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
+                return false;
+            }
+
+            var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
+            if (us == null)
+            {
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
+                return false;
+            }
+
+            //if host is up to date
+            if (us.Count == 0)
+            {
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                return false;
+            }
+
+            tooltipText = null;
+            return true;
+        }
+
+        private bool CanEnableRowNonAutomated(Host host, out string tooltipText)
+        {
+            tooltipText = null;
+            
+            if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
+            {
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
+                return false;
             }
 
             switch (SelectedUpdateType)
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
+                    bool enabled = true;
                     if (Helpers.ElyOrGreater(host))
                     {
-                        row.Enabled = false;
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                        enabled = false;
+                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
                     }
-                    disableNotApplicableHosts(row, applicableHosts, host);
-                    break;
+                    string reason;
+                    if (!IsHostAmongApplicable(host, out reason))
+                    {
+                        enabled = false;
+                        tooltipText = reason;
+                    }
+                    return enabled;
+
                 case UpdateType.ISO:
-                    if (!Helpers.CreamOrGreater(host.Connection) && !Helpers.ElyOrGreater(host)) //from Ely, iso does not mean supplemental pack
+                    //from Ely onwards, iso does not mean supplemental pack
+                    if (!Helpers.CreamOrGreater(host.Connection))
                     {
-                        row.Enabled = false;
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
+                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
+                        return false;
                     }
-                    else
+
+                    if (poolSelectionOnly)
+                        return IsHostAmongApplicable(host, out tooltipText);
+                    
+                    var firstCheckedHost = GetFirstCheckedHost();
+                    if (firstCheckedHost != null && (Helpers.ElyOrGreater(firstCheckedHost) != Helpers.ElyOrGreater(host)))
                     {
-                        if (applicableHosts != null)
-                        {
-                            disableNotApplicableHosts(row, applicableHosts, host);
-                        }
-                        else
-                        {
-                            var firstCheckedHost = GetFirstCheckedHost();
-                            if (firstCheckedHost != null && (Helpers.ElyOrGreater(firstCheckedHost) != Helpers.ElyOrGreater(host)))
-                            {
-                                row.Enabled = false;
-                                row.Cells[3].ToolTipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort(), host.ProductVersionTextShort());
-                            }
-                            else if (!row.Enabled)
-                            {
-                                row.Enabled = true;
-                                row.Cells[3].ToolTipText = null;
-                            }
-                        }
+                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort(), host.ProductVersionTextShort());
+                        return false;
                     }
-                    break;
+                    
+                    return true;
             }
-        }
 
-        private void EnablePoolRow(int index)
-        {
-            var row = (PatchingHostsDataGridViewRow) dataGridViewHosts.Rows[index];
-            var pool = row.Tag as Pool;
-            var master = Helpers.GetMaster(pool);
-
-            if (master != null &&
-                SelectedUpdateType == UpdateType.ISO &&
-                Helpers.CreamOrGreater(master.Connection) &&
-                SelectedUpdateAlert == null && FileFromDiskAlert == null)
-            {
-                var firstCheckedHost = GetFirstCheckedHost();
-                if (firstCheckedHost != null && (Helpers.ElyOrGreater(firstCheckedHost) != Helpers.ElyOrGreater(master)))
-                {
-                    row.Enabled = false;
-                    row.Cells[3].ToolTipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort(), master.ProductVersionTextShort());
-                }
-                else if (!row.Enabled)
-                {
-                    row.Enabled = true;
-                    row.Cells[3].ToolTipText = null;
-                }
-            }
+            return true;
         }
 
         private Host GetFirstCheckedHost()
@@ -374,39 +312,63 @@ namespace XenAdmin.Wizards.PatchingWizard
             return firstCheckedRow.Tag as Host ?? Helpers.GetMaster(firstCheckedRow.Tag as Pool);
         }
 
-        private void disableNotApplicableHosts(PatchingHostsDataGridViewRow row, List<Host> applicableHosts, Host host)
+        private bool IsHostAmongApplicable(Host host, out string tooltipText)
         {
-            if (applicableHosts == null)
-                return;
+            string patchUuidFromAlert = null;
+            List<Host> applicableHosts = null;
 
-            if (poolSelectionOnly && row.IsPoolOrStandaloneHost && host.Connection.Cache.Hosts.Any(applicableHosts.Contains))
-                return;
-
-            if (!applicableHosts.Contains(host))
+            if (SelectedUpdateAlert != null)
             {
-                string patchUuidFromAlert = null;
-                if (SelectedUpdateAlert != null && SelectedUpdateAlert.Patch != null)
-                {
+                applicableHosts = SelectedUpdateAlert.DistinctHosts;
+                if(SelectedUpdateAlert.Patch != null)
                     patchUuidFromAlert = SelectedUpdateAlert.Patch.Uuid;
-                }
-                else if (FileFromDiskAlert != null)
-                {
+            }
+            else if (FileFromDiskAlert != null)
+            {
+                applicableHosts = FileFromDiskAlert.DistinctHosts;
+                if (FileFromDiskAlert.Patch != null)
                     patchUuidFromAlert = FileFromDiskAlert.Patch.Uuid;
-                }
+            }
 
-                if (!string.IsNullOrEmpty(patchUuidFromAlert))
+            tooltipText = null;
+            if (applicableHosts == null)
+                return true;
+
+            if (host.Connection.Cache.Hosts.Length == 1 && applicableHosts.Contains(host)) //standalone host
+                return true;
+
+            if (WizardMode == WizardMode.NewVersion)
+            {
+                if (applicableHosts.Contains(host))
                 {
-                    if (isPatchApplied(patchUuidFromAlert, host))
+                    var nonApplicables = host.Connection.Cache.Hosts.Count(h =>
+                        !applicableHosts.Contains(h) && !string.IsNullOrEmpty(patchUuidFromAlert) &&
+                        !isPatchApplied(patchUuidFromAlert, h));
+
+                    if (0 < nonApplicables && nonApplicables < host.Connection.Cache.Hosts.Length)
                     {
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST;
+                        return false;
                     }
-                    else
-                    {
-                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
-                    }
-                    row.Enabled = false;
                 }
             }
+
+            if (!applicableHosts.Contains(host) && !string.IsNullOrEmpty(patchUuidFromAlert))
+            {
+                if (isPatchApplied(patchUuidFromAlert, host))
+                {
+                    if (applyUpdatesCheckBox.Checked)
+                        return CanEnableRowAutomatedUpdates(host, out tooltipText);
+
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                    return false;
+                }
+                
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                return false;
+            }
+
+            return true;
         }
 
         private bool isPatchApplied(string uuid, Host host) 
@@ -687,15 +649,44 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void dataGridViewHosts_CheckBoxClicked(object sender, EventArgs e)
         {
+            OnPageUpdated();
+        }
+
+        private void applyUpdatesCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            PatchingHostsDataGridViewRow masterRow = null;
+
             foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
             {
                 var host = row.Tag as Host;
                 if (host != null)
-                    EnableRow(host, row.Index);
+                {
+                    string tooltipText;
+                    row.Enabled = CanEnableRow(host, out tooltipText);
+                    row.Cells[3].ToolTipText = tooltipText;
+
+                    if (row.ParentPoolRow != null)
+                    {
+                        if (row.Enabled)
+                        {
+                            row.ParentPoolRow.Enabled = true;
+                            row.ParentPoolRow.Cells[3].ToolTipText = null;
+                        }
+
+                        if (masterRow == null)
+                        {
+                            masterRow = row;
+                            if (!row.Enabled)
+                                row.ParentPoolRow.Cells[3].ToolTipText = row.Cells[3].ToolTipText;
+                        }
+                    }
+                }
                 else
-                    EnablePoolRow(row.Index);
+                {
+                    row.Enabled = false;
+                    masterRow = null;//reset the stored masterRow
+                }
             }
-            OnPageUpdated();
         }
 
         #region Nested items
@@ -1009,31 +1000,38 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _nameCell = new DataGridViewNameCell();
                 _versionCell = new DataGridViewTextBoxCell();
 
-                Cells.AddRange(new[] { _expansionCell, _poolCheckBoxCell, _poolIconHostCheckCell, _nameCell, _versionCell });
+                Cells.AddRange(_expansionCell, _poolCheckBoxCell, _poolIconHostCheckCell, _nameCell, _versionCell);
 
                 this.UpdateDetails();
             }
 
             private void UpdateDetails()
             {
-                if (Tag is Pool)
+                var pool = Tag as Pool;
+                if (pool != null)
                 {
-                    Pool pool = (Pool)Tag;
                     Host master = pool.Connection.Resolve(pool.master);
-                    _poolCheckBoxCell.Value = 0;
+                    if (_poolCheckBoxCell.Value == null)
+                        _poolCheckBoxCell.Value = CheckState.Unchecked;
                     _expansionCell.Value = Resources.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
                     _versionCell.Value = master.ProductVersionTextShort();
+                    return;
                 }
-                else if (Tag is Host)
+
+                var host = Tag as Host;
+                if (host != null)
                 {
-                    Host host = (Host) Tag;
-                    _poolCheckBoxCell.Value = 0;
+                    if (_poolCheckBoxCell.Value == null)
+                        _poolCheckBoxCell.Value = CheckState.Unchecked;
                     _expansionCell.Value = Resources.tree_plus;
                     if (_hasPool)
-                        _poolIconHostCheckCell.Value = 0;
-                    else 
+                    {
+                        if (_poolIconHostCheckCell.Value == null)
+                            _poolIconHostCheckCell.Value = CheckState.Unchecked;
+                    }
+                    else
                         _poolIconHostCheckCell.Value = Images.GetImage16For(host);
                     _nameCell.Value = host;
                     _versionCell.Value = host.ProductVersionTextShort();
@@ -1047,9 +1045,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     _poolIconHostCheckCell.Value = Images.GetImage16For((IXenObject)Tag);
                 }
             }
+
+            public PatchingHostsDataGridViewRow ParentPoolRow { get; set; }
         }
 
         #endregion
-
     }
 }
