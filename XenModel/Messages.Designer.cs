@@ -27689,9 +27689,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version..
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST", resourceCulture);
             }
         }
         
