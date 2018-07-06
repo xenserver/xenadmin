@@ -576,9 +576,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return groups;
         }
 
-        [DefaultValue(true)]
-        protected bool ManualUpgrade { set; get; }
-
         public override void PageCancelled()
         {
             DeregisterEventHandlers();

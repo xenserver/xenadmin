@@ -51,9 +51,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeWizardPrecheckPage()
         {
             InitializeComponent();
-            this.Dock = DockStyle.Fill;
+            ManualUpgrade = true;
         }
-
 
         private void AddEventHandlersToMasters()
         {
@@ -86,7 +85,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 return;
             }
             var selectedMasters = new List<Host>(SelectedMasters);
-            ManualUpgrade = ManualModeSelected;
             RemoveEventHandlersToMasters();
             SelectedServers.Clear();
             foreach (Host selectedMaster in selectedMasters)
@@ -233,7 +231,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         }
 
         public IEnumerable<Host> SelectedMasters { private get; set; }
-        public bool ManualModeSelected { private get; set; }
+        public bool ManualUpgrade { set; private get; }
 
         #region private methods
         public static List<Host> HostsToUpgradeOrUpdate(Pool pool)
