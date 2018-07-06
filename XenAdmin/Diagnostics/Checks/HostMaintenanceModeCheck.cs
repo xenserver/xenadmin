@@ -37,9 +37,12 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class HostMaintenanceModeCheck : HostLivenessCheck
     {
-        public HostMaintenanceModeCheck(Host host)
+        private readonly bool checkHostLivenessOnly;
+
+        public HostMaintenanceModeCheck(Host host, bool checkHostLivenessOnly = false)
             : base(host)
         {
+            this.checkHostLivenessOnly = checkHostLivenessOnly;
         }
 
         protected override Problem RunCheck()
@@ -47,6 +50,9 @@ namespace XenAdmin.Diagnostics.Checks
             var problem = base.RunCheck();
             if (problem != null)
                 return problem;
+
+            if (checkHostLivenessOnly)
+                return null;
 
             // Check the host is not in Maintenance Mode (or disabled)
             if (Host.MaintenanceMode() || !Host.enabled)
