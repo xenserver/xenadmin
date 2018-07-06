@@ -122,7 +122,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 else
                     AddPage(RollingUpgradeWizardInstallMethodPage, 4);
 
-                RollingUpgradeWizardPrecheckPage.ManualModeSelected = manualModeSelected;
+                RollingUpgradeWizardPrecheckPage.ManualUpgrade = manualModeSelected;
                 RollingUpgradeUpgradePage.ManualModeSelected = manualModeSelected;
 
                 var applyUpdatesToNewVersion = RollingUpgradeWizardUpgradeModePage.ApplyUpdatesToNewVersion;
