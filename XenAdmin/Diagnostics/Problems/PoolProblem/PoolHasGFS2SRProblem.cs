@@ -35,13 +35,13 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class UnableToUpdateOrUpgradeToLimaProblem : PoolProblem
+    class PoolHasGFS2SRProblem : PoolProblem
     {
         public bool clusterEnabled;
         public bool gfs2;
         
 
-        public UnableToUpdateOrUpgradeToLimaProblem(Check check, Pool pool, bool clusteringEnabled, bool hasGfs2Sr)
+        public PoolHasGFS2SRProblem(Check check, Pool pool, bool clusteringEnabled, bool hasGfs2Sr)
             : base(check, pool)
         {
             clusterEnabled = clusteringEnabled;

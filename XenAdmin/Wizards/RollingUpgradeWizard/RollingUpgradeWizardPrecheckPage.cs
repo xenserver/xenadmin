@@ -216,8 +216,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             var gfs2Checks = new List<Check>();
-            foreach (Pool pool in SelectedPools.Where(p => Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))
-                gfs2Checks.Add(new PoolHasKolkataGFS2SR(pool));
+            foreach (Pool pool in SelectedPools.Where(p =>
+                Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))
+            {
+                Host host = pool.Connection.Resolve(pool.master);
+                gfs2Checks.Add(new PoolHasGFS2SR(host));
+            }
 
             if (gfs2Checks.Count > 0)
             {

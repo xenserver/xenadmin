@@ -37,24 +37,23 @@ using XenAdmin.Diagnostics.Problems.HostProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class PoolHasKolkataGFS2SR : PoolCheck
+    class PoolHasGFS2SR : Check
     {
-        public PoolHasKolkataGFS2SR(Pool pool)
-            : base(pool)
+        public PoolHasGFS2SR(Host host)
+            : base(host)
         {
         }
 
         protected override Problem RunCheck()
         {
-            Host host = Pool.Connection.Resolve(Pool.master);
-            if (!host.IsLive())
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
-            var clusteringEnabled = Pool.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);
+            var clusteringEnabled = Host.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);
             var hasGfs2Sr = Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.gfs2);
 
             if (clusteringEnabled || hasGfs2Sr)
-                return new Problems.PoolProblem.UnableToUpdateOrUpgradeToLimaProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
+                return new Problems.PoolProblem.PoolHasGFS2SRProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
 
 
             return null;
