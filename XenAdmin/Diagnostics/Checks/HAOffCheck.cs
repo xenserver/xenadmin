@@ -51,9 +51,9 @@ namespace XenAdmin.Diagnostics.Checks
                 return null;
 
             if (pool.ha_enabled)
-                return new HAEnabledProblem(this, Helpers.GetPoolOfOne(Host.Connection));
+                return new HAEnabledProblem(this, pool);
             if (Helpers.WlbEnabled(pool.Connection))
-                return new WLBEnabledProblem(this, Helpers.GetPoolOfOne(Host.Connection));
+                return new WLBEnabledProblem(this, pool);
             return null;
         }
 
