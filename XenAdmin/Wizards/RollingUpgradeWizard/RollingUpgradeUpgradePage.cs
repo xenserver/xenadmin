@@ -94,8 +94,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            //Add masters first, then the slaves that are not ugpraded
-            applicableHosts = pool.HostsToUpgrade();
+            //Add masters first, then the slaves (add all hosts for now, they will be skipped from upgrade if already upgraded)
+            applicableHosts = pool.Connection.Cache.Hosts.ToList();
+            applicableHosts.Sort();
             return applicableHosts.Select(GetSubTasksFor).ToList();
         }
 
