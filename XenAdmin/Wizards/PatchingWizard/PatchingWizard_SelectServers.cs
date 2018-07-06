@@ -62,6 +62,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
         public XenServerPatchAlert FileFromDiskAlert { private get; set; }
+        public bool FileFromDiskHasUpdateXml { private get; set; }
         public WizardMode WizardMode { private get; set; }
 
         public PatchingWizard_SelectServers()
@@ -288,28 +289,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                         return false;
                     }
 
-                    if (poolSelectionOnly)
+                    if (WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null)
                         return IsHostAmongApplicable(host, out tooltipText);
-                    
-                    var firstCheckedHost = GetFirstCheckedHost();
-                    if (firstCheckedHost != null && (Helpers.ElyOrGreater(firstCheckedHost) != Helpers.ElyOrGreater(host)))
+
+                    // here a file from disk was selected, but it was not an update (FileFromDiskAlert == null)
+                    if ((!Helpers.ElyOrGreater(host.Connection) && FileFromDiskHasUpdateXml) ||
+                        (Helpers.ElyOrGreater(host.Connection) && !FileFromDiskHasUpdateXml))
                     {
-                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort(), host.ProductVersionTextShort());
+                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
                         return false;
                     }
-                    
+
                     return true;
             }
 
             return true;
-        }
-
-        private Host GetFirstCheckedHost()
-        {
-            var firstCheckedRow = dataGridViewHosts.Rows.Cast<PatchingHostsDataGridViewRow>().FirstOrDefault(row => row.CheckValue > UNCHECKED);
-            if (firstCheckedRow == null)
-                return null;
-            return firstCheckedRow.Tag as Host ?? Helpers.GetMaster(firstCheckedRow.Tag as Pool);
         }
 
         private bool IsHostAmongApplicable(Host host, out string tooltipText)

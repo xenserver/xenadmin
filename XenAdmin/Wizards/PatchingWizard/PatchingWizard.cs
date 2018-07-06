@@ -116,12 +116,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var existPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedExistingPatch;
                 var alertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
                 var fileFromDiskAlertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
+                var fileFromDiskHasUpdateXml = !wizardIsInAutomatedUpdatesMode && PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
 
                 PatchingWizard_SelectServers.WizardMode = wizardMode;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
                 PatchingWizard_SelectServers.FileFromDiskAlert = fileFromDiskAlertPatch;
+                PatchingWizard_SelectServers.FileFromDiskHasUpdateXml = fileFromDiskHasUpdateXml;
 
                 RemovePage(PatchingWizard_UploadPage);
                 RemovePage(PatchingWizard_ModePage);
