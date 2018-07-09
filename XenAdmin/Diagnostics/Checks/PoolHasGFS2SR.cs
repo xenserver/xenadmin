@@ -63,7 +63,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
             get
             {
-                return string.Format(Messages.GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR, Helpers.GetPoolOfOne(Host.Connection));
+                return string.Format(Messages.CLUSTERING_STATUS_CHECK, Helpers.GetPoolOfOne(Host.Connection));
             }
         }
     }

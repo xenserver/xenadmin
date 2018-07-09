@@ -7211,6 +7211,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clustering status check.
+        /// </summary>
+        public static string CLUSTERING_STATUS_CHECK {
+            get {
+                return ResourceManager.GetString("CLUSTERING_STATUS_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Collapse Children.
         /// </summary>
         public static string COLLAPSE_CHILDREN {
