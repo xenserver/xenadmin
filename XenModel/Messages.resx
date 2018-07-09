@@ -2527,6 +2527,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>Checking VM migration status</value>
   </data>
+  <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
+    <value>Checking clustering status</value>
+  </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
   </data>
@@ -2607,6 +2610,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CLUSTERING" xml:space="preserve">
     <value>Clustering</value>
+  </data>
+  <data name="CLUSTERING_STATUS_CHECK" xml:space="preserve">
+    <value>Clustering status check</value>
   </data>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>&amp;Collapse Children</value>
@@ -5697,6 +5703,15 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   </data>
   <data name="GFS2_SR_ATTACHED" xml:space="preserve">
     <value>Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool.</value>
+  </data>
+  <data name="GFS2_UPDATE_UPGRADE_CLUSTER_ERROR" xml:space="preserve">
+    <value>Pool {0} cannot have clustering enabled.</value>
+  </data>
+  <data name="GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR" xml:space="preserve">
+    <value>Pool {0} cannot have clustering enabled or a thinly provisioned (GFS2) SR present.</value>
+  </data>
+  <data name="GFS2_UPDATE_UPGRADE_SR_ERROR" xml:space="preserve">
+    <value>Pool {0} cannot have a thinly provisioned (GFS2) SR present.</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>

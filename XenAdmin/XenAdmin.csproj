@@ -708,6 +708,7 @@
     <Compile Include="TabPages\UsbPage.Designer.cs">
       <DependentUpon>UsbPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasGFS2SRProblem.cs" />
     <Compile Include="Wizards\BallooningWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -994,6 +995,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
+    <Compile Include="Diagnostics\Checks\PoolHasGFS2SR.cs" />
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
     <Compile Include="Dialogs\FolderChangeDialog.cs">
