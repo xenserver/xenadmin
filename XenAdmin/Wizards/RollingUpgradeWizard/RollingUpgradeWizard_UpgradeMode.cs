@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -81,7 +82,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     continue;
 
                 poolCount++;
-                var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates
+                var automatedUpdatesRestricted = hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates
                 if (!automatedUpdatesRestricted)
                     licensedPoolCount++;
             }

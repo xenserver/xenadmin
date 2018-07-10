@@ -129,20 +129,34 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
         {
+            if (!ApplyUpdatesToNewVersion)
+                return;
+
             var theHostPlan = bgw.HostPlans.FirstOrDefault(ha => ha.Host.Equals(host));
             if (theHostPlan == null)
                 return;
 
             if (theHostPlan.UpdatesPlanActions.Count > 0) // this is a retry; do not recreate actions
-                return; 
+                return;
 
             host = host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref));
 
-            if (!ApplyUpdatesToNewVersion || host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
-                return;
+            var automatedUpdatesRestricted = host.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates (only considering DundeeOrGreater hosts)
             
+            if (automatedUpdatesRestricted)
+            {
+                log.InfoFormat("Skipping updates installation on {0} because the batch hotfix application is restricted in the pool", host.Name());
+                return;
+            }
+
             if (!MinimalPatches.ContainsKey(bgw))
-                MinimalPatches.Add(bgw, Updates.GetMinimalPatches(host));
+            {
+                log.InfoFormat("Calculating minimal patches for {0}", host.Name());
+                var mp = Updates.GetMinimalPatches(host);
+                log.InfoFormat("Minimal patches for {0}: {1}", host.Name(), mp == null ? "None" : string.Join(",", mp.Select(p => p.Name)));
+
+                MinimalPatches.Add(bgw, mp);
+            }
 
             var minimalPatches = MinimalPatches[bgw];
             
