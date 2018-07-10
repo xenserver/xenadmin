@@ -24171,6 +24171,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server needs to have an IP address assigned to one (and only one) of the interfaces that will be part of the bonded cluster network..
+        /// </summary>
+        public static string NEWPOOL_IP_COUNT_BOND {
+            get {
+                return ResourceManager.GetString("NEWPOOL_IP_COUNT_BOND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server needs to have one (and only one) IP address on the network that will be used for clustering..
+        /// </summary>
+        public static string NEWPOOL_IP_COUNT_CLUSTER {
+            get {
+                return ResourceManager.GetString("NEWPOOL_IP_COUNT_CLUSTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server is master of an existing pool.
         /// </summary>
         public static string NEWPOOL_IS_A_POOL {
