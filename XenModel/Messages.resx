@@ -8230,6 +8230,12 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>This server has shared storage</value>
   </data>
+  <data name="NEWPOOL_IP_COUNT_BOND" xml:space="preserve">
+    <value>This server needs to have an IP address assigned to one (and only one) of the interfaces that will be part of the bonded cluster network.</value>
+  </data>
+  <data name="NEWPOOL_IP_COUNT_CLUSTER" xml:space="preserve">
+    <value>This server needs to have one (and only one) IP address on the network that will be used for clustering.</value>
+  </data>
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
     <value>This server is master of an existing pool</value>
   </data>

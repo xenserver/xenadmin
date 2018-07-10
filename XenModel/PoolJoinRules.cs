@@ -34,6 +34,8 @@ using System.Collections.Generic;
 using XenAdmin.Network;
 using XenAPI;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using XenAdmin.Actions;
 
 namespace XenAdmin.Core
 {
@@ -71,6 +73,8 @@ namespace XenAdmin.Core
             NonCompatibleManagementInterface,
             WrongRoleOnMaster,
             WrongRoleOnSlave,
+            WrongNumberOfIpsCluster,
+            WrongNumberOfIpsBond,
             NotConnected,
         }
 
@@ -166,6 +170,12 @@ namespace XenAdmin.Core
             if (!Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && !HasCompatibleManagementInterface(slaveConnection))
                 return Reason.NonCompatibleManagementInterface;
 
+            bool clusterHostInBond;
+            if (!HasIpForClusterNetwork(masterConnection, slaveHost, out clusterHostInBond))
+            {
+                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;
+            }    
+
             return Reason.Allowed;
         }
 
@@ -227,6 +237,10 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_MASTER_ROLE;
                 case Reason.WrongRoleOnSlave:
                     return Messages.NEWPOOL_SLAVE_ROLE;
+                case Reason.WrongNumberOfIpsCluster:
+                    return Messages.NEWPOOL_IP_COUNT_CLUSTER;
+                case Reason.WrongNumberOfIpsBond:
+                    return Messages.NEWPOOL_IP_COUNT_BOND;
                 default:
                     System.Diagnostics.Trace.Assert(false, "Unknown reason");
                     return "";
@@ -672,6 +686,52 @@ namespace XenAdmin.Core
                 return false;
             else
                 return slaveConnection.Cache.PIFs.Any(p => !p.physical && p.management && p.VLAN != -1);
+        }
+
+        public static bool HasIpForClusterNetwork(IXenConnection masterConnection, Host slaveHost, out bool clusterHostInBond)
+        {
+
+            var clusterHost = masterConnection.Cache.Cluster_hosts.FirstOrDefault();
+
+            if (clusterHost == null)
+            {
+                clusterHostInBond = false;
+                return true;
+            }
+            var clusterHostPif = clusterHost.Connection.Resolve(clusterHost.PIF);
+            clusterHostInBond = clusterHostPif.IsBondNIC();
+
+            var pifsWithIPAddress = 0;
+
+            List<string> ids = new List<string>();
+
+            if (clusterHostInBond)
+            {
+
+                List<PIF> slaves = new List<PIF>();
+
+                foreach (Bond bond in masterConnection.ResolveAll(clusterHostPif.bond_master_of))
+                {
+                    slaves.AddRange(masterConnection.ResolveAll(bond.slaves));
+                }
+
+                ids.AddRange(slaves.Select(slave => slave.device));
+            }
+            else
+            {
+                ids.Add(clusterHostPif.device);
+            }
+
+            foreach (PIF pif in slaveHost.Connection.ResolveAll(slaveHost.PIFs))
+            {
+                if (pif.IsManagementInterface(false) && ids.Contains(pif.device))
+                {
+                    pifsWithIPAddress += 1;
+                }
+            }
+
+            return pifsWithIPAddress == 1;
+
         }
     }
 }
