@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
@@ -166,7 +165,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
             //HA checks - for each pool
-            var haChecks = (from Host server in SelectedServers
+            var haChecks = (from Host server in SelectedMasters
                 where server.IsMaster()
                 select new HAOffCheck(server) as Check).ToList();
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
@@ -217,7 +216,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)
             {
-                var automatedUpdateChecks = (from Host server in SelectedServers
+                var automatedUpdateChecks = (from Host server in SelectedMasters
                     where server.IsMaster()
                     select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
 
