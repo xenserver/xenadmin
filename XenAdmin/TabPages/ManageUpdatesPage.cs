@@ -466,6 +466,11 @@ namespace XenAdmin.TabPages
             return connection.Cache.Hosts.All(h => Updates.GetServerVersions(h, Updates.XenServerVersions).Count > 0);
         }
 
+        private bool VersionFoundInUpdatesXml(Host host)
+        {
+            return Updates.GetServerVersions(host, Updates.XenServerVersions).Count > 0;
+        }
+
         private void RebuildHostView()
         {
             Program.AssertOnEventThread();
@@ -501,11 +506,10 @@ namespace XenAdmin.TabPages
                 foreach (IXenConnection c in xenConnections)
                 {
                     Pool pool = Helpers.GetPool(c);
-                    var versionIsFound = VersionFoundInUpdatesXml(c);
 
                     if (pool != null)          // pool row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded && versionIsFound);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded && VersionFoundInUpdatesXml(c));
                         var hostUuidList = new List<string>();
 
                         foreach (Host h in c.Cache.Hosts)
@@ -520,7 +524,7 @@ namespace XenAdmin.TabPages
                     Array.Sort(hosts);
                     foreach (Host h in hosts)       // host row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded && versionIsFound);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded && VersionFoundInUpdatesXml(h));
 
                         // add row based on server filter status
                         if (!toolStripDropDownButtonServerFilter.HideByLocation(h.uuid))
@@ -1406,7 +1410,7 @@ namespace XenAdmin.TabPages
             string patchingStatus = String.Empty;
             string requiredUpdates = String.Empty;
             string installedUpdates = String.Empty;
-            var versionIsFound = VersionFoundInUpdatesXml(xenConnection);
+            var versionIsFound = VersionFoundInUpdatesXml(host);
 
             pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
             requiredUpdates = CheckForUpdateSucceeded && versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
