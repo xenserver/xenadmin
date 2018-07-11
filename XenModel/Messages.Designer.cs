@@ -27651,6 +27651,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot install updates on this host because the master is running a version higher than [BRANDING_VERSION_7_0].
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0 {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subscription Advantage required.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED {
