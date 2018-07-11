@@ -3499,7 +3499,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Server &apos;{0}&apos; has fenced..
+        ///   Looks up a localized string similar to  Server &apos;{0}&apos; has been fenced..
         /// </summary>
         public static string Message_body_cluster_host_fencing {
             get {
@@ -4311,7 +4311,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server fenced.
+        ///   Looks up a localized string similar to Server has been fenced.
         /// </summary>
         public static string Message_name_cluster_host_fencing {
             get {
