@@ -11982,7 +11982,7 @@ Check your settings and try again.</value>
     <value>Click here to exit maintenance mode</value>
   </data>
   <data name="UPDATES_WIZARD_HOST_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Server {0} should be put into maintenance mode when required.  You must start with all servers enabled.</value>
+    <value>Server {0} will be put into maintenance mode when required.  You must start with all servers enabled.</value>
   </data>
   <data name="UPDATES_WIZARD_HOST_MAINTENANCE_MODE_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
