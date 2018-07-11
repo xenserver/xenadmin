@@ -279,6 +279,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         enabled = false;
                         tooltipText = reason;
                     }
+
+                    if (enabled && !Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the master is Ely or greater
+                    {
+                        enabled = false;
+                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0;
+                    }
                     return enabled;
 
                 case UpdateType.ISO:
