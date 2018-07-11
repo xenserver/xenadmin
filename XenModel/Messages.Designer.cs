@@ -27155,7 +27155,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated updates process was not completed successfuly. The update process has been paused. Press Retry to resume it..
+        ///   Looks up a localized string similar to The automated updates process was not completed successfully. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE {
             get {
@@ -27182,7 +27182,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All automated updates processes were completed successfuly..
+        ///   Looks up a localized string similar to All automated updates processes were completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY {
             get {
@@ -27191,7 +27191,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated updates process was completed successfuly..
+        ///   Looks up a localized string similar to The automated updates process was completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE {
             get {
@@ -30461,7 +30461,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The rolling pool upgrade process was not completed successfuly. The upgrade process has been paused. Press Retry to resume it..
+        ///   Looks up a localized string similar to The rolling pool upgrade process was not completed successfully. The upgrade process has been paused. Press Retry to resume it..
         /// </summary>
         public static string ROLLING_UPGRADE_ERROR_ONE {
             get {
@@ -30532,7 +30532,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All rolling pool upgrade processes were completed successfuly..
+        ///   Looks up a localized string similar to All rolling pool upgrade processes were completed successfully..
         /// </summary>
         public static string ROLLING_UPGRADE_SUCCESS_MANY {
             get {
@@ -30541,7 +30541,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The rolling pool upgrade process was completed successfuly..
+        ///   Looks up a localized string similar to The rolling pool upgrade process was completed successfully..
         /// </summary>
         public static string ROLLING_UPGRADE_SUCCESS_ONE {
             get {
