@@ -265,8 +265,15 @@ namespace XenAdmin.Core
             if (CheckForUpdatesStarted != null)
                 CheckForUpdatesStarted();
 
-            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
-                dialog.ShowDialog(parentForProgressDialog);
+            if (parentForProgressDialog != null)
+            {
+                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                    dialog.ShowDialog(parentForProgressDialog);
+            }
+            else
+            {
+                action.RunExternal(action.Session);
+            }
 
             return action.Succeeded;
         }
