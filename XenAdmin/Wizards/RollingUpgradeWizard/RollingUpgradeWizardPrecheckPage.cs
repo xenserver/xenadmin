@@ -166,7 +166,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
-                where server.IsMaster()
                 select new HAOffCheck(server) as Check).ToList();
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
@@ -217,7 +216,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (ApplyUpdatesToNewVersion)
             {
                 var automatedUpdateChecks = (from Host server in SelectedMasters
-                    where server.IsMaster()
                     select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
 
                 automatedUpdateChecks.Add(new CfuAvailabilityCheck());
