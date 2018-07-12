@@ -31,6 +31,7 @@
 
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -57,6 +58,11 @@ namespace XenAdmin.Diagnostics.Checks
         public override string Description
         {
             get { return Messages.XENCENTER_VERSION_CHECK_DESCRIPTION; }
+        }
+
+        public override IXenObject XenObject
+        {
+            get { return null; }
         }
     }
 }

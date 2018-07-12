@@ -32,11 +32,13 @@
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.UtilityProblem;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
     class CfuAvailabilityCheck : Check
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected override Problem RunCheck()
         {
@@ -51,10 +53,7 @@ namespace XenAdmin.Diagnostics.Checks
                 log.WarnFormat("Could not download check for update file.");
             }
 
-            if (!action.Succeeded)
-                return new CfuNotAvailableProblem(this);
-            else
-                return null;
+            return action.Succeeded ? null : new CfuNotAvailableProblem(this);
         }
 
         public override string Description
@@ -65,6 +64,9 @@ namespace XenAdmin.Diagnostics.Checks
             }
         }
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public override IXenObject XenObject
+        {
+            get { return null; }
+        }
     }
 }

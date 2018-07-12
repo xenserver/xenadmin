@@ -37,13 +37,19 @@ namespace XenAdmin.Diagnostics.Checks
 {
     public abstract class PoolCheck : Check
     {
+        private readonly Pool _pool;
+
         protected PoolCheck(Pool pool)
         {
             _pool = pool;
         }
 
-        private readonly Pool _pool;
-        public Pool Pool
+        protected Pool Pool
+        {
+            get { return _pool; }
+        }
+
+        public sealed override IXenObject XenObject
         {
             get { return _pool; }
         }

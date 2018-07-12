@@ -243,13 +243,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     // this host is no longer live -> remove all previous problems regarding this host
                     Problem curProblem = problem;
                     ProblemsResolvedPreCheck.RemoveAll(p =>
-                    {
-                        var hostCheck = p.Check as HostCheck;
-                        var curHostCheck = curProblem.Check as HostCheck;
-                        if (hostCheck != null && curHostCheck != null)
-                            return hostCheck.Host.Equals(curHostCheck.Host);
-                        return false;
-                    });
+                        p.Check != null && p.Check.XenObject != null && curProblem.Check != null &&
+                        p.Check.XenObject.Equals(curProblem.Check.XenObject));
                 }
 
                 if (ProblemsResolvedPreCheck.Contains(problem))

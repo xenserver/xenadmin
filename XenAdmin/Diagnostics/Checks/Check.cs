@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using XenAdmin.Diagnostics.Problems;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -50,6 +51,7 @@ namespace XenAdmin.Diagnostics.Checks
         }
 
         public abstract string Description { get; }
+        public abstract IXenObject XenObject { get; }
 
         public virtual string SuccessfulCheckDescription
         {

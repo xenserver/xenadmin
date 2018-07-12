@@ -104,18 +104,33 @@ namespace XenAdmin.Diagnostics.Problems
 
         public int CompareTo(Problem other)
         {
-            if (!Description.Equals(other.Description))
-                return Description.CompareTo(other.Description);
+            if (other == null)
+                return 1;
 
-            return Title.CompareTo(other.Title);
+            var result = string.Compare(Description, other.Description);
+
+            if (result == 0)
+                result = string.Compare(Title, other.Title);
+
+            if (result == 0 && Check != null && Check.XenObject != null && other.Check != null)
+                result = Check.XenObject.CompareTo(other.Check.XenObject);
+
+            return result;
         }
 
         public override bool Equals(object obj)
         {
-            Problem problem = obj as Problem;
-            if (problem != null)
-                return this.CompareTo(problem) == 0;
-            return false;
+            Problem other = obj as Problem;
+            if (other == null)
+                return false;
+
+            if (GetType() != other.GetType())
+                return false;
+
+            if (CompareTo(other) != 0)
+                return false;
+
+            return true;
         }
 
         public override int GetHashCode()
