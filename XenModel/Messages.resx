@@ -10205,7 +10205,9 @@ To configure HA settings, switch to an account with one of the following roles:
     <value>Check complete, you have full access to the features in this wizard.</value>
   </data>
   <data name="RBAC_UPDATES_WIZARD" xml:space="preserve">
-    <value>User {0} does not have sufficient permissions to apply software updates to {1}. Either log in with different user credentials or deselect this server before continuing.</value>
+    <value>User {0} does not have sufficient permissions to apply software updates to {1}.
+
+You must reconnect to {1} using an account with Pool Operator permissions before you can apply software updates to it.</value>
   </data>
   <data name="RBAC_UPGRADE_WIZARD_MESSAGE" xml:space="preserve">
     <value>User {0} does not have sufficient permissions to perform a rolling pool upgrade on {1}. 
