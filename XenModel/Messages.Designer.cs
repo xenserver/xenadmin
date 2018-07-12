@@ -5204,22 +5204,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying this update failed.  Logs:
-        ///
-        ///.
-        /// </summary>
-        public static string APPLY_PATCH_FAILED_LOG_MESSAGE {
-            get {
-                return ResourceManager.GetString("APPLY_PATCH_FAILED_LOG_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///Apply update &apos;{0}&apos; to server &apos;{1}&apos;...
-        ///
-        ///.
+        ///   Looks up a localized string similar to Applied update &apos;{0}&apos; to server &apos;{1}&apos;. Result: {2}..
         /// </summary>
         public static string APPLY_PATCH_LOG_MESSAGE {
             get {
@@ -5237,7 +5222,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying Update &apos;{0}&apos; to Server &apos;{1}&apos;....
+        ///   Looks up a localized string similar to Applying update &apos;{0}&apos; to server &apos;{1}&apos;....
         /// </summary>
         public static string APPLYING_PATCH {
             get {
@@ -26907,11 +26892,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update &apos;{0}&apos; Applied to Server &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Update &apos;{0}&apos; applied to server &apos;{1}&apos;.
         /// </summary>
         public static string PATCH_APPLIED {
             get {
                 return ResourceManager.GetString("PATCH_APPLIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update &apos;{0}&apos; already applied to server &apos;{1}&apos;.
+        /// </summary>
+        public static string PATCH_APPLIED_ALREADY {
+            get {
+                return ResourceManager.GetString("PATCH_APPLIED_ALREADY", resourceCulture);
             }
         }
         
@@ -34976,7 +34970,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Already Applied to Server &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Update already applied to server &apos;{0}&apos;.
         /// </summary>
         public static string UPDATES_WIZARD_PATCH_ALREADY_APPLIED_TITLE {
             get {
