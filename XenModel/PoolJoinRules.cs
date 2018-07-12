@@ -710,7 +710,9 @@ namespace XenAdmin.Core
 
                 List<PIF> slaves = new List<PIF>();
 
-                foreach (Bond bond in masterConnection.ResolveAll(clusterHostPif.bond_master_of))
+                var bonds = masterConnection.ResolveAll(clusterHostPif.bond_master_of);
+
+                foreach (var bond in bonds)
                 {
                     slaves.AddRange(masterConnection.ResolveAll(bond.slaves));
                 }
@@ -722,7 +724,9 @@ namespace XenAdmin.Core
                 ids.Add(clusterHostPif.device);
             }
 
-            foreach (PIF pif in slaveHost.Connection.ResolveAll(slaveHost.PIFs))
+            var pifs = slaveHost.Connection.ResolveAll(slaveHost.PIFs);
+
+            foreach (var pif in pifs)
             {
                 if (pif.IsManagementInterface(false) && ids.Contains(pif.device))
                 {
