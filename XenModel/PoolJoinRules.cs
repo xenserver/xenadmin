@@ -34,8 +34,6 @@ using System.Collections.Generic;
 using XenAdmin.Network;
 using XenAPI;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using XenAdmin.Actions;
 
 namespace XenAdmin.Core
 {
@@ -690,15 +688,17 @@ namespace XenAdmin.Core
 
         public static bool HasIpForClusterNetwork(IXenConnection masterConnection, Host slaveHost, out bool clusterHostInBond)
         {
-
+            clusterHostInBond = false;
             var clusterHost = masterConnection.Cache.Cluster_hosts.FirstOrDefault();
 
             if (clusterHost == null)
-            {
-                clusterHostInBond = false;
                 return true;
-            }
+
             var clusterHostPif = clusterHost.Connection.Resolve(clusterHost.PIF);
+
+            if (clusterHostPif == null)
+                return true;
+
             clusterHostInBond = clusterHostPif.IsBondNIC();
 
             var pifsWithIPAddress = 0;
