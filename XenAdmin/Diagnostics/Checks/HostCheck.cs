@@ -44,7 +44,12 @@ namespace XenAdmin.Diagnostics.Checks
             _host = host;
         }
 
-        public Host Host
+        protected Host Host
+        {
+            get { return _host; }
+        }
+
+        public sealed override IXenObject XenObject
         {
             get { return _host; }
         }
