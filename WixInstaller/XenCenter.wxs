@@ -224,7 +224,7 @@
 								  Vital="no"
 								  Name="XenServerHealthCheck"
 								  DisplayName="[Citrix XenServer] Health Check Service"
-								  Description="Enables monitoring of the health of your Citrix Hypervisor pools by periodically uploading data from the servers to Citrix Insight Services."
+								  Description="Enables monitoring of the health of your [Citrix XenServer] pools by periodically uploading data from the servers to Citrix Insight Services."
 								  Start="auto"
 								  Account="LocalSystem"
 								  ErrorControl="normal"
@@ -293,7 +293,7 @@
             <ComponentRef Id="ProgramFilesShortcut" />
   
            <?if "$(env.Branding)"="XenCenter"?>		
-				<Feature Id="HealthCheckService" Title="[Citrix XenServer] Health Check Service" Description="Enables monitoring of the health of your Citrix Hypervisor pools." Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+				<Feature Id="HealthCheckService" Title="[Citrix XenServer] Health Check Service" Description="Enables monitoring of the health of your [Citrix XenServer] pools." Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
 					<ComponentRef Id="XenServerHealthCheck" /> 
 				</Feature>
 	       <?else ?>
