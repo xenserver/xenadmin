@@ -29345,7 +29345,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} does not have sufficient permissions to apply software updates to {1}. Either log in with different user credentials or deselect this server before continuing..
+        ///   Looks up a localized string similar to User {0} does not have sufficient permissions to apply software updates to {1}.
+        ///
+        ///You must reconnect to {1} using an account with Pool Operator permissions before you can apply software updates to it..
         /// </summary>
         public static string RBAC_UPDATES_WIZARD {
             get {
