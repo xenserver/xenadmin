@@ -267,25 +267,26 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    bool enabled = true;
                     if (Helpers.ElyOrGreater(host))
                     {
-                        enabled = false;
                         tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                        return false;
                     }
+
                     string reason;
                     if (!IsHostAmongApplicable(host, out reason))
                     {
-                        enabled = false;
                         tooltipText = reason;
+                        return false;
                     }
 
-                    if (enabled && !Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the master is Ely or greater
+                    if (!Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the master is Ely or greater
                     {
-                        enabled = false;
                         tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0;
+                        return false;
                     }
-                    return enabled;
+
+                    return true;
 
                 case UpdateType.ISO:
                     //from Ely onwards, iso does not mean supplemental pack
