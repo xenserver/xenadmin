@@ -1907,7 +1907,7 @@ Warning: you must ensure that the SR is not in use by any server not connected t
     <value>Applying hotfix to '{0}'</value>
   </data>
   <data name="APPLYING_PATCH" xml:space="preserve">
-    <value>Applying Update '{0}' to Server '{1}'...</value>
+    <value>Applying update '{0}' to server '{1}'...</value>
   </data>
   <data name="APPLYLICENSE_APPLIED" xml:space="preserve">
     <value>License applied</value>
@@ -1927,17 +1927,8 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLY_HOTFIX" xml:space="preserve">
     <value>Apply hotfix</value>
   </data>
-  <data name="APPLY_PATCH_FAILED_LOG_MESSAGE" xml:space="preserve">
-    <value>Applying this update failed.  Logs:
-
-</value>
-  </data>
   <data name="APPLY_PATCH_LOG_MESSAGE" xml:space="preserve">
-    <value>
-
-Apply update '{0}' to server '{1}'...
-
-</value>
+    <value>Applied update '{0}' to server '{1}'. Result: {2}.</value>
   </data>
   <data name="ARE_EMPTY" xml:space="preserve">
     <value>are empty</value>
@@ -9644,7 +9635,10 @@ Please wait for this operation to complete, then click Next to continue with the
     <value>Go to web page</value>
   </data>
   <data name="PATCH_APPLIED" xml:space="preserve">
-    <value>Update '{0}' Applied to Server '{1}'</value>
+    <value>Update '{0}' applied to server '{1}'</value>
+  </data>
+  <data name="PATCH_APPLIED_ALREADY" xml:space="preserve">
+    <value>Update '{0}' already applied to server '{1}'</value>
   </data>
   <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
     <value>{0} 
@@ -12065,7 +12059,7 @@ Check your settings and try again.</value>
     <value>{0}: The update has already been applied to this server.  This server will be skipped.</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED_TITLE" xml:space="preserve">
-    <value>Update Already Applied to Server '{0}'</value>
+    <value>Update already applied to server '{0}'</value>
   </data>
   <data name="UPDATES_WIZARD_PLAN_ERROR" xml:space="preserve">
     <value>An error occurred trying to carry out plan stage '{0}'.  The error was '{1}'</value>
