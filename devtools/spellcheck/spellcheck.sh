@@ -39,7 +39,7 @@ src="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
 output=$(/usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" \( -name \*.cs -o -name \*.resx \) -exec sh "$dir/spellcheck-file.sh" \{\} \;)
 
-output_brand=$(/usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenModel/XenAPI" "$src/XenOvfApi" "$src/XenOvfTransport" \( -name \*.resx \) -exec sh "$dir/spellcheck-brand-file.sh" \{\} \;)
+output_brand=$(/usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" \( -name \*.resx \) -exec sh "$dir/spellcheck-brand-file.sh" \{\} \;)
 
 echo "$output" | sed -e "s,$src/,,g"
 
