@@ -34191,7 +34191,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Saving properties of {0}.
         /// </summary>
         public static string UPDATE_PROPERTIES {
             get {
@@ -34254,7 +34254,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating complete..
+        ///   Looks up a localized string similar to Saved properties of {0}..
         /// </summary>
         public static string UPDATED_PROPERTIES {
             get {
@@ -35251,7 +35251,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating....
+        ///   Looks up a localized string similar to Saving properties....
         /// </summary>
         public static string UPDATING_PROPERTIES {
             get {
