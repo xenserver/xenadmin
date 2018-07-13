@@ -2533,6 +2533,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>Checking VM migration status</value>
   </data>
+  <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
+    <value>Checking clustering status</value>
+  </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
   </data>
@@ -2616,6 +2619,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CLUSTERING" xml:space="preserve">
     <value>Clustering</value>
+  </data>
+  <data name="CLUSTERING_STATUS_CHECK" xml:space="preserve">
+    <value>Clustering status check</value>
   </data>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>&amp;Collapse Children</value>
@@ -5701,6 +5707,15 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="GFS2_SR_ATTACHED" xml:space="preserve">
     <value>Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool.</value>
   </data>
+  <data name="GFS2_UPDATE_UPGRADE_CLUSTER_ERROR" xml:space="preserve">
+    <value>Pool {0} cannot have clustering enabled.</value>
+  </data>
+  <data name="GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR" xml:space="preserve">
+    <value>Pool {0} cannot have clustering enabled or a thinly provisioned (GFS2) SR present.</value>
+  </data>
+  <data name="GFS2_UPDATE_UPGRADE_SR_ERROR" xml:space="preserve">
+    <value>Pool {0} cannot have a thinly provisioned (GFS2) SR present.</value>
+  </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
   </data>
@@ -8233,6 +8248,12 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>This server has shared storage</value>
   </data>
+  <data name="NEWPOOL_IP_COUNT_BOND" xml:space="preserve">
+    <value>This server needs to have an IP address assigned to one (and only one) of the interfaces that will be part of the bonded cluster network.</value>
+  </data>
+  <data name="NEWPOOL_IP_COUNT_CLUSTER" xml:space="preserve">
+    <value>This server needs to have one (and only one) IP address on the network that will be used for clustering.</value>
+  </data>
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
     <value>This server is master of an existing pool</value>
   </data>
@@ -9081,6 +9102,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
     <value>The VM is not agile. Restart cannot be guaranteed.</value>
+  </data>
+  <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
+    <value>The VM has one or more SR-IOV VFs attached. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM has one or more virtual GPUs. Restart cannot be guaranteed.</value>
@@ -11149,11 +11173,8 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR" xml:space="preserve">
     <value>Storage Repository</value>
   </data>
-  <data name="SRIOV_DISABLED" xml:space="preserve">
-    <value>Yes (disabled)</value>
-  </data>
-  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
-    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  <data name="SRIOV_LOGICAL_PIF_UNPLUGGED" xml:space="preserve">
+    <value>Yes (SR-IOV logical PIF is unplugged)</value>
   </data>
   <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
     <value>SR-IOV networks require an SR-IOV capable NIC.</value>
@@ -11161,8 +11182,13 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
     <value>Create &amp;SR-IOV anyway</value>
   </data>
-  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
-    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
+  <data name="SRIOV_NETWORK_CREATE_WARNING" xml:space="preserve">
+    <value>Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
+
+You may need to reboot your server(s) to enable SR-IOV network.</value>
+  </data>
+  <data name="SRIOV_NETWORK_SHOULD_BE_CREATED" xml:space="preserve">
+    <value>Yes (To enable SR-IOV create an SR-IOV network on this NIC)</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>

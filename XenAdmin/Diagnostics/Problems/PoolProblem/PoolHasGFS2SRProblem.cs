@@ -29,37 +29,54 @@
  * SUCH DAMAGE.
  */
 
-using System.Linq;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
-namespace XenAdmin.Actions
+
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    public class DisableClusteringAction : AsyncAction
+    class PoolHasGFS2SRProblem : PoolProblem
     {
-        public DisableClusteringAction(Pool pool)
-            : base(pool.Connection, Messages.DISABLE_CLUSTERING_ON_POOL,
-            string.Format(Messages.DISABLING_CLUSTERING_ON_POOL, pool.Name()), true)
+        public bool clusterEnabled;
+        public bool gfs2;
+        
+
+        public PoolHasGFS2SRProblem(Check check, Pool pool, bool clusteringEnabled, bool hasGfs2Sr)
+            : base(check, pool)
         {
-            #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("cluster.pool_destroy");
-            ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
-            #endregion
+            clusterEnabled = clusteringEnabled;
+            gfs2 = hasGfs2Sr;
         }
 
-        protected override void Run()
+        public override string Description
         {
-            var existingCluster = Connection.Cache.Clusters.FirstOrDefault();
-            if (existingCluster != null)
+            get
             {
-                Cluster.pool_destroy(Session, existingCluster.opaque_ref);
-                var clusterHosts = Connection.ResolveAll(existingCluster.cluster_hosts);
-
-                foreach (var clusterHost in clusterHosts)
+                if (clusterEnabled && gfs2)
                 {
-                    PIF.set_disallow_unplug(Session, clusterHost.PIF.opaque_ref, false);
+                    return string.Format(Messages.GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR, Pool);
                 }
+
+                if (clusterEnabled)
+                {
+                    return string.Format(Messages.GFS2_UPDATE_UPGRADE_CLUSTER_ERROR, Pool);
+                }
+
+                if (gfs2)
+                {
+                    return string.Format(Messages.GFS2_UPDATE_UPGRADE_SR_ERROR, Pool);
+                }
+                return null;
             }
-            Description = string.Format(Messages.DISABLED_CLUSTERING_ON_POOL, Pool.Name());
         }
+
+        public override string HelpMessage
+        {
+            get
+            {
+                return "";
+            }
+        }
+
     }
 }
