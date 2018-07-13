@@ -30,36 +30,41 @@
  */
 
 using System.Linq;
+using XenAdmin.Core;
 using XenAPI;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class DisableClusteringAction : AsyncAction
+    class PoolHasGFS2SR : Check
     {
-        public DisableClusteringAction(Pool pool)
-            : base(pool.Connection, Messages.DISABLE_CLUSTERING_ON_POOL,
-            string.Format(Messages.DISABLING_CLUSTERING_ON_POOL, pool.Name()), true)
+        public PoolHasGFS2SR(Host host)
+            : base(host)
         {
-            #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("cluster.pool_destroy");
-            ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
-            #endregion
         }
 
-        protected override void Run()
+        protected override Problem RunCheck()
         {
-            var existingCluster = Connection.Cache.Clusters.FirstOrDefault();
-            if (existingCluster != null)
-            {
-                Cluster.pool_destroy(Session, existingCluster.opaque_ref);
-                var clusterHosts = Connection.ResolveAll(existingCluster.cluster_hosts);
+            if (!Host.IsLive())
+                return new HostNotLiveWarning(this, Host);
 
-                foreach (var clusterHost in clusterHosts)
-                {
-                    PIF.set_disallow_unplug(Session, clusterHost.PIF.opaque_ref, false);
-                }
+            var clusteringEnabled = Host.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);
+            var hasGfs2Sr = Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.gfs2);
+
+            if (clusteringEnabled || hasGfs2Sr)
+                return new Problems.PoolProblem.PoolHasGFS2SRProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
+
+
+            return null;
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.CLUSTERING_STATUS_CHECK, Helpers.GetPoolOfOne(Host.Connection));
             }
-            Description = string.Format(Messages.DISABLED_CLUSTERING_ON_POOL, Pool.Name());
         }
     }
 }

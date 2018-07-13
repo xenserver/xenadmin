@@ -53,6 +53,7 @@ namespace XenAPI
             XenRef<Host> host,
             bool enabled,
             XenRef<PIF> PIF,
+            bool joined,
             List<cluster_host_operation> allowed_operations,
             Dictionary<string, cluster_host_operation> current_operations,
             Dictionary<string, string> other_config)
@@ -62,6 +63,7 @@ namespace XenAPI
             this.host = host;
             this.enabled = enabled;
             this.PIF = PIF;
+            this.joined = joined;
             this.allowed_operations = allowed_operations;
             this.current_operations = current_operations;
             this.other_config = other_config;
@@ -87,6 +89,7 @@ namespace XenAPI
             host = update.host;
             enabled = update.enabled;
             PIF = update.PIF;
+            joined = update.joined;
             allowed_operations = update.allowed_operations;
             current_operations = update.current_operations;
             other_config = update.other_config;
@@ -99,6 +102,7 @@ namespace XenAPI
             host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
             enabled = (bool)proxy.enabled;
             PIF = proxy.PIF == null ? null : XenRef<PIF>.Create(proxy.PIF);
+            joined = (bool)proxy.joined;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_host_operation>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_cluster_host_operation(proxy.current_operations);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
@@ -112,6 +116,7 @@ namespace XenAPI
             result_.host = host ?? "";
             result_.enabled = enabled;
             result_.PIF = PIF ?? "";
+            result_.joined = joined;
             result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
             result_.current_operations = Maps.convert_to_proxy_string_cluster_host_operation(current_operations);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
@@ -147,6 +152,8 @@ namespace XenAPI
                 enabled = Marshalling.ParseBool(table, "enabled");
             if (table.ContainsKey("PIF"))
                 PIF = Marshalling.ParseRef<PIF>(table, "PIF");
+            if (table.ContainsKey("joined"))
+                joined = Marshalling.ParseBool(table, "joined");
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<cluster_host_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
@@ -170,6 +177,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._host, other._host) &&
                 Helper.AreEqual2(this._enabled, other._enabled) &&
                 Helper.AreEqual2(this._PIF, other._PIF) &&
+                Helper.AreEqual2(this._joined, other._joined) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
@@ -197,7 +205,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -211,7 +219,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Cluster_host instance with the specified UUID.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -225,7 +233,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -239,7 +247,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster field of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -253,7 +261,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the host field of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -267,7 +275,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the enabled field of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -281,7 +289,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PIF field of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -291,6 +299,20 @@ namespace XenAPI
                 return session.JsonRpcClient.cluster_host_get_pif(session.opaque_ref, _cluster_host);
             else
                 return XenRef<PIF>.Create(session.proxy.cluster_host_get_pif(session.opaque_ref, _cluster_host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the joined field of the given Cluster_host.
+        /// Experimental. First published in XenServer 7.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
+        public static bool get_joined(Session session, string _cluster_host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_host_get_joined(session.opaque_ref, _cluster_host);
+            else
+                return (bool)session.proxy.cluster_host_get_joined(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -321,7 +343,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given Cluster_host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -335,7 +357,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a new host to an existing cluster.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">Cluster to join</param>
@@ -351,7 +373,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a new host to an existing cluster.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">Cluster to join</param>
@@ -367,7 +389,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -381,7 +403,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -395,7 +417,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable cluster membership for a disabled cluster host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -409,7 +431,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable cluster membership for a disabled cluster host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -423,7 +445,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster forcefully.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -437,7 +459,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster forcefully.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -451,7 +473,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable cluster membership for an enabled cluster host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -465,7 +487,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable cluster membership for an enabled cluster host.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -479,7 +501,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the Cluster_hosts known to the system.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Cluster_host>> get_all(Session session)
@@ -504,7 +526,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         public virtual string uuid
         {
@@ -523,7 +545,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reference to the Cluster object
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<Cluster>))]
         public virtual XenRef<Cluster> cluster
@@ -543,7 +565,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reference to the Host object
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<Host>))]
         public virtual XenRef<Host> host
@@ -563,7 +585,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether the cluster host believes that clustering should be enabled on this host
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         public virtual bool enabled
         {
@@ -582,7 +604,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reference to the PIF object
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<PIF>))]
         public virtual XenRef<PIF> PIF
@@ -599,6 +621,25 @@ namespace XenAPI
             }
         }
         private XenRef<PIF> _PIF = new XenRef<PIF>("OpaqueRef:NULL");
+
+        /// <summary>
+        /// Whether the cluster host has joined the cluster
+        /// Experimental. First published in XenServer 7.5.
+        /// </summary>
+        public virtual bool joined
+        {
+            get { return _joined; }
+            set
+            {
+                if (!Helper.AreEqual(value, _joined))
+                {
+                    _joined = value;
+                    Changed = true;
+                    NotifyPropertyChanged("joined");
+                }
+            }
+        }
+        private bool _joined = true;
 
         /// <summary>
         /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
@@ -638,7 +679,7 @@ namespace XenAPI
 
         /// <summary>
         /// Additional configuration
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config

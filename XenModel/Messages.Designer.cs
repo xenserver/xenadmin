@@ -6986,6 +6986,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking clustering status.
+        /// </summary>
+        public static string CHECKING_CLUSTERING_STATUS {
+            get {
+                return ResourceManager.GetString("CHECKING_CLUSTERING_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for pending restart.
         /// </summary>
         public static string CHECKING_FOR_PENDING_RESTART {
@@ -7225,6 +7234,15 @@ namespace XenAdmin {
         public static string CLUSTERING {
             get {
                 return ResourceManager.GetString("CLUSTERING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering status check.
+        /// </summary>
+        public static string CLUSTERING_STATUS_CHECK {
+            get {
+                return ResourceManager.GetString("CLUSTERING_STATUS_CHECK", resourceCulture);
             }
         }
         
@@ -16281,6 +16299,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pool {0} cannot have clustering enabled..
+        /// </summary>
+        public static string GFS2_UPDATE_UPGRADE_CLUSTER_ERROR {
+            get {
+                return ResourceManager.GetString("GFS2_UPDATE_UPGRADE_CLUSTER_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool {0} cannot have clustering enabled or a thinly provisioned (GFS2) SR present..
+        /// </summary>
+        public static string GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR {
+            get {
+                return ResourceManager.GetString("GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool {0} cannot have a thinly provisioned (GFS2) SR present..
+        /// </summary>
+        public static string GFS2_UPDATE_UPGRADE_SR_ERROR {
+            get {
+                return ResourceManager.GetString("GFS2_UPDATE_UPGRADE_SR_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GPU.
         /// </summary>
         public static string GPU {
@@ -24135,6 +24180,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server needs to have an IP address assigned to one (and only one) of the interfaces that will be part of the bonded cluster network..
+        /// </summary>
+        public static string NEWPOOL_IP_COUNT_BOND {
+            get {
+                return ResourceManager.GetString("NEWPOOL_IP_COUNT_BOND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server needs to have one (and only one) IP address on the network that will be used for clustering..
+        /// </summary>
+        public static string NEWPOOL_IP_COUNT_CLUSTER {
+            get {
+                return ResourceManager.GetString("NEWPOOL_IP_COUNT_CLUSTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server is master of an existing pool.
         /// </summary>
         public static string NEWPOOL_IS_A_POOL {
@@ -26151,6 +26214,15 @@ namespace XenAdmin {
         public static string NOT_AGILE_UNKOWN {
             get {
                 return ResourceManager.GetString("NOT_AGILE_UNKOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM has one or more SR-IOV VFs attached. Restart cannot be guaranteed..
+        /// </summary>
+        public static string NOT_AGILE_VM_HAS_SRIOV_VIF {
+            get {
+                return ResourceManager.GetString("NOT_AGILE_VM_HAS_SRIOV_VIF", resourceCulture);
             }
         }
         
@@ -32381,20 +32453,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes (disabled).
+        ///   Looks up a localized string similar to Yes (SR-IOV logical PIF is unplugged).
         /// </summary>
-        public static string SRIOV_DISABLED {
+        public static string SRIOV_LOGICAL_PIF_UNPLUGGED {
             get {
-                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to These servers needs to be rebooted for this SR-IOV network to take effect:&apos;{0}&apos;.
-        /// </summary>
-        public static string SRIOV_ENABLE_REBOOT_WARNING {
-            get {
-                return ResourceManager.GetString("SRIOV_ENABLE_REBOOT_WARNING", resourceCulture);
+                return ResourceManager.GetString("SRIOV_LOGICAL_PIF_UNPLUGGED", resourceCulture);
             }
         }
         
@@ -32417,11 +32480,22 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+        ///   Looks up a localized string similar to Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
+        ///
+        ///You may need to reboot your server(s) to enable SR-IOV network..
         /// </summary>
-        public static string SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION {
+        public static string SRIOV_NETWORK_CREATE_WARNING {
             get {
-                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION", resourceCulture);
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (To enable SR-IOV create an SR-IOV network on this NIC).
+        /// </summary>
+        public static string SRIOV_NETWORK_SHOULD_BE_CREATED {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_SHOULD_BE_CREATED", resourceCulture);
             }
         }
         

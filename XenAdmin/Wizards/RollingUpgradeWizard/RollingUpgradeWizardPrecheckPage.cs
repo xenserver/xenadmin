@@ -211,6 +211,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     upgradeChecks.Add(new SafeToUpgradeCheck(host));
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
+            
+            var gfs2Checks = new List<Check>();
+            foreach (Pool pool in SelectedPools.Where(p =>
+                Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))
+            {
+                Host host = pool.Connection.Resolve(pool.master);
+                gfs2Checks.Add(new PoolHasGFS2SR(host));
+            }
+
+            if (gfs2Checks.Count > 0)
+            {
+                groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
+            }
 
             //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)
