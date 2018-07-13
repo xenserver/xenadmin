@@ -11817,7 +11817,7 @@ Verify that the file is a valid {1} export.</value>
     <value>Updated performance monitoring configuration</value>
   </data>
   <data name="UPDATED_PROPERTIES" xml:space="preserve">
-    <value>Updating complete.</value>
+    <value>Saved properties of {0}.</value>
   </data>
   <data name="UPDATES" xml:space="preserve">
     <value>Updates</value>
@@ -12184,7 +12184,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Update performance monitoring configuration</value>
   </data>
   <data name="UPDATE_PROPERTIES" xml:space="preserve">
-    <value>Updating '{0}'</value>
+    <value>Saving properties of {0}</value>
   </data>
   <data name="UPDATE_SERVER_NOT_REACHABLE" xml:space="preserve">
     <value>Update server unreachable or network connectivity error. Please deselect the updates application checkbox on the previous page and try again.</value>
@@ -12202,7 +12202,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Updating performance monitoring configuration</value>
   </data>
   <data name="UPDATING_PROPERTIES" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Saving properties...</value>
   </data>
   <data name="UPGRADEWIZARD_PATCHING_TEXT" xml:space="preserve">
     <value>Apply Upgrade</value>
