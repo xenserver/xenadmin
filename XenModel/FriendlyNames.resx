@@ -160,7 +160,7 @@
     <value>X server authority files</value>
   </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
-    <value>Retrieve the user information stored as binary objects on [XenServer].</value>
+    <value>Retrieve the user information stored as binary objects on server.</value>
   </data>
   <data name="Description-host.system_status-boot-loader" xml:space="preserve">
     <value>List of boot options and their details given to the user at system boot time</value>
@@ -259,16 +259,16 @@
     <value>Details of the [XenServer] such as version and build information, primary hard disk location and pool configuration</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>The database which stores the state of the [XenServer]</value>
+    <value>The database which stores the state of the server</value>
   </data>
   <data name="Description-host.system_status-xenserver-domains" xml:space="preserve">
     <value>List of the guest VMs installed onto the server and their current states</value>
   </data>
   <data name="Description-host.system_status-xenserver-install" xml:space="preserve">
-    <value>Log files generated during the installation of the [XenServer]</value>
+    <value>Log files generated during the installation of the server</value>
   </data>
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>Log files concerning the [XenServer]'s activity</value>
+    <value>Log files concerning the server's activity</value>
   </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>HA liveset</value>
@@ -586,13 +586,13 @@
     <value>Pool members</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
-    <value>[XenServer] build number</value>
+    <value>Build number</value>
   </data>
   <data name="Label-host.software_version-date" xml:space="preserve">
-    <value>[XenServer] build date</value>
+    <value>Build date</value>
   </data>
   <data name="Label-host.software_version-product_version" xml:space="preserve">
-    <value>[XenServer] version</value>
+    <value>Version</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
     <value>[Citrix] StorageLink configuration</value>
@@ -1017,7 +1017,7 @@
     <value>The servers in pool '{0}' cannot access the heartbeat SR. HA protection is severely impaired without it.</value>
   </data>
   <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>[XenServer] on server '{0}' is taking too long to respond and may fence.</value>
+    <value>Server '{0}' is taking too long to respond and may fence.</value>
   </data>
   <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
     <value>The clock on server '{0}' is not synchronized with the other servers in pool '{1}'.  This can lead to errors when migrating virtual machines, and also affect any performance data collected in the future.</value>
@@ -1116,7 +1116,7 @@
     <value>Virtual machine '{0}' did not reduce its memory usage when requested.</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>The [XenServer] license you are using does not allow you to use the Scheduled Snapshots feature.</value>
+    <value>The server license you are using does not allow you to use the Scheduled Snapshots feature.</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>The snapshot schedule '{0}' failed because a snapshot could not be created.</value>
@@ -1233,7 +1233,7 @@
     <value>Heartbeat SR lost</value>
   </data>
   <data name="Message.name-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>[XenServer] healthcheck approaching timeout</value>
+    <value>Server healthcheck approaching timeout</value>
   </data>
   <data name="Message.name-host_clock_skew_detected" xml:space="preserve">
     <value>Server clock not synchronized</value>
@@ -1242,7 +1242,7 @@
     <value>Server clock has gone backwards</value>
   </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
-    <value>[XenServer] statistics synchronization failed</value>
+    <value>Server statistics synchronization failed</value>
   </data>
   <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
     <value>Network configuration issue</value>
@@ -1362,11 +1362,11 @@
     <value>WLB VM Relocation</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
-    <value>Pool Admins have full access to all [XenServer] features and settings. They can access the [XenServer] console and manage the roles of other users.
+    <value>Pool Admins have full access to all features and settings. They can access the server console and manage the roles of other users.
  
 - No restrictions
 - Role and user management
-- Access to [XenServer] console</value>
+- Access to server console</value>
   </data>
   <data name="Role.pool-admin.NameLabel" xml:space="preserve">
     <value>Pool Admin</value>
@@ -1390,7 +1390,7 @@
     <value>Read Only</value>
   </data>
   <data name="Role.vm-admin.Description" xml:space="preserve">
-    <value>VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on [XenServer] to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
+    <value>VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on server to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
  
 - Manage VMs and Templates
 - No access to dynamic memory control features
@@ -1749,7 +1749,7 @@
     <value>Container management logs</value>
   </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
-    <value>Tests for connectivity between [XenServer] and the internet</value>
+    <value>Tests for connectivity between server and the internet</value>
   </data>
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>Connection test</value>

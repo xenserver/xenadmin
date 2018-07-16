@@ -277,7 +277,7 @@
     <value>Expanding {0} ... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>Configuring virtual machine for [XenServer] ... </value>
+    <value>Configuring virtual machine for server ... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>Imported.</value>
