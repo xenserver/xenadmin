@@ -105,6 +105,7 @@ namespace XenAdmin.Plugins
 
         private readonly Dictionary<IXenObject, BrowserState> BrowserStates = new Dictionary<IXenObject, BrowserState>();
         private BrowserState lastBrowserState = null;
+        private bool resettingPage = false;
 
         private TabControl tabControl;
         private IXenObject selectedXenObject;
@@ -146,7 +147,6 @@ namespace XenAdmin.Plugins
             set
             {
                 selectedXenObject = value;
-                _tabControl_SelectedIndexChanged(null, EventArgs.Empty);
             }
         }
 
@@ -281,9 +281,6 @@ namespace XenAdmin.Plugins
                 BrowserStates[selectedXenObject] = state;
             }
 
-            if (lastBrowserState == state)
-                return;
-
             try
             {
                 if (state.ObjectForScripting != null)
@@ -293,7 +290,15 @@ namespace XenAdmin.Plugins
                     Browser.ObjectForScripting = state.ObjectForScripting;
                 }
                 Browser.Navigate(state.Urls);
-
+                if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
+                {
+                    if (Program.MainWindow.StatusBarAction == null || Program.MainWindow.StatusBarAction.IsCompleted)
+                    {
+                        MainWindowActionAtNavigateTime = Program.MainWindow.StatusBarAction;
+                        Program.MainWindow.SetProgressBar(true, 1);
+                        Program.MainWindow.SetStatusBar(null, string.Format(Messages.LOADING, state.Urls[0].ToString().Ellipsise(50)));
+                    }
+                }
                 lastBrowserState = state;
             }
             catch (Exception e)
@@ -306,21 +311,20 @@ namespace XenAdmin.Plugins
         {
             Program.AssertOnEventThread();
 
-            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
+
+            if (Program.MainWindow.StatusBarAction == null
+                || Program.MainWindow.StatusBarAction.IsCompleted && Program.MainWindow.StatusBarAction.Equals(MainWindowActionAtNavigateTime))
             {
-                if (Program.MainWindow.StatusBarAction == null 
-                    || Program.MainWindow.StatusBarAction.IsCompleted && MainWindowActionAtNavigateTime.Equals(Program.MainWindow.StatusBarAction))
-                {
-                    // we still have 'control' of the status bar
-                    Program.MainWindow.SetProgressBar(false, 0);
-                    Program.MainWindow.SetStatusBar(null, null);
-                }
+                // we still have 'control' of the status bar
+                Program.MainWindow.SetProgressBar(false, 0);
+                Program.MainWindow.SetStatusBar(null, null);
             }
 
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
+                if (!resettingPage)
+                    lastBrowserState.Urls = new List<Uri> { e.Url };
             }
         }
 
@@ -332,7 +336,7 @@ namespace XenAdmin.Plugins
             {
                 if (e.MaximumProgress != 0)
                 {
-                    if (Program.MainWindow.StatusBarAction == null || Program.MainWindow.StatusBarAction.IsCompleted)
+                    if (Program.MainWindow.StatusBarAction == null || Program.MainWindow.StatusBarAction.IsCompleted )
                     {
                         MainWindowActionAtNavigateTime = Program.MainWindow.StatusBarAction;
                         int progr = Convert.ToInt32((e.CurrentProgress * 100L) / (e.MaximumProgress));
@@ -364,6 +368,15 @@ namespace XenAdmin.Plugins
 
             log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
 
+            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
+            {
+                if (Program.MainWindow.StatusBarAction == null || Program.MainWindow.StatusBarAction.IsCompleted)
+                {
+                    MainWindowActionAtNavigateTime = Program.MainWindow.StatusBarAction;
+                    Program.MainWindow.SetStatusBar(null, string.Format(Messages.LOADING, e.Url.ToString().Ellipsise(50)));
+                }
+            }
+
             if (Console)
             {
                 // delete this page from the cache.... that we can be sure that if the page stops working then
@@ -371,7 +384,8 @@ namespace XenAdmin.Plugins
                 DeleteUrlCacheEntry(e.Url.AbsoluteUri);
             }
 
-            lastBrowserState.Urls = new List<Uri> { e.Url };
+            if (!resettingPage)
+                lastBrowserState.Urls = new List<Uri> { e.Url };
         }
 
         /// <summary>
@@ -397,6 +411,16 @@ namespace XenAdmin.Plugins
             {
                 log.Error(exn, exn);
             }
+
+
+            if (Program.MainWindow.StatusBarAction == null
+                || Program.MainWindow.StatusBarAction.IsCompleted && Program.MainWindow.StatusBarAction.Equals(MainWindowActionAtNavigateTime))
+            {
+                // we still have 'control' of the status bar
+                Program.MainWindow.SetProgressBar(false, 0);
+                Program.MainWindow.SetStatusBar(null, null);
+            }
+
         }
 
         private void TabPage_ParentChanged(object sender, EventArgs e)
@@ -416,6 +440,11 @@ namespace XenAdmin.Plugins
             }
         }
 
+        public void SetSelectedTabIndexChanged()
+        {
+            _tabControl_SelectedIndexChanged(null, EventArgs.Empty);
+        }
+
         private void _tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Console)
@@ -425,17 +454,28 @@ namespace XenAdmin.Plugins
 
                 lastXenModelObject = SelectedXenObject;
                 if (ShowTab)
+                {
                     SetUrl();
+                }  
             }
             else
             {
                 // if this isn't a console replacement window, then only update when this tab is selected.
-
                 if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
                 {
                     lastXenModelObject = SelectedXenObject;
                     if (ShowTab)
+                    {
+                        Browser.Navigate("about:blank");
+                        resettingPage = true;
+                        while (Browser.ReadyState != WebBrowserReadyState.Complete)
+                        {
+                            Application.DoEvents();
+                            System.Threading.Thread.Sleep(10);
+                        }
+                        resettingPage = false;
                         SetUrl();
+                    }
                 }
                 else if (lastXenModelObject != null)
                 {
@@ -449,7 +489,8 @@ namespace XenAdmin.Plugins
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
+                if (!resettingPage)
+                    lastBrowserState.Urls = new List<Uri> { e.Url };
 
                 if (lastBrowserState.IsError != navigationError)
                 {
