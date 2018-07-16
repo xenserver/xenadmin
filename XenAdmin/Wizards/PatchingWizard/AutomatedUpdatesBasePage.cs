@@ -189,30 +189,35 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void WorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            var actionsWorker = sender as UpdateProgressBackgroundWorker;
-            if (actionsWorker == null)
+            var bgw = sender as UpdateProgressBackgroundWorker;
+            if (bgw == null)
                 return;
 
-            if (!actionsWorker.CancellationPending)
+            if (!bgw.CancellationPending)
             {
                 PlanAction action = (PlanAction)e.UserState;
                 if (action != null)
                 {
                     if (!action.IsComplete)
                     {
-                        if (!actionsWorker.InProgressActions.Contains(action))
-                            actionsWorker.InProgressActions.Add(action);
+                        if (!bgw.InProgressActions.Contains(action))
+                            bgw.InProgressActions.Add(action);
                     }
                     else
                     {
-                        if (!actionsWorker.DoneActions.Contains(action))
-                            actionsWorker.DoneActions.Add(action);
-                        actionsWorker.InProgressActions.Remove(action);
+                        if (!bgw.DoneActions.Contains(action))
+                            bgw.DoneActions.Add(action);
+                        bgw.InProgressActions.Remove(action);
 
                         if (action.Error == null)
                         {
                             // remove the successful action from the cleanup actions (we are running the cleanup actions in case of failures or if the user cancelled the process, but we shouldn't re-run the actions that have already been run)
-                            actionsWorker.CleanupActions.Remove(action);
+                            bgw.CleanupActions.Remove(action);
+                        }
+                        else
+                        {
+                            if (!failedWorkers.Contains(bgw))
+                                failedWorkers.Add(bgw);
                         }
                     }
                 }
@@ -255,17 +260,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
 
                         var innerEx = pa.Error.InnerException as Failure;
-                        if (innerEx != null)
-                        {
-                            log.Error(innerEx);
-                            errorSb.AppendLine(innerEx.Message);
-                        }
-                        else
-                        {
-                            log.Error(pa.Error);
-                            errorSb.AppendLine(pa.Error.Message);
-                        }
-
+                        errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
                         bgwErrorCount++;
                     }
                 }
@@ -385,14 +380,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (action.Error == null)
                     action.Error = new Exception(Messages.ERROR_UNKNOWN);
 
-                if (!bgw.DoneActions.Contains(action))
-                    bgw.DoneActions.Add(action);
-                bgw.InProgressActions.Remove(action);
-
                 log.ErrorFormat("Failed to carry out plan. {0} {1}", action.CurrentProgressStep, e);
                 doWorkEventArgs.Result = new Exception(action.CurrentProgressStep, e);
-
-                failedWorkers.Add(bgw);
             }
         }
 
