@@ -507,7 +507,7 @@ namespace XenAdmin.Core
         /// <returns>true when wlb is enabled, otherwise false</returns>
         public static bool WlbEnabled(IXenConnection connection)
         {
-            //Clearwater doesn't has WLB
+            //Clearwater doesn't have WLB
             if (IsClearwater(connection))
                 return false;
 

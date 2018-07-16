@@ -29,47 +29,30 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using XenAdmin.Core;
+using System.Text;
+using System.Threading.Tasks;
+using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.PoolProblem;
-using XenAPI;
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.Wizards
 {
-    class ServerSelectionCheck : HostPostLivenessCheck
+    public class UpdateUpgradeWizard : XenWizardBase
     {
-        private readonly Pool_update update;
-        private readonly Pool pool;
-        private readonly List<Host> selectedServers;
-
-        public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
-            : base(Helpers.GetMaster(pool.Connection))
+        protected List<AsyncAction> GetUnwindChangesActions(List<Problem> problems)
         {
-            this.pool = pool;
-            this.update = update;
-            this.selectedServers = selectedServers;
-        }
+            if (problems == null)
+                return new List<AsyncAction>();
 
-        protected override Problem RunHostCheck()
-        {
-            if (update == null || !update.EnforceHomogeneity()) 
-                return null;
+            var actions = from problem in problems
+                          where problem.SolutionActionCompleted
+                          let action = problem.CreateUnwindChangesAction()
+                          where action != null && action.Connection != null && action.Connection.IsConnected
+                          select action;
 
-            //If mixed pool, skip the precheck and issue warning, because the update may not be compatible to all servers.
-            if (!pool.IsPoolFullyUpgraded())
-                return new MixedPoolServerSelectionWarning(this, pool);
-            
-            if (pool.Connection.Cache.Hosts.Any(h => !update.AppliedOn(h) && !selectedServers.Contains(h)))
-                return new ServerSelectionProblem(this, pool);
-
-            return null;
-        }
-
-        public override string Description
-        {
-            get { return Messages.SERVER_SELECTION_CHECK_DESCRIPTION; }
+            return actions.ToList();
         }
     }
 }

@@ -29,47 +29,44 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAdmin.Diagnostics.Problems.UtilityProblem;
 using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class ServerSelectionCheck : HostPostLivenessCheck
+    class CfuAvailabilityCheck : Check
     {
-        private readonly Pool_update update;
-        private readonly Pool pool;
-        private readonly List<Host> selectedServers;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
-            : base(Helpers.GetMaster(pool.Connection))
+        protected override Problem RunCheck()
         {
-            this.pool = pool;
-            this.update = update;
-            this.selectedServers = selectedServers;
-        }
+            var action = Updates.CreateDownloadUpdatesXmlAction(Updates.CheckForUpdatesUrl);
 
-        protected override Problem RunHostCheck()
-        {
-            if (update == null || !update.EnforceHomogeneity()) 
-                return null;
+            try
+            {
+                action.RunExternal(action.Session);
+            }
+            catch
+            {
+                log.WarnFormat("Could not download check for update file.");
+            }
 
-            //If mixed pool, skip the precheck and issue warning, because the update may not be compatible to all servers.
-            if (!pool.IsPoolFullyUpgraded())
-                return new MixedPoolServerSelectionWarning(this, pool);
-            
-            if (pool.Connection.Cache.Hosts.Any(h => !update.AppliedOn(h) && !selectedServers.Contains(h)))
-                return new ServerSelectionProblem(this, pool);
-
-            return null;
+            return action.Succeeded ? null : new CfuNotAvailableProblem(this);
         }
 
         public override string Description
         {
-            get { return Messages.SERVER_SELECTION_CHECK_DESCRIPTION; }
+            get
+            {
+                return Messages.CFU_STATUS_CHECK_DESCRIPTION;
+            }
+        }
+
+        public override IXenObject XenObject
+        {
+            get { return null; }
         }
     }
 }

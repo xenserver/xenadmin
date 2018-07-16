@@ -33,27 +33,24 @@ using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class PoolHasGFS2SR : Check
+    class PoolHasGFS2SR : HostPostLivenessCheck
     {
         public PoolHasGFS2SR(Host host)
             : base(host)
         {
         }
 
-        protected override Problem RunCheck()
+        protected override Problem RunHostCheck()
         {
-            if (!Host.IsLive())
-                return new HostNotLiveWarning(this, Host);
-
             var clusteringEnabled = Host.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);
             var hasGfs2Sr = Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.gfs2);
 
             if (clusteringEnabled || hasGfs2Sr)
-                return new Problems.PoolProblem.PoolHasGFS2SRProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
+                return new PoolHasGFS2SRProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
 
 
             return null;

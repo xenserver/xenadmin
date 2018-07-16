@@ -47,7 +47,7 @@ namespace XenAdmin.Actions
         Error
     };
 
-    public class DownloadAndUnzipXenServerPatchAction : AsyncAction
+    public class DownloadAndUnzipXenServerPatchAction : AsyncAction, IByteProgressAction
     {
         private static readonly log4net.ILog log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -69,6 +69,8 @@ namespace XenAdmin.Actions
         private Exception patchDownloadError;
 
         public string PatchPath { get; private set; }
+
+        public string ByteProgressDescription { get; set; }
 
         public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, bool suppressHist,
             params string[] updateFileExtensions)
@@ -266,7 +268,7 @@ namespace XenAdmin.Actions
                 catch (Exception e)
                 {
                     log.ErrorFormat("Exception occurred when preparing archive: {0}", e.Message);
-                    throw e;
+                    throw;
                 }
             }
             else
@@ -284,22 +286,17 @@ namespace XenAdmin.Actions
         void archiveIterator_CurrentFileExtractProgressChanged(object sender, ExtractProgressChangedEventArgs e)
         {
             int pc = downloadUpdate ? 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer) : (int)(100.0 * e.BytesTransferred / e.TotalBytesToTransfer);
-            if (pc != PercentComplete)
-                PercentComplete = pc;
+            PercentComplete = pc;
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             int pc = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
-            if (pc != PercentComplete)
-            {
-                DownloadProgressDescription
-                    = Description 
-                    = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
-                                            Util.DiskSizeString(e.BytesReceived),
+            var descr = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
+                                            Util.DiskSizeString(e.BytesReceived, "F1"),
                                             Util.DiskSizeString(e.TotalBytesToReceive));
-                PercentComplete = pc;
-            }
+            ByteProgressDescription = descr;
+            Tick(pc, descr);
         }
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -333,6 +330,5 @@ namespace XenAdmin.Actions
         {
         }
 
-        public string DownloadProgressDescription { get; set; }
     }
 }

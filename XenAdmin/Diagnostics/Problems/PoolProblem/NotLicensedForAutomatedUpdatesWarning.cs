@@ -29,47 +29,55 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using XenAdmin.Core;
-using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.PoolProblem;
+using System;
+using System.Drawing;
+using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 using XenAPI;
 
-namespace XenAdmin.Diagnostics.Checks
-{
-    class ServerSelectionCheck : HostPostLivenessCheck
-    {
-        private readonly Pool_update update;
-        private readonly Pool pool;
-        private readonly List<Host> selectedServers;
 
-        public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
-            : base(Helpers.GetMaster(pool.Connection))
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
+{
+
+    public class NotLicensedForAutomatedUpdatesWarning : Warning
+    {
+        private readonly Pool pool;
+
+        public NotLicensedForAutomatedUpdatesWarning(Check check, Pool pool)
+            : base(check)
         {
             this.pool = pool;
-            this.update = update;
-            this.selectedServers = selectedServers;
         }
 
-        protected override Problem RunHostCheck()
+        public override string Title
         {
-            if (update == null || !update.EnforceHomogeneity()) 
-                return null;
-
-            //If mixed pool, skip the precheck and issue warning, because the update may not be compatible to all servers.
-            if (!pool.IsPoolFullyUpgraded())
-                return new MixedPoolServerSelectionWarning(this, pool);
-            
-            if (pool.Connection.Cache.Hosts.Any(h => !update.AppliedOn(h) && !selectedServers.Contains(h)))
-                return new ServerSelectionProblem(this, pool);
-
-            return null;
+            get { return Check.Description; }
         }
 
         public override string Description
         {
-            get { return Messages.SERVER_SELECTION_CHECK_DESCRIPTION; }
+            get
+            {
+                return string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
+            }
+        }
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO)))
+            {
+                dlg.ShowDialog();
+            }
+
+            cancelled = true;
+            return null;
+        }
+
+        public override string HelpMessage
+        {
+            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
         }
     }
 }

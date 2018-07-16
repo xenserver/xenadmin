@@ -29,47 +29,50 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using XenAdmin.Core;
-using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.PoolProblem;
-using XenAPI;
+using System.Drawing;
+using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 {
-    class ServerSelectionCheck : HostPostLivenessCheck
+    class CfuNotAvailableProblem : Problem
     {
-        private readonly Pool_update update;
-        private readonly Pool pool;
-        private readonly List<Host> selectedServers;
-
-        public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
-            : base(Helpers.GetMaster(pool.Connection))
+        public CfuNotAvailableProblem(Check check)
+            : base(check)
         {
-            this.pool = pool;
-            this.update = update;
-            this.selectedServers = selectedServers;
-        }
-
-        protected override Problem RunHostCheck()
-        {
-            if (update == null || !update.EnforceHomogeneity()) 
-                return null;
-
-            //If mixed pool, skip the precheck and issue warning, because the update may not be compatible to all servers.
-            if (!pool.IsPoolFullyUpgraded())
-                return new MixedPoolServerSelectionWarning(this, pool);
-            
-            if (pool.Connection.Cache.Hosts.Any(h => !update.AppliedOn(h) && !selectedServers.Contains(h)))
-                return new ServerSelectionProblem(this, pool);
-
-            return null;
         }
 
         public override string Description
         {
-            get { return Messages.SERVER_SELECTION_CHECK_DESCRIPTION; }
+            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
+        }
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
+            {
+                dlg.ShowDialog();
+            }
+
+            cancelled = true;
+            return null;
+        }
+
+        public override string HelpMessage
+        {
+            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
+        }
+
+        public sealed override string Title
+        {
+            get { return string.Empty; }
+        }
+
+        public override bool IsFixable
+        {
+            get { return false; }
         }
     }
 }

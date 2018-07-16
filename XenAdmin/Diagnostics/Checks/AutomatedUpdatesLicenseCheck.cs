@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
@@ -38,38 +37,37 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class ServerSelectionCheck : HostPostLivenessCheck
+    class AutomatedUpdatesLicenseCheck : HostPostLivenessCheck
     {
-        private readonly Pool_update update;
-        private readonly Pool pool;
-        private readonly List<Host> selectedServers;
+        private readonly Pool _pool;
 
-        public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
-            : base(Helpers.GetMaster(pool.Connection))
+        public AutomatedUpdatesLicenseCheck(Host host)
+            : base(host)
         {
-            this.pool = pool;
-            this.update = update;
-            this.selectedServers = selectedServers;
+            _pool = Helpers.GetPoolOfOne(Host.Connection);
         }
 
         protected override Problem RunHostCheck()
         {
-            if (update == null || !update.EnforceHomogeneity()) 
-                return null;
-
-            //If mixed pool, skip the precheck and issue warning, because the update may not be compatible to all servers.
-            if (!pool.IsPoolFullyUpgraded())
-                return new MixedPoolServerSelectionWarning(this, pool);
-            
-            if (pool.Connection.Cache.Hosts.Any(h => !update.AppliedOn(h) && !selectedServers.Contains(h)))
-                return new ServerSelectionProblem(this, pool);
+            if (_pool != null && _pool.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)))
+                return new NotLicensedForAutomatedUpdatesWarning(this, _pool);
 
             return null;
         }
 
         public override string Description
         {
-            get { return Messages.SERVER_SELECTION_CHECK_DESCRIPTION; }
+            get { return Messages.AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION; }
+        }
+
+        public override string SuccessfulCheckDescription
+        {
+            get
+            {
+                return _pool == null
+                    ? string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description)
+                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _pool.Name(), Description);
+            }
         }
     }
 }
