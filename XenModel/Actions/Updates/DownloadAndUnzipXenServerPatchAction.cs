@@ -35,6 +35,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using XenCenterLib.Archive;
 
 namespace XenAdmin.Actions
@@ -86,71 +87,80 @@ namespace XenAdmin.Actions
             this.outputFileName = outputFileName;
         }
 
+        private WebClient client;
+
         private void DownloadFile()
         {
             int errorCount = 0;
             int nextSleepMs = 0;
             bool needToRetry = true;
 
-            while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry)
+            client = new WebClient();
+            //register download events
+            client.DownloadProgressChanged += client_DownloadProgressChanged;
+            client.DownloadFileCompleted += client_DownloadFileCompleted;
+
+            // register event handler to detect dhanges in network connectivity
+            NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+
+            try
             {
-                needToRetry = false;
-
-                using (var client = new WebClient())
+                while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry)
                 {
-                    try
+                    needToRetry = false;
+
+                    client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
+
+                    //start the download
+                    patchDownloadState = DownloadState.InProgress;
+                    client.DownloadFileAsync(address, outputFileName);
+
+                    bool patchDownloadCancelling = false;
+
+                    //wait for the file to be downloaded
+                    while (patchDownloadState == DownloadState.InProgress)
                     {
-                        client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
-
-                        //register download events
-                        client.DownloadProgressChanged += client_DownloadProgressChanged;
-                        client.DownloadFileCompleted += client_DownloadFileCompleted;
-                        //start the download
-                        client.DownloadFileAsync(address, outputFileName);
-
-                        patchDownloadState = DownloadState.InProgress;
-                        bool patchDownloadCancelling = false;
-
-                        //wait for the file to be downloaded
-                        while (patchDownloadState == DownloadState.InProgress)
+                        if (!patchDownloadCancelling && (Cancelling || Cancelled))
                         {
-                            if (!patchDownloadCancelling && (Cancelling || Cancelled))
-                            {
-                                Description = Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC;
-                                client.CancelAsync();
-                                patchDownloadCancelling = true;
-                            }
-                            Thread.Sleep(SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS);
+                            Description = Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC;
+                            client.CancelAsync();
+                            patchDownloadCancelling = true;
                         }
 
-                        if (patchDownloadState == DownloadState.Cancelled)
-                            throw new CancelledException();
-
-                        if (patchDownloadState == DownloadState.Error)
-                        {
-                            needToRetry = true;
-
-                            // this many errors so far - including this one
-                            errorCount++;
-
-                            // logging only, it will retry again.
-                            log.ErrorFormat(
-                                "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
-                                address, errorCount, MAX_NUMBER_OF_TRIES);
-                            log.Error(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
-
-                            // wait for some randomly increased amount of time after each retry
-                            nextSleepMs += random.Next(5000);
-                            Thread.Sleep(nextSleepMs);
-                        }
+                        Thread.Sleep(SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS);
                     }
-                    finally
+
+                    if (patchDownloadState == DownloadState.Cancelled)
+                        throw new CancelledException();
+
+                    if (patchDownloadState == DownloadState.Error)
                     {
-                        //deregister download events
-                        client.DownloadProgressChanged -= client_DownloadProgressChanged;
-                        client.DownloadFileCompleted -= client_DownloadFileCompleted;
+                        needToRetry = true;
+
+                        // this many errors so far - including this one
+                        errorCount++;
+
+                        // logging only, it will retry again.
+                        log.ErrorFormat(
+                            "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
+                            address, errorCount, MAX_NUMBER_OF_TRIES);
+                        log.Error(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
+
+                        // wait for some randomly increased amount of time after each retry
+                        nextSleepMs += random.Next(5000);
+                        Thread.Sleep(nextSleepMs);
                     }
                 }
+            }
+            finally
+            {
+                //deregister download events
+                client.DownloadProgressChanged -= client_DownloadProgressChanged;
+                client.DownloadFileCompleted -= client_DownloadFileCompleted;
+
+                NetworkChange.NetworkAvailabilityChanged -= NetworkAvailabilityChanged;
+
+                client.Dispose();
             }
 
             //if this is still the case after having retried MAX_RETRY number of times.
@@ -161,6 +171,16 @@ namespace XenAdmin.Actions
                 MarkCompleted(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
             }
 
+        }
+
+        private void NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
+        {
+            if (!e.IsAvailable && client != null && patchDownloadState == DownloadState.InProgress)
+            {
+                patchDownloadError = new WebException(Messages.NETWORK_CONNECTIVITY_ERROR);
+                patchDownloadState = DownloadState.Error;
+                client.CancelAsync();
+            }
         }
 
         private void ExtractFile()
@@ -301,6 +321,9 @@ namespace XenAdmin.Actions
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            if (e.Cancelled && patchDownloadState == DownloadState.Error) // cancelled due to network connectivity issue (see NetworkAvailabilityChanged)
+                return;
+
             if (e.Cancelled) //user cancelled
             {
                 patchDownloadState = DownloadState.Cancelled;
