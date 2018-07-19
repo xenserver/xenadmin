@@ -160,7 +160,7 @@
     <value>X server authority files</value>
   </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
-    <value>Retrieve the user information stored as binary objects on server.</value>
+    <value>Retrieve the user information stored as binary objects on the server.</value>
   </data>
   <data name="Description-host.system_status-boot-loader" xml:space="preserve">
     <value>List of boot options and their details given to the user at system boot time</value>
@@ -1390,7 +1390,7 @@
     <value>Read Only</value>
   </data>
   <data name="Role.vm-admin.Description" xml:space="preserve">
-    <value>VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on server to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
+    <value>VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on the server to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
  
 - Manage VMs and Templates
 - No access to dynamic memory control features
@@ -1749,7 +1749,7 @@
     <value>Container management logs</value>
   </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
-    <value>Tests for connectivity between server and the internet</value>
+    <value>Tests for connectivity between the server and the internet</value>
   </data>
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>Connection test</value>
