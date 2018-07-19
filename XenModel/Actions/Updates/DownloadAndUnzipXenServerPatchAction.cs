@@ -54,8 +54,9 @@ namespace XenAdmin.Actions
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS = 900;
+        private const int SLEEP_TIME_BEFORE_RETRY_MS = 5000;
 
-        //If you consider increasing this for any reason (I think 5 is already more than enough), have a look at nextSleepMs in DownloadFile() as well.
+        //If you consider increasing this for any reason (I think 5 is already more than enough), have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
         private const int MAX_NUMBER_OF_TRIES = 5;
 
         private Random random = new Random();
@@ -92,21 +93,23 @@ namespace XenAdmin.Actions
         private void DownloadFile()
         {
             int errorCount = 0;
-            int nextSleepMs = 0;
-            bool needToRetry = true;
+            bool needToRetry = false;
 
             client = new WebClient();
             //register download events
             client.DownloadProgressChanged += client_DownloadProgressChanged;
             client.DownloadFileCompleted += client_DownloadFileCompleted;
 
-            // register event handler to detect dhanges in network connectivity
+            // register event handler to detect changes in network connectivity
             NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
 
             try
             {
-                while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry)
+                do
                 {
+                    if (needToRetry)
+                        Thread.Sleep(SLEEP_TIME_BEFORE_RETRY_MS);
+
                     needToRetry = false;
 
                     client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
@@ -145,12 +148,8 @@ namespace XenAdmin.Actions
                             "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
                             address, errorCount, MAX_NUMBER_OF_TRIES);
                         log.Error(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
-
-                        // wait for some randomly increased amount of time after each retry
-                        nextSleepMs += random.Next(5000);
-                        Thread.Sleep(nextSleepMs);
                     }
-                }
+                } while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry);
             }
             finally
             {
@@ -163,10 +162,10 @@ namespace XenAdmin.Actions
                 client.Dispose();
             }
 
-            //if this is still the case after having retried MAX_RETRY number of times.
+            //if this is still the case after having retried MAX_NUMBER_OF_TRIES number of times.
             if (patchDownloadState == DownloadState.Error)
             {
-                log.ErrorFormat("Giving up - MAX_NUMBER_OF_RETRIES_IF_FAILED has been reached.");
+                log.ErrorFormat("Giving up - Maximum number of retries ({0}) has been reached.", MAX_NUMBER_OF_TRIES);
 
                 MarkCompleted(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
             }
