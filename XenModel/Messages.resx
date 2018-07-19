@@ -8149,6 +8149,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETWORK_ACTION_UPDATING_NETWORK_TITLE" xml:space="preserve">
     <value>Updating network '{0}' on {1}</value>
   </data>
+  <data name="NETWORK_CONNECTIVITY_ERROR" xml:space="preserve">
+    <value>Network connectivity error</value>
+  </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (in use by {1})</value>
   </data>
