@@ -7105,15 +7105,15 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps/Desktops [Citrix] Cloud features enabled</value>
+[Citrix] Virtual Apps and Desktops [Citrix] Cloud features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps/Desktops features enabled</value>
+[Citrix] Virtual Apps and Desktops features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps/Desktops Platinum features enabled</value>
+[Citrix] Virtual Apps and Desktops Platinum features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -8799,10 +8799,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Assign a virtual GPU</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>This pool is only licensed for [Citrix] Virtual Apps/Desktops workloads</value>
+    <value>This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>This server is only licensed for [Citrix] Virtual Apps/Desktops workloads</value>
+    <value>This server is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>

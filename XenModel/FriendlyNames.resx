@@ -1638,10 +1638,10 @@
     <value>Help on Licensing</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>[Citrix] Virtual Apps/Desktops</value>
+    <value>[Citrix] Virtual Apps and Desktops</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>[Citrix] Virtual Apps/Desktops Platinum</value>
+    <value>[Citrix] Virtual Apps and Desktops Platinum</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>Installed supplemental packs</value>
@@ -1842,6 +1842,6 @@
     <value>GFS2</value>
   </data>
   <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
-    <value>[Citrix] Virtual Apps/Desktops [Citrix] Cloud</value>
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud</value>
   </data>
 </root>
