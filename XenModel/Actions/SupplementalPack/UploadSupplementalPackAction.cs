@@ -45,8 +45,6 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private List<SR> srList = new List<SR>();
-
         private readonly string suppPackFilePath;
         private readonly long _totalUpdateSize;
         private readonly List<Host> servers;
@@ -89,7 +87,7 @@ namespace XenAdmin.Actions
         {
             SafeToExit = false;
 
-            SelectTargetSr();
+            var srList = SelectTargetSr();
 
             if (srList.Count == 0)
                 throw new Exception(Messages.HOTFIX_APPLY_ERROR_NO_SR);
@@ -272,70 +270,68 @@ namespace XenAdmin.Actions
             return vdi;
         }
 
-        private void SelectTargetSr()
+        private List<SR> SelectTargetSr()
         {
+            /* For ely or greater (update ISOs) we need an SR that can be seen from master;
+             * that would be a shared SR or the master's local SR.
+             * 
+             * For earlier (supplemental packs) we need an SR that can be seen from all hosts;
+             * that would be a shared SR, otherwise we have to upload to each hosts's local SR
+             * 
+             * The selection priority is default SRs over non-default and shared over local.
+             */
+
             SR defaultSr = Pool != null ? Pool.Connection.Resolve(Pool.default_SR) : null;
-            if ((defaultSr != null && defaultSr.shared) && CanCreateVdi(defaultSr))
-            {
-                srList.Add(defaultSr);
-                return;
-            }
             
-            // no default shared SR where we can upload the file -> find another shared SR
-            
-            var sharedSr = Connection.Cache.SRs.FirstOrDefault(sr => sr.shared && CanCreateVdi(sr));
-            if (sharedSr != null)
-            {
-                srList.Add(sharedSr);
-                return;
-            }
+            var serversToConsider = Helpers.ElyOrGreater(Connection)
+                ? new List<Host> {Helpers.GetMaster(Connection)}
+                : new List<Host>(servers);
 
-            // no shared SR where we can upload the file -> will have to upload on the local SRs
-                
-            //For Ely or greater, the ISO has to be uploaded to exactly one SR, even if it's not a shared one
-            if (Helpers.ElyOrGreater(Connection))
+            var srList = new List<SR>();
+
+            foreach (var host in serversToConsider)
             {
-                if (defaultSr != null && CanCreateVdi(defaultSr))
+                var visibleSRs = Connection.Cache.SRs.Where(sr => CanStoreUpdateForHost(sr, host)).ToList();
+
+                if (defaultSr != null && visibleSRs.Contains(defaultSr) && !srList.Contains(defaultSr))
                 {
                     srList.Add(defaultSr);
+                    continue;
                 }
-                else
+
+                var sharedSr = visibleSRs.FirstOrDefault(sr => sr.shared);
+                if (sharedSr != null && !srList.Contains(sharedSr))
                 {
-                    var firstSrCanCreateVdi = Connection.Cache.SRs.FirstOrDefault(sr => CanCreateVdi(sr));
-                    if (firstSrCanCreateVdi != null)
-                        srList.Add(firstSrCanCreateVdi);
+                    srList.Add(sharedSr);
+                    continue;
+                }
+
+                if (visibleSRs.Count > 0)
+                    srList.Add(visibleSRs[0]);
+            }
+
+            return srList;
+        }
+
+        private bool CanStoreUpdateForHost(SR sr, Host host)
+        {
+            if (!sr.SupportsVdiCreate())
+                return false;
+
+            if (sr.FreeSpace() < _totalUpdateSize)
+                return false;
+
+            var canBeSeen = false;
+            foreach (var pbdRef in sr.PBDs)
+            {
+                var pbd = Connection.Resolve(pbdRef);
+                if (pbd != null && pbd.currently_attached && pbd.host.opaque_ref == host.opaque_ref)
+                {
+                    canBeSeen = true;
+                    break;
                 }
             }
-            else //legacy case (supplemental packs)
-            {
-                SelectLocalSrs();
-            }
-        }
-
-        private void SelectLocalSrs()
-        {
-            foreach (var host in servers)
-            {
-                // get the list of local SRs where we can create the vdi
-                var localSrs = Connection.Cache.SRs.Where(sr => host.Equals(sr.GetStorageHost()) && CanCreateVdi(sr)).ToList();
-
-                // if the default SR is in this list, then select it, otherwise select first SR from the list
-                var defaultSr = Host.Connection.Resolve(Pool.default_SR);
-                if (localSrs.Contains(defaultSr))
-                    srList.Add(defaultSr);
-                else if (localSrs.Count > 0)
-                    srList.Add(localSrs[0]);
-            }
-        }
-
-        private bool CanCreateVdi(SR sr)
-        {
-            return sr.SupportsVdiCreate() && !sr.IsDetached() && SrHasEnoughFreeSpace(sr); 
-        }
-
-        private bool SrHasEnoughFreeSpace(SR sr)
-        {
-            return sr.FreeSpace() >= _totalUpdateSize; 
+            return canBeSeen;
         }
     }
 }
