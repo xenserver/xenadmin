@@ -92,7 +92,7 @@ namespace XenAdmin.Actions
             SelectTargetSr();
 
             if (srList.Count == 0)
-                throw new Failure(Failure.OUT_OF_SPACE);
+                throw new Exception(Messages.HOTFIX_APPLY_ERROR_NO_SR);
 
             totalCount = srList.Count;
             foreach (var sr in srList)
@@ -112,23 +112,10 @@ namespace XenAdmin.Actions
         private string UploadSupplementalPack(SR sr)
         {
             this.Description = String.Format(Messages.SUPP_PACK_UPLOADING_TO, _updateName, sr.Name());
-
-            String result;
             log.DebugFormat("Creating vdi of size {0} bytes on SR '{1}'", _totalUpdateSize, sr.Name());
 
             VDI vdi = NewVDI(sr);
-            XenRef<VDI> vdiRef = null;
-            try
-            {
-                vdiRef = VDI.create(Session, vdi);
-            }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("{0} {1}", "Failed to create VDI", ex.Message);
-                throw;
-            }
-
-            log.DebugFormat("Uploading file '{0}' to VDI '{1}' on SR '{2}'", suppPackFilePath, vdi.Name(), sr.Name());
+            var vdiRef = VDI.create(Session, vdi);
 
             Host localStorageHost = sr.GetStorageHost();
 
@@ -146,8 +133,11 @@ namespace XenAdmin.Actions
 
             log.DebugFormat("Using {0} for import", hostUrl);
 
+            string result;
             try
             {
+                log.DebugFormat("Uploading file '{0}' to VDI '{1}' on SR '{2}'", suppPackFilePath, vdi.Name(), sr.Name());
+
                 HTTP.UpdateProgressDelegate progressDelegate = delegate(int percent)
                 {
                     var sr1 = sr;
@@ -168,20 +158,18 @@ namespace XenAdmin.Actions
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", "Failed to import a virtual disk over HTTP.", ex.Message);
+                log.Error("Failed to import a virtual disk over HTTP", ex);
 
                 if (vdiRef != null)
                 {
-                    log.DebugFormat("Removing the VDI on a best effort basis.");
-
                     try
                     {
-                        RemoveVDI(Session, vdiRef);
+                        log.ErrorFormat("Deleting VDI '{0}' on a best effort basis.", vdiRef);
+                        VDI.destroy(Session, vdiRef);
                     }
                     catch (Exception removeEx)
                     {
-                        //best effort
-                        log.Error("Failed to remove the VDI.", removeEx);
+                        log.Error("Failed to remove VDI.", removeEx);
                     }
                 }
 
@@ -227,18 +215,18 @@ namespace XenAdmin.Actions
                         //clean-up the VDI we've just created
                         try
                         {
-                            RemoveVDI(Session, vdiRef);
+                            log.ErrorFormat("Deleting VDI '{0}' on a best effor basis.", vdiRef);
+                            VDI.destroy(Session, vdiRef);
 
                             //remove the vdi that have just been cleaned up
                             var remaining = VdiRefsToCleanUp.Where(kvp => kvp.Value != null && kvp.Value.opaque_ref != vdiRef.opaque_ref).ToList();
                             VdiRefsToCleanUp.Clear();
                             remaining.ForEach(rem => VdiRefsToCleanUp.Add(rem.Key, rem.Value));
                         }
-                        catch
-                        { 
-                            //best effort cleanup
+                        catch (Exception removeEx)
+                        {
+                            log.Error("Failed to remove VDI", removeEx);
                         }
-
                     }
                     else
                     {
@@ -282,21 +270,6 @@ namespace XenAdmin.Actions
             //mark the vdi as being a temporary supp pack iso
             vdi.other_config = new Dictionary<string, string> {{"supp_pack_iso", "true"}};
             return vdi;
-        }
-
-        private void RemoveVDI(Session session, XenRef<VDI> vdi)
-        {
-            try
-            {
-                log.ErrorFormat("Deleting VDI '{0}'", vdi.opaque_ref);
-                VDI.destroy(session, vdi.opaque_ref);
-            }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("{0}, {1}", "Failed to remove a vdi", ex.Message);
-                throw;
-            }
-            return;
         }
 
         private void SelectTargetSr()

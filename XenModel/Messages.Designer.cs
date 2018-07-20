@@ -18340,6 +18340,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not locate an appropriate SR to upload the update. Your SRs may be detached or have insufficient space..
+        /// </summary>
+        public static string HOTFIX_APPLY_ERROR_NO_SR {
+            get {
+                return ResourceManager.GetString("HOTFIX_APPLY_ERROR_NO_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotfix check.
         /// </summary>
         public static string HOTFIX_CHECK {

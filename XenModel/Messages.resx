@@ -6411,6 +6411,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOST_X" xml:space="preserve">
     <value>Host '{0}':</value>
   </data>
+  <data name="HOTFIX_APPLY_ERROR_NO_SR" xml:space="preserve">
+    <value>Could not locate an appropriate SR to upload the update. Your SRs may be detached or have insufficient space.</value>
+  </data>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix check</value>
   </data>
