@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -277,7 +277,7 @@
     <value>Expanding {0} ... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>Configuring virtual machine for [XenServer] ... </value>
+    <value>Configuring virtual machine for the server ... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>Imported.</value>

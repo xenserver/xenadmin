@@ -289,7 +289,7 @@
     <value>4</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Create a network that does not leave each [XenServer] host.
+    <value>Create a network that does not leave each server.
 This can be used as a private connection between VMs on the same host.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -432,7 +432,7 @@ This will create a single higher performing channel.</value>
     <value>8</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
-    <value>Create a network that does not leave the [XenServer] pool.
+    <value>Create a network that does not leave the pool.
 This can be used as a private connection between VMs in the pool.
 This type of network requires the vSwitch Controller to be running.</value>
   </data>

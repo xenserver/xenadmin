@@ -1,19 +1,19 @@
 From: "Saved by Internet Explorer 11"
-Subject: Citrix XenServer
-Date: Thu, 25 Feb 2016 14:06:50 -0000
+Subject: Citrix Hypervisor
+Date: Fri, 8 Jun 2018 17:03:48 +0800
 MIME-Version: 1.0
 Content-Type: multipart/related;
 	type="text/html";
-	boundary="----=_NextPart_000_00AD_01D16FD5.C5E03F20"
-X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17609
+	boundary="----=_NextPart_000_0000_01D3FF4A.AADC6670"
+X-MimeOLE: Produced By Microsoft MimeOLE
 
 This is a multi-part message in MIME format.
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: text/html;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Location: file://C:\XenCenter\HomePage\index.html
+Content-Location: file://C:\Users\fengyangz\workspace\bitbucket\xenadmin\XenAdmin\HomePage\index.html
 
 <!DOCTYPE HTML>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" =
@@ -22,12 +22,17 @@ content=3D"IE=3D11.0000" http-equiv=3D"X-UA-Compatible">
      <!-- File saved as ISO-8859-1 encoding. -->    =20
 <META http-equiv=3D"Content-Type" content=3D"text/html; =
 charset=3DISO-8859-1">    =20
-<TITLE>Citrix XenServer</TITLE>     <!-- CSS Framework -->     <LINK =
-href=3D"file:///C:/XenCenter/HomePage/css/screen.css"=20
+<TITLE>Citrix Hypervisor</TITLE>     <!-- CSS Framework -->     <LINK =
+href=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/=
+HomePage/css/screen.css"=20
 rel=3D"stylesheet" type=3D"text/css" media=3D"screen, projection">     =
-<LINK href=3D"file:///C:/XenCenter/HomePage/css/theme.css"=20
+<LINK =
+href=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/=
+HomePage/css/theme.css"=20
 rel=3D"stylesheet" type=3D"text/css" media=3D"screen, projection">     =
-<LINK href=3D"file:///C:/XenCenter/HomePage/css/print.css"=20
+<LINK =
+href=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/=
+HomePage/css/print.css"=20
 rel=3D"stylesheet" type=3D"text/css" media=3D"print">     <!-- <![if lt =
 IE 9]><link rel=3D"stylesheet" href=3D"css/" type=3D"text/css" =
 media=3D"screen, projection"><![endif]> -->=20
@@ -39,7 +44,7 @@ media=3D"screen, projection"><![endif]> -->=20
              <!-- To remove div outlines, remove line below. -->     =
 <!-- <style>div {outline:1px solid #000000; }</style> -->=20
  =20
-<META name=3D"GENERATOR" content=3D"MSHTML 11.00.9600.18057"></HEAD>  =20
+<META name=3D"GENERATOR" content=3D"MSHTML 11.00.10570.1001"></HEAD>  =20
 <BODY><!-- start dummy purple bg that spans the browser window width -->	=
 =20
 <DIV class=3D"cx-hero-top-bg"></DIV><!-- end dummy purple bg that spans =
@@ -55,8 +60,8 @@ column -->
 <DIV class=3D"column left span-12 first"><!-- Citrix XenServer Logo -->		=
 			 <IMG=20
 id=3D"logo-citrixXenServer" alt=3D"Citrix XenServer Logo" =
-src=3D"file:///C:/XenCenter/HomePage/media/logos/cx-logo-citrixXenServer.=
-png"><!-- start tagline -->
+src=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/H=
+omePage/media/logos/cx-logo-citrixXenServer.png"><!-- start tagline -->
 					=20
 <P title=3D"Industry leading open srouce platform for cloud server and =
 desktop virtualization"=20
@@ -70,10 +75,11 @@ opacity -->
 class=3D"cx-link"=20
   href=3D"xencenter://HelpContents/">Learn about using XenCenter</A>					=
 	 </LI>
-  <LI title=3D"Network with other XenServer users" =
-class=3D"cx-doc-icon"><A class=3D"cx-link"=20
-  href=3D"http://xenserver.org/">Network with other XenServer users</A>
-						 </LI>
+  <LI title=3D"Network with other Citrix Hypervisor users" =
+class=3D"cx-doc-icon"><A=20
+  class=3D"cx-link" href=3D"http://xenserver.org/">Network with other =
+Citrix=20
+  Hypervisor</A>						 </LI>
   <LI title=3D"Community Support Partners" class=3D"cx-doc-icon last"><A =
 class=3D"cx-link"=20
   href=3D"https://www.citrix.com/support">Visit the Citrix Knowledge =
@@ -83,8 +89,8 @@ Center</A>
 				=20
 <DIV class=3D"column right span-6 last"><IMG id=3D"cloudServerGraphic" =
 alt=3D"Cloud Server Graphic"=20
-src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-cloudServerGraphic.pn=
-g">
+src=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/H=
+omePage/media/icons/cx-cloudServerGraphic.png">
 				 </DIV><!-- end right column -->			 </DIV></DIV><!-- End Top Section =
 -->		 <!-- Bottom Section -->
 		=20
@@ -93,7 +99,8 @@ g">
 <DIV title=3D"Add a Server" class=3D"span-6 cx-cards"><A =
 class=3D"cx-link" href=3D"xencenter://AddServer/"><IMG=20
 id=3D"addServer" alt=3D"Add a Server" =
-src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png">
+src=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/H=
+omePage/media/icons/cx-icon-addServer.png">
 <P>							Add a Server						 </P></A>				 </DIV><!-- end card 1 -->				 =
 <!-- start card 2 -->
 				=20
@@ -101,8 +108,8 @@ src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png">
 class=3D"cx-link" =
 href=3D"http://www.citrix.com/xenserver/le/features"><IMG=20
 id=3D"purchaseSupport" alt=3D"Purchase Support" =
-src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-purchaseSupport.=
-png">
+src=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/H=
+omePage/media/icons/cx-icon-purchaseSupport.png">
 <P>							Purchase Support						 </P></A>				 </DIV><!-- end card 2 -->		=
 		 <!-- start card 3 -->
 				=20
@@ -110,93 +117,94 @@ png">
 last"><A class=3D"cx-link"=20
 href=3D"http://www.citrix.com/TryXenDesktop"><IMG id=3D"deskTopVirt" =
 alt=3D"Try Desktop Virtualization"=20
-src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualizatio=
-n.png">
+src=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/H=
+omePage/media/icons/cx-icon-tryVirtualization.png">
 <P>							Try Desktop Virtualization						 </P></A>				 </DIV><!-- end =
 card 3 -->
 			 </DIV></DIV><!-- END Bottom Section -->     </DIV><IMG width=3D"0" =
 height=3D"0"=20
-src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-generic-doc.png"=
->     <!--  end container -->=20
-  </BODY></HTML>
+src=3D"file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/H=
+omePage/media/icons/cx-icon-generic-doc.png">=20
+    <!--  end container -->   </BODY></HTML>
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: image/png
 Content-Transfer-Encoding: base64
-Content-Location: file:///C:/XenCenter/HomePage/media/logos/cx-logo-citrixXenServer.png
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/media/logos/cx-logo-citrixXenServer.png
 
-iVBORw0KGgoAAAANSUhEUgAAAQUAAAAfCAYAAADurNjYAAAEE2lDQ1BJQ0MgcHJvZmlsZQAAeNqN
-lV1sFFUYhp/dOTNrAs5VBS1JmaACIaVZwCgNAd3tLtvC2m62LdLGRLfTs7tjp7PjmdnyE66IicYb
-UO8MifHvjsTERAP+RPBCbjCYEBSwMdFwAfEnJCTcKNSL2e4O2AbP1Tfv+b73/b73nJmB1OWK77tJ
-C2a9UJULWWv/xKSVukKSx1hBNysqduBnSqUiQMX3Xe5dCbj9IwmAi5uX2H/QWjEtAxsSDwGN6cCe
-hcRB0E/Yvgoh1QVsPxD6IaSKQJfaPzEJqZeBrloUh0DXVBS/AXSpsfIApE4Apl2vTEPqJNA7FcNr
-sTjqAYCugvSkcmyrXMhaJdWoOq6MtfuA7f+5Zt3mot5aYGUwM7oX2AiJ16Yrub1AHyRO2pX8KPAE
-JK7OOfuGW/FdP8yWgfWQXNecGc8AmyA5WFW7xyOepKo3Bxfjdw/Xx14AVkHyW29qeKRVe9kOBiaB
-dZC8W5dDRaAHNMsJh8aiWm2XapRHIl2tOi1zeaAXtDdnGnvLEaf2eTA3ml/kPFwfGG7h51+p7CkB
-3aD9Jt1COdLS/vHDUqsH0eO5w8VIS+RkkB9dxMP62GCkK9xQjbVqxfGqs3uolf9pXQ2WW/FV3y0V
-o970pGqWx6N8va+i8oWIUy9Jb7zFr8+xL1FB0mAKiY3HHSzKFMhi4aNoUMXBpYDEQ6KQuO2czUwh
-CZhB4TCHxCVAUkKiWpUdvhoSj+soHGwGej6miUWdP/Cox/IGqNPEo7YMT9TLjRZPQ6wWabFNpMUO
-URQ7xXbRjyWeFc+JXSIn0qJf7GjXlmITWdS40eZ5lSYSizL7yHIWl5AKLr/i0SBY2pXj3c2NnZ2j
-6iXHvnDsZswrh4CZmFtxR0ce5Ll+Tb+uX9Kv6Vf0+U6G/rM+r8/rV+6ZpfEfl+WiO/fNvHRWBheX
-GpJZJA4eMjbz5jjHuSNfPdrhuSROvXhx5bkjVe94dwe1Lxy7KV8fvj3M0d4Omv4p/Wf6Uvr99Efp
-37V3tM+0r7XT2hfaeSztjHZW+0b7TvtE+zJ2VsvfofbZk4n1LfGW9Frimllzjfm4mTPXmk+axQ6f
-udrcYg6aG8ycuaZ9bnG9uHsOE7htf5bWivJiNyDxMDM4y7xV43g4HECiCKjg4nHovpxWpegRW8TQ
-fbd7u9gh2tMYeSNnZLCMTUa/scXYY2Q6qsYGI2f0GxuM/D23015mUhnKgyHAQMM/pJxaPbS2ptPP
-WBnfd6U15Nl9vVbFdS3l1OphYCkZSDUnp/vYPzFpRZ/0W2USQGLVhQ4WPg87/wLthw422YSTAax+
-qoNt7IZH3oNTT9tNNbf4j018D0F129boaWUW9F8WFm6th9TbcOethYW/P1hYuPMhaPNwxv0XqDR8
-VlFWxjUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADKGlUWHRYTUw6Y29t
-LmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6
-TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0i
-QWRvYmUgWE1QIENvcmUgNS42LWMxMTEgNzkuMTU4MzI1LCAyMDE1LzA5LzEwLTAxOjEwOjIwICAg
-ICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjIt
-cmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9
-Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRv
-YmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAv
-MS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3Ag
-Q0MgMjAxNSAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxNkUwRURGRDk1
-MjAxMUU1OTM3QThENEZFRENDQTFDOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxNkUwRURG
-RTk1MjAxMUU1OTM3QThENEZFRENDQTFDOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0
-YW5jZUlEPSJ4bXAuaWlkOjE2RTBFREZCOTUyMDExRTU5MzdBOEQ0RkVEQ0NBMUM5IiBzdFJlZjpk
-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
-AAAASUVORK5CYII=
+iVBORw0KGgoAAAANSUhEUgAAAQUAAAAfCAYAAADurNjYAAAABGdBTUEAANjr9RwUqgAAACBjSFJN
+AACHDwAAjA0AAPmTAACE5QAAe4IAAOt1AAA/tAAAIlh1a16cAAAEC2lDQ1BJQ0MgcHJvZmlsZQAA
+SMeNVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2bVjShtLp/3d02bpZJNtoi6GT27s6Yyc44P9sf+lQE
+xRejvklB/HsLCIJS/7D1wb5UKpRoU4Og+NDiD0KhL5quZ+7MZCZxQ7xh7n7zne+ec+6Zk3sBeq7L
+pqknRYCFlmNJxaz4zPETYs8KJOEB6IVB6JUV28xUq5OAw9PCxpEAuPO9NwNc29fFvt3orVNbQTf3
+IDbqtrKA+BQAf14xLQfz60d+/KRjetjLod/CBBE/7+Gmjx0Pz/n4FaaZkXKIzyMWFFWuI15CPDIX
+45sx7OfARn+RtqilKaJXi6plNDSdxtLdxvw/x4LuhvF24dNnz08fw99h3PtLdTnv4VHES4pcmEb8
+EOIbbW22EuC7ppOVED8CkNztztcyiPciLjWsIzXfT9JS3VKI3zqjzjyNeAfir1tzlalg7XXFzmHN
+YDfiuyote/UdAuBEzSnP+Gu5w5YhTflxuUad5gteHRG/Om8ck3yf3Cd2e7oQ+jyj5ioBf+UF+WgV
+8SDiX6helPxY3D+mUw1yIEMtvTLpxyJ5arP9Mt5RZ0p+XKI7+EH9tWSxoR0pB/qPVKskBfiGqbMe
+xdz4pOVKNV/Pj8pWoej75Ku0VQv8822YTchAwYA5nBVowRqIIEERsvhrgoWWBmigI0PRSpGh+BZq
+9rF1Nswjr0Gb2Wycq0zpr4z8NZmPm0yrQG7oA3CRVeF3ZNWYLodvLnLNLfz4udwK/BhkgKTJAXwO
+kklyiIyTCRDJE+RJcpjkkZ0gB9fXVmM78vK5te7nRYxImW4WdZfQ7oCM88+oMHBPXauyOOgOR5Zz
+1nOacvW1v2K10lhtomrFKzq1Xc35X/mb/DLOK/xqpOB/5Ffxb2XDXoz/VJmG1dm05+6qDNp0xi3g
+ozGLHcs75uPy2S/uj/wskwvPXuu7fLbRWhyMWK8K9OXKnQqcG4nY9A/pP9LL6XfS76d/497kPua+
+5D7lPuOugMhd5C5xX3HfcB9yn8e+1dY9tP7tWeZh3p6lW62xK4WssFN4UMgLu4SHhcnInzAgjAkl
+YQ9adq5/t3i8ePU0OI5zWJ/usXxdrAMS92IHaFv8V9VQpcFJprRZv7Xg9CZNsJIMkTFS3tTd417P
+h4pUIZVPZUBM7U1NpMZSRz0cRk3tQdsEzoUN3alssVPq0FPefQI5wzxtaU3VEfen04+LGbzaqFhu
+KaMjoqzrIjPZokVtarVpfRS8e9M/0m9L7D5M7Lgacc5TAIf+xLPvu4g74QIs2QADj0bcMJ6V970N
+cOExxbXa4R2b+BbAbhzY77/1ZfH8+qnTuY3nWM8bAGuvdzp/v9vprL2H/lcBLur/Aqg0fFYEwEof
+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccll
+PAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0i
+VzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6
+bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8w
+OS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJv
+dXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBN
+TT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9u
+cy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0i
+QWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9Inht
+cC5paWQ6MTZFMEVERkQ5NTIwMTFFNTkzN0E4RDRGRURDQ0ExQzkiIHhtcE1NOkRvY3VtZW50SUQ9
+InhtcC5kaWQ6MTZFMEVERkU5NTIwMTFFNTkzN0E4RDRGRURDQ0ExQzkiPiA8eG1wTU06RGVyaXZl
+ZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxNkUwRURGQjk1MjAxMUU1OTM3QThENEZF
+RENDQTFDOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxNkUwRURGQzk1MjAxMUU1OTM3QThE
+NEZFRENDQTFDOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4g
+PD94cGFja2V0IGVuZD0iciI/Ph2PN4IAAAcpSURBVHhe7Z09ciI7EIDb7yzgwOUTDCfAThw5dTaE
+kDhzuJkTCCFz6siJ4QTmBFsbLNyF1/rpGf20hAYP3ue3/VWpFoOm1d2SWlILai8OCAiCIFj+sf8K
+giBoJCgIguAhQUEQBA8JCoIgeEhQEATBQ4KCIAgeEhQEQfDoLSjsFyO4uLiA0WJv3zmdPmUJLeJX
+oYSioECDySujBXyvobWByVG997AYKfsmWFsQ/k7yQWEz0QFgONvaNxy2Mxg6k2cw/QD15ciP6cC+
+Y9hMuk+ylCzhc3x/v9qg/U0WJD32v93imQsKKiDcrMzrag47HExqQDVlXZvPsuzh90/7UhCy2Ak/
+kT1an5wSmPigsF/ASAeECuY7DAAfU4jWlvESg8MSxvZPQfgM+8UDzAAXn6WMqD4ZL3fo1Rk8dMgj
+sUFh//4K6sBQzV+geKdpjxoU6M2xYQjm5LGCG5uLoCQX5SlU/SZnQREtkEV/cxGvefZMK4yxw9HF
+I8hTeHpTfoJK5ghF9mXqpvy1yOmngrutx/qVoHpUGD9rIj2xMA1n+5ZlA884UOonZvERPskApk81
+nvafi4/wTFDYw/urmsk1PH3F2fP3Ah64nIUL7kp280rnMbyIh4NZP1uv4XCmFWZ8Z45Jqzdu8P/A
+cIfNR4NZBQsKiIQKjCMIA7YOOnRMa+DragJ/3eb0s8E9N9n0pB3OdL2G0M8U4CI9kdUNTvpEwCvp
+W8XmDS2u4S7swiAIsYFPEQa1oKIJ7KhjUM9UC4I324gN/k5J6nKUQlmB7aPFJpFPKZA3vkPvroAZ
+IjyHiPUBh9kBtwmHnX2niHWtfoJ9qNf2b83ugHMZ369Rqg9Ocl0/fgYpkpWWzWPtKiquzFQ7zPtW
+76qqDhWeu1qoLhbHqMYHoa+tHLYuljIfk72xfu3ziWd380Pt6N+2nfIBliJdeda1/7yGfOnooesp
+ua6/UFdcLpx61m5HXvycozeWpmokC2H0YN9j0O26upbKKrW9g26sjxP8+aDAKcrKQmynqWfM89Uh
+sD3DqUGh1dXTJzOAeOeHfk37RmEGQftZzl/02dHBEfm1nRysyhqqk/J1HHyyfRth5PuD2LYZPZ/w
+YThWtZ2tvsaXgf5sX4XyUnqQTL7vCF2ns6yOthfqpvsk9FOC9O3D9hfs7MtzUkd7xgyDKXygxWrL
+qq5JO+U8CO4mpSk7QEdHDKZPuP3CZn+0W7fNs9pyV3B/GyvA2zSEKyW78esOfumddZtvcYvZqf+E
+38ERgpM9uL1HTVD067vVD7fEP0yimNOvxZw3Fasbajs8tlg9q3vgRVm7GLr07fWlI3z/DuoEW10N
+7RtE0BbVu7/1j0fDK7R8C7+8AXwNbhOmTqjjAC6v7UtFUg86Vsb9k6RUVlfbC3UbKMMK5zQTFMZg
+jqkdziD/e6xPtq/wrh29gTc951IT5YvBYKnnNulnBwzUT8eDpr5FWuugZ9jCbIjB4fRDc0coOMZ4
+gSLDdjb0AmqUI/kkaT3CwHOcUlmltvepG8HuFJrk2k23Lx2dnw1M1BKKq/0cVdzOHvhk3BkYP871
+6vOqZp1OjKk5xyfwfnLLB03U6gpjvsJG/uzO5aN4J2T6zOjXJBiLV+oxLKnNnbITWb35fZ9cZWgn
+QXZ1Jb3TKAV30IHfTOkr98z2p6YCZqHO0qcsRd/yFPzxAVcPtUunrS37XXmdHS0NGh22WUlUlvgG
+Napg/jKF6VKtbmpV+6LANbiFexy8aou+0NsEJltuUSuX7zMMZnb1are6A7jVAmcwZK7rVMa802Kt
+M8xKv2d41vvKOTwenRTKp4H/rJ0tY3jUZyo1FkJfU5+4dp2GN7gHl7jZV3EpcAAFVsLqyt289AL1
+ObPkbvQYCI4kOUpldbS9VLe9+hZhaeDGiJrEJCxyxUlmREksQyiDEkps8o5gZJEcrz6bLEoRJmo4
+bPImlUCi9lJtkt5zmxANS9Q2Jen44jaR9ZelSfBh8RN3lsivZC9TvIYy9VQJ7CrR1UX3bVA5luHo
+4LZnbfLsVUlgp44ZO0Gf2kRxqKOue0x+5EeeU2V9yvaEbpyPU2SDgiExcONWWWXC58mA7MAJZJlO
+ZdpEcp/59BAUGlsSmXhXb7opoZLRr7HBKWH1oonWtJkPap6MUM/wcwfSwS3egLQU6eqi9Yp19ttT
+Prf9E/ahtaspwefGvycGBUXko9RNjM9nZIW+rtcJ24vkmXFb2h8FQUFooA4IO4bgJp1QQLdB+3di
+g8IpTkoE3RTpK0khwlxDonvl67g9Y/IW7pWvEGBzCl2ueQ3merqaP6KXy5CgUMp+AfrqP5NgFE5n
+MH3RP9wZftlV6H8XlWRmE9VFyWOfzWSof2j20uULPXbHICSIz3b2Aw45Pgg9EeWZvnBQyU6hA9gv
+vd19C0KO8dL/zsW5fvDHIf+XpCAIHrJTEATBQ4KCIAgOAP8CyHu4hHqCjeoAAAAASUVORK5CYII=
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: image/png
 Content-Transfer-Encoding: base64
-Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-cloudServerGraphic.png
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/media/icons/cx-cloudServerGraphic.png
 
 iVBORw0KGgoAAAANSUhEUgAAAIEAAAClCAYAAAB7nZ5wAAAKRWlDQ1BJQ0MgcHJvZmlsZQAAeNqd
 U2dUU+kWPffe9EJLiICUS29SFQggUkKLgBSRJiohCRBKiCGh2RVRwRFFRQQbyKCIA46OgIwVUSwM
@@ -354,10 +362,10 @@ yw33zeHeGHs3MQFfTcUTT4WAEpHp9CyjFj+kIEU7hbHDhXtizGNOzz7xYwEwHU88NRal1tVoAT8r
 rENqV7Ii754jCCWJhCrcy2ksw7j4klkZHHA8ocmSBthRu9zMtcwMPFF2AkXi/wUYAKHmYva3WaRg
 AAAAAElFTkSuQmCC
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: image/png
 Content-Transfer-Encoding: base64
-Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/media/icons/cx-icon-addServer.png
 
 iVBORw0KGgoAAAANSUhEUgAAADcAAABCCAYAAADzNE40AAAKRWlDQ1BJQ0MgcHJvZmlsZQAAeNqd
 U2dUU+kWPffe9EJLiICUS29SFQggUkKLgBSRJiohCRBKiCGh2RVRwRFFRQQbyKCIA46OgIwVUSwM
@@ -433,10 +441,10 @@ rveJjysRyavryJegXL9kmayXGcosVGqxTLWYHEhem/QSbkf7XpgtYyUEJpaNpCXLpMXSe2P5b1jZ
 pcDfTVFELKlF12NWOpRX2q4IYm9pfNlcRhQroVCQessxqJ56pIuvFxWJSSfqukWzL3M1cqhQh6+h
 B/zVwbrePRnnAHiuSf6FhDMUhmM4n+aW1kx8M9+Hnq0U+hRgAIYz031FnvkhAAAAAElFTkSuQmCC
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: image/png
 Content-Transfer-Encoding: base64
-Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-purchaseSupport.png
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/media/icons/cx-icon-purchaseSupport.png
 
 iVBORw0KGgoAAAANSUhEUgAAADkAAABBCAYAAABraQwpAAAKRWlDQ1BJQ0MgcHJvZmlsZQAAeNqd
 U2dUU+kWPffe9EJLiICUS29SFQggUkKLgBSRJiohCRBKiCGh2RVRwRFFRQQbyKCIA46OgIwVUSwM
@@ -520,10 +528,10 @@ AHIxwDbF+7fBAc69COw1T3H6D5+rJQV56b0qPQ/bMh5KbQf5Ys7fxKOmLsW73m8GB/OLlT9fpts9
 QQskUviMJxTBAJ+Bdzz1UQdi/f67JRrJa9hu5tRXixt2K/RVWtVvBlOsaNMfCZZ9Iki9LrWvOcES
 FNGSk9lFae1Qi2cqRNVDjmd/CzAA4cJVq5HwYZMAAAAASUVORK5CYII=
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: image/png
 Content-Transfer-Encoding: base64
-Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualization.png
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/media/icons/cx-icon-tryVirtualization.png
 
 iVBORw0KGgoAAAANSUhEUgAAAFYAAABCCAYAAADNESF6AAAKRWlDQ1BJQ0MgcHJvZmlsZQAAeNqd
 U2dUU+kWPffe9EJLiICUS29SFQggUkKLgBSRJiohCRBKiCGh2RVRwRFFRQQbyKCIA46OgIwVUSwM
@@ -607,10 +615,10 @@ ZkyahOFf5/dkEibT+2n++wr/pg35BJBn04aZbCr/8Yt2kVl9BCtg6vNUl1GCkBzlLP6d3UKRtpYZ
 MZWMTY2NIpzqiKWtmv7e6IVkbGo0ixj1B6W0zoCP/JYXbJCxcvDVQVvtLDEiyCOBPLsSfwUYAP2G
 LP9CyPswAAAAAElFTkSuQmCC
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: image/png
 Content-Transfer-Encoding: base64
-Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-generic-doc.png
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/media/icons/cx-icon-generic-doc.png
 
 iVBORw0KGgoAAAANSUhEUgAAABEAAAAVCAYAAACg/AXsAAAKRWlDQ1BJQ0MgcHJvZmlsZQAAeNqd
 U2dUU+kWPffe9EJLiICUS29SFQggUkKLgBSRJiohCRBKiCGh2RVRwRFFRQQbyKCIA46OgIwVUSwM
@@ -680,11 +688,11 @@ g/kbFEMrsGiOgNI/gfgVEP+FYn4gXgPU586CpPgNECdgMQQkvgaIL2CRA6nXhxsCjLo/QOoBDq88
 gWL0WHNA9w4HkLIgMnzeAC29AuMge4cHh3ewgXNAjGkI0OQ3JBhCdmLDCZDDRApIbSNS336gywux
 eecZkDIYMt6pA7p4E05DBtw7VDEEVDz2AOkQCsxoAggwACbuXbJX+JbPAAAAAElFTkSuQmCC
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Location: file:///C:/XenCenter/HomePage/css/screen.css
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/css/screen.css
 
 html {
 	margin: 0px; padding: 0px; border: 0px currentColor; border-image: =
@@ -1253,11 +1261,11 @@ hidden; content: "\0020";
 	clear: both;
 }
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Location: file:///C:/XenCenter/HomePage/css/theme.css
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/css/theme.css
 
 .cx-hero-top {
 	background: rgb(95, 103, 181); height: 310px;
@@ -1274,17 +1282,17 @@ Content-Location: file:///C:/XenCenter/HomePage/css/theme.css
 .cx-hero-top .inner .column {
 	height: 165px;
 }
-.cx-hero-top .inner .left.column {
+.cx-hero-top .inner .column.left {
 	padding-top: 36px; padding-bottom: 42px;
 }
-.cx-hero-top .inner .right.column {
+.cx-hero-top .inner .column.right {
 	width: 127px; height: 165px; text-align: center; line-height: 165px; =
 margin-top: 65px;
 }
-.cx-hero-top .inner .right.column img#cloudServerGraphic {
+.cx-hero-top .inner .column.right img#cloudServerGraphic {
 	width: 129px; height: 165px;
 }
-.cx-hero-top .inner .left.column img#logo-citrixXenServer {
+.cx-hero-top .inner .column.left img#logo-citrixXenServer {
 	width: 261px; height: 31px; margin-bottom: 10px; display: block;
 }
 p.cx-tagline {
@@ -1302,7 +1310,7 @@ ul.cx-callouts-list li.cx-doc-icon {
 50%; height: 21px; line-height: 21px; padding-left: 32px; margin-bottom: =
 10px; margin-left: -17px; display: block;
 }
-ul.cx-callouts-list li.last.cx-doc-icon {
+ul.cx-callouts-list li.cx-doc-icon.last {
 	margin-bottom: 0px;
 }
 ul.cx-callouts-list li.cx-doc-icon a.cx-link {
@@ -1325,7 +1333,7 @@ square; list-style-position: inside;
 	border-radius: 4px; cursor: pointer; background-color: rgb(242, 242, =
 242);
 }
-.cx-hero-bottom .last.cx-cards {
+.cx-hero-bottom .cx-cards.last {
 	margin-right: 0px;
 }
 .cx-hero-bottom .cx-cards p {
@@ -1347,11 +1355,11 @@ img#deskTopVirt {
 	width: 86px; height: 66px;
 }
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20
+------=_NextPart_000_0000_01D3FF4A.AADC6670
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Location: file:///C:/XenCenter/HomePage/css/print.css
+Content-Location: file:///C:/Users/fengyangz/workspace/bitbucket/xenadmin/XenAdmin/HomePage/css/print.css
 
 body {
 	background: none; color: rgb(0, 0, 0); line-height: 1.5; font-family: =
@@ -1383,4 +1391,4 @@ a:visited::after {
 	font-size: 90%; content: " (" attr(href) ")";
 }
 
-------=_NextPart_000_00AD_01D16FD5.C5E03F20--
+------=_NextPart_000_0000_01D3FF4A.AADC6670--

@@ -382,7 +382,7 @@
     <value>8</value>
   </data>
   <data name="BypassForServersCheckbox.Text" xml:space="preserve">
-    <value>&amp;Bypass proxy server for all [XenServer] connections</value>
+    <value>&amp;Bypass proxy server for all server connections</value>
   </data>
   <data name="&gt;&gt;BypassForServersCheckbox.Name" xml:space="preserve">
     <value>BypassForServersCheckbox</value>
@@ -1036,7 +1036,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>These settings allow you to configure a proxy server or to customize your [XenServer] connections for high latency environments.</value>
+    <value>These settings allow you to configure a proxy server or to customize your server connections for high latency environments.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

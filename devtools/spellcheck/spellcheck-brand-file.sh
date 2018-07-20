@@ -32,7 +32,7 @@
 
 set -eu
 
-WORDS="[^[\/"]XenCenter\|XenCenter[[:space:]][^p].*\|.*[[:space:]]XenCenter\|XenCenter[,].*\|^XenCenter\|XenCenter$\|[^[\/"]XenServer\|XenServer[[:space:]][^p].*\|.*[[:space:]]XenServer\|XenServer[,].*\|^XenServer\|XenServer$\|[^[\/]Citrix\|Citrix[[:space:]][^p].*\|.*[[:space:]]Citrix\|Citrix[,].*\|^Citrix\|Citrix$"
+WORDS="[^[\/"]XenCenter\|XenCenter[[:space:]][^p].*\|.*[[:space:]]XenCenter\|XenCenter[,].*\|^XenCenter\|XenCenter$\|[^[\/"]XenServer\|XenServer[[:space:]][^p].*\|XenServer[,].*\|^XenServer\|XenServer$\|[^[\/]Citrix\|.*[[:space:]]Citrix\|Citrix[,].*\|^Citrix\|Citrix$"
 
 FOUND_TYPO=$(grep -iow $WORDS $1)
 if [ "${FOUND_TYPO}" != "" ]

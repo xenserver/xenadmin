@@ -376,7 +376,7 @@
     <value>8</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>Specify the cache configuration to be used for PVS-Accelerator by choosing either memory or a storage repository and the amount of space to be allocated for each site and each [XenServer].</value>
+    <value>Specify the cache configuration to be used for PVS-Accelerator by choosing either memory or a storage repository and the amount of space to be allocated for each site and each server.</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>

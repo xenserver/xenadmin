@@ -3055,9 +3055,9 @@ Would you like to carry out the operation at this time?</value>
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>Connection to server {0} restricted - a connection to a [Citrix] [XenServer product] Express Edition server ({1}) already exists.
+    <value>Connection to server {0} restricted - a connection to a [Citrix XenServer] Express Edition server ({1}) already exists.
 
-You can only connect to a single [Citrix] [XenServer product] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
+You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>Cannot connect to {0} because of license restriction</value>
@@ -3073,7 +3073,7 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
     <value>Connection to {0}: will try to connect to another pool member in {1} seconds</value>
   </data>
   <data name="CONNECT_NO_XAPI_FAILURE" xml:space="preserve">
-    <value>Could not find [XenServer] running on {0}.</value>
+    <value>Could not find server running on {0}.</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
     <value>Could not find {0}.</value>
@@ -5069,7 +5069,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>File {0} not found</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
-    <value>[XenServer] is still booting.</value>
+    <value>Server is still booting.</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>Gateway is invalid.</value>
@@ -5090,7 +5090,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>You are not authorized to access this server.</value>
   </data>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
-    <value>Could not find [XenServer] on '{0}'.</value>
+    <value>Could not find a server on '{0}'.</value>
   </data>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>Error preparing host</value>
@@ -5176,7 +5176,7 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
     <value>An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
 
-Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter].</value>
+Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including servers that are not connected to [XenCenter].</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
@@ -7105,15 +7105,15 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenAdd/XenDesktop [Citrix] Cloud features enabled</value>
+[Citrix] Virtual Apps and Desktops [Citrix] Cloud features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenApp/XenDesktop features enabled</value>
+[Citrix] Virtual Apps and Desktops features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenApp/XenDesktop Platinum features enabled</value>
+[Citrix] Virtual Apps and Desktops Platinum features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -8799,10 +8799,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Assign a virtual GPU</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>This pool is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>This server is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This server is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -9190,7 +9190,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>There are no system alerts available to dismiss.</value>
   </data>
   <data name="NO_MORE_USERDEVICES" xml:space="preserve">
-    <value>[XenServer] cannot create any more disks for this VM</value>
+    <value>Server cannot create any more disks for this VM</value>
   </data>
   <data name="NO_NAME" xml:space="preserve">
     <value>(No Name)</value>
@@ -9202,7 +9202,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>There are no servers that need activating at this time.</value>
   </data>
   <data name="NO_SESSION_INFO" xml:space="preserve">
-    <value>No [XenServer] session information is available, cannot continue.</value>
+    <value>No server session information is available, cannot continue.</value>
   </data>
   <data name="NO_SNAPSHOTS" xml:space="preserve">
     <value>This VM does not have any snapshots.</value>
@@ -9702,7 +9702,7 @@ File not found</value>
     <value>Permission Denied</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Per-&amp;Socket ({0} required)</value>
+    <value>[Citrix XenServer] Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>Physical device</value>
@@ -10019,7 +10019,7 @@ Please reconnect the host and try again</value>
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs was removed in [XenServer]. Remove StorageLink SRs before upgrading.</value>
+    <value>The use of StorageLink SRs was removed in server. Remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -11087,7 +11087,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
+    <value>Check the proxy settings and that server is configured correctly on '{0}' and try again.</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>Please wait and then try again.</value>
@@ -12267,37 +12267,37 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Uploaded</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
+    <value>Upgrade your server license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
+    <value>Upgrade your server license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
+    <value>Upgrade your server license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.</value>
+    <value>Upgrade your server license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Dynamic Memory Control.  Dynamic Memory Control allows [XenServer] to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.</value>
+    <value>Upgrade your server license to enable Dynamic Memory Control.  Dynamic Memory Control allows server to adjust the memory of live virtual machines, and respond dynamically to changing demands on the server.</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.</value>
+    <value>Upgrade your server license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable StorageLink™ Technology. StorageLink allows [XenServer] to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
+    <value>Upgrade your server license to enable StorageLink™ Technology. StorageLink allows server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.</value>
+    <value>Upgrade your server license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
+    <value>Upgrade your server license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
+    <value>Upgrade your server license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
+    <value>Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
   </data>
   <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
@@ -12305,13 +12305,13 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
 To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
+    <value>Upgrade your server license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
+    <value>Upgrade your server license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and [XenServer] hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
+    <value>Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and servers' performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>Uptime</value>
@@ -12635,7 +12635,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>[XenServer] can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
+    <value>Server can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>&amp;Run the new snapshot schedule job when I click Finish</value>
@@ -13159,34 +13159,34 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB unknown error.</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>An error occurred when WLB tried to establish a session with [XenServer].</value>
+    <value>An error occurred when WLB tried to establish a session with server.</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
-    <value>WLB could not log into [XenServer]. It could be due to invalid credentials.</value>
+    <value>WLB could not log into server. It could be due to invalid credentials.</value>
   </data>
   <data name="WLB_ERROR_4003" xml:space="preserve">
-    <value>WLB cannot connect to [XenServer]. It could be the [XenServer] being offline or an incorrect TCP/IP address.</value>
+    <value>WLB cannot connect to server. It could be the server being offline or an incorrect TCP/IP address.</value>
   </data>
   <data name="WLB_ERROR_4004" xml:space="preserve">
-    <value>WLB received a null argument from [XenServer], which is not allowed.</value>
+    <value>WLB received a null argument from server, which is not allowed.</value>
   </data>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>WLB registry key is missing.</value>
   </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
-    <value>WLB received an invalid argument from [XenServer].</value>
+    <value>WLB received an invalid argument from server.</value>
   </data>
   <data name="WLB_ERROR_4008" xml:space="preserve">
-    <value>WLB data collection service cannot retrieve [XenServer] data.</value>
+    <value>WLB data collection service cannot retrieve server data.</value>
   </data>
   <data name="WLB_ERROR_4009" xml:space="preserve">
     <value>WLB configuration data is missing in WLB database.</value>
   </data>
   <data name="WLB_ERROR_4010" xml:space="preserve">
-    <value>WLB received an invalid operation from [XenServer].</value>
+    <value>WLB received an invalid operation from server.</value>
   </data>
   <data name="WLB_ERROR_4011" xml:space="preserve">
-    <value>WLB received an out of range argument from [XenServer].</value>
+    <value>WLB received an out of range argument from server.</value>
   </data>
   <data name="WLB_ERROR_4012" xml:space="preserve">
     <value>WLB data collection service is not properly initialized.</value>
@@ -13216,7 +13216,7 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>One or more hosts in the pool do not have an appropriate license.</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB could not connect to [XenServer] because the supplied credentials were invalid.</value>
+    <value>WLB could not connect to server because the supplied credentials were invalid.</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB unable to evacuate an explicitly excluded host.</value>
@@ -13225,10 +13225,10 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB cannot save your configuration at this time.  Verify all Workload Balancing services are running, and try reentering your configuration in a few minutes.</value>
   </data>
   <data name="WLB_ERROR_5" xml:space="preserve">
-    <value>[XenServer] cannot connect to the WLB Server with the supplied WLB Server credentials.</value>
+    <value>Server cannot connect to the WLB Server with the supplied WLB Server credentials.</value>
   </data>
   <data name="WLB_ERROR_6" xml:space="preserve">
-    <value>The user WLB uses to connect to [XenServer] either doesn't have sufficient privileges or doesn't have access to [XenServer]. Please re-initialize WLB with an valid user.</value>
+    <value>The user WLB uses to connect to server either doesn't have sufficient privileges or doesn't have access to server. Please re-initialize WLB with an valid user.</value>
   </data>
   <data name="WLB_ERROR_SERVER_NOT_FOUND" xml:space="preserve">
     <value>The specified WLB Server could not be found.  Please check your settings.</value>
@@ -13405,7 +13405,7 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
     <value>Configuration Error: {0}</value>
   </data>
   <data name="WLB_RECONFIGURE_CREDS" xml:space="preserve">
-    <value>The stored [XenServer] credentials are no longer valid.  Please update the connection settings for Workload Balancing.</value>
+    <value>The stored server credentials are no longer valid.  Please update the connection settings for Workload Balancing.</value>
   </data>
   <data name="WLB_RECONNECT" xml:space="preserve">
     <value>Re&amp;connect...</value>

@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -8445,9 +8445,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a [Citrix] [XenServer product] Express Edition server ({1}) already exists.
+        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a [Citrix XenServer] Express Edition server ({1}) already exists.
         ///
-        ///You can only connect to a single [Citrix] [XenServer product] Express Edition server at a time. To find out how to upgrade your license, follow the link below..
+        ///You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below..
         /// </summary>
         public static string CONNECTION_RESTRICTED_MESSAGE_LONG {
             get {
@@ -20400,7 +20400,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///XenAdd/XenDesktop [Citrix] Cloud features enabled.
+        ///[Citrix] Virtual Apps/Desktops [Citrix] Cloud features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED {
             get {
@@ -20410,7 +20410,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///XenApp/XenDesktop features enabled.
+        ///[Citrix] Virtual Apps/Desktops features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
             get {
@@ -20420,7 +20420,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///XenApp/XenDesktop Platinum features enabled.
+        ///[Citrix] Virtual Apps/Desktops Platinum features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED {
             get {
@@ -25795,7 +25795,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool is only licensed for XenApp/XenDesktop workloads.
+        ///   Looks up a localized string similar to This pool is only licensed for [Citrix] Virtual Apps/Desktops workloads.
         /// </summary>
         public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL {
             get {
@@ -25804,7 +25804,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is only licensed for XenApp/XenDesktop workloads.
+        ///   Looks up a localized string similar to This server is only licensed for [Citrix] Virtual Apps/Desktops workloads.
         /// </summary>
         public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER {
             get {
@@ -27894,7 +27894,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Per-&amp;Socket ({0} required).
+        ///   Looks up a localized string similar to [Citrix XenServer] Per-&amp;Socket ({0} required).
         /// </summary>
         public static string PERSOCKET_LICENSES_X_REQUIRED {
             get {

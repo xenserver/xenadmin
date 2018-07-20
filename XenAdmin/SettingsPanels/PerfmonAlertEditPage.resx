@@ -226,7 +226,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>[XenServer] can notify you when your resource usage crosses certain thresholds. These notifications are generated as system alerts and can be forwarded  to an email server the same as any other System Alert.</value>
+    <value>The server can notify you when your resource usage crosses certain thresholds. These notifications are generated as system alerts and can be forwarded  to an email server the same as any other System Alert.</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
