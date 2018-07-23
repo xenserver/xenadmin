@@ -960,21 +960,24 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RefreshDataGridViewList()
         {
-            dataGridView1.Rows.Clear();
-
-            foreach (var row in allRows)
+            lock (_update_grid_lock)
             {
-                if(row is PreCheckHostRow)
+                dataGridView1.Rows.Clear();
+
+                foreach (var row in allRows)
                 {
-                    var r = row as PreCheckHostRow;
-                    if(r.Problem != null || (r.Problem == null && !checkBoxViewPrecheckFailuresOnly.Checked))
+                    var hostRow = row as PreCheckHostRow;
+                    if (hostRow != null)
                     {
-                        AddRowToGridView(r);
+                        if (hostRow.Problem != null || !checkBoxViewPrecheckFailuresOnly.Checked)
+                        {
+                            AddRowToGridView(hostRow);
+                        }
                     }
-                }
-                else
-                {
-                    AddRowToGridView(row);
+                    else
+                    {
+                        AddRowToGridView(row);
+                    }
                 }
             }
         }
