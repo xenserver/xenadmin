@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Dialogs;
@@ -261,7 +262,7 @@ namespace XenAdmin.TabPages
                 {
                     if (r.IsLocalRootRow)
                     {
-                        r.toggleExpandedState();
+                        r.ToggleExpandedState();
                         break;
                     }
                 }
@@ -412,7 +413,7 @@ namespace XenAdmin.TabPages
             if (GridViewSubjectList.FirstDisplayedScrollingRowIndex > 0)
             {
                 AdSubjectRow topRow = GridViewSubjectList.Rows[GridViewSubjectList.FirstDisplayedScrollingRowIndex] as AdSubjectRow;
-                if (topRow.subject != null)
+                if (topRow != null && topRow.subject != null)
                     topSubject = topRow.subject.uuid;
             }
 
@@ -439,33 +440,25 @@ namespace XenAdmin.TabPages
                 // Populate list of authenticated users
                 GridViewSubjectList.Rows.Clear();
 
-                // Add local root account, a null value for the subject shows this
-                AdSubjectRow adminRow = new AdSubjectRow(null);
-                GridViewSubjectList.Rows.Add(adminRow);
+                var rows = new List<DataGridViewRow> {new AdSubjectRow(null)}; //local root account
 
-                List<DataGridViewRow> rows = new List<DataGridViewRow>();
-                Session session = pool.Connection.Session;
-                // Add all other Subjects in the server list
-                foreach (Subject subject in pool.Connection.Cache.Subjects)
+                foreach (Subject subject in pool.Connection.Cache.Subjects) //all other subjects in the pool
                 {
-                    subject.PropertyChanged += new PropertyChangedEventHandler(subject_PropertyChanged);
-                    AdSubjectRow r = new AdSubjectRow(subject);
-                    // we show them as unknown logged in status until the background thread updates them
-                    r.showStatusLost();
-                    rows.Add(r);
+                    subject.PropertyChanged += subject_PropertyChanged;
+                    rows.Add(new AdSubjectRow(subject));
                 }
                 GridViewSubjectList.Rows.AddRange(rows.ToArray());
-                GridViewSubjectList.Sort(GridViewSubjectList.SortedColumn ?? GridViewSubjectList.Columns[2],
-                                         GridViewSubjectList.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
+
+                GridViewSubjectList.Sort(GridViewSubjectList.SortedColumn ?? ColumnSubject,
+                    GridViewSubjectList.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
                 // restore old selection, old expansion state and top row
                 foreach (AdSubjectRow r in GridViewSubjectList.Rows)
                 {
-                    r.Selected = r.subject != null && selectedSubjectUuids.ContainsKey(r.subject.uuid);
-                    r.Expanded = r.subject != null && expandedSubjectUuids.ContainsKey(r.subject.uuid);
-                    if (r.subject == null && rootExpanded)
-                        r.Expanded = true;
-                    if (r.subject != null && topSubject == r.subject.uuid)
+                    r.Selected = !r.IsLocalRootRow && selectedSubjectUuids.ContainsKey(r.subject.uuid);
+                    r.Expanded = r.IsLocalRootRow ? rootExpanded : expandedSubjectUuids.ContainsKey(r.subject.uuid);
+
+                    if (!r.IsLocalRootRow && topSubject == r.subject.uuid)
                         GridViewSubjectList.FirstDisplayedScrollingRowIndex = r.Index;
                 }
                 if (GridViewSubjectList.SelectedRows.Count == 0)
@@ -567,7 +560,7 @@ namespace XenAdmin.TabPages
                     if (r.IsLocalRootRow)
                         continue;
 
-                    r.showStatusLost();
+                    r.SetStatusLost();
                 }
             });
         }
@@ -578,12 +571,21 @@ namespace XenAdmin.TabPages
         /// Used in the DataGridView on the ConfigureAdDialog. Stores information about the subject and the different text to show if the 
         /// row is expanded or not.
         /// </summary>
-        internal class AdSubjectRow : DataGridViewRow
+        private class AdSubjectRow : DataGridViewRow
         {
-            internal Subject subject;
-            private bool expanded = false;
-            private bool loggedIn = false;
-            private bool statusLost = false;
+            private readonly DataGridViewImageCell _cellExpander = new DataGridViewImageCell();
+            private readonly DataGridViewImageCell _cellGroupOrUser = new DataGridViewImageCell();
+            private readonly KeyValuePairCell _cellSubjectInfo = new KeyValuePairCell();
+            private readonly DataGridViewTextBoxCell _cellRoles = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellLoggedIn = new DataGridViewTextBoxCell();
+
+            internal Subject subject { get; private set; }
+            private bool expanded;
+            private bool loggedIn;
+            /// <summary>
+            /// The row is created with unknown status until it's updated from outside the class
+            /// </summary>
+            private bool statusLost = true;
 
             public bool LoggedIn
             {
@@ -595,8 +597,7 @@ namespace XenAdmin.TabPages
                 {
                     loggedIn = value;
                     statusLost = false;
-                    Cells[4].Value = IsLocalRootRow || subject.IsGroup ? "-"
-                       : loggedIn ? Messages.YES : Messages.NO;
+                    RefreshCellContent();
                 }
             }
 
@@ -605,25 +606,32 @@ namespace XenAdmin.TabPages
                 get { return subject == null; }
             }
 
-            // Each entry can show a summary of roles or a full list depending on whether it is expanded or contracted
-            private string expandedRoles, contractedRoles;
-            // Expanded subject info is the key pair mapping detailed in the subjects other config along with their display name
-            // The contracted version is just their display name
-            private List<KeyValuePair<string, string>> expandedSubjectInfo, contractedSubjectInfo;
+            /// <summary>
+            /// The full list of the subject's roles
+            /// </summary>
+            private readonly string expandedRoles = string.Empty;
+            /// <summary>
+            /// Topmost of the subject's roles
+            /// </summary>
+            private readonly string contractedRoles = string.Empty;
+            /// <summary>
+            /// The detailed info from the subject's other_config along with their display name
+            /// </summary>
+            private readonly List<KeyValuePair<string, string>> expandedSubjectInfo = new List<KeyValuePair<String, String>>();
+            /// <summary>
+            /// The subject's display name
+            /// </summary>
+            private readonly List<KeyValuePair<string, string>> contractedSubjectInfo = new List<KeyValuePair<String, String>>();
 
             /// <summary>
-            /// A DataGridViewRow that corresponds to a subject and shows their relevant information in expanded and collapsed states
+            /// A DataGridViewRow that corresponds to a subject and shows their
+            /// information in expanded and collapsed states
             /// </summary>
-            /// <param name="subject">If set to null this is assumed to be a root account that does not have a subject</param>
+            /// <param name="subject">If null, if it is a root account (no subject)</param>
             internal AdSubjectRow(Subject subject)
-                : base()
             {
-                this.subject = subject;
-                if (IsLocalRootRow)
+                if (subject == null) //root account
                 {
-                    contractedRoles = expandedRoles = "";
-                    expandedSubjectInfo = new List<KeyValuePair<String, String>>();
-                    contractedSubjectInfo = new List<KeyValuePair<String, String>>();
                     expandedSubjectInfo.Add(new KeyValuePair<string, string>(Messages.AD_LOCAL_ROOT_ACCOUNT, ""));
                     expandedSubjectInfo.Add(new KeyValuePair<string, string>("", ""));
                     expandedSubjectInfo.Add(new KeyValuePair<string, string>(Messages.AD_ALWAYS_GRANTED_ACCESS, ""));
@@ -631,49 +639,40 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    //Generate the role list
-                    string s = "";
-                    List<Role> roles = subject.Connection.ResolveAll<Role>(subject.roles);
+                    this.subject = subject;
+                    var roles = subject.Connection.ResolveAll(subject.roles);
                     roles.Sort();
                     roles.Reverse();
-                    foreach (Role r in roles)
-                    {
-                        s = String.Format("{0}\n{1}", s, r.FriendlyName());
-                    }
-                    expandedRoles = s;
+                    if (roles.Count > 0)
+                        expandedRoles = roles.Select(r => r.FriendlyName()).Aggregate((acc, s) => acc + "\n" + s);
+
                     contractedRoles = roles.Count > 0
                         ? roles.Count > 1 ? roles[0].FriendlyName().AddEllipsis() : roles[0].FriendlyName()
                         : "";
 
-                    contractedSubjectInfo = new List<KeyValuePair<String, String>>();
                     contractedSubjectInfo.Add(new KeyValuePair<string, string>(subject.DisplayName ?? subject.SubjectName ?? "", ""));
                     expandedSubjectInfo = Subject.ExtractKvpInfo(subject);
                 }
-                Cells.Add(new DataGridViewImageCell()); // Expander image cell
-                Cells.Add(new DataGridViewImageCell()); // Group/user image cell
-                Cells.Add(new KeyValuePairCell()); // Subject info cell
-                Cells.Add(new DataGridViewTextBoxCell()); // Roles cell
-                Cells.Add(new DataGridViewTextBoxCell()); // logged in cell
 
-                refreshCellContent();
+                Cells.AddRange(_cellExpander, _cellGroupOrUser, _cellSubjectInfo, _cellRoles, _cellLoggedIn);
+                RefreshCellContent();
             }
 
-            public void refreshCellContent()
+            public void RefreshCellContent()
             {
-                Cells[0].Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
-                Cells[1].Value = IsLocalRootRow || !subject.IsGroup ?
-                    Resources._000_User_h32bit_16 : Resources._000_UserAndGroup_h32bit_32;
-                Cells[2].Value = expanded ? expandedSubjectInfo : contractedSubjectInfo;
-                Cells[3].Value = expanded ? expandedRoles : contractedRoles;
-                Cells[4].Value = IsLocalRootRow || subject.IsGroup || statusLost ? "-"
-                       : loggedIn ? Messages.YES : Messages.NO;
-
+                _cellExpander.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
+                _cellGroupOrUser.Value = IsLocalRootRow || !subject.IsGroup ? Resources._000_User_h32bit_16 : Resources._000_UserAndGroup_h32bit_32;
+                _cellSubjectInfo.Value = expanded ? expandedSubjectInfo : contractedSubjectInfo;
+                _cellRoles.Value = expanded ? expandedRoles : contractedRoles;
+                _cellLoggedIn.Value = IsLocalRootRow || subject.IsGroup || statusLost
+                    ? "-"
+                    : loggedIn ? Messages.YES : Messages.NO;
             }
 
-            public void toggleExpandedState()
+            public void ToggleExpandedState()
             {
                 expanded = !expanded;
-                refreshCellContent();
+                RefreshCellContent();
             }
 
             public bool Expanded
@@ -684,17 +683,24 @@ namespace XenAdmin.TabPages
                 }
                 set
                 {
-                    expanded = value;
-                    refreshCellContent();
+                    if (expanded != value)
+                    {
+                        expanded = value;
+                        RefreshCellContent();
+                    }
                 }
             }
 
-            public void showStatusLost()
+            public void SetStatusLost()
             {
+                if (statusLost)
+                    return;
+
                 statusLost = true;
-                Cells[4].Value = "-";
+                RefreshCellContent();
             }
         }
+
         #endregion
 
         private void buttonJoinLeave_Click(object sender, EventArgs e)
@@ -814,21 +820,6 @@ namespace XenAdmin.TabPages
             resolvingSubjectsDialog.ShowDialog();
         }
 
-
-
-        private void GridViewSubjectList_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            Program.AssertOnEventThread();
-            if (e.Button != MouseButtons.Left)
-                return;
-
-            if (e.RowIndex < 0)
-                // The click is on a column header
-                return;
-            AdSubjectRow row = GridViewSubjectList.Rows[e.RowIndex] as AdSubjectRow;
-            row.toggleExpandedState();
-        }
-
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
             Program.AssertOnEventThread();
@@ -928,6 +919,26 @@ namespace XenAdmin.TabPages
             toolStripMenuItemChangeRoles.Enabled = ButtonChangeRoles.Enabled;
             toolStripMenuItemLogout.Enabled = ButtonLogout.Enabled;
             toolStripMenuItemRemove.Enabled = ButtonRemove.Enabled;
+        }
+
+        private void GridViewSubjectList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpand.Index)
+                return;
+
+            var row = GridViewSubjectList.Rows[e.RowIndex] as AdSubjectRow;
+            if (row != null)
+                row.ToggleExpandedState();
+        }
+
+        private void GridViewSubjectList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
+
+            var row = GridViewSubjectList.Rows[e.RowIndex] as AdSubjectRow;
+            if (row != null)
+                row.ToggleExpandedState();
         }
 
         private bool AllSelectedRowsLoggedIn()
@@ -1180,19 +1191,6 @@ namespace XenAdmin.TabPages
                 lock (statusUpdaterLock)
                     Monitor.Pulse(statusUpdaterLock);
             }
-        }
-
-        private void GridViewSubjectList_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Right)
-                return;
-
-            DataGridView.HitTestInfo i = GridViewSubjectList.HitTest(e.X, e.Y);
-            if (i.RowIndex < 0 || GridViewSubjectList.Rows[i.RowIndex].Selected)
-                return;
-
-            GridViewSubjectList.ClearSelection();
-            GridViewSubjectList.Rows[i.RowIndex].Selected = true;
         }
     }
 }

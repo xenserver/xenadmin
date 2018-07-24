@@ -145,23 +145,34 @@
   <data name="ColumnExpand.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <data name="ColumnExpand.MinimumWidth" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
   <data name="ColumnExpand.Width" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>5</value>
   </data>
   <metadata name="ColumnTypeImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="dataGridViewCellStyle3.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
   <data name="ColumnTypeImage.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <data name="ColumnTypeImage.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
   <data name="ColumnTypeImage.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>5</value>
   </data>
   <metadata name="ColumnSubject.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -169,11 +180,17 @@
   <data name="ColumnSubject.HeaderText" xml:space="preserve">
     <value>Subject</value>
   </data>
+  <data name="ColumnSubject.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
   <metadata name="ColumnRoles.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnRoles.HeaderText" xml:space="preserve">
     <value>Roles</value>
+  </data>
+  <data name="ColumnRoles.Width" type="System.Int32, mscorlib">
+    <value>62</value>
   </data>
   <metadata name="ColumnStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -181,20 +198,8 @@
   <data name="ColumnStatus.HeaderText" xml:space="preserve">
     <value>Logged In</value>
   </data>
-  <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <metadata name="ColumnDummy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDummy.HeaderText" xml:space="preserve">
-    <value>Dummy</value>
-  </data>
-  <data name="ColumnDummy.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ColumnDummy.Width" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
+    <value>87</value>
   </data>
   <metadata name="contextMenuStripADBox.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -852,12 +857,6 @@
     <value>ColumnStatus</value>
   </data>
   <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDummy.Name" xml:space="preserve">
-    <value>ColumnDummy</value>
-  </data>
-  <data name="&gt;&gt;ColumnDummy.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
