@@ -1699,6 +1699,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VM &apos;{0}&apos; could not be shut down..
+        /// </summary>
+        public static string ACTION_REBOOT_HOST_VM_SHUTDOWN_ACK {
+            get {
+                return ResourceManager.GetString("ACTION_REBOOT_HOST_VM_SHUTDOWN_ACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Removing alerts....
         /// </summary>
         public static string ACTION_REMOVE_ALERTS_DESCRIPTION {
@@ -23671,7 +23680,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must shutdown and then restart the VM to finish the installation of the new DVD drive..
+        ///   Looks up a localized string similar to You must shut down and then restart the VM to finish the installation of the new DVD drive..
         /// </summary>
         public static string NEW_DVD_DRIVE_REBOOT {
             get {
@@ -23680,7 +23689,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must shutdown and then restart the VM to finish the installation of the new DVD drive.
+        ///   Looks up a localized string similar to You must shut down and then restart the VM to finish the installation of the new DVD drive.
         ///Once the VM has restarted click the Install [XenServer product] Tools menu item once again..
         /// </summary>
         public static string NEW_DVD_DRIVE_REBOOT_TOOLS {
@@ -24072,7 +24081,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to shutdown and then restart the VM before it can access the new disk..
+        ///   Looks up a localized string similar to You need to shut down and then restart the VM before it can access the new disk..
         /// </summary>
         public static string NEWDISKWIZARD_MESSAGE {
             get {
@@ -36470,7 +36479,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM..
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shut down and then restart the VM..
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {

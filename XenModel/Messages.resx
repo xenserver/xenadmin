@@ -663,6 +663,9 @@
   <data name="ACTION_PREPARING" xml:space="preserve">
     <value>Preparing...</value>
   </data>
+  <data name="ACTION_REBOOT_HOST_VM_SHUTDOWN_ACK" xml:space="preserve">
+    <value>VM '{0}' could not be shut down.</value>
+  </data>
   <data name="ACTION_REMOVE_ALERTS_DESCRIPTION" xml:space="preserve">
     <value>Removing alerts...</value>
   </data>
@@ -8213,7 +8216,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Never</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>You need to shutdown and then restart the VM before it can access the new disk.</value>
+    <value>You need to shut down and then restart the VM before it can access the new disk.</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>Disk Created</value>
@@ -8871,10 +8874,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Creating new DVD drive succeeded</value>
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT" xml:space="preserve">
-    <value>You must shutdown and then restart the VM to finish the installation of the new DVD drive.</value>
+    <value>You must shut down and then restart the VM to finish the installation of the new DVD drive.</value>
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
-    <value>You must shutdown and then restart the VM to finish the installation of the new DVD drive.
+    <value>You must shut down and then restart the VM to finish the installation of the new DVD drive.
 Once the VM has restarted click the Install [XenServer product] Tools menu item once again.</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
@@ -12611,7 +12614,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>View snapshot schedules</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
-    <value>The virtual network device changes will take effect when you shutdown and then restart the VM.</value>
+    <value>The virtual network device changes will take effect when you shut down and then restart the VM.</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>Virtual Network Device Changes</value>
