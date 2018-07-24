@@ -92,6 +92,7 @@ namespace XenAPI
         public const string OTHER_OPERATION_IN_PROGRESS = "OTHER_OPERATION_IN_PROGRESS";
         public const string PATCH_ALREADY_APPLIED = "PATCH_ALREADY_APPLIED";
         public const string UPDATE_ALREADY_APPLIED = "UPDATE_ALREADY_APPLIED";
+        public const string UPDATE_ALREADY_EXISTS = "UPDATE_ALREADY_EXISTS";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
