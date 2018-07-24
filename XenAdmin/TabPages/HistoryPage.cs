@@ -378,6 +378,15 @@ namespace XenAdmin.TabPages
             ToggleExpandedState(e.RowIndex);
         }
 
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex != columnActions.Index)
+                ToggleExpandedState(e.RowIndex);
+        }
+
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
