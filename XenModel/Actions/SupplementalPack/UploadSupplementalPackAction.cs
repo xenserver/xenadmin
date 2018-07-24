@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -162,7 +163,8 @@ namespace XenAdmin.Actions
                 {
                     try
                     {
-                        log.ErrorFormat("Deleting VDI '{0}' on a best effort basis.", vdiRef);
+                        log.ErrorFormat("Deleting VDI '{0}' on a best effort basis.", vdiRef.opaque_ref);
+                        Thread.Sleep(1000);
                         VDI.destroy(Session, vdiRef);
                     }
                     catch (Exception removeEx)
@@ -183,12 +185,6 @@ namespace XenAdmin.Actions
                 RelatedTask = null;
             }
 
-            if (localStorageHost != null)
-                VdiRefsToCleanUp.Add(localStorageHost, vdiRef);
-            else // shared SR
-                foreach (var server in servers)
-                    VdiRefsToCleanUp.Add(server, vdiRef);
-
             //introduce ISO for Ely and higher
             if (Helpers.ElyOrGreater(Connection))
             {
@@ -199,49 +195,44 @@ namespace XenAdmin.Actions
 
                     if (poolUpdate == null)
                         throw new Exception(Messages.UPDATE_ERROR_INTRODUCE); // This should not happen, because such case will result in a XAPI Failure. But this code has to be protected at this point.
-
-                    VdiRefsToCleanUp.Clear();
-                }
-                catch (Failure ex)
-                {
-                    if (ex.ErrorDescription != null && ex.ErrorDescription.Count > 1 && string.Equals("UPDATE_ALREADY_EXISTS", ex.ErrorDescription[0], StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        string uuidFound = ex.ErrorDescription[1];
-
-                        poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, System.StringComparison.InvariantCultureIgnoreCase));
-
-                        //clean-up the VDI we've just created
-                        try
-                        {
-                            log.ErrorFormat("Deleting VDI '{0}' on a best effor basis.", vdiRef);
-                            VDI.destroy(Session, vdiRef);
-
-                            //remove the vdi that have just been cleaned up
-                            var remaining = VdiRefsToCleanUp.Where(kvp => kvp.Value != null && kvp.Value.opaque_ref != vdiRef.opaque_ref).ToList();
-                            VdiRefsToCleanUp.Clear();
-                            remaining.ForEach(rem => VdiRefsToCleanUp.Add(rem.Key, rem.Value));
-                        }
-                        catch (Exception removeEx)
-                        {
-                            log.Error("Failed to remove VDI", removeEx);
-                        }
-                    }
-                    else
-                    {
-                        throw;
-                    }
                 }
                 catch (Exception ex)
                 {
-                    log.ErrorFormat("Upload failed when introducing update from VDI {0} on {1}: {2}", vdi.opaque_ref, Connection, ex.Message);
-                    poolUpdate = null;
+                    //clean-up the VDI we've just created
+                    try
+                    {
+                        log.ErrorFormat("Deleting VDI '{0}' on a best effor basis.", vdiRef);
+                        VDI.destroy(Session, vdiRef);
+                    }
+                    catch (Exception removeEx)
+                    {
+                        log.Error("Failed to remove VDI", removeEx);
+                    }
+                    
+                    var failure = ex as Failure;
+                    if (failure != null && failure.ErrorDescription != null && failure.ErrorDescription.Count > 1 && failure.ErrorDescription[0] == Failure.UPDATE_ALREADY_EXISTS)
+                    {
+                        string uuidFound = failure.ErrorDescription[1];
 
-                    throw;
+                        poolUpdate = Connection.Cache.Pool_updates.FirstOrDefault(pu => string.Equals(pu.uuid, uuidFound, StringComparison.InvariantCultureIgnoreCase));
+                    }
+                    else
+                    {
+                        log.Error("Failed to introduce the update", ex);
+                        poolUpdate = null;
+                        throw;
+                    }
                 }
             }
             else
             {
                 poolUpdate = null;
+
+                if (localStorageHost != null)
+                    VdiRefsToCleanUp.Add(localStorageHost, vdiRef);
+                else // shared SR
+                    foreach (var server in servers)
+                        VdiRefsToCleanUp.Add(server, vdiRef);
             }
 
             totalUploaded++;
