@@ -31,13 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -60,25 +56,26 @@ namespace XenAdmin.Dialogs
             this.subjects = subjects;
             this.pool = pool;
             roleAssignment = new Dictionary<Role,List<Subject>>();
+
+            var allAreGroups = subjects.Length > 0 && subjects.All(s => s.IsGroup);
+            var allAreUsers = subjects.Length > 0 && subjects.All(s => !s.IsGroup);
+
+            pictureBoxSubjectType.Image = allAreUsers ? Properties.Resources._000_User_h32bit_16 : Properties.Resources._000_UserAndGroup_h32bit_32;
+
             if (subjects.Length == 1)
             {
                 Subject subject = subjects[0];
                 string sName = (subject.DisplayName ?? subject.SubjectName ?? Messages.UNKNOWN_AD_USER).Ellipsise(30);
-                if (subject.IsGroup)
-                {
-                    labelBlurb.Text = String.Format(Messages.AD_SELECT_ROLE_GROUP, sName);
-                    pictureBoxSubjectType.Image = XenAdmin.Properties.Resources._000_UserAndGroup_h32bit_32;
-                }
-                else
-                {
-                    labelBlurb.Text = String.Format(Messages.AD_SELECT_ROLE_USER, sName);
-                    pictureBoxSubjectType.Image = XenAdmin.Properties.Resources._000_User_h32bit_16;
-                }
+                labelBlurb.Text = string.Format(allAreGroups ? Messages.AD_SELECT_ROLE_GROUP : Messages.AD_SELECT_ROLE_USER, sName);
             }
             else
             {
-                labelBlurb.Text = Messages.AD_SELECT_ROLE_MIXED;
-                pictureBoxSubjectType.Image = XenAdmin.Properties.Resources._000_User_h32bit_16;
+                if (allAreGroups)
+                    labelBlurb.Text = Messages.AD_SELECT_ROLE_GROUP_MANY;
+                else if (allAreUsers)
+                    labelBlurb.Text = Messages.AD_SELECT_ROLE_USER_MANY;
+                else
+                    labelBlurb.Text = Messages.AD_SELECT_ROLE_MIXED;
             }
 
             // Get the list of roles off the server and arrange them into rank
