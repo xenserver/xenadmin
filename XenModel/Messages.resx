@@ -1675,11 +1675,17 @@ Do you want to continue?</value>
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
     <value>Select the role you want to assign to group '{0}'. Each role inherits all the privileges of the subordinate role below it in the list.</value>
   </data>
+  <data name="AD_SELECT_ROLE_GROUP_MANY" xml:space="preserve">
+    <value>Select the role you want to assign to these groups. Each role inherits all the privileges of the subordinate role below it in the list.</value>
+  </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
     <value>Select the role you want to assign to these users and groups. Each role inherits all the privileges of the subordinate role below it in the list.</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
     <value>Select the role you want to assign to user '{0}'. Each role inherits all the privileges of the subordinate role below it in the list.</value>
+  </data>
+  <data name="AD_SELECT_ROLE_USER_MANY" xml:space="preserve">
+    <value>Select the role you want to assign to these users. Each role inherits all the privileges of the subordinate role below it in the list.</value>
   </data>
   <data name="AD_SELECT_SINGLE_SUBJECT" xml:space="preserve">
     <value>Select a single subject to change their role</value>
