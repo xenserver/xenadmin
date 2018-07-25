@@ -56,13 +56,13 @@ namespace XenAdmin.TabPages
         /// </summary>
         private Pool pool;
         private Host master;
-        private ActionProgressDialog removeUserDialog;
-        private ResolvingSubjectsDialog resolvingSubjectsDialog;
         private Thread _loggedInStatusUpdater;
         /// <summary>
         /// We keep a reference to this prompt to make repeated attempts to enable AD more user friendly (remembering the previously tried creds)
         /// </summary>
         private AdPasswordPrompt joinPrompt;
+
+        private bool _updateInProgress;
 
         private IXenObject _xenObject;
         private readonly CollectionChangeEventHandler Pool_CollectionChangedWithInvoke;
@@ -155,12 +155,6 @@ namespace XenAdmin.TabPages
             pool.PropertyChanged -= pool_PropertyChanged;
             if (master != null)
                 master.PropertyChanged -= master_PropertyChanged;
-
-            if (removeUserDialog != null)
-                removeUserDialog.Dispose();
-
-            if (resolvingSubjectsDialog != null)
-                resolvingSubjectsDialog.Dispose();
 
             if (pool.Connection.Session != null)
                 pool.Connection.Session.PropertyChanged -= Session_PropertyChanged;
@@ -430,6 +424,7 @@ namespace XenAdmin.TabPages
 
             try
             {
+                _updateInProgress = true;
                 GridViewSubjectList.SuspendLayout();
                 // Populate list of authenticated users
                 GridViewSubjectList.Rows.Clear();
@@ -465,6 +460,8 @@ namespace XenAdmin.TabPages
             finally
             {
                 GridViewSubjectList.ResumeLayout();
+                _updateInProgress = false;
+                EnableButtons();
             }
         }
 
@@ -499,6 +496,7 @@ namespace XenAdmin.TabPages
                 finally
                 {
                     GridViewSubjectList.ResumeLayout();
+                    EnableButtons();
                 }
             });
         }
@@ -543,8 +541,7 @@ namespace XenAdmin.TabPages
 
                                 r.LoggedIn = loggedSids.ContainsKey(r.subject.subject_identifier);
                             }
-                            // This will update the enablement of the buttons - more specifically the log out one
-                            GridViewSubjectList_SelectionChanged(this, null);
+                            EnableButtons();
                         });
                     }
                     lock (statusUpdaterLock)
@@ -829,8 +826,9 @@ namespace XenAdmin.TabPages
             Program.AssertOnEventThread();
             if (!buttonAdd.Enabled)
                 return;
-            resolvingSubjectsDialog = new ResolvingSubjectsDialog(pool);
-            resolvingSubjectsDialog.ShowDialog();
+
+            using (var dlog = new ResolvingSubjectsDialog(pool))
+                dlog.ShowDialog();
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
@@ -907,12 +905,19 @@ namespace XenAdmin.TabPages
                     }
                 }
             }
-            removeUserDialog = new ActionProgressDialog(
-                new AddRemoveSubjectsAction(pool, new List<string>(), subjectsToRemove), ProgressBarStyle.Continuous);
-            removeUserDialog.ShowDialog();
+
+            var action = new AddRemoveSubjectsAction(pool, new List<string>(), subjectsToRemove);
+            using (var dlog = new ActionProgressDialog(action, ProgressBarStyle.Continuous))
+                dlog.ShowDialog();
         }
 
         private void GridViewSubjectList_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!_updateInProgress)
+                EnableButtons();
+        }
+
+        private void EnableButtons()
         {
             Program.AssertOnEventThread();
             if (GridViewSubjectList.SelectedRows.Count < 1)
