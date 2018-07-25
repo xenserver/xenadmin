@@ -90,8 +90,8 @@ namespace XenAdmin.TabPages
                     return;
                 }
 
-                pool.PropertyChanged += new PropertyChangedEventHandler(pool_PropertyChanged);
-                pool.Connection.Session.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Session_PropertyChanged);
+                pool.PropertyChanged += pool_PropertyChanged;
+                pool.Connection.Session.PropertyChanged += Session_PropertyChanged;
                 RefreshMaster();
 
                 if (_loggedInStatusUpdater == null)
@@ -111,7 +111,7 @@ namespace XenAdmin.TabPages
             ColumnSubject.CellTemplate = new KeyValuePairCell();
             tTipLogoutButton.SetToolTip(Messages.AD_CANNOT_MODIFY_ROOT);
             tTipRemoveButton.SetToolTip(Messages.AD_CANNOT_MODIFY_ROOT);
-            ConnectionsManager.History.CollectionChanged += new CollectionChangeEventHandler(History_CollectionChanged);
+            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             Text = Messages.ACTIVE_DIRECTORY_TAB_TITLE;
             joinPrompt = new AdPasswordPrompt(true, null);
         }
@@ -126,14 +126,12 @@ namespace XenAdmin.TabPages
         void Pool_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             pool = Helpers.GetPoolOfOne(_xenObject.Connection);
-
-            if (pool != null)
-                _xenObject.Connection.Cache.DeregisterCollectionChanged<Pool>(Pool_CollectionChangedWithInvoke);
-            else
+            if (pool == null)
                 return;
 
-            pool.PropertyChanged += new PropertyChangedEventHandler(pool_PropertyChanged);
-            pool.Connection.Session.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Session_PropertyChanged);
+            _xenObject.Connection.Cache.DeregisterCollectionChanged<Pool>(Pool_CollectionChangedWithInvoke);
+            pool.PropertyChanged += pool_PropertyChanged;
+            pool.Connection.Session.PropertyChanged += Session_PropertyChanged;
             RefreshMaster();
         }
 
@@ -154,9 +152,9 @@ namespace XenAdmin.TabPages
         private void ClearHandles()
         {
             pool.Connection.Cache.DeregisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
-            pool.PropertyChanged -= new PropertyChangedEventHandler(pool_PropertyChanged);
+            pool.PropertyChanged -= pool_PropertyChanged;
             if (master != null)
-                master.PropertyChanged -= new PropertyChangedEventHandler(master_PropertyChanged);
+                master.PropertyChanged -= master_PropertyChanged;
 
             if (removeUserDialog != null)
                 removeUserDialog.Dispose();
@@ -165,7 +163,7 @@ namespace XenAdmin.TabPages
                 resolvingSubjectsDialog.Dispose();
 
             if (pool.Connection.Session != null)
-                pool.Connection.Session.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(Session_PropertyChanged);
+                pool.Connection.Session.PropertyChanged -= Session_PropertyChanged;
         }
 
         public override void PageHidden()
@@ -207,9 +205,9 @@ namespace XenAdmin.TabPages
                 Program.Invoke(this, checkAdType);
         }
 
-        void Session_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void Session_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.BeginInvoke(this,RepopulateListBox);
+            Program.BeginInvoke(this, RepopulateListBox);
         }
 
         /// <summary>
@@ -218,7 +216,7 @@ namespace XenAdmin.TabPages
         /// </summary>
         /// <param name="sender1"></param>
         /// <param name="e"></param>
-        void master_PropertyChanged(object sender1, System.ComponentModel.PropertyChangedEventArgs e)
+        void master_PropertyChanged(object sender1, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "external_auth_type" || e.PropertyName == "name_label")
             {
@@ -232,7 +230,7 @@ namespace XenAdmin.TabPages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void pool_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "name_label")
             {
@@ -253,11 +251,9 @@ namespace XenAdmin.TabPages
             GridViewSubjectList.Enabled = enable;
             if (enable)
             {
-                // Grid views do a bad job of looking disabled - give it a hand
-                //GridViewSubjectList.ColumnHeadersVisible = true;
                 LabelGridViewDisabled.Visible = false;
                 RepopulateListBox();
-                // Expand admin row
+
                 foreach (AdSubjectRow r in GridViewSubjectList.Rows)
                 {
                     if (r.IsLocalRootRow)
@@ -269,8 +265,6 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                // Grid views do a bad job of looking disabled - give it a hand
-                //GridViewSubjectList.ColumnHeadersVisible = false;
                 LabelGridViewDisabled.Visible = true;
                 GridViewSubjectList.Rows.Clear();
             }
@@ -474,7 +468,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        void subject_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        private void subject_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Program.BeginInvoke(this, () =>
                                           {
@@ -906,7 +900,6 @@ namespace XenAdmin.TabPages
                 return;
 
             bool adminSelected = GridViewSubjectList.Rows[0].Selected;
-            bool multipleSelected = GridViewSubjectList.SelectedRows.Count > 1;
 
             tTipChangeRole.SuppressTooltip = ButtonChangeRoles.Enabled = !adminSelected;
             tTipChangeRole.SetToolTip(Messages.AD_CANNOT_MODIFY_ROOT);
@@ -1164,7 +1157,6 @@ namespace XenAdmin.TabPages
                 if (r.IsLocalRootRow || !r.LoggedIn)
                     continue;
 
-                // we suicide last
                 if (session.UserSid == r.subject.subject_identifier)
                 {
                     continue;
@@ -1177,7 +1169,6 @@ namespace XenAdmin.TabPages
             }
             if (suicide)
             {
-                //bye bye
                 DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(pool.Connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
                     {
                         Session.logout_subject_identifier(s, session.UserSid);
