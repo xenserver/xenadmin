@@ -243,7 +243,7 @@ namespace XenAdmin.TabPages
         {
             Program.AssertOnEventThread();
             GridViewSubjectList.Enabled = enable;
-            if (enable)
+            if (GridViewSubjectList.Enabled)
             {
                 LabelGridViewDisabled.Visible = false;
                 RepopulateListBox();
@@ -259,8 +259,14 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                LabelGridViewDisabled.Visible = true;
+                foreach (AdSubjectRow row in GridViewSubjectList.Rows)
+                {
+                    if (row.IsLocalRootRow)
+                        continue;
+                    row.subject.PropertyChanged -= subject_PropertyChanged;
+                }
                 GridViewSubjectList.Rows.Clear();
+                LabelGridViewDisabled.Visible = true;
             }
         }
 
@@ -302,23 +308,9 @@ namespace XenAdmin.TabPages
             }
         }
 
-        internal void SubjectCollectionChanged(object sender, EventArgs e)
+        private void SubjectCollectionChanged(object sender, EventArgs e)
         {
-            Program.BeginInvoke(this, () =>
-                                          {
-
-                                              if (!GridViewSubjectList.Enabled)
-                                                  return;
-
-                                              foreach (AdSubjectRow row in GridViewSubjectList.Rows)
-                                              {
-                                                  if (row.IsLocalRootRow)
-                                                      continue;
-                                                  row.subject.PropertyChanged -=
-                                                      new PropertyChangedEventHandler(subject_PropertyChanged);
-                                              }
-                                              RepopulateListBox();
-                                          });
+            Program.BeginInvoke(this, RepopulateListBox);
         }
 
         private string Domain
@@ -394,6 +386,9 @@ namespace XenAdmin.TabPages
         {
             Program.AssertOnEventThread();
 
+            if (!GridViewSubjectList.Enabled)
+                return;
+
             Dictionary<string, bool> selectedSubjectUuids = new Dictionary<string, bool>();
             Dictionary<string, bool> expandedSubjectUuids = new Dictionary<string, bool>();
             bool rootExpanded = false;
@@ -426,7 +421,14 @@ namespace XenAdmin.TabPages
             {
                 _updateInProgress = true;
                 GridViewSubjectList.SuspendLayout();
-                // Populate list of authenticated users
+
+                foreach (AdSubjectRow row in GridViewSubjectList.Rows)
+                {
+                    if (row.IsLocalRootRow)
+                        continue;
+                    row.subject.PropertyChanged -= subject_PropertyChanged;
+                }
+
                 GridViewSubjectList.Rows.Clear();
 
                 var rows = new List<DataGridViewRow> {new AdSubjectRow(null)}; //local root account
