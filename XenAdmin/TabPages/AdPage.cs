@@ -470,21 +470,37 @@ namespace XenAdmin.TabPages
 
         private void subject_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.BeginInvoke(this, () =>
-                                          {
+            if (e.PropertyName != "roles")
+                return;
 
-                                              if (!GridViewSubjectList.Enabled || e.PropertyName != "roles")
-                                                  return;
+            var subject = sender as Subject;
+            if (subject == null)
+                return;
 
-                                              foreach (AdSubjectRow row in GridViewSubjectList.Rows)
-                                              {
-                                                  if (row.IsLocalRootRow)
-                                                      continue;
-                                                  row.subject.PropertyChanged -=
-                                                      new PropertyChangedEventHandler(subject_PropertyChanged);
-                                              }
-                                              RepopulateListBox();
-                                          });
+            Program.Invoke(this, () =>
+            {
+                if (!GridViewSubjectList.Enabled)
+                    return;
+
+                var found = (from DataGridViewRow row in GridViewSubjectList.Rows
+                    let adRow = row as AdSubjectRow
+                    where adRow != null && adRow.subject != null && adRow.subject.opaque_ref == subject.opaque_ref
+                    select adRow).FirstOrDefault();
+
+                try
+                {
+                    GridViewSubjectList.SuspendLayout();
+
+                    if (found == null)
+                        GridViewSubjectList.Rows.Add(new AdSubjectRow(subject));
+                    else
+                        found.RefreshCellContent(subject);
+                }
+                finally
+                {
+                    GridViewSubjectList.ResumeLayout();
+                }
+            });
         }
 
 
@@ -652,8 +668,11 @@ namespace XenAdmin.TabPages
                 RefreshCellContent();
             }
 
-            public void RefreshCellContent()
+            public void RefreshCellContent(Subject subj = null)
             {
+                if (subj != null)
+                    subject = subj;
+
                 _cellExpander.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
                 _cellGroupOrUser.Value = IsLocalRootRow || !subject.IsGroup ? Resources._000_User_h32bit_16 : Resources._000_UserAndGroup_h32bit_32;
                 _cellSubjectInfo.Value = expanded ? expandedSubjectInfo : contractedSubjectInfo;
