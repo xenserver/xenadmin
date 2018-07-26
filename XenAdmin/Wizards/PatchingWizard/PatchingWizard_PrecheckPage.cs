@@ -58,6 +58,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<Host> SelectedServers = new List<Host>();
         private readonly List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
         private AsyncAction resolvePrechecksAction;
+        private List<DataGridViewRow> allRows = new List<DataGridViewRow>();
 
         private bool _isRecheckQueued;
         public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
@@ -197,6 +198,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PreCheckHostRow rowHost = e.UserState as PreCheckHostRow;
                 if (rowHost != null)
                 {
+                    allRows.Add(rowHost);
+
                     if (checkBoxViewPrecheckFailuresOnly.Checked && rowHost.Problem != null || !checkBoxViewPrecheckFailuresOnly.Checked)
                         AddRowToGridView(rowHost);
                 }
@@ -205,6 +208,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var row = e.UserState as DataGridViewRow;
                     if (row != null && !dataGridView1.Rows.Contains(row))
                     {
+                        allRows.Add(row);
                         AddRowToGridView(row);
                     }
                 }
@@ -287,6 +291,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 int totalChecks = groups.Sum(c => c.Value == null ? 0 : c.Value.Count);
                 int doneCheckIndex = 0;
+
+                allRows.Clear();
 
                 foreach (var group in groups)
                 {
@@ -949,7 +955,31 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshRechecks();
+            RefreshDataGridViewList();
+        }
+
+        private void RefreshDataGridViewList()
+        {
+            lock (_update_grid_lock)
+            {
+                dataGridView1.Rows.Clear();
+
+                foreach (var row in allRows)
+                {
+                    var hostRow = row as PreCheckHostRow;
+                    if (hostRow != null)
+                    {
+                        if (hostRow.Problem != null || !checkBoxViewPrecheckFailuresOnly.Checked)
+                        {
+                            AddRowToGridView(hostRow);
+                        }
+                    }
+                    else
+                    {
+                        AddRowToGridView(row);
+                    }
+                }
+            }
         }
 
         private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
