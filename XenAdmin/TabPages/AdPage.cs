@@ -60,12 +60,10 @@ namespace XenAdmin.TabPages
         private IXenConnection _connection;
 
         private Thread _loggedInStatusUpdater;
-        /// <summary>
-        /// We keep a reference to this prompt to make repeated attempts to enable AD more user friendly (remembering the previously tried creds)
-        /// </summary>
-        private AdPasswordPrompt joinPrompt;
-
         private bool _updateInProgress;
+
+        private string _storedDomain;
+        private string _storedUsername;
 
         private readonly CollectionChangeEventHandler Pool_CollectionChangedWithInvoke;
         public IXenObject XenObject
@@ -109,7 +107,6 @@ namespace XenAdmin.TabPages
             tTipRemoveButton.SetToolTip(Messages.AD_CANNOT_MODIFY_ROOT);
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             Text = Messages.ACTIVE_DIRECTORY_TAB_TITLE;
-            joinPrompt = new AdPasswordPrompt(true, null);
         }
 
         /// <summary>
@@ -685,21 +682,22 @@ namespace XenAdmin.TabPages
             if (buttonJoinLeave.Text == Messages.AD_JOIN_DOMAIN)
             {
                 // We're enabling AD            
-                // Obtain domain, username and password
+                // Obtain domain, username and password; store the domain and username
+                // so the user won't have to retype it for future join attempts
 
-                joinPrompt.ShowDialog(this);
-                // Blocking for a long time, check we haven't had the dialog disposed under us
-                if (Disposing || IsDisposed)
-                    return;
-
-                if (joinPrompt.DialogResult == DialogResult.Cancel)
+                using (var joinPrompt = new AdPasswordPrompt(true)
+                    {Domain = _storedDomain, Username = _storedUsername})
                 {
-                    joinPrompt.ClearPassword();
-                    return;
-                }
+                    var result = joinPrompt.ShowDialog(this);
+                    _storedDomain = joinPrompt.Domain;
+                    _storedUsername = joinPrompt.Username;
 
-                new EnableAdAction(_connection, joinPrompt.Domain, joinPrompt.Username, joinPrompt.Password, false).RunAsync();
-                joinPrompt.ClearPassword();
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    new EnableAdAction(_connection, joinPrompt.Domain,
+                        joinPrompt.Username, joinPrompt.Password, false).RunAsync();
+                }
             }
             else
             {
@@ -751,7 +749,6 @@ namespace XenAdmin.TabPages
                         return;
                 }
 
-
                 Host master = Helpers.GetMaster(_connection);
                 if (master == null)
                 {
@@ -762,7 +759,7 @@ namespace XenAdmin.TabPages
 
                 using (var passPrompt = new AdPasswordPrompt(false, master.external_auth_service_name))
                 {
-                    var result = passPrompt.ShowDialog(Program.MainWindow);
+                    var result = passPrompt.ShowDialog(this);
                     if (result == DialogResult.Cancel)
                         return;
 
@@ -785,7 +782,7 @@ namespace XenAdmin.TabPages
                 return;
 
             using (var dlog = new ResolvingSubjectsDialog(_connection))
-                dlog.ShowDialog();
+                dlog.ShowDialog(this);
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
@@ -865,7 +862,7 @@ namespace XenAdmin.TabPages
 
             var action = new AddRemoveSubjectsAction(_connection, new List<string>(), subjectsToRemove);
             using (var dlog = new ActionProgressDialog(action, ProgressBarStyle.Continuous))
-                dlog.ShowDialog();
+                dlog.ShowDialog(this);
         }
 
         private void GridViewSubjectList_SelectionChanged(object sender, EventArgs e)
