@@ -3869,7 +3869,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Join Domain.
+        ///   Looks up a localized string similar to &amp;Join Domain....
         /// </summary>
         public static string AD_JOIN_DOMAIN {
             get {
@@ -3920,7 +3920,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to L&amp;eave Domain.
+        ///   Looks up a localized string similar to L&amp;eave Domain....
         /// </summary>
         public static string AD_LEAVE_DOMAIN {
             get {

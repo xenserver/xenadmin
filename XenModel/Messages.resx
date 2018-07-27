@@ -1586,7 +1586,7 @@ Host: {1}</value>
     <value>AD Authentication</value>
   </data>
   <data name="AD_JOIN_DOMAIN" xml:space="preserve">
-    <value>&amp;Join Domain</value>
+    <value>&amp;Join Domain...</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB" xml:space="preserve">
     <value>Pool '{0}' has Active Directory authentication enabled. In order for '{1}' to join the pool, it must share the same AD configuration.
@@ -1607,7 +1607,7 @@ You must use a user account with sufficient privileges.</value>
 Do you want to continue?</value>
   </data>
   <data name="AD_LEAVE_DOMAIN" xml:space="preserve">
-    <value>L&amp;eave Domain</value>
+    <value>L&amp;eave Domain...</value>
   </data>
   <data name="AD_LEAVE_WARNING" xml:space="preserve">
     <value>You are currently connected to pool '{0}' using Active Directory authentication.
