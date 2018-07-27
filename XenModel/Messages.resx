@@ -12061,7 +12061,7 @@ Check your settings and try again.</value>
     <value>No Default SR on Pool '{0}'</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
-    <value>There are no servers available to migrate the VM {0} to.</value>
+    <value>There are no servers available to migrate the VM '{0}' on '{1}' to.</value>
   </data>
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: There is not enough memory available on other servers to migrate all the VMs off this server.</value>
