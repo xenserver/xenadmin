@@ -256,8 +256,16 @@ namespace XenAdmin.TabPages
             {
                 log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
                 OnMasterUnavailable();
+                return;
             }
-            else if (HelpersGUI.FindActiveAdAction(_connection) != null)
+
+            var action = (from ActionBase act in ConnectionsManager.History
+                let async = act as AsyncAction
+                where async != null && !async.IsCompleted && !async.Cancelled && async.Connection == _connection
+                      && (async is EnableAdAction || async is DisableAdAction)
+                select async).FirstOrDefault();
+
+            if (action != null)
             {
                 OnAdConfiguring();
             }
@@ -272,7 +280,7 @@ namespace XenAdmin.TabPages
                     log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool master '{1}' for pool '{2}'; assuming AD enabled on pool.",
                         master.external_auth_type, Helpers.GetName(master), Helpers.GetName(_connection));
                 }
-                
+
                 OnAdEnabled();
             }
         }
@@ -695,8 +703,7 @@ namespace XenAdmin.TabPages
                     if (result == DialogResult.Cancel)
                         return;
 
-                    new EnableAdAction(_connection, joinPrompt.Domain,
-                        joinPrompt.Username, joinPrompt.Password, false).RunAsync();
+                    new EnableAdAction(_connection, joinPrompt.Domain, joinPrompt.Username, joinPrompt.Password).RunAsync();
                 }
             }
             else

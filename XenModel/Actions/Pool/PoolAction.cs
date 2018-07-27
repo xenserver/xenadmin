@@ -165,7 +165,7 @@ namespace XenAdmin.Actions
                     foreach (Host h in hostsToAdConfigure)
                     {
                         action = new EnableAdAction(h.Connection, poolMaster.external_auth_service_name,
-                                adUserAndPassword.Username, adUserAndPassword.Password, false)
+                                adUserAndPassword.Username, adUserAndPassword.Password)
                             {Host = h};
                         action.RunExternal(null);
                     }

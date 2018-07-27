@@ -49,8 +49,8 @@ namespace XenAdmin.Actions
         private readonly string user;
         private readonly string password;
 
-        public EnableAdAction(IXenConnection connection, string domain, string user, string password, bool hideFromHistory)
-            : base(connection, string.Format(Messages.ENABLING_AD_ON, Helpers.GetName(connection).Ellipsise(50)), Messages.ENABLING_AD, hideFromHistory)
+        public EnableAdAction(IXenConnection connection, string domain, string user, string password)
+            : base(connection, string.Format(Messages.ENABLING_AD_ON, Helpers.GetName(connection).Ellipsise(50)), Messages.ENABLING_AD, false)
         {
             if (string.IsNullOrEmpty(domain))
                 throw new ArgumentException("domain");
