@@ -41,6 +41,7 @@ using System.Threading;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Actions;
+using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenCenterLib;
 
@@ -56,6 +57,8 @@ namespace XenAdmin.TabPages
         /// </summary>
         private Pool pool;
         private Host master;
+        private IXenConnection _connection;
+
         private Thread _loggedInStatusUpdater;
         /// <summary>
         /// We keep a reference to this prompt to make repeated attempts to enable AD more user friendly (remembering the previously tried creds)
@@ -64,7 +67,6 @@ namespace XenAdmin.TabPages
 
         private bool _updateInProgress;
 
-        private IXenObject _xenObject;
         private readonly CollectionChangeEventHandler Pool_CollectionChangedWithInvoke;
         public IXenObject XenObject
         {
@@ -72,27 +74,21 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                if (_xenObject != null)
-                {
-                    ClearHandles();
-                }
+                ClearHandles();
 
-                _xenObject = value;
-
-                if (_xenObject == null)
+                _connection = value == null ? null : value.Connection;
+                if (_connection == null)
                     return;
 
-                pool = Helpers.GetPoolOfOne(_xenObject.Connection);
-                if (pool == null)
-                {
-                    // Cache not populated
-                    _xenObject.Connection.Cache.RegisterCollectionChanged<Pool>(Pool_CollectionChangedWithInvoke);
-                    return;
-                }
+                pool = Helpers.GetPoolOfOne(_connection);
+                if (pool == null) // Cache not populated
+                    _connection.Cache.RegisterCollectionChanged<Pool>(Pool_CollectionChangedWithInvoke);
+                else
+                    pool.PropertyChanged += pool_PropertyChanged;
 
-                pool.PropertyChanged += pool_PropertyChanged;
-                pool.Connection.Session.PropertyChanged += Session_PropertyChanged;
-                RefreshMaster();
+                if (_connection.Session != null)
+                    _connection.Session.PropertyChanged += Session_PropertyChanged;
+                checkAdType();
 
                 if (_loggedInStatusUpdater == null)
                 {
@@ -125,25 +121,24 @@ namespace XenAdmin.TabPages
         /// <param name="e"></param>
         void Pool_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            pool = Helpers.GetPoolOfOne(_xenObject.Connection);
-            if (pool == null)
+            pool = Helpers.GetPoolOfOne(_connection);
+            if (pool == null) // Cache not populated
                 return;
 
-            _xenObject.Connection.Cache.DeregisterCollectionChanged<Pool>(Pool_CollectionChangedWithInvoke);
+            _connection.Cache.DeregisterCollectionChanged<Pool>(Pool_CollectionChangedWithInvoke);
             pool.PropertyChanged += pool_PropertyChanged;
-            pool.Connection.Session.PropertyChanged += Session_PropertyChanged;
-            RefreshMaster();
+
+            Program.Invoke(this, checkAdType);
         }
 
-        /// <summary>
-        /// Sets the references to the pool master and updates the tab with the correct configuration. Remember to de-reference events
-        /// on the old master before running this method.
-        /// </summary>
         private void RefreshMaster()
         {
-            master = _xenObject.Connection.Resolve(pool.master);
-            master.PropertyChanged += new PropertyChangedEventHandler(master_PropertyChanged);
-            Program.BeginInvoke(this,checkAdType);
+            if (master != null)
+                master.PropertyChanged -= master_PropertyChanged;
+
+            master = Helpers.GetMaster(_connection);
+            if (master != null)
+                master.PropertyChanged += master_PropertyChanged;
         }
 
         /// <summary>
@@ -151,13 +146,18 @@ namespace XenAdmin.TabPages
         /// </summary>
         private void ClearHandles()
         {
-            pool.Connection.Cache.DeregisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
-            pool.PropertyChanged -= pool_PropertyChanged;
+            if (pool != null)
+                pool.PropertyChanged -= pool_PropertyChanged;
+
             if (master != null)
                 master.PropertyChanged -= master_PropertyChanged;
 
-            if (pool.Connection.Session != null)
-                pool.Connection.Session.PropertyChanged -= Session_PropertyChanged;
+            if (_connection != null)
+            {
+                _connection.Cache.DeregisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
+                if (_connection.Session != null)
+                    _connection.Session.PropertyChanged -= Session_PropertyChanged;
+            }
         }
 
         public override void PageHidden()
@@ -166,36 +166,27 @@ namespace XenAdmin.TabPages
         }
 
         /// <summary>
-        /// We keep track of the actions in currently running so we can disable the tab if we are in the middle of configuring AD.
+        /// We keep track of the actions currently running so we can disable the tab if we are in the middle of configuring AD.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            //Program.AssertOnEventThread();
-            Program.BeginInvoke(Program.MainWindow, () =>
-                                                        {
-                                                            if (e.Action == CollectionChangeAction.Add &&
-                                                                (e.Element is EnableAdAction ||
-                                                                 e.Element is DisableAdAction))
-                                                            {
-                                                                AsyncAction action = (AsyncAction) e.Element;
-                                                                action.Completed += action_Completed;
+            if (e.Action == CollectionChangeAction.Add &&
+                (e.Element is EnableAdAction || e.Element is DisableAdAction))
+            {
+                AsyncAction action = (AsyncAction)e.Element;
+                action.Completed += action_Completed;
 
-                                                                if (_xenObject != null &&
-                                                                    _xenObject.Connection == action.Connection)
-                                                                    checkAdType();
-                                                            }
-                                                        });
+                if (_connection != null && _connection == action.Connection)
+                    Program.Invoke(this, checkAdType);
+            }
         }
-
 
         void action_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
             action.Completed -= action_Completed;
 
-            if (_xenObject != null && _xenObject.Connection == action.Connection)
+            if (_connection != null && _connection == action.Connection)
                 Program.Invoke(this, checkAdType);
         }
 
@@ -213,30 +204,18 @@ namespace XenAdmin.TabPages
         void master_PropertyChanged(object sender1, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "external_auth_type" || e.PropertyName == "name_label")
-            {
                 Program.Invoke(this, checkAdType);
-            }
         }
 
         /// <summary>
-        /// various labels display the name of the pool and should also be updated if that changes. Additionally if the pool master changes
-        /// we need to update our event handles. There is a sanity check in the checkAdType() method in case this event is stuck in a queue.
+        /// Various labels display the name of the pool and should also be updated if that changes.
+        /// Additionally if the pool master changes we need to update our event handles.
+        /// There is a sanity check in the checkAdType() method in case this event is stuck in a queue.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "name_label")
-            {
+            if (e.PropertyName == "name_label" || e.PropertyName == "master")
                 Program.Invoke(this, checkAdType);
-            }
-            else if (e.PropertyName == "master")
-            {
-                if (master != null)
-                    master.PropertyChanged -= new PropertyChangedEventHandler(master_PropertyChanged);
-
-                Program.Invoke(this, RefreshMaster);
-            }
         }
 
         private void SetSubjectListEnable(bool enable)
@@ -273,37 +252,30 @@ namespace XenAdmin.TabPages
         private void checkAdType()
         {
             Program.AssertOnEventThread();
+            //refresh the master in case the cache is slow
+            RefreshMaster();
+
             if (master == null)
             {
-                log.WarnFormat("Could not resolve pool master for connection '{0}' in constructor; disabling.",
-                    Helpers.GetName(pool.Connection).Ellipsise(100));
+                log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
                 OnMasterUnavailable();
-                return;
             }
-            // Sanity check in case the master change events are queued up
-            if (pool.master.opaque_ref != master.opaque_ref)
-            {
-                master.PropertyChanged -= new PropertyChangedEventHandler(master_PropertyChanged);
-                RefreshMaster();
-            }
-            AsyncAction a = HelpersGUI.FindActiveAdAction(master.Connection);
-            if (a != null)
+            else if (HelpersGUI.FindActiveAdAction(_connection) != null)
             {
                 OnAdConfiguring();
             }
-            else if (master.external_auth_type == Auth.AUTH_TYPE_NONE)
+            else if (master.external_auth_type == Auth.AUTH_TYPE_NONE) // AD is not yet configured
             {
-                // AD is not yet configured.
                 OnAdDisabled();
             }
-            else
+            else // AD is already configured
             {
                 if (master.external_auth_type != Auth.AUTH_TYPE_AD)
                 {
-                    log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool master '{1}' for pool '{2}' in constructor; assuming AD enabled on pool.",
-                        master.external_auth_type, Helpers.GetName(master).Ellipsise(100), Helpers.GetName(pool).Ellipsise(100));
+                    log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool master '{1}' for pool '{2}'; assuming AD enabled on pool.",
+                        master.external_auth_type, Helpers.GetName(master), Helpers.GetName(_connection));
                 }
-                // AD is already configured.
+                
                 OnAdEnabled();
             }
         }
@@ -319,20 +291,14 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                if (pool == null)
-                    return "";
-                // Resolve master
-                Host master = Helpers.GetMaster(pool.Connection);
+                Host master = Helpers.GetMaster(_connection);
                 if (master == null)
                 {
-                    log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.",
-                        Helpers.GetName(pool.Connection).Ellipsise(50));
+                    log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
                     return Messages.UNKNOWN;
                 }
 
-                // Determine AD domain from master
-                string domain = master.external_auth_service_name;
-                return domain.Ellipsise(30);
+                return master.external_auth_service_name;
             }
         }
 
@@ -344,8 +310,8 @@ namespace XenAdmin.TabPages
             SetSubjectListEnable(true);
             buttonJoinLeave.Text = Messages.AD_LEAVE_DOMAIN;
             buttonJoinLeave.Enabled = true;
-            labelBlurb.Text = string.Format(pool.name_label.Length > 0 ? Messages.AD_CONFIGURED_BLURB : Messages.AD_CONFIGURED_BLURB_HOST, Helpers.GetName(pool).Ellipsise(70), Domain);
-            pool.Connection.Cache.RegisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
+            labelBlurb.Text = string.Format(Helpers.GetPool(_connection) != null ? Messages.AD_CONFIGURED_BLURB : Messages.AD_CONFIGURED_BLURB_HOST, Helpers.GetName(_connection).Ellipsise(70), Domain.Ellipsise(30));
+            _connection.Cache.RegisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
         }
 
         private void OnAdDisabled()
@@ -356,9 +322,9 @@ namespace XenAdmin.TabPages
             SetSubjectListEnable(false);
             buttonJoinLeave.Text = Messages.AD_JOIN_DOMAIN;
             buttonJoinLeave.Enabled = true;
-            labelBlurb.Text = string.Format(pool.name_label.Length > 0 ? Messages.AD_NOT_CONFIGURED_BLURB : Messages.AD_NOT_CONFIGURED_BLURB_HOST,
-                Helpers.GetName(pool).Ellipsise(70));
-            pool.Connection.Cache.DeregisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
+            labelBlurb.Text = string.Format(Helpers.GetPool(_connection) != null ? Messages.AD_NOT_CONFIGURED_BLURB : Messages.AD_NOT_CONFIGURED_BLURB_HOST,
+                Helpers.GetName(_connection).Ellipsise(70));
+            _connection.Cache.DeregisterBatchCollectionChanged<Subject>(SubjectCollectionChanged);
         }
 
         private void OnAdConfiguring()
@@ -368,8 +334,8 @@ namespace XenAdmin.TabPages
             flowLayoutPanel1.Enabled = false;
             SetSubjectListEnable(false);
             buttonJoinLeave.Enabled = false;
-            labelBlurb.Text = string.Format(pool.name_label.Length > 0 ? Messages.AD_CONFIGURING_BLURB : Messages.AD_CONFIGURING_BLURB_HOST,
-                Helpers.GetName(pool).Ellipsise(70));
+            labelBlurb.Text = string.Format(Helpers.GetPool(_connection) != null ? Messages.AD_CONFIGURING_BLURB : Messages.AD_CONFIGURING_BLURB_HOST,
+                Helpers.GetName(_connection).Ellipsise(70));
         }
 
         private void OnMasterUnavailable()
@@ -433,7 +399,7 @@ namespace XenAdmin.TabPages
 
                 var rows = new List<DataGridViewRow> {new AdSubjectRow(null)}; //local root account
 
-                foreach (Subject subject in pool.Connection.Cache.Subjects) //all other subjects in the pool
+                foreach (Subject subject in _connection.Cache.Subjects) //all other subjects in the pool
                 {
                     subject.PropertyChanged += subject_PropertyChanged;
                     rows.Add(new AdSubjectRow(subject));
@@ -512,7 +478,7 @@ namespace XenAdmin.TabPages
         {
             // This could get a bit spammy with a repeated exception, consider a back off or summary approach if it becomes an issue
             Program.AssertOffEventThread();
-            Pool p;
+
             while (!Disposing && !IsDisposed)
             {
                 try
@@ -526,9 +492,7 @@ namespace XenAdmin.TabPages
                     });
                     if (showing)
                     {
-                        // In case the value gets altered underneath us
-                        p = pool;
-                        String[] loggedInSids = p.Connection.Session.get_all_subject_identifiers();
+                        String[] loggedInSids = _connection.Session.get_all_subject_identifiers();
                         // Want fast access time for when we take the lock and switch off the background thread
                         Dictionary<string, bool> loggedSids = new Dictionary<string, bool>();
                         foreach (string s in loggedInSids)
@@ -555,7 +519,7 @@ namespace XenAdmin.TabPages
                 {
                     showLoggedInStatusError();
                     log.Error(e);
-                    System.Threading.Thread.Sleep(5000);
+                    Thread.Sleep(5000);
                 }
             }
         }
@@ -734,12 +698,7 @@ namespace XenAdmin.TabPages
                     return;
                 }
 
-                EnableAdAction action = new EnableAdAction(pool, joinPrompt.Domain, joinPrompt.Username, joinPrompt.Password);
-                if (pool.name_label.Length > 0)
-                    action.Pool = pool;
-                else
-                    action.Host = Helpers.GetMaster(pool.Connection);
-                action.RunAsync();
+                new EnableAdAction(_connection, joinPrompt.Domain, joinPrompt.Username, joinPrompt.Password, false).RunAsync();
                 joinPrompt.ClearPassword();
             }
             else
@@ -747,7 +706,7 @@ namespace XenAdmin.TabPages
                 // We're disabling AD
 
                 // Warn if the user will boot himself out by disabling AD
-                Session session = pool.Connection.Session;
+                Session session = _connection.Session;
                 if (session == null)
                     return;
 
@@ -755,14 +714,11 @@ namespace XenAdmin.TabPages
                 {
                     // User is authenticated using local root account. Confirm anyway.
                     string msg = string.Format(Messages.AD_LEAVE_CONFIRM,
-                                Helpers.GetName(pool).Ellipsise(50).EscapeAmpersands(), Domain);
+                                Helpers.GetName(_connection).Ellipsise(50).EscapeAmpersands(), Domain.Ellipsise(30));
 
                     DialogResult r;
                     using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            null,
-                            msg,
-                            Messages.AD_FEATURE_NAME),
+                        new ThreeButtonDialog.Details(null, msg, Messages.AD_FEATURE_NAME),
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                     {
@@ -777,8 +733,8 @@ namespace XenAdmin.TabPages
                 else
                 {
                     // Warn user will be booted out.
-                    string msg = string.Format(pool.name_label.Length > 0 ? Messages.AD_LEAVE_WARNING : Messages.AD_LEAVE_WARNING_HOST,
-                                Helpers.GetName(pool).Ellipsise(50), Domain);
+                    string msg = string.Format(Helpers.GetPool(_connection) != null ? Messages.AD_LEAVE_WARNING : Messages.AD_LEAVE_WARNING_HOST,
+                                Helpers.GetName(_connection).Ellipsise(50), Domain.Ellipsise(30));
 
                     DialogResult r;
                     using (var dlg = new ThreeButtonDialog(
@@ -796,30 +752,29 @@ namespace XenAdmin.TabPages
                 }
 
 
-                Host master = Helpers.GetMaster(pool.Connection);
+                Host master = Helpers.GetMaster(_connection);
                 if (master == null)
                 {
                     // Really shouldn't happen unless we have been very slow with the cache
                     log.Error("Could not retrieve master when trying to look up domain..");
                     throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
                 }
-                AdPasswordPrompt passPrompt = new AdPasswordPrompt(false, master.external_auth_service_name);
-                DialogResult result = passPrompt.ShowDialog(Program.MainWindow);
-                if (result == DialogResult.Cancel)
-                    return;
 
-                Dictionary<string, string> creds = new Dictionary<string, string>();
-                if (result != DialogResult.Ignore)
+                using (var passPrompt = new AdPasswordPrompt(false, master.external_auth_service_name))
                 {
-                    creds.Add(DisableAdAction.KEY_USER, passPrompt.Username);
-                    creds.Add(DisableAdAction.KEY_PASSWORD, passPrompt.Password);
+                    var result = passPrompt.ShowDialog(Program.MainWindow);
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    var creds = new Dictionary<string, string>();
+                    if (result != DialogResult.Ignore)
+                    {
+                        creds.Add(DisableAdAction.KEY_USER, passPrompt.Username);
+                        creds.Add(DisableAdAction.KEY_PASSWORD, passPrompt.Password);
+                    }
+
+                    new DisableAdAction(_connection, creds).RunAsync();
                 }
-                DisableAdAction action = new DisableAdAction(pool, creds);
-                if (pool.name_label.Length > 0)
-                    action.Pool = pool;
-                else
-                    action.Host = Helpers.GetMaster(pool.Connection);
-                action.RunAsync();
             }
         }
 
@@ -829,7 +784,7 @@ namespace XenAdmin.TabPages
             if (!buttonAdd.Enabled)
                 return;
 
-            using (var dlog = new ResolvingSubjectsDialog(pool))
+            using (var dlog = new ResolvingSubjectsDialog(_connection))
                 dlog.ShowDialog();
         }
 
@@ -867,7 +822,7 @@ namespace XenAdmin.TabPages
                 return;
 
             // Warn if user is revoking his currently-in-use credentials
-            Session session = pool.Connection.Session;
+            Session session = _connection.Session;
             if (session != null && session.Subject != null)
             {
                 foreach (Subject entry in subjectsToRemove)
@@ -884,7 +839,7 @@ namespace XenAdmin.TabPages
                             subjectName = subjectName.Ellipsise(256);
                         }
                         string msg = string.Format(entry.IsGroup ? Messages.AD_CONFIRM_SUICIDE_GROUP : Messages.AD_CONFIRM_SUICIDE,
-                                    subjectName, Helpers.GetName(pool).Ellipsise(50));
+                                    subjectName, Helpers.GetName(_connection).Ellipsise(50));
 
                         DialogResult r;
                         using (var dlg = new ThreeButtonDialog(
@@ -908,7 +863,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            var action = new AddRemoveSubjectsAction(pool, new List<string>(), subjectsToRemove);
+            var action = new AddRemoveSubjectsAction(_connection, new List<string>(), subjectsToRemove);
             using (var dlog = new ActionProgressDialog(action, ProgressBarStyle.Continuous))
                 dlog.ShowDialog();
         }
@@ -1009,8 +964,8 @@ namespace XenAdmin.TabPages
 
         private int RoleCompare(Subject s1, Subject s2)
         {
-            List<Role> s1Roles = pool.Connection.ResolveAll(s1.roles);
-            List<Role> s2Roles = pool.Connection.ResolveAll(s2.roles);
+            List<Role> s1Roles = _connection.ResolveAll(s1.roles);
+            List<Role> s2Roles = _connection.ResolveAll(s2.roles);
             s1Roles.Sort();
             s2Roles.Sort();
             // If one subject doesn't have any roles, but it below the one with roles
@@ -1068,11 +1023,11 @@ namespace XenAdmin.TabPages
         private void ButtonChangeRoles_Click(object sender, EventArgs e)
         {
             Program.AssertOnEventThread();
-            if (Helpers.FeatureForbidden(pool.Connection, Host.RestrictRBAC))
+            if (Helpers.FeatureForbidden(_connection, Host.RestrictRBAC))
             {
                 // Show upsell dialog
                 using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_RBAC : Messages.UPSELL_BLURB_RBAC + Messages.UPSELL_BLURB_TRIAL,
-                                                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
+                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                     dlg.ShowDialog(this);
                 return;
 
@@ -1093,7 +1048,7 @@ namespace XenAdmin.TabPages
                 selectedSubjects.Add(selectedRow.subject);
             }
 
-            using (var dialog = new RoleSelectionDialog(selectedSubjects.ToArray(), pool))
+            using (var dialog = new RoleSelectionDialog(_connection, selectedSubjects.ToArray()))
                 dialog.ShowDialog(this);
         }
 
@@ -1104,7 +1059,7 @@ namespace XenAdmin.TabPages
             if (!ButtonLogout.Enabled)
                 return;
 
-            Session session = pool.Connection.Session;
+            Session session = _connection.Session;
             if (session == null)
                 return;
 
@@ -1123,7 +1078,7 @@ namespace XenAdmin.TabPages
             if (session.Subject != null)//have already checked session not null
             {
                 var warnMsg = string.Format(subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_SUICIDE_MANY : Messages.AD_LOGOUT_SUICIDE_ONE,
-                                            Helpers.GetName(pool).Ellipsise(50));
+                                            Helpers.GetName(_connection).Ellipsise(50));
 
                 foreach (Subject entry in subjectsToLogout)
                 {
@@ -1187,7 +1142,7 @@ namespace XenAdmin.TabPages
                 {
                     continue;
                 }
-                DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(pool.Connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
+                DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(_connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
                     {
                         Session.logout_subject_identifier(s, r.subject.subject_identifier);
                     }, "session.logout_subject_identifier");
@@ -1195,10 +1150,10 @@ namespace XenAdmin.TabPages
             }
             if (suicide)
             {
-                DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(pool.Connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
+                DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(_connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
                     {
                         Session.logout_subject_identifier(s, session.UserSid);
-                        pool.Connection.Logout();
+                        _connection.Logout();
                     }, "session.logout_subject_identifier");
                 logoutAction.RunAsync();
             }
