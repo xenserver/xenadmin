@@ -197,6 +197,7 @@ namespace XenAdmin.Actions
                 ZipToOutputFile(_inputTempFolder);
                 PercentComplete = 100;
                 log.ErrorFormat("An exception was trapped while creating a server status report: " + exn.Message);
+                Description = Messages.STATUS_REPORT_ZIP_FAILED;
                 throw new Exception(Messages.STATUS_REPORT_ZIP_FAILED);
             }
         }

@@ -118,6 +118,7 @@
     <Compile Include="Actions\PVS\DeletePvsSiteAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyCreateAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyDestroyAction.cs" />
+    <Compile Include="Actions\SaveServerStatusReportAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
