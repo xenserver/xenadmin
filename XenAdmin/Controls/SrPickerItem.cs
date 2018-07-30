@@ -280,7 +280,7 @@ namespace XenAdmin.Controls
         {
             get
             {
-                return TheSR.FreeSpace() >= DiskSize;
+                return TheSR.VdiCreationCanProceed(DiskSize);
             }
         }
 

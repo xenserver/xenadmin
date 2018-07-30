@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using XenAdmin;
+using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
 
@@ -490,6 +491,28 @@ namespace XenAPI
                 results.Add(new SRInfo(uuid, size, aggr, name_label, name_description, pool_metadata_detected, probeResult.configuration));
             }
             return results;
+        }
+
+        public virtual bool VdiCreationCanProceed(long vdiSize)
+        {
+            SM sm = GetSM();
+
+            bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+
+            if (GetSRType(true) == SRTypes.gfs2)
+            {
+                vdiSizeUnlimited = true;
+                isThinlyProvisioned = true;
+            }
+
+            if (vdiSize > 2 * Util.BINARY_TERA && !vdiSizeUnlimited)
+                return false;
+
+            if (!isThinlyProvisioned && vdiSize > FreeSpace())
+                return false;
+
+            return true;
         }
 
         /// <summary>
