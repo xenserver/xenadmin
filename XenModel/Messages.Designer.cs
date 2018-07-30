@@ -34936,7 +34936,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no servers available to migrate the VM &apos;{0}&apos; on &apos;{1}&apos; to..
+        ///   Looks up a localized string similar to {0}: There are no servers available to migrate the VM &apos;{1}&apos; to..
         /// </summary>
         public static string UPDATES_WIZARD_NO_HOSTS {
             get {

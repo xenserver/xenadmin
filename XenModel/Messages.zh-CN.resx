@@ -11993,7 +11993,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池“{0}”上没有默认 SR</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
-    <value>没有可用于迁移“{1}”上的 VM“{0}”的服务器。</value>
+    <value>{0}: 没有可用于迁移 VM“{1}”的服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: 其他服务器上的可用内存不足，无法将所有 VM 迁移出此服务器。</value>
