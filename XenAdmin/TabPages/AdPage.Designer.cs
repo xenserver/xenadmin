@@ -164,7 +164,6 @@ namespace XenAdmin.TabPages
             // 
             this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
@@ -176,7 +175,6 @@ namespace XenAdmin.TabPages
             // 
             this.ColumnTypeImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle3.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle3.NullValue")));
             this.ColumnTypeImage.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.ColumnTypeImage, "ColumnTypeImage");
             this.ColumnTypeImage.Name = "ColumnTypeImage";
