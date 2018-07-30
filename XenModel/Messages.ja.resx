@@ -12062,7 +12062,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>プール '{0}' にデフォルト SR がありません</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
-    <value>VM {0} を移行できるサーバーがありません。</value>
+    <value>{0}: VM '{1}' を移行できるサーバーがありません。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: このサーバーのすべての VM を移行するための空きメモリがほかのサーバーにありません。</value>
