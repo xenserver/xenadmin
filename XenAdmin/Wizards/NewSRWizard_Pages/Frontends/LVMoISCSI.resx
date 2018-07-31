@@ -570,6 +570,9 @@
   <data name="&gt;&gt;placeholderLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="errorLabelAtCHAPPassword.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="errorLabelAtCHAPPassword.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -1094,6 +1097,9 @@
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="errorLabelAtHostname.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="errorLabelAtHostname.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
