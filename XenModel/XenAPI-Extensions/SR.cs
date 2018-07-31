@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using XenAdmin;
-using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
 
@@ -499,12 +498,6 @@ namespace XenAPI
 
             bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
             bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
-
-            if (GetSRType(true) == SRTypes.gfs2)
-            {
-                vdiSizeUnlimited = true;
-                isThinlyProvisioned = true;
-            }
 
             if (vdiSize > 2 * Util.BINARY_TERA && !vdiSizeUnlimited)
                 return false;
