@@ -14922,6 +14922,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VMs with disks greater than 2TB cannot be exported as an OVF/OVA package..
+        /// </summary>
+        public static string EXPORT_ERROR_GREATER_THAN_2TB_OVA_OVF {
+            get {
+                return ResourceManager.GetString("EXPORT_ERROR_GREATER_THAN_2TB_OVA_OVF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The maximum number of EULAs that can be included in the appliance is {0}. Selected EULA documents exceeding this number will not be added to the appliance. Click OK to proceed or Cancel to go back and change you selection..
         /// </summary>
         public static string EXPORT_EULA_PAGE_FILE_LIMIT_WARNING {

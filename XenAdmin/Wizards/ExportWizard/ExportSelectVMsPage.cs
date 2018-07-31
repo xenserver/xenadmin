@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.ExportWizard
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
-					cancel = !PerformCheck(CheckSpaceRequirements);
+					cancel = !PerformCheck(CheckSpaceRequirements, CheckDiskSizeForTransfer);
 		}
 
         public override void PopulatePage()
@@ -262,6 +262,22 @@ namespace XenAdmin.Wizards.ExportWizard
 
 			return true;
 		}
+
+	    private bool CheckDiskSizeForTransfer(out string errorMsg)
+	    {
+	        errorMsg = string.Empty;
+
+	        foreach (VM vm in VMsToExport)
+	        {
+	            if (GetTotalVmSize(vm) > 2 * Util.BINARY_TERA && !ExportAsXva)
+	            {
+	                errorMsg = Messages.EXPORT_ERROR_GREATER_THAN_2TB_OVA_OVF;
+	                return false;
+	            }
+	        }
+
+	        return true;
+	    }
 
 		//TODO: improve method
 		private long GetFreeSpace(string drivename)
