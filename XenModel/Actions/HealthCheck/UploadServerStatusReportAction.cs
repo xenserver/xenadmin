@@ -74,13 +74,11 @@ namespace XenAdmin.Actions
             catch (Exception e)
             {
                 log.Error("Exception during upload", e);
-                Description = Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED;
                 throw new Exception(Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED, e);
             }
 
             if (Cancelling || Cancelled)
             {
-                Description = Messages.CANCEL;
                 throw new CancelledException();
             }
               
@@ -88,7 +86,6 @@ namespace XenAdmin.Actions
             {
                 // Fail to upload the zip to CIS server.
                 log.ErrorFormat("Fail to upload the Server Status Report {0} to CIS server {1}", bundleToUpload, UPLOAD_DOMAIN_NAME);
-                Description = Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED;
                 throw new Exception(Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED);
             }
 

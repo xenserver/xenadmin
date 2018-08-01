@@ -121,16 +121,63 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            // Run Async action to handle the task in the background
-            SaveServerStatusReportAction.SaveReportInfo info = new SaveServerStatusReportAction.SaveReportInfo(bugToolPageRetrieveData.OutputFolder, //tmp folder
-                                                                                                               bugToolPageDestination1.OutputFile, // dest file
-                                                                                                               bugToolPageDestination1.Upload, // whether upload
-                                                                                                               bugToolPageDestination1.UploadToken, // upload token
-                                                                                                               bugToolPageDestination1.CaseNumber, // case id
-                                                                                                               Registry.HealthCheckUploadDomainName); // domain name
+            AsyncAction action;
+            if (bugToolPageDestination1.Upload)
+            {
+                // The MultipleAction is only used as a wrapper, we will suppress its history and expose the sub-actions in the history
+                List<AsyncAction> subActions = new List<AsyncAction>();
+                ZipStatusReportAction zipAction = new ZipStatusReportAction(bugToolPageRetrieveData.OutputFolder, bugToolPageDestination1.OutputFile,false);
+                subActions.Add(zipAction);
+                UploadServerStatusReportAction uploadAction = new UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,// tmp folder
+                                                                                           bugToolPageDestination1.UploadToken,// upload token
+                                                                                           bugToolPageDestination1.CaseNumber,// case id
+                                                                                           Registry.HealthCheckUploadDomainName,// domain name
+                                                                                           false); // suppressHistory
+                subActions.Add(uploadAction);
+                action = new MultipleAction(null, Messages.BUGTOOL_SAVING, Messages.BUGTOOL_SAVING, Messages.COMPLETED, subActions,true);
+            }
+            else
+            {
+                action = new ZipStatusReportAction(bugToolPageRetrieveData.OutputFolder, bugToolPageDestination1.OutputFile, false);
+            }
 
-            SaveServerStatusReportAction action = new SaveServerStatusReportAction(info);
             action.RunAsync();
+
+
+            // Save away the output path for next time
+            XenAdmin.Properties.Settings.Default.ServerStatusPath = bugToolPageDestination1.OutputFile;
+
+            log.Debug("Cleaning up crash dump logs on server");
+            var capabilities = bugToolPageSelectCapabilities1.Capabilities;
+            foreach (Capability c in capabilities)
+            {
+                if (c.Key == "host-crashdump-dumps" && c.Checked)
+                {
+                    var hostList = bugToolPageSelectHosts1.SelectedHosts;
+                    if (!hostList.Any(h => h.HasCrashDumps()))
+                        break;
+
+                    DialogResult result;
+                    using (var dlg = new ThreeButtonDialog(
+                                new ThreeButtonDialog.Details(null, Messages.REMOVE_CRASHDUMP_QUESTION, Messages.REMOVE_CRASHDUMP_FILES),
+                                ThreeButtonDialog.ButtonYes,
+                                ThreeButtonDialog.ButtonNo))
+                    {
+                        result = dlg.ShowDialog(this);
+                    }
+                    if (result == DialogResult.Yes)
+                    {
+                        foreach (Host host in hostList)
+                        {
+                            if (host != null && host.HasCrashDumps())
+                            {
+                                new Actions.DestroyHostCrashDumpAction(host).RunAsync();
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
 
             base.FinishWizard();
         }

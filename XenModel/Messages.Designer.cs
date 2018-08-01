@@ -1942,15 +1942,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and upload Server Status Report.
-        /// </summary>
-        public static string ACTION_SAVE_UPLOAD_SERVER_STATUS_REPORT {
-            get {
-                return ResourceManager.GetString("ACTION_SAVE_UPLOAD_SERVER_STATUS_REPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Saving alerts for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_SAVING_ALERTS_FOR {

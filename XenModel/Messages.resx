@@ -744,9 +744,6 @@
   <data name="ACTION_SAVE_SETTINGS" xml:space="preserve">
     <value>Save settings for '{0}'...</value>
   </data>
-  <data name="ACTION_SAVE_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Save and upload Server Status Report</value>
-  </data>
   <data name="ACTION_SAVING_ALERTS_FOR" xml:space="preserve">
     <value>Saving alerts for '{0}'...</value>
   </data>
