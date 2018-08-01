@@ -31,12 +31,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using XenAdmin.Core;
 using System.IO;
-using System.Threading;
-using System.Net;
+
 
 namespace XenAdminTests.MiscTests
 {
@@ -108,7 +106,7 @@ namespace XenAdminTests.MiscTests
 
             _wb.NavigateError += (s, e) => Assert.Fail("Navigation failed.");
 
-            MW(() => _wb.Navigate(new[] { uri, uri2 }));
+            MW(() => _wb.Navigate(new List<Uri> {uri, uri2}));
 
             MWWaitFor(() => navigating && navigated, "Navigation didn't take place.");
         }
@@ -155,7 +153,7 @@ namespace XenAdminTests.MiscTests
                 navError = true;
             };
 
-            MW(() => _wb.Navigate(new[] { uri, uri2 }));
+            MW(() => _wb.Navigate(new List<Uri> {uri, uri2}));
 
             MWWaitFor(() => navigating && navigated && navError, "Navigation didn't take place.");
         }
