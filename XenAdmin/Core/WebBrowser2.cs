@@ -151,7 +151,7 @@ namespace XenAdmin.Core
             Program.AssertOnEventThread();
 
             // clear the _webClients so that an existing multiple-url Navigation is cancelled.
-            _webClients.Clear();
+            ClearWebClients();
             base.OnNavigating(e);
         }
 
@@ -167,11 +167,10 @@ namespace XenAdmin.Core
         /// <summary>
         /// Navigates to the first valid URI in the specified list.
         /// </summary>
-        public void Navigate(IEnumerable<Uri> uris)
+        public void Navigate(List<Uri> uriList)
         {
             Program.AssertOnEventThread();
-            Util.ThrowIfEnumerableParameterNullOrEmpty(uris, "uris");
-            List<Uri> uriList = new List<Uri>(uris);
+            Util.ThrowIfEnumerableParameterNullOrEmpty(uriList, "uris");
 
             if (uriList.Count == 1)
             {
@@ -179,19 +178,19 @@ namespace XenAdmin.Core
                 return;
             }
 
-            // test each url with a WebClient to see if it works.
-            _webClients.Clear();
+            ClearWebClients();
             var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
-            _webClients.AddRange(uriList.ConvertAll(u => new WebClient() {Proxy = proxy}));
 
-            // start all urls downloading in parallel.
-            for (int i = 0; i < _webClients.Count; i++)
+            // test each url with a WebClient to see if it works and start downloading for all in parallel
+            foreach (var uri in uriList)
             {
-                _webClients[i].DownloadDataCompleted += webClient_DownloadDataCompleted;
+                var webClient = new WebClient {Proxy = proxy};
+                webClient.DownloadDataCompleted += webClient_DownloadDataCompleted;
+                _webClients.Add(webClient);
 
                 try
                 {
-                    _webClients[i].DownloadDataAsync(uriList[i], uriList[i]);
+                    webClient.DownloadDataAsync(uri, uri);
                 }
                 catch (WebException)
                 {
@@ -208,23 +207,38 @@ namespace XenAdmin.Core
         {
             Program.AssertOnEventThread();
 
-            WebClient webClient = (WebClient)sender;
+            var webClient = sender as WebClient;
+            if (webClient == null)
+                return;
+
             if (_webClients.Contains(webClient))
             {
+                webClient.DownloadDataCompleted -= webClient_DownloadDataCompleted;
                 _webClients.Remove(webClient);
+                webClient.Dispose();
 
                 if (e.Error == null || (e.Error != null && _webClients.Count == 0))
                 {
-                    // either one has finished successfully...or...they've all failed.                          
+                    // either one has finished successfully or they've all failed and been removed one by one.                          
                     // navigate the browser to this url and leave other requests (if any) to timeout.
-                    _webClients.Clear();
+                    ClearWebClients();
                     Navigate((Uri)e.UserState);
                 }
             }
-            else
+
+            // if the sender is not contained in the _webClients, it's because the _webClients have been
+            // cleared due to either a valid url having been found or another Navigate having started;
+            // in either case take no action
+        }
+
+        private void ClearWebClients()
+        {
+            foreach (var webClient in _webClients)
             {
-                // either a valid url has been found...or another Navigate has started: do nothing.
+                webClient.DownloadDataCompleted -= webClient_DownloadDataCompleted;
+                webClient.Dispose();
             }
+            _webClients.Clear();
         }
 
 
