@@ -581,8 +581,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (e.Column.Index == ColumnDate.Index)
             {
-                int sortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
-                e.SortResult = (dataGridViewPatches.SortOrder == SortOrder.Descending) ? sortResult *= -1 : sortResult;
+                e.SortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
                 e.Handled = true;
             }
         }
