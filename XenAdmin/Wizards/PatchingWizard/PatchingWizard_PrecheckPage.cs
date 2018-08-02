@@ -423,13 +423,23 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     log.InfoFormat("Minimal patches for {0}: {1}", pool.Name(), string.Join(",", minimalPatches.Select(p => p.Name)));
 
+                    // we check the contains-livepatch property of all the applicable patches to determine if a host will need to be rebooted after patch installation, 
+                    // because the minimal patches might roll-up patches that are not live-patchable
+                    var allPatches = WizardMode == WizardMode.NewVersion
+                        ? Updates.GetAllPatches(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                        : Updates.GetAllPatches(pool.Connection);
+
                     foreach (Host host in us.Keys)
                     {
                         diskChecks.Add(new DiskSpaceForAutomatedUpdatesCheck(host, us));
 
                         if (us[host] != null && us[host].Count > 0)
                         {
-                            var restartHostPatches = us[host].Where(p => p.after_apply_guidance == after_apply_guidance.restartHost).ToList();
+                            var allApplicablePatches = Updates.GetPatchSequenceForHost(host, allPatches);
+                            var restartHostPatches = allApplicablePatches != null 
+                                ? allApplicablePatches.Where(p => p.after_apply_guidance == after_apply_guidance.restartHost).ToList()
+                                : new List<XenServerPatch>();
+
                             rebootChecks.Add(new HostNeedsRebootCheck(host, restartHostPatches));
                             if (restartHostPatches.Any(p => !p.ContainsLivepatch))
                                 evacuateChecks.Add(new AssertCanEvacuateCheck(host));
