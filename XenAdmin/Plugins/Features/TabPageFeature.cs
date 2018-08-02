@@ -82,17 +82,44 @@ namespace XenAdmin.Plugins
          * to show a TabPageCredentialsDialog before returning to the background thread to persist the new credentials.
          */
 
+        [DllImport("wininet.dll", SetLastError = true)]
+        private static extern long DeleteUrlCacheEntry(string url);
+
+        #region Fields
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const char CREDENTIALS_SEPARATOR = '\x0294';
 
-        private readonly string Url;                  // required - "url" attribute, the local or remote url of the HTML page to load
-        private readonly bool ContextEnabled;         // optional - "context-menu" attribute, if set the context menu will be disabled
-        private readonly bool XenCenterOnly;          // optional - "xencenter-only" attribute, if set this tabpage will appear on the XenCenter node and no where else
-        private readonly bool RelativeUrl;            // optional - "relative" attribute, if set the url will be resolved relative to the XenCenter directory
-        private readonly string HelpLink;             // optional - "help-link" attribute, if set when the help button is pressed this url will be loaded in a separate browser
-        private readonly bool Credentials;            // optional - "credentials" attribute, if set XenCenter will duplicate a session for use by the htmls JavaScript
-        private readonly bool Console;                // optional - "console" attribute on the "TabPage" tag.
+        /// <summary>
+        /// required - "url" attribute, the local or remote url of the HTML page to load
+        /// </summary>
+        private readonly string Url;
+        /// <summary>
+        /// optional - "context-menu" attribute, if set the context menu will be disabled
+        /// </summary>
+        private readonly bool ContextEnabled;
+        /// <summary>
+        /// optional - "xencenter-only" attribute, if set this tabpage will appear on the XenCenter node and no where else
+        /// </summary>
+        private readonly bool XenCenterOnly;
+        /// <summary>
+        /// optional - "relative" attribute, if set the url will be resolved relative to the XenCenter directory
+        /// </summary>
+        private readonly bool RelativeUrl;
+        /// <summary>
+        /// optional - "help-link" attribute, if set when the help button is pressed this url will be loaded in a separate browser
+        /// </summary>
+        private readonly string HelpLink;
+        /// <summary>
+        /// optional - "credentials" attribute, if set XenCenter will duplicate a session for use by the htmls JavaScript
+        /// </summary>
+        private readonly bool Credentials;
+        /// <summary>
+        /// optional - "console" attribute on the "TabPage" tag.
+        /// Indicates that this tab-page is a replacement for the console tab.
+        /// </summary>
+        private readonly bool Console;
 
         public const string ELEMENT_NAME = "TabPage";
         public const string ATT_XC_ONLY = "xencenter-only";
@@ -121,20 +148,34 @@ namespace XenAdmin.Plugins
         /// </summary>
         private bool navigationError;
 
+        #endregion
+
+        public TabPageFeature(ResourceManager resourceManager, XmlNode node, PluginDescriptor plugin)
+            : base(resourceManager, node, plugin)
+        {
+            XenCenterOnly = Helpers.GetBoolXmlAttribute(node, ATT_XC_ONLY, false);
+            ContextEnabled = Helpers.GetBoolXmlAttribute(node, ATT_CONTEXT_MENU, false);
+
+            // plugins v2
+            HelpLink = Helpers.GetStringXmlAttribute(node, ATT_HELP_LINK, "");
+            RelativeUrl = Helpers.GetBoolXmlAttribute(node, ATT_RELATIVE, false);
+            Credentials = Helpers.GetBoolXmlAttribute(node, ATT_CREDENTIALS, false);
+
+            Console = Helpers.GetBoolXmlAttribute(node, ATT_CONSOLE, false);
+            string urlString = Helpers.GetStringXmlAttribute(node, ATT_URL);
+            Url = urlString == null ? "" : string.Format("{0}{1}", RelativeUrl ? string.Format("{0}/", Application.StartupPath) : "", urlString);
+        }
+
+        #region Properties
+
         public bool HasHelp
         {
-            get
-            {
-                return !string.IsNullOrEmpty(HelpLink);
-            }
+            get { return !string.IsNullOrEmpty(HelpLink); }
         }
 
         public TabPage TabPage
         {
-            get
-            {
-                return _tabPage;
-            }
+            get { return _tabPage; }
         }
 
         public IXenObject SelectedXenObject
@@ -150,21 +191,38 @@ namespace XenAdmin.Plugins
             }
         }
 
-        public TabPageFeature(ResourceManager resourceManager, XmlNode node, PluginDescriptor plugin)
-            : base(resourceManager, node, plugin)
+        /// <summary>
+        /// Gets a value indicating whether this instance should replace the console tab.
+        /// </summary>
+        public bool IsConsoleReplacement
         {
-            XenCenterOnly = Helpers.GetBoolXmlAttribute(node, ATT_XC_ONLY, false);
-            ContextEnabled = Helpers.GetBoolXmlAttribute(node, ATT_CONTEXT_MENU, false);
-
-            // plugins v2
-            HelpLink = Helpers.GetStringXmlAttribute(node, ATT_HELP_LINK, "");
-            RelativeUrl = Helpers.GetBoolXmlAttribute(node, ATT_RELATIVE, false);
-            Credentials = Helpers.GetBoolXmlAttribute(node, ATT_CREDENTIALS, false);
-            // indicates that this tab-page is a replacement for the console tab.
-            Console = Helpers.GetBoolXmlAttribute(node, ATT_CONSOLE, false);
-            string urlString = Helpers.GetStringXmlAttribute(node, ATT_URL);
-            Url = urlString == null ? "" : string.Format("{0}{1}", RelativeUrl ? string.Format("{0}/", Application.StartupPath) : "", urlString);
+            get
+            {
+                return Console;
+            }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether the most recent navigation for the selected xen object
+        /// resulted in an error.
+        /// </summary>
+        public bool IsError
+        {
+            get
+            {
+                if (selectedXenObject != null)
+                {
+                    if (BrowserStates.ContainsKey(selectedXenObject))
+                    {
+                        return BrowserStates[selectedXenObject].IsError;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        #endregion
 
         public override string CheckForError()
         {
@@ -211,22 +269,7 @@ namespace XenAdmin.Plugins
             // Navigate to about:blank to work around http://support.microsoft.com/kb/320153.
             Browser.Navigate("about:blank");
         }
-
-        void Browser_WindowClosed(object sender, EventArgs e)
-        {
-            if (!Program.Exiting && Enabled && !_tabPage.Disposing)
-            {
-                _tabPage.Controls.Remove(Browser);
-                CreateBrowser();
-                _tabPage.Controls.Add(Browser);
-                if (SelectedXenObject != null)
-                {
-                    BrowserStates.Remove(SelectedXenObject);
-                    SetUrl();
-                }
-            }
-        }
-
+        
         public bool ShowTab
         {
             get
@@ -302,25 +345,70 @@ namespace XenAdmin.Plugins
             }
         }
 
-        private void Browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        #region WebBrowser2 event handlers
+
+        private void Browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             Program.AssertOnEventThread();
 
-            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
+            UrlIsLoaded |= e.Url.AbsoluteUri != "about:blank";
+            navigationError = false;
+
+            if (XenCenterOnly || e.TargetFrameName != "" || lastBrowserState == null)
+                return;
+
+            log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
+
+            if (Console)
             {
-                if (Program.MainWindow.StatusBarAction == null 
-                    || Program.MainWindow.StatusBarAction.IsCompleted && MainWindowActionAtNavigateTime.Equals(Program.MainWindow.StatusBarAction))
-                {
-                    // we still have 'control' of the status bar
-                    Program.MainWindow.SetProgressBar(false, 0);
-                    Program.MainWindow.SetStatusBar(null, null);
-                }
+                // delete this page from the cache.... that we can be sure that if the page stops working then
+                // the user reliably gets the real console back.
+                DeleteUrlCacheEntry(e.Url.AbsoluteUri);
             }
 
+            lastBrowserState.Urls = new List<Uri> { e.Url };
+        }
+
+        private void Browser_NavigateError(object sender, WebBrowserNavigateErrorEventArgs e)
+        {
+            Program.AssertOnEventThread();
+            navigationError = true;
+            try
+            {
+                log.DebugFormat("Navigate error ({0}): {1}", e.StatusCode, e.Url);
+                if ((e.StatusCode == 401 || e.StatusCode == 403))
+                {
+                    log.Warn("Clearing secret and re-prompting, since we've seen a 401/403.");
+                    BrowserState.BrowserCredentials creds = lastBrowserState.Credentials;
+                    bool persisting = creds == null ? true : creds.PersistCredentials;
+                    CompleteClearSecret(lastBrowserState);
+                    TriggerGetSecret(lastBrowserState);
+                }
+            }
+            catch (Exception exn)
+            {
+                log.Error(exn, exn);
+            }
+        }
+
+        private void Browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
                 lastBrowserState.Urls = new List<Uri> { e.Url };
+
+                if (lastBrowserState.IsError != navigationError)
+                {
+                    lastBrowserState.IsError = navigationError;
+
+                    if (Console)
+                    {
+                        // if this plugin tab-page is a console replacement and the error-state of the navigation has changed
+                        // then update the tabs. This ensures that user gets the real console tab back.
+                        Program.MainWindow.UpdateToolbars();
+                    }
+                }
             }
         }
 
@@ -349,55 +437,86 @@ namespace XenAdmin.Plugins
             }
         }
 
-        [DllImport("wininet.dll", SetLastError = true)]
-        private static extern long DeleteUrlCacheEntry(string url);
-
-        private void Browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        private void Browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             Program.AssertOnEventThread();
 
-            UrlIsLoaded |= e.Url.AbsoluteUri != "about:blank";
-            navigationError = false;
-
-            if (XenCenterOnly || e.TargetFrameName != "" || lastBrowserState == null)
-                return;
-
-            log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-
-            if (Console)
+            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
             {
-                // delete this page from the cache.... that we can be sure that if the page stops working then
-                // the user reliably gets the real console back.
-                DeleteUrlCacheEntry(e.Url.AbsoluteUri);
+                if (Program.MainWindow.StatusBarAction == null
+                    || Program.MainWindow.StatusBarAction.IsCompleted && MainWindowActionAtNavigateTime.Equals(Program.MainWindow.StatusBarAction))
+                {
+                    // we still have 'control' of the status bar
+                    Program.MainWindow.SetProgressBar(false, 0);
+                    Program.MainWindow.SetStatusBar(null, null);
+                }
             }
 
-            lastBrowserState.Urls = new List<Uri> { e.Url };
+            if (!XenCenterOnly && lastBrowserState != null)
+            {
+                log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
+                lastBrowserState.Urls = new List<Uri> { e.Url };
+            }
         }
 
-        /// <summary>
-        /// Nothrow guarantee.
-        /// </summary>
-        void Browser_NavigateError(object sender, WebBrowserNavigateErrorEventArgs e)
+        private void Browser_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            Program.AssertOnEventThread();
-            navigationError = true;
+            if (e.KeyCode == Keys.F1 && Browser.Focused)
+            {
+                Program.MainWindow.MainWindow_HelpRequested(null, null);
+            }
+        }
+
+        private void Browser_AuthenticationPrompt(WebBrowser2 sender, WebBrowserAuthenticationPromptEventArgs e)
+        {
             try
             {
-                log.DebugFormat("Navigate error ({0}): {1}", e.StatusCode, e.Url);
-                if ((e.StatusCode == 401 || e.StatusCode == 403))
+                Program.AssertOnEventThread();
+
+                log.Debug("Prompting for authentication...");
+
+                CompleteClearSecret(lastBrowserState);
+                CompleteGetSecret(lastBrowserState);
+                BrowserState.BrowserCredentials creds = lastBrowserState.Credentials;
+                if (creds != null && creds.Valid)
                 {
-                    log.Warn("Clearing secret and re-prompting, since we've seen a 401/403.");
-                    BrowserState.BrowserCredentials creds = lastBrowserState.Credentials;
-                    bool persisting = creds == null ? true : creds.PersistCredentials;
-                    CompleteClearSecret(lastBrowserState);
-                    TriggerGetSecret(lastBrowserState);
+                    e.Username = creds.Username;
+                    e.Password = creds.Password;
+                    e.Success = true;
+
+                    log.Debug("Prompt for authentication successful.");
+                }
+                else
+                {
+                    e.Success = false;
+                    log.Debug("Prompt for authentication cancelled / failed.");
                 }
             }
             catch (Exception exn)
             {
-                log.Error(exn, exn);
+                log.Error("Prompt for authentication failed", exn);
+                e.Success = false;
             }
         }
+
+        private void Browser_WindowClosed(object sender, EventArgs e)
+        {
+            if (!Program.Exiting && Enabled && !_tabPage.Disposing)
+            {
+                _tabPage.Controls.Remove(Browser);
+                CreateBrowser();
+                _tabPage.Controls.Add(Browser);
+                if (SelectedXenObject != null)
+                {
+                    BrowserStates.Remove(SelectedXenObject);
+                    SetUrl();
+                }
+            }
+        }
+
+        #endregion
+
+        #region TabPage event handlers
 
         private void TabPage_ParentChanged(object sender, EventArgs e)
         {
@@ -444,69 +563,7 @@ namespace XenAdmin.Plugins
             }
         }
 
-        private void Browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
-        {
-            if (!XenCenterOnly && lastBrowserState != null)
-            {
-                log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
-
-                if (lastBrowserState.IsError != navigationError)
-                {
-                    lastBrowserState.IsError = navigationError;
-
-                    if (Console)
-                    {
-                        // if this plugin tab-page is a console replacement and the error-state of the navigation has changed
-                        // then update the tabs. This ensures that user gets the real console tab back.
-                        Program.MainWindow.UpdateToolbars();
-                    }
-                }
-            }
-        }
-
-        private void Browser_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1 && Browser.Focused)
-            {
-                Program.MainWindow.MainWindow_HelpRequested(null, null);
-            }
-        }
-
-        /// <summary>
-        /// Nothrow guarantee.
-        /// </summary>
-        void Browser_AuthenticationPrompt(WebBrowser2 sender, WebBrowserAuthenticationPromptEventArgs e)
-        {
-            try
-            {
-                Program.AssertOnEventThread();
-
-                log.Debug("Prompting for authentication...");
-
-                CompleteClearSecret(lastBrowserState);
-                CompleteGetSecret(lastBrowserState);
-                BrowserState.BrowserCredentials creds = lastBrowserState.Credentials;
-                if (creds != null && creds.Valid)
-                {
-                    e.Username = creds.Username;
-                    e.Password = creds.Password;
-                    e.Success = true;
-
-                    log.Debug("Prompt for authentication successful.");
-                }
-                else
-                {
-                    e.Success = false;
-                    log.Debug("Prompt for authentication cancelled / failed.");
-                }
-            }
-            catch (Exception exn)
-            {
-                log.Error("Prompt for authentication failed", exn);
-                e.Success = false;
-            }
-        }
+        #endregion
 
         private void CompleteGetSecret(BrowserState state)
         {
@@ -534,8 +591,6 @@ namespace XenAdmin.Plugins
         /// <summary>
         /// Get the persisted secret from the server, or prompt for new credentials and persist those back to the server.
         /// Completion of this thread is indicated by state.Credentials being set.
-        /// 
-        /// Nothrow guarantee.
         /// </summary>
         /// <param name="obj"></param>
         private void GetSecret(object obj)
@@ -700,10 +755,7 @@ namespace XenAdmin.Plugins
         /// <summary>
         /// Clear the persisted secret from the server.
         /// Completion of this thread is indicated by state.Credentials being set to null.
-        /// 
-        /// Nothrow guarantee.
         /// </summary>
-        /// <param name="obj"></param>
         private void ClearSecret(object obj)
         {
             Program.AssertOffEventThread();
@@ -733,9 +785,6 @@ namespace XenAdmin.Plugins
             state.Credentials = null;
         }
 
-        /// <summary>
-        /// Nothrow guarantee.
-        /// </summary>
         private static void TryToDestroySecret(Session session, string opaque_ref)
         {
             try
@@ -749,9 +798,6 @@ namespace XenAdmin.Plugins
             }
         }
 
-        /// <summary>
-        /// Nothrow guarantee.
-        /// </summary>
         private static void TryToRemoveSecret(Pool pool, Session session, string name, IXenObject obj)
         {
             try
@@ -799,36 +845,6 @@ namespace XenAdmin.Plugins
             }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance should replace the console tab.
-        /// </summary>
-        public bool IsConsoleReplacement
-        {
-            get
-            {
-                return Console;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the most recent navigation for the selected xen object
-        /// resulted in an error.
-        /// </summary>
-        public bool IsError
-        {
-            get
-            {
-                if (selectedXenObject != null)
-                {
-                    if (BrowserStates.ContainsKey(selectedXenObject))
-                    {
-                        return BrowserStates[selectedXenObject].IsError;
-                    }
-                }
-
-                return true;
-            }
-        }
 
         private class BrowserState
         {
@@ -913,7 +929,7 @@ namespace XenAdmin.Plugins
             SelectedObjectRef = XenObject.opaque_ref;
         }
 
-        void connection_ConnectionResult(object sender, ConnectionResultEventArgs e)
+        private void connection_ConnectionResult(object sender, ConnectionResultEventArgs e)
         {
             if (connection.IsConnected)
             {
