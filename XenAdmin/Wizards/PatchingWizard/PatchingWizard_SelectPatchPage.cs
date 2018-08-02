@@ -587,12 +587,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private void dataGridViewPatches_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (dataGridViewPatches.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
-                PopulatePatchesBox();
-        }
-
         private void dataGridViewPatches_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // The click is on a column header
