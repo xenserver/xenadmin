@@ -607,24 +607,18 @@ namespace XenAdmin.Plugins
                     if (pool == null)
                     {
                         log.Warn("Failed to get Pool!");
-                        // Sleep and retry.
                         Thread.Sleep(5000);
                         continue;
                     }
 
                     string secret_uuid = pool.GetXCPluginSecret(PluginDescriptor.Name, state.Obj);
-                    if (secret_uuid == null)
+                    if (string.IsNullOrEmpty(secret_uuid))
                     {
-                        log.Debug("Nothing persisted.  Prompting for new credentials.");
-                        Program.Invoke(Program.MainWindow, (Action<bool, BrowserState>)PromptForUsernamePassword, true, state);
-                        MaybePersistCredentials(session, pool, state);
-                        return;
-                    }
-                    else if (secret_uuid == "")
-                    {
-                        log.Debug("User chose not to persist these credentials.");
-                        Program.Invoke(Program.MainWindow, (Action<bool, BrowserState>)PromptForUsernamePassword, false, state);
-                        MaybePersistCredentials(session, pool, state);
+                        var msg = secret_uuid == null ? "Nothing persisted." : "User chose not to persist these credentials.";
+                        log.Debug(msg + " Prompting for new credentials.");
+
+                        Program.Invoke(Program.MainWindow, () => { state.Credentials = PromptForUsernamePassword(secret_uuid == null); });
+                        MaybePersistCredentials(session, pool, state.Obj, state.Credentials);
                         return;
                     }
                     else
@@ -637,11 +631,9 @@ namespace XenAdmin.Plugins
                         }
                         catch (Failure exn)
                         {
-                            log.Warn(string.Format("Secret {0} for {1} on plugin {2} has disappeared!",
-                                                   secret_uuid, Helpers.GetName(state.Obj), PluginDescriptor.Name),
-                                     exn);
+                            log.Warn(string.Format("Secret {0} for {1} on plugin {2} has disappeared! Removing from pool.gui_config.",
+                                    secret_uuid, Helpers.GetName(state.Obj), PluginDescriptor.Name), exn);
                             TryToRemoveSecret(pool, session, PluginDescriptor.Name, state.Obj);
-                            // Retry.
                             continue;
                         }
 
@@ -654,20 +646,19 @@ namespace XenAdmin.Plugins
 
                             TryToDestroySecret(session, secret.opaque_ref);
                             TryToRemoveSecret(pool, session, PluginDescriptor.Name, state.Obj);
-
-                            // Retry.
                             continue;
                         }
 
                         log.Debug("Secret successfully read.");
 
-                        BrowserState.BrowserCredentials creds = new BrowserState.BrowserCredentials();
-                        creds.Username = bits[0];
-                        creds.Password = bits[1];
-                        creds.PersistCredentials = true;
-                        creds.Valid = true;
-                        state.Credentials = creds;
-                        return;
+                        state.Credentials = new BrowserState.BrowserCredentials
+                        {
+                            Username = bits[0],
+                            Password = bits[1],
+                            PersistCredentials = true,
+                            Valid = true
+                        };
+                       return;
                     }
 
                     // Unreachable.  Should either have returned, or continued (to retry).
@@ -678,25 +669,18 @@ namespace XenAdmin.Plugins
             {
                 log.Warn("Ignoring exception when trying to get secret", exn);
 
-                // Note that it's essential that we set state.Credentials before leaving this function, because other threads are waiting
-                // for that value to appear.
-
-                BrowserState.BrowserCredentials creds = new BrowserState.BrowserCredentials();
-                creds.Valid = false;
-                state.Credentials = creds;
+                // Note that it's essential that we set state.Credentials before leaving this function,
+                // because other threads are waiting for that value to appear.
+                state.Credentials = new BrowserState.BrowserCredentials {Valid = false};
             }
         }
 
-        private void MaybePersistCredentials(Session session, Pool pool, BrowserState state)
+        private void MaybePersistCredentials(Session session, Pool pool, IXenObject obj, BrowserState.BrowserCredentials creds)
         {
-            BrowserState.BrowserCredentials creds = state.Credentials;
             if (creds != null && creds.Valid)
             {
-                string val =
-                    creds.PersistCredentials ?
-                        CreateSecret(session, creds.Username, creds.Password) :
-                        "";
-                pool.SetXCPluginSecret(session, PluginDescriptor.Name, state.Obj, val);
+                string secretUuid = creds.PersistCredentials ? CreateSecret(session, creds.Username, creds.Password) : "";
+                pool.SetXCPluginSecret(session, PluginDescriptor.Name, obj, secretUuid);
             }
         }
 
@@ -706,31 +690,24 @@ namespace XenAdmin.Plugins
             return Secret.CreateSecret(session, val);
         }
 
-        /// <summary>
-        /// Prompt for credentials, and set state.Credentials appropriately.
-        /// </summary>
-        /// <param name="defaultPersist">Whether the "persist these credentials" checkbox is checked on entry to the dialog.</param>
-        /// <param name="state"></param>
-        private void PromptForUsernamePassword(bool defaultPersist, BrowserState state)
+        private BrowserState.BrowserCredentials PromptForUsernamePassword(bool persistCredentials)
         {
             Program.AssertOnEventThread();
 
-            TabPageCredentialsDialog d = new TabPageCredentialsDialog();
-            d.ServiceName = Label;
-            d.DefaultPersist = defaultPersist;
-            BrowserState.BrowserCredentials creds = new BrowserState.BrowserCredentials();
-            if (DialogResult.OK == d.ShowDialog(Program.MainWindow))
+            using (var d = new TabPageCredentialsDialog {ServiceName = Label, PersistCredentials = persistCredentials})
             {
-                creds.Username = d.Username;
-                creds.Password = d.Password;
-                creds.PersistCredentials = d.PersistCredentials;
-                creds.Valid = true;
+                if (d.ShowDialog(Program.MainWindow) == DialogResult.OK)
+                {
+                    return new BrowserState.BrowserCredentials
+                    {
+                        Username = d.Username,
+                        Password = d.Password,
+                        PersistCredentials = d.PersistCredentials,
+                        Valid = true
+                    };
+                }
+                return new BrowserState.BrowserCredentials {Valid = false};
             }
-            else
-            {
-                creds.Valid = false;
-            }
-            state.Credentials = creds;
         }
 
         private void CompleteClearSecret(BrowserState state)
