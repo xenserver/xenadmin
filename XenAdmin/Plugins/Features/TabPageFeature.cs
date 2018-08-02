@@ -369,7 +369,7 @@ namespace XenAdmin.Plugins
             lastBrowserState.Urls = new List<Uri> { e.Url };
         }
 
-        private void Browser_NavigateError(object sender, WebBrowserNavigateErrorEventArgs e)
+        private void Browser_NavigateError(object sender, WebBrowser2.NavigateErrorEventArgs e)
         {
             Program.AssertOnEventThread();
             navigationError = true;
@@ -467,7 +467,7 @@ namespace XenAdmin.Plugins
             }
         }
 
-        private void Browser_AuthenticationPrompt(WebBrowser2 sender, WebBrowserAuthenticationPromptEventArgs e)
+        private void Browser_AuthenticationPrompt(WebBrowser2 sender, WebBrowser2.AuthenticationPromptEventArgs e)
         {
             try
             {
@@ -586,8 +586,6 @@ namespace XenAdmin.Plugins
             t.Start(state);
         }
 
-        private delegate void BrowserStateDelegate(bool persistByDefault, BrowserState obj);
-
         /// <summary>
         /// Get the persisted secret from the server, or prompt for new credentials and persist those back to the server.
         /// Completion of this thread is indicated by state.Credentials being set.
@@ -618,14 +616,14 @@ namespace XenAdmin.Plugins
                     if (secret_uuid == null)
                     {
                         log.Debug("Nothing persisted.  Prompting for new credentials.");
-                        Program.Invoke(Program.MainWindow, (BrowserStateDelegate)PromptForUsernamePassword, true, state);
+                        Program.Invoke(Program.MainWindow, (Action<bool, BrowserState>)PromptForUsernamePassword, true, state);
                         MaybePersistCredentials(session, pool, state);
                         return;
                     }
                     else if (secret_uuid == "")
                     {
                         log.Debug("User chose not to persist these credentials.");
-                        Program.Invoke(Program.MainWindow, (BrowserStateDelegate)PromptForUsernamePassword, false, state);
+                        Program.Invoke(Program.MainWindow, (Action<bool, BrowserState>)PromptForUsernamePassword, false, state);
                         MaybePersistCredentials(session, pool, state);
                         return;
                     }
