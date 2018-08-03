@@ -630,12 +630,10 @@ namespace XenAdmin.Core
         /// <summary>
         /// Gets an upgrade sequence that contains a version upgrade, optionally followed by the minimal patches for the new version
         /// </summary>
-        /// <param name="conn">Connection for the pool</param>
         /// <param name="alert">The alert that refers the version-update</param>
         /// <param name="updateTheNewVersion">Also add the minimum patches for the new version (true) or not (false).</param>
-        public static List<XenServerPatch> GetMinimalPatches(IXenConnection conn, XenServerPatchAlert alert, bool updateTheNewVersion)
+        public static List<XenServerPatch> GetMinimalPatches(XenServerPatchAlert alert, bool updateTheNewVersion)
         {
-            Debug.Assert(conn != null);
             Debug.Assert(alert != null);
 
             var minimalPatches = new List<XenServerPatch> {alert.Patch};
@@ -661,17 +659,18 @@ namespace XenAdmin.Core
         /// <summary>
         /// Gets an upgrade sequence that contains a version upgrade, optionally followed by all the patches for the new version
         /// </summary>
-        public static List<XenServerPatch> GetAllPatches(IXenConnection conn, XenServerPatchAlert alert, bool updateTheNewVersion)
+        public static List<XenServerPatch> GetAllPatches(XenServerPatchAlert alert, bool updateTheNewVersion)
         {
-            Debug.Assert(conn != null);
             Debug.Assert(alert != null);
 
             var allPatches = new List<XenServerPatch> { alert.Patch };
 
             // if it's a version updgrade the update sequence will be this patch (the upgrade) and the patches for the new version
-            if (updateTheNewVersion && alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
+            if (updateTheNewVersion && alert.NewServerVersion != null)
             {
-                allPatches.AddRange(GetAllPatches(alert.NewServerVersion));
+                var newVersionPatches = GetAllPatches(alert.NewServerVersion);
+                if (newVersionPatches != null)
+                    allPatches.AddRange(newVersionPatches);
             }
 
             return allPatches;

@@ -405,7 +405,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
                     var minimalPatches = WizardMode == WizardMode.NewVersion
-                        ? Updates.GetMinimalPatches(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                        ? Updates.GetMinimalPatches(UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
                         : Updates.GetMinimalPatches(pool.Connection);
 
                     if (minimalPatches == null)
@@ -426,7 +426,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     // we check the contains-livepatch property of all the applicable patches to determine if a host will need to be rebooted after patch installation, 
                     // because the minimal patches might roll-up patches that are not live-patchable
                     var allPatches = WizardMode == WizardMode.NewVersion
-                        ? Updates.GetAllPatches(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                        ? Updates.GetAllPatches(UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
                         : Updates.GetAllPatches(pool.Connection);
 
                     foreach (Host host in us.Keys)
