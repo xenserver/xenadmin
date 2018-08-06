@@ -1386,7 +1386,7 @@ namespace XenAdmin
         /// <summary>
         /// Updates the toolbar buttons. Also updates which tabs are visible.
         /// </summary>
-        public void UpdateToolbarsCore()
+        private void UpdateToolbarsCore()
         {
             // refresh the selection-manager
             SelectionManager.RefreshSelection();
@@ -1673,6 +1673,8 @@ namespace XenAdmin
 
         private void pluginManager_PluginsChanged()
         {
+            UpdateToolbarsCore();
+
             foreach (ToolStripMenuItem menu in MainMenuBar.Items)
             {
                 //clear existing plugin items
