@@ -2393,9 +2393,9 @@ namespace XenAdmin
         /// it is created first and then shown.
         /// </summary>
         /// <param name="type">The type of the form to be shown.</param>
-        public void ShowForm(Type type)
+        public Form ShowForm(Type type)
         {
-            ShowForm(type, null);
+            return ShowForm(type, null);
         }
 
         /// <summary>
@@ -2404,19 +2404,20 @@ namespace XenAdmin
         /// </summary>
         /// <param name="type">The type of the form to be shown.</param>
         /// <param name="args">The arguments to pass to the form's consructor</param>
-        public void ShowForm(Type type, object[] args)
+        public Form ShowForm(Type type, object[] args)
         {
             foreach (Form form in Application.OpenForms)
             {
                 if (form.GetType() == type)
                 {
                     HelpersGUI.BringFormToFront(form);
-                    return;
+                    return form;
                 }
             }
 
             Form newForm = (Form)Activator.CreateInstance(type, args);
             newForm.Show(this);
+            return newForm;
         }
 
         public Form Form

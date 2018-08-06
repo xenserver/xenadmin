@@ -1099,8 +1099,9 @@ namespace XenAdmin.TabPages
             if (string.IsNullOrEmpty(patchUri))
                 return;
 
-            var wizard = new PatchingWizard();
-            wizard.Show();
+            PatchingWizard wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            if (!wizard.IsFirstPage())
+                return;
             wizard.NextStep();
             wizard.AddAlert(patchAlert);
             wizard.NextStep();
@@ -1531,16 +1532,9 @@ namespace XenAdmin.TabPages
 
         private void toolStripButtonUpdate_Click(object sender, EventArgs e)
         {
-            var wizard = new PatchingWizard();
-            wizard.Show();
-            wizard.NextStep();
-
-            var hostlist = new List<Host>();
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-                hostlist.AddRange(c.Cache.Hosts);
-
-            if (hostlist.Count > 0)
-                wizard.SelectServers(hostlist);
+            PatchingWizard wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            if (wizard.IsFirstPage())
+                wizard.NextStep();
         }
     }
 }
