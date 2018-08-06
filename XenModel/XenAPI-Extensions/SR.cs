@@ -497,11 +497,10 @@ namespace XenAPI
             SM sm = GetSM();
 
             bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
-            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
-
-            if (vdiSize > 2 * Util.BINARY_TERA && !vdiSizeUnlimited)
+            if (!vdiSizeUnlimited && vdiSize > 2 * Util.BINARY_TERA)
                 return false;
 
+            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
             if (!isThinlyProvisioned && vdiSize > FreeSpace())
                 return false;
 
