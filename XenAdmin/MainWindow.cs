@@ -1460,17 +1460,17 @@ namespace XenAdmin
             ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
             ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
 
-            pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
+            var consoleFeatures = new List<TabPageFeature>();
+            var otherFeatures = new List<TabPageFeature>();
 
-            bool shownConsoleReplacement = false;
-            foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => f.IsConsoleReplacement && !f.IsError && !multi && f.ShowTab))
-            {
+            if (SelectionManager.Selection.Count == 1 && !SearchMode)
+                pluginManager.GetFeatureTabPages(SelectionManager.Selection.FirstAsXenObject, out consoleFeatures, out otherFeatures);
+
+            foreach (var f in consoleFeatures)
                 ShowTab(f.TabPage, true);
-                shownConsoleReplacement = true;
-            }
 
-            ShowTab(TabPageConsole, !shownConsoleReplacement && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(TabPageCvmConsole, !shownConsoleReplacement && !multi && !SearchMode && isHostLive && hasManyControlDomains);
+            ShowTab(TabPageConsole, consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
+            ShowTab(TabPageCvmConsole, consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains);
             ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
             ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
             ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
@@ -1484,7 +1484,7 @@ namespace XenAdmin
             ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
                 && Helpers.PvsCacheCapability(selectionConnection));
 
-            foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
+            foreach (var f in otherFeatures)
                 ShowTab(f.TabPage, true);
 
             ShowTab(TabPageSearch, true);
@@ -2798,11 +2798,13 @@ namespace XenAdmin
 
         #region XenSearch
 
-        // SearchMode doesn't just mean we are looking at the Search tab.
-        // It's set when we import a search from a file; or when we double-click
-        // on a folder or tag name to search for it.
-        private bool searchMode = false;
-        public bool SearchMode
+        private bool searchMode;
+        /// <summary>
+        /// SearchMode doesn't just mean we are looking at the Search tab.
+        /// It's set when we import a search from a file; or when we double-click
+        /// on a folder or tag name to search for it.
+        /// </summary>
+        private bool SearchMode
         {
             get
             {
