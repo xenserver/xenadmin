@@ -131,7 +131,6 @@ namespace XenAdmin.Plugins
         private readonly Dictionary<IXenObject, BrowserState> BrowserStates = new Dictionary<IXenObject, BrowserState>();
         private BrowserState lastBrowserState;
 
-        private TabControl tabControl;
         private StatusStrip statusStrip;
         private ToolStripStatusLabel statusLabel;
 
@@ -168,7 +167,7 @@ namespace XenAdmin.Plugins
             get { return _tabPage; }
         }
 
-        public IXenObject SelectedXenObject { private get; set; }
+        public IXenObject SelectedXenObject { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance should replace the console tab.
@@ -194,11 +193,6 @@ namespace XenAdmin.Plugins
 
                 return false;
             }
-        }
-
-        public bool IsCurrentlySelectedTab
-        {
-            get { return tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this; }
         }
 
         #endregion
@@ -230,7 +224,6 @@ namespace XenAdmin.Plugins
                 Browser.BringToFront();
 
                 _tabPage.Tag = this; // Tag the tab page so we can reload when the tab is focused.
-                _tabPage.ParentChanged += TabPage_ParentChanged;
             }
             finally
             {
@@ -521,31 +514,6 @@ namespace XenAdmin.Plugins
                     SetUrl();
                 }
             }
-        }
-
-        #endregion
-
-        #region TabPage event handlers
-
-        private void TabPage_ParentChanged(object sender, EventArgs e)
-        {
-            if (tabControl != null)
-                tabControl.SelectedIndexChanged -= _tabControl_SelectedIndexChanged;
-
-            tabControl = _tabPage.Parent as TabControl;
-
-            if (tabControl != null)
-                tabControl.SelectedIndexChanged += _tabControl_SelectedIndexChanged;
-        }
-
-        private void _tabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // If this is a console replacement window, then update the browser object with every selection change;
-            // this way the console tabs will always stay up-to-date.
-            // If this isn't a console replacement window, then only update when this tab is selected
-
-            if (ShowTab && (Console || IsCurrentlySelectedTab))
-                SetUrl();
         }
 
         #endregion

@@ -80,41 +80,6 @@ namespace XenAdmin.Plugins
             get { return (from PluginDescriptor plugin in _plugins where plugin.Enabled select plugin).Count(); }
         }
 
-        internal void GetFeatureTabPages(IXenObject xenObject, out List<TabPageFeature> consoleFeatures, out List<TabPageFeature> otherFeatures)
-        {
-            consoleFeatures = new List<TabPageFeature>();
-            otherFeatures = new List<TabPageFeature>();
-
-            var plugins = Plugins;
-            foreach (var p in plugins)
-            {
-                var features = p.Features;
-                foreach (var feature in features)
-                {
-                    var f = feature as TabPageFeature;
-                    if (f == null)
-                        continue;
-
-                    f.SelectedXenObject = xenObject;
-                    if (!f.ShowTab)
-                        continue;
-
-                    if (f.IsConsoleReplacement)
-                    {
-                        f.SetUrl();
-                        if (!f.IsError)
-                            consoleFeatures.Add(f);
-                    }
-                    else
-                    {
-                        if (f.IsCurrentlySelectedTab)
-                            f.SetUrl();
-                        otherFeatures.Add(f);
-                    }
-                }
-            }
-        }
-
         public void OnPluginsChanged()
         {
             if (PluginsChanged != null)
