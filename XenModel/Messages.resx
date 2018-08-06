@@ -7208,9 +7208,6 @@ Standard features only</value>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
     <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
   </data>
-  <data name="LOADING" xml:space="preserve">
-    <value>Loading '{0}'...</value>
-  </data>
   <data name="LOCAL" xml:space="preserve">
     <value>Local</value>
   </data>
@@ -13077,6 +13074,21 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="WARNING_DELETE_VD_MULTIPLE" xml:space="preserve">
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
+  </data>
+  <data name="WEB_BROWSER_FAILED" xml:space="preserve">
+    <value>Cannot find '{0}'.</value>
+  </data>
+  <data name="WEB_BROWSER_FAILED_RETRYING" xml:space="preserve">
+    <value>Cannot find '{0}'. Waiting for '{1}'...</value>
+  </data>
+  <data name="WEB_BROWSER_LOADING" xml:space="preserve">
+    <value>Loading '{0}'...</value>
+  </data>
+  <data name="WEB_BROWSER_LOADING_PERCENT" xml:space="preserve">
+    <value>Loading '{0}' ({1}%)...</value>
+  </data>
+  <data name="WEB_BROWSER_WAITING" xml:space="preserve">
+    <value>Waiting for '{0}'...</value>
   </data>
   <data name="WEB_PAGE" xml:space="preserve">
     <value>Web Page</value>
