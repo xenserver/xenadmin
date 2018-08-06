@@ -528,10 +528,6 @@ namespace XenAdmin
 
         public void SetStatusBar(Image image, string message)
         {
-            if ((statusLabel.Text != null && statusLabel.Text.Equals(message))
-                || (statusLabel.Image != null && statusLabel.Equals(image)))
-                return;
-
             statusLabel.Image = image;
             statusLabel.Text = Helpers.FirstLine(message);
         }
@@ -1374,12 +1370,16 @@ namespace XenAdmin
                 return;
             }
 
-            ToolStrip.SuspendLayout();
-
-            UpdateToolbarsCore();
-            MainMenuBar_MenuActivate(null, null);
-
-            ToolStrip.ResumeLayout();
+            try
+            {
+                ToolStrip.SuspendLayout();
+                UpdateToolbarsCore();
+                MainMenuBar_MenuActivate(null, null);
+            }
+            finally
+            {
+                ToolStrip.ResumeLayout();
+            }
         }
 
         private static int TOOLBAR_HEIGHT = 31;

@@ -61,11 +61,6 @@ namespace XenAdmin.Core
     /// </summary>
     public class WebBrowser2 : WebBrowser
     {
-        /// <summary>
-        /// A list of <see cref="WebClient"/>s used to determine whether URLS are valid before Navigations.
-        /// </summary>
-        private readonly List<WebClient> _webClients = new List<WebClient>();
-
         private AxHost.ConnectionPointCookie cookie;
         private WebBrowser2EventHelper helper;
 
@@ -145,102 +140,6 @@ namespace XenAdmin.Core
                     break;
             }
         }
-
-        protected override void OnNavigating(WebBrowserNavigatingEventArgs e)
-        {
-            Program.AssertOnEventThread();
-
-            // clear the _webClients so that an existing multiple-url Navigation is cancelled.
-            ClearWebClients();
-            base.OnNavigating(e);
-        }
-
-        /// <summary>
-        /// Navigates to the specified URI.
-        /// </summary>
-        public new void Navigate(Uri uri)
-        {
-            Program.AssertOnEventThread();
-            Navigate(uri, null, null, "X-XenCenter: " + Program.ClientVersion());
-        }
-
-        /// <summary>
-        /// Navigates to the first valid URI in the specified list.
-        /// </summary>
-        public void Navigate(List<Uri> uriList)
-        {
-            Program.AssertOnEventThread();
-            Util.ThrowIfEnumerableParameterNullOrEmpty(uriList, "uris");
-
-            if (uriList.Count == 1)
-            {
-                Navigate(uriList[0]);
-                return;
-            }
-
-            ClearWebClients();
-            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
-
-            // test each url with a WebClient to see if it works and start downloading for all in parallel
-            foreach (var uri in uriList)
-            {
-                var webClient = new WebClient {Proxy = proxy};
-                webClient.DownloadDataCompleted += webClient_DownloadDataCompleted;
-                _webClients.Add(webClient);
-
-                try
-                {
-                    webClient.DownloadDataAsync(uri, uri);
-                }
-                catch (WebException)
-                {
-                    // we are expecting some urls to fail: do nothing.
-                }
-                catch (SocketException)
-                {
-                    // we are expecting some urls to fail: do nothing.
-                }
-            }
-        }
-
-        private void webClient_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
-        {
-            Program.AssertOnEventThread();
-
-            var webClient = sender as WebClient;
-            if (webClient == null)
-                return;
-
-            if (_webClients.Contains(webClient))
-            {
-                webClient.DownloadDataCompleted -= webClient_DownloadDataCompleted;
-                _webClients.Remove(webClient);
-                webClient.Dispose();
-
-                if (e.Error == null || (e.Error != null && _webClients.Count == 0))
-                {
-                    // either one has finished successfully or they've all failed and been removed one by one.                          
-                    // navigate the browser to this url and leave other requests (if any) to timeout.
-                    ClearWebClients();
-                    Navigate((Uri)e.UserState);
-                }
-            }
-
-            // if the sender is not contained in the _webClients, it's because the _webClients have been
-            // cleared due to either a valid url having been found or another Navigate having started;
-            // in either case take no action
-        }
-
-        private void ClearWebClients()
-        {
-            foreach (var webClient in _webClients)
-            {
-                webClient.DownloadDataCompleted -= webClient_DownloadDataCompleted;
-                webClient.Dispose();
-            }
-            _webClients.Clear();
-        }
-
 
         #region Nested classes
 

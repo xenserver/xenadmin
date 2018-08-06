@@ -20720,15 +20720,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading &apos;{0}&apos;....
-        /// </summary>
-        public static string LOADING {
-            get {
-                return ResourceManager.GetString("LOADING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Local.
         /// </summary>
         public static string LOCAL {
@@ -37870,6 +37861,51 @@ namespace XenAdmin {
         public static string WARNING_DELETE_VD_MULTIPLE {
             get {
                 return ResourceManager.GetString("WARNING_DELETE_VD_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find &apos;{0}&apos;..
+        /// </summary>
+        public static string WEB_BROWSER_FAILED {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find &apos;{0}&apos;. Waiting for &apos;{1}&apos;....
+        /// </summary>
+        public static string WEB_BROWSER_FAILED_RETRYING {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_FAILED_RETRYING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading &apos;{0}&apos;....
+        /// </summary>
+        public static string WEB_BROWSER_LOADING {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_LOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading &apos;{0}&apos; ({1}%)....
+        /// </summary>
+        public static string WEB_BROWSER_LOADING_PERCENT {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_LOADING_PERCENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for &apos;{0}&apos;....
+        /// </summary>
+        public static string WEB_BROWSER_WAITING {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_WAITING", resourceCulture);
             }
         }
         

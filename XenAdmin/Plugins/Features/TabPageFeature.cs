@@ -42,9 +42,7 @@ using System.Windows.Forms;
 using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.XenSearch;
 using XenAPI;
-using XenAdmin.Actions;
 
 
 namespace XenAdmin.Plugins
@@ -131,20 +129,14 @@ namespace XenAdmin.Plugins
         public const string ATT_URL = "url";
 
         private readonly Dictionary<IXenObject, BrowserState> BrowserStates = new Dictionary<IXenObject, BrowserState>();
-        private BrowserState lastBrowserState = null;
+        private BrowserState lastBrowserState;
 
         private TabControl tabControl;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel statusLabel;
 
         private TabPage _tabPage;
         private WebBrowser2 Browser;
-        private bool UrlIsLoaded;
-
-        private ActionBase MainWindowActionAtNavigateTime = null;
-
-        /// <summary>
-        /// If true, this indicates that the most recent Navigation was an error.
-        /// </summary>
-        private bool navigationError;
 
         #endregion
 
@@ -222,28 +214,50 @@ namespace XenAdmin.Plugins
         public override void Initialize()
         {
             _tabPage = new TabPage();
-            _tabPage.SuspendLayout();
-            _tabPage.Text = ToString();
-            _tabPage.ToolTipText = Tooltip ?? "";
-
-            if (Program.MainWindow != null) // for unit tests
+            try
             {
-                _tabPage.HelpRequested += Program.MainWindow.MainWindow_HelpRequested;
+                _tabPage.SuspendLayout();
+                _tabPage.Text = ToString();
+                _tabPage.ToolTipText = Tooltip ?? "";
+
+                if (Program.MainWindow != null) // for unit tests
+                    _tabPage.HelpRequested += Program.MainWindow.MainWindow_HelpRequested;
+
+                CreateStatusBar();
+                CreateBrowser();
+                _tabPage.Controls.Add(statusStrip);
+                _tabPage.Controls.Add(Browser);
+                Browser.BringToFront();
+
+                _tabPage.Tag = this; // Tag the tab page so we can reload when the tab is focused.
+                _tabPage.ParentChanged += TabPage_ParentChanged;
             }
+            finally
+            {
+                _tabPage.ResumeLayout();
+            }
+        }
 
-            CreateBrowser();
-            _tabPage.Controls.Add(Browser);
-
-            _tabPage.Tag = this; // Tag the tab page so we can reload when the tab is focussed.
-            _tabPage.ResumeLayout();
-            _tabPage.ParentChanged += TabPage_ParentChanged;
+        private void CreateStatusBar()
+        {
+            statusLabel = new ToolStripStatusLabel
+            {
+                Overflow = ToolStripItemOverflow.Never,
+                Spring = true,
+                TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+            };
+            statusStrip = new StatusStrip
+            {
+                SizingGrip = false,
+                AutoSize = false,
+                Items = {statusLabel},
+                Visible = false
+            };
         }
 
         private void CreateBrowser()
         {
-            Browser = new WebBrowser2();
-            Browser.Dock = DockStyle.Fill;
-            Browser.IsWebBrowserContextMenuEnabled = ContextEnabled;
+            Browser = new WebBrowser2 {Dock = DockStyle.Fill, IsWebBrowserContextMenuEnabled = ContextEnabled};
             Browser.ProgressChanged += Browser_ProgressChanged;
             Browser.DocumentCompleted += Browser_DocumentCompleted;
             Browser.Navigating += Browser_Navigating;
@@ -284,7 +298,8 @@ namespace XenAdmin.Plugins
 
         public void SetUrl()
         {
-            if (UrlIsLoaded && XenCenterOnly) // Never update XenCenter node tabs once loaded
+            // Never update XenCenter node tabs once loaded
+            if (Browser.Url != null && Browser.Url.AbsoluteUri != "about:blank" && XenCenterOnly)
                 return;
 
             BrowserState state;
@@ -294,19 +309,16 @@ namespace XenAdmin.Plugins
                 // After this point we will never update this url again for this node, so there is no need to store a browser state
                 state = new BrowserState(Placeholders.SubstituteUri(Url, SelectedXenObject), SelectedXenObject, Browser);
             }
-            else if (BrowserStates.ContainsKey(SelectedXenObject) && !BrowserStates[SelectedXenObject].IsError)
+            else if (BrowserStates.ContainsKey(SelectedXenObject))
             {
-                // if there wasn't an error with navigation then use the stored browser-state. Otherwise try again.
                 state = BrowserStates[SelectedXenObject];
+                state.Uris = Placeholders.SubstituteUri(Url, SelectedXenObject);
             }
             else
             {
                 state = new BrowserState(Placeholders.SubstituteUri(Url, SelectedXenObject), SelectedXenObject, Browser);
                 BrowserStates[SelectedXenObject] = state;
             }
-
-            if (lastBrowserState == state)
-                return;
 
             try
             {
@@ -316,14 +328,37 @@ namespace XenAdmin.Plugins
                         state.ObjectForScripting.LoginSession();
                     Browser.ObjectForScripting = state.ObjectForScripting;
                 }
-                Browser.Navigate(state.Urls);
 
                 lastBrowserState = state;
+
+                Browser.DocumentText = string.Empty;
+                Application.DoEvents();
+
+                lastBrowserState.IsError = false;
+                ShowStatus(string.Format(Messages.WEB_BROWSER_WAITING, ShortUri(state.Uris[0])));
+                Browser.Navigate(state.Uris[0]);
             }
             catch (Exception e)
             {
-                log.Error(string.Format("Failed to set TabPage url to '{0}' for plugin '{1}'", string.Join(",", state.Urls.ConvertAll(u => u.ToString()).ToArray()), PluginDescriptor.Name), e);
+                log.Error(string.Format("Failed to set TabPage url to '{0}' for plugin '{1}'",
+                    string.Join(",", state.Uris.ConvertAll(u => u.ToString()).ToArray()), PluginDescriptor.Name), e);
             }
+        }
+
+        private void ShowStatus(string text)
+        {
+            statusLabel.Text = text;
+            statusStrip.Visible = true;
+        }
+
+        private void HideStatus()
+        {
+            statusStrip.Visible = false;
+        }
+
+        private string ShortUri(Uri uri)
+        {
+            return uri.ToString().Ellipsise(80);
         }
 
         #region WebBrowser2 event handlers
@@ -332,36 +367,30 @@ namespace XenAdmin.Plugins
         {
             Program.AssertOnEventThread();
 
-            UrlIsLoaded |= e.Url.AbsoluteUri != "about:blank";
-            navigationError = false;
-
-            if (XenCenterOnly || e.TargetFrameName != "" || lastBrowserState == null)
+            if (XenCenterOnly || lastBrowserState == null)
                 return;
 
-            log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-
+            log.DebugFormat("Navigating to {0} for {1}", e.Url, Helpers.GetName(lastBrowserState.Obj));
+            DeleteUrlCacheEntry(e.Url.AbsoluteUri);
             if (Console)
             {
                 // delete this page from the cache.... that we can be sure that if the page stops working then
                 // the user reliably gets the real console back.
                 DeleteUrlCacheEntry(e.Url.AbsoluteUri);
             }
-
-            lastBrowserState.Urls = new List<Uri> { e.Url };
         }
 
         private void Browser_NavigateError(object sender, WebBrowser2.NavigateErrorEventArgs e)
         {
             Program.AssertOnEventThread();
-            navigationError = true;
+            lastBrowserState.IsError = true;
+            log.DebugFormat("Got error {0} while navigating to {1}.", e.StatusCode, e.Url);
+
             try
             {
-                log.DebugFormat("Navigate error ({0}): {1}", e.StatusCode, e.Url);
-                if ((e.StatusCode == 401 || e.StatusCode == 403))
+                if (e.StatusCode == 401 || e.StatusCode == 403)
                 {
-                    log.Warn("Clearing secret and re-prompting, since we've seen a 401/403.");
-                    BrowserState.BrowserCredentials creds = lastBrowserState.Credentials;
-                    bool persisting = creds == null ? true : creds.PersistCredentials;
+                    log.Debug("Clearing secret and re-prompting.");
                     CompleteClearSecret(lastBrowserState);
                     TriggerGetSecret(lastBrowserState);
                 }
@@ -374,21 +403,36 @@ namespace XenAdmin.Plugins
 
         private void Browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            if (!XenCenterOnly && lastBrowserState != null)
+            if (XenCenterOnly || lastBrowserState == null)
             {
-                log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
+                HideStatus();
+                return;
+            }
+            
+            log.DebugFormat("Navigated to {0} for {1}", e.Url, Helpers.GetName(lastBrowserState.Obj));
 
-                if (lastBrowserState.IsError != navigationError)
+            if (lastBrowserState.IsError && e.Url != null && e.Url.AbsoluteUri != "about:blank")
+            {
+                if (Console)
                 {
-                    lastBrowserState.IsError = navigationError;
+                    // if this plugin tab-page is a console replacement and the error-state of the navigation has changed
+                    // then update the tabs. This ensures that user gets the real console tab back.
+                    Program.MainWindow.UpdateToolbars();
+                }
 
-                    if (Console)
-                    {
-                        // if this plugin tab-page is a console replacement and the error-state of the navigation has changed
-                        // then update the tabs. This ensures that user gets the real console tab back.
-                        Program.MainWindow.UpdateToolbars();
-                    }
+                lastBrowserState.Uris.Remove(e.Url);
+
+                if (lastBrowserState.Uris.Count > 0)
+                {
+                    lastBrowserState.IsError = false;
+                    ShowStatus(string.Format(Messages.WEB_BROWSER_FAILED_RETRYING, ShortUri(e.Url),
+                        ShortUri(lastBrowserState.Uris[0])));
+                    Browser.Navigate(lastBrowserState.Uris[0]);
+                }
+                else
+                {
+                    ShowStatus(string.Format(Messages.WEB_BROWSER_FAILED, ShortUri(e.Url)));
+                    Browser.Navigate("about:blank");
                 }
             }
         }
@@ -396,48 +440,32 @@ namespace XenAdmin.Plugins
         private void Browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
         {
             Program.AssertOnEventThread();
+            if (XenCenterOnly || lastBrowserState == null || lastBrowserState.Uris.Count == 0 ||
+                Browser.ReadyState == WebBrowserReadyState.Complete)
+                return;
 
-            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
+            if (e.MaximumProgress > 0 && e.CurrentProgress >= 0 && e.CurrentProgress < e.MaximumProgress)
             {
-                if (e.MaximumProgress != 0)
-                {
-                    if (Program.MainWindow.StatusBarAction == null || Program.MainWindow.StatusBarAction.IsCompleted)
-                    {
-                        MainWindowActionAtNavigateTime = Program.MainWindow.StatusBarAction;
-                        int progr = Convert.ToInt32((e.CurrentProgress * 100L) / (e.MaximumProgress));
-                        Program.MainWindow.SetProgressBar(true, progr);
-                    }
-                    if (Browser.Url != null)
-                    {
-                        string text = e.CurrentProgress >= e.MaximumProgress
-                            ? ""
-                            : string.Format(Messages.LOADING, Browser.Url.ToString().Ellipsise(50));
-                        Program.MainWindow.SetStatusBar(null, text);
-                    }
-                }
+                int progr = Convert.ToInt32(e.CurrentProgress * 100L / e.MaximumProgress);
+                if (progr > 100)
+                    progr = 100;
+
+                ShowStatus(string.Format(Messages.WEB_BROWSER_LOADING_PERCENT, ShortUri(lastBrowserState.Uris[0]), progr));
+            }
+            else
+            {
+                ShowStatus(string.Format(Messages.WEB_BROWSER_LOADING, ShortUri(lastBrowserState.Uris[0])));
             }
         }
 
         private void Browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             Program.AssertOnEventThread();
-
-            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
-            {
-                if (Program.MainWindow.StatusBarAction == null
-                    || Program.MainWindow.StatusBarAction.IsCompleted && MainWindowActionAtNavigateTime.Equals(Program.MainWindow.StatusBarAction))
-                {
-                    // we still have 'control' of the status bar
-                    Program.MainWindow.SetProgressBar(false, 0);
-                    Program.MainWindow.SetStatusBar(null, null);
-                }
-            }
-
-            if (!XenCenterOnly && lastBrowserState != null)
-            {
-                log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
-            }
+            
+            if (XenCenterOnly || lastBrowserState == null || lastBrowserState.IsError)
+                return;
+            
+            HideStatus();
         }
 
         private void Browser_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -784,7 +812,7 @@ namespace XenAdmin.Plugins
             /// May be null, if this is the XenCenter node.
             /// </summary>
             public readonly ScriptingObject ObjectForScripting;
-            public List<Uri> Urls;
+            public List<Uri> Uris;
 
             /// <summary>
             /// May be null, if this is the XenCenter node.
@@ -800,11 +828,11 @@ namespace XenAdmin.Plugins
             /// Indicates that the browser is currently in an error state i.e. the page couldn't be loaded. This is used when the console is being replaced
             /// by this tab-page so that the user can get the real console back.
             /// </summary>
-            public bool IsError = true;
+            public bool IsError;
 
-            public BrowserState(List<Uri> urls, IXenObject obj, WebBrowser2 browser)
+            public BrowserState(List<Uri> uris, IXenObject obj, WebBrowser2 browser)
             {
-                Urls = new List<Uri>(urls);
+                Uris = new List<Uri>(uris);
                 Obj = obj;
                 ObjectForScripting = obj == null ? null : new ScriptingObject(browser, obj);
             }
@@ -843,7 +871,7 @@ namespace XenAdmin.Plugins
             connection = XenObject.Connection;
             if (connection != null)
             {
-                connection.ConnectionResult += new EventHandler<ConnectionResultEventArgs>(connection_ConnectionResult);
+                connection.ConnectionResult += connection_ConnectionResult;
             }
             SetObject(XenObject);
         }
@@ -851,9 +879,9 @@ namespace XenAdmin.Plugins
         public void SetObject(IXenObject XenObject)
         {
             // Annoyingly all of our classes start with an uppercase character, whereas the servers only uppercase abbreviations
-            List<string> abbreviations = new List<string>(new string[]{"SR", "VDI", "VBD", "VM", "PIF", "VIF", "PBD"});
+            var abbreviations = new List<string> {"SR", "VDI", "VBD", "VM", "PIF", "VIF", "PBD"};
             SelectedObjectType = XenObject.GetType().Name;
-            if (abbreviations.Find(delegate(string s) { return SelectedObjectType.StartsWith(s); }) == null)
+            if (abbreviations.Find(s => SelectedObjectType.StartsWith(s)) == null)
             {
                 string firstLetter = SelectedObjectType.Substring(0, 1);
                 SelectedObjectType = firstLetter.ToLowerInvariant() + SelectedObjectType.Substring(1, SelectedObjectType.Length - 1);
@@ -869,7 +897,7 @@ namespace XenAdmin.Plugins
                 LoginSession();
                 Program.Invoke(Program.MainWindow, delegate
                 {
-                    if (!browser.IsDisposed)
+                    if (!browser.IsDisposed && browser.Document != null)
                         browser.Document.InvokeScript("RefreshPage");
                     else
                         log.Debug("Tried to access disposed webbrowser, ignoring refresh.");
@@ -942,16 +970,16 @@ namespace XenAdmin.Plugins
                 {
                     if (browser.IsDisposed || browser.Disposing)
                     {
-                        log.DebugFormat("Browser has been disposed, cannot return message to plugin: {0}", outputBuilder.ToString());
+                        log.DebugFormat("Browser has been disposed, cannot return message to plugin: {0}", outputBuilder);
                     }
                     else if (browser.ObjectForScripting != this)
                     {
                         // If you don't do this, you can get old data re-entering the javascript execution after you have switched to a new object
-                        log.DebugFormat("Scripting object has been changed, discarding message to plugin: {0}", outputBuilder.ToString());
+                        log.DebugFormat("Scripting object has been changed, discarding message to plugin: {0}", outputBuilder);
                     }
-                    else
+                    else if (browser.Document != null)
                     {
-                        browser.Document.InvokeScript(JAVASCRIPT_CALLBACK_METHOD, new string[] { funcName, outputBuilder.ToString() });
+                        browser.Document.InvokeScript(JAVASCRIPT_CALLBACK_METHOD, new object[] { funcName, outputBuilder.ToString() });
                     }
                 });
             }
@@ -959,7 +987,7 @@ namespace XenAdmin.Plugins
             {
                 log.Error(e);
             }
-            //TODO: Whats the sensible way to let the JS know that there has been an error? Invoke an method with the info? How does this work with regard to message callback?
+            //TODO: What's the sensible way to let the JS know that there has been an error? Invoke a method with the info? How does this work with regards to message callback?
         }
     }
 }
