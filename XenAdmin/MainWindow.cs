@@ -1464,7 +1464,7 @@ namespace XenAdmin
             var otherFeatures = new List<TabPageFeature>();
 
             if (SelectionManager.Selection.Count == 1 && !SearchMode)
-                pluginManager.GetFeatureTabPages(SelectionManager.Selection.FirstAsXenObject, out consoleFeatures, out otherFeatures);
+                GetFeatureTabPages(SelectionManager.Selection.FirstAsXenObject, out consoleFeatures, out otherFeatures);
 
             foreach (var f in consoleFeatures)
                 ShowTab(f.TabPage, true);
@@ -1496,6 +1496,42 @@ namespace XenAdmin
             // the tree using the keyboard.
 
             navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
+        }
+
+        private void GetFeatureTabPages(IXenObject xenObject, out List<TabPageFeature> consoleFeatures, out List<TabPageFeature> otherFeatures)
+        {
+            consoleFeatures = new List<TabPageFeature>();
+            otherFeatures = new List<TabPageFeature>();
+
+            var plugins = pluginManager.Plugins;
+            foreach (var p in plugins)
+            {
+                var features = p.Features;
+                foreach (var feature in features)
+                {
+                    var f = feature as TabPageFeature;
+                    if (f == null)
+                        continue;
+
+                    f.SelectedXenObject = xenObject;
+                    if (!f.ShowTab)
+                        continue;
+
+                    if (f.IsConsoleReplacement)
+                    {
+                        f.SetUrl();
+                        if (!f.IsError)
+                            consoleFeatures.Add(f);
+                    }
+                    else
+                    {
+                        var page = GetLastSelectedPage(xenObject);
+                        if (page != null && page.Tag == f)
+                            f.SetUrl();
+                        otherFeatures.Add(f);
+                    }
+                }
+            }
         }
 
         private readonly TabPage[] NewTabs = new TabPage[512];
@@ -1620,10 +1656,9 @@ namespace XenAdmin
 
         private TabPage GetLastSelectedPage(object o)
         {
-            return
-                o == null ? selectedOverviewTab :
-                selectedTabs.ContainsKey(o) ? selectedTabs[o] :
-                                               null;
+            return o == null
+                ? selectedOverviewTab
+                : selectedTabs.ContainsKey(o) ? selectedTabs[o] : null;
         }
 
         private int NewTabsIndexOf(TabPage tp)
@@ -2070,6 +2105,36 @@ namespace XenAdmin
 
             if (t != null)
                 SetLastSelectedPage(SelectionManager.Selection.First, t);
+
+            UpdateTabePageFeatures();
+        }
+
+        private void UpdateTabePageFeatures()
+        {
+            var plugins = pluginManager.Plugins;
+            foreach (var p in plugins)
+            {
+                var features = p.Features;
+                foreach (var feature in features)
+                {
+                    var f = feature as TabPageFeature;
+                    if (f == null)
+                        continue;
+
+                    if (!f.ShowTab)
+                        continue;
+
+                    if (f.IsConsoleReplacement)
+                    {
+                        f.SetUrl();
+                        continue;
+                    }
+
+                    var page = GetLastSelectedPage(f.SelectedXenObject);
+                    if (page != null && page.Tag == f)
+                        f.SetUrl();
+                }
+            }
         }
 
         private void UnpauseVNC(bool focus)
