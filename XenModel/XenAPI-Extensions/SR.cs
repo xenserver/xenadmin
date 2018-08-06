@@ -492,6 +492,21 @@ namespace XenAPI
             return results;
         }
 
+        public virtual bool VdiCreationCanProceed(long vdiSize)
+        {
+            SM sm = GetSM();
+
+            bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            if (!vdiSizeUnlimited && vdiSize > 2 * Util.BINARY_TERA)
+                return false;
+
+            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+            if (!isThinlyProvisioned && vdiSize > FreeSpace())
+                return false;
+
+            return true;
+        }
+
         /// <summary>
         /// Parses an XML list of SRs (as returned by the SR.probe() call) into a list of SRInfos.
         /// </summary>

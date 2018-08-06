@@ -150,7 +150,7 @@ namespace XenAdmin.Controls
             get
             {
                 return existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(CanMigrate)
-                       && TheSR.SupportsVdiCreate() && !ExistingVDILocation() && !TheSR.IsDetached() && TargetSRHasEnoughFreeSpace;
+                       && TheSR.SupportsVdiCreate() && !ExistingVDILocation() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize);
             }
         }
     }
@@ -169,7 +169,7 @@ namespace XenAdmin.Controls
             get
             {
                 return !TheSR.IsDetached() && TheSR.SupportsVdiCreate() && !ExistingVDILocation() &&
-                       TargetSRHasEnoughFreeSpace;
+                       TheSR.VdiCreationCanProceed(DiskSize);
             }
         }
 
@@ -198,7 +198,7 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled
         {
-            get { return TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TargetSRHasEnoughFreeSpace; }
+            get { return TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize); }
         }
 
         protected override string CannotBeShownReason
@@ -224,7 +224,7 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled
         {
-            get { return TheSR.CanBeSeenFrom(Affinity) && TheSR.CanCreateVmOn() && TargetSRHasEnoughFreeSpace; }
+            get { return TheSR.CanBeSeenFrom(Affinity) && TheSR.CanCreateVmOn() && TheSR.VdiCreationCanProceed(DiskSize); }
         }
 
         protected override string CannotBeShownReason
@@ -273,14 +273,6 @@ namespace XenAdmin.Controls
             get
             {
                 return TheSR.ShowInVDISRList(Properties.Settings.Default.ShowHiddenVMs);
-            }
-        }
-
-        protected bool TargetSRHasEnoughFreeSpace
-        {
-            get
-            {
-                return TheSR.FreeSpace() >= DiskSize;
             }
         }
 
