@@ -5272,8 +5272,8 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>Export to File...</value>
   </data>
-  <data name="EXPORT_ERROR_GREATER_THAN_2TB_OVA_OVF" xml:space="preserve">
-    <value>VMs with disks greater than 2TB cannot be exported as an OVF/OVA package.</value>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>VMs with disks greater than {0} cannot be exported as an OVF/OVA package.</value>
   </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>Normal text file (*.txt)|*.txt|Rich text file (*.rtf)|*.rtf</value>
@@ -12528,6 +12528,12 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
+  </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>

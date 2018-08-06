@@ -14922,11 +14922,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs with disks greater than 2TB cannot be exported as an OVF/OVA package..
+        ///   Looks up a localized string similar to VMs with disks greater than {0} cannot be exported as an OVF/OVA package..
         /// </summary>
-        public static string EXPORT_ERROR_GREATER_THAN_2TB_OVA_OVF {
+        public static string EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF {
             get {
-                return ResourceManager.GetString("EXPORT_ERROR_GREATER_THAN_2TB_OVA_OVF", resourceCulture);
+                return ResourceManager.GetString("EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF", resourceCulture);
             }
         }
         
@@ -36214,6 +36214,24 @@ namespace XenAdmin {
         public static string VAL_SEC {
             get {
                 return ResourceManager.GetString("VAL_SEC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TiB.
+        /// </summary>
+        public static string VAL_TERB {
+            get {
+                return ResourceManager.GetString("VAL_TERB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TiBps.
+        /// </summary>
+        public static string VAL_TERRATE {
+            get {
+                return ResourceManager.GetString("VAL_TERRATE", resourceCulture);
             }
         }
         

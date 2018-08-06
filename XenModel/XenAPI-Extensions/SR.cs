@@ -58,6 +58,7 @@ namespace XenAPI
             tmpfs
         }
 
+        public const long DISK_MAX_SIZE = 2 * Util.BINARY_GIGA;
         public const string Content_Type_ISO = "iso";
         public const string SM_Config_Type_CD = "cd";
 
