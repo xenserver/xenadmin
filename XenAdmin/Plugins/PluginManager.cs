@@ -64,30 +64,6 @@ namespace XenAdmin.Plugins
         }
 
         /// <summary>
-        /// Gets all features from all plugins of the specified type that match the specified predicate.
-        /// </summary>
-        /// <typeparam name="T">The type of the features required.</typeparam>
-        /// <param name="match">The predicate that the features must match.</param>
-        /// <returns>The features.</returns>
-        public IEnumerable<T> GetAllFeatures<T>(Predicate<T> match) where T: Feature
-        {
-            Util.ThrowIfParameterNull(match, "match");
-
-            foreach (PluginDescriptor plugin in Plugins)
-            {
-                foreach (Feature feature in plugin.Features)
-                {
-                    T f = feature as T;
-
-                    if (f != null && match(f))
-                    {
-                        yield return f;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether plugins functionality is enabled. This is driven by whether the Plugins folder exists.
         /// </summary>
         /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
@@ -102,6 +78,41 @@ namespace XenAdmin.Plugins
         public int EnabledPluginsCount
         {
             get { return (from PluginDescriptor plugin in _plugins where plugin.Enabled select plugin).Count(); }
+        }
+
+        internal void GetFeatureTabPages(IXenObject xenObject, out List<TabPageFeature> consoleFeatures, out List<TabPageFeature> otherFeatures)
+        {
+            consoleFeatures = new List<TabPageFeature>();
+            otherFeatures = new List<TabPageFeature>();
+
+            var plugins = Plugins;
+            foreach (var p in plugins)
+            {
+                var features = p.Features;
+                foreach (var feature in features)
+                {
+                    var f = feature as TabPageFeature;
+                    if (f == null)
+                        continue;
+
+                    f.SelectedXenObject = xenObject;
+                    if (!f.ShowTab)
+                        continue;
+
+                    if (f.IsConsoleReplacement)
+                    {
+                        f.SetUrl();
+                        if (!f.IsError)
+                            consoleFeatures.Add(f);
+                    }
+                    else
+                    {
+                        if (f.IsCurrentlySelectedTab)
+                            f.SetUrl();
+                        otherFeatures.Add(f);
+                    }
+                }
+            }
         }
 
         public void OnPluginsChanged()
@@ -203,22 +214,6 @@ namespace XenAdmin.Plugins
             foreach (PluginDescriptor plugin in _plugins)
             {
                 plugin.DisposeURLs(xenObject);
-            }
-        }
-
-        public void SetSelectedXenObject(IXenObject xenObject)
-        {
-            foreach (PluginDescriptor plugin in Plugins)
-            {
-                foreach (Feature feature in plugin.Features)
-                {
-                    TabPageFeature tabPageFeature = feature as TabPageFeature;
-
-                    if (tabPageFeature != null)
-                    {
-                        tabPageFeature.SelectedXenObject = xenObject;
-                    }
-                }
             }
         }
 

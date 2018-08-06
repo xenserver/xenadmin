@@ -134,8 +134,6 @@ namespace XenAdmin.Plugins
         private BrowserState lastBrowserState = null;
 
         private TabControl tabControl;
-        private IXenObject selectedXenObject;
-        private IXenObject lastXenModelObject;
 
         private TabPage _tabPage;
         private WebBrowser2 Browser;
@@ -178,18 +176,7 @@ namespace XenAdmin.Plugins
             get { return _tabPage; }
         }
 
-        public IXenObject SelectedXenObject
-        {
-            get
-            {
-                return selectedXenObject;
-            }
-            set
-            {
-                selectedXenObject = value;
-                _tabControl_SelectedIndexChanged(null, EventArgs.Empty);
-            }
-        }
+        public IXenObject SelectedXenObject { private get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance should replace the console tab.
@@ -210,16 +197,16 @@ namespace XenAdmin.Plugins
         {
             get
             {
-                if (selectedXenObject != null)
-                {
-                    if (BrowserStates.ContainsKey(selectedXenObject))
-                    {
-                        return BrowserStates[selectedXenObject].IsError;
-                    }
-                }
+                if (SelectedXenObject != null && BrowserStates.ContainsKey(SelectedXenObject))
+                    return BrowserStates[SelectedXenObject].IsError;
 
-                return true;
+                return false;
             }
+        }
+
+        public bool IsCurrentlySelectedTab
+        {
+            get { return tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this; }
         }
 
         #endregion
@@ -276,52 +263,46 @@ namespace XenAdmin.Plugins
             {
                 try
                 {
-                    if (_tabPage == null || Program.MainWindow.SearchMode)
-                    {
+                    if (_tabPage == null)
                         return false;
-                    }
 
                     if (XenCenterOnly)
-                    {
                         return SelectedXenObject == null;
-                    }
 
                     if (SelectedXenObject == null || !Enabled || !Placeholders.UriValid(Url, SelectedXenObject))
-                    {
                         return false;
-                    }
 
                     return Search == null || Search.Query.Match(SelectedXenObject);
                 }
                 catch (UriFormatException e)
                 {
                     log.Debug(string.Format("Not displaying tab '{0}' for plugin '{1}'. Invalid properties in url '{2}'", ToString(), PluginDescriptor.Name, Url), e);
+                    return false;
                 }
-                return false;
             }
         }
 
-        private void SetUrl()
+        public void SetUrl()
         {
-            if (UrlIsLoaded && XenCenterOnly) // Never update XenCenter node tabs.
+            if (UrlIsLoaded && XenCenterOnly) // Never update XenCenter node tabs once loaded
                 return;
 
             BrowserState state;
-            if (selectedXenObject == null)
+            if (SelectedXenObject == null)
             {
                 // XenCenter node is selected, the placeholder code will sub in "null" for all placeholders
                 // After this point we will never update this url again for this node, so there is no need to store a browser state
-                state = new BrowserState(Placeholders.SubstituteUri(Url, selectedXenObject), selectedXenObject, Browser);
+                state = new BrowserState(Placeholders.SubstituteUri(Url, SelectedXenObject), SelectedXenObject, Browser);
             }
-            else if (BrowserStates.ContainsKey(selectedXenObject) && !BrowserStates[selectedXenObject].IsError)
+            else if (BrowserStates.ContainsKey(SelectedXenObject) && !BrowserStates[SelectedXenObject].IsError)
             {
                 // if there wasn't an error with navigation then use the stored browser-state. Otherwise try again.
-                state = BrowserStates[selectedXenObject];
+                state = BrowserStates[SelectedXenObject];
             }
             else
             {
-                state = new BrowserState(Placeholders.SubstituteUri(Url, selectedXenObject), selectedXenObject, Browser);
-                BrowserStates[selectedXenObject] = state;
+                state = new BrowserState(Placeholders.SubstituteUri(Url, SelectedXenObject), SelectedXenObject, Browser);
+                BrowserStates[SelectedXenObject] = state;
             }
 
             if (lastBrowserState == state)
@@ -520,47 +501,23 @@ namespace XenAdmin.Plugins
 
         private void TabPage_ParentChanged(object sender, EventArgs e)
         {
-            TabControl tabControl = _tabPage.Parent as TabControl;
+            if (tabControl != null)
+                tabControl.SelectedIndexChanged -= _tabControl_SelectedIndexChanged;
 
-            if (this.tabControl != null)
-            {
-                this.tabControl.SelectedIndexChanged -= _tabControl_SelectedIndexChanged;
-            }
+            tabControl = _tabPage.Parent as TabControl;
 
-            this.tabControl = tabControl;
-
-            if (this.tabControl != null)
-            {
-                this.tabControl.SelectedIndexChanged += _tabControl_SelectedIndexChanged;
-            }
+            if (tabControl != null)
+                tabControl.SelectedIndexChanged += _tabControl_SelectedIndexChanged;
         }
 
         private void _tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Console)
-            {
-                // if this is a console replacement window, then update the browser object with every selection change. This way the console
-                // tabs will always stay up-to-date
+            // If this is a console replacement window, then update the browser object with every selection change;
+            // this way the console tabs will always stay up-to-date.
+            // If this isn't a console replacement window, then only update when this tab is selected
 
-                lastXenModelObject = SelectedXenObject;
-                if (ShowTab)
-                    SetUrl();
-            }
-            else
-            {
-                // if this isn't a console replacement window, then only update when this tab is selected.
-
-                if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
-                {
-                    lastXenModelObject = SelectedXenObject;
-                    if (ShowTab)
-                        SetUrl();
-                }
-                else if (lastXenModelObject != null)
-                {
-                    lastXenModelObject = null;
-                }
-            }
+            if (ShowTab && (Console || IsCurrentlySelectedTab))
+                SetUrl();
         }
 
         #endregion
