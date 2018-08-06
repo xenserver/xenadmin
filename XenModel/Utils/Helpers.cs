@@ -1327,15 +1327,11 @@ namespace XenAdmin.Core
         /// <returns></returns>
         public static string FirstLine(string s)
         {
-            if (s == null)
-            {
-                return "";
-            }
-            else
-            {
-                s = s.Split(new char[] { '\n' })[0];
-                return s.Split(new char[] { '\r' })[0];
-            }
+            if (string.IsNullOrEmpty(s))
+                return string.Empty;
+
+            s = s.Split('\n')[0];
+            return s.Split('\r')[0];
         }
 
         /// <summary>
