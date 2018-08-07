@@ -83,7 +83,7 @@ namespace XenAdminTests.Controls
                     Sr = GetLocalSr(slaveHost),
                     VdisToMove = GetVDIsOn(largeISCSI).Where(v => !v.name_label.Contains("OnMaster")).ToArray(),
                     DiskSize = 8000000000000,
-                    ExpectedFailureDescription = "Disk size (7450.58 GB) exceeds SR size (224.8 GB)"
+                    ExpectedFailureDescription = "Disk size (7.28 TiB) exceeds SR size (224.8 GB)"
                 };
                 yield return new TestData //Local master to slave local
                 {
