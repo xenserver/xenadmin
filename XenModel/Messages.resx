@@ -9931,6 +9931,12 @@ Please reconnect the host and try again</value>
   <data name="POOL_COLON" xml:space="preserve">
     <value>Pool:</value>
   </data>
+  <data name="POOL_DELETE_HA_ENABLED" xml:space="preserve">
+    <value>Pool '{0}' has HA enabled. You must disable HA before making the pool into a standalone server.</value>
+  </data>
+  <data name="POOL_DELETE_HA_ENABLING" xml:space="preserve">
+    <value>HA is currently being enabled on pool '{0}'. You must disable HA before making the pool into a standalone server.</value>
+  </data>
   <data name="POOL_EDIT_IN_PROGRESS" xml:space="preserve">
     <value>The configuration for this pool is currently being modified</value>
   </data>
