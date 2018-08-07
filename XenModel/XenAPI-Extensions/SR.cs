@@ -58,6 +58,7 @@ namespace XenAPI
             tmpfs
         }
 
+        public const long DISK_MAX_SIZE = 2 * Util.BINARY_TERA;
         public const string Content_Type_ISO = "iso";
         public const string SM_Config_Type_CD = "cd";
 
@@ -497,7 +498,7 @@ namespace XenAPI
             SM sm = GetSM();
 
             bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
-            if (!vdiSizeUnlimited && vdiSize > 2 * Util.BINARY_TERA)
+            if (!vdiSizeUnlimited && vdiSize > DISK_MAX_SIZE)
                 return false;
 
             bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;

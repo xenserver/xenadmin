@@ -171,6 +171,12 @@ namespace XenAdmin
 
         private static string ByteSizeString(double bytes, int decPlaces, bool isRate, out string unit, string format = null)
         {
+            if (bytes >= BINARY_TERA)
+            {
+                unit = isRate ? Messages.VAL_TERRATE : Messages.VAL_TERB;
+                var result = Math.Round(bytes / BINARY_TERA, decPlaces);
+                return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
+            }
             if (bytes >= BINARY_GIGA)
             {
                 unit = isRate ? Messages.VAL_GIGRATE : Messages.VAL_GIGB;
