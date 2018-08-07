@@ -28499,6 +28499,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pool &apos;{0}&apos; has HA enabled. You must disable HA before making the pool into a standalone server..
+        /// </summary>
+        public static string POOL_DELETE_HA_ENABLED {
+            get {
+                return ResourceManager.GetString("POOL_DELETE_HA_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HA is currently being enabled on pool &apos;{0}&apos;. You must disable HA before making the pool into a standalone server..
+        /// </summary>
+        public static string POOL_DELETE_HA_ENABLING {
+            get {
+                return ResourceManager.GetString("POOL_DELETE_HA_ENABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The configuration for this pool is currently being modified.
         /// </summary>
         public static string POOL_EDIT_IN_PROGRESS {
