@@ -42,7 +42,6 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenAPI;
-using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.HAWizard_Pages
@@ -53,7 +52,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         private IXenConnection connection;
 
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
-        private readonly QueuedBackgroundWorker m_worker;
+        private readonly List<VM> _vmsQueuedForUpdate = new List<VM>();
 
         /// <summary>
         /// May not be set to null.
@@ -160,8 +159,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             nudStartDelay.Maximum = long.MaxValue;
             nudOrder.Maximum = long.MaxValue;
-
-            m_worker = new QueuedBackgroundWorker();
         }
 
         /// <summary> 
@@ -256,7 +253,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
                 dataGridViewVms.Rows.AddRange(newRows.ToArray());
                 var addedVms = from row in dataGridViewVms.Rows.Cast<VmWithSettingsRow>() select row.Vm;
-                UpdateVMsAgility(addedVms);
+                UpdateVMsAgility(addedVms.ToList());
             }
             finally
             {
@@ -267,17 +264,26 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// <summary>
         /// Starts a new background thread that updates the displayed agility status for each VM.
         /// </summary>
-        private void UpdateVMsAgility(IEnumerable<VM> vms)
+        private void UpdateVMsAgility(List<VM> vms)
         {
-            Debug.Assert(connection != null, "Connection property must have been set to non-null before calling this function");
+            if (bgWorker.IsBusy)
+            {
+                foreach (var vm in vms)
+                {
+                    if (!_vmsQueuedForUpdate.Contains(vm))
+                        _vmsQueuedForUpdate.Add(vm);
+                }
+                return;
+            }
 
-            //worker starts on UI (main) thread
-            m_worker.RunWorkerAsync((sender, arg) => worker_DoWork(null, vms), worker_RunWorkerCompleted);
+            Debug.Assert(connection != null, "Connection is null; set it to non-null before calling this method.");
+            if (vms.Count > 0)
+                bgWorker.RunWorkerAsync(vms);
         }
 
-        private object worker_DoWork(object sender, object arg)
+        private void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var vms = arg as IEnumerable<VM>;
+            var vms = e.Argument as IEnumerable<VM>;
             Debug.Assert(vms != null);
 
             Session session = connection.DuplicateSession();
@@ -296,10 +302,10 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 }
             }
 
-            return results;
+            e.Result = results;
         }
 
-        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
             {
@@ -346,6 +352,13 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 row.FriendlyNonAgileReason = nonAgileReason;
             }
             updateButtons();
+
+            if (_vmsQueuedForUpdate.Count > 0)
+            {
+                var vms = new List<VM>(_vmsQueuedForUpdate);
+                _vmsQueuedForUpdate.Clear();
+                UpdateVMsAgility(vms);
+            }
         }
         
         private bool IsHaActivatedFirstTime(IEnumerable<VM> vms)
@@ -517,12 +530,12 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         private void m_dropDownButtonRestartPriority_Click(object sender, EventArgs e)
         {
-            var selectedRows = dataGridViewVms.SelectedRows.Cast<VmWithSettingsRow>();
+            var selectedRows = dataGridViewVms.SelectedRows.Cast<VmWithSettingsRow>().ToList();
 
             foreach (ToolStripMenuItem item in contextMenuStrip.Items)
             {
                 var itemRestartPriority = ((VM.HA_Restart_Priority)item.Tag);
-                item.Checked = selectedRows.Count() > 0 && selectedRows.All(s => s.RestartPriority == itemRestartPriority);
+                item.Checked = selectedRows.Count > 0 && selectedRows.All(s => s.RestartPriority == itemRestartPriority);
             }
         }
 
@@ -530,7 +543,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         {
             Program.AssertOnEventThread();
 
-            var selectedRows = dataGridViewVms.SelectedRows.Cast<VmWithSettingsRow>();
+            var selectedRows = dataGridViewVms.SelectedRows.Cast<VmWithSettingsRow>().ToList();
 
             if (dataGridViewVms.SelectedRows.Count == 0)
             {
@@ -578,11 +591,11 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             // set the order and delay NUDs 
             nudOrder.Enabled = nudStartDelay.Enabled = true;
 
-            var orderDistList = (from row in selectedRows select row.StartOrder).Distinct();
-            nudOrder.Text = orderDistList.Count() == 1 ? orderDistList.ElementAt(0).ToString() : "";
+            var orderDistList = (from row in selectedRows select row.StartOrder).Distinct().ToList();
+            nudOrder.Text = orderDistList.Count == 1 ? orderDistList.ElementAt(0).ToString() : "";
 
-            var delayDistList = (from row in selectedRows select row.StartDelay).Distinct();
-            nudStartDelay.Text = delayDistList.Count() == 1 ? delayDistList.ElementAt(0).ToString() : "";
+            var delayDistList = (from row in selectedRows select row.StartDelay).Distinct().ToList();
+            nudStartDelay.Text = delayDistList.Count == 1 ? delayDistList.ElementAt(0).ToString() : "";
 
             // check that all the VMs selected in the list are agile and make sure the protect button is disabled with the relevant reason
             VmWithSettingsRow nonAgileRow = selectedRows.FirstOrDefault(r => !r.IsAgile);
