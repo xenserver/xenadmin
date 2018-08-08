@@ -109,14 +109,16 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         {
             Program.AssertOnEventThread();
 
-            VM vm = (VM)e.Element;
+            var vm = e.Element as VM;
+            if (vm == null)
+                return;
+
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
                     vm.PropertyChanged -= vm_PropertyChanged;
                     vm.PropertyChanged += vm_PropertyChanged;
                     AddVmRow(vm);
-                    UpdateVMsAgility(new List<VM> {vm});
                     break;
                 case CollectionChangeAction.Remove:
                     vm.PropertyChanged -= vm_PropertyChanged;
@@ -365,6 +367,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority();
             var row = new VmWithSettingsRow(vm, priority);
             dataGridViewVms.Rows.Add(row);
+            UpdateVMsAgility(new List<VM> {vm});
         }
 
         private void RemoveVmRow(VM vm)
@@ -388,34 +391,32 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            var vm = sender as VM;
+            if (vm == null)
+                return;
+
             Program.Invoke(this, () =>
+            {
+                var row = findItemFromVM(vm);
+
+                try
                 {
-                    VM vm = (VM)sender;
-                    if (vm == null)
-                        return;
+                    dataGridViewVms.SuspendLayout();
 
-                    // Find row for VM
-                    var row = findItemFromVM(vm);
-
-                    try
+                    if (row == null)
+                        AddVmRow(vm);
+                    else
                     {
-                        dataGridViewVms.SuspendLayout();
-
-                        if (row == null)
-                            AddVmRow(vm);
-                        else
-                        {
-                            row.UpdateVm(vm);
-                            row.SetAgileCalculating();
-                        }
-
+                        row.UpdateVm(vm);
+                        row.SetAgileCalculating();
                         UpdateVMsAgility(new List<VM> {vm});
                     }
-                    finally
-                    {
-                        dataGridViewVms.ResumeLayout();
-                    }
-                });
+                }
+                finally
+                {
+                    dataGridViewVms.ResumeLayout();
+                }
+            });
         }
 
         private void haNtolIndicator_UpdateInProgressChanged(object sender, EventArgs e)
