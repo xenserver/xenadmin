@@ -60,6 +60,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// </summary>
         public new IXenConnection Connection
         {
+            private get { return connection; }
             set
             {
                 if (value == null)
@@ -68,16 +69,20 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 if (connection != null)
                     DeregisterEvents();
 
-                this.connection = value;
-
+                connection = value;
                 RegisterEvents();
-
-                UpdateMenuItems();
-                PopulateVMs();
-
-                haNtolIndicator.Connection = value;
-                haNtolIndicator.Settings = getCurrentSettings();
             }
+        }
+
+        internal void PopulatePageControls()
+        {
+            Debug.Assert(connection != null, "Connection is null; set it to non-null before calling this method.");
+
+            UpdateMenuItems();
+            PopulateVMs();
+            haNtolIndicator.Connection = Connection;
+            haNtolIndicator.Settings = getCurrentSettings();
+            StartNtolUpdate();
         }
 
         private void UpdateMenuItems()
@@ -203,7 +208,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// </summary>
         internal bool ProtectVmsByDefault { get; set; }
 
-        internal void StartNtolUpdate()
+        private void StartNtolUpdate()
         {
             haNtolIndicator.StartNtolUpdate();
         }
@@ -693,7 +698,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            StartNtolUpdate();
+            PopulatePageControls();
         }
 
         public override void SelectDefaultControl()
