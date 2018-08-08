@@ -718,7 +718,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             private readonly DataGridViewTextBoxCell cellStartOrder;
             private readonly DataGridViewTextBoxCell cellDelay;
             private readonly DataGridViewTextBoxCell cellAgile;
-            private string _nonAgileReason;
+            private string _nonAgileReason = string.Empty;
 
             public VM Vm { get; private set; }
             public long StartDelay { get; private set; }
@@ -733,30 +733,37 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             /// </summary>
             public string FriendlyNonAgileReason
             {
-                get
-                {
-                    switch (_nonAgileReason)
-                    {
-                        case null:
-                            return "";
-                        case "HA_CONSTRAINT_VIOLATION_SR_NOT_SHARED":
-                            return Messages.NOT_AGILE_SR_NOT_SHARED;
-                        case "HA_CONSTRAINT_VIOLATION_NETWORK_NOT_SHARED":
-                            return Messages.NOT_AGILE_NETWORK_NOT_SHARED;
-                        case "VM_HAS_VGPU":
-                            return Messages.NOT_AGILE_VM_HAS_VGPU;
-                        case "VM_HAS_VUSB":
-                            return Messages.NOT_AGILE_VM_HAS_VUSB;
-                        case "VM_HAS_SRIOV_VIF":
-                            return Messages.NOT_AGILE_VM_HAS_SRIOV_VIF;
-                        default:
-                            // We shouldn't really be here unless we have not iterated all the return errors from vm.assert_agile
-                            return Messages.NOT_AGILE_UNKOWN;
-                    }
-                }
+                get { return _nonAgileReason; }
                 set
                 {
-                    _nonAgileReason = value;
+                    var msg = string.Empty;
+                    switch (value)
+                    {
+                        case null:
+                            break;
+                        case "HA_CONSTRAINT_VIOLATION_SR_NOT_SHARED":
+                            msg = Messages.NOT_AGILE_SR_NOT_SHARED;
+                            break;
+                        case "HA_CONSTRAINT_VIOLATION_NETWORK_NOT_SHARED":
+                            msg = Messages.NOT_AGILE_NETWORK_NOT_SHARED;
+                            break;
+                        case "VM_HAS_VGPU":
+                            msg = Messages.NOT_AGILE_VM_HAS_VGPU;
+                            break;
+                        case "VM_HAS_VUSB":
+                            msg = Messages.NOT_AGILE_VM_HAS_VUSB;
+                            break;
+                        case "VM_HAS_SRIOV_VIF":
+                            msg = Messages.NOT_AGILE_VM_HAS_SRIOV_VIF;
+                            break;
+                        default:
+                            // We shouldn't really be here unless we have not iterated through all the return errors from vm.assert_agile
+                            msg = Messages.NOT_AGILE_UNKOWN;
+                            break;
+                    }
+
+                    _nonAgileReason = msg;
+                    cellAgile.ToolTipText = msg;
                 }
             }
 
