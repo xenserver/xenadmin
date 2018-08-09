@@ -3061,12 +3061,6 @@
     <Compile Include="Diagnostics\Problems\VMProblem\RunningVMProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\ExistingVmWarning.cs" />
     <Compile Include="Diagnostics\Problems\Warning.cs" />
-    <Compile Include="Dialogs\DecompressApplianceDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\DecompressApplianceDialog.Designer.cs">
-      <DependentUpon>DecompressApplianceDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\DownloadApplianceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5246,15 +5240,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DateFilterDialog.zh-CN.resx">
       <DependentUpon>DateFilterDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DecompressApplianceDialog.ja.resx">
-      <DependentUpon>DecompressApplianceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DecompressApplianceDialog.resx">
-      <DependentUpon>DecompressApplianceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DecompressApplianceDialog.zh-CN.resx">
-      <DependentUpon>DecompressApplianceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DialogWithProgress.ja.resx">
       <DependentUpon>DialogWithProgress.cs</DependentUpon>
