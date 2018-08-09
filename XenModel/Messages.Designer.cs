@@ -32397,6 +32397,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot create a disk greater than {0} on this SR..
+        /// </summary>
+        public static string SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE {
+            get {
+                return ResourceManager.GetString("SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} required when only {1} available.
         /// </summary>
         public static string SR_PICKER_INSUFFICIENT_SPACE {
