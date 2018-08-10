@@ -360,6 +360,12 @@
     <Compile Include="Dialogs\UsbUsageDialog.Designer.cs">
       <DependentUpon>UsbUsageDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\BallooningDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BallooningDialog.Designer.cs">
+      <DependentUpon>BallooningDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1699,14 +1705,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>AssignLicenseDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\BallooningDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>BallooningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\BallooningDialogAdvanced.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>BallooningDialogAdvanced.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ControlDomainMemoryDialog.resx">
       <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1880,6 +1878,15 @@
     <EmbeddedResource Include="Dialogs\VMDialogs\SelectVMsToSuspendDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectVMsToSuspendDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BallooningDialog.ja.resx">
+      <DependentUpon>BallooningDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BallooningDialog.resx">
+      <DependentUpon>BallooningDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BallooningDialog.zh-CN.resx">
+      <DependentUpon>BallooningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbEditScheduledTask.resx">
       <SubType>Designer</SubType>
@@ -4005,21 +4012,6 @@
     <Compile Include="Dialogs\AssignLicenseDialog.Designer.cs">
       <DependentUpon>AssignLicenseDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\BallooningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\BallooningDialog.Designer.cs">
-      <DependentUpon>BallooningDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\BallooningDialogAdvanced.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\BallooningDialogAdvanced.Designer.cs">
-      <DependentUpon>BallooningDialogAdvanced.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\BallooningDialogBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Dialogs\ReconnectAsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5186,18 +5178,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AttachDiskDialog.zh-CN.resx">
       <DependentUpon>AttachDiskDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\BallooningDialog.ja.resx">
-      <DependentUpon>BallooningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\BallooningDialog.zh-CN.resx">
-      <DependentUpon>BallooningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\BallooningDialogAdvanced.ja.resx">
-      <DependentUpon>BallooningDialogAdvanced.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\BallooningDialogAdvanced.zh-CN.resx">
-      <DependentUpon>BallooningDialogAdvanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BondProperties.ja.resx">
       <DependentUpon>BondProperties.cs</DependentUpon>

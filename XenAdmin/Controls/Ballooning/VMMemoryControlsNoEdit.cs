@@ -115,12 +115,7 @@ namespace XenAdmin.Controls.Ballooning
         private void editButton_Click(object sender, EventArgs e)
         {
             if (vms.Count == 1)
-            {
-                if (vm0.advanced_ballooning())
-                    (new BallooningDialogAdvanced(vm0)).ShowDialog();
-                else
-                    (new BallooningDialog(vm0)).ShowDialog();
-            }
+                new BallooningDialog(vm0, vm0.advanced_ballooning()).ShowDialog(Program.MainWindow);
             else
                 Program.MainWindow.ShowPerConnectionWizard(vm0.Connection, new BallooningWizard(vms));
         }

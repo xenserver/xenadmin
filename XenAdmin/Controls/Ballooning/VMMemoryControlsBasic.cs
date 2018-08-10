@@ -60,9 +60,6 @@ namespace XenAdmin.Controls.Ballooning
             if (!firstPaint)
                 return;
 
-            // Layout because of different fonts. I tried putting this in the constructor but it didn't take effect that early.
-            memorySpinnerFixed.Left = radioOff.Right + radioOff.Margin.Right;
-
             // Calculate the maximum legal value of dynamic minimum
             CalcMaxDynMin();
 
@@ -104,7 +101,9 @@ namespace XenAdmin.Controls.Ballooning
                         if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL;
                         else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                            labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates() ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL : Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL;
+                            labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates()
+                                ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL
+                                : Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL;
                         else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_OLDTOOLS_PLURAL;
                         else
@@ -126,7 +125,9 @@ namespace XenAdmin.Controls.Ballooning
                     if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED;
                     else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                        labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates() ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT : Messages.DMC_UNAVAILABLE_NOTOOLS;
+                        labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates()
+                            ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT
+                            : Messages.DMC_UNAVAILABLE_NOTOOLS;
                     else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_OLDTOOLS;
                     else
