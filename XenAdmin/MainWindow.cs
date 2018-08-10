@@ -3028,21 +3028,26 @@ namespace XenAdmin
 
         private void navigationPane_NotificationsSubModeChanged(NotificationsSubModeItem submodeItem)
         {
-            alertPage.Visible = submodeItem.SubMode == NotificationsSubMode.Alerts;
-            updatesPage.Visible = submodeItem.SubMode == NotificationsSubMode.Updates;
-            eventsPage.Visible = submodeItem.SubMode == NotificationsSubMode.Events;
-            TheTabControl.Visible = false;
-
-            if (alertPage.Visible)
-                alertPage.RefreshAlertList();
-
-            if (updatesPage.Visible)
-                updatesPage.RefreshUpdateList();
-
-            if (eventsPage.Visible)
+            switch (submodeItem.SubMode)
             {
-                eventsPage.RefreshDisplayedEvents();
-            }
+                case NotificationsSubMode.Alerts:
+                    alertPage.ShowPage();
+                    updatesPage.HidePage();
+                    eventsPage.HidePage();
+                    break;
+                case NotificationsSubMode.Updates:
+                    alertPage.HidePage();
+                    updatesPage.ShowPage();
+                    eventsPage.HidePage();
+                    break;
+                case NotificationsSubMode.Events:
+                    alertPage.HidePage();
+                    updatesPage.HidePage();
+                    eventsPage.ShowPage();
+                    break;
+            } 
+
+            TheTabControl.Visible = false;
 
             loggedInLabel1.Connection = null;
             TitleLabel.Text = submodeItem.Text;
@@ -3060,7 +3065,12 @@ namespace XenAdmin
             {
                 bool tabControlWasVisible = TheTabControl.Visible;
                 TheTabControl.Visible = true;
-                alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+                if (alertPage.Visible)
+                    alertPage.HidePage();
+                if (updatesPage.Visible)
+                    updatesPage.HidePage();
+                if (eventsPage.Visible)
+                    eventsPage.HidePage();
 
                 // force an update of the selected tab when switching back from Notification view, 
                 // as some tabs ignore the update events when not visible (e.g. Snapshots, HA)
