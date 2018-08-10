@@ -1107,6 +1107,9 @@
   <data name="ACTION_VMS_MIGRATING_TITLE" xml:space="preserve">
     <value>Migrating VMs</value>
   </data>
+  <data name="ACTION_VMS_REBOOTING_TITLE" xml:space="preserve">
+    <value>Rebooting VMs</value>
+  </data>
   <data name="ACTION_VMS_RESUMING_ON_TITLE" xml:space="preserve">
     <value>Resuming VMs</value>
   </data>
@@ -1115,6 +1118,9 @@
   </data>
   <data name="ACTION_VMS_STARTING_ON_TITLE" xml:space="preserve">
     <value>Starting VMs</value>
+  </data>
+  <data name="ACTION_VMS_SUSPENDING_TITLE" xml:space="preserve">
+    <value>Suspending VMs</value>
   </data>
   <data name="ACTION_VM_COPIED" xml:space="preserve">
     <value>Copied</value>
@@ -11530,12 +11536,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="SUSPEND" xml:space="preserve">
     <value>Suspend</value>
-  </data>
-  <data name="SUSPENDED_SPECIFIED_VMS" xml:space="preserve">
-    <value>Suspended specified VMs</value>
-  </data>
-  <data name="SUSPENDING_SPECIFIED_VMS" xml:space="preserve">
-    <value>Suspending specified VMs</value>
   </data>
   <data name="SUSPENDING_VM_OUT_OF" xml:space="preserve">
     <value>Suspending VM {0} out of {1}</value>
