@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -3445,6 +3445,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rebooting VMs.
+        /// </summary>
+        public static string ACTION_VMS_REBOOTING_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VMS_REBOOTING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resuming VMs.
         /// </summary>
         public static string ACTION_VMS_RESUMING_ON_TITLE {
@@ -3468,6 +3477,15 @@ namespace XenAdmin {
         public static string ACTION_VMS_STARTING_ON_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_VMS_STARTING_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspending VMs.
+        /// </summary>
+        public static string ACTION_VMS_SUSPENDING_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VMS_SUSPENDING_TITLE", resourceCulture);
             }
         }
         
@@ -33317,24 +33335,6 @@ namespace XenAdmin {
         public static string SUSPEND_VMS {
             get {
                 return ResourceManager.GetString("SUSPEND_VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Suspended specified VMs.
-        /// </summary>
-        public static string SUSPENDED_SPECIFIED_VMS {
-            get {
-                return ResourceManager.GetString("SUSPENDED_SPECIFIED_VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Suspending specified VMs.
-        /// </summary>
-        public static string SUSPENDING_SPECIFIED_VMS {
-            get {
-                return ResourceManager.GetString("SUSPENDING_SPECIFIED_VMS", resourceCulture);
             }
         }
         
