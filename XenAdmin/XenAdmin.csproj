@@ -451,6 +451,9 @@
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\NotificationsBasePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="TabPages\PvsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
