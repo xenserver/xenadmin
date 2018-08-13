@@ -3031,18 +3031,24 @@ namespace XenAdmin
             switch (submodeItem.SubMode)
             {
                 case NotificationsSubMode.Alerts:
+                    if (updatesPage.Visible)
+                        updatesPage.HidePage();
+                    if (eventsPage.Visible)
+                        eventsPage.HidePage();
                     alertPage.ShowPage();
-                    updatesPage.HidePage();
-                    eventsPage.HidePage();
                     break;
                 case NotificationsSubMode.Updates:
-                    alertPage.HidePage();
+                    if (alertPage.Visible)
+                        alertPage.HidePage();
+                    if (eventsPage.Visible)
+                        eventsPage.HidePage();
                     updatesPage.ShowPage();
-                    eventsPage.HidePage();
                     break;
                 case NotificationsSubMode.Events:
-                    alertPage.HidePage();
-                    updatesPage.HidePage();
+                    if (alertPage.Visible)
+                        alertPage.HidePage();
+                    if (updatesPage.Visible)
+                        updatesPage.HidePage();
                     eventsPage.ShowPage();
                     break;
             } 
