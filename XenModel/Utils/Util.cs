@@ -138,16 +138,16 @@ namespace XenAdmin
             return string.Format(Messages.VAL_FORMAT, value, unit);
         }       
 	
-		public static string DiskSizeString(long bytes)
+        public static string DiskSizeString(long bytes, string format = null)
         {
-            return DiskSizeString(bytes, 1);
+            return DiskSizeString(bytes, 1, format);
         }
 
-		public static string DiskSizeString(long bytes, int dp)
+        public static string DiskSizeString(long bytes, int dp, string format = null)
 		{
 			ulong abs = (ulong)Math.Abs(bytes);
             string unit;
-            string value = ByteSizeString(abs, dp, false, out unit);
+            string value = ByteSizeString(abs, dp, false, out unit, format);
             return string.Format(Messages.VAL_FORMAT, value, unit);
 		}
 
@@ -169,24 +169,27 @@ namespace XenAdmin
             return ByteSizeString(bytes, 0, false, out unit);
         }
 
-        private static string ByteSizeString(double bytes, int decPlaces, bool isRate, out string unit)
+        private static string ByteSizeString(double bytes, int decPlaces, bool isRate, out string unit, string format = null)
         {
             if (bytes >= BINARY_GIGA)
             {
                 unit = isRate ? Messages.VAL_GIGRATE : Messages.VAL_GIGB;
-                return Math.Round(bytes / BINARY_GIGA, decPlaces).ToString();
+                var result = Math.Round(bytes / BINARY_GIGA, decPlaces);
+                return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
 
             if (bytes >= BINARY_MEGA)
             {
                 unit = isRate ? Messages.VAL_MEGRATE : Messages.VAL_MEGB;
-                return Math.Round(bytes / BINARY_MEGA, decPlaces).ToString();
+                var result = Math.Round(bytes / BINARY_MEGA, decPlaces);
+                return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
 
             if (bytes >= BINARY_KILO)
             {
                 unit = isRate ? Messages.VAL_KILRATE : Messages.VAL_KILB;
-                return Math.Round(bytes / BINARY_KILO, decPlaces).ToString();
+                var result = Math.Round(bytes / BINARY_KILO, decPlaces);
+                return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
 
             unit = isRate ? Messages.VAL_RATE : Messages.VAL_BYTE;
@@ -356,6 +359,33 @@ namespace XenAdmin
         public static string CountsPerSecondString(double p)
         {
             return string.Format(Messages.VAL_FORMAT, p, Messages.COUNTS_PER_SEC_UNIT);
+        }
+
+        public static string MegaHertzString(double t)
+        {
+            string unit;
+            string value = MegaHertzValue(t, out unit);
+            return string.Format(Messages.VAL_FORMAT, value, unit);
+        }
+
+        public static string MegaHertzValue(double t, out string unit)
+        {
+            return MegaHertzValue(t, 4, out unit);
+        }
+
+        /// <summary>
+        /// Converts the input value from MHz to GHz if needed, rounding it to the specified decimal places
+        /// </summary>
+        private static string MegaHertzValue(double t, int decPlaces, out string unit)
+        {
+            if (t >= DEC_KILO)
+            {
+                unit = Messages.VAL_GIGHZ;
+                return Math.Round(t / DEC_KILO, decPlaces).ToString();
+            }
+            
+            unit = Messages.VAL_MEGHZ;
+            return Math.Round(t, decPlaces).ToString();
         }
 
         public static string PercentageString(double fraction)

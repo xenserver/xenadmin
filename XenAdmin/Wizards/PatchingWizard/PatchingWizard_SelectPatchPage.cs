@@ -56,6 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool CheckForUpdatesInProgress;
         public XenServerPatchAlert SelectedUpdateAlert;
         public XenServerPatchAlert FileFromDiskAlert;
+        public bool FileFromDiskHasUpdateXml { get; private set; }
         private bool firstLoad = true;
         private string unzippedUpdateFilePath;
 
@@ -224,13 +225,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                              ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
                              : null;
 
-                    FileFromDiskAlert = selectFromDiskRadioButton.Checked
-                                                 ? GetAlertFromFile(fileName)
-                                                 : null;
+                    bool hasUpdateXml = false;
+                    FileFromDiskAlert = selectFromDiskRadioButton.Checked 
+                        ? GetAlertFromFile(fileName, out hasUpdateXml)
+                        : null;
+                    FileFromDiskHasUpdateXml = hasUpdateXml;
 
                     if (downloadUpdateRadioButton.Checked)
                     {
-                        if (SelectedUpdateAlert != null && SelectedUpdateAlert.DistinctHosts != null && SelectedUpdateAlert.DistinctHosts.Any(Helpers.ElyOrGreater)) // this is to check whether the Alert represents an ISO update (Ely or greater)
+                        var distinctHosts = SelectedUpdateAlert != null ? SelectedUpdateAlert.DistinctHosts : null;
+                        if (distinctHosts != null && distinctHosts.Any(Helpers.ElyOrGreater)) // this is to check whether the Alert represents an ISO update (Ely or greater)
                         {
                             SelectedUpdateType = UpdateType.ISO;
                         }
@@ -280,9 +284,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private XenServerPatchAlert GetAlertFromFile(string fileName)
+        private XenServerPatchAlert GetAlertFromFile(string fileName, out bool hasUpdateXml)
         {
-            var alertFromIso = GetAlertFromIsoFile(fileName);
+            var alertFromIso = GetAlertFromIsoFile(fileName, out hasUpdateXml);
             if (alertFromIso != null)
                 return alertFromIso;
 
@@ -290,8 +294,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Updates.FindPatchAlertByName(Path.GetFileNameWithoutExtension(fileName));
         }
 
-        private XenServerPatchAlert GetAlertFromIsoFile(string fileName)
+        private XenServerPatchAlert GetAlertFromIsoFile(string fileName, out bool hasUpdateXml)
         {
+            hasUpdateXml = false;
+
             if (!fileName.EndsWith(Branding.UpdateIso))
                 return null;
 
@@ -307,6 +313,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         using (var fileStream = cd.OpenFile("Update.xml", FileMode.Open))
                         {
                             xmlDoc.Load(fileStream);
+                            hasUpdateXml = true;
                         }
                     }
                 }
@@ -574,16 +581,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (e.Column.Index == ColumnDate.Index)
             {
-                int sortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
-                e.SortResult = (dataGridViewPatches.SortOrder == SortOrder.Descending) ? sortResult *= -1 : sortResult;
+                e.SortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
                 e.Handled = true;
             }
-        }
-
-        private void dataGridViewPatches_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (dataGridViewPatches.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
-                PopulatePatchesBox();
         }
 
         private void dataGridViewPatches_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -235,13 +235,9 @@ namespace XenAdmin.Actions
 
         private string GetIPInRange(string range_start, PIF existing_pif)
         {
-            Host host = Connection.Resolve(existing_pif.host);
-            if (host == null)
-                throw new Failure(Failure.INTERNAL_ERROR, "Host has gone away during IP address calculation!");
-
-            int i = Array.IndexOf(Hosts, host);
+            int i = Array.FindIndex(Hosts, h => h.opaque_ref == existing_pif.host);
             if (i == -1)
-                throw new Failure(Failure.INTERNAL_ERROR, "Host not in master list during IP address calculation!");
+                throw new Failure(Failure.INTERNAL_ERROR, Messages.HOST_GONE);
 
             string[] bits = range_start.Split('.');
             return string.Format("{0}.{1}.{2}.{3}", bits[0], bits[1], bits[2], int.Parse(bits[3]) + i);
@@ -254,8 +250,7 @@ namespace XenAdmin.Actions
         private void DisableClustering(PIF pif, out List<PBD> gfs2Pbds)
         {
             gfs2Pbds = new List<PBD>();
-            var isUsedByClustering = Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
-            if (!isUsedByClustering)
+            if (!pif.IsUsedByClustering())
                 return;
 
             var host = Connection.Resolve(pif.host);
@@ -290,8 +285,7 @@ namespace XenAdmin.Actions
         /// </summary>
         private void EnableClustering(PIF pif, List<PBD> gfs2Pbds)
         {
-            var isUsedByClustering = Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
-            if (!isUsedByClustering)
+            if (!pif.IsUsedByClustering())
                 return;
 
             var host = Connection.Resolve(pif.host);

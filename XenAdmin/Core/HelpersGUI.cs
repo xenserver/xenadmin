@@ -354,32 +354,6 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Finds the EnableAdAction or DisableAdAction in progress that pertains to the given connection, or null
-        /// if there is no such action.
-        /// Must be called on the event thread.
-        /// </summary>
-        /// <param name="connection">May not be null.</param>
-        /// <returns></returns>
-        internal static AsyncAction FindActiveAdAction(IXenConnection connection)
-        {
-            Program.AssertOnEventThread();
-            foreach (ActionBase action in ConnectionsManager.History)
-            {
-                if (action.IsCompleted)
-                    continue;
-
-                EnableAdAction enableAction = action as EnableAdAction;
-                if (enableAction != null && !enableAction.Cancelled && enableAction.Connection == connection)
-                    return enableAction;
-
-                DisableAdAction disableAction = action as DisableAdAction;
-                if (disableAction != null && !disableAction.Cancelled && disableAction.Connection == connection)
-                    return disableAction;
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Whether there is a HostAction in progress that pertains to the given host.
         /// Must be called on the event thread.
         /// </summary>
@@ -544,13 +518,25 @@ namespace XenAdmin.Core
         /// <summary>
         /// Remember to call this after populating the gridview
         /// </summary>
-        public static void ResizeLastGridViewColumn(DataGridViewColumn col)
+        public static void ResizeGridViewColumnToAllCells(DataGridViewColumn col)
         {
             //the last column of the gridviews used on these pages should be autosized to Fill, but should not
             //become smaller than a minimum width, which is chosen to be the column's contents (including header)
             //width. To find what this is set temporarily the column's autosize mode to AllCells.
 
             col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            int storedWidth = col.Width;
+            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            col.MinimumWidth = storedWidth;
+        }
+
+        public static void ResizeGridViewColumnToHeader(DataGridViewTextBoxColumn col)
+        {
+            //the column should be autosized to Fill, but should not become smaller than a minimum
+            //width, which here is chosen to be the column header width. To find what this width is 
+            //set temporarily the column's autosize mode to ColumnHeader.
+
+            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             int storedWidth = col.Width;
             col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             col.MinimumWidth = storedWidth;

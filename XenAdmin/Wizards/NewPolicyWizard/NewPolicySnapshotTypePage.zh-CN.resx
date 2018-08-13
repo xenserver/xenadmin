@@ -160,7 +160,7 @@
     <value>6, 36</value>
   </data>
   <data name="radioButtonDiskOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 20</value>
+    <value>132, 17</value>
   </data>
   <data name="radioButtonDiskOnly.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -181,7 +181,7 @@
     <value>6</value>
   </data>
   <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 98</value>
+    <value>29, 87</value>
   </data>
   <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>419, 34</value>
@@ -211,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 132</value>
+    <value>6, 127</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 17</value>
@@ -238,10 +238,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 65</value>
+    <value>25, 56</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 40</value>
+    <value>460, 35</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -268,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkpointInfoPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 103</value>
+    <value>188, 128</value>
   </data>
   <data name="checkpointInfoPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -301,7 +301,7 @@
     <value>True</value>
   </data>
   <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 8</value>
+    <value>25, 3</value>
   </data>
   <data name="labelWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -314,6 +314,7 @@
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
     <value>请注意，将仅创建此 {0} 中满足以下所有条件的 VM 的计划磁盘和内存快照:
+
 1. 计划快照时 VM 正在运行或已暂停。
 2. VM 上已安装 [XenServer product] Tools。
 3. VM 没有为其分配的专用 GPU。</value>
@@ -331,7 +332,7 @@
     <value>0</value>
   </data>
   <data name="pictureBoxWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 64</value>
+    <value>3, 3</value>
   </data>
   <data name="pictureBoxWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>

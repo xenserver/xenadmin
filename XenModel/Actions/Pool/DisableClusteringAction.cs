@@ -41,7 +41,8 @@ namespace XenAdmin.Actions
             string.Format(Messages.DISABLING_CLUSTERING_ON_POOL, pool.Name()), true)
         {
             #region RBAC Dependencies
-            //ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
+            ApiMethodsToRoleCheck.Add("cluster.pool_destroy");
+            ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
             #endregion
         }
 
@@ -51,14 +52,11 @@ namespace XenAdmin.Actions
             if (existingCluster != null)
             {
                 Cluster.pool_destroy(Session, existingCluster.opaque_ref);
-                var network = Connection.Resolve(existingCluster.network);
+                var clusterHosts = Connection.ResolveAll(existingCluster.cluster_hosts);
 
-                if (network != null)
+                foreach (var clusterHost in clusterHosts)
                 {
-                    foreach (var pif in Connection.ResolveAll(network.PIFs))
-                    {
-                        PIF.set_disallow_unplug(Session, pif.opaque_ref, false);
-                    }
+                    PIF.set_disallow_unplug(Session, clusterHost.PIF.opaque_ref, false);
                 }
             }
             Description = string.Format(Messages.DISABLED_CLUSTERING_ON_POOL, Pool.Name());

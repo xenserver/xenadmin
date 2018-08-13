@@ -423,6 +423,23 @@ namespace XenAdmin.Core
             return platform_version != null && productVersionCompare(platform_version, "2.5.50") >= 0;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool LimaOrGreater(IXenConnection conn)
+        {
+            return conn == null || LimaOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Lima platform version is 2.7.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool LimaOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return platform_version != null && productVersionCompare(platform_version, "2.6.50") >= 0;
+        }
+
         /// <summary>
         /// Cream (Creedence SP1) has API version 2.4
         /// </summary>
@@ -490,7 +507,7 @@ namespace XenAdmin.Core
         /// <returns>true when wlb is enabled, otherwise false</returns>
         public static bool WlbEnabled(IXenConnection connection)
         {
-            //Clearwater doesn't has WLB
+            //Clearwater doesn't have WLB
             if (IsClearwater(connection))
                 return false;
 
@@ -1001,6 +1018,7 @@ namespace XenAdmin.Core
         #endregion
 
         public static Regex CpuRegex = new Regex("^cpu([0-9]+)$");
+        public static Regex CpuAvgFreqRegex = new Regex("^CPU([0-9]+)-avg-freq$");
         public static Regex CpuStateRegex = new Regex("^cpu([0-9]+)-(C|P)([0-9]+)$");
         static Regex VifRegex = new Regex("^vif_([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifEthRegex = new Regex("^pif_eth([0-9]+)_(tx|rx)((_errors)?)$");
@@ -1039,6 +1057,10 @@ namespace XenAdmin.Core
             m = CpuRegex.Match(name);
             if (m.Success)
                 return FormatFriendly("Label-performance.cpu", m.Groups[1].Value);
+
+            m = CpuAvgFreqRegex.Match(name);
+            if (m.Success)
+                return FormatFriendly("Label-performance.cpu-avg-freq", m.Groups[1].Value);
 
             m = VifRegex.Match(name);
             if (m.Success)

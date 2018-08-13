@@ -40,6 +40,8 @@ namespace XenAdmin.Actions
 {
     public class CreateSriovAction : PureAsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         XenAPI.Network newNetwork;
         private List<PIF> selectedPifs;
 
@@ -52,11 +54,12 @@ namespace XenAdmin.Actions
         }
 
         protected override void Run()
-        {
-            // Create the new network            
-            XenRef<XenAPI.Network> networkRef = XenAPI.Network.create(Session, newNetwork);
-
+        {  
             PIF pifOnMaster =null;
+
+            if (selectedPifs.Count == 0)
+                return;
+
             foreach (PIF thePif in selectedPifs)
             {
                 Host host = thePif.Connection.Resolve<XenAPI.Host>(thePif.host);
@@ -69,18 +72,35 @@ namespace XenAdmin.Actions
                     break;
                 }
             }
-
             Connection.ExpectDisruption = true;
 
-            // Enable SR-IOV network on Pool Master
-            RelatedTask = Network_sriov.async_create(Session, pifOnMaster.opaque_ref, networkRef);
-            PollToCompletion(0, 100);
-
-            // Enable SR-IOV network on Pool Slaves
-            selectedPifs.Remove(pifOnMaster);
-            foreach (PIF thePif in selectedPifs)
+            //Enable SR-IOV network on Pool requires enabling master first.
+            if (pifOnMaster != null)
             {
-                Network_sriov.create(Session, thePif.opaque_ref, networkRef);
+                selectedPifs.Remove(pifOnMaster);
+                selectedPifs.Insert(0, pifOnMaster);
+            }
+
+            int inc = 100 / selectedPifs.Count;
+            int lo = 0;
+
+            // Create the new network            
+            XenRef<XenAPI.Network> networkRef = XenAPI.Network.create(Session, newNetwork);
+
+            try
+            {
+                foreach (PIF thePif in selectedPifs)
+                {
+                    RelatedTask = Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
+                    PollToCompletion(lo, lo + inc);
+                    lo += inc;
+                }
+            }
+            catch(Exception)
+            {
+                if(lo == 0)
+                    DestroyNetwork(networkRef);
+                throw;
             }
         }
 
@@ -88,5 +108,18 @@ namespace XenAdmin.Actions
         {
             Connection.ExpectDisruption = false;
         }
+
+        private void DestroyNetwork(string network)
+        {
+            try
+            {
+                XenAPI.Network.destroy(Session, network);
+            }
+            catch (Exception exn)
+            {
+                log.Warn(exn, exn);
+            }
+        }
+
     }
 }

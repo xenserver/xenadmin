@@ -207,6 +207,9 @@ namespace XenAdmin.TabPages
             if (licenseStatus != null)
                 licenseStatus.ItemUpdated -= licenseStatus_ItemUpdated;
 
+            if (xenObject.Connection != null && !xenObject.Connection.IsConnected)
+                return;
+
             if (xenObject is Host || xenObject is Pool)
             {
                 licenseStatus = new LicenseStatus(xenObject);
@@ -1817,7 +1820,8 @@ namespace XenAdmin.TabPages
             foreach (var updateRef in updateRefs)
             {
                 var update = host.Connection.Resolve(updateRef);
-                warnings.Add(CreateWarningRow(host, update));
+                if (update != null)
+                    warnings.Add(CreateWarningRow(host, update));
             }
 
             // For Toolstack restart, legacy code has to be used to determine this - pool_patches are still populated for backward compatibility
