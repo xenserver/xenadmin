@@ -30,11 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
@@ -63,8 +58,7 @@ namespace XenAdmin.Controls.Ballooning
             // Calculate the maximum legal value of dynamic minimum
             CalcMaxDynMin();
 
-            // Shiny bar
-            vmShinyBar.Initialize(vm0, vms.Count > 1, CalcMemoryUsed(), true);
+            vmShinyBar.Populate(vms, true);
 
             // Radio buttons and "DMC Unavailable" warning
             if (ballooning)

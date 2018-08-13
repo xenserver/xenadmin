@@ -3451,9 +3451,6 @@
     <Compile Include="Controls\Ballooning\VMMemoryControlsAdvanced.Designer.cs">
       <DependentUpon>VMMemoryControlsAdvanced.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ballooning\VMMemoryControlsBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Controls\Ballooning\VMMemoryControlsBasic.cs">
       <SubType>UserControl</SubType>
     </Compile>

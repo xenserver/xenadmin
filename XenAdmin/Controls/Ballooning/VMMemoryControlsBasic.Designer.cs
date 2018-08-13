@@ -71,7 +71,6 @@ namespace XenAdmin.Controls.Ballooning
             // 
             // vmShinyBar
             // 
-            this.vmShinyBar.Increment = 0D;
             resources.ApplyResources(this.vmShinyBar, "vmShinyBar");
             this.vmShinyBar.Name = "vmShinyBar";
             this.vmShinyBar.SliderDragged += new System.EventHandler(this.vmShinyBar_SliderDragged);
