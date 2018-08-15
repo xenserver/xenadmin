@@ -5588,7 +5588,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM {0} has autostart enabled.
+        ///   Looks up a localized string similar to {0}: VM {1} has autostart enabled.
         /// </summary>
         public static string AUTOSTART_ENABLED_CHECK_DESCRIPTION {
             get {
@@ -34727,7 +34727,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; uses the network &apos;{1}&apos;, which cannot be seen from all servers..
+        ///   Looks up a localized string similar to {0}: The VM &apos;{1}&apos; uses the network &apos;{2}&apos;, which cannot be seen from all servers..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_SEE_NETWORK {
             get {
@@ -34882,7 +34882,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM &apos;{0}&apos; has a local CD/DVD in its drive..
+        ///   Looks up a localized string similar to {0}: VM &apos;{1}&apos; has a local CD/DVD in its drive..
         /// </summary>
         public static string UPDATES_WIZARD_LOCAL_CD {
             get {
@@ -34972,7 +34972,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM {0} does not have [XenServer product] Tools installed..
+        ///   Looks up a localized string similar to {0}: The VM {1} does not have [XenServer product] Tools installed..
         /// </summary>
         public static string UPDATES_WIZARD_NO_TOOLS {
             get {
@@ -34999,7 +34999,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM {0} cannot be suspended until it has up to date [XenServer product] Tools..
+        ///   Looks up a localized string similar to {0}: The VM {1} cannot be suspended until it has up to date [XenServer product] Tools..
         /// </summary>
         public static string UPDATES_WIZARD_OUT_OF_DATE_TOOLS {
             get {
@@ -35244,7 +35244,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM &apos;{0}&apos; has the tools CD in its drive..
+        ///   Looks up a localized string similar to {0}: VM &apos;{1}&apos; has the tools CD in its drive..
         /// </summary>
         public static string UPDATES_WIZARD_TOOLS_CD {
             get {
@@ -35262,7 +35262,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; has one or more virtual GPUs..
+        ///   Looks up a localized string similar to {0}: The VM &apos;{1}&apos; has one or more virtual GPUs..
         /// </summary>
         public static string UPDATES_WIZARD_VM_HAS_VGPU {
             get {
@@ -35460,7 +35460,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM &apos;{0}&apos; has invalid vCPU settings..
+        ///   Looks up a localized string similar to {0}: VM &apos;{1}&apos; has invalid vCPU settings..
         /// </summary>
         public static string UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS {
             get {

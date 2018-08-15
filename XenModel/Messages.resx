@@ -2039,7 +2039,7 @@ Warning: you must ensure that the SR is not in use by any server not connected t
     <value>Auto-start on server boot</value>
   </data>
   <data name="AUTOSTART_ENABLED_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>VM {0} has autostart enabled</value>
+    <value>{0}: VM {1} has autostart enabled</value>
   </data>
   <data name="AVAILABLE" xml:space="preserve">
     <value>available</value>
@@ -11978,7 +11978,7 @@ Check your settings and try again.</value>
     <value>{0}: Cannot migrate VM '{1}' for an unknown reason. See application logs for more details.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_SEE_NETWORK" xml:space="preserve">
-    <value>The VM '{0}' uses the network '{1}', which cannot be seen from all servers.</value>
+    <value>{0}: The VM '{1}' uses the network '{2}', which cannot be seen from all servers.</value>
   </data>
   <data name="UPDATES_WIZARD_CONNECTION_LOST" xml:space="preserve">
     <value>The connections to your selected servers have been lost.  Select alternate servers or reconnect to your selected servers.</value>
@@ -12031,7 +12031,7 @@ Check your settings and try again.</value>
     <value>{0}: Check skipped because the server is unreachable.</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
-    <value>VM '{0}' has a local CD/DVD in its drive.</value>
+    <value>{0}: VM '{1}' has a local CD/DVD in its drive.</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_STORAGE" xml:space="preserve">
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
@@ -12067,10 +12067,10 @@ Check your settings and try again.</value>
     <value>{0}: This server does not need to be rebooted because live patching is used.</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>The VM {0} does not have [XenServer product] Tools installed.</value>
+    <value>{0}: The VM {1} does not have [XenServer product] Tools installed.</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>The VM {0} cannot be suspended until it has up to date [XenServer product] Tools.</value>
+    <value>{0}: The VM {1} cannot be suspended until it has up to date [XenServer product] Tools.</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
     <value>Select the checkboxes for each server you want to update. Select a pool checkbox to select all the available servers in the pool.</value>
@@ -12153,13 +12153,13 @@ Check your settings and try again.</value>
     <value>Storage repository '{0}'</value>
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
-    <value>VM '{0}' has the tools CD in its drive.</value>
+    <value>{0}: VM '{1}' has the tools CD in its drive.</value>
   </data>
   <data name="UPDATES_WIZARD_UPLOADING_UPDATE" xml:space="preserve">
     <value>Uploading update {0} to {1}...</value>
   </data>
   <data name="UPDATES_WIZARD_VM_HAS_VGPU" xml:space="preserve">
-    <value>The VM '{0}' has one or more virtual GPUs.</value>
+    <value>{0}: The VM '{1}' has one or more virtual GPUs.</value>
   </data>
   <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
@@ -12240,7 +12240,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Shut down all VMs</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS" xml:space="preserve">
-    <value>VM '{0}' has invalid vCPU settings.</value>
+    <value>{0}: VM '{1}' has invalid vCPU settings.</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE" xml:space="preserve">
     <value>Fix vCPU configuration</value>
