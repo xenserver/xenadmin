@@ -34736,33 +34736,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM cannot be suspended and will be shut down..
-        /// </summary>
-        public static string UPDATES_WIZARD_CANNOT_SUSPEND_VM {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_SUSPEND_VM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot suspend VM &apos;{0}&apos;.
-        /// </summary>
-        public static string UPDATES_WIZARD_CANNOT_SUSPEND_VM_TITLE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_SUSPEND_VM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot upgrade with VM &apos;{0}&apos;.
-        /// </summary>
-        public static string UPDATES_WIZARD_CANNOT_UPGRADE_WITH_VM {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_UPGRADE_WITH_VM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The connections to your selected servers have been lost.  Select alternate servers or reconnect to your selected servers..
         /// </summary>
         public static string UPDATES_WIZARD_CONNECTION_LOST {
@@ -34909,15 +34882,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to install tools.
-        /// </summary>
-        public static string UPDATES_WIZARD_INSTALL_TOOLS {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_INSTALL_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to VM &apos;{0}&apos; has a local CD/DVD in its drive..
         /// </summary>
         public static string UPDATES_WIZARD_LOCAL_CD {
@@ -34972,24 +34936,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no default SR on this pool to suspend VMs to..
-        /// </summary>
-        public static string UPDATES_WIZARD_NO_DEFAULT_SR {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_NO_DEFAULT_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No Default SR on Pool &apos;{0}&apos;.
-        /// </summary>
-        public static string UPDATES_WIZARD_NO_DEFAULT_SR_TITLE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_NO_DEFAULT_SR_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0}: There are no servers available to migrate the VM &apos;{1}&apos; to..
         /// </summary>
         public static string UPDATES_WIZARD_NO_HOSTS {
@@ -35031,24 +34977,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_NO_TOOLS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_NO_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This storage repository does not have enough space to suspend the required VMs..
-        /// </summary>
-        public static string UPDATES_WIZARD_NOT_ENOUGH_SPACE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_NOT_ENOUGH_SPACE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not enough space on default SR &apos;{0}&apos;.
-        /// </summary>
-        public static string UPDATES_WIZARD_NOT_ENOUGH_SPACE_TITLE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_NOT_ENOUGH_SPACE_TITLE", resourceCulture);
             }
         }
         
@@ -35139,15 +35067,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pre-update checks failed on the selected servers.  The update will not be applied..
-        /// </summary>
-        public static string UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS", resourceCulture);
             }
         }
         
@@ -35321,15 +35240,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_SR_TITLE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_SR_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The VM {0} is suspended with a local or Tools CD.
-        /// </summary>
-        public static string UPDATES_WIZARD_SUSPENDED_VM {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_SUSPENDED_VM", resourceCulture);
             }
         }
         

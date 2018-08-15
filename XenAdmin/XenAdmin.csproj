@@ -476,7 +476,6 @@
     <Compile Include="Controls\BootOrderListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Diagnostics\Problems\VMProblem\SuspendedVM.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\ToolsCD.cs" />
     <Compile Include="Dialogs\AdPasswordPrompt.cs">
       <SubType>Form</SubType>
@@ -1408,11 +1407,9 @@
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotLive.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\LocalCD.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\LocalStorage.cs" />
-    <Compile Include="Diagnostics\Problems\PoolProblem\NoDefaultSR.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\NoHosts.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\NoPVDrivers.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\NotEnoughMem.cs" />
-    <Compile Include="Diagnostics\Problems\SRProblem\NotEnoughSpaceToSuspend.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrecheckFailed.cs" />
     <Compile Include="Diagnostics\Problems\Problem.cs" />
     <Compile Include="Wizards\BugToolWizardFiles\GenericSelectHostsPage.cs">
