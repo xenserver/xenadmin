@@ -11980,15 +11980,6 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_CANNOT_SEE_NETWORK" xml:space="preserve">
     <value>The VM '{0}' uses the network '{1}', which cannot be seen from all servers.</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_SUSPEND_VM" xml:space="preserve">
-    <value>This VM cannot be suspended and will be shut down.</value>
-  </data>
-  <data name="UPDATES_WIZARD_CANNOT_SUSPEND_VM_TITLE" xml:space="preserve">
-    <value>Cannot suspend VM '{0}'</value>
-  </data>
-  <data name="UPDATES_WIZARD_CANNOT_UPGRADE_WITH_VM" xml:space="preserve">
-    <value>Cannot upgrade with VM '{0}'</value>
-  </data>
   <data name="UPDATES_WIZARD_CONNECTION_LOST" xml:space="preserve">
     <value>The connections to your selected servers have been lost.  Select alternate servers or reconnect to your selected servers.</value>
   </data>
@@ -12039,9 +12030,6 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the server is unreachable.</value>
   </data>
-  <data name="UPDATES_WIZARD_INSTALL_TOOLS" xml:space="preserve">
-    <value>Click here to install tools</value>
-  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>VM '{0}' has a local CD/DVD in its drive.</value>
   </data>
@@ -12063,20 +12051,8 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
     <value>No valid update file found in {0}</value>
   </data>
-  <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
-    <value>This storage repository does not have enough space to suspend the required VMs.</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE_TITLE" xml:space="preserve">
-    <value>Not enough space on default SR '{0}'</value>
-  </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>No further action is required for this update.</value>
-  </data>
-  <data name="UPDATES_WIZARD_NO_DEFAULT_SR" xml:space="preserve">
-    <value>There is no default SR on this pool to suspend VMs to.</value>
-  </data>
-  <data name="UPDATES_WIZARD_NO_DEFAULT_SR_TITLE" xml:space="preserve">
-    <value>No Default SR on Pool '{0}'</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
     <value>{0}: There are no servers available to migrate the VM '{1}' to.</value>
@@ -12116,9 +12092,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
     <value>{0}: Conflicting update(s) are present: {1}</value>
-  </data>
-  <data name="UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS" xml:space="preserve">
-    <value>Pre-update checks failed on the selected servers.  The update will not be applied.</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
     <value>{0}: Prerequisite update(s) are missing: {1}</value>
@@ -12178,9 +12151,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
-  </data>
-  <data name="UPDATES_WIZARD_SUSPENDED_VM" xml:space="preserve">
-    <value>The VM {0} is suspended with a local or Tools CD</value>
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
     <value>VM '{0}' has the tools CD in its drive.</value>
