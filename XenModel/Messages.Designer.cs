@@ -34655,7 +34655,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;.
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;.
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM {
             get {
@@ -34664,7 +34664,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos; due to license restrictions..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos; due to license restrictions..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON {
             get {
@@ -34673,7 +34673,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has a virtual GPU attached and there is no suitable GPU available on other servers..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;, because it has a virtual GPU attached and there is no suitable GPU available on other servers..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU {
             get {
@@ -34682,7 +34682,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it doesn&apos;t have up-to-date drivers installed..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;, because it doesn&apos;t have up-to-date drivers installed..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS {
             get {
@@ -34691,7 +34691,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it is involved in another operation currently in progress..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;, because it is involved in another operation currently in progress..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_OPERATION_IN_PROGRESS {
             get {
@@ -34700,7 +34700,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has one or more PCI devices attached..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;, because it has one or more PCI devices attached..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON {
             get {
@@ -34709,7 +34709,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it cannot be suspended..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;, because it cannot be suspended..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON {
             get {
@@ -34718,7 +34718,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos; for an unknown reason. See application logs for more details..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos; for an unknown reason. See application logs for more details..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON {
             get {
