@@ -20684,15 +20684,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to , .
-        /// </summary>
-        public static string LIST_SEPARATOR {
-            get {
-                return ResourceManager.GetString("LIST_SEPARATOR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Live Patching.
         /// </summary>
         public static string LIVE_PATCHING {
@@ -20702,7 +20693,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them..
+        ///   Looks up a localized string similar to Live patching failed for the following servers:
+        ///
+        ///{0}
+        ///
+        ///To complete the patch installation, please put the servers into maintenance mode and reboot them..
         /// </summary>
         public static string LIVE_PATCHING_FAILED_MULTI_HOST {
             get {
@@ -20711,7 +20706,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it..
+        ///   Looks up a localized string similar to Live patching failed for server ‘{0}’. To complete the patch installation, please put the server into maintenance mode and reboot it..
         /// </summary>
         public static string LIVE_PATCHING_FAILED_ONE_HOST {
             get {
@@ -27193,15 +27188,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} error..
-        /// </summary>
-        public static string PATCHING_WIZARD_ERROR {
-            get {
-                return ResourceManager.GetString("PATCHING_WIZARD_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0}: {1} ok..
         /// </summary>
         public static string PATCHING_WIZARD_HOST_CHECK_OK {
@@ -27392,7 +27378,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart toolstack in this order (master always first):.
+        ///   Looks up a localized string similar to Restart toolstack on these servers in this order (master always first):.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_RESTARTXAPI {
             get {
@@ -27415,15 +27401,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_MODEPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_MODEPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown.
-        /// </summary>
-        public static string PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION", resourceCulture);
             }
         }
         
@@ -27906,6 +27883,69 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The installation of update {0} was not completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_FAILURE_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_FAILURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following errors occurred while the installation of update {0} was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following error occurred while the installation of update {0} was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The installation of update {0} on all selected servers was completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The installation of update {0} was completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] is now installing update {0} on your system..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_TITLE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_TITLE", resourceCulture);
             }
         }
         
@@ -30043,7 +30083,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed Update &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Removed update &apos;{0}&apos;.
         /// </summary>
         public static string REMOVED_UPDATE {
             get {
@@ -33211,22 +33251,13 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to install supplemental pack &apos;{0}&apos; on &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Failed to install supplemental pack &apos;{0}&apos; on &apos;{1}&apos;.
+        ///
+        ///Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a server..
         /// </summary>
         public static string SUPP_PACK_INSTALL_FAILED {
             get {
                 return ResourceManager.GetString("SUPP_PACK_INSTALL_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}
-        ///
-        ///Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a server..
-        /// </summary>
-        public static string SUPP_PACK_INSTALL_FAILED_MORE_INFO {
-            get {
-                return ResourceManager.GetString("SUPP_PACK_INSTALL_FAILED_MORE_INFO", resourceCulture);
             }
         }
         
@@ -34342,15 +34373,6 @@ namespace XenAdmin {
         public static string UPDATE_TEMP_VDI_DESCRIPTION {
             get {
                 return ResourceManager.GetString("UPDATE_TEMP_VDI_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The installation of update {0} was not completed successfully.
-        /// </summary>
-        public static string UPDATE_WAS_NOT_COMPLETED {
-            get {
-                return ResourceManager.GetString("UPDATE_WAS_NOT_COMPLETED", resourceCulture);
             }
         }
         

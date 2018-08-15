@@ -44,7 +44,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<PlanAction> CleanupActions { get; private set; }
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
         public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
-        public string Name { get; set; }
+        public Pool Pool { get; set; }
         
         private double _percentComplete;
         private readonly object _percentLock = new object();

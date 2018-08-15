@@ -7189,9 +7189,6 @@ Standard 機能のみ有効です</value>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>接続状態</value>
   </data>
-  <data name="LIST_SEPARATOR" xml:space="preserve">
-    <value>, </value>
-  </data>
   <data name="LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチ</value>
   </data>
@@ -9433,9 +9430,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_MODEPAGE_TITLE" xml:space="preserve">
     <value>アップデート モードの選択</value>
   </data>
-  <data name="PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION" xml:space="preserve">
-    <value>不明</value>
-  </data>
   <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
     <value>詳細...</value>
   </data>
@@ -9636,9 +9630,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_ERROR" xml:space="preserve">
-    <value>{0} エラー。</value>
   </data>
   <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
     <value>{0}: {1} OK。</value>
@@ -11491,11 +11482,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
     <value>'{1}' 上にサプリメンタル パック '{0}' をインストールできませんでした。</value>
   </data>
-  <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
-    <value>{0}
-
-サーバーにサプリメンタル パックを手動でインストールする方法については、『[XenServer product] 管理者ガイド』を参照してください。</value>
-  </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} ({1} に未インストール)</value>
   </data>
@@ -12218,9 +12204,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATE_TEMP_VDI_DESCRIPTION" xml:space="preserve">
     <value>アップデートのインストールに使用される一時仮想ディスク</value>
-  </data>
-  <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
-    <value>アップデート {0} のインストールに失敗しました</value>
   </data>
   <data name="UPDATE_WAS_SUCCESSFULLY_INSTALLED" xml:space="preserve">
     <value>アップデート {0} が正しくインストールされました</value>

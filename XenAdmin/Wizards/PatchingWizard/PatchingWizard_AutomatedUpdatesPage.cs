@@ -92,7 +92,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return multiplePools ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
         }
 
-        protected override string SuccessMessagePerPool()
+        protected override string SuccessMessagePerPool(Pool pool)
         {
             return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
         }

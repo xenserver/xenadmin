@@ -7202,17 +7202,18 @@ Standard features only</value>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
   </data>
-  <data name="LIST_SEPARATOR" xml:space="preserve">
-    <value>, </value>
-  </data>
   <data name="LIVE_PATCHING" xml:space="preserve">
     <value>Live Patching</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
-    <value>Live patching failed for servers {0}. To apply the patch, please put the servers into maintenance mode and reboot them.</value>
+    <value>Live patching failed for the following servers:
+
+{0}
+
+To complete the patch installation, please put the servers into maintenance mode and reboot them.</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
-    <value>Live patching failed for server ‘{0}’. To apply the patch, please put the server into maintenance mode and reboot it.</value>
+    <value>Live patching failed for server ‘{0}’. To complete the patch installation, please put the server into maintenance mode and reboot it.</value>
   </data>
   <data name="LOCAL" xml:space="preserve">
     <value>Local</value>
@@ -9442,16 +9443,13 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Restart these VMs:</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
-    <value>Restart toolstack in this order (master always first):</value>
+    <value>Restart toolstack on these servers in this order (master always first):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>Update Mode</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TITLE" xml:space="preserve">
     <value>Select the update mode</value>
-  </data>
-  <data name="PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION" xml:space="preserve">
-    <value>Unknown</value>
   </data>
   <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
     <value>More info...</value>
@@ -9616,6 +9614,27 @@ Servers where this update cannot be applied appear disabled in this list.</value
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you want to update</value>
   </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
+    <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_ONE" xml:space="preserve">
+    <value>The installation of update {0} was not completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_MANY" xml:space="preserve">
+    <value>The following errors occurred while the installation of update {0} was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE" xml:space="preserve">
+    <value>The following error occurred while the installation of update {0} was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY" xml:space="preserve">
+    <value>The installation of update {0} on all selected servers was completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_ONE" xml:space="preserve">
+    <value>The installation of update {0} was completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
+    <value>[XenCenter] is now installing update {0} on your system.</value>
+  </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
 Please wait for these operations to complete, then click Next to continue with the installation.</value>
@@ -9653,9 +9672,6 @@ Please wait for this operation to complete, then click Next to continue with the
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_ERROR" xml:space="preserve">
-    <value>{0} error.</value>
   </data>
   <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
     <value>{0}: {1} ok.</value>
@@ -10366,7 +10382,7 @@ To log out of this server and log in again using a different user account, enter
     <value>Removed from folder</value>
   </data>
   <data name="REMOVED_UPDATE" xml:space="preserve">
-    <value>Removed Update '{0}'</value>
+    <value>Removed update '{0}'</value>
   </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>Removed from vApp </value>
@@ -11512,10 +11528,7 @@ The upper limit: SR size / {2}</value>
     <value>{0} (version {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
-    <value>Failed to install supplemental pack '{0}' on '{1}'.</value>
-  </data>
-  <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
-    <value>{0}
+    <value>Failed to install supplemental pack '{0}' on '{1}'.
 
 Refer to the "[XenServer product] Administrator's Guide" for instructions on how to manually install a supplemental pack on a server.</value>
   </data>
@@ -12235,9 +12248,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPDATE_TEMP_VDI_DESCRIPTION" xml:space="preserve">
     <value>Temporary virtual disk used for the installation of an update</value>
-  </data>
-  <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
-    <value>The installation of update {0} was not completed successfully</value>
   </data>
   <data name="UPDATE_WAS_SUCCESSFULLY_INSTALLED" xml:space="preserve">
     <value>Update {0} was successfully installed</value>

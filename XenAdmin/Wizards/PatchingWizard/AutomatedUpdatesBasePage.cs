@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected abstract string BlurbText();
         protected abstract string SuccessMessageOnCompletion(bool multiplePools);
         protected abstract string FailureMessageOnCompletion(bool multiplePools);
-        protected abstract string SuccessMessagePerPool();
+        protected abstract string SuccessMessagePerPool(Pool pool);
         protected abstract string FailureMessagePerPool(bool multipleErrors);
         protected abstract string UserCancellationMessage();
 
@@ -165,18 +165,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (planActions.Count > 0)
                 {
                     atLeastOneWorkerStarted = true;
-                    StartNewWorker(pool.Name(), planActions, finalActions);
+                    StartNewWorker(pool, planActions, finalActions);
                 }
             }
 
             return atLeastOneWorkerStarted;
         }
 
-        private void StartNewWorker(string poolName, List<HostPlan> planActions, List<PlanAction> finalActions)
+        private void StartNewWorker(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions)
             {
-                Name = poolName,
+                Pool = pool,
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
@@ -244,8 +244,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var sb = new StringBuilder();
                 var errorSb = new StringBuilder();
 
-                if (!String.IsNullOrEmpty(bgw.Name))
-                    sb.AppendLine(string.Format("{0}:", bgw.Name));
+                if (bgw.Pool != null)
+                {
+                    var name = bgw.Pool.Name();
+                    if (!string.IsNullOrEmpty(name))
+                        sb.AppendLine(string.Format("{0}:", name));
+                }
 
                 foreach (var pa in bgw.DoneActions)
                 {
@@ -283,7 +287,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendIndented(SuccessMessagePerPool()).AppendLine();
+                    sb.AppendIndented(SuccessMessagePerPool(bgw.Pool)).AppendLine();
                 }
 
                 sb.AppendLine();
