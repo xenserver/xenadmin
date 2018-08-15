@@ -118,6 +118,8 @@ namespace XenAdmin.Dialogs
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
                 standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+
+                desktopCloudRadioButton.Visible = xos.TrueForAll(x => Helpers.HavanaOrGreaterLTSR71(x.Connection));
             } else if(xos.TrueForAll(x=> Helpers.ClearwaterOrGreater(x.Connection)))
             {
                 platinumRadioButton.Visible = false;

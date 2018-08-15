@@ -396,6 +396,25 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool HavanaOrGreaterLTSR71(IXenConnection conn)
+        {
+            return conn == null || HavanaOrGreaterLTSR71(Helpers.GetMaster(conn));
+        }
+
+         /// As Havana platform version is same with Ely and Honolulu, so use product version here
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool HavanaOrGreaterLTSR71(Host host)
+        {
+            if (host == null)
+                return true;
+             string product_version = HostProductVersion(host);
+            return
+                product_version != null && 
+                ((product_version.StartsWith("7.1") && productVersionCompare(product_version, "7.1.2") >= 0) || 
+                 (product_version.StartsWith("5.0") && productVersionCompare(product_version, "5.0.2") >= 0 && productVersionCompare(product_version, "5.0.10") < 0));
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
             return conn == null ? true : FalconOrGreater(Helpers.GetMaster(conn));
