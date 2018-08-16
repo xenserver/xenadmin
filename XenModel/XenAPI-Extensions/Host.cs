@@ -1092,7 +1092,7 @@ namespace XenAPI
         public long memory_free_calc()
         {
             Host_metrics host_metrics = Connection.Resolve(this.metrics);
-            return host_metrics?.memory_free ?? 0;
+            return host_metrics != null ? host_metrics.memory_free : 0;
         }
 
         /// <summary>
