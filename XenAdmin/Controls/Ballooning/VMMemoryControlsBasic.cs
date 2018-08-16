@@ -33,6 +33,7 @@ using System;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
+using XenAdmin.Properties;
 
 
 namespace XenAdmin.Controls.Ballooning
@@ -64,15 +65,15 @@ namespace XenAdmin.Controls.Ballooning
             if (ballooning)
             {
                 if (vm0.memory_dynamic_min == vm0.memory_static_max)
-                    radioOff.Checked = true;
+                    radioFixed.Checked = true;
                 else
-                    radioOn.Checked = true;
+                    radioDynamic.Checked = true;
                 iconDMCUnavailable.Visible = labelDMCUnavailable.Visible = linkInstallTools.Visible = false;
             }
             else
             {
-                radioOff.Checked = true;
-                radioOn.Enabled = false;
+                radioFixed.Checked = true;
+                radioDynamic.Enabled = false;
                 groupBoxOn.Enabled = false;
 
                 if (vms.Count > 1)
@@ -134,8 +135,8 @@ namespace XenAdmin.Controls.Ballooning
             // Spinners
             FreeSpinnerRanges();
             static_min = vm0.memory_static_min;
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, ballooning ? XenAdmin.Properties.Resources.memory_dynmin_slider_small : null, vm0.memory_dynamic_min, vm0.memory_static_max);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, ballooning ? XenAdmin.Properties.Resources.memory_dynmax_slider_small : null, vm0.memory_dynamic_max, vm0.memory_static_max);
+            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, ballooning ? Resources.memory_dynmin_slider_small : null, vm0.memory_dynamic_min, vm0.memory_static_max);
+            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, ballooning ? Resources.memory_dynmax_slider_small : null, vm0.memory_dynamic_max, vm0.memory_static_max);
             memorySpinnerFixed.Initialize("", null, vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
@@ -147,7 +148,7 @@ namespace XenAdmin.Controls.Ballooning
             get
             {
                 System.Diagnostics.Trace.Assert(ballooning);
-                return (radioOn.Checked ? memorySpinnerDynMin.Value : memorySpinnerFixed.Value);
+                return (radioDynamic.Checked ? memorySpinnerDynMin.Value : memorySpinnerFixed.Value);
             }
         }
 
@@ -156,7 +157,7 @@ namespace XenAdmin.Controls.Ballooning
             get
             {
                 System.Diagnostics.Trace.Assert(ballooning);
-                return (radioOn.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
+                return (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
             }
         }
 
@@ -164,7 +165,7 @@ namespace XenAdmin.Controls.Ballooning
         {
             get
             {
-                return (radioOn.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
+                return (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
             }
         }
 
@@ -177,14 +178,14 @@ namespace XenAdmin.Controls.Ballooning
         {
             if (firstPaint)  // still initialising
                 return;
-            radioOn.Checked = true;
+            radioDynamic.Checked = true;
             if (sender == memorySpinnerDynMax)
             {
                 // Force supported envelope
                 FreeSpinnerRanges();
-                long min = (long)((double)static_max * GetMemoryRatio());
+                long min = (long)(static_max * GetMemoryRatio());
                 if (memorySpinnerDynMin.Value < min)
-                    memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, XenAdmin.Properties.Resources.memory_dynmin_slider_small, min, RoundingBehaviour.Up);
+                    memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, Resources.memory_dynmin_slider_small, min, RoundingBehaviour.Up);
             }
             SetIncrements();
             SetSpinnerRanges();
@@ -196,7 +197,7 @@ namespace XenAdmin.Controls.Ballooning
         {
             if (firstPaint)  // still initialising
                 return;
-            radioOff.Checked = true;
+            radioFixed.Checked = true;
             SetIncrements();
         }
 

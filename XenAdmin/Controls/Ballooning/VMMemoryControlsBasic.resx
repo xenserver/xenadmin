@@ -142,7 +142,7 @@
     <value>257, 31</value>
   </data>
   <data name="memorySpinnerDynMin.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;memorySpinnerDynMin.Name" xml:space="preserve">
     <value>memorySpinnerDynMin</value>
@@ -169,7 +169,7 @@
     <value>257, 31</value>
   </data>
   <data name="memorySpinnerDynMax.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;memorySpinnerDynMax.Name" xml:space="preserve">
     <value>memorySpinnerDynMax</value>
@@ -193,7 +193,7 @@
     <value>500, 90</value>
   </data>
   <data name="vmShinyBar.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;vmShinyBar.Name" xml:space="preserve">
     <value>vmShinyBar</value>
@@ -217,7 +217,7 @@
     <value>506, 158</value>
   </data>
   <data name="spinnerPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;spinnerPanel.Name" xml:space="preserve">
     <value>spinnerPanel</value>
@@ -234,10 +234,10 @@
   <data name="spinnerPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerDynMin" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerDynMax" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="vmShinyBar" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="radioOff.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="radioFixed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="radioOff.AutoSize" type="System.Boolean, mscorlib">
+  <data name="radioFixed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -262,7 +262,7 @@
     <value>143, 27</value>
   </data>
   <data name="memorySpinnerFixed.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;memorySpinnerFixed.Name" xml:space="preserve">
     <value>memorySpinnerFixed</value>
@@ -295,7 +295,7 @@
     <value>515, 187</value>
   </data>
   <data name="groupBoxOn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;groupBoxOn.Name" xml:space="preserve">
     <value>groupBoxOn</value>
@@ -319,7 +319,7 @@
     <value>184, 13</value>
   </data>
   <data name="linkInstallTools.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
     <value>Install [XenServer product] Tools now</value>
@@ -349,7 +349,7 @@
     <value>207, 13</value>
   </data>
   <data name="labelDMCUnavailable.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="labelDMCUnavailable.Text" xml:space="preserve">
     <value>A memory range cannot be set on this VM.</value>
@@ -366,31 +366,31 @@
   <data name="&gt;&gt;labelDMCUnavailable.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="radioOn.AutoSize" type="System.Boolean, mscorlib">
+  <data name="radioDynamic.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="radioOn.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="radioDynamic.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 34</value>
   </data>
-  <data name="radioOn.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="radioDynamic.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 17</value>
   </data>
-  <data name="radioOn.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="radioDynamic.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="radioOn.Text" xml:space="preserve">
+  <data name="radioDynamic.Text" xml:space="preserve">
     <value>&amp;Automatically allocate memory within this range:</value>
   </data>
-  <data name="&gt;&gt;radioOn.Name" xml:space="preserve">
-    <value>radioOn</value>
+  <data name="&gt;&gt;radioDynamic.Name" xml:space="preserve">
+    <value>radioDynamic</value>
   </data>
-  <data name="&gt;&gt;radioOn.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioDynamic.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioOn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioDynamic.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioOn.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioDynamic.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="iconDMCUnavailable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -433,7 +433,7 @@
     <value>538, 289</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -448,33 +448,33 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerFixed" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxOn" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="linkInstallTools" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="radioOff" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelDMCUnavailable" Row="3" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="radioOn" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="iconDMCUnavailable" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerFixed" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxOn" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="linkInstallTools" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="radioFixed" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelDMCUnavailable" Row="3" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="radioDynamic" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="iconDMCUnavailable" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="radioOff.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="radioFixed.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="radioOff.MinimumSize" type="System.Drawing.Size, System.Drawing">
+  <data name="radioFixed.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 25</value>
   </data>
-  <data name="radioOff.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="radioFixed.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 25</value>
   </data>
-  <data name="radioOff.TabIndex" type="System.Int32, mscorlib">
+  <data name="radioFixed.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="radioOff.Text" xml:space="preserve">
+  <data name="radioFixed.Text" xml:space="preserve">
     <value>&amp;Set a fixed memory of</value>
   </data>
-  <data name="&gt;&gt;radioOff.Name" xml:space="preserve">
-    <value>radioOff</value>
+  <data name="&gt;&gt;radioFixed.Name" xml:space="preserve">
+    <value>radioFixed</value>
   </data>
-  <data name="&gt;&gt;radioOff.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioFixed.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioOff.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioFixed.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioOff.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioFixed.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

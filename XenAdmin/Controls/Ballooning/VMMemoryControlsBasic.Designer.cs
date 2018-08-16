@@ -33,8 +33,8 @@ namespace XenAdmin.Controls.Ballooning
             this.memorySpinnerDynMin = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.memorySpinnerDynMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.vmShinyBar = new XenAdmin.Controls.Ballooning.VMShinyBar();
-            this.radioOff = new System.Windows.Forms.RadioButton();
-            this.radioOn = new System.Windows.Forms.RadioButton();
+            this.radioFixed = new System.Windows.Forms.RadioButton();
+            this.radioDynamic = new System.Windows.Forms.RadioButton();
             this.groupBoxOn = new System.Windows.Forms.GroupBox();
             this.iconDMCUnavailable = new System.Windows.Forms.PictureBox();
             this.labelDMCUnavailable = new System.Windows.Forms.Label();
@@ -71,25 +71,27 @@ namespace XenAdmin.Controls.Ballooning
             // 
             // vmShinyBar
             // 
+            this.vmShinyBar.Increment = 0D;
             resources.ApplyResources(this.vmShinyBar, "vmShinyBar");
             this.vmShinyBar.Name = "vmShinyBar";
+            this.vmShinyBar.TabStop = false;
             this.vmShinyBar.SliderDragged += new System.EventHandler(this.vmShinyBar_SliderDragged);
             // 
-            // radioOff
+            // radioFixed
             // 
-            resources.ApplyResources(this.radioOff, "radioOff");
-            this.tableLayoutPanel1.SetColumnSpan(this.radioOff, 2);
-            this.radioOff.Name = "radioOff";
-            this.radioOff.TabStop = true;
-            this.radioOff.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.radioFixed, "radioFixed");
+            this.tableLayoutPanel1.SetColumnSpan(this.radioFixed, 2);
+            this.radioFixed.Name = "radioFixed";
+            this.radioFixed.TabStop = true;
+            this.radioFixed.UseVisualStyleBackColor = true;
             // 
-            // radioOn
+            // radioDynamic
             // 
-            resources.ApplyResources(this.radioOn, "radioOn");
-            this.tableLayoutPanel1.SetColumnSpan(this.radioOn, 3);
-            this.radioOn.Name = "radioOn";
-            this.radioOn.TabStop = true;
-            this.radioOn.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.radioDynamic, "radioDynamic");
+            this.tableLayoutPanel1.SetColumnSpan(this.radioDynamic, 3);
+            this.radioDynamic.Name = "radioDynamic";
+            this.radioDynamic.TabStop = true;
+            this.radioDynamic.UseVisualStyleBackColor = true;
             // 
             // groupBoxOn
             // 
@@ -134,9 +136,9 @@ namespace XenAdmin.Controls.Ballooning
             this.tableLayoutPanel1.Controls.Add(this.memorySpinnerFixed, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxOn, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.linkInstallTools, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.radioOff, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.radioFixed, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelDMCUnavailable, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.radioOn, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.radioDynamic, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.iconDMCUnavailable, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -163,8 +165,8 @@ namespace XenAdmin.Controls.Ballooning
         private VMShinyBar vmShinyBar;
         private System.Windows.Forms.TableLayoutPanel spinnerPanel;
         private MemorySpinner memorySpinnerDynMin;
-        private System.Windows.Forms.RadioButton radioOff;
-        private System.Windows.Forms.RadioButton radioOn;
+        private System.Windows.Forms.RadioButton radioFixed;
+        private System.Windows.Forms.RadioButton radioDynamic;
         private System.Windows.Forms.GroupBox groupBoxOn;
         private System.Windows.Forms.PictureBox iconDMCUnavailable;
         private System.Windows.Forms.Label labelDMCUnavailable;
