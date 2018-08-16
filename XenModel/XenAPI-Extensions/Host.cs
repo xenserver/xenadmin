@@ -1087,33 +1087,12 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// The amount of memory free on the host. For George and earlier hosts, we use to use
-        /// the obvious Host_metrics.memory_free. Since Midnight Ride, however, we use
-        /// the same calculation as xapi, adding the used memory and the virtualisation overheads
-        /// on each of the VMs. This is a more conservative estimate (i.e., it reports less memory
-        /// free), but it's the one we need to make the memory go down to zero when ballooning
-        /// takes place.
+        /// The amount of memory free on the host.
         /// </summary>
         public long memory_free_calc()
         {
             Host_metrics host_metrics = Connection.Resolve(this.metrics);
-            if (host_metrics == null)
-                return 0;
-
-            long used = memory_overhead;
-            foreach (VM vm in Connection.ResolveAll(resident_VMs))
-            {
-                used += vm.memory_overhead;
-                VM_metrics vm_metrics = vm.Connection.Resolve(vm.metrics);
-                if (vm_metrics != null)
-                    used += vm_metrics.memory_actual;
-            }
-
-            // This hack is needed because of bug CA-32509. xapi uses a deliberately generous
-            // estimate of VM.memory_overhead: but the low-level squeezer code doesn't (and can't)
-            // know about the same calculation, and so uses some of this memory_overhead for the
-            // VM's memory_actual. This causes up to 1MB of double-counting per VM.
-            return ((host_metrics.memory_total > used) ? (host_metrics.memory_total - used) : 0);
+            return host_metrics?.memory_free ?? 0;
         }
 
         /// <summary>

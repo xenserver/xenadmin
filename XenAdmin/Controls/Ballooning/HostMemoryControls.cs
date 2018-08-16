@@ -88,7 +88,7 @@ namespace XenAdmin.Controls.Ballooning
             if (host == null || host_metrics == null)
                 return;
             long total = host_metrics.memory_total;
-            long free = host.memory_free_calc();
+            long free = host_metrics.memory_free;
             long used = total - free;
             long xen_memory = host.xen_memory_calc();
             long avail = host.memory_available_calc();
