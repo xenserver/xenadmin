@@ -42,7 +42,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
     public abstract class VMProblem : Problem
     {
-        protected VM VM { get; }
+        protected VM VM { get; private set; }
         private Host residentOn;
 
         protected VMProblem(Check check, VM vm)
