@@ -198,7 +198,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else if (SuppPackVdis != null) //supp pack
                 {
                     foreach (var server in SelectedServers)
-                        if (SuppPackVdis.ContainsKey(server))
+                        if (SuppPackVdis.ContainsKey(server) && poolHosts.Contains(server))
                         {
                             var updateActions = new List<PlanAction> {new InstallSupplementalPackPlanAction(server, SuppPackVdis[server])};
                             hostplans.Add(new HostPlan(server, null, updateActions, null));
@@ -246,7 +246,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else if (SuppPackVdis != null) // supp pack
                 {
                     foreach (var server in SelectedServers)
-                        if (SuppPackVdis.ContainsKey(server))
+                        if (SuppPackVdis.ContainsKey(server) && poolHosts.Contains(server))
                         {
                             var updateActions = new List<PlanAction>
                             {

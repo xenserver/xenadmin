@@ -174,9 +174,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void StartNewWorker(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
-            var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions)
+            var bgw = new UpdateProgressBackgroundWorker(pool, planActions, finalActions)
             {
-                Pool = pool,
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
@@ -244,12 +243,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var sb = new StringBuilder();
                 var errorSb = new StringBuilder();
 
-                if (bgw.Pool != null)
-                {
-                    var name = bgw.Pool.Name();
-                    if (!string.IsNullOrEmpty(name))
-                        sb.AppendLine(string.Format("{0}:", name));
-                }
+                if (!string.IsNullOrEmpty(bgw.Name))
+                    sb.AppendLine(string.Format("{0}:", bgw.Name));
 
                 foreach (var pa in bgw.DoneActions)
                 {
