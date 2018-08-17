@@ -210,7 +210,6 @@
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockVersionedHost.cs" />
     <Compile Include="WizardTests\CrossPoolMigrateWizard\Filters\WlbEnabledFilterTests.cs" />
     <Compile Include="WizardTests\ExportWizard\ApplianceExistsCheckTests.cs" />
-    <Compile Include="WizardTests\PatchingWizard\PatchingWizardModeGuidanceBuilderTests.cs" />
     <Compile Include="WizardTests\PatchingWizard\PatchingWizard_PrecheckPageTests.cs" />
     <Compile Include="XenModelTests\ActionTests\AD\AddRemoveRolesActionTest.cs" />
     <Compile Include="XenModelTests\ActionTests\ExportVMActionTest.cs" />

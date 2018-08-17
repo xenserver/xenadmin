@@ -2366,10 +2366,6 @@
     <EmbeddedResource Include="Wizards\PatchingWizard\AutomatedUpdatesBasePage.zh-CN.resx">
       <DependentUpon>AutomatedUpdatesBasePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PatchingPage.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PatchingWizard_PatchingPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PrecheckPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PatchingWizard_PrecheckPage.cs</DependentUpon>
@@ -3940,7 +3936,6 @@
     <Compile Include="Wizards\GenericPages\TvmIpPage.Designer.cs">
       <DependentUpon>TvmIpPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\PatchingWizardModeGuidanceBuilder.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -6765,12 +6760,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_ModePage.zh-CN.resx">
       <DependentUpon>PatchingWizard_ModePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PatchingPage.ja.resx">
-      <DependentUpon>PatchingWizard_PatchingPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PatchingPage.zh-CN.resx">
-      <DependentUpon>PatchingWizard_PatchingPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_PrecheckPage.ja.resx">
       <DependentUpon>PatchingWizard_PrecheckPage.cs</DependentUpon>

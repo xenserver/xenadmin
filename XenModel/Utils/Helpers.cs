@@ -1805,16 +1805,6 @@ namespace XenAdmin.Core
             return string.Join(", ", names.ToArray());
         }
 
-        public static List<VM> VMsRunningOn(List<Host> hosts)
-        {
-            List<VM> vms = new List<VM>();
-            foreach (Host host in hosts)
-            {
-                vms.AddRange(host.Connection.ResolveAll(host.resident_VMs));
-            }
-            return vms;
-        }
-
         public static bool CompareLists<T>(List<T> l1, List<T> l2)
         {
             if (l1 == l2)
