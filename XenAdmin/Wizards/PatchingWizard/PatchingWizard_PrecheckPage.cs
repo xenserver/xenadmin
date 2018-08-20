@@ -413,6 +413,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     var us = new Dictionary<Host, List<XenServerPatch>>();
                     var hosts = pool.Connection.Cache.Hosts;
+                    Array.Sort(hosts);
 
                     foreach (var h in hosts)
                     {
