@@ -501,6 +501,46 @@ namespace XenAPI
             }
         }
 
+        #region Supported Boot Mode Recommendations
+
+        public bool CanSupportBIOSBoot()
+        {
+            return GetRecommendationByField("supports-bios") == "yes";
+        }
+
+        public bool CanSupportUEFIBoot()
+        {
+            return GetRecommendationByField("supports-uefi") == "yes";
+        }
+
+        public bool CanSupportUEFISecureBoot()
+        {
+            return GetRecommendationByField("supports-secure-boot") == "yes";
+        }
+
+        private string GetRecommendationByField(string fieldName)
+        {
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return string.Empty;
+
+            try
+            {
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
+                if (xn == null || xn.Attributes == null || xn.Attributes["value"] == null)
+                    return string.Empty;
+
+                return xn.Attributes["value"].Value;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        #endregion
+
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
         // able to recognise it, and turn it off during Rolling Pool Upgrade.

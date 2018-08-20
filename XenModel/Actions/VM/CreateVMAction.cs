@@ -46,6 +46,9 @@ namespace XenAdmin.Actions.VMActions
         CD,
         Network
     }
+
+    public enum BootMode { BIOS_BOOT, UEFI_BOOT, UEFI_SECURE_BOOT }
+
     public class CreateVMAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -60,6 +63,7 @@ namespace XenAdmin.Actions.VMActions
         private readonly long VcpusMax;
         private readonly long VcpusAtStartup;
         private readonly long MemoryDynamicMin, MemoryDynamicMax, MemoryStaticMax;
+        private readonly BootMode BootMode;
         private readonly List<DiskDescription> Disks;
         private readonly List<VIF> Vifs;
         private readonly bool StartAfter;
@@ -114,7 +118,7 @@ namespace XenAdmin.Actions.VMActions
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
             string name, string description, InstallMethod installMethod,
             string pvArgs, VDI cd, string url, Host homeServer, long vcpusMax, long vcpusAtStartup,
-            long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
+            long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax, BootMode bootMode,
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
             Action<VMStartAbstractAction, Failure> startDiagnosisForm,
@@ -137,6 +141,7 @@ namespace XenAdmin.Actions.VMActions
             MemoryDynamicMin = memoryDynamicMin;
             MemoryDynamicMax = memoryDynamicMax;
             MemoryStaticMax = memoryStaticMax;
+            BootMode = bootMode;
             Disks = disks;
             Vifs = vifs;
             StartAfter = startAfter;
@@ -357,6 +362,23 @@ namespace XenAdmin.Actions.VMActions
             if (!Template.IsHVM())
             {
                 XenAPI.VM.set_PV_args(Session, VM.opaque_ref, PvArgs);
+            }
+            else
+            {
+                var hvm_params = VM.HVM_boot_params;
+                var platform = VM.platform;
+                if (BootMode == BootMode.UEFI_SECURE_BOOT)
+                {
+                    hvm_params["firmware"] = "uefi";
+                    platform["secureboot"] = "true";
+                }
+                else
+                {
+                    hvm_params["firmware"] = BootMode == BootMode.UEFI_BOOT ? "uefi" : "bios";
+                    platform["secureboot"] = "false";
+                }
+                XenAPI.VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
+                XenAPI.VM.set_platform(Session, VM.opaque_ref, platform);
             }
         }
 
