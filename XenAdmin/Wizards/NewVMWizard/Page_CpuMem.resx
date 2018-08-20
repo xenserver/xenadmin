@@ -414,6 +414,141 @@
   <data name="&gt;&gt;comboBoxVCPUs.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="radioButtonUEFISecureBoot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonUEFISecureBoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 49</value>
+  </data>
+  <data name="radioButtonUEFISecureBoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="radioButtonUEFISecureBoot.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="radioButtonUEFISecureBoot.Text" xml:space="preserve">
+    <value>UEFI &amp;Secure Boot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.Name" xml:space="preserve">
+    <value>radioButtonUEFISecureBoot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="radioButtonBIOSBoot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonBIOSBoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="radioButtonBIOSBoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="radioButtonBIOSBoot.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="radioButtonBIOSBoot.Text" xml:space="preserve">
+    <value>&amp;BIOS Boot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.Name" xml:space="preserve">
+    <value>radioButtonBIOSBoot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="radioButtonUEFIBoot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonUEFIBoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 26</value>
+  </data>
+  <data name="radioButtonUEFIBoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="radioButtonUEFIBoot.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="radioButtonUEFIBoot.Text" xml:space="preserve">
+    <value>&amp;UEFI Boot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.Name" xml:space="preserve">
+    <value>radioButtonUEFIBoot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 75</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Name" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Parent" xml:space="preserve">
+    <value>groupBoxBootMode</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonUEFISecureBoot" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonBIOSBoot" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonUEFIBoot" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="groupBoxBootMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 259</value>
+  </data>
+  <data name="groupBoxBootMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 3, 245, 3</value>
+  </data>
+  <data name="groupBoxBootMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 94</value>
+  </data>
+  <data name="groupBoxBootMode.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="groupBoxBootMode.Text" xml:space="preserve">
+    <value>Boot Mode</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.Name" xml:space="preserve">
+    <value>groupBoxBootMode</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -421,10 +556,10 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>515, 255</value>
+    <value>515, 355</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -442,7 +577,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerDynMin" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,190,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerDynMin" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxBootMode" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,190,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -532,7 +667,7 @@
     <value>Bottom</value>
   </data>
   <data name="ErrorPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 255</value>
+    <value>0, 355</value>
   </data>
   <data name="ErrorPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>515, 112</value>
@@ -562,7 +697,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>515, 367</value>
+    <value>515, 467</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Page_CpuMem</value>
