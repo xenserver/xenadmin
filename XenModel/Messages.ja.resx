@@ -663,6 +663,9 @@
   <data name="ACTION_PREPARING" xml:space="preserve">
     <value>準備しています...</value>
   </data>
+  <data name="ACTION_REBOOT_HOST_VM_SHUTDOWN_ACK" xml:space="preserve">
+    <value>VM '{0}' をシャットダウンできませんでした。</value>
+  </data>
   <data name="ACTION_REMOVE_ALERTS_DESCRIPTION" xml:space="preserve">
     <value>アラートを削除しています...</value>
   </data>
@@ -1587,7 +1590,7 @@ Active Directory 構成が同じ場合のみ、'{0}' をプールに追加でき
     <value>Active Directory 認証</value>
   </data>
   <data name="AD_JOIN_DOMAIN" xml:space="preserve">
-    <value>ドメインに追加(&amp;J)</value>
+    <value>ドメインに追加(&amp;J)...</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB" xml:space="preserve">
     <value>プール '{0}' では、Active Directory 認証が有効になっています。'{1}' をこのプールに追加するには、Active Directory 構成が同じである必要があります。
@@ -1608,7 +1611,7 @@ Active Directory 構成が同じ場合のみ、'{0}' をプールに追加でき
 続行しますか?</value>
   </data>
   <data name="AD_LEAVE_DOMAIN" xml:space="preserve">
-    <value>ドメインから削除(&amp;E)</value>
+    <value>ドメインから削除(&amp;E)...</value>
   </data>
   <data name="AD_LEAVE_WARNING" xml:space="preserve">
     <value>現在、Active Directory 認証によりプール '{0}' に接続しています。
@@ -1679,11 +1682,17 @@ Active Directory ドメイン '{1}' から削除すると、このサーバー�
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
     <value>グループ '{0}' に割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
   </data>
+  <data name="AD_SELECT_ROLE_GROUP_MANY" xml:space="preserve">
+    <value>これらのグループに割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
+  </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
     <value>これらのユーザーおよびグループに割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
     <value>ユーザー '{0}' に割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
+  </data>
+  <data name="AD_SELECT_ROLE_USER_MANY" xml:space="preserve">
+    <value>これらのユーザーに割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
   </data>
   <data name="AD_SELECT_SINGLE_SUBJECT" xml:space="preserve">
     <value>役割を変更するには、単一のサブジェクトを選択します。</value>
@@ -6416,6 +6425,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOST_X" xml:space="preserve">
     <value>ホスト '{0}':</value>
   </data>
+  <data name="HOTFIX_APPLY_ERROR_NO_SR" xml:space="preserve">
+    <value>アップデートをアップロードするのに適切な SR が見つかりません。SR が接続解除されているか、容量不足の可能性があります。</value>
+  </data>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix チェック</value>
   </data>
@@ -8154,6 +8166,9 @@ SCSI ID: {2}
   <data name="NETWORK_ACTION_UPDATING_NETWORK_TITLE" xml:space="preserve">
     <value>{1} 上のネットワーク '{0}' のアップデート</value>
   </data>
+  <data name="NETWORK_CONNECTIVITY_ERROR" xml:space="preserve">
+    <value>ネットワーク接続エラー</value>
+  </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} ({1} で使用中)</value>
   </data>
@@ -8212,7 +8227,7 @@ SCSI ID: {2}
     <value>なし</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>仮想マシンが新しいディスクにアクセスする前に、シャットダウンして再起動してください。</value>
+    <value>VM が新しいディスクにアクセスする前に、シャットダウンして再起動してください。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>ディスクが作成されました</value>
