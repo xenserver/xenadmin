@@ -771,6 +771,12 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>Performing SR scan from '{0}'</value>
   </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
+    <value>Renaming server network interface</value>
+  </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE" xml:space="preserve">
+    <value>Renamed server network interface</value>
+  </data>
   <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
     <value>Saving VM Configuration</value>
   </data>
