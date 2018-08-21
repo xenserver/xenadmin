@@ -2023,6 +2023,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renamed server network interface.
+        /// </summary>
+        public static string ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renaming server network interface.
+        /// </summary>
+        public static string ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving VM Configuration.
         /// </summary>
         public static string ACTION_SET_VM_OTHER_CONFIG_TITLE {
