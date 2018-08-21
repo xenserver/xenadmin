@@ -193,7 +193,7 @@
     <value>更改开机设置</value>
   </data>
   <data name="ACTION_CHANGE_SHADOW_MULTIPLIER" xml:space="preserve">
-    <value>更改重影系数</value>
+    <value>更改阴影乘数</value>
   </data>
   <data name="ACTION_CHANGING_DISK_SIZE_FOR" xml:space="preserve">
     <value>正在更改“{0}”的磁盘大小...</value>
@@ -214,7 +214,7 @@
     <value>正在更改开机设置...</value>
   </data>
   <data name="ACTION_CHANGING_SHADOW_MULTIPLIER_FOR" xml:space="preserve">
-    <value>正在更改“{0}”的重影系数...</value>
+    <value>正在更改“{0}”的阴影乘数...</value>
   </data>
   <data name="ACTION_CHECK_DISK_SPACE_DESCRIPTION" xml:space="preserve">
     <value>正在检查 {0} 上的磁盘空间</value>
@@ -662,6 +662,9 @@
   </data>
   <data name="ACTION_PREPARING" xml:space="preserve">
     <value>正在准备...</value>
+  </data>
+  <data name="ACTION_REBOOT_HOST_VM_SHUTDOWN_ACK" xml:space="preserve">
+    <value>无法关闭 VM“{0}”。</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_DESCRIPTION" xml:space="preserve">
     <value>正在删除警报...</value>
@@ -1583,7 +1586,7 @@
     <value>AD 身份验证</value>
   </data>
   <data name="AD_JOIN_DOMAIN" xml:space="preserve">
-    <value>加入域(&amp;J)</value>
+    <value>加入域(&amp;J)...</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB" xml:space="preserve">
     <value>池“{0}”已启用 Active Directory 身份验证。“{1}”要加入该池，必须共享相同的 AD 配置。
@@ -1604,7 +1607,7 @@
 是否要继续?</value>
   </data>
   <data name="AD_LEAVE_DOMAIN" xml:space="preserve">
-    <value>离开域(&amp;E)</value>
+    <value>离开域(L&amp;)...</value>
   </data>
   <data name="AD_LEAVE_WARNING" xml:space="preserve">
     <value>您当前使用 Active Directory 身份验证连接到池“{0}”。
@@ -1675,11 +1678,17 @@
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
     <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
   </data>
+  <data name="AD_SELECT_ROLE_GROUP_MANY" xml:space="preserve">
+    <value>选择要分配给这些组的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
+  </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
     <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
     <value>选择要分配给用户“{0}”的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
+  </data>
+  <data name="AD_SELECT_ROLE_USER_MANY" xml:space="preserve">
+    <value>选择要分配给这些用户的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_SINGLE_SUBJECT" xml:space="preserve">
     <value>选择要更改角色的单个使用者</value>
@@ -2594,7 +2603,7 @@
     <value>选择其他目标(&amp;D)</value>
   </data>
   <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
-    <value>选择置备方法</value>
+    <value>选择预配方法</value>
   </data>
   <data name="CHOOSE_SR_TYPE_PAGE_TITLE" xml:space="preserve">
     <value>选择新存储的类型</value>
@@ -3534,7 +3543,7 @@
     <value>正在为 {0} 配置网络接口</value>
   </data>
   <data name="CREATEVM_PROVISIONING" xml:space="preserve">
-    <value>正在为 {0} 置备新存储</value>
+    <value>正在为 {0} 预配新存储</value>
   </data>
   <data name="CREATE_CD_DRIVE" xml:space="preserve">
     <value>正在创建 CD 驱动器</value>
@@ -5155,7 +5164,7 @@
     <value>内存不足</value>
   </data>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS" xml:space="preserve">
-    <value>池中没有可用来迁移运行中的 VM 的其他服务器。请改为挂起 VM。</value>
+    <value>池中没有可用来将运行中的 VM 迁移到的其他服务器。请改为挂起 VM。</value>
   </data>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
     <value>没有可用服务器</value>
@@ -5695,22 +5704,22 @@
     <value>必须在启用群集之前禁用高可用性。</value>
   </data>
   <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
-    <value>您的池许可证不允许精简置备(GFS2)。</value>
+    <value>您的池许可证不允许精简预配(GFS2)。</value>
   </data>
   <data name="GFS2_NO_NETWORK" xml:space="preserve">
     <value>无法启用群集，因为没有适用的网络。</value>
   </data>
   <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
-    <value>精简置备(GFS2)要求在池上启用群集。</value>
+    <value>精简预配(GFS2)要求在池上启用群集。</value>
   </data>
   <data name="GFS2_SR_ATTACHED" xml:space="preserve">
-    <value>无法禁用群集，因为有精简置备的(GFS2)存储库连接到此池。</value>
+    <value>无法禁用群集，因为有精简预配的(GFS2)存储库连接到此池。</value>
   </data>
   <data name="GFS2_UPDATE_UPGRADE_CLUSTER_ERROR" xml:space="preserve">
     <value>池 {0} 不能启用群集。</value>
   </data>
   <data name="GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR" xml:space="preserve">
-    <value>池 {0} 不能启用群集，也不能存在精简置备的(GFS2) SR。</value>
+    <value>池 {0} 不能启用群集，也不能存在精简预配的(GFS2) SR。</value>
   </data>
   <data name="GFS2_UPDATE_UPGRADE_SR_ERROR" xml:space="preserve">
     <value>池 {0} 不能存在精简配置的(GFS2) SR。</value>
@@ -6410,6 +6419,9 @@
   <data name="HOST_X" xml:space="preserve">
     <value>主机“{0}”:</value>
   </data>
+  <data name="HOTFIX_APPLY_ERROR_NO_SR" xml:space="preserve">
+    <value>找不到恰当的 SR 来上载更新。您的 SR 可能已分离或者空间不足。</value>
+  </data>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>修补程序检查</value>
   </data>
@@ -6741,7 +6753,7 @@
     <value>协议版本不兼容</value>
   </data>
   <data name="INCOMPATIBLE_WRITE_CACHE_MODE" xml:space="preserve">
-    <value>写缓存模式不兼容</value>
+    <value>写入缓存模式不兼容</value>
   </data>
   <data name="INCORRECT_FILE_SIZE" xml:space="preserve">
     <value>文件大小不正确</value>
@@ -6777,10 +6789,10 @@
     <value>静止快照需要在 VM 上启用 VSS 服务</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_MGMNT" xml:space="preserve">
-    <value>静态快照需要安装管理代理</value>
+    <value>静止快照需要安装管理代理</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>静态快照需要安装 [XenServer product] Tools</value>
+    <value>静止快照需要安装 [XenServer product] Tools</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>静止快照需要 VM 处于运行状态</value>
@@ -8148,6 +8160,9 @@ SCSI ID: {2}
   <data name="NETWORK_ACTION_UPDATING_NETWORK_TITLE" xml:space="preserve">
     <value>正在更新“{1}”上的网络“{0}”</value>
   </data>
+  <data name="NETWORK_CONNECTIVITY_ERROR" xml:space="preserve">
+    <value>网络连接错误</value>
+  </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (正由 {1} 使用)</value>
   </data>
@@ -8342,7 +8357,7 @@ SCSI ID: {2}
     <value>为存储库选择存储系统</value>
   </data>
   <data name="NEWSR_CSLG_SETTINGS_PAGE_TITLE" xml:space="preserve">
-    <value>选择用于置备新存储卷的存储库设置</value>
+    <value>选择用于预配新存储卷的存储库设置</value>
   </data>
   <data name="NEWSR_CSLG_THICK_PROVISIONING" xml:space="preserve">
     <value>复杂</value>
@@ -8460,7 +8475,7 @@ SCSI ID: {2}
     <value>硬件 HBA</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>可以将对共享 LUN 的 iSCSI 或光纤通道访问配置为使用 LVM 托管完整置备的虚拟磁盘或通过 GFS2 群集文件系统进行格式化以便托管精简置备的虚拟磁盘。</value>
+    <value>可以将对共享 LUN 的 iSCSI 或光纤通道访问配置为使用 LVM 托管完整预配的虚拟磁盘或通过 GFS2 群集文件系统进行格式化以便托管精简预配的虚拟磁盘。</value>
   </data>
   <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
     <value>iSCSI</value>
@@ -8643,7 +8658,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 如果在使用此数量 vCPU 的情况下启动该 VM，其性能将会显著下降。</value>
   </data>
   <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
-    <value>已收集完所有必需信息，向导可以使用如下设置置备新虚拟机。
+    <value>已收集完所有必需信息，向导可以使用如下设置预配新虚拟机。
 
 请检查这些设置，如果需要更改任何设置，请单击“上一步”。否则，请单击“立即创建”创建新 VM。创建新 VM 可能需要几分钟时间。</value>
   </data>
@@ -10079,16 +10094,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要通过该策略保护的 VM</value>
   </data>
   <data name="PROVISIONING" xml:space="preserve">
-    <value>置备</value>
+    <value>预配</value>
   </data>
   <data name="PROVISIONING_OPTIONS" xml:space="preserve">
-    <value>置备选项</value>
+    <value>预配选项</value>
   </data>
   <data name="PROVISIONING_TYPE" xml:space="preserve">
-    <value>置备类型</value>
+    <value>预配类型</value>
   </data>
   <data name="PROVISIONING_VM" xml:space="preserve">
-    <value>置备 VM</value>
+    <value>预配 VM</value>
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>不支持代理服务器。</value>
@@ -10980,7 +10995,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>参考信息</value>
   </data>
   <data name="SHADOW_MEMORY_MULTIPLIER" xml:space="preserve">
-    <value>重影内存系数: {0}</value>
+    <value>阴影内存乘数: {0}</value>
   </data>
   <data name="SHADOW_MEMORY_MULTIPLIER_VALUE" xml:space="preserve">
     <value>值应是大于或等于 1.0 的数字</value>
@@ -11355,7 +11370,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>启动时间</value>
   </data>
   <data name="START_UPGRADE" xml:space="preserve">
-    <value>启动升级(&amp;U)</value>
+    <value>开始升级(&amp;U)</value>
   </data>
   <data name="START_UP_OPTIONS" xml:space="preserve">
     <value>启动选项</value>
@@ -11436,10 +11451,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>优先级</value>
   </data>
   <data name="STORAGE_PROVISIONING_METHOD_TITLE" xml:space="preserve">
-    <value>选择存储置备方法</value>
+    <value>选择存储预配方法</value>
   </data>
   <data name="STORAGE_PROVISIONING_SETTINGS" xml:space="preserve">
-    <value>存储置备设置</value>
+    <value>存储预配设置</value>
   </data>
   <data name="STORAGE_READ_ONLY" xml:space="preserve">
     <value>只读</value>
@@ -12060,7 +12075,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池“{0}”上没有默认 SR</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
-    <value>{0}: 没有可用于迁移 VM“{1}”的服务器。</value>
+    <value>{0}: 没有可用于将 VM“{1}”迁移到的服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: 其他服务器上的可用内存不足，无法将所有 VM 迁移出此服务器。</value>
@@ -12347,7 +12362,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>升级您的 [XenServer] 许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 [XenServer] 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
+    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 [XenServer] 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储预配、克隆和快照功能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
@@ -12901,31 +12916,31 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>此 VM 已暂停。</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
-    <value>此 VM 不使用读缓存</value>
+    <value>此 VM 不使用读取缓存</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
-    <value>未许可此池使用读缓存</value>
+    <value>未许可此池使用读取缓存</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE" xml:space="preserve">
     <value>此 VM 没有任何只读磁盘或父磁盘为只读的磁盘</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE" xml:space="preserve">
-    <value>未许可此池在启动 VM 时使用读缓存</value>
+    <value>未许可此池在启动 VM 时使用读取缓存</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
-    <value>不支持在此 VM 使用的存储库类型上使用读缓存</value>
+    <value>不支持在此 VM 使用的存储库类型上使用读取缓存</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
-    <value>读缓存在此 VM 使用的存储库上已禁用</value>
+    <value>读取缓存在此 VM 使用的存储库上已禁用</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_SEARCH" xml:space="preserve">
     <value>未使用读取缓存</value>
   </data>
   <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
-    <value>此 VM 使用读缓存</value>
+    <value>此 VM 使用读取缓存</value>
   </data>
   <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
-    <value>使用读缓存</value>
+    <value>使用读取缓存</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM 已还原为“{0}”</value>
