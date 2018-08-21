@@ -663,6 +663,9 @@
   <data name="ACTION_PREPARING" xml:space="preserve">
     <value>準備しています...</value>
   </data>
+  <data name="ACTION_REBOOT_HOST_VM_SHUTDOWN_ACK" xml:space="preserve">
+    <value>VM '{0}' をシャットダウンできませんでした。</value>
+  </data>
   <data name="ACTION_REMOVE_ALERTS_DESCRIPTION" xml:space="preserve">
     <value>アラートを削除しています...</value>
   </data>
@@ -1104,6 +1107,9 @@
   <data name="ACTION_VMS_MIGRATING_TITLE" xml:space="preserve">
     <value>VM の移行</value>
   </data>
+  <data name="ACTION_VMS_REBOOTING_TITLE" xml:space="preserve">
+    <value>VM の再起動</value>
+  </data>
   <data name="ACTION_VMS_RESUMING_ON_TITLE" xml:space="preserve">
     <value>VM の再開</value>
   </data>
@@ -1112,6 +1118,9 @@
   </data>
   <data name="ACTION_VMS_STARTING_ON_TITLE" xml:space="preserve">
     <value>VM の起動</value>
+  </data>
+  <data name="ACTION_VMS_SUSPENDING_TITLE" xml:space="preserve">
+    <value>VM の一時停止</value>
   </data>
   <data name="ACTION_VM_COPIED" xml:space="preserve">
     <value>コピーされました</value>
@@ -1587,7 +1596,7 @@ Active Directory 構成が同じ場合のみ、'{0}' をプールに追加でき
     <value>Active Directory 認証</value>
   </data>
   <data name="AD_JOIN_DOMAIN" xml:space="preserve">
-    <value>ドメインに追加(&amp;J)</value>
+    <value>ドメインに追加(&amp;J)...</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB" xml:space="preserve">
     <value>プール '{0}' では、Active Directory 認証が有効になっています。'{1}' をこのプールに追加するには、Active Directory 構成が同じである必要があります。
@@ -1608,7 +1617,7 @@ Active Directory 構成が同じ場合のみ、'{0}' をプールに追加でき
 続行しますか?</value>
   </data>
   <data name="AD_LEAVE_DOMAIN" xml:space="preserve">
-    <value>ドメインから削除(&amp;E)</value>
+    <value>ドメインから削除(&amp;E)...</value>
   </data>
   <data name="AD_LEAVE_WARNING" xml:space="preserve">
     <value>現在、Active Directory 認証によりプール '{0}' に接続しています。
@@ -1679,11 +1688,17 @@ Active Directory ドメイン '{1}' から削除すると、このサーバー�
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
     <value>グループ '{0}' に割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
   </data>
+  <data name="AD_SELECT_ROLE_GROUP_MANY" xml:space="preserve">
+    <value>これらのグループに割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
+  </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
     <value>これらのユーザーおよびグループに割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
     <value>ユーザー '{0}' に割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
+  </data>
+  <data name="AD_SELECT_ROLE_USER_MANY" xml:space="preserve">
+    <value>これらのユーザーに割り当てる役割を選択します。各役割には、その下位レベルのすべての役割が含まれています。</value>
   </data>
   <data name="AD_SELECT_SINGLE_SUBJECT" xml:space="preserve">
     <value>役割を変更するには、単一のサブジェクトを選択します。</value>
@@ -6416,6 +6431,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOST_X" xml:space="preserve">
     <value>ホスト '{0}':</value>
   </data>
+  <data name="HOTFIX_APPLY_ERROR_NO_SR" xml:space="preserve">
+    <value>アップデートをアップロードするのに適切な SR が見つかりません。SR が接続解除されているか、容量不足の可能性があります。</value>
+  </data>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix チェック</value>
   </data>
@@ -7197,9 +7215,6 @@ Standard 機能のみ有効です</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
     <value>サーバー ‘{0}’ のライブパッチに失敗しました。パッチを適用するには、サーバーをメンテナンス モードにして再起動してください。</value>
-  </data>
-  <data name="LOADING" xml:space="preserve">
-    <value>'{0}' を読み込んでいます...</value>
   </data>
   <data name="LOCAL" xml:space="preserve">
     <value>ローカル</value>
@@ -8151,6 +8166,9 @@ SCSI ID: {2}
   <data name="NETWORK_ACTION_UPDATING_NETWORK_TITLE" xml:space="preserve">
     <value>{1} 上のネットワーク '{0}' のアップデート</value>
   </data>
+  <data name="NETWORK_CONNECTIVITY_ERROR" xml:space="preserve">
+    <value>ネットワーク接続エラー</value>
+  </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} ({1} で使用中)</value>
   </data>
@@ -8209,7 +8227,7 @@ SCSI ID: {2}
     <value>なし</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
-    <value>仮想マシンが新しいディスクにアクセスする前に、シャットダウンして再起動してください。</value>
+    <value>VM が新しいディスクにアクセスする前に、シャットダウンして再起動してください。</value>
   </data>
   <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
     <value>ディスクが作成されました</value>
@@ -9593,6 +9611,27 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>アップデートするサーバーを選択します</value>
   </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
+    <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_ONE" xml:space="preserve">
+    <value>アップデート {0} のインストールに失敗しました.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_MANY" xml:space="preserve">
+    <value>The following errors occurred while the installation of update {0} was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE" xml:space="preserve">
+    <value>The following error occurred while the installation of update {0} was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY" xml:space="preserve">
+    <value>The installation of update {0} on all selected servers was completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_ONE" xml:space="preserve">
+    <value>The installation of update {0} was completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
+    <value>[XenCenter] is now installing update {0} on your system.</value>
+  </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] は、前の手順で指定したサーバーにアップデートをダウンロードしてから、そのサーバーにアップロードしています。
 操作が完了するまで待ってから [次へ] をクリックしインストールを続行してください。</value>
@@ -9907,6 +9946,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="POOL_COLON" xml:space="preserve">
     <value>プール:</value>
+  </data>
+  <data name="POOL_DELETE_HA_ENABLED" xml:space="preserve">
+    <value>プール '{0}' は HA を有効にしています。プールをスタンドアロン サーバーにする前に、HA を無効にする必要があります。</value>
+  </data>
+  <data name="POOL_DELETE_HA_ENABLING" xml:space="preserve">
+    <value>HA は現在プール '{0}' で有効になっています。プールをスタンドアロン サーバーにする前に、HA を無効にする必要があります。</value>
   </data>
   <data name="POOL_EDIT_IN_PROGRESS" xml:space="preserve">
     <value>このプールの構成は、現在変更されています</value>
@@ -11503,12 +11548,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SUSPEND" xml:space="preserve">
     <value>一時停止</value>
   </data>
-  <data name="SUSPENDED_SPECIFIED_VMS" xml:space="preserve">
-    <value>指定した VM が一時停止しました</value>
-  </data>
-  <data name="SUSPENDING_SPECIFIED_VMS" xml:space="preserve">
-    <value>指定した VM の一時停止</value>
-  </data>
   <data name="SUSPENDING_VM_OUT_OF" xml:space="preserve">
     <value>VM を一時停止中: {0} / {1}</value>
   </data>
@@ -11949,15 +11988,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_CANNOT_SEE_NETWORK" xml:space="preserve">
     <value>VM '{0}' が使用するネットワーク '{1}' は、一部のサーバーからアクセスできません。</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_SUSPEND_VM" xml:space="preserve">
-    <value>この VM は一時停止できないため、シャットダウンされます。</value>
-  </data>
-  <data name="UPDATES_WIZARD_CANNOT_SUSPEND_VM_TITLE" xml:space="preserve">
-    <value>VM '{0}' を一時停止できません</value>
-  </data>
-  <data name="UPDATES_WIZARD_CANNOT_UPGRADE_WITH_VM" xml:space="preserve">
-    <value>VM '{0}' でアップグレードできません</value>
-  </data>
   <data name="UPDATES_WIZARD_CONNECTION_LOST" xml:space="preserve">
     <value>選択したサーバーへの接続が切断されました。再接続するか、別のサーバーを選択してください。</value>
   </data>
@@ -12008,9 +12038,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: サーバーに到達できないためチェックがスキップされました。</value>
   </data>
-  <data name="UPDATES_WIZARD_INSTALL_TOOLS" xml:space="preserve">
-    <value>ツールをインストールするにはここをクリックしてください</value>
-  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>VM '{0}' のドライブには、ローカルの CD/DVD があります。</value>
   </data>
@@ -12032,20 +12059,8 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
     <value>{0} に有効なアップデート ファイルがありません</value>
   </data>
-  <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
-    <value>要求された VM を一時停止するために必要な空き容量がこのストレージ リポジトリにありません。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE_TITLE" xml:space="preserve">
-    <value>デフォルト SR '{0}' の空き容量不足</value>
-  </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>このアップデートには、これ以上の操作は必要ありません。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NO_DEFAULT_SR" xml:space="preserve">
-    <value>このプールには VM を一時停止するためのデフォルトの SR がありません。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NO_DEFAULT_SR_TITLE" xml:space="preserve">
-    <value>プール '{0}' にデフォルト SR がありません</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
     <value>{0}: VM '{1}' を移行できるサーバーがありません。</value>
@@ -12085,9 +12100,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
     <value>{0}: 競合するアップデートがあります: {1}</value>
-  </data>
-  <data name="UPDATES_WIZARD_PRECHECK_FAILED_ON_ALL_SERVERS" xml:space="preserve">
-    <value>選択したサーバーの事前チェックに失敗しました。アップデートは適用されません。</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING" xml:space="preserve">
     <value>{0}: 必要なアップデートが適用されていません: {1}</value>
@@ -12147,9 +12159,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>ストレージ リポジトリ '{0}'</value>
-  </data>
-  <data name="UPDATES_WIZARD_SUSPENDED_VM" xml:space="preserve">
-    <value>VM {0} は、ローカル CD または Tools CD が挿入されたまま一時停止状態になっています</value>
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
     <value>VM '{0}' のドライブには、Tools CD があります。</value>
@@ -13046,6 +13055,21 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="WARNING_DELETE_VD_MULTIPLE" xml:space="preserve">
     <value>これらの仮想ディスクは完全に削除され、データが破棄されます。</value>
+  </data>
+  <data name="WEB_BROWSER_FAILED" xml:space="preserve">
+    <value>'{0}' が見つかりません。</value>
+  </data>
+  <data name="WEB_BROWSER_FAILED_RETRYING" xml:space="preserve">
+    <value>'{0}' が見つかりません。'{1}' を待機しています...</value>
+  </data>
+  <data name="WEB_BROWSER_LOADING" xml:space="preserve">
+    <value>'{0}' を読み込んでいます...</value>
+  </data>
+  <data name="WEB_BROWSER_LOADING_PERCENT" xml:space="preserve">
+    <value>'{0}' を読み込んでいます ({1}%)...</value>
+  </data>
+  <data name="WEB_BROWSER_WAITING" xml:space="preserve">
+    <value>'{0}' を待機しています...</value>
   </data>
   <data name="WEB_PAGE" xml:space="preserve">
     <value>Web ページ</value>
