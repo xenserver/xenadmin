@@ -132,7 +132,8 @@ namespace XenAPI
             bool has_vendor_device,
             bool requires_reboot,
             string reference_label,
-            domain_type domain_type)
+            domain_type domain_type,
+            Dictionary<string, string> NVRAM)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -218,6 +219,7 @@ namespace XenAPI
             this.requires_reboot = requires_reboot;
             this.reference_label = reference_label;
             this.domain_type = domain_type;
+            this.NVRAM = NVRAM;
         }
 
         /// <summary>
@@ -319,6 +321,7 @@ namespace XenAPI
             requires_reboot = update.requires_reboot;
             reference_label = update.reference_label;
             domain_type = update.domain_type;
+            NVRAM = update.NVRAM;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -407,6 +410,7 @@ namespace XenAPI
             requires_reboot = (bool)proxy.requires_reboot;
             reference_label = proxy.reference_label == null ? null : proxy.reference_label;
             domain_type = proxy.domain_type == null ? (domain_type) 0 : (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)proxy.domain_type);
+            NVRAM = proxy.NVRAM == null ? null : Maps.convert_from_proxy_string_string(proxy.NVRAM);
         }
 
         public Proxy_VM ToProxy()
@@ -496,6 +500,7 @@ namespace XenAPI
             result_.requires_reboot = requires_reboot;
             result_.reference_label = reference_label ?? "";
             result_.domain_type = domain_type_helper.ToString(domain_type);
+            result_.NVRAM = Maps.convert_to_proxy_string_string(NVRAM);
             return result_;
         }
 
@@ -686,6 +691,8 @@ namespace XenAPI
                 reference_label = Marshalling.ParseString(table, "reference_label");
             if (table.ContainsKey("domain_type"))
                 domain_type = (domain_type)Helper.EnumParseDefault(typeof(domain_type), Marshalling.ParseString(table, "domain_type"));
+            if (table.ContainsKey("NVRAM"))
+                NVRAM = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "NVRAM"));
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -780,7 +787,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device) &&
                 Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
                 Helper.AreEqual2(this._reference_label, other._reference_label) &&
-                Helper.AreEqual2(this._domain_type, other._domain_type);
+                Helper.AreEqual2(this._domain_type, other._domain_type) &&
+                Helper.AreEqual2(this._NVRAM, other._NVRAM);
         }
 
         internal static List<VM> ProxyArrayToObjectList(Proxy_VM[] input)
@@ -896,6 +904,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_hardware_platform_version, server._hardware_platform_version))
                 {
                     VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
+                }
+                if (!Helper.AreEqual2(_NVRAM, server._NVRAM))
+                {
+                    VM.set_NVRAM(session, opaqueRef, _NVRAM);
                 }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
@@ -2264,6 +2276,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the NVRAM field of the given VM.
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static Dictionary<string, string> get_NVRAM(Session session, string _vm)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_nvram(session.opaque_ref, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_nvram(session.opaque_ref, _vm ?? "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given VM.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -2839,6 +2865,52 @@ namespace XenAPI
                 session.JsonRpcClient.vm_set_hardware_platform_version(session.opaque_ref, _vm, _hardware_platform_version);
             else
                 session.proxy.vm_set_hardware_platform_version(session.opaque_ref, _vm ?? "", _hardware_platform_version.ToString()).parse();
+        }
+
+        /// <summary>
+        /// Set the NVRAM field of the given VM.
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_nvram">New value to set</param>
+        public static void set_NVRAM(Session session, string _vm, Dictionary<string, string> _nvram)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_nvram(session.opaque_ref, _vm, _nvram);
+            else
+                session.proxy.vm_set_nvram(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_nvram)).parse();
+        }
+
+        /// <summary>
+        /// Add the given key-value pair to the NVRAM field of the given VM.
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
+        public static void add_to_NVRAM(Session session, string _vm, string _key, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_nvram(session.opaque_ref, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_nvram(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Remove the given key and its corresponding value from the NVRAM field of the given VM.  If the key is not in that Map, then do nothing.
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
+        public static void remove_from_NVRAM(Session session, string _vm, string _key)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_nvram(session.opaque_ref, _vm, _key);
+            else
+                session.proxy.vm_remove_from_nvram(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -6704,5 +6776,25 @@ namespace XenAPI
             }
         }
         private domain_type _domain_type = domain_type.unspecified;
+
+        /// <summary>
+        /// initial value for guest NVRAM (containing UEFI variables, etc)
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
+        public virtual Dictionary<string, string> NVRAM
+        {
+            get { return _NVRAM; }
+            set
+            {
+                if (!Helper.AreEqual(value, _NVRAM))
+                {
+                    _NVRAM = value;
+                    Changed = true;
+                    NotifyPropertyChanged("NVRAM");
+                }
+            }
+        }
+        private Dictionary<string, string> _NVRAM = new Dictionary<string, string>() {};
     }
 }
