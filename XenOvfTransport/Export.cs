@@ -271,16 +271,10 @@ namespace XenOvfTransport
                 }
 
                 #region ADD XEN SPECIFICS
+
                 if (vm.HVM_boot_params != null)
                 {
-                    Dictionary<string, string> _params = vm.HVM_boot_params;
-                    foreach (string key in _params.Keys)
-                    {
-                        if (key.ToLower().Equals("order"))
-                        {
-                            OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_params", _params[key], OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
-                        }
-                    }
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_params", JoinDictionaryIntoString(vm.HVM_boot_params), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
                 if (!string.IsNullOrEmpty(vm.HVM_boot_policy))
                 {
@@ -292,13 +286,11 @@ namespace XenOvfTransport
                 }
                 if (vm.platform != null)
                 {
-                    Dictionary<string, string> platform = vm.platform;
-                    StringBuilder sb = new StringBuilder();
-                    foreach (string key in platform.Keys)
-                    {
-                        sb.AppendFormat(@"{0}={1};", key, platform[key]);
-                    }
-					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", JoinDictionaryIntoString(vm.platform), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+                }
+                if (vm.NVRAM != null)
+                {
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "NVRAM", JoinDictionaryIntoString(vm.NVRAM), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
                 if (!string.IsNullOrEmpty(vm.PV_args))
                 {
@@ -402,6 +394,17 @@ namespace XenOvfTransport
                 throw new Exception(Messages.ERROR_EXPORT_FAILED, ex);
             }
             return ovfEnv;
+        }
+
+        private static string JoinDictionaryIntoString(Dictionary<string, string> dict)
+        {
+            var sb = new StringBuilder();
+            foreach (var key in dict.Keys)
+            {
+                sb.AppendFormat(@"{0}={1};", key, dict[key]);
+            }
+
+            return sb.ToString();
         }
 
         private void _copydisks(EnvelopeType ovfEnv, string label, string targetPath)

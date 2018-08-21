@@ -1257,7 +1257,7 @@ namespace XenOvfTransport
             {
                 // DEFAULT should work for all of HVM type or 301
                 newVm.HVM_boot_policy = Properties.Settings.Default.xenBootOptions;
-                newVm.HVM_boot_params = new Dictionary<string, string> {{"order", Properties.Settings.Default.xenBootOrder}};
+                newVm.HVM_boot_params = SplitStringIntoDictionary(Properties.Settings.Default.xenBootParams);
                 newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
             }
             else
@@ -1269,7 +1269,7 @@ namespace XenOvfTransport
                     switch (key.ToLower())
                     {
                         case "hvm_boot_params":
-                            newVm.HVM_boot_params = new Dictionary<string, string> {{"order", xcsd.Value.Value}};
+                            newVm.HVM_boot_params = SplitStringIntoDictionary(xcsd.Value.Value);
                             break;
                         case "platform":
                             newVm.platform = MakePlatformHash(xcsd.Value.Value);
@@ -1393,16 +1393,24 @@ namespace XenOvfTransport
             }
             return;
         }
-        private Dictionary<string, string> MakePlatformHash(string plaform)
+
+        private static Dictionary<string, string> SplitStringIntoDictionary(string inputStr)
         {
-            var hPlatform = new Dictionary<string, string>();
-            string[] platformArray = plaform.Split('=', ';');
-            for (int i = 0; i < platformArray.Length - 1; i += 2)
+            var result = new Dictionary<string, string>();
+            string[] inputArray = inputStr.Split('=', ';');
+            for (int i = 0; i < inputArray.Length - 1; i += 2)
             {
-                string identifier = platformArray[i].Trim();
-                string identvalue = platformArray[i + 1].Trim();
-                hPlatform.Add(identifier, identvalue);
+                string identifier = inputArray[i].Trim();
+                string identvalue = inputArray[i + 1].Trim();
+                result.Add(identifier, identvalue);
             }
+
+            return result;
+        }
+
+        private Dictionary<string, string> MakePlatformHash(string platform)
+        {
+            var hPlatform = SplitStringIntoDictionary(platform);
 
             // Handle the case when NX isn't in the platform string.
             if (!hPlatform.ContainsKey("nx"))

@@ -52,10 +52,10 @@ namespace XenOvfTransport.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dc")]
-        public string xenBootOrder {
+        [global::System.Configuration.DefaultSettingValueAttribute("order=dc;")]
+        public string xenBootParams {
             get {
-                return ((string)(this["xenBootOrder"]));
+                return ((string)(this["xenBootParams"]));
             }
         }
         
