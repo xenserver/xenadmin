@@ -253,7 +253,7 @@
     <value>0</value>
   </data>
   <data name="topLabel.Text" xml:space="preserve">
-    <value>为您的 CoreOS VM 指定云配置参数.</value>
+    <value>为您的 CoreOS VM 指定云配置参数。</value>
   </data>
   <data name="&gt;&gt;topLabel.Name" xml:space="preserve">
     <value>topLabel</value>
@@ -325,7 +325,7 @@
     <value>3</value>
   </data>
   <data name="ConfigDriveTemplateLabel.Text" xml:space="preserve">
-    <value>&amp;Config drive template:</value>
+    <value>配置驱动器模板(&amp;C):</value>
   </data>
   <data name="&gt;&gt;ConfigDriveTemplateLabel.Name" xml:space="preserve">
     <value>ConfigDriveTemplateLabel</value>
@@ -355,7 +355,7 @@
     <value>6</value>
   </data>
   <data name="IncludeConfigDriveCheckBox.Text" xml:space="preserve">
-    <value>&amp;Include config drive</value>
+    <value>包括配置驱动器(&amp;I)</value>
   </data>
   <data name="&gt;&gt;IncludeConfigDriveCheckBox.Name" xml:space="preserve">
     <value>IncludeConfigDriveCheckBox</value>
@@ -382,7 +382,7 @@
     <value>7</value>
   </data>
   <data name="reloadDefaults.Text" xml:space="preserve">
-    <value>&amp;Reset to default</value>
+    <value>重置为默认值(&amp;R)</value>
   </data>
   <data name="&gt;&gt;reloadDefaults.Name" xml:space="preserve">
     <value>reloadDefaults</value>

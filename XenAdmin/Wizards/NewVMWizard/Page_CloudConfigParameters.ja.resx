@@ -325,7 +325,7 @@
     <value>3</value>
   </data>
   <data name="ConfigDriveTemplateLabel.Text" xml:space="preserve">
-    <value>&amp;Config drive template:</value>
+    <value>ドライブ テンプレートを構成(&amp;C):</value>
   </data>
   <data name="&gt;&gt;ConfigDriveTemplateLabel.Name" xml:space="preserve">
     <value>ConfigDriveTemplateLabel</value>
@@ -355,7 +355,7 @@
     <value>6</value>
   </data>
   <data name="IncludeConfigDriveCheckBox.Text" xml:space="preserve">
-    <value>&amp;Include config drive</value>
+    <value>構成ドライブを含む(&amp;I)</value>
   </data>
   <data name="&gt;&gt;IncludeConfigDriveCheckBox.Name" xml:space="preserve">
     <value>IncludeConfigDriveCheckBox</value>
@@ -382,7 +382,7 @@
     <value>7</value>
   </data>
   <data name="reloadDefaults.Text" xml:space="preserve">
-    <value>&amp;Reset to default</value>
+    <value>デフォルトにリセット(&amp;R)</value>
   </data>
   <data name="&gt;&gt;reloadDefaults.Name" xml:space="preserve">
     <value>reloadDefaults</value>

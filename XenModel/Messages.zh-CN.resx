@@ -2039,7 +2039,7 @@
     <value>在服务器启动时自动启动</value>
   </data>
   <data name="AUTOSTART_ENABLED_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>VM {0} 已启用自动启动功能</value>
+    <value>{0}: VM {1} 已启用自动启动功能</value>
   </data>
   <data name="AVAILABLE" xml:space="preserve">
     <value>可用</value>
@@ -7205,10 +7205,14 @@ XenApp/XenDesktop Platinum 功能已启用</value>
     <value>实时修补</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
-    <value>对服务器 {0} 执行实时修补功能失败。要应用此修补程序，请将这些服务器置于维护模式并重新启动。</value>
+    <value>以下服务器的实时修补失败:
+
+{0}
+
+要完成修补程序安装，请将这些服务器置于维护模式并重新启动。</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
-    <value>对服务器“{0}”执行实时修补功能失败。要应用此修补程序，请将该服务器置于维护模式并重新启动。</value>
+    <value>服务器“{0}”的实时修补失败。要完成修补程序安装，请将该服务器置于维护模式并重新启动。</value>
   </data>
   <data name="LOCAL" xml:space="preserve">
     <value>本地</value>
@@ -9438,7 +9442,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>重新启动这些 VM:</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
-    <value>按此顺序重新启动 Toolstack (始终先重新启动主服务器):</value>
+    <value>按此顺序重新启动这些服务器上的 Toolstack (主服务器始终优先):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>更新模式</value>
@@ -9610,25 +9614,25 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>选择要更新的服务器</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
-    <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
+    <value>在所有选定的服务器上未完成更新 {0} 的安装。更新过程已暂停。请按“重试”继续。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_ONE" xml:space="preserve">
     <value>更新 {0} 的安装未成功完成.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_MANY" xml:space="preserve">
-    <value>The following errors occurred while the installation of update {0} was in progress:</value>
+    <value>安装更新 {0} 过程中出现以下错误:</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE" xml:space="preserve">
-    <value>The following error occurred while the installation of update {0} was in progress:</value>
+    <value>安装更新 {0} 过程中出现以下错误:</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY" xml:space="preserve">
-    <value>The installation of update {0} on all selected servers was completed successfully.</value>
+    <value>已成功在所有选定的服务器上安装更新 {0}。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_ONE" xml:space="preserve">
-    <value>The installation of update {0} was completed successfully.</value>
+    <value>更新 {0} 的安装已成功完成。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
-    <value>[XenCenter] is now installing update {0} on your system.</value>
+    <value>[XenCenter] 现在正在您的系统中安装更新 {0}。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] 现在正在下载您的更新并将其上载到在上一步骤中指定的服务器。
@@ -11523,7 +11527,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0} (版本: {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
-    <value>在“{1}”上安装补充包“{0}”失败。</value>
+    <value>无法在“{1}”上安装补充包“{0}”。
+
+有关如何在服务器上手动安装补充包的说明，请参阅《[XenServer product] 管理员指南》。</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (未在 {1} 上安装)</value>
@@ -11960,31 +11966,31 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 请检查您的设置并重试。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
-    <value>无法迁移 VM“{0}”</value>
+    <value>{0}: 无法迁移 VM“{1}”</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON" xml:space="preserve">
-    <value>由于许可证限制，无法迁移 VM“{0}”。</value>
+    <value>{0}: 由于许可证限制，无法迁移 VM“{1}”。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
-    <value>无法迁移 VM“{0}”，因为该 VM 连接了虚拟 GPU，并且其他服务器上没有合适的 GPU 可用。</value>
+    <value>{0}: 无法迁移 VM“{1}”，因为该 VM 连接了虚拟 GPU，并且其他服务器上没有合适的 GPU 可用。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
-    <value>无法迁移 VM“{0}”，因为该 VM 未安装最新的驱动程序。</value>
+    <value>{0}: 无法迁移 VM“{1}”，因为该 VM 未安装最新的驱动程序。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_OPERATION_IN_PROGRESS" xml:space="preserve">
-    <value>无法迁移 VM“{0}”，因为当前正在进行的另一项操作使用该 VM。</value>
+    <value>{0}: 无法迁移 VM“{1}”，因为当前正在进行的另一项操作使用该 VM。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
-    <value>无法迁移 VM“{0}”，因为该 VM 连接了一个或多个 PCI 设备。</value>
+    <value>{0}: 无法迁移 VM“{1}”，因为该 VM 连接了一个或多个 PCI 设备。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
-    <value>无法迁移 VM“{0}”，因为无法暂停该 VM。</value>
+    <value>{0}: 无法迁移 VM“{1}”，因为无法暂停该 VM。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON" xml:space="preserve">
-    <value>由于未知原因，无法迁移 VM“{0}”。有关更多详细信息，请参阅应用程序日志。</value>
+    <value>{0}: 由于未知原因，无法迁移 VM“{1}”。有关更多详细信息，请参阅应用程序日志。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_SEE_NETWORK" xml:space="preserve">
-    <value>VM {0} 使用网络 {1}，此网络对所有服务器都不可见。</value>
+    <value>{0}: VM“{1}”使用网络“{2}”，此网络对所有服务器都不可见。</value>
   </data>
   <data name="UPDATES_WIZARD_CONNECTION_LOST" xml:space="preserve">
     <value>与所选服务器的连接已丢失。请选择备用服务器或重新连接所选服务器。</value>
@@ -12037,7 +12043,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 由于服务器无法访问，因此已跳过检查。</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
-    <value>VM“{0}”的驱动器中有本地 CD/DVD。</value>
+    <value>{0}: VM“{1}”的驱动器中有本地 CD/DVD。</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_STORAGE" xml:space="preserve">
     <value>{0}: VM {1} 使用本地存储，无法迁移。</value>
@@ -12073,10 +12079,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 不需要重新启动此服务器，因为使用的是实时修补。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>VM {0} 未安装 [XenServer product] Tools。</value>
+    <value>{0}: VM {1} 未安装 [XenServer product] Tools。</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>安装最新版本的 [XenServer product] Tools 之前不能暂停 VM {0}。</value>
+    <value>{0}: 安装最新版本的 [XenServer product] Tools 之前不能暂停 VM {1}。</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
     <value>选中要更新的每个服务器对应的复选框。选中池的复选框可选择该池中的所有可用服务器。</value>
@@ -12159,13 +12165,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>存储库“{0}”</value>
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
-    <value>VM“{0}”的驱动器中装有工具 CD。</value>
+    <value>{0}: VM“{1}”的驱动器中装有工具 CD。</value>
   </data>
   <data name="UPDATES_WIZARD_UPLOADING_UPDATE" xml:space="preserve">
     <value>正在将更新 {0} 上载到 {1}...</value>
   </data>
   <data name="UPDATES_WIZARD_VM_HAS_VGPU" xml:space="preserve">
-    <value>VM“{0}”有一个或多个虚拟 GPU。</value>
+    <value>{0}: VM“{1}”有一个或多个虚拟 GPU。</value>
   </data>
   <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
     <value>{0}: 由于在池 {1} 上启用了 WLB，因此已跳过检查。</value>
@@ -12243,7 +12249,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>关闭所有 VM</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS" xml:space="preserve">
-    <value>VM“{0}”具有无效 vCPU 设置。</value>
+    <value>{0}: VM“{1}”具有无效 vCPU 设置。</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE" xml:space="preserve">
     <value>修复 vCPU 配置</value>

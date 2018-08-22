@@ -352,7 +352,7 @@
     <value>4</value>
   </data>
   <data name="labelDMCUnavailable.Text" xml:space="preserve">
-    <value>无法在此 VM 上设置内存范围.</value>
+    <value>无法在此 VM 上设置内存范围。</value>
   </data>
   <data name="&gt;&gt;labelDMCUnavailable.Name" xml:space="preserve">
     <value>labelDMCUnavailable</value>
