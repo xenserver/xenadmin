@@ -493,7 +493,7 @@
     <value>3</value>
   </data>
   <data name="_labelError.Text" xml:space="preserve">
-    <value>Failed to uncompress file. Please see the logs for more information.</value>
+    <value>ファイルを圧縮解除できません。詳しくは、ログを参照してください。</value>
   </data>
   <data name="&gt;&gt;_labelError.Name" xml:space="preserve">
     <value>_labelError</value>
