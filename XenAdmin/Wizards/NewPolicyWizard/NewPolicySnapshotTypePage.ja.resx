@@ -389,7 +389,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBoxVSS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 94</value>
+    <value>395, 94</value>
   </data>
   <data name="pictureBoxVSS.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
