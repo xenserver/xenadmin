@@ -4895,7 +4895,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>ends with</value>
   </data>
   <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer] &amp;Enterprise Per-Socket ({0} required)</value>
+    <value>[XenServer] P&amp;remium Per-Socket ({0} required)</value>
   </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>Enter &amp;Maintenance Mode...</value>
@@ -7071,7 +7071,7 @@ Size: {3}</value>
     <value>The license for a host cannot be changed when HA is on</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>Servers must be selected one at a time when activating free [XenServer].</value>
+    <value>Servers must be selected one at a time when activating Express [XenServer].</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
     <value>Servers must be selected one at a time when licensing servers which have a version lower than [BRANDING_VERSION_5_6].</value>
@@ -7113,11 +7113,11 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps and Desktops Platinum features enabled</value>
+[Citrix] Virtual Apps and Desktops Premium features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-Enterprise features enabled</value>
+Premium features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -7128,7 +7128,7 @@ Premium features enabled</value>
 Standard features only</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>Activation keys can only be applied to one Free [XenServer] product at a time.</value>
+    <value>Activation keys can only be applied to one Express [XenServer] product at a time.</value>
   </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>Unlicensed</value>
@@ -7155,10 +7155,10 @@ Standard features only</value>
     <value>Your license has expired</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>One or more managed servers have expired. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
+    <value>One or more managed servers have expired. Either assign [XenServer] licenses, or activate Express [XenServer] products.</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
+    <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Express [XenServer] products.</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
