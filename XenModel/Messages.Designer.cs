@@ -6063,6 +6063,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boot Mode.
+        /// </summary>
+        public static string BOOT_MODE {
+            get {
+                return ResourceManager.GetString("BOOT_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boot order: {0}.
         /// </summary>
         public static string BOOTORDER {
@@ -36974,7 +36983,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ma&amp;ximum number of vCPUs:.
+        ///   Looks up a localized string similar to Maximum number of &amp;vCPUs:.
         /// </summary>
         public static string VM_CPUMEMPAGE_MAX_VCPUS_LABEL {
             get {
@@ -37010,7 +37019,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of v&amp;CPUs:.
+        ///   Looks up a localized string similar to &amp;Number of vCPUs:.
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPUS_LABEL {
             get {

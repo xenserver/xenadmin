@@ -167,13 +167,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_3_InstallationMedia.SelectedPvArgs,
                                         page_3_InstallationMedia.SelectedCD,
                                         page_3_InstallationMedia.SelectedUrl,
+                                        page_3_InstallationMedia.SelectedBootMode,
                                         m_affinity,
                                         page_5_CpuMem.SelectedVcpusMax,
                                         page_5_CpuMem.SelectedVcpusAtStartup,
                                         (long)page_5_CpuMem.SelectedMemoryDynamicMin,
                                         (long)page_5_CpuMem.SelectedMemoryDynamicMax,
                                         (long)page_5_CpuMem.SelectedMemoryStaticMax,
-                                        page_5_CpuMem.SelectedBootMode,
                                         page_6b_LunPerVdi.MapLunsToVdisRequired
                                             ? page_6b_LunPerVdi.MappedDisks
                                             : page_6_Storage.SelectedDisks,

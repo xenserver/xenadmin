@@ -42,6 +42,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.panelInstallationMethod = new System.Windows.Forms.TableLayoutPanel();
             this.linkLabelAttachNewIsoStore = new System.Windows.Forms.LinkLabel();
             this.comboBoxToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.bootModesControl1 = new XenAdmin.Wizards.BootModesControl();
             this.PvBootBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelInstallationMethod.SuspendLayout();
@@ -97,13 +98,13 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.CdDropDownBox, "CdDropDownBox");
             this.CdDropDownBox.connection = null;
+            this.CdDropDownBox.DisplayISO = false;
+            this.CdDropDownBox.DisplayPhysical = false;
             this.CdDropDownBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CdDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CdDropDownBox.Empty = false;
             this.CdDropDownBox.FormattingEnabled = true;
-            this.CdDropDownBox.DisplayISO = false;
             this.CdDropDownBox.Name = "CdDropDownBox";
-            this.CdDropDownBox.DisplayPhysical = false;
             this.CdDropDownBox.SelectedCD = null;
             // 
             // UrlTextBox
@@ -129,10 +130,17 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.linkLabelAttachNewIsoStore.TabStop = true;
             this.linkLabelAttachNewIsoStore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // bootModesControl1
+            // 
+            this.bootModesControl1.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.bootModesControl1, "bootModesControl1");
+            this.bootModesControl1.Name = "bootModesControl1";
+            // 
             // Page_InstallationMedia
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.bootModesControl1);
             this.Controls.Add(this.panelInstallationMethod);
             this.Controls.Add(this.PvBootBox);
             this.Name = "Page_InstallationMedia";
@@ -160,5 +168,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.LinkLabel linkLabelAttachNewIsoStore;
         private System.Windows.Forms.ToolTip comboBoxToolTip;
+        private BootModesControl bootModesControl1;
     }
 }

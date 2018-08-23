@@ -37,7 +37,6 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.Ballooning;
 using XenAdmin.Core;
 using XenAPI;
-using BootMode = XenAdmin.Actions.VMActions.BootMode;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
@@ -119,8 +118,6 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             SetSpinnerLimitsAndIncrement();
 
-            InitialiseBootModeControls();
-
             ValuesUpdated();
 
             initialising = false;
@@ -129,42 +126,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         public override void SelectDefaultControl()
         {
             comboBoxVCPUs.Select();
-        }
-
-        private void InitialiseBootModeControls()
-        {
-            if (Template.IsHVM())
-            {
-                groupBoxBootMode.Visible = true;
-                radioButtonBIOSBoot.Enabled = Template.CanSupportBIOSBoot();
-                radioButtonUEFIBoot.Enabled = Template.CanSupportUEFIBoot();
-                radioButtonUEFISecureBoot.Enabled = Template.CanSupportUEFISecureBoot();
-
-                var firmware = string.Empty;
-                if (Template.HVM_boot_params != null)
-                    Template.HVM_boot_params.TryGetValue("firmware", out firmware);
-                var secureboot = string.Empty;
-                if (Template.platform != null)
-                    Template.platform.TryGetValue("secureboot", out secureboot);
-
-                if (firmware != null && firmware.ToLower() == "uefi")
-                {
-                    var isSecurebootEnabled = secureboot != null && secureboot.ToLower() == "true";
-                    radioButtonUEFIBoot.Checked = !isSecurebootEnabled;
-                    radioButtonUEFISecureBoot.Checked = isSecurebootEnabled;
-                }
-                else
-                {
-                    radioButtonBIOSBoot.Checked = true;
-                }
-            }
-            else
-            {
-                groupBoxBootMode.Visible = false;
-                radioButtonBIOSBoot.Checked = false;
-                radioButtonUEFIBoot.Checked = false;
-                radioButtonUEFISecureBoot.Checked = false;
-            }
         }
 
         private void InitialiseVcpuControls()
@@ -318,14 +279,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             get
             {
                 return comboBoxTopology.CoresPerSocket;
-            }
-        }
-
-        public BootMode SelectedBootMode
-        {
-            get
-            {
-                return radioButtonUEFISecureBoot.Checked ? BootMode.UEFI_SECURE_BOOT : (radioButtonUEFIBoot.Checked ? BootMode.UEFI_BOOT : BootMode.BIOS_BOOT);
             }
         }
 
