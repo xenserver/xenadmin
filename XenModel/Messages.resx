@@ -2222,6 +2222,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BOOT_HARD_DISK" xml:space="preserve">
     <value>Hard Disk</value>
   </data>
+  <data name="BOOT_MODE" xml:space="preserve">
+    <value>Boot Mode</value>
+  </data>
   <data name="BROKEN_SRS_AFTER_UPGRADE" xml:space="preserve">
     <value>There are broken SRs after the upgrade. To solve this problem you should reattach the SRs.</value>
   </data>
@@ -12854,7 +12857,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>Initial number of v&amp;CPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
-    <value>Ma&amp;ximum number of vCPUs:</value>
+    <value>Maximum number of &amp;vCPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
     <value>The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. </value>
@@ -12866,7 +12869,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
-    <value>Number of v&amp;CPUs:</value>
+    <value>&amp;Number of vCPUs:</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>

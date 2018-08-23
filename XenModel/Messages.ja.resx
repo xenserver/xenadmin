@@ -2199,6 +2199,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_MASTER_GONE" xml:space="preserve">
     <value>[XenCenter] のキャッシュにボンド マスターが見つかりません。</value>
   </data>
+  <data name="BOOTMODE" xml:space="preserve">
+    <value>起動モード</value>
+  </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>起動順序: {0}</value>
   </data>

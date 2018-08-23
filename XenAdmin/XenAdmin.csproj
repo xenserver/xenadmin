@@ -1019,6 +1019,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Diagnostics\Checks\PoolHasGFS2SR.cs" />
+    <Compile Include="Wizards\BootModesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BootModesControl.Designer.cs">
+      <DependentUpon>BootModesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
     <Compile Include="Dialogs\FolderChangeDialog.cs">
@@ -2667,6 +2673,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.zh-CN.resx">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\BootModesControl.ja.resx">
+      <DependentUpon>BootModesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\BootModesControl.resx">
+      <DependentUpon>BootModesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\BootModesControl.zh-CN.resx">
+      <DependentUpon>BootModesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\WizardProgress.resx">
       <DependentUpon>WizardProgress.cs</DependentUpon>
@@ -6649,6 +6667,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_CpuMem.zh-CN.resx">
       <DependentUpon>Page_CpuMem.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_Finish.ja.resx">
       <DependentUpon>Page_Finish.cs</DependentUpon>
@@ -6890,6 +6909,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\WizardProgress.ja.resx">
       <DependentUpon>WizardProgress.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\WizardProgress.zh-CN.resx">
       <DependentUpon>WizardProgress.cs</DependentUpon>

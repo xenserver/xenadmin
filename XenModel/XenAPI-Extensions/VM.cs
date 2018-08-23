@@ -311,6 +311,24 @@ namespace XenAPI
             HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower());
         }
 
+        public bool IsUEFIEnabled()
+        {
+            if (!IsHVM())
+                return false;
+
+            var firmware = Get(HVM_boot_params, "firmware");
+            return !string.IsNullOrEmpty(firmware) && firmware.Trim().ToLower() == "uefi";
+        }
+
+        public bool IsSecureBootEnabled()
+        {
+            if (!IsUEFIEnabled())
+                return false;
+
+            var secureboot = Get(platform, "secureboot");
+            return !string.IsNullOrEmpty(secureboot) && secureboot.Trim().ToLower() == "true";
+        }
+
         public int GetVcpuWeight()
         {
             if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
@@ -502,11 +520,6 @@ namespace XenAPI
         }
 
         #region Supported Boot Mode Recommendations
-
-        public bool CanSupportBIOSBoot()
-        {
-            return GetRecommendationByField("supports-bios") == "yes";
-        }
 
         public bool CanSupportUEFIBoot()
         {

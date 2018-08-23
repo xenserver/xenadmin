@@ -44,16 +44,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
             this.labelTopology = new System.Windows.Forms.Label();
             this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
-            this.groupBoxBootMode = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanelBootMode = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButtonUEFISecureBoot = new System.Windows.Forms.RadioButton();
-            this.radioButtonBIOSBoot = new System.Windows.Forms.RadioButton();
-            this.radioButtonUEFIBoot = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ErrorPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBoxBootMode.SuspendLayout();
-            this.tableLayoutPanelBootMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelVCPUs
@@ -124,7 +117,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.groupBoxBootMode, 0, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // comboBoxInitialVCPUs
@@ -166,42 +158,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.comboBoxVCPUs.Name = "comboBoxVCPUs";
             this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.vCPU_ValueChanged);
             // 
-            // groupBoxBootMode
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBootMode, 2);
-            this.groupBoxBootMode.Controls.Add(this.tableLayoutPanelBootMode);
-            resources.ApplyResources(this.groupBoxBootMode, "groupBoxBootMode");
-            this.groupBoxBootMode.Name = "groupBoxBootMode";
-            this.groupBoxBootMode.TabStop = false;
-            // 
-            // tableLayoutPanelBootMode
-            // 
-            this.tableLayoutPanelBootMode.Controls.Add(this.radioButtonUEFISecureBoot, 0, 2);
-            this.tableLayoutPanelBootMode.Controls.Add(this.radioButtonBIOSBoot, 0, 0);
-            this.tableLayoutPanelBootMode.Controls.Add(this.radioButtonUEFIBoot, 0, 1);
-            resources.ApplyResources(this.tableLayoutPanelBootMode, "tableLayoutPanelBootMode");
-            this.tableLayoutPanelBootMode.Name = "tableLayoutPanelBootMode";
-            // 
-            // radioButtonUEFISecureBoot
-            // 
-            resources.ApplyResources(this.radioButtonUEFISecureBoot, "radioButtonUEFISecureBoot");
-            this.radioButtonUEFISecureBoot.Name = "radioButtonUEFISecureBoot";
-            this.radioButtonUEFISecureBoot.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonBIOSBoot
-            // 
-            resources.ApplyResources(this.radioButtonBIOSBoot, "radioButtonBIOSBoot");
-            this.radioButtonBIOSBoot.Name = "radioButtonBIOSBoot";
-            this.radioButtonBIOSBoot.TabStop = true;
-            this.radioButtonBIOSBoot.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonUEFIBoot
-            // 
-            resources.ApplyResources(this.radioButtonUEFIBoot, "radioButtonUEFIBoot");
-            this.radioButtonUEFIBoot.Name = "radioButtonUEFIBoot";
-            this.radioButtonUEFIBoot.TabStop = true;
-            this.radioButtonUEFIBoot.UseVisualStyleBackColor = true;
-            // 
             // Page_CpuMem
             // 
             resources.ApplyResources(this, "$this");
@@ -214,9 +170,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.ErrorPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBoxBootMode.ResumeLayout(false);
-            this.tableLayoutPanelBootMode.ResumeLayout(false);
-            this.tableLayoutPanelBootMode.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -238,10 +191,5 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.ComboBox comboBoxVCPUs;
         private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
         private System.Windows.Forms.Label labelInitialVCPUs;
-        private System.Windows.Forms.GroupBox groupBoxBootMode;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBootMode;
-        private System.Windows.Forms.RadioButton radioButtonUEFISecureBoot;
-        private System.Windows.Forms.RadioButton radioButtonBIOSBoot;
-        private System.Windows.Forms.RadioButton radioButtonUEFIBoot;
     }
 }

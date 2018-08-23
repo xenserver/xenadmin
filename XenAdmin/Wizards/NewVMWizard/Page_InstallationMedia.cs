@@ -42,6 +42,7 @@ using XenAdmin.Dialogs;
 using XenCenterLib;
 using System.Windows.Forms;
 using System.Drawing;
+using BootMode = XenAdmin.Actions.VMActions.BootMode;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
@@ -63,6 +64,8 @@ namespace XenAdmin.Wizards.NewVMWizard
         public bool ShowInstallationMedia { private get; set; }
 
         public bool ShowBootParameters { get { return !SelectedTemplate.IsHVM(); } }
+
+        public bool ShowBootModesControl { get { return SelectedTemplate.IsHVM(); } }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
@@ -88,6 +91,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             PvBootBox.Visible = ShowBootParameters;
             PvBootTextBox.Text = m_template.PV_args;
+
+            bootModesControl1.Visible = ShowBootModesControl;
+            bootModesControl1.TemplateVM = m_template;
 
             if (!ShowInstallationMedia)
             {
@@ -154,6 +160,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             UpdateEnablement();
         }
+
+        public Actions.VMActions.BootMode SelectedBootMode { get { return ShowBootModesControl ? bootModesControl1.SelectedOption : BootMode.NOT_AVAILABLE; } }
 
         private bool IsBootFromNetworkCustomTemplate(bool userTemplate)
         {
@@ -276,6 +284,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                         sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_NETWORKMEDIAPAGE_INSTALLATIONURL, SelectedUrl));
                         break;
                 }
+                if (ShowBootModesControl)
+                    sum.Add(new KeyValuePair<string, string>(Messages.BOOT_MODE, SelectedBootMode.StringOf()));
                 return sum;
             }
         }

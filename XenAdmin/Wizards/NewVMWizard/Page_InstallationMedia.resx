@@ -561,6 +561,39 @@
   <metadata name="comboBoxToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="bootModesControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 179</value>
+  </data>
+  <data name="bootModesControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="bootModesControl1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 104</value>
+  </data>
+  <data name="bootModesControl1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="bootModesControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 104</value>
+  </data>
+  <data name="bootModesControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="bootModesControl1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;bootModesControl1.Name" xml:space="preserve">
+    <value>bootModesControl1</value>
+  </data>
+  <data name="&gt;&gt;bootModesControl1.Type" xml:space="preserve">
+    <value>XenAdmin.Wizards.BootModesControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bootModesControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bootModesControl1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
