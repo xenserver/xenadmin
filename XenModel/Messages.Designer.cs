@@ -8184,7 +8184,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find [XenServer] running on {0}..
+        ///   Looks up a localized string similar to Could not find server running on {0}..
         /// </summary>
         public static string CONNECT_NO_XAPI_FAILURE {
             get {
@@ -13902,7 +13902,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] &amp;Enterprise Per-Socket ({0} required).
+        ///   Looks up a localized string similar to [XenServer] P&amp;remium Per-Socket ({0} required).
         /// </summary>
         public static string ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED {
             get {
@@ -14397,7 +14397,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] is still booting..
+        ///   Looks up a localized string similar to Server is still booting..
         /// </summary>
         public static string ERROR_HOST_STILL_BOOTING {
             get {
@@ -14451,7 +14451,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find [XenServer] on &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Could not find a server on &apos;{0}&apos;..
         /// </summary>
         public static string ERROR_NO_XENSERVER {
             get {
@@ -14705,7 +14705,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
         ///
-        ///Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter]..
+        ///Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including servers that are not connected to [XenCenter]..
         /// </summary>
         public static string EXISTING_SR_FOUND_ON_LUN {
             get {
@@ -20291,7 +20291,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers must be selected one at a time when activating free [XenServer]..
+        ///   Looks up a localized string similar to Servers must be selected one at a time when activating Express [XenServer]..
         /// </summary>
         public static string LICENSE_NO_MULTISELECT_ACTIVATE {
             get {
@@ -20400,7 +20400,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///[Citrix] Virtual Apps/Desktops [Citrix] Cloud features enabled.
+        ///[Citrix] Virtual Apps and Desktops [Citrix] Cloud features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED {
             get {
@@ -20410,7 +20410,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///[Citrix] Virtual Apps/Desktops features enabled.
+        ///[Citrix] Virtual Apps and Desktops features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
             get {
@@ -20420,7 +20420,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///[Citrix] Virtual Apps/Desktops Platinum features enabled.
+        ///[Citrix] Virtual Apps and Desktops Premium features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED {
             get {
@@ -20430,7 +20430,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///Enterprise features enabled.
+        ///Premium features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED {
             get {
@@ -20459,7 +20459,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activation keys can only be applied to one Free [XenServer] product at a time..
+        ///   Looks up a localized string similar to Activation keys can only be applied to one Express [XenServer] product at a time..
         /// </summary>
         public static string LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION {
             get {
@@ -20540,7 +20540,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more managed servers have expired. Either assign [XenServer] licenses, or activate Free [XenServer] products..
+        ///   Looks up a localized string similar to One or more managed servers have expired. Either assign [XenServer] licenses, or activate Express [XenServer] products..
         /// </summary>
         public static string LICENSING_DIALOG_EXPIRED_TEXT {
             get {
@@ -20549,7 +20549,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Free [XenServer] products..
+        ///   Looks up a localized string similar to One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Express [XenServer] products..
         /// </summary>
         public static string LICENSING_DIALOG_EXPIRING_SOON_TEXT {
             get {
@@ -25795,7 +25795,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool is only licensed for [Citrix] Virtual Apps/Desktops workloads.
+        ///   Looks up a localized string similar to This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads.
         /// </summary>
         public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL {
             get {
@@ -25804,7 +25804,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is only licensed for [Citrix] Virtual Apps/Desktops workloads.
+        ///   Looks up a localized string similar to This server is only licensed for [Citrix] Virtual Apps and Desktops workloads.
         /// </summary>
         public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER {
             get {
@@ -26002,7 +26002,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] cannot create any more disks for this VM.
+        ///   Looks up a localized string similar to Server cannot create any more disks for this VM.
         /// </summary>
         public static string NO_MORE_USERDEVICES {
             get {
@@ -26038,7 +26038,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No [XenServer] session information is available, cannot continue..
+        ///   Looks up a localized string similar to No server session information is available, cannot continue..
         /// </summary>
         public static string NO_SESSION_INFO {
             get {
@@ -28841,7 +28841,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in [XenServer]. Remove StorageLink SRs before upgrading..
+        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in server. Remove StorageLink SRs before upgrading..
         /// </summary>
         public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
             get {
@@ -31958,7 +31958,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check the proxy settings and that [XenServer] is configured correctly on &apos;{0}&apos; and try again..
+        ///   Looks up a localized string similar to Check the proxy settings and that server is configured correctly on &apos;{0}&apos; and try again..
         /// </summary>
         public static string SOLUTION_CHECK_XENSERVER_WITH_PROXY {
             get {
@@ -35454,7 +35454,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts..
         /// </summary>
         public static string UPSELL_BLURB_AD {
             get {
@@ -35463,7 +35463,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services..
         /// </summary>
         public static string UPSELL_BLURB_ALERTS {
             get {
@@ -35472,7 +35472,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. .
+        ///   Looks up a localized string similar to Upgrade your server license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. .
         /// </summary>
         public static string UPSELL_BLURB_CPM {
             get {
@@ -35481,7 +35481,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them..
         /// </summary>
         public static string UPSELL_BLURB_CPUMASKING {
             get {
@@ -35490,7 +35490,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Dynamic Memory Control.  Dynamic Memory Control allows [XenServer] to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Memory Control.  Dynamic Memory Control allows server to adjust the memory of live virtual machines, and respond dynamically to changing demands on the server..
         /// </summary>
         public static string UPSELL_BLURB_DMC {
             get {
@@ -35499,7 +35499,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site..
         /// </summary>
         public static string UPSELL_BLURB_DR {
             get {
@@ -35508,7 +35508,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable StorageLink™ Technology. StorageLink allows [XenServer] to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
+        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink™ Technology. StorageLink allows server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
         /// </summary>
         public static string UPSELL_BLURB_ENHANCEDSR {
             get {
@@ -35517,7 +35517,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance..
+        ///   Looks up a localized string similar to Upgrade your server license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance..
         /// </summary>
         public static string UPSELL_BLURB_GPU {
             get {
@@ -35526,7 +35526,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool..
+        ///   Looks up a localized string similar to Upgrade your server license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool..
         /// </summary>
         public static string UPSELL_BLURB_HA {
             get {
@@ -35535,7 +35535,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change..
         /// </summary>
         public static string UPSELL_BLURB_PERFORMANCE {
             get {
@@ -35544,7 +35544,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup..
         /// </summary>
         public static string UPSELL_BLURB_RBAC {
             get {
@@ -35564,7 +35564,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site..
+        ///   Looks up a localized string similar to Upgrade your server license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site..
         /// </summary>
         public static string UPSELL_BLURB_VM_APPLIANCES {
             get {
@@ -35573,7 +35573,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs..
+        ///   Looks up a localized string similar to Upgrade your server license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs..
         /// </summary>
         public static string UPSELL_BLURB_VMSS {
             get {
@@ -35582,7 +35582,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and [XenServer] hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and servers&apos; performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
         /// </summary>
         public static string UPSELL_BLURB_WLB {
             get {
@@ -37211,7 +37211,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
+        ///   Looks up a localized string similar to Server can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
         /// </summary>
         public static string VMSS_EMAIL_PAGE_TEXT {
             get {
@@ -38002,7 +38002,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred when WLB tried to establish a session with [XenServer]..
+        ///   Looks up a localized string similar to An error occurred when WLB tried to establish a session with server..
         /// </summary>
         public static string WLB_ERROR_4001 {
             get {
@@ -38011,7 +38011,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not log into [XenServer]. It could be due to invalid credentials..
+        ///   Looks up a localized string similar to WLB could not log into server. It could be due to invalid credentials..
         /// </summary>
         public static string WLB_ERROR_4002 {
             get {
@@ -38020,7 +38020,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB cannot connect to [XenServer]. It could be the [XenServer] being offline or an incorrect TCP/IP address..
+        ///   Looks up a localized string similar to WLB cannot connect to server. It could be the server being offline or an incorrect TCP/IP address..
         /// </summary>
         public static string WLB_ERROR_4003 {
             get {
@@ -38029,7 +38029,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received a null argument from [XenServer], which is not allowed..
+        ///   Looks up a localized string similar to WLB received a null argument from server, which is not allowed..
         /// </summary>
         public static string WLB_ERROR_4004 {
             get {
@@ -38047,7 +38047,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an invalid argument from [XenServer]..
+        ///   Looks up a localized string similar to WLB received an invalid argument from server..
         /// </summary>
         public static string WLB_ERROR_4007 {
             get {
@@ -38056,7 +38056,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB data collection service cannot retrieve [XenServer] data..
+        ///   Looks up a localized string similar to WLB data collection service cannot retrieve server data..
         /// </summary>
         public static string WLB_ERROR_4008 {
             get {
@@ -38074,7 +38074,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an invalid operation from [XenServer]..
+        ///   Looks up a localized string similar to WLB received an invalid operation from server..
         /// </summary>
         public static string WLB_ERROR_4010 {
             get {
@@ -38083,7 +38083,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an out of range argument from [XenServer]..
+        ///   Looks up a localized string similar to WLB received an out of range argument from server..
         /// </summary>
         public static string WLB_ERROR_4011 {
             get {
@@ -38173,7 +38173,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not connect to [XenServer] because the supplied credentials were invalid..
+        ///   Looks up a localized string similar to WLB could not connect to server because the supplied credentials were invalid..
         /// </summary>
         public static string WLB_ERROR_4021 {
             get {
@@ -38200,7 +38200,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] cannot connect to the WLB Server with the supplied WLB Server credentials..
+        ///   Looks up a localized string similar to Server cannot connect to the WLB Server with the supplied WLB Server credentials..
         /// </summary>
         public static string WLB_ERROR_5 {
             get {
@@ -38209,7 +38209,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The user WLB uses to connect to [XenServer] either doesn&apos;t have sufficient privileges or doesn&apos;t have access to [XenServer]. Please re-initialize WLB with an valid user..
+        ///   Looks up a localized string similar to The user WLB uses to connect to server either doesn&apos;t have sufficient privileges or doesn&apos;t have access to server. Please re-initialize WLB with an valid user..
         /// </summary>
         public static string WLB_ERROR_6 {
             get {
@@ -38728,7 +38728,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The stored [XenServer] credentials are no longer valid.  Please update the connection settings for Workload Balancing..
+        ///   Looks up a localized string similar to The stored server credentials are no longer valid.  Please update the connection settings for Workload Balancing..
         /// </summary>
         public static string WLB_RECONFIGURE_CREDS {
             get {
