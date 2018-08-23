@@ -202,17 +202,17 @@ namespace XenAPI
             webRequest.Method = "POST";
             webRequest.ContentType = "application/json";
             webRequest.Accept = "application/json";
+            webRequest.Timeout = Timeout;
+            webRequest.Proxy = WebProxy;
+            webRequest.KeepAlive = KeepAlive;
+            webRequest.UserAgent = UserAgent;
+            webRequest.ConnectionGroupName = ConnectionGroupName;
             webRequest.ProtocolVersion = ProtocolVersion;
             webRequest.ServicePoint.Expect100Continue = Expect100Continue;
             webRequest.AllowAutoRedirect = AllowAutoRedirect;
             webRequest.PreAuthenticate = PreAuthenticate;
             webRequest.AllowWriteStreamBuffering = true;
             webRequest.CookieContainer = Cookies;
-            webRequest.Timeout = Timeout;
-            webRequest.Proxy = WebProxy;
-            webRequest.KeepAlive = KeepAlive;
-            webRequest.UserAgent = UserAgent;
-            webRequest.ConnectionGroupName = ConnectionGroupName;
 
             // for performance reasons it's preferable to deserialize directly
             // from the Stream rather than allocating strings inbetween
