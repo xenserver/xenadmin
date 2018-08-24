@@ -320,7 +320,7 @@
     <Compile Include="MiscTests\WebBrowser2Tests.cs" />
     <Compile Include="PluginTests\PlaceholdersTests.cs" />
     <Compile Include="TabsAndMenus\TabsAndMenusBoston.cs" />
-    <Compile Include="TabsAndMenus\LogsTabTests.cs">
+    <Compile Include="TabsAndMenus\HistoryPageTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainWindowWrapper\InputPromptDialogWrapper.cs" />
