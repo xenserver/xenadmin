@@ -153,6 +153,12 @@
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_5" xml:space="preserve">
     <value>PVS 加速器信息</value>
   </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_6" xml:space="preserve">
+    <value>HVM启动参数</value>
+  </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_7" xml:space="preserve">
+    <value>非易失性随机存取存储器</value>
+  </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
     <value>仅限 [XenServer] 安装后操作(尝试修复 Linux 发行版。)</value>
   </data>

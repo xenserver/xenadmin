@@ -5259,8 +5259,8 @@ namespace XenOvf
                 }
                 if (vhs.VirtualSystemOtherConfigurationData == null)
                 {
-                    AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
-                    AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_params", "dnc", _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+                    AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+                    AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_params", "dnc", _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
                     AddOtherSystemSettingData(ovfObj, vsId, "platform", Properties.Settings.Default.xenPlatformSetting, _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
                 }
                 else

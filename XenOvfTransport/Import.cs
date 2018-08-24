@@ -1258,7 +1258,7 @@ namespace XenOvfTransport
                 // DEFAULT should work for all of HVM type or 301
                 newVm.HVM_boot_policy = Properties.Settings.Default.xenBootOptions;
                 newVm.HVM_boot_params = SplitStringIntoDictionary(Properties.Settings.Default.xenBootParams);
-                newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
+				newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
             }
             else
             {
@@ -1269,8 +1269,13 @@ namespace XenOvfTransport
                     switch (key.ToLower())
                     {
                         case "hvm_boot_params":
-                            newVm.HVM_boot_params = SplitStringIntoDictionary(xcsd.Value.Value);
-                            break;
+	                        var xcsdValue = xcsd.Value.Value;
+							// Backward Compatibility
+							// Before this change, the string in xcsd.Value.Value is just a plain string.
+							// And now we would like to change it to support a dictionary string like "key1=value1;key2=value2"
+							// However, this logic should also work if a plain string is passed in from an old OVF file 
+							newVm.HVM_boot_params = xcsdValue.IndexOf('=') > -1 ? SplitStringIntoDictionary(xcsdValue) : new Dictionary<string, string> { { "order", xcsdValue } };
+							break;
                         case "platform":
                             newVm.platform = MakePlatformHash(xcsd.Value.Value);
                             break;
@@ -1396,16 +1401,8 @@ namespace XenOvfTransport
 
         private static Dictionary<string, string> SplitStringIntoDictionary(string inputStr)
         {
-            var result = new Dictionary<string, string>();
-            string[] inputArray = inputStr.Split('=', ';');
-            for (int i = 0; i < inputArray.Length - 1; i += 2)
-            {
-                string identifier = inputArray[i].Trim();
-                string identvalue = inputArray[i + 1].Trim();
-                result.Add(identifier, identvalue);
-            }
-
-            return result;
+	        return inputStr.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(o => o.Split('='))
+		        .ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
         }
 
         private Dictionary<string, string> MakePlatformHash(string platform)
