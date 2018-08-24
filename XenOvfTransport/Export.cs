@@ -270,11 +270,12 @@ namespace XenOvfTransport
                     _copydisks(ovfEnv, ovfname, targetPath);
                 }
 
-                #region ADD XEN SPECIFICS
+				#region ADD XEN SPECIFICS
 
-                if (vm.HVM_boot_params != null)
+				var _params = vm.HVM_boot_params;
+				if (_params != null && _params.Count > 0)
                 {
-                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_params", JoinDictionaryIntoString(vm.HVM_boot_params), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_params", string.Join(";", _params.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
                 }
                 if (!string.IsNullOrEmpty(vm.HVM_boot_policy))
                 {
@@ -284,13 +285,15 @@ namespace XenOvfTransport
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_shadow_multiplier", Convert.ToString(vm.HVM_shadow_multiplier), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.platform != null)
+	            var platform = vm.platform;
+				if (platform != null && platform.Count > 0)
                 {
-					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", JoinDictionaryIntoString(vm.platform), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", string.Join(";", platform.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
                 }
-                if (vm.NVRAM != null)
-                {
-                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "NVRAM", JoinDictionaryIntoString(vm.NVRAM), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+				var nvram = vm.NVRAM;
+                if (nvram != null && nvram.Count > 0)
+				{
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "NVRAM", string.Join(";", nvram.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_7"));
                 }
                 if (!string.IsNullOrEmpty(vm.PV_args))
                 {
@@ -394,17 +397,6 @@ namespace XenOvfTransport
                 throw new Exception(Messages.ERROR_EXPORT_FAILED, ex);
             }
             return ovfEnv;
-        }
-
-        private static string JoinDictionaryIntoString(Dictionary<string, string> dict)
-        {
-            var sb = new StringBuilder();
-            foreach (var key in dict.Keys)
-            {
-                sb.AppendFormat(@"{0}={1};", key, dict[key]);
-            }
-
-            return sb.ToString();
         }
 
         private void _copydisks(EnvelopeType ovfEnv, string label, string targetPath)

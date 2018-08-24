@@ -153,6 +153,12 @@
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_5" xml:space="preserve">
     <value>PVS Accelerator Information</value>
   </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_6" xml:space="preserve">
+    <value>HVM Boot Parameters</value>
+  </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_7" xml:space="preserve">
+    <value>Non-Volatile Random-Access Memory</value>
+  </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
     <value>[XenServer] Post Install Operations ONLY (Attempt to fix up Linux distributions.)</value>
   </data>
