@@ -271,7 +271,6 @@
     <Compile Include="Diagnostics\DiagnosticsTests.cs" />
     <Compile Include="DialogTests\BostonDialogTest.cs" />
     <Compile Include="DialogTests\CertificateDialogTests.cs" />
-    <Compile Include="DialogTests\DownloadApplianceDialogTests.cs" />
     <Compile Include="DialogTests\IscsiDeviceConfigDialogTests.cs" />
     <Compile Include="DialogTests\MessageBoxTestTests.cs" />
     <Compile Include="DialogTests\MoveVirtualDiskDialogTests.cs" />

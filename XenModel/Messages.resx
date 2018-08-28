@@ -6507,9 +6507,6 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>Import VM '{0}' from Disk Image to '{1}'</value>
   </data>
-  <data name="IMPORT_DOWNLOAD_ERROR" xml:space="preserve">
-    <value>Error downloading file '{0}'. {1}</value>
-  </data>
   <data name="IMPORT_EULA_PAGE_MAX_TABS" xml:space="preserve">
     <value>Too many EULAs to display, cannot continue.</value>
   </data>
@@ -6735,6 +6732,15 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>&amp;Assign imported VM(s) to a home server:</value>
   </data>
+  <data name="IMPORT_WIZARD_DOWNLOADING" xml:space="preserve">
+    <value>Downloading file {0}, please wait...</value>
+  </data>
+  <data name="IMPORT_WIZARD_FAILED_DOWNLOAD" xml:space="preserve">
+    <value>Failed to download file {0}. Please see the logs for more information.</value>
+  </data>
+  <data name="IMPORT_WIZARD_FAILED_UNCOMPRESS" xml:space="preserve">
+    <value>Failed to uncompress file {0}. Please see the logs for more information.</value>
+  </data>
   <data name="IMPORT_WIZARD_NETWORKING_INTRO" xml:space="preserve">
     <value>Map the virtual network interfaces in the VMs you are importing to networks in the destination pool or standalone server.</value>
   </data>
@@ -6746,6 +6752,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT" xml:space="preserve">
     <value>Select the storage repository for the imported template.</value>
+  </data>
+  <data name="IMPORT_WIZARD_UNCOMPRESSING" xml:space="preserve">
+    <value>Uncompressing file {0}, please wait...</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces in imported VMs:</value>
@@ -10581,9 +10590,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="RETRIEVING_WLB_DEFAULT_CONFIGURATION" xml:space="preserve">
     <value>Retrieving WLB default configuration</value>
-  </data>
-  <data name="RETRY" xml:space="preserve">
-    <value>&amp;Retry</value>
   </data>
   <data name="RETRY_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Retry</value>
