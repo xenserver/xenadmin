@@ -247,7 +247,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                     noInstallMedia = true;
 
                 page_3_InstallationMedia.ShowInstallationMedia = !noInstallMedia;
-                page_3_InstallationMedia.DisableStep = noInstallMedia && !page_3_InstallationMedia.ShowBootParameters;
 
                 // The user cannot set their own affinity, use the one off the template
                 if (BlockAffinitySelection)
