@@ -1279,6 +1279,9 @@ namespace XenOvfTransport
                         case "platform":
                             newVm.platform = MakePlatformHash(xcsd.Value.Value);
                             break;
+	                    case "nvram":
+		                    newVm.NVRAM = SplitStringIntoDictionary(xcsd.Value.Value);
+		                    break;
                         default:
                             hashtable.Add(key, xcsd.Value.Value);
                             break;
@@ -1401,8 +1404,16 @@ namespace XenOvfTransport
 
         private static Dictionary<string, string> SplitStringIntoDictionary(string inputStr)
         {
-	        return inputStr.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(o => o.Split('='))
-		        .ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
+			/* Comment for the usage o.Split(new[] { '=' }, 2)
+			 * The second parameter "2" is used to handle the case when the delimiter '=' appears in the content of the string
+			 *
+			 * For example, inputStr = "EFI-variables-backend=xapidb;EFI-variabbles-on-boot=reset;EFI-variables=dGVzdA=="
+			 * Notice there are 2 extra '=' in the last section
+			 * The expected output of that section should be { 'EFI-variables':'dGVzdA==' }
+			 * But if we do not the second parameter "2" in the Split function, the actual output will be { 'EFI-variables':'' }
+			 */
+			return inputStr.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(o => o.Split(new[] { '=' }, 2))
+				.ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
         }
 
         private Dictionary<string, string> MakePlatformHash(string platform)
