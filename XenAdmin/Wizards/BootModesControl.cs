@@ -29,54 +29,61 @@
  * SUCH DAMAGE.
  */
 
+using System.ComponentModel;
 using System.Windows.Forms;
 using XenAPI;
 using BootMode = XenAdmin.Actions.VMActions.BootMode;
 
 namespace XenAdmin.Wizards
 {
-    public partial class BootModesControl : UserControl
-    {
-        public BootModesControl()
-        {
-            InitializeComponent();
-        }
+	public partial class BootModesControl : UserControl
+	{
+		public BootModesControl()
+		{
+			InitializeComponent();
+		}
 
-        public VM TemplateVM
-        {
-            get { return _templateVM; }
-            set
-            {
-                if (_templateVM == value)
-                    return;
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public VM TemplateVM
+		{
+			get { return _templateVM; }
+			set
+			{
+				if (_templateVM == value)
+					return;
 
-                _templateVM = value;
-                if (_templateVM != null && _templateVM.IsHVM())
-                {
-                    radioButtonUEFIBoot.Enabled = _templateVM.CanSupportUEFIBoot();
-                    radioButtonUEFISecureBoot.Enabled = _templateVM.CanSupportUEFISecureBoot();
+				_templateVM = value;
+				if (_templateVM != null && _templateVM.IsHVM())
+				{
+					radioButtonUEFIBoot.Enabled = _templateVM.CanSupportUEFIBoot();
+					radioButtonUEFISecureBoot.Enabled = _templateVM.CanSupportUEFISecureBoot();
 
-                    if (_templateVM.IsUEFIEnabled())
-                        if (_templateVM.IsSecureBootEnabled())
-                            radioButtonUEFISecureBoot.Checked = true;
-                        else
-                            radioButtonUEFIBoot.Checked = true;
-                    else
-                        radioButtonBIOSBoot.Checked = true;
-                }
-                else
-                {
-                    radioButtonBIOSBoot.Checked = false;
-                    radioButtonUEFIBoot.Checked = false;
-                    radioButtonUEFISecureBoot.Checked = false;
-                }
-            }
-        }
-        private VM _templateVM;
+					if (_templateVM.IsUEFIEnabled())
+						if (_templateVM.IsSecureBootEnabled())
+							radioButtonUEFISecureBoot.Checked = true;
+						else
+							radioButtonUEFIBoot.Checked = true;
+					else
+						radioButtonBIOSBoot.Checked = true;
+				}
+				else
+				{
+					radioButtonBIOSBoot.Checked = false;
+					radioButtonUEFIBoot.Checked = false;
+					radioButtonUEFISecureBoot.Checked = false;
+				}
+			}
+		}
+		private VM _templateVM;
 
-        public BootMode SelectedOption
-        {
-            get { return radioButtonUEFISecureBoot.Checked ? BootMode.UEFI_SECURE_BOOT: (radioButtonUEFIBoot.Checked ? BootMode.UEFI_BOOT : BootMode.BIOS_BOOT); }
-        }
-    }
+		public BootMode SelectedOption
+		{
+			get { return radioButtonUEFISecureBoot.Checked ? BootMode.UEFI_SECURE_BOOT : (radioButtonUEFIBoot.Checked ? BootMode.UEFI_BOOT : BootMode.BIOS_BOOT); }
+		}
+
+		public void CheckBIOSBootMode()
+		{
+			radioButtonBIOSBoot.Checked = true;
+		}
+	}
 }

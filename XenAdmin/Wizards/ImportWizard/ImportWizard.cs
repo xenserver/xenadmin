@@ -42,7 +42,7 @@ using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 using System.Linq;
-
+using XenAdmin.Actions.VMActions;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
@@ -521,6 +521,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageVMconfig.VmName));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_CPUCOUNT, m_pageVMconfig.CpuCount.ToString()));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_MEMORY, string.Format(Messages.VAL_MB, m_pageVMconfig.Memory)));
+			temp.Add(new Tuple(Messages.BOOT_MODE, m_pageVMconfig.SelectedBootMode.StringOf()));
 
 			if (m_pageImportSource.IsWIM)
 				temp.Add(new Tuple(Messages.FINISH_PAGE_ADDSPACE, Util.DiskSizeString(m_pageVMconfig.AdditionalSpace)));
@@ -675,7 +676,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return Guid.NewGuid().ToString();
 		}
 
-		private EnvelopeType InitialiseOvfEnvelope()
+	    private EnvelopeType InitialiseOvfEnvelope()
 		{
 			EnvelopeType env = OVF.CreateEnvelope(m_pageVMconfig.VmName);
 
@@ -684,6 +685,12 @@ namespace XenAdmin.Wizards.ImportWizard
 			string guid = Guid.NewGuid().ToString();
 			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE,
 											Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
+
+			var bootMode = m_pageVMconfig.SelectedBootMode;
+			if (bootMode == BootMode.UEFI_BOOT || bootMode == BootMode.UEFI_SECURE_BOOT )
+				OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_params", "firmware=uefi", OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
+			if (bootMode == BootMode.UEFI_SECURE_BOOT)
+				OVF.AddOtherSystemSettingData(env, systemID, "platform", "secureboot=true", OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
 
 			OVF.SetCPUs(env, systemID, m_pageVMconfig.CpuCount);
 			OVF.SetMemory(env, systemID, m_pageVMconfig.Memory, "MB");
