@@ -41,10 +41,6 @@ namespace XenAdmin.Controls.Ballooning
 {
     public class VMMemoryControlsEdit : UserControl
     {
-        // Was ballooning on at the time when we entered the dialog?
-        // (Like other settings on the dialog, it deliberately doesn't reflect later changes: see CA-34476).
-        protected bool ballooning = true;
-
         // The maximum value allowed for memory for this VM
         private long maxMemAllowed = VM.DEFAULT_MEM_ALLOWED;
 
@@ -63,24 +59,10 @@ namespace XenAdmin.Controls.Ballooning
                 if (vms.Count > 0)
                 {
                     vm0 = vms[0];
-                    ballooning = vm0.has_ballooning();
+                    SetBallooning(vm0.has_ballooning());
                 }
                 firstPaint = true;
                 maxMemAllowed = CalcMaxMemAllowed();
-            }
-        }
-
-        private double _static_min;
-        protected double static_min
-        {
-            get
-            {
-                System.Diagnostics.Trace.Assert(ballooning || Program.RunInAutomatedTestMode);  // would be better to edit the test XML file to have VMs and templates with ballooning
-                return _static_min;
-            }
-            set
-            {
-                _static_min = value;
             }
         }
 
@@ -103,6 +85,10 @@ namespace XenAdmin.Controls.Ballooning
         public virtual double static_max
         {
             get { return 0; }
+        }
+
+        protected virtual void SetBallooning(bool hasBallooning)
+        {
         }
 
         // A bit hacky, but needed to fix CA-35710. The ballooning dialog has to call this before
@@ -165,7 +151,7 @@ namespace XenAdmin.Controls.Ballooning
         }
 
         // Maximum for dynamic_min spinner: if we have set a maxDynMin, use it,
-        // except constrained by static_min and dynamic_max.
+        // except when constrained by vm0.memory_static_min and dynamic_max.
         protected double DynMinSpinnerMax
         {
             get
@@ -174,8 +160,8 @@ namespace XenAdmin.Controls.Ballooning
                 if (maxDynMin >= 0 && maxDynMin < maxDM)
                 {
                     maxDM = maxDynMin;
-                    if (maxDM < static_min)
-                        maxDM = static_min;
+                    if (maxDM < vm0.memory_static_min)
+                        maxDM = vm0.memory_static_min;
                 }
                 // If we've already managed to exceed that value, don't trash the user's setting
                 if (maxDM < dynamic_min)
@@ -184,12 +170,12 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        // Minimum for dynamic_min spinner: constrained by both static_min, and a proportion of static_max
+        // Minimum for dynamic_min spinner: constrained by both vm0.memory_static_min, and a proportion of static_max
         protected double DynMinSpinnerMin
         {
             get
             {
-                double minDM = static_min;
+                double minDM = vm0.memory_static_min;
                 long limit = (long)(static_max * GetMemoryRatio());
                 if (limit > minDM)
                     minDM = limit;

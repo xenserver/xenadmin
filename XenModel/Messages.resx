@@ -3195,9 +3195,6 @@ You can only connect to a single [Citrix XenServer] Express Edition server at a 
   <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
     <value>Control Domain Memory Settings - {0}</value>
   </data>
-  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
-    <value>&amp;Control Domain Memory:</value>
-  </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
   </data>
@@ -4784,12 +4781,6 @@ Eject the CD and try again.</value>
   <data name="DYNAMIC_MAX" xml:space="preserve">
     <value>Maximum memory</value>
   </data>
-  <data name="DYNAMIC_MAX_AMP" xml:space="preserve">
-    <value>Ma&amp;ximum memory</value>
-  </data>
-  <data name="DYNAMIC_MAX_COLON" xml:space="preserve">
-    <value>Ma&amp;ximum memory:</value>
-  </data>
   <data name="DYNAMIC_MEMORY_CONTROL" xml:space="preserve">
     <value>Memory</value>
   </data>
@@ -4801,9 +4792,6 @@ Eject the CD and try again.</value>
   </data>
   <data name="DYNAMIC_MIN" xml:space="preserve">
     <value>Minimum memory</value>
-  </data>
-  <data name="DYNAMIC_MIN_AMP" xml:space="preserve">
-    <value>&amp;Minimum memory</value>
   </data>
   <data name="DYNAMIC_MIN_COLON" xml:space="preserve">
     <value>&amp;Minimum memory:</value>
@@ -11454,12 +11442,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATIC_MAX" xml:space="preserve">
     <value>Static maximum</value>
-  </data>
-  <data name="STATIC_MAX_AMP" xml:space="preserve">
-    <value>&amp;Static maximum</value>
-  </data>
-  <data name="STATIC_MAX_COLON" xml:space="preserve">
-    <value>&amp;Static maximum:</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>

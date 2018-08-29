@@ -34,13 +34,13 @@ using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Controls.Ballooning
 {
     public partial class VMMemoryControlsBasic : VMMemoryControlsEdit
     {
+        private bool ballooning = true;
         public event EventHandler InstallTools;
 
         public VMMemoryControlsBasic()
@@ -142,10 +142,9 @@ namespace XenAdmin.Controls.Ballooning
 
             // Spinners
             FreeSpinnerRanges();
-            static_min = vm0.memory_static_min;
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, ballooning ? Resources.memory_dynmin_slider_small : null, vm0.memory_dynamic_min, vm0.memory_static_max);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, ballooning ? Resources.memory_dynmax_slider_small : null, vm0.memory_dynamic_max, vm0.memory_static_max);
-            memorySpinnerFixed.Initialize("", null, vm0.memory_static_max, vm0.memory_static_max);
+            memorySpinnerDynMin.Initialize(vm0.memory_dynamic_min, vm0.memory_static_max);
+            memorySpinnerDynMax.Initialize(vm0.memory_dynamic_max, vm0.memory_static_max);
+            memorySpinnerFixed.Initialize(vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
             firstPaint = false;
@@ -177,6 +176,13 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
+        protected override void SetBallooning(bool hasBallooning)
+        {
+            ballooning = hasBallooning;
+            pictureBoxDynMin.Visible = hasBallooning;
+            pictureBoxDynMax.Visible = hasBallooning;
+        }
+
         private void SetIncrements()
         {
             vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = memorySpinnerFixed.Increment = CalcIncrement(static_max, memorySpinnerDynMax.Units);
@@ -193,11 +199,11 @@ namespace XenAdmin.Controls.Ballooning
                 FreeSpinnerRanges();
                 long min = (long)(static_max * GetMemoryRatio());
                 if (memorySpinnerDynMin.Value < min)
-                    memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, Resources.memory_dynmin_slider_small, min, RoundingBehaviour.Up);
+                    memorySpinnerDynMin.Initialize(min, RoundingBehaviour.Up);
             }
             SetIncrements();
             SetSpinnerRanges();
-            vmShinyBar.ChangeSettings(static_min, dynamic_min, dynamic_max, static_max);
+            vmShinyBar.ChangeSettings(vm0.memory_static_min, dynamic_min, dynamic_max, static_max);
             vmShinyBar.Refresh();
         }
 
@@ -238,8 +244,8 @@ namespace XenAdmin.Controls.Ballooning
 
         private void vmShinyBar_SliderDragged(object sender, EventArgs e)
         {
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, XenAdmin.Properties.Resources.memory_dynmin_slider_small, vmShinyBar.Dynamic_min, RoundingBehaviour.None);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, XenAdmin.Properties.Resources.memory_dynmax_slider_small, vmShinyBar.Dynamic_max, RoundingBehaviour.None);
+            memorySpinnerDynMin.Initialize(vmShinyBar.Dynamic_min, RoundingBehaviour.None);
+            memorySpinnerDynMax.Initialize(vmShinyBar.Dynamic_max, RoundingBehaviour.None);
             memorySpinnerDynMin.Refresh();
             memorySpinnerDynMax.Refresh();
         }
