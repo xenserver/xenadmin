@@ -82,7 +82,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             Template = SelectedTemplate;
             if (Template.has_ballooning() && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
-                memoryMode = (Template.memory_dynamic_max == Template.memory_static_max ? 2 : 3);
+                memoryMode = Template.memory_dynamic_max == Template.memory_static_max ? 2 : 3;
             else
                 memoryMode = 1;
 
@@ -92,22 +92,24 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (memoryMode == 1)
             {
-                spinnerDynMin.Initialize(Messages.MEMORY_COLON, null, Template.memory_static_max, Template.memory_static_max);
-                spinnerDynMax.Visible = spinnerStatMax.Visible = false;
+                spinnerDynMin.Initialize(Template.memory_static_max, Template.memory_static_max);
+                labelDynMin.Text = Messages.MEMORY_COLON;
+                labelDynMax.Visible = labelStatMax.Visible = spinnerDynMax.Visible = spinnerStatMax.Visible = false;
             }
             else
             {
-                spinnerDynMax.Visible = true;
-                spinnerDynMin.Initialize(Messages.DYNAMIC_MIN_COLON, null, Template.memory_dynamic_min, Template.memory_static_max);
+                labelDynMin.Text = Messages.DYNAMIC_MIN_COLON;
+                labelDynMax.Visible = spinnerDynMax.Visible = true;
+                spinnerDynMin.Initialize(Template.memory_dynamic_min, Template.memory_static_max);
                 FreeSpinnerLimits();  // same as CA-33831
-                spinnerDynMax.Initialize(Messages.DYNAMIC_MAX_COLON, null, Template.memory_dynamic_max, Template.memory_static_max);
+                spinnerDynMax.Initialize(Template.memory_dynamic_max, Template.memory_static_max);
                 if (memoryMode == 3)
                 {
                     FreeSpinnerLimits();
-                    spinnerStatMax.Initialize(Messages.STATIC_MAX_COLON, null, Template.memory_static_max, Template.memory_static_max);
+                    spinnerStatMax.Initialize(Template.memory_static_max, Template.memory_static_max);
                 }
                 else
-                    spinnerStatMax.Visible = false;
+                    labelStatMax.Visible = spinnerStatMax.Visible = false;
             }
 
             isVcpuHotplugSupported = Template.SupportsVcpuHotplug();

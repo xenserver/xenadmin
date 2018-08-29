@@ -8834,15 +8834,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Control Domain Memory:.
-        /// </summary>
-        public static string CONTROL_DOMAIN_MEMORY_LABEL {
-            get {
-                return ResourceManager.GetString("CONTROL_DOMAIN_MEMORY_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Convert.
         /// </summary>
         public static string CONVERT {
@@ -13540,24 +13531,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ma&amp;ximum memory.
-        /// </summary>
-        public static string DYNAMIC_MAX_AMP {
-            get {
-                return ResourceManager.GetString("DYNAMIC_MAX_AMP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ma&amp;ximum memory:.
-        /// </summary>
-        public static string DYNAMIC_MAX_COLON {
-            get {
-                return ResourceManager.GetString("DYNAMIC_MAX_COLON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Memory.
         /// </summary>
         public static string DYNAMIC_MEMORY_CONTROL {
@@ -13590,15 +13563,6 @@ namespace XenAdmin {
         public static string DYNAMIC_MIN {
             get {
                 return ResourceManager.GetString("DYNAMIC_MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Minimum memory.
-        /// </summary>
-        public static string DYNAMIC_MIN_AMP {
-            get {
-                return ResourceManager.GetString("DYNAMIC_MIN_AMP", resourceCulture);
             }
         }
         
@@ -33031,24 +32995,6 @@ namespace XenAdmin {
         public static string STATIC_MAX {
             get {
                 return ResourceManager.GetString("STATIC_MAX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Static maximum.
-        /// </summary>
-        public static string STATIC_MAX_AMP {
-            get {
-                return ResourceManager.GetString("STATIC_MAX_AMP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Static maximum:.
-        /// </summary>
-        public static string STATIC_MAX_COLON {
-            get {
-                return ResourceManager.GetString("STATIC_MAX_COLON", resourceCulture);
             }
         }
         
