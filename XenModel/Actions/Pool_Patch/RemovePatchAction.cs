@@ -30,12 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.IO;
-using XenAdmin.Network;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -50,8 +44,6 @@ namespace XenAdmin.Actions
         /// <summary>
         /// This constructor is used to remove a single 'normal' patch
         /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="path"></param>
         public RemovePatchAction(Pool_patch patch)
             : base(patch.Connection, Messages.REMOVE_PATCH)
         {

@@ -172,7 +172,7 @@
     <value>116, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Tasks to be performed:</value>
@@ -218,9 +218,6 @@
   </data>
   <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
   </data>
   <data name="button1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
