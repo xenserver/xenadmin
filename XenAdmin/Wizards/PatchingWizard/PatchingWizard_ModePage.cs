@@ -236,6 +236,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             foreach (var guide in Patch.after_apply_guidance)
             {
                 var result = GetGuidanceList(guide, serversPerPool, null, out someHostMayRequireRestart);
+                if (result == null)
+                    continue;
                 foreach (var kvp in result)
                 {
                     if (total.ContainsKey(kvp.Key))
@@ -263,6 +265,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             foreach (var guide in PoolUpdate.after_apply_guidance)
             {
                 var result = GetGuidanceList(guide, serversPerPool, LivePatchCodesByHost, out someHostMayRequireRestart);
+                if (result == null)
+                    continue;
                 foreach (var kvp in result)
                 {
                     if (total.ContainsKey(kvp.Key))
