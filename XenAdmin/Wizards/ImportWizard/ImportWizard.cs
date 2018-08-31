@@ -257,14 +257,15 @@ namespace XenAdmin.Wizards.ImportWizard
 			}
 			else if (type == typeof(ImportSelectHostPage))
 			{
+                var taretConn = m_pageHost.ChosenItem == null ? null : m_pageHost.ChosenItem.Connection;
                 RemovePage(m_pageRbac);
-				ConfigureRbacPage(m_pageHost.Connection);
+                ConfigureRbacPage(taretConn);
 				m_vmMappings = m_pageHost.VmMappings;
 				m_pageStorage.VmMappings = m_vmMappings;
-				m_pageStorage.Connection = m_pageHost.Connection;
-				m_pageNetwork.Connection = m_pageHost.Connection;
-				m_pageOptions.Connection = m_pageHost.Connection;
-				m_pageTvmIp.Connection = m_pageHost.Connection;
+                m_pageStorage.Connection = taretConn;
+                m_pageNetwork.Connection = taretConn;
+                m_pageOptions.Connection = taretConn;
+                m_pageTvmIp.Connection = taretConn;
 				NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions, m_pageTvmIp);
 			}
 			else if (type == typeof(ImportSelectStoragePage))
@@ -400,9 +401,10 @@ namespace XenAdmin.Wizards.ImportWizard
 		#region Private methods
 
         private void ConfigureRbacPage(IXenConnection selectedConnection)
-		{
-			if (selectedConnection == null || selectedConnection.Session.IsLocalSuperuser || Helpers.GetMaster(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
-				return;
+        {
+            if (selectedConnection == null || selectedConnection.Session == null || selectedConnection.Session.IsLocalSuperuser ||
+                Helpers.GetMaster(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
+                return;
 
 			m_pageRbac.ClearPermissionChecks();
 			m_ignoreAffinitySet = false;
@@ -430,12 +432,9 @@ namespace XenAdmin.Wizards.ImportWizard
 						//Check to see if they can set the VM's affinity
 						var affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_AFFINITY);
 						affinityCheck.ApiCallsToCheck.Add("vm.set_affinity");
-						affinityCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate
-						                                                                                	{
-						                                                                                		//We cannot allow them to set the affinity, so we are only going
-						                                                                                		//to offer them the choice of connection, not specific host
-						                                                                                		m_ignoreAffinitySet = true;
-						                                                                                	});
+                        //We cannot allow them to set the affinity, so we are only going
+                        //to offer them the choice of connection, not specific host
+                        affinityCheck.WarningAction = () => m_ignoreAffinitySet = true;
                         m_pageRbac.AddPermissionChecks(selectedConnection, importCheck, affinityCheck);
                         AddAfterPage(m_pageXvaHost, m_pageRbac);
 					}
