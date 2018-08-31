@@ -64,9 +64,7 @@ namespace XenAdmin.Wizards
             // radioButtonBIOSBoot
             // 
             resources.ApplyResources(this.radioButtonBIOSBoot, "radioButtonBIOSBoot");
-            this.radioButtonBIOSBoot.Checked = true;
             this.radioButtonBIOSBoot.Name = "radioButtonBIOSBoot";
-            this.radioButtonBIOSBoot.TabStop = true;
             this.radioButtonBIOSBoot.UseVisualStyleBackColor = true;
             // 
             // radioButtonUEFIBoot

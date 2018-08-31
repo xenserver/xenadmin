@@ -44,7 +44,7 @@
             this.m_upDownAddSpace = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.bootModesControl1 = new XenAdmin.Wizards.BootModesControl();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_upDownCpuCount)).BeginInit();
@@ -67,6 +67,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.m_groupBoxAddSpace, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.bootModesControl1, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // lblIntro
@@ -207,10 +208,12 @@
             this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 4);
             this.m_ctrlError.Name = "m_ctrlError";
             // 
-            // tableLayoutPanel3
+            // bootModesControl1
             // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.bootModesControl1.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutPanel1.SetColumnSpan(this.bootModesControl1, 4);
+            resources.ApplyResources(this.bootModesControl1, "bootModesControl1");
+            this.bootModesControl1.Name = "bootModesControl1";
             // 
             // label2
             // 
@@ -242,7 +245,6 @@
 		private XenAdmin.Controls.Common.AutoHeightLabel lblIntro;
 		private System.Windows.Forms.Label lblCPUs;
 		private System.Windows.Forms.Label lblMemory;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label3;
@@ -255,5 +257,6 @@
         private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
 		private System.Windows.Forms.GroupBox m_groupBoxAddSpace;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private BootModesControl bootModesControl1;
     }
 }

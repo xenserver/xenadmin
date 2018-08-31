@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.ComponentModel;
 using System.Windows.Forms;
 using XenAPI;
 using BootMode = XenAdmin.Actions.VMActions.BootMode;
@@ -42,6 +43,7 @@ namespace XenAdmin.Wizards
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public VM TemplateVM
         {
             get { return _templateVM; }
@@ -76,7 +78,12 @@ namespace XenAdmin.Wizards
 
         public BootMode SelectedOption
         {
-            get { return radioButtonUEFISecureBoot.Checked ? BootMode.UEFI_SECURE_BOOT: (radioButtonUEFIBoot.Checked ? BootMode.UEFI_BOOT : BootMode.BIOS_BOOT); }
+            get { return radioButtonUEFISecureBoot.Checked ? BootMode.UEFI_SECURE_BOOT : (radioButtonUEFIBoot.Checked ? BootMode.UEFI_BOOT : BootMode.BIOS_BOOT); }
+        }
+
+        public void CheckBIOSBootMode()
+        {
+            radioButtonBIOSBoot.Checked = true;
         }
     }
 }
