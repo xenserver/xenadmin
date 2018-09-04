@@ -817,7 +817,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Premium Per-Socket.
+        ///   Looks up a localized string similar to [Legacy XenServer product] Premium Per-Socket.
         /// </summary>
         public static string Label_host_edition_enterprise_per_socket {
             get {
@@ -826,7 +826,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Premium Per-User.
+        ///   Looks up a localized string similar to [Legacy XenServer product] Premium Per-User.
         /// </summary>
         public static string Label_host_edition_enterprise_per_user {
             get {
@@ -835,11 +835,119 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product].
+        ///   Looks up a localized string similar to [XenServer product] Express.
         /// </summary>
-        public static string Label_host_edition_free {
+        public static string Label_host_edition_express {
             get {
-                return ResourceManager.GetString("Label-host.edition-free", resourceCulture);
+                return ResourceManager.GetString("Label-host.edition-express", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy Citrix XenServer] Basic Edition.
+        /// </summary>
+        public static string Label_host_edition_legacy_basic {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop.
+        /// </summary>
+        public static string Label_host_edition_legacy_desktop {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-desktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] Cloud.
+        /// </summary>
+        public static string Label_host_edition_legacy_desktop_cloud {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-desktop-cloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop Platinum.
+        /// </summary>
+        public static string Label_host_edition_legacy_desktop_plus {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-desktop-plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Enterprise Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_legacy_enterprise_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-enterprise-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Enterprise Per-User.
+        /// </summary>
+        public static string Label_host_edition_legacy_enterprise_per_user {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-enterprise-per-user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product].
+        /// </summary>
+        public static string Label_host_edition_legacy_free {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-free", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_legacy_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy Citrix XenServer] Ultimate Edition.
+        /// </summary>
+        public static string Label_host_edition_legacy_premium {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-premium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy Citrix XenServer] Standard Edition.
+        /// </summary>
+        public static string Label_host_edition_legacy_standard {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-standard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Standard Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_legacy_standard_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-standard-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] for XenDesktop.
+        /// </summary>
+        public static string Label_host_edition_legacy_xendesktop {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-xendesktop", resourceCulture);
             }
         }
         
@@ -858,6 +966,24 @@ namespace XenAdmin {
         public static string Label_host_edition_premium {
             get {
                 return ResourceManager.GetString("Label-host.edition-premium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] Premium Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_premium_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-premium-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] Premium Per-User.
+        /// </summary>
+        public static string Label_host_edition_premium_per_user {
+            get {
+                return ResourceManager.GetString("Label-host.edition-premium-per-user", resourceCulture);
             }
         }
         
@@ -3672,7 +3798,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license on server &apos;{0}&apos; has expired or been changed, and no longer supports [XenServer product] Premium features..
+        ///   Looks up a localized string similar to The license on server &apos;{0}&apos; has expired or been changed, pooling is no longer supported..
         /// </summary>
         public static string Message_body_license_does_not_support_pooling {
             get {

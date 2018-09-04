@@ -184,7 +184,7 @@ namespace XenAdmin.Actions
 
                     if(xo is Host && host != null)
                     {
-                        Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition), false);
+                        Host.apply_edition(host.Connection.Session, host.opaque_ref, host.GetEditionText(_edition), false);
 
                         // PR-1102: populate the list of updated hosts
                         updatedHosts.Add(host, previousLicenseData);
@@ -192,8 +192,7 @@ namespace XenAdmin.Actions
 
                     if (xo is Pool)
                     {
-                        Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, Host.GetEditionText(_edition));
-
+                        Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, xo.Connection.Cache.Hosts.First().GetEditionText(_edition));
                         xo.Connection.Cache.Hosts.ToList().ForEach(h => updatedHosts.Add(h, previousLicenseData));
                     }
 
@@ -228,7 +227,7 @@ namespace XenAdmin.Actions
             // PR-1102: Send licensing data to the activation server
             if (updatedHosts.Count > 0)
             {
-                LicensingHelper.SendLicenseEditionData(updatedHosts, Host.GetEditionText(_edition));
+                LicensingHelper.SendLicenseEditionData(updatedHosts, updatedHosts.Keys.First().GetEditionText(_edition));
             }
 
             if (LicenseFailures.Count > 0)
