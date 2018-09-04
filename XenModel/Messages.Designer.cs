@@ -13902,15 +13902,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] P&amp;remium Per-Socket ({0} required).
-        /// </summary>
-        public static string ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED {
-            get {
-                return ResourceManager.GetString("ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Members.
         /// </summary>
         public static string EQUALLOGICS_MEMBERS {
@@ -20071,6 +20062,150 @@ namespace XenAdmin {
         public static string LICENSE_ACTIVATED {
             get {
                 return ResourceManager.GetString("LICENSE_ACTIVATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix] Virtual &amp;Apps and Desktops.
+        /// </summary>
+        public static string LICENSE_EDITION_DESKTOP {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_DESKTOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops [Citrix] &amp;Cloud.
+        /// </summary>
+        public static string LICENSE_EDITION_DESKTOP_CLOUD {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_DESKTOP_CLOUD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] &amp;Cloud.
+        /// </summary>
+        public static string LICENSE_EDITION_DESKTOP_CLOUD_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_DESKTOP_CLOUD_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/Xen&amp;Desktop.
+        /// </summary>
+        public static string LICENSE_EDITION_DESKTOP_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_DESKTOP_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops &amp;Premium.
+        /// </summary>
+        public static string LICENSE_EDITION_DESKTOP_PLUS {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_DESKTOP_PLUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop &amp;Platinum.
+        /// </summary>
+        public static string LICENSE_EDITION_DESKTOP_PLUS_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_DESKTOP_PLUS_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] P&amp;remium Per-Socket ({0} required).
+        /// </summary>
+        public static string LICENSE_EDITION_ENTERPRISE_PERSOCKET {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_ENTERPRISE_PERSOCKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required).
+        /// </summary>
+        public static string LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] Pr&amp;emium Per-User.
+        /// </summary>
+        public static string LICENSE_EDITION_ENTERPRISE_PERUSER {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_ENTERPRISE_PERUSER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] &amp;Enterprise Per-User.
+        /// </summary>
+        public static string LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] Per-&amp;Socket ({0} required).
+        /// </summary>
+        public static string LICENSE_EDITION_PERSOCKET {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_PERSOCKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Per-&amp;Socket ({0} required).
+        /// </summary>
+        public static string LICENSE_EDITION_PERSOCKET_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_PERSOCKET_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] &amp;Standard Per-Socket ({0} required).
+        /// </summary>
+        public static string LICENSE_EDITION_STANDARD_PERSOCKET {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_STANDARD_PERSOCKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] &amp;Standard Per-Socket ({0} required).
+        /// </summary>
+        public static string LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] for [Citrix] Virtual &amp;Desktops.
+        /// </summary>
+        public static string LICENSE_EDITION_XENDESKTOP {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_XENDESKTOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] for &amp;XenDesktop.
+        /// </summary>
+        public static string LICENSE_EDITION_XENDESKTOP_LEGACY {
+            get {
+                return ResourceManager.GetString("LICENSE_EDITION_XENDESKTOP_LEGACY", resourceCulture);
             }
         }
         
@@ -27894,15 +28029,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix XenServer] Per-&amp;Socket ({0} required).
-        /// </summary>
-        public static string PERSOCKET_LICENSES_X_REQUIRED {
-            get {
-                return ResourceManager.GetString("PERSOCKET_LICENSES_X_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Physical device.
         /// </summary>
         public static string PHYSICAL_DEVICE {
@@ -32427,15 +32553,6 @@ namespace XenAdmin {
         public static string SRWIZARD_STORAGE_NAME {
             get {
                 return ResourceManager.GetString("SRWIZARD_STORAGE_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] &amp;Standard Per-Socket ({0} required).
-        /// </summary>
-        public static string STANDARD_PERSOCKET_LICENSES_X_REQUIRED {
-            get {
-                return ResourceManager.GetString("STANDARD_PERSOCKET_LICENSES_X_REQUIRED", resourceCulture);
             }
         }
         

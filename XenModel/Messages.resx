@@ -4894,9 +4894,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENDS_WITH" xml:space="preserve">
     <value>ends with</value>
   </data>
-  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer] P&amp;remium Per-Socket ({0} required)</value>
-  </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>Enter &amp;Maintenance Mode...</value>
   </data>
@@ -6993,6 +6990,54 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_ACTIVATED" xml:space="preserve">
     <value>Activated</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
+    <value>[Citrix] Virtual &amp;Apps and Desktops</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_CLOUD" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] &amp;Cloud</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_CLOUD_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop [Citrix] &amp;Cloud</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_LEGACY" xml:space="preserve">
+    <value>XenApp/Xen&amp;Desktop</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_PLUS" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops &amp;Premium</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_PLUS_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop &amp;Platinum</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] P&amp;remium Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
+    <value>[XenServer product] Pr&amp;emium Per-User</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] &amp;Enterprise Per-User</value>
+  </data>
+  <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] Per-&amp;Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] Per-&amp;Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
+    <value>[XenServer product] for [Citrix] Virtual &amp;Desktops</value>
+  </data>
+  <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] for &amp;XenDesktop</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>The licensing action for {0} failed.</value>
@@ -9701,9 +9746,6 @@ File not found</value>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>Permission Denied</value>
   </data>
-  <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[Citrix XenServer] Per-&amp;Socket ({0} required)</value>
-  </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>Physical device</value>
   </data>
@@ -11246,9 +11288,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>SR {0} on {1}</value>
-  </data>
-  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>Started</value>
