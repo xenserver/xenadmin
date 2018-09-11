@@ -33,6 +33,7 @@ using System;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
+using XenAdmin.Core;
 using XenAdmin.Properties;
 
 
@@ -61,8 +62,10 @@ namespace XenAdmin.Controls.Ballooning
 
             vmShinyBar.Populate(vms, true);
 
+            bool licenseRestriction = Helpers.FeatureForbidden(vm0.Connection, Host.RestrictDMC);
+
             // Radio buttons and "DMC Unavailable" warning
-            if (ballooning)
+            if (ballooning && !licenseRestriction)
             {
                 if (vm0.memory_dynamic_min == vm0.memory_static_max)
                     radioFixed.Checked = true;
@@ -76,7 +79,12 @@ namespace XenAdmin.Controls.Ballooning
                 radioDynamic.Enabled = false;
                 groupBoxOn.Enabled = false;
 
-                if (vms.Count > 1)
+                if (licenseRestriction)
+                {
+                    labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_LICENSE_RESTRICTION;
+                    linkInstallTools.Visible = false;
+                }
+                else if (vms.Count > 1)
                 {
                     // If all the Virtualisation Statuses are the same, report that reason.
                     // Otherwise give a generic message.

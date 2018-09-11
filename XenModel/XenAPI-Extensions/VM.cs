@@ -818,7 +818,7 @@ namespace XenAPI
         /// </summary>
         public bool advanced_ballooning()
         {
-            return memory_dynamic_max != memory_static_max && has_ballooning();
+            return !Helpers.FeatureForbidden(Connection, Host.RestrictDMC) && memory_dynamic_max != memory_static_max && has_ballooning();
         }
 
         /// <summary>
