@@ -4209,6 +4209,9 @@ This will also delete its subfolders.</value>
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>Display options</value>
   </data>
+  <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
+    <value>The Dynamic Memory Control (DMC) is not available due to license restrictions on the server.</value>
+  </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>A memory range cannot be set because [XenServer product] Tools are not installed on this VM.</value>
   </data>

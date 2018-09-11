@@ -11837,6 +11837,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Dynamic Memory Control (DMC) is not available due to license restrictions on the server..
+        /// </summary>
+        public static string DMC_UNAVAILABLE_LICENSE_RESTRICTION {
+            get {
+                return ResourceManager.GetString("DMC_UNAVAILABLE_LICENSE_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A memory range cannot be set because I/O drivers are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NO_IO_NO_MGMNT {
