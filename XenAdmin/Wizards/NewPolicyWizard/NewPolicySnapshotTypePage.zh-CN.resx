@@ -193,7 +193,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;radioButtonDiskOnly.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
