@@ -50,7 +50,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public NewPolicySnapshotTypePage()
         {
             InitializeComponent();
-            labelWarning.Text = string.Format(labelWarning.Text, Messages.VMSS_TYPE);
         }
 
         public string SubText

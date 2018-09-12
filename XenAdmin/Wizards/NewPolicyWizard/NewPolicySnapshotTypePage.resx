@@ -223,11 +223,11 @@
     <value>0</value>
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
-    <value>Note that scheduled disk and memory snapshots will only be taken of VMs in this {0} that meet all of the following conditions:
+    <value>Note that scheduled disk and memory snapshots will only be taken of VMs in this schedule that meet all of the following conditions:
 
 1. The VM is running or suspended at the time the snapshot is scheduled.
 2. The VM has [XenServer product] Tools installed.
-3. The VM DOES NOT have dedicated GPU assigned to it.</value>
+3. The VM does NOT have dedicated GPU assigned to it.</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
