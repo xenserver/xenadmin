@@ -41,6 +41,7 @@ using System.Linq;
 using XenAdmin.Core;
 using System.Text;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -332,9 +333,34 @@ namespace XenAdmin.Wizards.PatchingWizard
                         bgw.RunPlanAction(action, ref doWorkEventArgs);
                     }
 
-                    // Step 3: DelayedActions
+                    // Step 3: Rearrange DelayedActions
+                    var suppPackPlanAction = (RpuUploadAndApplySuppPackPlanAction)planActions.FirstOrDefault(pa => pa is RpuUploadAndApplySuppPackPlanAction);
+
+                    if (suppPackPlanAction != null)
+                    {
+                        foreach (var dpa in suppPackPlanAction.delayedPlanActions)
+                        {
+                            var existing = hp.DelayedPlanActions.FirstOrDefault(a => a.GetType() == dpa.GetType());
+                            if (existing == null)
+                                hp.DelayedPlanActions.Add(dpa);
+                            if (dpa is RestartHostPlanAction)
+                                hp.RequireDelayedRestartHost = true;
+                        }
+                    }
+
+                    if (hp.DelayedPlanActions.Any(a => a is RestartHostPlanAction))
+                    {
+                        if (Helpers.ElyOrGreater(host)
+                            && host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref)).updates_requiring_reboot.Count <= 0
+                            && !hp.RequireDelayedRestartHost)
+                            hp.DelayedPlanActions.RemoveAll(a => a is RestartHostPlanAction);
+                        else
+                            hp.DelayedPlanActions.RemoveAll(a => a is RestartAgentPlanAction);
+                    }
+
+                    // Step 4: DelayedActions
                     bgw.ProgressIncrement = bgw.DelayedActionsIncrement(hp);
-                    // running delayed actions, but skipping the ones that should be skipped
+                    // running delayed actions
                     var delayedActions = hp.DelayedPlanActions;
                     var restartActions = delayedActions.Where(a => a is RestartHostPlanAction).ToList();
 
@@ -349,24 +375,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var a in otherActions)
                     {
                         action = a;
-
-                        // any non-restart-alike delayed action needs to be run if:
-                        // - this host is pre-Ely and there isn't any delayed restart plan action, or
-                        // - this host is Ely or above and live patching must have succeeded or there isn't any delayed restart plan action
-                        if (restartActions.Count <= 0 ||
-                            (Helpers.ElyOrGreater(host) && host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref)).updates_requiring_reboot.Count <= 0))
-                        {
-                            bgw.RunPlanAction(action, ref doWorkEventArgs);
-                        }
-                        else
-                        {
-                            //skip running it, but still need to report progress, mainly for the progress bar
-                            bgw.RunPlanAction(action, ref doWorkEventArgs, true);
-                        }
+                        bgw.RunPlanAction(action, ref doWorkEventArgs);
                     }
                 }
 
-                // Step 4: FinalActions (eg. revert pre-checks)
+                // Step 5: FinalActions (eg. revert pre-checks)
                 bgw.ProgressIncrement = bgw.FinalActionsIncrement;
                 foreach (var a in bgw.FinalActions)
                 {
@@ -489,6 +502,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var planActionsPerHost = new List<PlanAction>();
             var delayedActionsPerHost = new List<PlanAction>();
+            var containsDelayedNonLivePatchRestartHost = false;
 
             foreach (var patch in patchSequence)
             {
@@ -502,10 +516,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings));
                 planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
 
-                var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
-                       ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
-                       : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-
+                var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
                 if (action != null)
                 {
                     if (patch.GuidanceMandatory)
@@ -515,12 +526,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                         // (because this action is guidance-mandatory=true, therefore
                         // it will run immediately, making delayed ones obsolete)
                         delayedActionsPerHost.RemoveAll(a => action.GetType() == a.GetType());
+                        if (action is RestartHostPlanAction)
+                            containsDelayedNonLivePatchRestartHost = false;
                     }
                     else
                     {
                         // add the action if it's not already in the list
                         if (delayedActionsPerHost.All(a => a.GetType() != action.GetType()))
                             delayedActionsPerHost.Add(action);
+                        if (action is RestartHostPlanAction && !patch.ContainsLivepatch)
+                            containsDelayedNonLivePatchRestartHost = true;
                     }
                 }
 
@@ -542,7 +557,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     ((RestartHostPlanAction) lastRestart).EnableOnly = false;
             }
 
-            return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);
+            return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost, containsDelayedNonLivePatchRestartHost);
         }
 
         private static PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)

@@ -35093,7 +35093,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.{0} and *.iso.
+        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso..
         /// </summary>
         public static string UPDATES_WIZARD_NOTVALID_EXTENSION {
             get {

@@ -30,7 +30,6 @@
  */
 
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -41,14 +40,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly List<XenRef<VM>> _vms;
         public bool EnableOnly { get; set; }
-        private readonly bool _restartAgentFallback;
 
-        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false)
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false)
             : base(host)
         {
             _vms = vms;
             EnableOnly = enableOnly;
-            _restartAgentFallback = restartAgentFallback;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -65,12 +62,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                                     + "Initiating evacuate-reboot-bringbabiesback process.",
                         hostObj.updates_requiring_reboot.Count);
                 }
-                else if (_restartAgentFallback)
-                {
-                    log.Debug("Live patching succeeded. Restarting agent.");
-                    RestartAgent(ref session);
-                    return;
-                }
                 else
                 {
                     log.Debug("Did not find patches requiring reboot (live patching succeeded)."
@@ -78,7 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     return;
                 }
             }
-           
+
             EvacuateHost(ref session);
             RebootHost(ref session);
             BringBabiesBack(ref session, _vms, EnableOnly);

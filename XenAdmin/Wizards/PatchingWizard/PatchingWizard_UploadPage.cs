@@ -503,7 +503,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         if (Helpers.ElyOrGreater(supplementalPackUploadAction.Connection))
                         {
-                            var newPoolUpdate = (supplementalPackUploadAction).PoolUpdate;
+                            var newPoolUpdate = supplementalPackUploadAction.PoolUpdate;
 
                             if (newPoolUpdate != null)
                             {

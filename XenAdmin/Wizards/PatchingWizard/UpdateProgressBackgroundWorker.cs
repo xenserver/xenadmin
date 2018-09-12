@@ -195,13 +195,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         public readonly List<PlanAction> InitialPlanActions;
         public readonly List<PlanAction> UpdatesPlanActions;
         public readonly List<PlanAction> DelayedPlanActions;
+        public bool RequireDelayedRestartHost;
 
-        public HostPlan(Host host, List<PlanAction> initialActions, List<PlanAction> updateActions, List<PlanAction> delayedActions)
+        public HostPlan(Host host, List<PlanAction> initialActions, List<PlanAction> updateActions,
+            List<PlanAction> delayedActions, bool requireDelayedRestartHost = false)
         {
             Host = host;
             InitialPlanActions = initialActions ?? new List<PlanAction>();
             UpdatesPlanActions = updateActions ?? new List<PlanAction>();
             DelayedPlanActions = delayedActions ?? new List<PlanAction>();
+            RequireDelayedRestartHost = requireDelayedRestartHost;
         }
 
         private double InitialActionsPercentage

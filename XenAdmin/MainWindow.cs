@@ -61,6 +61,7 @@ using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
+using XenAdmin.Wizards;
 
 namespace XenAdmin
 {
@@ -2851,12 +2852,21 @@ namespace XenAdmin
             new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
         }
 
-        internal void InstallUpdate(string path)
+        private void InstallUpdate(string path)
         {
-            var wizard = new PatchingWizard();
-            wizard.Show(this);
-            wizard.NextStep();
-            wizard.AddFile(path);
+            if (HelpersWizard.isValidFile(path))
+            {
+                var wizard = new PatchingWizard();
+                wizard.Show(this);
+                wizard.NextStep();
+                wizard.AddFile(path);
+            }
+            else
+                using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                    SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)))
+                {
+                    popup.ShowDialog();
+                }
         }
 
         #region XenSearch
