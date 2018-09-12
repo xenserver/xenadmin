@@ -12731,9 +12731,6 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VMSS_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
-  <data name="VMSS_TYPE" xml:space="preserve">
-    <value>schedule</value>
-  </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>Virtual Machines</value>
   </data>
