@@ -9762,7 +9762,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>间隔必须为 5 的倍数</value>
   </data>
   <data name="PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE" xml:space="preserve">
-    <value>执行池滚动升级(手动模式)</value>
+    <value>执行滚动池升级(手动模式)</value>
   </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>权限遭拒</value>
@@ -10270,9 +10270,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 必须先使用具有池操作员权限的帐户重新连接到 {1}，才能对其应用软件更新。</value>
   </data>
   <data name="RBAC_UPGRADE_WIZARD_MESSAGE" xml:space="preserve">
-    <value>用户 {0} 权限不足，无法在 {1} 上执行池滚动升级。 
+    <value>用户 {0} 权限不足，无法在 {1} 上执行滚动池升级。 
 
-必须先使用具有池管理员权限的帐户重新连接 {1}，才能使用“池滚动升级”向导滚动升级池。</value>
+必须先使用具有池管理员权限的帐户重新连接 {1}，才能使用“滚动池升级”向导滚动升级池。</value>
   </data>
   <data name="RBAC_WARNING_EXPORT_WIZARD_APPLIANCE" xml:space="preserve">
     <value>权限为“{0}”的用户无法导出设备。请以具有足够权限的其他用户身份登录，然后重试。</value>
@@ -10624,10 +10624,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>将在您选择的所有池上执行升级预检查，以确保能够升级所有服务器。</value>
   </data>
   <data name="ROLLING_POOL_UPGRADE" xml:space="preserve">
-    <value>池滚动升级</value>
+    <value>滚动池升级</value>
   </data>
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
-    <value>正在执行池滚动升级(&amp;U)...</value>
+    <value>正在执行滚动池升级(&amp;U)...</value>
   </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>停止(&amp;T)</value>
@@ -10639,7 +10639,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>滚动池升级过程已取消。</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
-    <value>可以通过重新启动“池滚动升级”向导继续执行此升级。</value>
+    <value>可以通过重新启动“滚动池升级”向导继续执行此升级。</value>
   </data>
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>不再连接到 {0}。请核对您所做的选择并重试。</value>
@@ -10674,9 +10674,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 2. 单击下面的“立即重新启动”按钮以重新启动服务器并开始安装。
 3. 转至服务器的控制台并按照屏幕上的说明进行操作以安装升级。
 
-要跳过此服务器并继续在池中的下一个服务器上进行安装，请单击“跳过此服务器”。请注意，不支持在安装了不同 [XenServer] 版本的服务器上运行池，因此，过后应尽快升级此池滚动升级过程中未升级的任何服务器。
+要跳过此服务器并继续在池中的下一个服务器上进行安装，请单击“跳过此服务器”。请注意，不支持在安装了不同 [XenServer] 版本的服务器上运行池，因此，过后应尽快升级此滚动池升级过程中未升级的任何服务器。
 
-必须先升级主服务器，因此，如果跳过此主服务器，则将取消此池的池滚动升级过程。
+必须先升级主服务器，因此，如果跳过此主服务器，则将取消此池的滚动池升级过程。
 </value>
   </data>
   <data name="ROLLING_UPGRADE_SUCCESS_MANY" xml:space="preserve">
@@ -10702,13 +10702,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>此池未获授权，无法进行滚动池升级</value>
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_COMPLETED" xml:space="preserve">
-    <value>池滚动升级已完成。</value>
+    <value>滚动池升级已完成。</value>
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_IN_PROGRESS" xml:space="preserve">
-    <value>正在进行池滚动升级。升级过程可能需要一些时间。</value>
+    <value>正在进行滚动池升级。升级过程可能需要一些时间。</value>
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
-    <value>池滚动升级未完成。</value>
+    <value>滚动池升级未完成。</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
@@ -12729,9 +12729,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VMSS_SUCCEEDED" xml:space="preserve">
     <value>成功</value>
-  </data>
-  <data name="VMSS_TYPE" xml:space="preserve">
-    <value>计划</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>虚拟机</value>

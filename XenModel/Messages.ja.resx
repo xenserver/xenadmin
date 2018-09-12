@@ -12732,9 +12732,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VMSS_SUCCEEDED" xml:space="preserve">
     <value>成功</value>
   </data>
-  <data name="VMSS_TYPE" xml:space="preserve">
-    <value>スケジュール</value>
-  </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>仮想マシン</value>
   </data>
