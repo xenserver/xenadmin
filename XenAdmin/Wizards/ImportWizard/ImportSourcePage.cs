@@ -118,13 +118,10 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
-                if (IsUri())
+                if (IsUri() && !Download())
                 {
-                    if (!PerformCheck(CheckDownloadFromUri) || !Download())
-                    {
-                        cancel = true;
-                        return;
-                    }
+                    cancel = true;
+                    return;
                 }
 
                 if (!PerformCheck(CheckIsSupportedType, CheckPathExists))
@@ -470,9 +467,8 @@ namespace XenAdmin.Wizards.ImportWizard
             if (String.IsNullOrEmpty(FilePath))
 				return false;
 
-			//if it's URI ignore
-			if (IsUri())
-				return true;
+            if (IsUri())
+                return CheckDownloadFromUri(out error);
 
             if (!PathValidator.IsPathValid(FilePath))
 			{
@@ -708,6 +704,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private void m_textBoxImage_TextChanged(object sender, EventArgs e)
 		{
 			m_tlpEncryption.Visible = false;
+            m_tlpError.Visible = false;
 			PerformCheck(CheckPathValid);
 			IsDirty = true;
 		}
