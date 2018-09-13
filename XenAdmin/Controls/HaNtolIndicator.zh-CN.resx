@@ -121,10 +121,7 @@
   <data name="groupBoxControls.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="tableServerFailureLimit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableServerFailureLimit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -143,18 +140,15 @@
   <data name="tableStatus.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="pictureBoxStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
   <data name="pictureBoxStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="pictureBoxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 0</value>
   </data>
   <data name="pictureBoxStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 0, 0</value>
   </data>
   <data name="pictureBoxStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -177,23 +171,23 @@
   <data name="&gt;&gt;pictureBoxStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="labelStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="labelStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 3</value>
+    <value>22, 0</value>
   </data>
   <data name="labelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 15</value>
+    <value>327, 13</value>
   </data>
   <data name="labelStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="labelStatus.Text" xml:space="preserve">
     <value>此数字不能超过池的最大故障容量。</value>
@@ -214,16 +208,16 @@
     <value>Fill</value>
   </data>
   <data name="tableStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
+    <value>3, 61</value>
   </data>
   <data name="tableStatus.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 20</value>
+    <value>352, 35</value>
   </data>
   <data name="tableStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>4</value>
   </data>
   <data name="tableStatus.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -241,7 +235,7 @@
     <value>0</value>
   </data>
   <data name="tableStatus.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBoxStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBoxStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -258,14 +252,11 @@
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 4, 0, 6</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 27</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>可以指定池中能够允许出现的服务器故障数。</value>
@@ -292,13 +283,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 30</value>
+    <value>160, 32</value>
   </data>
   <data name="labelMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>1, 22</value>
   </data>
   <data name="labelMax.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="labelMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -322,7 +313,7 @@
     <value>NoControl</value>
   </data>
   <data name="spinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 30</value>
+    <value>166, 37</value>
   </data>
   <data name="spinner.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -349,13 +340,13 @@
     <value>Left</value>
   </data>
   <data name="numericUpDownCapacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 30</value>
+    <value>99, 35</value>
   </data>
   <data name="numericUpDownCapacity.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 19</value>
   </data>
   <data name="numericUpDownCapacity.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="numericUpDownCapacity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -382,13 +373,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelNumberOfServers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
+    <value>3, 38</value>
   </data>
   <data name="labelNumberOfServers.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 22</value>
   </data>
   <data name="labelNumberOfServers.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="labelNumberOfServers.Text" xml:space="preserve">
     <value>允许出现的故障数(&amp;F):</value>
@@ -405,8 +396,11 @@
   <data name="&gt;&gt;labelNumberOfServers.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="tableServerFailureLimit.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableServerFailureLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>3, 17</value>
   </data>
   <data name="tableServerFailureLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -433,10 +427,10 @@
     <value>0</value>
   </data>
   <data name="tableServerFailureLimit.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="tableStatus" Row="2" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="labelMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="spinner" Row="1" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="numericUpDownCapacity" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelNumberOfServers" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableStatus" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="spinner" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="numericUpDownCapacity" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelNumberOfServers" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBoxControls.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="groupBoxControls.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -445,13 +439,13 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="groupBoxControls.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 6, 0</value>
+    <value>3, 4, 3, 6</value>
   </data>
   <data name="groupBoxControls.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 125</value>
   </data>
   <data name="groupBoxControls.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>0</value>
   </data>
   <data name="groupBoxControls.Text" xml:space="preserve">
     <value>服务器故障限制</value>
