@@ -223,7 +223,7 @@
     <value>1</value>
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
-    <value>スケジュールされたディスクとメモリのスナップショットは、この {0} の対象 VM が以下のすべての条件を満たす場合のみ作成されます。
+    <value>スケジュールされたディスクとメモリのスナップショットは、この の対象 VM が以下のすべての条件を満たす場合のみ作成されます。
 
 1. スケジュールされた時間に VM が実行中である、または一時停止している。
 2. VM に [XenServer product] Tools がインストールされている。
@@ -413,7 +413,7 @@
     <value>0</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>休止スナップショットを作成するには、VM で VSS サービスが有効である必要があります.</value>
+    <value>休止スナップショットを作成するには、VM で VSS サービスが有効である必要があります。</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -476,7 +476,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Choose the type of snapshot you would like to take.</value>
+    <value>作成するスナップショットの種類を選択します。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

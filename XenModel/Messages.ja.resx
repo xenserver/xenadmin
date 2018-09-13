@@ -771,6 +771,12 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>'{0}' からの SR スキャンの実行</value>
   </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
+    <value>仮想ネットワーク インタフェースの名前の変更</value>
+  </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE" xml:space="preserve">
+    <value>仮想ネットワーク インタフェースの名前が変更されました</value>
+  </data>
   <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
     <value>VM 構成の保存</value>
   </data>

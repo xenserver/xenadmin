@@ -223,7 +223,7 @@
     <value>1</value>
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
-    <value>请注意，将仅创建此 {0} 中满足以下所有条件的 VM 的计划磁盘和内存快照:
+    <value>请注意，将仅创建此计划中满足以下所有条件的 VM 的计划磁盘和内存快照:
 
 1. 计划快照时 VM 正在运行或已暂停。
 2. VM 上已安装 [XenServer product] Tools。
@@ -413,7 +413,7 @@
     <value>0</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>静止快照需要在 VM 上启用 VSS 服务.</value>
+    <value>静止快照需要在 VM 上启用 VSS 服务。</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -476,7 +476,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Choose the type of snapshot you would like to take.</value>
+    <value>选择要创建的快照类型。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
