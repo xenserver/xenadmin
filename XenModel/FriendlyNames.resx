@@ -1443,7 +1443,7 @@
     <value>Local storage on {0}</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>[XenServer product] Tools ISOs</value>
+    <value>[Citrix VM Tools] ISOs</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1470,7 +1470,7 @@
     <value>Local storage on {0}</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>[XenServer product] Tools</value>
+    <value>[Citrix VM Tools]</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use.</value>

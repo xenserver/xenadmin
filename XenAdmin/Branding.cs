@@ -52,6 +52,7 @@ namespace XenAdmin
         public const string BACKUP = "[xbk]";
         public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
         public const string BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT = "[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT]";
+        public const string PV_TOOLS = "[Citrix VM Tools]";
 
         public static string Search
         {

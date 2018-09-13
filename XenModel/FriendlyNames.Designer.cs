@@ -5073,7 +5073,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Tools ISOs.
+        ///   Looks up a localized string similar to [Citrix VM Tools] ISOs.
         /// </summary>
         public static string SR_name_description_xenserver_tools {
             get {
@@ -5154,7 +5154,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Tools.
+        ///   Looks up a localized string similar to [Citrix VM Tools].
         /// </summary>
         public static string SR_name_label_xenserver_tools {
             get {
