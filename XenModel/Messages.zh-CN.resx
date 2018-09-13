@@ -771,6 +771,12 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>正在从“{0}”执行 SR 扫描</value>
   </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
+    <value>正在重命名服务器网络接口</value>
+  </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE" xml:space="preserve">
+    <value>已重命名服务器网络接口</value>
+  </data>
   <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
     <value>正在保存 VM 配置</value>
   </data>
