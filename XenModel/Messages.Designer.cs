@@ -11441,15 +11441,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Disable HA....
-        /// </summary>
-        public static string DISABLE_HA_ELLIPSIS {
-            get {
-                return ResourceManager.GetString("DISABLE_HA_ELLIPSIS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disable.
         /// </summary>
         public static string DISABLE_NOAMP {
@@ -13736,15 +13727,6 @@ namespace XenAdmin {
         public static string ENABLE_CLUSTERING_ON_POOL {
             get {
                 return ResourceManager.GetString("ENABLE_CLUSTERING_ON_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Enable HA....
-        /// </summary>
-        public static string ENABLE_HA_ELLIPSIS {
-            get {
-                return ResourceManager.GetString("ENABLE_HA_ELLIPSIS", resourceCulture);
             }
         }
         

@@ -4089,9 +4089,6 @@ This will also delete its subfolders.</value>
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>Disable HA if you want to configure the management interfaces</value>
   </data>
-  <data name="DISABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>&amp;Disable HA...</value>
-  </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>Disable</value>
   </data>
@@ -4860,9 +4857,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Enable clustering.</value>
-  </data>
-  <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>&amp;Enable HA...</value>
   </data>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>Enable</value>
