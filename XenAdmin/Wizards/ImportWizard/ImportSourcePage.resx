@@ -487,13 +487,13 @@
     <value>25, 4</value>
   </data>
   <data name="_labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 13</value>
+    <value>57, 13</value>
   </data>
   <data name="_labelError.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="_labelError.Text" xml:space="preserve">
-    <value>Failed to uncompress file. Please see the logs for more information.</value>
+    <value>_labelError</value>
   </data>
   <data name="&gt;&gt;_labelError.Name" xml:space="preserve">
     <value>_labelError</value>
@@ -541,13 +541,13 @@
     <value>3, 251</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 13</value>
+    <value>70, 13</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
-    <value>Uncompressing file, please wait...</value>
+    <value>labelProgress</value>
   </data>
   <data name="&gt;&gt;labelProgress.Name" xml:space="preserve">
     <value>labelProgress</value>

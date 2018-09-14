@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -72,6 +73,13 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private string _unzipFileIn;
         private string _unzipFileOut;
+
+        private Uri _uri;
+        private string _downloadFolder;
+        private WebClient _webClient;
+        private Queue<ApplianceFile> _filesToDownload;
+
+	    private bool longProcessInProgress;
 		#endregion
 
 		public ImportSourcePage()
@@ -110,11 +118,11 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
-				if (IsUri() && !PerformCheck(CheckDownloadFromUri))
-				{
-					cancel = true;
-					return;
-				}
+                if (IsUri() && !Download())
+                {
+                    cancel = true;
+                    return;
+                }
 
                 if (!PerformCheck(CheckIsSupportedType, CheckPathExists))
 				{
@@ -126,13 +134,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
                 if (extension == ".gz")
                 {
-                    if (!PerformCheck(CheckSourceIsWritable))
-                    {
-                        cancel = true;
-                        return;
-                    }
-
-                    if (!Uncompress())
+                    if (!PerformCheck(CheckSourceIsWritable) || !Uncompress())
                     {
                         cancel = true;
                         return;
@@ -171,6 +173,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public override void PageCancelled()
         {
+            if (_webClient != null && _webClient.IsBusy)
+                _webClient.CancelAsync();
+
             if (_unzipWorker.IsBusy)
                 _unzipWorker.CancelAsync();
         }
@@ -462,9 +467,8 @@ namespace XenAdmin.Wizards.ImportWizard
             if (String.IsNullOrEmpty(FilePath))
 				return false;
 
-			//if it's URI ignore
-			if (IsUri())
-				return true;
+            if (IsUri())
+                return CheckDownloadFromUri(out error);
 
             if (!PathValidator.IsPathValid(FilePath))
 			{
@@ -574,13 +578,13 @@ namespace XenAdmin.Wizards.ImportWizard
             }
         }
 
-		private bool CheckDownloadFromUri(out string error)
-		{
-		    error = string.Empty;
-		    Uri uri;
+        private bool CheckDownloadFromUri(out string error)
+        {
+            error = string.Empty;
             try
             {
-                uri = new Uri(FilePath);
+                _uri = new Uri(FilePath);
+                return true;
             }
             catch (ArgumentNullException)
             {
@@ -592,21 +596,41 @@ namespace XenAdmin.Wizards.ImportWizard
                 error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI;
                 return false;
             }
-
-			using (var dlog = new DownloadApplianceDialog(uri))
-			{
-				if (dlog.ShowDialog(ParentForm) == DialogResult.Yes && !string.IsNullOrEmpty(dlog.DownloadedPath))
-				{
-					m_textBoxFile.Text = dlog.DownloadedPath;
-					return true;
-				}
-				return false; //an error happened during download or the user cancelled
-			}
-		}
+        }
 
         #endregion
 
-        #region Uncompression
+        #region Download and Uncompression
+
+        private bool Download()
+        {
+            using (var dlog = new FolderBrowserDialog { Description = Messages.FOLDER_BROWSER_DOWNLOAD_APPLIANCE })
+            {
+                if (dlog.ShowDialog() == DialogResult.OK)
+                {
+                    if (_webClient == null)
+                    {
+                        _webClient = new WebClient { Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false) };
+                        _webClient.DownloadFileCompleted += webclient_DownloadFileCompleted;
+                        _webClient.DownloadProgressChanged += webclient_DownloadProgressChanged;
+                    }
+
+                    _downloadFolder = dlog.SelectedPath;
+                    var downloadedPath = Path.Combine(_downloadFolder, Path.GetFileName(_uri.AbsolutePath));
+                    if (string.IsNullOrEmpty(Path.GetExtension(downloadedPath))) //CA-41747
+                        downloadedPath += ".ovf";
+
+                    var file = new ApplianceFile(_uri, downloadedPath);
+                    _filesToDownload = new Queue<ApplianceFile>();
+                    _filesToDownload.Enqueue(file);
+
+                    LongProcessWrapper(() => _webClient.DownloadFileAsync(_uri, downloadedPath, file),
+                        string.Format(Messages.IMPORT_WIZARD_DOWNLOADING, Path.GetFileName(downloadedPath).Ellipsise(50)));
+                    return m_textBoxFile.Text == downloadedPath;
+                }
+                return false;
+            }
+        }
 
         private bool Uncompress()
         {
@@ -624,58 +648,63 @@ namespace XenAdmin.Wizards.ImportWizard
                 new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)))
             {
                 if (dlog.ShowDialog(this) == DialogResult.Yes)
-                    return StartUncompression();
+                {
+                    LongProcessWrapper(() => _unzipWorker.RunWorkerAsync(),
+                        string.Format(Messages.IMPORT_WIZARD_UNCOMPRESSING, Path.GetFileName(_unzipFileIn).Ellipsise(50)));
+                    return m_textBoxFile.Text == _unzipFileOut;
+                }
 
-                return false; //user cancelled or error
+                return false;
             }
         }
 
-        private bool StartUncompression()
+        private void LongProcessWrapper(Action process, string processMessage)
         {
             m_textBoxFile.Enabled = false;
             m_buttonBrowse.Enabled = false;
-
             m_buttonNextEnabled = false;
             OnPageUpdated();
 
             m_tlpError.Visible = false;
+            labelProgress.Text = processMessage;
             labelProgress.Visible = true;
             progressBar1.Visible = true;
             progressBar1.Value = 0;
-            _unzipWorker.RunWorkerAsync();
-            
-            while (_unzipWorker.IsBusy)
+
+            longProcessInProgress = true;
+            process.Invoke();
+            while (longProcessInProgress)
                 Application.DoEvents();
 
             m_textBoxFile.Enabled = true;
             m_buttonBrowse.Enabled = true;
-            return m_textBoxFile.Text == _unzipFileOut;
         }
 
         #endregion
 
         #region Event handlers
 
-		private void m_buttonBrowse_Click(object sender, EventArgs e)
-		{
-			using (FileDialog ofd = new OpenFileDialog
-			                        	{
-			                        		CheckFileExists = true,
-			                        		CheckPathExists = true,
-			                        		DereferenceLinks = true,
-											Filter = OvfModeOnly ? Messages.IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY : Messages.IMPORT_SOURCE_PAGE_FILETYPES,
-			                        		RestoreDirectory = true,
-			                        		Multiselect = false,
-			                        	})
-			{
-				if (ofd.ShowDialog() == DialogResult.OK)
-					m_textBoxFile.Text = ofd.FileName;
-			}
-		}
+        private void m_buttonBrowse_Click(object sender, EventArgs e)
+        {
+            using (FileDialog ofd = new OpenFileDialog
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DereferenceLinks = true,
+                Filter = OvfModeOnly ? Messages.IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY : Messages.IMPORT_SOURCE_PAGE_FILETYPES,
+                RestoreDirectory = true,
+                Multiselect = false,
+            })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                    m_textBoxFile.Text = ofd.FileName;
+            }
+        }
 
 		private void m_textBoxImage_TextChanged(object sender, EventArgs e)
 		{
 			m_tlpEncryption.Visible = false;
+            m_tlpError.Visible = false;
 			PerformCheck(CheckPathValid);
 			IsDirty = true;
 		}
@@ -741,22 +770,15 @@ namespace XenAdmin.Wizards.ImportWizard
             progressBar1.Visible = false;
             labelProgress.Visible = false;
 
-            if (e.Cancelled)
+            if (e.Cancelled || e.Error != null)
             {
-                try
+                if (e.Error != null)
                 {
-                    File.Delete(_unzipFileOut);
+                    _labelError.Text = string.Format(Messages.IMPORT_WIZARD_FAILED_UNCOMPRESS,
+                        Path.GetFileName(_unzipFileIn).Ellipsise(50));
+                    m_tlpError.Visible = true;
                 }
-                catch (Exception ex)
-                {
-                    log.Error(string.Format("Failed to delete uncompressed file {0}.", _unzipFileOut), ex);
-                }
-                return;
-            }
 
-            if (e.Error != null)
-            {
-                m_tlpError.Visible = true;
                 try
                 {
                     File.Delete(_unzipFileOut);
@@ -765,6 +787,8 @@ namespace XenAdmin.Wizards.ImportWizard
                 {
                     log.Error(string.Format("Failed to delete uncompressed file {0}.", _unzipFileOut), ex);
                 }
+
+                longProcessInProgress = false;
                 return;
             }
 
@@ -780,8 +804,91 @@ namespace XenAdmin.Wizards.ImportWizard
             {
                 log.Error(string.Format("Failed to delete compressed file {0}.", _unzipFileIn), ex);
             }
+            longProcessInProgress = false;
         }
 
-		#endregion
+
+        private void webclient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            Program.Invoke(this, () => progressBar1.Value = e.ProgressPercentage);
+        }
+
+        private void webclient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Program.Invoke(this, () =>
+            {
+                var appfile = (ApplianceFile)e.UserState;
+
+                if (e.Cancelled)
+                {
+                    longProcessInProgress = false;
+                }
+                else if (e.Error != null) // failure
+                {
+                    progressBar1.Visible = false;
+                    labelProgress.Visible = false;
+                    _labelError.Text = string.Format(Messages.IMPORT_WIZARD_FAILED_DOWNLOAD,
+                        Path.GetFileName(appfile.LocalPath));
+                    m_tlpError.Visible = true;
+                    log.Error(string.Format("Failed to download file {0}.", appfile), e.Error);
+                    longProcessInProgress = false;
+                }
+                else // success
+                {
+                    if (_filesToDownload.Peek() == appfile)
+                        _filesToDownload.Dequeue();
+
+                    if (appfile.LocalPath.ToLower().EndsWith(".ovf"))
+                    {
+                        var envType = OVF.Load(appfile.LocalPath);
+
+                        if (envType != null)
+                        {
+                            int index = _uri.OriginalString.LastIndexOf('/') + 1;
+                            var remoteDir = _uri.OriginalString.Substring(0, index);
+
+                            foreach (var file in envType.References.File)
+                            {
+                                var remoteUri = new Uri(remoteDir + file.href);
+                                var localPath = Path.Combine(_downloadFolder, file.href);
+                                _filesToDownload.Enqueue(new ApplianceFile(remoteUri, localPath));
+                            }
+                        }
+                    }
+
+                    if (_filesToDownload.Count == 0)
+                    {
+                        progressBar1.Value = 100;
+                        progressBar1.Visible = false;
+                        labelProgress.Visible = false;
+                        m_textBoxFile.Text = Path.Combine(_downloadFolder, Path.GetFileName(_uri.AbsolutePath));
+                        longProcessInProgress = false;
+                    }
+                    else
+                    {
+                        progressBar1.Value = 0;
+                        var file = _filesToDownload.Peek();
+                        labelProgress.Text = string.Format(Messages.IMPORT_WIZARD_DOWNLOADING,
+                            Path.GetFileName(file.LocalPath).Ellipsise(50));
+                        _webClient.DownloadFileAsync(file.RemoteUri, file.LocalPath, file);
+                    }
+                }
+            });
+        }
+
+        #endregion
+
+        private class ApplianceFile
+        {
+            public ApplianceFile(Uri remoteUri, string localPath)
+            {
+                RemoteUri = remoteUri;
+                LocalPath = localPath;
+            }
+
+            public Uri RemoteUri { get; private set; }
+
+            public string LocalPath { get; private set; }
+        }
     }
 }

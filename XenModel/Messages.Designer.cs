@@ -18538,15 +18538,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error downloading file &apos;{0}&apos;. {1}.
-        /// </summary>
-        public static string IMPORT_DOWNLOAD_ERROR {
-            get {
-                return ResourceManager.GetString("IMPORT_DOWNLOAD_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Too many EULAs to display, cannot continue..
         /// </summary>
         public static string IMPORT_EULA_PAGE_MAX_TABS {
@@ -19216,6 +19207,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading file {0}, please wait....
+        /// </summary>
+        public static string IMPORT_WIZARD_DOWNLOADING {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_DOWNLOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download file {0}. Please see the logs for more information..
+        /// </summary>
+        public static string IMPORT_WIZARD_FAILED_DOWNLOAD {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_FAILED_DOWNLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to uncompress file {0}. Please see the logs for more information..
+        /// </summary>
+        public static string IMPORT_WIZARD_FAILED_UNCOMPRESS {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_FAILED_UNCOMPRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map the virtual network interfaces in the VMs you are importing to networks in the destination pool or standalone server..
         /// </summary>
         public static string IMPORT_WIZARD_NETWORKING_INTRO {
@@ -19248,6 +19266,15 @@ namespace XenAdmin {
         public static string IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT {
             get {
                 return ResourceManager.GetString("IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncompressing file {0}, please wait....
+        /// </summary>
+        public static string IMPORT_WIZARD_UNCOMPRESSING {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_UNCOMPRESSING", resourceCulture);
             }
         }
         
@@ -30475,15 +30502,6 @@ namespace XenAdmin {
         public static string RETRIEVING_WLB_DEFAULT_CONFIGURATION {
             get {
                 return ResourceManager.GetString("RETRIEVING_WLB_DEFAULT_CONFIGURATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Retry.
-        /// </summary>
-        public static string RETRY {
-            get {
-                return ResourceManager.GetString("RETRY", resourceCulture);
             }
         }
         

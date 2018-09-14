@@ -3064,12 +3064,6 @@
     <Compile Include="Diagnostics\Problems\VMProblem\RunningVMProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\ExistingVmWarning.cs" />
     <Compile Include="Diagnostics\Problems\Warning.cs" />
-    <Compile Include="Dialogs\DownloadApplianceDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\DownloadApplianceDialog.Designer.cs">
-      <DependentUpon>DownloadApplianceDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\DRConfigureDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5218,15 +5212,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DialogWithProgress.zh-CN.resx">
       <DependentUpon>DialogWithProgress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DownloadApplianceDialog.ja.resx">
-      <DependentUpon>DownloadApplianceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DownloadApplianceDialog.resx">
-      <DependentUpon>DownloadApplianceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DownloadApplianceDialog.zh-CN.resx">
-      <DependentUpon>DownloadApplianceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DRConfigureDialog.ja.resx">
       <DependentUpon>DRConfigureDialog.cs</DependentUpon>
