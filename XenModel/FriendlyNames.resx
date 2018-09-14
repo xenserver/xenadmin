@@ -1845,7 +1845,7 @@
     <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud</value>
   </data>
   <data name="Label-host.edition-legacy-basic" xml:space="preserve">
-    <value>[Legacy Citrix XenServer] Basic Edition</value>
+    <value>[Citrix XenServer] Basic Edition</value>
   </data>
   <data name="Label-host.edition-legacy-desktop" xml:space="preserve">
     <value>XenApp/XenDesktop</value>
@@ -1869,10 +1869,10 @@
     <value>[Legacy XenServer product] Per-Socket</value>
   </data>
   <data name="Label-host.edition-legacy-premium" xml:space="preserve">
-    <value>[Legacy Citrix XenServer] Ultimate Edition</value>
+    <value>[Citrix XenServer] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-legacy-standard" xml:space="preserve">
-    <value>[Legacy Citrix XenServer] Standard Edition</value>
+    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Label-host.edition-legacy-standard-per-socket" xml:space="preserve">
     <value>[Legacy XenServer product] Standard Per-Socket</value>

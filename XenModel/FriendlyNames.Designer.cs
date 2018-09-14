@@ -844,7 +844,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy Citrix XenServer] Basic Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Basic Edition.
         /// </summary>
         public static string Label_host_edition_legacy_basic {
             get {
@@ -916,7 +916,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy Citrix XenServer] Ultimate Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Ultimate Edition.
         /// </summary>
         public static string Label_host_edition_legacy_premium {
             get {
@@ -925,7 +925,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy Citrix XenServer] Standard Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Standard Edition.
         /// </summary>
         public static string Label_host_edition_legacy_standard {
             get {
