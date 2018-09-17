@@ -54,7 +54,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace XenAdmin.TabPages
 {
-    public partial class ManageUpdatesPage : UserControl
+    public partial class ManageUpdatesPage : NotificationsBasePage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -78,21 +78,35 @@ namespace XenAdmin.TabPages
             UpdateButtonEnablement();
             informationLabel.Click += informationLabel_Click;
             m_updateCollectionChangedWithInvoke = Program.ProgramInvokeHandler(UpdatesCollectionChanged);
-            Updates.RegisterCollectionChanged(m_updateCollectionChangedWithInvoke);
-            Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
-            Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
-            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
             toolStripButtonUpdate.Visible = false;
         }
 
-        public void RefreshUpdateList()
+        #region NotificationPage overrides
+        protected override void RefreshPage()
         {
             toolStripDropDownButtonServerFilter.InitializeHostList();
             toolStripDropDownButtonServerFilter.BuildFilterList();
-            Rebuild();
+            Rebuild(); 
         }
+
+        protected override void RegisterEventHandlers()
+        {
+            Updates.RegisterCollectionChanged(m_updateCollectionChangedWithInvoke);
+            Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
+            Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
+            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+        }
+
+        protected override void DeregisterEventHandlers()
+        {
+            Updates.DeregisterCollectionChanged(m_updateCollectionChangedWithInvoke);
+            Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
+            Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
+            Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
+        }
+        #endregion
 
         private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
@@ -453,8 +467,9 @@ namespace XenAdmin.TabPages
         {
             List<string> result = new List<string>();
 
-            foreach (Pool_patch patch in host.AppliedPatches())
-                result.Add(patch.Name());
+            result.AddRange(Helpers.ElyOrGreater(host)
+                ? host.AppliedUpdates().Select(u => u.Name())
+                : host.AppliedPatches().Select(p => p.Name()));
 
             result.Sort(StringUtility.NaturalCompare);
             return string.Join(", ", result.ToArray());
@@ -463,6 +478,11 @@ namespace XenAdmin.TabPages
         private bool VersionFoundInUpdatesXml(IXenConnection connection)
         {
             return connection.Cache.Hosts.All(h => Updates.GetServerVersions(h, Updates.XenServerVersions).Count > 0);
+        }
+
+        private bool VersionFoundInUpdatesXml(Host host)
+        {
+            return Updates.GetServerVersions(host, Updates.XenServerVersions).Count > 0;
         }
 
         private void RebuildHostView()
@@ -500,11 +520,10 @@ namespace XenAdmin.TabPages
                 foreach (IXenConnection c in xenConnections)
                 {
                     Pool pool = Helpers.GetPool(c);
-                    var versionIsFound = VersionFoundInUpdatesXml(c);
 
                     if (pool != null)          // pool row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded && versionIsFound);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded && VersionFoundInUpdatesXml(c));
                         var hostUuidList = new List<string>();
 
                         foreach (Host h in c.Cache.Hosts)
@@ -519,7 +538,7 @@ namespace XenAdmin.TabPages
                     Array.Sort(hosts);
                     foreach (Host h in hosts)       // host row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded && versionIsFound);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded && VersionFoundInUpdatesXml(h));
 
                         // add row based on server filter status
                         if (!toolStripDropDownButtonServerFilter.HideByLocation(h.uuid))
@@ -1094,8 +1113,9 @@ namespace XenAdmin.TabPages
             if (string.IsNullOrEmpty(patchUri))
                 return;
 
-            var wizard = new PatchingWizard();
-            wizard.Show();
+            PatchingWizard wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            if (!wizard.IsFirstPage())
+                return;
             wizard.NextStep();
             wizard.AddAlert(patchAlert);
             wizard.NextStep();
@@ -1405,7 +1425,7 @@ namespace XenAdmin.TabPages
             string patchingStatus = String.Empty;
             string requiredUpdates = String.Empty;
             string installedUpdates = String.Empty;
-            var versionIsFound = VersionFoundInUpdatesXml(xenConnection);
+            var versionIsFound = VersionFoundInUpdatesXml(host);
 
             pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
             requiredUpdates = CheckForUpdateSucceeded && versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
@@ -1526,16 +1546,9 @@ namespace XenAdmin.TabPages
 
         private void toolStripButtonUpdate_Click(object sender, EventArgs e)
         {
-            var wizard = new PatchingWizard();
-            wizard.Show();
-            wizard.NextStep();
-
-            var hostlist = new List<Host>();
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-                hostlist.AddRange(c.Cache.Hosts);
-
-            if (hostlist.Count > 0)
-                wizard.SelectServers(hostlist);
+            PatchingWizard wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            if (wizard.IsFirstPage())
+                wizard.NextStep();
         }
     }
 }

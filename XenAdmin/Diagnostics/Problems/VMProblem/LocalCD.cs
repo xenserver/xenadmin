@@ -39,14 +39,12 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
     public class LocalCD : VMProblem
     {
-        private VDI LoadedCD;
-
         public LocalCD(Check check, VM vm)
             : base(check, vm) { }
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_CD, VM.Name().Ellipsise(25)); }
+            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_CD, ServerName, VM.Name().Ellipsise(25)); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)
@@ -54,15 +52,10 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             cancelled = false;
             VBD cddrive = VM.FindVMCDROM();
 
-            if (cddrive != null)
-            {
-                LoadedCD = VM.Connection.Resolve(cddrive.VDI);
-            }
-
             return new ChangeVMISOAction(VM.Connection, VM, null, cddrive);
         }
 
-        public override AsyncAction UnwindChanges()
+        public override AsyncAction CreateUnwindChangesAction()
         {
             return null;
 

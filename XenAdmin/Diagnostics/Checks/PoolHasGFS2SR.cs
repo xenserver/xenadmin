@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,24 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using System.Windows.Forms;
-using NUnit.Framework;
-using XenAdmin.Dialogs;
+using System.Linq;
+using XenAdmin.Core;
+using XenAPI;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
 
-namespace XenAdminTests.DialogTests.boston.DecompressApplianceDialogTests
+namespace XenAdmin.Diagnostics.Checks
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
-    public class DecompressApplianceDialogTests : DialogTest<DecompressApplianceDialog>
+    class PoolHasGFS2SR : HostPostLivenessCheck
     {
-        protected override DecompressApplianceDialog NewDialog()
+        public PoolHasGFS2SR(Host host)
+            : base(host)
         {
-            return new DecompressApplianceDialog("file1", "file2");
         }
 
-        protected override void RunAfter()
+        protected override Problem RunHostCheck()
         {
-            Button decompress = TestUtils.GetButton(dialog, "m_buttonDecompress");
-            Assert.IsTrue(decompress.Enabled, "decompress button enabled");
+            var clusteringEnabled = Host.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);
+            var hasGfs2Sr = Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.gfs2);
+
+            if (clusteringEnabled || hasGfs2Sr)
+                return new PoolHasGFS2SRProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
+
+
+            return null;
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.CLUSTERING_STATUS_CHECK, Helpers.GetPoolOfOne(Host.Connection));
+            }
         }
     }
 }

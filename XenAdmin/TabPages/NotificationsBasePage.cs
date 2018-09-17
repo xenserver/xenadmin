@@ -29,52 +29,32 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
-using XenAPI;
 
-namespace XenAdmin.Controls.Ballooning
+namespace XenAdmin.TabPages
 {
-    public class VMMemoryControlsBase : UserControl
+    public class NotificationsBasePage: UserControl
     {
-        protected List<VM> vms;
-        protected VM vm0;
-        protected List<VM_metrics> vm_metrics = new List<VM_metrics>();  // metrics for all the VMs
-        public virtual List<VM> VMs
+        protected virtual void RefreshPage()
+        { }
+
+        protected virtual void RegisterEventHandlers()
+        { }
+
+        protected virtual void DeregisterEventHandlers()
+        { }
+
+        public void ShowPage()
         {
-            set
-            {
-                vms = value;
-                vm0 = vms[0];  // just an abbreviation for when we don't care which VM we look at
-                vm_metrics = new List<VM_metrics>(vms.Count);
-                foreach (VM vm in vms)
-                    vm_metrics.Add(vm.Connection.Resolve(vm.metrics));
-            }
+            Visible = true;
+            RefreshPage();
+            RegisterEventHandlers();
         }
 
-        protected long CalcMemoryUsed()
+        public void HidePage()
         {
-            long memoryUsed = 0;
-
-            if (vm0.power_state == vm_power_state.Running || vm0.power_state == vm_power_state.Paused)
-            {
-                // Calculate the average memory used by these VMs
-                int count = 0;
-                foreach (VM_metrics vm_metric in vm_metrics)
-                {
-                    if (vm_metric != null)
-                    {
-                        memoryUsed += vm_metric.memory_actual;
-                        ++count;
-                    }
-                }
-                if (count > 0)
-                    memoryUsed /= count;
-            }
-
-            return memoryUsed;
+            Visible = false;
+            DeregisterEventHandlers();
         }
     }
 }

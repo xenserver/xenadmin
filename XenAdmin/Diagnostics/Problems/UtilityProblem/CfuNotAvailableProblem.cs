@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,29 +29,50 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Windows.Forms;
-using NUnit.Framework;
+using System.Drawing;
+using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;
 
-namespace XenAdminTests.DialogTests.boston.DownloadApplianceDialogTests
+namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
-    public class DownloadApplianceDialogTests : DialogTest<DownloadApplianceDialog>
+    class CfuNotAvailableProblem : Problem
     {
-        protected override DownloadApplianceDialog NewDialog()
+        public CfuNotAvailableProblem(Check check)
+            : base(check)
         {
-            return new DownloadApplianceDialog(new Uri("http://myuri"));
         }
 
-        protected override void RunAfter()
+        public override string Description
         {
-            Button downloadButton = TestUtils.GetButton(dialog, "m_buttonDownload");
-            TextBox tb = TestUtils.GetTextBox(dialog, "m_textBoxWorkspace");
-            MW(delegate { tb.Text = "nonsense text"; });
-            Assert.AreEqual("nonsense text", tb.Text);
-            Assert.IsTrue(downloadButton.Enabled);
-            
+            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
+        }
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
+            {
+                dlg.ShowDialog();
+            }
+
+            cancelled = true;
+            return null;
+        }
+
+        public override string HelpMessage
+        {
+            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
+        }
+
+        public sealed override string Title
+        {
+            get { return string.Empty; }
+        }
+
+        public override bool IsFixable
+        {
+            get { return false; }
         }
     }
 }
