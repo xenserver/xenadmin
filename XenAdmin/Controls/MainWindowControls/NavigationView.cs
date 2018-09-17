@@ -109,11 +109,14 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #region Accessors
 
-        public NavigationPane.NavigationMode NavigationMode { get; set; }
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public NavigationPane.NavigationMode NavigationMode { private get; set; }
 
-        public Search CurrentSearch { get; set; }
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public Search CurrentSearch { private get; set; }
 
-        public bool InSearchMode { get; set; }
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool InSearchMode { private get; set; }
 
         internal SelectionBroadcaster SelectionManager
         {
