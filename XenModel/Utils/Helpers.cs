@@ -368,7 +368,7 @@ namespace XenAdmin.Core
                 product_version != null &&
                 ElyOrGreater(host) && 
                 !FalconOrGreater(host) && 
-                productVersionCompare(product_version, "[BRANDING_VERSION_7_1_2]") >= 0;
+                productVersionCompare(product_version, Branding.BRANDING_VERSION_7_1_2) >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>

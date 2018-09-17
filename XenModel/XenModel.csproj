@@ -164,6 +164,7 @@
     <Compile Include="Actions\WLB\WlbRetrieveVmRecommendationsAction.cs" />
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
+    <Compile Include="Branding.cs" />
     <Compile Include="DockerContainers.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
     <Compile Include="CustomFields\CustomFieldDefinition.cs" />

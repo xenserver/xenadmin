@@ -140,8 +140,6 @@ cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false
 #AssemblyInfo rebranding
 version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer XenServerHealthCheck"
 
-#XenAdmin rebranding
-rebranding_global ${REPO}/XenAdmin/Branding.cs
 #XenAdmin controls
 XENADMIN_RESXS=$(/usr/bin/find ${REPO}/XenAdmin -name \*.resx)
 for XENADMIN_RESX in ${XENADMIN_RESXS}
@@ -154,7 +152,7 @@ rebranding_global ${REPO}/XenAdmin/app.config
 
 #XenModel rebranding
 RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
-rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
+rebranding_global ${REPO}/XenModel/Branding.cs
 
 #XenOvfApi rebranding
 RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"

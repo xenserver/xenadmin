@@ -51,6 +51,7 @@ namespace XenAdmin
         public const string BACKUP = "[xbk]";
         public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
         public const string BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT = "[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT]";
+        public const string BRANDING_VERSION_7_1_2 = "[BRANDING_VERSION_7_1_2]";
 
         public static string Search
         {
