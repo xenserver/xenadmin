@@ -58,7 +58,13 @@ namespace XenAdmin
         private readonly List<VirtualTreeNode.PersistenceInfo> _foldersViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _fieldsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _vappsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
-        private bool _rootExpanded;
+
+        /// <remarks>
+        /// The default value is true because the very first time the tree builder calls PersistExpandedNodes
+        /// the tree is empty. This happens immediately after initialization of the tree (we shouldn't need to
+        /// add by default a root node in the NavigationView constructor at design time).
+        /// </remarks>
+        private bool _rootExpanded = true;
 
         private readonly OrganizationViewFields viewFields = new OrganizationViewFields();
         private readonly OrganizationViewFolders viewFolders = new OrganizationViewFolders();
@@ -209,6 +215,9 @@ namespace XenAdmin
 
         private void PersistExpandedNodes(string searchText)
         {
+            if (_treeView.Nodes.Count == 0)
+                return;
+
             // only persist the expansion state of nodes if there isn't an active search.
             //If there's a search then we're just going to expand everything later.
 
@@ -220,8 +229,11 @@ namespace XenAdmin
                 var list = AssignList(_lastSearchMode);
                 list.Clear();
 
-                foreach (VirtualTreeNode node in _treeView.AllNodes.Where(n => n.Tag != null && n.Parent != null && n.IsExpanded))
-                    list.Add(node.GetPersistenceInfo());
+                foreach (var node in _treeView.AllNodes)
+                {
+                    if (node.Tag != null && node.Parent != null && node.IsExpanded)
+                        list.Add(node.GetPersistenceInfo());
+                }
             }
 
             // persist the expansion state of the root node separately - it's a special case as its
