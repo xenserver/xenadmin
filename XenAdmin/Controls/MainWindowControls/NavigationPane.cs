@@ -36,7 +36,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using XenAdmin.Alerts;
 using XenAdmin.Commands;
 using XenAdmin.XenSearch;
 using XenAPI;
@@ -50,12 +49,6 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             Infrastructure, Objects, Tags, Folders, CustomFields, vApps,
             SavedSearch, Notifications
-        }
-
-        public NavigationMode currentMode
-        {
-            get;
-            private set;
         }
 
         private NotificationsSubMode lastNotificationsMode = NotificationsSubMode.Alerts;
@@ -131,6 +124,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #region Accessors
 
+        public NavigationMode currentMode { get; private set; }
+
         private Search m_search;
         public Search Search
         {
@@ -157,6 +152,7 @@ namespace XenAdmin.Controls.MainWindowControls
             }
         }
 
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool InSearchMode
         {
             set { navigationView.InSearchMode = value; }

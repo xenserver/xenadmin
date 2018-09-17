@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.MainWindowControls;
@@ -49,7 +48,6 @@ namespace XenAdmin
         private readonly FlickerFreeTreeView _treeView;
         private readonly Color _treeViewForeColor;
         private readonly Color _treeViewBackColor;
-        private object _highlightedDragTarget;
         private string _lastSearchText = string.Empty;
         private NavigationPane.NavigationMode _lastSearchMode;
         private readonly List<VirtualTreeNode.PersistenceInfo> _infraViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
@@ -85,11 +83,7 @@ namespace XenAdmin
         /// <summary>
         /// Gets or sets an object that should be highlighted.
         /// </summary>
-        public object HighlightedDragTarget
-        {
-            get { return _highlightedDragTarget; }
-            set { _highlightedDragTarget = value; }
-        }
+        public object HighlightedDragTarget { private get; set; }
 
         /// <summary>
         /// Updates the <see cref="TreeView"/> with the specified new root node. This is done by merging the specified
@@ -143,27 +137,27 @@ namespace XenAdmin
             {
                 case NavigationPane.NavigationMode.Objects:
                     newRootNode = viewObjects.RootNode;
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     viewObjects.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.Tags:
                     newRootNode = viewTags.RootNode;
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     viewTags.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.Folders:
                     newRootNode = viewFolders.RootNode;
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     viewFolders.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.CustomFields:
                     newRootNode = viewFields.RootNode;
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     viewFields.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.vApps:
                     newRootNode = viewVapps.RootNode;
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     viewVapps.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.SavedSearch:
@@ -175,13 +169,13 @@ namespace XenAdmin
                                              ? (int)Icons.DefaultSearch
                                              : (int)Icons.Search
                         };
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     search.PopulateAdapters(groupAcceptor);
                     break;
                 default://includes Infrastructure and Notifications
                     Util.ThrowIfParameterNull(search, "search");
                     newRootNode = new VirtualTreeNode(Branding.BRAND_CONSOLE) { ImageIndex = (int)Icons.Home };
-                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    groupAcceptor = CreateGroupAcceptor(newRootNode);
                     search.PopulateAdapters(groupAcceptor);
                     break;
             }
@@ -189,9 +183,9 @@ namespace XenAdmin
             return newRootNode;
         }
 
-        private MainWindowTreeNodeGroupAcceptor CreateGroupAcceptor(object dragTarget, VirtualTreeNode parent)
+        private MainWindowTreeNodeGroupAcceptor CreateGroupAcceptor(VirtualTreeNode parent)
         {
-            return new MainWindowTreeNodeGroupAcceptor(dragTarget, _treeViewForeColor, _treeViewBackColor, parent);
+            return new MainWindowTreeNodeGroupAcceptor(HighlightedDragTarget, _treeViewForeColor, _treeViewBackColor, parent);
         }
 
         private List<VirtualTreeNode.PersistenceInfo> AssignList(NavigationPane.NavigationMode mode)
@@ -299,7 +293,7 @@ namespace XenAdmin
 
         #region MainWindowTreeNodeGroupAcceptor class
 
-        public class MainWindowTreeNodeGroupAcceptor : IAcceptGroups
+        private class MainWindowTreeNodeGroupAcceptor : IAcceptGroups
         {
             private readonly VirtualTreeNode _parent;
             private readonly Color _treeViewForeColor;
@@ -466,7 +460,6 @@ namespace XenAdmin
                 _parent.Nodes.Insert(_index, result);
                 _index++;
 
-                IXenObject xenObject = obj as IXenObject;
                 bool highlighted = _highlightedDragTarget != null && obj != null && _highlightedDragTarget.Equals(obj);
 
                 if (highlighted)
