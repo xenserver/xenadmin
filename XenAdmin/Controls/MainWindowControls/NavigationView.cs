@@ -103,10 +103,6 @@ namespace XenAdmin.Controls.MainWindowControls
                 treeView.ItemHeight = 18;
             //otherwise it's too close together on XP and the icons crash into each other
 
-            VirtualTreeNode n = new VirtualTreeNode(Messages.XENCENTER);
-            treeView.Nodes.Add(n);
-            treeView.SelectedNode = treeView.Nodes[0];
-
             treeBuilder = new MainWindowTreeBuilder(treeView);
             treeViewUpdateManager.Update += treeViewUpdateManager_Update;
         }
