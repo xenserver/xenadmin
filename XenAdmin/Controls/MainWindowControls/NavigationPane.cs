@@ -102,9 +102,11 @@ namespace XenAdmin.Controls.MainWindowControls
             buttonObjectsBig.SetTag(NavigationMode.Objects);
             buttonNotifyBig.SetTag(NavigationMode.Notifications);
 
-            PopulateOrganizationDropDown();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
 
             Search.SearchesChanged += PopulateSearchDropDown;
+            PopulateOrganizationDropDown();
             PopulateSearchDropDown();
 
             buttonInfraBig.Checked = true;

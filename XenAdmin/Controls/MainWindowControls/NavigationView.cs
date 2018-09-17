@@ -54,9 +54,9 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly SelectionManager selectionManager = new SelectionManager();
+        private readonly SelectionManager selectionManager;
         private readonly MainWindowTreeBuilder treeBuilder;
-        private readonly UpdateManager treeViewUpdateManager = new UpdateManager(30 * 1000);
+        private readonly UpdateManager treeViewUpdateManager;
 
         private VirtualTreeNode _highlightedDragTarget;
         private int ignoreRefreshTreeView;
@@ -103,8 +103,13 @@ namespace XenAdmin.Controls.MainWindowControls
                 treeView.ItemHeight = 18;
             //otherwise it's too close together on XP and the icons crash into each other
 
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
+
             treeBuilder = new MainWindowTreeBuilder(treeView);
+            treeViewUpdateManager = new UpdateManager(30 * 1000);
             treeViewUpdateManager.Update += treeViewUpdateManager_Update;
+            selectionManager = new SelectionManager();
         }
 
         #region Accessors
