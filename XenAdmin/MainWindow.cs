@@ -83,7 +83,6 @@ namespace XenAdmin
         internal readonly PerformancePage PerformancePage = new PerformancePage();
         internal readonly GeneralTabPage GeneralPage = new GeneralTabPage();
         internal readonly BallooningPage BallooningPage = new BallooningPage();
-        internal readonly BallooningUpsellPage BallooningUpsellPage = new BallooningUpsellPage();
         internal readonly ConsolePanel ConsolePanel = new ConsolePanel();
         internal readonly CvmConsolePanel CvmConsolePanel = new CvmConsolePanel();
         internal readonly HAPage HAPage = new HAPage();
@@ -187,7 +186,6 @@ namespace XenAdmin
             AddTabContents(PerformancePage, TabPagePeformance);
             AddTabContents(GeneralPage, TabPageGeneral);
             AddTabContents(BallooningPage, TabPageBallooning);
-            AddTabContents(BallooningUpsellPage, TabPageBallooningUpsell);
             AddTabContents(ConsolePanel, TabPageConsole);
             AddTabContents(CvmConsolePanel, TabPageCvmConsole);
             AddTabContents(NetworkPage, TabPageNetwork);
@@ -2582,8 +2580,6 @@ namespace XenAdmin
                 return "TabPageAD" + modelObj;
             if (TheTabControl.SelectedTab == TabPageADUpsell)
                 return "TabPageADUpsell" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageBallooningUpsell)
-                return "TabPageBallooningUpsell";
             if (TheTabControl.SelectedTab == TabPageWLBUpsell)
                 return "TabPageWLBUpsell";
             if (TheTabControl.SelectedTab == TabPageGPU)
