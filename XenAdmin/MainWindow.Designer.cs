@@ -68,7 +68,6 @@ namespace XenAdmin
             this.TabPageHome = new System.Windows.Forms.TabPage();
             this.TabPageGeneral = new System.Windows.Forms.TabPage();
             this.TabPageBallooning = new System.Windows.Forms.TabPage();
-            this.TabPageBallooningUpsell = new System.Windows.Forms.TabPage();
             this.TabPageConsole = new System.Windows.Forms.TabPage();
             this.TabPageCvmConsole = new System.Windows.Forms.TabPage();
             this.TabPageStorage = new System.Windows.Forms.TabPage();
@@ -348,7 +347,6 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageHome);
             this.TheTabControl.Controls.Add(this.TabPageGeneral);
             this.TheTabControl.Controls.Add(this.TabPageBallooning);
-            this.TheTabControl.Controls.Add(this.TabPageBallooningUpsell);
             this.TheTabControl.Controls.Add(this.TabPageConsole);
             this.TheTabControl.Controls.Add(this.TabPageCvmConsole);
             this.TheTabControl.Controls.Add(this.TabPageStorage);
@@ -390,12 +388,6 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageBallooning, "TabPageBallooning");
             this.TabPageBallooning.Name = "TabPageBallooning";
             this.TabPageBallooning.UseVisualStyleBackColor = true;
-            // 
-            // TabPageBallooningUpsell
-            // 
-            resources.ApplyResources(this.TabPageBallooningUpsell, "TabPageBallooningUpsell");
-            this.TabPageBallooningUpsell.Name = "TabPageBallooningUpsell";
-            this.TabPageBallooningUpsell.UseVisualStyleBackColor = true;
             // 
             // TabPageConsole
             // 
@@ -2121,7 +2113,6 @@ namespace XenAdmin
         private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem7;
         private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem9;
         private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem8;
-        private TabPage TabPageBallooningUpsell;
         private ToolStripMenuItem xenCenterPluginsOnlineToolStripMenuItem;
         private CommandToolStripMenuItem MoveVMToolStripMenuItem;
         private CommandToolStripMenuItem rollingUpgradeToolStripMenuItem;

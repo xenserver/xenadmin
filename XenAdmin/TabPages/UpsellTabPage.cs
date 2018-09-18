@@ -29,13 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Core;
 
 
@@ -57,14 +50,6 @@ namespace XenAdmin.TabPages
         public ADUpsellPage()
             : base(Messages.ACTIVE_DIRECTORY_TAB_TITLE, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_AD :
             Messages.UPSELL_BLURB_AD + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
-        { }
-    }
-
-    public class BallooningUpsellPage : UpsellTabPage
-    {
-        public BallooningUpsellPage()
-            : base(Messages.DYNAMIC_MEMORY_CONTROL, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DMC :
-            Messages.UPSELL_BLURB_DMC + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
         { }
     }
 
