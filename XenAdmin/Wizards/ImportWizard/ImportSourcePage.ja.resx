@@ -493,7 +493,7 @@
     <value>3</value>
   </data>
   <data name="_labelError.Text" xml:space="preserve">
-    <value>ファイルを圧縮解除できません。詳しくは、ログを参照してください。</value>
+    <value>_labelError</value>
   </data>
   <data name="&gt;&gt;_labelError.Name" xml:space="preserve">
     <value>_labelError</value>
@@ -547,7 +547,7 @@
     <value>5</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
-    <value>ファイルの圧縮を解除しています...</value>
+    <value>labelProgress</value>
   </data>
   <data name="&gt;&gt;labelProgress.Name" xml:space="preserve">
     <value>labelProgress</value>
