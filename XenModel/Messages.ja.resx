@@ -6518,9 +6518,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>ディスク イメージから仮想マシン '{0}' を '{1}' にインポート</value>
   </data>
-  <data name="IMPORT_DOWNLOAD_ERROR" xml:space="preserve">
-    <value>ファイル '{0}' のダウンロード エラー。{1}</value>
-  </data>
   <data name="IMPORT_EULA_PAGE_MAX_TABS" xml:space="preserve">
     <value>表示する EULA が多すぎるため続行できません。</value>
   </data>
@@ -6746,6 +6743,15 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>各 VM のホーム サーバーを指定(&amp;A):</value>
   </data>
+  <data name="IMPORT_WIZARD_DOWNLOADING" xml:space="preserve">
+    <value>ファイル {0} をダウンロードしています...</value>
+  </data>
+  <data name="IMPORT_WIZARD_FAILED_DOWNLOAD" xml:space="preserve">
+    <value>ファイル {0} のダウンロードに失敗しました。詳しくはログを参照してください。</value>
+  </data>
+  <data name="IMPORT_WIZARD_FAILED_UNCOMPRESS" xml:space="preserve">
+    <value>ファイル {0} の圧縮解除に失敗しました。詳しくはログを参照してください。</value>
+  </data>
   <data name="IMPORT_WIZARD_NETWORKING_INTRO" xml:space="preserve">
     <value>インポートする VM の仮想ネットワーク インターフェイスに、インポート先のプールまたはスタンドアロン サーバーのネットワークをマップします。</value>
   </data>
@@ -6757,6 +6763,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT" xml:space="preserve">
     <value>インポートしたテンプレートのストレージ リポジトリを選択してください。</value>
+  </data>
+  <data name="IMPORT_WIZARD_UNCOMPRESSING" xml:space="preserve">
+    <value>ファイル {0} の圧縮を解除しています...</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>インポートする VM の仮想ネットワーク インターフェイス(&amp;V):</value>
@@ -10588,9 +10597,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="RETRIEVING_WLB_DEFAULT_CONFIGURATION" xml:space="preserve">
     <value>WLB のデフォルト構成の取得</value>
-  </data>
-  <data name="RETRY" xml:space="preserve">
-    <value>再試行(&amp;R)</value>
   </data>
   <data name="RETRY_BUTTON_LABEL" xml:space="preserve">
     <value>再試行(&amp;R)</value>

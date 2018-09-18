@@ -493,7 +493,7 @@
     <value>3</value>
   </data>
   <data name="_labelError.Text" xml:space="preserve">
-    <value>无法解压缩文件。请参阅日志了解详细信息。</value>
+    <value>_labelError</value>
   </data>
   <data name="&gt;&gt;_labelError.Name" xml:space="preserve">
     <value>_labelError</value>
@@ -547,7 +547,7 @@
     <value>5</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
-    <value>正在解压文件，请稍候...</value>
+    <value>labelProgress</value>
   </data>
   <data name="&gt;&gt;labelProgress.Name" xml:space="preserve">
     <value>labelProgress</value>
