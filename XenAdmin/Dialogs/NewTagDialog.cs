@@ -38,6 +38,7 @@ using System.Drawing;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using System.Windows.Forms.VisualStyles;
+using CheckState = System.Windows.Forms.CheckState;
 
 
 namespace XenAdmin.Dialogs
@@ -214,9 +215,10 @@ namespace XenAdmin.Dialogs
         {
             // Used to use tagsListView.Items.ContainsKey(tag), but that uses the Name
             // instead of the Text, and is also not case sensitive, which caused a bug.
-            foreach (TagsListViewItem item in tagsListView.Items)
+            foreach (DataGridViewRow row in tagsDataGrid.Rows)
             {
-                if (item.Text == tag)
+                DataGridViewTextBoxCell cellTag = (DataGridViewTextBoxCell)row.Cells[1];
+                if (cellTag.Value.ToString() == tag)
                     return true;
             }
             return false;
@@ -227,21 +229,26 @@ namespace XenAdmin.Dialogs
             string text = this.textBox1.Text.Trim();
             if (!TagPresent(text))
             {
-                TagsListViewItem item = (TagsListViewItem)tagsListView.Items.Add(new TagsListViewItem(text));
-                item.Checked = CheckState.Checked;
-                item.Text = text;
+                var row = new DataGridViewRow();
+                var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Checked };
+                var cellTag = new DataGridViewTextBoxCell { Value = text };
+                row.Cells.AddRange(cellEnabled, cellTag);
+                tagsDataGrid.Rows.Add(row);
             }
             else
             {
-                foreach (TagsListViewItem item in tagsListView.Items)
+                foreach (DataGridViewRow row in tagsDataGrid.Rows)
                 {
-                    if (item.Text == text)
+                    var cellEnabled = (DataGridViewCheckBoxCell)row.Cells[0];
+                    var cellTag = (DataGridViewTextBoxCell)row.Cells[1];
+                    if (cellTag.Value.ToString() == text)
                     {
-                        item.Checked = CheckState.Checked;
+                        cellEnabled.Value = CheckState.Checked;
                         break;
                     }
                 }
             }
+
             this.textBox1.Text = "";
             addButton.Enabled = false;
             SortList();
@@ -255,26 +262,31 @@ namespace XenAdmin.Dialogs
 
             foreach (string tag in Tags.GetAllTags())
             {
-                TagsListViewItem item = (TagsListViewItem)tagsListView.Items.Add(new TagsListViewItem(tag));
+                var cellEnabled = new DataGridViewCheckBoxCell();
 
                 if (tags.Contains(tag))
                 {
-                    item.Checked = CheckState.Checked;
+                    cellEnabled.Value = CheckState.Checked;
                 }
                 else if (indeterminateTags.Contains(tag))
                 {
-                    item.Checked = CheckState.Indeterminate;
+                    cellEnabled.Value = CheckState.Indeterminate;
                 }
 
-                item.Text = tag;
+                var cellTag = new DataGridViewTextBoxCell { Value = tag };
+                var row = new DataGridViewRow();
+                row.Cells.AddRange(cellEnabled, cellTag);
+                tagsDataGrid.Rows.Add(row);
             }
             foreach (string tag in tags)   // We need to include these too, because they may have been recently added and not yet got into GetAllTags()
             {
                 if (!TagPresent(tag))
                 {
-                    TagsListViewItem item = (TagsListViewItem)tagsListView.Items.Add(new TagsListViewItem(tag));
-                    item.Checked = CheckState.Checked;
-                    item.Text = tag;
+                    var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Checked };
+                    var cellTag = new DataGridViewTextBoxCell { Value = tag };
+                    var row = new DataGridViewRow();
+                    row.Cells.AddRange(cellEnabled, cellTag);
+                    tagsDataGrid.Rows.Add(row);
                 }
             }
             SortList();
