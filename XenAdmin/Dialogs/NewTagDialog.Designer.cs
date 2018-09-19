@@ -166,6 +166,7 @@ namespace XenAdmin.Dialogs
             this.ColumnTags.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.ColumnTags, "ColumnTags");
             this.ColumnTags.Name = "ColumnTags";
+            this.ColumnTags.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // NewTagDialog
             // 
