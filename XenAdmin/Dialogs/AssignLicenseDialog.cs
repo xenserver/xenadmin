@@ -55,7 +55,7 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
             licenseServerNameTextBox.TextChanged += licenseServerPortTextBox_TextChanged;
             licenseServerPortTextBox.TextChanged += licenseServerNameTextBox_TextChanged;
-            SetOptionsForClearwaterAndNewer();
+            LoadLicenseOptions();
             UpdateButtonEnablement();
 
             // if all the hosts have the same license server details then populate the textboxes.
@@ -99,24 +99,38 @@ namespace XenAdmin.Dialogs
             return hosts;
         }
 
-
-        /// <summary>
-        /// Not all license types apply for post-clearwater hosts. Hide them to declutter the UI
-        /// </summary>
-        private void SetOptionsForClearwaterAndNewer()
+        private void LoadLicenseOptions()
         {
-            if (xos.TrueForAll(x => Helpers.CreedenceOrGreater(x.Connection)))
+            if (xos.TrueForAll(x => Helpers.NaplesOrGreater(x.Connection)))
             {
                 perSocketRadioButton.Visible = false;
                 xenDesktopEnterpriseRadioButton.Visible = false;
                 enterprisePerSocketRadioButton.Checked = true;
-                enterprisePerSocketRadioButton.Text = String.Format(Messages.ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED,
-                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
-                standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
-                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
-
+                enterprisePerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_ENTERPRISE_PERSOCKET, 
+                    xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets()))); 
+                enterprisePerUserRadioButton.Text = Messages.LICENSE_EDITION_ENTERPRISE_PERUSER;
+                desktopPlusRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_PLUS;
+                desktopRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP;
+                desktopCloudRadioButton.Visible = true;
+                desktopCloudRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_CLOUD;
+                standardPerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET,
+                    xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
+            }
+            else if (xos.TrueForAll(x => Helpers.CreedenceOrGreater(x.Connection)))
+            {
+                perSocketRadioButton.Visible = false;
+                xenDesktopEnterpriseRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Checked = true;
+                enterprisePerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY, 
+                    xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
+                enterprisePerUserRadioButton.Text = Messages.LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY;
+                desktopPlusRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_PLUS_LEGACY;
+                desktopRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_LEGACY;
                 desktopCloudRadioButton.Visible = xos.TrueForAll(x => Helpers.JuraOrGreater(x.Connection) || Helpers.HavanaOrGreater(x.Connection));
-            } 
+                desktopCloudRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_CLOUD_LEGACY;
+                standardPerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY,
+                    xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
+            }
             else
             {
                 enterprisePerSocketRadioButton.Visible = false;
@@ -126,8 +140,9 @@ namespace XenAdmin.Dialogs
                 desktopRadioButton.Visible = false;
                 desktopCloudRadioButton.Visible = false;
                 perSocketRadioButton.Checked = true;
-                perSocketRadioButton.Text = String.Format(Messages.PERSOCKET_LICENSES_X_REQUIRED,
-                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets())));
+                perSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_PERSOCKET_LEGACY,
+                    xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
+                xenDesktopEnterpriseRadioButton.Text = Messages.LICENSE_EDITION_XENDESKTOP_LEGACY;
             }
         }
 

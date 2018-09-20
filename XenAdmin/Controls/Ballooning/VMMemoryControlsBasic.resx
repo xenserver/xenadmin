@@ -322,7 +322,7 @@
     <value>5</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>Install [XenServer product] Tools now</value>
+    <value>Install [Citrix VM Tools] now</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>

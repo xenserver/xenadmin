@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -226,7 +226,7 @@
     <value>スケジュールされたディスクとメモリのスナップショットは、この の対象 VM が以下のすべての条件を満たす場合のみ作成されます。
 
 1. スケジュールされた時間に VM が実行中である、または一時停止している。
-2. VM に [XenServer product] Tools がインストールされている。
+2. VM に [Citrix VM Tools] がインストールされている。
 3. VM に専用の GPU が割り当てられていない。</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">

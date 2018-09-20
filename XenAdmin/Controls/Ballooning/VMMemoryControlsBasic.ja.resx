@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -322,7 +322,7 @@
     <value>8</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>[XenServer product] Tools を今すぐインストール</value>
+    <value>[Citrix VM Tools] を今すぐインストール</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>

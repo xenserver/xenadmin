@@ -132,7 +132,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>You can use this wizard to install software updates to your [XenServer] hosts.
+    <value>You can use this wizard to install software updates to your servers.
 </value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">

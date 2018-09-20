@@ -75,7 +75,7 @@ namespace XenAdmin.Actions.HostActions
         public static void SendActivationData(Dictionary<XenAPI.Host, LicenseDataStruct> hosts)
         {
             // Supply the state information required by the task.
-            SendLicenseDataHelper sendLicenseDataHelper = new SendLicenseDataHelper(hosts, "activation", XenAPI.Host.GetEditionText(XenAPI.Host.Edition.Free), true);
+            SendLicenseDataHelper sendLicenseDataHelper = new SendLicenseDataHelper(hosts, "activation", hosts.Keys.First().GetEditionText(XenAPI.Host.Edition.Free), true);
 
             // start a separate thread
             Thread thread = new Thread(new ThreadStart(sendLicenseDataHelper.ThreadProc));

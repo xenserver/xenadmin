@@ -48,9 +48,12 @@ rebranding_global()
 {
     sed -b -i -e "s#\[BRANDING_COMPANY_NAME_LEGAL\]#${BRANDING_COMPANY_NAME_LEGAL}#g" \
         -e "s#\[Citrix\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
+        -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
+        -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
         -e "s#\"\[BRANDING_COPYRIGHT\]\"#${BRANDING_COPYRIGHT}#g" \
         -e "s#\"\[BRANDING_COPYRIGHT_2\]\"#${BRANDING_COPYRIGHT_2}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
+        -e "s#\[Legacy XenServer product\]#${BRANDING_LEGACY_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
         -e "s#\[BRANDING_BUILD_NUMBER\]#${BUILD_NUMBER}#g" \

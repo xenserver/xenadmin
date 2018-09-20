@@ -1455,7 +1455,7 @@
     <value>{0} 上的本地存储</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>[XenServer product] Tools ISO</value>
+    <value>[Citrix VM Tools] ISO</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1482,7 +1482,7 @@
     <value>{0} 上的本地存储</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>[XenServer product] Tools</value>
+    <value>[Citrix VM Tools]</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>此模板可用于通过内置 Linux 发行版创建 Linux VM，以进行测试和演示。建议不要在生产环境中使用。</value>

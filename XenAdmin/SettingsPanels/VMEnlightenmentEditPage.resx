@@ -142,7 +142,7 @@
     <value>2</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>This VM can be configured to allow [XenServer] to monitor and control containers. Choose whether this feature should be enabled on this VM. </value>
+    <value>This VM can be configured to allow a server to monitor and control containers. Choose whether this feature should be enabled on this VM. </value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
