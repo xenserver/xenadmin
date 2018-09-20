@@ -165,11 +165,11 @@ namespace XenAdmin.Dialogs
 
         private void SortList()
         {
-            List<TagsListViewItem> listChecked = new List<TagsListViewItem>();
-            List<TagsListViewItem> listIndeterminate = new List<TagsListViewItem>();
-            List<TagsListViewItem> listNonChecked = new List<TagsListViewItem>();
+            var listChecked = new List<TagsDataGridViewRow>();
+            var listIndeterminate = new List<TagsDataGridViewRow>();
+            var listNonChecked = new List<TagsDataGridViewRow>();
 
-            foreach (TagsListViewItem item in tagsListView.Items)
+            foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
             {
                 if (item.Checked == CheckState.Checked)
                 {
@@ -187,27 +187,26 @@ namespace XenAdmin.Dialogs
             listNonChecked.Sort(Comparison());
             listChecked.Sort(Comparison());
             listIndeterminate.Sort(Comparison());
-            tagsListView.Items.Clear();
-            foreach (TagsListViewItem item in listChecked)
+            tagsDataGrid.Rows.Clear();
+            foreach (var item in listChecked)
             {
-                tagsListView.Items.Add(item);
+                tagsDataGrid.Rows.Add(item);
             }
-            foreach (TagsListViewItem item in listIndeterminate)
+            foreach (var item in listIndeterminate)
             {
-                tagsListView.Items.Add(item);
+                tagsDataGrid.Rows.Add(item);
             }
-            foreach (TagsListViewItem item in listNonChecked)
+            foreach (var item in listNonChecked)
             {
-                tagsListView.Items.Add(item);
+                tagsDataGrid.Rows.Add(item);
             }
         }
 
-        private Comparison<TagsListViewItem> Comparison()
+        private Comparison<TagsDataGridViewRow> Comparison()
         {
-            return delegate(TagsListViewItem x, TagsListViewItem y)
+            return delegate (TagsDataGridViewRow x, TagsDataGridViewRow y)
                        {
                            return x.Text.CompareTo(y.Text);
-
                        };
         }
 
