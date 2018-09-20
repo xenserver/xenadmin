@@ -29,9 +29,9 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewTagDialog));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.NewTagLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.addButton = new System.Windows.Forms.Button();
@@ -40,7 +40,9 @@ namespace XenAdmin.Dialogs
             this.tagsDataGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnTags = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGrid)).BeginInit();
+            this.mainTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // NewTagLabel
@@ -63,8 +65,8 @@ namespace XenAdmin.Dialogs
             // 
             // cancelButton
             // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.cancelButton, "cancelButton");
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -78,40 +80,41 @@ namespace XenAdmin.Dialogs
             // 
             // tagsDataGrid
             // 
+            resources.ApplyResources(this.tagsDataGrid, "tagsDataGrid");
             this.tagsDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.tagsDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tagsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tagsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tagsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tagsDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnEnabled,
             this.ColumnTags});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tagsDataGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            this.mainTableLayoutPanel.SetColumnSpan(this.tagsDataGrid, 3);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tagsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.tagsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            resources.ApplyResources(this.tagsDataGrid, "tagsDataGrid");
             this.tagsDataGrid.MultiSelect = true;
             this.tagsDataGrid.Name = "tagsDataGrid";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tagsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tagsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.tagsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsDataGrid_KeyDown);
             // 
             // ColumnEnabled
@@ -128,24 +131,31 @@ namespace XenAdmin.Dialogs
             this.ColumnTags.ReadOnly = true;
             this.ColumnTags.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // mainTableLayoutPanel
+            // 
+            resources.ApplyResources(this.mainTableLayoutPanel, "mainTableLayoutPanel");
+            this.mainTableLayoutPanel.Controls.Add(this.cancelButton, 2, 2);
+            this.mainTableLayoutPanel.Controls.Add(this.tagsDataGrid, 0, 1);
+            this.mainTableLayoutPanel.Controls.Add(this.textBox1, 1, 0);
+            this.mainTableLayoutPanel.Controls.Add(this.addButton, 2, 0);
+            this.mainTableLayoutPanel.Controls.Add(this.okButton, 1, 2);
+            this.mainTableLayoutPanel.Controls.Add(this.NewTagLabel, 0, 0);
+            this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
+            // 
             // NewTagDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
-            this.Controls.Add(this.tagsDataGrid);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.addButton);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.NewTagLabel);
+            this.Controls.Add(this.mainTableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "NewTagDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Activated += new System.EventHandler(this.NewTagDialog_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGrid)).EndInit();
+            this.mainTableLayoutPanel.ResumeLayout(false);
+            this.mainTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -159,5 +169,6 @@ namespace XenAdmin.Dialogs
         private Controls.DataGridViewEx.DataGridViewEx tagsDataGrid;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTags;
+        private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;
     }
 }
