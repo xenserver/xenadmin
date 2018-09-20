@@ -29,38 +29,54 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    public partial class BallooningDialogAdvanced : BallooningDialogBase
+    class PoolHasGFS2SRProblem : PoolProblem
     {
-        public BallooningDialogAdvanced(VM vm)
-            : base(vm, true)
+        public bool clusterEnabled;
+        public bool gfs2;
+        
+
+        public PoolHasGFS2SRProblem(Check check, Pool pool, bool clusteringEnabled, bool hasGfs2Sr)
+            : base(check, pool)
         {
-            InitializeComponent();
-            rubric.Text = is_a_template ? Messages.BALLOONING_RUBRIC_ADVANCED_TEMPLATE : Messages.BALLOONING_RUBRIC_ADVANCED;
-            memoryControls = memoryControlsAdvanced;
-            Initialize();
+            clusterEnabled = clusteringEnabled;
+            gfs2 = hasGfs2Sr;
         }
 
-        protected override void buttonOK_Click(object sender, EventArgs e)
+        public override string Description
         {
-            base.buttonOK_Click(sender, e);
+            get
+            {
+                if (clusterEnabled && gfs2)
+                {
+                    return string.Format(Messages.GFS2_UPDATE_UPGRADE_CLUSTER_SR_ERROR, Pool);
+                }
+
+                if (clusterEnabled)
+                {
+                    return string.Format(Messages.GFS2_UPDATE_UPGRADE_CLUSTER_ERROR, Pool);
+                }
+
+                if (gfs2)
+                {
+                    return string.Format(Messages.GFS2_UPDATE_UPGRADE_SR_ERROR, Pool);
+                }
+                return null;
+            }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        public override string HelpMessage
         {
-            Close();
+            get
+            {
+                return "";
+            }
         }
+
     }
 }
-

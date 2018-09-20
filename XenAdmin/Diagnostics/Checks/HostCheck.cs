@@ -29,39 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Commands;
-using XenAdmin.Diagnostics.Checks;
+using System.Diagnostics;
 using XenAPI;
-using XenAdmin.Actions;
-using XenAdmin.Actions.VMActions;
 
-
-namespace XenAdmin.Diagnostics.Problems.VMProblem
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class SuspendedVM : VMProblem
+    public abstract class HostCheck : Check
     {
-        public SuspendedVM(Check check,  VM vm)
-            : base(check,  vm) { }
+        private readonly Host _host;
 
-        public override string Description
+        protected HostCheck(Host host)
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_SUSPENDED_VM, VM.Name()); }
+            Debug.Assert(host != null);
+            _host = host;
         }
 
-        protected override AsyncAction CreateAction(out bool cancelled)
+        protected Host Host
         {
-            cancelled = false;
-            return new VMResumeAction(VM, VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
+            get { return _host; }
         }
 
-        public override AsyncAction UnwindChanges()
+        public sealed override IXenObject XenObject
         {
-            return new VMSuspendAction(VM);
+            get { return _host; }
         }
 
-        public override string HelpMessage
+        public override string SuccessfulCheckDescription 
         {
-            get { return Messages.SUSPEND_VM; }
+            get
+            {
+                return string.IsNullOrEmpty(Description)
+                    ? string.Empty
+                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Host.Name(), Description);
+            }
         }
     }
 }

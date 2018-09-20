@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string Description
         {
-            get { return String.Format(Messages.UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS, VM.Name()); }
+            get { return String.Format(Messages.UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS, ServerName, VM.Name()); }
         }
 
         public override string HelpMessage
@@ -82,7 +82,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             return action;
         }
 
-        public override AsyncAction UnwindChanges()
+        public override AsyncAction CreateUnwindChangesAction()
         {
             return null;
         }

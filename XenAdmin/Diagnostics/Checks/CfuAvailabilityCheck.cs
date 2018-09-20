@@ -29,31 +29,44 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.UtilityProblem;
 using XenAPI;
 
-
-namespace XenAdmin.Diagnostics.Problems.PoolProblem
+namespace XenAdmin.Diagnostics.Checks
 {
-    class NoDefaultSR : PoolProblem
+    class CfuAvailabilityCheck : Check
     {
-        private List<VM> vms;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public NoDefaultSR(Check check,Pool pool, List<VM> vms)
-            : base(check, pool)
+        protected override Problem RunCheck()
         {
-            this.vms = vms;
+            var action = Updates.CreateDownloadUpdatesXmlAction(Updates.CheckForUpdatesUrl);
+
+            try
+            {
+                action.RunExternal(action.Session);
+            }
+            catch
+            {
+                log.WarnFormat("Could not download check for update file.");
+            }
+
+            return action.Succeeded ? null : new CfuNotAvailableProblem(this);
         }
 
         public override string Description
         {
-            get { return Messages.UPDATES_WIZARD_NO_DEFAULT_SR; }
+            get
+            {
+                return Messages.CFU_STATUS_CHECK_DESCRIPTION;
+            }
         }
 
-        public override string HelpMessage
+        public override IXenObject XenObject
         {
-            get { return Messages.SELECT_DEFAULT_SR; }
+            get { return null; }
         }
     }
 }

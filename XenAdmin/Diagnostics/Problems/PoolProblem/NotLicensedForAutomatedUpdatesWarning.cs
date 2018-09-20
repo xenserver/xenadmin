@@ -29,33 +29,55 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
+using System;
+using System.Drawing;
+using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 
-namespace XenAdmin.Diagnostics.Problems.SRProblem
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class NotEnoughSpaceToSuspend : SRProblem
-    {
-        private readonly long RequiredSpace;
-        private readonly List<VM> Vms;
 
-        public NotEnoughSpaceToSuspend(Check check, SR sr, long requiredSpace, List<VM> vms)
-            : base(check, sr)
+    public class NotLicensedForAutomatedUpdatesWarning : Warning
+    {
+        private readonly Pool pool;
+
+        public NotLicensedForAutomatedUpdatesWarning(Check check, Pool pool)
+            : base(check)
         {
-            RequiredSpace = requiredSpace;
-            Vms = vms;
+            this.pool = pool;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
         }
 
         public override string Description
         {
-            get { return Messages.UPDATES_WIZARD_NOT_ENOUGH_SPACE; }
+            get
+            {
+                return string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
+            }
+        }
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO)))
+            {
+                dlg.ShowDialog();
+            }
+
+            cancelled = true;
+            return null;
         }
 
         public override string HelpMessage
         {
-            get { return Messages.SHUTDOWN_VM; }
+            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
         }
     }
 }

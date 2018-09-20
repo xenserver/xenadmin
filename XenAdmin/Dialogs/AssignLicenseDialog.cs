@@ -126,7 +126,7 @@ namespace XenAdmin.Dialogs
                 enterprisePerUserRadioButton.Text = Messages.LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY;
                 desktopPlusRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_PLUS_LEGACY;
                 desktopRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_LEGACY;
-                desktopCloudRadioButton.Visible = xos.TrueForAll(x => Helpers.JuraOrGreater(x.Connection));
+                desktopCloudRadioButton.Visible = xos.TrueForAll(x => Helpers.JuraOrGreater(x.Connection) || Helpers.HavanaOrGreater(x.Connection));
                 desktopCloudRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_CLOUD_LEGACY;
                 standardPerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY,
                     xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));

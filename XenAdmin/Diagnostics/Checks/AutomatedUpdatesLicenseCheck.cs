@@ -29,24 +29,45 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
 using XenAPI;
 
-
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class RebootHostPlanAction : RebootPlanAction
+    class AutomatedUpdatesLicenseCheck : HostPostLivenessCheck
     {
-        public RebootHostPlanAction(Host host)
-            : base(host, string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
+        private readonly Pool _pool;
+
+        public AutomatedUpdatesLicenseCheck(Host host)
+            : base(host)
         {
-            Visible = false;
+            _pool = Helpers.GetPoolOfOne(Host.Connection);
         }
 
-        protected override void RunWithSession(ref Session session)
+        protected override Problem RunHostCheck()
         {
-            Visible = true;
-            RebootHost(ref session);
+            if (_pool != null && _pool.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)))
+                return new NotLicensedForAutomatedUpdatesWarning(this, _pool);
+
+            return null;
+        }
+
+        public override string Description
+        {
+            get { return Messages.AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION; }
+        }
+
+        public override string SuccessfulCheckDescription
+        {
+            get
+            {
+                return _pool == null
+                    ? string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description)
+                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _pool.Name(), Description);
+            }
         }
     }
 }

@@ -3616,6 +3616,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; failed to join the cluster..
+        /// </summary>
+        public static string Message_body_cluster_host_enable_failed {
+            get {
+                return ResourceManager.GetString("Message.body-cluster_host_enable_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Server &apos;{0}&apos; has been fenced..
+        /// </summary>
+        public static string Message_body_cluster_host_fencing {
+            get {
+                return ResourceManager.GetString("Message.body-cluster_host_fencing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The external authentication service used within &apos;{0}&apos; is not consistent..
         /// </summary>
         public static string Message_body_extauth_in_pool_is_non_homogeneous {
@@ -4406,6 +4424,24 @@ namespace XenAdmin {
         public static string Message_name_bond_status_changed {
             get {
                 return ResourceManager.GetString("Message.name-bond_status_changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server failed to join the cluster.
+        /// </summary>
+        public static string Message_name_cluster_host_enable_failed {
+            get {
+                return ResourceManager.GetString("Message.name-cluster_host_enable_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server has been fenced.
+        /// </summary>
+        public static string Message_name_cluster_host_fencing {
+            get {
+                return ResourceManager.GetString("Message.name-cluster_host_fencing", resourceCulture);
             }
         }
         

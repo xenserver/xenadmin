@@ -30,18 +30,20 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
-using XenAdmin.Wizards.PatchingWizard;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class HostNeedsRebootCheck : Check
+    class HostNeedsRebootCheck : HostPostLivenessCheck
     {
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
         private readonly List<after_apply_guidance> patchGuidance;
         private readonly List<update_after_apply_guidance> updateGuidance;
+        private readonly List<XenServerPatch> restartHostPatches;
 
         private string successfulCheckDescription;
 
@@ -59,21 +61,29 @@ namespace XenAdmin.Diagnostics.Checks
             patchGuidance = guidance;
         }
 
-        protected override Problem RunCheck()
+        public HostNeedsRebootCheck(Host host, List<XenServerPatch> restartHostPatches)
+            : base(host)
         {
-            if (!Host.IsLive())
-                return new HostNotLiveWarning(this, Host);
+            this.restartHostPatches = restartHostPatches;
+        }
+
+
+        protected override Problem RunHostCheck()
+        {
+            var updateSequenceIsLivePatchable = restartHostPatches != null && restartHostPatches.Count > 0 && restartHostPatches.All(p => p.ContainsLivepatch);
 
             // when livepatching is available, no restart is expected
             if (livePatchCodesByHost != null && livePatchCodesByHost.ContainsKey(Host.uuid) &&
-                livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete)
+                livePatchCodesByHost[Host.uuid] == livepatch_status.ok_livepatch_complete
+                || updateSequenceIsLivePatchable)
             {
                 successfulCheckDescription = string.Format(Messages.UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH, Host);
                 return null;
             }
-            
+
             if ((updateGuidance != null && updateGuidance.Contains(update_after_apply_guidance.restartHost))
-                || (patchGuidance != null && patchGuidance.Contains(after_apply_guidance.restartHost)))
+                || (patchGuidance != null && patchGuidance.Contains(after_apply_guidance.restartHost))
+                || (restartHostPatches != null && restartHostPatches.Count > 0))
             {
                  return new HostNeedsReboot(this, Host);
             }
