@@ -214,10 +214,9 @@ namespace XenAdmin.Dialogs
         {
             // Used to use tagsListView.Items.ContainsKey(tag), but that uses the Name
             // instead of the Text, and is also not case sensitive, which caused a bug.
-            foreach (DataGridViewRow row in tagsDataGrid.Rows)
+            foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
             {
-                DataGridViewTextBoxCell cellTag = (DataGridViewTextBoxCell)row.Cells[1];
-                if (cellTag.Value.ToString() == tag)
+                if (item.Text == tag)
                     return true;
             }
             return false;
@@ -228,21 +227,18 @@ namespace XenAdmin.Dialogs
             string text = this.textBox1.Text.Trim();
             if (!TagPresent(text))
             {
-                var row = new TagsDataGridViewRow();
-                var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Checked };
-                var cellTag = new DataGridViewTextBoxCell { Value = text };
-                row.Cells.AddRange(cellEnabled, cellTag);
-                tagsDataGrid.Rows.Add(row);
+                var item = new TagsDataGridViewRow();
+                tagsDataGrid.Rows.Add(item);
+                item.Checked = CheckState.Checked;
+                item.Text = text;
             }
             else
             {
-                foreach (DataGridViewRow row in tagsDataGrid.Rows)
+                foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
                 {
-                    var cellEnabled = (DataGridViewCheckBoxCell)row.Cells[0];
-                    var cellTag = (DataGridViewTextBoxCell)row.Cells[1];
-                    if (cellTag.Value.ToString() == text)
+                    if (item.Text == text)
                     {
-                        cellEnabled.Value = CheckState.Checked;
+                        item.Checked = CheckState.Checked;
                         break;
                     }
                 }
@@ -261,31 +257,28 @@ namespace XenAdmin.Dialogs
 
             foreach (string tag in Tags.GetAllTags())
             {
-                var cellEnabled = new DataGridViewCheckBoxCell();
+                var item = new TagsDataGridViewRow();
+                tagsDataGrid.Rows.Add(item);
 
                 if (tags.Contains(tag))
                 {
-                    cellEnabled.Value = CheckState.Checked;
+                    item.Checked = CheckState.Checked;
                 }
                 else if (indeterminateTags.Contains(tag))
                 {
-                    cellEnabled.Value = CheckState.Indeterminate;
+                    item.Checked = CheckState.Indeterminate;
                 }
 
-                var cellTag = new DataGridViewTextBoxCell { Value = tag };
-                var row = new TagsDataGridViewRow();
-                row.Cells.AddRange(cellEnabled, cellTag);
-                tagsDataGrid.Rows.Add(row);
+                item.Text = tag;
             }
             foreach (string tag in tags)   // We need to include these too, because they may have been recently added and not yet got into GetAllTags()
             {
                 if (!TagPresent(tag))
                 {
-                    var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Checked };
-                    var cellTag = new DataGridViewTextBoxCell { Value = tag };
-                    var row = new TagsDataGridViewRow();
-                    row.Cells.AddRange(cellEnabled, cellTag);
-                    tagsDataGrid.Rows.Add(row);
+                    var item = new TagsDataGridViewRow();
+                    tagsDataGrid.Rows.Add(item);
+                    item.Checked = CheckState.Checked;
+                    item.Text = tag;
                 }
             }
             SortList();
@@ -494,6 +487,13 @@ namespace XenAdmin.Dialogs
 
         private class TagsDataGridViewRow : DataGridViewRow
         {
+            public TagsDataGridViewRow()
+            {
+                var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Unchecked };
+                var cellTag = new DataGridViewTextBoxCell();
+                Cells.AddRange(cellEnabled, cellTag);
+            }
+
             public void Toggle()
             {
                 Toggle(Checked);
