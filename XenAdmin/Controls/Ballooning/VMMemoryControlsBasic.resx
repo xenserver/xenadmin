@@ -322,7 +322,7 @@
     <value>5</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>Install [XenServer product] Tools now</value>
+    <value>Install [Citrix VM Tools] now</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>
@@ -377,9 +377,6 @@
   </data>
   <data name="radioDynamic.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>Install [Citrix VM Tools] now</value>
   </data>
   <data name="radioDynamic.Text" xml:space="preserve">
     <value>&amp;Automatically allocate memory within this range:</value>

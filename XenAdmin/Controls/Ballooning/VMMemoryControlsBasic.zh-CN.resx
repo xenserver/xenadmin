@@ -322,7 +322,7 @@
     <value>8</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>立即安装 [XenServer product] Tools</value>
+    <value>立即安装 [Citrix VM Tools]</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>
@@ -377,9 +377,6 @@
   </data>
   <data name="radioDynamic.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>立即安装 [Citrix VM Tools]</value>
   </data>
   <data name="radioDynamic.Text" xml:space="preserve">
     <value>自动在此范围内分配内存(&amp;A):</value>
