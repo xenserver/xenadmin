@@ -305,63 +305,9 @@ namespace XenAdmin.Dialogs
             AddTag();
         }
 
-        private void renameButton_Click(object sender, EventArgs e)
-        {
-            if (tagsListView.SelectedItems.Count == 1)
-            {
-                tagsListView.SelectedItems[0].BeginEdit();
-            }
-        }
-
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            if (tagsListView.SelectedItems.Count == 1)
-            {
-                string tag = tagsListView.SelectedItems[0].Text;
-
-                DialogResult result;
-                using (var  tbd = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_TAG, tag), Messages.CONFIRM_DELETE_TAG_TITLE),
-                    new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
-                    ThreeButtonDialog.ButtonCancel))
-                {
-                    result = tbd.ShowDialog(this);
-                }
-
-                if (result != DialogResult.OK)
-                    return;
-
-                // Remove the tag from the tagsListView
-                tagsListView.Items.Remove(tagsListView.SelectedItems[0]);
-                setButtonEnablement();
-
-                // Delete the tag from all resources on all servers
-                DelegatedAsyncAction action = new DelegatedAsyncAction(null,
-                    String.Format(Messages.DELETE_ALL_TAG, tag),
-                    String.Format(Messages.DELETING_ALL_TAG, tag),
-                    String.Format(Messages.DELETED_ALL_TAG, tag),
-                    delegate(Session session)
-                    {
-                        Tags.RemoveTagGlobally(tag);
-                    });
-                action.RunAsync();
-            }
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             addButton.Enabled = (this.textBox1.Text.Trim() != string.Empty);
-        }
-
-        private void tagsListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            setButtonEnablement();
-        }
-
-        private void setButtonEnablement()
-        {
-            renameButton.Enabled = tagsListView.SelectedItems.Count == 1;
-            deleteButton.Enabled = tagsListView.SelectedItems.Count == 1;
         }
 
         private void tagsListView_MouseClick(object sender, MouseEventArgs e)

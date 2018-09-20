@@ -41,8 +41,6 @@ namespace XenAdmin.Dialogs
             this.tagsListView = new System.Windows.Forms.ListView();
             this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.stateImageList = new System.Windows.Forms.ImageList(this.components);
-            this.renameButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.tagsDataGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnTags = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +89,6 @@ namespace XenAdmin.Dialogs
             this.tagsListView.StateImageList = this.stateImageList;
             this.tagsListView.UseCompatibleStateImageBehavior = false;
             this.tagsListView.View = System.Windows.Forms.View.Details;
-            this.tagsListView.SelectedIndexChanged += new System.EventHandler(this.tagsListView_SelectedIndexChanged);
             this.tagsListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsListView_KeyDown);
             this.tagsListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tagsListView_MouseClick);
             // 
@@ -104,20 +101,6 @@ namespace XenAdmin.Dialogs
             this.stateImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             resources.ApplyResources(this.stateImageList, "stateImageList");
             this.stateImageList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // renameButton
-            // 
-            resources.ApplyResources(this.renameButton, "renameButton");
-            this.renameButton.Name = "renameButton";
-            this.renameButton.UseVisualStyleBackColor = true;
-            this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
-            // 
-            // deleteButton
-            // 
-            resources.ApplyResources(this.deleteButton, "deleteButton");
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // tagsDataGrid
             // 
@@ -178,8 +161,6 @@ namespace XenAdmin.Dialogs
             this.CancelButton = this.cancelButton;
             this.Controls.Add(this.tagsDataGrid);
             this.Controls.Add(this.tagsListView);
-            this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.renameButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
@@ -204,8 +185,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.ListView tagsListView;
         private System.Windows.Forms.ColumnHeader columnHeader;
-        private System.Windows.Forms.Button renameButton;
-        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.ImageList stateImageList;
         private Controls.DataGridViewEx.DataGridViewEx tagsDataGrid;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
