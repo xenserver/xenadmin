@@ -82,75 +82,7 @@ namespace XenAdmin.Dialogs
         private void InitDialog()
         {
             InitializeComponent();
-
-            // CheckBoxes is false as we draw them ourselves for tri-state.
-            tagsListView.CheckBoxes = false;
-            tagsListView.HideSelection = false;
-            tagsListView.MultiSelect = true;
-            tagsListView.LabelEdit = true;
-            tagsListView.AfterLabelEdit += tagsListView_AfterLabelEdit;
-            tagsListView.Activation = ItemActivation.TwoClick;
             textBox1.KeyPress += textBox1_KeyPress;
-
-            // populate state image list for tri-state checkboxes
-            using (Graphics listViewGraphics = Graphics.FromHwnd(tagsListView.Handle))
-            {
-                stateImageList.ImageSize = CheckBoxRenderer.GetGlyphSize(listViewGraphics, CheckBoxState.CheckedNormal);
-            }
-
-            foreach (CheckBoxState state in new CheckBoxState[] { CheckBoxState.UncheckedNormal, CheckBoxState.CheckedNormal, CheckBoxState.MixedNormal })
-            {
-                Bitmap bitmap = new Bitmap(stateImageList.ImageSize.Width, stateImageList.ImageSize.Height);
-
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    g.Clear(Color.Transparent);
-                    CheckBoxRenderer.DrawCheckBox(g, new Point(0, 0), state);
-                }
-                stateImageList.Images.Add(bitmap);
-            }
-        }
-
-        private void tagsListView_AfterLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            okButton.Enabled = true;
-
-            TagsListViewItem itemRenaming = (TagsListViewItem)tagsListView.Items[e.Item];
-            if (itemRenaming != null)
-            {
-                string oldName = itemRenaming.Text;
-                string newName = (e.Label == null ? oldName : e.Label.Trim());   // null indicates no change
-
-                if (newName == "")
-                {
-                    e.CancelEdit = true;
-                    return;
-                }
-
-                foreach (TagsListViewItem currentItem in tagsListView.Items)
-                {
-                    if (currentItem != itemRenaming && currentItem.Text == newName)
-                    {
-                        e.CancelEdit = true;
-                        return;
-                    }
-                }
-
-                // Rename the tag in the list view ourselves (necessary if we've trimmed whitespace from the ends of the name)
-                itemRenaming.Text = newName;
-                e.CancelEdit = true;
-
-                // Rename the tag on all the servers
-                DelegatedAsyncAction action = new DelegatedAsyncAction(null,
-                    String.Format(Messages.RENAME_TAG, oldName),
-                    String.Format(Messages.RENAMING_TAG, oldName),
-                    String.Format(Messages.RENAMED_TAG, oldName),
-                    delegate(Session session)
-                    {
-                        Tags.RenameTagGlobally(oldName, newName);
-                    });
-                action.RunAsync();
-            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -252,7 +184,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
-            tagsListView.Items.Clear();
+            tagsDataGrid.Rows.Clear();
 
             foreach (string tag in Tags.GetAllTags())
             {
@@ -310,62 +242,16 @@ namespace XenAdmin.Dialogs
             addButton.Enabled = (this.textBox1.Text.Trim() != string.Empty);
         }
 
-        private void tagsListView_MouseClick(object sender, MouseEventArgs e)
-        {
-            TagsListViewItem item = (TagsListViewItem)tagsListView.GetItemAt(e.X, e.Y);
-
-            if (item != null)
-            {
-                Rectangle iconRect = tagsListView.GetItemRect(item.Index, ItemBoundsPortion.Icon);
-                Rectangle checkRect = new Rectangle(0, iconRect.Top, iconRect.Left, iconRect.Height);
-
-                // if there's a selection and the clicked item is in the selection, then toggle the
-                // entire selection
-
-                if (checkRect.Contains(e.Location))
-                {
-                    if (tagsListView.SelectedItems.Count > 0 && tagsListView.SelectedItems.Contains(item))
-                    {
-                        ToggleItems(tagsListView.SelectedItems);
-                    }
-                    else
-                    {
-                        item.Toggle();
-                    }
-                }
-            }
-        }
-
-        private void tagsListView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
-            {
-                ToggleItems(tagsListView.SelectedItems);
-            }
-        }
-
         private void tagsDataGrid_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
             {
-                ToggleItemsNew(tagsDataGrid.SelectedRows);
+                ToggleItems(tagsDataGrid.SelectedRows);
                 e.Handled = true;
             }
         }
 
         private void ToggleItems(System.Collections.IList items)
-        {
-            if(items.Count < 1)
-                return;
-
-            CheckState firstCheckState = ((TagsListViewItem)items[0]).Checked;
-            foreach (TagsListViewItem item in items)
-            {
-                item.Toggle(firstCheckState);
-            }
-        }
-
-        private void ToggleItemsNew(System.Collections.IList items)
         {
             if (items.Count < 1)
                 return;
@@ -374,59 +260,6 @@ namespace XenAdmin.Dialogs
             foreach (TagsDataGridViewRow item in items)
             {
                 item.Toggle(firstCheckState);
-            }
-        }
-
-        private class TagsListViewItem : ListViewItem
-        {
-            public TagsListViewItem(string text)
-                : base(text)
-            {
-                Checked = CheckState.Unchecked;
-            }
-
-            public void Toggle()
-            {
-                Toggle(Checked);
-            }
-
-            public void Toggle(CheckState stateToToggleFrom)
-            {
-                StateImageIndex = Convert.ToInt32(!Convert.ToBoolean(stateToToggleFrom));
-            }
-
-            public new CheckState Checked
-            {
-                get
-                {
-                    if (StateImageIndex == 0)
-                    {
-                        return CheckState.Unchecked;
-                    }
-                    else if (StateImageIndex == 1)
-                    {
-                        return CheckState.Checked;
-                    }
-                    else
-                    {
-                        return CheckState.Indeterminate;
-                    }
-                }
-                set
-                {
-                    if (value == CheckState.Unchecked)
-                    {
-                        StateImageIndex = 0;
-                    }
-                    else if (value == CheckState.Checked)
-                    {
-                        StateImageIndex = 1;
-                    }
-                    else
-                    {
-                        StateImageIndex = 2;
-                    }
-                }
             }
         }
 

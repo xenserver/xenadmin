@@ -147,7 +147,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;NewTagLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="textBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -181,7 +181,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="addButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -211,7 +211,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;addButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -265,45 +265,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="columnHeader.Text" xml:space="preserve">
-    <value>Tags</value>
-  </data>
-  <data name="columnHeader.Width" type="System.Int32, mscorlib">
-    <value>245</value>
-  </data>
-  <data name="tagsListView.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="tagsListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 63</value>
-  </data>
-  <data name="tagsListView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="tagsListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 298</value>
-  </data>
-  <metadata name="stateImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="stateImageList.ImageSize" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="tagsListView.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tagsListView.Name" xml:space="preserve">
-    <value>tagsListView</value>
-  </data>
-  <data name="&gt;&gt;tagsListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tagsListView.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tagsListView.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="ColumnEnabled.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -325,10 +286,10 @@
     <value>Segoe UI, 10pt</value>
   </data>
   <data name="tagsDataGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 154</value>
+    <value>13, 56</value>
   </data>
   <data name="tagsDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 150</value>
+    <value>259, 305</value>
   </data>
   <data name="tagsDataGrid.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -368,18 +329,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Edit Tags</value>
-  </data>
-  <data name="&gt;&gt;columnHeader.Name" xml:space="preserve">
-    <value>columnHeader</value>
-  </data>
-  <data name="&gt;&gt;columnHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;stateImageList.Name" xml:space="preserve">
-    <value>stateImageList</value>
-  </data>
-  <data name="&gt;&gt;stateImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnEnabled.Name" xml:space="preserve">
     <value>ColumnEnabled</value>
