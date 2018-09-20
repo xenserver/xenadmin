@@ -229,7 +229,7 @@ namespace XenAdmin.Dialogs
             string text = this.textBox1.Text.Trim();
             if (!TagPresent(text))
             {
-                var row = new DataGridViewRow();
+                var row = new TagsDataGridViewRow();
                 var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Checked };
                 var cellTag = new DataGridViewTextBoxCell { Value = text };
                 row.Cells.AddRange(cellEnabled, cellTag);
@@ -274,7 +274,7 @@ namespace XenAdmin.Dialogs
                 }
 
                 var cellTag = new DataGridViewTextBoxCell { Value = tag };
-                var row = new DataGridViewRow();
+                var row = new TagsDataGridViewRow();
                 row.Cells.AddRange(cellEnabled, cellTag);
                 tagsDataGrid.Rows.Add(row);
             }
@@ -284,7 +284,7 @@ namespace XenAdmin.Dialogs
                 {
                     var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Checked };
                     var cellTag = new DataGridViewTextBoxCell { Value = tag };
-                    var row = new DataGridViewRow();
+                    var row = new TagsDataGridViewRow();
                     row.Cells.AddRange(cellEnabled, cellTag);
                     tagsDataGrid.Rows.Add(row);
                 }
@@ -407,6 +407,15 @@ namespace XenAdmin.Dialogs
             }
         }
 
+        private void tagsDataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
+            {
+                ToggleItemsNew(tagsDataGrid.SelectedRows);
+                e.Handled = true;
+            }
+        }
+
         private void ToggleItems(System.Collections.IList items)
         {
             if(items.Count < 1)
@@ -414,6 +423,18 @@ namespace XenAdmin.Dialogs
 
             CheckState firstCheckState = ((TagsListViewItem)items[0]).Checked;
             foreach (TagsListViewItem item in items)
+            {
+                item.Toggle(firstCheckState);
+            }
+        }
+
+        private void ToggleItemsNew(System.Collections.IList items)
+        {
+            if (items.Count < 1)
+                return;
+
+            CheckState firstCheckState = ((TagsDataGridViewRow) items[0]).Checked;
+            foreach (TagsDataGridViewRow item in items)
             {
                 item.Toggle(firstCheckState);
             }
@@ -469,6 +490,59 @@ namespace XenAdmin.Dialogs
                         StateImageIndex = 2;
                     }
                 }
+            }
+        }
+
+        private class TagsDataGridViewRow : DataGridViewRow
+        {
+            public void Toggle()
+            {
+                Toggle(Checked);
+            }
+
+            public void Toggle(CheckState stateToToggleFrom)
+            {
+                Checked = Opposite(stateToToggleFrom);
+            }
+
+            public CheckState Checked
+            {
+                get
+                {
+                    var value = CellEnabled.Value;
+                    if (value == null)
+                        return CheckState.Unchecked;
+
+                    if (value is CheckState)
+                        return (CheckState)value;
+
+                    if (value is bool)
+                        return (bool)value ? CheckState.Checked : CheckState.Unchecked;
+
+                    return CheckState.Indeterminate;
+                }
+                set { CellEnabled.Value = value; }
+            }
+
+            public string Text
+            {
+                get { return CellTag.Value.ToString(); }
+                set { CellTag.Value = value; }
+            }
+
+            private DataGridViewCheckBoxCell CellEnabled
+            {
+                get { return (DataGridViewCheckBoxCell)Cells[0]; }
+            }
+
+            private DataGridViewTextBoxCell CellTag
+            {
+                get { return (DataGridViewTextBoxCell)Cells[1]; }
+            }
+
+            private CheckState Opposite(CheckState state)
+            {
+                return state == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
             }
         }
     }

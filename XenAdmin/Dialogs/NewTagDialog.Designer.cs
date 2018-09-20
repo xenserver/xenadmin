@@ -155,6 +155,7 @@ namespace XenAdmin.Dialogs
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.tagsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.tagsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsDataGrid_KeyDown);
             // 
             // ColumnEnabled
             // 
