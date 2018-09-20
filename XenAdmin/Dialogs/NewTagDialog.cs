@@ -38,7 +38,6 @@ using System.Drawing;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using System.Windows.Forms.VisualStyles;
-using CheckState = System.Windows.Forms.CheckState;
 
 
 namespace XenAdmin.Dialogs
