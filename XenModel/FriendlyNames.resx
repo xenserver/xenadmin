@@ -990,7 +990,7 @@
     <value>A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
-    <value>Server '{0}' is taking too long to respond to the HA networking heartbeat and may fence.</value>
+    <value>Server '{0}' is taking too long to respond to the HA networking heartbeat and may become fenced.</value>
   </data>
   <data name="Message.body-ha_host_failed" xml:space="preserve">
     <value>Server '{0}' has failed.</value>
@@ -1017,13 +1017,13 @@
     <value>Virtual machine '{0}', which is protected under HA, has failed to start.</value>
   </data>
   <data name="Message.body-ha_statefile_approaching_timeout" xml:space="preserve">
-    <value>Server '{0}' is taking too long to write to the heartbeat storage and may fence.</value>
+    <value>Server '{0}' is taking too long to write to the heartbeat storage and may become fenced.</value>
   </data>
   <data name="Message.body-ha_statefile_lost" xml:space="preserve">
     <value>The servers in pool '{0}' cannot access the heartbeat SR. HA protection is severely impaired without it.</value>
   </data>
   <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>Server '{0}' is taking too long to respond and may fence.</value>
+    <value>Server '{0}' is taking too long to respond and may become fenced.</value>
   </data>
   <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
     <value>The clock on server '{0}' is not synchronized with the other servers in pool '{1}'.  This can lead to errors when migrating virtual machines, and also affect any performance data collected in the future.</value>

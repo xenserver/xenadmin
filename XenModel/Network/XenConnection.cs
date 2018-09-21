@@ -899,7 +899,7 @@ namespace XenAdmin.Network
                 }
                 else if (w.Status == WebExceptionStatus.ReceiveFailure)
                 {
-                    return string.Format(Messages.CONNECT_NO_XAPI_FAILURE, this.Hostname);
+                    return string.Format(Messages.ERROR_NO_XENSERVER, this.Hostname);
                 }
                 else if (w.Status == WebExceptionStatus.SecureChannelFailure)
                 {
