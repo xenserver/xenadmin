@@ -29,40 +29,32 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-using XenAdmin.Dialogs;
-
-namespace XenAdmin.Plugins
+namespace XenAdmin.TabPages
 {
-    public partial class TabPageCredentialsDialog : XenDialogBase
+    public class NotificationsBasePage: UserControl
     {
-        public TabPageCredentialsDialog()
+        protected virtual void RefreshPage()
+        { }
+
+        protected virtual void RegisterEventHandlers()
+        { }
+
+        protected virtual void DeregisterEventHandlers()
+        { }
+
+        public void ShowPage()
         {
-            InitializeComponent();
+            Visible = true;
+            RefreshPage();
+            RegisterEventHandlers();
         }
 
-        public string ServiceName
+        public void HidePage()
         {
-            set { TopLabel.Text = string.Format(TopLabel.Text, value); }
-        }
-
-        public bool PersistCredentials
-        {
-            get { return PersistCredentialsCheckBox.Checked; }
-            set { PersistCredentialsCheckBox.Checked = value; }
-        }
-
-        public string Username
-        {
-            get { return UsernameTextBox.Text; }
-        }
-
-        public string Password
-        {
-            get { return PasswordTextBox.Text; }
+            Visible = false;
+            DeregisterEventHandlers();
         }
     }
 }

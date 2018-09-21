@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -3445,6 +3445,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rebooting VMs.
+        /// </summary>
+        public static string ACTION_VMS_REBOOTING_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VMS_REBOOTING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resuming VMs.
         /// </summary>
         public static string ACTION_VMS_RESUMING_ON_TITLE {
@@ -3468,6 +3477,15 @@ namespace XenAdmin {
         public static string ACTION_VMS_STARTING_ON_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_VMS_STARTING_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspending VMs.
+        /// </summary>
+        public static string ACTION_VMS_SUSPENDING_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VMS_SUSPENDING_TITLE", resourceCulture);
             }
         }
         
@@ -20702,15 +20720,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading &apos;{0}&apos;....
-        /// </summary>
-        public static string LOADING {
-            get {
-                return ResourceManager.GetString("LOADING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Local.
         /// </summary>
         public static string LOCAL {
@@ -33303,24 +33312,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Suspended specified VMs.
-        /// </summary>
-        public static string SUSPENDED_SPECIFIED_VMS {
-            get {
-                return ResourceManager.GetString("SUSPENDED_SPECIFIED_VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Suspending specified VMs.
-        /// </summary>
-        public static string SUSPENDING_SPECIFIED_VMS {
-            get {
-                return ResourceManager.GetString("SUSPENDING_SPECIFIED_VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Suspending VM {0} out of {1}.
         /// </summary>
         public static string SUSPENDING_VM_OUT_OF {
@@ -37870,6 +37861,51 @@ namespace XenAdmin {
         public static string WARNING_DELETE_VD_MULTIPLE {
             get {
                 return ResourceManager.GetString("WARNING_DELETE_VD_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find &apos;{0}&apos;..
+        /// </summary>
+        public static string WEB_BROWSER_FAILED {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find &apos;{0}&apos;. Waiting for &apos;{1}&apos;....
+        /// </summary>
+        public static string WEB_BROWSER_FAILED_RETRYING {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_FAILED_RETRYING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading &apos;{0}&apos;....
+        /// </summary>
+        public static string WEB_BROWSER_LOADING {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_LOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading &apos;{0}&apos; ({1}%)....
+        /// </summary>
+        public static string WEB_BROWSER_LOADING_PERCENT {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_LOADING_PERCENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for &apos;{0}&apos;....
+        /// </summary>
+        public static string WEB_BROWSER_WAITING {
+            get {
+                return ResourceManager.GetString("WEB_BROWSER_WAITING", resourceCulture);
             }
         }
         

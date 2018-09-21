@@ -451,6 +451,9 @@
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\NotificationsBasePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="TabPages\PvsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3176,7 +3179,6 @@
     <Compile Include="WinformsXenAdminConfigProvider.cs" />
     <Compile Include="Actions\GUIActions\Wlb\ExportReportAction.cs" />
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />
-    <Compile Include="Branding.cs" />
     <Compile Include="Commands\ActivateVBDCommand.cs" />
     <Compile Include="Commands\AddHostCommand.cs">
     </Compile>
