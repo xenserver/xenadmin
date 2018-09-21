@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyNames {
@@ -3663,7 +3663,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond to the HA networking heartbeat and may fence..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond to the HA networking heartbeat and may become fenced..
         /// </summary>
         public static string Message_body_ha_heartbeat_approaching_timeout {
             get {
@@ -3744,7 +3744,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to write to the heartbeat storage and may fence..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to write to the heartbeat storage and may become fenced..
         /// </summary>
         public static string Message_body_ha_statefile_approaching_timeout {
             get {
@@ -3762,7 +3762,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond and may fence..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond and may become fenced..
         /// </summary>
         public static string Message_body_ha_xapi_healthcheck_approaching_timeout {
             get {

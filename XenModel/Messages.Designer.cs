@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -8288,15 +8288,6 @@ namespace XenAdmin {
         public static string CONNECT {
             get {
                 return ResourceManager.GetString("CONNECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not find server running on {0}..
-        /// </summary>
-        public static string CONNECT_NO_XAPI_FAILURE {
-            get {
-                return ResourceManager.GetString("CONNECT_NO_XAPI_FAILURE", resourceCulture);
             }
         }
         
@@ -23900,7 +23891,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-
         ///   Looks up a localized string similar to You must shut down and then restart the VM to finish the installation of the new DVD drive.
         ///Once the VM has restarted click the Install [Citrix VM Tools] menu item once again..
         /// </summary>
@@ -26313,7 +26303,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server cannot create any more disks for this VM.
+        ///   Looks up a localized string similar to The server cannot create any more disks for this VM.
         /// </summary>
         public static string NO_MORE_USERDEVICES {
             get {
@@ -29224,7 +29214,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in server. Remove StorageLink SRs before upgrading..
+        ///   Looks up a localized string similar to The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading..
         /// </summary>
         public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
             get {
@@ -32410,7 +32400,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check the proxy settings and that server is configured correctly on &apos;{0}&apos; and try again..
+        ///   Looks up a localized string similar to Check the proxy settings and that the server is configured correctly on &apos;{0}&apos; and try again..
         /// </summary>
         public static string SOLUTION_CHECK_XENSERVER_WITH_PROXY {
             get {
@@ -35816,7 +35806,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Memory Control.  Dynamic Memory Control allows server to adjust the memory of live virtual machines, and respond dynamically to changing demands on the server..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Memory Control.  Dynamic Memory Control allows the server to adjust the memory of live virtual machines, and respond dynamically to changing demands on the server..
         /// </summary>
         public static string UPSELL_BLURB_DMC {
             get {
@@ -35834,7 +35824,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink™ Technology. StorageLink allows server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
+        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink™ Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
         /// </summary>
         public static string UPSELL_BLURB_ENHANCEDSR {
             get {
@@ -37537,7 +37527,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
+        ///   Looks up a localized string similar to The server can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
         /// </summary>
         public static string VMSS_EMAIL_PAGE_TEXT {
             get {
@@ -38364,7 +38354,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred when WLB tried to establish a session with server..
+        ///   Looks up a localized string similar to An error occurred when WLB tried to establish a session with the server..
         /// </summary>
         public static string WLB_ERROR_4001 {
             get {
@@ -38373,7 +38363,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not log into server. It could be due to invalid credentials..
+        ///   Looks up a localized string similar to WLB could not log into the server. It could be due to invalid credentials..
         /// </summary>
         public static string WLB_ERROR_4002 {
             get {
@@ -38382,7 +38372,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB cannot connect to server. It could be the server being offline or an incorrect TCP/IP address..
+        ///   Looks up a localized string similar to WLB cannot connect to the server. It could be due to the server being offline or an incorrect TCP/IP address..
         /// </summary>
         public static string WLB_ERROR_4003 {
             get {
@@ -38391,7 +38381,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received a null argument from server, which is not allowed..
+        ///   Looks up a localized string similar to WLB received a null argument from the server..
         /// </summary>
         public static string WLB_ERROR_4004 {
             get {
@@ -38409,7 +38399,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an invalid argument from server..
+        ///   Looks up a localized string similar to WLB received an invalid argument from the server..
         /// </summary>
         public static string WLB_ERROR_4007 {
             get {
@@ -38436,7 +38426,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an invalid operation from server..
+        ///   Looks up a localized string similar to WLB received an invalid operation from the server..
         /// </summary>
         public static string WLB_ERROR_4010 {
             get {
@@ -38445,7 +38435,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an out of range argument from server..
+        ///   Looks up a localized string similar to WLB received an out of range argument from the server..
         /// </summary>
         public static string WLB_ERROR_4011 {
             get {
@@ -38499,7 +38489,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB cannot find a host that has required storage repositories to place a VM. .
+        ///   Looks up a localized string similar to WLB cannot find a host that has the required storage repositories for placing a VM. .
         /// </summary>
         public static string WLB_ERROR_4017 {
             get {
@@ -38508,7 +38498,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB cannot find required free CPUs to place a VM..
+        ///   Looks up a localized string similar to WLB cannot find the required free CPUs for placing a VM..
         /// </summary>
         public static string WLB_ERROR_4018 {
             get {
@@ -38517,7 +38507,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB cannot find required free memory to place a VM..
+        ///   Looks up a localized string similar to WLB cannot find the required free memory for placing a VM..
         /// </summary>
         public static string WLB_ERROR_4019 {
             get {
@@ -38535,7 +38525,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB could not connect to server because the supplied credentials were invalid..
+        ///   Looks up a localized string similar to WLB could not connect to the server because the supplied credentials were invalid..
         /// </summary>
         public static string WLB_ERROR_4021 {
             get {
@@ -38544,7 +38534,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB unable to evacuate an explicitly excluded host..
+        ///   Looks up a localized string similar to WLB is unable to evacuate an explicitly excluded host..
         /// </summary>
         public static string WLB_ERROR_4022 {
             get {
@@ -38562,7 +38552,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server cannot connect to the WLB Server with the supplied WLB Server credentials..
+        ///   Looks up a localized string similar to The server cannot connect to the WLB Server with the supplied WLB Server credentials..
         /// </summary>
         public static string WLB_ERROR_5 {
             get {
@@ -38571,7 +38561,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The user WLB uses to connect to server either doesn&apos;t have sufficient privileges or doesn&apos;t have access to server. Please re-initialize WLB with an valid user..
+        ///   Looks up a localized string similar to The user WLB uses to connect to the server has either insufficient privileges or no access to the server. Please re-initialize WLB with a valid user..
         /// </summary>
         public static string WLB_ERROR_6 {
             get {
