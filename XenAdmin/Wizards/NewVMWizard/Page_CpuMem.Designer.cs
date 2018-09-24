@@ -47,6 +47,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.labelDynMin = new System.Windows.Forms.Label();
             this.labelDynMax = new System.Windows.Forms.Label();
             this.labelStatMax = new System.Windows.Forms.Label();
+            this.labelDynMinInfo = new System.Windows.Forms.Label();
+            this.labelDynMaxInfo = new System.Windows.Forms.Label();
+            this.labelStatMaxInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ErrorPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -60,7 +63,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
-            this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.label5, 3);
             this.label5.Name = "label5";
             // 
             // pictureBox1
@@ -120,6 +123,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.Controls.Add(this.labelDynMin, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelDynMax, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.labelStatMax, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMinInfo, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMaxInfo, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatMaxInfo, 2, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // comboBoxInitialVCPUs
@@ -142,6 +148,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             // comboBoxTopology
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
             this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
             this.comboBoxTopology.FormattingEnabled = true;
@@ -175,6 +182,21 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.labelStatMax, "labelStatMax");
             this.labelStatMax.Name = "labelStatMax";
+            // 
+            // labelDynMinInfo
+            // 
+            resources.ApplyResources(this.labelDynMinInfo, "labelDynMinInfo");
+            this.labelDynMinInfo.Name = "labelDynMinInfo";
+            // 
+            // labelDynMaxInfo
+            // 
+            resources.ApplyResources(this.labelDynMaxInfo, "labelDynMaxInfo");
+            this.labelDynMaxInfo.Name = "labelDynMaxInfo";
+            // 
+            // labelStatMaxInfo
+            // 
+            resources.ApplyResources(this.labelStatMaxInfo, "labelStatMaxInfo");
+            this.labelStatMaxInfo.Name = "labelStatMaxInfo";
             // 
             // Page_CpuMem
             // 
@@ -212,5 +234,8 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.Label labelDynMin;
         private System.Windows.Forms.Label labelDynMax;
         private System.Windows.Forms.Label labelStatMax;
+        private System.Windows.Forms.Label labelDynMinInfo;
+        private System.Windows.Forms.Label labelDynMaxInfo;
+        private System.Windows.Forms.Label labelStatMaxInfo;
     }
 }
