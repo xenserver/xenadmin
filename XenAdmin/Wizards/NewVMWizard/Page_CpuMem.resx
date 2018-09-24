@@ -160,7 +160,7 @@
     <value>True</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="comboBoxInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 116</value>
@@ -235,7 +235,7 @@
     <value>3, 0, 3, 6</value>
   </data>
   <data name="labelInvalidVCPUWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 13</value>
+    <value>91, 13</value>
   </data>
   <data name="labelInvalidVCPUWarning.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -513,6 +513,96 @@
   <data name="&gt;&gt;labelStatMax.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="labelDynMinInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelDynMinInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDynMinInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 166</value>
+  </data>
+  <data name="labelDynMinInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 13</value>
+  </data>
+  <data name="labelDynMinInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="labelDynMinInfo.Text" xml:space="preserve">
+    <value>Minimum maximum placeholder.</value>
+  </data>
+  <data name="&gt;&gt;labelDynMinInfo.Name" xml:space="preserve">
+    <value>labelDynMinInfo</value>
+  </data>
+  <data name="&gt;&gt;labelDynMinInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDynMinInfo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelDynMinInfo.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="labelDynMaxInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelDynMaxInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDynMaxInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 192</value>
+  </data>
+  <data name="labelDynMaxInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 13</value>
+  </data>
+  <data name="labelDynMaxInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="labelDynMaxInfo.Text" xml:space="preserve">
+    <value>Minimum maximum placeholder.</value>
+  </data>
+  <data name="&gt;&gt;labelDynMaxInfo.Name" xml:space="preserve">
+    <value>labelDynMaxInfo</value>
+  </data>
+  <data name="&gt;&gt;labelDynMaxInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDynMaxInfo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelDynMaxInfo.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="labelStatMaxInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelStatMaxInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelStatMaxInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 218</value>
+  </data>
+  <data name="labelStatMaxInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 13</value>
+  </data>
+  <data name="labelStatMaxInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="labelStatMaxInfo.Text" xml:space="preserve">
+    <value>Minimum maximum placeholder.</value>
+  </data>
+  <data name="&gt;&gt;labelStatMaxInfo.Name" xml:space="preserve">
+    <value>labelStatMaxInfo</value>
+  </data>
+  <data name="&gt;&gt;labelStatMaxInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelStatMaxInfo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelStatMaxInfo.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -541,7 +631,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="spinnerStatMax" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMin" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMin" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMax" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStatMax" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="spinnerStatMax" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelVCPUs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMax" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTopology" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxVCPUs" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="spinnerDynMin" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMin" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMax" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStatMax" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMinInfo" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMaxInfo" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelStatMaxInfo" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
