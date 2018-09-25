@@ -156,12 +156,6 @@
   <data name="LOG_FILENAME" xml:space="preserve">
     <value>[XenCenter].log</value>
   </data>
-  <data name="MAINWINDOW_HELP_PARAMS" xml:space="preserve">
-    <value>-mapid {0} {1}</value>
-  </data>
-  <data name="MAINWINDOW_HELP_PATH" xml:space="preserve">
-    <value>Help\XenCenter.chm</value>
-  </data>
   <data name="MAINWINDOW_HOME_PATH" xml:space="preserve">
     <value>Home.htm</value>
   </data>
@@ -200,5 +194,8 @@
   </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
+  </data>
+  <data name="HELP_URL" xml:space="preserve">
+    <value>http://docs.citrix.com/{0}/xencenter/current-release/{1}.html</value>
   </data>
 </root>
