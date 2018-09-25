@@ -263,7 +263,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private class TagsDataGridViewRow : DataGridViewRow
+        public class TagsDataGridViewRow : DataGridViewRow
         {
             public TagsDataGridViewRow()
             {
