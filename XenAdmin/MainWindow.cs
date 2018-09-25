@@ -2635,7 +2635,7 @@ namespace XenAdmin
 
         public void ShowHelpTopic(string topicID)
         {
-            var helpTopicUrl = string.Format(InvisibleMessages.HELP_URL, topicID ?? "index");
+            var helpTopicUrl = string.Format(InvisibleMessages.HELP_URL, InvisibleMessages.LOCALE.ToLowerInvariant(), topicID ?? "index");
             if (!string.IsNullOrEmpty(helpTopicUrl))
                 Program.OpenURL(helpTopicUrl);
 
