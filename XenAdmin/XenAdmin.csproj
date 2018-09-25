@@ -2749,12 +2749,6 @@
     <Compile Include="Commands\DestroyHostCommand.cs" />
     <Compile Include="Commands\MigrateVirtualDiskCommand.cs" />
     <Compile Include="Commands\UpdateVIFCommand.cs" />
-    <Content Include="Help\XenCenter.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\XenCenter.ja.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Actions\OVFActions\ApplianceAction.cs" />
     <Compile Include="Actions\OVFActions\ExportApplianceAction.cs" />
     <Compile Include="Actions\GUIActions\GeneralEditPageAction.cs" />
@@ -4185,9 +4179,6 @@
     </Compile>
     <Compile Include="XenSearch\CustomFieldWrapper.cs" />
     <Compile Include="XenSearch\TreeSearch.cs" />
-    <Content Include="Help\XenCenter.zh-CN.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Images\attach_virtualstorage_32.png" />
     <None Include="Images\backup_restore_32.png" />
     <None Include="Images\copy_16.png" />
