@@ -556,7 +556,7 @@
     <value>1</value>
   </data>
   <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
-    <value>This pool is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomLeft</value>

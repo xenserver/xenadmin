@@ -178,13 +178,13 @@
     <value>10, 3, 3, 3</value>
   </data>
   <data name="CPSOptimizationRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+    <value>170, 17</value>
   </data>
   <data name="CPSOptimizationRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="CPSOptimizationRadioButton.Text" xml:space="preserve">
-    <value>Optimize for [Citrix] &amp;XenApp</value>
+    <value>Optimize for [Citrix] &amp;Virtual Apps</value>
   </data>
   <data name="&gt;&gt;CPSOptimizationRadioButton.Name" xml:space="preserve">
     <value>CPSOptimizationRadioButton</value>
