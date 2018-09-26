@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	Fri Dec  8 13:23:08 2017
-+++ XenCenter.l10n.wxs	Fri Dec  8 13:23:08 2017
+--- XenCenter.wxs	2018-09-26 08:58:12.136785600 +0100
++++ XenCenter.l10n.wxs	2018-09-26 08:58:39.980298600 +0100
 @@ -40,7 +40,7 @@
  	<?define HiddenFeatures="[BRANDING_HIDDEN_FEATURES]"?>
  	<?define AdditionalFeatures="[BRANDING_ADDITIONAL_FEATURES]"?>
@@ -135,7 +135,7 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -173,12 +175,34 @@
+@@ -173,9 +175,29 @@
                          </Directory>
                          <?else?>
                          <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
@@ -143,13 +143,6 @@
 +                            <File Id="Readme" Source="..\Branding\WixInstaller\!(loc.Readme)" />
                          </Component>
                          <?endif?>
-                         <Directory Id="Help" Name="Help">
-                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
-                                 <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
-+                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].ja.chm" />  
-+                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].zh-CN.chm" />
-+                            </Component>
-+                        </Directory>
 +                        <Directory Id="ja" Name="ja">
 +                            <Component Id="JaResources" Guid="[BRANDING_JA_RESOURCES_GUID]">
 +                                <File Id="JaResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
@@ -168,10 +161,12 @@
 +                                <File Id="ScMicRepVwrPrcObjResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
 +                                <File Id="ScXOResourcesDLL" Source="..\XenOvfApi\bin\Release\zh-CN\XenOvf.resources.dll" />
 +                                <File Id="ScXOTResourcesDLL" Source="..\XenOvfTransport\bin\Release\zh-CN\XenOvfTransport.resources.dll" />
-                             </Component>
-                         </Directory>
++                            </Component>
++                        </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -223,7 +247,7 @@
+                             <Component Id="ExternalToolsComponent" Guid="[BRANDING_EXTERNAL_TOOLS_GUID]">
+                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
+@@ -219,7 +241,7 @@
  								  Vital="no"
  								  Name="XenServerHealthCheck"
  								  DisplayName="[Citrix XenServer] Health Check Service"
@@ -180,10 +175,10 @@
  								  Start="auto"
  								  Account="LocalSystem"
  								  ErrorControl="normal"
-@@ -278,13 +302,15 @@
+@@ -273,13 +295,15 @@
+ 	
          <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
-             <ComponentRef Id="HelpFiles" />
 -            <ComponentRef Id="ReportViewer" />
 +            <ComponentRef Id="JaResources" />
 +            <ComponentRef Id="ScResources" />
@@ -197,7 +192,7 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-@@ -292,7 +318,7 @@
+@@ -287,7 +311,7 @@
              <ComponentRef Id="ProgramFilesShortcut" />
    
             <?if "$(env.Branding)"="XenCenter"?>		
@@ -206,7 +201,7 @@
  					<ComponentRef Id="XenServerHealthCheck" /> 
  				</Feature>
  	       <?else ?>
-@@ -311,7 +337,7 @@
+@@ -306,7 +330,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />

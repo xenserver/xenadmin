@@ -176,11 +176,6 @@
                             <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
                         </Component>
                         <?endif?>
-                        <Directory Id="Help" Name="Help">
-                            <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
-                            </Component>
-                        </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                             <Component Id="ExternalToolsComponent" Guid="[BRANDING_EXTERNAL_TOOLS_GUID]">
                                 <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
@@ -278,7 +273,6 @@
 	
         <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
-            <ComponentRef Id="HelpFiles" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="UpdateFiles" />
             <?if "$(env.Branding)"="XenCenter"?>
