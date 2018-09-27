@@ -88,24 +88,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var hostObj = GetResolvedHost();
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, hostObj.Name()));
 
-            int retries = 0;
-            while (!Host.get_enabled(session, HostXenRef.opaque_ref))
-            {
-                retries++;
-                Thread.Sleep(5000);
-
-                try
-                {
-                    Host.enable(session, HostXenRef.opaque_ref);
-                }
-                catch (Exception e)
-                {
-                    if (retries > 60)
-                        throw;
-
-                    log.Debug(string.Format("Cannot enable host {0}. Retrying in 5 sec.", HostXenRef.opaque_ref), e);
-                }
-            }
+            WaitForHostToBecomeEnabled(session, true);
 
             if (enableOnly || vmrefs.Count == 0)
                 return;
@@ -159,6 +142,41 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             log.DebugFormat("Cleaning up evacuated VMs from Host '{0}'", hostObj.Name());
             Host.ClearEvacuatedVMs(session, HostXenRef);
+        }
+
+        protected void WaitForHostToBecomeEnabled(Session session, bool attemptEnable)
+        {
+            int retries = 0;
+            while (!Host.get_enabled(session, HostXenRef.opaque_ref))
+            {
+                retries++;
+                var isLastTry = retries > 60;
+
+                Thread.Sleep(5000);
+
+                if (!attemptEnable)
+                {
+                    if (isLastTry)
+                    {
+                        log.Debug(string.Format("Timed out waiting for host {0} to become enabled.", HostXenRef.opaque_ref));
+                        break;
+                    }
+
+                    continue;
+                }
+
+                try
+                {
+                    Host.enable(session, HostXenRef.opaque_ref);
+                }
+                catch (Exception e)
+                {
+                    if (isLastTry)
+                        throw;
+
+                    log.Debug(string.Format("Cannot enable host {0}. Retrying in 5 sec.", HostXenRef.opaque_ref), e);
+                }
+            }
         }
     }
 }
