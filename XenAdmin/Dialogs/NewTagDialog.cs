@@ -46,7 +46,8 @@ namespace XenAdmin.Dialogs
 
         public NewTagDialog(List<string> tags, List<string> indeterminateTags)
         {
-            InitDialog();
+            InitializeComponent();
+            textBox1.KeyPress += textBox1_KeyPress;
             LoadTags(tags, indeterminateTags);
         }
 
@@ -72,12 +73,6 @@ namespace XenAdmin.Dialogs
                 }
             }
             return items;
-        }
-
-        private void InitDialog()
-        {
-            InitializeComponent();
-            textBox1.KeyPress += textBox1_KeyPress;
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
