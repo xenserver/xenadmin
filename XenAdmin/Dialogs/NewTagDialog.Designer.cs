@@ -116,6 +116,8 @@ namespace XenAdmin.Dialogs
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.tagsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.tagsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGrid_CellContentClick);
+            this.tagsDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGrid_CellContentClick);
             this.tagsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsDataGrid_KeyDown);
             // 
             // ColumnEnabled
@@ -123,6 +125,7 @@ namespace XenAdmin.Dialogs
             this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
             this.ColumnEnabled.Name = "ColumnEnabled";
+            this.ColumnEnabled.ThreeState = true;
             // 
             // ColumnTags
             // 
@@ -168,8 +171,8 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
         private Controls.DataGridViewEx.DataGridViewEx tagsDataGrid;
+        private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTags;
-        private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;
     }
 }

@@ -256,7 +256,7 @@ namespace XenAdmin.Dialogs
         {
             public TagsDataGridViewRow()
             {
-                var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Unchecked };
+                var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Unchecked, ThreeState = true};
                 var cellTag = new DataGridViewTextBoxCell();
                 Cells.AddRange(cellEnabled, cellTag);
             }
@@ -310,6 +310,22 @@ namespace XenAdmin.Dialogs
             {
                 return state == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
             }
+        }
+
+        private void tagsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var col = tagsDataGrid.Columns[e.ColumnIndex] as DataGridViewCheckBoxColumn;
+
+            if (col == null || !col.ThreeState)
+                return;
+
+            var state = (CheckState)tagsDataGrid[e.ColumnIndex, e.RowIndex].EditedFormattedValue;
+            if (state != CheckState.Indeterminate)
+                return;
+
+            tagsDataGrid[e.ColumnIndex, e.RowIndex].Value = CheckState.Unchecked;
+            tagsDataGrid.RefreshEdit();
+            tagsDataGrid.NotifyCurrentCellDirty(true);
         }
     }
 }
