@@ -47,7 +47,6 @@ namespace XenAdmin.Dialogs
         public NewTagDialog(List<string> tags, List<string> indeterminateTags)
         {
             InitializeComponent();
-            textBox1.KeyPress += textBox1_KeyPress;
             LoadTags(tags, indeterminateTags);
         }
 
