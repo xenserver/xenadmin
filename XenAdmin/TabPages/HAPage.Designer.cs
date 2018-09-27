@@ -41,7 +41,7 @@ namespace XenAdmin.TabPages
             this.labelStatus = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonConfigure = new System.Windows.Forms.Button();
-            this.buttonEnableDisableHa = new System.Windows.Forms.Button();
+            this.buttonDisableHa = new System.Windows.Forms.Button();
             this.tableLatencies = new System.Windows.Forms.TableLayoutPanel();
             this.customListPanel = new XenAdmin.Controls.CustomListPanel();
             this.TitleLabel = new System.Windows.Forms.Label();
@@ -89,7 +89,6 @@ namespace XenAdmin.TabPages
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLatencies, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.customListPanel, 0, 2);
-            this.tableLayoutPanel1.MaximumSize = new System.Drawing.Size(900, 500);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tableLayoutPanel2
@@ -115,8 +114,7 @@ namespace XenAdmin.TabPages
             // 
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Controls.Add(this.buttonConfigure);
-            this.flowLayoutPanel1.Controls.Add(this.buttonEnableDisableHa);
-            this.flowLayoutPanel1.MaximumSize = new System.Drawing.Size(900, 100);
+            this.flowLayoutPanel1.Controls.Add(this.buttonDisableHa);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // buttonConfigure
@@ -126,12 +124,12 @@ namespace XenAdmin.TabPages
             this.buttonConfigure.UseVisualStyleBackColor = true;
             this.buttonConfigure.Click += new System.EventHandler(this.buttonConfigure_Click);
             // 
-            // buttonEnableDisableHa
+            // buttonDisableHa
             // 
-            resources.ApplyResources(this.buttonEnableDisableHa, "buttonEnableDisableHa");
-            this.buttonEnableDisableHa.Name = "buttonEnableDisableHa";
-            this.buttonEnableDisableHa.UseVisualStyleBackColor = true;
-            this.buttonEnableDisableHa.Click += new System.EventHandler(this.buttonEnableDisableHa_Click);
+            resources.ApplyResources(this.buttonDisableHa, "buttonDisableHa");
+            this.buttonDisableHa.Name = "buttonDisableHa";
+            this.buttonDisableHa.UseVisualStyleBackColor = true;
+            this.buttonDisableHa.Click += new System.EventHandler(this.buttonDisableHa_Click);
             // 
             // tableLatencies
             // 
@@ -165,6 +163,7 @@ namespace XenAdmin.TabPages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarningTriangle)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -180,7 +179,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.PictureBox pictureBoxWarningTriangle;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button buttonEnableDisableHa;
+        private System.Windows.Forms.Button buttonDisableHa;
         private System.Windows.Forms.Button buttonConfigure;
         private System.Windows.Forms.TableLayoutPanel tableLatencies;
         private XenAdmin.Controls.CustomListPanel customListPanel;

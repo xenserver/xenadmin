@@ -201,14 +201,11 @@
   <data name="labelProtectionLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 225</value>
   </data>
-  <data name="labelProtectionLevel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="labelProtectionLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
   </data>
   <data name="labelProtectionLevel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="labelProtectionLevel.Text" xml:space="preserve">
     <value>&amp;HA restart priority:</value>
@@ -256,7 +253,7 @@
     <value>144, 22</value>
   </data>
   <data name="m_dropDownButtonRestartPriority.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="m_dropDownButtonRestartPriority.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -285,14 +282,11 @@
   <data name="labelStartOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 252</value>
   </data>
-  <data name="labelStartOrder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="labelStartOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
   </data>
   <data name="labelStartOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="labelStartOrder.Text" xml:space="preserve">
     <value>&amp;Start order:</value>
@@ -319,7 +313,7 @@
     <value>80, 20</value>
   </data>
   <data name="nudOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="nudOrder.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -348,14 +342,11 @@
   <data name="labelStartDelay.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 278</value>
   </data>
-  <data name="labelStartDelay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="labelStartDelay.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 13</value>
   </data>
   <data name="labelStartDelay.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="labelStartDelay.Text" xml:space="preserve">
     <value>&amp;Attempt to start next VM after:</value>
@@ -382,7 +373,7 @@
     <value>80, 20</value>
   </data>
   <data name="nudStartDelay.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="nudStartDelay.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -411,14 +402,11 @@
   <data name="labelStartDelayUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 278</value>
   </data>
-  <data name="labelStartDelayUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="labelStartDelayUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
   </data>
   <data name="labelStartDelayUnits.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="labelStartDelayUnits.Text" xml:space="preserve">
     <value>seconds</value>
@@ -445,13 +433,13 @@
     <value>3, 318</value>
   </data>
   <data name="linkLabelTellMeMore.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 20, 3, 6</value>
+    <value>3, 20, 3, 0</value>
   </data>
   <data name="linkLabelTellMeMore.Size" type="System.Drawing.Size, System.Drawing">
     <value>249, 13</value>
   </data>
   <data name="linkLabelTellMeMore.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="linkLabelTellMeMore.Text" xml:space="preserve">
     <value>How can I increase the maximum failover capacity?</value>
@@ -475,7 +463,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="haNtolIndicator.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="haNtolIndicator.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 218</value>
@@ -487,7 +475,7 @@
     <value>324, 126</value>
   </data>
   <data name="haNtolIndicator.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;haNtolIndicator.Name" xml:space="preserve">
     <value>haNtolIndicator</value>
@@ -500,84 +488,6 @@
   </data>
   <data name="&gt;&gt;haNtolIndicator.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <metadata name="colImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colVm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colRestartPriority.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colStartOrder.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colDelay.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colAgile.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewVms.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dataGridViewVms.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
-  </data>
-  <data name="dataGridViewVms.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 6</value>
-  </data>
-  <data name="dataGridViewVms.Size" type="System.Drawing.Size, System.Drawing">
-    <value>625, 184</value>
-  </data>
-  <data name="dataGridViewVms.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewVms.Name" xml:space="preserve">
-    <value>dataGridViewVms</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewVms.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewVms.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewVms.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>631, 347</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBoxStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHaStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="5" /&gt;&lt;Control Name="labelProtectionLevel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="m_dropDownButtonRestartPriority" Row="2" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="labelStartOrder" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="nudOrder" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelStartDelay" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="nudStartDelay" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelStartDelayUnits" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelTellMeMore" Row="5" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="haNtolIndicator" Row="2" RowSpan="4" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewVms" Row="1" RowSpan="1" Column="0" ColumnSpan="6" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="colImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -633,6 +543,66 @@
   <data name="colAgile.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
+  <data name="dataGridViewVms.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dataGridViewVms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 28</value>
+  </data>
+  <data name="dataGridViewVms.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 6</value>
+  </data>
+  <data name="dataGridViewVms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>625, 184</value>
+  </data>
+  <data name="dataGridViewVms.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewVms.Name" xml:space="preserve">
+    <value>dataGridViewVms</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewVms.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewVms.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewVms.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>631, 347</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBoxStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHaStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="5" /&gt;&lt;Control Name="labelProtectionLevel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="m_dropDownButtonRestartPriority" Row="2" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="labelStartOrder" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="nudOrder" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelStartDelay" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="nudStartDelay" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelStartDelayUnits" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelTellMeMore" Row="5" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="haNtolIndicator" Row="2" RowSpan="4" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewVms" Row="1" RowSpan="1" Column="0" ColumnSpan="6" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -665,9 +635,6 @@
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 3, 3, 3</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>631, 347</value>
