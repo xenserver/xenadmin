@@ -133,7 +133,7 @@
     <value>https://cis.citrix.com/legal/</value>
   </data>
   <data name="HOMEPAGE" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver</value>
+    <value>https://www.citrix.com/products/citrix-hypervisor</value>
   </data>
   <data name="HOMEPAGE_FILENAME" xml:space="preserve">
     <value>HomePage.zh-CN.mht</value>
