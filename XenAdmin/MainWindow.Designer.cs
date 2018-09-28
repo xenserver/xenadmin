@@ -1,13 +1,3 @@
-using XenAdmin.Alerts;
-using XenAdmin.Network;
-using XenAdmin.Commands;
-using XenAdmin.Controls;
-using XenAdmin.Plugins;
-using XenAPI;
-using System;
-using System.Windows.Forms;
-using System.ComponentModel;
-
 namespace XenAdmin
 {
     partial class MainWindow
@@ -32,7 +22,7 @@ namespace XenAdmin
 
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
-            Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
+            XenAdmin.Alerts.Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             XenAdmin.Core.Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
@@ -333,6 +323,7 @@ namespace XenAdmin
             this.navigationPane.Name = "navigationPane";
             this.navigationPane.NavigationModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NavigationPane.NavigationMode>(this.navigationPane_NavigationModeChanged);
             this.navigationPane.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubModeItem>(this.navigationPane_NotificationsSubModeChanged);
+            this.navigationPane.DragDropCommandActivated += new System.Action<string>(this.navigationPane_DragDropCommandActivated);
             this.navigationPane.TreeViewSelectionChanged += new System.Action(this.navigationPane_TreeViewSelectionChanged);
             this.navigationPane.TreeNodeBeforeSelected += new System.Action(this.navigationPane_TreeNodeBeforeSelected);
             this.navigationPane.TreeNodeClicked += new System.Action(this.navigationPane_TreeNodeClicked);
@@ -344,32 +335,35 @@ namespace XenAdmin
             // TheTabControl
             // 
             resources.ApplyResources(this.TheTabControl, "TheTabControl");
-            this.TheTabControl.Controls.Add(this.TabPageHome);
-            this.TheTabControl.Controls.Add(this.TabPageGeneral);
-            this.TheTabControl.Controls.Add(this.TabPageBallooning);
-            this.TheTabControl.Controls.Add(this.TabPageConsole);
-            this.TheTabControl.Controls.Add(this.TabPageCvmConsole);
-            this.TheTabControl.Controls.Add(this.TabPageStorage);
-            this.TheTabControl.Controls.Add(this.TabPagePhysicalStorage);
-            this.TheTabControl.Controls.Add(this.TabPageSR);
-            this.TheTabControl.Controls.Add(this.TabPageNetwork);
-            this.TheTabControl.Controls.Add(this.TabPageNICs);
-            this.TheTabControl.Controls.Add(this.TabPagePeformance);
-            this.TheTabControl.Controls.Add(this.TabPageHA);
-            this.TheTabControl.Controls.Add(this.TabPageHAUpsell);
-            this.TheTabControl.Controls.Add(this.TabPageSnapshots);
-            this.TheTabControl.Controls.Add(this.TabPageWLB);
-            this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
-            this.TheTabControl.Controls.Add(this.TabPageAD);
-            this.TheTabControl.Controls.Add(this.TabPageADUpsell);
-            this.TheTabControl.Controls.Add(this.TabPageGPU);
-            this.TheTabControl.Controls.Add(this.TabPagePvs);
-            this.TheTabControl.Controls.Add(this.TabPageSearch);
-            this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
-            this.TheTabControl.Controls.Add(this.TabPageDockerDetails);
-            this.TheTabControl.Controls.Add(this.TabPageUSB);
+            this.TheTabControl.Controls.AddRange(new System.Windows.Forms.TabPage [] {
+            this.TabPageHome,
+            this.TabPageGeneral,
+            this.TabPageBallooning,
+            this.TabPageConsole,
+            this.TabPageCvmConsole,
+            this.TabPageStorage,
+            this.TabPagePhysicalStorage,
+            this.TabPageSR,
+            this.TabPageNetwork,
+            this.TabPageNICs,
+            this.TabPagePeformance,
+            this.TabPageHA,
+            this.TabPageHAUpsell,
+            this.TabPageSnapshots,
+            this.TabPageWLB,
+            this.TabPageWLBUpsell,
+            this.TabPageAD,
+            this.TabPageADUpsell,
+            this.TabPageGPU,
+            this.TabPagePvs,
+            this.TabPageSearch,
+            this.TabPageDockerProcess,
+            this.TabPageDockerDetails,
+            this.TabPageUSB});
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
+            this.TheTabControl.Deselected += new System.Windows.Forms.TabControlEventHandler(this.TheTabControl_Deselected);
+            this.TheTabControl.SelectedIndexChanged += new System.EventHandler(this.TheTabControl_SelectedIndexChanged);
             // 
             // TabPageHome
             // 
@@ -1405,13 +1399,13 @@ namespace XenAdmin
             // 
             // enablePVSReadcachingToolStripMenuItem
             // 
-            this.enablePVSReadcachingToolStripMenuItem.Command = new EnablePvsReadCachingCommand();
+            this.enablePVSReadcachingToolStripMenuItem.Command = new XenAdmin.Commands.EnablePvsReadCachingCommand();
             this.enablePVSReadcachingToolStripMenuItem.Name = "enablePVSReadcachingToolStripMenuItem";
             resources.ApplyResources(this.enablePVSReadcachingToolStripMenuItem, "enablePVSReadcachingToolStripMenuItem");
             // 
             // disablePVSReadcachingToolStripMenuItem
             // 
-            this.disablePVSReadcachingToolStripMenuItem.Command = new DisablePvsReadCachingCommand();
+            this.disablePVSReadcachingToolStripMenuItem.Command = new XenAdmin.Commands.DisablePvsReadCachingCommand();
             this.disablePVSReadcachingToolStripMenuItem.Name = "disablePVSReadcachingToolStripMenuItem";
             resources.ApplyResources(this.disablePVSReadcachingToolStripMenuItem, "disablePVSReadcachingToolStripMenuItem");
             // 
@@ -1941,15 +1935,15 @@ namespace XenAdmin
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private XenAdmin.Controls.ToolStripEx ToolStrip;
-        private CommandToolStripButton NewVmToolbarButton;
-        private CommandToolStripButton AddServerToolbarButton;
-        private CommandToolStripButton RebootToolbarButton;
-        private CommandToolStripButton SuspendToolbarButton;
-        private CommandToolStripButton ForceRebootToolbarButton;
-        private CommandToolStripButton ForceShutdownToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton NewVmToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton AddServerToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton RebootToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton SuspendToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton ForceRebootToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton ForceShutdownToolbarButton;
         private System.Windows.Forms.ToolTip statusToolTip;
-        private CommandToolStripButton AddPoolToolbarButton;
-        private CommandToolStripButton newStorageToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton AddPoolToolbarButton;
+        private XenAdmin.Commands.CommandToolStripButton newStorageToolbarButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.Label TitleLabel;
@@ -1962,74 +1956,74 @@ namespace XenAdmin
         private System.Windows.Forms.ContextMenuStrip ToolBarContextMenu;
         private System.Windows.Forms.ToolStripMenuItem ShowToolbarMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private CommandToolStripMenuItem FileImportVMToolStripMenuItem;
-        private CommandToolStripMenuItem importSearchToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem FileImportVMToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem importSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem poolToolStripMenuItem;
-        private CommandToolStripMenuItem AddPoolToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem AddPoolToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private CommandToolStripMenuItem PoolPropertiesToolStripMenuItem;
-        private CommandToolStripMenuItem highAvailabilityToolStripMenuItem;
-        private CommandToolStripMenuItem wlbReportsToolStripMenuItem;
-        private CommandToolStripMenuItem wlbDisconnectToolStripMenuItem;
-        private AddHostToSelectedPoolToolStripMenuItem addServerToolStripMenuItem;
-        private CommandToolStripMenuItem removeServerToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem PoolPropertiesToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem highAvailabilityToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem wlbReportsToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem wlbDisconnectToolStripMenuItem;
+        private XenAdmin.Commands.AddHostToSelectedPoolToolStripMenuItem addServerToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem removeServerToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private CommandToolStripMenuItem deleteToolStripMenuItem;
-        private CommandToolStripMenuItem disconnectPoolToolStripMenuItem;
-        private CommandToolStripMenuItem exportResourceReportPoolToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem deleteToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem disconnectPoolToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem exportResourceReportPoolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HostMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
-        private CommandToolStripMenuItem ServerPropertiesToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem ServerPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private CommandToolStripMenuItem RebootHostToolStripMenuItem;
-        private CommandToolStripMenuItem ShutdownHostToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem RebootHostToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem ShutdownHostToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private CommandToolStripMenuItem AddHostToolStripMenuItem;
-        private CommandToolStripMenuItem removeHostToolStripMenuItem;
-        private AddSelectedHostToPoolToolStripMenuItem addServerToPoolMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem AddHostToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem removeHostToolStripMenuItem;
+        private XenAdmin.Commands.AddSelectedHostToPoolToolStripMenuItem addServerToPoolMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private CommandToolStripMenuItem RemoveCrashdumpsToolStripMenuItem;
-        private CommandToolStripMenuItem maintenanceModeToolStripMenuItem1;
-        private CommandToolStripMenuItem backupToolStripMenuItem;
-        private CommandToolStripMenuItem restoreFromBackupToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem RemoveCrashdumpsToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem maintenanceModeToolStripMenuItem1;
+        private XenAdmin.Commands.CommandToolStripMenuItem backupToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem restoreFromBackupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem VMToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private CommandToolStripMenuItem VMPropertiesToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem VMPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private CommandToolStripMenuItem snapshotToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem snapshotToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
-        private CommandToolStripMenuItem copyVMtoSharedStorageMenuItem;
-        private CommandToolStripMenuItem exportToolStripMenuItem;
-        private CommandToolStripMenuItem convertToTemplateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem copyVMtoSharedStorageMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem exportToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem convertToTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem12;
-        private CommandToolStripMenuItem installToolsToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem installToolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private CommandToolStripMenuItem uninstallToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem uninstallToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem StorageToolStripMenuItem;
-        private CommandToolStripMenuItem AddStorageToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem AddStorageToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
-        private CommandToolStripMenuItem SRPropertiesToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem SRPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
-        private CommandToolStripMenuItem RepairStorageToolStripMenuItem;
-        private CommandToolStripMenuItem DefaultSRToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem RepairStorageToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem DefaultSRToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
-        private CommandToolStripMenuItem DetachStorageToolStripMenuItem;
-        private CommandToolStripMenuItem ReattachStorageRepositoryToolStripMenuItem;
-        private CommandToolStripMenuItem ForgetStorageRepositoryToolStripMenuItem;
-        private CommandToolStripMenuItem DestroyStorageRepositoryToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem DetachStorageToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem ReattachStorageRepositoryToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem ForgetStorageRepositoryToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem DestroyStorageRepositoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem;
-        private CommandToolStripMenuItem exportTemplateToolStripMenuItem;
-        private CommandToolStripMenuItem duplicateTemplateToolStripMenuItem;
-        private CommandToolStripMenuItem uninstallTemplateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem exportTemplateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem duplicateTemplateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem uninstallTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private CommandToolStripMenuItem bugToolToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem bugToolToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem LicenseManagerMenuItem;
-        private CommandToolStripMenuItem installNewUpdateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem installNewUpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
@@ -2069,101 +2063,101 @@ namespace XenAdmin
         internal System.Windows.Forms.TabPage TabPageDockerDetails;
         private XenAdmin.TabPages.SnapshotsPage snapshotPage;
         private System.Windows.Forms.ToolStripMenuItem connectDisconnectToolStripMenuItem;
-        private CommandToolStripMenuItem connectAllToolStripMenuItem;
-        private CommandToolStripMenuItem DisconnectToolStripMenuItem;
-        private CommandToolStripMenuItem disconnectAllToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem connectAllToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem DisconnectToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem disconnectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sendCtrlAltDelToolStripMenuItem;
-        private CommandToolStripMenuItem virtualDisksToolStripMenuItem;
-        private CommandToolStripMenuItem addVirtualDiskToolStripMenuItem;
-        private CommandToolStripMenuItem attachVirtualDiskToolStripMenuItem;
-        private CommandToolStripMenuItem NewVmToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem virtualDisksToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem addVirtualDiskToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem attachVirtualDiskToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem NewVmToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
-        private CommandToolStripMenuItem templatePropertiesToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem templatePropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
-        private VMLifeCycleToolStripMenuItem startShutdownToolStripMenuItem;
+        private XenAdmin.Commands.VMLifeCycleToolStripMenuItem startShutdownToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
-        private CommandToolStripMenuItem ReconnectToolStripMenuItem1;
+        private XenAdmin.Commands.CommandToolStripMenuItem ReconnectToolStripMenuItem1;
         private XenAdmin.Controls.ToolTipContainer toolTipContainer1;
         private XenAdmin.Controls.LoggedInLabel loggedInLabel1;
-        private CommandToolStripMenuItem reconnectAsToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem reconnectAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private CommandToolStripMenuItem poolReconnectAsToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem poolReconnectAsToolStripMenuItem;
         internal System.Windows.Forms.TabPage TabPageAD;
         private System.Windows.Forms.TabPage TabPageGPU;
-        private CommandToolStripMenuItem powerOnToolStripMenuItem;
-        private CommandToolStripButton shutDownToolStripButton;
-        private CommandToolStripButton startVMToolStripButton;
-        private CommandToolStripButton powerOnHostToolStripButton;
-        private CommandToolStripButton resumeToolStripButton;
-        private MigrateVMToolStripMenuItem relocateToolStripMenuItem;
-        private StartVMOnHostToolStripMenuItem startOnHostToolStripMenuItem;
-        private ResumeVMOnHostToolStripMenuItem resumeOnToolStripMenuItem;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem1;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem2;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem3;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem4;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem5;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem6;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem7;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem9;
-        private ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem8;
-        private ToolStripMenuItem xenCenterPluginsOnlineToolStripMenuItem;
-        private CommandToolStripMenuItem MoveVMToolStripMenuItem;
-        private CommandToolStripMenuItem rollingUpgradeToolStripMenuItem;
-        private CommandToolStripMenuItem changePoolPasswordToolStripMenuItem;
-		private ToolStripSeparator toolStripSeparator30;
-		private CommandToolStripMenuItem virtualAppliancesToolStripMenuItem;
-        private AssignGroupToolStripMenuItemVM_appliance assignToVirtualApplianceToolStripMenuItem;
-		private CommandToolStripMenuItem disasterRecoveryToolStripMenuItem;
-		private CommandToolStripMenuItem DrWizardToolStripMenuItem;
-		private CommandToolStripMenuItem drConfigureToolStripMenuItem;
-        private CommandToolStripMenuItem securityGroupsToolStripMenuItem;
-        private ToolStripSeparator toolStripMenuItem1;
-        private CommandToolStripMenuItem HostPasswordToolStripMenuItem;
-        private CommandToolStripMenuItem ChangeRootPasswordToolStripMenuItem;
-        private CommandToolStripMenuItem forgetSavedPasswordToolStripMenuItem;
-        private CommandToolStripMenuItem CreateVmFromTemplateToolStripMenuItem;
-        private CommandToolStripMenuItem newVMFromTemplateToolStripMenuItem;
-        private CommandToolStripMenuItem InstantVmToolStripMenuItem;
-        private ToolStripMenuItem importSettingsToolStripMenuItem;
-        private ToolStripMenuItem exportSettingsToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator31;
-        private CommandToolStripMenuItem destroyServerToolStripMenuItem;
-        private CommandToolStripMenuItem restartToolstackToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem powerOnToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripButton shutDownToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton startVMToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton powerOnHostToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton resumeToolStripButton;
+        private XenAdmin.Commands.MigrateVMToolStripMenuItem relocateToolStripMenuItem;
+        private XenAdmin.Commands.StartVMOnHostToolStripMenuItem startOnHostToolStripMenuItem;
+        private XenAdmin.Commands.ResumeVMOnHostToolStripMenuItem resumeOnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem pluginItemsPlaceHolderToolStripMenuItem8;
+        private System.Windows.Forms.ToolStripMenuItem xenCenterPluginsOnlineToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem MoveVMToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem rollingUpgradeToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem changePoolPasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
+        private XenAdmin.Commands.CommandToolStripMenuItem virtualAppliancesToolStripMenuItem;
+        private XenAdmin.Commands.AssignGroupToolStripMenuItemVM_appliance assignToVirtualApplianceToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem disasterRecoveryToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem DrWizardToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem drConfigureToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem securityGroupsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private XenAdmin.Commands.CommandToolStripMenuItem HostPasswordToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem ChangeRootPasswordToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem forgetSavedPasswordToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem CreateVmFromTemplateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem newVMFromTemplateToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem InstantVmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator31;
+        private XenAdmin.Commands.CommandToolStripMenuItem destroyServerToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem restartToolstackToolStripMenuItem;
         private XenAdmin.Controls.MainWindowControls.NavigationPane navigationPane;
         private XenAdmin.TabPages.AlertSummaryPage alertPage;
         private XenAdmin.TabPages.ManageUpdatesPage updatesPage;
         private XenAdmin.TabPages.HistoryPage eventsPage;
-        private ToolStripMenuItem customTemplatesToolStripMenuItem;
-        private ToolStripMenuItem templatesToolStripMenuItem1;
-        private ToolStripMenuItem localStorageToolStripMenuItem;
-        private StatusStrip StatusStrip;
-        private ToolStripStatusLabel statusLabel;
-        private ToolStripProgressBar statusProgressBar;
-        private CommandToolStripMenuItem reclaimFreedSpacetripMenuItem;
-        private CommandToolStripButton startContainerToolStripButton;
-        private CommandToolStripButton stopContainerToolStripButton;
-        private CommandToolStripButton pauseContainerToolStripButton;
-        private CommandToolStripButton resumeContainerToolStripButton;
-        private CommandToolStripButton restartContainerToolStripButton;
-        private CommandToolStripMenuItem healthCheckToolStripMenuItem1;
-        private AssignGroupToolStripMenuItemVMSS assignSnapshotScheduleToolStripMenuItem;
-        private CommandToolStripMenuItem VMSnapshotScheduleToolStripMenuItem;
-        private TabPage TabPageADUpsell;
-        private TabPage TabPageCvmConsole;
-        private TabPage TabPagePvs;
-        private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
-        private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
-        private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
-        private TabPage TabPageUSB;
-        private CommandToolStripMenuItem disableCbtToolStripMenuItem;
-        private Label LicenseStatusTitleLabel;
+        private System.Windows.Forms.ToolStripMenuItem customTemplatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem localStorageToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip StatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
+        private XenAdmin.Commands.CommandToolStripMenuItem reclaimFreedSpacetripMenuItem;
+        private XenAdmin.Commands.CommandToolStripButton startContainerToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton stopContainerToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton pauseContainerToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton resumeContainerToolStripButton;
+        private XenAdmin.Commands.CommandToolStripButton restartContainerToolStripButton;
+        private XenAdmin.Commands.CommandToolStripMenuItem healthCheckToolStripMenuItem1;
+        private XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS assignSnapshotScheduleToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem VMSnapshotScheduleToolStripMenuItem;
+        private System.Windows.Forms.TabPage TabPageADUpsell;
+        private System.Windows.Forms.TabPage TabPageCvmConsole;
+        private System.Windows.Forms.TabPage TabPagePvs;
+        private XenAdmin.Commands.CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
+        private System.Windows.Forms.TabPage TabPageUSB;
+        private XenAdmin.Commands.CommandToolStripMenuItem disableCbtToolStripMenuItem;
+        private System.Windows.Forms.Label LicenseStatusTitleLabel;
     }
 
 }

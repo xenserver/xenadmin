@@ -82,6 +82,7 @@ namespace XenAdmin.Controls.MainWindowControls
         [Browsable(true)]
         public event Action TreeViewRefreshResumed;
 
+        [Browsable(true)]
         internal event Action<string> DragDropCommandActivated;
 
         #endregion
