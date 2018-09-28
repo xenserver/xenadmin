@@ -242,11 +242,14 @@ namespace XenAdmin.Dialogs
 
         public class TagsDataGridViewRow : DataGridViewRow
         {
+            private readonly DataGridViewCheckBoxCell _cellCheckState;
+            private readonly DataGridViewTextBoxCell _cellTag;
+
             public TagsDataGridViewRow()
             {
-                var cellEnabled = new DataGridViewCheckBoxCell { Value = CheckState.Unchecked, ThreeState = true};
-                var cellTag = new DataGridViewTextBoxCell();
-                Cells.AddRange(cellEnabled, cellTag);
+                _cellCheckState = new DataGridViewCheckBoxCell { Value = CheckState.Unchecked, ThreeState = true};
+                _cellTag = new DataGridViewTextBoxCell();
+                Cells.AddRange(_cellCheckState, _cellTag);
             }
 
             public void Toggle()
@@ -263,7 +266,7 @@ namespace XenAdmin.Dialogs
             {
                 get
                 {
-                    var value = CellEnabled.Value;
+                    var value = _cellCheckState.Value;
                     if (value == null)
                         return CheckState.Unchecked;
 
@@ -275,23 +278,13 @@ namespace XenAdmin.Dialogs
 
                     return CheckState.Indeterminate;
                 }
-                set { CellEnabled.Value = value; }
+                set { _cellCheckState.Value = value; }
             }
 
             public string Text
             {
-                get { return CellTag.Value.ToString(); }
-                set { CellTag.Value = value; }
-            }
-
-            private DataGridViewCheckBoxCell CellEnabled
-            {
-                get { return (DataGridViewCheckBoxCell)Cells[0]; }
-            }
-
-            private DataGridViewTextBoxCell CellTag
-            {
-                get { return (DataGridViewTextBoxCell)Cells[1]; }
+                get { return _cellTag.Value.ToString(); }
+                set { _cellTag.Value = value; }
             }
 
             private CheckState Opposite(CheckState state)
