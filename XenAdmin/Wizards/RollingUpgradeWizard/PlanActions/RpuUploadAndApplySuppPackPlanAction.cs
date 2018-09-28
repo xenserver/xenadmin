@@ -51,7 +51,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         private List<Host> hosts;
         private string suppPackPath;
         private Dictionary<Host, Pool_update> uploadedSuppPacks;
-        public List<PlanAction> delayedPlanActions;
+        public List<PlanAction> DelayedPlanActions;
+        private Dictionary<string, livepatch_status> livePatchStatus;
 
         public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path,
             Dictionary<Host, Pool_update> uploadedUpdates)
@@ -61,7 +62,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             this.hosts = hosts;
             suppPackPath = path;
             uploadedSuppPacks = uploadedUpdates;
-            delayedPlanActions = new List<PlanAction>();
+            DelayedPlanActions = new List<PlanAction>();
+            livePatchStatus = new Dictionary<string, livepatch_status>();
         }
 
         protected override void RunWithSession(ref Session session)
@@ -141,7 +143,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, suppPack, host.Name()));
 
-                PatchPrecheckCheck check = new PatchPrecheckCheck(host, update);
+                PatchPrecheckCheck check = new PatchPrecheckCheck(host, update, livePatchStatus);
                 var problems = check.RunAllChecks();
                 if (problems != null && problems.Count > 0)
                 {
@@ -194,7 +196,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 foreach (update_after_apply_guidance afterApplyGuidance in afterApplyGuidanceLists)
                 {
                     var planAction = GetAfterApplyGuidancePlanAction(host, afterApplyGuidance);
-                    delayedPlanActions.Add(planAction);
+                    DelayedPlanActions.Add(planAction);
                 }
             }
         }
@@ -222,12 +224,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             }
         }
 
-        private static PlanAction GetAfterApplyGuidancePlanAction(Host host, update_after_apply_guidance guidance)
+        private PlanAction GetAfterApplyGuidancePlanAction(Host host, update_after_apply_guidance guidance)
         {
             switch (guidance)
             {
                 case update_after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
+                {
+                    if (livePatchStatus != null && livePatchStatus.ContainsKey(host.uuid)
+                        && livePatchStatus[host.uuid] == livepatch_status.ok_livepatch_complete)
+                        return null;
+                    else
+                        return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
+                }
                 case update_after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case update_after_apply_guidance.restartHVM:

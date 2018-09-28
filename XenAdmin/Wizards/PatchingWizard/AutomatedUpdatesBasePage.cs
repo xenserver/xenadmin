@@ -338,7 +338,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (suppPackPlanAction != null)
                     {
-                        foreach (var dpa in suppPackPlanAction.delayedPlanActions)
+                        foreach (var dpa in suppPackPlanAction.DelayedPlanActions)
                         {
                             var existing = hp.DelayedPlanActions.FirstOrDefault(a => a.GetType() == dpa.GetType());
                             if (existing == null)

@@ -213,7 +213,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) !=
                             Path.GetFileNameWithoutExtension(FilePath))
                         {
-                            unzippedUpdateFilePath = HelpersWizard.ExtractUpdate(FilePath, this);
+                            unzippedUpdateFilePath = WizardHelpers.ExtractUpdate(FilePath, this);
                             if (unzippedUpdateFilePath == null)
                                 cancel = true;
 
@@ -223,7 +223,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         unzippedUpdateFilePath = null;
 
-                    var fileName = HelpersWizard.isValidFile(unzippedUpdateFilePath)
+                    var fileName = WizardHelpers.IsValidFile(unzippedUpdateFilePath)
                         ? unzippedUpdateFilePath.ToLowerInvariant()
                         : FilePath.ToLowerInvariant();
 
@@ -253,7 +253,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                     else
                     {
-                        if (HelpersWizard.isValidFile(fileName))
+                        if (WizardHelpers.IsValidFile(fileName))
                         {
                             if (fileName.EndsWith("." + Branding.Update))
                                 SelectedUpdateType = UpdateType.NewRetail;
@@ -429,7 +429,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (selectFromDiskRadioButton.Checked)
             {
-                if (HelpersWizard.isValidFile(FilePath))
+                if (WizardHelpers.IsValidFile(FilePath))
                     return true;
             }
 
@@ -472,7 +472,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else if (selectFromDiskRadioButton.Checked)
                 {
                     return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
-                        ? HelpersWizard.isValidFile(unzippedUpdateFilePath) &&
+                        ? WizardHelpers.IsValidFile(unzippedUpdateFilePath) &&
                           Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip")
                             ? unzippedUpdateFilePath
                             : FilePath
@@ -695,7 +695,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             selectFromDiskRadioButton.Checked = true;
-            var suppPack = HelpersWizard.GetSuppPackFromDisk(this);
+            var suppPack = WizardHelpers.GetSuppPackFromDisk(this);
             if (!string.IsNullOrEmpty(suppPack))
                 FilePath = suppPack;
             OnPageUpdated();

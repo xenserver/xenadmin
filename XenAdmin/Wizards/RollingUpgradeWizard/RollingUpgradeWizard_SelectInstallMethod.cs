@@ -48,7 +48,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Bitmap testOK = Resources._000_Tick_h32bit_16;
         private TestLocationInstallerAction testingAction;
-        private string unzippedUpdateFilePath = null;
         public string SelectedSuppPack;
 
         public RollingUpgradeWizardInstallMethodPage()
@@ -77,7 +76,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override bool EnableNext()
         {
-            if (ApplySuppPackAfterUpgrade && !HelpersWizard.isValidFile(FilePath))
+            if (ApplySuppPackAfterUpgrade && !WizardHelpers.IsValidFile(FilePath))
                 return false;
 
             return pictureBox1.Visible && pictureBox1.Image == testOK;
@@ -97,9 +96,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 StopUrlTesting();
             }
 
-            if (ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+            if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
             {
-                HelpersWizard.ParseSuppPackFile(FilePath, unzippedUpdateFilePath, this, ref cancel, out SelectedSuppPack);
+                WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel, out SelectedSuppPack);
             }
         }
 
@@ -359,7 +358,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             checkBoxInstallSuppPack.Checked = true;
-            var suppPack = HelpersWizard.GetSuppPackFromDisk(this);
+            var suppPack = WizardHelpers.GetSuppPackFromDisk(this);
             if (!string.IsNullOrEmpty(suppPack))
                 FilePath = suppPack;
             OnPageUpdated();

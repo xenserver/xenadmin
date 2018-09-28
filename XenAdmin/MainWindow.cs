@@ -2854,7 +2854,7 @@ namespace XenAdmin
 
         private void InstallUpdate(string path)
         {
-            if (HelpersWizard.isValidFile(path))
+            if (WizardHelpers.IsValidFile(path))
             {
                 var wizard = new PatchingWizard();
                 wizard.Show(this);

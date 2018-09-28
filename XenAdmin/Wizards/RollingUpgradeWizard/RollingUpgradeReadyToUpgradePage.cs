@@ -42,7 +42,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeReadyToUpgradePage : XenTabPage
     {
-        private string unzippedUpdateFilePath = null;
         public string SelectedSuppPack;
 
         public RollingUpgradeReadyToUpgradePage()
@@ -106,7 +105,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override bool EnableNext()
         {
-            if (ApplySuppPackAfterUpgrade && !HelpersWizard.isValidFile(FilePath))
+            if (ApplySuppPackAfterUpgrade && !WizardHelpers.IsValidFile(FilePath))
                 return false;
 
             return true;
@@ -133,9 +132,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            if (ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+            if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
             {
-                HelpersWizard.ParseSuppPackFile(FilePath, unzippedUpdateFilePath, this, ref cancel, out SelectedSuppPack);
+                WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel, out SelectedSuppPack);
             }
         }
 
@@ -158,7 +157,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             checkBoxInstallSuppPack.Checked = true;
-            var suppPack = HelpersWizard.GetSuppPackFromDisk(this);
+            var suppPack = WizardHelpers.GetSuppPackFromDisk(this);
             if (!string.IsNullOrEmpty(suppPack))
                 FilePath = suppPack;
             OnPageUpdated();

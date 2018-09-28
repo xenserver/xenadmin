@@ -34,15 +34,14 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 
 
 namespace XenAdmin.Wizards
 {
-    public static class HelpersWizard
+    public static class WizardHelpers
     {
-        public static string GetSuppPackFromDisk(XenTabPage page)
+        public static string GetSuppPackFromDisk(Control control)
         {
             string oldDir = string.Empty;
             try
@@ -62,7 +61,7 @@ namespace XenAdmin.Wizards
                 {
                     dlg.FileOk += dlg_FileOk;
 
-                    if (dlg.ShowDialog(page) == DialogResult.OK)
+                    if (dlg.ShowDialog(control) == DialogResult.OK)
                         return dlg.FileName;
                 }
             }
@@ -80,7 +79,7 @@ namespace XenAdmin.Wizards
             if (dlg == null)
                 return;
 
-            if (!isValidFile(dlg.FileName))
+            if (!IsValidFile(dlg.FileName))
                 using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
                     SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)))
                 {
@@ -89,24 +88,24 @@ namespace XenAdmin.Wizards
                 }
         }       
 
-        public static void ParseSuppPackFile(string path, string unzippedPath, XenTabPage page, ref bool cancel, out string suppPackPath)
+        public static void ParseSuppPackFile(string path, Control control, ref bool cancel, out string suppPackPath)
         {
-            if (Path.GetExtension(path).ToLowerInvariant().Equals(".zip") &&
-                    Path.GetFileNameWithoutExtension(unzippedPath) !=
-                    Path.GetFileNameWithoutExtension(path))
+            string unzippedPath;
+
+            if (Path.GetExtension(path).ToLowerInvariant().Equals(".zip"))
             {
-                unzippedPath = ExtractUpdate(path, page);
+                unzippedPath = ExtractUpdate(path, control);
                 if (unzippedPath == null)
                     cancel = true;
             }
             else
                 unzippedPath = null;
 
-            var fileName = isValidFile(unzippedPath)
+            var fileName = IsValidFile(unzippedPath)
                 ? unzippedPath.ToLowerInvariant()
                 : path.ToLowerInvariant();
 
-            if (isValidFile(fileName))
+            if (IsValidFile(fileName))
             {
                 if (!fileName.EndsWith("." + Branding.Update)
                     && !fileName.EndsWith("." + Branding.UpdateIso)
@@ -117,7 +116,7 @@ namespace XenAdmin.Wizards
                         string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(fileName)),
                         Messages.UPDATES)))
                     {
-                        dlg.ShowDialog(page);
+                        dlg.ShowDialog(control);
                     }
                     cancel = true;
                 }
@@ -127,14 +126,14 @@ namespace XenAdmin.Wizards
                 suppPackPath = string.Empty;
         }
 
-        public static string ExtractUpdate(string zippedUpdatePath, XenTabPage page)
+        public static string ExtractUpdate(string zippedUpdatePath, Control control)
         {
             var unzipAction =
                 new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null,
                     zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
-                dlg.ShowDialog(page.Parent);
+                dlg.ShowDialog(control.Parent);
             }
 
             if (string.IsNullOrEmpty(unzipAction.PatchPath))
@@ -144,7 +143,7 @@ namespace XenAdmin.Wizards
                     string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(zippedUpdatePath)),
                     Messages.UPDATES)))
                 {
-                    dlg.ShowDialog(page);
+                    dlg.ShowDialog(control);
                 }
                 return null;
             }
@@ -154,7 +153,7 @@ namespace XenAdmin.Wizards
             }
         }
 
-        public static bool isValidFile(string fileName)
+        public static bool IsValidFile(string fileName)
         {
             return !string.IsNullOrEmpty(fileName) && File.Exists(fileName)
                 && (fileName.ToLowerInvariant().EndsWith("." + Branding.Update.ToLowerInvariant())
