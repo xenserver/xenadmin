@@ -46,7 +46,6 @@ using XenAdmin.Network;
 using XenAdmin.Dialogs;
 using XenAdmin.XenSearch;
 using XenAPI;
-using System.Runtime.InteropServices;
 using XenCenterLib;
 
 
@@ -59,11 +58,11 @@ namespace XenAdmin
         /// <summary>
         /// Module for authenticating with proxy server using the Basic authentication scheme.
         /// </summary>
-        private static IAuthenticationModule BasicAuthenticationModule = null;
+        private static IAuthenticationModule BasicAuthenticationModule;
         /// <summary>
         /// Module for authenticating with proxy server using the Digest authentication scheme.
         /// </summary>
-        private static IAuthenticationModule DigestAuthenticationModule = null;
+        private static IAuthenticationModule DigestAuthenticationModule;
 
         /// <summary>
         /// A UUID for the current instance of XenCenter.  Used to identify our own task instances.
@@ -84,13 +83,9 @@ namespace XenAdmin
         /// </summary>
         public static Color TransparentUsually = Color.Transparent;
 
-        public static readonly Color ErrorForeColor = Color.White;
-        public static readonly Color ErrorBackColor = Color.Firebrick;
-
         public static Font DefaultFont = FormFontFixer.DefaultFont;
         public static Font DefaultFontBold;
         public static Font DefaultFontUnderline;
-        public static Font DefaultFontBoldUnderline;
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
@@ -105,13 +100,10 @@ namespace XenAdmin
         public static Color HeaderGradientEndColor = Color.FromArgb(63, 139, 137);
         public static Color HeaderGradientForeColor = Color.White;
         public static Font HeaderGradientFont = new Font(DefaultFont.FontFamily, 11.25f);
-        public static Font HeaderGradientFontSmall = DefaultFont;
         public static Font TabbedDialogHeaderFont = HeaderGradientFont;
 
         public static Color TabPageRowBorder = Color.DarkGray;
         public static Color TabPageRowHeader = Color.Silver;
-
-        public static readonly XenAdmin.Core.PropertyManager PropertyManager = new XenAdmin.Core.PropertyManager();
 
         public static MainWindow MainWindow = null;
 
@@ -119,16 +111,16 @@ namespace XenAdmin
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
         {
             return delegate(object s, CollectionChangeEventArgs args)
-                       {
-                           if (Program.MainWindow != null)
-                           {
-                               Program.BeginInvoke(Program.MainWindow, delegate()
-                                                                           {
-                                                                               if (handler != null)
-                                                                                   handler(s, args);
-                                                                           });
-                           }
-                       };
+            {
+                if (MainWindow != null)
+                {
+                    BeginInvoke(MainWindow, delegate
+                    {
+                        if (handler != null)
+                            handler(s, args);
+                    });
+                }
+            };
         }
 
 
@@ -146,35 +138,27 @@ namespace XenAdmin
         public static bool SkipSessionSave = false;
 
         public static bool RunInAutomatedTestMode = false;
-        public static string TestExceptionString = null;  // an exception passed back to the test framework
-        private static log4net.ILog log = null;
+        public static string TestExceptionString;  // an exception passed back to the test framework
+        private static log4net.ILog log;
 
-        public static volatile bool Exiting = false;
+        public static volatile bool Exiting;
 
         public static readonly string AssemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-        public static readonly DateTime ApplicationStartTime = DateTime.Now;
-
         private static readonly System.Threading.Timer dailyTimer;
-
-        public static bool IsThemed = false;
-
-        [DllImport("uxtheme", ExactSpelling = true)]
-        public extern static int IsAppThemed();
 
         static Program()
         {
             XenAdminConfigManager.Provider = new WinformsXenAdminConfigProvider();
             // Start timer to record resource usage every 24hrs
-            dailyTimer = new System.Threading.Timer((TimerCallback)delegate(object state)
+            dailyTimer = new System.Threading.Timer(delegate
             {
-                Program.logApplicationStats();
+                logApplicationStats();
             }, null, new TimeSpan(24, 0, 0), new TimeSpan(24, 0, 0));
 
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));
             log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-            IsThemed = IsAppThemed() > 0 ? true : false;
             SetDefaultFonts();
         }
 
@@ -185,7 +169,7 @@ namespace XenAdmin
         static public void Main(string[] Args)
         {
             //Upgrade settings
-            System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+            Assembly a = Assembly.GetExecutingAssembly();
             Version appVersion = a.GetName().Version;
             string appVersionString = appVersion.ToString();
             log.DebugFormat("Application version of new settings {0}", appVersionString);
@@ -270,7 +254,6 @@ namespace XenAdmin
                         TitleBarForeColor = Color.FromArgb(60, 60, 60);
                         HeaderGradientForeColor = Color.White;
                         HeaderGradientFont = new Font(DefaultFont.FontFamily, 11.25f);
-                        HeaderGradientFontSmall = DefaultFont;
                         TabbedDialogHeaderFont = HeaderGradientFont;
                         TabPageRowBorder = Color.Gainsboro;
                         TabPageRowHeader = Color.WhiteSmoke;
@@ -281,7 +264,6 @@ namespace XenAdmin
                         TitleBarForeColor = SystemColors.ControlText;
                         HeaderGradientForeColor = SystemColors.ControlText;
                         HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
-                        HeaderGradientFontSmall = DefaultFontBold;
                         TabbedDialogHeaderFont = HeaderGradientFont;
                         TabPageRowBorder = Color.DarkGray;
                         TabPageRowHeader = Color.Silver;
@@ -295,7 +277,6 @@ namespace XenAdmin
                     TitleBarForeColor = Application.RenderWithVisualStyles ? Color.White : SystemColors.ControlText;
                     HeaderGradientForeColor = TitleBarForeColor;
                     HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
-                    HeaderGradientFontSmall = DefaultFontBold;
                     TabbedDialogHeaderFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1.75f, FontStyle.Bold);
                     TabPageRowBorder = Color.DarkGray;
                     TabPageRowHeader = Color.Silver;
@@ -311,7 +292,7 @@ namespace XenAdmin
             ServicePointManager.DefaultConnectionLimit = 20;
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-            XenAPI.Session.UserAgent = string.Format("XenCenter/{0}", ClientVersion());
+            Session.UserAgent = string.Format("XenCenter/{0}", ClientVersion());
             RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
 
@@ -347,7 +328,7 @@ namespace XenAdmin
             }
             else if (sanitizedArgs.Count == 1 && sanitizedArgs[0] == "messageboxtest")
             {
-                new Dialogs.MessageBoxTest().ShowDialog();
+                new MessageBoxTest().ShowDialog();
                 Application.Exit();
                 return;
             }
@@ -360,7 +341,7 @@ namespace XenAdmin
             {
                 ConnectPipe();
             }
-            catch (System.ComponentModel.Win32Exception exn)
+            catch (Win32Exception exn)
             {
                 log.Error("Creating named pipe failed. Continuing to launch XenCenter.", exn);
             }
@@ -424,14 +405,14 @@ namespace XenAdmin
             pipe = new NamedPipes.Pipe(pipe_path);
 
             log.InfoFormat(@"Successfully created pipe '{0}' - proceeding to launch XenCenter", pipe_path);
-            pipe.Read += new EventHandler<NamedPipes.PipeReadEventArgs>(delegate(object sender, NamedPipes.PipeReadEventArgs e)
+            pipe.Read += delegate(object sender, NamedPipes.PipeReadEventArgs e)
             {
-                MainWindow m = Program.MainWindow;
+                MainWindow m = MainWindow;
                 if (m == null || RunInAutomatedTestMode)
                 {
                     return;
                 }
-                Program.Invoke(m, delegate
+                Invoke(m, delegate
                 {
                     log.InfoFormat(@"Received data from pipe '{0}': {1}", pipe_path, e.Message);
 
@@ -481,7 +462,7 @@ namespace XenAdmin
 
                     m.ProcessCommand(argType, new string[] { file_arg });
                 });
-            });
+            };
             pipe.BeginRead();
             // We created the pipe successfully - i.e. nobody was listening, so go ahead and start XenCenter
         }
@@ -491,20 +472,17 @@ namespace XenAdmin
             if (pipe != null)
             {
                 log.Debug("Disconnecting from named pipe in Program.DisconnectPipe()");
-                System.Threading.ThreadPool.QueueUserWorkItem((WaitCallback)delegate(object o)
-                {
-                    pipe.Disconnect();
-                });
+                ThreadPool.QueueUserWorkItem(state => pipe.Disconnect());
             }
         }
 
         private static void logSystemDetails()
         {
-            log.Info("Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
-            log.Info(".NET runtime version: " + Environment.Version.ToString(4));
-            log.Info("OS version: " + Environment.OSVersion.ToString());
-            log.Info("UI Culture: " + Thread.CurrentThread.CurrentUICulture.EnglishName);
-            log.Info(string.Format("Bitness: {0}-bit", IntPtr.Size * 8));
+            log.InfoFormat("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            log.InfoFormat(".NET runtime version: {0}", Environment.Version.ToString(4));
+            log.InfoFormat("OS version: {0}", Environment.OSVersion);
+            log.InfoFormat("UI Culture: {0}", Thread.CurrentThread.CurrentUICulture.EnglishName);
+            log.InfoFormat("Bitness: {0}-bit", IntPtr.Size * 8);
         }
 
         static void Application_ApplicationExit(object sender, EventArgs e)
@@ -526,7 +504,7 @@ namespace XenAdmin
             }
             // The application is about to exit - gracefully close connections to
             // avoid a bunch of WinForms related race conditions...
-            foreach (Network.IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
+            foreach (IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
                 conn.EndConnect(false, true);
         }
 
@@ -562,7 +540,7 @@ namespace XenAdmin
             log.InfoFormat("User processor time: {0}", p.UserProcessorTime.ToString());
         }
 
-        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             ProcessUnhandledException(sender, e.Exception, false);
         }
@@ -630,21 +608,19 @@ namespace XenAdmin
                 TestExceptionString = e.GetBaseException().ToString();
         }
 
+        /// <summary>
+        /// Set the default fonts.
+        /// Some locales have a known correct font, which we just use. Otherwise (e.g. English),
+        /// we need to make sure that our fonts fit in with our panel layout.  This can be a problem
+        /// on far-Eastern platforms in particular, because the default fonts there are wider in the
+        /// English range than Tahoma / Segoe UI. Anything bigger than them is going to cause us to
+        /// overflow on the panels, so we force it back to an appropriate font. We need to be careful
+        /// not to override the user's settings if they've deliberately scaled up the text for readability
+        /// reasons, so we only override if the font size is 9pt or smaller, which is the usual default.
+        /// We also define a registry key to turn this off, just in case someone in the field complains.
+        /// </summary>
         private static void SetDefaultFonts()
         {
-            // Set the default font.
-            //
-            // Some locales have a known correct font, which we just use.
-            //
-            // Otherwise (e.g. English), we need to make sure that our fonts fit in with
-            // our panel layout.  This can be a problem on far-Eastern platforms in particular, because the default fonts there are wider in the
-            // English range than Tahoma / Segoe UI.  Anything bigger than them is going to cause us to overflow on the panels, so we force it back
-            // to an appropriate font.
-            // We need to be careful not to override the user's settings if they've deliberately scaled up the text for readability reasons,
-            // so we only override if the font size is 9pt or smaller, which is the usual default.
-            //
-            // We also define a registry key to turn this off, just in case someone in the field complains.
-
             if (Registry.ForceSystemFonts)
             {
                 log.Debug("ForceSystemFonts registry key is defined");
@@ -709,7 +685,6 @@ namespace XenAdmin
             DefaultFont = f;
             DefaultFontBold = new Font(f, FontStyle.Bold);
             DefaultFontUnderline = new Font(f, FontStyle.Underline);
-            DefaultFontBoldUnderline = new Font(f, FontStyle.Bold | FontStyle.Underline);
             DefaultFontItalic = new Font(f, FontStyle.Italic);
             DefaultFontHeader = new Font(f.FontFamily, 9.75f, FontStyle.Bold);
 
@@ -718,7 +693,7 @@ namespace XenAdmin
 
         internal static void AssertOffEventThread()
         {
-            if (Program.MainWindow.Visible && !Program.MainWindow.InvokeRequired)
+            if (MainWindow.Visible && !MainWindow.InvokeRequired)
             {
                 FatalError();
             }
@@ -726,7 +701,7 @@ namespace XenAdmin
 
         internal static void AssertOnEventThread()
         {
-            if (Program.MainWindow != null && Program.MainWindow.Visible && Program.MainWindow.InvokeRequired)
+            if (MainWindow != null && MainWindow.Visible && MainWindow.InvokeRequired)
             {
                 FatalError();
             }
@@ -736,8 +711,11 @@ namespace XenAdmin
         {
             string msg = String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED,
                 HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), GetLogFile_());
-            log.Fatal(msg + "\n" + Environment.StackTrace);
-            MainWindow m = Program.MainWindow;
+
+            var msgWithStackTrace = string.Format("{0}\n{1}", msg, Environment.StackTrace);
+            log.Fatal(msgWithStackTrace);
+
+            MainWindow m = MainWindow;
             if (m == null)
             {
                 log.Fatal("Program.MainWindow is null");
@@ -752,7 +730,7 @@ namespace XenAdmin
             if (RunInAutomatedTestMode)
             {
                 if (TestExceptionString == null)
-                    TestExceptionString = msg + "\n" + Environment.StackTrace;
+                    TestExceptionString = msgWithStackTrace;
             }
             else
             {
@@ -775,24 +753,25 @@ namespace XenAdmin
             }
             else
             {
-                System.Diagnostics.Process.Start(Path.GetDirectoryName(s));
+                Process.Start(Path.GetDirectoryName(s));
             }
         }
 
         private static string GetLogFile()
         {
             string s = GetLogFile_();
-            return s == null ? "MISSING LOG FILE!" : s;
+            return s ?? "MISSING LOG FILE!";
         }
 
         public static string GetLogFile_()
         {
             foreach (log4net.Appender.IAppender appender in log.Logger.Repository.GetAppenders())
             {
-                if (appender is log4net.Appender.FileAppender)
+                var fileAppender = appender as log4net.Appender.FileAppender;
+                if (fileAppender != null)
                 {
                     // Assume that the first FileAppender is the primary log file.
-                    return ((log4net.Appender.FileAppender)appender).File;
+                    return fileAppender.File;
                 }
             }
             return null;
@@ -990,13 +969,14 @@ namespace XenAdmin
             }
         }
 
-        public static string ClientVersion()
+        private static string ClientVersion()
         {
             foreach (object o in Assembly.GetExecutingAssembly().GetCustomAttributes(true))
             {
-                if (o is XSVersionAttribute)
+                var attr = o as XSVersionAttribute;
+                if (attr != null)
                 {
-                    string result = ((XSVersionAttribute)o).Version;
+                    string result = attr.Version;
                     return result == "[BRANDING_PRODUCT_VERSION]" ? "PRIVATE" : result;
                 }
             }
@@ -1006,7 +986,7 @@ namespace XenAdmin
         public static void ReconfigureConnectionSettings()
         {
             ReconfigureProxyAuthenticationSettings();
-            XenAPI.Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
+            Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
         }
 
         /// <summary>
@@ -1052,7 +1032,7 @@ namespace XenAdmin
             else
                 AuthenticationManager.Register(DigestAuthenticationModule);
 
-            XenAPI.HTTP.CurrentProxyAuthenticationMethod = authSetting;
+            HTTP.CurrentProxyAuthenticationMethod = authSetting;
         }
 
         private const string SplashWindowClass = "XenCenterSplash0001";
@@ -1062,14 +1042,11 @@ namespace XenAdmin
             IntPtr hWnd = Win32.FindWindow(SplashWindowClass, null);
 
             if (hWnd == IntPtr.Zero)
-            {
-                //log.Warn("Couldn't find splash screen in CloseSplash()", new System.ComponentModel.Win32Exception());
                 return;
-            }
 
             if (!Win32.PostMessage(hWnd, Win32.WM_DESTROY, IntPtr.Zero, IntPtr.Zero))
             {
-                log.Warn("PostMessage WM_DESTROY failed in CloseSplash()", new System.ComponentModel.Win32Exception());
+                log.Warn("PostMessage WM_DESTROY failed in CloseSplash()", new Win32Exception());
             }
         }
 
@@ -1079,7 +1056,7 @@ namespace XenAdmin
                 return;
             try
             {
-                System.Diagnostics.Process.Start(url);
+                Process.Start(url);
             }
             catch (Exception e)
             {
@@ -1100,26 +1077,7 @@ namespace XenAdmin
             }
         }
 
-		/// <summary>
-		/// Gets the version in the form "a.b.c"
-		/// </summary>
-		public static string VersionThreePart
-		{
-			get
-			{
-				var version = Version;
-
-				//The release version is obtained from branding.hg. From a
-				//private build we get 0.0.0.0 so we should look out for
-				//it and return it as is (or alternatively return 99.99.99)
-				if (version.ToString() == "0.0.0.0")
-					return "0.0.0.0";
-
-				return string.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
-			}
-		}
-
-        public static string CurrentLanguage
+		public static string CurrentLanguage
         {
             get
             {
@@ -1131,7 +1089,7 @@ namespace XenAdmin
         {
             get
             {
-                return string.Format("{0}.{1}", Version.ToString(), CurrentLanguage);
+                return string.Format("{0}.{1}", Version, CurrentLanguage);
             }
         }
 
@@ -1144,5 +1102,5 @@ namespace XenAdmin
         }
     }
 
-    public enum ArgType { Import, License, Restore, Update, None, XenSearch, Passwords, Connect };
+    public enum ArgType { Import, License, Restore, Update, None, XenSearch, Passwords, Connect }
 }
