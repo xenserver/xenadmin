@@ -130,38 +130,32 @@ namespace XenAdmin.Dialogs
                        };
         }
 
-        private bool TagPresent(string tag)
+        private TagsDataGridViewRow FindTag(string tag)
         {
             // Used to use tagsListView.Items.ContainsKey(tag), but that uses the Name
             // instead of the Text, and is also not case sensitive, which caused a bug.
             foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
             {
                 if (item.Text == tag)
-                    return true;
+                    return item;
             }
-            return false;
+            return null;
         }
 
         private void AddTag()
         {
             string text = this.textBox1.Text.Trim();
-            if (!TagPresent(text))
+            var item = FindTag(text);
+            if (item == null)
             {
-                var item = new TagsDataGridViewRow();
+                item = new TagsDataGridViewRow();
                 tagsDataGrid.Rows.Add(item);
                 item.Checked = CheckState.Checked;
                 item.Text = text;
             }
             else
             {
-                foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
-                {
-                    if (item.Text == text)
-                    {
-                        item.Checked = CheckState.Checked;
-                        break;
-                    }
-                }
+                item.Checked = CheckState.Checked;
             }
 
             this.textBox1.Text = "";
@@ -193,7 +187,7 @@ namespace XenAdmin.Dialogs
             }
             foreach (string tag in tags)   // We need to include these too, because they may have been recently added and not yet got into GetAllTags()
             {
-                if (!TagPresent(tag))
+                if (FindTag(tag) == null)
                 {
                     var item = new TagsDataGridViewRow();
                     tagsDataGrid.Rows.Add(item);
