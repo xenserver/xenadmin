@@ -186,7 +186,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnVersion.HeaderText" xml:space="preserve">
-    <value>[XenServer] バージョン</value>
+    <value>バージョン</value>
   </data>
   <data name="ColumnVersion.MinimumWidth" type="System.Int32, mscorlib">
     <value>130</value>

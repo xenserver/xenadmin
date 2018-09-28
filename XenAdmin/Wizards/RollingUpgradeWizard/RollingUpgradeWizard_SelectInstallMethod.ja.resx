@@ -421,7 +421,7 @@
     <value>5</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>インストール メディアの詳細を入力して [アップグレードの開始] をクリックします。これにより、各 [XenServer] が順次アップグレードされます。</value>
+    <value>インストール メディアの詳細を入力して [アップグレードの開始] をクリックします。これにより、各サーバーが順次アップグレードされます。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

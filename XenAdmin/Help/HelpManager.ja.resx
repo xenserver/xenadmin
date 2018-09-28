@@ -951,9 +951,6 @@
   <data name="TabPageBallooning" xml:space="preserve">
     <value>1033</value>
   </data>
-  <data name="TabPageBallooningUpsell" xml:space="preserve">
-    <value>1034</value>
-  </data>
   <data name="TabPageConsole" xml:space="preserve">
     <value>1020</value>
   </data>

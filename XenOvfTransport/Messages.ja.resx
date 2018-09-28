@@ -277,7 +277,7 @@
     <value>{0} を展開しています... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>[XenServer] の仮想マシンを構成しています... </value>
+    <value>サーバーの仮想マシンを構成しています... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>インポート済み。</value>

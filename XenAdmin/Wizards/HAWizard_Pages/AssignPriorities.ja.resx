@@ -502,7 +502,7 @@
     <value>True</value>
   </metadata>
   <data name="colVm.HeaderText" xml:space="preserve">
-    <value>Virtual machine</value>
+    <value>仮想マシン</value>
   </data>
   <data name="colVm.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
@@ -511,7 +511,7 @@
     <value>True</value>
   </metadata>
   <data name="colRestartPriority.HeaderText" xml:space="preserve">
-    <value>Restart priority</value>
+    <value>再起動優先度</value>
   </data>
   <data name="colRestartPriority.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
@@ -520,7 +520,7 @@
     <value>True</value>
   </metadata>
   <data name="colStartOrder.HeaderText" xml:space="preserve">
-    <value>Start order</value>
+    <value>起動順序</value>
   </data>
   <data name="colStartOrder.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
@@ -529,7 +529,7 @@
     <value>True</value>
   </metadata>
   <data name="colDelay.HeaderText" xml:space="preserve">
-    <value>Delay interval</value>
+    <value>遅延間隔</value>
   </data>
   <data name="colDelay.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
@@ -538,7 +538,7 @@
     <value>True</value>
   </metadata>
   <data name="colAgile.HeaderText" xml:space="preserve">
-    <value>Agile</value>
+    <value>アジャイル</value>
   </data>
   <data name="colAgile.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>

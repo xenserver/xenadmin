@@ -277,7 +277,7 @@
     <value>正在展开 {0}... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>正在配置 [XenServer] 的虚拟机... </value>
+    <value>正在为服务器配置虚拟机... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>已导入。</value>
