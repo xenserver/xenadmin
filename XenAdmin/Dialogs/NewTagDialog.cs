@@ -83,11 +83,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void SortDisplayedList()
-        {
-            SortAndDisplayList(ExtractList());
-        }
-
         private List<TagsDataGridViewRow> ExtractList()
         {
             var rows = new List<TagsDataGridViewRow>();
@@ -113,11 +108,11 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private TagsDataGridViewRow FindTag(string tag)
+        private TagsDataGridViewRow FindTag(string tag, List<TagsDataGridViewRow> rows)
         {
             // Used to use tagsListView.Items.ContainsKey(tag), but that uses the Name
             // instead of the Text, and is also not case sensitive, which caused a bug.
-            foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
+            foreach (var item in rows)
             {
                 if (item.Text == tag)
                     return item;
@@ -127,12 +122,13 @@ namespace XenAdmin.Dialogs
 
         private void AddTag()
         {
+            var rows = ExtractList();
             string text = this.textBox1.Text.Trim();
-            var item = FindTag(text);
+            var item = FindTag(text, rows);
             if (item == null)
             {
                 item = new TagsDataGridViewRow { Checked = CheckState.Checked, Text = text };
-                tagsDataGrid.Rows.Add(item);
+                rows.Add(item);
             }
             else
             {
@@ -141,14 +137,14 @@ namespace XenAdmin.Dialogs
 
             this.textBox1.Text = "";
             addButton.Enabled = false;
-            SortDisplayedList();
+            SortAndDisplayList(rows);
         }
 
         private void LoadTags(List<string> tags, List<string> indeterminateTags)
         {
             Program.AssertOnEventThread();
 
-            tagsDataGrid.Rows.Clear();
+            var rows = new List<TagsDataGridViewRow>();
 
             foreach (string tag in Tags.GetAllTags())
             {
@@ -163,17 +159,17 @@ namespace XenAdmin.Dialogs
                 }
 
                 var item = new TagsDataGridViewRow { Checked = checkState, Text = tag };
-                tagsDataGrid.Rows.Add(item);
+                rows.Add(item);
             }
             foreach (string tag in tags)   // We need to include these too, because they may have been recently added and not yet got into GetAllTags()
             {
-                if (FindTag(tag) == null)
+                if (FindTag(tag, rows) == null)
                 {
                     var item = new TagsDataGridViewRow { Checked = CheckState.Checked, Text = tag};
-                    tagsDataGrid.Rows.Add(item);
+                    rows.Add(item);
                 }
             }
-            SortDisplayedList();
+            SortAndDisplayList(rows);
         }
 
         private void NewTagDialog_Activated(object sender, EventArgs e)
