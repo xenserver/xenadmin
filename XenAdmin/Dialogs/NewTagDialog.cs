@@ -85,49 +85,17 @@ namespace XenAdmin.Dialogs
 
         private void SortList()
         {
-            var listChecked = new List<TagsDataGridViewRow>();
-            var listIndeterminate = new List<TagsDataGridViewRow>();
-            var listNonChecked = new List<TagsDataGridViewRow>();
-
+            var rows = new List<TagsDataGridViewRow>();
             foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
             {
-                if (item.Checked == CheckState.Checked)
-                {
-                    listChecked.Add(item);
-                }
-                else if (item.Checked == CheckState.Unchecked)
-                {
-                    listNonChecked.Add(item);
-                }
-                else
-                {
-                    listIndeterminate.Add(item);
-                }
+                rows.Add(item);
             }
-            listNonChecked.Sort(Comparison());
-            listChecked.Sort(Comparison());
-            listIndeterminate.Sort(Comparison());
+            rows.Sort();
             tagsDataGrid.Rows.Clear();
-            foreach (var item in listChecked)
+            foreach (var item in rows)
             {
                 tagsDataGrid.Rows.Add(item);
             }
-            foreach (var item in listIndeterminate)
-            {
-                tagsDataGrid.Rows.Add(item);
-            }
-            foreach (var item in listNonChecked)
-            {
-                tagsDataGrid.Rows.Add(item);
-            }
-        }
-
-        private Comparison<TagsDataGridViewRow> Comparison()
-        {
-            return delegate (TagsDataGridViewRow x, TagsDataGridViewRow y)
-                       {
-                           return x.Text.CompareTo(y.Text);
-                       };
         }
 
         private TagsDataGridViewRow FindTag(string tag)
@@ -229,7 +197,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public class TagsDataGridViewRow : DataGridViewRow
+        public class TagsDataGridViewRow : DataGridViewRow, IComparable<TagsDataGridViewRow>
         {
             private readonly DataGridViewCheckBoxCell _cellCheckState;
             private readonly DataGridViewTextBoxCell _cellTag;
@@ -274,6 +242,36 @@ namespace XenAdmin.Dialogs
             {
                 get { return _cellTag.Value.ToString(); }
                 set { _cellTag.Value = value; }
+            }
+
+            public int CompareTo(TagsDataGridViewRow other)
+            {
+                if (other == null)
+                    throw new ArgumentNullException(string.Format("Compared {0} must not be null.", GetType().Name));
+
+                var checkStateComparer = new SortCheckedStateForTagsHelper();
+                var output = checkStateComparer.Compare(Checked, other.Checked);
+                if (output != 0)
+                    return output;
+
+                return Text.CompareTo(other.Text);
+            }
+        }
+
+        private class SortCheckedStateForTagsHelper : IComparer<CheckState>
+        {
+            private static readonly IList<CheckState> Priority = new List<CheckState>
+            {
+                CheckState.Checked,
+                CheckState.Indeterminate,
+                CheckState.Unchecked
+            };
+
+            public int Compare(CheckState a, CheckState b)
+            {
+                var priorityA = Priority.IndexOf(a);
+                var priorityB = Priority.IndexOf(b);
+                return priorityA.CompareTo(priorityB);
             }
         }
 
