@@ -117,14 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivationServerUnavailable" xml:space="preserve">
-    <value>7018</value>
-  </data>
   <data name="AddServerDialog" xml:space="preserve">
     <value>hosts-add</value>
-  </data>
-  <data name="AddStorageLinkSystemDialog" xml:space="preserve">
-    <value>4022</value>
   </data>
   <data name="AdPasswordPromptDisable" xml:space="preserve">
     <value>rbac-join-domain</value>
@@ -537,9 +531,6 @@
   <data name="InstallToolsWarningDialog" xml:space="preserve">
     <value>vms-installtools</value>
   </data>
-  <data name="IQNWarningDialog" xml:space="preserve">
-    <value>6320</value>
-  </data>
   <data name="IscsiChoicesDialog" xml:space="preserve">
     <value>storage-pools</value>
   </data>
@@ -547,7 +538,7 @@
     <value>dr-testfailover</value>
   </data>
   <data name="LicenseKeyDialog" xml:space="preserve">
-    <value>6800</value>
+    <value>licensing-about</value>
   </data>
   <data name="LicenseManager" xml:space="preserve">
     <value>licensing-about</value>
@@ -633,30 +624,6 @@
   <data name="NewNetworkWizard" xml:space="preserve">
     <value>hosts-network-add</value>
   </data>
-  <data name="NewPolicyWizard_ArchivesnapshotsPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_EmailalertsPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_FinishPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_PolicyNamePane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_RbacPane" xml:space="preserve">
-    <value>9843</value>
-  </data>
-  <data name="NewPolicyWizard_SnapshotfrequencyPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_SnapshottypePane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_VirtualMachinesPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
   <data name="NewPolicyWizardVMSS_EmailalertsPane" xml:space="preserve">
     <value>vms-snapshotschedule-create-policy</value>
   </data>
@@ -684,9 +651,6 @@
   <data name="NewSRWizard_FinishPane" xml:space="preserve">
     <value>storage-pools-add</value>
   </data>
-  <data name="NewSRWizard_FlexVols" xml:space="preserve">
-    <value>4025</value>
-  </data>
   <data name="NewSRWizard_Location_CIFSISOPane" xml:space="preserve">
     <value>storage-pools-add-iso</value>
   </data>
@@ -709,7 +673,7 @@
     <value>storage-pools-add-nfsvhd</value>
   </data>
   <data name="NewSRWizard_NameandStorageSystemPane" xml:space="preserve">
-    <value>4023</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_RbacPane" xml:space="preserve">
     <value>rbac-overview</value>
@@ -721,25 +685,25 @@
     <value>storage-pools-add-smb</value>
   </data>
   <data name="NewSRWizard_SL_NETAPP_filerPane" xml:space="preserve">
-    <value>4017</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SL_NETAPP_optionsPane" xml:space="preserve">
-    <value>4018</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SL_SLServer_locationPane" xml:space="preserve">
-    <value>4020</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SL_SLServer_optionsPane" xml:space="preserve">
-    <value>4019</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SL_SLServer_options_PreBostonPane" xml:space="preserve">
-    <value>4023</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SL_SystemPane" xml:space="preserve">
-    <value>4014</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SL_System_PreBostonPane" xml:space="preserve">
-    <value>4023</value>
+    <value>storage-pools-add</value>
   </data>
   <data name="NewSRWizard_SrNamePane" xml:space="preserve">
     <value>storage-pools-add</value>
@@ -855,9 +819,6 @@
   <data name="PatchingWizard_UploadPatchPane" xml:space="preserve">
     <value>updates-applying</value>
   </data>
-  <data name="PluginListDialog" xml:space="preserve">
-    <value>1200</value>
-  </data>
   <data name="PoolJoinAdConfiguring" xml:space="preserve">
     <value>pools-add-host</value>
   </data>
@@ -934,7 +895,7 @@
     <value>hosts-backup</value>
   </data>
   <data name="SelectHostDialogLicense" xml:space="preserve">
-    <value>6801</value>
+    <value>licensing-about</value>
   </data>
   <data name="SelectVMsToSuspendDialog" xml:space="preserve">
     <value>vms-suspend</value>
@@ -958,10 +919,10 @@
     <value>tabs</value>
   </data>
   <data name="TabPageDockerDetails" xml:space="preserve">
-    <value>9903</value>
+    <value>tabs</value>
   </data>
   <data name="TabPageDockerProcess" xml:space="preserve">
-    <value>9902</value>
+    <value>tabs</value>
   </data>
   <data name="TabPageGPU" xml:space="preserve">
     <value>tabs</value>
