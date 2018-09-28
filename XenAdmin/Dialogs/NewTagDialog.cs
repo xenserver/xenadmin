@@ -85,12 +85,27 @@ namespace XenAdmin.Dialogs
 
         private void SortDisplayedList()
         {
+            SortAndDisplayList(ExtractList());
+        }
+
+        private List<TagsDataGridViewRow> ExtractList()
+        {
             var rows = new List<TagsDataGridViewRow>();
             foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
             {
                 rows.Add(item);
             }
+            return rows;
+        }
+
+        private void SortAndDisplayList(List<TagsDataGridViewRow> rows)
+        {
             rows.Sort();
+            DisplayList(rows);
+        }
+
+        private void DisplayList(List<TagsDataGridViewRow> rows)
+        {
             tagsDataGrid.Rows.Clear();
             foreach (var item in rows)
             {
