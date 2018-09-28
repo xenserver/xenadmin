@@ -64,7 +64,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
             List<string> items = new List<string>();
-            foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
+            foreach (var item in ExtractList())
             {
                 if (item.Checked == checkState)
                 {
