@@ -259,7 +259,7 @@ namespace XenAdmin.Dialogs
 
             public void Toggle(CheckState stateToToggleFrom)
             {
-                Checked = Opposite(stateToToggleFrom);
+                Checked = stateToToggleFrom == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
             }
 
             public CheckState Checked
@@ -285,11 +285,6 @@ namespace XenAdmin.Dialogs
             {
                 get { return _cellTag.Value.ToString(); }
                 set { _cellTag.Value = value; }
-            }
-
-            private CheckState Opposite(CheckState state)
-            {
-                return state == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
             }
         }
 
