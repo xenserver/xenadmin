@@ -209,18 +209,6 @@ namespace XenAdmin.Dialogs
             textBox1.Focus();
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
         private void addButton_Click(object sender, EventArgs e)
         {
             AddTag();
