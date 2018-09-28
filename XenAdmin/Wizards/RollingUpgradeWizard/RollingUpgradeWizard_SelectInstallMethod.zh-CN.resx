@@ -421,7 +421,7 @@
     <value>5</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>输入安装介质的详细信息，然后单击“开始升级”以开始依次自动升级每个 [XenServer]。</value>
+    <value>输入安装介质的详细信息，然后单击“开始升级”以开始依次自动升级每个服务器。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

@@ -382,7 +382,7 @@
     <value>8</value>
   </data>
   <data name="BypassForServersCheckbox.Text" xml:space="preserve">
-    <value>すべての [XenServer] 接続でプロキシ サーバーを使用しない(&amp;B)</value>
+    <value>すべてのサーバー接続でプロキシ サーバーを使用しない(&amp;B)</value>
   </data>
   <data name="&gt;&gt;BypassForServersCheckbox.Name" xml:space="preserve">
     <value>BypassForServersCheckbox</value>
@@ -1036,7 +1036,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>ここでは、プロキシ サーバーを構成したり、待機時間が長い環境での [XenServer] 接続をカスタマイズしたりできます。</value>
+    <value>ここでは、プロキシ サーバーを構成したり、待機時間が長い環境でのサーバー接続をカスタマイズしたりできます。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

@@ -376,7 +376,7 @@
     <value>8</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>各サイトおよび [XenServer] ごとに割り当てるメモリまたはストレージ リポジトリと容量を選択して、PVS アクセラレータが使用するキャッシュ構成を指定します。</value>
+    <value>各サイトおよびサーバーごとに割り当てるメモリまたはストレージ リポジトリと容量を選択して、PVS アクセラレータが使用するキャッシュ構成を指定します。</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
