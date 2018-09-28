@@ -148,10 +148,8 @@ namespace XenAdmin.Dialogs
             var item = FindTag(text);
             if (item == null)
             {
-                item = new TagsDataGridViewRow();
+                item = new TagsDataGridViewRow { Checked = CheckState.Checked, Text = text };
                 tagsDataGrid.Rows.Add(item);
-                item.Checked = CheckState.Checked;
-                item.Text = text;
             }
             else
             {
@@ -171,28 +169,25 @@ namespace XenAdmin.Dialogs
 
             foreach (string tag in Tags.GetAllTags())
             {
-                var item = new TagsDataGridViewRow();
-                tagsDataGrid.Rows.Add(item);
-
+                var checkState = CheckState.Unchecked;
                 if (tags.Contains(tag))
                 {
-                    item.Checked = CheckState.Checked;
+                    checkState = CheckState.Checked;
                 }
                 else if (indeterminateTags.Contains(tag))
                 {
-                    item.Checked = CheckState.Indeterminate;
+                    checkState = CheckState.Indeterminate;
                 }
 
-                item.Text = tag;
+                var item = new TagsDataGridViewRow { Checked = checkState, Text = tag };
+                tagsDataGrid.Rows.Add(item);
             }
             foreach (string tag in tags)   // We need to include these too, because they may have been recently added and not yet got into GetAllTags()
             {
                 if (FindTag(tag) == null)
                 {
-                    var item = new TagsDataGridViewRow();
+                    var item = new TagsDataGridViewRow { Checked = CheckState.Checked, Text = tag};
                     tagsDataGrid.Rows.Add(item);
-                    item.Checked = CheckState.Checked;
-                    item.Text = tag;
                 }
             }
             SortList();
