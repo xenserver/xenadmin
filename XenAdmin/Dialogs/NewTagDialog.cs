@@ -93,14 +93,10 @@ namespace XenAdmin.Dialogs
             return rows;
         }
 
-        private void SortAndDisplayList(List<TagsDataGridViewRow> rows)
-        {
-            rows.Sort();
-            DisplayList(rows);
-        }
-
         private void DisplayList(List<TagsDataGridViewRow> rows)
         {
+            rows.Sort();
+
             tagsDataGrid.Rows.Clear();
             foreach (var item in rows)
             {
@@ -137,7 +133,7 @@ namespace XenAdmin.Dialogs
 
             this.textBox1.Text = "";
             addButton.Enabled = false;
-            SortAndDisplayList(rows);
+            DisplayList(rows);
         }
 
         private void LoadTags(List<string> tags, List<string> indeterminateTags)
@@ -169,7 +165,7 @@ namespace XenAdmin.Dialogs
                     rows.Add(item);
                 }
             }
-            SortAndDisplayList(rows);
+            DisplayList(rows);
         }
 
         private void NewTagDialog_Activated(object sender, EventArgs e)
