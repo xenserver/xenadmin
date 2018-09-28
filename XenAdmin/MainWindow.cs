@@ -106,8 +106,6 @@ namespace XenAdmin
         internal readonly UsbPage UsbPage = new UsbPage();
 
         private ActionBase statusBarAction = null;
-        public ActionBase StatusBarAction { get { return statusBarAction; } }
-      
         private bool IgnoreTabChanges = false;
         private bool ToolbarsEnabled;
 
@@ -206,10 +204,6 @@ namespace XenAdmin
             AddTabContents(UsbPage, TabPageUSB);
 
             #endregion
-
-            TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
-            TheTabControl.Deselected += TheTabControl_Deselected;
-            navigationPane.DragDropCommandActivated += navigationPane_DragDropCommandActivated;
 
             PoolCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Pool>);
             MessageCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MessageCollectionChanged);
@@ -531,20 +525,13 @@ namespace XenAdmin
             statusLabel.Text = Helpers.FirstLine(message);
         }
 
-        public void SetProgressBar(bool visible, int progress)
-        {
-            statusProgressBar.Visible = visible;
-            statusProgressBar.Value = progress;
-        }
-
         private void MainWindow_Shown(object sender, EventArgs e)
         {
             MainMenuBar.Location = new Point(0, 0);
 
-            if (ToolStrip.Renderer is ToolStripProfessionalRenderer)
-            {
-                ((ToolStripProfessionalRenderer)ToolStrip.Renderer).RoundedEdges = false;
-            }
+            var rendProf = ToolStrip.Renderer as ToolStripProfessionalRenderer;
+            if (rendProf != null)
+                rendProf.RoundedEdges = false;
 
             ConnectionsManager.XenConnections.CollectionChanged += XenConnection_CollectionChanged;
             try
@@ -565,8 +552,9 @@ namespace XenAdmin
                     dlg.ShowDialog(this);
                 }
                 Application.Exit();
-                return; // Application.Exit() does not exit the current method.
+                return; //return explicitly because Application.Exit() does not exit the current method.
             }
+
             ToolbarsEnabled = Properties.Settings.Default.ToolbarsEnabled;
             RequestRefreshTreeView();
             UpdateToolbars();
@@ -641,11 +629,6 @@ namespace XenAdmin
                 pair.Value.opaque_ref = pair.Key;
                 MeddlingActionManager.ForceAddTask(pair.Value);
             }
-        }
-
-        private void Cache_Changed(object sender, EventArgs e)
-        {
-            RequestRefreshTreeView();
         }
 
         private void connection_CachePopulatedOnStartup(object sender, EventArgs e)
@@ -1265,20 +1248,7 @@ namespace XenAdmin
 
         private static void gc()
         {
-            //log_gc("Before");  // Don't log this, CA-159791
             GC.Collect();
-            //log_gc("After");
-        }
-
-        private static void log_gc(string when)
-        {
-            log.DebugFormat("{0} GC: approx {1} bytes in use", when, GC.GetTotalMemory(false));
-            for (int i = 0; i <= GC.MaxGeneration; i++)
-            {
-                log.DebugFormat("Number of times GC has occurred for generation {0} objects: {1}", i, GC.CollectionCount(i));
-            }
-            log.Debug("GDI objects in use: " + Win32.GetGuiResourcesGDICount(Process.GetCurrentProcess().Handle));
-            log.Debug("USER objects in use: " + Win32.GetGuiResourcesUserCount(Process.GetCurrentProcess().Handle));
         }
 
         void connection_ConnectionReconnecting(object sender, EventArgs e)
@@ -1382,6 +1352,7 @@ namespace XenAdmin
         }
 
         private static int TOOLBAR_HEIGHT = 31;
+
         /// <summary>
         /// Updates the toolbar buttons. Also updates which tabs are visible.
         /// </summary>
@@ -1416,7 +1387,6 @@ namespace XenAdmin
 
             IXenConnection selectionConnection = SelectionManager.Selection.GetConnectionOfFirstItem();
             Pool selectionPool = selectionConnection == null ? null : Helpers.GetPool(selectionConnection);
-            Host selectionMaster = null == selectionPool ? null : selectionPool.Connection.Resolve(selectionPool.master);
 
             // 'Home' tab is only visible if the 'Overview' tree node is selected, or if the tree is
             // empty (i.e. at startup).
@@ -1741,8 +1711,6 @@ namespace XenAdmin
 
         private void MainMenuBar_MenuActivate(object sender, EventArgs e)
         {
-            Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
-            IXenConnection connection = SelectionManager.Selection.GetConnectionOfFirstItem();
             bool vm = SelectionManager.Selection.FirstIsRealVM && !((VM)SelectionManager.Selection.First).Locked;
 
             exportSettingsToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
@@ -1754,8 +1722,7 @@ namespace XenAdmin
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
-            IXenConnection conn;
-            conn = SelectionManager.Selection.GetConnectionOfAllItems();
+            IXenConnection conn = SelectionManager.Selection.GetConnectionOfAllItems();
             if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn)))
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = true;
