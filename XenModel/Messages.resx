@@ -3771,7 +3771,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>Default</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>Default install of [XenServer]</value>
+    <value>Default install of {0}</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>Default Search</value>
@@ -11208,13 +11208,13 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>What type of snapshot do you want to use for scheduled snapshots?</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>[XenServer] build number</value>
+    <value>Build number</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>[XenServer] build date</value>
+    <value>Build date</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>[XenServer] version</value>
+    <value>Version</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>Try again using a correct user name and password.</value>
