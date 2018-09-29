@@ -10534,7 +10534,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default install of [XenServer].
+        ///   Looks up a localized string similar to Default install of {0}.
         /// </summary>
         public static string DEFAULT_INSTALL_OF_XENSERVER {
             get {
@@ -32301,7 +32301,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] build number.
+        ///   Looks up a localized string similar to Build number.
         /// </summary>
         public static string SOFTWARE_VERSION_BUILD_NUMBER {
             get {
@@ -32310,7 +32310,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] build date.
+        ///   Looks up a localized string similar to Build date.
         /// </summary>
         public static string SOFTWARE_VERSION_DATE {
             get {
@@ -32319,7 +32319,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] version.
+        ///   Looks up a localized string similar to Version.
         /// </summary>
         public static string SOFTWARE_VERSION_PRODUCT_VERSION {
             get {
