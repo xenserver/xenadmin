@@ -266,7 +266,7 @@ namespace XenAdmin.XenSearch
         {
             if (Program.MainWindow.SelectObject(o) && Program.MainWindow.TheTabControl.TabPages.Contains(Program.MainWindow.TabPageGeneral))
             {
-                Program.MainWindow.SwitchToTab(MainWindow.Tab.Settings);
+                Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
             }
         }
     }
