@@ -38,9 +38,9 @@ namespace XenAdmin.Dialogs
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.tagsDataGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnTags = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGrid)).BeginInit();
             this.mainTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,7 @@ namespace XenAdmin.Dialogs
             this.textBox1.Name = "textBox1";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox1_PreviewKeyDown);
             // 
             // addButton
             // 
@@ -120,17 +121,6 @@ namespace XenAdmin.Dialogs
             this.tagsDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.tagsDataGrid_SortCompare);
             this.tagsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsDataGrid_KeyDown);
             // 
-            // mainTableLayoutPanel
-            // 
-            resources.ApplyResources(this.mainTableLayoutPanel, "mainTableLayoutPanel");
-            this.mainTableLayoutPanel.Controls.Add(this.cancelButton, 2, 2);
-            this.mainTableLayoutPanel.Controls.Add(this.tagsDataGrid, 0, 1);
-            this.mainTableLayoutPanel.Controls.Add(this.textBox1, 1, 0);
-            this.mainTableLayoutPanel.Controls.Add(this.addButton, 2, 0);
-            this.mainTableLayoutPanel.Controls.Add(this.okButton, 1, 2);
-            this.mainTableLayoutPanel.Controls.Add(this.NewTagLabel, 0, 0);
-            this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
-            // 
             // ColumnEnabled
             // 
             this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -146,8 +136,20 @@ namespace XenAdmin.Dialogs
             this.ColumnTags.Name = "ColumnTags";
             this.ColumnTags.ReadOnly = true;
             // 
+            // mainTableLayoutPanel
+            // 
+            resources.ApplyResources(this.mainTableLayoutPanel, "mainTableLayoutPanel");
+            this.mainTableLayoutPanel.Controls.Add(this.cancelButton, 2, 2);
+            this.mainTableLayoutPanel.Controls.Add(this.tagsDataGrid, 0, 1);
+            this.mainTableLayoutPanel.Controls.Add(this.textBox1, 1, 0);
+            this.mainTableLayoutPanel.Controls.Add(this.addButton, 2, 0);
+            this.mainTableLayoutPanel.Controls.Add(this.okButton, 1, 2);
+            this.mainTableLayoutPanel.Controls.Add(this.NewTagLabel, 0, 0);
+            this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
+            // 
             // NewTagDialog
             // 
+            this.AcceptButton = this.okButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;

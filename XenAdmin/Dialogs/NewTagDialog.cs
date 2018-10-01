@@ -76,7 +76,7 @@ namespace XenAdmin.Dialogs
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter && addButton.Enabled)
+            if ((e.KeyChar == (char)Keys.Enter || e.KeyChar == (char)Keys.Return) && addButton.Enabled)
             {
                 e.Handled = true;
                 AddTag();
@@ -193,10 +193,18 @@ namespace XenAdmin.Dialogs
 
         private void tagsDataGrid_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Space)
             {
                 ToggleItems(tagsDataGrid.SelectedRows);
                 e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            {
+                if (AcceptButton == null)
+                    return;
+
+                e.Handled = true;
+                AcceptButton.PerformClick();
             }
         }
 
@@ -316,6 +324,11 @@ namespace XenAdmin.Dialogs
                 e.SortResult = row1.Checked.CompareTo(row2.Checked);
                 e.Handled = true;
             }
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            e.IsInputKey = e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return;
         }
     }
 }

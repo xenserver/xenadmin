@@ -289,7 +289,7 @@
     <value />
   </data>
   <data name="ColumnEnabled.Width" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>19</value>
   </data>
   <metadata name="ColumnTags.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
