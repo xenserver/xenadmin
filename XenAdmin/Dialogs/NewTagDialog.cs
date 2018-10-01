@@ -97,10 +97,18 @@ namespace XenAdmin.Dialogs
         {
             rows.Sort();
 
-            tagsDataGrid.Rows.Clear();
-            foreach (var item in rows)
+            try
             {
-                tagsDataGrid.Rows.Add(item);
+                tagsDataGrid.SuspendLayout();
+                tagsDataGrid.Rows.Clear();
+                foreach (var item in rows)
+                {
+                    tagsDataGrid.Rows.Add(item);
+                }
+            }
+            finally
+            {
+                tagsDataGrid.ResumeLayout();
             }
         }
 
