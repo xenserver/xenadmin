@@ -554,7 +554,6 @@ namespace XenAdmin
 
             ToolbarsEnabled = Properties.Settings.Default.ToolbarsEnabled;
             RequestRefreshTreeView();
-            UpdateToolbars();
 
             // if there are fewer than 30 connections, then expand the tree nodes.
             expandTreeNodesOnStartup = ConnectionsManager.XenConnectionsCopy.Count < 30;
@@ -572,9 +571,7 @@ namespace XenAdmin
                 }
             }
 
-            RequestRefreshTreeView();
-
-            ThreadPool.QueueUserWorkItem((WaitCallback)delegate(object o)
+            ThreadPool.QueueUserWorkItem(delegate
             {
                 // Sleep a short time before closing the splash
                 Thread.Sleep(500);
