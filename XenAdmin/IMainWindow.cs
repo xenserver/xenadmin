@@ -64,7 +64,7 @@ namespace XenAdmin
         void RemoveConnection(IXenConnection connection);
         void PutSelectedNodeIntoEditMode();
         void SwitchToTab(MainWindow.Tab tab);
-        bool MenuShortcutsEnabled { get;}
+        bool MenuShortcutsEnabled { get; set; }
         Form Form { get; }
     }
 }

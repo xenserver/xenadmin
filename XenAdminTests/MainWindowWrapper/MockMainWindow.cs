@@ -138,6 +138,7 @@ namespace XenAdminTests
         public bool MenuShortcutsEnabled
         {
             get { return true; }
+            set { }
         }
 
         public void TrySelectNewObjectInTree(IXenConnection c, bool selectNode, bool expandNode, bool ensureNodeVisible)

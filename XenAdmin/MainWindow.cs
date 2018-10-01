@@ -1305,16 +1305,17 @@ namespace XenAdmin
             this.Close();
         }
 
-        private bool _menuShortcuts = true;
-        public bool MenuShortcuts
+        private bool _menuShortcutsEnabled = true;
+        public bool MenuShortcutsEnabled
         {
+            get { return _menuShortcutsEnabled; }
             set
             {
-                if (value != _menuShortcuts)
+                if (value != _menuShortcutsEnabled)
                 {
                     //if the VNC Console is active (the user is typing into it etc) all of the shortcuts for XenCenter are disabled
                     //IMPORTANT! add any shortcuts you want to pass to the VNC console into this if, else statement
-                    _menuShortcuts = value;
+                    _menuShortcutsEnabled = value;
 
                     // update the selection so menu items can enable/disable keyboard shortcuts as appropriate.
                     SelectionManager.RefreshSelection();
@@ -1683,7 +1684,7 @@ namespace XenAdmin
 
             exportSettingsToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
 
-            this.MenuShortcuts = true;
+            MenuShortcutsEnabled = true;
 
             startOnHostToolStripMenuItem.Available = startOnHostToolStripMenuItem.Enabled;
             resumeOnToolStripMenuItem.Available = resumeOnToolStripMenuItem.Enabled;
@@ -2471,11 +2472,6 @@ namespace XenAdmin
             TrySelectNewNode(c, selectNode, expandNode, ensureNodeVisible);
         }
 
-        public bool MenuShortcutsEnabled
-        {
-            get { return _menuShortcuts; }
-        }
-
         #endregion
 
         #region Help
@@ -2599,7 +2595,7 @@ namespace XenAdmin
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             // CA-28064. MessageBox hack to kill the hlpevent it passes to MainWindows.
-            if (Program.MainWindow.ContainsFocus && _menuShortcuts)
+            if (Program.MainWindow.ContainsFocus && MenuShortcutsEnabled)
                 LaunchHelp();
         }
 
