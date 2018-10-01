@@ -1321,12 +1321,12 @@ namespace XenAdmin.ConsoleView
 
         public static void DisableMenuShortcuts()
         {
-            Program.MainWindow.MenuShortcuts = false;
+            Program.MainWindow.MenuShortcutsEnabled = false;
         }
 
         public static void EnableMenuShortcuts()
         {
-            Program.MainWindow.MenuShortcuts = true;
+            Program.MainWindow.MenuShortcutsEnabled = true;
         }
 
         private Set<Keys> pressedKeys = new Set<Keys>();
