@@ -105,6 +105,7 @@ namespace XenAdmin
         internal readonly UsbPage UsbPage = new UsbPage();
 
         private ActionBase statusBarAction = null;
+
         private bool IgnoreTabChanges = false;
         private bool ToolbarsEnabled;
 
@@ -336,10 +337,6 @@ namespace XenAdmin
             // Using the Load event ensures that the handle has been 
             // created:
             base.OnLoad(e);
-
-            NewTabs[0] = TabPageHome;
-            NewTabCount = 1;
-            ChangeToNewTabs();
         }
 
         protected override void OnShown(EventArgs e)
@@ -1348,12 +1345,18 @@ namespace XenAdmin
             {
                 ToolStrip.ResumeLayout();
             }
+
+            // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
+            // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
+            // the tree using the keyboard.
+
+            navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
         }
 
         private static int TOOLBAR_HEIGHT = 31;
 
         /// <summary>
-        /// Updates the toolbar buttons. Also updates which tabs are visible.
+        /// Updates the toolbar buttons.
         /// </summary>
         private void UpdateToolbarsCore()
         {
@@ -1383,7 +1386,10 @@ namespace XenAdmin
 
             ForceRebootToolbarButton.Available = ((ForceVMRebootCommand)ForceRebootToolbarButton.Command).ShowOnMainToolBar;
             ForceShutdownToolbarButton.Available = ((ForceVMShutDownCommand)ForceShutdownToolbarButton.Command).ShowOnMainToolBar;
+        }
 
+        private List<TabPage> GetNewTabPages()
+        {
             IXenConnection selectionConnection = SelectionManager.Selection.GetConnectionOfFirstItem();
             Pool selectionPool = selectionConnection == null ? null : Helpers.GetPool(selectionConnection);
 
@@ -1411,21 +1417,46 @@ namespace XenAdmin
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML();
 
-            NewTabCount = 0;
-            ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected));
-            ShowTab(TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
-            ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
-            ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
-            ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
-            ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
-            ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
-            ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows());
-            ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
+            var newTabs = new List<TabPage>();
+
+            if (!SearchMode && show_home)
+                newTabs.Add(TabPageHome);
+
+            if (!multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) ||
+                                          isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected))
+                newTabs.Add(TabPageGeneral);
+
+            if (!multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected))
+                newTabs.Add(TabPageBallooning);
+
+            if (!multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)))
+                newTabs.Add(TabPageStorage);
+
+            if (!multi && !SearchMode && isSRSelected)
+                newTabs.Add(TabPageSR);
+
+            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected))
+                newTabs.Add(TabPagePhysicalStorage);
+
+            if (!multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected))
+                newTabs.Add(TabPageNetwork);
+
+            if (!multi && !SearchMode && isHostSelected && isHostLive)
+                newTabs.Add(TabPageNICs);
+
+            if (!multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows())
+                newTabs.Add(TabPageDockerProcess);
+
+            if (!multi && !SearchMode && isDockerContainerSelected)
+                newTabs.Add(TabPageDockerDetails);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
-            ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
-            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
+
+            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu))
+                newTabs.Add(TabPageGPU);
+
+            if (!multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough))
+                newTabs.Add(TabPageUSB);
 
             var consoleFeatures = new List<TabPageFeature>();
             var otherFeatures = new List<TabPageFeature>();
@@ -1434,35 +1465,43 @@ namespace XenAdmin
                 GetFeatureTabPages(SelectionManager.Selection.FirstAsXenObject, out consoleFeatures, out otherFeatures);
 
             foreach (var f in consoleFeatures)
-                ShowTab(f.TabPage, true);
+                newTabs.Add(f.TabPage);
 
-            ShowTab(TabPageConsole, consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(TabPageCvmConsole, consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains);
-            ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
-            ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
+            if (consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
+                newTabs.Add(TabPageConsole);
+            
+            if (consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains)
+                newTabs.Add(TabPageCvmConsole);
+
+            if (!multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
+                newTabs.Add(TabPagePeformance);
+
+            if (!multi && !SearchMode && isPoolSelected)
+                newTabs.Add(ha_upsell ? TabPageHAUpsell : TabPageHA);
+            
+            if(!multi && !SearchMode && isRealVMSelected)
+                newTabs.Add(TabPageSnapshots);
 
             //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
-            if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell ))
-                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
+            if (!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell)
+                && !multi && !SearchMode && isPoolSelected)
+                newTabs.Add(TabPageWLB);
 
-            ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
+            if (!multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive))
+                newTabs.Add(ad_upsell ? TabPageADUpsell : TabPageAD);
 
-            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
-                && Helpers.PvsCacheCapability(selectionConnection));
+            if (!multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
+                && Helpers.PvsCacheCapability(selectionConnection))
+                newTabs.Add(TabPagePvs);
 
             foreach (var f in otherFeatures)
-                ShowTab(f.TabPage, true);
+                newTabs.Add(f.TabPage);
 
-            ShowTab(TabPageSearch, true);
+            newTabs.Add(TabPageSearch);
 
             // N.B. Change NewTabs definition if you add more tabs here.
 
-            // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
-            // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
-            // the tree using the keyboard.
-
-            navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
+            return newTabs;
         }
 
         private void GetFeatureTabPages(IXenObject xenObject, out List<TabPageFeature> consoleFeatures, out List<TabPageFeature> otherFeatures)
@@ -1501,90 +1540,41 @@ namespace XenAdmin
             }
         }
 
-        private readonly TabPage[] NewTabs = new TabPage[512];
-        int NewTabCount;
-        private void ShowTab(TabPage page, bool visible)
-        {
-            if (visible)
-            {
-                NewTabs[NewTabCount] = page;
-                NewTabCount++;
-            }
-        }
-
         private void ChangeToNewTabs()
         {
-            TabPage new_selected_page = NewSelectedPage();
+            var newTabs = GetNewTabPages();
+
+            var pageToSelect = GetLastSelectedPage(SelectionManager.Selection.First);
+            if (pageToSelect != null && !newTabs.Contains(pageToSelect))
+                pageToSelect = null;
+
             TheTabControl.SuspendLayout();
             IgnoreTabChanges = true;
+
             try
             {
-                TabControl.TabPageCollection p = TheTabControl.TabPages;
-                int i = 0; // Index into NewTabs
-                int m = 0; // Index into p
-
-                while (i < NewTabCount)
+                foreach (TabPage page in TheTabControl.TabPages)
                 {
-                    if (m == p.Count)
-                    {
-                        p.Add(NewTabs[i]);
-                        if (new_selected_page == NewTabs[i])
-                            TheTabControl.SelectedTab = new_selected_page;
-                        m++;
-                        i++;
-                    }
-                    else if (p[m] == NewTabs[i])
-                    {
-                        if (new_selected_page == NewTabs[i])
-                            TheTabControl.SelectedTab = new_selected_page;
-                        m++;
-                        i++;
-                    }
-                    else if (NewTabs.Contains(p[m]))
-                    {
-                        p.Insert(m, NewTabs[i]);
-                        if (new_selected_page == NewTabs[i])
-                            TheTabControl.SelectedTab = new_selected_page;
-                        m++;
-                        i++;
-                    }
-                    else
-                    {
-                        if (TheTabControl.SelectedTab == p[m] && new_selected_page == NewTabs[i])
-                        {
-                            // This clause is deliberately targeted at the case when you go from
-                            // Overview:Home to Host:Overview.
-                            p.Insert(m, NewTabs[i]);
-                            TheTabControl.SelectedTab = new_selected_page;
-                            m++;
-                            i++;
-                        }
-                        p.Remove(p[m]);
-                    }
+                    if (!newTabs.Contains(page))
+                        TheTabControl.TabPages.Remove(page);
                 }
 
-                // Remove any tabs that are left at the end of the list.
-                while (m < p.Count)
+                int m = 0; // Index into TheTabControl.TabPages
+
+                foreach (var newTab in newTabs)
                 {
-                    TabPage removed = p[p.Count - 1];
-                    p.Remove(removed);
-                    int index = NewTabsIndexOf(removed);
-                    if (index != -1)
-                    {
-                        // If this is a tab that we want, then we've got it in the list twice -- one
-                        // reference was here when we entered this function, and is the one that we're
-                        // pointing at now, and the other reference we've inserted through the loop above.
-                        // This is bad -- p.Remove(removed) above has now invalidated removed.Parent
-                        // (removed is still in the list through the other reference).  Fix this up by
-                        // removing the other reference too and starting over.
-                        // We can't do the Remove call in the loop above, because this has a poor visual
-                        // effect.
-                        p.Remove(removed);
-                        p.Insert(index, removed);
-                        if (new_selected_page == removed)
-                            TheTabControl.SelectedTab = removed;
-                    }
+                    var index = TheTabControl.TabPages.IndexOf(newTab);
+                    if (index < 0)
+                        TheTabControl.TabPages.Insert(m, newTab);
+
+                    m++;
+
+                    if (newTab == pageToSelect)
+                        TheTabControl.SelectedTab = newTab;
                 }
+
+                if (pageToSelect == null)
+                    TheTabControl.SelectedTab = TheTabControl.TabPages[0];
             }
             finally
             {
@@ -1593,17 +1583,6 @@ namespace XenAdmin
 
                 SetLastSelectedPage(SelectionManager.Selection.First, TheTabControl.SelectedTab);
             }
-        }
-
-        private TabPage NewSelectedPage()
-        {
-            Object o = SelectionManager.Selection.First;
-            IXenObject s = o as IXenObject;
-
-            TabPage last_selected_page = GetLastSelectedPage(o);
-            return last_selected_page != null && NewTabs.Contains(last_selected_page)
-                       ? last_selected_page
-                       : NewTabs[0];
         }
 
         private void SetLastSelectedPage(object o, TabPage p)
@@ -1628,19 +1607,9 @@ namespace XenAdmin
                 : selectedTabs.ContainsKey(o) ? selectedTabs[o] : null;
         }
 
-        private int NewTabsIndexOf(TabPage tp)
-        {
-            for (int i = 0; i < NewTabCount; i++)
-            {
-                if (NewTabs[i] == tp)
-                    return i;
-            }
-            return -1;
-        }
-
         private void pluginManager_PluginsChanged()
         {
-            UpdateToolbarsCore();
+            UpdateToolbars();
 
             foreach (ToolStripMenuItem menu in MainMenuBar.Items)
             {
@@ -2122,20 +2091,17 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails, USB
+            Home, General, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails, USB, Search
         }
 
         public void SwitchToTab(Tab tab)
         {
             switch (tab)
             {
-                case Tab.Overview:
-                    TheTabControl.SelectedTab = TabPageSearch;
-                    break;
                 case Tab.Home:
                     TheTabControl.SelectedTab = TabPageHome;
                     break;
-                case Tab.Settings:
+                case Tab.General:
                     TheTabControl.SelectedTab = TabPageGeneral;
                     break;
                 case Tab.Storage:
@@ -2167,6 +2133,9 @@ namespace XenAdmin
                     break;
                 case Tab.USB:
                     TheTabControl.SelectedTab = TabPageUSB;
+                    break;
+                case Tab.Search:
+                    TheTabControl.SelectedTab = TabPageSearch;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -2847,7 +2816,7 @@ namespace XenAdmin
 
                 searchMode = value;
                 navigationPane.InSearchMode = value;
-                UpdateToolbarsCore();
+                UpdateToolbars();
             }
         }
 
