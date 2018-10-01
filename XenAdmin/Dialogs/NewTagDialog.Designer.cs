@@ -38,9 +38,9 @@ namespace XenAdmin.Dialogs
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.tagsDataGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnTags = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGrid)).BeginInit();
             this.mainTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -117,22 +117,8 @@ namespace XenAdmin.Dialogs
             this.tagsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.tagsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGrid_CellContentClick);
             this.tagsDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGrid_CellContentClick);
+            this.tagsDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.tagsDataGrid_SortCompare);
             this.tagsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsDataGrid_KeyDown);
-            // 
-            // ColumnEnabled
-            // 
-            this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
-            this.ColumnEnabled.Name = "ColumnEnabled";
-            this.ColumnEnabled.ThreeState = true;
-            // 
-            // ColumnTags
-            // 
-            this.ColumnTags.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.ColumnTags, "ColumnTags");
-            this.ColumnTags.Name = "ColumnTags";
-            this.ColumnTags.ReadOnly = true;
-            this.ColumnTags.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // mainTableLayoutPanel
             // 
@@ -144,6 +130,21 @@ namespace XenAdmin.Dialogs
             this.mainTableLayoutPanel.Controls.Add(this.okButton, 1, 2);
             this.mainTableLayoutPanel.Controls.Add(this.NewTagLabel, 0, 0);
             this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
+            // 
+            // ColumnEnabled
+            // 
+            this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
+            this.ColumnEnabled.Name = "ColumnEnabled";
+            this.ColumnEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnEnabled.ThreeState = true;
+            // 
+            // ColumnTags
+            // 
+            this.ColumnTags.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnTags, "ColumnTags");
+            this.ColumnTags.Name = "ColumnTags";
+            this.ColumnTags.ReadOnly = true;
             // 
             // NewTagDialog
             // 

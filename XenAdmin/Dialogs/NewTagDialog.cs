@@ -305,5 +305,17 @@ namespace XenAdmin.Dialogs
             tagsDataGrid.RefreshEdit();
             tagsDataGrid.NotifyCurrentCellDirty(true);
         }
+
+        private void tagsDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            var row1 = tagsDataGrid.Rows[e.RowIndex1] as TagsDataGridViewRow;
+            var row2 = tagsDataGrid.Rows[e.RowIndex2] as TagsDataGridViewRow;
+
+            if (row1 != null && row2 != null && e.Column.Index == ColumnEnabled.Index)
+            {
+                e.SortResult = row1.Checked.CompareTo(row2.Checked);
+                e.Handled = true;
+            }
+        }
     }
 }
