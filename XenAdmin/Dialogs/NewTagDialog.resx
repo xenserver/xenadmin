@@ -282,13 +282,13 @@
   <data name="tagsDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="ColumnEnabled.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnChecked.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnEnabled.HeaderText" xml:space="preserve">
+  <data name="ColumnChecked.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <data name="ColumnEnabled.Width" type="System.Int32, mscorlib">
+  <data name="ColumnChecked.Width" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <metadata name="ColumnTags.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -387,10 +387,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Edit Tags</value>
   </data>
-  <data name="&gt;&gt;ColumnEnabled.Name" xml:space="preserve">
-    <value>ColumnEnabled</value>
+  <data name="&gt;&gt;ColumnChecked.Name" xml:space="preserve">
+    <value>ColumnChecked</value>
   </data>
-  <data name="&gt;&gt;ColumnEnabled.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnChecked.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnTags.Name" xml:space="preserve">

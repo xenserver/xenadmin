@@ -74,15 +74,6 @@ namespace XenAdmin.Dialogs
             return items;
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar == (char)Keys.Enter || e.KeyChar == (char)Keys.Return) && addButton.Enabled)
-            {
-                e.Handled = true;
-                AddTag();
-            }
-        }
-
         private List<TagsDataGridViewRow> ExtractList()
         {
             var rows = new List<TagsDataGridViewRow>();
@@ -176,6 +167,24 @@ namespace XenAdmin.Dialogs
             DisplayList(rows);
         }
 
+        private void ToggleItems(System.Collections.IList items)
+        {
+            var allChecked = true;
+            foreach (TagsDataGridViewRow item in items)
+            {
+                if (item.Checked != CheckState.Checked)
+                {
+                    allChecked = false;
+                    break;
+                }
+            }
+
+            foreach (TagsDataGridViewRow item in items)
+                item.Checked = allChecked ? CheckState.Unchecked : CheckState.Checked;
+        }
+
+        #region Event handlers
+        
         private void NewTagDialog_Activated(object sender, EventArgs e)
         {
             textBox1.Focus();
@@ -186,39 +195,60 @@ namespace XenAdmin.Dialogs
             AddTag();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            addButton.Enabled = (this.textBox1.Text.Trim() != string.Empty);
+            if ((e.KeyChar == (char)Keys.Enter || e.KeyChar == (char)Keys.Return) && addButton.Enabled)
+            {
+                e.Handled = true;
+                AddTag();
+            }
         }
 
-        private void tagsDataGrid_KeyDown(object sender, KeyEventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
+            addButton.Enabled = textBox1.Text.Trim() != string.Empty;
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            e.IsInputKey = e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return;
+        }
+
+        private void tagsDataGrid_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Space)
             {
                 ToggleItems(tagsDataGrid.SelectedRows);
                 e.Handled = true;
             }
-            else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
-            {
-                if (AcceptButton == null)
-                    return;
-
-                e.Handled = true;
-                AcceptButton.PerformClick();
-            }
         }
 
-        private void ToggleItems(System.Collections.IList items)
+        private void tagsDataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (items.Count < 1)
+            if (e.ColumnIndex != ColumnChecked.Index || e.RowIndex < 0 || e.RowIndex >= tagsDataGrid.RowCount)
                 return;
 
-            CheckState firstCheckState = ((TagsDataGridViewRow) items[0]).Checked;
-            foreach (TagsDataGridViewRow item in items)
+            var row = tagsDataGrid.Rows[e.RowIndex] as TagsDataGridViewRow;
+            if (row != null)
+                row.Toggle();
+        }
+
+        private void tagsDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.RowIndex1 < 0 || e.RowIndex1 >= tagsDataGrid.RowCount || e.RowIndex2 < 0 || e.RowIndex2 >= tagsDataGrid.RowCount)
+                return;
+
+            var row1 = tagsDataGrid.Rows[e.RowIndex1] as TagsDataGridViewRow;
+            var row2 = tagsDataGrid.Rows[e.RowIndex2] as TagsDataGridViewRow;
+
+            if (row1 != null && row2 != null)
             {
-                item.Toggle(firstCheckState);
+                e.SortResult = row1.Checked.CompareTo(row2.Checked);
+                e.Handled = true;
             }
         }
+
+        #endregion
 
         public class TagsDataGridViewRow : DataGridViewRow, IComparable<TagsDataGridViewRow>
         {
@@ -234,12 +264,7 @@ namespace XenAdmin.Dialogs
 
             public void Toggle()
             {
-                Toggle(Checked);
-            }
-
-            public void Toggle(CheckState stateToToggleFrom)
-            {
-                Checked = stateToToggleFrom == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
+                Checked = Checked == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
             }
 
             public CheckState Checked
@@ -296,39 +321,6 @@ namespace XenAdmin.Dialogs
                 var priorityB = Priority.IndexOf(b);
                 return priorityA.CompareTo(priorityB);
             }
-        }
-
-        private void tagsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var col = tagsDataGrid.Columns[e.ColumnIndex] as DataGridViewCheckBoxColumn;
-
-            if (col == null || !col.ThreeState)
-                return;
-
-            var state = (CheckState)tagsDataGrid[e.ColumnIndex, e.RowIndex].EditedFormattedValue;
-            if (state != CheckState.Indeterminate)
-                return;
-
-            tagsDataGrid[e.ColumnIndex, e.RowIndex].Value = CheckState.Unchecked;
-            tagsDataGrid.RefreshEdit();
-            tagsDataGrid.NotifyCurrentCellDirty(true);
-        }
-
-        private void tagsDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
-        {
-            var row1 = tagsDataGrid.Rows[e.RowIndex1] as TagsDataGridViewRow;
-            var row2 = tagsDataGrid.Rows[e.RowIndex2] as TagsDataGridViewRow;
-
-            if (row1 != null && row2 != null && e.Column.Index == ColumnEnabled.Index)
-            {
-                e.SortResult = row1.Checked.CompareTo(row2.Checked);
-                e.Handled = true;
-            }
-        }
-
-        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            e.IsInputKey = e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return;
         }
     }
 }
