@@ -115,7 +115,7 @@ namespace XenAdminTests.CommandTests
                 HandleModalDialog<NewTagDialogWrapper>("Edit Tags", Command.Execute, d =>
                 {
                     // switch checkboxes for all tags
-                    Util.PopulateList<ListViewItem>(d.TagsListView.Items).ForEach(i => i.Checked = !i.Checked);
+                    Util.PopulateList<NewTagDialog.TagsDataGridViewRow>(d.TagsDataGrid.Rows).ForEach(row => row.Toggle());
                     d.OkButton.PerformClick();
                 });
 

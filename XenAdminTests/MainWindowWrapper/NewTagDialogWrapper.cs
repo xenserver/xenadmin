@@ -35,6 +35,7 @@ using System.Text;
 using XenAdmin.Dialogs;
 using XenAdmin.Core;
 using System.Windows.Forms;
+using XenAdmin.Controls.DataGridViewEx;
 
 namespace XenAdminTests
 {
@@ -82,11 +83,11 @@ namespace XenAdminTests
             }
         }
 
-        public ListView TagsListView
+        public DataGridViewEx TagsDataGrid
         {
             get
             {
-                return GetField<ListView>("tagsListView");
+                return GetField<DataGridViewEx>("tagsDataGrid");
             }
         }
 
