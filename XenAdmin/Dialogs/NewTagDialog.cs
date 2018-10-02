@@ -243,7 +243,7 @@ namespace XenAdmin.Dialogs
 
             if (row1 != null && row2 != null)
             {
-                e.SortResult = row1.Checked.CompareTo(row2.Checked);
+                e.SortResult = row1.CompareTo(row2);
                 e.Handled = true;
             }
         }
