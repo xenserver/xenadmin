@@ -54,14 +54,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         public List<PlanAction> DelayedPlanActions;
         private Dictionary<string, livepatch_status> livePatchStatus;
 
-        public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path,
-            Dictionary<Host, Pool_update> uploadedUpdates)
+        public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path)
             : base(connection)
         {
             this.host = host;
             this.hosts = hosts;
             suppPackPath = path;
-            uploadedSuppPacks = uploadedUpdates;
+            uploadedSuppPacks = new Dictionary<Host, Pool_update>();
             DelayedPlanActions = new List<PlanAction>();
             livePatchStatus = new Dictionary<string, livepatch_status>();
         }
@@ -85,6 +84,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     PrecheckSuppPack(update, suppPackName, out alreadyApplied);
                     if (alreadyApplied)
                     {
+                        // do after-apply-supppack step in case that this is a retry after
+                        // the update already applied but after-apply-supppack hasn't done yet
+                        AfterApplySuppPack(update);
                         RemoveSuppPackFromMaster(session, master, suppPackName, update);
                         return;
                     }
@@ -131,6 +133,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 }
 
                 uploadedSuppPacks.Add(master, poolupdate);
+            }
+            else
+            {
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPLOAD, suppPack, connection.Name));
             }
         }
 
@@ -219,7 +225,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 catch (Exception ex)
                 {
                     log.Error(string.Format("Remove update file from master failed on host {0}", master.Name()), ex);
-                    throw;
                 }
             }
         }

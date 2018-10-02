@@ -133,7 +133,7 @@ namespace XenAdmin.Wizards
                     zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
-                dlg.ShowDialog(control.Parent);
+                dlg.ShowDialog(control);
             }
 
             if (string.IsNullOrEmpty(unzipAction.PatchPath))

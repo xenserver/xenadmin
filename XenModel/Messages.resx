@@ -12192,6 +12192,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>Skipping update {0}. Already applied on {1}... </value>
   </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>Skipping uploading update {0}. Already uploaded to {1}... </value>
+  </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
   </data>

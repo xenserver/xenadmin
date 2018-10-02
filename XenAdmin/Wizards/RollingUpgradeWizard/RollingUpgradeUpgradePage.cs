@@ -65,7 +65,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         #region Fields
         private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> AllUploadedPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>();
         private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> MinimalPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>(); // should be calculated only once per pool (to ensure update homogeneity)
-        public Dictionary<Host, Pool_update> UploadedSuppPacks = new Dictionary<Host, Pool_update>();
         #endregion
 
         #region AutomatedUpdatesBesePage overrides
@@ -190,7 +189,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (ApplySuppPackAfterUpgrade && Helpers.ElyOrGreater(host))
             {
                 var suppPackPlanAction = new RpuUploadAndApplySuppPackPlanAction(host.Connection,
-                    host, hosts, SelectedSuppPackPath, UploadedSuppPacks);
+                    host, hosts, SelectedSuppPackPath);
                 theHostPlan.UpdatesPlanActions.Add(suppPackPlanAction);
             }
         }
