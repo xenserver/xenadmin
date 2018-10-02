@@ -38,7 +38,7 @@ namespace XenAdmin.Dialogs
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.tagsDataGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnChecked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnTags = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGrid)).BeginInit();
@@ -94,7 +94,7 @@ namespace XenAdmin.Dialogs
             this.tagsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tagsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.tagsDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnEnabled,
+            this.ColumnChecked,
             this.ColumnTags});
             this.mainTableLayoutPanel.SetColumnSpan(this.tagsDataGrid, 3);
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -105,7 +105,6 @@ namespace XenAdmin.Dialogs
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.tagsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.tagsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.tagsDataGrid.MultiSelect = true;
             this.tagsDataGrid.Name = "tagsDataGrid";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -116,18 +115,17 @@ namespace XenAdmin.Dialogs
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.tagsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.tagsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGrid_CellContentClick);
-            this.tagsDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGrid_CellContentClick);
+            this.tagsDataGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tagsDataGrid_CellMouseClick);
             this.tagsDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.tagsDataGrid_SortCompare);
-            this.tagsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagsDataGrid_KeyDown);
+            this.tagsDataGrid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tagsDataGrid_KeyPress);
             // 
-            // ColumnEnabled
+            // ColumnChecked
             // 
-            this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
-            this.ColumnEnabled.Name = "ColumnEnabled";
-            this.ColumnEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ColumnEnabled.ThreeState = true;
+            this.ColumnChecked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnChecked, "ColumnChecked");
+            this.ColumnChecked.Name = "ColumnChecked";
+            this.ColumnChecked.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnChecked.ThreeState = true;
             // 
             // ColumnTags
             // 
@@ -174,7 +172,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button okButton;
         private Controls.DataGridViewEx.DataGridViewEx tagsDataGrid;
         private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnChecked;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTags;
     }
 }
