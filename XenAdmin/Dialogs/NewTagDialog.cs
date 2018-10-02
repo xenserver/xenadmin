@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Model;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs
@@ -302,7 +303,7 @@ namespace XenAdmin.Dialogs
                 if (output != 0)
                     return output;
 
-                return Text.CompareTo(other.Text);
+                return StringUtility.NaturalCompare(Text, other.Text);
             }
         }
 
