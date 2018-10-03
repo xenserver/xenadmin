@@ -817,7 +817,7 @@ namespace XenAdmin
 
                         con.EndConnect();
                     }
-                    RequestRefreshTreeView();
+
                     //CA-41228 refresh submenu items when there are no connections
                     SelectionManager.RefreshSelection();
                 }
@@ -1158,72 +1158,25 @@ namespace XenAdmin
             }
         }
 
-        void Connection_ConnectionResult(object sender, Network.ConnectionResultEventArgs e)
+        private void Connection_ConnectionResult(object sender, Network.ConnectionResultEventArgs e)
         {
             RequestRefreshTreeView();
-            Program.Invoke(this, (EventHandler<ConnectionResultEventArgs>)Connection_ConnectionResult_, sender, e);
         }
 
-        private void Connection_ConnectionResult_(object sender, Network.ConnectionResultEventArgs e)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                UpdateToolbars();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing more about this.
-            }
-        }
-
-        void Connection_ConnectionClosed(object sender, EventArgs e)
+        private void Connection_ConnectionClosed(object sender, EventArgs e)
         {
             RequestRefreshTreeView();
-            Program.Invoke(this, (EventHandler<Network.ConnectionResultEventArgs>)Connection_ConnectionClosed_, sender, e);
             gc();
-        }
-
-        private void Connection_ConnectionClosed_(object sender, EventArgs e)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                UpdateToolbars();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Nothing more we can do with this.
-            }
         }
 
         // called whenever our connection with the Xen server fails (i.e., after we've successfully logged in)
-        void Connection_ConnectionLost(object sender, EventArgs e)
+        private void Connection_ConnectionLost(object sender, EventArgs e)
         {
             if (Program.Exiting)
                 return;
-            Program.Invoke(this, (EventHandler)Connection_ConnectionLost_, sender, e);
+            Program.Invoke(this, () => CloseActiveWizards((IXenConnection)sender));
             RequestRefreshTreeView();
             gc();
-        }
-
-        private void Connection_ConnectionLost_(object sender, EventArgs e)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                IXenConnection connection = (IXenConnection)sender;
-                CloseActiveWizards(connection);
-
-                UpdateToolbars();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing about this.
-            }
         }
 
         private static void gc()

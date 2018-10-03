@@ -156,7 +156,6 @@ namespace XenAdmin.Commands
             XenDialogBase.CloseAll(connection);
             connection.EndConnect();
             MainWindowCommandInterface.SaveServerList();
-            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         private bool AllActionsFinished(IXenConnection connection, bool treatCancelingAsFinished)
