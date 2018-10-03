@@ -54,13 +54,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         public List<PlanAction> DelayedPlanActions;
         private Dictionary<string, livepatch_status> livePatchStatus;
 
-        public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path)
+        public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path, Dictionary<Host, Pool_update> uploadedUpdate)
             : base(connection)
         {
             this.host = host;
             this.hosts = hosts;
             suppPackPath = path;
-            uploadedSuppPacks = new Dictionary<Host, Pool_update>();
+            uploadedSuppPacks = uploadedUpdate;
             DelayedPlanActions = new List<PlanAction>();
             livePatchStatus = new Dictionary<string, livepatch_status>();
         }
@@ -134,7 +134,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
                 uploadedSuppPacks.Add(master, poolupdate);
             }
-            else
+            else if (host.uuid == master.uuid)
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPLOAD, suppPack, connection.Name));
             }
