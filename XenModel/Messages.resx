@@ -3084,7 +3084,7 @@ Would you like to carry out the operation at this time?</value>
     <value>The connection was refused.</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
-    <value>Connection Refused</value>
+    <value>Refused connection to {0}</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>Connection to Server {0} restricted because a connection already exists to another XE Express Server ({1})</value>
@@ -5848,10 +5848,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Group Roles</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>This version of [XenCenter] is out of date and cannot connect to {0}.</value>
-  </data>
-  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
-    <value>
+    <value>This version of [XenCenter] is out of date and cannot connect to {0}.
 
 You can get a compatible version of [XenCenter] from the following location:</value>
   </data>

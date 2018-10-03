@@ -8526,7 +8526,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection Refused.
+        ///   Looks up a localized string similar to Refused connection to {0}.
         /// </summary>
         public static string CONNECTION_REFUSED_TITLE {
             get {
@@ -16715,22 +16715,13 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] is out of date and cannot connect to {0}..
+        ///   Looks up a localized string similar to This version of [XenCenter] is out of date and cannot connect to {0}.
+        ///
+        ///You can get a compatible version of [XenCenter] from the following location:.
         /// </summary>
         public static string GUI_OUT_OF_DATE {
             get {
                 return ResourceManager.GetString("GUI_OUT_OF_DATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///You can get a compatible version of [XenCenter] from the following location:.
-        /// </summary>
-        public static string GUI_OUT_OF_DATE_MORE {
-            get {
-                return ResourceManager.GetString("GUI_OUT_OF_DATE_MORE", resourceCulture);
             }
         }
         
