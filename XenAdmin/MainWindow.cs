@@ -712,7 +712,7 @@ namespace XenAdmin
                     }
                     break;
                 case ArgType.Passwords:
-                    System.Diagnostics.Trace.Assert(false);
+                    Trace.Assert(false);
                     break;
             }
             Launched = true;
@@ -867,21 +867,13 @@ namespace XenAdmin
             {
                 connection.EndConnect();
 
-                Program.Invoke(Program.MainWindow, delegate()
+                Program.Invoke(Program.MainWindow, delegate
                 {
-                    string msg = string.Format(Messages.INCOMPATIBLE_PRODUCTS, Helpers.GetName(master));
-                    string url = "";
+                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                    new ActionBase(title, "", false, true, Messages.INCOMPATIBLE_PRODUCTS);
 
-                    using (var dlog = new ConnectionRefusedDialog())
-                    {
-                        dlog.ErrorMessage = msg;
-                        dlog.Url = "";
+                    using (var dlog = new ConnectionRefusedDialog {ErrorMessage = Messages.INCOMPATIBLE_PRODUCTS, Url = ""})
                         dlog.ShowDialog(this);
-                    }
-
-                    new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
-                                   string.Format("{0}\n{1}", msg, url), false,
-                                   true, Messages.CONNECTION_REFUSED);
                 });
                 return;
             }
@@ -907,29 +899,23 @@ namespace XenAdmin
                 {
                     connection.EndConnect();
 
-                    Program.Invoke(Program.MainWindow, delegate()
+                    Program.Invoke(Program.MainWindow, delegate
                     {
-                        string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
-                        msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
-                        string url = "https://" + connection.Hostname;
+                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
+                        var url = "https://" + connection.Hostname;
+                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                        var error = string.Format("{0}\n{1}", msg, url);
 
-                        using (var dlog = new ConnectionRefusedDialog())
-                        {
-                            dlog.ErrorMessage = msg;
-                            dlog.Url = url;
+                        new ActionBase(title, "", false, true, error);
+
+                        using (var dlog = new ConnectionRefusedDialog {ErrorMessage = msg, Url = url})
                             dlog.ShowDialog(this);
-                        }
-                        
-                        new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
-                                       string.Format("{0}\n{1}", msg, url), false,
-                                       true, Messages.CONNECTION_REFUSED);
                     });
                     return;
                 }
-                else if (server_max > current_version)
-                {
+                
+                if (server_max > current_version)
                     Alert.AddAlert(new GuiOldAlert());
-                }
 
                 LoadTasksAsMeddlingActions(connection);
             }
@@ -975,7 +961,7 @@ namespace XenAdmin
                 newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
-        public static bool SameProductBrand(Host host)
+        private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
             return brand == Branding.PRODUCT_BRAND || brand == Branding.LEGACY_PRODUCT_BRAND ||  Branding.PRODUCT_BRAND == "[XenServer product]";
