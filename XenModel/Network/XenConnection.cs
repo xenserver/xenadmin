@@ -716,22 +716,13 @@ namespace XenAdmin.Network
             }
         }
 
-        /// <summary>
-        /// Equivalent to EndConnect(true).
-        /// i.e. Clears the cache.
-        /// </summary>
-        public void EndConnect()
-        {
-            EndConnect(true);
-        }
-
-        /// <param name="resetState">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
+        /// <param name="clearCache">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
         /// <param name="exiting"></param>
-        public void EndConnect(bool resetState, bool exiting = false)
+        public void EndConnect(bool clearCache = true, bool exiting = false)
         {
             ConnectTask t = connectTask;
             connectTask = null;
-            EndConnect(resetState, t, exiting);
+            EndConnect(clearCache, t, exiting);
         }
 
         /// <summary>

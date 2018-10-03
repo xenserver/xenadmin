@@ -60,8 +60,7 @@ namespace XenAdmin.Network
         event EventHandler<ConnectionMajorChangeEventArgs> AfterMajorChange;
         Session DuplicateSession();
         Session DuplicateSession(int timeout);
-        void EndConnect();
-        void EndConnect(bool resetState, bool exiting = false);
+        void EndConnect(bool resetState = true, bool exiting = false);
         void Interrupt();
         Session Connect(string user, string password);
         List<string> PoolMembers { get; set; }
