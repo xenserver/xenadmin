@@ -449,7 +449,6 @@ namespace XenAdmin.Network
                                     //user cannot provide correct credentials, we d/c now to save the confusion of having the server available
                                     //but unusable.
                                     EndConnect();
-                                    OnConnectionClosed();
                                     throw new CancelledException();
                                 }
                                 break;
@@ -781,7 +780,7 @@ namespace XenAdmin.Network
             }
 
             _promptForNewPassword = null;
-            OnConnectionStateChanged();
+            OnConnectionClosed();
         }
 
         /// <summary>
