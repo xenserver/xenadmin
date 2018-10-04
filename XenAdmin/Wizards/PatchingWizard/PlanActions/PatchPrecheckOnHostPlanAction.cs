@@ -44,13 +44,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly XenServerPatch patch;
         private readonly List<PoolPatchMapping> mappings;
         private readonly Host host;
+        private readonly List<string> hostsThatWillRequireReboot;
 
-        public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch patch, Host host, List<PoolPatchMapping> mappings)
+        public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch patch, Host host, List<PoolPatchMapping> mappings, List<string> hostsThatWillRequireReboot)
             : base(connection)
         {
             this.patch = patch;
             this.host = host;
             this.mappings = mappings;
+            this.hostsThatWillRequireReboot = hostsThatWillRequireReboot;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -60,6 +62,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
+                var livePatchStatus = new Dictionary<string, livepatch_status>();
+
                 if (Cancelling)
                     throw new CancelledException();
 
@@ -68,8 +72,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name()));
 
                     PatchPrecheckCheck check = mapping.Pool_patch == null
-                        ? new PatchPrecheckCheck(host, mapping.Pool_update)
-                        : new PatchPrecheckCheck(host, mapping.Pool_patch);
+                        ? new PatchPrecheckCheck(host, mapping.Pool_update, livePatchStatus)
+                        : new PatchPrecheckCheck(host, mapping.Pool_patch, livePatchStatus);
 
                     var problems = check.RunAllChecks();
 
@@ -86,6 +90,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     log.Error(string.Format("Precheck failed on host {0}", host.Name()), ex);
                     throw;
                 }
+
+                if (livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete && !hostsThatWillRequireReboot.Contains(host.uuid))
+                    hostsThatWillRequireReboot.Add(host.uuid);
             }
         }
     }
