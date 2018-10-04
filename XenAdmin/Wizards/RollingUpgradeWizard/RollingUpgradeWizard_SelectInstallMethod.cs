@@ -34,12 +34,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using XenAdmin.Actions;
+using XenAdmin.Actions.HostActions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
 
-using XenAdmin.Actions.HostActions;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
@@ -47,7 +47,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Bitmap testOK = Resources._000_Tick_h32bit_16;
-        private TestLocationInstallerAction testingAction = null;
+        private TestLocationInstallerAction testingAction;
+        public string SelectedSuppPack;
 
         public RollingUpgradeWizardInstallMethodPage()
         {
@@ -75,6 +76,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override bool EnableNext()
         {
+            if (ApplySuppPackAfterUpgrade && !WizardHelpers.IsValidFile(FilePath))
+                return false;
+
             return pictureBox1.Visible && pictureBox1.Image == testOK;
         }
 
@@ -90,6 +94,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (testingAction != null)
             {
                 StopUrlTesting();
+            }
+
+            if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+            {
+                WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel, out SelectedSuppPack);
             }
         }
 
@@ -312,6 +321,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
         }
 
+        private string FilePath
+        {
+            get { return fileNameTextBox.Text; }
+            set { fileNameTextBox.Text = value; }
+        }
+
+        public bool ApplySuppPackAfterUpgrade
+        {
+            get
+            {
+                return checkBoxInstallSuppPack.Checked;
+            }
+        }
 
         private void ChangeInputEnablement(bool value)
         {
@@ -331,6 +353,32 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void textBoxPassword_TextChanged(object sender, EventArgs e)
         {
             ResetCheckControls();
+        }
+
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            checkBoxInstallSuppPack.Checked = true;
+            var suppPack = WizardHelpers.GetSuppPackFromDisk(this);
+            if (!string.IsNullOrEmpty(suppPack))
+                FilePath = suppPack;
+            OnPageUpdated();
+        }
+
+        private void fileNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            checkBoxInstallSuppPack.Checked = true;
+            OnPageUpdated();
+        }
+
+        private void fileNameTextBox_Enter(object sender, EventArgs e)
+        {
+            checkBoxInstallSuppPack.Checked = true;
+            OnPageUpdated();
+        }
+
+        private void checkBoxInstallSuppPack_CheckedChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
         }
     }
 

@@ -44,17 +44,26 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             this.label1 = new System.Windows.Forms.Label();
             this.labelErrors = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelSelectDiskFile = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.BrowseButton = new System.Windows.Forms.Button();
+            this.fileNameTextBox = new System.Windows.Forms.TextBox();
+            this.checkBoxInstallSuppPack = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.tableLayoutPanel2.SetColumnSpan(this.groupBox2, 3);
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -128,11 +137,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.tableLayoutPanel2.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
             // 
             // labelErrors
             // 
             resources.ApplyResources(this.labelErrors, "labelErrors");
+            this.tableLayoutPanel2.SetColumnSpan(this.labelErrors, 2);
             this.labelErrors.Name = "labelErrors";
             // 
             // pictureBox2
@@ -142,26 +153,75 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
-            // label2
+            // labelSelectDiskFile
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelSelectDiskFile, "labelSelectDiskFile");
+            this.tableLayoutPanel2.SetColumnSpan(this.labelSelectDiskFile, 2);
+            this.labelSelectDiskFile.Name = "labelSelectDiskFile";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelSelectDiskFile, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.pictureBox2, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelErrors, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.checkBoxInstallSuppPack, 0, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel3, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.BrowseButton, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.fileNameTextBox, 1, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // BrowseButton
+            // 
+            resources.ApplyResources(this.BrowseButton, "BrowseButton");
+            this.BrowseButton.Name = "BrowseButton";
+            this.BrowseButton.UseVisualStyleBackColor = true;
+            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
+            // 
+            // fileNameTextBox
+            // 
+            resources.ApplyResources(this.fileNameTextBox, "fileNameTextBox");
+            this.fileNameTextBox.Name = "fileNameTextBox";
+            this.fileNameTextBox.TextChanged += new System.EventHandler(this.fileNameTextBox_TextChanged);
+            this.fileNameTextBox.Enter += new System.EventHandler(this.fileNameTextBox_Enter);
+            // 
+            // checkBoxInstallSuppPack
+            // 
+            resources.ApplyResources(this.checkBoxInstallSuppPack, "checkBoxInstallSuppPack");
+            this.tableLayoutPanel2.SetColumnSpan(this.checkBoxInstallSuppPack, 3);
+            this.checkBoxInstallSuppPack.Name = "checkBoxInstallSuppPack";
+            this.checkBoxInstallSuppPack.UseVisualStyleBackColor = true;
+            this.checkBoxInstallSuppPack.CheckedChanged += new System.EventHandler(this.checkBoxInstallSuppPack_CheckedChanged);
             // 
             // RollingUpgradeWizardInstallMethodPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.labelErrors);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "RollingUpgradeWizardInstallMethodPage";
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -181,7 +241,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private System.Windows.Forms.TextBox watermarkTextBox1;
         private System.Windows.Forms.Label labelErrors;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelSelectDiskFile;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BrowseButton;
+        private System.Windows.Forms.TextBox fileNameTextBox;
+        private System.Windows.Forms.CheckBox checkBoxInstallSuppPack;
 
 
     }

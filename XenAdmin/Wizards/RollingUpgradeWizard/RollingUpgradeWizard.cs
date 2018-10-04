@@ -130,9 +130,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 RollingUpgradeUpgradePage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
+            {
                 RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
+                RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeWizardInstallMethodPage.ApplySuppPackAfterUpgrade;
+                RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeWizardInstallMethodPage.SelectedSuppPack;
+            }
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
+            else if (prevPageType == typeof(RollingUpgradeReadyToUpgradePage))
+            {
+                RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeReadyToUpgradePage.ApplySuppPackAfterUpgrade;
+                RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeReadyToUpgradePage.SelectedSuppPack;
+            }
         }
 
         protected override void OnShown(System.EventArgs e)
