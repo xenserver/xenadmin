@@ -40,39 +40,40 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly List<XenRef<VM>> _vms;
         public bool EnableOnly { get; set; }
+        private List<string> hostsNeedReboot;
 
-        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false)
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, List<string> hostsThatWillRequireReboot = null)
             : base(host)
         {
             _vms = vms;
             EnableOnly = enableOnly;
+            hostsNeedReboot = hostsThatWillRequireReboot;
         }
 
         protected override void RunWithSession(ref Session session)
         {
             var hostObj = GetResolvedHost();
-
-            if (Helpers.ElyOrGreater(hostObj))
-            {
-                log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'.", hostObj);
-
-                if (hostObj.updates_requiring_reboot.Count > 0)
-                {
-                    log.DebugFormat("Found {0} patches requiring reboot (live patching failed)."
-                                    + "Initiating evacuate-reboot-bringbabiesback process.",
-                        hostObj.updates_requiring_reboot.Count);
-                }
-                else
-                {
-                    log.Debug("Did not find patches requiring reboot (live patching succeeded)."
-                              + " Skipping scheduled restart.");
-                    return;
-                }
-            }
+            if (hostObj != null && SkipRestartHost(hostObj))
+                return;
 
             EvacuateHost(ref session);
             RebootHost(ref session);
             BringBabiesBack(ref session, _vms, EnableOnly);
+
+            if (hostObj != null && hostsNeedReboot != null && hostsNeedReboot.Contains(hostObj.uuid))
+                hostsNeedReboot.Remove(hostObj.uuid);
+        }
+
+        public bool SkipRestartHost(Host host)
+        {
+            if (hostsNeedReboot != null
+                && !hostsNeedReboot.Contains(host.uuid)
+                && Helpers.ElyOrGreater(host)
+                && host.updates_requiring_reboot.Count <= 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

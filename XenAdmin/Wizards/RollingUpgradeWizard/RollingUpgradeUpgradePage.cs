@@ -177,7 +177,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                         {
                             theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
                             theHostPlan.DelayedPlanActions.InsertRange(0, hp.DelayedPlanActions);
-                            theHostPlan.RequireDelayedRestartHost = hp.RequireDelayedRestartHost;
                         }
                     }
                 }
