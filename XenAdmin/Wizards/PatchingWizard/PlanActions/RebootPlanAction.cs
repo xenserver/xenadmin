@@ -72,6 +72,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var hostObj = GetResolvedHost();
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name()));
             WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
+            WaitForHostToBecomeEnabled(session, false);
         }
 
         protected void RebootHost(ref Session session)
