@@ -4299,6 +4299,8 @@
     <Content Include="HomePage\css\screen.css" />
     <Content Include="HomePage\css\theme.css" />
     <Content Include="HomePage\index.html" />
+    <Content Include="HomePage\index.ja.html" />
+    <Content Include="HomePage\index.zh-CN.html" />
     <Content Include="HomePage\media\grid.png" />
     <Content Include="HomePage\media\icons\cx-cloudServerGraphic.png" />
     <Content Include="HomePage\media\icons\cx-icon-addServer.png" />
@@ -4306,7 +4308,7 @@
     <Content Include="HomePage\media\icons\cx-icon-purchaseSupport.png" />
     <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
     <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
-    <Content Include="HomePage\media\logos\cx-logo-citrixXenServer.png" />
+    <Content Include="HomePage\media\logos\cx-logo-citrixHypervisor.png" />
     <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
