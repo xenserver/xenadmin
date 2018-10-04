@@ -46,20 +46,20 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly List<PoolPatchMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private KeyValuePair<XenServerPatch, string> patchFromDisk;
-        private AsyncAction inProgressAction = null;
+        private AsyncAction inProgressAction;
 
         public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
             : base(connection)
         {
             this.patch = patch;
             this.mappings = mappings;
-            this.AllDownloadedPatches = allDownloadedPatches;
+            AllDownloadedPatches = allDownloadedPatches;
             this.patchFromDisk = patchFromDisk;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            var path = AllDownloadedPatches.ContainsKey(patch) 
+            var path = AllDownloadedPatches.ContainsKey(patch)
                 ? AllDownloadedPatches[patch]
                 : patchFromDisk.Key == patch ? patchFromDisk.Value : null;
 
