@@ -41,6 +41,7 @@ using System.Linq;
 using XenAdmin.Core;
 using System.Text;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -334,6 +335,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
 
                     // Step 3: Rearrange DelayedActions
+                    var suppPackPlanAction = (RpuUploadAndApplySuppPackPlanAction)planActions.FirstOrDefault(pa => pa is RpuUploadAndApplySuppPackPlanAction);
+
+                    if (suppPackPlanAction != null)
+                    {
+                        foreach (var dpa in suppPackPlanAction.DelayedPlanActions)
+                        {
+                            if (!hp.DelayedPlanActions.Exists(a => a.GetType() == dpa.GetType()))
+                                hp.DelayedPlanActions.Add(dpa);
+                        }
+                    }
+
                     var restartHostPlanAction = (RestartHostPlanAction)hp.DelayedPlanActions.FirstOrDefault(a => a is RestartHostPlanAction);
                     if (restartHostPlanAction != null)
                     {

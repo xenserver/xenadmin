@@ -58,6 +58,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         #region Accessors
         public bool ManualModeSelected { private get; set; }
         public Dictionary<string, string> InstallMethodConfig { private get; set; }
+        public bool ApplySuppPackAfterUpgrade { private get; set; }
+        public string SelectedSuppPackPath { private get; set; }
+        #endregion
+
+        #region Fields
+        private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> AllUploadedPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>();
+        private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> MinimalPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>(); // should be calculated only once per pool (to ensure update homogeneity)
+        private Dictionary<Host, Pool_update> UploadedSuppPacks = new Dictionary<Host, Pool_update>();
         #endregion
 
         #region AutomatedUpdatesBesePage overrides
@@ -124,12 +132,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return false;
         }
 
-        private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> AllUploadedPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>(); 
-        private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> MinimalPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>(); // should be calculated only once per pool (to ensure update homogeneity)
-
         protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
         {
-            if (!ApplyUpdatesToNewVersion)
+            if (!ApplyUpdatesToNewVersion && !ApplySuppPackAfterUpgrade)
                 return;
 
             var theHostPlan = bgw.HostPlans.FirstOrDefault(ha => ha.Host.Equals(host));
@@ -141,43 +146,57 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             host = host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref));
 
-            var automatedUpdatesRestricted = host.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates (only considering DundeeOrGreater hosts)
-            
-            if (automatedUpdatesRestricted)
+            if (ApplyUpdatesToNewVersion)
             {
-                log.InfoFormat("Skipping updates installation on {0} because the batch hotfix application is restricted in the pool", host.Name());
-                return;
+                var automatedUpdatesRestricted = host.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates (only considering DundeeOrGreater hosts)
+
+                if (!automatedUpdatesRestricted)
+                {
+                    if (!MinimalPatches.ContainsKey(bgw))
+                    {
+                        log.InfoFormat("Calculating minimal patches for {0}", host.Name());
+                        Updates.CheckForUpdatesSync(null);
+                        var mp = Updates.GetMinimalPatches(host);
+                        log.InfoFormat("Minimal patches for {0}: {1}", host.Name(),
+                            mp == null ? "None" : string.Join(",", mp.Select(p => p.Name)));
+
+                        MinimalPatches.Add(bgw, mp);
+                    }
+
+                    var minimalPatches = MinimalPatches[bgw];
+
+                    if (minimalPatches != null)
+                    {
+                        if (!AllUploadedPatches.ContainsKey(bgw))
+                            AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
+                        var uploadedPatches = AllUploadedPatches[bgw];
+
+                        var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches,
+                            new KeyValuePair<XenServerPatch, string>(), false);
+                        if (hp.UpdatesPlanActions != null && hp.UpdatesPlanActions.Count > 0)
+                        {
+                            theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
+                            theHostPlan.DelayedPlanActions.InsertRange(0, hp.DelayedPlanActions);
+                        }
+                    }
+                }
+                else
+                {
+                    log.InfoFormat("Skipping updates installation on {0} because the batch hotfix application is restricted in the pool", host.Name());
+                }
             }
 
-            if (!MinimalPatches.ContainsKey(bgw))
+            if (ApplySuppPackAfterUpgrade && Helpers.ElyOrGreater(host))
             {
-                log.InfoFormat("Calculating minimal patches for {0}", host.Name());
-                Updates.CheckForUpdatesSync(null);
-                var mp = Updates.GetMinimalPatches(host);
-                log.InfoFormat("Minimal patches for {0}: {1}", host.Name(), mp == null ? "None" : string.Join(",", mp.Select(p => p.Name)));
-
-                MinimalPatches.Add(bgw, mp);
-            }
-
-            var minimalPatches = MinimalPatches[bgw];
-            
-            if (minimalPatches == null)
-                return;
-
-            if (!AllUploadedPatches.ContainsKey(bgw))
-                AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
-            var uploadedPatches = AllUploadedPatches[bgw];
-
-            var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>(), false);
-            if (hp.UpdatesPlanActions != null && hp.UpdatesPlanActions.Count > 0)
-            {
-                theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
-                theHostPlan.DelayedPlanActions.InsertRange(0, hp.DelayedPlanActions);
+                var suppPackPlanAction = new RpuUploadAndApplySuppPackPlanAction(host.Connection,
+                    host, hosts, SelectedSuppPackPath, UploadedSuppPacks, hostsThatWillRequireReboot);
+                theHostPlan.UpdatesPlanActions.Add(suppPackPlanAction);
             }
         }
         #endregion
 
         #region Private methods
+
         private HostPlan GetSubTasksFor(Host host)
         {
             var runningVMs = host.GetRunningVMs();
