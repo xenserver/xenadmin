@@ -12095,7 +12095,7 @@ Check your settings and try again.</value>
     <value>Ensure you have upgraded [XenCenter] before upgrading [XenServer].</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.{0} and *.iso</value>
+    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
     <value>No valid update file found in {0}</value>
@@ -12197,6 +12197,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>Skipping update {0}. Already applied on {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>Skipping uploading update {0}. Already uploaded to {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
