@@ -63,7 +63,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
-        private List<string> hostsThatWillRequireReboot = new List<string>();
+        protected List<string> hostsThatWillRequireReboot = new List<string>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
 
         public AutomatedUpdatesBasePage()
@@ -343,11 +343,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             if (!hp.DelayedPlanActions.Exists(a => a.GetType() == dpa.GetType()))
                                 hp.DelayedPlanActions.Add(dpa);
-                            if (dpa is RestartHostPlanAction)
-                            {
-                                hp.DelayedPlanActions.RemoveAll(a => a is RestartHostPlanAction);
-                                hp.DelayedPlanActions.Add(dpa);
-                            }
                         }
                     }
 

@@ -52,9 +52,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         private string suppPackPath;
         private Dictionary<Host, Pool_update> uploadedSuppPacks;
         public List<PlanAction> DelayedPlanActions;
-        private Dictionary<string, livepatch_status> livePatchStatus;
+        private readonly List<string> hostsThatWillRequireReboot;
 
-        public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path, Dictionary<Host, Pool_update> uploadedUpdate)
+        public RpuUploadAndApplySuppPackPlanAction(IXenConnection connection, Host host, List<Host> hosts, string path, Dictionary<Host, Pool_update> uploadedUpdate, List<string> hostsThatWillRequireReboot)
             : base(connection)
         {
             this.host = host;
@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             suppPackPath = path;
             uploadedSuppPacks = uploadedUpdate;
             DelayedPlanActions = new List<PlanAction>();
-            livePatchStatus = new Dictionary<string, livepatch_status>();
+            this.hostsThatWillRequireReboot = hostsThatWillRequireReboot;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -145,9 +145,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             alreadyApplied = false;
             if (Cancelling)
                 throw new CancelledException();
+
+            var livePatchStatus = new Dictionary<string, livepatch_status>();
+
             try
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, suppPack, host.Name()));
+
 
                 PatchPrecheckCheck check = new PatchPrecheckCheck(host, update, livePatchStatus);
                 var problems = check.RunAllChecks();
@@ -169,6 +173,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 log.Error(string.Format("Precheck failed on host {0}", host.Name()), ex);
                 throw;
             }
+
+            if (livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete && !hostsThatWillRequireReboot.Contains(host.uuid))
+                hostsThatWillRequireReboot.Add(host.uuid);
         }
 
         private void ApplySuppPack(IXenConnection connection, Session session, string suppPack, Pool_update update)
@@ -234,13 +241,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             switch (guidance)
             {
                 case update_after_apply_guidance.restartHost:
-                {
-                    if (livePatchStatus != null && livePatchStatus.ContainsKey(host.uuid)
-                        && livePatchStatus[host.uuid] == livepatch_status.ok_livepatch_complete)
-                        return null;
-                    else
-                        return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
-                }
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, hostsThatWillRequireReboot);
                 case update_after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case update_after_apply_guidance.restartHVM:

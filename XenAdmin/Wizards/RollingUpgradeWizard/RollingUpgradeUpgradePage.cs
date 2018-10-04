@@ -189,7 +189,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (ApplySuppPackAfterUpgrade && Helpers.ElyOrGreater(host))
             {
                 var suppPackPlanAction = new RpuUploadAndApplySuppPackPlanAction(host.Connection,
-                    host, hosts, SelectedSuppPackPath, UploadedSuppPacks);
+                    host, hosts, SelectedSuppPackPath, UploadedSuppPacks, hostsThatWillRequireReboot);
                 theHostPlan.UpdatesPlanActions.Add(suppPackPlanAction);
             }
         }
