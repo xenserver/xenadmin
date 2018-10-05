@@ -44,7 +44,16 @@ namespace XenAdmin.Wizards.NewVMWizard
     public partial class Page_CpuMem : XenTabPage
     {
         private VM Template;
-        int memoryMode = 1;  // number of spinners to show: 1 for just "memory", 2 for "minimum" and "maximum", 3 for "static max" too
+
+        // number of spinners to show
+        enum MemoryMode
+        {
+            JustMemory = 1,
+            MinimumAndMaximum = 2,
+            MinimumMaximumAndStaticMax = 3
+        }
+        MemoryMode memoryMode = MemoryMode.JustMemory;
+
         double memoryRatio = 0.0;  // the permitted ratio of dynamic_min / static_max
         bool initialising = true;
         private bool isVcpuHotplugSupported;
@@ -82,36 +91,33 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             Template = SelectedTemplate;
             if (Template.has_ballooning() && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
-                memoryMode = Template.memory_dynamic_max == Template.memory_static_max ? 2 : 3;
+                memoryMode = Template.memory_dynamic_max == Template.memory_static_max ? MemoryMode.MinimumAndMaximum : MemoryMode.MinimumMaximumAndStaticMax;
             else
-                memoryMode = 1;
+                memoryMode = MemoryMode.JustMemory;
 
             memoryRatio = VMMemoryControlsEdit.GetMemoryRatio(Template);
 
             FreeSpinnerLimits();
 
-            if (memoryMode == 1)
+            if (memoryMode == MemoryMode.JustMemory)
             {
                 spinnerDynMin.Initialize(Template.memory_static_max, Template.memory_static_max);
                 labelDynMin.Text = Messages.MEMORY_COLON;
-                labelDynMaxInfo.Visible = labelStatMaxInfo.Visible = labelDynMax.Visible = labelStatMax.Visible = spinnerDynMax.Visible = spinnerStatMax.Visible = false;
             }
             else
             {
                 labelDynMin.Text = Messages.DYNAMIC_MIN_COLON;
-                labelDynMaxInfo.Visible = labelDynMax.Visible = spinnerDynMax.Visible = true;
                 spinnerDynMin.Initialize(Template.memory_dynamic_min, Template.memory_static_max);
                 FreeSpinnerLimits();  // same as CA-33831
                 spinnerDynMax.Initialize(Template.memory_dynamic_max, Template.memory_static_max);
-                if (memoryMode == 3)
+                if (memoryMode == MemoryMode.MinimumMaximumAndStaticMax)
                 {
                     FreeSpinnerLimits();
                     spinnerStatMax.Initialize(Template.memory_static_max, Template.memory_static_max);
-                    labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = true;
                 }
-                else
-                    labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = false;
             }
+            labelDynMaxInfo.Visible = labelDynMax.Visible = spinnerDynMax.Visible = memoryMode == MemoryMode.MinimumAndMaximum || memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
+            labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
 
             isVcpuHotplugSupported = Template.SupportsVcpuHotplug();
             _prevVCPUsMax = Template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
@@ -211,7 +217,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             
             long maxMemAllowed = MaxMemAllowed;
             double min = Template.memory_static_min;
-            if (memoryMode == 1)
+            if (memoryMode == MemoryMode.JustMemory)
             {
                 spinnerDynMin.SetRange(min, maxMemAllowed);
                 ShowMemoryMinMaxInformation(labelDynMinInfo, min, maxMemAllowed);
@@ -227,9 +233,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             ShowMemoryMinMaxInformation(labelDynMinInfo, min, max);
 
             spinnerDynMax.SetRange(SelectedMemoryDynamicMin,
-                memoryMode == 2 ? maxMemAllowed : SelectedMemoryStaticMax);
+                memoryMode == MemoryMode.MinimumAndMaximum ? maxMemAllowed : SelectedMemoryStaticMax);
             ShowMemoryMinMaxInformation(labelDynMaxInfo, SelectedMemoryDynamicMin,
-                memoryMode == 2 ? maxMemAllowed : SelectedMemoryStaticMax);
+                memoryMode == MemoryMode.MinimumAndMaximum ? maxMemAllowed : SelectedMemoryStaticMax);
 
             spinnerStatMax.SetRange(SelectedMemoryDynamicMax, maxMemAllowed);
             ShowMemoryMinMaxInformation(labelStatMaxInfo, SelectedMemoryDynamicMax, maxMemAllowed);
@@ -254,7 +260,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                return memoryMode == 1 ? spinnerDynMin.Value : spinnerDynMax.Value;
+                return memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
             }
         }
 
@@ -263,8 +269,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             get
             {
                 return
-                    memoryMode == 1 ? spinnerDynMin.Value :
-                    memoryMode == 2 ? spinnerDynMax.Value :
+                    memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
+                    memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
                     spinnerStatMax.Value;
             }
         }
@@ -309,13 +315,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                     sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS, SelectedVcpusAtStartup.ToString()));
                 }
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY, comboBoxTopology.Text));
-                if (memoryMode == 1)
+                if (memoryMode == MemoryMode.JustMemory)
                     sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeStringSuitableUnits(SelectedMemoryStaticMax, false)));
                 else
                 {
                     sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MIN, Util.MemorySizeStringSuitableUnits(SelectedMemoryDynamicMin, false)));
                     sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MAX, Util.MemorySizeStringSuitableUnits(SelectedMemoryDynamicMax, false)));
-                    if (memoryMode == 3)
+                    if (memoryMode == MemoryMode.MinimumMaximumAndStaticMax)
                         sum.Add(new KeyValuePair<string, string>(Messages.STATIC_MAX, Util.MemorySizeStringSuitableUnits(SelectedMemoryStaticMax, false)));
                 }
                 return sum;
