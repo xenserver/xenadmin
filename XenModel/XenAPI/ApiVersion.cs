@@ -59,7 +59,7 @@ namespace XenAPI
         API_2_9 = 20, //XenServer 7.4 (jura)
         API_2_10 = 21, //XenServer 7.5 (kolkata)
         API_2_11 = 22, //Unreleased (lima)
-        LATEST = 22,
+        LATEST = 17,
         UNKNOWN = 99
     }
 
