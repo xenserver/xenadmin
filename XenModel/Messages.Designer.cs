@@ -6794,15 +6794,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must detach this virtual disk before it can be moved..
-        /// </summary>
-        public static string CANNOT_MOVE_VDI_WITH_VBDS {
-            get {
-                return ResourceManager.GetString("CANNOT_MOVE_VDI_WITH_VBDS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cannot parse required parameter &apos;{1}&apos; on XML node &apos;{0}&apos;.
         /// </summary>
         public static string CANNOT_PARSE_NODE_PARAM {

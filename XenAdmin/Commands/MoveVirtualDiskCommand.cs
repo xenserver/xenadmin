@@ -76,11 +76,12 @@ namespace XenAdmin.Commands
         {
             if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType() || vdi.cbt_enabled)
                 return false;
-            if (vdi.VBDs.Count != 0)
-                return false;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null || sr.HBALunPerVDI())
+                return false;
+
+            if (vdi.GetVMs().Any(vm => vm.power_state != vm_power_state.Halted))
                 return false;
 
             return true;
@@ -102,8 +103,6 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_CBT_ENABLED_VDI;
             if (vdi.IsMetadataForDR())
                 return Messages.CANNOT_MOVE_DR_VD;
-            if (vdi.VBDs.Count != 0)
-                return Messages.CANNOT_MOVE_VDI_WITH_VBDS;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)

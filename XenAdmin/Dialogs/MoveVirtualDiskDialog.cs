@@ -38,6 +38,7 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
+using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs
 {
@@ -159,11 +160,12 @@ namespace XenAdmin.Dialogs
             get { return "VDIMigrateDialog"; }
         }
 
-        internal static Command MoveMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+        internal static Command MoveMigrateCommand(IMainWindow mainWindow, SelectedItemCollection selection)
         {
             var cmd = new MigrateVirtualDiskCommand(mainWindow, selection);
+            var con = selection.GetConnectionOfFirstItem();
 
-            if (cmd.CanExecute())
+            if (cmd.CanExecute() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
                 return cmd;
 
             return new MoveVirtualDiskCommand(mainWindow, selection);
