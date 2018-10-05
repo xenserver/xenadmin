@@ -542,15 +542,15 @@ namespace XenAdmin
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            ProcessUnhandledException(sender, e.Exception, false);
+            ProcessUnhandledException(e.Exception);
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            ProcessUnhandledException(sender, (Exception)e.ExceptionObject, e.IsTerminating);
+            ProcessUnhandledException(e.ExceptionObject as Exception);
         }
 
-        private static void ProcessUnhandledException(object sender, Exception e, bool isTerminating)
+        private static void ProcessUnhandledException(Exception e)
         {
             try
             {
@@ -567,7 +567,12 @@ namespace XenAdmin
                 logSystemDetails();
                 logApplicationStats();
 
-                if (!RunInAutomatedTestMode)
+                if (RunInAutomatedTestMode)
+                {
+                    if (e != null && TestExceptionString == null)
+                        TestExceptionString = e.GetBaseException().ToString();
+                }
+                else
                 {
                     string filepath = GetLogFile();
 
@@ -578,7 +583,7 @@ namespace XenAdmin
                            Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE)))
                     {
                         // CA-44733
-                        if (MainWindow != null && !IsExiting(MainWindow) && !MainWindow.InvokeRequired)
+                        if (IsInvokable(MainWindow) && !MainWindow.InvokeRequired)
                             d.ShowDialog(MainWindow);
                         else
                             d.ShowDialog();
@@ -594,6 +599,7 @@ namespace XenAdmin
                 catch (Exception)
                 {
                 }
+
                 if (!RunInAutomatedTestMode)
                 {
                     using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, exception.ToString(), Messages.XENCENTER)))
@@ -604,8 +610,6 @@ namespace XenAdmin
                     throw;
                 }
             }
-            if (RunInAutomatedTestMode && TestExceptionString == null)
-                TestExceptionString = e.GetBaseException().ToString();
         }
 
         /// <summary>
@@ -811,6 +815,8 @@ namespace XenAdmin
             }
         }
 
+        #region Invocations
+
         /// <summary>
         /// Safely invoke the given delegate on the given control.
         /// </summary>
@@ -818,36 +824,25 @@ namespace XenAdmin
         {
             try
             {
-                if (!IsExiting(c))
+                if (IsInvokable(c))
                 {
-                    if (c == null)
-                        return;
-
                     if (c.InvokeRequired)
                     {
                         MethodInvoker exceptionLogger = () =>
+                        {
+                            try
                             {
-                                try
-                                {
-                                    f();
-                                }
-                                catch (Exception e)
-                                {
-                                    log.Error("Exception in Invoke", e);
-                                    throw;
-                                }
-                            };
+                                f();
+                            }
+                            catch (Exception e)
+                            {
+                                log.Error(string.Format("Exception in Invoke (ControlType={0}, MethodName={1})",
+                                    c.GetType(), f.Method.Name), e);
+                                throw;
+                            }
+                        };
 
-                        try
-                        {
-                            c.Invoke(exceptionLogger);
-                        }
-                        catch (Exception e)
-                        {
-                            log.Error(string.Format("Exception in Invoke (ControlType={0}, MethodName={1})", c.GetType(),
-                                                    f.Method.Name), e);
-                            throw;
-                        }
+                        c.Invoke(exceptionLogger);
                     }
                     else
                     {
@@ -855,49 +850,51 @@ namespace XenAdmin
                     }
                 }
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidAsynchronousStateException)
+            catch (InvalidAsynchronousStateException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-        }
-
-        private static bool IsExiting(Control c)
-        {
-            return Exiting || ((c != null) && (c.Disposing || c.IsDisposed || !c.IsHandleCreated));
         }
 
         /// <summary>
         /// Safely invoke the given delegate on the given control.
         /// </summary>
-        /// <returns>The result of the function call, or null if c is being disposed.</returns>
+        /// <returns>The result of the function call, or null if the control cannot be invoked.</returns>
         public static object Invoke(Control c, Delegate f, params object[] p)
         {
             try
             {
-                if (!IsExiting(c))
+                if (IsInvokable(c))
                 {
                     if (c.InvokeRequired)
                     {
                         Func<object> exceptionLogger = () =>
+                        {
+                            try
                             {
-                                try
-                                {
-                                    return f.DynamicInvoke(p);
-                                }
-                                catch (Exception e)
-                                {
-                                    log.Error("Exception in Invoke", e);
-                                    throw;
-                                }
-                            };
+                                return f.DynamicInvoke(p);
+                            }
+                            catch (Exception e)
+                            {
+                                log.Error(string.Format("Exception in Invoke (ControlType={0}, MethodName={1})",
+                                    c.GetType(), f.Method.Name), e);
+                                throw;
+                            }
+                        };
 
                         return c.Invoke(exceptionLogger);
                     }
@@ -907,18 +904,25 @@ namespace XenAdmin
                     }
                 }
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidAsynchronousStateException)
+            catch (InvalidAsynchronousStateException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
+
             return null;
         }
 
@@ -926,23 +930,28 @@ namespace XenAdmin
         {
             try
             {
-                if (!IsExiting(c))
-                {
+                if (IsInvokable(c))
                     return c.BeginInvoke(f, p);
-                }
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidAsynchronousStateException)
+            catch (InvalidAsynchronousStateException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
+
             return null;
         }
 
@@ -950,24 +959,34 @@ namespace XenAdmin
         {
             try
             {
-                if (!IsExiting(c))
-                {
+                if (IsInvokable(c))
                     c.BeginInvoke(f);
-                }
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidAsynchronousStateException)
+            catch (InvalidAsynchronousStateException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
-                if (!IsExiting(c)) throw;
+                if (IsInvokable(c))
+                    throw;
+                log.Error(e);
             }
         }
+
+        private static bool IsInvokable(Control c)
+        {
+            return !Exiting && c != null && !c.Disposing && !c.IsDisposed && c.IsHandleCreated;
+        }
+        #endregion
 
         private static string ClientVersion()
         {
