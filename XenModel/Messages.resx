@@ -5263,6 +5263,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>Export to File...</value>
   </data>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>VMs with disks greater than {0} cannot be exported as an OVF/OVA package.</value>
+  </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>Normal text file (*.txt)|*.txt|Rich text file (*.rtf)|*.rtf</value>
   </data>
@@ -11345,6 +11348,9 @@ Incremental allocation: {1}</value>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs without a home server cannot have disks on local storage</value>
   </data>
+  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>You cannot create a disk greater than {0} on this SR.</value>
+  </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
   </data>
@@ -12538,6 +12544,12 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
+  </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>

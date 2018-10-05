@@ -14895,6 +14895,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VMs with disks greater than {0} cannot be exported as an OVF/OVA package..
+        /// </summary>
+        public static string EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF {
+            get {
+                return ResourceManager.GetString("EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The maximum number of EULAs that can be included in the appliance is {0}. Selected EULA documents exceeding this number will not be added to the appliance. Click OK to proceed or Cancel to go back and change you selection..
         /// </summary>
         public static string EXPORT_EULA_PAGE_FILE_LIMIT_WARNING {
@@ -32572,6 +32581,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot create a disk greater than {0} on this SR..
+        /// </summary>
+        public static string SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE {
+            get {
+                return ResourceManager.GetString("SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} required when only {1} available.
         /// </summary>
         public static string SR_PICKER_INSUFFICIENT_SPACE {
@@ -36236,6 +36254,24 @@ namespace XenAdmin {
         public static string VAL_SEC {
             get {
                 return ResourceManager.GetString("VAL_SEC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TiB.
+        /// </summary>
+        public static string VAL_TERB {
+            get {
+                return ResourceManager.GetString("VAL_TERB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TiBps.
+        /// </summary>
+        public static string VAL_TERRATE {
+            get {
+                return ResourceManager.GetString("VAL_TERRATE", resourceCulture);
             }
         }
         
