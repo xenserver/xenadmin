@@ -2933,10 +2933,11 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
-            bool licenseStatusTitleLabelHandled = false;
-
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
+
+            var licenseColor = Program.TitleBarForeColor;
+            var licenseText = string.Empty;
 
             if (SearchMode && SearchPage.Search != null)
             {
@@ -2947,11 +2948,10 @@ namespace XenAdmin
             {
                 IXenObject xenObject = SelectionManager.Selection[0].XenObject;
                 TitleLabel.Text = xenObject.NameWithLocation();
-
-                UpdateLicenseStatusTitleLabel(xenObject);
-                licenseStatusTitleLabelHandled = true;
-
                 TitleIcon.Image = Images.GetImage16For(xenObject);
+                
+                licenseText = GetLicenseStatusText(xenObject, out licenseColor);
+
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
 
                 if (SelectionManager.Selection[0].PoolAncestor == null && SelectionManager.Selection[0].HostAncestor == null)
@@ -2966,62 +2966,40 @@ namespace XenAdmin
                 loggedInLabel1.Connection = null;
             }
 
-            if (!licenseStatusTitleLabelHandled)
-                ResetLicenseStatusTitleLabel();
-
+            LicenseStatusTitleLabel.Text = licenseText;
+            LicenseStatusTitleLabel.ForeColor = licenseColor;
             SetTitleLabelMaxWidth();
         }
 
-        private void UpdateLicenseStatusTitleLabel(IXenObject xenObject)
+        private string GetLicenseStatusText(IXenObject xenObject, out Color foreColor)
         {
-            if (xenObject is Pool)
-            {
-                var pool = xenObject as Pool;
+            foreColor = Program.TitleBarForeColor;
 
-                if (pool.Connection != null && pool.Connection.CacheIsPopulated)
+            var pool = xenObject as Pool;
+            if (pool != null && pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)
+            {
+                if (pool.IsFreeLicenseOrExpired())
                 {
-                    if (pool.IsFreeLicenseOrExpired)
-                    {
-                        LicenseStatusTitleLabel.Text = Messages.MAINWINDOW_HEADER_UNLICENSED;
-                        LicenseStatusTitleLabel.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, pool.LicenseString());
-                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
-                    }
+                    foreColor = Color.Red;
+                    return Messages.MAINWINDOW_HEADER_UNLICENSED;
                 }
-            }
-            else if (xenObject is Host)
-            {
-                var host = xenObject as Host;
 
-                if (host.Connection != null && host.Connection.CacheIsPopulated)
+                return string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(pool));
+            }
+
+            var host = xenObject as Host;
+            if (host != null && host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
+            {
+                if (host.IsFreeLicenseOrExpired())
                 {
-                    if (host.IsFreeLicenseOrExpired())
-                    {
-                        LicenseStatusTitleLabel.Text = Messages.MAINWINDOW_HEADER_UNLICENSED;
-                        LicenseStatusTitleLabel.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
-                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
-                    }
+                    foreColor = Color.Red;
+                    return Messages.MAINWINDOW_HEADER_UNLICENSED;
                 }
-            }
-            else
-            {
-                ResetLicenseStatusTitleLabel();
-            }
-        }
 
-        private void ResetLicenseStatusTitleLabel()
-        {
-            if (string.IsNullOrEmpty(LicenseStatusTitleLabel.Text))
-                return;
+                return string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
+            }
 
-            LicenseStatusTitleLabel.Text = string.Empty;
+            return string.Empty;
         }
 
         private void SetTitleLabelMaxWidth()
@@ -3128,7 +3106,7 @@ namespace XenAdmin
         {
             if (mode == NavigationPane.NavigationMode.Notifications)
             {
-                ResetLicenseStatusTitleLabel();
+                LicenseStatusTitleLabel.Text = string.Empty;
                 TheTabControl.Visible = false;
             }
             else

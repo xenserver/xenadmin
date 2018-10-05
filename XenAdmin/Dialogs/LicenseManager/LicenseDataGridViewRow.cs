@@ -104,13 +104,14 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                if(XenObject is Host)
-                    return XenObject as Host;
-                if(XenObject is Pool)
-                {
-                   Pool pool = XenObject as Pool;
-                   return pool.Connection.Resolve(pool.master);
-                }
+                var host = XenObject as Host;
+                if (host != null)
+                    return host;
+
+                var pool = XenObject as Pool;
+                if (pool != null)
+                    return pool.Connection.Resolve(pool.master);
+
                 return null;
             }
         }
@@ -123,21 +124,23 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public virtual string LicenseName 
-        { 
+        public virtual string LicenseName
+        {
             get
             {
-                if (XenObject != null && !XenObject.Connection.IsConnected)
+                if (XenObject == null || XenObject.Connection == null || !XenObject.Connection.IsConnected)
                     return Messages.UNKNOWN;
 
-                // for a pool, get the lowest license, i.e. pool.LicenseString
-                Pool pool = Helpers.GetPool(XenObjectHost.Connection);
+                // for a pool, get the lowest license
+                Pool pool = Helpers.GetPool(XenObject.Connection);
+                if (pool != null)
+                    return Helpers.GetFriendlyLicenseName(pool);
 
-                if (pool == null || XenObject is Host)
+                if (XenObjectHost != null)
                     return Helpers.GetFriendlyLicenseName(XenObjectHost);
 
-                return pool.LicenseString();
-            } 
+                return Messages.UNKNOWN;
+            }
         }
 
         public override bool WarningRequired

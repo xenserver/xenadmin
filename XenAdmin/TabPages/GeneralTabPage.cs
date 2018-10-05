@@ -127,8 +127,8 @@ namespace XenAdmin.TabPages
                     pdSectionGeneral.UpdateEntryValueWithKey(
                         Messages.POOL_LICENSE,
                         additionalString != string.Empty
-                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
-                            : p.LicenseString(),
+                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
+                            : Helpers.GetFriendlyLicenseName(p),
                         true);
                 });
         }
@@ -1306,8 +1306,8 @@ namespace XenAdmin.TabPages
                 var additionalString = PoolAdditionalLicenseString();
                 s.AddEntry(Messages.POOL_LICENSE,
                     additionalString != string.Empty
-                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
-                        : p.LicenseString());
+                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
+                        : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
                 var master = p.Connection.Resolve(p.master);

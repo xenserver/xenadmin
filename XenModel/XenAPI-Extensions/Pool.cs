@@ -95,28 +95,9 @@ namespace XenAPI
             return false;
         }
 
-        public bool IsFreeLicenseOrExpired
+        public bool IsFreeLicenseOrExpired()
         {
-            get
-            {
-                return Connection.Cache.Hosts.Any(h => h.IsFreeLicenseOrExpired());
-            }
-        }
-
-        public string LicenseString()
-        {
-            var hosts = new List<Host>(Connection.Cache.Hosts);
-            foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
-            {
-                Host.Edition edition1 = edition;
-                Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
-
-                if (host != null)
-                {
-                    return Helpers.GetFriendlyLicenseName(host);
-                }
-            }
-            return PropertyManager.GetFriendlyName("Label-host.edition-free");
+            return Connection.Cache.Hosts.Any(h => h.IsFreeLicenseOrExpired());
         }
 
         /// <summary>

@@ -920,6 +920,26 @@ namespace XenAdmin.Core
             return string.Format("{0}{1}", GuiTempObjectPrefix, name);
         }
 
+        public static string GetFriendlyLicenseName(Pool pool)
+        {
+            var hosts = new List<Host>(pool.Connection.Cache.Hosts);
+
+            if (hosts.Count > 0)
+            {
+                var editions = Enum.GetValues(typeof(Host.Edition));
+                foreach (Host.Edition edition in editions)
+                {
+                    Host.Edition edition1 = edition;
+                    Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
+
+                    if (host != null)
+                        return GetFriendlyLicenseName(host);
+                }
+            }
+
+            return Messages.UNKNOWN;
+        }
+
         public static string GetFriendlyLicenseName(Host host)
         {
 			if (string.IsNullOrEmpty(host.edition))
