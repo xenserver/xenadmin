@@ -60,8 +60,10 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            if (!templatesLoaded)
-                PopulateTemplatesBox();
+            if (templatesLoaded)
+                return;
+
+            PopulateTemplatesBox();
             templatesLoaded = true;
 
             if (m_selectedTemplate == null)
