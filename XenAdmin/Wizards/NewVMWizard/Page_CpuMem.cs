@@ -107,6 +107,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     FreeSpinnerLimits();
                     spinnerStatMax.Initialize(Template.memory_static_max, Template.memory_static_max);
+                    labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = true;
                 }
                 else
                     labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = false;
