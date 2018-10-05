@@ -50,8 +50,8 @@ namespace XenAPI
         public enum Edition
         {
             Free,
-            PerSocket,     //Added in Clearwater (PR-1589)
-            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            PerSocket,             //Added in Clearwater (PR-1589)
+            XenDesktop,            //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
             Standard,              // Added in Dundee/Violet (standard)
@@ -91,12 +91,11 @@ namespace XenAPI
                     return Edition.DesktopPlus;
                 case "desktop-cloud":
                     return Edition.DesktopCloud;
-                case "basic":
-                    return Edition.Free;
                 case "premium":
                     return Edition.Premium;
                 case "standard":
                     return Edition.Standard;
+                case "basic":
                 default:
                     return Edition.Free;
             }
