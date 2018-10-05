@@ -196,7 +196,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         public readonly List<PlanAction> UpdatesPlanActions;
         public readonly List<PlanAction> DelayedPlanActions;
 
-        public HostPlan(Host host, List<PlanAction> initialActions, List<PlanAction> updateActions, List<PlanAction> delayedActions)
+        public HostPlan(Host host, List<PlanAction> initialActions, List<PlanAction> updateActions,
+            List<PlanAction> delayedActions)
         {
             Host = host;
             InitialPlanActions = initialActions ?? new List<PlanAction>();
