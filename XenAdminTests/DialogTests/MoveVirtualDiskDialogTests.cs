@@ -44,7 +44,7 @@ namespace XenAdminTests.DialogTests.boston.MoveVirtualDiskDialogTests
         protected override MoveVirtualDiskDialog NewDialog()
         {
             var vdi = GetAnyVDI();
-            return new MoveVirtualDiskDialog(vdi.Connection, new List<VDI> {vdi}, null);
+            return new MoveVirtualDiskDialog(vdi.Connection, new List<VDI> {vdi});
         }
 
         protected override void RunAfter()

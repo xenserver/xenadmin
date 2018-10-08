@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveVirtualDiskDialog));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTipContainer2 = new XenAdmin.Controls.ToolTipContainer();
             this.buttonMove = new System.Windows.Forms.Button();
@@ -40,11 +39,6 @@
             this.toolTipContainer2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label1
             // 
@@ -73,7 +67,7 @@
             this.srPicker1.Name = "srPicker1";
             this.srPicker1.ItemSelectionNull += new System.Action(this.srPicker1_ItemSelectionNull);
             this.srPicker1.ItemSelectionNotNull += new System.Action(this.srPicker1_ItemSelectionNotNull);
-            this.srPicker1.DoubleClickOnRow += new System.EventHandler(this.SRPicker_DoubleClickOnRow);
+            this.srPicker1.DoubleClickOnRow += new System.EventHandler(this.srPicker1_DoubleClickOnRow);
             // 
             // tableLayoutPanel2
             // 
@@ -116,7 +110,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private XenAdmin.Controls.ToolTipContainer toolTipContainer2;
         private System.Windows.Forms.Button buttonMove;

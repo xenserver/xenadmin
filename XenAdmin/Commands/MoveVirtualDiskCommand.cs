@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             var vdis = selection.AsXenObjects<VDI>();
-            new MoveVirtualDiskDialog(selection.GetConnectionOfFirstItem(), vdis, null).Show(Program.MainWindow);
+            new MoveVirtualDiskDialog(selection.GetConnectionOfFirstItem(), vdis).Show(Program.MainWindow);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
