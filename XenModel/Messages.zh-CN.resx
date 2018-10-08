@@ -5262,6 +5262,9 @@
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>导出到文件...</value>
   </data>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>无法将磁盘大于 {0} 的 VM 导出为 OVF/OVA 包。</value>
+  </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>标准文本文件(*.txt)|*.txt|RTF 文件(*.rtf)|*.rtf</value>
   </data>
@@ -11344,6 +11347,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>没有主服务器的 VM 不能在本地存储中包含磁盘</value>
   </data>
+  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>无法在此 SR 上创建大于 {0} 的磁盘。</value>
+  </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>磁盘大小({0})超过 SR 大小({1})</value>
   </data>
@@ -12088,7 +12094,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>请务必先升级 [XenCenter]，然后再升级 [XenServer]。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为 *.{0} 和 *.iso</value>
+    <value>所选文件的扩展名无效。有效扩展名为 *.{0}、*.zip 和 *.iso。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
     <value>在 {0} 中找不到有效的更新文件</value>
@@ -12190,6 +12196,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>正在跳过更新 {0}。已在 {1} 上应用... </value>
+  </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>正在跳过上载更新 {0}。已上载到 {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>存储库“{0}”</value>
@@ -12537,6 +12546,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
+  </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>

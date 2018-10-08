@@ -12540,6 +12540,12 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VAL_SEC" xml:space="preserve">
     <value>秒</value>
   </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
+  </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>
   </data>
