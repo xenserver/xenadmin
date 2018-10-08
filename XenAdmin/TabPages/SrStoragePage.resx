@@ -201,6 +201,108 @@
   <data name="&gt;&gt;addVirtualDiskButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonMove.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="buttonMove.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="buttonMove.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="buttonMove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="buttonMove.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonMove.Text" xml:space="preserve">
+    <value>Mov&amp;e...</value>
+  </data>
+  <data name="&gt;&gt;buttonMove.Name" xml:space="preserve">
+    <value>buttonMove</value>
+  </data>
+  <data name="&gt;&gt;buttonMove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonMove.Parent" xml:space="preserve">
+    <value>toolTipContainerMove</value>
+  </data>
+  <data name="&gt;&gt;buttonMove.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="toolTipContainerMove.Location" type="System.Drawing.Point, System.Drawing">
+    <value>219, 3</value>
+  </data>
+  <data name="toolTipContainerMove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="toolTipContainerMove.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerMove.Name" xml:space="preserve">
+    <value>toolTipContainerMove</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerMove.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerMove.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerMove.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="RemoveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="RemoveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RemoveButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="RemoveButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="RemoveButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="RemoveButton.Text" xml:space="preserve">
+    <value>&amp;Delete</value>
+  </data>
+  <data name="&gt;&gt;RemoveButton.Name" xml:space="preserve">
+    <value>RemoveButton</value>
+  </data>
+  <data name="&gt;&gt;RemoveButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RemoveButton.Parent" xml:space="preserve">
+    <value>RemoveButtonContainer</value>
+  </data>
+  <data name="&gt;&gt;RemoveButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="RemoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 3</value>
+  </data>
+  <data name="RemoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="RemoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.Name" xml:space="preserve">
+    <value>RemoveButtonContainer</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="EditButtonContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -238,13 +340,13 @@
     <value>1</value>
   </data>
   <data name="EditButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 3</value>
+    <value>435, 3</value>
   </data>
   <data name="EditButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 23</value>
   </data>
   <data name="EditButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;EditButtonContainer.Name" xml:space="preserve">
     <value>EditButtonContainer</value>
@@ -256,118 +358,19 @@
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;EditButtonContainer.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="buttonMove.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="buttonMove.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="buttonMove.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="buttonMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="buttonMove.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="buttonMove.Text" xml:space="preserve">
-    <value>Mov&amp;e...</value>
-  </data>
-  <data name="&gt;&gt;buttonMove.Name" xml:space="preserve">
-    <value>buttonMove</value>
-  </data>
-  <data name="&gt;&gt;buttonMove.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonMove.Parent" xml:space="preserve">
-    <value>toolTipContainerMove</value>
-  </data>
-  <data name="&gt;&gt;buttonMove.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="toolTipContainerMove.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 3</value>
-  </data>
-  <data name="toolTipContainerMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="toolTipContainerMove.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerMove.Name" xml:space="preserve">
-    <value>toolTipContainerMove</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerMove.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerMove.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerMove.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="RemoveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="RemoveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="RemoveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="RemoveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="RemoveButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="RemoveButton.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
-  <data name="&gt;&gt;RemoveButton.Name" xml:space="preserve">
-    <value>RemoveButton</value>
-  </data>
-  <data name="&gt;&gt;RemoveButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RemoveButton.Parent" xml:space="preserve">
-    <value>RemoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;RemoveButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="RemoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>435, 3</value>
-  </data>
-  <data name="RemoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="RemoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Name" xml:space="preserve">
-    <value>RemoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 272</value>
+    <value>0, 269</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>894, 77</value>
+    <value>900, 83</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -434,6 +437,9 @@
   </metadata>
   <data name="ColumnCBT.HeaderText" xml:space="preserve">
     <value>Changed Block Tracking</value>
+  </data>
+  <data name="ColumnCBT.Width" type="System.Int32, mscorlib">
+    <value>155</value>
   </data>
   <data name="dataGridViewVDIs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

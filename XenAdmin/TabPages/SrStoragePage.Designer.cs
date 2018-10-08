@@ -40,13 +40,13 @@ namespace XenAdmin.TabPages
             this.toolTipContainerMove = new XenAdmin.Controls.ToolTipContainer();
             this.buttonMove = new System.Windows.Forms.Button();
             this.dataGridViewVDIs = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCBT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pageContainerPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.RemoveButtonContainer.SuspendLayout();
@@ -161,9 +161,9 @@ namespace XenAdmin.TabPages
             // 
             this.flowLayoutPanel1.Controls.Add(this.toolTipContainerRescan);
             this.flowLayoutPanel1.Controls.Add(this.addVirtualDiskButton);
-            this.flowLayoutPanel1.Controls.Add(this.EditButtonContainer);
             this.flowLayoutPanel1.Controls.Add(this.toolTipContainerMove);
             this.flowLayoutPanel1.Controls.Add(this.RemoveButtonContainer);
+            this.flowLayoutPanel1.Controls.Add(this.EditButtonContainer);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -215,14 +215,6 @@ namespace XenAdmin.TabPages
             this.dataGridViewVDIs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewVDIs_KeyUp);
             this.dataGridViewVDIs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewVDIs_MouseUp);
             // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVDIs, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
             // ColumnName
             // 
             this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -264,6 +256,14 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.ColumnCBT, "ColumnCBT");
             this.ColumnCBT.Name = "ColumnCBT";
             this.ColumnCBT.ReadOnly = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVDIs, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // SrStoragePage
             // 
