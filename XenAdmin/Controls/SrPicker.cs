@@ -174,16 +174,6 @@ namespace XenAdmin.Controls
 			refresh();
 		}
 
-        /// <summary>
-        /// Returns how much disk space is required to create the disk on an SR
-        /// </summary>
-        /// <param name="sr"></param>
-        /// <returns></returns>
-        private long GetRequiredDiskSizeForSR(SR sr)
-        {
-            return DiskSize;
-        }
-
         private readonly SrPickerItemFactory itemFactory = new SrPickerItemFactory();
 
     	public void refresh()
@@ -199,7 +189,7 @@ namespace XenAdmin.Controls
 
                 foreach (SR sr in connection.Cache.SRs)
                 {
-                    SrPickerItem item = itemFactory.PickerItem(sr, usage, affinity, GetRequiredDiskSizeForSR(sr), existingVDIs);
+                    SrPickerItem item = itemFactory.PickerItem(sr, usage, affinity, DiskSize, existingVDIs);
                     if (item.Show)
                         srListBox.AddNode(item);
                     foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))
@@ -251,7 +241,7 @@ namespace XenAdmin.Controls
             {
                 foreach (SrPickerItem node in srListBox.Items)
                 {
-                    node.UpdateDiskSize(GetRequiredDiskSizeForSR(node.TheSR));
+                    node.UpdateDiskSize(DiskSize);
                 }
             }
             finally
