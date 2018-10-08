@@ -62,39 +62,7 @@ namespace XenAdmin.Controls
         public event EventHandler DoubleClickOnRow;
         public long DiskSize = 0;
 
-        public SrPicker(IXenConnection connection, SRPickerType usage) : this(connection)
-        {
-            this.usage = usage;
-        }
-
         private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
-        public SrPicker(IXenConnection connection)
-        {
-            this.connection = connection;
-            InitializeComponent();
-
-            srListBox.ShowCheckboxes = false;
-            srListBox.ShowDescription = true;
-            srListBox.ShowImages = true;
-            srListBox.NodeIndent = 3;
-            srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
-            srListBox.DoubleClickOnRow += srListBox_DoubleClickOnRow;
-
-            SrHint.Text = usage == SRPickerType.MoveOrCopy ?
-                Messages.IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT :
-                Messages.IMPORT_WIZARD_VM_SR_HINT_TEXT;
-
-            Pool pool = Helpers.GetPoolOfOne(connection);
-            if (pool != null)
-            {
-                pool.PropertyChanged -= Server_PropertyChanged;
-                pool.PropertyChanged += Server_PropertyChanged;
-            }
-            SR_CollectionChangedWithInvoke=Program.ProgramInvokeHandler(SR_CollectionChanged);
-            connection.Cache.RegisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
-
-            refresh();
-        }
 
         public SrPicker()
         {
@@ -195,14 +163,6 @@ namespace XenAdmin.Controls
             get
             {
                 return srListBox.SelectedItem is SrPickerItem && (srListBox.SelectedItem as SrPickerItem).Enabled ? (srListBox.SelectedItem as SrPickerItem).TheSR : null;
-            }
-        }
-
-        public SR DisabledSelectedSR
-        {
-            get 
-            {
-                return srListBox.SelectedItem is SrPickerItem && !(srListBox.SelectedItem as SrPickerItem).Enabled ? (srListBox.SelectedItem as SrPickerItem).TheSR : null;
             }
         }
 
