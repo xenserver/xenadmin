@@ -91,7 +91,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     throw;
                 }
 
-                if (livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete && !hostsThatWillRequireReboot.Contains(host.uuid))
+                if (livePatchStatus.ContainsKey(host.uuid)
+                    && livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete
+                    && !hostsThatWillRequireReboot.Contains(host.uuid))
                     hostsThatWillRequireReboot.Add(host.uuid);
             }
         }
