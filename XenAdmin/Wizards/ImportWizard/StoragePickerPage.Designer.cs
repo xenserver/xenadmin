@@ -37,8 +37,7 @@
 			this.m_srPicker.Connection = null;
 			resources.ApplyResources(this.m_srPicker, "m_srPicker");
 			this.m_srPicker.Name = "m_srPicker";
-			this.m_srPicker.ItemSelectionNull += new System.Action(this.m_srPicker_ItemSelectionNull);
-            this.m_srPicker.ItemSelectionNotNull += new System.Action(this.m_srPicker_ItemSelectionNotNull);
+			this.m_srPicker.SrSelectionChanged += new System.Action<object>(this.m_srPicker_SrSelectionChanged);
 			// 
 			// StoragePickerPage
 			// 

@@ -74,17 +74,16 @@ namespace XenAdmin.Dialogs
 
             // Add events
             NameTextBox.Text = GetDefaultVDIName();
-            SrListBox.srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
-            SrListBox.ItemSelectionNotNull += SrListBox_ItemSelectionNotNull;
-            SrListBox.ItemSelectionNull += SrListBox_ItemSelectionNull;
+            SrListBox.srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
+            SrListBox.SrSelectionChanged += SrListBox_SrSelectionChanged;
             srListBox_SelectedIndexChanged(null, null);
 
-            DiskSizeNumericUpDown.TextChanged += new EventHandler(DiskSizeNumericUpDown_TextChanged);
+            DiskSizeNumericUpDown.TextChanged += DiskSizeNumericUpDown_TextChanged;
 
             max = (decimal)Math.Pow(1024, 4);//1 Petabit
             min = 0;
             comboBoxUnits.SelectedItem = comboBoxUnits.Items[0];
-            comboBoxUnits.SelectedIndexChanged += new EventHandler(comboBoxUnits_SelectedIndexChanged);
+            comboBoxUnits.SelectedIndexChanged += comboBoxUnits_SelectedIndexChanged;
 
             SetNumUpDownIncrementAndDecimals(DiskSizeNumericUpDown, comboBoxUnits.SelectedItem.ToString());
         }
@@ -171,14 +170,9 @@ namespace XenAdmin.Dialogs
             return Helpers.MakeUniqueName(Messages.DEFAULT_VDI_NAME, usedNames);
         }
 
-        void SrListBox_ItemSelectionNull()
+        private void SrListBox_SrSelectionChanged(object obj)
         {
-            SelectionNull = true;
-        }
-
-        void SrListBox_ItemSelectionNotNull()
-        {
-            SelectionNull = false;
+            SelectionNull = obj == null;
         }
 
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -299,16 +299,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			});
 		}
 
-		private void m_srPicker_ItemSelectionNotNull()
-		{
-			if (ImportInProgress())
-				return;
-
-			SetButtonNextEnabled(m_srPicker.SR != null);
-			IsDirty = true;
-		}
-
-		private void m_srPicker_ItemSelectionNull()
+		private void m_srPicker_SrSelectionChanged(object obj)
 		{
 			if (ImportInProgress())
 				return;

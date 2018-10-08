@@ -53,8 +53,7 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             InitializeComponent();
             this.vm = vm;
-            srPicker1.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
-            srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
+            srPicker1.SrSelectionChanged += srPicker1_SrSelectionChanged;
             srPicker1.DoubleClickOnRow += srPicker1_DoubleClickOnRow;
             srPicker1.SrHint.Visible = false;
             Host affinity = vm.Home();
@@ -93,12 +92,7 @@ namespace XenAdmin.Dialogs.VMDialogs
             buttonMove.Enabled = srPicker1.SR != null;
         }
 
-        private void srPicker1_ItemSelectionNull()
-        {
-            EnableMoveButton();
-        }
-
-        private void srPicker1_ItemSelectionNotNull()
+        private void srPicker1_SrSelectionChanged(object obj)
         {
             EnableMoveButton();
         }
