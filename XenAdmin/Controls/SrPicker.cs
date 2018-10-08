@@ -54,11 +54,10 @@ namespace XenAdmin.Controls
         }
 
         private IXenConnection connection;
-
         private Host affinity;
         private SrPickerItem LastSelectedItem;
-        public event Action ItemSelectionNull;
-        public event Action ItemSelectionNotNull;
+
+        public event Action<object> SrSelectionChanged;
         public event EventHandler DoubleClickOnRow;
         public long DiskSize = 0;
 
@@ -133,13 +132,13 @@ namespace XenAdmin.Controls
             SrPickerItem item = srListBox.SelectedItem as SrPickerItem;
             if (item == null || !item.Enabled)
             {
-                if (ItemSelectionNull != null)
-                    ItemSelectionNull();
+                if (SrSelectionChanged != null)
+                    SrSelectionChanged(null);
                 return;
             }
 
-            if (ItemSelectionNotNull != null)
-                ItemSelectionNotNull();
+            if (SrSelectionChanged != null)
+                SrSelectionChanged(item);
 
             if (!item.Enabled && LastSelectedItem != null && LastSelectedItem.TheSR.opaque_ref != item.TheSR.opaque_ref)
                 srListBox.SelectedItem = LastSelectedItem;
@@ -153,9 +152,6 @@ namespace XenAdmin.Controls
             }
             else
                 LastSelectedItem = item;
-
-                            
-
         }
 
         public SR SR
@@ -315,8 +311,8 @@ namespace XenAdmin.Controls
                 }
             }
 
-            if (ItemSelectionNull != null)
-                ItemSelectionNull();
+            if (SrSelectionChanged != null)
+                SrSelectionChanged(null);
         }
 
         internal void selectDefaultSROrAny()
@@ -333,8 +329,8 @@ namespace XenAdmin.Controls
                     return;
                 }
             }
-            if (ItemSelectionNull != null)
-                ItemSelectionNull();
+            if (SrSelectionChanged != null)
+                SrSelectionChanged(null);
         }
 
         public void selectSRorDefaultorAny(SR sr)
@@ -370,7 +366,4 @@ namespace XenAdmin.Controls
             }
         }
     }
-
-
-    
 }
