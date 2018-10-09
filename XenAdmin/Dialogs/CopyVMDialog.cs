@@ -31,26 +31,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-
-using XenAdmin;
-using XenAPI;
-using XenAdmin.Controls;
-using XenAdmin.Network;
-using XenAdmin.Core;
-using XenAdmin.Actions;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.Controls;
+using XenAdmin.Core;
+using XenAPI;
 
 
 namespace XenAdmin.Dialogs
 {
     public partial class CopyVMDialog : XenDialogBase
     {
-        public readonly VM TheVM;
+        private readonly VM TheVM;
         private readonly bool IsRealVm;
 
         public CopyVMDialog(VM vm)
@@ -60,11 +51,10 @@ namespace XenAdmin.Dialogs
             IsRealVm = !vm.is_a_template;
             TheVM = vm;
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            srPicker1.SrSelectionChanged += srPicker1_SrSelectionChanged;
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
             srPicker1.DiskSize = vm.TotalVMSize();
-            srPicker1.SrHint.Text = IsRealVm ? Messages.COPY_VM_SELECT_SR : Messages.COPY_TEMPLATE_SELECT_SR;
+            labelSrHint.Text = IsRealVm ? Messages.COPY_VM_SELECT_SR : Messages.COPY_TEMPLATE_SELECT_SR;
             srPicker1.SetAffinity(affinity);
             Pool pool = Helpers.GetPoolOfOne(vm.Connection);
             if (pool != null)
@@ -101,7 +91,7 @@ namespace XenAdmin.Dialogs
             if (vm.DescriptionType() != VM.VmDescriptionType.None)
                 DescriptionTextBox.Text = vm.Description();
 
-            srPicker1.srListBox.Invalidate();
+            srPicker1.Invalidate();
             srPicker1.selectDefaultSROrAny();
         }
 
@@ -127,7 +117,7 @@ namespace XenAdmin.Dialogs
 
         private void MoveButton_Click(object sender, EventArgs e)
         {
-            if (!srPicker1.Enabled || CloneRadioButton.Checked)
+            if (!tableLayoutPanelSrPicker.Enabled || CloneRadioButton.Checked)
             {
                 new VMCloneAction(TheVM,NameTextBox.Text, DescriptionTextBox.Text).RunAsync();
                 Close();
@@ -192,7 +182,7 @@ namespace XenAdmin.Dialogs
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            srPicker1.Enabled = CopyRadioButton.Checked;
+            tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Checked;
             // Since the radiobuttons aren't in the same panel, we have to do manual mutual exclusion
             CloneRadioButton.Checked = !CopyRadioButton.Checked;
         }
@@ -205,7 +195,7 @@ namespace XenAdmin.Dialogs
 
         private void CopyVMDialog_Shown(object sender, EventArgs e)
         {
-            srPicker1.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
+            tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace XenAdminTests.DialogTests.boston.MoveVirtualDiskDialogTests
         protected override void RunAfter()
         {
             SrPicker picker = TestUtils.GetFieldDeep<SrPicker>(dialog, "srPicker1");
-            Assert.AreEqual(3, picker.srListBox.Items.Count);
+            Assert.AreEqual(3, picker.Items.Count);
             Button moveButton = TestUtils.GetButton(dialog, "buttonMove");
             Assert.IsTrue(moveButton.Enabled);
             MW(moveButton.PerformClick);

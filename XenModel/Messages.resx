@@ -8907,9 +8907,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>New Virtual Network Interface - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>Select a storage repository to create the disk on</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
   </data>
