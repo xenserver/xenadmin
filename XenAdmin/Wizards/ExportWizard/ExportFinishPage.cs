@@ -92,5 +92,11 @@ namespace XenAdmin.Wizards.ExportWizard
         public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetreiver { private get; set; }
 
 		public bool VerifyExport { get { return m_checkBoxVerify.Checked; } }
+
+        private void m_checkBoxVerify_CheckStateChanged(object sender, EventArgs e)
+        {
+            warningLabel.Visible = m_checkBoxVerify.Checked;
+            warningPicture.Visible = m_checkBoxVerify.Checked;
+        }
 	}
 }
