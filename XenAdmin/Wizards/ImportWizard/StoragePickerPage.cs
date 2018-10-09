@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -120,7 +119,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public override void PopulatePage()
 		{
-			m_srPicker.SrHint.Text = Messages.IMPORT_VM_SELECT_SR;
+			labelSrHint.Text = Messages.IMPORT_VM_SELECT_SR;
 
 			// Select default SR
 			Pool pool = Helpers.GetPoolOfOne(m_targetConnection);

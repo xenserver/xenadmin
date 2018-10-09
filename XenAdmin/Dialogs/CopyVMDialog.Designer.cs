@@ -40,9 +40,12 @@ namespace XenAdmin.Dialogs
             this.label1 = new System.Windows.Forms.Label();
             this.FastCloneDescription = new System.Windows.Forms.Label();
             this.groupBox1 = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanelSrPicker = new System.Windows.Forms.TableLayoutPanel();
+            this.labelSrHint = new System.Windows.Forms.Label();
             this.toolTipContainer1 = new XenAdmin.Controls.ToolTipContainer();
             this.FastClonePanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanelSrPicker.SuspendLayout();
             this.toolTipContainer1.SuspendLayout();
             this.FastClonePanel.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +55,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.srPicker1, "srPicker1");
             this.srPicker1.Connection = null;
             this.srPicker1.Name = "srPicker1";
+            this.srPicker1.SrSelectionChanged += new System.Action<object>(this.srPicker1_SrSelectionChanged);
             // 
             // CloseButton
             // 
@@ -116,11 +120,23 @@ namespace XenAdmin.Dialogs
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.tableLayoutPanelSrPicker);
             this.groupBox1.Controls.Add(this.toolTipContainer1);
             this.groupBox1.Controls.Add(this.CopyRadioButton);
-            this.groupBox1.Controls.Add(this.srPicker1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // tableLayoutPanelSrPicker
+            // 
+            resources.ApplyResources(this.tableLayoutPanelSrPicker, "tableLayoutPanelSrPicker");
+            this.tableLayoutPanelSrPicker.Controls.Add(this.srPicker1, 0, 1);
+            this.tableLayoutPanelSrPicker.Controls.Add(this.labelSrHint, 0, 0);
+            this.tableLayoutPanelSrPicker.Name = "tableLayoutPanelSrPicker";
+            // 
+            // labelSrHint
+            // 
+            resources.ApplyResources(this.labelSrHint, "labelSrHint");
+            this.labelSrHint.Name = "labelSrHint";
             // 
             // toolTipContainer1
             // 
@@ -154,6 +170,8 @@ namespace XenAdmin.Dialogs
             this.Shown += new System.EventHandler(this.CopyVMDialog_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tableLayoutPanelSrPicker.ResumeLayout(false);
+            this.tableLayoutPanelSrPicker.PerformLayout();
             this.toolTipContainer1.ResumeLayout(false);
             this.FastClonePanel.ResumeLayout(false);
             this.FastClonePanel.PerformLayout();
@@ -177,5 +195,7 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Controls.DecentGroupBox groupBox1;
         private XenAdmin.Controls.ToolTipContainer toolTipContainer1;
         private System.Windows.Forms.Panel FastClonePanel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSrPicker;
+        private System.Windows.Forms.Label labelSrHint;
     }
 }

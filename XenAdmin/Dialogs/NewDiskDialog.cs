@@ -70,12 +70,9 @@ namespace XenAdmin.Dialogs
         {
             this.Owner = Program.MainWindow;
             SrListBox.Connection = connection;
-            SrListBox.SrHint.Visible = false;
 
             // Add events
             NameTextBox.Text = GetDefaultVDIName();
-            SrListBox.srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
-            SrListBox.SrSelectionChanged += SrListBox_SrSelectionChanged;
             srListBox_SelectedIndexChanged(null, null);
 
             DiskSizeNumericUpDown.TextChanged += DiskSizeNumericUpDown_TextChanged;
@@ -410,10 +407,10 @@ namespace XenAdmin.Dialogs
         private void setError(string error)
         {
             if (string.IsNullOrEmpty(error))
-                labelError.Visible = pictureBoxError.Visible = false;
+                tableLayoutPanelError.Visible = false;
             else
             {
-                labelError.Visible = pictureBoxError.Visible = true;
+                tableLayoutPanelError.Visible = true;
                 labelError.Text = error;
             }
         }

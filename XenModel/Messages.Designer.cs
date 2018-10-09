@@ -23774,15 +23774,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a storage repository to create the disk on.
-        /// </summary>
-        public static string NEW_DISK_DIALOG_SR_HINT_TEXT {
-            get {
-                return ResourceManager.GetString("NEW_DISK_DIALOG_SR_HINT_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Creating new DVD drive on VM {0}.
         /// </summary>
         public static string NEW_DVD_DRIVE_CREATE_TITLE {
