@@ -3088,7 +3088,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>接続が拒否されました。</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
-    <value>接続の拒否</value>
+    <value>{0} への接続が拒否されました</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>ほかの XE Express Server ({1}) に接続済みであるため、サーバー {0} への接続は制限されます</value>
@@ -5268,6 +5268,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>ファイルにエクスポート...</value>
   </data>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>ディスク サイズが {0} を超える VM は、単一の OVF/OVA パッケージとしてエクスポートできません。</value>
+  </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>テキスト ファイル (*.txt)|*.txt|リッチ テキスト (*.rtf)|*.rtf</value>
   </data>
@@ -5835,12 +5838,9 @@ CD をイジェクトしてから再試行してください。</value>
     <value>グループの役割</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenCenter] のバージョンが古いため、{0} に接続できません。</value>
-  </data>
-  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
-    <value>
+    <value>[XenCenter] のバージョンが古いため、{0} に接続できません。
 
-最新バージョンの [XenCenter] は、以下の場所から入手できます。</value>
+最新バージョンの [XenCenter] は、以下の場所から入手できます:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>高可用性</value>
@@ -11346,6 +11346,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>ホーム サーバーが設定されていない VM はローカル ストレージにディスクを持つことはできません</value>
   </data>
+  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>この SR には、{0} を超えるサイズのディスクを作成できません。</value>
+  </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>ディスク サイズ ({0}) が SR サイズ ({1}) を超過しています</value>
   </data>
@@ -12090,7 +12093,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>[XenServer] をアップグレードする前に [XenCenter] をアップグレードする必要があります。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0} および *.iso</value>
+    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0}、*.zip、*.iso。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
     <value>{0} に有効なアップデート ファイルがありません</value>
@@ -12192,6 +12195,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>アップデート {0} をスキップしています。{1} に適用済みです... </value>
+  </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>アップデート {0} をスキップしています。{1} にアップロード済みです... </value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>ストレージ リポジトリ '{0}'</value>

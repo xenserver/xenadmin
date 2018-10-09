@@ -3084,7 +3084,7 @@
     <value>连接被拒绝。</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
-    <value>连接被拒绝</value>
+    <value>已拒绝连接到 {0}</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>与服务器 {0} 的连接受到限制，因为已经与另一个 XE 速成版服务器({1})建立连接</value>
@@ -5832,10 +5832,7 @@
     <value>组角色</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>此版本的 [XenCenter] 已过时，无法连接到 {0}。</value>
-  </data>
-  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
-    <value>
+    <value>此版本的 [XenCenter] 已过时，无法连接到 {0}。
 
 可以从以下位置获取兼容的 [XenCenter] 版本:</value>
   </data>
