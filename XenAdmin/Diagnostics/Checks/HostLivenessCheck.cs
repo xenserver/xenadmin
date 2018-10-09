@@ -37,17 +37,22 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class HostLivenessCheck : HostCheck
     {
-        public HostLivenessCheck(Host host)
+        private readonly bool checkEnabled;
+
+        public HostLivenessCheck(Host host, bool checkEnabled = false)
             :base(host)
         {
+            this.checkEnabled = checkEnabled;
         }
 
         protected override Problem RunCheck()
         {
             if (!Host.IsLive())
-            {
                 return new HostNotLive(this, Host);
-            }
+
+            if (checkEnabled && (Host.MaintenanceMode() || !Host.enabled))
+                return new HostMaintenanceMode(this, Host);
+
             return null;
         }
 

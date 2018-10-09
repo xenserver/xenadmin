@@ -2939,7 +2939,6 @@
     <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
-    <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
