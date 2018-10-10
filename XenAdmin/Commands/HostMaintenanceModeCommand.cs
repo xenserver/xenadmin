@@ -39,6 +39,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Actions;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 
 
 namespace XenAdmin.Commands
@@ -88,11 +89,21 @@ namespace XenAdmin.Commands
                 {
                     dlg.ShowDialog(Parent);
                 }
+
+                return;
             }
-            else
+
+            if (!host.GetRunningVMs().Any() && (pool == null || !host.IsMaster()))
             {
-                MainWindowCommandInterface.ShowPerXenModelObjectWizard(host, new EvacuateHostDialog(host));
+                Program.MainWindow.CloseActiveWizards(host.Connection);
+                var action = new EvacuateHostAction(host, null, new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
+                action.Completed += delegate { MainWindowCommandInterface.RequestRefreshTreeView(); };
+                action.RunAsync();
+                MainWindowCommandInterface.RequestRefreshTreeView();
+                return;
             }
+            
+            MainWindowCommandInterface.ShowPerXenModelObjectWizard(host, new EvacuateHostDialog(host));
         }
 
         private void ExitMaintenanceMode(Host host)
