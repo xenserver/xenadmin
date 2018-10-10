@@ -3776,7 +3776,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>デフォルト</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>[XenServer] のデフォルト インストール</value>
+    <value>{0} のデフォルト インストール</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>デフォルトの検索</value>
@@ -7033,10 +7033,10 @@ SCSI ID: {2}
     <value>アクティブ化済み</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
-    <value>[Citrix] Virtual Apps および Desktops(&amp;A)</value>
+    <value>[Citrix] Virtual Apps and Desktops(&amp;A)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_CLOUD" xml:space="preserve">
-    <value>[Citrix] Virtual Apps および Desktops [Citrix] Cloud(&amp;C)</value>
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud(&amp;C)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_CLOUD_LEGACY" xml:space="preserve">
     <value>XenApp/XenDesktop [Citrix] Cloud(&amp;C)</value>
@@ -7045,7 +7045,7 @@ SCSI ID: {2}
     <value>XenApp/XenDesktop(&amp;D)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_PLUS" xml:space="preserve">
-    <value>[Citrix] Virtual Apps および Desktops Premium(&amp;P)</value>
+    <value>[Citrix] Virtual Apps and Desktops Premium(&amp;P)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_PLUS_LEGACY" xml:space="preserve">
     <value>XenApp/XenDesktop Platinum(&amp;P)</value>
@@ -7191,15 +7191,15 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
-[Citrix] Virtual Apps および Desktops [Citrix] Cloud 機能が有効です</value>
+[Citrix] Virtual Apps and Desktops [Citrix] Cloud 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
-[Citrix] Virtual Apps および Desktops 機能が有効です</value>
+[Citrix] Virtual Apps and Desktops 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
-[Citrix] Virtual Apps および Desktops Premium 機能が有効です</value>
+[Citrix] Virtual Apps and Desktops Premium 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
@@ -8888,10 +8888,10 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>仮想 GPU の割り当て</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>このプールでは [Citrix] Virtual Apps および Desktops ワークロードに対してのみライセンスが有効です</value>
+    <value>このプールでは [Citrix] Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>このサーバーでは [Citrix] Virtual Apps および Desktops ワークロードに対してのみライセンスが有効です</value>
+    <value>このサーバーでは [Citrix] Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -11209,13 +11209,13 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>スケジュールによるスナップショットの種類</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>[XenServer] ビルド番号</value>
+    <value>ビルド番号</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>[XenServer] ビルド日</value>
+    <value>ビルド日</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>[XenServer] バージョン</value>
+    <value>バージョン</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>正しいユーザー名とパスワードを使用して再試行してください。</value>
