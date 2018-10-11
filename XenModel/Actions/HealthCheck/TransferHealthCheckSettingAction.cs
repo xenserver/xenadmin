@@ -33,6 +33,7 @@ using XenAPI;
 using XenAdmin.Core;
 using System;
 using System.IO.Pipes;
+using System.Linq;
 using System.Text;
 using System.ServiceProcess;
 using XenAdmin.Model;
@@ -67,6 +68,10 @@ namespace XenAdmin.Actions
             ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
             try
             {
+                var services = ServiceController.GetServices();
+                var found = services.FirstOrDefault(s => s.ServiceName == HEALTHCHECKSERVICENAME);
+                if (found == null)
+                    return;//the service is not installed
                 if (sc.Status != ServiceControllerStatus.Running)
                     return;
             }
