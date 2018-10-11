@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
             {
                 MainWindowCommandInterface.CloseActiveWizards(host.Connection);
                 RebootHostAction action = new RebootHostAction( host,AddHostToPoolCommand.NtolDialog);
-                action.Completed += s => MainWindowCommandInterface.RequestRefreshTreeView();
+                action.Completed += Program.MainWindow.action_Completed;
                 actions.Add(action);
             }
             RunMultipleActions(actions, null, Messages.ACTION_HOSTS_REBOOTING, Messages.ACTION_HOSTS_REBOOTED, true);

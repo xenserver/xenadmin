@@ -157,7 +157,6 @@ namespace XenAdmin.Dialogs.Wlb
                 dialog.ShowDialog(this);
             }
 
-            Program.MainWindow.UpdateToolbars();
             return action.Succeeded;
         }
 
@@ -191,7 +190,6 @@ namespace XenAdmin.Dialogs.Wlb
 
         private void textboxWlbUrl_TextChanged(object sender, EventArgs e)
         {
-
             buttonOK.Enabled = checkEnabled_OkButton();
         }
 

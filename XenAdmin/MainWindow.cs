@@ -992,7 +992,6 @@ namespace XenAdmin
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
                 action.RunAsync();
-                Program.Invoke(this, UpdateToolbars);
             }
         }
 
@@ -2704,16 +2703,10 @@ namespace XenAdmin
             }
 
             RequestRefreshTreeView();
-            
-            //Update toolbars, since if an action has just completed, various
-            //buttons may need to be re-enabled. Applies to:
-            // HostAction
-            // EnableHAAction
-            // DisableHAAction
             Program.Invoke(this, UpdateToolbars);
         }
 
-        internal void OpenGlobalImportWizard(string param)
+        private void OpenGlobalImportWizard(string param)
         {
             HelpersGUI.BringFormToFront(this);
             Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;

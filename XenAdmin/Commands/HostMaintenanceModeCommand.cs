@@ -131,9 +131,8 @@ namespace XenAdmin.Commands
 
             MainWindowCommandInterface.CloseActiveWizards(host.Connection);
             var action = new EnableHostAction(host, result == DialogResult.Yes,AddHostToPoolCommand.EnableNtolDialog);
-            action.Completed += delegate { MainWindowCommandInterface.RequestRefreshTreeView(); };
+            action.Completed += Program.MainWindow.action_Completed;
             action.RunAsync();
-            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

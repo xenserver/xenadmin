@@ -638,7 +638,6 @@ namespace XenAdmin.Dialogs
             hostAction = new EvacuateHostAction(host, newMaster != null ? newMaster.item : null, reasons ?? new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
             hostAction.Completed += Program.MainWindow.action_Completed;
             SetSession(hostAction);
-            Program.MainWindow.UpdateToolbars();
 
             //Closes all per-Connection and per-VM wizards for the given connection.
             Program.MainWindow.CloseActiveWizards(host.Connection);
