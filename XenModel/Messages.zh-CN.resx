@@ -3771,7 +3771,7 @@
     <value>默认值</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>默认安装 [XenServer]</value>
+    <value>默认安装 {0}</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>默认搜索</value>
@@ -11207,13 +11207,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>要对计划快照使用哪种快照类型?</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>[XenServer] 内部版本号</value>
+    <value>内部版本号</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>[XenServer] 内部版本日期</value>
+    <value>内部版本日期</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>[XenServer] 版本</value>
+    <value>版本</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>使用正确的用户名和密码重试。</value>
