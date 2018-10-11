@@ -181,7 +181,7 @@
     <value>未圧縮の OVA ファイルに ova 拡張子がありません。</value>
   </data>
   <data name="OVF_CONTROLLER_MISSING" xml:space="preserve">
-    <value>コントローラ {0} が見つかりません。</value>
+    <value>コントローラー {0} が見つかりません。</value>
   </data>
   <data name="OVF_COULD_NOT_OPEN_STREAM" xml:space="preserve">
     <value>{0} を開けません。</value>
