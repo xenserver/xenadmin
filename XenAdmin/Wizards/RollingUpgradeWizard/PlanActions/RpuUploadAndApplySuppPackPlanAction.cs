@@ -164,8 +164,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         alreadyApplied = true;
                     }
                     else
-                        throw new Exception(string.Format("{0}: {1}. {2}", host, problems[0].Title,
-                            problems[0].Description));
+                        throw new Exception(problems[0].Description);
                 }
             }
             catch (Exception ex)
