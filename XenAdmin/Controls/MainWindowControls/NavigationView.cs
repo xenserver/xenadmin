@@ -227,7 +227,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #region TreeView
 
-        private void treeViewUpdateManager_Update(object sender, EventArgs e)
+        private void treeViewUpdateManager_Update()
         {
             Program.AssertOffEventThread();
             RefreshTreeView();
