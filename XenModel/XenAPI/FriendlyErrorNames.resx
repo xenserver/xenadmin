@@ -531,6 +531,9 @@
   <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
     <value>Not enough free memory</value>
   </data>
+  <data name="HOST_NOT_ENOUGH_PCPUS" xml:space="preserve">
+    <value>The host does not have enough pCPUs to run the VM. It needs at least as many as the VM has vCPUs.</value>
+  </data>
   <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
     <value>The restore could not be performed because the server is not in recovery mode</value>
   </data>
