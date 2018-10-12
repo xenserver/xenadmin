@@ -33,7 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using XenAdmin;
 using XenAdmin.Network;
@@ -44,13 +45,17 @@ namespace XenServerHealthCheck
     public class XenServerHealthCheckUpload
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public string UPLOAD_URL = "https://rttf.citrix.com/feeds/api/";
-        public const int CHUNK_SIZE = 1 * 1024 * 1024;
-        private JavaScriptSerializer serializer;
-        private int verbosityLevel;
+        private readonly string uploadUrl = "https://rttf.citrix.com/feeds/api/";
 
-        private string uploadToken;
-        private IWebProxy proxy;
+        private const string UPLOAD_CHUNK_STRING = "{0}upload_raw_chunk/?id={1}&offset={2}";
+        private const string INITIATE_UPLOAD_STRING = "{0}bundle/?size={1}&name={2}";
+        private const int CHUNK_SIZE = 1 * 1024 * 1024;
+
+        private JavaScriptSerializer serializer;
+        private HttpClient httpClient;
+
+        private readonly int verbosityLevel;
+        private readonly string uploadToken;
 
         public XenServerHealthCheckUpload(string token, int verbosity, string uploadUrl, IXenConnection connection)
         {
@@ -60,111 +65,90 @@ namespace XenServerHealthCheck
             serializer.MaxJsonLength = int.MaxValue;
             if (!string.IsNullOrEmpty(uploadUrl))
             {
-                UPLOAD_URL = uploadUrl;
+                this.uploadUrl = uploadUrl;
             }
-            proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection, false);
+
+            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection, false);
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+                UseProxy = proxy != null
+            };
+           
+            httpClient = new HttpClient(handler);
+            httpClient.DefaultRequestHeaders.Add("Authorization", "BT " + uploadToken);
         }
 
-        // Request an upload and fetch the uploading id from CIS.
-        public string InitiateUpload(string fileName, long size, string caseNumber)
+        // Request an upload and fetch the upload id from CIS.
+        public string InitiateUpload(string fileName, long size, string caseNumber, System.Threading.CancellationToken cancel)
         {
             // Request a new bundle upload to CIS server.
-            string FULL_URL = UPLOAD_URL + "bundle/?size=" + size.ToString() + "&name=" + fileName.UrlEncode();
+            string url = string.Format(INITIATE_UPLOAD_STRING, uploadUrl, size, fileName.UrlEncode());
             if (!string.IsNullOrEmpty(caseNumber))
-                FULL_URL += "&sr=" + caseNumber;
-            log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", FULL_URL);
-            Uri uri = new Uri(FULL_URL);
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            if (uploadToken != null)
-            {
-                request.Headers.Add("Authorization", "BT " + uploadToken);
-            }
-
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.ServicePoint.Expect100Continue = false;
-            request.Proxy = proxy;
-
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-            {
-                // Add the log verbosity level in json cotent.
-                string verbosity = "{\"verbosity\":\""+ verbosityLevel + "\"}";
-                streamWriter.Write(verbosity);
-            }
-
-            Dictionary<string, object> res = new Dictionary<string, object>();
+                url += "&sr=" + caseNumber;
+            log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", url);
+            
+            // Add the log verbosity level in json cotent.
+            string verbosity = "{\"verbosity\":\""+ verbosityLevel + "\"}";
+            
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                {
-                    string respString = reader.ReadToEnd();
-                    res = (Dictionary<string, object>)serializer.DeserializeObject(respString);
-                }
-                response.Close();
+                var httpContent = new StringContent(verbosity);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var response = httpClient.PostAsync(new Uri(url), httpContent, cancel).Result;
+                response.EnsureSuccessStatusCode();
+                var respString = response.Content.ReadAsStringAsync().Result;
+
+                // Get the upload uuid
+                var res = (Dictionary<string, object>)serializer.DeserializeObject(respString);
+                if (res.ContainsKey("id"))
+                    return (string) res["id"];
             }
             catch (WebException e)
             {
-                log.ErrorFormat("Exception while requesting a new CIS uploading: {0}", e);
+                log.ErrorFormat("Exception while initiating a new CIS upload: {0}", e);
                 return "";
             }
 
-            if (res.ContainsKey("id"))
-            {
-                // Get the uuid of uploading
-                return (string)res["id"];
-            }
-            else
-            {
-                // Fail to initialize the upload request
-                return "";
-            }
+            // Fail to initialize the upload request
+            return "";
         }
 
-        // Upload a chunk.
-        public bool UploadChunk(string address, string filePath, long offset, long thisChunkSize, string uploadToken)
+        private bool UploadChunk(string address, FileStream source, long offset, long thisChunkSize, System.Threading.CancellationToken cancel)
         {
             log.InfoFormat("UploadChunk, UPLOAD_URL: {0}", address);
-            Uri uri = new Uri(address);
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(uri);
-            req.Method = "POST";
-            req.ContentType = "application/octet-stream";
-            req.Headers.Add("Authorization", "BT " + uploadToken);
-            req.Proxy = proxy;
 
-            using (Stream destination = req.GetRequestStream())
+            source.Position = offset;
+            int bytes = Convert.ToInt32(thisChunkSize);
+            byte[] buffer = new byte[CHUNK_SIZE];
+            int read;
+            int totalBytesRead = 0;
+
+            while (bytes > 0 && (read = source.Read(buffer, 0, Math.Min(buffer.Length, bytes))) > 0)
             {
-                using (FileStream source = File.Open(filePath, FileMode.Open))
-                {
-                    source.Position = offset;
-                    int bytes = Convert.ToInt32(thisChunkSize);
-                    byte[] buffer = new byte[CHUNK_SIZE];
-                    int read;
-                    while (bytes > 0 &&
-                           (read = source.Read(buffer, 0, Math.Min(buffer.Length, bytes))) > 0)
-                    {
-                        destination.Write(buffer, 0, read);
-                        bytes -= read;
-                    }
-                }
-                HttpWebResponse resp = req.GetResponse() as HttpWebResponse;
-                HttpStatusCode statusCode = resp.StatusCode;
+                bytes -= read;
+                totalBytesRead += read;
+            }
+
+            try
+            {
+                var httpContent = new ByteArrayContent(buffer, 0, totalBytesRead);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                var response = httpClient.PostAsync(new Uri(address), httpContent, cancel).Result;
+                response.EnsureSuccessStatusCode();
+                var respString = response.Content.ReadAsStringAsync().Result;
 
                 // After sending every chunk upload request to server, response will contain a status indicating if it is complete.
-                using (StreamReader reader = new StreamReader(resp.GetResponseStream()))
-                {
-                    string respString = reader.ReadToEnd();
-                    Dictionary<string, object> res = (Dictionary<string, object>)serializer.DeserializeObject(respString);
-                    log.InfoFormat("The status of chunk upload: {0}", res["status"]);
-                }
-
-                resp.Close();
-
-                if (statusCode == HttpStatusCode.OK)
-                    return true;
-                else
-                    return false;
+                var res = (Dictionary<string, object>)serializer.DeserializeObject(respString);
+                log.InfoFormat("The status of chunk upload: {0}", res.ContainsKey("status") ? res["status"] : "");
             }
+            catch (Exception e)
+            {
+                log.ErrorFormat("Failed to upload the chunk. The exception was: {0} ({1})", e.Message, e.InnerException != null ? e.InnerException.Message : "");
+                return false;
+            }
+
+            return true;
         }
 
         // Upload the zip file.
@@ -175,7 +159,7 @@ namespace XenServerHealthCheck
             long size = fileInfo.Length;
 
             // Fetch the upload UUID from CIS server.
-            string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size, caseNumber);
+            string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size, caseNumber, cancel);
             if (string.IsNullOrEmpty(uploadUuid))
             {
                 log.ErrorFormat("Cannot fetch the upload UUID from CIS server");
@@ -183,54 +167,52 @@ namespace XenServerHealthCheck
             }
 
             // Start to upload zip file.
-            log.InfoFormat("Upload server returns Upload ID: {0}", uploadUuid);
-
-            long offset = 0;
-            while (offset < size)
+            log.InfoFormat("Upload server returned Upload ID: {0}", uploadUuid);
+            using (var source = File.Open(fileName, FileMode.Open))
             {
-                StringBuilder url = new StringBuilder(UPLOAD_URL + "upload_raw_chunk/?id=" + uploadUuid);
-                url.Append(String.Format("&offset={0}", offset));
-                long remainingSize = size - offset;
-                long thisChunkSize = (remainingSize > CHUNK_SIZE) ? CHUNK_SIZE : remainingSize;
-
-                try
+                long offset = 0;
+                while (offset < size)
                 {
-                    for (int i = 0; i < 3; i++)
+                    var url = string.Format(UPLOAD_CHUNK_STRING, uploadUrl, uploadUuid, offset);
+                    long remainingSize = size - offset;
+                    long thisChunkSize = remainingSize > CHUNK_SIZE ? CHUNK_SIZE : remainingSize;
+
+                    try
                     {
-                        if (cancel.IsCancellationRequested)
+                        for (int i = 0; i < 3; i++)
                         {
-                            log.Info("Upload cancelled");
-                            return "";
-                        }
+                            if (cancel.IsCancellationRequested)
+                            {
+                                log.Info("Upload cancelled");
+                                return "";
+                            }
 
-                        if (UploadChunk(url.ToString(), fileName, offset, thisChunkSize, uploadToken))
-                        {
-                            // This chunk is successfully uploaded
-                            offset += thisChunkSize;
-                            break;
-                        }
+                            if (UploadChunk(url, source, offset, thisChunkSize, cancel))
+                            {
+                                // This chunk is successfully uploaded
+                                offset += thisChunkSize;
+                                break;
+                            }
 
-                        // Fail to upload the chunk for 3 times so fail the bundle upload.
-                        if (i == 2)
-                        {
-                            log.ErrorFormat("Fail to upload the chunk");
-                            return "";
+                            // Fail to upload the chunk for 3 times so fail the bundle upload.
+                            if (i == 2)
+                            {
+                                log.ErrorFormat("Failed to upload the chunk. Tried 3 times");
+                                return "";
+                            }
                         }
                     }
-                }
-                catch (Exception e)
-                {
-                    log.Error(e, e);
-                    return "";
-                }
+                    catch (Exception e)
+                    {
+                        log.Error(e, e);
+                        return "";
+                    }
 
+                }
             }
 
-            log.InfoFormat("Succeed to upload bundle {0}", fileName);
+            log.InfoFormat("Succeeded to upload bundle {0}", fileName);
             return uploadUuid;
-            
         }
     }
-
-
 }
