@@ -388,7 +388,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="dataGridViewVms" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="panel2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,20,AutoSize,0,Percent,100,AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="dataGridViewVms" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="ConfigureButton" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,Absolute,20" />&lt;Rows Styles="AutoSize,20,AutoSize,0,Percent,100,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 78</value>
