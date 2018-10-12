@@ -1,11 +1,13 @@
 XenCenter
 =========
 
+[![Lines of Code](https://tokei.rs/b1/github/xenserver/xenadmin)](https://github.com/xenserver/xenadmin)
+
 This repository contains the source code for XenCenter.
 
-XenCenter is a Windows-based management tool for XenServer environments
-which enables users to manage and monitor XenServer hosts and resource pools,
-and to deploy, monitor, manage and migrate virtual machines.
+XenCenter is a Windows-based management tool for Citrix Hypervisor environments,
+which enables users to manage and monitor server and resource pools,
+and to deploy, monitor, manage, and migrate virtual machines.
 
 XenCenter is written mostly in C#.
 
