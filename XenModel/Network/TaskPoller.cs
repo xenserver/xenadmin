@@ -98,7 +98,30 @@ namespace XenAdmin.Network
 
         private void poll()
         {
-            Task task = GetTask();
+            Session session = _action.Session;
+            Task task;
+
+            try
+            {
+                task = (Task)_action.DoWithSessionRetry(ref session, (Task.TaskGetRecordOp)Task.get_record, _action.RelatedTask.opaque_ref);
+            }
+            catch (Failure exn)
+            {
+                if (exn.ErrorDescription.Count > 1 &&
+                    exn.ErrorDescription[0] == Failure.HANDLE_INVALID &&
+                    exn.ErrorDescription[1] == "task")
+                {
+                    GotInvalidHandle();
+                    return;
+                }
+                else
+                    throw;
+            }
+            finally
+            {
+                _action.Session = session;
+            }
+
             _action.Tick((int)(task.progress * _scale + _lo),
                 task.Description() == "" ? _action.Description : task.Description());
 
@@ -109,10 +132,7 @@ namespace XenAdmin.Network
                         task.error_info[0] == Failure.HANDLE_INVALID &&
                         task.error_info[1] == "task")
                     {
-                        log.WarnFormat("Invalid task handle - task is finished:\n{0}", Environment.StackTrace);
-                        taskCompleted = true;
-                        _action.PercentComplete = (int)(_scale + _lo);
-                        _action.Result = "";
+                        GotInvalidHandle();
                         break;
                     }
                     else
@@ -146,18 +166,12 @@ namespace XenAdmin.Network
             }
         }
 
-        private Task GetTask()
+        private void GotInvalidHandle()
         {
-            Session session = _action.Session;
-
-            try
-            {
-                return (Task)_action.DoWithSessionRetry(ref session, (Task.TaskGetRecordOp)Task.get_record, _action.RelatedTask.opaque_ref);
-            }
-            finally
-            {
-                _action.Session = session;
-            }
+            log.WarnFormat("Invalid task handle - task is finished:\n{0}", Environment.StackTrace);
+            taskCompleted = true;
+            _action.PercentComplete = (int)(_scale + _lo);
+            _action.Result = "";
         }
     }
 }
