@@ -456,14 +456,14 @@ namespace XenAdmin
             });
         }
 
-        void actionCompleted(ActionBase action)
+        private void actionCompleted(ActionBase action)
         {
             actionChanged(action);
             if (action is SrAction)
                 Program.Invoke(this, UpdateToolbars);
         }
 
-        void actionChanged(ActionBase action)
+        private void actionChanged(ActionBase action)
         {
             if (Program.Exiting)
                 return;
@@ -471,42 +471,45 @@ namespace XenAdmin
             Program.Invoke(this, () => actionChanged_(action));
         }
 
-        void actionChanged_(ActionBase action)
+        private void actionChanged_(ActionBase action)
         {
-            if (action.SuppressProgressReport) // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+            // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+            if (action.SuppressProgressReport)
                 return;
-             var meddlingAction = action as MeddlingAction;
-             if (meddlingAction == null)
-                 statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
 
-            // Be defensive against CA-8517.
-            if (action.PercentComplete < 0 || action.PercentComplete > 100)
-            {
-                log.ErrorFormat("PercentComplete is erroneously {0}", action.PercentComplete);
-            }
-            else if (meddlingAction == null)
-            {
-                statusProgressBar.Value = action.PercentComplete;
-            }
+            var percentage = action.PercentComplete;
+            Debug.Assert(0 <= percentage && percentage <= 100,
+                "PercentComplete is out of range, the reporting action needs to be fixed."); //CA-8517
 
-            // Don't show cancelled exception
-            if (action.Exception != null && !(action.Exception is CancelledException))
+            var meddlingAction = action as MeddlingAction;
+            if (meddlingAction == null)
             {
-                if (meddlingAction == null)
+                statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
+
+                if (percentage < 0)
+                    percentage = 0;
+                else if (percentage > 100)
+                    percentage = 100;
+                statusProgressBar.Value = percentage;
+
+                // Don't show cancelled exception
+                if (action.Exception != null && !(action.Exception is CancelledException))
+                {
                     SetStatusBar(Properties.Resources._000_error_h32bit_16, action.Exception.Message);
-            }
-            else if (meddlingAction == null)
-            {
-                SetStatusBar(null, action.IsCompleted
-                                       ? null
-                                       : !string.IsNullOrEmpty(action.Description)
-                                             ? action.Description
-                                             : !string.IsNullOrEmpty(action.Title)
-                                                   ? action.Title
-                                                   : null);
+                }
+                else
+                {
+                    SetStatusBar(null, action.IsCompleted
+                        ? null
+                        : !string.IsNullOrEmpty(action.Description)
+                            ? action.Description
+                            : !string.IsNullOrEmpty(action.Title)
+                                ? action.Title
+                                : null);
+                }
             }
 
-            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !((a is CancellingAction) && ((CancellingAction)a).Cancelled));
+            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
 
             if (eventsPage.Visible)
@@ -516,7 +519,7 @@ namespace XenAdmin
             }
         }
 
-        public void SetStatusBar(Image image, string message)
+        private void SetStatusBar(Image image, string message)
         {
             statusLabel.Image = image;
             statusLabel.Text = Helpers.FirstLine(message);
