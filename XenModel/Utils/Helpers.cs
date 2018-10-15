@@ -1384,30 +1384,6 @@ namespace XenAdmin.Core
             return s.Split('\r')[0];
         }
 
-        /// <summary>
-        /// Returns empty string if mainline
-        /// </summary>
-        public static string OEMName(Host host)
-        {
-            if (host.software_version == null)
-                return string.Empty;
-
-            if (!host.software_version.ContainsKey("oem_manufacturer"))
-                return "";
-
-            return host.software_version["oem_manufacturer"].ToLowerInvariant();
-        }
-
-        public static string HostProductVersionWithOEM(Host host)
-        {
-            string oem = OEMName(host);
-            if (string.IsNullOrEmpty(oem))
-                return HostProductVersion(host);
-            else
-                return string.Format("{0}.{1}", HostProductVersion(host), OEMName(host));
-        }
-
-
         public static double StringToDouble(string str)
         {
             if (str == "NaN")

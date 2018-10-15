@@ -154,14 +154,14 @@ namespace XenAdmin.Core
                         if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
                         {
                             List<string> current = new List<string>(other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
-                            if (current.Contains(((XenServerVersionAlert)alert).Version.VersionAndOEM))
+                            if (current.Contains(((XenServerVersionAlert)alert).Version.Version.ToString()))
                                 continue;
-                            current.Add(((XenServerVersionAlert)alert).Version.VersionAndOEM);
+                            current.Add(((XenServerVersionAlert)alert).Version.Version.ToString());
                             other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
                         }
                         else
                         {
-                            other_config.Add(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY, ((XenServerVersionAlert)alert).Version.VersionAndOEM);
+                            other_config.Add(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY, ((XenServerVersionAlert)alert).Version.Version.ToString());
                         }                       
                     }
                     Updates.RemoveUpdate(alert);
@@ -851,9 +851,7 @@ namespace XenAdmin.Core
                 if (version.BuildNumber != string.Empty)
                     return (host.BuildNumberRaw() == version.BuildNumber);
 
-                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                           && Helpers.HostProductVersion(host) == version.Version.ToString());
+                return Helpers.HostProductVersion(host) == version.Version.ToString();
             });
             return serverVersions;
         }

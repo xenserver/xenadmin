@@ -62,14 +62,14 @@ namespace XenAdmin.Actions
             if (other_config.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
             {
                 List<string> current = new List<string>(other_config[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
-                if (current.Contains(Version.VersionAndOEM))
+                if (current.Contains(Version.Version.ToString()))
                     return;
-                current.Add(Version.VersionAndOEM);
+                current.Add(Version.Version.ToString());
                 other_config[LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
             }
             else
             {
-                other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, Version.VersionAndOEM);
+                other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, Version.Version.ToString());
             }
 
             XenAPI.Pool.set_other_config(Session, pool.opaque_ref, other_config);

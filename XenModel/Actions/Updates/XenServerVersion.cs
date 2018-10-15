@@ -43,7 +43,6 @@ namespace XenAdmin.Core
         public bool Latest;
         public bool LatestCr;
         public string Url;
-        public string Oem;
         public List<XenServerPatch> Patches;
         public string PatchUuid;
         public bool PresentAsUpdate;
@@ -98,8 +97,6 @@ namespace XenAdmin.Core
                 int num;
                 if (Int32.TryParse(bit, out num))
                     ver.Add(bit);
-                else
-                    Oem = bit;
             }
             Version = new Version(string.Join(".", ver.ToArray()));
         }
@@ -109,16 +106,6 @@ namespace XenAdmin.Core
             Version ver;
             Version.TryParse(minXcVersion, out ver);
             MinimumXcVersion = ver;
-        }
-
-        public string VersionAndOEM
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Oem))
-                    return Version.ToString();
-                return string.Format("{0}.{1}", Version.ToString(), Oem);
-            }
         }
 
         public bool IsVersionAvailableAsAnUpdate
