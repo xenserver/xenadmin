@@ -65,8 +65,9 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
             return delegate(Session session)
                        {
-                           var vmclone = (VM)VM.Clone();
-                           VM.Locked = true;
+                           var vm = VM.Connection.Resolve(new XenRef<VM>(VM.opaque_ref));
+                           var vmclone = (VM)vm.Clone();
+                           vm.Locked = true;
                            vmclone.SetAutoPowerOn(autostartValue);
                            try
                            {
@@ -74,10 +75,10 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                            }
                            finally
                            {
-                               VM.Locked = false;
+                               vm.Locked = false;
                            }
                            int wait = 5000; // wait up to 5 seconds for the cache to be updated
-                           while (wait > 0 && VM.GetAutoPowerOn() != autostartValue)
+                           while (wait > 0 && vm.GetAutoPowerOn() != autostartValue)
                            {
                                Thread.Sleep(100);
                                wait -= 100;
