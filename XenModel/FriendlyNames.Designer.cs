@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyNames {
@@ -3807,6 +3807,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; has low memory..
+        /// </summary>
+        public static string Message_body_host_low_memory {
+            get {
+                return ResourceManager.GetString("Message.body-host_low_memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was a temporary failure synchronizing performance statistics across the pool, probably because one or more servers were offline.  Another synchronization attempt will be made later..
         /// </summary>
         public static string Message_body_host_sync_data_failed {
@@ -4595,6 +4604,15 @@ namespace XenAdmin {
         public static string Message_name_host_cpu_features_up {
             get {
                 return ResourceManager.GetString("Message.name-host_cpu_features_up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server has low memory..
+        /// </summary>
+        public static string Message_name_host_low_memory {
+            get {
+                return ResourceManager.GetString("Message.name-host_low_memory", resourceCulture);
             }
         }
         

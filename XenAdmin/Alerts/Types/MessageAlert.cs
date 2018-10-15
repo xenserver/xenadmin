@@ -151,6 +151,7 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.VDI_CBT_METADATA_INCONSISTENT:
                     case Message.MessageType.CLUSTER_HOST_FENCING:
                     case Message.MessageType.CLUSTER_HOST_ENABLE_FAILED:
+                    case Message.MessageType.HOST_LOW_MEMORY:
                         if (XenObject != null)
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         break;

@@ -2784,7 +2784,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Call a XenAPI plugin on this host
+        /// Call an API plugin on this host
         /// First published in XenServer 5.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2801,7 +2801,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Call a XenAPI plugin on this host
+        /// Call an API plugin on this host
         /// First published in XenServer 5.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2848,7 +2848,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Call a XenAPI extension on this host
+        /// Call an API extension on this host
         /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
@@ -3248,7 +3248,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Enable/disable SSLv3 for interoperability with older versions of XenServer. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
+        /// Enable/disable SSLv3 for interoperability with older server versions. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. API login sessions will remain valid.
         /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -3263,7 +3263,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Enable/disable SSLv3 for interoperability with older versions of XenServer. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
+        /// Enable/disable SSLv3 for interoperability with older server versions. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. API login sessions will remain valid.
         /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -4292,7 +4292,7 @@ namespace XenAPI
         private List<XenRef<PUSB>> _PUSBs = new List<XenRef<PUSB>>() {};
 
         /// <summary>
-        /// Allow SSLv3 protocol and ciphersuites as used by older XenServers. This controls both incoming and outgoing connections. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
+        /// Allow SSLv3 protocol and ciphersuites as used by older server versions. This controls both incoming and outgoing connections. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. API login sessions will remain valid.
         /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool ssl_legacy
