@@ -95,7 +95,7 @@ namespace XenAdmin.Commands
             foreach (Host host in selection.AsXenObjects<Host>(CanExecute))
             {
                 var action = new HostPowerOnAction( host);
-                action.Completed += s => MainWindowCommandInterface.RequestRefreshTreeView();
+                action.Completed += Program.MainWindow.action_Completed;
                 actions.Add(action);
             }
             RunMultipleActions(actions, null, Messages.ACTION_HOST_STARTING, Messages.ACTION_HOST_STARTED, true);

@@ -115,7 +115,7 @@ namespace XenAdmin
                 // stop watch to time how long an update takes.
                 Stopwatch sw = Stopwatch.StartNew();
 
-                OnUpdate(EventArgs.Empty);
+                OnUpdate();
 
                 _delayCalculator.RegisterLatestUpdate(sw.ElapsedMilliseconds);
             }
@@ -178,13 +178,13 @@ namespace XenAdmin
         /// Raises the <see cref="Update"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnUpdate(EventArgs e)
+        protected virtual void OnUpdate()
         {
-            EventHandler handler = Update;
+            var handler = Update;
 
             if (handler != null)
             {
-                handler(this, e);
+                handler();
             }
         }
 
@@ -221,7 +221,7 @@ namespace XenAdmin
         /// <summary>
         /// Occurs when an update should take place.
         /// </summary>
-        public event EventHandler Update;
+        public event Action Update;
 
         #region IDisposable Members
 

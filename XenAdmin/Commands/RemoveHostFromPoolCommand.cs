@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
-using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -190,7 +189,7 @@ namespace XenAdmin.Commands
                         return;
                     }
 
-                    Socket socket = new Socket(System.Net.Sockets.AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     try
                     {
                         socket.Connect(connection.Hostname, connection.Port);
@@ -202,11 +201,7 @@ namespace XenAdmin.Commands
 
                     if (socket.Connected)
                     {
-                        MainWindowCommandInterface.Invoke(delegate
-                        {
-                            XenConnectionUI.BeginConnect(connection, false, null, false);
-                            MainWindowCommandInterface.RequestRefreshTreeView();
-                        });
+                        MainWindowCommandInterface.Invoke(() => XenConnectionUI.BeginConnect(connection, false, null, false));
                         return;
                     }
                     i++;

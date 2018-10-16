@@ -647,7 +647,6 @@ namespace XenAdmin.TabPages
             // We will need to re-enable buttons when the action completes
             action.Completed += Program.MainWindow.action_Completed;
             action.RunAsync();
-            Program.MainWindow.UpdateToolbars();
         }
 
         /// <summary>

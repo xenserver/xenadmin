@@ -79,7 +79,6 @@ namespace XenAdmin.Commands
                         Actions.Wlb.DisableWLBAction action = new Actions.Wlb.DisableWLBAction(selection[0].PoolAncestor, true);
                         action.Completed += Program.MainWindow.action_Completed;
                         action.RunAsync();
-                        Program.MainWindow.UpdateToolbars();
                     }
                 }
                 catch (Failure exn)

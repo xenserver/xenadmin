@@ -995,7 +995,6 @@ namespace XenAdmin
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
                 action.RunAsync();
-                Program.Invoke(this, UpdateToolbars);
             }
         }
 
@@ -1215,29 +1214,12 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        private int ignoreUpdateToolbars = 0;
-        private bool calledUpdateToolbars = false;
-
         /// <summary>
         /// Requests a refresh of the main tree view. The refresh will be managed such that we are not overloaded using an UpdateManager.
         /// </summary>
         public void RequestRefreshTreeView()
         {
             Program.Invoke(this, navigationPane.RequestRefreshTreeView);
-        }
-
-        private void UpdateHeaderAndTabPages()
-        {
-            Program.Invoke(this, () =>
-                {
-                    // This is required to update search results when things change.
-                    if (TheTabControl.SelectedTab == TabPageGeneral)
-                        GeneralPage.BuildList();
-                    else if (TheTabControl.SelectedTab == TabPageSearch)
-                        SearchPage.BuildList();
-
-                    UpdateHeader();
-                });
         }
 
         void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1269,12 +1251,6 @@ namespace XenAdmin
         public void UpdateToolbars()
         {
             Program.AssertOnEventThread();
-
-            if (ignoreUpdateToolbars > 0)
-            {
-                calledUpdateToolbars = true;
-                return;
-            }
 
             try
             {
@@ -2702,21 +2678,12 @@ namespace XenAdmin
         internal void action_Completed(ActionBase sender)
         {
             if (Program.Exiting)
-            {
                 return;
-            }
 
             RequestRefreshTreeView();
-            
-            //Update toolbars, since if an action has just completed, various
-            //buttons may need to be re-enabled. Applies to:
-            // HostAction
-            // EnableHAAction
-            // DisableHAAction
-            Program.Invoke(this, UpdateToolbars);
         }
 
-        internal void OpenGlobalImportWizard(string param)
+        private void OpenGlobalImportWizard(string param)
         {
             HelpersGUI.BringFormToFront(this);
             Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
@@ -3032,21 +2999,14 @@ namespace XenAdmin
 
         private void navigationPane_TreeViewRefreshed()
         {
-            UpdateHeaderAndTabPages();
-        }
+            // This is required to update search results when things change.
+            if (TheTabControl.SelectedTab == TabPageGeneral)
+                GeneralPage.BuildList();
+            else if (TheTabControl.SelectedTab == TabPageSearch)
+                SearchPage.BuildList();
 
-        private void navigationPane_TreeViewRefreshResumed()
-        {
-            ignoreUpdateToolbars--;
-            if (ignoreUpdateToolbars == 0 && calledUpdateToolbars)
-                UpdateToolbars();
-        }
-
-        private void navigationPane_TreeViewRefreshSuspended()
-        {
-            if (ignoreUpdateToolbars == 0)
-                calledUpdateToolbars = false;
-            ignoreUpdateToolbars++;
+            UpdateHeader();
+            UpdateToolbars();
         }
 
         #endregion

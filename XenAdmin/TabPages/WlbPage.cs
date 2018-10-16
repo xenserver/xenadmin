@@ -144,7 +144,6 @@ namespace XenAdmin.TabPages
             action.Completed += Program.MainWindow.action_Completed;
             action.Completed += this.action_Completed;
             action.RunAsync();
-            Program.MainWindow.UpdateToolbars();
         }
 
         private void DisableWLB(bool deconfigure)
@@ -153,7 +152,6 @@ namespace XenAdmin.TabPages
             action.Completed += Program.MainWindow.action_Completed;
             action.Completed += this.action_Completed;
             action.RunAsync();
-            Program.MainWindow.UpdateToolbars();
         }
 
         private void RetrieveConfiguration()

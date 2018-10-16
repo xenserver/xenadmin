@@ -329,8 +329,6 @@ namespace XenAdmin
             this.navigationPane.TreeNodeClicked += new System.Action(this.navigationPane_TreeNodeClicked);
             this.navigationPane.TreeNodeRightClicked += new System.Action(this.navigationPane_TreeNodeRightClicked);
             this.navigationPane.TreeViewRefreshed += new System.Action(this.navigationPane_TreeViewRefreshed);
-            this.navigationPane.TreeViewRefreshSuspended += new System.Action(this.navigationPane_TreeViewRefreshSuspended);
-            this.navigationPane.TreeViewRefreshResumed += new System.Action(this.navigationPane_TreeViewRefreshResumed);
             // 
             // TheTabControl
             // 
