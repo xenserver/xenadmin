@@ -2464,9 +2464,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>Snapshot disks cannot be moved</value>
   </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>You must detach this virtual disk before it can be moved.</value>
-  </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
   </data>

@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private XenAPI.VDI vdi;
+        private VDI vdi;
 
         public MoveVirtualDiskAction(IXenConnection connection, XenAPI.VDI vdi, SR sr)
             : base(connection, string.Format(Messages.ACTION_MOVING_VDI_TITLE, Helpers.GetName(vdi), Helpers.GetName(sr)))
@@ -66,25 +66,65 @@ namespace XenAdmin.Actions
             Description = string.Format(Messages.ACTION_MOVING_VDI_STATUS, Helpers.GetName(vdi));
             PercentComplete = 10;
             log.DebugFormat("Moving VDI '{0}'", Helpers.GetName(vdi));
-            RelatedTask = XenAPI.VDI.async_copy(Session, vdi.opaque_ref, SR.opaque_ref);
+            RelatedTask = VDI.async_copy(Session, vdi.opaque_ref, SR.opaque_ref);
             PollToCompletion(PercentComplete, 60);
-            XenAPI.VDI newVDI = Connection.WaitForCache(new XenRef<VDI>(Result));
+
+            VDI newVdi = Connection.WaitForCache(new XenRef<VDI>(Result));
 
             // if the original is a suspend VDI, link the suspended VM to the new VDI
             if (vdi.type == vdi_type.suspend)
             {
                 var suspendedVm = (from vm in Connection.Cache.VMs
-                                         let suspendVdi = Connection.Resolve<VDI>(vm.suspend_VDI)
+                                         let suspendVdi = Connection.Resolve(vm.suspend_VDI)
                                          where suspendVdi != null && suspendVdi.uuid == vdi.uuid
                                          select vm).FirstOrDefault();
                 if (suspendedVm != null)
                 {
-                    XenAPI.VM.set_suspend_VDI(Session, suspendedVm.opaque_ref, newVDI.opaque_ref);
+                    VM.set_suspend_VDI(Session, suspendedVm.opaque_ref, newVdi.opaque_ref);
                 }
             }
-            PercentComplete = 70;
+            PercentComplete = 60;
 
-            XenAPI.VDI.destroy(Session, vdi.opaque_ref);
+            var newVbds = new List<VBD>();
+            foreach (var vbdRef in vdi.VBDs)
+            {
+                var oldVbd = Connection.Resolve(vbdRef);
+                if (oldVbd == null)
+                    continue;
+
+                var newVbd = new VBD
+                {
+                    userdevice = oldVbd.userdevice,
+                    bootable = oldVbd.bootable,
+                    mode = oldVbd.mode,
+                    type = oldVbd.type,
+                    unpluggable = oldVbd.unpluggable,
+                    other_config = oldVbd.other_config,
+                    VDI = new XenRef<VDI>(newVdi.opaque_ref),
+                    VM = new XenRef<VM>(oldVbd.VM)
+                };
+                newVbd.SetIsOwner(oldVbd.GetIsOwner());
+                newVbds.Add(newVbd);
+
+                try
+                {
+                    if (oldVbd.currently_attached && oldVbd.allowed_operations.Contains(vbd_operations.unplug))
+                        VBD.unplug(Session, vbdRef);
+                }
+                finally
+                {
+                    if (!oldVbd.currently_attached)
+                        VBD.destroy(Session, vbdRef);
+                }
+            }
+
+            PercentComplete = 80;
+
+            VDI.destroy(Session, vdi.opaque_ref);
+
+            foreach (var newVbd in newVbds)
+                Connection.WaitForCache(VBD.create(Session, newVbd));
+
             PercentComplete = 100;
             Description = Messages.COMPLETED;
             log.DebugFormat("Moved VDI '{0}'", Helpers.GetName(vdi));
