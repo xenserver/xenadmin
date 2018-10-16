@@ -327,7 +327,8 @@ namespace XenAdmin.Alerts
             return lines
                 .Select(s => multipathRegex.Match(s))
                 .Where(m => m.Success)
-                .Select(m => m.Groups[1].Value);
+                .Select(m => m.Groups[1].Value)
+                .Distinct();
         }
 
         private string GetManagementBondName()
