@@ -201,9 +201,17 @@ namespace XenAdmin.Commands
             {
                 return Messages.VM_SHUT_DOWN;
             }
-            else if (vm.power_state == vm_power_state.Suspended)
+            if (vm.power_state == vm_power_state.Suspended)
             {
                 return Messages.VM_ALREADY_SUSPENDED;
+            }
+            if (vm.HasGPUPassthrough())
+            {
+                return FriendlyErrorNames.VM_HAS_PCI_ATTACHED;
+            }
+            if (vm.allowed_operations != null && !vm.allowed_operations.Contains(vm_operations.suspend))
+            {
+                return FriendlyErrorNames.VM_LACKS_FEATURE_SUSPEND;
             }
 
             return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
