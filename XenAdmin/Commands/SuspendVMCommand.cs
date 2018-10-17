@@ -168,7 +168,7 @@ namespace XenAdmin.Commands
             {
                 if (!CanExecute(vm) && vm.power_state == vm_power_state.Running)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, GetCantExecuteReasonsExtra());
                 }
             }
             return null;
@@ -192,6 +192,11 @@ namespace XenAdmin.Commands
 
         protected override string GetCantExecuteReasonCore(SelectedItem item)
         {
+            return GetCantExecuteReasonCore(item, false);
+        }
+
+        private string GetCantExecuteReasonCore(SelectedItem item, bool extraDetails)
+        {
             VM vm = item.XenObject as VM;
             if (vm == null)
             {
@@ -205,18 +210,56 @@ namespace XenAdmin.Commands
             {
                 return Messages.VM_ALREADY_SUSPENDED;
             }
-            if (vm.HasGPUPassthrough())
+
+            var noToolsOrDriversReason = GetCantExecuteNoToolsOrDriversReasonCore(item);
+            if (noToolsOrDriversReason != null)
             {
-                return FriendlyErrorNames.VM_HAS_PCI_ATTACHED;
-            }
-            if (vm.allowed_operations != null && !vm.allowed_operations.Contains(vm_operations.suspend))
-            {
-                return FriendlyErrorNames.VM_LACKS_FEATURE_SUSPEND;
+                return noToolsOrDriversReason;
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
+            if (extraDetails)
+            {
+                string reason = null;
+                DelegatedAsyncAction action = new DelegatedAsyncAction(vm.Connection, null, null, null,
+                    delegate (Session session)
+                    {
+                        try
+                        {
+                            VM.assert_operation_valid(session, vm.opaque_ref, vm_operations.suspend);
+                        }
+                        catch (Failure f)
+                        {
+                            if (f.ErrorDescription.Count == 0 || f.ErrorDescription[0] != Failure.RBAC_PERMISSION_DENIED)
+                                reason = f.Message;
+                        }
+                    }, true);
+                action.RunExternal(vm.Connection.Session);
+
+                if (reason != null)
+                    return reason;
+            }
+
+            return base.GetCantExecuteReasonCore(item);
         }
 
+        private Dictionary<SelectedItem, string> GetCantExecuteReasonsExtra()
+        {
+            Dictionary<SelectedItem, string> cantExecuteReasons = new Dictionary<SelectedItem, string>();
+
+            foreach (SelectedItem item in GetSelection())
+            {
+                if (item == null || item.XenObject == null)
+                    continue;
+                if (MainWindowCommandInterface != null && CanExecuteCore(new SelectedItemCollection(item)))
+                    continue;
+
+                string reason = GetCantExecuteReasonCore(item, true);
+                if (reason != null)
+                    cantExecuteReasons.Add(item, reason);
+            }
+
+            return cantExecuteReasons;
+        }
 
         protected override AsyncAction BuildAction(VM vm)
         {
