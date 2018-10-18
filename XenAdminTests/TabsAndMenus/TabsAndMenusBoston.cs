@@ -585,8 +585,9 @@ namespace XenAdminTests.TabsAndMenus
                 var vdis = GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot);
                 foreach (VDI v in vdis)
                 {
+                    bool canMoveVdi = !(v.GetVMs().Any(vm => vm.power_state != vm_power_state.Halted));
                     VerifyContextMenu(v, new ExpectedMenuItem[] {
-                        new ExpectedTextMenuItem("&Move Virtual Disk...", true),//can migrate 
+                        new ExpectedTextMenuItem("&Move Virtual Disk...", canMoveVdi),
                         new ExpectedTextMenuItem("&Delete Virtual Disk", v.allowed_operations.Contains(vdi_operations.destroy)),
                         new ExpectedSeparator(),
                         new ExpectedTextMenuItem("P&roperties", true),
