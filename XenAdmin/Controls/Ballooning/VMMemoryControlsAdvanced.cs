@@ -30,13 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using XenAPI;
 
 
 namespace XenAdmin.Controls.Ballooning
@@ -53,7 +47,7 @@ namespace XenAdmin.Controls.Ballooning
             if (vms == null || vms.Count == 0)
                 return;
 
-            // If !firstPaint, don't re-intialize, because it will pull the rug from under our own edits.
+            // If !firstPaint, don't re-initialize, because it will pull the rug from under our own edits.
             if (!firstPaint)
                 return;
 
@@ -62,11 +56,10 @@ namespace XenAdmin.Controls.Ballooning
 
             // Spinners
             FreeSpinnerRanges();
-            static_min = vm0.memory_static_min;
 
-            memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, null, vm0.memory_dynamic_min, vm0.memory_static_max);
-            memorySpinnerDynMax.Initialize(Messages.DYNAMIC_MAX_AMP, null, vm0.memory_dynamic_max, vm0.memory_static_max);
-            memorySpinnerStatMax.Initialize(Messages.STATIC_MAX_AMP, null, vm0.memory_static_max, vm0.memory_static_max);
+            memorySpinnerDynMin.Initialize(vm0.memory_dynamic_min, vm0.memory_static_max);
+            memorySpinnerDynMax.Initialize(vm0.memory_dynamic_max, vm0.memory_static_max);
+            memorySpinnerStatMax.Initialize(vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
             firstPaint = false;
@@ -103,17 +96,18 @@ namespace XenAdmin.Controls.Ballooning
 
         private void Spinners_ValueChanged(object sender, EventArgs e)
         {
-            if (firstPaint)  // still initialising
+            if (firstPaint)  // still initializing
                 return;
 
             if (sender == memorySpinnerStatMax)
             {
                 // Force supported envelope
-                long min = (long)((double)static_max * GetMemoryRatio());
+                long min = (long)(static_max * GetMemoryRatio());
                 if (memorySpinnerDynMin.Value < min)
                 {
                     FreeSpinnerRanges();
-                    memorySpinnerDynMin.Initialize(Messages.DYNAMIC_MIN_AMP, null, min, RoundingBehaviour.Up);  // This will also force DynMax up if necessary when its range is set in SetSpinnerRanges()
+                    memorySpinnerDynMin.Initialize(min, RoundingBehaviour.Up);
+                    // This will also force DynMax up if necessary when its range is set in SetSpinnerRanges()
                 }
                 SetIncrements();
             }

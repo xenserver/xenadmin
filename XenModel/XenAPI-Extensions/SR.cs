@@ -58,6 +58,7 @@ namespace XenAPI
             tmpfs
         }
 
+        public const long DISK_MAX_SIZE = 2 * Util.BINARY_TERA;
         public const string Content_Type_ISO = "iso";
         public const string SM_Config_Type_CD = "cd";
 
@@ -490,6 +491,21 @@ namespace XenAPI
                 results.Add(new SRInfo(uuid, size, aggr, name_label, name_description, pool_metadata_detected, probeResult.configuration));
             }
             return results;
+        }
+
+        public virtual bool VdiCreationCanProceed(long vdiSize)
+        {
+            SM sm = GetSM();
+
+            bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            if (!vdiSizeUnlimited && vdiSize > DISK_MAX_SIZE)
+                return false;
+
+            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+            if (!isThinlyProvisioned && vdiSize > FreeSpace())
+                return false;
+
+            return true;
         }
 
         /// <summary>

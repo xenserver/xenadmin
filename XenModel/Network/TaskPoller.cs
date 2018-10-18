@@ -98,70 +98,80 @@ namespace XenAdmin.Network
 
         private void poll()
         {
+            Session session = _action.Session;
+            Task task;
+
             try
             {
-                XenAPI.Task task = GetTask();
-                _action.Tick((int)(task.progress * _scale + _lo),
-                             task.Description() == "" ? _action.Description : task.Description());
-                switch (task.status)
-                {
-                    case XenAPI.task_status_type.failure:
-                        log.Warn("Action failed due to API failure:\n" + Environment.StackTrace);
-                        throw new XenAPI.Failure(new List<string>(task.error_info));
-
-                    case XenAPI.task_status_type.success:
-                        taskCompleted = true;
-                        _action.Result = task.result;
-                        // Work around CA-6597.
-                        if (_action.Result != "")
-                        {
-                            Match m = Regex.Match(_action.Result, "<value>(.*)</value>");
-                            if (m.Success)
-                            {
-                                _action.Result = m.Groups[1].Value;
-                            }
-                        }
-                        break;
-
-                    case XenAPI.task_status_type.cancelled:
-                        log.Debug("Action cancelled");
-                        throw new CancelledException();
-
-                    case XenAPI.task_status_type.cancelling:
-                    case XenAPI.task_status_type.pending:
-                        break;
-                }
+                task = (Task)_action.DoWithSessionRetry(ref session, (Task.TaskGetRecordOp)Task.get_record, _action.RelatedTask.opaque_ref);
             }
-            catch (XenAPI.Failure exn)
+            catch (Failure exn)
             {
                 if (exn.ErrorDescription.Count > 1 &&
-                    exn.ErrorDescription[0] == XenAPI.Failure.HANDLE_INVALID &&
+                    exn.ErrorDescription[0] == Failure.HANDLE_INVALID &&
                     exn.ErrorDescription[1] == "task")
                 {
-                    // Task has gone away, which means it's finished.
-                    taskCompleted = true;
-                    _action.PercentComplete = (int)(_scale + _lo);
-                    _action.Result = "";
+                    GotInvalidHandle();
+                    return;
                 }
                 else
-                {
                     throw;
-                }
-            }
-        }
-
-        private Task GetTask()
-        {
-            Session session = _action.Session;
-
-            try
-            {
-                return (Task)_action.DoWithSessionRetry(ref session, (Task.TaskGetRecordOp)Task.get_record, _action.RelatedTask.opaque_ref);
             }
             finally
             {
                 _action.Session = session;
             }
+
+            _action.Tick((int)(task.progress * _scale + _lo),
+                task.Description() == "" ? _action.Description : task.Description());
+
+            switch (task.status)
+            {
+                case task_status_type.failure:
+                    if (task.error_info.Length > 1 &&
+                        task.error_info[0] == Failure.HANDLE_INVALID &&
+                        task.error_info[1] == "task")
+                    {
+                        GotInvalidHandle();
+                        break;
+                    }
+                    else
+                    {
+                        log.WarnFormat("Action failed due to API failure:\n{0}", Environment.StackTrace);
+                        throw new Failure(new List<string>(task.error_info));
+                    }
+
+                case task_status_type.success:
+                    taskCompleted = true;
+                    _action.Result = task.result;
+                    // Work around CA-6597.
+                    if (_action.Result != "")
+                    {
+                        Match m = Regex.Match(_action.Result, "<value>(.*)</value>");
+                        if (m.Success)
+                        {
+                            _action.Result = m.Groups[1].Value;
+                        }
+                    }
+
+                    break;
+
+                case task_status_type.cancelled:
+                    log.Debug("Action cancelled");
+                    throw new CancelledException();
+
+                case task_status_type.cancelling:
+                case task_status_type.pending:
+                    break;
+            }
+        }
+
+        private void GotInvalidHandle()
+        {
+            log.WarnFormat("Invalid task handle - task is finished:\n{0}", Environment.StackTrace);
+            taskCompleted = true;
+            _action.PercentComplete = (int)(_scale + _lo);
+            _action.Result = "";
         }
     }
 }

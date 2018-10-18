@@ -68,6 +68,7 @@ namespace XenAdmin.Controls.DataGridViewEx
             this.ShowRowErrors = false;
             this.StandardTab = true;
             this.DoubleBuffered = true;
+            this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             InitializeComponent();
             RefreshTheme();
         }

@@ -553,7 +553,6 @@ namespace XenOvfTransport
             string sourcefile = filename;
             string encryptfilename = null;
             string uncompressedfilename = null;
-            string destinationPath = Properties.Settings.Default.xenISOMount;
             string StartPath = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(pathToOvf);
             Stream dataStream = null;
@@ -701,8 +700,7 @@ namespace XenOvfTransport
             try
             {
                 #region SEE IF TARGET SR HAS ENOUGH SPACE
-                if (useTransport == TransferType.UploadRawVDI ||
-                    useTransport == TransferType.iSCSI)
+                if (useTransport == TransferType.UploadRawVDI || useTransport == TransferType.iSCSI)
                 {
                     long freespace;
                     string contenttype = string.Empty;
@@ -785,11 +783,24 @@ namespace XenOvfTransport
                 {
                     wimDisk = null;
                 }
-                if (File.Exists(encryptfilename)) { File.Delete(encryptfilename); }
-                if (File.Exists(uncompressedfilename)) { File.Delete(uncompressedfilename); }
+
+                try
+                {
+                    if (File.Exists(encryptfilename))
+                        File.Delete(encryptfilename);
+
+                    if (File.Exists(uncompressedfilename))
+                        File.Delete(uncompressedfilename);
+                }
+                catch
+                {
+                    //ignore errors
+                }
+
+                Directory.SetCurrentDirectory(StartPath);
             }
 
-            Directory.SetCurrentDirectory(StartPath);
+
             log.DebugFormat("OVF.Import.ImportFile leave: created {0} VDIs", vdiRef.Count);
             return vdiRef;
         }

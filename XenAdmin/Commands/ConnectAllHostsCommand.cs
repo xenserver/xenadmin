@@ -30,13 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Network;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using XenAPI;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Commands
@@ -73,7 +67,6 @@ namespace XenAdmin.Commands
                             c.CachePopulated += c_CachePopulated;
                         }
                         XenConnectionUI.BeginConnect(c, false, null, false);
-                        MainWindowCommandInterface.RequestRefreshTreeView();
                     });
                 }
             }

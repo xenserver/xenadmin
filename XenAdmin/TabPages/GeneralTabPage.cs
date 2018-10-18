@@ -56,7 +56,7 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static readonly Dictionary<Type, List<PDSection>> _expandedSections = new Dictionary<Type, List<PDSection>>();
+        private readonly Dictionary<Type, List<PDSection>> _expandedSections = new Dictionary<Type, List<PDSection>>();
 
         /// <summary>
         /// Set when we need to do a rebuild, but we are not visible, to queue up a rebuild.
@@ -127,8 +127,8 @@ namespace XenAdmin.TabPages
                     pdSectionGeneral.UpdateEntryValueWithKey(
                         Messages.POOL_LICENSE,
                         additionalString != string.Empty
-                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
-                            : p.LicenseString(),
+                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
+                            : Helpers.GetFriendlyLicenseName(p),
                         true);
                 });
         }
@@ -189,11 +189,7 @@ namespace XenAdmin.TabPages
                     xenObject = value;
                     RegisterHandlers();
                     BuildList();
-                    List<PDSection> listPDSections = null;
-                    if (_expandedSections.TryGetValue(xenObject.GetType(), out listPDSections))
-                        ResetExpandState(listPDSections);
-                    else
-                        ResetExpandState();
+                    ResetExpandState();
                 }
                 else
                 {
@@ -241,28 +237,30 @@ namespace XenAdmin.TabPages
             SetStatesOfExpandingLinks();
         }
 
+
         private void ResetExpandState()
         {
-            panel2.SuspendLayout();
-            foreach (PDSection s in sections)
+            try
             {
-                s.Contract();
+                panel2.SuspendLayout();
+
+                List<PDSection> expandedSections;
+                _expandedSections.TryGetValue(xenObject.GetType(), out expandedSections);
+
+                foreach (PDSection s in sections)
+                {
+                    if (expandedSections != null && expandedSections.Contains(s))
+                        s.Expand();
+                    else
+                        s.Contract();
+                }
+
+                pdSectionGeneral.Expand();
             }
-            pdSectionGeneral.Expand();
-            panel2.ResumeLayout();
-        }
-        private void ResetExpandState(List<PDSection> expandedSections)
-        {
-            panel2.SuspendLayout();
-            foreach (PDSection s in sections)
+            finally
             {
-                if (expandedSections.Contains(s))
-                    s.Expand();
-                else
-                    s.Contract();
+                panel2.ResumeLayout();
             }
-            pdSectionGeneral.Expand();
-            panel2.ResumeLayout();
         }
 
         private void UnregisterHandlers()
@@ -1306,8 +1304,8 @@ namespace XenAdmin.TabPages
                 var additionalString = PoolAdditionalLicenseString();
                 s.AddEntry(Messages.POOL_LICENSE,
                     additionalString != string.Empty
-                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
-                        : p.LicenseString());
+                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
+                        : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
                 var master = p.Connection.Resolve(p.master);
@@ -1352,12 +1350,18 @@ namespace XenAdmin.TabPages
 
         private string PoolAdditionalLicenseString()
         {
-            if (licenseStatus.CurrentState == LicenseStatus.HostState.Expired)
-                return Messages.LICENSE_EXPIRED;
-            else if (licenseStatus.CurrentState == LicenseStatus.HostState.Free)
-                return Messages.LICENSE_UNLICENSED;
-            else   
+            if (licenseStatus == null)
                 return string.Empty;
+
+            switch (licenseStatus.CurrentState)
+            {
+                case LicenseStatus.HostState.Expired:
+                    return Messages.LICENSE_EXPIRED;
+                case LicenseStatus.HostState.Free:
+                    return Messages.LICENSE_UNLICENSED;
+                default:
+                    return string.Empty;
+            }
         }
 
         private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)

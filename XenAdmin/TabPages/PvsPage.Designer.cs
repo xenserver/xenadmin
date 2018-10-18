@@ -38,16 +38,14 @@
             this.ColumnPvsSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.ConfigureButton = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.enableButton = new XenAdmin.Commands.CommandButton();
             this.disableButton = new XenAdmin.Commands.CommandButton();
+            this.ConfigureButton = new System.Windows.Forms.Button();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -60,8 +58,8 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewVms, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ConfigureButton, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // dataGridViewVms
@@ -118,25 +116,12 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // panel1
+            // tableLayoutPanel2
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.ConfigureButton);
-            this.panel1.Name = "panel1";
-            // 
-            // ConfigureButton
-            // 
-            resources.ApplyResources(this.ConfigureButton, "ConfigureButton");
-            this.ConfigureButton.Name = "ConfigureButton";
-            this.ConfigureButton.UseVisualStyleBackColor = true;
-            this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.enableButton);
-            this.panel2.Controls.Add(this.disableButton);
-            this.panel2.Name = "panel2";
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.enableButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.disableButton, 1, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // enableButton
             // 
@@ -150,6 +135,13 @@
             this.disableButton.Name = "disableButton";
             this.disableButton.UseVisualStyleBackColor = true;
             // 
+            // ConfigureButton
+            // 
+            resources.ApplyResources(this.ConfigureButton, "ConfigureButton");
+            this.ConfigureButton.Name = "ConfigureButton";
+            this.ConfigureButton.UseVisualStyleBackColor = true;
+            this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
+            // 
             // PvsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -159,8 +151,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,13 +164,12 @@
         private System.Windows.Forms.Label label2;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
         private XenAdmin.Commands.CommandButton disableButton;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private XenAdmin.Commands.CommandButton enableButton;
         public System.Windows.Forms.Button ConfigureButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCachingEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPvsSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }

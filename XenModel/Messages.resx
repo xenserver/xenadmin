@@ -771,6 +771,12 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>Performing SR scan from '{0}'</value>
   </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE" xml:space="preserve">
+    <value>Renamed server network interface</value>
+  </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
+    <value>Renaming server network interface</value>
+  </data>
   <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
     <value>Saving VM Configuration</value>
   </data>
@@ -2340,7 +2346,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>You must install I/O drivers on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install [XenServer product] Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
+    <value>You must install [Citrix VM Tools] on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
     <value>The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}.</value>
@@ -2376,7 +2382,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>You must install I/O drivers on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install [XenServer product] Tools on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
+    <value>You must install [Citrix VM Tools] on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>It is not possible to deactivate this virtual disk on VM '{0}' because the VM is not running.</value>
@@ -2417,7 +2423,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>This snapshot is currently in use and cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_TOOLS_SR" xml:space="preserve">
-    <value>Deleting the [XenServer product] Tools ISO storage is not supported.</value>
+    <value>Deleting the [Citrix VM Tools] ISO storage is not supported.</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
     <value>This virtual disk is active on VM '{0}'. Deactivate the virtual disk before deleting.</value>
@@ -2460,9 +2466,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>Snapshot disks cannot be moved</value>
-  </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>You must detach this virtual disk before it can be moved.</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
@@ -3081,16 +3084,16 @@ Would you like to carry out the operation at this time?</value>
     <value>The connection was refused.</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
-    <value>Connection Refused</value>
+    <value>Refused connection to {0}</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>Connection to Server {0} restricted because a connection already exists to another XE Express Server ({1})</value>
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>Connection to server {0} restricted - a connection to a [Citrix] [XenServer product] Express Edition server ({1}) already exists.
+    <value>Connection to server {0} restricted - a connection to a [Citrix XenServer] Express Edition server ({1}) already exists.
 
-You can only connect to a single [Citrix] [XenServer product] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
+You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>Cannot connect to {0} because of license restriction</value>
@@ -3104,9 +3107,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CONNECTION_WILL_RETRY_SLAVE" xml:space="preserve">
     <value>Connection to {0}: will try to connect to another pool member in {1} seconds</value>
-  </data>
-  <data name="CONNECT_NO_XAPI_FAILURE" xml:space="preserve">
-    <value>Could not find [XenServer] running on {0}.</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
     <value>Could not find {0}.</value>
@@ -3194,9 +3194,6 @@ You can only connect to a single [Citrix] [XenServer product] Express Edition se
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
     <value>Control Domain Memory Settings - {0}</value>
-  </data>
-  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
-    <value>&amp;Control Domain Memory:</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
@@ -3774,7 +3771,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>Default</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>Default install of [XenServer]</value>
+    <value>Default install of {0}</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>Default Search</value>
@@ -3798,7 +3795,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>VMs by Power State</value>
   </data>
   <data name="DEFAULT_SEARCH_VMS_WO_XS_TOOLS" xml:space="preserve">
-    <value>VMs without [XenServer product] Tools</value>
+    <value>VMs without [Citrix VM Tools]</value>
   </data>
   <data name="DEFAULT_VDI_NAME" xml:space="preserve">
     <value>New virtual disk</value>
@@ -4092,9 +4089,6 @@ This will also delete its subfolders.</value>
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>Disable HA if you want to configure the management interfaces</value>
   </data>
-  <data name="DISABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>&amp;Disable HA...</value>
-  </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>Disable</value>
   </data>
@@ -4206,11 +4200,14 @@ This will also delete its subfolders.</value>
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>Display options</value>
   </data>
+  <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
+    <value>The Dynamic Memory Control (DMC) is not available due to license restrictions on the server.</value>
+  </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because [XenServer product] Tools are not installed on this VM.</value>
+    <value>A memory range cannot be set because [Citrix VM Tools] are not installed on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because [XenServer product] Tools are not installed on these VMs.</value>
+    <value>A memory range cannot be set because [Citrix VM Tools] are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED" xml:space="preserve">
     <value>A memory range cannot be set because the operating system on this VM does not support it.</value>
@@ -4225,10 +4222,10 @@ This will also delete its subfolders.</value>
     <value>A memory range cannot be set because I/O drivers are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because [XenServer product] Tools are out of date on this VM.</value>
+    <value>A memory range cannot be set because [Citrix VM Tools] are out of date on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because [XenServer product] Tools are out of date on these VMs.</value>
+    <value>A memory range cannot be set because [Citrix VM Tools] are out of date on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>A memory range cannot be set for this template.</value>
@@ -4781,12 +4778,6 @@ Eject the CD and try again.</value>
   <data name="DYNAMIC_MAX" xml:space="preserve">
     <value>Maximum memory</value>
   </data>
-  <data name="DYNAMIC_MAX_AMP" xml:space="preserve">
-    <value>Ma&amp;ximum memory</value>
-  </data>
-  <data name="DYNAMIC_MAX_COLON" xml:space="preserve">
-    <value>Ma&amp;ximum memory:</value>
-  </data>
   <data name="DYNAMIC_MEMORY_CONTROL" xml:space="preserve">
     <value>Memory</value>
   </data>
@@ -4798,9 +4789,6 @@ Eject the CD and try again.</value>
   </data>
   <data name="DYNAMIC_MIN" xml:space="preserve">
     <value>Minimum memory</value>
-  </data>
-  <data name="DYNAMIC_MIN_AMP" xml:space="preserve">
-    <value>&amp;Minimum memory</value>
   </data>
   <data name="DYNAMIC_MIN_COLON" xml:space="preserve">
     <value>&amp;Minimum memory:</value>
@@ -4870,9 +4858,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Enable clustering.</value>
   </data>
-  <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>&amp;Enable HA...</value>
-  </data>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>Enable</value>
   </data>
@@ -4923,9 +4908,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENDS_WITH" xml:space="preserve">
     <value>ends with</value>
-  </data>
-  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer] &amp;Enterprise Per-Socket ({0} required)</value>
   </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>Enter &amp;Maintenance Mode...</value>
@@ -5099,7 +5081,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>File {0} not found</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
-    <value>[XenServer] is still booting.</value>
+    <value>Server is still booting.</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>Gateway is invalid.</value>
@@ -5120,7 +5102,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>You are not authorized to access this server.</value>
   </data>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
-    <value>Could not find [XenServer] on '{0}'.</value>
+    <value>Could not find a server on '{0}'.</value>
   </data>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>Error preparing host</value>
@@ -5159,7 +5141,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>{0} Install Management Agent</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0} Install [XenServer product] Tools</value>
+    <value>{0} Install [Citrix VM Tools]</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>This VM uses a local CD.</value>
@@ -5206,7 +5188,7 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
     <value>An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
 
-Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter].</value>
+Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including servers that are not connected to [XenCenter].</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
@@ -5280,6 +5262,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   </data>
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>Export to File...</value>
+  </data>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>VMs with disks greater than {0} cannot be exported as an OVF/OVA package.</value>
   </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>Normal text file (*.txt)|*.txt|Rich text file (*.rtf)|*.rtf</value>
@@ -5836,7 +5821,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Performance Graph</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
-    <value>To view memory data for this VM, you need to install [XenServer product] Tools</value>
+    <value>To view memory data for this VM, you need to install [Citrix VM Tools]</value>
   </data>
   <data name="GREATER_THAN" xml:space="preserve">
     <value>&gt; {0}</value>
@@ -5848,10 +5833,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Group Roles</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>This version of [XenCenter] is out of date and cannot connect to {0}.</value>
-  </data>
-  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
-    <value>
+    <value>This version of [XenCenter] is out of date and cannot connect to {0}.
 
 You can get a compatible version of [XenCenter] from the following location:</value>
   </data>
@@ -6510,9 +6492,6 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>Import VM '{0}' from Disk Image to '{1}'</value>
   </data>
-  <data name="IMPORT_DOWNLOAD_ERROR" xml:space="preserve">
-    <value>Error downloading file '{0}'. {1}</value>
-  </data>
   <data name="IMPORT_EULA_PAGE_MAX_TABS" xml:space="preserve">
     <value>Too many EULAs to display, cannot continue.</value>
   </data>
@@ -6738,6 +6717,15 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>&amp;Assign imported VM(s) to a home server:</value>
   </data>
+  <data name="IMPORT_WIZARD_DOWNLOADING" xml:space="preserve">
+    <value>Downloading file {0}, please wait...</value>
+  </data>
+  <data name="IMPORT_WIZARD_FAILED_DOWNLOAD" xml:space="preserve">
+    <value>Failed to download file {0}. Please see the logs for more information.</value>
+  </data>
+  <data name="IMPORT_WIZARD_FAILED_UNCOMPRESS" xml:space="preserve">
+    <value>Failed to uncompress file {0}. Please see the logs for more information.</value>
+  </data>
   <data name="IMPORT_WIZARD_NETWORKING_INTRO" xml:space="preserve">
     <value>Map the virtual network interfaces in the VMs you are importing to networks in the destination pool or standalone server.</value>
   </data>
@@ -6749,6 +6737,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT" xml:space="preserve">
     <value>Select the storage repository for the imported template.</value>
+  </data>
+  <data name="IMPORT_WIZARD_UNCOMPRESSING" xml:space="preserve">
+    <value>Uncompressing file {0}, please wait...</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces in imported VMs:</value>
@@ -6787,7 +6778,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Disk and memory snapshots need I/O drivers to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Disk and memory snapshots need [XenServer product] Tools to be installed</value>
+    <value>Disk and memory snapshots need [Citrix VM Tools] to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_POWER_STATE" xml:space="preserve">
     <value>Disk and memory snapshots need the VM to be running</value>
@@ -6802,7 +6793,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Quiesced snapshots need Management Agent to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Quiesced snapshots need [XenServer product] Tools to be installed</value>
+    <value>Quiesced snapshots need [Citrix VM Tools] to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>Quiesced snapshots need the VM to be running</value>
@@ -6826,19 +6817,19 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>Could not find the [XenServer product] Tools install disc.</value>
+    <value>Could not find the [Citrix VM Tools] install disc.</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
-    <value>[XenServer product] Tools installation launched.</value>
+    <value>[Citrix VM Tools] installation launched.</value>
   </data>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
-    <value>[XenServer product] Tools are already installed on this VM.</value>
+    <value>[Citrix VM Tools] are already installed on this VM.</value>
   </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
-    <value>Launching [XenServer product] Tools installation.</value>
+    <value>Launching [Citrix VM Tools] installation.</value>
   </data>
   <data name="INSTALLTOOLS_TITLE" xml:space="preserve">
-    <value>Installing [XenServer product] Tools on VM {0}</value>
+    <value>Installing [Citrix VM Tools] on VM {0}</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
     <value>Install files could not be found at specified network location</value>
@@ -6850,13 +6841,13 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Install pending &amp;updates...</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
-    <value>Install [XenServer product] Tools</value>
+    <value>Install [Citrix VM Tools]</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS_DOTS" xml:space="preserve">
-    <value>Install [XenServer product] Tools...</value>
+    <value>Install [Citrix VM Tools]...</value>
   </data>
   <data name="INSTALL_XS_TOOLS" xml:space="preserve">
-    <value>Install [XenServer product] Tools</value>
+    <value>Install [Citrix VM Tools]</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
     <value>Creating VM '{0}' from template '{1}'</value>
@@ -7036,6 +7027,54 @@ Size: {3}</value>
   <data name="LICENSE_ACTIVATED" xml:space="preserve">
     <value>Activated</value>
   </data>
+  <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
+    <value>[Citrix] Virtual &amp;Apps and Desktops</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_CLOUD" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] &amp;Cloud</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_CLOUD_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop [Citrix] &amp;Cloud</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_LEGACY" xml:space="preserve">
+    <value>XenApp/Xen&amp;Desktop</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_PLUS" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops &amp;Premium</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_PLUS_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop &amp;Platinum</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] P&amp;remium Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
+    <value>[XenServer product] Pr&amp;emium Per-User</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] &amp;Enterprise Per-User</value>
+  </data>
+  <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] Per-&amp;Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] Per-&amp;Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
+    <value>[XenServer product] for [Citrix] Virtual &amp;Desktops</value>
+  </data>
+  <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] for &amp;XenDesktop</value>
+  </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>The licensing action for {0} failed.</value>
   </data>
@@ -7113,7 +7152,7 @@ Size: {3}</value>
     <value>The license for a host cannot be changed when HA is on</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>Servers must be selected one at a time when activating free [XenServer].</value>
+    <value>Servers must be selected one at a time when activating Express [XenServer].</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
     <value>Servers must be selected one at a time when licensing servers which have a version lower than [BRANDING_VERSION_5_6].</value>
@@ -7147,19 +7186,19 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenAdd/XenDesktop [Citrix] Cloud features enabled</value>
+[Citrix] Virtual Apps and Desktops [Citrix] Cloud features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenApp/XenDesktop features enabled</value>
+[Citrix] Virtual Apps and Desktops features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-XenApp/XenDesktop Platinum features enabled</value>
+[Citrix] Virtual Apps and Desktops Premium features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-Enterprise features enabled</value>
+Premium features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -7170,7 +7209,7 @@ Premium features enabled</value>
 Standard features only</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>Activation keys can only be applied to one Free [XenServer] product at a time.</value>
+    <value>Activation keys can only be applied to one Express [XenServer] product at a time.</value>
   </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>Unlicensed</value>
@@ -7197,10 +7236,10 @@ Standard features only</value>
     <value>Your license has expired</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>One or more managed servers have expired. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
+    <value>One or more managed servers have expired. Either assign [XenServer] licenses, or activate Express [XenServer] products.</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
+    <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Express [XenServer] products.</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
@@ -7472,7 +7511,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>&amp;High Availability...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>Inst&amp;all [XenServer product] Tools...</value>
+    <value>Inst&amp;all [Citrix VM Tools]...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>&amp;Quick Create</value>
@@ -8629,6 +8668,9 @@ When you configure an NFS storage repository, you simply provide the hostname or
   <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
     <value>Maximum number of vCPUs</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYINFO" xml:space="preserve">
+    <value>(min = {0}, max = {1})</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
 
@@ -8845,10 +8887,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Assign a virtual GPU</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>This pool is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>This server is only licensed for XenApp/XenDesktop workloads</value>
+    <value>This server is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -8872,7 +8914,7 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Select a storage repository to create the disk on</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>At least one of the VMs you want to install [XenServer product] Tools onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
+    <value>At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATED" xml:space="preserve">
     <value>DVD Drive Created</value>
@@ -8891,10 +8933,10 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
     <value>You must shut down and then restart the VM to finish the installation of the new DVD drive.
-Once the VM has restarted click the Install [XenServer product] Tools menu item once again.</value>
+Once the VM has restarted click the Install [Citrix VM Tools] menu item once again.</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
-    <value>The VM you want to install [XenServer product] Tools onto has no DVD drive, would you like to create one?</value>
+    <value>The VM you want to install [Citrix VM Tools] onto has no DVD drive, would you like to create one?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
@@ -9245,7 +9287,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>There are no system alerts available to dismiss.</value>
   </data>
   <data name="NO_MORE_USERDEVICES" xml:space="preserve">
-    <value>[XenServer] cannot create any more disks for this VM</value>
+    <value>The server cannot create any more disks for this VM</value>
   </data>
   <data name="NO_NAME" xml:space="preserve">
     <value>(No Name)</value>
@@ -9257,7 +9299,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>There are no servers that need activating at this time.</value>
   </data>
   <data name="NO_SESSION_INFO" xml:space="preserve">
-    <value>No [XenServer] session information is available, cannot continue.</value>
+    <value>No server session information is available, cannot continue.</value>
   </data>
   <data name="NO_SNAPSHOTS" xml:space="preserve">
     <value>This VM does not have any snapshots.</value>
@@ -9771,9 +9813,6 @@ File not found</value>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>Permission Denied</value>
   </data>
-  <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Per-&amp;Socket ({0} required)</value>
-  </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>Physical device</value>
   </data>
@@ -10092,7 +10131,7 @@ Please reconnect the host and try again</value>
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs was removed in [XenServer]. Remove StorageLink SRs before upgrading.</value>
+    <value>The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -10177,13 +10216,13 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>PVS-Accelerator</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
-    <value>[XenServer product] Tools not installed</value>
+    <value>[Citrix VM Tools] not installed</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenServer product] Tools out of date (version {0} installed)</value>
+    <value>[Citrix VM Tools] out of date (version {0} installed)</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>[XenServer product] Tools out of date</value>
+    <value>[Citrix VM Tools] out of date</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS limit must be between 1 and 2147483647 (or left empty).</value>
@@ -10584,9 +10623,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="RETRIEVING_WLB_DEFAULT_CONFIGURATION" xml:space="preserve">
     <value>Retrieving WLB default configuration</value>
-  </data>
-  <data name="RETRY" xml:space="preserve">
-    <value>&amp;Retry</value>
   </data>
   <data name="RETRY_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Retry</value>
@@ -11172,13 +11208,13 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>What type of snapshot do you want to use for scheduled snapshots?</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>[XenServer] build number</value>
+    <value>Build number</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>[XenServer] build date</value>
+    <value>Build date</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>[XenServer] version</value>
+    <value>Version</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>Try again using a correct user name and password.</value>
@@ -11190,7 +11226,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
+    <value>Check the proxy settings and that the server is configured correctly on '{0}' and try again.</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>Please wait and then try again.</value>
@@ -11309,6 +11345,9 @@ Incremental allocation: {1}</value>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs without a home server cannot have disks on local storage</value>
   </data>
+  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>You cannot create a disk greater than {0} on this SR.</value>
+  </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
   </data>
@@ -11349,9 +11388,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>SR {0} on {1}</value>
-  </data>
-  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>Started</value>
@@ -11406,12 +11442,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATIC_MAX" xml:space="preserve">
     <value>Static maximum</value>
-  </data>
-  <data name="STATIC_MAX_AMP" xml:space="preserve">
-    <value>&amp;Static maximum</value>
-  </data>
-  <data name="STATIC_MAX_COLON" xml:space="preserve">
-    <value>&amp;Static maximum:</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
@@ -11620,13 +11650,13 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>OS: {0}</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSNOTPRESENT" xml:space="preserve">
-    <value>[XenServer product] Tools: Not present</value>
+    <value>[Citrix VM Tools]: Not present</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>[XenServer product] Tools: Out of date (version {0}.{1} installed)</value>
+    <value>[Citrix VM Tools]: Out of date (version {0}.{1} installed)</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>[XenServer product] Tools: Up to date</value>
+    <value>[Citrix VM Tools]: Up to date</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPUs: {0}</value>
@@ -11725,7 +11755,7 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>System disks cannot be activated or deactivated while the VM is running</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be activated or deactivated from running VMs without [XenServer product] Tools installed</value>
+    <value>Disks cannot be activated or deactivated from running VMs without [Citrix VM Tools] installed</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>Networks cannot be deactivated while the VM is suspended</value>
@@ -11740,7 +11770,7 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>System disks cannot be deleted while the VM is running</value>
   </data>
   <data name="TOOLTIP_DELETE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be deleted from running VMs without [XenServer product] Tools installed</value>
+    <value>Disks cannot be deleted from running VMs without [Citrix VM Tools] installed</value>
   </data>
   <data name="TOOLTIP_DETACH_SUSPENDED" xml:space="preserve">
     <value>Disks cannot be removed while the VM is suspended</value>
@@ -11752,13 +11782,13 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>Disks must be deactivated before detaching.</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be removed from running VMs without [XenServer product] Tools installed</value>
+    <value>Disks cannot be removed from running VMs without [Citrix VM Tools] installed</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>I/O drivers must be installed to edit a network on a running VM</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>[XenServer product] Tools must be installed to edit a network on a running VM</value>
+    <value>[Citrix VM Tools] must be installed to edit a network on a running VM</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>Default templates support a maximum of {0} networks at VM creation</value>
@@ -11776,7 +11806,7 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>Networks cannot be removed from suspended VMs</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>[XenServer product] Tools must be installed to remove a network on a running VM</value>
+    <value>[Citrix VM Tools] must be installed to remove a network on a running VM</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>This network cannot be removed because it is a physical device</value>
@@ -12062,7 +12092,7 @@ Check your settings and try again.</value>
     <value>Ensure you have upgraded [XenCenter] before upgrading [XenServer].</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.{0} and *.iso</value>
+    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
     <value>No valid update file found in {0}</value>
@@ -12083,10 +12113,10 @@ Check your settings and try again.</value>
     <value>{0}: This server does not need to be rebooted because live patching is used.</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>{0}: The VM {1} does not have [XenServer product] Tools installed.</value>
+    <value>{0}: The VM {1} does not have [Citrix VM Tools] installed.</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>{0}: The VM {1} cannot be suspended until it has up to date [XenServer product] Tools.</value>
+    <value>{0}: The VM {1} cannot be suspended until it has up to date [Citrix VM Tools].</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
     <value>Select the checkboxes for each server you want to update. Select a pool checkbox to select all the available servers in the pool.</value>
@@ -12164,6 +12194,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>Skipping update {0}. Already applied on {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>Skipping uploading update {0}. Already uploaded to {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
@@ -12331,37 +12364,37 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Uploading update '{0}' to '{1}' ({2} of {3})...</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
+    <value>Upgrade your server license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
+    <value>Upgrade your server license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
+    <value>Upgrade your server license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.</value>
+    <value>Upgrade your server license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Dynamic Memory Control.  Dynamic Memory Control allows [XenServer] to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.</value>
+    <value>Upgrade your server license to enable Dynamic Memory Control.  Dynamic Memory Control allows the server to adjust the memory of live virtual machines, and respond dynamically to changing demands on the server.</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.</value>
+    <value>Upgrade your server license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable StorageLink™ Technology. StorageLink allows [XenServer] to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
+    <value>Upgrade your server license to enable StorageLink™ Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.</value>
+    <value>Upgrade your server license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
+    <value>Upgrade your server license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
+    <value>Upgrade your server license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
+    <value>Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
   </data>
   <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
@@ -12369,13 +12402,13 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
 To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
+    <value>Upgrade your server license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
+    <value>Upgrade your server license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and [XenServer] hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
+    <value>Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and servers' performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>Uptime</value>
@@ -12511,6 +12544,12 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
+  </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>
@@ -12699,7 +12738,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>[XenServer] can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
+    <value>The server can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>&amp;Run the new snapshot schedule job when I click Finish</value>
@@ -12733,9 +12772,6 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VMSS_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
-  </data>
-  <data name="VMSS_TYPE" xml:space="preserve">
-    <value>schedule</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>Virtual Machines</value>
@@ -13238,34 +13274,34 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB unknown error.</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>An error occurred when WLB tried to establish a session with [XenServer].</value>
+    <value>An error occurred when WLB tried to establish a session with the server.</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
-    <value>WLB could not log into [XenServer]. It could be due to invalid credentials.</value>
+    <value>WLB could not log into the server. It could be due to invalid credentials.</value>
   </data>
   <data name="WLB_ERROR_4003" xml:space="preserve">
-    <value>WLB cannot connect to [XenServer]. It could be the [XenServer] being offline or an incorrect TCP/IP address.</value>
+    <value>WLB cannot connect to the server. It could be due to the server being offline or an incorrect TCP/IP address.</value>
   </data>
   <data name="WLB_ERROR_4004" xml:space="preserve">
-    <value>WLB received a null argument from [XenServer], which is not allowed.</value>
+    <value>WLB received a null argument from the server.</value>
   </data>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>WLB registry key is missing.</value>
   </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
-    <value>WLB received an invalid argument from [XenServer].</value>
+    <value>WLB received an invalid argument from the server.</value>
   </data>
   <data name="WLB_ERROR_4008" xml:space="preserve">
-    <value>WLB data collection service cannot retrieve [XenServer] data.</value>
+    <value>WLB data collection service cannot retrieve server data.</value>
   </data>
   <data name="WLB_ERROR_4009" xml:space="preserve">
     <value>WLB configuration data is missing in WLB database.</value>
   </data>
   <data name="WLB_ERROR_4010" xml:space="preserve">
-    <value>WLB received an invalid operation from [XenServer].</value>
+    <value>WLB received an invalid operation from the server.</value>
   </data>
   <data name="WLB_ERROR_4011" xml:space="preserve">
-    <value>WLB received an out of range argument from [XenServer].</value>
+    <value>WLB received an out of range argument from the server.</value>
   </data>
   <data name="WLB_ERROR_4012" xml:space="preserve">
     <value>WLB data collection service is not properly initialized.</value>
@@ -13283,31 +13319,31 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB does not have current metrics.</value>
   </data>
   <data name="WLB_ERROR_4017" xml:space="preserve">
-    <value>WLB cannot find a host that has required storage repositories to place a VM. </value>
+    <value>WLB cannot find a host that has the required storage repositories for placing a VM. </value>
   </data>
   <data name="WLB_ERROR_4018" xml:space="preserve">
-    <value>WLB cannot find required free CPUs to place a VM.</value>
+    <value>WLB cannot find the required free CPUs for placing a VM.</value>
   </data>
   <data name="WLB_ERROR_4019" xml:space="preserve">
-    <value>WLB cannot find required free memory to place a VM.</value>
+    <value>WLB cannot find the required free memory for placing a VM.</value>
   </data>
   <data name="WLB_ERROR_4020" xml:space="preserve">
     <value>One or more hosts in the pool do not have an appropriate license.</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB could not connect to [XenServer] because the supplied credentials were invalid.</value>
+    <value>WLB could not connect to the server because the supplied credentials were invalid.</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
-    <value>WLB unable to evacuate an explicitly excluded host.</value>
+    <value>WLB is unable to evacuate an explicitly excluded host.</value>
   </data>
   <data name="WLB_ERROR_4023" xml:space="preserve">
     <value>WLB cannot save your configuration at this time.  Verify all Workload Balancing services are running, and try reentering your configuration in a few minutes.</value>
   </data>
   <data name="WLB_ERROR_5" xml:space="preserve">
-    <value>[XenServer] cannot connect to the WLB Server with the supplied WLB Server credentials.</value>
+    <value>The server cannot connect to the WLB Server with the supplied WLB Server credentials.</value>
   </data>
   <data name="WLB_ERROR_6" xml:space="preserve">
-    <value>The user WLB uses to connect to [XenServer] either doesn't have sufficient privileges or doesn't have access to [XenServer]. Please re-initialize WLB with an valid user.</value>
+    <value>The user WLB uses to connect to the server has either insufficient privileges or no access to the server. Please re-initialize WLB with a valid user.</value>
   </data>
   <data name="WLB_ERROR_SERVER_NOT_FOUND" xml:space="preserve">
     <value>The specified WLB Server could not be found.  Please check your settings.</value>
@@ -13484,7 +13520,7 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
     <value>Configuration Error: {0}</value>
   </data>
   <data name="WLB_RECONFIGURE_CREDS" xml:space="preserve">
-    <value>The stored [XenServer] credentials are no longer valid.  Please update the connection settings for Workload Balancing.</value>
+    <value>The stored server credentials are no longer valid.  Please update the connection settings for Workload Balancing.</value>
   </data>
   <data name="WLB_RECONNECT" xml:space="preserve">
     <value>Re&amp;connect...</value>
@@ -13831,12 +13867,12 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[XenServer] License Files</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
-    <value>[XenServer product] Tools DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
+    <value>[Citrix VM Tools] DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
 
 You will need to navigate to the Console on each of the selected VMs to complete the installation.</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
-    <value>The [XenServer product] Tools SR could not be found.</value>
+    <value>The [Citrix VM Tools] SR could not be found.</value>
   </data>
   <data name="X_HIDDEN" xml:space="preserve">
     <value>{0} (hidden)</value>

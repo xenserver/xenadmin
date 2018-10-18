@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.ExportWizard
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
-					cancel = !PerformCheck(CheckSpaceRequirements);
+					cancel = !PerformCheck(CheckDiskSizeForTransfer, CheckSpaceRequirements);
 		}
 
         public override void PopulatePage()
@@ -262,6 +262,23 @@ namespace XenAdmin.Wizards.ExportWizard
 
 			return true;
 		}
+
+	    private bool CheckDiskSizeForTransfer(out string errorMsg)
+	    {
+	        errorMsg = string.Empty;
+	        var maxDiskSizeString = Util.DiskSizeString(SR.DISK_MAX_SIZE, 0);
+
+	        foreach (VM vm in VMsToExport)
+	        {
+	            if (!ExportAsXva && GetTotalVmSize(vm) > SR.DISK_MAX_SIZE)
+	            {
+                    errorMsg = string.Format(Messages.EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF, maxDiskSizeString);
+	                return false;
+	            }
+	        }
+
+	        return true;
+	    }
 
 		//TODO: improve method
 		private long GetFreeSpace(string drivename)

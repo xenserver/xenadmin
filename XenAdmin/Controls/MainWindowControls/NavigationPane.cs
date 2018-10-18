@@ -36,7 +36,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using XenAdmin.Alerts;
 using XenAdmin.Commands;
 using XenAdmin.XenSearch;
 using XenAPI;
@@ -50,12 +49,6 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             Infrastructure, Objects, Tags, Folders, CustomFields, vApps,
             SavedSearch, Notifications
-        }
-
-        public NavigationMode currentMode
-        {
-            get;
-            private set;
         }
 
         private NotificationsSubMode lastNotificationsMode = NotificationsSubMode.Alerts;
@@ -89,6 +82,7 @@ namespace XenAdmin.Controls.MainWindowControls
         [Browsable(true)]
         public event Action TreeViewRefreshResumed;
 
+        [Browsable(true)]
         internal event Action<string> DragDropCommandActivated;
 
         #endregion
@@ -109,9 +103,11 @@ namespace XenAdmin.Controls.MainWindowControls
             buttonObjectsBig.SetTag(NavigationMode.Objects);
             buttonNotifyBig.SetTag(NavigationMode.Notifications);
 
-            PopulateOrganizationDropDown();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
 
             Search.SearchesChanged += PopulateSearchDropDown;
+            PopulateOrganizationDropDown();
             PopulateSearchDropDown();
 
             buttonInfraBig.Checked = true;
@@ -130,6 +126,8 @@ namespace XenAdmin.Controls.MainWindowControls
         }
 
         #region Accessors
+
+        public NavigationMode currentMode { get; private set; }
 
         private Search m_search;
         public Search Search
@@ -157,6 +155,7 @@ namespace XenAdmin.Controls.MainWindowControls
             }
         }
 
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool InSearchMode
         {
             set { navigationView.InSearchMode = value; }

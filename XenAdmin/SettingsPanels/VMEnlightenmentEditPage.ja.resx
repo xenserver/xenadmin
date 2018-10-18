@@ -142,7 +142,7 @@
     <value>2</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>[XenServer] がコンテナを監視および制御できるようにこの仮想マシンを構成できます。この仮想マシンでこの機能を有効にする必要があるかどうかを選択してください。 </value>
+    <value>サーバーがコンテナを監視および制御できるようにこの仮想マシンを構成できます。この仮想マシンでこの機能を有効にする必要があるかどうかを選択してください。 </value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>

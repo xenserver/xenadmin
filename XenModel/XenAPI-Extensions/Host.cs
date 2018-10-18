@@ -50,8 +50,8 @@ namespace XenAPI
         public enum Edition
         {
             Free,
-            PerSocket,     //Added in Clearwater (PR-1589)
-            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            PerSocket,             //Added in Clearwater (PR-1589)
+            XenDesktop,            //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
             Standard,              // Added in Dundee/Violet (standard)
@@ -78,8 +78,10 @@ namespace XenAPI
                 case "per-socket":
                     return Edition.PerSocket;
                 case "enterprise-per-socket":
+                case "premium-per-socket":
                     return Edition.EnterprisePerSocket;
                 case "enterprise-per-user":
+                case "premium-per-user":
                     return Edition.EnterprisePerUser;
                 case "standard-per-socket":
                     return Edition.StandardPerSocket;
@@ -89,12 +91,11 @@ namespace XenAPI
                     return Edition.DesktopPlus;
                 case "desktop-cloud":
                     return Edition.DesktopCloud;
-                case "basic":
-                    return Edition.Free;
                 case "premium":
                     return Edition.Premium;
                 case "standard":
                     return Edition.Standard;
+                case "basic":
                 default:
                     return Edition.Free;
             }
@@ -118,19 +119,18 @@ namespace XenAPI
             return false;
         }
 
-        public static string GetEditionText(Edition edition)
+        public string GetEditionText(Edition edition)
         {
             switch (edition)
             {
-
                 case Edition.XenDesktop:
                     return "xendesktop";
                 case Edition.PerSocket:
                     return "per-socket";
                 case Edition.EnterprisePerSocket:
-                    return "enterprise-per-socket";
+                    return Helpers.NaplesOrGreater(this) ? "premium-per-socket" : "enterprise-per-socket";
                 case Edition.EnterprisePerUser:
-                    return "enterprise-per-user";
+                    return Helpers.NaplesOrGreater(this) ? "premium-per-user" : "enterprise-per-user";
                 case Edition.StandardPerSocket:
                     return "standard-per-socket";
                 case Edition.Desktop:
@@ -144,7 +144,7 @@ namespace XenAPI
                 case Edition.Standard:
                     return "standard";
                 default:
-                    return "free";
+                    return Helpers.NaplesOrGreater(this) ? "express" : "free";
             }
         }
 
@@ -177,7 +177,7 @@ namespace XenAPI
         public override string Description()
         {
             if (name_description == "Default install of XenServer" || name_description == "Default install") // i18n: CA-30372, CA-207273
-                return Messages.DEFAULT_INSTALL_OF_XENSERVER;
+                return string.Format(Messages.DEFAULT_INSTALL_OF_XENSERVER, software_version.ContainsKey("product_brand") ? software_version["product_brand"] : Messages.XENSERVER);
             else if (name_description == null)
                 return "";
             else
@@ -286,7 +286,7 @@ namespace XenAPI
 
         public virtual bool IsFreeLicense()
         {
-            return edition == "free";
+            return edition == "free" || edition == "express";
         }
 
         public virtual bool IsFreeLicenseOrExpired()

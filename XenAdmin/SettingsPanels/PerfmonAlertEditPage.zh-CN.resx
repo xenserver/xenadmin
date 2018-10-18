@@ -226,7 +226,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>当资源使用率超过特定阈值时，[XenServer] 可以向您发出通知。这些通知以系统警报的形式生成，可以像其他任何系统警报一样转发到电子邮件服务器。</value>
+    <value>当资源使用率超过特定阈值时，服务器可以向您发出通知。这些通知以系统警报的形式生成，可以像其他任何系统警报一样转发到电子邮件服务器。</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>

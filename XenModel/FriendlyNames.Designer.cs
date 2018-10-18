@@ -115,7 +115,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrieve the user information stored as binary objects on [XenServer]..
+        ///   Looks up a localized string similar to Retrieve the user information stored as binary objects on the server..
         /// </summary>
         public static string Description_host_system_status_blobs {
             get {
@@ -142,7 +142,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tests for connectivity between [XenServer] and the internet.
+        ///   Looks up a localized string similar to Tests for connectivity between the server and the internet.
         /// </summary>
         public static string Description_host_system_status_conntest {
             get {
@@ -493,7 +493,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The database which stores the state of the [XenServer].
+        ///   Looks up a localized string similar to The database which stores the state of the server.
         /// </summary>
         public static string Description_host_system_status_xenserver_databases {
             get {
@@ -511,7 +511,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log files generated during the installation of the [XenServer].
+        ///   Looks up a localized string similar to Log files generated during the installation of the server.
         /// </summary>
         public static string Description_host_system_status_xenserver_install {
             get {
@@ -520,7 +520,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log files concerning the [XenServer]&apos;s activity.
+        ///   Looks up a localized string similar to Log files concerning the server&apos;s activity.
         /// </summary>
         public static string Description_host_system_status_xenserver_logs {
             get {
@@ -781,7 +781,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Basic Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Basic Edition.
         /// </summary>
         public static string Label_host_edition_basic {
             get {
@@ -790,7 +790,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop.
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops.
         /// </summary>
         public static string Label_host_edition_desktop {
             get {
@@ -799,7 +799,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] Cloud.
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops [Citrix] Cloud.
         /// </summary>
         public static string Label_host_edition_desktop_cloud {
             get {
@@ -808,7 +808,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop Platinum.
+        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops Premium.
         /// </summary>
         public static string Label_host_edition_desktop_plus {
             get {
@@ -817,7 +817,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Enterprise Per-Socket.
+        ///   Looks up a localized string similar to [Legacy XenServer product] Premium Per-Socket.
         /// </summary>
         public static string Label_host_edition_enterprise_per_socket {
             get {
@@ -826,7 +826,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Enterprise Per-User.
+        ///   Looks up a localized string similar to [Legacy XenServer product] Premium Per-User.
         /// </summary>
         public static string Label_host_edition_enterprise_per_user {
             get {
@@ -835,11 +835,119 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product].
+        ///   Looks up a localized string similar to [XenServer product] Express.
         /// </summary>
-        public static string Label_host_edition_free {
+        public static string Label_host_edition_express {
             get {
-                return ResourceManager.GetString("Label-host.edition-free", resourceCulture);
+                return ResourceManager.GetString("Label-host.edition-express", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix XenServer] Basic Edition.
+        /// </summary>
+        public static string Label_host_edition_legacy_basic {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop.
+        /// </summary>
+        public static string Label_host_edition_legacy_desktop {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-desktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] Cloud.
+        /// </summary>
+        public static string Label_host_edition_legacy_desktop_cloud {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-desktop-cloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop Platinum.
+        /// </summary>
+        public static string Label_host_edition_legacy_desktop_plus {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-desktop-plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Enterprise Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_legacy_enterprise_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-enterprise-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Enterprise Per-User.
+        /// </summary>
+        public static string Label_host_edition_legacy_enterprise_per_user {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-enterprise-per-user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product].
+        /// </summary>
+        public static string Label_host_edition_legacy_free {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-free", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_legacy_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix XenServer] Ultimate Edition.
+        /// </summary>
+        public static string Label_host_edition_legacy_premium {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-premium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix XenServer] Standard Edition.
+        /// </summary>
+        public static string Label_host_edition_legacy_standard {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-standard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] Standard Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_legacy_standard_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-standard-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product] for XenDesktop.
+        /// </summary>
+        public static string Label_host_edition_legacy_xendesktop {
+            get {
+                return ResourceManager.GetString("Label-host.edition-legacy-xendesktop", resourceCulture);
             }
         }
         
@@ -853,7 +961,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Ultimate Edition.
+        ///   Looks up a localized string similar to [Citrix XenServer] Ultimate Edition.
         /// </summary>
         public static string Label_host_edition_premium {
             get {
@@ -862,7 +970,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Standard Edition.
+        ///   Looks up a localized string similar to [XenServer product] Premium Per-Socket.
+        /// </summary>
+        public static string Label_host_edition_premium_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-premium-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer product] Premium Per-User.
+        /// </summary>
+        public static string Label_host_edition_premium_per_user {
+            get {
+                return ResourceManager.GetString("Label-host.edition-premium-per-user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Citrix XenServer] Standard Edition.
         /// </summary>
         public static string Label_host_edition_standard {
             get {
@@ -880,7 +1006,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] for XenDesktop.
+        ///   Looks up a localized string similar to [XenServer product] for [Citrix] Virtual Desktops.
         /// </summary>
         public static string Label_host_edition_xendesktop {
             get {
@@ -1015,7 +1141,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] build number.
+        ///   Looks up a localized string similar to Build number.
         /// </summary>
         public static string Label_host_software_version_build_number {
             get {
@@ -1024,7 +1150,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] build date.
+        ///   Looks up a localized string similar to Build date.
         /// </summary>
         public static string Label_host_software_version_date {
             get {
@@ -1033,7 +1159,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] version.
+        ///   Looks up a localized string similar to Version.
         /// </summary>
         public static string Label_host_software_version_product_version {
             get {
@@ -3537,7 +3663,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond to the HA networking heartbeat and may fence..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond to the HA networking heartbeat and may become fenced..
         /// </summary>
         public static string Message_body_ha_heartbeat_approaching_timeout {
             get {
@@ -3618,7 +3744,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to write to the heartbeat storage and may fence..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to write to the heartbeat storage and may become fenced..
         /// </summary>
         public static string Message_body_ha_statefile_approaching_timeout {
             get {
@@ -3636,7 +3762,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] on server &apos;{0}&apos; is taking too long to respond and may fence..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is taking too long to respond and may become fenced..
         /// </summary>
         public static string Message_body_ha_xapi_healthcheck_approaching_timeout {
             get {
@@ -3681,6 +3807,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; has low memory..
+        /// </summary>
+        public static string Message_body_host_low_memory {
+            get {
+                return ResourceManager.GetString("Message.body-host_low_memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was a temporary failure synchronizing performance statistics across the pool, probably because one or more servers were offline.  Another synchronization attempt will be made later..
         /// </summary>
         public static string Message_body_host_sync_data_failed {
@@ -3690,7 +3825,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license on server &apos;{0}&apos; has expired or been changed, and no longer supports [XenServer product] Enterprise features..
+        ///   Looks up a localized string similar to The license on server &apos;{0}&apos; has expired or been changed, pooling is no longer supported..
         /// </summary>
         public static string Message_body_license_does_not_support_pooling {
             get {
@@ -3987,7 +4122,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The [XenServer] license you are using does not allow you to use the Scheduled Snapshots feature..
+        ///   Looks up a localized string similar to The server license you are using does not allow you to use the Scheduled Snapshots feature..
         /// </summary>
         public static string Message_body_vmss_license_error {
             get {
@@ -4428,7 +4563,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] healthcheck approaching timeout.
+        ///   Looks up a localized string similar to Server healthcheck approaching timeout.
         /// </summary>
         public static string Message_name_ha_xapi_healthcheck_approaching_timeout {
             get {
@@ -4473,7 +4608,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] statistics synchronization failed.
+        ///   Looks up a localized string similar to Server has low memory..
+        /// </summary>
+        public static string Message_name_host_low_memory {
+            get {
+                return ResourceManager.GetString("Message.name-host_low_memory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server statistics synchronization failed.
         /// </summary>
         public static string Message_name_host_sync_data_failed {
             get {
@@ -4905,11 +5049,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool Admins have full access to all [XenServer] features and settings. They can access the [XenServer] console and manage the roles of other users.
+        ///   Looks up a localized string similar to Pool Admins have full access to all features and settings. They can access the server console and manage the roles of other users.
         /// 
         ///- No restrictions
         ///- Role and user management
-        ///- Access to [XenServer] console.
+        ///- Access to server console.
         /// </summary>
         public static string Role_pool_admin_Description {
             get {
@@ -4969,7 +5113,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on [XenServer] to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
+        ///   Looks up a localized string similar to VM Admins can manage VMs and Templates and can access the storage necessary to complete these tasks. This role relies on the server to choose where to run each VM, and on templates to provide values for dynamic memory control (DMC) and Home Server settings.
         /// 
         ///- Manage VMs and Templates
         ///- No access to dynamic memory control features
@@ -5109,7 +5253,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Tools ISOs.
+        ///   Looks up a localized string similar to [Citrix VM Tools] ISOs.
         /// </summary>
         public static string SR_name_description_xenserver_tools {
             get {
@@ -5190,7 +5334,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Tools.
+        ///   Looks up a localized string similar to [Citrix VM Tools].
         /// </summary>
         public static string SR_name_label_xenserver_tools {
             get {

@@ -33,11 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Model;
-using XenAPI;
-using System.Drawing;
-using XenAdmin.Core;
-using XenAdmin.Actions;
-using System.Windows.Forms.VisualStyles;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs
@@ -51,7 +47,7 @@ namespace XenAdmin.Dialogs
 
         public NewTagDialog(List<string> tags, List<string> indeterminateTags)
         {
-            InitDialog();
+            InitializeComponent();
             LoadTags(tags, indeterminateTags);
         }
 
@@ -69,7 +65,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
             List<string> items = new List<string>();
-            foreach (TagsListViewItem item in tagsListView.Items)
+            foreach (var item in ExtractList())
             {
                 if (item.Checked == checkState)
                 {
@@ -79,222 +75,120 @@ namespace XenAdmin.Dialogs
             return items;
         }
 
-        private void InitDialog()
+        private List<TagsDataGridViewRow> ExtractList()
         {
-            InitializeComponent();
-
-            // CheckBoxes is false as we draw them ourselves for tri-state.
-            tagsListView.CheckBoxes = false;
-            tagsListView.HideSelection = false;
-            tagsListView.MultiSelect = true;
-            tagsListView.LabelEdit = true;
-            tagsListView.AfterLabelEdit += tagsListView_AfterLabelEdit;
-            tagsListView.Activation = ItemActivation.TwoClick;
-            textBox1.KeyPress += textBox1_KeyPress;
-
-            // populate state image list for tri-state checkboxes
-            using (Graphics listViewGraphics = Graphics.FromHwnd(tagsListView.Handle))
+            var rows = new List<TagsDataGridViewRow>();
+            foreach (TagsDataGridViewRow item in tagsDataGrid.Rows)
             {
-                stateImageList.ImageSize = CheckBoxRenderer.GetGlyphSize(listViewGraphics, CheckBoxState.CheckedNormal);
+                rows.Add(item);
             }
+            return rows;
+        }
 
-            foreach (CheckBoxState state in new CheckBoxState[] { CheckBoxState.UncheckedNormal, CheckBoxState.CheckedNormal, CheckBoxState.MixedNormal })
+        private void DisplayList(List<TagsDataGridViewRow> rows)
+        {
+            rows.Sort();
+
+            try
             {
-                Bitmap bitmap = new Bitmap(stateImageList.ImageSize.Width, stateImageList.ImageSize.Height);
-
-                using (Graphics g = Graphics.FromImage(bitmap))
+                tagsDataGrid.SuspendLayout();
+                tagsDataGrid.Rows.Clear();
+                foreach (var item in rows)
                 {
-                    g.Clear(Color.Transparent);
-                    CheckBoxRenderer.DrawCheckBox(g, new Point(0, 0), state);
+                    tagsDataGrid.Rows.Add(item);
                 }
-                stateImageList.Images.Add(bitmap);
+            }
+            finally
+            {
+                tagsDataGrid.ResumeLayout();
             }
         }
 
-        private void tagsListView_AfterLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            okButton.Enabled = true;
-
-            TagsListViewItem itemRenaming = (TagsListViewItem)tagsListView.Items[e.Item];
-            if (itemRenaming != null)
-            {
-                string oldName = itemRenaming.Text;
-                string newName = (e.Label == null ? oldName : e.Label.Trim());   // null indicates no change
-
-                if (newName == "")
-                {
-                    e.CancelEdit = true;
-                    return;
-                }
-
-                foreach (TagsListViewItem currentItem in tagsListView.Items)
-                {
-                    if (currentItem != itemRenaming && currentItem.Text == newName)
-                    {
-                        e.CancelEdit = true;
-                        return;
-                    }
-                }
-
-                // Rename the tag in the list view ourselves (necessary if we've trimmed whitespace from the ends of the name)
-                itemRenaming.Text = newName;
-                e.CancelEdit = true;
-
-                // Rename the tag on all the servers
-                DelegatedAsyncAction action = new DelegatedAsyncAction(null,
-                    String.Format(Messages.RENAME_TAG, oldName),
-                    String.Format(Messages.RENAMING_TAG, oldName),
-                    String.Format(Messages.RENAMED_TAG, oldName),
-                    delegate(Session session)
-                    {
-                        Tags.RenameTagGlobally(oldName, newName);
-                    });
-                action.RunAsync();
-            }
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter && addButton.Enabled)
-            {
-                e.Handled = true;
-                AddTag();
-            }
-        }
-
-        private void SortList()
-        {
-            List<TagsListViewItem> listChecked = new List<TagsListViewItem>();
-            List<TagsListViewItem> listIndeterminate = new List<TagsListViewItem>();
-            List<TagsListViewItem> listNonChecked = new List<TagsListViewItem>();
-
-            foreach (TagsListViewItem item in tagsListView.Items)
-            {
-                if (item.Checked == CheckState.Checked)
-                {
-                    listChecked.Add(item);
-                }
-                else if (item.Checked == CheckState.Unchecked)
-                {
-                    listNonChecked.Add(item);
-                }
-                else
-                {
-                    listIndeterminate.Add(item);
-                }
-            }
-            listNonChecked.Sort(Comparison());
-            listChecked.Sort(Comparison());
-            listIndeterminate.Sort(Comparison());
-            tagsListView.Items.Clear();
-            foreach (TagsListViewItem item in listChecked)
-            {
-                tagsListView.Items.Add(item);
-            }
-            foreach (TagsListViewItem item in listIndeterminate)
-            {
-                tagsListView.Items.Add(item);
-            }
-            foreach (TagsListViewItem item in listNonChecked)
-            {
-                tagsListView.Items.Add(item);
-            }
-        }
-
-        private Comparison<TagsListViewItem> Comparison()
-        {
-            return delegate(TagsListViewItem x, TagsListViewItem y)
-                       {
-                           return x.Text.CompareTo(y.Text);
-
-                       };
-        }
-
-        private bool TagPresent(string tag)
+        private TagsDataGridViewRow FindTag(string tag, List<TagsDataGridViewRow> rows)
         {
             // Used to use tagsListView.Items.ContainsKey(tag), but that uses the Name
             // instead of the Text, and is also not case sensitive, which caused a bug.
-            foreach (TagsListViewItem item in tagsListView.Items)
+            foreach (var item in rows)
             {
                 if (item.Text == tag)
-                    return true;
+                    return item;
             }
-            return false;
+            return null;
         }
 
         private void AddTag()
         {
+            var rows = ExtractList();
             string text = this.textBox1.Text.Trim();
-            if (!TagPresent(text))
+            var item = FindTag(text, rows);
+            if (item == null)
             {
-                TagsListViewItem item = (TagsListViewItem)tagsListView.Items.Add(new TagsListViewItem(text));
-                item.Checked = CheckState.Checked;
-                item.Text = text;
+                item = new TagsDataGridViewRow { Checked = CheckState.Checked, Text = text };
+                rows.Add(item);
             }
             else
             {
-                foreach (TagsListViewItem item in tagsListView.Items)
-                {
-                    if (item.Text == text)
-                    {
-                        item.Checked = CheckState.Checked;
-                        break;
-                    }
-                }
+                item.Checked = CheckState.Checked;
             }
+
             this.textBox1.Text = "";
             addButton.Enabled = false;
-            SortList();
+            DisplayList(rows);
         }
 
         private void LoadTags(List<string> tags, List<string> indeterminateTags)
         {
             Program.AssertOnEventThread();
 
-            tagsListView.Items.Clear();
+            var rows = new List<TagsDataGridViewRow>();
 
             foreach (string tag in Tags.GetAllTags())
             {
-                TagsListViewItem item = (TagsListViewItem)tagsListView.Items.Add(new TagsListViewItem(tag));
-
+                var checkState = CheckState.Unchecked;
                 if (tags.Contains(tag))
                 {
-                    item.Checked = CheckState.Checked;
+                    checkState = CheckState.Checked;
                 }
                 else if (indeterminateTags.Contains(tag))
                 {
-                    item.Checked = CheckState.Indeterminate;
+                    checkState = CheckState.Indeterminate;
                 }
 
-                item.Text = tag;
+                var item = new TagsDataGridViewRow { Checked = checkState, Text = tag };
+                rows.Add(item);
             }
             foreach (string tag in tags)   // We need to include these too, because they may have been recently added and not yet got into GetAllTags()
             {
-                if (!TagPresent(tag))
+                if (FindTag(tag, rows) == null)
                 {
-                    TagsListViewItem item = (TagsListViewItem)tagsListView.Items.Add(new TagsListViewItem(tag));
-                    item.Checked = CheckState.Checked;
-                    item.Text = tag;
+                    var item = new TagsDataGridViewRow { Checked = CheckState.Checked, Text = tag};
+                    rows.Add(item);
                 }
             }
-            SortList();
+            DisplayList(rows);
         }
 
+        private void ToggleItems(System.Collections.IList items)
+        {
+            var allChecked = true;
+            foreach (TagsDataGridViewRow item in items)
+            {
+                if (item.Checked != CheckState.Checked)
+                {
+                    allChecked = false;
+                    break;
+                }
+            }
+
+            foreach (TagsDataGridViewRow item in items)
+                item.Checked = allChecked ? CheckState.Unchecked : CheckState.Checked;
+        }
+
+        #region Event handlers
+        
         private void NewTagDialog_Activated(object sender, EventArgs e)
         {
             textBox1.Focus();
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -302,161 +196,131 @@ namespace XenAdmin.Dialogs
             AddTag();
         }
 
-        private void renameButton_Click(object sender, EventArgs e)
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (tagsListView.SelectedItems.Count == 1)
+            if ((e.KeyChar == (char)Keys.Enter || e.KeyChar == (char)Keys.Return) && addButton.Enabled)
             {
-                tagsListView.SelectedItems[0].BeginEdit();
-            }
-        }
-
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            if (tagsListView.SelectedItems.Count == 1)
-            {
-                string tag = tagsListView.SelectedItems[0].Text;
-
-                DialogResult result;
-                using (var  tbd = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_TAG, tag), Messages.CONFIRM_DELETE_TAG_TITLE),
-                    new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
-                    ThreeButtonDialog.ButtonCancel))
-                {
-                    result = tbd.ShowDialog(this);
-                }
-
-                if (result != DialogResult.OK)
-                    return;
-
-                // Remove the tag from the tagsListView
-                tagsListView.Items.Remove(tagsListView.SelectedItems[0]);
-                setButtonEnablement();
-
-                // Delete the tag from all resources on all servers
-                DelegatedAsyncAction action = new DelegatedAsyncAction(null,
-                    String.Format(Messages.DELETE_ALL_TAG, tag),
-                    String.Format(Messages.DELETING_ALL_TAG, tag),
-                    String.Format(Messages.DELETED_ALL_TAG, tag),
-                    delegate(Session session)
-                    {
-                        Tags.RemoveTagGlobally(tag);
-                    });
-                action.RunAsync();
+                e.Handled = true;
+                AddTag();
             }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            addButton.Enabled = (this.textBox1.Text.Trim() != string.Empty);
+            addButton.Enabled = textBox1.Text.Trim() != string.Empty;
         }
 
-        private void tagsListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            setButtonEnablement();
+            e.IsInputKey = e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return;
         }
 
-        private void setButtonEnablement()
+        private void tagsDataGrid_KeyPress(object sender, KeyPressEventArgs e)
         {
-            renameButton.Enabled = tagsListView.SelectedItems.Count == 1;
-            deleteButton.Enabled = tagsListView.SelectedItems.Count == 1;
-        }
-
-        private void tagsListView_MouseClick(object sender, MouseEventArgs e)
-        {
-            TagsListViewItem item = (TagsListViewItem)tagsListView.GetItemAt(e.X, e.Y);
-
-            if (item != null)
+            if (e.KeyChar == (char)Keys.Space)
             {
-                Rectangle iconRect = tagsListView.GetItemRect(item.Index, ItemBoundsPortion.Icon);
-                Rectangle checkRect = new Rectangle(0, iconRect.Top, iconRect.Left, iconRect.Height);
-
-                // if there's a selection and the clicked item is in the selection, then toggle the
-                // entire selection
-
-                if (checkRect.Contains(e.Location))
-                {
-                    if (tagsListView.SelectedItems.Count > 0 && tagsListView.SelectedItems.Contains(item))
-                    {
-                        ToggleItems(tagsListView.SelectedItems);
-                    }
-                    else
-                    {
-                        item.Toggle();
-                    }
-                }
+                ToggleItems(tagsDataGrid.SelectedRows);
+                e.Handled = true;
             }
         }
 
-        private void tagsListView_KeyDown(object sender, KeyEventArgs e)
+        private void tagsDataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
-            {
-                ToggleItems(tagsListView.SelectedItems);
-            }
-        }
-
-        private void ToggleItems(System.Collections.IList items)
-        {
-            if(items.Count < 1)
+            if (e.ColumnIndex != ColumnChecked.Index || e.RowIndex < 0 || e.RowIndex >= tagsDataGrid.RowCount)
                 return;
 
-            CheckState firstCheckState = ((TagsListViewItem)items[0]).Checked;
-            foreach (TagsListViewItem item in items)
+            var row = tagsDataGrid.Rows[e.RowIndex] as TagsDataGridViewRow;
+            if (row != null)
+                row.Toggle();
+        }
+
+        private void tagsDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.RowIndex1 < 0 || e.RowIndex1 >= tagsDataGrid.RowCount || e.RowIndex2 < 0 || e.RowIndex2 >= tagsDataGrid.RowCount)
+                return;
+
+            var row1 = tagsDataGrid.Rows[e.RowIndex1] as TagsDataGridViewRow;
+            var row2 = tagsDataGrid.Rows[e.RowIndex2] as TagsDataGridViewRow;
+
+            if (row1 != null && row2 != null)
             {
-                item.Toggle(firstCheckState);
+                e.SortResult = row1.CompareTo(row2);
+                e.Handled = true;
             }
         }
 
-        private class TagsListViewItem : ListViewItem
+        #endregion
+
+        public class TagsDataGridViewRow : DataGridViewRow, IComparable<TagsDataGridViewRow>
         {
-            public TagsListViewItem(string text)
-                : base(text)
+            private readonly DataGridViewCheckBoxCell _cellCheckState;
+            private readonly DataGridViewTextBoxCell _cellTag;
+
+            public TagsDataGridViewRow()
             {
-                Checked = CheckState.Unchecked;
+                _cellCheckState = new DataGridViewCheckBoxCell { Value = CheckState.Unchecked, ThreeState = true};
+                _cellTag = new DataGridViewTextBoxCell();
+                Cells.AddRange(_cellCheckState, _cellTag);
             }
 
             public void Toggle()
             {
-                Toggle(Checked);
+                Checked = Checked == CheckState.Checked ? CheckState.Unchecked : CheckState.Checked;
             }
 
-            public void Toggle(CheckState stateToToggleFrom)
-            {
-                StateImageIndex = Convert.ToInt32(!Convert.ToBoolean(stateToToggleFrom));
-            }
-
-            public new CheckState Checked
+            public CheckState Checked
             {
                 get
                 {
-                    if (StateImageIndex == 0)
-                    {
+                    var value = _cellCheckState.Value;
+                    if (value == null)
                         return CheckState.Unchecked;
-                    }
-                    else if (StateImageIndex == 1)
-                    {
-                        return CheckState.Checked;
-                    }
-                    else
-                    {
-                        return CheckState.Indeterminate;
-                    }
+
+                    if (value is CheckState)
+                        return (CheckState)value;
+
+                    if (value is bool)
+                        return (bool)value ? CheckState.Checked : CheckState.Unchecked;
+
+                    return CheckState.Indeterminate;
                 }
-                set
-                {
-                    if (value == CheckState.Unchecked)
-                    {
-                        StateImageIndex = 0;
-                    }
-                    else if (value == CheckState.Checked)
-                    {
-                        StateImageIndex = 1;
-                    }
-                    else
-                    {
-                        StateImageIndex = 2;
-                    }
-                }
+                set { _cellCheckState.Value = value; }
+            }
+
+            public string Text
+            {
+                get { return _cellTag.Value.ToString(); }
+                set { _cellTag.Value = value; }
+            }
+
+            public int CompareTo(TagsDataGridViewRow other)
+            {
+                if (other == null)
+                    throw new ArgumentNullException(string.Format("Compared {0} must not be null.", GetType().Name));
+
+                var checkStateComparer = new SortCheckedStateForTagsHelper();
+                var output = checkStateComparer.Compare(Checked, other.Checked);
+                if (output != 0)
+                    return output;
+
+                return StringUtility.NaturalCompare(Text, other.Text);
+            }
+        }
+
+        private class SortCheckedStateForTagsHelper : IComparer<CheckState>
+        {
+            private static readonly IList<CheckState> Priority = new List<CheckState>
+            {
+                CheckState.Checked,
+                CheckState.Indeterminate,
+                CheckState.Unchecked
+            };
+
+            public int Compare(CheckState a, CheckState b)
+            {
+                var priorityA = Priority.IndexOf(a);
+                var priorityB = Priority.IndexOf(b);
+                return priorityA.CompareTo(priorityB);
             }
         }
     }

@@ -195,10 +195,8 @@ namespace XenAdmin.TabPages
                 {
                     // There is an EnableHAAction or DisableHAAction in progress relating to this connection.
                     // Show some text and disable editing
-                    buttonConfigure.Visible = true;
                     buttonConfigure.Enabled = false;
-                    buttonEnableDisableHa.Visible = true;
-                    buttonEnableDisableHa.Enabled = false;
+                    buttonDisableHa.Enabled = false;
 
                     pictureBoxWarningTriangle.Visible = false;
                     labelStatus.Text = String.Format(action is EnableHAAction ? Messages.HA_PAGE_ENABLING : Messages.HA_PAGE_DISABLING,
@@ -214,16 +212,14 @@ namespace XenAdmin.TabPages
 
                     if (pool.ha_enabled)
                     {
-                        buttonEnableDisableHa.Text = Messages.DISABLE_HA_ELLIPSIS;
-
                         if (PassedRbacChecks())
                         {
                             bool haRestricted = Helpers.FeatureForbidden(pool, Host.RestrictHA);
 
                             buttonConfigure.Visible = !haRestricted;
                             buttonConfigure.Enabled = !haRestricted;
-                            buttonEnableDisableHa.Visible = true;
-                            buttonEnableDisableHa.Enabled = true;
+                            buttonDisableHa.Visible = true;
+                            buttonDisableHa.Enabled = true;
 
                             pictureBoxWarningTriangle.Visible = false;
                             labelStatus.Text = string.Format(haRestricted ? Messages.HA_TAB_CONFIGURED_UNLICENSED : Messages.HA_TAB_CONFIGURED_BLURB, Helpers.GetName(pool).Ellipsise(30));
@@ -231,9 +227,7 @@ namespace XenAdmin.TabPages
                         else
                         {
                             buttonConfigure.Visible = false;
-                            buttonConfigure.Enabled = false;
-                            buttonEnableDisableHa.Visible = false;
-                            buttonEnableDisableHa.Enabled = false;
+                            buttonDisableHa.Visible = false;
 
                             pictureBoxWarningTriangle.Visible = true;
                             labelStatus.Text = String.Format(Messages.RBAC_HA_TAB_WARNING,
@@ -243,21 +237,18 @@ namespace XenAdmin.TabPages
                     }
                     else
                     {
-                        buttonEnableDisableHa.Text = Messages.ENABLE_HA_ELLIPSIS;
-
                         buttonConfigure.Visible = true;
                         buttonConfigure.Enabled = true;
-                        buttonEnableDisableHa.Visible = false;
-                        buttonEnableDisableHa.Enabled = true;
+                        buttonDisableHa.Visible = false;
 
                         pictureBoxWarningTriangle.Visible = false;
                         labelStatus.Text = String.Format(Messages.HAPANEL_BLURB, Helpers.GetName(pool).Ellipsise(30));
                     }
 
-                    if (xenObject is SR)
+                    var sr = xenObject as SR;
+                    if (sr != null)
                     {
                         // Currently unused
-                        SR sr = (SR)xenObject;
                         generateSRHABox(sr);
                     }
                     else if (xenObject is Pool)
@@ -626,7 +617,7 @@ namespace XenAdmin.TabPages
             EditHA(pool);
         }
 
-        private void buttonEnableDisableHa_Click(object sender, EventArgs e)
+        private void buttonDisableHa_Click(object sender, EventArgs e)
         {
             if (pool == null)
                 return;
@@ -638,8 +629,7 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            // Offer to disable HA
-            DialogResult dr;
+            // Confirm the user wants to disable HA
             using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     null,
@@ -649,16 +639,14 @@ namespace XenAdmin.TabPages
                 ThreeButtonDialog.ButtonYes,
                 ThreeButtonDialog.ButtonNo))
             {
-                dr = dlg.ShowDialog(this);
+                if (dlg.ShowDialog(this) != DialogResult.Yes)
+                    return;
             }
-            if (dr != DialogResult.Yes)
-                return;
 
             DisableHAAction action = new DisableHAAction(pool);
             // We will need to re-enable buttons when the action completes
             action.Completed += Program.MainWindow.action_Completed;
             action.RunAsync();
-            Program.MainWindow.UpdateToolbars();
         }
 
         /// <summary>

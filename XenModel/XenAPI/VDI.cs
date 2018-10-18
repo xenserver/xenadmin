@@ -1653,7 +1653,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Load the metadata found on the supplied VDI and return a session reference which can be used in XenAPI calls to query its contents.
+        /// Load the metadata found on the supplied VDI and return a session reference which can be used in API calls to query its contents.
         /// First published in XenServer 6.0.
         /// </summary>
         /// <param name="session">The session</param>
@@ -1667,7 +1667,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Load the metadata found on the supplied VDI and return a session reference which can be used in XenAPI calls to query its contents.
+        /// Load the metadata found on the supplied VDI and return a session reference which can be used in API calls to query its contents.
         /// First published in XenServer 6.0.
         /// </summary>
         /// <param name="session">The session</param>

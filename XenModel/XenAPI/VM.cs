@@ -5008,7 +5008,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Call a XenAPI plugin on this vm
+        /// Call an API plugin on this vm
         /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
@@ -5025,7 +5025,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Call a XenAPI plugin on this vm
+        /// Call an API plugin on this vm
         /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>

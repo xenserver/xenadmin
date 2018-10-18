@@ -904,12 +904,12 @@ namespace XenAdmin.ConsoleView
 
         public void DisableMenuShortcuts()
         {
-            Program.MainWindow.MenuShortcuts = false;
+            Program.MainWindow.MenuShortcutsEnabled = false;
         }
 
         public void EnableMenuShortcuts()
         {
-            Program.MainWindow.MenuShortcuts = true;
+            Program.MainWindow.MenuShortcutsEnabled = true;
         }
 
         protected override void OnGotFocus(EventArgs e)

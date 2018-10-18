@@ -429,7 +429,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Ta&ke a Snapshot...", true),
                     new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Inst&all " + Branding.PRODUCT_BRAND + " Tools...", true),
+                    new ExpectedTextMenuItem("Inst&all " + Branding.PV_TOOLS + "...", true),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", true)
                 });

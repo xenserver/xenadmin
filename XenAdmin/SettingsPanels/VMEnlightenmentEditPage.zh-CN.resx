@@ -142,7 +142,7 @@
     <value>2</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>可以将此 VM 配置为允许 [XenServer] 监视和控制容器。请选择是否应在此 VM 上启用此功能。 </value>
+    <value>可以将此 VM 配置为允许服务器监视和控制容器。请选择是否应在此 VM 上启用此功能。 </value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>

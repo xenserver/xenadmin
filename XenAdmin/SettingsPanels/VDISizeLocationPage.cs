@@ -214,10 +214,10 @@ namespace XenAdmin.SettingsPanels
                 {
                     reqSize = diskSize < 0 ? long.MinValue : long.MaxValue;
                 }
-                long freeSpace = vdi.Connection.Resolve<SR>(vdi.SR).FreeSpace();
-                return reqSize - vdi.virtual_size > freeSpace
-                           ? DiskSizeValidationResult.NotEnoughSpace
-                           : DiskSizeValidationResult.Valid;
+                SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
+                return sr != null && sr.VdiCreationCanProceed(reqSize - vdi.virtual_size)
+                           ? DiskSizeValidationResult.Valid
+                           : DiskSizeValidationResult.NotEnoughSpace;
             }
             return DiskSizeValidationResult.InvalidNumber;
         }

@@ -312,8 +312,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -330,8 +329,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -348,8 +346,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0;
         }
 
         public static bool HavanaOrGreater(IXenConnection conn)
@@ -385,8 +382,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -403,8 +399,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "2.3.50") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "2.3.50") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -421,8 +416,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "2.4.50") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "2.4.50") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -499,8 +493,7 @@ namespace XenAdmin.Core
                 return true;
 
             string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0;
+            return platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0;
         }
 
         /// <summary>
@@ -511,6 +504,23 @@ namespace XenAdmin.Core
         public static bool ClearwaterSp1OrGreater(IXenConnection conn)
         {
             return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_1;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool NaplesOrGreater(IXenConnection conn)
+        {
+            return conn == null || NaplesOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Naples is ver. 3.0.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool NaplesOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return platform_version != null && productVersionCompare(platform_version, "2.9.50") >= 0;
         }
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
@@ -910,12 +920,33 @@ namespace XenAdmin.Core
             return string.Format("{0}{1}", GuiTempObjectPrefix, name);
         }
 
+        public static string GetFriendlyLicenseName(Pool pool)
+        {
+            var hosts = new List<Host>(pool.Connection.Cache.Hosts);
+
+            if (hosts.Count > 0)
+            {
+                var editions = Enum.GetValues(typeof(Host.Edition));
+                foreach (Host.Edition edition in editions)
+                {
+                    Host.Edition edition1 = edition;
+                    Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
+
+                    if (host != null)
+                        return GetFriendlyLicenseName(host);
+                }
+            }
+
+            return Messages.UNKNOWN;
+        }
+
         public static string GetFriendlyLicenseName(Host host)
         {
 			if (string.IsNullOrEmpty(host.edition))
 				return Messages.UNKNOWN;
 
-            string name = PropertyManager.GetFriendlyName("Label-host.edition-" + host.edition);
+            string legacy = NaplesOrGreater(host) ? "" : "legacy-";
+            string name = PropertyManager.GetFriendlyName("Label-host.edition-" + legacy + host.edition);
             return name ?? Messages.UNKNOWN;
         }
 

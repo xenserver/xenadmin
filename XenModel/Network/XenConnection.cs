@@ -449,7 +449,6 @@ namespace XenAdmin.Network
                                     //user cannot provide correct credentials, we d/c now to save the confusion of having the server available
                                     //but unusable.
                                     EndConnect();
-                                    OnConnectionClosed();
                                     throw new CancelledException();
                                 }
                                 break;
@@ -717,22 +716,13 @@ namespace XenAdmin.Network
             }
         }
 
-        /// <summary>
-        /// Equivalent to EndConnect(true).
-        /// i.e. Clears the cache.
-        /// </summary>
-        public void EndConnect()
-        {
-            EndConnect(true);
-        }
-
-        /// <param name="resetState">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
+        /// <param name="clearCache">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
         /// <param name="exiting"></param>
-        public void EndConnect(bool resetState, bool exiting = false)
+        public void EndConnect(bool clearCache = true, bool exiting = false)
         {
             ConnectTask t = connectTask;
             connectTask = null;
-            EndConnect(resetState, t, exiting);
+            EndConnect(clearCache, t, exiting);
         }
 
         /// <summary>
@@ -781,7 +771,7 @@ namespace XenAdmin.Network
             }
 
             _promptForNewPassword = null;
-            OnConnectionStateChanged();
+            OnConnectionClosed();
         }
 
         /// <summary>
@@ -899,7 +889,7 @@ namespace XenAdmin.Network
                 }
                 else if (w.Status == WebExceptionStatus.ReceiveFailure)
                 {
-                    return string.Format(Messages.CONNECT_NO_XAPI_FAILURE, this.Hostname);
+                    return string.Format(Messages.ERROR_NO_XENSERVER, this.Hostname);
                 }
                 else if (w.Status == WebExceptionStatus.SecureChannelFailure)
                 {

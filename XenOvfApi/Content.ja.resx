@@ -229,13 +229,13 @@
     <value>マシン メモリ</value>
   </data>
   <data name="RASD_CONTROLLER_ALLOCATIONUNITS" xml:space="preserve">
-    <value>コントローラ</value>
+    <value>コントローラー</value>
   </data>
   <data name="RASD_CONTROLLER_DESCRIPTION" xml:space="preserve">
-    <value>{0} コントローラ</value>
+    <value>{0} コントローラー</value>
   </data>
   <data name="RASD_CONTROLLER_ELEMENTNAME" xml:space="preserve">
-    <value>{0}  {1} コントローラ</value>
+    <value>{0}  {1} コントローラー</value>
   </data>
   <data name="RASD_CONTROLLER_IDE" xml:space="preserve">
     <value>IDE</value>

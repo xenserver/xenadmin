@@ -289,7 +289,7 @@
     <value>4</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>创建不离开每个 [XenServer] 主机的网络。
+    <value>创建不离开每个服务器的网络。
 此网络可用作同一主机上两个 VM 之间的专用连接。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -432,7 +432,7 @@
     <value>6</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
-    <value>创建不离开 [XenServer] 池的网络。
+    <value>创建不离开池的网络。
 此网络可用作池中的两个 VM 之间的专用连接。
 此类型的网络需要运行 vSwitch Controller。</value>
   </data>
@@ -773,7 +773,7 @@
     <value>0, 32, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 281</value>
+    <value>416, 360</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>选择类型</value>

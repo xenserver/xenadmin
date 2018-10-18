@@ -160,7 +160,7 @@
     <value>X サーバーの認証ファイル</value>
   </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
-    <value>[XenServer] 上にバイナリ オブジェクトとして格納されているユーザー情報を取得します。</value>
+    <value>サーバー上にバイナリ オブジェクトとして格納されているユーザー情報を取得します。</value>
   </data>
   <data name="Description-host.system_status-boot-loader" xml:space="preserve">
     <value>システム起動時に表示される起動オプションおよびその説明の一覧</value>
@@ -259,16 +259,16 @@
     <value>[XenServer] のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール構成などの詳細</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>[XenServer] の状態に関する情報を格納するデータベース</value>
+    <value>サーバーの状態に関する情報を格納するデータベース</value>
   </data>
   <data name="Description-host.system_status-xenserver-domains" xml:space="preserve">
     <value>サーバーにインストールされているゲスト VM とその状態の一覧</value>
   </data>
   <data name="Description-host.system_status-xenserver-install" xml:space="preserve">
-    <value>[XenServer] インストール時のログ ファイル</value>
+    <value>サーバー インストール時のログ ファイル</value>
   </data>
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>[XenServer] のアクティビティに関するログ ファイル</value>
+    <value>サーバーのアクティビティに関するログ ファイル</value>
   </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性ライブセット</value>
@@ -543,8 +543,8 @@
   <data name="Label-host.edition" xml:space="preserve">
     <value>ライセンス</value>
   </data>
-  <data name="Label-host.edition-free" xml:space="preserve">
-    <value>[XenServer product]</value>
+  <data name="Label-host.edition-express" xml:space="preserve">
+    <value>[XenServer product] Express</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>有効</value>
@@ -586,13 +586,13 @@
     <value>プール メンバー</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
-    <value>[XenServer] ビルド番号</value>
+    <value>ビルド番号</value>
   </data>
   <data name="Label-host.software_version-date" xml:space="preserve">
-    <value>[XenServer] ビルド日</value>
+    <value>ビルド日</value>
   </data>
   <data name="Label-host.software_version-product_version" xml:space="preserve">
-    <value>[XenServer] バージョン</value>
+    <value>バージョン</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
     <value>[Citrix] StorageLink 構成</value>
@@ -1023,7 +1023,7 @@
     <value>プール '{0}'のサーバーでハートビート SR にアクセスできません。このため、高可用性による保護に問題が生じます。</value>
   </data>
   <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>サーバー '{0}' 上の [XenServer] で応答に時間がかかっています。隔離される可能性があります。</value>
+    <value>サーバー '{0}' の応答に時間がかかっています。隔離される可能性があります。</value>
   </data>
   <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
     <value>サーバー '{0}' の時計がプール '{1}' のほかのサーバーと同期していません。これにより、仮想マシンの移行や収集されるパフォーマンス データに問題が生じる場合があります。</value>
@@ -1035,7 +1035,7 @@
     <value>プール内でのパフォーマンス統計値の同期に一時的な障害が発生しました。一部のサーバーがオフラインであることが考えられます。</value>
   </data>
   <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
-    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。このため、[XenServer product] Enterprise の機能は使用できなくなりました。</value>
+    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。プール機能はサポートされなくなりました。</value>
   </data>
   <data name="Message.body-license_expired" xml:space="preserve">
     <value>{0} のライセンスの有効期限が切れました。</value>
@@ -1122,7 +1122,7 @@
     <value>仮想マシン '{0}' のメモリ使用が要求どおりに減少しませんでした。</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>使用中の [XenServer] ライセンスでは、スナップショット スケジュール機能を使用できません。</value>
+    <value>使用中のサーバー ライセンスでは、スナップショット スケジュール機能を使用できません。</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>スナップショットが作成できなかったため、スナップショット スケジュール '{0}' が失敗しました。</value>
@@ -1245,7 +1245,7 @@
     <value>ハートビート SR のアクセス不可</value>
   </data>
   <data name="Message.name-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>[XenServer] ヘルスチェックのタイムアウト</value>
+    <value>サーバーのヘルスチェックのタイムアウト</value>
   </data>
   <data name="Message.name-host_clock_skew_detected" xml:space="preserve">
     <value>サーバーの時計の非同期</value>
@@ -1254,7 +1254,7 @@
     <value>サーバーの時計が戻されました</value>
   </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
-    <value>[XenServer] 統計値の同期の失敗</value>
+    <value>サーバー統計値の同期の失敗</value>
   </data>
   <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
     <value>ネットワーク構成の問題</value>
@@ -1374,11 +1374,11 @@
     <value>WLB VM 再配置</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
-    <value>プール管理者には、[XenServer] のすべての機能および設定に対する完全なアクセス権が付与されます。プール管理者は、[XenServer] コンソールを使ってほかのユーザーの役割を管理できます。
+    <value>プール管理者には、すべての機能および設定に対する完全なアクセス権が付与されます。プール管理者は、サーバー コンソールを使ってほかのユーザーの役割を管理できます。
  
 - 無制限
 - 役割およびユーザーの管理
-- [XenServer] コンソールへのアクセス</value>
+- サーバー コンソールへのアクセス</value>
   </data>
   <data name="Role.pool-admin.NameLabel" xml:space="preserve">
     <value>プール管理者</value>
@@ -1402,7 +1402,7 @@
     <value>読み取り専用</value>
   </data>
   <data name="Role.vm-admin.Description" xml:space="preserve">
-    <value>VM 管理者は、VM およびテンプレートを管理でき、必要なストレージにアクセスできます。各 VM の実行サーバーの選択は [XenServer] に依存し、動的メモリ制御 (DMC) やホーム サーバーの設定はテンプレートに依存します。
+    <value>VM 管理者は、VM およびテンプレートを管理でき、必要なストレージにアクセスできます。各 VM の実行サーバーの選択はサーバーに依存し、動的メモリ制御 (DMC) やホーム サーバーの設定はテンプレートに依存します。
  
 - VM およびテンプレートの管理
 - 動的メモリ制御は不可
@@ -1455,7 +1455,7 @@
     <value>{0} のローカル ストレージ</value>
   </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>[XenServer product] Tools ISO</value>
+    <value>[Citrix VM Tools] ISO</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1482,7 +1482,7 @@
     <value>{0} のローカル ストレージ</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>[XenServer product] Tools</value>
+    <value>[Citrix VM Tools]</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux 仮想マシンを作成できます。業務での使用は推奨されません。</value>
@@ -1551,7 +1551,7 @@
     <value>[XenServer product] Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>[XenServer product] for XenDesktop</value>
+    <value>[XenServer product] for [Citrix] Virtual Desktops</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>AD のヘルプ</value>
@@ -1622,11 +1622,11 @@
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
     <value>ライセンス サーバーのバージョンが古すぎます。</value>
   </data>
-  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-Socket</value>
+  <data name="Label-host.edition-premium-per-socket" xml:space="preserve">
+    <value>[XenServer product] Premium Per-Socket</value>
   </data>
-  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-User</value>
+  <data name="Label-host.edition-premium-per-user" xml:space="preserve">
+    <value>[XenServer product] Premium Per-User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
     <value>[XenServer product] Standard Per-Socket</value>
@@ -1650,10 +1650,10 @@
     <value>ライセンスのヘルプ</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>XenApp/XenDesktop</value>
+    <value>[Citrix] Virtual Apps and Desktops</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>XenApp/XenDesktop Platinum</value>
+    <value>[Citrix] Virtual Apps and Desktops Premium</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>インストールされたサプリメンタル パック</value>
@@ -1752,22 +1752,22 @@
     <value>ボリューム マネージャーのログ</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Ultimate Edition</value>
+    <value>[Citrix XenServer] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Basic Edition</value>
+    <value>[Citrix XenServer] Basic Edition</value>
   </data>
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>コンテナー管理のログ</value>
   </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
-    <value>[XenServer] とインターネットの間の接続をテスト</value>
+    <value>サーバーとインターネットの間の接続をテスト</value>
   </data>
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>接続テスト</value>
   </data>
   <data name="Label-host.edition-standard" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Standard Edition</value>
+    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>必要なアップデート</value>
@@ -1854,6 +1854,48 @@
     <value>GFS2</value>
   </data>
   <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud</value>
+  </data>
+  <data name="Label-host.edition-legacy-basic" xml:space="preserve">
+    <value>[Citrix XenServer] Basic Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop" xml:space="preserve">
+    <value>XenApp/XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop-cloud" xml:space="preserve">
     <value>XenApp/XenDesktop [Citrix] Cloud</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop-plus" xml:space="preserve">
+    <value>XenApp/XenDesktop Platinum</value>
+  </data>
+  <data name="Label-host.edition-legacy-enterprise-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Enterprise Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-enterprise-per-user" xml:space="preserve">
+    <value>[Legacy XenServer product] Enterprise Per-User</value>
+  </data>
+  <data name="Label-host.edition-legacy-free" xml:space="preserve">
+    <value>[Legacy XenServer product]</value>
+  </data>
+  <data name="Label-host.edition-legacy-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-premium" xml:space="preserve">
+    <value>[Citrix XenServer] Ultimate Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-standard" xml:space="preserve">
+    <value>[Citrix XenServer] Standard Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-standard-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Standard Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-xendesktop" xml:space="preserve">
+    <value>[Legacy XenServer product] for XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Premium Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>[Legacy XenServer product] Premium Per-User</value>
   </data>
 </root>

@@ -41,5 +41,6 @@ namespace XenServerHealthCheck
     {
         public const string PRODUCT_BRAND = "[XenServer product]";
         public const string COMPANY_NAME_SHORT = "[Citrix]";
+        public const string COMPANY_AND_PRODUCT_BRAND = "[Citrix XenServer]";
     }
 }

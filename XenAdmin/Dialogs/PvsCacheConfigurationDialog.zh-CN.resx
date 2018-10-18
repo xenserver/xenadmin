@@ -376,7 +376,7 @@
     <value>8</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>通过选择内存或存储库以及要为每个站点和每个 [XenServer] 分配的空间量来指定要用于 PVS 加速器的缓存配置。</value>
+    <value>通过选择内存或存储库以及要为每个站点和每个服务器分配的空间量来指定要用于 PVS 加速器的缓存配置。</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
