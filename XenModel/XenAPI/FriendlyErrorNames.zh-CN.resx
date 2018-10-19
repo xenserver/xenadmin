@@ -531,6 +531,9 @@
   <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
     <value>可用内存不足</value>
   </data>
+  <data name="HOST_NOT_ENOUGH_PCPUS" xml:space="preserve">
+    <value>主机的 pCPU 数量不足，无法运行 VM。所需的 pCPU 数量至少与 VM 拥有的 vCPU 数量相同。</value>
+  </data>
   <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
     <value>无法执行还原，因为服务器未处于恢复模式</value>
   </data>

@@ -531,6 +531,9 @@
   <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
     <value>十分な空きメモリがありません。</value>
   </data>
+  <data name="HOST_NOT_ENOUGH_PCPUS" xml:space="preserve">
+    <value>ホストには、仮想マシンの実行に必要な数の pCPU がありません。少なくとも vCPU と同じ数が必要です。</value>
+  </data>
   <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
     <value>サーバーがリカバリ モードで動作しているため、復元を実行できません。</value>
   </data>
