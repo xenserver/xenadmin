@@ -39,6 +39,7 @@ using XenAPI;
 using System.Collections.Generic;
 using XenAdmin;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.XenSearch;
 
@@ -585,8 +586,11 @@ namespace XenAdminTests.TabsAndMenus
                 var vdis = GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot);
                 foreach (VDI v in vdis)
                 {
+                    var canBeMigrated = !Helpers.FeatureForbidden(v.Connection, Host.RestrictCrossPoolMigrate);
+                    var canBeMoved = v.GetVMs().All(vm => vm.power_state == vm_power_state.Halted);
+
                     VerifyContextMenu(v, new ExpectedMenuItem[] {
-                        new ExpectedTextMenuItem("&Move Virtual Disk...", true),//can migrate 
+                        new ExpectedTextMenuItem("&Move Virtual Disk...", canBeMigrated || canBeMoved),
                         new ExpectedTextMenuItem("&Delete Virtual Disk", v.allowed_operations.Contains(vdi_operations.destroy)),
                         new ExpectedSeparator(),
                         new ExpectedTextMenuItem("P&roperties", true),
