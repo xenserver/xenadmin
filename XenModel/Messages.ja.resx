@@ -2468,9 +2468,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>スナップショット ディスクは移動できません</value>
   </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>この仮想ディスクの接続を解除してから移動してください。</value>
-  </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>XML ノード '{0}' の必須パラメーター '{1}' を解析できません。</value>
   </data>
