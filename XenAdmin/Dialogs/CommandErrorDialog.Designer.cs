@@ -135,7 +135,6 @@ namespace XenAdmin.Dialogs
             // 
             this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(4);
             this.colImage.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colImage, "colImage");
