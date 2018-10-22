@@ -103,8 +103,6 @@
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
     <Compile Include="Actions\GUIActions\RestoreDismissedUpdatesAction.cs" />
     <Compile Include="Actions\GUIActions\MeddlingAction.cs" />
-    <Compile Include="Actions\GUIActions\IgnoreServerAction.cs" />
-    <Compile Include="Actions\GUIActions\IgnorePatchAction.cs" />
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
