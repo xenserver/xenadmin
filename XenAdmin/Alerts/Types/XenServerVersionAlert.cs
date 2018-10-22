@@ -105,10 +105,10 @@ namespace XenAdmin.Alerts
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
+            if (other_config.ContainsKey(Updates.LAST_SEEN_SERVER_VERSION_KEY))
             {
-                List<string> current = new List<string>(other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
-                if (current.Contains(Version.VersionAndOEM))
+                List<string> current = new List<string>(other_config[Updates.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
+                if (current.Contains(Version.Version.ToString()))
                     return true;
             }
             return false;
@@ -118,7 +118,7 @@ namespace XenAdmin.Alerts
         {
             if (other is XenServerVersionAlert)
             {
-                return Version.VersionAndOEM == ((XenServerVersionAlert)other).Version.VersionAndOEM;
+                return Version.Version.ToString() == ((XenServerVersionAlert)other).Version.Version.ToString();
             }
             return base.Equals(other);
         }
