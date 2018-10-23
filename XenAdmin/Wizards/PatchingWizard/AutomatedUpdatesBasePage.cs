@@ -236,66 +236,71 @@ namespace XenAdmin.Wizards.PatchingWizard
                 newVal = 100;
             progressBar.Value = (int)newVal;
         }
+        private StringBuilder FindBackgroundWorkerInfo(UpdateProgressBackgroundWorker bgw)
+        {
+            int bgwErrorCount = 0;
+            int bgwCancellationCount = 0;
+            var sb = new StringBuilder();
+            var errorSb = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(bgw.Name))
+                sb.AppendLine(string.Format("{0}:", bgw.Name));
+
+            foreach (var pa in bgw.DoneActions)
+            {
+                pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+
+                if (pa.Error != null)
+                {
+                    if (pa.Error is CancelledException)
+                    {
+                        bgwCancellationCount++;
+                        continue;
+                    }
+
+                    var innerEx = pa.Error.InnerException as Failure;
+                    errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
+                    bgwErrorCount++;
+                }
+            }
+
+            foreach (var pa in bgw.InProgressActions)
+            {
+                pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+            }
+
+            sb.AppendLine();
+
+            if (bgwCancellationCount > 0)
+            {
+                sb.AppendIndented(UserCancellationMessage()).AppendLine();
+            }
+            else if (bgwErrorCount > 0)
+            {
+                sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
+                sb.AppendIndented(errorSb);
+            }
+            else if (!bgw.IsBusy)
+            {
+                sb.AppendIndented(SuccessMessagePerPool(bgw.Pool)).AppendLine();
+            }
+
+            sb.AppendLine();
+
+            return sb;
+        }
 
         private void UpdateStatus()
         {
             UpdateProgressBar();
+            
+            var backgroundWorkersInfo = backgroundWorkers.Select(FindBackgroundWorkerInfo).ToList();
 
             var allsb = new StringBuilder();
-
-            foreach (var bgw in backgroundWorkers)
+            foreach (var sb in backgroundWorkersInfo)
             {
-                int bgwErrorCount = 0;
-                int bgwCancellationCount = 0;
-                var sb = new StringBuilder();
-                var errorSb = new StringBuilder();
-
-                if (!string.IsNullOrEmpty(bgw.Name))
-                    sb.AppendLine(string.Format("{0}:", bgw.Name));
-
-                foreach (var pa in bgw.DoneActions)
-                {
-                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
-
-                    if (pa.Error != null)
-                    {
-                        if (pa.Error is CancelledException)
-                        {
-                            bgwCancellationCount++;
-                            continue;
-                        }
-
-                        var innerEx = pa.Error.InnerException as Failure;
-                        errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
-                        bgwErrorCount++;
-                    }
-                }
-
-                foreach (var pa in bgw.InProgressActions)
-                {
-                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
-                }
-
-                sb.AppendLine();
-
-                if (bgwCancellationCount > 0)
-                {
-                    sb.AppendIndented(UserCancellationMessage()).AppendLine();
-                }
-                else if (bgwErrorCount > 0)
-                {
-                    sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
-                    sb.AppendIndented(errorSb);
-                }
-                else if (!bgw.IsBusy)
-                {
-                    sb.AppendIndented(SuccessMessagePerPool(bgw.Pool)).AppendLine();
-                }
-
-                sb.AppendLine();
                 allsb.Append(sb);
             }
-
             textBoxLog.Text = allsb.ToString();
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
