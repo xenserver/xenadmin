@@ -80,7 +80,7 @@ namespace XenAdmin.ServerDBs
                             if(string.IsNullOrEmpty(name))
                                 continue;
 
-                            row.Props.Add(name, a.Value);
+                            row.Props.Add(name, SanitizePropertyValue(a.Value));
                         }
                     }
 
@@ -126,6 +126,24 @@ namespace XenAdmin.ServerDBs
                 default:
                     return prop;
             }
+        }
+
+        private string SanitizePropertyValue(string value)
+        {
+            var escapedCharacters = new Dictionary<string, string>
+            {
+                { "%.", " " },
+                { "%t", "\t" },
+                { "%n", "\n" },
+                { "%r", "\r" },
+                { "%%", "%" }
+            };
+            string newValue = value;
+            foreach (var escapedCharacter in escapedCharacters)
+            {
+                newValue = newValue.Replace(escapedCharacter.Key, escapedCharacter.Value);
+            }
+            return newValue;
         }
 
         private static XmlNode GetDatabaseNode(XmlNode doc)
