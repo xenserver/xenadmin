@@ -133,9 +133,9 @@ namespace XenAdmin.Dialogs
             // 
             // colImage
             // 
-            this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(4);
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
             this.colImage.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colImage, "colImage");
             this.colImage.Name = "colImage";
@@ -145,6 +145,7 @@ namespace XenAdmin.Dialogs
             // colName
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.colName.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colName, "colName");
             this.colName.Name = "colName";
@@ -153,6 +154,8 @@ namespace XenAdmin.Dialogs
             // colReason
             // 
             this.colReason.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.colReason.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.colReason, "colReason");
