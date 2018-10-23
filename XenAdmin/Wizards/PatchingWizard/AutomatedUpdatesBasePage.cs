@@ -236,6 +236,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 newVal = 100;
             progressBar.Value = (int)newVal;
         }
+
         private StringBuilder FindBackgroundWorkerInfo(UpdateProgressBackgroundWorker bgw)
         {
             int bgwErrorCount = 0;
@@ -293,7 +294,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void UpdateStatus()
         {
             UpdateProgressBar();
-            
+
             var backgroundWorkersInfo = backgroundWorkers.Select(FindBackgroundWorkerInfo).ToList();
 
             var allsb = new StringBuilder();
