@@ -33640,6 +33640,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Interface {0}: Network = {1}.
+        /// </summary>
+        public static string TEMPLATE_INFO_VIF {
+            get {
+                return ResourceManager.GetString("TEMPLATE_INFO_VIF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must install the Linux pack to use this template.
         /// </summary>
         public static string TEMPLATE_LINUX_PACK_NEEDED {
@@ -33658,20 +33667,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Terminating sessions....
+        ///   Looks up a localized string similar to Terminating session for user &apos;{0}&apos;.
         /// </summary>
-        public static string TERMINATING_SESSIONS {
+        public static string TERMINATING_USER_SESSION {
             get {
-                return ResourceManager.GetString("TERMINATING_SESSIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Interface {0}: Network = {1}.
-        /// </summary>
-        public static string TERMPLATE_INFO_VIF {
-            get {
-                return ResourceManager.GetString("TERMPLATE_INFO_VIF", resourceCulture);
+                return ResourceManager.GetString("TERMINATING_USER_SESSION", resourceCulture);
             }
         }
         

@@ -92,7 +92,7 @@ namespace XenAdmin.TabPages
             if (action == null)
                 return;
 
-            Program.BeginInvoke(Program.MainWindow,
+            Program.Invoke(Program.MainWindow,
                            () =>
                            {
                                int count = ConnectionsManager.History.Count;
