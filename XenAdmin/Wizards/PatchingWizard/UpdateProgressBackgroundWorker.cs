@@ -66,6 +66,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public double ProgressIncrement { get; set; }
 
+        public PlanAction FirstFailedSkippableAction { get; set; }
+
         public UpdateProgressBackgroundWorker(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             Pool = pool;
@@ -73,9 +75,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             HostPlans = planActions ?? new List<HostPlan>();
             FinalActions = finalActions ?? new List<PlanAction>();
             CleanupActions = FinalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
+            FirstFailedSkippableAction = null;
         }
 
-        public void RunPlanAction(PlanAction action, ref DoWorkEventArgs e, bool skip = false)
+        public void RunPlanAction(PlanAction action, ref DoWorkEventArgs e)
         {
             if (CancellationPending)
             {
@@ -91,18 +94,15 @@ namespace XenAdmin.Wizards.PatchingWizard
             DoneActions.Remove(action);
             action.Error = null;
 
-            if (skip)
+            if (action == FirstFailedSkippableAction)
             {
-                //skip running it, but still need to report progress, mainly for the progress bar
-                PercentComplete += ProgressIncrement * 100;
-                ReportProgress((int)PercentComplete, action);
+                FirstFailedSkippableAction = null;
+                action.Skipping = true;
             }
-            else
-            {
-                action.OnProgressChange += action_OnProgressChange;
-                action.Run();
-                action.OnProgressChange -= action_OnProgressChange;
-            }
+
+            action.OnProgressChange += action_OnProgressChange;
+            action.Run();
+            action.OnProgressChange -= action_OnProgressChange;
         }
 
         private void action_OnProgressChange(PlanAction planAction)

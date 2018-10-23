@@ -30,9 +30,9 @@
  */
 
 using System;
-using System.Collections.Generic;
 using XenAdmin.Network;
 using XenAPI;
+
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
@@ -52,7 +52,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected sealed override void _Run()
         {
             Session session = Connection.DuplicateSession();
-
             RunWithSession(ref session);
         }
 

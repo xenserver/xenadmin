@@ -7967,6 +7967,26 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>Could not save session</value>
   </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>By pressing Yes, the following step will be skipped:
+    
+{0}
+
+Do you want to continue?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>By pressing Yes, the following steps will be skipped:
+    
+{0}
+
+Do you want to continue?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP_TITLE" xml:space="preserve">
+    <value>Skip Rolling Pool Upgrade Step</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS_TITLE" xml:space="preserve">
+    <value>Skip Rolling Pool Upgrade Steps</value>
+  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>You must eject all slaves from the pool before you can delete the pool.</value>
   </data>
@@ -10682,10 +10702,10 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>No longer connected to {0}. Please review your selection and try again.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>The rolling pool upgrade process was not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+    <value>The rolling pool upgrade process was not completed successfully. The upgrade process has been paused.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>The following errors occurred while rolling pool upgrade was in progress:</value>
@@ -10746,6 +10766,15 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>{0} could be skipped.</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>Installing update '{0}' on '{1}'</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>Skipping installing update '{0}' on '{1}'...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
@@ -12158,7 +12187,7 @@ Check your settings and try again.</value>
     <value>Deleting update installation file {0} from {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>Removing update file {0} from {1}...</value>
+    <value>Removing update file {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>
