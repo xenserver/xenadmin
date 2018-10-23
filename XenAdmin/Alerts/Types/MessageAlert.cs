@@ -322,8 +322,11 @@ namespace XenAdmin.Alerts
             }
         }
 
-        private IEnumerable<string> FindHostUuids(IEnumerable<string> lines)
+        public static IEnumerable<string> FindHostUuids(IEnumerable<string> lines)
         {
+            if (lines == null)
+                return Enumerable.Empty<string>();
+
             return lines
                 .Select(s => multipathRegex.Match(s))
                 .Where(m => m.Success)
