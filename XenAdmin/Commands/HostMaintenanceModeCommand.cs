@@ -97,9 +97,8 @@ namespace XenAdmin.Commands
             {
                 Program.MainWindow.CloseActiveWizards(host.Connection);
                 var action = new EvacuateHostAction(host, null, new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
-                action.Completed += delegate { MainWindowCommandInterface.RequestRefreshTreeView(); };
+                action.Completed += Program.MainWindow.action_Completed;
                 action.RunAsync();
-                MainWindowCommandInterface.RequestRefreshTreeView();
                 return;
             }
             
