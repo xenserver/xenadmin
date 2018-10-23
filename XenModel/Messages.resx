@@ -11655,17 +11655,17 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPUs: {0}</value>
   </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>Interface {0}: Network = {1}</value>
+  </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>You must install the Linux pack to use this template</value>
   </data>
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;no description&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>Terminating sessions...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>Interface {0}: Network = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>Terminating session for user '{0}'</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>Test archive target location</value>
