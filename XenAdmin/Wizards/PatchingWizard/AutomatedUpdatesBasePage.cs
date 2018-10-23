@@ -227,7 +227,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private void UpdateStatus()
+        private void UpdateProgressBar()
         {
             var newVal = backgroundWorkers.Sum(b => b.PercentComplete) / backgroundWorkers.Count;
             if (newVal < 0)
@@ -235,6 +235,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (newVal > 100)
                 newVal = 100;
             progressBar.Value = (int)newVal;
+        }
+
+        private void UpdateStatus()
+        {
+            UpdateProgressBar();
 
             var allsb = new StringBuilder();
 
