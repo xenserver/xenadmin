@@ -37,7 +37,7 @@ using XenAdmin.Alerts;
 namespace XenAdminTests.UnitTests.AlertTests
 {
     [TestFixture, Category(TestCategories.Unit)]
-    public class MessageAlertTest
+    public class MultipathAlertTest
     {
         [Test]
         public void TestFindHostUuidsTestGivenNull()
