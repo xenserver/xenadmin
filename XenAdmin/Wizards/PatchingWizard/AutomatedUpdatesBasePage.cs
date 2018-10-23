@@ -40,6 +40,7 @@ using XenAPI;
 using System.Linq;
 using XenAdmin.Core;
 using System.Text;
+using System.Windows.Forms;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
 
@@ -305,6 +306,29 @@ namespace XenAdmin.Wizards.PatchingWizard
             textBoxLog.Text = allsb.ToString();
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
+
+            try
+            {
+                dataGridLog.SuspendLayout();
+                dataGridLog.Rows.Clear();
+
+                /*
+                foreach (var bgw in backgroundWorkers)
+                {
+                    bgw, sb.ToString();
+                }
+                */
+                //TODO: Display poolInfo.
+                //Columns: Message, Server / Pool, Actions (Retry/Skip)
+
+                var rows = backgroundWorkersInfo.Zip(backgroundWorkers, (info, bgw) => CreateUpdateLocationRow(bgw, info));
+                //var rows = backgroundWorkers.Select(a => CreateUpdateLocationRow(a, poolInfo[a.Name])).ToList();
+                dataGridLog.Rows.AddRange(rows.ToArray());
+            }
+            finally
+            {
+                dataGridLog.ResumeLayout();
+            }
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
@@ -584,6 +608,32 @@ namespace XenAdmin.Wizards.PatchingWizard
                 default:
                     return null;
             }
+        }
+
+        private DataGridViewUpdateLocationRow CreateUpdateLocationRow(UpdateProgressBackgroundWorker bgw, StringBuilder sb)
+        {
+            var row = new DataGridViewUpdateLocationRow(bgw, sb);
+            //row.Message = sb.ToString();
+            //row.Visible = !FilterAction(action);
+            //row.DismissalRequested += row_DismissalRequested;
+            //row.GoToXenObjectRequested += row_GoToXenObjectRequested;
+            return row;
+        }
+    }
+
+    public class DataGridViewUpdateLocationRow : DataGridViewRow
+    {
+        private readonly BackgroundWorker _bgw;
+        private readonly DataGridViewTextBoxCell _messageCell = new DataGridViewTextBoxCell();
+        private readonly DataGridViewTextBoxCell _locationCell = new DataGridViewTextBoxCell();
+        private readonly DataGridViewDropDownSplitButtonCell _actionCell = new DataGridViewDropDownSplitButtonCell();
+
+        public DataGridViewUpdateLocationRow(UpdateProgressBackgroundWorker bgw, StringBuilder sb)
+        {
+            _bgw = bgw;
+            Cells.AddRange(_messageCell, _locationCell, _actionCell);
+            _messageCell.Value = sb.ToString();
+            _locationCell.Value = bgw.Name;
         }
     }
 }
