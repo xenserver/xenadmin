@@ -613,8 +613,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private DataGridViewUpdateLocationRow CreateUpdateLocationRow(UpdateProgressBackgroundWorker bgw, StringBuilder sb)
         {
-            var row = new DataGridViewUpdateLocationRow(bgw, sb);
-            //row.Message = sb.ToString();
+            var row = new DataGridViewUpdateLocationRow { Message = sb.ToString(), Location = bgw.Name };
             //row.Visible = !FilterAction(action);
             //row.DismissalRequested += row_DismissalRequested;
             //row.GoToXenObjectRequested += row_GoToXenObjectRequested;
@@ -624,22 +623,29 @@ namespace XenAdmin.Wizards.PatchingWizard
 
     public class DataGridViewUpdateLocationRow : DataGridViewExRow
     {
-        private readonly BackgroundWorker _bgw;
         private DataGridViewTextBoxCell _messageCell;
         private DataGridViewTextBoxCell _locationCell;
         private DataGridViewDropDownSplitButtonCell _actionCell;
 
-        public DataGridViewUpdateLocationRow(UpdateProgressBackgroundWorker bgw, StringBuilder sb)
+        public DataGridViewUpdateLocationRow()
         {
-            _bgw = bgw;
-
             _messageCell = new DataGridViewTextBoxCell();
             _locationCell = new DataGridViewTextBoxCell();
             _actionCell = new DataGridViewDropDownSplitButtonCell();
 
             Cells.AddRange(_messageCell, _locationCell, _actionCell);
-            _messageCell.Value = sb.ToString();
-            _locationCell.Value = bgw.Name;
+        }
+
+        public string Message
+        {
+            get { return _messageCell.Value.ToString(); }
+            set { _messageCell.Value = value; }
+        }
+
+        public string Location
+        {
+            get { return _locationCell.Value.ToString(); }
+            set { _locationCell.Value = value; }
         }
     }
 }
