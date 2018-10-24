@@ -8908,9 +8908,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>新規仮想ネットワーク インターフェイス - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>ディスクの作成先のストレージ リポジトリを選択してください</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>[Citrix VM Tools] のインストール先の仮想マシンに DVD ドライブがないものがあります。必要に応じて新しい DVD ドライブを作成してもよろしいですか?</value>
   </data>
