@@ -677,7 +677,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<ToolStripItem> Actions
         {
-            set { _actionCell.RefreshItems(value.ToArray()); }
+            get { return _actionCell.ContextMenu.Items.Cast<ToolStripItem>().ToList(); }
+            set
+            {
+                if (Actions.SequenceEqual(value))
+                    return;
+                _actionCell.RefreshItems(value.ToArray());
+            }
         }
 
         public void RefreshSelf()
