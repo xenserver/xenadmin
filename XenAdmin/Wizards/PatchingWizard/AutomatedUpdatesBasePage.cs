@@ -324,6 +324,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var rows = backgroundWorkersInfo.Zip(backgroundWorkers, (info, bgw) => CreateUpdateLocationRow(bgw, info));
                 //var rows = backgroundWorkers.Select(a => CreateUpdateLocationRow(a, poolInfo[a.Name])).ToList();
+
+                //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
+                if (dataGridLog.ColumnCount == 0)
+                    return;
+
                 dataGridLog.Rows.AddRange(rows.ToArray());
             }
             finally
