@@ -623,9 +623,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
     public class DataGridViewUpdateLocationRow : DataGridViewExRow
     {
-        private DataGridViewTextBoxCell _messageCell;
-        private DataGridViewTextBoxCell _locationCell;
-        private DataGridViewDropDownSplitButtonCell _actionCell;
+        private readonly DataGridViewTextBoxCell _messageCell;
+        private readonly DataGridViewTextBoxCell _locationCell;
+        private readonly DataGridViewDropDownSplitButtonCell _actionCell;
 
         public DataGridViewUpdateLocationRow()
         {
