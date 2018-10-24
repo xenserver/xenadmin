@@ -45,6 +45,15 @@ namespace XenAdmin.ServerDBs
     /// </summary>
     class StatusReportXmlDocReader
     {
+        private static readonly Dictionary<string, string> escapedCharacters = new Dictionary<string, string>
+        {
+            { "%.", " " },
+            { "%t", "\t" },
+            { "%n", "\n" },
+            { "%r", "\r" },
+            { "%%", "%" }
+        };
+
         /// <summary>
         /// Populates the specified Db with the specified XML document.
         /// </summary>
@@ -130,14 +139,6 @@ namespace XenAdmin.ServerDBs
 
         private string SanitizePropertyValue(string value)
         {
-            var escapedCharacters = new Dictionary<string, string>
-            {
-                { "%.", " " },
-                { "%t", "\t" },
-                { "%n", "\n" },
-                { "%r", "\r" },
-                { "%%", "%" }
-            };
             string newValue = value;
             foreach (var escapedCharacter in escapedCharacters)
             {
