@@ -8906,9 +8906,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>新建虚拟网络接口 - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>选择要创建磁盘的存储库</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>在要安装 [Citrix VM Tools] 的 VM 中，至少有一个 VM 没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
   </data>
