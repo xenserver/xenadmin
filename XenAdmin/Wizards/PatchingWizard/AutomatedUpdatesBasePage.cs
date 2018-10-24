@@ -225,7 +225,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
 
-                UpdateStatus();
+                UpdateStatus(bgw);
             }
         }
 
@@ -239,7 +239,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             progressBar.Value = (int)newVal;
         }
 
-        private StringBuilder FindBackgroundWorkerInfo(UpdateProgressBackgroundWorker bgw)
+        public StringBuilder FindBackgroundWorkerInfo(UpdateProgressBackgroundWorker bgw)
         {
             int bgwErrorCount = 0;
             int bgwCancellationCount = 0;
@@ -293,7 +293,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return sb;
         }
 
-        private void UpdateStatus()
+        private void UpdateStatus(UpdateProgressBackgroundWorker bgwToUpdate = null)
         {
             UpdateProgressBar();
 
@@ -311,25 +311,29 @@ namespace XenAdmin.Wizards.PatchingWizard
             try
             {
                 dataGridLog.SuspendLayout();
-                dataGridLog.Rows.Clear();
-
-                /*
-                foreach (var bgw in backgroundWorkers)
+                if (dataGridLog.Rows.Count == 0 || bgwToUpdate == null)
                 {
-                    bgw, sb.ToString();
+                    dataGridLog.Rows.Clear();
+
+                    var rows = backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw));
+
+                    //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
+                    if (dataGridLog.ColumnCount == 0)
+                        return;
+
+                    dataGridLog.Rows.AddRange(rows.ToArray());
                 }
-                */
-                //TODO: Display poolInfo.
-                //Columns: Message, Server / Pool, Actions (Retry/Skip)
+                else
+                {
+                    var rows = dataGridLog.Rows
+                        .Cast<DataGridViewUpdateLocationRow>()
+                        .Where(row => row.BackgroundWorker == bgwToUpdate);
 
-                var rows = backgroundWorkersInfo.Zip(backgroundWorkers, (info, bgw) => CreateUpdateLocationRow(bgw, info));
-                //var rows = backgroundWorkers.Select(a => CreateUpdateLocationRow(a, poolInfo[a.Name])).ToList();
-
-                //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
-                if (dataGridLog.ColumnCount == 0)
-                    return;
-
-                dataGridLog.Rows.AddRange(rows.ToArray());
+                    foreach (var row in rows)
+                    {
+                        row.RefreshSelf();
+                    }
+                }
             }
             finally
             {
@@ -443,6 +447,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            var bgw = sender as UpdateProgressBackgroundWorker;
+
             if (e.Cancelled)
             {
                 Status = Status.Completed;
@@ -457,7 +463,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             else
             {
                 var someWorkersCancelled = false;
-                var bgw = sender as UpdateProgressBackgroundWorker;
                 if (bgw != null)
                 {
                     var workerSucceeded = true;
@@ -507,7 +512,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            UpdateStatus();
+            UpdateStatus(bgw);
             OnPageUpdated();
         }
 
@@ -616,9 +621,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private DataGridViewUpdateLocationRow CreateUpdateLocationRow(UpdateProgressBackgroundWorker bgw, StringBuilder sb)
+        private DataGridViewUpdateLocationRow CreateUpdateLocationRow(UpdateProgressBackgroundWorker bgw)
         {
-            var row = new DataGridViewUpdateLocationRow { Message = sb.ToString(), Location = bgw.Name };
+            var row = new DataGridViewUpdateLocationRow(this, bgw);
             //row.Visible = !FilterAction(action);
             //row.DismissalRequested += row_DismissalRequested;
             //row.GoToXenObjectRequested += row_GoToXenObjectRequested;
@@ -628,6 +633,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
     public class DataGridViewUpdateLocationRow : DataGridViewExRow
     {
+        private readonly AutomatedUpdatesBasePage _owner;
+
         private readonly DataGridViewTextBoxCell _messageCell;
         private readonly DataGridViewTextBoxCell _locationCell;
         private readonly DataGridViewDropDownSplitButtonCell _actionCell;
@@ -635,8 +642,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly ToolStripMenuItem _retryItem = new ToolStripMenuItem(Messages.RETRY);
         private readonly ToolStripMenuItem _skipItem = new ToolStripMenuItem(Messages.SKIP);
 
-        public DataGridViewUpdateLocationRow()
+        public DataGridViewUpdateLocationRow(AutomatedUpdatesBasePage Owner,  UpdateProgressBackgroundWorker BackgroundWorker)
         {
+            _owner = Owner;
+            this.BackgroundWorker = BackgroundWorker;
+
             _messageCell = new DataGridViewTextBoxCell();
             _locationCell = new DataGridViewTextBoxCell();
             _actionCell = new DataGridViewDropDownSplitButtonCell();
@@ -646,6 +656,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             Cells.AddRange(_messageCell, _locationCell, _actionCell);
             RefreshSelf();
+        }
+
+        public UpdateProgressBackgroundWorker BackgroundWorker
+        {
+            get;
         }
 
         public string Message
@@ -665,8 +680,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             set { _actionCell.RefreshItems(value.ToArray()); }
         }
 
-        private void RefreshSelf()
+        public void RefreshSelf()
         {
+            Message = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString();
+            Location = BackgroundWorker.Name;
+            
             var actions = new List<ToolStripItem>();
             actions.Add(_retryItem);
             actions.Add(_skipItem);
