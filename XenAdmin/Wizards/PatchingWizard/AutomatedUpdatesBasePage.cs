@@ -41,6 +41,7 @@ using System.Linq;
 using XenAdmin.Core;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
 
@@ -621,16 +622,21 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
     }
 
-    public class DataGridViewUpdateLocationRow : DataGridViewRow
+    public class DataGridViewUpdateLocationRow : DataGridViewExRow
     {
         private readonly BackgroundWorker _bgw;
-        private readonly DataGridViewTextBoxCell _messageCell = new DataGridViewTextBoxCell();
-        private readonly DataGridViewTextBoxCell _locationCell = new DataGridViewTextBoxCell();
-        private readonly DataGridViewDropDownSplitButtonCell _actionCell = new DataGridViewDropDownSplitButtonCell();
+        private DataGridViewTextBoxCell _messageCell;
+        private DataGridViewTextBoxCell _locationCell;
+        private DataGridViewDropDownSplitButtonCell _actionCell;
 
         public DataGridViewUpdateLocationRow(UpdateProgressBackgroundWorker bgw, StringBuilder sb)
         {
             _bgw = bgw;
+
+            _messageCell = new DataGridViewTextBoxCell();
+            _locationCell = new DataGridViewTextBoxCell();
+            _actionCell = new DataGridViewDropDownSplitButtonCell();
+
             Cells.AddRange(_messageCell, _locationCell, _actionCell);
             _messageCell.Value = sb.ToString();
             _locationCell.Value = bgw.Name;
