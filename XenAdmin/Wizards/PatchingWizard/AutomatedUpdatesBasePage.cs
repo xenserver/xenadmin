@@ -647,5 +647,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _locationCell.Value.ToString(); }
             set { _locationCell.Value = value; }
         }
+
+        public List<ToolStripItem> Actions
+        {
+            set { _actionCell.RefreshItems(value.ToArray()); }
+        }
     }
 }
