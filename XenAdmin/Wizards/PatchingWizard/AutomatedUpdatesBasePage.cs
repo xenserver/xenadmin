@@ -627,13 +627,20 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly DataGridViewTextBoxCell _locationCell;
         private readonly DataGridViewDropDownSplitButtonCell _actionCell;
 
+        private readonly ToolStripMenuItem _retryItem = new ToolStripMenuItem(Messages.RETRY);
+        private readonly ToolStripMenuItem _skipItem = new ToolStripMenuItem(Messages.SKIP);
+
         public DataGridViewUpdateLocationRow()
         {
             _messageCell = new DataGridViewTextBoxCell();
             _locationCell = new DataGridViewTextBoxCell();
             _actionCell = new DataGridViewDropDownSplitButtonCell();
 
+            _retryItem.Click += ToolStripMenuItemRetry_Click;
+            _skipItem.Click += ToolStripMenuItemSkip_Click;
+
             Cells.AddRange(_messageCell, _locationCell, _actionCell);
+            RefreshSelf();
         }
 
         public string Message
@@ -648,9 +655,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             set { _locationCell.Value = value; }
         }
 
-        public List<ToolStripItem> Actions
+        private List<ToolStripItem> Actions
         {
             set { _actionCell.RefreshItems(value.ToArray()); }
+        }
+
+        private void RefreshSelf()
+        {
+            var actions = new List<ToolStripItem>();
+            actions.Add(_retryItem);
+            actions.Add(_skipItem);
+            Actions = actions;
+        }
+
+        private void ToolStripMenuItemRetry_Click(object sender, EventArgs e)
+        {
+            //Action.Retry();
+        }
+
+        private void ToolStripMenuItemSkip_Click(object sender, EventArgs e)
+        {
+            //Action.Skip();
         }
     }
 }

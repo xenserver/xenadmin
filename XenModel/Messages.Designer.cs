@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -30578,6 +30578,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        public static string RETRY {
+            get {
+                return ResourceManager.GetString("RETRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Retry.
         /// </summary>
         public static string RETRY_BUTTON_LABEL {
@@ -32026,6 +32035,15 @@ namespace XenAdmin {
         public static string SIZE_NEGLIGIBLE {
             get {
                 return ResourceManager.GetString("SIZE_NEGLIGIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip.
+        /// </summary>
+        public static string SKIP {
+            get {
+                return ResourceManager.GetString("SKIP", resourceCulture);
             }
         }
         

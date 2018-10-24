@@ -10621,6 +10621,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RETRIEVING_WLB_DEFAULT_CONFIGURATION" xml:space="preserve">
     <value>Retrieving WLB default configuration</value>
   </data>
+  <data name="RETRY" xml:space="preserve">
+    <value>Retry</value>
+  </data>
   <data name="RETRY_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Retry</value>
   </data>
@@ -11115,6 +11118,9 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
   </data>
   <data name="SIZE_NEGLIGIBLE" xml:space="preserve">
     <value>Negligible</value>
+  </data>
+  <data name="SKIP" xml:space="preserve">
+    <value>Skip</value>
   </data>
   <data name="SKIP_SERVER" xml:space="preserve">
     <value>&amp;Skip This Server</value>
