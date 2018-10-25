@@ -38,9 +38,13 @@ namespace XenAdmin.Controls.Ballooning
             this.valueDynMax = new System.Windows.Forms.Label();
             this.valueStatMax = new System.Windows.Forms.Label();
             this.editButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.vmShinyBar = new XenAdmin.Controls.Ballooning.VMShinyBar();
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMax)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // iconBoxDynMin
@@ -102,28 +106,46 @@ namespace XenAdmin.Controls.Ballooning
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.vmShinyBar, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.editButton, 1, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.iconBoxDynMax, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.iconBoxDynMin, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelDynMax, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelDynMin, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelStatMax, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.valueDynMax, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.valueDynMin, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.valueStatMax, 2, 2);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
             // vmShinyBar
             // 
             resources.ApplyResources(this.vmShinyBar, "vmShinyBar");
+            this.vmShinyBar.Increment = 0D;
             this.vmShinyBar.Name = "vmShinyBar";
+            this.tableLayoutPanel1.SetRowSpan(this.vmShinyBar, 2);
             // 
             // VMMemoryControlsNoEdit
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.editButton);
-            this.Controls.Add(this.valueStatMax);
-            this.Controls.Add(this.valueDynMax);
-            this.Controls.Add(this.valueDynMin);
-            this.Controls.Add(this.labelStatMax);
-            this.Controls.Add(this.labelDynMax);
-            this.Controls.Add(this.labelDynMin);
-            this.Controls.Add(this.iconBoxDynMax);
-            this.Controls.Add(this.iconBoxDynMin);
-            this.Controls.Add(this.vmShinyBar);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "VMMemoryControlsNoEdit";
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconBoxDynMax)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -140,5 +162,7 @@ namespace XenAdmin.Controls.Ballooning
         private System.Windows.Forms.Label valueDynMax;
         private System.Windows.Forms.Label valueStatMax;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
