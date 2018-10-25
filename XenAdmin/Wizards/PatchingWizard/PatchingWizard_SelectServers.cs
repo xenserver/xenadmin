@@ -222,9 +222,15 @@ namespace XenAdmin.Wizards.PatchingWizard
             var minimalPatches = WizardMode == WizardMode.NewVersion
                 ? Updates.GetMinimalPatches(host)
                 : Updates.GetMinimalPatches(host.Connection);
-            if (minimalPatches == null) //version not supported
+            if (minimalPatches == null) //version not supported or too new to have automated updates available
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
+                var versionSupportsAutomatedUpdates = WizardMode == WizardMode.NewVersion
+                     ? Helpers.DundeeOrGreater(host)
+                     : Helpers.DundeeOrGreater(host.Connection);
+
+                tooltipText = versionSupportsAutomatedUpdates
+                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE
+                    : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
                 return false;
             }
 
