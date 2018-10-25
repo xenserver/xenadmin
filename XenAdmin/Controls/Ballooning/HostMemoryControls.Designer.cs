@@ -37,13 +37,14 @@ namespace XenAdmin.Controls.Ballooning
             this.valueUsed = new System.Windows.Forms.Label();
             this.valueAvail = new System.Windows.Forms.Label();
             this.valueTotDynMax = new System.Windows.Forms.Label();
-            this.unitsTotal = new System.Windows.Forms.Label();
-            this.unitsUsed = new System.Windows.Forms.Label();
-            this.unitsTotDynMax = new System.Windows.Forms.Label();
             this.labelOvercommit = new System.Windows.Forms.Label();
             this.labelControlDomain = new System.Windows.Forms.Label();
             this.valueControlDomain = new System.Windows.Forms.LinkLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.hostShinyBar = new XenAdmin.Controls.Ballooning.HostShinyBar();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelTotal
@@ -86,24 +87,10 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.valueTotDynMax, "valueTotDynMax");
             this.valueTotDynMax.Name = "valueTotDynMax";
             // 
-            // unitsTotal
-            // 
-            resources.ApplyResources(this.unitsTotal, "unitsTotal");
-            this.unitsTotal.Name = "unitsTotal";
-            // 
-            // unitsUsed
-            // 
-            resources.ApplyResources(this.unitsUsed, "unitsUsed");
-            this.unitsUsed.Name = "unitsUsed";
-            // 
-            // unitsTotDynMax
-            // 
-            resources.ApplyResources(this.unitsTotDynMax, "unitsTotDynMax");
-            this.unitsTotDynMax.Name = "unitsTotDynMax";
-            // 
             // labelOvercommit
             // 
             resources.ApplyResources(this.labelOvercommit, "labelOvercommit");
+            this.tableLayoutPanel2.SetColumnSpan(this.labelOvercommit, 2);
             this.labelOvercommit.Name = "labelOvercommit";
             // 
             // labelControlDomain
@@ -116,7 +103,31 @@ namespace XenAdmin.Controls.Ballooning
             resources.ApplyResources(this.valueControlDomain, "valueControlDomain");
             this.valueControlDomain.DisabledLinkColor = System.Drawing.SystemColors.ControlText;
             this.valueControlDomain.Name = "valueControlDomain";
+            this.valueControlDomain.TabStop = true;
             this.valueControlDomain.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.valueControlDomain_LinkClicked);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.hostShinyBar, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.labelTotal, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.valueControlDomain, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelOvercommit, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.valueTotDynMax, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.valueAvail, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.valueUsed, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.valueTotal, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelUsed, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelControlDomain, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelAvail, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.labelTotDynMax, 0, 4);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // hostShinyBar
             // 
@@ -127,23 +138,13 @@ namespace XenAdmin.Controls.Ballooning
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.valueControlDomain);
-            this.Controls.Add(this.labelControlDomain);
-            this.Controls.Add(this.labelOvercommit);
-            this.Controls.Add(this.unitsTotDynMax);
-            this.Controls.Add(this.unitsUsed);
-            this.Controls.Add(this.unitsTotal);
-            this.Controls.Add(this.valueTotDynMax);
-            this.Controls.Add(this.valueAvail);
-            this.Controls.Add(this.valueUsed);
-            this.Controls.Add(this.valueTotal);
-            this.Controls.Add(this.labelTotDynMax);
-            this.Controls.Add(this.labelAvail);
-            this.Controls.Add(this.labelUsed);
-            this.Controls.Add(this.labelTotal);
-            this.Controls.Add(this.hostShinyBar);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.Name = "HostMemoryControls";
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -159,11 +160,10 @@ namespace XenAdmin.Controls.Ballooning
         private System.Windows.Forms.Label valueUsed;
         private System.Windows.Forms.Label valueAvail;
         private System.Windows.Forms.Label valueTotDynMax;
-        private System.Windows.Forms.Label unitsTotal;
-        private System.Windows.Forms.Label unitsUsed;
-        private System.Windows.Forms.Label unitsTotDynMax;
         private System.Windows.Forms.Label labelOvercommit;
         private System.Windows.Forms.Label labelControlDomain;
         private System.Windows.Forms.LinkLabel valueControlDomain;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
