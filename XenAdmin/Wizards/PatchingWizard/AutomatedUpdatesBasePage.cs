@@ -680,6 +680,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _actionCell.ContextMenu.Items.Cast<ToolStripItem>().ToList(); }
             set
             {
+                value = value ?? new List<ToolStripItem>();
                 if (Actions.SequenceEqual(value))
                     return;
                 _actionCell.RefreshItems(value.ToArray());
