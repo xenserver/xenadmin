@@ -648,12 +648,60 @@ namespace XenAdmin.Wizards.PatchingWizard
             //row.GoToXenObjectRequested += row_GoToXenObjectRequested;
             return row;
         }
+
+        private void ToggleExpandedState(int rowIndex)
+        {
+            var row = dataGridLog.Rows[rowIndex] as DataGridViewUpdateLocationRow;
+            if (row == null)
+                return;
+
+            if (row.Expanded)
+            {
+                row.Cells[ColumnExpander.Index].Value = Images.StaticImages.contracted_triangle;
+                //row.Cells[ColumnMessage.Index].Value = row.Action.GetTitle(); //TODO
+            }
+            else
+            {
+                row.Cells[ColumnExpander.Index].Value = Images.StaticImages.expanded_triangle;
+                //row.Cells[ColumnMessage.Index].Value = row.Action.GetDetails(); //TODO
+            }
+            row.Expanded = !row.Expanded;
+        }
+
+        private void dataGridLog_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // If you click on the headers you can get -1 as the index.
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpander.Index)
+                return;
+
+            ToggleExpandedState(e.RowIndex);
+        }
+
+        private void dataGridLog_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridLog_CellContentClick(sender, e);
+        }
+
+        private void dataGridLog_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // If you click on the headers you can get -1 as the index.
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpander.Index)
+                return;
+
+            ToggleExpandedState(e.RowIndex);
+        }
+
+        private void dataGridLog_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridLog_CellClick(sender, e);
+        }
     }
 
     public class DataGridViewUpdateLocationRow : DataGridViewExRow
     {
         private readonly AutomatedUpdatesBasePage _owner;
 
+        private readonly DataGridViewImageCell _expanderCell;
         private readonly DataGridViewTextBoxCell _messageCell;
         private readonly DataGridViewTextBoxCell _locationCell;
         private readonly DataGridViewDropDownSplitButtonCell _actionCell;
@@ -666,6 +714,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             _owner = Owner;
             this.BackgroundWorker = BackgroundWorker;
 
+            _expanderCell = new DataGridViewImageCell();
             _messageCell = new DataGridViewTextBoxCell();
             _locationCell = new DataGridViewTextBoxCell();
             _actionCell = new DataGridViewDropDownSplitButtonCell();
@@ -673,7 +722,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             _retryItem.Click += ToolStripMenuItemRetry_Click;
             _skipItem.Click += ToolStripMenuItemSkip_Click;
 
-            Cells.AddRange(_messageCell, _locationCell, _actionCell);
+            Cells.AddRange(_expanderCell, _messageCell, _locationCell, _actionCell);
+
+            Expanded = false;
+
             RefreshSelf();
         }
 
@@ -706,6 +758,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public bool Expanded { get; set; }
+
         public void RefreshSelf()
         {
             Message = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString();
@@ -715,6 +769,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             actions.Add(_retryItem);
             actions.Add(_skipItem);
             Actions = actions;
+
+            if (Expanded)
+            {
+                _expanderCell.Value = Images.StaticImages.expanded_triangle;
+                //messageCell.Value = Action.GetDetails(); //TODO
+            }
+            else
+            {
+                _expanderCell.Value = Images.StaticImages.contracted_triangle;
+                //messageCell.Value = Action.GetTitle(); //TODO
+            }
         }
 
         private void ToolStripMenuItemRetry_Click(object sender, EventArgs e)
