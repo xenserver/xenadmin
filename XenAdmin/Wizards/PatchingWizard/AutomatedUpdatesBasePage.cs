@@ -535,6 +535,25 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
+        public void RetryFailedActionsOfAWorker(UpdateProgressBackgroundWorker bgw)
+        {
+            if (bgw == null)
+                return;
+
+            if (!failedWorkers.Remove(bgw))
+                return;
+
+            _someWorkersFailed = !failedWorkers.Any();
+            panel1.Visible = !failedWorkers.Any();
+
+            bgw.RunWorkerAsync();
+
+            _thisPageIsCompleted = false;
+            _cancelEnabled = true;
+            _nextEnabled = false;
+            OnPageUpdated();
+        }
+
         #endregion
 
         private void buttonRetry_Click(object sender, EventArgs e)
@@ -701,6 +720,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void ToolStripMenuItemRetry_Click(object sender, EventArgs e)
         {
             //Action.Retry();
+            _owner.RetryFailedActionsOfAWorker(BackgroundWorker);
         }
 
         private void ToolStripMenuItemSkip_Click(object sender, EventArgs e)
