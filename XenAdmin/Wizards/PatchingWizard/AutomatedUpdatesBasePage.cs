@@ -793,8 +793,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public string Location
         {
-            get { return _locationCell.Value.ToString(); }
-            set { _locationCell.Value = value; }
+            get
+            {
+                return _locationCell.Value != null ? _locationCell.Value.ToString() : string.Empty;
+            }
+            private set
+            {
+                if (value == Location)
+                    return;
+
+                _locationCell.Value = value;
+            }
         }
 
         private List<ToolStripItem> Actions
