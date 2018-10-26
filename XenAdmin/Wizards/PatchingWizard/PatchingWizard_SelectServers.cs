@@ -265,7 +265,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             switch (SelectedUpdateType)
             {
-                case UpdateType.NewRetail:
+                case UpdateType.Legacy:
                 case UpdateType.Existing:
                     if (Helpers.ElyOrGreater(host))
                     {

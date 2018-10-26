@@ -111,7 +111,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var wizardMode = PatchingWizard_SelectPatchPage.WizardMode;
                 var wizardIsInAutomatedUpdatesMode = wizardMode == WizardMode.AutomatedUpdates;
 
-                var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.NewRetail : PatchingWizard_SelectPatchPage.SelectedUpdateType;
+                var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.Legacy : PatchingWizard_SelectPatchPage.SelectedUpdateType;
                 var newPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedNewPatch;
                 var existPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedExistingPatch;
                 var alertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
@@ -186,7 +186,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {
-                if (PatchingWizard_SelectPatchPage.SelectedUpdateType == UpdateType.NewRetail)
+                if (PatchingWizard_SelectPatchPage.SelectedUpdateType == UpdateType.Legacy)
                 {
                     PatchingWizard_SelectPatchPage.SelectedUpdateType = UpdateType.Existing;
                     PatchingWizard_SelectPatchPage.SelectedExistingPatch = PatchingWizard_UploadPage.Patch;
