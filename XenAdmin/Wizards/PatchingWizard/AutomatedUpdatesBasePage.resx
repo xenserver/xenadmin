@@ -330,11 +330,17 @@
   <data name="ColumnMessage.HeaderText" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
   <metadata name="ColumnLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnLocation.HeaderText" xml:space="preserve">
     <value>Server / Pool</value>
+  </data>
+  <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
   <metadata name="Actions.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -342,14 +348,14 @@
   <data name="Actions.HeaderText" xml:space="preserve">
     <value>Actions</value>
   </data>
+  <data name="Actions.Width" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
   <data name="dataGridLog.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="dataGridLog.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 49</value>
-  </data>
-  <data name="dataGridLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
   </data>
   <data name="dataGridLog.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 243</value>

@@ -139,6 +139,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             resources.ApplyResources(this.ColumnExpander, "ColumnExpander");
             this.ColumnExpander.Name = "ColumnExpander";
             this.ColumnExpander.ReadOnly = true;
+            this.ColumnExpander.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ColumnMessage
             // 
@@ -161,10 +162,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // Actions
             // 
+            this.Actions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Actions.FillWeight = 119.797F;
             resources.ApplyResources(this.Actions, "Actions");
             this.Actions.Name = "Actions";
             this.Actions.ReadOnly = true;
+            this.Actions.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // AutomatedUpdatesBasePage
             // 
