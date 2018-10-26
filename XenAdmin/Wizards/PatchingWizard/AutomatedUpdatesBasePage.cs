@@ -655,16 +655,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (row == null)
                 return;
 
-            if (row.Expanded)
-            {
-                row.Cells[ColumnExpander.Index].Value = Images.StaticImages.contracted_triangle;
-                //row.Cells[ColumnMessage.Index].Value = row.Action.GetTitle(); //TODO
-            }
-            else
-            {
-                row.Cells[ColumnExpander.Index].Value = Images.StaticImages.expanded_triangle;
-                //row.Cells[ColumnMessage.Index].Value = row.Action.GetDetails(); //TODO
-            }
             row.Expanded = !row.Expanded;
         }
 
@@ -694,6 +684,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private readonly ToolStripMenuItem _retryItem = new ToolStripMenuItem(Messages.RETRY);
         private readonly ToolStripMenuItem _skipItem = new ToolStripMenuItem(Messages.SKIP);
+
+        private bool _expanded;
 
         public DataGridViewUpdateLocationRow(AutomatedUpdatesBasePage Owner,  UpdateProgressBackgroundWorker BackgroundWorker)
         {
@@ -744,7 +736,24 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public bool Expanded { get; set; }
+        public bool Expanded {
+            get { return _expanded; }
+            set
+            {
+                if (value)
+                {
+                    _expanderCell.Value = Images.StaticImages.expanded_triangle;
+                    //messageCell.Value = Action.GetDetails(); //TODO
+                }
+                else
+                {
+                    _expanderCell.Value = Images.StaticImages.contracted_triangle;
+                    //messageCell.Value = Action.GetTitle(); //TODO
+                }
+
+                _expanded = value;
+            }
+        }
 
         public void RefreshSelf()
         {
@@ -755,17 +764,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             actions.Add(_retryItem);
             actions.Add(_skipItem);
             Actions = actions;
-
-            if (Expanded)
-            {
-                _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                //messageCell.Value = Action.GetDetails(); //TODO
-            }
-            else
-            {
-                _expanderCell.Value = Images.StaticImages.contracted_triangle;
-                //messageCell.Value = Action.GetTitle(); //TODO
-            }
         }
 
         private void ToolStripMenuItemRetry_Click(object sender, EventArgs e)
