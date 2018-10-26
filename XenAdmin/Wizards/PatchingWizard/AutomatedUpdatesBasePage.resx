@@ -348,6 +348,9 @@
   <data name="dataGridLog.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 49</value>
   </data>
+  <data name="dataGridLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
   <data name="dataGridLog.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 243</value>
   </data>

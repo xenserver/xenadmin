@@ -114,6 +114,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // dataGridLog
             // 
+            this.dataGridLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridLog.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
