@@ -740,18 +740,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return _expanded; }
             set
             {
-                if (value)
-                {
-                    _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                    //messageCell.Value = Action.GetDetails(); //TODO
-                }
-                else
-                {
-                    _expanderCell.Value = Images.StaticImages.contracted_triangle;
-                    //messageCell.Value = Action.GetTitle(); //TODO
-                }
-
                 _expanded = value;
+                RefreshExpanded();
             }
         }
 
@@ -764,6 +754,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             actions.Add(_retryItem);
             actions.Add(_skipItem);
             Actions = actions;
+        }
+
+        private void RefreshExpanded()
+        {
+            if (Expanded)
+            {
+                _expanderCell.Value = Images.StaticImages.expanded_triangle;
+                //messageCell.Value = Action.GetDetails(); //TODO
+            }
+            else
+            {
+                _expanderCell.Value = Images.StaticImages.contracted_triangle;
+                //messageCell.Value = Action.GetTitle(); //TODO
+            }
         }
 
         private void ToolStripMenuItemRetry_Click(object sender, EventArgs e)
