@@ -352,6 +352,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             //return sb;
         }
 
+        public string FindBackgroundWorkerDetails(UpdateProgressBackgroundWorker bgw)
+        {
+            return FindBackgroundWorkerInfo(bgw).ToString().TrimEnd();
+        }
+
         private void UpdateStatus(UpdateProgressBackgroundWorker bgwToUpdate = null)
         {
             UpdateProgressBar();
@@ -820,7 +825,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (Expanded)
             {
                 _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                CurrentlyShownMessage = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString().TrimEnd();
+                CurrentlyShownMessage = _owner.FindBackgroundWorkerDetails(BackgroundWorker);
             }
             else
             {
