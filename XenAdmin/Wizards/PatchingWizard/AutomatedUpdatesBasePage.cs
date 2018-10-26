@@ -379,7 +379,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     dataGridLog.Rows.Clear();
 
-                    var rows = backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw));
+                    var rows = backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw))
+                        .Concat(backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw)))
+                        .Concat(backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw)))
+                        .Concat(backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw)));
 
                     //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
                     if (dataGridLog.ColumnCount == 0)
@@ -735,6 +738,55 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             dataGridLog_CellClick(sender, e);
         }
+
+        #region ResizableColumnsForOldNewPanel
+        //From: https://www.codeproject.com/Questions/289580/TableLayout-Panel-resize
+        //TODO: Use this only to compare the old and new interfaces, remove before considering inclusion in the mainline.
+
+        bool resizing = false;
+        
+        //TableLayoutRowStyleCollection rowStyles;
+        TableLayoutColumnStyleCollection columnStyles;
+        /*
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        */
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //rowStyles = tableLayoutPanel1.RowStyles;
+            columnStyles = tableLayoutPanel1.ColumnStyles;
+        }
+        
+        private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                resizing = true;
+            }
+        }
+
+        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (resizing)
+            {
+                columnStyles[0].SizeType = SizeType.Absolute;
+                //rowStyles[0].SizeType = SizeType.Absolute;
+                //rowStyles[0].Height = Math.Max(e.Y, 0);
+                columnStyles[0].Width = Math.Max(e.X, 0);
+            }
+        }
+
+        private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                resizing = false;
+            }
+        }
+
+        #endregion
     }
 
     public class DataGridViewUpdateLocationRow : DataGridViewExRow
@@ -844,7 +896,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (Expanded)
             {
                 _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                CurrentlyShownMessage = _owner.FindBackgroundWorkerDetails(BackgroundWorker);
+                var message = _owner.FindBackgroundWorkerDetails(BackgroundWorker);
+                CurrentlyShownMessage = message + message + message + message + message + message + message + message + message + message + message + message;
             }
             else
             {
