@@ -204,7 +204,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 AsyncAction action = null;
                 switch (SelectedUpdateType)
                 {
-                    case UpdateType.NewRetail:
+                    case UpdateType.Legacy:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
                             bool deleteFileOnCancel = AllDownloadedPatches.ContainsValue(SelectedNewPatchPath);
@@ -295,7 +295,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 AsyncAction action = null;
                 switch (SelectedUpdateType)
                 {
-                    case UpdateType.NewRetail:
+                    case UpdateType.Legacy:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, master))
                             action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatchPath, true);
                         break;

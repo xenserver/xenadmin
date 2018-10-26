@@ -248,7 +248,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                         else //legacy format
                         {
-                            SelectedUpdateType = UpdateType.NewRetail;
+                            SelectedUpdateType = UpdateType.Legacy;
                         }
                     }
                     else
@@ -256,7 +256,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (WizardHelpers.IsValidFile(fileName))
                         {
                             if (fileName.EndsWith("." + Branding.Update))
-                                SelectedUpdateType = UpdateType.NewRetail;
+                                SelectedUpdateType = UpdateType.Legacy;
                             else if (fileName.EndsWith("." + Branding.UpdateIso))
                                 SelectedUpdateType = UpdateType.ISO;
                             else
@@ -465,13 +465,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (downloadUpdateRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
+                    return SelectedUpdateType == UpdateType.Legacy || SelectedUpdateType == UpdateType.ISO
                         ? ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).PathPatch
                         : null;
                 }
                 else if (selectFromDiskRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
+                    return SelectedUpdateType == UpdateType.Legacy || SelectedUpdateType == UpdateType.ISO
                         ? WizardHelpers.IsValidFile(unzippedUpdateFilePath) &&
                           Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip")
                             ? unzippedUpdateFilePath
@@ -762,5 +762,5 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
     }        
 
-    public enum UpdateType { NewRetail, Existing, ISO}
+    public enum UpdateType { Legacy, Existing, ISO}
 }
