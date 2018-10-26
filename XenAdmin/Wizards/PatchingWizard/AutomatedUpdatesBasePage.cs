@@ -778,8 +778,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public string CurrentlyShownMessage
         {
-            get { return _messageCell.Value.ToString(); }
-            private set { _messageCell.Value = value; }
+            get
+            {
+                return _messageCell.Value != null ? _messageCell.Value.ToString() : string.Empty;
+            }
+            private set
+            {
+                if (value == CurrentlyShownMessage)
+                    return;
+
+                _messageCell.Value = value;
+            }
         }
 
         public string Location
