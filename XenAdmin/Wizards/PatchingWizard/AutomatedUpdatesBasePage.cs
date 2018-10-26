@@ -774,6 +774,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public UpdateProgressBackgroundWorker BackgroundWorker
         {
             get;
+            private set;
         }
 
         public string CurrentlyShownMessage
