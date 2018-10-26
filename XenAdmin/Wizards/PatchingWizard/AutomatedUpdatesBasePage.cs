@@ -293,6 +293,65 @@ namespace XenAdmin.Wizards.PatchingWizard
             return sb;
         }
 
+        public string FindBackgroundWorkerTitle(UpdateProgressBackgroundWorker bgw)
+        {
+            int bgwErrorCount = 0;
+            int bgwCancellationCount = 0;
+            //var sb = new StringBuilder();
+            //var errorSb = new StringBuilder();
+
+            //if (!string.IsNullOrEmpty(bgw.Name))
+            //    sb.AppendLine(string.Format("{0}:", bgw.Name));
+
+            foreach (var pa in bgw.DoneActions)
+            {
+                //pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+
+                if (pa.Error != null)
+                {
+                    if (pa.Error is CancelledException)
+                    {
+                        bgwCancellationCount++;
+                        continue;
+                    }
+
+                    //var innerEx = pa.Error.InnerException as Failure;
+                    //errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
+                    bgwErrorCount++;
+                }
+            }
+
+            //foreach (var pa in bgw.InProgressActions)
+            //{
+            //    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+            //}
+
+            //sb.AppendLine();
+
+            if (bgwCancellationCount > 0)
+            {
+                //sb.AppendIndented(UserCancellationMessage()).AppendLine();
+                return UserCancellationMessage();
+            }
+            else if (bgwErrorCount > 0)
+            {
+                //sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
+                //sb.AppendIndented(errorSb);
+                return FailureMessagePerPool(bgwErrorCount > 1);
+            }
+            else if (!bgw.IsBusy)
+            {
+                //sb.AppendIndented(SuccessMessagePerPool(bgw.Pool)).AppendLine();
+                return SuccessMessagePerPool(bgw.Pool);
+            }
+
+            return BlurbText();
+
+            //sb.AppendLine();
+
+            //return sb;
+        }
+
         private void UpdateStatus(UpdateProgressBackgroundWorker bgwToUpdate = null)
         {
             UpdateProgressBar();
@@ -712,10 +771,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             get;
         }
 
-        public string Message
+        public string CurrentlyShownMessage
         {
             get { return _messageCell.Value.ToString(); }
-            set { _messageCell.Value = value; }
+            private set { _messageCell.Value = value; }
         }
 
         public string Location
@@ -747,9 +806,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void RefreshSelf()
         {
-            Message = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString();
+            RefreshExpanded();
             Location = BackgroundWorker.Name;
-            
+
             var actions = new List<ToolStripItem>();
             actions.Add(_retryItem);
             actions.Add(_skipItem);
@@ -761,12 +820,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (Expanded)
             {
                 _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                //messageCell.Value = Action.GetDetails(); //TODO
+                CurrentlyShownMessage = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString();
             }
             else
             {
                 _expanderCell.Value = Images.StaticImages.contracted_triangle;
-                //messageCell.Value = Action.GetTitle(); //TODO
+                CurrentlyShownMessage = _owner.FindBackgroundWorkerTitle(BackgroundWorker);
             }
         }
 
