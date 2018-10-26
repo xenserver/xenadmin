@@ -379,10 +379,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     dataGridLog.Rows.Clear();
 
-                    var rows = backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw))
-                        .Concat(backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw)))
-                        .Concat(backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw)))
-                        .Concat(backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw)));
+                    var rows = backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw));
 
                     //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
                     if (dataGridLog.ColumnCount == 0)
@@ -896,8 +893,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (Expanded)
             {
                 _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                var message = _owner.FindBackgroundWorkerDetails(BackgroundWorker);
-                CurrentlyShownMessage = message + message + message + message + message + message + message + message + message + message + message + message;
+                CurrentlyShownMessage = _owner.FindBackgroundWorkerDetails(BackgroundWorker);
             }
             else
             {
