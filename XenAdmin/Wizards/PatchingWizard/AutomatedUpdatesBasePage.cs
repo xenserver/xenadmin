@@ -668,20 +668,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             row.Expanded = !row.Expanded;
         }
 
-        private void dataGridLog_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // If you click on the headers you can get -1 as the index.
-            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpander.Index)
-                return;
-
-            ToggleExpandedState(e.RowIndex);
-        }
-
-        private void dataGridLog_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dataGridLog_CellContentClick(sender, e);
-        }
-
         private void dataGridLog_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // If you click on the headers you can get -1 as the index.
