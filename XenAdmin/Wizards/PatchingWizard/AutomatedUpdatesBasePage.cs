@@ -820,7 +820,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (Expanded)
             {
                 _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                CurrentlyShownMessage = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString();
+                CurrentlyShownMessage = _owner.FindBackgroundWorkerInfo(BackgroundWorker).ToString().TrimEnd();
             }
             else
             {
