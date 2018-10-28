@@ -486,8 +486,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Accessors
 
-        public Pool_patch Patch { private get; set; }
-
         public List<Host> SelectedMasters
         {
             get

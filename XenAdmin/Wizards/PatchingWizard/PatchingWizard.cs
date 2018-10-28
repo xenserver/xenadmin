@@ -120,7 +120,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_SelectServers.WizardMode = wizardMode;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
-                PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
                 PatchingWizard_SelectServers.FileFromDiskAlert = fileFromDiskAlertPatch;
                 PatchingWizard_SelectServers.FileFromDiskHasUpdateXml = fileFromDiskHasUpdateXml;
@@ -151,7 +150,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_PrecheckPage.WizardMode = wizardMode;
                 PatchingWizard_PrecheckPage.Patch = existPatch;
                 PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
-                PatchingWizard_PrecheckPage.SelectedUpdateType = updateType;
                 PatchingWizard_PrecheckPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
 
                 PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
@@ -192,7 +190,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     PatchingWizard_SelectPatchPage.SelectedExistingPatch = PatchingWizard_UploadPage.Patch;
 
                     PatchingWizard_SelectServers.SelectedUpdateType = UpdateType.Existing;
-                    PatchingWizard_SelectServers.Patch = PatchingWizard_UploadPage.Patch;
 
                     PatchingWizard_PrecheckPage.Patch = PatchingWizard_UploadPage.Patch;
 
