@@ -653,7 +653,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return !checkInProgress && !actionInProgress && !problemsFound;
         }
 
-        public UpdateType SelectedUpdateType { private get; set; }
         public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
 
