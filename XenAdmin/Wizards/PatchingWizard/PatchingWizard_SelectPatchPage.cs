@@ -267,13 +267,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
                     {
                         cancel = true;
-                        PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH,
-                            SelectedExistingPatch.Connection.Name));
+
+                        using (var dlg = new ThreeButtonDialog(
+                            new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                string.Format(Messages.UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH, SelectedExistingPatch.Connection.Name),
+                                Messages.UPDATES_WIZARD)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
                     }
                     else if (!string.IsNullOrEmpty(SelectedNewPatch) && !File.Exists(SelectedNewPatch))
                     {
                         cancel = true;
-                        PageLeaveCancelled(string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch));
+
+                        using (var dlg = new ThreeButtonDialog(
+                            new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch),
+                                Messages.UPDATES_WIZARD)))
+                        {
+                            dlg.ShowDialog(this);
+                        }
                     }
                 }
                 else //In Automatic Mode
@@ -339,17 +352,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var uuid = update.Attributes["uuid"];
             return uuid != null ? Updates.FindPatchAlertByUuid(uuid.Value) : null;
-        }
-
-        private void PageLeaveCancelled(string message)
-        {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.UPDATES_WIZARD)))
-            {
-                dlg.ShowDialog(this);
-            }
-
-            ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateDetails();
         }
 
         private void PopulatePatchesBox()
@@ -441,7 +443,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             return !CheckForUpdatesInProgress;
         }
 
-        //list to store unzipped files to be removed later by PatchingWizard
+        /// <summary>
+        /// List to store unzipped files to be removed later by PatchingWizard
+        /// </summary>
         private List<string> unzippedFiles = new List<string>();
 
         public List<string> UnzippedUpdateFiles
@@ -462,24 +466,17 @@ namespace XenAdmin.Wizards.PatchingWizard
         public string SelectedNewPatch
         {
             get
-            {
-                if (downloadUpdateRadioButton.Checked)
+            {               
+                if (selectFromDiskRadioButton.Checked)
                 {
                     return SelectedUpdateType == UpdateType.Legacy || SelectedUpdateType == UpdateType.ISO
-                        ? ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).PathPatch
-                        : null;
-                }
-                else if (selectFromDiskRadioButton.Checked)
-                {
-                    return SelectedUpdateType == UpdateType.Legacy || SelectedUpdateType == UpdateType.ISO
-                        ? WizardHelpers.IsValidFile(unzippedUpdateFilePath) &&
-                          Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip")
+                        ? WizardHelpers.IsValidFile(unzippedUpdateFilePath) && Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip")
                             ? unzippedUpdateFilePath
                             : FilePath
                         : null;
                 }
-                else
-                    return null;
+                
+                return null;
             }
         }
 
@@ -487,19 +484,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void dataGridViewPatches_SelectionChanged(object sender, EventArgs e)
         {
-            OnPageUpdated();
-        }
-
-        private void dataGridViewPatches_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-                return;
-
-            if (e.RowIndex < 0)
-                // The click is on a column header
-                return;
-            PatchGridViewRow row = (PatchGridViewRow) dataGridViewPatches.Rows[e.RowIndex];
-            row.toggleExpandedState();
             OnPageUpdated();
         }
 
@@ -539,30 +523,15 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             private readonly XenServerPatchAlert _alert;
 
-            private bool expanded = false;
-
-            private bool _isFile = false;
-            private string _patchPath;
-
-            private DataGridViewImageCell _imageCell;
-            private DataGridViewTextBoxCell _nameCell;
-            private DataGridViewTextBoxCell _descriptionCell;
-            private DataGridViewTextBoxCell _dateCell;
-            private DataGridViewTextBoxCell _statusCell;
-            private DataGridViewLinkCell _webPageCell;
+            private DataGridViewTextBoxCell _nameCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell _descriptionCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell _dateCell = new DataGridViewTextBoxCell();
+            private DataGridViewLinkCell _webPageCell = new DataGridViewLinkCell();
 
             public PatchGridViewRow(XenServerPatchAlert alert)
             {
                 _alert = alert;
-                _nameCell = new DataGridViewTextBoxCell();
-                _descriptionCell = new DataGridViewTextBoxCell();
-                _dateCell = new DataGridViewTextBoxCell();
-                _webPageCell = new DataGridViewLinkCell();
-
-                Cells.Add(_nameCell);
-                Cells.Add(_descriptionCell);
-                Cells.Add(_dateCell);
-                Cells.Add(_webPageCell);
+                Cells.AddRange(_nameCell, _descriptionCell, _dateCell, _webPageCell);
 
                 _nameCell.Value = String.Format(alert.Name);
                 _descriptionCell.Value = String.Format(alert.Description);
@@ -571,80 +540,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _webPageCell.Value = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
             }
 
-            public PatchGridViewRow(string patchPath)
-            {
-                _isFile = true;
-                _patchPath = patchPath;
-                SetupCells();
-            }
-
             public XenServerPatchAlert UpdateAlert
             {
                 get { return _alert; }
             }
 
-            public string PathPatch
-            {
-                get { return _patchPath; }
-            }
-
-            private void SetupCells()
-            {
-                _imageCell = new DataGridViewExImageCell();
-                _nameCell = new DataGridViewTextBoxCell();
-                _descriptionCell = new DataGridViewTextBoxCell();
-                _statusCell = new DataGridViewTextBoxCell();
-                _webPageCell = new DataGridViewLinkCell();
-
-                Cells.Add(_imageCell);
-                Cells.Add(_nameCell);
-                Cells.Add(_descriptionCell);
-                Cells.Add(_statusCell);
-                Cells.Add(_webPageCell);
-                this.UpdateDetails();
-            }
-
-            private void UpdateFileDetails(string description, string status)
-            {
-                _descriptionCell.Value = description;
-                _statusCell.Value = status;
-            }
-
-            public void UpdateDetails()
-            {
-                _imageCell.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
-                _webPageCell.Value = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
-
-                if (_isFile)
-                {
-                    _nameCell.Value = System.IO.Path.GetFileName(_patchPath);
-                    FileInfo fileInfo = new FileInfo(_patchPath);
-
-                    string description = expanded
-                        ? fileInfo.Exists
-                            ? String.Format(Messages.PATCH_EXPANDED_DESCRIPTION
-                                , _patchPath, fileInfo.CreationTime,
-                                fileInfo.LastWriteTime, Util.DiskSizeString(fileInfo.Length))
-                            : String.Format(Messages.PATCH_NOT_FOUND_EXPANDED_DESCRIPTION,
-                                _patchPath)
-                        : _patchPath;
-
-                    UpdateFileDetails(description, fileInfo.Exists ? Messages.NOT_UPLOADED : Messages.PATCH_NOT_FOUND);
-                }
-            }
-
-            public void toggleExpandedState()
-            {
-                expanded = !expanded;
-            }
-
-
             public bool Equals(PatchGridViewRow other)
             {
-                if (other.UpdateAlert != null && this.UpdateAlert != null &&
-                    this.UpdateAlert.uuid == other.UpdateAlert.uuid)
-                    return true;
-                if (other.PathPatch != null && this.PathPatch != null && this.PathPatch == other.PathPatch)
+                if (other != null && other.UpdateAlert != null && UpdateAlert != null && UpdateAlert.uuid == other.UpdateAlert.uuid)
                     return true;
                 return false;
             }
