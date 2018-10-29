@@ -190,17 +190,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                     PatchingWizard_SelectPatchPage.SelectedExistingPatch = PatchingWizard_UploadPage.Patch;
 
                     PatchingWizard_SelectServers.SelectedUpdateType = UpdateType.Existing;
-
-                    PatchingWizard_PrecheckPage.Patch = PatchingWizard_UploadPage.Patch;
-
-                    PatchingWizard_ModePage.Patch = PatchingWizard_UploadPage.Patch;
-
-                    PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
                 }
+
+                PatchingWizard_PrecheckPage.Patch = PatchingWizard_UploadPage.Patch;
                 PatchingWizard_PrecheckPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PrecheckPage.SrUploadedUpdates = PatchingWizard_UploadPage.SrUploadedUpdates;
-                PatchingWizard_PatchingPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
+
+                PatchingWizard_ModePage.Patch = PatchingWizard_UploadPage.Patch;
                 PatchingWizard_ModePage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
+
+                PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
+                PatchingWizard_PatchingPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PatchingPage.SuppPackVdis = PatchingWizard_UploadPage.SuppPackVdis;
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
