@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
@@ -928,6 +929,60 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void ToolStripMenuItemSkip_Click(object sender, EventArgs e)
         {
             //Action.Skip();
+        }
+    }
+
+    public class DataGridViewUpdateLocationGrid : DataGridViewEx
+    {
+        //Based on CollapsingPoolHostDataGridView.
+
+        public bool Updating;
+
+        /// <summary>
+        /// Sort the rows but then remove and read the rows that should be expandable to be placed back under
+        /// the parent row as they may get moved out of place
+        /// </summary>
+        /// <param name="comparer">Implementation if IComparer used to sort the rows prior to tree rebuild</param>
+        protected void SortAndRebuildTree(IComparer comparer)
+        {
+            /*
+            Updating = true;
+            try
+            {
+                if (comparer == null)
+                    throw new ArgumentNullException("comparer", "Comparator must not be null");
+
+                Sort(comparer);
+
+                var poolRows = (from DataGridViewUpdateLocationRow r in Rows where r.IsAPoolRow select r).ToList();
+
+                foreach (DataGridViewUpdateLocationRow poolRow in poolRows)
+                {
+                    //Select the rows that contain hosts represented by the pool row
+                    List<Host> hosts = poolRow.UnderlyingPool.Connection.Cache.Hosts.ToList();
+
+                    List<DataGridViewUpdateLocationRow> poolHostRows = (from DataGridViewUpdateLocationRow r in Rows
+                                                                            where r.IsAHostRow && hosts.Contains(r.UnderlyingHost)
+                                                                            select r).ToList();
+
+                    poolHostRows.ForEach(r => Rows.RemoveAt(r.Index));
+
+                    var rowstoInsert = new Queue<CollapsingPoolHostDataGridViewRow>();
+
+                    foreach (DataGridViewUpdateLocationRow unRow in poolHostRows.Where(row => row.IsAHostRow))
+                    {
+                        unRow.ToPooledHostRow();
+                        rowstoInsert.Enqueue(unRow);
+                    }
+
+                    Rows.InsertRange(poolRow.Index + 1, rowstoInsert.ToArray());
+                }
+            }
+            finally
+            {
+                Updating = false;
+            }
+            */
         }
     }
 }
