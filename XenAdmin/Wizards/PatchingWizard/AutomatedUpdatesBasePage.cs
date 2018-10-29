@@ -789,6 +789,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     public class DataGridViewUpdateLocationRow : DataGridViewExRow
     {
         private readonly AutomatedUpdatesBasePage _owner;
+        private readonly PlanAction _planAction;
 
         private readonly DataGridViewImageCell _expanderCell;
         private readonly DataGridViewTextBoxCell _messageCell;
@@ -800,10 +801,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool _expanded;
 
-        public DataGridViewUpdateLocationRow(AutomatedUpdatesBasePage Owner,  UpdateProgressBackgroundWorker BackgroundWorker)
+        public DataGridViewUpdateLocationRow(AutomatedUpdatesBasePage Owner, UpdateProgressBackgroundWorker BackgroundWorker, PlanAction planAction = null)
         {
             _owner = Owner;
             this.BackgroundWorker = BackgroundWorker;
+            _planAction = planAction;
 
             _expanderCell = new DataGridViewImageCell();
             _messageCell = new DataGridViewTextBoxCell();
@@ -824,6 +826,21 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get;
             private set;
+        }
+
+        public PlanAction PlanAction
+        {
+            get { return _planAction; }
+        }
+
+        public bool IsLocation
+        {
+            get { return _planAction == null; }
+        }
+
+        public bool IsPlanAction
+        {
+            get { return !IsLocation; }
         }
 
         public string CurrentlyShownMessage
