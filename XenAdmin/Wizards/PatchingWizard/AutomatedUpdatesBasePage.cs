@@ -914,8 +914,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             _retryItem.Click += ToolStripMenuItemRetry_Click;
             _skipItem.Click += ToolStripMenuItemSkip_Click;
 
-            SetExpandIcon(); //todo: fix NullBitmaps and remove.
-
             UpdateDetails();
             RefreshSelf();
         }

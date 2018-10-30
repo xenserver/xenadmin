@@ -140,7 +140,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             this.ColumnExpansion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.NullValue = "System.Drawing.Bitmap";
+            dataGridViewCellStyle1.NullValue = null;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.ColumnExpansion.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.ColumnExpansion, "ColumnExpansion");
@@ -152,7 +152,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             this.ColumnPoolIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.NullValue = "System.Drawing.Bitmap";
+            dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.ColumnPoolIcon.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ColumnPoolIcon, "ColumnPoolIcon");
