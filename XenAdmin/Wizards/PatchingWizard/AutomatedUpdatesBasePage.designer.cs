@@ -133,8 +133,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.dataGridLog.MultiSelect = true;
             this.dataGridLog.Name = "dataGridLog";
             this.dataGridLog.ReadOnly = true;
-            this.dataGridLog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridLog_CellClick);
-            this.dataGridLog.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridLog_CellDoubleClick);
             // 
             // ColumnExpansion
             // 

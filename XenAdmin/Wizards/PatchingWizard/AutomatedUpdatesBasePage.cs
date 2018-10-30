@@ -684,32 +684,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return row;
         }
 
-        private void ToggleExpandedState(int rowIndex)
-        {
-            var row = dataGridLog.Rows[rowIndex] as DataGridViewUpdateLocationRow;
-            if (row == null)
-                return;
-
-            if (row.IsACollapsedRow)
-                row.SetCollapseIcon();
-            else
-                row.SetExpandIcon();
-        }
-
-        private void dataGridLog_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // If you click on the headers you can get -1 as the index.
-            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpansion.Index)
-                return;
-
-            ToggleExpandedState(e.RowIndex);
-        }
-
-        private void dataGridLog_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dataGridLog_CellClick(sender, e);
-        }
-
         #region ResizableColumnsForOldNewPanel
         //From: https://www.codeproject.com/Questions/289580/TableLayout-Panel-resize
         //TODO: Use this only to compare the old and new interfaces, remove before considering inclusion in the mainline.
