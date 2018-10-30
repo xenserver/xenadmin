@@ -934,8 +934,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             //Location = BackgroundWorker.Name;
 
             var actions = new List<ToolStripItem>();
-            actions.Add(_retryItem);
-            actions.Add(_skipItem);
+            if (IsPoolOrStandaloneHost)
+            {
+                actions.Add(_retryItem);
+                actions.Add(_skipItem);
+            }
             Actions = actions;
         }
 
