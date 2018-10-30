@@ -373,37 +373,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
 
-            try
-            {
-                dataGridLog.SuspendLayout();
-                if (dataGridLog.Rows.Count == 0 || bgwToUpdate == null)
-                {
-                    dataGridLog.Rows.Clear();
-
-                    var rows = backgroundWorkers.Select(bgw => CreateUpdateLocationRow(bgw));
-
-                    //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
-                    if (dataGridLog.ColumnCount == 0)
-                        return;
-
-                    dataGridLog.Rows.AddRange(rows.ToArray());
-                }
-                else
-                {
-                    var rows = dataGridLog.Rows
-                        .Cast<DataGridViewUpdateLocationRow>()
-                        .Where(row => row.BackgroundWorker == bgwToUpdate);
-
-                    foreach (var row in rows)
-                    {
-                        row.RefreshSelf();
-                    }
-                }
-            }
-            finally
-            {
-                dataGridLog.ResumeLayout();
-            }
+            Rebuild();
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
@@ -707,7 +677,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private DataGridViewUpdateLocationRow CreateUpdateLocationRow(UpdateProgressBackgroundWorker bgw)
         {
-            var row = new DataGridViewUpdateLocationRow(this, bgw);
+            var row = new DataGridViewUpdateLocationRow(bgw.Pool, this, bgw);
             //row.Visible = !FilterAction(action);
             //row.DismissalRequested += row_DismissalRequested;
             //row.GoToXenObjectRequested += row_GoToXenObjectRequested;
@@ -720,13 +690,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (row == null)
                 return;
 
-            row.Expanded = !row.Expanded;
+            if (row.IsACollapsedRow)
+                row.SetCollapseIcon();
+            else
+                row.SetExpandIcon();
         }
 
         private void dataGridLog_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // If you click on the headers you can get -1 as the index.
-            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpander.Index)
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpansion.Index)
                 return;
 
             ToggleExpandedState(e.RowIndex);
@@ -785,63 +758,225 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #endregion
+
+        private List<string> selectedUpdates = new List<string>();
+        private List<string> collapsedPoolRowsList = new List<string>();
+
+        private void Rebuild()
+        {
+            Program.AssertOnEventThread();
+
+            if (!Visible)
+                return;
+
+            //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
+            if (dataGridLog.ColumnCount == 0)
+                return;
+
+            //if (checksQueue > 0)
+            //    return;
+
+            //SetFilterLabel();
+
+            try
+            {
+                dataGridLog.SuspendLayout();
+
+                if (dataGridLog.RowCount > 0)
+                {
+                    StoreStateOfRows();
+                    dataGridLog.Rows.Clear();
+                    dataGridLog.Refresh();
+                }
+
+                var xenConnections = ConnectionsManager.XenConnectionsCopy;
+                xenConnections.Sort();
+
+                var rowList = new List<DataGridViewRow>();
+
+                foreach (var bgw in this.backgroundWorkers)
+                {
+                    var pool = Helpers.GetPool(bgw.Pool.Connection);
+
+                    if (pool != null) // pool row
+                        rowList.Add(new DataGridViewUpdateLocationRow(pool, this, bgw));
+
+                    var hosts = bgw.Pool.Connection.Cache.Hosts;
+                    Array.Sort(hosts);
+                    foreach (var host in hosts) // host row
+                        rowList.Add(new DataGridViewUpdateLocationRow(host, pool != null, this, bgw));
+                }
+
+                dataGridLog.Rows.AddRange(rowList.ToArray());
+
+                // restore selected state and pool collapsed state
+                var checkHostRow = false;
+                foreach (DataGridViewUpdateLocationRow row in dataGridLog.Rows)
+                {
+                    if (checkHostRow)
+                    {
+                        if (!row.IsPoolOrStandaloneHost)
+                        {
+                            row.Visible = !row.Visible;
+                            continue;
+                        }
+                        else
+                            checkHostRow = false;
+                    }
+
+                    var pool = row.UnderlyingPool;
+                    if (pool != null)
+                    {
+                        row.Selected = selectedUpdates.Contains(pool.uuid);
+                        if (collapsedPoolRowsList.Contains(pool.uuid))
+                        {
+                            row.SetExpandIcon();
+                            checkHostRow = true;
+                        }
+                    }
+                    else
+                    {
+                        var host = row.UnderlyingHost;
+                        if (host != null)
+                            row.Selected = selectedUpdates.Contains(host.uuid);
+                    }
+                }
+
+                if (dataGridLog.SelectedRows.Count == 0 && dataGridLog.Rows.Count > 0)
+                    dataGridLog.Rows[0].Selected = true;
+            }
+            finally
+            {
+                dataGridLog.ResumeLayout();
+                //UpdateButtonEnablement();
+            }
+        }
+
+        private void StoreStateOfRows()
+        {
+            selectedUpdates.Clear();
+
+            collapsedPoolRowsList.Clear();
+            foreach (DataGridViewUpdateLocationRow row in dataGridLog.Rows)
+            {
+                var pool = row.UnderlyingPool;
+                if (pool != null)
+                {
+                    if (row.Selected)
+                        selectedUpdates.Add(pool.uuid);
+                    if (row.IsACollapsedRow)
+                        collapsedPoolRowsList.Add(pool.uuid);
+                }
+                else
+                {
+                    var host = row.UnderlyingHost;
+                    if (host != null && row.Selected)
+                        selectedUpdates.Add(host.uuid);
+                }
+            }
+        }
     }
 
-    public class DataGridViewUpdateLocationRow : DataGridViewExRow
+    public class DataGridViewUpdateLocationRow : CollapsingPoolHostDataGridViewRow
     {
-        private readonly AutomatedUpdatesBasePage _owner;
-        private readonly PlanAction _planAction;
-
-        private readonly DataGridViewImageCell _expanderCell;
-        private readonly DataGridViewTextBoxCell _messageCell;
-        private readonly DataGridViewTextBoxCell _locationCell;
-        private readonly DataGridViewDropDownSplitButtonCell _actionCell;
+        private DataGridViewImageCell _poolIconCell;
+        private DataGridViewTextBoxCell _messageCell;
+        private DataGridViewDropDownSplitButtonCell _actionCell;
 
         private readonly ToolStripMenuItem _retryItem = new ToolStripMenuItem(Messages.RETRY);
         private readonly ToolStripMenuItem _skipItem = new ToolStripMenuItem(Messages.SKIP);
 
-        private bool _expanded;
-
-        public DataGridViewUpdateLocationRow(AutomatedUpdatesBasePage Owner, UpdateProgressBackgroundWorker BackgroundWorker, PlanAction planAction = null)
+        public DataGridViewUpdateLocationRow(Pool pool, AutomatedUpdatesBasePage Owner, UpdateProgressBackgroundWorker BackgroundWorker)
+            : base(pool)
         {
-            _owner = Owner;
-            this.BackgroundWorker = BackgroundWorker;
-            _planAction = planAction;
+            SetupCells(Owner, BackgroundWorker);
+        }
 
-            _expanderCell = new DataGridViewImageCell();
+        public DataGridViewUpdateLocationRow(Host host, bool hasPool, AutomatedUpdatesBasePage Owner, UpdateProgressBackgroundWorker BackgroundWorker)
+            : base(host, hasPool)
+        {
+            SetupCells(Owner, BackgroundWorker);
+        }
+
+        private void SetupCells(AutomatedUpdatesBasePage Owner, UpdateProgressBackgroundWorker BackgroundWorker)
+        {
+            this.Owner = Owner;
+            this.BackgroundWorker = BackgroundWorker;
+            
+            _expansionCell = new DataGridViewImageCell();
+            _poolIconCell = new DataGridViewImageCell();
+            _nameCell = new DataGridViewTextAndImageCell();
             _messageCell = new DataGridViewTextBoxCell();
-            _locationCell = new DataGridViewTextBoxCell();
             _actionCell = new DataGridViewDropDownSplitButtonCell();
+
+            Cells.AddRange(_expansionCell, _poolIconCell, _nameCell, _messageCell, _actionCell);
 
             _retryItem.Click += ToolStripMenuItemRetry_Click;
             _skipItem.Click += ToolStripMenuItemSkip_Click;
 
-            Cells.AddRange(_expanderCell, _messageCell, _locationCell, _actionCell);
+            SetExpandIcon(); //todo: fix NullBitmaps and remove.
 
-            Expanded = false;
-
+            UpdateDetails();
             RefreshSelf();
+        }
+        
+        private void UpdateDetails()
+        {
+            var pool = UnderlyingPool;
+            if (pool != null)
+            {
+                SetCollapseIcon();
+                _poolIconCell.Value = Images.GetImage16For(pool);
+
+                var nc = _nameCell as DataGridViewTextAndImageCell;
+                if (nc != null)
+                    nc.Image = null;
+
+                _nameCell.Value = pool.Name();
+            }
+            else
+            {
+                var host = UnderlyingHost;
+                if (host != null)
+                {
+                    var nc = _nameCell as DataGridViewTextAndImageCell;
+
+                    if (_hasPool && nc != null) // host in pool
+                    {
+                        nc.Image = Images.GetImage16For(host);
+                    }
+                    else if (!_hasPool && nc != null) // standalone host
+                    {
+                        _poolIconCell.Value = Images.GetImage16For(host);
+                        nc.Image = null;
+                    }
+
+                    _nameCell.Value = host.Name();
+                }
+            }
+        }
+
+        public void RefreshSelf()
+        {
+            CurrentlyShownMessage = Owner.FindBackgroundWorkerTitle(BackgroundWorker);
+            //Location = BackgroundWorker.Name;
+
+            var actions = new List<ToolStripItem>();
+            actions.Add(_retryItem);
+            actions.Add(_skipItem);
+            Actions = actions;
+        }
+
+        protected AutomatedUpdatesBasePage Owner
+        {
+            get;
+            private set;
         }
 
         public UpdateProgressBackgroundWorker BackgroundWorker
         {
             get;
             private set;
-        }
-
-        public PlanAction PlanAction
-        {
-            get { return _planAction; }
-        }
-
-        public bool IsLocation
-        {
-            get { return _planAction == null; }
-        }
-
-        public bool IsPlanAction
-        {
-            get { return !IsLocation; }
         }
 
         public string CurrentlyShownMessage
@@ -858,7 +993,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _messageCell.Value = value;
             }
         }
-
+        /*
         public string Location
         {
             get
@@ -873,7 +1008,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _locationCell.Value = value;
             }
         }
-
+        */
         private List<ToolStripItem> Actions
         {
             get { return _actionCell.ContextMenu.Items.Cast<ToolStripItem>().ToList(); }
@@ -886,44 +1021,15 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public bool Expanded {
-            get { return _expanded; }
-            set
-            {
-                _expanded = value;
-                RefreshExpanded();
-            }
-        }
-
-        public void RefreshSelf()
+        public override bool IsCheckable
         {
-            RefreshExpanded();
-            Location = BackgroundWorker.Name;
-
-            var actions = new List<ToolStripItem>();
-            actions.Add(_retryItem);
-            actions.Add(_skipItem);
-            Actions = actions;
-        }
-
-        private void RefreshExpanded()
-        {
-            if (Expanded)
-            {
-                _expanderCell.Value = Images.StaticImages.expanded_triangle;
-                CurrentlyShownMessage = _owner.FindBackgroundWorkerDetails(BackgroundWorker);
-            }
-            else
-            {
-                _expanderCell.Value = Images.StaticImages.contracted_triangle;
-                CurrentlyShownMessage = _owner.FindBackgroundWorkerTitle(BackgroundWorker);
-            }
+            get { return IsPoolOrStandaloneHost; }
         }
 
         private void ToolStripMenuItemRetry_Click(object sender, EventArgs e)
         {
             //Action.Retry();
-            _owner.RetryFailedActionsOfAWorker(BackgroundWorker);
+            Owner.RetryFailedActionsOfAWorker(BackgroundWorker);
         }
 
         private void ToolStripMenuItemSkip_Click(object sender, EventArgs e)

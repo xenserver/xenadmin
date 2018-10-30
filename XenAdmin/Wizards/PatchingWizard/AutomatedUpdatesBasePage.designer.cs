@@ -34,6 +34,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelTitle = new System.Windows.Forms.Label();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -43,9 +44,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.buttonRetry = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridLog = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnExpander = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnExpansion = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnPoolIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Actions = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -122,9 +124,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.dataGridLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnExpander,
+            this.ColumnExpansion,
+            this.ColumnPoolIcon,
+            this.ColumnName,
             this.ColumnMessage,
-            this.ColumnLocation,
             this.Actions});
             resources.ApplyResources(this.dataGridLog, "dataGridLog");
             this.dataGridLog.MultiSelect = true;
@@ -133,35 +136,49 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.dataGridLog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridLog_CellClick);
             this.dataGridLog.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridLog_CellDoubleClick);
             // 
-            // ColumnExpander
+            // ColumnExpansion
             // 
-            this.ColumnExpander.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnExpansion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.NullValue = "System.Drawing.Bitmap";
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.ColumnExpander.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.ColumnExpander, "ColumnExpander");
-            this.ColumnExpander.Name = "ColumnExpander";
-            this.ColumnExpander.ReadOnly = true;
-            this.ColumnExpander.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnExpansion.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnExpansion, "ColumnExpansion");
+            this.ColumnExpansion.Name = "ColumnExpansion";
+            this.ColumnExpansion.ReadOnly = true;
+            this.ColumnExpansion.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ColumnPoolIcon
+            // 
+            this.ColumnPoolIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.NullValue = "System.Drawing.Bitmap";
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.ColumnPoolIcon.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.ColumnPoolIcon, "ColumnPoolIcon");
+            this.ColumnPoolIcon.Name = "ColumnPoolIcon";
+            this.ColumnPoolIcon.ReadOnly = true;
+            this.ColumnPoolIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ColumnName
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnName.FillWeight = 119.797F;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
             // 
             // ColumnMessage
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnMessage.FillWeight = 119.797F;
             resources.ApplyResources(this.ColumnMessage, "ColumnMessage");
             this.ColumnMessage.Name = "ColumnMessage";
             this.ColumnMessage.ReadOnly = true;
-            // 
-            // ColumnLocation
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnLocation.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnLocation.FillWeight = 119.797F;
-            resources.ApplyResources(this.ColumnLocation, "ColumnLocation");
-            this.ColumnLocation.Name = "ColumnLocation";
-            this.ColumnLocation.ReadOnly = true;
             // 
             // Actions
             // 
@@ -200,9 +217,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.Button buttonRetry;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Controls.DataGridViewEx.DataGridViewEx dataGridLog;
-        private System.Windows.Forms.DataGridViewImageColumn ColumnExpander;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnExpansion;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnPoolIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Actions;
     }
 }
