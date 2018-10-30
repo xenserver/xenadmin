@@ -42,7 +42,7 @@ using XenAdmin.Core;
 
 namespace XenServerHealthCheck
 {
-    public class XenServerHealthCheckUpload
+    public class XenServerHealthCheckUpload : IDisposable
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string uploadUrl = "https://rttf.citrix.com/feeds/api/";
@@ -50,7 +50,7 @@ namespace XenServerHealthCheck
         private const string UPLOAD_CHUNK_STRING = "{0}upload_raw_chunk/?id={1}&offset={2}";
         private const string INITIATE_UPLOAD_STRING = "{0}bundle/?size={1}&name={2}";
         private const int CHUNK_SIZE = 1 * 1024 * 1024;
-
+        private const int CHUNK_UPLOAD_TRIES = 3;
         private JavaScriptSerializer serializer;
         private HttpClient httpClient;
 
@@ -80,7 +80,7 @@ namespace XenServerHealthCheck
         }
 
         // Request an upload and fetch the upload id from CIS.
-        public string InitiateUpload(string fileName, long size, string caseNumber, System.Threading.CancellationToken cancel)
+        private string InitiateUpload(string fileName, long size, string caseNumber, System.Threading.CancellationToken cancel)
         {
             // Request a new bundle upload to CIS server.
             string url = string.Format(INITIATE_UPLOAD_STRING, uploadUrl, size, fileName.UrlEncode());
@@ -88,26 +88,33 @@ namespace XenServerHealthCheck
                 url += "&sr=" + caseNumber;
             log.InfoFormat("InitiateUpload, UPLOAD_URL: {0}", url);
             
-            // Add the log verbosity level in json cotent.
+            // Add the log verbosity level in json content.
             string verbosity = "{\"verbosity\":\""+ verbosityLevel + "\"}";
             
             try
             {
-                var httpContent = new StringContent(verbosity);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var response = httpClient.PostAsync(new Uri(url), httpContent, cancel).Result;
-                response.EnsureSuccessStatusCode();
-                var respString = response.Content.ReadAsStringAsync().Result;
+                
+                using (var httpContent = new StringContent(verbosity))
+                {
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    using (var response = httpClient.PostAsync(new Uri(url), httpContent, cancel).Result)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var respString = response.Content.ReadAsStringAsync().Result;
 
-                // Get the upload uuid
-                var res = (Dictionary<string, object>)serializer.DeserializeObject(respString);
-                if (res.ContainsKey("id"))
-                    return (string) res["id"];
+                            // Get the upload uuid
+                            var res = (Dictionary<string, object>) serializer.DeserializeObject(respString);
+                            if (res.ContainsKey("id"))
+                                return (string) res["id"];
+                        }
+                        log.ErrorFormat("Exception while initiating a new CIS upload. The exception was: {0} ({1})", response.StatusCode, response.ReasonPhrase);
+                    }
+                }
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 log.ErrorFormat("Exception while initiating a new CIS upload: {0}", e);
-                return "";
             }
 
             // Fail to initialize the upload request
@@ -132,23 +139,31 @@ namespace XenServerHealthCheck
 
             try
             {
-                var httpContent = new ByteArrayContent(buffer, 0, totalBytesRead);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                var response = httpClient.PostAsync(new Uri(address), httpContent, cancel).Result;
-                response.EnsureSuccessStatusCode();
-                var respString = response.Content.ReadAsStringAsync().Result;
+                using (var httpContent = new ByteArrayContent(buffer, 0, totalBytesRead))
+                {
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                    using (var response = httpClient.PostAsync(new Uri(address), httpContent, cancel).Result)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var respString = response.Content.ReadAsStringAsync().Result;
 
-                // After sending every chunk upload request to server, response will contain a status indicating if it is complete.
-                var res = (Dictionary<string, object>)serializer.DeserializeObject(respString);
-                log.InfoFormat("The status of chunk upload: {0}", res.ContainsKey("status") ? res["status"] : "");
+                            // After sending every chunk upload request to server, response will contain a status indicating if it is complete.
+                            var res = (Dictionary<string, object>) serializer.DeserializeObject(respString);
+                            log.InfoFormat("The status of chunk upload: {0}", res.ContainsKey("status") ? res["status"] : "");
+                            return true;
+                        }
+                        log.ErrorFormat("Failed to upload the chunk. The exception was: {0} ({1})", response.StatusCode, response.ReasonPhrase);
+                    }
+                }
+               
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Failed to upload the chunk. The exception was: {0} ({1})", e.Message, e.InnerException != null ? e.InnerException.Message : "");
-                return false;
+                log.ErrorFormat("Failed to upload the chunk. The exception was: {0}", e);
             }
 
-            return true;
+            return false;
         }
 
         // Upload the zip file.
@@ -179,7 +194,7 @@ namespace XenServerHealthCheck
 
                     try
                     {
-                        for (int i = 0; i < 3; i++)
+                        for (int i = 1; i <= CHUNK_UPLOAD_TRIES; i++)
                         {
                             if (cancel.IsCancellationRequested)
                             {
@@ -195,9 +210,9 @@ namespace XenServerHealthCheck
                             }
 
                             // Fail to upload the chunk for 3 times so fail the bundle upload.
-                            if (i == 2)
+                            if (i == CHUNK_UPLOAD_TRIES)
                             {
-                                log.ErrorFormat("Failed to upload the chunk. Tried 3 times");
+                                log.ErrorFormat("Failed to upload the chunk. Tried {0} times", CHUNK_UPLOAD_TRIES);
                                 return "";
                             }
                         }
@@ -214,5 +229,12 @@ namespace XenServerHealthCheck
             log.InfoFormat("Succeeded to upload bundle {0}", fileName);
             return uploadUuid;
         }
+
+        #region IDisposable Members
+        public void Dispose()
+        {
+            httpClient.Dispose();
+        }
+        #endregion
     }
 }
