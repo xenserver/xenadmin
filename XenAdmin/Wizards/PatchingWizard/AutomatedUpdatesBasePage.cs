@@ -930,8 +930,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void RefreshSelf()
         {
-            CurrentlyShownMessage = Owner.FindBackgroundWorkerTitle(BackgroundWorker);
-            //Location = BackgroundWorker.Name;
+            var currentAction = BackgroundWorker.InProgressActions.FirstOrDefault();
+            CurrentlyShownMessage = currentAction != null ? currentAction.CurrentProgressStep : string.Empty;
 
             var actions = new List<ToolStripItem>();
             if (IsPoolOrStandaloneHost)
