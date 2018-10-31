@@ -373,7 +373,29 @@ namespace XenAdmin.Wizards.PatchingWizard
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
 
-            Rebuild();
+            if (dataGridLog.Rows.Count == 0)
+            {
+                Rebuild();
+                return;
+            }
+
+            try
+            {
+                dataGridLog.SuspendLayout();
+
+                var rows = dataGridLog.Rows
+                    .Cast<DataGridViewUpdateLocationRow>()
+                    .Where(row => row.BackgroundWorker == bgwToUpdate);
+
+                foreach (var row in rows)
+                {
+                    row.RefreshSelf();
+                }
+            }
+            finally
+            {
+                dataGridLog.ResumeLayout();
+            }
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
