@@ -98,9 +98,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!_thisPageIsCompleted)
             {
                 Status = Status.Cancelled;
-                backgroundWorkers.ForEach(bgw => bgw.ProgressChanged -= WorkerProgressChanged);
-                backgroundWorkers.ForEach(bgw => bgw.RunWorkerCompleted -= WorkerCompleted);
-                backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
+                backgroundWorkers.ForEach(delegate(UpdateProgressBackgroundWorker bgw)
+                {
+                    bgw.ProgressChanged -= WorkerProgressChanged;
+                    bgw.RunWorkerCompleted -= WorkerCompleted;
+                    bgw.CancelAsync();
+                });
             }
 
             base.PageCancelled();
