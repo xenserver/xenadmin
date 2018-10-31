@@ -73,5 +73,14 @@ namespace XenAdmin.Controls
             }
 
         }
+
+        protected override Size GetPreferredSize(Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+        {
+            var normalSize = base.GetPreferredSize(graphics, cellStyle, rowIndex, constraintSize);
+            if (Image == null)
+                return normalSize;
+
+            return new Size(normalSize.Width + Image.Width + 2, Math.Max(normalSize.Height, Image.Height));
+        }
     }
 }

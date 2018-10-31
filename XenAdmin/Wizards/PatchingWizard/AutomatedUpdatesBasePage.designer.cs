@@ -160,6 +160,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // ColumnName
             // 
+            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnName.DefaultCellStyle = dataGridViewCellStyle3;
@@ -170,6 +171,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // ColumnMessage
             // 
+            this.ColumnMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle4;
@@ -177,6 +179,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             resources.ApplyResources(this.ColumnMessage, "ColumnMessage");
             this.ColumnMessage.Name = "ColumnMessage";
             this.ColumnMessage.ReadOnly = true;
+            this.ColumnMessage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Actions
             // 
