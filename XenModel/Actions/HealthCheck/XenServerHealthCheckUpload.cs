@@ -75,7 +75,7 @@ namespace XenServerHealthCheck
                 UseProxy = proxy != null
             };
            
-            httpClient = new HttpClient(handler);
+            httpClient = new HttpClient(handler, true);
             httpClient.DefaultRequestHeaders.Add("Authorization", "BT " + uploadToken);
         }
 
@@ -105,10 +105,9 @@ namespace XenServerHealthCheck
 
                             // Get the upload uuid
                             var res = (Dictionary<string, object>) serializer.DeserializeObject(respString);
-                            if (res.ContainsKey("id"))
-                                return (string) res["id"];
+                            return res.ContainsKey("id") ? (string) res["id"] : "";
                         }
-                        log.ErrorFormat("Exception while initiating a new CIS upload. The exception was: {0} ({1})", response.StatusCode, response.ReasonPhrase);
+                        log.ErrorFormat("Failed to initiate a CIS upload. POST request returned {0} ({1})", response.StatusCode, response.ReasonPhrase);
                     }
                 }
             }
@@ -153,7 +152,7 @@ namespace XenServerHealthCheck
                             log.InfoFormat("The status of chunk upload: {0}", res.ContainsKey("status") ? res["status"] : "");
                             return true;
                         }
-                        log.ErrorFormat("Failed to upload the chunk. The exception was: {0} ({1})", response.StatusCode, response.ReasonPhrase);
+                        log.ErrorFormat("Failed to upload the chunk. POST request returned {0} ({1})", response.StatusCode, response.ReasonPhrase);
                     }
                 }
                
@@ -177,12 +176,12 @@ namespace XenServerHealthCheck
             string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size, caseNumber, cancel);
             if (string.IsNullOrEmpty(uploadUuid))
             {
-                log.ErrorFormat("Cannot fetch the upload UUID from CIS server");
+                log.ErrorFormat("Could not fetch the upload UUID from the CIS server");
                 return "";
             }
 
             // Start to upload zip file.
-            log.InfoFormat("Upload server returned Upload ID: {0}", uploadUuid);
+            log.InfoFormat("Upload server returned Upload UUID: {0}", uploadUuid);
             using (var source = File.Open(fileName, FileMode.Open))
             {
                 long offset = 0;
