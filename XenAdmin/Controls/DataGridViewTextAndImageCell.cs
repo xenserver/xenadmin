@@ -30,8 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -39,8 +37,6 @@ namespace XenAdmin.Controls
 {
     public class DataGridViewTextAndImageCell : DataGridViewTextBoxCell
     {
-
-      
         public Image Image { get; set; }
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
@@ -65,13 +61,11 @@ namespace XenAdmin.Controls
                 }
                 graphics.DrawImage(Image, cellBounds.X, cellBounds.Y+2, Image.Width,
                                          Math.Min(Image.Height,cellBounds.Height));
-
             }
             else
             {
                 base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
             }
-
         }
 
         protected override Size GetPreferredSize(Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
