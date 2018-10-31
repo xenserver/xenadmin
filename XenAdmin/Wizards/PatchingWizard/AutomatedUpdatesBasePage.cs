@@ -98,6 +98,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!_thisPageIsCompleted)
             {
                 Status = Status.Cancelled;
+                backgroundWorkers.ForEach(bgw => bgw.ProgressChanged -= WorkerProgressChanged);
+                backgroundWorkers.ForEach(bgw => bgw.RunWorkerCompleted -= WorkerCompleted);
                 backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
             }
 
@@ -763,10 +765,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             Program.AssertOnEventThread();
 
             if (!Visible)
-                return;
-
-            //TODO: Replace this temporary hack designed to prevent crashes when the workers finish after the form is no longer shown and there are no columns to fit the cells in.
-            if (dataGridLog.ColumnCount == 0)
                 return;
 
             //if (checksQueue > 0)
