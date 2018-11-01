@@ -57,6 +57,11 @@ namespace XenServerHealthCheck
         private readonly int verbosityLevel;
         private readonly string uploadToken;
 
+        /// <summary>
+        /// Fired when progress changes; the first param is bytes uploaded, the second total bytes
+        /// </summary>
+        public event Action<long, long> ProgressChanged;
+
         public XenServerHealthCheckUpload(string token, int verbosity, string uploadUrl, IXenConnection connection)
         {
             uploadToken = token;
@@ -79,7 +84,9 @@ namespace XenServerHealthCheck
             httpClient.DefaultRequestHeaders.Add("Authorization", "BT " + uploadToken);
         }
 
-        // Request an upload and fetch the upload id from CIS.
+        /// <summary>
+        /// Request an upload and fetch the upload id from CIS
+        /// </summary>
         private string InitiateUpload(string fileName, long size, string caseNumber, System.Threading.CancellationToken cancel)
         {
             // Request a new bundle upload to CIS server.
@@ -93,7 +100,6 @@ namespace XenServerHealthCheck
             
             try
             {
-                
                 using (var httpContent = new StringContent(verbosity))
                 {
                     httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -165,10 +171,12 @@ namespace XenServerHealthCheck
             return false;
         }
 
-        // Upload the zip file.
+        /// <summary>
+        /// Initiate the upload and then upload the zip file in chunks
+        /// </summary>
         public string UploadZip(string fileName, string caseNumber, System.Threading.CancellationToken cancel)
         {
-            log.InfoFormat("Start to upload bundle {0}", fileName);
+            log.InfoFormat("Initiate the upload for {0}", fileName);
             FileInfo fileInfo = new FileInfo(fileName);
             long size = fileInfo.Length;
 
@@ -182,7 +190,9 @@ namespace XenServerHealthCheck
 
             // Start to upload zip file.
             log.InfoFormat("Upload server returned Upload UUID: {0}", uploadUuid);
-            using (var source = File.Open(fileName, FileMode.Open))
+            log.InfoFormat("Start to upload bundle {0}", fileName);
+
+            using (var source = fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.None))
             {
                 long offset = 0;
                 while (offset < size)
@@ -205,6 +215,7 @@ namespace XenServerHealthCheck
                             {
                                 // This chunk is successfully uploaded
                                 offset += thisChunkSize;
+                                OnProgressChanged(offset, size);
                                 break;
                             }
 
@@ -227,6 +238,12 @@ namespace XenServerHealthCheck
 
             log.InfoFormat("Succeeded to upload bundle {0}", fileName);
             return uploadUuid;
+        }
+
+        private void OnProgressChanged(long bytesUploaded, long totalBytes)
+        {
+            if (ProgressChanged != null)
+                ProgressChanged(bytesUploaded, totalBytes);
         }
 
         #region IDisposable Members

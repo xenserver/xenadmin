@@ -2725,6 +2725,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services ({0} of {1}).
+        /// </summary>
+        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE {
+            get {
+                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
