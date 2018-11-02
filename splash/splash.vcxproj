@@ -117,6 +117,12 @@
   <ItemGroup>
     <ResourceCompile Include="splash.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XenAdmin\XenAdmin.csproj">
+      <Project>{70bda4bc-f062-4302-8acd-a15d8bf31d65}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
