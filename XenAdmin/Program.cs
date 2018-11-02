@@ -265,6 +265,8 @@ namespace XenAdmin
                     else
                     {
                         // 2K8, and Vista, Win7 without styles.
+                        TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
+                        TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
                         TitleBarForeColor = SystemColors.ControlText;
                         HeaderGradientForeColor = SystemColors.ControlText;
                         HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
