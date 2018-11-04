@@ -208,7 +208,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Tags\TagsEditor.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\UpsellPage.cs">
       <SubType>UserControl</SubType>
@@ -450,7 +450,7 @@
       <DependentUpon>DockerDetailsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\HomePage.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
@@ -555,13 +555,13 @@
       <DependentUpon>PerfmonAlertOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\BlueBorderPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\ArchiveMaintainer.cs">
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataArchive.cs" />
     <Compile Include="Controls\CustomDataGraph\GraphList.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\GraphList.Designer.cs">
       <DependentUpon>GraphList.cs</DependentUpon>
@@ -575,12 +575,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DoubleBufferedPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DoubleBufferedPanel.Designer.cs">
       <DependentUpon>DoubleBufferedPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GradientPanel\GradientPanel.cs">
+    <Compile Include="Controls\GradientPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\HaNtolIndicator.cs">
@@ -928,13 +928,13 @@
       <DependentUpon>DataKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlot.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlot.designer.cs">
       <DependentUpon>DataPlot.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlotNav.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlotNav.designer.cs">
       <DependentUpon>DataPlotNav.cs</DependentUpon>
@@ -1033,7 +1033,7 @@
       <DependentUpon>FolderChangeDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Folders\FolderEditor.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Folders\FolderListItem.cs" />
     <Compile Include="Dialogs\NewTagDialog.cs">
@@ -3689,9 +3689,7 @@
     <Compile Include="Wizards\DRWizards\DRFailoverWizardWelcomePage.Designer.cs">
       <DependentUpon>DRFailoverWizardWelcomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataGridViewEnableableComboBoxCell.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\DataGridViewEnableableComboBoxCell.cs" />
     <Compile Include="Wizards\GenericPages\DelayLoadingOptionComboBoxItem.cs" />
     <Compile Include="Wizards\GenericPages\LunPerVdiMappingPage.cs">
       <SubType>UserControl</SubType>

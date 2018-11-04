@@ -89,25 +89,19 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        private static Color DefaultTitleBarStartColor = Color.FromArgb(242, 242, 242);
-        private static Color DefaultTitleBarEndColor = Color.FromArgb(207, 207, 207);
-
-        // Also set in Main() AFTER we call EnableVisualStyles().
+        // Set in Main() AFTER we call EnableVisualStyles().
         // We set them here only so something decent shows up in the Designer.
-        // We must not request ProfessionalColors before we have called Application.EnableVisualStyles may prevent the program from displayed as expected.
-        public static Color TitleBarStartColor = DefaultTitleBarStartColor;
-        public static Color TitleBarEndColor = DefaultTitleBarEndColor;
-        public static Color TitleBarBorderColor = TitleBarEndColor;
-        public static Color TitleBarForeColor = Color.White;
-
-        public static Color HeaderGradientStartColor = Color.FromArgb(57, 109, 140);
-        public static Color HeaderGradientEndColor = Color.FromArgb(63, 139, 137);
-        public static Color HeaderGradientForeColor = Color.White;
-        public static Font HeaderGradientFont = new Font(DefaultFont.FontFamily, 11.25f);
-        public static Font TabbedDialogHeaderFont = HeaderGradientFont;
-
-        public static Color TabPageRowBorder = Color.DarkGray;
-        public static Color TabPageRowHeader = Color.Silver;
+        // We must not request ProfessionalColors before we have called Application.EnableVisualStyles
+        // as it may prevent the program from displayed as expected.
+        public static Color TitleBarStartColor;
+        public static Color TitleBarEndColor;
+        public static Color TitleBarBorderColor;
+        public static Color TitleBarForeColor;
+        public static Color HeaderGradientForeColor;
+        public static Font HeaderGradientFont;
+        public static Font TabbedDialogHeaderFont;
+        public static Color TabPageRowBorder;
+        public static Color TabPageRowHeader;
 
         public static MainWindow MainWindow = null;
 
@@ -252,8 +246,8 @@ namespace XenAdmin
                     if (Application.RenderWithVisualStyles)
                     {
                         // Vista, Win7 with styles.
-                        TitleBarStartColor = DefaultTitleBarStartColor;
-                        TitleBarEndColor = DefaultTitleBarEndColor;
+                        TitleBarStartColor = Color.FromArgb(242, 242, 242);
+                        TitleBarEndColor = Color.FromArgb(207, 207, 207);
                         TitleBarBorderColor = Color.FromArgb(160, 160, 160);
                         TitleBarForeColor = Color.FromArgb(60, 60, 60);
                         HeaderGradientForeColor = Color.White;
@@ -264,9 +258,10 @@ namespace XenAdmin
                     }
                     else
                     {
-                        // 2K8, and Vista, Win7 without styles.
+                        // 2K8 and Vista, Win7 without styles.
                         TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
                         TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
+                        TitleBarBorderColor = TitleBarEndColor;
                         TitleBarForeColor = SystemColors.ControlText;
                         HeaderGradientForeColor = SystemColors.ControlText;
                         HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
@@ -280,8 +275,8 @@ namespace XenAdmin
                     TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
                     TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
                     TitleBarBorderColor = TitleBarEndColor;
-                    TitleBarForeColor = Application.RenderWithVisualStyles ? Color.White : SystemColors.ControlText;
-                    HeaderGradientForeColor = TitleBarForeColor;
+                    TitleBarForeColor = SystemColors.ControlText;
+                    HeaderGradientForeColor = Application.RenderWithVisualStyles ? Color.White : SystemColors.ControlText;
                     HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
                     TabbedDialogHeaderFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1.75f, FontStyle.Bold);
                     TabPageRowBorder = Color.DarkGray;

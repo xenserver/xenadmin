@@ -22,7 +22,7 @@ namespace XenAdmin.TabPages
             this.DataEventList = new XenAdmin.Controls.CustomDataGraph.DataEventList();
             this.DataPlotNav = new XenAdmin.Controls.CustomDataGraph.DataPlotNav();
             this.EventsLabel = new System.Windows.Forms.Label();
-            this.gradientPanel2 = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.gradientPanel2 = new XenAdmin.Controls.GradientPanel.VerticalGradientPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.zoomButton = new System.Windows.Forms.Button();
             this.moveDownButton = new System.Windows.Forms.Button();
@@ -116,7 +116,7 @@ namespace XenAdmin.TabPages
             // 
             this.EventsLabel.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.EventsLabel, "EventsLabel");
-            this.EventsLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.EventsLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.EventsLabel.Name = "EventsLabel";
             // 
             // gradientPanel2
@@ -124,7 +124,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.gradientPanel2, "gradientPanel2");
             this.gradientPanel2.Controls.Add(this.EventsLabel);
             this.gradientPanel2.Name = "gradientPanel2";
-            this.gradientPanel2.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Title;
             // 
             // panel3
             // 
