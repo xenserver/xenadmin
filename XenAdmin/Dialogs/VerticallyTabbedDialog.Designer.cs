@@ -32,7 +32,7 @@ namespace XenAdmin.Dialogs
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.verticalTabs = new XenAdmin.Controls.VerticalTabs();
             this.blueBorder = new XenAdmin.Controls.BlueBorderPanel();
-            this.TopPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.TopPanel = new XenAdmin.Controls.GradientPanel.HorizontalGradientPanel();
             this.TabImage = new System.Windows.Forms.PictureBox();
             this.TabTitle = new System.Windows.Forms.Label();
             this.ContentPanel = new System.Windows.Forms.Panel();
@@ -86,7 +86,6 @@ namespace XenAdmin.Dialogs
             this.TopPanel.Controls.Add(this.TabTitle);
             resources.ApplyResources(this.TopPanel, "TopPanel");
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
             // 
             // TabImage
             // 

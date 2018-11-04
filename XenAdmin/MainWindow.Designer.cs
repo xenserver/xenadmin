@@ -82,7 +82,7 @@ namespace XenAdmin
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.eventsPage = new XenAdmin.TabPages.HistoryPage();
-            this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.VerticalGradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TitleLabel = new System.Windows.Forms.Label();
@@ -533,7 +533,6 @@ namespace XenAdmin
             this.TitleBackPanel.Controls.Add(this.TitleIcon);
             this.TitleBackPanel.Controls.Add(this.tableLayoutPanel1);
             this.TitleBackPanel.Name = "TitleBackPanel";
-            this.TitleBackPanel.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Title;
             // 
             // TitleIcon
             // 
@@ -553,7 +552,7 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.TitleLabel, "TitleLabel");
             this.TitleLabel.AutoEllipsis = true;
-            this.TitleLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.TitleLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.UseMnemonic = false;
             // 
