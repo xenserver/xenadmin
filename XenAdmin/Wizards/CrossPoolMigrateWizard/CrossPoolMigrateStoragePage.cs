@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override bool SrIsSuitable(SR sr)
         {
-            return sr != null && !sr.HBALunPerVDI();
+            return sr != null && !sr.HBALunPerVDI() && sr.SupportsStorageMigration();
         }
 
 	    protected override bool IsExtraSpaceNeeded(XenRef<SR> sourceRef, XenRef<SR> targetRef)

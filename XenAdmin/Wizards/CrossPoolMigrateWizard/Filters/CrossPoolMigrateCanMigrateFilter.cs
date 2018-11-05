@@ -80,7 +80,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 
                 foreach (Host host in targets)
                 {
-                    var targetSrs = host.Connection.Cache.SRs.Where(sr => sr.SupportsVdiCreate()).ToList();
+                    var targetSrs = host.Connection.Cache.SRs.Where(sr => sr.SupportsStorageMigration()).ToList();
                     var targetNetwork = GetANetwork(host);
 
                     foreach (VM vm in preSelectedVMs)
