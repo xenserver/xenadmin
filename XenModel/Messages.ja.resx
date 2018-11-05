@@ -11656,17 +11656,17 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU: {0}</value>
   </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>インターフェイス {0}: ネットワーク = {1}</value>
+  </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>このテンプレートを使用するには、Linux パックをインストールする必要があります</value>
   </data>
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;説明はありません&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>セッションを終了しています...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>インターフェイス {0}: ネットワーク = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>ユーザー '{0}' のセッションを終了しています</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>アーカイブ先のテスト</value>

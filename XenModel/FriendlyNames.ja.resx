@@ -1904,4 +1904,16 @@
   <data name="Message.body-host_low_memory" xml:space="preserve">
     <value>サーバー '{0}' のメモリが不足しています。</value>
   </data>
+  <data name="Description-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] ライセンス デーモン ログ</value>
+  </data>
+  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>[XenServer] ツールスタックのクラスター管理デーモンによって生成されたログ。</value>
+  </data>
+  <data name="Label-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] ライセンス デーモン</value>
+  </data>
+  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>[XenServer] クラスター管理デーモン</value>
+  </data>
 </root>
