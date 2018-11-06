@@ -1352,12 +1352,18 @@ namespace XenAdmin.TabPages
 
         private string PoolAdditionalLicenseString()
         {
-            if (licenseStatus.CurrentState == LicenseStatus.HostState.Expired)
-                return Messages.LICENSE_EXPIRED;
-            else if (licenseStatus.CurrentState == LicenseStatus.HostState.Free)
-                return Messages.LICENSE_UNLICENSED;
-            else   
+            if (licenseStatus == null)
                 return string.Empty;
+
+            switch (licenseStatus.CurrentState)
+            {
+                case LicenseStatus.HostState.Expired:
+                    return Messages.LICENSE_EXPIRED;
+                case LicenseStatus.HostState.Free:
+                    return Messages.LICENSE_UNLICENSED;
+                default:
+                    return string.Empty;
+            }
         }
 
         private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)
