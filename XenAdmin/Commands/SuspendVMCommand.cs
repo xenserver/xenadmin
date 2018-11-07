@@ -192,11 +192,6 @@ namespace XenAdmin.Commands
 
         protected override string GetCantExecuteReasonCore(SelectedItem item)
         {
-            return GetCantExecuteReasonCore(item, false);
-        }
-
-        private string GetCantExecuteReasonCore(SelectedItem item, bool extraDetails)
-        {
             VM vm = item.XenObject as VM;
             if (vm == null)
             {
@@ -217,26 +212,17 @@ namespace XenAdmin.Commands
                 return noToolsOrDriversReason;
             }
 
-            if (extraDetails)
+            if (vm.allowed_operations != null && !vm.allowed_operations.Contains(vm_operations.suspend))
             {
-                string reason = null;
-                DelegatedAsyncAction action = new DelegatedAsyncAction(vm.Connection, null, null, null,
-                    delegate (Session session)
-                    {
-                        try
-                        {
-                            VM.assert_operation_valid(session, vm.opaque_ref, vm_operations.suspend);
-                        }
-                        catch (Failure f)
-                        {
-                            if (f.ErrorDescription.Count == 0 || f.ErrorDescription[0] != Failure.RBAC_PERMISSION_DENIED)
-                                reason = f.Message;
-                        }
-                    }, true);
-                action.RunExternal(vm.Connection.Session);
+                if (vm.HasGPUPassthrough())
+                {
+                    return Messages.VM_HAS_GPU_PASSTHROUGH;
+                }
 
-                if (reason != null)
-                    return reason;
+                if (vm.HasVGPUs())
+                {
+                    return Messages.VM_HAS_VGPUS;
+                }
             }
 
             return base.GetCantExecuteReasonCore(item);
@@ -253,7 +239,7 @@ namespace XenAdmin.Commands
                 if (MainWindowCommandInterface != null && CanExecuteCore(new SelectedItemCollection(item)))
                     continue;
 
-                string reason = GetCantExecuteReasonCore(item, true);
+                string reason = GetCantExecuteReasonCore(item);
                 if (reason != null)
                     cantExecuteReasons.Add(item, reason);
             }
