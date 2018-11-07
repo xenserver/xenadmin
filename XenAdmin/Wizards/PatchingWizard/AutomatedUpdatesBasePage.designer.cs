@@ -120,7 +120,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

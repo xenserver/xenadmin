@@ -7981,12 +7981,6 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="MESSAGEBOX_SKIP_RPU_STEP_TITLE" xml:space="preserve">
-    <value>Skip Rolling Pool Upgrade Step</value>
-  </data>
-  <data name="MESSAGEBOX_SKIP_RPU_STEPS_TITLE" xml:space="preserve">
-    <value>Skip Rolling Pool Upgrade Steps</value>
-  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>You must eject all slaves from the pool before you can delete the pool.</value>
   </data>

@@ -522,7 +522,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning,
                                     string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
-                                    skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS_TITLE : Messages.MESSAGEBOX_SKIP_RPU_STEP_TITLE),
+                                    ParentForm != null ? ParentForm.Text : Messages.XENCENTER),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo))
             {
