@@ -172,6 +172,9 @@
       <DependentUpon>DataGridViewEx.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewTextAndImageCell.cs" />
+    <Compile Include="Controls\ComboBoxes\EnableableComboBoxEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3689,9 +3692,7 @@
     <Compile Include="Wizards\DRWizards\DRFailoverWizardWelcomePage.Designer.cs">
       <DependentUpon>DRFailoverWizardWelcomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataGridViewEnableableComboBoxCell.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\DataGridViewEnableableComboBoxCell.cs" />
     <Compile Include="Wizards\GenericPages\DelayLoadingOptionComboBoxItem.cs" />
     <Compile Include="Wizards\GenericPages\LunPerVdiMappingPage.cs">
       <SubType>UserControl</SubType>
