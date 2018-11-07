@@ -76,7 +76,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override bool EnableNext()
         {
-            if (ApplySuppPackAfterUpgrade && !WizardHelpers.IsValidFile(FilePath))
+            if (ApplySuppPackAfterUpgrade && !WizardHelpers.IsValidFile(FilePath, out _))
                 return false;
 
             return pictureBox1.Visible && pictureBox1.Image == testOK;
@@ -98,7 +98,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
             {
-                WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel, out SelectedSuppPack);
+                SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
             }
         }
 

@@ -35,7 +35,6 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
 using System.IO;
 using XenAdmin.Dialogs;
@@ -204,96 +203,78 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                if (!IsInAutomatedUpdatesMode)
+                if (IsInAutomatedUpdatesMode)
                 {
-                    if (selectFromDiskRadioButton.Checked && !string.IsNullOrEmpty(FilePath) &&
-                        Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip"))
-                    {
-                        //check if we are installing update user sees in textbox
-                        if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) !=
-                            Path.GetFileNameWithoutExtension(FilePath))
-                        {
-                            unzippedUpdateFilePath = WizardHelpers.ExtractUpdate(FilePath, this);
-                            if (unzippedUpdateFilePath == null)
-                                cancel = true;
-
-                            unzippedFiles.Add(unzippedUpdateFilePath);
-                        }
-                    }
-                    else
-                        unzippedUpdateFilePath = null;
-
-                    var fileName = WizardHelpers.IsValidFile(unzippedUpdateFilePath)
-                        ? unzippedUpdateFilePath.ToLowerInvariant()
-                        : FilePath.ToLowerInvariant();
-
-                    SelectedUpdateAlert = downloadUpdateRadioButton.Checked &&
-                                          dataGridViewPatches.SelectedRows.Count > 0
+                    var succeed = Updates.CheckForUpdatesSync(this.Parent);
+                    cancel = !succeed;
+                }
+                else if (downloadUpdateRadioButton.Checked)
+                {
+                    SelectedUpdateAlert = dataGridViewPatches.SelectedRows.Count > 0
                         ? ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateAlert
                         : null;
 
-                    bool hasUpdateXml = false;
-                    FileFromDiskAlert = selectFromDiskRadioButton.Checked
-                        ? GetAlertFromFile(fileName, out hasUpdateXml)
-                        : null;
-                    FileFromDiskHasUpdateXml = hasUpdateXml;
+                    var distinctHosts = SelectedUpdateAlert != null ? SelectedUpdateAlert.DistinctHosts : null;
+                    SelectedUpdateType = distinctHosts != null && distinctHosts.Any(Helpers.ElyOrGreater)
+                        ? UpdateType.ISO
+                        : UpdateType.Legacy;
 
-                    if (downloadUpdateRadioButton.Checked)
+                    FileFromDiskAlert = null;
+                    FileFromDiskHasUpdateXml = false;
+                    unzippedUpdateFilePath = null;
+                    SelectedNewPatch = null;
+                }
+                else
+                {
+                    SelectedUpdateAlert = null;
+                    SelectedNewPatch = null;
+
+                    if (!WizardHelpers.IsValidFile(FilePath, out var pathFailure))
+                        using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                            SystemIcons.Error, pathFailure, Messages.UPDATES)))
+                        {
+                            cancel = true;
+                            dlg.ShowDialog();
+                            return;
+                        }
+
+                    SelectedNewPatch = FilePath;
+
+                    if (Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip"))
                     {
-                        var distinctHosts = SelectedUpdateAlert != null ? SelectedUpdateAlert.DistinctHosts : null;
-                        if (distinctHosts != null && distinctHosts.Any(Helpers.ElyOrGreater))
-                            // this is to check whether the Alert represents an ISO update (Ely or greater)
+                        //check if we are installing the update the user sees in the textbox
+                        if (unzippedUpdateFilePath == null || !File.Exists(unzippedUpdateFilePath) ||
+                            Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) != Path.GetFileNameWithoutExtension(FilePath))
                         {
-                            SelectedUpdateType = UpdateType.ISO;
+                            unzippedUpdateFilePath = WizardHelpers.ExtractUpdate(FilePath, this);
                         }
-                        else //legacy format
+
+                        if (!WizardHelpers.IsValidFile(unzippedUpdateFilePath, out var zipFailure))
                         {
-                            SelectedUpdateType = UpdateType.Legacy;
+                            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                                SystemIcons.Error, zipFailure, Messages.UPDATES)))
+                            {
+                                cancel = true;
+                                dlg.ShowDialog();
+                                return;
+                            }
                         }
+                        
+                        if (!unzippedFiles.Contains(unzippedUpdateFilePath))
+                            unzippedFiles.Add(unzippedUpdateFilePath);
+
+                        SelectedNewPatch = unzippedUpdateFilePath;
                     }
                     else
-                    {
-                        if (WizardHelpers.IsValidFile(fileName))
-                        {
-                            if (fileName.EndsWith("." + Branding.Update))
-                                SelectedUpdateType = UpdateType.Legacy;
-                            else if (fileName.EndsWith("." + Branding.UpdateIso))
-                                SelectedUpdateType = UpdateType.ISO;
-                            else
-                                SelectedUpdateType = UpdateType.Existing;
-                        }
-                    }
+                        unzippedUpdateFilePath = null;                  
 
-                    if (SelectedExistingPatch != null && !SelectedExistingPatch.Connection.IsConnected)
-                    {
-                        cancel = true;
+                    if (SelectedNewPatch.EndsWith("." + Branding.Update))
+                        SelectedUpdateType = UpdateType.Legacy;
+                    else if (SelectedNewPatch.EndsWith("." + Branding.UpdateIso))
+                        SelectedUpdateType = UpdateType.ISO;
 
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                string.Format(Messages.UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH, SelectedExistingPatch.Connection.Name),
-                                Messages.UPDATES_WIZARD)))
-                        {
-                            dlg.ShowDialog(this);
-                        }
-                    }
-                    else if (!string.IsNullOrEmpty(SelectedNewPatch) && !File.Exists(SelectedNewPatch))
-                    {
-                        cancel = true;
-
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, SelectedNewPatch),
-                                Messages.UPDATES_WIZARD)))
-                        {
-                            dlg.ShowDialog(this);
-                        }
-                    }
-                }
-                else //In Automatic Mode
-                {
-                    var succeed = Updates.CheckForUpdatesSync(this.Parent);
-
-                    cancel = !succeed;
+                    FileFromDiskAlert = GetAlertFromFile(SelectedNewPatch, out var hasUpdateXml);
+                    FileFromDiskHasUpdateXml = hasUpdateXml;
                 }
             }
 
@@ -431,7 +412,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (selectFromDiskRadioButton.Checked)
             {
-                if (WizardHelpers.IsValidFile(FilePath))
+                if (WizardHelpers.IsValidFile(FilePath, out _))
                     return true;
             }
 
@@ -446,7 +427,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         /// <summary>
         /// List to store unzipped files to be removed later by PatchingWizard
         /// </summary>
-        private List<string> unzippedFiles = new List<string>();
+        private readonly List<string> unzippedFiles = new List<string>();
 
         public List<string> UnzippedUpdateFiles
         {
@@ -461,24 +442,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public UpdateType SelectedUpdateType { get; set; }
 
-        public Pool_patch SelectedExistingPatch { get; set; }
-
-        public string SelectedNewPatch
-        {
-            get
-            {               
-                if (selectFromDiskRadioButton.Checked)
-                {
-                    return SelectedUpdateType == UpdateType.Legacy || SelectedUpdateType == UpdateType.ISO
-                        ? WizardHelpers.IsValidFile(unzippedUpdateFilePath) && Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip")
-                            ? unzippedUpdateFilePath
-                            : FilePath
-                        : null;
-                }
-                
-                return null;
-            }
-        }
+        public string SelectedNewPatch { get; set; }
 
         #region DataGridView
 
@@ -665,5 +629,5 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
     }        
 
-    public enum UpdateType { Legacy, Existing, ISO}
+    public enum UpdateType { Legacy, ISO }
 }

@@ -67,7 +67,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<Host> SelectedServers { private get; set; }
         public UpdateType SelectedUpdateType { private get; set; }
         public string SelectedNewPatchPath { get; set; }
-        public Pool_patch SelectedExistingPatch { private get; set; }
         public Alert SelectedUpdateAlert { private get; set; }
 
         public readonly Dictionary<Pool_patch, string> NewUploadedPatches = new Dictionary<Pool_patch, string>();
@@ -96,9 +95,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             canUpload = true;
             canDownload = true;
             UpdateButtons();
-
-            if (SelectedUpdateType == UpdateType.Existing)
-                _patch = SelectedExistingPatch;
 
             if (direction == PageLoadedDirection.Forward)           
             {
@@ -183,13 +179,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private Dictionary<Host, AsyncAction> uploadActions = new Dictionary<Host, AsyncAction>();
 
-        private static bool PatchExistsOnPool(Pool_patch patch, Host poolMaster)
-        {
-            var poolPatches = new List<Pool_patch>(poolMaster.Connection.Cache.Pool_patches);
-
-            return (poolPatches.Exists(p => string.Equals(p.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase)));
-        }
-
         private void PrepareUploadActions()
         {
             OnPageUpdated();
@@ -209,14 +198,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             bool deleteFileOnCancel = AllDownloadedPatches.ContainsValue(SelectedNewPatchPath);
                             action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatchPath, true, deleteFileOnCancel);
-                        }
-                        break;
-                    case UpdateType.Existing:
-                        if (!PatchExistsOnPool(_patch, selectedServer))
-                        {
-                            //Download patch from server Upload in the selected server
-                            action = new CopyPatchFromHostToOther(SelectedExistingPatch.Connection, selectedServer,
-                                                                  SelectedExistingPatch);
                         }
                         break;
                     case UpdateType.ISO:
@@ -298,10 +279,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case UpdateType.Legacy:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, master))
                             action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatchPath, true);
-                        break;
-                    case UpdateType.Existing:
-                        if (SelectedExistingPatch != null && !PatchExistsOnPool(SelectedExistingPatch, master))
-                            action = new CheckDiskSpaceForPatchUploadAction(master, SelectedExistingPatch, true);
                         break;
                 }
 
@@ -475,12 +452,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
                     }
                     
-                    if (action is CopyPatchFromHostToOther && action.Host != null)
-                    {
-                        _poolUpdate = null;
-                        _patch = action.Host.Connection.Cache.Resolve((action as CopyPatchFromHostToOther).NewPatchRef);
-                    }
-
                     if (_patch != null && !NewUploadedPatches.ContainsKey(_patch))
                     {
                         NewUploadedPatches.Add(_patch, SelectedNewPatchPath);
@@ -608,17 +579,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void errorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (!canDownload)
-            {
-                var msgtemplate = SelectedExistingPatch.host_patches.Count > 0 ? Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO : Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED;
-                var msg = string.Format(msgtemplate, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name, Branding.Update);
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, msg)))
-                {
-                    dlg.ShowDialog(this);
-                }
-            }
-
             if (diskSpaceRequirements == null)
                 return;
 
