@@ -88,13 +88,14 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override AsyncAction CreateUnwindChangesAction()
         {
-            if (VM.Connection.Resolve(new XenRef<VM>(VM.opaque_ref)) == null) // check if the vm is still in the cache
+            var vm = VM.Connection.Resolve(new XenRef<VM>(VM.opaque_ref));
+            if (vm == null) // check if the vm is still in the cache
                 return null;
 
             return new DelegatedAsyncAction(
                VM.Connection,
                Messages.ACTION_ENABLE_AUTOSTART_ON_VM,
-               string.Format(Messages.ACTION_ENABLING_AUTOSTART_ON_VM, Helpers.GetName(VM)),
+               string.Format(Messages.ACTION_ENABLING_AUTOSTART_ON_VM, Helpers.GetName(vm)),
                null,
                ActionDelegate(true));
         }
