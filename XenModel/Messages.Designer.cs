@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -22904,6 +22904,32 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By pressing Yes, the following step will be skipped:
+        ///    
+        ///{0}
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string MESSAGEBOX_SKIP_RPU_STEP {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_SKIP_RPU_STEP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By pressing Yes, the following steps will be skipped:
+        ///    
+        ///{0}
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string MESSAGEBOX_SKIP_RPU_STEPS {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_SKIP_RPU_STEPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must eject all slaves from the pool before you can delete the pool..
         /// </summary>
         public static string MESSAGEBOX_SLAVES_EJECT {
@@ -30749,7 +30775,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it..
+        ///   Looks up a localized string similar to One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused..
         /// </summary>
         public static string ROLLING_UPGRADE_ERROR_MANY {
             get {
@@ -30758,7 +30784,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The rolling pool upgrade process was not completed successfully. The upgrade process has been paused. Press Retry to resume it..
+        ///   Looks up a localized string similar to The rolling pool upgrade process was not completed successfully. The upgrade process has been paused..
         /// </summary>
         public static string ROLLING_UPGRADE_ERROR_ONE {
             get {
@@ -30919,6 +30945,33 @@ namespace XenAdmin {
         public static string ROLLINGUPGRADE_PRECHECKS {
             get {
                 return ResourceManager.GetString("ROLLINGUPGRADE_PRECHECKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} could be skipped..
+        /// </summary>
+        public static string RPU_WIZARD_ERROR_SKIP_MSG {
+            get {
+                return ResourceManager.GetString("RPU_WIZARD_ERROR_SKIP_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing update &apos;{0}&apos; on &apos;{1}&apos;.
+        /// </summary>
+        public static string RPU_WIZARD_INSTALL_SUPPPACK_TITLE {
+            get {
+                return ResourceManager.GetString("RPU_WIZARD_INSTALL_SUPPPACK_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skipping installing update &apos;{0}&apos; on &apos;{1}&apos;....
+        /// </summary>
+        public static string RPU_WIZARD_SKIP_INSTALL_SUPPPACK {
+            get {
+                return ResourceManager.GetString("RPU_WIZARD_SKIP_INSTALL_SUPPPACK", resourceCulture);
             }
         }
         
@@ -35246,7 +35299,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing update file {0} from {1}....
+        ///   Looks up a localized string similar to Removing update file {0}....
         /// </summary>
         public static string UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL {
             get {
