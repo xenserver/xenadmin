@@ -40,9 +40,6 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Controls
 {
-    [Designer("System.Windows.Forms.Design.UserControlDocumentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.ComponentModel.Design.IRootDesigner))]
-    [Designer("System.Windows.Forms.Design.ControlDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [DesignerCategory("UserControl")]
     public partial class DoubleBufferedPanel : Panel
     {
         private Bitmap BackBuffer;
