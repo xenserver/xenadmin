@@ -113,7 +113,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.Legacy : PatchingWizard_SelectPatchPage.SelectedUpdateType;
                 var newPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedNewPatch;
-                var existPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedExistingPatch;
                 var alertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
                 var fileFromDiskAlertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
                 var fileFromDiskHasUpdateXml = !wizardIsInAutomatedUpdatesMode && PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
@@ -140,15 +139,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
-                PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
                 PatchingWizard_UploadPage.SelectedNewPatchPath = newPatch;
                 PatchingWizard_UploadPage.SelectedUpdateAlert = alertPatch; 
 
-                PatchingWizard_ModePage.Patch = existPatch;
                 PatchingWizard_ModePage.SelectedUpdateType = updateType;
 
                 PatchingWizard_PrecheckPage.WizardMode = wizardMode;
-                PatchingWizard_PrecheckPage.Patch = existPatch;
                 PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
                 PatchingWizard_PrecheckPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
 
@@ -157,7 +153,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_AutomatedUpdatesPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_PatchingPage.SelectedUpdateType = updateType;
-                PatchingWizard_PatchingPage.Patch = existPatch;
                 PatchingWizard_PatchingPage.SelectedNewPatch = newPatch;
             }
             else if (prevPageType == typeof(PatchingWizard_SelectServers))
@@ -184,14 +179,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {
-                if (PatchingWizard_SelectPatchPage.SelectedUpdateType == UpdateType.Legacy)
-                {
-                    PatchingWizard_SelectPatchPage.SelectedUpdateType = UpdateType.Existing;
-                    PatchingWizard_SelectPatchPage.SelectedExistingPatch = PatchingWizard_UploadPage.Patch;
-
-                    PatchingWizard_SelectServers.SelectedUpdateType = UpdateType.Existing;
-                }
-
                 PatchingWizard_PrecheckPage.Patch = PatchingWizard_UploadPage.Patch;
                 PatchingWizard_PrecheckPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PrecheckPage.SrUploadedUpdates = PatchingWizard_UploadPage.SrUploadedUpdates;

@@ -88,7 +88,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             switch (SelectedUpdateType)
             {
                 case UpdateType.Legacy:
-                case UpdateType.Existing:
                     ManualTextInstructions = ModePoolPatch(out someHostMayRequireRestart);
                     automaticDisabled = anyPoolForbidsAutostart && someHostMayRequireRestart;
                     break;

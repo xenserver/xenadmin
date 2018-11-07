@@ -79,86 +79,87 @@ namespace XenAdmin.Wizards
             if (dlg == null)
                 return;
 
-            if (!IsValidFile(dlg.FileName))
+            if (!IsValidFile(dlg.FileName, out var failureReason))
                 using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)))
+                    SystemIcons.Error, failureReason, Messages.UPDATES)))
                 {
                     popup.ShowDialog();
                     e.Cancel = true;
                 }
-        }       
+        }
 
-        public static void ParseSuppPackFile(string path, Control control, ref bool cancel, out string suppPackPath)
+        public static string ParseSuppPackFile(string path, Control control, ref bool cancel)
         {
-            string unzippedPath;
+            if (!IsValidFile(path, out var pathFailure))
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                    SystemIcons.Error, pathFailure, Messages.UPDATES)))
+                {
+                    cancel = true;
+                    dlg.ShowDialog();
+                    return null;
+                }
 
             if (Path.GetExtension(path).ToLowerInvariant().Equals(".zip"))
             {
-                unzippedPath = ExtractUpdate(path, control);
-                if (unzippedPath == null)
-                    cancel = true;
-            }
-            else
-                unzippedPath = null;
+                var unzippedPath = ExtractUpdate(path, control);
 
-            var fileName = IsValidFile(unzippedPath)
-                ? unzippedPath.ToLowerInvariant()
-                : path.ToLowerInvariant();
-
-            if (IsValidFile(fileName))
-            {
-                if (!fileName.EndsWith("." + Branding.Update)
-                    && !fileName.EndsWith("." + Branding.UpdateIso)
-                    && !cancel)
-                {
+                if (!IsValidFile(unzippedPath, out var zipFailure))
                     using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                        SystemIcons.Error,
-                        string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(fileName)),
-                        Messages.UPDATES)))
+                        SystemIcons.Error, zipFailure, Messages.UPDATES)))
                     {
-                        dlg.ShowDialog(control);
+                        cancel = true;
+                        dlg.ShowDialog();
+                        return null;
                     }
-                    cancel = true;
-                }
-                suppPackPath = fileName;
+
+                return unzippedPath;
             }
-            else
-                suppPackPath = string.Empty;
+
+            return path;
         }
 
         public static string ExtractUpdate(string zippedUpdatePath, Control control)
         {
-            var unzipAction =
-                new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null,
-                    zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
+            if (string.IsNullOrEmpty(zippedUpdatePath))
+                return null;
+
+            var unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath),
+                null, zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
+
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
                 dlg.ShowDialog(control);
             }
 
-            if (string.IsNullOrEmpty(unzipAction.PatchPath))
-            {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error,
-                    string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(zippedUpdatePath)),
-                    Messages.UPDATES)))
-                {
-                    dlg.ShowDialog(control);
-                }
-                return null;
-            }
-            else
-            {
-                return unzipAction.PatchPath;
-            }
+            return !string.IsNullOrEmpty(unzipAction.PatchPath) ? unzipAction.PatchPath : null;
         }
 
-        public static bool IsValidFile(string fileName)
+        public static bool IsValidFile(string fileName, out string failureReason)
         {
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName)
-                && (fileName.ToLowerInvariant().EndsWith("." + Branding.Update.ToLowerInvariant())
-                || fileName.ToLowerInvariant().EndsWith(".zip")
-                || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
+            if (string.IsNullOrEmpty(fileName))
+            {
+                failureReason = Messages.UPDATES_WIZARD_INVALID_FILE;
+                return false;
+            }
+
+            if (!File.Exists(fileName))
+            {
+                failureReason = string.Format(Messages.UPDATES_WIZARD_FILE_NOT_FOUND, fileName);
+                return false;
+            }
+
+            bool isValidExt = fileName.ToLowerInvariant().EndsWith("." + Branding.Update.ToLowerInvariant())
+                              || fileName.ToLowerInvariant().EndsWith(".zip")
+                              || fileName.ToLowerInvariant().EndsWith(".iso");
+
+            if (!isValidExt)
+            {
+                failureReason = string.Format(Messages.UPDATES_WIZARD_INVALID_EXTENSION, Branding.Update);
+                return false;
+            }
+
+            failureReason = null;
+            return true;
         }
     }
 }

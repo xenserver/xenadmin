@@ -2692,7 +2692,7 @@ namespace XenAdmin
 
         private void InstallUpdate(string path)
         {
-            if (WizardHelpers.IsValidFile(path))
+            if (WizardHelpers.IsValidFile(path, out var failureReason))
             {
                 var wizard = new PatchingWizard();
                 wizard.Show(this);
@@ -2701,7 +2701,7 @@ namespace XenAdmin
             }
             else
                 using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_EXTENSION, Branding.Update), Messages.UPDATES)))
+                    SystemIcons.Error, failureReason, Messages.UPDATES)))
                 {
                     popup.ShowDialog();
                 }

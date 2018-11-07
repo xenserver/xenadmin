@@ -266,7 +266,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             switch (SelectedUpdateType)
             {
                 case UpdateType.Legacy:
-                case UpdateType.Existing:
                     if (Helpers.ElyOrGreater(host))
                     {
                         tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;

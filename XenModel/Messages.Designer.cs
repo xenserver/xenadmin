@@ -27202,32 +27202,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
-        ///
-        ///The update is installed on &apos;{1}&apos;, but the update installation file may have since been deleted.
-        ///
-        ///Upload the update from an .{2} file instead..
-        /// </summary>
-        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO {
-            get {
-                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
-        ///
-        ///The update has previously been uploaded to &apos;{1}&apos;, but the update installation file may have since been deleted.
-        ///
-        ///Upload the update from an .{2} file instead..
-        /// </summary>
-        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED {
-            get {
-                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} 
         ///Date modified: {1}
         ///Date created: {2}
@@ -34809,17 +34783,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to download update from &apos;{0}&apos;: no longer connected.
-        ///
-        ///Check your settings and try again..
-        /// </summary>
-        public static string UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos;.
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM {
@@ -35047,6 +35010,26 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso..
+        /// </summary>
+        public static string UPDATES_WIZARD_INVALID_EXTENSION {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_INVALID_EXTENSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is not a valid update file.
+        ///
+        ///Please check your settings and try again..
+        /// </summary>
+        public static string UPDATES_WIZARD_INVALID_FILE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_INVALID_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}: VM &apos;{1}&apos; has a local CD/DVD in its drive..
         /// </summary>
         public static string UPDATES_WIZARD_LOCAL_CD {
@@ -35142,24 +35125,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_NO_TOOLS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_NO_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso..
-        /// </summary>
-        public static string UPDATES_WIZARD_NOTVALID_EXTENSION {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_NOTVALID_EXTENSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No valid update file found in {0}.
-        /// </summary>
-        public static string UPDATES_WIZARD_NOTVALID_ZIPFILE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_NOTVALID_ZIPFILE", resourceCulture);
             }
         }
         

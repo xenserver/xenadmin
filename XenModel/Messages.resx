@@ -9761,20 +9761,6 @@ Installation size: {1}</value>
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>Failed to download {0} from '{1}'</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update is installed on '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .{2} file instead.</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .{2} file instead.</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 Date modified: {1}
@@ -12014,11 +12000,6 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}: The '{1}' storage repository is broken.</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>Unable to download update from '{0}': no longer connected.
-
-Check your settings and try again.</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: Cannot migrate VM '{1}'</value>
   </data>
@@ -12096,6 +12077,14 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the server is unreachable.</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>This is not a valid update file.
+
+Please check your settings and try again.</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' has a local CD/DVD in its drive.</value>
   </data>
@@ -12110,12 +12099,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>Ensure you have upgraded [XenCenter] before upgrading [XenServer].</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>No valid update file found in {0}</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>No further action is required for this update.</value>
