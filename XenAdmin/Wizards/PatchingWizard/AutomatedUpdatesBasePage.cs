@@ -427,7 +427,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             else
             {
                 var bgw = sender as UpdateProgressBackgroundWorker;
-                var _someWorkersCancelled = false;
+                var someWorkersCancelled = false;
 
                 if (bgw != null)
                 {
@@ -447,7 +447,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (bgw.DoneActions.Any(a => a.Error is CancelledException))
                     {
                         workerSucceeded = false;
-                        _someWorkersCancelled = true;
+                        someWorkersCancelled = true;
                     }
 
                     if (workerSucceeded)
@@ -470,7 +470,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             buttonSkip.Visible = true;
                     }
 
-                    else if (_someWorkersCancelled)
+                    else if (someWorkersCancelled)
                     {
                         labelError.Text = UserCancellationMessage();
                         pictureBox1.Image = Images.StaticImages.cancelled_action_16;
@@ -493,6 +493,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             UpdateStatus();
             OnPageUpdated();
         }
+        #endregion
 
         private void RetryFailedActions()
         {
@@ -527,22 +528,21 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;
-
-                panel1.Visible = false;
-
-                foreach (var worker in skippableWorkers)
-                {
-                    failedWorkers.Remove(worker);
-                    worker.RunWorkerAsync();
-                }
-
-                _thisPageIsCompleted = false;
-                _cancelEnabled = true;
-                _nextEnabled = false;
-                OnPageUpdated();
             }
+
+            panel1.Visible = false;
+
+            foreach (var worker in skippableWorkers)
+            {
+                failedWorkers.Remove(worker);
+                worker.RunWorkerAsync();
+            }
+
+            _thisPageIsCompleted = false;
+            _cancelEnabled = true;
+            _nextEnabled = false;
+            OnPageUpdated();
         }
-        #endregion
 
         private void buttonRetry_Click(object sender, EventArgs e)
         {

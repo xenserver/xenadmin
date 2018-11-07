@@ -33,7 +33,6 @@ using System;
 using XenAdmin.Network;
 using XenAPI;
 
-
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public abstract class PlanActionWithSession : PlanAction
@@ -52,6 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected sealed override void _Run()
         {
             Session session = Connection.DuplicateSession();
+
             RunWithSession(ref session);
         }
 
