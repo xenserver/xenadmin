@@ -37139,6 +37139,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This VM has a pass-through GPU assigned..
+        /// </summary>
+        public static string VM_HAS_GPU_PASSTHROUGH {
+            get {
+                return ResourceManager.GetString("VM_HAS_GPU_PASSTHROUGH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM has a virtual GPU assigned..
+        /// </summary>
+        public static string VM_HAS_VGPUS {
+            get {
+                return ResourceManager.GetString("VM_HAS_VGPUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memory and/or VCPU changes will take effect when you restart the VM..
         /// </summary>
         public static string VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE {
