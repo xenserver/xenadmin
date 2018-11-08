@@ -168,7 +168,7 @@ namespace XenAdmin.Commands
             {
                 if (!CanExecute(vm) && vm.power_state == vm_power_state.Running)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, GetCantExecuteReasonsExtra());
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, cantExecuteReasons);
                 }
             }
             return null;
@@ -223,25 +223,6 @@ namespace XenAdmin.Commands
             }
 
             return base.GetCantExecuteReasonCore(item);
-        }
-
-        private Dictionary<SelectedItem, string> GetCantExecuteReasonsExtra()
-        {
-            Dictionary<SelectedItem, string> cantExecuteReasons = new Dictionary<SelectedItem, string>();
-
-            foreach (SelectedItem item in GetSelection())
-            {
-                if (item == null || item.XenObject == null)
-                    continue;
-                if (MainWindowCommandInterface != null && CanExecuteCore(new SelectedItemCollection(item)))
-                    continue;
-
-                string reason = GetCantExecuteReasonCore(item);
-                if (reason != null)
-                    cantExecuteReasons.Add(item, reason);
-            }
-
-            return cantExecuteReasons;
         }
 
         protected override AsyncAction BuildAction(VM vm)
