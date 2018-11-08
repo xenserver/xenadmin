@@ -212,17 +212,14 @@ namespace XenAdmin.Commands
                 return noToolsOrDriversReason;
             }
 
-            if (vm.allowed_operations != null && !vm.allowed_operations.Contains(vm_operations.suspend))
+            if (vm.HasGPUPassthrough())
             {
-                if (vm.HasGPUPassthrough())
-                {
-                    return Messages.VM_HAS_GPU_PASSTHROUGH;
-                }
+                return Messages.VM_HAS_GPU_PASSTHROUGH;
+            }
 
-                if (vm.HasVGPUs())
-                {
-                    return Messages.VM_HAS_VGPUS;
-                }
+            if (vm.HasVGPUs())
+            {
+                return Messages.VM_HAS_VGPUS;
             }
 
             return base.GetCantExecuteReasonCore(item);
