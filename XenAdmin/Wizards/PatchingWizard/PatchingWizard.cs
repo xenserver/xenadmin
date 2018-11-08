@@ -339,9 +339,21 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (PatchingWizard_UploadPage.NewUploadedPatches != null)
             {
-                List<Pool_patch> patchesToRemove =
-                    PatchingWizard_UploadPage.NewUploadedPatches.Keys.ToList().Where(
-                        patch => !string.Equals(patch.uuid, PatchingWizard_UploadPage.Patch.uuid, System.StringComparison.OrdinalIgnoreCase)).ToList();
+                var patchesToRemove = new List<Pool_patch>();
+
+                foreach (var kvp in PatchingWizard_UploadPage.NewUploadedPatches)
+                {
+                    if (PatchingWizard_UploadPage.Patch == null)
+                    {
+                        patchesToRemove.Add(kvp.Key);
+                    }
+                    else
+                    {
+                        if (!string.Equals(kvp.Key.uuid, PatchingWizard_UploadPage.Patch.uuid,
+                            System.StringComparison.OrdinalIgnoreCase))
+                            patchesToRemove.Add(kvp.Key);
+                    }
+                }
 
                 RemoveUnwantedPatches(patchesToRemove);
             }
