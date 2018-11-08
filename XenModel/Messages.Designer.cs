@@ -37086,7 +37086,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM has one or more GPU devices passed through..
+        ///   Looks up a localized string similar to This VM has a pass-through GPU assigned..
         /// </summary>
         public static string VM_HAS_GPU_PASSTHROUGH {
             get {
@@ -37095,7 +37095,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM has one or more vGPUs..
+        ///   Looks up a localized string similar to This VM has a virtual GPU assigned..
         /// </summary>
         public static string VM_HAS_VGPUS {
             get {
