@@ -31,7 +31,7 @@ How to build XenCenter
 To build XenCenter, you need
 
 * the source from xenadmin repository
-* Visual Studio 2013
+* Visual Studio 2017
 
 and also some libraries which we do not store in the source tree:
 
