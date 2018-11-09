@@ -1008,6 +1008,9 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>状態レポートのアップロードに失敗しました。</value>
   </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>[Citrix] Insight Services にレポートをアップロードしています ({0}/{1})</value>
+  </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>[Citrix] Insight Services にレポートをアップロードしています</value>
   </data>
@@ -7969,6 +7972,20 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>セッションの保存エラー</value>
   </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>[はい] を押すと、以下の手順はスキップされます。
+    
+{0}
+
+続行しますか?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>[はい] を押すと、以下の手順はスキップされます。
+    
+{0}
+
+続行しますか?</value>
+  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>プールを削除する前に、すべてのスレーブをプールからイジェクトする必要があります。</value>
   </data>
@@ -10680,10 +10697,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>{0} から切断されています。選択項目を確認して再試行してください。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップデート プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
+    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップデート プロセスは一時停止しました。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップグレード プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
+    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップグレード プロセスは一時停止しました。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>プールのローリングアップグレードの進行中に次のエラーが発生しました。</value>
@@ -10744,6 +10761,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>プールのローリング アップグレードが完了しませんでした。</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>{0} はスキップできます。</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>アップデート '{0}' を '{1}' にインストールしています</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>アップデート '{0}' の '{1}' へのインストールをスキップしています...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>アーカイブ中</value>
@@ -12156,7 +12182,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>{1} からアップデート ファイル {0} を削除しています...</value>
+    <value>ファイル {0} からアップデート ファイルを削除しています...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>修復するにはここをクリックしてください</value>
@@ -12887,6 +12913,12 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM の全般プロパティ</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>この VM にはパススルー GPU が割り当てられています。</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>この VM には仮想 GPU が割り当てられています。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>メモリや VCPU への変更は、VM の再起動後に反映されます。</value>
