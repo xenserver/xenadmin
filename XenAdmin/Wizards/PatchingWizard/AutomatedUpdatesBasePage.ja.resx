@@ -303,6 +303,36 @@
   <data name="&gt;&gt;buttonRetry.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="buttonSkip.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSkip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>427, 0</value>
+  </data>
+  <data name="buttonSkip.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 0</value>
+  </data>
+  <data name="buttonSkip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonSkip.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="buttonSkip.Text" xml:space="preserve">
+    <value>スキップ(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;buttonSkip.Name" xml:space="preserve">
+    <value>buttonSkip</value>
+  </data>
+  <data name="&gt;&gt;buttonSkip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSkip.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;buttonSkip.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>

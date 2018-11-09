@@ -1008,6 +1008,9 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>上载状态报告失败。</value>
   </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>正在将报告上载到 [Citrix] Insight Services) (第 {0} 个，共 {1} 个)</value>
+  </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>正在将报告上载到 [Citrix] Insight Services</value>
   </data>
@@ -7963,6 +7966,20 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>无法保存会话</value>
   </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>通过按“是”，将跳过以下步骤:
+
+{0}
+
+是否要继续?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>通过按“是”，将跳过以下步骤:
+
+{0}
+
+是否要继续?</value>
+  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>必须先从池中弹出所有从属设备，然后才能删除池。</value>
   </data>
@@ -10678,10 +10695,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>不再连接到 {0}。请核对您所做的选择并重试。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>一个或多个滚动池升级过程未成功完成。升级过程已暂停。请按“重试”继续。</value>
+    <value>一个或多个滚动池升级过程未成功完成。升级过程已暂停。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>滚动池升级过程未成功完成。升级过程已暂停。请按“重试”继续。</value>
+    <value>滚动池升级过程未成功完成。升级过程已暂停。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>滚动池升级过程中发生以下错误:</value>
@@ -10742,6 +10759,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>滚动池升级未完成。</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>可能已跳过 {0}。</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>正在“{1}”上安装更新“{0}”</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>正在“{1}”上跳过安装更新“{0}”...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
@@ -12154,7 +12180,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在从 {1} 中删除更新安装文件 {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>正在从 {1} 中删除更新文件 {0}...</value>
+    <value>正在删除更新文件 {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>单击此处修复</value>
@@ -12885,6 +12911,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM 常规属性</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>已为此 VM 分配了直通 GPU。</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>已为此 VM 分配了虚拟 GPU。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>内存和/或 VCPU 更改将在重新启动 VM 时生效。</value>
