@@ -71,17 +71,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public readonly Dictionary<Pool_patch, string> NewUploadedPatches = new Dictionary<Pool_patch, string>();
         private Dictionary<string, List<Host>> uploadedUpdates = new Dictionary<string, List<Host>>();
-        private Pool_patch _patch;
-        public Pool_patch Patch
-        {
-            get { return _patch; }
-        }
 
-        private Pool_update _poolUpdate;
-        public Pool_update PoolUpdate
-        {
-            get { return _poolUpdate; }
-        }
+        public Pool_patch Patch { get; private set; }
+        public Pool_update PoolUpdate { get; private set; }
 
         public Dictionary<string, string> AllDownloadedPatches = new Dictionary<string, string>();
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
@@ -203,8 +195,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case UpdateType.ISO:
                         if (CanUploadUpdateOnHost(SelectedNewPatchPath, selectedServer))
                         {
-                            _poolUpdate = null;
-                            _patch = null;
+                            PoolUpdate = null;
+                            Patch = null;
                             
                             action = new UploadSupplementalPackAction(
                             selectedServer.Connection,
@@ -221,8 +213,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else
                 {
-                    _poolUpdate = GetUpdateFromUpdatePath();
-                    _patch = GetPatchFromPatchPath();
+                    PoolUpdate = GetUpdateFromUpdatePath();
+                    Patch = GetPatchFromPatchPath();
                 }
                 uploadActions.Add(selectedServer, action);
             }
@@ -447,21 +439,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var uploadAction = action as UploadPatchAction;
                     if (uploadAction != null)
                     {
-                        _patch = uploadAction.Patch;
-                        _poolUpdate = null;
+                        Patch = uploadAction.Patch;
+                        PoolUpdate = null;
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
                     }
                     
-                    if (_patch != null && !NewUploadedPatches.ContainsKey(_patch))
+                    if (Patch != null && !NewUploadedPatches.ContainsKey(Patch))
                     {
-                        NewUploadedPatches.Add(_patch, SelectedNewPatchPath);
-                        _poolUpdate = null;
+                        NewUploadedPatches.Add(Patch, SelectedNewPatchPath);
+                        PoolUpdate = null;
                     }
 
                     var supplementalPackUploadAction = action as UploadSupplementalPackAction;
                     if (supplementalPackUploadAction != null)
                     {
-                        _patch = null;
+                        Patch = null;
 
                         foreach (var vdiRef in supplementalPackUploadAction.VdiRefsToCleanUp)
                         {
@@ -478,7 +470,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                             if (newPoolUpdate != null)
                             {
-                                _poolUpdate = newPoolUpdate;
+                                PoolUpdate = newPoolUpdate;
                                 AllIntroducedPoolUpdates.Add(PoolUpdate, SelectedNewPatchPath);
                                 SrUploadedUpdates[newPoolUpdate] = new Dictionary<Host, SR>(supplementalPackUploadAction.SrUploadedUpdates);
                             }
@@ -493,7 +485,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             AllDownloadedPatches.Add((SelectedUpdateAlert as XenServerPatchAlert).Patch.Uuid, SelectedNewPatchPath);
                         }
-                        _patch = null;
+                        Patch = null;
                         PrepareUploadActions();
                         TryUploading();
                     }
@@ -502,8 +494,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (action is UploadSupplementalPackAction)
                     {
-                        _patch = null;
-                        _poolUpdate = null;
+                        Patch = null;
+                        PoolUpdate = null;
 
                         foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
                         {
