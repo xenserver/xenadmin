@@ -31,17 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Network;
 using XenAdmin.Model;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using System.Drawing;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
-using System.Threading;
 using XenAdmin.Actions;
-using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -51,6 +46,8 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class NewFolderCommand : Command
     {
+        public event Action<string[]> FoldersCreated;
+
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -118,22 +115,26 @@ namespace XenAdmin.Commands
             {
                 var action = new CreateFolderAction(connection, newPaths.ToArray());
 
-                Action<ActionBase> completed = null;
-                completed = delegate
-                {
-                    action.Completed -= completed;
-                    if (action.Succeeded)
-                    {
-                        Program.MainWindow.TrySelectNewNode(delegate(object o)
-                        {
-                            Folder ff = o as Folder;
-                            return ff != null && newPaths[0] == ff.opaque_ref;
-                        }, true, true, true);
-                    }
-                };
-
-                action.Completed += completed;
+                action.Completed += Action_Completed;
                 action.RunAsync();
+            }
+        }
+
+        private void Action_Completed(ActionBase sender)
+        {
+            sender.Completed -= Action_Completed;
+
+            var action = sender as CreateFolderAction;
+            if (action != null && action.Succeeded)
+            {
+                if (FoldersCreated != null)
+                    FoldersCreated(action.NewPaths);
+
+                Program.MainWindow.TrySelectNewNode(delegate(object o)
+                {
+                    Folder ff = o as Folder;
+                    return ff != null && action.NewPaths[0] == ff.opaque_ref;
+                }, true, true, true);
             }
         }
 

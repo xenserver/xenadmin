@@ -1,5 +1,3 @@
-using XenAdmin.Controls;
-using System;
 namespace XenAdmin.Dialogs
 {
     partial class FolderChangeDialog
@@ -30,54 +28,79 @@ namespace XenAdmin.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FolderChangeDialog));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
-            this.treeView = new XenAdmin.Controls.FolderChangeDialogTreeView();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.radioButtonNone = new System.Windows.Forms.RadioButton();
             this.radioButtonChoose = new System.Windows.Forms.RadioButton();
             this.newButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.treeView = new XenAdmin.Controls.FolderChangeDialogTreeView();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.contextMenuStrip.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cancelButton
             // 
-            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // okButton
             // 
             resources.ApplyResources(this.okButton, "okButton");
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.Name = "okButton";
             this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // treeView
+            // contextMenuStrip
             // 
-            resources.ApplyResources(this.treeView, "treeView");
-            this.treeView.HideSelection = false;
-            this.treeView.Name = "treeView";
-            this.treeView.ShowLines = false;
-            this.treeView.NodeMouseDoubleClick += new EventHandler<VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseDoubleClick);
-            this.treeView.AfterSelect += new EventHandler<VirtualTreeViewEventArgs>(this.treeView_AfterSelect);
-            this.treeView.NodeMouseClick += new EventHandler<VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseClick);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemNew,
+            this.toolStripMenuItemDelete});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            // 
+            // toolStripMenuItemNew
+            // 
+            this.toolStripMenuItemNew.Image = global::XenAdmin.Properties.Resources._000_Folder_open_h32bit_16;
+            this.toolStripMenuItemNew.Name = "toolStripMenuItemNew";
+            resources.ApplyResources(this.toolStripMenuItemNew, "toolStripMenuItemNew");
+            this.toolStripMenuItemNew.Click += new System.EventHandler(this.toolStripMenuItemNew_Click);
+            // 
+            // toolStripMenuItemDelete
+            // 
+            this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
+            resources.ApplyResources(this.toolStripMenuItemDelete, "toolStripMenuItemDelete");
+            this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
             // 
             // radioButtonNone
             // 
             resources.ApplyResources(this.radioButtonNone, "radioButtonNone");
+            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonNone, 3);
             this.radioButtonNone.Name = "radioButtonNone";
             this.radioButtonNone.TabStop = true;
             this.radioButtonNone.UseVisualStyleBackColor = true;
-            this.radioButtonNone.Click += new System.EventHandler(this.radioButtonNone_Click);
+            this.radioButtonNone.CheckedChanged += new System.EventHandler(this.radioButtonNone_CheckedChanged);
+            this.radioButtonNone.TabStopChanged += new System.EventHandler(this.radioButtonNone_TabStopChanged);
             // 
             // radioButtonChoose
             // 
             resources.ApplyResources(this.radioButtonChoose, "radioButtonChoose");
+            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonChoose, 3);
             this.radioButtonChoose.Name = "radioButtonChoose";
+            this.radioButtonChoose.TabStop = true;
             this.radioButtonChoose.UseVisualStyleBackColor = true;
-            this.radioButtonChoose.Click += new System.EventHandler(this.radioButtonChoose_Click);
+            this.radioButtonChoose.CheckedChanged += new System.EventHandler(this.radioButtonChoose_CheckedChanged);
+            this.radioButtonChoose.TabStopChanged += new System.EventHandler(this.radioButtonChoose_TabStopChanged);
             // 
             // newButton
             // 
@@ -86,22 +109,58 @@ namespace XenAdmin.Dialogs
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonNone, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonChoose, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.treeView, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.newButton, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.buttonDelete, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // treeView
+            // 
+            resources.ApplyResources(this.treeView, "treeView");
+            this.treeView.ContextMenuStrip = this.contextMenuStrip;
+            this.treeView.HideSelection = false;
+            this.treeView.Name = "treeView";
+            this.tableLayoutPanel1.SetRowSpan(this.treeView, 2);
+            this.treeView.ShowLines = false;
+            this.treeView.NodeMouseDoubleClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseDoubleClick);
+            this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
+            this.treeView.Enter += new System.EventHandler(this.treeView_Enter);
+            // 
+            // buttonDelete
+            // 
+            resources.ApplyResources(this.buttonDelete, "buttonDelete");
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 3);
+            this.tableLayoutPanel2.Controls.Add(this.okButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cancelButton, 1, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
             // FolderChangeDialog
             // 
             this.AcceptButton = this.okButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
-            this.Controls.Add(this.newButton);
-            this.Controls.Add(this.radioButtonChoose);
-            this.Controls.Add(this.radioButtonNone);
-            this.Controls.Add(this.treeView);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.okButton);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "FolderChangeDialog";
+            this.contextMenuStrip.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -109,9 +168,15 @@ namespace XenAdmin.Dialogs
 
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
-        private XenAdmin.Controls.FolderChangeDialogTreeView treeView;
         private System.Windows.Forms.RadioButton radioButtonNone;
         private System.Windows.Forms.RadioButton radioButtonChoose;
         private System.Windows.Forms.Button newButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemNew;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private Controls.FolderChangeDialogTreeView treeView;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
     }
 }

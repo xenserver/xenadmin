@@ -168,7 +168,7 @@
     <Compile Include="Controls\ComboBoxes\EnableableComboBoxEditingControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\FolderChangeDialogTreeView.cs">
+    <Compile Include="Controls\TreeViews\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ListViewEx.cs">

@@ -45,7 +45,7 @@ namespace XenAdmin.Controls
 {
     public class FolderListItem
     {
-        public event EventHandler PathChanged;
+        public event Action PathChanged;
 
         private const int INNER_PADDING = 9;
         private const int RIGHT_PADDING = 20;
@@ -328,20 +328,26 @@ namespace XenAdmin.Controls
 
         private void LaunchFolderChangeDlg()
         {
-            FolderChangeDialog dialog = new FolderChangeDialog(path);
-         
-            if (dialog.ShowDialog(Program.MainWindow) == DialogResult.OK)
-            {
-                Folder _selectedFolder = dialog.CurrentFolder;
-                path = (_selectedFolder == null ? "" : Folders.AppendPath(_selectedFolder.Path, _selectedFolder.ToString()));
-                OnPathChanged();
-            }
+            using (var dialog = new FolderChangeDialog(path))
+                if (dialog.ShowDialog(Program.MainWindow) == DialogResult.OK)
+                {
+                    if (!dialog.FolderChanged)
+                        return;
+
+                    Folder selectedFolder = dialog.CurrentFolder;
+
+                    path = selectedFolder == null
+                        ? string.Empty
+                        : Folders.AppendPath(selectedFolder.Path, selectedFolder.ToString());
+
+                    OnPathChanged();
+                }
         }
 
         private void OnPathChanged()
         {
             if (PathChanged != null)
-                PathChanged(null, null);
+                PathChanged();
         }
 
         private class FLIControl

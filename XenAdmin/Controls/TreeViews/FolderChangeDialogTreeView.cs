@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -39,12 +40,16 @@ namespace XenAdmin.Controls
     internal class FolderChangeDialogTreeView : VirtualTreeView
     {
         public bool expandOnDoubleClick = true;
-        private bool blockExpansion = false;
+        private bool blockExpansion;
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Clicks > 1)
                 blockExpansion = true;
+
+            var hitTesInfo = HitTest(e.X, e.Y);
+            if (hitTesInfo.Node == null)
+                SelectedNode = null;
 
             base.OnMouseDown(e);
         }
