@@ -105,19 +105,47 @@ namespace XenAdmin.Wizards.PatchingWizard
                     label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE;
                     break;
                 case WizardMode.SingleUpdate:
-                    label1.Text = poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
+                    label1.Text = poolSelectionOnly
+                        ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION
+                        : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
                     break;
             }
 
-            // catch selected servers, in order to restore selection after the dataGrid is reloaded
-            List<Host> selectedServers = SelectedServers;
-
-            dataGridViewHosts.Rows.Clear();
-
             List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
             xenConnections.Sort();
+
             int licensedPoolCount = 0;
             int poolCount = 0;
+
+            foreach (IXenConnection xenConnection in xenConnections)
+            {
+                var hosts = xenConnection.Cache.Hosts;
+                if (hosts.Length > 0)
+                {
+                    poolCount++;
+                    //check if any host is not licensed for automated updates
+                    var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply);
+                    if (!automatedUpdatesRestricted)
+                        licensedPoolCount++;
+                }
+            }
+
+            if (WizardMode == WizardMode.NewVersion && licensedPoolCount > 0)
+            {
+                applyUpdatesCheckBox.Visible = true;
+                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
+                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES
+                    : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED;
+            }
+            else
+            {
+                applyUpdatesCheckBox.Visible = false;
+            }
+
+            // store selected servers in order to restore selection after the dataGrid is reloaded
+            List<Host> selectedServers = SelectedServers;
+            dataGridViewHosts.Rows.Clear();
+
             foreach (IXenConnection xenConnection in xenConnections)
             {
                 // add pools, their members and standalone hosts
@@ -133,16 +161,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 Host[] hosts = xenConnection.Cache.Hosts;
-
-                if (hosts.Length > 0)
-                {
-                    poolCount++;
-                    var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates
-                    if (!automatedUpdatesRestricted)
-                        licensedPoolCount++;
-                }
-
                 Array.Sort(hosts);
+
                 PatchingHostsDataGridViewRow masterRow = null;
 
                 foreach (Host host in hosts)
@@ -163,18 +183,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (poolRow != null && !poolRow.Enabled && masterRow != null)
                     poolRow.Cells[3].ToolTipText = masterRow.Cells[3].ToolTipText;
-            }
-
-            if (WizardMode == WizardMode.NewVersion && licensedPoolCount > 0) // in NewVersion mode and at least one pool licensed for automated updates 
-            {
-                applyUpdatesCheckBox.Visible = true;
-                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
-                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES
-                    : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED;
-            }
-            else // not in NewVersion mode or all pools unlicensed
-            {
-                applyUpdatesCheckBox.Visible = false;
             }
 
             // restore server selection
@@ -357,7 +365,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (isPatchApplied(patchUuidFromAlert, host))
                 {
-                    if (applyUpdatesCheckBox.Checked)
+                    if (ApplyUpdatesToNewVersion)
                         return CanEnableRowAutomatedUpdates(host, out tooltipText);
 
                     tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
