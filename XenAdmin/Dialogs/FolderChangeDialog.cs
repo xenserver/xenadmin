@@ -38,7 +38,6 @@ using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenAdmin.XenSearch;
-using XenAPI;
 using XenAdmin.Commands;
 
 
@@ -46,67 +45,31 @@ namespace XenAdmin.Dialogs
 {
     public partial class FolderChangeDialog : XenDialogBase
     {
-        private readonly string orig_folder;
+        private readonly string originalFolderRef;
+        private string selectedFolderRef;
 
-        public FolderChangeDialog(string orig_folder)
+        public FolderChangeDialog(string originalFolderRef = null)
             : base(null)
         {
-            this.orig_folder = orig_folder;
-
             InitializeComponent();
+
+            this.originalFolderRef = originalFolderRef;
+
+            var imgList = new ImageList {ColorDepth = ColorDepth.Depth32Bit, TransparentColor = Color.Transparent};
+            imgList.Images.Add("folder", Resources._000_Folder_open_h32bit_16);
+            treeView.ImageList = imgList;
+
+            treeView.expandOnDoubleClick = false;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
             ConnectionsManager.XenConnections.CollectionChanged += XenConnections_CollectionChanged;
             XenConnections_CollectionChanged(null, null);
 
-            treeView.BeginUpdate();
-            treeView.ImageList = new ImageList();
-            treeView.ImageList.Images.Add("folder", Properties.Resources._000_Folder_open_h32bit_16);  // if there is only one image, all nodes will get it
-            treeView.ImageList.ColorDepth = ColorDepth.Depth32Bit;
-            treeView.ImageList.TransparentColor = Color.Transparent;
-            treeView.expandOnDoubleClick = false;
-            InitState();
-            PopulateTree();
-            treeView.EndUpdate();
-        }
+            selectedFolderRef = originalFolderRef;
 
-        protected override void OnClosed(EventArgs e)
-        {
-            ConnectionsManager.XenConnections.CollectionChanged -= XenConnections_CollectionChanged;
-            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
-                connection.Cache.DeregisterBatchCollectionChanged<Folder>(foldersChanged);
-        }
-        
-        private void EmptyTree()
-        {
-            treeView.Nodes.Clear();
-        }
-
-        private void PopulateTree()
-        {
-            VirtualTreeNode selectedNode = treeView.SelectedNode;
-            Folder selectedFolder = selectedNode==null?null: selectedNode.Tag as Folder;
-
-            EmptyTree();
-
-            TreeNodeGroupAcceptor tnga = new TreeNodeGroupAcceptor(treeView, true);
-            Search.SearchForAllFolders().PopulateAdapters(tnga);
-
-            if (selectedFolder != null)
-            {
-                // try the one we were on: if that's no longer present, back off to the one we started with
-                if (!SelectNode(selectedFolder.opaque_ref))
-                {
-                    string folder = orig_folder;
-                    SelectNode(folder);
-                }
-            }
-            else
-                SelectNode(null);
-        }
-
-        private void InitState()
-        {
-            SelectNode(orig_folder);
-            if (orig_folder == "")
+            if (string.IsNullOrEmpty(selectedFolderRef))
             {
                 radioButtonNone.Checked = true;
             }
@@ -115,55 +78,95 @@ namespace XenAdmin.Dialogs
                 radioButtonChoose.Checked = true;
                 ActiveControl = treeView;
             }
+
+            PopulateTree();
+            base.OnLoad(e);
         }
 
-        // Select the named node. If found it, return true.
-        // If not, select the first node (if there are any) and return false.
-        private bool SelectNode(string tag)
+        protected override void OnClosed(EventArgs e)
         {
-            VirtualTreeNode node = FindNode(tag);
-            if (node != null)
+            ConnectionsManager.XenConnections.CollectionChanged -= XenConnections_CollectionChanged;
+            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+                connection.Cache.DeregisterBatchCollectionChanged<Folder>(FoldersChanged);
+        }
+
+        private void PopulateTree()
+        {
+            try
             {
-                treeView.SelectedNode = node;
-                return true;
+                treeView.BeginUpdate();
+
+                //repopulate the tree
+                treeView.Nodes.Clear();
+                var tnga = new TreeNodeGroupAcceptor(treeView, true);
+                Search.SearchForAllFolders().PopulateAdapters(tnga);
+                    
+                //restore selection
+                SelectNodeByRef(selectedFolderRef);
             }
-            else if (treeView.Nodes.Count != 0)
-                treeView.SelectedNode = treeView.Nodes[0];
-            return false;
+            finally
+            {
+                treeView.EndUpdate();
+            }
         }
 
         private void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
-                connection.Cache.RegisterBatchCollectionChanged<Folder>(foldersChanged);
+                connection.Cache.RegisterBatchCollectionChanged<Folder>(FoldersChanged);
         }
 
-        private void foldersChanged(object sender, EventArgs e)
+        private void FoldersChanged(object sender, EventArgs e)
         {
-            PopulateTree();
+            Program.Invoke(this, PopulateTree);
         }
 
-        private VirtualTreeNode FindNode(string tag)
+        private void SelectNodeByRef(string folderRef)
         {
+            var node = FindNodeByRef(folderRef);
+            if (node == null)
+            {
+                treeView.SelectedNode = null;
+            }
+            else
+            {
+                treeView.SelectedNode = node;
+
+                var folder = treeView.SelectedNode.Tag as Folder;
+                if (folder != null)
+                    selectedFolderRef = folder.opaque_ref;
+                
+                treeView.SelectedNode.EnsureVisible();
+            }
+        }
+
+        private VirtualTreeNode FindNodeByRef(string folderRef)
+        {
+            if (string.IsNullOrEmpty(folderRef))
+                return null;
+
             foreach (VirtualTreeNode node in treeView.Nodes)
             {
-                VirtualTreeNode found = FindNode(tag, node);
+                VirtualTreeNode found = FindNodeByRef(folderRef, node);
                 if (found != null)
                     return found;
             }
             return null;
         }
 
-        private VirtualTreeNode FindNode(string tag, VirtualTreeNode node)
+        private VirtualTreeNode FindNodeByRef(string folderRef, VirtualTreeNode node)
         {
+            if (string.IsNullOrEmpty(folderRef))
+                return null;
+
             Folder folder = node.Tag as Folder;
 
-            if (folder != null && folder.opaque_ref == tag)
+            if (folder != null && folder.opaque_ref == folderRef)
                 return node;
 
             foreach (VirtualTreeNode subNode in node.Nodes)
             {
-                VirtualTreeNode found = FindNode(tag, subNode);
+                VirtualTreeNode found = FindNodeByRef(folderRef, subNode);
                 if (found != null)
                     return found;
             }
@@ -177,8 +180,8 @@ namespace XenAdmin.Dialogs
             {
                 if (radioButtonChoose.Checked && treeView.SelectedNode != null)
                     return treeView.SelectedNode.Tag as Folder;
-                else
-                    return null;
+                
+                return null;
             }
         }
 
@@ -187,89 +190,131 @@ namespace XenAdmin.Dialogs
             get
             {
                 Folder folder = CurrentFolder;
-                string folderName = (folder == null ? String.Empty : folder.opaque_ref);
-                return (orig_folder != folderName);
+                if (folder == null)
+                    return !string.IsNullOrEmpty(originalFolderRef);
+
+                return folder.opaque_ref != originalFolderRef;
             }
         }
 
-        private void EnableTreeView(bool enabled)
+        private void CreateNewFolder(Folder folder = null)
         {
-            treeView.Enabled = enabled;
-            newButton.Enabled = enabled;
+            var cmd = new NewFolderCommand(Program.MainWindow, folder, this);
+            cmd.FoldersCreated += cmd_FoldersCreated;
+            cmd.Execute();
         }
 
-        private void SetOKButtonEnablement()
+        private void cmd_FoldersCreated(string[] obj)
         {
-            okButton.Enabled = FolderChanged;
+            if (obj != null && obj.Length > 0)
+                Program.Invoke(this, () => SelectNodeByRef(obj[0]));
         }
 
-        private void radioButtonNone_Click(object sender, EventArgs e)
+        private void DeleteFolder()
         {
-            EnableTreeView(false);
-            SetOKButtonEnablement();
+            if (treeView.SelectedNode != null)
+            {
+                var folder = treeView.SelectedNode.Tag as Folder;
+                new DeleteFolderCommand(Program.MainWindow, folder).Execute();
+            }
         }
 
-        private void radioButtonChoose_Click(object sender, EventArgs e)
+        private void EnableButtons()
         {
-            EnableTreeView(true);
-            SetOKButtonEnablement();
+            okButton.Enabled = radioButtonNone.Checked ||
+                               (radioButtonChoose.Checked && treeView.SelectedNode != null);
+
+            buttonDelete.Enabled = radioButtonChoose.Checked && treeView.SelectedNode != null;
+            toolStripMenuItemDelete.Visible = buttonDelete.Enabled;
         }
 
-        private void okButton_Click(object sender, EventArgs e)
+        #region Control event Handlers
+
+        private void radioButtonNone_CheckedChanged(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            Close();
+            if (radioButtonNone.Checked)
+            {
+                treeView.SelectedNode = null;
+                EnableButtons();
+            }
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void radioButtonChoose_CheckedChanged(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            if (radioButtonChoose.Checked)
+            {
+                SelectNodeByRef(selectedFolderRef);
+                EnableButtons();
+            }
         }
+
+        private void radioButtonNone_TabStopChanged(object sender, EventArgs e)
+        {
+            if (!radioButtonNone.TabStop)
+                radioButtonNone.TabStop = true;
+        }
+
+        private void radioButtonChoose_TabStopChanged(object sender, EventArgs e)
+        {
+            if (!radioButtonChoose.TabStop)
+                radioButtonChoose.TabStop = true;
+        }
+
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            new NewFolderCommand(Program.MainWindow, null, this).Execute();
+            CreateNewFolder();
         }
 
-        private void newMenuItem_Click(object sender, EventArgs e)
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item == null)
-                return;
-
-            Folder folder = item.Tag as Folder;
-            if (folder == null)
-                return;
-
-            new NewFolderCommand(Program.MainWindow, folder, this).Execute();
+            DeleteFolder();
         }
 
-        private void treeView_NodeMouseClick(object sender, VirtualTreeNodeMouseClickEventArgs e)
+
+        private void toolStripMenuItemNew_Click(object sender, EventArgs e)
         {
-            if (e.Button != MouseButtons.Right || e.Node == null)
-                return;
+            Folder folder = null;
+            if (treeView.SelectedNode != null)
+                folder = treeView.SelectedNode.Tag as Folder;
 
-            Folder folder = e.Node.Tag as Folder;
-            if (folder == null)
-                return;
-
-            ContextMenuStrip menu = new ContextMenuStrip();
-            ToolStripMenuItem item = new ToolStripMenuItem(Messages.NEW_FOLDER, Resources._000_Folder_open_h32bit_16, newMenuItem_Click);
-            item.Tag = folder;
-            menu.Items.Add(item);
-            menu.Show(treeView, e.Location);
+            CreateNewFolder(folder);
         }
 
-        private void treeView_AfterSelect(object sender, VirtualTreeViewEventArgs e)
+        private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
         {
-            SetOKButtonEnablement();
+            DeleteFolder();
+        }
+
+
+        private void treeView_Enter(object sender, EventArgs e)
+        {
+            radioButtonChoose.Checked = true;
         }
 
         private void treeView_NodeMouseDoubleClick(object sender, VirtualTreeNodeMouseClickEventArgs e)
         {
-            if (okButton.Enabled)
-                okButton_Click(sender, null);
+            DialogResult = DialogResult.OK;
         }
+
+        private void treeView_SelectionsChanged(object sender, EventArgs e)
+        {
+            // if the SelecteNode is null, it could be a result of the user
+            // either having clicked radioButtonNone or whitespace in the treeview,
+            // in which case do not deselect the radioButtonChoose
+
+            if (treeView.SelectedNode != null)
+            {
+                radioButtonChoose.Checked = true;
+
+                var folder = treeView.SelectedNode.Tag as Folder;
+                if (folder != null)
+                    selectedFolderRef = folder.opaque_ref;
+            }
+
+            EnableButtons();
+        }
+
+        #endregion
     }
 }
