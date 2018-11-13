@@ -191,5 +191,14 @@
     <Setting Name="EjectSharedIsoOnUpdate" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="xenBootOptions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BIOS order</Value>
+    </Setting>
+    <Setting Name="xenBootParams" Type="System.String" Scope="User">
+      <Value Profile="(Default)">order=dc;</Value>
+    </Setting>
+    <Setting Name="xenPlatformSetting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nx=true;acpi=true;apic=true;pae=true;stdvga=0;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
