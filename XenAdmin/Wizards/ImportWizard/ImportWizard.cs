@@ -690,10 +690,10 @@ namespace XenAdmin.Wizards.ImportWizard
 											Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
 
 			var bootMode = m_pageVMconfig.SelectedBootMode;
-			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
-			var bootParams = Properties.Settings.Default.xenBootParams + (bootMode == BootMode.UEFI_BOOT || bootMode == BootMode.UEFI_SECURE_BOOT ? "firmware=uefi;" : string.Empty);
+			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", XenOvf.Properties.Settings.Default.xenBootOptions, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+			var bootParams = XenOvf.Properties.Settings.Default.xenBootParams + (bootMode == BootMode.UEFI_BOOT || bootMode == BootMode.UEFI_SECURE_BOOT ? "firmware=uefi;" : string.Empty);
 			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_params", bootParams, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
-			var platformSetting = Properties.Settings.Default.xenPlatformSetting + (bootMode == BootMode.UEFI_SECURE_BOOT ? "secureboot=true;" : string.Empty);
+			var platformSetting = XenOvf.Properties.Settings.Default.xenPlatformSetting + (bootMode == BootMode.UEFI_SECURE_BOOT ? "secureboot=true;" : string.Empty);
 			OVF.AddOtherSystemSettingData(env, systemID, "platform", platformSetting, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
 
 			OVF.SetCPUs(env, systemID, m_pageVMconfig.CpuCount);

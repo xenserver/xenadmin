@@ -825,32 +825,5 @@ namespace XenAdmin.Properties {
                 this["EjectSharedIsoOnUpdate"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BIOS order")]
-        public string xenBootOptions {
-            get {
-                return ((string)(this["xenBootOptions"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("order=dc;")]
-        public string xenBootParams {
-            get {
-                return ((string)(this["xenBootParams"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nx=true;acpi=true;apic=true;pae=true;stdvga=0;")]
-        public string xenPlatformSetting {
-            get {
-                return ((string)(this["xenPlatformSetting"]));
-            }
-        }
     }
 }
