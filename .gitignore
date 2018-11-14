@@ -38,9 +38,13 @@ packages/*
 !packages/DOTNET_BUILD_LOCATION_CTXSIGN
 XenOvfApi/External Tools/*
 
-_ReSharper.*/
 *.opensdf
 *.sdf
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
 
 _UpgradeReport_Files/
 Backup*/
