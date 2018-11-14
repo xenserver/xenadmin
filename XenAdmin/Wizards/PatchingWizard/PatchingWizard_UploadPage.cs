@@ -129,14 +129,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             bool isIso = SelectedUpdateType == UpdateType.ISO;
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, false, isIso ? Branding.UpdateIso : Branding.Update);          
-
-            if (downloadAction != null)
-            {
-                downloadAction.Changed += singleAction_Changed;
-                downloadAction.Completed += singleAction_Completed;
-            }
-
+            var downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, false, isIso ? Branding.UpdateIso : Branding.Update);
+            downloadAction.Changed += singleAction_Changed;
+            downloadAction.Completed += singleAction_Completed;
             downloadAction.RunAsync();
 
             flickerFreeListBox1.Items.Clear();
@@ -213,8 +208,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else
                 {
-                    PoolUpdate = GetUpdateFromUpdatePath();
-                    Patch = GetPatchFromPatchPath();
+                    PoolUpdate = AllIntroducedPoolUpdates.Where(kvp => kvp.Value == SelectedNewPatchPath).Select(kvp => kvp.Key).FirstOrDefault();
+                    Patch = NewUploadedPatches.Where(kvp => kvp.Value == SelectedNewPatchPath).Select(kvp => kvp.Key).FirstOrDefault();
                 }
                 uploadActions.Add(selectedServer, action);
             }
@@ -241,9 +236,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if(!uploadedUpdates.ContainsKey(patchPath))
             {
-                List<Host> hosts = new List<Host>();
-                hosts.Add(host);
-                uploadedUpdates.Add(patchPath, hosts);
+                uploadedUpdates.Add(patchPath, new List<Host> {host});
             }
             else if(!uploadedUpdates[patchPath].Contains(host))
             {
@@ -309,30 +302,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 };
                 multipleAction.RunAsync();
             }
-        }
-
-        private Pool_patch GetPatchFromPatchPath()
-        {
-            foreach (var kvp in NewUploadedPatches)
-            {
-                if (kvp.Value == SelectedNewPatchPath)
-                {
-                    return kvp.Key;
-                }
-            }
-            return null;
-        }
-
-        private Pool_update GetUpdateFromUpdatePath()
-        {
-            foreach (var kvp in AllIntroducedPoolUpdates)
-            {
-                if (kvp.Value == SelectedNewPatchPath)
-                {
-                    return kvp.Key;
-                }
-            }
-            return null;
         }
 
         private void StartUploading()
