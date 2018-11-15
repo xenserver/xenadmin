@@ -134,7 +134,15 @@ namespace XenAdmin.Wizards
                                                                                            Registry.HealthCheckUploadDomainName,// domain name
                                                                                            false); // suppressHistory
                 subActions.Add(uploadAction);
-                action = new MultipleAction(null, Messages.BUGTOOL_SAVING, Messages.BUGTOOL_SAVING, Messages.COMPLETED, subActions,true);
+                action = new MultipleAction(
+                    null,
+                    Messages.BUGTOOL_SAVING,
+                    Messages.BUGTOOL_SAVING,
+                    Messages.COMPLETED,
+                    subActions,
+                    true, // suppressHistory
+                    false, // showSubActionDetails (default value).
+                    true); // stopOnFirstException
             }
             else
             {
