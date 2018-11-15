@@ -39,7 +39,9 @@ using System.Linq;
 
 namespace XenAdmin.Actions
 {
-    // Run several actions. The outer action is asynchronous, but the subactions are run synchronously within that.
+    /// <summary>
+    /// Run several actions.The outer action is asynchronous, but the subactions are run synchronously within that.
+    /// </summary>
     public class MultipleAction : AsyncAction, IDisposable
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
