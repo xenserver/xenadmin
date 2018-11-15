@@ -258,7 +258,8 @@ namespace XenServerHealthCheck
             }
             finally
             {
-                source?.Dispose();
+                if (source != null)
+                    source.Dispose();
             }
 
             log.InfoFormat("Succeeded to upload bundle {0}", fileName);
