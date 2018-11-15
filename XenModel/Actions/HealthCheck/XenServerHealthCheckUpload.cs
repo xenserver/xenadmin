@@ -171,29 +171,50 @@ namespace XenServerHealthCheck
             return false;
         }
 
+        private const int FILE_MOVE_MAX_RETRIES = 5;
+        private const int FILE_MOVE_SLEEP_BETWEEN_RETRIES = 100;
         /// <summary>
         /// Initiate the upload and then upload the zip file in chunks
         /// </summary>
         public string UploadZip(string fileName, string caseNumber, System.Threading.CancellationToken cancel)
         {
             log.InfoFormat("Initiate the upload for {0}", fileName);
-            FileInfo fileInfo = new FileInfo(fileName);
-            long size = fileInfo.Length;
-
-            // Fetch the upload UUID from CIS server.
-            string uploadUuid = InitiateUpload(Path.GetFileName(fileName), size, caseNumber, cancel);
-            if (string.IsNullOrEmpty(uploadUuid))
+            FileInfo fileInfo = null;
+            FileStream source = null;
+            string uploadUuid = "";
+            try
             {
-                log.ErrorFormat("Could not fetch the upload UUID from the CIS server");
-                return "";
-            }
+                int retriesRemaining = FILE_MOVE_MAX_RETRIES;
+                do
+                {
+                    try
+                    {
+                        fileInfo = new FileInfo(fileName);
+                        source = fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        if (retriesRemaining <= 0)
+                            throw;
+                        System.Threading.Thread.Sleep(FILE_MOVE_SLEEP_BETWEEN_RETRIES);
+                    }
+                } while (retriesRemaining-- > 0);
 
-            // Start to upload zip file.
-            log.InfoFormat("Upload server returned Upload UUID: {0}", uploadUuid);
-            log.InfoFormat("Start to upload bundle {0}", fileName);
+                long size = fileInfo.Length;
 
-            using (var source = fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.None))
-            {
+                // Fetch the upload UUID from CIS server.
+                uploadUuid = InitiateUpload(Path.GetFileName(fileName), size, caseNumber, cancel);
+                if (string.IsNullOrEmpty(uploadUuid))
+                {
+                    log.ErrorFormat("Could not fetch the upload UUID from the CIS server");
+                    return "";
+                }
+
+                // Start to upload zip file.
+                log.InfoFormat("Upload server returned Upload UUID: {0}", uploadUuid);
+                log.InfoFormat("Start to upload bundle {0}", fileName);
+
                 long offset = 0;
                 while (offset < size)
                 {
@@ -234,6 +255,10 @@ namespace XenServerHealthCheck
                     }
 
                 }
+            }
+            finally
+            {
+                source?.Dispose();
             }
 
             log.InfoFormat("Succeeded to upload bundle {0}", fileName);
