@@ -125,6 +125,23 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
+	    private bool IsStorageMotion(KeyValuePair<string, VmMapping> mapping)
+	    {
+	        if (!IsIntraPoolMigration(mapping))
+	            return true;
+
+	        if (mapping.Value.Storage == null)
+	            return false;
+
+            foreach (var vdiMapping in mapping.Value.Storage)
+	        {
+	            var vdi = xenConnection.Resolve(new XenRef<VDI>(vdiMapping.Key));
+	            if (vdi.SR.opaque_ref != vdiMapping.Value.opaque_ref)
+	                return true;
+	        }
+            return false;
+        }
+
         private bool IsIntraPoolMove()
         {
             return wizardMode == WizardMode.Move && m_vmMappings.All(IsIntraPoolMove);
@@ -245,8 +262,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 else
                 {
                     var isCopy = wizardMode == WizardMode.Copy;
-                    var migrateAction = 
-                        new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
+                    AsyncAction migrateAction;
+                    if (isCopy || IsStorageMotion(pair))
+                        migrateAction = new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
+                    else
+                        migrateAction = new VMMigrateAction(vm, target);
 
                     if (_resumeAfterMigrate)
                     {

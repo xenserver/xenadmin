@@ -195,7 +195,7 @@ namespace XenAdmin.Wizards.GenericPages
             return true;
         }
 
-		protected virtual bool IsExtraSpaceNeeded(XenRef<SR> sourceRef, XenRef<SR> targetRef)
+		protected virtual bool IsExtraSpaceNeeded(SR sourceSr, SR targetSr)
 		{
 			return true;
 		}
@@ -290,23 +290,26 @@ namespace XenAdmin.Wizards.GenericPages
 			foreach (var toStringWrapper in commonSRs)
 			{
 				ulong requiredSpace = 0;
+			    bool isSuitableForAll = true;
 				foreach (var kvp in m_vmMappings)
 				{
 					foreach (IStorageResource resourceData in ResourceData(kvp.Key))
 					{
-						if (IsExtraSpaceNeeded(resourceData.SR, new XenRef<SR>(toStringWrapper.item)))
+						if (IsExtraSpaceNeeded(resourceData.SR, toStringWrapper.item))
 						{
 							requiredSpace += resourceData.RequiredDiskCapacity;
+						    if (!SrIsSuitable(resourceData.SR) || !SrIsSuitable(toStringWrapper.item))
+						        isSuitableForAll=false;
 						}
 					}
 				}
-				listToAdd.Add(new EnableableSrComboboxItem(toStringWrapper, requiredSpace));
+				if (isSuitableForAll)
+				    listToAdd.Add(new EnableableSrComboboxItem(toStringWrapper, requiredSpace));
 			} 
 	           
             if (listToAdd.Any(item => item.Enabled))
             {
                 var sortedlistToAdd = from item in listToAdd
-                                      where SrIsSuitable(item.Sr)
                                       orderby item.Enabled descending , item.SrName
                                       select item;
 
@@ -426,7 +429,7 @@ namespace XenAdmin.Wizards.GenericPages
 					var storageDetail = (StorageDetail)row.Cells[0].Tag;
 					string uuid = selectedItem.item.uuid;
 					ulong requiredSpace =
-						IsExtraSpaceNeeded(storageDetail.ResourceData.SR, new XenRef<SR>(selectedItem.item))
+						IsExtraSpaceNeeded(storageDetail.ResourceData.SR, selectedItem.item)
 							? storageDetail.RequiredSpace
 							: 0;
 					
@@ -449,6 +452,8 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			var cb = new DataGridViewComboBoxCell { FlatStyle = FlatStyle.Flat };
 
+		    var sourceSrIsSuitable = SrIsSuitable(resource.SR);
+
             foreach (var pbd in TargetConnection.Cache.PBDs)
 			{
 				if (pbd.SR == null)
@@ -465,7 +470,7 @@ namespace XenAdmin.Wizards.GenericPages
 
 				bool srOnHost = pbd.host != null && pbd.host.Equals(xenRef);
 				
-				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, pbd.SR) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity) && SrIsSuitable(sr))
+				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, sr) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && sourceSrIsSuitable && SrIsSuitable(sr)))
 				{
 					var count = (from ToStringWrapper<SR> existingItem in cb.Items
 					             where existingItem.item.opaque_ref == sr.opaque_ref

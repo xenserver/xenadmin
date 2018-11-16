@@ -109,7 +109,7 @@ namespace XenAdmin.Commands
             return vm != null && !_cantBootReasons.ContainsKey(vm);
         }
 
-        private static string GetVmCannotBootOnHostReason(VM vm, Host host, Session session, vm_operations operation)
+        internal static string GetVmCannotBootOnHostReason(VM vm, Host host, Session session, vm_operations operation)
         {
             Host residentHost = vm.Connection.Resolve(vm.resident_on);
 
