@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
@@ -125,6 +126,20 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                                     excludedHosts.Add(host.opaque_ref);
                                 }
                                 continue;
+                            }
+
+                            //if pool_migrate can be done, then we will allow it in the wizard, even if storage migration is not allowed (i.e. users can use the wizard to live-migrate a VM inside the pool)
+                            if (_wizardMode == WizardMode.Migrate && vmPool != null && targetPool != null && vmPool.opaque_ref == targetPool.opaque_ref)
+                            {
+                                var reason = VMOperationHostCommand.GetVmCannotBootOnHostReason(vm, host, vm.Connection.Session, vm_operations.pool_migrate);
+                                if (string.IsNullOrEmpty(reason))
+                                {
+                                    lock (cacheLock)
+                                    {
+                                        vmCache.Add(host.opaque_ref, reason);
+                                    }
+                                    continue;
+                                }
                             }
 
                             PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);

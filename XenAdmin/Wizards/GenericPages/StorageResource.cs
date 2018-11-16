@@ -41,7 +41,7 @@ namespace XenAdmin.Wizards.GenericPages
         bool SRTypeInvalid { get; }
         ulong RequiredDiskCapacity { get; }
         bool CanCalculateDiskCapacity { get; }
-		XenRef<SR> SR { get; }
+		SR SR { get; }
     }
 
     public abstract class StorageResourceContainer : IEnumerable
