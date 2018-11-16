@@ -261,7 +261,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (item.Disk.SR.opaque_ref != sr.opaque_ref)
                     continue;
 
-                if (sr.FreeSpace() < totalDiskInitialAllocation[sr.opaque_ref])
+                if (!sr.VdiCreationCanProceed(totalDiskInitialAllocation[sr.opaque_ref]))
                     overcommitedDisk = item.OverCommit = DiskOverCommit.Error;
 
                 if (item.OverCommit != DiskOverCommit.None)
@@ -556,7 +556,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         /// </summary>
         private static bool IsSufficientFreeSpaceAvailableOnSrForVdi(SR sr, VDI disk)
         {
-            return sr != null && !sr.IsFull() && sr.FreeSpace() > Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk);
+            return sr != null && sr.VdiCreationCanProceed(Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk));
         }
     }
 
