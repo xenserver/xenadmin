@@ -674,62 +674,6 @@ namespace XenAdmin.Core
                 return string.Format("{0} - {1}", Util.DiskSizeStringWithoutUnits(min), Util.DiskSizeString(max));
         }
 
-        public static string StringFromMaxMinTime(long min, long max)
-        {
-            if (min == -1 && max == -1)
-                return Messages.TIME_NEGLIGIBLE;
-            else if (min == -1)
-                return Util.LThanTime(max);
-            else if (max == -1)
-                return Util.GThanTime(min);
-            else if (min == max)
-                return Util.TimeString(max);
-            else
-                return Util.TimeRangeString(min, max);
-        }
-
-        public static string StringFromMaxMinTimeList(List<long> minList, List<long> maxList)
-        {
-            bool lessFlag = false;
-            bool moreFlag = false;
-            bool negligFlag = false;
-
-            long minSum = 0;
-            long maxSum = 0;
-
-            for (int i = 0; i < minList.Count; i++)
-            {
-                if (minList[i] < 0 && maxList[i] < 0)
-                {
-                    negligFlag = true;
-                }
-                else if (minList[i] < 0)
-                {
-                    maxSum += maxList[i];
-                    lessFlag = true;
-                }
-                else if (maxList[i] < 0)
-                {
-                    minSum += minList[i];
-                    moreFlag = true;
-                }
-                else
-                {
-                    minSum += minList[i];
-                    maxSum += maxList[i];
-                }
-            }
-
-            if (moreFlag)
-                return Util.GThanTime(minSum);
-            if (lessFlag)
-                return Util.LThanTime(maxSum);
-            if (negligFlag && maxSum <= 0)
-                return Util.TimeString(maxSum);
-            return StringFromMaxMinTime(minSum, maxSum);
-
-        }
-
         public static string StringFromMaxMinSizeList(List<long> minList, List<long> maxList)
         {
             bool lessFlag = false;

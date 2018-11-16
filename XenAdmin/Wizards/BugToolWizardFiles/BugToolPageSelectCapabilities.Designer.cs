@@ -43,14 +43,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.DescriptionValue = new System.Windows.Forms.Label();
             this.SizeLabel = new System.Windows.Forms.Label();
             this.SizeValue = new System.Windows.Forms.Label();
-            this.TimeLabel = new System.Windows.Forms.Label();
-            this.TimeValue = new System.Windows.Forms.Label();
             this.TotalSizeLabel = new System.Windows.Forms.Label();
             this.TotalSizeValue = new System.Windows.Forms.Label();
-            this.TotalTimeLabel = new System.Windows.Forms.Label();
-            this.TotalTimeValue = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -96,9 +93,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this.dataGridViewItems, "dataGridViewItems");
             this.dataGridViewItems.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridViewItems.Name = "dataGridViewItems";
-            this.dataGridViewItems.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewItems_SortCompare);
             this.dataGridViewItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewItems_CellClick);
             this.dataGridViewItems.SelectionChanged += new System.EventHandler(this.dataGridViewItems_SelectionChanged);
+            this.dataGridViewItems.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewItems_SortCompare);
             // 
             // columnCheck
             // 
@@ -148,12 +145,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel4.Controls.Add(this.DescriptionValue, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.SizeLabel, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.SizeValue, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.TimeLabel, 0, 4);
-            this.tableLayoutPanel4.Controls.Add(this.TimeValue, 0, 5);
-            this.tableLayoutPanel4.Controls.Add(this.TotalSizeLabel, 0, 6);
-            this.tableLayoutPanel4.Controls.Add(this.TotalSizeValue, 1, 6);
-            this.tableLayoutPanel4.Controls.Add(this.TotalTimeLabel, 0, 7);
-            this.tableLayoutPanel4.Controls.Add(this.TotalTimeValue, 1, 7);
+            this.tableLayoutPanel4.Controls.Add(this.TotalSizeLabel, 0, 4);
+            this.tableLayoutPanel4.Controls.Add(this.TotalSizeValue, 1, 4);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
             // DescriptionLabel
@@ -178,17 +171,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel4.SetColumnSpan(this.SizeValue, 2);
             this.SizeValue.Name = "SizeValue";
             // 
-            // TimeLabel
-            // 
-            resources.ApplyResources(this.TimeLabel, "TimeLabel");
-            this.TimeLabel.Name = "TimeLabel";
-            // 
-            // TimeValue
-            // 
-            resources.ApplyResources(this.TimeValue, "TimeValue");
-            this.tableLayoutPanel4.SetColumnSpan(this.TimeValue, 2);
-            this.TimeValue.Name = "TimeValue";
-            // 
             // TotalSizeLabel
             // 
             resources.ApplyResources(this.TotalSizeLabel, "TotalSizeLabel");
@@ -198,16 +180,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // 
             resources.ApplyResources(this.TotalSizeValue, "TotalSizeValue");
             this.TotalSizeValue.Name = "TotalSizeValue";
-            // 
-            // TotalTimeLabel
-            // 
-            resources.ApplyResources(this.TotalTimeLabel, "TotalTimeLabel");
-            this.TotalTimeLabel.Name = "TotalTimeLabel";
-            // 
-            // TotalTimeValue
-            // 
-            resources.ApplyResources(this.TotalTimeValue, "TotalTimeValue");
-            this.TotalTimeValue.Name = "TotalTimeValue";
             // 
             // tableLayoutPanel3
             // 
@@ -229,6 +201,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this, "$this");
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -247,15 +220,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label DescriptionLabel;
         private System.Windows.Forms.Label SizeLabel;
-        private System.Windows.Forms.Label TimeLabel;
         private System.Windows.Forms.Label DescriptionValue;
         private System.Windows.Forms.Label SizeValue;
-        private System.Windows.Forms.Label TimeValue;
         private System.Windows.Forms.Label TotalSizeLabel;
         private System.Windows.Forms.Label TotalSizeValue;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label TotalTimeLabel;
-        private System.Windows.Forms.Label TotalTimeValue;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button SelectButton;
         private System.Windows.Forms.SplitContainer splitContainer1;

@@ -206,10 +206,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                         c.MaxSize = Int64.Parse(value);
                     else if (name == "min-size")
                         c.MinSize = Int64.Parse(value);
-                    else if (name == "max-time")
-                        c.MaxTime = Int64.Parse(value);
-                    else if (name == "min-time")
-                        c.MinTime = Int64.Parse(value);
                     else if (name == "pii")
                         c.PII = value == "yes" ? PrivateInformationIncluded.yes :
                             value == "no" ? PrivateInformationIncluded.no :
@@ -272,8 +268,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             clientCap.Key = "client-logs";
             clientCap.MaxSize = getLogSize();
             clientCap.MinSize = clientCap.MaxSize;
-            clientCap.MaxTime = -1;
-            clientCap.MinTime = -1;
             clientCap.PII = PrivateInformationIncluded.yes;
 
             return clientCap;
@@ -293,10 +287,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void OnCheckedCapabilitiesChanged()
         {
-            string totalSize, totalTime;
-            CalculateTotalSizeAndTime(out totalSize, out totalTime);
+            string totalSize;
+            CalculateTotalSize(out totalSize);
             TotalSizeValue.Text = totalSize;
-            TotalTimeValue.Text = totalTime;
             ClearButton.Enabled = wizardCheckAnyChecked();
             SelectButton.Enabled = wizardCheckAnyUnchecked();
             OnPageUpdated();
@@ -348,13 +341,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
         }
 
-        private void CalculateTotalSizeAndTime(out string totalSize, out string totalTime)
+        private void CalculateTotalSize(out string totalSize)
         {
             var sizeMinList = new List<long>();
             var sizeMaxList = new List<long>();
-
-            var timeMinList = new List<long>();
-            var timeMaxList = new List<long>();
 
             foreach (var row in dataGridViewItems.Rows)
             {
@@ -366,13 +356,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
                     sizeMinList.Add(c.MinSize * m);
                     sizeMaxList.Add(c.MaxSize * m);
-
-                    timeMinList.Add(c.MinTime * m);
-                    timeMaxList.Add(c.MaxTime * m);
                 }
             }
             totalSize = Helpers.StringFromMaxMinSizeList(sizeMinList, sizeMaxList);
-            totalTime = Helpers.StringFromMaxMinTimeList(timeMinList, timeMaxList);
         }
 
         public IEnumerable<Capability> Capabilities
@@ -410,7 +396,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
                 DescriptionValue.Text = row.Capability.Description;
                 SizeValue.Text = row.Capability.EstimatedSize;
-                TimeValue.Text = row.Capability.EstimatedTime;
             }
         }
 
@@ -531,8 +516,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         bool _defaultChecked;
         public long MaxSize;
         public long MinSize;
-        public long MaxTime;
-        public long MinTime;
         public PrivateInformationIncluded PII;
         private string _key;
         private string _name;
@@ -606,14 +589,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             get
             {
                 return Helpers.StringFromMaxMinSize(MinSize, MaxSize);
-            }
-        }
-
-        public string EstimatedTime
-        {
-            get
-            {
-                return Helpers.StringFromMaxMinTime(MinTime, MaxTime);
             }
         }
 
