@@ -586,7 +586,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Choose which items you would like to include in your status report. You can see the size and estimated retrieval time of your report, as well as specific details on each item to the right of the item list.</value>
+    <value>Choose which items you would like to include in your status report. You can see the size of your report, as well as specific details on each item to the right of the item list.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
