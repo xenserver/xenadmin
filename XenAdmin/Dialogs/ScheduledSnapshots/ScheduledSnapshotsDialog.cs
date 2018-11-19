@@ -142,7 +142,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 PolicyStatus = _policy.enabled ? Messages.ENABLED : Messages.DISABLED;
 
                 if (_serverLocalTime.HasValue)
-                    PolicyNextRunTime = _policy.GetNextRunTime(_serverLocalTime.Value);
+                    PolicyNextRunTime = _policy.GetNextRunTime(_serverLocalTime.Value).ToLocalTime();
                 else
                     PolicyNextRunTime = null;
 
@@ -262,8 +262,12 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
                     if (action.ServerLocalTime.HasValue)
                     {
-                        string time= HelpersGUI.DateTimeToString(action.ServerLocalTime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
-                        labelServerTime.Text = string.Format(Messages.SERVER_TIME, time);
+                        var time = HelpersGUI.DateTimeToString(action.ServerLocalTime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
+                        var localTime = HelpersGUI.DateTimeToString(action.ServerLocalTime.Value.ToLocalTime(), Messages.DATEFORMAT_WDMY_HM_LONG, true);
+                        
+                        labelServerTime.Text = time == localTime ?
+                            string.Format(Messages.SERVER_TIME, time) :
+                            string.Format(Messages.SERVER_TIME_LOCAL_TIME, localTime, time);
                     }
 
                     RefreshPoolTitle(Pool);

@@ -10960,6 +10960,10 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
   <data name="SERVER_TIME" xml:space="preserve">
     <value>The current time on the pool master is: {0}</value>
   </data>
+  <data name="SERVER_TIME_LOCAL_TIME" xml:space="preserve">
+    <value>The current time on the pool master is: {0}
+In the server's timezone this is: {1}</value>
+  </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
     <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards.</value>
   </data>
