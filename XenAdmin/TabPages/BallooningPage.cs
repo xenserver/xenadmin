@@ -32,12 +32,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 using XenAdmin.Controls.Ballooning;
 using XenAdmin.Core;
-using XenAdmin.Network;
+using XenAdmin.XenSearch;
 using XenAPI;
 
 
@@ -46,6 +46,7 @@ namespace XenAdmin.TabPages
     public partial class BallooningPage : BaseTabPage
     {
         private const int ROW_GAP = 10;
+        private static MetricUpdater metricUpdater;
 
         public BallooningPage()
         {
@@ -58,6 +59,33 @@ namespace XenAdmin.TabPages
             Text = Messages.DYNAMIC_MEMORY_CONTROL;
             Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Host_CollectionChanged);
             VM_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_CollectionChanged);
+            metricUpdater = new MetricUpdater();
+            metricUpdater.MetricsUpdated += MetricsUpdated;
+        }
+
+        private void MetricsUpdated(object o, EventArgs e)
+        {
+            foreach (Control c in pageContainerPanel.Controls)
+            {
+                var hostRow = c as HostMemoryRow;
+                if (hostRow != null)
+                {
+                    Program.Invoke(Program.MainWindow, delegate
+                    {
+                        hostRow.UpdateMemoryByMetricUpdater();
+                    });
+                }
+            }
+        }
+
+        public void HostMemoryControlsShown()
+        {
+            metricUpdater.Start();
+        }
+
+        public void HostMemoryControlsHidden()
+        {
+            metricUpdater.Pause();
         }
 
         IXenObject xenObject;
@@ -351,12 +379,16 @@ namespace XenAdmin.TabPages
             int initScroll = pageContainerPanel.VerticalScroll.Value;
             int top = pageContainerPanel.Padding.Top - initScroll;
             hosts.Sort();
+            metricUpdater.SetXenObjects(hosts.ToArray<IXenObject>());
+
             foreach (Host host in hosts)
             {
                 Host_metrics metrics = host.Connection.Resolve(host.metrics);
                 if (metrics == null || !metrics.live)
                     continue;
-                AddRowToPanel(new HostMemoryRow(host), ref top);
+                var hostRow = new HostMemoryRow(host);
+                hostRow.MetricUpdater = metricUpdater;
+                AddRowToPanel(hostRow, ref top);
             }
 
             // Add VM rows.

@@ -1945,6 +1945,11 @@ namespace XenAdmin
             else
                 SearchPage.PanelHidden();
 
+            if (t == TabPageBallooning)
+                BallooningPage.HostMemoryControlsShown();
+            else
+                BallooningPage.HostMemoryControlsHidden();
+
             if (t == TabPageDockerDetails)
                 DockerDetailsPage.ResumeRefresh();
             else

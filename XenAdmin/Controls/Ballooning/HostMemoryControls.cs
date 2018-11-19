@@ -30,16 +30,12 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using XenAPI;
-using XenAdmin.Dialogs;
 using XenAdmin.Core;
-
+using XenAdmin.Dialogs;
+using XenAdmin.XenSearch;
+using XenAPI;
 
 namespace XenAdmin.Controls.Ballooning
 {
@@ -88,8 +84,6 @@ namespace XenAdmin.Controls.Ballooning
             if (host == null || host_metrics == null)
                 return;
             long total = host_metrics.memory_total;
-            long free = host.memory_free_calc();
-            long used = total - free;
             long xen_memory = host.xen_memory_calc();
             long avail = host.memory_available_calc();
             long tot_dyn_max = host.tot_dyn_max() + xen_memory;
@@ -104,11 +98,23 @@ namespace XenAdmin.Controls.Ballooning
 
             // Set the text values
             valueTotal.Text = Util.MemorySizeStringSuitableUnits(total, true);
-            valueUsed.Text = Util.MemorySizeStringSuitableUnits(used, true);
+            UpdateMemoryByMetricUpdater();
             valueAvail.Text = Util.MemorySizeStringSuitableUnits(avail, true);
             valueTotDynMax.Text = Util.MemorySizeStringSuitableUnits(tot_dyn_max, true);
             labelOvercommit.Text = string.Format(Messages.OVERCOMMIT, overcommit);
             valueControlDomain.Text = Util.MemorySizeStringSuitableUnits(dom0, true);
+        }
+
+        public MetricUpdater MetricUpdater { get; set; }
+
+        public void UpdateMemoryByMetricUpdater()
+        {
+            if (MetricUpdater == null) return;
+            MetricUpdater.Prod();
+            var free = MetricUpdater.GetValue(host, "memory_free_kib");
+            var total = MetricUpdater.GetValue(host, "memory_total_kib");
+            var used = (total - free) * Util.BINARY_KILO;
+            valueUsed.Text = Util.MemorySizeStringSuitableUnits(used, true);
         }
 
         void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)

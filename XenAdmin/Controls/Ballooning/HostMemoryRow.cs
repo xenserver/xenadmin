@@ -30,6 +30,7 @@
  */
 
 using System.Windows.Forms;
+using XenAdmin.XenSearch;
 using XenAPI;
 
 namespace XenAdmin.Controls.Ballooning
@@ -63,6 +64,17 @@ namespace XenAdmin.Controls.Ballooning
         {
             memoryRowLabel.UnsubscribeEvents();
             hostMemoryControls.UnregisterHandlers();
+        }
+
+        public MetricUpdater MetricUpdater
+        {
+            get { return hostMemoryControls.MetricUpdater; }
+            set { hostMemoryControls.MetricUpdater = value; }
+        }
+
+        public void UpdateMemoryByMetricUpdater()
+        {
+            hostMemoryControls.UpdateMemoryByMetricUpdater();
         }
     }
 }
