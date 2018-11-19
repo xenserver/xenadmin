@@ -29,7 +29,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BugToolPageSelectCapabilities));
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewItems = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -47,29 +46,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.TotalSizeValue = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitContainer1
-            // 
-            resources.ApplyResources(this.splitContainer1, "splitContainer1");
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel4);
-            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
             // tableLayoutPanel1
             // 
@@ -77,7 +58,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewItems, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.SelectButton, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.ClearButton, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // dataGridViewItems
@@ -134,6 +114,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // 
             this.linkLabel1.AutoEllipsis = true;
             resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.tableLayoutPanel3.SetColumnSpan(this.linkLabel1, 2);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -185,26 +166,24 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.linkLabel1, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.tableLayoutPanel3.SetColumnSpan(this.label1, 2);
             this.label1.Name = "label1";
             // 
             // BugToolPageSelectCapabilities
             // 
-            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.tableLayoutPanel3);
             this.DoubleBuffered = true;
             this.Name = "BugToolPageSelectCapabilities";
             resources.ApplyResources(this, "$this");
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -227,7 +206,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button SelectButton;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;

@@ -63,10 +63,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageSelectCapabilities()
         {
             InitializeComponent();
-
-            //set this here due to a framework bug
-            splitContainer1.Panel1MinSize = 250;
-            splitContainer1.Panel2MinSize = 200;
             this.linkLabel1.Visible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
         }
 
