@@ -173,5 +173,43 @@ namespace XenAPI
 
             return string.Empty;
         }
+
+        public static Dictionary<string, string> FindScheduleWithGivenTimeOffset(
+            TimeSpan timeDiff,
+            Dictionary<string, string> schedule)
+        {
+            var output = new Dictionary<string, string>();
+
+            if (schedule.TryGetValue("min", out var min))
+            {
+                var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
+                if (newMin < 0)
+                    newMin = 60 - Math.Abs(newMin);
+                output["min"] = newMin.ToString();
+            }
+
+            if (schedule.TryGetValue("hour", out var hour))
+            {
+                var newHour = (int.Parse(hour) + timeDiff.TotalHours + TimeSpan.FromMinutes(int.Parse(min)).TotalHours) % 24;
+                if (newHour < 0)
+                    newHour = 24 - Math.Abs(newHour);
+                output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
+            }
+
+            if (schedule.TryGetValue("days", out var days))
+            {
+                var dayOffset = Convert.ToInt32(Math.Floor((timeDiff + TimeSpan.FromHours(int.Parse(hour)) + TimeSpan.FromMinutes(int.Parse(min))).TotalDays));
+                var originalDays = new List<DayOfWeek>();
+                foreach (var dayText in days.Split(','))
+                {
+                    if (Enum.TryParse(dayText, out DayOfWeek day))
+                        originalDays.Add(day);
+                }
+                var newDays = Util.DaysOfWeekWithOffset(originalDays, dayOffset);
+                output["days"] = string.Join(",", newDays.Select(day => day.ToString()));
+            }
+
+            return output;
+        }
     }
 }

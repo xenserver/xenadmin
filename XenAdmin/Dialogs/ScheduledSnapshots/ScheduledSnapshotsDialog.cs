@@ -57,9 +57,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             : base(pool.Connection)
         {
             Pool = pool;
-            InitializeComponent();      
-            chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
-            chevronButton1.Image = Properties.Resources.PDChevronDown;
+            InitializeComponent();
+            ShowHideRunHistoryButton.Text = Messages.SHOW_RUN_HISTORY;
+            ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronDown;
 
             ColumnExpand.DefaultCellStyle.NullValue = null;
             comboBoxTimeSpan.SelectedIndex = 0;
@@ -106,10 +106,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             private DataGridViewTextBoxCell _name = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _numVMs = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _nextRunTime = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell _correspondingServerTime = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _status = new DataGridViewTextBoxCell();
             private DataGridViewTextAndImageCell _lastResult = new DataGridViewTextAndImageCell();
 
-            private readonly DateTime? _serverLocalTime;
+            private readonly TimeSpan? _timeZoneDiff;
             private readonly VMSS _policy;
             private readonly List<XenAPI.Message> _alertMessages;
 
@@ -123,15 +124,16 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             public string PolicyStatus { get; private set; }
             public int PolicyVmCount { get; private set; }
             public DateTime? PolicyNextRunTime { get; private set; }
+            public DateTime? PolicyCorrespondingServerTime { get; private set; }
             public string PolicyLastResult { get; private set; }
             private Bitmap PolicyLastResultImage { get; set; }
 
-            public PolicyRow(VMSS policy, List<XenAPI.Message> alertMessages, DateTime? serverLocalTime)
+            public PolicyRow(VMSS policy, List<XenAPI.Message> alertMessages, TimeSpan? timeZoneDiff)
             {
-                Cells.AddRange(_name, _status, _numVMs, _nextRunTime, _lastResult);
+                Cells.AddRange(_name, _status, _numVMs, _nextRunTime, _correspondingServerTime, _lastResult);
                 _policy = policy;
                 _alertMessages = alertMessages;
-                _serverLocalTime = serverLocalTime;
+                _timeZoneDiff = timeZoneDiff;
                 RefreshRow();
             }
 
@@ -141,10 +143,17 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 PolicyVmCount = _policy.VMs.FindAll(vm => _policy.Connection.Resolve(vm).is_a_real_vm()).Count;
                 PolicyStatus = _policy.enabled ? Messages.ENABLED : Messages.DISABLED;
 
-                if (_serverLocalTime.HasValue)
-                    PolicyNextRunTime = _policy.GetNextRunTime(_serverLocalTime.Value);
+                if (_timeZoneDiff.HasValue)
+                {
+                    var now = DateTime.Now;
+                    PolicyNextRunTime = _policy.GetNextRunTime(now);
+                    PolicyCorrespondingServerTime = _policy.GetNextRunTime(now) - _timeZoneDiff.Value;
+                }
                 else
+                {
                     PolicyNextRunTime = null;
+                    PolicyCorrespondingServerTime = null;
+                }
 
                 if (_alertMessages.Count > 0)
                 {
@@ -172,6 +181,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 _lastResult.Image = PolicyLastResultImage;
                 _nextRunTime.Value = PolicyNextRunTime.HasValue
                     ? HelpersGUI.DateTimeToString(PolicyNextRunTime.Value, Messages.DATEFORMAT_DMY_HM, true)
+                    : Messages.VMSS_HOST_NOT_LIVE;
+                _correspondingServerTime.Value = PolicyCorrespondingServerTime.HasValue
+                    ? HelpersGUI.DateTimeToString(PolicyCorrespondingServerTime.Value, Messages.DATEFORMAT_DMY_HM, true)
                     : Messages.VMSS_HOST_NOT_LIVE;
             }
         }
@@ -225,19 +237,25 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     var selectedPolicyUuids = (from PolicyRow row in dataGridViewPolicies.SelectedRows
                         select row.Policy.uuid).ToList();
 
-                    var rowList = from kvp in action.SnapshotSchedules select new PolicyRow(kvp.Key, kvp.Value, action.ServerLocalTime);
+                    TimeSpan? timeZoneDiff = null;
+                    if (action.ServerLocalTime.HasValue)
+                        timeZoneDiff = Util.RoundToNearestMinute(DateTime.UtcNow - action.ServerLocalTime.Value + Pool.Connection.ServerTimeOffset);
+
+                    var rowList = from kvp in action.SnapshotSchedules select new PolicyRow(kvp.Key, kvp.Value, timeZoneDiff);
 
                     Func<PolicyRow, object> comparer = p => p.PolicyName;
                     if (dataGridViewPolicies.SortedColumn != null)
                     {
-                        if (dataGridViewPolicies.SortedColumn.Index == NameColum.Index)
+                        if (dataGridViewPolicies.SortedColumn.Index == ColumnName.Index)
                             comparer = p => p.PolicyName;
-                        else if (dataGridViewPolicies.SortedColumn.Index == EnabledColumn.Index)
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnEnabled.Index)
                             comparer = p => p.PolicyStatus;
                         else if (dataGridViewPolicies.SortedColumn.Index == ColumnVMs.Index)
                             comparer = p => p.PolicyVmCount;
-                        else if (dataGridViewPolicies.SortedColumn.Index == DescriptionColum.Index)
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnNextSnapshotTime.Index)
                             comparer = p => p.PolicyNextRunTime;
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnCorrespondingServerTime.Index)
+                            comparer = p => p.PolicyCorrespondingServerTime;
                         else if (dataGridViewPolicies.SortedColumn.Index == ColumnLastResult.Index)
                             comparer = p => p.PolicyLastResult;
                     }
@@ -259,12 +277,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 {
                     dataGridViewPolicies.ResumeLayout();
                     updatingPolicies = false;
-
-                    if (action.ServerLocalTime.HasValue)
-                    {
-                        string time= HelpersGUI.DateTimeToString(action.ServerLocalTime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
-                        labelServerTime.Text = string.Format(Messages.SERVER_TIME, time);
-                    }
 
                     RefreshPoolTitle(Pool);
                     RefreshButtons();
@@ -395,26 +407,26 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             }
         }
 
-        private void chevronButton1_ButtonClick(object sender, EventArgs e)
+        private void ShowHideRunHistoryButton_Click(object sender, EventArgs e)
         {
-            if (chevronButton1.Text == Messages.HIDE_RUN_HISTORY)
+            if (ShowHideRunHistoryButton.Text == Messages.HIDE_RUN_HISTORY)
             {
-                chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
-                chevronButton1.Image = Properties.Resources.PDChevronDown;
+                ShowHideRunHistoryButton.Text = Messages.SHOW_RUN_HISTORY;
+                ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronDown;
                 panelHistory.Visible = false;
             }
             else
             {
-                chevronButton1.Text = Messages.HIDE_RUN_HISTORY;
-                chevronButton1.Image = Properties.Resources.PDChevronUp;
+                ShowHideRunHistoryButton.Text = Messages.HIDE_RUN_HISTORY;
+                ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronUp;
                 panelHistory.Visible = true;
             }
         }
 
-        private void chevronButton1_KeyDown(object sender, KeyEventArgs e)
+        private void ShowHideRunHistoryButton_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
-                chevronButton1_ButtonClick(sender, e);
+                ShowHideRunHistoryButton_Click(sender, e);
         }
 
         #endregion

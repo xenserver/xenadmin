@@ -37617,6 +37617,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next scheduled time {0} this corresponds to a server time of {1}..
+        /// </summary>
+        public static string VMSS_NEXT_TIME_RUNNING {
+            get {
+                return ResourceManager.GetString("VMSS_NEXT_TIME_RUNNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n.
         /// </summary>
         public static string VMSS_POLICY_SUMMARY {

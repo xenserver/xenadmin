@@ -32,14 +32,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.SettingsPanels;
 using XenAPI;
-using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {
@@ -48,11 +48,46 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public NewPolicySnapshotFrequencyPage()
         {
             InitializeComponent();
+            InitializeProgressControls();
             radioButtonDaily.Checked = true;
             comboBoxMin.SelectedIndex = 1;
             daysWeekCheckboxes.CheckBoxChanged += checkBox_CheckedChanged;
-
+            StatusChanged += PolicySnapshotFrequency_StatusChanged;
+            MainTableLayoutPanel.Visible = false;
+            LoadingBox.Visible = true;
+            spinningTimer.Start();
         }
+
+        private int currentSpinningFrame;
+        private Timer spinningTimer = new Timer();
+        private ImageList imageList = new ImageList();
+
+        private void InitializeProgressControls()
+        {
+            imageList.ColorDepth = ColorDepth.Depth32Bit;
+            imageList.ImageSize = new Size(32, 32);
+            imageList.Images.AddRange(new Image[]
+            {
+                Properties.Resources.SpinningFrame0,
+                Properties.Resources.SpinningFrame1,
+                Properties.Resources.SpinningFrame2,
+                Properties.Resources.SpinningFrame3,
+                Properties.Resources.SpinningFrame4,
+                Properties.Resources.SpinningFrame5,
+                Properties.Resources.SpinningFrame6,
+                Properties.Resources.SpinningFrame7
+            });
+
+            spinningTimer.Tick += timer_Tick;
+            spinningTimer.Interval = 150;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            int imageIndex = ++currentSpinningFrame <= 7 ? currentSpinningFrame : currentSpinningFrame = 0;
+            pictureBoxProgress.Image = imageList.Images[imageIndex];
+        }
+
         private Pool _pool;
         public Pool Pool
         {
@@ -60,7 +95,33 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             set
             {
                 _pool = value;
-                localServerTime1.Pool = _pool;
+                GetServerTime();
+            }
+        }
+
+        public void GetServerTime()
+        {
+            var master = Helpers.GetMaster(Pool);
+            if (master == null)
+                return;
+
+            var action = new GetServerTimeAction(master);
+            action.Completed += action_CompletedTimeServer;
+            action.RunAsync();
+        }
+
+        private TimeSpan? TimeZoneDiff { get; set; }
+
+        public VMSS CurrentPolicy
+        {
+            get
+            {
+                return new VMSS
+                {
+                    frequency = Frequency,
+                    schedule = Schedule,
+                    retained_snapshots = BackupRetention
+                };
             }
         }
 
@@ -132,6 +193,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void radioButtonHourly_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (sender == null || !((RadioButton) sender).Checked)
+                return;
+
             ShowPanel(panelHourly);
             numericUpDownRetention.Value = 10;
             OnPageUpdated();
@@ -139,19 +203,27 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void ShowPanel(Panel panel)
         {
-            panelHourly.Visible = false;
-            panelDaily.Visible = false;
-            panelWeekly.Visible = false;
-            panelHourly.Dock = DockStyle.None;
-            panelDaily.Dock = DockStyle.None;
-            panelHourly.Dock = DockStyle.None;
-            panel.Dock = DockStyle.Fill;
-            panel.Visible = true;
-
+            var list = new List<Control>{ panelHourly , panelDaily , panelWeekly };
+            foreach (var p in list)
+            {
+                if (p == panel)
+                {
+                    p.Dock = DockStyle.Fill;
+                    p.Visible = true;
+                }
+                else
+                {
+                    p.Visible = false;
+                    p.Dock = DockStyle.None;
+                }
+            }
         }
 
         private void radioButtonDaily_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (sender == null || !((RadioButton) sender).Checked)
+                return;
+
             ShowPanel(panelDaily);
             numericUpDownRetention.Value = 7;
             OnPageUpdated();
@@ -159,6 +231,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void radioButtonWeekly_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (sender == null || !((RadioButton) sender).Checked)
+                return;
+
             ShowPanel(panelWeekly);
             daysWeekCheckboxes.Days = "monday";
             numericUpDownRetention.Value = 4;
@@ -167,6 +242,22 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void RefreshTab(VMSS policy)
         {
+            if (!TimeZoneDiff.HasValue)
+            {
+                _applyTimeZoneToPolicy = true;
+                return;
+            }
+
+            var localPolicy = new VMSS
+            {
+                frequency = policy.frequency,
+                retained_snapshots = policy.retained_snapshots
+            };
+            
+            localPolicy.schedule = VMSS.FindScheduleWithGivenTimeOffset(
+                -TimeZoneDiff.Value,
+                policy.schedule);
+
             if (ParentForm != null)
             {
                 var parentFormType = ParentForm.GetType();
@@ -177,26 +268,26 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     sectionLabelSchedule.LineColor = sectionLabelNumber.LineColor = SystemColors.ActiveBorder;
             }
 
-            switch (policy.frequency)
+            switch (localPolicy.frequency)
             {
                 case vmss_frequency.hourly:
                     radioButtonHourly.Checked = true;
-                    SetHourlyMinutes(policy.BackupScheduleMin());
+                    SetHourlyMinutes(localPolicy.BackupScheduleMin());
                     break;
                 case vmss_frequency.daily:
                     radioButtonDaily.Checked = true;
                     dateTimePickerDaily.Value = new DateTime(1970, 1, 1,
-                        policy.BackupScheduleHour(), policy.BackupScheduleMin(), 0);
+                        localPolicy.BackupScheduleHour(), localPolicy.BackupScheduleMin(), 0);
                     break;
                 case vmss_frequency.weekly:
                     radioButtonWeekly.Checked = true;
                     dateTimePickerWeekly.Value = new DateTime(1970, 1, 1,
-                        policy.BackupScheduleHour(), policy.BackupScheduleMin(), 0);
-                    daysWeekCheckboxes.Days = policy.BackupScheduleDays();
+                        localPolicy.BackupScheduleHour(), localPolicy.BackupScheduleMin(), 0);
+                    daysWeekCheckboxes.Days = localPolicy.BackupScheduleDays();
                     break;
             }
 
-            numericUpDownRetention.Value = policy.retained_snapshots;
+            numericUpDownRetention.Value = localPolicy.retained_snapshots;
         }
 
         private void SetHourlyMinutes(decimal min)
@@ -220,16 +311,27 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 checkBox.Checked = true;
             }
+            OnPageUpdated();
         }
 
         public AsyncAction SaveSettings()
         {
             _policyCopy.frequency = Frequency;
-            _policyCopy.schedule = Schedule;
+
+            if (TimeZoneDiff.HasValue)
+                _policyCopy.schedule = VMSS.FindScheduleWithGivenTimeOffset(
+                    TimeZoneDiff.Value,
+                    Schedule);
+            else
+                _policyCopy.schedule = Schedule;
+            
+            
             _policyCopy.retained_snapshots = BackupRetention;
+
             return null;
         }
 
+        private bool _applyTimeZoneToPolicy;
         private VMSS _policyCopy;
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
@@ -263,13 +365,91 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 if (!Helper.AreEqual2(_policyCopy.frequency, Frequency))
                     return true;
-                if (!Helper.AreEqual2(_policyCopy.schedule, Schedule))
-                    return true;
+
+                if (TimeZoneDiff.HasValue)
+                {
+                    if (!Helper.AreEqual2(
+                        _policyCopy.schedule,
+                        VMSS.FindScheduleWithGivenTimeOffset(TimeZoneDiff.Value, Schedule)))
+                        return true;
+                }
+                else
+                {
+                    if (!Helper.AreEqual2(_policyCopy.schedule, Schedule))
+                        return true;
+                }
+
                 if (!Helper.AreEqual2(_policyCopy.retained_snapshots, BackupRetention))
                     return true;
 
                 return false;
             }
+        }
+
+        private string DateTimeToRequiredFormat(DateTime? datetime)
+        {
+            if (!datetime.HasValue)
+                return Messages.UNKNOWN;
+
+            return HelpersGUI.DateTimeToString(datetime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
+        }
+
+        void action_CompletedTimeServer(ActionBase sender)
+        {
+            var action = (GetServerTimeAction)sender;
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                string serverLocalTimeString = action.Result;
+                if (serverLocalTimeString != "")
+                {
+                    var serverUtcTime = DateTime.Parse(serverLocalTimeString, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+                    TimeZoneDiff = Util.RoundToNearestMinute(DateTime.UtcNow - serverUtcTime + Pool.Connection.ServerTimeOffset);
+
+                    if (_applyTimeZoneToPolicy)
+                    {
+                        RefreshTab(_policyCopy);
+                        _applyTimeZoneToPolicy = false;
+                    }
+
+                    MainTableLayoutPanel.Visible = true;
+                    LoadingBox.Visible = false;
+                    spinningTimer.Stop();
+
+                    OnPageUpdated();
+                }
+            });
+        }
+
+        private void PolicySnapshotFrequency_StatusChanged(XenTabPage sender)
+        {
+            DateTime? nextRunTime = null;
+            DateTime? correspondingServerTime = null;
+            if (TimeZoneDiff.HasValue)
+            {
+                var currentPolicy = CurrentPolicy;
+                nextRunTime = currentPolicy.GetNextRunTime(DateTime.Now);
+                correspondingServerTime = nextRunTime + TimeZoneDiff.Value;
+            }
+
+            TimeDetailsLabel.Text = string.Format(
+                Messages.VMSS_NEXT_TIME_RUNNING,
+                DateTimeToRequiredFormat(nextRunTime),
+                DateTimeToRequiredFormat(correspondingServerTime));
+        }
+
+        private void dateTimePickerWeekly_ValueChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
+
+        private void comboBoxMin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
+
+        private void dateTimePickerDaily_ValueChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
         }
     }
 }
