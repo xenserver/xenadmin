@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { private get; set; }
         public bool IsAutomaticMode { private get; set; }
         public bool RemoveUpdateFile { private get; set; }
-        public string SelectedNewPatch { private get; set; }
+        public string SelectedPatchFilePatch { private get; set; }
         public Dictionary<Host, VDI> SuppPackVdis { private get; set; }
         #endregion
 
@@ -355,11 +355,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             try
             {
-                return new FileInfo(SelectedNewPatch).Name;
+                return new FileInfo(SelectedPatchFilePatch).Name;
             }
             catch (Exception)
             {
-                return SelectedNewPatch;
+                return SelectedPatchFilePatch;
             }
         }
     }
