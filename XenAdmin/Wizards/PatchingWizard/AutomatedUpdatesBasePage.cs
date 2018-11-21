@@ -160,13 +160,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var finalActions = new List<PlanAction>();
 
-                //add a revert pre-check action for this pool
-                var curPool = pool;
-                var problemsToRevert = PrecheckProblemsActuallyResolved.Where(a =>
-                    a.SolutionAction != null && Helpers.GetPoolOfOne(a.SolutionAction.Connection).Equals(curPool)).ToList();
+                if (PrecheckProblemsActuallyResolved != null)
+                {
+                    //add a revert pre-check action for this pool
+                    var curPool = pool;
+                    var problemsToRevert = PrecheckProblemsActuallyResolved.Where(a =>
+                        a.SolutionAction != null && Helpers.GetPoolOfOne(a.SolutionAction.Connection).Equals(curPool)).ToList();
 
-                if (problemsToRevert.Count > 0)
-                    finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
+                    if (problemsToRevert.Count > 0)
+                        finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
+                }
 
                 if (planActions.Count > 0)
                 {

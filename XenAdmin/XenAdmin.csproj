@@ -1014,7 +1014,6 @@
     <Compile Include="Wizards\PatchingWizard\UpdateProgressBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\PlanActions\RpuUploadAndApplySuppPackPlanAction.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeUpgradePage.cs">
       <SubType>UserControl</SubType>
