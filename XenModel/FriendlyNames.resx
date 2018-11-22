@@ -1904,4 +1904,10 @@
   <data name="Message.body-host_low_memory" xml:space="preserve">
     <value>Server '{0}' has low memory.</value>
   </data>
+  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
+    <value>Virtual machine '{0}' failed to pass Secure Boot verification.</value>
+  </data>
+  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
+    <value>VM Secure Boot verification failed</value>
+  </data>
 </root>

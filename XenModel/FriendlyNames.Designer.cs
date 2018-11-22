@@ -4086,6 +4086,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual machine &apos;{0}&apos; failed to pass Secure Boot verification..
+        /// </summary>
+        public static string Message_body_vm_secure_boot_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vm_secure_boot_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual machine &apos;{0}&apos; has been shut down..
         /// </summary>
         public static string Message_body_vm_shutdown {
@@ -4901,6 +4910,15 @@ namespace XenAdmin {
         public static string Message_name_vm_resumed {
             get {
                 return ResourceManager.GetString("Message.name-vm_resumed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM Secure Boot verification failed.
+        /// </summary>
+        public static string Message_name_vm_secure_boot_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vm_secure_boot_failed", resourceCulture);
             }
         }
         
