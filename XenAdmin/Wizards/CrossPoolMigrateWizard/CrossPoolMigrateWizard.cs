@@ -258,7 +258,21 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     throw new ApplicationException("Cannot resolve the target host");
 
                 if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
-                    new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
+                {
+                    // check if there is actually something to be moved
+                    var moveStorage = false;
+                    foreach (var storageMapping in pair.Value.Storage.Where(sm => sm.Value != null))
+                    {
+                        var vdi = vm.Connection.Resolve(new XenRef<VDI>(storageMapping.Key));
+                        if (vdi != null && vdi.SR.opaque_ref != storageMapping.Value.opaque_ref)
+                        {
+                            moveStorage = true;
+                            break;
+                        }
+                    }
+                    if (moveStorage)
+                        new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
+                }
                 else
                 {
                     var isCopy = wizardMode == WizardMode.Copy;
