@@ -190,10 +190,10 @@ namespace XenAdmin.Wizards.GenericPages
             set { targetConnection = value; }
 	    }
 
-        protected virtual bool SrIsSuitable(SR sr)
-        {
-            return true;
-        }
+		protected virtual bool SrsAreSuitable(SR sourceSr, SR targetSr)
+	    {
+	        return true;
+	    }
 
 		protected virtual bool IsExtraSpaceNeeded(SR sourceSr, SR targetSr)
 		{
@@ -298,11 +298,16 @@ namespace XenAdmin.Wizards.GenericPages
 						if (IsExtraSpaceNeeded(resourceData.SR, toStringWrapper.item))
 						{
 							requiredSpace += resourceData.RequiredDiskCapacity;
-						    if (!SrIsSuitable(resourceData.SR) || !SrIsSuitable(toStringWrapper.item))
-						        isSuitableForAll=false;
+						    if (!SrsAreSuitable(resourceData.SR, toStringWrapper.item))
+						    {
+						        isSuitableForAll = false;
+						        break;
+						    }
 						}
 					}
-				}
+				    if (!isSuitableForAll)
+				        break;
+                }
 				if (isSuitableForAll)
 				    listToAdd.Add(new EnableableSrComboboxItem(toStringWrapper, requiredSpace));
 			} 
@@ -452,8 +457,6 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			var cb = new DataGridViewComboBoxCell { FlatStyle = FlatStyle.Flat };
 
-		    var sourceSrIsSuitable = SrIsSuitable(resource.SR);
-
             foreach (var pbd in TargetConnection.Cache.PBDs)
 			{
 				if (pbd.SR == null)
@@ -470,7 +473,7 @@ namespace XenAdmin.Wizards.GenericPages
 
 				bool srOnHost = pbd.host != null && pbd.host.Equals(xenRef);
 				
-				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, sr) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && sourceSrIsSuitable && SrIsSuitable(sr)))
+				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, sr) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && SrsAreSuitable(resource.SR, sr)))
 				{
 					var count = (from ToStringWrapper<SR> existingItem in cb.Items
 					             where existingItem.item.opaque_ref == sr.opaque_ref
