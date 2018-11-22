@@ -9762,20 +9762,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>'{1}' から {0} をダウンロードできませんでした</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>'{1}' からアップデート {0} をダウンロードできませんでした。
-
-アップデートは '{1}' にインストールされますが、アップデート インストール ファイルが削除されている可能性があります。
-
-代わりに .{2} ファイルからアップデートをアップロードします。</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>'{1}' からアップデート {0} をダウンロードできませんでした。
-
-アップデートは以前 '{1}' にアップロードされましたが、アップデート インストール ファイルが削除されている可能性があります。
-
-代わりに .{2} ファイルからアップデートをアップロードします。</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 変更日: {1}
@@ -12015,11 +12001,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}: '{1}' ストレージ リポジトリが破損しています。</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>'{0}' からアップデートをダウンロードできません。接続が切断されました。
-
-設定を確認し、もう一度実行してください。</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: VM '{1}' を移行できません</value>
   </data>
@@ -12097,6 +12078,14 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: サーバーに到達できないためチェックがスキップされました。</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0}、*.zip、*.iso。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>これは有効なアップデート ファイルではありません。
+
+設定を確認し、もう一度実行してください。</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' のドライブには、ローカルの CD/DVD があります。</value>
   </data>
@@ -12111,12 +12100,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>[XenServer] をアップグレードする前に [XenCenter] をアップグレードする必要があります。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0}、*.zip、*.iso。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>{0} に有効なアップデート ファイルがありません</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>このアップデートには、これ以上の操作は必要ありません。</value>

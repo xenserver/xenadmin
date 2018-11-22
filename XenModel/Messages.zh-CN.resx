@@ -9760,20 +9760,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>从 {1} 下载 {0} 失败</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>从 {1} 下载更新 {0} 失败。
-
-该更新安装在“{1}”上，但更新安装文件可能已被删除。
-
-请改为从 .{2} 文件上载更新。</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>从 {1} 下载更新 {0} 失败。
-
-该更新以前已上载到“{1}”，但更新安装文件可能已被删除。
-
-请改为从 .{2} 文件上载更新。</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 修改日期: {1}
@@ -12013,11 +11999,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}:“{1}”存储库已损坏。</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>无法从 {0} 中下载更新: 连接已断开。
-
-请检查您的设置并重试。</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: 无法迁移 VM“{1}”</value>
   </data>
@@ -12095,6 +12076,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: 由于服务器无法访问，因此已跳过检查。</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>所选文件的扩展名无效。有效扩展名为 *.{0}、*.zip 和 *.iso。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>此文件不是有效的更新文件。</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM“{1}”的驱动器中有本地 CD/DVD。</value>
   </data>
@@ -12109,12 +12096,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>请务必先升级 [XenCenter]，然后再升级 [XenServer]。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为 *.{0}、*.zip 和 *.iso。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>在 {0} 中找不到有效的更新文件</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>该更新无需更多操作。</value>
