@@ -361,7 +361,7 @@
     <value>3</value>
   </data>
   <data name="panel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelError" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="buttonRetry" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelError" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="buttonRetry" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="buttonSkip" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" />&lt;Rows Styles="Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
