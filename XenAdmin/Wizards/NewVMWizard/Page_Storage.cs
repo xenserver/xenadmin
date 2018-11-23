@@ -263,6 +263,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 if (!sr.VdiCreationCanProceed(totalDiskInitialAllocation[sr.opaque_ref]))
                     overcommitedDisk = item.OverCommit = DiskOverCommit.Error;
+                else if (sr.FreeSpace() < totalDiskInitialAllocation[sr.opaque_ref])
+                    overcommitedDisk = item.OverCommit = DiskOverCommit.Warning;
 
                 if (item.OverCommit != DiskOverCommit.None)
                 {
