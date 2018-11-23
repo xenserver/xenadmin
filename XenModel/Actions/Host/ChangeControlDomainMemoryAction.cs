@@ -57,7 +57,23 @@ namespace XenAdmin.Actions
         {
             VM vm = Host.ControlDomainZero();
 
-            XenAPI.VM.set_memory(Session, vm.opaque_ref, memory);
+            try
+            {
+                XenAPI.VM.set_memory(Session, vm.opaque_ref, memory);
+            }
+            catch (Exception e)
+            {
+                var f = e as Failure;
+                if (f != null && f.ErrorDescription[0] == Failure.MEMORY_CONSTRAINT_VIOLATION
+                    && memory < vm.memory_static_min)
+                {
+                    throw new Failure(string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW,
+                        Util.MemorySizeStringSuitableUnits(memory, true),
+                        Util.MemorySizeStringSuitableUnits(vm.memory_static_min, true)));
+                }
+
+                throw;
+            }
 
             Description = Messages.COMPLETED;
         }
