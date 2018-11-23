@@ -174,12 +174,6 @@ namespace XenAdmin.Core
             }
         }
 
-        private static Alert FindUpdate(Alert alert)
-        {
-            lock (updateAlertsLock)
-                return FindUpdate(a => a.Equals(alert));
-        }
-
         private static Alert FindUpdate(Predicate<Alert> predicate)
         {
             lock (updateAlertsLock)
@@ -879,7 +873,7 @@ namespace XenAdmin.Core
 
         private static void CheckUpdate(XenServerUpdateAlert alert)
         {
-            var existingAlert = FindUpdate(alert);
+            var existingAlert = FindUpdate(a => a.Equals(alert));
 
             if (existingAlert != null && alert.CanIgnore)
                 RemoveUpdate(existingAlert);
