@@ -8952,6 +8952,9 @@ Once the VM has restarted click the Install [Citrix VM Tools] menu item once aga
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
   </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>&amp;Create</value>
+  </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>New Folder</value>
   </data>
@@ -10533,6 +10536,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>&amp;Rename Folder...</value>
+  </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>Rename Folder</value>
   </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>Rename tag '{0}'</value>

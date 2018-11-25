@@ -210,11 +210,35 @@ namespace XenAdmin.Dialogs
                 Program.Invoke(this, () => SelectNodeByRef(obj[0]));
         }
 
+        private void RenameFolder()
+        {
+            if (treeView.SelectedNode != null)
+            {
+                var folder = treeView.SelectedNode.Tag as Folder;
+                if (folder == null)
+                    return;
+
+                using (var dialog = new InputPromptDialog {
+                    Text = Messages.RENAME_FOLDER_TITLE,
+                    PromptText = Messages.NEW_FOLDER_NAME,
+                    InputText = folder.Name(),
+                    HelpID = "NewFolderDialog"
+                })
+                {
+                    if (dialog.ShowDialog(this) != DialogResult.OK)
+                        return;
+                    selectedFolderRef = Folders.AppendPath(folder.Path, dialog.InputText);
+                    new RenameFolderCommand(Program.MainWindow, folder, dialog.InputText).Execute();
+                }
+            }
+        }
+
         private void DeleteFolder()
         {
             if (treeView.SelectedNode != null)
             {
                 var folder = treeView.SelectedNode.Tag as Folder;
+                selectedFolderRef = folder == null || folder.Parent == null ? null : folder.Parent.opaque_ref;
                 new DeleteFolderCommand(Program.MainWindow, folder).Execute();
             }
         }
@@ -224,7 +248,8 @@ namespace XenAdmin.Dialogs
             okButton.Enabled = radioButtonNone.Checked ||
                                (radioButtonChoose.Checked && treeView.SelectedNode != null);
 
-            buttonDelete.Enabled = radioButtonChoose.Checked && treeView.SelectedNode != null;
+            buttonRename.Enabled = buttonDelete.Enabled = radioButtonChoose.Checked && treeView.SelectedNode != null;
+            toolStripMenuItemRename.Visible = buttonRename.Enabled;
             toolStripMenuItemDelete.Visible = buttonDelete.Enabled;
         }
 
@@ -261,9 +286,14 @@ namespace XenAdmin.Dialogs
         }
 
 
-        private void newButton_Click(object sender, EventArgs e)
+        private void buttonNew_Click(object sender, EventArgs e)
         {
             CreateNewFolder();
+        }
+
+        private void buttonRename_Click(object sender, EventArgs e)
+        {
+            RenameFolder();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -271,6 +301,11 @@ namespace XenAdmin.Dialogs
             DeleteFolder();
         }
 
+
+        private void toolStripMenuItemRename_Click(object sender, EventArgs e)
+        {
+            RenameFolder();
+        }
 
         private void toolStripMenuItemNew_Click(object sender, EventArgs e)
         {
@@ -294,7 +329,8 @@ namespace XenAdmin.Dialogs
 
         private void treeView_NodeMouseDoubleClick(object sender, VirtualTreeNodeMouseClickEventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            if (radioButtonChoose.Checked && treeView.SelectedNode != null && e.Node == treeView.SelectedNode)
+                DialogResult = DialogResult.OK;
         }
 
         private void treeView_SelectionsChanged(object sender, EventArgs e)
@@ -313,6 +349,14 @@ namespace XenAdmin.Dialogs
             }
 
             EnableButtons();
+        }
+
+        private void treeView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                DeleteFolder();
+            else if (e.KeyCode == Keys.F2)
+                RenameFolder();
         }
 
         #endregion

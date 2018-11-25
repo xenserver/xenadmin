@@ -23891,6 +23891,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Create.
+        /// </summary>
+        public static string NEW_FOLDER_BUTTON {
+            get {
+                return ResourceManager.GetString("NEW_FOLDER_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Folder.
         /// </summary>
         public static string NEW_FOLDER_DIALOG_TITLE {
@@ -30286,6 +30295,15 @@ namespace XenAdmin {
         public static string RENAME_FOLDER {
             get {
                 return ResourceManager.GetString("RENAME_FOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename Folder.
+        /// </summary>
+        public static string RENAME_FOLDER_TITLE {
+            get {
+                return ResourceManager.GetString("RENAME_FOLDER_TITLE", resourceCulture);
             }
         }
         
