@@ -32,11 +32,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
 using XenAdmin.Actions.VMActions;
 
 
@@ -74,14 +74,21 @@ namespace XenAdmin.Commands
 
             // Generate a unique suggested name for the new template
             string defaultName = Helpers.MakeUniqueName(String.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name()), takenNames);
-            string newName = InputPromptDialog.Prompt(Parent, Messages.NEW_TEMPLATE_PROMPT, Messages.SAVE_AS_TEMPLATE, defaultName, "VMSnapshotPage");
 
-            if (newName != null) // is null if user cancelled
+            using (var dialog = new InputPromptDialog {
+                Text = Messages.SAVE_AS_TEMPLATE,
+                PromptText = Messages.NEW_TEMPLATE_PROMPT,
+                InputText = defaultName,
+                HelpID = "VMSnapshotPage"
+            })
             {
-                // TODO: work out what the new description should be
-                var action = new VMCloneAction(snapshot, newName, "");
-                action.Completed += action_Completed;
-                action.RunAsync();
+                if (dialog.ShowDialog(Parent) == DialogResult.OK)
+                {
+                    // TODO: work out what the new description should be
+                    var action = new VMCloneAction(snapshot, dialog.InputText, "");
+                    action.Completed += action_Completed;
+                    action.RunAsync();
+                }
             }
         }
 

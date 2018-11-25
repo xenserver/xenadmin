@@ -82,23 +82,35 @@ namespace XenAdmin.Commands
             // (although we will also sudo a Read Only command when the FolderAction is run).
             if (folder == null || folder.IsRootFolder || folder.Connection == null || CrossConnectionCommand.IsReadOnly(folder.Connection))
             {
-                NameAndConnectionPrompt dialog = new NameAndConnectionPrompt();
-                dialog.Text = Messages.NEW_FOLDER_DIALOG_TITLE;
-                dialog.OKText = Messages.CREATE_MNEMONIC_R;
-                dialog.HelpID = "NewFolderDialog";
-                if (dialog.ShowDialog(ownerWindow) != DialogResult.OK)
-                    return;
-                name = dialog.PromptedName;
-                connection = dialog.Connection;
+                using (var dialog = new NameAndConnectionPrompt
+                {
+                    Text = Messages.NEW_FOLDER_DIALOG_TITLE,
+                    OKText = Messages.CREATE_MNEMONIC_R,
+                    HelpID = "NewFolderDialog"
+                })
+                {
+                    if (dialog.ShowDialog(ownerWindow) != DialogResult.OK)
+                        return;
+                    name = dialog.PromptedName;
+                    connection = dialog.Connection;
+                }
             }
             else
             {
-                name = InputPromptDialog.Prompt(ownerWindow, Messages.NEW_FOLDER_NAME, Messages.NEW_FOLDER_DIALOG_TITLE, "NewFolderDialog");
+                using (var dialog = new InputPromptDialog {
+                    Text = Messages.NEW_FOLDER_DIALOG_TITLE,
+                    PromptText = Messages.NEW_FOLDER_NAME,
+                    OkButtonText = Messages.NEW_FOLDER_BUTTON,
+                    HelpID = "NewFolderDialog"
+                })
+                {
+                    if (dialog.ShowDialog(ownerWindow) != DialogResult.OK)
+                        return;
+                    name = dialog.InputText;
+                }
                 connection = folder.Connection;
             }
 
-            if (name == null)
-                return;  // Happens if InputPromptDialog was cancelled
 
             List<string> newPaths = new List<string>();
             foreach (string s in name.Split(';'))

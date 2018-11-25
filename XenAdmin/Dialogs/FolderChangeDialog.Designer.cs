@@ -34,14 +34,16 @@ namespace XenAdmin.Dialogs
             this.okButton = new System.Windows.Forms.Button();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.radioButtonNone = new System.Windows.Forms.RadioButton();
             this.radioButtonChoose = new System.Windows.Forms.RadioButton();
-            this.newButton = new System.Windows.Forms.Button();
+            this.buttonNew = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.treeView = new XenAdmin.Controls.FolderChangeDialogTreeView();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonRename = new System.Windows.Forms.Button();
             this.contextMenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -65,6 +67,7 @@ namespace XenAdmin.Dialogs
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemNew,
+            this.toolStripMenuItemRename,
             this.toolStripMenuItemDelete});
             this.contextMenuStrip.Name = "contextMenuStrip";
             resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
@@ -75,6 +78,12 @@ namespace XenAdmin.Dialogs
             this.toolStripMenuItemNew.Name = "toolStripMenuItemNew";
             resources.ApplyResources(this.toolStripMenuItemNew, "toolStripMenuItemNew");
             this.toolStripMenuItemNew.Click += new System.EventHandler(this.toolStripMenuItemNew_Click);
+            // 
+            // toolStripMenuItemRename
+            // 
+            this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
+            resources.ApplyResources(this.toolStripMenuItemRename, "toolStripMenuItemRename");
+            this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
             // 
             // toolStripMenuItemDelete
             // 
@@ -102,12 +111,12 @@ namespace XenAdmin.Dialogs
             this.radioButtonChoose.CheckedChanged += new System.EventHandler(this.radioButtonChoose_CheckedChanged);
             this.radioButtonChoose.TabStopChanged += new System.EventHandler(this.radioButtonChoose_TabStopChanged);
             // 
-            // newButton
+            // buttonNew
             // 
-            resources.ApplyResources(this.newButton, "newButton");
-            this.newButton.Name = "newButton";
-            this.newButton.UseVisualStyleBackColor = true;
-            this.newButton.Click += new System.EventHandler(this.newButton_Click);
+            resources.ApplyResources(this.buttonNew, "buttonNew");
+            this.buttonNew.Name = "buttonNew";
+            this.buttonNew.UseVisualStyleBackColor = true;
+            this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -115,29 +124,24 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.radioButtonNone, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.radioButtonChoose, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.treeView, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.newButton, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.buttonDelete, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonNew, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.buttonDelete, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonRename, 2, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // treeView
             // 
-            resources.ApplyResources(this.treeView, "treeView");
             this.treeView.ContextMenuStrip = this.contextMenuStrip;
+            resources.ApplyResources(this.treeView, "treeView");
             this.treeView.HideSelection = false;
             this.treeView.Name = "treeView";
-            this.tableLayoutPanel1.SetRowSpan(this.treeView, 2);
+            this.tableLayoutPanel1.SetRowSpan(this.treeView, 3);
             this.treeView.ShowLines = false;
             this.treeView.NodeMouseDoubleClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseDoubleClick);
             this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
             this.treeView.Enter += new System.EventHandler(this.treeView_Enter);
-            // 
-            // buttonDelete
-            // 
-            resources.ApplyResources(this.buttonDelete, "buttonDelete");
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.treeView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyDown);
             // 
             // tableLayoutPanel2
             // 
@@ -146,6 +150,20 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel2.Controls.Add(this.okButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.cancelButton, 1, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // buttonDelete
+            // 
+            resources.ApplyResources(this.buttonDelete, "buttonDelete");
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonRename
+            // 
+            resources.ApplyResources(this.buttonRename, "buttonRename");
+            this.buttonRename.Name = "buttonRename";
+            this.buttonRename.UseVisualStyleBackColor = true;
+            this.buttonRename.Click += new System.EventHandler(this.buttonRename_Click);
             // 
             // FolderChangeDialog
             // 
@@ -170,7 +188,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.RadioButton radioButtonNone;
         private System.Windows.Forms.RadioButton radioButtonChoose;
-        private System.Windows.Forms.Button newButton;
+        private System.Windows.Forms.Button buttonNew;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemNew;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -178,5 +196,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
+        private System.Windows.Forms.Button buttonRename;
     }
 }
