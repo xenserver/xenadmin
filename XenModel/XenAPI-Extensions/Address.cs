@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace XenAPI
@@ -19,7 +20,7 @@ namespace XenAPI
                 (from network in networks
                     where network.Key.StartsWith(string.Format("{0}/ip", device))
                     orderby network.Key
-                    select network.Value).Distinct().ToList();
+                    select network.Value.Split(new[] {"\n", "%n"}, StringSplitOptions.None)).SelectMany(x => x).Distinct().ToList();
         }
     }
 }
