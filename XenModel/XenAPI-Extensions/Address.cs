@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace XenAPI
 {
-    public abstract class Address
+    public static class Address
     {
         public static List<string> FindIpAddresses(Dictionary<string, string> networks, string device)
         {
