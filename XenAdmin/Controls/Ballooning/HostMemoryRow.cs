@@ -48,6 +48,13 @@ namespace XenAdmin.Controls.Ballooning
             this.host = host;
         }
 
+        public HostMemoryRow(Host host, MetricUpdater metricUpdater)
+            : this()
+        {
+            this.host = host;
+            hostMemoryControls.MetricUpdater = metricUpdater;
+        }
+
         private Host host
         {
             set
@@ -64,12 +71,6 @@ namespace XenAdmin.Controls.Ballooning
         {
             memoryRowLabel.UnsubscribeEvents();
             hostMemoryControls.UnregisterHandlers();
-        }
-
-        public MetricUpdater MetricUpdater
-        {
-            get { return hostMemoryControls.MetricUpdater; }
-            set { hostMemoryControls.MetricUpdater = value; }
         }
 
         public void UpdateMemoryByMetricUpdater()

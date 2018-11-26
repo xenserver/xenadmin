@@ -386,8 +386,7 @@ namespace XenAdmin.TabPages
                 Host_metrics metrics = host.Connection.Resolve(host.metrics);
                 if (metrics == null || !metrics.live)
                     continue;
-                var hostRow = new HostMemoryRow(host);
-                hostRow.MetricUpdater = metricUpdater;
+                var hostRow = new HostMemoryRow(host, metricUpdater);
                 AddRowToPanel(hostRow, ref top);
             }
 

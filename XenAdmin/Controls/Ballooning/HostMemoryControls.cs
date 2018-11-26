@@ -110,7 +110,6 @@ namespace XenAdmin.Controls.Ballooning
         public void UpdateMemoryByMetricUpdater()
         {
             if (MetricUpdater == null) return;
-            MetricUpdater.Prod();
             var free = MetricUpdater.GetValue(host, "memory_free_kib");
             var total = MetricUpdater.GetValue(host, "memory_total_kib");
             var used = (total - free) * Util.BINARY_KILO;
