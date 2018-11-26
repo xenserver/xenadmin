@@ -61,10 +61,9 @@ namespace XenAdmin.Actions
             {
                 XenAPI.VM.set_memory(Session, vm.opaque_ref, memory);
             }
-            catch (Exception e)
+            catch (Failure f)
             {
-                var f = e as Failure;
-                if (f != null && f.ErrorDescription[0] == Failure.MEMORY_CONSTRAINT_VIOLATION
+                if (f.ErrorDescription[0] == Failure.MEMORY_CONSTRAINT_VIOLATION
                     && memory < vm.memory_static_min)
                 {
                     throw new Failure(string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW,

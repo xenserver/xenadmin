@@ -130,7 +130,7 @@
     <value>Changing control domain memory settings on '{0}'</value>
   </data>
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
-    <value>The memory {0} has to be at least the value of the Static minimum ({1})</value>
+    <value>The memory {0} has to be at least the value of the static minimum ({1})</value>
   </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>Change disk size</value>
