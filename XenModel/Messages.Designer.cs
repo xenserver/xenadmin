@@ -88,7 +88,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The memory {0} has to be at least the value of the static minimum ({1}).
+        ///   Looks up a localized string similar to The memory specified ({0}) was too low. It has to be at least the value of the static minimum ({1}).
         /// </summary>
         public static string ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW {
             get {
