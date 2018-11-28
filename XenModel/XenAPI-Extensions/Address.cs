@@ -20,7 +20,7 @@ namespace XenAPI
                 (from network in networks
                     where network.Key.StartsWith(string.Format("{0}/ip", device))
                     orderby network.Key
-                    select network.Value.Split(new[] {"\n", "%n"}, StringSplitOptions.None)).SelectMany(x => x).Distinct().ToList();
+                    select network.Value.Split(new[] {"\n", "%n"}, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
         }
     }
 }

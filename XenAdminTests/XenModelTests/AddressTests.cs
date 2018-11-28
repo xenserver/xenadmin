@@ -63,5 +63,21 @@ namespace XenAdminTests.XenModelTests
             var actual = Address.FindIpAddresses(_compoundNetworks, "1");
             Assert.That(actual, Is.EquivalentTo(expected));
         }
+
+        [Test]
+        public void TestCompoundNetworkSkipsBlanks()
+        {
+            var given = new Dictionary<string, string>
+            {
+                {"0/ip", "10.0.0.24\n\n10.0.0.26"}
+            };
+            var expected = new List<string>
+            {
+                "10.0.0.24",
+                "10.0.0.26"
+            };
+            var actual = Address.FindIpAddresses(given, "0");
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
     }
 }
