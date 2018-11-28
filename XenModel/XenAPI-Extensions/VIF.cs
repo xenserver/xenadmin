@@ -31,8 +31,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using XenAdmin;
+using XenAdmin.Core;
 
 
 namespace XenAPI
@@ -60,7 +60,7 @@ namespace XenAPI
 
                 if (vmGuestMetrics != null)
                 {
-                    return Address.FindIpAddresses(vmGuestMetrics.networks, device);
+                    return Helpers.FindIpAddresses(vmGuestMetrics.networks, device);
                 }
             }
 

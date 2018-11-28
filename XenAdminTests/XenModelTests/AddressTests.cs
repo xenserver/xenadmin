@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using XenAPI;
+using XenAdmin.Core;
 
 namespace XenAdminTests.XenModelTests
 {
@@ -29,14 +29,14 @@ namespace XenAdminTests.XenModelTests
                 "10.71.57.53",
                 "fe80:0000:0000:0000:1c1a:c2ff:fe2e:c823"
             };
-            var actual = Address.FindIpAddresses(_simpleNetworks, "0");
+            var actual = Helpers.FindIpAddresses(_simpleNetworks, "0");
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
         [Test]
         public void TestUnusedDevice()
         {
-            var actual = Address.FindIpAddresses(_simpleNetworks, "1");
+            var actual = Helpers.FindIpAddresses(_simpleNetworks, "1");
             Assert.That(actual, Is.Empty);
         }
 
@@ -48,7 +48,7 @@ namespace XenAdminTests.XenModelTests
                 "192.168.0.1",
                 "192.168.0.2"
             };
-            var actual = Address.FindIpAddresses(_compoundNetworks, "0");
+            var actual = Helpers.FindIpAddresses(_compoundNetworks, "0");
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -60,7 +60,7 @@ namespace XenAdminTests.XenModelTests
                 "192.168.0.3",
                 "192.168.0.4"
             };
-            var actual = Address.FindIpAddresses(_compoundNetworks, "1");
+            var actual = Helpers.FindIpAddresses(_compoundNetworks, "1");
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -76,7 +76,7 @@ namespace XenAdminTests.XenModelTests
                 "10.0.0.24",
                 "10.0.0.26"
             };
-            var actual = Address.FindIpAddresses(given, "0");
+            var actual = Helpers.FindIpAddresses(given, "0");
             Assert.That(actual, Is.EquivalentTo(expected));
         }
     }

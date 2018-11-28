@@ -1109,7 +1109,7 @@ namespace XenAdmin.XenSearch
 
                 foreach (VIF vif in vifs)
                 {
-                    foreach (var value in Address.FindIpAddresses(metrics.networks, vif.device))
+                    foreach (var value in Helpers.FindIpAddresses(metrics.networks, vif.device))
                     {
                         ComparableAddress ipAddress;
                         if (!ComparableAddress.TryParse(value, false, true, out ipAddress)) 
