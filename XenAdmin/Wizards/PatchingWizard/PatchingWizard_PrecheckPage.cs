@@ -553,11 +553,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var serverChecks = new List<Check>();
                 foreach (Host host in SelectedServers)
                 {
-                    List<Pool_update> updates = new List<Pool_update>(host.Connection.Cache.Pool_updates);
-                    Pool_update poolUpdateFromHost = updates.Find(otherPatch => string.Equals(otherPatch.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
+                    var updates = new List<Pool_update>(host.Connection.Cache.Pool_updates);
+                    var poolUpdateFromHost = updates.Find(p => string.Equals(p.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
+
                     SR uploadSr = null;
-                    if (SrUploadedUpdates != null && SrUploadedUpdates.ContainsKey(poolUpdateFromHost) && SrUploadedUpdates[poolUpdateFromHost].ContainsKey(host))
+                    if (SrUploadedUpdates != null && poolUpdateFromHost != null &&
+                        SrUploadedUpdates.ContainsKey(poolUpdateFromHost) && SrUploadedUpdates[poolUpdateFromHost].ContainsKey(host))
                         uploadSr = SrUploadedUpdates[poolUpdateFromHost][host];
+
                     serverChecks.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost, uploadSr));
                 }
                 groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SIDE_STATUS, serverChecks));
