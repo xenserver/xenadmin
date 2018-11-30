@@ -581,6 +581,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (patch.GuidanceMandatory)
                     {
+                        // if this update requires a mandatory toolstack restart and there is a pending host reboot in the delayed actions,
+                        // then the pending reboot should be carried out instead
+                        if (patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction))
+                        {
+                            // replace the action with a host reboot action which will fall back to a toolstack restart if the reboot is not needed because the live patching succedeed
+                            action = new RestartHostPlanAction(host, host.GetRunningVMs(), true, true, hostsThatWillRequireReboot);
+                        }
+
                         planActionsPerHost.Add(action);
                         // remove all delayed actions of the same kind that has already been added
                         // (because this action is guidance-mandatory=true, therefore
@@ -621,7 +629,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             switch (guidance)
             {
                 case after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, hostsThatWillRequireReboot);
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, false, hostsThatWillRequireReboot);
                 case after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case after_apply_guidance.restartHVM:
