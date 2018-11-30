@@ -40,27 +40,37 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly List<XenRef<VM>> _vms;
         public bool EnableOnly { get; set; }
+        private readonly bool _restartAgentFallback;
         private List<string> hostsNeedReboot;
 
-        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, List<string> hostsThatWillRequireReboot = null)
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false, List<string> hostsThatWillRequireReboot = null)
             : base(host)
         {
             _vms = vms;
             EnableOnly = enableOnly;
+            _restartAgentFallback = restartAgentFallback;
             hostsNeedReboot = hostsThatWillRequireReboot;
         }
 
         protected override void RunWithSession(ref Session session)
         {
             var hostObj = GetResolvedHost();
-            if (hostObj != null && SkipRestartHost(hostObj))
+            if (hostObj == null)
                 return;
+
+            if (SkipRestartHost(hostObj))
+            {
+                if (_restartAgentFallback)
+                    RestartAgent(ref session);
+                else
+                    return;
+            }
 
             EvacuateHost(ref session);
             RebootHost(ref session);
             BringBabiesBack(ref session, _vms, EnableOnly);
 
-            if (hostObj != null && hostsNeedReboot != null && hostsNeedReboot.Contains(hostObj.uuid))
+            if (hostsNeedReboot != null && hostsNeedReboot.Contains(hostObj.uuid))
                 hostsNeedReboot.Remove(hostObj.uuid);
         }
 
