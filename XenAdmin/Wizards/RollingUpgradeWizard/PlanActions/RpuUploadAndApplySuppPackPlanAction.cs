@@ -258,7 +258,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             switch (guidance)
             {
                 case update_after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, hostsThatWillRequireReboot);
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, false, hostsThatWillRequireReboot);
                 case update_after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case update_after_apply_guidance.restartHVM:
