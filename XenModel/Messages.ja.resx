@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>'{0}' でコントロール ドメイン メモリの設定を変更しています</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>指定したメモリ サイズ ({0}) が小さすぎます。静的最小サイズ ({1}) 以上の値を指定する必要があります</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>ディスク サイズの変更</value>
   </data>
@@ -2123,10 +2126,10 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この VM に一定のメモリを割り当てたり、メモリ範囲を指定して自動的に調整されるように設定したりできます。</value>
   </data>
   <data name="BALLOONING_RUBRIC_ADVANCED" xml:space="preserve">
-    <value>この VM に割り当てるメモリの範囲および固定最大サイズを設定します。</value>
+    <value>この VM に割り当てるメモリの範囲および静的最大サイズを設定します。</value>
   </data>
   <data name="BALLOONING_RUBRIC_ADVANCED_TEMPLATE" xml:space="preserve">
-    <value>このテンプレートから作成される VM に割り当てるメモリの範囲および固定最大サイズを設定します。</value>
+    <value>このテンプレートから作成される VM に割り当てるメモリの範囲および静的最大サイズを設定します。</value>
   </data>
   <data name="BALLOONING_RUBRIC_TEMPLATE" xml:space="preserve">
     <value>このテンプレートから作成される VM に一定のメモリを割り当てたり、メモリ範囲を指定して自動的に調整されるように設定したりできます。</value>
@@ -2704,12 +2707,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
 続行しますか?</value>
   </data>
   <data name="CONFIRM_CHANGE_STATIC_MAX_PLURAL" xml:space="preserve">
-    <value>VM のメモリの固定最大サイズを変更すると、VM が強制的に再起動されます。
+    <value>VM のメモリの静的最大サイズを変更すると、VM が強制的に再起動されます。
 
 続行しますか?</value>
   </data>
   <data name="CONFIRM_CHANGE_STATIC_MAX_SINGULAR" xml:space="preserve">
-    <value>VM のメモリの固定最大サイズを変更すると、VM が強制的に再起動されます。
+    <value>VM のメモリの静的最大サイズを変更すると、VM が強制的に再起動されます。
 
 続行しますか?</value>
   </data>
@@ -8953,6 +8956,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新規フォルダ(&amp;N)...</value>
   </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>作成(&amp;C)</value>
+  </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>新規フォルダ</value>
   </data>
@@ -10535,6 +10541,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>フォルダの名前変更(&amp;R)...</value>
   </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>フォルダの名前変更</value>
+  </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>タグ '{0}' の名前変更</value>
   </data>
@@ -11448,7 +11457,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>高可用性オプション</value>
   </data>
   <data name="STATIC_MAX" xml:space="preserve">
-    <value>固定最大サイズ</value>
+    <value>静的最大サイズ</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>状態</value>
