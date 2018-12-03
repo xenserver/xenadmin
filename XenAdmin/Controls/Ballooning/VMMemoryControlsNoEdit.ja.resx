@@ -283,7 +283,7 @@
     <value>5</value>
   </data>
   <data name="labelStatMax.Text" xml:space="preserve">
-    <value>固定最大サイズ</value>
+    <value>静的最大サイズ</value>
   </data>
   <data name="&gt;&gt;labelStatMax.Name" xml:space="preserve">
     <value>labelStatMax</value>

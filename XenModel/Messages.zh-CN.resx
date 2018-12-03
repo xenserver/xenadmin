@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>更改“{0}”上的控制域内存设置</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>指定的内存({0})太低。必须至少为静态最小值({1})</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>更改磁盘大小</value>
   </data>
@@ -8951,6 +8954,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新建文件夹(&amp;N)...</value>
   </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>创建(&amp;C)</value>
+  </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>新建文件夹</value>
   </data>
@@ -10532,6 +10538,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>重命名文件夹(&amp;R)...</value>
+  </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>重命名文件夹</value>
   </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>重命名标记“{0}”</value>
