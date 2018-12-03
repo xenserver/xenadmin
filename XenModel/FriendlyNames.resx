@@ -1760,6 +1760,15 @@
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>Container management logs</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>Container management logs</value>
+  </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>Measured boot logs</value>
+  </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>Measured boot logs</value>
+  </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
     <value>Tests for connectivity between the server and the internet</value>
   </data>
