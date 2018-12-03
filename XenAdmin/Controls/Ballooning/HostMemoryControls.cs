@@ -98,11 +98,14 @@ namespace XenAdmin.Controls.Ballooning
 
             // Set the text values
             valueTotal.Text = Util.MemorySizeStringSuitableUnits(total, true);
-            UpdateMemoryByMetricUpdater();
             valueAvail.Text = Util.MemorySizeStringSuitableUnits(avail, true);
             valueTotDynMax.Text = Util.MemorySizeStringSuitableUnits(tot_dyn_max, true);
             labelOvercommit.Text = string.Format(Messages.OVERCOMMIT, overcommit);
             valueControlDomain.Text = Util.MemorySizeStringSuitableUnits(dom0, true);
+            if (isMetricUpdating)
+                valueUsed.Text = valueTotDynMax.Text;
+            else
+                UpdateMemoryByMetricUpdater();
         }
 
         public MetricUpdater MetricUpdater { get; set; }
@@ -122,10 +125,33 @@ namespace XenAdmin.Controls.Ballooning
                 this.Refresh();
         }
 
+        static bool isMetricUpdating;
+        Timer metricUpdaterTimer;
         void host_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "memory_overhead")
                 this.Refresh();
+            else if (e.PropertyName == "resident_VMs" && MetricUpdater != null)
+            {
+                isMetricUpdating = true;
+                this.Refresh();
+                if (metricUpdaterTimer == null)
+                {
+                    metricUpdaterTimer = new Timer();
+                    metricUpdaterTimer.Interval = 15000;
+                    metricUpdaterTimer.Tick += MetricUpdaterTimer_Tick;
+                }
+                metricUpdaterTimer.Enabled = true;
+            }
+        }
+
+        private void MetricUpdaterTimer_Tick(object sender, EventArgs e)
+        {
+            if (MetricUpdater == null) return;
+            MetricUpdater.Prod();
+            isMetricUpdating = false;
+            this.Refresh();
+            metricUpdaterTimer.Enabled = false;
         }
 
         void vm_metrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
