@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyNames {
@@ -385,6 +385,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Measured boot logs.
+        /// </summary>
+        public static string Description_host_system_status_tboot {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-tboot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenServer] licensing daemon logs.
         /// </summary>
         public static string Description_host_system_status_v6d {
@@ -561,6 +570,15 @@ namespace XenAdmin {
         public static string Description_host_system_status_xha_liveset {
             get {
                 return ResourceManager.GetString("Description-host.system_status-xha-liveset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container management logs.
+        /// </summary>
+        public static string Description_host_system_status_xscontainer {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-xscontainer", resourceCulture);
             }
         }
         
@@ -1452,6 +1470,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_tapdisk_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-tapdisk-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Measured boot logs.
+        /// </summary>
+        public static string Label_host_system_status_tboot {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-tboot", resourceCulture);
             }
         }
         
