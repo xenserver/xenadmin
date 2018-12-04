@@ -204,7 +204,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionReadCaching, "pdSectionReadCaching");
             this.pdSectionReadCaching.Name = "pdSectionReadCaching";
             this.pdSectionReadCaching.ShowCellToolTips = false;
-            this.pdSectionReadCaching.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionReadCaching.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelDockerInfo
             // 
@@ -270,7 +270,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdStorageLink, "pdStorageLink");
             this.pdStorageLink.Name = "pdStorageLink";
             this.pdStorageLink.ShowCellToolTips = false;
-            this.pdStorageLink.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdStorageLink.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelUpdates
             // 
@@ -284,7 +284,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionUpdates, "pdSectionUpdates");
             this.pdSectionUpdates.Name = "pdSectionUpdates";
             this.pdSectionUpdates.ShowCellToolTips = false;
-            this.pdSectionUpdates.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionUpdates.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelMemoryAndVCPUs
             // 
@@ -298,7 +298,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionVCPUs, "pdSectionVCPUs");
             this.pdSectionVCPUs.Name = "pdSectionVCPUs";
             this.pdSectionVCPUs.ShowCellToolTips = false;
-            this.pdSectionVCPUs.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionVCPUs.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelMultipathing
             // 
@@ -312,7 +312,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionMultipathing, "pdSectionMultipathing");
             this.pdSectionMultipathing.Name = "pdSectionMultipathing";
             this.pdSectionMultipathing.ShowCellToolTips = false;
-            this.pdSectionMultipathing.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionMultipathing.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelStatus
             // 
@@ -326,7 +326,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionStatus, "pdSectionStatus");
             this.pdSectionStatus.Name = "pdSectionStatus";
             this.pdSectionStatus.ShowCellToolTips = false;
-            this.pdSectionStatus.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionStatus.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelHighAvailability
             // 
@@ -340,7 +340,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionHighAvailability, "pdSectionHighAvailability");
             this.pdSectionHighAvailability.Name = "pdSectionHighAvailability";
             this.pdSectionHighAvailability.ShowCellToolTips = false;
-            this.pdSectionHighAvailability.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionHighAvailability.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelBootOptions
             // 
@@ -354,7 +354,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionBootOptions, "pdSectionBootOptions");
             this.pdSectionBootOptions.Name = "pdSectionBootOptions";
             this.pdSectionBootOptions.ShowCellToolTips = false;
-            this.pdSectionBootOptions.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionBootOptions.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelCPU
             // 
@@ -368,7 +368,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionCPU, "pdSectionCPU");
             this.pdSectionCPU.Name = "pdSectionCPU";
             this.pdSectionCPU.ShowCellToolTips = false;
-            this.pdSectionCPU.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionCPU.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelLicense
             // 
@@ -382,7 +382,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionLicense, "pdSectionLicense");
             this.pdSectionLicense.Name = "pdSectionLicense";
             this.pdSectionLicense.ShowCellToolTips = false;
-            this.pdSectionLicense.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionLicense.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelVersion
             // 
@@ -396,7 +396,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionVersion, "pdSectionVersion");
             this.pdSectionVersion.Name = "pdSectionVersion";
             this.pdSectionVersion.ShowCellToolTips = false;
-            this.pdSectionVersion.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionVersion.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelMemory
             // 
@@ -410,7 +410,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionMemory, "pdSectionMemory");
             this.pdSectionMemory.Name = "pdSectionMemory";
             this.pdSectionMemory.ShowCellToolTips = false;
-            this.pdSectionMemory.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionMemory.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelManagementInterfaces
             // 
@@ -424,7 +424,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionManagementInterfaces, "pdSectionManagementInterfaces");
             this.pdSectionManagementInterfaces.Name = "pdSectionManagementInterfaces";
             this.pdSectionManagementInterfaces.ShowCellToolTips = false;
-            this.pdSectionManagementInterfaces.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionManagementInterfaces.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelCustomFields
             // 
@@ -438,7 +438,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionCustomFields, "pdSectionCustomFields");
             this.pdSectionCustomFields.Name = "pdSectionCustomFields";
             this.pdSectionCustomFields.ShowCellToolTips = true;
-            this.pdSectionCustomFields.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionCustomFields.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // panelGeneral
             // 
@@ -452,7 +452,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.pdSectionGeneral, "pdSectionGeneral");
             this.pdSectionGeneral.Name = "pdSectionGeneral";
             this.pdSectionGeneral.ShowCellToolTips = false;
-            this.pdSectionGeneral.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionGeneral.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.pdSection_ExpandedChanged);
             // 
             // GeneralTabPage
             // 
