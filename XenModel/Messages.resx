@@ -5644,6 +5644,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="GENERAL_HEADING_VERSION_DETAILS" xml:space="preserve">
     <value>Version Details</value>
   </data>
+  <data name="GENERAL_LICENSE_QUERYING" xml:space="preserve">
+    <value>Querying license status...</value>
+  </data>
   <data name="GENERAL_MEMORY" xml:space="preserve">
     <value>Memory:</value>
   </data>

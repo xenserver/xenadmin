@@ -992,17 +992,24 @@ namespace XenAdmin.TabPages
             {
                 ToolStripMenuItem editItem = new ToolStripMenuItem(Messages.LAUNCH_LICENSE_MANAGER);
                 editItem.Click += delegate
+                {
+                    if (LicenseLauncher != null)
                     {
-                        if (LicenseLauncher != null)
-                        {
-                            LicenseLauncher.Parent = Program.MainWindow;
-                            LicenseLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections);
-                        }
-                    };
+                        LicenseLauncher.Parent = Program.MainWindow;
+                        LicenseLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections);
+                    }
+                };
 
-                GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-                s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, editItem);
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem, ss.ShowExpiryDate);
+                if (licenseStatus != null)
+                {
+                    var ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
+                    s.AddEntry(Messages.LICENSE_STATUS,
+                        licenseStatus.Updated ? ss.ExpiryStatus : Messages.GENERAL_LICENSE_QUERYING, editItem);
+                    s.AddEntry(FriendlyName("host.license_params-expiry"),
+                        licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
+                        editItem, ss.ShowExpiryDate);
+                }
+
                 info.Remove("expiry");
             }
 
