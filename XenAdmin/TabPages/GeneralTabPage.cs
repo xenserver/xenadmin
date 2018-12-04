@@ -214,7 +214,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        void s_ExpandedEventHandler(PDSection pdSection)
+        private void pdSection_ExpandedChanged(PDSection pdSection)
         {
             if (pdSection != null)
             {
