@@ -42,12 +42,6 @@ namespace XenAdmin.Controls.Ballooning
             InitializeComponent();
         }
 
-        public HostMemoryRow(Host host)
-            : this()
-        {
-            this.host = host;
-        }
-
         public HostMemoryRow(Host host, MetricUpdater metricUpdater)
             : this()
         {

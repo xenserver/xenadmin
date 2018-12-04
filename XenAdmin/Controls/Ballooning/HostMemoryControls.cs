@@ -44,10 +44,17 @@ namespace XenAdmin.Controls.Ballooning
         public HostMemoryControls()
         {
             InitializeComponent();
+            metricUpdaterTimer.Interval = metricUpdaterInterval;
+            metricUpdaterTimer.Tick += MetricUpdaterTimer_Tick;
         }
 
         private Host _host;
         private Host_metrics host_metrics;
+        public MetricUpdater MetricUpdater { get; set; }
+        static bool isMetricUpdating;
+        private readonly Timer metricUpdaterTimer = new Timer();
+        private const int metricUpdaterInterval = 15000;
+
         [Browsable(false)]
         public Host host
         {
@@ -98,17 +105,19 @@ namespace XenAdmin.Controls.Ballooning
 
             // Set the text values
             valueTotal.Text = Util.MemorySizeStringSuitableUnits(total, true);
+            if (isMetricUpdating)
+            {
+                long free = host.memory_free_calc();
+                long used = total - free;
+                valueUsed.Text = Util.MemorySizeStringSuitableUnits(used, true);
+            }
+            else
+                UpdateMemoryByMetricUpdater();
             valueAvail.Text = Util.MemorySizeStringSuitableUnits(avail, true);
             valueTotDynMax.Text = Util.MemorySizeStringSuitableUnits(tot_dyn_max, true);
             labelOvercommit.Text = string.Format(Messages.OVERCOMMIT, overcommit);
             valueControlDomain.Text = Util.MemorySizeStringSuitableUnits(dom0, true);
-            if (isMetricUpdating)
-                valueUsed.Text = valueTotDynMax.Text;
-            else
-                UpdateMemoryByMetricUpdater();
         }
-
-        public MetricUpdater MetricUpdater { get; set; }
 
         public void UpdateMemoryByMetricUpdater()
         {
@@ -125,8 +134,6 @@ namespace XenAdmin.Controls.Ballooning
                 this.Refresh();
         }
 
-        static bool isMetricUpdating;
-        Timer metricUpdaterTimer;
         void host_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "memory_overhead")
@@ -134,24 +141,18 @@ namespace XenAdmin.Controls.Ballooning
             else if (e.PropertyName == "resident_VMs" && MetricUpdater != null)
             {
                 isMetricUpdating = true;
-                this.Refresh();
-                if (metricUpdaterTimer == null)
-                {
-                    metricUpdaterTimer = new Timer();
-                    metricUpdaterTimer.Interval = 15000;
-                    metricUpdaterTimer.Tick += MetricUpdaterTimer_Tick;
-                }
+                Refresh();
                 metricUpdaterTimer.Enabled = true;
             }
         }
 
         private void MetricUpdaterTimer_Tick(object sender, EventArgs e)
         {
+            metricUpdaterTimer.Enabled = false;
             if (MetricUpdater == null) return;
             MetricUpdater.Prod();
             isMetricUpdating = false;
-            this.Refresh();
-            metricUpdaterTimer.Enabled = false;
+            Refresh();
         }
 
         void vm_metrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
