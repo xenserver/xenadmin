@@ -16110,6 +16110,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Querying license status....
+        /// </summary>
+        public static string GENERAL_LICENSE_QUERYING {
+            get {
+                return ResourceManager.GetString("GENERAL_LICENSE_QUERYING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memory:.
         /// </summary>
         public static string GENERAL_MEMORY {
