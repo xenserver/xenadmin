@@ -1760,6 +1760,15 @@
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>容器管理日志</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>容器管理日志</value>
+  </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
     <value>服务器与 Internet 之间的连接性测试</value>
   </data>
