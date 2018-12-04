@@ -65,7 +65,7 @@ namespace XenAdmin.TabPages
 
         private LicenseStatus licenseStatus;
 
-        private List<PDSection> sections;
+        private readonly List<PDSection> sections;
 
         public LicenseManagerLauncher LicenseLauncher { private get; set; }
 
@@ -179,6 +179,13 @@ namespace XenAdmin.TabPages
                     xenObject = value;
                     RegisterHandlers();
                     BuildList();
+
+                    if (xenObject != null && !_expandedSections.ContainsKey(xenObject.GetType()))
+                    {
+                        _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSectionGeneral});
+                        pdSectionGeneral.Expand();
+                    }
+
                     ResetExpandState();
                 }
                 else
@@ -206,9 +213,8 @@ namespace XenAdmin.TabPages
 
         private void pdSection_ExpandedChanged(PDSection pdSection)
         {
-            if (pdSection != null)
+            if (pdSection != null && xenObject != null)
             {
-                //Add to the expandedSections
                 List<PDSection> listSections;
                 if (_expandedSections.TryGetValue(xenObject.GetType(), out listSections))
                 {
@@ -219,9 +225,7 @@ namespace XenAdmin.TabPages
                 }
                 else if (pdSection.IsExpanded)
                 {
-                    List<PDSection> list = new List<PDSection>();
-                    list.Add(pdSection);
-                    _expandedSections.Add(xenObject.GetType(), list);
+                    _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSection});
                 }
             }
             SetStatesOfExpandingLinks();
@@ -230,22 +234,28 @@ namespace XenAdmin.TabPages
 
         private void ResetExpandState()
         {
+            List<PDSection> expandedSections = null;
+            if (xenObject != null)
+                _expandedSections.TryGetValue(xenObject.GetType(), out expandedSections);
+
             try
             {
                 panel2.SuspendLayout();
 
-                List<PDSection> expandedSections;
-                _expandedSections.TryGetValue(xenObject.GetType(), out expandedSections);
-
                 foreach (PDSection s in sections)
                 {
-                    if (expandedSections != null && expandedSections.Contains(s))
+                    if (expandedSections == null)
+                    {
+                        if (s == pdSectionGeneral)
+                            s.Expand();
+                        else
+                            s.Contract();
+                    }
+                    else if (expandedSections.Contains(s))
                         s.Expand();
                     else
                         s.Contract();
                 }
-
-                pdSectionGeneral.Expand();
             }
             finally
             {
