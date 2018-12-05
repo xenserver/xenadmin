@@ -3870,15 +3870,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; has low memory..
-        /// </summary>
-        public static string Message_body_host_low_memory {
-            get {
-                return ResourceManager.GetString("Message.body-host_low_memory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to There was a temporary failure synchronizing performance statistics across the pool, probably because one or more servers were offline.  Another synchronization attempt will be made later..
         /// </summary>
         public static string Message_body_host_sync_data_failed {
@@ -4667,15 +4658,6 @@ namespace XenAdmin {
         public static string Message_name_host_cpu_features_up {
             get {
                 return ResourceManager.GetString("Message.name-host_cpu_features_up", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server has low memory..
-        /// </summary>
-        public static string Message_name_host_low_memory {
-            get {
-                return ResourceManager.GetString("Message.name-host_low_memory", resourceCulture);
             }
         }
         

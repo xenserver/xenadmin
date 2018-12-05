@@ -5439,6 +5439,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The requested operation is not allowed because the specified VDI is encrypted..
+        /// </summary>
+        public static string VDI_IS_ENCRYPTED {
+            get {
+                return ResourceManager.GetString("VDI_IS_ENCRYPTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation can only be performed on CD VDIs (iso files or CDROM drives).  VDI {0} is of type {1}..
         /// </summary>
         public static string VDI_IS_NOT_ISO {
