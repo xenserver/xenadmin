@@ -1980,7 +1980,7 @@ namespace XenAPI
         private string _gateway = "";
 
         /// <summary>
-        /// IP address of DNS servers to use
+        /// Comma separated list of the IP addresses of the DNS servers to use
         /// First published in XenServer 4.1.
         /// </summary>
         public virtual string DNS

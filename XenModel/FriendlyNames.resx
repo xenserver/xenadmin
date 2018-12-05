@@ -1907,12 +1907,6 @@
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
     <value>[Legacy XenServer product] Premium Per-User</value>
   </data>
-  <data name="Message.name-host_low_memory" xml:space="preserve">
-    <value>Server has low memory.</value>
-  </data>
-  <data name="Message.body-host_low_memory" xml:space="preserve">
-    <value>Server '{0}' has low memory.</value>
-  </data>
   <data name="Description-host.system_status-v6d" xml:space="preserve">
     <value>[XenServer] licensing daemon logs</value>
   </data>
