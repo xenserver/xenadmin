@@ -51,12 +51,16 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelWeekly = new System.Windows.Forms.TableLayoutPanel();
             this.panelHourly = new System.Windows.Forms.TableLayoutPanel();
             this.panelDaily = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.TimeDetailsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.sectionLabelSchedule = new XenAdmin.Controls.SectionHeaderLabel();
             this.sectionLabelNumber = new XenAdmin.Controls.SectionHeaderLabel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRetention)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -64,6 +68,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelWeekly.SuspendLayout();
             this.panelHourly.SuspendLayout();
             this.panelDaily.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -180,6 +185,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelRecurrence, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tableLayoutPanel4
@@ -190,6 +196,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.tableLayoutPanel4.Controls.Add(this.radioButtonWeekly, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.label9, 1, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel4, 2);
             // 
             // label9
             // 
@@ -229,6 +236,24 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelDaily.Controls.Add(this.dateTimePickerDaily, 1, 0);
             this.panelDaily.Controls.Add(this.label8, 0, 0);
             this.panelDaily.Name = "panelDaily";
+            // 
+            // tableLayoutPanel5
+            // 
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.InfoLabel, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.TimeDetailsLabel, 1, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // InfoLabel
+            // 
+            resources.ApplyResources(this.InfoLabel, "InfoLabel");
+            this.InfoLabel.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.InfoLabel.Name = "InfoLabel";
+            // 
+            // TimeDetailsLabel
+            // 
+            resources.ApplyResources(this.TimeDetailsLabel, "TimeDetailsLabel");
+            this.TimeDetailsLabel.Name = "TimeDetailsLabel";
             // 
             // tableLayoutPanel2
             // 
@@ -275,6 +300,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.tableLayoutPanel3.SetColumnSpan(this.autoHeightLabel2, 2);
             this.autoHeightLabel2.Name = "autoHeightLabel2";
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.label1.Name = "label1";
+            // 
             // NewPolicySnapshotFrequencyPage
             // 
             resources.ApplyResources(this, "$this");
@@ -293,6 +324,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelHourly.PerformLayout();
             this.panelDaily.ResumeLayout(false);
             this.panelDaily.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -331,5 +364,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private System.Windows.Forms.TableLayoutPanel panelHourly;
         private System.Windows.Forms.TableLayoutPanel panelDaily;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Label TimeDetailsLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
