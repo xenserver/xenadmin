@@ -44,29 +44,28 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.radioButtonDaily = new System.Windows.Forms.RadioButton();
             this.numericUpDownRetention = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.localServerTime1 = new XenAdmin.Wizards.NewPolicyWizard.LocalServerTime();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label9 = new System.Windows.Forms.Label();
             this.panelRecurrence = new System.Windows.Forms.Panel();
             this.panelWeekly = new System.Windows.Forms.TableLayoutPanel();
             this.panelHourly = new System.Windows.Forms.TableLayoutPanel();
+            this.panelDaily = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.sectionLabelSchedule = new XenAdmin.Controls.SectionHeaderLabel();
             this.sectionLabelNumber = new XenAdmin.Controls.SectionHeaderLabel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.panelDaily = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRetention)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panelRecurrence.SuspendLayout();
             this.panelWeekly.SuspendLayout();
             this.panelHourly.SuspendLayout();
+            this.panelDaily.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.panelDaily.SuspendLayout();
             this.SuspendLayout();
             // 
             // radioButtonHourly
@@ -116,7 +115,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.ApplyResources(this.daysWeekCheckboxes, "daysWeekCheckboxes");
             this.panelWeekly.SetColumnSpan(this.daysWeekCheckboxes, 2);
             this.daysWeekCheckboxes.Days = "";
-            this.daysWeekCheckboxes.MaximumSize = new System.Drawing.Size(400, 80);
             this.daysWeekCheckboxes.Name = "daysWeekCheckboxes";
             // 
             // label5
@@ -177,12 +175,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // localServerTime1
-            // 
-            resources.ApplyResources(this.localServerTime1, "localServerTime1");
-            this.localServerTime1.Name = "localServerTime1";
-            this.localServerTime1.TabStop = false;
-            // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
@@ -198,6 +190,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.tableLayoutPanel4.Controls.Add(this.radioButtonWeekly, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.label9, 1, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Name = "label9";
+            this.tableLayoutPanel4.SetRowSpan(this.label9, 3);
             // 
             // panelRecurrence
             // 
@@ -222,18 +221,23 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelHourly.Controls.Add(this.label6, 0, 0);
             this.panelHourly.Controls.Add(this.comboBoxMin, 1, 0);
             this.panelHourly.Controls.Add(this.label7, 2, 0);
-            this.panelHourly.MinimumSize = new System.Drawing.Size(100, 40);
             this.panelHourly.Name = "panelHourly";
+            // 
+            // panelDaily
+            // 
+            resources.ApplyResources(this.panelDaily, "panelDaily");
+            this.panelDaily.Controls.Add(this.dateTimePickerDaily, 1, 0);
+            this.panelDaily.Controls.Add(this.label8, 0, 0);
+            this.panelDaily.Name = "panelDaily";
             // 
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.autoHeightLabel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.localServerTime1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.sectionLabelSchedule, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.sectionLabelNumber, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.sectionLabelSchedule, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.sectionLabelNumber, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // autoHeightLabel1
@@ -244,20 +248,16 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             // sectionLabelSchedule
             // 
             resources.ApplyResources(this.sectionLabelSchedule, "sectionLabelSchedule");
-            this.sectionLabelSchedule.FocusControl = null;
             this.sectionLabelSchedule.LineColor = System.Drawing.SystemColors.Window;
             this.sectionLabelSchedule.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionLabelSchedule.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionLabelSchedule.Name = "sectionLabelSchedule";
             this.sectionLabelSchedule.TabStop = false;
             // 
             // sectionLabelNumber
             // 
             resources.ApplyResources(this.sectionLabelNumber, "sectionLabelNumber");
-            this.sectionLabelNumber.FocusControl = null;
             this.sectionLabelNumber.LineColor = System.Drawing.SystemColors.Window;
             this.sectionLabelNumber.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionLabelNumber.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionLabelNumber.Name = "sectionLabelNumber";
             this.sectionLabelNumber.TabStop = false;
             // 
@@ -275,21 +275,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.tableLayoutPanel3.SetColumnSpan(this.autoHeightLabel2, 2);
             this.autoHeightLabel2.Name = "autoHeightLabel2";
             // 
-            // panelDaily
-            // 
-            resources.ApplyResources(this.panelDaily, "panelDaily");
-            this.panelDaily.Controls.Add(this.dateTimePickerDaily, 1, 0);
-            this.panelDaily.Controls.Add(this.label8, 0, 0);
-            this.panelDaily.MinimumSize = new System.Drawing.Size(10, 40);
-            this.panelDaily.Name = "panelDaily";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Name = "label9";
-            this.tableLayoutPanel4.SetRowSpan(this.label9, 3);
-            // 
             // NewPolicySnapshotFrequencyPage
             // 
             resources.ApplyResources(this, "$this");
@@ -306,12 +291,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelWeekly.PerformLayout();
             this.panelHourly.ResumeLayout(false);
             this.panelHourly.PerformLayout();
+            this.panelDaily.ResumeLayout(false);
+            this.panelDaily.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.panelDaily.ResumeLayout(false);
-            this.panelDaily.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,7 +320,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private DaysWeekCheckboxes daysWeekCheckboxes;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panelRecurrence;
-        private LocalServerTime localServerTime1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
         private SectionHeaderLabel sectionLabelSchedule;

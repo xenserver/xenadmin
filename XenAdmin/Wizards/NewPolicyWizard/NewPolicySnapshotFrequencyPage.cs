@@ -58,7 +58,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             set
             {
                 _pool = value;
-                localServerTime1.Pool = _pool;
             }
         }
 
