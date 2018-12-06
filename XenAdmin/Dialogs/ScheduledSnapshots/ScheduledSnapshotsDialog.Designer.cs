@@ -71,6 +71,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNextSnapshotTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCorrespondingServerTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnLastResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -215,6 +216,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.ColumnEnabled,
             this.ColumnVMs,
             this.ColumnNextSnapshotTime,
+            this.ColumnCorrespondingServerTime,
             this.ColumnLastResult});
             resources.ApplyResources(this.dataGridViewPolicies, "dataGridViewPolicies");
             this.dataGridViewPolicies.GridColor = System.Drawing.SystemColors.Control;
@@ -377,6 +379,13 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.ColumnNextSnapshotTime.Name = "ColumnNextSnapshotTime";
             this.ColumnNextSnapshotTime.ReadOnly = true;
             // 
+            // ColumnCorrespondingServerTime
+            // 
+            this.ColumnCorrespondingServerTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnCorrespondingServerTime, "ColumnCorrespondingServerTime");
+            this.ColumnCorrespondingServerTime.Name = "ColumnCorrespondingServerTime";
+            this.ColumnCorrespondingServerTime.ReadOnly = true;
+            // 
             // ColumnLastResult
             // 
             this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -450,6 +459,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNextSnapshotTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCorrespondingServerTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
     }
 }

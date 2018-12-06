@@ -408,6 +408,15 @@
   <data name="ColumnNextSnapshotTime.Width" type="System.Int32, mscorlib">
     <value>138</value>
   </data>
+  <metadata name="ColumnCorrespondingServerTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnCorrespondingServerTime.HeaderText" xml:space="preserve">
+    <value>Corresponding Server Time</value>
+  </data>
+  <data name="ColumnCorrespondingServerTime.Width" type="System.Int32, mscorlib">
+    <value>170</value>
+  </data>
   <metadata name="ColumnLastResult.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1129,6 +1138,12 @@
     <value>ColumnNextSnapshotTime</value>
   </data>
   <data name="&gt;&gt;ColumnNextSnapshotTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnCorrespondingServerTime.Name" xml:space="preserve">
+    <value>ColumnCorrespondingServerTime</value>
+  </data>
+  <data name="&gt;&gt;ColumnCorrespondingServerTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnLastResult.Name" xml:space="preserve">

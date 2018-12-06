@@ -106,6 +106,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             private DataGridViewTextBoxCell _name = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _numVMs = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _nextRunTime = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell _correspondingServerTime = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _status = new DataGridViewTextBoxCell();
             private DataGridViewTextAndImageCell _lastResult = new DataGridViewTextAndImageCell();
 
@@ -123,12 +124,13 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             public string PolicyStatus { get; private set; }
             public int PolicyVmCount { get; private set; }
             public DateTime? PolicyNextRunTime { get; private set; }
+            public DateTime? PolicyCorrespondingServerTime { get; private set; }
             public string PolicyLastResult { get; private set; }
             private Bitmap PolicyLastResultImage { get; set; }
 
             public PolicyRow(VMSS policy, List<XenAPI.Message> alertMessages, DateTime? serverLocalTime)
             {
-                Cells.AddRange(_name, _status, _numVMs, _nextRunTime, _lastResult);
+                Cells.AddRange(_name, _status, _numVMs, _nextRunTime, _correspondingServerTime, _lastResult);
                 _policy = policy;
                 _alertMessages = alertMessages;
                 _serverLocalTime = serverLocalTime;
@@ -142,9 +144,15 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 PolicyStatus = _policy.enabled ? Messages.ENABLED : Messages.DISABLED;
 
                 if (_serverLocalTime.HasValue)
+                {
                     PolicyNextRunTime = _policy.GetNextRunTime(_serverLocalTime.Value).ToLocalTime();
+                    PolicyCorrespondingServerTime = _policy.GetNextRunTime(_serverLocalTime.Value);
+                }
                 else
+                {
                     PolicyNextRunTime = null;
+                    PolicyCorrespondingServerTime = null;
+                }
 
                 if (_alertMessages.Count > 0)
                 {
@@ -172,6 +180,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 _lastResult.Image = PolicyLastResultImage;
                 _nextRunTime.Value = PolicyNextRunTime.HasValue
                     ? HelpersGUI.DateTimeToString(PolicyNextRunTime.Value, Messages.DATEFORMAT_DMY_HM, true)
+                    : Messages.VMSS_HOST_NOT_LIVE;
+                _correspondingServerTime.Value = PolicyCorrespondingServerTime.HasValue
+                    ? HelpersGUI.DateTimeToString(PolicyCorrespondingServerTime.Value, Messages.DATEFORMAT_DMY_HM, true)
                     : Messages.VMSS_HOST_NOT_LIVE;
             }
         }
@@ -238,6 +249,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                             comparer = p => p.PolicyVmCount;
                         else if (dataGridViewPolicies.SortedColumn.Index == ColumnNextSnapshotTime.Index)
                             comparer = p => p.PolicyNextRunTime;
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnCorrespondingServerTime.Index)
+                            comparer = p => p.PolicyCorrespondingServerTime;
                         else if (dataGridViewPolicies.SortedColumn.Index == ColumnLastResult.Index)
                             comparer = p => p.PolicyLastResult;
                     }
