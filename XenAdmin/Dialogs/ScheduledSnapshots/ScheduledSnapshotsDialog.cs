@@ -57,9 +57,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             : base(pool.Connection)
         {
             Pool = pool;
-            InitializeComponent();      
-            chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
-            chevronButton1.Image = Properties.Resources.PDChevronDown;
+            InitializeComponent();
+            ShowHideRunHistoryButton.Text = Messages.SHOW_RUN_HISTORY;
+            ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronDown;
 
             ColumnExpand.DefaultCellStyle.NullValue = null;
             comboBoxTimeSpan.SelectedIndex = 0;
@@ -402,26 +402,26 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             }
         }
 
-        private void chevronButton1_ButtonClick(object sender, EventArgs e)
+        private void ShowHideRunHistoryButton_Click(object sender, EventArgs e)
         {
-            if (chevronButton1.Text == Messages.HIDE_RUN_HISTORY)
+            if (ShowHideRunHistoryButton.Text == Messages.HIDE_RUN_HISTORY)
             {
-                chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
-                chevronButton1.Image = Properties.Resources.PDChevronDown;
+                ShowHideRunHistoryButton.Text = Messages.SHOW_RUN_HISTORY;
+                ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronDown;
                 panelHistory.Visible = false;
             }
             else
             {
-                chevronButton1.Text = Messages.HIDE_RUN_HISTORY;
-                chevronButton1.Image = Properties.Resources.PDChevronUp;
+                ShowHideRunHistoryButton.Text = Messages.HIDE_RUN_HISTORY;
+                ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronUp;
                 panelHistory.Visible = true;
             }
         }
 
-        private void chevronButton1_KeyDown(object sender, KeyEventArgs e)
+        private void ShowHideRunHistoryButton_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
-                chevronButton1_ButtonClick(sender, e);
+                ShowHideRunHistoryButton_Click(sender, e);
         }
 
         #endregion
