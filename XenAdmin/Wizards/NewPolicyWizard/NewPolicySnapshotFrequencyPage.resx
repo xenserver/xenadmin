@@ -832,7 +832,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value>Snapshots will be automatically taken according to the schedule specified below. A scheduled snapshot job will be triggered at the specified time as set on the pool master server.</value>
+    <value>Snapshots will be automatically taken according to the schedule specified below.</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
