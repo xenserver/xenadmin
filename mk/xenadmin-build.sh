@@ -126,10 +126,6 @@ echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && $MSBUILD
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
-
-#include resources script and collect the resources for translations
-. ${REPO}/mk/find-resources.sh
-
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar *
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 
