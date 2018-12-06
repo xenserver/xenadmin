@@ -230,13 +230,13 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     Func<PolicyRow, object> comparer = p => p.PolicyName;
                     if (dataGridViewPolicies.SortedColumn != null)
                     {
-                        if (dataGridViewPolicies.SortedColumn.Index == NameColum.Index)
+                        if (dataGridViewPolicies.SortedColumn.Index == ColumnName.Index)
                             comparer = p => p.PolicyName;
-                        else if (dataGridViewPolicies.SortedColumn.Index == EnabledColumn.Index)
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnEnabled.Index)
                             comparer = p => p.PolicyStatus;
                         else if (dataGridViewPolicies.SortedColumn.Index == ColumnVMs.Index)
                             comparer = p => p.PolicyVmCount;
-                        else if (dataGridViewPolicies.SortedColumn.Index == DescriptionColum.Index)
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnNextSnapshotTime.Index)
                             comparer = p => p.PolicyNextRunTime;
                         else if (dataGridViewPolicies.SortedColumn.Index == ColumnLastResult.Index)
                             comparer = p => p.PolicyLastResult;

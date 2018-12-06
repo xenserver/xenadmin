@@ -33,11 +33,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduledSnapshotsDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
             this.buttonEnable = new System.Windows.Forms.Button();
@@ -55,11 +55,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.labelLoading = new System.Windows.Forms.Label();
             this.pictureBoxSpinner = new System.Windows.Forms.PictureBox();
             this.dataGridViewPolicies = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.NameColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EnabledColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnVMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescriptionColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLastResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panelHistory = new System.Windows.Forms.Panel();
@@ -72,6 +67,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.labelHistory = new System.Windows.Forms.Label();
             this.labelShow = new System.Windows.Forms.Label();
             this.comboBoxTimeSpan = new System.Windows.Forms.ComboBox();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnVMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNextSnapshotTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLastResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panelPolicies.SuspendLayout();
@@ -211,10 +211,10 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.dataGridViewPolicies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewPolicies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewPolicies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NameColum,
-            this.EnabledColumn,
+            this.ColumnName,
+            this.ColumnEnabled,
             this.ColumnVMs,
-            this.DescriptionColum,
+            this.ColumnNextSnapshotTime,
             this.ColumnLastResult});
             resources.ApplyResources(this.dataGridViewPolicies, "dataGridViewPolicies");
             this.dataGridViewPolicies.GridColor = System.Drawing.SystemColors.Control;
@@ -230,44 +230,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewPolicies.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewPolicies.SelectionChanged += new System.EventHandler(this.dataGridViewPolicies_SelectionChanged);
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.NameColum, "NameColum");
-            this.NameColum.Name = "NameColum";
-            this.NameColum.ReadOnly = true;
-            // 
-            // EnabledColumn
-            // 
-            this.EnabledColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.EnabledColumn, "EnabledColumn");
-            this.EnabledColumn.Name = "EnabledColumn";
-            this.EnabledColumn.ReadOnly = true;
-            this.EnabledColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnVMs
-            // 
-            this.ColumnVMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColumnVMs.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.ColumnVMs, "ColumnVMs");
-            this.ColumnVMs.Name = "ColumnVMs";
-            this.ColumnVMs.ReadOnly = true;
-            // 
-            // DescriptionColum
-            // 
-            this.DescriptionColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.DescriptionColum, "DescriptionColum");
-            this.DescriptionColum.Name = "DescriptionColum";
-            this.DescriptionColum.ReadOnly = true;
-            // 
-            // ColumnLastResult
-            // 
-            this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnLastResult, "ColumnLastResult");
-            this.ColumnLastResult.Name = "ColumnLastResult";
-            this.ColumnLastResult.ReadOnly = true;
             // 
             // tableLayoutPanel4
             // 
@@ -384,6 +346,44 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.comboBoxTimeSpan.Name = "comboBoxTimeSpan";
             this.comboBoxTimeSpan.SelectedIndexChanged += new System.EventHandler(this.comboBoxTimeSpan_SelectedIndexChanged);
             // 
+            // ColumnName
+            // 
+            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnEnabled
+            // 
+            this.ColumnEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
+            this.ColumnEnabled.Name = "ColumnEnabled";
+            this.ColumnEnabled.ReadOnly = true;
+            this.ColumnEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnVMs
+            // 
+            this.ColumnVMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColumnVMs.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnVMs, "ColumnVMs");
+            this.ColumnVMs.Name = "ColumnVMs";
+            this.ColumnVMs.ReadOnly = true;
+            // 
+            // ColumnNextSnapshotTime
+            // 
+            this.ColumnNextSnapshotTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnNextSnapshotTime, "ColumnNextSnapshotTime");
+            this.ColumnNextSnapshotTime.Name = "ColumnNextSnapshotTime";
+            this.ColumnNextSnapshotTime.ReadOnly = true;
+            // 
+            // ColumnLastResult
+            // 
+            this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnLastResult, "ColumnLastResult");
+            this.ColumnLastResult.Name = "ColumnLastResult";
+            this.ColumnLastResult.ReadOnly = true;
+            // 
             // ScheduledSnapshotsDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -446,10 +446,10 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         private System.Windows.Forms.ComboBox comboBoxTimeSpan;
         private System.Windows.Forms.Panel panelPolicies;
         protected DataGridViewEx dataGridViewPolicies;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameColum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EnabledColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionColum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNextSnapshotTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
     }
 }

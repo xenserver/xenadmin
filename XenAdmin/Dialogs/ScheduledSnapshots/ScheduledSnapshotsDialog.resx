@@ -375,16 +375,16 @@
   <data name="&gt;&gt;panelLoading.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="NameColum.HeaderText" xml:space="preserve">
+  <data name="ColumnName.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NameColum.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <data name="EnabledColumn.HeaderText" xml:space="preserve">
+  <data name="ColumnEnabled.HeaderText" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="EnabledColumn.Width" type="System.Int32, mscorlib">
+  <data name="ColumnEnabled.Width" type="System.Int32, mscorlib">
     <value>64</value>
   </data>
   <metadata name="ColumnVMs.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -399,13 +399,13 @@
   <data name="ColumnVMs.Width" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
-  <metadata name="DescriptionColum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnNextSnapshotTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="DescriptionColum.HeaderText" xml:space="preserve">
+  <data name="ColumnNextSnapshotTime.HeaderText" xml:space="preserve">
     <value>Next Snapshot Time</value>
   </data>
-  <data name="DescriptionColum.Width" type="System.Int32, mscorlib">
+  <data name="ColumnNextSnapshotTime.Width" type="System.Int32, mscorlib">
     <value>138</value>
   </data>
   <metadata name="ColumnLastResult.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1083,36 +1083,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Snapshot Schedules</value>
   </data>
-  <data name="&gt;&gt;NameColum.Name" xml:space="preserve">
-    <value>NameColum</value>
-  </data>
-  <data name="&gt;&gt;NameColum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;EnabledColumn.Name" xml:space="preserve">
-    <value>EnabledColumn</value>
-  </data>
-  <data name="&gt;&gt;EnabledColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnVMs.Name" xml:space="preserve">
-    <value>ColumnVMs</value>
-  </data>
-  <data name="&gt;&gt;ColumnVMs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DescriptionColum.Name" xml:space="preserve">
-    <value>DescriptionColum</value>
-  </data>
-  <data name="&gt;&gt;DescriptionColum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnLastResult.Name" xml:space="preserve">
-    <value>ColumnLastResult</value>
-  </data>
-  <data name="&gt;&gt;ColumnLastResult.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
     <value>ColumnExpand</value>
   </data>
@@ -1135,6 +1105,36 @@
     <value>ColumnDescription</value>
   </data>
   <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+    <value>ColumnName</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnEnabled.Name" xml:space="preserve">
+    <value>ColumnEnabled</value>
+  </data>
+  <data name="&gt;&gt;ColumnEnabled.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnVMs.Name" xml:space="preserve">
+    <value>ColumnVMs</value>
+  </data>
+  <data name="&gt;&gt;ColumnVMs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnNextSnapshotTime.Name" xml:space="preserve">
+    <value>ColumnNextSnapshotTime</value>
+  </data>
+  <data name="&gt;&gt;ColumnNextSnapshotTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnLastResult.Name" xml:space="preserve">
+    <value>ColumnLastResult</value>
+  </data>
+  <data name="&gt;&gt;ColumnLastResult.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
