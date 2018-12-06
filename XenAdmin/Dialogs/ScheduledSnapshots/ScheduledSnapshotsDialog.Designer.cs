@@ -72,8 +72,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.labelHistory = new System.Windows.Forms.Label();
             this.labelShow = new System.Windows.Forms.Label();
             this.comboBoxTimeSpan = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelServerTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panelPolicies.SuspendLayout();
@@ -85,7 +83,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.panelHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRunHistory)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -176,8 +173,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.tableLayoutPanel3.Controls.Add(this.buttonRunNow, 2, 3);
             this.tableLayoutPanel3.Controls.Add(this.buttonDelete, 2, 4);
             this.tableLayoutPanel3.Controls.Add(this.buttonNew, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 7);
-            this.tableLayoutPanel3.Controls.Add(this.labelServerTime, 1, 7);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // panelPolicies
@@ -214,6 +209,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.dataGridViewPolicies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridViewPolicies.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewPolicies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewPolicies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewPolicies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameColum,
             this.EnabledColumn,
@@ -388,18 +384,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.comboBoxTimeSpan.Name = "comboBoxTimeSpan";
             this.comboBoxTimeSpan.SelectedIndexChanged += new System.EventHandler(this.comboBoxTimeSpan_SelectedIndexChanged);
             // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
-            // labelServerTime
-            // 
-            resources.ApplyResources(this.labelServerTime, "labelServerTime");
-            this.labelServerTime.Name = "labelServerTime";
-            // 
             // ScheduledSnapshotsDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -426,7 +410,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRunHistory)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,7 +451,5 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionColum;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label labelServerTime;
     }
 }

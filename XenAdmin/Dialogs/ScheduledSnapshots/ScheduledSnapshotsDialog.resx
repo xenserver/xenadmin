@@ -355,7 +355,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="panelLoading.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 75</value>
+    <value>314, 86</value>
   </data>
   <data name="panelLoading.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 20</value>
@@ -430,7 +430,7 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridViewPolicies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>732, 161</value>
+    <value>732, 183</value>
   </data>
   <data name="dataGridViewPolicies.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -457,7 +457,7 @@
     <value>3, 24</value>
   </data>
   <data name="panelPolicies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>732, 161</value>
+    <value>732, 183</value>
   </data>
   <data name="panelPolicies.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -507,63 +507,6 @@
   <data name="&gt;&gt;buttonProperties.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 191</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="labelServerTime.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="labelServerTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelServerTime.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="labelServerTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 191</value>
-  </data>
-  <data name="labelServerTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 15</value>
-  </data>
-  <data name="labelServerTime.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="labelServerTime.Text" xml:space="preserve">
-    <value>labelServerTime</value>
-  </data>
-  <data name="&gt;&gt;labelServerTime.Name" xml:space="preserve">
-    <value>labelServerTime</value>
-  </data>
-  <data name="&gt;&gt;labelServerTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelServerTime.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;labelServerTime.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -595,7 +538,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelPolicies" Row="1" RowSpan="6" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="buttonProperties" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPolicyTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="buttonEnable" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonRunNow" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonDelete" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonNew" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox1" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelServerTime" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelPolicies" Row="1" RowSpan="6" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="buttonProperties" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPolicyTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="buttonEnable" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonRunNow" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonDelete" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonNew" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="labelPolicyTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

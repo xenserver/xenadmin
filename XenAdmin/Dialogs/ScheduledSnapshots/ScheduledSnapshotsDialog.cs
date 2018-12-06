@@ -260,16 +260,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     dataGridViewPolicies.ResumeLayout();
                     updatingPolicies = false;
 
-                    if (action.ServerLocalTime.HasValue)
-                    {
-                        var time = HelpersGUI.DateTimeToString(action.ServerLocalTime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
-                        var localTime = HelpersGUI.DateTimeToString(action.ServerLocalTime.Value.ToLocalTime(), Messages.DATEFORMAT_WDMY_HM_LONG, true);
-                        
-                        labelServerTime.Text = time == localTime ?
-                            string.Format(Messages.SERVER_TIME, time) :
-                            string.Format(Messages.SERVER_TIME_LOCAL_TIME, localTime, time);
-                    }
-
                     RefreshPoolTitle(Pool);
                     RefreshButtons();
                     RefreshHistoryLabel();

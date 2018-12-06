@@ -31526,16 +31526,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The current time on the pool master is: {0}
-        ///In the server&apos;s timezone this is: {1}.
-        /// </summary>
-        public static string SERVER_TIME_LOCAL_TIME {
-            get {
-                return ResourceManager.GetString("SERVER_TIME_LOCAL_TIME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
