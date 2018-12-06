@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
@@ -60,7 +61,33 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             set
             {
                 _pool = value;
-                Connection = Pool?.Connection;
+                GetServerTime();
+            }
+        }
+
+        public void GetServerTime()
+        {
+            var master = Helpers.GetMaster(Pool);
+            if (master == null)
+                return;
+
+            var action = new GetServerTimeAction(master);
+            action.Completed += action_CompletedTimeServer;
+            action.RunAsync();
+        }
+
+        public DateTime? ServerLocalTime { get; private set; }
+
+        public VMSS CurrentPolicy
+        {
+            get
+            {
+                return new VMSS
+                {
+                    frequency = Frequency,
+                    schedule = Schedule,
+                    retained_snapshots = BackupRetention
+                };
             }
         }
 
@@ -220,6 +247,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 checkBox.Checked = true;
             }
+            OnPageUpdated();
         }
 
         public AsyncAction SaveSettings()
@@ -279,34 +307,51 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
             return HelpersGUI.DateTimeToString(datetime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
         }
-        
+
+        void action_CompletedTimeServer(ActionBase sender)
+        {
+            var action = (GetServerTimeAction)sender;
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                string serverLocalTimeString = action.Result;
+                if (serverLocalTimeString != "")
+                {
+                    ServerLocalTime = DateTime.Parse(serverLocalTimeString, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+                    OnPageUpdated();
+                }
+            });
+        }
+
         private void PolicySnapshotFrequency_StatusChanged(XenTabPage sender)
         {
-            //Or use GetServerTimeAction or the datetime part of LoadVmssAction.
-            DateTime? serverLocalTime;
-            try
-            {
-                serverLocalTime = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
-            }
-            catch (Exception e)
-            {
-                //log.Error("An error occurred while obtaining VMPP date time: ", e);
-                TimeDetailsLabel.Text = e.ToString();
-                serverLocalTime = null;
-            }
-
             DateTime? nextRunTime = null;
             DateTime? correspondingServerTime = null;
-            if (serverLocalTime.HasValue)
+            if (ServerLocalTime.HasValue)
             {
-                nextRunTime = _policyCopy.GetNextRunTime(serverLocalTime.Value).ToLocalTime();
-                correspondingServerTime = _policyCopy.GetNextRunTime(serverLocalTime.Value);
+                var currentPolicy = CurrentPolicy;
+                nextRunTime = currentPolicy.GetNextRunTime(ServerLocalTime.Value).ToLocalTime();
+                correspondingServerTime = currentPolicy.GetNextRunTime(ServerLocalTime.Value);
             }
 
             TimeDetailsLabel.Text = string.Format(
                 Messages.VMSS_NEXT_TIME_RUNNING,
                 DateTimeToRequiredFormat(nextRunTime),
                 DateTimeToRequiredFormat(correspondingServerTime));
+        }
+
+        private void dateTimePickerWeekly_ValueChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
+
+        private void comboBoxMin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
+
+        private void dateTimePickerDaily_ValueChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
         }
     }
 }

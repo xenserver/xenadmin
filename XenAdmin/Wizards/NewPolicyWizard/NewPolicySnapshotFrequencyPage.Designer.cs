@@ -92,6 +92,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.dateTimePickerDaily.Name = "dateTimePickerDaily";
             this.dateTimePickerDaily.ShowUpDown = true;
             this.dateTimePickerDaily.Value = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerDaily.ValueChanged += new System.EventHandler(this.dateTimePickerDaily_ValueChanged);
             // 
             // comboBoxMin
             // 
@@ -104,6 +105,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.GetString("comboBoxMin.Items3")});
             resources.ApplyResources(this.comboBoxMin, "comboBoxMin");
             this.comboBoxMin.Name = "comboBoxMin";
+            this.comboBoxMin.SelectedIndexChanged += new System.EventHandler(this.comboBoxMin_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -140,6 +142,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.dateTimePickerWeekly.Name = "dateTimePickerWeekly";
             this.dateTimePickerWeekly.ShowUpDown = true;
             this.dateTimePickerWeekly.Value = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerWeekly.ValueChanged += new System.EventHandler(this.dateTimePickerWeekly_ValueChanged);
             // 
             // radioButtonWeekly
             // 

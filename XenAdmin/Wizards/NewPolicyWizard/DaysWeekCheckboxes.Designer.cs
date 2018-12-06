@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DaysWeekCheckboxes));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBoxSaturday = new System.Windows.Forms.CheckBox();
-            this.checkBoxFriday = new System.Windows.Forms.CheckBox();
-            this.checkBoxThursday = new System.Windows.Forms.CheckBox();
-            this.checkBoxSunday = new System.Windows.Forms.CheckBox();
             this.checkBoxMonday = new System.Windows.Forms.CheckBox();
             this.checkBoxTuesday = new System.Windows.Forms.CheckBox();
             this.checkBoxWednesday = new System.Windows.Forms.CheckBox();
+            this.checkBoxThursday = new System.Windows.Forms.CheckBox();
+            this.checkBoxFriday = new System.Windows.Forms.CheckBox();
+            this.checkBoxSaturday = new System.Windows.Forms.CheckBox();
+            this.checkBoxSunday = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,30 +51,6 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBoxSaturday, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxSunday, 2, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // checkBoxSaturday
-            // 
-            resources.ApplyResources(this.checkBoxSaturday, "checkBoxSaturday");
-            this.checkBoxSaturday.Name = "checkBoxSaturday";
-            this.checkBoxSaturday.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxFriday
-            // 
-            resources.ApplyResources(this.checkBoxFriday, "checkBoxFriday");
-            this.checkBoxFriday.Name = "checkBoxFriday";
-            this.checkBoxFriday.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxThursday
-            // 
-            resources.ApplyResources(this.checkBoxThursday, "checkBoxThursday");
-            this.checkBoxThursday.Name = "checkBoxThursday";
-            this.checkBoxThursday.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxSunday
-            // 
-            resources.ApplyResources(this.checkBoxSunday, "checkBoxSunday");
-            this.checkBoxSunday.Name = "checkBoxSunday";
-            this.checkBoxSunday.UseVisualStyleBackColor = true;
             // 
             // checkBoxMonday
             // 
@@ -93,6 +69,30 @@
             resources.ApplyResources(this.checkBoxWednesday, "checkBoxWednesday");
             this.checkBoxWednesday.Name = "checkBoxWednesday";
             this.checkBoxWednesday.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxThursday
+            // 
+            resources.ApplyResources(this.checkBoxThursday, "checkBoxThursday");
+            this.checkBoxThursday.Name = "checkBoxThursday";
+            this.checkBoxThursday.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxFriday
+            // 
+            resources.ApplyResources(this.checkBoxFriday, "checkBoxFriday");
+            this.checkBoxFriday.Name = "checkBoxFriday";
+            this.checkBoxFriday.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSaturday
+            // 
+            resources.ApplyResources(this.checkBoxSaturday, "checkBoxSaturday");
+            this.checkBoxSaturday.Name = "checkBoxSaturday";
+            this.checkBoxSaturday.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSunday
+            // 
+            resources.ApplyResources(this.checkBoxSunday, "checkBoxSunday");
+            this.checkBoxSunday.Name = "checkBoxSunday";
+            this.checkBoxSunday.UseVisualStyleBackColor = true;
             // 
             // DaysWeekCheckboxes
             // 
