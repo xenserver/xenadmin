@@ -12764,6 +12764,9 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VMSS_NAME_TITLE" xml:space="preserve">
     <value>What do you want to call this schedule?</value>
   </data>
+  <data name="VMSS_NEXT_TIME_RUNNING" xml:space="preserve">
+    <value>Next scheduled time {0} this corresponds to a server time of {1}.</value>
+  </data>
   <data name="VMSS_POLICY_SUMMARY" xml:space="preserve">
     <value>Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n</value>
   </data>

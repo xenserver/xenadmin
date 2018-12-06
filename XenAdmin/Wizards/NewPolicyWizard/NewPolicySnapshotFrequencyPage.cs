@@ -35,6 +35,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.SettingsPanels;
 using XenAPI;
@@ -49,6 +50,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             radioButtonDaily.Checked = true;
             comboBoxMin.SelectedIndex = 1;
             daysWeekCheckboxes.CheckBoxChanged += checkBox_CheckedChanged;
+            StatusChanged += PolicySnapshotFrequency_StatusChanged;
 
         }
         private Pool _pool;
@@ -58,6 +60,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             set
             {
                 _pool = value;
+                Connection = Pool?.Connection;
             }
         }
 
@@ -267,6 +270,43 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
                 return false;
             }
+        }
+
+        private string DateTimeToRequiredFormat(DateTime? datetime)
+        {
+            if (!datetime.HasValue)
+                return Messages.UNKNOWN;
+
+            return HelpersGUI.DateTimeToString(datetime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
+        }
+        
+        private void PolicySnapshotFrequency_StatusChanged(XenTabPage sender)
+        {
+            //Or use GetServerTimeAction or the datetime part of LoadVmssAction.
+            DateTime? serverLocalTime;
+            try
+            {
+                serverLocalTime = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
+            }
+            catch (Exception e)
+            {
+                //log.Error("An error occurred while obtaining VMPP date time: ", e);
+                TimeDetailsLabel.Text = e.ToString();
+                serverLocalTime = null;
+            }
+
+            DateTime? nextRunTime = null;
+            DateTime? correspondingServerTime = null;
+            if (serverLocalTime.HasValue)
+            {
+                nextRunTime = _policyCopy.GetNextRunTime(serverLocalTime.Value).ToLocalTime();
+                correspondingServerTime = _policyCopy.GetNextRunTime(serverLocalTime.Value);
+            }
+
+            TimeDetailsLabel.Text = string.Format(
+                Messages.VMSS_NEXT_TIME_RUNNING,
+                DateTimeToRequiredFormat(nextRunTime),
+                DateTimeToRequiredFormat(correspondingServerTime));
         }
     }
 }
