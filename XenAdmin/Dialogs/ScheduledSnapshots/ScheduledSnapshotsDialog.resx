@@ -393,9 +393,6 @@
   <data name="ColumnVMs.HeaderText" xml:space="preserve">
     <value>#VMs</value>
   </data>
-  <data name="ColumnVMs.MinimumWidth" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="ColumnVMs.Width" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
@@ -415,7 +412,7 @@
     <value>Corresponding Server Time</value>
   </data>
   <data name="ColumnCorrespondingServerTime.Width" type="System.Int32, mscorlib">
-    <value>170</value>
+    <value>176</value>
   </data>
   <metadata name="ColumnLastResult.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -423,11 +420,8 @@
   <data name="ColumnLastResult.HeaderText" xml:space="preserve">
     <value>Last Result</value>
   </data>
-  <data name="ColumnLastResult.MinimumWidth" type="System.Int32, mscorlib">
-    <value>140</value>
-  </data>
   <data name="ColumnLastResult.Width" type="System.Int32, mscorlib">
-    <value>140</value>
+    <value>88</value>
   </data>
   <data name="dataGridViewPolicies.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

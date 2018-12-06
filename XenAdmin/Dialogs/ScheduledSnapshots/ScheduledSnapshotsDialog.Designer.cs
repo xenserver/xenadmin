@@ -374,21 +374,21 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // 
             // ColumnNextSnapshotTime
             // 
-            this.ColumnNextSnapshotTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnNextSnapshotTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnNextSnapshotTime, "ColumnNextSnapshotTime");
             this.ColumnNextSnapshotTime.Name = "ColumnNextSnapshotTime";
             this.ColumnNextSnapshotTime.ReadOnly = true;
             // 
             // ColumnCorrespondingServerTime
             // 
-            this.ColumnCorrespondingServerTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnCorrespondingServerTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnCorrespondingServerTime, "ColumnCorrespondingServerTime");
             this.ColumnCorrespondingServerTime.Name = "ColumnCorrespondingServerTime";
             this.ColumnCorrespondingServerTime.ReadOnly = true;
             // 
             // ColumnLastResult
             // 
-            this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnLastResult, "ColumnLastResult");
             this.ColumnLastResult.Name = "ColumnLastResult";
             this.ColumnLastResult.ReadOnly = true;
