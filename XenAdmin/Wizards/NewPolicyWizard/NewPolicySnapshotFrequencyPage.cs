@@ -32,14 +32,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using XenAdmin.SettingsPanels;
 using XenAPI;
-using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {
