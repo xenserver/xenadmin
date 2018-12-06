@@ -43,13 +43,13 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxSaturday, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxFriday, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxThursday, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxSunday, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxMonday, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxTuesday, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxWednesday, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxThursday, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxFriday, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxSaturday, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxSunday, 2, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // checkBoxSaturday
@@ -99,7 +99,6 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MaximumSize = new System.Drawing.Size(400, 80);
             this.Name = "DaysWeekCheckboxes";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
