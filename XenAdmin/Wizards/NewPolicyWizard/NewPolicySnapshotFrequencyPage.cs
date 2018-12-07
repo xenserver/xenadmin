@@ -166,15 +166,20 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void ShowPanel(Panel panel)
         {
-            panelHourly.Visible = false;
-            panelDaily.Visible = false;
-            panelWeekly.Visible = false;
-            panelHourly.Dock = DockStyle.None;
-            panelDaily.Dock = DockStyle.None;
-            panelHourly.Dock = DockStyle.None;
-            panel.Dock = DockStyle.Fill;
-            panel.Visible = true;
-
+            var list = new List<Control>{ panelHourly , panelDaily , panelWeekly };
+            foreach (var p in list)
+            {
+                if (p == panel)
+                {
+                    p.Dock = DockStyle.Fill;
+                    p.Visible = true;
+                }
+                else
+                {
+                    p.Visible = false;
+                    p.Dock = DockStyle.None;
+                }
+            }
         }
 
         private void radioButtonDaily_CheckedChanged(object sender, System.EventArgs e)
