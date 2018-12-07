@@ -159,6 +159,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void radioButtonHourly_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (sender == null || !((RadioButton) sender).Checked)
+                return;
+
             ShowPanel(panelHourly);
             numericUpDownRetention.Value = 10;
             OnPageUpdated();
@@ -184,6 +187,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void radioButtonDaily_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (sender == null || !((RadioButton) sender).Checked)
+                return;
+
             ShowPanel(panelDaily);
             numericUpDownRetention.Value = 7;
             OnPageUpdated();
@@ -191,6 +197,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         private void radioButtonWeekly_CheckedChanged(object sender, System.EventArgs e)
         {
+            if (sender == null || !((RadioButton) sender).Checked)
+                return;
+
             ShowPanel(panelWeekly);
             daysWeekCheckboxes.Days = "monday";
             numericUpDownRetention.Value = 4;
