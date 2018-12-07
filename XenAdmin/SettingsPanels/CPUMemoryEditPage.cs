@@ -476,15 +476,15 @@ namespace XenAdmin.SettingsPanels
             if (selectedAffinity == null && vm.Connection.Cache.Hosts.Length == 1)
                 selectedAffinity = vm.Connection.Cache.Hosts[0];
 
-            if (selectedAffinity != null && selectedAffinity.host_CPUs.Count < (long)comboBoxVCPUs.SelectedItem)
+            if (selectedAffinity != null && comboBoxVCPUs.SelectedItem != null && selectedAffinity.host_CPUs.Count < SelectedVcpusMax)
             {
-                VCPUWarningLabel.Visible = true;
                 VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_WARNING;
+                VCPUWarningLabel.Visible = true;
             }
             else if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax < minVCPUs)
             {
-                VCPUWarningLabel.Visible = true;
                 VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                VCPUWarningLabel.Visible = true;
             }
             else
             {
@@ -493,8 +493,8 @@ namespace XenAdmin.SettingsPanels
 
             if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVcpusAtStartup < minVCPUs)
             {
-                initialVCPUWarningLabel.Visible = true;
                 initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                initialVCPUWarningLabel.Visible = true;
             }
             else
             {

@@ -437,8 +437,8 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax < minVCPUs)
             {
-                vCPUWarningLabel.Visible = true;
                 vCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                vCPUWarningLabel.Visible = true;
             }
             else
             {
@@ -447,8 +447,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVcpusAtStartup < minVCPUs)
             {
-                initialVCPUWarningLabel.Visible = true;
                 initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                initialVCPUWarningLabel.Visible = true;
             }
             else
             {

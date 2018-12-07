@@ -37068,7 +37068,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is recommended to allocate at least {0} virtual CPUs for this virtual machine.
+        ///   Looks up a localized string similar to It is recommended to allocate at least {0} vCPUs for this VM.
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_MIN_WARNING {
             get {
