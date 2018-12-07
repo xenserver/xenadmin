@@ -53,7 +53,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelDaily = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.InfoLabel = new System.Windows.Forms.Label();
-            this.TimeDetailsLabel = new System.Windows.Forms.Label();
+            this.TimeDetailsLabel = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.sectionLabelSchedule = new XenAdmin.Controls.SectionHeaderLabel();
@@ -369,7 +369,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label InfoLabel;
-        private System.Windows.Forms.Label TimeDetailsLabel;
         private System.Windows.Forms.Label label1;
+        private Controls.Common.AutoHeightLabel TimeDetailsLabel;
     }
 }
