@@ -119,10 +119,10 @@ namespace XenAdmin.Controls.Ballooning
             this.tableLayoutPanel2.Controls.Add(this.labelTotal, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.valueControlDomain, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.labelOvercommit, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.valueTotDynMax, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.valueAvail, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.valueUsed, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.valueTotal, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.valueTotDynMax, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.valueAvail, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.valueUsed, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.valueTotal, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.labelUsed, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.labelControlDomain, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.labelAvail, 0, 3);
