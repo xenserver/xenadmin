@@ -72,6 +72,7 @@
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
+    <Compile Include="UnitTests\VMSSClientTimeTests.cs" />
     <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />
     <Compile Include="XenModelTests\ActionTests\VMActionsTest.cs" />
     <Compile Include="MainWindowWrapper\AttachDiskDialogWrapper.cs" />

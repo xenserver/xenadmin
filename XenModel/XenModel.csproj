@@ -345,6 +345,7 @@
     <Compile Include="XenAPI-Extensions\pvs_proxy_status.cs" />
     <Compile Include="XenAPI-Extensions\PVS_site.cs" />
     <Compile Include="XenAPI-Extensions\PVS_proxy.cs" />
+    <Compile Include="XenAPI-Extensions\VMSSClientTime.cs" />
     <Compile Include="XenAPI-Extensions\VM_Docker_Info.cs" />
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />
     <Compile Include="XenAPI-Extensions\PGPU.cs" />
