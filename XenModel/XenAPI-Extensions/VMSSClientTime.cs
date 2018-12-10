@@ -41,15 +41,18 @@ namespace XenAPI
             vmss_frequency frequency,
             Dictionary<string, string> schedule)
         {
+            string hour;
+            string min;
+            string days;
+            var output = new Dictionary<string, string>();
+
             switch (frequency)
             {
                 case vmss_frequency.hourly:
-                    var output = new Dictionary<string, string>();
-
-                    if (schedule.TryGetValue("hour", out var hour))
+                    if (schedule.TryGetValue("hour", out hour))
                         output["hour"] = hour;
 
-                    if (schedule.TryGetValue("min", out var min))
+                    if (schedule.TryGetValue("min", out min))
                     {
                         var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
                         if (newMin < 0)
@@ -57,12 +60,31 @@ namespace XenAPI
                         output["min"] = newMin.ToString();
                     }
 
-                    if (schedule.TryGetValue("days", out var days))
+                    if (schedule.TryGetValue("days", out days))
                         output["days"] = days;
 
                     return output;
                 case vmss_frequency.daily:
-                    throw new NotImplementedException("Unhandled vmss_frequency value.");
+                    if (schedule.TryGetValue("hour", out hour))
+                    {
+                        var newHour = (int.Parse(hour) + timeDiff.TotalHours) % 24;
+                        if (newHour < 0)
+                            newHour = 24 - Math.Abs(newHour);
+                        output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
+                    }
+
+                    if (schedule.TryGetValue("min", out min))
+                    {
+                        var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
+                        if (newMin < 0)
+                            newMin = 60 - Math.Abs(newMin);
+                        output["min"] = newMin.ToString();
+                    }
+
+                    if (schedule.TryGetValue("days", out days))
+                        output["days"] = days;
+
+                    return output;
                 case vmss_frequency.weekly:
                     throw new NotImplementedException("Unhandled vmss_frequency value.");
                 case vmss_frequency.unknown:
