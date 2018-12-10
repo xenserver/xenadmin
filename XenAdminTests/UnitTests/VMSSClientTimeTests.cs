@@ -49,7 +49,10 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void Hourly_with_zero_diff()
         {
-            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(TimeSpan.Zero, vmss_frequency.hourly, _givenSettings);
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.Zero,
+                vmss_frequency.hourly,
+                _givenSettings);
             var expected = _givenSettings;
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -57,7 +60,10 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void Hourly_with_quarter_of_an_hour_diff()
         {
-            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(TimeSpan.FromMinutes(15), vmss_frequency.hourly, _givenSettings);
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(15),
+                vmss_frequency.hourly,
+                _givenSettings);
             var expected = new Dictionary<string, string>
             {
                 { "hour", "0" },
@@ -70,7 +76,10 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void Hourly_with_minus_half_an_hour_diff()
         {
-            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(TimeSpan.FromMinutes(-30), vmss_frequency.hourly, _givenSettings);
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(-30),
+                vmss_frequency.hourly,
+                _givenSettings);
             var expected = new Dictionary<string, string>
             {
                 { "hour", "0" },
@@ -83,7 +92,10 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void Hourly_with_three_quarters_of_an_hour_diff()
         {
-            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(TimeSpan.FromMinutes(45), vmss_frequency.hourly, _givenSettings);
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(45),
+                vmss_frequency.hourly,
+                _givenSettings);
             var expected = new Dictionary<string, string>
             {
                 { "hour", "0" },
@@ -96,7 +108,10 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void Hourly_with_an_hour_diff()
         {
-            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(TimeSpan.FromMinutes(60), vmss_frequency.hourly, _givenSettings);
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(60),
+                vmss_frequency.hourly,
+                _givenSettings);
             var expected = _givenSettings;
             Assert.That(actual, Is.EquivalentTo(expected));
         }

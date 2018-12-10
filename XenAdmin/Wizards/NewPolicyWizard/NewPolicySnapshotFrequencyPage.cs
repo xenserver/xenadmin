@@ -343,8 +343,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             if (ServerLocalTime.HasValue)
             {
                 var currentPolicy = CurrentPolicy;
-                nextRunTime = currentPolicy.GetNextRunTime(ServerLocalTime.Value).ToLocalTime();
-                correspondingServerTime = currentPolicy.GetNextRunTime(ServerLocalTime.Value);
+                var localTime = DateTime.Now;
+                var serverTime = DateTime.UtcNow.Subtract(Pool.Connection.ServerTimeOffset);
+                //TODO: check
+                nextRunTime = currentPolicy.GetNextRunTime(localTime);
+                correspondingServerTime = currentPolicy.GetNextRunTime(serverTime);
             }
 
             TimeDetailsLabel.Text = string.Format(
