@@ -49,9 +49,6 @@ namespace XenAPI
             switch (frequency)
             {
                 case vmss_frequency.hourly:
-                    if (schedule.TryGetValue("hour", out hour))
-                        output["hour"] = hour;
-
                     if (schedule.TryGetValue("min", out min))
                     {
                         var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
@@ -59,26 +56,29 @@ namespace XenAPI
                             newMin = 60 - Math.Abs(newMin);
                         output["min"] = newMin.ToString();
                     }
+
+                    if (schedule.TryGetValue("hour", out hour))
+                        output["hour"] = hour;
 
                     if (schedule.TryGetValue("days", out days))
                         output["days"] = days;
 
                     return output;
                 case vmss_frequency.daily:
-                    if (schedule.TryGetValue("hour", out hour))
-                    {
-                        var newHour = (int.Parse(hour) + timeDiff.TotalHours) % 24;
-                        if (newHour < 0)
-                            newHour = 24 - Math.Abs(newHour);
-                        output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
-                    }
-
                     if (schedule.TryGetValue("min", out min))
                     {
                         var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
                         if (newMin < 0)
                             newMin = 60 - Math.Abs(newMin);
                         output["min"] = newMin.ToString();
+                    }
+
+                    if (schedule.TryGetValue("hour", out hour))
+                    {
+                        var newHour = (int.Parse(hour) + timeDiff.TotalHours + TimeSpan.FromMinutes(int.Parse(min)).TotalHours) % 24;
+                        if (newHour < 0)
+                            newHour = 24 - Math.Abs(newHour);
+                        output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
                     }
 
                     if (schedule.TryGetValue("days", out days))

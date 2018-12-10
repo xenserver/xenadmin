@@ -142,5 +142,21 @@ namespace XenAdminTests.UnitTests
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
+
+        [Test]
+        public void Daily_with_three_quarters_of_an_hour_diff()
+        {
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(45),
+                vmss_frequency.daily,
+                _givenSettings);
+            var expected = new Dictionary<string, string>
+            {
+                { "hour", "1" },
+                { "min", "0" },
+                { "days", "Monday" }
+            };
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
     }
 }
