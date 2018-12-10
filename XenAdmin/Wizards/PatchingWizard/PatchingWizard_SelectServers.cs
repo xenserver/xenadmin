@@ -1009,8 +1009,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 _poolCheckBoxCell = new DataGridViewCheckBoxCell { ThreeState = true };
 
-                _expansionCell = new DataGridViewImageCell();
-
                 if (IsPoolOrStandaloneHost)
                     _poolIconHostCheckCell = new DataGridViewIconCell(); 
                 else

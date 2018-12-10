@@ -283,12 +283,12 @@ namespace XenAdmin.TabPages
 
         private class UpdatePageDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
-            private DataGridViewImageCell _poolIconCell;
-            private DataGridViewTextBoxCell _versionCell;
-            private DataGridViewImageCell _patchingStatusCell;
-            private DataGridViewTextBoxCell _statusCell;
-            private DataGridViewTextBoxCell _requiredUpdateCell;
-            private DataGridViewTextBoxCell _installedUpdateCell;
+            private readonly DataGridViewImageCell _poolIconCell = new DataGridViewImageCell();
+            private readonly DataGridViewTextBoxCell _versionCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewImageCell _patchingStatusCell = new DataGridViewImageCell();
+            private readonly DataGridViewTextBoxCell _statusCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _requiredUpdateCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _installedUpdateCell = new DataGridViewTextBoxCell();
 
             public UpdatePageDataGridViewRow(Pool pool, bool isFullyPopulated)
                 : base(pool)
@@ -333,18 +333,10 @@ namespace XenAdmin.TabPages
 
             private void SetupCells()
             {
-                _expansionCell = new DataGridViewImageCell();
-                _poolIconCell = new DataGridViewImageCell();
                 _nameCell = new DataGridViewTextAndImageCell();
-                _versionCell = new DataGridViewTextBoxCell();
-                _patchingStatusCell = new DataGridViewImageCell();
-                _statusCell = new DataGridViewTextBoxCell();
-                _requiredUpdateCell = new DataGridViewTextBoxCell();
-                _installedUpdateCell = new DataGridViewTextBoxCell();
+                Cells.AddRange(_expansionCell, _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell);
 
-                Cells.AddRange(new DataGridViewCell[] { _expansionCell, _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell });
-
-                this.UpdateDetails();
+                UpdateDetails();
             }
 
             // fill data into row

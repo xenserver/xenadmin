@@ -177,7 +177,6 @@ namespace XenAdmin.Controls.DataGridViewEx
                 IndeterminateValue = CheckState.Indeterminate,
             }; 
 
-            _expansionCell = new DataGridViewImageCell();
             _nameCell = new DataGridViewNameCell();
 
             Cells.AddRange(_expansionCell, _poolCheckBoxCell, _nameCell);
