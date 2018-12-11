@@ -40,89 +40,40 @@ namespace XenAPI
     {
         public static Dictionary<string, string> FindScheduleWithGivenTimeOffset(
             TimeSpan timeDiff,
-            vmss_frequency frequency,
             Dictionary<string, string> schedule)
         {
-            string hour;
-            string min;
-            string days;
             var output = new Dictionary<string, string>();
 
-            switch (frequency)
+            if (schedule.TryGetValue("min", out var min))
             {
-                case vmss_frequency.hourly:
-                    if (schedule.TryGetValue("min", out min))
-                    {
-                        var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
-                        if (newMin < 0)
-                            newMin = 60 - Math.Abs(newMin);
-                        output["min"] = newMin.ToString();
-                    }
-
-                    if (schedule.TryGetValue("hour", out hour))
-                        output["hour"] = hour;
-
-                    if (schedule.TryGetValue("days", out days))
-                        output["days"] = days;
-
-                    return output;
-                case vmss_frequency.daily:
-                    if (schedule.TryGetValue("min", out min))
-                    {
-                        var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
-                        if (newMin < 0)
-                            newMin = 60 - Math.Abs(newMin);
-                        output["min"] = newMin.ToString();
-                    }
-
-                    if (schedule.TryGetValue("hour", out hour))
-                    {
-                        var newHour = (int.Parse(hour) + timeDiff.TotalHours + TimeSpan.FromMinutes(int.Parse(min)).TotalHours) % 24;
-                        if (newHour < 0)
-                            newHour = 24 - Math.Abs(newHour);
-                        output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
-                    }
-
-                    if (schedule.TryGetValue("days", out days))
-                        output["days"] = days;
-
-                    return output;
-                case vmss_frequency.weekly:
-                    if (schedule.TryGetValue("min", out min))
-                    {
-                        var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
-                        if (newMin < 0)
-                            newMin = 60 - Math.Abs(newMin);
-                        output["min"] = newMin.ToString();
-                    }
-
-                    if (schedule.TryGetValue("hour", out hour))
-                    {
-                        var newHour = (int.Parse(hour) + timeDiff.TotalHours + TimeSpan.FromMinutes(int.Parse(min)).TotalHours) % 24;
-                        if (newHour < 0)
-                            newHour = 24 - Math.Abs(newHour);
-                        output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
-                    }
-
-                    if (schedule.TryGetValue("days", out days))
-                    {
-                        var dayOffset = Convert.ToInt32(Math.Floor((timeDiff + TimeSpan.FromHours(int.Parse(hour)) + TimeSpan.FromMinutes(int.Parse(min))).TotalDays));
-                        var originalDays = new List<DayOfWeek>();
-                        foreach (var dayText in days.Split(','))
-                        {
-                            if (Enum.TryParse(dayText, out DayOfWeek day))
-                                originalDays.Add(day);
-                        }
-                        var newDays = Util.DaysOfWeekWithOffset(originalDays, dayOffset);
-                        output["days"] = string.Join(",", newDays.Select(day => day.ToString()));
-                    }
-
-                    return output;
-                case vmss_frequency.unknown:
-                    return schedule;
-                default:
-                    throw new ArgumentException("Unhandled vmss_frequency value.");
+                var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
+                if (newMin < 0)
+                    newMin = 60 - Math.Abs(newMin);
+                output["min"] = newMin.ToString();
             }
+
+            if (schedule.TryGetValue("hour", out var hour))
+            {
+                var newHour = (int.Parse(hour) + timeDiff.TotalHours + TimeSpan.FromMinutes(int.Parse(min)).TotalHours) % 24;
+                if (newHour < 0)
+                    newHour = 24 - Math.Abs(newHour);
+                output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
+            }
+
+            if (schedule.TryGetValue("days", out var days))
+            {
+                var dayOffset = Convert.ToInt32(Math.Floor((timeDiff + TimeSpan.FromHours(int.Parse(hour)) + TimeSpan.FromMinutes(int.Parse(min))).TotalDays));
+                var originalDays = new List<DayOfWeek>();
+                foreach (var dayText in days.Split(','))
+                {
+                    if (Enum.TryParse(dayText, out DayOfWeek day))
+                        originalDays.Add(day);
+                }
+                var newDays = Util.DaysOfWeekWithOffset(originalDays, dayOffset);
+                output["days"] = string.Join(",", newDays.Select(day => day.ToString()));
+            }
+
+            return output;
         }
     }
 }

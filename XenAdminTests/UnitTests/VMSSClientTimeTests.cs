@@ -39,10 +39,21 @@ namespace XenAdminTests.UnitTests
     [TestFixture, Category(TestCategories.Unit)]
     public class VMSSClientTimeTests
     {
-        private readonly Dictionary<string, string> _givenSettings = new Dictionary<string, string>
+        private readonly Dictionary<string, string> _hourlySettings = new Dictionary<string, string>
         {
-            { "hour", "0" },
             { "min", "15" },
+        };
+
+        private readonly Dictionary<string, string> _dailySettings = new Dictionary<string, string>
+        {
+            { "min", "15" },
+            { "hour", "0" }
+        };
+
+        private readonly Dictionary<string, string> _weeklySettings = new Dictionary<string, string>
+        {
+            { "min", "15" },
+            { "hour", "0" },
             { "days", "Monday" }
         };
 
@@ -51,9 +62,8 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.Zero,
-                vmss_frequency.hourly,
-                _givenSettings);
-            var expected = _givenSettings;
+                _hourlySettings);
+            var expected = _hourlySettings;
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -62,13 +72,10 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(15),
-                vmss_frequency.hourly,
-                _givenSettings);
+                _hourlySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "0" },
-                { "min", "30" },
-                { "days", "Monday" }
+                { "min", "30" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -78,13 +85,10 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(-30),
-                vmss_frequency.hourly,
-                _givenSettings);
+                _hourlySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "0" },
-                { "min", "45" },
-                { "days", "Monday" }
+                { "min", "45" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -94,13 +98,10 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(45),
-                vmss_frequency.hourly,
-                _givenSettings);
+                _hourlySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "0" },
-                { "min", "0" },
-                { "days", "Monday" }
+                { "min", "0" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -110,9 +111,8 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(60),
-                vmss_frequency.hourly,
-                _givenSettings);
-            var expected = _givenSettings;
+                _hourlySettings);
+            var expected = _hourlySettings;
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -121,9 +121,8 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.Zero,
-                vmss_frequency.daily,
-                _givenSettings);
-            var expected = _givenSettings;
+                _dailySettings);
+            var expected = _dailySettings;
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -132,13 +131,11 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(-30),
-                vmss_frequency.daily,
-                _givenSettings);
+                _dailySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "23" },
                 { "min", "45" },
-                { "days", "Monday" }
+                { "hour", "23" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -148,13 +145,11 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(45),
-                vmss_frequency.daily,
-                _givenSettings);
+                _dailySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "1" },
                 { "min", "0" },
-                { "days", "Monday" }
+                { "hour", "1" },
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -164,9 +159,8 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.Zero,
-                vmss_frequency.weekly,
-                _givenSettings);
-            var expected = _givenSettings;
+                _weeklySettings);
+            var expected = _weeklySettings;
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -175,12 +169,11 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(-30),
-                vmss_frequency.weekly,
-                _givenSettings);
+                _weeklySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "23" },
                 { "min", "45" },
+                { "hour", "23" },
                 { "days", "Sunday" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
@@ -191,12 +184,11 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromMinutes(45),
-                vmss_frequency.weekly,
-                _givenSettings);
+                _weeklySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "1" },
                 { "min", "0" },
+                { "hour", "1" },
                 { "days", "Monday" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
@@ -207,12 +199,11 @@ namespace XenAdminTests.UnitTests
         {
             var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
                 TimeSpan.FromHours(23) + TimeSpan.FromMinutes(45),
-                vmss_frequency.weekly,
-                _givenSettings);
+                _weeklySettings);
             var expected = new Dictionary<string, string>
             {
-                { "hour", "0" },
                 { "min", "0" },
+                { "hour", "0" },
                 { "days", "Tuesday" }
             };
             Assert.That(actual, Is.EquivalentTo(expected));
