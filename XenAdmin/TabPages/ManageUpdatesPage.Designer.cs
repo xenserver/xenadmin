@@ -121,6 +121,7 @@
             resources.ApplyResources(this.informationLabel, "informationLabel");
             this.informationLabel.Name = "informationLabel";
             this.informationLabel.TabStop = true;
+            this.informationLabel.Click += new System.EventHandler(this.informationLabel_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -164,13 +165,11 @@
             // 
             // byUpdateToolStripMenuItem
             // 
-            this.byUpdateToolStripMenuItem.Checked = true;
             this.byUpdateToolStripMenuItem.CheckOnClick = true;
-            this.byUpdateToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.byUpdateToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
             resources.ApplyResources(this.byUpdateToolStripMenuItem, "byUpdateToolStripMenuItem");
             this.byUpdateToolStripMenuItem.Name = "byUpdateToolStripMenuItem";
-            this.byUpdateToolStripMenuItem.Click += new System.EventHandler(this.byUpdateToolStripMenuItem_Click);
+            this.byUpdateToolStripMenuItem.CheckedChanged += new System.EventHandler(this.byUpdateToolStripMenuItem_CheckedChanged);
             // 
             // byHostToolStripMenuItem
             // 
@@ -178,7 +177,7 @@
             this.byHostToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_TreeConnected_h32bit_16;
             resources.ApplyResources(this.byHostToolStripMenuItem, "byHostToolStripMenuItem");
             this.byHostToolStripMenuItem.Name = "byHostToolStripMenuItem";
-            this.byHostToolStripMenuItem.Click += new System.EventHandler(this.byHostToolStripMenuItem_Click);
+            this.byHostToolStripMenuItem.CheckedChanged += new System.EventHandler(this.byHostToolStripMenuItem_CheckedChanged);
             // 
             // toolStripSeparator2
             // 
