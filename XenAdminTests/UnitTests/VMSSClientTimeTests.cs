@@ -158,5 +158,48 @@ namespace XenAdminTests.UnitTests
             };
             Assert.That(actual, Is.EquivalentTo(expected));
         }
+
+        [Test]
+        public void Weekly_with_zero_diff()
+        {
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.Zero,
+                vmss_frequency.weekly,
+                _givenSettings);
+            var expected = _givenSettings;
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void Weekly_with_minus_half_an_hour_diff()
+        {
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(-30),
+                vmss_frequency.weekly,
+                _givenSettings);
+            var expected = new Dictionary<string, string>
+            {
+                { "hour", "23" },
+                { "min", "45" },
+                { "days", "Sunday" }
+            };
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void Weekly_with_three_quarters_of_an_hour_diff()
+        {
+            var actual = VMSSClient.FindScheduleWithGivenTimeOffset(
+                TimeSpan.FromMinutes(45),
+                vmss_frequency.weekly,
+                _givenSettings);
+            var expected = new Dictionary<string, string>
+            {
+                { "hour", "1" },
+                { "min", "0" },
+                { "days", "Monday" }
+            };
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
     }
 }
