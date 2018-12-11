@@ -58,7 +58,7 @@ namespace XenAdminTests.XenModelTests
         }
 
         [Test]
-        public void Empty_list_tommorrow()
+        public void Empty_list_tomorrow()
         {
             Assert.That(Util.DaysOfWeekWithOffset(new List<DayOfWeek>(), 1), Is.Empty);
         }
@@ -72,7 +72,7 @@ namespace XenAdminTests.XenModelTests
         }
 
         [Test]
-        public void Assorted_days_tommorrow()
+        public void Assorted_days_tomorrow()
         {
             var given = new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday };
             var expected = new List<DayOfWeek> { DayOfWeek.Tuesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Monday };
