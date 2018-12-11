@@ -11513,15 +11513,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No updates found because automatic checking for updates is disabled..
-        /// </summary>
-        public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
-            get {
-                return ResourceManager.GetString("DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; disabled..
         /// </summary>
         public static string DISABLED_VMSS {
@@ -22122,15 +22113,6 @@ namespace XenAdmin {
         public static string MAKE_DEFAULT_SR {
             get {
                 return ResourceManager.GetString("MAKE_DEFAULT_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No update is needed..
-        /// </summary>
-        public static string MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE {
-            get {
-                return ResourceManager.GetString("MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE", resourceCulture);
             }
         }
         

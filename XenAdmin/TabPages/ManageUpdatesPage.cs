@@ -67,7 +67,6 @@ namespace XenAdmin.TabPages
         private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
-        private bool CheckForUpdateSucceeded;
         private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
 
         public ManageUpdatesPage()
@@ -180,7 +179,6 @@ namespace XenAdmin.TabPages
                     checkForUpdatesNowLink.Enabled = true;
                     checkForUpdatesNowButton.Visible = true;
                     spinningTimer.Stop();
-                    CheckForUpdateSucceeded = succeeded;
 
                     if (succeeded)
                     {
@@ -242,9 +240,17 @@ namespace XenAdmin.TabPages
 
         private void Rebuild()
         {
-            if (byUpdateToolStripMenuItem.Checked)    // By update view
+            Program.AssertOnEventThread();
+
+            if (!Visible || checksQueue > 0)
+                return;
+
+            SetFilterLabel();
+            ToggleTopWarningVisibility();
+
+            if (byUpdateToolStripMenuItem.Checked)
                 RebuildUpdateView();
-            else                                      // By host view
+            else
                 RebuildHostView();
         }
 
@@ -479,16 +485,6 @@ namespace XenAdmin.TabPages
 
         private void RebuildHostView()
         {
-            Program.AssertOnEventThread();
-
-            if (!Visible)
-                return;
-
-            if (checksQueue > 0)
-                return;
-
-            SetFilterLabel();
-
             try
             {
                 dataGridViewHosts.SuspendLayout();
@@ -501,8 +497,6 @@ namespace XenAdmin.TabPages
                 }
 
                 ToggleCentreWarningVisibility();
-                tableLayoutPanel3.Visible = false;
-                ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
 
                 List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
                 xenConnections.Sort();
@@ -515,7 +509,7 @@ namespace XenAdmin.TabPages
 
                     if (pool != null)          // pool row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded && VersionFoundInUpdatesXml(c));
+                        var row = new UpdatePageDataGridViewRow(pool, VersionFoundInUpdatesXml(c));
                         var hostUuidList = new List<string>();
 
                         foreach (Host h in c.Cache.Hosts)
@@ -530,7 +524,7 @@ namespace XenAdmin.TabPages
                     Array.Sort(hosts);
                     foreach (Host h in hosts)       // host row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded && VersionFoundInUpdatesXml(h));
+                        var row = new UpdatePageDataGridViewRow(h, pool != null, VersionFoundInUpdatesXml(h));
 
                         // add row based on server filter status
                         if (!toolStripDropDownButtonServerFilter.HideByLocation(h.uuid))
@@ -585,16 +579,6 @@ namespace XenAdmin.TabPages
 
         private void RebuildUpdateView()
         {
-            Program.AssertOnEventThread();
-
-            if (!Visible)
-                return;
-
-            if (checksQueue > 0)
-                return;
-
-            SetFilterLabel();
-
             try
             {
                 dataGridViewUpdates.SuspendLayout();
@@ -607,15 +591,12 @@ namespace XenAdmin.TabPages
                 }
 
                 ToggleCentreWarningVisibility();
+                
                 var updates = new List<Alert>(Updates.UpdateAlerts);
                 if (updates.Count == 0)
                     return;
 
-
                 updates.RemoveAll(FilterAlert);
-                tableLayoutPanel3.Visible = false;
-                ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
-                
                 sortUpdates(updates);
 
                 var rowList = new List<DataGridViewRow>();
@@ -640,60 +621,31 @@ namespace XenAdmin.TabPages
 
         private void ToggleCentreWarningVisibility()
         {
-            var updates = new List<Alert>(Updates.UpdateAlerts);
-
-            if (updates.Count == 0)
+            if (byUpdateToolStripMenuItem.Checked && Updates.UpdateAlertsCount == 0)
             {
-                tableLayoutPanel3.Visible = true;
                 pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
-
-                if (AllUpdatesDisabled())
-                {
-                    labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
-                    ToggleWarningVisibility(false);
-                }
-                else
-                {
-                    labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
-                    ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
-                }
+                labelProgress.Text =  Messages.AVAILABLE_UPDATES_NOT_FOUND;
+                tableLayoutPanel3.Visible = true;
+            }
+            else
+            {
+                tableLayoutPanel3.Visible = false;
             }
         }
 
         /// <summary>
-        /// Toggles the viibility of the warning that appears above the grid saying:
+        /// Toggles the visibility of the warning that appears above the grid saying:
         /// "Automatic checking for updates is disabled for some types of updates".
         /// </summary>
-        private void ToggleWarningVisibility(bool visible)
+        private void ToggleTopWarningVisibility()
         {
+            bool visible = !Properties.Settings.Default.AllowPatchesUpdates ||
+                           !Properties.Settings.Default.AllowXenCenterUpdates ||
+                           !Properties.Settings.Default.AllowXenServerUpdates;
+
             pictureBox1.Visible = visible;
             AutoCheckForUpdatesDisabledLabel.Visible = visible;
             checkForUpdatesNowLink.Visible = visible;
-        }
-
-        /// <summary>
-        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some, but not all types of updates.
-        /// </summary>
-        /// <returns></returns>
-        private bool SomeButNotAllUpdatesDisabled()
-        {
-            return (!Properties.Settings.Default.AllowPatchesUpdates ||
-                    !Properties.Settings.Default.AllowXenCenterUpdates ||
-                    !Properties.Settings.Default.AllowXenServerUpdates) &&
-                    (Properties.Settings.Default.AllowPatchesUpdates ||
-                    Properties.Settings.Default.AllowXenCenterUpdates ||
-                    Properties.Settings.Default.AllowXenServerUpdates);
-        }
-
-        /// <summary>
-        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for all types of updates.
-        /// </summary>
-        /// <returns></returns>
-        private bool AllUpdatesDisabled()
-        {
-            return (!Properties.Settings.Default.AllowPatchesUpdates &&
-                   !Properties.Settings.Default.AllowXenCenterUpdates &&
-                   !Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         /// <summary>
@@ -750,47 +702,13 @@ namespace XenAdmin.TabPages
         private void UpdateButtonEnablement()
         {
             if (byUpdateToolStripMenuItem.Checked)
+            {
                 toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;
-
+            }
             else
             {
-                toolStripButtonExportAll.Enabled = true;
-                toolStripButtonUpdate.ToolTipText = String.Empty;
                 var connectionList = ConnectionsManager.XenConnectionsCopy;
-
-                if (!connectionList.Any(xenConnection => xenConnection.IsConnected))
-                {
-                    toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = false;
-                    return;
-                }
-
-                if (!CheckForUpdateSucceeded)
-                {
-                    toolStripButtonUpdate.Enabled = true;
-                    return;
-                }
-
-                // check Updates Availability
-                foreach (IXenConnection connection in connectionList)
-                {
-                    if (!VersionFoundInUpdatesXml(connection))
-                    {
-                        toolStripButtonUpdate.Enabled = true;
-                        return;
-                    }
-
-                    foreach (Host host in connection.Cache.Hosts)
-                    {
-                        if (RequiredUpdatesForHost(host).Length > 0)
-                        {
-                            toolStripButtonUpdate.Enabled = true;
-                            return;
-                        }
-                    }
-                }
-
-                toolStripButtonUpdate.Enabled = false;
-                toolStripButtonUpdate.ToolTipText = Messages.MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE;
+                toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = connectionList.Any(xenConnection => xenConnection.IsConnected);
             }
         }
 
@@ -915,7 +833,7 @@ namespace XenAdmin.TabPages
                     }
                     toolStripButtonRestoreDismissed.Enabled = false;
                     DeleteAllAlertsAction action = new DeleteAllAlertsAction(g.Connection, g.Alerts);
-                    action.Completed += DeleteAllAllertAction_Completed;
+                    action.Completed += DeleteAllAlertsAction_Completed;
                     action.RunAsync();
                 }
             }
@@ -926,12 +844,13 @@ namespace XenAdmin.TabPages
         /// button is enabled again.
         /// </summary>
         /// <param name="sender"></param>
-        private void DeleteAllAllertAction_Completed(ActionBase sender)
+        private void DeleteAllAlertsAction_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, () =>
             {
                 toolStripButtonRestoreDismissed.Enabled = true;
                 ToggleCentreWarningVisibility();
+                ToggleTopWarningVisibility();
             });
         }
 
@@ -1420,9 +1339,9 @@ namespace XenAdmin.TabPages
             var versionIsFound = VersionFoundInUpdatesXml(host);
 
             pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
-            requiredUpdates = CheckForUpdateSucceeded && versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
+            requiredUpdates = versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
             installedUpdates = InstalledUpdatesForHost(host);
-            patchingStatus = CheckForUpdateSucceeded && versionIsFound
+            patchingStatus = versionIsFound
                 ? (requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED)
                 : String.Empty;
 
