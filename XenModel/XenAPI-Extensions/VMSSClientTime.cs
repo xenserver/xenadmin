@@ -106,7 +106,7 @@ namespace XenAPI
 
                     if (schedule.TryGetValue("days", out days))
                     {
-                        var dayOffset = Convert.ToInt32(Math.Floor(timeDiff.TotalDays));
+                        var dayOffset = Convert.ToInt32(Math.Floor((timeDiff + TimeSpan.FromHours(int.Parse(hour)) + TimeSpan.FromMinutes(int.Parse(min))).TotalDays));
                         var originalDays = new List<DayOfWeek>();
                         foreach (var dayText in days.Split(','))
                         {
