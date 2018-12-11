@@ -1913,6 +1913,9 @@
   <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
     <value>无法在物理设备上执行该操作</value>
   </data>
+  <data name="VDI_IS_ENCRYPTED" xml:space="preserve">
+    <value>不允许执行请求的操作，因为指定的 VDI 已加密。</value>
+  </data>
   <data name="VDI_IS_NOT_ISO" xml:space="preserve">
     <value>只能在 CD VDI (iso 文件或 CDROM 驱动器)上执行该操作。VDI {0} 为 {1} 类型。</value>
   </data>
