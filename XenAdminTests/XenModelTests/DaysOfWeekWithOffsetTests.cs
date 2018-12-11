@@ -42,25 +42,25 @@ namespace XenAdminTests.XenModelTests
         [Test]
         public void Null_today()
         {
-            Assert.That(Util.DaysOfWeekOffset(null, 0), Is.Null);
+            Assert.That(Util.DaysOfWeekWithOffset(null, 0), Is.Null);
         }
 
         [Test]
         public void Null_tomorrow()
         {
-            Assert.That(Util.DaysOfWeekOffset(null, 1), Is.Null);
+            Assert.That(Util.DaysOfWeekWithOffset(null, 1), Is.Null);
         }
 
         [Test]
         public void Empty_list_today()
         {
-            Assert.That(Util.DaysOfWeekOffset(new List<DayOfWeek>(), 0), Is.Empty);
+            Assert.That(Util.DaysOfWeekWithOffset(new List<DayOfWeek>(), 0), Is.Empty);
         }
 
         [Test]
         public void Empty_list_tommorrow()
         {
-            Assert.That(Util.DaysOfWeekOffset(new List<DayOfWeek>(), 1), Is.Empty);
+            Assert.That(Util.DaysOfWeekWithOffset(new List<DayOfWeek>(), 1), Is.Empty);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace XenAdminTests.XenModelTests
         {
             var given = new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday };
             var expected = new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday };
-            Assert.That(Util.DaysOfWeekOffset(given, 0), Is.EquivalentTo(expected));
+            Assert.That(Util.DaysOfWeekWithOffset(given, 0), Is.EquivalentTo(expected));
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace XenAdminTests.XenModelTests
         {
             var given = new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday };
             var expected = new List<DayOfWeek> { DayOfWeek.Tuesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Monday };
-            Assert.That(Util.DaysOfWeekOffset(given, 1), Is.EquivalentTo(expected));
+            Assert.That(Util.DaysOfWeekWithOffset(given, 1), Is.EquivalentTo(expected));
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace XenAdminTests.XenModelTests
         {
             var given = new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday };
             var expected = new List<DayOfWeek> { DayOfWeek.Sunday, DayOfWeek.Tuesday, DayOfWeek.Thursday, DayOfWeek.Saturday };
-            Assert.That(Util.DaysOfWeekOffset(given, -1), Is.EquivalentTo(expected));
+            Assert.That(Util.DaysOfWeekWithOffset(given, -1), Is.EquivalentTo(expected));
         }
     }
 }

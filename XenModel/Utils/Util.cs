@@ -356,7 +356,7 @@ namespace XenAdmin
             }
         }
 
-        public static IEnumerable<DayOfWeek> DaysOfWeekOffset(IEnumerable<DayOfWeek> daysOfWeek, int daysDifference)
+        public static IEnumerable<DayOfWeek> DaysOfWeekWithOffset(IEnumerable<DayOfWeek> daysOfWeek, int daysDifference)
         {
             return daysOfWeek?.Select(day => DayOfWeekWithOffset(day, daysDifference));
         }

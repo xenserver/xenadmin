@@ -31,6 +31,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin;
 
 namespace XenAPI
 {
@@ -103,7 +105,17 @@ namespace XenAPI
                     }
 
                     if (schedule.TryGetValue("days", out days))
-                        output["days"] = days; //TODO
+                    {
+                        var dayOffset = Convert.ToInt32(Math.Floor(timeDiff.TotalDays));
+                        var originalDays = new List<DayOfWeek>();
+                        foreach (var dayText in days.Split(','))
+                        {
+                            if (Enum.TryParse(dayText, out DayOfWeek day))
+                                originalDays.Add(day);
+                        }
+                        var newDays = Util.DaysOfWeekWithOffset(originalDays, dayOffset);
+                        output["days"] = string.Join(",", newDays.Select(day => day.ToString()));
+                    }
 
                     return output;
                 case vmss_frequency.unknown:
