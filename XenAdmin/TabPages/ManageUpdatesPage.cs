@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -62,7 +61,7 @@ namespace XenAdmin.TabPages
         private Timer spinningTimer = new Timer();
         private ImageList imageList = new ImageList();
 
-        Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
+        private Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
         private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
@@ -75,11 +74,21 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
-            informationLabel.Click += informationLabel_Click;
             m_updateCollectionChangedWithInvoke = Program.ProgramInvokeHandler(UpdatesCollectionChanged);
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
-            toolStripButtonUpdate.Visible = false;
+
+            try
+            {
+                //ensure we won't try to rebuild the list while setting the initial view
+                checksQueue++;
+                byHostToolStripMenuItem.Checked = Properties.Settings.Default.ShowUpdatesByServer;
+                byUpdateToolStripMenuItem.Checked = !Properties.Settings.Default.ShowUpdatesByServer;
+            }
+            finally
+            {
+                checksQueue--;
+            }
         }
 
         #region NotificationPage overrides
@@ -1416,42 +1425,43 @@ namespace XenAdmin.TabPages
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
 
-        private void byUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void byUpdateToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            // Adjust checked state
-            byHostToolStripMenuItem.Checked = false;
-            byUpdateToolStripMenuItem.Checked = true;
-
-            // buttons
-            toolStripDropDownButtonDateFilter.Visible = true;
-            toolStripSplitButtonDismiss.Visible = true;
-            toolStripButtonRestoreDismissed.Visible = true;
-            toolStripButtonUpdate.Visible = false;
-
-            // Switch the grid view
-            dataGridViewUpdates.Visible = true;
-            dataGridViewHosts.Visible = false;
-            Rebuild();
+            if (byUpdateToolStripMenuItem.Checked)
+            {
+                byHostToolStripMenuItem.Checked = false;
+                ToggleView();
+            }
         }
 
-        private void byHostToolStripMenuItem_Click(object sender, EventArgs e)
+        private void byHostToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            // Adjust checked state
-            byUpdateToolStripMenuItem.Checked = false;
-            byHostToolStripMenuItem.Checked = true;
+            if (byHostToolStripMenuItem.Checked)
+            {
+                byUpdateToolStripMenuItem.Checked = false;
+                ToggleView();
+            }
+        }
+
+        private void ToggleView()
+        {
+            //store the view
+            Properties.Settings.Default.ShowUpdatesByServer = byHostToolStripMenuItem.Checked;
 
             // buttons
-            toolStripDropDownButtonDateFilter.Visible = false;
-            toolStripSplitButtonDismiss.Visible = false;
-            toolStripButtonRestoreDismissed.Visible = false;
-            toolStripButtonUpdate.Visible = true;
-
-            // Turn off Date Filter
-            toolStripDropDownButtonDateFilter.ResetFilterDates();
+            toolStripDropDownButtonDateFilter.Visible = byUpdateToolStripMenuItem.Checked;
+            toolStripSplitButtonDismiss.Visible = byUpdateToolStripMenuItem.Checked;
+            toolStripButtonRestoreDismissed.Visible = byUpdateToolStripMenuItem.Checked;
+            toolStripButtonUpdate.Visible = byHostToolStripMenuItem.Checked;
 
             // Switch the grid view
-            dataGridViewUpdates.Visible = false;
-            dataGridViewHosts.Visible = true;
+            dataGridViewUpdates.Visible = byUpdateToolStripMenuItem.Checked;
+            dataGridViewHosts.Visible = byHostToolStripMenuItem.Checked;
+
+            // Turn off Date Filter for the updates-by-server view
+            if (byHostToolStripMenuItem.Checked)
+                toolStripDropDownButtonDateFilter.ResetFilterDates();
+
             Rebuild();
         }
 
