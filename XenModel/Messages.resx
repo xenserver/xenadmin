@@ -4077,9 +4077,6 @@ This will also delete its subfolders.</value>
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Disabled clustering on {0}.</value>
   </data>
-  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
-    <value>No updates found because automatic checking for updates is disabled.</value>
-  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' disabled.</value>
   </data>
@@ -7710,9 +7707,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{0} (management) on {1}</value>
-  </data>
-  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
-    <value>No update is needed.</value>
   </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage required for some hosts</value>
