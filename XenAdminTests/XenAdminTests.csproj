@@ -69,6 +69,7 @@
     <Compile Include="UnitTests\BatchUpdatesTests\BatchUpdatesTests.cs" />
     <Compile Include="UnitTests\CPUFeaturesTest.cs" />
     <Compile Include="UnitTests\AlertTests\MultipathAlertTest.cs" />
+    <Compile Include="XenModelTests\DayOfWeekWithOffsetTests.cs" />
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
@@ -373,6 +374,7 @@
     <Compile Include="WizardTests\ResidentHostIsSameAsSelectionFilterTests.cs" />
     <Compile Include="WizardTests\RollingUpgradeWizardTest.cs" />
     <Compile Include="XenModelTests\ActionTestBase.cs" />
+    <Compile Include="XenModelTests\DaysOfWeekWithOffsetTests.cs" />
     <Compile Include="XenModelTests\DestroyPolicyActionTests.cs" />
     <Compile Include="XenModelTests\DestroyVMTests.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockActionFactory.cs" />
