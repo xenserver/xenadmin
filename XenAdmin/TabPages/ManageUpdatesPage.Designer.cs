@@ -378,7 +378,7 @@
             // 
             this.ColumnExpansion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
+            dataGridViewCellStyle1.NullValue = null;
             this.ColumnExpansion.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.ColumnExpansion, "ColumnExpansion");
             this.ColumnExpansion.Name = "ColumnExpansion";
@@ -388,7 +388,7 @@
             // 
             this.ColumnIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
+            dataGridViewCellStyle2.NullValue = null;
             this.ColumnIcon.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ColumnIcon, "ColumnIcon");
             this.ColumnIcon.Name = "ColumnIcon";
@@ -470,7 +470,7 @@
             // 
             this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle4.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle4.NullValue")));
+            dataGridViewCellStyle4.NullValue = null;
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");

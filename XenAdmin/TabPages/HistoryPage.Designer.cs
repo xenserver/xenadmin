@@ -37,7 +37,7 @@ namespace XenAdmin.TabPages
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.toolStripTop = new System.Windows.Forms.ToolStrip();
+            this.toolStripTop = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDdbFilterStatus = new XenAdmin.Controls.FilterStatusToolStripDropDownButton();
             this.toolStripDdbFilterLocation = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDdbFilterDates = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
@@ -64,6 +64,7 @@ namespace XenAdmin.TabPages
             // 
             resources.ApplyResources(this.toolStripTop, "toolStripTop");
             this.toolStripTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripTop.ClickThrough = true;
             this.toolStripTop.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDdbFilterStatus,
@@ -234,7 +235,7 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStripTop;
+        private XenAdmin.Controls.ToolStripEx toolStripTop;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
