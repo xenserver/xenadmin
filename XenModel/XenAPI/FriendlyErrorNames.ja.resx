@@ -1913,6 +1913,9 @@
   <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
     <value>この処理は物理デバイスに対して実行できません。</value>
   </data>
+  <data name="VDI_IS_ENCRYPTED" xml:space="preserve">
+    <value>指定された VDI が暗号化されていないため、要求された操作は許可されていません。</value>
+  </data>
   <data name="VDI_IS_NOT_ISO" xml:space="preserve">
     <value>この処理は CD VDI (ISO ファイルまたは CD ドライブ) に対してのみ実行できます。VDI {0} の種類は {1} です。</value>
   </data>
