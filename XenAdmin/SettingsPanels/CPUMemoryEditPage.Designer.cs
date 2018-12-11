@@ -51,6 +51,7 @@ namespace XenAdmin.SettingsPanels
             this.VCPUWarningLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
+            this.initialVCPUWarningLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).BeginInit();
@@ -75,25 +76,26 @@ namespace XenAdmin.SettingsPanels
             // lblPriority
             // 
             resources.ApplyResources(this.lblPriority, "lblPriority");
-            this.tableLayoutPanel1.SetColumnSpan(this.lblPriority, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.lblPriority, 4);
             this.lblPriority.Name = "lblPriority";
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.initialVCPUWarningLabel, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxInitialVCPUs, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelInitialVCPUs, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.MemWarningLabel, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.MemWarningLabel, 3, 10);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.lblVCPUs, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblVcpuWarning, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.VCPUWarningLabel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 2);
@@ -105,6 +107,7 @@ namespace XenAdmin.SettingsPanels
             this.comboBoxInitialVCPUs.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxInitialVCPUs, "comboBoxInitialVCPUs");
             this.comboBoxInitialVCPUs.Name = "comboBoxInitialVCPUs";
+            this.comboBoxInitialVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxInitialVCPUs_SelectedIndexChanged);
             // 
             // labelInitialVCPUs
             // 
@@ -114,13 +117,13 @@ namespace XenAdmin.SettingsPanels
             // labelInvalidVCPUWarning
             // 
             resources.ApplyResources(this.labelInvalidVCPUWarning, "labelInvalidVCPUWarning");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelInvalidVCPUWarning, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.labelInvalidVCPUWarning, 3);
             this.labelInvalidVCPUWarning.ForeColor = System.Drawing.Color.Red;
             this.labelInvalidVCPUWarning.Name = "labelInvalidVCPUWarning";
             // 
             // comboBoxTopology
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 3);
             this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
             this.comboBoxTopology.FormattingEnabled = true;
@@ -142,6 +145,7 @@ namespace XenAdmin.SettingsPanels
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
+            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.lblMB);
             this.panel2.Controls.Add(this.nudMemory);
             this.panel2.Name = "panel2";
@@ -175,7 +179,7 @@ namespace XenAdmin.SettingsPanels
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
-            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 4);
             this.panel1.Controls.Add(this.lblSliderHighest);
             this.panel1.Controls.Add(this.lblSliderNormal);
             this.panel1.Controls.Add(this.lblSliderLowest);
@@ -197,7 +201,7 @@ namespace XenAdmin.SettingsPanels
             // lblVcpuWarning
             // 
             resources.ApplyResources(this.lblVcpuWarning, "lblVcpuWarning");
-            this.tableLayoutPanel1.SetColumnSpan(this.lblVcpuWarning, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.lblVcpuWarning, 4);
             this.lblVcpuWarning.LinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblVcpuWarning.Name = "lblVcpuWarning";
             this.lblVcpuWarning.TabStop = true;
@@ -211,6 +215,7 @@ namespace XenAdmin.SettingsPanels
             // VCPUWarningLabel
             // 
             resources.ApplyResources(this.VCPUWarningLabel, "VCPUWarningLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.VCPUWarningLabel, 2);
             this.VCPUWarningLabel.ForeColor = System.Drawing.Color.Red;
             this.VCPUWarningLabel.Name = "VCPUWarningLabel";
             this.tableLayoutPanel1.SetRowSpan(this.VCPUWarningLabel, 2);
@@ -218,7 +223,7 @@ namespace XenAdmin.SettingsPanels
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 4);
             this.label1.Name = "label1";
             // 
             // comboBoxVCPUs
@@ -228,6 +233,13 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.comboBoxVCPUs, "comboBoxVCPUs");
             this.comboBoxVCPUs.Name = "comboBoxVCPUs";
             this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxVCPUs_SelectedIndexChanged);
+            // 
+            // initialVCPUWarningLabel
+            // 
+            resources.ApplyResources(this.initialVCPUWarningLabel, "initialVCPUWarningLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.initialVCPUWarningLabel, 2);
+            this.initialVCPUWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.initialVCPUWarningLabel.Name = "initialVCPUWarningLabel";
             // 
             // CPUMemoryEditPage
             // 
@@ -273,5 +285,6 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.ComboBox comboBoxVCPUs;
         private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
         private System.Windows.Forms.Label labelInitialVCPUs;
+        private System.Windows.Forms.Label initialVCPUWarningLabel;
     }
 }

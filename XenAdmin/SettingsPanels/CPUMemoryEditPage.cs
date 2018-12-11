@@ -56,6 +56,7 @@ namespace XenAdmin.SettingsPanels
         private decimal _OrigVCPUWeight;
         private decimal _CurrentVCPUWeight;
         private bool isVcpuHotplugSupported;
+        private int minVCPUs;
 
         // Please note that the comboBoxVCPUs control can represent two different VM properties, depending whether the VM supports vCPU hotplug or not: 
         // If vCPU hotplug is supported, comboBoxVCPUs represents the maximum number of vCPUs (VCPUs_max). And the initial number of vCPUs is represented in comboBoxInitialVCPUs (which is only visible in this case) 
@@ -217,6 +218,7 @@ namespace XenAdmin.SettingsPanels
             }
 
             isVcpuHotplugSupported = vm.SupportsVcpuHotplug();
+            minVCPUs = vm.MinVCPUs();
 
             label1.Text = GetRubric();
 
@@ -460,13 +462,13 @@ namespace XenAdmin.SettingsPanels
 
         private void comboBoxVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ShowVcpuError(false, true);
-            comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
             ValidateVCPUSettings();
+            comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
+            ValidateTopologySettings();
             RefreshCurrentVCPUs();
         }
 
-        private void ShowVcpuError(bool showAlways, bool testValue)
+        private void ValidateVCPUSettings()
         {
             if (vm == null || !comboBoxVCPUs.Enabled)
                 return;
@@ -474,14 +476,36 @@ namespace XenAdmin.SettingsPanels
             if (selectedAffinity == null && vm.Connection.Cache.Hosts.Length == 1)
                 selectedAffinity = vm.Connection.Cache.Hosts[0];
 
-            if (showAlways || (testValue && (selectedAffinity != null && selectedAffinity.host_CPUs.Count < (long)comboBoxVCPUs.SelectedItem)))
+            if (selectedAffinity != null && comboBoxVCPUs.SelectedItem != null && selectedAffinity.host_CPUs.Count < SelectedVcpusMax)
             {
+                VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_WARNING;
+                VCPUWarningLabel.Visible = true;
+            }
+            else if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax < minVCPUs)
+            {
+                VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
                 VCPUWarningLabel.Visible = true;
             }
             else
             {
                 VCPUWarningLabel.Visible = false;
             }
+
+            if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVcpusAtStartup < minVCPUs)
+            {
+                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                initialVCPUWarningLabel.Visible = true;
+            }
+            else
+            {
+                initialVCPUWarningLabel.Visible = false;
+            }
+        }
+
+        private void ValidateTopologySettings()
+        {
+            if (comboBoxVCPUs.SelectedItem != null)
+                labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
         }
 
         private long _prevVCPUsMax;
@@ -519,13 +543,12 @@ namespace XenAdmin.SettingsPanels
         
         private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ValidateVCPUSettings();
+            ValidateTopologySettings();
         }
 
-        private void ValidateVCPUSettings()
+        private void comboBoxInitialVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxVCPUs.SelectedItem != null)
-                labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
+            ValidateVCPUSettings();
         }
     }
 }

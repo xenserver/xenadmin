@@ -38,6 +38,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.spinnerDynMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.spinnerStatMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.vCPUWarningLabel = new System.Windows.Forms.Label();
+            this.initialVCPUWarningLabel = new System.Windows.Forms.Label();
             this.comboBoxInitialVCPUs = new System.Windows.Forms.ComboBox();
             this.labelInitialVCPUs = new System.Windows.Forms.Label();
             this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
@@ -63,7 +65,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
-            this.tableLayoutPanel1.SetColumnSpan(this.label5, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.label5, 4);
             this.label5.Name = "label5";
             // 
             // pictureBox1
@@ -88,6 +90,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // spinnerDynMin
             // 
             resources.ApplyResources(this.spinnerDynMin, "spinnerDynMin");
+            this.tableLayoutPanel1.SetColumnSpan(this.spinnerDynMin, 2);
             this.spinnerDynMin.Increment = 0.1D;
             this.spinnerDynMin.Name = "spinnerDynMin";
             this.spinnerDynMin.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
@@ -95,6 +98,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // spinnerDynMax
             // 
             resources.ApplyResources(this.spinnerDynMax, "spinnerDynMax");
+            this.tableLayoutPanel1.SetColumnSpan(this.spinnerDynMax, 2);
             this.spinnerDynMax.Increment = 0.1D;
             this.spinnerDynMax.Name = "spinnerDynMax";
             this.spinnerDynMax.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
@@ -102,6 +106,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // spinnerStatMax
             // 
             resources.ApplyResources(this.spinnerStatMax, "spinnerStatMax");
+            this.tableLayoutPanel1.SetColumnSpan(this.spinnerStatMax, 2);
             this.spinnerStatMax.Increment = 0.1D;
             this.spinnerStatMax.Name = "spinnerStatMax";
             this.spinnerStatMax.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
@@ -109,6 +114,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.vCPUWarningLabel, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.initialVCPUWarningLabel, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxInitialVCPUs, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelInitialVCPUs, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 3);
@@ -123,10 +130,24 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.Controls.Add(this.labelDynMin, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelDynMax, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.labelStatMax, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.labelDynMinInfo, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.labelDynMaxInfo, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.labelStatMaxInfo, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMinInfo, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMaxInfo, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatMaxInfo, 3, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // vCPUWarningLabel
+            // 
+            resources.ApplyResources(this.vCPUWarningLabel, "vCPUWarningLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.vCPUWarningLabel, 2);
+            this.vCPUWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.vCPUWarningLabel.Name = "vCPUWarningLabel";
+            // 
+            // initialVCPUWarningLabel
+            // 
+            resources.ApplyResources(this.initialVCPUWarningLabel, "initialVCPUWarningLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.initialVCPUWarningLabel, 2);
+            this.initialVCPUWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.initialVCPUWarningLabel.Name = "initialVCPUWarningLabel";
             // 
             // comboBoxInitialVCPUs
             // 
@@ -134,6 +155,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.comboBoxInitialVCPUs.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxInitialVCPUs, "comboBoxInitialVCPUs");
             this.comboBoxInitialVCPUs.Name = "comboBoxInitialVCPUs";
+            this.comboBoxInitialVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxInitialVCPUs_SelectedIndexChanged);
             // 
             // labelInitialVCPUs
             // 
@@ -143,12 +165,13 @@ namespace XenAdmin.Wizards.NewVMWizard
             // labelInvalidVCPUWarning
             // 
             resources.ApplyResources(this.labelInvalidVCPUWarning, "labelInvalidVCPUWarning");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelInvalidVCPUWarning, 3);
             this.labelInvalidVCPUWarning.ForeColor = System.Drawing.Color.Red;
             this.labelInvalidVCPUWarning.Name = "labelInvalidVCPUWarning";
             // 
             // comboBoxTopology
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 3);
             this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
             this.comboBoxTopology.FormattingEnabled = true;
@@ -237,5 +260,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.Label labelDynMinInfo;
         private System.Windows.Forms.Label labelDynMaxInfo;
         private System.Windows.Forms.Label labelStatMaxInfo;
+        private System.Windows.Forms.Label vCPUWarningLabel;
+        private System.Windows.Forms.Label initialVCPUWarningLabel;
     }
 }

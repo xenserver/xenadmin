@@ -81,6 +81,26 @@ namespace XenAPI
                 return DEFAULT_NUM_VCPUS_ALLOWED;
             }
         }
+        public int MinVCPUs()
+        {
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return 1;
+
+            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
+            if (xn == null || xn.Attributes == null)
+                return 1;
+
+            try
+            {
+                return Convert.ToInt32(xn.Attributes["min"].Value);
+            }
+            catch
+            {
+                return 1;
+            }
+        }
 
         public bool IsRunning()
         {
