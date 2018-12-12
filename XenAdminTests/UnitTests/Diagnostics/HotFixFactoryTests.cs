@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = new []{"Clearwater", "Creedence", "Dundee", "ElyJura"};
+            string[] expectedNames = {"Clearwater", "Creedence", "Dundee", "ElyKolkata"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -81,7 +81,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             "Dundee UUID lookup from enum");
 
             Assert.AreEqual("ddd68553-2bf8-411d-99bc-ed4a95265840",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyJura).UUID,
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyKolkata).UUID,
                             "Ely-Jura UUID lookup from enum");
         }
 
@@ -101,14 +101,14 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             "Dundee Filename lookup from enum");
 
             Assert.AreEqual("RPU004",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyJura).Filename,
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyKolkata).Filename,
                             "Ely-Jura Filename lookup from enum");
         }
 
         [Test]
-        [TestCase("2.5.50", Description = "Kolkata")]
+        [TestCase("2.6.50", Description = "Lima")]
         [TestCase("9999.9999.9999", Description = "Future")]
-        public void TestPlatformVersionNumbersInvernessOrGreaterGiveNulls(string platformVersion)
+        public void TestPlatformVersionNumbersLatestReleaseGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.PlatformVersion()).Returns(platformVersion);
@@ -116,7 +116,8 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("2.5.50", Description = "Kolkata", Result = false)]
+        [TestCase("2.7.0", Description = "Lima", Result = false)]
+        [TestCase("2.6.0", Description = "Kolkata", Result = true)]
         [TestCase("2.5.0", Description = "Jura", Result = true)]
         [TestCase("2.4.0", Description = "Inverness", Result = true)]
         [TestCase("2.3.0", Description = "Falcon", Result = true)]

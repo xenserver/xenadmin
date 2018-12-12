@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>'{0}' でコントロール ドメイン メモリの設定を変更しています</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>指定したメモリ サイズ ({0}) が小さすぎます。静的最小サイズ ({1}) 以上の値を指定する必要があります</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>ディスク サイズの変更</value>
   </data>
@@ -1007,6 +1010,9 @@
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>状態レポートのアップロードに失敗しました。</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>[Citrix] Insight Services にレポートをアップロードしています ({0}/{1})</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>[Citrix] Insight Services にレポートをアップロードしています</value>
@@ -2120,10 +2126,10 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この VM に一定のメモリを割り当てたり、メモリ範囲を指定して自動的に調整されるように設定したりできます。</value>
   </data>
   <data name="BALLOONING_RUBRIC_ADVANCED" xml:space="preserve">
-    <value>この VM に割り当てるメモリの範囲および固定最大サイズを設定します。</value>
+    <value>この VM に割り当てるメモリの範囲および静的最大サイズを設定します。</value>
   </data>
   <data name="BALLOONING_RUBRIC_ADVANCED_TEMPLATE" xml:space="preserve">
-    <value>このテンプレートから作成される VM に割り当てるメモリの範囲および固定最大サイズを設定します。</value>
+    <value>このテンプレートから作成される VM に割り当てるメモリの範囲および静的最大サイズを設定します。</value>
   </data>
   <data name="BALLOONING_RUBRIC_TEMPLATE" xml:space="preserve">
     <value>このテンプレートから作成される VM に一定のメモリを割り当てたり、メモリ範囲を指定して自動的に調整されるように設定したりできます。</value>
@@ -2471,9 +2477,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>スナップショット ディスクは移動できません</value>
   </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>この仮想ディスクの接続を解除してから移動してください。</value>
-  </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>XML ノード '{0}' の必須パラメーター '{1}' を解析できません。</value>
   </data>
@@ -2707,12 +2710,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
 続行しますか?</value>
   </data>
   <data name="CONFIRM_CHANGE_STATIC_MAX_PLURAL" xml:space="preserve">
-    <value>VM のメモリの固定最大サイズを変更すると、VM が強制的に再起動されます。
+    <value>VM のメモリの静的最大サイズを変更すると、VM が強制的に再起動されます。
 
 続行しますか?</value>
   </data>
   <data name="CONFIRM_CHANGE_STATIC_MAX_SINGULAR" xml:space="preserve">
-    <value>VM のメモリの固定最大サイズを変更すると、VM が強制的に再起動されます。
+    <value>VM のメモリの静的最大サイズを変更すると、VM が強制的に再起動されます。
 
 続行しますか?</value>
   </data>
@@ -7975,6 +7978,20 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>セッションの保存エラー</value>
   </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>[はい] を押すと、以下の手順はスキップされます。
+    
+{0}
+
+続行しますか?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>[はい] を押すと、以下の手順はスキップされます。
+    
+{0}
+
+続行しますか?</value>
+  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>プールを削除する前に、すべてのスレーブをプールからイジェクトする必要があります。</value>
   </data>
@@ -8914,9 +8931,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>新規仮想ネットワーク インターフェイス - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>ディスクの作成先のストレージ リポジトリを選択してください</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>[Citrix VM Tools] のインストール先の仮想マシンに DVD ドライブがないものがあります。必要に応じて新しい DVD ドライブを作成してもよろしいですか?</value>
   </data>
@@ -8944,6 +8958,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新規フォルダ(&amp;N)...</value>
+  </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>作成(&amp;C)</value>
   </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>新規フォルダ</value>
@@ -9754,20 +9771,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>'{1}' から {0} をダウンロードできませんでした</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>'{1}' からアップデート {0} をダウンロードできませんでした。
-
-アップデートは '{1}' にインストールされますが、アップデート インストール ファイルが削除されている可能性があります。
-
-代わりに .{2} ファイルからアップデートをアップロードします。</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>'{1}' からアップデート {0} をダウンロードできませんでした。
-
-アップデートは以前 '{1}' にアップロードされましたが、アップデート インストール ファイルが削除されている可能性があります。
-
-代わりに .{2} ファイルからアップデートをアップロードします。</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 変更日: {1}
@@ -10541,6 +10544,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>フォルダの名前変更(&amp;R)...</value>
   </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>フォルダの名前変更</value>
+  </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>タグ '{0}' の名前変更</value>
   </data>
@@ -10689,10 +10695,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>{0} から切断されています。選択項目を確認して再試行してください。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップデート プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
+    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップデート プロセスは一時停止しました。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップグレード プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
+    <value>1 つまたは複数のプールのローリングアップグレード プロセスが正常に完了しませんでした。アップグレード プロセスは一時停止しました。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>プールのローリングアップグレードの進行中に次のエラーが発生しました。</value>
@@ -10753,6 +10759,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>プールのローリング アップグレードが完了しませんでした。</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>{0} はスキップできます。</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>アップデート '{0}' を '{1}' にインストールしています</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>アップデート '{0}' の '{1}' へのインストールをスキップしています...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>アーカイブ中</value>
@@ -11445,7 +11460,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>高可用性オプション</value>
   </data>
   <data name="STATIC_MAX" xml:space="preserve">
-    <value>固定最大サイズ</value>
+    <value>静的最大サイズ</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>状態</value>
@@ -11665,17 +11680,17 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU: {0}</value>
   </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>インターフェイス {0}: ネットワーク = {1}</value>
+  </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>このテンプレートを使用するには、Linux パックをインストールする必要があります</value>
   </data>
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;説明はありません&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>セッションを終了しています...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>インターフェイス {0}: ネットワーク = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>ユーザー '{0}' のセッションを終了しています</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>アーカイブ先のテスト</value>
@@ -11998,11 +12013,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}: '{1}' ストレージ リポジトリが破損しています。</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>'{0}' からアップデートをダウンロードできません。接続が切断されました。
-
-設定を確認し、もう一度実行してください。</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: VM '{1}' を移行できません</value>
   </data>
@@ -12080,6 +12090,14 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: サーバーに到達できないためチェックがスキップされました。</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0}、*.zip、*.iso。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>これは有効なアップデート ファイルではありません。
+
+設定を確認し、もう一度実行してください。</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' のドライブには、ローカルの CD/DVD があります。</value>
   </data>
@@ -12094,12 +12112,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>[XenServer] をアップグレードする前に [XenCenter] をアップグレードする必要があります。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0}、*.zip、*.iso。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>{0} に有効なアップデート ファイルがありません</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>このアップデートには、これ以上の操作は必要ありません。</value>
@@ -12165,7 +12177,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>{1} からアップデート ファイル {0} を削除しています...</value>
+    <value>ファイル {0} からアップデート ファイルを削除しています...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>修復するにはここをクリックしてください</value>
@@ -12896,6 +12908,12 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM の全般プロパティ</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>この VM にはパススルー GPU が割り当てられています。</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>この VM には仮想 GPU が割り当てられています。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>メモリや VCPU への変更は、VM の再起動後に反映されます。</value>

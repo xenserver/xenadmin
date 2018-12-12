@@ -33,17 +33,20 @@
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanelSrPicker = new System.Windows.Forms.TableLayoutPanel();
+            this.srPicker1 = new XenAdmin.Controls.SrPicker();
+            this.labelSrHint = new System.Windows.Forms.Label();
             this.toolTipContainer1 = new XenAdmin.Controls.ToolTipContainer();
             this.FastClonePanel = new System.Windows.Forms.Panel();
             this.CloneRadioButton = new System.Windows.Forms.RadioButton();
             this.FastCloneDescription = new System.Windows.Forms.Label();
             this.CopyRadioButton = new System.Windows.Forms.RadioButton();
-            this.srPicker1 = new XenAdmin.Controls.SrPicker();
             this.labelRubric = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanelSrPicker.SuspendLayout();
             this.toolTipContainer1.SuspendLayout();
             this.FastClonePanel.SuspendLayout();
             this.SuspendLayout();
@@ -75,11 +78,30 @@
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 2);
+            this.groupBox1.Controls.Add(this.tableLayoutPanelSrPicker);
             this.groupBox1.Controls.Add(this.toolTipContainer1);
             this.groupBox1.Controls.Add(this.CopyRadioButton);
-            this.groupBox1.Controls.Add(this.srPicker1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // tableLayoutPanelSrPicker
+            // 
+            resources.ApplyResources(this.tableLayoutPanelSrPicker, "tableLayoutPanelSrPicker");
+            this.tableLayoutPanelSrPicker.Controls.Add(this.srPicker1, 0, 1);
+            this.tableLayoutPanelSrPicker.Controls.Add(this.labelSrHint, 0, 0);
+            this.tableLayoutPanelSrPicker.Name = "tableLayoutPanelSrPicker";
+            // 
+            // srPicker1
+            // 
+            resources.ApplyResources(this.srPicker1, "srPicker1");
+            this.srPicker1.Connection = null;
+            this.srPicker1.Name = "srPicker1";
+            this.srPicker1.SrSelectionChanged += new System.Action<object>(this.srPicker1_SrSelectionChanged);
+            // 
+            // labelSrHint
+            // 
+            resources.ApplyResources(this.labelSrHint, "labelSrHint");
+            this.labelSrHint.Name = "labelSrHint";
             // 
             // toolTipContainer1
             // 
@@ -116,12 +138,6 @@
             this.CopyRadioButton.UseVisualStyleBackColor = true;
             this.CopyRadioButton.CheckedChanged += new System.EventHandler(this.CopyRadioButton_CheckedChanged);
             // 
-            // srPicker1
-            // 
-            resources.ApplyResources(this.srPicker1, "srPicker1");
-            this.srPicker1.Connection = null;
-            this.srPicker1.Name = "srPicker1";
-            // 
             // labelRubric
             // 
             resources.ApplyResources(this.labelRubric, "labelRubric");
@@ -148,6 +164,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tableLayoutPanelSrPicker.ResumeLayout(false);
+            this.tableLayoutPanelSrPicker.PerformLayout();
             this.toolTipContainer1.ResumeLayout(false);
             this.FastClonePanel.ResumeLayout(false);
             this.FastClonePanel.PerformLayout();
@@ -170,9 +188,8 @@
         private Controls.SrPicker srPicker1;
         private System.Windows.Forms.TextBox DescriptionTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
-
-
-
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSrPicker;
+        private System.Windows.Forms.Label labelSrHint;
     }
 }
 

@@ -120,7 +120,7 @@ namespace XenAdminTests.UnitTests
             // Arrange
 
             var serverVersions = GetAVersionWithGivenNumberOfPatches(0);
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
 
             var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
@@ -145,7 +145,7 @@ namespace XenAdminTests.UnitTests
 
             var serverVersions = GetAVersionWithGivenNumberOfPatches(1);
             var patch = serverVersions.First().Patches[0];
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
 
             var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
@@ -176,7 +176,7 @@ namespace XenAdminTests.UnitTests
             Pool_patch pool_patch = new Pool_patch();
             pool_patch.uuid = patch.Uuid;
 
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber, new List<Pool_patch> {pool_patch});
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber, new List<Pool_patch> {pool_patch});
             SetXenServerVersionsInUpdates(serverVersions);
 
             var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
@@ -200,7 +200,7 @@ namespace XenAdminTests.UnitTests
         {
             // Arrange
             var serverVersions = GetAVersionWithGivenNumberOfPatches(100);
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
             
             var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
@@ -226,7 +226,7 @@ namespace XenAdminTests.UnitTests
         {
             // Arrange
             var serverVersions = GetAVersionWithGivenNumberOfPatches(100);
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber);
             RemoveANumberOfPatchesPseudoRandomly(serverVersions.First().MinimalPatches, 49);
             SetXenServerVersionsInUpdates(serverVersions);
 
@@ -272,7 +272,7 @@ namespace XenAdminTests.UnitTests
                 pool_patches.Add(new Pool_patch() { uuid = notMinimalPatchesInVersion[ii].Uuid });
             }
 
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber, pool_patches);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber, pool_patches);
 
             SetXenServerVersionsInUpdates(serverVersions);
 
@@ -305,7 +305,7 @@ namespace XenAdminTests.UnitTests
             // Arrange
 
             var serverVersions = GetAVersionWithGivenNumberOfPatches(2);
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber);
             RemoveANumberOfPatchesPseudoRandomly(serverVersions.First().MinimalPatches, 1);
             SetXenServerVersionsInUpdates(serverVersions);
 
@@ -334,7 +334,7 @@ namespace XenAdminTests.UnitTests
             // Arrange
 
             var serverVersions = GetAVersionWithGivenNumberOfPatches(2);
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
 
             // Assert
@@ -361,7 +361,7 @@ namespace XenAdminTests.UnitTests
         {
             // Arrange
             var serverVersions = GetAVersionWithGivenNumberOfPatches(200);
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber + "to_make_it_not_match");
+            var master = GetAMockHost(serverVersions.First().Version.ToString(), serverVersions.First().BuildNumber + "to_make_it_not_match");
             SetXenServerVersionsInUpdates(serverVersions);
 
             // assert

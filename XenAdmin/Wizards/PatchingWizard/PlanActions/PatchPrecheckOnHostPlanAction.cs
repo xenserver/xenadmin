@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         problem = problems[0];
 
                     if (problem != null)
-                        throw new Exception(string.Format("{0}: {1}. {2}", host, problem.Title, problem.Description));
+                        throw new Exception(problem.Description);
                 }
                 catch (Exception ex)
                 {

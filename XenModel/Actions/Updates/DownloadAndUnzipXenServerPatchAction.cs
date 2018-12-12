@@ -59,14 +59,12 @@ namespace XenAdmin.Actions
         //If you consider increasing this for any reason (I think 5 is already more than enough), have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
         private const int MAX_NUMBER_OF_TRIES = 5;
 
-        private Random random = new Random();
-
         private readonly Uri address;
         private readonly string outputFileName;
         private readonly string updateName;
         private readonly string[] updateFileSuffixes;
         private readonly bool downloadUpdate;
-        private readonly bool doNotExtractUpdate;
+        private readonly bool skipUnzipping;
         private DownloadState patchDownloadState;
         private Exception patchDownloadError;
 
@@ -84,7 +82,7 @@ namespace XenAdmin.Actions
             address = uri;
             downloadUpdate = address != null;
             updateFileSuffixes = (from item in updateFileExtensions select '.' + item).ToArray();
-            doNotExtractUpdate = downloadUpdate && updateFileSuffixes.Any(item => address.ToString().Contains(item));
+            skipUnzipping = downloadUpdate && updateFileSuffixes.Any(item => address.ToString().Contains(item));
             this.outputFileName = outputFileName;
         }
 
@@ -225,8 +223,7 @@ namespace XenAdmin.Actions
 
                     if (zipIterator != null)
                     {
-                        zipIterator.CurrentFileExtractProgressChanged -=
-                            archiveIterator_CurrentFileExtractProgressChanged;
+                        zipIterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
                     }
                 }
             }
@@ -273,7 +270,7 @@ namespace XenAdmin.Actions
                     throw new CancelledException();
             }
 
-            if (doNotExtractUpdate)
+            if (skipUnzipping)
             {
                 try
                 {

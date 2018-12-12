@@ -1760,6 +1760,15 @@
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>コンテナー管理のログ</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>コンテナー管理のログ</value>
+  </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>メジャー ブート ログ</value>
+  </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>メジャー ブート ログ</value>
+  </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
     <value>サーバーとインターネットの間の接続をテスト</value>
   </data>
@@ -1830,7 +1839,7 @@
     <value>PVS アクセラレータ</value>
   </data>
   <data name="Label-xenserver-measured-boot" xml:space="preserve">
-    <value>計測された起動</value>
+    <value>メジャー ブート</value>
   </data>
   <data name="Label-xscontainer" xml:space="preserve">
     <value>コンテナ管理</value>
@@ -1897,5 +1906,17 @@
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
     <value>[Legacy XenServer product] Premium Per-User</value>
+  </data>
+  <data name="Description-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] ライセンス デーモン ログ</value>
+  </data>
+  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>[XenServer] ツールスタックのクラスター管理デーモンによって生成されたログ。</value>
+  </data>
+  <data name="Label-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] ライセンス デーモン</value>
+  </data>
+  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>[XenServer] クラスター管理デーモン</value>
   </data>
 </root>

@@ -32,7 +32,7 @@ namespace XenAdmin.TabPages
             this.pageContainerPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanelBanner = new System.Windows.Forms.TableLayoutPanel();
             this.deprecationBanner1 = new XenAdmin.Controls.DeprecationBanner();
-            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.HorizontalGradientPanel();
             this.titleLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanelBanner.SuspendLayout();
             this.gradientPanel1.SuspendLayout();
@@ -61,7 +61,6 @@ namespace XenAdmin.TabPages
             this.gradientPanel1.Controls.Add(this.titleLabel);
             resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
             this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
             // 
             // titleLabel
             // 

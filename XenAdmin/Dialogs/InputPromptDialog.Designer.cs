@@ -48,18 +48,17 @@ namespace XenAdmin.Dialogs
             // 
             // button1
             // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.button2, "button2");
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // InputPromptDialog
             // 
@@ -79,9 +78,9 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        public System.Windows.Forms.Label promptLabel;
-        public System.Windows.Forms.TextBox textBox1;
-        public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label promptLabel;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

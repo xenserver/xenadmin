@@ -80,6 +80,8 @@ namespace XenAdmin.Controls
         public event TreeViewEventHandler AfterDeselect;
         public event TreeViewEventHandler BeforeDeselect;
         public event EventHandler SelectionsChanged;
+        public new event EventHandler<MultiSelectTreeViewCancelEventArgs> BeforeSelect;
+        public new event EventHandler<MultiSelectTreeViewItemDragEventArgs> ItemDrag;
 
         public MultiSelectTreeView()
         {
@@ -264,8 +266,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        public new event EventHandler<MultiSelectTreeViewCancelEventArgs> BeforeSelect;
-
         protected sealed override void OnItemDrag(ItemDragEventArgs e)
         {
             OnItemDrag(new MultiSelectTreeViewItemDragEventArgs(MouseButtons.Left, SelectedNodes));
@@ -280,8 +280,6 @@ namespace XenAdmin.Controls
                 handler(this, e);
             }
         }
-
-        public new event EventHandler<MultiSelectTreeViewItemDragEventArgs> ItemDrag;
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
@@ -325,29 +323,37 @@ namespace XenAdmin.Controls
                     break;
 
                 case Keys.Left:
-                    if (_mostRecentSelectedNode.IsExpanded)
-                        _mostRecentSelectedNode.Collapse();
-                    else
-                        endNode = _mostRecentSelectedNode.Parent;
+                    if (_mostRecentSelectedNode != null)
+                    {
+                        if (_mostRecentSelectedNode.IsExpanded)
+                            _mostRecentSelectedNode.Collapse();
+                        else
+                            endNode = _mostRecentSelectedNode.Parent;
+                    }
                     break;
 
                 case Keys.Up:
-                    endNode = _mostRecentSelectedNode.PrevVisibleNode;
+                    if (_mostRecentSelectedNode != null)
+                        endNode = _mostRecentSelectedNode.PrevVisibleNode;
                     break;
 
                 case Keys.Right:
-                    if (_mostRecentSelectedNode.IsExpanded)
+                    if (_mostRecentSelectedNode != null)
                     {
-                        endNode = _mostRecentSelectedNode.NextVisibleNode;
-                        if (endNode != null && !endNode.Parent.Equals(_mostRecentSelectedNode))
-                            endNode = null;
+                        if (_mostRecentSelectedNode.IsExpanded)
+                        {
+                            endNode = _mostRecentSelectedNode.NextVisibleNode;
+                            if (endNode != null && !endNode.Parent.Equals(_mostRecentSelectedNode))
+                                endNode = null;
+                        }
+                        else
+                            _mostRecentSelectedNode.Expand();
                     }
-                    else
-                        _mostRecentSelectedNode.Expand();
                     break;
 
                 case Keys.Down:
-                    endNode = _mostRecentSelectedNode.NextVisibleNode;
+                    if (_mostRecentSelectedNode != null)
+                        endNode = _mostRecentSelectedNode.NextVisibleNode;
                     break;
 
                 default:
@@ -387,7 +393,7 @@ namespace XenAdmin.Controls
                 }
                 if (tnMostRecentSelectedNode != null)
                 {
-                    if (((e.KeyData & Keys.Control) != 0) || ((e.KeyData & Keys.Shift) != 0))
+                    if ((e.KeyData & Keys.Control) != 0 || (e.KeyData & Keys.Shift) != 0)
                     {
                         SuspendLayout();
                         int prevScrollPos = HScrollPos;
@@ -1085,6 +1091,7 @@ namespace XenAdmin.Controls
             return si.nPos;
         }
 
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public int HScrollPos
         {
             get
@@ -1097,6 +1104,7 @@ namespace XenAdmin.Controls
             }
         }
 
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public int VScrollPos
         {
             get

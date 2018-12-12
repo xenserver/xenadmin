@@ -51,18 +51,12 @@ namespace XenAdminTests
 
         public TextBox NameTextBox
         {
-            get
-            {
-                return Item.textBox1;
-            }
+            get { return TestUtils.GetTextBox(Item, "textBox1"); }
         }
 
         public Button OKButton
         {
-            get
-            {
-                return Item.button1;
-            }
+            get { return TestUtils.GetButton(Item, "button1"); }
         }
     }
 }

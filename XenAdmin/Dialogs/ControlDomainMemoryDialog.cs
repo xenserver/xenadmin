@@ -80,8 +80,7 @@ namespace XenAdmin.Dialogs
 
             // Since updates come in dribs and drabs, avoid error if new max and min arrive
             // out of sync and maximum < minimum.
-            if (vm.memory_dynamic_max >= vm.memory_dynamic_min &&
-                vm.memory_static_max >= vm.memory_static_min)
+            if (vm.memory_dynamic_max >= vm.memory_dynamic_min)
             {
                 double min = vm.memory_static_min;
                 double max = Math.Min(vm.memory_dynamic_min + host.memory_available_calc(), MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA);

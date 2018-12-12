@@ -1840,18 +1840,6 @@ namespace XenAPI
         Response<string>
         vm_set_hardware_platform_version(string session, string _vm, string _hardware_platform_version);
 
-        [XmlRpcMethod("VM.set_NVRAM")]
-        Response<string>
-        vm_set_nvram(string session, string _vm, Object _nvram);
-
-        [XmlRpcMethod("VM.add_to_NVRAM")]
-        Response<string>
-        vm_add_to_nvram(string session, string _vm, string _key, string _value);
-
-        [XmlRpcMethod("VM.remove_from_NVRAM")]
-        Response<string>
-        vm_remove_from_nvram(string session, string _vm, string _key);
-
         [XmlRpcMethod("VM.snapshot")]
         Response<string>
         vm_snapshot(string session, string _vm, string _new_name);
@@ -2035,6 +2023,18 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.add_to_VCPUs_params_live")]
         Response<string>
         async_vm_add_to_vcpus_params_live(string session, string _vm, string _key, string _value);
+
+        [XmlRpcMethod("VM.set_NVRAM")]
+        Response<string>
+        vm_set_nvram(string session, string _vm, Object _value);
+
+        [XmlRpcMethod("VM.add_to_NVRAM")]
+        Response<string>
+        vm_add_to_nvram(string session, string _vm, string _key, string _value);
+
+        [XmlRpcMethod("VM.remove_from_NVRAM")]
+        Response<string>
+        vm_remove_from_nvram(string session, string _vm, string _key);
 
         [XmlRpcMethod("VM.set_ha_restart_priority")]
         Response<string>

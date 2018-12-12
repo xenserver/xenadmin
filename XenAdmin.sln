@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenAdmin", "XenAdmin\XenAdmin.csproj", "{70BDA4BC-F062-4302-8ACD-A15D8BF31D65}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -13,9 +13,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xva_verify", "xva_verify\xva_verify.csproj", "{2A70D7E7-EAB2-4C36-B3F4-85B79D2384B5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "splash", "splash\splash.vcxproj", "{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{70BDA4BC-F062-4302-8ACD-A15D8BF31D65} = {70BDA4BC-F062-4302-8ACD-A15D8BF31D65}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenAdminTests", "XenAdminTests\XenAdminTests.csproj", "{21B9482C-D255-40D5-ABA7-C8F00F99547C}"
 EndProject
@@ -170,5 +167,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7DA36D8-567A-4150-9588-EB752844946A}
 	EndGlobalSection
 EndGlobal

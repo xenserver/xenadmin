@@ -531,6 +531,9 @@
   <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
     <value>十分な空きメモリがありません。</value>
   </data>
+  <data name="HOST_NOT_ENOUGH_PCPUS" xml:space="preserve">
+    <value>ホストには、仮想マシンの実行に必要な数の pCPU がありません。少なくとも vCPU と同じ数が必要です。</value>
+  </data>
   <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
     <value>サーバーがリカバリ モードで動作しているため、復元を実行できません。</value>
   </data>
@@ -1909,6 +1912,9 @@
   </data>
   <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
     <value>この処理は物理デバイスに対して実行できません。</value>
+  </data>
+  <data name="VDI_IS_ENCRYPTED" xml:space="preserve">
+    <value>指定された VDI が暗号化されていないため、要求された操作は許可されていません。</value>
   </data>
   <data name="VDI_IS_NOT_ISO" xml:space="preserve">
     <value>この処理は CD VDI (ISO ファイルまたは CD ドライブ) に対してのみ実行できます。VDI {0} の種類は {1} です。</value>

@@ -59,11 +59,11 @@ namespace XenAdmin.Actions
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
-                other_config.Remove(IgnorePatchAction.IgnorePatchKey);
+            if (other_config.ContainsKey(Updates.IgnorePatchKey))
+                other_config.Remove(Updates.IgnorePatchKey);
 
-            if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
-                other_config.Remove(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY);
+            if (other_config.ContainsKey(Updates.LAST_SEEN_SERVER_VERSION_KEY))
+                other_config.Remove(Updates.LAST_SEEN_SERVER_VERSION_KEY);
 
 
             XenAPI.Pool.set_other_config(Connection.Session, pool.opaque_ref, other_config);

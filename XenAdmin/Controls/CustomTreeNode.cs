@@ -35,6 +35,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.Drawing;
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {
@@ -206,7 +207,7 @@ namespace XenAdmin.Controls
 
         protected virtual int SameLevelSortOrder(CustomTreeNode other)
         {
-            return this.ToString().CompareTo(other.ToString());
+            return StringUtility.NaturalCompare(this.ToString(), other.ToString());
         }
 
         public override string ToString()

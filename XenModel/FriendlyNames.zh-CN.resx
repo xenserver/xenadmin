@@ -1760,6 +1760,15 @@
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>容器管理日志</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>容器管理日志</value>
+  </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
     <value>服务器与 Internet 之间的连接性测试</value>
   </data>
@@ -1897,5 +1906,17 @@
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
     <value>[Legacy XenServer product] Premium Per-User</value>
+  </data>
+  <data name="Description-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] 许可守护程序日志</value>
+  </data>
+  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>由 [XenServer] Toolstack 的群集管理守护程序生成的日志。</value>
+  </data>
+  <data name="Label-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] 许可守护程序</value>
+  </data>
+  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>[XenServer] 群集管理守护程序</value>
   </data>
 </root>

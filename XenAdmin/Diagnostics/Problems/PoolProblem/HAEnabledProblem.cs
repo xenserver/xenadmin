@@ -58,7 +58,18 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override AsyncAction CreateUnwindChangesAction()
         {
-            return new EnableHAAction(Pool, null, HeartbeatSrs, FailuresToTolerate);
+            var pool = Pool.Connection.Resolve(new XenRef<Pool>(Pool.opaque_ref));
+            if (pool == null)
+            {
+                foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy)
+                {
+                    pool = xenConnection.Resolve(new XenRef<Pool>(Pool.opaque_ref));
+                    if (pool != null)
+                        break;
+                }
+            }
+
+            return pool != null ? new EnableHAAction(pool, null, HeartbeatSrs, FailuresToTolerate) : null;
         }
 
         public override string Description

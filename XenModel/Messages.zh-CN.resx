@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>更改“{0}”上的控制域内存设置</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>指定的内存({0})太低。必须至少为静态最小值({1})</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>更改磁盘大小</value>
   </data>
@@ -1007,6 +1010,9 @@
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>上载状态报告失败。</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>正在将报告上载到 [Citrix] Insight Services) (第 {0} 个，共 {1} 个)</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>正在将报告上载到 [Citrix] Insight Services</value>
@@ -2466,9 +2472,6 @@
   </data>
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>无法移动快照磁盘</value>
-  </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>必须先分离此虚拟磁盘才能进行移动。</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>无法解析 XML 节点“{0}”上的必需参数“{1}”</value>
@@ -7969,6 +7972,20 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>无法保存会话</value>
   </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>通过按“是”，将跳过以下步骤:
+
+{0}
+
+是否要继续?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>通过按“是”，将跳过以下步骤:
+
+{0}
+
+是否要继续?</value>
+  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>必须先从池中弹出所有从属设备，然后才能删除池。</value>
   </data>
@@ -8912,9 +8929,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>新建虚拟网络接口 - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>选择要创建磁盘的存储库</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>在要安装 [Citrix VM Tools] 的 VM 中，至少有一个 VM 没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
   </data>
@@ -8942,6 +8956,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新建文件夹(&amp;N)...</value>
+  </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>创建(&amp;C)</value>
   </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>新建文件夹</value>
@@ -9752,20 +9769,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>从 {1} 下载 {0} 失败</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>从 {1} 下载更新 {0} 失败。
-
-该更新安装在“{1}”上，但更新安装文件可能已被删除。
-
-请改为从 .{2} 文件上载更新。</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>从 {1} 下载更新 {0} 失败。
-
-该更新以前已上载到“{1}”，但更新安装文件可能已被删除。
-
-请改为从 .{2} 文件上载更新。</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 修改日期: {1}
@@ -10539,6 +10542,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>重命名文件夹(&amp;R)...</value>
   </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>重命名文件夹</value>
+  </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>重命名标记“{0}”</value>
   </data>
@@ -10687,10 +10693,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>不再连接到 {0}。请核对您所做的选择并重试。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>一个或多个滚动池升级过程未成功完成。升级过程已暂停。请按“重试”继续。</value>
+    <value>一个或多个滚动池升级过程未成功完成。升级过程已暂停。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>滚动池升级过程未成功完成。升级过程已暂停。请按“重试”继续。</value>
+    <value>滚动池升级过程未成功完成。升级过程已暂停。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>滚动池升级过程中发生以下错误:</value>
@@ -10751,6 +10757,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>滚动池升级未完成。</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>可能已跳过 {0}。</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>正在“{1}”上安装更新“{0}”</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>正在“{1}”上跳过安装更新“{0}”...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
@@ -11663,17 +11678,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU 数: {0}</value>
   </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>接口 {0}: 网络 = {1}</value>
+  </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>必须安装 Linux 包才能使用该模板</value>
   </data>
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;无说明&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>正在终止会话...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>接口 {0}: 网络 = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>正在终止用户“{0}”的会话</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>测试存档目标位置</value>
@@ -11996,11 +12011,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}:“{1}”存储库已损坏。</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>无法从 {0} 中下载更新: 连接已断开。
-
-请检查您的设置并重试。</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: 无法迁移 VM“{1}”</value>
   </data>
@@ -12078,6 +12088,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: 由于服务器无法访问，因此已跳过检查。</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>所选文件的扩展名无效。有效扩展名为 *.{0}、*.zip 和 *.iso。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>此文件不是有效的更新文件。</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM“{1}”的驱动器中有本地 CD/DVD。</value>
   </data>
@@ -12092,12 +12108,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>请务必先升级 [XenCenter]，然后再升级 [XenServer]。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为 *.{0}、*.zip 和 *.iso。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>在 {0} 中找不到有效的更新文件</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>该更新无需更多操作。</value>
@@ -12163,7 +12173,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在从 {1} 中删除更新安装文件 {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>正在从 {1} 中删除更新文件 {0}...</value>
+    <value>正在删除更新文件 {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>单击此处修复</value>
@@ -12894,6 +12904,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM 常规属性</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>已为此 VM 分配了直通 GPU。</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>已为此 VM 分配了虚拟 GPU。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>内存和/或 VCPU 更改将在重新启动 VM 时生效。</value>

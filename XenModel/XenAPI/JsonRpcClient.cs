@@ -3183,27 +3183,6 @@ namespace XenAPI
             Rpc("VM.set_hardware_platform_version", new JArray(session, _vm ?? "", _hardware_platform_version), serializer);
         }
 
-        public void vm_set_nvram(string session, string _vm, Dictionary<string, string> _nvram)
-        {
-            var converters = new List<JsonConverter> {new StringStringMapConverter()};
-            var serializer = CreateSerializer(converters);
-            Rpc("VM.set_NVRAM", new JArray(session, _vm ?? "", _nvram == null ? new JObject() : JObject.FromObject(_nvram, serializer)), serializer);
-        }
-
-        public void vm_add_to_nvram(string session, string _vm, string _key, string _value)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            Rpc("VM.add_to_NVRAM", new JArray(session, _vm ?? "", _key ?? "", _value ?? ""), serializer);
-        }
-
-        public void vm_remove_from_nvram(string session, string _vm, string _key)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            Rpc("VM.remove_from_NVRAM", new JArray(session, _vm ?? "", _key ?? ""), serializer);
-        }
-
         public XenRef<VM> vm_snapshot(string session, string _vm, string _new_name)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VM>()};
@@ -3524,6 +3503,27 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.VM.add_to_VCPUs_params_live", new JArray(session, _vm ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void vm_set_nvram(string session, string _vm, Dictionary<string, string> _value)
+        {
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.set_NVRAM", new JArray(session, _vm ?? "", _value == null ? new JObject() : JObject.FromObject(_value, serializer)), serializer);
+        }
+
+        public void vm_add_to_nvram(string session, string _vm, string _key, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.add_to_NVRAM", new JArray(session, _vm ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void vm_remove_from_nvram(string session, string _vm, string _key)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.remove_from_NVRAM", new JArray(session, _vm ?? "", _key ?? ""), serializer);
         }
 
         public void vm_set_ha_restart_priority(string session, string _vm, string _value)

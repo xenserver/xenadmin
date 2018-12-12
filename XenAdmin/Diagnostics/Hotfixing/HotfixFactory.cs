@@ -42,20 +42,20 @@ namespace XenAdmin.Diagnostics.Hotfixing
             Clearwater,
             Creedence,
             Dundee,
-            ElyJura
+            ElyKolkata
         }
 
         private readonly Hotfix clearwaterHotfix = new SingleHotfix
-                                                         {
-                                                             Filename = "RPU001",
-                                                             UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
-                                                         };
+        {
+            Filename = "RPU001",
+            UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
+        };
 
         private readonly Hotfix creedenceHotfix = new SingleHotfix
-                                                         {
-                                                             Filename = "RPU002",
-                                                             UUID = "3f92b111-0a90-4ec6-b85a-737f241a3fc1 "
-                                                         };
+        {
+            Filename = "RPU002",
+            UUID = "3f92b111-0a90-4ec6-b85a-737f241a3fc1 "
+        };
 
         private readonly Hotfix dundeeHotfix = new SingleHotfix
         {
@@ -63,7 +63,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             UUID = "f6014211-7611-47ac-ac4c-e66bb1692c35"
         };
 
-        private readonly Hotfix elyJuraHotfix = new SingleHotfix
+        private readonly Hotfix elyKolkataHotfix = new SingleHotfix
         {
             Filename = "RPU004",
             UUID = "ddd68553-2bf8-411d-99bc-ed4a95265840"
@@ -71,8 +71,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(Host host)
         {
-            if (Helpers.ElyOrGreater(host) && !Helpers.KolkataOrGreater(host))
-                return Hotfix(HotfixableServerVersion.ElyJura);
+            if (Helpers.ElyOrGreater(host) && !Helpers.LimaOrGreater(host))
+                return Hotfix(HotfixableServerVersion.ElyKolkata);
             if (Helpers.DundeeOrGreater(host) && !Helpers.ElyOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Dundee);
             if (Helpers.CreedenceOrGreater(host) && !Helpers.DundeeOrGreater(host))
@@ -85,12 +85,12 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(HotfixableServerVersion version)
         {
-            if (version == HotfixableServerVersion.ElyJura)
-                return elyJuraHotfix;
+            if (version == HotfixableServerVersion.ElyKolkata)
+                return elyKolkataHotfix;
             if (version == HotfixableServerVersion.Dundee)
-                return dundeeHotfix; 
+                return dundeeHotfix;
             if (version == HotfixableServerVersion.Creedence)
-                return creedenceHotfix; 
+                return creedenceHotfix;
             if (version == HotfixableServerVersion.Clearwater)
                 return clearwaterHotfix;
 

@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -151,7 +152,6 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.VDI_CBT_METADATA_INCONSISTENT:
                     case Message.MessageType.CLUSTER_HOST_FENCING:
                     case Message.MessageType.CLUSTER_HOST_ENABLE_FAILED:
-                    case Message.MessageType.HOST_LOW_MEMORY:
                     case Message.MessageType.VM_SECURE_BOOT_FAILED:
                         if (XenObject != null)
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
@@ -312,19 +312,26 @@ namespace XenAdmin.Alerts
             else
             {
                 // Several hosts in pool unhealthy, list their names as a summary
-                string output = "";
-                foreach (string s in currentState)
-                {
-                    Match m = multipathRegex.Match(s);
-                    if (m.Success)
-                    {
-                        output = string.Format("{0}, '{1}'", output, Message.Connection.Cache.Find_By_Uuid<Host>(m.Groups[1].Value));
-                    }
-                }
+                var output = string.Join(", ",
+                    FindHostUuids(currentState)
+                        .Select(s => string.Format("'{0}'", Message.Connection.Cache.Find_By_Uuid<Host>(s)))
+                    );
                 return string.Format(PropertyManager.GetFriendlyName("Message.body-multipath_periodic_alert_summary"),
                     Helpers.GetName(XenObject),
                     output);
             }
+        }
+
+        public static IEnumerable<string> FindHostUuids(IEnumerable<string> lines)
+        {
+            if (lines == null)
+                return Enumerable.Empty<string>();
+
+            return lines
+                .Select(s => multipathRegex.Match(s))
+                .Where(m => m.Success)
+                .Select(m => m.Groups[1].Value)
+                .Distinct();
         }
 
         private string GetManagementBondName()

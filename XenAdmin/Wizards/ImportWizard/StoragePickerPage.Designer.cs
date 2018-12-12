@@ -28,30 +28,48 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StoragePickerPage));
-			this.m_srPicker = new XenAdmin.Controls.SrPicker();
-			this.SuspendLayout();
-			// 
-			// m_srPicker
-			// 
-			this.m_srPicker.Connection = null;
-			resources.ApplyResources(this.m_srPicker, "m_srPicker");
-			this.m_srPicker.Name = "m_srPicker";
-			this.m_srPicker.ItemSelectionNull += new System.Action(this.m_srPicker_ItemSelectionNull);
-            this.m_srPicker.ItemSelectionNotNull += new System.Action(this.m_srPicker_ItemSelectionNotNull);
-			// 
-			// StoragePickerPage
-			// 
-			resources.ApplyResources(this, "$this");
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.Controls.Add(this.m_srPicker);
-			this.Name = "StoragePickerPage";
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StoragePickerPage));
+            this.m_srPicker = new XenAdmin.Controls.SrPicker();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelSrHint = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // m_srPicker
+            // 
+            this.m_srPicker.Connection = null;
+            resources.ApplyResources(this.m_srPicker, "m_srPicker");
+            this.m_srPicker.Name = "m_srPicker";
+            this.m_srPicker.SrSelectionChanged += new System.Action<object>(this.m_srPicker_SrSelectionChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelSrHint, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m_srPicker, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // labelSrHint
+            // 
+            resources.ApplyResources(this.labelSrHint, "labelSrHint");
+            this.labelSrHint.Name = "labelSrHint";
+            // 
+            // StoragePickerPage
+            // 
+            resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Name = "StoragePickerPage";
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
         private XenAdmin.Controls.SrPicker m_srPicker;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label labelSrHint;
 	}
 }
