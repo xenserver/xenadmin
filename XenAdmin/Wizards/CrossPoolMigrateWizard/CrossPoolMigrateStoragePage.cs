@@ -57,19 +57,25 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return true;
         }
 
-        protected override bool SrIsSuitable(SR sr)
+        protected override bool SrsAreSuitable(SR sourceSr, SR targetSr)
         {
-            return sr != null && !sr.HBALunPerVDI();
+            if (sourceSr == null || targetSr == null || sourceSr.HBALunPerVDI() || targetSr.HBALunPerVDI())
+                return false;
+
+            // intra-pool move of halted VMs does not require the SRs to support migration because we use VMMoveAction (vdi copy & destroy)
+            if (wizardMode == WizardMode.Move && sourceSr.Connection == targetSr.Connection)
+                return true;
+
+            return sourceSr.SupportsStorageMigration() && targetSr.SupportsStorageMigration();
         }
 
-	    protected override bool IsExtraSpaceNeeded(XenRef<SR> sourceRef, XenRef<SR> targetRef)
+	    protected override bool IsExtraSpaceNeeded(SR sourceSr, SR targetSr)
 	    {
-			// No extra space is needed for Migrate or Move operation on same SR.
-			if (targetRef.Equals(sourceRef) &&
-				((wizardMode == WizardMode.Migrate) || (wizardMode == WizardMode.Move)))
+	        // No extra space is needed for Migrate or Move operation on same SR.
+			if (sourceSr != null && targetSr != null && targetSr.opaque_ref.Equals(sourceSr.opaque_ref) && 
+			    (wizardMode == WizardMode.Migrate || wizardMode == WizardMode.Move))
 				return false;
-			else
-				return true;
+	        return true;
 	    }
 
 		/// <summary>

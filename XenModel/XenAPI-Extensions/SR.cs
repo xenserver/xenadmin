@@ -459,7 +459,6 @@ namespace XenAPI
         /// <summary>
         /// Whether the underlying SR backend supports VDI_CREATE. Will return true even if the SR is full.
         /// </summary>
-        /// <param name="connection"></param>
         /// <returns></returns>
         public virtual bool SupportsVdiCreate()
         {
@@ -474,6 +473,21 @@ namespace XenAPI
 
             SM sm = SM.GetByType(Connection, type);
             return sm != null && -1 != Array.IndexOf(sm.capabilities, "VDI_CREATE");
+        }
+        
+        /// <summary>
+        /// Whether the underlying SR backend supports storage migration. Will return true even if the SR is full.
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool SupportsStorageMigration()
+        {
+            // ISO and Memory SRs should not support migration
+            if (content_type == SR.Content_Type_ISO || GetSRType(false) == SR.SRTypes.tmpfs)
+                return false;
+
+            SM sm = SM.GetByType(Connection, type);
+            // check if the SM has VDI_SNAPSHOT and VDI_MIRROR capabilities; the VDI_MIRROR capability has only been added in Ely (API Version 2.6)
+            return sm != null && Array.IndexOf(sm.capabilities, "VDI_SNAPSHOT") != -1 && (Array.IndexOf(sm.capabilities, "VDI_MIRROR") != -1 || !Helpers.ElyOrGreater(Connection));
         }
 
         public static List<SRInfo> ParseSRList(List<Probe_result> probeExtResult)

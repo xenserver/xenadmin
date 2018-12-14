@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,13 +12,6 @@
     <AssemblyName>XenCenterMain</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <SignManifests>false</SignManifests>
-    <ManifestCertificateThumbprint>4C1DD393E361B8BBCFA1E1D09539C446F88C0A11</ManifestCertificateThumbprint>
-    <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timestamp.dll</ManifestTimestampUrl>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -103,8 +96,6 @@
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
     <Compile Include="Actions\GUIActions\RestoreDismissedUpdatesAction.cs" />
     <Compile Include="Actions\GUIActions\MeddlingAction.cs" />
-    <Compile Include="Actions\GUIActions\IgnoreServerAction.cs" />
-    <Compile Include="Actions\GUIActions\IgnorePatchAction.cs" />
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
@@ -174,7 +165,10 @@
       <DependentUpon>DataGridViewEx.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewTextAndImageCell.cs" />
-    <Compile Include="Controls\FolderChangeDialogTreeView.cs">
+    <Compile Include="Controls\ComboBoxes\EnableableComboBoxEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TreeViews\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ListViewEx.cs">
@@ -582,7 +576,7 @@
     <Compile Include="Controls\DoubleBufferedPanel.Designer.cs">
       <DependentUpon>DoubleBufferedPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GradientPanel\GradientPanel.cs">
+    <Compile Include="Controls\GradientPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\HaNtolIndicator.cs">
@@ -2957,7 +2951,6 @@
     <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
-    <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
@@ -3702,10 +3695,7 @@
       <DependentUpon>DRFailoverWizardStoragePage.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SrPicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SrPicker.Designer.cs">
-      <DependentUpon>SrPicker.cs</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Wizards\DRWizards\DRFailoverWizardWelcomePage.cs">
       <SubType>UserControl</SubType>
@@ -3713,9 +3703,7 @@
     <Compile Include="Wizards\DRWizards\DRFailoverWizardWelcomePage.Designer.cs">
       <DependentUpon>DRFailoverWizardWelcomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataGridViewEnableableComboBoxCell.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\DataGridViewEnableableComboBoxCell.cs" />
     <Compile Include="Wizards\GenericPages\DelayLoadingOptionComboBoxItem.cs" />
     <Compile Include="Wizards\GenericPages\LunPerVdiMappingPage.cs">
       <SubType>UserControl</SubType>
@@ -5039,9 +5027,6 @@
     <EmbeddedResource Include="Controls\ShadowPanel.zh-CN.resx">
       <DependentUpon>ShadowPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrPicker.zh-CN.resx">
-      <DependentUpon>SrPicker.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ToolTipContainer.ja.resx">
       <DependentUpon>ToolTipContainer.cs</DependentUpon>
     </EmbeddedResource>
@@ -6251,13 +6236,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\HAWizard_Pages\Intro.ja.resx">
       <DependentUpon>Intro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrPicker.ja.resx">
-      <DependentUpon>SrPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrPicker.resx">
-      <DependentUpon>SrPicker.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\HAWizard_Pages\Intro.zh-CN.resx">
       <DependentUpon>Intro.cs</DependentUpon>

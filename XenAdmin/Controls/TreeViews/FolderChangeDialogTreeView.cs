@@ -31,48 +31,49 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
-using XenAdmin.Network;
-using XenAdmin.Core;
-using XenAPI;
+using System.Windows.Forms;
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Controls
 {
-    public class IgnoreServerAction : AsyncAction
+    internal class FolderChangeDialogTreeView : VirtualTreeView
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private XenServerVersion Version;
+        public bool expandOnDoubleClick = true;
+        private bool blockExpansion;
 
-        public const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
-
-        public IgnoreServerAction(IXenConnection connection, XenServerVersion version)
-            : base(connection, "ignore_patch", "ignore_patch", true)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            Version = version;
+            if (e.Clicks > 1)
+                blockExpansion = true;
+
+            var hitTesInfo = HitTest(e.X, e.Y);
+            if (hitTesInfo.Node == null)
+                SelectedNode = null;
+
+            base.OnMouseDown(e);
         }
 
-        protected override void Run()
+        protected override void OnBeforeExpand(VirtualTreeViewCancelEventArgs e)
         {
-            Pool pool = Helpers.GetPoolOfOne(Connection);
-            if (pool == null)
+            if (!expandOnDoubleClick && blockExpansion)
+            {
+                blockExpansion = false;
+                e.Cancel = true;
                 return;
-
-            Dictionary<string, string> other_config = pool.other_config;
-
-            if (other_config.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
-            {
-                List<string> current = new List<string>(other_config[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
-                if (current.Contains(Version.VersionAndOEM))
-                    return;
-                current.Add(Version.VersionAndOEM);
-                other_config[LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
             }
-            else
-            {
-                other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, Version.VersionAndOEM);
-            }
+            base.OnBeforeExpand(e);
+        }
 
-            XenAPI.Pool.set_other_config(Session, pool.opaque_ref, other_config);
+        protected override void OnBeforeCollapse(VirtualTreeViewCancelEventArgs e)
+        {
+            if (!expandOnDoubleClick && blockExpansion)
+            {
+                blockExpansion = false;
+                e.Cancel = true;
+                return;
+            }
+            base.OnBeforeCollapse(e);
         }
     }
 }

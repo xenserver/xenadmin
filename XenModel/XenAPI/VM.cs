@@ -985,6 +985,10 @@ namespace XenAPI
                 {
                     VM.set_domain_type(session, opaqueRef, _domain_type);
                 }
+                if (!Helper.AreEqual2(_NVRAM, server._NVRAM))
+                {
+                    VM.set_NVRAM(session, opaqueRef, _NVRAM);
+                }
 
                 return null;
             }
@@ -2868,52 +2872,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Set the NVRAM field of the given VM.
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_nvram">New value to set</param>
-        public static void set_NVRAM(Session session, string _vm, Dictionary<string, string> _nvram)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_nvram(session.opaque_ref, _vm, _nvram);
-            else
-                session.proxy.vm_set_nvram(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_nvram)).parse();
-        }
-
-        /// <summary>
-        /// Add the given key-value pair to the NVRAM field of the given VM.
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_key">Key to add</param>
-        /// <param name="_value">Value to add</param>
-        public static void add_to_NVRAM(Session session, string _vm, string _key, string _value)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_nvram(session.opaque_ref, _vm, _key, _value);
-            else
-                session.proxy.vm_add_to_nvram(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
-        }
-
-        /// <summary>
-        /// Remove the given key and its corresponding value from the NVRAM field of the given VM.  If the key is not in that Map, then do nothing.
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_key">Key to remove</param>
-        public static void remove_from_NVRAM(Session session, string _vm, string _key)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_nvram(session.opaque_ref, _vm, _key);
-            else
-                session.proxy.vm_remove_from_nvram(session.opaque_ref, _vm ?? "", _key ?? "").parse();
-        }
-
-        /// <summary>
         /// Snapshots the specified VM, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
         /// First published in XenServer 5.0.
         /// </summary>
@@ -3597,6 +3555,52 @@ namespace XenAPI
               return session.JsonRpcClient.async_vm_add_to_vcpus_params_live(session.opaque_ref, _vm, _key, _value);
           else
               return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse());
+        }
+
+        /// <summary>
+        /// 
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The value</param>
+        public static void set_NVRAM(Session session, string _vm, Dictionary<string, string> _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_nvram(session.opaque_ref, _vm, _value);
+            else
+                session.proxy.vm_set_nvram(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+        }
+
+        /// <summary>
+        /// 
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">The key</param>
+        /// <param name="_value">The value</param>
+        public static void add_to_NVRAM(Session session, string _vm, string _key, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_nvram(session.opaque_ref, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_nvram(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// 
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">The key</param>
+        public static void remove_from_NVRAM(Session session, string _vm, string _key)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_nvram(session.opaque_ref, _vm, _key);
+            else
+                session.proxy.vm_remove_from_nvram(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -6778,7 +6782,7 @@ namespace XenAPI
         private domain_type _domain_type = domain_type.unspecified;
 
         /// <summary>
-        /// initial value for guest NVRAM (containing UEFI variables, etc)
+        /// initial value for guest NVRAM (containing UEFI variables, etc). Cannot be changed while the VM is running
         /// Experimental. First published in Unreleased.
         /// </summary>
         [JsonConverter(typeof(StringStringMapConverter))]

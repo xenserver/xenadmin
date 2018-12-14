@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>Changing control domain memory settings on '{0}'</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>The memory specified ({0}) was too low. It has to be at least the value of the static minimum ({1})</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>Change disk size</value>
   </data>
@@ -1007,6 +1010,9 @@
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>Failed to upload the status report.</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>Uploading report to [Citrix] Insight Services ({0} of {1})</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>Uploading report to [Citrix] Insight Services</value>
@@ -7967,6 +7973,20 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>Could not save session</value>
   </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>By pressing Yes, the following step will be skipped:
+    
+{0}
+
+Do you want to continue?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>By pressing Yes, the following steps will be skipped:
+    
+{0}
+
+Do you want to continue?</value>
+  </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>You must eject all slaves from the pool before you can delete the pool.</value>
   </data>
@@ -8910,9 +8930,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>New Virtual Network Interface - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>Select a storage repository to create the disk on</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
   </data>
@@ -8940,6 +8957,9 @@ Once the VM has restarted click the Install [Citrix VM Tools] menu item once aga
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
+  </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>&amp;Create</value>
   </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>New Folder</value>
@@ -9750,20 +9770,6 @@ Installation size: {1}</value>
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>Failed to download {0} from '{1}'</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update is installed on '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .{2} file instead.</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .{2} file instead.</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 Date modified: {1}
@@ -10537,6 +10543,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>&amp;Rename Folder...</value>
   </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>Rename Folder</value>
+  </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>Rename tag '{0}'</value>
   </data>
@@ -10685,10 +10694,10 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>No longer connected to {0}. Please review your selection and try again.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>The rolling pool upgrade process was not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+    <value>The rolling pool upgrade process was not completed successfully. The upgrade process has been paused.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>The following errors occurred while rolling pool upgrade was in progress:</value>
@@ -10749,6 +10758,15 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>{0} could be skipped.</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>Installing update '{0}' on '{1}'</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>Skipping installing update '{0}' on '{1}'...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
@@ -11661,17 +11679,17 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPUs: {0}</value>
   </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>Interface {0}: Network = {1}</value>
+  </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>You must install the Linux pack to use this template</value>
   </data>
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;no description&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>Terminating sessions...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>Interface {0}: Network = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>Terminating session for user '{0}'</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>Test archive target location</value>
@@ -11994,11 +12012,6 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}: The '{1}' storage repository is broken.</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>Unable to download update from '{0}': no longer connected.
-
-Check your settings and try again.</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: Cannot migrate VM '{1}'</value>
   </data>
@@ -12076,6 +12089,14 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the server is unreachable.</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>This is not a valid update file.
+
+Please check your settings and try again.</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' has a local CD/DVD in its drive.</value>
   </data>
@@ -12090,12 +12111,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>Ensure you have upgraded [XenCenter] before upgrading [XenServer].</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>No valid update file found in {0}</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>No further action is required for this update.</value>
@@ -12161,7 +12176,7 @@ Check your settings and try again.</value>
     <value>Deleting update installation file {0} from {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>Removing update file {0} from {1}...</value>
+    <value>Removing update file {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>
@@ -12898,6 +12913,12 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>This VM has a pass-through GPU assigned.</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>This VM has a virtual GPU assigned.</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>Memory and/or VCPU changes will take effect when you restart the VM.</value>

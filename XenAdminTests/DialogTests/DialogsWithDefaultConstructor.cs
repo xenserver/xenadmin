@@ -70,8 +70,8 @@ namespace XenAdminTests.DialogTests.state1_xml.DialogsWithDefaultConstructor
         protected override void RunBeforeShow()
         {
             dialog.Text = "Foo";
-            dialog.promptLabel.Text = "Bar";
-            dialog.textBox1.Text = "stuff";
+            dialog.PromptText = "Bar";
+            dialog.InputText = "stuff";
             dialog.HelpID = "NewFolderDialog";
         }
     }

@@ -45,8 +45,9 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class PatchPrecheckCheck : HostCheck
     {
-        private readonly Pool_patch _patch;
-        private readonly Pool_update _update;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly Pool_patch Patch;
+        private readonly Pool_update Update;
 
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
@@ -54,27 +55,17 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
         private  SR srUploadedUpdates;
 
-        public PatchPrecheckCheck(Host host, Pool_patch patch)
-            : this(host, patch, null)
-        { 
-        }
-
-        public PatchPrecheckCheck(Host host, Pool_update update)
-            : this(host, update, null)
-        {
-        }
-
         public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
-            _patch = patch;
+            Patch = patch;
             this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
         public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost, SR srUploadedUpdates = null)
             : base(host)
         {
-            _update = update;
+            Update = update;
             this.livePatchCodesByHost = livePatchCodesByHost;
             this.srUploadedUpdates = srUploadedUpdates;
         }
@@ -157,18 +148,6 @@ namespace XenAdmin.Diagnostics.Checks
         {
             get { return Messages.SERVER_SIDE_CHECK_DESCRIPTION; }
         }
-
-        public Pool_patch Patch
-        {
-            get { return _patch; }
-        }
-
-        public Pool_update Update
-        {
-            get { return _update; }
-        }
-
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Find problem from xml result

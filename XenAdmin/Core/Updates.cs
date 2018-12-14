@@ -61,7 +61,10 @@ namespace XenAdmin.Core
 
         private static readonly object updateAlertsLock = new object();
         private static readonly ChangeableList<Alert> updateAlerts = new ChangeableList<Alert>();
-        
+
+        public const string IgnorePatchKey = "XenCenter.IgnorePatches";
+        public const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
+
         public static IEnumerable<Alert> UpdateAlerts
         {
             get { return updateAlerts; }
@@ -135,33 +138,33 @@ namespace XenAdmin.Core
                     if (alert is XenServerPatchAlert)
                     {
 
-                        if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
+                        if (other_config.ContainsKey(IgnorePatchKey))
                         {
-                            List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
+                            List<string> current = new List<string>(other_config[IgnorePatchKey].Split(','));
                             if (current.Contains(((XenServerPatchAlert)alert).Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                                 continue;
                             current.Add(((XenServerPatchAlert)alert).Patch.Uuid);
-                            other_config[IgnorePatchAction.IgnorePatchKey] = string.Join(",", current.ToArray());
+                            other_config[IgnorePatchKey] = string.Join(",", current.ToArray());
                         }
                         else
                         {
-                            other_config.Add(IgnorePatchAction.IgnorePatchKey, ((XenServerPatchAlert)alert).Patch.Uuid);
+                            other_config.Add(IgnorePatchKey, ((XenServerPatchAlert)alert).Patch.Uuid);
                         }
                     }
                     if (alert is XenServerVersionAlert)
                     {
 
-                        if (other_config.ContainsKey(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY))
+                        if (other_config.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
                         {
-                            List<string> current = new List<string>(other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
-                            if (current.Contains(((XenServerVersionAlert)alert).Version.VersionAndOEM))
+                            List<string> current = new List<string>(other_config[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
+                            if (current.Contains(((XenServerVersionAlert)alert).Version.Version.ToString()))
                                 continue;
-                            current.Add(((XenServerVersionAlert)alert).Version.VersionAndOEM);
-                            other_config[IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
+                            current.Add(((XenServerVersionAlert)alert).Version.Version.ToString());
+                            other_config[LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
                         }
                         else
                         {
-                            other_config.Add(IgnoreServerAction.LAST_SEEN_SERVER_VERSION_KEY, ((XenServerVersionAlert)alert).Version.VersionAndOEM);
+                            other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, ((XenServerVersionAlert)alert).Version.Version.ToString());
                         }                       
                     }
                     Updates.RemoveUpdate(alert);
@@ -851,9 +854,7 @@ namespace XenAdmin.Core
                 if (version.BuildNumber != string.Empty)
                     return (host.BuildNumberRaw() == version.BuildNumber);
 
-                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                           && Helpers.HostProductVersion(host) == version.Version.ToString());
+                return Helpers.HostProductVersion(host) == version.Version.ToString();
             });
             return serverVersions;
         }

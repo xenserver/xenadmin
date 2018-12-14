@@ -64,7 +64,12 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         public override AsyncAction CreateUnwindChangesAction()
         {
             Program.MainWindow.CloseActiveWizards(Server.Connection);
-            return new DisableHostAction(Server);
+
+            var server = Server.Connection.Resolve(new XenRef<Host>(Server.opaque_ref));
+            if (server == null)
+                return null;
+
+            return new DisableHostAction(server);
         }
 
     }

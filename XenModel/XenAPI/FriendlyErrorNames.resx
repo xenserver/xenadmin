@@ -1913,6 +1913,9 @@ Authorized Roles: {1}</value>
   <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
     <value>The operation cannot be performed on physical device</value>
   </data>
+  <data name="VDI_IS_ENCRYPTED" xml:space="preserve">
+    <value>The requested operation is not allowed because the specified VDI is encrypted.</value>
+  </data>
   <data name="VDI_IS_NOT_ISO" xml:space="preserve">
     <value>This operation can only be performed on CD VDIs (iso files or CDROM drives).  VDI {0} is of type {1}.</value>
   </data>

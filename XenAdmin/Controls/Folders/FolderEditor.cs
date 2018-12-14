@@ -57,7 +57,7 @@ namespace XenAdmin.Controls
             get { return _folderListItem.Path; }
         }
 
-        private void folderListItem_PathChanged(object sender, EventArgs e)
+        private void folderListItem_PathChanged()
         {
             RefreshBuffer();
             Refresh();

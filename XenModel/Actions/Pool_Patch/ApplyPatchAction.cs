@@ -133,9 +133,10 @@ namespace XenAdmin.Actions
             Description = string.Format(Messages.APPLYING_PATCH, patch.Name(), host.Name());
             log.Debug(Description);
 
-            var result = Pool_patch.apply(Session, patchRef, host.opaque_ref);
+            RelatedTask = Pool_patch.async_apply(Session, patchRef, host.opaque_ref);
+            PollToCompletion();
 
-            log.DebugFormat(Messages.APPLY_PATCH_LOG_MESSAGE, patch.Name(), host.Name(), result);
+            log.DebugFormat(Messages.APPLY_PATCH_LOG_MESSAGE, patch.Name(), host.Name(), Result);
             Description = string.Format(Messages.PATCH_APPLIED, patch.Name(), host.Name());
         }
     }

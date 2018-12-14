@@ -69,9 +69,8 @@ namespace XenAdmin.Dialogs
             srPicker1.Usage = SrPickerType;
             srPicker1.SetExistingVDIs(_vdis.ToArray());
             srPicker1.DiskSize = _vdis.Sum(d => d.physical_utilisation);
-            srPicker1.SrHint.Visible = false;
             srPicker1.Connection = connection;
-            srPicker1.srListBox.Invalidate();
+            srPicker1.Invalidate();
             srPicker1.selectDefaultSROrAny();
         }
 
@@ -85,12 +84,7 @@ namespace XenAdmin.Dialogs
             get { return SrPicker.SRPickerType.MoveOrCopy; }
         }
 
-        private void srPicker1_ItemSelectionNull()
-        {
-            updateButtons();
-        }
-
-        private void srPicker1_ItemSelectionNotNull()
+        private void srPicker1_SrSelectionChanged(object obj)
         {
             updateButtons();
         }

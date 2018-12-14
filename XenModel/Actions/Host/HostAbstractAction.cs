@@ -88,7 +88,6 @@ namespace XenAdmin.Actions
                         ? VM.async_clean_shutdown(Session, vm.opaque_ref)
                         : VM.async_hard_shutdown(Session, vm.opaque_ref);
                     PollToCompletion(PercentComplete, PercentComplete + step);
-                    PercentComplete += step;
                     i++;
                 }
             }

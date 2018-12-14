@@ -201,14 +201,29 @@ namespace XenAdmin.Commands
             {
                 return Messages.VM_SHUT_DOWN;
             }
-            else if (vm.power_state == vm_power_state.Suspended)
+            if (vm.power_state == vm_power_state.Suspended)
             {
                 return Messages.VM_ALREADY_SUSPENDED;
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
-        }
+            var noToolsOrDriversReason = GetCantExecuteNoToolsOrDriversReasonCore(item);
+            if (noToolsOrDriversReason != null)
+            {
+                return noToolsOrDriversReason;
+            }
 
+            if (vm.HasGPUPassthrough())
+            {
+                return Messages.VM_HAS_GPU_PASSTHROUGH;
+            }
+
+            if (vm.HasVGPUs())
+            {
+                return Messages.VM_HAS_VGPUS;
+            }
+
+            return base.GetCantExecuteReasonCore(item);
+        }
 
         protected override AsyncAction BuildAction(VM vm)
         {

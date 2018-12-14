@@ -238,7 +238,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.dataGridViewPatches.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewPatches.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewPatches.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPatches_CellContentClick);
-            this.dataGridViewPatches.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPatches_CellMouseClick);
             this.dataGridViewPatches.SelectionChanged += new System.EventHandler(this.dataGridViewPatches_SelectionChanged);
             this.dataGridViewPatches.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewPatches_SortCompare);
             this.dataGridViewPatches.Enter += new System.EventHandler(this.dataGridViewPatches_Enter);

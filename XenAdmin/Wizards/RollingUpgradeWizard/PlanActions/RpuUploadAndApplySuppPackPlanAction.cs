@@ -65,6 +65,24 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             this.hostsThatWillRequireReboot = hostsThatWillRequireReboot;
         }
 
+        public override bool IsSkippable
+        {
+            get { return true; }
+        }
+
+        public override string Title
+        {
+            get
+            {
+                return string.Format(Messages.RPU_WIZARD_INSTALL_SUPPPACK_TITLE, Path.GetFileName(suppPackPath), host.Name());
+            }
+        }
+
+        protected override void DoOnSkip()
+        {
+            AddProgressStep(string.Format(Messages.RPU_WIZARD_SKIP_INSTALL_SUPPPACK, Path.GetFileName(suppPackPath), host.Name()));
+        }
+
         protected override void RunWithSession(ref Session session)
         {
             var conn = session.Connection;
@@ -164,8 +182,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         alreadyApplied = true;
                     }
                     else
-                        throw new Exception(string.Format("{0}: {1}. {2}", host, problems[0].Title,
-                            problems[0].Description));
+                        throw new Exception(problems[0].Description);
                 }
             }
             catch (Exception ex)
@@ -193,10 +210,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             {
                 if (f.ErrorDescription.Count > 1 && f.ErrorDescription[0] == Failure.UPDATE_ALREADY_APPLIED)
                 {
-                    log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.", suppPack,
-                        host.Name());
-                    ReplaceProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPDATE, suppPack,
-                        host.Name()));
+                    log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.", suppPack, host.Name());
+                    ReplaceProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPDATE, suppPack, host.Name()));
                 }
                 else
                     throw;
@@ -223,7 +238,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             {
                 try
                 {
-                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, suppPack, master.Name()));
+                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, suppPack));
 
                     Pool_update.pool_clean(session, update.opaque_ref);
                     if (!update.AppliedOnHosts().Any())
@@ -243,7 +258,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             switch (guidance)
             {
                 case update_after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, hostsThatWillRequireReboot);
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, false, hostsThatWillRequireReboot);
                 case update_after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case update_after_apply_guidance.restartHVM:

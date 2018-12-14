@@ -55,6 +55,20 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly object historyLock = new object();
         private readonly Stack<string> _progressHistory = new Stack<string>();
 
+        public virtual string Title
+        {
+            get { return null; }
+        }
+
+        public virtual bool IsSkippable
+        {
+            get { return false; }
+        }
+
+        public virtual bool Skipping { private get; set; }
+
+        protected virtual void DoOnSkip() { }
+
         public int PercentComplete
         {
             get
@@ -94,7 +108,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     _progressHistory.Clear();
                 _running = true;
                 PercentComplete = 0;
-                _Run();
+                if (Skipping)
+                {
+                    DoOnSkip();
+                    Skipping = false;
+                }
+                else
+                {
+                    _Run();
+                }
                 AddProgressStep(null);
             }
             catch (CancelledException e)
