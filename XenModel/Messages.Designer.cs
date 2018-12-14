@@ -18727,6 +18727,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boot options.
+        /// </summary>
+        public static string IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the boot mode for the new virtual machine.
+        /// </summary>
+        public static string IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the location where the imported VM will be placed.
         /// </summary>
         public static string IMPORT_SELECT_HOST_PAGE_TITLE {

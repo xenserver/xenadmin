@@ -6576,6 +6576,12 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_SOURCE_IS_READONLY" xml:space="preserve">
     <value>You do not have write permission on the location provided. Read-write access is required to import this type of file.</value>
   </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT" xml:space="preserve">
+    <value>Boot options</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE" xml:space="preserve">
+    <value>Select the boot mode for the new virtual machine</value>
+  </data>
   <data name="IMPORT_SELECT_HOST_PAGE_TITLE" xml:space="preserve">
     <value>Select the location where the imported VM will be placed</value>
   </data>

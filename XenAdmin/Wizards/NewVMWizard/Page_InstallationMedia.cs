@@ -90,7 +90,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             PvBootBox.Visible = !IsSelectedTemplateHVM;
             PvBootTextBox.Text = m_template.PV_args;
 
-            bootModesControl1.Visible = IsSelectedTemplateHVM;
+            bootModesControl1.Visible = Helpers.NaplesOrGreater(SelectedTemplate.Connection) && IsSelectedTemplateHVM;
             bootModesControl1.TemplateVM = m_template;
 
             if (!ShowInstallationMedia)
@@ -282,7 +282,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                         sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_NETWORKMEDIAPAGE_INSTALLATIONURL, SelectedUrl));
                         break;
                 }
-                if (IsSelectedTemplateHVM)
+                if (Helpers.NaplesOrGreater(SelectedTemplate.Connection) && IsSelectedTemplateHVM)
                     sum.Add(new KeyValuePair<string, string>(Messages.BOOT_MODE, SelectedBootMode.StringOf()));
                 return sum;
             }

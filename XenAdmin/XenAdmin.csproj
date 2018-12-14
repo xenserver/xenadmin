@@ -752,6 +752,12 @@
     <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\ImportWizard\ImportBootOptionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\ImportWizard\ImportBootOptionPage.Designer.cs">
+      <DependentUpon>ImportBootOptionPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\WizardHelpers.cs" />
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.cs">
@@ -2186,6 +2192,16 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ImportWizard\ImportBootOptionPage.ja.resx">
+      <DependentUpon>ImportBootOptionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ImportWizard\ImportBootOptionPage.resx">
+      <DependentUpon>ImportBootOptionPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ImportWizard\ImportBootOptionPage.zh-CN.resx">
+      <DependentUpon>ImportBootOptionPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.ja.resx">
       <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>

@@ -81,7 +81,6 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_upDownMemory.Value = m_upDownMemory.Minimum;
 			m_upDownCpuCount.Value = m_upDownCpuCount.Minimum;
 			m_upDownAddSpace.Value = m_upDownAddSpace.Minimum;
-			bootModesControl1.CheckBIOSBootMode();
 		}
 
         public override void SelectDefaultControl()
@@ -107,9 +106,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		public ulong Memory { get { return (ulong)m_upDownMemory.Value; } }
 
 		public ulong AdditionalSpace { get { return m_groupBoxAddSpace.Enabled ? (ulong)m_upDownAddSpace.Value * GB : 0; } }
-
-		public Actions.VMActions.BootMode SelectedBootMode { get { return bootModesControl1.SelectedOption; } }
-
+        
 		#endregion
 
 		#region Private Methods

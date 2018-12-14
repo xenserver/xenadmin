@@ -68,6 +68,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private readonly NetworkPickerPage m_pageXvaNetwork;
         private readonly GlobalSelectHost m_pageXvaHost;
         private readonly LunPerVdiImportPage lunPerVdiMappingPage;
+        private readonly ImportBootOptionPage m_pageBootOptions;
 
         private IXenObject m_selectedObject;
 		private Dictionary<string, VmMapping> m_vmMappings = new Dictionary<string, VmMapping>();
@@ -100,6 +101,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		    m_pageXvaNetwork = new NetworkPickerPage();
 		    m_pageXvaHost = new GlobalSelectHost();
             lunPerVdiMappingPage = new LunPerVdiImportPage { Connection = con };
+		    m_pageBootOptions = new ImportBootOptionPage();
 
 			m_selectedObject = xenObject;
             m_pageTvmIp.IsExportMode = false;
@@ -195,6 +197,7 @@ namespace XenAdmin.Wizards.ImportWizard
 							pictureBoxWizard.Image = Properties.Resources._000_ImportVirtualAppliance_h32bit_32;
 							m_pageFinish.ShowStartVmsGroupBox = false;
                             RemovePages(imagePages);
+                            RemovePage(m_pageBootOptions);
                             RemovePages(xvaPages);
                             AddAfterPage(m_pageImportSource, appliancePages);
 						}
@@ -236,6 +239,7 @@ namespace XenAdmin.Wizards.ImportWizard
 							pictureBoxWizard.Image = Properties.Resources._000_ImportVM_h32bit_32;
 							m_pageFinish.ShowStartVmsGroupBox = true;
                             RemovePages(imagePages);
+						    RemovePage(m_pageBootOptions);
                             RemovePages(appliancePages);
                             AddAfterPage(m_pageImportSource, xvaPages);
 						}
@@ -267,6 +271,13 @@ namespace XenAdmin.Wizards.ImportWizard
                 m_pageNetwork.Connection = TargetConnection;
                 m_pageOptions.Connection = TargetConnection;
                 m_pageTvmIp.Connection = TargetConnection;
+			    RemovePage(m_pageBootOptions);
+                if (m_typeOfImport == ImportType.Vhd && Helpers.NaplesOrGreater(TargetConnection))
+			    {
+			        AddAfterPage(m_pageNetwork, m_pageBootOptions);
+			        m_pageBootOptions.Connection = TargetConnection;
+			    }
+			    m_pageBootOptions.Connection = TargetConnection;
 				NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions, m_pageTvmIp);
 			}
 			else if (type == typeof(ImportSelectStoragePage))
@@ -524,7 +535,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageVMconfig.VmName));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_CPUCOUNT, m_pageVMconfig.CpuCount.ToString()));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_MEMORY, string.Format(Messages.VAL_MB, m_pageVMconfig.Memory)));
-			temp.Add(new Tuple(Messages.BOOT_MODE, m_pageVMconfig.SelectedBootMode.StringOf()));
+			if (Helpers.NaplesOrGreater(TargetConnection))
+			    temp.Add(new Tuple(Messages.BOOT_MODE, m_pageBootOptions.SelectedBootMode.StringOf()));
 
 			if (m_pageImportSource.IsWIM)
 				temp.Add(new Tuple(Messages.FINISH_PAGE_ADDSPACE, Util.DiskSizeString(m_pageVMconfig.AdditionalSpace)));
@@ -689,7 +701,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE,
 											Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
 
-			var bootMode = m_pageVMconfig.SelectedBootMode;
+			var bootMode = m_pageBootOptions.SelectedBootMode;
 			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", XenOvf.Properties.Settings.Default.xenBootOptions, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
 			var bootParams = XenOvf.Properties.Settings.Default.xenBootParams + (bootMode == BootMode.UEFI_BOOT || bootMode == BootMode.UEFI_SECURE_BOOT ? "firmware=uefi;" : string.Empty);
 			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_params", bootParams, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
