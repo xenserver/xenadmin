@@ -111,7 +111,7 @@ namespace XenAdmin.Diagnostics.Checks
                     return FindProblem(result);
                 }
 
-                if (Update!= null && Helpers.ElyOrGreater(Host))// is the version check needed??
+                if (Update!= null)
                 {
                     var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
 

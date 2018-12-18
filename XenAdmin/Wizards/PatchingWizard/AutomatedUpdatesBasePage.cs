@@ -573,7 +573,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (!uploadedPatches.Contains(patch))
                 {
                     planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));
-                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk));
+                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk, true));
                     uploadedPatches.Add(patch);
                 }
 

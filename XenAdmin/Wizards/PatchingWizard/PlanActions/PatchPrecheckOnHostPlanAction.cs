@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (mapping is PoolPatchMapping patchMapping)
                     problems = new PatchPrecheckCheck(host, patchMapping.Pool_patch, livePatchStatus).RunAllChecks();
                 else if (mapping is PoolUpdateMapping updateMapping)
-                    new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
+                    problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
               
                 Problem problem = null;
 

@@ -229,7 +229,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Messages.REVERTED_WIZARD_CHANGES,
                 GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
 
-            CleanUploadedPatches();
+            CleanUploadedPatches(true);
             RemoveDownloadedPatches();
         }
         
@@ -241,7 +241,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.FinishWizard();
         }
 
-        private void CleanUploadedPatches()
+        private void CleanUploadedPatches(bool forceCleanSelectedPatch = false)
         {
             var list = new List<AsyncAction>();
 
@@ -253,7 +253,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     // exclude the selected patch; either the user wants to keep it or it has already been cleared in the patching page
                     if (PatchingWizard_UploadPage.Patch == null ||
-                        !string.Equals(patch.uuid, PatchingWizard_UploadPage.Patch.uuid, StringComparison.OrdinalIgnoreCase))
+                        !string.Equals(patch.uuid, PatchingWizard_UploadPage.Patch.uuid, StringComparison.OrdinalIgnoreCase) ||
+                        forceCleanSelectedPatch)
                         list.Add(GetCleanActionForPoolPatch(patch));
                 }
                 else if (mapping is PoolUpdateMapping updateMapping)
