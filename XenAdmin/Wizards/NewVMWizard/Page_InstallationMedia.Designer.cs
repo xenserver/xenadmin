@@ -40,9 +40,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.CdDropDownBox = new XenAdmin.Controls.ISODropDownBox();
             this.UrlTextBox = new System.Windows.Forms.TextBox();
             this.panelInstallationMethod = new System.Windows.Forms.TableLayoutPanel();
+            this.bootModesControl1 = new XenAdmin.Wizards.BootModesControl();
             this.linkLabelAttachNewIsoStore = new System.Windows.Forms.LinkLabel();
             this.comboBoxToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.bootModesControl1 = new XenAdmin.Wizards.BootModesControl();
             this.PvBootBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelInstallationMethod.SuspendLayout();
@@ -73,6 +73,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // PvBootBox
             // 
             resources.ApplyResources(this.PvBootBox, "PvBootBox");
+            this.panelInstallationMethod.SetColumnSpan(this.PvBootBox, 2);
             this.PvBootBox.Controls.Add(this.tableLayoutPanel2);
             this.PvBootBox.Name = "PvBootBox";
             this.PvBootBox.TabStop = false;
@@ -115,6 +116,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             // panelInstallationMethod
             // 
             resources.ApplyResources(this.panelInstallationMethod, "panelInstallationMethod");
+            this.panelInstallationMethod.Controls.Add(this.bootModesControl1, 0, 7);
+            this.panelInstallationMethod.Controls.Add(this.PvBootBox, 0, 6);
             this.panelInstallationMethod.Controls.Add(this.CdRadioButton, 0, 1);
             this.panelInstallationMethod.Controls.Add(this.UrlRadioButton, 0, 3);
             this.panelInstallationMethod.Controls.Add(this.label1, 0, 0);
@@ -123,6 +126,13 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.panelInstallationMethod.Controls.Add(this.linkLabelAttachNewIsoStore, 1, 2);
             this.panelInstallationMethod.Name = "panelInstallationMethod";
             // 
+            // bootModesControl1
+            // 
+            resources.ApplyResources(this.bootModesControl1, "bootModesControl1");
+            this.bootModesControl1.BackColor = System.Drawing.SystemColors.Control;
+            this.panelInstallationMethod.SetColumnSpan(this.bootModesControl1, 2);
+            this.bootModesControl1.Name = "bootModesControl1";
+            // 
             // linkLabelAttachNewIsoStore
             // 
             resources.ApplyResources(this.linkLabelAttachNewIsoStore, "linkLabelAttachNewIsoStore");
@@ -130,19 +140,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.linkLabelAttachNewIsoStore.TabStop = true;
             this.linkLabelAttachNewIsoStore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // bootModesControl1
-            // 
-            this.bootModesControl1.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.bootModesControl1, "bootModesControl1");
-            this.bootModesControl1.Name = "bootModesControl1";
-            // 
             // Page_InstallationMedia
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.bootModesControl1);
             this.Controls.Add(this.panelInstallationMethod);
-            this.Controls.Add(this.PvBootBox);
             this.Name = "Page_InstallationMedia";
             this.PvBootBox.ResumeLayout(false);
             this.PvBootBox.PerformLayout();

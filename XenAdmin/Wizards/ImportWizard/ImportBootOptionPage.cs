@@ -33,7 +33,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-
+            if (direction == PageLoadedDirection.Forward)
+                bootModesControl1.Connection = Connection;
         }
 
         public override void PopulatePage()

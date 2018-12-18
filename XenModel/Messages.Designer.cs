@@ -16688,6 +16688,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The UEFI boot mode is experimental, and is currently not suitable for production use..
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI boot mode is not supported with the selected template..
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are experimental, and are currently not suitable for production use..
+        /// </summary>
+        public static string GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are not supported with the selected template..
+        /// </summary>
+        public static string GUEFI_BOOT_MODES_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODES_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI secure boot mode is experimental, and is currently not suitable for production use..
+        /// </summary>
+        public static string GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI secure boot mode is not supported with the selected template..
+        /// </summary>
+        public static string GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This version of [XenCenter] is out of date and cannot connect to {0}.
         ///
         ///You can get a compatible version of [XenCenter] from the following location:.
