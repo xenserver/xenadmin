@@ -52,6 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private KeyValuePair<XenServerPatch, string> patchFromDisk;
         private AsyncAction inProgressAction;
         private bool skipDiskSpaceCheck;
+        private readonly UpdateType updateType;
         private string updateFilePath;
         private readonly Control invokingControl;
         private readonly List<Host> selectedServers;
@@ -70,11 +71,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
         public UploadPatchToMasterPlanAction(Control invokingControl, IXenConnection connection, List<Host> selectedServers,
-            string updateFilePath, List<HostUpdateMapping> mappings, bool skipDiskSpaceCheck = false)
+            string updateFilePath, UpdateType updateType, List<HostUpdateMapping> mappings, bool skipDiskSpaceCheck = false)
             : base(connection)
         {
             this.invokingControl = invokingControl;
             this.updateFilePath = updateFilePath;
+            this.updateType = updateType;
             this.mappings = mappings;
             this.skipDiskSpaceCheck = skipDiskSpaceCheck;
             this.selectedServers = selectedServers;
@@ -117,7 +119,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
             else if (updateFilePath != null)
             {
-                UploadSuppPack(conn, session, path);
+                if (updateType == UpdateType.ISO)
+                    UploadSuppPack(conn, session, path);
+                else
+                    UploadLegacyPatch(conn, session, path);
             }
         }
 
@@ -208,18 +213,36 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             // this has to be run again to refresh poolPatches (to get the recently uploaded one as well)
             var poolPatches = new List<Pool_patch>(conn.Cache.Pool_patches);
 
-            var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
-            if (poolPatch == null)
+            Pool_patch poolPatch;
+            if (xenServerPatch != null)
             {
-                log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).",
-                    xenServerPatch.Uuid, conn);
+                poolPatch = poolPatches.Find(p => string.Equals(p.uuid, xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
 
-                throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                if (poolPatch == null)
+                {
+                    log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).",
+                        xenServerPatch.Uuid, conn);
+                    throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                }
+
+                var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetMaster(conn));
+                if (!mappings.Contains(newMapping))
+                    mappings.Add(newMapping);
             }
+            else
+            {
+                poolPatch = uploadPatchAction.Patch;
+                if (poolPatch == null)
+                {
+                    log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch {0} on host (uuid={1}).",
+                        updateFilePath, conn);
+                    throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                }
 
-            var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetMaster(conn));
-            if (!mappings.Contains(newMapping))
-                mappings.Add(newMapping);
+                var newMapping = new OtherLegacyMapping(updateFilePath, poolPatch, Helpers.GetMaster(conn));
+                if (!mappings.Contains(newMapping))
+                    mappings.Add(newMapping);
+            }
         }
 
         private void UploadSuppPack(IXenConnection conn, Session session, string path)

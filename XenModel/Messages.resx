@@ -9810,9 +9810,6 @@ Date modified: {1}
 Date created: {2}
 Size: {3}</value>
   </data>
-  <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>{0}: This patch is for servers with version matching the regular expression '{1}'.</value>
-  </data>
   <data name="PATCH_INSTALLATION_SIZE" xml:space="preserve">
     <value>Installation size: {0}</value>
   </data>

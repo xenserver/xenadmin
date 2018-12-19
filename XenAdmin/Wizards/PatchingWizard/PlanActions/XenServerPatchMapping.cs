@@ -157,7 +157,54 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
     }
 
-    
+
+    public class OtherLegacyMapping : HostUpdateMapping
+    {
+        public readonly string Path;
+        public readonly Pool_patch Pool_patch;
+
+        public OtherLegacyMapping(string path, Pool_patch pool_patch, Host masterHost)
+            : base(masterHost)
+        {
+            Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException("path");
+            Pool_patch = pool_patch;
+        }
+
+        public bool Matches(Host masterHost, string path, Pool_patch patch = null)
+        {
+            if (patch == null)
+                return Matches(masterHost) && Path == path;
+
+            return Matches(masterHost) && Path == path && Pool_patch != null &&
+                   string.Equals(patch.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is OtherLegacyMapping other && Matches(other.MasterHost, other.Path, other.Pool_patch);
+        }
+
+        public override int GetHashCode()
+        {
+            if (Pool_patch == null)
+                return Path.GetHashCode() ^ base.GetHashCode();
+
+            return Path.GetHashCode() ^ Pool_patch.GetHashCode() ^ base.GetHashCode();
+        }
+
+        public override bool IsValid
+        {
+            get
+            {
+                if (Pool_patch == null)
+                    return true;
+
+                return Pool_patch.opaque_ref != null;
+            }
+        }
+    }
+
+
     public class SuppPackMapping : HostUpdateMapping
     {
         public readonly string Path;

@@ -67,7 +67,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public UpdateType SelectedUpdateType { private get; set; }
         public Pool_patch Patch { private get; set; }
         public Pool_update PoolUpdate { private get; set; }
-        public List<HostUpdateMapping> PatchMappings { private get; set; }
 
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { private get; set; }
         public bool IsAutomaticMode { private get; set; }

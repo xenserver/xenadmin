@@ -54,11 +54,6 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             get 
             {
-                if (!string.IsNullOrEmpty(_versionRequired))
-                {
-                    return string.Format(Messages.PATCH_FOR_XENSERVER_VERSION, ServerName,_versionRequired);
-                }
-
                 return string.Format(Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION, ServerName);
             }
         }

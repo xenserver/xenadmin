@@ -27304,15 +27304,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: This patch is for servers with version matching the regular expression &apos;{1}&apos;..
-        /// </summary>
-        public static string PATCH_FOR_XENSERVER_VERSION {
-            get {
-                return ResourceManager.GetString("PATCH_FOR_XENSERVER_VERSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Installation size: {0}.
         /// </summary>
         public static string PATCH_INSTALLATION_SIZE {

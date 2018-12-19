@@ -61,13 +61,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get
             {
-                if (SelectedUpdateAlert == null)
-                    return null;
+                if (SelectedUpdateAlert != null)
+                    return (from HostUpdateMapping mapping in PatchMappings
+                        let m = mapping as PoolPatchMapping
+                        where m != null && m.XenServerPatch.Equals(SelectedUpdateAlert.Patch)
+                        select m.Pool_patch).FirstOrDefault();
 
-                return (from HostUpdateMapping mapping in PatchMappings
-                    let m = mapping as PoolPatchMapping
-                    where m != null && m.XenServerPatch.Equals(SelectedUpdateAlert.Patch)
-                    select m.Pool_patch).FirstOrDefault();
+                if (SelectedPatchFilePath != null)
+                    return (from HostUpdateMapping mapping in PatchMappings
+                        let m = mapping as OtherLegacyMapping
+                        where m != null && m.Path.Equals(SelectedPatchFilePath)
+                        select m.Pool_patch).FirstOrDefault();
+
+                return null;
             }
         }
 
@@ -103,7 +109,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         foreach (var kvp in m.SuppPackVdis)
                             suppPackVdis[kvp.Key] = kvp.Value;
-                    };
+                    }
                 }
 
                 return suppPackVdis;
@@ -213,7 +219,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 var servers = SelectedServers.Where(s => s.Connection == master.Connection).ToList();
                 planActions.Add(new UploadPatchToMasterPlanAction(this, master.Connection, servers, SelectedPatchFilePath,
-                    PatchMappings, skipDiskSpaceCheck));
+                    SelectedUpdateType, PatchMappings, skipDiskSpaceCheck));
             }
 
             var hostPlan = new HostPlan(master, null, planActions, null);

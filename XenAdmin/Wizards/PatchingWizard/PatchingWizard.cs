@@ -203,7 +203,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_PatchingPage.Patch = patch;
                 PatchingWizard_PatchingPage.PoolUpdate = update;
-                PatchingWizard_PatchingPage.PatchMappings = PatchingWizard_UploadPage.PatchMappings;
                 PatchingWizard_PatchingPage.SuppPackVdis = suppPackVdis;
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
@@ -247,21 +246,30 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var mapping in PatchingWizard_UploadPage.PatchMappings)
             {
+                Pool_patch patch = null;
                 if (mapping is PoolPatchMapping patchMapping)
-                {
-                    var patch = patchMapping.Pool_patch;
+                    patch = patchMapping.Pool_patch;
+                else if (mapping is OtherLegacyMapping legacyMapping)
+                    patch = legacyMapping.Pool_patch;
 
+                if (patch != null)
+                {
                     // exclude the selected patch; either the user wants to keep it or it has already been cleared in the patching page
                     if (PatchingWizard_UploadPage.Patch == null ||
                         !string.Equals(patch.uuid, PatchingWizard_UploadPage.Patch.uuid, StringComparison.OrdinalIgnoreCase) ||
                         forceCleanSelectedPatch)
                         list.Add(GetCleanActionForPoolPatch(patch));
+
+                    continue;
                 }
-                else if (mapping is PoolUpdateMapping updateMapping)
+                
+                if (mapping is PoolUpdateMapping updateMapping)
                 {
                     list.Add(GetCleanActionForPoolUpdate(updateMapping.Pool_update));
+                    continue;
                 }
-                else if (mapping is SuppPackMapping suppPackMapping)
+                
+                if (mapping is SuppPackMapping suppPackMapping)
                 {
                     if (suppPackMapping.Pool_update!= null)
                         list.Add(GetCleanActionForPoolUpdate(suppPackMapping.Pool_update));
