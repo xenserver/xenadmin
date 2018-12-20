@@ -104,8 +104,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Status = Status.Cancelled;
                 backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
             }
-
-            base.PageCancelled();
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
