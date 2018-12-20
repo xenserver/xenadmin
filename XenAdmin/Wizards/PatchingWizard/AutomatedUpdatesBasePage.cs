@@ -99,11 +99,23 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override void PageCancelled(ref bool cancel)
         {
-            if (!_thisPageIsCompleted)
+            if (_thisPageIsCompleted)
+                return;
+
+            using (var dlog = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, ReconsiderCancellationMessage(), Text),
+                ThreeButtonDialog.ButtonYes,
+                ThreeButtonDialog.ButtonNo))
             {
-                Status = Status.Cancelled;
-                backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                {
+                    cancel = true;
+                    return;
+                }
             }
+
+            Status = Status.Cancelled;
+            backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
@@ -137,6 +149,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected abstract string SuccessMessagePerPool(Pool pool);
         protected abstract string FailureMessagePerPool(bool multipleErrors);
         protected abstract string UserCancellationMessage();
+        protected abstract string ReconsiderCancellationMessage();
 
         protected abstract List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts);
 

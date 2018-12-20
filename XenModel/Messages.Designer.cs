@@ -6216,9 +6216,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leaving this page will cancel compilation of the status report.
+        ///   Looks up a localized string similar to Are you sure you want to leave this page?
         ///
-        ///Do you wish to continue?.
+        ///This will cancel compilation of the status report..
         /// </summary>
         public static string BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL {
             get {
@@ -27470,6 +27470,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to leave this page?
+        ///
+        ///This will cancel the update process and may leave your system in an unstable state..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION_RECONSIDER {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION_RECONSIDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
@@ -28173,6 +28184,17 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to leave this page?
+        ///
+        ///This will cancel the upload process..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER", resourceCulture);
             }
         }
         
@@ -30880,6 +30902,17 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_CANCELLATION {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_CANCELLATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to leave this page?
+        ///
+        ///This will cancel the rolling pool upgrade process and may leave your system in an unstable state..
+        /// </summary>
+        public static string ROLLING_UPGRADE_CANCELLATION_RECONSIDER {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_CANCELLATION_RECONSIDER", resourceCulture);
             }
         }
         

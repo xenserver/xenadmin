@@ -192,6 +192,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Messages.PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION;
         }
 
+        protected override string ReconsiderCancellationMessage()
+        {
+            return Messages.PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER;
+        }
+
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
             var master = Helpers.GetMaster(pool);

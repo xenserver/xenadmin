@@ -174,6 +174,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION;
         }
 
+        protected override string ReconsiderCancellationMessage()
+        {
+            return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION_RECONSIDER;
+        }
+
         #endregion
 
         #region Manual mode
