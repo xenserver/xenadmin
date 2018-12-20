@@ -4082,9 +4082,6 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>{0} でクラスタリングが無効です。</value>
   </data>
-  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
-    <value>アップデートの自動チェックが無効になっているため、アップデートが見つかりません。</value>
-  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>スナップショット スケジュール '{0}' が無効になりました。</value>
   </data>
@@ -5648,6 +5645,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="GENERAL_HEADING_VERSION_DETAILS" xml:space="preserve">
     <value>バージョン詳細</value>
+  </data>
+  <data name="GENERAL_LICENSE_QUERYING" xml:space="preserve">
+    <value>ライセンスの状態を照会しています...</value>
   </data>
   <data name="GENERAL_MEMORY" xml:space="preserve">
     <value>メモリ:</value>
@@ -7712,9 +7712,6 @@ SCSI ID: {2}
   </data>
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} の {0} (管理)</value>
-  </data>
-  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
-    <value>アップデートは必要ありません。</value>
   </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>一部のホストで Subscription Advantage が必要です</value>

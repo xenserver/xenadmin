@@ -4076,9 +4076,6 @@
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>已在 {0} 上禁用群集。</value>
   </data>
-  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
-    <value>找不到任何更新，因为已禁用自动检查更新。</value>
-  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>已禁用快照计划“{0}”。</value>
   </data>
@@ -5642,6 +5639,9 @@
   </data>
   <data name="GENERAL_HEADING_VERSION_DETAILS" xml:space="preserve">
     <value>版本详细信息</value>
+  </data>
+  <data name="GENERAL_LICENSE_QUERYING" xml:space="preserve">
+    <value>正在查询许可证状态...</value>
   </data>
   <data name="GENERAL_MEMORY" xml:space="preserve">
     <value>内存:</value>
@@ -7706,9 +7706,6 @@ SCSI ID: {2}
   </data>
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} 上的 {0} (管理)</value>
-  </data>
-  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
-    <value>不需要更新。</value>
   </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>某些主机需要专享升级服务</value>
