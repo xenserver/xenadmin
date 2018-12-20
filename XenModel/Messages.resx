@@ -2286,9 +2286,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Report Destination</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL" xml:space="preserve">
-    <value>Leaving this page will cancel compilation of the status report.
+    <value>Are you sure you want to leave this page?
 
-Do you wish to continue?</value>
+This will cancel compilation of the status report.</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE" xml:space="preserve">
     <value>Compiling Status Report</value>
@@ -9488,6 +9488,11 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION" xml:space="preserve">
     <value>The update process was canceled.</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>Are you sure you want to leave this page?
+
+This will cancel the update process and may leave your system in an unstable state.</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it.</value>
   </data>
@@ -9725,6 +9730,11 @@ Servers where this update cannot be applied appear disabled in this list.</value
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
     <value>The upload process was cancelled.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>Are you sure you want to leave this page?
+
+This will cancel the upload process.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY" xml:space="preserve">
     <value>The upload of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
@@ -10719,6 +10729,11 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
     <value>The rolling pool upgrade process was canceled.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>Are you sure you want to leave this page?
+
+This will cancel the rolling pool upgrade process and may leave your system in an unstable state.</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>

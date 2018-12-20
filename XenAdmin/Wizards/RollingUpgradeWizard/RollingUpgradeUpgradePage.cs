@@ -100,6 +100,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return Messages.ROLLING_UPGRADE_CANCELLATION;
         }
 
+        protected override string ReconsiderCancellationMessage()
+        {
+            return Messages.ROLLING_UPGRADE_CANCELLATION_RECONSIDER;
+        }
+
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
             //Add masters first, then the slaves (add all hosts for now, they will be skipped from upgrade if already upgraded)
