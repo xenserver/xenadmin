@@ -168,12 +168,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
         }
 
-        protected override void OnCancel()
+        protected override void OnCancel(ref bool cancel)
         {
             if (RollingUpgradeUpgradePage.Status == Status.NotStarted)
                 RevertResolvedPreChecks();
 
-            base.OnCancel();
+            base.OnCancel(ref cancel);
         }
 
         private void ShowCanBeResumedInfo()

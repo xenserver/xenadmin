@@ -242,9 +242,9 @@ namespace XenAdmin.Wizards
                 p.IsFirstLoad = true;
         }
 
-        protected virtual void OnCancel()
+        protected virtual void OnCancel(ref bool cancel)
         {
-            wizardProgress.CurrentStepTabPage.PageCancelled();
+            wizardProgress.CurrentStepTabPage.PageCancelled(ref cancel);
             DialogResult = DialogResult.Cancel;
         }
 
@@ -275,7 +275,9 @@ namespace XenAdmin.Wizards
             if (wizardFinished)
                 return;
 
-            OnCancel();
+            bool cancel = false;
+            OnCancel(ref cancel);
+            e.Cancel = cancel;
         }
 
         /// <summary>

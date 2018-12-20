@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return _cancelEnabled;
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             if (!_thisPageIsCompleted)
             {

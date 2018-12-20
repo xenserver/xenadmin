@@ -163,9 +163,9 @@ namespace XenAdmin.Wizards.ImportWizard
 			base.FinishWizard();
 		}
 
-		protected override void OnCancel()
+		protected override void OnCancel(ref bool cancel)
 		{
-			base.OnCancel();
+			base.OnCancel(ref cancel);
 
 			if (m_pageXvaStorage.ImportXvaAction != null)
 			{

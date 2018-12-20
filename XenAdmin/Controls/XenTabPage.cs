@@ -177,7 +177,7 @@ namespace XenAdmin.Controls
         /// <summary>
         /// Called when the wizard's Cancel button is hit while on this page
         /// </summary>
-        public virtual void PageCancelled()
+        public virtual void PageCancelled(ref bool cancel)
         {
         }
 

@@ -455,7 +455,7 @@ namespace XenAdmin.Wizards.DRWizards
             return result;
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             if (_worker != null)
                 _worker.CancelAsync();

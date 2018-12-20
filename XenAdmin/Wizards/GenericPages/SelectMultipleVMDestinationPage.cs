@@ -162,7 +162,7 @@ namespace XenAdmin.Wizards.GenericPages
             PopulateComboBox();
 		}
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             UnregisterHandlers();
             CancelFilters();
