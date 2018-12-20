@@ -705,7 +705,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             return !haNtolIndicator.UpdateInProgress && Ntol >= 0 && !haNtolIndicator.Overcommitted;
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             StopNtolUpdate();
         }

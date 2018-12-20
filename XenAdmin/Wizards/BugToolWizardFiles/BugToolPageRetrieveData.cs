@@ -77,28 +77,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (direction == PageLoadedDirection.Forward)
                 return;
 
-            var allCompleted = AllActionsCompleted(out _, out _);
-            if (allCompleted)
-                return;
-
-            using (var dlog = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL, Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE),
-                ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo))
-            {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                {
-                    cancel = true;
-                    return;
-                }
-            }
-
-            CancelActions();
+            CancelActions(ref cancel);
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
-            CancelActions();
+            CancelActions(ref cancel);
         }
 
         #endregion
@@ -130,8 +114,24 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         #endregion
 
-        private void CancelActions()
+        private void CancelActions(ref bool cancel)
         {
+            var allCompleted = AllActionsCompleted(out _, out _);
+            if (allCompleted)
+                return;
+
+            using (var dlog = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL, Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE),
+                ThreeButtonDialog.ButtonYes,
+                ThreeButtonDialog.ButtonNo))
+            {
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                {
+                    cancel = true;
+                    return;
+                }
+            }
+
             foreach (var r in dataGridViewEx1.Rows)
             {
                 if (r is StatusReportRow row)

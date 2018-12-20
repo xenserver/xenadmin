@@ -353,10 +353,10 @@ namespace XenAdmin.Wizards.DRWizards
             return SummaryReport.ToString();
         }
 
-        protected override void OnCancel()
+        protected override void OnCancel(ref bool cancel)
         {
             DoFinalCleanup();
-            base.OnCancel();
+            base.OnCancel(ref cancel);
         }
 
         #region Page event handlers

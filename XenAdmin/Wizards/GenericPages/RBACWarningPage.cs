@@ -104,7 +104,7 @@ namespace XenAdmin.Wizards.GenericPages
             DeregisterConnectionEvents();
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             DeregisterConnectionEvents();
         }

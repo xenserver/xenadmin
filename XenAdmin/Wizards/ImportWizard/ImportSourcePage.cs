@@ -171,7 +171,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			}
 		}
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             if (_webClient != null && _webClient.IsBusy)
                 _webClient.CancelAsync();

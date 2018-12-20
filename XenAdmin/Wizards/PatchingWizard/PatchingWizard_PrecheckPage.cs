@@ -598,7 +598,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return groups;
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             DeregisterEventHandlers();
             _worker.CancelAsync();

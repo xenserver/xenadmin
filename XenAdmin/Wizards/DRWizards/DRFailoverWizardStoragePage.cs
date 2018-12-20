@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.DRWizards
             _worker.RunWorkerAsync();
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
            _worker.CancelAsync();
         }

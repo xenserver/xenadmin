@@ -220,9 +220,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
         
-        protected override void OnCancel()
+        protected override void OnCancel(ref bool cancel)
         {
-            base.OnCancel();
+            base.OnCancel(ref cancel);
 
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                 Messages.REVERTED_WIZARD_CHANGES,

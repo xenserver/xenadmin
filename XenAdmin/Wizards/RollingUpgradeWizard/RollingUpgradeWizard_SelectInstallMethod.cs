@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             if (testingAction != null)
             {

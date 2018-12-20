@@ -381,7 +381,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public override void PageCancelled()
+        public override void PageCancelled(ref bool cancel)
         {
             Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
