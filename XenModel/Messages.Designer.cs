@@ -2545,7 +2545,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting system status from {0}.
+        ///   Looks up a localized string similar to Getting system status from the designated servers....
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_DESCRIPTION {
             get {
@@ -2563,29 +2563,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to compile status report .
+        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_FAILED {
             get {
                 return ResourceManager.GetString("ACTION_SYSTEM_STATUS_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No data was compiled.
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_NONE_SUCCEEDED {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_NONE_SUCCEEDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_NONE_SUCCEEDED_GUI {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_NONE_SUCCEEDED_GUI", resourceCulture);
             }
         }
         
@@ -2601,18 +2583,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was compiled..
         /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERROR {
+        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL {
             get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report (with errors). Only [XenCenter] logs were compiled..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS", resourceCulture);
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL", resourceCulture);
             }
         }
         
@@ -6135,56 +6108,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compiling [XenCenter] logs and metadata.
+        /// </summary>
+        public static string BUGTOOL_CLIENT_ACTION_LOGS_META {
+            get {
+                return ResourceManager.GetString("BUGTOOL_CLIENT_ACTION_LOGS_META", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling [XenCenter] metadata.
+        /// </summary>
+        public static string BUGTOOL_CLIENT_ACTION_META {
+            get {
+                return ResourceManager.GetString("BUGTOOL_CLIENT_ACTION_META", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] logs and metadata.
+        /// </summary>
+        public static string BUGTOOL_CLIENT_LOGS_META {
+            get {
+                return ResourceManager.GetString("BUGTOOL_CLIENT_LOGS_META", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] metadata.
+        /// </summary>
+        public static string BUGTOOL_CLIENT_META {
+            get {
+                return ResourceManager.GetString("BUGTOOL_CLIENT_META", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to status-report-.
         /// </summary>
         public static string BUGTOOL_FILE_PREFIX {
             get {
                 return ResourceManager.GetString("BUGTOOL_FILE_PREFIX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Compiling.
-        /// </summary>
-        public static string BUGTOOL_HOST_STATUS_COMPILING {
-            get {
-                return ResourceManager.GetString("BUGTOOL_HOST_STATUS_COMPILING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading - {0}.
-        /// </summary>
-        public static string BUGTOOL_HOST_STATUS_DOWNLOADING {
-            get {
-                return ResourceManager.GetString("BUGTOOL_HOST_STATUS_DOWNLOADING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed.
-        /// </summary>
-        public static string BUGTOOL_HOST_STATUS_FAILED {
-            get {
-                return ResourceManager.GetString("BUGTOOL_HOST_STATUS_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed - {0}.
-        /// </summary>
-        public static string BUGTOOL_HOST_STATUS_FAILED_WITH_ERROR {
-            get {
-                return ResourceManager.GetString("BUGTOOL_HOST_STATUS_FAILED_WITH_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pending.
-        /// </summary>
-        public static string BUGTOOL_HOST_STATUS_PENDING {
-            get {
-                return ResourceManager.GetString("BUGTOOL_HOST_STATUS_PENDING", resourceCulture);
             }
         }
         
@@ -6252,7 +6216,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to cancel the current action?.
+        ///   Looks up a localized string similar to Leaving this page will cancel compilation of the status report.
+        ///
+        ///Do you wish to continue?.
         /// </summary>
         public static string BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL {
             get {
@@ -6297,11 +6263,56 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} user cannot retrieve all the specified items..
+        ///   Looks up a localized string similar to Failed. A {0} user cannot retrieve all the specified items..
         /// </summary>
         public static string BUGTOOL_RBAC_FAILURE {
             get {
                 return ResourceManager.GetString("BUGTOOL_RBAC_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_CANCELLED {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_COMPILING {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_COMPILING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading - {0}.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_DOWNLOADING {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_DOWNLOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed - Please see logs for details.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_FAILED {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queued.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_QUEUED {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_QUEUED", resourceCulture);
             }
         }
         

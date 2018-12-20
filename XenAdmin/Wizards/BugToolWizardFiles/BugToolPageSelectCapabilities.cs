@@ -357,14 +357,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             totalSize = Helpers.StringFromMaxMinSizeList(sizeMinList, sizeMaxList);
         }
 
-        public IEnumerable<Capability> Capabilities
+        public List<Capability> Capabilities
         {
             get
             {
-                return from DataGridViewRow row in dataGridViewItems.Rows
-                       let capRow = row as CapabilityRow
-                       where capRow != null && capRow.Capability.Checked
-                       select capRow.Capability;
+                return (from DataGridViewRow row in dataGridViewItems.Rows
+                    let capRow = row as CapabilityRow
+                    where capRow != null && capRow.Capability.Checked
+                    select capRow.Capability).ToList();
             }
         }
 

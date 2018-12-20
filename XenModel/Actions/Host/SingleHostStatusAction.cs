@@ -31,108 +31,113 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 using XenCenterLib;
 
 namespace XenAdmin.Actions
 {
-    public class SingleHostStatusAction :  AsyncAction
+    public class SingleHostStatusAction :  StatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        private readonly HostWithStatus host;
-        private readonly string filepath;
-        private readonly string timestring;
-        private readonly string[] entries;
+        private readonly Host host;
+        private readonly string[] capabilityKeys;
+        private readonly long size;
+        private readonly string[] RBAC_FAIL_STRINGS = {"HTTP", "403", "Forbidden"};
 
-        public SingleHostStatusAction(HostWithStatus h, List<string> e, string path, string time)
-            : base(h.Host.Connection, string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(h.Host)), null, true)
+    public SingleHostStatusAction(Host host, long size, List<string> capabilityKeys, string path, string time)
+            : base(host.Connection, string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(host)), path, time)
         {
-            host = h;
-            entries = e.ToArray();
-            filepath = path;
-            timestring = time;
+            this.host = host;
+            this.capabilityKeys = capabilityKeys.ToArray();
+            this.size = size;
         }
+
+        public long DataTransferred;
 
         protected override void Run()
         {
-            host.Status = HostStatus.compiling;
+            Status = ReportStatus.compiling;
 
-            string hostname = Helpers.GetName(host.Host);
+            string hostname = Helpers.GetName(host);
             hostname = ZipStatusReportAction.SanitizeTarPathMember(hostname);
-            // Workaround for excessively long filenames: trim the hostname we use
             if (hostname.Length > 20)
-            {
                 hostname = hostname.Truncate(20);
-            }
-            string filename = string.Format("{1}\\{2}-bugtool-{0}.tar", hostname, filepath, timestring);
 
-            string entries_string = String.Join(",", entries);
+            string filename = string.Format("{1}\\{2}-bugtool-{0}.tar", hostname, filePath, timeString);
+
+            string entries_string = string.Join(",", capabilityKeys);
 
             log.DebugFormat("Getting system status for {0} on {1}", entries_string, hostname);
 
             try
             {
-                host.Status = HostStatus.compiling;
                 if (Session == null)
-                {
                     throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
-                }
 
-                HTTPHelper.Get(this, false, dataRxDelegate, filename, host.Host.address,
+                HTTPHelper.Get(this, false, dataRxDelegate, filename, host.address,
                     (HTTP_actions.get_ssss)HTTP_actions.get_system_status,
                     Session.opaque_ref, entries_string, "tar");
 
                 log.DebugFormat("Getting system status from {0} successful", hostname);
 
-                host.Status = HostStatus.succeeded;
-                base.PercentComplete = 100;
+                Status = ReportStatus.succeeded;
+                Description = Messages.COMPLETED;
+                PercentComplete = 100;
+            }
+            catch (HTTP.CancelledException)
+            {
+                throw new CancelledException();
             }
             catch (CancelledException ce)
             {
                 log.Info("Getting system status cancelled");
-
+                Status = ReportStatus.cancelled;
+                Error = ce;
                 Description = Messages.ACTION_SYSTEM_STATUS_CANCELLED;
-                host.Status = HostStatus.failed;
-                host.error = ce;
-
                 throw;
             }
             catch (Exception e)
             {
-                log.Warn(string.Format("Getting system status from {0} failed", hostname), e);
+                log.Error(string.Format("Getting system status from {0} failed", hostname), e);
 
-                host.Status = HostStatus.failed;
-                host.error = e;
+                Status = ReportStatus.failed;
+                Error = e;
 
-                Description = 
-                    Win32.GetHResult(e) == Win32.ERROR_DISK_FULL ? 
-                    Messages.ACTION_SYSTEM_STATUS_DISK_FULL : 
-                    Messages.ACTION_SYSTEM_STATUS_FAILED;
-            }
-        }
+                if (Win32.GetHResult(e) == Win32.ERROR_DISK_FULL)
+                {
+                    Description = Messages.ACTION_SYSTEM_STATUS_DISK_FULL;
+                    return;
+                }
 
-        public override int PercentComplete
-        {
-            // We don't want the PercentComplete to be set by HttpGet
-            set
-            {
+                if (!string.IsNullOrEmpty(Error.Message) && RBAC_FAIL_STRINGS.All(s => Error.Message.Contains(s)))
+                {
+                    var roles = Host.Connection.Session.Roles;
+                    roles.Sort();
+                    Description = string.Format(Messages.BUGTOOL_RBAC_FAILURE, roles[0].FriendlyName());
+                    return;
+                }
+
+                Description = Messages.BUGTOOL_REPORTSTATUS_FAILED;
             }
         }
 
         private void dataRxDelegate(long rxd)
         {
-            host.Status = HostStatus.downloading;
-            host.DataTransferred = rxd;
+            Status = ReportStatus.downloading;
+            DataTransferred = rxd;
 
             if (Cancelling)
                 throw new CancelledException();
 
-            if (rxd < host.Size)
-                base.PercentComplete = 10 + (int)((rxd * 80L) / host.Size);
-            else 
-                base.PercentComplete = 90;
+            //although the parent class's PercentComplete setter does correct out of range values,
+            //it throws an assertion to catch potentially erroneous percentage calculations;
+            //here, however, the error is expected because the MaxSize is only an estimate,
+            //hence the assertion is pointless, hence correct the value before assigning it to PercentComplete 
+
+            PercentComplete = rxd < size ? (int)(rxd * 100L / size) : 100;
         }
 
         public override void RecomputeCanCancel()

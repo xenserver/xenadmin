@@ -946,28 +946,19 @@
     <value>Compiling status report for {0}</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_DESCRIPTION" xml:space="preserve">
-    <value>Getting system status from {0}</value>
+    <value>Getting system status from the designated servers...</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_DISK_FULL" xml:space="preserve">
     <value>Getting system status failed: disk full</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>Failed to compile status report </value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED" xml:space="preserve">
-    <value>No data was compiled</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED_GUI" xml:space="preserve">
     <value>No data was compiled. Press previous to select new items or servers and try again.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL" xml:space="preserve">
     <value>Finished compiling status report</value>
   </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERROR" xml:space="preserve">
+  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL" xml:space="preserve">
     <value>Finished compiling status report (with errors). A partial status report was compiled.</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS" xml:space="preserve">
-    <value>Finished compiling status report (with errors). Only [XenCenter] logs were compiled.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>Getting system status information</value>
@@ -2243,23 +2234,35 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
     <value>Your Tools ISO is on a broken SR, [XenCenter] will attempt to fix it before proceeding. Do you want to continue?</value>
   </data>
+  <data name="BUGTOOL_CLIENT_ACTION_LOGS_META" xml:space="preserve">
+    <value>Compiling [XenCenter] logs and metadata</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_ACTION_META" xml:space="preserve">
+    <value>Compiling [XenCenter] metadata</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_LOGS_META" xml:space="preserve">
+    <value>[XenCenter] logs and metadata</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_META" xml:space="preserve">
+    <value>[XenCenter] metadata</value>
+  </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_COMPILING" xml:space="preserve">
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
     <value>Compiling</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_DOWNLOADING" xml:space="preserve">
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
     <value>Downloading - {0}</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_FAILED" xml:space="preserve">
-    <value>Failed</value>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>Failed - Please see logs for details</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_FAILED_WITH_ERROR" xml:space="preserve">
-    <value>Failed - {0}</value>
-  </data>
-  <data name="BUGTOOL_HOST_STATUS_PENDING" xml:space="preserve">
-    <value>Pending</value>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>Queued</value>
   </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>Select the data you want to include in your report</value>
@@ -2283,7 +2286,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Report Destination</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL" xml:space="preserve">
-    <value>Are you sure you want to cancel the current action?</value>
+    <value>Leaving this page will cancel compilation of the status report.
+
+Do you wish to continue?</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE" xml:space="preserve">
     <value>Compiling Status Report</value>
@@ -2298,7 +2303,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>Select the servers you want to include in the report</value>
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
-    <value>A {0} user cannot retrieve all the specified items.</value>
+    <value>Failed. A {0} user cannot retrieve all the specified items.</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>

@@ -31,19 +31,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
-
-using XenAdmin;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
+using XenAdmin.Controls.DataGridViewEx;
 
 
 namespace XenAdmin.Wizards.BugToolWizardFiles
@@ -52,13 +47,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private SystemStatusAction _action;
-        private List<HostWithStatus> _hostList = new List<HostWithStatus>();
-
         public BugToolPageRetrieveData()
         {
             InitializeComponent();
         }
+
+        #region XenTabPage overrides
 
         public override string Text { get { return Messages.BUGTOOL_PAGE_RETRIEVEDATA_TEXT; } }
 
@@ -68,167 +62,406 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public override bool EnableNext()
         {
-            if (_action == null || !_action.IsCompleted)
-                return false;
-
-            if (_action.SomethingToSave)
-                return true;
-
-            return false;
+            var allCompleted = AllActionsCompleted(out bool successExists, out _);
+            return allCompleted && successExists;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Forward)
-                RunAction(CapabilityList, SelectedHosts);
+                RunActions();
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            if (OutputFolder == null)
+            if (direction == PageLoadedDirection.Forward)
+                return;
+
+            var allCompleted = AllActionsCompleted(out _, out _);
+            if (allCompleted)
+                return;
+
+            using (var dlog = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL, Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE),
+                ThreeButtonDialog.ButtonYes,
+                ThreeButtonDialog.ButtonNo))
             {
-                using (var dlog = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL, Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE),
-                        ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo))
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
                 {
-                    if (dlog.ShowDialog(this) == DialogResult.Yes)
-                        CancelAction();
-                    else
-                        cancel = true;
+                    cancel = true;
+                    return;
                 }
             }
+
+            CancelActions();
         }
 
         public override void PageCancelled()
         {
-            if (_action != null)
-                CancelAction();
+            CancelActions();
         }
 
-        public override void SelectDefaultControl()
-        {
-            flickerFreeListBox1.Select();
-        }
+        #endregion
 
+        #region Properties
         public List<Host> SelectedHosts { private get; set; }
-        public IEnumerable<Capability> CapabilityList { private get; set; }
+        public List<Capability> CapabilityList { private get; set; }
+        public string OutputFolder { get; private set; }
 
-        /// <summary>
-        /// Must be called on the event thread.
-        /// </summary>
-        private void CancelAction()
+        private bool AllActionsCompleted(out bool successExists, out bool failureExists)
         {
-            Program.AssertOnEventThread();
-            OnPageUpdated();
-            _action.Changed -= _action_Changed;
-            _action.Completed -= _action_Completed;
-            _action.Cancel();
-            _action = null;
+            successExists = false;
+            failureExists = false;
+
+            foreach (var row in dataGridViewEx1.Rows)
+            {
+                var srRow = (StatusReportRow)row;
+
+                if (!srRow.IsCompleted)
+                    return false;
+
+                if (srRow.IsSuccessful)
+                    successExists = true;
+                else
+                    failureExists = true;
+            }
+            return true;
         }
 
-        private void RunAction(IEnumerable<Capability> capabilities, List<Host> hosts)
+        #endregion
+
+        private void CancelActions()
         {
-            OnPageUpdated();
-            _hostList.Clear();
-            flickerFreeListBox1.Items.Clear();
-            label1.Text = "";
-            long size = 0;
-            foreach (Capability c in capabilities)
-                if (c.Key != "client-logs")
-                    size += c.MinSize;
-            foreach(Host host in hosts)
+            foreach (var r in dataGridViewEx1.Rows)
             {
-                HostWithStatus hostWithStatus = new HostWithStatus(host,size);
-                _hostList.Add(hostWithStatus);
-                flickerFreeListBox1.Items.Add(hostWithStatus);
-            }
-            List<string> strings = new List<string>();
-            foreach(Capability c in capabilities)
-                    strings.Add(c.Key);
-            _action = new SystemStatusAction(_hostList, strings);
-            _action.Changed += _action_Changed;
-            _action.Completed += _action_Completed;
-            _action.RunAsync();
-        }
-
-        private void finish()
-        {
-            if (_action.Exception == null)
-            {
-                label1.Text = _action.Description == Messages.ACTION_SYSTEM_STATUS_NONE_SUCCEEDED
-                                  ? Messages.ACTION_SYSTEM_STATUS_NONE_SUCCEEDED_GUI
-                                  : _action.Description;
-
-                flickerFreeListBox1.Refresh();
-
-                //Update buttons to enable next iff none of the hosts have failed
-                //The next button will remain disabled should there be a failing host
-                if (!_hostList.TrueForAll(host => host.Status == HostStatus.failed))
-                    OnPageUpdated();
-
-                progressBar1.Value = 100;
-            }
-            else
-            {
-                // we probably will get here
-                log.Debug("Server status report finished with errors",_action.Exception);
-            }
-        }
-
-        public string OutputFolder
-        {
-            get
-            {
-                if (_action.IsCompleted)
+                if (r is StatusReportRow row)
                 {
-                    if (_action.Cancelled)
-                        return "";
-                    return _action.Result ?? "";
+                    row.DeRegisterEvents();
+                    DeRegisterRowEvents(row);
+                    row.CancelAction();
                 }
-                return null;
             }
         }
 
-        private void actionchanged()
+        private void RunActions()
         {
-            progressBar1.Value = _action.PercentComplete;
-            label1.Text = _action.Description;
-            flickerFreeListBox1.Refresh();
+            try
+            {
+                labelError.Text = "";
+                progressBar1.Value = 0;
+                dataGridViewEx1.SuspendLayout();
+                dataGridViewEx1.Rows.Clear();
+
+                var capabilityKeys = new List<string>();
+                long size = 0;
+                foreach (Capability c in CapabilityList)
+                {
+                    if (c.Key != "client-logs")
+                        size += c.MaxSize;
+
+                    capabilityKeys.Add(c.Key);
+                }
+
+                var rowList = new List<DataGridViewRow>();
+
+                var includeClientLogs = capabilityKeys.Contains("client-logs");
+                if (includeClientLogs || SelectedHosts.Count > 0)
+                    rowList.Add(new ClientSideDataRow(SelectedHosts, includeClientLogs));
+
+                foreach (Host host in SelectedHosts)
+                    rowList.Add(new HostStatusRow(host, size, capabilityKeys));
+
+                dataGridViewEx1.Rows.AddRange(rowList.ToArray());
+            }
+            finally
+            {
+                dataGridViewEx1.ResumeLayout();
+            }
+
+            OutputFolder = CreateOutputFolder();
+            string timeString = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            foreach (var r in dataGridViewEx1.Rows)
+            {
+                var row = (StatusReportRow)r;
+                RegisterRowEvents(row);
+                row.RunAction(OutputFolder, timeString);
+            }
+
             OnPageUpdated();
         }
 
-        private void _action_Completed(ActionBase sender)
+        private void Row_RowStatusChanged(StatusReportRow row)
         {
-            Program.Invoke(this, finish);
+            UpdateTotalPercentComplete();
+            OnPageUpdated();
         }
 
-        private void _action_Changed(object sender)
+        private void Row_RowStatusCompleted(StatusReportRow row)
         {
-            Program.Invoke(this, actionchanged);
-        }
+            DeRegisterRowEvents(row);
+            UpdateTotalPercentComplete();
 
-        private void flickerFreeListBox1_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            HostWithStatus host = flickerFreeListBox1.Items[e.Index] as HostWithStatus;
-            using (SolidBrush backBrush = new SolidBrush(flickerFreeListBox1.BackColor))
+            var allCompleted = AllActionsCompleted(out bool successExists, out bool failureExists);
+
+            if (allCompleted)
             {
-                e.Graphics.FillRectangle(backBrush, e.Bounds);
+                if (!successExists)
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_FAILED;
+                else if (!failureExists)
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL;
+                else
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL;
             }
 
-            e.Graphics.DrawImage(Images.GetImage16For(host.Host), e.Bounds.Left, e.Bounds.Top);
-
-            int width = Drawing.MeasureText(host.StatusString, flickerFreeListBox1.Font).Width;
-            Drawing.DrawText(e.Graphics, host.ToString(), flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
-            if (host.Status == HostStatus.queued)
-                Drawing.DrawText(e.Graphics, host.StatusString, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), flickerFreeListBox1.ForeColor, flickerFreeListBox1.BackColor);
-            else if (host.Status == HostStatus.compiling || host.Status == HostStatus.downloading)
-                Drawing.DrawText(e.Graphics, host.StatusString, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), Color.Blue, flickerFreeListBox1.BackColor);
-            else if (host.Status == HostStatus.succeeded)
-                Drawing.DrawText(e.Graphics, host.StatusString, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), Color.Green, flickerFreeListBox1.BackColor);
-            if (host.Status == HostStatus.failed)
-                Drawing.DrawText(e.Graphics, host.StatusString, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), Color.Red, flickerFreeListBox1.BackColor);
+            OnPageUpdated();
         }
+
+        private void RegisterRowEvents(StatusReportRow row)
+        {
+            row.RowStatusChanged += Row_RowStatusChanged;
+            row.RowStatusCompleted += Row_RowStatusCompleted;
+        }
+
+        private void DeRegisterRowEvents(StatusReportRow row)
+        {
+            row.RowStatusChanged -= Row_RowStatusChanged;
+            row.RowStatusCompleted -= Row_RowStatusCompleted;
+        }
+
+        private void UpdateTotalPercentComplete()
+        {
+            int total = 0;
+            foreach (var r in dataGridViewEx1.Rows)
+            {
+                var row = (StatusReportRow)r;
+                total += row.PercentComplete;
+            }
+
+            var percentage = total / dataGridViewEx1.RowCount;
+
+            if (percentage < 0)
+                percentage = 0;
+            if (percentage > 100)
+                percentage = 100;
+
+            if (percentage > progressBar1.Value)
+                progressBar1.Value = percentage;
+        }
+
+        private static string CreateOutputFolder()
+        {
+            var folder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+
+            if (Directory.Exists(folder))
+                Directory.Delete(folder);
+            Directory.CreateDirectory(folder);
+
+            return folder;
+        }
+
+        #region Nested classes
+
+        private abstract class StatusReportRow : DataGridViewRow
+        {
+            protected readonly DataGridViewExImageCell cellHostImg = new DataGridViewExImageCell();
+            protected readonly DataGridViewTextBoxCell cellHost = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell cellStatus = new DataGridViewTextBoxCell();
+            private readonly DataGridViewExImageCell cellResultImg = new DataGridViewExImageCell();
+
+            public event Action<StatusReportRow> RowStatusChanged;
+            public event Action<StatusReportRow> RowStatusCompleted;
+
+            protected StatusReportRow()
+            {
+                Cells.AddRange(cellHostImg, cellHost, cellStatus, cellResultImg);
+                cellResultImg.Value = new Bitmap(1, 1);
+            }
+           
+            public abstract StatusReportAction Action { get; }
+            public int PercentComplete { get; private set; }
+
+            public bool IsCompleted
+            {
+                get { return Action != null && Action.IsCompleted; }
+            }
+
+            public bool IsSuccessful
+            {
+                get
+                {
+                    return Action != null && Action.IsCompleted && Action.Status == ReportStatus.succeeded;
+                }
+            }
+
+            public void CancelAction()
+            {
+                if (Action != null && !Action.IsCompleted)
+                    Action.Cancel();
+            }
+
+            public void RunAction(string path, string time)
+            {
+                CreateAction(path, time);
+                Action.Changed += Action_Changed;
+                Action.Completed += Action_Completed;
+                UpdateCells(0);
+                Action.RunAsync();
+            }
+
+            public void DeRegisterEvents()
+            {
+                if (Action == null)
+                    return;
+
+                Action.Changed -= Action_Changed;
+                Action.Completed -= Action_Completed;
+            }
+
+            private void Action_Changed(ActionBase action)
+            {
+                Program.Invoke(DataGridView, () =>
+                {
+                    UpdateCells(action.PercentComplete);
+
+                    if (RowStatusChanged != null)
+                        RowStatusChanged(this);
+                });
+            }
+
+            private void Action_Completed(ActionBase action)
+            {
+                DeRegisterEvents();
+
+                Program.Invoke(DataGridView, () =>
+                {
+                    UpdateCells(100);
+
+                    if (RowStatusCompleted != null)
+                        RowStatusCompleted(this);
+                });
+            }
+
+            protected abstract void CreateAction(string path, string time);
+
+            protected virtual void UpdateCells(int percentComplete)
+            {
+                var statusString = GetStatus(out Image statusImage);
+                cellStatus.Value = statusString;
+                PercentComplete = percentComplete;
+
+                if (statusImage != null)
+                    cellResultImg.Value = statusImage;
+            }
+
+            protected virtual string GetStatus(out Image img)
+            {
+                img = null;
+                if (Action == null)
+                    return string.Empty;
+
+                switch (Action.Status)
+                {
+                    case ReportStatus.compiling:
+                        return Messages.BUGTOOL_REPORTSTATUS_COMPILING;
+                   
+                    case ReportStatus.succeeded:
+                        img = Images.StaticImages._000_Tick_h32bit_16;
+                        return Messages.COMPLETED;
+                    
+                    case ReportStatus.failed:
+                        img = Images.StaticImages._000_Abort_h32bit_16;
+                        return Messages.BUGTOOL_REPORTSTATUS_FAILED;
+
+                    case ReportStatus.cancelled:
+                        img = Images.StaticImages.cancelled_action_16;
+                        return Messages.BUGTOOL_REPORTSTATUS_CANCELLED;
+                    
+                    case ReportStatus.queued:
+                        return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+                    
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        private class ClientSideDataRow : StatusReportRow
+        {
+            private readonly List<Host> hosts;
+            private readonly bool includeClientLogs;
+            private StatusReportClientSideAction _action;
+
+            public ClientSideDataRow(List<Host> hosts, bool includeClientLogs)
+            {
+                this.hosts = hosts;
+                this.includeClientLogs = includeClientLogs;
+                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
+                cellHost.Value = includeClientLogs ? Messages.BUGTOOL_CLIENT_LOGS_META : Messages.BUGTOOL_CLIENT_META;
+            }
+
+            public override StatusReportAction Action
+            {
+                get { return _action; }
+            }
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new StatusReportClientSideAction(hosts, includeClientLogs, path, time);
+            }
+        }
+
+        private class HostStatusRow : StatusReportRow
+        {
+            private readonly long size;
+            private readonly List<string> capabilityKeys;
+            private readonly Host Host;
+            private SingleHostStatusAction _action;
+
+            public HostStatusRow(Host host, long size, List<string> capabilityKeys)
+            {
+                Host = host;
+                this.size = size;
+                this.capabilityKeys = capabilityKeys;
+            }
+
+            protected override void UpdateCells(int percentComplete)
+            {
+                cellHostImg.Value = Images.GetImage16For(Host);
+                cellHost.Value = Host.Name();
+                base.UpdateCells(percentComplete);
+            }
+
+            public override StatusReportAction Action
+            {
+                get { return _action; }
+            }
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new SingleHostStatusAction(Host, size, capabilityKeys, path, time);
+            }
+
+            protected override string GetStatus(out Image img)
+            {
+                img = null;
+                if (_action == null)
+                    return string.Empty;
+
+                switch (_action.Status)
+                {
+                    case ReportStatus.downloading:
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
+                            Util.MemorySizeStringSuitableUnits(_action.DataTransferred, false));
+
+                    default:
+                        return base.GetStatus(out img);
+                }
+               
+            }
+        }
+
+        #endregion
     }
 
 }

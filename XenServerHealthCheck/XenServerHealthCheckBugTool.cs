@@ -177,8 +177,7 @@ namespace XenServerHealthCheck
                         p.Name()));
                 }
 
-                HostWithStatus hostWithStatus = new HostWithStatus(host, 0);
-                SingleHostStatusAction statAction = new SingleHostStatusAction(hostWithStatus, reportIncluded, filepath, timestring + "-" + ++i);
+                var statAction = new SingleHostStatusAction(host, 0, reportIncluded, filepath, timestring + "-" + ++i);
                 statAction.RunExternal(session);
             }
 
