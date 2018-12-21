@@ -228,12 +228,12 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label labelCurrentUser;
         private System.Windows.Forms.Label labelRequiredRole;
         private System.Windows.Forms.Label labelRequiredRoleValue;
-        internal System.Windows.Forms.TextBox TextBoxUsername;
+        private System.Windows.Forms.TextBox TextBoxUsername;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Label labelUserName;
         private System.Windows.Forms.Button buttonAuthorize;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        internal System.Windows.Forms.TextBox TextBoxPassword;
+        private System.Windows.Forms.TextBox TextBoxPassword;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelBlurb2;
         private System.Windows.Forms.PictureBox pictureBox1;

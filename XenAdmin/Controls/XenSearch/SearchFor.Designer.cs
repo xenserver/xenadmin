@@ -55,6 +55,6 @@ namespace XenAdmin.Controls.XenSearch
 
         #endregion
 
-        internal DropDownComboButton searchForComboButton;
+        private DropDownComboButton searchForComboButton;
     }
 }

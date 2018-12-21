@@ -128,8 +128,8 @@ namespace XenAdmin.Controls.XenSearch
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private DropDownComboButton ComboButton;
-        internal DropDownComboButton queryTypeComboButton;
-        internal DropDownComboButton matchTypeComboButton;
+        private DropDownComboButton queryTypeComboButton;
+        private DropDownComboButton matchTypeComboButton;
         private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Label unitsLabel;
         private ResourceSelectButton resourceSelectButton;

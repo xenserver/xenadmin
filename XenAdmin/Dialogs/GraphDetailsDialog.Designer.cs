@@ -279,7 +279,7 @@
 
         #endregion
 
-        internal System.Windows.Forms.Label GraphNameLabel;
+        private System.Windows.Forms.Label GraphNameLabel;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.TextBox GraphNameTextBox;

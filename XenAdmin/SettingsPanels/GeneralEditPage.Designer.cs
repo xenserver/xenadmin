@@ -174,9 +174,9 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.Label labelIqnHint;
         private System.Windows.Forms.Label labelTags;
         private System.Windows.Forms.Label lblFolder;
-        public System.Windows.Forms.TextBox txtName;
-        public System.Windows.Forms.TextBox txtDescription;
-        public System.Windows.Forms.TextBox txtIQN;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.TextBox txtIQN;
         private XenAdmin.Controls.BlueBorderPanel tagsPanel;
         private XenAdmin.Controls.BlueBorderPanel folderPanel;
         private XenAdmin.Controls.Common.AutoHeightLabel labelTitle;

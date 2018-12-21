@@ -231,18 +231,18 @@
 
         #endregion
 
-        public System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFill;
-        public System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelDescriptionOptional;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        public XenAdmin.Controls.CustomTreeView customTreeViewServers;
+        private XenAdmin.Controls.CustomTreeView customTreeViewServers;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelServerListButtons;
-        public System.Windows.Forms.Button buttonAddNewServer;
-        public System.Windows.Forms.ComboBox comboBoxServers;
+        private System.Windows.Forms.Button buttonAddNewServer;
+        private System.Windows.Forms.ComboBox comboBoxServers;
         private System.Windows.Forms.Label labelMaster;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelDialogButtons;
         private System.Windows.Forms.Button buttonCancel;

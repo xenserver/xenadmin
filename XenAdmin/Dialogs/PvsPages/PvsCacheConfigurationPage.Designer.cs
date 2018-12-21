@@ -170,7 +170,7 @@ namespace XenAdmin.Dialogs
         private Controls.FlickerFreePanel hostsPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button deleteButton;
-        public System.Windows.Forms.Button viewPvsServersButton;
+        private System.Windows.Forms.Button viewPvsServersButton;
         private System.Windows.Forms.Label pvsConfigInfoLabel;
         private System.Windows.Forms.PictureBox pvsConfigInfoIcon;
         private System.Windows.Forms.Label memoryOnlyInfoLabel;

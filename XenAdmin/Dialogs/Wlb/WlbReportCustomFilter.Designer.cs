@@ -212,6 +212,6 @@ namespace XenAdmin.Dialogs.Wlb
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.CheckBox checkBoxCheckAll;
         private System.Windows.Forms.Label labelHost;
-        public System.Windows.Forms.ComboBox comboFilterType;
+        private System.Windows.Forms.ComboBox comboFilterType;
     }
 }

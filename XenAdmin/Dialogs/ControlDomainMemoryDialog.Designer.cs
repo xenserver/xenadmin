@@ -175,8 +175,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Controls.Ballooning.MemorySpinner memorySpinner;
         private System.Windows.Forms.FlowLayoutPanel panel1;
-        public System.Windows.Forms.Button CloseButton;
-        public System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tplMaintenanceWarning;
         private System.Windows.Forms.PictureBox maintenanceWarningImage;

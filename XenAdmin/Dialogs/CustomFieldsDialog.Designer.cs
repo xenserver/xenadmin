@@ -98,7 +98,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
-        internal System.Windows.Forms.Label CustomFieldsLabel;
-        internal System.Windows.Forms.ListBox lbCustomFields;
+        private System.Windows.Forms.Label CustomFieldsLabel;
+        private System.Windows.Forms.ListBox lbCustomFields;
     }
 }

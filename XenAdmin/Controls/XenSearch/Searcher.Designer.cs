@@ -115,7 +115,7 @@ namespace XenAdmin.Controls.XenSearch
         private GroupingControl GroupingControl;
         private System.Windows.Forms.Label GroupsLabel;
         private System.Windows.Forms.Label FiltersLabel;
-        internal QueryElement QueryElement;
+        private QueryElement QueryElement;
         private System.Windows.Forms.Label SearchLabel;
         private SearchFor searchFor;
         private System.Windows.Forms.Button buttonSave;

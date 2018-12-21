@@ -264,7 +264,7 @@ namespace XenAdmin.SettingsPanels
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        public System.Windows.Forms.NumericUpDown nudMemory;
+        private System.Windows.Forms.NumericUpDown nudMemory;
         private System.Windows.Forms.Label lblMB;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblSliderHighest;

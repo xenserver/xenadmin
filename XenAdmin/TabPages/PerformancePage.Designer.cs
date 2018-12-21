@@ -399,8 +399,8 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        public XenAdmin.Controls.CustomDataGraph.DataEventList DataEventList;
-        public XenAdmin.Controls.CustomDataGraph.DataPlotNav DataPlotNav;
+        private XenAdmin.Controls.CustomDataGraph.DataEventList DataEventList;
+        private XenAdmin.Controls.CustomDataGraph.DataPlotNav DataPlotNav;
         private XenAdmin.Controls.CustomDataGraph.GraphList GraphList;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label EventsLabel;

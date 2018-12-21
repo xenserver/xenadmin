@@ -270,20 +270,20 @@
         private System.Windows.Forms.Label labelColon;
         private System.Windows.Forms.Label lunInUseLabel;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerIQNscan;
-        internal System.Windows.Forms.Button buttonIscsiPopulateIQNs;
-        public System.Windows.Forms.TextBox textBoxIscsiHost;
-        public System.Windows.Forms.CheckBox IscsiUseChapCheckBox;
-        public System.Windows.Forms.ComboBox comboBoxIscsiIqns;
+        private System.Windows.Forms.Button buttonIscsiPopulateIQNs;
+        private System.Windows.Forms.TextBox textBoxIscsiHost;
+        private System.Windows.Forms.CheckBox IscsiUseChapCheckBox;
+        private System.Windows.Forms.ComboBox comboBoxIscsiIqns;
         private System.Windows.Forms.Label labelIscsiIQN;
-        public System.Windows.Forms.ComboBox comboBoxIscsiLuns;
+        private System.Windows.Forms.ComboBox comboBoxIscsiLuns;
         private System.Windows.Forms.Label labelIscsiTargetHost;
         private System.Windows.Forms.Label labelIscsiInvalidHost;
         private XenAdmin.Controls.DecentGroupBox groupBoxChap;
         private System.Windows.Forms.Label IScsiChapSecretLabel;
-        public System.Windows.Forms.TextBox IScsiChapSecretTextBox;
+        private System.Windows.Forms.TextBox IScsiChapSecretTextBox;
         private System.Windows.Forms.Label labelCHAPuser;
-        public System.Windows.Forms.TextBox IScsiChapUserTextBox;
-        internal System.Windows.Forms.Button buttonIscsiPopulateLUNs;
+        private System.Windows.Forms.TextBox IScsiChapUserTextBox;
+        private System.Windows.Forms.Button buttonIscsiPopulateLUNs;
         private System.Windows.Forms.Label targetLunLabel;
 
     }
