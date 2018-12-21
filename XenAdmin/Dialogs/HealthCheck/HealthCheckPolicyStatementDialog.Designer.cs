@@ -62,9 +62,7 @@
 
         #endregion
 
-        internal System.Windows.Forms.Button OKButton;
+        private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.LinkLabel policyStatementTextBox;
-
-
     }
 }

@@ -33,8 +33,6 @@ using System;
 using System.Windows.Forms;
 using XenAdmin.CustomFields;
 using XenAdmin.Network;
-using XenAdmin.Core;
-using XenAdmin.XenSearch;
 using XenAPI;
 using XenAdmin.Actions;
 

@@ -449,15 +449,15 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        public System.Windows.Forms.Button AttachButton;
-        public System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button AttachButton;
+        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button EditButton;
-        public System.Windows.Forms.Button DetachButton;
-        public System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button DetachButton;
+        private System.Windows.Forms.Button DeleteButton;
         private XenAdmin.Controls.ToolTipContainer DetachButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeleteButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeactivateButtonContainer;
-        public System.Windows.Forms.Button DeactivateButton;
+        private System.Windows.Forms.Button DeactivateButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewStorage;

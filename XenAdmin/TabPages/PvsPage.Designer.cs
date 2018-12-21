@@ -165,7 +165,7 @@
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
         private XenAdmin.Commands.CommandButton disableButton;
         private XenAdmin.Commands.CommandButton enableButton;
-        public System.Windows.Forms.Button ConfigureButton;
+        private System.Windows.Forms.Button ConfigureButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVM;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCachingEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPvsSite;
