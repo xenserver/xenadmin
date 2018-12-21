@@ -31,15 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using System.Windows;
-using System.Xml;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
@@ -47,12 +43,10 @@ using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.Wlb;
 using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Help;
 using System.Collections;
 
 // Report viewer control dependencies
 using Microsoft.Reporting.WinForms;
-using Microsoft.ReportingServices;
 using System.IO;
 
 
@@ -66,14 +60,12 @@ namespace XenAdmin.Controls.Wlb
 
         public event CustomRefreshEventHandler OnChangeOK;
         public event DrillthroughEventHandler ReportDrilledThrough;
-        public event BackEventHandler ReportBack;
         public event EventHandler Close;
         public event EventHandler PoolConnectionLost;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool _bDisplayedError;
-        private bool _resetReportViewer;
         private int _currentOffsetMinutes;
         private int _startLine;
         private int _endLine;
@@ -90,14 +82,13 @@ namespace XenAdmin.Controls.Wlb
         private string _startTime = String.Empty;
         private string _endTime = String.Empty;
         private bool _isAuditReport;
-        private bool _isCreedenceOrLater;
 
         private WlbReportInfo _reportInfo;
         private LocalReport _localReport;
         private IEnumerable<Host> _hosts;
-        private Pool _pool;
+
         private List<string> _selectedCustomFilters; 
-        private static string DELIMETER = ",";
+        private static string DELIMITER = ",";
 
         // for report subscription
         private Dictionary<string, string> _reportParameters;
@@ -106,6 +97,16 @@ namespace XenAdmin.Controls.Wlb
 
 
         #region Properties
+
+        public bool ButtonSubscribeVisible
+        {
+            set { btnSubscribe.Visible = value; }
+        }
+
+        public bool ButtonLaterReportVisible
+        {
+            set { btnLaterReport.Visible = value; }
+        }
 
         public WlbReportInfo ViewerReportInfo
         {
@@ -119,18 +120,9 @@ namespace XenAdmin.Controls.Wlb
             set { _localReport = value; }
         }
 
-        public Pool Pool
-        {
-            get { return _pool; }
-            set { _pool = value; }
-        }
+        public Pool Pool { get; set; }
 
-
-        public bool ResetReportViewer
-        {
-            get { return _resetReportViewer; }
-            set { _resetReportViewer = value; }
-        }
+        public bool ResetReportViewer { get; set; }
 
         public IEnumerable<Host> Hosts
         {
@@ -142,11 +134,7 @@ namespace XenAdmin.Controls.Wlb
             }
         }
 
-        public bool IsCreedenceOrLater
-        {
-            get { return _isCreedenceOrLater; }
-            set { _isCreedenceOrLater = value; }
-        }
+        public bool IsCreedenceOrLater { get; set; }
 
         #endregion
 
@@ -463,7 +451,7 @@ namespace XenAdmin.Controls.Wlb
             try
             {
                 // Make sure the pool is okay
-                if (!_pool.Connection.IsConnected)
+                if (!Pool.Connection.IsConnected)
                 {
                     PoolConnectionLost(this, EventArgs.Empty);
                 }
@@ -841,12 +829,12 @@ namespace XenAdmin.Controls.Wlb
                             break;
 
                         case "PoolID":
-                            paramValue = currentParams["PoolID"].Values.Count == 0 ? _pool.uuid : currentParams["PoolID"].Values[0];
+                            paramValue = currentParams["PoolID"].Values.Count == 0 ? Pool.uuid : currentParams["PoolID"].Values[0];
                             addParam = true;
                             break;
 
                         case "PoolName":
-                            paramValue = currentParams["PoolName"].Values.Count == 0 ? Helpers.GetName(_pool) : currentParams["PoolName"].Values[0];
+                            paramValue = currentParams["PoolName"].Values.Count == 0 ? Helpers.GetName(Pool) : currentParams["PoolName"].Values[0];
                             addParam = true;
                             break;
 
@@ -862,7 +850,7 @@ namespace XenAdmin.Controls.Wlb
 
                         case "Filter":
                             paramValue = currentParams["Filter"].Values.Count == 0 ?
-                                (_selectedCustomFilters != null && _selectedCustomFilters.Count > 0 ? String.Join(DELIMETER, _selectedCustomFilters.ToArray()) : comboBoxView.SelectedIndex.ToString()) : 
+                                (_selectedCustomFilters != null && _selectedCustomFilters.Count > 0 ? String.Join(DELIMITER, _selectedCustomFilters.ToArray()) : comboBoxView.SelectedIndex.ToString()) : 
                                 currentParams["Filter"].Values[0];
                             addParam = true;
                             break;
@@ -1038,7 +1026,7 @@ namespace XenAdmin.Controls.Wlb
                     reportDataSource1.Value = reportDS.Tables[0];
                     _localReport.DataSources.Add(reportDataSource1);
 
-                    if(_isAuditReport && _isCreedenceOrLater)
+                    if(_isAuditReport && IsCreedenceOrLater)
                     {
                         int cnt = reportDS.Tables[0].Rows.Count;
 
@@ -1265,26 +1253,13 @@ namespace XenAdmin.Controls.Wlb
 
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="currentBackEventArgs"></param>
-        private void OnReportBack(BackEventArgs currentBackEventArgs)
-        {
-            if (ReportBack != null)
-            {
-                ReportBack(this, currentBackEventArgs);
-            }
-        }
-
-
-        /// <summary>
         /// Event handler for the "Run Report"/"Next Section" button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void btnRunReport_Click(object sender, EventArgs e)
         {
-            if(_isAuditReport && _isCreedenceOrLater)
+            if(_isAuditReport && IsCreedenceOrLater)
             {
                 // If the button displays "Run Report",
                 // that means the 1st report section is requested.
@@ -1317,7 +1292,7 @@ namespace XenAdmin.Controls.Wlb
         /// <param name="e"></param>
         internal void btnLaterReport_Click(object sender, EventArgs e)
         {
-            if(_isAuditReport && _isCreedenceOrLater)
+            if(_isAuditReport && IsCreedenceOrLater)
             {
                 // The previous report section is requested.
 
@@ -1338,7 +1313,7 @@ namespace XenAdmin.Controls.Wlb
         private void btnSubscribe_Click(object sender, EventArgs e)
         {
             // Make sure the pool is okay
-            if (!_pool.Connection.IsConnected)
+            if (!Pool.Connection.IsConnected)
             {
                 PoolConnectionLost(this, EventArgs.Empty);
             }
@@ -1349,7 +1324,7 @@ namespace XenAdmin.Controls.Wlb
                     this._reportParameters.Remove("reportName");
                 }
                 this._reportParameters.Add("reportName", this._reportInfo.ReportFile.Split('.')[0]);
-                WlbReportSubscriptionDialog rpSubDialog = new WlbReportSubscriptionDialog(this._reportInfo.ReportName, this._reportParameters, _pool);
+                WlbReportSubscriptionDialog rpSubDialog = new WlbReportSubscriptionDialog(this._reportInfo.ReportName, this._reportParameters, Pool);
                 if (rpSubDialog.ShowDialog() == DialogResult.OK)
                 {
                     OnChangeOK(this, e);
@@ -1374,7 +1349,7 @@ namespace XenAdmin.Controls.Wlb
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void reportViewer1_Drillthrough(object sender, DrillthroughEventArgs e)                        
+        private void reportViewer1_Drillthrough(object sender, DrillthroughEventArgs e)
         {
 
             _localReport = (LocalReport)e.Report;
@@ -1401,7 +1376,6 @@ namespace XenAdmin.Controls.Wlb
         private void reportViewer1_Back(object sender, BackEventArgs e)
         {
             _localReport = (LocalReport)e.ParentReport;
-            OnReportBack(e);
         }
 
 
@@ -1427,7 +1401,7 @@ namespace XenAdmin.Controls.Wlb
             {
                 if (this.comboBoxView.SelectedIndex == 1)
                 {
-                    Dialogs.Wlb.WlbReportCustomFilter customFilterDialog = new Dialogs.Wlb.WlbReportCustomFilter(_pool.Connection);
+                    WlbReportCustomFilter customFilterDialog = new WlbReportCustomFilter(Pool.Connection);
                     customFilterDialog.InitializeFilterTypeIndex();
                     if (customFilterDialog.ShowDialog() == DialogResult.OK)
                     {

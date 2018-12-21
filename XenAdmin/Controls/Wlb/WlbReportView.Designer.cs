@@ -286,17 +286,17 @@ namespace XenAdmin.Controls.Wlb
 
         #endregion
 
-        public System.Windows.Forms.Label labelHostCombo;
-        public System.Windows.Forms.ComboBox hostComboBox;
-        public System.Windows.Forms.Button btnRunReport;
-        public System.Windows.Forms.Button btnLaterReport;
+        private System.Windows.Forms.Label labelHostCombo;
+        private System.Windows.Forms.ComboBox hostComboBox;
+        private System.Windows.Forms.Button btnRunReport;
+        private System.Windows.Forms.Button btnLaterReport;
         private System.Windows.Forms.Label labelEndDate;
         private System.Windows.Forms.DateTimePicker EndDatePicker;
         private System.Windows.Forms.Label labelStartDate;
         private System.Windows.Forms.DateTimePicker StartDatePicker;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        public System.Windows.Forms.Button btnSubscribe;
-        public System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnSubscribe;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ComboBox comboBoxView;
         private System.Windows.Forms.Label labelShow;
         private System.Windows.Forms.Panel panelHosts;
@@ -309,8 +309,8 @@ namespace XenAdmin.Controls.Wlb
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Panel panelUsers;
-        public XenAdmin.Controls.LongStringComboBox userComboBox;
-        public System.Windows.Forms.Label labelUsers;
+        private XenAdmin.Controls.LongStringComboBox userComboBox;
+        private System.Windows.Forms.Label labelUsers;
         private System.Windows.Forms.Panel panelObjects;
         private System.Windows.Forms.Label labelObjects;
         private System.Windows.Forms.ComboBox objectComboBox;
