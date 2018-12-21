@@ -112,6 +112,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button cancelbutton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.Button okbutton;
+        private System.Windows.Forms.Button okbutton;
     }
 }
