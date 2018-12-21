@@ -61,6 +61,7 @@ using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
+using XenAdmin.Help;
 
 namespace XenAdmin
 {
@@ -2635,7 +2636,14 @@ namespace XenAdmin
 
         public void ShowHelpTopic(string topicID)
         {
-            var helpTopicUrl = string.Format(InvisibleMessages.HELP_URL, InvisibleMessages.LOCALE.ToLowerInvariant(), topicID ?? "index");
+            var helpTopicUrl = HelpManager.ProduceUrl(
+                topicID,
+                InvisibleMessages.HELP_URL,
+                InvisibleMessages.LOCALE,
+                $"{Branding.XENCENTER_VERSION}.{Program.Version.Revision}",
+                "ui_link",
+                Messages.XENCENTER);
+
             if (!string.IsNullOrEmpty(helpTopicUrl))
                 Program.OpenURL(helpTopicUrl);
 

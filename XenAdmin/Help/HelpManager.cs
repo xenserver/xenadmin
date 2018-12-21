@@ -128,5 +128,17 @@ namespace XenAdmin.Help
         {
             return (pageref != null && pageref != "TabPageUnknown" && GetID(pageref) != null);
         }
+
+        public static string ProduceUrl(string topicId, string helpUrl, string locale, string campaign, string medium, string source)
+        {
+            return string.Format(
+                helpUrl,
+                locale,
+                topicId ?? "index",
+                campaign.Replace('.', '_'),
+                medium,
+                source
+            ).ToLowerInvariant();
+        }
     }
 }
