@@ -30,20 +30,12 @@
  */
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Wizards.NewNetworkWizard_Pages;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Dialogs;
 
 
 namespace XenAdmin.Wizards
@@ -163,11 +155,7 @@ namespace XenAdmin.Wizards
             switch (network_type)
             {
                 case NetworkTypes.Bonded:
-                    if (!CreateBonded())
-                    {
-                        FinishCanceled();
-                        return;
-                    }
+                    CreateBonded();
                     break;
                 case NetworkTypes.CHIN:
                     CreateCHIN();
@@ -183,40 +171,22 @@ namespace XenAdmin.Wizards
             base.FinishWizard();
         }
 
-        private bool CreateBonded()
+        private void CreateBonded()
         {
-            BondDetails details = pageBondDetails.Details;
-
-            if (details.ShowCreationWarning() == DialogResult.OK)
-            {
-                new CreateBondAction(details.Connection, details.BondName, details.BondedPIFs, details.AutoPlug, details.MTU, details.BondMode, details.HashingAlgorithm).RunAsync();
-                return true;
-            }
-            
-            return false;
+            new CreateBondAction(pageBondDetails.Connection, pageBondDetails.BondName,
+                pageBondDetails.BondedPIFs, pageBondDetails.AutoPlug, pageBondDetails.MTU,
+                pageBondDetails.BondMode, pageBondDetails.HashingAlgorithm).RunAsync();
         }
 
         private void CreateCHIN()
         {
-            XenAPI.Network network = PopulateNewNetworkObj();
+            XenAPI.Network network = CreateNetworkObject();
             XenAPI.Network theInterface = pageChinDetails.SelectedInterface;
-            (new CreateChinAction(xenConnection, network, theInterface)).RunAsync();
+            new CreateChinAction(xenConnection, network, theInterface).RunAsync();
         }
 
         private void CreateSRIOV()
         {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(
-                    SystemIcons.Warning,
-                    Messages.SRIOV_NETWORK_CREATE_WARNING),
-                new ThreeButtonDialog.TBDButton(Messages.SRIOV_NETWORK_CREATE, DialogResult.OK),
-                ThreeButtonDialog.ButtonCancel))
-            {
-                var result = dlg.ShowDialog(this);
-                if (result != DialogResult.OK)
-                    return;
-            }
-
             List<PIF> sriovSelectedPifs = new List<PIF>();
             Pool pool = Helpers.GetPoolOfOne(Host.Connection);
             if (pool == null)
@@ -231,15 +201,15 @@ namespace XenAdmin.Wizards
                     sriovSelectedPifs.Add(thePIF);
             }
 
-            XenAPI.Network network = PopulateNewNetworkObj();
+            XenAPI.Network network = CreateNetworkObject();
 
             if (sriovSelectedPifs.Count != 0)
-                (new CreateSriovAction(xenConnection, network, sriovSelectedPifs)).RunAsync();
+                new CreateSriovAction(xenConnection, network, sriovSelectedPifs).RunAsync();
         }
 
         private void CreateNonBonded()
         {
-            XenAPI.Network network = PopulateNewNetworkObj();
+            XenAPI.Network network = CreateNetworkObject();
 
             PIF nic;
             if (pageNetworkDetails.CreateVlanOnSriovNetwork)
@@ -269,17 +239,27 @@ namespace XenAdmin.Wizards
             action.RunAsync();
         }
 
-        private XenAPI.Network PopulateNewNetworkObj()
+        private XenAPI.Network CreateNetworkObject()
         {
-            XenAPI.Network result = new XenAPI.Network();
-            result.name_label = pageName.NetworkName;
-            result.name_description = pageName.NetworkDescription;
-            result.SetAutoPlug(pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : (pageNetworkType.SelectedNetworkType == NetworkTypes.SRIOV ? pageSriovDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM));
+            XenAPI.Network result = new XenAPI.Network
+            {
+                name_label = pageName.NetworkName,
+                name_description = pageName.NetworkDescription,
+                managed = true
+            };
+
+            var autoPlug = pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN
+                ? pageChinDetails.isAutomaticAddNicToVM
+                : pageNetworkType.SelectedNetworkType == NetworkTypes.SRIOV
+                    ? pageSriovDetails.isAutomaticAddNicToVM
+                    : pageNetworkDetails.isAutomaticAddNicToVM;
+            result.SetAutoPlug(autoPlug);
+            
             if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
                 result.MTU = pageChinDetails.MTU;
             else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something
                 result.MTU = pageNetworkDetails.MTU.Value;
-            result.managed = true;
+
             return result;
         }
 

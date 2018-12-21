@@ -103,14 +103,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        internal List<PIF> AllPIFs
-        {
-            get
-            {
-                return dataGridView1.Rows.OfType<DataGridViewRow>().Select(r => r.Tag as PIF).Where(t => t != null).ToList();
-            }
-        }
-
         internal bond_mode BondMode
         {
             get
@@ -230,7 +222,7 @@ namespace XenAdmin.Controls
             return bond == null ? "" : string.Format(Messages.ALREADY_IN_BOND, bond.Name());
         }
 
-        internal DialogResult ShowCreationWarning()
+        internal bool CanCreateBond()
         {
             List<PIF> pifs = BondedPIFs;
 
@@ -250,7 +242,7 @@ namespace XenAdmin.Controls
                     dlg.ShowDialog(this);
                 }
 
-                return DialogResult.Cancel;
+                return false;
             }
 
             // Only primary management interface.
@@ -269,7 +261,7 @@ namespace XenAdmin.Controls
                         dlg.ShowDialog(this);
                     }
                     
-                    return DialogResult.Cancel;
+                    return false;
                 }
 
                 DialogResult dialogResult;
@@ -281,7 +273,7 @@ namespace XenAdmin.Controls
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }
-                return dialogResult;
+                return dialogResult == DialogResult.OK;
             }
             
             // Only secondary interface.
@@ -316,11 +308,11 @@ namespace XenAdmin.Controls
                         dialogResult = dlg.ShowDialog(this);
                     }
                 }
-                
-                return dialogResult;
+
+                return dialogResult == DialogResult.OK;
             }
             
-            return DialogResult.OK;
+            return true;
         }
 
         private void UpdateCellsReadOnlyState()

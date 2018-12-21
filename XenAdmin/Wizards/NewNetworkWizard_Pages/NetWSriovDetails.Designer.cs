@@ -71,6 +71,7 @@
             resources.ApplyResources(this.comboBoxNicList, "comboBoxNicList");
             this.comboBoxNicList.Name = "comboBoxNicList";
             this.comboBoxNicList.Sorted = true;
+            this.comboBoxNicList.SelectedIndexChanged += new System.EventHandler(this.comboBoxNicList_SelectedIndexChanged);
             // 
             // NetWSriovDetails
             // 

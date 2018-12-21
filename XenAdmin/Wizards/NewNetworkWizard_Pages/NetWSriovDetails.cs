@@ -30,7 +30,10 @@
  */
 
 using System;
+using System.Drawing;
+using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Network;
 
@@ -44,19 +47,42 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         {
             InitializeComponent();
         }
-        public override string Text { get { return Messages.NETW_DETAILS_TEXT; } }
 
-        public override string PageTitle
-        {
-            get
-            {
-                return Messages.NETW_INTERNAL_DETAILS_TITLE;
-            }
-        }
+        #region XenTabPage overrides
+
+        public override string Text => Messages.NETW_DETAILS_TEXT;
+        public override string PageTitle => Messages.NETW_INTERNAL_DETAILS_TITLE;
+
         public override void PopulatePage()
         {
             PopulateHostNicList(Host, Connection);
         }
+
+        public override bool EnableNext()
+        {
+            return SelectedHostNic != null;
+        }
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (direction == PageLoadedDirection.Back)
+                return;
+
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(
+                    SystemIcons.Warning,
+                    Messages.SRIOV_NETWORK_CREATE_WARNING),
+                new ThreeButtonDialog.TBDButton(Messages.SRIOV_NETWORK_CREATE, DialogResult.OK),
+                ThreeButtonDialog.ButtonCancel))
+            {
+                var result = dlg.ShowDialog(this);
+                if (result != DialogResult.OK)
+                    cancel = true;
+            }
+        }
+
+        #endregion
+
         private void PopulateHostNicList(Host host, IXenConnection conn)
         {
             comboBoxNicList.Items.Clear();
@@ -70,11 +96,13 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             }
             if (comboBoxNicList.Items.Count > 0)
                 comboBoxNicList.SelectedIndex = 0;
+
+            OnPageUpdated();
         }
 
-        public XenAPI.PIF SelectedHostNic
+        public PIF SelectedHostNic
         {
-            get { return (XenAPI.PIF)comboBoxNicList.SelectedItem; }
+            get { return (PIF)comboBoxNicList.SelectedItem; }
         }
 
         public bool isAutomaticAddNicToVM
@@ -82,9 +110,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             get { return cbxAutomatic.Checked; }
         }
 
-        public override bool EnableNext()
+        private void comboBoxNicList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            return SelectedHostNic != null;
+            OnPageUpdated();
         }
     }
 }

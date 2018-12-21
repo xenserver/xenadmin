@@ -31,11 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
@@ -50,26 +45,11 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             InitializeComponent();
         }
 
-        public override string Text { get { return Messages.NETW_BOND_DETAILS_TEXT; } }
+        #region XentabPage overrides
 
-         public override string PageTitle { get { return Messages.NETW_BOND_DETAILS_TITLE; } }
+        public override string Text => Messages.NETW_BOND_DETAILS_TEXT;
 
-        internal void SetPool(Pool pool)
-        {
-            Details.SetPool(pool);
-            OnPageUpdated();
-        }
-
-        internal void SetHost(Host host)
-        {
-            Details.SetHost(host);
-            OnPageUpdated();
-        }
-
-        private void Details_ValidChanged(object sender, EventArgs e)
-        {
-            OnPageUpdated();
-        }
+        public override string PageTitle => Messages.NETW_BOND_DETAILS_TITLE;
 
         public override bool EnableNext()
         {
@@ -79,6 +59,40 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             HelpersGUI.FocusFirstControl(Controls);
+        }
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (direction == PageLoadedDirection.Forward)
+                cancel = !Details.CanCreateBond();
+        }
+
+        #endregion
+
+        internal string BondName => Details.BondName;
+        internal List<PIF> BondedPIFs => Details.BondedPIFs;
+        internal bond_mode BondMode => Details.BondMode;
+        internal Bond.hashing_algoritm HashingAlgorithm => Details.HashingAlgorithm;
+        internal long MTU => Details.MTU;
+        internal bool AutoPlug => Details.AutoPlug;
+
+        internal void SetPool(Pool pool)
+        {
+            Connection = pool.Connection;
+            Details.SetPool(pool);
+            OnPageUpdated();
+        }
+
+        internal void SetHost(Host host)
+        {
+            Connection = host.Connection;
+            Details.SetHost(host);
+            OnPageUpdated();
+        }
+
+        private void Details_ValidChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
         }
     }
 }
