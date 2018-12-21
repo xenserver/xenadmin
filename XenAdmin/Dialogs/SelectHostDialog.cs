@@ -43,34 +43,33 @@ namespace XenAdmin.Dialogs
 {
     public partial class SelectHostDialog : XenDialogBase
     {
-        public string HelpString = "License"; // dont i18n
+        public string HelpString = "License"; // don't i18n
 
         public SelectHostDialog()
         {
             InitializeComponent();
             poolHostPicker1.AllowPoolSelect = false;
             poolHostPicker1.SupressErrors = true;
-            poolHostPicker1.SelectedItemChanged += new EventHandler<XenAdmin.Controls.SelectedItemEventArgs>(selectionChanged);
+            poolHostPicker1.SelectedItemChanged += selectionChanged;
             poolHostPicker1.buildList();
         }
 
-        public string DispString
+        public string TopBlurb
         {
-            set
-            {
-                label1.Text = value;
-            }
+            set { label1.Text = value; }
         }
 
         /// <summary>
         /// set image, must be 32x32
         /// </summary>
-        public Image SetPicture
+        public Image TopPicture
         {
-            set
-            {
-                pictureBox1.Image = value;
-            }
+            set { pictureBox1.Image = value; }
+        }
+
+        public string OkButtonText
+        {
+            set { okbutton.Text = value; }
         }
 
         private void button3_Click(object sender, EventArgs e)

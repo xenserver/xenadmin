@@ -115,13 +115,16 @@ namespace XenAdmin.Commands
 
             if (host == null)
             {
-                SelectHostDialog hostdialog = new SelectHostDialog();
-                hostdialog.TheHost = host;
-                hostdialog.DispString = Messages.BACKUP_SELECT_HOST;
-                hostdialog.SetPicture = Images.StaticImages.backup_restore_32;
-                hostdialog.HelpString = "Backup"; // dont i18n
-                hostdialog.Text = Messages.BACKUP_SELECT_HOST_TITLE;
-                hostdialog.okbutton.Text = Messages.BACKUP_SELECT_HOST_BUTTON;
+                SelectHostDialog hostdialog = new SelectHostDialog
+                {
+                    TheHost = host,
+                    TopBlurb = Messages.BACKUP_SELECT_HOST,
+                    TopPicture = Images.StaticImages.backup_restore_32,
+                    HelpString = "Backup", // don't i18n
+                    Text = Messages.BACKUP_SELECT_HOST_TITLE,
+                    OkButtonText = Messages.BACKUP_SELECT_HOST_BUTTON
+                };
+
                 hostdialog.FormClosed += delegate
                 {
                     if (hostdialog.DialogResult != DialogResult.OK)
