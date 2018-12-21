@@ -8,14 +8,14 @@ namespace XenAdminTests.XenModelTests
     public class AreEqual2Tests
     {
         [Test]
-        public void A_null_is_considered_equal_to_itself()
+        public void A_null_list_is_considered_equal_to_itself()
         {
             List<string> given = null;
             Assert.IsTrue(Helper.AreEqual2(given, given));
         }
 
         [Test]
-        public void Separate_nulls_are_considered_equal_to_each_other()
+        public void Separate_null_lists_are_considered_equal_to_each_other()
         {
             Assert.IsTrue(Helper.AreEqual2((List<string>)null, (List<string>)null));
         }
@@ -58,6 +58,19 @@ namespace XenAdminTests.XenModelTests
                         "test",
                         "other"
                     }));
+        }
+
+        [Test]
+        public void A_null_dictionary_is_considered_equal_to_itself()
+        {
+            Dictionary<string, string> given = null;
+            Assert.IsTrue(Helper.AreEqual2(given, given));
+        }
+
+        [Test]
+        public void Separate_null_dictionary_are_considered_equal_to_each_other()
+        {
+            Assert.IsTrue(Helper.AreEqual2((Dictionary<string, string>)null, (Dictionary<string, string>)null));
         }
 
         [Test]
