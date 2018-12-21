@@ -178,7 +178,6 @@ namespace XenAdmin.Controls.Wlb
             this.MinimumSize = new System.Drawing.Size(671, 278);
             this.Name = "WlbReportSubscriptionView";
             this.Load += new System.EventHandler(this.ReportSubscriptionView_Load);
-            this.Resize += new System.EventHandler(this.WlbReportSubscriptionView_Resize);
             this.tableLayoutPanelSubscriptionDetails.ResumeLayout(false);
             this.panelTopControls.ResumeLayout(false);
             this.panelTopControls.PerformLayout();
@@ -194,8 +193,8 @@ namespace XenAdmin.Controls.Wlb
 
         #endregion
 
-        internal System.Windows.Forms.Button btnDelete;
-        internal System.Windows.Forms.Button btnChange;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.Label labelSubscription;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSubscriptionDetails;

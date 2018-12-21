@@ -30,16 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Dialogs;
@@ -276,11 +268,6 @@ namespace XenAdmin.Controls.Wlb
         }
 
         #endregion
-
-        private void WlbReportSubscriptionView_Resize(object sender, EventArgs e)
-        {
-
-        }
     }
 }
     

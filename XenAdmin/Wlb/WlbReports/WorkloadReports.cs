@@ -148,9 +148,9 @@ namespace XenAdmin
                 // retrieve subscription
                 SetSubscriptionCollection();
 
-                this.wlbReportView1.btnSubscribe.Visible = false;
-                this.wlbReportView1.btnLaterReport.Visible = false;
-                this.wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
+                wlbReportView1.ButtonSubscribeVisible = false;
+                wlbReportView1.ButtonLaterReportVisible = false;
+                wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
                 PopulateTreeView();
             }
             catch (XenAdmin.CancelledException xc)
@@ -407,7 +407,7 @@ namespace XenAdmin
                 _isCreedenceOrLater = poolConfiguration.IsCreedenceOrLater;
 
                 this.splitContainerLeftPane.Panel2Collapsed = true;
-                this.wlbReportView1.btnSubscribe.Visible=false;
+                this.wlbReportView1.ButtonSubscribeVisible = false;
             }
             else
             {
