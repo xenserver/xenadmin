@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
         #endregion
 
-        internal XenAdmin.Controls.BondDetails Details;
+        private XenAdmin.Controls.BondDetails Details;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
     }

@@ -30,19 +30,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-
+using XenAdmin.Actions;
 using XenAPI;
 
-using XenAdmin.Core;
-using XenAdmin.Actions;
-using XenAdmin.Network;
-using XenAdmin.Controls;
 
 namespace XenAdmin.Dialogs
 {
@@ -62,7 +52,7 @@ namespace XenAdmin.Dialogs
 
         private void AcceptBtn_Click(object sender, EventArgs e)
         {
-            if (Details.ShowCreationWarning() == DialogResult.OK)
+            if (Details.CanCreateBond())
             {
                 new CreateBondAction(Details.Connection, Details.BondName, Details.BondedPIFs, Details.AutoPlug, Details.MTU, Details.BondMode, Details.HashingAlgorithm).RunAsync();
                 Close();

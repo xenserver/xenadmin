@@ -348,8 +348,8 @@ namespace XenAdmin.Controls
 
         #endregion
 
-        public System.Windows.Forms.CheckBox cbxAutomatic;
-		private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.CheckBox cbxAutomatic;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.NumericUpDown numericUpDownMTU;
         private System.Windows.Forms.Label labelMTU;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

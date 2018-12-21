@@ -73,6 +73,6 @@
 
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Button AcceptBtn;
-        public XenAdmin.Controls.BondDetails Details;
+        private XenAdmin.Controls.BondDetails Details;
     }
 }
