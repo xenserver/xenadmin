@@ -21,6 +21,18 @@ namespace XenAdminTests.XenModelTests
         }
 
         [Test]
+        public void A_null_list_is_considered_equal_to_an_empty_one()
+        {
+            Assert.IsTrue(Helper.AreEqual2(null, new List<string>()));
+        }
+
+        [Test]
+        public void An_empty_list_is_considered_equal_to_a_null_one()
+        {
+            Assert.IsTrue(Helper.AreEqual2(new List<string>(), null));
+        }
+
+        [Test]
         public void A_list_is_considered_equal_to_itself()
         {
             var given = new List<string> {
@@ -71,6 +83,18 @@ namespace XenAdminTests.XenModelTests
         public void Separate_null_dictionary_are_considered_equal_to_each_other()
         {
             Assert.IsTrue(Helper.AreEqual2((Dictionary<string, string>)null, (Dictionary<string, string>)null));
+        }
+
+        [Test]
+        public void A_null_dictionary_is_considered_equal_to_an_empty_one()
+        {
+            Assert.IsTrue(Helper.AreEqual2(null, new Dictionary<string, string>()));
+        }
+
+        [Test]
+        public void An_empty_dictionary_is_considered_equal_to_a_null_one()
+        {
+            Assert.IsTrue(Helper.AreEqual2(new Dictionary<string, string>(), null));
         }
 
         [Test]
