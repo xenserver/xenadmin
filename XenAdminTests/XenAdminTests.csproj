@@ -373,6 +373,7 @@
     <Compile Include="WizardTests\RollingUpgradeWizardTest.cs" />
     <Compile Include="XenModelTests\ActionTestBase.cs" />
     <Compile Include="XenModelTests\AddressTests.cs" />
+    <Compile Include="XenModelTests\AreEqual2Tests.cs" />
     <Compile Include="XenModelTests\DestroyPolicyActionTests.cs" />
     <Compile Include="XenModelTests\DestroyVMTests.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockActionFactory.cs" />
