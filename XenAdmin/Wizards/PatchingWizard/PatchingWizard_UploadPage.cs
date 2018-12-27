@@ -131,7 +131,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnableNext()
         {
-            return IsError;
+            return IsSuccess;
         }
 
         public override bool EnableCancel()

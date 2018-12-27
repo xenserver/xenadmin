@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
 
-        protected bool IsError
+        protected bool IsSuccess
         {
             get { return _thisPageIsCompleted && !failedWorkers.Any(); }
         }
