@@ -40,7 +40,7 @@ namespace XenAdminTests.WizardTests.state1_xml
     {
 
         public NewVMWizardTestDisklessVM()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         {
         }
 

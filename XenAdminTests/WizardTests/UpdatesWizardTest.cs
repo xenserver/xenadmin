@@ -40,8 +40,7 @@ namespace XenAdminTests.WizardTests.updatesState_xml
     public class UpdatesAutomaticModeWizardTest : WizardTest<PatchingWizard>
     {
         public UpdatesAutomaticModeWizardTest()
-            : base(new[] { "Before You Start", "Select Update", "Select Servers", "Upload", "Prechecks", "Update Mode", "Install Update" }
-            , true, false)
+            : base(new[] {"Before You Start", "Select Update", "Select Servers", "Upload", "Prechecks", "Update Mode", "Install Update"})
         { }
 
         protected override PatchingWizard NewWizard()
@@ -49,13 +48,7 @@ namespace XenAdminTests.WizardTests.updatesState_xml
             return new PatchingWizard();
         }
 
-        protected override bool CanCancelLastPage
-        {
-            get
-            {
-                return false;
-            }
-        }
+        protected override bool IsCancelButtonEnabledOnLastPage => false;
 
         protected override void TestPage(string pageName)
         {

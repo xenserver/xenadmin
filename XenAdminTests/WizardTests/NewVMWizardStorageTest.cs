@@ -52,7 +52,7 @@ namespace XenAdminTests.WizardTests.state5_xml
         private bool _cloneInvoked;
 
         public NewVMWizardTestUserTemplateClone()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;
@@ -90,7 +90,7 @@ namespace XenAdminTests.WizardTests.state5_xml
         private bool _copyInvoked;
 
         public NewVMWizardTestUserTemplateCopy()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;
@@ -147,7 +147,7 @@ namespace XenAdminTests.WizardTests.state5_xml
         private bool _cloneInvoked;
 
         public NewVMWizardTestUserTemplateCopy2()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;
@@ -182,12 +182,16 @@ namespace XenAdminTests.WizardTests.state5_xml
                 var cloneCheckBosx = TestUtils.GetCheckBox(wizard, "page_6_Storage.CloneCheckBox");
                 var propertiesButton = TestUtils.GetButton(wizard, "page_6_Storage.PropertiesButton");
 
-                HandleModalDialog<NewDiskDialogWrapper>("Edit Disk", propertiesButton.PerformClick,
+                HandleModalDialog("Edit Disk", propertiesButton.PerformClick,
                     delegate(NewDiskDialogWrapper w)
                     {
                         w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name().Contains("SCSI"))); //switch storage for new disk
                         w.OkButton.PerformClick();
                     });
+
+                MWWaitFor(() => wizard.Visible && wizard.CanFocus);
+                while (!btnNext.Enabled)
+                    Thread.Sleep(1000);
 
                 Assert.IsTrue(cloneCheckBosx.Enabled, "Clone checkbox wasn't enabled");
                 Assert.IsTrue(cloneCheckBosx.Checked, "Clone checkbox wasn't checked");
@@ -207,7 +211,7 @@ namespace XenAdminTests.WizardTests.state5_xml
         private bool _copyInvoked;
 
         public NewVMWizardTestUserTemplateCopy3()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;
@@ -275,7 +279,7 @@ namespace XenAdminTests.WizardTests.state5_xml
         private bool _cloneInvoked;
 
         public NewVMWizardTestDefaultTemplate()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;

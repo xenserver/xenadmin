@@ -44,8 +44,7 @@ namespace XenAdminTests.WizardTests.state5_xml
     class RollingUpgradeWizardTest : WizardTest<RollingUpgradeWizard>
     {
         public RollingUpgradeWizardTest()
-            : base(new string[] { "Before You Start", "Select Pools", "Upgrade Mode", "Prechecks","Ready to Upgrade","Apply Upgrade" }
-            , true, false)
+            : base(new[] {"Before You Start", "Select Pools", "Upgrade Mode", "Prechecks", "Ready to Upgrade", "Apply Upgrade"}, doFinish: false)
         { }
 
         protected override RollingUpgradeWizard NewWizard()
@@ -92,7 +91,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             }
         }
 
-        protected override bool CanCancelLastPage
+        protected override bool IsCancelButtonEnabledOnLastPage
         {
             get
             {

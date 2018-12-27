@@ -38,7 +38,7 @@ namespace XenAdminTests.WizardTests.cowleyPolicies_xml
     class NewPolicyWizardTest : WizardTest<NewPolicyWizard>
     {
         public NewPolicyWizardTest()
-            : base(new[] {"Schedule Name", "Virtual Machines", "Snapshot Type", "Snapshot Schedule", "Finish"}, true, false)
+            : base(new[] {"Schedule Name", "Virtual Machines", "Snapshot Type", "Snapshot Schedule", "Finish"}, doFinish: false)
         {
         }
 

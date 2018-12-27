@@ -42,8 +42,7 @@ namespace XenAdminTests.WizardTests.boston_db.DRWizardTests
     public class DRFailoverWizardTest_FailoverMode : WizardTest<DRFailoverWizard>
     {
         public DRFailoverWizardTest_FailoverMode()
-            : base(new[] { "Welcome", "Before You Start", "Locate Mirrored SRs" 
-                           /* , "Select vApps & VMs", "Pre-checks", "Progress", "Summary"*/ }, false, false)
+            : base(new[] { "Welcome", "Before You Start", "Locate Mirrored SRs" }, false, false)
         { }
 
         protected override DRFailoverWizard NewWizard()
@@ -78,8 +77,7 @@ namespace XenAdminTests.WizardTests.boston_db.DRWizardTests
     public class DRFailoverWizardTest_FailbackMode : WizardTest<DRFailoverWizard>
     {
         public DRFailoverWizardTest_FailbackMode()
-            : base(new[] { "Welcome", "Before You Start", "Locate Mirrored SRs" 
-                           /*, "Select vApps & VMs", "Pre-checks", "Progress", "Summary"*/ }, false, false)
+            : base(new[] { "Welcome", "Before You Start", "Locate Mirrored SRs" }, false, false)
         { }
 
         protected override DRFailoverWizard NewWizard()
@@ -113,8 +111,7 @@ namespace XenAdminTests.WizardTests.boston_db.DRWizardTests
     public class DRFailoverWizardTest_DryRunMode : WizardTest<DRFailoverWizard>
     {
         public DRFailoverWizardTest_DryRunMode()
-            : base(new[] { "Welcome", "Before You Start", "Locate Mirrored SRs" 
-                           /*, "Select vApps & VMs", "Pre-checks", "Progress", "Summary"*/ }, false, false)
+            : base(new[] { "Welcome", "Before You Start", "Locate Mirrored SRs" }, false, false)
         { }
 
         protected override DRFailoverWizard NewWizard()

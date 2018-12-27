@@ -50,7 +50,7 @@ namespace XenAdminTests.WizardTests.state4_xml
         protected bool _copyBiosStringsInvoked;
 
         protected NewVMWizardBiosStringsTest(string[] pages)
-            : base(pages, true, true)
+            : base(pages)
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;

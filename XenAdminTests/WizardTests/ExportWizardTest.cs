@@ -30,7 +30,6 @@
  */
 
 using System.IO;
-using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Commands;
 using XenAdmin.Wizards.ExportWizard;
@@ -42,7 +41,7 @@ namespace XenAdminTests.WizardTests.small_vms.ExportWizardTests
     internal class ExportWizardTest_OVF : WizardTest<ExportApplianceWizard>
     {
         public ExportWizardTest_OVF()
-            : base(new[] { "Export File Details", "Virtual Machines", "EULAs", "Advanced Options", "Transfer VM Settings", "Finish" }, true, false)
+            : base(new[] { "Export File Details", "Virtual Machines", "EULAs", "Advanced Options", "Transfer VM Settings", "Finish" }, doFinish: false)
         {}
 
         protected override ExportApplianceWizard NewWizard()
@@ -65,7 +64,7 @@ namespace XenAdminTests.WizardTests.small_vms.ExportWizardTests
     internal class ExportWizardTest_XVA : WizardTest<ExportApplianceWizard>
     {
         public ExportWizardTest_XVA()
-            : base(new[] { "Export File Details", "Virtual Machines", "Finish" }, true, false)
+            : base(new[] { "Export File Details", "Virtual Machines", "Finish" }, doFinish: false)
         { }
 
         protected override ExportApplianceWizard NewWizard()

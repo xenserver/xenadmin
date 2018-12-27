@@ -43,7 +43,7 @@ namespace XenAdminTests.WizardTests.state4_xml.BallooningWizardTests
     class BallooningWizardTest_OneOld : WizardTest<BallooningWizard>
     {
         public BallooningWizardTest_OneOld()
-            : base(new string[] { "Adjust memory settings" }, true, false)
+            : base(new[] { "Adjust memory settings" }, doFinish: false)
         { }
 
         protected override BallooningWizard NewWizard()
@@ -58,7 +58,7 @@ namespace XenAdminTests.WizardTests.state4_xml.BallooningWizardTests
     class BallooningWizardTest_OneNew : WizardTest<BallooningWizard>
     {
         public BallooningWizardTest_OneNew()
-            : base(new string[] { "Adjust memory settings" }, true, false)
+            : base(new[] { "Adjust memory settings" }, doFinish: false)
         { }
 
         protected override BallooningWizard NewWizard()
@@ -73,7 +73,7 @@ namespace XenAdminTests.WizardTests.state4_xml.BallooningWizardTests
     class BallooningWizardTest_TwoOld : WizardTest<BallooningWizard>
     {
         public BallooningWizardTest_TwoOld()
-            : base(new string[] { "Select VMs", "Adjust memory settings" }, true, false)
+            : base(new[] { "Select VMs", "Adjust memory settings" }, doFinish: false)
         { }
 
         protected override BallooningWizard NewWizard()
@@ -90,7 +90,7 @@ namespace XenAdminTests.WizardTests.state4_xml.BallooningWizardTests
     class BallooningWizardTest_TwoOld_Unselect : WizardTest<BallooningWizard>
     {
         public BallooningWizardTest_TwoOld_Unselect()
-            : base(new string[] { "Select VMs" }, false, false)
+            : base(new[] { "Select VMs" }, false, false)
         { }
 
         protected override BallooningWizard NewWizard()
@@ -114,7 +114,7 @@ namespace XenAdminTests.WizardTests.state4_xml.BallooningWizardTests
     class BallooningWizardTest_TwoOld_SelectOne : WizardTest<BallooningWizard>
     {
         public BallooningWizardTest_TwoOld_SelectOne()
-            : base(new string[] { "Select VMs", "Adjust memory settings" }, true, false)
+            : base(new[] { "Select VMs", "Adjust memory settings" }, doFinish: false)
         { }
 
         protected override BallooningWizard NewWizard()

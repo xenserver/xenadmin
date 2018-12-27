@@ -42,7 +42,7 @@ namespace XenAdminTests.WizardTests.cowley1_xml.NewNetworkWizardTests
     public class NewExternalNetworkTest : WizardTest<NewNetworkWizard>
     {
         public NewExternalNetworkTest()
-            : base(new string[] { "Select Type", "Name", "Network settings" }, true, false)
+            : base(new[] { "Select Type", "Name", "Network settings" }, doFinish: false)
         { }
 
         protected override NewNetworkWizard NewWizard()
@@ -63,7 +63,7 @@ namespace XenAdminTests.WizardTests.cowley1_xml.NewNetworkWizardTests
     public class NewInternalNetworkTest : WizardTest<NewNetworkWizard>
     {
         public NewInternalNetworkTest()
-            : base(new string[] { "Select Type", "Name", "Network settings" }, true, false)
+            : base(new[] { "Select Type", "Name", "Network settings" }, doFinish: false)
         { }
 
         protected override NewNetworkWizard NewWizard()
@@ -82,7 +82,7 @@ namespace XenAdminTests.WizardTests.cowley1_xml.NewNetworkWizardTests
     public class NewBondedNetworkTest : WizardTest<NewNetworkWizard>
     {
         public NewBondedNetworkTest()
-            : base(new string[] { "Select Type", "Bond Members" }, false, false)
+            : base(new[] { "Select Type", "Bond Members" }, false, false)
         { }
 
         protected override NewNetworkWizard NewWizard()
@@ -101,7 +101,7 @@ namespace XenAdminTests.WizardTests.cowley1_xml.NewNetworkWizardTests
     public class NewChinTest : WizardTest<NewNetworkWizard>
     {
         public NewChinTest()
-            : base(new string[] { "Select Type", "Name", "Network settings" }, true, false)
+            : base(new[] { "Select Type", "Name", "Network settings" }, doFinish: false)
         { }
 
         protected override NewNetworkWizard NewWizard()
