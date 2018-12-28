@@ -54,10 +54,17 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			public string SysId { get; set; }
 			public IStorageResource ResourceData { get; set; }
-			public ulong RequiredSpace {
-				get { return (ResourceData == null) ? 0 : ResourceData.RequiredDiskCapacity; }
-			}
-		}
+
+            public ulong RequiredSpace
+            {
+                get
+                {
+                    if (ResourceData == null || !ResourceData.TryCalcRequiredDiskCapacity(out ulong capacity))
+                        return 0;
+                    return capacity;
+                }
+            }
+        }
 
         private class EnableableSrComboboxItem : IEnableableXenObjectComboBoxItem
         {
@@ -221,7 +228,7 @@ namespace XenAdmin.Wizards.GenericPages
 				int i = 0;
                 foreach (IStorageResource resourceData in ResourceData(sysId))
                 {
-                    if(!resourceData.CanCalculateDiskCapacity)
+                    if(!resourceData.TryCalcRequiredDiskCapacity(out _))
                         continue;
 
                     string disklabel = !string.IsNullOrEmpty(resourceData.DiskLabel)
@@ -297,7 +304,9 @@ namespace XenAdmin.Wizards.GenericPages
 					{
 						if (IsExtraSpaceNeeded(resourceData.SR, toStringWrapper.item))
 						{
-							requiredSpace += resourceData.RequiredDiskCapacity;
+                            if (resourceData.TryCalcRequiredDiskCapacity(out ulong capacity))
+                                requiredSpace += capacity;
+
 						    if (!SrsAreSuitable(resourceData.SR, toStringWrapper.item))
 						    {
 						        isSuitableForAll = false;
@@ -322,13 +331,12 @@ namespace XenAdmin.Wizards.GenericPages
             }
 	    }
 
-	    private string FormatDiskValueText(IStorageResource resourceData, string disklabel)
-	    {
-	        if(displayDiskCapacity)
-	            return string.Format("{0} ({1})", disklabel,
-	                                      Util.DiskSizeString(resourceData.RequiredDiskCapacity));
-	        return disklabel;
-	    }
+        private string FormatDiskValueText(IStorageResource resourceData, string diskLabel)
+        {
+            if(displayDiskCapacity && resourceData.TryCalcRequiredDiskCapacity(out ulong capacity))
+                return $"{diskLabel} ({Util.DiskSizeString(capacity)})";
+            return diskLabel;
+        }
 
 	    public override bool EnableNext()
         {
@@ -472,8 +480,11 @@ namespace XenAdmin.Wizards.GenericPages
                     continue;
 
 				bool srOnHost = pbd.host != null && pbd.host.Equals(xenRef);
-				
-				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, sr) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && SrsAreSuitable(resource.SR, sr)))
+
+                if ((sr.shared || srOnHost) &&
+                    (!IsExtraSpaceNeeded(resource.SR, sr) ||
+                     resource.TryCalcRequiredDiskCapacity(out ulong capacity) && (ulong)sr.FreeSpace() > capacity &&
+                     SrsAreSuitable(resource.SR, sr)))
 				{
 					var count = (from ToStringWrapper<SR> existingItem in cb.Items
 					             where existingItem.item.opaque_ref == sr.opaque_ref

@@ -99,26 +99,22 @@ namespace XenAdmin.Wizards.ImportWizard
             }
         }
 
-        public bool CanCalculateDiskCapacity
+        public SR SR => null;
+
+        public bool TryCalcRequiredDiskCapacity(out ulong capacity)
         {
-            get { return file != null; }
+            capacity = 0;
+
+            if (file == null)
+                return false;
+
+            VirtualDiskDesc_Type disk = OVF.FindDiskReference(envelope, rasd);
+
+            capacity = disk != null && !string.IsNullOrEmpty(disk.capacity)
+                ? Convert.ToUInt64(OVF.ComputeCapacity(Convert.ToInt64(disk.capacity), disk.capacityAllocationUnits))
+                : file.size;
+
+            return true;
         }
-
-        public ulong RequiredDiskCapacity
-        {
-            get
-            {
-                VirtualDiskDesc_Type disk = OVF.FindDiskReference(envelope, rasd);
-
-                return (disk != null && !string.IsNullOrEmpty(disk.capacity))
-                                        ? Convert.ToUInt64(OVF.ComputeCapacity(Convert.ToInt64(disk.capacity), disk.capacityAllocationUnits))
-                                        : file.size;
-            }
-        }
-
-		public SR SR
-		{
-			get { return null; }
-		}
-	}
+    }
 }

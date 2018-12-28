@@ -39,9 +39,8 @@ namespace XenAdmin.Wizards.GenericPages
         string DiskLabel { get; }
         object Tag { get; }
         bool SRTypeInvalid { get; }
-        ulong RequiredDiskCapacity { get; }
-        bool CanCalculateDiskCapacity { get; }
-		SR SR { get; }
+        bool TryCalcRequiredDiskCapacity(out ulong capacity);
+        SR SR { get; }
     }
 
     public abstract class StorageResourceContainer : IEnumerable

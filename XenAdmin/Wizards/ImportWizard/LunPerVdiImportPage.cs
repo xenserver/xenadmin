@@ -117,10 +117,8 @@ namespace XenAdmin.Wizards.ImportWizard
                 string sysId = pair.Key;
                 foreach (IStorageResource resourceData in ResourceData(sysId))
                 {
-                    if (!resourceData.CanCalculateDiskCapacity)
+                    if (!resourceData.TryCalcRequiredDiskCapacity(out ulong requiredSize))
                         continue;
-
-                    ulong requiredSize = resourceData.RequiredDiskCapacity;
 
                     foreach (KeyValuePair<string, SR> subPair in pair.Value.Storage)
                     {
