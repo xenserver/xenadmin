@@ -74,35 +74,16 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             sr = vdi.Connection.Cache.Resolve(vdi.SR);
         }
 
-        public string DiskLabel
-        {
-            get { return vdi.Name(); }
-        }
+        public string DiskLabel => vdi.Name();
+        public object Tag => vdi.opaque_ref;
+        public bool SRTypeInvalid => false;
+        public SR SR => sr;
 
-        public object Tag
+        public bool TryCalcRequiredDiskCapacity(out ulong capacity)
         {
-            get { return vdi.opaque_ref; }
+            capacity = Convert.ToUInt64(vdi.physical_utilisation);
+            return true;
         }
-
-		public bool SRTypeInvalid
-        {
-            get { return false;}
-        }
-
-        public bool CanCalculateDiskCapacity
-        {
-            get { return true; }
-        }
-
-        public ulong RequiredDiskCapacity
-        {
-            get { return Convert.ToUInt64(vdi.physical_utilisation); }
-        }
-
-		public SR SR
-		{
-			get { return sr; }
-		}
     }
 }
 
