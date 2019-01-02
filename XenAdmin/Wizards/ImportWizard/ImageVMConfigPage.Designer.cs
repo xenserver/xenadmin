@@ -35,23 +35,22 @@
             this.m_textBoxVMName = new System.Windows.Forms.TextBox();
             this.lblCPUs = new System.Windows.Forms.Label();
             this.m_upDownCpuCount = new System.Windows.Forms.NumericUpDown();
-            this.lblMemory = new System.Windows.Forms.Label();
-            this.m_upDownMemory = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
             this.m_groupBoxAddSpace = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.m_upDownAddSpace = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
-            this.bootModesControl1 = new XenAdmin.Wizards.BootModesControl();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.m_upDownMemory = new System.Windows.Forms.NumericUpDown();
+            this.lblMemory = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_upDownCpuCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.m_upDownMemory)).BeginInit();
             this.m_groupBoxAddSpace.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_upDownAddSpace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.m_upDownMemory)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -65,9 +64,8 @@
             this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.m_upDownMemory, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.m_groupBoxAddSpace, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.bootModesControl1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m_groupBoxAddSpace, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // lblIntro
@@ -113,42 +111,6 @@
             0,
             0});
             this.m_upDownCpuCount.ValueChanged += new System.EventHandler(this.m_upDownCpuCount_ValueChanged);
-            // 
-            // lblMemory
-            // 
-            resources.ApplyResources(this.lblMemory, "lblMemory");
-            this.lblMemory.Name = "lblMemory";
-            // 
-            // m_upDownMemory
-            // 
-            this.m_upDownMemory.Increment = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            resources.ApplyResources(this.m_upDownMemory, "m_upDownMemory");
-            this.m_upDownMemory.Maximum = new decimal(new int[] {
-            16128,
-            0,
-            0,
-            0});
-            this.m_upDownMemory.Minimum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.m_upDownMemory.Name = "m_upDownMemory";
-            this.m_upDownMemory.Value = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
-            this.m_upDownMemory.ValueChanged += new System.EventHandler(this.m_upDownMemory_ValueChanged);
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
             // 
             // m_groupBoxAddSpace
             // 
@@ -208,17 +170,46 @@
             this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 4);
             this.m_ctrlError.Name = "m_ctrlError";
             // 
-            // bootModesControl1
-            // 
-            this.bootModesControl1.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel1.SetColumnSpan(this.bootModesControl1, 4);
-            resources.ApplyResources(this.bootModesControl1, "bootModesControl1");
-            this.bootModesControl1.Name = "bootModesControl1";
-            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // m_upDownMemory
+            // 
+            this.m_upDownMemory.Increment = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.m_upDownMemory, "m_upDownMemory");
+            this.m_upDownMemory.Maximum = new decimal(new int[] {
+            16128,
+            0,
+            0,
+            0});
+            this.m_upDownMemory.Minimum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.m_upDownMemory.Name = "m_upDownMemory";
+            this.m_upDownMemory.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.m_upDownMemory.ValueChanged += new System.EventHandler(this.m_upDownMemory_ValueChanged);
+            // 
+            // lblMemory
+            // 
+            resources.ApplyResources(this.lblMemory, "lblMemory");
+            this.lblMemory.Name = "lblMemory";
             // 
             // ImageVMConfigPage
             // 
@@ -229,12 +220,12 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_upDownCpuCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.m_upDownMemory)).EndInit();
             this.m_groupBoxAddSpace.ResumeLayout(false);
             this.m_groupBoxAddSpace.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_upDownAddSpace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.m_upDownMemory)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -244,19 +235,18 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private XenAdmin.Controls.Common.AutoHeightLabel lblIntro;
 		private System.Windows.Forms.Label lblCPUs;
-		private System.Windows.Forms.Label lblMemory;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown m_upDownCpuCount;
-        private System.Windows.Forms.NumericUpDown m_upDownMemory;
         private System.Windows.Forms.NumericUpDown m_upDownAddSpace;
-        private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox m_textBoxVMName;
         private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
 		private System.Windows.Forms.GroupBox m_groupBoxAddSpace;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private BootModesControl bootModesControl1;
+        private System.Windows.Forms.Label lblMemory;
+        private System.Windows.Forms.NumericUpDown m_upDownMemory;
+        private System.Windows.Forms.Label label4;
     }
 }

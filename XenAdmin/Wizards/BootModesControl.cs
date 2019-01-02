@@ -31,6 +31,8 @@
 
 using System.ComponentModel;
 using System.Windows.Forms;
+using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAPI;
 using BootMode = XenAdmin.Actions.VMActions.BootMode;
 
@@ -53,28 +55,30 @@ namespace XenAdmin.Wizards
                     return;
 
                 _templateVM = value;
-                if (_templateVM != null && _templateVM.IsHVM())
-                {
-                    radioButtonUEFIBoot.Enabled = _templateVM.CanSupportUEFIBoot();
-                    radioButtonUEFISecureBoot.Enabled = _templateVM.CanSupportUEFISecureBoot();
 
-                    if (_templateVM.IsUEFIEnabled())
-                        if (_templateVM.IsSecureBootEnabled())
-                            radioButtonUEFISecureBoot.Checked = true;
-                        else
-                            radioButtonUEFIBoot.Checked = true;
-                    else
-                        radioButtonBIOSBoot.Checked = true;
-                }
-                else
+                if (_templateVM != null)
                 {
-                    radioButtonBIOSBoot.Checked = false;
-                    radioButtonUEFIBoot.Checked = false;
-                    radioButtonUEFISecureBoot.Checked = false;
+                    _connection = _templateVM.Connection;
                 }
+                UpdateControls();
             }
         }
         private VM _templateVM;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IXenConnection Connection
+        {
+            get { return _connection; }
+            set
+            {
+                if (_connection == value)
+                    return;
+
+                _connection = value;
+                UpdateControls();
+            }
+        }
+        private IXenConnection _connection;
 
         public BootMode SelectedOption
         {
@@ -84,6 +88,87 @@ namespace XenAdmin.Wizards
         public void CheckBIOSBootMode()
         {
             radioButtonBIOSBoot.Checked = true;
+        }
+
+        private void UpdateControls()
+        {
+            radioButtonUEFIBoot.Visible = !Helpers.FeatureForbidden(_connection, Host.UefiBootDisabled);
+            radioButtonUEFISecureBoot.Visible = !Helpers.FeatureForbidden(_connection, Host.UefiSecureBootDisabled);
+
+            // ensure that a visible option is selected
+            if (radioButtonUEFIBoot.Checked && !radioButtonUEFIBoot.Visible)
+                radioButtonBIOSBoot.Checked = true;
+
+            if (radioButtonUEFISecureBoot.Checked && !radioButtonUEFISecureBoot.Visible)
+                radioButtonBIOSBoot.Checked = true;
+
+            // show the experimental message
+            ShowExperimentalWarning();
+
+            if (_templateVM != null)
+            {
+                radioButtonUEFIBoot.Enabled = _templateVM.CanSupportUEFIBoot();
+                radioButtonUEFISecureBoot.Enabled = _templateVM.CanSupportUEFISecureBoot();
+
+                if (_templateVM.IsUEFIEnabled())
+                    if (_templateVM.IsSecureBootEnabled())
+                        radioButtonUEFISecureBoot.Checked = true;
+                    else
+                        radioButtonUEFIBoot.Checked = true;
+                else
+                    radioButtonBIOSBoot.Checked = true;
+            }
+            else
+            {
+                radioButtonBIOSBoot.Checked = true;
+                radioButtonUEFIBoot.Checked = false;
+                radioButtonUEFISecureBoot.Checked = false;
+            }
+
+            ShowTemplateWarning();
+        }
+        private void ShowExperimentalWarning()
+        {
+            var uefiExperimental = Helpers.FeatureForbidden(_connection, Host.UefiBootExperimental);
+            var uefiSecureExperimental = Helpers.FeatureForbidden(_connection, Host.UefiSecureBootExperimental);
+            if (uefiExperimental || uefiSecureExperimental)
+            {
+                imgExperimental.Visible = labelExperimental.Visible = true;
+                labelExperimental.Text = uefiExperimental && uefiSecureExperimental
+                    ? Messages.GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING
+                    : uefiExperimental
+                        ? Messages.GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING
+                        : Messages.GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING;
+            }
+            else
+            {
+                imgExperimental.Visible = labelExperimental.Visible = false;
+            }
+        }
+
+        private void ShowTemplateWarning()
+        {
+            if (_templateVM == null)
+            {
+                imgUnsupported.Visible = labelUnsupported.Visible = false;
+                return;
+            }
+
+            var uefiNotSupported = radioButtonUEFIBoot.Visible && !radioButtonUEFIBoot.Enabled;
+            var uefiSecureNotSupported = radioButtonUEFISecureBoot.Visible && !radioButtonUEFISecureBoot.Enabled;
+            if (uefiNotSupported || uefiSecureNotSupported)
+            {
+                imgUnsupported.Visible = labelUnsupported.Visible = true;
+                labelUnsupported.Text = uefiNotSupported && uefiSecureNotSupported
+                    ? Messages.GUEFI_BOOT_MODES_UNSUPPORTED_WARNING
+                    : uefiNotSupported
+                        ? Messages.GUEFI_BOOT_MODE_UNSUPPORTED_WARNING
+                        : Messages.GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING;
+            }
+            else
+            {
+                imgUnsupported.Visible = labelUnsupported.Visible = false;
+            }
         }
     }
 }
