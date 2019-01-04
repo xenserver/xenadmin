@@ -2910,6 +2910,13 @@ namespace XenAPI
             return Rpc<domain_type>("VM.get_domain_type", new JArray(session, _vm ?? ""), serializer);
         }
 
+        public Dictionary<string, string> vm_get_nvram(string session, string _vm)
+        {
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<Dictionary<string, string>>("VM.get_NVRAM", new JArray(session, _vm ?? ""), serializer);
+        }
+
         public void vm_set_name_label(string session, string _vm, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -3496,6 +3503,27 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.VM.add_to_VCPUs_params_live", new JArray(session, _vm ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void vm_set_nvram(string session, string _vm, Dictionary<string, string> _value)
+        {
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.set_NVRAM", new JArray(session, _vm ?? "", _value == null ? new JObject() : JObject.FromObject(_value, serializer)), serializer);
+        }
+
+        public void vm_add_to_nvram(string session, string _vm, string _key, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.add_to_NVRAM", new JArray(session, _vm ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void vm_remove_from_nvram(string session, string _vm, string _key)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.remove_from_NVRAM", new JArray(session, _vm ?? "", _key ?? ""), serializer);
         }
 
         public void vm_set_ha_restart_priority(string session, string _vm, string _value)

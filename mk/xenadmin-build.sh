@@ -57,7 +57,7 @@ source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
 #build
-MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=13.0"
+MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
 
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
@@ -126,10 +126,6 @@ echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && $MSBUILD
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
-
-#include resources script and collect the resources for translations
-. ${REPO}/mk/find-resources.sh
-
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar *
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 

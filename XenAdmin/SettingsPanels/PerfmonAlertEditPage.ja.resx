@@ -226,7 +226,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>[XenServer] では、リソース使用量が特定のしきい値に達したときにメッセージが表示されるように設定できます。これらのメッセージはシステム アラートとして生成され、ほかのシステム アラートと同様にメール サーバーに送信できます。</value>
+    <value>サーバーでは、リソース使用量が特定のしきい値に達したときにメッセージが表示されるように設定できます。これらのメッセージはシステム アラートとして生成され、ほかのシステム アラートと同様にメール サーバーに送信できます。</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>

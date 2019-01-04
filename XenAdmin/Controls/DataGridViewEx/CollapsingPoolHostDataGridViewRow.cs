@@ -41,7 +41,7 @@ namespace XenAdmin.Controls.DataGridViewEx
 {
     public class CollapsingPoolHostDataGridViewRow : DataGridViewExRow
     {
-        protected DataGridViewImageCell _expansionCell;
+        protected readonly DataGridViewImageCell _expansionCell = new DataGridViewImageCell();
         protected DataGridViewCheckBoxCell _poolCheckBoxCell;
         protected DataGridViewTextBoxCell _nameCell;
         protected bool _hasPool;

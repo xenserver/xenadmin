@@ -34,8 +34,7 @@ using System.Collections.Generic;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
-using XenAdmin.Actions;
-using XenAdmin.Actions.VMActions;
+
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
@@ -54,7 +53,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public bool CloneVM
         {
-            get { return !srPicker1.Enabled || CloneRadioButton.Checked; }
+            get { return !tableLayoutPanelSrPicker.Enabled || CloneRadioButton.Checked; }
         }
 
         public SR SelectedSR
@@ -102,12 +101,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         public override void PopulatePage()
         {
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            srPicker1.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
-            srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
             srPicker1.DiskSize = TheVM.TotalVMSize();
-            srPicker1.SrHint.Text = TheVM.is_a_template ? Messages.COPY_TEMPLATE_SELECT_SR : Messages.COPY_VM_SELECT_SR;
+            labelSrHint.Text = TheVM.is_a_template ? Messages.COPY_TEMPLATE_SELECT_SR : Messages.COPY_VM_SELECT_SR;
             srPicker1.SetAffinity(affinity);
             Pool pool = Helpers.GetPoolOfOne(TheVM.Connection);
             if (pool != null)
@@ -142,10 +139,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (TheVM.DescriptionType() != VM.VmDescriptionType.None)
                 DescriptionTextBox.Text = TheVM.Description();
 
-            srPicker1.srListBox.Invalidate();
+            srPicker1.Invalidate();
             srPicker1.selectDefaultSROrAny();
 
-            srPicker1.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
+            tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
 
             labelRubric.Text = TheVM.is_a_template
                                    ? Messages.COPY_TEMPLATE_INTRA_POOL_RUBRIC
@@ -181,12 +178,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             OnPageUpdated();
         }
 
-        private void srPicker1_ItemSelectionNull()
-        {
-            EnableMoveButton();
-        }
-
-        private void srPicker1_ItemSelectionNotNull()
+        private void srPicker1_SrSelectionChanged(object obj)
         {
             EnableMoveButton();
         }
@@ -219,7 +211,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private void CopyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            srPicker1.Enabled = CopyRadioButton.Checked;
+            tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Checked;
             // Since the radiobuttons aren't in the same panel, we have to do manual mutual exclusion
             CloneRadioButton.Checked = !CopyRadioButton.Checked;
         }

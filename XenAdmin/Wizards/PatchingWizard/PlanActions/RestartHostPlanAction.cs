@@ -30,7 +30,6 @@
  */
 
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -42,46 +41,49 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly List<XenRef<VM>> _vms;
         public bool EnableOnly { get; set; }
         private readonly bool _restartAgentFallback;
+        private List<string> hostsNeedReboot;
 
-        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false)
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false, List<string> hostsThatWillRequireReboot = null)
             : base(host)
         {
             _vms = vms;
             EnableOnly = enableOnly;
             _restartAgentFallback = restartAgentFallback;
+            hostsNeedReboot = hostsThatWillRequireReboot;
         }
 
         protected override void RunWithSession(ref Session session)
         {
             var hostObj = GetResolvedHost();
+            if (hostObj == null)
+                return;
 
-            if (Helpers.ElyOrGreater(hostObj))
+            if (SkipRestartHost(hostObj))
             {
-                log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'.", hostObj);
-
-                if (hostObj.updates_requiring_reboot.Count > 0)
-                {
-                    log.DebugFormat("Found {0} patches requiring reboot (live patching failed)."
-                                    + "Initiating evacuate-reboot-bringbabiesback process.",
-                        hostObj.updates_requiring_reboot.Count);
-                }
-                else if (_restartAgentFallback)
-                {
-                    log.Debug("Live patching succeeded. Restarting agent.");
+                if (_restartAgentFallback)
                     RestartAgent(ref session);
-                    return;
-                }
                 else
-                {
-                    log.Debug("Did not find patches requiring reboot (live patching succeeded)."
-                              + " Skipping scheduled restart.");
                     return;
-                }
             }
-           
+
             EvacuateHost(ref session);
             RebootHost(ref session);
             BringBabiesBack(ref session, _vms, EnableOnly);
+
+            if (hostsNeedReboot != null && hostsNeedReboot.Contains(hostObj.uuid))
+                hostsNeedReboot.Remove(hostObj.uuid);
+        }
+
+        public bool SkipRestartHost(Host host)
+        {
+            if (hostsNeedReboot != null
+                && !hostsNeedReboot.Contains(host.uuid)
+                && Helpers.ElyOrGreater(host)
+                && host.updates_requiring_reboot.Count <= 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

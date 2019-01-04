@@ -132,7 +132,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>可以使用此向导将软件更新安装到 [XenServer] 主机上。
+    <value>可以使用此向导将软件更新安装到您的服务器上。
 </value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">

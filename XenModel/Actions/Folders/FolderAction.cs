@@ -372,6 +372,11 @@ namespace XenAdmin.Actions
                 AppliesTo.Add(path);
         }
 
+        public string[] NewPaths
+        {
+            get { return paths; }
+        }
+
         protected override void Run()
         {
             CanCancel = true;
@@ -384,7 +389,7 @@ namespace XenAdmin.Actions
             Description = paths.Length == 1 ? Messages.CREATED_NEW_FOLDER : Messages.CREATED_NEW_FOLDERS;
         }
 
-        internal static string GetTitle(params string[] paths)
+        private static string GetTitle(params string[] paths)
         {
             return paths.Length == 1
                 ? string.Format(Messages.CREATE_NEW_FOLDER, paths[0])

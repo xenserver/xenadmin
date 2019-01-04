@@ -272,7 +272,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
             try
             {
-                if (XenObject == null || XenObject.Locked)
+                if (XenObject == null)
                     return;
 
                 if (!XenObject.Connection.CacheIsPopulated)

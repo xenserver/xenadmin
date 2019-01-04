@@ -1,3 +1,5 @@
+using System;
+
 namespace XenAdmin.Dialogs
 {
     partial class NewDiskDialog
@@ -31,7 +33,6 @@ namespace XenAdmin.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewDiskDialog));
             this.DiskSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.SrListBox = new XenAdmin.Controls.SrPicker();
-            this.GbLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.OkButton = new System.Windows.Forms.Button();
             this.NameTextBox = new System.Windows.Forms.TextBox();
@@ -40,17 +41,15 @@ namespace XenAdmin.Dialogs
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBoxUnits = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanelError = new System.Windows.Forms.TableLayoutPanel();
             this.labelError = new System.Windows.Forms.Label();
             this.pictureBoxError = new System.Windows.Forms.PictureBox();
+            this.comboBoxUnits = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DiskSizeNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.tableLayoutPanelError.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,15 +72,13 @@ namespace XenAdmin.Dialogs
             // 
             // SrListBox
             // 
-            resources.ApplyResources(this.SrListBox, "SrListBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.SrListBox, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.SrListBox, 4);
             this.SrListBox.Connection = null;
+            resources.ApplyResources(this.SrListBox, "SrListBox");
+            this.SrListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.SrListBox.Name = "SrListBox";
-            // 
-            // GbLabel
-            // 
-            resources.ApplyResources(this.GbLabel, "GbLabel");
-            this.GbLabel.Name = "GbLabel";
+            this.SrListBox.SrSelectionChanged += new System.Action<object>(this.SrListBox_SrSelectionChanged);
+            this.SrListBox.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
             // 
             // CloseButton
             // 
@@ -101,7 +98,7 @@ namespace XenAdmin.Dialogs
             // 
             // NameTextBox
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.NameTextBox, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.NameTextBox, 4);
             resources.ApplyResources(this.NameTextBox, "NameTextBox");
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
@@ -113,7 +110,7 @@ namespace XenAdmin.Dialogs
             // 
             // DescriptionTextBox
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.DescriptionTextBox, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.DescriptionTextBox, 4);
             resources.ApplyResources(this.DescriptionTextBox, "DescriptionTextBox");
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
@@ -131,6 +128,9 @@ namespace XenAdmin.Dialogs
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelError, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxUnits, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.CloseButton, 4, 9);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.NameTextBox, 1, 2);
@@ -138,43 +138,18 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.SrListBox, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.DiskSizeNumericUpDown, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.OkButton, 3, 9);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // panel1
+            // tableLayoutPanelError
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 3);
-            this.panel1.Controls.Add(this.CloseButton);
-            this.panel1.Controls.Add(this.OkButton);
-            this.panel1.Name = "panel1";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
-            this.panel2.Controls.Add(this.comboBoxUnits);
-            this.panel2.Controls.Add(this.labelError);
-            this.panel2.Controls.Add(this.pictureBoxError);
-            this.panel2.Name = "panel2";
-            // 
-            // comboBoxUnits
-            // 
-            this.comboBoxUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxUnits, "comboBoxUnits");
-            this.comboBoxUnits.FormattingEnabled = true;
-            this.comboBoxUnits.Items.AddRange(new object[] {
-            resources.GetString("comboBoxUnits.Items"),
-            resources.GetString("comboBoxUnits.Items1")});
-            this.comboBoxUnits.Name = "comboBoxUnits";
+            resources.ApplyResources(this.tableLayoutPanelError, "tableLayoutPanelError");
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanelError, 2);
+            this.tableLayoutPanelError.Controls.Add(this.labelError, 1, 0);
+            this.tableLayoutPanelError.Controls.Add(this.pictureBoxError, 0, 0);
+            this.tableLayoutPanelError.Name = "tableLayoutPanelError";
             // 
             // labelError
             // 
@@ -188,10 +163,25 @@ namespace XenAdmin.Dialogs
             this.pictureBoxError.Name = "pictureBoxError";
             this.pictureBoxError.TabStop = false;
             // 
+            // comboBoxUnits
+            // 
+            this.comboBoxUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxUnits, "comboBoxUnits");
+            this.comboBoxUnits.FormattingEnabled = true;
+            this.comboBoxUnits.Items.AddRange(new object[] {
+            resources.GetString("comboBoxUnits.Items"),
+            resources.GetString("comboBoxUnits.Items1")});
+            this.comboBoxUnits.Name = "comboBoxUnits";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
-            this.tableLayoutPanel1.SetColumnSpan(this.label6, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.label6, 5);
             this.label6.Name = "label6";
             // 
             // NewDiskDialog
@@ -200,15 +190,13 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this, "$this");
             this.CancelButton = this.CloseButton;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.GbLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "NewDiskDialog";
             ((System.ComponentModel.ISupportInitialize)(this.DiskSizeNumericUpDown)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.tableLayoutPanelError.ResumeLayout(false);
+            this.tableLayoutPanelError.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -217,24 +205,22 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        private System.Windows.Forms.Label GbLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.NumericUpDown DiskSizeNumericUpDown;
-        public XenAdmin.Controls.SrPicker SrListBox;
-        public System.Windows.Forms.Button CloseButton;
-        public System.Windows.Forms.Button OkButton;
-        public System.Windows.Forms.TextBox NameTextBox;
-        public System.Windows.Forms.TextBox DescriptionTextBox;
+        private System.Windows.Forms.NumericUpDown DiskSizeNumericUpDown;
+        private XenAdmin.Controls.SrPicker SrListBox;
+        private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.TextBox DescriptionTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel panel1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelError;
-        private System.Windows.Forms.PictureBox pictureBoxError;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxUnits;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.PictureBox pictureBoxError;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelError;
 
     }
 }

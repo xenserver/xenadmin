@@ -31,21 +31,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
+
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeReadyToUpgradePage : XenTabPage
     {
+        public string SelectedSuppPack;
+
         public RollingUpgradeReadyToUpgradePage()
         {
             InitializeComponent();
@@ -105,6 +103,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return Messages.START_UPGRADE;
         }
 
+        public override bool EnableNext()
+        {
+            if (ApplySuppPackAfterUpgrade && !WizardHelpers.IsValidFile(FilePath, out _))
+                return false;
+
+            return true;
+        }
+
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             listBox.Items.Clear();
@@ -124,6 +130,54 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             listBox.Items.Add(Messages.REVERT_POOL_STATE);
         }
 
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+            {
+                SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
+            }
+        }
+
         public IEnumerable<Host> SelectedMasters { private get; set; }
+
+        private string FilePath
+        {
+            get { return fileNameTextBox.Text; }
+            set { fileNameTextBox.Text = value; }
+        }
+
+        public bool ApplySuppPackAfterUpgrade
+        {
+            get
+            {
+                return checkBoxInstallSuppPack.Checked;
+            }
+        }
+
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            checkBoxInstallSuppPack.Checked = true;
+            var suppPack = WizardHelpers.GetSuppPackFromDisk(this);
+            if (!string.IsNullOrEmpty(suppPack))
+                FilePath = suppPack;
+            OnPageUpdated();
+        }
+
+        private void fileNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            checkBoxInstallSuppPack.Checked = true;
+            OnPageUpdated();
+        }
+
+        private void fileNameTextBox_Enter(object sender, EventArgs e)
+        {
+            checkBoxInstallSuppPack.Checked = true;
+            OnPageUpdated();
+        }
+
+        private void checkBoxInstallSuppPack_CheckedChanged(object sender, EventArgs e)
+        {
+            OnPageUpdated();
+        }
     }
 }

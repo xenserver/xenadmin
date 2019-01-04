@@ -531,6 +531,9 @@
   <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
     <value>Not enough free memory</value>
   </data>
+  <data name="HOST_NOT_ENOUGH_PCPUS" xml:space="preserve">
+    <value>The host does not have enough pCPUs to run the VM. It needs at least as many as the VM has vCPUs.</value>
+  </data>
   <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
     <value>The restore could not be performed because the server is not in recovery mode</value>
   </data>
@@ -1909,6 +1912,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
     <value>The operation cannot be performed on physical device</value>
+  </data>
+  <data name="VDI_IS_ENCRYPTED" xml:space="preserve">
+    <value>The requested operation is not allowed because the specified VDI is encrypted.</value>
   </data>
   <data name="VDI_IS_NOT_ISO" xml:space="preserve">
     <value>This operation can only be performed on CD VDIs (iso files or CDROM drives).  VDI {0} is of type {1}.</value>

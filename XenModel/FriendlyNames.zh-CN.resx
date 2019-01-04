@@ -160,7 +160,7 @@
     <value>X 服务器授权文件</value>
   </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
-    <value>检索以二进制对象形式存储在 [XenServer] 上的用户信息。</value>
+    <value>检索以二进制对象形式存储在服务器上的用户信息。</value>
   </data>
   <data name="Description-host.system_status-boot-loader" xml:space="preserve">
     <value>系统引导时提供给用户的引导选项及其详细信息列表</value>
@@ -259,16 +259,16 @@
     <value>[XenServer] 的详细信息，例如版本和内部版本信息、主硬盘位置和池配置</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>用于存储 [XenServer] 状态的数据库</value>
+    <value>用于存储服务器状态的数据库</value>
   </data>
   <data name="Description-host.system_status-xenserver-domains" xml:space="preserve">
     <value>服务器上安装的来宾 VM 及其当前状态的列表</value>
   </data>
   <data name="Description-host.system_status-xenserver-install" xml:space="preserve">
-    <value>在 [XenServer] 安装期间生成的日志文件</value>
+    <value>在服务器安装期间生成的日志文件</value>
   </data>
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>有关 [XenServer] 活动的日志文件</value>
+    <value>有关服务器活动的日志文件</value>
   </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性实时集</value>
@@ -543,8 +543,8 @@
   <data name="Label-host.edition" xml:space="preserve">
     <value>许可证</value>
   </data>
-  <data name="Label-host.edition-free" xml:space="preserve">
-    <value>[XenServer product]</value>
+  <data name="Label-host.edition-express" xml:space="preserve">
+    <value>[XenServer product] Express</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>已启用</value>
@@ -586,13 +586,13 @@
     <value>池成员</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
-    <value>[XenServer] 内部版本号</value>
+    <value>内部版本号</value>
   </data>
   <data name="Label-host.software_version-date" xml:space="preserve">
-    <value>[XenServer] 内部版本日期</value>
+    <value>内部版本日期</value>
   </data>
   <data name="Label-host.software_version-product_version" xml:space="preserve">
-    <value>[XenServer] 版本</value>
+    <value>版本</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
     <value>[Citrix] StorageLink 配置</value>
@@ -990,7 +990,7 @@
     <value>已为 {0} 颁发宽限期许可证。这是因为许可证服务器无法访问、版本已过时或者最近升级了主机。</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
-    <value>服务器“{0}”响应高可用性网络连接检测信号的时间过长，可能要进行防护。</value>
+    <value>服务器“{0}”响应高可用性网络连接检测信号的时间太长，可能要会受到防护。</value>
   </data>
   <data name="Message.body-ha_host_failed" xml:space="preserve">
     <value>服务器“{0}”出现故障。</value>
@@ -1017,13 +1017,13 @@
     <value>受高可用性保护的虚拟机“{0}”无法启动。</value>
   </data>
   <data name="Message.body-ha_statefile_approaching_timeout" xml:space="preserve">
-    <value>服务器“{0}”向检测信号存储写入数据的时间过长，可能要进行防护。</value>
+    <value>服务器“{0}”向检测信号存储写入数据的时间太长，可能会受到防护。</value>
   </data>
   <data name="Message.body-ha_statefile_lost" xml:space="preserve">
     <value>池“{0}”中的服务器无法访问检测信号 SR。如果没有检测信号 SR，高可用性保护的作用将严重削弱。</value>
   </data>
   <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>服务器“{0}”上的 [XenServer] 响应时间过长，可能要进行防护。</value>
+    <value>服务器“{0}”的响应时间太长，可能会受到防护。</value>
   </data>
   <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
     <value>服务器“{0}”的时钟与池“{1}”中其他服务器不同步。这可能导致在迁移虚拟机时出现错误，并且还会影响以后收集的任何性能数据。</value>
@@ -1035,7 +1035,7 @@
     <value>在池中同步性能统计信息时出现临时故障，这可能是因为一个或多个服务器处于脱机状态。稍后将再次尝试同步。</value>
   </data>
   <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
-    <value>服务器“{0}”上的许可证已过期或被更改，不再支持 [XenServer product] Enterprise 功能。</value>
+    <value>服务器“{0}”上的许可证已过期或被更改，不再支持池功能。</value>
   </data>
   <data name="Message.body-license_expired" xml:space="preserve">
     <value>{0} 的许可证已过期。</value>
@@ -1122,7 +1122,7 @@
     <value>虚拟机“{0}”在收到请求时未降低其内存使用量。</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>正在使用的 [XenServer] 许可证不允许您使用计划快照功能。</value>
+    <value>正在使用的服务器许可证不允许您使用计划快照功能。</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>快照计划“{0}”失败，因为无法创建快照。</value>
@@ -1245,7 +1245,7 @@
     <value>检测信号 SR 已丢失</value>
   </data>
   <data name="Message.name-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
-    <value>[XenServer] 运行状况检查即将超时</value>
+    <value>服务器运行状况检查即将超时</value>
   </data>
   <data name="Message.name-host_clock_skew_detected" xml:space="preserve">
     <value>服务器时钟未同步</value>
@@ -1254,7 +1254,7 @@
     <value>服务器时钟已倒退</value>
   </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
-    <value>[XenServer] 统计信息同步失败</value>
+    <value>服务器统计信息同步失败</value>
   </data>
   <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
     <value>网络配置问题</value>
@@ -1374,11 +1374,11 @@
     <value>WLB VM 重新定位</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
-    <value>池管理员对所有 [XenServer] 功能和设置具有完全访问权限，可以访问 [XenServer] 控制台并管理其他用户的角色。
+    <value>池管理员对所有功能和设置具有完全访问权限。可以访问服务器控制台并管理其他用户的角色。
  
 - 无任何限制
-- 可进行角色和用户管理
-- 可访问 [XenServer] 控制台</value>
+- 角色和用户管理
+- 访问服务器控制台</value>
   </data>
   <data name="Role.pool-admin.NameLabel" xml:space="preserve">
     <value>池管理员</value>
@@ -1402,7 +1402,7 @@
     <value>只读</value>
   </data>
   <data name="Role.vm-admin.Description" xml:space="preserve">
-    <value>VM 管理员可以管理 VM 和模板，并且可以访问完成这些任务所需要的存储。此角色依靠 [XenServer] 选择每个 VM 的运行位置，依靠模板为动态内存控制(DMC)和主服务器设置提供值。
+    <value>VM 管理员可以管理 VM 和模板，并且可以访问完成这些任务所需的存储。此角色依靠服务器选择每个 VM 的运行位置，依靠模板为动态内存控制(DMC)和主服务器设置提供值。
  
 - 管理 VM 和模板
 - 无权访问动态内存控制功能
@@ -1551,7 +1551,7 @@
     <value>[XenServer product] Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>[XenServer product] for XenDesktop</value>
+    <value>[XenServer product] for [Citrix] Virtual Desktops</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>有关 AD 的帮助</value>
@@ -1622,11 +1622,11 @@
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
     <value>许可证服务器版本已过时。</value>
   </data>
-  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-Socket</value>
+  <data name="Label-host.edition-premium-per-socket" xml:space="preserve">
+    <value>[XenServer product] Premium Per-Socket</value>
   </data>
-  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-User</value>
+  <data name="Label-host.edition-premium-per-user" xml:space="preserve">
+    <value>[XenServer product] Premium Per-User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
     <value>[XenServer product] Standard Per-Socket</value>
@@ -1650,10 +1650,10 @@
     <value>有关许可的帮助</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>XenApp/XenDesktop</value>
+    <value>[Citrix] Virtual Apps and Desktops</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>XenApp/XenDesktop Platinum</value>
+    <value>[Citrix] Virtual Apps and Desktops Premium</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>安装的补充包</value>
@@ -1752,22 +1752,31 @@
     <value>卷管理器日志</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Ultimate Edition</value>
+    <value>[Citrix XenServer] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Basic Edition</value>
+    <value>[Citrix XenServer] Basic Edition</value>
   </data>
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>容器管理日志</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>容器管理日志</value>
+  </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
   <data name="Description-host.system_status-conntest" xml:space="preserve">
-    <value>[XenServer] 与 Internet 之间的连接性测试</value>
+    <value>服务器与 Internet 之间的连接性测试</value>
   </data>
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>测试连接</value>
   </data>
   <data name="Label-host.edition-standard" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Standard Edition</value>
+    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>必需的更新</value>
@@ -1854,6 +1863,60 @@
     <value>GFS2</value>
   </data>
   <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud</value>
+  </data>
+  <data name="Label-host.edition-legacy-basic" xml:space="preserve">
+    <value>[Citrix XenServer] Basic Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop" xml:space="preserve">
+    <value>XenApp/XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop-cloud" xml:space="preserve">
     <value>XenApp/XenDesktop [Citrix] Cloud</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop-plus" xml:space="preserve">
+    <value>XenApp/XenDesktop Platinum</value>
+  </data>
+  <data name="Label-host.edition-legacy-enterprise-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Enterprise Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-enterprise-per-user" xml:space="preserve">
+    <value>[Legacy XenServer product] Enterprise Per-User</value>
+  </data>
+  <data name="Label-host.edition-legacy-free" xml:space="preserve">
+    <value>[Legacy XenServer product]</value>
+  </data>
+  <data name="Label-host.edition-legacy-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-premium" xml:space="preserve">
+    <value>[Citrix XenServer] Ultimate Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-standard" xml:space="preserve">
+    <value>[Citrix XenServer] Standard Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-standard-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Standard Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-xendesktop" xml:space="preserve">
+    <value>[Legacy XenServer product] for XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>[Legacy XenServer product] Premium Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>[Legacy XenServer product] Premium Per-User</value>
+  </data>
+  <data name="Description-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] 许可守护程序日志</value>
+  </data>
+  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>由 [XenServer] Toolstack 的群集管理守护程序生成的日志。</value>
+  </data>
+  <data name="Label-host.system_status-v6d" xml:space="preserve">
+    <value>[XenServer] 许可守护程序</value>
+  </data>
+  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>[XenServer] 群集管理守护程序</value>
   </data>
 </root>

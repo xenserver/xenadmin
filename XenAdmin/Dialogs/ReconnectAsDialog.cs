@@ -89,7 +89,6 @@ namespace XenAdmin.Dialogs
             {
                 xc.CachePopulated += new EventHandler<EventArgs>(xc_CachePopulated);
                 XenConnectionUI.BeginConnect(xc, true, Program.MainWindow, true);
-                Program.MainWindow.RequestRefreshTreeView();
             });  
         }
 

@@ -121,6 +121,11 @@ namespace XenAdminTests
             return GetFieldDeep<CheckedListBox>(o, name);
         }
 
+        public static SrPicker GetSrPicker(object o, string name)
+        {
+            return GetFieldDeep<SrPicker>(o, name);
+        }
+
         public static RadioButton GetRadioButton(object o, string name)
         {
             return GetFieldDeep<RadioButton>(o, name);

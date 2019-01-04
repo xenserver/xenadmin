@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>Changing control domain memory settings on '{0}'</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>The memory specified ({0}) was too low. It has to be at least the value of the static minimum ({1})</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>Change disk size</value>
   </data>
@@ -771,11 +774,11 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>Performing SR scan from '{0}'</value>
   </data>
-  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
-    <value>Renaming server network interface</value>
-  </data>
   <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE" xml:space="preserve">
     <value>Renamed server network interface</value>
+  </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
+    <value>Renaming server network interface</value>
   </data>
   <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
     <value>Saving VM Configuration</value>
@@ -1007,6 +1010,9 @@
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>Failed to upload the status report.</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>Uploading report to [Citrix] Insight Services ({0} of {1})</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>Uploading report to [Citrix] Insight Services</value>
@@ -2464,9 +2470,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>Snapshot disks cannot be moved</value>
   </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>You must detach this virtual disk before it can be moved.</value>
-  </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
   </data>
@@ -3084,7 +3087,7 @@ Would you like to carry out the operation at this time?</value>
     <value>The connection was refused.</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
-    <value>Connection Refused</value>
+    <value>Refused connection to {0}</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>Connection to Server {0} restricted because a connection already exists to another XE Express Server ({1})</value>
@@ -3194,9 +3197,6 @@ You can only connect to a single [Citrix XenServer] Express Edition server at a 
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
     <value>Control Domain Memory Settings - {0}</value>
-  </data>
-  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
-    <value>&amp;Control Domain Memory:</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
@@ -3774,7 +3774,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>Default</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>Default install of [XenServer]</value>
+    <value>Default install of {0}</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>Default Search</value>
@@ -4077,9 +4077,6 @@ This will also delete its subfolders.</value>
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Disabled clustering on {0}.</value>
   </data>
-  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
-    <value>No updates found because automatic checking for updates is disabled.</value>
-  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' disabled.</value>
   </data>
@@ -4091,9 +4088,6 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>Disable HA if you want to configure the management interfaces</value>
-  </data>
-  <data name="DISABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>&amp;Disable HA...</value>
   </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>Disable</value>
@@ -4784,12 +4778,6 @@ Eject the CD and try again.</value>
   <data name="DYNAMIC_MAX" xml:space="preserve">
     <value>Maximum memory</value>
   </data>
-  <data name="DYNAMIC_MAX_AMP" xml:space="preserve">
-    <value>Ma&amp;ximum memory</value>
-  </data>
-  <data name="DYNAMIC_MAX_COLON" xml:space="preserve">
-    <value>Ma&amp;ximum memory:</value>
-  </data>
   <data name="DYNAMIC_MEMORY_CONTROL" xml:space="preserve">
     <value>Memory</value>
   </data>
@@ -4801,9 +4789,6 @@ Eject the CD and try again.</value>
   </data>
   <data name="DYNAMIC_MIN" xml:space="preserve">
     <value>Minimum memory</value>
-  </data>
-  <data name="DYNAMIC_MIN_AMP" xml:space="preserve">
-    <value>&amp;Minimum memory</value>
   </data>
   <data name="DYNAMIC_MIN_COLON" xml:space="preserve">
     <value>&amp;Minimum memory:</value>
@@ -4872,9 +4857,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Enable clustering.</value>
-  </data>
-  <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>&amp;Enable HA...</value>
   </data>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>Enable</value>
@@ -5281,6 +5263,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>Export to File...</value>
   </data>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>VMs with disks greater than {0} cannot be exported as an OVF/OVA package.</value>
+  </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>Normal text file (*.txt)|*.txt|Rich text file (*.rtf)|*.rtf</value>
   </data>
@@ -5656,6 +5641,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="GENERAL_HEADING_VERSION_DETAILS" xml:space="preserve">
     <value>Version Details</value>
   </data>
+  <data name="GENERAL_LICENSE_QUERYING" xml:space="preserve">
+    <value>Querying license status...</value>
+  </data>
   <data name="GENERAL_MEMORY" xml:space="preserve">
     <value>Memory:</value>
   </data>
@@ -5848,10 +5836,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Group Roles</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>This version of [XenCenter] is out of date and cannot connect to {0}.</value>
-  </data>
-  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
-    <value>
+    <value>This version of [XenCenter] is out of date and cannot connect to {0}.
 
 You can get a compatible version of [XenCenter] from the following location:</value>
   </data>
@@ -7723,9 +7708,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{0} (management) on {1}</value>
   </data>
-  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
-    <value>No update is needed.</value>
-  </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage required for some hosts</value>
   </data>
@@ -7984,6 +7966,20 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   </data>
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>Could not save session</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>By pressing Yes, the following step will be skipped:
+    
+{0}
+
+Do you want to continue?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>By pressing Yes, the following steps will be skipped:
+    
+{0}
+
+Do you want to continue?</value>
   </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>You must eject all slaves from the pool before you can delete the pool.</value>
@@ -8686,6 +8682,9 @@ When you configure an NFS storage repository, you simply provide the hostname or
   <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
     <value>Maximum number of vCPUs</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYINFO" xml:space="preserve">
+    <value>(min = {0}, max = {1})</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
 
@@ -8925,9 +8924,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>New Virtual Network Interface - {0}</value>
   </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>Select a storage repository to create the disk on</value>
-  </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
   </data>
@@ -8955,6 +8951,9 @@ Once the VM has restarted click the Install [Citrix VM Tools] menu item once aga
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
+  </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>&amp;Create</value>
   </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>New Folder</value>
@@ -9765,20 +9764,6 @@ Installation size: {1}</value>
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>Failed to download {0} from '{1}'</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update is installed on '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .{2} file instead.</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .{2} file instead.</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 Date modified: {1}
@@ -10552,6 +10537,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>&amp;Rename Folder...</value>
   </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>Rename Folder</value>
+  </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>Rename tag '{0}'</value>
   </data>
@@ -10700,10 +10688,10 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>No longer connected to {0}. Please review your selection and try again.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>The rolling pool upgrade process was not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+    <value>The rolling pool upgrade process was not completed successfully. The upgrade process has been paused.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>The following errors occurred while rolling pool upgrade was in progress:</value>
@@ -10764,6 +10752,15 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>{0} could be skipped.</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>Installing update '{0}' on '{1}'</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>Skipping installing update '{0}' on '{1}'...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
@@ -11223,13 +11220,13 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>What type of snapshot do you want to use for scheduled snapshots?</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>[XenServer] build number</value>
+    <value>Build number</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>[XenServer] build date</value>
+    <value>Build date</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>[XenServer] version</value>
+    <value>Version</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>Try again using a correct user name and password.</value>
@@ -11360,6 +11357,9 @@ Incremental allocation: {1}</value>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs without a home server cannot have disks on local storage</value>
   </data>
+  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>You cannot create a disk greater than {0} on this SR.</value>
+  </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
   </data>
@@ -11454,12 +11454,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATIC_MAX" xml:space="preserve">
     <value>Static maximum</value>
-  </data>
-  <data name="STATIC_MAX_AMP" xml:space="preserve">
-    <value>&amp;Static maximum</value>
-  </data>
-  <data name="STATIC_MAX_COLON" xml:space="preserve">
-    <value>&amp;Static maximum:</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
@@ -11679,17 +11673,17 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPUs: {0}</value>
   </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>Interface {0}: Network = {1}</value>
+  </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>You must install the Linux pack to use this template</value>
   </data>
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;no description&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>Terminating sessions...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>Interface {0}: Network = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>Terminating session for user '{0}'</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>Test archive target location</value>
@@ -12012,11 +12006,6 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}: The '{1}' storage repository is broken.</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>Unable to download update from '{0}': no longer connected.
-
-Check your settings and try again.</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: Cannot migrate VM '{1}'</value>
   </data>
@@ -12094,6 +12083,14 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the server is unreachable.</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>The selected file does not have a valid extension. Valid extensions are *.{0}, *.zip and *.iso.</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>This is not a valid update file.
+
+Please check your settings and try again.</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' has a local CD/DVD in its drive.</value>
   </data>
@@ -12108,12 +12105,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>Ensure you have upgraded [XenCenter] before upgrading [XenServer].</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.{0} and *.iso</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>No valid update file found in {0}</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>No further action is required for this update.</value>
@@ -12179,7 +12170,7 @@ Check your settings and try again.</value>
     <value>Deleting update installation file {0} from {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>Removing update file {0} from {1}...</value>
+    <value>Removing update file {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>
@@ -12212,6 +12203,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>Skipping update {0}. Already applied on {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>Skipping uploading update {0}. Already uploaded to {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
@@ -12560,6 +12554,12 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
   </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
+  </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>
   </data>
@@ -12901,6 +12901,12 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>This VM has a pass-through GPU assigned.</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>This VM has a virtual GPU assigned.</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>Memory and/or VCPU changes will take effect when you restart the VM.</value>

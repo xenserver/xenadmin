@@ -41,6 +41,7 @@ using System.Threading;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Actions;
+using XenAdmin.Commands;
 using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenCenterLib;
@@ -884,13 +885,23 @@ namespace XenAdmin.TabPages
             if (GridViewSubjectList.SelectedRows.Count < 1)
                 return;
 
-            bool adminSelected = GridViewSubjectList.Rows[0].Selected;
+            bool adminSelected = false;
+            bool allSelectedLoggedIn = true;
+
+            foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
+            {
+                if (r.IsLocalRootRow)
+                    adminSelected = true;
+
+                if (!r.LoggedIn)
+                    allSelectedLoggedIn = false;
+            }
 
             tTipChangeRole.SuppressTooltip = ButtonChangeRoles.Enabled = !adminSelected;
             tTipChangeRole.SetToolTip(Messages.AD_CANNOT_MODIFY_ROOT);
 
             tTipLogoutButton.SuppressTooltip = !adminSelected;
-            ButtonLogout.Enabled = !adminSelected && AllSelectedRowsLoggedIn();
+            ButtonLogout.Enabled = !adminSelected && allSelectedLoggedIn;
 
             tTipRemoveButton.SuppressTooltip = ButtonRemove.Enabled = !adminSelected;
 
@@ -918,17 +929,6 @@ namespace XenAdmin.TabPages
             if (row != null)
                 row.ToggleExpandedState();
         }
-
-        private bool AllSelectedRowsLoggedIn()
-        {
-            foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
-            {
-                if (!r.LoggedIn)
-                    return false;
-            }
-            return true;
-        }
-
 
         private void GridViewSubjectList_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
@@ -1067,47 +1067,37 @@ namespace XenAdmin.TabPages
             if (session == null)
                 return;
 
-            // First we check through the list to check what warning message we show
-            List<Subject> subjectsToLogout = new List<Subject>();
+            var subjectsToLogout = new List<Subject>();
+            bool logSelfOut = false;
+
             foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
             {
                 if (r.IsLocalRootRow || !r.LoggedIn)
                     continue;
 
                 subjectsToLogout.Add(r.subject);
+
+                if (session.Subject != null && r.subject.opaque_ref == session.Subject)
+                    logSelfOut = true;
             }
 
             bool suicide = false;
-            // Warn if user is logging themselves out
-            if (session.Subject != null)//have already checked session not null
+            if (logSelfOut)
             {
                 var warnMsg = string.Format(subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_SUICIDE_MANY : Messages.AD_LOGOUT_SUICIDE_ONE,
-                                            Helpers.GetName(_connection).Ellipsise(50));
+                    Helpers.GetName(_connection).Ellipsise(50));
 
-                foreach (Subject entry in subjectsToLogout)
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, warnMsg, Messages.AD_FEATURE_NAME),
+                    ThreeButtonDialog.ButtonYes,
+                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                 {
-                    if (entry.opaque_ref == session.Subject)
-                    {
-                        DialogResult r;
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(
-                                SystemIcons.Warning,
-                                warnMsg,
-                                Messages.AD_FEATURE_NAME),
-                            ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
-                        {
-                            r = dlg.ShowDialog(this);
-                        }
+                    //CA-64818: DialogResult can be No if the No button has been hit
+                    //or Cancel if the dialog has been closed from the control box
+                    if (dlg.ShowDialog(this) != DialogResult.Yes)
+                        return;
 
-                        //CA-64818: DialogResult can be No if the No button has been hit
-                        //or Cancel if the dialog has been closed from the control box
-                        if (r != DialogResult.Yes)
-                            return;
-
-                        suicide = true;
-                        break;
-                    }
+                    suicide = true;
                 }
             }
 
@@ -1117,49 +1107,37 @@ namespace XenAdmin.TabPages
 
             if (!suicide)//CA-68645
             {
-                DialogResult questionDialog;
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Warning,
-                        logoutMessage,
-                        Messages.AD_FEATURE_NAME),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, logoutMessage, Messages.AD_FEATURE_NAME),
                     ThreeButtonDialog.ButtonYes,
                     new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                 {
-                    questionDialog = dlg.ShowDialog(this);
+                    //CA-64818: DialogResult can be No if the No button has been hit
+                    //or Cancel if the dialog has been closed from the control box
+                    if (dlg.ShowDialog(this) != DialogResult.Yes)
+                        return;
                 }
-
-                //CA-64818: DialogResult can be No if the No button has been hit
-                //or Cancel if the dialog has been closed from the control box
-                if (questionDialog != DialogResult.Yes)
-                    return;
             }
 
             // Then we go through the list and disconnect each user session, doing our own last if necessary
             foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
             {
-                // check they are not the root row and are logged in
                 if (r.IsLocalRootRow || !r.LoggedIn)
                     continue;
 
                 if (session.UserSid == r.subject.subject_identifier)
-                {
                     continue;
-                }
-                DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(_connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
-                    {
-                        Session.logout_subject_identifier(s, r.subject.subject_identifier);
-                    }, "session.logout_subject_identifier");
-                logoutAction.RunAsync();
+
+                new DelegatedAsyncAction(_connection,
+                    string.Format(Messages.TERMINATING_USER_SESSION, r.subject.DisplayName ?? r.subject.SubjectName),
+                    Messages.IN_PROGRESS, Messages.COMPLETED,
+                    s => Session.logout_subject_identifier(s, r.subject.subject_identifier),
+                    "session.logout_subject_identifier").RunAsync();
             }
+
             if (suicide)
             {
-                DelegatedAsyncAction logoutAction = new DelegatedAsyncAction(_connection, Messages.TERMINATING_SESSIONS, Messages.IN_PROGRESS, Messages.COMPLETED, delegate(Session s)
-                    {
-                        Session.logout_subject_identifier(s, session.UserSid);
-                        _connection.Logout();
-                    }, "session.logout_subject_identifier");
-                logoutAction.RunAsync();
+                new DisconnectCommand(Program.MainWindow, _connection, true).Execute();
             }
             else
             {

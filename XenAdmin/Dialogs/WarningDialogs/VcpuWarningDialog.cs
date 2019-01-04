@@ -73,11 +73,9 @@ namespace XenAdmin.Dialogs
                     vm.Locked = false;
                 }
             }
-            else
+            else if (Program.MainWindow.SelectObject(vm))
             {
-                // Select VM's settings (a.k.a. 'general') tab
-                if (Program.MainWindow.SelectObject(this.vm))
-                    Program.MainWindow.SwitchToTab(MainWindow.Tab.Settings);
+                Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
             }
         }
     }

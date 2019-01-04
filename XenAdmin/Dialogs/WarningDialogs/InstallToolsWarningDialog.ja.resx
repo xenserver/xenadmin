@@ -429,7 +429,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>[Citrix VM Tools] のインストール</value>
+    <value>[Citrix VM Tools] をインストール</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>InstallToolsWarningDialog</value>

@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
@@ -69,8 +68,8 @@ namespace XenAdmin.Dialogs
             Host_metrics metrics = host.Connection.Resolve(host.metrics);
             bool maintenanceMode = host.MaintenanceMode() || (metrics != null && !metrics.live);
 
-            maintenanceWarningImage.Visible = maintenanceWarningLabel.Visible = maintenanceModeLinkLabel.Visible = !maintenanceMode;
-            hostRebootWarningImage.Visible = hostRebootWarningLabel.Visible = maintenanceMode;
+            tplMaintenanceWarning.Visible = !maintenanceMode;
+            tplRebootWarning.Visible = maintenanceMode;
 
             memorySpinner.Enabled = maintenanceMode;
         }
@@ -81,8 +80,7 @@ namespace XenAdmin.Dialogs
 
             // Since updates come in dribs and drabs, avoid error if new max and min arrive
             // out of sync and maximum < minimum.
-            if (vm.memory_dynamic_max >= vm.memory_dynamic_min &&
-                vm.memory_static_max >= vm.memory_static_min)
+            if (vm.memory_dynamic_max >= vm.memory_dynamic_min)
             {
                 double min = vm.memory_static_min;
                 double max = Math.Min(vm.memory_dynamic_min + host.memory_available_calc(), MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA);
@@ -93,7 +91,7 @@ namespace XenAdmin.Dialogs
                 if (value < min)
                     min = value;
                 memorySpinner.SetRange(0, MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA); // reset spinner limits
-                memorySpinner.Initialize(Messages.CONTROL_DOMAIN_MEMORY_LABEL, null, value, max);
+                memorySpinner.Initialize(value, max);
                 memorySpinner.SetRange(min, max);
             }
             origMemory = memorySpinner.Value;

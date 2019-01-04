@@ -41,10 +41,10 @@ namespace XenAdmin.TabPages
             this.DeactivateButton = new System.Windows.Forms.Button();
             this.MoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
             this.MoveButton = new System.Windows.Forms.Button();
-            this.DeleteButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DeleteButton = new System.Windows.Forms.Button();
             this.DetachButtonContainer = new XenAdmin.Controls.ToolTipContainer();
             this.DetachButton = new System.Windows.Forms.Button();
+            this.DeleteButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAttach = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +56,16 @@ namespace XenAdmin.TabPages
             this.toolStripMenuItemProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewStorage = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.ColumnDevicePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSRVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnReadOnly = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDevicePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,22 +77,12 @@ namespace XenAdmin.TabPages
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDevicePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSRVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnReadOnly = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDevicePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.DeactivateButtonContainer.SuspendLayout();
             this.MoveButtonContainer.SuspendLayout();
-            this.DeleteButtonContainer.SuspendLayout();
             this.DetachButtonContainer.SuspendLayout();
+            this.DeleteButtonContainer.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).BeginInit();
@@ -120,9 +120,9 @@ namespace XenAdmin.TabPages
             this.flowLayoutPanel1.Controls.Add(this.AttachButton);
             this.flowLayoutPanel1.Controls.Add(this.DeactivateButtonContainer);
             this.flowLayoutPanel1.Controls.Add(this.MoveButtonContainer);
-            this.flowLayoutPanel1.Controls.Add(this.EditButton);
-            this.flowLayoutPanel1.Controls.Add(this.DeleteButtonContainer);
             this.flowLayoutPanel1.Controls.Add(this.DetachButtonContainer);
+            this.flowLayoutPanel1.Controls.Add(this.DeleteButtonContainer);
+            this.flowLayoutPanel1.Controls.Add(this.EditButton);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -152,19 +152,6 @@ namespace XenAdmin.TabPages
             this.MoveButton.UseVisualStyleBackColor = true;
             this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
-            // DeleteButtonContainer
-            // 
-            this.DeleteButtonContainer.Controls.Add(this.DeleteButton);
-            resources.ApplyResources(this.DeleteButtonContainer, "DeleteButtonContainer");
-            this.DeleteButtonContainer.Name = "DeleteButtonContainer";
-            // 
-            // DeleteButton
-            // 
-            resources.ApplyResources(this.DeleteButton, "DeleteButton");
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteDriveButton_Click);
-            // 
             // DetachButtonContainer
             // 
             this.DetachButtonContainer.Controls.Add(this.DetachButton);
@@ -177,6 +164,19 @@ namespace XenAdmin.TabPages
             this.DetachButton.Name = "DetachButton";
             this.DetachButton.UseVisualStyleBackColor = true;
             this.DetachButton.Click += new System.EventHandler(this.DetachButton_Click);
+            // 
+            // DeleteButtonContainer
+            // 
+            this.DeleteButtonContainer.Controls.Add(this.DeleteButton);
+            resources.ApplyResources(this.DeleteButtonContainer, "DeleteButtonContainer");
+            this.DeleteButtonContainer.Name = "DeleteButtonContainer";
+            // 
+            // DeleteButton
+            // 
+            resources.ApplyResources(this.DeleteButton, "DeleteButton");
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteDriveButton_Click);
             // 
             // contextMenuStrip1
             // 
@@ -276,6 +276,76 @@ namespace XenAdmin.TabPages
             this.dataGridViewStorage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewStorage_KeyUp);
             this.dataGridViewStorage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewStorage_MouseUp);
             // 
+            // ColumnDevicePosition
+            // 
+            this.ColumnDevicePosition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnDevicePosition, "ColumnDevicePosition");
+            this.ColumnDevicePosition.Name = "ColumnDevicePosition";
+            this.ColumnDevicePosition.ReadOnly = true;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnDesc
+            // 
+            this.ColumnDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnDesc, "ColumnDesc");
+            this.ColumnDesc.Name = "ColumnDesc";
+            this.ColumnDesc.ReadOnly = true;
+            // 
+            // ColumnSR
+            // 
+            this.ColumnSR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnSR, "ColumnSR");
+            this.ColumnSR.Name = "ColumnSR";
+            this.ColumnSR.ReadOnly = true;
+            // 
+            // ColumnSRVolume
+            // 
+            this.ColumnSRVolume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnSRVolume, "ColumnSRVolume");
+            this.ColumnSRVolume.Name = "ColumnSRVolume";
+            this.ColumnSRVolume.ReadOnly = true;
+            // 
+            // ColumnSize
+            // 
+            this.ColumnSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnSize, "ColumnSize");
+            this.ColumnSize.Name = "ColumnSize";
+            this.ColumnSize.ReadOnly = true;
+            // 
+            // ColumnReadOnly
+            // 
+            this.ColumnReadOnly.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnReadOnly, "ColumnReadOnly");
+            this.ColumnReadOnly.Name = "ColumnReadOnly";
+            this.ColumnReadOnly.ReadOnly = true;
+            // 
+            // ColumnPriority
+            // 
+            this.ColumnPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnPriority, "ColumnPriority");
+            this.ColumnPriority.Name = "ColumnPriority";
+            this.ColumnPriority.ReadOnly = true;
+            // 
+            // ColumnActive
+            // 
+            this.ColumnActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnActive, "ColumnActive");
+            this.ColumnActive.Name = "ColumnActive";
+            this.ColumnActive.ReadOnly = true;
+            // 
+            // ColumnDevicePath
+            // 
+            this.ColumnDevicePath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnDevicePath, "ColumnDevicePath");
+            this.ColumnDevicePath.Name = "ColumnDevicePath";
+            this.ColumnDevicePath.ReadOnly = true;
+            // 
             // multipleDvdIsoList1
             // 
             resources.ApplyResources(this.multipleDvdIsoList1, "multipleDvdIsoList1");
@@ -355,76 +425,6 @@ namespace XenAdmin.TabPages
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
-            // ColumnDevicePosition
-            // 
-            this.ColumnDevicePosition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnDevicePosition, "ColumnDevicePosition");
-            this.ColumnDevicePosition.Name = "ColumnDevicePosition";
-            this.ColumnDevicePosition.ReadOnly = true;
-            // 
-            // ColumnName
-            // 
-            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnName, "ColumnName");
-            this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
-            // 
-            // ColumnDesc
-            // 
-            this.ColumnDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.ColumnDesc, "ColumnDesc");
-            this.ColumnDesc.Name = "ColumnDesc";
-            this.ColumnDesc.ReadOnly = true;
-            // 
-            // ColumnSR
-            // 
-            this.ColumnSR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnSR, "ColumnSR");
-            this.ColumnSR.Name = "ColumnSR";
-            this.ColumnSR.ReadOnly = true;
-            // 
-            // ColumnSRVolume
-            // 
-            this.ColumnSRVolume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnSRVolume, "ColumnSRVolume");
-            this.ColumnSRVolume.Name = "ColumnSRVolume";
-            this.ColumnSRVolume.ReadOnly = true;
-            // 
-            // ColumnSize
-            // 
-            this.ColumnSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnSize, "ColumnSize");
-            this.ColumnSize.Name = "ColumnSize";
-            this.ColumnSize.ReadOnly = true;
-            // 
-            // ColumnReadOnly
-            // 
-            this.ColumnReadOnly.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnReadOnly, "ColumnReadOnly");
-            this.ColumnReadOnly.Name = "ColumnReadOnly";
-            this.ColumnReadOnly.ReadOnly = true;
-            // 
-            // ColumnPriority
-            // 
-            this.ColumnPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnPriority, "ColumnPriority");
-            this.ColumnPriority.Name = "ColumnPriority";
-            this.ColumnPriority.ReadOnly = true;
-            // 
-            // ColumnActive
-            // 
-            this.ColumnActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnActive, "ColumnActive");
-            this.ColumnActive.Name = "ColumnActive";
-            this.ColumnActive.ReadOnly = true;
-            // 
-            // ColumnDevicePath
-            // 
-            this.ColumnDevicePath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnDevicePath, "ColumnDevicePath");
-            this.ColumnDevicePath.Name = "ColumnDevicePath";
-            this.ColumnDevicePath.ReadOnly = true;
-            // 
             // VMStoragePage
             // 
             resources.ApplyResources(this, "$this");
@@ -437,8 +437,8 @@ namespace XenAdmin.TabPages
             this.flowLayoutPanel1.ResumeLayout(false);
             this.DeactivateButtonContainer.ResumeLayout(false);
             this.MoveButtonContainer.ResumeLayout(false);
-            this.DeleteButtonContainer.ResumeLayout(false);
             this.DetachButtonContainer.ResumeLayout(false);
+            this.DeleteButtonContainer.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).EndInit();

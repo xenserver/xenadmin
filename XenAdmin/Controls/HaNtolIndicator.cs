@@ -95,11 +95,5 @@ namespace XenAdmin.Controls
             tableStatus.Visible = Overcommitted;
             OnNtolKnownChanged();
         }
-
-        private void tableServerFailureLimit_Resize(object sender, EventArgs e)
-        {
-            if (ParentForm == null || ParentForm.WindowState != FormWindowState.Minimized) 
-                groupBoxControls.Height = tableServerFailureLimit.Height + 20;
-        }
     }
 }

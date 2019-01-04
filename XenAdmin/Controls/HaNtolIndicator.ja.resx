@@ -121,9 +121,6 @@
   <data name="groupBoxControls.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="tableServerFailureLimit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableServerFailureLimit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -142,9 +139,6 @@
   </data>
   <data name="tableStatus.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="pictureBoxStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
   </data>
   <data name="pictureBoxStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -177,11 +171,11 @@
   <data name="&gt;&gt;pictureBoxStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="labelStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="labelStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -193,7 +187,7 @@
     <value>330, 16</value>
   </data>
   <data name="labelStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="labelStatus.Text" xml:space="preserve">
     <value>プールの最大許容障害数を超える数を指定することはできません。</value>
@@ -223,7 +217,7 @@
     <value>352, 16</value>
   </data>
   <data name="tableStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>4</value>
   </data>
   <data name="tableStatus.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -241,7 +235,7 @@
     <value>0</value>
   </data>
   <data name="tableStatus.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBoxStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBoxStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -258,14 +252,11 @@
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 4, 0, 6</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 36</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>プールで許容するサーバー障害の数を指定できます。</value>
@@ -298,7 +289,7 @@
     <value>1, 30</value>
   </data>
   <data name="labelMax.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="labelMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -355,7 +346,7 @@
     <value>35, 20</value>
   </data>
   <data name="numericUpDownCapacity.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="numericUpDownCapacity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -388,7 +379,7 @@
     <value>85, 23</value>
   </data>
   <data name="labelNumberOfServers.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="labelNumberOfServers.Text" xml:space="preserve">
     <value>許容するサーバー障害数(&amp;F):</value>
@@ -404,6 +395,9 @@
   </data>
   <data name="&gt;&gt;labelNumberOfServers.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="tableServerFailureLimit.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="tableServerFailureLimit.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
@@ -433,10 +427,10 @@
     <value>0</value>
   </data>
   <data name="tableServerFailureLimit.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="tableStatus" Row="2" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="labelMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="spinner" Row="1" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="numericUpDownCapacity" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelNumberOfServers" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableStatus" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="spinner" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="numericUpDownCapacity" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelNumberOfServers" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBoxControls.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="groupBoxControls.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

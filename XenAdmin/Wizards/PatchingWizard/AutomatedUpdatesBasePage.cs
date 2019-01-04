@@ -32,6 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.Reflection;
 using log4net;
 using XenAdmin.Controls;
@@ -40,7 +42,10 @@ using XenAPI;
 using System.Linq;
 using XenAdmin.Core;
 using System.Text;
+using System.Windows.Forms;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Dialogs;
+using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -51,7 +56,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool _thisPageIsCompleted = false;
-        private bool _someWorkersFailed = false;
 
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
@@ -62,6 +66,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
+        protected List<string> hostsThatWillRequireReboot = new List<string>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
 
         public AutomatedUpdatesBasePage()
@@ -98,6 +103,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             base.PageCancelled();
         }
+
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (_thisPageIsCompleted)
@@ -260,6 +266,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         var innerEx = pa.Error.InnerException as Failure;
                         errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
+
+                        if (pa.IsSkippable)
+                        {
+                            Debug.Assert(!string.IsNullOrEmpty(pa.Title));
+                            errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title)).AppendLine();
+                        }
+
                         bgwErrorCount++;
                     }
                 }
@@ -332,9 +345,36 @@ namespace XenAdmin.Wizards.PatchingWizard
                         bgw.RunPlanAction(action, ref doWorkEventArgs);
                     }
 
-                    // Step 3: DelayedActions
+                    // Step 3: Rearrange DelayedActions
+                    var suppPackPlanAction = (RpuUploadAndApplySuppPackPlanAction)planActions.FirstOrDefault(pa => pa is RpuUploadAndApplySuppPackPlanAction);
+
+                    if (suppPackPlanAction != null)
+                    {
+                        foreach (var dpa in suppPackPlanAction.DelayedPlanActions)
+                        {
+                            if (!hp.DelayedPlanActions.Exists(a => a.GetType() == dpa.GetType()))
+                                hp.DelayedPlanActions.Add(dpa);
+                        }
+                    }
+
+                    var restartHostPlanAction = (RestartHostPlanAction)hp.DelayedPlanActions.FirstOrDefault(a => a is RestartHostPlanAction);
+                    if (restartHostPlanAction != null)
+                    {
+                        if (restartHostPlanAction.SkipRestartHost(host))
+                        {
+                            log.Debug("Did not find patches requiring reboot (live patching succeeded)."
+                                      + " Skipping scheduled restart.");
+                            hp.DelayedPlanActions.RemoveAll(a => a is RestartHostPlanAction);
+                        }
+                        else
+                        {
+                            hp.DelayedPlanActions.RemoveAll(a => a is RestartAgentPlanAction);
+                        }
+                    }
+
+                    // Step 4: DelayedActions
                     bgw.ProgressIncrement = bgw.DelayedActionsIncrement(hp);
-                    // running delayed actions, but skipping the ones that should be skipped
+                    // running delayed actions
                     var delayedActions = hp.DelayedPlanActions;
                     var restartActions = delayedActions.Where(a => a is RestartHostPlanAction).ToList();
 
@@ -349,24 +389,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var a in otherActions)
                     {
                         action = a;
-
-                        // any non-restart-alike delayed action needs to be run if:
-                        // - this host is pre-Ely and there isn't any delayed restart plan action, or
-                        // - this host is Ely or above and live patching must have succeeded or there isn't any delayed restart plan action
-                        if (restartActions.Count <= 0 ||
-                            (Helpers.ElyOrGreater(host) && host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref)).updates_requiring_reboot.Count <= 0))
-                        {
-                            bgw.RunPlanAction(action, ref doWorkEventArgs);
-                        }
-                        else
-                        {
-                            //skip running it, but still need to report progress, mainly for the progress bar
-                            bgw.RunPlanAction(action, ref doWorkEventArgs, true);
-                        }
+                        bgw.RunPlanAction(action, ref doWorkEventArgs);
                     }
                 }
 
-                // Step 4: FinalActions (eg. revert pre-checks)
+                // Step 5: FinalActions (eg. revert pre-checks)
                 bgw.ProgressIncrement = bgw.FinalActionsIncrement;
                 foreach (var a in bgw.FinalActions)
                 {
@@ -392,23 +419,29 @@ namespace XenAdmin.Wizards.PatchingWizard
                 panel1.Visible = true;
                 labelError.Text = UserCancellationMessage();
                 pictureBox1.Image = Images.StaticImages.cancelled_action_16;
-                buttonRetry.Visible = false;
+                buttonRetry.Visible = buttonSkip.Visible = false;
                 _thisPageIsCompleted = true;
                 _cancelEnabled = false;
                 _nextEnabled = true;
             }
             else
             {
-                var someWorkersCancelled = false;
                 var bgw = sender as UpdateProgressBackgroundWorker;
+                var someWorkersCancelled = false;
+
                 if (bgw != null)
                 {
                     var workerSucceeded = true;
 
-                    if (bgw.DoneActions.Any(a => a.Error != null && !(a.Error is CancelledException)))
+                    var failedAction = bgw.DoneActions.FirstOrDefault(a => a.Error != null && !(a.Error is CancelledException));
+                    if (failedAction != null)
                     {
                         workerSucceeded = false;
-                        _someWorkersFailed = true;
+                        if (failedAction.IsSkippable)
+                        {
+                            Debug.Assert(!string.IsNullOrEmpty(failedAction.Title));
+                            bgw.FirstFailedSkippableAction = failedAction;
+                        }
                     }
 
                     if (bgw.DoneActions.Any(a => a.Error is CancelledException))
@@ -425,23 +458,30 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     Status = Status.Completed;
                     panel1.Visible = true;
-                    if (_someWorkersFailed)
+
+                    if (failedWorkers.Any())
                     {
                         labelError.Text = FailureMessageOnCompletion(backgroundWorkers.Count > 1);
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
                         buttonRetry.Visible = true;
+                        buttonSkip.Visible = false;
+
+                        if (failedWorkers.Any(w => w.FirstFailedSkippableAction != null))
+                            buttonSkip.Visible = true;
                     }
+
                     else if (someWorkersCancelled)
                     {
                         labelError.Text = UserCancellationMessage();
                         pictureBox1.Image = Images.StaticImages.cancelled_action_16;
-                        buttonRetry.Visible = false;
+                        buttonRetry.Visible = buttonSkip.Visible = false;
                     }
+
                     else
                     {
                         labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
-                        buttonRetry.Visible = false;
+                        buttonRetry.Visible = buttonSkip.Visible = false;
                     }
 
                     _thisPageIsCompleted = true;
@@ -453,11 +493,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             UpdateStatus();
             OnPageUpdated();
         }
+        #endregion
 
         private void RetryFailedActions()
         {
-            _someWorkersFailed = false;
             panel1.Visible = false;
+            failedWorkers.ForEach(bgw => bgw.FirstFailedSkippableAction = null);
 
             var workers = new List<UpdateProgressBackgroundWorker>(failedWorkers);
             failedWorkers.Clear();
@@ -473,11 +514,44 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
-        #endregion
+        private void SkipFailedActions()
+        {
+            var skippableWorkers = failedWorkers.Where(w => w.FirstFailedSkippableAction != null).ToList();
+            var msg = string.Join(Environment.NewLine, skippableWorkers.Select(w => w.FirstFailedSkippableAction.Title));
+
+            using (var dlg = new ThreeButtonDialog(
+                                new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                    string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
+                                    ParentForm != null ? ParentForm.Text : Messages.XENCENTER),
+                                ThreeButtonDialog.ButtonYes,
+                                ThreeButtonDialog.ButtonNo))
+            {
+                if (dlg.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
+
+            panel1.Visible = false;
+
+            foreach (var worker in skippableWorkers)
+            {
+                failedWorkers.Remove(worker);
+                worker.RunWorkerAsync();
+            }
+
+            _thisPageIsCompleted = false;
+            _cancelEnabled = true;
+            _nextEnabled = false;
+            OnPageUpdated();
+        }
 
         private void buttonRetry_Click(object sender, EventArgs e)
         {
             RetryFailedActions();
+        }
+
+        private void buttonSkip_Click(object sender, EventArgs e)
+        {
+            SkipFailedActions();
         }
 
         protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches,
@@ -499,17 +573,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                     uploadedPatches.Add(patch);
                 }
 
-                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings));
+                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings, hostsThatWillRequireReboot));
                 planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
 
-                var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
-                       ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
-                       : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-
+                var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
                 if (action != null)
                 {
                     if (patch.GuidanceMandatory)
                     {
+                        // if this update requires a mandatory toolstack restart and there is a pending host reboot in the delayed actions,
+                        // then the pending reboot should be carried out instead
+                        if (patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction))
+                        {
+                            // replace the action with a host reboot action which will fall back to a toolstack restart if the reboot is not needed because the live patching succedeed
+                            action = new RestartHostPlanAction(host, host.GetRunningVMs(), true, true, hostsThatWillRequireReboot);
+                        }
+
                         planActionsPerHost.Add(action);
                         // remove all delayed actions of the same kind that has already been added
                         // (because this action is guidance-mandatory=true, therefore
@@ -545,12 +624,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);
         }
 
-        private static PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)
+        private PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)
         {
             switch (guidance)
             {
                 case after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, false, hostsThatWillRequireReboot);
                 case after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case after_apply_guidance.restartHVM:

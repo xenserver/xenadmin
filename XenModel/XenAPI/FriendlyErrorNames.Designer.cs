@@ -19,7 +19,7 @@ namespace XenAPI {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyErrorNames {
@@ -1281,6 +1281,15 @@ namespace XenAPI {
         public static string HOST_NOT_ENOUGH_FREE_MEMORY_SHORT {
             get {
                 return ResourceManager.GetString("HOST_NOT_ENOUGH_FREE_MEMORY-SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host does not have enough pCPUs to run the VM. It needs at least as many as the VM has vCPUs..
+        /// </summary>
+        public static string HOST_NOT_ENOUGH_PCPUS {
+            get {
+                return ResourceManager.GetString("HOST_NOT_ENOUGH_PCPUS", resourceCulture);
             }
         }
         
@@ -5426,6 +5435,15 @@ namespace XenAPI {
         public static string VDI_IS_A_PHYSICAL_DEVICE {
             get {
                 return ResourceManager.GetString("VDI_IS_A_PHYSICAL_DEVICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested operation is not allowed because the specified VDI is encrypted..
+        /// </summary>
+        public static string VDI_IS_ENCRYPTED {
+            get {
+                return ResourceManager.GetString("VDI_IS_ENCRYPTED", resourceCulture);
             }
         }
         

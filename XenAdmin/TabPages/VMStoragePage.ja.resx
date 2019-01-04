@@ -129,9 +129,6 @@
   <data name="AddButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 2</value>
   </data>
-  <data name="AddButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 29</value>
   </data>
@@ -158,9 +155,6 @@
   </data>
   <data name="AttachButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 2</value>
-  </data>
-  <data name="AttachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
   </data>
   <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 29</value>
@@ -219,9 +213,6 @@
   <data name="DeactivateButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 2</value>
   </data>
-  <data name="DeactivateButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
   <data name="DeactivateButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 29</value>
   </data>
@@ -276,9 +267,6 @@
   <data name="MoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>419, 2</value>
   </data>
-  <data name="MoveButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
   <data name="MoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>
   </data>
@@ -297,37 +285,58 @@
   <data name="&gt;&gt;MoveButtonContainer.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="EditButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="DetachButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="EditButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="DetachButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="EditButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 2</value>
+  <data name="DetachButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="EditButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="DetachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="EditButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
+  <data name="DetachButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 23</value>
   </data>
-  <data name="EditButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="DetachButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="EditButton.Text" xml:space="preserve">
-    <value>プロパティ(&amp;R)</value>
+  <data name="DetachButton.Text" xml:space="preserve">
+    <value>接続解除(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
-    <value>EditButton</value>
+  <data name="&gt;&gt;DetachButton.Name" xml:space="preserve">
+    <value>DetachButton</value>
   </data>
-  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;DetachButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DetachButton.Parent" xml:space="preserve">
+    <value>DetachButtonContainer</value>
+  </data>
+  <data name="&gt;&gt;DetachButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="DetachButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 3</value>
+  </data>
+  <data name="DetachButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 23</value>
+  </data>
+  <data name="DetachButtonContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;DetachButtonContainer.Name" xml:space="preserve">
+    <value>DetachButtonContainer</value>
+  </data>
+  <data name="&gt;&gt;DetachButtonContainer.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DetachButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DetachButtonContainer.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="DeleteButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -366,9 +375,6 @@
   <data name="DeleteButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>502, 2</value>
   </data>
-  <data name="DeleteButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
   <data name="DeleteButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 29</value>
   </data>
@@ -387,61 +393,34 @@
   <data name="&gt;&gt;DeleteButtonContainer.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="DetachButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="EditButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="DetachButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="EditButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="DetachButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="EditButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>615, 3</value>
   </data>
-  <data name="DetachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="EditButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 23</value>
   </data>
-  <data name="DetachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
-  </data>
-  <data name="DetachButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="DetachButton.Text" xml:space="preserve">
-    <value>接続解除(&amp;E)</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.Name" xml:space="preserve">
-    <value>DetachButton</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.Parent" xml:space="preserve">
-    <value>DetachButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DetachButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>602, 2</value>
-  </data>
-  <data name="DetachButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="DetachButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
-  </data>
-  <data name="DetachButtonContainer.TabIndex" type="System.Int32, mscorlib">
+  <data name="EditButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Name" xml:space="preserve">
-    <value>DetachButtonContainer</value>
+  <data name="EditButton.Text" xml:space="preserve">
+    <value>プロパティ(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
+    <value>EditButton</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -567,6 +546,9 @@
   <data name="ColumnDevicePath.HeaderText" xml:space="preserve">
     <value>デバイス パス</value>
   </data>
+  <data name="ColumnDevicePath.Width" type="System.Int32, mscorlib">
+    <value>91</value>
+  </data>
   <data name="dataGridViewStorage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -662,6 +644,9 @@
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>820, 338</value>
+  </data>
+  <data name="pageContainerPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>

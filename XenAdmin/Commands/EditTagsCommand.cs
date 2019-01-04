@@ -110,38 +110,41 @@ namespace XenAdmin.Commands
             }
 
             // show dialog modally
-            NewTagDialog newTagDialog = new NewTagDialog(tags, indeterminateTags);
-            
-            if (DialogResult.OK == newTagDialog.ShowDialog(Parent))
+            using (NewTagDialog newTagDialog = new NewTagDialog(tags, indeterminateTags))
             {
-                List<AsyncAction> actions = new List<AsyncAction>();
-                foreach (IXenObject xenObject in selection.AsXenObjects())
+                if (DialogResult.OK == newTagDialog.ShowDialog(Parent))
                 {
-                    // rebuild tabs lists as tags can be deleted in the dialog.
-                    List<string> newTags = new List<string>(Tags.GetTags(xenObject));
-
-                    for (int i = newTags.Count - 1; i >= 0; i--)
+                    List<AsyncAction> actions = new List<AsyncAction>();
+                    foreach (IXenObject xenObject in selection.AsXenObjects())
                     {
-                        // remove any tags from this xenobject which aren't either checked or indeterminate
-                        if (!newTagDialog.GetSelectedTags().Contains(newTags[i]) && !newTagDialog.GetIndeterminateTags().Contains(newTags[i]))
+                        // rebuild tabs lists as tags can be deleted in the dialog.
+                        List<string> newTags = new List<string>(Tags.GetTags(xenObject));
+
+                        for (int i = newTags.Count - 1; i >= 0; i--)
                         {
-                            newTags.RemoveAt(i);
+                            // remove any tags from this xenobject which aren't either checked or indeterminate
+                            if (!newTagDialog.GetSelectedTags().Contains(newTags[i]) &&
+                                !newTagDialog.GetIndeterminateTags().Contains(newTags[i]))
+                            {
+                                newTags.RemoveAt(i);
+                            }
                         }
-                    }
 
-                    // now add any new tags
-                    foreach (string t in newTagDialog.GetSelectedTags())
-                    {
-                        if (!newTags.Contains(t))
+                        // now add any new tags
+                        foreach (string t in newTagDialog.GetSelectedTags())
                         {
-                            newTags.Add(t);
+                            if (!newTags.Contains(t))
+                            {
+                                newTags.Add(t);
+                            }
                         }
+
+                        actions.Add(new GeneralEditPageAction(xenObject, xenObject.Clone(), xenObject.Path, newTags,
+                            true));
+
                     }
-
-                    actions.Add(new GeneralEditPageAction(xenObject, xenObject.Clone(), xenObject.Path, newTags, true));
-
+                    RunMultipleActions(actions, Messages.ACTION_SAVING_TAGS_TITLE, Messages.ACTION_SAVING_TAGS_DESCRIPTION, Messages.ACTION_SAVING_TAGS_DESCRIPTION, true);
                 }
-                RunMultipleActions(actions, Messages.ACTION_SAVING_TAGS_TITLE, Messages.ACTION_SAVING_TAGS_DESCRIPTION, Messages.ACTION_SAVING_TAGS_DESCRIPTION, true);
             }
         }
 

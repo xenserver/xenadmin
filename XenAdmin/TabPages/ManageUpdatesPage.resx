@@ -253,7 +253,7 @@
     <value>None</value>
   </data>
   <data name="byUpdateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="byUpdateToolStripMenuItem.Text" xml:space="preserve">
     <value>By &amp;Update</value>
@@ -262,7 +262,7 @@
     <value>None</value>
   </data>
   <data name="byHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="byHostToolStripMenuItem.Text" xml:space="preserve">
     <value>By &amp;Server</value>
@@ -286,13 +286,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 23</value>
+    <value>45, 22</value>
   </data>
   <data name="toolStripDropDownButtonView.Text" xml:space="preserve">
     <value>V&amp;iew</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -301,7 +301,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 23</value>
+    <value>97, 22</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
     <value>Filter by S&amp;erver</value>
@@ -313,13 +313,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+    <value>89, 22</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
     <value>Filter by &amp;Date</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButtonRefresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -328,13 +328,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 22</value>
   </data>
   <data name="toolStripButtonRefresh.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButtonExportAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -343,7 +343,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 23</value>
+    <value>61, 22</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
     <value>E&amp;xport All</value>
@@ -352,7 +352,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
+    <value>104, 22</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
     <value>Filters are ON/OFF</value>
@@ -388,7 +388,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 23</value>
+    <value>63, 22</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
     <value>&amp;Dismiss</value>
@@ -412,7 +412,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRestoreDismissed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 23</value>
+    <value>152, 22</value>
   </data>
   <data name="toolStripButtonRestoreDismissed.Text" xml:space="preserve">
     <value>Restore Dismissed &amp;Updates</value>
@@ -445,10 +445,10 @@
     <value>1, 1</value>
   </data>
   <data name="toolStrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 0</value>
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>774, 26</value>
+    <value>774, 25</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -840,23 +840,6 @@
   <metadata name="ColumnExpansion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
   <data name="ColumnExpansion.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -869,23 +852,6 @@
   <metadata name="ColumnIcon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
   <data name="ColumnIcon.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -968,7 +934,7 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridViewHosts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 6, 1, 1</value>
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="dataGridViewHosts.Size" type="System.Drawing.Size, System.Drawing">
     <value>776, 348</value>
@@ -994,23 +960,6 @@
   <metadata name="ColumnExpand.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
   <data name="ColumnExpand.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -1069,7 +1018,7 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridViewUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 6, 1, 1</value>
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="dataGridViewUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>776, 348</value>
@@ -1117,7 +1066,7 @@
     <value>3</value>
   </data>
   <data name="tableLayouPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 45</value>
+    <value>12, 51</value>
   </data>
   <data name="tableLayouPanel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 6, 0, 12</value>
@@ -1342,6 +1291,6 @@
     <value>ManageUpdatesPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.TabPages.NotificationsBasePage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

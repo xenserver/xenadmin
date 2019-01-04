@@ -59,7 +59,7 @@ namespace XenAdmin.ConsoleView
             this.LifeCycleMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.powerStateLabel = new System.Windows.Forms.Label();
             this.dedicatedGpuWarning = new System.Windows.Forms.Label();
-            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
+            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.HorizontalGradientPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.HostLabel = new System.Windows.Forms.Label();
             this.buttonSSH = new System.Windows.Forms.Button();
@@ -165,7 +165,6 @@ namespace XenAdmin.ConsoleView
             this.gradientPanel1.Controls.Add(this.tableLayoutPanel2);
             resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
             this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
             // 
             // tableLayoutPanel2
             // 

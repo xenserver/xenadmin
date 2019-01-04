@@ -29,13 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
-using System.Collections.ObjectModel;
 
 
 namespace XenAdmin.Commands
@@ -80,7 +76,6 @@ namespace XenAdmin.Commands
             }
 
             MainWindowCommandInterface.SaveServerList();
-            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         private static bool CanExecute(Host host)

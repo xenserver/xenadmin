@@ -1684,6 +1684,10 @@ namespace XenAPI
         Response<string>
         vm_get_domain_type(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_NVRAM")]
+        Response<Object>
+        vm_get_nvram(string session, string _vm);
+
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
         vm_set_name_label(string session, string _vm, string _label);
@@ -2019,6 +2023,18 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.add_to_VCPUs_params_live")]
         Response<string>
         async_vm_add_to_vcpus_params_live(string session, string _vm, string _key, string _value);
+
+        [XmlRpcMethod("VM.set_NVRAM")]
+        Response<string>
+        vm_set_nvram(string session, string _vm, Object _value);
+
+        [XmlRpcMethod("VM.add_to_NVRAM")]
+        Response<string>
+        vm_add_to_nvram(string session, string _vm, string _key, string _value);
+
+        [XmlRpcMethod("VM.remove_from_NVRAM")]
+        Response<string>
+        vm_remove_from_nvram(string session, string _vm, string _key);
 
         [XmlRpcMethod("VM.set_ha_restart_priority")]
         Response<string>
@@ -8453,6 +8469,7 @@ namespace XenAPI
         public bool requires_reboot;
         public string reference_label;
         public string domain_type;
+        public Object NVRAM;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

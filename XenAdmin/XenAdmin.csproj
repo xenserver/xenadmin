@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,13 +12,6 @@
     <AssemblyName>XenCenterMain</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <SignManifests>false</SignManifests>
-    <ManifestCertificateThumbprint>4C1DD393E361B8BBCFA1E1D09539C446F88C0A11</ManifestCertificateThumbprint>
-    <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timestamp.dll</ManifestTimestampUrl>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -103,8 +96,6 @@
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
     <Compile Include="Actions\GUIActions\RestoreDismissedUpdatesAction.cs" />
     <Compile Include="Actions\GUIActions\MeddlingAction.cs" />
-    <Compile Include="Actions\GUIActions\IgnoreServerAction.cs" />
-    <Compile Include="Actions\GUIActions\IgnorePatchAction.cs" />
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
@@ -174,7 +165,10 @@
       <DependentUpon>DataGridViewEx.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewTextAndImageCell.cs" />
-    <Compile Include="Controls\FolderChangeDialogTreeView.cs">
+    <Compile Include="Controls\ComboBoxes\EnableableComboBoxEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TreeViews\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ListViewEx.cs">
@@ -210,7 +204,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Tags\TagsEditor.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\UpsellPage.cs">
       <SubType>UserControl</SubType>
@@ -452,7 +446,7 @@
       <DependentUpon>DockerDetailsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\HomePage.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
@@ -557,13 +551,13 @@
       <DependentUpon>PerfmonAlertOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\BlueBorderPanel.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\ArchiveMaintainer.cs">
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataArchive.cs" />
     <Compile Include="Controls\CustomDataGraph\GraphList.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\GraphList.Designer.cs">
       <DependentUpon>GraphList.cs</DependentUpon>
@@ -577,12 +571,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DoubleBufferedPanel.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DoubleBufferedPanel.Designer.cs">
       <DependentUpon>DoubleBufferedPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GradientPanel\GradientPanel.cs">
+    <Compile Include="Controls\GradientPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\HaNtolIndicator.cs">
@@ -758,6 +752,7 @@
     <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\WizardHelpers.cs" />
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.cs">
       <SubType>UserControl</SubType>
@@ -929,13 +924,13 @@
       <DependentUpon>DataKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlot.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlot.designer.cs">
       <DependentUpon>DataPlot.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlotNav.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataPlotNav.designer.cs">
       <DependentUpon>DataPlotNav.cs</DependentUpon>
@@ -1014,6 +1009,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
+    <Compile Include="Wizards\RollingUpgradeWizard\PlanActions\RpuUploadAndApplySuppPackPlanAction.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeUpgradePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1033,7 +1029,7 @@
       <DependentUpon>FolderChangeDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Folders\FolderEditor.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Folders\FolderListItem.cs" />
     <Compile Include="Dialogs\NewTagDialog.cs">
@@ -2931,7 +2927,6 @@
     <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
-    <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
@@ -3676,10 +3671,7 @@
       <DependentUpon>DRFailoverWizardStoragePage.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SrPicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SrPicker.Designer.cs">
-      <DependentUpon>SrPicker.cs</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Wizards\DRWizards\DRFailoverWizardWelcomePage.cs">
       <SubType>UserControl</SubType>
@@ -4290,6 +4282,8 @@
     <Content Include="HomePage\css\screen.css" />
     <Content Include="HomePage\css\theme.css" />
     <Content Include="HomePage\index.html" />
+    <Content Include="HomePage\index.ja.html" />
+    <Content Include="HomePage\index.zh-CN.html" />
     <Content Include="HomePage\media\grid.png" />
     <Content Include="HomePage\media\icons\cx-cloudServerGraphic.png" />
     <Content Include="HomePage\media\icons\cx-icon-addServer.png" />
@@ -4297,7 +4291,7 @@
     <Content Include="HomePage\media\icons\cx-icon-purchaseSupport.png" />
     <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
     <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
-    <Content Include="HomePage\media\logos\cx-logo-citrixXenServer.png" />
+    <Content Include="HomePage\media\logos\cx-logo-citrixHypervisor.png" />
     <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
@@ -4321,6 +4315,7 @@
     <None Include="Images\000_RebootVM_h32bit_16.png" />
     <None Include="Images\000_RemoveIPAddress_h32bit_16.png" />
     <None Include="Images\000_RemoveSite_h32bit_16.png" />
+    <None Include="Images\000_Pool_h32bit_16-w-alert.png" />
     <Content Include="Images\000_ServerInProgress_h32bit_16.png" />
     <None Include="Images\000_ServerMaintenance_h32bit_16.png" />
     <None Include="Images\000_ServerMaintenance_h32bit_32.png" />
@@ -4386,6 +4381,7 @@
     <None Include="Images\001_WindowView_h32bit_16.png" />
     <None Include="Images\000_TestFailover_h32bit_32.png" />
     <None Include="Images\015_Download_h32bit_32.png" />
+    <None Include="Images\000_Server_h32bit_16-w-alert.png" />
     <Content Include="Images\000_Severity5_h32bit_16.png" />
     <None Include="Images\alert1_16.png" />
     <None Include="Images\alert2_16.png" />
@@ -4397,6 +4393,8 @@
       <Link>Images\alerts_32.png</Link>
     </Content>
     <Content Include="Images\000_Sites_h32bit_16.png" />
+    <None Include="Images\000_TCP-IPGroup_h32bit_16.png" />
+    <None Include="Images\015_Download_h32bit_16.png" />
     <Content Include="Images\asterisk.png" />
     <Content Include="Images\attach_24.png" />
     <None Include="Images\cancelled_action_16.png" />
@@ -4450,12 +4448,15 @@
     <None Include="Images\turbo_16x.png" />
     <None Include="Images\linx_16x.png" />
     <None Include="Images\yinhekylin_16x.png" />
+    <None Include="Images\pool_32.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
     <Content Include="Images\scilinux_16x.png" />
+    <None Include="Images\server_32.png" />
+    <None Include="Images\server_up_32.png" />
     <Content Include="Images\sl_luns_16.png" />
     <Content Include="Images\debian_16x.png" />
     <None Include="Images\desktop.jpg" />
@@ -4500,9 +4501,6 @@
     <None Include="Images\sl_pools_16.png" />
     <None Include="Images\sl_system_16.png" />
     <None Include="Images\sl_lun_16.png" />
-    <Content Include="Images\spacer1x1.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Images\SpinningFrame0.png" />
     <None Include="Images\SpinningFrame1.png" />
     <None Include="Images\SpinningFrame2.png" />
@@ -4512,6 +4510,7 @@
     <None Include="Images\SpinningFrame6.png" />
     <None Include="Images\SpinningFrame7.png" />
     <None Include="Images\StoppedDC_16.png" />
+    <None Include="Images\storage_error_16.png" />
     <Content Include="Images\subscribe.png" />
     <Content Include="Images\suse_16x.png" />
     <Content Include="Images\tempAdd.png" />
@@ -4543,42 +4542,19 @@
     <Content Include="Images\tshadowtopright.png" />
     <Content Include="Images\ubuntu_16x.png" />
     <Content Include="..\Branding\Images\upsell_16.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Link>Images\upsell_16.png</Link>
     </Content>
-    <Content Include="Images\usagebar_0.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\usagebar_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Images\usagebar_0.png" />
+    <Content Include="Images\usagebar_1.png" />
+    <Content Include="Images\usagebar_10.png" />
+    <Content Include="Images\usagebar_2.png" />
+    <Content Include="Images\usagebar_3.png" />
+    <Content Include="Images\usagebar_4.png" />
+    <Content Include="Images\usagebar_5.png" />
+    <Content Include="Images\usagebar_6.png" />
+    <Content Include="Images\usagebar_7.png" />
+    <Content Include="Images\usagebar_8.png" />
+    <Content Include="Images\usagebar_9.png" />
     <None Include="Images\virtualstorage_snapshot_16.png" />
     <None Include="Images\vmBackgroundCurrent.png" />
     <None Include="Images\vmBackground.png" />
@@ -5023,9 +4999,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ShadowPanel.zh-CN.resx">
       <DependentUpon>ShadowPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrPicker.zh-CN.resx">
-      <DependentUpon>SrPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ToolTipContainer.ja.resx">
       <DependentUpon>ToolTipContainer.cs</DependentUpon>
@@ -6236,13 +6209,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\HAWizard_Pages\Intro.ja.resx">
       <DependentUpon>Intro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrPicker.ja.resx">
-      <DependentUpon>SrPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrPicker.resx">
-      <DependentUpon>SrPicker.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\HAWizard_Pages\Intro.zh-CN.resx">
       <DependentUpon>Intro.cs</DependentUpon>

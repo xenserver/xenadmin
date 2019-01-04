@@ -171,6 +171,12 @@ namespace XenAdmin
 
         private static string ByteSizeString(double bytes, int decPlaces, bool isRate, out string unit, string format = null)
         {
+            if (bytes >= BINARY_TERA)
+            {
+                unit = isRate ? Messages.VAL_TERRATE : Messages.VAL_TERB;
+                var result = Math.Round(bytes / BINARY_TERA, decPlaces);
+                return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
+            }
             if (bytes >= BINARY_GIGA)
             {
                 unit = isRate ? Messages.VAL_GIGRATE : Messages.VAL_GIGB;
@@ -335,20 +341,10 @@ namespace XenAdmin
                 string.Format(Messages.TIME_RANGE_MINUTES, t1 / 60, t2 / 60) :
                 string.Format(Messages.TIME_RANGE_SECONDS, t1, t2);
         }
-       
-        internal static string LThanTime(long max)
-        {
-            return string.Format(Messages.LESS_THAN, TimeString(max));
-        }
 
         internal static string GThanSize(long min)
         {
             return string.Format(Messages.GREATER_THAN, DiskSizeString(min));
-        }
-
-        internal static string GThanTime(long min)
-        {
-            return string.Format(Messages.GREATER_THAN, TimeString(min));
         }
 
         internal static string LThanSize(long max)

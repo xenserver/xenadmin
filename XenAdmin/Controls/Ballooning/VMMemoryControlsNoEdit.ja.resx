@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="iconBoxDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="iconBoxDynMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -129,10 +129,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="iconBoxDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 35</value>
+    <value>3, 0</value>
   </data>
   <data name="iconBoxDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="iconBoxDynMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>7, 13</value>
@@ -148,13 +148,13 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;iconBoxDynMin.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;iconBoxDynMin.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="iconBoxDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="iconBoxDynMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -163,7 +163,10 @@
     <value/>
   </data>
   <data name="iconBoxDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 54</value>
+    <value>3, 16</value>
+  </data>
+  <data name="iconBoxDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="iconBoxDynMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>7, 13</value>
@@ -178,22 +181,25 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;iconBoxDynMax.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;iconBoxDynMax.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="labelDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Left</value>
+  </data>
+  <data name="labelDynMin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="labelDynMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 32</value>
+    <value>16, 0</value>
   </data>
   <data name="labelDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="labelDynMin.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -207,9 +213,6 @@
   <data name="labelDynMin.Text" xml:space="preserve">
     <value>最小メモリ</value>
   </data>
-  <data name="labelDynMin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;labelDynMin.Name" xml:space="preserve">
     <value>labelDynMin</value>
   </data>
@@ -217,22 +220,25 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDynMin.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;labelDynMin.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="labelDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Left</value>
+  </data>
+  <data name="labelDynMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="labelDynMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 51</value>
+    <value>16, 16</value>
   </data>
   <data name="labelDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="labelDynMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 18</value>
@@ -243,9 +249,6 @@
   <data name="labelDynMax.Text" xml:space="preserve">
     <value>最大メモリ</value>
   </data>
-  <data name="labelDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;labelDynMax.Name" xml:space="preserve">
     <value>labelDynMax</value>
   </data>
@@ -253,22 +256,25 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDynMax.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;labelDynMax.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="labelStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Left</value>
+  </data>
+  <data name="labelStatMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="labelStatMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 70</value>
+    <value>16, 32</value>
   </data>
   <data name="labelStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="labelStatMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 18</value>
@@ -277,10 +283,7 @@
     <value>5</value>
   </data>
   <data name="labelStatMax.Text" xml:space="preserve">
-    <value>固定最大サイズ</value>
-  </data>
-  <data name="labelStatMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>静的最大サイズ</value>
   </data>
   <data name="&gt;&gt;labelStatMax.Name" xml:space="preserve">
     <value>labelStatMax</value>
@@ -289,22 +292,25 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStatMax.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;labelStatMax.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="valueDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
+  </data>
+  <data name="valueDynMin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="valueDynMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="valueDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 32</value>
+    <value>206, 0</value>
   </data>
   <data name="valueDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="valueDynMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 18</value>
@@ -312,8 +318,8 @@
   <data name="valueDynMin.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="valueDynMin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="valueDynMin.Text" xml:space="preserve">
+    <value>dynMin</value>
   </data>
   <data name="&gt;&gt;valueDynMin.Name" xml:space="preserve">
     <value>valueDynMin</value>
@@ -322,22 +328,25 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;valueDynMin.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;valueDynMin.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="valueDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
+  </data>
+  <data name="valueDynMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="valueDynMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="valueDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 51</value>
+    <value>203, 16</value>
   </data>
   <data name="valueDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="valueDynMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 18</value>
@@ -345,8 +354,8 @@
   <data name="valueDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="valueDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="valueDynMax.Text" xml:space="preserve">
+    <value>dynMax</value>
   </data>
   <data name="&gt;&gt;valueDynMax.Name" xml:space="preserve">
     <value>valueDynMax</value>
@@ -355,22 +364,25 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;valueDynMax.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;valueDynMax.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="valueStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
+  </data>
+  <data name="valueStatMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="valueStatMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="valueStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 70</value>
+    <value>203, 32</value>
   </data>
   <data name="valueStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="valueStatMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 18</value>
@@ -378,8 +390,8 @@
   <data name="valueStatMax.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="valueStatMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="valueStatMax.Text" xml:space="preserve">
+    <value>statMax</value>
   </data>
   <data name="&gt;&gt;valueStatMax.Name" xml:space="preserve">
     <value>valueStatMax</value>
@@ -388,10 +400,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;valueStatMax.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;valueStatMax.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="editButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -401,9 +413,6 @@
   </data>
   <data name="editButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>630, 4</value>
-  </data>
-  <data name="editButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
   </data>
   <data name="editButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
@@ -421,19 +430,70 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;editButton.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;editButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>450, 42</value>
+  </data>
+  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel2.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>250, 48</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 48</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="iconBoxDynMax" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="iconBoxDynMin" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelDynMax" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelDynMin" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelStatMax" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="valueDynMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="valueDynMin" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="valueStatMax" Row="2" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
   <data name="vmShinyBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="vmShinyBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 7</value>
   </data>
   <data name="vmShinyBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>10, 3, 10, 3</value>
+  </data>
+  <data name="vmShinyBar.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>420, 80</value>
   </data>
   <data name="vmShinyBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>420, 80</value>
@@ -448,10 +508,43 @@
     <value>XenAdmin.Controls.Ballooning.VMShinyBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;vmShinyBar.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;vmShinyBar.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>700, 90</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="vmShinyBar" Row="0" RowSpan="2" Column="0" ColumnSpan="1" />&lt;Control Name="editButton" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,Absolute,250" />&lt;Rows Styles="AutoSize,0,Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -472,6 +565,6 @@
     <value>VMMemoryControlsNoEdit</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Ballooning.VMMemoryControlsBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

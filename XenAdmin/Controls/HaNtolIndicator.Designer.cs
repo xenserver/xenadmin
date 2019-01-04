@@ -64,7 +64,6 @@ namespace XenAdmin.Controls
             this.tableServerFailureLimit.Controls.Add(this.numericUpDownCapacity, 1, 1);
             this.tableServerFailureLimit.Controls.Add(this.labelNumberOfServers, 0, 1);
             this.tableServerFailureLimit.Name = "tableServerFailureLimit";
-            this.tableServerFailureLimit.Resize += new System.EventHandler(this.tableServerFailureLimit_Resize);
             // 
             // tableStatus
             // 
@@ -76,8 +75,8 @@ namespace XenAdmin.Controls
             // 
             // pictureBoxStatus
             // 
-            resources.ApplyResources(this.pictureBoxStatus, "pictureBoxStatus");
             this.pictureBoxStatus.Image = global::XenAdmin.Properties.Resources._000_error_h32bit_16;
+            resources.ApplyResources(this.pictureBoxStatus, "pictureBoxStatus");
             this.pictureBoxStatus.Name = "pictureBoxStatus";
             this.pictureBoxStatus.TabStop = false;
             // 

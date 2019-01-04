@@ -121,6 +121,7 @@
             resources.ApplyResources(this.informationLabel, "informationLabel");
             this.informationLabel.Name = "informationLabel";
             this.informationLabel.TabStop = true;
+            this.informationLabel.Click += new System.EventHandler(this.informationLabel_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -164,13 +165,11 @@
             // 
             // byUpdateToolStripMenuItem
             // 
-            this.byUpdateToolStripMenuItem.Checked = true;
             this.byUpdateToolStripMenuItem.CheckOnClick = true;
-            this.byUpdateToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.byUpdateToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
             resources.ApplyResources(this.byUpdateToolStripMenuItem, "byUpdateToolStripMenuItem");
             this.byUpdateToolStripMenuItem.Name = "byUpdateToolStripMenuItem";
-            this.byUpdateToolStripMenuItem.Click += new System.EventHandler(this.byUpdateToolStripMenuItem_Click);
+            this.byUpdateToolStripMenuItem.CheckedChanged += new System.EventHandler(this.byUpdateToolStripMenuItem_CheckedChanged);
             // 
             // byHostToolStripMenuItem
             // 
@@ -178,7 +177,7 @@
             this.byHostToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_TreeConnected_h32bit_16;
             resources.ApplyResources(this.byHostToolStripMenuItem, "byHostToolStripMenuItem");
             this.byHostToolStripMenuItem.Name = "byHostToolStripMenuItem";
-            this.byHostToolStripMenuItem.Click += new System.EventHandler(this.byHostToolStripMenuItem_Click);
+            this.byHostToolStripMenuItem.CheckedChanged += new System.EventHandler(this.byHostToolStripMenuItem_CheckedChanged);
             // 
             // toolStripSeparator2
             // 
@@ -378,7 +377,7 @@
             // 
             this.ColumnExpansion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
+            dataGridViewCellStyle1.NullValue = null;
             this.ColumnExpansion.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.ColumnExpansion, "ColumnExpansion");
             this.ColumnExpansion.Name = "ColumnExpansion";
@@ -388,7 +387,7 @@
             // 
             this.ColumnIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
+            dataGridViewCellStyle2.NullValue = null;
             this.ColumnIcon.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ColumnIcon, "ColumnIcon");
             this.ColumnIcon.Name = "ColumnIcon";
@@ -470,7 +469,7 @@
             // 
             this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle4.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle4.NullValue")));
+            dataGridViewCellStyle4.NullValue = null;
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");

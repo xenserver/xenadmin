@@ -125,6 +125,23 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
+	    private bool IsStorageMotion(KeyValuePair<string, VmMapping> mapping)
+	    {
+	        if (!IsIntraPoolMigration(mapping))
+	            return true;
+
+	        if (mapping.Value.Storage == null)
+	            return false;
+
+            foreach (var vdiMapping in mapping.Value.Storage)
+	        {
+	            var vdi = xenConnection.Resolve(new XenRef<VDI>(vdiMapping.Key));
+	            if (vdi.SR.opaque_ref != vdiMapping.Value.opaque_ref)
+	                return true;
+	        }
+            return false;
+        }
+
         private bool IsIntraPoolMove()
         {
             return wizardMode == WizardMode.Move && m_vmMappings.All(IsIntraPoolMove);
@@ -241,12 +258,29 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     throw new ApplicationException("Cannot resolve the target host");
 
                 if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
-                    new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
+                {
+                    // check if there is actually something to be moved
+                    var moveStorage = false;
+                    foreach (var storageMapping in pair.Value.Storage.Where(sm => sm.Value != null))
+                    {
+                        var vdi = vm.Connection.Resolve(new XenRef<VDI>(storageMapping.Key));
+                        if (vdi != null && vdi.SR.opaque_ref != storageMapping.Value.opaque_ref)
+                        {
+                            moveStorage = true;
+                            break;
+                        }
+                    }
+                    if (moveStorage)
+                        new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
+                }
                 else
                 {
                     var isCopy = wizardMode == WizardMode.Copy;
-                    var migrateAction = 
-                        new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
+                    AsyncAction migrateAction;
+                    if (isCopy || IsStorageMotion(pair))
+                        migrateAction = new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, isCopy);
+                    else
+                        migrateAction = new VMMigrateAction(vm, target);
 
                     if (_resumeAfterMigrate)
                     {

@@ -116,7 +116,7 @@ namespace XenAdmin.Wizards.ImportWizard
             }
         }
 
-		public XenRef<SR> SR
+		public SR SR
 		{
 			get { return null; }
 		}

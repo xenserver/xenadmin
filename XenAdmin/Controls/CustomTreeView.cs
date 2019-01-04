@@ -61,9 +61,8 @@ namespace XenAdmin.Controls
         /// If you want to make this into a regular listbox, set this to a smaller value, like 5 or something
         /// </summary>
         private int _nodeIndent = 19;
-
         [Browsable(true)]
-        public int NodeIndent
+        public virtual int NodeIndent
         {
             get { return _nodeIndent; }
             set { _nodeIndent = value; }
@@ -73,7 +72,7 @@ namespace XenAdmin.Controls
 
         private bool _showCheckboxes = true;
         [Browsable(true)]
-        public bool ShowCheckboxes
+        public virtual bool ShowCheckboxes
         {
             get { return _showCheckboxes; }
             set { _showCheckboxes = value; }
@@ -81,7 +80,7 @@ namespace XenAdmin.Controls
 
         private bool _showDescription = true;
         [Browsable(true)]
-        public bool ShowDescription
+        public virtual bool ShowDescription
         {
             get { return _showDescription; }
             set { _showDescription = value; }
@@ -89,7 +88,7 @@ namespace XenAdmin.Controls
 
         private bool _showImages = false;
         [Browsable(true)]
-        public bool ShowImages
+        public virtual bool ShowImages
         {
             get { return _showImages; }
             set { _showImages = value; }
@@ -117,7 +116,6 @@ namespace XenAdmin.Controls
         }
 
         private bool _showRootLines = true;
-
         [Browsable(true)]
         public bool ShowRootLines
         {

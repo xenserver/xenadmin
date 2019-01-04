@@ -217,7 +217,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="toolStripDropDownSeveritiesFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
+    <value>106, 22</value>
   </data>
   <data name="toolStripDropDownSeveritiesFilter.Text" xml:space="preserve">
     <value>Filter by Severit&amp;y</value>
@@ -229,7 +229,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 23</value>
+    <value>97, 22</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
     <value>Filter by S&amp;erver</value>
@@ -241,13 +241,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+    <value>89, 22</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
     <value>Filter by &amp;Date</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButtonRefresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -256,13 +256,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 22</value>
   </data>
   <data name="toolStripButtonRefresh.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButtonExportAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -271,7 +271,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 23</value>
+    <value>61, 22</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
     <value>E&amp;xport All</value>
@@ -295,7 +295,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 23</value>
+    <value>63, 22</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
     <value>&amp;Dismiss</value>
@@ -304,7 +304,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
+    <value>104, 22</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
     <value>Filters are ON/OFF</value>
@@ -313,10 +313,10 @@
     <value>1, 1</value>
   </data>
   <data name="toolStrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 0</value>
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 26</value>
+    <value>731, 25</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -493,7 +493,7 @@
     <value>733, 417</value>
   </data>
   <data name="GridViewAlerts.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;GridViewAlerts.Name" xml:space="preserve">
     <value>GridViewAlerts</value>
@@ -628,6 +628,6 @@
     <value>AlertSummaryPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.TabPages.NotificationsBasePage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
