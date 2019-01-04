@@ -62,7 +62,12 @@ namespace XenAdminTests.WizardTests.state1_xml
         {
             if (pageName == "Installation Media")
             {
-                MW(() => (TestUtils.GetRadioButton(wizard, "page_3_InstallationMedia.UrlRadioButton")).Checked = true);
+                MW(() =>
+                {
+                    var button = TestUtils.GetRadioButton(wizard, "page_3_InstallationMedia.UrlRadioButton");
+                    button.Checked = true;
+                    button.Focus();
+                });
             }
 
             if (pageName == "Storage")
