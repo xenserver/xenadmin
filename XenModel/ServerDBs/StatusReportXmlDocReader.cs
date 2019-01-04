@@ -45,6 +45,15 @@ namespace XenAdmin.ServerDBs
     /// </summary>
     class StatusReportXmlDocReader
     {
+        private static readonly Dictionary<string, string> escapedCharacters = new Dictionary<string, string>
+        {
+            { "%.", " " },
+            { "%t", "\t" },
+            { "%n", "\n" },
+            { "%r", "\r" },
+            { "%%", "%" }
+        };
+
         /// <summary>
         /// Populates the specified Db with the specified XML document.
         /// </summary>
@@ -80,7 +89,7 @@ namespace XenAdmin.ServerDBs
                             if(string.IsNullOrEmpty(name))
                                 continue;
 
-                            row.Props.Add(name, a.Value);
+                            row.Props.Add(name, SanitizePropertyValue(a.Value));
                         }
                     }
 
@@ -126,6 +135,16 @@ namespace XenAdmin.ServerDBs
                 default:
                     return prop;
             }
+        }
+
+        private string SanitizePropertyValue(string value)
+        {
+            string newValue = value;
+            foreach (var escapedCharacter in escapedCharacters)
+            {
+                newValue = newValue.Replace(escapedCharacter.Key, escapedCharacter.Value);
+            }
+            return newValue;
         }
 
         private static XmlNode GetDatabaseNode(XmlNode doc)

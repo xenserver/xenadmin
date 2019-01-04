@@ -38,6 +38,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRetry = new System.Windows.Forms.Button();
+            this.buttonSkip = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -81,6 +82,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.panel1.Controls.Add(this.pictureBox1, 0, 0);
             this.panel1.Controls.Add(this.labelError, 1, 0);
             this.panel1.Controls.Add(this.buttonRetry, 2, 0);
+            this.panel1.Controls.Add(this.buttonSkip, 3, 0);
             this.panel1.Name = "panel1";
             // 
             // buttonRetry
@@ -89,6 +91,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.buttonRetry.Name = "buttonRetry";
             this.buttonRetry.UseVisualStyleBackColor = true;
             this.buttonRetry.Click += new System.EventHandler(this.buttonRetry_Click);
+            // 
+            // buttonSkip
+            // 
+            resources.ApplyResources(this.buttonSkip, "buttonSkip");
+            this.buttonSkip.Name = "buttonSkip";
+            this.buttonSkip.UseVisualStyleBackColor = true;
+            this.buttonSkip.Click += new System.EventHandler(this.buttonSkip_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -124,5 +133,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.TableLayoutPanel panel1;
         private System.Windows.Forms.Button buttonRetry;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button buttonSkip;
     }
 }

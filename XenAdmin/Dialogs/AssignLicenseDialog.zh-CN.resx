@@ -189,93 +189,6 @@
   <data name="mainLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Name" xml:space="preserve">
-    <value>licenseServerLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Parent" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="licenseServerLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="licenseServerNameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="licenseServerNameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="licenseServerPortTextBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="colonLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="&gt;&gt;mainLabel.Name" xml:space="preserve">
-    <value>mainLabel</value>
-  </data>
-  <data name="&gt;&gt;mainLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mainLabel.Parent" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;mainLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.Name" xml:space="preserve">
-    <value>editionsGroupBox</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.Parent" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.Name" xml:space="preserve">
-    <value>buttonsLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.Parent" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="mainLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="mainLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="mainLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="mainLayoutPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
-  </data>
-  <data name="mainLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="mainLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 368</value>
-  </data>
-  <data name="mainLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;mainLayoutPanel.Name" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;mainLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mainLayoutPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;mainLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="mainLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="licenseServerLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="mainLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="editionsGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="buttonsLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
-  </data>
   <data name="licenseServerLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -284,90 +197,6 @@
   </data>
   <data name="licenseServerLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameLabel.Name" xml:space="preserve">
-    <value>licenseServerNameLabel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameLabel.Parent" xml:space="preserve">
-    <value>licenseServerLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.Name" xml:space="preserve">
-    <value>licenseServerNameTextBox</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.Parent" xml:space="preserve">
-    <value>licenseServerLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.Name" xml:space="preserve">
-    <value>licenseServerPortTextBox</value>
-  </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.Parent" xml:space="preserve">
-    <value>licenseServerLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;colonLabel.Name" xml:space="preserve">
-    <value>colonLabel</value>
-  </data>
-  <data name="&gt;&gt;colonLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colonLabel.Parent" xml:space="preserve">
-    <value>licenseServerLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;colonLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="licenseServerLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="licenseServerLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="licenseServerLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 41</value>
-  </data>
-  <data name="licenseServerLayoutPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
-  </data>
-  <data name="licenseServerLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="licenseServerLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 45</value>
-  </data>
-  <data name="licenseServerLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Name" xml:space="preserve">
-    <value>licenseServerLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Parent" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="licenseServerLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="licenseServerNameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="licenseServerNameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="licenseServerPortTextBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="colonLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="licenseServerNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -495,6 +324,42 @@
   <data name="&gt;&gt;colonLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="licenseServerLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="licenseServerLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="licenseServerLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 41</value>
+  </data>
+  <data name="licenseServerLayoutPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="licenseServerLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="licenseServerLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 45</value>
+  </data>
+  <data name="licenseServerLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;licenseServerLayoutPanel.Name" xml:space="preserve">
+    <value>licenseServerLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;licenseServerLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseServerLayoutPanel.Parent" xml:space="preserve">
+    <value>mainLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;licenseServerLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="licenseServerLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="licenseServerNameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="licenseServerNameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="licenseServerPortTextBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="colonLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
+  </data>
   <data name="mainLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -534,53 +399,29 @@
   <data name="editionsGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="&gt;&gt;editionLayoutPanel.Name" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;editionLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;editionLayoutPanel.Parent" xml:space="preserve">
-    <value>editionsGroupBox</value>
-  </data>
-  <data name="&gt;&gt;editionLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="editionsGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="editionsGroupBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="editionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 92</value>
-  </data>
-  <data name="editionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 226</value>
-  </data>
-  <data name="editionsGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="editionsGroupBox.Text" xml:space="preserve">
-    <value>许可证</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.Name" xml:space="preserve">
-    <value>editionsGroupBox</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.Parent" xml:space="preserve">
-    <value>mainLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;editionsGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="editionLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="editionLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
+  </data>
+  <data name="perSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="perSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="perSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="perSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 3</value>
+  </data>
+  <data name="perSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="perSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;perSocketRadioButton.Name" xml:space="preserve">
     <value>perSocketRadioButton</value>
@@ -594,6 +435,24 @@
   <data name="&gt;&gt;perSocketRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="xenDesktopEnterpriseRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="xenDesktopEnterpriseRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="xenDesktopEnterpriseRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="xenDesktopEnterpriseRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 22</value>
+  </data>
+  <data name="xenDesktopEnterpriseRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="xenDesktopEnterpriseRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Name" xml:space="preserve">
     <value>xenDesktopEnterpriseRadioButton</value>
   </data>
@@ -605,6 +464,24 @@
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 41</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;enterprisePerSocketRadioButton.Name" xml:space="preserve">
     <value>enterprisePerSocketRadioButton</value>
@@ -618,6 +495,27 @@
   <data name="&gt;&gt;enterprisePerSocketRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="enterprisePerUserRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 60</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;enterprisePerUserRadioButton.Name" xml:space="preserve">
     <value>enterprisePerUserRadioButton</value>
   </data>
@@ -629,6 +527,24 @@
   </data>
   <data name="&gt;&gt;enterprisePerUserRadioButton.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="desktopPlusRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="desktopPlusRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="desktopPlusRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="desktopPlusRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 79</value>
+  </data>
+  <data name="desktopPlusRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="desktopPlusRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;desktopPlusRadioButton.Name" xml:space="preserve">
     <value>desktopPlusRadioButton</value>
@@ -642,6 +558,24 @@
   <data name="&gt;&gt;desktopPlusRadioButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="desktopRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="desktopRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="desktopRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="desktopRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 98</value>
+  </data>
+  <data name="desktopRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="desktopRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;desktopRadioButton.Name" xml:space="preserve">
     <value>desktopRadioButton</value>
   </data>
@@ -654,6 +588,27 @@
   <data name="&gt;&gt;desktopRadioButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="desktopCloudRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="desktopCloudRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="desktopCloudRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="desktopCloudRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 117</value>
+  </data>
+  <data name="desktopCloudRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="desktopCloudRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="desktopCloudRadioButton.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;desktopCloudRadioButton.Name" xml:space="preserve">
     <value>desktopCloudRadioButton</value>
   </data>
@@ -665,6 +620,24 @@
   </data>
   <data name="&gt;&gt;desktopCloudRadioButton.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="standardPerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="standardPerSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 136</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="standardPerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;standardPerSocketRadioButton.Name" xml:space="preserve">
     <value>standardPerSocketRadioButton</value>
@@ -711,275 +684,35 @@
   <data name="&gt;&gt;editionLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="perSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="editionsGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="perSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="editionsGroupBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="perSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="editionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 92</value>
   </data>
-  <data name="perSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="editionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 178</value>
   </data>
-  <data name="perSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 19</value>
+  <data name="editionsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="perSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="editionsGroupBox.Text" xml:space="preserve">
+    <value>许可证</value>
   </data>
-  <data name="perSocketRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] Per-Socket(&amp;S)</value>
+  <data name="&gt;&gt;editionsGroupBox.Name" xml:space="preserve">
+    <value>editionsGroupBox</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.Name" xml:space="preserve">
-    <value>perSocketRadioButton</value>
+  <data name="&gt;&gt;editionsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;editionsGroupBox.Parent" xml:space="preserve">
+    <value>mainLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;perSocketRadioButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 103</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 19</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="xenDesktopEnterpriseRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] for XenDesktop(&amp;X)</value>
-  </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Name" xml:space="preserve">
-    <value>xenDesktopEnterpriseRadioButton</value>
-  </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 143</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 22</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="enterprisePerSocketRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-Socket(&amp;N)</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.Name" xml:space="preserve">
-    <value>enterprisePerSocketRadioButton</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 171</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] Enterprise Per-User(&amp;E)</value>
-  </data>
-  <data name="enterprisePerUserRadioButton.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.Name" xml:space="preserve">
-    <value>enterprisePerUserRadioButton</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="desktopPlusRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="desktopPlusRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="desktopPlusRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="desktopPlusRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 199</value>
-  </data>
-  <data name="desktopPlusRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 22</value>
-  </data>
-  <data name="desktopPlusRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="desktopPlusRadioButton.Text" xml:space="preserve">
-    <value>XenApp/XenDesktop Platinum(&amp;P)</value>
-  </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.Name" xml:space="preserve">
-    <value>desktopPlusRadioButton</value>
-  </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="desktopRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="desktopRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="desktopRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="desktopRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 227</value>
-  </data>
-  <data name="desktopRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 22</value>
-  </data>
-  <data name="desktopRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="desktopRadioButton.Text" xml:space="preserve">
-    <value>XenApp/XenDesktop(&amp;D)</value>
-  </data>
-  <data name="&gt;&gt;desktopRadioButton.Name" xml:space="preserve">
-    <value>desktopRadioButton</value>
-  </data>
-  <data name="&gt;&gt;desktopRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;desktopRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;desktopRadioButton.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="desktopCloudRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="desktopCloudRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="desktopCloudRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="desktopCloudRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 153</value>
-  </data>
-  <data name="desktopCloudRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 19</value>
-  </data>
-  <data name="desktopCloudRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="desktopCloudRadioButton.Text" xml:space="preserve">
-    <value>XenApp/XenDesktop [Citrix] Cloud(&amp;C)</value>
-  </data>
-  <data name="desktopCloudRadioButton.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;desktopCloudRadioButton.Name" xml:space="preserve">
-    <value>desktopCloudRadioButton</value>
-  </data>
-  <data name="&gt;&gt;desktopCloudRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;desktopCloudRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;desktopCloudRadioButton.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="standardPerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="standardPerSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="standardPerSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="standardPerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 255</value>
-  </data>
-  <data name="standardPerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="standardPerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="standardPerSocketRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] Standard Per-Socket(&amp;S)</value>
-  </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.Name" xml:space="preserve">
-    <value>standardPerSocketRadioButton</value>
-  </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;editionsGroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="buttonsLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1017,6 +750,42 @@
   <data name="&gt;&gt;buttonsLayoutPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="mainLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="mainLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="mainLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mainLayoutPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="mainLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mainLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>547, 368</value>
+  </data>
+  <data name="mainLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.Name" xml:space="preserve">
+    <value>mainLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mainLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="licenseServerLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="mainLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="editionsGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="buttonsLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1030,13 +799,10 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>523, 292</value>
+    <value>547, 368</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>应用许可证</value>

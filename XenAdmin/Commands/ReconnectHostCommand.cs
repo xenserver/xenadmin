@@ -31,12 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Network;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using XenAPI;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Commands
@@ -77,8 +72,6 @@ namespace XenAdmin.Commands
                     XenConnectionUI.BeginConnect(item.Connection, true, null, false);
                 }
             }
-
-            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         private void Connection_CachePopulated(object sender, EventArgs e)

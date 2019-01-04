@@ -118,25 +118,37 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="spinnerPanel.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="spinnerPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="spinnerPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="spinnerPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="memorySpinnerDynMin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memorySpinnerDynMin.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="memorySpinnerDynMin.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="memorySpinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>109, 0</value>
   </data>
   <data name="memorySpinnerDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>10, 0, 0, 0</value>
   </data>
   <data name="memorySpinnerDynMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 31</value>
+    <value>151, 26</value>
   </data>
   <data name="memorySpinnerDynMin.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;memorySpinnerDynMin.Name" xml:space="preserve">
     <value>memorySpinnerDynMin</value>
@@ -150,20 +162,26 @@
   <data name="&gt;&gt;memorySpinnerDynMin.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="memorySpinnerDynMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memorySpinnerDynMax.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="memorySpinnerDynMax.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="memorySpinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 31</value>
+    <value>109, 26</value>
   </data>
   <data name="memorySpinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>10, 0, 0, 0</value>
   </data>
   <data name="memorySpinnerDynMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 31</value>
+    <value>151, 26</value>
   </data>
   <data name="memorySpinnerDynMax.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;memorySpinnerDynMax.Name" xml:space="preserve">
     <value>memorySpinnerDynMax</value>
@@ -177,20 +195,26 @@
   <data name="&gt;&gt;memorySpinnerDynMax.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="memorySpinnerStatMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memorySpinnerStatMax.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="memorySpinnerStatMax.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="memorySpinnerStatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 62</value>
+    <value>109, 52</value>
   </data>
   <data name="memorySpinnerStatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>10, 0, 0, 0</value>
   </data>
   <data name="memorySpinnerStatMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 31</value>
+    <value>151, 26</value>
   </data>
   <data name="memorySpinnerStatMax.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;memorySpinnerStatMax.Name" xml:space="preserve">
     <value>memorySpinnerStatMax</value>
@@ -204,23 +228,110 @@
   <data name="&gt;&gt;memorySpinnerStatMax.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="labelDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelDynMin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDynMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="labelDynMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="labelDynMin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelDynMin.Text" xml:space="preserve">
+    <value>&amp;Minimum memory:</value>
+  </data>
+  <data name="&gt;&gt;labelDynMin.Name" xml:space="preserve">
+    <value>labelDynMin</value>
+  </data>
+  <data name="&gt;&gt;labelDynMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDynMin.Parent" xml:space="preserve">
+    <value>spinnerPanel</value>
+  </data>
+  <data name="&gt;&gt;labelDynMin.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelDynMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDynMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 32</value>
+  </data>
+  <data name="labelDynMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="labelDynMax.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelDynMax.Text" xml:space="preserve">
+    <value>Ma&amp;ximum memory:</value>
+  </data>
+  <data name="&gt;&gt;labelDynMax.Name" xml:space="preserve">
+    <value>labelDynMax</value>
+  </data>
+  <data name="&gt;&gt;labelDynMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDynMax.Parent" xml:space="preserve">
+    <value>spinnerPanel</value>
+  </data>
+  <data name="&gt;&gt;labelDynMax.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelStatMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelStatMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 58</value>
+  </data>
+  <data name="labelStatMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="labelStatMax.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelStatMax.Text" xml:space="preserve">
+    <value>&amp;Static maximum:</value>
+  </data>
+  <data name="&gt;&gt;labelStatMax.Name" xml:space="preserve">
+    <value>labelStatMax</value>
+  </data>
+  <data name="&gt;&gt;labelStatMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelStatMax.Parent" xml:space="preserve">
+    <value>spinnerPanel</value>
+  </data>
+  <data name="&gt;&gt;labelStatMax.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="spinnerPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="spinnerPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="spinnerPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
   <data name="spinnerPanel.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="spinnerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 93</value>
+    <value>260, 78</value>
   </data>
   <data name="spinnerPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;spinnerPanel.Name" xml:space="preserve">
     <value>spinnerPanel</value>
@@ -235,7 +346,7 @@
     <value>0</value>
   </data>
   <data name="spinnerPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerDynMin" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerDynMax" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerStatMax" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="memorySpinnerDynMin" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerDynMax" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="memorySpinnerStatMax" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMin" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelDynMax" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStatMax" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -243,8 +354,17 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>260, 50</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 93</value>
+    <value>260, 78</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VMMemoryControlsAdvanced</value>

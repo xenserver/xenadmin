@@ -56,7 +56,7 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static readonly Dictionary<Type, List<PDSection>> _expandedSections = new Dictionary<Type, List<PDSection>>();
+        private readonly Dictionary<Type, List<PDSection>> _expandedSections = new Dictionary<Type, List<PDSection>>();
 
         /// <summary>
         /// Set when we need to do a rebuild, but we are not visible, to queue up a rebuild.
@@ -65,7 +65,7 @@ namespace XenAdmin.TabPages
 
         private LicenseStatus licenseStatus;
 
-        private List<PDSection> sections;
+        private readonly List<PDSection> sections;
 
         public LicenseManagerLauncher LicenseLauncher { private get; set; }
 
@@ -73,8 +73,7 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
 
-            VM_guest_metrics_CollectionChangedWithInvoke =
-                Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
+            VM_guest_metrics_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
             OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
             sections = new List<PDSection>();
             foreach (Control control in panel2.Controls)
@@ -102,35 +101,26 @@ namespace XenAdmin.TabPages
             if (pdSectionLicense == null || licenseStatus == null)
                 return;
 
-            GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-            Program.Invoke(Program.MainWindow, () => 
-            {
-                pdSectionLicense.UpdateEntryValueWithKey(
-                    FriendlyName("host.license_params-expiry"),
-                    ss.ExpiryDate, 
-                    ss.ShowExpiryDate);
-            });
-
+            var ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
             Program.Invoke(Program.MainWindow, () =>
             {
-                pdSectionLicense.UpdateEntryValueWithKey(
-                    Messages.LICENSE_STATUS,
-                    ss.ExpiryStatus,
-                    true);
-            });
+                pdSectionLicense.UpdateEntryValueWithKey(FriendlyName("host.license_params-expiry"),
+                    ss.ExpiryDate, ss.ShowExpiryDate);
 
-            Pool p = xenObject as Pool;
-            if (p != null)
-                Program.Invoke(Program.MainWindow, () =>
+                pdSectionLicense.UpdateEntryValueWithKey(Messages.LICENSE_STATUS, ss.ExpiryStatus, true);
+
+                Pool p = xenObject as Pool;
+                if (p != null)
                 {
                     var additionalString = PoolAdditionalLicenseString();
                     pdSectionGeneral.UpdateEntryValueWithKey(
                         Messages.POOL_LICENSE,
                         additionalString != string.Empty
-                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
-                            : p.LicenseString(),
+                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
+                            : Helpers.GetFriendlyLicenseName(p),
                         true);
-                });
+                }
+            });
         }
 
         void s_contentReceivedFocus(PDSection s)
@@ -189,11 +179,14 @@ namespace XenAdmin.TabPages
                     xenObject = value;
                     RegisterHandlers();
                     BuildList();
-                    List<PDSection> listPDSections = null;
-                    if (_expandedSections.TryGetValue(xenObject.GetType(), out listPDSections))
-                        ResetExpandState(listPDSections);
-                    else
-                        ResetExpandState();
+
+                    if (xenObject != null && !_expandedSections.ContainsKey(xenObject.GetType()))
+                    {
+                        _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSectionGeneral});
+                        pdSectionGeneral.Expand();
+                    }
+
+                    ResetExpandState();
                 }
                 else
                 {
@@ -218,11 +211,10 @@ namespace XenAdmin.TabPages
             }
         }
 
-        void s_ExpandedEventHandler(PDSection pdSection)
+        private void pdSection_ExpandedChanged(PDSection pdSection)
         {
-            if (pdSection != null)
+            if (pdSection != null && xenObject != null)
             {
-                //Add to the expandedSections
                 List<PDSection> listSections;
                 if (_expandedSections.TryGetValue(xenObject.GetType(), out listSections))
                 {
@@ -233,36 +225,42 @@ namespace XenAdmin.TabPages
                 }
                 else if (pdSection.IsExpanded)
                 {
-                    List<PDSection> list = new List<PDSection>();
-                    list.Add(pdSection);
-                    _expandedSections.Add(xenObject.GetType(), list);
+                    _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSection});
                 }
             }
             SetStatesOfExpandingLinks();
         }
 
+
         private void ResetExpandState()
         {
-            panel2.SuspendLayout();
-            foreach (PDSection s in sections)
+            List<PDSection> expandedSections = null;
+            if (xenObject != null)
+                _expandedSections.TryGetValue(xenObject.GetType(), out expandedSections);
+
+            try
             {
-                s.Contract();
+                panel2.SuspendLayout();
+
+                foreach (PDSection s in sections)
+                {
+                    if (expandedSections == null)
+                    {
+                        if (s == pdSectionGeneral)
+                            s.Expand();
+                        else
+                            s.Contract();
+                    }
+                    else if (expandedSections.Contains(s))
+                        s.Expand();
+                    else
+                        s.Contract();
+                }
             }
-            pdSectionGeneral.Expand();
-            panel2.ResumeLayout();
-        }
-        private void ResetExpandState(List<PDSection> expandedSections)
-        {
-            panel2.SuspendLayout();
-            foreach (PDSection s in sections)
+            finally
             {
-                if (expandedSections.Contains(s))
-                    s.Expand();
-                else
-                    s.Contract();
+                panel2.ResumeLayout();
             }
-            pdSectionGeneral.Expand();
-            panel2.ResumeLayout();
         }
 
         private void UnregisterHandlers()
@@ -420,11 +418,11 @@ namespace XenAdmin.TabPages
             buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
 
             //keeping it separate
-            if (xenObject is DockerContainer)
+            var container = xenObject as DockerContainer;
+            if (container != null)
             {
                 buttonProperties.Enabled = false;
 
-                DockerContainer container = (DockerContainer)xenObject;
                 buttonViewConsole.Visible = true;
                 buttonViewLog.Visible = true;
 
@@ -992,7 +990,7 @@ namespace XenAdmin.TabPages
 
             Dictionary<string, string> info = new Dictionary<string, string>(host.license_params);
 
-            // This field is now supressed as it has no meaning under the current license scheme, and was never
+            // This field is now suppressed as it has no meaning under the current license scheme, and was never
             // enforced anyway.
             info.Remove("sockets");
 
@@ -1004,17 +1002,24 @@ namespace XenAdmin.TabPages
             {
                 ToolStripMenuItem editItem = new ToolStripMenuItem(Messages.LAUNCH_LICENSE_MANAGER);
                 editItem.Click += delegate
+                {
+                    if (LicenseLauncher != null)
                     {
-                        if (LicenseLauncher != null)
-                        {
-                            LicenseLauncher.Parent = Program.MainWindow;
-                            LicenseLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections);
-                        }
-                    };
+                        LicenseLauncher.Parent = Program.MainWindow;
+                        LicenseLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections);
+                    }
+                };
 
-                GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-                s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, editItem);
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem, ss.ShowExpiryDate);
+                if (licenseStatus != null)
+                {
+                    var ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
+                    s.AddEntry(Messages.LICENSE_STATUS,
+                        licenseStatus.Updated ? ss.ExpiryStatus : Messages.GENERAL_LICENSE_QUERYING, editItem);
+                    s.AddEntry(FriendlyName("host.license_params-expiry"),
+                        licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
+                        editItem, ss.ShowExpiryDate);
+                }
+
                 info.Remove("expiry");
             }
 
@@ -1029,12 +1034,12 @@ namespace XenAdmin.TabPages
             {
                 var licenseServerAddress = host.license_server["address"].Trim();
                 if (licenseServerAddress == "" || licenseServerAddress.ToLower() == "localhost")
-                    s.AddEntry(FriendlyName(String.Format("host.license_server-address")), host.license_server["address"]);
+                    s.AddEntry(FriendlyName("host.license_server-address"), host.license_server["address"]);
                 else
                 {
                     var openUrl = new ToolStripMenuItem(Messages.LICENSE_SERVER_WEB_CONSOLE_GOTO);
                     openUrl.Click += (sender, args) => Program.OpenURL(string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, licenseServerAddress, Host.LicenseServerWebConsolePort));
-                    s.AddEntryLink(FriendlyName(String.Format("host.license_server-address")),
+                    s.AddEntryLink(FriendlyName("host.license_server-address"),
                                    host.license_server["address"],
                                    new[] {openUrl},
                                    openUrl.PerformClick);
@@ -1042,7 +1047,7 @@ namespace XenAdmin.TabPages
             }
             if (host.license_server.ContainsKey("port"))
             {
-                s.AddEntry(FriendlyName(String.Format("host.license_server-port")), host.license_server["port"]);
+                s.AddEntry(FriendlyName("host.license_server-port"), host.license_server["port"]);
             }
 
             foreach (string key in new string[] { "productcode", "serialnumber" })
@@ -1306,8 +1311,8 @@ namespace XenAdmin.TabPages
                 var additionalString = PoolAdditionalLicenseString();
                 s.AddEntry(Messages.POOL_LICENSE,
                     additionalString != string.Empty
-                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
-                        : p.LicenseString());
+                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
+                        : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
                 var master = p.Connection.Resolve(p.master);
@@ -1352,12 +1357,18 @@ namespace XenAdmin.TabPages
 
         private string PoolAdditionalLicenseString()
         {
-            if (licenseStatus.CurrentState == LicenseStatus.HostState.Expired)
-                return Messages.LICENSE_EXPIRED;
-            else if (licenseStatus.CurrentState == LicenseStatus.HostState.Free)
-                return Messages.LICENSE_UNLICENSED;
-            else   
+            if (licenseStatus == null)
                 return string.Empty;
+
+            switch (licenseStatus.CurrentState)
+            {
+                case LicenseStatus.HostState.Expired:
+                    return Messages.LICENSE_EXPIRED;
+                case LicenseStatus.HostState.Free:
+                    return Messages.LICENSE_UNLICENSED;
+                default:
+                    return string.Empty;
+            }
         }
 
         private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)
@@ -1477,10 +1488,10 @@ namespace XenAdmin.TabPages
 
         private void generateDockerContainerGeneralBox()
         {
-            if (xenObject is DockerContainer)
+            var dockerContainer = xenObject as DockerContainer;
+            if (dockerContainer != null)
             {
                 PDSection s = pdSectionGeneral;
-                DockerContainer dockerContainer = (DockerContainer)xenObject;
                 s.AddEntry(Messages.NAME, dockerContainer.Name().Length != 0 ? dockerContainer.Name() : Messages.NONE);
                 s.AddEntry(Messages.STATUS, dockerContainer.status.Length != 0 ? dockerContainer.status : Messages.NONE);
                 try
@@ -1664,20 +1675,6 @@ namespace XenAdmin.TabPages
                 result.Add(patch.Name);
 
             return string.Join(Environment.NewLine, result.ToArray());
-        }
-
-        private string hostUnappliedPatches(Host host)
-        {
-            List<string> result = new List<string>();
-
-            foreach (Pool_patch patch in Pool_patch.GetAllThatApply(host, ConnectionsManager.XenConnectionsCopy))
-            {
-                if (!patch.AppliedTo(ConnectionsManager.XenConnectionsCopy).Contains(new XenRef<Host>(xenObject.opaque_ref)))
-                    result.Add(patch.Name());
-            }
-
-            result.Sort(StringUtility.NaturalCompare);
-            return string.Join("\n", result.ToArray());
         }
 
         private string hostInstalledSuppPacks(Host host)
@@ -1923,9 +1920,9 @@ namespace XenAdmin.TabPages
 
         private void buttonViewConsole_Click(object sender, EventArgs e)
         {
-            if (xenObject is DockerContainer)
+            var dockerContainer = xenObject as DockerContainer;
+            if (dockerContainer != null)
             {
-                DockerContainer dockerContainer = (DockerContainer)xenObject;
                 string vmIp = dockerContainer.Parent.IPAddressForSSH();
                 //Set command 'docker attach' to attach to the container.
                 string dockerCmd = "env docker attach --sig-proxy=false " + dockerContainer.uuid;
@@ -1935,9 +1932,9 @@ namespace XenAdmin.TabPages
 
         private void buttonViewLog_Click(object sender, EventArgs e)
         {
-            if (xenObject is DockerContainer)
+            var dockerContainer = xenObject as DockerContainer;
+            if (dockerContainer != null)
             {
-                DockerContainer dockerContainer = (DockerContainer)xenObject;
                 string vmIp = dockerContainer.Parent.IPAddressForSSH();
                 //Set command 'docker logs' to retrieve the logs of the container.
                 string dockerCmd = "env docker logs --tail=50 --follow --timestamps " + dockerContainer.uuid;

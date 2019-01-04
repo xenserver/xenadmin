@@ -115,7 +115,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver.
+        ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor.
         /// </summary>
         public static string HOMEPAGE {
             get {
@@ -205,7 +205,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.citrix.com/downloads/xenserver.
+        ///   Looks up a localized string similar to https://www.citrix.com/downloads/citrix-hypervisor.
         /// </summary>
         public static string OUT_OF_DATE_WEBSITE {
             get {
@@ -250,7 +250,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.citrix.com/products/xenserver/get-started.html.
+        ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {
             get {

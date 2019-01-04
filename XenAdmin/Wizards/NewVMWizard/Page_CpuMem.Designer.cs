@@ -44,6 +44,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
             this.labelTopology = new System.Windows.Forms.Label();
             this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
+            this.labelDynMin = new System.Windows.Forms.Label();
+            this.labelDynMax = new System.Windows.Forms.Label();
+            this.labelStatMax = new System.Windows.Forms.Label();
+            this.labelDynMinInfo = new System.Windows.Forms.Label();
+            this.labelDynMaxInfo = new System.Windows.Forms.Label();
+            this.labelStatMaxInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ErrorPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -57,7 +63,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
-            this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.label5, 3);
             this.label5.Name = "label5";
             // 
             // pictureBox1
@@ -81,25 +87,22 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             // spinnerDynMin
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.spinnerDynMin, 2);
-            this.spinnerDynMin.Increment = 0.1D;
             resources.ApplyResources(this.spinnerDynMin, "spinnerDynMin");
+            this.spinnerDynMin.Increment = 0.1D;
             this.spinnerDynMin.Name = "spinnerDynMin";
             this.spinnerDynMin.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
             // spinnerDynMax
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.spinnerDynMax, 2);
-            this.spinnerDynMax.Increment = 0.1D;
             resources.ApplyResources(this.spinnerDynMax, "spinnerDynMax");
+            this.spinnerDynMax.Increment = 0.1D;
             this.spinnerDynMax.Name = "spinnerDynMax";
             this.spinnerDynMax.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
             // spinnerStatMax
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.spinnerStatMax, 2);
-            this.spinnerStatMax.Increment = 0.1D;
             resources.ApplyResources(this.spinnerStatMax, "spinnerStatMax");
+            this.spinnerStatMax.Increment = 0.1D;
             this.spinnerStatMax.Name = "spinnerStatMax";
             this.spinnerStatMax.SpinnerValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
@@ -111,12 +114,18 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.labelVCPUs, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMin, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMax, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatMax, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMinInfo, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMaxInfo, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatMaxInfo, 2, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // comboBoxInitialVCPUs
@@ -139,6 +148,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             // comboBoxTopology
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
             this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
             this.comboBoxTopology.FormattingEnabled = true;
@@ -157,6 +167,36 @@ namespace XenAdmin.Wizards.NewVMWizard
             resources.ApplyResources(this.comboBoxVCPUs, "comboBoxVCPUs");
             this.comboBoxVCPUs.Name = "comboBoxVCPUs";
             this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.vCPU_ValueChanged);
+            // 
+            // labelDynMin
+            // 
+            resources.ApplyResources(this.labelDynMin, "labelDynMin");
+            this.labelDynMin.Name = "labelDynMin";
+            // 
+            // labelDynMax
+            // 
+            resources.ApplyResources(this.labelDynMax, "labelDynMax");
+            this.labelDynMax.Name = "labelDynMax";
+            // 
+            // labelStatMax
+            // 
+            resources.ApplyResources(this.labelStatMax, "labelStatMax");
+            this.labelStatMax.Name = "labelStatMax";
+            // 
+            // labelDynMinInfo
+            // 
+            resources.ApplyResources(this.labelDynMinInfo, "labelDynMinInfo");
+            this.labelDynMinInfo.Name = "labelDynMinInfo";
+            // 
+            // labelDynMaxInfo
+            // 
+            resources.ApplyResources(this.labelDynMaxInfo, "labelDynMaxInfo");
+            this.labelDynMaxInfo.Name = "labelDynMaxInfo";
+            // 
+            // labelStatMaxInfo
+            // 
+            resources.ApplyResources(this.labelStatMaxInfo, "labelStatMaxInfo");
+            this.labelStatMaxInfo.Name = "labelStatMaxInfo";
             // 
             // Page_CpuMem
             // 
@@ -187,9 +227,15 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelTopology;
         private Controls.CPUTopologyComboBox comboBoxTopology;
-        private System.Windows.Forms.Label labelInvalidVCPUWarning;
         private System.Windows.Forms.ComboBox comboBoxVCPUs;
         private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
         private System.Windows.Forms.Label labelInitialVCPUs;
+        private System.Windows.Forms.Label labelInvalidVCPUWarning;
+        private System.Windows.Forms.Label labelDynMin;
+        private System.Windows.Forms.Label labelDynMax;
+        private System.Windows.Forms.Label labelStatMax;
+        private System.Windows.Forms.Label labelDynMinInfo;
+        private System.Windows.Forms.Label labelDynMaxInfo;
+        private System.Windows.Forms.Label labelStatMaxInfo;
     }
 }

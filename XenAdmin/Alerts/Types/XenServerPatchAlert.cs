@@ -188,9 +188,9 @@ namespace XenAdmin.Alerts
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            if (other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
+            if (other_config.ContainsKey(Updates.IgnorePatchKey))
             {
-                List<string> current = new List<string>(other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
+                List<string> current = new List<string>(other_config[Updates.IgnorePatchKey].Split(','));
                 if (current.Contains(Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                     return true;
             }

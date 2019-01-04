@@ -62,6 +62,8 @@ using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
 using XenAdmin.Help;
+using XenAdmin.Wizards;
+
 
 namespace XenAdmin
 {
@@ -106,8 +108,7 @@ namespace XenAdmin
         internal readonly UsbPage UsbPage = new UsbPage();
 
         private ActionBase statusBarAction = null;
-        public ActionBase StatusBarAction { get { return statusBarAction; } }
-      
+
         private bool IgnoreTabChanges = false;
         private bool ToolbarsEnabled;
 
@@ -206,10 +207,6 @@ namespace XenAdmin
             AddTabContents(UsbPage, TabPageUSB);
 
             #endregion
-
-            TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
-            TheTabControl.Deselected += TheTabControl_Deselected;
-            navigationPane.DragDropCommandActivated += navigationPane_DragDropCommandActivated;
 
             PoolCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Pool>);
             MessageCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MessageCollectionChanged);
@@ -343,10 +340,6 @@ namespace XenAdmin
             // Using the Load event ensures that the handle has been 
             // created:
             base.OnLoad(e);
-
-            NewTabs[0] = TabPageHome;
-            NewTabCount = 1;
-            ChangeToNewTabs();
         }
 
         protected override void OnShown(EventArgs e)
@@ -465,14 +458,14 @@ namespace XenAdmin
             });
         }
 
-        void actionCompleted(ActionBase action)
+        private void actionCompleted(ActionBase action)
         {
             actionChanged(action);
             if (action is SrAction)
                 Program.Invoke(this, UpdateToolbars);
         }
 
-        void actionChanged(ActionBase action)
+        private void actionChanged(ActionBase action)
         {
             if (Program.Exiting)
                 return;
@@ -480,42 +473,45 @@ namespace XenAdmin
             Program.Invoke(this, () => actionChanged_(action));
         }
 
-        void actionChanged_(ActionBase action)
+        private void actionChanged_(ActionBase action)
         {
-            if (action.SuppressProgressReport) // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+            // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+            if (action.SuppressProgressReport)
                 return;
-             var meddlingAction = action as MeddlingAction;
-             if (meddlingAction == null)
-                 statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
 
-            // Be defensive against CA-8517.
-            if (action.PercentComplete < 0 || action.PercentComplete > 100)
-            {
-                log.ErrorFormat("PercentComplete is erroneously {0}", action.PercentComplete);
-            }
-            else if (meddlingAction == null)
-            {
-                statusProgressBar.Value = action.PercentComplete;
-            }
+            var percentage = action.PercentComplete;
+            Debug.Assert(0 <= percentage && percentage <= 100,
+                "PercentComplete is out of range, the reporting action needs to be fixed."); //CA-8517
 
-            // Don't show cancelled exception
-            if (action.Exception != null && !(action.Exception is CancelledException))
+            var meddlingAction = action as MeddlingAction;
+            if (meddlingAction == null)
             {
-                if (meddlingAction == null)
+                statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
+
+                if (percentage < 0)
+                    percentage = 0;
+                else if (percentage > 100)
+                    percentage = 100;
+                statusProgressBar.Value = percentage;
+
+                // Don't show cancelled exception
+                if (action.Exception != null && !(action.Exception is CancelledException))
+                {
                     SetStatusBar(Properties.Resources._000_error_h32bit_16, action.Exception.Message);
-            }
-            else if (meddlingAction == null)
-            {
-                SetStatusBar(null, action.IsCompleted
-                                       ? null
-                                       : !string.IsNullOrEmpty(action.Description)
-                                             ? action.Description
-                                             : !string.IsNullOrEmpty(action.Title)
-                                                   ? action.Title
-                                                   : null);
+                }
+                else
+                {
+                    SetStatusBar(null, action.IsCompleted
+                        ? null
+                        : !string.IsNullOrEmpty(action.Description)
+                            ? action.Description
+                            : !string.IsNullOrEmpty(action.Title)
+                                ? action.Title
+                                : null);
+                }
             }
 
-            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !((a is CancellingAction) && ((CancellingAction)a).Cancelled));
+            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
 
             if (eventsPage.Visible)
@@ -525,26 +521,19 @@ namespace XenAdmin
             }
         }
 
-        public void SetStatusBar(Image image, string message)
+        private void SetStatusBar(Image image, string message)
         {
             statusLabel.Image = image;
             statusLabel.Text = Helpers.FirstLine(message);
-        }
-
-        public void SetProgressBar(bool visible, int progress)
-        {
-            statusProgressBar.Visible = visible;
-            statusProgressBar.Value = progress;
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
         {
             MainMenuBar.Location = new Point(0, 0);
 
-            if (ToolStrip.Renderer is ToolStripProfessionalRenderer)
-            {
-                ((ToolStripProfessionalRenderer)ToolStrip.Renderer).RoundedEdges = false;
-            }
+            var rendProf = ToolStrip.Renderer as ToolStripProfessionalRenderer;
+            if (rendProf != null)
+                rendProf.RoundedEdges = false;
 
             ConnectionsManager.XenConnections.CollectionChanged += XenConnection_CollectionChanged;
             try
@@ -565,11 +554,11 @@ namespace XenAdmin
                     dlg.ShowDialog(this);
                 }
                 Application.Exit();
-                return; // Application.Exit() does not exit the current method.
+                return; //return explicitly because Application.Exit() does not exit the current method.
             }
+
             ToolbarsEnabled = Properties.Settings.Default.ToolbarsEnabled;
             RequestRefreshTreeView();
-            UpdateToolbars();
 
             // if there are fewer than 30 connections, then expand the tree nodes.
             expandTreeNodesOnStartup = ConnectionsManager.XenConnectionsCopy.Count < 30;
@@ -587,9 +576,7 @@ namespace XenAdmin
                 }
             }
 
-            RequestRefreshTreeView();
-
-            ThreadPool.QueueUserWorkItem((WaitCallback)delegate(object o)
+            ThreadPool.QueueUserWorkItem(delegate
             {
                 // Sleep a short time before closing the splash
                 Thread.Sleep(500);
@@ -641,11 +628,6 @@ namespace XenAdmin
                 pair.Value.opaque_ref = pair.Key;
                 MeddlingActionManager.ForceAddTask(pair.Value);
             }
-        }
-
-        private void Cache_Changed(object sender, EventArgs e)
-        {
-            RequestRefreshTreeView();
         }
 
         private void connection_CachePopulatedOnStartup(object sender, EventArgs e)
@@ -735,7 +717,7 @@ namespace XenAdmin
                     }
                     break;
                 case ArgType.Passwords:
-                    System.Diagnostics.Trace.Assert(false);
+                    Trace.Assert(false);
                     break;
             }
             Launched = true;
@@ -840,7 +822,7 @@ namespace XenAdmin
 
                         con.EndConnect();
                     }
-                    RequestRefreshTreeView();
+
                     //CA-41228 refresh submenu items when there are no connections
                     SelectionManager.RefreshSelection();
                 }
@@ -890,21 +872,13 @@ namespace XenAdmin
             {
                 connection.EndConnect();
 
-                Program.Invoke(Program.MainWindow, delegate()
+                Program.Invoke(Program.MainWindow, delegate
                 {
-                    string msg = string.Format(Messages.INCOMPATIBLE_PRODUCTS, Helpers.GetName(master));
-                    string url = "";
+                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                    new ActionBase(title, "", false, true, Messages.INCOMPATIBLE_PRODUCTS);
 
-                    using (var dlog = new ConnectionRefusedDialog())
-                    {
-                        dlog.ErrorMessage = msg;
-                        dlog.Url = "";
+                    using (var dlog = new ConnectionRefusedDialog {ErrorMessage = Messages.INCOMPATIBLE_PRODUCTS, Url = ""})
                         dlog.ShowDialog(this);
-                    }
-
-                    new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
-                                   string.Format("{0}\n{1}", msg, url), false,
-                                   true, Messages.CONNECTION_REFUSED);
                 });
                 return;
             }
@@ -930,29 +904,23 @@ namespace XenAdmin
                 {
                     connection.EndConnect();
 
-                    Program.Invoke(Program.MainWindow, delegate()
+                    Program.Invoke(Program.MainWindow, delegate
                     {
-                        string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
-                        msg = msg + Messages.GUI_OUT_OF_DATE_MORE;
-                        string url = "https://" + connection.Hostname;
+                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
+                        var url = "https://" + connection.Hostname;
+                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                        var error = string.Format("{0}\n{1}", msg, url);
 
-                        using (var dlog = new ConnectionRefusedDialog())
-                        {
-                            dlog.ErrorMessage = msg;
-                            dlog.Url = url;
+                        new ActionBase(title, "", false, true, error);
+
+                        using (var dlog = new ConnectionRefusedDialog {ErrorMessage = msg, Url = url})
                             dlog.ShowDialog(this);
-                        }
-                        
-                        new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
-                                       string.Format("{0}\n{1}", msg, url), false,
-                                       true, Messages.CONNECTION_REFUSED);
                     });
                     return;
                 }
-                else if (server_max > current_version)
-                {
+                
+                if (server_max > current_version)
                     Alert.AddAlert(new GuiOldAlert());
-                }
 
                 LoadTasksAsMeddlingActions(connection);
             }
@@ -998,7 +966,7 @@ namespace XenAdmin
                 newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
-        public static bool SameProductBrand(Host host)
+        private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
             return brand == Branding.PRODUCT_BRAND || brand == Branding.LEGACY_PRODUCT_BRAND ||  Branding.PRODUCT_BRAND == "[XenServer product]";
@@ -1029,7 +997,6 @@ namespace XenAdmin
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
                 action.RunAsync();
-                Program.Invoke(this, UpdateToolbars);
             }
         }
 
@@ -1195,90 +1162,30 @@ namespace XenAdmin
             }
         }
 
-        void Connection_ConnectionResult(object sender, Network.ConnectionResultEventArgs e)
+        private void Connection_ConnectionResult(object sender, Network.ConnectionResultEventArgs e)
         {
             RequestRefreshTreeView();
-            Program.Invoke(this, (EventHandler<ConnectionResultEventArgs>)Connection_ConnectionResult_, sender, e);
         }
 
-        private void Connection_ConnectionResult_(object sender, Network.ConnectionResultEventArgs e)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                UpdateToolbars();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing more about this.
-            }
-        }
-
-        void Connection_ConnectionClosed(object sender, EventArgs e)
+        private void Connection_ConnectionClosed(object sender, EventArgs e)
         {
             RequestRefreshTreeView();
-            Program.Invoke(this, (EventHandler<Network.ConnectionResultEventArgs>)Connection_ConnectionClosed_, sender, e);
             gc();
-        }
-
-        private void Connection_ConnectionClosed_(object sender, EventArgs e)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                UpdateToolbars();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Nothing more we can do with this.
-            }
         }
 
         // called whenever our connection with the Xen server fails (i.e., after we've successfully logged in)
-        void Connection_ConnectionLost(object sender, EventArgs e)
+        private void Connection_ConnectionLost(object sender, EventArgs e)
         {
             if (Program.Exiting)
                 return;
-            Program.Invoke(this, (EventHandler)Connection_ConnectionLost_, sender, e);
+            Program.Invoke(this, () => CloseActiveWizards((IXenConnection)sender));
             RequestRefreshTreeView();
             gc();
-        }
-
-        private void Connection_ConnectionLost_(object sender, EventArgs e)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                IXenConnection connection = (IXenConnection)sender;
-                CloseActiveWizards(connection);
-
-                UpdateToolbars();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing about this.
-            }
         }
 
         private static void gc()
         {
-            //log_gc("Before");  // Don't log this, CA-159791
             GC.Collect();
-            //log_gc("After");
-        }
-
-        private static void log_gc(string when)
-        {
-            log.DebugFormat("{0} GC: approx {1} bytes in use", when, GC.GetTotalMemory(false));
-            for (int i = 0; i <= GC.MaxGeneration; i++)
-            {
-                log.DebugFormat("Number of times GC has occurred for generation {0} objects: {1}", i, GC.CollectionCount(i));
-            }
-            log.Debug("GDI objects in use: " + Win32.GetGuiResourcesGDICount(Process.GetCurrentProcess().Handle));
-            log.Debug("USER objects in use: " + Win32.GetGuiResourcesUserCount(Process.GetCurrentProcess().Handle));
         }
 
         void connection_ConnectionReconnecting(object sender, EventArgs e)
@@ -1309,9 +1216,6 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        private int ignoreUpdateToolbars = 0;
-        private bool calledUpdateToolbars = false;
-
         /// <summary>
         /// Requests a refresh of the main tree view. The refresh will be managed such that we are not overloaded using an UpdateManager.
         /// </summary>
@@ -1320,35 +1224,22 @@ namespace XenAdmin
             Program.Invoke(this, navigationPane.RequestRefreshTreeView);
         }
 
-        private void UpdateHeaderAndTabPages()
-        {
-            Program.Invoke(this, () =>
-                {
-                    // This is required to update search results when things change.
-                    if (TheTabControl.SelectedTab == TabPageGeneral)
-                        GeneralPage.BuildList();
-                    else if (TheTabControl.SelectedTab == TabPageSearch)
-                        SearchPage.BuildList();
-
-                    UpdateHeader();
-                });
-        }
-
         void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private bool _menuShortcuts = true;
-        public bool MenuShortcuts
+        private bool _menuShortcutsEnabled = true;
+        public bool MenuShortcutsEnabled
         {
+            get { return _menuShortcutsEnabled; }
             set
             {
-                if (value != _menuShortcuts)
+                if (value != _menuShortcutsEnabled)
                 {
                     //if the VNC Console is active (the user is typing into it etc) all of the shortcuts for XenCenter are disabled
                     //IMPORTANT! add any shortcuts you want to pass to the VNC console into this if, else statement
-                    _menuShortcuts = value;
+                    _menuShortcutsEnabled = value;
 
                     // update the selection so menu items can enable/disable keyboard shortcuts as appropriate.
                     SelectionManager.RefreshSelection();
@@ -1363,12 +1254,6 @@ namespace XenAdmin
         {
             Program.AssertOnEventThread();
 
-            if (ignoreUpdateToolbars > 0)
-            {
-                calledUpdateToolbars = true;
-                return;
-            }
-
             try
             {
                 ToolStrip.SuspendLayout();
@@ -1379,11 +1264,18 @@ namespace XenAdmin
             {
                 ToolStrip.ResumeLayout();
             }
+
+            // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
+            // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
+            // the tree using the keyboard.
+
+            navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
         }
 
         private static int TOOLBAR_HEIGHT = 31;
+
         /// <summary>
-        /// Updates the toolbar buttons. Also updates which tabs are visible.
+        /// Updates the toolbar buttons.
         /// </summary>
         private void UpdateToolbarsCore()
         {
@@ -1413,10 +1305,12 @@ namespace XenAdmin
 
             ForceRebootToolbarButton.Available = ((ForceVMRebootCommand)ForceRebootToolbarButton.Command).ShowOnMainToolBar;
             ForceShutdownToolbarButton.Available = ((ForceVMShutDownCommand)ForceShutdownToolbarButton.Command).ShowOnMainToolBar;
+        }
 
+        private List<TabPage> GetNewTabPages()
+        {
             IXenConnection selectionConnection = SelectionManager.Selection.GetConnectionOfFirstItem();
             Pool selectionPool = selectionConnection == null ? null : Helpers.GetPool(selectionConnection);
-            Host selectionMaster = null == selectionPool ? null : selectionPool.Connection.Resolve(selectionPool.master);
 
             // 'Home' tab is only visible if the 'Overview' tree node is selected, or if the tree is
             // empty (i.e. at startup).
@@ -1442,21 +1336,46 @@ namespace XenAdmin
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML();
 
-            NewTabCount = 0;
-            ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected));
-            ShowTab(TabPageBallooning, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
-            ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
-            ShowTab(TabPageSR, !multi && !SearchMode && isSRSelected);
-            ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
-            ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
-            ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
-            ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows());
-            ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
+            var newTabs = new List<TabPage>();
+
+            if (!SearchMode && show_home)
+                newTabs.Add(TabPageHome);
+
+            if (!multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) ||
+                                          isPoolSelected || isSRSelected || isVdiSelected || isDockerContainerSelected))
+                newTabs.Add(TabPageGeneral);
+
+            if (!multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected))
+                newTabs.Add(TabPageBallooning);
+
+            if (!multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)))
+                newTabs.Add(TabPageStorage);
+
+            if (!multi && !SearchMode && isSRSelected)
+                newTabs.Add(TabPageSR);
+
+            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected))
+                newTabs.Add(TabPagePhysicalStorage);
+
+            if (!multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected))
+                newTabs.Add(TabPageNetwork);
+
+            if (!multi && !SearchMode && isHostSelected && isHostLive)
+                newTabs.Add(TabPageNICs);
+
+            if (!multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows())
+                newTabs.Add(TabPageDockerProcess);
+
+            if (!multi && !SearchMode && isDockerContainerSelected)
+                newTabs.Add(TabPageDockerDetails);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
-            ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
-            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
+
+            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu))
+                newTabs.Add(TabPageGPU);
+
+            if (!multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough))
+                newTabs.Add(TabPageUSB);
 
             var consoleFeatures = new List<TabPageFeature>();
             var otherFeatures = new List<TabPageFeature>();
@@ -1465,35 +1384,43 @@ namespace XenAdmin
                 GetFeatureTabPages(SelectionManager.Selection.FirstAsXenObject, out consoleFeatures, out otherFeatures);
 
             foreach (var f in consoleFeatures)
-                ShowTab(f.TabPage, true);
+                newTabs.Add(f.TabPage);
 
-            ShowTab(TabPageConsole, consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(TabPageCvmConsole, consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains);
-            ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
-            ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected);
-            ShowTab(TabPageSnapshots, !multi && !SearchMode && isRealVMSelected);
+            if (consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
+                newTabs.Add(TabPageConsole);
+            
+            if (consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains)
+                newTabs.Add(TabPageCvmConsole);
+
+            if (!multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
+                newTabs.Add(TabPagePeformance);
+
+            if (!multi && !SearchMode && isPoolSelected)
+                newTabs.Add(ha_upsell ? TabPageHAUpsell : TabPageHA);
+            
+            if(!multi && !SearchMode && isRealVMSelected)
+                newTabs.Add(TabPageSnapshots);
 
             //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
-            if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell ))
-                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected);
+            if (!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell)
+                && !multi && !SearchMode && isPoolSelected)
+                newTabs.Add(TabPageWLB);
 
-            ShowTab(ad_upsell ? TabPageADUpsell : TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive));
+            if (!multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive))
+                newTabs.Add(ad_upsell ? TabPageADUpsell : TabPageAD);
 
-            ShowTab(TabPagePvs, !multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
-                && Helpers.PvsCacheCapability(selectionConnection));
+            if (!multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
+                && Helpers.PvsCacheCapability(selectionConnection))
+                newTabs.Add(TabPagePvs);
 
             foreach (var f in otherFeatures)
-                ShowTab(f.TabPage, true);
+                newTabs.Add(f.TabPage);
 
-            ShowTab(TabPageSearch, true);
+            newTabs.Add(TabPageSearch);
 
             // N.B. Change NewTabs definition if you add more tabs here.
 
-            // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
-            // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
-            // the tree using the keyboard.
-
-            navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
+            return newTabs;
         }
 
         private void GetFeatureTabPages(IXenObject xenObject, out List<TabPageFeature> consoleFeatures, out List<TabPageFeature> otherFeatures)
@@ -1532,90 +1459,41 @@ namespace XenAdmin
             }
         }
 
-        private readonly TabPage[] NewTabs = new TabPage[512];
-        int NewTabCount;
-        private void ShowTab(TabPage page, bool visible)
-        {
-            if (visible)
-            {
-                NewTabs[NewTabCount] = page;
-                NewTabCount++;
-            }
-        }
-
         private void ChangeToNewTabs()
         {
-            TabPage new_selected_page = NewSelectedPage();
+            var newTabs = GetNewTabPages();
+
+            var pageToSelect = GetLastSelectedPage(SelectionManager.Selection.First);
+            if (pageToSelect != null && !newTabs.Contains(pageToSelect))
+                pageToSelect = null;
+
             TheTabControl.SuspendLayout();
             IgnoreTabChanges = true;
+
             try
             {
-                TabControl.TabPageCollection p = TheTabControl.TabPages;
-                int i = 0; // Index into NewTabs
-                int m = 0; // Index into p
-
-                while (i < NewTabCount)
+                foreach (TabPage page in TheTabControl.TabPages)
                 {
-                    if (m == p.Count)
-                    {
-                        p.Add(NewTabs[i]);
-                        if (new_selected_page == NewTabs[i])
-                            TheTabControl.SelectedTab = new_selected_page;
-                        m++;
-                        i++;
-                    }
-                    else if (p[m] == NewTabs[i])
-                    {
-                        if (new_selected_page == NewTabs[i])
-                            TheTabControl.SelectedTab = new_selected_page;
-                        m++;
-                        i++;
-                    }
-                    else if (NewTabs.Contains(p[m]))
-                    {
-                        p.Insert(m, NewTabs[i]);
-                        if (new_selected_page == NewTabs[i])
-                            TheTabControl.SelectedTab = new_selected_page;
-                        m++;
-                        i++;
-                    }
-                    else
-                    {
-                        if (TheTabControl.SelectedTab == p[m] && new_selected_page == NewTabs[i])
-                        {
-                            // This clause is deliberately targeted at the case when you go from
-                            // Overview:Home to Host:Overview.
-                            p.Insert(m, NewTabs[i]);
-                            TheTabControl.SelectedTab = new_selected_page;
-                            m++;
-                            i++;
-                        }
-                        p.Remove(p[m]);
-                    }
+                    if (!newTabs.Contains(page))
+                        TheTabControl.TabPages.Remove(page);
                 }
 
-                // Remove any tabs that are left at the end of the list.
-                while (m < p.Count)
+                int m = 0; // Index into TheTabControl.TabPages
+
+                foreach (var newTab in newTabs)
                 {
-                    TabPage removed = p[p.Count - 1];
-                    p.Remove(removed);
-                    int index = NewTabsIndexOf(removed);
-                    if (index != -1)
-                    {
-                        // If this is a tab that we want, then we've got it in the list twice -- one
-                        // reference was here when we entered this function, and is the one that we're
-                        // pointing at now, and the other reference we've inserted through the loop above.
-                        // This is bad -- p.Remove(removed) above has now invalidated removed.Parent
-                        // (removed is still in the list through the other reference).  Fix this up by
-                        // removing the other reference too and starting over.
-                        // We can't do the Remove call in the loop above, because this has a poor visual
-                        // effect.
-                        p.Remove(removed);
-                        p.Insert(index, removed);
-                        if (new_selected_page == removed)
-                            TheTabControl.SelectedTab = removed;
-                    }
+                    var index = TheTabControl.TabPages.IndexOf(newTab);
+                    if (index < 0)
+                        TheTabControl.TabPages.Insert(m, newTab);
+
+                    m++;
+
+                    if (newTab == pageToSelect)
+                        TheTabControl.SelectedTab = newTab;
                 }
+
+                if (pageToSelect == null)
+                    TheTabControl.SelectedTab = TheTabControl.TabPages[0];
             }
             finally
             {
@@ -1624,17 +1502,6 @@ namespace XenAdmin
 
                 SetLastSelectedPage(SelectionManager.Selection.First, TheTabControl.SelectedTab);
             }
-        }
-
-        private TabPage NewSelectedPage()
-        {
-            Object o = SelectionManager.Selection.First;
-            IXenObject s = o as IXenObject;
-
-            TabPage last_selected_page = GetLastSelectedPage(o);
-            return last_selected_page != null && NewTabs.Contains(last_selected_page)
-                       ? last_selected_page
-                       : NewTabs[0];
         }
 
         private void SetLastSelectedPage(object o, TabPage p)
@@ -1659,19 +1526,9 @@ namespace XenAdmin
                 : selectedTabs.ContainsKey(o) ? selectedTabs[o] : null;
         }
 
-        private int NewTabsIndexOf(TabPage tp)
-        {
-            for (int i = 0; i < NewTabCount; i++)
-            {
-                if (NewTabs[i] == tp)
-                    return i;
-            }
-            return -1;
-        }
-
         private void pluginManager_PluginsChanged()
         {
-            UpdateToolbarsCore();
+            UpdateToolbars();
 
             foreach (ToolStripMenuItem menu in MainMenuBar.Items)
             {
@@ -1741,21 +1598,18 @@ namespace XenAdmin
 
         private void MainMenuBar_MenuActivate(object sender, EventArgs e)
         {
-            Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
-            IXenConnection connection = SelectionManager.Selection.GetConnectionOfFirstItem();
             bool vm = SelectionManager.Selection.FirstIsRealVM && !((VM)SelectionManager.Selection.First).Locked;
 
             exportSettingsToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
 
-            this.MenuShortcuts = true;
+            MenuShortcutsEnabled = true;
 
             startOnHostToolStripMenuItem.Available = startOnHostToolStripMenuItem.Enabled;
             resumeOnToolStripMenuItem.Available = resumeOnToolStripMenuItem.Enabled;
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
-            IXenConnection conn;
-            conn = SelectionManager.Selection.GetConnectionOfAllItems();
+            IXenConnection conn = SelectionManager.Selection.GetConnectionOfAllItems();
             if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn)))
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = true;
@@ -2156,20 +2010,17 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails, USB
+            Home, General, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails, USB, Search
         }
 
         public void SwitchToTab(Tab tab)
         {
             switch (tab)
             {
-                case Tab.Overview:
-                    TheTabControl.SelectedTab = TabPageSearch;
-                    break;
                 case Tab.Home:
                     TheTabControl.SelectedTab = TabPageHome;
                     break;
-                case Tab.Settings:
+                case Tab.General:
                     TheTabControl.SelectedTab = TabPageGeneral;
                     break;
                 case Tab.Storage:
@@ -2201,6 +2052,9 @@ namespace XenAdmin
                     break;
                 case Tab.USB:
                     TheTabControl.SelectedTab = TabPageUSB;
+                    break;
+                case Tab.Search:
+                    TheTabControl.SelectedTab = TabPageSearch;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -2536,11 +2390,6 @@ namespace XenAdmin
             TrySelectNewNode(c, selectNode, expandNode, ensureNodeVisible);
         }
 
-        public bool MenuShortcutsEnabled
-        {
-            get { return _menuShortcuts; }
-        }
-
         #endregion
 
         #region Help
@@ -2655,7 +2504,7 @@ namespace XenAdmin
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             // CA-28064. MessageBox hack to kill the hlpevent it passes to MainWindows.
-            if (Program.MainWindow.ContainsFocus && _menuShortcuts)
+            if (Program.MainWindow.ContainsFocus && MenuShortcutsEnabled)
                 LaunchHelp();
         }
 
@@ -2822,33 +2671,33 @@ namespace XenAdmin
         internal void action_Completed(ActionBase sender)
         {
             if (Program.Exiting)
-            {
                 return;
-            }
 
             RequestRefreshTreeView();
-            
-            //Update toolbars, since if an action has just completed, various
-            //buttons may need to be re-enabled. Applies to:
-            // HostAction
-            // EnableHAAction
-            // DisableHAAction
-            Program.Invoke(this, UpdateToolbars);
         }
 
-        internal void OpenGlobalImportWizard(string param)
+        private void OpenGlobalImportWizard(string param)
         {
             HelpersGUI.BringFormToFront(this);
             Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
             new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
         }
 
-        internal void InstallUpdate(string path)
+        private void InstallUpdate(string path)
         {
-            var wizard = new PatchingWizard();
-            wizard.Show(this);
-            wizard.NextStep();
-            wizard.AddFile(path);
+            if (WizardHelpers.IsValidFile(path, out var failureReason))
+            {
+                var wizard = new PatchingWizard();
+                wizard.Show(this);
+                wizard.NextStep();
+                wizard.AddFile(path);
+            }
+            else
+                using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                    SystemIcons.Error, failureReason, Messages.UPDATES)))
+                {
+                    popup.ShowDialog();
+                }
         }
 
         #region XenSearch
@@ -2872,7 +2721,7 @@ namespace XenAdmin
 
                 searchMode = value;
                 navigationPane.InSearchMode = value;
-                UpdateToolbarsCore();
+                UpdateToolbars();
             }
         }
 
@@ -2925,10 +2774,11 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
-            bool licenseStatusTitleLabelHandled = false;
-
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
+
+            var licenseColor = Program.TitleBarForeColor;
+            var licenseText = string.Empty;
 
             if (SearchMode && SearchPage.Search != null)
             {
@@ -2939,11 +2789,10 @@ namespace XenAdmin
             {
                 IXenObject xenObject = SelectionManager.Selection[0].XenObject;
                 TitleLabel.Text = xenObject.NameWithLocation();
-
-                UpdateLicenseStatusTitleLabel(xenObject);
-                licenseStatusTitleLabelHandled = true;
-
                 TitleIcon.Image = Images.GetImage16For(xenObject);
+                
+                licenseText = GetLicenseStatusText(xenObject, out licenseColor);
+
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
 
                 if (SelectionManager.Selection[0].PoolAncestor == null && SelectionManager.Selection[0].HostAncestor == null)
@@ -2958,62 +2807,40 @@ namespace XenAdmin
                 loggedInLabel1.Connection = null;
             }
 
-            if (!licenseStatusTitleLabelHandled)
-                ResetLicenseStatusTitleLabel();
-
+            LicenseStatusTitleLabel.Text = licenseText;
+            LicenseStatusTitleLabel.ForeColor = licenseColor;
             SetTitleLabelMaxWidth();
         }
 
-        private void UpdateLicenseStatusTitleLabel(IXenObject xenObject)
+        private string GetLicenseStatusText(IXenObject xenObject, out Color foreColor)
         {
-            if (xenObject is Pool)
-            {
-                var pool = xenObject as Pool;
+            foreColor = Program.TitleBarForeColor;
 
-                if (pool.Connection != null && pool.Connection.CacheIsPopulated)
+            var pool = xenObject as Pool;
+            if (pool != null && pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)
+            {
+                if (pool.IsFreeLicenseOrExpired())
                 {
-                    if (pool.IsFreeLicenseOrExpired)
-                    {
-                        LicenseStatusTitleLabel.Text = Messages.MAINWINDOW_HEADER_UNLICENSED;
-                        LicenseStatusTitleLabel.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, pool.LicenseString());
-                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
-                    }
+                    foreColor = Color.Red;
+                    return Messages.MAINWINDOW_HEADER_UNLICENSED;
                 }
-            }
-            else if (xenObject is Host)
-            {
-                var host = xenObject as Host;
 
-                if (host.Connection != null && host.Connection.CacheIsPopulated)
+                return string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(pool));
+            }
+
+            var host = xenObject as Host;
+            if (host != null && host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
+            {
+                if (host.IsFreeLicenseOrExpired())
                 {
-                    if (host.IsFreeLicenseOrExpired())
-                    {
-                        LicenseStatusTitleLabel.Text = Messages.MAINWINDOW_HEADER_UNLICENSED;
-                        LicenseStatusTitleLabel.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
-                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
-                    }
+                    foreColor = Color.Red;
+                    return Messages.MAINWINDOW_HEADER_UNLICENSED;
                 }
-            }
-            else
-            {
-                ResetLicenseStatusTitleLabel();
-            }
-        }
 
-        private void ResetLicenseStatusTitleLabel()
-        {
-            if (string.IsNullOrEmpty(LicenseStatusTitleLabel.Text))
-                return;
+                return string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
+            }
 
-            LicenseStatusTitleLabel.Text = string.Empty;
+            return string.Empty;
         }
 
         private void SetTitleLabelMaxWidth()
@@ -3120,7 +2947,7 @@ namespace XenAdmin
         {
             if (mode == NavigationPane.NavigationMode.Notifications)
             {
-                ResetLicenseStatusTitleLabel();
+                LicenseStatusTitleLabel.Text = string.Empty;
                 TheTabControl.Visible = false;
             }
             else
@@ -3165,21 +2992,14 @@ namespace XenAdmin
 
         private void navigationPane_TreeViewRefreshed()
         {
-            UpdateHeaderAndTabPages();
-        }
+            // This is required to update search results when things change.
+            if (TheTabControl.SelectedTab == TabPageGeneral)
+                GeneralPage.BuildList();
+            else if (TheTabControl.SelectedTab == TabPageSearch)
+                SearchPage.BuildList();
 
-        private void navigationPane_TreeViewRefreshResumed()
-        {
-            ignoreUpdateToolbars--;
-            if (ignoreUpdateToolbars == 0 && calledUpdateToolbars)
-                UpdateToolbars();
-        }
-
-        private void navigationPane_TreeViewRefreshSuspended()
-        {
-            if (ignoreUpdateToolbars == 0)
-                calledUpdateToolbars = false;
-            ignoreUpdateToolbars++;
+            UpdateHeader();
+            UpdateToolbars();
         }
 
         #endregion

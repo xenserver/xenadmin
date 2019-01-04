@@ -382,7 +382,7 @@
     <value>8</value>
   </data>
   <data name="BypassForServersCheckbox.Text" xml:space="preserve">
-    <value>为所有 [XenServer] 连接绕过代理服务器(&amp;B)</value>
+    <value>为所有服务器连接绕过代理服务器(&amp;B)</value>
   </data>
   <data name="&gt;&gt;BypassForServersCheckbox.Name" xml:space="preserve">
     <value>BypassForServersCheckbox</value>
@@ -1036,7 +1036,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>通过这些设置，可以配置代理服务器或自定义 [XenServer] 连接，以实现高延迟环境。</value>
+    <value>这些设置允许您配置代理服务器或为高延迟环境自定义您的服务器连接。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

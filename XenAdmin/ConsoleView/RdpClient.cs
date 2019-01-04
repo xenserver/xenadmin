@@ -312,7 +312,7 @@ namespace XenAdmin.ConsoleView
 
         void rdpClient_Leave(object sender, EventArgs e)
         {
-            Program.MainWindow.MenuShortcuts = true;
+            Program.MainWindow.MenuShortcutsEnabled = true;
             InterceptKeys.releaseKeys();
             pressedScans = new Set<int>();
         }
@@ -342,7 +342,7 @@ namespace XenAdmin.ConsoleView
 
         public void Activate()
         {
-            Program.MainWindow.MenuShortcuts = false;
+            Program.MainWindow.MenuShortcutsEnabled = false;
             if (rdpControl != null)
             {
                 if (!rdpControl.Focused)

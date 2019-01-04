@@ -237,6 +237,15 @@ namespace XenAdmin.Controls
             DataGridView.InvalidateCell(this);
         }
 
+        protected override void OnMouseMove(DataGridViewCellMouseEventArgs e)
+        {
+            if (active || e.Button != MouseButtons.None)
+                return;
+
+            active = true;
+            DataGridView.InvalidateCell(this);
+        }
+
         protected override void OnMouseDown(DataGridViewCellMouseEventArgs e)
         {
             var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];

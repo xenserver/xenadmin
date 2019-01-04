@@ -293,7 +293,7 @@ Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of [Cit
     <value>5</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>[Citrix]、[Citrix] [XenServer]、Xen、Xen 徽标、[XenCenter]、XenMotion 是 [Citrix] Systems, Inc. 在美国及其他国家/地区的商标和/或注册商标。</value>
+    <value>[Citrix]、[Citrix XenServer]、[Legacy XenServer product]、Xen 和 Xen 徽标、[XenCenter]、XenMotion 是 [Citrix] Systems, Inc. 在美国及其他国家/地区的商标和/或注册商标。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -443,7 +443,7 @@ Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of [Cit
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="textBox1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="button1" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,20,AutoSize,0,AutoSize,50,Percent,100,AutoSize,20" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="textBox1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="button1" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

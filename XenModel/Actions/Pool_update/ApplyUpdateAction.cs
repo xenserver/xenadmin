@@ -69,7 +69,8 @@ namespace XenAdmin.Actions
 
             if (!poolUpdate.AppliedOn(host))
             {
-                Pool_update.apply(Session, poolUpdate.opaque_ref, host.opaque_ref);
+                RelatedTask = Pool_update.async_apply(Session, poolUpdate.opaque_ref, host.opaque_ref);
+                PollToCompletion();
                 Description = string.Format(Messages.PATCH_APPLIED, update.Name(), host.Name());
             }
             else

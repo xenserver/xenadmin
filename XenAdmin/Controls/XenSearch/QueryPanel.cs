@@ -500,7 +500,7 @@ namespace XenAdmin.Controls.XenSearch
             }
         }
 
-        private void listUpdateManager_Update(object sender, EventArgs e)
+        private void listUpdateManager_Update()
         {
             GridRow root = new GridRow(-1);
             RowGroupAcceptor acceptor = new RowGroupAcceptor(root);
@@ -663,7 +663,7 @@ namespace XenAdmin.Controls.XenSearch
                                     {
                                         if (Program.MainWindow.SelectObject(ixmo)
                                             && Program.MainWindow.TheTabControl.TabPages.Contains(Program.MainWindow.TabPageGeneral))
-                                            Program.MainWindow.SwitchToTab(MainWindow.Tab.Settings);
+                                            Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
                                     };
                             GridImageItem _statusItem = new GridImageItem(
                                 "foo",

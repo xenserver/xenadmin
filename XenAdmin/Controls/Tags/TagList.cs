@@ -77,12 +77,14 @@ namespace XenAdmin.Controls
 
         private void linkDialogLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewTagDialog dialog = new NewTagDialog(_tags);
-            if (dialog.ShowDialog() == DialogResult.OK)
+            using (NewTagDialog dialog = new NewTagDialog(_tags))
             {
-                _tags = dialog.GetSelectedTags();
-                UpdateList();
-                DrawSelf(null, new Rectangle(0, 0, _panel.Width, _panel.Height), false);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _tags = dialog.GetSelectedTags();
+                    UpdateList();
+                    DrawSelf(null, new Rectangle(0, 0, _panel.Width, _panel.Height), false);
+                }
             }
         }
 

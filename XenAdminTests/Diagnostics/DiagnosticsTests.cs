@@ -67,7 +67,7 @@ namespace XenAdminTests.Diagnostics
             var host = GetHostLiveness(fake, false, false, true);
 
             //Execute the check
-            var check = new HostMaintenanceModeCheck(host);
+            var check = new HostLivenessCheck(host, true);
             var problems = check.RunAllChecks();
             Assert.IsNotEmpty(problems);
             Assert.AreEqual(typeof(HostMaintenanceMode), problems[0].GetType());
@@ -81,7 +81,7 @@ namespace XenAdminTests.Diagnostics
             var host = GetHostLiveness(mock, true, true, true);
 
             //Execute the check
-            var check = new HostMaintenanceModeCheck(host);
+            var check = new HostLivenessCheck(host, true);
             var problems = check.RunAllChecks();
             Assert.IsNotEmpty(problems);
             Assert.AreEqual(typeof(HostMaintenanceMode), problems[0].GetType());

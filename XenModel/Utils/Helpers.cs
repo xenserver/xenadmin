@@ -674,62 +674,6 @@ namespace XenAdmin.Core
                 return string.Format("{0} - {1}", Util.DiskSizeStringWithoutUnits(min), Util.DiskSizeString(max));
         }
 
-        public static string StringFromMaxMinTime(long min, long max)
-        {
-            if (min == -1 && max == -1)
-                return Messages.TIME_NEGLIGIBLE;
-            else if (min == -1)
-                return Util.LThanTime(max);
-            else if (max == -1)
-                return Util.GThanTime(min);
-            else if (min == max)
-                return Util.TimeString(max);
-            else
-                return Util.TimeRangeString(min, max);
-        }
-
-        public static string StringFromMaxMinTimeList(List<long> minList, List<long> maxList)
-        {
-            bool lessFlag = false;
-            bool moreFlag = false;
-            bool negligFlag = false;
-
-            long minSum = 0;
-            long maxSum = 0;
-
-            for (int i = 0; i < minList.Count; i++)
-            {
-                if (minList[i] < 0 && maxList[i] < 0)
-                {
-                    negligFlag = true;
-                }
-                else if (minList[i] < 0)
-                {
-                    maxSum += maxList[i];
-                    lessFlag = true;
-                }
-                else if (maxList[i] < 0)
-                {
-                    minSum += minList[i];
-                    moreFlag = true;
-                }
-                else
-                {
-                    minSum += minList[i];
-                    maxSum += maxList[i];
-                }
-            }
-
-            if (moreFlag)
-                return Util.GThanTime(minSum);
-            if (lessFlag)
-                return Util.LThanTime(maxSum);
-            if (negligFlag && maxSum <= 0)
-                return Util.TimeString(maxSum);
-            return StringFromMaxMinTime(minSum, maxSum);
-
-        }
-
         public static string StringFromMaxMinSizeList(List<long> minList, List<long> maxList)
         {
             bool lessFlag = false;
@@ -918,6 +862,26 @@ namespace XenAdmin.Core
         public static string MakeHiddenName(string name)
         {
             return string.Format("{0}{1}", GuiTempObjectPrefix, name);
+        }
+
+        public static string GetFriendlyLicenseName(Pool pool)
+        {
+            var hosts = new List<Host>(pool.Connection.Cache.Hosts);
+
+            if (hosts.Count > 0)
+            {
+                var editions = Enum.GetValues(typeof(Host.Edition));
+                foreach (Host.Edition edition in editions)
+                {
+                    Host.Edition edition1 = edition;
+                    Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
+
+                    if (host != null)
+                        return GetFriendlyLicenseName(host);
+                }
+            }
+
+            return Messages.UNKNOWN;
         }
 
         public static string GetFriendlyLicenseName(Host host)
@@ -1363,30 +1327,6 @@ namespace XenAdmin.Core
             s = s.Split('\n')[0];
             return s.Split('\r')[0];
         }
-
-        /// <summary>
-        /// Returns empty string if mainline
-        /// </summary>
-        public static string OEMName(Host host)
-        {
-            if (host.software_version == null)
-                return string.Empty;
-
-            if (!host.software_version.ContainsKey("oem_manufacturer"))
-                return "";
-
-            return host.software_version["oem_manufacturer"].ToLowerInvariant();
-        }
-
-        public static string HostProductVersionWithOEM(Host host)
-        {
-            string oem = OEMName(host);
-            if (string.IsNullOrEmpty(oem))
-                return HostProductVersion(host);
-            else
-                return string.Format("{0}.{1}", HostProductVersion(host), OEMName(host));
-        }
-
 
         public static double StringToDouble(string str)
         {
@@ -2065,6 +2005,23 @@ namespace XenAdmin.Core
             result.Sort(StringUtility.NaturalCompare);
 
             return result;
+        }
+
+        public static List<string> FindIpAddresses(Dictionary<string, string> networks, string device)
+        {
+            if (networks == null || string.IsNullOrWhiteSpace(device))
+                return new List<string>();
+
+            // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
+            // [["0/ip", <IPv4 address>], 
+            //  ["0/ipv4/0", <IPv4 address>], ["0/ipv4/1", <IPv4 address>],
+            //  ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
+
+            return
+                (from network in networks
+                    where network.Key.StartsWith(string.Format("{0}/ip", device))
+                    orderby network.Key
+                    select network.Value.Split(new[] { "\n", "%n" }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
         }
     }
 }

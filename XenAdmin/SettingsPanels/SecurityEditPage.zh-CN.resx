@@ -238,7 +238,7 @@
     <value>4</value>
   </data>
   <data name="labelDisruption.Text" xml:space="preserve">
-    <value>更改此设置将导致您暂时失去对 [XenServer] 的访问权限</value>
+    <value>更改此设置将导致您暂时失去对服务器的访问权限</value>
   </data>
   <data name="labelDisruption.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

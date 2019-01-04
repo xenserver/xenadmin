@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
@@ -67,10 +66,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     public class CrossPoolMigrationStorageResource : IStorageResource
     {
         private readonly VDI vdi;
+        private readonly SR sr;
 
         public CrossPoolMigrationStorageResource(VDI vdi)
         {
             this.vdi = vdi;
+            sr = vdi.Connection.Cache.Resolve(vdi.SR);
         }
 
         public string DiskLabel
@@ -98,10 +99,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             get { return Convert.ToUInt64(vdi.physical_utilisation); }
         }
 
-		public XenRef<SR> SR
+		public SR SR
 		{
-			get { return vdi.SR; }
+			get { return sr; }
 		}
-	}
+    }
 }
 

@@ -32,21 +32,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using XenAdmin.Controls;
-using XenAdmin.Network;
-using XenAPI;
 using XenAdmin.Actions;
+using XenAdmin.Network;
 using XenAdmin.Commands;
+using XenAdmin.Controls;
+using XenAdmin.Core;
+using XenAPI;
 
 namespace XenAdmin.Dialogs
 {
     public partial class MoveVirtualDiskDialog : XenDialogBase
     {
-        private const int BATCH_SIZE = 3;
-        
-        private readonly List<VDI> _vdisToMove;
-        private readonly List<VDI> _vdisToMigrate;
+        protected const int BATCH_SIZE = 3;
+
+        protected readonly List<VDI> _vdis= new List<VDI>();
 
         /// <summary>
         /// Designer support only. Do not use.
@@ -56,50 +55,41 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
         }
 
-        public MoveVirtualDiskDialog(IXenConnection connection, List<VDI> vdisToMove, List<VDI> vdisToMigrate)
+        public MoveVirtualDiskDialog(IXenConnection connection, List<VDI> vdis)
             : base(connection)
         {
             InitializeComponent();
+            _vdis = vdis ?? new List<VDI>();
+        }
 
-            //set those so we don't have to bother with null checks further down
-            _vdisToMove = vdisToMove ?? new List<VDI>();
-            _vdisToMigrate = vdisToMigrate ?? new List<VDI>();
-
-            if (_vdisToMove.Count > 0)
-            {
-                srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-                srPicker1.SetExistingVDIs(_vdisToMove.ToArray());
-                srPicker1.DiskSize = _vdisToMove.Sum(d => d.physical_utilisation);
-            }
-            else if (_vdisToMigrate.Count > 0)
-            {
-                srPicker1.Usage = SrPicker.SRPickerType.Migrate;
-                srPicker1.SetExistingVDIs(_vdisToMigrate.ToArray());
-                srPicker1.DiskSize = _vdisToMigrate.Sum(d => d.physical_utilisation);
-            }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
             
-            srPicker1.SrHint.Visible = false;
+            srPicker1.Usage = SrPickerType;
+            srPicker1.SetExistingVDIs(_vdis.ToArray());
+            srPicker1.DiskSize = _vdis.Sum(d => d.physical_utilisation);
             srPicker1.Connection = connection;
-            srPicker1.srListBox.Invalidate();
+            srPicker1.Invalidate();
             srPicker1.selectDefaultSROrAny();
         }
 
-        private SR SelectedSR
+        protected SR SelectedSR
         {
             get { return srPicker1.SR; }
         }
-        
-        private void srPicker1_ItemSelectionNull()
+
+        protected virtual SrPicker.SRPickerType SrPickerType
+        {
+            get { return SrPicker.SRPickerType.MoveOrCopy; }
+        }
+
+        private void srPicker1_SrSelectionChanged(object obj)
         {
             updateButtons();
         }
 
-        private void srPicker1_ItemSelectionNotNull()
-        {
-            updateButtons();
-        }
-
-        void SRPicker_DoubleClickOnRow(object sender, EventArgs e)
+        private void srPicker1_DoubleClickOnRow(object sender, EventArgs e)
         {
             if (buttonMove.Enabled)
                 buttonMove.PerformClick();
@@ -121,32 +111,17 @@ namespace XenAdmin.Dialogs
             Close();
         }
 
-        private void CreateAndRunParallelActions()
+        protected virtual void CreateAndRunParallelActions()
         {
-            if (_vdisToMigrate.Count == 1)
+            if (_vdis.Count == 1)
             {
-                new MigrateVirtualDiskAction(connection, _vdisToMigrate[0], SelectedSR).RunAsync();
+                new MoveVirtualDiskAction(connection, _vdis[0], SelectedSR).RunAsync();
             }
-            else if (_vdisToMigrate.Count > 1)
+            else if (_vdis.Count > 1)
             {
-                string title = string.Format(Messages.ACTION_MIGRATING_X_VDIS, _vdisToMigrate.Count, SelectedSR.name_label);
+                string title = string.Format(Messages.ACTION_MOVING_X_VDIS, _vdis.Count, SelectedSR.name_label);
 
-                var batch = from VDI vdi in _vdisToMigrate
-                    select (AsyncAction)new MigrateVirtualDiskAction(connection, vdi, SelectedSR);
-
-                new ParallelAction(connection, title, Messages.ACTION_MIGRATING_X_VDIS_STARTED,
-                    Messages.ACTION_MIGRATING_X_VDIS_COMPLETED, batch.ToList(), BATCH_SIZE).RunAsync();
-            }
-
-            if (_vdisToMove.Count == 1)
-            {
-                new MoveVirtualDiskAction(connection, _vdisToMove[0], SelectedSR).RunAsync();
-            }
-            else if (_vdisToMove.Count > 1)
-            {
-                string title = string.Format(Messages.ACTION_MOVING_X_VDIS, _vdisToMove.Count, SelectedSR.name_label);
-
-                var batch = from VDI vdi in _vdisToMove
+                var batch = from VDI vdi in _vdis
                     select (AsyncAction)new MoveVirtualDiskAction(connection, vdi, SelectedSR);
 
                 new ParallelAction(connection, title, Messages.ACTION_MOVING_X_VDIS_STARTED,
@@ -159,14 +134,47 @@ namespace XenAdmin.Dialogs
             get { return "VDIMigrateDialog"; }
         }
 
-        internal static Command MoveMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+        internal static Command MoveMigrateCommand(IMainWindow mainWindow, SelectedItemCollection selection)
         {
             var cmd = new MigrateVirtualDiskCommand(mainWindow, selection);
+            var con = selection.GetConnectionOfFirstItem();
 
-            if (cmd.CanExecute())
+            if (cmd.CanExecute() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
                 return cmd;
 
             return new MoveVirtualDiskCommand(mainWindow, selection);
+        }
+    }
+
+
+    public class MigrateVirtualDiskDialog : MoveVirtualDiskDialog
+    {
+        public MigrateVirtualDiskDialog(IXenConnection connection, List<VDI> vdis)
+            : base(connection, vdis)
+        {
+        }
+
+        protected override SrPicker.SRPickerType SrPickerType
+        {
+            get { return SrPicker.SRPickerType.Migrate; }
+        }
+
+        protected override void CreateAndRunParallelActions()
+        {
+            if (_vdis.Count == 1)
+            {
+                new MigrateVirtualDiskAction(connection, _vdis[0], SelectedSR).RunAsync();
+            }
+            else if (_vdis.Count > 1)
+            {
+                string title = string.Format(Messages.ACTION_MIGRATING_X_VDIS, _vdis.Count, SelectedSR.name_label);
+
+                var batch = from VDI vdi in _vdis
+                    select (AsyncAction)new MigrateVirtualDiskAction(connection, vdi, SelectedSR);
+
+                new ParallelAction(connection, title, Messages.ACTION_MIGRATING_X_VDIS_STARTED,
+                    Messages.ACTION_MIGRATING_X_VDIS_COMPLETED, batch.ToList(), BATCH_SIZE).RunAsync();
+            }
         }
     }
 }

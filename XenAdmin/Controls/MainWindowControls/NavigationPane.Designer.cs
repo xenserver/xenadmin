@@ -72,11 +72,8 @@
             // 
             // navigationView
             // 
-            this.navigationView.CurrentSearch = null;
             resources.ApplyResources(this.navigationView, "navigationView");
-            this.navigationView.InSearchMode = false;
             this.navigationView.Name = "navigationView";
-            this.navigationView.NavigationMode = XenAdmin.Controls.MainWindowControls.NavigationPane.NavigationMode.Infrastructure;
             this.navigationView.TreeViewSelectionChanged += new System.Action(this.navigationView_TreeViewSelectionChanged);
             this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
             this.navigationView.TreeNodeClicked += new System.Action(this.navigationView_TreeNodeClicked);

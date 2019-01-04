@@ -31,17 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Network;
 using XenAdmin.Model;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using System.Drawing;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
-using System.Threading;
 using XenAdmin.Actions;
-using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -51,6 +46,8 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class NewFolderCommand : Command
     {
+        public event Action<string[]> FoldersCreated;
+
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -85,23 +82,35 @@ namespace XenAdmin.Commands
             // (although we will also sudo a Read Only command when the FolderAction is run).
             if (folder == null || folder.IsRootFolder || folder.Connection == null || CrossConnectionCommand.IsReadOnly(folder.Connection))
             {
-                NameAndConnectionPrompt dialog = new NameAndConnectionPrompt();
-                dialog.Text = Messages.NEW_FOLDER_DIALOG_TITLE;
-                dialog.OKText = Messages.CREATE_MNEMONIC_R;
-                dialog.HelpID = "NewFolderDialog";
-                if (dialog.ShowDialog(ownerWindow) != DialogResult.OK)
-                    return;
-                name = dialog.PromptedName;
-                connection = dialog.Connection;
+                using (var dialog = new NameAndConnectionPrompt
+                {
+                    Text = Messages.NEW_FOLDER_DIALOG_TITLE,
+                    OKText = Messages.CREATE_MNEMONIC_R,
+                    HelpID = "NewFolderDialog"
+                })
+                {
+                    if (dialog.ShowDialog(ownerWindow) != DialogResult.OK)
+                        return;
+                    name = dialog.PromptedName;
+                    connection = dialog.Connection;
+                }
             }
             else
             {
-                name = InputPromptDialog.Prompt(ownerWindow, Messages.NEW_FOLDER_NAME, Messages.NEW_FOLDER_DIALOG_TITLE, "NewFolderDialog");
+                using (var dialog = new InputPromptDialog {
+                    Text = Messages.NEW_FOLDER_DIALOG_TITLE,
+                    PromptText = Messages.NEW_FOLDER_NAME,
+                    OkButtonText = Messages.NEW_FOLDER_BUTTON,
+                    HelpID = "NewFolderDialog"
+                })
+                {
+                    if (dialog.ShowDialog(ownerWindow) != DialogResult.OK)
+                        return;
+                    name = dialog.InputText;
+                }
                 connection = folder.Connection;
             }
 
-            if (name == null)
-                return;  // Happens if InputPromptDialog was cancelled
 
             List<string> newPaths = new List<string>();
             foreach (string s in name.Split(';'))
@@ -118,22 +127,26 @@ namespace XenAdmin.Commands
             {
                 var action = new CreateFolderAction(connection, newPaths.ToArray());
 
-                Action<ActionBase> completed = null;
-                completed = delegate
-                {
-                    action.Completed -= completed;
-                    if (action.Succeeded)
-                    {
-                        Program.MainWindow.TrySelectNewNode(delegate(object o)
-                        {
-                            Folder ff = o as Folder;
-                            return ff != null && newPaths[0] == ff.opaque_ref;
-                        }, true, true, true);
-                    }
-                };
-
-                action.Completed += completed;
+                action.Completed += Action_Completed;
                 action.RunAsync();
+            }
+        }
+
+        private void Action_Completed(ActionBase sender)
+        {
+            sender.Completed -= Action_Completed;
+
+            var action = sender as CreateFolderAction;
+            if (action != null && action.Succeeded)
+            {
+                if (FoldersCreated != null)
+                    FoldersCreated(action.NewPaths);
+
+                Program.MainWindow.TrySelectNewNode(delegate(object o)
+                {
+                    Folder ff = o as Folder;
+                    return ff != null && action.NewPaths[0] == ff.opaque_ref;
+                }, true, true, true);
             }
         }
 

@@ -1495,7 +1495,7 @@ namespace XenAdmin.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap _000_WarningAlert_h32bit_32 {
             get {
-                object obj = ResourceManager.GetObject("000_WarningAlert_h32bit_32", resourceCulture);
+                object obj = ResourceManager.GetObject("_000_WarningAlert_h32bit_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

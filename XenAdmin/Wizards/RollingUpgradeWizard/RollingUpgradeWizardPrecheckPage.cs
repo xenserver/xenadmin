@@ -161,7 +161,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated
             var livenessChecks = new List<Check>();
             foreach (Host host in hostsToUpgradeOrUpdate)
-                livenessChecks.Add(new HostMaintenanceModeCheck(host, !hostsToUpgrade.Contains(host)));
+                livenessChecks.Add(new HostLivenessCheck(host, hostsToUpgrade.Contains(host)));
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
             //HA checks - for each pool

@@ -133,7 +133,7 @@
     <value>https://cis.citrix.com/legal/</value>
   </data>
   <data name="HOMEPAGE" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver</value>
+    <value>https://www.citrix.com/products/citrix-hypervisor</value>
   </data>
   <data name="HOMEPAGE_FILENAME" xml:space="preserve">
     <value>HomePage.mht</value>
@@ -160,7 +160,7 @@
     <value>Home.htm</value>
   </data>
   <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
-    <value>https://www.citrix.com/downloads/xenserver</value>
+    <value>https://www.citrix.com/downloads/citrix-hypervisor</value>
   </data>
   <data name="PARTNEROFFERS_URL" xml:space="preserve">
     <value>http://www.citrix.com/buy/partnerlocator.html</value>
@@ -193,7 +193,7 @@
     <value>iso</value>
   </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
-    <value>https://www.citrix.com/products/xenserver/get-started.html</value>
+    <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
   </data>
   <data name="HELP_URL" xml:space="preserve">
     <value>http://docs.citrix.com/{0}/xencenter/current-release/{1}.html?utm_campaign={2}&amp;utm_medium={3}&amp;utm_source={4}</value>

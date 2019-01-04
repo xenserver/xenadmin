@@ -365,7 +365,7 @@ namespace XenAdmin.TabPages
             }
 
             // Move button
-            Command moveCmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, selectedVDIs);
+            Command moveCmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, new SelectedItemCollection(selectedVDIs));
             if (moveCmd.CanExecute())
             {
                 MoveButton.Enabled = true;
@@ -404,11 +404,10 @@ namespace XenAdmin.TabPages
             List<VBDRow> rows = SelectedVBDRows;
             if (rows == null)
                 return;
-            List<SelectedItem> l = new List<SelectedItem>();
-            foreach (VBDRow r in rows)
-                l.Add(new SelectedItem(r.VDI));
 
-            Command cmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, l);
+            var vdis = (from VBDRow r in rows select new SelectedItem(r.VDI)).ToList();
+
+            var cmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, new SelectedItemCollection(vdis));
             if (cmd.CanExecute())
                 cmd.Execute();
         }

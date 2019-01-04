@@ -290,7 +290,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the pending_forget field of the given Cluster.
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -746,7 +746,7 @@ namespace XenAPI
 
         /// <summary>
         /// Internal field used by Host.destroy to store the IP of cluster members marked as permanently dead but not yet removed
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in XenServer 7.6.
         /// </summary>
         public virtual string[] pending_forget
         {

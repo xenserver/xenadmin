@@ -31,17 +31,10 @@
 
 using System;
 using System.Linq;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+using XenAdmin.Actions.VMActions;
 using XenAdmin.Controls;
 using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Actions;
-using XenAdmin.Actions.VMActions;
+
 
 namespace XenAdmin.Dialogs.VMDialogs
 {
@@ -53,10 +46,7 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             InitializeComponent();
             this.vm = vm;
-            srPicker1.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
-            srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
             srPicker1.DoubleClickOnRow += srPicker1_DoubleClickOnRow;
-            srPicker1.SrHint.Visible = false;
             Host affinity = vm.Home();
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
             //this has to be set after ImportTemplate, otherwise the usage will be reset to VM
@@ -69,7 +59,7 @@ namespace XenAdmin.Dialogs.VMDialogs
             srPicker1.Connection = vm.Connection;
             srPicker1.DiskSize = vm.TotalVMSize();
             srPicker1.SetAffinity(affinity);
-            srPicker1.srListBox.Invalidate();
+            srPicker1.Invalidate();
             srPicker1.selectDefaultSROrAny();
 
             EnableMoveButton();
@@ -93,12 +83,7 @@ namespace XenAdmin.Dialogs.VMDialogs
             buttonMove.Enabled = srPicker1.SR != null;
         }
 
-        private void srPicker1_ItemSelectionNull()
-        {
-            EnableMoveButton();
-        }
-
-        private void srPicker1_ItemSelectionNotNull()
+        private void srPicker1_SrSelectionChanged(object obj)
         {
             EnableMoveButton();
         }

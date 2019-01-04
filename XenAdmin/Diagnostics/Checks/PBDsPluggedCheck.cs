@@ -29,10 +29,12 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Diagnostics.Problems.HostProblem;
-using XenAPI;
+using System;
+using System.Collections.Generic;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Diagnostics.Problems.SRProblem;
+using XenAPI;
 
 
 namespace XenAdmin.Diagnostics.Checks
@@ -46,8 +48,13 @@ namespace XenAdmin.Diagnostics.Checks
             srUploadedUpdates = sr;
         }
 
-        protected override Problem RunHostCheck()
+        public override List<Problem> RunAllChecks()
         {
+            if (!Host.IsLive())
+                return new List<Problem> {new HostNotLiveWarning(this, Host)};
+
+            var list = new List<Problem>();
+
             foreach (VM vm in Host.Connection.Cache.VMs)
             {
                 if (vm.power_state != vm_power_state.Running && vm.power_state != vm_power_state.Paused)
@@ -69,7 +76,11 @@ namespace XenAdmin.Diagnostics.Checks
 
                     if ((sr.shared && !sr.CanBeSeenFrom(Host)) ||
                         (!sr.shared && sr.GetStorageHost().Equals(Host) && !sr.CanBeSeenFrom(Host)))
-                        return new BrokenSR(this, sr, Host);
+                    {
+                        var problem = new BrokenSR(this, sr, Host);
+                        if (!list.Contains(problem))
+                            list.Add(problem);
+                    }
                 }
             }
 
@@ -77,10 +88,17 @@ namespace XenAdmin.Diagnostics.Checks
                 && ((srUploadedUpdates.shared && !srUploadedUpdates.CanBeSeenFrom(Host))
                     || (!srUploadedUpdates.shared && srUploadedUpdates.IsBroken())))
             {
-                return new BrokenSR(this, srUploadedUpdates, Host);
+                var problem = new BrokenSR(this, srUploadedUpdates, Host);
+                if (!list.Contains(problem))
+                    list.Add(problem);
             }
 
-            return null;
+            return list;
+        }
+
+        protected override Problem RunHostCheck()
+        {
+            throw new NotImplementedException("This class overrides RunAllChecks instead.");
         }
 
         public override string Description

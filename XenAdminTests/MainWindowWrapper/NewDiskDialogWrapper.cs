@@ -44,18 +44,12 @@ namespace XenAdminTests
 
         public Button OkButton
         {
-            get
-            {
-                return Item.OkButton;
-            }
+            get { return TestUtils.GetButton(Item, "OkButton"); }
         }
 
         public SrPicker SrListBox
         {
-            get
-            {
-                return Item.SrListBox;
-            }
+            get { return TestUtils.GetSrPicker(Item, "SrListBox"); }
         }
     }
 }

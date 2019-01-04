@@ -85,7 +85,7 @@ namespace XenAdmin.Network
                     {
                         return true;
                     }
-                    else if (!XenAdmin.Properties.Settings.Default.WarnChangedCertificate && Registry.AlwaysShowSSLCertificates == SSLCertificateTypes.None)
+                    else if (!Properties.Settings.Default.WarnChangedCertificate && Registry.AlwaysShowSSLCertificates == SSLCertificateTypes.None)
                     {
                         Settings.ReplaceCertificate(kvp.Key, certificate);
                         log.Debug("Updating cert silently");
@@ -93,12 +93,12 @@ namespace XenAdmin.Network
                     }
                     else
                     {
-                        Program.Invoke(Program.MainWindow, delegate
+                        Program.Invoke(Program.MainWindow, () =>
                         {
-                            CertificateChangedDialog dialog = new CertificateChangedDialog(certificate, webreq.Address.Host);
-                            AcceptCertificate = dialog.ShowDialog(Program.MainWindow) == DialogResult.OK;
-
+                            using (var dialog = new CertificateChangedDialog(certificate, webreq.Address.Host))
+                                AcceptCertificate = dialog.ShowDialog(Program.MainWindow) == DialogResult.OK;
                         });
+
                         if (AcceptCertificate)
                             log.Debug("Updating cert after confirmation");
                         else
@@ -107,7 +107,7 @@ namespace XenAdmin.Network
                     }
                 }
 
-                if (!XenAdmin.Properties.Settings.Default.WarnUnrecognizedCertificate && Registry.AlwaysShowSSLCertificates != SSLCertificateTypes.All)
+                if (!Properties.Settings.Default.WarnUnrecognizedCertificate && Registry.AlwaysShowSSLCertificates != SSLCertificateTypes.All)
                 {
                     // user has chosen to ignore new certificates
                     Settings.AddCertificate(certificate, webreq.Address.Host);
@@ -115,12 +115,12 @@ namespace XenAdmin.Network
                     return true;
                 }
 
-                Program.Invoke(Program.MainWindow, delegate
+                Program.Invoke(Program.MainWindow, () =>
                 {
-                    UnknownCertificateDialog dialog = new UnknownCertificateDialog(certificate, webreq.Address.Host);
-                    AcceptCertificate = dialog.ShowDialog(Program.MainWindow) == DialogResult.OK;
-
+                    using (var dialog = new UnknownCertificateDialog(certificate, webreq.Address.Host))
+                        AcceptCertificate = dialog.ShowDialog(Program.MainWindow) == DialogResult.OK;
                 });
+
                 if (AcceptCertificate)
                     log.Debug("Adding cert after confirmation");
                 else

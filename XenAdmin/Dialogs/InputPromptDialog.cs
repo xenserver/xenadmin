@@ -30,92 +30,54 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace XenAdmin.Dialogs
 {
     public partial class InputPromptDialog : XenDialogBase
     {
-        // Do not use this constructor: use InputPromptDialog.Prompt(..) instead
         public InputPromptDialog()
         {
             InitializeComponent();
-            textBox1_TextChanged(null, null);
+            EnableButtons();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="message"></param>
-        /// <param name="title"></param>
-        /// <param name="helpID"></param>
-        /// <returns>null if the user cancelled, otherwise the string they gave.</returns>
-        public static String Prompt(IWin32Window owner, String message, String title, String helpID)
+        public string OkButtonText
         {
-            return Prompt(owner, message, title, "", helpID);
+            set { button1.Text = value; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="message"></param>
-        /// <param name="title"></param>
-        /// <param name="defaultInput"></param>
-        /// <param name="helpID"></param>
-        /// <returns>null if the user cancelled, otherwise the string they gave.</returns>
-        public static String Prompt(IWin32Window owner, String message, String title, String defaultInput, String helpID)
+        public string PromptText
         {
-            InputPromptDialog messageBox = new InputPromptDialog();
-
-            messageBox.Text = title;
-            messageBox.promptLabel.Text = message;
-            messageBox.textBox1.Text = defaultInput;
-            messageBox.HelpID = helpID;
-
-            if (messageBox.ShowDialog(owner) == DialogResult.Cancel)
-                return null;
-
-            return messageBox.textBox1.Text;
+            set { promptLabel.Text = value; }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public string InputText
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            get { return textBox1.Text.Trim();}
+            set { textBox1.Text = value; }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private string helpID;
+        public string HelpID
         {
-            DialogResult = DialogResult.OK;
-            Close();
+            set { helpID = value; }
         }
+
+        internal override string HelpName
+        {
+            get { return helpID ?? base.HelpName; }
+        }
+
+
+        private void EnableButtons()
+        {
+            button1.Enabled = !string.IsNullOrEmpty(InputText);
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            button1.Enabled = !String.IsNullOrEmpty(textBox1.Text.Trim());
-        }
-
-        private string helpID = null;
-        public string HelpID
-        {
-            set
-            {
-                helpID = value;
-            }
-        }
-        internal override string HelpName
-        {
-            get
-            {
-                return helpID ?? base.HelpName;
-            }
+            EnableButtons();
         }
     }
 }

@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
             }
             else
             {
-                new MoveVirtualDiskDialog(selection.FirstAsXenObject.Connection, null, vdis).Show(Program.MainWindow);
+                new MigrateVirtualDiskDialog(selection.FirstAsXenObject.Connection, vdis).Show(Program.MainWindow);
             }
         }
 

@@ -39,6 +39,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Actions;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 
 
 namespace XenAdmin.Commands
@@ -88,11 +89,20 @@ namespace XenAdmin.Commands
                 {
                     dlg.ShowDialog(Parent);
                 }
+
+                return;
             }
-            else
+
+            if (!host.GetRunningVMs().Any() && (pool == null || !host.IsMaster()))
             {
-                MainWindowCommandInterface.ShowPerXenModelObjectWizard(host, new EvacuateHostDialog(host));
+                Program.MainWindow.CloseActiveWizards(host.Connection);
+                var action = new EvacuateHostAction(host, null, new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
+                action.Completed += Program.MainWindow.action_Completed;
+                action.RunAsync();
+                return;
             }
+            
+            MainWindowCommandInterface.ShowPerXenModelObjectWizard(host, new EvacuateHostDialog(host));
         }
 
         private void ExitMaintenanceMode(Host host)
@@ -131,9 +141,8 @@ namespace XenAdmin.Commands
 
             MainWindowCommandInterface.CloseActiveWizards(host.Connection);
             var action = new EnableHostAction(host, result == DialogResult.Yes,AddHostToPoolCommand.EnableNtolDialog);
-            action.Completed += delegate { MainWindowCommandInterface.RequestRefreshTreeView(); };
+            action.Completed += Program.MainWindow.action_Completed;
             action.RunAsync();
-            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

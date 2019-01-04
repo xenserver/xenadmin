@@ -104,13 +104,28 @@ namespace XenAdmin.Actions
 
             RecomputeCanCancel();
 
-            // Upload the zip file to CIS uploading server.
+            // Upload the zip file to CIS uploading server and return the uuid of upload
             var uploadUrl = string.Format("{0}{1}", UPLOAD_DOMAIN_NAME, UPLOAD_URL);
-            XenServerHealthCheckUpload upload = new XenServerHealthCheckUpload(uploadToken, 9, uploadUrl, null);
-            string uploadUuid = upload.UploadZip(bundleToUpload, caseNumber, cts.Token);
+            using (var upload = new XenServerHealthCheckUpload(uploadToken, 9, uploadUrl, null))
+            {
+                upload.ProgressChanged += upload_ProgressChanged;
+                try
+                {
+                    return upload.UploadZip(bundleToUpload, caseNumber, cts.Token);
+                }
+                finally
+                {
+                    upload.ProgressChanged -= upload_ProgressChanged;
+                }
+            }
+        }
 
-            // Return the uuid of upload.
-            return uploadUuid;
+        private void upload_ProgressChanged(long bytesUploaded, long totalBytes)
+        {
+            var percentageUploaded = (int)(100.0 * bytesUploaded / totalBytes);
+            var msg = string.Format(Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE,
+                Util.DiskSizeString(bytesUploaded), Util.DiskSizeString(totalBytes));
+            Tick(percentageUploaded, msg);
         }
 
         public override void RecomputeCanCancel()

@@ -129,6 +129,9 @@
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>更改“{0}”上的控制域内存设置</value>
   </data>
+  <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY_VALUE_TOO_LOW" xml:space="preserve">
+    <value>指定的内存({0})太低。必须至少为静态最小值({1})</value>
+  </data>
   <data name="ACTION_CHANGE_DISK_SIZE" xml:space="preserve">
     <value>更改磁盘大小</value>
   </data>
@@ -771,11 +774,11 @@
   <data name="ACTION_SCANNING_SR_FROM" xml:space="preserve">
     <value>正在从“{0}”执行 SR 扫描</value>
   </data>
-  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
-    <value>正在重命名服务器网络接口</value>
-  </data>
   <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_DONE" xml:space="preserve">
     <value>已重命名服务器网络接口</value>
+  </data>
+  <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
+    <value>正在重命名服务器网络接口</value>
   </data>
   <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
     <value>正在保存 VM 配置</value>
@@ -1007,6 +1010,9 @@
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>上载状态报告失败。</value>
+  </data>
+  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
+    <value>正在将报告上载到 [Citrix] Insight Services) (第 {0} 个，共 {1} 个)</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>正在将报告上载到 [Citrix] Insight Services</value>
@@ -2464,9 +2470,6 @@
   <data name="CANNOT_MOVE_VDI_IS_SNAPSHOT" xml:space="preserve">
     <value>无法移动快照磁盘</value>
   </data>
-  <data name="CANNOT_MOVE_VDI_WITH_VBDS" xml:space="preserve">
-    <value>必须先分离此虚拟磁盘才能进行移动。</value>
-  </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>无法解析 XML 节点“{0}”上的必需参数“{1}”</value>
   </data>
@@ -3084,16 +3087,16 @@
     <value>连接被拒绝。</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
-    <value>连接被拒绝</value>
+    <value>已拒绝连接到 {0}</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>与服务器 {0} 的连接受到限制，因为已经与另一个 XE 速成版服务器({1})建立连接</value>
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>与服务器 {0} 的连接受到限制 - 已经与 [Citrix] [XenServer product] Express Edition 服务器({1})建立连接。
+    <value>与服务器 {0} 的连接受到限制 - 已与 [Citrix XenServer] Express Edition 服务器({1})建立连接。
 
-一次只能连接到一个 [Citrix] [XenServer product] Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
+一次只能连接到一个 [Citrix XenServer] Express Edition 服务器。要了解许可证的升级方法，请单击下面的链接。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>由于许可证限制，无法连接 {0}</value>
@@ -3107,9 +3110,6 @@
   </data>
   <data name="CONNECTION_WILL_RETRY_SLAVE" xml:space="preserve">
     <value>连接 {0}: 将尝试在 {1} 秒后连接其他池成员</value>
-  </data>
-  <data name="CONNECT_NO_XAPI_FAILURE" xml:space="preserve">
-    <value>找不到在 {0} 上运行的 [XenServer]。</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
     <value>找不到 {0}。</value>
@@ -3197,9 +3197,6 @@
   </data>
   <data name="CONTROL_DOMAIN_MEMORY_DIALOG_TITLE" xml:space="preserve">
     <value>控制域内存设置 - {0}</value>
-  </data>
-  <data name="CONTROL_DOMAIN_MEMORY_LABEL" xml:space="preserve">
-    <value>控制域内存(&amp;C):</value>
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>主机 {0} 上的控制域</value>
@@ -3777,7 +3774,7 @@
     <value>默认值</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
-    <value>默认安装 [XenServer]</value>
+    <value>默认安装 {0}</value>
   </data>
   <data name="DEFAULT_SEARCH" xml:space="preserve">
     <value>默认搜索</value>
@@ -4079,9 +4076,6 @@
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>已在 {0} 上禁用群集。</value>
   </data>
-  <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
-    <value>找不到任何更新，因为已禁用自动检查更新。</value>
-  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>已禁用快照计划“{0}”。</value>
   </data>
@@ -4093,9 +4087,6 @@
   </data>
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>如果要配置管理接口，请禁用高可用性</value>
-  </data>
-  <data name="DISABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>禁用高可用性(&amp;D)...</value>
   </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>禁用</value>
@@ -4207,6 +4198,9 @@
   </data>
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>显示选项</value>
+  </data>
+  <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
+    <value>由于服务器上存在许可证限制，因此，动态内存控制(DMC)不可用。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>无法设置内存范围，因为未在此 VM 上安装 [Citrix VM Tools]。</value>
@@ -4783,12 +4777,6 @@
   <data name="DYNAMIC_MAX" xml:space="preserve">
     <value>最大内存</value>
   </data>
-  <data name="DYNAMIC_MAX_AMP" xml:space="preserve">
-    <value>最大内存(&amp;X)</value>
-  </data>
-  <data name="DYNAMIC_MAX_COLON" xml:space="preserve">
-    <value>最大内存(&amp;X):</value>
-  </data>
   <data name="DYNAMIC_MEMORY_CONTROL" xml:space="preserve">
     <value>内存</value>
   </data>
@@ -4800,9 +4788,6 @@
   </data>
   <data name="DYNAMIC_MIN" xml:space="preserve">
     <value>最小内存</value>
-  </data>
-  <data name="DYNAMIC_MIN_AMP" xml:space="preserve">
-    <value>最小内存(&amp;M)</value>
   </data>
   <data name="DYNAMIC_MIN_COLON" xml:space="preserve">
     <value>最小内存(&amp;M):</value>
@@ -4872,9 +4857,6 @@
   <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>启用群集。</value>
   </data>
-  <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
-    <value>启用高可用性(&amp;E)...</value>
-  </data>
   <data name="ENABLE_PLAIN" xml:space="preserve">
     <value>启用</value>
   </data>
@@ -4925,9 +4907,6 @@
   </data>
   <data name="ENDS_WITH" xml:space="preserve">
     <value>结尾</value>
-  </data>
-  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer] Enterprise Per-Socket (需要 {0})(&amp;E)</value>
   </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>进入维护模式(&amp;M)...</value>
@@ -5101,7 +5080,7 @@
     <value>未找到文件 {0}</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
-    <value>[XenServer] 仍在启动。</value>
+    <value>服务器仍在启动中。</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>网关无效。</value>
@@ -5122,7 +5101,7 @@
     <value>您无权访问该服务器。</value>
   </data>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
-    <value>在“{0}”上找不到 [XenServer]。</value>
+    <value>在“{0}”上找不到服务器。</value>
   </data>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>准备主机时出错</value>
@@ -5206,9 +5185,9 @@
     <value>用户已取消。需要先升级主服务器。</value>
   </data>
   <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
-    <value>在所选 LUN 上找到现有 {0} SR。请单击“重新连接”以使用现有 SR，或者单击“格式化”以销毁磁盘上的所有数据并创建一个新 {1} SR。
+    <value>在所选 LUN 上找到现有 {0} SR。请单击“重新连接”以使用现有 SR，或者单击“格式化”以销毁磁盘上现有的任何数据并创建一个新 {1} SR。
 
-警告: 为避免数据丢失，必须确保该 LUN 未在由其他任何系统(包括未连接到 [XenCenter] 的 [XenServer] 主机)使用。</value>
+警告: 为避免数据丢失，必须确保该 LUN 未由其他任何系统(包括未连接到 [XenCenter] 的服务器)使用。</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>退出维护模式(&amp;M)</value>
@@ -5282,6 +5261,9 @@
   </data>
   <data name="EXPORT_AS_BACKUP" xml:space="preserve">
     <value>导出到文件...</value>
+  </data>
+  <data name="EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF" xml:space="preserve">
+    <value>无法将磁盘大于 {0} 的 VM 导出为 OVF/OVA 包。</value>
   </data>
   <data name="EXPORT_EULA_PAGE_FILETYPES" xml:space="preserve">
     <value>标准文本文件(*.txt)|*.txt|RTF 文件(*.rtf)|*.rtf</value>
@@ -5658,6 +5640,9 @@
   <data name="GENERAL_HEADING_VERSION_DETAILS" xml:space="preserve">
     <value>版本详细信息</value>
   </data>
+  <data name="GENERAL_LICENSE_QUERYING" xml:space="preserve">
+    <value>正在查询许可证状态...</value>
+  </data>
   <data name="GENERAL_MEMORY" xml:space="preserve">
     <value>内存:</value>
   </data>
@@ -5850,10 +5835,7 @@
     <value>组角色</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>此版本的 [XenCenter] 已过时，无法连接到 {0}。</value>
-  </data>
-  <data name="GUI_OUT_OF_DATE_MORE" xml:space="preserve">
-    <value>
+    <value>此版本的 [XenCenter] 已过时，无法连接到 {0}。
 
 可以从以下位置获取兼容的 [XenCenter] 版本:</value>
   </data>
@@ -7047,6 +7029,54 @@ SCSI ID: {2}
   <data name="LICENSE_ACTIVATED" xml:space="preserve">
     <value>已激活</value>
   </data>
+  <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops(&amp;A)</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_CLOUD" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud(&amp;C)</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_CLOUD_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop [Citrix] Cloud(&amp;C)</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop(&amp;D)</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_PLUS" xml:space="preserve">
+    <value>[Citrix] Virtual Apps and Desktops Premium(&amp;P)</value>
+  </data>
+  <data name="LICENSE_EDITION_DESKTOP_PLUS_LEGACY" xml:space="preserve">
+    <value>XenApp/XenDesktop Platinum(&amp;P)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] Premium Per-Socket (需要 {0})(&amp;R)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] Enterprise Per-Socket (需要 {0})(&amp;N)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
+    <value>[XenServer product] Premium Per-User(&amp;E)</value>
+  </data>
+  <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] Enterprise Per-User(&amp;E)</value>
+  </data>
+  <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] Per-Socket (需要 {0})(&amp;S)</value>
+  </data>
+  <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] Per-Socket (需要 {0})(&amp;S)</value>
+  </data>
+  <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
+    <value>[XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
+  </data>
+  <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
+  </data>
+  <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
+    <value>[XenServer product] for [Citrix] Virtual Desktops(&amp;D)</value>
+  </data>
+  <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product] for XenDesktop(&amp;X)</value>
+  </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>{0} 的许可操作失败。</value>
   </data>
@@ -7118,13 +7148,13 @@ SCSI ID: {2}
     <value>从不</value>
   </data>
   <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
-    <value>不符合支持条件</value>
+    <value>没有资格获得支持</value>
   </data>
   <data name="LICENSE_NO_HA" xml:space="preserve">
     <value>高可用性处于启用状态时无法更改主机的许可证</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>激活免费 [XenServer] 时，必须一次选择一个服务器。</value>
+    <value>激活 [XenServer] Express 时，必须一次选择一个服务器。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
     <value>向版本低于 [BRANDING_VERSION_5_6] 的服务器授权时，必须一次选择一个服务器。</value>
@@ -7157,31 +7187,31 @@ SCSI ID: {2}
     <value>状态</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-已启用 XenApp/XenDesktop [Citrix] Cloud 功能</value>
+    <value>有资格获得支持 
+[Citrix] Virtual Apps and Desktops [Citrix] Cloud 功能已启用</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
-    <value>满足支持条件 
-XenApp/XenDesktop 功能已启用</value>
+    <value>有资格获得支持 
+[Citrix] Virtual Apps and Desktops 功能已启用</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
-    <value>满足支持条件 
-XenApp/XenDesktop Platinum 功能已启用</value>
+    <value>有资格获得支持 
+[Citrix] Virtual Apps and Desktops Premium 功能已启用</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Enterprise 功能</value>
+    <value>有资格获得支持 
+Premium 功能已启用</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-已启用高级功能</value>
+    <value>有资格获得支持 
+Premium 功能已启用</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
+    <value>有资格获得支持 
 仅限 Standard 功能</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>激活密钥一次只能应用到一款免费 [XenServer] 产品。</value>
+    <value>激活密钥一次只能应用到一款 [XenServer] Express 产品。</value>
   </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>未获许可</value>
@@ -7208,10 +7238,10 @@ XenApp/XenDesktop Platinum 功能已启用</value>
     <value>您的许可证已过期</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>一个或多个托管服务器已过期。请分配 [XenServer] 许可证，或激活免费 [XenServer] 产品。</value>
+    <value>一个或多个托管服务器已过期。请分配 [XenServer] 许可证，或激活 [XenServer] Express 产品。</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>一个或多个托管服务器即将到期。请分配 [XenServer] 许可证，或激活免费 [XenServer] 产品。</value>
+    <value>一个或多个托管服务器即将到期。请分配 [XenServer] 许可证，或激活 [XenServer] Express 产品。</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>链接状态</value>
@@ -7483,7 +7513,7 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>安装 [Citrix VM Tools](&amp;X)...</value>
+    <value>安装 [Citrix VM Tools](&amp;A)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>快速创建(&amp;Q)</value>
@@ -7676,9 +7706,6 @@ SCSI ID: {2}
   </data>
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} 上的 {0} (管理)</value>
-  </data>
-  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
-    <value>不需要更新。</value>
   </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>某些主机需要专享升级服务</value>
@@ -7938,6 +7965,20 @@ SCSI ID: {2}
   </data>
   <data name="MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE" xml:space="preserve">
     <value>无法保存会话</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEP" xml:space="preserve">
+    <value>通过按“是”，将跳过以下步骤:
+
+{0}
+
+是否要继续?</value>
+  </data>
+  <data name="MESSAGEBOX_SKIP_RPU_STEPS" xml:space="preserve">
+    <value>通过按“是”，将跳过以下步骤:
+
+{0}
+
+是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
     <value>必须先从池中弹出所有从属设备，然后才能删除池。</value>
@@ -8640,6 +8681,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS" xml:space="preserve">
     <value>最大 vCPU 数量</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYINFO" xml:space="preserve">
+    <value>(最小值 = {0}，最大值 = {1})</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
     <value>分配给新 VM 的内存量超过池中任何服务器上的物理内存量。
 
@@ -8856,10 +8900,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>分配虚拟 GPU</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>仅许可此池使用 XenApp/XenDesktop 工作负载</value>
+    <value>仅许可此池使用 [Citrix] Virtual Apps and Desktops 工作负载</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>仅许可此服务器使用 XenApp/XenDesktop 工作负载</value>
+    <value>仅许可此服务器使用 [Citrix] Virtual Apps and Desktops 工作负载</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -8878,9 +8922,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVNET_TITLE" xml:space="preserve">
     <value>新建虚拟网络接口 - {0}</value>
-  </data>
-  <data name="NEW_DISK_DIALOG_SR_HINT_TEXT" xml:space="preserve">
-    <value>选择要创建磁盘的存储库</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>在要安装 [Citrix VM Tools] 的 VM 中，至少有一个 VM 没有 DVD 驱动器。是否要为需要 DVD 驱动器的每个 VM 创建新 DVD 驱动器?</value>
@@ -8909,6 +8950,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新建文件夹(&amp;N)...</value>
+  </data>
+  <data name="NEW_FOLDER_BUTTON" xml:space="preserve">
+    <value>创建(&amp;C)</value>
   </data>
   <data name="NEW_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>新建文件夹</value>
@@ -9256,7 +9300,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>没有可消除的系统警报。</value>
   </data>
   <data name="NO_MORE_USERDEVICES" xml:space="preserve">
-    <value>[XenServer] 无法为此 VM 创建更多磁盘</value>
+    <value>服务器无法为此 VM 创建更多磁盘</value>
   </data>
   <data name="NO_NAME" xml:space="preserve">
     <value>(无名称)</value>
@@ -9268,7 +9312,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>此时没有需要激活的服务器。</value>
   </data>
   <data name="NO_SESSION_INFO" xml:space="preserve">
-    <value>没有可用的 [XenServer] 会话信息，无法继续。</value>
+    <value>没有可用的服务器会话信息，无法继续。</value>
   </data>
   <data name="NO_SNAPSHOTS" xml:space="preserve">
     <value>该 VM 没有任何快照。</value>
@@ -9719,20 +9763,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
     <value>从 {1} 下载 {0} 失败</value>
   </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>从 {1} 下载更新 {0} 失败。
-
-该更新安装在“{1}”上，但更新安装文件可能已被删除。
-
-请改为从 .{2} 文件上载更新。</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>从 {1} 下载更新 {0} 失败。
-
-该更新以前已上载到“{1}”，但更新安装文件可能已被删除。
-
-请改为从 .{2} 文件上载更新。</value>
-  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 修改日期: {1}
@@ -9781,9 +9811,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>权限遭拒</value>
-  </data>
-  <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理设备</value>
@@ -10103,7 +10130,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>尝试连接到 StorageLink Gateway 时出错: \n\n{0}\n\n请检查此主机的设置并重新连接。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>[XenServer] 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
+    <value>StorageLink SR 的使用已被弃用。请在升级之前删除 StorageLink SR。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -10191,10 +10218,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>未安装 [Citrix VM Tools]</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>[Citrix VM Tools] 已过时(安装的版本为 {0})</value>
+    <value>[Citrix VM Tools] 已过期(已安装版本 {0})</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>[Citrix VM Tools] 已过时</value>
+    <value>[Citrix VM Tools] 已过期</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS 限制必须介于 1 和 2147483647 之间(或者留空)。</value>
@@ -10509,6 +10536,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="RENAME_FOLDER" xml:space="preserve">
     <value>重命名文件夹(&amp;R)...</value>
   </data>
+  <data name="RENAME_FOLDER_TITLE" xml:space="preserve">
+    <value>重命名文件夹</value>
+  </data>
   <data name="RENAME_TAG" xml:space="preserve">
     <value>重命名标记“{0}”</value>
   </data>
@@ -10657,10 +10687,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>不再连接到 {0}。请核对您所做的选择并重试。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
-    <value>一个或多个滚动池升级过程未成功完成。升级过程已暂停。请按“重试”继续。</value>
+    <value>一个或多个滚动池升级过程未成功完成。升级过程已暂停。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
-    <value>滚动池升级过程未成功完成。升级过程已暂停。请按“重试”继续。</value>
+    <value>滚动池升级过程未成功完成。升级过程已暂停。</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
     <value>滚动池升级过程中发生以下错误:</value>
@@ -10721,6 +10751,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>滚动池升级未完成。</value>
+  </data>
+  <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
+    <value>可能已跳过 {0}。</value>
+  </data>
+  <data name="RPU_WIZARD_INSTALL_SUPPPACK_TITLE" xml:space="preserve">
+    <value>正在“{1}”上安装更新“{0}”</value>
+  </data>
+  <data name="RPU_WIZARD_SKIP_INSTALL_SUPPPACK" xml:space="preserve">
+    <value>正在“{1}”上跳过安装更新“{0}”...</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
@@ -11180,13 +11219,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>要对计划快照使用哪种快照类型?</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
-    <value>[XenServer] 内部版本号</value>
+    <value>内部版本号</value>
   </data>
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
-    <value>[XenServer] 内部版本日期</value>
+    <value>内部版本日期</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>[XenServer] 版本</value>
+    <value>版本</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>使用正确的用户名和密码重试。</value>
@@ -11198,7 +11237,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>检查确认已在“{0}”上正确配置 [XenServer]，然后重试。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>检查代理设置以及 [XenServer] 在“{0}”上是否正确配置，然后重试。</value>
+    <value>检查代理设置以及服务器在“{0}”上是否正确配置，然后重试。</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>请稍候，然后重试。</value>
@@ -11317,6 +11356,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>没有主服务器的 VM 不能在本地存储中包含磁盘</value>
   </data>
+  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>无法在此 SR 上创建大于 {0} 的磁盘。</value>
+  </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>磁盘大小({0})超过 SR 大小({1})</value>
   </data>
@@ -11357,9 +11399,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>{1} 上的 SR {0}</value>
-  </data>
-  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>已启动</value>
@@ -11414,12 +11453,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="STATIC_MAX" xml:space="preserve">
     <value>静态最大内存</value>
-  </data>
-  <data name="STATIC_MAX_AMP" xml:space="preserve">
-    <value>静态最大内存(&amp;S)</value>
-  </data>
-  <data name="STATIC_MAX_COLON" xml:space="preserve">
-    <value>静态最大内存(&amp;S):</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>状态</value>
@@ -11631,13 +11664,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[Citrix VM Tools]: 不存在</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>[Citrix VM Tools]: 已过时(安装的版本为 {0}.{1})</value>
+    <value>[Citrix VM Tools]: 已过期(已安装版本 {0}.{1})</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>[Citrix VM Tools]: 最新版本</value>
+    <value>[Citrix VM Tools]: 最新</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU 数: {0}</value>
+  </data>
+  <data name="TEMPLATE_INFO_VIF" xml:space="preserve">
+    <value>接口 {0}: 网络 = {1}</value>
   </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>必须安装 Linux 包才能使用该模板</value>
@@ -11645,11 +11681,8 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="TEMPLATE_NO_DESCRIPTION" xml:space="preserve">
     <value>&lt;无说明&gt;</value>
   </data>
-  <data name="TERMINATING_SESSIONS" xml:space="preserve">
-    <value>正在终止会话...</value>
-  </data>
-  <data name="TERMPLATE_INFO_VIF" xml:space="preserve">
-    <value>接口 {0}: 网络 = {1}</value>
+  <data name="TERMINATING_USER_SESSION" xml:space="preserve">
+    <value>正在终止用户“{0}”的会话</value>
   </data>
   <data name="TEST_ARCHIVE_LOCATION" xml:space="preserve">
     <value>测试存档目标位置</value>
@@ -11733,7 +11766,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 运行时无法激活或停用系统磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>不能从正在运行的未安装 [Citrix VM Tools] 的 VM 中激活或停用磁盘</value>
+    <value>不能从正在运行的未安装 [Citrix VM Tools] 的 VM 激活或停用磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法停用网络</value>
@@ -11760,7 +11793,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>必须先停用磁盘，才能进行分离。</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>不能从正在运行的未安装 [Citrix VM Tools] 的 VM 中移除磁盘</value>
+    <value>不能从正在运行的未安装 [Citrix VM Tools] 的 VM 中删除磁盘</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>必须安装 I/O 驱动程序才能编辑正在运行的 VM 上的网络</value>
@@ -11972,11 +12005,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
     <value>{0}:“{1}”存储库已损坏。</value>
   </data>
-  <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
-    <value>无法从 {0} 中下载更新: 连接已断开。
-
-请检查您的设置并重试。</value>
-  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM" xml:space="preserve">
     <value>{0}: 无法迁移 VM“{1}”</value>
   </data>
@@ -12054,6 +12082,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
     <value>{0}: 由于服务器无法访问，因此已跳过检查。</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_EXTENSION" xml:space="preserve">
+    <value>所选文件的扩展名无效。有效扩展名为 *.{0}、*.zip 和 *.iso。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
+    <value>此文件不是有效的更新文件。</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM“{1}”的驱动器中有本地 CD/DVD。</value>
   </data>
@@ -12068,12 +12102,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
     <value>请务必先升级 [XenCenter]，然后再升级 [XenServer]。</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为 *.{0} 和 *.iso</value>
-  </data>
-  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
-    <value>在 {0} 中找不到有效的更新文件</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>该更新无需更多操作。</value>
@@ -12139,7 +12167,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在从 {1} 中删除更新安装文件 {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>正在从 {1} 中删除更新文件 {0}...</value>
+    <value>正在删除更新文件 {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>单击此处修复</value>
@@ -12172,6 +12200,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_SKIPPING_UPDATE" xml:space="preserve">
     <value>正在跳过更新 {0}。已在 {1} 上应用... </value>
+  </data>
+  <data name="UPDATES_WIZARD_SKIPPING_UPLOAD" xml:space="preserve">
+    <value>正在跳过上载更新 {0}。已上载到 {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>存储库“{0}”</value>
@@ -12339,37 +12370,37 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在将更新“{0}”上载到“{1}”(第 {2} 个，共 {3} 个)...</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用 Active Directory。Active Directory 允许您通过添加命名用户帐户来配置 [XenServer] 访问控制功能。</value>
+    <value>升级您的服务器许可证以启用 Active Directory。Active Directory 允许您通过添加命名用户帐户来配置 [XenServer] 访问控制功能。</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
+    <value>升级您的服务器许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用 VM 实时迁移。通过此功能，您能够在同一池中的服务器之间或跨池迁移共享存储或本地存储上正在运行的 VM，而不会导致 VM 停机。 </value>
+    <value>升级您的服务器许可证以启用 VM 实时迁移。通过此功能，您能够在同一池中的服务器之间或跨池迁移共享存储或本地存储上正在运行的 VM，而不会导致 VM 停机。 </value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用异构池。异构池允许由使用不同 CPU 的主机构成一个资源池，并允许虚拟机在这些主机之间迁移。</value>
+    <value>升级您的服务器许可证以启用异构池。异构池允许由使用不同 CPU 的主机构成一个资源池，并允许虚拟机在这些主机之间迁移。</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用动态内存控制功能。通过动态内存控制功能，[XenServer] 可以调整活动虚拟机的内存，并对主机服务器不断变化的要求进行动态响应。</value>
+    <value>升级您的服务器许可证以启用动态内存控制功能。通过动态内存控制功能，服务器可以调整活动虚拟机的内存，并对服务器不断变化的要求进行动态响应。</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
+    <value>升级您的服务器许可证以启用灾难恢复功能。通过灾难恢复功能，您可以在主生产站点发生灾难性故障时在 DR 站点恢复关键 VM 和 vApp。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 [XenServer] 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储预配、克隆和快照功能。</value>
+    <value>升级服务器许可证以启用 StorageLink™ 技术。StorageLink 使服务器能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
+    <value>升级您的服务器许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用高可用性。通过高可用性，虚拟机可以在基础硬件出现故障或单个 VM 出现故障时自动重新启动。如果服务器出现故障，VM 将智能地在资源池中的其他虚拟化服务器上重新启动。</value>
+    <value>升级您的服务器许可证以启用高可用性。通过高可用性，虚拟机可以在基础硬件出现故障或单个 VM 出现故障时自动重新启动。如果服务器出现故障，VM 将智能地在资源池中的其他虚拟化服务器上重新启动。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用性能报告功能。性能报告提供关于整体环境性能趋势的指导，并使您能够在业务需求发生变化时对生产能力做出准确规划。</value>
+    <value>升级您的服务器许可证以启用性能报告功能。性能报告提供关于整体环境性能趋势的指导，并使您能够在业务需求发生变化时对生产能力做出准确规划。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用基于角色的访问控制。通过 RBAC 功能，可以控制对 [XenServer] 资源池中重要组件的访问，并具有完全的审核日志记录功能，能够与当前 Active Directory 设置实现无缝集成。</value>
+    <value>升级您的服务器许可证以启用基于角色的访问控制。通过 RBAC 功能，可以控制对 [XenServer] 资源池中重要组件的访问，并具有完全的审核日志记录功能，能够与当前 Active Directory 设置实现无缝集成。</value>
   </data>
   <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
@@ -12377,13 +12408,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用 VM 计划快照功能。通过 VM 计划快照功能，可以为您的关键 VM 创建自动快照。</value>
+    <value>升级您的服务器许可证以启用 VM 计划快照功能。通过 VM 计划快照功能，可以为您的关键 VM 创建自动快照。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
+    <value>升级您的服务器许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>升级您的 [XenServer] 许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和 [XenServer] 主机的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
+    <value>升级您的服务器许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和服务器的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>运行时间</value>
@@ -12519,6 +12550,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
+  </data>
+  <data name="VAL_TERB" xml:space="preserve">
+    <value>TiB</value>
+  </data>
+  <data name="VAL_TERRATE" xml:space="preserve">
+    <value>TiBps</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>
@@ -12707,7 +12744,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>发送与快照计划作业警报有关的电子邮件通知(&amp;E)</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>[XenServer] 可以在引发了与快照计划作业有关的警报时向您发送电子邮件通知，例如创建 VM 快照时或快照操作失败时。</value>
+    <value>服务器可以在引发了与快照计划作业有关的警报时向您发送电子邮件通知，例如创建 VM 快照时或快照操作失败时。</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>当我单击“完成”时运行新快照计划作业(&amp;R)</value>
@@ -12861,6 +12898,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM 常规属性</value>
+  </data>
+  <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
+    <value>已为此 VM 分配了直通 GPU。</value>
+  </data>
+  <data name="VM_HAS_VGPUS" xml:space="preserve">
+    <value>已为此 VM 分配了虚拟 GPU。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>内存和/或 VCPU 更改将在重新启动 VM 时生效。</value>
@@ -13243,34 +13286,34 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 未知错误。</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>WLB 尝试与 [XenServer] 建立会话时出错。</value>
+    <value>WLB 尝试与服务器建立会话时出错。</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
-    <value>WLB 无法登录 [XenServer]。这可能是因为凭据无效。</value>
+    <value>WLB 无法登录服务器。这可能是因为凭据无效。</value>
   </data>
   <data name="WLB_ERROR_4003" xml:space="preserve">
-    <value>WLB 无法连接到 [XenServer]。这可能是因为 [XenServer] 处于脱机状态或 TCP/IP 地址不正确。</value>
+    <value>WLB 无法连接到服务器。这可能是因为服务器处于脱机状态或 TCP/IP 地址不正确。</value>
   </data>
   <data name="WLB_ERROR_4004" xml:space="preserve">
-    <value>WLB 从 [XenServer] 接收到空参数，而这是不允许的。</value>
+    <value>WLB 从服务器接收到空参数。</value>
   </data>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>缺少 WLB 注册表项。</value>
   </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
-    <value>WLB 从 [XenServer] 接收到无效参数。</value>
+    <value>WLB 从服务器接收到无效参数。</value>
   </data>
   <data name="WLB_ERROR_4008" xml:space="preserve">
-    <value>WLB 数据收集服务无法检索 [XenServer] 数据。</value>
+    <value>WLB 数据收集服务无法检索服务器数据。</value>
   </data>
   <data name="WLB_ERROR_4009" xml:space="preserve">
     <value>WLB 数据库中缺少 WLB 配置数据。</value>
   </data>
   <data name="WLB_ERROR_4010" xml:space="preserve">
-    <value>WLB 从 [XenServer] 接收到无效操作。</value>
+    <value>WLB 从服务器接收到无效操作。</value>
   </data>
   <data name="WLB_ERROR_4011" xml:space="preserve">
-    <value>WLB 从 [XenServer] 接收到超出范围的参数。</value>
+    <value>WLB 从服务器接收到超出范围的参数。</value>
   </data>
   <data name="WLB_ERROR_4012" xml:space="preserve">
     <value>WLB 数据收集服务未正确初始化。</value>
@@ -13288,19 +13331,19 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 没有当前指标。</value>
   </data>
   <data name="WLB_ERROR_4017" xml:space="preserve">
-    <value>WLB 找不到带有所需存储库的主机来放置 VM。 </value>
+    <value>WLB 找不到具有放置 VM 所需的存储库的主机。 </value>
   </data>
   <data name="WLB_ERROR_4018" xml:space="preserve">
-    <value>WLB 找不到所需的可用 CPU 来放置 VM。</value>
+    <value>WLB 找不到放置 VM 所需的可用 CPU。</value>
   </data>
   <data name="WLB_ERROR_4019" xml:space="preserve">
-    <value>WLB 找不到所需的可用内存来放置 VM。</value>
+    <value>WLB 找不到放置 VM 所需的可用内存。</value>
   </data>
   <data name="WLB_ERROR_4020" xml:space="preserve">
     <value>池中的一个或多个主机没有合适的许可证。</value>
   </data>
   <data name="WLB_ERROR_4021" xml:space="preserve">
-    <value>WLB 无法连接到 [XenServer]，因为提供的凭据无效。</value>
+    <value>WLB 无法连接到服务器，因为提供的凭据无效。</value>
   </data>
   <data name="WLB_ERROR_4022" xml:space="preserve">
     <value>WLB 无法撤离显式排除的主机。</value>
@@ -13309,10 +13352,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 此时无法保存配置。请确认所有 Workload Balancing 服务都在运行，然后在几分钟后尝试重新输入配置。</value>
   </data>
   <data name="WLB_ERROR_5" xml:space="preserve">
-    <value>[XenServer] 无法使用提供的 WLB 服务器凭据连接到 WLB 服务器。</value>
+    <value>服务器无法使用提供的 WLB 服务器凭据连接到 WLB 服务器。</value>
   </data>
   <data name="WLB_ERROR_6" xml:space="preserve">
-    <value>WLB 连接到 [XenServer] 时所使用的用户身份权限不足，或者没有访问 [XenServer] 的权限。请使用有效用户身份重新初始化 WLB。</value>
+    <value>WLB 连接到服务器时所使用的用户身份权限不足，或者没有访问服务器的权限。请使用有效的用户身份重新初始化 WLB。</value>
   </data>
   <data name="WLB_ERROR_SERVER_NOT_FOUND" xml:space="preserve">
     <value>找不到指定的 WLB 服务器。请检查设置。</value>
@@ -13489,7 +13532,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>配置错误: {0}</value>
   </data>
   <data name="WLB_RECONFIGURE_CREDS" xml:space="preserve">
-    <value>存储的 [XenServer] 凭据不再有效。请更新 Workload Balancing 的连接设置。</value>
+    <value>存储的服务器凭据不再有效。请更新 Workload Balancing 的连接设置。</value>
   </data>
   <data name="WLB_RECONNECT" xml:space="preserve">
     <value>重新连接(&amp;C)...</value>
