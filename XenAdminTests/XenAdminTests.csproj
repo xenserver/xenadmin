@@ -70,6 +70,7 @@
     <Compile Include="UnitTests\CPUFeaturesTest.cs" />
     <Compile Include="UnitTests\AlertTests\MultipathAlertTest.cs" />
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
+    <Compile Include="UnitTests\HelpManagerTests.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
     <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />

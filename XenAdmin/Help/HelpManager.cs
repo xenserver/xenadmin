@@ -53,9 +53,7 @@ namespace XenAdmin.Help
 
         internal static string GetID(string pageref)
         {
-            int id;
-            string s = resources.GetString(pageref);
-            return s != null && int.TryParse(s, out id) ? s : null;
+            return resources.GetString(pageref);
         }
 
         public static void Launch(string pageref)
@@ -129,6 +127,18 @@ namespace XenAdmin.Help
         public static bool HasHelpFor(string pageref)
         {
             return (pageref != null && pageref != "TabPageUnknown" && GetID(pageref) != null);
+        }
+
+        public static string ProduceUrl(string topicId, string helpUrl, string locale, string campaign, string medium, string source)
+        {
+            return string.Format(
+                helpUrl,
+                locale,
+                topicId ?? "index",
+                campaign.Replace('.', '_'),
+                medium,
+                source
+            ).ToLowerInvariant();
         }
     }
 }

@@ -106,6 +106,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://docs.citrix.com/{0}/xencenter/current-release/{1}.html?utm_campaign={2}&amp;utm_medium={3}&amp;utm_source={4}.
+        /// </summary>
+        public static string HELP_URL {
+            get {
+                return ResourceManager.GetString("HELP_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor.
         /// </summary>
         public static string HOMEPAGE {
@@ -183,24 +192,6 @@ namespace XenAdmin {
         public static string LOG_FILENAME {
             get {
                 return ResourceManager.GetString("LOG_FILENAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to -mapid {0} {1}.
-        /// </summary>
-        public static string MAINWINDOW_HELP_PARAMS {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_HELP_PARAMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Help\XenCenter.chm.
-        /// </summary>
-        public static string MAINWINDOW_HELP_PATH {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_HELP_PATH", resourceCulture);
             }
         }
         
