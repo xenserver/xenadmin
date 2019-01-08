@@ -227,7 +227,7 @@
 
 1. The VM is running or suspended at the time the snapshot is scheduled.
 2. The VM has [Citrix VM Tools] installed.
-3. The VM does NOT have dedicated GPU assigned to it.</value>
+3. If the VM has a dedicated GPU assigned to it, this GPU supports disk and memory snapshots.</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
