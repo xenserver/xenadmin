@@ -2226,9 +2226,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_MASTER_GONE" xml:space="preserve">
     <value>[XenCenter] のキャッシュにボンド マスターが見つかりません。</value>
   </data>
-  <data name="BOOTMODE" xml:space="preserve">
-    <value>起動モード</value>
-  </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>起動順序: {0}</value>
   </data>
@@ -12899,6 +12896,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
     <value>vCPU の数(&amp;C):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
+    <value>物理 CPU よりも多い vCPU を設定すると、VM のパフォーマンスが低下します</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>コンテナ管理</value>
