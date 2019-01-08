@@ -66,7 +66,7 @@ namespace XenAdminTests.CommandTests
 
         public void TestRbacGeorge()
         {
-            foreach (Pool pool in RunTest(GetAnyPool))
+            foreach (Pool pool in RunTest(() => GetAnyPool()))
             {
                 MW(delegate
                 {

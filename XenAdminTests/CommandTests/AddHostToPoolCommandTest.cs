@@ -88,7 +88,7 @@ namespace XenAdminTests.CommandTests
 
         public void TestAddGeorgeHostToGeorgePool()
         {
-            foreach (Pool pool in RunTest(GetAnyPool))
+            foreach (Pool pool in RunTest(() => GetAnyPool()))
             {
                 MW(Command.Execute);
                 MWWaitFor(Finished, "AddHostToPoolCommandTest.TestRbacGeorge() didn't finish.");
@@ -97,7 +97,7 @@ namespace XenAdminTests.CommandTests
 
         public void TestAddGeorgeHostToMidnightRidePool()
         {
-            foreach (Pool pool in RunTest(GetAnyPool))
+            foreach (Pool pool in RunTest(() => GetAnyPool()))
             {
                 HandleModalDialog<CommandErrorDialogWrapper>("Error Adding Server to Pool", Command.Execute, d => d.CloseButton.PerformClick());
             }
