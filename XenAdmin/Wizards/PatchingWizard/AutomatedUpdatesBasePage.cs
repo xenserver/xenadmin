@@ -55,17 +55,22 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool _thisPageIsCompleted = false;
+        protected bool _thisPageIsCompleted;
 
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
         public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
 
+        protected bool IsError
+        {
+            get { return _thisPageIsCompleted && !failedWorkers.Any(); }
+        }
+
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
 
-        private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
+        private List<HostUpdateMapping> patchMappings = new List<HostUpdateMapping>();
         protected List<string> hostsThatWillRequireReboot = new List<string>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
 
@@ -81,10 +86,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             return false;
         }
 
-        private bool _nextEnabled;
         public override bool EnableNext()
         {
-            return _nextEnabled;
+            return _thisPageIsCompleted;
         }
 
         private bool _cancelEnabled = true;
@@ -109,6 +113,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (_thisPageIsCompleted)
                 return;
 
+            panel1.Visible = false;
             Status = Status.NotStarted;
             labelTitle.Text = BlurbText();
 
@@ -116,7 +121,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 Status = Status.Completed;
                 _thisPageIsCompleted = true;
-                _nextEnabled = true;
                 OnPageUpdated();
             }
             else
@@ -151,6 +155,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             //reset the background workers
             backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
+            failedWorkers = new List<UpdateProgressBackgroundWorker>();
             bool atLeastOneWorkerStarted = false;
             
             foreach (var pool in SelectedPools)
@@ -425,7 +430,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 buttonRetry.Visible = buttonSkip.Visible = false;
                 _thisPageIsCompleted = true;
                 _cancelEnabled = false;
-                _nextEnabled = true;
             }
             else
             {
@@ -489,7 +493,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     _thisPageIsCompleted = true;
                     _cancelEnabled = false;
-                    _nextEnabled = true;
                 }
             }
 
@@ -513,7 +516,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             _thisPageIsCompleted = false;
             _cancelEnabled = true;
-            _nextEnabled = false;
             OnPageUpdated();
         }
 
@@ -543,7 +545,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             _thisPageIsCompleted = false;
             _cancelEnabled = true;
-            _nextEnabled = false;
             OnPageUpdated();
         }
 
@@ -572,7 +573,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (!uploadedPatches.Contains(patch))
                 {
                     planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));
-                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk));
+                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk));
                     uploadedPatches.Add(patch);
                 }
 

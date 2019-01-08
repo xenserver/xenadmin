@@ -9721,19 +9721,32 @@ Servers where this update cannot be applied appear disabled in this list.</value
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
     <value>[XenCenter] is now installing update {0} on your system.</value>
   </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
-    <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
-Please wait for these operations to complete, then click Next to continue with the installation.</value>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
+    <value>The upload process was cancelled.</value>
   </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD" xml:space="preserve">
-    <value>[XenCenter] is now uploading your update to the servers specified in the previous step.
-Please wait for this operation to complete, then click Next to continue with the installation.</value>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY" xml:space="preserve">
+    <value>The upload of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_ONE" xml:space="preserve">
+    <value>The upload of update {0} was not completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_MANY" xml:space="preserve">
+    <value>The following errors occurred while the upload of update {0} was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_ONE" xml:space="preserve">
+    <value>The following error occurred while the upload of update {0} was in progress:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_MANY" xml:space="preserve">
+    <value>The upload of update {0} on all selected servers was completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_ONE" xml:space="preserve">
+    <value>The upload of update {0} was completed successfully.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_TITLE" xml:space="preserve">
+    <value>[XenCenter] is now performing the operations necessary to upload your update to the servers specified in the previous step. Please wait for these operations to complete, then click Next to continue with the installation.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
     <value>Upload</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
-    <value>Downloading and uploading the selected file to your servers</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD" xml:space="preserve">
     <value>Uploading the selected file to your servers</value>
@@ -12374,18 +12387,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPLOADING_PATCH_TO" xml:space="preserve">
     <value>Uploading to server '{0}'...</value>
-  </data>
-  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
-    <value>Already uploaded</value>
-  </data>
-  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
-    <value>Uploading...</value>
-  </data>
-  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
-    <value>Update successfully uploaded to the selected server(s)</value>
-  </data>
-  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
-    <value>Upload</value>
   </data>
   <data name="UPLOAD_PATCH_UPLOADED_DESCRIPTION" xml:space="preserve">
     <value>Completed</value>

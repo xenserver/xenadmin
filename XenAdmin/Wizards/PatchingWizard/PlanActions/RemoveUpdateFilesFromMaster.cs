@@ -40,15 +40,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     class RemoveUpdateFileFromMasterPlanAction : PlanActionWithSession
     {
-        private readonly List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
-        private readonly XenServerPatch patch = null;
-        private readonly Host master = null;
+        private readonly List<HostUpdateMapping> patchMappings = new List<HostUpdateMapping>();
+        private readonly XenServerPatch xenServerPatch;
+        private readonly Host master;
 
-        public RemoveUpdateFileFromMasterPlanAction(Host master, List<PoolPatchMapping> patchMappings, XenServerPatch patch)
+        public RemoveUpdateFileFromMasterPlanAction(Host master, List<HostUpdateMapping> patchMappings, XenServerPatch xenServerPatch)
             : base(master.Connection)
         {
             this.patchMappings = patchMappings;
-            this.patch = patch;
+            this.xenServerPatch = xenServerPatch;
             this.master = master;
         }
 
@@ -56,20 +56,23 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             try
             {
-                var mapping = patchMappings.FirstOrDefault(pm => pm.MasterHost != null && master != null &&
-                                                                 pm.MasterHost.uuid == master.uuid && pm.XenServerPatch.Equals(patch));
+                var existing = (from HostUpdateMapping hum in patchMappings
+                    let xpm = hum as XenServerPatchMapping
+                    where xpm != null && xpm.Matches(master, xenServerPatch)
+                    select xpm).FirstOrDefault();
 
                 if (!Helpers.ElyOrGreater(session.Connection))
                 {
                     Pool_patch poolPatch = null;
+                    var mapping = existing as PoolPatchMapping;
 
-                    if (mapping != null && mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
+                    if (mapping != null && mapping.IsValid)
                     {
                         poolPatch = mapping.Pool_patch;
                     }
                     else
                     {
-                        poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, patch.Uuid, StringComparison.InvariantCultureIgnoreCase));
+                        poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, xenServerPatch.Uuid, StringComparison.InvariantCultureIgnoreCase));
                     }
 
                     if (poolPatch != null && poolPatch.opaque_ref != null)
@@ -83,7 +86,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
-                    if (mapping != null && mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
+                    var mapping = existing as PoolUpdateMapping;
+
+                    if (mapping != null && mapping.IsValid)
                     {
                         var poolUpdate = mapping.Pool_update;
                         AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolUpdate.Name()));

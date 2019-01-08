@@ -31,10 +31,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
+using System.Windows.Forms;
+using XenAdmin.Dialogs;
 using XenAdmin.Network;
 
 
@@ -42,88 +46,219 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     class UploadPatchToMasterPlanAction : PlanActionWithSession
     {
-        private readonly XenServerPatch patch;
-        private readonly List<PoolPatchMapping> mappings;
+        private readonly XenServerPatch xenServerPatch;
+        private readonly List<HostUpdateMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private KeyValuePair<XenServerPatch, string> patchFromDisk;
         private AsyncAction inProgressAction;
+        private bool skipDiskSpaceCheck;
+        private string updateFilePath;
+        private readonly Control invokingControl;
+        private readonly List<Host> selectedServers;
 
-        public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
+        public UploadPatchToMasterPlanAction(Control invokingControl, IXenConnection connection, XenServerPatch xenServerPatch,
+            List<HostUpdateMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches,
+            KeyValuePair<XenServerPatch, string> patchFromDisk, bool skipDiskSpaceCheck = false)
             : base(connection)
         {
-            this.patch = patch;
+            this.invokingControl = invokingControl;
+            this.xenServerPatch = xenServerPatch;
             this.mappings = mappings;
             AllDownloadedPatches = allDownloadedPatches;
             this.patchFromDisk = patchFromDisk;
+            this.skipDiskSpaceCheck = skipDiskSpaceCheck;
+        }
+
+        public UploadPatchToMasterPlanAction(Control invokingControl, IXenConnection connection, List<Host> selectedServers,
+            string updateFilePath, List<HostUpdateMapping> mappings, bool skipDiskSpaceCheck = false)
+            : base(connection)
+        {
+            this.invokingControl = invokingControl;
+            this.updateFilePath = updateFilePath;
+            this.mappings = mappings;
+            this.skipDiskSpaceCheck = skipDiskSpaceCheck;
+            this.selectedServers = selectedServers;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            var path = AllDownloadedPatches.ContainsKey(patch)
-                ? AllDownloadedPatches[patch]
-                : patchFromDisk.Key == patch ? patchFromDisk.Value : null;
-
-            var poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
-            var poolUpdates = new List<Pool_update>(session.Connection.Cache.Pool_updates);
-
             var conn = session.Connection;
             var master = Helpers.GetMaster(conn);
+            HostUpdateMapping existingMapping = null;
 
-            var existingMapping = mappings.Find(m => m.MasterHost != null && master != null &&
-                                                     m.MasterHost.uuid == master.uuid && (m.Pool_patch != null || m.Pool_update != null) && m.XenServerPatch.Equals(patch));
-
-            if (existingMapping == null
-                || !(existingMapping.Pool_patch != null && poolPatches.Any(p => string.Equals(p.uuid, existingMapping.Pool_patch.uuid, StringComparison.OrdinalIgnoreCase)))
-                && !(existingMapping.Pool_update != null && poolUpdates.Any(p => string.Equals(p.uuid, existingMapping.Pool_update.uuid, StringComparison.OrdinalIgnoreCase)))
-            )
+            if (xenServerPatch != null)
             {
-                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, conn.Name));
-                PoolPatchMapping newMapping;
-
                 if (Helpers.ElyOrGreater(master))
                 {
-                    var uploadIsoAction = new UploadSupplementalPackAction(session.Connection, new List<Host>() {master}, path, true);
+                    var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
+
+                    existingMapping = (from HostUpdateMapping hum in mappings
+                        let pum = hum as PoolUpdateMapping
+                        where pum != null && poolUpdates.Any(p => pum.Matches(master, xenServerPatch, p))
+                        select pum).FirstOrDefault();
+                }
+                else
+                {
+                    var poolPatches = new List<Pool_patch>(conn.Cache.Pool_patches);
+
+                    existingMapping = (from HostUpdateMapping hum in mappings
+                        let ppm = hum as PoolPatchMapping
+                        where ppm != null && poolPatches.Any(p => ppm.Matches(master, xenServerPatch, p))
+                        select ppm).FirstOrDefault();
+                }
+            }
+            else if (updateFilePath != null)
+            {
+                if (Helpers.ElyOrGreater(master))
+                {
+                    var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
+
+                    existingMapping = (from HostUpdateMapping hum in mappings
+                        let spm = hum as SuppPackMapping
+                        where spm != null && poolUpdates.Any(p => spm.Matches(master, updateFilePath, p))
+                        select spm).FirstOrDefault();
+                }
+                else
+                {
+                    existingMapping = (from HostUpdateMapping hum in mappings
+                        let spm = hum as SuppPackMapping
+                        where spm != null && spm.Matches(master, updateFilePath)
+                        select spm).FirstOrDefault();
+                }
+            }
+
+            if (existingMapping != null && existingMapping.IsValid)
+                return;
+
+            string path = null;
+            if (xenServerPatch != null)
+            {
+                path = AllDownloadedPatches.ContainsKey(xenServerPatch)
+                    ? AllDownloadedPatches[xenServerPatch]
+                    : patchFromDisk.Key == xenServerPatch
+                        ? patchFromDisk.Value
+                        : null;
+            }
+            else if (updateFilePath != null)
+            {
+                path = updateFilePath;
+            }
+
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, GetUpdateName(), conn.Name));
+
+            if (xenServerPatch != null)
+            {
+                if (Helpers.ElyOrGreater(master))
+                {
+                    var uploadIsoAction = new UploadSupplementalPackAction(conn, new List<Host> {master}, path, true);
                     uploadIsoAction.Changed += uploadAction_Changed;
                     uploadIsoAction.Completed += uploadAction_Completed;
                     inProgressAction = uploadIsoAction;
                     uploadIsoAction.RunExternal(session);
 
-                    var poolupdate = uploadIsoAction.PoolUpdate;
+                    var poolUpdate = uploadIsoAction.PoolUpdate;
 
-                    if (poolupdate == null)
+                    if (poolUpdate == null)
                     {
-                        log.ErrorFormat("Upload finished successfully, but Pool_update object has not been found for update (uuid={0}) on host (uuid={1}).", patch.Uuid, session.Connection);
+                        log.ErrorFormat("Upload finished successfully, but Pool_update object has not been found for update {0} on host (uuid={1}).",
+                            xenServerPatch != null ? $"(uuid={xenServerPatch.Uuid})" : GetUpdateName(), conn);
 
                         throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
                     }
 
-                    newMapping = new PoolPatchMapping(patch, poolupdate, Helpers.GetMaster(session.Connection));
+                    var newMapping = new PoolUpdateMapping(xenServerPatch, poolUpdate, Helpers.GetMaster(conn))
+                    {
+                        SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost)
+                    };
+
+                    if (!mappings.Contains(newMapping))
+                        mappings.Add(newMapping);
                 }
                 else
                 {
-                    var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetMaster(conn), path, true);
-                    inProgressAction = checkSpaceForUpload;
-                    checkSpaceForUpload.RunExternal(session);
+                    if (!skipDiskSpaceCheck)
+                    {
+                        try
+                        {
+                            var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetMaster(conn), path, true);
+                            inProgressAction = checkSpaceForUpload;
+                            checkSpaceForUpload.RunExternal(session);
+                        }
+                        catch (NotEnoughSpaceException e)
+                        {
+                            if (!e.DiskSpaceRequirements.CanCleanup)
+                                throw;
 
-                    var uploadPatchAction = new UploadPatchAction(session.Connection, path, true, false);
+                            var dialogResult = Program.Invoke(invokingControl, (Func<DialogResult>)(() =>
+                                    {
+                                        using (var d = new ThreeButtonDialog(
+                                            new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                                e.DiskSpaceRequirements.GetSpaceRequirementsMessage()),
+                                            new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
+                                            new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel)))
+                                        {
+                                            return d.ShowDialog(invokingControl);
+                                        }
+                                    }
+                                ), null);
+
+                            if (dialogResult is DialogResult dr && dr == DialogResult.OK)
+                                new CleanupDiskSpaceAction(e.DiskSpaceRequirements.Host, null, true).RunExternal(session);
+                            else
+                                throw;
+                        }
+                    }
+
+                    var uploadPatchAction = new UploadPatchAction(conn, path, true, false);
                     uploadPatchAction.Changed += uploadAction_Changed;
                     uploadPatchAction.Completed += uploadAction_Completed;
                     inProgressAction = uploadPatchAction;
                     uploadPatchAction.RunExternal(session);
 
                     // this has to be run again to refresh poolPatches (to get the recently uploaded one as well)
-                    poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
+                    var poolPatches = new List<Pool_patch>(conn.Cache.Pool_patches);
 
-                    var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, patch.Uuid, StringComparison.OrdinalIgnoreCase));
+                    var poolPatch = poolPatches.Find(p => string.Equals(p.uuid, xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
                     if (poolPatch == null)
                     {
-                        log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).", patch.Uuid, session.Connection);
+                        log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).",
+                            xenServerPatch.Uuid, conn);
 
                         throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
                     }
 
-                    newMapping = new PoolPatchMapping(patch, poolPatch, Helpers.GetMaster(session.Connection));
+                    var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetMaster(conn));
+                    if (!mappings.Contains(newMapping))
+                        mappings.Add(newMapping);
                 }
+            }
+            else if (updateFilePath != null)
+            {
+                var uploadIsoAction = new UploadSupplementalPackAction(conn, selectedServers, path, true);
+                uploadIsoAction.Changed += uploadAction_Changed;
+                uploadIsoAction.Completed += uploadAction_Completed;
+                inProgressAction = uploadIsoAction;
+                uploadIsoAction.RunExternal(session);
+
+                var poolUpdate = uploadIsoAction.PoolUpdate;
+
+                var suppPackVdis = new Dictionary<Host, VDI>();
+
+                foreach (var kvp in uploadIsoAction.VdiRefsPerHost)
+                {
+                    var vdi = kvp.Key.Connection.Resolve(kvp.Value);
+                    if (vdi != null)
+                        suppPackVdis.Add(kvp.Key, vdi);
+                }
+
+                var newMapping = new SuppPackMapping(updateFilePath, poolUpdate, Helpers.GetMaster(conn))
+                {
+                    SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost),
+                    SuppPackVdis = suppPackVdis
+                };
 
                 if (!mappings.Contains(newMapping))
                     mappings.Add(newMapping);
@@ -153,6 +288,21 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             action.Changed -= uploadAction_Changed;
             action.Completed -= uploadAction_Completed;
+        }
+
+        private string GetUpdateName()
+        {
+            if (xenServerPatch != null)
+                return xenServerPatch.Name;
+
+            try
+            {
+                return Path.GetFileName(updateFilePath);
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public override void Cancel()
