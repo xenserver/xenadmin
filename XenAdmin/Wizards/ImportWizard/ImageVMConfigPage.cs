@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		public ulong Memory { get { return (ulong)m_upDownMemory.Value; } }
 
 		public ulong AdditionalSpace { get { return m_groupBoxAddSpace.Enabled ? (ulong)m_upDownAddSpace.Value * GB : 0; } }
-
+        
 		#endregion
 
 		#region Private Methods

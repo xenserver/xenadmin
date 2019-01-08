@@ -29,53 +29,56 @@
  * SUCH DAMAGE.
  */
 
-using NUnit.Framework;
-using XenAdmin.Wizards.NewVMWizard;
-using XenAPI;
+using XenAdmin.Controls;
 
-namespace XenAdminTests.WizardTests.state1_xml
+namespace XenAdmin.Wizards.ImportWizard
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
-    public class NewVMWizardTestDisklessVM : WizardTest<NewVMWizard>
+    public partial class ImportBootOptionPage : XenTabPage
     {
-
-        public NewVMWizardTestDisklessVM()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+        public ImportBootOptionPage()
         {
+            InitializeComponent();
         }
 
+        #region Base class (XenTabPage) overrides
 
-        protected override NewVMWizard NewWizard()
+        /// <summary>
+        /// Gets the page's title (headline)
+        /// </summary>
+        public override string PageTitle { get { return Messages.IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE; } }
+
+        /// <summary>
+        /// Gets the page's label in the (left hand side) wizard progress panel
+        /// </summary>
+        public override string Text { get { return Messages.IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT; } }
+
+        /// <summary>
+        /// Gets the value by which the help files section for this page is identified
+        /// </summary>
+        public override string HelpID { get { return "VMConfig"; } }
+
+        protected override bool ImplementsIsDirty()
         {
-            VM template = GetAnyTemplate(vm => vm.IsHVM());
-            Assert.NotNull(template, "User template not found.");
-            return new NewVMWizard(template.Connection, template, GetAnyHost());
+            return true;
         }
 
-        protected override void RunAfter()
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            MWWaitFor(() => wizard.Action.IsCompleted && wizard.Action.Succeeded, "Wizard didn't succeed.");
-           
+            if (direction == PageLoadedDirection.Forward)
+                bootModesControl1.Connection = Connection;
         }
 
-        protected override void TestPage(string pageName)
+        public override void PopulatePage()
         {
-            if (pageName == "Installation Media")
-            {
-                MW(() =>
-                {
-                    var button = TestUtils.GetRadioButton(wizard, "page_3_InstallationMedia.UrlRadioButton");
-                    button.Checked = true;
-                    button.Focus();
-                });
-            }
-
-            if (pageName == "Storage")
-            {
-                MW(() => (TestUtils.GetRadioButton(wizard, "page_6_Storage.DisklessVMRadioButton")).Checked = true);
-            }
-
-            base.TestPage(pageName);
+            bootModesControl1.CheckBIOSBootMode();
         }
+
+        #endregion
+
+        #region Accessors
+		
+        public Actions.VMActions.BootMode SelectedBootMode { get { return bootModesControl1.SelectedOption; } }
+		
+        #endregion
     }
 }

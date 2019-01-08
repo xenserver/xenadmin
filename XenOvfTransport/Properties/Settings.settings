@@ -11,8 +11,8 @@
     <Setting Name="xenBootOptions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">BIOS order</Value>
     </Setting>
-    <Setting Name="xenBootOrder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">dc</Value>
+    <Setting Name="xenBootParams" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">order=dc;</Value>
     </Setting>
     <Setting Name="xenPlatformSetting" Type="System.String" Scope="Application">
       <Value Profile="(Default)">nx=true;acpi=true;apic=true;pae=true;stdvga=0;</Value>

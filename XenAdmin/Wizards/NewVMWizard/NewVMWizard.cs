@@ -167,6 +167,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_3_InstallationMedia.SelectedPvArgs,
                                         page_3_InstallationMedia.SelectedCD,
                                         page_3_InstallationMedia.SelectedUrl,
+                                        page_3_InstallationMedia.SelectedBootMode,
                                         m_affinity,
                                         page_5_CpuMem.SelectedVcpusMax,
                                         page_5_CpuMem.SelectedVcpusAtStartup,
@@ -246,7 +247,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                     noInstallMedia = true;
 
                 page_3_InstallationMedia.ShowInstallationMedia = !noInstallMedia;
-                page_3_InstallationMedia.DisableStep = noInstallMedia && !page_3_InstallationMedia.ShowBootParameters;
 
                 // The user cannot set their own affinity, use the one off the template
                 if (BlockAffinitySelection)

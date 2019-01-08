@@ -2222,6 +2222,9 @@
   <data name="BOND_MASTER_GONE" xml:space="preserve">
     <value>在 [XenCenter] 的缓存中找不到绑定主对象。</value>
   </data>
+  <data name="BOOT_MODE" xml:space="preserve">
+    <value>启动模式</value>
+  </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>启动顺序: {0}</value>
   </data>

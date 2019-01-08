@@ -6099,6 +6099,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boot Mode.
+        /// </summary>
+        public static string BOOT_MODE {
+            get {
+                return ResourceManager.GetString("BOOT_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boot order: {0}.
         /// </summary>
         public static string BOOTORDER {
@@ -16679,6 +16688,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The UEFI boot mode is experimental, and is currently not suitable for production use..
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI boot mode is not supported with the selected template..
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are experimental, and are currently not suitable for production use..
+        /// </summary>
+        public static string GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are not supported with the selected template..
+        /// </summary>
+        public static string GUEFI_BOOT_MODES_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODES_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI secure boot mode is experimental, and is currently not suitable for production use..
+        /// </summary>
+        public static string GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The UEFI secure boot mode is not supported with the selected template..
+        /// </summary>
+        public static string GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This version of [XenCenter] is out of date and cannot connect to {0}.
         ///
         ///You can get a compatible version of [XenCenter] from the following location:.
@@ -18714,6 +18777,24 @@ namespace XenAdmin {
         public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_SOURCE_IS_READONLY {
             get {
                 return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_SOURCE_IS_READONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boot options.
+        /// </summary>
+        public static string IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the boot mode for the new virtual machine.
+        /// </summary>
+        public static string IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -37059,7 +37140,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ma&amp;ximum number of vCPUs:.
+        ///   Looks up a localized string similar to Maximum number of &amp;vCPUs:.
         /// </summary>
         public static string VM_CPUMEMPAGE_MAX_VCPUS_LABEL {
             get {
@@ -37095,7 +37176,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of v&amp;CPUs:.
+        ///   Looks up a localized string similar to It is recommended to allocate at least {0} vCPUs for this VM.
+        /// </summary>
+        public static string VM_CPUMEMPAGE_VCPU_MIN_WARNING {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_VCPU_MIN_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More vCPUs than physical CPUs may lead to reduced VM performance.
+        /// </summary>
+        public static string VM_CPUMEMPAGE_VCPU_WARNING {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_VCPU_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Number of vCPUs:.
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPUS_LABEL {
             get {

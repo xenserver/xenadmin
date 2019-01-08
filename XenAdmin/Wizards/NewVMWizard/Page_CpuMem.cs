@@ -33,11 +33,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using XenAPI;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Ballooning;
 using XenAdmin.Core;
-
+using XenAPI;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
@@ -57,6 +56,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         double memoryRatio = 0.0;  // the permitted ratio of dynamic_min / static_max
         bool initialising = true;
         private bool isVcpuHotplugSupported;
+        private int minVCPUs;
 
         // Please note that the comboBoxVCPUs control can represent two different VM properties, depending whether the VM supports vCPU hotplug or not: 
         // When vCPU hotplug is not supported, comboBoxVCPUs represents the initial number of vCPUs (VCPUs_at_startup). In this case we will also set the VM property VCPUs_max to the same value.
@@ -120,6 +120,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
 
             isVcpuHotplugSupported = Template.SupportsVcpuHotplug();
+            minVCPUs = Template.MinVCPUs();
+
             _prevVCPUsMax = Template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
 
             label5.Text = GetRubric();
@@ -430,8 +432,31 @@ namespace XenAdmin.Wizards.NewVMWizard
             SetSpinnerLimitsAndIncrement();
             ValuesUpdated();
         }
-
+        
         private void ValidateVCPUSettings()
+        {
+            if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax < minVCPUs)
+            {
+                vCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                vCPUWarningLabel.Visible = true;
+            }
+            else
+            {
+                vCPUWarningLabel.Visible = false;
+            }
+
+            if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVcpusAtStartup < minVCPUs)
+            {
+                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
+                initialVCPUWarningLabel.Visible = true;
+            }
+            else
+            {
+                initialVCPUWarningLabel.Visible = false;
+            }
+        }
+
+        private void ValidateTopologySettings()
         {
             if (comboBoxVCPUs.SelectedItem != null)
                 labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
@@ -461,6 +486,11 @@ namespace XenAdmin.Wizards.NewVMWizard
         }
 
         private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateTopologySettings();
+        }
+
+        private void comboBoxInitialVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
             ValidateVCPUSettings();
         }

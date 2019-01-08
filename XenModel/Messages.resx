@@ -2234,6 +2234,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BOOT_HARD_DISK" xml:space="preserve">
     <value>Hard Disk</value>
   </data>
+  <data name="BOOT_MODE" xml:space="preserve">
+    <value>Boot Mode</value>
+  </data>
   <data name="BROKEN_SRS_AFTER_UPGRADE" xml:space="preserve">
     <value>There are broken SRs after the upgrade. To solve this problem you should reattach the SRs.</value>
   </data>
@@ -5835,6 +5838,24 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GROUP_ROLES" xml:space="preserve">
     <value>Group Roles</value>
   </data>
+  <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>The UEFI and UEFI secure boot modes are experimental, and are currently not suitable for production use.</value>
+  </data>
+  <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>The UEFI and UEFI secure boot modes are not supported with the selected template.</value>
+  </data>
+  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>The UEFI boot mode is experimental, and is currently not suitable for production use.</value>
+  </data>
+  <data name="GUEFI_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>The UEFI boot mode is not supported with the selected template.</value>
+  </data>
+  <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>The UEFI secure boot mode is experimental, and is currently not suitable for production use.</value>
+  </data>
+  <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>The UEFI secure boot mode is not supported with the selected template.</value>
+  </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>This version of [XenCenter] is out of date and cannot connect to {0}.
 
@@ -6572,6 +6593,12 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_SOURCE_IS_READONLY" xml:space="preserve">
     <value>You do not have write permission on the location provided. Read-write access is required to import this type of file.</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT" xml:space="preserve">
+    <value>Boot options</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE" xml:space="preserve">
+    <value>Select the boot mode for the new virtual machine</value>
   </data>
   <data name="IMPORT_SELECT_HOST_PAGE_TITLE" xml:space="preserve">
     <value>Select the location where the imported VM will be placed</value>
@@ -12882,7 +12909,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>Initial number of v&amp;CPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
-    <value>Ma&amp;ximum number of vCPUs:</value>
+    <value>Maximum number of &amp;vCPUs:</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
     <value>The maximum number of vCPUs, the topology and the vCPU priority can only be changed when the VM is shut down. </value>
@@ -12894,7 +12921,13 @@ To start a [XenServer] trial, click the button below.</value>
     <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
-    <value>Number of v&amp;CPUs:</value>
+    <value>&amp;Number of vCPUs:</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPU_MIN_WARNING" xml:space="preserve">
+    <value>It is recommended to allocate at least {0} vCPUs for this VM</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
+    <value>More vCPUs than physical CPUs may lead to reduced VM performance</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>

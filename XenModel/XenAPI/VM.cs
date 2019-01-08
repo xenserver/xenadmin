@@ -905,6 +905,10 @@ namespace XenAPI
                 {
                     VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
                 }
+                if (!Helper.AreEqual2(_NVRAM, server._NVRAM))
+                {
+                    VM.set_NVRAM(session, opaqueRef, _NVRAM);
+                }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
                     VM.set_memory_static_max(session, opaqueRef, _memory_static_max);

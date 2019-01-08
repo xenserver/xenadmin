@@ -1919,4 +1919,10 @@
   <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
     <value>[XenServer] cluster management daemon</value>
   </data>
+  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
+    <value>Virtual machine '{0}' failed to pass Secure Boot verification.</value>
+  </data>
+  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
+    <value>VM Secure Boot verification failed</value>
+  </data>
 </root>

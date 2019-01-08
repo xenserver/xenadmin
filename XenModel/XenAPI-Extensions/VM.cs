@@ -81,6 +81,26 @@ namespace XenAPI
                 return DEFAULT_NUM_VCPUS_ALLOWED;
             }
         }
+        public int MinVCPUs()
+        {
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return 1;
+
+            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
+            if (xn == null || xn.Attributes == null)
+                return 1;
+
+            try
+            {
+                return Convert.ToInt32(xn.Attributes["min"].Value);
+            }
+            catch
+            {
+                return 1;
+            }
+        }
 
         public bool IsRunning()
         {
@@ -311,6 +331,24 @@ namespace XenAPI
             HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower());
         }
 
+        public bool IsUEFIEnabled()
+        {
+            if (!IsHVM())
+                return false;
+
+            var firmware = Get(HVM_boot_params, "firmware");
+            return !string.IsNullOrEmpty(firmware) && firmware.Trim().ToLower() == "uefi";
+        }
+
+        public bool IsSecureBootEnabled()
+        {
+            if (!IsUEFIEnabled())
+                return false;
+
+            var secureboot = Get(platform, "secureboot");
+            return !string.IsNullOrEmpty(secureboot) && secureboot.Trim().ToLower() == "true";
+        }
+
         public int GetVcpuWeight()
         {
             if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
@@ -500,6 +538,41 @@ namespace XenAPI
                 return true;
             }
         }
+
+        #region Supported Boot Mode Recommendations
+
+        public bool CanSupportUEFIBoot()
+        {
+            return GetRecommendationByField("supports-uefi") == "yes";
+        }
+
+        public bool CanSupportUEFISecureBoot()
+        {
+            return GetRecommendationByField("supports-secure-boot") == "yes";
+        }
+
+        private string GetRecommendationByField(string fieldName)
+        {
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return string.Empty;
+
+            try
+            {
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
+                if (xn == null || xn.Attributes == null || xn.Attributes["value"] == null)
+                    return string.Empty;
+
+                return xn.Attributes["value"].Value;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        #endregion
 
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be

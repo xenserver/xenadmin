@@ -1268,8 +1268,8 @@ namespace XenOvfTransport
             {
                 // DEFAULT should work for all of HVM type or 301
                 newVm.HVM_boot_policy = Properties.Settings.Default.xenBootOptions;
-                newVm.HVM_boot_params = new Dictionary<string, string> {{"order", Properties.Settings.Default.xenBootOrder}};
-                newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
+                newVm.HVM_boot_params = SplitStringIntoDictionary(Properties.Settings.Default.xenBootParams);
+				newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
             }
             else
             {
@@ -1280,11 +1280,19 @@ namespace XenOvfTransport
                     switch (key.ToLower())
                     {
                         case "hvm_boot_params":
-                            newVm.HVM_boot_params = new Dictionary<string, string> {{"order", xcsd.Value.Value}};
-                            break;
+	                        var xcsdValue = xcsd.Value.Value;
+							// Backward Compatibility
+							// Before this change, the string in xcsd.Value.Value is just a plain string.
+							// And now we would like to change it to support a dictionary string like "key1=value1;key2=value2"
+							// However, this logic should also work if a plain string is passed in from an old OVF file 
+							newVm.HVM_boot_params = xcsdValue.IndexOf('=') > -1 ? SplitStringIntoDictionary(xcsdValue) : new Dictionary<string, string> { { "order", xcsdValue } };
+							break;
                         case "platform":
                             newVm.platform = MakePlatformHash(xcsd.Value.Value);
                             break;
+	                    case "nvram":
+		                    newVm.NVRAM = SplitStringIntoDictionary(xcsd.Value.Value);
+		                    break;
                         default:
                             hashtable.Add(key, xcsd.Value.Value);
                             break;
@@ -1404,16 +1412,24 @@ namespace XenOvfTransport
             }
             return;
         }
-        private Dictionary<string, string> MakePlatformHash(string plaform)
+
+        private static Dictionary<string, string> SplitStringIntoDictionary(string inputStr)
         {
-            var hPlatform = new Dictionary<string, string>();
-            string[] platformArray = plaform.Split('=', ';');
-            for (int i = 0; i < platformArray.Length - 1; i += 2)
-            {
-                string identifier = platformArray[i].Trim();
-                string identvalue = platformArray[i + 1].Trim();
-                hPlatform.Add(identifier, identvalue);
-            }
+			/* Comment for the usage o.Split(new[] { '=' }, 2)
+			 * The second parameter "2" is used to handle the case when the delimiter '=' appears in the content of the string
+			 *
+			 * For example, inputStr = "EFI-variables-backend=xapidb;EFI-variabbles-on-boot=reset;EFI-variables=dGVzdA=="
+			 * Notice there are 2 extra '=' in the last section
+			 * The expected output of that section should be { 'EFI-variables':'dGVzdA==' }
+			 * But if we do not the second parameter "2" in the Split function, the actual output will be { 'EFI-variables':'' }
+			 */
+			return inputStr.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(o => o.Split(new[] { '=' }, 2))
+				.ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
+        }
+
+        private Dictionary<string, string> MakePlatformHash(string platform)
+        {
+            var hPlatform = SplitStringIntoDictionary(platform);
 
             // Handle the case when NX isn't in the platform string.
             if (!hPlatform.ContainsKey("nx"))

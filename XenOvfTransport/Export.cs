@@ -270,17 +270,12 @@ namespace XenOvfTransport
                     _copydisks(ovfEnv, ovfname, targetPath);
                 }
 
-                #region ADD XEN SPECIFICS
-                if (vm.HVM_boot_params != null)
+				#region ADD XEN SPECIFICS
+
+				var _params = vm.HVM_boot_params;
+				if (_params != null && _params.Count > 0)
                 {
-                    Dictionary<string, string> _params = vm.HVM_boot_params;
-                    foreach (string key in _params.Keys)
-                    {
-                        if (key.ToLower().Equals("order"))
-                        {
-                            OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_params", _params[key], OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
-                        }
-                    }
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_params", string.Join(";", _params.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
                 }
                 if (!string.IsNullOrEmpty(vm.HVM_boot_policy))
                 {
@@ -290,15 +285,15 @@ namespace XenOvfTransport
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_shadow_multiplier", Convert.ToString(vm.HVM_shadow_multiplier), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.platform != null)
+	            var platform = vm.platform;
+				if (platform != null && platform.Count > 0)
                 {
-                    Dictionary<string, string> platform = vm.platform;
-                    StringBuilder sb = new StringBuilder();
-                    foreach (string key in platform.Keys)
-                    {
-                        sb.AppendFormat(@"{0}={1};", key, platform[key]);
-                    }
-					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", string.Join(";", platform.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+                }
+				var nvram = vm.NVRAM;
+                if (nvram != null && nvram.Count > 0)
+				{
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "NVRAM", string.Join(";", nvram.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_7"));
                 }
                 if (!string.IsNullOrEmpty(vm.PV_args))
                 {

@@ -618,7 +618,7 @@ namespace XenOvf
             {
                 AddVirtualSystemSettingData(env, vsId, vhsId, xenxva.vm.label.Trim(), xenxva.vm.label.Trim(), _ovfrm.GetString("CONVERT_XVA_VSSD_CAPTION"), Guid.NewGuid().ToString(), Properties.Settings.Default.xenDefaultVirtualSystemType);
                 AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
-                AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootOrder, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
+                AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootParams, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
                 AddOtherSystemSettingData(env, vsId, lang, "platform", Properties.Settings.Default.xenPlatformSetting, _ovfrm.GetString("XENSERVER_PLATFORM_DESCRIPTION"));
 
             }
@@ -899,7 +899,7 @@ namespace XenOvf
             SetCPUs(env, vsId, (ulong)1);
             AddVirtualSystemSettingData(env, vsId, vhsId, vpcName, vpcName, _ovfrm.GetString("CONVERT_VPC_VSSD_CAPTION"), Guid.NewGuid().ToString(), Properties.Settings.Default.xenDefaultVirtualSystemType);
             AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
-            AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootOrder, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
+            AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootParams, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
             AddOtherSystemSettingData(env, vsId, lang, "platform", Properties.Settings.Default.xenPlatformSetting, _ovfrm.GetString("XENSERVER_PLATFORM_DESCRIPTION"));
 
             UpdateVirtualSystemName(env, vsId, lang, vpcName);
@@ -1119,7 +1119,7 @@ namespace XenOvf
             }
             AddVirtualSystemSettingData(env, vsId, vhsId, vmxName, vmxName, _ovfrm.GetString("CONVERT_VMX_VSSD_CAPTION"), Guid.NewGuid().ToString(), Properties.Settings.Default.xenDefaultVirtualSystemType);
             AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
-            AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootOrder, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
+            AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootParams, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
             AddOtherSystemSettingData(env, vsId, lang, "platform", Properties.Settings.Default.xenPlatformSetting, _ovfrm.GetString("XENSERVER_PLATFORM_DESCRIPTION"));
             FinalizeEnvelope(env);
             log.DebugFormat("OVF.ConvertFromVMXcfg completed {0}", ovfname);
