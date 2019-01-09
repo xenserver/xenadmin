@@ -699,6 +699,19 @@ namespace XenAdmin.Core
             if (clusterHostPif == null)
                 return true;
 
+            // if this PIF is a VLAN, then use the tagged_PIF field of the VLAN
+            if (clusterHostPif.VLAN >= 0)
+            {
+                var vlan = masterConnection.Resolve(clusterHostPif.VLAN_master_of);
+
+                if (vlan != null)
+                {
+                    var taggedPif = masterConnection.Resolve(vlan.tagged_PIF);
+                    if (taggedPif != null)
+                        clusterHostPif = taggedPif;
+                }
+            }
+
             clusterHostInBond = clusterHostPif.IsBondNIC();
 
             var pifsWithIPAddress = 0;
