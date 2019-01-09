@@ -1919,4 +1919,10 @@
   <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
     <value>[XenServer] 群集管理守护程序</value>
   </data>
+  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
+    <value>虚拟机“{0}”无法通过安全启动验证。</value>
+  </data>
+  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
+    <value>VM 安全启动验证失败</value>
+  </data>
 </root>

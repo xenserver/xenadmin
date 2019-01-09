@@ -1919,4 +1919,10 @@
   <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
     <value>[XenServer] クラスター管理デーモン</value>
   </data>
+  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
+    <value>仮想マシン '{0}' はセキュア ブートの検証をパスしませんでした。</value>
+  </data>
+  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
+    <value>仮想マシンのセキュア ブート検証が失敗しました</value>
+  </data>
 </root>

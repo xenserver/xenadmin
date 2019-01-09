@@ -2238,6 +2238,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOOT_HARD_DISK" xml:space="preserve">
     <value>ハード ディスク</value>
   </data>
+  <data name="BOOT_MODE" xml:space="preserve">
+    <value>起動モード</value>
+  </data>
   <data name="BROKEN_SRS_AFTER_UPGRADE" xml:space="preserve">
     <value>アップグレード後に接続に問題が生じた SR があります。この問題を解決するには、SR を再接続してください。</value>
   </data>
@@ -5840,6 +5843,24 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GROUP_ROLES" xml:space="preserve">
     <value>グループの役割</value>
   </data>
+  <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>UEFI ブート モードおよび UEFI セキュア ブート モードは試験段階の機能であり、現時点では実稼働での使用には適していません。</value>
+  </data>
+  <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>UEFI ブート モードおよび UEFI セキュア ブート モードは現在選択したテンプレートでサポートされていません。</value>
+  </data>
+  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>UEFI ブート モードは試験段階の機能であり、現時点では実稼働での使用には適していません。</value>
+  </data>
+  <data name="GUEFI_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>UEFI ブート モードは現在選択したテンプレートでサポートされていません。</value>
+  </data>
+  <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>UEFI セキュア ブート モードは試験段階の機能であり、現時点では実稼働での使用には適していません。</value>
+  </data>
+  <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>UEFI セキュア ブート モードは現在選択したテンプレートでサポートされていません。</value>
+  </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>[XenCenter] のバージョンが古いため、{0} に接続できません。
 
@@ -6577,6 +6598,12 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_SOURCE_IS_READONLY" xml:space="preserve">
     <value>指定した場所に対する書き込み許可がありません。この種類のファイルをインポートするには、読み取り/書き込みアクセスが必要です。</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT" xml:space="preserve">
+    <value>起動オプション</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE" xml:space="preserve">
+    <value>新規仮想マシンの起動モードを選択する</value>
   </data>
   <data name="IMPORT_SELECT_HOST_PAGE_TITLE" xml:space="preserve">
     <value>インポートする VM の配置先の選択</value>
@@ -12883,7 +12910,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>vCPU の初期の数(&amp;C):</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
-    <value>vCPU の最大数(&amp;X):</value>
+    <value>vCPU の最大数(&amp;V):</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
     <value>vCPU の最大数、トポロジー、vCPU 優先度を変更するには、VM がシャットダウン状態である必要があります。 </value>
@@ -12896,6 +12923,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
     <value>vCPU の数(&amp;C):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPU_MIN_WARNING" xml:space="preserve">
+    <value>この仮想マシンに {0} 個以上の vCPU を割り当てることをお勧めします</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
     <value>物理 CPU よりも多い vCPU を設定すると、VM のパフォーマンスが低下します</value>
