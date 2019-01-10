@@ -196,6 +196,9 @@ namespace XenCenterLib
         public const int WM_TIMER = 275;
         public const int WM_VSCROLL = 277;
 
+        public const int WM_KEYDOWN = 0x100;
+        public const int WM_KEYUP = 0x101;
+
         // Mouse Hooks
         public const int HC_ACTION = 0;
         public const int WH_MOUSE_LL = 14;

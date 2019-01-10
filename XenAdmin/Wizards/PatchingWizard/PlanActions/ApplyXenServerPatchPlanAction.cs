@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -41,55 +42,55 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly Host host;
         private readonly XenServerPatch xenServerPatch;
-        private readonly List<PoolPatchMapping> mappings;
-        private readonly string masterUuid;
+        private readonly List<HostUpdateMapping> mappings;
 
-        public ApplyXenServerPatchPlanAction(Host host, XenServerPatch xenServerPatch, List<PoolPatchMapping> mappings)
+        public ApplyXenServerPatchPlanAction(Host host, XenServerPatch xenServerPatch, List<HostUpdateMapping> mappings)
             : base(host.Connection)
         {
             this.host = host;
             this.xenServerPatch = xenServerPatch;
             this.mappings = mappings;
-
-            var master = Helpers.GetMaster(host.Connection);
-            this.masterUuid = master.uuid;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            var mapping = mappings.Find(m => m.XenServerPatch.Equals(xenServerPatch)
-                                             && m.MasterHost != null && m.MasterHost.uuid == masterUuid);
+            var master = Helpers.GetMaster(Connection);
+            var mapping = (from HostUpdateMapping hum in mappings
+                let xpm = hum as XenServerPatchMapping
+                where xpm != null && xpm.Matches(master, xenServerPatch)
+                select xpm).FirstOrDefault();
 
-            if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
-            {
-                try
-                {
-                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name,
-                        host.Name()));
-
-                    var task = mapping.Pool_patch == null
-                        ? Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref)
-                        : Pool_patch.async_apply(session, mapping.Pool_patch.opaque_ref, host.opaque_ref);
-
-                    PollTaskForResultAndDestroy(Connection, ref session, task);
-                }
-                catch (Failure f)
-                {
-                    if (f.ErrorDescription.Count > 1 && (f.ErrorDescription[0] == Failure.PATCH_ALREADY_APPLIED || f.ErrorDescription[0] == Failure.UPDATE_ALREADY_APPLIED))
-                    {
-                        log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.", xenServerPatch.Name, host.Name());
-                        ReplaceProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPDATE, xenServerPatch.Name, host.Name()));
-                    }
-                    else
-                        throw;
-                }
-            }
-            else
+            if (mapping == null || !mapping.IsValid)
             {
                 if (xenServerPatch != null)
-                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, masterUuid);
+                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
 
                 throw new Exception("Pool_patch or Pool_update not found.");
+            }
+
+            try
+            {
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name,
+                    host.Name()));
+
+                XenRef<Task> task = null;
+
+                if (mapping is PoolPatchMapping patchMapping)
+                    task = Pool_patch.async_apply(session, patchMapping.Pool_patch.opaque_ref, host.opaque_ref);
+                else if (mapping is PoolUpdateMapping updateMapping)
+                    task = Pool_update.async_apply(session, updateMapping.Pool_update.opaque_ref, host.opaque_ref);
+
+                PollTaskForResultAndDestroy(Connection, ref session, task);
+            }
+            catch (Failure f)
+            {
+                if (f.ErrorDescription.Count > 1 && (f.ErrorDescription[0] == Failure.PATCH_ALREADY_APPLIED || f.ErrorDescription[0] == Failure.UPDATE_ALREADY_APPLIED))
+                {
+                    log.InfoFormat("The update {0} is already applied on {1}. Ignoring this error.", xenServerPatch.Name, host.Name());
+                    ReplaceProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPDATE, xenServerPatch.Name, host.Name()));
+                }
+                else
+                    throw;
             }
         }
     }

@@ -31,25 +31,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Diagnostics.Problems;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     class PatchPrecheckOnHostPlanAction : PlanActionWithSession
     {
-        private readonly XenServerPatch patch;
-        private readonly List<PoolPatchMapping> mappings;
+        private readonly XenServerPatch xenServerPatch;
+        private readonly List<HostUpdateMapping> mappings;
         private readonly Host host;
         private readonly List<string> hostsThatWillRequireReboot;
 
-        public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch patch, Host host, List<PoolPatchMapping> mappings, List<string> hostsThatWillRequireReboot)
+        public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch xenServerPatch, Host host, List<HostUpdateMapping> mappings, List<string> hostsThatWillRequireReboot)
             : base(connection)
         {
-            this.patch = patch;
+            this.xenServerPatch = xenServerPatch;
             this.host = host;
             this.mappings = mappings;
             this.hostsThatWillRequireReboot = hostsThatWillRequireReboot;
@@ -58,44 +60,49 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             var master = Helpers.GetMaster(Connection);
-            var mapping = mappings.Find(m => m.XenServerPatch.Equals(patch) && m.MasterHost != null && master != null && m.MasterHost.uuid == master.uuid);
 
-            if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
+            var mapping = (from HostUpdateMapping hum in mappings
+                let xpm = hum as XenServerPatchMapping
+                where xpm != null && xpm.Matches(master, xenServerPatch)
+                select xpm).FirstOrDefault();
+
+            if (mapping == null || !mapping.IsValid)
+                return;
+
+            var livePatchStatus = new Dictionary<string, livepatch_status>();
+
+            if (Cancelling)
+                throw new CancelledException();
+
+            try
             {
-                var livePatchStatus = new Dictionary<string, livepatch_status>();
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, xenServerPatch.Name, host.Name()));
 
-                if (Cancelling)
-                    throw new CancelledException();
+                List<Problem> problems = null;
 
-                try
-                {
-                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name()));
+                if (mapping is PoolPatchMapping patchMapping)
+                    problems = new PatchPrecheckCheck(host, patchMapping.Pool_patch, livePatchStatus).RunAllChecks();
+                else if (mapping is PoolUpdateMapping updateMapping)
+                    problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
+              
+                Problem problem = null;
 
-                    PatchPrecheckCheck check = mapping.Pool_patch == null
-                        ? new PatchPrecheckCheck(host, mapping.Pool_update, livePatchStatus)
-                        : new PatchPrecheckCheck(host, mapping.Pool_patch, livePatchStatus);
+                if (problems != null && problems.Count > 0)
+                    problem = problems[0];
 
-                    var problems = check.RunAllChecks();
-
-                    Diagnostics.Problems.Problem problem = null;
-
-                    if (problems != null && problems.Count > 0)
-                        problem = problems[0];
-
-                    if (problem != null)
-                        throw new Exception(problem.Description);
-                }
-                catch (Exception ex)
-                {
-                    log.Error(string.Format("Precheck failed on host {0}", host.Name()), ex);
-                    throw;
-                }
-
-                if (livePatchStatus.ContainsKey(host.uuid)
-                    && livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete
-                    && !hostsThatWillRequireReboot.Contains(host.uuid))
-                    hostsThatWillRequireReboot.Add(host.uuid);
+                if (problem != null)
+                    throw new Exception(problem.Description);
             }
+            catch (Exception ex)
+            {
+                log.Error(string.Format("Precheck failed on host {0}", host.Name()), ex);
+                throw;
+            }
+
+            if (livePatchStatus.ContainsKey(host.uuid)
+                && livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete
+                && !hostsThatWillRequireReboot.Contains(host.uuid))
+                hostsThatWillRequireReboot.Add(host.uuid);
         }
     }
 }

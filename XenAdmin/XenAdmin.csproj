@@ -1007,14 +1007,13 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\PoolPatchMapping.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\XenServerPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\InstallSupplementalPackPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\UpdateProgressBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Wizards\PatchingWizard\UpgradeProgressDescriptor.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\PlanActions\RpuUploadAndApplySuppPackPlanAction.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeUpgradePage.cs">
       <SubType>UserControl</SubType>
@@ -2675,16 +2674,6 @@
     <EmbeddedResource Include="Controls\ConsolePanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConsolePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.ja.resx">
-      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.resx">
-      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.zh-CN.resx">
-      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BootModesControl.ja.resx">
       <DependentUpon>BootModesControl.cs</DependentUpon>

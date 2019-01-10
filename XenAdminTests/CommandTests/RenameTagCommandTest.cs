@@ -65,16 +65,16 @@ namespace XenAdminTests.CommandTests
 
         public void Test()
         {
-            foreach (VM selection in RunTest(GetAnyVM))
+            foreach (VM selection in RunTest(() => GetAnyVM()))
             {
                 //Add a tag (old tag)
-                selection.tags = new []{oldTag};
+                selection.tags = new[] {oldTag};
                 Assert.IsTrue(selection.tags.Contains(oldTag), "old tag added");
 
                 MW(Command.Execute);
 
                 //Look for the renamed tag
-                MWWaitFor(()=>selection.tags.Contains(newTag), "New tag found");
+                MWWaitFor(() => selection.tags.Contains(newTag), "New tag found");
             }
         }
     }

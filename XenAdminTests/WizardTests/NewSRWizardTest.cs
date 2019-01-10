@@ -39,7 +39,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_NFS : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFS()
-            : base(new string[] { "Type", "Name", "Location" }, true, false)
+            : base(new[] { "Type", "Name", "Location" }, doFinish: false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -63,7 +63,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_NFSNoPath : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFSNoPath()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -82,7 +82,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_NFSIncompletePath : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFSIncompletePath()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -106,7 +106,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_iSCSI : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_iSCSI()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)  // can't finish because we haven't implemented probes of iSCSI LUNs etc.
+            : base(new[] { "Type", "Name", "Location" }, false, false)  // can't finish because we haven't implemented probes of iSCSI LUNs etc.
         { }
 
         protected override NewSRWizard NewWizard()
@@ -125,7 +125,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_HBA : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_HBA()
-            : base(new string[] { "Type", "Name", "Location" }, true, false)
+            : base(new[] { "Type", "Name", "Location" }, doFinish: false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -149,7 +149,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_HBANoSelection : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_HBANoSelection()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -168,7 +168,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_CIFS : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_CIFS()
-            : base(new string[] { "Type", "Name", "Location" }, true, false)
+            : base(new[] { "Type", "Name", "Location" }, doFinish: false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -192,7 +192,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_CIFSNoPath : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_CIFSNoPath()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -211,7 +211,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_CIFSIncompletePath : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_CIFSIncompletePath()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -235,7 +235,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_NFSISO : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFSISO()
-            : base(new string[] { "Type", "Name", "Location" }, true, false)
+            : base(new[] { "Type", "Name", "Location" }, doFinish: false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -259,7 +259,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_NFSISONoPath : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFSISONoPath()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -278,7 +278,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_NFSISOIncompletePath : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFSISOIncompletePath()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new[] { "Type", "Name", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()

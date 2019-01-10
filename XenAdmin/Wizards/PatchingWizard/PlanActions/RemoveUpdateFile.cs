@@ -49,7 +49,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATE, _patch.Name(), _pool.Name()));
-            AddProgressStep(string.Format(Messages.REMOVING_UPDATE, _patch.Name(), _pool.Name()));
             new PoolPatchCleanAction(_pool, _patch, true).RunExternal(session);
         }
     }

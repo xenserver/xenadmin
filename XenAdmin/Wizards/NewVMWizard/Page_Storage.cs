@@ -49,6 +49,7 @@ namespace XenAdmin.Wizards.NewVMWizard
     {
         private VM Template;
         private bool InstallMethodIsNetwork;
+        private bool loading = false;
 
         public Page_Storage()
         {
@@ -78,6 +79,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (template == Template && InstallMethodIsNetwork == installMethodIsNetwork)
                 return;
 
+            loading = true;
             Template = template;
 
             InstallMethodIsNetwork = installMethodIsNetwork;
@@ -88,10 +90,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             else
                 DisksRadioButton.Checked = true;
-            DisksGridView.Rows.Clear();
+
             LoadDisks();
-            UpdateEnablement();
-            UpdateCloneCheckboxEnablement(true);
+            loading = false;
+            UpdateEnablement(true);
         }
 
         public override void SelectDefaultControl()
@@ -101,29 +103,30 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void LoadDisks()
         {
+            DisksGridView.Rows.Clear();
+            var rowList = new List<DataGridViewRow>();
+
             XmlNode provision = Template.ProvisionXml();
             if (provision != null)
             {
                 foreach (XmlNode disk in provision.ChildNodes)
-                {
-                    DisksGridView.Rows.Add(new DiskGridRowItem(Connection, disk, SelectedName, Affinity));
-                }
+                    rowList.Add(new DiskGridRowItem(Connection, disk, SelectedName, Affinity));
             }
             else
             {
-                foreach (VBD vbd in Connection.ResolveAll(Template.VBDs))
+                var vbds = Connection.ResolveAll(Template.VBDs);
+                foreach (VBD vbd in vbds)
                 {
                     if (vbd.type != vbd_type.Disk)
                         continue;
 
                     VDI vdi = Connection.Resolve(vbd.VDI);
                     if (vdi != null)
-                    {
-                        DisksGridView.Rows.Add(new DiskGridRowItem(Connection, vdi, vbd, false, Affinity));
-                    }
+                        rowList.Add(new DiskGridRowItem(Connection, vdi, vbd, false, Affinity));
                 }
-
             }
+
+            DisksGridView.Rows.AddRange(rowList.ToArray());
         }
 
         public override bool EnableNext()
@@ -163,16 +166,21 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void DisksRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
+            if (DisksRadioButton.Checked)
+                UpdateEnablement();
         }
 
         private void DisklessVMRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
+            if (DisklessVMRadioButton.Checked)
+                UpdateEnablement();
         }
 
-        private void UpdateEnablement()
+        private void UpdateEnablement(bool pageLoad = false)
         {
+            if (loading)
+                return;
+
             AddButton.Enabled = DisksRadioButton.Checked && DisksGridView.Rows.Count < Template.MaxVBDsAllowed() - 1;
             PropertiesButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0;
             DeleteButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
@@ -181,12 +189,6 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             CheckForOverCommit();
 
-            OnPageUpdated();
-            UpdateCloneCheckboxEnablement(false);
-        }
-
-        private void UpdateCloneCheckboxEnablement(bool pageLoad)
-        {
             CloneCheckBox.Enabled = false;
 
             if (!Template.DefaultTemplate())
@@ -203,9 +205,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                             CloneCheckBox.Enabled = true;
 
                             if (pageLoad)
-                            {
                                 CloneCheckBox.Checked = true;
-                            }
 
                             break;
                         }
@@ -214,9 +214,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
 
             if (!CloneCheckBox.Enabled)
-            {
                 CloneCheckBox.Checked = false;
-            }
+
+            OnPageUpdated();
         }
 
         private DiskOverCommit CheckForOverCommit()

@@ -53,8 +53,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool CheckForUpdatesInProgress;
-        public XenServerPatchAlert SelectedUpdateAlert;
-        public XenServerPatchAlert FileFromDiskAlert;
+        public XenServerPatchAlert UpdateAlertFromWeb;
+        public XenServerPatchAlert AlertFromFileOnDisk;
         public bool FileFromDiskHasUpdateXml { get; private set; }
         private bool firstLoad = true;
         private string unzippedUpdateFilePath;
@@ -179,25 +179,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
                     return WizardMode.AutomatedUpdates;
                 var updateAlert = downloadUpdateRadioButton.Checked
-                    ? SelectedUpdateAlert
+                    ? UpdateAlertFromWeb
                     : selectFromDiskRadioButton.Checked
-                        ? FileFromDiskAlert
+                        ? AlertFromFileOnDisk
                         : null;
                 if (updateAlert != null && updateAlert.NewServerVersion != null)
                     return WizardMode.NewVersion;
                 return WizardMode.SingleUpdate;
             }
         }
-
-        public KeyValuePair<XenServerPatch, string> PatchFromDisk
-        {
-            get
-            {
-                return selectFromDiskRadioButton.Checked && FileFromDiskAlert != null
-                    ? new KeyValuePair<XenServerPatch, string>(FileFromDiskAlert.Patch, SelectedNewPatch)
-                    : new KeyValuePair<XenServerPatch, string>(null, null);
-            }
-        }
+        public KeyValuePair<XenServerPatch, string> PatchFromDisk { get; private set; }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
@@ -210,24 +201,25 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else if (downloadUpdateRadioButton.Checked)
                 {
-                    SelectedUpdateAlert = dataGridViewPatches.SelectedRows.Count > 0
+                    UpdateAlertFromWeb = dataGridViewPatches.SelectedRows.Count > 0
                         ? ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateAlert
                         : null;
 
-                    var distinctHosts = SelectedUpdateAlert != null ? SelectedUpdateAlert.DistinctHosts : null;
+                    var distinctHosts = UpdateAlertFromWeb != null ? UpdateAlertFromWeb.DistinctHosts : null;
                     SelectedUpdateType = distinctHosts != null && distinctHosts.Any(Helpers.ElyOrGreater)
                         ? UpdateType.ISO
                         : UpdateType.Legacy;
 
-                    FileFromDiskAlert = null;
+                    AlertFromFileOnDisk = null;
                     FileFromDiskHasUpdateXml = false;
                     unzippedUpdateFilePath = null;
-                    SelectedNewPatch = null;
+                    SelectedPatchFilePath = null;
+                    PatchFromDisk = new KeyValuePair<XenServerPatch, string>(null, null);
                 }
                 else
                 {
-                    SelectedUpdateAlert = null;
-                    SelectedNewPatch = null;
+                    UpdateAlertFromWeb = null;
+                    SelectedPatchFilePath = null;
 
                     if (!WizardHelpers.IsValidFile(FilePath, out var pathFailure))
                         using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
@@ -238,7 +230,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             return;
                         }
 
-                    SelectedNewPatch = FilePath;
+                    SelectedPatchFilePath = FilePath;
 
                     if (Path.GetExtension(FilePath).ToLowerInvariant().Equals(".zip"))
                     {
@@ -263,18 +255,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (!unzippedFiles.Contains(unzippedUpdateFilePath))
                             unzippedFiles.Add(unzippedUpdateFilePath);
 
-                        SelectedNewPatch = unzippedUpdateFilePath;
+                        SelectedPatchFilePath = unzippedUpdateFilePath;
                     }
                     else
                         unzippedUpdateFilePath = null;                  
 
-                    if (SelectedNewPatch.EndsWith("." + Branding.Update))
+                    if (SelectedPatchFilePath.EndsWith("." + Branding.Update))
                         SelectedUpdateType = UpdateType.Legacy;
-                    else if (SelectedNewPatch.EndsWith("." + Branding.UpdateIso))
+                    else if (SelectedPatchFilePath.EndsWith("." + Branding.UpdateIso))
                         SelectedUpdateType = UpdateType.ISO;
 
-                    FileFromDiskAlert = GetAlertFromFile(SelectedNewPatch, out var hasUpdateXml);
+                    AlertFromFileOnDisk = GetAlertFromFile(SelectedPatchFilePath, out var hasUpdateXml);
                     FileFromDiskHasUpdateXml = hasUpdateXml;
+                    PatchFromDisk = AlertFromFileOnDisk == null
+                        ? new KeyValuePair<XenServerPatch, string>(null, null)
+                        : new KeyValuePair<XenServerPatch, string>(AlertFromFileOnDisk.Patch, SelectedPatchFilePath);
                 }
             }
 
@@ -337,33 +332,35 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void PopulatePatchesBox()
         {
-            dataGridViewPatches.Rows.Clear();
-
-            var updates = Updates.UpdateAlerts.ToList();
-
-            if (dataGridViewPatches.SortedColumn != null)
+            try
             {
-                if (dataGridViewPatches.SortedColumn.Index == ColumnUpdate.Index)
-                    updates.Sort(Alert.CompareOnTitle);
-                else if (dataGridViewPatches.SortedColumn.Index == ColumnDate.Index)
-                    updates.Sort(Alert.CompareOnDate);
-                else if (dataGridViewPatches.SortedColumn.Index == ColumnDescription.Index)
-                    updates.Sort(Alert.CompareOnDescription);
+                var updates = Updates.UpdateAlerts.ToList();
 
-                if (dataGridViewPatches.SortOrder == SortOrder.Descending)
-                    updates.Reverse();
-            }
-            else
-            {
-                updates.Sort(new NewVersionPriorityAlertComparer());
-            }
-
-            foreach (Alert alert in updates)
-            {
-                var patchAlert = alert as XenServerPatchAlert;
-
-                if (patchAlert != null)
+                if (dataGridViewPatches.SortedColumn != null)
                 {
+                    if (dataGridViewPatches.SortedColumn.Index == ColumnUpdate.Index)
+                        updates.Sort(Alert.CompareOnTitle);
+                    else if (dataGridViewPatches.SortedColumn.Index == ColumnDate.Index)
+                        updates.Sort(Alert.CompareOnDate);
+                    else if (dataGridViewPatches.SortedColumn.Index == ColumnDescription.Index)
+                        updates.Sort(Alert.CompareOnDescription);
+
+                    if (dataGridViewPatches.SortOrder == SortOrder.Descending)
+                        updates.Reverse();
+                }
+                else
+                {
+                    updates.Sort(new NewVersionPriorityAlertComparer());
+                }
+
+                dataGridViewPatches.SuspendLayout();
+                dataGridViewPatches.Rows.Clear();
+
+                foreach (Alert alert in updates)
+                {
+                    if (!(alert is XenServerPatchAlert patchAlert))
+                        continue;
+
                     PatchGridViewRow row = new PatchGridViewRow(patchAlert);
                     if (!dataGridViewPatches.Rows.Contains(row))
                     {
@@ -377,6 +374,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
                 }
+            }
+            finally
+            {
+                dataGridViewPatches.ResumeLayout();
             }
         }
 
@@ -442,7 +443,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public UpdateType SelectedUpdateType { get; set; }
 
-        public string SelectedNewPatch { get; set; }
+        public string SelectedPatchFilePath { get; set; }
 
         #region DataGridView
 

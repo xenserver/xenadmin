@@ -41,17 +41,15 @@ namespace XenAdminTests.WizardTests
     public abstract class WizardTest<T> : MainWindowTester where T : XenWizardBase
     {
         protected T wizard;
-        private string[] pageNames;
-        private bool canFinish;
-        private bool doFinish;
+        private readonly string[] pageNames;
+        private readonly bool canFinish;
+        private readonly bool doFinish;
 
         protected Button btnNext;
         protected Button btnPrevious;
         protected Button btnCancel;
 
-        private static uint WM_KEYDOWN = 0x100;
-
-        protected WizardTest(string[] pageNames, bool canFinish, bool doFinish)
+        protected WizardTest(string[] pageNames, bool canFinish = true, bool doFinish = true)
         {
             this.pageNames = pageNames;
             this.canFinish = canFinish;
@@ -59,118 +57,128 @@ namespace XenAdminTests.WizardTests
         }
 
 
-        [Test]
+        [Test(Description = "Test that the Enter key takes us forward through the wizard")]
         [Timeout(100 * 1000)]
         public void RunWizardKeyboardTests()
         {
+            SetUp();
+
+            RunWizardTests(() =>
+                {
+                    //ensure the focus is not on Previous or Cancel, otherwise pressing Enter will result in clicking those
+                    for (int j = 0; j < wizard.Controls.Count; j++)
+                    {
+                        if (!btnCancel.Focused && !btnPrevious.Focused)
+                            break;
+                        wizard.Controls[j].Focus();
+                    }
+                    Win32.PostMessage(wizard.Handle, Win32.WM_KEYDOWN, new IntPtr((int)Keys.Enter), IntPtr.Zero);
+                },
+                btnPrevious.PerformClick,
+                () =>
+                {
+                    var key = doFinish ? Keys.Enter : Keys.Escape;
+                    Win32.PostMessage(wizard.Handle, Win32.WM_KEYDOWN, new IntPtr((int)key), IntPtr.Zero);
+                });
+        }
+
+        [Test(Description = "Test that Next/Previous buttons take us forwards/backwards through the wizard")]
+        [Timeout(100 * 1000)]
+        public void RunWizardButtonTests()
+        {
+            SetUp();
+
+            RunWizardTests(
+                btnNext.PerformClick,
+                btnPrevious.PerformClick,
+                () =>
+                {
+                    if (doFinish)
+                        btnNext.PerformClick();
+                    else if (btnCancel.Enabled)
+                        btnCancel.PerformClick();
+                    else
+                        wizard.Close();
+                });
+        }
+
+        private void SetUp()
+        {
             RunBefore();
 
-            wizard = MW<T>(NewWizard);
+            wizard = MW(NewWizard);
             MW(wizard.Show);
 
             btnNext = TestUtils.GetButton(wizard, "buttonNext");
             btnPrevious = TestUtils.GetButton(wizard, "buttonPrevious");
             btnCancel = TestUtils.GetButton(wizard, "buttonCancel");
+        }
 
-            // Test that the Enter key takes us forward through the wizard
+        private void RunWizardTests(Action goForwards, Action goBackwards, Action finish)
+        {
             for (int i = 0; i < pageNames.Length; ++i)
             {
-                bool lastPage = (i == pageNames.Length - 1);
+                bool lastPage = i == pageNames.Length - 1;
 
-                // Any specific setup or testing for this page defined in derived class
+                Assert.AreEqual(pageNames[i], CurrentPageName(wizard), "Wrong page name");
+                Assert.IsTrue(wizard.HasHelp(), $"Help missing for page {pageNames[i]}");
+
                 TestPage(pageNames[i]);
+
+                Assert.AreEqual(!lastPage || canFinish, btnNext.Enabled,
+                    $"Next button enabled state wrong on page {pageNames[i]}");
+                Assert.AreEqual(lastPage && !IsCancelButtonEnabledOnLastPage, !btnCancel.Enabled,
+                    $"Cancel button enabled state wrong on page {pageNames[i]}");
+
                 if (!lastPage)
                 {
-                    // send the enter key to the wizard window
-                    MW(() => Win32.PostMessage(wizard.Handle, WM_KEYDOWN, new IntPtr((int)Keys.Enter), IntPtr.Zero));
+                    MW(goForwards);
 
                     // wait for any progress dialog to close
                     MWWaitFor(() => wizard.Visible && wizard.CanFocus);
 
-                    // check if the wizard progressed to the next page
                     Assert.AreEqual(pageNames[i + 1], CurrentPageName(wizard),
-                        string.Format("Enter key button didn't get from page {0} to page {1}", pageNames[i], pageNames[i + 1]));
-                }
-                else
-                {
-                    MW(btnCancel.PerformClick);
-                }
-            }
+                        $"Next button didn't get from page {pageNames[i]} to page {pageNames[i + 1]}");
 
-            MW(() => wizard.Dispose());
-        }
-
-        [Test]
-        [Timeout(100 * 1000)]
-        public void RunWizardTests()
-        {
-            RunBefore();
-
-            wizard = MW<T>(NewWizard);
-            MW(wizard.Show);
-
-            btnNext = TestUtils.GetButton(wizard, "buttonNext");
-            btnPrevious = TestUtils.GetButton(wizard, "buttonPrevious");
-            btnCancel = TestUtils.GetButton(wizard, "buttonCancel");
-
-            for (int i = 0; i < pageNames.Length; ++i)
-            {
-                bool lastPage = (i == pageNames.Length - 1);
-
-                // Check we're on the right tab
-                Assert.AreEqual(pageNames[i], CurrentPageName(wizard), "Wrong page name");
-
-                // Check that we have help
-                Assert.IsTrue(wizard.HasHelp(), "Help missing for page: " + pageNames[i]);
-
-                // Any specific setup or testing for this page defined in derived class
-                TestPage(pageNames[i]);
-
-                // Check button enablement
-                //Assert.AreEqual(i != 0, btnPrevious.Enabled, "Previous button wrong on page: " + pageNames[i]);
-                if (lastPage)
-                    Assert.AreEqual(canFinish, btnNext.Enabled, "Next button wrong on page: " + pageNames[i]);
-                else
-                    Assert.AreEqual(true, btnNext.Enabled, "Next button wrong on page: " + pageNames[i]);
-                Assert.AreEqual(lastPage && !CanCancelLastPage, !btnCancel.Enabled, "Cancel button wrong on page: " + pageNames[i]);
-
-                // Test that Next takes us forward and Prev takes us back here
-                if (!lastPage)
-                {
-                    MW(btnNext.PerformClick);
-                    Assert.AreEqual(pageNames[i + 1], CurrentPageName(wizard), "Next button didn't get from page: " + pageNames[i] + " to page: " + pageNames[i + 1]);
-
-                    
                     if (btnPrevious.Enabled)
                     {
-                        MW(btnPrevious.PerformClick);
-                        Assert.AreEqual(pageNames[i], CurrentPageName(wizard), "Next then Previous didn't get back to page: " + pageNames[i]);
+                        MW(goBackwards);
+
                         while (!btnNext.Enabled)
                             Thread.Sleep(1000);
-                        MW(btnNext.PerformClick);
+
+                        Assert.AreEqual(pageNames[i], CurrentPageName(wizard),
+                            $"Next then Previous didn't get back to page {pageNames[i]}");
+
+                        MW(goForwards);
+
+                        // wait for any progress dialog to close
+                        MWWaitFor(() => wizard.Visible && wizard.CanFocus);
+
+                        while (!btnPrevious.Enabled)
+                            Thread.Sleep(1000);
+
+                        Assert.AreEqual(pageNames[i + 1], CurrentPageName(wizard),
+                            $"Next button didn't get from page {pageNames[i]} to page {pageNames[i + 1]}");
                     }
                 }
                 else
                 {
-                    if (doFinish)
-                        MW(btnNext.PerformClick);
-                    else
-                        MW(btnCancel.PerformClick);
+                    MW(finish);
                 }
             }
 
-            // Any subsequent testing defined in derived class
             RunAfter();
-
             MW(() => wizard.Dispose());
         }
 
-        private string CurrentPageName(T wizard)
+        private string CurrentPageName(T wiz)
         {
-            return wizard.CurrentStepTabPage.Text;
+            return wiz.CurrentStepTabPage.Text;
         }
 
         protected abstract T NewWizard();
+
 
         protected virtual void RunBefore()
         {
@@ -184,7 +192,7 @@ namespace XenAdminTests.WizardTests
         {
         }
 
-        protected virtual bool CanCancelLastPage
+        protected virtual bool IsCancelButtonEnabledOnLastPage
         {
             get { return true; }
         }

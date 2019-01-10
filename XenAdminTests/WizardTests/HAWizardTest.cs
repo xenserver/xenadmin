@@ -43,7 +43,7 @@ namespace XenAdminTests.WizardTests.state1_xml.HAWizardTests
     public class HAWizardTest : WizardTest<HAWizard>
     {
         public HAWizardTest()
-            : base(new string[] { "Prerequisites", "Heartbeat SR", "HA Plan", "Finish" }, true, false)
+            : base(new[] { "Prerequisites", "Heartbeat SR", "HA Plan", "Finish" }, doFinish: false)
         { }
 
         protected override HAWizard NewWizard()

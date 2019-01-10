@@ -43,11 +43,10 @@ namespace XenAdminTests
 {
     public abstract class TestObjectProvider
     {
-
         public abstract List<IXenConnection> ConnectionManager { get; }
         public abstract List<IXenConnection> ConnectionManagerCopy { get; }
 
-        protected IXenConnection GetAnyConnection(Predicate<IXenConnection> cond)
+        protected IXenConnection GetAnyConnection(Predicate<IXenConnection> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -58,13 +57,10 @@ namespace XenAdminTests
             return null;
         }
 
-        protected IXenConnection GetAnyConnection()
-        {
-            return GetAnyConnection(null);
-        }
-
-        // Only returns true pools, not pools-of-one
-        protected Pool GetAnyPool(Predicate<Pool> cond)
+        /// <summary>
+        /// Only returns true pools, not pools-of-one
+        /// </summary>
+        protected Pool GetAnyPool(Predicate<Pool> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -79,13 +75,10 @@ namespace XenAdminTests
             return null;
         }
 
-        protected Pool GetAnyPool()
-        {
-            return GetAnyPool(null);
-        }
-
-        // Returns any pool or pool-of-one
-        protected Pool GetAnyPoolOfOne(Predicate<Pool> cond)
+        ///<summary>
+        /// Returns any pool or pool-of-one
+        /// </summary>
+        protected Pool GetAnyPoolOfOne(Predicate<Pool> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -100,12 +93,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected Pool GetAnyPoolOfOne()
-        {
-            return GetAnyPoolOfOne(null);
-        }
-
-        protected Host GetAnyHost(Predicate<Host> cond)
+        protected Host GetAnyHost(Predicate<Host> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -122,12 +110,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected Host GetAnyHost()
-        {
-            return GetAnyHost(null);
-        }
-
-        protected VM GetAnyVM(Predicate<VM> cond)
+        protected VM GetAnyVM(Predicate<VM> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -144,12 +127,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VM GetAnyVM()
-        {
-            return GetAnyVM(null);
-        }
-
-        protected VM GetAnyDefaultTemplate(Predicate<VM> cond)
+        protected VM GetAnyDefaultTemplate(Predicate<VM> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -168,12 +146,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VM GetAnyDefaultTemplate()
-        {
-            return GetAnyDefaultTemplate(null);
-        }
-
-        protected VM GetAnyUserTemplate(Predicate<VM> cond)
+        protected VM GetAnyUserTemplate(Predicate<VM> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -208,12 +181,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VM GetAnyUserTemplate()
-        {
-            return GetAnyUserTemplate(null);
-        }
-
-        protected VM GetAnySnapshot(Predicate<VM> cond)
+        protected VM GetAnySnapshot(Predicate<VM> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -230,12 +198,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VM GetAnySnapshot()
-        {
-            return GetAnySnapshot(null);
-        }
-
-        protected SR GetAnySR(Predicate<SR> cond)
+        protected SR GetAnySR(Predicate<SR> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -252,12 +215,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected SR GetAnySR()
-        {
-            return GetAnySR(null);
-        }
-
-        protected Network GetAnyNetwork(Predicate<Network> cond)
+        protected Network GetAnyNetwork(Predicate<Network> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -274,12 +232,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected Network GetAnyNetwork()
-        {
-            return GetAnyNetwork(null);
-        }
-
-        protected VBD GetAnyVBD(Predicate<VBD> cond)
+        protected VBD GetAnyVBD(Predicate<VBD> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -296,12 +249,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VBD GetAnyVBD()
-        {
-            return GetAnyVBD(null);
-        }
-
-        protected VIF GetAnyVIF(Predicate<VIF> cond)
+        protected VIF GetAnyVIF(Predicate<VIF> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -318,12 +266,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VIF GetAnyVIF()
-        {
-            return GetAnyVIF(null);
-        }
-
-        protected VDI GetAnyVDI(Predicate<VDI> cond)
+        protected VDI GetAnyVDI(Predicate<VDI> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -340,12 +283,7 @@ namespace XenAdminTests
             return null;
         }
 
-        protected VDI GetAnyVDI()
-        {
-            return GetAnyVDI(null);
-        }
-
-        protected Folder GetAnyFolder(Predicate<Folder> cond)
+        protected Folder GetAnyFolder(Predicate<Folder> cond = null)
         {
             foreach (IXenConnection connection in ConnectionManager)
             {
@@ -360,11 +298,6 @@ namespace XenAdminTests
             }
             Assert.Fail("Failed to find folder");
             return null;
-        }
-
-        protected Folder GetAnyFolder()
-        {
-            return GetAnyFolder(null);
         }
 
         protected IXenObject GetAnyXenObject(Predicate<IXenObject> cond)

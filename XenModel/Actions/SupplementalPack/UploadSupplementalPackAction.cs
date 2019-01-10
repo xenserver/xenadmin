@@ -49,12 +49,16 @@ namespace XenAdmin.Actions
         private readonly string suppPackFilePath;
         private readonly long _totalUpdateSize;
         private readonly List<Host> servers;
-
-        private Pool_update poolUpdate;
+        private long totalCount;
+        private long totalUploaded;
         private readonly string _updateName;
 
-        public Dictionary<Host, SR> SrUploadedUpdates = new Dictionary<Host, SR>();
+        public Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>();
+        public readonly Dictionary<Host, XenRef<VDI>> VdiRefsPerHost = new Dictionary<Host, XenRef<VDI>>();
 
+        public string ByteProgressDescription { get; set; }
+
+        private Pool_update poolUpdate;
         public Pool_update PoolUpdate
         {
             get { return poolUpdate; }
@@ -64,25 +68,18 @@ namespace XenAdmin.Actions
         public UploadSupplementalPackAction(IXenConnection connection, List<Host> selectedServers, string path, bool suppressHistory)
             : base(connection, null, Messages.SUPP_PACK_UPLOADING, suppressHistory)
         {
-            Host master = Helpers.GetMaster(connection);
-            if (master == null)
-                throw new NullReferenceException();
+            Host = Helpers.GetMaster(connection) ?? throw new NullReferenceException();
 
             ApiMethodsToRoleCheck.Add("VDI.create");
             ApiMethodsToRoleCheck.Add("VDI.destroy");
             ApiMethodsToRoleCheck.Add("VDI.set_other_config");
             ApiMethodsToRoleCheck.Add("http/put_import_raw_vdi");
             
-            Host = master;
             suppPackFilePath = path;
             _updateName = Path.GetFileNameWithoutExtension(suppPackFilePath);
             _totalUpdateSize = (new FileInfo(path)).Length;
             servers = selectedServers;
         }
-
-        public readonly Dictionary<Host, XenRef<VDI>> VdiRefsToCleanUp = new Dictionary<Host, XenRef<VDI>>();
-
-        public string ByteProgressDescription { get; set; }
 
         protected override void Run()
         {
@@ -104,9 +101,6 @@ namespace XenAdmin.Actions
         {
             CanCancel = !Cancelling;
         }
-
-        private long totalCount;
-        private long totalUploaded;
 
         private string UploadSupplementalPack(SR sr)
         {
@@ -227,19 +221,19 @@ namespace XenAdmin.Actions
             else
             {
                 poolUpdate = null;
-
-                if (localStorageHost != null)
-                    VdiRefsToCleanUp.Add(localStorageHost, vdiRef);
-                else // shared SR
-                    foreach (var server in servers)
-                        VdiRefsToCleanUp.Add(server, vdiRef);
             }
 
+            if (localStorageHost != null)
+                VdiRefsPerHost.Add(localStorageHost, vdiRef);
+            else // shared SR
+                foreach (var server in servers)
+                    VdiRefsPerHost.Add(server, vdiRef);
+
             totalUploaded++;
-            Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
+            Description = string.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
 
             foreach (Host host in servers)
-                SrUploadedUpdates[host] = sr;
+                SrsWithUploadedUpdatesPerHost[host] = sr;
 
             return result;
         }

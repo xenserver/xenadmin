@@ -44,7 +44,7 @@ namespace XenAdminTests.WizardTests.xapidb_app.ImportWizardTests
     {
         public ImportWizardTest_OVF()
             : base(new[] { "Import Source", "EULAs", "Location", "Storage", "Networking", "Security",
-                "OS Fixup Settings", "Transfer VM Settings", "Finish" }, true, false)
+                "OS Fixup Settings", "Transfer VM Settings", "Finish" }, doFinish: false)
         { }
 
         protected override ImportWizard NewWizard()
@@ -88,7 +88,7 @@ namespace XenAdminTests.WizardTests.xapidb_app.ImportWizardTests
     {
         public ImportWizardTest_DiskImage()
             : base(new[] { "Import Source", "VM Definition", "Location", "Storage", "Networking",
-                "OS Fixup Settings", "Transfer VM Settings", "Finish"}, true, false)
+                "OS Fixup Settings", "Transfer VM Settings", "Finish"}, doFinish: false)
         { }
 
         protected override ImportWizard NewWizard()

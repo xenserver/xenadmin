@@ -47,7 +47,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewVMWizardTests
     public class NewVMWizardTestSpecificHost : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestSpecificHost()
-            : base(new string[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         { }
 
         protected override NewVMWizard NewWizard()
@@ -69,7 +69,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewVMWizardTests
     public class NewVMWizardTestUnspecifiedHost : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestUnspecifiedHost()
-            : base(new string[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         { }
 
         protected override NewVMWizard NewWizard()
@@ -94,16 +94,12 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
     public class NewVMWizardTestLinuxTemplate : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestLinuxTemplate()
-            : base(new string[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         { }
 
         protected override NewVMWizard NewWizard()
         {
-            VM template =
-                GetAnyDefaultTemplate(new Predicate<VM>(delegate(VM vm)
-                                                                         {
-                                                                             return Helpers.GetName(vm).ToLowerInvariant().Contains("centos");
-                                                                         }));
+            VM template = GetAnyDefaultTemplate(vm => Helpers.GetName(vm).ToLowerInvariant().Contains("centos"));
             Assert.NotNull(template, "CentOS template not found.");
             return new NewVMWizard(template.Connection, template, null);
         }
@@ -121,20 +117,19 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
     public class NewVMWizardTestWindowsTemplate : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestWindowsTemplate()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         { }
 
         protected override NewVMWizard NewWizard()
         {
-            VM template = GetAnyDefaultTemplate(new Predicate<VM>(
-                delegate(VM vm)
-                {
-                    if (!Helpers.GetName(vm).ToLowerInvariant().Contains("windows"))
-                        return false;
-                    XmlNode xml = vm.ProvisionXml();
-                    return (xml != null && xml.FirstChild != null && 
-                        long.Parse(xml.FirstChild.Attributes["size"].Value) < (long)20 * (1 << 30));  // less than 20GB
-                }));
+            VM template = GetAnyDefaultTemplate(vm =>
+            {
+                if (!Helpers.GetName(vm).ToLowerInvariant().Contains("windows"))
+                    return false;
+                XmlNode xml = vm.ProvisionXml();
+                return (xml != null && xml.FirstChild != null &&
+                        long.Parse(xml.FirstChild.Attributes["size"].Value) < (long)20 * (1 << 30)); // less than 20GB
+            });
             Assert.NotNull(template, "Windows template not found.");
             return new NewVMWizard(template.Connection, template, null);
         }
@@ -152,18 +147,17 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
     public class NewVMWizardTestWindowsTemplate_TooBig : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestWindowsTemplate_TooBig()
-            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage" }, false, false)
+            : base(new[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage" }, false, false)
         { }
 
         protected override NewVMWizard NewWizard()
         {
-            VM template = GetAnyDefaultTemplate(new Predicate<VM>(
-                delegate(VM vm)
-                {
-                    XmlNode xml = vm.ProvisionXml();
-                    return (xml != null && xml.FirstChild != null &&
-                        long.Parse(xml.FirstChild.Attributes["size"].Value) > (long)23 * (1 << 30));  // over 23GB
-                }));
+            VM template = GetAnyDefaultTemplate(vm =>
+            {
+                XmlNode xml = vm.ProvisionXml();
+                return (xml != null && xml.FirstChild != null &&
+                        long.Parse(xml.FirstChild.Attributes["size"].Value) > (long)23 * (1 << 30)); // over 23GB
+            });
             Assert.NotNull(template, "Large template not found.");
             return new NewVMWizard(template.Connection, template, null);
         }
@@ -173,7 +167,7 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
     public class NewVMWizardTestUserTemplate : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestUserTemplate()
-            : base(new string[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new[] {"Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" })
         { }
 
         protected override NewVMWizard NewWizard()

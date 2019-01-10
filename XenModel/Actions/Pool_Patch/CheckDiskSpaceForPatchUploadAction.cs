@@ -44,15 +44,6 @@ namespace XenAdmin.Actions
         private readonly string fileName;
         private readonly long fileSize;
 
-       
-
-        /// <summary>
-        /// This constructor is used to check disk space for uploading a single patch
-        /// </summary>
-        public CheckDiskSpaceForPatchUploadAction(Host host, Pool_patch patch, bool suppressHistory)
-            : this(host, patch.Name(), patch.size, suppressHistory)
-        { }
-
         /// <summary>
         /// This constructor is used to check disk space for uploading a single update file
         /// </summary>
@@ -102,7 +93,7 @@ namespace XenAdmin.Actions
                 {
                     log.WarnFormat("Getting disk space requirements on {0} failed with: {1}", Host.Name(), failure.Message);
                 }
-                Exception = new NotEnoughSpaceException(Host.Name(), fileName, diskSpaceRequirements);
+                throw new NotEnoughSpaceException(Host.Name(), fileName, diskSpaceRequirements);
             }
         }
 
@@ -130,13 +121,6 @@ namespace XenAdmin.Actions
         private readonly string fileName;
 
         public DiskSpaceRequirements DiskSpaceRequirements { get; private set; }
-
-        public NotEnoughSpaceException(string host, string fileName)
-        {
-            this.host = host;
-            this.fileName = fileName;
-            DiskSpaceRequirements = null;
-        }
 
         public NotEnoughSpaceException(string host, string fileName, DiskSpaceRequirements diskSpaceRequirements)
         {

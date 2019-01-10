@@ -32,6 +32,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 using XenAPI;
@@ -626,9 +627,19 @@ namespace XenAdmin.ServerDBs
         {
             if (!db.Tables[clazz].Rows.ContainsKey(opaque_ref))
                 return Helper.NullOpaqueRef;
+
             Db.Row r = db.Tables[clazz].Rows[opaque_ref].CopyOf();
             string new_opaque_ref = CreateOpaqueRef();
+
             r.Props["uuid"].XapiObjectValue = Guid.NewGuid().ToString(); // this object needs a new uuid & ref
+            
+            if (r.Props.TryGetValue("VBDs", out Db.Prop vbdVal))
+            {
+                if (vbdVal.XapiObjectValue is string[] vbds)
+                    r.Props["VBDs"].XapiObjectValue =
+                        vbds.Select(v => $"OpaqueRef:{Guid.NewGuid().ToString()}").ToArray();
+            }
+
             db.Tables[clazz].Rows.Add(new_opaque_ref, r);
             return new_opaque_ref;
         }

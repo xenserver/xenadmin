@@ -27304,15 +27304,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: This patch is for servers with version matching the regular expression &apos;{1}&apos;..
-        /// </summary>
-        public static string PATCH_FOR_XENSERVER_VERSION {
-            get {
-                return ResourceManager.GetString("PATCH_FOR_XENSERVER_VERSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Installation size: {0}.
         /// </summary>
         public static string PATCH_INSTALLATION_SIZE {
@@ -28166,6 +28157,78 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The upload process was cancelled..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upload of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upload of update {0} was not completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following errors occurred while the upload of update {0} was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following error occurred while the upload of update {0} was in progress:.
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upload of update {0} on all selected servers was completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upload of update {0} was completed successfully..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] is now performing the operations necessary to upload your update to the servers specified in the previous step. Please wait for these operations to complete, then click Next to continue with the installation..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_TITLE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] is now installing updates on your system..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE {
@@ -28184,40 +28247,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
-        ///Please wait for these operations to complete, then click Next to continue with the installation..
-        /// </summary>
-        public static string PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is now uploading your update to the servers specified in the previous step.
-        ///Please wait for this operation to complete, then click Next to continue with the installation..
-        /// </summary>
-        public static string PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upload.
         /// </summary>
         public static string PATCHINGWIZARD_UPLOADPAGE_TEXT {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading and uploading the selected file to your servers.
-        /// </summary>
-        public static string PATCHINGWIZARD_UPLOADPAGE_TITLE_DOWNLOAD_AND_UPLOAD {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TITLE_DOWNLOAD_AND_UPLOAD", resourceCulture);
             }
         }
         
@@ -35730,42 +35764,6 @@ namespace XenAdmin {
         public static string UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS {
             get {
                 return ResourceManager.GetString("UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Already uploaded.
-        /// </summary>
-        public static string UPLOAD_PATCH_ALREADY_UPLOADED {
-            get {
-                return ResourceManager.GetString("UPLOAD_PATCH_ALREADY_UPLOADED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading....
-        /// </summary>
-        public static string UPLOAD_PATCH_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("UPLOAD_PATCH_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update successfully uploaded to the selected server(s).
-        /// </summary>
-        public static string UPLOAD_PATCH_END_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("UPLOAD_PATCH_END_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload.
-        /// </summary>
-        public static string UPLOAD_PATCH_TITLE {
-            get {
-                return ResourceManager.GetString("UPLOAD_PATCH_TITLE", resourceCulture);
             }
         }
         

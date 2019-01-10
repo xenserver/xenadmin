@@ -61,8 +61,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool poolSelectionOnly;
         private readonly List<Host> selectedServers = new List<Host>();
 
-        public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
-        public XenServerPatchAlert FileFromDiskAlert { private get; set; }
+        public XenServerPatchAlert UpdateAlertFromWeb { private get; set; }
+        public XenServerPatchAlert AlertFromFileOnDisk { private get; set; }
         public bool FileFromDiskHasUpdateXml { private get; set; }
         public WizardMode WizardMode { private get; set; }
 
@@ -95,7 +95,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
+            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null;
 
             switch (WizardMode)
             {
@@ -308,7 +308,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         return false;
                     }
 
-                    if (WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null)
+                    if (WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);
 
                     // here a file from disk was selected, but it was not an update (FileFromDiskAlert == null)
@@ -330,17 +330,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             string patchUuidFromAlert = null;
             List<Host> applicableHosts = null;
 
-            if (SelectedUpdateAlert != null)
+            if (UpdateAlertFromWeb != null)
             {
-                applicableHosts = SelectedUpdateAlert.DistinctHosts;
-                if(SelectedUpdateAlert.Patch != null)
-                    patchUuidFromAlert = SelectedUpdateAlert.Patch.Uuid;
+                applicableHosts = UpdateAlertFromWeb.DistinctHosts;
+                if(UpdateAlertFromWeb.Patch != null)
+                    patchUuidFromAlert = UpdateAlertFromWeb.Patch.Uuid;
             }
-            else if (FileFromDiskAlert != null)
+            else if (AlertFromFileOnDisk != null)
             {
-                applicableHosts = FileFromDiskAlert.DistinctHosts;
-                if (FileFromDiskAlert.Patch != null)
-                    patchUuidFromAlert = FileFromDiskAlert.Patch.Uuid;
+                applicableHosts = AlertFromFileOnDisk.DistinctHosts;
+                if (AlertFromFileOnDisk.Patch != null)
+                    patchUuidFromAlert = AlertFromFileOnDisk.Patch.Uuid;
             }
 
             tooltipText = null;

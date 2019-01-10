@@ -110,7 +110,8 @@ namespace XenAdmin.Diagnostics.Checks
 
                     return FindProblem(result);
                 }
-                else if (Helpers.ElyOrGreater(Host))
+
+                if (Update!= null)
                 {
                     var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
 
@@ -118,9 +119,11 @@ namespace XenAdmin.Diagnostics.Checks
 
                     if (livePatchCodesByHost != null)
                         livePatchCodesByHost[Host.uuid] = livepatchStatus;
+
+                    return null;
                 }
                 //trying to apply update to partially upgraded pool
-                else if (Helpers.ElyOrGreater(Helpers.GetMaster(Host.Connection)) && !Helpers.ElyOrGreater(Host))
+                if (Helpers.ElyOrGreater(Helpers.GetMaster(Host.Connection)) && !Helpers.ElyOrGreater(Host))
                 {
                     return new WrongServerVersion(this, Host);
                 }
