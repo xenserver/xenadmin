@@ -2222,9 +2222,6 @@
   <data name="BOND_MASTER_GONE" xml:space="preserve">
     <value>在 [XenCenter] 的缓存中找不到绑定主对象。</value>
   </data>
-  <data name="BOOT_MODE" xml:space="preserve">
-    <value>启动模式</value>
-  </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>启动顺序: {0}</value>
   </data>
@@ -2236,6 +2233,9 @@
   </data>
   <data name="BOOT_HARD_DISK" xml:space="preserve">
     <value>硬盘</value>
+  </data>
+  <data name="BOOT_MODE" xml:space="preserve">
+    <value>引导模式</value>
   </data>
   <data name="BROKEN_SRS_AFTER_UPGRADE" xml:space="preserve">
     <value>升级后存在损坏的 SR。要解决该问题，应重新连接 SR。</value>
@@ -5837,6 +5837,24 @@
   <data name="GROUP_ROLES" xml:space="preserve">
     <value>组角色</value>
   </data>
+  <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>UEFI 和 UEFI 安全启动模式是实验性功能，当前不适合于供生产使用。</value>
+  </data>
+  <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>选定模板不支持 UEFI 和 UEFI 安全启动模式。</value>
+  </data>
+  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>UEFI 启动模式是实验性功能，当前不适合于供生产使用。</value>
+  </data>
+  <data name="GUEFI_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>选定模板不支持 UEFI 启动模式。</value>
+  </data>
+  <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
+    <value>UEFI 安全启动模式是实验性功能，当前不适合于供生产使用。</value>
+  </data>
+  <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>选定模板不支持 UEFI 安全启动模式。</value>
+  </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>此版本的 [XenCenter] 已过时，无法连接到 {0}。
 
@@ -6574,6 +6592,12 @@
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_SOURCE_IS_READONLY" xml:space="preserve">
     <value>您在所提供的位置没有写入权限。需要具有读写权限才能导入此类型的文件。</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TEXT" xml:space="preserve">
+    <value>引导选项</value>
+  </data>
+  <data name="IMPORT_SELECT_BOOT_OPTIONS_PAGE_TITLE" xml:space="preserve">
+    <value>为新虚拟机选择引导模式</value>
   </data>
   <data name="IMPORT_SELECT_HOST_PAGE_TITLE" xml:space="preserve">
     <value>选择用来放置导入 VM 的位置</value>
@@ -12879,7 +12903,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>初始 vCPU 数量(&amp;C):</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
-    <value>最大 vCPU 数量(&amp;X):</value>
+    <value>最大 vCPU 数量(&amp;V):</value>
   </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_READONLY" xml:space="preserve">
     <value>仅当 VM 关闭时才能更改最大 vCPU 数量、拓扑以及 vCPU 优先级。 </value>
@@ -12891,7 +12915,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>如果初始 vCPU 数量设置为小于最大数量，则可以在运行过程中向虚拟机中添加更多 vCPU。 </value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
-    <value>vCPU 数量(&amp;C):</value>
+    <value>vCPU 数量(&amp;N):</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPU_MIN_WARNING" xml:space="preserve">
+    <value>建议为此 VM 至少分配 {0} 个 vCPU</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
+    <value>vCPU 数超过物理 CPU 数可能会导致 VM 性能下降</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>容器管理</value>

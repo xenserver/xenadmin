@@ -154,10 +154,10 @@
     <value>PVS アクセラレータ情報</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_6" xml:space="preserve">
-    <value>HVM起動パラメータ</value>
+    <value>HVM 起動パラメーター</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_7" xml:space="preserve">
-    <value>非揮発性ランダムアクセスメモリ</value>
+    <value>不揮発性 RAM</value>
   </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
     <value>[XenServer] インストール後処理のみ (Linux ディストリビューションの修復を試行)</value>
