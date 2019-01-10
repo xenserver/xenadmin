@@ -6798,9 +6798,6 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INFORMATION" xml:space="preserve">
     <value>Information</value>
   </data>
-  <data name="INFO_DISKMEMORY_MODE_GPU" xml:space="preserve">
-    <value>Disk and memory snapshots are not available for VMs with a dedicated GPU</value>
-  </data>
   <data name="INFO_DISKMEMORY_MODE_MISC" xml:space="preserve">
     <value>Disk and memory snapshots are not currently available for this VM</value>
   </data>

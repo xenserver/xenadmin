@@ -6779,9 +6779,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INFORMATION" xml:space="preserve">
     <value>情報</value>
   </data>
-  <data name="INFO_DISKMEMORY_MODE_GPU" xml:space="preserve">
-    <value>GPU を割り当てた VM では、ディスクおよびメモリのスナップショットを作成できません。</value>
-  </data>
   <data name="INFO_DISKMEMORY_MODE_MISC" xml:space="preserve">
     <value>この VM のディスクおよびメモリのスナップショットは現在使用できません。</value>
   </data>
