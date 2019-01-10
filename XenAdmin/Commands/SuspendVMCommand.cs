@@ -217,11 +217,6 @@ namespace XenAdmin.Commands
                 return Messages.VM_HAS_GPU_PASSTHROUGH;
             }
 
-            if (vm.HasVGPUs())
-            {
-                return Messages.VM_HAS_VGPUS;
-            }
-
             return base.GetCantExecuteReasonCore(item);
         }
 
