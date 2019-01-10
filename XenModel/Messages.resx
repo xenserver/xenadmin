@@ -12933,9 +12933,6 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
     <value>This VM has a pass-through GPU assigned.</value>
   </data>
-  <data name="VM_HAS_VGPUS" xml:space="preserve">
-    <value>This VM has a virtual GPU assigned.</value>
-  </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>Memory and/or VCPU changes will take effect when you restart the VM.</value>
   </data>

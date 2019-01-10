@@ -12906,9 +12906,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VM_HAS_GPU_PASSTHROUGH" xml:space="preserve">
     <value>この VM にはパススルー GPU が割り当てられています。</value>
   </data>
-  <data name="VM_HAS_VGPUS" xml:space="preserve">
-    <value>この VM には仮想 GPU が割り当てられています。</value>
-  </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>メモリや VCPU への変更は、VM の再起動後に反映されます。</value>
   </data>
