@@ -19450,15 +19450,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk and memory snapshots are not available for VMs with a dedicated GPU.
-        /// </summary>
-        public static string INFO_DISKMEMORY_MODE_GPU {
-            get {
-                return ResourceManager.GetString("INFO_DISKMEMORY_MODE_GPU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disk and memory snapshots are not currently available for this VM.
         /// </summary>
         public static string INFO_DISKMEMORY_MODE_MISC {

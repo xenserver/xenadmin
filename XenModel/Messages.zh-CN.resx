@@ -6770,9 +6770,6 @@
   <data name="INFORMATION" xml:space="preserve">
     <value>信息</value>
   </data>
-  <data name="INFO_DISKMEMORY_MODE_GPU" xml:space="preserve">
-    <value>磁盘和内存快照不可供带专用 GPU 的 VM 使用</value>
-  </data>
   <data name="INFO_DISKMEMORY_MODE_MISC" xml:space="preserve">
     <value>磁盘和内存快照当前不可供该 VM 使用</value>
   </data>
