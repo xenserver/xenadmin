@@ -9717,19 +9717,32 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
     <value>[XenCenter] 现在正在您的系统中安装更新 {0}。</value>
   </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
-    <value>[XenCenter] 现在正在下载您的更新并将其上载到在上一步骤中指定的服务器。
-请等待完成这些操作，然后单击“下一步”继续进行安装。</value>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
+    <value>上载过程已取消。</value>
   </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_ONLY_UPLOAD" xml:space="preserve">
-    <value>[XenCenter] 正在将您的更新上载到在上一步骤中指定的服务器。
-请等待完成此操作，然后单击“下一步”继续安装。</value>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY" xml:space="preserve">
+    <value>在所有选定的服务器上未成功完成更新 {0} 的上载。更新过程已暂停。请按“重试”继续。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_ONE" xml:space="preserve">
+    <value>更新 {0} 的上载未成功完成。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_MANY" xml:space="preserve">
+    <value>上载更新 {0} 过程中出现以下错误:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_PER_POOL_ONE" xml:space="preserve">
+    <value>上载更新 {0} 过程中出现以下错误:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_MANY" xml:space="preserve">
+    <value>已成功在所有选定的服务器上上载更新 {0}。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_SUCCESS_ONE" xml:space="preserve">
+    <value>更新 {0} 的上载已成功完成。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_TITLE" xml:space="preserve">
+    <value>[XenCenter] 现在正在执行将您的更新上载到上一步骤中指定的服务器所需的操作。请等待完成这些操作，然后单击“下一步”继续进行安装。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
     <value>上载</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
-    <value>下载所选文件并将其上载到您的服务器</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD" xml:space="preserve">
     <value>正在将所选文件上载到您的服务器</value>
@@ -9792,9 +9805,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 修改日期: {1}
 创建日期: {2}
 大小: {3}</value>
-  </data>
-  <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>{0}: 此修补程序适用于版本匹配正则表达式“{1}”的服务器。</value>
   </data>
   <data name="PATCH_INSTALLATION_SIZE" xml:space="preserve">
     <value>安装大小: {0}</value>
@@ -12368,18 +12378,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPLOADING_PATCH_TO" xml:space="preserve">
     <value>正在上载到服务器“{0}”...</value>
-  </data>
-  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
-    <value>已上载</value>
-  </data>
-  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
-    <value>正在上载...</value>
-  </data>
-  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
-    <value>更新已成功上载到所选服务器</value>
-  </data>
-  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
-    <value>上载</value>
   </data>
   <data name="UPLOAD_PATCH_UPLOADED_DESCRIPTION" xml:space="preserve">
     <value>已完成</value>
