@@ -30,12 +30,10 @@
  */
 
 using System;
-using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin;
-using XenAdmin.Core;
 
 namespace XenAdminTests
 {
@@ -50,44 +48,25 @@ namespace XenAdminTests
     {
         private readonly TClass _item;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestWrapper&lt;TClass&gt;"/> class.
-        /// </summary>
-        /// <param name="item">The class that is to be wrapped.</param>
-        public TestWrapper(TClass item)
+        protected TestWrapper(TClass item)
         {
             Util.ThrowIfParameterNull(item, "item");
             _item = item;
         }
 
-        private static TClass GetControlFromWindow(IWin32Window window)
-        {
-            Control control = Control.FromHandle(window.Handle);
-
-            if (!(control is TClass))
-            {
-                throw new ArgumentException("window is not a " + typeof(TClass).Name, "window");
-            }
-
-            return control as TClass;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="TestWrapper&lt;TClass&gt;"/> class. 
-        /// </summary>
-        /// <param name="window">The window.</param>
-        public TestWrapper(IWin32Window window)
+        protected TestWrapper(IWin32Window window)
             : this(GetControlFromWindow(window))
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestWrapper&lt;TClass&gt;"/> class.
-        /// </summary>
-        /// <param name="windowText">The window text of the window being wrapped.</param>
-        public TestWrapper(string windowText)
-            : this(Win32Window.GetWindowWithText(windowText, w => Control.FromHandle(w.Handle) is TClass))
+        private static TClass GetControlFromWindow(IWin32Window window)
         {
+            var control = Control.FromHandle(window.Handle) as TClass;
+
+            if (control == null)
+                throw new ArgumentException($"window is not a {typeof(TClass).Name} window");
+
+            return control;
         }
 
         /// <summary>
@@ -112,10 +91,10 @@ namespace XenAdminTests
         }
 
         /// <summary>
-        /// Gets the value of the private field from the wrapped classes *base* class of the specified name.
+        /// Gets the value of a given private field from the wrapped class's *base* class
         /// </summary>
         /// <typeparam name="TField">The type of the field.</typeparam>
-        /// <param name="name">The name of the private field.</param>
+        /// <param name="name">The name of the field.</param>
         /// <returns>The value of the private field from the base class of the wrapped class of the specified name.</returns>
         protected TField GetBaseClassField<TField>(string name)
         {
@@ -125,14 +104,13 @@ namespace XenAdminTests
             {
                 Type baseType = _item.GetType().BaseType;
 
-                if(baseType == null)
-                    throw new NoNullAllowedException("Base class type was null, check the class has a base class");
+                Assert.NotNull(baseType, $"{name} is a field of a class that has no base class");
 
                 return (TField)baseType.GetField(name, BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_item);
             }
             catch (Exception e)
             {
-                Assert.Fail(string.Format("Field {0} of {1} throws {2}.", name, typeof(TClass).Name, e.GetType().Name));
+                Assert.Fail($"Field {name} of {typeof(TClass).Name} throws {e.GetType().Name}.");
                 throw;
             }
         }
