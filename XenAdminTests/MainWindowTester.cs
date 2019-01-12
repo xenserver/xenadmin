@@ -88,68 +88,59 @@ namespace XenAdminTests
 
         /// <summary>
         /// Waits for the specified action to return true. The action is run on the main program thread.
-        /// The action is attempted 300 times, with a 100ms wait between tries. If the action doesn't
-        /// succeed after being retried then the calling test is failed with the specified message.
-        /// If assert message is null, then the test won't be failed.
+        /// The action is attempted 300 times, with a 100ms wait between tries.
+        /// If the action has not succeeeded after the retires, the calling test fails with the specified message.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <param name="assertMessage">The assert message.</param>
         /// <returns>A value indicating whether the action was successful.</returns>
-        protected bool MWWaitFor(Func<bool> action, string assertMessage)
+        protected bool MWWaitFor(Func<bool> action, string assertMessage = null)
         {
             bool success = false;
-            for (int i = 0; i < 500 && !success; i++)
+            for (int i = 0; i < 500; i++)
             {
-                success = MW<bool>(action);
-                if (!success)
-                {
-                    Thread.Sleep(300);
-                }
+                success = MW(action);
+                if (success)
+                    break;
+
+                Thread.Sleep(300);
             }
 
-            if (assertMessage != null && !success)
-            {
-                Assert.Fail(assertMessage);
-            }
+            if (!success)
+                Assert.Fail(string.IsNullOrEmpty(assertMessage) ? "Waited unsuccessfully" : assertMessage);
 
             return success;
         }
 
         /// <summary>
         /// Waits for the specified action to return true. The action is run on the calling thread.
-        /// The action is attempted 300 times, with a 100ms wait between tries. If the action doesn't
-        /// succeed after being retried then the calling test is failed with the specified message.
-        /// If assert message is null, then the test won't be failed.
+        /// The action is attempted 300 times, with a 100ms wait between tries.
+        /// If the action has not succeeded after the retries, the calling test fails with the specified message.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <param name="assertMessage">The assert message.</param>
         /// <returns>A value indicating whether the action was successful.</returns>
-        protected bool WaitFor(Func<bool> action, string assertMessage)
+        protected void WaitFor(Func<bool> action, string assertMessage = null)
         {
             bool success = false;
-            for (int i = 0; i < 300 && !success; i++)
+            for (int i = 0; i < 300; i++)
             {
                 success = action();
-                if (!success)
-                {
-                    Thread.Sleep(100);
-                }
+                if (success)
+                    break;
+
+                Thread.Sleep(100);
             }
 
-            if (assertMessage != null && !success)
-            {
-                Assert.Fail(assertMessage);
-            }
-            return success;
+            if (!success)
+                Assert.Fail(string.IsNullOrEmpty(assertMessage) ? "Waited unsuccessfully" : assertMessage);
         }
 
-        internal Win32Window WaitForWindowToAppear(string windowText)
+        internal Win32Window WaitForWindowToAppear(string windowText, Predicate<Win32Window> match = null)
         {
-            return WaitForWindowToAppear(windowText, w => true);
-        }
+            if (match == null)
+                match = w => true;
 
-        internal Win32Window WaitForWindowToAppear(string windowText, Predicate<Win32Window> match)
-        {
             Win32Window window = null;
             Func<bool> func = delegate
             {
@@ -157,28 +148,8 @@ namespace XenAdminTests
                 return window != null;
             };
 
-            WaitFor(func, "Window with text " + windowText + " didn't appear.");
+            WaitFor(func, $"Window with text {windowText} didn't appear.");
             return window;
-        }
-
-        /// <summary>
-        /// Waits for the specified action to return true. The action is run on the main program thread.
-        /// The action is attempted 200 times, with a 100ms wait between tries.
-        /// </summary>
-        /// <returns>A value indicating whether the action was successful.</returns>
-        protected bool MWWaitFor(Func<bool> action)
-        {
-            return MWWaitFor(action, null);
-        }
-
-        /// <summary>
-        /// Waits for the specified action to return true. The action is run on the calling thread.
-        /// The action is attempted 200 times, with a 100ms wait between tries.
-        /// </summary>
-        /// <returns>A value indicating whether the action was successful.</returns>
-        protected bool WaitFor(Func<bool> action)
-        {
-            return WaitFor(action, null);
         }
 
         /// <summary>
@@ -507,7 +478,7 @@ namespace XenAdminTests
             });
 
             MW(openDialog);
-            MWWaitFor(() => closed, "Dialog \"" + windowText + "\" was not closed.");
+            MWWaitFor(() => closed, $"Dialog {windowText} was not closed.");
         }
 
         /// <summary>

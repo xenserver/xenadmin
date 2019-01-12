@@ -29,16 +29,11 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAdmin;
 using System.Windows.Forms;
 using XenAdmin.Controls;
-using XenAdmin.Controls.MainWindowControls;
-using XenAdmin.Controls.XenSearch;
 using XenAdmin.Plugins;
-using XenAdmin.Commands;
+
 
 namespace XenAdminTests
 {
@@ -49,193 +44,48 @@ namespace XenAdminTests
         {
         }
 
-        public ToolStripMenuItem ToolsMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("toolsToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem ToolsMenu => GetField<ToolStripMenuItem>("toolsToolStripMenuItem");
 
-        public ToolsMenuWrapper ToolsMenuItems
-        {
-            get
-            {
-                return new ToolsMenuWrapper(Item);
-            }
-        }
+        public ToolsMenuWrapper ToolsMenuItems => new ToolsMenuWrapper(Item);
 
-        public ToolStripMenuItem WindowMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("windowToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem HelpMenu => GetField<ToolStripMenuItem>("helpToolStripMenuItem");
 
-        public ToolStripMenuItem HelpMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("helpToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem ViewMenu => GetField<ToolStripMenuItem>("viewToolStripMenuItem");
 
-        public ToolStripMenuItem ViewMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("viewToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem FileMenu => GetField<ToolStripMenuItem>("fileToolStripMenuItem");
 
+        public ToolStripMenuItem PoolMenu => GetField<ToolStripMenuItem>("poolToolStripMenuItem");
 
-        public ToolStripMenuItem FileMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("fileToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem VMMenu => GetField<ToolStripMenuItem>("VMToolStripMenuItem");
 
-        public ToolStripMenuItem PoolMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("poolToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem TemplatesMenu => GetField<ToolStripMenuItem>("templatesToolStripMenuItem");
 
-        public ToolStripMenuItem VMMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("VMToolStripMenuItem");
-            }
-        }
+        public ToolStripEx MainToolStrip => GetField<ToolStripEx>("ToolStrip");
 
-        public ToolStripMenuItem TemplatesMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("templatesToolStripMenuItem");
-            }
-        }
+        public MainToolBarWrapper MainToolStripItems => new MainToolBarWrapper(Item);
 
-        public ToolStripEx MainToolStrip
-        {
-            get
-            {
-                return GetField<ToolStripEx>("ToolStrip");
-            }
-        }
+        public PluginManager PluginManager => GetField<PluginManager>("pluginManager");
 
-        public MainToolBarWrapper MainToolStripItems
-        {
-            get
-            {
-                return new MainToolBarWrapper(Item);
-            }
-        }
+        public FlickerFreeTreeView TreeView => TestUtils.GetFlickerFreeTreeView(Item, "navigationPane.navigationView.treeView");
 
-        public PluginManager PluginManager
-        {
-            get
-            {
-                return GetField<PluginManager>("pluginManager");
-            }
-        }
+        public ToolStripMenuItem StorageMenu => Item.StorageToolStripMenuItem;
 
-        public FlickerFreeTreeView TreeView
-        {
-            get { return TestUtils.GetFlickerFreeTreeView(Item, "navigationPane.navigationView.treeView"); } }
+        public StorageMenuWrapper StorageMenuItems => new StorageMenuWrapper(Item);
 
-        public CommandToolStripMenuItem AddHostToolStripMenuItemInPoolMenu
-        {
-            get
-            {
-                return GetField<CommandToolStripMenuItem>("addServerToolStripMenuItem");
-            }
-        }
+        public ToolStripMenuItem HostMenu => GetField<ToolStripMenuItem>("HostMenuItem");
 
-        public ToolStripMenuItem StorageMenu
-        {
-            get
-            {
-                return Item.StorageToolStripMenuItem;
-            }
-        }
+        public VMMenuWrapper VMMenuItems => new VMMenuWrapper(Item);
 
-        public StorageMenuWrapper StorageMenuItems
-        {
-            get
-            {
-                return new StorageMenuWrapper(Item);
-            }
-        }
+        public ViewMenuWrapper ViewMenuItems => new ViewMenuWrapper(Item);
 
-        public ToolStripMenuItem HostMenu
-        {
-            get
-            {
-                return GetField<ToolStripMenuItem>("HostMenuItem");
-            }
-        }
+        public TabControl TheTabControl => Item.TheTabControl;
 
-        public HostMenuWrapper HostMenuItems
-        {
-            get
-            {
-                return new HostMenuWrapper(Item);
-            }
-        }
+        public MenuStripEx MainMenuBar => GetField<MenuStripEx>("MainMenuBar");
 
-        public VMMenuWrapper VMMenuItems
-        {
-            get
-            {
-                return new VMMenuWrapper(Item);
-            }
-        }
+        public NetworkTabPageWrapper NetworkPage => new NetworkTabPageWrapper(Item.NetworkPage);
 
-        public ViewMenuWrapper ViewMenuItems
-        {
-            get
-            {
-                return new ViewMenuWrapper(Item);
-            }
-        }
+        public TabPage TabPageNetwork => GetField<TabPage>("TabPageNetwork");
 
-        public TabControl TheTabControl
-        {
-            get
-            {
-                return Item.TheTabControl;
-            }
-        }
-
-        public MenuStripEx MainMenuBar
-        {
-            get
-            {
-                return GetField<XenAdmin.Controls.MenuStripEx>("MainMenuBar");
-            }
-        }
-
-        public NetworkTabPageWrapper NetworkPage
-        {
-            get
-            {
-                return new NetworkTabPageWrapper(Item.NetworkPage);
-            }
-        }
-
-        public TabPage TabPageNetwork
-        {
-            get
-            {
-                return GetField<TabPage>("TabPageNetwork");
-            }
-        }
+        public Form[] OwnedForms => Item.OwnedForms;
     }
 }

@@ -118,37 +118,21 @@ namespace XenAdminTests.MiscTests
         [Test]
         public void TestMultipleUrisWithNoneValid()
         {
-            Uri uri1 = new Uri("http://fgdfffgd.dfgdfgd.dfg");
-            Uri uri2 = new Uri("http://fgdfgd.dfgdfgd.dfg");
-            Uri navCancelUri = new Uri("res://ieframe.dll/navcancl.htm#http://fgdfgd.dfgdfgd.dfg/");
+            Uri curUri = null;
             bool navigating = false;
             bool navigated = false;
             bool navError = false;
 
             _wb.Navigating += (s, e) =>
             {
-                if (e.Url != navCancelUri)
-                {
-                    Assert.IsFalse(navigating);
-                }
-                else
-                {
-                    Assert.IsTrue(navigating);
-                }
-                navigating = true;
+                if (e.Url == curUri)
+                    navigating = true;
             };
 
             _wb.Navigated += (s, e) =>
             {
-                if (e.Url != navCancelUri)
-                {
-                    Assert.IsFalse(navigated);
-                }
-                else
-                {
-                    Assert.IsTrue(navigated);
-                }
-                navigated = true;
+                if (e.Url == curUri)
+                    navigated = true;
             };
 
             _wb.NavigateError += (s, e) =>
@@ -157,10 +141,20 @@ namespace XenAdminTests.MiscTests
                 navError = true;
             };
 
-            var uris = new[] { uri1, uri2 };
+            //Use non-existing URLs with existing rather than completely fictional
+            //domains, otherwise the NavigationError even is not fired
+
+            var uris = new[]
+            {
+                new Uri("http://127.0.0.1/blah"),
+                new Uri("http://127.0.0.1/blahblah")
+            };
+
             foreach (var uri in uris)
             {
-                var curUri = uri;
+                curUri = uri;
+
+                navigated = navigated = navError = false;
                 MW(() => _wb.Navigate(curUri));
                 MWWaitFor(() => navigating && navigated && navError, "Navigation didn't take place.");
             } 

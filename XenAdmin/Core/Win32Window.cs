@@ -122,32 +122,23 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Gets the first window that has the specified window text.
-        /// </summary>
-        /// <param name="text">The text that the window must have.</param>
-        /// <returns>The first window that has the specified window text.</returns>
-        public static Win32Window GetWindowWithText(string text)
-        {
-            return GetWindowWithText(text, w => true);
-        }
-
-        /// <summary>
         /// Gets the first window that has the specified window text and matches the specified Predicate.
         /// </summary>
         /// <param name="text">The text that the window must have.</param>
         /// <param name="match">The Predicate that the window must match.</param>
         /// <returns>The first window that has the specified window text and matches the specified Predicate.</returns>
-        public static Win32Window GetWindowWithText(string text, Predicate<Win32Window> match)
+        public static Win32Window GetWindowWithText(string text, Predicate<Win32Window> match = null)
         {
-            Util.ThrowIfParameterNull(match, "match");
+            if (match == null)
+                match = w => true;
+
             Thread.Sleep(100);
             foreach (Win32Window window in TopLevelWindows)
             {
                 if (window.Text == text && match(window))
-                {
                     return window;
-                }
             }
+
             return null;
         }
 
