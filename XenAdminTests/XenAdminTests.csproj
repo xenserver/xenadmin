@@ -76,7 +76,6 @@
     <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />
     <Compile Include="XenModelTests\ActionTests\VMActionsTest.cs" />
     <Compile Include="MainWindowWrapper\AttachDiskDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\NewDiskDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\AddServerDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\MockMainWindow.cs" />
     <Compile Include="MainWindowWrapper\NameAndConnectionPromptWrapper.cs" />

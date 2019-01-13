@@ -29,11 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using NUnit.Framework;
+using XenAdmin;
 using XenAdmin.Dialogs;
 
 namespace XenAdminTests.DialogTests
@@ -47,11 +44,11 @@ namespace XenAdminTests.DialogTests
         {
             RunBefore();
 
-            dialog = MW<T>(NewDialog);
+            dialog = MW(NewDialog);
 
             RunBeforeShow();
 
-            MW(dialog.Show);
+            MW(()=>dialog.Show(Program.MainWindow));
 
             // Check that if we have a help button, we have help
             if (dialog.HelpButton)

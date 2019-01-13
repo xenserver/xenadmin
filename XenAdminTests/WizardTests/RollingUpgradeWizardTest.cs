@@ -29,8 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System.Linq;
 using System.Threading;
-using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Dialogs;
@@ -80,13 +80,15 @@ namespace XenAdminTests.WizardTests.state5_xml
             }
             else if (pageName == "Apply Upgrade")
             {
-                var window = WaitForWindowToAppear(Messages.ROLLING_POOL_UPGRADE,
-                    w => Control.FromHandle(w.Handle) is NonModalThreeButtonDialog);
+                MWWaitFor(() => wizard.OwnedForms.Length > 0);
+
                 MW(() =>
                 {
-                    var dialog = Control.FromHandle(window.Handle) as Form;
-                    if (dialog != null)
-                        dialog.CancelButton.PerformClick();
+                    var dialog = wizard.OwnedForms.FirstOrDefault(w =>
+                        w.Text == Messages.ROLLING_POOL_UPGRADE && w is NonModalThreeButtonDialog);
+
+                    Assert.NotNull(dialog, "Manual upgrade prompt was not found");
+                    dialog.CancelButton.PerformClick();
                 });
             }
         }

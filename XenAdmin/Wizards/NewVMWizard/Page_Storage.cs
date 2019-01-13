@@ -155,13 +155,15 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            NewDiskDialog dialog = new NewDiskDialog(Connection, Template, SrPicker.SRPickerType.LunPerVDI, null, Affinity, true, 0, AddedVDIs);
-            dialog.DontCreateVDI = true;
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
+            using (var dialog = new NewDiskDialog(Connection, Template, SrPicker.SRPickerType.LunPerVDI, null, Affinity,
+                true, 0, AddedVDIs) {DontCreateVDI = true})
+            {
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
 
-            DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.NewDisk(), dialog.NewDevice(), true, Affinity));
-            UpdateEnablement();
+                DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.NewDisk(), dialog.NewDevice(), true, Affinity));
+                UpdateEnablement();
+            }
         }
 
         private void DisksRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -293,17 +295,19 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (DisksGridView.SelectedRows.Count <= 0)
                 return;
 
-            DiskGridRowItem selectedItem = ((DiskGridRowItem)DisksGridView.SelectedRows[0]);
+            DiskGridRowItem selectedItem = (DiskGridRowItem) DisksGridView.SelectedRows[0];
 
-            NewDiskDialog dialog = new NewDiskDialog(Connection, Template, SrPicker.SRPickerType.LunPerVDI, selectedItem.Disk, Affinity, selectedItem.CanResize, selectedItem.MinSize, AddedVDIs);
-            dialog.DontCreateVDI = true;
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
+            using (var dialog = new NewDiskDialog(Connection, Template, SrPicker.SRPickerType.LunPerVDI,
+                    selectedItem.Disk, Affinity, selectedItem.CanResize, selectedItem.MinSize, AddedVDIs)
+                {DontCreateVDI = true})
+            {
+                if (dialog.ShowDialog(ParentForm) != DialogResult.OK)
+                    return;
 
-            selectedItem.Disk = dialog.NewDisk();
-            selectedItem.UpdateDetails();
-
-            UpdateEnablement();
+                selectedItem.Disk = dialog.NewDisk();
+                selectedItem.UpdateDetails();
+                UpdateEnablement();
+            }
         }
 
         #region Accessors
