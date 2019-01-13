@@ -29,24 +29,23 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 using XenAdmin.Wizards.NewVMWizard;
 using XenAPI;
 using XenAdmin.ServerDBs;
 using XenAdmin;
-using System.Threading;
-using XenAdminTests.CommandTests;
-using XenAdmin.Actions.VMActions;
+using System.Windows.Forms;
+using XenAdmin.Controls;
 
 namespace XenAdminTests.WizardTests.state5_xml
 {
-    /// <summary>
-    /// Tests that VM.Clone is called when using the New VM Wizard with a user template with default storage settings.
-    /// </summary>
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture]
+    [Category(TestCategories.UICategoryB)]
+    [Description("Tests that VM.Clone is called when using the New VM Wizard " +
+                 "with a user template with default storage settings.")]
     public class NewVMWizardTestUserTemplateClone : WizardTest<NewVMWizard>
     {
         private bool _cloneInvoked;
@@ -81,10 +80,11 @@ namespace XenAdminTests.WizardTests.state5_xml
         }
     }
 
-    /// <summary>
-    /// Tests that VM.Copy is called when using the New VM Wizard with a user-template when the user unchecks the clone checkbox.
-    /// </summary>
-    [TestFixture, Category(TestCategories.UICategoryB)]
+
+    [TestFixture]
+    [Category(TestCategories.UICategoryB)]
+    [Description("Tests that VM.Copy is called when using the New VM Wizard " +
+                 "with a user-template when the user unchecks the clone checkbox.")]
     public class NewVMWizardTestUserTemplateCopy : WizardTest<NewVMWizard>
     {
         private bool _copyInvoked;
@@ -122,14 +122,14 @@ namespace XenAdminTests.WizardTests.state5_xml
         {
             if (pageName == "Storage")
             {
-                var cloneCheckBosx = TestUtils.GetCheckBox(wizard, "page_6_Storage.CloneCheckBox");
+                var cloneCheckBox = TestUtils.GetCheckBox(wizard, "page_6_Storage.CloneCheckBox");
 
                 MW(delegate
                 {
-                    Assert.IsTrue(cloneCheckBosx.Enabled, "Clone checkbox wasn't enabled.");
-                    Assert.IsTrue(cloneCheckBosx.Checked, "Clone checkbox wasn't checked.");
+                    Assert.IsTrue(cloneCheckBox.Enabled, "Clone checkbox wasn't enabled.");
+                    Assert.IsTrue(cloneCheckBox.Checked, "Clone checkbox wasn't checked.");
 
-                    cloneCheckBosx.Checked = false;
+                    cloneCheckBox.Checked = false;
                 });
             }
 
@@ -137,12 +137,12 @@ namespace XenAdminTests.WizardTests.state5_xml
         }
     }
 
-    /// <summary>
-    /// Tests that VM.Copy is called when using the New VM Wizard with a user-template when one of the 2 target disks has a
-    /// different SR.
-    /// </summary>
-    [TestFixture, Category(TestCategories.UICategoryB)]
-    public class NewVMWizardTestUserTemplateCopy2 : WizardTest<NewVMWizard>
+
+    [TestFixture]
+    [Category(TestCategories.UICategoryB)]
+    [Description("Tests that VM.Copy is called when using the New VM Wizard " +
+                 "with a user-template when one of the 2 target disks has a different SR.")]
+    public class NewVMWizardTestUserTemplateCopy2 : NewVMWizardTest
     {
         private bool _cloneInvoked;
 
@@ -179,34 +179,29 @@ namespace XenAdminTests.WizardTests.state5_xml
         {
             if (pageName == "Storage")
             {
-                var cloneCheckBosx = TestUtils.GetCheckBox(wizard, "page_6_Storage.CloneCheckBox");
-                var propertiesButton = TestUtils.GetButton(wizard, "page_6_Storage.PropertiesButton");
+                var cloneCheckBox = TestUtils.GetCheckBox(wizard, "page_6_Storage.CloneCheckBox");
+                var gridView = TestUtils.GetDataGridView(wizard, "page_6_Storage.DisksGridView");
 
-                HandleModalDialog("Edit Disk", propertiesButton.PerformClick,
-                    delegate(NewDiskDialogWrapper w)
-                    {
-                        w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name().Contains("SCSI"))); //switch storage for new disk
-                        w.OkButton.PerformClick();
-                    });
+                foreach (DiskGridRowItem item in gridView.Rows)
+                {
+                    ChangeDiskStorageToIscsi(item);
+                    break; //change only one disk
+                }
 
-                MWWaitFor(() => wizard.Visible && wizard.CanFocus);
-                while (!btnNext.Enabled)
-                    Thread.Sleep(1000);
-
-                Assert.IsTrue(cloneCheckBosx.Enabled, "Clone checkbox wasn't enabled");
-                Assert.IsTrue(cloneCheckBosx.Checked, "Clone checkbox wasn't checked");
+                Assert.IsTrue(cloneCheckBox.Enabled, "Clone checkbox wasn't enabled");
+                Assert.IsTrue(cloneCheckBox.Checked, "Clone checkbox wasn't checked");
             }
 
             base.TestPage(pageName);
         }
     }
 
-    /// <summary>
-    /// Tests that VM.Copy is called when using the New VM Wizard with a user-template when the user selects all disks to be a different
-    /// storage than the source.
-    /// </summary>
-    [TestFixture, Category(TestCategories.UICategoryB)]
-    public class NewVMWizardTestUserTemplateCopy3 : WizardTest<NewVMWizard>
+
+    [TestFixture]
+    [Category(TestCategories.UICategoryB)]
+    [Description("Tests that VM.Copy is called when using the New VM Wizard with a user-template " +
+                 "and the user selects all disks to be on a storage different from the source.")]
+    public class NewVMWizardTestUserTemplateCopy3 : NewVMWizardTest
     {
         private bool _copyInvoked;
 
@@ -244,36 +239,24 @@ namespace XenAdminTests.WizardTests.state5_xml
             if (pageName == "Storage")
             {
                 var cloneCheckBox = TestUtils.GetCheckBox(wizard, "page_6_Storage.CloneCheckBox");
-                var propertiesButton = TestUtils.GetButton(wizard, "page_6_Storage.PropertiesButton");
                 var gridView = TestUtils.GetDataGridView(wizard, "page_6_Storage.DisksGridView");
 
                 foreach (DiskGridRowItem item in gridView.Rows)
-                {
-                    MW(() => item.Selected = true);
+                    ChangeDiskStorageToIscsi(item);
 
-                    HandleModalDialog<NewDiskDialogWrapper>("Edit Disk", propertiesButton.PerformClick,
-                        delegate(NewDiskDialogWrapper w)
-                        {
-                            w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name().Contains("SCSI"))); //switch storage for new disk
-                            w.OkButton.PerformClick();
-                        });
-                }
-
-                MW(delegate
-                {
-                    Assert.IsFalse(cloneCheckBox.Enabled, "clone checkbox was enabled.");
-                    Assert.IsFalse(cloneCheckBox.Checked, "clone checkbox was checked.");
-                });
+                Assert.IsFalse(cloneCheckBox.Enabled, "clone checkbox was enabled.");
+                Assert.IsFalse(cloneCheckBox.Checked, "clone checkbox was checked.");
             }
 
             base.TestPage(pageName);
         }
     }
 
-    /// <summary>
-    /// Tests that VM.clone is called when using the New VM Wizard with a default-template when the user selects default storage settings.
-    /// </summary>
-    [TestFixture, Category(TestCategories.UICategoryB)]
+
+    [TestFixture]
+    [Category(TestCategories.UICategoryB)]
+    [Description("Tests that VM.clone is called when using the New VM Wizard " +
+                 "with a default-template when the user selects default storage settings.")]
     public class NewVMWizardTestDefaultTemplate : WizardTest<NewVMWizard>
     {
         private bool _cloneInvoked;
@@ -305,6 +288,41 @@ namespace XenAdminTests.WizardTests.state5_xml
 
             List<VBD> vbds = wizard.Action.VM.Connection.ResolveAll(wizard.Action.VM.VBDs);
             Assert.IsTrue(vbds.TrueForAll(v => v.GetIsOwner() || v.IsCDROM()), "IsOwner wasn't set");
+        }
+    }
+
+    public abstract class NewVMWizardTest : WizardTest<NewVMWizard>
+    {
+        protected NewVMWizardTest(string[] pageNames, bool canFinish = true, bool doFinish = true)
+            : base(pageNames, canFinish, doFinish)
+        {
+        }
+
+        protected void ChangeDiskStorageToIscsi(DiskGridRowItem item)
+        {
+            var propertiesButton = TestUtils.GetButton(wizard, "page_6_Storage.PropertiesButton");
+
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                MWWaitFor(() => wizard.OwnedForms.Length > 0);
+
+                var dialog = wizard.OwnedForms.FirstOrDefault(w => w.Text == "Edit Disk");
+                var srPicker = TestUtils.GetSrPicker(dialog, "SrListBox");
+                var okButton = TestUtils.GetButton(dialog, "OkButton");
+
+                MW(() =>
+                {
+                    srPicker.selectSRorDefaultorAny(GetAnySR(sr => sr.Name().Contains("SCSI")));
+                    okButton.PerformClick();
+                });
+            });
+            MW(() =>
+            {
+                item.Selected = true;
+                propertiesButton.PerformClick();
+            });
+
+            MWWaitFor(() => wizard.Visible && wizard.CanFocus);
         }
     }
 }

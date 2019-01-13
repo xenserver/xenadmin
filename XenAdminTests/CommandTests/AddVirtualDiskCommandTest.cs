@@ -29,13 +29,11 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using XenAdmin.Commands;
 using XenAdmin.ServerDBs;
 using XenAPI;
-using XenAdmin.Core;
 using NUnit.Framework;
 
 namespace XenAdminTests.CommandTests
@@ -83,15 +81,18 @@ namespace XenAdminTests.CommandTests
             {
                 int vbdCount = DbProxy.proxys[vm.Connection].db.Tables["vbd"].Rows.Count;
 
-                MW(delegate
+                MW(()=> MainWindowWrapper.StorageMenuItems.AddVirtualDiskToolStripMenuItemInStorageMenu.PerformClick());
+                MWWaitFor(() => MainWindowWrapper.OwnedForms.Length > 0);
+
+                MW(() =>
                 {
-                    MainWindowWrapper.StorageMenuItems.AddVirtualDiskToolStripMenuItemInStorageMenu.PerformClick();
-                    NewDiskDialogWrapper newDiskDialogWrapper = new NewDiskDialogWrapper(WaitForWindowToAppear("Add Virtual Disk"));
-                    newDiskDialogWrapper.OkButton.PerformClick();
+                    var dialog = MainWindowWrapper.OwnedForms.FirstOrDefault(w => w.Text == "Add Virtual Disk");
+                    TestUtils.GetButton(dialog, "OkButton").PerformClick();
                 });
 
                 // wait until command finished.
-                MWWaitFor(() => DbProxy.proxys[vm.Connection].db.Tables["vbd"].Rows.Count == vbdCount + 1, "AddVirtualDiskCommandTest didn't finish.");
+                MWWaitFor(() => DbProxy.proxys[vm.Connection].db.Tables["vbd"].Rows.Count == vbdCount + 1,
+                    "AddVirtualDiskCommandTest didn't finish.");
             }
         }
 

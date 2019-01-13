@@ -1,5 +1,3 @@
-using System;
-
 namespace XenAdmin.Dialogs
 {
     partial class NewDiskDialog
@@ -67,6 +65,7 @@ namespace XenAdmin.Dialogs
             0,
             0,
             0});
+            this.DiskSizeNumericUpDown.TextChanged += new System.EventHandler(this.DiskSizeNumericUpDown_TextChanged);
             this.DiskSizeNumericUpDown.ValueChanged += new System.EventHandler(this.DiskSizeNumericUpDown_ValueChanged);
             this.DiskSizeNumericUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DiskSizeNumericUpDown_KeyUp);
             // 
@@ -172,6 +171,7 @@ namespace XenAdmin.Dialogs
             resources.GetString("comboBoxUnits.Items"),
             resources.GetString("comboBoxUnits.Items1")});
             this.comboBoxUnits.Name = "comboBoxUnits";
+            this.comboBoxUnits.SelectedIndexChanged += new System.EventHandler(this.comboBoxUnits_SelectedIndexChanged);
             // 
             // label4
             // 

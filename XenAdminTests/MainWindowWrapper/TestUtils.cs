@@ -30,17 +30,13 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Controls.MainWindowControls;
-using XenAdmin.Dialogs;
 using XenAdmin.Controls.XenSearch;
 
 namespace XenAdminTests
@@ -68,7 +64,7 @@ namespace XenAdminTests
             }
             catch (Exception e)
             {
-                Assert.Fail(string.Format("Field {0} of {1} throws {2}: {3}.", parts[0], o.GetType().Name, e.GetType().Name, e.Message));
+                Assert.Fail($"Field {parts[0]} of {o.GetType().Name} throws {e.GetType().Name}: {e.Message}.");
             }
 
             if (parts.Length == 1)

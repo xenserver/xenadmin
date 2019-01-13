@@ -45,6 +45,10 @@ namespace XenAdmin.Dialogs
 {
     public partial class NewDiskDialog : XenDialogBase
     {
+        private enum DiskSizeUnits { MB, GB }
+
+        #region Private fields
+
         private readonly VM TheVM;
         private readonly SR TheSR;
 
@@ -57,64 +61,59 @@ namespace XenAdmin.Dialogs
         private bool SelectionNull = true;
         private readonly IEnumerable<VDI> _VDINamesInUse = new List<VDI>();
 
+        private const int DecimalPlacesGB = 3; // show 3 decimal places for GB (CA-91322)
+        private const int DecimalPlacesMB = 0;
+        private const int IncrementGB = 1;
+        private const int IncrementMB = 256;
+
+        private const decimal MinimumDiskSizeGB = 0.001m;
+        private const int MinimumDiskSizeMB = 1;
+        private DiskSizeUnits currentSelectedUnits = DiskSizeUnits.GB;
+
+        #endregion
+
+        #region Constructors
+
         private NewDiskDialog(IXenConnection connection, IEnumerable<VDI> vdiNamesInUse)
             : base(connection)
         {
-            if (connection == null) throw new ArgumentNullException("connection");
-            _VDINamesInUse = vdiNamesInUse;
+            if (connection == null)
+                throw new ArgumentNullException("connection");
+
             InitializeComponent();
-            InitDialog(connection);
-        }
 
-        private void InitDialog(IXenConnection connection)
-        {
-            this.Owner = Program.MainWindow;
+            _VDINamesInUse = vdiNamesInUse;
             SrListBox.Connection = connection;
-
-            // Add events
             NameTextBox.Text = GetDefaultVDIName();
-            srListBox_SelectedIndexChanged(null, null);
-
-            DiskSizeNumericUpDown.TextChanged += DiskSizeNumericUpDown_TextChanged;
-
             max = (decimal)Math.Pow(1024, 4);//1 Petabit
             min = 0;
             comboBoxUnits.SelectedItem = comboBoxUnits.Items[0];
-            comboBoxUnits.SelectedIndexChanged += comboBoxUnits_SelectedIndexChanged;
-
             SetNumUpDownIncrementAndDecimals(DiskSizeNumericUpDown, comboBoxUnits.SelectedItem.ToString());
+            updateErrorsAndButtons();
         }
 
         public NewDiskDialog(IXenConnection connection, SR sr)
             : this(connection, new List<VDI>())
         {
             TheSR = sr;
-            PickerUsage = SrPicker.SRPickerType.InstallFromTemplate;
+            SrListBox.Usage = SrPicker.SRPickerType.InstallFromTemplate;
             SrListBox.SetAffinity(null);
             SrListBox.selectSRorNone(TheSR);
         }
 
-        private SrPicker.SRPickerType PickerUsage
-        {
-            set { SrListBox.Usage = value; }
-        }
-
-        public NewDiskDialog(IXenConnection connection, VM vm, VDI diskTemplate, Host affinity, bool canResize, long minSize, IEnumerable<VDI> vdiNamesInUse)
-            : this(connection, vm, SrPicker.SRPickerType.VM, diskTemplate, affinity, canResize, minSize, vdiNamesInUse)
-        {
-        }
-
         public NewDiskDialog(IXenConnection connection, VM vm)
-            : this(connection, vm, null, vm.Home(), true, 0, new List<VDI>()) { }
+            : this(connection, vm, SrPicker.SRPickerType.VM, null, vm.Home(), true, 0, new List<VDI>())
+        { }
 
-        public NewDiskDialog(IXenConnection connection, VM vm, SrPicker.SRPickerType PickerUsage, VDI diskTemplate, Host affinity, bool canResize, long minSize, IEnumerable<VDI> vdiNamesInUse)
+        public NewDiskDialog(IXenConnection connection, VM vm, SrPicker.SRPickerType pickerUsage, VDI diskTemplate,
+            Host affinity, bool canResize, long minSize, IEnumerable<VDI> vdiNamesInUse)
             : this(connection, vdiNamesInUse)
         {
             TheVM = vm;
             DiskTemplate = diskTemplate;
             CanResize = canResize;
             MinSize = minSize;
-            this.PickerUsage = PickerUsage;
+            SrListBox.Usage = pickerUsage;
             SrListBox.SetAffinity(affinity);
 
             Pool pool_sr = Helpers.GetPoolOfOne(connection);
@@ -126,6 +125,8 @@ namespace XenAdmin.Dialogs
 
             LoadValues();
         }
+
+        #endregion
 
         private void LoadValues()
         {
@@ -152,11 +153,6 @@ namespace XenAdmin.Dialogs
             OkButton.Text = Messages.OK;
         }
 
-        private const int DecimalPlacesGB = 3; // show 3 decimal places for GB (CA-91322)
-        private const int DecimalPlacesMB = 0;
-        private const int IncrementGB = 1;
-        private const int IncrementMB = 256;
-        
         private string GetDefaultVDIName()
         {
             List<string> usedNames = new List<string>();
@@ -172,7 +168,7 @@ namespace XenAdmin.Dialogs
             SelectionNull = obj == null;
         }
 
-        void srListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateErrorsAndButtons();
         }
@@ -334,16 +330,11 @@ namespace XenAdmin.Dialogs
             updateErrorsAndButtons();
         }
 
-        private enum DiskSizeUnits { MB, GB }
-
         private DiskSizeUnits SelectedUnits
         {
             get { return comboBoxUnits.SelectedIndex == 0 ? DiskSizeUnits.GB : DiskSizeUnits.MB; }
             set { comboBoxUnits.SelectedIndex = value == DiskSizeUnits.GB ? 0 : 1; }
         }
-
-        private const decimal MinimumDiskSizeGB = 0.001m;
-        private const int MinimumDiskSizeMB = 1;
 
         private decimal GetDiskTooSmallMessageMinSize()
         {
@@ -439,19 +430,7 @@ namespace XenAdmin.Dialogs
             Close();
         }
 
-        private bool dontCreateVDI;
-        public bool DontCreateVDI
-        {
-            get
-            {
-                return dontCreateVDI;
-            }
-            set
-            {
-                dontCreateVDI = value;
-            }
-        }
-
+        public bool DontCreateVDI { get; set; }
 
         private void DiskSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
@@ -497,7 +476,6 @@ namespace XenAdmin.Dialogs
                 min = (decimal)((double)MinSize / GetUnits());
         }
 
-        private DiskSizeUnits currentSelectedUnits = DiskSizeUnits.GB;
         private void comboBoxUnits_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Check if the new unit is different than the previous one otherwise discard the change
