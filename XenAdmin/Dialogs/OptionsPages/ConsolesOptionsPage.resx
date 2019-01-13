@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ConsoleTabTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ConsoleTabTableLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -131,7 +131,7 @@
   <data name="ClipboardCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ClipboardCheckBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
@@ -154,7 +154,7 @@
     <value>ClipboardCheckBox</value>
   </data>
   <data name="&gt;&gt;ClipboardCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ClipboardCheckBox.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
@@ -184,7 +184,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="checkBoxDisableRDPPolling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 17</value>
+    <value>366, 17</value>
   </data>
   <data name="checkBoxDisableRDPPolling.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -196,7 +196,7 @@
     <value>checkBoxDisableRDPPolling</value>
   </data>
   <data name="&gt;&gt;checkBoxDisableRDPPolling.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBoxDisableRDPPolling.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
@@ -229,7 +229,7 @@
     <value>WindowsKeyCheckBox</value>
   </data>
   <data name="&gt;&gt;WindowsKeyCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;WindowsKeyCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
@@ -265,7 +265,7 @@
     <value>ConnectToServerConsoleCheckBox</value>
   </data>
   <data name="&gt;&gt;ConnectToServerConsoleCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ConnectToServerConsoleCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
@@ -298,7 +298,7 @@
     <value>SoundCheckBox</value>
   </data>
   <data name="&gt;&gt;SoundCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SoundCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
@@ -331,7 +331,7 @@
     <value>AutoSwitchCheckBox</value>
   </data>
   <data name="&gt;&gt;AutoSwitchCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AutoSwitchCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
@@ -352,7 +352,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="RDPGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1009, 146</value>
+    <value>1017, 146</value>
   </data>
   <data name="RDPGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -406,7 +406,7 @@
     <value>PreserveVNCConsoleScalingCheckBox</value>
   </data>
   <data name="&gt;&gt;PreserveVNCConsoleScalingCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PreserveVNCConsoleScalingCheckBox.Parent" xml:space="preserve">
     <value>ConsoleGroupBox</value>
@@ -439,7 +439,7 @@
     <value>PreserveUndockedScaleCheckBox</value>
   </data>
   <data name="&gt;&gt;PreserveUndockedScaleCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PreserveUndockedScaleCheckBox.Parent" xml:space="preserve">
     <value>ConsoleGroupBox</value>
@@ -460,7 +460,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="ConsoleGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1009, 76</value>
+    <value>1017, 76</value>
   </data>
   <data name="ConsoleGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -499,10 +499,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="UncaptureKeyComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 57</value>
-  </data>
-  <data name="UncaptureKeyComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>161, 57</value>
   </data>
   <data name="UncaptureKeyComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 21</value>
@@ -514,7 +511,7 @@
     <value>UncaptureKeyComboBox</value>
   </data>
   <data name="&gt;&gt;UncaptureKeyComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UncaptureKeyComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -522,11 +519,11 @@
   <data name="&gt;&gt;UncaptureKeyComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="UncaptureLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="UncaptureLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="UncaptureLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="UncaptureLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -535,13 +532,10 @@
     <value>NoControl</value>
   </data>
   <data name="UncaptureLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 57</value>
-  </data>
-  <data name="UncaptureLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>3, 61</value>
   </data>
   <data name="UncaptureLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+    <value>152, 13</value>
   </data>
   <data name="UncaptureLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -549,14 +543,11 @@
   <data name="UncaptureLabel.Text" xml:space="preserve">
     <value>R&amp;elease keyboard and mouse:</value>
   </data>
-  <data name="UncaptureLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;UncaptureLabel.Name" xml:space="preserve">
     <value>UncaptureLabel</value>
   </data>
   <data name="&gt;&gt;UncaptureLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UncaptureLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -564,11 +555,11 @@
   <data name="&gt;&gt;UncaptureLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="FullscreenHeader.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="FullscreenHeader.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="FullscreenHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="FullscreenHeader.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -577,13 +568,10 @@
     <value>NoControl</value>
   </data>
   <data name="FullscreenHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
-  </data>
-  <data name="FullscreenHeader.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>3, 7</value>
   </data>
   <data name="FullscreenHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+    <value>92, 13</value>
   </data>
   <data name="FullscreenHeader.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -591,14 +579,11 @@
   <data name="FullscreenHeader.Text" xml:space="preserve">
     <value>&amp;Full-screen mode:</value>
   </data>
-  <data name="FullscreenHeader.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;FullscreenHeader.Name" xml:space="preserve">
     <value>FullscreenHeader</value>
   </data>
   <data name="&gt;&gt;FullscreenHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FullscreenHeader.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -610,10 +595,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="DockKeyComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 30</value>
-  </data>
-  <data name="DockKeyComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>161, 30</value>
   </data>
   <data name="DockKeyComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 21</value>
@@ -625,7 +607,7 @@
     <value>DockKeyComboBox</value>
   </data>
   <data name="&gt;&gt;DockKeyComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DockKeyComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -633,11 +615,11 @@
   <data name="&gt;&gt;DockKeyComboBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="DockUndockabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="DockUndockabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="DockUndockabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="DockUndockabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -646,13 +628,10 @@
     <value>NoControl</value>
   </data>
   <data name="DockUndockabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 30</value>
-  </data>
-  <data name="DockUndockabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>3, 34</value>
   </data>
   <data name="DockUndockabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+    <value>73, 13</value>
   </data>
   <data name="DockUndockabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -660,14 +639,11 @@
   <data name="DockUndockabel.Text" xml:space="preserve">
     <value>&amp;Dock/Undock:</value>
   </data>
-  <data name="DockUndockabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;DockUndockabel.Name" xml:space="preserve">
     <value>DockUndockabel</value>
   </data>
   <data name="&gt;&gt;DockUndockabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DockUndockabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -679,10 +655,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="KeyComboListBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 3</value>
-  </data>
-  <data name="KeyComboListBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>161, 3</value>
   </data>
   <data name="KeyComboListBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 21</value>
@@ -694,7 +667,7 @@
     <value>KeyComboListBox</value>
   </data>
   <data name="&gt;&gt;KeyComboListBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;KeyComboListBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -709,7 +682,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 81</value>
+    <value>299, 81</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -718,7 +691,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>ShortcutsGroupBox</value>
@@ -742,7 +715,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="ShortcutsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1009, 116</value>
+    <value>1017, 116</value>
   </data>
   <data name="ShortcutsGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -775,7 +748,7 @@
     <value>0, 0, 0, 12</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1015, 13</value>
+    <value>1023, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -787,7 +760,7 @@
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
@@ -808,7 +781,7 @@
     <value>6</value>
   </data>
   <data name="ConsoleTabTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1015, 407</value>
+    <value>1023, 407</value>
   </data>
   <data name="ConsoleTabTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -817,7 +790,7 @@
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
   <data name="&gt;&gt;ConsoleTabTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ConsoleTabTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -828,7 +801,7 @@
   <data name="ConsoleTabTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ClipboardCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="RDPGroupBox" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ConsoleGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ShortcutsGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -838,12 +811,12 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1015, 407</value>
+    <value>1023, 407</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ConsolesOptionsPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
