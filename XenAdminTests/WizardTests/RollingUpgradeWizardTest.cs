@@ -90,6 +90,8 @@ namespace XenAdminTests.WizardTests.state5_xml
                     Assert.NotNull(dialog, "Manual upgrade prompt was not found");
                     dialog.CancelButton.PerformClick();
                 });
+
+                MWWaitFor(() => wizard.Visible && wizard.CanFocus);
             }
         }
 
