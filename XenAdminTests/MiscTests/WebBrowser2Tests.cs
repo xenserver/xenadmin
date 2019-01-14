@@ -154,7 +154,7 @@ namespace XenAdminTests.MiscTests
             {
                 curUri = uri;
 
-                navigated = navigated = navError = false;
+                navigating = navigated = navError = false;
                 MW(() => _wb.Navigate(curUri));
                 MWWaitFor(() => navigating && navigated && navError, "Navigation didn't take place.");
             } 
