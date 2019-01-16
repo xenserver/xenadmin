@@ -91,7 +91,11 @@ namespace XenAdminTests.WizardTests.state5_xml
                     dialog.CancelButton.PerformClick();
                 });
 
-                MWWaitFor(() => wizard.Visible && wizard.CanFocus);
+                //since we clicked cancel the retry button will become visible
+                var retryBtn = TestUtils.GetButton(wizard, "RollingUpgradeUpgradePage.buttonRetry");
+
+                MWWaitFor(() => wizard.Visible && wizard.CanFocus &&
+                                retryBtn.Visible && retryBtn.Enabled);
             }
         }
 
