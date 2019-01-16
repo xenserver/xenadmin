@@ -40,11 +40,11 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
-    public partial class RollingUpgradeReadyToUpgradePage : XenTabPage
+    public partial class RollingUpgradeExtrasPage : XenTabPage
     {
         public string SelectedSuppPack;
 
-        public RollingUpgradeReadyToUpgradePage()
+        public RollingUpgradeExtrasPage()
         {
             InitializeComponent();
             listBox.DrawItem += new DrawItemEventHandler(listBox_DrawItem);

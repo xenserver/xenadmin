@@ -1,6 +1,6 @@
 ﻿namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
-    partial class RollingUpgradeReadyToUpgradePage
+    partial class RollingUpgradeExtrasPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RollingUpgradeReadyToUpgradePage));
             this.listBox = new System.Windows.Forms.ListBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RollingUpgradeExtrasPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -129,12 +129,12 @@
             this.tableLayoutPanel1.SetColumnSpan(this.label6, 2);
             this.label6.Name = "label6";
             // 
-            // RollingUpgradeReadyToUpgradePage
+            // RollingUpgradeExtrasPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "RollingUpgradeReadyToUpgradePage";
+            this.Name = "RollingUpgradeExtrasPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

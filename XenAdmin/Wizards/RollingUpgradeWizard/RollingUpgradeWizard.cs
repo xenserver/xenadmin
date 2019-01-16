@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private readonly RollingUpgradeWizardFirstPage RollingUpgradeWizardFirstPage;
         private readonly RollingUpgradeWizardInstallMethodPage RollingUpgradeWizardInstallMethodPage;
         private readonly RollingUpgradeWizardUpgradeModePage RollingUpgradeWizardUpgradeModePage;
-        private readonly RollingUpgradeReadyToUpgradePage RollingUpgradeReadyToUpgradePage;
+        private readonly RollingUpgradeExtrasPage RollingUpgradeExtrasPage;
 
         public RollingUpgradeWizard()
         {
@@ -63,14 +63,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             RollingUpgradeWizardFirstPage = new RollingUpgradeWizardFirstPage();
             RollingUpgradeWizardInstallMethodPage = new RollingUpgradeWizardInstallMethodPage();
             RollingUpgradeWizardUpgradeModePage = new RollingUpgradeWizardUpgradeModePage();
-            RollingUpgradeReadyToUpgradePage = new RollingUpgradeReadyToUpgradePage();
+            RollingUpgradeExtrasPage = new RollingUpgradeExtrasPage();
 
             AddPage(RollingUpgradeWizardFirstPage);
             AddPage(RollingUpgradeWizardSelectPool);
             AddPage(RollingUpgradeWizardUpgradeModePage);
             AddPage(RollingUpgradeWizardPrecheckPage);
             //Here has to be inserted the installer location page if automatic
-            AddPage(RollingUpgradeReadyToUpgradePage);
+            AddPage(RollingUpgradeExtrasPage);
             AddPage(RollingUpgradeUpgradePage);
         }
 
@@ -100,7 +100,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 RollingUpgradeWizardUpgradeModePage.SelectedMasters = selectedMasters;
                 RollingUpgradeWizardPrecheckPage.SelectedMasters = selectedMasters;
                 RollingUpgradeWizardInstallMethodPage.SelectedMasters = selectedMasters;
-                RollingUpgradeReadyToUpgradePage.SelectedMasters = selectedMasters;
+                RollingUpgradeExtrasPage.SelectedMasters = selectedMasters;
 
                 var selectedPools = new List<Pool>();
                 foreach (var master in selectedMasters)
@@ -118,7 +118,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 
                 RemovePageAt(4);
                 if (manualModeSelected)
-                    AddPage(RollingUpgradeReadyToUpgradePage, 4);
+                    AddPage(RollingUpgradeExtrasPage, 4);
                 else
                     AddPage(RollingUpgradeWizardInstallMethodPage, 4);
 
@@ -137,10 +137,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
-            else if (prevPageType == typeof(RollingUpgradeReadyToUpgradePage))
+            else if (prevPageType == typeof(RollingUpgradeExtrasPage))
             {
-                RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeReadyToUpgradePage.ApplySuppPackAfterUpgrade;
-                RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeReadyToUpgradePage.SelectedSuppPack;
+                RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeExtrasPage.ApplySuppPackAfterUpgrade;
+                RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeExtrasPage.SelectedSuppPack;
             }
         }
 

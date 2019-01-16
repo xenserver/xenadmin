@@ -490,7 +490,7 @@
     <value>523, 380</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>RollingUpgradeReadyToUpgradePage</value>
+    <value>RollingUpgradeExtrasPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
