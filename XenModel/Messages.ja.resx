@@ -946,28 +946,19 @@
     <value>{0} の状態レポートを作成しています</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_DESCRIPTION" xml:space="preserve">
-    <value>{0} からシステムの状態を取得しています</value>
+    <value>選択したサーバーからシステムの状態を取得しています...</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_DISK_FULL" xml:space="preserve">
     <value>システム状態の取得に失敗しました。ディスクがいっぱいです</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>状態レポートの作成に失敗しました </value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED" xml:space="preserve">
-    <value>データは収集されませんでした</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED_GUI" xml:space="preserve">
     <value>データが収集されていません。[前へ] をクリックして新しい項目またはサーバーを選択して再試行してください。</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL" xml:space="preserve">
     <value>状態レポートの作成が完了しました</value>
   </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERROR" xml:space="preserve">
+  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL" xml:space="preserve">
     <value>状態レポートの作成が完了しました (エラーあり)。不完全な状態レポートが作成されました。</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS" xml:space="preserve">
-    <value>状態レポートの作成が完了しました (エラーあり)。[XenCenter] のログだけが作成されました。</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>システム状態の情報の取得</value>
@@ -2247,23 +2238,35 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
     <value>接続に問題が生じた SR 上に [XenServer product] Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
   </data>
+  <data name="BUGTOOL_CLIENT_ACTION_LOGS_META" xml:space="preserve">
+    <value>[XenCenter] のログおよびメタデータを収集しています</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_ACTION_META" xml:space="preserve">
+    <value>[XenCenter] のメタデータを収集しています</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_LOGS_META" xml:space="preserve">
+    <value>[XenCenter] のログおよびメタデータ</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_META" xml:space="preserve">
+    <value>[XenCenter] のメタデータ</value>
+  </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>状態レポート -</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_COMPILING" xml:space="preserve">
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>キャンセル済み</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
     <value>作成中</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_DOWNLOADING" xml:space="preserve">
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
     <value>ダウンロード中 - {0}</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_FAILED" xml:space="preserve">
-    <value>失敗</value>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>失敗しました - 詳しくはログを参照してください</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_FAILED_WITH_ERROR" xml:space="preserve">
-    <value>失敗 - {0}</value>
-  </data>
-  <data name="BUGTOOL_HOST_STATUS_PENDING" xml:space="preserve">
-    <value>保留</value>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>応答待ち</value>
   </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>レポートに追加するデータを選択してください</value>
@@ -2287,7 +2290,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>レポートの保存先</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL" xml:space="preserve">
-    <value>この操作をキャンセルしてよろしいですか?</value>
+    <value>このページから移動してもよろしいですか?
+
+これによって状態レポートの収集がキャンセルされます。</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE" xml:space="preserve">
     <value>状態レポートを作成しています</value>
@@ -2302,7 +2307,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>レポートに追加するサーバーを選択してください</value>
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
-    <value>{0} ユーザーは、一部の項目を取得できません。</value>
+    <value>失敗しました。{0} ユーザーは、一部の項目を取得できません。</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>サーバーの状態レポートを保存しています</value>
@@ -9484,6 +9489,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION" xml:space="preserve">
     <value>アップデート プロセスはキャンセルされました。</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>このページから移動してもよろしいですか?
+
+アップデート プロセスがキャンセルされ、システムが不安定な状態のままになることがあります。</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
     <value>1 つまたは複数の自動アップデート プロセスが正常に完了しませんでした。アップデート プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
   </data>
@@ -9721,6 +9731,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
     <value>アップロード プロセスはキャンセルされました。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>このページから移動してもよろしいですか?
+
+これによってアップロード プロセスがキャンセルされます。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY" xml:space="preserve">
     <value>選択したすべてのサーバーでアップデート {0} のアップロードが正常に完了しませんでした。アップデート プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
@@ -10715,6 +10730,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
     <value>プールのローリングアップグレード プロセスがキャンセルされました</value>
+  </data>
+  <data name="ROLLING_UPGRADE_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>このページから移動してもよろしいですか?
+
+プールのローリング アップグレード プロセスがキャンセルされ、システムが不安定な状態のままになることがあります。</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>このアップグレードを再開するには、プールのローリング アップグレード ウィザードを再度実行してください。</value>

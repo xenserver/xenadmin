@@ -946,28 +946,19 @@
     <value>正在编译 {0} 的状态报告</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_DESCRIPTION" xml:space="preserve">
-    <value>正在从 {0} 获取系统状态</value>
+    <value>正在从指定的服务器获取系统状态...</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_DISK_FULL" xml:space="preserve">
     <value>获取系统状态失败: 磁盘已满</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>无法编译状态报告 </value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED" xml:space="preserve">
-    <value>未编译数据</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED_GUI" xml:space="preserve">
     <value>未编译数据。请按“上一步”选择新项目或服务器，然后重试。</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL" xml:space="preserve">
     <value>已完成状态报告的编译</value>
   </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERROR" xml:space="preserve">
+  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL" xml:space="preserve">
     <value>已完成编译状态报告(出错)。已完成编译部分状态报告。</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_WITH_ERRORS_XCLOGS" xml:space="preserve">
-    <value>已完成编译状态报告(出错)。仅完成编译 [XenCenter] 日志。</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>正在获取系统状态信息</value>
@@ -2243,23 +2234,35 @@
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
     <value>Tools ISO 位于损坏的 SR 上，[XenCenter] 将尝试修复该问题，然后再继续操作。是否要继续?</value>
   </data>
+  <data name="BUGTOOL_CLIENT_ACTION_LOGS_META" xml:space="preserve">
+    <value>正在编译 [XenCenter] 日志和元数据</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_ACTION_META" xml:space="preserve">
+    <value>正在编译 [XenCenter] 元数据</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_LOGS_META" xml:space="preserve">
+    <value>[XenCenter] 日志和元数据</value>
+  </data>
+  <data name="BUGTOOL_CLIENT_META" xml:space="preserve">
+    <value>[XenCenter] 元数据</value>
+  </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_COMPILING" xml:space="preserve">
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
     <value>正在编译</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_DOWNLOADING" xml:space="preserve">
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
     <value>正在下载 - {0}</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_FAILED" xml:space="preserve">
-    <value>失败</value>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>失败 - 请参阅日志以了解详细信息</value>
   </data>
-  <data name="BUGTOOL_HOST_STATUS_FAILED_WITH_ERROR" xml:space="preserve">
-    <value>失败 - {0}</value>
-  </data>
-  <data name="BUGTOOL_HOST_STATUS_PENDING" xml:space="preserve">
-    <value>待定</value>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>已排队</value>
   </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>选择要包含在报告中的数据</value>
@@ -2283,7 +2286,9 @@
     <value>报告目标位置</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL" xml:space="preserve">
-    <value>是否确实要取消当前操作?</value>
+    <value>是否确实要离开此页面?
+
+此操作将取消编译状态报告。</value>
   </data>
   <data name="BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE" xml:space="preserve">
     <value>编译状态报告</value>
@@ -2298,7 +2303,7 @@
     <value>选择要包含在报告中的服务器</value>
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
-    <value>权限为{0}的用户无法检索所有指定的项目。</value>
+    <value>失败。{0} 用户无法检索所有指定项目。</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>正在保存服务器状态报告</value>
@@ -9482,6 +9487,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION" xml:space="preserve">
     <value>更新过程已取消。</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>是否确实要离开此页面?
+
+此操作将取消更新过程，并且可能会使您的系统处于不稳定状态。</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
     <value>一个或多个自动更新过程未成功完成。更新过程已暂停。请按“重试”继续。</value>
   </data>
@@ -9719,6 +9729,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
     <value>上载过程已取消。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>是否确实要离开此页面?
+
+此操作将取消上载过程。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_FAILURE_MANY" xml:space="preserve">
     <value>在所有选定的服务器上未成功完成更新 {0} 的上载。更新过程已暂停。请按“重试”继续。</value>
@@ -10713,6 +10728,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
     <value>滚动池升级过程已取消。</value>
+  </data>
+  <data name="ROLLING_UPGRADE_CANCELLATION_RECONSIDER" xml:space="preserve">
+    <value>是否确实要离开此页面?
+
+此操作将取消滚动池升级过程，并且可能会使您的系统处于不稳定状态。</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>可以通过重新启动“滚动池升级”向导继续执行此升级。</value>
