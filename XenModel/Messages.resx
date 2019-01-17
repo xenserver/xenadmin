@@ -2249,21 +2249,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
   </data>
-  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
-    <value>Canceled</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
-    <value>Compiling</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
-    <value>Downloading - {0}</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
-    <value>Failed - Please see logs for details</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
-    <value>Queued</value>
-  </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>Select the data you want to include in your report</value>
   </data>
@@ -2304,6 +2289,21 @@ This will cancel compilation of the status report.</value>
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
     <value>Failed. A {0} user cannot retrieve all the specified items.</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
+    <value>Compiling</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
+    <value>Downloading - {0}</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>Failed - Please see logs for details</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>Queued</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
@@ -10712,6 +10712,12 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
+  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>S&amp;top</value>
   </data>
@@ -10744,8 +10750,17 @@ This will cancel the rolling pool upgrade process and may leave your system in a
   <data name="ROLLING_UPGRADE_ERROR_POOL_ONE" xml:space="preserve">
     <value>The following error occurred while rolling pool upgrade was in progress:</value>
   </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
+    <value>Choose whether to also apply updates or suplemental packs</value>
+  </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
     <value>Installer Location</value>
+  </data>
+  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
+    <value>Locate the network install files (Automatic Mode)</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>
@@ -13942,20 +13957,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
-    <value>Extras</value>
-  </data>
-  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>Choose whether to also apply updates or suplemental packs</value>
-  </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
-    <value>Apply all released &amp;updates on the new version</value>
-  </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
-    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
-  </data>
-  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
-    <value>Locate the network install files (Automatic Mode)</value>
   </data>
 </root>
