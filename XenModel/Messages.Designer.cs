@@ -28334,15 +28334,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Perform the rolling pool upgrade (Manual Mode).
-        /// </summary>
-        public static string PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE {
-            get {
-                return ResourceManager.GetString("PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Performance Graphs.
         /// </summary>
         public static string PERFORMANCE_TAB_TITLE {
@@ -29052,15 +29043,6 @@ namespace XenAdmin {
         public static string POOL_X {
             get {
                 return ResourceManager.GetString("POOL_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  Pool {0}.
-        /// </summary>
-        public static string POOL_X_READYUPGRADE {
-            get {
-                return ResourceManager.GetString("POOL_X_READYUPGRADE", resourceCulture);
             }
         }
         
@@ -30019,15 +30001,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to Upgrade.
-        /// </summary>
-        public static string READY_UPGRADE {
-            get {
-                return ResourceManager.GetString("READY_UPGRADE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to R&amp;eattach.
         /// </summary>
         public static string REATTACH_SR {
@@ -30861,6 +30834,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version.
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version (only on pools licensed for automated updates).
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES_MIXED {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES_MIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S&amp;top.
         /// </summary>
         public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
@@ -30953,11 +30944,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Locate the network install files (Automatic Mode).
+        ///   Looks up a localized string similar to Extras.
+        /// </summary>
+        public static string ROLLING_UPGRADE_EXTRAS_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_EXTRAS_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose whether to also apply updates or suplemental packs.
+        /// </summary>
+        public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_EXTRAS_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installer Location.
         /// </summary>
         public static string ROLLING_UPGRADE_METHOD_PAGE_TEXT {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_METHOD_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locate the network install files (Automatic Mode).
+        /// </summary>
+        public static string ROLLING_UPGRADE_METHOD_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_METHOD_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -35650,15 +35668,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to         Upgrade pool master {0}.
-        /// </summary>
-        public static string UPGRADE_POOL_MASTER_X {
-            get {
-                return ResourceManager.GetString("UPGRADE_POOL_MASTER_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Prechecks.
         /// </summary>
         public static string UPGRADE_PRECHECKS_TEXT {
@@ -35682,15 +35691,6 @@ namespace XenAdmin {
         public static string UPGRADE_SERVER {
             get {
                 return ResourceManager.GetString("UPGRADE_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to         Upgrade server {0}.
-        /// </summary>
-        public static string UPGRADE_SERVER_X {
-            get {
-                return ResourceManager.GetString("UPGRADE_SERVER_X", resourceCulture);
             }
         }
         

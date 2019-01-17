@@ -68,9 +68,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             AddPage(RollingUpgradeWizardFirstPage);
             AddPage(RollingUpgradeWizardSelectPool);
             AddPage(RollingUpgradeWizardUpgradeModePage);
-            AddPage(RollingUpgradeWizardPrecheckPage);
             //Here has to be inserted the installer location page if automatic
             AddPage(RollingUpgradeExtrasPage);
+            AddPage(RollingUpgradeWizardPrecheckPage);
             AddPage(RollingUpgradeUpgradePage);
         }
 
@@ -116,29 +116,25 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var manualModeSelected = RollingUpgradeWizardUpgradeModePage.ManualModeSelected;
                 
-                RemovePageAt(4);
-                if (manualModeSelected)
-                    AddPage(RollingUpgradeExtrasPage, 4);
-                else
-                    AddPage(RollingUpgradeWizardInstallMethodPage, 4);
+                RemovePage(RollingUpgradeWizardInstallMethodPage);
+                if (!manualModeSelected)
+                    AddAfterPage(RollingUpgradeWizardUpgradeModePage, RollingUpgradeWizardInstallMethodPage);
 
                 RollingUpgradeWizardPrecheckPage.ManualUpgrade = manualModeSelected;
                 RollingUpgradeUpgradePage.ManualModeSelected = manualModeSelected;
-
-                var applyUpdatesToNewVersion = RollingUpgradeWizardUpgradeModePage.ApplyUpdatesToNewVersion;
-                RollingUpgradeWizardPrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
-                RollingUpgradeUpgradePage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
             {
                 RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
-                RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeWizardInstallMethodPage.ApplySuppPackAfterUpgrade;
-                RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeWizardInstallMethodPage.SelectedSuppPack;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
             else if (prevPageType == typeof(RollingUpgradeExtrasPage))
             {
+                var applyUpdatesToNewVersion = RollingUpgradeExtrasPage.ApplyUpdatesToNewVersion;
+                RollingUpgradeWizardPrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
+                RollingUpgradeUpgradePage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
+
                 RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeExtrasPage.ApplySuppPackAfterUpgrade;
                 RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeExtrasPage.SelectedSuppPack;
             }

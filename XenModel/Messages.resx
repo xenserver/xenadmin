@@ -9856,9 +9856,6 @@ File not found</value>
   <data name="PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE" xml:space="preserve">
     <value>Interval must be a multiple of 5</value>
   </data>
-  <data name="PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE" xml:space="preserve">
-    <value>Perform the rolling pool upgrade (Manual Mode)</value>
-  </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>Permission Denied</value>
   </data>
@@ -10121,9 +10118,6 @@ Please reconnect the host and try again</value>
   </data>
   <data name="POOL_X" xml:space="preserve">
     <value>pool '{0}'</value>
-  </data>
-  <data name="POOL_X_READYUPGRADE" xml:space="preserve">
-    <value> Pool {0}</value>
   </data>
   <data name="POWER_ON" xml:space="preserve">
     <value>Power On</value>
@@ -10419,9 +10413,6 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>A {0} user cannot alter memory values and will be restricted to the settings on the template.</value>
-  </data>
-  <data name="READY_UPGRADE" xml:space="preserve">
-    <value>Ready to Upgrade</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>Read Only</value>
@@ -10754,7 +10745,7 @@ This will cancel the rolling pool upgrade process and may leave your system in a
     <value>The following error occurred while rolling pool upgrade was in progress:</value>
   </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
-    <value>Locate the network install files (Automatic Mode)</value>
+    <value>Installer Location</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>
@@ -12375,9 +12366,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
     <value>Upgrade pool master '{0}'</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER_X" xml:space="preserve">
-    <value>        Upgrade pool master {0}</value>
-  </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>Prechecks</value>
   </data>
@@ -12386,9 +12374,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>Upgrade server '{0}</value>
-  </data>
-  <data name="UPGRADE_SERVER_X" xml:space="preserve">
-    <value>        Upgrade server {0}</value>
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>Upgrade '{0}'</value>
@@ -13957,5 +13942,20 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
+    <value>Choose whether to also apply updates or suplemental packs</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
+  </data>
+  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
+    <value>Locate the network install files (Automatic Mode)</value>
   </data>
 </root>
