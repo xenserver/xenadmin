@@ -28,73 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox = new System.Windows.Forms.ListBox();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RollingUpgradeExtrasPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.checkBoxInstallSuppPack = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.applyUpdatesCheckBox = new System.Windows.Forms.CheckBox();
+            this.applyUpdatesLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.fileNameTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.checkBoxInstallSuppPack = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox
-            // 
-            resources.ApplyResources(this.listBox, "listBox");
-            this.listBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.listBox.FormattingEnabled = true;
-            this.listBox.Name = "listBox";
-            // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.listBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxInstallSuppPack, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.applyUpdatesCheckBox, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.applyUpdatesLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxInstallSuppPack, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // label1
+            // applyUpdatesCheckBox
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.applyUpdatesCheckBox, "applyUpdatesCheckBox");
+            this.applyUpdatesCheckBox.Checked = true;
+            this.applyUpdatesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.applyUpdatesCheckBox, 2);
+            this.applyUpdatesCheckBox.Name = "applyUpdatesCheckBox";
+            this.applyUpdatesCheckBox.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // applyUpdatesLabel
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
-            this.label2.Name = "label2";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
-            this.label3.Name = "label3";
-            // 
-            // checkBoxInstallSuppPack
-            // 
-            resources.ApplyResources(this.checkBoxInstallSuppPack, "checkBoxInstallSuppPack");
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxInstallSuppPack, 2);
-            this.checkBoxInstallSuppPack.Name = "checkBoxInstallSuppPack";
-            this.checkBoxInstallSuppPack.UseVisualStyleBackColor = true;
-            this.checkBoxInstallSuppPack.CheckedChanged += new System.EventHandler(this.checkBoxInstallSuppPack_CheckedChanged);
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.applyUpdatesLabel, "applyUpdatesLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.applyUpdatesLabel, 2);
+            this.applyUpdatesLabel.Name = "applyUpdatesLabel";
             // 
             // tableLayoutPanel2
             // 
@@ -129,6 +102,20 @@
             this.tableLayoutPanel1.SetColumnSpan(this.label6, 2);
             this.label6.Name = "label6";
             // 
+            // checkBoxInstallSuppPack
+            // 
+            resources.ApplyResources(this.checkBoxInstallSuppPack, "checkBoxInstallSuppPack");
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxInstallSuppPack, 2);
+            this.checkBoxInstallSuppPack.Name = "checkBoxInstallSuppPack";
+            this.checkBoxInstallSuppPack.UseVisualStyleBackColor = true;
+            this.checkBoxInstallSuppPack.CheckedChanged += new System.EventHandler(this.checkBoxInstallSuppPack_CheckedChanged);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.tableLayoutPanel1.SetColumnSpan(this.label4, 2);
+            this.label4.Name = "label4";
+            // 
             // RollingUpgradeExtrasPage
             // 
             resources.ApplyResources(this, "$this");
@@ -144,12 +131,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBoxInstallSuppPack;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -157,5 +139,7 @@
         private System.Windows.Forms.Button BrowseButton;
         private System.Windows.Forms.TextBox fileNameTextBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label applyUpdatesLabel;
+        private System.Windows.Forms.CheckBox applyUpdatesCheckBox;
     }
 }

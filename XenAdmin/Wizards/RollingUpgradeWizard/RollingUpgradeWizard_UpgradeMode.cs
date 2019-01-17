@@ -29,11 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -64,41 +61,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             get { return "Upgrademode"; }
         }
-
-        public override string NextText(bool isLastPage)
-        {
-            return Messages.RUN_PRECHECKS_WITH_ACCESS_KEY;
-        }
-
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            var licensedPoolCount = 0;
-            var poolCount = 0;
-            foreach (Host master in SelectedMasters)
-            {
-                var hosts = master.Connection.Cache.Hosts;
-
-                if (hosts.Length == 0)
-                    continue;
-
-                poolCount++;
-                var automatedUpdatesRestricted = hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates
-                if (!automatedUpdatesRestricted)
-                    licensedPoolCount++;
-            }
-
-            if (licensedPoolCount > 0) // at least one pool licensed for automated updates 
-            {
-                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = true;
-                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
-                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES
-                    : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED;
-            }
-            else  // all pools unlicensed
-            {
-                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = false;
-            }
-        }
         #endregion
 
         #region Accessors
@@ -107,14 +69,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public bool ManualModeSelected
         {
             get { return radioButtonManual.Checked; }
-        }
-
-        public bool ApplyUpdatesToNewVersion
-        {
-            get
-            {
-                return applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
-            }
         }
         #endregion
     }

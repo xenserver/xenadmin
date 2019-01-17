@@ -31,8 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
@@ -47,60 +46,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeExtrasPage()
         {
             InitializeComponent();
-            listBox.DrawItem += new DrawItemEventHandler(listBox_DrawItem);
         }
 
-        void listBox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            ListBox lbox = sender as ListBox;
-            var item = lbox.Items[e.Index];
+        #region XenTabPage overrides
+        public override string Text => Messages.ROLLING_UPGRADE_EXTRAS_PAGE_TEXT;
 
-            using (Brush brush = new SolidBrush(SystemColors.WindowText))
-            {
-                Host host = item as Host;
-                if (host != null)
-                {
-                    e.Graphics.DrawString(string.Format(host.IsMaster()
-                                                            ? Messages.UPGRADE_POOL_MASTER_X
-                                                            : Messages.UPGRADE_SERVER_X, host.Name().Ellipsise(64)), Program.DefaultFont, brush, e.Bounds);
-                    return;
-                }
+        public override string HelpID => "UpgradeExtras";
 
-                Pool pool = item as Pool;
-                if (pool != null)
-                {
-                    e.Graphics.DrawString(string.Format(Messages.POOL_X_READYUPGRADE, pool.Name().Ellipsise(64)), Program.DefaultFontBold, brush, e.Bounds);
-                    return;
-                }
-
-                e.Graphics.DrawString(item.ToString(), Program.DefaultFont, brush, e.Bounds);
-            }
-        }
-
-        public override string Text
-        {
-            get
-            {
-                return Messages.READY_UPGRADE;
-            }
-        }
-
-        public override string HelpID
-        {
-            get { return "Readyupgrade"; }
-        }
-
-        public override string PageTitle
-        {
-            get
-            {
-                return Messages.PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE;
-            }
-        }
+        public override string PageTitle => Messages.ROLLING_UPGRADE_EXTRAS_PAGE_TITLE;
 
         public override string NextText(bool isLastPage)
         {
-            return Messages.START_UPGRADE;
+            return Messages.RUN_PRECHECKS_WITH_ACCESS_KEY;
         }
 
         public override bool EnableNext()
@@ -113,21 +70,32 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            listBox.Items.Clear();
-            foreach (var master in SelectedMasters)
+            var licensedPoolCount = 0;
+            var poolCount = 0;
+            foreach (Host master in SelectedMasters)
             {
-                Pool pool = Helpers.GetPoolOfOne(master.Connection);
-                if (pool != null)
-                {
-                    listBox.Items.Add(pool);
-                    var hostsToUpgrade = pool.HostsToUpgrade();
-                    foreach (var host in hostsToUpgrade)
-                    {
-                        listBox.Items.Add(host);
-                    }
-                }
+                var hosts = master.Connection.Cache.Hosts;
+
+                if (hosts.Length == 0)
+                    continue;
+
+                poolCount++;
+                var automatedUpdatesRestricted = hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates
+                if (!automatedUpdatesRestricted)
+                    licensedPoolCount++;
             }
-            listBox.Items.Add(Messages.REVERT_POOL_STATE);
+
+            if (licensedPoolCount > 0) // at least one pool licensed for automated updates 
+            {
+                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = true;
+                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
+                    ? Messages.ROLLING_UPGRADE_APPLY_UPDATES
+                    : Messages.ROLLING_UPGRADE_APPLY_UPDATES_MIXED;
+            }
+            else  // all pools unlicensed
+            {
+                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = false;
+            }
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
@@ -137,6 +105,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
             }
         }
+        #endregion
 
         public IEnumerable<Host> SelectedMasters { private get; set; }
 
@@ -151,6 +120,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get
             {
                 return checkBoxInstallSuppPack.Checked;
+            }
+        }
+
+        public bool ApplyUpdatesToNewVersion
+        {
+            get
+            {
+                return applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
             }
         }
 

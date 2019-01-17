@@ -135,6 +135,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
+        public override string NextText(bool isLastPage)
+        {
+            return Messages.START_UPGRADE;
+        }
+
         protected override List<CheckGroup> GenerateChecks(Pool_patch patch)
         {
             var groups = new List<CheckGroup>();
