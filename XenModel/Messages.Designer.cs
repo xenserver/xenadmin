@@ -30944,7 +30944,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extras.
+        ///   Looks up a localized string similar to Upgrade Options.
         /// </summary>
         public static string ROLLING_UPGRADE_EXTRAS_PAGE_TEXT {
             get {
@@ -30953,7 +30953,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose whether to also apply updates or suplemental packs.
+        ///   Looks up a localized string similar to Optionally, apply updates or supplemental packs.
         /// </summary>
         public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
             get {

@@ -10751,10 +10751,10 @@ This will cancel the rolling pool upgrade process and may leave your system in a
     <value>The following error occurred while rolling pool upgrade was in progress:</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
-    <value>Extras</value>
+    <value>Upgrade Options</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>Choose whether to also apply updates or suplemental packs</value>
+    <value>Optionally, apply updates or supplemental packs</value>
   </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
     <value>Installer Location</value>
