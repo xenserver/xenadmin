@@ -28574,6 +28574,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; could be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process..
+        /// </summary>
+        public static string PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installing [XenServer] on &apos;{0}&apos;....
         /// </summary>
         public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER {
