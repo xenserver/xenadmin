@@ -7114,6 +7114,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking host memory status.
+        /// </summary>
+        public static string CHECKING_HOST_MEMORY_POST_UPGRADE {
+            get {
+                return ResourceManager.GetString("CHECKING_HOST_MEMORY_POST_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host memory check.
+        /// </summary>
+        public static string CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking role....
         /// </summary>
         public static string CHECKING_ROLE {
@@ -18050,6 +18068,66 @@ namespace XenAdmin {
         public static string HOST_LOG_DESTINATION_LOCAL {
             get {
                 return ResourceManager.GetString("HOST_LOG_DESTINATION_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+        ///
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate all the VMs that are currently residing on this server..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server might not be able to accommodate all its VMs after the upgrade, due to a possible increase in Control Domain memory. .
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased to {1} during the upgrade. 
+        ///
+        ///This might result in failure to migrate VMs to this server during the RPU or to accomodate all the VMs that are currently residing on this server.. .
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
+        ///
+        ///This might result in failure to migrate VMs to this server during the RPU or to accomodate all the VMs that are currently residing on this server..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This host might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT", resourceCulture);
             }
         }
         
