@@ -29,18 +29,14 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Drawing;
-using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Dialogs;
 using XenAPI;
 
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
 
-    public class NotLicensedForAutomatedUpdatesWarning : Warning
+    public class NotLicensedForAutomatedUpdatesWarning : WarningWithMoreInfo
     {
         private readonly Pool pool;
 
@@ -50,34 +46,10 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.pool = pool;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
-            }
-        }
+        public override string Description => string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
 
-        protected override AsyncAction CreateAction(out bool cancelled)
-        {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO)))
-            {
-                dlg.ShowDialog();
-            }
-
-            cancelled = true;
-            return null;
-        }
-
-        public override string HelpMessage
-        {
-            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
-        }
+        public override string Message => Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO;
     }
 }

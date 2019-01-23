@@ -242,6 +242,7 @@
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Diagnostics\Problems\WarningWithMoreInfo.cs" />
     <Compile Include="Dialogs\AttachUsbDialog.cs">
       <SubType>Form</SubType>
     </Compile>
