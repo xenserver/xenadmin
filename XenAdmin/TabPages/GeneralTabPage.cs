@@ -36,7 +36,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Commands;
@@ -1875,7 +1874,7 @@ namespace XenAdmin.TabPages
 
         private static string FriendlyName(string propertyName)
         {
-            return Core.PropertyManager.GetFriendlyName(string.Format("Label-{0}", propertyName)) ?? propertyName;
+            return FriendlyNameManager.GetFriendlyName(string.Format("Label-{0}", propertyName)) ?? propertyName;
         }
 
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

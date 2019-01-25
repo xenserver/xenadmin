@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin;
+using XenAdmin.Core;
 using XenAdmin.Network;
 
 
@@ -78,7 +79,7 @@ namespace XenAPI
             {
                 // Try to localise the property key name
                 string keyText, valueText;
-                keyText = XenAdmin.Core.PropertyManager.GetFriendlyName(string.Format("AD.PropertyKey-{0}", kvp.Key));
+                keyText = FriendlyNameManager.GetFriendlyName(string.Format("AD.PropertyKey-{0}", kvp.Key));
                 if (keyText == null)
                     keyText = kvp.Key;
 

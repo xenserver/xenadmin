@@ -53,22 +53,22 @@ namespace XenAPI
 
         public static string FriendlyName(string type)
         {
-            return PropertyManager.GetFriendlyName(string.Format("Message.name-{0}", type.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName(string.Format("Message.name-{0}", type.ToLowerInvariant()));
         }
 
         public static string FriendlyBody(string type)
         {
-            return PropertyManager.GetFriendlyName(string.Format("Message.body-{0}", type.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName(string.Format("Message.body-{0}", type.ToLowerInvariant()));
         }
 
         public static string FriendlyHelp(string type)
         {
-            return PropertyManager.GetFriendlyName(string.Format("Message.help-{0}", type.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName(string.Format("Message.help-{0}", type.ToLowerInvariant()));
         }
 
         public static string FriendlyAction(string type)
         {
-            return PropertyManager.GetFriendlyName(string.Format("Message.action-{0}", type.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName(string.Format("Message.action-{0}", type.ToLowerInvariant()));
         }
 
         /// <summary>

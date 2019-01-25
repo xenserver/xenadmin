@@ -208,7 +208,7 @@ namespace XenAdmin.XenSearch
         static PropertyAccessors()
         {
             foreach (vm_power_state p in Enum.GetValues(typeof(vm_power_state)))
-                VM_power_state_i18n[Core.PropertyManager.GetFriendlyName(string.Format("Label-VM.power_state-{0}", p.ToString()))] = p;
+                VM_power_state_i18n[FriendlyNameManager.GetFriendlyName(string.Format("Label-VM.power_state-{0}", p.ToString()))] = p;
             foreach (SR.SRTypes type in Enum.GetValues(typeof(SR.SRTypes)))
                 SRType_i18n[SR.getFriendlyTypeName(type)] = type;
 

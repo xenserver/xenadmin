@@ -1089,7 +1089,7 @@ namespace XenAPI
                 return "";
 
             if (DescriptionType() == VmDescriptionType.ReadOnly)
-                return PropertyManager.GetFriendlyName("VM.TemplateDescription-" + name_label) ?? name_description;
+                return FriendlyNameManager.GetFriendlyName("VM.TemplateDescription-" + name_label) ?? name_description;
 
             //if this assertion fails it means the code calling this property
             //should be checking beforehand what the DescriptionType is
