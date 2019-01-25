@@ -280,12 +280,12 @@ namespace XenAdmin.Alerts
                 // current state is healthy, past errors have been resolved.
                 if (Helpers.IsPool(Message.Connection))
                 {
-                    return string.Format(PropertyManager.GetFriendlyName("Message.body-multipath_periodic_alert_healthy"),
+                    return string.Format(FriendlyNameManager.GetFriendlyName("Message.body-multipath_periodic_alert_healthy"),
                         Helpers.GetName(XenObject));
                 }
                 else
                 {
-                    return string.Format(PropertyManager.GetFriendlyName("Message.body-multipath_periodic_alert_healthy_standalone"),
+                    return string.Format(FriendlyNameManager.GetFriendlyName("Message.body-multipath_periodic_alert_healthy_standalone"),
                         Helpers.GetName(XenObject));
                 }
             }
@@ -316,7 +316,7 @@ namespace XenAdmin.Alerts
                     FindHostUuids(currentState)
                         .Select(s => string.Format("'{0}'", Message.Connection.Cache.Find_By_Uuid<Host>(s)))
                     );
-                return string.Format(PropertyManager.GetFriendlyName("Message.body-multipath_periodic_alert_summary"),
+                return string.Format(FriendlyNameManager.GetFriendlyName("Message.body-multipath_periodic_alert_summary"),
                     Helpers.GetName(XenObject),
                     output);
             }

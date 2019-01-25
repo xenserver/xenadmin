@@ -139,7 +139,7 @@ namespace XenAdmin.Actions
         {
             if (errCode == null)
                 return null;
-            return PropertyManager.GetFriendlyName("Message.name-" + errCode);
+            return FriendlyNameManager.GetFriendlyName("Message.name-" + errCode);
         }
     }
 }

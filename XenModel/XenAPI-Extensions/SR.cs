@@ -128,7 +128,7 @@ namespace XenAPI
         /// </summary>
         public static string getFriendlyTypeName(SRTypes srType)
         {
-            return PropertyManager.GetFriendlyName(string.Format("Label-SR.SRTypes-{0}", srType.ToString()),
+            return FriendlyNameManager.GetFriendlyName(string.Format("Label-SR.SRTypes-{0}", srType.ToString()),
                                                        "Label-SR.SRTypes-unknown");
         }
 
@@ -176,12 +176,12 @@ namespace XenAPI
             string hostname = with_host ? GetHostName() : null;
             if (hostname == null)
             {
-                string pattern = PropertyManager.GetFriendlyName(string.Format("SR.{0}-{1}", field_name, i18n_key));
+                string pattern = FriendlyNameManager.GetFriendlyName(string.Format("SR.{0}-{1}", field_name, i18n_key));
                 return pattern == null ? field_value : pattern;
             }
             else
             {
-                string pattern = PropertyManager.GetFriendlyName(string.Format("SR.{0}-{1}-host", field_name, i18n_key));
+                string pattern = FriendlyNameManager.GetFriendlyName(string.Format("SR.{0}-{1}-host", field_name, i18n_key));
                 return pattern == null ? field_value : string.Format(pattern, hostname);
             }
         }

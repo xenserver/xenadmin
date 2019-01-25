@@ -29,40 +29,38 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Text;
+
 
 namespace XenAdmin.Core
 {
-    public class PropertyManager
+    public class FriendlyNameManager
     {
         // resource file with internationalized display strings
-        public static System.Resources.ResourceManager FriendlyNames = new System.Resources.ResourceManager("XenAdmin.FriendlyNames", typeof(PropertyManager).Assembly);
+        public static readonly System.Resources.ResourceManager FriendlyNames = new System.Resources.ResourceManager("XenAdmin.FriendlyNames", typeof(FriendlyNameManager).Assembly);
 
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
         public static string GetFriendlyName(string s)
         {
-            string result = FriendlyNames.GetString(s);
+            var result = FriendlyNames.GetString(s);
 #if DEBUG
-			Debug.Assert(result != null, string.Format("{0} doesn't exist in FriendlyNames", s));
+			Debug.Assert(result != null, $"{s} doesn't exist in FriendlyNames");
 #endif
             return result;
         }
 
         /// <summary>
-        /// Return the result of GetFriendlyName(s), or GetFriendlyName(defkey) if the former returns null.
-        /// Returns null if no match is found for defkey.
+        /// Return the result of GetFriendlyName(s), or GetFriendlyName(defKey) if the former returns null.
+        /// Returns null if no match is found for defKey.
         /// </summary>
-        public static string GetFriendlyName(string s, string defkey)
+        public static string GetFriendlyName(string s, string defKey)
         {
-            string result = FriendlyNames.GetString(s) ?? FriendlyNames.GetString(defkey);
+            var result = FriendlyNames.GetString(s) ?? FriendlyNames.GetString(defKey);
 #if DEBUG
-			Debug.Assert(result != null, string.Format("{0} doesn't exist in FriendlyNames", s));
+			Debug.Assert(result != null, $"{s} doesn't exist in FriendlyNames");
 #endif
             return result;
         }

@@ -50,12 +50,12 @@ namespace XenAPI
 
         public string FriendlyName()
         {
-            return PropertyManager.GetFriendlyName(String.Format("Role.{0}.NameLabel", this.name_label.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName(String.Format("Role.{0}.NameLabel", this.name_label.ToLowerInvariant()));
         }
 
         public string FriendlyDescription()
         {
-            return PropertyManager.GetFriendlyName(String.Format("Role.{0}.Description", this.name_label.ToLowerInvariant()));
+            return FriendlyNameManager.GetFriendlyName(String.Format("Role.{0}.Description", this.name_label.ToLowerInvariant()));
         }
 
         public override string Name()

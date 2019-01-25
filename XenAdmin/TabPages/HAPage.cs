@@ -607,7 +607,7 @@ namespace XenAdmin.TabPages
 
         private static string GetFriendlyName(string propertyName)
         {
-            return XenAdmin.Core.PropertyManager.GetFriendlyName(string.Format("Label-{0}", propertyName));
+            return FriendlyNameManager.GetFriendlyName(string.Format("Label-{0}", propertyName));
         }
 
         private void buttonConfigure_Click(object sender, EventArgs e)
