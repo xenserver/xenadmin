@@ -14543,15 +14543,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error preparing host.
-        /// </summary>
-        public static string ERROR_PREPARING_HOST {
-            get {
-                return ResourceManager.GetString("ERROR_PREPARING_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not authenticate to proxy server on &apos;{0}&apos;..
         /// </summary>
         public static string ERROR_PROXY_AUTHENTICATION {
@@ -19962,24 +19953,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid URL to installer files.
-        /// </summary>
-        public static string INVALID_URL {
-            get {
-                return ResourceManager.GetString("INVALID_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The specified network location contains an invalid version of the installer files.
-        /// </summary>
-        public static string INVALID_VER {
-            get {
-                return ResourceManager.GetString("INVALID_VER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to IP Address.
         /// </summary>
         public static string IP_ADDRESS {
@@ -23195,15 +23168,6 @@ namespace XenAdmin {
         public static string MIN {
             get {
                 return ResourceManager.GetString("MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing URL.
-        /// </summary>
-        public static string MISSING_URL {
-            get {
-                return ResourceManager.GetString("MISSING_URL", resourceCulture);
             }
         }
         

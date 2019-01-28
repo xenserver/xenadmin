@@ -1925,4 +1925,37 @@
   <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
     <value>VM Secure Boot verification failed</value>
   </data>
+  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
+    <value>There was an error in preparing the host for upgrade.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
+    <value>Access to the specified network location is forbidden.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
+    <value>Invalid URL to installer files.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
+    <value>The specified network location contains an invalid version of the installer files.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
+    <value>Missing URL.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
+    <value>The request has timed out.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
+    <value>You are not authorized to access the specified network location with the credentials entered.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
+    <value>The specified network location was not found.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
+    <value>Access to the specified network location requires proxy authentication.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
+    <value>The server hosting the installer files has encountered an error.</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
+    <value>An error occurred while opening the installer files.</value>
+  </data>
 </root>

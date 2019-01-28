@@ -5118,9 +5118,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
     <value>Could not find a server on '{0}'.</value>
   </data>
-  <data name="ERROR_PREPARING_HOST" xml:space="preserve">
-    <value>Error preparing host</value>
-  </data>
   <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
     <value>Could not authenticate to proxy server on '{0}'.</value>
   </data>
@@ -6947,12 +6944,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INVALID_SESSION" xml:space="preserve">
     <value>Invalid session</value>
   </data>
-  <data name="INVALID_URL" xml:space="preserve">
-    <value>Invalid URL to installer files</value>
-  </data>
-  <data name="INVALID_VER" xml:space="preserve">
-    <value>The specified network location contains an invalid version of the installer files</value>
-  </data>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>Is in a vApp</value>
   </data>
@@ -8078,9 +8069,6 @@ Do you want to continue?</value>
   </data>
   <data name="MIN" xml:space="preserve">
     <value>Min</value>
-  </data>
-  <data name="MISSING_URL" xml:space="preserve">
-    <value>Missing URL</value>
   </data>
   <data name="MIXED_POWER_ON_MODE" xml:space="preserve">
     <value>Mixed</value>

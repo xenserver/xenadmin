@@ -29,14 +29,20 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
+using XenAdmin.Core;
+using XenAPI;
 
 namespace XenAdmin.Actions.HostActions
 {
     public class TestLocationInstallerAction : PureAsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly Dictionary<string, string> Config;
-        public TestLocationInstallerAction(XenAPI.Host host, Dictionary<string, string> config)
+
+        public TestLocationInstallerAction(Host host, Dictionary<string, string> config)
             : base(host.Connection, string.Empty, true)
         {
             Host = host;
@@ -45,7 +51,40 @@ namespace XenAdmin.Actions.HostActions
 
         protected override void Run()
         {
-            Result = XenAPI.Host.call_plugin(Session, Host.opaque_ref, "prepare_host_upgrade.py", "testUrl", Config);
+            string result = null;
+
+            try
+            {
+                result = Host.call_plugin(Session, Host.opaque_ref, "prepare_host_upgrade.py", "testUrl", Config);
+            }
+            catch (Failure failure)
+            {
+                if (failure.ErrorDescription.Count == 4)
+                {
+                    var key = failure.ErrorDescription[3];
+                    if (key.StartsWith("REPO_SERVER_ERROR_"))
+                        key = "REPO_SERVER_ERROR_5XX";
+
+                    string fromResources = FriendlyNameManager.GetFriendlyName($"PREPARE_HOST_UPGRADE_{key}");
+                    Exception = string.IsNullOrEmpty(fromResources) ? failure : new Exception(fromResources);
+                }
+                else
+                    Exception = failure;
+            }
+            catch (Exception e)
+            {
+                Exception = e;
+            }
+            finally
+            {
+                if (string.IsNullOrEmpty(result) || result.ToLower() != "true")
+                {
+                    if (Exception == null)
+                        Exception = new Exception(Messages.INSTALL_FILES_CANNOT_BE_FOUND);
+
+                    log.ErrorFormat("Error testing upgrade hotfix: {0}", Exception);
+                }
+            }
         }
     }
 }
