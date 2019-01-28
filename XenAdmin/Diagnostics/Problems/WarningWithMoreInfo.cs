@@ -40,8 +40,7 @@ namespace XenAdmin.Diagnostics.Problems
         protected WarningWithMoreInfo(Check check) : base(check)
         {
         }
-        public override bool IsFixable => false;
-
+        
         public override string HelpMessage => Messages.PATCHINGWIZARD_MORE_INFO;
 
         protected override Actions.AsyncAction CreateAction(out bool cancelled)
