@@ -227,6 +227,8 @@
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\LicenseRestrictionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MasterIsPendingRestartProblems.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Diagnostics\Problems\WarningWithMoreInfo.cs" />
     <Compile Include="Dialogs\AttachUsbDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -2577,6 +2577,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
   </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE" xml:space="preserve">
+    <value>Checking host memory status</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
+    <value>Host memory check</value>
+  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
   </data>
@@ -6341,6 +6347,30 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOST_LOG_DESTINATION_LOCAL" xml:space="preserve">
     <value>Local</value>
   </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
+    <value>If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+
+This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to a possible increase in Control Domain memory. </value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG" xml:space="preserve">
+    <value>The Control Domain memory on {0} will be increased to {1} during the upgrade. 
+
+This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG" xml:space="preserve">
+    <value>The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
+
+This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory.</value>
+  </data>
   <data name="HOST_MENU_ADD_SERVER" xml:space="preserve">
     <value>{0} (License restriction)</value>
   </data>
@@ -9924,6 +9954,9 @@ File not found</value>
   </data>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> error.</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
+    <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing [XenServer] on '{0}'...</value>

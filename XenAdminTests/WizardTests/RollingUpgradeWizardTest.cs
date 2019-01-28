@@ -44,7 +44,7 @@ namespace XenAdminTests.WizardTests.state5_xml
     class RollingUpgradeWizardTest : WizardTest<RollingUpgradeWizard>
     {
         public RollingUpgradeWizardTest()
-            : base(new[] {"Before You Start", "Select Pools", "Upgrade Mode", "Prechecks", "Ready to Upgrade", "Apply Upgrade"}, doFinish: false)
+            : base(new[] {"Before You Start", "Select Pools", "Upgrade Mode", "Upgrade Options", "Prechecks", "Apply Upgrade"}, doFinish: false)
         { }
 
         protected override RollingUpgradeWizard NewWizard()

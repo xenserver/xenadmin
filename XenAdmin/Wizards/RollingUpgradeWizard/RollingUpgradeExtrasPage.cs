@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         #region XenTabPage overrides
         public override string Text => Messages.ROLLING_UPGRADE_EXTRAS_PAGE_TEXT;
 
-        public override string HelpID => "UpgradeExtras";
+        public override string HelpID => "Upgradeextras";
 
         public override string PageTitle => Messages.ROLLING_UPGRADE_EXTRAS_PAGE_TITLE;
 

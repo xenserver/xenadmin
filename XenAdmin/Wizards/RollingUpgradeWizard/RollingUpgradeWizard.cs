@@ -125,7 +125,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
             else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
             {
-                RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
+                RollingUpgradeWizardPrecheckPage.InstallMethodConfig = 
+                    RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
