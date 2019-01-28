@@ -46,8 +46,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
     public partial class RollingUpgradeWizardInstallMethodPage : XenTabPage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private Bitmap testOK = Resources._000_Tick_h32bit_16;
         private TestLocationInstallerAction testingAction;
+        private bool testingUrl;
+        private RollingUpgradeInstallMethod _installMethod = RollingUpgradeInstallMethod.http;
 
         public RollingUpgradeWizardInstallMethodPage()
         {
@@ -55,34 +56,40 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             comboBoxUpgradeMethod.SelectedIndex = 0;
         }
 
+        public IEnumerable<Host> SelectedMasters { private get; set; }
+        public Dictionary<string, string> InstallMethodConfig;
+
         #region XenTabPage overrides
 
         public override string Text => Messages.ROLLING_UPGRADE_METHOD_PAGE_TEXT;
 
         public override string PageTitle => Messages.ROLLING_UPGRADE_METHOD_PAGE_TITLE;
 
+        public override string HelpID => "upgrademethod";
+
         public override bool EnableNext()
         {
-            return pictureBox1.Visible && pictureBox1.Image == testOK;
+            if (testingUrl)
+                return false;
+
+            return testingAction != null && testingAction.IsCompleted && testingAction.Succeeded;
         }
 
-        public override string HelpID => "upgrademethod";
+        protected override void PageLoadedCore(PageLoadedDirection direction)
+        {
+            ResetCheckControls();
+        }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            if (testingAction != null)
-            {
-                StopUrlTesting();
-            }
+            StopUrlTesting();
         }
 
         public override void PageCancelled(ref bool cancel)
         {
-            if (testingAction != null)
-            {
-                StopUrlTesting();
-            }
+            StopUrlTesting();
         }
+
         #endregion
 
         private void ShowBottomError(string msg)
@@ -92,10 +99,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             labelErrors.Text = msg;
         }
 
-        private void ShowSideIcon(Bitmap bitmap)
+        private void ShowSideIcon(Image img)
         {
             pictureBox1.Visible = true;
-            pictureBox1.Image = bitmap;
+            pictureBox1.Image = img;
         }
 
         private void HideBottomError()
@@ -111,7 +118,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void ResetCheckControls()
         {
-            buttonTest.Enabled = !string.IsNullOrEmpty(watermarkTextBox1.Text);
+            testingAction = null;
+            buttonTest.Enabled = !string.IsNullOrWhiteSpace(watermarkTextBox1.Text);
             HideSideIcon();
             HideBottomError();
             OnPageUpdated();
@@ -119,100 +127,64 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (InstallMethod == RollingUpgradeInstallMethod.nfs)
+            switch (comboBoxUpgradeMethod.SelectedIndex)
             {
-                labelUser.Visible = labelPassword.Visible = textBoxPassword.Visible = textBoxUser.Visible = false;
-            }
-            //FTP or HTTP
-            else
-            {
-                labelUser.Visible = labelPassword.Visible = textBoxPassword.Visible = textBoxUser.Visible = true;
-            }
-
-            switch (InstallMethod)
-            {
-                case RollingUpgradeInstallMethod.nfs:
-                    CueBannersManager.SetWatermark(watermarkTextBox1, "server:path/");
-                    break;
-                case RollingUpgradeInstallMethod.ftp:
-                    CueBannersManager.SetWatermark(watermarkTextBox1, "ftp.example.com/");
-                    break;
-                case RollingUpgradeInstallMethod.http:
+                case 0:
+                    _installMethod = RollingUpgradeInstallMethod.http;
                     CueBannersManager.SetWatermark(watermarkTextBox1, "www.example.com/");
                     break;
+                case 1:
+                    _installMethod = RollingUpgradeInstallMethod.nfs;
+                    CueBannersManager.SetWatermark(watermarkTextBox1, "server:path/");
+                    break;
+                case 2:
+                    _installMethod = RollingUpgradeInstallMethod.ftp;
+                    CueBannersManager.SetWatermark(watermarkTextBox1, "ftp.example.com/");
+                    break;
+                default:
+                    throw new ArgumentException();
             }
+
+            labelUser.Visible = textBoxUser.Visible = 
+                labelPassword.Visible = textBoxPassword.Visible =  _installMethod != RollingUpgradeInstallMethod.nfs;
 
             ResetCheckControls();
         }
 
-        private RollingUpgradeInstallMethod InstallMethod
+        private string AutoCorrectUrl(out Dictionary<string, string> config)
         {
-            get
-            {
-                switch (comboBoxUpgradeMethod.SelectedIndex)
-                {
-                    case 0:
-                        return RollingUpgradeInstallMethod.http;
-                    case 1:
-                        return RollingUpgradeInstallMethod.nfs;
-                    case 2:
-                        return RollingUpgradeInstallMethod.ftp;
-                }
-                throw new ArgumentException();
-            }
-        }
+            var url = watermarkTextBox1.Text.Trim().Replace(" ", "");
+            if (!url.EndsWith("/"))
+                url = $"{url}/";
 
-        public Dictionary<string, string> InstallMethodConfig
-        {
-            get
-            {
-                var dict = new Dictionary<string, string>();
-                watermarkTextBox1.Text = watermarkTextBox1.Text.Trim().Replace(" ","");
-                var url = watermarkTextBox1.Text.EndsWith("/")
-                              ? watermarkTextBox1.Text
-                              : string.Format("{0}/", watermarkTextBox1.Text);
-                
-                url = ExtractBaseUrl(url);
-                watermarkTextBox1.Text = url;
-
-                if (InstallMethod != RollingUpgradeInstallMethod.nfs && textBoxUser.Text != string.Empty && textBoxPassword.Text != string.Empty)
-                {
-                    dict.Add("url", string.Format("{0}://{1}:{2}@{3}", InstallMethod, textBoxUser.Text.UrlEncode(), textBoxPassword.Text.UrlEncode(), url));
-                }
-                else
-                    dict.Add("url", string.Format("{0}://{1}", InstallMethod,  url));
-                return dict;
-            }
-        }
-
-        /// <summary>
-        /// Strip away any prepended URL directives such as http:// etc.. based on the 
-        /// entries of the RollingUpgradeInstallMethod enum
-        /// </summary>
-        /// <param name="url">Some url with/without prepended directives</param>
-        /// <returns>base URL without any prepended directives</returns>
-        private string ExtractBaseUrl(string url)
-        {
-            string baseUrl = url;
             foreach (string method in Enum.GetNames(typeof(RollingUpgradeInstallMethod)))
             {
-                string prependedText = method.ToLower() + @"://";
-                baseUrl = baseUrl.ToLower().StartsWith(prependedText) ? baseUrl.Substring(prependedText.Length) : baseUrl;
+                string prefix = method.ToLower() + @"://";
+                if (url.ToLower().StartsWith(prefix))
+                    url = url.Substring(prefix.Length);
             }
-            return baseUrl;
-        }
 
-        public IEnumerable<Host> SelectedMasters { private get; set; }
+            config = new Dictionary<string, string>();
+
+            if (_installMethod != RollingUpgradeInstallMethod.nfs &&
+                !string.IsNullOrWhiteSpace(textBoxUser.Text) && !string.IsNullOrWhiteSpace(textBoxPassword.Text))
+            {
+                config["url"]= $"{_installMethod}://{textBoxUser.Text.UrlEncode()}:{textBoxPassword.Text.UrlEncode()}@{url}";
+            }
+            else
+                config["url"]=  $"{_installMethod}://{url}";
+
+            return url;
+        }
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            if (testingAction == null)
-            {
-                StartUrlTesting();
-            }
+            if (testingUrl)
+                StopUrlTesting();
             else
             {
-                StopUrlTesting();
+                watermarkTextBox1.Text = AutoCorrectUrl(out InstallMethodConfig);
+                StartUrlTesting();
             }
         }
 
@@ -230,74 +202,61 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 return;
             }
 
-            var action = new TestLocationInstallerAction(host, InstallMethodConfig);
-            action.Completed += action_Completed;
+            testingAction = new TestLocationInstallerAction(host, InstallMethodConfig);
+            testingAction.Completed += action_Completed;
+            testingUrl = true;
             ShowSideIcon(Resources.ajax_loader);
-            ChangeInputEnablement(false);
-            buttonTest.Enabled = true;
-            buttonTest.Text = Messages.ROLLING_UPGRADE_BUTTON_LABEL_STOP;
-            testingAction = action;
-            action.RunAsync();
+            ChangeInputEnablement();
+            testingAction.RunAsync();
+            OnPageUpdated();
         }
 
-        // The URL-Testing is not be able to cancel, as it is implemented as a plug-in on server side.
-        // What we do is: 
-        //   1. Ignore the Completed event of the action, and 
-        //   2. Recover the button text and side icon.
+        /// <summary>
+        /// The TestLocationInstallerAction cannot be cancelled because it is implemented as a plug-in
+        /// on the server side. What we do is: 
+        ///  1. Ignore the Completed event of the action, and 
+        ///  2. Recover the button text and side icon.
+        /// </summary>
         private void StopUrlTesting()
         {
-            buttonTest.Text = Messages.ROLLING_UPGRADE_BUTTON_LABEL_TEST;
-            testingAction.Completed -= action_Completed;
-            testingAction = null;
-            ChangeInputEnablement(true);
-            HideSideIcon();
+            if (testingAction != null)
+            {
+                testingAction.Completed -= action_Completed;
+                testingUrl = false;
+                ChangeInputEnablement();
+                HideSideIcon();
+            }
         }
 
-        private void action_Completed(ActionBase sender)
+        private void action_Completed(ActionBase action)
         {
-            Program.BeginInvoke(this, () => StopUrlTesting());
-            var action = (AsyncAction)sender;
-            bool result = false;
-            string resultMessage = string.Empty;
+            action.Completed -= action_Completed;
+            if (action != testingAction)
+                return;
 
-            try
+            Program.Invoke(this, () =>
             {
-                result = action.Result.ToLower() == "true";
-            }
-            catch (Failure failure)
-            {
-                if (failure.ErrorDescription.Count == 4)
+                testingUrl = false;
+                ChangeInputEnablement();
+
+                if (action.Succeeded)
                 {
-                    string fromResources = Messages.ResourceManager.GetString(failure.ErrorDescription[3]);
-                    resultMessage = string.IsNullOrEmpty(fromResources) ? failure.Message : fromResources;
+                    ShowSideIcon(Images.StaticImages._000_Tick_h32bit_16);
+                    HideBottomError();
                 }
                 else
-                    resultMessage = failure.Message;
-
-                log.Error("Error testing upgrade hotfix", failure);
-            }
-            finally
-            {
-                Program.BeginInvoke(this, () =>
                 {
-                    if (result)
-                    {
-                        ShowSideIcon(testOK);
-                        HideBottomError();
-                    }
-                    else
-                    {
-                        ShowBottomError(string.IsNullOrEmpty(resultMessage) ? Messages.INSTALL_FILES_CANNOT_BE_FOUND : resultMessage);
-                        ShowSideIcon(Resources._000_Abort_h32bit_16);
-                    }
-                    OnPageUpdated();
-                });
-            }
+                    ShowSideIcon(Images.StaticImages._000_Abort_h32bit_16);
+                    ShowBottomError(action.Exception.Message);
+                }
+                OnPageUpdated();
+            });
         }
 
-        private void ChangeInputEnablement(bool value)
+        private void ChangeInputEnablement()
         {
-            textBoxUser.Enabled = textBoxPassword.Enabled = watermarkTextBox1.Enabled = comboBoxUpgradeMethod.Enabled = buttonTest.Enabled = value;
+            textBoxUser.Enabled = textBoxPassword.Enabled = watermarkTextBox1.Enabled = comboBoxUpgradeMethod.Enabled = !testingUrl;
+            buttonTest.Text = testingUrl ? Messages.ROLLING_UPGRADE_BUTTON_LABEL_STOP : Messages.ROLLING_UPGRADE_BUTTON_LABEL_TEST;
         }
 
         private void watermarkTextBox1_TextChanged(object sender, EventArgs e)
