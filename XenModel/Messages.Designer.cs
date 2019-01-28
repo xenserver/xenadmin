@@ -18074,7 +18074,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
         ///
-        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate all the VMs that are currently residing on this server..
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
         public static string HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG {
             get {
@@ -18094,7 +18094,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased to {1} during the upgrade. 
         ///
-        ///This might result in failure to migrate VMs to this server during the RPU or to accomodate all the VMs that are currently residing on this server.. .
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
         public static string HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG {
             get {
@@ -18114,7 +18114,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
         ///
-        ///This might result in failure to migrate VMs to this server during the RPU or to accomodate all the VMs that are currently residing on this server..
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
         public static string HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG {
             get {
@@ -18123,7 +18123,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: This host might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory..
+        ///   Looks up a localized string similar to {0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory..
         /// </summary>
         public static string HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT {
             get {
@@ -28574,7 +28574,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; could be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process..
         /// </summary>
         public static string PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY {
             get {

@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using XenAdmin.Core;
@@ -65,41 +66,34 @@ namespace XenAdmin.Diagnostics.Checks
             }
             else
             {
-                // we don't know the Dom0 memory after the upgrade, so add generic warning if they are upgrading from pre-Naples 
                 if (Helpers.NaplesOrGreater(Host))
                     return null;
 
+                // we don't know the Dom0 memory after the upgrade, so add generic warning if upgrading from pre-Naples 
                 string upgradePlatformVersion = null;
                 string upgradeProductVersion = null;
                 if (installMethodConfig != null)
                     TryGetUpgradeVersion(out upgradePlatformVersion, out upgradeProductVersion);
                 
-                if (string.IsNullOrEmpty(upgradePlatformVersion))
-                {
-                    // we don't know the upgrade version, so add generic warning (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
-                    return new HostMemoryPostUpgradeWarning(this, Host);
-                }
-
-                // we know the upgrade version
                 if (Helpers.NaplesOrGreater(upgradePlatformVersion))
                 {
                     // we know that they are upgrading to Naples or greater, so add specific warning
                     return new HostMemoryPostUpgradeWarning(this, Host, 0, upgradeProductVersion);
                 }
+                // we don't know the upgrade version, so add generic warning (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
+                return new HostMemoryPostUpgradeWarning(this, Host);
             }
             return null;
         }
 
-        public bool TryGetDom0MemoryPostUpgrade(out long dom0MemoryAfterUpgrade)
+        private bool TryGetDom0MemoryPostUpgrade(out long dom0MemoryAfterUpgrade)
         {
             dom0MemoryAfterUpgrade = 0;
 
             try
             {
                 var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "getDom0DefaultMemory", installMethodConfig);
-                if (long.TryParse(result, out dom0MemoryAfterUpgrade))
-                    return true;
-                return false;
+                return long.TryParse(result, out dom0MemoryAfterUpgrade);
             }
             catch (Failure failure)
             {
@@ -108,24 +102,28 @@ namespace XenAdmin.Diagnostics.Checks
             }
         }
 
-        public bool TryGetUpgradeVersion(out string platformVersion, out string productVersion)
+        private bool TryGetUpgradeVersion(out string platformVersion, out string productVersion)
         {
             platformVersion = productVersion = null;
             try
             {
                 var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "getVersion", installMethodConfig);
                 var serializer = new JavaScriptSerializer();
-                var res = (Dictionary<string, object>)serializer.DeserializeObject(result);
-                platformVersion = res.ContainsKey("platform-version") ? (string)res["platform-version"] : null;
-                productVersion = res.ContainsKey("product-version") ? (string)res["product-version"] : null;
-                if (platformVersion == null && productVersion == null)
-                    return false;
-                return true;
+                var version = (Dictionary<string, object>)serializer.DeserializeObject(result);
+                platformVersion = version.ContainsKey("platform-version") ? (string)version["platform-version"] : null;
+                productVersion = version.ContainsKey("product-version") ? (string)version["product-version"] : null;
+                return platformVersion != null || productVersion != null;
             }
             catch (Failure failure)
             {
                 log.WarnFormat("Plugin call prepare_host_upgrade.getVersion on {0} failed with {1}", Host.Name(), failure.Message);
                 
+                return false;
+            }
+            catch (Exception exception)
+            {
+                log.WarnFormat("Exception while trying to get the upgrade version: {0}", exception.Message);
+
                 return false;
             }
         }
