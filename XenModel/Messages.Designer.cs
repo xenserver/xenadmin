@@ -7132,6 +7132,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking host upgrade readiness.
+        /// </summary>
+        public static string CHECKING_PREPARE_TO_UPGRADE {
+            get {
+                return ResourceManager.GetString("CHECKING_PREPARE_TO_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host upgrade readiness check.
+        /// </summary>
+        public static string CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking role....
         /// </summary>
         public static string CHECKING_ROLE {
@@ -19728,7 +19746,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install files could not be found at specified network location.
+        ///   Looks up a localized string similar to {0}: Could not find install files at the specified network location.
         /// </summary>
         public static string INSTALL_FILES_CANNOT_BE_FOUND {
             get {
@@ -29323,6 +29341,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please ensure you have specified a network location that is visible from the server and contains an applicable version of installer files.
+        ///
+        ///Click Previous if you need to go back and specify a different network location or select a different set of servers to upgrade..
+        /// </summary>
+        public static string PROBLEM_PREPARE_TO_UPGRADE {
+            get {
+                return ResourceManager.GetString("PROBLEM_PREPARE_TO_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SR &apos;{0}&apos;.
         /// </summary>
         public static string PROBLEM_SRPROBLEM_TITLE {
@@ -31009,24 +31038,6 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_EXTRAS_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installer Location.
-        /// </summary>
-        public static string ROLLING_UPGRADE_METHOD_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("ROLLING_UPGRADE_METHOD_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Locate the network install files (Automatic Mode).
-        /// </summary>
-        public static string ROLLING_UPGRADE_METHOD_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("ROLLING_UPGRADE_METHOD_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -35097,15 +35108,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_CANNOT_SEE_NETWORK {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_SEE_NETWORK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The connections to your selected servers have been lost.  Select alternate servers or reconnect to your selected servers..
-        /// </summary>
-        public static string UPDATES_WIZARD_CONNECTION_LOST {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_CONNECTION_LOST", resourceCulture);
             }
         }
         

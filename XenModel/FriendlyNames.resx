@@ -1935,7 +1935,7 @@
     <value>Invalid URL to installer files.</value>
   </data>
   <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
-    <value>The specified network location contains an invalid version of the installer files.</value>
+    <value>The specified location contains a non-applicable version of the installer files.</value>
   </data>
   <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
     <value>Missing URL.</value>

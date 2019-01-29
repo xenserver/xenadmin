@@ -2583,6 +2583,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host memory check</value>
   </data>
+  <data name="CHECKING_PREPARE_TO_UPGRADE" xml:space="preserve">
+    <value>Checking host upgrade readiness</value>
+  </data>
+  <data name="CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
+    <value>Host upgrade readiness check</value>
+  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
   </data>
@@ -6891,7 +6897,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Installing [Citrix VM Tools] on VM {0}</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
-    <value>Install files could not be found at specified network location</value>
+    <value>{0}: Could not find install files at the specified network location</value>
   </data>
   <data name="INSTALL_LICENSE_KEY" xml:space="preserve">
     <value>Install License Key</value>
@@ -10188,6 +10194,11 @@ Please reconnect the host and try again</value>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
   </data>
+  <data name="PROBLEM_PREPARE_TO_UPGRADE" xml:space="preserve">
+    <value>Please ensure you have specified a network location that is visible from the server and contains an applicable version of installer files.
+
+Click Previous if you need to go back and specify a different network location or select a different set of servers to upgrade.</value>
+  </data>
   <data name="PROBLEM_SRPROBLEM_TITLE" xml:space="preserve">
     <value>SR '{0}'</value>
   </data>
@@ -10776,12 +10787,6 @@ This will cancel the rolling pool upgrade process and may leave your system in a
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
     <value>Optionally, apply updates or supplemental packs</value>
-  </data>
-  <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
-    <value>Installer Location</value>
-  </data>
-  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
-    <value>Locate the network install files (Automatic Mode)</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>
@@ -12113,9 +12118,6 @@ Verify that the file is a valid {1} export.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_SEE_NETWORK" xml:space="preserve">
     <value>{0}: The VM '{1}' uses the network '{2}', which cannot be seen from all servers.</value>
-  </data>
-  <data name="UPDATES_WIZARD_CONNECTION_LOST" xml:space="preserve">
-    <value>The connections to your selected servers have been lost.  Select alternate servers or reconnect to your selected servers.</value>
   </data>
   <data name="UPDATES_WIZARD_DISCONNECTED_SERVER" xml:space="preserve">
     <value>No longer connected to '{0}'. Please review your selection and try again.</value>

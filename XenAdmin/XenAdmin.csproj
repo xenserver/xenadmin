@@ -221,6 +221,7 @@
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostCheck.cs" />
+    <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\HostPrepareToUpgradeProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\LicenseRestrictionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MasterIsPendingRestartProblems.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
@@ -4087,12 +4089,6 @@
     <Compile Include="UpdateManager.DelayCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_SelectInstallMethod.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_SelectInstallMethod.Designer.cs">
-      <DependentUpon>RollingUpgradeWizard_SelectInstallMethod.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -6775,21 +6771,11 @@
     <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_FirstPage.zh-CN.resx">
       <DependentUpon>RollingUpgradeWizard_FirstPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_SelectInstallMethod.ja.resx">
-      <DependentUpon>RollingUpgradeWizard_SelectInstallMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_SelectInstallMethod.zh-CN.resx">
-      <DependentUpon>RollingUpgradeWizard_SelectInstallMethod.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_UpgradeMode.ja.resx">
       <DependentUpon>RollingUpgradeWizard_UpgradeMode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_UpgradeMode.resx">
       <DependentUpon>RollingUpgradeWizard_UpgradeMode.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_SelectInstallMethod.resx">
-      <DependentUpon>RollingUpgradeWizard_SelectInstallMethod.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard.resx">

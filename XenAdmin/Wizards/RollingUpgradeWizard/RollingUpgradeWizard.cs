@@ -49,7 +49,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private readonly RollingUpgradeWizardSelectPool RollingUpgradeWizardSelectPool;
         private readonly RollingUpgradeWizardPrecheckPage RollingUpgradeWizardPrecheckPage;
         private readonly RollingUpgradeWizardFirstPage RollingUpgradeWizardFirstPage;
-        private readonly RollingUpgradeWizardInstallMethodPage RollingUpgradeWizardInstallMethodPage;
         private readonly RollingUpgradeWizardUpgradeModePage RollingUpgradeWizardUpgradeModePage;
         private readonly RollingUpgradeExtrasPage RollingUpgradeExtrasPage;
 
@@ -61,7 +60,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             RollingUpgradeWizardSelectPool = new RollingUpgradeWizardSelectPool();
             RollingUpgradeWizardPrecheckPage = new RollingUpgradeWizardPrecheckPage();
             RollingUpgradeWizardFirstPage = new RollingUpgradeWizardFirstPage();
-            RollingUpgradeWizardInstallMethodPage = new RollingUpgradeWizardInstallMethodPage();
             RollingUpgradeWizardUpgradeModePage = new RollingUpgradeWizardUpgradeModePage();
             RollingUpgradeExtrasPage = new RollingUpgradeExtrasPage();
 
@@ -97,9 +95,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (prevPageType == typeof(RollingUpgradeWizardSelectPool))
             {
                 var selectedMasters = RollingUpgradeWizardSelectPool.SelectedMasters;
-                RollingUpgradeWizardUpgradeModePage.SelectedMasters = selectedMasters;
                 RollingUpgradeWizardPrecheckPage.SelectedMasters = selectedMasters;
-                RollingUpgradeWizardInstallMethodPage.SelectedMasters = selectedMasters;
                 RollingUpgradeExtrasPage.SelectedMasters = selectedMasters;
 
                 var selectedPools = new List<Pool>();
@@ -115,18 +111,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             else if (prevPageType == typeof(RollingUpgradeWizardUpgradeModePage))
             {
                 var manualModeSelected = RollingUpgradeWizardUpgradeModePage.ManualModeSelected;
-                
-                RemovePage(RollingUpgradeWizardInstallMethodPage);
-                if (!manualModeSelected)
-                    AddAfterPage(RollingUpgradeWizardUpgradeModePage, RollingUpgradeWizardInstallMethodPage);
-
                 RollingUpgradeWizardPrecheckPage.ManualUpgrade = manualModeSelected;
                 RollingUpgradeUpgradePage.ManualModeSelected = manualModeSelected;
-            }
-            else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
-            {
-                RollingUpgradeWizardPrecheckPage.InstallMethodConfig = 
-                    RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
+
+                RollingUpgradeWizardPrecheckPage.InstallMethodConfig =
+                    RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardUpgradeModePage.InstallMethodConfig;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
