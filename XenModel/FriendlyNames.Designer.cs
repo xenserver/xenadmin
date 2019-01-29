@@ -5139,7 +5139,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified network location contains an invalid version of the installer files..
+        ///   Looks up a localized string similar to The specified location contains a non-applicable version of the installer files..
         /// </summary>
         public static string PREPARE_HOST_UPGRADE_INVALID_VER {
             get {

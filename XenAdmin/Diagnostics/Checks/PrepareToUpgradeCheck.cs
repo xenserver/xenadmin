@@ -32,59 +32,49 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAPI;
 
-namespace XenAdmin.Actions.HostActions
+
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class TestLocationInstallerAction : PureAsyncAction
+    class PrepareToUpgradeCheck : HostPostLivenessCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Dictionary<string, string> Config;
+        private readonly Dictionary<string, string> installMethodConfig;
 
-        public TestLocationInstallerAction(Host host, Dictionary<string, string> config)
-            : base(host.Connection, string.Empty, true)
+        public PrepareToUpgradeCheck(Host host, Dictionary<string, string> installMethodConfig)
+            : base(host)
         {
-            Host = host;
-            Config = config;
+            this.installMethodConfig = installMethodConfig;
         }
 
-        protected override void Run()
-        {
-            string result = null;
+        public override string Description => Messages.CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION;
 
+        protected override Problem RunHostCheck()
+        {
             try
             {
-                result = Host.call_plugin(Session, Host.opaque_ref, "prepare_host_upgrade.py", "testUrl", Config);
+                var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "testUrl", installMethodConfig);
+
+                if (result.ToLower() == "true")
+                    return null;
             }
             catch (Failure failure)
             {
                 if (failure.ErrorDescription.Count == 4)
-                {
-                    var key = failure.ErrorDescription[3];
-                    if (key.StartsWith("REPO_SERVER_ERROR_"))
-                        key = "REPO_SERVER_ERROR_5XX";
+                    return new HostPrepareToUpgradeProblem(this, Host, failure.ErrorDescription[3]);
 
-                    string fromResources = FriendlyNameManager.GetFriendlyName($"PREPARE_HOST_UPGRADE_{key}");
-                    Exception = string.IsNullOrEmpty(fromResources) ? failure : new Exception(fromResources);
-                }
-                else
-                    Exception = failure;
+                log.ErrorFormat("Error testing upgrade hotfix: {0}", failure);
             }
             catch (Exception e)
             {
-                Exception = e;
+                log.ErrorFormat("Error testing upgrade hotfix: {0}", e);
             }
-            finally
-            {
-                if (string.IsNullOrEmpty(result) || result.ToLower() != "true")
-                {
-                    if (Exception == null)
-                        Exception = new Exception(Messages.INSTALL_FILES_CANNOT_BE_FOUND);
 
-                    log.ErrorFormat("Error testing upgrade hotfix: {0}", Exception);
-                }
-            }
+            return new HostPrepareToUpgradeProblem(this, Host);
         }
     }
 }

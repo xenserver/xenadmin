@@ -88,7 +88,6 @@
     <Compile Include="Actions\Host\RebootHostAction.cs" />
     <Compile Include="Actions\Host\RestartToolstackAction.cs" />
     <Compile Include="Actions\Host\ShutdownHostAction.cs" />
-    <Compile Include="Actions\Host\TestLocationInstallerAction.cs" />
     <Compile Include="Actions\Host\UpdateIntegratedGpuPassthroughAction.cs" />
     <Compile Include="Actions\Message\DestroyMessageAction.cs" />
     <Compile Include="Actions\Host\HostBackupRestoreAction.cs" />

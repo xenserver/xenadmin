@@ -169,6 +169,30 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 livenessChecks.Add(new HostLivenessCheck(host, hostsToUpgrade.Contains(host)));
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
+            //HotfixesCheck - for hosts that will be upgraded
+            var hotfixChecks = new List<Check>();
+            foreach (var host in hostsToUpgrade)
+            {
+                if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
+                    hotfixChecks.Add(new HostHasHotfixCheck(host));
+            }
+            if (hotfixChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
+
+            //SafeToUpgrade- and PrepareToUpgrade- checks - in automatic mode only, for hosts that will be upgraded
+            if (!ManualUpgrade)
+            {
+                var prepareToUpgradeChecks = new List<Check>();
+                foreach (var host in hostsToUpgrade)
+                    prepareToUpgradeChecks.Add(new PrepareToUpgradeCheck(host, InstallMethodConfig));
+                groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
+
+                var safeToUpgradeChecks = new List<Check>();
+                foreach (var host in hostsToUpgrade)
+                    safeToUpgradeChecks.Add(new SafeToUpgradeCheck(host));
+                groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
+            }
+
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();
@@ -185,17 +209,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (Host host in hostsToUpgradeOrUpdate)
                 pbdChecks.Add(new PBDsPluggedCheck(host));
             groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
-
-
-            //HotfixesCheck - for hosts that will be upgraded
-            var hotfixChecks = new List<Check>();
-            foreach (var host in hostsToUpgrade)
-            {
-                if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
-                    hotfixChecks.Add(new HostHasHotfixCheck(host));
-            }
-            if (hotfixChecks.Count > 0)
-                groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
             //HostMemoryPostUpgradeCheck - for hosts that will be upgraded
             var mostMemoryPostUpgradeChecks = new List<Check>();
@@ -214,15 +227,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 foreach (Host host in preCreedenceServers)
                     srLinkChecks.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
                 groups.Add(new CheckGroup(Messages.CHECKING_STORAGELINK_STATUS, srLinkChecks));
-            }
-
-            //SafeToUpgradeCheck - in automatic mode only, for hosts that will be upgraded
-            if (!ManualUpgrade)
-            {
-                var upgradeChecks = new List<Check>();
-                foreach (var host in hostsToUpgrade)
-                    upgradeChecks.Add(new SafeToUpgradeCheck(host));
-                groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
             
             var gfs2Checks = new List<Check>();
