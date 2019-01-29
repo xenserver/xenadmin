@@ -135,6 +135,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
+        public override string NextText(bool isLastPage)
+        {
+            return Messages.START_UPGRADE;
+        }
+
         protected override List<CheckGroup> GenerateChecks(Pool_patch patch)
         {
             var groups = new List<CheckGroup>();
@@ -192,6 +197,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (hotfixChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
+            //HostMemoryPostUpgradeCheck - for hosts that will be upgraded
+            var mostMemoryPostUpgradeChecks = new List<Check>();
+            foreach (var host in hostsToUpgrade)
+            {
+                mostMemoryPostUpgradeChecks.Add(new HostMemoryPostUpgradeCheck(host, InstallMethodConfig));
+            }
+            if (mostMemoryPostUpgradeChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_HOST_MEMORY_POST_UPGRADE, mostMemoryPostUpgradeChecks));
 
             //iSL (StorageLink) check - CA-223486: only for pre-Creedence
             var preCreedenceServers = hostsToUpgrade.Where(h => !Helpers.CreedenceOrGreater(h)).ToList();
@@ -242,6 +255,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public IEnumerable<Host> SelectedMasters { private get; set; }
         public bool ManualUpgrade { set; private get; }
+
+        public Dictionary<string, string> InstallMethodConfig { private get; set; }
 
         #region private methods
         public static List<Host> HostsToUpgradeOrUpdate(Pool pool)

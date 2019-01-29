@@ -519,8 +519,12 @@ namespace XenAdmin.Core
             if (host == null)
                 return true;
 
-            string platform_version = HostPlatformVersion(host);
-            return platform_version != null && productVersionCompare(platform_version, "2.9.50") >= 0;
+            return NaplesOrGreater(HostPlatformVersion(host));
+        }
+
+        public static bool NaplesOrGreater(string platformVersion)
+        {
+            return platformVersion != null && productVersionCompare(platformVersion, "2.9.50") >= 0;
         }
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
@@ -890,7 +894,7 @@ namespace XenAdmin.Core
 				return Messages.UNKNOWN;
 
             string legacy = NaplesOrGreater(host) ? "" : "legacy-";
-            string name = PropertyManager.GetFriendlyName("Label-host.edition-" + legacy + host.edition);
+            string name = FriendlyNameManager.GetFriendlyName("Label-host.edition-" + legacy + host.edition);
             return name ?? Messages.UNKNOWN;
         }
 
@@ -1203,18 +1207,18 @@ namespace XenAdmin.Core
             }
 
             if (NetworkLatencyRegex.IsMatch(name))
-                return PropertyManager.GetFriendlyName("Label-performance.network_latency");
+                return FriendlyNameManager.GetFriendlyName("Label-performance.network_latency");
 
             if (XapiLatencyRegex.IsMatch(name))
-                return PropertyManager.GetFriendlyName("Label-performance.xapi_latency");
+                return FriendlyNameManager.GetFriendlyName("Label-performance.xapi_latency");
 
             if (StatefileLatencyRegex.IsMatch(name))
-                return PropertyManager.GetFriendlyName("Label-performance.statefile_latency");
+                return FriendlyNameManager.GetFriendlyName("Label-performance.statefile_latency");
 
             if (LoadAvgRegex.IsMatch(name))
-                return PropertyManager.GetFriendlyName("Label-performance.loadavg");
+                return FriendlyNameManager.GetFriendlyName("Label-performance.loadavg");
 
-            return PropertyManager.GetFriendlyName(string.Format("Label-performance.{0}", name));
+            return FriendlyNameManager.GetFriendlyName(string.Format("Label-performance.{0}", name));
         }
 
         /// <summary>
@@ -1222,7 +1226,7 @@ namespace XenAdmin.Core
         /// </summary>
         private static string FormatFriendly(string key, params string[] args)
         {
-            return string.Format(PropertyManager.GetFriendlyName(key), args);
+            return string.Format(FriendlyNameManager.GetFriendlyName(key), args);
         }
 
         private static PGPU FindGpu(IXenObject iXenObject, string pciId)
@@ -1390,7 +1394,7 @@ namespace XenAdmin.Core
             }
             else
             {
-                return XenAdmin.Core.PropertyManager.GetFriendlyName("Label-VM.ha_restart_priority." + priority.ToString()) ?? priority.ToString();
+                return FriendlyNameManager.GetFriendlyName("Label-VM.ha_restart_priority." + priority.ToString()) ?? priority.ToString();
             }
         }
 
@@ -1402,7 +1406,7 @@ namespace XenAdmin.Core
             }
             else
             {
-                return XenAdmin.Core.PropertyManager.GetFriendlyName("Description-VM.ha_restart_priority." + priority.ToString()) ?? priority.ToString();
+                return FriendlyNameManager.GetFriendlyName("Description-VM.ha_restart_priority." + priority.ToString()) ?? priority.ToString();
             }
         }
 
@@ -1976,7 +1980,7 @@ namespace XenAdmin.Core
 
         public static string UpdatesFriendlyName(string propertyName)
         {
-            return Core.PropertyManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
+            return FriendlyNameManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
         }
 
         public static string UpdatesFriendlyNameAndVersion(Pool_update update)

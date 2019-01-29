@@ -561,12 +561,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 _key = value;
 
-                _name = Core.PropertyManager.GetFriendlyName(string.Format("Label-host.system_status-{0}", _key));
+                _name = FriendlyNameManager.GetFriendlyName(string.Format("Label-host.system_status-{0}", _key));
 
                 if (string.IsNullOrEmpty(_name))
                     _name = _key;
 
-                _description = Core.PropertyManager.GetFriendlyName(string.Format("Description-host.system_status-{0}", _key));
+                _description = FriendlyNameManager.GetFriendlyName(string.Format("Description-host.system_status-{0}", _key));
             }
         }
 

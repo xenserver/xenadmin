@@ -399,7 +399,7 @@ namespace XenAdmin.Core
 
             return toUse.Version > currentProgramVersion ||
                    (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
-                    !PropertyManager.IsCultureLoaded(Program.CurrentCulture));
+                    !FriendlyNameManager.IsCultureLoaded(Program.CurrentCulture));
         }
 
         public static List<XenServerPatchAlert> NewXenServerPatchAlerts(List<XenServerVersion> xenServerVersions,

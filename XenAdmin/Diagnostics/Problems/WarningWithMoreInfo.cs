@@ -29,27 +29,35 @@
  * SUCH DAMAGE.
  */
 
+using System.Drawing;
 using XenAdmin.Diagnostics.Checks;
-using XenAPI;
+using XenAdmin.Dialogs;
 
-
-namespace XenAdmin.Diagnostics.Problems.PoolProblem
+namespace XenAdmin.Diagnostics.Problems
 {
-
-    public class NotLicensedForAutomatedUpdatesWarning : WarningWithMoreInfo
+    public abstract class WarningWithMoreInfo : Warning
     {
-        private readonly Pool pool;
-
-        public NotLicensedForAutomatedUpdatesWarning(Check check, Pool pool)
-            : base(check)
+        protected WarningWithMoreInfo(Check check) : base(check)
         {
-            this.pool = pool;
+        }
+        
+        public override string HelpMessage => Messages.PATCHINGWIZARD_MORE_INFO;
+
+        protected override Actions.AsyncAction CreateAction(out bool cancelled)
+        {
+            Program.Invoke(Program.MainWindow, delegate ()
+            {
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
+                {
+                    dlg.ShowDialog();
+                }
+            });
+
+            cancelled = true;
+            return null;
         }
 
-        public override string Title => Check.Description;
-
-        public override string Description => string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
-
-        public override string Message => Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO;
+        public abstract string Message { get; }
     }
 }

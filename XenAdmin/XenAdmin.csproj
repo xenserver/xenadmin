@@ -227,6 +227,8 @@
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\LicenseRestrictionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MasterIsPendingRestartProblems.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Diagnostics\Problems\WarningWithMoreInfo.cs" />
     <Compile Include="Dialogs\AttachUsbDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3939,11 +3942,11 @@
     <Compile Include="Wizards\GenericPages\TvmIpPage.Designer.cs">
       <DependentUpon>TvmIpPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.cs">
+    <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.Designer.cs">
-      <DependentUpon>RollingUpgradeReadyToUpgradePage.cs</DependentUpon>
+    <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.Designer.cs">
+      <DependentUpon>RollingUpgradeExtrasPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard_UpgradeMode.cs">
       <SubType>UserControl</SubType>
@@ -6745,14 +6748,14 @@
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_SelectServers.zh-CN.resx">
       <DependentUpon>PatchingWizard_SelectServers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.ja.resx">
-      <DependentUpon>RollingUpgradeReadyToUpgradePage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.ja.resx">
+      <DependentUpon>RollingUpgradeExtrasPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.resx">
-      <DependentUpon>RollingUpgradeReadyToUpgradePage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.resx">
+      <DependentUpon>RollingUpgradeExtrasPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.zh-CN.resx">
-      <DependentUpon>RollingUpgradeReadyToUpgradePage.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.zh-CN.resx">
+      <DependentUpon>RollingUpgradeExtrasPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\RollingUpgradeWizard\RollingUpgradeWizard.ja.resx">
       <DependentUpon>RollingUpgradeWizard.cs</DependentUpon>

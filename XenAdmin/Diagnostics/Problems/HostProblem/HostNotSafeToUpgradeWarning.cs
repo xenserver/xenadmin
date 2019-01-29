@@ -32,14 +32,12 @@
 using System;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
-using XenAdmin.Dialogs;
-using System.Drawing;
 
 namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
     public enum HostNotSafeToUpgradeReason { NotEnoughSpace, Default }
 
-    public class HostNotSafeToUpgradeWarning : Warning
+    public class HostNotSafeToUpgradeWarning : WarningWithMoreInfo
     {
         private readonly Host host;
         private HostNotSafeToUpgradeReason reason;
@@ -51,41 +49,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             this.reason = reason;
         }
 
-        protected override Actions.AsyncAction CreateAction(out bool cancelled)
-        {
-            Program.Invoke(Program.MainWindow, delegate()
-            {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
-                {
-                    dlg.ShowDialog();
-                }
-            });
+        public override string Title => Description;
 
-            cancelled = true;
+        public override string Description => String.Format(ShortMessage, host.name_label);
 
-            return null;
-        }
-
-        public override string HelpMessage
-        {
-            get
-            {
-                return Messages.PATCHINGWIZARD_MORE_INFO;
-            }
-        }
-
-        public override string Title
-        {
-            get { return Description; }
-        }
-
-        public override string Description
-        {
-            get { return String.Format(ShortMessage, host.name_label); }
-        }
-
-        private string Message 
+        public override string Message
         {
             get
             {

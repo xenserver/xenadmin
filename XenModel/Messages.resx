@@ -2249,21 +2249,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
   </data>
-  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
-    <value>Canceled</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
-    <value>Compiling</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
-    <value>Downloading - {0}</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
-    <value>Failed - Please see logs for details</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
-    <value>Queued</value>
-  </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>Select the data you want to include in your report</value>
   </data>
@@ -2304,6 +2289,21 @@ This will cancel compilation of the status report.</value>
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
     <value>Failed. A {0} user cannot retrieve all the specified items.</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
+    <value>Compiling</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
+    <value>Downloading - {0}</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>Failed - Please see logs for details</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>Queued</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
@@ -2576,6 +2576,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE" xml:space="preserve">
+    <value>Checking host memory status</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
+    <value>Host memory check</value>
   </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
@@ -5112,9 +5118,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
     <value>Could not find a server on '{0}'.</value>
   </data>
-  <data name="ERROR_PREPARING_HOST" xml:space="preserve">
-    <value>Error preparing host</value>
-  </data>
   <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
     <value>Could not authenticate to proxy server on '{0}'.</value>
   </data>
@@ -6341,6 +6344,30 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOST_LOG_DESTINATION_LOCAL" xml:space="preserve">
     <value>Local</value>
   </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
+    <value>If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+
+This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to a possible increase in Control Domain memory. </value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG" xml:space="preserve">
+    <value>The Control Domain memory on {0} will be increased to {1} during the upgrade. 
+
+This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG" xml:space="preserve">
+    <value>The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
+
+This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory.</value>
+  </data>
   <data name="HOST_MENU_ADD_SERVER" xml:space="preserve">
     <value>{0} (License restriction)</value>
   </data>
@@ -6916,12 +6943,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="INVALID_SESSION" xml:space="preserve">
     <value>Invalid session</value>
-  </data>
-  <data name="INVALID_URL" xml:space="preserve">
-    <value>Invalid URL to installer files</value>
-  </data>
-  <data name="INVALID_VER" xml:space="preserve">
-    <value>The specified network location contains an invalid version of the installer files</value>
   </data>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>Is in a vApp</value>
@@ -8048,9 +8069,6 @@ Do you want to continue?</value>
   </data>
   <data name="MIN" xml:space="preserve">
     <value>Min</value>
-  </data>
-  <data name="MISSING_URL" xml:space="preserve">
-    <value>Missing URL</value>
   </data>
   <data name="MIXED_POWER_ON_MODE" xml:space="preserve">
     <value>Mixed</value>
@@ -9856,9 +9874,6 @@ File not found</value>
   <data name="PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE" xml:space="preserve">
     <value>Interval must be a multiple of 5</value>
   </data>
-  <data name="PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE" xml:space="preserve">
-    <value>Perform the rolling pool upgrade (Manual Mode)</value>
-  </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>Permission Denied</value>
   </data>
@@ -9927,6 +9942,9 @@ File not found</value>
   </data>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> error.</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
+    <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing [XenServer] on '{0}'...</value>
@@ -10121,9 +10139,6 @@ Please reconnect the host and try again</value>
   </data>
   <data name="POOL_X" xml:space="preserve">
     <value>pool '{0}'</value>
-  </data>
-  <data name="POOL_X_READYUPGRADE" xml:space="preserve">
-    <value> Pool {0}</value>
   </data>
   <data name="POWER_ON" xml:space="preserve">
     <value>Power On</value>
@@ -10419,9 +10434,6 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>A {0} user cannot alter memory values and will be restricted to the settings on the template.</value>
-  </data>
-  <data name="READY_UPGRADE" xml:space="preserve">
-    <value>Ready to Upgrade</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>Read Only</value>
@@ -10721,6 +10733,12 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
+  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>S&amp;top</value>
   </data>
@@ -10753,7 +10771,16 @@ This will cancel the rolling pool upgrade process and may leave your system in a
   <data name="ROLLING_UPGRADE_ERROR_POOL_ONE" xml:space="preserve">
     <value>The following error occurred while rolling pool upgrade was in progress:</value>
   </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
+    <value>Upgrade Options</value>
+  </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
+    <value>Optionally, apply updates or supplemental packs</value>
+  </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
+    <value>Installer Location</value>
+  </data>
+  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
     <value>Locate the network install files (Automatic Mode)</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
@@ -12375,9 +12402,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
     <value>Upgrade pool master '{0}'</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER_X" xml:space="preserve">
-    <value>        Upgrade pool master {0}</value>
-  </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>Prechecks</value>
   </data>
@@ -12386,9 +12410,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>Upgrade server '{0}</value>
-  </data>
-  <data name="UPGRADE_SERVER_X" xml:space="preserve">
-    <value>        Upgrade server {0}</value>
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>Upgrade '{0}'</value>

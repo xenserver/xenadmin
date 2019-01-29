@@ -910,11 +910,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                PreCheckHostRow preCheckHostRow = row as PreCheckHostRow;
-                if (preCheckHostRow != null && preCheckHostRow.Problem != null)
+                if (row is PreCheckHostRow preCheckHostRow && preCheckHostRow.IsFixable)
                 {
-                    bool cancelled;
-                    AsyncAction action = preCheckHostRow.Problem.GetSolutionAction(out cancelled);
+                    AsyncAction action = preCheckHostRow.Problem.GetSolutionAction(out _);
                     if (action != null)
                     {
                         preCheckHostRow.Enabled = false;

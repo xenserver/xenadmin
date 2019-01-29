@@ -41,14 +41,10 @@ namespace XenAdmin.Diagnostics.Problems
         {
         }
 
-        public override string HelpMessage
-        {
-            get { return null; }
-        }
+        public override bool IsFixable => false;
 
-        public override Image Image
-        {
-            get { return Images.GetImage16For(Icons.Warning); }
-        }
+        public override string HelpMessage => null;
+
+        public override Image Image => Images.GetImage16For(Icons.Warning);
     }
 }

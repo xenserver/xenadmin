@@ -7114,6 +7114,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking host memory status.
+        /// </summary>
+        public static string CHECKING_HOST_MEMORY_POST_UPGRADE {
+            get {
+                return ResourceManager.GetString("CHECKING_HOST_MEMORY_POST_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host memory check.
+        /// </summary>
+        public static string CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking role....
         /// </summary>
         public static string CHECKING_ROLE {
@@ -14525,15 +14543,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error preparing host.
-        /// </summary>
-        public static string ERROR_PREPARING_HOST {
-            get {
-                return ResourceManager.GetString("ERROR_PREPARING_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not authenticate to proxy server on &apos;{0}&apos;..
         /// </summary>
         public static string ERROR_PROXY_AUTHENTICATION {
@@ -18054,6 +18063,66 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+        ///
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server might not be able to accommodate all its VMs after the upgrade, due to a possible increase in Control Domain memory. .
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased to {1} during the upgrade. 
+        ///
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
+        ///
+        ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory..
+        /// </summary>
+        public static string HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT {
+            get {
+                return ResourceManager.GetString("HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (License restriction).
         /// </summary>
         public static string HOST_MENU_ADD_SERVER {
@@ -19880,24 +19949,6 @@ namespace XenAdmin {
         public static string INVALID_SESSION {
             get {
                 return ResourceManager.GetString("INVALID_SESSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid URL to installer files.
-        /// </summary>
-        public static string INVALID_URL {
-            get {
-                return ResourceManager.GetString("INVALID_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The specified network location contains an invalid version of the installer files.
-        /// </summary>
-        public static string INVALID_VER {
-            get {
-                return ResourceManager.GetString("INVALID_VER", resourceCulture);
             }
         }
         
@@ -23117,15 +23168,6 @@ namespace XenAdmin {
         public static string MIN {
             get {
                 return ResourceManager.GetString("MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing URL.
-        /// </summary>
-        public static string MISSING_URL {
-            get {
-                return ResourceManager.GetString("MISSING_URL", resourceCulture);
             }
         }
         
@@ -28334,15 +28376,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Perform the rolling pool upgrade (Manual Mode).
-        /// </summary>
-        public static string PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE {
-            get {
-                return ResourceManager.GetString("PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Performance Graphs.
         /// </summary>
         public static string PERFORMANCE_TAB_TITLE {
@@ -28501,6 +28534,15 @@ namespace XenAdmin {
         public static string PLAN_ACTION_ERROR {
             get {
                 return ResourceManager.GetString("PLAN_ACTION_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process..
+        /// </summary>
+        public static string PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY", resourceCulture);
             }
         }
         
@@ -29052,15 +29094,6 @@ namespace XenAdmin {
         public static string POOL_X {
             get {
                 return ResourceManager.GetString("POOL_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  Pool {0}.
-        /// </summary>
-        public static string POOL_X_READYUPGRADE {
-            get {
-                return ResourceManager.GetString("POOL_X_READYUPGRADE", resourceCulture);
             }
         }
         
@@ -30019,15 +30052,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to Upgrade.
-        /// </summary>
-        public static string READY_UPGRADE {
-            get {
-                return ResourceManager.GetString("READY_UPGRADE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to R&amp;eattach.
         /// </summary>
         public static string REATTACH_SR {
@@ -30861,6 +30885,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version.
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version (only on pools licensed for automated updates).
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES_MIXED {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES_MIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S&amp;top.
         /// </summary>
         public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
@@ -30953,11 +30995,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Locate the network install files (Automatic Mode).
+        ///   Looks up a localized string similar to Upgrade Options.
+        /// </summary>
+        public static string ROLLING_UPGRADE_EXTRAS_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_EXTRAS_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optionally, apply updates or supplemental packs.
+        /// </summary>
+        public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_EXTRAS_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installer Location.
         /// </summary>
         public static string ROLLING_UPGRADE_METHOD_PAGE_TEXT {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_METHOD_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locate the network install files (Automatic Mode).
+        /// </summary>
+        public static string ROLLING_UPGRADE_METHOD_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_METHOD_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -35650,15 +35719,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to         Upgrade pool master {0}.
-        /// </summary>
-        public static string UPGRADE_POOL_MASTER_X {
-            get {
-                return ResourceManager.GetString("UPGRADE_POOL_MASTER_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Prechecks.
         /// </summary>
         public static string UPGRADE_PRECHECKS_TEXT {
@@ -35682,15 +35742,6 @@ namespace XenAdmin {
         public static string UPGRADE_SERVER {
             get {
                 return ResourceManager.GetString("UPGRADE_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to         Upgrade server {0}.
-        /// </summary>
-        public static string UPGRADE_SERVER_X {
-            get {
-                return ResourceManager.GetString("UPGRADE_SERVER_X", resourceCulture);
             }
         }
         

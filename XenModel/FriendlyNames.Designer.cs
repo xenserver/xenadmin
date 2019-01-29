@@ -5112,6 +5112,105 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an error in preparing the host for upgrade..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access to the specified network location is forbidden..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_FORBIDDEN {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_FORBIDDEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid URL to installer files..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_INVALID_URL {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_INVALID_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified network location contains an invalid version of the installer files..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_INVALID_VER {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_INVALID_VER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing URL..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_MISSING_URL {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_MISSING_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified network location was not found..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access to the specified network location requires proxy authentication..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_PROXY_AUTH_FAILURE {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while opening the installer files..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_REPO_IOERROR {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_REPO_IOERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The server hosting the installer files has encountered an error..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The request has timed out..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_TIMEOUT {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_TIMEOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not authorized to access the specified network location with the credentials entered..
+        /// </summary>
+        public static string PREPARE_HOST_UPGRADE_UNAUTH_URL {
+            get {
+                return ResourceManager.GetString("PREPARE_HOST_UPGRADE_UNAUTH_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool Admins have full access to all features and settings. They can access the server console and manage the roles of other users.
         /// 
         ///- No restrictions

@@ -57,7 +57,7 @@ namespace XenAdmin.Core
         {
             get
             {
-                string message = string.Format(Core.PropertyManager.GetFriendlyName(string.Format("Exception-{0}", Type)), Parameters);
+                string message = string.Format(FriendlyNameManager.GetFriendlyName(string.Format("Exception-{0}", Type)), Parameters);
                 return !string.IsNullOrEmpty(message) ? message : Messages.EXCEPTION_GENERAL;
             }
         }

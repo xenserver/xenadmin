@@ -73,10 +73,24 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (vms.Count > 0)
             {
                 PBD.CheckPlugPBDsForVMs(Connection, vms);
-                AddProgressStep(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
-                log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
-                XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
-                PollTaskForResultAndDestroy(Connection, ref session, task);
+
+                try
+                {
+                    AddProgressStep(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
+                    log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
+
+                    XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
+                    PollTaskForResultAndDestroy(Connection, ref session, task);
+                }
+                catch (Failure f)
+                {
+                    if (f.ErrorDescription.Count > 0 && f.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
+                    {
+                        log.WarnFormat("Host {0} cannot be avacuated: {1}", hostObj.Name(), f.Message);
+                        throw new Exception(string.Format(Messages.PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY, hostObj.Name()), f);
+                    }
+                    throw;
+                }
             }
         }
 
