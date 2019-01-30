@@ -867,7 +867,7 @@
   <data name="RollingUpgradeWizard_BeforeyoustartPane" xml:space="preserve">
     <value>upgrade</value>
   </data>
-  <data name="RollingUpgradeWizard_ReadyupgradePane" xml:space="preserve">
+  <data name="RollingUpgradeWizard_UpgradeextrasPane" xml:space="preserve">
     <value>upgrade</value>
   </data>
   <data name="RollingUpgradeWizard_SelectpoolPane" xml:space="preserve">

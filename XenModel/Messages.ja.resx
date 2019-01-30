@@ -2253,21 +2253,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>状態レポート -</value>
   </data>
-  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
-    <value>キャンセル済み</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
-    <value>作成中</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
-    <value>ダウンロード中 - {0}</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
-    <value>失敗しました - 詳しくはログを参照してください</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
-    <value>応答待ち</value>
-  </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>レポートに追加するデータを選択してください</value>
   </data>
@@ -2308,6 +2293,21 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
     <value>失敗しました。{0} ユーザーは、一部の項目を取得できません。</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>キャンセル済み</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
+    <value>作成中</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
+    <value>ダウンロード中 - {0}</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>失敗しました - 詳しくはログを参照してください</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>応答待ち</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>サーバーの状態レポートを保存しています</value>
@@ -2580,6 +2580,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>ホストのライブネスの状態のチェック</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE" xml:space="preserve">
+    <value>ホストのメモリの状態をチェック</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
+    <value>ホストのメモリをチェック</value>
   </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>役割を確認しています...</value>
@@ -5117,9 +5123,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
     <value>'{0}' でサーバーが見つかりません。</value>
   </data>
-  <data name="ERROR_PREPARING_HOST" xml:space="preserve">
-    <value>ホストの準備エラー</value>
-  </data>
   <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
     <value>'{0}' のプロキシ サーバーに認証できませんでした。</value>
   </data>
@@ -6346,6 +6349,30 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOST_LOG_DESTINATION_LOCAL" xml:space="preserve">
     <value>ローカル</value>
   </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
+    <value>[XenServer] [BRANDING_VERSION_8_0] 以降にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
+
+そのため、プールのローリング アップグレード中にこのサーバーに VM を移行できないか、またはアップグレード後、このサーバーに現在配置されているすべての VM を格納できない可能性があります。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: コントロール ドメイン メモリの増加により、このサーバーはアップグレード後にすべての VM を格納できない可能性があります。 </value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG" xml:space="preserve">
+    <value>アップグレードすると、{0} のコントロール ドメイン メモリが {1} に増加します。
+
+そのため、プールのローリング アップグレード中にこのサーバーに VM を移行できないか、またはアップグレード後、このサーバーに現在配置されているすべての VM を格納できない可能性があります。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: コントロール ドメイン メモリの増加により、このサーバーはアップグレード後にすべての VM を格納できない可能性があります。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG" xml:space="preserve">
+    <value>[XenServer] {1} にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
+
+そのため、プールのローリング アップグレード中にこのサーバーに VM を移行できないか、またはアップグレード後、このサーバーに現在配置されているすべての VM を格納できない可能性があります。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: コントロール ドメイン メモリの増加により、このサーバーはアップグレード後にすべての VM を格納できない可能性があります。</value>
+  </data>
   <data name="HOST_MENU_ADD_SERVER" xml:space="preserve">
     <value>{0} (ライセンスによる制限)</value>
   </data>
@@ -6921,12 +6948,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="INVALID_SESSION" xml:space="preserve">
     <value>無効なセッション</value>
-  </data>
-  <data name="INVALID_URL" xml:space="preserve">
-    <value>無効なインストーラ ファイル URL</value>
-  </data>
-  <data name="INVALID_VER" xml:space="preserve">
-    <value>指定されたネットワークの場所にあるインストーラー ファイルのバージョンが無効です。</value>
   </data>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>vApp に属している</value>
@@ -8053,9 +8074,6 @@ SCSI ID: {2}
   </data>
   <data name="MIN" xml:space="preserve">
     <value>最小</value>
-  </data>
-  <data name="MISSING_URL" xml:space="preserve">
-    <value>不明な URL</value>
   </data>
   <data name="MIXED_POWER_ON_MODE" xml:space="preserve">
     <value>混在</value>
@@ -9857,9 +9875,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE" xml:space="preserve">
     <value>間隔には、5 の倍数を指定してください</value>
   </data>
-  <data name="PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE" xml:space="preserve">
-    <value>プールのローリング アップグレードの実行 (手動モード)</value>
-  </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>権限が拒否されました</value>
   </data>
@@ -9928,6 +9943,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> エラー。</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
+    <value>このサーバーからすべての VM を移行するのに十分な空きメモリが他のサーバーになかったため、サーバー '{0}' を退避できませんでした。一部の VM を一時停止またはシャットダウンしてから、[再試行] を押してプロセスを再開してください。</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>'{0}' に [XenServer] をインストールしています...</value>
@@ -10122,9 +10140,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="POOL_X" xml:space="preserve">
     <value>プール '{0}'</value>
-  </data>
-  <data name="POOL_X_READYUPGRADE" xml:space="preserve">
-    <value> プール {0}</value>
   </data>
   <data name="POWER_ON" xml:space="preserve">
     <value>電源投入</value>
@@ -10420,9 +10435,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>{0} はメモリ サイズを変更できません。テンプレートで指定されている設定に制限されます</value>
-  </data>
-  <data name="READY_UPGRADE" xml:space="preserve">
-    <value>アップグレードの開始</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>読み取り専用</value>
@@ -10722,6 +10734,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>プールのローリング アップグレード(&amp;U)...</value>
   </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>新しいバージョンのすべてのリリース済みアップデートを適用(&amp;U)</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>新しいバージョンのすべてのリリース済みアップデートを適用 (自動アップデートが使用できるプールでのみ)(&amp;U)</value>
+  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>停止(&amp;T)</value>
   </data>
@@ -10754,7 +10772,16 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="ROLLING_UPGRADE_ERROR_POOL_ONE" xml:space="preserve">
     <value>プールのローリングアップグレードの進行中に次のエラーが発生しました。</value>
   </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
+    <value>アップグレード オプション</value>
+  </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
+    <value>アップデートまたはサプリメンタル パックの適用 (オプション)</value>
+  </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
+    <value>インストーラーの場所</value>
+  </data>
+  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
     <value>ネットワーク上のインストール ファイルの指定 (自動モード)</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
@@ -12376,9 +12403,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
     <value>プール マスター '{0}' のアップグレード</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER_X" xml:space="preserve">
-    <value>        プール マスター{0} のアップグレード</value>
-  </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>事前チェック</value>
   </data>
@@ -12387,9 +12411,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>サーバー '{0}' のアップグレード</value>
-  </data>
-  <data name="UPGRADE_SERVER_X" xml:space="preserve">
-    <value>        サーバー {0} のアップグレード</value>
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>'{0}' のアップグレード</value>

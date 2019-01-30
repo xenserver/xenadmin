@@ -2249,21 +2249,6 @@
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
   </data>
-  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
-    <value>已取消</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
-    <value>正在编译</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
-    <value>正在下载 - {0}</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
-    <value>失败 - 请参阅日志以了解详细信息</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
-    <value>已排队</value>
-  </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>选择要包含在报告中的数据</value>
   </data>
@@ -2304,6 +2289,21 @@
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
     <value>失败。{0} 用户无法检索所有指定项目。</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_CANCELLED" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_COMPILING" xml:space="preserve">
+    <value>正在编译</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
+    <value>正在下载 - {0}</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
+    <value>失败 - 请参阅日志以了解详细信息</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>已排队</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>正在保存服务器状态报告</value>
@@ -2576,6 +2576,12 @@
   </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>正在检查主机活跃状态</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE" xml:space="preserve">
+    <value>正在检查主机内存状态</value>
+  </data>
+  <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
+    <value>主机内存检查</value>
   </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>正在检查角色...</value>
@@ -5111,9 +5117,6 @@
   <data name="ERROR_NO_XENSERVER" xml:space="preserve">
     <value>在“{0}”上找不到服务器。</value>
   </data>
-  <data name="ERROR_PREPARING_HOST" xml:space="preserve">
-    <value>准备主机时出错</value>
-  </data>
   <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
     <value>无法在“{0}”对代理服务器进行身份验证。</value>
   </data>
@@ -6340,6 +6343,30 @@
   <data name="HOST_LOG_DESTINATION_LOCAL" xml:space="preserve">
     <value>本地</value>
   </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
+    <value>如果要升级到 [XenServer] [BRANDING_VERSION_8_0] 及更高版本，则将增加 {0} 上的控制域内存。
+
+这可能会导致在 RPU 期间无法将 VM 迁移到此服务器，或在升级后无法容纳当前位于此服务器上的所有 VM。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: 由于控制域内存可能会增加，此服务器可能在升级后无法容纳其所有 VM。 </value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG" xml:space="preserve">
+    <value>{0} 上的控制域内存将在升级期间增加到 {1}。
+
+这可能会导致在 RPU 期间无法将 VM 迁移到此服务器，或在升级后无法容纳当前位于此服务器上的所有 VM。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: 由于控制域内存增加，此服务器可能在升级后无法容纳其所有 VM。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG" xml:space="preserve">
+    <value>{0} 上的控制域内存将在升级到 [XenServer] {1} 时增加。
+
+这可能会导致在 RPU 期间无法将 VM 迁移到此服务器，或在升级后无法容纳当前位于此服务器上的所有 VM。</value>
+  </data>
+  <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_SHORT" xml:space="preserve">
+    <value>{0}: 由于控制域内存增加，此服务器可能在升级后无法容纳其所有 VM。</value>
+  </data>
   <data name="HOST_MENU_ADD_SERVER" xml:space="preserve">
     <value>{0} (许可证限制)</value>
   </data>
@@ -6915,12 +6942,6 @@
   </data>
   <data name="INVALID_SESSION" xml:space="preserve">
     <value>会话无效</value>
-  </data>
-  <data name="INVALID_URL" xml:space="preserve">
-    <value>安装程序文件的 URL 无效</value>
-  </data>
-  <data name="INVALID_VER" xml:space="preserve">
-    <value>指定的网络位置包含的安装程序文件版本无效</value>
   </data>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>在 vApp 中</value>
@@ -8047,9 +8068,6 @@ SCSI ID: {2}
   </data>
   <data name="MIN" xml:space="preserve">
     <value>最小</value>
-  </data>
-  <data name="MISSING_URL" xml:space="preserve">
-    <value>缺少 URL</value>
   </data>
   <data name="MIXED_POWER_ON_MODE" xml:space="preserve">
     <value>混合</value>
@@ -9855,9 +9873,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE" xml:space="preserve">
     <value>间隔必须为 5 的倍数</value>
   </data>
-  <data name="PERFORM_ROLLING_UPGRADE_INTERACTIVE_MODE" xml:space="preserve">
-    <value>执行滚动池升级(手动模式)</value>
-  </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>权限遭拒</value>
   </data>
@@ -9926,6 +9941,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> 错误。</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
+    <value>服务器“{0}”无法撤离，因为其他服务器上没有足够的可用内存以迁移此服务器中的所有 VM。请暂停或关闭某些 VM，然后按“重试”以恢复该过程。</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>正在“{0}”上安装 [XenServer]...</value>
@@ -10120,9 +10138,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="POOL_X" xml:space="preserve">
     <value>池“{0}”</value>
-  </data>
-  <data name="POOL_X_READYUPGRADE" xml:space="preserve">
-    <value> 池 {0}</value>
   </data>
   <data name="POWER_ON" xml:space="preserve">
     <value>开机</value>
@@ -10418,9 +10433,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>权限为“{0}”的用户无法更改内存值，将被限定使用模板上的设置。</value>
-  </data>
-  <data name="READY_UPGRADE" xml:space="preserve">
-    <value>升级准备就绪</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>只读</value>
@@ -10720,6 +10732,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>正在执行滚动池升级(&amp;U)...</value>
   </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>对新版本应用所有已发布的更新(&amp;U)</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>对新版本应用所有已发布的更新(仅在获得自动更新许可的池中应用)(&amp;U)</value>
+  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>停止(&amp;T)</value>
   </data>
@@ -10752,7 +10770,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="ROLLING_UPGRADE_ERROR_POOL_ONE" xml:space="preserve">
     <value>滚动池升级过程中发生以下错误:</value>
   </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TEXT" xml:space="preserve">
+    <value>升级选项</value>
+  </data>
+  <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
+    <value>(可选)应用更新或补充包</value>
+  </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
+    <value>安装程序位置</value>
+  </data>
+  <data name="ROLLING_UPGRADE_METHOD_PAGE_TITLE" xml:space="preserve">
     <value>查找网络安装文件(自动模式)</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
@@ -12372,9 +12399,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
     <value>升级池主服务器“{0}”</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER_X" xml:space="preserve">
-    <value>        升级池主服务器 {0}</value>
-  </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>预检查</value>
   </data>
@@ -12383,9 +12407,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>升级服务器 {0}</value>
-  </data>
-  <data name="UPGRADE_SERVER_X" xml:space="preserve">
-    <value>        升级服务器 {0}</value>
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>升级“{0}”</value>

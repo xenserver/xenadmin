@@ -142,7 +142,7 @@
     <value>5</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>输入安装介质详细信息，然后单击“测试”进行验证。验证后，可以单击“开始升级”以开始依次自动升级每个 [XenServer]。升级过程可能需要一些时间。</value>
+    <value>输入安装介质详细信息，然后单击“测试”对其进行验证。验证后，您就可以继续前往下一页。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -155,36 +155,6 @@
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="labelSelectDiskFile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelSelectDiskFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 256</value>
-  </data>
-  <data name="labelSelectDiskFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelSelectDiskFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 39</value>
-  </data>
-  <data name="labelSelectDiskFile.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="labelSelectDiskFile.Text" xml:space="preserve">
-    <value>浏览您的计算机，查找希望 [XenCenter] 在升级选定的服务器后安装的更新或补充包文件。请注意，如果选择了与上面指定的 [XenServer] 版本不兼容的文件，安装将失败。</value>
-  </data>
-  <data name="&gt;&gt;labelSelectDiskFile.Name" xml:space="preserve">
-    <value>labelSelectDiskFile</value>
-  </data>
-  <data name="&gt;&gt;labelSelectDiskFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelSelectDiskFile.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;labelSelectDiskFile.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -211,7 +181,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="labelErrors.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -241,154 +211,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;labelErrors.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>文件名(&amp;F):</value>
-  </data>
-  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="BrowseButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="BrowseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 3</value>
-  </data>
-  <data name="BrowseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="BrowseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="BrowseButton.Text" xml:space="preserve">
-    <value>浏览(&amp;B)...</value>
-  </data>
-  <data name="&gt;&gt;BrowseButton.Name" xml:space="preserve">
-    <value>BrowseButton</value>
-  </data>
-  <data name="&gt;&gt;BrowseButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BrowseButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;BrowseButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="fileNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 6</value>
-  </data>
-  <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 20</value>
-  </data>
-  <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;fileNameTextBox.Name" xml:space="preserve">
-    <value>fileNameTextBox</value>
-  </data>
-  <data name="&gt;&gt;fileNameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fileNameTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;fileNameTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 301</value>
-  </data>
-  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>549, 32</value>
-  </data>
-  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="BrowseButton" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="fileNameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,Absolute,20" />&lt;Rows Styles="Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="checkBoxInstallSuppPack.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBoxInstallSuppPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 233</value>
-  </data>
-  <data name="checkBoxInstallSuppPack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 12, 3, 3</value>
-  </data>
-  <data name="checkBoxInstallSuppPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 17</value>
-  </data>
-  <data name="checkBoxInstallSuppPack.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="checkBoxInstallSuppPack.Text" xml:space="preserve">
-    <value>从磁盘安装更新或补充包(&amp;I)</value>
-  </data>
-  <data name="&gt;&gt;checkBoxInstallSuppPack.Name" xml:space="preserve">
-    <value>checkBoxInstallSuppPack</value>
-  </data>
-  <data name="&gt;&gt;checkBoxInstallSuppPack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxInstallSuppPack.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;checkBoxInstallSuppPack.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -397,7 +220,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>575, 378</value>
@@ -703,7 +526,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
