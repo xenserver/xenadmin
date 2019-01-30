@@ -1517,7 +1517,7 @@ namespace XenAdmin.TabPages
         private void generateReadCachingBox()
         {
             VM vm = xenObject as VM;
-            if (vm == null || !vm.IsRunning() || !Helpers.CreamOrGreater(vm.Connection))
+            if (vm == null || !vm.IsRunning())
                 return;
 
             PDSection s = pdSectionReadCaching;

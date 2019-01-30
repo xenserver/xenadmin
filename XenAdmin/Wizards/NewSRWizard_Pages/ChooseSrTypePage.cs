@@ -85,16 +85,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         #region XenTabPage overrides
 
-        public override string Text { get { return Messages.TYPE; } }
+        public override string Text => Messages.TYPE;
 
-        public override string PageTitle { get { return Messages.CHOOSE_SR_TYPE_PAGE_TITLE; } }
+        public override string PageTitle => Messages.CHOOSE_SR_TYPE_PAGE_TITLE;
 
-        public override string HelpID { get { return "Type"; } }
+        public override string HelpID => "Type";
 
         public override void PopulatePage()
         {
             //Hide iSL radio button for Creedence or higher (StorageLink is not supported)
-            radioButtonCslg.Visible = !Helpers.CreedenceOrGreater(Connection);
+            radioButtonCslg.Visible = false;
 
             radioButtonCifs.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictCifs);
 

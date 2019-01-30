@@ -250,7 +250,6 @@ namespace XenAdmin.Diagnostics.Checks
                     return new WrongServerVersion(this, required, Host);
 
                 case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
-                    System.Diagnostics.Trace.Assert(Helpers.CreamOrGreater(Host.Connection));  // If not Cream or greater, we shouldn't get this error
                     System.Diagnostics.Trace.Assert(!Helpers.ElyOrGreater(Host.Connection));   // If Ely or greater, we shouldn't get this error  
 
                     long.TryParse(found, out foundSpace);
@@ -281,7 +280,7 @@ namespace XenAdmin.Diagnostics.Checks
                     return new HostOutOfSpaceProblem(this, Host, Update, diskSpaceReq);
 
                 case "OUT_OF_SPACE":
-                    if (Helpers.CreamOrGreater(Host.Connection) && (Patch != null || Update != null))
+                    if (Patch != null || Update != null)
                     {
                         var action = Patch != null
                             ? new GetDiskSpaceRequirementsAction(Host, Patch, true)

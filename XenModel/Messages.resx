@@ -10968,9 +10968,6 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
   <data name="SELECTED_HOST_POOL_NOT_CONNECTED" xml:space="preserve">
     <value>The hosts or pools selected are not connected</value>
   </data>
-  <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
-    <value>Different versions of [XenServer] must be licensed separately</value>
-  </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>Select a filter...</value>
   </data>

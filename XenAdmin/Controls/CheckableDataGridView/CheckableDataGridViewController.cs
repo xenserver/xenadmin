@@ -236,34 +236,10 @@ namespace XenAdmin.Controls.CheckableDataGridView
             return indexToUpdate;
         }
 
-        protected virtual KeyValuePair<bool, string> DisableOtherRowsInContext(CheckableDataGridViewRow checkedRow, CheckableDataGridViewRow otherRow)
-        {
-            return new KeyValuePair<bool, string>(false, String.Empty);
-        }
-
         private void ToggleDisableOtherRowsInContext(int checkedRowIndex)
         {
             if (storedRows.All(r => !r.Checked))
                 ToggleDisableIfLastStanding(checkedRowIndex);
-            else
-                ToggleDisableIfNotLastStanding(checkedRowIndex);
-        }
-
-        private void ToggleDisableIfNotLastStanding(int checkedRowIndex)
-        {
-            foreach (CheckableDataGridViewRow otherRow in storedRows.ToList())
-            {
-                if(otherRow.LockDisabledState)
-                    continue;
-
-                KeyValuePair<bool, string> disabled = DisableOtherRowsInContext(storedRows[checkedRowIndex], otherRow);
-                if (otherRow.Index != checkedRowIndex && !otherRow.Disabled && disabled.Key)
-                {
-                    otherRow.Disabled = !otherRow.Disabled;
-                    otherRow.DisabledReason = otherRow.Disabled ? disabled.Value : String.Empty;
-                    View.DrawRowAsDisabled(otherRow.Disabled, otherRow.Index);
-                }
-            }
         }
 
         private void ToggleDisableIfLastStanding(int checkedRowIndex)

@@ -1371,10 +1371,11 @@ namespace XenAdmin
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
 
-            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu))
+            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) &&
+                !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu))
                 newTabs.Add(TabPageGPU);
 
-            if (!multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough))
+            if (!multi && !SearchMode && isHostSelected && isHostLive && ((Host)SelectionManager.Selection.First).PUSBs.Count > 0 && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough))
                 newTabs.Add(TabPageUSB);
 
             var consoleFeatures = new List<TabPageFeature>();
@@ -1402,8 +1403,7 @@ namespace XenAdmin
                 newTabs.Add(TabPageSnapshots);
 
             //Any Clearwater XenServer, or WLB is not licensed on XenServer, the WLB tab and any WLB menu items disappear completely.
-            if (!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) || wlb_upsell)
-                && !multi && !SearchMode && isPoolSelected)
+            if (!wlb_upsell && !multi && !SearchMode && isPoolSelected)
                 newTabs.Add(TabPageWLB);
 
             if (!multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive))

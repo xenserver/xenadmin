@@ -29,10 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using XenAdmin.Core;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 using XenOvf.Definitions;
@@ -42,23 +40,18 @@ namespace XenAdmin.Wizards.ImportWizard.Filters
     public class HardwareCompatibilityFilter : ReasoningFilter
     {
         private List<Xen_ConfigurationSettingData_Type> _hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
-        private List<Host> _creamOrNewerHosts = new List<Host>();
+        private List<Host> _hosts = new List<Host>();
 
         public HardwareCompatibilityFilter(IXenObject itemAddedToComboBox, List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings)
             : base(itemAddedToComboBox)
         {
             _hardwarePlatformSettings = hardwarePlatformSettings;
 
-            if (Helpers.CreamOrGreater(ItemToFilterOn.Connection))
-            {
-                Host host = ItemToFilterOn as Host;
-                if (host != null)
-                    _creamOrNewerHosts.Add(host);
+            if (ItemToFilterOn is Host host)
+                _hosts.Add(host);
 
-                Pool pool = ItemToFilterOn as Pool;
-                if (pool != null)
-                    _creamOrNewerHosts.AddRange(pool.Connection.Cache.Hosts);
-            }
+            if (ItemToFilterOn is Pool pool)
+                _hosts.AddRange(pool.Connection.Cache.Hosts);
         }
     
         public override bool FailureFound
@@ -71,9 +64,9 @@ namespace XenAdmin.Wizards.ImportWizard.Filters
                     if (!long.TryParse(setting.Value.Value, out hardwarePlatformVersion))
                         continue;
 
-                    if (_creamOrNewerHosts.Count > 0)
+                    if (_hosts.Count > 0)
                     {
-                        if (_creamOrNewerHosts.Any(h => !h.virtual_hardware_platform_versions.Contains(hardwarePlatformVersion)))
+                        if (_hosts.Any(h => !h.virtual_hardware_platform_versions.Contains(hardwarePlatformVersion)))
                             return true;
                     }
                     else
@@ -87,9 +80,6 @@ namespace XenAdmin.Wizards.ImportWizard.Filters
             }
         }
 
-        public override string Reason
-        {
-	        get { return Messages.CPM_FAILURE_REASON_HARDWARE_PLATFORM; }
-        }
+        public override string Reason => Messages.CPM_FAILURE_REASON_HARDWARE_PLATFORM;
     }
 }

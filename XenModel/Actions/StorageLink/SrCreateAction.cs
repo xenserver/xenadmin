@@ -157,7 +157,7 @@ namespace XenAdmin.Actions
                 // that an unused secret will be left lying around without warning.
                 try
                 {
-                    if (!string.IsNullOrEmpty(secretuuid) && Helpers.CreedenceOrGreater(Connection))
+                    if (!string.IsNullOrEmpty(secretuuid))
                     {
                         string opaqref = Secret.get_by_uuid(Session, secretuuid);
                         Secret.destroy(Session, opaqref);

@@ -299,23 +299,6 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool CreedenceOrGreater(IXenConnection conn)
-        {
-            return conn == null || CreedenceOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// Creedence is ver. 1.9.0
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool CreedenceOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-
-            string platform_version = HostPlatformVersion(host);
-            return platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
             return conn == null || DundeeOrGreater(Helpers.GetMaster(conn));
@@ -330,6 +313,11 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0;
+        }
+
+        public static bool DundeePlusOrGreater(IXenConnection conn)
+        {
+            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_6;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -453,59 +441,6 @@ namespace XenAdmin.Core
             return platform_version != null && productVersionCompare(platform_version, "2.6.50") >= 0;
         }
 
-        /// <summary>
-        /// Cream (Creedence SP1) has API version 2.4
-        /// </summary>
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        /// <returns></returns>
-        public static bool CreamOrGreater(IXenConnection conn)
-        {
-            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_4;
-        }
-
-        public static bool DundeePlusOrGreater(IXenConnection conn)
-        {
-            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_6;
-        }
-
-        /// Clearwater is ver. 1.7.0
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool IsClearwater(IXenConnection conn)
-        {
-            if(conn == null) return true;
-            else {
-                Host host = Helpers.GetMaster(conn);
-                return (ClearwaterOrGreater(host) && !CreedenceOrGreater(host));
-            }
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool ClearwaterOrGreater(IXenConnection conn)
-        {
-            return conn == null || ClearwaterOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// Clearwater is ver. 1.7.0
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool ClearwaterOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-
-            string platform_version = HostPlatformVersion(host);
-            return platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0;
-        }
-
-        /// <summary>
-        /// Clearwater SP1 has API version 2.1
-        /// </summary>
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        /// <returns></returns>
-        public static bool ClearwaterSp1OrGreater(IXenConnection conn)
-        {
-            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_1;
-        }
-
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(IXenConnection conn)
         {
@@ -533,22 +468,10 @@ namespace XenAdmin.Core
             get { return false; }
         }
 
-        /// <summary>
-        /// WLB: Whether pool has wlb enabled.
-        /// </summary>
-        /// <param name="connection">May not be null.</param>
-        /// <returns>true when wlb is enabled, otherwise false</returns>
         public static bool WlbEnabled(IXenConnection connection)
         {
-            //Clearwater doesn't have WLB
-            if (IsClearwater(connection))
-                return false;
-
             Pool pool = GetPoolOfOne(connection);
-            if (pool == null)
-                return false;
-
-            return pool.wlb_enabled;
+            return pool != null && pool.wlb_enabled;
         }
 
         public static bool WlbEnabledAndConfigured(IXenConnection conn)
@@ -558,12 +481,8 @@ namespace XenAdmin.Core
 
         public static bool WlbConfigured(IXenConnection conn)
         {
-            //Clearwater doesn't has WLB
-            if (IsClearwater(conn))
-                return false;
-
             Pool p = GetPoolOfOne(conn);
-            return (p != null && !String.IsNullOrEmpty(p.wlb_url));
+            return p != null && !string.IsNullOrEmpty(p.wlb_url);
         }
 
         public static bool CrossPoolMigrationRestrictedWithWlb(IXenConnection conn)
@@ -770,11 +689,6 @@ namespace XenAdmin.Core
             return output;
         }
 
-        public static string BoolToString(bool b)
-        {
-            return b ? Messages.YES : Messages.NO;
-        }
-
         private static readonly Regex IqnRegex = new Regex(@"^iqn\.\d{4}-\d{2}\.([a-zA-Z0-9][-_a-zA-Z0-9]*(\.[a-zA-Z0-9][-_a-zA-Z0-9]*)*)(:.+)?$", RegexOptions.ECMAScript);
 
         public static bool ValidateIscsiIQN(string iqn)
@@ -921,24 +835,6 @@ namespace XenAdmin.Core
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Shuffles a list in-place.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="listToShuffle"></param>
-        public static void ShuffleList<T>(List<T> listToShuffle)
-        {
-            Random r = new Random();
-
-            for (int k = listToShuffle.Count - 1; k > 1; --k)
-            {
-                int randIndx = r.Next(k);
-                T temp = listToShuffle[k];
-                listToShuffle[k] = listToShuffle[randIndx];
-                listToShuffle[randIndx] = temp;
-            }
         }
 
         /// <summary>
@@ -1512,18 +1408,6 @@ namespace XenAdmin.Core
             return null;
         }
 
-
-        public static int Max(params int[] arr)
-        {
-            int result = int.MinValue;
-            foreach (int i in arr)
-            {
-                if (i > result)
-                    result = i;
-            }
-            return result;
-        }
-
         /// <summary>
         /// Load an xml stream and ignore comments and whitespace
         /// </summary>
@@ -1722,8 +1606,6 @@ namespace XenAdmin.Core
             return string.Join(":", pairs.ToArray());
         }
 
-      
-
         public static string GetUrl(IXenConnection connection)
         {
             UriBuilder uriBuilder = new UriBuilder(connection.UriScheme, connection.Hostname);
@@ -1766,17 +1648,6 @@ namespace XenAdmin.Core
             }
 
             return false;
-        }
-
-        public static object GetListOfNames(List<Host> list)
-        {
-            List<string> names = new List<string>();
-            foreach (Host obj in list)
-            {
-                names.Add(obj.Name());
-            }
-
-            return string.Join(", ", names.ToArray());
         }
 
         public static bool CompareLists<T>(List<T> l1, List<T> l2)
@@ -1837,9 +1708,6 @@ namespace XenAdmin.Core
 
             return pif.VLAN.ToString();
         }
-
-       
-       
 
         /// <summary>
         /// Return a string version of a list, in the form "L1, L2, L3 and L4"
@@ -1936,7 +1804,7 @@ namespace XenAdmin.Core
        {
            Host master = GetMaster(connection);
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
-           return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend();
+           return master != null && master.vSwitchNetworkBackend();
        }
 
        public static bool ContainerCapability(IXenConnection connection)
@@ -1946,7 +1814,7 @@ namespace XenAdmin.Core
                return false;
            if (ElyOrGreater(connection))
                return master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
-           return CreamOrGreater(connection) && master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+           return master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
        public static bool PvsCacheCapability(IXenConnection connection)

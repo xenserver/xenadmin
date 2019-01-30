@@ -218,17 +218,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
             if (mostMemoryPostUpgradeChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_HOST_MEMORY_POST_UPGRADE, mostMemoryPostUpgradeChecks));
-
-            //iSL (StorageLink) check - CA-223486: only for pre-Creedence
-            var preCreedenceServers = hostsToUpgrade.Where(h => !Helpers.CreedenceOrGreater(h)).ToList();
-            if (preCreedenceServers.Any())
-            {
-                var srLinkChecks = new List<Check>();
-                foreach (Host host in preCreedenceServers)
-                    srLinkChecks.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
-                groups.Add(new CheckGroup(Messages.CHECKING_STORAGELINK_STATUS, srLinkChecks));
-            }
-            
+          
             var gfs2Checks = new List<Check>();
             foreach (Pool pool in SelectedPools.Where(p =>
                 Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))

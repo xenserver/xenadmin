@@ -160,22 +160,12 @@ namespace XenAPI
 
         public override bool Show(bool showHiddenVMs)
         {
-            return IsManaged() && (showHiddenVMs || !IsHidden());
+            return managed && (showHiddenVMs || !IsHidden());
         }
 
         public override bool IsHidden()
         {
             return BoolKey(other_config, HIDE_FROM_XENCENTER);
-        }
-
-        /// <summary>
-        /// Indicates whether the interface is managed by xapi.
-        /// Note that this is the same as PIF.managed property for Clearwater SP1 and later hosts.
-        /// And it is always true for older hosts, where the managed property is not available.
-        /// </summary>
-        public bool IsManaged()
-        {
-            return Helpers.ClearwaterSp1OrGreater(Connection) ? managed : true;
         }
 
         // Whether this PIF is a management interface in the XenCenter sense.

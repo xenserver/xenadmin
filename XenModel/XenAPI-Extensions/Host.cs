@@ -348,18 +348,7 @@ namespace XenAPI
 
         public static bool RestrictExportResourceData(Host h)
         {
-            if (Helpers.CreedenceOrGreater(h.Connection))
-            {
-                return BoolKeyPreferTrue(h.license_params, "restrict_export_resource_data");
-            }
-            // Pre-Creedence hosts:
-            // allowed on Per-Socket edition for Clearwater hosts
-            var hostEdition = GetEdition(h.edition);
-            if (hostEdition == Edition.PerSocket)
-            {
-                return h.LicenseExpiryUTC() < DateTime.UtcNow - h.Connection.ServerTimeOffset; // restrict if the license has expired
-            }
-            return true;
+            return BoolKeyPreferTrue(h.license_params, "restrict_export_resource_data");
         }
 
         public static bool RestrictIntraPoolMigrate(Host h)
@@ -1468,7 +1457,7 @@ namespace XenAPI
 
         public bool EligibleForSupport()
         {
-            return (Helpers.CreedenceOrGreater(this) && GetEdition(edition) != Edition.Free);
+            return GetEdition(edition) != Edition.Free;
         }
 
         #region Supplemental Packs
@@ -1584,9 +1573,8 @@ namespace XenAPI
         /// </summary>
         public bool CanEnableDisableIntegratedGpu()
         {
-            return Helpers.CreamOrGreater(Connection)
-                   && Helpers.GpuCapability(Connection)
-                   && !Helpers.FeatureForbidden(Connection, RestrictIntegratedGpuPassthrough);
+            return Helpers.GpuCapability(Connection) &&
+                   !Helpers.FeatureForbidden(Connection, RestrictIntegratedGpuPassthrough);
         }
 
         #region IEquatable<Host> Members
