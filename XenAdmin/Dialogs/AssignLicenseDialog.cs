@@ -116,7 +116,7 @@ namespace XenAdmin.Dialogs
                 standardPerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET,
                     xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
             }
-            else if (xos.TrueForAll(x => Helpers.CreedenceOrGreater(x.Connection)))
+            else
             {
                 perSocketRadioButton.Visible = false;
                 xenDesktopEnterpriseRadioButton.Visible = false;
@@ -130,19 +130,6 @@ namespace XenAdmin.Dialogs
                 desktopCloudRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_CLOUD_LEGACY;
                 standardPerSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY,
                     xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
-            }
-            else
-            {
-                enterprisePerSocketRadioButton.Visible = false;
-                enterprisePerUserRadioButton.Visible = false;
-                standardPerSocketRadioButton.Visible = false;
-                desktopPlusRadioButton.Visible = false;
-                desktopRadioButton.Visible = false;
-                desktopCloudRadioButton.Visible = false;
-                perSocketRadioButton.Checked = true;
-                perSocketRadioButton.Text = String.Format(Messages.LICENSE_EDITION_PERSOCKET_LEGACY,
-                    xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
-                xenDesktopEnterpriseRadioButton.Text = Messages.LICENSE_EDITION_XENDESKTOP_LEGACY;
             }
         }
 

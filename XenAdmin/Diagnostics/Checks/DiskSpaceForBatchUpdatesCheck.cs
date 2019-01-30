@@ -56,9 +56,6 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.Connection.IsConnected)
                 throw new EndOfStreamException(Helpers.GetName(Host.Connection));
 
-            if (!Helpers.CreamOrGreater(Host.Connection))
-                return null;
-
             var elyOrGreater = Helpers.ElyOrGreater(Host.Connection);
 
             // check the disk space on host

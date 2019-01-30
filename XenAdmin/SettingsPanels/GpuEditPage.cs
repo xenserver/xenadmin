@@ -212,12 +212,9 @@ namespace XenAdmin.SettingsPanels
                 }
             }
 
-            // vGPU was introduced in Clearwater SP1
-            gpu_groups = !Helpers.ClearwaterSp1OrGreater(Connection) //We used to check host.RestrictVgpu here (instead of checking the API version); this is not correct anymore, because vGPU is a licensed feature.
-                 ? Connection.Cache.GPU_groups
-                 : Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();
-                   //not showing empty groups
-            
+            gpu_groups = Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();
+            //not showing empty groups
+
             gpusAvailable = gpu_groups.Length > 0;
 
             if (gpusAvailable)

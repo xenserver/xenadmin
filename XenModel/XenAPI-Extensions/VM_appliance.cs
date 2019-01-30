@@ -87,12 +87,5 @@ namespace XenAPI
             }
             return false;
         }
-
-        public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)
-        {
-            return Helpers.CreedenceOrGreater(sessionTo.Connection)
-                       ? VM_appliance.get_SRs_required_for_recovery(session, vm, sessionTo.opaque_ref)
-                       : null;
-        }
     }
 }

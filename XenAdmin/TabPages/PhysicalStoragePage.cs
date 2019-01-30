@@ -398,7 +398,7 @@ namespace XenAdmin.TabPages
 
         private void RefreshTrimButton()
         {
-            showTrimButton = connection != null && Helpers.CreedenceOrGreater(connection);
+            showTrimButton = connection != null;
             if (showTrimButton)
             {
                 trimButtonContainer.Visible = true;

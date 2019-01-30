@@ -616,7 +616,7 @@ namespace XenAdmin.ConsoleView
                     Program.Invoke(this, OnDetectRDP);
                 AutoSwitchRDPLater = false;
             }
-            if (Helpers.CreamOrGreater(Source.Connection) && parentVNCTabView.IsRDPControlEnabled())
+            if (parentVNCTabView.IsRDPControlEnabled())
                 parentVNCTabView.EnableToggleVNCButton();
         }
 
@@ -758,7 +758,7 @@ namespace XenAdmin.ConsoleView
                 parentVNCTabView.DisableToggleVNCButton();
             }
 
-            if (!Helpers.CreamOrGreater(Source.Connection) || !parentVNCTabView.IsRDPControlEnabled())
+            if (!parentVNCTabView.IsRDPControlEnabled())
             {
                 if (InDefaultConsole())
                 {

@@ -302,12 +302,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 case UpdateType.ISO:
                     //from Ely onwards, iso does not mean supplemental pack
-                    if (!Helpers.CreamOrGreater(host.Connection))
-                    {
-                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
-                        return false;
-                    }
-
+                    
                     if (WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);
 

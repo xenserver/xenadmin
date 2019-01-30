@@ -31630,15 +31630,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Different versions of [XenServer] must be licensed separately.
-        /// </summary>
-        public static string SELECTION_CANNOT_BE_MIXED_FOR_LICENSING {
-            get {
-                return ResourceManager.GetString("SELECTION_CANNOT_BE_MIXED_FOR_LICENSING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Server.
         /// </summary>
         public static string SERVER {

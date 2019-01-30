@@ -72,15 +72,10 @@ namespace XenAdmin.TabPages
                         return Messages.LICENSE_EXPIRED_NO_LICENSES_AVAILABLE;
 
                     if (Status.CurrentState == LicenseStatus.HostState.Expired)
-                    {
-
-                        return Status.PoolLicensingModel == LicenseStatus.LicensingModel.Clearwater ? Messages.LICENSE_UNSUPPORTED : Messages.LICENSE_UNLICENSED;
-                    }
+                        return Messages.LICENSE_UNLICENSED;
 
                     if (Status.CurrentState == LicenseStatus.HostState.Free)
-                    {
-                        return Status.PoolLicensingModel == LicenseStatus.LicensingModel.Clearwater ? Messages.LICENSE_UNSUPPORTED : Messages.LICENSE_UNLICENSED;
-                    }
+                        return Messages.LICENSE_UNLICENSED;
 
                     TimeSpan s = Status.LicenseExpiresExactlyIn;
                     if (s.TotalMinutes < 2)

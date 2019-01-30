@@ -1587,22 +1587,6 @@ namespace XenAPI
                    appliance.opaque_ref != "OpaqueRef:NULL";
         }
 
-        /// <summary>
-        /// Try to determine if this VM is WSS - this is a best guess only
-        /// </summary>
-        public bool CouldBeWss()
-        {
-            const string wssName = "Web Self Service";
-            return name_label.Contains(wssName);
-        }
-
-        public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)
-        {
-            return Helpers.CreedenceOrGreater(sessionTo.Connection)
-                       ? VM.get_SRs_required_for_recovery(session, vm, sessionTo.opaque_ref)
-                       : null;
-        }
-
         public long GetCoresPerSocket()
         {
             if (platform != null && platform.ContainsKey("cores-per-socket"))

@@ -68,14 +68,6 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void UUIDLookedUpFromEnum()
         {
-            Assert.AreEqual("591d0209-531e-4ed8-9ed2-98df2a1a445c", 
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Clearwater).UUID,
-                            "Clearwater UUID lookup from enum");
-
-            Assert.AreEqual("3f92b111-0a90-4ec6-b85a-737f241a3fc1 ",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).UUID,
-                            "Creedence UUID lookup from enum");
-
             Assert.AreEqual("f6014211-7611-47ac-ac4c-e66bb1692c35",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
@@ -88,14 +80,6 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void FilenameLookedUpFromEnum()
         {
-            Assert.AreEqual("RPU001",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Clearwater).Filename,
-                            "Clearwater Filename lookup from enum");
-
-            Assert.AreEqual("RPU002",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).Filename,
-                            "Creedence Filename lookup from enum");
-
             Assert.AreEqual("RPU003",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).Filename,
                             "Dundee Filename lookup from enum");

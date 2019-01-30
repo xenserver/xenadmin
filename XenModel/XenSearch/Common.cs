@@ -436,7 +436,7 @@ namespace XenAdmin.XenSearch
 
             properties[PropertyNames.read_caching_enabled] = delegate(IXenObject o)
             {
-                return GetForRealVM(o, (vm, conn) => Helpers.CreamOrGreater(conn) ? (bool?)vm.ReadCachingEnabled() : null);
+                return GetForRealVM(o, (vm, conn) => (bool?)vm.ReadCachingEnabled());
             };
 
             properties[PropertyNames.connection_hostname] = ConnectionHostnameProperty;

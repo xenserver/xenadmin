@@ -39,23 +39,9 @@ namespace XenAdmin.Diagnostics.Hotfixing
     {
         public enum HotfixableServerVersion
         {
-            Clearwater,
-            Creedence,
             Dundee,
             ElyKolkata
         }
-
-        private readonly Hotfix clearwaterHotfix = new SingleHotfix
-        {
-            Filename = "RPU001",
-            UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
-        };
-
-        private readonly Hotfix creedenceHotfix = new SingleHotfix
-        {
-            Filename = "RPU002",
-            UUID = "3f92b111-0a90-4ec6-b85a-737f241a3fc1 "
-        };
 
         private readonly Hotfix dundeeHotfix = new SingleHotfix
         {
@@ -75,11 +61,6 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 return Hotfix(HotfixableServerVersion.ElyKolkata);
             if (Helpers.DundeeOrGreater(host) && !Helpers.ElyOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Dundee);
-            if (Helpers.CreedenceOrGreater(host) && !Helpers.DundeeOrGreater(host))
-                return Hotfix(HotfixableServerVersion.Creedence);
-            if (!Helpers.CreedenceOrGreater(host))
-                return Hotfix(HotfixableServerVersion.Clearwater);
-
             return null;
         }
 
@@ -89,10 +70,6 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 return elyKolkataHotfix;
             if (version == HotfixableServerVersion.Dundee)
                 return dundeeHotfix;
-            if (version == HotfixableServerVersion.Creedence)
-                return creedenceHotfix;
-            if (version == HotfixableServerVersion.Clearwater)
-                return clearwaterHotfix;
 
             throw new ArgumentException("A version was provided for which there is no hotfix filename");
         }

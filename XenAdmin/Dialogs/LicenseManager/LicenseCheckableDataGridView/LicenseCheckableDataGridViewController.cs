@@ -139,12 +139,5 @@ namespace XenAdmin.Controls
                     return null;
             }
         }
-
-        protected override KeyValuePair<bool, string> DisableOtherRowsInContext(CheckableDataGridViewRow checkedRow, CheckableDataGridViewRow otherRow)
-        {
-            return new KeyValuePair<bool, string>(
-                    LicenseStatus.GetLicensingModel(checkedRow.XenObject.Connection) != LicenseStatus.GetLicensingModel(otherRow.XenObject.Connection),
-                    Messages.SELECTION_CANNOT_BE_MIXED_FOR_LICENSING);
-        }
     }
 }

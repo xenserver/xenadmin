@@ -32,8 +32,6 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAdmin.Utils;
 using XenAPI;
 
@@ -50,7 +48,6 @@ namespace XenAdmin.Dialogs
         bool Updated { get; }
         void BeginUpdate();
         Host LicencedHost { get; }
-        LicenseStatus.LicensingModel PoolLicensingModel { get; }
         string LicenseEntitlements { get; }
     }
 
@@ -97,13 +94,10 @@ namespace XenAdmin.Dialogs
             SetDefaultOptions();
             XenObject = xo;
 
-            if (XenObject is Host)
-                LicencedHost = XenObject as Host;
-            if (XenObject is Pool)
-            {
-                Pool pool = XenObject as Pool;
+            if (XenObject is Host host)
+                LicencedHost = host;
+            if (XenObject is Pool pool)
                 SetMinimumLicenseValueHost(pool);
-            }
 
             serverTime.ServerTimeObtained -= ServerTimeUpdatedEventHandler;
             serverTime.ServerTimeObtained += ServerTimeUpdatedEventHandler;
@@ -161,7 +155,6 @@ namespace XenAdmin.Dialogs
 
         protected void CalculateLicenseState()
         {
-            PoolLicensingModel = GetLicensingModel(XenObject.Connection);
             LicenseExpiresExactlyIn = CalculateLicenceExpiresIn();
             CurrentState = CalculateCurrentState();
             Updated = true;
@@ -330,13 +323,11 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public LicensingModel PoolLicensingModel { get; private set; }
-
         public string LicenseEntitlements
         {
             get
             {
-                if (PoolLicensingModel == LicensingModel.Creedence && CurrentState == HostState.Licensed)
+                if (CurrentState == HostState.Licensed)
                 {
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
@@ -362,22 +353,6 @@ namespace XenAdmin.Dialogs
 
                 return Messages.UNKNOWN;
             }
-        }
-
-        #endregion
-
-        #region LicensingModel
-        public enum LicensingModel
-        {
-            Clearwater,
-            Creedence
-        }
-
-        public static LicensingModel GetLicensingModel(IXenConnection connection)
-        {
-            if (Helpers.CreedenceOrGreater(connection))
-                return LicensingModel.Creedence;
-            return LicensingModel.Clearwater;
         }
 
         #endregion
