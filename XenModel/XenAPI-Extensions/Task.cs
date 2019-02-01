@@ -152,18 +152,17 @@ namespace XenAPI
                         throw;
                 }
 
-                Session newSession = connection.DuplicateSession();
+                Session newSession;
 
                 try
                 {
-                    // Try and logout the old session using the new session
-                    newSession.logout(session.opaque_ref);
+                    // try to create a new TCP stream to use, as the other one has failed us
+                    newSession = connection.DuplicateSession();
+                    session = newSession;
                 }
                 catch
                 {
                 }
-
-                session = newSession;
 
                 retries--;
 
