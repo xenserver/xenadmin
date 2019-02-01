@@ -32,7 +32,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.ConsoleTabTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ClipboardCheckBox = new System.Windows.Forms.CheckBox();
             this.RDPGroupBox = new XenAdmin.Controls.DecentGroupBox();
-            this.checkBoxDisableRDPPolling = new System.Windows.Forms.CheckBox();
             this.WindowsKeyCheckBox = new System.Windows.Forms.CheckBox();
             this.ConnectToServerConsoleCheckBox = new System.Windows.Forms.CheckBox();
             this.SoundCheckBox = new System.Windows.Forms.CheckBox();
@@ -75,19 +74,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             // RDPGroupBox
             // 
             resources.ApplyResources(this.RDPGroupBox, "RDPGroupBox");
-            this.RDPGroupBox.Controls.Add(this.checkBoxDisableRDPPolling);
             this.RDPGroupBox.Controls.Add(this.WindowsKeyCheckBox);
             this.RDPGroupBox.Controls.Add(this.ConnectToServerConsoleCheckBox);
             this.RDPGroupBox.Controls.Add(this.SoundCheckBox);
             this.RDPGroupBox.Controls.Add(this.AutoSwitchCheckBox);
             this.RDPGroupBox.Name = "RDPGroupBox";
             this.RDPGroupBox.TabStop = false;
-            // 
-            // checkBoxDisableRDPPolling
-            // 
-            resources.ApplyResources(this.checkBoxDisableRDPPolling, "checkBoxDisableRDPPolling");
-            this.checkBoxDisableRDPPolling.Name = "checkBoxDisableRDPPolling";
-            this.checkBoxDisableRDPPolling.UseVisualStyleBackColor = true;
             // 
             // WindowsKeyCheckBox
             // 
@@ -232,7 +224,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.ComboBox DockKeyComboBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBoxDisableRDPPolling;
         private System.Windows.Forms.Label UncaptureLabel;
         private System.Windows.Forms.ComboBox UncaptureKeyComboBox;
     }
