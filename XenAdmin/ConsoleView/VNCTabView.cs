@@ -577,19 +577,8 @@ namespace XenAdmin.ConsoleView
 
                 log.DebugFormat( "'{0}' console: Enabling RDP button, because RDP capability has appeared.", source);
 
-                if (Properties.Settings.Default.EnableRDPPolling)
-                {
-                    log.DebugFormat("'{0}' console: Starting RDP polling. (RDP polling is enabled in settings.)", source);
-                    toggleConsoleButton.Visible = true;
-                    toggleConsoleButton.Enabled = RDPControlEnabled;
-                    ThreadPool.QueueUserWorkItem(TryToConnectRDP);
-                }
-                else
-                {
-                    log.DebugFormat("'{0}' console: Not starting polling. (RDP polling is diabled in settings.)", source);
-                    toggleConsoleButton.Visible = true;
-                    toggleConsoleButton.Enabled = true;
-                }
+                toggleConsoleButton.Visible = true;
+                toggleConsoleButton.Enabled = true;
             }
         }
 
@@ -606,7 +595,7 @@ namespace XenAdmin.ConsoleView
             {
                 log.DebugFormat(
                     "'{0}' console: Update power state, after receiving property change notification, PropertyName='{1}'",
-                    sender.ToString(), e.PropertyName);
+                    sender, e.PropertyName);
                 updatePowerState();
             }
         }
@@ -1182,26 +1171,15 @@ namespace XenAdmin.ConsoleView
                         }
                     }
 
-                    if (vncScreen.rdpIP == null && vncScreen.UseVNC && Properties.Settings.Default.EnableRDPPolling && (!RDPControlEnabled || tryToConnectRDP))
-                    {
+                    // disable toggleConsoleButton; it will be re-enabled in TryToConnectRDP() when rdp port polling is complete (CA-102755)
+                    if (vncScreen.rdpIP == null)
                         toggleConsoleButton.Enabled = false;
-                    }
-                    else
-                    {
-                        if (vncScreen.rdpIP == null) // disable toggleConsoleButton; it will be re-enabled in TryToConnectRDP() when rdp port polling is complete (CA-102755)
-                            toggleConsoleButton.Enabled = false;
-                        ThreadPool.QueueUserWorkItem(TryToConnectRDP);
-                    }
+                    ThreadPool.QueueUserWorkItem(TryToConnectRDP);
                 }
                 else
                 {
                     oldScaleValue = scaleCheckBox.Checked;
                     vncScreen.UseSource = !vncScreen.UseSource;
-
-                    if (vncScreen.vncIP == null && vncScreen.UseSource && Properties.Settings.Default.EnableRDPPolling)
-                    {
-                        toggleConsoleButton.Enabled = false;
-                    }
                 }
                 Unpause();
                 UpdateButtons();

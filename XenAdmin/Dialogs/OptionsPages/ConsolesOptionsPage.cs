@@ -29,15 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Properties;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -75,8 +68,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             // Console scaling
             PreserveUndockedScaleCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenUndocked;
             PreserveVNCConsoleScalingCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC;
-            checkBoxDisableRDPPolling.Visible = !HiddenFeatures.RDPPollingHidden;
-            checkBoxDisableRDPPolling.Checked = Properties.Settings.Default.EnableRDPPolling;
         }
 
         private void buildKeyCodeListBox()
@@ -126,22 +117,22 @@ namespace XenAdmin.Dialogs.OptionsPages
             log.Info(ConsoleTabSettingsHeader);
 
             // Fullscreen shortcut keys
-            log.Info("=== FullScreenShortcutKey: " + Properties.Settings.Default.FullScreenShortcutKey.ToString());
+            log.Info($"=== FullScreenShortcutKey: {Properties.Settings.Default.FullScreenShortcutKey}");
             // Dock-undock shortcut keys
-            log.Info("=== DockShortcutKey: " + Properties.Settings.Default.DockShortcutKey.ToString());
+            log.Info($"=== DockShortcutKey: {Properties.Settings.Default.DockShortcutKey}");
             // Uncapture keyboard and mouse shortcut keys
-            log.Info("=== UncaptureShortcutKey: " + Properties.Settings.Default.UncaptureShortcutKey.ToString());
+            log.Info($"=== UncaptureShortcutKey: {Properties.Settings.Default.UncaptureShortcutKey}");
 
             // Windows Remote Desktop console
-            log.Info("=== ClipboardAndPrinterRedirection: " + Properties.Settings.Default.ClipboardAndPrinterRedirection.ToString());
-            log.Info("=== WindowsShortcuts: " + Properties.Settings.Default.WindowsShortcuts.ToString());
-            log.Info("=== ReceiveSoundFromRDP: " + Properties.Settings.Default.ReceiveSoundFromRDP.ToString());
-            log.Info("=== AutoSwitchToRDP: " + Properties.Settings.Default.AutoSwitchToRDP.ToString());
-            log.Info("=== ConnectToServerConsole: " + Properties.Settings.Default.ConnectToServerConsole.ToString());
+            log.Info($"=== ClipboardAndPrinterRedirection: {Properties.Settings.Default.ClipboardAndPrinterRedirection}");
+            log.Info($"=== WindowsShortcuts: {Properties.Settings.Default.WindowsShortcuts}");
+            log.Info($"=== ReceiveSoundFromRDP: {Properties.Settings.Default.ReceiveSoundFromRDP}");
+            log.Info($"=== AutoSwitchToRDP: {Properties.Settings.Default.AutoSwitchToRDP}");
+            log.Info($"=== ConnectToServerConsole: {Properties.Settings.Default.ConnectToServerConsole}");
 
             // Console scaling
-            log.Info("=== PreserveScaleWhenUndocked: " + Properties.Settings.Default.PreserveScaleWhenUndocked.ToString());
-            log.Info("=== PreserveScaleWhenSwitchBackToVNC: " + Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC.ToString());
+            log.Info($"=== PreserveScaleWhenUndocked: {Properties.Settings.Default.PreserveScaleWhenUndocked}");
+            log.Info($"=== PreserveScaleWhenSwitchBackToVNC: {Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC}");
         }
 
         #region IOptionsPage Members
@@ -175,28 +166,17 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.PreserveScaleWhenUndocked = PreserveUndockedScaleCheckBox.Checked;
             if (PreserveVNCConsoleScalingCheckBox.Checked != Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC)
                 Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC = PreserveVNCConsoleScalingCheckBox.Checked;
-            if (checkBoxDisableRDPPolling.Checked != Properties.Settings.Default.EnableRDPPolling)
-                Properties.Settings.Default.EnableRDPPolling = checkBoxDisableRDPPolling.Checked;
         }
 
         #endregion
 
         #region IVerticalTab Members
 
-        public override string Text
-        {
-            get { return Messages.CONSOLE; }
-        }
+        public override string Text => Messages.CONSOLE;
 
-        public string SubText
-        {
-            get { return Messages.CONSOLE_DESC; }
-        }
+        public string SubText => Messages.CONSOLE_DESC;
 
-        public Image Image
-        {
-            get { return Resources.console_16; }
-        }
+        public Image Image => Images.StaticImages.console_16;
 
         #endregion
 

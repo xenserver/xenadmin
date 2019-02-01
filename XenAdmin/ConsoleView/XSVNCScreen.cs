@@ -293,7 +293,7 @@ namespace XenAdmin.ConsoleView
 
         private void PollRDPPort(Object Sender)
         {
-            if (hasRDP && !Properties.Settings.Default.EnableRDPPolling)
+            if (hasRDP)
             {
                 if (connectionPoller != null)
                     connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
