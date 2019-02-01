@@ -883,6 +883,33 @@ namespace XenAdmin
                 return;
             }
 
+            //check the pool has no slaves earlier than the lowest supported version 
+            //(could happen if trying to connect to a partially upgraded pool where
+            //the newest hosts have been upgraded using a earlier XenCenter)
+
+            var slaves = connection.Cache.Hosts.Where(h => h.opaque_ref != master.opaque_ref);
+            foreach (var slave in slaves)
+            {
+                if (Helpers.DundeeOrGreater(slave))
+                    continue;
+
+                connection.EndConnect();
+
+                Program.Invoke(Program.MainWindow, () =>
+                {
+                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                    new ActionBase(title, "", false, true, Messages.SLAVE_TOO_OLD);
+
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Error, Messages.SLAVE_TOO_OLD, Messages.CONNECT_TO_SERVER),
+                        ThreeButtonDialog.ButtonOK))
+                    {
+                        dlg.ShowDialog(this);
+                    }
+                });
+                return;
+            }
+
             // When releasing a new version of the server, we should set xencenter_min and xencenter_max on the server
             // as follows:
             //
@@ -909,7 +936,7 @@ namespace XenAdmin
                         var msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
                         var url = "https://" + connection.Hostname;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                        var error = string.Format("{0}\n{1}", msg, url);
+                        var error = $"{msg}\n{url}";
 
                         new ActionBase(title, "", false, true, error);
 

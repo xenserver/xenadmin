@@ -11227,6 +11227,9 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
     <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool master.
 Do you want to connect to the pool master '{1}'?</value>
   </data>
+  <data name="SLAVE_TOO_OLD" xml:space="preserve">
+    <value>This pool contains servers earlier than [XenServer] [BRANDING_VERSION_7_0]. Please use an earlier version of [XenCenter] to manage this pool.</value>
+  </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>smaller than</value>
   </data>
