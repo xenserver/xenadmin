@@ -32333,6 +32333,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] [BRANDING_VERSION_7_0]. Please use an earlier version of [XenCenter] to manage this pool..
+        /// </summary>
+        public static string SLAVE_TOO_OLD {
+            get {
+                return ResourceManager.GetString("SLAVE_TOO_OLD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to smaller than.
         /// </summary>
         public static string SMALLER_THAN {
