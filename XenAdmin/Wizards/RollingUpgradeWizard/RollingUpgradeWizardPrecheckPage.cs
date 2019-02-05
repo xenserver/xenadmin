@@ -110,8 +110,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override void PageCancelled(ref bool cancel)
         {
-            RemoveEventHandlersToMasters();
             base.PageCancelled(ref cancel);
+            if (cancel)
+                return;
+            RemoveEventHandlersToMasters();
         }
 
         public override string PageTitle

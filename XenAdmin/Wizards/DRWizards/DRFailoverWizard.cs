@@ -355,8 +355,10 @@ namespace XenAdmin.Wizards.DRWizards
 
         protected override void OnCancel(ref bool cancel)
         {
-            DoFinalCleanup();
             base.OnCancel(ref cancel);
+            if (cancel)
+                return;
+            DoFinalCleanup();
         }
 
         #region Page event handlers

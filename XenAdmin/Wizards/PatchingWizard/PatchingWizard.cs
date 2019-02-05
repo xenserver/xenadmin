@@ -224,6 +224,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             base.OnCancel(ref cancel);
 
+            if (cancel)
+                return;
+
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                 Messages.REVERTED_WIZARD_CHANGES,
                 GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
