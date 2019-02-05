@@ -167,6 +167,9 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			base.OnCancel(ref cancel);
 
+		    if (cancel)
+		        return;
+
 			if (m_pageXvaStorage.ImportXvaAction != null)
 			{
 				m_pageXvaStorage.ImportXvaAction.EndWizard(false, null);
