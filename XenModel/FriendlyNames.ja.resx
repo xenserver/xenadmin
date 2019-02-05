@@ -1925,4 +1925,37 @@
   <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
     <value>仮想マシンのセキュア ブート検証が失敗しました</value>
   </data>
+  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
+    <value>アップグレードのためにホストを準備中にエラーが発生しました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
+    <value>指定されたネットワークの場所にアクセスすることはできません。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
+    <value>無効なインストーラー ファイル URL。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
+    <value>指定された場所にあるインストーラー ファイルは使用できないバージョンです。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
+    <value>不明な URL。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
+    <value>要求がタイムアウトになりました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
+    <value>入力した資格情報では、指定されたネットワークの場所へのアクセスが許可されていません。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
+    <value>指定されたネットワークの場所が見つかりません。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
+    <value>指定されたネットワークの場所にアクセスするには、プロキシ認証が必要です。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
+    <value>インストーラー ファイルをホストしているサーバーでエラーが発生しました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
+    <value>インストーラー ファイルを開くときにエラーが発生しました。</value>
+  </data>
 </root>

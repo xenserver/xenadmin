@@ -117,34 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="radioButtonAutomatic.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="radioButtonAutomatic.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>562, 58</value>
+  <data name="radioButtonAutomatic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 62</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="radioButtonAutomatic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 17</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>选择所选池中各服务器的升级方式。请注意，在这两种模式下，向导都将在升级过程开始前执行一系列检查，以确保可以对池中的所有服务器应用升级。</value>
+  <data name="radioButtonAutomatic.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="radioButtonAutomatic.Text" xml:space="preserve">
+    <value>自动模式 – 通过网络安装文件自动升级(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;radioButtonAutomatic.Name" xml:space="preserve">
+    <value>radioButtonAutomatic</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonAutomatic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonAutomatic.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonAutomatic.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 82</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>536, 26</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>在自动模式下，升级将通过 HTTP、NFS 或 FTP 服务器上存储的安装文件自动应用到池中的所有服务器。</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="radioButtonManual.AutoSize" type="System.Boolean, mscorlib">
@@ -175,49 +217,19 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;radioButtonManual.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="radioButtonAutomatic.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButtonAutomatic.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radioButtonAutomatic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 78</value>
-  </data>
-  <data name="radioButtonAutomatic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 17</value>
-  </data>
-  <data name="radioButtonAutomatic.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="radioButtonAutomatic.Text" xml:space="preserve">
-    <value>自动模式 – 通过网络安装文件自动升级(&amp;A)</value>
-  </data>
-  <data name="&gt;&gt;radioButtonAutomatic.Name" xml:space="preserve">
-    <value>radioButtonAutomatic</value>
-  </data>
-  <data name="&gt;&gt;radioButtonAutomatic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButtonAutomatic.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;radioButtonAutomatic.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 199</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>22, 2, 3, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>529, 55</value>
@@ -238,133 +250,259 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 110</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>22, 2, 3, 0</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 55</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>在自动模式下，升级将通过 HTTP、NFS 或 FTP 服务器上存储的安装文件自动应用到池中的所有服务器。</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 355</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>562, 23</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>单击“运行预检查”以开始运行升级预检查。</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="applyUpdatesLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="groupBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="applyUpdatesLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="groupBox2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="applyUpdatesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="applyUpdatesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 238</value>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="applyUpdatesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 20, 3, 5</value>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="applyUpdatesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>556, 26</value>
+  <data name="comboBoxUpgradeMethod.Items" xml:space="preserve">
+    <value>HTTP</value>
   </data>
-  <data name="applyUpdatesLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="comboBoxUpgradeMethod.Items1" xml:space="preserve">
+    <value>NFS</value>
   </data>
-  <data name="applyUpdatesLabel.Text" xml:space="preserve">
-    <value>选择是否希望 [XenCenter] 在升级选定的池后自动下载并安装已发布的所有更新。请注意，此选项需要 Internet 连接。</value>
+  <data name="comboBoxUpgradeMethod.Items2" xml:space="preserve">
+    <value>FTP</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesLabel.Name" xml:space="preserve">
-    <value>applyUpdatesLabel</value>
+  <data name="comboBoxUpgradeMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="comboBoxUpgradeMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;applyUpdatesLabel.ZOrder" xml:space="preserve">
+  <data name="comboBoxUpgradeMethod.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="applyUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;comboBoxUpgradeMethod.Name" xml:space="preserve">
+    <value>comboBoxUpgradeMethod</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUpgradeMethod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUpgradeMethod.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUpgradeMethod.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="watermarkTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="watermarkTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 3</value>
+  </data>
+  <data name="watermarkTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 20</value>
+  </data>
+  <data name="watermarkTextBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;watermarkTextBox1.Name" xml:space="preserve">
+    <value>watermarkTextBox1</value>
+  </data>
+  <data name="&gt;&gt;watermarkTextBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;watermarkTextBox1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;watermarkTextBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelUser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelUser.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="applyUpdatesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelUser.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="applyUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 272</value>
+  <data name="labelUser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 33</value>
   </data>
-  <data name="applyUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 14</value>
+  <data name="labelUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="applyUpdatesCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="labelUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesCheckBox.Name" xml:space="preserve">
-    <value>applyUpdatesCheckBox</value>
+  <data name="labelUser.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelUser.Text" xml:space="preserve">
+    <value>用户名(&amp;U):</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelUser.Name" xml:space="preserve">
+    <value>labelUser</value>
+  </data>
+  <data name="&gt;&gt;labelUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUser.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;labelUser.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxUser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="textBoxUser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 30</value>
+  </data>
+  <data name="textBoxUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 20</value>
+  </data>
+  <data name="textBoxUser.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxUser.Name" xml:space="preserve">
+    <value>textBoxUser</value>
+  </data>
+  <data name="&gt;&gt;textBoxUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxUser.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxUser.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelPassword.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPassword.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 59</value>
+  </data>
+  <data name="labelPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="labelPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="labelPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelPassword.Text" xml:space="preserve">
+    <value>密码(&amp;P):</value>
+  </data>
+  <data name="&gt;&gt;labelPassword.Name" xml:space="preserve">
+    <value>labelPassword</value>
+  </data>
+  <data name="&gt;&gt;labelPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPassword.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;labelPassword.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textBoxPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="textBoxPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 56</value>
+  </data>
+  <data name="textBoxPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 20</value>
+  </data>
+  <data name="textBoxPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;textBoxPassword.Name" xml:space="preserve">
+    <value>textBoxPassword</value>
+  </data>
+  <data name="&gt;&gt;textBoxPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPassword.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxPassword.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 79</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="comboBoxUpgradeMethod" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="watermarkTextBox1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelUser" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="textBoxUser" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelPassword" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="textBoxPassword" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="groupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 118</value>
+  </data>
+  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 10</value>
+  </data>
+  <data name="groupBox2.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>536, 120</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>536, 120</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>网络安装文件的位置</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;applyUpdatesCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -373,7 +511,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>562, 378</value>
@@ -394,7 +532,37 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="applyUpdatesLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="applyUpdatesCheckBox" Row="6" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonAutomatic" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonManual" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="label2" Row="7" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="radioButtonAutomatic" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="label4" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="radioButtonManual" Row="4" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="label3" Row="5" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="groupBox2" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Absolute,20,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 20</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>556, 39</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>选择如何升级所选池中的服务器。在这两种模式下，向导均将在升级过程开始之前执行一系列检查，以确保可以向池中的所有服务器应用升级。</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
