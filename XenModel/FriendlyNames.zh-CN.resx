@@ -1925,4 +1925,37 @@
   <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
     <value>VM 安全启动验证失败</value>
   </data>
+  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
+    <value>准备主机以进行升级时出现错误。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
+    <value>禁止访问指定的网络位置。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
+    <value>安装程序文件的 URL 无效。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
+    <value>指定位置包含非适用版本的安装程序文件。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
+    <value>缺少 URL。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
+    <value>请求已超时。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
+    <value>您无权使用输入的凭据访问指定的网络位置。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
+    <value>找不到指定的网络位置。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
+    <value>访问指定的网络位置需要代理身份验证。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
+    <value>服务器托管和安装程序文件遇到错误。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
+    <value>打开安装程序文件时出错。</value>
+  </data>
 </root>
