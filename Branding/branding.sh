@@ -44,7 +44,7 @@ OUTPUT_DIR=${ROOT}/output
 
 cd ${REPO}/Branding/Hotfixes
 
-for hfx in RPU001 RPU002 RPU003
+for hfx in RPU003
 do
   if [ -d "${hfx}" ]; then
     latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
@@ -53,21 +53,12 @@ do
   fi
 done
 
-for hfx in RPU004
+for hfx in RPU004 RPU005
 do
   if [ -d "${hfx}" ]; then
     latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
     echo "INFO: Latest version of ${hfx} hotfix is $latest"
     cp ${hfx}/$latest/${hfx}.iso ${hfx}.iso
-  fi
-done
-
-for hfx in RPU001
-do
-  if [ -d "${hfx}" ]; then
-    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
-    echo "INFO: Latest version of ${hfx} hotfix is $latest"
-    cp ${hfx}/$latest/${hfx}-src-pkgs.tar ${hfx}-src-pkgs.tar && rm -f ${hfx}-src-pkgs.tar.gz && gzip ${hfx}-src-pkgs.tar
   fi
 done
 
