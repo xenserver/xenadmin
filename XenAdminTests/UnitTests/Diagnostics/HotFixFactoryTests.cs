@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = {"Clearwater", "Creedence", "Dundee", "ElyKolkata"};
+            string[] expectedNames = {"Dundee", "ElyKolkata", "Lima"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -68,13 +68,17 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void UUIDLookedUpFromEnum()
         {
-            Assert.AreEqual("f6014211-7611-47ac-ac4c-e66bb1692c35",
+            Assert.AreEqual("149be566-421d-4661-bfca-e70970f86a36",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
 
-            Assert.AreEqual("ddd68553-2bf8-411d-99bc-ed4a95265840",
+            Assert.AreEqual("072bf802-c54d-4e0d-b110-f0647ea86e32",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyKolkata).UUID,
-                            "Ely-Jura UUID lookup from enum");
+                            "Ely - Kolkata UUID lookup from enum");
+
+            Assert.AreEqual("660e3036-a090-44b5-a06b-10b3bd929855",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Lima).UUID,
+                            "Lima UUID lookup from enum");
         }
 
         [Test]
@@ -86,11 +90,15 @@ namespace XenAdminTests.UnitTests.Diagnostics
 
             Assert.AreEqual("RPU004",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyKolkata).Filename,
-                            "Ely-Jura Filename lookup from enum");
+                            "Ely - Kolkata Filename lookup from enum");
+
+            Assert.AreEqual("RPU005",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Lima).Filename,
+                            "Lima Filename lookup from enum");
         }
 
         [Test]
-        [TestCase("2.6.50", Description = "Lima")]
+        [TestCase("2.9.50", Description = "Naples")]
         [TestCase("9999.9999.9999", Description = "Future")]
         public void TestPlatformVersionNumbersLatestReleaseGiveNulls(string platformVersion)
         {
@@ -100,15 +108,14 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("2.7.0", Description = "Lima", Result = false)]
+        [TestCase("3.0.0", Description = "Naples", Result = false)]
+        [TestCase("2.7.0", Description = "Lima", Result = true)]
         [TestCase("2.6.0", Description = "Kolkata", Result = true)]
         [TestCase("2.5.0", Description = "Jura", Result = true)]
         [TestCase("2.4.0", Description = "Inverness", Result = true)]
         [TestCase("2.3.0", Description = "Falcon", Result = true)]
         [TestCase("2.1.1", Description = "Ely", Result = true)]
         [TestCase("2.0.0", Description = "Dundee", Result = true)]
-        [TestCase("1.9.0", Description = "Creedence", Result = true)]
-        [TestCase("1.8.0", Description = "Clearwater", Result = true)]
         [TestCase("9999.9999.9999", Description = "Future", Result = false)]
         public bool TestIsHotfixRequiredBasedOnPlatformVersion(string version)
         {

@@ -40,23 +40,32 @@ namespace XenAdmin.Diagnostics.Hotfixing
         public enum HotfixableServerVersion
         {
             Dundee,
-            ElyKolkata
+            ElyKolkata,
+            Lima
         }
 
         private readonly Hotfix dundeeHotfix = new SingleHotfix
         {
             Filename = "RPU003",
-            UUID = "f6014211-7611-47ac-ac4c-e66bb1692c35"
+            UUID = "149be566-421d-4661-bfca-e70970f86a36"
         };
 
         private readonly Hotfix elyKolkataHotfix = new SingleHotfix
         {
             Filename = "RPU004",
-            UUID = "ddd68553-2bf8-411d-99bc-ed4a95265840"
+            UUID = "072bf802-c54d-4e0d-b110-f0647ea86e32"
+        };
+
+        private readonly Hotfix limaHotfix = new SingleHotfix
+        {
+            Filename = "RPU005",
+            UUID = "660e3036-a090-44b5-a06b-10b3bd929855"
         };
 
         public Hotfix Hotfix(Host host)
         {
+            if (Helpers.LimaOrGreater(host) && !Helpers.NaplesOrGreater(host))
+                return Hotfix(HotfixableServerVersion.Lima);
             if (Helpers.ElyOrGreater(host) && !Helpers.LimaOrGreater(host))
                 return Hotfix(HotfixableServerVersion.ElyKolkata);
             if (Helpers.DundeeOrGreater(host) && !Helpers.ElyOrGreater(host))
@@ -66,6 +75,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(HotfixableServerVersion version)
         {
+            if (version == HotfixableServerVersion.Lima)
+                return limaHotfix;
             if (version == HotfixableServerVersion.ElyKolkata)
                 return elyKolkataHotfix;
             if (version == HotfixableServerVersion.Dundee)
