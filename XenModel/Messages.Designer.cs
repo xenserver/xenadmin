@@ -5869,6 +5869,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BIOS Boot.
+        /// </summary>
+        public static string BIOS_BOOT {
+            get {
+                return ResourceManager.GetString("BIOS_BOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BIOS strings copied.
         /// </summary>
         public static string BIOS_STRINGS_COPIED {
@@ -16549,15 +16558,6 @@ namespace XenAdmin {
         public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE {
             get {
                 return ResourceManager.GetString("GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not available.
-        /// </summary>
-        public static string GPU_UNAVAILABLE {
-            get {
-                return ResourceManager.GetString("GPU_UNAVAILABLE", resourceCulture);
             }
         }
         
@@ -34518,6 +34518,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UEFI Boot.
+        /// </summary>
+        public static string UEFI_BOOT {
+            get {
+                return ResourceManager.GetString("UEFI_BOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UEFI Secure Boot.
+        /// </summary>
+        public static string UEFI_SECURE_BOOT {
+            get {
+                return ResourceManager.GetString("UEFI_SECURE_BOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] was unable to import a saved search from file &apos;{0}&apos;.
         ///
         ///Verify that the file is a valid {1} export..
@@ -34525,6 +34543,15 @@ namespace XenAdmin {
         public static string UNABLE_TO_IMPORT_SEARCH {
             get {
                 return ResourceManager.GetString("UNABLE_TO_IMPORT_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not available.
+        /// </summary>
+        public static string UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("UNAVAILABLE", resourceCulture);
             }
         }
         

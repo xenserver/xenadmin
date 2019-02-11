@@ -2133,6 +2133,9 @@ This is a potentially dangerous operation and is not allowed.</value>
   <data name="BIGGER_THAN" xml:space="preserve">
     <value>bigger than</value>
   </data>
+  <data name="BIOS_BOOT" xml:space="preserve">
+    <value>BIOS Boot</value>
+  </data>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS strings copied</value>
   </data>
@@ -5792,9 +5795,6 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
     <value>Select which virtual GPU types are allowed on this GPU:</value>
-  </data>
-  <data name="GPU_UNAVAILABLE" xml:space="preserve">
-    <value>Not available</value>
   </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
     <value>It is not possible to add new performance graphs on VM '{0}' because the VM is not running.</value>
@@ -11960,10 +11960,19 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>Import a locally stored VM, template or snapshot as a new VM.</value>
   </data>
+  <data name="UEFI_BOOT" xml:space="preserve">
+    <value>UEFI Boot</value>
+  </data>
+  <data name="UEFI_SECURE_BOOT" xml:space="preserve">
+    <value>UEFI Secure Boot</value>
+  </data>
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
     <value>[XenCenter] was unable to import a saved search from file '{0}'.
 
 Verify that the file is a valid {1} export.</value>
+  </data>
+  <data name="UNAVAILABLE" xml:space="preserve">
+    <value>Not available</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>[XenCenter] will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
