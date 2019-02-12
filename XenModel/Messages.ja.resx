@@ -10969,9 +10969,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SELECTED_HOST_POOL_NOT_CONNECTED" xml:space="preserve">
     <value>選択したホストまたはプールに接続されていません</value>
   </data>
-  <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
-    <value>異なるバージョンの [XenServer] のライセンスは、個別に適用してください</value>
-  </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>フィルタを選択...</value>
   </data>
@@ -11230,6 +11227,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SLAVE_CONNECTION_ERROR" xml:space="preserve">
     <value>サーバー '{0}' はプールに属しています。プールに接続するには、プール マスターに接続する必要があります。
 プール マスター '{1}' に接続しますか?</value>
+  </data>
+  <data name="SLAVE_TOO_OLD" xml:space="preserve">
+    <value>このプールには、[XenServer] [BRANDING_VERSION_7_0] より前のサーバーが含まれています。このプールを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>＜</value>
