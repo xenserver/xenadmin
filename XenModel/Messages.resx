@@ -11050,7 +11050,7 @@ Click Keep Waiting if the upgrade is still running or Cancel if an error occurre
     <value>The current time on the pool master is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards.</value>
+    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_7_0] onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of [XenCenter] to manage this server.</value>
