@@ -31,21 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading;
-using log4net;
-using XenAdmin.Controls;
-using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
-using XenAdmin.Actions;
-using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -196,7 +186,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var server in SelectedServers)
                         if (poolHosts.Contains(server))
                         {
-                            var updateActions = new List<PlanAction> {new ApplyPoolUpdatePlanAction(server, PoolUpdate)};
+                            var hostRebootRequired = WizardHelpers.IsHostRebootRequiredForUpdate(server, PoolUpdate, LivePatchCodesByHost);
+
+                            var updateActions = new List<PlanAction> {new ApplyPoolUpdatePlanAction(server, PoolUpdate, hostRebootRequired) };
                             hostplans.Add(new HostPlan(server, null, updateActions, null));
                         }
                 }
@@ -215,7 +207,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var server in SelectedServers)
                     if (poolHosts.Contains(server))
                     {
-                        var updateActions = new List<PlanAction> { new ApplyPatchPlanAction(server, Patch) };
+                        var hostRebootRequired = WizardHelpers.IsHostRebootRequiredForUpdate(server, Patch, LivePatchCodesByHost);
+
+                        var updateActions = new List<PlanAction> { new ApplyPatchPlanAction(server, Patch, hostRebootRequired) };
                         hostplans.Add(new HostPlan(server, null, updateActions, null));
                     }
 
@@ -284,14 +278,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PlanAction> CompilePatchActionList(Host host, Pool_patch patch)
         {
-            var actions = new List<PlanAction> {new ApplyPatchPlanAction(host, patch)};
+            var hostRebootRequired = WizardHelpers.IsHostRebootRequiredForUpdate(host, patch, LivePatchCodesByHost);
 
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
-                && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid)
-                     && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
-            {
+            var actions = new List<PlanAction> {new ApplyPatchPlanAction(host, patch, hostRebootRequired) };
+
+            if (hostRebootRequired)
                 actions.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
-            }
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI))
                 actions.Add(new RestartAgentPlanAction(host));
@@ -307,14 +299,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PlanAction> CompilePoolUpdateActionList(Host host, Pool_update poolUpdate)
         {
-            var actions = new List<PlanAction> {new ApplyPoolUpdatePlanAction(host, poolUpdate)};
+            var hostRebootRequired = WizardHelpers.IsHostRebootRequiredForUpdate(host, poolUpdate, LivePatchCodesByHost);
 
-            if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartHost)
-                && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid)
-                     && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
-            {
+            var actions = new List<PlanAction> {new ApplyPoolUpdatePlanAction(host, poolUpdate, hostRebootRequired) };
+
+            if (hostRebootRequired)
                 actions.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
-            }
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartXAPI))
                 actions.Add(new RestartAgentPlanAction(host));

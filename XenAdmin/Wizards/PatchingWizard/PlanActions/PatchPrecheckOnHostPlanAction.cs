@@ -74,6 +74,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (Cancelling)
                 throw new CancelledException();
 
+            var updateRequiresHostReboot = false;
+
             try
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, xenServerPatch.Name, host.Name()));
@@ -81,10 +83,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 List<Problem> problems = null;
 
                 if (mapping is PoolPatchMapping patchMapping)
+                {
                     problems = new PatchPrecheckCheck(host, patchMapping.Pool_patch, livePatchStatus).RunAllChecks();
+                    updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, patchMapping.Pool_patch, livePatchStatus);
+                }
                 else if (mapping is PoolUpdateMapping updateMapping)
+                {
                     problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
-              
+                    updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, updateMapping.Pool_update, livePatchStatus);
+                }
+
                 Problem problem = null;
 
                 if (problems != null && problems.Count > 0)
@@ -99,10 +107,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 throw;
             }
 
-            if (livePatchStatus.ContainsKey(host.uuid)
-                && livePatchStatus[host.uuid] != livepatch_status.ok_livepatch_complete
-                && !hostsThatWillRequireReboot.Contains(host.uuid))
+            if(updateRequiresHostReboot && !hostsThatWillRequireReboot.Contains(host.uuid))
                 hostsThatWillRequireReboot.Add(host.uuid);
+            if (updateRequiresHostReboot && !mapping.HostsThatNeedEvacuated.Contains(host.uuid))
+                mapping.HostsThatNeedEvacuated.Add(host.uuid);
         }
     }
 }
