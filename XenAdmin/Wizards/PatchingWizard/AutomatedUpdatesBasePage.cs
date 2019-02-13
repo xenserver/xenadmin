@@ -581,6 +581,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var patch in patchSequence)
             {
+                // if the patchSequence contains a patch that requires a host reboot (excluding livepatches), then add the Evacuate action as the first action in the sequence
+                if (patch.after_apply_guidance == after_apply_guidance.restartHost
+                    && !patch.ContainsLivepatch
+                    && (planActionsPerHost.Count == 0 || !(planActionsPerHost[0] is EvacuateHostPlanAction)))
+                {
+                    planActionsPerHost.Insert(0, new EvacuateHostPlanAction(host));
+                }
+
                 if (!uploadedPatches.Contains(patch))
                 {
                     planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));

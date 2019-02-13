@@ -31,10 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
@@ -66,9 +63,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var hostObj = GetResolvedHost();
 
             var vms = hostObj.GetRunningVMs();
-            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, hostObj.Name()));
-            log.DebugFormat("Disabling host {0}", hostObj.Name());
-            Host.disable(session, HostXenRef.opaque_ref);
+
+            if (hostObj.enabled)
+            {
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, hostObj.Name()));
+                log.DebugFormat("Disabling host {0}", hostObj.Name());
+                Host.disable(session, HostXenRef.opaque_ref);
+            }
 
             if (vms.Count > 0)
             {

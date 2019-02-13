@@ -62,6 +62,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 if (_restartAgentFallback)
                     RestartAgent(ref session);
+
+                if (!EnableOnly)
+                    BringBabiesBack(ref session, _vms, EnableOnly);
                 return;
             }
 
