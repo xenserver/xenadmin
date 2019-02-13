@@ -47,14 +47,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly List<HostUpdateMapping> mappings;
         private readonly Host host;
         private readonly List<string> hostsThatWillRequireReboot;
+        private readonly Dictionary<string, List<string>> livePatchAttempts;
 
-        public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch xenServerPatch, Host host, List<HostUpdateMapping> mappings, List<string> hostsThatWillRequireReboot)
+        public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch xenServerPatch, Host host, List<HostUpdateMapping> mappings, List<string> hostsThatWillRequireReboot, Dictionary<string, List<string>> livePatchAttempts)
             : base(connection)
         {
             this.xenServerPatch = xenServerPatch;
             this.host = host;
             this.mappings = mappings;
             this.hostsThatWillRequireReboot = hostsThatWillRequireReboot;
+            this.livePatchAttempts = livePatchAttempts;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -111,6 +113,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 hostsThatWillRequireReboot.Add(host.uuid);
             if (updateRequiresHostReboot && !mapping.HostsThatNeedEvacuated.Contains(host.uuid))
                 mapping.HostsThatNeedEvacuated.Add(host.uuid);
+            if (livePatchStatus.ContainsKey(host.uuid) && livePatchStatus[host.uuid] == livepatch_status.ok_livepatch_complete)
+            {
+                if (!livePatchAttempts.ContainsKey(host.uuid) || livePatchAttempts[host.uuid] == null)
+                    livePatchAttempts[host.uuid] = new List<string>();
+                livePatchAttempts[host.uuid].Add(xenServerPatch.Uuid);
+            }
         }
     }
 }
