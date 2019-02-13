@@ -72,6 +72,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<HostUpdateMapping> patchMappings = new List<HostUpdateMapping>();
         protected List<string> hostsThatWillRequireReboot = new List<string>();
+        protected Dictionary<string, List<string>> livePatchAttempts = new Dictionary<string, List<string>>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
 
         public AutomatedUpdatesBasePage()
@@ -146,8 +147,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected abstract string BlurbText();
         protected abstract string SuccessMessageOnCompletion(bool multiplePools);
         protected abstract string FailureMessageOnCompletion(bool multiplePools);
+        protected abstract string WarningMessageOnCompletion(bool multiplePools);
         protected abstract string SuccessMessagePerPool(Pool pool);
         protected abstract string FailureMessagePerPool(bool multipleErrors);
+        protected abstract string WarningMessagePerPool(Pool pool);
         protected abstract string UserCancellationMessage();
         protected abstract string ReconsiderCancellationMessage();
 
@@ -314,7 +317,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendIndented(SuccessMessagePerPool(bgw.Pool)).AppendLine();
+                    sb.AppendIndented(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool)).AppendLine();
                 }
 
                 sb.AppendLine();
@@ -495,6 +498,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         buttonRetry.Visible = buttonSkip.Visible = false;
                     }
 
+                    else if (backgroundWorkers.Any(w => WarningMessagePerPool(w.Pool) != null))
+                    {
+                        labelError.Text = WarningMessageOnCompletion(backgroundWorkers.Count > 1);
+                        pictureBox1.Image = Images.StaticImages._000_Alert2_h32bit_16;
+                        buttonRetry.Visible = buttonSkip.Visible = false;
+                    }
                     else
                     {
                         labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
@@ -596,7 +605,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     uploadedPatches.Add(patch);
                 }
 
-                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings, hostsThatWillRequireReboot));
+                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings, hostsThatWillRequireReboot, livePatchAttempts));
                 planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
 
                 var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
@@ -662,6 +671,44 @@ namespace XenAdmin.Wizards.PatchingWizard
                 default:
                     return null;
             }
+        }
+
+        protected string LivePatchWarningMessagePerPool(Pool pool)
+        {
+            var sb = new StringBuilder();
+
+            var poolHosts = pool.Connection.Cache.Hosts.ToList();
+
+            var livePatchingFailedHosts = new List<Host>();
+            foreach (var host in poolHosts)
+            {
+                if (livePatchAttempts.ContainsKey(host.uuid) && host.updates_requiring_reboot != null && host.updates_requiring_reboot.Count > 0)
+                {
+                    foreach (var updateUuid in livePatchAttempts[host.uuid])
+                    {
+                        if (host.updates_requiring_reboot.Select(uRef => host.Connection.Resolve(uRef)).Any(u => u != null && u.uuid.Equals(updateUuid)))
+                        {
+                            livePatchingFailedHosts.Add(host);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (livePatchingFailedHosts.Count == 1)
+            {
+                sb.AppendFormat(Messages.LIVE_PATCHING_FAILED_ONE_HOST, livePatchingFailedHosts[0].Name()).AppendLine();
+                return sb.ToString();
+            }
+
+            if (livePatchingFailedHosts.Count > 1)
+            {
+                var hostnames = string.Join(", ", livePatchingFailedHosts.Select(h => string.Format("'{0}'", h.Name())));
+                sb.AppendFormat(Messages.LIVE_PATCHING_FAILED_MULTI_HOST, hostnames).AppendLine();
+                return sb.ToString();
+            }
+
+            return null;
         }
     }
 }

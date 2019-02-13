@@ -112,6 +112,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             return string.Format(msg, GetUpdateName());
         }
 
+        protected override string WarningMessageOnCompletion(bool multiplePools)
+        {
+            var msg = multiplePools
+                ? Messages.PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY
+                : Messages.PATCHINGWIZARD_SINGLEUPDATE_WARNING_ONE;
+            return string.Format(msg, GetUpdateName());
+        }
+
         protected override string SuccessMessagePerPool(Pool pool)
         {
             var sb = new StringBuilder();
@@ -120,6 +128,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (!IsAutomaticMode && ManualTextInstructions.ContainsKey(pool))
                 sb.Append(ManualTextInstructions[pool]).AppendLine();
+            
+            return sb.ToString();
+        }
+        
+        protected override string WarningMessagePerPool(Pool pool)
+        {
+            var sb = new StringBuilder();
 
             var poolHosts = pool.Connection.Cache.Hosts.ToList();
 
@@ -133,15 +148,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (livePatchingFailedHosts.Count == 1)
             {
                 sb.AppendFormat(Messages.LIVE_PATCHING_FAILED_ONE_HOST, livePatchingFailedHosts[0].Name()).AppendLine();
+                return sb.ToString();
             }
-            else if (livePatchingFailedHosts.Count > 1)
+
+            if (livePatchingFailedHosts.Count > 1)
             {
                 var hostnames = string.Join(", ", livePatchingFailedHosts.Select(h => string.Format("'{0}'", h.Name())));
                 sb.AppendFormat(Messages.LIVE_PATCHING_FAILED_MULTI_HOST, hostnames).AppendLine();
+                return sb.ToString();
             }
-
-            return sb.ToString();
+            return null;
         }
+
 
         protected override string FailureMessageOnCompletion(bool multiplePools)
         {
@@ -158,7 +176,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 : Messages.PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE;
             return string.Format(msg, GetUpdateName());
         }
-
         protected override string UserCancellationMessage()
         {
             return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION;
