@@ -16726,11 +16726,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI boot mode is experimental, and is currently not suitable for production use..
+        ///   Looks up a localized string similar to &amp;UEFI Boot (experimental).
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
         /// </summary>
         public static string GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING {
             get {
                 return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;UEFI Boot.
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_LABEL", resourceCulture);
             }
         }
         
@@ -16744,7 +16762,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are experimental, and are currently not suitable for production use..
+        ///   Looks up a localized string similar to Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
         /// </summary>
         public static string GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING {
             get {
@@ -16762,7 +16780,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI secure boot mode is experimental, and is currently not suitable for production use..
+        ///   Looks up a localized string similar to UEFI &amp;Secure Boot (experimental).
+        /// </summary>
+        public static string GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UEFI &amp;Secure Boot.
+        /// </summary>
+        public static string GUEFI_SECURE_BOOT_MODE_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_SECURE_BOOT_MODE_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
         /// </summary>
         public static string GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING {
             get {
