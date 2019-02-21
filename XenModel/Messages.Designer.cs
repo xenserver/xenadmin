@@ -14003,7 +14003,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value for your QoS limit needs to be greater than zero.
+        ///   Looks up a localized string similar to The QoS limit value should be an integer greater than zero.
         /// </summary>
         public static string ENTER_VALID_QOS {
             get {
@@ -29314,7 +29314,10 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM: \n {1} \n\n Are you sure you want to continue?.
+        ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM:
+        ///{1}
+        ///
+        ///Are you sure you want to continue?.
         /// </summary>
         public static string PROBLEM_MAC_ADDRESS_IS_DUPLICATE {
             get {

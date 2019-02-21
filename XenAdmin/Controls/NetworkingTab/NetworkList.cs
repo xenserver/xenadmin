@@ -512,14 +512,19 @@ namespace XenAdmin.Controls.NetworkingTab
                     return;
                 }
 
-                VIFDialog d = new VIFDialog(vm.Connection, null, VIF.GetDeviceId(vm), vm.HasSriovRecommendation());
-                if (d.ShowDialog(this) != DialogResult.OK)
-                    return;
+                VIF pVif;
+                using (var d = new VIFDialog(vm.Connection, null, VIF.GetDeviceId(vm), vm.HasSriovRecommendation()))
+                {
+                    if (d.ShowDialog(this) != DialogResult.OK)
+                        return;
 
-                var pVif = d.GetNewSettings();
+                    pVif = d.GetNewSettings();
+                }
+
                 pVif.VM = new XenRef<VM>(vm.opaque_ref);
-                CreateVIFCommand action = new CreateVIFCommand(Program.MainWindow, vm, pVif);
-                action.Execute();
+                var action = new CreateVIFAction(vm, pVif);
+                action.Completed += VifAction_Completed;
+                action.RunAsync();
             }
             else if (XenObject is Host)
             {
@@ -536,6 +541,27 @@ namespace XenAdmin.Controls.NetworkingTab
                     Program.MainWindow.ShowPerConnectionWizard(_xenObject.Connection,
                         new NewNetworkWizard(_xenObject.Connection, pool, host));
                 }
+            }
+        }
+
+        private void VifAction_Completed(ActionBase sender)
+        {
+            sender.Completed -= VifAction_Completed;
+            var action = (AsyncAction)sender;
+
+            if (action.Result == false.ToString())
+                Program.Invoke(Program.MainWindow, ShowHotPlugError);
+        }
+
+        private void ShowHotPlugError()
+        {
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(
+                    SystemIcons.Information,
+                    Messages.VIF_HOTPLUG_FAILED_MESSAGE,
+                    Messages.VIF_HOTPLUG_FAILED_TITLE)))
+            {
+                dlg.ShowDialog(Program.MainWindow);
             }
         }
 
@@ -732,31 +758,40 @@ namespace XenAdmin.Controls.NetworkingTab
                 return;
 
             int device;
-            VIFDialog d;
-            if (int.TryParse(vif.device, out device))
-            {
-                d = new VIFDialog(vm.Connection, vif, device, vm.HasSriovRecommendation());
-            }
-            else
+            if (!int.TryParse(vif.device, out device))
             {
                 log.ErrorFormat("Aborting vif edit. Could not parse existing vif device to int. Value is: '{0}'", vif.device);
                 return;
             }
 
-            if (d.ShowDialog() != DialogResult.OK)
-                return;
+            VIF proxyVIF;
+            using (var d = new VIFDialog(vm.Connection, vif, device, vm.HasSriovRecommendation()))
+            {
+                if (d.ShowDialog() != DialogResult.OK)
+                    return;
 
-            var proxyVIF = d.GetNewSettings();
-            UpdateVIFCommand command = new UpdateVIFCommand(Program.MainWindow, vm, vif, proxyVIF);
+                proxyVIF = d.GetNewSettings();
+            }
+
+            var action = new UpdateVIFAction(vm, vif, proxyVIF);
+            action.Completed += updateVIFAction_Completed;
             InBuildList = true;
-            command.Completed += new EventHandler((s, f) => Program.Invoke(this, () =>
-                                                                                     {
-                                                                                         InBuildList = false;
-                                                                                         BuildList();
-                                                                                     }));
-            command.Execute();
+            action.RunAsync();
         }
 
+        private void updateVIFAction_Completed(ActionBase sender)
+        {
+            sender.Completed -= updateVIFAction_Completed;
+            var action = (AsyncAction)sender;
+
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (action.Result == false.ToString())
+                    ShowHotPlugError();
+                InBuildList = false;
+                BuildList();
+            });
+        }
 
         private void launchHostOrPoolNetworkSettingsDialog()
         {
