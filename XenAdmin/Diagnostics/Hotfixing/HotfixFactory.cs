@@ -40,8 +40,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
         public enum HotfixableServerVersion
         {
             Dundee,
-            ElyKolkata,
-            Lima
+            ElyLima
         }
 
         private readonly Hotfix dundeeHotfix = new SingleHotfix
@@ -50,24 +49,16 @@ namespace XenAdmin.Diagnostics.Hotfixing
             UUID = "149be566-421d-4661-bfca-e70970f86a36"
         };
 
-        private readonly Hotfix elyKolkataHotfix = new SingleHotfix
+        private readonly Hotfix elyLimaHotfix = new SingleHotfix
         {
             Filename = "RPU004",
-            UUID = "072bf802-c54d-4e0d-b110-f0647ea86e32"
-        };
-
-        private readonly Hotfix limaHotfix = new SingleHotfix
-        {
-            Filename = "RPU005",
-            UUID = "660e3036-a090-44b5-a06b-10b3bd929855"
+            UUID = "d72c237a-eaaf-4d98-be63-48e2add8dc3a"
         };
 
         public Hotfix Hotfix(Host host)
         {
-            if (Helpers.LimaOrGreater(host) && !Helpers.NaplesOrGreater(host))
-                return Hotfix(HotfixableServerVersion.Lima);
-            if (Helpers.ElyOrGreater(host) && !Helpers.LimaOrGreater(host))
-                return Hotfix(HotfixableServerVersion.ElyKolkata);
+            if (Helpers.ElyOrGreater(host) && !Helpers.NaplesOrGreater(host))
+                return Hotfix(HotfixableServerVersion.ElyLima);
             if (Helpers.DundeeOrGreater(host) && !Helpers.ElyOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Dundee);
             return null;
@@ -75,10 +66,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(HotfixableServerVersion version)
         {
-            if (version == HotfixableServerVersion.Lima)
-                return limaHotfix;
-            if (version == HotfixableServerVersion.ElyKolkata)
-                return elyKolkataHotfix;
+            if (version == HotfixableServerVersion.ElyLima)
+                return elyLimaHotfix;
             if (version == HotfixableServerVersion.Dundee)
                 return dundeeHotfix;
 
