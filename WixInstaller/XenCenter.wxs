@@ -155,7 +155,6 @@
                         <Component Id="UpdateFiles" Guid="[BRANDING_XSUPDATE_FILE_GUID]">
                             <File Id="hotfixDundee" Source="..\Branding\Hotfixes\RPU003.[xsupdate]" />
                             <File Id="hotfixEly" Source="..\Branding\Hotfixes\RPU004.iso" />
-                            <File Id="hotfixLima" Source="..\Branding\Hotfixes\RPU005.iso" />
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
 						<!-- TestResources -->
