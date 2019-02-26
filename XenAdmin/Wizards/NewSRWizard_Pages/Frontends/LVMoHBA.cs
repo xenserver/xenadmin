@@ -97,10 +97,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
 
             SrDescriptors = new List<FibreChannelDescriptor>();
-
-            var existingSrDescriptors = new List<FibreChannelDescriptor>();
-            var targetSrDescriptors = new List<FibreChannelDescriptor>();
-            var formatDiskDescriptors = new List<FibreChannelDescriptor>();
+            var formatDiskDescriptors = new Dictionary<FibreChannelDescriptor, FibreChannelDescriptor>(); // key = requested SR, value = existing SR
 
             var performSecondProbe = Helpers.KolkataOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.CorosyncDisabled)
                 && SrType != SR.SRTypes.lvmofcoe; // gfs2 over fcoe is not supported yet
@@ -173,7 +170,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     }
 
                     if (!Program.RunInAutomatedTestMode)
-                        formatDiskDescriptors.Add(formatDiskDescriptor);
+                        formatDiskDescriptors.Add(formatDiskDescriptor, null);
                 }
                 else
                 {
@@ -205,23 +202,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     }
 
                     // We found a SR on this LUN. Will ask user for choice later.
-                    existingSrDescriptors.Add(currentSrDescriptor);
-                    targetSrDescriptors.Add(formatDiskDescriptor);
+                    formatDiskDescriptors.Add(formatDiskDescriptor, currentSrDescriptor);
                 }
-            }
-
-            if (!cancel && existingSrDescriptors.Count > 0)
-            {
-                var launcher = new LVMoHBAWarningDialogLauncher(this, existingSrDescriptors, targetSrDescriptors, true, SrType);
-                launcher.ShowWarnings();
-                cancel = launcher.Cancelled;
-                if (!cancel && launcher.SrDescriptors.Count > 0)
-                    SrDescriptors.AddRange(launcher.SrDescriptors);
             }
 
             if (!cancel && formatDiskDescriptors.Count > 0)
             {
-                var launcher = new LVMoHBAWarningDialogLauncher(this, formatDiskDescriptors, null, false, SrType);
+                var launcher = new LVMoHBAWarningDialogLauncher(this, formatDiskDescriptors, SrType);
                 launcher.ShowWarnings();
                 cancel = launcher.Cancelled;
                 if (!cancel && launcher.SrDescriptors.Count > 0)
@@ -525,31 +512,25 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private class LVMoHBAWarningDialogLauncher
         {
-            private readonly List<FibreChannelDescriptor> inputSrDescriptors;
-            private readonly List<FibreChannelDescriptor> targetSrDescriptors;
-            private readonly bool foundExistingSRs;
+            private readonly Dictionary<FibreChannelDescriptor, FibreChannelDescriptor> inputSrDescriptors;
             private readonly IWin32Window owner;
             private readonly SR.SRTypes requestedSrType;
             
             public List<FibreChannelDescriptor> SrDescriptors { get; private set; }
             public bool Cancelled { get; private set; }
 
-            public LVMoHBAWarningDialogLauncher(IWin32Window owner, List<FibreChannelDescriptor> srDescriptors,
-                List<FibreChannelDescriptor> targetSrDescriptors, bool foundExistingSRs, SR.SRTypes requestedSrType)
+            public LVMoHBAWarningDialogLauncher(IWin32Window owner, Dictionary<FibreChannelDescriptor, FibreChannelDescriptor> srDescriptors, SR.SRTypes requestedSrType)
             {
                 this.owner = owner;
-                this.foundExistingSRs = foundExistingSRs;
                 inputSrDescriptors = srDescriptors;
-                this.targetSrDescriptors = targetSrDescriptors;
                 this.requestedSrType = requestedSrType;
                 SrDescriptors = new List<FibreChannelDescriptor>();
             }
 
-            private UserSelectedOption GetSelectedOption(FibreChannelDescriptor descriptor,
-                out bool repeatForRemainingLUNs)
+            private UserSelectedOption GetSelectedOption(FibreChannelDescriptor descriptor, int remainingCount, bool foundExistingSr, 
+                SR.SRTypes existingSrType, out bool repeatForRemainingLUNs)
             {
-                int remainingCount = inputSrDescriptors.Count - 1 - inputSrDescriptors.IndexOf(descriptor);
-                using (var dialog = new LVMoHBAWarningDialog(descriptor.Device, remainingCount, foundExistingSRs, descriptor.SrType, requestedSrType))
+                using (var dialog = new LVMoHBAWarningDialog(descriptor.Device, remainingCount, foundExistingSr, existingSrType, requestedSrType))
                 {
                     dialog.ShowDialog(owner);
                     repeatForRemainingLUNs = dialog.RepeatForRemainingLUNs;
@@ -559,29 +540,57 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             public void ShowWarnings()
             {
+                // process LUNs where existing SRs have been found
                 bool repeatForRemainingLUNs = false;
                 UserSelectedOption selectedOption = UserSelectedOption.Cancel;
-
-                for (int i = 0; i < inputSrDescriptors.Count; i++)
+                var descriptors = inputSrDescriptors.Keys.Where(d => inputSrDescriptors[d] != null).ToList();
+                foreach (var descriptor in descriptors)
                 {
                     if (!repeatForRemainingLUNs)
                     {
-                        selectedOption = GetSelectedOption(inputSrDescriptors[i], out repeatForRemainingLUNs);
-                    }
+                        var remainingCount = descriptors.Count - 1 - descriptors.IndexOf(descriptor);
+                        var existingSrType = inputSrDescriptors[descriptor].SrType;
 
-                    switch (selectedOption)
-                    {
-                        case UserSelectedOption.Format:
-                            SrDescriptors.Add(targetSrDescriptors != null ? targetSrDescriptors[i] : inputSrDescriptors[i]);
-                            break;
-                        case UserSelectedOption.Reattach:
-                            SrDescriptors.Add(inputSrDescriptors[i]);
-                            break;
-                        case UserSelectedOption.Cancel:
-                            SrDescriptors.Clear();
-                            Cancelled = true;
-                            return;
+                        selectedOption = GetSelectedOption(descriptor, remainingCount, true, existingSrType, out repeatForRemainingLUNs);
                     }
+                    ProcessSelectedOption(selectedOption, descriptor);
+                }
+
+                if (Cancelled)
+                    return;
+
+                // process LUNs where no existing have been found
+                repeatForRemainingLUNs = false;
+                selectedOption = UserSelectedOption.Cancel;
+                descriptors = inputSrDescriptors.Keys.Where(d => inputSrDescriptors[d] == null).ToList();
+                
+                foreach (var descriptor in descriptors)
+                {
+                    if (!repeatForRemainingLUNs)
+                    {
+                        var remainingCount = descriptors.Count - 1 - descriptors.IndexOf(descriptor);
+                        var existingSrType = descriptor.SrType;
+                        selectedOption = GetSelectedOption(descriptor, remainingCount, false, existingSrType, out repeatForRemainingLUNs);
+                    }
+                    ProcessSelectedOption(selectedOption, descriptor);
+                }
+            }
+
+            private void ProcessSelectedOption(UserSelectedOption selectedOption, FibreChannelDescriptor descriptor)
+            {
+                switch (selectedOption)
+                {
+                    case UserSelectedOption.Format:
+                        descriptor.UUID = null;
+                        SrDescriptors.Add(descriptor); // descriptor of requested SR
+                        break;
+                    case UserSelectedOption.Reattach:
+                        SrDescriptors.Add(inputSrDescriptors[descriptor]); // value = descriptor of existing SR
+                        break;
+                    case UserSelectedOption.Cancel:
+                        SrDescriptors.Clear();
+                        Cancelled = true;
+                        return;
                 }
             }
         }
