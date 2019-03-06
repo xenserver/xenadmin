@@ -51,7 +51,7 @@ namespace XenAdmin.Actions.GUIActions
         {
             return task.XenCenterUUID() == Program.XenCenterUUID ||
                    task.Connection.Resolve(task.subtask_of) != null ||
-                   task.IsHidden();
+                   MeddlingAction.IsTaskUnwanted(task);
         }
     }
 

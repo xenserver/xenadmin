@@ -594,6 +594,12 @@
   <data name="ACTION_HOST_START_TITLE" xml:space="preserve">
     <value>Powering on server '{0}'</value>
   </data>
+  <data name="ACTION_IMPORT_VM_TITLE" xml:space="preserve">
+    <value>Importing VM '{0}'</value>
+  </data>
+  <data name="ACTION_IMPORT_VM_TO_HOST_TITLE" xml:space="preserve">
+    <value>Importing VM '{0}' to '{1}'</value>
+  </data>
   <data name="ACTION_ISCSI_IQN_SCANNING" xml:space="preserve">
     <value>Scanning for IQNs on iSCSI filer {0}</value>
   </data>
@@ -1173,6 +1179,9 @@
   <data name="ACTION_VM_MIGRATING_RESIDENT" xml:space="preserve">
     <value>Migrating VM '{0}' from '{1}' to '{2}'</value>
   </data>
+  <data name="ACTION_VM_MIGRATING_TITLE" xml:space="preserve">
+    <value>Migrating VM '{0}'</value>
+  </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
     <value>Moving VM to new storage...</value>
   </data>
@@ -1185,8 +1194,11 @@
   <data name="ACTION_VM_REBOOTING" xml:space="preserve">
     <value>Rebooting VM</value>
   </data>
-  <data name="ACTION_VM_REBOOTING_TITLE" xml:space="preserve">
+  <data name="ACTION_VM_REBOOTING_ON_TITLE" xml:space="preserve">
     <value>Rebooting VM '{0}' on '{1}'</value>
+  </data>
+  <data name="ACTION_VM_REBOOTING_TITLE" xml:space="preserve">
+    <value>Rebooting VM '{0}'</value>
   </data>
   <data name="ACTION_VM_RESUMED" xml:space="preserve">
     <value>Resumed</value>
@@ -1212,8 +1224,11 @@
   <data name="ACTION_VM_SHUTTING_DOWN" xml:space="preserve">
     <value>Shutting down VM</value>
   </data>
-  <data name="ACTION_VM_SHUTTING_DOWN_TITLE" xml:space="preserve">
+  <data name="ACTION_VM_SHUTTING_DOWN_ON_TITLE" xml:space="preserve">
     <value>Shutting down VM '{0}' on '{1}'</value>
+  </data>
+  <data name="ACTION_VM_SHUTTING_DOWN_TITLE" xml:space="preserve">
+    <value>Shutting down VM '{0}'</value>
   </data>
   <data name="ACTION_VM_SHUT_DOWN" xml:space="preserve">
     <value>Shut down</value>
