@@ -1492,6 +1492,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Importing VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_IMPORT_VM_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_IMPORT_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing VM &apos;{0}&apos; to &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_IMPORT_VM_TO_HOST_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_IMPORT_VM_TO_HOST_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning for IQNs on iSCSI filer {0}.
         /// </summary>
         public static string ACTION_ISCSI_IQN_SCANNING {
@@ -3166,6 +3184,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MIGRATING_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moving VM to new storage....
         /// </summary>
         public static string ACTION_VM_MOVING {
@@ -3203,6 +3230,15 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Rebooting VM &apos;{0}&apos; on &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_REBOOTING_ON_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_REBOOTING_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rebooting VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_VM_REBOOTING_TITLE {
             get {
@@ -3293,6 +3329,15 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Shutting down VM &apos;{0}&apos; on &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_SHUTTING_DOWN_ON_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_SHUTTING_DOWN_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutting down VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_VM_SHUTTING_DOWN_TITLE {
             get {
