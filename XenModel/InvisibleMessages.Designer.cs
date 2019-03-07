@@ -88,15 +88,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://xenserver.org/.
-        /// </summary>
-        public static string COMMUNITY_URL {
-            get {
-                return ResourceManager.GetString("COMMUNITY_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
         /// </summary>
         public static string HEALTH_CHECK_PRIVACY_STATEMENT_URL {
@@ -223,7 +214,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://more.citrix.com/xenserver-plugin-development.
+        ///   Looks up a localized string similar to https://github.com/xenserver/xencenter-samples.
         /// </summary>
         public static string PLUGINS_URL {
             get {
