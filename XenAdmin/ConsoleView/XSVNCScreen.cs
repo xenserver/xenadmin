@@ -1085,6 +1085,8 @@ namespace XenAdmin.ConsoleView
                 throw new Failure(Failure.INTERNAL_ERROR, Messages.HOST_GONE);
             }
 
+            console.location = System.Text.RegularExpressions.Regex.Replace(console.location, @"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?){1}(:([0-6][0-5][0-5][0-3][0-5]|[0-5]\d{1,4}|\d{1,4}))?", console.Connection.HostnameWithPort);
+
             Uri uri = new Uri(console.location);
             string sesssionRef;
 
