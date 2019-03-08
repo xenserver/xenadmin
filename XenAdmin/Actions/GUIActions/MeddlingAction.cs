@@ -38,14 +38,19 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions.GUIActions
 {
-
     /// <summary>
-    /// A "meddling" Action is one being performed by someone else -- in other words, they are ones that we've inferred by the
-    /// presence of task instances on the pool.
+    /// A "meddling" Action is one being performed by someone else; in other words,
+    /// they are ones that we've inferred by the presence of task instances on the pool.
     /// </summary>
     public class MeddlingAction : CancellingAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// Heuristic to determine whether a new task was created by a client
+        /// aware of our task.AppliesTo scheme, or by some other client.
+        /// </summary>
+        private static readonly TimeSpan awareClientHeuristic = TimeSpan.FromSeconds(5);
 
         private static readonly string XapiExportTaskPrefix = "Export of VM: ";
         private static readonly string XapiImportTaskName = "VM import";
@@ -71,15 +76,13 @@ namespace XenAdmin.Actions.GUIActions
         };
 
         private vm_operations vmOperation;
+
         public MeddlingAction(Task task)
             : base(task.Name(), task.Description(), false, false)
         {
             RelatedTask = new XenRef<Task>(task.opaque_ref);
 
-            Host = task.Connection.Resolve(task.resident_on);
-
-            if (Host == null)
-                Host = Helpers.GetMaster(task.Connection);
+            Host = task.Connection.Resolve(task.resident_on) ?? Helpers.GetMaster(task.Connection);
 
             Started = (task.created + task.Connection.ServerTimeOffset).ToLocalTime();
             SetAppliesToData(task);
@@ -305,11 +308,30 @@ namespace XenAdmin.Actions.GUIActions
             }
         }
 
-
+        /// <summary>
+        /// This is one of our tasks, or it's a sub-task of something else, or it corresponds
+        /// to an operation we don't care to recognize. We're going to do no more with it.
+        /// </summary>
         public static bool IsTaskUnwanted(Task task)
         {
-            return GetVmOperation(task) == vm_operations.unknown;
+            return task.XenCenterUUID() == Program.XenCenterUUID ||
+                   task.Connection.Resolve(task.subtask_of) != null ||
+                   GetVmOperation(task) == vm_operations.unknown;
         }
+
+        /// <summary>
+        /// Decides whether a MeddlingAction can be created for a given task.
+        /// If AppliesTo is set, then the client that created this task knows about our scheme for passing
+        /// info between clients. 
+        /// Otherwise, we give the client a window (awareClientHeuristic) to set this field before we decide
+        /// that it's a non-aware client.
+        /// </summary>
+        public static bool IsTaskSuitable(Task task)
+        {
+            return task.AppliesTo() != null ||
+                   task.created + task.Connection.ServerTimeOffset < DateTime.UtcNow - awareClientHeuristic;
+        }
+
         private void DestroyUnwantedOperations(Task task)
         {
             string[] err = task.error_info;
