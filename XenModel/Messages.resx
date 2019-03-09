@@ -5628,14 +5628,14 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="GENERAL_DETAILS_CPU_NUMBER" xml:space="preserve">
     <value>CPU {0}</value>
   </data>
-  <data name="GENERAL_EDIT_INVALID_HOSTNAME" xml:space="preserve">
-    <value>You must give a valid server name.</value>
-  </data>
   <data name="GENERAL_EDIT_INVALID_IQN" xml:space="preserve">
-    <value>You must give a valid IQN, e.g. iqn.2007-11.com.example.subdomain:optional-domain-specific-string</value>
+    <value>Please enter a valid IQN, e.g. iqn.2007-11.com.example.subdomain:optional-domain-specific-string</value>
   </data>
   <data name="GENERAL_EDIT_INVALID_NAME" xml:space="preserve">
-    <value>You must give a valid name.</value>
+    <value>Please enter a valid name.</value>
+  </data>
+  <data name="GENERAL_EDIT_INVALID_REMOTE" xml:space="preserve">
+    <value>Please enter a valid IP address or server name.</value>
   </data>
   <data name="GENERAL_HEADING_BOOT_OPTIONS" xml:space="preserve">
     <value>Boot Options</value>
@@ -7330,6 +7330,9 @@ To complete the patch installation, please put the servers into maintenance mode
   </data>
   <data name="LOCAL" xml:space="preserve">
     <value>Local</value>
+  </data>
+  <data name="LOCAL_AND_REMOTE" xml:space="preserve">
+    <value>Local; Remote ({0})</value>
   </data>
   <data name="LOCAL_SRS" xml:space="preserve">
     <value>Local Storage Repositories</value>
@@ -10494,9 +10497,6 @@ To log out of this server and log in again using a different user account, enter
   </data>
   <data name="REMAINING_VFS" xml:space="preserve">
     <value>Yes ({0} VFs remaining)</value>
-  </data>
-  <data name="REMOTE" xml:space="preserve">
-    <value>Remote ({0})</value>
   </data>
   <data name="REMOTE_SRS" xml:space="preserve">
     <value>Remote Storage Repositories</value>
