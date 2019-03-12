@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = {"Dundee", "ElyKolkata", "Lima"};
+            string[] expectedNames = {"Dundee", "ElyLima"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -72,13 +72,9 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
 
-            Assert.AreEqual("072bf802-c54d-4e0d-b110-f0647ea86e32",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyKolkata).UUID,
-                            "Ely - Kolkata UUID lookup from enum");
-
-            Assert.AreEqual("660e3036-a090-44b5-a06b-10b3bd929855",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Lima).UUID,
-                            "Lima UUID lookup from enum");
+            Assert.AreEqual("d72c237a-eaaf-4d98-be63-48e2add8dc3a",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyLima).UUID,
+                            "Ely - Lima UUID lookup from enum");
         }
 
         [Test]
@@ -89,12 +85,8 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             "Dundee Filename lookup from enum");
 
             Assert.AreEqual("RPU004",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyKolkata).Filename,
-                            "Ely - Kolkata Filename lookup from enum");
-
-            Assert.AreEqual("RPU005",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Lima).Filename,
-                            "Lima Filename lookup from enum");
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyLima).Filename,
+                            "Ely - Lima Filename lookup from enum");
         }
 
         [Test]

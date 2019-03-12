@@ -5869,6 +5869,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BIOS Boot.
+        /// </summary>
+        public static string BIOS_BOOT {
+            get {
+                return ResourceManager.GetString("BIOS_BOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BIOS strings copied.
         /// </summary>
         public static string BIOS_STRINGS_COPIED {
@@ -16553,15 +16562,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not available.
-        /// </summary>
-        public static string GPU_UNAVAILABLE {
-            get {
-                return ResourceManager.GetString("GPU_UNAVAILABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Loading Data....
         /// </summary>
         public static string GRAPH_LOADING {
@@ -16726,11 +16726,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI boot mode is experimental, and is currently not suitable for production use..
+        ///   Looks up a localized string similar to &amp;UEFI Boot (experimental).
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
         /// </summary>
         public static string GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING {
             get {
                 return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;UEFI Boot.
+        /// </summary>
+        public static string GUEFI_BOOT_MODE_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_BOOT_MODE_LABEL", resourceCulture);
             }
         }
         
@@ -16744,7 +16762,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are experimental, and are currently not suitable for production use..
+        ///   Looks up a localized string similar to Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
         /// </summary>
         public static string GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING {
             get {
@@ -16762,7 +16780,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI secure boot mode is experimental, and is currently not suitable for production use..
+        ///   Looks up a localized string similar to UEFI &amp;Secure Boot (experimental).
+        /// </summary>
+        public static string GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UEFI &amp;Secure Boot.
+        /// </summary>
+        public static string GUEFI_SECURE_BOOT_MODE_LABEL {
+            get {
+                return ResourceManager.GetString("GUEFI_SECURE_BOOT_MODE_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
         /// </summary>
         public static string GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING {
             get {
@@ -34590,6 +34626,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UEFI Boot.
+        /// </summary>
+        public static string UEFI_BOOT {
+            get {
+                return ResourceManager.GetString("UEFI_BOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UEFI Secure Boot.
+        /// </summary>
+        public static string UEFI_SECURE_BOOT {
+            get {
+                return ResourceManager.GetString("UEFI_SECURE_BOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] was unable to import a saved search from file &apos;{0}&apos;.
         ///
         ///Verify that the file is a valid {1} export..
@@ -34597,6 +34651,15 @@ namespace XenAdmin {
         public static string UNABLE_TO_IMPORT_SEARCH {
             get {
                 return ResourceManager.GetString("UNABLE_TO_IMPORT_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not available.
+        /// </summary>
+        public static string UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("UNAVAILABLE", resourceCulture);
             }
         }
         
