@@ -37554,24 +37554,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Run the new snapshot schedule job when I click Finish.
-        /// </summary>
-        public static string VMSS_FINISH_PAGE_CHECKBOX_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_FINISH_PAGE_CHECKBOX_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Review the new snapshot schedule and click Previous if you want to change any settings or Finish to create the new schedule..
-        /// </summary>
-        public static string VMSS_FINISH_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_FINISH_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create the new schedule.
         /// </summary>
         public static string VMSS_FINISH_TITLE {
@@ -37586,6 +37568,15 @@ namespace XenAdmin {
         public static string VMSS_HOST_NOT_LIVE {
             get {
                 return ResourceManager.GetString("VMSS_HOST_NOT_LIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or incomplete schedule.
+        /// </summary>
+        public static string VMSS_INVALID_SCHEDULE {
+            get {
+                return ResourceManager.GetString("VMSS_INVALID_SCHEDULE", resourceCulture);
             }
         }
         
@@ -37617,16 +37608,35 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next scheduled time {0} this corresponds to a server time of {1}..
+        ///   Looks up a localized string similar to The next scheduled local run time is {0}..
         /// </summary>
-        public static string VMSS_NEXT_TIME_RUNNING {
+        public static string VMSS_NEXT_CLIENT_LOCAL_RUN {
             get {
-                return ResourceManager.GetString("VMSS_NEXT_TIME_RUNNING", resourceCulture);
+                return ResourceManager.GetString("VMSS_NEXT_CLIENT_LOCAL_RUN", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n.
+        ///   Looks up a localized string similar to The corresponding server local time is {0}..
+        /// </summary>
+        public static string VMSS_NEXT_SERVER_LOCAL_RUN {
+            get {
+                return ResourceManager.GetString("VMSS_NEXT_SERVER_LOCAL_RUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job name:
+        ///	{0}
+        ///
+        ///Selected VMs:
+        ///	{1}
+        ///
+        ///Snapshot type:
+        ///	{2}
+        ///
+        ///Schedule:
+        ///	{3}.
         /// </summary>
         public static string VMSS_POLICY_SUMMARY {
             get {

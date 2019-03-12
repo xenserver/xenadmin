@@ -69,11 +69,9 @@
     <Compile Include="UnitTests\BatchUpdatesTests\BatchUpdatesTests.cs" />
     <Compile Include="UnitTests\CPUFeaturesTest.cs" />
     <Compile Include="UnitTests\AlertTests\MultipathAlertTest.cs" />
-    <Compile Include="XenModelTests\DayOfWeekWithOffsetTests.cs" />
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
-    <Compile Include="UnitTests\VMSSClientTimeTests.cs" />
     <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />
     <Compile Include="XenModelTests\ActionTests\VMActionsTest.cs" />
     <Compile Include="MainWindowWrapper\AttachDiskDialogWrapper.cs" />
@@ -357,7 +355,6 @@
     <Compile Include="UnitTests\UnitTestHelper\VerifyGetters.cs" />
     <Compile Include="UnitTests\UnitTestHelper\VerifyGettersAndSetters.cs" />
     <Compile Include="UnitTests\UnitTestHelper\VerifyPropertyCounter.cs" />
-    <Compile Include="UnitTests\VMPPGetWeeklyTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbPoolConfigurationTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbReportSubscriptionTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbScheduledTasksTests.cs" />
@@ -376,12 +373,10 @@
     <Compile Include="XenModelTests\ActionTestBase.cs" />
     <Compile Include="XenModelTests\AddressTests.cs" />
     <Compile Include="XenModelTests\AreEqual2Tests.cs" />
-    <Compile Include="XenModelTests\DaysOfWeekWithOffsetTests.cs" />
     <Compile Include="XenModelTests\DestroyPolicyActionTests.cs" />
     <Compile Include="XenModelTests\DestroyVMTests.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockActionFactory.cs" />
     <Compile Include="XenModelTests\HostExtensionTests.cs" />
-    <Compile Include="XenModelTests\RoundToNearestMinuteTests.cs" />
     <Compile Include="XenModelTests\SessionTests.cs" />
     <Compile Include="XenModelTests\TestXenAdminConfigProvider.cs" />
     <Compile Include="XenModelTests\PureAsyncActionTests.cs" />

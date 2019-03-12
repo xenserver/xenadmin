@@ -32,38 +32,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using XenAdmin;
-using XenAdmin.Alerts;
-using XenAdmin.Core;
 
 
 namespace XenAPI
 {
     public partial class VMSS 
     {
-        public DateTime GetNextRunTime(DateTime serverLocalTime)
+        public DateTime? GetNextRunTime(DateTime serverLocalTime)
         {
+            if (!TryGetScheduleMin(schedule, out int min))
+                return null;
+
             if (frequency == vmss_frequency.hourly)
-            {
-                return GetHourlyDate(serverLocalTime, BackupScheduleMin());
-            }
+                return GetHourlyDate(serverLocalTime, min);
+
+            if (!TryGetScheduleHour(schedule, out int hour))
+                return null;
+
             if (frequency == vmss_frequency.daily)
-            {
-                return GetDailyDate(serverLocalTime, BackupScheduleMin(), BackupScheduleHour());
-            }
+                return GetDailyDate(serverLocalTime, min, hour);
+
             if (frequency == vmss_frequency.weekly)
             {
-                return GetWeeklyDate(serverLocalTime, BackupScheduleHour(), BackupScheduleMin(), new List<DayOfWeek>(DaysOfWeekBackup()));
+                var dates = GetWeeklyDates(serverLocalTime, min, hour, BackUpScheduleDays(schedule));
+                if (dates.Count > 0)
+                    return dates[0];
             }
-            return new DateTime();
-        }
 
-        public static DateTime GetDailyDate(DateTime time, int min, int hour)
-        {
-            var nextDateTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
-            if (time > nextDateTime)
-                nextDateTime = nextDateTime.AddDays(1);
-            return nextDateTime;
+            return null;
         }
 
         public static DateTime GetHourlyDate(DateTime time, int min)
@@ -74,67 +70,35 @@ namespace XenAPI
             return nextDateTime;
         }
 
-        public static DateTime GetWeeklyDate(DateTime time, int hour, int min, List<DayOfWeek> listDaysOfWeek)
+        public static DateTime GetDailyDate(DateTime time, int min, int hour)
         {
-            listDaysOfWeek.Sort();
-
-            int daysOfDifference;
-            DayOfWeek today = time.DayOfWeek;
-
-            int nextDay = listDaysOfWeek.FindIndex(x => x >= time.DayOfWeek);
-
-            // No scheduled days later in the week: take first day next week
-            if (nextDay < 0)
-            {
-                daysOfDifference = 7 - (today - listDaysOfWeek[0]);
-            }
-            else
-            {
-                daysOfDifference = listDaysOfWeek[nextDay] - today;
-
-                // Today is a scheduled day: but is the time already past?
-                if (daysOfDifference == 0)
-                {
-                    var todaysScheduledTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
-                    if (time > todaysScheduledTime)
-                    {
-                        // Yes, the time is already past. Find the next day in the schedule instead.
-                        if (listDaysOfWeek.Count == nextDay + 1)  // we're at the last scheduled day in the week: go to next week
-                            daysOfDifference = 7 - (today - listDaysOfWeek[0]);
-                        else
-                            daysOfDifference = listDaysOfWeek[nextDay + 1] - today;
-                    }
-                }
-            }
-            return (new DateTime(time.Year, time.Month, time.Day, hour, min, 0)).AddDays(daysOfDifference);
+            var nextDateTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
+            if (time > nextDateTime)
+                nextDateTime = nextDateTime.AddDays(1);
+            return nextDateTime;
         }
 
-        public IEnumerable<DayOfWeek> DaysOfWeekBackup()
+        public static List<DateTime> GetWeeklyDates(DateTime time, int min, int hour, DayOfWeek[] listDaysOfWeek)
         {
-            return GetDaysFromDictionary(schedule);
+            var nextRun = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
+
+            var runs = new List<DateTime>();
+            foreach (var d in listDaysOfWeek)
+            {
+                if (nextRun.DayOfWeek < d)
+                    runs.Add(nextRun.AddDays(d - nextRun.DayOfWeek));
+                else if (d < nextRun.DayOfWeek)
+                    runs.Add(nextRun.AddDays(7 - (nextRun.DayOfWeek - d)));
+                else if (time < nextRun)
+                    runs.Add(nextRun);
+                else
+                    runs.Add(nextRun.AddDays(7));
+            }
+
+            runs.Sort();
+            return runs;
         }
 
-        private static IEnumerable<DayOfWeek> GetDaysFromDictionary(Dictionary<string, string> dictionary)
-        {
-            if (dictionary.ContainsKey("days"))
-            {
-                if (dictionary["days"].IndexOf("monday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Monday;
-                if (dictionary["days"].IndexOf("tuesday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Tuesday;
-                if (dictionary["days"].IndexOf("wednesday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Wednesday;
-                if (dictionary["days"].IndexOf("thursday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Thursday;
-                if (dictionary["days"].IndexOf("friday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Friday;
-                if (dictionary["days"].IndexOf("saturday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Saturday;
-                if (dictionary["days"].IndexOf("sunday", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                    yield return DayOfWeek.Sunday;
-            }
-        }
-        
         public override string Name()
         {
             return name_label;
@@ -145,71 +109,32 @@ namespace XenAPI
             return name_description;
         }
 
-        public int BackupScheduleMin()
+        private static bool TryGetScheduleMin(Dictionary<string, string> schedule, out int result)
         {
-            string outStr;
-            int result;
-            if (schedule.TryGetValue("min", out outStr) && int.TryParse(outStr, out result))
-                return result;
-
-            return 0;
+            result = 0;
+            return schedule.TryGetValue("min", out var outStr) && int.TryParse(outStr, out result);
         }
 
-        public int BackupScheduleHour()
+        private static bool TryGetScheduleHour(Dictionary<string, string> schedule, out int result)
         {
-            string outStr;
-            int result;
-            if (schedule.TryGetValue("hour", out outStr) && int.TryParse(outStr, out result))
-                return result;
-
-            return 0;
+            result = 0;
+            return schedule.TryGetValue("hour", out var outStr) && int.TryParse(outStr, out result);
         }
 
-        public string BackupScheduleDays()
+        public static DayOfWeek[] BackUpScheduleDays(Dictionary<string, string> schedule)
         {
-            string outStr;
-            if (schedule.TryGetValue("days", out outStr))
-                return outStr;
+            if (!schedule.ContainsKey("days"))
+                return new DayOfWeek[] { };
 
-            return string.Empty;
-        }
+            var days = schedule["days"].Split(new[] {',', ' '}, StringSplitOptions.RemoveEmptyEntries);
 
-        public static Dictionary<string, string> FindScheduleWithGivenTimeOffset(
-            TimeSpan timeDiff,
-            Dictionary<string, string> schedule)
-        {
-            var output = new Dictionary<string, string>();
-
-            if (schedule.TryGetValue("min", out var min))
+            var list = new List<DayOfWeek>();
+            foreach (var d in days)
             {
-                var newMin = (int.Parse(min) + Convert.ToInt32(timeDiff.TotalMinutes)) % 60;
-                if (newMin < 0)
-                    newMin = 60 - Math.Abs(newMin);
-                output["min"] = newMin.ToString();
+                if (Enum.TryParse(d, true, out DayOfWeek result))
+                    list.Add(result);
             }
-
-            if (schedule.TryGetValue("hour", out var hour))
-            {
-                var newHour = (int.Parse(hour) + timeDiff.TotalHours + TimeSpan.FromMinutes(int.Parse(min)).TotalHours) % 24;
-                if (newHour < 0)
-                    newHour = 24 - Math.Abs(newHour);
-                output["hour"] = Convert.ToInt32(Math.Floor(newHour)).ToString();
-            }
-
-            if (schedule.TryGetValue("days", out var days))
-            {
-                var dayOffset = Convert.ToInt32(Math.Floor((timeDiff + TimeSpan.FromHours(int.Parse(hour)) + TimeSpan.FromMinutes(int.Parse(min))).TotalDays));
-                var originalDays = new List<DayOfWeek>();
-                foreach (var dayText in days.Split(','))
-                {
-                    if (Enum.TryParse(dayText, out DayOfWeek day))
-                        originalDays.Add(day);
-                }
-                var newDays = Util.DaysOfWeekWithOffset(originalDays, dayOffset);
-                output["days"] = string.Join(",", newDays.Select(day => day.ToString()));
-            }
-
-            return output;
+            return list.ToArray();
         }
     }
 }

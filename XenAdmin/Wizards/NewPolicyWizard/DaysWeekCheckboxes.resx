@@ -142,7 +142,7 @@
     <value>64, 17</value>
   </data>
   <data name="checkBoxMonday.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="checkBoxMonday.Text" xml:space="preserve">
     <value>&amp;Monday</value>
@@ -172,7 +172,7 @@
     <value>67, 17</value>
   </data>
   <data name="checkBoxTuesday.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="checkBoxTuesday.Text" xml:space="preserve">
     <value>&amp;Tuesday</value>
@@ -202,7 +202,7 @@
     <value>83, 17</value>
   </data>
   <data name="checkBoxWednesday.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="checkBoxWednesday.Text" xml:space="preserve">
     <value>&amp;Wednesday</value>
@@ -232,7 +232,7 @@
     <value>70, 17</value>
   </data>
   <data name="checkBoxThursday.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="checkBoxThursday.Text" xml:space="preserve">
     <value>T&amp;hursday</value>
@@ -262,7 +262,7 @@
     <value>54, 17</value>
   </data>
   <data name="checkBoxFriday.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="checkBoxFriday.Text" xml:space="preserve">
     <value>Frida&amp;y</value>
@@ -292,7 +292,7 @@
     <value>68, 17</value>
   </data>
   <data name="checkBoxSaturday.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="checkBoxSaturday.Text" xml:space="preserve">
     <value>S&amp;aturday</value>
@@ -322,7 +322,7 @@
     <value>62, 17</value>
   </data>
   <data name="checkBoxSunday.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="checkBoxSunday.Text" xml:space="preserve">
     <value>&amp;Sunday</value>
@@ -352,7 +352,7 @@
     <value>309, 46</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>

@@ -12749,17 +12749,17 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
     <value>The server can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
   </data>
-  <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
-    <value>&amp;Run the new snapshot schedule job when I click Finish</value>
-  </data>
-  <data name="VMSS_FINISH_PAGE_TEXT" xml:space="preserve">
-    <value>Review the new snapshot schedule and click Previous if you want to change any settings or Finish to create the new schedule.</value>
-  </data>
   <data name="VMSS_FINISH_TITLE" xml:space="preserve">
     <value>Create the new schedule</value>
   </data>
   <data name="VMSS_HOST_NOT_LIVE" xml:space="preserve">
     <value>Pool master unreachable</value>
+  </data>
+  <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
+    <value>Invalid or incomplete schedule</value>
+  </data>
+  <data name="VMSS_MAIN_MENU" xml:space="preserve">
+    <value>VM Snapsh&amp;ot Schedules...</value>
   </data>
   <data name="VMSS_MAIN_MENU" xml:space="preserve">
     <value>VM Snapsh&amp;ot Schedules...</value>
@@ -12770,11 +12770,24 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VMSS_NAME_TITLE" xml:space="preserve">
     <value>What do you want to call this schedule?</value>
   </data>
-  <data name="VMSS_NEXT_TIME_RUNNING" xml:space="preserve">
-    <value>Next scheduled time {0} this corresponds to a server time of {1}.</value>
+  <data name="VMSS_NEXT_CLIENT_LOCAL_RUN" xml:space="preserve">
+    <value>The next scheduled local run time is {0}.</value>
+  </data>
+  <data name="VMSS_NEXT_SERVER_LOCAL_RUN" xml:space="preserve">
+    <value>The corresponding server local time is {0}.</value>
   </data>
   <data name="VMSS_POLICY_SUMMARY" xml:space="preserve">
-    <value>Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n</value>
+    <value>Job name:
+	{0}
+
+Selected VMs:
+	{1}
+
+Snapshot type:
+	{2}
+
+Schedule:
+	{3}</value>
   </data>
   <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
     <value>Snapshot schedules defined in pool '{0}' ({1} out of {2} VMs currently in schedule):</value>

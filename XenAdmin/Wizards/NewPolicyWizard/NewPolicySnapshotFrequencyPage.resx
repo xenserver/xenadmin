@@ -123,11 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="radioButtonHourly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="radioButtonHourly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
+    <value>3, 3</value>
   </data>
   <data name="radioButtonHourly.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
@@ -150,6 +146,7 @@
   <data name="&gt;&gt;radioButtonHourly.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -161,9 +158,6 @@
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 6</value>
-  </data>
-  <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 13</value>
@@ -184,7 +178,7 @@
     <value>panelDaily</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="dateTimePickerDaily.CustomFormat" xml:space="preserve">
     <value>HH:mm</value>
@@ -208,7 +202,7 @@
     <value>panelDaily</value>
   </data>
   <data name="&gt;&gt;dateTimePickerDaily.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="comboBoxMin.Items" xml:space="preserve">
     <value>0</value>
@@ -255,9 +249,6 @@
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 7</value>
   </data>
-  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 13</value>
   </data>
@@ -288,9 +279,6 @@
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 7</value>
   </data>
-  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
   </data>
@@ -318,49 +306,13 @@
   <data name="daysWeekCheckboxes.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="daysWeekCheckboxes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
+  <data name="panelWeekly.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="daysWeekCheckboxes.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 80</value>
+  <data name="panelWeekly.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="daysWeekCheckboxes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 46</value>
-  </data>
-  <data name="daysWeekCheckboxes.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;daysWeekCheckboxes.Name" xml:space="preserve">
-    <value>daysWeekCheckboxes</value>
-  </data>
-  <data name="&gt;&gt;daysWeekCheckboxes.Type" xml:space="preserve">
-    <value>XenAdmin.Wizards.NewPolicyWizard.DaysWeekCheckboxes, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;daysWeekCheckboxes.Parent" xml:space="preserve">
-    <value>panelWeekly</value>
-  </data>
-  <data name="&gt;&gt;daysWeekCheckboxes.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>panelWeekly</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+  <data name="panelWeekly.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -371,9 +323,6 @@
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 6</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -400,7 +349,7 @@
     <value>HH:mm</value>
   </data>
   <data name="dateTimePickerWeekly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 3</value>
+    <value>101, 3</value>
   </data>
   <data name="dateTimePickerWeekly.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 20</value>
@@ -420,14 +369,65 @@
   <data name="&gt;&gt;dateTimePickerWeekly.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="panelWeekly.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 3</value>
+  </data>
+  <data name="panelWeekly.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="panelWeekly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 85</value>
+  </data>
+  <data name="panelWeekly.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panelWeekly.Name" xml:space="preserve">
+    <value>panelWeekly</value>
+  </data>
+  <data name="&gt;&gt;panelWeekly.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelWeekly.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;panelWeekly.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panelWeekly.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label4" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerWeekly" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="daysWeekCheckboxes" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="daysWeekCheckboxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="daysWeekCheckboxes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 3</value>
+  </data>
+  <data name="daysWeekCheckboxes.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>400, 80</value>
+  </data>
+  <data name="daysWeekCheckboxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 46</value>
+  </data>
+  <data name="daysWeekCheckboxes.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;daysWeekCheckboxes.Name" xml:space="preserve">
+    <value>daysWeekCheckboxes</value>
+  </data>
+  <data name="&gt;&gt;daysWeekCheckboxes.Type" xml:space="preserve">
+    <value>XenAdmin.Wizards.NewPolicyWizard.DaysWeekCheckboxes, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;daysWeekCheckboxes.Parent" xml:space="preserve">
+    <value>panelWeekly</value>
+  </data>
+  <data name="&gt;&gt;daysWeekCheckboxes.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="radioButtonWeekly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="radioButtonWeekly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 59</value>
-  </data>
-  <data name="radioButtonWeekly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
+    <value>3, 49</value>
   </data>
   <data name="radioButtonWeekly.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 17</value>
@@ -454,10 +454,7 @@
     <value>True</value>
   </data>
   <data name="radioButtonDaily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
-  </data>
-  <data name="radioButtonDaily.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
+    <value>3, 26</value>
   </data>
   <data name="radioButtonDaily.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
@@ -484,13 +481,13 @@
     <value>Left</value>
   </data>
   <data name="numericUpDownRetention.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 31</value>
+    <value>216, 51</value>
   </data>
   <data name="numericUpDownRetention.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
   </data>
   <data name="numericUpDownRetention.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;numericUpDownRetention.Name" xml:space="preserve">
     <value>numericUpDownRetention</value>
@@ -502,7 +499,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;numericUpDownRetention.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -514,16 +511,13 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 34</value>
-  </data>
-  <data name="label2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
+    <value>3, 54</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 13</value>
+    <value>207, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Ma&amp;ximum number of scheduled snapshots:</value>
@@ -549,6 +543,51 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="sectionLabelSchedule.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="sectionLabelSchedule.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="sectionLabelSchedule.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="sectionLabelSchedule.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="sectionLabelSchedule.LabelText" xml:space="preserve">
+    <value>Snapshot schedule</value>
+  </data>
+  <data name="sectionLabelSchedule.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="sectionLabelSchedule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="sectionLabelSchedule.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 14</value>
+  </data>
+  <data name="sectionLabelSchedule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>721, 14</value>
+  </data>
+  <data name="sectionLabelSchedule.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="sectionLabelSchedule.UseMnemonic" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;sectionLabelSchedule.Name" xml:space="preserve">
+    <value>sectionLabelSchedule</value>
+  </data>
+  <data name="&gt;&gt;sectionLabelSchedule.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;sectionLabelSchedule.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;sectionLabelSchedule.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="tableLayoutPanel4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -568,7 +607,7 @@
     <value>121, 0</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>2, 81</value>
+    <value>2, 69</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -589,16 +628,16 @@
     <value>Top</value>
   </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 23</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 81</value>
+    <value>126, 69</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -610,85 +649,16 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonHourly" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonDaily" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonWeekly" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="0" RowSpan="3" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="panelWeekly.AutoSize" type="System.Boolean, mscorlib">
+  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="panelWeekly.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
-  </data>
-  <data name="panelWeekly.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="panelWeekly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 3</value>
-  </data>
-  <data name="panelWeekly.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="panelWeekly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 101</value>
-  </data>
-  <data name="panelWeekly.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelWeekly.Name" xml:space="preserve">
-    <value>panelWeekly</value>
-  </data>
-  <data name="&gt;&gt;panelWeekly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelWeekly.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panelWeekly.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelWeekly.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label4" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerWeekly" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="daysWeekCheckboxes" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="panelDaily.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="panelDaily.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="panelDaily.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="panelDaily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 160</value>
-  </data>
-  <data name="panelDaily.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 20</value>
-  </data>
-  <data name="panelDaily.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="panelDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
-  </data>
-  <data name="panelDaily.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;panelDaily.Name" xml:space="preserve">
-    <value>panelDaily</value>
-  </data>
-  <data name="&gt;&gt;panelDaily.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelDaily.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panelDaily.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="panelDaily.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dateTimePickerDaily" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="panelHourly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -700,10 +670,7 @@
     <value>3</value>
   </data>
   <data name="panelHourly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 110</value>
-  </data>
-  <data name="panelHourly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 20</value>
+    <value>3, 3</value>
   </data>
   <data name="panelHourly.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -712,7 +679,7 @@
     <value>242, 27</value>
   </data>
   <data name="panelHourly.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;panelHourly.Name" xml:space="preserve">
     <value>panelHourly</value>
@@ -721,61 +688,151 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelHourly.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+    <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panelHourly.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="panelHourly.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxMin" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxMin" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="TimeDetailsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="panelDaily.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="TimeDetailsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="panelDaily.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="TimeDetailsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 237</value>
+  <data name="panelDaily.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="TimeDetailsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>565, 13</value>
+  <data name="panelDaily.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
   </data>
-  <data name="TimeDetailsLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="panelDaily.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="TimeDetailsLabel.Text" xml:space="preserve">
-    <value>Next scheduled time {0} this corresponds to a server time of {1}.</value>
+  <data name="panelDaily.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 26</value>
   </data>
-  <data name="&gt;&gt;TimeDetailsLabel.Name" xml:space="preserve">
-    <value>TimeDetailsLabel</value>
+  <data name="panelDaily.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;TimeDetailsLabel.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;panelDaily.Name" xml:space="preserve">
+    <value>panelDaily</value>
   </data>
-  <data name="&gt;&gt;TimeDetailsLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelDaily.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDaily.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;panelDaily.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelDaily.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerDaily" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 20</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>569, 91</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;TimeDetailsLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelClientNextRun.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelClientNextRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 140</value>
+  </data>
+  <data name="labelClientNextRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="labelClientNextRun.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelClientNextRun.Text" xml:space="preserve">
+    <value>labelClientNextRun</value>
+  </data>
+  <data name="&gt;&gt;labelClientNextRun.Name" xml:space="preserve">
+    <value>labelClientNextRun</value>
+  </data>
+  <data name="&gt;&gt;labelClientNextRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelClientNextRun.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelClientNextRun.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelServerNextRun.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelServerNextRun.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="labelServerNextRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 153</value>
+  </data>
+  <data name="labelServerNextRun.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 20</value>
+  </data>
+  <data name="labelServerNextRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>721, 13</value>
+  </data>
+  <data name="labelServerNextRun.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelServerNextRun.Text" xml:space="preserve">
+    <value>labelServerNextRun</value>
+  </data>
+  <data name="&gt;&gt;labelServerNextRun.Name" xml:space="preserve">
+    <value>labelServerNextRun</value>
+  </data>
+  <data name="&gt;&gt;labelServerNextRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServerNextRun.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelServerNextRun.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 46</value>
-  </data>
-  <data name="tableLayoutPanel1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 250</value>
+    <value>3, 36</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 250</value>
+    <value>727, 186</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -787,10 +844,10 @@
     <value>MainTableLayoutPanel</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel4" Row="0" RowSpan="3" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelWeekly" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panelDaily" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panelHourly" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TimeDetailsLabel" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sectionLabelSchedule" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="tableLayoutPanel4" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelClientNextRun" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelServerNextRun" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,120,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="MainTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -814,10 +871,10 @@
     <value>3, 0</value>
   </data>
   <data name="autoHeightLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 10</value>
+    <value>3, 0, 3, 20</value>
   </data>
   <data name="autoHeightLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 13</value>
+    <value>727, 13</value>
   </data>
   <data name="autoHeightLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -837,50 +894,14 @@
   <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="sectionLabelSchedule.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="sectionLabelSchedule.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="sectionLabelSchedule.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="sectionLabelSchedule.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="sectionLabelSchedule.LabelText" xml:space="preserve">
-    <value>Snapshot schedule</value>
-  </data>
-  <data name="sectionLabelSchedule.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="sectionLabelSchedule.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
-  </data>
-  <data name="sectionLabelSchedule.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 14</value>
-  </data>
-  <data name="sectionLabelSchedule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 14</value>
-  </data>
-  <data name="sectionLabelSchedule.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="sectionLabelSchedule.UseMnemonic" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;sectionLabelSchedule.Name" xml:space="preserve">
-    <value>sectionLabelSchedule</value>
-  </data>
-  <data name="&gt;&gt;sectionLabelSchedule.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;sectionLabelSchedule.Parent" xml:space="preserve">
-    <value>MainTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;sectionLabelSchedule.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="sectionLabelNumber.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -901,16 +922,16 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="sectionLabelNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 302</value>
+    <value>3, 3</value>
   </data>
   <data name="sectionLabelNumber.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 14</value>
   </data>
   <data name="sectionLabelNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 14</value>
+    <value>721, 14</value>
   </data>
   <data name="sectionLabelNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="sectionLabelNumber.UseMnemonic" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -922,19 +943,10 @@
     <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sectionLabelNumber.Parent" xml:space="preserve">
-    <value>MainTableLayoutPanel</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;sectionLabelNumber.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="autoHeightLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -943,16 +955,16 @@
     <value>Fill</value>
   </data>
   <data name="autoHeightLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
+    <value>3, 25</value>
   </data>
   <data name="autoHeightLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 10</value>
   </data>
   <data name="autoHeightLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 13</value>
+    <value>721, 13</value>
   </data>
   <data name="autoHeightLabel2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="autoHeightLabel2.Text" xml:space="preserve">
     <value>When the number of scheduled snapshots taken exceeds the maximum number specified here, the oldest scheduled snapshot will be deleted.</value>
@@ -967,22 +979,22 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel2.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>Top</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 322</value>
+    <value>3, 228</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 54</value>
+    <value>727, 74</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -994,10 +1006,10 @@
     <value>MainTableLayoutPanel</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="autoHeightLabel2" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="numericUpDownRetention" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sectionLabelNumber" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="autoHeightLabel2" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="numericUpDownRetention" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Absolute,20,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="MainTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1006,10 +1018,10 @@
     <value>0, 0</value>
   </data>
   <data name="MainTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="MainTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>709, 602</value>
+    <value>733, 418</value>
   </data>
   <data name="MainTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1027,7 +1039,7 @@
     <value>1</value>
   </data>
   <data name="MainTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="autoHeightLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionLabelSchedule" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionLabelNumber" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="autoHeightLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1057,7 +1069,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LoadingBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>None</value>
   </data>
   <data name="LoadingBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1066,22 +1078,10 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="LoadingBox.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="tableLayoutPanel6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tableLayoutPanel6.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="tableLayoutPanel6.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
+    <value>Left</value>
   </data>
   <data name="labelProgress.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1089,26 +1089,17 @@
   <data name="labelProgress.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9.5pt, style=Bold</value>
   </data>
-  <data name="labelProgress.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="labelProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="labelProgress.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 10</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 17</value>
+    <value>70, 17</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
     <value>Loading...</value>
-  </data>
-  <data name="labelProgress.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;labelProgress.Name" xml:space="preserve">
     <value>labelProgress</value>
@@ -1117,82 +1108,43 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelProgress.Parent" xml:space="preserve">
-    <value>tableLayoutPanel6</value>
+    <value>LoadingBox</value>
   </data>
   <data name="&gt;&gt;labelProgress.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="pictureBoxProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="pictureBoxProgress.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="pictureBoxProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBoxProgress.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="spinnerIcon1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="pictureBoxProgress.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="spinnerIcon1.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
   </data>
-  <data name="pictureBoxProgress.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBoxProgress.TabIndex" type="System.Int32, mscorlib">
+  <data name="spinnerIcon1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;pictureBoxProgress.Name" xml:space="preserve">
-    <value>pictureBoxProgress</value>
+  <data name="&gt;&gt;spinnerIcon1.Name" xml:space="preserve">
+    <value>spinnerIcon1</value>
   </data>
-  <data name="&gt;&gt;pictureBoxProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;spinnerIcon1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.SpinnerIcon, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;pictureBoxProgress.Parent" xml:space="preserve">
-    <value>tableLayoutPanel6</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxProgress.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 3</value>
-  </data>
-  <data name="tableLayoutPanel6.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 38</value>
-  </data>
-  <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.Name" xml:space="preserve">
-    <value>tableLayoutPanel6</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.Parent" xml:space="preserve">
+  <data name="&gt;&gt;spinnerIcon1.Parent" xml:space="preserve">
     <value>LoadingBox</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel6.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel6.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelProgress" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxProgress" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="&gt;&gt;spinnerIcon1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="LoadingBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 231</value>
+    <value>283, 156</value>
   </data>
   <data name="LoadingBox.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="LoadingBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 44</value>
+    <value>114, 38</value>
   </data>
   <data name="LoadingBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;LoadingBox.Name" xml:space="preserve">
     <value>LoadingBox</value>
@@ -1207,7 +1159,7 @@
     <value>0</value>
   </data>
   <data name="LoadingBox.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelProgress" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="spinnerIcon1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1216,7 +1168,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>709, 602</value>
+    <value>733, 418</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NewPolicySnapshotFrequencyPage</value>

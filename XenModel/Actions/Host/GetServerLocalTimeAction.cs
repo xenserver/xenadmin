@@ -30,27 +30,45 @@
  */
 
 using System;
-using NUnit.Framework;
-using XenAdmin;
+using XenAPI;
 
-namespace XenAdminTests.XenModelTests
+namespace XenAdmin.Actions
 {
-    [TestFixture, Category(TestCategories.Unit)]
-    public class DayOfWeekWithOffsetTests
+    public class GetServerLocalTimeAction : PureAsyncAction
     {
-        [TestCase(DayOfWeek.Monday, 0, Result = DayOfWeek.Monday, Description = "Today")]
-        [TestCase(DayOfWeek.Monday, 1, Result = DayOfWeek.Tuesday, Description = "Tomorrow")]
-        [TestCase(DayOfWeek.Monday, -1, Result = DayOfWeek.Sunday, Description = "Yesterday")]
-        [TestCase(DayOfWeek.Monday, 6, Result = DayOfWeek.Sunday, Description = "One week from now less a day")]
-        [TestCase(DayOfWeek.Monday, 7, Result = DayOfWeek.Monday, Description = "One week from now")]
-        [TestCase(DayOfWeek.Monday, -6, Result = DayOfWeek.Tuesday, Description = "One week ago less a day")]
-        [TestCase(DayOfWeek.Monday, -7, Result = DayOfWeek.Monday, Description = "One week ago")]
-        [TestCase((DayOfWeek)0, int.MinValue, Result = DayOfWeek.Friday, Description = "Lower range check")]
-        [TestCase((DayOfWeek)(7 - 1), int.MaxValue, Result = DayOfWeek.Sunday, Description = "Upper range check")]
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private Host _host;
 
-        public DayOfWeek DayOfWeekOffsetTest(DayOfWeek dayOfWeek, int daysDifference)
+        public ServerTimeInfo? ServerTimeInfo;
+
+        public GetServerLocalTimeAction(Host host)
+            : base(host.Connection, "", true)
         {
-            return Util.DayOfWeekWithOffset(dayOfWeek, daysDifference);
+            _host = host;
         }
+
+        protected override void Run()
+        {
+            try
+            {
+                var serverLocalTime = Host.get_server_localtime(Connection.Session, _host.opaque_ref);
+
+                ServerTimeInfo = new ServerTimeInfo
+                {
+                    ServerClientTimeZoneDiff = DateTime.Now - Connection.ServerTimeOffset - serverLocalTime,
+                    ServerLocalTime = serverLocalTime
+                };
+            }
+            catch (Exception e)
+            {
+                log.Error("An error occurred while obtaining the server local time: ", e);
+            }
+        }
+    }
+
+    public struct ServerTimeInfo
+    {
+        public DateTime ServerLocalTime;
+        public TimeSpan ServerClientTimeZoneDiff;
     }
 }

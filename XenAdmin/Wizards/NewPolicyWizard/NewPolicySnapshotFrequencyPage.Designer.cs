@@ -1,5 +1,4 @@
-﻿using XenAdmin.Controls;
-namespace XenAdmin.Wizards.NewPolicyWizard
+﻿namespace XenAdmin.Wizards.NewPolicyWizard
 {
     partial class NewPolicySnapshotFrequencyPage
     {
@@ -37,7 +36,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.daysWeekCheckboxes = new XenAdmin.Wizards.NewPolicyWizard.DaysWeekCheckboxes();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePickerWeekly = new XenAdmin.Controls.DateTimeMinutes15();
             this.radioButtonWeekly = new System.Windows.Forms.RadioButton();
@@ -45,34 +43,35 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.numericUpDownRetention = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.sectionLabelSchedule = new XenAdmin.Controls.SectionHeaderLabel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
-            this.panelWeekly = new System.Windows.Forms.TableLayoutPanel();
-            this.panelDaily = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelHourly = new System.Windows.Forms.TableLayoutPanel();
-            this.TimeDetailsLabel = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.panelDaily = new System.Windows.Forms.TableLayoutPanel();
+            this.panelWeekly = new System.Windows.Forms.TableLayoutPanel();
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.sectionLabelSchedule = new XenAdmin.Controls.SectionHeaderLabel();
-            this.sectionLabelNumber = new XenAdmin.Controls.SectionHeaderLabel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.sectionLabelNumber = new XenAdmin.Controls.SectionHeaderLabel();
             this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.LoadingBox = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.labelProgress = new System.Windows.Forms.Label();
-            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
+            this.spinnerIcon1 = new XenAdmin.Controls.SpinnerIcon();
+            this.labelServerNextRun = new System.Windows.Forms.Label();
+            this.labelClientNextRun = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRetention)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.panelWeekly.SuspendLayout();
-            this.panelDaily.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.panelHourly.SuspendLayout();
+            this.panelDaily.SuspendLayout();
+            this.panelWeekly.SuspendLayout();
             this.MainTableLayoutPanel.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.LoadingBox.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon1)).BeginInit();
             this.SuspendLayout();
             // 
             // radioButtonHourly
@@ -122,13 +121,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             // daysWeekCheckboxes
             // 
             resources.ApplyResources(this.daysWeekCheckboxes, "daysWeekCheckboxes");
-            this.daysWeekCheckboxes.Days = "";
+            this.panelWeekly.SetColumnSpan(this.daysWeekCheckboxes, 2);
             this.daysWeekCheckboxes.Name = "daysWeekCheckboxes";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            this.daysWeekCheckboxes.CheckBoxChanged += new System.EventHandler(this.daysWeekCheckboxes_CheckBoxChanged);
             // 
             // label4
             // 
@@ -177,6 +172,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             0,
             0,
             0});
+            this.numericUpDownRetention.ValueChanged += new System.EventHandler(this.numericUpDownRetention_ValueChanged);
             // 
             // label2
             // 
@@ -186,12 +182,21 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panelWeekly, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panelDaily, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panelHourly, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.TimeDetailsLabel, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.sectionLabelSchedule, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelClientNextRun, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelServerNextRun, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // sectionLabelSchedule
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.sectionLabelSchedule, 2);
+            resources.ApplyResources(this.sectionLabelSchedule, "sectionLabelSchedule");
+            this.sectionLabelSchedule.LineColor = System.Drawing.SystemColors.Window;
+            this.sectionLabelSchedule.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
+            this.sectionLabelSchedule.Name = "sectionLabelSchedule";
+            this.sectionLabelSchedule.TabStop = false;
             // 
             // tableLayoutPanel4
             // 
@@ -201,7 +206,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.tableLayoutPanel4.Controls.Add(this.radioButtonWeekly, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.label9, 1, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel4, 3);
             // 
             // label9
             // 
@@ -210,21 +214,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.label9.Name = "label9";
             this.tableLayoutPanel4.SetRowSpan(this.label9, 3);
             // 
-            // panelWeekly
+            // flowLayoutPanel1
             // 
-            resources.ApplyResources(this.panelWeekly, "panelWeekly");
-            this.panelWeekly.Controls.Add(this.label4, 0, 0);
-            this.panelWeekly.Controls.Add(this.dateTimePickerWeekly, 1, 0);
-            this.panelWeekly.Controls.Add(this.label5, 0, 1);
-            this.panelWeekly.Controls.Add(this.daysWeekCheckboxes, 0, 2);
-            this.panelWeekly.Name = "panelWeekly";
-            // 
-            // panelDaily
-            // 
-            resources.ApplyResources(this.panelDaily, "panelDaily");
-            this.panelDaily.Controls.Add(this.dateTimePickerDaily, 1, 0);
-            this.panelDaily.Controls.Add(this.label8, 0, 0);
-            this.panelDaily.Name = "panelDaily";
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Controls.Add(this.panelHourly);
+            this.flowLayoutPanel1.Controls.Add(this.panelDaily);
+            this.flowLayoutPanel1.Controls.Add(this.panelWeekly);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // panelHourly
             // 
@@ -234,20 +230,27 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.panelHourly.Controls.Add(this.label7, 2, 0);
             this.panelHourly.Name = "panelHourly";
             // 
-            // TimeDetailsLabel
+            // panelDaily
             // 
-            resources.ApplyResources(this.TimeDetailsLabel, "TimeDetailsLabel");
-            this.TimeDetailsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TimeDetailsLabel.Name = "TimeDetailsLabel";
+            resources.ApplyResources(this.panelDaily, "panelDaily");
+            this.panelDaily.Controls.Add(this.label8, 0, 0);
+            this.panelDaily.Controls.Add(this.dateTimePickerDaily, 1, 0);
+            this.panelDaily.Name = "panelDaily";
+            // 
+            // panelWeekly
+            // 
+            resources.ApplyResources(this.panelWeekly, "panelWeekly");
+            this.panelWeekly.Controls.Add(this.label4, 0, 0);
+            this.panelWeekly.Controls.Add(this.dateTimePickerWeekly, 1, 0);
+            this.panelWeekly.Controls.Add(this.daysWeekCheckboxes, 0, 1);
+            this.panelWeekly.Name = "panelWeekly";
             // 
             // MainTableLayoutPanel
             // 
             resources.ApplyResources(this.MainTableLayoutPanel, "MainTableLayoutPanel");
             this.MainTableLayoutPanel.Controls.Add(this.autoHeightLabel1, 0, 0);
-            this.MainTableLayoutPanel.Controls.Add(this.sectionLabelSchedule, 0, 1);
-            this.MainTableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 0, 2);
-            this.MainTableLayoutPanel.Controls.Add(this.sectionLabelNumber, 0, 3);
-            this.MainTableLayoutPanel.Controls.Add(this.tableLayoutPanel3, 0, 4);
+            this.MainTableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.MainTableLayoutPanel.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.MainTableLayoutPanel.Name = "MainTableLayoutPanel";
             // 
             // autoHeightLabel1
@@ -255,29 +258,23 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             resources.ApplyResources(this.autoHeightLabel1, "autoHeightLabel1");
             this.autoHeightLabel1.Name = "autoHeightLabel1";
             // 
-            // sectionLabelSchedule
+            // tableLayoutPanel3
             // 
-            resources.ApplyResources(this.sectionLabelSchedule, "sectionLabelSchedule");
-            this.sectionLabelSchedule.LineColor = System.Drawing.SystemColors.Window;
-            this.sectionLabelSchedule.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionLabelSchedule.Name = "sectionLabelSchedule";
-            this.sectionLabelSchedule.TabStop = false;
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.sectionLabelNumber, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.autoHeightLabel2, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.numericUpDownRetention, 1, 2);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // sectionLabelNumber
             // 
+            this.tableLayoutPanel3.SetColumnSpan(this.sectionLabelNumber, 2);
             resources.ApplyResources(this.sectionLabelNumber, "sectionLabelNumber");
             this.sectionLabelNumber.LineColor = System.Drawing.SystemColors.Window;
             this.sectionLabelNumber.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
             this.sectionLabelNumber.Name = "sectionLabelNumber";
             this.sectionLabelNumber.TabStop = false;
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.autoHeightLabel2, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.numericUpDownRetention, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // autoHeightLabel2
             // 
@@ -294,28 +291,32 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             // LoadingBox
             // 
             resources.ApplyResources(this.LoadingBox, "LoadingBox");
-            this.LoadingBox.BackColor = System.Drawing.Color.Transparent;
-            this.LoadingBox.Controls.Add(this.tableLayoutPanel6, 0, 0);
+            this.LoadingBox.Controls.Add(this.labelProgress, 1, 0);
+            this.LoadingBox.Controls.Add(this.spinnerIcon1, 0, 0);
             this.LoadingBox.Name = "LoadingBox";
-            // 
-            // tableLayoutPanel6
-            // 
-            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
-            this.tableLayoutPanel6.Controls.Add(this.labelProgress, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.pictureBoxProgress, 0, 0);
-            this.tableLayoutPanel6.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             // 
             // labelProgress
             // 
             resources.ApplyResources(this.labelProgress, "labelProgress");
             this.labelProgress.Name = "labelProgress";
             // 
-            // pictureBoxProgress
+            // spinnerIcon1
             // 
-            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
-            this.pictureBoxProgress.Name = "pictureBoxProgress";
-            this.pictureBoxProgress.TabStop = false;
+            resources.ApplyResources(this.spinnerIcon1, "spinnerIcon1");
+            this.spinnerIcon1.Name = "spinnerIcon1";
+            this.spinnerIcon1.TabStop = false;
+            // 
+            // labelServerNextRun
+            // 
+            resources.ApplyResources(this.labelServerNextRun, "labelServerNextRun");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelServerNextRun, 2);
+            this.labelServerNextRun.Name = "labelServerNextRun";
+            // 
+            // labelClientNextRun
+            // 
+            resources.ApplyResources(this.labelClientNextRun, "labelClientNextRun");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelClientNextRun, 2);
+            this.labelClientNextRun.Name = "labelClientNextRun";
             // 
             // NewPolicySnapshotFrequencyPage
             // 
@@ -324,26 +325,27 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.Controls.Add(this.LoadingBox);
             this.Controls.Add(this.MainTableLayoutPanel);
             this.Name = "NewPolicySnapshotFrequencyPage";
+            this.ParentChanged += new System.EventHandler(this.NewPolicySnapshotFrequencyPage_ParentChanged);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRetention)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.panelWeekly.ResumeLayout(false);
-            this.panelWeekly.PerformLayout();
-            this.panelDaily.ResumeLayout(false);
-            this.panelDaily.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.panelHourly.ResumeLayout(false);
             this.panelHourly.PerformLayout();
+            this.panelDaily.ResumeLayout(false);
+            this.panelDaily.PerformLayout();
+            this.panelWeekly.ResumeLayout(false);
+            this.panelWeekly.PerformLayout();
             this.MainTableLayoutPanel.ResumeLayout(false);
             this.MainTableLayoutPanel.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.LoadingBox.ResumeLayout(false);
             this.LoadingBox.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,10 +358,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private System.Windows.Forms.RadioButton radioButtonDaily;
         private System.Windows.Forms.NumericUpDown numericUpDownRetention;
         private System.Windows.Forms.Label label2;
-        private DateTimeMinutes15 dateTimePickerDaily;
-        private DateTimeMinutes15 dateTimePickerWeekly;
+        private XenAdmin.Controls.DateTimeMinutes15 dateTimePickerDaily;
+        private XenAdmin.Controls.DateTimeMinutes15 dateTimePickerWeekly;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -368,8 +369,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel MainTableLayoutPanel;
         private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
-        private SectionHeaderLabel sectionLabelSchedule;
-        private SectionHeaderLabel sectionLabelNumber;
+        private XenAdmin.Controls.SectionHeaderLabel sectionLabelSchedule;
+        private XenAdmin.Controls.SectionHeaderLabel sectionLabelNumber;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -378,10 +379,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private System.Windows.Forms.TableLayoutPanel panelDaily;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label1;
-        private Controls.Common.AutoHeightLabel TimeDetailsLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel LoadingBox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label labelProgress;
-        private System.Windows.Forms.PictureBox pictureBoxProgress;
+        private Controls.SpinnerIcon spinnerIcon1;
+        private System.Windows.Forms.Label labelClientNextRun;
+        private System.Windows.Forms.Label labelServerNextRun;
     }
 }

@@ -336,37 +336,6 @@ namespace XenAdmin
             return Messages.TIME_NEGLIGIBLE;
         }
 
-        public static string TimeRangeString(long t1, long t2)
-        {
-            return t1 > 60 && t2 > 60 ?
-                string.Format(Messages.TIME_RANGE_MINUTES, t1 / 60, t2 / 60) :
-                string.Format(Messages.TIME_RANGE_SECONDS, t1, t2);
-        }
-
-        private static readonly int DaysInAWeek = Enum.GetNames(typeof(DayOfWeek)).Length;
-        public static DayOfWeek DayOfWeekWithOffset(DayOfWeek dayOfWeek, int daysDifference)
-        {
-            checked
-            {
-                var diff = daysDifference % DaysInAWeek;
-                var index = ((int) dayOfWeek + diff) % DaysInAWeek;
-                if (index < 0)
-                    index = DaysInAWeek - Math.Abs(index);
-                return (DayOfWeek) index;
-            }
-        }
-
-        public static IEnumerable<DayOfWeek> DaysOfWeekWithOffset(IEnumerable<DayOfWeek> daysOfWeek, int daysDifference)
-        {
-            return daysOfWeek?.Select(day => DayOfWeekWithOffset(day, daysDifference));
-        }
-
-        public static TimeSpan RoundToNearestMinute(TimeSpan span)
-        {
-            var minutes = Convert.ToInt32(Math.Round(span.TotalMinutes));
-            return new TimeSpan(0, minutes, 0);
-        }
-
         internal static string GThanSize(long min)
         {
             return string.Format(Messages.GREATER_THAN, DiskSizeString(min));
