@@ -30,18 +30,18 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class GetServerTimeAction:PureAsyncAction   
+    public class GetServerLocalTimeAction : PureAsyncAction
     {
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Host _host;
-        public GetServerTimeAction(Host host)
+
+        public ServerTimeInfo? ServerTimeInfo;
+
+        public GetServerLocalTimeAction(Host host)
             : base(host.Connection, "", true)
         {
             _host = host;
@@ -51,13 +51,24 @@ namespace XenAdmin.Actions
         {
             try
             {
-                var time=Host.get_server_localtime(Connection.Session, _host.opaque_ref);
-                Result = time.ToString("u", CultureInfo.InvariantCulture);
+                var serverLocalTime = Host.get_server_localtime(Connection.Session, _host.opaque_ref);
+
+                ServerTimeInfo = new ServerTimeInfo
+                {
+                    ServerClientTimeZoneDiff = DateTime.Now - Connection.ServerTimeOffset - serverLocalTime,
+                    ServerLocalTime = serverLocalTime
+                };
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Result = "";
+                log.Error("An error occurred while obtaining the server local time: ", e);
             }
         }
+    }
+
+    public struct ServerTimeInfo
+    {
+        public DateTime ServerLocalTime;
+        public TimeSpan ServerClientTimeZoneDiff;
     }
 }
