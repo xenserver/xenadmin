@@ -1,3 +1,38 @@
+/* Copyright (c) Citrix Systems, Inc.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms,
+ * with or without modification, are permitted provided
+ * that the following conditions are met:
+ *
+ * *   Redistributions of source code must retain the above
+ *     copyright notice, this list of conditions and the
+ *     following disclaimer.
+ * *   Redistributions in binary form must reproduce the above
+ *     copyright notice, this list of conditions and the
+ *     following disclaimer in the documentation and/or other
+ *     materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+/*
+ * Based upon code copyrighted as below.
+ */
+
 ﻿/*MIT License
 
 Copyright (c) 2018 differentrain
@@ -23,11 +58,11 @@ SOFTWARE. */
 /*
  * The minimum requirements for YYProject.XXHash are .NET Framework 3.5, and C# 7.0 ,
  * it means that these code also apply to .NET Core 1.0 or later, Mono 4.6 or later and so on.
- * If necessary, you can also rewrite these library to .NET Framework 2.0 with just a little work. 
- * Since all code (XXHash32 and XXHash64) are inside these file independently, 
+ * If necessary, you can also rewrite these library to .NET Framework 2.0 with just a little work.
+ * Since all code (XXHash32 and XXHash64) are inside these file independently,
  * I don't recommend using compiled library in your project.
  * Instead, you can just copy the useful parts to your code, this is the benefit of MIT License. P:)
- * 
+ *
  * If you are using .NET4.5 (or higher) or sibling frameworks,  you can add conditional compilation
  * symbol "HIGHER_VERSIONS" to optimize static-short-methods.
  */
@@ -305,4 +340,3 @@ namespace YYProject.XXHash
     }
 
 }
-
