@@ -36842,24 +36842,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your license to enable QoS settings.
-        /// </summary>
-        public static string VIF_LICENSE_RESTRICTION {
-            get {
-                return ResourceManager.GetString("VIF_LICENSE_RESTRICTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to QoS settings should be configured using the vSwitch Controller.
-        /// </summary>
-        public static string VIF_VSWITCH_CONTROLLER {
-            get {
-                return ResourceManager.GetString("VIF_VSWITCH_CONTROLLER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Virtual Disk.
         /// </summary>
         public static string VIRTUAL_DISK {

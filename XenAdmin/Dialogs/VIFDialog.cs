@@ -82,7 +82,6 @@ namespace XenAdmin.Dialogs
             {
                 tableLayoutPanel3.Enabled = checkboxQoS.Enabled = checkboxQoS.Checked = false;
                 tableLayoutPanelInfo.Visible = true;
-                labelInfo.Text = Messages.VIF_VSWITCH_CONTROLLER;
             }
             else
             {
@@ -98,7 +97,6 @@ namespace XenAdmin.Dialogs
                 }
 
                 tableLayoutPanel3.Enabled = checkboxQoS.Enabled = true;
-                labelInfo.Text = Messages.VIF_LICENSE_RESTRICTION;
                 tableLayoutPanelInfo.Visible = false;
             }
 

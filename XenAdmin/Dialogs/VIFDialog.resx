@@ -715,7 +715,7 @@
     <value>1</value>
   </data>
   <data name="labelInfo.Text" xml:space="preserve">
-    <value>Upgrade your license to enable QoS settings</value>
+    <value>QoS settings should be configured using the vSwitch Controller</value>
   </data>
   <data name="&gt;&gt;labelInfo.Name" xml:space="preserve">
     <value>labelInfo</value>

@@ -523,7 +523,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 pVif.VM = new XenRef<VM>(vm.opaque_ref);
                 var action = new CreateVIFAction(vm, pVif);
-                action.Completed += VifAction_Completed;
+                action.Completed += createVIFAction_Completed;
                 action.RunAsync();
             }
             else if (XenObject is Host)
@@ -544,12 +544,11 @@ namespace XenAdmin.Controls.NetworkingTab
             }
         }
 
-        private void VifAction_Completed(ActionBase sender)
+        private void createVIFAction_Completed(ActionBase sender)
         {
-            sender.Completed -= VifAction_Completed;
-            var action = (AsyncAction)sender;
+            sender.Completed -= createVIFAction_Completed;
 
-            if (action.Result == false.ToString())
+            if (sender is CreateVIFAction action && action.RebootRequired)
                 Program.Invoke(Program.MainWindow, ShowHotPlugError);
         }
 
@@ -782,15 +781,18 @@ namespace XenAdmin.Controls.NetworkingTab
         private void updateVIFAction_Completed(ActionBase sender)
         {
             sender.Completed -= updateVIFAction_Completed;
-            var action = (AsyncAction)sender;
 
-            Program.Invoke(Program.MainWindow, () =>
+            if (sender is UpdateVIFAction action)
             {
-                if (action.Result == false.ToString())
-                    ShowHotPlugError();
-                InBuildList = false;
-                BuildList();
-            });
+                Program.Invoke(Program.MainWindow, () =>
+                {
+                    InBuildList = false;
+                    BuildList();
+
+                    if (action.RebootRequired)
+                        ShowHotPlugError();
+                });
+            }
         }
 
         private void launchHostOrPoolNetworkSettingsDialog()

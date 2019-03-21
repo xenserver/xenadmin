@@ -12748,12 +12748,6 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>Virtual Network Device Changes</value>
   </data>
-  <data name="VIF_LICENSE_RESTRICTION" xml:space="preserve">
-    <value>Upgrade your license to enable QoS settings</value>
-  </data>
-  <data name="VIF_VSWITCH_CONTROLLER" xml:space="preserve">
-    <value>QoS settings should be configured using the vSwitch Controller</value>
-  </data>
   <data name="VIRTUALIZATION_OPTIMIZED" xml:space="preserve">
     <value>Optimized (version {0} installed)</value>
   </data>
