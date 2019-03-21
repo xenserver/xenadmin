@@ -16103,16 +16103,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must give a valid server name..
-        /// </summary>
-        public static string GENERAL_EDIT_INVALID_HOSTNAME {
-            get {
-                return ResourceManager.GetString("GENERAL_EDIT_INVALID_HOSTNAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You must give a valid IQN, e.g. iqn.2007-11.com.example.subdomain:optional-domain-specific-string.
+        ///   Looks up a localized string similar to Please enter a valid IQN, e.g. iqn.2007-11.com.example.subdomain:optional-domain-specific-string.
         /// </summary>
         public static string GENERAL_EDIT_INVALID_IQN {
             get {
@@ -16121,11 +16112,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must give a valid name..
+        ///   Looks up a localized string similar to Please enter a valid name..
         /// </summary>
         public static string GENERAL_EDIT_INVALID_NAME {
             get {
                 return ResourceManager.GetString("GENERAL_EDIT_INVALID_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid IP address or server name..
+        /// </summary>
+        public static string GENERAL_EDIT_INVALID_REMOTE {
+            get {
+                return ResourceManager.GetString("GENERAL_EDIT_INVALID_REMOTE", resourceCulture);
             }
         }
         
@@ -18158,6 +18158,15 @@ namespace XenAdmin {
         public static string HOST_LOG_DESTINATION_LOCAL {
             get {
                 return ResourceManager.GetString("HOST_LOG_DESTINATION_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local and Remote ({0}).
+        /// </summary>
+        public static string HOST_LOG_DESTINATION_LOCAL_AND_REMOTE {
+            get {
+                return ResourceManager.GetString("HOST_LOG_DESTINATION_LOCAL_AND_REMOTE", resourceCulture);
             }
         }
         
@@ -21079,15 +21088,6 @@ namespace XenAdmin {
         public static string LIVE_PATCHING_FAILED_ONE_HOST {
             get {
                 return ResourceManager.GetString("LIVE_PATCHING_FAILED_ONE_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local.
-        /// </summary>
-        public static string LOCAL {
-            get {
-                return ResourceManager.GetString("LOCAL", resourceCulture);
             }
         }
         
@@ -30223,15 +30223,6 @@ namespace XenAdmin {
         public static string REMAINING_VFS {
             get {
                 return ResourceManager.GetString("REMAINING_VFS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remote ({0}).
-        /// </summary>
-        public static string REMOTE {
-            get {
-                return ResourceManager.GetString("REMOTE", resourceCulture);
             }
         }
         

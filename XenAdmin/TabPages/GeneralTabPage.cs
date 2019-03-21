@@ -1198,7 +1198,13 @@ namespace XenAdmin.TabPages
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
                     new PropertiesToolStripMenuItem(new IqnPropertiesCommand(Program.MainWindow, xenObject)));
-                s.AddEntry(FriendlyName("host.log_destination"), host.GetSysLogDestination() ?? Messages.HOST_LOG_DESTINATION_LOCAL,
+
+                var sysLog = host.GetSysLogDestination();
+                var sysLogDisplay = string.IsNullOrEmpty(sysLog)
+                    ? Messages.HOST_LOG_DESTINATION_LOCAL
+                    : string.Format(Messages.HOST_LOG_DESTINATION_LOCAL_AND_REMOTE, sysLog);
+
+                s.AddEntry(FriendlyName("host.log_destination"), sysLogDisplay,
                    new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow, xenObject)));
 
                 PrettyTimeSpan uptime = host.Uptime();
