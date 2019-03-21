@@ -75,8 +75,8 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 return checkBoxRemote.Checked
-                    ? string.Format(Messages.LOCAL_AND_REMOTE, RemoteServer)
-                    : Messages.LOCAL;
+                    ? string.Format(Messages.HOST_LOG_DESTINATION_LOCAL_AND_REMOTE, RemoteServer)
+                    : Messages.HOST_LOG_DESTINATION_LOCAL;
             }
         }
 

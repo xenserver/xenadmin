@@ -18117,6 +18117,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Local and Remote ({0}).
+        /// </summary>
+        public static string HOST_LOG_DESTINATION_LOCAL_AND_REMOTE {
+            get {
+                return ResourceManager.GetString("HOST_LOG_DESTINATION_LOCAL_AND_REMOTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
         ///
         ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
@@ -21034,24 +21043,6 @@ namespace XenAdmin {
         public static string LIVE_PATCHING_FAILED_ONE_HOST {
             get {
                 return ResourceManager.GetString("LIVE_PATCHING_FAILED_ONE_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local.
-        /// </summary>
-        public static string LOCAL {
-            get {
-                return ResourceManager.GetString("LOCAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local; Remote ({0}).
-        /// </summary>
-        public static string LOCAL_AND_REMOTE {
-            get {
-                return ResourceManager.GetString("LOCAL_AND_REMOTE", resourceCulture);
             }
         }
         
