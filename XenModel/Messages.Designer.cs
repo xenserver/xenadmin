@@ -23235,15 +23235,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
-        /// </summary>
-        public static string MIGRATE_VDI_UPSELL_BLURB {
-            get {
-                return ResourceManager.GetString("MIGRATE_VDI_UPSELL_BLURB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM may not migrate at the moment.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED {
@@ -36124,6 +36115,15 @@ namespace XenAdmin {
         public static string UPSELL_BLURB_HA {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
+        /// </summary>
+        public static string UPSELL_BLURB_MIGRATE_VDI {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_MIGRATE_VDI", resourceCulture);
             }
         }
         
