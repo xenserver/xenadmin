@@ -67,11 +67,12 @@ public class Export
     }
 
     private readonly SHA1 sha = new SHA1CryptoServiceProvider();
+    private XXHash64 xxhash = new XXHash64();
 
     private string checksum_sha1(byte[] data)
     {
         byte[] result = sha.ComputeHash(data);
-        return hex(result);
+        return hex(result).ToLower();
     }
 
     private string hex(byte[] bytes)
@@ -91,7 +92,7 @@ public class Export
 
     private string checksum_xxhash(byte[] data)
     {
-        XXHash64 xxhash = new XXHash64();
+        xxhash.Initialize();
         return hex(xxhash.ComputeHash(data));
     }
 
@@ -205,23 +206,16 @@ public class Export
                     string xml = string_of_byte_array(bytes_data);
                     original_checksums = parse_checksum_table(xml);
                 }
-                else if (header_data.file_name.EndsWith(".checksum") || header_data.file_name.EndsWith(".xxhash"))
-                {
-                    string csum = string_of_byte_array(bytes_data);
-                    string base_name = header_data.file_name.Substring(0, header_data.file_name.LastIndexOf('.'));
-                    string ours = (string)recomputed_checksums[base_name];
-                    if (!ours.Equals(csum))
-                        throw new BlockChecksumFailed(base_name, ours, csum);
-                    debug(String.Format("{0} hash OK", base_name));
-                }
                 else
                 { // The file has no extension (must be a data file) so will have a .checksum or .xxhash file right after it
                     Header header_checksum = nextHeader(input, output, callback);
-                    debug(header_checksum.ToString());
-
                     byte[] bytes_checksum = nextData(input, output, callback, header_checksum.file_size);
+                    string csum_compare = string_of_byte_array(bytes_checksum);
 
                     string csum = header_checksum.file_name.EndsWith(".xxhash") ? checksum_xxhash(bytes_data) : checksum_sha1(bytes_data);
+
+                    if (!csum.Equals(csum_compare))
+                        throw new BlockChecksumFailed(header_data.file_name, csum, csum_compare);
 
                     debug(String.Format(" has checksum: {0}", csum));
                     recomputed_checksums.Add(header_data.file_name, csum);
