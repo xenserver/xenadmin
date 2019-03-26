@@ -8091,9 +8091,6 @@ Do you want to continue?</value>
   <data name="MIGRATE_PLEASE_EJECT_YOUR_CD" xml:space="preserve">
     <value>Please eject your CD</value>
   </data>
-  <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
     <value>This VM may not migrate at the moment</value>
   </data>
@@ -12508,6 +12505,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
     <value>Upgrade your server license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
   </data>
+  <data name="UPSELL_BLURB_MIGRATE_VDI" xml:space="preserve">
+    <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
+  </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
     <value>Upgrade your server license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
   </data>
@@ -12866,9 +12866,6 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
     <value>Invalid or incomplete schedule</value>
-  </data>
-  <data name="VMSS_MAIN_MENU" xml:space="preserve">
-    <value>VM Snapsh&amp;ot Schedules...</value>
   </data>
   <data name="VMSS_MAIN_MENU" xml:space="preserve">
     <value>VM Snapsh&amp;ot Schedules...</value>

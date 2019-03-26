@@ -66,8 +66,8 @@ namespace XenAdmin.Commands
             if (featureForbidden)
             {
                 string theText = HiddenFeatures.LinkLabelHidden
-                    ? Messages.MIGRATE_VDI_UPSELL_BLURB
-                    : Messages.MIGRATE_VDI_UPSELL_BLURB + Messages.UPSELL_BLURB_TRIAL;
+                    ? Messages.UPSELL_BLURB_MIGRATE_VDI
+                    : Messages.UPSELL_BLURB_MIGRATE_VDI + Messages.UPSELL_BLURB_TRIAL;
 
                 using (var dlg = new UpsellDialog(theText, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                     dlg.ShowDialog(Parent);
