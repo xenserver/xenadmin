@@ -2440,13 +2440,13 @@ This will cancel compilation of the status report.</value>
     <value>Cannot delete this system disk as it is in use by the running VM '{0}'.</value>
   </data>
   <data name="CANNOT_DELETE_ISO_GENERIC" xml:space="preserve">
-    <value>It is not possible to delete this ISO storage. Try again later and confirm your SR supports this operation.</value>
+    <value>It is not possible to delete this ISO storage. Please check your SR supports this operation and try again.</value>
   </data>
   <data name="CANNOT_DELETE_ISO_IN_USE" xml:space="preserve">
     <value>This ISO storage is currently in use and cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_SNAPSHOT_GENERIC" xml:space="preserve">
-    <value>It is not possible to delete this snapshot. Try again later and confirm your SR supports this operation.</value>
+    <value>It is not possible to delete this snapshot. Please check your SR supports this operation and try again.</value>
   </data>
   <data name="CANNOT_DELETE_SNAPSHOT_IN_USE" xml:space="preserve">
     <value>This snapshot is currently in use and cannot be deleted.</value>
@@ -2467,7 +2467,7 @@ This will cancel compilation of the status report.</value>
     <value>Virtual disks cannot be deleted from suspended VMs. This virtual disk is used by the suspended VM '{0}'.</value>
   </data>
   <data name="CANNOT_DELETE_VD_GENERIC" xml:space="preserve">
-    <value>It is not possible to delete this virtual disk. Try again later and confirm your SR supports this operation.</value>
+    <value>It is not possible to delete this virtual disk. Please check your SR supports this operation and try again.</value>
   </data>
   <data name="CANNOT_DELETE_VD_IN_USE" xml:space="preserve">
     <value>This virtual disk is currently in use and cannot be deleted.</value>

@@ -6715,7 +6715,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to delete this ISO storage. Try again later and confirm your SR supports this operation..
+        ///   Looks up a localized string similar to It is not possible to delete this ISO storage. Please check your SR supports this operation and try again..
         /// </summary>
         public static string CANNOT_DELETE_ISO_GENERIC {
             get {
@@ -6733,7 +6733,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to delete this snapshot. Try again later and confirm your SR supports this operation..
+        ///   Looks up a localized string similar to It is not possible to delete this snapshot. Please check your SR supports this operation and try again..
         /// </summary>
         public static string CANNOT_DELETE_SNAPSHOT_GENERIC {
             get {
@@ -6760,7 +6760,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to delete this virtual disk. Try again later and confirm your SR supports this operation..
+        ///   Looks up a localized string similar to It is not possible to delete this virtual disk. Please check your SR supports this operation and try again..
         /// </summary>
         public static string CANNOT_DELETE_VD_GENERIC {
             get {
