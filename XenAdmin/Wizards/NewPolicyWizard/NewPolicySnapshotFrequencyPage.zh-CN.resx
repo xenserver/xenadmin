@@ -159,9 +159,6 @@
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 4</value>
   </data>
-  <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 17</value>
   </data>
@@ -327,9 +324,6 @@
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 4</value>
   </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 17</value>
   </data>
@@ -435,9 +429,6 @@
   <data name="radioButtonWeekly.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 61</value>
   </data>
-  <data name="radioButtonWeekly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
-  </data>
   <data name="radioButtonWeekly.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 18</value>
   </data>
@@ -464,9 +455,6 @@
   </data>
   <data name="radioButtonDaily.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 33</value>
-  </data>
-  <data name="radioButtonDaily.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
   </data>
   <data name="radioButtonDaily.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 18</value>
