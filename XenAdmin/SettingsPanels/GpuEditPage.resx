@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="warningsTable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="warningsTable.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -136,7 +139,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="addButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>778, 41</value>
+    <value>607, 41</value>
   </data>
   <data name="addButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 27</value>
@@ -169,7 +172,7 @@
     <value>3, 0</value>
   </data>
   <data name="labelRubric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>850, 38</value>
+    <value>679, 38</value>
   </data>
   <data name="labelRubric.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -188,6 +191,18 @@
   </data>
   <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <metadata name="DeviceColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DeviceColumn.HeaderText" xml:space="preserve">
+    <value>PCI slot number </value>
+  </data>
+  <data name="DeviceColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="DeviceColumn.Width" type="System.Int32, mscorlib">
+    <value>101</value>
   </data>
   <metadata name="NameColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -208,7 +223,7 @@
     <value>50</value>
   </data>
   <data name="VGPUsPerGPUColumn.Width" type="System.Int32, mscorlib">
-    <value>154</value>
+    <value>124</value>
   </data>
   <metadata name="MaxResolutionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -220,7 +235,7 @@
     <value>50</value>
   </data>
   <data name="MaxResolutionColumn.Width" type="System.Int32, mscorlib">
-    <value>113</value>
+    <value>91</value>
   </data>
   <metadata name="MaxDisplaysColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -230,6 +245,9 @@
   </data>
   <data name="MaxDisplaysColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
+  </data>
+  <data name="MaxDisplaysColumn.Width" type="System.Int32, mscorlib">
+    <value>80</value>
   </data>
   <metadata name="VideoRAMColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -241,7 +259,7 @@
     <value>50</value>
   </data>
   <data name="VideoRAMColumn.Width" type="System.Int32, mscorlib">
-    <value>90</value>
+    <value>72</value>
   </data>
   <data name="gpuGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -253,7 +271,7 @@
     <value>3, 41</value>
   </data>
   <data name="gpuGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>769, 300</value>
+    <value>598, 199</value>
   </data>
   <data name="gpuGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -277,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="deleteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>778, 74</value>
+    <value>607, 74</value>
   </data>
   <data name="deleteButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 27</value>
@@ -310,7 +328,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>856, 562</value>
+    <value>685, 450</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -328,7 +346,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="addButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="gpuGrid" Row="1" RowSpan="2" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="warningsTable" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="deleteButton" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="addButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="gpuGrid" Row="1" RowSpan="2" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="warningsTable" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="deleteButton" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,172,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="imgRDP.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -340,7 +358,7 @@
     <value />
   </data>
   <data name="imgRDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 33</value>
+    <value>3, 29</value>
   </data>
   <data name="imgRDP.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
@@ -373,7 +391,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelRDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 33</value>
+    <value>29, 29</value>
   </data>
   <data name="labelRDP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -382,7 +400,7 @@
     <value>586, 999</value>
   </data>
   <data name="labelRDP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 51</value>
+    <value>586, 39</value>
   </data>
   <data name="labelRDP.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -412,7 +430,7 @@
     <value />
   </data>
   <data name="imgNeedDriver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 97</value>
+    <value>3, 81</value>
   </data>
   <data name="imgNeedDriver.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
@@ -442,13 +460,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelNeedDriver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 97</value>
+    <value>29, 81</value>
   </data>
   <data name="labelNeedDriver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
   <data name="labelNeedDriver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>818, 17</value>
+    <value>647, 13</value>
   </data>
   <data name="labelNeedDriver.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -478,7 +496,7 @@
     <value />
   </data>
   <data name="imgNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 127</value>
+    <value>3, 107</value>
   </data>
   <data name="imgNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
@@ -511,13 +529,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 127</value>
+    <value>29, 107</value>
   </data>
   <data name="labelNeedGpu.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
   <data name="labelNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>818, 17</value>
+    <value>647, 13</value>
   </data>
   <data name="labelNeedGpu.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -550,7 +568,7 @@
     <value />
   </data>
   <data name="imgStopVM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 157</value>
+    <value>3, 133</value>
   </data>
   <data name="imgStopVM.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
@@ -583,7 +601,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelStopVM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 157</value>
+    <value>29, 133</value>
   </data>
   <data name="labelStopVM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -592,7 +610,7 @@
     <value>584, 999</value>
   </data>
   <data name="labelStopVM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 17</value>
+    <value>584, 13</value>
   </data>
   <data name="labelStopVM.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -625,7 +643,7 @@
     <value />
   </data>
   <data name="imgHA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 187</value>
+    <value>3, 159</value>
   </data>
   <data name="imgHA.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
@@ -658,7 +676,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelHA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 187</value>
+    <value>29, 159</value>
   </data>
   <data name="labelHA.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -667,7 +685,7 @@
     <value>584, 999</value>
   </data>
   <data name="labelHA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 17</value>
+    <value>584, 13</value>
   </data>
   <data name="labelHA.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -727,7 +745,7 @@
     <value>3, 3, 3, 10</value>
   </data>
   <data name="labelExperimental.Size" type="System.Drawing.Size, System.Drawing">
-    <value>818, 17</value>
+    <value>647, 13</value>
   </data>
   <data name="labelExperimental.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -754,13 +772,16 @@
     <value>Fill</value>
   </data>
   <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 347</value>
+    <value>3, 246</value>
+  </data>
+  <data name="warningsTable.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 150</value>
   </data>
   <data name="warningsTable.RowCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="warningsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>850, 212</value>
+    <value>679, 201</value>
   </data>
   <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -784,13 +805,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>856, 562</value>
+    <value>685, 450</value>
+  </data>
+  <data name="&gt;&gt;DeviceColumn.Name" xml:space="preserve">
+    <value>DeviceColumn</value>
+  </data>
+  <data name="&gt;&gt;DeviceColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NameColumn.Name" xml:space="preserve">
     <value>NameColumn</value>

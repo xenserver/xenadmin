@@ -48,7 +48,7 @@ namespace XenAdmin.SettingsPanels
     public partial class GpuEditPage : XenTabPage, IEditPage
     {
         public VM vm;
-        private List<GpuTuple> currentGpuTuples = new List<GpuTuple>();
+        private List<VGPU> currentGpus = new List<VGPU>();
         private GPU_group[] gpu_groups;
         private bool gpusAvailable;
 
@@ -63,26 +63,12 @@ namespace XenAdmin.SettingsPanels
                     false;
         }
 
-        public GPU_group GpuGroup 
+        public List<VGPU> VGpus
         {
             get
             {
-                var tuples = gpuGrid.Rows.Cast<object>().Select(row => row as VGpuDetailRow).Select(vGpuRow => vGpuRow?.GpuTuple).Where(tuple => tuple != null).ToList();
-                GpuTuple firstTuple = tuples.FirstOrDefault();
-                return firstTuple == null ? null : firstTuple.GpuGroup; // !!! temporary solution
-            }
-        }
-
-        public VGPU_type VgpuType
-        {
-            get
-            {
-                var tuples = gpuGrid.Rows.Cast<object>().Select(row => row as VGpuDetailRow).Select(vGpuRow => vGpuRow?.GpuTuple).Where(tuple => tuple != null).ToList();
-                GpuTuple firstTuple = tuples.FirstOrDefault();
-                if (firstTuple == null || firstTuple.VgpuTypes == null || firstTuple.VgpuTypes.Length == 0)
-                    return null;
-
-                return firstTuple.VgpuTypes[0]; // !!! temporary solution
+                return gpuGrid.Rows.Cast<object>().Select(row => row as VGpuDetailRow)
+                    .Select(vGpuRow => vGpuRow?.VGpu).Where(vGpu => vGpu != null).ToList();
             }
         }
 
@@ -92,7 +78,7 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
-            return new GpuAssignAction(vm, GpuGroup, VgpuType);
+            return new GpuAssignAction(vm, VGpus);
         }
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
@@ -109,10 +95,7 @@ namespace XenAdmin.SettingsPanels
             PopulatePage();
         }
 
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
+        public bool ValidToSave => true;
 
         public void ShowLocalValidationMessages()
         {
@@ -122,15 +105,8 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
-        public bool HasChanged
-        {
-            get
-            {
-                var tuples = gpuGrid.Rows.Cast<object>().Select(row => row as VGpuDetailRow).Select(vGpuRow => vGpuRow?.GpuTuple).Where(tuple => tuple != null).ToList();
-                return !tuples.SequenceEqual(currentGpuTuples);
-            }
-        }
-
+        public bool HasChanged => !VGpus.SequenceEqual(currentGpus);
+        
         #region IVerticalTab Members
 
         public string SubText
@@ -141,9 +117,8 @@ namespace XenAdmin.SettingsPanels
 
                 if (gpusAvailable)
                 {
-                    var tuples = gpuGrid.Rows.Cast<object>().Select(row => row as VGpuDetailRow).Select(vGpuRow => vGpuRow?.GpuTuple).Where(tuple => tuple != null).ToList();
-                    if (tuples.Count > 0)
-                        txt = string.Join(",", tuples.Select(t => t.ToString()));
+                    var vGpus = VGpus;
+                    txt = vGpus.Count > 0 ? string.Join(",", vGpus.Select(v => v.VGpuTypeDescription())) : Messages.GPU_NONE;
                 }
 
                 return txt;
@@ -161,20 +136,11 @@ namespace XenAdmin.SettingsPanels
 
         #region XenTabPage overrides
 
-        public override string Text
-        {
-            get { return Messages.GPU; }
-        }
+        public override string Text => Messages.GPU;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_VGPUPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_VGPUPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "GPU"; }
-        }
+        public override string HelpID => "GPU";
 
         public override List<KeyValuePair<string, string>> PageSummary
         {
@@ -191,7 +157,7 @@ namespace XenAdmin.SettingsPanels
         
         public override void PopulatePage()
         {
-            currentGpuTuples.Clear();
+            currentGpus.Clear();
 
             gpu_groups = Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();
             //not showing empty groups
@@ -209,7 +175,7 @@ namespace XenAdmin.SettingsPanels
                                        ? Messages.GPU_RUBRIC_NO_GPUS_SERVER
                                        : Messages.GPU_RUBRIC_NO_GPUS_POOL;
 
-                tableLayoutPanel1.Visible = false;
+                gpuGrid.Visible = addButton.Visible = deleteButton.Visible = false;
                 warningsTable.Visible = false;
             }
         }
@@ -231,30 +197,15 @@ namespace XenAdmin.SettingsPanels
             {
                 foreach(var vGpuRef in vm.VGPUs)
                 {
-                    VGPU vgpu = Connection.Resolve(vGpuRef);
-                    GpuTuple gpuTuple = null;
+                    var vgpu = Connection.Resolve(vGpuRef);
                     if (vgpu != null)
                     {
-                        var vgpuGroup = Connection.Resolve(vgpu.GPU_group);
-
-                        if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu())
-                        {
-                            if (vgpuGroup.HasPassthrough())
-                                gpuTuple = new GpuTuple(vgpuGroup, null, null); //GPU pass-through item
-                        }
-                        else
-                        {
-                            VGPU_type vgpuType = Connection.Resolve(vgpu.type);
-                            gpuTuple = new GpuTuple(vgpuGroup, vgpuType, null);
-                        }
-                    }
-
-                    if (gpuTuple != null)
-                    {
-                        currentGpuTuples.Add(gpuTuple);
-                        gpuGrid.Rows.Add(new VGpuDetailRow(gpuTuple));
+                        currentGpus.Add(vgpu);
+                        gpuGrid.Rows.Add(new VGpuDetailRow(vgpu));
                     }
                 }
+
+                DeviceColumn.Visible = vm.VGPUs.Count > 0;
             }
             finally
             {
@@ -268,8 +219,10 @@ namespace XenAdmin.SettingsPanels
             if (!gpusAvailable)
                 return;
 
+            var vGpus = VGpus;
+
             imgExperimental.Visible = labelExperimental.Visible =
-                VgpuType != null && VgpuType.experimental;
+                vGpus.Count > 0 && vGpus.Any(v => v.IsExperimental());
 
             if (vm.power_state != vm_power_state.Halted)
             {
@@ -300,19 +253,18 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            addButton.Enabled = deleteButton.Enabled = true;
-            var tuples = gpuGrid.Rows.Cast<object>().Select(row => row as VGpuDetailRow).Select(vGpuRow => vGpuRow?.GpuTuple).Where(tuple => tuple != null).ToList();
+            addButton.Enabled = true;
+            deleteButton.Enabled = gpuGrid.SelectedRows.Count > 0;
 
             imgStopVM.Visible = labelStopVM.Visible =
             imgHA.Visible = labelHA.Visible = false;
 
             imgRDP.Visible = labelRDP.Visible =
-                HasChanged && currentGpuTuples.Any(tuple => tuple.GpuGroup == null) &&
-                tuples.Count > 0 && tuples.Any(tuple => !tuple.IsFractionalVgpu);
+                HasChanged && currentGpus.Count == 0 &&
+                vGpus.Count > 0 && vGpus.Any(v => v.IsPassthrough());
 
             imgNeedGpu.Visible = labelNeedGpu.Visible =
-            labelNeedDriver.Visible = imgNeedDriver.Visible =
-                tuples.Count > 0 && tuples.Any(tuple => tuple.GpuGroup != null);
+                labelNeedDriver.Visible = imgNeedDriver.Visible = vGpus.Count > 0;
         }
 
         private void warningsTable_SizeChanged(object sender, EventArgs e)
@@ -326,6 +278,17 @@ namespace XenAdmin.SettingsPanels
         private void addButton_Click(object sender, EventArgs e)
         {
             // to do: add code for adding vGPU
+            var tuple = SelectATuple();
+            
+            VGPU_type type = tuple.VgpuTypes.FirstOrDefault() ?? vm.Connection.ResolveAll(tuple.GpuGroup.supported_VGPU_types).FirstOrDefault(t => t.IsPassthrough());
+            if (type == null)
+                return;
+
+            var vGpu = new VGPU();
+            vGpu.GPU_group = new XenRef<GPU_group>(tuple.GpuGroup.opaque_ref);
+            vGpu.type = new XenRef<VGPU_type>(type.opaque_ref);
+            vGpu.Connection = vm.Connection;
+            gpuGrid.Rows.Add(new VGpuDetailRow(vGpu));
             warningsTable.SuspendLayout();
             ShowHideWarnings();
             warningsTable.ResumeLayout();
@@ -333,38 +296,91 @@ namespace XenAdmin.SettingsPanels
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            // to do: add code for deleting vGPU
+            if (gpuGrid.SelectedRows.Count == 0)
+                return;
+
+            gpuGrid.Rows.Remove(gpuGrid.SelectedRows[0]);
             warningsTable.SuspendLayout();
             ShowHideWarnings();
             warningsTable.ResumeLayout();
+        }
+
+        /// <summary>
+        /// temporaty function. this will be replaced with the Add vGPU dialog
+        /// </summary>
+        /// <returns></returns>
+        private GpuTuple SelectATuple()
+        {
+            var tuples = new List<GpuTuple>();
+
+            Array.Sort(gpu_groups);
+            foreach (GPU_group gpu_group in gpu_groups)
+            {
+                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu())
+                {
+                    if (gpu_group.HasPassthrough())
+                        tuples.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
+                }
+                else
+                {
+                    var enabledTypes = Connection.ResolveAll(gpu_group.enabled_VGPU_types);
+                    var allTypes = Connection.ResolveAll(gpu_group.supported_VGPU_types);
+
+                    var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
+
+                    if (gpu_group.HasVGpu())
+                    {
+                        allTypes.Sort();
+                        allTypes.Reverse();
+                        tuples.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
+                    }
+
+                    foreach (var vgpuType in allTypes)
+                        tuples.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
+                }
+            }
+
+            var fractionalVGpu = tuples.FirstOrDefault(t => t.IsVgpuSubitem && !t.IsNotEnabledVgpu && t.IsFractionalVgpu);
+            if (fractionalVGpu != null)
+                return fractionalVGpu;
+            return tuples.FirstOrDefault(t => !t.IsNotEnabledVgpu && !t.IsGpuHeaderItem);
         }
     }
 
     public class VGpuDetailRow : DataGridViewExRow
     {
+        private readonly DataGridViewTextBoxCell deviceColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell nameColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell vGpusPerGpuColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell maxResolutionColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell maxDisplaysColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell videoRamColumn = new DataGridViewTextBoxCell();
 
-        public GpuTuple GpuTuple { get; }
+        public VGPU VGpu { get; }
 
-        public VGpuDetailRow(GpuTuple gpuTuple)
+        public VGpuDetailRow(VGPU vGpu)
         {
-            GpuTuple = gpuTuple;
+            VGpu = vGpu;
 
             SetCells();
-            Cells.AddRange(nameColumn, vGpusPerGpuColumn, maxResolutionColumn, maxDisplaysColumn, videoRamColumn);
+            Cells.AddRange(deviceColumn, nameColumn, vGpusPerGpuColumn, maxResolutionColumn, maxDisplaysColumn, videoRamColumn);
         }
 
         private void SetCells()
         {
-            var vGpuType = GpuTuple.VgpuTypes[0];
+            if (int.TryParse(VGpu.device, out var device) && device != 0)
+                deviceColumn.Value = device;
+            else
+                deviceColumn.Value = Messages.HYPHEN;
+
+            var vGpuType = VGpu.Connection.Resolve(VGpu.type);
+            var gpuGroup = VGpu.Connection.Resolve(VGpu.GPU_group);
 
             bool isPassThru = vGpuType.IsPassthrough();
 
-            nameColumn.Value = isPassThru ? Messages.VGPU_PASSTHRU_TOSTRING : vGpuType.model_name;
+            nameColumn.Value = isPassThru 
+                ? gpuGroup.HasVGpu() ? Messages.VGPU_PASSTHRU_TOSTRING : gpuGroup.Name()
+                : vGpuType.model_name;
 
             if (!isPassThru)
                 vGpusPerGpuColumn.Value = vGpuType.Capacity();

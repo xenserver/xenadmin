@@ -521,8 +521,7 @@ namespace XenAdmin.Dialogs
                 VMHAEditPage.StartNtolUpdate();
                 if (GpuEditPage != null)
                 {
-                    VMHAEditPage.GpuGroup = GpuEditPage.GpuGroup;
-                    VMHAEditPage.VgpuType = GpuEditPage.VgpuType;
+                    VMHAEditPage.VGpus = GpuEditPage.VGpus;
                     VMHAEditPage.RefillPrioritiesComboBox();
                 }
                 return;

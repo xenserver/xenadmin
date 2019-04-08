@@ -50,6 +50,7 @@
             this.addButton = new System.Windows.Forms.Button();
             this.labelRubric = new System.Windows.Forms.Label();
             this.gpuGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.DeviceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VGPUsPerGPUColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxResolutionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -188,6 +189,7 @@
             this.gpuGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.gpuGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gpuGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DeviceColumn,
             this.NameColumn,
             this.VGPUsPerGPUColumn,
             this.MaxResolutionColumn,
@@ -198,6 +200,14 @@
             this.gpuGrid.ReadOnly = true;
             this.gpuGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.tableLayoutPanel1.SetRowSpan(this.gpuGrid, 2);
+            // 
+            // DeviceColumn
+            // 
+            this.DeviceColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.DeviceColumn, "DeviceColumn");
+            this.DeviceColumn.Name = "DeviceColumn";
+            this.DeviceColumn.ReadOnly = true;
+            this.DeviceColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // NameColumn
             // 
@@ -298,6 +308,7 @@
         private Controls.DataGridViewEx.DataGridViewEx gpuGrid;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DeviceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn VGPUsPerGPUColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxResolutionColumn;
