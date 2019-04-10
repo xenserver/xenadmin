@@ -247,6 +247,12 @@
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithMoreInfo.cs" />
+    <Compile Include="Dialogs\AddVGPUDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddVGPUDialog.Designer.cs">
+      <DependentUpon>AddVGPUDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\AttachUsbDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1593,6 +1599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddVGPUDialog.resx">
+      <DependentUpon>AddVGPUDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AttachUsbDialog.ja.resx">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
