@@ -39,6 +39,7 @@ using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAdmin.Properties;
 using XenAPI;
 
@@ -278,12 +279,17 @@ namespace XenAdmin.SettingsPanels
         private void addButton_Click(object sender, EventArgs e)
         {
             // to do: add code for adding vGPU
-            var tuple = SelectATuple();
-            
-            VGPU_type type = tuple.VgpuTypes.FirstOrDefault() ?? vm.Connection.ResolveAll(tuple.GpuGroup.supported_VGPU_types).FirstOrDefault(t => t.IsPassthrough());
-            if (type == null)
+
+            AddVGPUDialog dialog = new AddVGPUDialog(vm, VGpus);
+            //dialog.ShowDialog(Program.MainWindow);
+            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
+            //var tuple = SelectATuple();
+            var tuple = dialog.selectedTuple;
+            if (tuple == null)
+                return;
+            VGPU_type type = tuple.VgpuTypes[0];
             var vGpu = new VGPU();
             vGpu.GPU_group = new XenRef<GPU_group>(tuple.GpuGroup.opaque_ref);
             vGpu.type = new XenRef<VGPU_type>(type.opaque_ref);
@@ -292,6 +298,7 @@ namespace XenAdmin.SettingsPanels
             warningsTable.SuspendLayout();
             ShowHideWarnings();
             warningsTable.ResumeLayout();
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)

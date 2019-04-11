@@ -20,10 +20,13 @@ namespace XenAdmin.Dialogs
     {
         private VM _vm;
         private GPU_group[] gpu_groups;
+        private List<VGPU> existingVGpus;
+        public GpuTuple selectedTuple { private set; get; }
 
-        public AddVGPUDialog(VM vm)
+        public AddVGPUDialog(VM vm, List<VGPU> VGpus)
         {
             _vm = vm;
+            existingVGpus = VGpus;
             InitializeComponent();
             BuildList();
         }
@@ -71,21 +74,41 @@ namespace XenAdmin.Dialogs
                         comboBoxTypes.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
                     }
 
+                    List<string> commonTypes = new List<string>();
+                    foreach (VGPU_type vgpuType in allTypes)
+                        commonTypes.Add(vgpuType.model_name);
+                    
+                        
+                    foreach (VGPU eVgpu in existingVGpus)
+                    {
+                        VGPU_type etype = _vm.Connection.Resolve(eVgpu.type);
+                        List<string> tmpCommonTypes = new List<string>();
+                        foreach (string compatible_type in etype.compatible_types_in_vm)
+                            if (commonTypes.Contains(compatible_type))
+                                tmpCommonTypes.Add(compatible_type);
+                        commonTypes = tmpCommonTypes;
+                    }
                     foreach (var vgpuType in allTypes)
-                        comboBoxTypes.Items.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
+                        if (commonTypes.Contains(vgpuType.model_name))
+                            comboBoxTypes.Items.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
 
                 }
             }
+            comboBoxTypes.SelectedItem = noneItem;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-
+            GpuTuple tuple = comboBoxTypes.SelectedItem as GpuTuple;
+            if (tuple == null || tuple.VgpuTypes == null || tuple.VgpuTypes.Length == 0)
+                selectedTuple = null;
+            else
+                selectedTuple = tuple;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
