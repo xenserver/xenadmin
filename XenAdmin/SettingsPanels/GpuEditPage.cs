@@ -254,7 +254,7 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            addButton.Enabled = true;
+            addButton.Enabled = !VGpus.Any(v => (Connection.Resolve(v.type)).compatible_types_in_vm.Count() == 0);
             deleteButton.Enabled = gpuGrid.SelectedRows.Count > 0;
 
             imgStopVM.Visible = labelStopVM.Visible =
@@ -278,17 +278,14 @@ namespace XenAdmin.SettingsPanels
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            // to do: add code for adding vGPU
-
             AddVGPUDialog dialog = new AddVGPUDialog(vm, VGpus);
-            //dialog.ShowDialog(Program.MainWindow);
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
-            //var tuple = SelectATuple();
-            var tuple = dialog.selectedTuple;
+            var tuple = dialog.SelectedTuple;
             if (tuple == null)
                 return;
+
             VGPU_type type = tuple.VgpuTypes[0];
             var vGpu = new VGPU();
             vGpu.GPU_group = new XenRef<GPU_group>(tuple.GpuGroup.opaque_ref);
@@ -312,46 +309,6 @@ namespace XenAdmin.SettingsPanels
             warningsTable.ResumeLayout();
         }
 
-        /// <summary>
-        /// temporaty function. this will be replaced with the Add vGPU dialog
-        /// </summary>
-        /// <returns></returns>
-        private GpuTuple SelectATuple()
-        {
-            var tuples = new List<GpuTuple>();
-
-            Array.Sort(gpu_groups);
-            foreach (GPU_group gpu_group in gpu_groups)
-            {
-                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu())
-                {
-                    if (gpu_group.HasPassthrough())
-                        tuples.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
-                }
-                else
-                {
-                    var enabledTypes = Connection.ResolveAll(gpu_group.enabled_VGPU_types);
-                    var allTypes = Connection.ResolveAll(gpu_group.supported_VGPU_types);
-
-                    var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
-
-                    if (gpu_group.HasVGpu())
-                    {
-                        allTypes.Sort();
-                        allTypes.Reverse();
-                        tuples.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
-                    }
-
-                    foreach (var vgpuType in allTypes)
-                        tuples.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
-                }
-            }
-
-            var fractionalVGpu = tuples.FirstOrDefault(t => t.IsVgpuSubitem && !t.IsNotEnabledVgpu && t.IsFractionalVgpu);
-            if (fractionalVGpu != null)
-                return fractionalVGpu;
-            return tuples.FirstOrDefault(t => !t.IsNotEnabledVgpu && !t.IsGpuHeaderItem);
-        }
     }
 
     public class VGpuDetailRow : DataGridViewExRow

@@ -1600,7 +1600,13 @@
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddVGPUDialog.ja.resx">
+      <DependentUpon>AddVGPUDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddVGPUDialog.resx">
+      <DependentUpon>AddVGPUDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddVGPUDialog.zh-CN.resx">
       <DependentUpon>AddVGPUDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AttachUsbDialog.ja.resx">
