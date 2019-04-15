@@ -41,16 +41,14 @@ namespace XenAdmin.Actions
 {
     public class GpuAssignAction : PureAsyncAction
     {
-        VM vm;
-        GPU_group gpu_group;
-        private VGPU_type vgpuType;
+        private readonly VM vm;
+        private readonly List<VGPU> vGpus;
 
-        public GpuAssignAction(VM vm, GPU_group gpu_group, VGPU_type vgpuType)
+        public GpuAssignAction(VM vm, List<VGPU> vGpus)
             : base(vm.Connection, "Set GPU", true)
         {
             this.vm = vm;
-            this.gpu_group = gpu_group;
-            this.vgpuType = vgpuType;
+            this.vGpus = vGpus;
         }
 
         protected override void Run()
@@ -59,18 +57,31 @@ namespace XenAdmin.Actions
             foreach (VGPU vgpu in vm.Connection.ResolveAll(vm.VGPUs))
                 VGPU.destroy(Session, vgpu.opaque_ref);
 
-            if (gpu_group == null)  // The VM doesn't want a VGPU
+            if (vGpus == null || vGpus.Count == 0)  // The VM doesn't want a VGPU
                 return;
 
-            // Add the new VGPU
-            string device = "0";  // fixed at the moment, see PR-1060
-            Dictionary<string, string> other_config = new Dictionary<string,string>();
+            // Add the new VGPUs
+            int index = 0;
+            foreach (var vGpu in vGpus)
+            {
+                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type), index + 11);
+                index++;
+            }
+        }
 
-            if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu) || vgpuType == null)
-                VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config);
+        private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, int device)
+        {
+            if (gpuGroup == null)
+                return;
+
+            //string device = "0";  // fixed at the moment, see PR-1060
+            Dictionary<string, string> other_config = new Dictionary<string, string>();
+
+            if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu) || vGpuType == null)
+                VGPU.async_create(Session, vm.opaque_ref, gpuGroup.opaque_ref, device.ToString(), other_config);
             else
-                VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device,
-                                  other_config, vgpuType.opaque_ref);
+                VGPU.async_create(Session, vm.opaque_ref, gpuGroup.opaque_ref, device.ToString(),
+                    other_config, vGpuType.opaque_ref);
         }
     }
 }

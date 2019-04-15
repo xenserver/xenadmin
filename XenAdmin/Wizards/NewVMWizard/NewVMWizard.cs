@@ -182,8 +182,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_8_Finish.StartImmediately,
                                         VMOperationCommand.WarningDialogHAInvalidConfig,
                                         VMOperationCommand.StartDiagnosisForm,
-                                        gpuCapability ? pageVgpu.GpuGroup : null,
-                                        gpuCapability ? pageVgpu.VgpuType : null,
+                                        gpuCapability ? pageVgpu.VGpus : null,
                                         pageVgpu.HasChanged,
                                         page_5_CpuMem.SelectedCoresPerSocket,
                                         page_CloudConfigParameters.ConfigDriveTemplateText);

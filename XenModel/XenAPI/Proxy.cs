@@ -7376,6 +7376,10 @@ namespace XenAPI
         Response<string>
         vgpu_type_get_max_heads(string session, string _vgpu_type);
 
+        [XmlRpcMethod("VGPU_type.get_multi_vgpu_supported")]
+        Response<string>
+        vgpu_type_get_multi_vgpu_supported(string session, string _vgpu_type);
+
         [XmlRpcMethod("VGPU_type.get_max_resolution_x")]
         Response<string>
         vgpu_type_get_max_resolution_x(string session, string _vgpu_type);
@@ -7415,6 +7419,14 @@ namespace XenAPI
         [XmlRpcMethod("VGPU_type.get_experimental")]
         Response<bool>
         vgpu_type_get_experimental(string session, string _vgpu_type);
+
+        [XmlRpcMethod("VGPU_type.get_compatible_types_in_vm")]
+        Response<string []>
+        vgpu_type_get_compatible_types_in_vm(string session, string _vgpu_type);
+
+        [XmlRpcMethod("VGPU_type.get_compatible_types_on_pgpu")]
+        Response<string []>
+        vgpu_type_get_compatible_types_on_pgpu(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_all")]
         Response<string []>
@@ -9160,6 +9172,7 @@ namespace XenAPI
         public string model_name;
         public string framebuffer_size;
         public string max_heads;
+        public string multi_vgpu_supported;
         public string max_resolution_x;
         public string max_resolution_y;
         public string [] supported_on_PGPUs;
@@ -9170,6 +9183,8 @@ namespace XenAPI
         public string implementation;
         public string identifier;
         public bool experimental;
+        public string [] compatible_types_in_vm;
+        public string [] compatible_types_on_pgpu;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
