@@ -254,7 +254,7 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            addButton.Enabled = !VGpus.Any(v => (Connection.Resolve(v.type)).compatible_types_in_vm.Count() == 0);
+            addButton.Enabled = VGpus.All(v => { var x = (Connection.Resolve(v.type)); return x != null && x.compatible_types_in_vm.Count() > 0; });
             deleteButton.Enabled = gpuGrid.SelectedRows.Count > 0;
 
             imgStopVM.Visible = labelStopVM.Visible =
@@ -278,24 +278,25 @@ namespace XenAdmin.SettingsPanels
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            AddVGPUDialog dialog = new AddVGPUDialog(vm, VGpus);
-            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                return;
+            using (var dialog = new AddVGPUDialog(vm, VGpus))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var tuple = dialog.SelectedTuple;
+                    if (tuple == null)
+                        return;
 
-            var tuple = dialog.SelectedTuple;
-            if (tuple == null)
-                return;
-
-            VGPU_type type = tuple.VgpuTypes[0];
-            var vGpu = new VGPU();
-            vGpu.GPU_group = new XenRef<GPU_group>(tuple.GpuGroup.opaque_ref);
-            vGpu.type = new XenRef<VGPU_type>(type.opaque_ref);
-            vGpu.Connection = vm.Connection;
-            gpuGrid.Rows.Add(new VGpuDetailRow(vGpu));
-            warningsTable.SuspendLayout();
-            ShowHideWarnings();
-            warningsTable.ResumeLayout();
-
+                    VGPU_type type = tuple.VgpuTypes[0];
+                    var vGpu = new VGPU();
+                    vGpu.GPU_group = new XenRef<GPU_group>(tuple.GpuGroup.opaque_ref);
+                    vGpu.type = new XenRef<VGPU_type>(type.opaque_ref);
+                    vGpu.Connection = vm.Connection;
+                    gpuGrid.Rows.Add(new VGpuDetailRow(vGpu));
+                    warningsTable.SuspendLayout();
+                    ShowHideWarnings();
+                    warningsTable.ResumeLayout();
+                }
+            } 
         }
 
         private void deleteButton_Click(object sender, EventArgs e)

@@ -93,8 +93,6 @@ namespace XenAdmin.Dialogs
                     
                 }
             }
-            if (comboBoxTypes.Items.Count == 0)
-                comboBoxTypes.Enabled = false;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
