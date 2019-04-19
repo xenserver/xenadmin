@@ -38,7 +38,15 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class ActionBase
+    public interface IStatus
+    {
+        bool IsCompleted { get; }
+        bool Succeeded { get; }
+        bool Cancelled { get; }
+        bool IsError { get; }
+    }
+
+    public class ActionBase : IStatus
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -315,10 +323,9 @@ namespace XenAdmin.Actions
             }
         }
 
-        public bool Succeeded
-        {
-            get { return this.IsCompleted && this.Exception == null; }
-        }
+        public bool Succeeded => IsCompleted && Exception == null;
+        public bool Cancelled => IsCompleted && !Succeeded && Exception is CancelledException;
+        public bool IsError => IsCompleted && !Succeeded && !(Exception is CancelledException);
 
         public Exception Exception
         {

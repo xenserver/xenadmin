@@ -718,6 +718,8 @@ namespace XenAdmin.Commands
                     items.Add(drItem);
                 }
 
+                items.AddIfEnabled(new LaunchConversionManagerCommand(mainWindow, selection));
+
                 var pool = selection.FirstAsXenObject as Pool;
                 if (pool != null && !pool.IsPoolFullyUpgraded())
                     items.Add(new RollingUpgradeCommand(mainWindow));

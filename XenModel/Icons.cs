@@ -172,7 +172,9 @@ namespace XenAdmin
         Ok,
         Info,
         Warning,
-        Error
+        Error,
         #endregion
+
+        ConversionManager
     }
 }

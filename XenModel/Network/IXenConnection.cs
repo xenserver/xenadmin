@@ -32,6 +32,7 @@
 using System;
 using XenAPI;
 using System.Collections.Generic;
+using System.Net;
 
 
 namespace XenAdmin.Network
@@ -86,6 +87,7 @@ namespace XenAdmin.Network
         string UriScheme { get; }
         string Version { get; set; }
         event EventHandler<EventArgs> XenObjectsUpdated;
+        NetworkCredential NetworkCredential { get; set; }
 
         /// <summary>
         /// Try to logout the given session. This will cause any threads blocking on Event.next() to get

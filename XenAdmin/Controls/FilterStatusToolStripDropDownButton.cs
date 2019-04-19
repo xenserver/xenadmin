@@ -31,9 +31,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
@@ -100,15 +97,12 @@ namespace XenAdmin.Controls
             toolStripMenuItemCancelled.CheckedChanged += Item_CheckedChanged;
         }
 
-        public bool HideByStatus(ActionBase action)
+        public bool HideByStatus(IStatus iStatus)
         {
-            bool cancelled = action.IsCompleted && !action.Succeeded && (action.Exception is CancelledException);
-            bool error = action.IsCompleted && !action.Succeeded && !(action.Exception is CancelledException);
-
-            return !((toolStripMenuItemComplete.Checked && action.Succeeded)
-                || (toolStripMenuItemError.Checked && error)
-                || (toolStripMenuItemInProgress.Checked && !action.IsCompleted)
-                || (toolStripMenuItemCancelled.Checked && cancelled));
+            return !(toolStripMenuItemComplete.Checked && iStatus.Succeeded
+                || toolStripMenuItemError.Checked && iStatus.IsError
+                || toolStripMenuItemInProgress.Checked && !iStatus.IsCompleted
+                || toolStripMenuItemCancelled.Checked && iStatus.Cancelled);
         }
 
         public bool FilterIsOn

@@ -1467,6 +1467,11 @@ namespace XenAPI
             return BoolKey(other_config, "instant");
         }
 
+        public bool IsConversionVM()
+        {
+            return BoolKey(other_config, "conversionvm");
+        }
+
         public override string ToString()
         {
             return name_label;

@@ -2025,6 +2025,12 @@
   <data name="wlbDisconnectToolStripMenuItem.Text" xml:space="preserve">
     <value>Disconnect Workload &amp;Balancing Server</value>
   </data>
+  <data name="conversionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="conversionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Conv&amp;ersion Manager...</value>
+  </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
   </data>
@@ -3938,6 +3944,12 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;conversionToolStripMenuItem.Name" xml:space="preserve">
+    <value>conversionToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;conversionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

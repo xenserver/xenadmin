@@ -277,6 +277,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -922,6 +923,7 @@ namespace XenAdmin
             this.exportResourceReportPoolToolStripMenuItem,
             this.wlbReportsToolStripMenuItem,
             this.wlbDisconnectToolStripMenuItem,
+            this.conversionToolStripMenuItem,
             this.toolStripSeparator9,
             this.changePoolPasswordToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -1886,6 +1888,12 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
+            // conversionToolStripMenuItem
+            // 
+            this.conversionToolStripMenuItem.Command = new XenAdmin.Commands.LaunchConversionManagerCommand();
+            this.conversionToolStripMenuItem.Name = "conversionToolStripMenuItem";
+            resources.ApplyResources(this.conversionToolStripMenuItem, "conversionToolStripMenuItem");
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2155,6 +2163,7 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem disableCbtToolStripMenuItem;
         private System.Windows.Forms.Label LicenseStatusTitleLabel;
         private Controls.GradientPanel.VerticalGradientPanel TitleBackPanel;
+        private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
     }
 
 }

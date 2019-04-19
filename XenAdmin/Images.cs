@@ -30,19 +30,16 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Alerts;
-using XenAdmin.Model;
-using System.Drawing;
-
 using XenAdmin.Core;
+using XenAdmin.Model;
 using XenAdmin.Network;
-using XenAPI;
 using XenAdmin.XenSearch;
-using System.IO;
-using System.Linq;
+using XenAPI;
+
 
 namespace XenAdmin
 {
@@ -185,6 +182,8 @@ namespace XenAdmin
             ImageList16.Images.Add("000_Abort_h32bit_16.png", Properties.Resources._000_Abort_h32bit_16); //Error
             #endregion
 
+            ImageList16.Images.Add("xcm.png", Properties.Resources.xcm);
+
             System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");
 
@@ -200,8 +199,6 @@ namespace XenAdmin
             Icons icon = GetIconFor(connection);
             return ImageArray16[(int)icon];
         }
-
-
 
         public static Image GetImage16For(IXenObject o)
         {
@@ -235,7 +232,36 @@ namespace XenAdmin
             return ImageArray16[(int)icon];
         }
 
+        public static Image GetImageForPercentage(int percent)
+        {
+            return GetImageForPercentage((long)percent);
+        }
 
+        public static Image GetImageForPercentage(long percent)
+        {
+            if (percent < 9)
+                return StaticImages.usagebar_0;
+            if (percent < 18)
+                return StaticImages.usagebar_1;
+            if (percent < 27)
+                return StaticImages.usagebar_2;
+            if (percent < 36)
+                return StaticImages.usagebar_3;
+            if (percent < 45)
+                return StaticImages.usagebar_4;
+            if (percent < 54)
+                return StaticImages.usagebar_5;
+            if (percent < 63)
+                return StaticImages.usagebar_6;
+            if (percent < 72)
+                return StaticImages.usagebar_7;
+            if (percent < 81)
+                return StaticImages.usagebar_8;
+            if (percent < 90)
+                return StaticImages.usagebar_9;
+
+            return StaticImages.usagebar_10;
+        }
 
         public static Icons GetIconFor(IXenObject o)
         {
@@ -449,7 +475,6 @@ namespace XenAdmin
             }
         }
 
-
         public static Icons GetIconFor(Pool pool)
         {
             if (!pool.Connection.IsConnected)
@@ -478,7 +503,6 @@ namespace XenAdmin
         {
             return Icons.VDI;
         }
-
 
         public static Icons GetIconFor(XenAPI.Message.MessageType type)
         {
@@ -524,25 +548,6 @@ namespace XenAdmin
                 default:
                     return Icons.MessageUnknown;
             }
-        }
-
-        public static void GenImageHTML()
-        {
-            // create a writer and open the file
-            TextWriter tw = new StreamWriter("images.htm");
-            tw.WriteLine("<html><head><title>XenCenter Images</title></head>");
-
-            tw.WriteLine("<body><table>");
-
-            foreach (Icons icon in Enum.GetValues(typeof(Icons)))
-            {
-                tw.WriteLine("<tr><td>{0}</td><td><image src='{1}'></td></tr>", icon, ImageList16.Images.Keys[(int)icon]);
-            }
-
-            tw.WriteLine("</table></body></html>");
-
-            // close the stream
-            tw.Close();
         }
 
         public static Icons GetIconFor(PIF pif)
@@ -893,6 +898,8 @@ namespace XenAdmin
             public static Image wizard_background = Properties.Resources.wizard_background;
             public static Image WLB = Properties.Resources.WLB;
             public static Image XS = Properties.Resources.XS;
+            public static Image ConversionManager = Properties.Resources.xcm;
+            public static Image ConversionManager_32 = Properties.Resources.xcm_32x32;
         }
     }
 }
