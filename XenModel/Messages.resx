@@ -4963,7 +4963,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>To access your saved session it is required that you enter the master password when starting [XenCenter]</value>
   </data>
   <data name="ENTER_VALID_QOS" xml:space="preserve">
-    <value>The value for your QoS limit needs to be greater than zero</value>
+    <value>The QoS limit value should be an integer greater than zero</value>
   </data>
   <data name="EQUALLOGICS_MEMBERS" xml:space="preserve">
     <value>Members</value>
@@ -10209,7 +10209,10 @@ Please reconnect the host and try again</value>
     <value>Server '{0}'</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
-    <value>The MAC address entered has already been assigned to the VM: \n {1} \n\n Are you sure you want to continue?</value>
+    <value>The MAC address entered has already been assigned to the VM:
+{1}
+
+Are you sure you want to continue?</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>Duplicate MAC address</value>
@@ -12767,12 +12770,6 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>Virtual Network Device Changes</value>
-  </data>
-  <data name="VIF_LICENSE_RESTRICTION" xml:space="preserve">
-    <value>Upgrade your license to enable QoS settings</value>
-  </data>
-  <data name="VIF_VSWITCH_CONTROLLER" xml:space="preserve">
-    <value>QoS settings should be configured using the vSwitch Controller</value>
   </data>
   <data name="VIRTUALIZATION_OPTIMIZED" xml:space="preserve">
     <value>Optimized (version {0} installed)</value>

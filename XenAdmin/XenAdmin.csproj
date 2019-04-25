@@ -2762,7 +2762,6 @@
     <Compile Include="Alerts\Types\LicenseAlert.cs" />
     <Compile Include="Alerts\Types\IqnAlert.cs" />
     <Compile Include="Commands\ApplyLicenseEditionCommand.cs" />
-    <Compile Include="Commands\BaseVIFCommand.cs" />
     <Compile Include="Commands\Controls\AssignVMGroupToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2771,7 +2770,6 @@
     <Compile Include="Commands\CrossPoolMigrateCommand.cs" />
     <Compile Include="Commands\DestroyHostCommand.cs" />
     <Compile Include="Commands\MigrateVirtualDiskCommand.cs" />
-    <Compile Include="Commands\UpdateVIFCommand.cs" />
     <Compile Include="Actions\OVFActions\ApplianceAction.cs" />
     <Compile Include="Actions\OVFActions\ExportApplianceAction.cs" />
     <Compile Include="Actions\GUIActions\GeneralEditPageAction.cs" />
@@ -3196,7 +3194,6 @@
     <Compile Include="Commands\Controls\MultipleWarningDialog.Designer.cs">
       <DependentUpon>MultipleWarningDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commands\CreateVIFCommand.cs" />
     <Compile Include="Commands\DeactivateVBDCommand.cs" />
     <Compile Include="Commands\DeleteVirtualDiskCommand.cs" />
     <Compile Include="Commands\DestroyBondCommand.cs" />

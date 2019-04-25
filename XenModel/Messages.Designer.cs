@@ -14066,7 +14066,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value for your QoS limit needs to be greater than zero.
+        ///   Looks up a localized string similar to The QoS limit value should be an integer greater than zero.
         /// </summary>
         public static string ENTER_VALID_QOS {
             get {
@@ -29379,7 +29379,10 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM: \n {1} \n\n Are you sure you want to continue?.
+        ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM:
+        ///{1}
+        ///
+        ///Are you sure you want to continue?.
         /// </summary>
         public static string PROBLEM_MAC_ADDRESS_IS_DUPLICATE {
             get {
@@ -36900,24 +36903,6 @@ namespace XenAdmin {
         public static string VIF_HOTPLUG_FAILED_TITLE {
             get {
                 return ResourceManager.GetString("VIF_HOTPLUG_FAILED_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade your license to enable QoS settings.
-        /// </summary>
-        public static string VIF_LICENSE_RESTRICTION {
-            get {
-                return ResourceManager.GetString("VIF_LICENSE_RESTRICTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to QoS settings should be configured using the vSwitch Controller.
-        /// </summary>
-        public static string VIF_VSWITCH_CONTROLLER {
-            get {
-                return ResourceManager.GetString("VIF_VSWITCH_CONTROLLER", resourceCulture);
             }
         }
         
