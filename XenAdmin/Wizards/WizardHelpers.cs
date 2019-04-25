@@ -33,6 +33,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using DiscUtils.Iso9660;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
 
@@ -158,6 +159,26 @@ namespace XenAdmin.Wizards
                 return false;
             }
 
+            if (fileName.ToLowerInvariant().EndsWith(".iso"))
+            {
+                bool isValidIso;
+                try
+                {
+                    using (var isoStream = File.OpenRead(fileName))
+                    using (var cd = new CDReader(isoStream, true))
+                        isValidIso = cd.Root.Exists;
+                }
+                catch
+                {
+                    isValidIso = false;
+                }
+
+                if (!isValidIso)
+                {
+                    failureReason = Messages.UPDATES_WIZARD_INVALID_ISO_FILE;
+                    return false;
+                }
+            }
             failureReason = null;
             return true;
         }

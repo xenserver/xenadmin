@@ -35391,6 +35391,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected ISO file is corrupt or contains invalid data..
+        /// </summary>
+        public static string UPDATES_WIZARD_INVALID_ISO_FILE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_INVALID_ISO_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}: VM &apos;{1}&apos; has a local CD/DVD in its drive..
         /// </summary>
         public static string UPDATES_WIZARD_LOCAL_CD {
