@@ -34,6 +34,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.warningsTable = new System.Windows.Forms.TableLayoutPanel();
+            this.labelMulti = new System.Windows.Forms.Label();
+            this.imgMulti = new System.Windows.Forms.PictureBox();
             this.imgRDP = new System.Windows.Forms.PictureBox();
             this.labelRDP = new System.Windows.Forms.Label();
             this.imgNeedDriver = new System.Windows.Forms.PictureBox();
@@ -50,14 +52,15 @@
             this.addButton = new System.Windows.Forms.Button();
             this.labelRubric = new System.Windows.Forms.Label();
             this.gpuGrid = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.DeviceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VGPUsPerGPUColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxResolutionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxDisplaysColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VideoRAMColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.warningsTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgMulti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgRDP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedDriver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedGpu)).BeginInit();
@@ -72,6 +75,8 @@
             // 
             resources.ApplyResources(this.warningsTable, "warningsTable");
             this.tableLayoutPanel1.SetColumnSpan(this.warningsTable, 2);
+            this.warningsTable.Controls.Add(this.labelMulti, 1, 6);
+            this.warningsTable.Controls.Add(this.imgMulti, 0, 6);
             this.warningsTable.Controls.Add(this.imgRDP, 0, 1);
             this.warningsTable.Controls.Add(this.labelRDP, 1, 1);
             this.warningsTable.Controls.Add(this.imgNeedDriver, 0, 2);
@@ -86,6 +91,18 @@
             this.warningsTable.Controls.Add(this.labelExperimental, 1, 0);
             this.warningsTable.Name = "warningsTable";
             this.warningsTable.SizeChanged += new System.EventHandler(this.warningsTable_SizeChanged);
+            // 
+            // labelMulti
+            // 
+            resources.ApplyResources(this.labelMulti, "labelMulti");
+            this.labelMulti.Name = "labelMulti";
+            // 
+            // imgMulti
+            // 
+            resources.ApplyResources(this.imgMulti, "imgMulti");
+            this.imgMulti.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.imgMulti.Name = "imgMulti";
+            this.imgMulti.TabStop = false;
             // 
             // imgRDP
             // 
@@ -201,6 +218,13 @@
             this.gpuGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.tableLayoutPanel1.SetRowSpan(this.gpuGrid, 2);
             // 
+            // deleteButton
+            // 
+            resources.ApplyResources(this.deleteButton, "deleteButton");
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // DeviceColumn
             // 
             this.DeviceColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -211,6 +235,7 @@
             // 
             // NameColumn
             // 
+            this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.NameColumn, "NameColumn");
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
@@ -219,7 +244,7 @@
             // VGPUsPerGPUColumn
             // 
             this.VGPUsPerGPUColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.VGPUsPerGPUColumn.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.VGPUsPerGPUColumn, "VGPUsPerGPUColumn");
             this.VGPUsPerGPUColumn.Name = "VGPUsPerGPUColumn";
@@ -230,7 +255,7 @@
             // MaxResolutionColumn
             // 
             this.MaxResolutionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.MaxResolutionColumn.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.MaxResolutionColumn, "MaxResolutionColumn");
             this.MaxResolutionColumn.Name = "MaxResolutionColumn";
@@ -241,7 +266,7 @@
             // MaxDisplaysColumn
             // 
             this.MaxDisplaysColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.MaxDisplaysColumn.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.MaxDisplaysColumn, "MaxDisplaysColumn");
             this.MaxDisplaysColumn.Name = "MaxDisplaysColumn";
@@ -252,20 +277,13 @@
             // VideoRAMColumn
             // 
             this.VideoRAMColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.VideoRAMColumn.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.VideoRAMColumn, "VideoRAMColumn");
             this.VideoRAMColumn.Name = "VideoRAMColumn";
             this.VideoRAMColumn.ReadOnly = true;
             this.VideoRAMColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.VideoRAMColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // deleteButton
-            // 
-            resources.ApplyResources(this.deleteButton, "deleteButton");
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // GpuEditPage
             // 
@@ -275,6 +293,7 @@
             this.Name = "GpuEditPage";
             this.warningsTable.ResumeLayout(false);
             this.warningsTable.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgMulti)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgRDP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedDriver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedGpu)).EndInit();
@@ -308,6 +327,8 @@
         private Controls.DataGridViewEx.DataGridViewEx gpuGrid;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Label labelMulti;
+        private System.Windows.Forms.PictureBox imgMulti;
         private System.Windows.Forms.DataGridViewTextBoxColumn DeviceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn VGPUsPerGPUColumn;
