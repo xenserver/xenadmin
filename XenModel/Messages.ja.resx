@@ -2444,13 +2444,13 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>実行中の VM '{0}' により使用されているため、このシステム ディスクを削除できません。</value>
   </data>
   <data name="CANNOT_DELETE_ISO_GENERIC" xml:space="preserve">
-    <value>この ISO ストレージを削除できません。SR でこの操作がサポートされていることを確認して後で再試行してください。</value>
+    <value>この ISO ストレージを削除できません。SR でこの操作がサポートされていることを確認して、再試行してください。</value>
   </data>
   <data name="CANNOT_DELETE_ISO_IN_USE" xml:space="preserve">
     <value>この ISO ストレージは使用中であり削除できません。</value>
   </data>
   <data name="CANNOT_DELETE_SNAPSHOT_GENERIC" xml:space="preserve">
-    <value>このスナップショットを削除できません。SR でこの操作がサポートされていることを確認して後で再試行してください。</value>
+    <value>このスナップショットを削除できません。SR でこの操作がサポートされていることを確認して、再試行してください。</value>
   </data>
   <data name="CANNOT_DELETE_SNAPSHOT_IN_USE" xml:space="preserve">
     <value>このスナップショットは使用中であり削除できません。</value>
@@ -2471,7 +2471,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>一時停止中の VM の仮想ディスクは削除できません。このディスクは一時停止中の VM '{0}' により使用されています。</value>
   </data>
   <data name="CANNOT_DELETE_VD_GENERIC" xml:space="preserve">
-    <value>この仮想ディスクを削除できません。SR でこの操作がサポートされていることを確認して後で再試行してください。</value>
+    <value>この仮想ディスクを削除できません。SR でこの操作がサポートされていることを確認して、再試行してください。</value>
   </data>
   <data name="CANNOT_DELETE_VD_IN_USE" xml:space="preserve">
     <value>この仮想ディスクは使用中であり削除できません。</value>
@@ -4968,7 +4968,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>保存したセッションにアクセスするには、[XenCenter] の起動時にマスター パスワードを入力する必要があります</value>
   </data>
   <data name="ENTER_VALID_QOS" xml:space="preserve">
-    <value>QoS 制限に、0 よりも大きな値を指定してください</value>
+    <value>QoS 制限値は、0 よりも大きな整数を指定してください</value>
   </data>
   <data name="EQUALLOGICS_MEMBERS" xml:space="preserve">
     <value>メンバー</value>
@@ -8096,9 +8096,6 @@ SCSI ID: {2}
   <data name="MIGRATE_PLEASE_EJECT_YOUR_CD" xml:space="preserve">
     <value>CD をイジェクトしてください</value>
   </data>
-  <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>VDI ライブ マイグレーション機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 </value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
     <value>現在、この VM を移行することはできません</value>
   </data>
@@ -10213,7 +10210,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>サーバー '{0}'</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
-    <value>この MAC アドレスは、以下の仮想マシンに割り当て済みです。\n {1} \n\n続行しますか?</value>
+    <value>この MAC アドレスは、次の仮想マシンに割り当て済みです:
+ {1} 
+
+続行しますか?</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>MAC アドレスの重複</value>
@@ -12509,6 +12509,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
     <value>高可用性機能を使用するには、サーバー ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。</value>
   </data>
+  <data name="UPSELL_BLURB_MIGRATE_VDI" xml:space="preserve">
+    <value>VDI ライブ マイグレーション機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 </value>
+  </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
     <value>パフォーマンス レポート機能を使用するには、サーバー ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。</value>
   </data>
@@ -12769,12 +12772,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>仮想ネットワークへの変更</value>
   </data>
-  <data name="VIF_LICENSE_RESTRICTION" xml:space="preserve">
-    <value>QoS 設定を有効にするにはライセンスをアップグレードする必要があります</value>
-  </data>
-  <data name="VIF_VSWITCH_CONTROLLER" xml:space="preserve">
-    <value>QoS の設定は、vSwitch コントローラーを使用して構成されます</value>
-  </data>
   <data name="VIRTUALIZATION_OPTIMIZED" xml:space="preserve">
     <value>最適化済み (Version {0} インストール済み)</value>
   </data>
@@ -12867,9 +12864,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
     <value>無効または不完全なスケジュール</value>
-  </data>
-  <data name="VMSS_MAIN_MENU" xml:space="preserve">
-    <value>VM スナップショット スケジュール(&amp;O)...</value>
   </data>
   <data name="VMSS_MAIN_MENU" xml:space="preserve">
     <value>VM スナップショット スケジュール(&amp;O)...</value>
