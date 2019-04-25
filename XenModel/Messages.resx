@@ -12215,6 +12215,9 @@ Check your settings and try again.</value>
 
 Please check your settings and try again.</value>
   </data>
+  <data name="UPDATES_WIZARD_INVALID_ISO_FILE" xml:space="preserve">
+    <value>The selected ISO file is corrupt or contains invalid data.</value>
+  </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' has a local CD/DVD in its drive.</value>
   </data>
