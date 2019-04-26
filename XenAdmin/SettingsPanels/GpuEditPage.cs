@@ -206,7 +206,7 @@ namespace XenAdmin.SettingsPanels
                     }
                 }
 
-                DeviceColumn.Visible = vm.VGPUs.Count > 0;
+                DeviceColumn.Visible = vm.VGPUs.Count > 0 && Helpers.PlymouthOrGreater(Connection);
             }
             finally
             {
@@ -254,8 +254,13 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            addButton.Enabled = VGpus.All(v => { var x = (Connection.Resolve(v.type)); return x != null && x.compatible_types_in_vm.Count() > 0; });
+            var multipleVgpuSupport = vGpus.All(v => { var x = Connection.Resolve(v.type); return x != null && x.compatible_types_in_vm.Length > 0; });
+            addButton.Enabled = multipleVgpuSupport;
             deleteButton.Enabled = gpuGrid.SelectedRows.Count > 0;
+
+            imgMulti.Visible = labelMulti.Visible = vGpus.Count > 0;
+            if (vGpus.Count > 0)
+                labelMulti.Text = multipleVgpuSupport ? Messages.NEWVMWIZARD_VGPUPAGE_MULTIPLE_VGPU_INFO : Messages.NEWVMWIZARD_VGPUPAGE_SINGLE_VGPU_INFO;
 
             imgStopVM.Visible = labelStopVM.Visible =
             imgHA.Visible = labelHA.Visible = false;
