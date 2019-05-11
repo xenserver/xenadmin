@@ -77,6 +77,8 @@ namespace XenAdmin.TabPages
             this.panelGeneral = new System.Windows.Forms.Panel();
             this.pdSectionGeneral = new XenAdmin.Controls.PDSection();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.panelBios = new System.Windows.Forms.Panel();
+            this.pdSectionBios = new XenAdmin.Controls.PDSection();
             this.pageContainerPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelReadCaching.SuspendLayout();
@@ -99,6 +101,7 @@ namespace XenAdmin.TabPages
             this.panelCustomFields.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
+            this.panelBios.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -162,6 +165,8 @@ namespace XenAdmin.TabPages
             this.panel2.Controls.Add(this.panelUpdates);
             this.panel2.Controls.Add(this.panelVersion);
             this.panel2.Controls.Add(this.panelLicense);
+
+            this.panel2.Controls.Add(this.panelBios);
             this.panel2.Controls.Add(this.panelCustomFields);
             this.panel2.Controls.Add(this.panelGeneral);
             this.panel2.Name = "panel2";
@@ -438,6 +443,19 @@ namespace XenAdmin.TabPages
             this.tableLayoutPanelButtons.Controls.Add(this.linkLabelExpand, 4, 0);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             // 
+            // panelBios
+            // 
+            resources.ApplyResources(this.panelBios, "panelBios");
+            this.panelBios.Controls.Add(this.pdSectionBios);
+            this.panelBios.Name = "panelBios";
+            // 
+            // pdSectionBios
+            // 
+            this.pdSectionBios.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.pdSectionBios, "pdSectionBios");
+            this.pdSectionBios.Name = "pdSectionBios";
+            this.pdSectionBios.ShowCellToolTips = false;
+            // 
             // GeneralTabPage
             // 
             resources.ApplyResources(this, "$this");
@@ -469,6 +487,7 @@ namespace XenAdmin.TabPages
             this.panelGeneral.ResumeLayout(false);
             this.tableLayoutPanelButtons.ResumeLayout(false);
             this.tableLayoutPanelButtons.PerformLayout();
+            this.panelBios.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -521,5 +540,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button buttonViewConsole;
         private System.Windows.Forms.Button buttonViewLog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
+        private System.Windows.Forms.Panel panelBios;
+        private Controls.PDSection pdSectionBios;
     }
 }
