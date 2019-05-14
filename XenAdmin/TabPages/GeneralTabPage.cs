@@ -906,10 +906,14 @@ namespace XenAdmin.TabPages
                     PBD pbd = sr.GetPBDFor(host);
                     if (pbd == null || !pathStatus.ContainsKey(pbd))
                     {
-                        s.AddEntry(host.Name(),
-                            pbd != null && pbd.MultipathActive()
-                                ? Messages.MULTIPATH_ACTIVE
-                                : Messages.MULTIPATH_NOT_ACTIVE);
+                        if (pbd == null)
+                            s.AddEntry(host.Name(), Messages.MULTIPATH_NOT_ACTIVE);
+                        else if (pbd.MultipathActive())
+                            s.AddEntry(host.Name(), Messages.MULTIPATH_ACTIVE);
+                        else if (sr.GetSRType(true) == SR.SRTypes.gfs2)
+                            s.AddEntry(host.Name(), Messages.MULTIPATH_NOT_ACTIVE_GFS2, Color.Red);
+                        else
+                            s.AddEntry(host.Name(), Messages.MULTIPATH_NOT_ACTIVE);
                         continue;
                     }
 
@@ -1198,7 +1202,13 @@ namespace XenAdmin.TabPages
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
                     new PropertiesToolStripMenuItem(new IqnPropertiesCommand(Program.MainWindow, xenObject)));
-                s.AddEntry(FriendlyName("host.log_destination"), host.GetSysLogDestination() ?? Messages.HOST_LOG_DESTINATION_LOCAL,
+
+                var sysLog = host.GetSysLogDestination();
+                var sysLogDisplay = string.IsNullOrEmpty(sysLog)
+                    ? Messages.HOST_LOG_DESTINATION_LOCAL
+                    : string.Format(Messages.HOST_LOG_DESTINATION_LOCAL_AND_REMOTE, sysLog);
+
+                s.AddEntry(FriendlyName("host.log_destination"), sysLogDisplay,
                    new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow, xenObject)));
 
                 PrettyTimeSpan uptime = host.Uptime();
