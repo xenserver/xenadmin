@@ -132,6 +132,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 Status = Status.Completed;
                 _thisPageIsCompleted = true;
+                UpdateStatusOnCompletion();
+                UpdateStatus();
                 OnPageUpdated();
             }
             else
@@ -255,7 +257,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateStatus()
         {
-            var newVal = backgroundWorkers.Sum(b => b.PercentComplete) / backgroundWorkers.Count;
+            var newVal = backgroundWorkers.Count > 0
+                ? backgroundWorkers.Sum(b => b.PercentComplete) / backgroundWorkers.Count
+                : 100;
+
             if (newVal < 0)
                 newVal = 0;
             else if (newVal > 100)
@@ -437,7 +442,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (e.Cancelled)
             {
-                Status = Status.Completed;
+                Status = Status.Cancelled;
                 panel1.Visible = true;
                 labelError.Text = UserCancellationMessage();
                 pictureBox1.Image = Images.StaticImages.cancelled_action_16;
@@ -474,51 +479,54 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (workerSucceeded)
                         bgw.PercentComplete = 100;
                 }
+
                 //if all finished
                 if (backgroundWorkers.All(w => !w.IsBusy))
-                {
-                    Status = Status.Completed;
-                    panel1.Visible = true;
-
-                    if (failedWorkers.Any())
-                    {
-                        labelError.Text = FailureMessageOnCompletion(backgroundWorkers.Count > 1);
-                        pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
-                        buttonRetry.Visible = true;
-                        buttonSkip.Visible = false;
-
-                        if (failedWorkers.Any(w => w.FirstFailedSkippableAction != null))
-                            buttonSkip.Visible = true;
-                    }
-
-                    else if (someWorkersCancelled)
-                    {
-                        labelError.Text = UserCancellationMessage();
-                        pictureBox1.Image = Images.StaticImages.cancelled_action_16;
-                        buttonRetry.Visible = buttonSkip.Visible = false;
-                    }
-
-                    else if (backgroundWorkers.Any(w => WarningMessagePerPool(w.Pool) != null))
-                    {
-                        labelError.Text = WarningMessageOnCompletion(backgroundWorkers.Count > 1);
-                        pictureBox1.Image = Images.StaticImages._000_Alert2_h32bit_16;
-                        buttonRetry.Visible = buttonSkip.Visible = false;
-                    }
-                    else
-                    {
-                        labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
-                        pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
-                        buttonRetry.Visible = buttonSkip.Visible = false;
-                    }
-
-                    _thisPageIsCompleted = true;
-                    _cancelEnabled = false;
-                }
+                    UpdateStatusOnCompletion(someWorkersCancelled);
             }
 
             UpdateStatus();
             OnPageUpdated();
         }
+
+        private void UpdateStatusOnCompletion(bool someWorkersCancelled = false)
+        {
+            Status = Status.Completed;
+            panel1.Visible = true;
+
+            if (failedWorkers.Any())
+            {
+                labelError.Text = FailureMessageOnCompletion(backgroundWorkers.Count > 1);
+                pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
+                buttonRetry.Visible = true;
+                buttonSkip.Visible = false;
+
+                if (failedWorkers.Any(w => w.FirstFailedSkippableAction != null))
+                    buttonSkip.Visible = true;
+            }
+            else if (someWorkersCancelled)
+            {
+                labelError.Text = UserCancellationMessage();
+                pictureBox1.Image = Images.StaticImages.cancelled_action_16;
+                buttonRetry.Visible = buttonSkip.Visible = false;
+            }
+            else if (backgroundWorkers.Any(w => WarningMessagePerPool(w.Pool) != null))
+            {
+                labelError.Text = WarningMessageOnCompletion(backgroundWorkers.Count > 1);
+                pictureBox1.Image = Images.StaticImages._000_Alert2_h32bit_16;
+                buttonRetry.Visible = buttonSkip.Visible = false;
+            }
+            else
+            {
+                labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
+                pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
+                buttonRetry.Visible = buttonSkip.Visible = false;
+            }
+
+            _thisPageIsCompleted = true;
+            _cancelEnabled = false;
+        }
+
         #endregion
 
         private void RetryFailedActions()

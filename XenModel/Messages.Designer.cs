@@ -1492,6 +1492,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Importing VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_IMPORT_VM_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_IMPORT_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing VM &apos;{0}&apos; to &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_IMPORT_VM_TO_HOST_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_IMPORT_VM_TO_HOST_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning for IQNs on iSCSI filer {0}.
         /// </summary>
         public static string ACTION_ISCSI_IQN_SCANNING {
@@ -3166,6 +3184,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrating VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MIGRATING_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MIGRATING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moving VM to new storage....
         /// </summary>
         public static string ACTION_VM_MOVING {
@@ -3203,6 +3230,15 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Rebooting VM &apos;{0}&apos; on &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_REBOOTING_ON_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_REBOOTING_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rebooting VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_VM_REBOOTING_TITLE {
             get {
@@ -3293,6 +3329,15 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Shutting down VM &apos;{0}&apos; on &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_SHUTTING_DOWN_ON_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_SHUTTING_DOWN_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutting down VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_VM_SHUTTING_DOWN_TITLE {
             get {
@@ -6670,7 +6715,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to delete this ISO storage. Try again later and confirm your SR supports this operation..
+        ///   Looks up a localized string similar to It is not possible to delete this ISO storage. Please check your SR supports this operation and try again..
         /// </summary>
         public static string CANNOT_DELETE_ISO_GENERIC {
             get {
@@ -6688,7 +6733,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to delete this snapshot. Try again later and confirm your SR supports this operation..
+        ///   Looks up a localized string similar to It is not possible to delete this snapshot. Please check your SR supports this operation and try again..
         /// </summary>
         public static string CANNOT_DELETE_SNAPSHOT_GENERIC {
             get {
@@ -6715,7 +6760,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to delete this virtual disk. Try again later and confirm your SR supports this operation..
+        ///   Looks up a localized string similar to It is not possible to delete this virtual disk. Please check your SR supports this operation and try again..
         /// </summary>
         public static string CANNOT_DELETE_VD_GENERIC {
             get {
@@ -7290,6 +7335,24 @@ namespace XenAdmin {
         public static string CHOOSE_ANOTHER_DESTINATION {
             get {
                 return ResourceManager.GetString("CHOOSE_ANOTHER_DESTINATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multipathing is not enabled on all servers of your pool. To ensure system stability, it is strongly recommended that you use multipathing for your storage connectivity..
+        /// </summary>
+        public static string CHOOSE_SR_PROVISIONING_PAGE_MULTIPATHING_MANY {
+            get {
+                return ResourceManager.GetString("CHOOSE_SR_PROVISIONING_PAGE_MULTIPATHING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multipathing is not enabled on your server. To ensure system stability, it is strongly recommended that you use multipathing for your storage connectivity..
+        /// </summary>
+        public static string CHOOSE_SR_PROVISIONING_PAGE_MULTIPATHING_ONE {
+            get {
+                return ResourceManager.GetString("CHOOSE_SR_PROVISIONING_PAGE_MULTIPATHING_ONE", resourceCulture);
             }
         }
         
@@ -14003,7 +14066,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value for your QoS limit needs to be greater than zero.
+        ///   Looks up a localized string similar to The QoS limit value should be an integer greater than zero.
         /// </summary>
         public static string ENTER_VALID_QOS {
             get {
@@ -16058,16 +16121,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must give a valid server name..
-        /// </summary>
-        public static string GENERAL_EDIT_INVALID_HOSTNAME {
-            get {
-                return ResourceManager.GetString("GENERAL_EDIT_INVALID_HOSTNAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You must give a valid IQN, e.g. iqn.2007-11.com.example.subdomain:optional-domain-specific-string.
+        ///   Looks up a localized string similar to Please enter a valid IQN, e.g. iqn.2007-11.com.example.subdomain:optional-domain-specific-string.
         /// </summary>
         public static string GENERAL_EDIT_INVALID_IQN {
             get {
@@ -16076,11 +16130,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must give a valid name..
+        ///   Looks up a localized string similar to Please enter a valid name..
         /// </summary>
         public static string GENERAL_EDIT_INVALID_NAME {
             get {
                 return ResourceManager.GetString("GENERAL_EDIT_INVALID_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid IP address or server name..
+        /// </summary>
+        public static string GENERAL_EDIT_INVALID_REMOTE {
+            get {
+                return ResourceManager.GetString("GENERAL_EDIT_INVALID_REMOTE", resourceCulture);
             }
         }
         
@@ -18113,6 +18176,15 @@ namespace XenAdmin {
         public static string HOST_LOG_DESTINATION_LOCAL {
             get {
                 return ResourceManager.GetString("HOST_LOG_DESTINATION_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local and Remote ({0}).
+        /// </summary>
+        public static string HOST_LOG_DESTINATION_LOCAL_AND_REMOTE {
+            get {
+                return ResourceManager.GetString("HOST_LOG_DESTINATION_LOCAL_AND_REMOTE", resourceCulture);
             }
         }
         
@@ -21038,15 +21110,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Local.
-        /// </summary>
-        public static string LOCAL {
-            get {
-                return ResourceManager.GetString("LOCAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Local Storage Repositories.
         /// </summary>
         public static string LOCAL_SRS {
@@ -23172,15 +23235,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
-        /// </summary>
-        public static string MIGRATE_VDI_UPSELL_BLURB {
-            get {
-                return ResourceManager.GetString("MIGRATE_VDI_UPSELL_BLURB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM may not migrate at the moment.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED {
@@ -23402,6 +23456,17 @@ namespace XenAdmin {
         public static string MULTIPATH_NOT_ACTIVE {
             get {
                 return ResourceManager.GetString("MULTIPATH_NOT_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not active.
+        ///To ensure system stability, it is strongly recommended that you use multipathing for your storage connectivity.
+        ///.
+        /// </summary>
+        public static string MULTIPATH_NOT_ACTIVE_GFS2 {
+            get {
+                return ResourceManager.GetString("MULTIPATH_NOT_ACTIVE_GFS2", resourceCulture);
             }
         }
         
@@ -29368,7 +29433,10 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM: \n {1} \n\n Are you sure you want to continue?.
+        ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM:
+        ///{1}
+        ///
+        ///Are you sure you want to continue?.
         /// </summary>
         public static string PROBLEM_MAC_ADDRESS_IS_DUPLICATE {
             get {
@@ -30232,15 +30300,6 @@ namespace XenAdmin {
         public static string REMAINING_VFS {
             get {
                 return ResourceManager.GetString("REMAINING_VFS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remote ({0}).
-        /// </summary>
-        public static string REMOTE {
-            get {
-                return ResourceManager.GetString("REMOTE", resourceCulture);
             }
         }
         
@@ -36135,6 +36194,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
+        /// </summary>
+        public static string UPSELL_BLURB_MIGRATE_VDI {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_MIGRATE_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upgrade your server license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change..
         /// </summary>
         public static string UPSELL_BLURB_PERFORMANCE {
@@ -36907,24 +36975,6 @@ namespace XenAdmin {
         public static string VIF_HOTPLUG_FAILED_TITLE {
             get {
                 return ResourceManager.GetString("VIF_HOTPLUG_FAILED_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade your license to enable QoS settings.
-        /// </summary>
-        public static string VIF_LICENSE_RESTRICTION {
-            get {
-                return ResourceManager.GetString("VIF_LICENSE_RESTRICTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to QoS settings should be configured using the vSwitch Controller.
-        /// </summary>
-        public static string VIF_VSWITCH_CONTROLLER {
-            get {
-                return ResourceManager.GetString("VIF_VSWITCH_CONTROLLER", resourceCulture);
             }
         }
         
@@ -37865,24 +37915,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Run the new snapshot schedule job when I click Finish.
-        /// </summary>
-        public static string VMSS_FINISH_PAGE_CHECKBOX_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_FINISH_PAGE_CHECKBOX_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Review the new snapshot schedule and click Previous if you want to change any settings or Finish to create the new schedule..
-        /// </summary>
-        public static string VMSS_FINISH_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_FINISH_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create the new schedule.
         /// </summary>
         public static string VMSS_FINISH_TITLE {
@@ -37897,6 +37929,15 @@ namespace XenAdmin {
         public static string VMSS_HOST_NOT_LIVE {
             get {
                 return ResourceManager.GetString("VMSS_HOST_NOT_LIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or incomplete schedule.
+        /// </summary>
+        public static string VMSS_INVALID_SCHEDULE {
+            get {
+                return ResourceManager.GetString("VMSS_INVALID_SCHEDULE", resourceCulture);
             }
         }
         
@@ -37928,7 +37969,35 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n.
+        ///   Looks up a localized string similar to The next scheduled local run time is {0}..
+        /// </summary>
+        public static string VMSS_NEXT_CLIENT_LOCAL_RUN {
+            get {
+                return ResourceManager.GetString("VMSS_NEXT_CLIENT_LOCAL_RUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The corresponding server local time is {0}..
+        /// </summary>
+        public static string VMSS_NEXT_SERVER_LOCAL_RUN {
+            get {
+                return ResourceManager.GetString("VMSS_NEXT_SERVER_LOCAL_RUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job name:
+        ///	{0}
+        ///
+        ///Selected VMs:
+        ///	{1}
+        ///
+        ///Snapshot type:
+        ///	{2}
+        ///
+        ///Schedule:
+        ///	{3}.
         /// </summary>
         public static string VMSS_POLICY_SUMMARY {
             get {
