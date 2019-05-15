@@ -384,13 +384,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var restartHostPlanAction = (RestartHostPlanAction)hp.DelayedPlanActions.FirstOrDefault(a => a is RestartHostPlanAction);
                     if (restartHostPlanAction != null)
                     {
-                        if (restartHostPlanAction.SkipRestartHost(host))
-                        {
-                            log.Debug("Did not find patches requiring reboot (live patching succeeded)."
-                                      + " Skipping scheduled restart.");
-                            hp.DelayedPlanActions.RemoveAll(a => a is RestartHostPlanAction);
-                        }
-                        else
+                        if (!restartHostPlanAction.SkipRestartHost(host))
                         {
                             hp.DelayedPlanActions.RemoveAll(a => a is RestartAgentPlanAction);
                         }

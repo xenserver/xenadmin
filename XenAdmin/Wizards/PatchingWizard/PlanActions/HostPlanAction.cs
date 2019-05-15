@@ -100,10 +100,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             // Hosts do reenable themselves anyway, so just wait 1 min for that,  
             // occasionally poking it.
             var hostObj = GetResolvedHost();
-            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, hostObj.Name()));
-
-            WaitForHostToBecomeEnabled(session, true);
-
+            if (!hostObj.enabled)
+            {
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, hostObj.Name()));
+                WaitForHostToBecomeEnabled(session, true);
+            }
+            
             if (enableOnly || vmrefs.Count == 0)
                 return;
 
