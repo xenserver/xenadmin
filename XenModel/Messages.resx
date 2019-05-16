@@ -9738,6 +9738,9 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>Update not applicable</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE_OR_INVALID" xml:space="preserve">
+    <value>Update not applicable or file contains invalid data.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
     <value>Select one or more pools or standalone servers that you want to have updated.
 Servers that cannot be updated with automated updates appear disabled in this list.</value>
