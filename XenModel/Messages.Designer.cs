@@ -28192,6 +28192,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update not applicable or file contains invalid data..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE_OR_INVALID {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE_OR_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select one or more pools or standalone servers that you want to have updated.
         ///Servers that cannot be updated with automated updates appear disabled in this list..
         /// </summary>
