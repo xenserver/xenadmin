@@ -456,7 +456,7 @@ namespace XenAdmin.Core
 
                         XenServerPatch serverPatch = xenServerPatch;
 
-                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host, version));
+                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host)).ToList();
         
                         if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);
@@ -469,12 +469,14 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host, XenServerVersion patchApplicableVersion)
+        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host)
         {
             Debug.Assert(serverPatch != null);
             Debug.Assert(host != null);
 
-            if (Helpers.productVersionCompare(patchApplicableVersion.Version.ToString(), host.ProductVersion()) != 0)
+            // A patch is applicable to host if the patch is amongst the current version patches
+            var patchIsApplicable = GetServerVersions(host, XenServerVersions).Any(v => v.Patches.Contains(serverPatch));
+            if (!patchIsApplicable)
                 return false;
 
             // A patch can be installed on a host if:
@@ -828,9 +830,9 @@ namespace XenAdmin.Core
                 // Show the Upgrade alert for a host if:
                 // - the host version is older than this version AND
                 // - there is no patch (amongst the current version patches) that can update to this version OR, if there is a patch, the patch cannot be installed
-                var patchApplicable = patch != null && GetServerVersions(master, XenServerVersions).Any(v => v.Patches.Contains(patch));
+
                 var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version
-                    && (!patchApplicable || !PatchCanBeInstalledOnHost(patch, host, version)));
+                    && (patch == null || !PatchCanBeInstalledOnHost(patch, host))).ToList();
 
                 if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
