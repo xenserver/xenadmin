@@ -12871,13 +12871,6 @@ namespace XenAPI
             return Rpc<long>("VGPU_type.get_max_heads", new JArray(session, _vgpu_type ?? ""), serializer);
         }
 
-        public long vgpu_type_get_multi_vgpu_supported(string session, string _vgpu_type)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            return Rpc<long>("VGPU_type.get_multi_vgpu_supported", new JArray(session, _vgpu_type ?? ""), serializer);
-        }
-
         public long vgpu_type_get_max_resolution_x(string session, string _vgpu_type)
         {
             var converters = new List<JsonConverter> {};
@@ -12948,18 +12941,11 @@ namespace XenAPI
             return Rpc<bool>("VGPU_type.get_experimental", new JArray(session, _vgpu_type ?? ""), serializer);
         }
 
-        public string[] vgpu_type_get_compatible_types_in_vm(string session, string _vgpu_type)
+        public List<XenRef<VGPU_type>> vgpu_type_get_compatible_types_in_vm(string session, string _vgpu_type)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new XenRefListConverter<VGPU_type>()};
             var serializer = CreateSerializer(converters);
-            return Rpc<string[]>("VGPU_type.get_compatible_types_in_vm", new JArray(session, _vgpu_type ?? ""), serializer);
-        }
-
-        public string[] vgpu_type_get_compatible_types_on_pgpu(string session, string _vgpu_type)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            return Rpc<string[]>("VGPU_type.get_compatible_types_on_pgpu", new JArray(session, _vgpu_type ?? ""), serializer);
+            return Rpc<List<XenRef<VGPU_type>>>("VGPU_type.get_compatible_types_in_vm", new JArray(session, _vgpu_type ?? ""), serializer);
         }
 
         public List<XenRef<VGPU_type>> vgpu_type_get_all(string session)

@@ -68,29 +68,26 @@ namespace XenAdmin.Dialogs
                     var enabledTypes = _vm.Connection.ResolveAll(gpu_group.enabled_VGPU_types);
                     var allTypes = _vm.Connection.ResolveAll(gpu_group.supported_VGPU_types);
                     var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
-
-                    allTypes.Sort();
-                    allTypes.Reverse();
-
-                    var commonTypes = new List<VGPU_type>();
-                    commonTypes.AddRange(allTypes);
+                    HashSet<VGPU_type> commonTypesSet = new HashSet<VGPU_type>(allTypes);
 
                     foreach (var eVgpu in existingVGpus)
                     {
                         var etype = _vm.Connection.Resolve(eVgpu.type);
-                        foreach (var vgpuType in allTypes)
-                        {
-                            if (!etype.compatible_types_in_vm.Contains(vgpuType.model_name))
-                                commonTypes.Remove(vgpuType);
-                        }
+                        List<XenRef<VGPU_type>> existing_compatible_types_in_vm_refs = etype.compatible_types_in_vm;
+                        List<VGPU_type> existing_compatible_types_in_vm = _vm.Connection.ResolveAll(existing_compatible_types_in_vm_refs);
+                        HashSet<VGPU_type> existing_compatible_types_set = new HashSet<VGPU_type>(existing_compatible_types_in_vm);
+                        commonTypesSet.IntersectWith(existing_compatible_types_set);
                     }
+
+                    var commonTypes = new List<VGPU_type>(commonTypesSet);
+                    commonTypes.Sort();
+                    commonTypes.Reverse();
 
                     if (gpu_group.HasVGpu() && commonTypes.Count > 0)
                         comboBoxTypes.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
 
                     foreach (var vgpuType in commonTypes)
                         comboBoxTypes.Items.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
-                    
                 }
             }
         }

@@ -54,7 +54,6 @@ namespace XenAPI
             string model_name,
             long framebuffer_size,
             long max_heads,
-            long multi_vgpu_supported,
             long max_resolution_x,
             long max_resolution_y,
             List<XenRef<PGPU>> supported_on_PGPUs,
@@ -65,15 +64,13 @@ namespace XenAPI
             vgpu_type_implementation implementation,
             string identifier,
             bool experimental,
-            string[] compatible_types_in_vm,
-            string[] compatible_types_on_pgpu)
+            List<XenRef<VGPU_type>> compatible_types_in_vm)
         {
             this.uuid = uuid;
             this.vendor_name = vendor_name;
             this.model_name = model_name;
             this.framebuffer_size = framebuffer_size;
             this.max_heads = max_heads;
-            this.multi_vgpu_supported = multi_vgpu_supported;
             this.max_resolution_x = max_resolution_x;
             this.max_resolution_y = max_resolution_y;
             this.supported_on_PGPUs = supported_on_PGPUs;
@@ -85,7 +82,6 @@ namespace XenAPI
             this.identifier = identifier;
             this.experimental = experimental;
             this.compatible_types_in_vm = compatible_types_in_vm;
-            this.compatible_types_on_pgpu = compatible_types_on_pgpu;
         }
 
         /// <summary>
@@ -108,7 +104,6 @@ namespace XenAPI
             model_name = update.model_name;
             framebuffer_size = update.framebuffer_size;
             max_heads = update.max_heads;
-            multi_vgpu_supported = update.multi_vgpu_supported;
             max_resolution_x = update.max_resolution_x;
             max_resolution_y = update.max_resolution_y;
             supported_on_PGPUs = update.supported_on_PGPUs;
@@ -120,7 +115,6 @@ namespace XenAPI
             identifier = update.identifier;
             experimental = update.experimental;
             compatible_types_in_vm = update.compatible_types_in_vm;
-            compatible_types_on_pgpu = update.compatible_types_on_pgpu;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU_type proxy)
@@ -130,7 +124,6 @@ namespace XenAPI
             model_name = proxy.model_name == null ? null : proxy.model_name;
             framebuffer_size = proxy.framebuffer_size == null ? 0 : long.Parse(proxy.framebuffer_size);
             max_heads = proxy.max_heads == null ? 0 : long.Parse(proxy.max_heads);
-            multi_vgpu_supported = proxy.multi_vgpu_supported == null ? 0 : long.Parse(proxy.multi_vgpu_supported);
             max_resolution_x = proxy.max_resolution_x == null ? 0 : long.Parse(proxy.max_resolution_x);
             max_resolution_y = proxy.max_resolution_y == null ? 0 : long.Parse(proxy.max_resolution_y);
             supported_on_PGPUs = proxy.supported_on_PGPUs == null ? null : XenRef<PGPU>.Create(proxy.supported_on_PGPUs);
@@ -141,8 +134,7 @@ namespace XenAPI
             implementation = proxy.implementation == null ? (vgpu_type_implementation) 0 : (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), (string)proxy.implementation);
             identifier = proxy.identifier == null ? null : proxy.identifier;
             experimental = (bool)proxy.experimental;
-            compatible_types_in_vm = proxy.compatible_types_in_vm == null ? new string[] {} : (string [])proxy.compatible_types_in_vm;
-            compatible_types_on_pgpu = proxy.compatible_types_on_pgpu == null ? new string[] {} : (string [])proxy.compatible_types_on_pgpu;
+            compatible_types_in_vm = proxy.compatible_types_in_vm == null ? null : XenRef<VGPU_type>.Create(proxy.compatible_types_in_vm);
         }
 
         public Proxy_VGPU_type ToProxy()
@@ -153,7 +145,6 @@ namespace XenAPI
             result_.model_name = model_name ?? "";
             result_.framebuffer_size = framebuffer_size.ToString();
             result_.max_heads = max_heads.ToString();
-            result_.multi_vgpu_supported = multi_vgpu_supported.ToString();
             result_.max_resolution_x = max_resolution_x.ToString();
             result_.max_resolution_y = max_resolution_y.ToString();
             result_.supported_on_PGPUs = supported_on_PGPUs == null ? new string[] {} : Helper.RefListToStringArray(supported_on_PGPUs);
@@ -164,8 +155,7 @@ namespace XenAPI
             result_.implementation = vgpu_type_implementation_helper.ToString(implementation);
             result_.identifier = identifier ?? "";
             result_.experimental = experimental;
-            result_.compatible_types_in_vm = compatible_types_in_vm;
-            result_.compatible_types_on_pgpu = compatible_types_on_pgpu;
+            result_.compatible_types_in_vm = compatible_types_in_vm == null ? new string[] {} : Helper.RefListToStringArray(compatible_types_in_vm);
             return result_;
         }
 
@@ -198,8 +188,6 @@ namespace XenAPI
                 framebuffer_size = Marshalling.ParseLong(table, "framebuffer_size");
             if (table.ContainsKey("max_heads"))
                 max_heads = Marshalling.ParseLong(table, "max_heads");
-            if (table.ContainsKey("multi_vgpu_supported"))
-                multi_vgpu_supported = Marshalling.ParseLong(table, "multi_vgpu_supported");
             if (table.ContainsKey("max_resolution_x"))
                 max_resolution_x = Marshalling.ParseLong(table, "max_resolution_x");
             if (table.ContainsKey("max_resolution_y"))
@@ -221,9 +209,7 @@ namespace XenAPI
             if (table.ContainsKey("experimental"))
                 experimental = Marshalling.ParseBool(table, "experimental");
             if (table.ContainsKey("compatible_types_in_vm"))
-                compatible_types_in_vm = Marshalling.ParseStringArray(table, "compatible_types_in_vm");
-            if (table.ContainsKey("compatible_types_on_pgpu"))
-                compatible_types_on_pgpu = Marshalling.ParseStringArray(table, "compatible_types_on_pgpu");
+                compatible_types_in_vm = Marshalling.ParseSetRef<VGPU_type>(table, "compatible_types_in_vm");
         }
 
         public bool DeepEquals(VGPU_type other)
@@ -238,7 +224,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._model_name, other._model_name) &&
                 Helper.AreEqual2(this._framebuffer_size, other._framebuffer_size) &&
                 Helper.AreEqual2(this._max_heads, other._max_heads) &&
-                Helper.AreEqual2(this._multi_vgpu_supported, other._multi_vgpu_supported) &&
                 Helper.AreEqual2(this._max_resolution_x, other._max_resolution_x) &&
                 Helper.AreEqual2(this._max_resolution_y, other._max_resolution_y) &&
                 Helper.AreEqual2(this._supported_on_PGPUs, other._supported_on_PGPUs) &&
@@ -249,8 +234,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._implementation, other._implementation) &&
                 Helper.AreEqual2(this._identifier, other._identifier) &&
                 Helper.AreEqual2(this._experimental, other._experimental) &&
-                Helper.AreEqual2(this._compatible_types_in_vm, other._compatible_types_in_vm) &&
-                Helper.AreEqual2(this._compatible_types_on_pgpu, other._compatible_types_on_pgpu);
+                Helper.AreEqual2(this._compatible_types_in_vm, other._compatible_types_in_vm);
         }
 
         internal static List<VGPU_type> ProxyArrayToObjectList(Proxy_VGPU_type[] input)
@@ -370,20 +354,6 @@ namespace XenAPI
                 return session.JsonRpcClient.vgpu_type_get_max_heads(session.opaque_ref, _vgpu_type);
             else
                 return long.Parse(session.proxy.vgpu_type_get_max_heads(session.opaque_ref, _vgpu_type ?? "").parse());
-        }
-
-        /// <summary>
-        /// Get the multi_vgpu_supported field of the given VGPU_type.
-        /// First published in XenServer 6.2 SP1 Tech-Preview.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
-        public static long get_multi_vgpu_supported(Session session, string _vgpu_type)
-        {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vgpu_type_get_multi_vgpu_supported(session.opaque_ref, _vgpu_type);
-            else
-                return long.Parse(session.proxy.vgpu_type_get_multi_vgpu_supported(session.opaque_ref, _vgpu_type ?? "").parse());
         }
 
         /// <summary>
@@ -528,30 +498,16 @@ namespace XenAPI
 
         /// <summary>
         /// Get the compatible_types_in_vm field of the given VGPU_type.
-        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
-        public static string[] get_compatible_types_in_vm(Session session, string _vgpu_type)
+        public static List<XenRef<VGPU_type>> get_compatible_types_in_vm(Session session, string _vgpu_type)
         {
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vgpu_type_get_compatible_types_in_vm(session.opaque_ref, _vgpu_type);
             else
-                return (string [])session.proxy.vgpu_type_get_compatible_types_in_vm(session.opaque_ref, _vgpu_type ?? "").parse();
-        }
-
-        /// <summary>
-        /// Get the compatible_types_on_pgpu field of the given VGPU_type.
-        /// First published in XenServer 6.2 SP1 Tech-Preview.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
-        public static string[] get_compatible_types_on_pgpu(Session session, string _vgpu_type)
-        {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vgpu_type_get_compatible_types_on_pgpu(session.opaque_ref, _vgpu_type);
-            else
-                return (string [])session.proxy.vgpu_type_get_compatible_types_on_pgpu(session.opaque_ref, _vgpu_type ?? "").parse();
+                return XenRef<VGPU_type>.Create(session.proxy.vgpu_type_get_compatible_types_in_vm(session.opaque_ref, _vgpu_type ?? "").parse());
         }
 
         /// <summary>
@@ -669,24 +625,6 @@ namespace XenAPI
             }
         }
         private long _max_heads = 0;
-
-        /// <summary>
-        /// Maximum number of vgpu supported by the VGPU type
-        /// </summary>
-        public virtual long multi_vgpu_supported
-        {
-            get { return _multi_vgpu_supported; }
-            set
-            {
-                if (!Helper.AreEqual(value, _multi_vgpu_supported))
-                {
-                    _multi_vgpu_supported = value;
-                    Changed = true;
-                    NotifyPropertyChanged("multi_vgpu_supported");
-                }
-            }
-        }
-        private long _multi_vgpu_supported = 0;
 
         /// <summary>
         /// Maximum resolution (width) supported by the VGPU type
@@ -882,9 +820,11 @@ namespace XenAPI
         private bool _experimental = false;
 
         /// <summary>
-        /// List of vgpu types that can start on one VM
+        /// List of VGPU types which are compatible in one VM
+        /// First published in Unreleased.
         /// </summary>
-        public virtual string[] compatible_types_in_vm
+        [JsonConverter(typeof(XenRefListConverter<VGPU_type>))]
+        public virtual List<XenRef<VGPU_type>> compatible_types_in_vm
         {
             get { return _compatible_types_in_vm; }
             set
@@ -897,24 +837,6 @@ namespace XenAPI
                 }
             }
         }
-        private string[] _compatible_types_in_vm = {};
-
-        /// <summary>
-        /// List of vgpu types that compatible on one PGPU
-        /// </summary>
-        public virtual string[] compatible_types_on_pgpu
-        {
-            get { return _compatible_types_on_pgpu; }
-            set
-            {
-                if (!Helper.AreEqual(value, _compatible_types_on_pgpu))
-                {
-                    _compatible_types_on_pgpu = value;
-                    Changed = true;
-                    NotifyPropertyChanged("compatible_types_on_pgpu");
-                }
-            }
-        }
-        private string[] _compatible_types_on_pgpu = {};
+        private List<XenRef<VGPU_type>> _compatible_types_in_vm = new List<XenRef<VGPU_type>>() {};
     }
 }
