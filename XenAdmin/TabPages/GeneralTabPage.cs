@@ -87,8 +87,6 @@ namespace XenAdmin.TabPages
                     if (s == null)
                         continue;
                     sections.Add(s);
-                    s.MaximumSize = new Size(900, 9999999);
-                    s.fixFirstColumnWidth(150);
                     s.contentChangedSelection += s_contentChangedSelection;
                     s.contentReceivedFocus += s_contentReceivedFocus;
                 }
@@ -1747,7 +1745,7 @@ namespace XenAdmin.TabPages
 
             output.Sort(StringUtility.NaturalCompare);
 
-            return String.Join(", ", output.ToArray());
+            return string.Join(Environment.NewLine, output);
         }
 
         private string poolUpdateString(Predicate<Pool_update> predicate)
@@ -1762,7 +1760,7 @@ namespace XenAdmin.TabPages
 
             output.Sort(StringUtility.NaturalCompare);
 
-            return String.Join(", ", output.ToArray());
+            return string.Join(Environment.NewLine, output);
         }
 
         #endregion
