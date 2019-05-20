@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -36,6 +37,7 @@ using System.Windows.Forms;
 using DiscUtils.Iso9660;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Wizards
@@ -182,5 +184,18 @@ namespace XenAdmin.Wizards
             failureReason = null;
             return true;
         }
+
+        public static bool IsHostRebootRequiredForUpdate(Host host, Pool_patch patch, Dictionary<string, livepatch_status> livePatchCodesByHost = null)
+        {
+            return patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
+                   && (livePatchCodesByHost == null || !livePatchCodesByHost.ContainsKey(host.uuid) || livePatchCodesByHost[host.uuid] != livepatch_status.ok_livepatch_complete);
+        }
+
+        public static bool IsHostRebootRequiredForUpdate(Host host, Pool_update poolUpdate, Dictionary<string, livepatch_status> livePatchCodesByHost = null)
+        {
+            return poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartHost)
+                   && (livePatchCodesByHost == null || !livePatchCodesByHost.ContainsKey(host.uuid) || livePatchCodesByHost[host.uuid] != livepatch_status.ok_livepatch_complete);
+        }
+
     }
 }

@@ -27705,6 +27705,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some of the automated updates processes were completed with warnings..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The automated updates process was completed with warnings..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clean up....
         /// </summary>
         public static string PATCHINGWIZARD_CLEANUP {
@@ -28340,6 +28358,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The installation of update {0} was completed with warnings on some of the selected servers..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The installation of update {0} was completed with warnings..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_WARNING_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_WARNING_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The upload process was cancelled..
         /// </summary>
         public static string PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION {
@@ -28419,6 +28455,24 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SINGLEUPLOAD_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upload of update {0} was completed with warnings on some of the selected servers..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_WARNING_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_WARNING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The upload of update {0} was completed with warnings..
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPLOAD_WARNING_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPLOAD_WARNING_ONE", resourceCulture);
             }
         }
         
@@ -31262,6 +31316,24 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more of the rolling pool upgrade processes were completed with warnings..
+        /// </summary>
+        public static string ROLLING_UPGRADE_WARNING_MANY {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_WARNING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The rolling pool upgrade process was completed with warnings..
+        /// </summary>
+        public static string ROLLING_UPGRADE_WARNING_ONE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_WARNING_ONE", resourceCulture);
             }
         }
         
