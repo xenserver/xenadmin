@@ -61,20 +61,19 @@ namespace XenAdmin.Actions
                 return;
 
             // Add the new VGPUs
-            int index = 0;
             foreach (var vGpu in vGpus)
             {
-                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type), index + 11);
-                index++;
+                // leave device=0, see PR-1060
+                // in XAPI, a new value will be generated
+                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type));
             }
         }
 
-        private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, int device)
+        private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, int device = 0)
         {
             if (gpuGroup == null)
                 return;
 
-            //string device = "0";  // fixed at the moment, see PR-1060
             Dictionary<string, string> other_config = new Dictionary<string, string>();
 
             if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu) || vGpuType == null)

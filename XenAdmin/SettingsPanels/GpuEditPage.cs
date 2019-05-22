@@ -254,7 +254,7 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            var multipleVgpuSupport = vGpus.All(v => { var x = Connection.Resolve(v.type); return x != null && x.compatible_types_in_vm.Length > 0; });
+            var multipleVgpuSupport = vGpus.All(v => { var x = Connection.Resolve(v.type); return x != null && x.compatible_types_in_vm.Count > 0; });
             addButton.Enabled = multipleVgpuSupport;
             deleteButton.Enabled = gpuGrid.SelectedRows.Count > 0;
 
