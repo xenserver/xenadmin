@@ -1441,7 +1441,7 @@
     <value>209, 22</value>
   </data>
   <data name="saveTemplateToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Save as a Template...</value>
+    <value>New Template from &amp;Snapshot...</value>
   </data>
   <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
@@ -1774,7 +1774,7 @@
     <value>209, 22</value>
   </data>
   <data name="saveAsTemplateToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Save as a Template...</value>
+    <value>New Template from &amp;Snapshot...</value>
   </data>
   <data name="exportAsBackupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
