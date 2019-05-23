@@ -42,7 +42,7 @@ Param(
 )
 
 $DOMAIN = $DOMAIN.Trim()
-$PACKAGE_DIR = Get-Item "$PSScriptRoot\..\packages" | select -ExpandProperty FullName
+$PACKAGE_DIR = Get-Item "$PSScriptRoot" | select -ExpandProperty FullName
 $MK_DIR = Get-Item "$PSScriptRoot\..\mk" | select -ExpandProperty FullName
 
 #dotnet packages
