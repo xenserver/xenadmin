@@ -157,14 +157,6 @@ node("${params.BUILD_ON_NODE}") {
       }
     }
 
-    def CTX_SIGN_DEFINED = bat(
-      returnStdout: true,
-      script: """
-              @echo off
-              if defined CTXSIGN (echo 1) else (echo 0)
-              """
-    ).trim()
-
     stage('Download dependencies') {
 
       GString remoteDotnet = GString.EMPTY
@@ -310,10 +302,8 @@ node("${params.BUILD_ON_NODE}") {
 
           GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${params.XC_BRANCH};vcs.revision=${GIT_COMMIT_XENADMIN}"
 
-          String targetSubRepo = (CTX_SIGN_DEFINED == '1') ? 'xenadmin-ctxsign' : 'xenadmin'
-
           // IMPORTANT: do not forget the slash at the end of the target path!
-          GString targetPath = "xc-local-build/${targetSubRepo}/${params.XC_BRANCH}/${params.XC_BRANDING}/${env.BUILD_NUMBER}/"
+          GString targetPath = "xc-local-build/xencenter/${params.XC_BRANCH}/${params.XC_BRANDING}/${env.BUILD_NUMBER}/"
           GString uploadSpec = """ {
               "files": [
                 { "pattern": "*", "flat": "false", "target": "${targetPath}", "props": "${artifactMeta}" }
