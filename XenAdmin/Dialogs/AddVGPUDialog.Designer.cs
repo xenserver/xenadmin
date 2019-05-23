@@ -62,7 +62,7 @@
             // 
             this.AcceptButton = this.buttonAdd;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.comboBoxTypes);
             this.Controls.Add(this.buttonCancel);
