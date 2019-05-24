@@ -212,11 +212,4 @@ then
   mv ${REPO}/Branding/Help/*.chm ${REPO}/XenAdmin/Help/
 fi
 
-#Overwrite HomePage
-if [ -d ${REPO}/Branding/HomePage ]
-then 
-  rm ${REPO}/XenAdmin/HomePage*.mht
-  cp ${REPO}/Branding/HomePage/*.mht ${REPO}/XenAdmin/
-fi
-
 set +u
