@@ -193,23 +193,4 @@ cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
 rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
-rebranding_CHM()
-{
-  for files in $1
-  do
-    sed -b -i -e "s#XenCenter.chm#${BRANDING_BRAND_CONSOLE}.chm#g" \
-        -e "s#XenCenter.ja.chm#${BRANDING_BRAND_CONSOLE}.ja.chm#g" \
-        -e "s#XenCenter.zh-CN.chm#${BRANDING_BRAND_CONSOLE}.zh-CN.chm#g" \
-      $files  
-  done  
-}
-
-if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
-then 
-  rebranding_CHM "${REPO}/XenAdmin/XenAdmin.csproj"
-  rebranding_CHM "${REPO}/XenModel/InvisibleMessages.zh-CN.resx ${REPO}/XenModel/InvisibleMessages.ja.resx ${REPO}/XenModel/InvisibleMessages.resx"
-  rm ${REPO}/XenAdmin/Help/XenCenter.chm ${REPO}/XenAdmin/Help/XenCenter.ja.chm ${REPO}/XenAdmin/Help/XenCenter.zh-CN.chm
-  mv ${REPO}/Branding/Help/*.chm ${REPO}/XenAdmin/Help/
-fi
-
 set +u
