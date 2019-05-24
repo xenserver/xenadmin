@@ -2730,20 +2730,23 @@
       <DependentUpon>XenWizardBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="..\Branding\HomePage.ja.mht">
+      <Link>HomePage.ja.mht</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\HomePage.mht">
+      <Link>HomePage.mht</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\HomePage.zh-CN.mht">
+      <Link>HomePage.zh-CN.mht</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="HomePage.zh-CN.mht">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="HomePage.ja.mht">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="HomePage.mht">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -4283,21 +4286,6 @@
     <None Include="Images\000_error_h32bit_32.png" />
     <None Include="Images\000_AddIPAddress_h32bit_16.png" />
     <None Include="Images\000_ConfigureIPAddresses_h32bit_16.png" />
-    <Content Include="HomePage\css\ie.css" />
-    <Content Include="HomePage\css\print.css" />
-    <Content Include="HomePage\css\screen.css" />
-    <Content Include="HomePage\css\theme.css" />
-    <Content Include="HomePage\index.html" />
-    <Content Include="HomePage\index.ja.html" />
-    <Content Include="HomePage\index.zh-CN.html" />
-    <Content Include="HomePage\media\grid.png" />
-    <Content Include="HomePage\media\icons\cx-cloudServerGraphic.png" />
-    <Content Include="HomePage\media\icons\cx-icon-addServer.png" />
-    <Content Include="HomePage\media\icons\cx-icon-generic-doc.png" />
-    <Content Include="HomePage\media\icons\cx-icon-purchaseSupport.png" />
-    <Content Include="HomePage\media\icons\cx-icon-regServPool.png" />
-    <Content Include="HomePage\media\icons\cx-icon-tryVirtualization.png" />
-    <Content Include="HomePage\media\logos\cx-logo-citrixHypervisor.png" />
     <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
