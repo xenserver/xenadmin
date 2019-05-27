@@ -32,6 +32,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBoxTypes = new XenAdmin.Controls.VgpuComboBox();
+            this.labelType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -58,17 +59,24 @@
             this.comboBoxTypes.Name = "comboBoxTypes";
             this.comboBoxTypes.SelectedIndexChanged += new System.EventHandler(this.comboBoxTypes_SelectedIndexChanged);
             // 
+            // labelType
+            // 
+            resources.ApplyResources(this.labelType, "labelType");
+            this.labelType.Name = "labelType";
+            // 
             // AddVGPUDialog
             // 
             this.AcceptButton = this.buttonAdd;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.labelType);
             this.Controls.Add(this.comboBoxTypes);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAdd);
             this.Name = "AddVGPUDialog";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -77,5 +85,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonCancel;
         private Controls.VgpuComboBox comboBoxTypes;
+        private System.Windows.Forms.Label labelType;
     }
 }

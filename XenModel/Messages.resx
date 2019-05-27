@@ -12736,13 +12736,16 @@ To start a [XenServer] trial, click the button below.</value>
     <value>[XenCenter] version {0} (build {1}.{2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
-    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays)</value>
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays{4})</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_MULTIPLE_SUPPORT" xml:space="preserve">
+    <value>, multiple vGPU support</value>
   </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
-    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display)</value>
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display{4})</value>
   </data>
   <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
-    <value>{0} virtual GPU ({1} per GPU)</value>
+    <value>{0} virtual GPU ({1} per GPU{2})</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>
@@ -12872,9 +12875,6 @@ To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
     <value>Invalid or incomplete schedule</value>
-  </data>
-  <data name="VMSS_MAIN_MENU" xml:space="preserve">
-    <value>VM Snapsh&amp;ot Schedules...</value>
   </data>
   <data name="VMSS_MAIN_MENU" xml:space="preserve">
     <value>VM Snapsh&amp;ot Schedules...</value>

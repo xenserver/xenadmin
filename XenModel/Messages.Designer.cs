@@ -36805,7 +36805,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays).
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays{4}).
         /// </summary>
         public static string VGPU_DESCRIPTION_MANY {
             get {
@@ -36814,7 +36814,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display).
+        ///   Looks up a localized string similar to , multiple vGPU support.
+        /// </summary>
+        public static string VGPU_DESCRIPTION_MULTIPLE_SUPPORT {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_MULTIPLE_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display{4}).
         /// </summary>
         public static string VGPU_DESCRIPTION_ONE {
             get {
@@ -36823,7 +36832,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU{2}).
         /// </summary>
         public static string VGPU_DESCRIPTION_ZEROES {
             get {
