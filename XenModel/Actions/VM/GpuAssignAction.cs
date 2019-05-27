@@ -53,20 +53,19 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            // Remove any existing VGPUs before adding new ones
-            foreach (VGPU vgpu in vm.Connection.ResolveAll(vm.VGPUs))
+            var vgpuSetToRemove = new HashSet<VGPU>(vm.Connection.ResolveAll(vm.VGPUs));
+            // Existing vGPUs must have opaque_ref
+            var vgpuSetToUnchanged = new HashSet<VGPU>(vGpus.FindAll(x => x.opaque_ref != null));
+
+            vgpuSetToRemove.ExceptWith(vgpuSetToUnchanged);
+
+            foreach (VGPU vgpu in vgpuSetToRemove)
                 VGPU.destroy(Session, vgpu.opaque_ref);
 
-            if (vGpus == null || vGpus.Count == 0)  // The VM doesn't want a VGPU
-                return;
-
-            // Add the new VGPUs
-            foreach (var vGpu in vGpus)
-            {
-                // leave device=0, see PR-1060
-                // in XAPI, a new value will be generated
+            // Add the new VGPUs. Keep device = 0, XAPI re-generate the device value.
+            // New added vGPUs haven't opaque_ref
+            foreach (var vGpu in vGpus.FindAll(x => x.opaque_ref == null))
                 AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type));
-            }
         }
 
         private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, int device = 0)
