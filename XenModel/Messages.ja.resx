@@ -9577,6 +9577,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
     <value>アップデートをアップロードしてインストールします</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_MANY" xml:space="preserve">
+    <value>一部の自動アップデート プロセスは完了しましたが、警告があります。</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_ONE" xml:space="preserve">
+    <value>自動アップデート プロセスは完了しましたが、警告があります。</value>
+  </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>クリーン アップ...</value>
   </data>
@@ -9739,6 +9745,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>適用されないアップデート</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE_OR_INVALID" xml:space="preserve">
+    <value>アップデートが適用されないか、ファイルに無効なデータが含まれています。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
     <value>アップデートする 1つまたは複数のプール、またはスタンドアロン サーバーを選択してください。
 この一覧で無効と表示されたサーバーは自動アップデートでアップデートできません。</value>
@@ -9788,6 +9797,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
     <value>[XenCenter] はシステムにアップデート {0} をインストール中です。</value>
   </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY" xml:space="preserve">
+    <value>アップデート {0} のインストールは完了しましたが、選択したサーバーの一部に関する警告があります。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_WARNING_ONE" xml:space="preserve">
+    <value>アップデート {0} のインストールは完了しましたが、警告があります。</value>
+  </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
     <value>アップロード プロセスはキャンセルされました。</value>
   </data>
@@ -9816,6 +9831,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_TITLE" xml:space="preserve">
     <value>[XenCenter] は、前の手順で指定したサーバーにアップデートをアップロードするために必要な操作を実行しています。操作が完了するまで待ってから [次へ] をクリックしインストールを続行してください。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_WARNING_MANY" xml:space="preserve">
+    <value>アップデート {0} のアップロードは完了しましたが、選択したサーバーの一部に関する警告があります。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_WARNING_ONE" xml:space="preserve">
+    <value>アップデート {0} のアップロードは完了しましたが、警告があります。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
     <value>アップロード</value>
@@ -10874,6 +10895,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>プールのローリング アップグレードが完了しませんでした。</value>
+  </data>
+  <data name="ROLLING_UPGRADE_WARNING_MANY" xml:space="preserve">
+    <value>プールのローリングアップグレード プロセスは完了しましたが、1 つまたは複数のプロセスに関する警告があります。</value>
+  </data>
+  <data name="ROLLING_UPGRADE_WARNING_ONE" xml:space="preserve">
+    <value>プールのローリングアップグレード プロセスは完了しましたが、警告があります。</value>
   </data>
   <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
     <value>{0} はスキップできます。</value>
@@ -12218,6 +12245,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>これは有効なアップデート ファイルではありません。
 
 設定を確認し、もう一度実行してください。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_ISO_FILE" xml:space="preserve">
+    <value>選択した ISO ファイルが破損しているか、無効なデータを含んでいます。</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM '{1}' のドライブには、ローカルの CD/DVD があります。</value>
