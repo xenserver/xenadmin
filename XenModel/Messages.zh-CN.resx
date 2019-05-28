@@ -9575,6 +9575,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
     <value>上载并安装更新</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_MANY" xml:space="preserve">
+    <value>某些自动更新过程已完成，但出现警告。</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_WARNING_ONE" xml:space="preserve">
+    <value>自动更新过程已完成，但出现警告。</value>
+  </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>清理...</value>
   </data>
@@ -9737,6 +9743,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE" xml:space="preserve">
     <value>更新不适用</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE_OR_INVALID" xml:space="preserve">
+    <value>更新不适用或文件包含无效数据。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
     <value>选择要更新的一个或多个池或独立服务器。
 无法通过自动更新更新的服务器在此列表中显示为已禁用。</value>
@@ -9786,6 +9795,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
     <value>[XenCenter] 现在正在您的系统中安装更新 {0}。</value>
   </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY" xml:space="preserve">
+    <value>更新 {0} 的安装已完成，但在某些选定的服务器上出现警告。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_WARNING_ONE" xml:space="preserve">
+    <value>更新 {0} 的安装已完成，但出现警告。</value>
+  </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
     <value>上载过程已取消。</value>
   </data>
@@ -9814,6 +9829,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_TITLE" xml:space="preserve">
     <value>[XenCenter] 现在正在执行将您的更新上载到上一步骤中指定的服务器所需的操作。请等待完成这些操作，然后单击“下一步”继续进行安装。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_WARNING_MANY" xml:space="preserve">
+    <value>更新 {0} 的上载已完成，但在某些选定的服务器上出现警告。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPLOAD_WARNING_ONE" xml:space="preserve">
+    <value>更新 {0} 的上载已完成，但出现警告。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
     <value>上载</value>
@@ -10872,6 +10893,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>滚动池升级未完成。</value>
+  </data>
+  <data name="ROLLING_UPGRADE_WARNING_MANY" xml:space="preserve">
+    <value>一个或多个滚动池升级过程已完成，但出现警告。</value>
+  </data>
+  <data name="ROLLING_UPGRADE_WARNING_ONE" xml:space="preserve">
+    <value>滚动池升级过程已完成，但出现警告。</value>
   </data>
   <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
     <value>可能已跳过 {0}。</value>
@@ -12214,6 +12241,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_INVALID_FILE" xml:space="preserve">
     <value>此文件不是有效的更新文件。</value>
+  </data>
+  <data name="UPDATES_WIZARD_INVALID_ISO_FILE" xml:space="preserve">
+    <value>选定的 ISO 文件已损坏或包含无效数据。</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_CD" xml:space="preserve">
     <value>{0}: VM“{1}”的驱动器中有本地 CD/DVD。</value>
