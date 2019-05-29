@@ -47,9 +47,9 @@ and also some libraries which we do not store in the source tree:
 You can find the source code of these libraries (along with some patches) in
 [dotnet-packages](https://github.com/xenserver/dotnet-packages) repository.
 
-You also need NUnit libraries
+To run the [NUnit](http://www.nunit.org/) tests you will need the following libraries:
 
 * nunit.framework.dll
 * Moq.dll
 
-which can be obtained from <http://www.nunit.org/>.
+which can be obtained from <http://www.nuget.org/>.
