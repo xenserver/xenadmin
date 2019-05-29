@@ -269,16 +269,15 @@ node("${params.BUILD_ON_NODE}") {
         timeout(time: 60, unit: 'MINUTES') {
 
           bat """
-              mkdir ${env.WORKSPACE}\\tmp
-              cp -r ${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release ${env.WORKSPACE}\\tmp
-              cd ${env.WORKSPACE}\\tmp
               taskkill /f /fi "imagename eq nunit*"
               echo Starting tests at %time% %date%
 
-              nunit-console /nologo /labels /stoponerror /nodots /process=separate /noshadow /labels /err="${env.WORKSPACE}\\tmp\\error.nunit.log" /timeout=40000 /xml="${env.WORKSPACE}\\tmp\\XenAdminTests.xml" "${env.WORKSPACE}\\tmp\\Release\\XenAdminTests.dll" /framework=net-4.6
+              nunit3-console /labels=all /process=separate /timeout=40000 ^
+                /out="${env.WORKSPACE}\\output\\nunit.out" ^
+                /result="${env.WORKSPACE}\\output\\XenAdminTests.xml" ^
+                "${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release\\XenAdminTests.dll"
 
               echo Finished tests at %time% %date%
-              cp ${env.WORKSPACE}\\tmp\\XenAdminTests.xml ${env.WORKSPACE}\\output
               """
 
           def text = readFile("${env.WORKSPACE}\\output\\XenAdminTests.xml")
