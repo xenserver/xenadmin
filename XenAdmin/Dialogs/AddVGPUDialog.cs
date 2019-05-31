@@ -91,7 +91,7 @@ namespace XenAdmin.Dialogs
                         comboBoxTypes.Items.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
 
                     if (commonTypes.Count == 1 && !disabledTypes.Contains(commonTypes[0]))
-                        comboBoxTypes.SelectedItem = comboBoxTypes.Items[1]; // Items[0] is group
+                        comboBoxTypes.SelectedItem = comboBoxTypes.Items[0];
                 }
             }
         }
