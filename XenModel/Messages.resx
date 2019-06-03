@@ -2000,10 +2000,10 @@ Warning: you must ensure that the SR is not in use by any server not connected t
     <value>License Details</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>Assign VM to snapsh&amp;ot schedule</value>
+    <value>Assign to Snapsh&amp;ot Schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>Assign VM to snapshot schedule</value>
+    <value>Assign to Snapsh&amp;ot Schedule</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>Assign VM to snapshot schedule...</value>
@@ -9107,7 +9107,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
 It is strongly recommended that you Cancel and apply the latest version of the packs to all servers before creating the pool.</value>
   </data>
   <data name="NEW_SCHEDULE" xml:space="preserve">
-    <value>&amp;New schedule...</value>
+    <value>&amp;New Snapshot Schedule...</value>
   </data>
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>New Search</value>
@@ -12877,7 +12877,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>{0}. {1}: {2}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
-    <value>Snapsh&amp;ot schedules ...</value>
+    <value>Snapsh&amp;ot Schedules...</value>
   </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
