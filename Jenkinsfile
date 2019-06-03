@@ -272,7 +272,7 @@ node("${params.BUILD_ON_NODE}") {
               taskkill /f /fi "imagename eq nunit*"
               echo Starting tests at %time% %date%
 
-              nunit3-console /labels=all /process=separate /timeout=40000 ^
+              nunit3-console /labels=all /process=separate /timeout=40000 /where "cat==Unit" ^
                 /out="${env.WORKSPACE}\\output\\nunit.out" ^
                 /result="${env.WORKSPACE}\\output\\XenAdminTests.xml" ^
                 "${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release\\XenAdminTests.dll"

@@ -63,92 +63,78 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchiveTests\ArchiveFactoryTests.cs" />
+    <Compile Include="ArchiveTests\ArchiveIteratorTests.cs" />
+    <Compile Include="ArchiveTests\ArchiveWriterTests.cs" />
+    <Compile Include="ArchiveTests\ThirdPartyArchiveWriterTests.cs" />
+    <Compile Include="ClassVerifiers.cs" />
+    <Compile Include="CodeTests\I18nResourceFilesTests.cs" />
+    <Compile Include="CodeTests\XenModelReferencesTest.cs" />
+    <Compile Include="CompressionTests\CompressionFactoryTests.cs" />
+    <Compile Include="CompressionTests\CompressionStreamTests.cs" />
+    <Compile Include="CompressionTests\ThirdPartyCompressionStreamTests.cs" />
+    <Compile Include="Controls\DecentGroupBoxTests.cs" />
+    <Compile Include="Controls\Folders\FolderListItemTests.cs" />
+    <Compile Include="Controls\LongStringComboBoxTest.cs" />
     <Compile Include="HealthCheckTests\CredentialTests.cs" />
-    <Compile Include="HealthCheckTests\RequestUploadTaskTests.cs" />
-    <Compile Include="UnitTests\BatchUpdatesTests\BatchUpdatesTests.cs" />
-    <Compile Include="UnitTests\CPUFeaturesTest.cs" />
-    <Compile Include="UnitTests\AlertTests\MultipathAlertTest.cs" />
-    <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
-    <Compile Include="UnitTests\HelpManagerTests.cs" />
-    <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
-    <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
-    <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />
-    <Compile Include="XenModelTests\ActionTests\VMActionsTest.cs" />
-    <Compile Include="MainWindowWrapper\AttachDiskDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\AddServerDialogWrapper.cs" />
+    <Compile Include="LicensingTests\LicenceTimerTests.cs" />
+    <Compile Include="LicensingTests\ProductColumnComparerTests.cs" />
     <Compile Include="MainWindowWrapper\MockMainWindow.cs" />
-    <Compile Include="MainWindowWrapper\NameAndConnectionPromptWrapper.cs" />
-    <Compile Include="MainWindowWrapper\HostMenuWrapper.cs" />
-    <Compile Include="MainWindowWrapper\MainToolBarWrapper.cs" />
-    <Compile Include="MainWindowWrapper\StartShutdownMenuWrapper.cs" />
-    <Compile Include="MainWindowWrapper\StorageMenuWrapper.cs" />
-    <Compile Include="MainWindowWrapper\ToolsMenuWrapper.cs" />
-    <Compile Include="MainWindowWrapper\VMMenuWrapper.cs" />
+    <Compile Include="MockConnectionManager.cs" />
     <Compile Include="PluginTests\MenuItemFeatureTests.cs" />
     <Compile Include="PluginTests\ParentMenuItemFeatureTests.cs" />
-    <Compile Include="PluginTests\ShellCmdTestBatchFile.cs" />
     <Compile Include="PluginTests\ShellCmdTests.cs" />
     <Compile Include="PluginTests\TabPageFeatureTests.cs" />
     <Compile Include="PluginTests\TestPluginLoader.cs" />
-    <Compile Include="SearchTests\SearcherTests.cs" />
-    <Compile Include="SearchTests\SearchWindow.cs" />
-    <Compile Include="SearchTests\SearchWindowUpdateTests.cs" />
-    <Compile Include="TabsAndMenus\DisconnectedTests.cs" />
-    <Compile Include="MainWindowWrapper\MainWindowWrapper.cs" />
-    <Compile Include="MainWindowWrapper\TestWrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchTests\DatePropertyQueryTests.cs" />
+    <Compile Include="StringExtensionsTests\EllipsiseStringTests.cs" />
+    <Compile Include="StringExtensionsTests\EscapeAmpersandsTests.cs" />
+    <Compile Include="StringExtensionsTests\TruncateStringTest.cs" />
+    <Compile Include="TestCategories.cs" />
+    <Compile Include="TestUtils.cs" />
     <Compile Include="TreeTests\FlickerFreeTreeViewTests.cs" />
-    <Compile Include="TreeTests\MainWindowTreeBuilderTests.cs" />
-    <Compile Include="TreeTests\MainWindowTreeTests.cs" />
-    <Compile Include="TreeTests\MainWindowTreeTestsDefault.cs" />
-    <Compile Include="TreeTests\TreeViewSerializer.cs" />
     <Compile Include="TreeTests\MultiSelectTreeViewTests.cs" />
     <Compile Include="TreeTests\VirtualTreeViewTests.cs" />
-    <Compile Include="DialogTests\AdPasswordPromptTest.cs" />
-    <Compile Include="DialogTests\DialogsForConnection.cs" />
-    <Compile Include="DialogTests\DialogsForHost.cs" />
-    <Compile Include="DialogTests\DialogsForPool.cs" />
-    <Compile Include="DialogTests\DialogsForVM.cs" />
-    <Compile Include="DialogTests\DialogsWithDefaultConstructor.cs" />
-    <Compile Include="DialogTests\DialogTest.cs" />
-    <Compile Include="DialogTests\NetworkingPropertiesTest.cs" />
-    <Compile Include="DialogTests\NewDiskDialogTest.cs" />
-    <Compile Include="DialogTests\OptionsDialogTest.cs" />
-    <Compile Include="DialogTests\OtherDialogs.cs" />
-    <Compile Include="DialogTests\PropertiesDialogTest.cs" />
-    <Compile Include="DialogTests\VerticallyTabbedDialogTest.cs" />
-    <Compile Include="FolderTests\FolderTest.cs" />
-    <Compile Include="LicensingTests\AssignLicenseDialogWrapper.cs" />
-    <Compile Include="LicensingTests\OpenFileDialogWrapper.cs" />
-    <Compile Include="MainWindowTester.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchTests\ComparerAdapter.cs" />
-    <Compile Include="SearchTests\IPAddressTest.cs" />
-    <Compile Include="SearchTests\MatchTests.cs" />
-    <Compile Include="SearchTests\SearchMarshallingTests.cs" />
-    <Compile Include="SearchTests\SearchTestsSetup.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenus.cs" />
+    <Compile Include="UnitTests\AlertTests\AlertClassUnitTestData.cs" />
+    <Compile Include="UnitTests\AlertTests\DuplicateIqnAlertTests.cs" />
+    <Compile Include="UnitTests\AlertTests\GuiOldAlertTest.cs" />
+    <Compile Include="UnitTests\AlertTests\MissingIqnAlertTests.cs" />
+    <Compile Include="UnitTests\AlertTests\MultipathAlertTest.cs" />
+    <Compile Include="UnitTests\AlertTests\XenCenterUpdateAlertTests.cs" />
+    <Compile Include="UnitTests\AlertTests\XenServerPatchAlertTests.cs" />
+    <Compile Include="UnitTests\AlertTests\XenServerUpdateAlertTests.cs" />
+    <Compile Include="UnitTests\ApplianceExistsCheckTests.cs" />
+    <Compile Include="UnitTests\BasicXMLResolverTests.cs" />
+    <Compile Include="UnitTests\CPUFeaturesTest.cs" />
+    <Compile Include="UnitTests\CPUMaskingTest.cs" />
+    <Compile Include="UnitTests\EmailAddressValidatorTests.cs" />
+    <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
+    <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
+    <Compile Include="UnitTests\HelpManagerTests.cs" />
+    <Compile Include="UnitTests\HelpStringTests.cs" />
+    <Compile Include="UnitTests\NamesAndMessagesTests.cs" />
     <Compile Include="UnitTests\NaturalCompareTest.cs" />
+    <Compile Include="UnitTests\StreamUtilitiesTests.cs" />
+    <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
+    <Compile Include="UnitTests\TimeUtilTests.cs" />
     <Compile Include="UnitTests\TokenizerTest.cs" />
-    <Compile Include="UnitTests\XenObjectEqualsTests.cs" />
-    <Compile Include="WizardTests\BallooningWizardTest.cs" />
-    <Compile Include="WizardTests\BugToolWizardTest.cs" />
-    <Compile Include="WizardTests\HAWizardTest.cs" />
-    <Compile Include="WizardTests\NewNetworkWizardTest.cs" />
-    <Compile Include="WizardTests\NewSRWizardTest.cs" />
-    <Compile Include="WizardTests\NewVMWizardStorageTest.cs" />
-    <Compile Include="WizardTests\NewVMWizardTest.cs" />
-    <Compile Include="WizardTests\UpdatesWizardTest.cs" />
-    <Compile Include="WizardTests\WizardTest.cs" />
+    <Compile Include="UnitTests\UpdateManagerTests.cs" />
+    <Compile Include="UnitTests\UtilTests.cs" />
+    <Compile Include="UnitTests\WlbTests\WlbPoolConfigurationTests.cs" />
+    <Compile Include="UnitTests\WlbTests\WlbReportSubscriptionTests.cs" />
+    <Compile Include="UnitTests\WlbTests\WlbScheduledTasksTests.cs" />
+    <Compile Include="UnitTests\WlbTests\WlbScheduledTaskTests.cs" />
+    <Compile Include="XenModelTests\AreEqual2Tests.cs" />
+    <Compile Include="XenModelTests\CacheTests.cs" />
+    <Compile Include="XenModelTests\HostExtensionTests.cs" />
+    <Compile Include="XenModelTests\JsonConverterTests.cs" />
+    <Compile Include="XenModelTests\XenObjectEqualsTests.cs" />
+    <Compile Include="XenOvf\FileDigestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="TestResources\enterprise.xslic">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestResources\express.xslic">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestResources\PluginResources\XenServerPowerShellTest.ps1">
+    <None Include="TestResources\emptyfile.bz2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestResources\PluginResources\PowerShellTest.ps1">
@@ -157,304 +143,24 @@
     <None Include="TestResources\PluginResources\ShellTest.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestResources\state.db">
+    <None Include="TestResources\PluginResources\XenServerPowerShellTest.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestResources\succeed.[xsupdate]">
+    <None Include="TestResources\PluginResources\MenuItemFeatureTestPlugin.xcplugin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TestResources\boston-db.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\ContextMenuBuilderTestResults.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\cowleyPolicies.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="TestResources\PluginResources\ParentMenuItemFeatureTestPlugin.xcplugin.xml" />
-    <Content Include="TestResources\PluginResources\PowerShellPlugin.xcplugin.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="TestResources\PluginResources\MenuItemFeatureTestPlugin.xcplugin.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TestResources\PluginResources\TabPageFeatureTestPlugin.xcplugin.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <Content Include="TestResources\PluginResources\XenServerPowerShellPlugin.xcplugin.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Compile Include="Controls\DecentGroupBoxTests.cs" />
-    <Compile Include="Controls\Folders\FolderListItemTests.cs" />
-    <Compile Include="DialogTests\LicenseManager\Comparers\NameColumnComparerTests.cs" />
-    <Compile Include="DialogTests\LicenseManager\Comparers\ProductColumnComparerTests.cs" />
-    <Compile Include="DialogTests\LicenseManager\SelectionVerifiers\CanUseLicenseServerVerifierTests.cs" />
-    <Compile Include="DialogTests\LicenseManager\SelectionVerifiers\OldServerVerifierTests.cs" />
-    <Compile Include="LicensingTests\LicenceStatusTests.cs" />
-    <Compile Include="LicensingTests\LicenseManagerSummaryLicenseExpiresDecoratorTests.cs" />
-    <Compile Include="LicensingTests\LicenseManagerTests.cs" />
-    <Compile Include="LicensingTests\FakeResponseSelectionVerifierFactories.cs" />
-    <Compile Include="StringExtensionsTests\EllipsiseStringTests.cs" />
-    <Compile Include="StringExtensionsTests\EscapeAmpersandsTests.cs" />
-    <Compile Include="TabsAndMenus\GeneralTabLicenseStatusStringifierTests.cs" />
-    <Compile Include="UnitTests\MiscTests\UtilTests.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockPoolOfVersionedHosts.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockVersionedHost.cs" />
-    <Compile Include="WizardTests\CrossPoolMigrateWizard\Filters\WlbEnabledFilterTests.cs" />
-    <Compile Include="WizardTests\ExportWizard\ApplianceExistsCheckTests.cs" />
-    <Compile Include="WizardTests\PatchingWizard\PatchingWizard_PrecheckPageTests.cs" />
-    <Compile Include="XenModelTests\ActionTests\AD\AddRemoveRolesActionTest.cs" />
-    <Compile Include="XenModelTests\ActionTests\ExportVMActionTest.cs" />
-    <Compile Include="XenModelTests\ActionTests\VM\GpuAssignActionTests.cs" />
-    <Compile Include="XenModelTests\ActionTests\Hosts\GetServerTimeActionTests.cs" />
-    <Compile Include="XenModelTests\ActionTests\NetworkingActionsTests.cs" />
-    <Compile Include="ArchiveTests\ArchiveFactoryTests.cs" />
-    <Compile Include="ArchiveTests\ArchiveIteratorTests.cs" />
-    <Compile Include="ArchiveTests\ArchiveWriterTests.cs" />
-    <Compile Include="ArchiveTests\ThirdPartyArchiveWriterTests.cs" />
-    <Compile Include="CommandTests\AddHostCommandTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CommandTests\AddHostToPoolCommandTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CommandTests\AddNewHostToPoolCommandTest.cs" />
-    <Compile Include="CommandTests\AddVirtualDiskCommandTest.cs" />
-    <Compile Include="CommandTests\AttachVirtualDiskCommandTest.cs" />
-    <Compile Include="CommandTests\BackupHostCommandTest.cs" />
-    <Compile Include="CommandTests\CommandTest.cs" />
-    <Compile Include="CommandTests\CrossPoolMigrateCommandTests.cs" />
-    <Compile Include="CommandTests\DeleteFolderCommandTest.cs" />
-    <Compile Include="CommandTests\DeleteSnapshotCommandTest.cs" />
-    <Compile Include="CommandTests\DeleteTagCommandTest.cs" />
-    <Compile Include="CommandTests\DeleteTemplateCommandTest.cs" />
-    <Compile Include="CommandTests\DeleteVMCommandTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CommandTests\DeleteVMsAndTemplatesCommandTest.cs" />
-    <Compile Include="CommandTests\DisconnectHostCommandTest.cs" />
-    <Compile Include="CommandTests\DisconnectPoolCommandTest.cs" />
-    <Compile Include="CommandTests\DRConfigureCommandTest.cs" />
-    <Compile Include="CommandTests\DRDryrunCommandTest.cs" />
-    <Compile Include="CommandTests\DRFailbackCommandTest.cs" />
-    <Compile Include="CommandTests\DRFailoverCommandTest.cs" />
-    <Compile Include="CommandTests\EditTagsCommandTest.cs" />
-    <Compile Include="CommandTests\MigrateVirtualDiskCommandTest.cs" />
-    <Compile Include="CommandTests\NewFolderCommandTest.cs" />
-    <Compile Include="CommandTests\PutFolderIntoRenameModeCommandTest.cs" />
-    <Compile Include="CommandTests\RemoveFromFolderCommandTest.cs" />
-    <Compile Include="CommandTests\RenameTagCommandTest.cs" />
-    <Compile Include="CommandTests\ShutDownHostCommandTest.cs" />
-    <Compile Include="CommandTests\UntagCommandTest.cs" />
-    <Compile Include="CommandTests\VMLifecycleCommandTest.cs" />
-    <Compile Include="CompressionTests\CompressionFactoryTests.cs" />
-    <Compile Include="CompressionTests\CompressionStreamTests.cs" />
-    <Compile Include="CompressionTests\ThirdPartyCompressionStreamTests.cs" />
-    <Compile Include="Controls\LunComboBoxItemTests.cs" />
-    <Compile Include="Controls\LunPerVdiPickerItemTests.cs" />
-    <Compile Include="Controls\SrPickerLunPerVDIItemTests.cs" />
-    <Compile Include="ManagedTester.cs" />
-    <Compile Include="MockConnectionManager.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenusTampa.cs" />
-    <Compile Include="UnitTester.cs" />
-    <Compile Include="UnitTests\Controls\LongStringComboBoxTest.cs" />
-    <Compile Include="Controls\SrPickerItemTests.cs" />
-    <Compile Include="DatabaseTester.cs" />
-    <Compile Include="Diagnostics\DiagnosticsTests.cs" />
-    <Compile Include="DialogTests\BostonDialogTest.cs" />
-    <Compile Include="DialogTests\CertificateDialogTests.cs" />
-    <Compile Include="DialogTests\IscsiDeviceConfigDialogTests.cs" />
-    <Compile Include="DialogTests\MessageBoxTestTests.cs" />
-    <Compile Include="DialogTests\MoveVirtualDiskDialogTests.cs" />
-    <Compile Include="DialogTests\ReconnectAsDialogTests.cs" />
-    <Compile Include="DialogTests\RestoreVMsDialogTests.cs" />
-    <Compile Include="DialogTests\ScreenShotDialogTest.cs" />
-    <Compile Include="DialogTests\UpsellDialogTests.cs" />
-    <Compile Include="DialogTests\WlbCredentialsDialogTests.cs" />
-    <Compile Include="DialogTests\WlbEditScheduledTaskTests.cs" />
-    <Compile Include="I18nResourceFilesTests.cs" />
-    <Compile Include="LicensingTests\LicenceTimerTests.cs" />
-    <Compile Include="MainWindowLauncher.cs" />
-    <Compile Include="MainWindowWrapper\CommandErrorDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\DRConfigureDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\DRFailoverWizardWrapper.cs" />
-    <Compile Include="MainWindowWrapper\NetworkTabPageWrapper.cs" />
-    <Compile Include="MainWindowWrapper\NewNetworkWizardWrapper.cs" />
-    <Compile Include="MainWindowWrapper\NewTagDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\OptionsDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\RoleElevationDialogWrapper.cs" />
-    <Compile Include="MainWindowWrapper\TestUtils.cs" />
-    <Compile Include="MiscTests\BasicXMLResolverTests.cs" />
-    <Compile Include="MiscTests\ContextMenuBuilderTests.cs" />
-    <Compile Include="MiscTests\ContextMenuBuilderTests.Serializer.cs" />
-    <Compile Include="TabsAndMenus\NetworkTabTests.cs" />
-    <Compile Include="TestCategories.cs" />
-    <Compile Include="TestDatabaseManager.cs" />
-    <Compile Include="TestObjectProvider.cs" />
-    <Compile Include="UnitTests\AlertTests\AlertClassUnitTestData.cs" />
-    <Compile Include="UnitTests\AlertTests\MissingIqnAlertTests.cs" />
-    <Compile Include="DialogTests\MultipleWarningDialogTests.cs" />
-    <Compile Include="UnitTests\AlertTests\XenCenterUpdateAlertTests.cs" />
-    <Compile Include="UnitTests\AlertTests\XenServerPatchAlertTests.cs" />
-    <Compile Include="UnitTests\AlertTests\XenServerUpdateAlertTests.cs" />
-    <Compile Include="UnitTests\Diagnostics\HotFixFactoryTests.cs" />
-    <Compile Include="UnitTests\Diagnostics\MultipleHotfixTests.cs" />
-    <Compile Include="UnitTests\Dialogs\DataGridViewEx\CollapsingPoolHostDataGridViewColumnStableSorterTests.cs" />
-    <Compile Include="UnitTests\Dialogs\DataGridViewEx\CollapsingPoolHostDataGridViewRowSorterTests.cs" />
-    <Compile Include="UnitTests\MiscTests\EmailAddressValidatorTests.cs" />
-    <Compile Include="UnitTests\MiscTests\NamesAndMessagesTests.cs" />
-    <Compile Include="MiscTests\HelpStringTests.cs" />
-    <Compile Include="MiscTests\ShowHideTests.cs" />
-    <Compile Include="MiscTests\StreamUtilitiesTests.cs" />
-    <Compile Include="MiscTests\TimeUtilTests.cs" />
-    <Compile Include="MiscTests\UpdateManagerTests.cs" />
-    <Compile Include="MiscTests\WebBrowser2Tests.cs" />
-    <Compile Include="PluginTests\PlaceholdersTests.cs" />
-    <Compile Include="TabsAndMenus\TabsAndMenusBoston.cs" />
-    <Compile Include="TabsAndMenus\HistoryPageTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindowWrapper\InputPromptDialogWrapper.cs" />
-    <Compile Include="DialogTests\VIFDialogTest.cs" />
-    <Compile Include="MainWindowWrapper\ViewMenuWrapper.cs" />
-    <Compile Include="SearchTests\ExpectedResults.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SearchTests\LoadAllSearches.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\MainMenuGeorge.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\PluginTabsAndMenus.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\StartUpStateTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\ToolbarGeorge.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TabsAndMenus\ToolbarMidnightRide.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UnitTests\AlertTests\DuplicateIqnAlertTests.cs" />
-    <Compile Include="UnitTests\AlertTests\GuiOldAlertTest.cs" />
-    <Compile Include="UnitTests\CPUMaskingTest.cs" />
-    <Compile Include="StringExtensionsTests\TruncateStringTest.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\IUnitTestVerifier.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockObjectBuilder.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockObjectBuilderFactory.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockVdiWithVbds.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockVmWithHomeServer.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\VerifyStaticMethodReturn.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\VerifyGetters.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\VerifyGettersAndSetters.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\VerifyPropertyCounter.cs" />
-    <Compile Include="UnitTests\WlbTests\WlbPoolConfigurationTests.cs" />
-    <Compile Include="UnitTests\WlbTests\WlbReportSubscriptionTests.cs" />
-    <Compile Include="UnitTests\WlbTests\WlbScheduledTasksTests.cs" />
-    <Compile Include="UnitTests\WlbTests\WlbScheduledTaskTests.cs" />
-    <Compile Include="WizardTests\CrossPoolMigrateCanMigrateFilterTest.cs" />
-    <Compile Include="WizardTests\CrossPoolMigrateWizardTest.cs" />
-    <Compile Include="WizardTests\DRFailoverWizardSummaryReportTests.cs" />
-    <Compile Include="WizardTests\DRFailoverWizardTests.cs" />
-    <Compile Include="WizardTests\ImportWizardTest.cs" />
-    <Compile Include="WizardTests\ExportWizardTest.cs" />
-    <Compile Include="WizardTests\NewPolicyWizardTest.cs" />
-    <Compile Include="WizardTests\NewVMWizardBiosStringsTest.cs" />
-    <Compile Include="WizardTests\NewVMWizardDisklessVMs.cs" />
-    <Compile Include="WizardTests\ResidentHostIsSameAsSelectionFilterTests.cs" />
-    <Compile Include="WizardTests\RollingUpgradeWizardTest.cs" />
-    <Compile Include="XenModelTests\ActionTestBase.cs" />
-    <Compile Include="XenModelTests\AddressTests.cs" />
-    <Compile Include="XenModelTests\AreEqual2Tests.cs" />
-    <Compile Include="XenModelTests\DestroyPolicyActionTests.cs" />
-    <Compile Include="XenModelTests\DestroyVMTests.cs" />
-    <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockActionFactory.cs" />
-    <Compile Include="XenModelTests\HostExtensionTests.cs" />
-    <Compile Include="XenModelTests\SessionTests.cs" />
-    <Compile Include="XenModelTests\TestXenAdminConfigProvider.cs" />
-    <Compile Include="XenModelTests\PureAsyncActionTests.cs" />
-    <Compile Include="XenModelTests\TestAPICallVersions.cs" />
-    <Compile Include="XenModelTests\UpgradePoolActionTests.cs" />
-    <Compile Include="XenModelTests\VMBuilder.cs" />
-    <Compile Include="XenModelTests\VMExtensionsTests.cs" />
-    <Compile Include="XenModelTests\JsonConverterTests.cs" />
-    <Compile Include="XenModelTests\XenModelReferencesTest.cs" />
-    <Compile Include="XenOvf\FileDigestTests.cs" />
-    <None Include="TestResources\callVersions.csv">
+    <None Include="TestResources\PluginResources\ParentMenuItemFeatureTestPlugin.xcplugin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestResources\disk-image.vhd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TestResources\emptyfile.bz2">
+    <None Include="TestResources\PluginResources\PowerShellPlugin.xcplugin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestResources\sample.xva">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TestResources\sample_app.ovf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TestResources\TestDevCertificate.cer">
+    <None Include="TestResources\PluginResources\TabPageFeatureTestPlugin.xcplugin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="TestResources\searchresults.xml">
+    <None Include="TestResources\PluginResources\XenServerPowerShellPlugin.xcplugin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\single-host-krakout.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\small_vms.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state1.treeview.orgview.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state1.treeview.serverview.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\tampa-db_inc_snapshots.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\tampa-poolof16and23-xapi-db.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\TampaTwoHostPoolSelectioniSCSI.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\tampa_livevdimove_xapi-db.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\tampa_poolofone_40.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\updatesState.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\state5.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\xapidb_app.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XenAdmin\XenAdmin.csproj">
@@ -478,7 +184,9 @@
       <Name>XenServerHealthCheck</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="WizardTests\Patching\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
