@@ -206,10 +206,10 @@ namespace XenAPI
             if (IsLocalSuperuser)
                 return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-            if (!string.IsNullOrEmpty(CurrentUserDetails.UserDisplayName))
+            if (CurrentUserDetails != null && !string.IsNullOrEmpty(CurrentUserDetails.UserDisplayName))
                 return CurrentUserDetails.UserDisplayName.Ellipsise(50);
 
-            if (!string.IsNullOrEmpty(CurrentUserDetails.UserName))
+            if (CurrentUserDetails != null && !string.IsNullOrEmpty(CurrentUserDetails.UserName))
                 return CurrentUserDetails.UserName.Ellipsise(50);
 
             return Messages.UNKNOWN_AD_USER;
@@ -223,7 +223,7 @@ namespace XenAPI
             if (IsLocalSuperuser)
                 return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-            if (!string.IsNullOrEmpty(CurrentUserDetails.UserName))
+            if (CurrentUserDetails != null && !string.IsNullOrEmpty(CurrentUserDetails.UserName))
                 return CurrentUserDetails.UserName;
 
             return UserSid;
