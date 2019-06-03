@@ -31,15 +31,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using XenAPI;
-using System.Collections;
 using System.Reflection;
 using XenAdmin.Model;
-using System.Diagnostics;
 
-namespace XenAdminTests.UnitTests
+
+namespace XenAdminTests.XenModelTests
 {
     [TestFixture, Category(TestCategories.Unit)]
     public class XenObjectEqualsTests
@@ -49,11 +47,12 @@ namespace XenAdminTests.UnitTests
         /// <summary>
         /// Gets all Types that derive from IXenObject except Folder and DockerContainer
         /// </summary>
-        public IEnumerable<Type> AllXenObjectTypesExceptFolder
+        private static IEnumerable<Type> AllXenObjectTypesExceptFolder
         {
             get
             {
-                foreach (Type t in typeof(IXenObject).Assembly.GetTypes())
+                var theTypes = typeof(IXenObject).Assembly.GetTypes();
+                foreach (Type t in theTypes)
                 {
                     if (!t.IsAbstract && typeof(IXenObject).IsAssignableFrom(t) && t.GetConstructor(new Type[0]) != null && !typeof(Folder).IsAssignableFrom(t) && !typeof(DockerContainer).IsAssignableFrom(t))
                     {
@@ -63,11 +62,9 @@ namespace XenAdminTests.UnitTests
             }
         }
 
-        /// <summary>
-        /// Tests object.Equals uses opaque_ref for all types of IXenObject except folders.
-        /// </summary>
         [Test]
-        public void TestObjectEquals([ValueSource("AllXenObjectTypesExceptFolder")] Type xenObjectType)
+        [Description("Tests object.Equals uses opaque_ref for all types of IXenObject except folders.")]
+        public void TestObjectEquals([ValueSource(typeof(XenObjectEqualsTests), nameof(AllXenObjectTypesExceptFolder))] Type xenObjectType)
         {
             IXenObject a = (IXenObject)Activator.CreateInstance(xenObjectType);
             SetRandomStuffToFields(a);
@@ -85,10 +82,8 @@ namespace XenAdminTests.UnitTests
             Assert.IsFalse(a.Equals(c), xenObjectType.Name + " Equals failed");
         }
 
-        /// <summary>
-        /// Tests that folder uses _name_label for object.Equals instead of opaque_ref.
-        /// </summary>
         [Test]
+        [Description("Tests that folder uses _name_label for object.Equals instead of opaque_ref.")]
         public void TestFolderObjectEquals()
         {
             Folder a = new Folder(null, "hello") { opaque_ref = "a" };
@@ -98,11 +93,9 @@ namespace XenAdminTests.UnitTests
             Assert.AreNotEqual(a, c, "Folder Equals failed");
         }
 
-        /// <summary>
-        /// Tests that IEquatable has the same result as object.Equals for all types that derive from IXenObject except Folder.
-        /// </summary>
         [Test]
-        public void TestIEquatableUsage([ValueSource("AllXenObjectTypesExceptFolder")] Type xenObjectType)
+        [Description("Tests that IEquatable has the same result as object.Equals for all types that derive from IXenObject except Folder.")]
+        public void TestIEquatableUsage([ValueSource(typeof(XenObjectEqualsTests), nameof(AllXenObjectTypesExceptFolder))] Type xenObjectType)
         {
             IXenObject a = (IXenObject)Activator.CreateInstance(xenObjectType);
             SetRandomStuffToFields(a);
@@ -148,13 +141,13 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void TestFolderIEquatableUsage()
         {
-            Folder a = new Folder(null, "hello") { opaque_ref = "a" };
-            Folder b = new Folder(null, "hello") { opaque_ref = "b" };
-            Folder c = new Folder(null, "goodbye") { opaque_ref = "c" };
+            var a = new Folder(null, "hello") { opaque_ref = "a" };
+            var b = new Folder(null, "hello") { opaque_ref = "b" };
+            var c = new Folder(null, "goodbye") { opaque_ref = "c" };
 
-            IEquatable<IXenObject> aa = (IEquatable<IXenObject>)a;
-            IEquatable<IXenObject> bb = (IEquatable<IXenObject>)b;
-            IEquatable<IXenObject> cc = (IEquatable<IXenObject>)c;
+            IEquatable<IXenObject> aa = a;
+            IEquatable<IXenObject> bb = b;
+            IEquatable<IXenObject> cc = c;
 
             Assert.IsTrue(aa.Equals(bb), "Folder Equals failed");
             Assert.IsFalse(aa.Equals(cc), "Folder Equals failed");
@@ -184,8 +177,8 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void TestCanDeriveHostAndOverrideEquals()
         {
-            DerivedFromHost h1 = new DerivedFromHost { opaque_ref = "hello" };
-            DerivedFromHost h2 = new DerivedFromHost { opaque_ref = "hello" };
+            var h1 = new DerivedFromHost { opaque_ref = "hello" };
+            var h2 = new DerivedFromHost { opaque_ref = "hello" };
 
             Assert.IsFalse(h1.Equals(h2));
 
@@ -200,7 +193,7 @@ namespace XenAdminTests.UnitTests
             Assert.IsFalse(hhh1.Equals(hhh2));
         }
 
-        public class DerivedFromHost : Host
+        private class DerivedFromHost : Host
         {
             private readonly object _o = new object();
             

@@ -37,26 +37,17 @@ using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
-    class ArchiveIteratorTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class ArchiveIteratorTests
     {
-        private ArchiveIteratorFake fakeIterator;
-
         #region ArchiveIterator Fake 
         private class ArchiveIteratorFake : ArchiveIterator
         {
-            private int numberOfCallsLeft;
             private Stream extractedFile;
-            private string currentFileName;
-            private long currentFileSize;
-            private DateTime modTime;
-            private bool isDirectory;
             private bool disposed;
 
-            public int NumberOfCallsLeftReturn
-            {
-                set { numberOfCallsLeft = value; }
-            }
+            public int NumberOfCallsLeftReturn { private get; set; }
+
             public Stream ExtractedFileReturn
             {
                 set 
@@ -65,22 +56,10 @@ namespace XenAdminTests.ArchiveTests
                     disposed = false;
                 }
             }
-            public string CurrentFileNameReturn
-            {
-                set { currentFileName = value; }
-            }
-            public long CurrentFileSizeReturn
-            {
-                set { currentFileSize = value; }
-            }
-            public DateTime ModTimeReturn
-            {
-                set { modTime = value; }
-            }
-            public bool IsDirectoryReturn
-            {
-                set { isDirectory = value; }
-            }
+            public string CurrentFileNameReturn { private get; set; }
+            public long CurrentFileSizeReturn { private get; set; }
+            public DateTime ModTimeReturn { private get; set; }
+            public bool IsDirectoryReturn { private get; set; }
 
             public ArchiveIteratorFake()
             {
@@ -99,10 +78,10 @@ namespace XenAdminTests.ArchiveTests
 
             public override bool HasNext()
             {
-                if (numberOfCallsLeft < 1)
+                if (NumberOfCallsLeftReturn < 1)
                     return false;
 
-                numberOfCallsLeft--;
+                NumberOfCallsLeftReturn--;
                 return true;
             }
 
@@ -119,25 +98,25 @@ namespace XenAdminTests.ArchiveTests
 
             public override string CurrentFileName()
             {
-                if (String.IsNullOrEmpty(currentFileName))
-                    return currentFileName;
+                if (String.IsNullOrEmpty(CurrentFileNameReturn))
+                    return CurrentFileNameReturn;
 
-                return numberOfCallsLeft + currentFileName;
+                return NumberOfCallsLeftReturn + CurrentFileNameReturn;
             }
 
             public override long CurrentFileSize()
             {
-                return currentFileSize;
+                return CurrentFileSizeReturn;
             }
 
             public override DateTime CurrentFileModificationTime()
             {
-                return modTime;
+                return ModTimeReturn;
             }
 
             public override bool IsDirectory()
             {
-                return isDirectory;
+                return IsDirectoryReturn;
             }
 
             protected override void Dispose(bool disposing)
@@ -152,16 +131,18 @@ namespace XenAdminTests.ArchiveTests
                     }
                 }
             }
-        } 
+        }
         #endregion
 
-        [TestFixtureSetUp]
+        private ArchiveIteratorFake fakeIterator;
+
+        [OneTimeSetUp]
         public void Setup()
         {
             fakeIterator = new ArchiveIteratorFake();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             fakeIterator.Dispose();
@@ -175,18 +156,16 @@ namespace XenAdminTests.ArchiveTests
 
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AnExceptionIsThrownForNullArgumentWhenCallingExtractAllContents()
         {
-            fakeIterator.ExtractAllContents(null);
+            Assert.Throws(typeof(ArgumentNullException), () => fakeIterator.ExtractAllContents(null));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AnExceptionIsThrownForANullFileNameWhenCallingExtractAllContents()
         {
             fakeIterator.CurrentFileNameReturn = null;
-            fakeIterator.ExtractAllContents(Path.GetTempPath());
+            Assert.Throws(typeof(ArgumentNullException), () => fakeIterator.ExtractAllContents(Path.GetTempPath()));
         }
         
         [Test]

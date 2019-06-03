@@ -31,11 +31,10 @@
 
 using NUnit.Framework;
 using XenAdmin;
-using System.Linq;
 using System.Collections.Generic;
 using System;
 
-namespace XenAdminTests.UnitTests.MiscTests
+namespace XenAdminTests.UnitTests
 {
     [TestFixture, Category(TestCategories.Unit)]
     internal class UtilTests
@@ -52,7 +51,7 @@ namespace XenAdminTests.UnitTests.MiscTests
                 {    2100000, new[] { "2", "MB" } },
                 {    2900000, new[] { "3", "MB" } },
                 { 1073741824, new[] { "1024", "MB" } }, //1024*1024*1024
-                { 2100000000, new[] { "2003", "MB" } },
+                { 2100000000, new[] { "2003", "MB" } }
             };
 
         private Dictionary<double, string[]> memoryVariousPairs = new Dictionary<double, string[]>

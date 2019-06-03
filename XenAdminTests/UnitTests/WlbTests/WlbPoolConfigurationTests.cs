@@ -34,21 +34,20 @@ using System.Collections.Generic;
 using System.Reflection;
 using NUnit.Framework;
 using XenAdmin.Wlb;
-using XenAdminTests.UnitTests.UnitTestHelper;
+
 
 namespace XenAdminTests.UnitTests.WlbTests
 {
     [TestFixture, Category(TestCategories.Unit)]
     public class WlbPoolConfigurationTests
     {
-        private IUnitTestVerifier validator;
         private WlbPoolConfiguration wlbPool;
         private const int NUMBER_OF_PROPERTIES = 33;
 
-        [Test, ExpectedException(typeof(Exception))]
+        [Test]
         public void NullCtorThrows()
         {
-           wlbPool = new WlbPoolConfiguration(null); 
+            Assert.Throws(typeof(Exception), () => new WlbPoolConfiguration(null));
         }
 
         [Test]
@@ -59,119 +58,113 @@ namespace XenAdminTests.UnitTests.WlbTests
 
             Assert.AreEqual(NUMBER_OF_PROPERTIES, pi.Length, "Number of properties");
 
-            List<string> fieldsToSkip = new List<string>()
-                                          {
-                                             "AutoBalanceAggressiveness", //Enum
-                                             "AutoBalanceSeverity",       //Enum
-                                             "ReportingSMTPServer",       //Not set
-                                             "PoolAuditGranularity"       //Enum
-                                          };
+            List<string> fieldsToSkip = new List<string>
+            {
+                "AutoBalanceAggressiveness", //Enum
+                "AutoBalanceSeverity",       //Enum
+                "ReportingSMTPServer",       //Not set
+                "PoolAuditGranularity"       //Enum
+            };
 
             foreach (PropertyInfo propertyInfo in pi)
             {
                 if( !fieldsToSkip.Contains( propertyInfo.Name ))
                 {
                     string extractedValue = propertyInfo.GetValue(wlbPool, null).ToString();
-                    Assert.IsFalse(String.IsNullOrEmpty(extractedValue), "PB:" + propertyInfo.Name);
+                    Assert.That(extractedValue, Is.Not.Null.And.Not.Empty, $"PB: {propertyInfo.Name}");
                 }
             }
 
-            Assert.IsNullOrEmpty(wlbPool.ReportingSMTPServer);
-
+            Assert.That(wlbPool.ReportingSMTPServer, Is.Null.Or.Empty);
         }
 
         [Test]
         public void SettersTest()
         {
+            var inputData = new Dictionary<string, string>
+            {
+                {"WlbVersion", "6.0"},
+                {"AutoBalanceEnabled", "false"},
+                {"AutoBalancePollIntervals", "0.333333"},
+                {"AutoBalanceSeverity", "High"},
+                {"AutoBalanceAggressiveness", "High"},
+                {"PowerManagementEnabled", "false"},
+                {"PowerManagementPollIntervals", "5.321264"},
+                {"EnableOptimizationModeSchedules", "false"} //Equal to AutomateOptimizationMode
+            };
 
-            Dictionary<string, string> inputData =  new Dictionary<string, string>()
-                                                        {
-                                                            {"WlbVersion", "6.0"},
-                                                            {"AutoBalanceEnabled", "false"},
-                                                            {"AutoBalancePollIntervals", "0.333333"},
-                                                            {"AutoBalanceSeverity", "High"},
-                                                            {"AutoBalanceAggressiveness", "High"},
-                                                            {"PowerManagementEnabled", "false"},
-                                                            {"PowerManagementPollIntervals", "5.321264"},
-                                                            {"EnableOptimizationModeSchedules", "false"} //Equal to AutomateOptimizationMode
-                                                        };
+            var expectedData = new MRSensitiveData
+            {
+                AutoBalanceEnabled = true,
+                AutoBalancePollIntervals = 2.0,
+                AutoBalanceSeverity = WlbPoolAutoBalanceSeverity.Low,
+                AutoBalanceAggressiveness = WlbPoolAutoBalanceAggressiveness.Medium,
+                PowerManagementEnabled = true,
+                PowerManagementPollIntervals = 7.0,
+                AutomateOptimizationMode = true
+            };
 
-            validator = new VerifyGettersAndSetters(new WlbPoolConfiguration(inputData));
-
-            MRSensitiveData expectedData = new MRSensitiveData()
-                                            {
-                                                AutoBalanceEnabled = true,
-                                                AutoBalancePollIntervals = 2.0,
-                                                AutoBalanceSeverity = WlbPoolAutoBalanceSeverity.Low,
-                                                AutoBalanceAggressiveness = WlbPoolAutoBalanceAggressiveness.Medium,
-                                                PowerManagementEnabled = true,
-                                                PowerManagementPollIntervals = 7.0,
-                                                AutomateOptimizationMode = true
-                                            };
-
-            validator.Verify( expectedData);
-
+            ClassVerifiers.VerifySettersAndGetters(new WlbPoolConfiguration(inputData), expectedData);
         }
 
         [Test]
         public void SettersThatSetVerbatim()
         {
-            Dictionary<string, string> inputData = new Dictionary<string, string>()
-                                                       {
-                                                           //Simple setters.....
-                                                           {"OptimizationMode", "MaximizeDensity"}, //PerformanceMode
-                                                           {"MetricGroomingPeriod", "2.0"},
-                                                           {"RecentMoveMinutes", "2.0"},
-                                                           //{"ReportingUseRSServer", "false"},
-                                                           {"ReportingSMTPServer", "some string"},
-                                                           //These set ranges of values.....
-                                                           {"HostCpuThresholdCritical", "3"},
-                                                           {"HostMemoryThresholdCritical", "3.0"},
-                                                           {"HostPifReadThresholdCritical", "4.0"}, //HostNetworkReadThresholdCritical
-                                                           {"HostPifWriteThresholdCritical", "5.0"}, //HostNetworkWriteThresholdCritical
-                                                           {"HostPbdReadThresholdCritical", "6.0"}, //HostDiskReadThresholdCritical
-                                                           {"HostPbdWriteThresholdCritical", "7.0"}, //HostDiskWriteThresholdCritical
-                                                           {"VmCpuUtilizationWeightHigh", "8"},
-                                                           {"VmMemoryWeightHigh", "9"},
-                                                           {"VmDiskReadWeightHigh", "10"},
-                                                           {"VmDiskWriteWeightHigh", "11"},
-                                                           {"VmNetworkReadWeightHigh", "12"},
-                                                           {"VmNetworkWriteWeightHigh", "13"}
-                                                        };
+            var inputData = new Dictionary<string, string>
+            {
+                //Simple setters.....
+                {"OptimizationMode", "MaximizeDensity"}, //PerformanceMode
+                {"MetricGroomingPeriod", "2.0"},
+                {"RecentMoveMinutes", "2.0"},
+                //{"ReportingUseRSServer", "false"},
+                {"ReportingSMTPServer", "some string"},
+                //These set ranges of values.....
+                {"HostCpuThresholdCritical", "3"},
+                {"HostMemoryThresholdCritical", "3.0"},
+                {"HostPifReadThresholdCritical", "4.0"}, //HostNetworkReadThresholdCritical
+                {"HostPifWriteThresholdCritical", "5.0"}, //HostNetworkWriteThresholdCritical
+                {"HostPbdReadThresholdCritical", "6.0"}, //HostDiskReadThresholdCritical
+                {"HostPbdWriteThresholdCritical", "7.0"}, //HostDiskWriteThresholdCritical
+                {"VmCpuUtilizationWeightHigh", "8"},
+                {"VmMemoryWeightHigh", "9"},
+                {"VmDiskReadWeightHigh", "10"},
+                {"VmDiskWriteWeightHigh", "11"},
+                {"VmNetworkReadWeightHigh", "12"},
+                {"VmNetworkWriteWeightHigh", "13"}
+            };
 
-            validator = new VerifyGettersAndSetters(new WlbPoolConfiguration(inputData));
-            MRInSensitiveData data = new MRInSensitiveData()
-                                         {
-                                             PerformanceMode = WlbPoolPerformanceMode.MaximizePerformance,
-                                             MetricGroomingPeriod = 5.0,
-                                             RecentMoveMinutes = 6.0,
-                                             //ReportingUseRSServer = true,
-                                             ReportingSMTPServer = "who knows what?!",
-                                             HostCpuThresholdCritical = 1,
-                                             HostMemoryThresholdCritical = 2,
-                                             HostNetworkReadThresholdCritical = 1.0,
-                                             HostNetworkWriteThresholdCritical = 2.0,
-                                             HostDiskReadThresholdCritical = 3.0,
-                                             HostDiskWriteThresholdCritical = 4.0,
-                                             VmCpuUtilizationWeightHigh = 5,
-                                             VmMemoryWeightHigh = 6,
-                                             VmDiskReadWeightHigh = 7,
-                                             VmDiskWriteWeightHigh = 8,
-                                             VmNetworkReadWeightHigh = 9,
-                                             VmNetworkWriteWeightHigh = 10
-                                         };
+            var data = new MRInSensitiveData
+            {
+                PerformanceMode = WlbPoolPerformanceMode.MaximizePerformance,
+                MetricGroomingPeriod = 5.0,
+                RecentMoveMinutes = 6.0,
+                //ReportingUseRSServer = true,
+                ReportingSMTPServer = "who knows what?!",
+                HostCpuThresholdCritical = 1,
+                HostMemoryThresholdCritical = 2,
+                HostNetworkReadThresholdCritical = 1.0,
+                HostNetworkWriteThresholdCritical = 2.0,
+                HostDiskReadThresholdCritical = 3.0,
+                HostDiskWriteThresholdCritical = 4.0,
+                VmCpuUtilizationWeightHigh = 5,
+                VmMemoryWeightHigh = 6,
+                VmDiskReadWeightHigh = 7,
+                VmDiskWriteWeightHigh = 8,
+                VmNetworkReadWeightHigh = 9,
+                VmNetworkWriteWeightHigh = 10
+            };
 
-            validator.Verify(data);
+            ClassVerifiers.VerifySettersAndGetters(new WlbPoolConfiguration(inputData), data);
         }
 
         [Test]
         public void OvercommitCPUsGetTheCorrectValueForDifferentModes()
         {
-            Dictionary<string, string> inputData = new Dictionary<string, string>()
-                                                       {
-                                                           {"OverCommitCpuInDensityMode", "false"},
-                                                           {"OverCommitCpuInPerfMode", "true"}
-                                                       };
+           var inputData = new Dictionary<string, string>
+            {
+                {"OverCommitCpuInDensityMode", "false"},
+                {"OverCommitCpuInPerfMode", "true"}
+            };
 
             wlbPool = new WlbPoolConfiguration(inputData);
 
@@ -189,7 +182,7 @@ namespace XenAdminTests.UnitTests.WlbTests
             Assert.IsTrue(wlbPool.OvercommitCPUs, "OvercommitCPUs in MaximizePerformance");
         }
 
-        #region Helper functions
+        #region Helper structs
 
         private struct MRSensitiveData
         {

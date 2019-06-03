@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using NUnit.Framework;
@@ -212,6 +213,13 @@ namespace XenAdminTests
         public static object ExecuteMethod(object item, string name, Type[] types, object[] parameters)
         {
             return item.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic, null, types, null).Invoke(item, parameters);
+        }
+
+
+        public static string GetTestResource(string name)
+        {
+            var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return Path.Combine(assemblyFolder, "TestResources", name);
         }
     }
 }

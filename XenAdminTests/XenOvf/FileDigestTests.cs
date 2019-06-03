@@ -31,14 +31,15 @@
 
 using System.Collections.Generic;
 using NUnit.Framework;
+using XenAPI;
 using XenOvf;
 
 namespace XenAdminTests.XenOvf
 {
-    public class FileDigestTests : UnitTester_SingleConnectionTestFixture
+    [Category(TestCategories.Unit)]
+    public class FileDigestTests
     {
-
-        public class TestCase
+        public struct TestCase
         {
             public string ToParse { get; set; }
             public string Name { get; set; }
@@ -46,29 +47,17 @@ namespace XenAdminTests.XenOvf
             public string DigestString { get; set; }
         }
 
-        private class AccessibleFileDigest : FileDigest
-        {
-            public AccessibleFileDigest(string line) : base(line)
-            {
-            }
-
-            public string DigestString
-            {
-                get { return DigestAsString; }
-            }
-        }
-
-        private IEnumerable<TestCase> TestCases
+        private static IEnumerable<TestCase> TestCases
         {
             get
             {
                 yield return new TestCase
-                 {
-                     ToParse = "SHA1(certname.mf)=b51121)",
-                     Name = "certname.mf",
-                     AlgorithmString = "SHA1",
-                     DigestString = ""
-                 };
+                {
+                    ToParse = "SHA1(certname.mf)=b51121)",
+                    Name = "certname.mf",
+                    AlgorithmString = "SHA1",
+                    DigestString = ""
+                };
                 yield return new TestCase //CA-89555 file names with parenthesis
                 {
                     ToParse = "SHA2(certname (32-bit).mf)=b51121)",
@@ -114,25 +103,25 @@ namespace XenAdminTests.XenOvf
             }
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(typeof(FileDigestTests), nameof(TestCases))]
         public void FileDigestNameExtraction(TestCase tc)
         {
             FileDigest fd = new FileDigest(tc.ToParse);
-            Assert.That(fd.Name, Is.EqualTo(tc.Name));
+            Assert.AreEqual(fd.Name, tc.Name);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(typeof(FileDigestTests), nameof(TestCases))]
         public void FileDigestAlgorithmExtraction(TestCase tc)
         {
             FileDigest fd = new FileDigest(tc.ToParse);
-            Assert.That(fd.AlgorithmName, Is.EqualTo(tc.AlgorithmString));
+            Assert.AreEqual(fd.AlgorithmName, tc.AlgorithmString);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(typeof(FileDigestTests), nameof(TestCases))]
         public void FileDigestDigestExtraction(TestCase tc)
         {
-            AccessibleFileDigest fd = new AccessibleFileDigest(tc.ToParse);
-            Assert.That(fd.DigestString, Is.EqualTo(tc.DigestString));
+            FileDigest fd = new FileDigest(tc.ToParse);
+            Assert.AreEqual(fd.DigestAsString, tc.DigestString);
         }
     }
 }

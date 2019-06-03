@@ -30,66 +30,61 @@
  */
 
 using System;
+using System.Text;
 using NUnit.Framework;
 using XenAdmin.Controls;
 
-
-namespace XenAdminTests.TreeTests
+namespace XenAdminTests.Controls
 {
     [TestFixture, Category(TestCategories.Unit)]
-    public class MultiSelectTreeViewTests
+    public class LongStringComboBoxTest
     {
-        private MultiSelectTreeView _tv;
-
-        [SetUp]
-        public void Setup()
+        private class LongStringComboBoxWrapper : LongStringComboBox
         {
-            _tv = new MultiSelectTreeView();
-
-            // ensure handle is created. Some tests fail if you don't do this.
-           Assert.NotNull(_tv.Handle);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (_tv != null)
-                _tv.Dispose();
-        }
-
-        /// <summary>
-        /// Tests that the SetContents method fires only once even when a complex change takes place in the
-        /// selected nodes collection.
-        /// </summary>
-        [Test]
-        public void TestSetContents()
-        {
-            int count = 0;
-
-            EventHandler handler = delegate
+            public LongStringComboBoxWrapper()
             {
-                count++;
-            };
-
-            _tv.SelectionsChanged += handler;
-            
-            try
-            {
-                _tv.Nodes.Add(new MultiSelectTreeNode("0"));
-                _tv.Nodes.Add(new MultiSelectTreeNode("1"));
-                _tv.SelectedNodes.SetContents(new [] { _tv.Nodes[0], _tv.Nodes[1] });
-                
-                Assert.AreEqual(1, count, "SelectionsChanged should only have fired once");
-
-                _tv.Nodes.Add(new MultiSelectTreeNode("2"));
-                _tv.Nodes.Add(new MultiSelectTreeNode("3"));
-                
-                _tv.SelectedNodes.SetContents(new [] { _tv.Nodes[2], _tv.Nodes[3] });
-                Assert.AreEqual(2, count, "SelectionsChanged should only have fired twice");
+                Items.AddRange(new object[]{"This", "is", "some", "base", "data"});
+                Width = 200;
             }
-            finally
+            public void TriggerDropDown()
             {
-                _tv.SelectionsChanged -= handler;
+                OnDropDown(new EventArgs());
+            }
+        }
+        
+        [Test]
+        public void CheckValidDropDownWidthSetUnderSize()
+        {
+            LongStringComboBoxWrapper cb = new LongStringComboBoxWrapper();
+            cb.Items.Add("Word");
+            cb.TriggerDropDown();
+            Assert.That(cb.Items.Count, Is.EqualTo(6));
+            Assert.That(cb.Width, Is.EqualTo(200));
+            Assert.That(cb.DropDownWidth, Is.EqualTo(200));
+        }
+
+        [Test]
+        public void CheckValidDropDownWidthSetOverSize()
+        {
+            LongStringComboBoxWrapper cb = new LongStringComboBoxWrapper();
+            cb.Items.Add(ALongWord);
+            cb.TriggerDropDown();
+            Assert.That(cb.Items.Count, Is.EqualTo(6));
+            Assert.That(cb.Width, Is.EqualTo(200));
+            Assert.That(cb.DropDownWidth, Is.Not.EqualTo(200));
+            Assert.That(cb.DropDownWidth, Is.GreaterThan(200));
+        }
+
+        private string ALongWord
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < 2000; i++)
+                {
+                    sb.Append("Word");
+                }
+                return sb.ToString();
             }
         }
     }

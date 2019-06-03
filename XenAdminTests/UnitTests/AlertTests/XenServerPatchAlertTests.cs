@@ -36,12 +36,11 @@ using NUnit.Framework;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdminTests.UnitTests.UnitTestHelper;
 using XenAPI;
 
 namespace XenAdminTests.UnitTests.AlertTests
 {
-    [TestFixture, Category(TestCategories.Unit), Category(TestCategories.SmokeTest)]
+    [TestFixture, Category(TestCategories.Unit)]
     public class XenServerPatchAlertTests
     {
         private Mock<IXenConnection> connA;
@@ -61,9 +60,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             alert.IncludeConnection(connB.Object);
             alert.IncludeHosts(new List<Host> { hostA.Object, hostB.Object });
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
                 FixLinkText = "Go to Web Page",
@@ -87,9 +84,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             XenServerPatchAlert alert = new XenServerPatchAlert(p);
             alert.IncludeHosts(new List<Host>() { hostA.Object, hostB.Object });
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName",
                 FixLinkText = "Go to Web Page",
@@ -114,9 +109,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = "ConnAName, ConnBName",
                 FixLinkText = "Go to Web Page",
@@ -139,9 +132,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             XenServerPatch p = new XenServerPatch("uuid", "name", "My description", "guidance", string.Empty, "6.0.1", "http://url", "http://patchUrl", new DateTime(2011, 4, 1).ToString(), "5", "", "");
             XenServerPatchAlert alert = new XenServerPatchAlert(p);
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = string.Empty,
                 FixLinkText = "Go to Web Page",
@@ -158,10 +149,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             VerifyHostsExpectations(Times.Never);
         }
 
-        [Test, ExpectedException(typeof(NullReferenceException))]
+        [Test]
         public void TestAlertWithNullPatch()
         {
-            XenServerPatchAlert alert = new XenServerPatchAlert(null);
+            Assert.Throws(typeof(NullReferenceException), () => new XenServerPatchAlert(null));
         }
 
         private void VerifyConnExpectations(Func<Times> times)

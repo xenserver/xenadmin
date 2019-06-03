@@ -30,75 +30,52 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
-using XenAdmin;
 using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    class ArchiveFactoryTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class ArchiveFactoryTests
     {
+        [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
+        [TestCase(ArchiveFactory.Type.TarGz, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
+        [TestCase(ArchiveFactory.Type.TarBz2, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
         [Test]
-        public void TestValidReaderGeneration()
+        public Type TestReaderGeneration(int archiveType)
         {
-            Dictionary<ArchiveFactory.Type, Type> validIterators = new Dictionary<ArchiveFactory.Type, Type>() 
-            { 
-                { ArchiveFactory.Type.Tar, typeof( SharpZipTarArchiveIterator )},
-                { ArchiveFactory.Type.TarGz, typeof( SharpZipTarArchiveIterator )},
-                { ArchiveFactory.Type.TarBz2, typeof( SharpZipTarArchiveIterator )}
-            };
+            string target = TestUtils.GetTestResource("emptyfile.bz2");
 
-            foreach (KeyValuePair<ArchiveFactory.Type, Type> pair in validIterators)
+            using (var ms = new MemoryStream(File.ReadAllBytes(target)))
             {
-                string target = Path.Combine(Directory.GetCurrentDirectory(), @"TestResources\emptyfile.bz2");
-                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(target)))
-                {
-                    ArchiveIterator providedStream = ArchiveFactory.Reader(pair.Key, ms);
-                    Assert.AreEqual(providedStream.GetType(), pair.Value);
-                }
+                var iterator = ArchiveFactory.Reader((ArchiveFactory.Type)archiveType, ms);
+                return iterator.GetType();
             }
         }
 
-        [Test]
-        public void TestValidWriterGeneration()
-        {
-            Dictionary<ArchiveFactory.Type, Type> validIterators = new Dictionary<ArchiveFactory.Type, Type>() 
-            { 
-                { ArchiveFactory.Type.Tar, typeof( SharpZipTarArchiveWriter )},
-                { ArchiveFactory.Type.Zip, typeof( DotNetZipZipWriter )}
-            };
 
-            foreach (KeyValuePair<ArchiveFactory.Type, Type> pair in validIterators)
+        [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(SharpZipTarArchiveWriter))]
+        [TestCase(ArchiveFactory.Type.Zip, ExpectedResult = typeof(DotNetZipZipWriter))]
+        [Test]
+        public Type TestWriterGeneration(int archiveType)
+        {
+            using (var ms = new MemoryStream())
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    ArchiveWriter providedStream = ArchiveFactory.Writer(pair.Key, ms);
-                    Assert.AreEqual(providedStream.GetType(), pair.Value);
-                }
+                var writer = ArchiveFactory.Writer((ArchiveFactory.Type)archiveType, ms);
+                return writer.GetType();
             }
         }
 
+        [TestCase(ArchiveFactory.Type.TarGz)]
+        [TestCase(ArchiveFactory.Type.TarBz2)]
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
-        public void TestInvalidTarGzWriterGeneration()
+        public void TestWriterGenerationUnsupported(int archiveType)
         {
-            CreateInvalidWriterType(ArchiveFactory.Type.TarGz);
-        }
-
-        [Test]
-        [ExpectedException(typeof(NotSupportedException))]
-        public void TestInvalidTarBz2WriterGeneration()
-        {
-            CreateInvalidWriterType(ArchiveFactory.Type.TarBz2);
-        }
-
-        private void CreateInvalidWriterType(ArchiveFactory.Type type)
-        {
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                ArchiveFactory.Writer(type, ms);
+                Assert.Throws(typeof(NotSupportedException),
+                    () => ArchiveFactory.Writer((ArchiveFactory.Type)archiveType, ms));
             }
         }
     }

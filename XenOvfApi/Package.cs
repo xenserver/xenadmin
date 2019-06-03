@@ -47,58 +47,50 @@ namespace XenOvf
         // Construct from a line in the manifest.
         public FileDigest(string line)
         {
-            var fields = line.Split(new char[] { '(', ')', '=' });
+            var fields = line.Split('(', ')', '=');
 
             // Expect the first field to be the security algorithm used to compute the hash of the file.
-            _AlgorithmName = fields[0].Trim();
+            AlgorithmName = fields[0].Trim();
 
             // Expect the second field to be the name of the file.
             Match nameMatch = new Regex(@"[\(](.*)[\)][=]").Match(line);
-            _Name = nameMatch.Success ? nameMatch.Groups[1].Value.Trim() : fields[1].Trim();
+            Name = nameMatch.Success ? nameMatch.Groups[1].Value.Trim() : fields[1].Trim();
 
             // Expect the last field to be the digest of the file.
-            _DigestAsString = fields[fields.Length - 1].Trim();
+            DigestAsString = fields[fields.Length - 1].Trim();
         }
 
+        /// <summary>
+        /// Name of the file with the digest.
+        /// </summary>
+        public string Name { get; }
 
-        // Name of the file with the digest.
-        public string Name { get { return _Name; } }
-        private string _Name;
+        /// <summary>
+        /// Name of the algorithm to compute the digest. It must be recognized by HashAlgorithm.Create().
+        /// </summary>
+        public string AlgorithmName { get; }
 
-
-        // Name of the algorithm to compute the digest.
-        // It must be recognized by HashAlgorithm.Create().
-        public string AlgorithmName { get { return _AlgorithmName; } }
-        private string _AlgorithmName;
-
-
-        // Algorithm to compute the digest.
+        /// <summary>
+        /// Algorithm to compute the digest.
+        /// </summary>
         public HashAlgorithm Algorithm
         {
             get
             {
-                var hashAlgorithm = HashAlgorithm.Create(_AlgorithmName);
+                var hashAlgorithm = HashAlgorithm.Create(AlgorithmName);
 
                 // Validate the algorithm.
                 if (hashAlgorithm == null)
-                    throw new ArgumentException(string.Format(Messages.SECURITY_NOT_SUPPORTED, _AlgorithmName));
+                    throw new ArgumentException(string.Format(Messages.SECURITY_NOT_SUPPORTED, AlgorithmName));
 
                 return hashAlgorithm;
             }
         }
 
+        public string DigestAsString { get; }
 
-        // Digest as a binary array.
-        public byte[] Digest { get { return ToArray(_DigestAsString); } }
-        private string _DigestAsString;
-        protected string DigestAsString
-        {
-            get { return _DigestAsString; }
-        }
+        public bool WasVerified { get; private set; }
 
-
-        public bool WasVerified { get { return _WasVerified; } }
-        private bool _WasVerified = false;
 
         // Convert a hex string to a binary array.
         public static byte[] ToArray(string HexString)
@@ -132,13 +124,14 @@ namespace XenOvf
         public void Verify(Stream stream)
         {
             var computedDigest = Algorithm.ComputeHash(stream);
+            var digest = ToArray(DigestAsString);
 
-            if (!System.Linq.Enumerable.SequenceEqual(Digest, computedDigest))
+            if (!System.Linq.Enumerable.SequenceEqual(digest, computedDigest))
             {
                 throw new Exception(string.Format(Messages.SECURITY_SIGNATURE_FAILED, Name));
             }
 
-            _WasVerified = true;
+            WasVerified = true;
         }
 
 
@@ -146,8 +139,9 @@ namespace XenOvf
         public void Verify(Stream stream, RSACryptoServiceProvider key)
         {
             var computedDigest = Algorithm.ComputeHash(stream);
+            var digest = ToArray(DigestAsString);
 
-            if (!key.VerifyHash(computedDigest, CryptoConfig.MapNameToOID(_AlgorithmName), Digest))
+            if (!key.VerifyHash(computedDigest, CryptoConfig.MapNameToOID(AlgorithmName), digest))
             {
                 throw new Exception(string.Format(Messages.SECURITY_SIGNATURE_FAILED, Name));
             }

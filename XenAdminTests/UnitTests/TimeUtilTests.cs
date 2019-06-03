@@ -33,9 +33,9 @@ using System;
 using XenCenterLib;
 using NUnit.Framework;
 
-namespace XenAdminTests.MiscTests
+namespace XenAdminTests.UnitTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.Unit)]
     class TimeUtilTests
     {
         private readonly long ticksSecondsFactor = Convert.ToInt64(1e7);
@@ -43,7 +43,7 @@ namespace XenAdminTests.MiscTests
         [Test]
         public void TicksToSecondsConversion()
         {
-            Assert.AreEqual(73, TimeUtil.TicksToSeconds(73*ticksSecondsFactor));
+            Assert.AreEqual(73, TimeUtil.TicksToSeconds(73 * ticksSecondsFactor));
             Assert.AreEqual(0, TimeUtil.TicksToSeconds(0));
         }
 
@@ -64,29 +64,27 @@ namespace XenAdminTests.MiscTests
         {
             Assert.AreEqual((-1 * TimeUtil.TicksBefore1970 / ticksSecondsFactor), TimeUtil.TicksToSecondsSince1970(0));
             Assert.AreEqual(0, TimeUtil.TicksToSecondsSince1970(TimeUtil.TicksBefore1970));
-            Assert.AreEqual(1324771200, TimeUtil.TicksToSecondsSince1970(new DateTime(2011,12,25).Ticks));
+            Assert.AreEqual(1324771200, TimeUtil.TicksToSecondsSince1970(new DateTime(2011, 12, 25).Ticks));
         }
 
         [Test]
         public void ISODateTimeParse()
         {
             DateTime derived = TimeUtil.ParseISO8601DateTime("20111225T10:20:37Z");
-            Assert.AreEqual(new DateTime(2011, 12, 25, 10, 20, 37), derived );
+            Assert.AreEqual(new DateTime(2011, 12, 25, 10, 20, 37), derived);
             Assert.AreEqual(DateTimeKind.Utc, derived.Kind);
         }
 
         [Test]
-        [ExpectedException(typeof(FormatException))]
         public void ISODateTimeParseWithBadFormat()
         {
-            TimeUtil.ParseISO8601DateTime("20111225T1020:37Z");
+            Assert.Throws(typeof(FormatException), () => TimeUtil.ParseISO8601DateTime("20111225T1020:37Z"));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ISODateTimeParseWithNullArg()
         {
-            TimeUtil.ParseISO8601DateTime(null);
+            Assert.Throws(typeof(ArgumentNullException), () => TimeUtil.ParseISO8601DateTime(null));
         }
 
         [Test]
@@ -103,6 +101,5 @@ namespace XenAdminTests.MiscTests
             string derived = TimeUtil.ToISO8601DateTime(TimeUtil.ParseISO8601DateTime(dateToParse));
             Assert.AreEqual(dateToParse, derived);
         }
-
     }
 }

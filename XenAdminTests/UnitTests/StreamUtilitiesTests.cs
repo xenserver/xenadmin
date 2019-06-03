@@ -30,61 +30,41 @@
  */
 
 using System;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
-using XenAdmin.Controls;
+using XenCenterLib;
 
-namespace XenAdminTests.UnitTests.Controls
+namespace XenAdminTests.UnitTests
 {
     [TestFixture, Category(TestCategories.Unit)]
-    public class LongStringComboBoxTest
+    class StreamUtilitiesTests
     {
-        private class LongStringComboBoxWrapper : LongStringComboBox
-        {
-            public LongStringComboBoxWrapper()
-            {
-                Items.AddRange(new object[]{"This", "is", "some", "base", "data"});
-                Width = 200;
-            }
-            public void TriggerDropDown()
-            {
-                OnDropDown(new EventArgs());
-            }
-        }
-        
         [Test]
-        public void CheckValidDropDownWidthSetUnderSize()
+        public void BufferedStreamCopyWithNullInputStream()
         {
-            LongStringComboBoxWrapper cb = new LongStringComboBoxWrapper();
-            cb.Items.Add("Word");
-            cb.TriggerDropDown();
-            Assert.That(cb.Items.Count, Is.EqualTo(6));
-            Assert.That(cb.Width, Is.EqualTo(200));
-            Assert.That(cb.DropDownWidth, Is.EqualTo(200));
+            using (MemoryStream ms = new MemoryStream())
+                Assert.Throws(typeof(ArgumentNullException), () => StreamUtilities.BufferedStreamCopy(null, ms));
         }
 
         [Test]
-        public void CheckValidDropDownWidthSetOverSize()
+        public void BufferedStreamCopyWithNullOutputStream()
         {
-            LongStringComboBoxWrapper cb = new LongStringComboBoxWrapper();
-            cb.Items.Add(ALongWord);
-            cb.TriggerDropDown();
-            Assert.That(cb.Items.Count, Is.EqualTo(6));
-            Assert.That(cb.Width, Is.EqualTo(200));
-            Assert.That(cb.DropDownWidth, Is.Not.EqualTo(200));
-            Assert.That(cb.DropDownWidth, Is.GreaterThan(200));
+            using (MemoryStream ms = new MemoryStream())
+                Assert.Throws(typeof(ArgumentNullException), () => StreamUtilities.BufferedStreamCopy(ms, null));
         }
 
-        private string ALongWord
+        [Test]
+        public void BufferedStreamCopyWithValidData()
         {
-            get
+            const string streamContents = "This is a test";
+            using (MemoryStream oms = new MemoryStream())
             {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < 2000; i++)
+                using (MemoryStream ims = new MemoryStream(Encoding.ASCII.GetBytes(streamContents)))
                 {
-                    sb.Append("Word");
+                    StreamUtilities.BufferedStreamCopy(ims, oms);
+                    Assert.AreEqual(ims, oms);
                 }
-                return sb.ToString();
             }
         }
     }

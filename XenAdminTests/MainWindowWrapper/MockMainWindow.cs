@@ -43,14 +43,8 @@ namespace XenAdminTests
     {
         #region IMainWindow Members
 
-        public Form Form
-        {
-            get
-            {
-                return null;
-            }
-        }
-        
+        public Form Form => null;
+
         public void Invoke(MethodInvoker method)
         {
 

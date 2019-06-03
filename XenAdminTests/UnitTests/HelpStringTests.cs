@@ -29,30 +29,20 @@
  * SUCH DAMAGE.
  */
 
-using System.Linq;
 using NUnit.Framework;
+using XenCenterLib;
 
-namespace XenAdminTests.UnitTests.UnitTestHelper
+namespace XenAdminTests.UnitTests
 {
-    class VerifyPropertyCounter : IUnitTestVerifier
+    [TestFixture, Category(TestCategories.Unit)]
+    public class HelpStringTests
     {
-        private readonly object classToVerify = null;
-
-        /// <param name="classToVerify">A class with getters and setters to verify</param>
-        public VerifyPropertyCounter(object classToVerify)
+        [Test]
+        public void HelpStringDefaultCtorAndValueGetter()
         {
-            this.classToVerify = classToVerify;
+            const string testString = "I'm helpful";
+            HelpString hs = new HelpString(testString);
+            Assert.AreEqual(testString, hs.Value);
         }
-
-        /// <summary>
-        /// Verify the number of properties on the provided class are as expected
-        /// </summary>
-        /// <param name="expectedNumberOfProperties">expected number of properties</param>
-        public void Verify(object expectedNumberOfProperties)
-        {
-            int propertyCount = classToVerify.GetType().GetProperties().Count();
-            Assert.AreEqual((int)expectedNumberOfProperties, propertyCount, "Number of properties on the class tested");
-        }
-
     }
 }

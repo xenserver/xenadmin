@@ -30,81 +30,59 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
-using XenAdmin;
 using XenCenterLib.Compression;
 
 namespace XenAdminTests.CompressionTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
-    class CompressionFactoryTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class CompressionFactoryTests
     {
+        [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(DotNetZipGZipOutputStream))]
+        [TestCase(CompressionFactory.Type.Bz2, ExpectedResult = typeof(DotNetZipBZip2OutputStream))]
         [Test]
-        public void TestWriterGeneration()
-        {
-            Dictionary<CompressionFactory.Type, Type> validWriters = new Dictionary<CompressionFactory.Type, Type>() 
-            { 
-                { CompressionFactory.Type.Gz, typeof( DotNetZipGZipOutputStream )},
-                { CompressionFactory.Type.Bz2, typeof( DotNetZipBZip2OutputStream )}
-            };
-
-            foreach (KeyValuePair<CompressionFactory.Type, Type> pair in validWriters)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using( CompressionStream providedStream = CompressionFactory.Writer(pair.Key, ms))
-                    {
-                        Assert.AreEqual(providedStream.GetType(), pair.Value);  
-                    }
-                    
-                }
-            }
-        }
-
-        [Test]
-        public void TestReaderGeneration()
-        {
-            Dictionary<CompressionFactory.Type, Type> validReaders = new Dictionary<CompressionFactory.Type, Type>() 
-            { 
-                { CompressionFactory.Type.Gz, typeof( DotNetZipGZipInputStream )},
-                { CompressionFactory.Type.Bz2, typeof( DotNetZipBZip2InputStream )}
-            };
-
-            foreach (KeyValuePair<CompressionFactory.Type, Type> pair in validReaders)
-            {
-                string target = Path.Combine(Directory.GetCurrentDirectory(), "TestResources", "emptyfile.bz2");
-                /*
-                 * Note: Reading a bzip2 file in as a byte[] works for gzip as well as bzip2 stream 
-                 * as the implementation of bzip2 must be initialised with a string containing a 
-                 * header, EOF etc.. whereas gzip doesn't mind so the following will work despite
-                 * opening a gzip compression stream with a bzip2 data
-                 */
-                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(target))) 
-                {
-                    using( CompressionStream providedStream = CompressionFactory.Reader(pair.Key, ms))
-                    {
-                        Assert.AreEqual(providedStream.GetType(), pair.Value);
-                    }
-                    
-                }
-            }
-        }
-
-        /*
-         * The BZip2 stream provided must contain actual BZip2 data, header, data etc..
-         * As this is not the case then this null construction will throw an exception
-         */
-        [Test]
-        [ExpectedException(typeof(IOException))]
-        public void TestFailingReaderGeneration()
+        public Type TestWriterGeneration(int archiveType)
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                using( CompressionFactory.Reader(CompressionFactory.Type.Bz2, ms))
-                {}
+                using (var providedStream = CompressionFactory.Writer((CompressionFactory.Type)archiveType, ms))
+                    return providedStream.GetType();
             }
+        }
+
+        [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(DotNetZipGZipInputStream))]
+        [TestCase(CompressionFactory.Type.Bz2, ExpectedResult = typeof(DotNetZipBZip2InputStream))]
+        [Test]
+        public Type TestReaderGenerationWithFile(int archiveType)
+        {
+            string target = TestUtils.GetTestResource("emptyfile.bz2");
+            /*
+             * Note: Reading a bzip2 file in as a byte[] works for gzip as well as bzip2 stream 
+             * as the implementation of bzip2 must be initialised with a string containing a 
+             * header, EOF etc. whereas gzip doesn't mind so the following will work despite
+             * opening a gzip compression stream with a bzip2 data
+             */
+            using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(target)))
+            {
+                using (var providedStream = CompressionFactory.Reader((CompressionFactory.Type)archiveType, ms))
+                    return providedStream.GetType();
+            }
+        }
+
+
+        [TestCase(CompressionFactory.Type.Bz2)]
+        [Description("Checks that a BZip2 stream without actual BZip2 data, header, data etc., will throw an exception")]
+        [Test]
+        public void TestReaderGenerationWithoutFile(int archiveType)
+        {
+            using (MemoryStream ms = new MemoryStream())
+                Assert.Throws(typeof(IOException), () =>
+                {
+                    using (CompressionFactory.Reader((CompressionFactory.Type)archiveType, ms))
+                    {
+                    }
+                });
         }
     }
 }

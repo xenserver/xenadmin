@@ -30,23 +30,32 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+using System.IO;
+using System.Xml;
 using XenCenterLib;
+using NUnit.Framework;
 
-namespace XenAdminTests.MiscTests
+namespace XenAdminTests.UnitTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
-    class HelpStringTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class BasicXMLResolverTests
     {
         [Test]
-        public void HelpStringDefaultCtorAndValueGetter()
+        public void TestEntityGetReturnsEmptyMemoryStream()
         {
-            const string testString = "I'm helpful";
-            HelpString hs = new HelpString(testString);
-            Assert.AreEqual(testString, hs.Value);
+            MemoryStream rms = null;
+
+            try
+            {
+                XmlResolver basic = new BasicXMLResolver();
+                rms = basic.GetEntity(new Uri("http://www.nonsense.com"), "role", typeof(BasicXMLResolver)) as MemoryStream;
+                Assert.IsNotNull(rms);
+                Assert.AreEqual(0, rms.Length);
+            }
+            finally
+            {
+                rms?.Close();
+            }
         }
     }
 }
