@@ -29,199 +29,126 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
+
 using NUnit.Framework;
 using XenAdmin.Controls;
 
 namespace XenAdminTests.Controls
 {
-    public class DecentGroupBoxTests : UnitTester_TestFixture
+    [TestFixture, Category(TestCategories.Unit)]
+    public class DecentGroupBoxTests
     {
-        private class DecentGroupBoxWrapper : DecentGroupBox
+        private DecentGroupBox gb;
+
+        [SetUp]
+        public void TestSetUp()
         {
-            public string ManipulatedText
-            {
-                get { return EscapedText; }
-            }
+            gb = null;
         }
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            gb?.Dispose();
+        }
+
 
         [Test, Description("Default case")]
-        [TestCaseSource("TestCasesNoMnemonic")]
-        public void TestTextManipulationNoMnemonic(TestCase testCase)
+        [TestCase("junk", 100, ExpectedResult = "junk")]
+        [TestCase("junk&", 50, ExpectedResult = "junk&&")]
+        [TestCase("junk&", 100, ExpectedResult = "junk&&")]
+        [TestCase("junk&&", 100, ExpectedResult = "junk&&&&")]
+        [TestCase("junk&&junk", 100, ExpectedResult = "junk&&&&junk")]
+        [TestCase("junk&junk", 100, ExpectedResult = "junk&&junk")]
+        [TestCase("junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 100, ExpectedResult = "junk&&&&&&&&&&&&&&&&...")]
+        [TestCase("jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 100, ExpectedResult = "jnk&&&&&&&&&&&&&&&&&&...")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
+            50, ExpectedResult = "All...")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
+            100, ExpectedResult = "AllWorkAndN...")]
+        public string TestTextManipulationNoMnemonic(string text, int width)
         {
-            DecentGroupBoxWrapper gb = new DecentGroupBoxWrapper { Width = testCase.Width };
-            gb.Text = testCase.Text;
+            gb = new DecentGroupBox {Width = width, Text = text};
             Assert.IsTrue(gb.AutoEllipsis, "auto ellipse setting");
             Assert.IsFalse(gb.UseMnemonic, "use mnemonic setting");
-            Assert.That(gb.Text, Is.EqualTo(testCase.Text), "Raw text TestCase: " + testCase.Text);
-            Assert.That(gb.ManipulatedText, Is.EqualTo(testCase.Expected), "Manipulated text TestCase: " + testCase.Text);
+            Assert.AreEqual(gb.Text, text, $"Raw text TestCase: {text}");
+            return gb.EscapedText;
         }
 
         [Test]
-        [TestCaseSource("TestCasesWithMnemonic")]
-        public void TestTextManipulationWithMnemonic(TestCase testCase)
+        [TestCase("junk", 100, ExpectedResult = "junk")]
+        [TestCase("junk&", 50, ExpectedResult = "junk&")]
+        [TestCase("junk&", 100, ExpectedResult = "junk&")]
+        [TestCase("junk&&", 100, ExpectedResult = "junk&&")]
+        [TestCase("junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 100, ExpectedResult = "junk&&&&&&&&&&&&&&&&&...")]
+        [TestCase("jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 100, ExpectedResult = "jnk&&&&&&&&&&&&&&&&&&&...")]
+        [TestCase("junk&&junk", 100, ExpectedResult = "junk&&junk")]
+        [TestCase("junk&junk", 100, ExpectedResult = "junk&junk")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
+            50, ExpectedResult = "All...")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
+            100, ExpectedResult = "AllWorkAndN...")]
+        public string TestTextManipulationWithMnemonic(string text, int width)
         {
-            DecentGroupBoxWrapper gb = new DecentGroupBoxWrapper { Width = testCase.Width, UseMnemonic = true};
-            gb.Text = testCase.Text;
+            gb = new DecentGroupBox {Width = width, UseMnemonic = true, Text = text};
             Assert.IsTrue(gb.AutoEllipsis, "auto ellipse setting");
             Assert.IsTrue(gb.UseMnemonic, "use mnemonic setting");
-            Assert.That(gb.Text, Is.EqualTo(testCase.Text), "Raw text TestCase: " + testCase.Text);
-            Assert.That(gb.ManipulatedText, Is.EqualTo(testCase.Expected), "Manipulated text TestCase: " + testCase.Text);
+            Assert.AreEqual(gb.Text, text, $"Raw text TestCase: {text}");
+            return gb.EscapedText;
         }
 
         [Test]
-        [TestCaseSource("TestCasesWithMnemonicNoEllipsing")]
-        public void TestTextManipulationWithMnemonicNoEllipsing(TestCase testCase)
+        [TestCase("junk", 100, ExpectedResult = "junk")]
+        [TestCase("junk&", 50, ExpectedResult = "junk&")]
+        [TestCase("junk&", 100, ExpectedResult = "junk&")]
+        [TestCase("junk&&", 100, ExpectedResult = "junk&&")]
+        [TestCase("junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 100, ExpectedResult = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")]
+        [TestCase("junk&&junk", 100, ExpectedResult = "junk&&junk")]
+        [TestCase("junk&junk", 100, ExpectedResult = "junk&junk")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy", 50,
+            ExpectedResult = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy", 100,
+            ExpectedResult = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy")]
+        public string TestTextManipulationWithMnemonicNoEllipsing(string text, int width)
         {
-            DecentGroupBoxWrapper gb = new DecentGroupBoxWrapper { Width = testCase.Width, UseMnemonic = true, AutoEllipsis = false};
-            gb.Text = testCase.Text;
+            gb = new DecentGroupBox {Width = width, UseMnemonic = true, AutoEllipsis = false, Text = text};
             Assert.IsFalse(gb.AutoEllipsis, "auto ellipse setting");
             Assert.IsTrue(gb.UseMnemonic, "use mnemonic setting");
-            Assert.That(gb.Text, Is.EqualTo(testCase.Text), "Raw text TestCase: " + testCase.Text);
-            Assert.That(gb.ManipulatedText, Is.EqualTo(testCase.Expected), "Manipulated text TestCase: " + testCase.Text);
+            Assert.AreEqual(gb.Text, text, $"Raw text TestCase: {text}");
+            return gb.EscapedText;
         }
 
         [Test]
-        [TestCaseSource("TestCasesNoMnemonicNoEllipsing")]
-        public void TestTextManipulationNoMnemonicNoAutoEllipse(TestCase testCase)
+        [TestCase("junk", 100, ExpectedResult = "junk")]
+        [TestCase("junk&", 50, ExpectedResult = "junk&&")]
+        [TestCase("junk&", 100, ExpectedResult = "junk&&")]
+        [TestCase("junk&&", 100, ExpectedResult = "junk&&&&")]
+        [TestCase("junk&&junk", 100, ExpectedResult = "junk&&&&junk")]
+        [TestCase("junk&junk", 100, ExpectedResult = "junk&&junk")]
+        [TestCase("junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 100,
+            ExpectedResult = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy", 50,
+            ExpectedResult = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy")]
+        [TestCase("AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy", 100,
+            ExpectedResult = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy")]
+        public string TestTextManipulationNoMnemonicNoAutoEllipse(string text, int width)
         {
-            DecentGroupBoxWrapper gb = new DecentGroupBoxWrapper { Width = testCase.Width, UseMnemonic = false, AutoEllipsis = false};
-            gb.Text = testCase.Text;
+            gb = new DecentGroupBox {Width = width, UseMnemonic = false, AutoEllipsis = false, Text = text};
             Assert.IsFalse(gb.AutoEllipsis, "auto ellipse setting");
             Assert.IsFalse(gb.UseMnemonic, "use mnemonic setting");
-            Assert.That(gb.Text, Is.EqualTo(testCase.Text), "Raw text TestCase: " + testCase.Text);
-            Assert.That(gb.ManipulatedText, Is.EqualTo(testCase.Expected), "Manipulated text TestCase: " + testCase.Text);
+            Assert.AreEqual(gb.Text, text, $"Raw text TestCase: {text}");
+            return gb.EscapedText;
         }
 
         [Test]
         public void TextBoxWidthNearFudgeFactor([Values(10, 14, 15, 16, 18)] int width)
         {
             const string text = "SomeTextOrOther";
-            DecentGroupBoxWrapper gb = new DecentGroupBoxWrapper { Width = width };
-            gb.Text = text;
+            gb = new DecentGroupBox {Width = width, Text = text};
             Assert.IsTrue(gb.AutoEllipsis, "auto ellipse setting");
             Assert.IsFalse(gb.UseMnemonic, "use mnemonic setting");
-            Assert.That(gb.Text, Is.EqualTo(text), "Raw text TestCase width: " + width);
-            Assert.That(gb.ManipulatedText, Is.EqualTo(String.Empty), "Manipulated text TestCase width: " + width);
-        }
-
-        public IEnumerable<TestCase> TestCasesNoMnemonicNoEllipsing
-        {
-            get
-            {
-                yield return new TestCase { Text = "junk", Expected = "junk", Width = 100 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&&", Width = 50 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&", Expected = "junk&&&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&junk", Expected = "junk&&&&junk", Width = 100 };
-                yield return new TestCase { Text = "junk&junk", Expected = "junk&&junk", Width = 100 };
-                yield return new TestCase
-                                 {
-                                     Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 
-                                     Expected = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", 
-                                     Width = 100
-                                 };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Width = 50
-                };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Width = 100
-                };
-            }
-        }
-
-        public IEnumerable<TestCase> TestCasesWithMnemonicNoEllipsing
-        {
-            get
-            {
-                yield return new TestCase { Text = "junk", Expected = "junk", Width = 100 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&", Width = 50 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&", Width = 100 };
-                yield return new TestCase { Text = "junk&&", Expected = "junk&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&junk", Expected = "junk&&junk", Width = 100 };
-                yield return new TestCase { Text = "junk&junk", Expected = "junk&junk", Width = 100 };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Width = 50
-                };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Width = 100
-                };
-            }
-        }
-
-        public IEnumerable<TestCase> TestCasesWithMnemonic
-        {
-            get
-            {
-                yield return new TestCase { Text = "junk", Expected = "junk", Width = 100 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&", Width = 50 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&", Width = 100 };
-                yield return new TestCase { Text = "junk&&", Expected = "junk&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&&&&&&&&&&&&...", Width = 100 };
-                yield return new TestCase { Text = "jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "jnk&&&&&&&&&&&&&&&&&&&...", Width = 100 };
-                yield return new TestCase { Text = "junk&&junk", Expected = "junk&&junk", Width = 100 };
-                yield return new TestCase { Text = "junk&junk", Expected = "junk&junk", Width = 100 };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "All...",
-                    Width = 50
-                };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "AllWorkAndN...",
-                    Width = 100
-                };
-            }
-        }
-
-        public IEnumerable<TestCase> TestCasesNoMnemonic
-        {
-            get
-            {
-                yield return new TestCase { Text = "junk", Expected = "junk", Width = 100 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&&", Width = 50 };
-                yield return new TestCase { Text = "junk&", Expected = "junk&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&", Expected = "junk&&&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&junk", Expected = "junk&&&&junk", Width = 100 };
-                yield return new TestCase { Text = "junk&junk", Expected = "junk&&junk", Width = 100 };
-                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&&&&&&&&&&&...", Width = 100 };
-                yield return new TestCase { Text = "jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "jnk&&&&&&&&&&&&&&&&&&...", Width = 100 };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "All...",
-                    Width = 50
-                };
-                yield return new TestCase
-                {
-                    Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",
-                    Expected = "AllWorkAndN...",
-                    Width = 100
-                };
-            }
-        }
-
-        public class TestCase
-        {
-            public string Text { get; set; }
-            public string Expected { get; set; }
-            public int Width { get; set; }
+            Assert.AreEqual(gb.Text, text, $"Raw text TestCase width: {width}");
+            Assert.AreEqual(gb.EscapedText, string.Empty, $"Escaped text TestCase width: {width}");
         }
     }
 }

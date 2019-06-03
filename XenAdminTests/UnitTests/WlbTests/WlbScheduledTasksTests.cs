@@ -50,30 +50,31 @@ namespace XenAdminTests.UnitTests.WlbTests
             Assert.IsNull(tasks.GetNextExecutingTask(), "GetNextExecutingTask");
         }
 
-        [Test, ExpectedException(typeof(IndexOutOfRangeException))]
+        [Test]
         public void EmptyConstructorCausesCurrentScheduledPerformanceModeToThrow()
         {
-            WlbScheduledTasks tasks = new WlbScheduledTasks();
-            tasks.GetCurrentScheduledPerformanceMode();
+            var tasks = new WlbScheduledTasks();
+            Assert.Throws(typeof(IndexOutOfRangeException), () => tasks.GetCurrentScheduledPerformanceMode());
         }
 
-        [Test, ExpectedException(typeof(IndexOutOfRangeException))]
+        [Test]
         public void EmptyConstructorCausesLastTaskToThrow()
         {
-            WlbScheduledTasks tasks = new WlbScheduledTasks();
-            tasks.GetLastExecutingTask();
+            var tasks = new WlbScheduledTasks();
+            Assert.Throws(typeof(IndexOutOfRangeException), () => tasks.GetLastExecutingTask());
         }
 
         [Test]
         public void MethodCallsFromADictionaryConstructedObject()
         {
-            WlbScheduledTasks tasks = new WlbScheduledTasks(new Dictionary<string, string>()
-                                                                {
-                                                                   {"schedTask_dosomething", "now"},
-                                                                   {"schedTask_3", "later"},
-                                                                   {"schedTask_1", "sooner"},
-                                                                   {"domoresomethings", "will not be added"} 
-                                                                });
+            var tasks = new WlbScheduledTasks(new Dictionary<string, string>
+            {
+                {"schedTask_dosomething", "now"},
+                {"schedTask_3", "later"},
+                {"schedTask_1", "sooner"},
+                {"domoresomethings", "will not be added"}
+            });
+
             //Task List Construction
             Assert.AreEqual(3, tasks.TaskList.Count );
             Assert.AreEqual(0, tasks.TaskList["dosomething"].TaskId);
@@ -129,39 +130,40 @@ namespace XenAdminTests.UnitTests.WlbTests
         {
             WlbScheduledTasks tasks = new WlbScheduledTasks();
 
-            Dictionary<string, string > taskParameters = new Dictionary<string, string>()
-                                                             {
-                                                                 { "OptMode", "1"} // Performance mode
-                                                             };
+            var taskParameters = new Dictionary<string, string>()
+            {
+                {"OptMode", "1"} // Performance mode
+            };
 
-            WlbScheduledTask taskA = new WlbScheduledTask("1")
-                                         { 
-                                             DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Friday,
-                                             TaskParameters = taskParameters
-                                         };
-            WlbScheduledTask taskB = new WlbScheduledTask("2")
-                                         {
-                                             DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Monday,
-                                             TaskParameters = taskParameters
-                                         };
+            var taskA = new WlbScheduledTask("1")
+            {
+                DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Friday,
+                TaskParameters = taskParameters
+            };
+
+            var taskB = new WlbScheduledTask("2")
+            {
+                DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Monday,
+                TaskParameters = taskParameters
+            };
 
             //Weekend tasks adds 2 to the virtual task list, one for each day
-            WlbScheduledTask taskC = new WlbScheduledTask("3")
-                                         {
-                                             DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Weekends,
-                                             TaskParameters = taskParameters
-                                         };
-            Dictionary<string, WlbScheduledTask> taskCollection = new Dictionary<string, WlbScheduledTask>()
-                                                                      {
-                                                                          {"schedTask_1", taskA},
-                                                                          {"schedTask_2", taskB},
-                                                                          {"schedTask_3", taskC}
-                                                                      };
+            var taskC = new WlbScheduledTask("3")
+            {
+                DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Weekends,
+                TaskParameters = taskParameters
+            };
+
+            var taskCollection = new Dictionary<string, WlbScheduledTask>()
+            {
+                {"schedTask_1", taskA},
+                {"schedTask_2", taskB},
+                {"schedTask_3", taskC}
+            };
 
             Assert.AreEqual(3, taskCollection.Count, "Setting up task collection");
             tasks.TaskList = taskCollection;
             return tasks;
         }
-
     }
 }

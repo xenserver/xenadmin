@@ -30,15 +30,13 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using XenAdmin.XenSearch;
 
-namespace XenAdminTests.SearchUnitTests
+namespace XenAdminTests.UnitTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
-    class MatchTests_Date
+    [TestFixture, Category(TestCategories.Unit)]
+    public class DatePropertyQueryTests
     {
         [Test, Sequential]
         public void Today(

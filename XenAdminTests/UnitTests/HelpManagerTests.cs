@@ -52,19 +52,19 @@ namespace XenAdminTests.UnitTests
         private const string Source = "XenCenter";
 
         [TestCase(null, HelpUrl, Locale, Campaign, Medium, Source,
-            Result = "http://docs.citrix.com/en-us/xencenter/current-release/index.html?utm_campaign=7_9_50_6753&utm_medium=ui_link&utm_source=xencenter",
+            ExpectedResult = "http://docs.citrix.com/en-us/xencenter/current-release/index.html?utm_campaign=7_9_50_6753&utm_medium=ui_link&utm_source=xencenter",
             Description = "No topic defaults to index page")]
         [TestCase(null, HelpUrl, "ja-JP", Campaign, Medium, Source,
-            Result = "http://docs.citrix.com/ja-jp/xencenter/current-release/index.html?utm_campaign=7_9_50_6753&utm_medium=ui_link&utm_source=xencenter",
+            ExpectedResult = "http://docs.citrix.com/ja-jp/xencenter/current-release/index.html?utm_campaign=7_9_50_6753&utm_medium=ui_link&utm_source=xencenter",
             Description = "Japanese locale is handled correctly")]
         [TestCase("tabs", HelpUrl, Locale, Campaign, Medium, Source,
-            Result = "http://docs.citrix.com/en-us/xencenter/current-release/tabs.html?utm_campaign=7_9_50_6753&utm_medium=ui_link&utm_source=xencenter",
+            ExpectedResult = "http://docs.citrix.com/en-us/xencenter/current-release/tabs.html?utm_campaign=7_9_50_6753&utm_medium=ui_link&utm_source=xencenter",
             Description = "Given topic is reflected in result")]
         [TestCase(null, HelpUrl, Locale, "10.0.0.9999", Medium, Source,
-            Result = "http://docs.citrix.com/en-us/xencenter/current-release/index.html?utm_campaign=10_0_0_9999&utm_medium=ui_link&utm_source=xencenter",
+            ExpectedResult = "http://docs.citrix.com/en-us/xencenter/current-release/index.html?utm_campaign=10_0_0_9999&utm_medium=ui_link&utm_source=xencenter",
             Description = "Given campaign version is reflected in result")]
         [TestCase("UPPER_TOPIC", HelpUrlUpper, "UPPER_LOCALE", "UPPER_CAMPAIGN", "UPPER_MEDIUM", "UPPER_SOURCE",
-            Result = "upper_help_url/upper_locale/upper_topic/upper_campaign/upper_medium/upper_source",
+            ExpectedResult = "upper_help_url/upper_locale/upper_topic/upper_campaign/upper_medium/upper_source",
             Description = "Ensure the URL is in lower case")]
         public string TestProduceUrl(string topicId, string helpUrl, string locale, string campaign, string medium, string source)
         {

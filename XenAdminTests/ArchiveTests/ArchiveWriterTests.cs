@@ -39,30 +39,18 @@ using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
-    class ArchiveWriterTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class ArchiveWriterTests
     {
         private class FakeArchiveWriter : ArchiveWriter
         {
-            private List<Stream> streamAdded;
-            private List<string> fileNameAdded;
-            private List<DateTime> dateAdded;
             private bool disposed;
 
-            public List<Stream> AddedStreamData
-            {
-                get { return streamAdded; }
-            }
+            public List<Stream> AddedStreamData { get; private set; }
 
-            public List<string> AddedFileNameData
-            {
-                get { return fileNameAdded; }
-            }
+            public List<string> AddedFileNameData { get; private set; }
 
-            public List<DateTime> AddedDates
-            {
-                get { return dateAdded; }
-            }
+            public List<DateTime> AddedDates { get; private set; }
 
             public FakeArchiveWriter()
             {
@@ -72,36 +60,35 @@ namespace XenAdminTests.ArchiveTests
             public void Reset()
             {
                 DisposeStreamList();
-                streamAdded = new List<Stream>();
-                fileNameAdded = new List<string>();
-                dateAdded = new List<DateTime>();
+                AddedStreamData = new List<Stream>();
+                AddedFileNameData = new List<string>();
+                AddedDates = new List<DateTime>();
             }
 
             private void DisposeStreamList()
             {
-                if (streamAdded != null)
+                if (AddedStreamData != null)
                 {
-                   foreach (Stream stream in streamAdded)
+                   foreach (Stream stream in AddedStreamData)
                     {
                         if( stream != null )
                             stream.Dispose();
                     } 
                 }
-                
             }
 
             public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime)
             {
                 disposed = false;
-                streamAdded.Add(filetoAdd);
-                fileNameAdded.Add(fileName);
-                dateAdded.Add(modificationTime);
+                AddedStreamData.Add(filetoAdd);
+                AddedFileNameData.Add(fileName);
+                AddedDates.Add(modificationTime);
             }
 
             public override void AddDirectory(string directoryName, DateTime modificationTime)
             {
-                fileNameAdded.Add(directoryName);
-                dateAdded.Add(modificationTime);
+                AddedFileNameData.Add(directoryName);
+                AddedDates.Add(modificationTime);
             }
 
             protected override void Dispose(bool disposing)
@@ -120,13 +107,13 @@ namespace XenAdminTests.ArchiveTests
 
         private FakeArchiveWriter fakeWriter;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             fakeWriter = new FakeArchiveWriter();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTearDown()
         {
             fakeWriter.Dispose();
@@ -182,10 +169,9 @@ namespace XenAdminTests.ArchiveTests
         }
 
         [Test]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void CreateArchiveThrowsWithBadPath()
         {
-            fakeWriter.CreateArchive("Yellow brick road - not a path!");
+            Assert.Throws(typeof(FileNotFoundException), () => fakeWriter.CreateArchive("Yellow brick road - not a path!"));
         }
 
         [Test]

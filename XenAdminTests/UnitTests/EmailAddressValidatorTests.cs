@@ -29,42 +29,33 @@
  * SUCH DAMAGE.
  */
 
-using System.Reflection;
 using NUnit.Framework;
+using XenCenterLib;
 
-namespace XenAdminTests.UnitTests.UnitTestHelper
+namespace XenAdminTests.UnitTests
 {
-    class VerifyGetters : IUnitTestVerifier
+    [TestFixture, Category(TestCategories.Unit)]
+    public class EmailAddressValidatorTests
     {
-        private readonly object classToVerify = null;
+        private readonly EmailAddressValidator validator = new EmailAddressValidator();
 
-        /// <param name="classToVerify">A class with getters and setters to verify</param>
-        public VerifyGetters(object classToVerify)
+        [Test]
+        [TestCase("bob@bob", ExpectedResult = true)]
+        [TestCase("me@you.com", ExpectedResult = true)]
+        [TestCase("them@127.0.0.1", ExpectedResult = true)]
+        [TestCase("bob@", ExpectedResult = false)]
+        [TestCase("me@ you.com", ExpectedResult = false)]
+        [TestCase("them@127.0.0.1()", ExpectedResult = false)]
+        [TestCase(" hi@there.com", ExpectedResult = false)]
+        [TestCase("hi@there.com ", ExpectedResult = false)]
+        [TestCase("bread", ExpectedResult = false)]
+        [TestCase("dan(ny@what.com", ExpectedResult = false)]
+        [TestCase("", ExpectedResult = false)]
+        [TestCase(null, ExpectedResult = false)]
+        [TestCase("    ", ExpectedResult = false)]
+        public bool TestAcceptableEmailAddresses(string address)
         {
-            this.classToVerify = classToVerify;
-        }
-
-        /// <summary>
-        /// Use this when you want to test that some expected data has already been set in a class
-        /// </summary>
-        /// <example>
-        /// </example>
-        /// <param name="expected">A struct of expected data content with members having the same name and return type as the getters and setters of the class</param>
-        public void Verify(object expected)
-        {
-            FieldInfo[] fields = expected.GetType().GetFields();
-            foreach (FieldInfo fieldInfo in fields)
-            {
-                string fieldName = fieldInfo.Name;
-                object expectedValue = fieldInfo.GetValue(expected);
-                PropertyInfo getter = classToVerify.GetType().GetProperty(fieldName);
-
-                object actualValue = getter.GetValue(classToVerify, null);
-                if (expectedValue is string)
-                    actualValue = actualValue.ToString();
-
-                Assert.AreEqual(expectedValue, actualValue, "Property mismatched: " + fieldName);
-            }
+            return validator.IsValid(address);
         }
     }
 }

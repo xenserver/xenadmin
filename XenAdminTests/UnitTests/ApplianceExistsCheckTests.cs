@@ -35,11 +35,13 @@ using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Wizards.ExportWizard.ApplianceChecks;
 
-namespace XenAdminTests.WizardTests.ExportWizard
+namespace XenAdminTests.UnitTests
 {
-    public class ApplianceExistsCheckTests : UnitTester_TestFixture
+    [TestFixture, Category(TestCategories.Unit)]
+    public class ApplianceExistsCheckTests
     {
         #region Test Helpers
+
         private class ApplianceExistsCheckStaticOverrides : ApplianceExistsCheck
         {
             public ApplianceExistsCheckStaticOverrides(string destinationDirectory, string fileName, FileExtension extension)
@@ -49,6 +51,7 @@ namespace XenAdminTests.WizardTests.ExportWizard
             }
 
             private bool directoryExistsValue;
+
             public bool DirectoryExistsValue
             {
                 set { directoryExistsValue = value; }
@@ -60,6 +63,7 @@ namespace XenAdminTests.WizardTests.ExportWizard
             }
 
             private bool fileExistsValue;
+
             public bool FileExistsValue
             {
                 set { fileExistsValue = value; }
@@ -89,69 +93,50 @@ namespace XenAdminTests.WizardTests.ExportWizard
             public bool DirFound { get; set; }
             public bool FileFound { get; set; }
             public bool Valid { get; set; }
+
             public override string ToString()
             {
-                return String.Format("DirFound: {0}; File found: {1}; Valid: {2}", DirFound, FileFound, Valid);
+                return $"DirFound: {DirFound}; File found: {FileFound}; Valid: {Valid}";
             }
         }
+
         #endregion
 
         #region Test Data
+
         private const string directoryName = @"C:\Some\Fake\Dir\Name";
         private const string fileName = "fileName";
         private readonly string errorMessage = Messages.EXPORT_APPLIANCE_PAGE_ERROR_APP_EXISTS;
         private readonly string noErrorMessage = string.Empty;
 
-        private IEnumerable<TestCase> TestCases
+        private static IEnumerable<TestCase> TestCases
         {
             get
             {
-                yield return new TestCase
-                 {
-                     DirFound = true,
-                     FileFound = true,
-                     Valid = false
-                 };
-
-                yield return new TestCase
-                {
-                    DirFound = false,
-                    FileFound = true,
-                    Valid = false
-                };
-
-                yield return new TestCase
-                {
-                    DirFound = true,
-                    FileFound = false,
-                    Valid = true
-                };
-
-                yield return new TestCase
-                {
-                    DirFound = false,
-                    FileFound = false,
-                    Valid = true
-                };
+                yield return new TestCase {DirFound = true, FileFound = true, Valid = false};
+                yield return new TestCase {DirFound = false, FileFound = true, Valid = false};
+                yield return new TestCase {DirFound = true, FileFound = false, Valid = true};
+                yield return new TestCase {DirFound = false, FileFound = false, Valid = true};
             }
-        } 
+        }
+
         #endregion
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(typeof(ApplianceExistsCheckTests), nameof(TestCases))]
         public void TestOvfOvaValidation(TestCase tc)
         {
             ApplianceExistsCheckStaticOverrides checker = new ApplianceExistsCheckStaticOverrides(directoryName, fileName, ApplianceCheck.FileExtension.ovaovf)
-                                                              {
-                                                                  DirectoryExistsValue = tc.DirFound,
-                                                                  FileExistsValue = tc.FileFound
-                                                              };
+            {
+                DirectoryExistsValue = tc.DirFound,
+                FileExistsValue = tc.FileFound
+            };
             checker.Validate();
             Assert.That(checker.IsValid, Is.EqualTo(tc.Valid), "Is valid test -> " + tc);
             Assert.That(checker.DirectoryExistsCalls, Is.EqualTo(1), "dir exists calls -> " + tc);
-            Assert.That(checker.FileExistsCalls, Is.InRange(1,2), "file exists calls -> " + tc);
+            Assert.That(checker.FileExistsCalls, Is.InRange(1, 2), "file exists calls -> " + tc);
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(typeof(ApplianceExistsCheckTests), nameof(TestCases))]
         public void TestXvaValidation(TestCase tc)
         {
             ApplianceExistsCheckStaticOverrides checker = new ApplianceExistsCheckStaticOverrides(directoryName, fileName, ApplianceCheck.FileExtension.xva)
@@ -171,12 +156,12 @@ namespace XenAdminTests.WizardTests.ExportWizard
         public void ErrorMessagesValidation(bool valid)
         {
             ApplianceExistsCheckStaticOverrides checker = new ApplianceExistsCheckStaticOverrides(directoryName,
-                                                                                                  fileName,
-                                                                                                  ApplianceCheck.FileExtension.xva)
-                                                              {
-                                                                  DirectoryExistsValue = !valid,
-                                                                  FileExistsValue = !valid
-                                                              };
+                fileName,
+                ApplianceCheck.FileExtension.xva)
+            {
+                DirectoryExistsValue = !valid,
+                FileExistsValue = !valid
+            };
             checker.Validate();
             Assert.That(checker.IsValid, Is.EqualTo(valid), "Is valid");
             string error = valid ? noErrorMessage : errorMessage;
@@ -187,17 +172,19 @@ namespace XenAdminTests.WizardTests.ExportWizard
         public void DefaultCase()
         {
             ApplianceCheck checker = new ApplianceExistsCheck(directoryName, fileName,
-                                                              ApplianceCheck.FileExtension.ovaovf);
+                ApplianceCheck.FileExtension.ovaovf);
             Assert.That(checker.IsValid, Is.False, "Is valid");
             Assert.That(checker.ErrorReason, Is.EqualTo(errorMessage), "error message");
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullPaths()
         {
-            ApplianceCheck checker = new ApplianceExistsCheck(null, null,
-                                                              ApplianceCheck.FileExtension.ovaovf);
-            checker.Validate();
+            Assert.Throws(typeof(ArgumentNullException), () =>
+            {
+                var checker = new ApplianceExistsCheck(null, null, ApplianceCheck.FileExtension.ovaovf);
+                checker.Validate();
+            });
         }
 
     }

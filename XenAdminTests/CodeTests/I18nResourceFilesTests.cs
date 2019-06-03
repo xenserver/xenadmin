@@ -33,12 +33,11 @@ using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using NUnit.Framework;
 
-namespace XenAdminTests
+namespace XenAdminTests.CodeTests
 {
-	[TestFixture, Category(TestCategories.UICategoryA)]
+	[TestFixture, Category(TestCategories.Unit)]
 	public class ResourceFilesTests
 	{
 		/// <summary>
@@ -46,54 +45,52 @@ namespace XenAdminTests
 		/// </summary>
 		private string[] m_assemblyIds = { "XenCenterMain", "XenModel", "XenOvf", "XenOvfTransport" };
 
-	    /// <summary>
-	    /// Available cultures (japanese and simplified chinese at the moment)
-	    /// </summary>
-	    private string[] m_locales = {"ja", "zh-CN"};
-
 	    private string[] m_excludeFromCheck = {"XenAdmin.Help.HelpManager"};
 
-		/// <summary>
-		/// Test checks all resx files in the project have their i18n counterparts in place
-		/// </summary>
-        [Test]
-        public void TestEnsureI18nFilesInPlace()
+        private List<Assembly> m_assemblies = new List<Assembly>();
+
+        [OneTimeSetUp]
+        public void TestFixtureSetUp()
         {
             var xenAdminTests = Assembly.GetExecutingAssembly();
-            var assemblies = GetAssembliesRecursively(xenAdminTests);
+            m_assemblies = GetAssembliesRecursively(xenAdminTests);
+            Assert.IsNotEmpty(m_assemblies, "Could not find assemblies to check.");
+        }
 
-            Assert.IsNotEmpty(assemblies, "Assemblies to check are found");
-            var missingSb = new StringBuilder();
-            var extraSb = new StringBuilder();
+        [Test]
+        [Description("Checks all resx files in the project have their i18n counterparts in place")]
+        [TestCase("ja")]
+        [TestCase("zh-CN")]
+        public void TestEnsureI18NFilesInPlace(string locale)
+        {
+            var missing = new List<string>();
+            var extra = new List<string>();
 
-            foreach (var assembly in assemblies)
+            foreach (var assembly in m_assemblies)
             {
                 List<string> defaultResx = new List<string>(assembly.GetManifestResourceNames().Where(resource => resource.EndsWith("resources")));
 
-                foreach (string locale in m_locales)
+                CultureInfo cultureInfo = new CultureInfo(locale);
+                Assembly localeDll = assembly.GetSatelliteAssembly(cultureInfo);
+                List<string> localeResx = new List<string>(localeDll.GetManifestResourceNames());
+
+                foreach (string def in defaultResx)
                 {
-                    CultureInfo cultureInfo = new CultureInfo(locale);
-                    Assembly localeDll = assembly.GetSatelliteAssembly(cultureInfo);
-                    List<string> localeResx = new List<string>(localeDll.GetManifestResourceNames());
+                    var name = def.Substring(0, def.Length - ".resources".Length);
+                    var exclude = m_excludeFromCheck.Contains(name);
 
-                    foreach (string def in defaultResx)
-                    {
-                        var name = def.Substring(0, def.Length - ".resources".Length);
-                        var exclude = m_excludeFromCheck.Contains(name);
+                    string localName = $"{name}.{locale}.resources";
+                    var localized = localeResx.Contains(localName);
 
-                        string localName = string.Format("{0}.{1}.resources", name, locale);
-                        var localized = localeResx.Contains(localName);
-
-                        if (localized && exclude)
-                           extraSb.AppendLine(localName);
-                        else if (!localized && !exclude)
-                            missingSb.AppendLine(localName);
-                    }
+                    if (localized && exclude)
+                        extra.Add(localName);
+                    else if (!localized && !exclude)
+                        missing.Add(localName);
                 }
             }
 
-            Assert.IsNullOrEmpty(missingSb.ToString(), "Missing resources detected.");
-            Assert.IsNullOrEmpty(extraSb.ToString(), "Unecessary resources detected");
+            Assert.IsEmpty(missing, "Missing resources detected.");
+            Assert.IsEmpty(extra, "Unnecessary resources detected.");
         }
 
 	    #region Auxiliary private methods

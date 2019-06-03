@@ -29,18 +29,15 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using NUnit.Framework;
 using XenAdmin;
 using System.Diagnostics;
 using System.Threading;
-using XenAdmin.Core;
-using System.Reflection;
-using System.Collections.Generic;
 
-namespace XenAdminTests.MiscTests
+
+namespace XenAdminTests.UnitTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.Unit)]
     public class UpdateManagerTests
     {
         private const int Delay = 1000;

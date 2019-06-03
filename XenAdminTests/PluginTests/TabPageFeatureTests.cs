@@ -29,39 +29,19 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 using NUnit.Framework;
-using XenAdmin.Plugins;
 
 namespace XenAdminTests.PluginTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
-    public class TabPageFeatureTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class TabPageFeatureTests : TestPluginLoader
     {
-        private PluginManager _pluginManager;
-        private TestPluginLoader _pluginLoader;
+        protected override string pluginName => "TabPageFeatureTestPlugin";
 
-        [TearDown]
-        public void TearDown()
-        {
-            _pluginLoader.Dispose();
-            _pluginManager.Dispose();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            _pluginManager = new PluginManager();
-        }
-
-        [Test, RequiresSTA]
+        [Test, Apartment(ApartmentState.STA)]
         public void TestLoadPlugin()
         {
-            _pluginLoader = new TestPluginLoader("TabPageFeatureTestPlugin", _pluginManager);
-            _pluginLoader.Load();
-
             Assert.AreEqual(1, _pluginManager.Plugins.Count, "No plugin loaded.");
             Assert.AreEqual(8, _pluginManager.Plugins[0].Features.Count, "No features loaded.");
             Assert.IsNotNull(_pluginManager.Plugins[0].GetSearch("pl"));
@@ -71,27 +51,5 @@ namespace XenAdminTests.PluginTests
             Assert.IsNotNull(_pluginManager.Plugins[0].GetSearch("ut"));
             Assert.IsNotNull(_pluginManager.Plugins[0].GetSearch("dt"));
         }
-
-
-        //[Test]
-        //public void Test_UrlReplacement_DefaultTemplate()
-        //{
-        //    MW(delegate()
-        //    {
-        //        SelectInTree(GetAnyDefaultTemplate());
-        //        Helpers.ParseURL(GetAllProperties());
-        //    });
-        //}
-
-
-        //private string GetAllProperties()
-        //{
-        //    StringBuilder builder = new StringBuilder("http://");
-        //    foreach (string prop in Enum.GetNames(typeof(PropertyNames)))
-        //    {
-        //        builder.AppendFormat("{{${0}}}", prop);
-        //    }
-        //    return builder.ToString();
-        //}
     }
 }

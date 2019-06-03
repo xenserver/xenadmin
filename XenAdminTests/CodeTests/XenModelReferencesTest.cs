@@ -29,51 +29,23 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Reflection;
 using NUnit.Framework;
-using XenCenterLib;
 
-namespace XenAdminTests.MiscTests
+namespace XenAdminTests.CodeTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
-    class StreamUtilitiesTests
+    [TestFixture, Category(TestCategories.Unit)]
+    public class XenModelReferencesTest
     {
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void BufferedStreamCopyWithNullInputStream()
+        public void TestReferences()
         {
-            using( MemoryStream ms = new MemoryStream() )
-            {
-               StreamUtilities.BufferedStreamCopy( null, ms ); 
-            }
-            
-        }
+            Assembly a = Assembly.Load(new AssemblyName("XenModel"));
+            AssemblyName[] an = a.GetReferencedAssemblies();
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void BufferedStreamCopyWithNullOutputStream()
-        {
-            using (MemoryStream ms = new MemoryStream())
+            foreach (AssemblyName name in an)
             {
-                StreamUtilities.BufferedStreamCopy(ms, null);
-            }
-        }
-
-        [Test]
-        public void BufferedStreamCopyWithValidData()
-        {
-            const string streamContents = "This is a test";
-            using (MemoryStream oms = new MemoryStream())
-            {
-                using (MemoryStream ims = new MemoryStream(Encoding.ASCII.GetBytes(streamContents)))
-                {
-                    StreamUtilities.BufferedStreamCopy(ims, oms);
-                    Assert.AreEqual(ims, oms);
-                }
+                Assert.False(name.ToString().StartsWith("System.Windows"), "Assembly referenced: " + name);
             }
         }
     }

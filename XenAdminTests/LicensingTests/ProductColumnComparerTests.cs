@@ -35,9 +35,10 @@ using NUnit.Framework;
 using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.LicenseManagerLicenseRowComparers;
 
-namespace XenAdminTests.DialogTests.LicenseManager.Comparers
+namespace XenAdminTests.UnitTests.LicenseManager
 {
-    public class ProductColumnComparerTests : UnitTester_SingleConnectionTestFixture
+    [TestFixture, Category(TestCategories.Unit)]
+    public class ProductColumnComparerTests
     {
         public class TestCase
         {
@@ -50,7 +51,7 @@ namespace XenAdminTests.DialogTests.LicenseManager.Comparers
             public bool VersionChecked { get; set; }
         }
 
-        private IEnumerable<TestCase> TestCases
+        private static IEnumerable<TestCase> TestCases
         {
             get
             {
@@ -64,7 +65,6 @@ namespace XenAdminTests.DialogTests.LicenseManager.Comparers
                     NameChecked = true,
                     VersionChecked = true
                 };
-
                 yield return new TestCase
                 {
                     LicenseNameA = "A",
@@ -73,7 +73,6 @@ namespace XenAdminTests.DialogTests.LicenseManager.Comparers
                     NameChecked = true,
                     VersionChecked = false
                 };
-
                 yield return new TestCase
                 {
                     LicenseNameA = "A",
@@ -87,7 +86,7 @@ namespace XenAdminTests.DialogTests.LicenseManager.Comparers
             }
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test, TestCaseSource(typeof(ProductColumnComparerTests), nameof(TestCases))]
         public void ComparisonTests(TestCase tc)
         {
             ProductColumnComparer comparer = new ProductColumnComparer();
@@ -121,8 +120,6 @@ namespace XenAdminTests.DialogTests.LicenseManager.Comparers
                 x.Verify(s => s.LicenseProductVersion, Times.Never());
                 y.Verify(s => s.LicenseProductVersion, Times.Never());
             }
-
         }
-
     }
 }

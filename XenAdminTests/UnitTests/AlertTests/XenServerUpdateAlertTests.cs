@@ -36,7 +36,6 @@ using NUnit.Framework;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdminTests.UnitTests.UnitTestHelper;
 using XenAPI;
 
 namespace XenAdminTests.UnitTests.AlertTests
@@ -60,10 +59,8 @@ namespace XenAdminTests.UnitTests.AlertTests
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
             alert.IncludeHosts(new List<Host>() { hostA.Object, hostB.Object });
-            
-            IUnitTestVerifier validator = new VerifyGetters(alert);
 
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
                 FixLinkText = "Go to Web Page",
@@ -87,9 +84,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             var alert = new XenServerVersionAlert(ver);
             alert.IncludeHosts(new List<Host> { hostA.Object, hostB.Object });
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName",
                 FixLinkText = "Go to Web Page",
@@ -114,9 +109,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = "ConnAName, ConnBName",
                 FixLinkText = "Go to Web Page",
@@ -139,9 +132,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, false, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123", "", false, "");
             var alert = new XenServerVersionAlert(ver);
 
-            IUnitTestVerifier validator = new VerifyGetters(alert);
-
-            validator.Verify(new AlertClassUnitTestData
+            ClassVerifiers.VerifyGetters(alert, new AlertClassUnitTestData
             {
                 AppliesTo = string.Empty,
                 FixLinkText = "Go to Web Page",
@@ -158,10 +149,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             VerifyHostsExpectations(Times.Never);
         }
 
-        [Test, ExpectedException(typeof(NullReferenceException))]
+        [Test]
         public void TestAlertWithNullVersion()
         {
-            var alert = new XenServerVersionAlert(null);
+            Assert.Throws(typeof(NullReferenceException), () => new XenServerVersionAlert(null));
         }
 
         private void VerifyConnExpectations(Func<Times> times)

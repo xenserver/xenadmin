@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using NUnit.Framework;
@@ -39,84 +38,50 @@ using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
-    public class TarArchiveWriterTests : ThirdPartyArchiveWriterTest
+    [TestFixture(typeof(SharpZipTarArchiveIterator), typeof(SharpZipTarArchiveWriter))]
+    [TestFixture(typeof(DotNetZipZipIterator), typeof(DotNetZipZipWriter))]
+    [Category(TestCategories.Unit)]
+    public class ThirdPartyArchiveWriterTest<TR, TW>
+        where TR : ArchiveIterator, new()
+        where TW : ArchiveWriter, new()
     {
-        [TestFixtureSetUp]
-        public void TestFixtureSetUp()
-        {
-            Writer = new SharpZipTarArchiveWriter();
-            Reader = new SharpZipTarArchiveIterator();
-        }
-    }
+        private string tempPath;
 
-    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
-    public class ZipArchiveWriterTests : ThirdPartyArchiveWriterTest
-    {
-        [TestFixtureSetUp]
-        public void TestFixtureSetUp()
+        [SetUp]
+        public void TestSetUp()
         {
-            Writer = new DotNetZipZipWriter();
-            Reader = null;
+            tempPath = CreateTempFolder();
         }
 
-        [TestFixtureTearDown]
-        public void TestFixtureTearDown()
+        [TearDown]
+        public void TestTearDown()
         {
-            Writer.Dispose();
-        }
-    }
-
-    public abstract class ThirdPartyArchiveWriterTest
-    {
-        private ArchiveWriter writer;
-        private ArchiveIterator reader;
-
-        protected ArchiveWriter Writer
-        {
-            set { writer = value; }
-            get { return writer;  }
-        }
-
-        protected ArchiveIterator Reader
-        {
-            set { reader = value; }
-            get { return reader;  }
+            try
+            {
+                Directory.Delete(tempPath, true);
+            }
+            catch
+            {
+                //ignore
+            }
         }
 
         [Test]
         public void CreateAnArchiveAndRereadWhenPossible()
         {
-            string tempPath = CreateTempFolder();
-
-            string tarFileName = Path.Combine( tempPath, Path.GetRandomFileName() );
-
-            WriteAnArchive(tarFileName);
-
-            if( reader != null )
-                RereadAnArchiveAndTest(tarFileName);
-            else
-                Trace.WriteLine(String.Format("A reader for the writer class {0} was not found so the contents are unvalidated by this test", writer.GetType()));
-            
-            Directory.Delete(tempPath, true);
+            string tarFileName = Path.Combine(tempPath, Path.GetRandomFileName());
+            CheckWriteArchive(tarFileName);
+            CheckReadArchive(tarFileName);
         }
 
         // This test knows the contents of the file written in the archive 
-        private void RereadAnArchiveAndTest(string archiveName)
+        private void CheckReadArchive(string archiveName)
         {
-            List<string> expectedDirs = new List<string>()
-                                            {
-                                                "adir/",
-                                                "adir2/a/"                                          
-                                            };
+            var expectedDirs = new List<string> {"adir/", "adir2/a/"};
+            var expectedFiles = new List<string> {"tf1", "adir2/a/tf2"};
 
-            List<string> expectedFiles = new List<string>()
-                                            {
-                                                "tf1",
-                                                "adir2/a/tf2"                                          
-                                            };
-
-            using (FileStream fs = File.OpenRead(archiveName))
+            using (var fs = File.OpenRead(archiveName))
+            using (var reader = new TR())
             {
                 reader.SetBaseStream(fs);
                 while (reader.HasNext())
@@ -130,18 +95,14 @@ namespace XenAdminTests.ArchiveTests
                         using (MemoryStream ms = new MemoryStream())
                         {
                             reader.ExtractCurrentFile(ms);
-                            Assert.IsTrue( ms.Length > 0, "Extracted file contents have data");
+                            Assert.IsTrue(ms.Length > 0, "Extracted file contents have data");
                         }
                     }
-
                 }
 
                 Assert.AreEqual(0, expectedFiles.Count, "Expected files count");
                 Assert.AreEqual(0, expectedDirs.Count, "Expected dir count");
-
             }
-
-            Reader.Dispose();
         }
 
         private string CreateTempFolder()
@@ -151,9 +112,10 @@ namespace XenAdminTests.ArchiveTests
             return tempPath;
         }
 
-        private void WriteAnArchive(string tarFileName)
+        private void CheckWriteArchive(string tarFileName)
         {
-            using (FileStream ms = File.OpenWrite(tarFileName))
+            using (var ms = File.OpenWrite(tarFileName))
+            using (var writer = new TW())
             {
                 Assert.AreEqual(0, ms.Length);
                 writer.SetBaseStream(ms);
@@ -170,7 +132,6 @@ namespace XenAdminTests.ArchiveTests
 
                 writer.AddDirectory("adir/");
                 writer.AddDirectory("adir2/a", DateTime.Now);
-                writer.Dispose();
             }
 
             Assert.IsTrue(File.Exists(tarFileName), "archive exists");

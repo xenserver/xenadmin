@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,10 +29,37 @@
  * SUCH DAMAGE.
  */
 
-namespace XenAdminTests.UnitTests.UnitTestHelper
+using NUnit.Framework;
+using XenAdmin;
+using XenAPI;
+
+namespace XenAdminTests.UnitTests
 {
-    public interface IUnitTestVerifier
+    [TestFixture, Category(TestCategories.Unit)]
+    internal class NamesAndMessagesTests
     {
-        void Verify(object expected);
+        [Test]
+        public void FriendlyNamesStaticMethodsReturnStrings()
+        {
+            ClassVerifiers.VerifyStaticMethodReturn(typeof(FriendlyNames), typeof(string));
+        }
+
+        [Test]
+        public void MessagesStaticMethodsReturnStrings()
+        {
+            ClassVerifiers.VerifyStaticMethodReturn(typeof(Messages), typeof(string));
+        }
+
+        [Test]
+        public void InvisibleMessagesStaticMethodsReturnStrings()
+        {
+            ClassVerifiers.VerifyStaticMethodReturn(typeof(InvisibleMessages), typeof(string));
+        }
+
+        [Test]
+        public void XapiFriendlyNameStaticMethodsReturnStrings()
+        {
+            ClassVerifiers.VerifyStaticMethodReturn(typeof(FriendlyErrorNames), typeof(string));
+        }
     }
 }
