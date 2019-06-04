@@ -12769,16 +12769,22 @@ To start a [XenServer] trial, click the button below.</value>
     <value>[XenCenter] version {0} (build {1}.{2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
-    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays{4})</value>
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays)</value>
   </data>
-  <data name="VGPU_DESCRIPTION_MULTIPLE_SUPPORT" xml:space="preserve">
-    <value>, multiple vGPU support</value>
+  <data name="VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays, multiple vGPU support)</value>
   </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
-    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display{4})</value>
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display, multiple vGPU support)</value>
   </data>
   <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
-    <value>{0} virtual GPU ({1} per GPU{2})</value>
+    <value>{0} virtual GPU ({1} per GPU)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, multiple vGPU support)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>

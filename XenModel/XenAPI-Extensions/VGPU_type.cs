@@ -49,14 +49,17 @@ namespace XenAPI
             if (IsPassthrough())
                 return Messages.VGPU_PASSTHRU_TOSTRING;
 
-            string multipleSupport = compatible_types_in_vm.Count > 0 ? Messages.VGPU_DESCRIPTION_MULTIPLE_SUPPORT : "";
+            bool multipleVgpuSupport = compatible_types_in_vm.Count > 0;
 
             var maxRes = MaxResolution();
             if ((maxRes == "0x0" || string.IsNullOrEmpty(maxRes)) && max_heads < 1)
-                return string.Format(Messages.VGPU_DESCRIPTION_ZEROES, model_name, Capacity(), multipleSupport);
+                return multipleVgpuSupport ? string.Format(Messages.VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT, model_name, Capacity()) : 
+                    string.Format(Messages.VGPU_DESCRIPTION_ZEROES, model_name, Capacity());
 
-            return string.Format(max_heads == 1 ? Messages.VGPU_DESCRIPTION_ONE : Messages.VGPU_DESCRIPTION_MANY,
-                model_name, Capacity(), maxRes, max_heads, multipleSupport);
+            return string.Format(max_heads == 1 ? 
+                (multipleVgpuSupport ? Messages.VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT : Messages.VGPU_DESCRIPTION_ONE) : 
+                (multipleVgpuSupport ? Messages.VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT : Messages.VGPU_DESCRIPTION_MANY),
+                model_name, Capacity(), maxRes, max_heads);
         }
 
         public string MaxResolution()
