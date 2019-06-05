@@ -300,7 +300,17 @@ namespace XenAdmin.Actions.VMActions
         {
             if (assignOrRemoveVgpu)
             {
-                var action = new GpuAssignAction(VM, vGpus);
+                var newvGpus = new List<VGPU>();
+                foreach (var vGpu in vGpus)
+                {
+                    newvGpus.Add(new VGPU
+                    {
+                        GPU_group = new XenRef<GPU_group>(vGpu.GPU_group.opaque_ref),
+                        type = new XenRef<VGPU_type>(vGpu.type.opaque_ref),
+                        device = vGpu.device
+                    });
+                }
+                var action = new GpuAssignAction(VM, newvGpus);
                 action.RunExternal(Session);
             }
         }
