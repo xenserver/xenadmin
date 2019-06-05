@@ -62,13 +62,12 @@ namespace XenAdmin.Actions
             foreach (VGPU vgpu in vgpuSetToRemove)
                 VGPU.destroy(Session, vgpu.opaque_ref);
 
-            // Add the new VGPUs. Keep device = 0, XAPI re-generate the device value.
             // New added vGPUs haven't opaque_ref
             foreach (var vGpu in vGpus.FindAll(x => x.opaque_ref == null))
-                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type));
+                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type), vGpu.device);
         }
 
-        private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, int device = 0)
+        private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, string device = "0")
         {
             if (gpuGroup == null)
                 return;
@@ -76,9 +75,9 @@ namespace XenAdmin.Actions
             Dictionary<string, string> other_config = new Dictionary<string, string>();
 
             if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu) || vGpuType == null)
-                VGPU.async_create(Session, vm.opaque_ref, gpuGroup.opaque_ref, device.ToString(), other_config);
+                VGPU.async_create(Session, vm.opaque_ref, gpuGroup.opaque_ref, device, other_config);
             else
-                VGPU.async_create(Session, vm.opaque_ref, gpuGroup.opaque_ref, device.ToString(),
+                VGPU.async_create(Session, vm.opaque_ref, gpuGroup.opaque_ref, device,
                     other_config, vGpuType.opaque_ref);
         }
     }
