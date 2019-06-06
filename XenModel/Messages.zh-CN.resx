@@ -2000,10 +2000,10 @@
     <value>许可证详细信息</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>将 VM 分配至快照计划(&amp;O)</value>
+    <value>分配至快照计划(&amp;O)</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>将 VM 分配至快照计划</value>
+    <value>分配至快照计划(&amp;O)</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>将 VM 分配至快照计划...</value>
@@ -9106,7 +9106,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 强烈建议您首先单击“取消”并将最新版本的软件包应用到所有服务器，然后再创建池。</value>
   </data>
   <data name="NEW_SCHEDULE" xml:space="preserve">
-    <value>新建计划(&amp;N)...</value>
+    <value>新建快照计划(&amp;N)...</value>
   </data>
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>新搜索</value>
