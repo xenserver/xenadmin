@@ -71,7 +71,7 @@
       "flat": "true"
     },
     {
-      "pattern": "ctx-local-contrib/Moq/4.0.10827.0/4.0/Moq.dll",
+      "pattern": "ctx-local-contrib/Moq/4.5.3/net45/Moq.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     }
