@@ -63,7 +63,8 @@ namespace XenAPI
             List<XenRef<GPU_group>> enabled_on_GPU_groups,
             vgpu_type_implementation implementation,
             string identifier,
-            bool experimental)
+            bool experimental,
+            List<XenRef<VGPU_type>> compatible_types_in_vm)
         {
             this.uuid = uuid;
             this.vendor_name = vendor_name;
@@ -80,6 +81,7 @@ namespace XenAPI
             this.implementation = implementation;
             this.identifier = identifier;
             this.experimental = experimental;
+            this.compatible_types_in_vm = compatible_types_in_vm;
         }
 
         /// <summary>
@@ -112,6 +114,7 @@ namespace XenAPI
             implementation = update.implementation;
             identifier = update.identifier;
             experimental = update.experimental;
+            compatible_types_in_vm = update.compatible_types_in_vm;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU_type proxy)
@@ -131,6 +134,7 @@ namespace XenAPI
             implementation = proxy.implementation == null ? (vgpu_type_implementation) 0 : (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), (string)proxy.implementation);
             identifier = proxy.identifier == null ? null : proxy.identifier;
             experimental = (bool)proxy.experimental;
+            compatible_types_in_vm = proxy.compatible_types_in_vm == null ? null : XenRef<VGPU_type>.Create(proxy.compatible_types_in_vm);
         }
 
         public Proxy_VGPU_type ToProxy()
@@ -151,6 +155,7 @@ namespace XenAPI
             result_.implementation = vgpu_type_implementation_helper.ToString(implementation);
             result_.identifier = identifier ?? "";
             result_.experimental = experimental;
+            result_.compatible_types_in_vm = compatible_types_in_vm == null ? new string[] {} : Helper.RefListToStringArray(compatible_types_in_vm);
             return result_;
         }
 
@@ -203,6 +208,8 @@ namespace XenAPI
                 identifier = Marshalling.ParseString(table, "identifier");
             if (table.ContainsKey("experimental"))
                 experimental = Marshalling.ParseBool(table, "experimental");
+            if (table.ContainsKey("compatible_types_in_vm"))
+                compatible_types_in_vm = Marshalling.ParseSetRef<VGPU_type>(table, "compatible_types_in_vm");
         }
 
         public bool DeepEquals(VGPU_type other)
@@ -226,7 +233,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._enabled_on_GPU_groups, other._enabled_on_GPU_groups) &&
                 Helper.AreEqual2(this._implementation, other._implementation) &&
                 Helper.AreEqual2(this._identifier, other._identifier) &&
-                Helper.AreEqual2(this._experimental, other._experimental);
+                Helper.AreEqual2(this._experimental, other._experimental) &&
+                Helper.AreEqual2(this._compatible_types_in_vm, other._compatible_types_in_vm);
         }
 
         internal static List<VGPU_type> ProxyArrayToObjectList(Proxy_VGPU_type[] input)
@@ -486,6 +494,20 @@ namespace XenAPI
                 return session.JsonRpcClient.vgpu_type_get_experimental(session.opaque_ref, _vgpu_type);
             else
                 return (bool)session.proxy.vgpu_type_get_experimental(session.opaque_ref, _vgpu_type ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the compatible_types_in_vm field of the given VGPU_type.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
+        public static List<XenRef<VGPU_type>> get_compatible_types_in_vm(Session session, string _vgpu_type)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vgpu_type_get_compatible_types_in_vm(session.opaque_ref, _vgpu_type);
+            else
+                return XenRef<VGPU_type>.Create(session.proxy.vgpu_type_get_compatible_types_in_vm(session.opaque_ref, _vgpu_type ?? "").parse());
         }
 
         /// <summary>
@@ -796,5 +818,25 @@ namespace XenAPI
             }
         }
         private bool _experimental = false;
+
+        /// <summary>
+        /// List of VGPU types which are compatible in one VM
+        /// First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VGPU_type>))]
+        public virtual List<XenRef<VGPU_type>> compatible_types_in_vm
+        {
+            get { return _compatible_types_in_vm; }
+            set
+            {
+                if (!Helper.AreEqual(value, _compatible_types_in_vm))
+                {
+                    _compatible_types_in_vm = value;
+                    Changed = true;
+                    NotifyPropertyChanged("compatible_types_in_vm");
+                }
+            }
+        }
+        private List<XenRef<VGPU_type>> _compatible_types_in_vm = new List<XenRef<VGPU_type>>() {};
     }
 }

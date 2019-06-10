@@ -1958,6 +1958,9 @@ Authorized Roles: {1}</value>
   <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
     <value>The VGPU is not compatible with any PGPU in the destination.</value>
   </data>
+  <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
+    <value>You tried to create a VGPU that is not compatible with existing types on the VM.</value>
+  </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>The VM cannot start because all GPUs are fully used or are running other types of virtual GPU</value>
   </data>
@@ -2137,6 +2140,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_OLD_PV_DRIVERS" xml:space="preserve">
     <value>You attempted an operation on a VM which requires a more recent version of the PV drivers. Please upgrade your PV drivers.</value>
+  </data>
+  <data name="VM_PCI_BUS_FULL" xml:space="preserve">
+    <value>The VM does not have any free PCI slots</value>
   </data>
   <data name="VM_PV_DRIVERS_IN_USE" xml:space="preserve">
     <value>VM PV drivers still in use</value>

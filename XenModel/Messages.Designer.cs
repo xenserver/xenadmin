@@ -26312,6 +26312,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected virtual GPU type supports multiple instances..
+        /// </summary>
+        public static string NEWVMWIZARD_VGPUPAGE_MULTIPLE_VGPU_INFO {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_VGPUPAGE_MULTIPLE_VGPU_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected virtual GPU type does not support multiple instances..
+        /// </summary>
+        public static string NEWVMWIZARD_VGPUPAGE_SINGLE_VGPU_INFO {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_VGPUPAGE_SINGLE_VGPU_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assign a virtual GPU.
         /// </summary>
         public static string NEWVMWIZARD_VGPUPAGE_TITLE {
@@ -36889,6 +36907,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays, multiple vGPU support).
+        /// </summary>
+        public static string VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display).
         /// </summary>
         public static string VGPU_DESCRIPTION_ONE {
@@ -36898,11 +36925,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display, multiple vGPU support).
+        /// </summary>
+        public static string VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
         /// </summary>
         public static string VGPU_DESCRIPTION_ZEROES {
             get {
                 return ResourceManager.GetString("VGPU_DESCRIPTION_ZEROES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, multiple vGPU support).
+        /// </summary>
+        public static string VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT", resourceCulture);
             }
         }
         

@@ -8985,6 +8985,12 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_TEMPLATEPAGE_WINDOWS" xml:space="preserve">
     <value>Windows</value>
   </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_MULTIPLE_VGPU_INFO" xml:space="preserve">
+    <value>The selected virtual GPU type supports multiple instances.</value>
+  </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_SINGLE_VGPU_INFO" xml:space="preserve">
+    <value>The selected virtual GPU type does not support multiple instances.</value>
+  </data>
   <data name="NEWVMWIZARD_VGPUPAGE_TITLE" xml:space="preserve">
     <value>Assign a virtual GPU</value>
   </data>
@@ -12765,11 +12771,20 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays, multiple vGPU support)</value>
+  </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU, {2}, {3} display)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} display, multiple vGPU support)</value>
+  </data>
   <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU, multiple vGPU support)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>

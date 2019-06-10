@@ -12745,6 +12745,13 @@ namespace XenAPI
             return Rpc<Dictionary<string, string>>("VGPU.get_compatibility_metadata", new JArray(session, _vgpu ?? ""), serializer);
         }
 
+        public string vgpu_get_extra_args(string session, string _vgpu)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("VGPU.get_extra_args", new JArray(session, _vgpu ?? ""), serializer);
+        }
+
         public void vgpu_set_other_config(string session, string _vgpu, Dictionary<string, string> _other_config)
         {
             var converters = new List<JsonConverter> {new StringStringMapConverter()};
@@ -12764,6 +12771,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             Rpc("VGPU.remove_from_other_config", new JArray(session, _vgpu ?? "", _key ?? ""), serializer);
+        }
+
+        public void vgpu_set_extra_args(string session, string _vgpu, string _extra_args)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("VGPU.set_extra_args", new JArray(session, _vgpu ?? "", _extra_args ?? ""), serializer);
         }
 
         public XenRef<VGPU> vgpu_create(string session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config)
@@ -12939,6 +12953,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<bool>("VGPU_type.get_experimental", new JArray(session, _vgpu_type ?? ""), serializer);
+        }
+
+        public List<XenRef<VGPU_type>> vgpu_type_get_compatible_types_in_vm(string session, string _vgpu_type)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<VGPU_type>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<XenRef<VGPU_type>>>("VGPU_type.get_compatible_types_in_vm", new JArray(session, _vgpu_type ?? ""), serializer);
         }
 
         public List<XenRef<VGPU_type>> vgpu_type_get_all(string session)
