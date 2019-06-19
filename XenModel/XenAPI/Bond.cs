@@ -45,6 +45,8 @@ namespace XenAPI
     /// </summary>
     public partial class Bond : XenObject<Bond>
     {
+        #region Constructors
+
         public Bond()
         {
         }
@@ -69,13 +71,27 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Creates a new Bond from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
+        /// </summary>
+        /// <param name="table"></param>
+        public Bond(Hashtable table)
+            : this()
+        {
+            UpdateFrom(table);
+        }
+
+        /// <summary>
         /// Creates a new Bond from a Proxy_Bond.
         /// </summary>
         /// <param name="proxy"></param>
         public Bond(Proxy_Bond proxy)
         {
-            this.UpdateFromProxy(proxy);
+            UpdateFrom(proxy);
         }
+
+        #endregion
 
         /// <summary>
         /// Updates each field of this instance with the value of
@@ -93,7 +109,7 @@ namespace XenAPI
             links_up = update.links_up;
         }
 
-        internal void UpdateFromProxy(Proxy_Bond proxy)
+        internal void UpdateFrom(Proxy_Bond proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
             master = proxy.master == null ? null : XenRef<PIF>.Create(proxy.master);
@@ -117,17 +133,6 @@ namespace XenAPI
             result_.properties = Maps.convert_to_proxy_string_string(properties);
             result_.links_up = links_up.ToString();
             return result_;
-        }
-
-        /// <summary>
-        /// Creates a new Bond from a Hashtable.
-        /// Note that the fields not contained in the Hashtable
-        /// will be created with their default values.
-        /// </summary>
-        /// <param name="table"></param>
-        public Bond(Hashtable table) : this()
-        {
-            UpdateFrom(table);
         }
 
         /// <summary>

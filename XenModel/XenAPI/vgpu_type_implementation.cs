@@ -28,7 +28,6 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 using Newtonsoft.Json;
 
 
@@ -37,7 +36,23 @@ namespace XenAPI
     [JsonConverter(typeof(vgpu_type_implementationConverter))]
     public enum vgpu_type_implementation
     {
-        passthrough, nvidia, gvt_g, mxgpu, unknown
+        /// <summary>
+        /// Pass through an entire physical GPU to a guest
+        /// </summary>
+        passthrough,
+        /// <summary>
+        /// vGPU using NVIDIA hardware
+        /// </summary>
+        nvidia,
+        /// <summary>
+        /// vGPU using Intel GVT-g
+        /// </summary>
+        gvt_g,
+        /// <summary>
+        /// vGPU using AMD MxGPU
+        /// </summary>
+        mxgpu,
+        unknown
     }
 
     public static class vgpu_type_implementation_helper
@@ -75,4 +90,4 @@ namespace XenAPI
             writer.WriteValue(((vgpu_type_implementation)value).StringOf());
         }
     }
-}
+}

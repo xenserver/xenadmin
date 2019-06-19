@@ -45,6 +45,8 @@ namespace XenAPI
     /// </summary>
     public partial class VGPU_type : XenObject<VGPU_type>
     {
+        #region Constructors
+
         public VGPU_type()
         {
         }
@@ -85,13 +87,27 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Creates a new VGPU_type from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
+        /// </summary>
+        /// <param name="table"></param>
+        public VGPU_type(Hashtable table)
+            : this()
+        {
+            UpdateFrom(table);
+        }
+
+        /// <summary>
         /// Creates a new VGPU_type from a Proxy_VGPU_type.
         /// </summary>
         /// <param name="proxy"></param>
         public VGPU_type(Proxy_VGPU_type proxy)
         {
-            this.UpdateFromProxy(proxy);
+            UpdateFrom(proxy);
         }
+
+        #endregion
 
         /// <summary>
         /// Updates each field of this instance with the value of
@@ -117,7 +133,7 @@ namespace XenAPI
             compatible_types_in_vm = update.compatible_types_in_vm;
         }
 
-        internal void UpdateFromProxy(Proxy_VGPU_type proxy)
+        internal void UpdateFrom(Proxy_VGPU_type proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
             vendor_name = proxy.vendor_name == null ? null : proxy.vendor_name;
@@ -157,17 +173,6 @@ namespace XenAPI
             result_.experimental = experimental;
             result_.compatible_types_in_vm = compatible_types_in_vm == null ? new string[] {} : Helper.RefListToStringArray(compatible_types_in_vm);
             return result_;
-        }
-
-        /// <summary>
-        /// Creates a new VGPU_type from a Hashtable.
-        /// Note that the fields not contained in the Hashtable
-        /// will be created with their default values.
-        /// </summary>
-        /// <param name="table"></param>
-        public VGPU_type(Hashtable table) : this()
-        {
-            UpdateFrom(table);
         }
 
         /// <summary>

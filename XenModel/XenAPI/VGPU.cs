@@ -45,6 +45,8 @@ namespace XenAPI
     /// </summary>
     public partial class VGPU : XenObject<VGPU>
     {
+        #region Constructors
+
         public VGPU()
         {
         }
@@ -75,13 +77,27 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Creates a new VGPU from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
+        /// </summary>
+        /// <param name="table"></param>
+        public VGPU(Hashtable table)
+            : this()
+        {
+            UpdateFrom(table);
+        }
+
+        /// <summary>
         /// Creates a new VGPU from a Proxy_VGPU.
         /// </summary>
         /// <param name="proxy"></param>
         public VGPU(Proxy_VGPU proxy)
         {
-            this.UpdateFromProxy(proxy);
+            UpdateFrom(proxy);
         }
+
+        #endregion
 
         /// <summary>
         /// Updates each field of this instance with the value of
@@ -102,7 +118,7 @@ namespace XenAPI
             extra_args = update.extra_args;
         }
 
-        internal void UpdateFromProxy(Proxy_VGPU proxy)
+        internal void UpdateFrom(Proxy_VGPU proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
             VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
@@ -132,17 +148,6 @@ namespace XenAPI
             result_.compatibility_metadata = Maps.convert_to_proxy_string_string(compatibility_metadata);
             result_.extra_args = extra_args ?? "";
             return result_;
-        }
-
-        /// <summary>
-        /// Creates a new VGPU from a Hashtable.
-        /// Note that the fields not contained in the Hashtable
-        /// will be created with their default values.
-        /// </summary>
-        /// <param name="table"></param>
-        public VGPU(Hashtable table) : this()
-        {
-            UpdateFrom(table);
         }
 
         /// <summary>
@@ -651,7 +656,7 @@ namespace XenAPI
         private XenRef<GPU_group> _GPU_group = new XenRef<GPU_group>(Helper.NullOpaqueRef);
 
         /// <summary>
-        /// Order in which the devices are plugged into the VM
+        /// Guest PCI slot (a value of 0 means auto-assign to first empty slot, valid slot is in range of [11,31] for multi-VGPU purpose)
         /// </summary>
         public virtual string device
         {

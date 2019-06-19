@@ -28,7 +28,6 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -1027,6 +1026,13 @@ namespace XenAPI
             return Rpc<bool>("pool.get_igmp_snooping_enabled", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public string pool_get_uefi_certificates(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("pool.get_uefi_certificates", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public void pool_set_name_label(string session, string _pool, string _name_label)
         {
             var converters = new List<JsonConverter> {};
@@ -1179,6 +1185,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             Rpc("pool.set_live_patching_disabled", new JArray(session, _pool ?? "", _live_patching_disabled), serializer);
+        }
+
+        public void pool_set_uefi_certificates(string session, string _pool, string _uefi_certificates)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_uefi_certificates", new JArray(session, _pool ?? "", _uefi_certificates ?? ""), serializer);
         }
 
         public void pool_join(string session, string _master_address, string _master_username, string _master_password)
@@ -5857,6 +5870,13 @@ namespace XenAPI
             return Rpc<bool>("host.get_multipathing", new JArray(session, _host ?? ""), serializer);
         }
 
+        public string host_get_uefi_certificates(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("host.get_uefi_certificates", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_set_name_label(string session, string _host, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -6723,6 +6743,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.host.set_multipathing", new JArray(session, _host ?? "", _value), serializer);
+        }
+
+        public void host_set_uefi_certificates(string session, string _host, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("host.set_uefi_certificates", new JArray(session, _host ?? "", _value ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_host_set_uefi_certificates(string session, string _host, string _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.host.set_uefi_certificates", new JArray(session, _host ?? "", _value ?? ""), serializer);
         }
 
         public List<XenRef<Host>> host_get_all(string session)
@@ -11772,6 +11806,7 @@ namespace XenAPI
             return Rpc<Dictionary<XenRef<Message>, Message>>("message.get_all_records_where", new JArray(session, _expr ?? ""), serializer);
         }
 
+
         public Secret secret_get_record(string session, string _secret)
         {
             var converters = new List<JsonConverter> {};
@@ -14410,6 +14445,5 @@ namespace XenAPI
             var serializer = CreateSerializer(converters);
             return Rpc<Dictionary<XenRef<Cluster_host>, Cluster_host>>("Cluster_host.get_all_records", new JArray(session), serializer);
         }
-
     }
-}
+}

@@ -28,11 +28,9 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using CookComputing.XmlRpc;
 
 
@@ -608,6 +606,10 @@ namespace XenAPI
         Response<bool>
         pool_get_igmp_snooping_enabled(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_uefi_certificates")]
+        Response<string>
+        pool_get_uefi_certificates(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -695,6 +697,10 @@ namespace XenAPI
         [XmlRpcMethod("pool.set_live_patching_disabled")]
         Response<string>
         pool_set_live_patching_disabled(string session, string _pool, bool _live_patching_disabled);
+
+        [XmlRpcMethod("pool.set_uefi_certificates")]
+        Response<string>
+        pool_set_uefi_certificates(string session, string _pool, string _uefi_certificates);
 
         [XmlRpcMethod("pool.join")]
         Response<string>
@@ -3368,6 +3374,10 @@ namespace XenAPI
         Response<bool>
         host_get_multipathing(string session, string _host);
 
+        [XmlRpcMethod("host.get_uefi_certificates")]
+        Response<string>
+        host_get_uefi_certificates(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3863,6 +3873,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.set_multipathing")]
         Response<string>
         async_host_set_multipathing(string session, string _host, bool _value);
+
+        [XmlRpcMethod("host.set_uefi_certificates")]
+        Response<string>
+        host_set_uefi_certificates(string session, string _host, string _value);
+
+        [XmlRpcMethod("Async.host.set_uefi_certificates")]
+        Response<string>
+        async_host_set_uefi_certificates(string session, string _host, string _value);
 
         [XmlRpcMethod("host.get_all")]
         Response<string []>
@@ -6748,6 +6766,7 @@ namespace XenAPI
         Response<Object>
         message_get_all_records_where(string session, string _expr);
 
+
         [XmlRpcMethod("secret.get_record")]
         Response<Proxy_Secret>
         secret_get_record(string session, string _secret);
@@ -8258,6 +8277,20 @@ namespace XenAPI
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Event
+    {
+        public string id;
+        public string timestamp;
+        [XmlRpcMember("class")]
+        public string class_;
+        public string operation;
+        [XmlRpcMember("ref")]
+        public string opaqueRef;
+        [XmlRpcMember("snapshot")]
+        public object snapshot;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_Session
     {
         public string uuid;
@@ -8361,6 +8394,7 @@ namespace XenAPI
         public bool policy_no_vendor_device;
         public bool live_patching_disabled;
         public bool igmp_snooping_enabled;
+        public string uefi_certificates;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8643,6 +8677,7 @@ namespace XenAPI
         public string [] features;
         public string iscsi_iqn;
         public bool multipathing;
+        public string uefi_certificates;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9331,5 +9366,4 @@ namespace XenAPI
         public Object current_operations;
         public Object other_config;
     }
-
-}
+}
