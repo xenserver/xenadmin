@@ -484,7 +484,6 @@
     <Compile Include="XenAPI\Crashdump.cs" />
     <Compile Include="XenAPI\Data_source.cs" />
     <Compile Include="XenAPI\Event.cs" />
-    <Compile Include="XenAPI\EventHelpers.cs" />
     <Compile Include="XenAPI\Failure.cs" />
     <Compile Include="XenAPI\Helper.cs" />
     <Compile Include="XenAPI\Host.cs" />

@@ -5475,7 +5475,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VDI which is not attached to a running VM..
+        ///   Looks up a localized string similar to Cannot migrate a VDI which is not attached to a running VM..
         /// </summary>
         public static string VDI_NEEDS_VM_FOR_MIGRATE {
             get {
@@ -5570,6 +5570,15 @@ namespace XenAPI {
         public static string VGPU_DESTINATION_INCOMPATIBLE {
             get {
                 return ResourceManager.GetString("VGPU_DESTINATION_INCOMPATIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You tried to create a VGPU that is not compatible with existing types on the VM..
+        /// </summary>
+        public static string VGPU_TYPE_NOT_COMPATIBLE {
+            get {
+                return ResourceManager.GetString("VGPU_TYPE_NOT_COMPATIBLE", resourceCulture);
             }
         }
         
@@ -5781,7 +5790,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VM which has a checkpoint..
+        ///   Looks up a localized string similar to Cannot migrate a VM which has a checkpoint..
         /// </summary>
         public static string VM_HAS_CHECKPOINT {
             get {
@@ -5817,7 +5826,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VM with more than one snapshot..
+        ///   Looks up a localized string similar to Cannot migrate a VM with more than one snapshot..
         /// </summary>
         public static string VM_HAS_TOO_MANY_SNAPSHOTS {
             get {
@@ -5853,7 +5862,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VM to a destination host which is older than the source host..
+        ///   Looks up a localized string similar to Cannot migrate a VM to a destination host which is older than the source host..
         /// </summary>
         public static string VM_HOST_INCOMPATIBLE_VERSION_MIGRATE {
             get {
@@ -6074,6 +6083,15 @@ namespace XenAPI {
         public static string VM_OLD_PV_DRIVERS {
             get {
                 return ResourceManager.GetString("VM_OLD_PV_DRIVERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM does not have any free PCI slots.
+        /// </summary>
+        public static string VM_PCI_BUS_FULL {
+            get {
+                return ResourceManager.GetString("VM_PCI_BUS_FULL", resourceCulture);
             }
         }
         
@@ -6402,7 +6420,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB URL is invalid. Ensure it is in format: &lt;ipaddress&gt;:&lt;port&gt;.  The configured/given URL is returned..
+        ///   Looks up a localized string similar to The WLB URL is invalid. Ensure it is in format: &lt;ipaddress&gt;:&lt;port&gt;. The configured/given URL is returned..
         /// </summary>
         public static string WLB_URL_INVALID {
             get {
