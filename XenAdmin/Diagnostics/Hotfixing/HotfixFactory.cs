@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
         private readonly Hotfix dundeeHotfix = new SingleHotfix
         {
             Filename = "RPU003",
-            UUID = "149be566-421d-4661-bfca-e70970f86a36"
+            UUID = "5b345963-ddcf-4c27-997f-3b46a79bcb07"
         };
 
         private readonly Hotfix elyLimaHotfix = new SingleHotfix
