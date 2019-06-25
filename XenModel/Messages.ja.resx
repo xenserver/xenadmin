@@ -6796,9 +6796,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_VM_SELECT_HOME_SERVER" xml:space="preserve">
     <value>新規 VM のホーム サーバーを選択してください</value>
   </data>
-  <data name="IMPORT_VM_SELECT_SR" xml:space="preserve">
-    <value>新規 VM の仮想ディスクを格納するストレージ リポジトリを選択してください</value>
-  </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>新規 VM の仮想ネットワーク インターフェイスを構成してください</value>
   </data>

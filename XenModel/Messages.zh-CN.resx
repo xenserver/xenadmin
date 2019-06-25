@@ -6790,9 +6790,6 @@
   <data name="IMPORT_VM_SELECT_HOME_SERVER" xml:space="preserve">
     <value>为新 VM 选择主服务器</value>
   </data>
-  <data name="IMPORT_VM_SELECT_SR" xml:space="preserve">
-    <value>选择将用来为新 VM 存储虚拟磁盘的存储库</value>
-  </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>为新 VM 配置虚拟网络接口</value>
   </data>

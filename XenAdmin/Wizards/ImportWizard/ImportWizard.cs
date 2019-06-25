@@ -105,7 +105,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			m_selectedObject = xenObject;
             m_pageTvmIp.IsExportMode = false;
-			m_pageFinish.SummaryRetreiver = GetSummary;
+			m_pageFinish.SummaryRetriever = GetSummary;
 			m_pageXvaStorage.ImportVmCompleted += m_pageXvaStorage_ImportVmCompleted;
 
 			if (!string.IsNullOrEmpty(filename))

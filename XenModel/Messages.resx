@@ -6791,9 +6791,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_VM_SELECT_HOME_SERVER" xml:space="preserve">
     <value>Select a home server for the new VM</value>
   </data>
-  <data name="IMPORT_VM_SELECT_SR" xml:space="preserve">
-    <value>Select a storage repository where virtual disks for the new VM will be stored</value>
-  </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>Configure virtual network interfaces for the new VM</value>
   </data>
