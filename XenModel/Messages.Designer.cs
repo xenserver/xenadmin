@@ -19350,15 +19350,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a storage repository where virtual disks for the new VM will be stored.
-        /// </summary>
-        public static string IMPORT_VM_SELECT_SR {
-            get {
-                return ResourceManager.GetString("IMPORT_VM_SELECT_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Configure virtual network interfaces for the new VM.
         /// </summary>
         public static string IMPORT_VM_VIFS {
