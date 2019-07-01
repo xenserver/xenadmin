@@ -62,7 +62,6 @@ MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:T
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
 $MSBUILD XenAdmin.sln
-$MSBUILD xe/Xe.csproj
 $MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
 
 #prepare wix
