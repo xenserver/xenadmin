@@ -2000,10 +2000,10 @@ Warning: you must ensure that the SR is not in use by any server not connected t
     <value>License Details</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>Assign to Snapsh&amp;ot Schedule</value>
+    <value>Assign to Snapshot Schedu&amp;le</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>Assign to Snapsh&amp;ot Schedule</value>
+    <value>Assign to Snapshot Schedu&amp;le</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>Assign VM to snapshot schedule...</value>
