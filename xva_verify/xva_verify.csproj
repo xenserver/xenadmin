@@ -11,7 +11,8 @@
     <RootNamespace>xva_verify</RootNamespace>
     <AssemblyName>xva_verify</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
-    <StartupObject>MainClass</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetFrameworkProfile />
