@@ -5474,7 +5474,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign to Snapsh&amp;ot Schedule.
+        ///   Looks up a localized string similar to Assign to Snapshot Schedu&amp;le.
         /// </summary>
         public static string ASSIGN_VMSS_POLICY {
             get {
@@ -5483,7 +5483,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign to Snapsh&amp;ot Schedule.
+        ///   Looks up a localized string similar to Assign to Snapshot Schedu&amp;le.
         /// </summary>
         public static string ASSIGN_VMSS_POLICY_CONTEXT_MENU {
             get {
