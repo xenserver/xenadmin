@@ -299,9 +299,9 @@ namespace XenAdmin.Actions
             MarkCompleted();
         }
 
-        void archiveIterator_CurrentFileExtractProgressChanged(object sender, ExtractProgressChangedEventArgs e)
+        void archiveIterator_CurrentFileExtractProgressChanged(long bytesTransferred, long totalBytesToTransfer)
         {
-            int pc = downloadUpdate ? 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer) : (int)(100.0 * e.BytesTransferred / e.TotalBytesToTransfer);
+            int pc = downloadUpdate ? 95 + (int)(5.0 * bytesTransferred / totalBytesToTransfer) : (int)(100.0 * bytesTransferred / totalBytesToTransfer);
             PercentComplete = pc;
         }
 
