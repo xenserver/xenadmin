@@ -389,26 +389,20 @@ namespace XenAdmin.Actions
                 }
                 catch (Exception ex)
                 {
-                    log.Debug(String.Format("Exception firing OnCompleted for Action {0}", Title), ex);
+                    log.Debug($"Exception firing OnCompleted for Action {Title}", ex);
                     log.Debug(ex, ex);
                 }
             }
         }
 
-        protected void MarkCompleted()
+        protected void MarkCompleted(Exception e = null)
         {
-            MarkCompletedCore();
-        }
+            if (e != null)
+            {
+                log.Debug(e, e);
+                Exception = e;
+            }
 
-        protected void MarkCompleted(Exception e)
-        {
-            log.Debug(e, e);
-            Exception = e;
-            MarkCompletedCore();
-        }
-
-        private void MarkCompletedCore()
-        {
             Finished = DateTime.Now;
             PercentComplete = 100;
             IsCompleted = true;
