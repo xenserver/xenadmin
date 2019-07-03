@@ -8986,6 +8986,12 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_TEMPLATEPAGE_WINDOWS" xml:space="preserve">
     <value>Windows</value>
   </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_MULTIPLE_VGPU_INFO" xml:space="preserve">
+    <value>選択した仮想 GPU タイプは複数のインスタンスをサポートします。</value>
+  </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_SINGLE_VGPU_INFO" xml:space="preserve">
+    <value>選択した仮想 GPU タイプは複数のインスタンスをサポートしていません。</value>
+  </data>
   <data name="NEWVMWIZARD_VGPUPAGE_TITLE" xml:space="preserve">
     <value>仮想 GPU の割り当て</value>
   </data>
@@ -12766,11 +12772,20 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
     <value>{0} 仮想 GPU ({1}/GPU、{2}、{3} ディスプレイ)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} 個の仮想 GPU ({1} 個/GPU、{2}、{3} 個のディスプレイ、複数 vGPU サポート)</value>
+  </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} 仮想 GPU ({1}/GPU、{2}、{3} ディスプレイ)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} 個の仮想 GPU ({1} 個/GPU、{2}、{3} 個のディスプレイ、複数 vGPU サポート)</value>
+  </data>
   <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
     <value>{0} 仮想 GPU ({1}/GPU)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} 個の仮想 GPU ({1} 個/GPU、複数 vGPU サポート)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>GPU 全体のパススルー</value>

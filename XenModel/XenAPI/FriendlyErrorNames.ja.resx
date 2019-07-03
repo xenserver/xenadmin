@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,39 +26,39 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
-  -->
+    -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -1926,7 +1926,7 @@
     <value>指定した仮想ディスクが見つからないため、この処理を実行できません。</value>
   </data>
   <data name="VDI_NEEDS_VM_FOR_MIGRATE" xml:space="preserve">
-    <value>実行中の VM に接続されていない VDI を移行しようとしました。</value>
+    <value>実行中の VM に接続されていない VDI は移行できません。</value>
   </data>
   <data name="VDI_NOT_AVAILABLE" xml:space="preserve">
     <value>VDI {0} を VM に正しく接続できないため、この処理を実行できません。</value>
@@ -1957,6 +1957,9 @@
   </data>
   <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
     <value>この仮想 GPU は対象の物理 GPU と互換性がありません。</value>
+  </data>
+  <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
+    <value>VM 上の既存のタイプと互換性のない 仮想 GPU を作成しようとしました。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>すべての GPU が使用中か、ほかの種類の仮想 GPU を実行しているため、VM を起動できません。</value>
@@ -2040,7 +2043,7 @@
     <value>VM が予期せず停止しました。</value>
   </data>
   <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
-    <value>チェックポイントが作成された VM を移行しようとしています。</value>
+    <value>チェックポイントが作成された VM は移行できません。</value>
   </data>
   <data name="VM_HAS_NO_SUSPEND_VDI" xml:space="preserve">
     <value>一時停止 VDI がないため、仮想マシンを再開できません</value>
@@ -2052,7 +2055,7 @@
     <value>VM に 1 つまたは複数の SR-IOV VIF が割り当てられているため、この処理を実行できません。</value>
   </data>
   <data name="VM_HAS_TOO_MANY_SNAPSHOTS" xml:space="preserve">
-    <value>複数のスナップショットを持つ VM を移行しようとしました。</value>
+    <value>複数のスナップショットを持つ VM は移行できません。</value>
   </data>
   <data name="VM_HAS_VGPU" xml:space="preserve">
     <value>VM に 仮想 GPU が割り当てられているため、この処理を実行できません。</value>
@@ -2064,7 +2067,7 @@
     <value>古いバージョンのホストをアップグレードするときにこの VM 処理は実行できません。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>移行元ホストより古いバージョンの移行先ホストに VM を移行しようとしました。</value>
+    <value>移行元ホストより古い移行先ホストに VM を移行することはできません。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM のこのバージョンの仮想ハードウェア プラットフォームには、このホストとの互換性がありません。</value>
@@ -2137,6 +2140,9 @@
   </data>
   <data name="VM_OLD_PV_DRIVERS" xml:space="preserve">
     <value>VM で処理を実行しようとしましたが、最新バージョンの PV ドライバーが必要です。PV ドライバーをアップグレードしてください。</value>
+  </data>
+  <data name="VM_PCI_BUS_FULL" xml:space="preserve">
+    <value>VM には空き PCI スロットがありません</value>
   </data>
   <data name="VM_PV_DRIVERS_IN_USE" xml:space="preserve">
     <value>VM PV ドライバーは使用中です</value>

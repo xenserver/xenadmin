@@ -117,14 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddServerDialog" xml:space="preserve">
-    <value>hosts-add</value>
-  </data>
   <data name="AdPasswordPromptDisable" xml:space="preserve">
     <value>rbac-join-domain</value>
   </data>
   <data name="AdPasswordPromptEnable" xml:space="preserve">
     <value>rbac-join-domain</value>
+  </data>
+  <data name="AddServerDialog" xml:space="preserve">
+    <value>hosts-add</value>
+  </data>
+  <data name="AddVGPUDialog" xml:space="preserve">
+    <value>vgpu-add</value>
   </data>
   <data name="AlertSummaryDialog" xml:space="preserve">
     <value>systemalerts</value>
@@ -195,6 +198,9 @@
   <data name="ConfirmVMDeleteDialog" xml:space="preserve">
     <value>vms-uninstall</value>
   </data>
+  <data name="ControlDomainMemoryDialog" xml:space="preserve">
+    <value>hosts-control-domain-memory</value>
+  </data>
   <data name="CopyVMDialog" xml:space="preserve">
     <value>vms-copy</value>
   </data>
@@ -204,14 +210,23 @@
   <data name="CrossPoolMigrateWizard_CopyModePane" xml:space="preserve">
     <value>vms-copy</value>
   </data>
+  <data name="CrossPoolMigrateWizard_DestinationCopyModePane" xml:space="preserve">
+    <value>vms-copy</value>
+  </data>
   <data name="CrossPoolMigrateWizard_DestinationPane" xml:space="preserve">
     <value>vms-relocate</value>
   </data>
   <data name="CrossPoolMigrateWizard_IntraPoolCopyPane" xml:space="preserve">
     <value>vms-copy</value>
   </data>
+  <data name="CrossPoolMigrateWizard_MigrationSummaryCopyModePane" xml:space="preserve">
+    <value>vms-copy</value>
+  </data>
   <data name="CrossPoolMigrateWizard_MigrationSummaryPane" xml:space="preserve">
     <value>vms-relocate</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_NetworkingCopyModePane" xml:space="preserve">
+    <value>vms-copy</value>
   </data>
   <data name="CrossPoolMigrateWizard_NetworkingPane" xml:space="preserve">
     <value>vms-relocate</value>
@@ -219,26 +234,20 @@
   <data name="CrossPoolMigrateWizard_RBACPane" xml:space="preserve">
     <value>rbac-roles</value>
   </data>
+  <data name="CrossPoolMigrateWizard_StorageCopyModePane" xml:space="preserve">
+    <value>vms-copy</value>
+  </data>
   <data name="CrossPoolMigrateWizard_StoragePane" xml:space="preserve">
     <value>vms-relocate</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_TransferNetworkCopyModePane" xml:space="preserve">
+    <value>vms-copy</value>
   </data>
   <data name="CrossPoolMigrateWizard_TransferNetworkPane" xml:space="preserve">
     <value>vms-relocate</value>
   </data>
   <data name="CustomFieldsDialog" xml:space="preserve">
     <value>resources-customfields</value>
-  </data>
-  <data name="DefaultHelpTopic" xml:space="preserve">
-    <value>intro-welcome</value>
-  </data>
-  <data name="DisableWLBDialog" xml:space="preserve">
-    <value>wlb-disable</value>
-  </data>
-  <data name="DisconnectServerWarningDialog" xml:space="preserve">
-    <value>hosts-disconnect</value>
-  </data>
-  <data name="DiskUsageMessageAlert" xml:space="preserve">
-    <value>systemalerts</value>
   </data>
   <data name="DRConfigureDialog" xml:space="preserve">
     <value>dr-config</value>
@@ -261,10 +270,10 @@
   <data name="DRFailoverWizard_Dryrun_StoragePane" xml:space="preserve">
     <value>dr-testfailover</value>
   </data>
-  <data name="DRFailoverWizard_Dryrun_vAppsPane" xml:space="preserve">
+  <data name="DRFailoverWizard_Dryrun_WelcomePane" xml:space="preserve">
     <value>dr-testfailover</value>
   </data>
-  <data name="DRFailoverWizard_Dryrun_WelcomePane" xml:space="preserve">
+  <data name="DRFailoverWizard_Dryrun_vAppsPane" xml:space="preserve">
     <value>dr-testfailover</value>
   </data>
   <data name="DRFailoverWizard_Failback_BeforeYouStartPane" xml:space="preserve">
@@ -285,10 +294,10 @@
   <data name="DRFailoverWizard_Failback_StoragePane" xml:space="preserve">
     <value>dr-failback</value>
   </data>
-  <data name="DRFailoverWizard_Failback_vAppsPane" xml:space="preserve">
+  <data name="DRFailoverWizard_Failback_WelcomePane" xml:space="preserve">
     <value>dr-failback</value>
   </data>
-  <data name="DRFailoverWizard_Failback_WelcomePane" xml:space="preserve">
+  <data name="DRFailoverWizard_Failback_vAppsPane" xml:space="preserve">
     <value>dr-failback</value>
   </data>
   <data name="DRFailoverWizard_Failover_BeforeYouStartPane" xml:space="preserve">
@@ -309,10 +318,10 @@
   <data name="DRFailoverWizard_Failover_StoragePane" xml:space="preserve">
     <value>dr-failover</value>
   </data>
-  <data name="DRFailoverWizard_Failover_vAppsPane" xml:space="preserve">
+  <data name="DRFailoverWizard_Failover_WelcomePane" xml:space="preserve">
     <value>dr-failover</value>
   </data>
-  <data name="DRFailoverWizard_Failover_WelcomePane" xml:space="preserve">
+  <data name="DRFailoverWizard_Failover_vAppsPane" xml:space="preserve">
     <value>dr-failover</value>
   </data>
   <data name="DRFailoverWizard_RbacPane" xml:space="preserve">
@@ -320,6 +329,21 @@
   </data>
   <data name="DRFailoverWizard_WelcomePane" xml:space="preserve">
     <value>dr-failover</value>
+  </data>
+  <data name="DefaultHelpTopic" xml:space="preserve">
+    <value>intro-welcome</value>
+  </data>
+  <data name="DisableWLBDialog" xml:space="preserve">
+    <value>wlb-disable</value>
+  </data>
+  <data name="DisconnectServerWarningDialog" xml:space="preserve">
+    <value>hosts-disconnect</value>
+  </data>
+  <data name="DiskUsageMessageAlert" xml:space="preserve">
+    <value>systemalerts</value>
+  </data>
+  <data name="Dom0MemoryDemandUsageMessageAlert" xml:space="preserve">
+    <value>systemalerts</value>
   </data>
   <data name="DummyAlert" xml:space="preserve">
     <value>systemalerts</value>
@@ -354,20 +378,29 @@
   <data name="EditVMGeneralSettingsDialog" xml:space="preserve">
     <value>vms-properties</value>
   </data>
-  <data name="EditVmHaPrioritiesDialog" xml:space="preserve">
-    <value>pools-ha-config</value>
-  </data>
-  <data name="EditVmNetworkSettingsDialog" xml:space="preserve">
-    <value>vms-network-properties</value>
-  </data>
   <data name="EditVMPPGeneralSettingsDialog" xml:space="preserve">
     <value>6536</value>
+  </data>
+  <data name="EditVMSSGeneralSettingsDialog" xml:space="preserve">
+    <value>vms-snapshotschedule-manage-policy</value>
   </data>
   <data name="EditVMStorageDialog" xml:space="preserve">
     <value>vms-storage-properties</value>
   </data>
   <data name="EditVM_applianceGeneralSettingsDialog" xml:space="preserve">
     <value>vapps-properties</value>
+  </data>
+  <data name="EditVmHaPrioritiesDialog" xml:space="preserve">
+    <value>pools-ha-config</value>
+  </data>
+  <data name="EditVmNetworkSettingsDialog" xml:space="preserve">
+    <value>vms-network-properties</value>
+  </data>
+  <data name="EnablePvsReadCachingDialog" xml:space="preserve">
+    <value>pvs-read-cache</value>
+  </data>
+  <data name="EnableRDPonVM" xml:space="preserve">
+    <value>tabs</value>
   </data>
   <data name="EnterMasterPasswordDialog" xml:space="preserve">
     <value>hosts-connect-save</value>
@@ -441,17 +474,17 @@
   <data name="HADropInNtolAlert" xml:space="preserve">
     <value>pools-ha-about</value>
   </data>
-  <data name="HaNtolMax" xml:space="preserve">
-    <value>pools-ha-config</value>
-  </data>
-  <data name="HaNtolZero" xml:space="preserve">
-    <value>pools-ha-config</value>
-  </data>
   <data name="HAOvercommittedAlert" xml:space="preserve">
     <value>pools-ha-about</value>
   </data>
   <data name="HAWizard" xml:space="preserve">
     <value>pools-ha-enable</value>
+  </data>
+  <data name="HaNtolMax" xml:space="preserve">
+    <value>pools-ha-config</value>
+  </data>
+  <data name="HaNtolZero" xml:space="preserve">
+    <value>pools-ha-config</value>
   </data>
   <data name="HealthCheckOverviewDialog" xml:space="preserve">
     <value>health-check</value>
@@ -537,6 +570,9 @@
   <data name="IscsiDeviceConfigDialog" xml:space="preserve">
     <value>dr-testfailover</value>
   </data>
+  <data name="LVMoHBAWarningDialog" xml:space="preserve">
+    <value>storage-pools-add-hba</value>
+  </data>
   <data name="LicenseKeyDialog" xml:space="preserve">
     <value>licensing-about</value>
   </data>
@@ -548,9 +584,6 @@
   </data>
   <data name="LogWindow" xml:space="preserve">
     <value>troubleshooting-eventlog</value>
-  </data>
-  <data name="LVMoHBAWarningDialog" xml:space="preserve">
-    <value>storage-pools-add-hba</value>
   </data>
   <data name="ManageUpdatesDialog" xml:space="preserve">
     <value>updates-applying</value>
@@ -591,11 +624,11 @@
   <data name="MissingIqnAlert" xml:space="preserve">
     <value>systemalerts</value>
   </data>
-  <data name="MoveVirtualDiskDialog" xml:space="preserve">
-    <value>vms-storage-move</value>
-  </data>
   <data name="MoveVMDialog" xml:space="preserve">
     <value>vms-relocate</value>
+  </data>
+  <data name="MoveVirtualDiskDialog" xml:space="preserve">
+    <value>vms-storage-move</value>
   </data>
   <data name="NameAndConnectionPrompt" xml:space="preserve">
     <value>resources-searching-saved</value>
@@ -675,6 +708,9 @@
   <data name="NewSRWizard_NameandStorageSystemPane" xml:space="preserve">
     <value>storage-pools-add</value>
   </data>
+  <data name="NewSRWizard_ProvisioningPane" xml:space="preserve">
+    <value>storage-pools-add</value>
+  </data>
   <data name="NewSRWizard_RbacPane" xml:space="preserve">
     <value>rbac-overview</value>
   </data>
@@ -723,13 +759,13 @@
   <data name="NewVMApplianceWizard_RbacPane" xml:space="preserve">
     <value>vapps-create</value>
   </data>
-  <data name="NewVMApplianceWizard_vAppNamePane" xml:space="preserve">
-    <value>vapps-create</value>
-  </data>
   <data name="NewVMApplianceWizard_VMOrderAndDelaysPane" xml:space="preserve">
     <value>vapps-create</value>
   </data>
   <data name="NewVMApplianceWizard_VMsPane" xml:space="preserve">
+    <value>vapps-create</value>
+  </data>
+  <data name="NewVMApplianceWizard_vAppNamePane" xml:space="preserve">
     <value>vapps-create</value>
   </data>
   <data name="NewVMNetworkWizard" xml:space="preserve">
@@ -741,14 +777,14 @@
   <data name="NewVMWizard_BIOSStringsPane" xml:space="preserve">
     <value>vms-new-template</value>
   </data>
+  <data name="NewVMWizard_CPU&amp;MemoryPane" xml:space="preserve">
+    <value>vms-new-cpu-memory</value>
+  </data>
   <data name="NewVMWizard_CdMediaPane" xml:space="preserve">
     <value>vms-new-media</value>
   </data>
   <data name="NewVMWizard_CloudConfigParametersPane" xml:space="preserve">
     <value>vms-new-cloudconfig</value>
-  </data>
-  <data name="NewVMWizard_CPU&amp;MemoryPane" xml:space="preserve">
-    <value>vms-new-cpu-memory</value>
   </data>
   <data name="NewVMWizard_FinishPane" xml:space="preserve">
     <value>vms-new-finish</value>
@@ -768,11 +804,11 @@
   <data name="NewVMWizard_NamePane" xml:space="preserve">
     <value>vms-new-media</value>
   </data>
-  <data name="NewVMWizard_NetworkingPane" xml:space="preserve">
-    <value>vms-new-networking</value>
-  </data>
   <data name="NewVMWizard_NetworkMediaPane" xml:space="preserve">
     <value>vms-new-media</value>
+  </data>
+  <data name="NewVMWizard_NetworkingPane" xml:space="preserve">
+    <value>vms-new-networking</value>
   </data>
   <data name="NewVMWizard_PermissionChecksPane" xml:space="preserve">
     <value>vms-new</value>
@@ -834,6 +870,12 @@
   <data name="ProcessForceClosePrompt" xml:space="preserve">
     <value>intro-start</value>
   </data>
+  <data name="PvsCacheConfigurationDialog" xml:space="preserve">
+    <value>pvs-read-cache</value>
+  </data>
+  <data name="PvsSiteDialog" xml:space="preserve">
+    <value>pvs-read-cache</value>
+  </data>
   <data name="ReconnectAsDialog" xml:space="preserve">
     <value>hosts-reconnect</value>
   </data>
@@ -867,13 +909,10 @@
   <data name="RollingUpgradeWizard_BeforeyoustartPane" xml:space="preserve">
     <value>upgrade</value>
   </data>
-  <data name="RollingUpgradeWizard_UpgradeextrasPane" xml:space="preserve">
-    <value>upgrade</value>
-  </data>
   <data name="RollingUpgradeWizard_SelectpoolPane" xml:space="preserve">
     <value>upgrade</value>
   </data>
-  <data name="RollingUpgradeWizard_upgrademethodPane" xml:space="preserve">
+  <data name="RollingUpgradeWizard_UpgradeextrasPane" xml:space="preserve">
     <value>upgrade</value>
   </data>
   <data name="RollingUpgradeWizard_UpgrademodePane" xml:space="preserve">
@@ -883,6 +922,9 @@
     <value>upgrade</value>
   </data>
   <data name="RollingUpgradeWizard_UpgradeprechecksPane" xml:space="preserve">
+    <value>upgrade</value>
+  </data>
+  <data name="RollingUpgradeWizard_upgrademethodPane" xml:space="preserve">
     <value>upgrade</value>
   </data>
   <data name="SaveAndRestoreDialog" xml:space="preserve">
@@ -909,13 +951,16 @@
   <data name="TabPageAD" xml:space="preserve">
     <value>users-overview</value>
   </data>
+  <data name="TabPageADUpsell" xml:space="preserve">
+    <value>users-overview</value>
+  </data>
   <data name="TabPageBallooning" xml:space="preserve">
     <value>tabs</value>
   </data>
-  <data name="TabPageConsole" xml:space="preserve">
+  <data name="TabPageCPUMemory" xml:space="preserve">
     <value>tabs</value>
   </data>
-  <data name="TabPageCPUMemory" xml:space="preserve">
+  <data name="TabPageConsole" xml:space="preserve">
     <value>tabs</value>
   </data>
   <data name="TabPageDockerDetails" xml:space="preserve">
@@ -939,6 +984,12 @@
   <data name="TabPageHome" xml:space="preserve">
     <value>intro-welcome</value>
   </data>
+  <data name="TabPageNICs" xml:space="preserve">
+    <value>tabs</value>
+  </data>
+  <data name="TabPageNICs_Dedicate" xml:space="preserve">
+    <value>hosts-nics</value>
+  </data>
   <data name="TabPageNetwork" xml:space="preserve">
     <value>tabs</value>
   </data>
@@ -948,14 +999,14 @@
   <data name="TabPageNetworkVM" xml:space="preserve">
     <value>vms-network</value>
   </data>
-  <data name="TabPageNICs" xml:space="preserve">
-    <value>tabs</value>
-  </data>
-  <data name="TabPageNICs_Dedicate" xml:space="preserve">
-    <value>hosts-nics</value>
-  </data>
   <data name="TabPagePerformance" xml:space="preserve">
     <value>performance</value>
+  </data>
+  <data name="TabPagePvs" xml:space="preserve">
+    <value>pvs-read-cache</value>
+  </data>
+  <data name="TabPageSR" xml:space="preserve">
+    <value>tabs</value>
   </data>
   <data name="TabPageSearch" xml:space="preserve">
     <value>tabs</value>
@@ -967,9 +1018,6 @@
     <value>tabs</value>
   </data>
   <data name="TabPageSnapshots" xml:space="preserve">
-    <value>tabs</value>
-  </data>
-  <data name="TabPageSR" xml:space="preserve">
     <value>tabs</value>
   </data>
   <data name="TabPageStorage" xml:space="preserve">
@@ -990,6 +1038,9 @@
   <data name="TabPageTagCloud" xml:space="preserve">
     <value>resources-tagging</value>
   </data>
+  <data name="TabPageUSB" xml:space="preserve">
+    <value>tabs</value>
+  </data>
   <data name="TabPageUnknown" xml:space="preserve">
     <value>intro-xencenterwindow</value>
   </data>
@@ -1005,9 +1056,6 @@
   <data name="UpdatesDialog" xml:space="preserve">
     <value>updates-applying</value>
   </data>
-  <data name="VcpuWarningDialog" xml:space="preserve">
-    <value>vms-properties</value>
-  </data>
   <data name="VDIMigrateDialog" xml:space="preserve">
     <value>vms-storage-move</value>
   </data>
@@ -1017,14 +1065,20 @@
   <data name="VMAppliancesDialog" xml:space="preserve">
     <value>vapps-manage</value>
   </data>
+  <data name="VMSnapshotPage" xml:space="preserve">
+    <value>vms-snapshots-newtemplate</value>
+  </data>
   <data name="VMSnapshotSchedulesDialog" xml:space="preserve">
     <value>vms-snapshotschedule-about</value>
+  </data>
+  <data name="VcpuWarningDialog" xml:space="preserve">
+    <value>vms-properties</value>
   </data>
   <data name="VmSnapshotDialog" xml:space="preserve">
     <value>vms-snapshots-take</value>
   </data>
-  <data name="VMSnapshotPage" xml:space="preserve">
-    <value>vms-snapshots-newtemplate</value>
+  <data name="WLBReports" xml:space="preserve">
+    <value>wlb-reports-creating</value>
   </data>
   <data name="WarningVmDisableChangedBlockTracking" xml:space="preserve">
     <value>cbt-overview</value>
@@ -1053,9 +1107,6 @@
   <data name="WlbEditScheduledTask" xml:space="preserve">
     <value>wlb-placement-strategy-change</value>
   </data>
-  <data name="WLBReports" xml:space="preserve">
-    <value>wlb-reports-creating</value>
-  </data>
   <data name="WlbReportSubscriptionDialog" xml:space="preserve">
     <value>wlb-reports-creating</value>
   </data>
@@ -1067,53 +1118,5 @@
   </data>
   <data name="XenServerUpdateAlert" xml:space="preserve">
     <value>updates-applying</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_DestinationCopyModePane" xml:space="preserve">
-    <value>vms-copy</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_MigrationSummaryCopyModePane" xml:space="preserve">
-    <value>vms-copy</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_NetworkingCopyModePane" xml:space="preserve">
-    <value>vms-copy</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_StorageCopyModePane" xml:space="preserve">
-    <value>vms-copy</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_TransferNetworkCopyModePane" xml:space="preserve">
-    <value>vms-copy</value>
-  </data>
-  <data name="TabPageADUpsell" xml:space="preserve">
-    <value>users-overview</value>
-  </data>
-  <data name="Dom0MemoryDemandUsageMessageAlert" xml:space="preserve">
-    <value>systemalerts</value>
-  </data>
-  <data name="ControlDomainMemoryDialog" xml:space="preserve">
-    <value>hosts-control-domain-memory</value>
-  </data>
-  <data name="EnablePvsReadCachingDialog" xml:space="preserve">
-    <value>pvs-read-cache</value>
-  </data>
-  <data name="PvsCacheConfigurationDialog" xml:space="preserve">
-    <value>pvs-read-cache</value>
-  </data>
-  <data name="TabPagePvs" xml:space="preserve">
-    <value>pvs-read-cache</value>
-  </data>
-  <data name="PvsSiteDialog" xml:space="preserve">
-    <value>pvs-read-cache</value>
-  </data>
-  <data name="EnableRDPonVM" xml:space="preserve">
-    <value>tabs</value>
-  </data>
-  <data name="EditVMSSGeneralSettingsDialog" xml:space="preserve">
-    <value>vms-snapshotschedule-manage-policy</value>
-  </data>
-  <data name="NewSRWizard_ProvisioningPane" xml:space="preserve">
-    <value>storage-pools-add</value>
-  </data>
-  <data name="TabPageUSB" xml:space="preserve">
-    <value>tabs</value>
   </data>
 </root>
