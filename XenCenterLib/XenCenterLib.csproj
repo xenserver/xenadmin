@@ -61,6 +61,7 @@
     <Compile Include="Archive\ArchiveFactory.cs" />
     <Compile Include="Archive\TarArchiveIterator.cs" />
     <Compile Include="Archive\TarArchiveWriter.cs" />
+    <Compile Include="Archive\TarSanitization.cs" />
     <Compile Include="Archive\ZipArchiveIterator.cs" />
     <Compile Include="Archive\ZipArchiveWriter.cs" />
     <Compile Include="Compression\BZip2Streams.cs" />
