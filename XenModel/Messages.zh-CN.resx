@@ -8984,6 +8984,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_TEMPLATEPAGE_WINDOWS" xml:space="preserve">
     <value>Windows</value>
   </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_MULTIPLE_VGPU_INFO" xml:space="preserve">
+    <value>选定的虚拟 GPU 类型支持多个实例。</value>
+  </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_SINGLE_VGPU_INFO" xml:space="preserve">
+    <value>选定的虚拟 GPU 类型不支持多个实例。</value>
+  </data>
   <data name="NEWVMWIZARD_VGPUPAGE_TITLE" xml:space="preserve">
     <value>分配虚拟 GPU</value>
   </data>
@@ -12762,11 +12768,20 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} 虚拟 GPU (每个 GPU {1}，{2}，{3} 个显示器，支持多 vGPU)</value>
+  </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} 虚拟 GPU (每个 GPU {1}，{2}，{3} 个显示器，支持多 vGPU)</value>
+  </data>
   <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1} 个)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+    <value>{0} 虚拟 GPU (每个 GPU {1}，支持多 vGPU)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>在整个 GPU 中直通</value>
