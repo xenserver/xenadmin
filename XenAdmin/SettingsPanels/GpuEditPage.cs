@@ -292,7 +292,10 @@ namespace XenAdmin.SettingsPanels
                         return;
 
                     VGPU_type type = tuple.VgpuTypes[0];
+                    // Set vGPU device to null. vGPU creation will check whether a valid device is assigned
+                    // to the vGPU, if not then 0 is used to declare the first availabe slot in VM
                     var vGpu = new VGPU();
+                    vGpu.device = null;
                     vGpu.GPU_group = new XenRef<GPU_group>(tuple.GpuGroup.opaque_ref);
                     vGpu.type = new XenRef<VGPU_type>(type.opaque_ref);
                     vGpu.Connection = vm.Connection;
@@ -325,6 +328,10 @@ namespace XenAdmin.SettingsPanels
         private readonly DataGridViewTextBoxCell maxResolutionColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell maxDisplaysColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell videoRamColumn = new DataGridViewTextBoxCell();
+        // Xapi reserves device numbers [0,20] for vGPU for backwards compatibility.
+        // The guest PCI bus slots lie within [11,31], hence XenCenter needs to
+        // shift the device number by 11 in order to show the actual PCI slot number used in the VM
+        private const int VGPU_PCI_SLOT_NUMBER_SHIFT = 11;
 
         public VGPU VGpu { get; }
 
@@ -338,8 +345,8 @@ namespace XenAdmin.SettingsPanels
 
         private void SetCells()
         {
-            if (int.TryParse(VGpu.device, out var device) && device != 0)
-                deviceColumn.Value = device;
+            if (int.TryParse(VGpu.device, out var device))
+                deviceColumn.Value = Helpers.PlymouthOrGreater(VGpu.Connection) ? device + VGPU_PCI_SLOT_NUMBER_SHIFT : device;
             else
                 deviceColumn.Value = Messages.HYPHEN;
 

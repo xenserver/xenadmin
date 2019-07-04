@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Text;
 
 using XenAdmin.Core;
-
 using XenAPI;
 
 namespace XenAdmin.Actions
@@ -64,7 +63,7 @@ namespace XenAdmin.Actions
 
             // New added vGPUs haven't opaque_ref
             foreach (var vGpu in vGpus.FindAll(x => x.opaque_ref == null))
-                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type), vGpu.device);
+                AddGpu(vm.Connection.Resolve(vGpu.GPU_group), vm.Connection.Resolve(vGpu.type), vGpu.device ?? "0");
         }
 
         private void AddGpu(GPU_group gpuGroup, VGPU_type vGpuType, string device = "0")
