@@ -7355,9 +7355,6 @@ To complete the patch installation, please put the servers into maintenance mode
   <data name="LOCAL_STORAGE_CANNOT_BE_SEEN" xml:space="preserve">
     <value>You have selected storage local to {0} that cannot be seen from this server</value>
   </data>
-  <data name="LOCAL_TO_LOCAL_MOVE" xml:space="preserve">
-    <value>Cannot move virtual disks between local SRs</value>
-  </data>
   <data name="LOCATION_LABEL" xml:space="preserve">
     <value>Location:</value>
   </data>

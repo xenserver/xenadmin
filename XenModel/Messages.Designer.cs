@@ -21119,15 +21119,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot move virtual disks between local SRs.
-        /// </summary>
-        public static string LOCAL_TO_LOCAL_MOVE {
-            get {
-                return ResourceManager.GetString("LOCAL_TO_LOCAL_MOVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Location:.
         /// </summary>
         public static string LOCATION_LABEL {

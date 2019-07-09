@@ -91,7 +91,7 @@ namespace XenAdminTests.Controls
                     Sr = GetLocalSr(slaveHost),
                     VdisToMove = GetVDIsFromLocal(masterHost),
                     DiskSize = 1024 * 1024,
-                    ExpectedFailureDescription = Messages.LOCAL_TO_LOCAL_MOVE
+                    ExpectedFailureDescription = string.Format(Messages.SR_CANNOT_BE_SEEN, masterHost)
                 };
                 yield return new TestData //Master and slave VDIs selected together from a iSCSI -> master local SR
                 {
@@ -99,7 +99,7 @@ namespace XenAdminTests.Controls
                     VdisToMove = GetVDIsOn(largeISCSI),
                     Sr = GetLocalSr(masterHost),
                     DiskSize = 1024 * 1024,
-                    ExpectedFailureDescription = Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
+                    ExpectedFailureDescription = string.Format(Messages.SR_CANNOT_BE_SEEN, slaveHost)
                 };
                 yield return new TestData //Master VDI to a slave move
                 {
@@ -107,7 +107,7 @@ namespace XenAdminTests.Controls
                     Sr = GetLocalSr(slaveHost),
                     VdisToMove = GetVDIsOn(largeISCSI).Where(v => v.name_label.Contains("OnMaster")).ToArray(),
                     DiskSize = 1024 * 1024,
-                    ExpectedFailureDescription = Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
+                    ExpectedFailureDescription = string.Format(Messages.SR_CANNOT_BE_SEEN, masterHost)
                 };
                 yield return new TestData //Slave VDI to a master move
                 {
@@ -115,7 +115,7 @@ namespace XenAdminTests.Controls
                     Sr = GetLocalSr(masterHost),
                     VdisToMove = GetVDIsOn(largeISCSI).Where(v => !v.name_label.Contains("OnMaster")).ToArray(),
                     DiskSize = 1024 * 1024,
-                    ExpectedFailureDescription = Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
+                    ExpectedFailureDescription = string.Format(Messages.SR_CANNOT_BE_SEEN, slaveHost)
                 };
                 yield return new TestData //Local master to shared restricted free space
                 {
