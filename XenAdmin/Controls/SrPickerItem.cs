@@ -37,28 +37,6 @@ using XenAPI;
 
 namespace XenAdmin.Controls
 {
-    /// <summary>
-    /// Decide which of the SRPickerItem to choose - depending on the usage required
-    /// </summary>
-    public class SrPickerItemFactory
-    {
-        public SrPickerItem PickerItem(SR sr, SrPicker.SRPickerType usage, Host aff, long diskSize, VDI[] vdis)
-        {
-            if (SrPicker.SRPickerType.Migrate == usage)
-                return new SrPickerMigrateItem(sr, aff, diskSize, vdis);
-            if (SrPicker.SRPickerType.MoveOrCopy == usage)
-                return new SrPickerMoveCopyItem(sr, aff, diskSize, vdis);
-            if (SrPicker.SRPickerType.InstallFromTemplate == usage)
-                return new SrPickerInstallFromTemplateItem(sr,  aff, diskSize, vdis);
-            if (SrPicker.SRPickerType.VM == usage)
-                return new SrPickerVmItem(sr, aff, diskSize, vdis);
-            if (SrPicker.SRPickerType.LunPerVDI == usage)
-                return new SrPickerLunPerVDIItem(sr, aff, diskSize, vdis);
-
-            throw new ArgumentException("There is no SRPickerItem for the type: " + usage);
-        }
-    }
-
     public class SrPickerLunPerVDIItem : SrPickerVmItem
     {
         public SrPickerLunPerVDIItem(SR sr, Host aff, long diskSize, VDI[] vdis)
@@ -79,9 +57,7 @@ namespace XenAdmin.Controls
         protected override bool UnsupportedSR => false;
     }
 
-    /// <summary>
-    /// Stategy pattern for the SRPickerItem for migrate scenarios
-    /// </summary>
+
     public class SrPickerMigrateItem : SrPickerItem
     {
         public SrPickerMigrateItem(SR sr, Host aff, long diskSize, VDI[] vdis) : base(sr, aff, diskSize, vdis)
@@ -157,9 +133,7 @@ namespace XenAdmin.Controls
         }
     }
 
-    /// <summary>
-    /// Stategy pattern for the SRPickerItem for copy and move scenarios
-    /// </summary>
+
     public class SrPickerMoveCopyItem : SrPickerItem
     {
         public SrPickerMoveCopyItem(SR sr, Host aff, long diskSize, VDI[] vdis) : base(sr, aff, diskSize, vdis)
@@ -189,9 +163,7 @@ namespace XenAdmin.Controls
                         
     }
 
-    /// <summary>
-    /// Stategy pattern for the SRPickerItem for installing from a template scenarios
-    /// </summary>
+
     public class SrPickerInstallFromTemplateItem : SrPickerItem
     {
         public SrPickerInstallFromTemplateItem(SR sr, Host aff, long diskSize, VDI[] vdis) : base(sr, aff, diskSize, vdis)
@@ -215,9 +187,7 @@ namespace XenAdmin.Controls
     }
 
 
-    /// <summary>
-    /// Stategy pattern for the SRPickerItem for VM scenarios
-    /// </summary>
+
     public class SrPickerVmItem : SrPickerItem
     {
         public SrPickerVmItem(SR sr, Host aff, long diskSize, VDI[] vdis) : base(sr, aff, diskSize, vdis)
@@ -244,12 +214,9 @@ namespace XenAdmin.Controls
         }
     }
 
-    /// <summary>
-    /// Base class for the SRPickerItem stategies
-    /// </summary>
+
     public abstract class SrPickerItem : CustomTreeNode, IComparable<SrPickerItem>
     {
-
         public SR TheSR { get; }
         public bool Show { get; private set; }
         protected readonly Host Affinity;
@@ -403,5 +370,24 @@ namespace XenAdmin.Controls
             return (int)sortingReason - (int)otherItem.sortingReason;
         }
         #endregion
+
+        public static SrPickerItem Create(SR sr, SrPicker.SRPickerType usage, Host aff, long diskSize, VDI[] vdis)
+        {
+            switch (usage)
+            {
+                case SrPicker.SRPickerType.Migrate:
+                    return new SrPickerMigrateItem(sr, aff, diskSize, vdis);
+                case SrPicker.SRPickerType.MoveOrCopy:
+                    return new SrPickerMoveCopyItem(sr, aff, diskSize, vdis);
+                case SrPicker.SRPickerType.InstallFromTemplate:
+                    return new SrPickerInstallFromTemplateItem(sr, aff, diskSize, vdis);
+                case SrPicker.SRPickerType.VM:
+                    return new SrPickerVmItem(sr, aff, diskSize, vdis);
+                case SrPicker.SRPickerType.LunPerVDI:
+                    return new SrPickerLunPerVDIItem(sr, aff, diskSize, vdis);
+                default:
+                    throw new ArgumentException("There is no SRPickerItem for the type: " + usage);
+            }
+        }
     }
 }

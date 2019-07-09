@@ -234,14 +234,16 @@ namespace XenAdmin.Dialogs
                         new XenAdmin.Actions.VbdSaveAndPlugAction(TheVM, vbd, vdi.Name(), session, false, ShowMustRebootBoxCD, ShowVBDWarningBox).RunAsync();
                     });
                 action.VM = TheVM;
-                new Dialogs.ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog();
+                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+                    dialog.ShowDialog();
                 if (!action.Succeeded)
                     return;
             }
             else
             {
                 CreateDiskAction action = new CreateDiskAction(vdi);
-                new Dialogs.ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog();
+                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                    dialog.ShowDialog();
                 if (!action.Succeeded)
                     return;
             }

@@ -174,8 +174,6 @@ namespace XenAdmin.Controls
 			refresh();
 		}
 
-        private readonly SrPickerItemFactory itemFactory = new SrPickerItemFactory();
-
     	public void refresh()
         {
             Program.AssertOnEventThread();
@@ -189,7 +187,7 @@ namespace XenAdmin.Controls
 
                 foreach (SR sr in connection.Cache.SRs)
                 {
-                    SrPickerItem item = itemFactory.PickerItem(sr, usage, affinity, DiskSize, existingVDIs);
+                    var item = SrPickerItem.Create(sr, usage, affinity, DiskSize, existingVDIs);
                     if (item.Show)
                         AddNode(item);
                     foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))

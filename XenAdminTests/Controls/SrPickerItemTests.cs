@@ -359,14 +359,13 @@ namespace XenAdminTests.Controls
         }
 
         #region Helper methods for XenObjects
-        private readonly SrPickerItemFactory factory = new SrPickerItemFactory();
+
         private void CannotDoScenario(SrPicker.SRPickerType type, IEnumerable<TestData> testData)
         {
             int count = 0;
             foreach (TestData data in testData)
             {
-                SrPickerItem item = factory.PickerItem(data.Sr, type, data.Affinity,
-                                                     data.DiskSize, data.VdisToMove);
+                var item = SrPickerItem.Create(data.Sr, type, data.Affinity, data.DiskSize, data.VdisToMove);
                 Assert.That(item.Show, Is.True, "Item Shown: Item " + count);
                 Assert.That(item.Enabled, Is.False, "Item Enabled: Item " + count);
                 Assert.That(item.Description, Is.EqualTo(data.ExpectedFailureDescription), "Item Reason: Item " + count);
@@ -380,8 +379,7 @@ namespace XenAdminTests.Controls
             int count = 0;
             foreach (TestData data in testData)
             {
-                SrPickerItem item = factory.PickerItem(data.Sr, type, data.Affinity,
-                                                     data.DiskSize, data.VdisToMove);
+                var item = SrPickerItem.Create(data.Sr, type, data.Affinity, data.DiskSize, data.VdisToMove);
                 Assert.That(item.Show, Is.True, "Item Shown: Item " + count);
                 Assert.That(item.Enabled, Is.True, "Item Enabled: Item " + count);
                 count++;
