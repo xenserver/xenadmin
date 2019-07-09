@@ -206,7 +206,7 @@ namespace XenAdmin.SettingsPanels
                     }
                 }
 
-                DeviceColumn.Visible = vm.VGPUs.Count > 0 && Helpers.PlymouthOrGreater(Connection);
+                DeviceColumn.Visible = vm.VGPUs.Count > 0 && Helpers.QuebecOrGreater(Connection);
             }
             finally
             {
@@ -346,7 +346,7 @@ namespace XenAdmin.SettingsPanels
         private void SetCells()
         {
             if (int.TryParse(VGpu.device, out var device))
-                deviceColumn.Value = Helpers.PlymouthOrGreater(VGpu.Connection) ? device + VGPU_PCI_SLOT_NUMBER_SHIFT : device;
+                deviceColumn.Value = Helpers.QuebecOrGreater(VGpu.Connection) ? device + VGPU_PCI_SLOT_NUMBER_SHIFT : device;
             else
                 deviceColumn.Value = Messages.HYPHEN;
 

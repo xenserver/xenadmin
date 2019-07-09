@@ -1591,7 +1591,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You tried to create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead..
+        ///   Looks up a localized string similar to Cannot create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead..
         /// </summary>
         public static string IS_TUNNEL_ACCESS_PIF {
             get {
@@ -2032,7 +2032,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host does not have a Cluster_host with a compatible cluster stack..
+        ///   Looks up a localized string similar to Clustering is not enabled on this host or pool..
         /// </summary>
         public static string NO_COMPATIBLE_CLUSTER_HOST {
             get {
@@ -5574,7 +5574,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You tried to create a VGPU that is not compatible with existing types on the VM..
+        ///   Looks up a localized string similar to Cannot create a virtual GPU that is incompatible with the existing types on the VM..
         /// </summary>
         public static string VGPU_TYPE_NOT_COMPATIBLE {
             get {
