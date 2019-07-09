@@ -76,10 +76,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected override bool UnsupportedSR
-        {
-            get { return false; }
-        }
+        protected override bool UnsupportedSR => false;
     }
 
     /// <summary>
@@ -91,27 +88,11 @@ namespace XenAdmin.Controls
         {
         }
 
-        private bool CanMigrate(VDI vdi)
-        {
-            if (TheSR == null || vdi == null)
-                return false;
-
-            bool toLocal = TheSR.IsLocalSR();
-            if (toLocal && !HomeHostCanSeeTargetSr(vdi))
-                return false;
-
-            bool fromLocal = vdi.Connection.Resolve(vdi.SR).IsLocalSR();
-            if (fromLocal && toLocal)
-                return false;
-
-            return true;
-        }
-
         /// <summary>
-        /// If the VM has a home host, we can move VDIs to a local SR only
-        /// if the latter belongs to the VM's home host
+        /// We can move VDIs to a local SR only if the VDI is attached to VMs
+        /// that have a home server that can see the SR
         /// </summary>
-        private bool HomeHostCanSeeTargetSr(VDI vdi)
+        private static bool HomeHostCanSeeTargetSr(VDI vdi, SR targetSr)
         {
             var vms = vdi.GetVMs();
             var homeHosts = (from VM vm in vms
@@ -119,7 +100,7 @@ namespace XenAdmin.Controls
                 where host != null
                 select host).ToList();
 
-            return homeHosts.Count == 0 || homeHosts.Any(TheSR.CanBeSeenFrom);
+            return homeHosts.Count > 0 && homeHosts.All(targetSr.CanBeSeenFrom);
         }
 
         protected override string CannotBeShownReason
@@ -128,29 +109,50 @@ namespace XenAdmin.Controls
             {
                 if (ExistingVDILocation())
                     return Messages.CURRENT_LOCATION;
-                if (LocalToLocalMove())
-                    return Messages.LOCAL_TO_LOCAL_MOVE;
-                if (TheSR.IsLocalSR() && existingVDIs != null && existingVDIs.Any(v => !HomeHostCanSeeTargetSr(v)))
-                    return Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS;
+
+                if (TheSR.IsLocalSR())
+                {
+                    foreach (var vdi in existingVDIs)
+                    {
+                        var homeHosts = new List<Host>();
+                        var vms = vdi.GetVMs();
+                        foreach (var vm in vms)
+                        {
+                            var homeHost = vm.Home();
+                            if (homeHost != null)
+                            {
+                                homeHosts.Add(homeHost);
+
+                                if (!TheSR.CanBeSeenFrom(homeHost))
+                                    return vm.power_state == vm_power_state.Running
+                                        ? Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
+                                        : string.Format(Messages.SR_CANNOT_BE_SEEN, Helpers.GetName(homeHost));
+                            }
+                        }
+
+                        if (homeHosts.Count == 0)
+                            return Messages.SR_IS_LOCAL;
+                    }
+                }
+
                 if (!TheSR.CanBeSeenFrom(Affinity))
                     return TheSR.Connection != null
                         ? string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
                         : Messages.SR_DETACHED;
+
                 return base.CannotBeShownReason;
             }
-        }
-
-        private bool LocalToLocalMove()
-        {
-            return TheSR.IsLocalSR() && existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.Connection.Resolve(vdi.SR).IsLocalSR());
         }
 
         protected override bool CanBeEnabled
         {
             get
             {
-                return existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(CanMigrate)
-                       && TheSR.SupportsVdiCreate() && !ExistingVDILocation() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize);
+                return existingVDIs.Length > 0 &&
+                       !ExistingVDILocation() &&
+                       (!TheSR.IsLocalSR() || existingVDIs.All(v => HomeHostCanSeeTargetSr(v, TheSR))) &&
+                       TheSR.SupportsVdiCreate() &&
+                       !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize);
             }
         }
     }
@@ -248,20 +250,16 @@ namespace XenAdmin.Controls
     public abstract class SrPickerItem : CustomTreeNode, IComparable<SrPickerItem>
     {
 
-        public SR TheSR { get; private set; }
+        public SR TheSR { get; }
         public bool Show { get; private set; }
-        protected Host Affinity { get; private set; }
+        protected readonly Host Affinity;
         protected long DiskSize { get; private set; }
-        protected VDI[] existingVDIs { get; private set; }
+        protected readonly VDI[] existingVDIs;
 
-        private SrPickerItem()
+        protected SrPickerItem(SR sr, Host aff, long diskSize, VDI[] vdis)
         {
             Show = true;
-        }
-
-        protected SrPickerItem(SR sr, Host aff, long diskSize, VDI[] vdis) : this()
-        {
-            existingVDIs = vdis;
+            existingVDIs = vdis ?? new VDI[0];
             TheSR = sr;
             Affinity = aff;
             DiskSize = diskSize;
@@ -341,7 +339,7 @@ namespace XenAdmin.Controls
 
         protected bool ExistingVDILocation()
         {
-            return existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.SR.opaque_ref == TheSR.opaque_ref);
+            return existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.SR.opaque_ref == TheSR.opaque_ref);
         }
 
         protected virtual string CannotBeShownReason
