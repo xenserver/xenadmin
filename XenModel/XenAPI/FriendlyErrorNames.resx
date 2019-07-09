@@ -628,7 +628,7 @@
     <value>The value '{1}' is invalid for field '{0}'.</value>
   </data>
   <data name="IS_TUNNEL_ACCESS_PIF" xml:space="preserve">
-    <value>You tried to create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead.</value>
+    <value>Cannot create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead.</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
     <value>The server joining the pool cannot already be a master of another pool.</value>
@@ -790,7 +790,7 @@
     <value>No other cluster host was reachable when joining</value>
   </data>
   <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
-    <value>The host does not have a Cluster_host with a compatible cluster stack.</value>
+    <value>Clustering is not enabled on this host or pool.</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>There were no servers available to complete the specified operation.</value>
@@ -1959,7 +1959,7 @@ Authorized Roles: {1}</value>
     <value>The VGPU is not compatible with any PGPU in the destination.</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
-    <value>You tried to create a VGPU that is not compatible with existing types on the VM.</value>
+    <value>Cannot create a virtual GPU that is incompatible with the existing types on the VM.</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>The VM cannot start because all GPUs are fully used or are running other types of virtual GPU</value>

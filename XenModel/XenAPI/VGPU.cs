@@ -656,7 +656,7 @@ namespace XenAPI
         private XenRef<GPU_group> _GPU_group = new XenRef<GPU_group>(Helper.NullOpaqueRef);
 
         /// <summary>
-        /// Guest PCI slot (a value of 0 means auto-assign to first empty slot, valid slot is in range of [0,20] for multi-VGPU purpose)
+        /// Order in which the devices are plugged into the VM
         /// </summary>
         public virtual string device
         {

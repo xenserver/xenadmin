@@ -463,14 +463,14 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool PlymouthOrGreater(IXenConnection conn)
+        public static bool QuebecOrGreater(IXenConnection conn)
         {
-            return conn == null || PlymouthOrGreater(GetMaster(conn));
+            return conn == null || QuebecOrGreater(GetMaster(conn));
         }
 
-        /// Plymouth platform version is 3.1.0
+        /// Quebec platform version is 3.1.0
         /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool PlymouthOrGreater(Host host)
+        public static bool QuebecOrGreater(Host host)
         {
             if (host == null)
                 return true;
