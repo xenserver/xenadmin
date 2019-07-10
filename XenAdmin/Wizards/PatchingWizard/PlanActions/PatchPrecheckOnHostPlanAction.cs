@@ -37,6 +37,7 @@ using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Diagnostics.Problems;
+using Console = System.Console;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
@@ -82,15 +83,19 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, xenServerPatch.Name, host.Name()));
 
+                RefreshUpdate(host, mapping, session);
+
                 List<Problem> problems = null;
 
                 if (mapping is PoolPatchMapping patchMapping)
                 {
+                    log.InfoFormat("Running patch precheck on `{0}`. Update = `{1}` (uuid = `{2}`; opaque_ref = `{3}`)", host.Name(), patchMapping.Pool_patch.Name(), patchMapping.Pool_patch.uuid, patchMapping.Pool_patch.opaque_ref);
                     problems = new PatchPrecheckCheck(host, patchMapping.Pool_patch, livePatchStatus).RunAllChecks();
                     updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, patchMapping.Pool_patch, livePatchStatus);
                 }
                 else if (mapping is PoolUpdateMapping updateMapping)
                 {
+                    log.InfoFormat("Running update precheck on `{0}`. Update = `{1}` (uuid = `{2}`; opaque_ref = `{3}`", host.Name(), updateMapping.Pool_update.Name(), updateMapping.Pool_update.uuid, updateMapping.Pool_update.opaque_ref);
                     problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
                     updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, updateMapping.Pool_update, livePatchStatus);
                 }
@@ -119,6 +124,30 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     livePatchAttempts[host.uuid] = new List<string>();
                 livePatchAttempts[host.uuid].Add(xenServerPatch.Uuid);
             }
+        }
+
+        public static void RefreshUpdate(Host host, HostUpdateMapping mapping, Session session)
+        {
+            // re-introduce pool_update if needed
+            if (mapping is PoolUpdateMapping poolUpdateMapping 
+                && session.Connection.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, poolUpdateMapping.Pool_update.uuid, StringComparison.OrdinalIgnoreCase)) == null)
+            {
+                log.InfoFormat("Re-introduce update on `{0}`. Update = `{1}` (uuid = `{2}`; old opaque_ref = `{3}`)",
+                    host.Name(), poolUpdateMapping.Pool_update.Name(), poolUpdateMapping.Pool_update.uuid,
+                    poolUpdateMapping.Pool_update.opaque_ref);
+                try
+                {
+                    var newUpdateRef = Pool_update.introduce(session, poolUpdateMapping.Pool_update.vdi.opaque_ref);
+                    session.Connection.WaitForCache(newUpdateRef);
+                }
+                catch (Exception e)
+                {
+                    log.Error("Failed to introduce update", e);
+                }
+            }
+
+            // refresh the update/patch record based on uuid
+            mapping.RefreshUpdate();
         }
     }
 }
