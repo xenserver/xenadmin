@@ -181,10 +181,6 @@ branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenC
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/app.config
-rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.serverview.xml
-rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.orgview.xml
-rebranding_global ${REPO}/XenAdminTests/TestResources/searchresults.xml
-rebranding_global ${REPO}/XenAdminTests/TestResources/state3.xml
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
 echo cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
 cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
