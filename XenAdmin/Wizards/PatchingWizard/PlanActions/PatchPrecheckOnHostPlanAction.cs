@@ -37,7 +37,6 @@ using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Diagnostics.Problems;
-using Console = System.Console;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
@@ -89,13 +88,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 if (mapping is PoolPatchMapping patchMapping)
                 {
-                    log.InfoFormat("Running patch precheck on `{0}`. Update = `{1}` (uuid = `{2}`; opaque_ref = `{3}`)", host.Name(), patchMapping.Pool_patch.Name(), patchMapping.Pool_patch.uuid, patchMapping.Pool_patch.opaque_ref);
+                    log.InfoFormat("Running patch precheck on '{0}'. Patch = '{1}' (uuid = '{2}'; opaque_ref = '{3}')", host.Name(), patchMapping.Pool_patch.Name(), patchMapping.Pool_patch.uuid, patchMapping.Pool_patch.opaque_ref);
                     problems = new PatchPrecheckCheck(host, patchMapping.Pool_patch, livePatchStatus).RunAllChecks();
                     updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, patchMapping.Pool_patch, livePatchStatus);
                 }
                 else if (mapping is PoolUpdateMapping updateMapping)
                 {
-                    log.InfoFormat("Running update precheck on `{0}`. Update = `{1}` (uuid = `{2}`; opaque_ref = `{3}`", host.Name(), updateMapping.Pool_update.Name(), updateMapping.Pool_update.uuid, updateMapping.Pool_update.opaque_ref);
+                    log.InfoFormat("Running update precheck on '{0}'. Update = '{1}' (uuid = '{2}'; opaque_ref = '{3}'", host.Name(), updateMapping.Pool_update.Name(), updateMapping.Pool_update.uuid, updateMapping.Pool_update.opaque_ref);
                     problems = new PatchPrecheckCheck(host, updateMapping.Pool_update, livePatchStatus).RunAllChecks();
                     updateRequiresHostReboot = WizardHelpers.IsHostRebootRequiredForUpdate(host, updateMapping.Pool_update, livePatchStatus);
                 }
@@ -132,7 +131,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (mapping is PoolUpdateMapping poolUpdateMapping 
                 && session.Connection.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, poolUpdateMapping.Pool_update.uuid, StringComparison.OrdinalIgnoreCase)) == null)
             {
-                log.InfoFormat("Re-introduce update on `{0}`. Update = `{1}` (uuid = `{2}`; old opaque_ref = `{3}`)",
+                log.InfoFormat("Re-introduce update on '{0}'. Update = '{1}' (uuid = '{2}'; old opaque_ref = '{3}')",
                     host.Name(), poolUpdateMapping.Pool_update.Name(), poolUpdateMapping.Pool_update.uuid,
                     poolUpdateMapping.Pool_update.opaque_ref);
                 try
@@ -142,7 +141,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 catch (Exception e)
                 {
-                    log.Error("Failed to introduce update", e);
+                    if (e is Failure failure && failure.ErrorDescription != null && failure.ErrorDescription.Count > 1 && failure.ErrorDescription[0] == Failure.UPDATE_ALREADY_EXISTS)
+                    {
+                        log.InfoFormat("Update '{0}' already exists", poolUpdateMapping.Pool_update.Name());
+                    }
+                    else
+                    {
+                        log.Error("Failed to re-introduce the update", e);
+                        throw;
+                    }
                 }
             }
 
