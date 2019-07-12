@@ -269,19 +269,19 @@ node("${params.BUILD_ON_NODE}") {
         timeout(time: 60, unit: 'MINUTES') {
 
           bat """
-              taskkill /f /fi "imagename eq nunit*"
-              echo Starting tests at %time% %date%
+taskkill /f /fi "imagename eq nunit*"
 
-              nunit3-console /labels=all /process=separate /timeout=40000 /where "cat==Unit" ^
-                /out="${env.WORKSPACE}\\output\\nunit.out" ^
-                /result="${env.WORKSPACE}\\output\\XenAdminTests.xml" ^
-                "${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release\\XenAdminTests.dll"
+nunit3-console /labels=all /process=separate /timeout=40000 /where "cat==Unit" ^
+  /out="${env.WORKSPACE}\\output\\XenAdminTests.out" ^
+  /result="${env.WORKSPACE}\\output\\XenAdminTests.xml" ^
+  "${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release\\XenAdminTests.dll" ^
+  > ${env.WORKSPACE}\\output\\nunit3-console.out
 
-              echo Finished tests at %time% %date%
-              """
+type ${env.WORKSPACE}\\output\\nunit3-console.out
+"""
 
-          def text = readFile("${env.WORKSPACE}\\output\\XenAdminTests.xml")
-          assert text.contains('errors="0" failures="0"')
+          def text = readFile("${env.WORKSPACE}\\output\\nunit3-console.out")
+          assert text.contains('Failed: 0')
         }
       }
     }
