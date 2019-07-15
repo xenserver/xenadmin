@@ -659,19 +659,6 @@ namespace XenAdmin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool ShowJustHostInSearch {
-            get {
-                return ((bool)(this["ShowJustHostInSearch"]));
-            }
-            set {
-                this["ShowJustHostInSearch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool ShowAboutDialog {
@@ -823,6 +810,19 @@ namespace XenAdmin.Properties {
             }
             set {
                 this["ShowUpdatesByServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool RememberLastSelectedTab {
+            get {
+                return ((bool)(this["RememberLastSelectedTab"]));
+            }
+            set {
+                this["RememberLastSelectedTab"] = value;
             }
         }
     }

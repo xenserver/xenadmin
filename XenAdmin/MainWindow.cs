@@ -1536,7 +1536,7 @@ namespace XenAdmin
             if (SearchMode)
                 return;
 
-            if (o == null)
+            if (o == null || !Properties.Settings.Default.RememberLastSelectedTab)
             {
                 selectedOverviewTab = p;
             }
@@ -1548,7 +1548,7 @@ namespace XenAdmin
 
         private TabPage GetLastSelectedPage(object o)
         {
-            return o == null
+            return o == null || !Properties.Settings.Default.RememberLastSelectedTab
                 ? selectedOverviewTab
                 : selectedTabs.ContainsKey(o) ? selectedTabs[o] : null;
         }
@@ -1906,27 +1906,21 @@ namespace XenAdmin
                     else
                     {
                         // Infrastructure View:
-                        // If XenCenter node or a  disconnected host is selected, show the default search
-                        // Otherwise, find the top-level parent (= pool or standalone server) and show the search restricted to that
-                        // In the case of multiselect, if all the selections are within one pool (or standalone server), then show that report.
-                        // Otherwise show everything, as on the XenCenter node.
-                        var connection = SelectionManager.Selection.GetConnectionOfAllItems(); // null for cross-pool selection
-                        if (connection != null)
+                        // - In case of single selection or multiple selection within the same pool,
+                        //   find the top-level parent (pool or standalone server) and show that search
+                        // - In case of multiple selection across pools or standalone servers,
+                        //   or selection of the XenCenter node, or selection of a disconnected host,
+                        //   show the default search.
+                        var connection = SelectionManager.Selection.GetConnectionOfAllItems();
+                        if (connection == null)
                         {
-                            //If ShowJustHostInSearch is enabled and only one live host is selected, we show the search for the host only
-                            if (Properties.Settings.Default.ShowJustHostInSearch && SelectionManager.Selection.Count == 1 
-                                && SelectionManager.Selection.FirstIsLiveHost)
-                            {
-                                SearchPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
-                            }
-                            else
-                            {
-                                var pool = Helpers.GetPool(connection);
-                                SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection); // pool or standalone server
-                            }
+                            SearchPage.XenObject = null;
                         }
                         else
-                            SearchPage.XenObject = null;
+                        {
+                            var pool = Helpers.GetPool(connection);
+                            SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection);
+                        }
                     }
                 }
                 else if (t == TabPageHA)
