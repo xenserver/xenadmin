@@ -510,7 +510,7 @@ namespace XenAdmin.Controls.XenSearch
                     break;
             }
 
-            return new Search(query, grouping, false, "", "", null, sorts);
+            return new Search(query, grouping, "", "", null, sorts);
         }
 
         private void Setup()
