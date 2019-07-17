@@ -2706,6 +2706,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="COMPRESSING_FILES" xml:space="preserve">
     <value>Compressing appliance files...</value>
   </data>
+  <data name="CONFIGURE_HA" xml:space="preserve">
+    <value>Configure HA</value>
+  </data>
   <data name="CONFIGURE_HA_ELLIPSIS" xml:space="preserve">
     <value>&amp;Configure HA...</value>
   </data>
@@ -5976,6 +5979,9 @@ not currently live:
   <data name="HA_CONFIGURE_NOW" xml:space="preserve">
     <value>Configure HA now...</value>
   </data>
+  <data name="HA_CONFIGURE_NO_STATEFILE" xml:space="preserve">
+    <value>Cannot configure HA for pool '{0}' because an HA Statefile VDI could not be found in the pool.</value>
+  </data>
   <data name="HA_CONFIRM_FORCESHUTDOWN_VM" xml:space="preserve">
     <value>The selected VM is currently protected by HA. Are you sure you want to force the shut down of this VM? This operation will cancel all running tasks for the VM and can result in data loss.</value>
   </data>
@@ -5996,6 +6002,9 @@ not currently live:
   </data>
   <data name="HA_CURRENT_CAPACITY" xml:space="preserve">
     <value>Current failure capacity:</value>
+  </data>
+  <data name="HA_DISABLE_NO_STATEFILE" xml:space="preserve">
+    <value>Cannot disable HA for pool '{0}' because an HA Statefile VDI could not be found in the pool.</value>
   </data>
   <data name="HA_DISABLE_QUERY" xml:space="preserve">
     <value>Are you sure you want to disable HA for pool '{0}'?</value>

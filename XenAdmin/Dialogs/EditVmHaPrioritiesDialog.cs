@@ -59,16 +59,13 @@ namespace XenAdmin.Dialogs
         /// </summary>
         private readonly long originalNtol;
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="pool">May not be null. HA must be turned off on the pool.</param>
         public EditVmHaPrioritiesDialog(Pool pool)
         {
             if (pool == null)
                 throw new ArgumentNullException("pool");
             if (!pool.ha_enabled)
-                throw new ArgumentException("You may only show the EditVmHaPrioritiesDialog for pools that already have HA turned on");
+                throw new ArgumentException("Can only configure HA for pools that already have HA turned on");
 
             this.pool = pool;
             InitializeComponent();
@@ -77,23 +74,6 @@ namespace XenAdmin.Dialogs
 
             pool.PropertyChanged += pool_PropertyChanged;
             originalNtol = pool.ha_host_failures_to_tolerate;
-
-            if (pool.ha_statefiles.Length != 1)
-            {
-                log.ErrorFormat("Cannot show dialog: pool {0} has {1} statefiles, but this dialog can only handle exactly 1. Closing dialog.",
-                    pool.Name(), pool.ha_statefiles.Length);
-                this.Close();
-                return;
-            }
-
-            XenRef<VDI> vdiRef = new XenRef<VDI>(pool.ha_statefiles[0]);
-            VDI vdi = pool.Connection.Resolve(vdiRef);
-            if (vdi == null)
-            {
-                log.Error("Could not resolve HA statefile reference. Closing dialog.");
-                this.Close();
-                return;
-            }
 
             pictureBoxWarningIcon.Image = SystemIcons.Warning.ToBitmap();
             Rebuild();

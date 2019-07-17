@@ -33,8 +33,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
@@ -629,6 +631,21 @@ namespace XenAdmin.TabPages
                 return;
             }
 
+            if (pool.ha_statefiles.All(sf => pool.Connection.Resolve(new XenRef<VDI>(sf)) == null)) //empty gives true, which is correct
+            {
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Error,
+                        string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
+                        Messages.DISABLE_HA),
+                    "HADisable",
+                    ThreeButtonDialog.ButtonOK))
+                {
+                    dlg.ShowDialog(this);
+                    return;
+                }
+            }
+
             // Confirm the user wants to disable HA
             using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
@@ -649,35 +666,12 @@ namespace XenAdmin.TabPages
             action.RunAsync();
         }
 
-        /// <summary>
-        /// Shows the appropriate dialog (HA wizard if HA is disabled for the pool, or VM restart priority editor otherwise).
-        /// </summary>
         /// <param name="pool">Must not be null.</param>
         internal static void EditHA(Pool pool)
         {
-            // Do nothing if there is an HA action in progress 
-            if (HelpersGUI.FindActiveHaAction(pool.Connection) != null)
-            {
-                log.Debug("Not opening HA dialog: an HA action is in progress");
-                return;
-            }
-
-            if (!pool.Connection.IsConnected)
-            {
-                log.Debug("Not opening HA dialog: the connection to the pool is now closed");
-                return;
-            }
-
-            if (pool.ha_enabled)
-            {
-                // Show VM restart priority editor
-                Program.MainWindow.ShowPerConnectionWizard(pool.Connection, new EditVmHaPrioritiesDialog(pool));
-            }
-            else
-            {
-                // Show wizard to enable HA
-                Program.MainWindow.ShowPerConnectionWizard(pool.Connection, new HAWizard(pool));
-            }
+            var cmd = new HACommand(Program.MainWindow, pool);
+            if (cmd.CanExecute())
+                cmd.Execute();
         }
 
         private void SetNetworkHBInitDelay()

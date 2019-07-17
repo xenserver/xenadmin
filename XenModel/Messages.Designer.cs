@@ -7492,6 +7492,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configure HA.
+        /// </summary>
+        public static string CONFIGURE_HA {
+            get {
+                return ResourceManager.GetString("CONFIGURE_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Configure HA....
         /// </summary>
         public static string CONFIGURE_HA_ELLIPSIS {
@@ -17013,6 +17022,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot configure HA for pool &apos;{0}&apos; because an HA Statefile VDI could not be found in the pool..
+        /// </summary>
+        public static string HA_CONFIGURE_NO_STATEFILE {
+            get {
+                return ResourceManager.GetString("HA_CONFIGURE_NO_STATEFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure HA now....
         /// </summary>
         public static string HA_CONFIGURE_NOW {
@@ -17099,6 +17117,15 @@ namespace XenAdmin {
         public static string HA_CURRENT_CAPACITY {
             get {
                 return ResourceManager.GetString("HA_CURRENT_CAPACITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot disable HA for pool &apos;{0}&apos; because an HA Statefile VDI could not be found in the pool..
+        /// </summary>
+        public static string HA_DISABLE_NO_STATEFILE {
+            get {
+                return ResourceManager.GetString("HA_DISABLE_NO_STATEFILE", resourceCulture);
             }
         }
         
