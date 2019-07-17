@@ -38,21 +38,24 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     public class HostNeedsReboot : Information
     {
         private readonly Host host;
+        private readonly bool livePatchingRestricted;
+        private readonly bool livePatchingDisabled;
 
-        public HostNeedsReboot(Check check, Host host)
+        public HostNeedsReboot(Check check, Host host, bool livePatchingRestricted = false, bool livePatchingDisabled = false)
             : base(check)
         {
             this.host = host;
+            this.livePatchingRestricted = livePatchingRestricted;
+            this.livePatchingDisabled = livePatchingDisabled;
+            this.host = host;
         }
 
-        public override string Title
-        {
-            get { return Description; }
-        }
+        public override string Title => Description;
 
-        public override string Description
-        {
-            get { return String.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED, host.name_label); }
-        }
+        public override string Description => livePatchingRestricted
+            ? string.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_RESTRICTED, host.name_label)
+            : livePatchingDisabled 
+                ? string.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_DISABLED, host.name_label) 
+                : string.Format(Messages.UPDATES_WIZARD_REBOOT_NEEDED, host.name_label);
     }
 }
