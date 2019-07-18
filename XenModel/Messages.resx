@@ -10014,6 +10014,9 @@ File not found</value>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing [XenServer] on '{0}'...</value>
   </data>
+  <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION" xml:space="preserve">
+    <value>Installing [XenServer] {0} on '{1}'...</value>
+  </data>
   <data name="PLAN_ACTION_STATUS_RECONNECTING_STORAGE" xml:space="preserve">
     <value>Reconnecting storage...</value>
   </data>

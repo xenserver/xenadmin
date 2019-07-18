@@ -74,7 +74,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             });
         }
 
-        protected void Upgrade(ref Session session)
+        protected void Upgrade(ref Session session, string upgradeVersion = null)
         {
             try
             {
@@ -91,7 +91,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 rebooting = true;
 
                 log.DebugFormat("Upgrading host {0}", hostObj.Name());
-                AddProgressStep(string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER, hostObj.Name()));
+                AddProgressStep(Version.TryParse(upgradeVersion, out var version)
+                    ? string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION, version, hostObj.Name())
+                    : string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER, hostObj.Name()));
 
                 log.DebugFormat("Waiting for host {0} to reboot", hostObj.Name());
                 WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
