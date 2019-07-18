@@ -1195,7 +1195,7 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="TitleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="LicenseStatusTitleLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="toolTipContainer1" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="TitleBackPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
+    <value>0, 0</value>
   </data>
   <data name="TitleBackPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>759, 24</value>
