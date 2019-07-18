@@ -28747,6 +28747,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installing [XenServer] {0} on &apos;{1}&apos;....
+        /// </summary>
+        public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reconnecting storage....
         /// </summary>
         public static string PLAN_ACTION_STATUS_RECONNECTING_STORAGE {
