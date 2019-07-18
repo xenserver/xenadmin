@@ -2004,10 +2004,10 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>ライセンス詳細</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>スナップショット スケジュールの割り当て(&amp;O)</value>
+    <value>スナップショット スケジュールの割り当て(&amp;L)</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>スナップショット スケジュールの割り当て(&amp;O)</value>
+    <value>スナップショット スケジュールの割り当て(&amp;L)</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>スナップショット スケジュールへの VM の割り当て...</value>

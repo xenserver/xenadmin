@@ -2000,10 +2000,10 @@
     <value>许可证详细信息</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
-    <value>分配至快照计划(&amp;O)</value>
+    <value>分配给快照计划(&amp;L)</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
-    <value>分配至快照计划(&amp;O)</value>
+    <value>分配给快照计划(&amp;L)</value>
   </data>
   <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
     <value>将 VM 分配至快照计划...</value>
