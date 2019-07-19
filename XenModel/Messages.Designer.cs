@@ -20317,15 +20317,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Keep waiting.
-        /// </summary>
-        public static string KEEP_WAITING_BUTTON_LABEL {
-            get {
-                return ResourceManager.GetString("KEEP_WAITING_BUTTON_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Attempting to connect to {0}....
         /// </summary>
         public static string LABEL_ATTEMPT {
@@ -31271,15 +31262,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Still waiting for the upgrade to complete.
-        ///
-        ///Please check the server console for possible errors.
-        ///    
-        ///Click Keep Waiting if the upgrade is still running or Cancel if an error occurred..
+        ///   Looks up a localized string similar to Still waiting for the installation of [XenServer] on &apos;{0}&apos; to complete. Please check the server console for possible errors. Keep waiting if the installation is still running....
         /// </summary>
         public static string ROLLING_UPGRADE_TIMEOUT {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_TIMEOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Still waiting for the installation of [XenServer] {0} on &apos;{1}&apos; to complete. Please check the server console for possible errors. Keep waiting if the installation is still running....
+        /// </summary>
+        public static string ROLLING_UPGRADE_TIMEOUT_VERSION {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_TIMEOUT_VERSION", resourceCulture);
             }
         }
         

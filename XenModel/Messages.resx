@@ -7080,9 +7080,6 @@ Size: {3}</value>
   <data name="JOINING_AD" xml:space="preserve">
     <value>Please enter a user name and password with sufficient privileges to add servers to domain '{0}'.</value>
   </data>
-  <data name="KEEP_WAITING_BUTTON_LABEL" xml:space="preserve">
-    <value>&amp;Keep waiting</value>
-  </data>
   <data name="LABEL_ATTEMPT" xml:space="preserve">
     <value>Attempting to connect to {0}...</value>
   </data>
@@ -10877,11 +10874,10 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The rolling pool upgrade process was completed successfully.</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>Still waiting for the upgrade to complete.
-
-Please check the server console for possible errors.
-    
-Click Keep Waiting if the upgrade is still running or Cancel if an error occurred.</value>
+    <value>Still waiting for the installation of [XenServer] on '{0}' to complete. Please check the server console for possible errors. Keep waiting if the installation is still running...</value>
+  </data>
+  <data name="ROLLING_UPGRADE_TIMEOUT_VERSION" xml:space="preserve">
+    <value>Still waiting for the installation of [XenServer] {0} on '{1}' to complete. Please check the server console for possible errors. Keep waiting if the installation is still running...</value>
   </data>
   <data name="ROLLING_UPGRADE_TITLE_MODE" xml:space="preserve">
     <value>Upgrade Mode</value>
