@@ -147,8 +147,7 @@ namespace XenAdmin.Commands
             }
             catch (Exception e)
             {
-                log.ErrorFormat("There was an error calling assert_can_boot_here on host {0}", host.Name());
-                log.Error(e, e);
+                log.ErrorFormat("There was an error calling assert_can_boot_here on host {0}: {1}", host.Name(), e.Message);
                 return Messages.HOST_MENU_UNKNOWN_ERROR;
             }
 

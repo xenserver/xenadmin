@@ -62,16 +62,13 @@ namespace XenAdmin.Diagnostics.Checks
                 if (result.ToLower() == "true")
                     return null;
             }
-            catch (Failure failure)
+            catch (Exception exception)
             {
-                if (failure.ErrorDescription.Count == 4)
+                var failure = exception as Failure;
+                if (failure?.ErrorDescription.Count == 4)
                     return new HostPrepareToUpgradeProblem(this, Host, failure.ErrorDescription[3]);
 
-                log.ErrorFormat("Error testing upgrade hotfix: {0}", failure);
-            }
-            catch (Exception e)
-            {
-                log.ErrorFormat("Error testing upgrade hotfix: {0}", e);
+                log.ErrorFormat("Error testing upgrade hotfix: {0}", exception);
             }
 
             return new HostPrepareToUpgradeProblem(this, Host);

@@ -176,7 +176,7 @@ namespace XenAdmin.TabPages
                     }
                 }
             }
-            catch (Failure)
+            catch (Exception)
             {
                 ShowInvalidInfo();
             }

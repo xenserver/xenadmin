@@ -187,6 +187,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 
                         vmIsMigratable = false;
                     }
+                    catch (Exception e)
+                    {
+                        log.ErrorFormat("There was an error while asserting if the VM {0} can be migrated to {1}: {2}", vm.Name(), itemToFilterOn, e.Message);
+                        disableReason = Messages.HOST_MENU_UNKNOWN_ERROR;
+                        vmIsMigratable = false;
+                    }
                 }
 
                 // if at least one VM is not migratable to the target pool, then there is no point checking the remaining VMs
