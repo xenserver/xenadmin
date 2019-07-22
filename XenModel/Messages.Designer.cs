@@ -8692,7 +8692,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot connect to {0} because of license restriction.
+        ///   Looks up a localized string similar to Cannot connect to {0} due to license restrictions on the server.
         /// </summary>
         public static string CONNECTION_RESTRICTED_NOTICE_TITLE {
             get {
@@ -35257,7 +35257,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos; due to license restrictions..
+        ///   Looks up a localized string similar to {0}: Cannot migrate VM &apos;{1}&apos; due to license restrictions on the server..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON {
             get {

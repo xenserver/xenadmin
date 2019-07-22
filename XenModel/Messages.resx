@@ -3143,7 +3143,7 @@ Would you like to carry out the operation at this time?</value>
 You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
-    <value>Cannot connect to {0} because of license restriction</value>
+    <value>Cannot connect to {0} due to license restrictions on the server</value>
     <comment>Title of notice shown when connection to a host is restricted by license</comment>
   </data>
   <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
@@ -12169,7 +12169,7 @@ Verify that the file is a valid {1} export.</value>
     <value>{0}: Cannot migrate VM '{1}'</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON" xml:space="preserve">
-    <value>{0}: Cannot migrate VM '{1}' due to license restrictions.</value>
+    <value>{0}: Cannot migrate VM '{1}' due to license restrictions on the server.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
     <value>{0}: Cannot migrate VM '{1}', because it has a virtual GPU attached and there is no suitable GPU available on other servers.</value>
