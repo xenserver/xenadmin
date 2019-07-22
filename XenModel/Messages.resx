@@ -12330,7 +12330,7 @@ Please check your settings and try again.</value>
     <value>{0}: This server needs to be rebooted after the update is applied, because live patching is disabled.</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_RESTRICTED" xml:space="preserve">
-    <value>{0}: This server needs to be rebooted after the update is applied, because live patching is  restricted with this server's license.</value>
+    <value>{0}: This server needs to be rebooted after the update is applied, because it is not licensed for live patching.</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>Deleting update installation file {0} from {1}... </value>

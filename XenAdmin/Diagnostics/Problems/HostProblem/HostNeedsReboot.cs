@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
@@ -47,7 +46,6 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             this.host = host;
             this.livePatchingRestricted = livePatchingRestricted;
             this.livePatchingDisabled = livePatchingDisabled;
-            this.host = host;
         }
 
         public override string Title => Description;
