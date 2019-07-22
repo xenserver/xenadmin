@@ -19,7 +19,7 @@ namespace XenOvf {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -583,16 +583,25 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to find files listed in the manifest. Please refer to the log for the list of missing files..
+        ///   Looks up a localized string similar to The appliance contains a file that is not listed in the manifest. Please see logs for details..
         /// </summary>
-        public static string SECURITY_FILE_MISSING {
+        public static string SECURITY_FILE_MISSING_FROM_MANIFEST {
             get {
-                return ResourceManager.GetString("SECURITY_FILE_MISSING", resourceCulture);
+                return ResourceManager.GetString("SECURITY_FILE_MISSING_FROM_MANIFEST", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Security method {0} is not supported..
+        ///   Looks up a localized string similar to One or more of the files listed in the manifest are missing from the appliance. Please see logs for details..
+        /// </summary>
+        public static string SECURITY_FILE_MISSING_FROM_PACKAGE {
+            get {
+                return ResourceManager.GetString("SECURITY_FILE_MISSING_FROM_PACKAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not a valid hash algorithm..
         /// </summary>
         public static string SECURITY_NOT_SUPPORTED {
             get {

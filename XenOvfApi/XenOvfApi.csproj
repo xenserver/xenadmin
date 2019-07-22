@@ -142,14 +142,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Content.zh-CN.resx" />
     <EmbeddedResource Include="Messages.ja.resx">
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Messages.zh-CN.resx" />
+    <EmbeddedResource Include="Messages.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Schemas\CIM_OperatingSystem.xml">
@@ -182,7 +184,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties StartDate="20090814" AssemblyFileVersion="1" AssemblyVersion="1" Reset="1" />
+      <UserProperties Reset="1" AssemblyVersion="1" AssemblyFileVersion="1" StartDate="20090814" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
