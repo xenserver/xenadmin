@@ -291,11 +291,14 @@
   <data name="SECURITY_FAILURE" xml:space="preserve">
     <value>Security Failure</value>
   </data>
-  <data name="SECURITY_FILE_MISSING" xml:space="preserve">
-    <value>Failed to find files listed in the manifest. Please refer to the log for the list of missing files.</value>
+  <data name="SECURITY_FILE_MISSING_FROM_MANIFEST" xml:space="preserve">
+    <value>The appliance contains a file that is not listed in the manifest. Please see logs for details.</value>
+  </data>
+  <data name="SECURITY_FILE_MISSING_FROM_PACKAGE" xml:space="preserve">
+    <value>One or more of the files listed in the manifest are missing from the appliance. Please see logs for details.</value>
   </data>
   <data name="SECURITY_NOT_SUPPORTED" xml:space="preserve">
-    <value>Security method {0} is not supported.</value>
+    <value>{0} is not a valid hash algorithm.</value>
   </data>
   <data name="SECURITY_SECTION_INVALID" xml:space="preserve">
     <value>Security section is invalid.</value>

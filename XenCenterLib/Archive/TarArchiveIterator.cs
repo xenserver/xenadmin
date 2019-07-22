@@ -126,8 +126,12 @@ namespace XenCenterLib.Archive
                         tarStream.Dispose();
                     disposed = true;
                 }
-                
             }
+        }
+
+        public override bool VerifyCurrentFileAgainstDigest(string algorithmName, byte[] digest)
+        {
+            return StreamUtilities.VerifyAgainstDigest(tarStream, CurrentFileSize(), algorithmName, digest);
         }
     }
 }

@@ -163,9 +163,10 @@ namespace XenAdmin.Wizards.ImportWizard
             m_ctrlError.HideError();
 
 			try
-			{
-				X509Certificate2UI.DisplayCertificate(SelectedOvfPackage.Certificate);
-			}
+            {
+                using (var certificate = new X509Certificate2(SelectedOvfPackage.RawCertificate))
+                    X509Certificate2UI.DisplayCertificate(certificate);
+            }
 			catch (CryptographicException)
 			{
 				m_ctrlError.ShowError(Messages.IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE);
