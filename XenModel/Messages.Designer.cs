@@ -35693,6 +35693,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: This server needs to be rebooted after the update is applied, because live patching is disabled..
+        /// </summary>
+        public static string UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_DISABLED {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This server needs to be rebooted after the update is applied, because it is not licensed for live patching..
+        /// </summary>
+        public static string UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_RESTRICTED {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_RESTRICTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rebooted.
         /// </summary>
         public static string UPDATES_WIZARD_REBOOTED {

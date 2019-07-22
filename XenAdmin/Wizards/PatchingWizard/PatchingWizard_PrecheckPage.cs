@@ -438,7 +438,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 : new List<XenServerPatch>();
 
                             rebootChecks.Add(new HostNeedsRebootCheck(host, restartHostPatches));
-                            if (restartHostPatches.Any(p => !p.ContainsLivepatch))
+
+                            if (restartHostPatches.Count > 0 && (restartHostPatches.Any(p => !p.ContainsLivepatch) ||
+                                                                 Helpers.FeatureForbidden(host.Connection, Host.RestrictLivePatching) ||
+                                                                 Helpers.GetPoolOfOne(host.Connection)?.live_patching_disabled == true))
                                 evacuateChecks.Add(new AssertCanEvacuateCheck(host));
 
                             foreach (var p in us[host])
