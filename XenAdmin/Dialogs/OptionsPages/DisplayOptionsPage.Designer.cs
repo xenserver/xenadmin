@@ -32,7 +32,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.GraphTypeGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label5 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.GraphAreasRadioButton = new System.Windows.Forms.RadioButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.GraphLinesRadioButton = new System.Windows.Forms.RadioButton();
@@ -52,8 +52,8 @@ namespace XenAdmin.Dialogs.OptionsPages
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.GraphTypeGroupBox, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.TabGroupBox, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.GraphTypeGroupBox, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.TabGroupBox, 0, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // GraphTypeGroupBox
@@ -157,7 +157,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RadioButton GraphAreasRadioButton;
         private System.Windows.Forms.RadioButton GraphLinesRadioButton;
-        private System.Windows.Forms.Label label5;
+        private XenAdmin.Controls.Common.AutoHeightLabel label5;
         private Controls.DecentGroupBox TabGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox2;
