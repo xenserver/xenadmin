@@ -628,7 +628,7 @@
     <value>值“{1}”对于字段“{0}”无效。</value>
   </data>
   <data name="IS_TUNNEL_ACCESS_PIF" xml:space="preserve">
-    <value>您尝试在隧道访问 PIF 之上创建 VLAN 或隧道 - 请改用基础传输 PIF。</value>
+    <value>无法在隧道访问 PIF 之上创建 VLAN 或隧道 - 请改为使用基础传输 PIF。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
     <value>加入池的服务器不能已经是另一个池的主服务器。</value>
@@ -790,7 +790,7 @@
     <value>加入时无法访问任何其他群集主机</value>
   </data>
   <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
-    <value>主机没有具有兼容群集堆栈的 Cluster_host。</value>
+    <value>未在此主机或池上启用群集。</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>没有可用于完成指定操作的服务器。</value>
@@ -1959,7 +1959,7 @@
     <value>VGPU 与目标中的任何 PGPU 都不兼容。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
-    <value>您尝试创建与 VM 上的现有类型不兼容的 VGPU。</value>
+    <value>无法创建与 VM 上的现有类型不兼容的虚拟 GPU。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>VM 无法启动，因为所有 GPU 已全部使用或者正在运行其他类型的虚拟 GPU</value>

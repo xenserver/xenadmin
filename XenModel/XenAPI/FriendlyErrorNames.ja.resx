@@ -628,7 +628,7 @@
     <value>値 '{1}' はフィールド '{0}' に対して無効です。</value>
   </data>
   <data name="IS_TUNNEL_ACCESS_PIF" xml:space="preserve">
-    <value>トンネル アクセス PIF 上に VLAN またはトンネルを作成しようとしました。代わりにトランスポート PIF を使用してください。</value>
+    <value>トンネル アクセス PIF 上に VLAN またはトンネルを作成できません。代わりにトランスポート PIF を使用してください。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
     <value>ほかのプールのマスターとして動作するサーバーを別のプールに追加することはできません。</value>
@@ -790,7 +790,7 @@
     <value>参加時にアクセスできる他のクラスター ホストがありません</value>
   </data>
   <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
-    <value>ホストに、互換性のあるクラスター スタックを持つ Cluster_host がありません。</value>
+    <value>クラスタリングがこのホストまたはプールで有効になっていません。</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>指定された処理を完了するためのサーバーがありません。</value>
@@ -1959,7 +1959,7 @@
     <value>この仮想 GPU は対象の物理 GPU と互換性がありません。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
-    <value>VM 上の既存のタイプと互換性のない 仮想 GPU を作成しようとしました。</value>
+    <value>仮想 GPU が VM 上の既存の種類と互換性がない場合、作成できません。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>すべての GPU が使用中か、ほかの種類の仮想 GPU を実行しているため、VM を起動できません。</value>
