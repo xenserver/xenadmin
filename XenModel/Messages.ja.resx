@@ -3147,7 +3147,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
 同時に複数の [Citrix XenServer] Express Edition サーバーに接続することはできません。ライセンスのアップグレードについては、下のリンクを参照してください。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
-    <value>ライセンスによる制限のため、{0} に接続できません</value>
+    <value>サーバーのライセンス条件により、{0} に接続できません。</value>
     <comment>Title of notice shown when connection to a host is restricted by license</comment>
   </data>
   <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
@@ -7085,9 +7085,6 @@ SCSI ID: {2}
   <data name="JOINING_AD" xml:space="preserve">
     <value>サーバーをドメイン '{0}' に追加するためのユーザー名およびパスワードを入力してください。</value>
   </data>
-  <data name="KEEP_WAITING_BUTTON_LABEL" xml:space="preserve">
-    <value>このまま待機(&amp;K)</value>
-  </data>
   <data name="LABEL_ATTEMPT" xml:space="preserve">
     <value>{0} への接続を試行しています...</value>
   </data>
@@ -7359,9 +7356,6 @@ Standard 機能のみ有効です</value>
   </data>
   <data name="LOCAL_STORAGE_CANNOT_BE_SEEN" xml:space="preserve">
     <value>このサーバーからアクセスできない、{0} のローカル ストレージが選択されています</value>
-  </data>
-  <data name="LOCAL_TO_LOCAL_MOVE" xml:space="preserve">
-    <value>ローカルの SR 間で仮想ディスクを移動することはできません</value>
   </data>
   <data name="LOCATION_LABEL" xml:space="preserve">
     <value>場所:</value>
@@ -10015,6 +10009,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>'{0}' に [XenServer] をインストールしています...</value>
   </data>
+  <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION" xml:space="preserve">
+    <value>'{1}' に [XenServer] {0} をインストールしています...</value>
+  </data>
   <data name="PLAN_ACTION_STATUS_RECONNECTING_STORAGE" xml:space="preserve">
     <value>ストレージを再接続しています...</value>
   </data>
@@ -10875,11 +10872,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>プールのローリングアップグレード プロセスは正常に完了しました。</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>まだアップグレードの完了を待機中です。
-
-サーバー コンソールでエラーが発生していないかを確認してください。
-    
-アップグレードが進行中であった場合は [このまま待機] を、エラーが発生していた場合は [キャンセル] を選択してください。</value>
+    <value>まだ '{0}' への [XenServer] のインストールの完了を待機中です。サーバー コンソールでエラーが発生していないかを確認してください。インストールが進行中であった場合は、このまま待機してください...</value>
+  </data>
+  <data name="ROLLING_UPGRADE_TIMEOUT_VERSION" xml:space="preserve">
+    <value>まだ '{1}' への [XenServer] {0} のインストールの完了を待機中です。サーバー コンソールでエラーが発生していないかを確認してください。インストールが進行中であった場合は、このまま待機してください...</value>
   </data>
   <data name="ROLLING_UPGRADE_TITLE_MODE" xml:space="preserve">
     <value>アップグレード モード</value>
@@ -12171,7 +12167,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: VM '{1}' を移行できません</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON" xml:space="preserve">
-    <value>{0}: ライセンスによる制限のため仮想マシン '{1}' を移行できません。</value>
+    <value>{0}: サーバーのライセンス条件により、仮想マシン '{1}' を移行できません。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
     <value>{0}: VM '{1}' は仮想 GPU を使用し他のサーバーには適切な GPU がないため、VM '{0}' を移行できません。</value>
@@ -12326,6 +12322,12 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
     <value>{0}: アップデートが適用された後、このサーバーを再起動する必要があります。</value>
+  </data>
+  <data name="UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_DISABLED" xml:space="preserve">
+    <value>{0}: ライブ パッチが無効になっているため、アップデートの適用後このサーバーを再起動する必要があります。</value>
+  </data>
+  <data name="UPDATES_WIZARD_REBOOT_NEEDED_LIVEPATCH_RESTRICTED" xml:space="preserve">
+    <value>{0}: ライブ パッチのライセンスがないため、アップデートの適用後このサーバーを再起動する必要があります。</value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATE" xml:space="preserve">
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>
