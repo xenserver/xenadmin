@@ -21594,7 +21594,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to De&amp;lete....
+        ///   Looks up a localized string similar to &amp;Delete....
         /// </summary>
         public static string MAINWINDOW_DELETE_OBJECTS {
             get {
@@ -21635,15 +21635,6 @@ namespace XenAdmin {
         public static string MAINWINDOW_DELETE_TEMPLATE {
             get {
                 return ResourceManager.GetString("MAINWINDOW_DELETE_TEMPLATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Delete VM....
-        /// </summary>
-        public static string MAINWINDOW_DELETE_VM {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_DELETE_VM", resourceCulture);
             }
         }
         

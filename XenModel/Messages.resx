@@ -7519,7 +7519,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Ctrl+Y</value>
   </data>
   <data name="MAINWINDOW_DELETE_OBJECTS" xml:space="preserve">
-    <value>De&amp;lete...</value>
+    <value>&amp;Delete...</value>
   </data>
   <data name="MAINWINDOW_DELETE_POOL" xml:space="preserve">
     <value>Mak&amp;e into standalone server</value>
@@ -7532,9 +7532,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_DELETE_TEMPLATE" xml:space="preserve">
     <value>&amp;Delete Template...</value>
-  </data>
-  <data name="MAINWINDOW_DELETE_VM" xml:space="preserve">
-    <value>&amp;Delete VM...</value>
   </data>
   <data name="MAINWINDOW_DESTROY_SR" xml:space="preserve">
     <value>Destr&amp;oy...</value>
