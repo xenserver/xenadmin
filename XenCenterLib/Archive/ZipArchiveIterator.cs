@@ -49,8 +49,9 @@ namespace XenCenterLib.Archive
         public event Action<long, long> CurrentFileExtractProgressChanged;
         public event Action CurrentFileExtractCompleted;
 
-        public DotNetZipZipIterator()
+        public DotNetZipZipIterator(Stream inputStream)
         {
+            Initialise(inputStream);
             disposed = false;
         }
 
@@ -71,11 +72,6 @@ namespace XenCenterLib.Archive
                     }
                     break;
             }
-        }
-
-        public DotNetZipZipIterator(Stream inputStream) : this()
-        {
-            Initialise(inputStream);
         }
 
         private void Initialise(Stream zipStream)
