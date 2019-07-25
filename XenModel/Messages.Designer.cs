@@ -18933,7 +18933,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify the manifest matches the appliance files. This option will only activate if the appliance has a manifest file..
+        ///   Looks up a localized string similar to The appliance has a manifest file. You can choose to verify the manifest matches the appliance files..
         /// </summary>
         public static string IMPORT_SECURITY_PAGE_VERIFY_CONTENT_DESCRIPTION {
             get {
@@ -18951,7 +18951,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify the digital signature of the appliance is valid. This option will activate only if the appliance has been digitally signed..
+        ///   Looks up a localized string similar to The appliance has been digitally signed. You can choose to verify the digital signature of the appliance is valid..
         /// </summary>
         public static string IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION {
             get {
