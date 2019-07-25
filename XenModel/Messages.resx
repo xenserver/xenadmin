@@ -6651,13 +6651,13 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>&amp;Verify manifest content</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_CONTENT_DESCRIPTION" xml:space="preserve">
-    <value>Verify the manifest matches the appliance files. This option will only activate if the appliance has a manifest file.</value>
+    <value>The appliance has a manifest file. You can choose to verify the manifest matches the appliance files.</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER" xml:space="preserve">
     <value>&amp;Verify digital signature</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION" xml:space="preserve">
-    <value>Verify the digital signature of the appliance is valid. This option will activate only if the appliance has been digitally signed.</value>
+    <value>The appliance has been digitally signed. You can choose to verify the digital signature of the appliance is valid.</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA" xml:space="preserve">
     <value>OVA file is corrupt or contains invalid data.</value>
