@@ -183,17 +183,17 @@ namespace XenAdmin.Actions
         private void ExtractFile()
         {
             ArchiveIterator iterator = null;
+            DotNetZipZipIterator zipIterator =  null;
+
             try
             {
                 using (Stream stream = new FileStream(outputFileName, FileMode.Open, FileAccess.Read))
                 {
                     iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Zip, stream);
-                    DotNetZipZipIterator zipIterator = iterator as DotNetZipZipIterator;
+                    zipIterator = iterator as DotNetZipZipIterator;
+
                     if (zipIterator != null)
-                    {
-                        zipIterator.CurrentFileExtractProgressChanged +=
-                            archiveIterator_CurrentFileExtractProgressChanged;
-                    }
+                        zipIterator.CurrentFileExtractProgressChanged += archiveIterator_CurrentFileExtractProgressChanged;
 
                     while (iterator.HasNext())
                     {
@@ -215,15 +215,9 @@ namespace XenAdmin.Actions
                                 PatchPath = path;
 
                                 log.InfoFormat("Update file extracted to '{0}'", path);
-
                                 break;
                             }
                         }
-                    }
-
-                    if (zipIterator != null)
-                    {
-                        zipIterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
                     }
                 }
             }
@@ -234,6 +228,9 @@ namespace XenAdmin.Actions
             }
             finally
             {
+                if (zipIterator != null)
+                    zipIterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
+
                 if (iterator != null)
                     iterator.Dispose();
 
