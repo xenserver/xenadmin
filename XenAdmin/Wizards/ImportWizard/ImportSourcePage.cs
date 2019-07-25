@@ -298,18 +298,18 @@ namespace XenAdmin.Wizards.ImportWizard
 		private string GetXmlStringFromTarXVA()
 		{
             using (Stream stream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
-			{
-			    ArchiveIterator iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, stream);
-                if( iterator.HasNext() )
-                {
-                    Stream ofs = new MemoryStream();
-                    iterator.ExtractCurrentFile(ofs);
-                    return new StreamReader(ofs).ReadToEnd();
-                }
+            {
+                using (var iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, stream))
+                    if (iterator.HasNext())
+                    {
+                        Stream ofs = new MemoryStream();
+                        iterator.ExtractCurrentFile(ofs);
+                        return new StreamReader(ofs).ReadToEnd();
+                    }
 
-			    return String.Empty;
-			}
-		}
+                return string.Empty;
+            }
+        }
 
 		private ulong GetTotalSizeFromXmlXva(string xmlString)
 		{
