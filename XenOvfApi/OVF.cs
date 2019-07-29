@@ -5930,21 +5930,16 @@ namespace XenOvf
         {
             return _ovfrm.GetString(key);
         }
-        /// <summary>
-        /// Get the iso file name / path
-        /// </summary>
-        /// <returns>qualified path to Fixup ISO</returns>
+
         public static string GetISOFixupFileName()
         {
-            string isofile = null;
-            string filepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string fullname = Path.Combine(filepath, Properties.Settings.Default.xenLinuxFixUpDisk);
-            if (File.Exists(fullname))
-            {
-                isofile = fullname;
-            }
+            return Path.GetFileName(Properties.Settings.Default.xenLinuxFixUpDisk);
+        }
 
-            return isofile;
+        public static string GetISOFixupPath()
+        {
+            var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return Path.Combine(assemblyDir, Properties.Settings.Default.xenLinuxFixUpDisk);
         }
         /// <summary>
         /// convert to a UInt64 a allocation unit
