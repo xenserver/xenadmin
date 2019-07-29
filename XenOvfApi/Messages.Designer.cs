@@ -214,6 +214,15 @@ namespace XenOvf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network {0}.
+        /// </summary>
+        public static string NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("NETWORK_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to find section with type {0} and id {1}..
         /// </summary>
         public static string OVF_CANNOT_FIND_SECTION {
@@ -268,6 +277,15 @@ namespace XenOvf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created by [XenCenter] Disk Image Import.
+        /// </summary>
+        public static string OVF_CREATED {
+            get {
+                return ResourceManager.GetString("OVF_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to find deployment configuration section..
         /// </summary>
         public static string OVF_DEPLOYMENT_CFG_SECTION_MISSING {
@@ -295,6 +313,15 @@ namespace XenOvf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Disk.
+        /// </summary>
+        public static string OVF_DISK_CAPTION {
+            get {
+                return ResourceManager.GetString("OVF_DISK_CAPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to find the disk section..
         /// </summary>
         public static string OVF_DISK_SECTION_MISSING {
@@ -318,6 +345,15 @@ namespace XenOvf {
         public static string OVF_INSTALL_SECTION_MISSING {
             get {
                 return ResourceManager.GetString("OVF_INSTALL_SECTION_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Network.
+        /// </summary>
+        public static string OVF_NET_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("OVF_NET_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -786,6 +822,15 @@ namespace XenOvf {
         public static string VERSION_PROMPT {
             get {
                 return ResourceManager.GetString("VERSION_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Machine.
+        /// </summary>
+        public static string VIRTUAL_MACHINE {
+            get {
+                return ResourceManager.GetString("VIRTUAL_MACHINE", resourceCulture);
             }
         }
     }

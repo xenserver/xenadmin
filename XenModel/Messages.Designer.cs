@@ -27265,33 +27265,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created by [XenCenter] Disk Image Import.
-        /// </summary>
-        public static string OVF_CREATED {
-            get {
-                return ResourceManager.GetString("OVF_CREATED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual Disk.
-        /// </summary>
-        public static string OVF_DISK_CAPTION {
-            get {
-                return ResourceManager.GetString("OVF_DISK_CAPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual Network.
-        /// </summary>
-        public static string OVF_NET_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("OVF_NET_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parent folder.
         /// </summary>
         public static string PARENT_FOLDER {

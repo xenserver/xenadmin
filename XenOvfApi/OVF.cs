@@ -1560,6 +1560,42 @@ namespace XenOvf
 
         #region CREATEs
 
+        public static EnvelopeType CreateOvfEnvelope(string vmName, ulong cpuCount, ulong memory,
+            string bootParams, string platformSettings, ulong diskCapacity, bool isWim, ulong additionalSpace,
+            string diskPath, ulong imageLength)
+        {
+            EnvelopeType env = CreateEnvelope(vmName);
+            string systemID = AddVirtualSystem(env, vmName);
+
+            string hdwareSectionId = AddVirtualHardwareSection(env, systemID);
+            string guid = Guid.NewGuid().ToString();
+            AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE, Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
+
+            AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+
+            bootParams = Properties.Settings.Default.xenBootParams + bootParams;
+            AddOtherSystemSettingData(env, systemID, "HVM_boot_params", bootParams, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
+
+            var platformSetting = Properties.Settings.Default.xenPlatformSetting + platformSettings;
+            AddOtherSystemSettingData(env, systemID, "platform", platformSetting, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+
+            SetCPUs(env, systemID, cpuCount);
+            SetMemory(env, systemID, memory, "MB");
+
+            string netId = Guid.NewGuid().ToString();
+            AddNetwork(env, systemID, netId, string.Format(Messages.NETWORK_NAME, 0), Messages.OVF_NET_DESCRIPTION, null);
+
+            string diskId = Guid.NewGuid().ToString();
+            ulong capacity = diskCapacity;
+
+            if (isWim)
+                capacity += additionalSpace;
+
+            AddDisk(env, systemID, diskId, diskPath, true, Messages.OVF_DISK_CAPTION, Messages.OVF_CREATED, imageLength, capacity);
+
+            FinalizeEnvelope(env);
+            return env;
+        }
 
         public EnvelopeType Create(DiskInfo[] vhdExports, string pathToOvf, string ovfName)
         {

@@ -168,6 +168,9 @@
   <data name="INVALID_DATA_IN_OVF" xml:space="preserve">
     <value>Failed to deserialize OVF descriptor.</value>
   </data>
+  <data name="NETWORK_NAME" xml:space="preserve">
+    <value>Network {0}</value>
+  </data>
   <data name="OVF_CANNOT_FIND_SECTION" xml:space="preserve">
     <value>Failed to find section with type {0} and id {1}.</value>
   </data>
@@ -186,6 +189,9 @@
   <data name="OVF_COULD_NOT_OPEN_STREAM" xml:space="preserve">
     <value>Failed to open {0}.</value>
   </data>
+  <data name="OVF_CREATED" xml:space="preserve">
+    <value>Created by [XenCenter] Disk Image Import</value>
+  </data>
   <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
     <value>Failed to find deployment configuration section.</value>
   </data>
@@ -195,6 +201,9 @@
   <data name="OVF_DEVICE_OUT_OF_RANGE" xml:space="preserve">
     <value>Device number {0} is less than zero or greater than 15.</value>
   </data>
+  <data name="OVF_DISK_CAPTION" xml:space="preserve">
+    <value>Virtual Disk</value>
+  </data>
   <data name="OVF_DISK_SECTION_MISSING" xml:space="preserve">
     <value>Failed to find the disk section.</value>
   </data>
@@ -203,6 +212,9 @@
   </data>
   <data name="OVF_INSTALL_SECTION_MISSING" xml:space="preserve">
     <value>Failed to find the install section.</value>
+  </data>
+  <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
+    <value>Virtual Network</value>
   </data>
   <data name="OVF_POST_INSTALL_MISSING" xml:space="preserve">
     <value>Failed to find the post-install section.</value>
@@ -359,5 +371,8 @@
   </data>
   <data name="VERSION_PROMPT" xml:space="preserve">
     <value>Version:</value>
+  </data>
+  <data name="VIRTUAL_MACHINE" xml:space="preserve">
+    <value>Virtual Machine</value>
   </data>
 </root>
