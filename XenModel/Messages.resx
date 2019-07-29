@@ -9493,15 +9493,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="OVERVIEW_UNITS" xml:space="preserve">
     <value>(avg / max KBs)</value>
   </data>
-  <data name="OVF_CREATED" xml:space="preserve">
-    <value>Created by [XenCenter] Disk Image Import</value>
-  </data>
-  <data name="OVF_DISK_CAPTION" xml:space="preserve">
-    <value>Virtual Disk</value>
-  </data>
-  <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
-    <value>Virtual Network</value>
-  </data>
   <data name="PARENT_FOLDER" xml:space="preserve">
     <value>Parent folder</value>
   </data>

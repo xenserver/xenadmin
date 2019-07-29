@@ -255,8 +255,14 @@ namespace XenAdmin.Wizards.ImportWizard
 			}
 			else if (type == typeof(ImageVMConfigPage))
 			{
-				//then use it to create an ovf for the import
-				m_envelopeFromVhd = InitialiseOvfEnvelope();
+                //then use it to create an ovf for the import
+
+                m_envelopeFromVhd = OVF.CreateOvfEnvelope(m_pageVMconfig.VmName,
+                    m_pageVMconfig.CpuCount, m_pageVMconfig.Memory,
+                    m_pageBootOptions.BootParams, m_pageBootOptions.PlatformSettings,
+                    m_pageImportSource.DiskCapacity, m_pageImportSource.IsWIM, m_pageVMconfig.AdditionalSpace,
+                    m_pageImportSource.FilePath, m_pageImportSource.ImageLength);
+
 				m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
 			    lunPerVdiMappingPage.SelectedOvfEnvelope = m_envelopeFromVhd;
 				m_pageNetwork.SelectedOvfEnvelope = m_envelopeFromVhd;
@@ -692,40 +698,6 @@ namespace XenAdmin.Wizards.ImportWizard
 
             // Last resort is a new GUID.
             return Guid.NewGuid().ToString();
-		}
-
-	    private EnvelopeType InitialiseOvfEnvelope()
-		{
-			EnvelopeType env = OVF.CreateEnvelope(m_pageVMconfig.VmName);
-
-			string systemID = OVF.AddVirtualSystem(env, m_pageVMconfig.VmName);
-			string hdwareSectionId = OVF.AddVirtualHardwareSection(env, systemID);
-			string guid = Guid.NewGuid().ToString();
-			OVF.AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE,
-											Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
-
-			var bootMode = m_pageBootOptions.SelectedBootMode;
-			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", XenOvf.Properties.Settings.Default.xenBootOptions, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
-			var bootParams = XenOvf.Properties.Settings.Default.xenBootParams + (bootMode == BootMode.UEFI_BOOT || bootMode == BootMode.UEFI_SECURE_BOOT ? "firmware=uefi;" : string.Empty);
-			OVF.AddOtherSystemSettingData(env, systemID, "HVM_boot_params", bootParams, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
-			var platformSetting = XenOvf.Properties.Settings.Default.xenPlatformSetting + (bootMode == BootMode.UEFI_SECURE_BOOT ? "secureboot=true;" : string.Empty);
-			OVF.AddOtherSystemSettingData(env, systemID, "platform", platformSetting, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
-
-			OVF.SetCPUs(env, systemID, m_pageVMconfig.CpuCount);
-			OVF.SetMemory(env, systemID, m_pageVMconfig.Memory, "MB");
-
-			string netId = Guid.NewGuid().ToString();
-			OVF.AddNetwork(env, systemID, netId, string.Format(Messages.NETWORK_NAME, 0), Messages.OVF_NET_DESCRIPTION, null);
-
-			string diskId = Guid.NewGuid().ToString();
-			ulong capacity = m_pageImportSource.DiskCapacity;
-			if (m_pageImportSource.IsWIM)
-				capacity += m_pageVMconfig.AdditionalSpace;
-			OVF.AddDisk(env, systemID, diskId, m_pageImportSource.FilePath, true, Messages.OVF_DISK_CAPTION,
-						Messages.OVF_CREATED, m_pageImportSource.ImageLength, capacity);
-
-			OVF.FinalizeEnvelope(env);
-			return env;
 		}
 
 		#endregion
