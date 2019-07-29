@@ -38,55 +38,44 @@ using XenOvf.Utilities;
 
 namespace XenOvf
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public partial class OVF
     {
         /// <summary>
-        /// ValidationFlags are binary flags for the individual selection of what to validate
-        /// None = No validation
-        /// Version = Check the OVF Version (if present)
-        /// Files = Ensure the files listed in References.Files are present and accessible.
-        /// Cpu = Ensure a CPU RASD is present
-        /// Memory = Ensure a Memory RASD is present
-        /// Networks = Validate Network RASD is connected to a NETWORK
-        /// Capability = Ensure import can handle required RASDs and Sections.
-        /// Schema = Validate the OVF XML against the Schema.
+        /// Binary flags describing things to validate
         /// </summary>
         [Flags]
         public enum ValidationFlags
         {
             /// <summary>
-            /// 
+            /// No validation
             /// </summary>
             None = 0,
             /// <summary>
-            /// 
+            /// Check the OVF Version (if present)
             /// </summary>
             Version = 1,
             /// <summary>
-            /// 
+            /// Ensure the files listed in References.Files are present and accessible
             /// </summary>
             Files = 2,
             /// <summary>
-            /// 
+            /// Ensure a CPU RASD is present
             /// </summary>
             Cpu = 4,
             /// <summary>
-            /// 
+            /// Ensure a Memory RASD is present
             /// </summary>
             Memory = 8,
             /// <summary>
-            /// 
+            /// Validate Network RASD is connected to a NETWORK
             /// </summary>
             Networks = 16,
             /// <summary>
-            /// 
+            /// Ensure import can handle required RASDs and Sections
             /// </summary>
             Capability = 32,
             /// <summary>
-            /// 
+            /// Validate the OVF XML against the Schema
             /// </summary>
             Schema = 64
         };
