@@ -775,7 +775,6 @@ namespace XenAdmin
             // 
             // ToolBarContextMenu
             // 
-            this.ToolBarContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.ToolBarContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowToolbarMenuItem});
             this.ToolBarContextMenu.Name = "ToolBarContextMenu";
@@ -783,9 +782,6 @@ namespace XenAdmin
             // 
             // ShowToolbarMenuItem
             // 
-            this.ShowToolbarMenuItem.Checked = true;
-            this.ShowToolbarMenuItem.CheckOnClick = true;
-            this.ShowToolbarMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ShowToolbarMenuItem.Name = "ShowToolbarMenuItem";
             resources.ApplyResources(this.ShowToolbarMenuItem, "ShowToolbarMenuItem");
             this.ShowToolbarMenuItem.Click += new System.EventHandler(this.ShowToolbarMenuItem_Click);
