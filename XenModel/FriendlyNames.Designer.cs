@@ -313,6 +313,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contains logs and details useful for diagnosing problems with NVIDIA&apos;s graphics drivers..
+        /// </summary>
+        public static string Description_host_system_status_NVIDIA_logs {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-NVIDIA-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collects data specific to your OEM provider..
         /// </summary>
         public static string Description_host_system_status_oem {
@@ -1398,6 +1407,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_network_status {
             get {
                 return ResourceManager.GetString("Label-host.system_status-network-status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NVIDIA Graphics Driver logs.
+        /// </summary>
+        public static string Label_host_system_status_NVIDIA_logs {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-NVIDIA-logs", resourceCulture);
             }
         }
         
