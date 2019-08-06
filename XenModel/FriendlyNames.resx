@@ -210,6 +210,9 @@
   <data name="Description-host.system_status-network-status" xml:space="preserve">
     <value>Current status of the network interfaces, routing tables and firewall</value>
   </data>
+  <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
+    <value>Contains logs and details useful for diagnosing problems with NVIDIA's graphics drivers.</value>
+  </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
     <value>Collects data specific to your OEM provider.</value>
   </data>
@@ -656,6 +659,9 @@
   </data>
   <data name="Label-host.system_status-network-status" xml:space="preserve">
     <value>Network status</value>
+  </data>
+  <data name="Label-host.system_status-NVIDIA-logs" xml:space="preserve">
+    <value>NVIDIA Graphics Driver logs</value>
   </data>
   <data name="Label-host.system_status-oem" xml:space="preserve">
     <value>OEM-specific logs</value>
