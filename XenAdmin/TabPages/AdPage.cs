@@ -783,7 +783,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void buttonResolve_Click(object sender, EventArgs e)
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
             Program.AssertOnEventThread();
             if (!buttonAdd.Enabled)
