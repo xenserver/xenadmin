@@ -30415,11 +30415,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Server from &amp;Pool.
+        ///   Looks up a localized string similar to Remove From &amp;Pool.
         /// </summary>
         public static string REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT {
             get {
                 return ResourceManager.GetString("REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re&amp;move Server.
+        /// </summary>
+        public static string REMOVE_SERVER_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("REMOVE_SERVER_MENU_ITEM", resourceCulture);
             }
         }
         
