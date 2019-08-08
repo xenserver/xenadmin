@@ -548,8 +548,12 @@ namespace XenAdmin.Commands
 
                 if (host != Helpers.GetMaster(host.Connection) )
                 {
-                    items.AddSeparator();
-                    items.Add(new RemoveHostFromPoolCommand(mainWindow, selection));
+                    var cmd = new RemoveHostFromPoolCommand(mainWindow, selection);
+                    if (cmd.CanExecute())
+                    {
+                        items.AddSeparator();
+                        items.Add(cmd);
+                    }
                 }
 
                 items.AddPluginItems(PluginContextMenu.server, selection);

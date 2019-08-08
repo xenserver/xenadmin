@@ -10584,8 +10584,11 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVE_SERVERS" xml:space="preserve">
     <value>&amp;Remove Servers...</value>
   </data>
+  <data name="REMOVE_SERVER_MENU_ITEM" xml:space="preserve">
+    <value>Re&amp;move Server</value>
+  </data>
   <data name="REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT" xml:space="preserve">
-    <value>Remove Server from &amp;Pool</value>
+    <value>Remove From &amp;Pool</value>
   </data>
   <data name="REMOVE_SNAPSHOT" xml:space="preserve">
     <value>Remove Snapshot</value>
