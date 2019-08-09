@@ -195,7 +195,7 @@ node("${params.BUILD_ON_NODE}") {
         println "Skipping initial checks on request."
       } else {
 
-        List<String> list = ["check-roaming.sh", "copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "deadcheck/deadcheck.sh", "spellcheck/spellcheck.sh"]
+        List<String> list = ["check-roaming.sh", "copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "spellcheck/spellcheck.sh"]
         for (String item : list) {
           bat """
           cd ${env.WORKSPACE}\\xenadmin.git\\devtools
