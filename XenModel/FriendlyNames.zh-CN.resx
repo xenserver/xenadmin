@@ -210,6 +210,9 @@
   <data name="Description-host.system_status-network-status" xml:space="preserve">
     <value>网络接口、路由表和防火墙的当前状态</value>
   </data>
+  <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
+    <value>包含有助于诊断 NVIDIA 的图形驱动程序问题的日志和详细信息。</value>
+  </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
     <value>收集特定于 OEM 提供商的数据。</value>
   </data>
@@ -656,6 +659,9 @@
   </data>
   <data name="Label-host.system_status-network-status" xml:space="preserve">
     <value>网络状态</value>
+  </data>
+  <data name="Label-host.system_status-NVIDIA-logs" xml:space="preserve">
+    <value>NVIDIA 图形驱动程序日志</value>
   </data>
   <data name="Label-host.system_status-oem" xml:space="preserve">
     <value>OEM 专有日志</value>

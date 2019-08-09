@@ -2710,6 +2710,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="COMPRESSING_FILES" xml:space="preserve">
     <value>アプライアンス ファイルを圧縮しています...</value>
   </data>
+  <data name="CONFIGURE_HA" xml:space="preserve">
+    <value>高可用性の構成</value>
+  </data>
   <data name="CONFIGURE_HA_ELLIPSIS" xml:space="preserve">
     <value>高可用性の構成(&amp;C)...</value>
   </data>
@@ -5981,6 +5984,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="HA_CONFIGURE_NOW" xml:space="preserve">
     <value>高可用性の構成...</value>
   </data>
+  <data name="HA_CONFIGURE_NO_STATEFILE" xml:space="preserve">
+    <value>高可用性ステート ファイル VDI がプール内に見つからないため、プール '{0}' の高可用性を構成できません。</value>
+  </data>
   <data name="HA_CONFIRM_FORCESHUTDOWN_VM" xml:space="preserve">
     <value>現在、この VM は高可用性で保護されています。この VM を強制的にシャットダウンしてもよろしいですか? これにより、この VM に対して実行中のすべてのタスクがキャンセルされるため、データが失われることがあります。</value>
   </data>
@@ -6001,6 +6007,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="HA_CURRENT_CAPACITY" xml:space="preserve">
     <value>現在の許容障害数:</value>
+  </data>
+  <data name="HA_DISABLE_NO_STATEFILE" xml:space="preserve">
+    <value>高可用性ステート ファイル VDI がプール内に見つからないため、プール '{0}' の高可用性を無効にできません。</value>
   </data>
   <data name="HA_DISABLE_QUERY" xml:space="preserve">
     <value>プール '{0}' の高可用性を無効にしてもよろしいですか?</value>
@@ -7515,7 +7524,7 @@ SCSI ID: {2}
     <value>Ctrl+Y</value>
   </data>
   <data name="MAINWINDOW_DELETE_OBJECTS" xml:space="preserve">
-    <value>削除(&amp;L)...</value>
+    <value>削除(&amp;D)...</value>
   </data>
   <data name="MAINWINDOW_DELETE_POOL" xml:space="preserve">
     <value>スタンドアロン サーバーにする(&amp;E)</value>
@@ -7528,9 +7537,6 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_DELETE_TEMPLATE" xml:space="preserve">
     <value>テンプレートの削除(&amp;D)...</value>
-  </data>
-  <data name="MAINWINDOW_DELETE_VM" xml:space="preserve">
-    <value>VM の削除(&amp;D)...</value>
   </data>
   <data name="MAINWINDOW_DESTROY_SR" xml:space="preserve">
     <value>破棄(&amp;O)...</value>
