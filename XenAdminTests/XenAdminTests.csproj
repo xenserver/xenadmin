@@ -68,7 +68,7 @@
     <Compile Include="ArchiveTests\ArchiveWriterTests.cs" />
     <Compile Include="ArchiveTests\ThirdPartyArchiveWriterTests.cs" />
     <Compile Include="ClassVerifiers.cs" />
-    <Compile Include="CodeTests\I18nResourceFilesTests.cs" />
+    <Compile Include="CodeTests\AssemblyTests.cs" />
     <Compile Include="CodeTests\XenModelReferencesTest.cs" />
     <Compile Include="CompressionTests\CompressionFactoryTests.cs" />
     <Compile Include="CompressionTests\CompressionStreamTests.cs" />
