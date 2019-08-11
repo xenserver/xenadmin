@@ -691,6 +691,7 @@ namespace XenAdmin
             public static Image _000_TreeConnected_h32bit_16 = Properties.Resources._000_TreeConnected_h32bit_16;
             public static Image _000_UpgradePool_h32bit_32 = Properties.Resources._000_UpgradePool_h32bit_32;
             public static Image _000_User_h32bit_16 = Properties.Resources._000_User_h32bit_16;
+            public static Image _000_UserAndGroup_h32bit_16 = Properties.Resources._000_UserAndGroup_h32bit_16;
             public static Image _000_UserAndGroup_h32bit_32 = Properties.Resources._000_UserAndGroup_h32bit_32;
             public static Image _000_UserTemplate_h32bit_16 = Properties.Resources._000_UserTemplate_h32bit_16;
             public static Image _000_ViewModeList_h32bit_16 = Properties.Resources._000_ViewModeList_h32bit_16;
