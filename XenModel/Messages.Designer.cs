@@ -7096,7 +7096,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please type the root password for {0}:.
+        ///   Looks up a localized string similar to Please type the root password for &apos;{0}&apos;:.
         /// </summary>
         public static string CHANGEPASS_ROOT_PASS {
             get {
