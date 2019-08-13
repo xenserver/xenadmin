@@ -30,69 +30,47 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenCenterLib;
 
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Dialogs.RestoreSession
 {
     public partial class LoadSessionDialog : XenDialogBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public LoadSessionDialog() : this(false)
-        {
-        }
-
-        public LoadSessionDialog(bool isRetry)
+        public LoadSessionDialog(bool isRetry = false)
         {
             InitializeComponent();
-            Icon = Properties.Resources.AppIcon;
-
             passwordFailure1.Visible = isRetry;
         }
 
+        internal override string HelpName => "LoadSessionDialog";
         public byte[] PasswordHash
         {
             get
             {
-                byte[] result = null;
-                if (this.passBox.Text != null && passBox.Text.Length > 0)
+                if (!string.IsNullOrEmpty(passBox.Text))
                 {
                     try
                     {
-                        result = EncryptionUtils.ComputeHash(passBox.Text);
+                        return EncryptionUtils.ComputeHash(passBox.Text);
                     }
                     catch (Exception exp)
                     {
                         log.Error("Could not hash entered password.", exp);
-                        result = null;
                     }
                 }
 
-                return result;
+                return null;
             }
-        }
-
-        private void LoadSessionDialog_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            Help.HelpManager.Launch("LoadSessionDialog");
-            hlpevent.Handled = true;
-        }
-
-        private void LoadSessionDialog_HelpButtonClicked(object sender, CancelEventArgs e)
-        {
-            Help.HelpManager.Launch("LoadSessionDialog");
-            e.Cancel = true; 
         }
 
         private void passBox_TextChanged(object sender, EventArgs e)
         {
+            passwordFailure1.Visible = false;
             okButton.Enabled = !string.IsNullOrEmpty(passBox.Text);
         }
 

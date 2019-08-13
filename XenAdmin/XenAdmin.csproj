@@ -1455,10 +1455,10 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Help\HelpManager.cs" />
-    <Compile Include="Dialogs\LoadSessionDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\LoadSessionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\LoadSessionDialog.Designer.cs">
+    <Compile Include="Dialogs\RestoreSession\LoadSessionDialog.Designer.cs">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TreeViews\FlickerFreeTreeView.cs">
@@ -2658,7 +2658,7 @@
       <DependentUpon>HelpManager.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoadSessionDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5279,10 +5279,10 @@
     <EmbeddedResource Include="Dialogs\LicenseManager\LicenseManager.zh-CN.resx">
       <DependentUpon>LicenseManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoadSessionDialog.ja.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.ja.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoadSessionDialog.zh-CN.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.zh-CN.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\ManageUpdatesPage.ja.resx">
@@ -5444,6 +5444,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.ja.resx">
       <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.zh-CN.resx">
       <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>

@@ -2540,7 +2540,7 @@ This will cancel compilation of the status report.</value>
     <value>Change Server Password - {0}</value>
   </data>
   <data name="CHANGEPASS_ROOT_PASS" xml:space="preserve">
-    <value>Please type the root password for {0}:</value>
+    <value>Please type the root password for '{0}':</value>
   </data>
   <data name="CHANGE_POLICY_STATUS" xml:space="preserve">
     <value>Change policy '{0}' status</value>
