@@ -129,12 +129,12 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.REMOVING_SERVERS_FROM_POOL, Messages.POOLCREATE_REMOVING, Messages.POOLCREATE_REMOVED, true);
         }
 
-        private static bool CanExecute(Host host)
+        public static bool CanExecute(Host host)
         {
-            if (host != null && host.Connection != null )
+            if (host != null && host.Connection != null)
             {
                 Pool pool = Helpers.GetPool(host.Connection);
-                return pool != null && host.resident_VMs != null && host.resident_VMs.Count < 2 && host.IsLive();
+                return pool != null && host.opaque_ref != pool.master && host.resident_VMs != null && host.resident_VMs.Count < 2 && host.IsLive();
             }
             return false;
         }
