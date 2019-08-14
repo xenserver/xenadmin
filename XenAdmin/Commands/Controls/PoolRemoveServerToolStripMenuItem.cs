@@ -61,17 +61,11 @@ namespace XenAdmin.Commands
         {
             DropDownItems.Clear();
 
-            var selection = Command.GetSelection();
-            var connection = selection.GetConnectionOfAllItems();
-            var pool = Helpers.GetPool(connection);
-            if (pool == null)
-                return;
-
-            var hosts = connection.Cache.Hosts;
+            var hosts = Command.GetSelection().GetConnectionOfAllItems().Cache.Hosts;
 
             foreach (var host in hosts)
             {
-                if (host.resident_VMs == null || host.resident_VMs.Count >= 2 || !host.IsLive())
+                if (!RemoveHostFromPoolCommand.CanExecute(host))
                     continue;
 
                 var cmd = new RemoveHostFromPoolCommand(Command.MainWindowCommandInterface, host);
@@ -99,7 +93,7 @@ namespace XenAdmin.Commands
                 if (pool == null)
                     return false;
 
-                return connection.Cache.Hosts.Any(host => host.resident_VMs != null && host.resident_VMs.Count < 2 && host.IsLive());
+                return connection.Cache.Hosts.Any(RemoveHostFromPoolCommand.CanExecute);
             }
         }
     }
