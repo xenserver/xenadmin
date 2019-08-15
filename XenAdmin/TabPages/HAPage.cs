@@ -98,8 +98,6 @@ namespace XenAdmin.TabPages
             Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Host_CollectionChanged);
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             base.Text = Messages.HIGH_AVAILABILITY;
-
-            pictureBoxWarningTriangle.Image = SystemIcons.Warning.ToBitmap();
             restartHBInitializationTimer = true;
         }
 
