@@ -24053,15 +24053,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DVD Drive Created.
-        /// </summary>
-        public static string NEW_DVD_DRIVE_CREATED {
-            get {
-                return ResourceManager.GetString("NEW_DVD_DRIVE_CREATED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Creating new DVD drive.
         /// </summary>
         public static string NEW_DVD_DRIVE_CREATING {
@@ -24495,15 +24486,6 @@ namespace XenAdmin {
         public static string NEWDISKWIZARD_MESSAGE {
             get {
                 return ResourceManager.GetString("NEWDISKWIZARD_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disk Created.
-        /// </summary>
-        public static string NEWDISKWIZARD_MESSAGE_TITLE {
-            get {
-                return ResourceManager.GetString("NEWDISKWIZARD_MESSAGE_TITLE", resourceCulture);
             }
         }
         

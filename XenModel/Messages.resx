@@ -8369,9 +8369,6 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWDISKWIZARD_MESSAGE" xml:space="preserve">
     <value>You need to shut down and then restart the VM before it can access the new disk.</value>
   </data>
-  <data name="NEWDISKWIZARD_MESSAGE_TITLE" xml:space="preserve">
-    <value>Disk Created</value>
-  </data>
   <data name="NEWER_GUI_AVAILABLE" xml:space="preserve">
     <value>There is a newer version of [XenCenter] available. Please contact your support representative.</value>
   </data>
@@ -9017,9 +9014,6 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
     <value>At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
-  </data>
-  <data name="NEW_DVD_DRIVE_CREATED" xml:space="preserve">
-    <value>DVD Drive Created</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATE_TITLE" xml:space="preserve">
     <value>Creating new DVD drive on VM {0}</value>
