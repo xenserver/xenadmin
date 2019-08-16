@@ -258,10 +258,27 @@ namespace XenAdmin.Controls
         {
             if (VM != null)
             {
-                CreateCdDriveAction createDriveAction = new CreateCdDriveAction(VM, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
+                var createDriveAction = new CreateCdDriveAction(VM);
+                createDriveAction.ShowUserInstruction += CreateDriveAction_ShowUserInstruction;
+
                 using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
                     dlg.ShowDialog(this);
             }
+        }
+
+        private void CreateDriveAction_ShowUserInstruction(string message)
+        {
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (!Program.RunInAutomatedTestMode)
+                {
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Information, message)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
+                }
+            });
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

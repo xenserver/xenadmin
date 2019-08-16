@@ -175,8 +175,6 @@ namespace XenAdmin.Dialogs
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-
-
             if (SrListBox.SR == null || SelectionNull || NameTextBox.Text == "" || !connection.IsConnected)
                 return;
 
@@ -231,8 +229,11 @@ namespace XenAdmin.Dialogs
                         vbd.userdevice = ud;
 
                         // Now try to plug the VBD.
-                        new XenAdmin.Actions.VbdSaveAndPlugAction(TheVM, vbd, vdi.Name(), session, false, ShowMustRebootBoxCD, ShowVBDWarningBox).RunAsync();
+                        var plugAction = new VbdSaveAndPlugAction(TheVM, vbd, vdi.Name(), session, false);
+                        plugAction.ShowUserInstruction += PlugAction_ShowUserInstruction;
+                        plugAction.RunAsync();
                     });
+
                 action.VM = TheVM;
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
                     dialog.ShowDialog();
@@ -249,6 +250,21 @@ namespace XenAdmin.Dialogs
             }
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void PlugAction_ShowUserInstruction(string message)
+        {
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (!Program.RunInAutomatedTestMode)
+                {
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(SystemIcons.Information, message)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
+                }
+            });
         }
 
         private static bool HasBootableDisk(VM vm)
@@ -502,40 +518,6 @@ namespace XenAdmin.Dialogs
                 else
                     return "NewDiskDialog";
             }
-        } 
-
-        public static void ShowVBDWarningBox()
-        {
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                if (!Program.RunInAutomatedTestMode)
-                {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                      Messages.NEWDISKWIZARD_MESSAGE,
-                                                      Messages.NEWDISKWIZARD_MESSAGE_TITLE)))
-                    {
-                        dlg.ShowDialog(Program.MainWindow);
-                    }
-                }
-            });
-        }
-
-        public static void ShowMustRebootBoxCD()
-        {
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                if (!Program.RunInAutomatedTestMode)
-                {
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                      Messages.
-                                                          NEW_DVD_DRIVE_REBOOT,
-                                                      Messages.
-                                                          NEW_DVD_DRIVE_CREATED))
-                        .ShowDialog(Program.MainWindow);
-                }
-            });
         }
     }
 }
