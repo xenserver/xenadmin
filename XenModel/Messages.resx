@@ -3265,9 +3265,6 @@ This action cannot be undone. Are you sure you wish to continue?</value>
   <data name="CONVERSION_CONNECTING_VMWARE_SUCCESS" xml:space="preserve">
     <value>Connected successfully to the VMware server</value>
   </data>
-  <data name="CONVERSION_CONNECTING_VPX_FAILURE" xml:space="preserve">
-    <value>Cannot connect to the Conversion Manager Virtual Appliance. Please see logs for details.</value>
-  </data>
   <data name="CONVERSION_CONNECTING_VPX_INTERRUPTION" xml:space="preserve">
     <value>Lost connection to the Conversion Manager Virtual Appliance. Will reconnect in {0} sec.</value>
   </data>
@@ -3422,6 +3419,9 @@ This action cannot be undone. Are you sure you wish to continue?</value>
   </data>
   <data name="CONVERSION_VERSION_CHECK" xml:space="preserve">
     <value>Checking compatibility with the Conversion Manager Virtual Appliance...</value>
+  </data>
+  <data name="CONVERSION_VERSION_CHECK_FAILURE" xml:space="preserve">
+    <value>Cannot retrieve the Conversion Manager Virtual Appliance version. Please see logs for details.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY" xml:space="preserve">
     <value>[XenCenter] is incompatible with this version of the Conversion Manager Virtual Appliance.</value>

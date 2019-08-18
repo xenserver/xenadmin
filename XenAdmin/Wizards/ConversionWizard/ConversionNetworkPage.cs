@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         protected override bool LoadsRemoteData => true;
         protected override string NetworkColumnHeaderText => Messages.CONVERSION_NETWORK_PAGE_COLUMN_HEADER;
-        protected override bool ShowReserveMacAddressesCheckBoc => true;
+        protected override bool ShowReserveMacAddressesCheckBox => true;
         protected override bool ShowRefreshButton => true;
 
         protected override string IntroductionText => Messages.CONVERSION_NETWORK_PAGE_BLURB;

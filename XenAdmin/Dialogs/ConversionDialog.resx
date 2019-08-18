@@ -121,13 +121,10 @@
   <data name="tableLayoutMain.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <metadata name="columnVm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="columnVm.HeaderText" xml:space="preserve">
+  <data name="ColumnVm.HeaderText" xml:space="preserve">
     <value>Source VM</value>
   </data>
-  <data name="columnVm.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnVm.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <metadata name="ColumnSourceServer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -161,13 +158,13 @@
     <value>True</value>
   </metadata>
   <data name="ColumnStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
+    <value />
   </data>
   <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
   <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
-    <value>64</value>
+    <value>19</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridViewConversions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -181,7 +178,7 @@
     <value>13, 13</value>
   </data>
   <data name="dataGridViewConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>523, 364</value>
+    <value>588, 364</value>
   </data>
   <data name="dataGridViewConversions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -232,7 +229,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="dataGridViewDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 340</value>
+    <value>312, 340</value>
   </data>
   <data name="dataGridViewDetails.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -292,13 +289,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 13</value>
+    <value>607, 13</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 364</value>
+    <value>314, 364</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -328,7 +325,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 383</value>
+    <value>846, 383</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -367,7 +364,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 412</value>
+    <value>934, 412</value>
   </data>
   <data name="tableLayoutMain.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -559,7 +556,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="toolStripTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 25</value>
+    <value>932, 25</value>
   </data>
   <data name="toolStripTop.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -592,7 +589,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 27</value>
+    <value>934, 27</value>
   </data>
   <data name="tableLayoutPanelTop.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -649,7 +646,7 @@
     <value>0, 439</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 22</value>
+    <value>934, 22</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -673,7 +670,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>834, 461</value>
+    <value>934, 461</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -683,6 +680,36 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Manage Conversions</value>
+  </data>
+  <data name="&gt;&gt;ColumnVm.Name" xml:space="preserve">
+    <value>ColumnVm</value>
+  </data>
+  <data name="&gt;&gt;ColumnVm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnSourceServer.Name" xml:space="preserve">
+    <value>ColumnSourceServer</value>
+  </data>
+  <data name="&gt;&gt;ColumnSourceServer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnStartTime.Name" xml:space="preserve">
+    <value>ColumnStartTime</value>
+  </data>
+  <data name="&gt;&gt;ColumnStartTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnFinishTime.Name" xml:space="preserve">
+    <value>ColumnFinishTime</value>
+  </data>
+  <data name="&gt;&gt;ColumnFinishTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
+    <value>ColumnStatus</value>
+  </data>
+  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnKey.Name" xml:space="preserve">
     <value>columnKey</value>
@@ -815,36 +842,6 @@
   </data>
   <data name="&gt;&gt;statusLinkLabel.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.ConversionDialog+ActionableLinkLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;columnVm.Name" xml:space="preserve">
-    <value>columnVm</value>
-  </data>
-  <data name="&gt;&gt;columnVm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnSourceServer.Name" xml:space="preserve">
-    <value>ColumnSourceServer</value>
-  </data>
-  <data name="&gt;&gt;ColumnSourceServer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnStartTime.Name" xml:space="preserve">
-    <value>ColumnStartTime</value>
-  </data>
-  <data name="&gt;&gt;ColumnStartTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnFinishTime.Name" xml:space="preserve">
-    <value>ColumnFinishTime</value>
-  </data>
-  <data name="&gt;&gt;ColumnFinishTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnStatus.Name" xml:space="preserve">
-    <value>ColumnStatus</value>
-  </data>
-  <data name="&gt;&gt;ColumnStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ConversionDialog</value>

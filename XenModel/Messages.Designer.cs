@@ -9027,15 +9027,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot connect to the Conversion Manager Virtual Appliance. Please see logs for details..
-        /// </summary>
-        public static string CONVERSION_CONNECTING_VPX_FAILURE {
-            get {
-                return ResourceManager.GetString("CONVERSION_CONNECTING_VPX_FAILURE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Lost connection to the Conversion Manager Virtual Appliance. Will reconnect in {0} sec..
         /// </summary>
         public static string CONVERSION_CONNECTING_VPX_INTERRUPTION {
@@ -9493,6 +9484,15 @@ namespace XenAdmin {
         public static string CONVERSION_VERSION_CHECK {
             get {
                 return ResourceManager.GetString("CONVERSION_VERSION_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot retrieve the Conversion Manager Virtual Appliance version. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_VERSION_CHECK_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VERSION_CHECK_FAILURE", resourceCulture);
             }
         }
         

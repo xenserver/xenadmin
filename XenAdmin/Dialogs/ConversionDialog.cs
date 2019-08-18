@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -54,11 +55,13 @@ namespace XenAdmin.Dialogs
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const int HEARTBEAT = 10; //seconds
         private ConversionClient _conversionClient;
         private Conversion[] _currentConversionList = { };
-        private readonly object conversionLock = new object();
+        private readonly object _conversionLock = new object();
         private volatile bool _updating;
         private volatile bool _updateRequired;
+        private VM _conversionVm;
 
         private static readonly string[] DetailHeaders =
         {
@@ -96,13 +99,13 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                lock (conversionLock)
+                lock (_conversionLock)
                     return _currentConversionList;
             }
             set
             {
-                lock (conversionLock)
-                    _currentConversionList = value;
+                lock (_conversionLock)
+                    _currentConversionList = value ?? new Conversion[] { };
             }
         }
 
@@ -117,6 +120,8 @@ namespace XenAdmin.Dialogs
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             timerVpx.Stop();
+            if (_conversionVm != null)
+                _conversionVm.PropertyChanged -= _conversionVm_PropertyChanged;
             base.OnFormClosing(e);
         }
 
@@ -152,9 +157,50 @@ namespace XenAdmin.Dialogs
 
                     var useSsl = Properties.Settings.Default.ConversionClientUseSsl;
                     _conversionClient = new ConversionClient(connection, serviceIp, useSsl);
+                    RegisterVM(serviceIp);
                     CheckVersionCompatibility();
                 });
             });
+        }
+
+        private void RegisterVM(string ipAddress)
+        {
+            // if we're reconnecting the conversion VM, we need to clear the old one
+            if (_conversionVm != null)
+            {
+                _conversionVm.PropertyChanged -= _conversionVm_PropertyChanged;
+                _conversionVm = null;
+            }
+
+            var vifs = connection.Cache.VIFs;
+
+            foreach (var vif in vifs)
+            {
+                if (!vif.IPAddresses().Contains(ipAddress))
+                    continue;
+
+                var vm = connection.Resolve(vif.VM);
+                if (!vm.IsConversionVM())
+                    continue;
+
+                _conversionVm = vm;
+                _conversionVm.PropertyChanged += _conversionVm_PropertyChanged;
+                break;
+            }
+        }
+
+        private void _conversionVm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "power_state" || _conversionVm == null)
+                return;
+
+            if (_conversionVm.power_state != vm_power_state.Running)
+            {
+                timerVpx.Stop();
+                CurrentConversionList = null;
+                Program.Invoke(this, BuildConversionList);
+                ConnectToVpx();
+            }
         }
 
         private void CheckVersionCompatibility()
@@ -175,7 +221,7 @@ namespace XenAdmin.Dialogs
                     Program.Invoke(this, () =>
                     {
                         statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
-                        statusLabel.Text = Messages.CONVERSION_CONNECTING_VPX_FAILURE;
+                        statusLabel.Text = Messages.CONVERSION_VERSION_CHECK_FAILURE;
                         statusLinkLabel.Reset();
                     });
 
@@ -221,14 +267,14 @@ namespace XenAdmin.Dialogs
                 catch (Exception e)
                 {
                     log.Error("Cannot fetch conversion history.", e);
+                    CurrentConversionList = null;
 
                     Program.Invoke(this, () =>
                     {
                         statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
-                        statusLabel.Text = string.Format(Messages.CONVERSION_CONNECTING_VPX_INTERRUPTION, timerVpx.Interval / 1000);
+                        statusLabel.Text = string.Format(Messages.CONVERSION_CONNECTING_VPX_INTERRUPTION, HEARTBEAT);
                         statusLinkLabel.Reset();
                     });
-                    return;
                 }
 
                 if (_updating)
@@ -271,7 +317,7 @@ namespace XenAdmin.Dialogs
 
                 Program.Invoke(this, () =>
                 {
-                    AddOrUpdateConversionRow(refreshedConversion);
+                    UpdateConversionRow(refreshedConversion);
                     UpdateButtons();
                 });
             });
@@ -311,14 +357,34 @@ namespace XenAdmin.Dialogs
                 _updating = true;
                 dataGridViewConversions.SuspendLayout();
 
-                foreach (ConversionRow row in dataGridViewConversions.Rows)
+                var selectedConversionId = dataGridViewConversions.SelectedRows.Count == 1 && dataGridViewConversions.SelectedRows[0] is ConversionRow r
+                    ? r.Conversion.Id
+                    : null;
+
+                dataGridViewConversions.Rows.Clear();
+                var rows = CurrentConversionList.Select(c => new ConversionRow(c)).ToList();
+
+                if (dataGridViewConversions.SortedColumn != null)
                 {
-                    if (CurrentConversionList.All(c => c.Id != row.Conversion.Id))//returns true for empty list, which is correct
-                        dataGridViewConversions.Rows.Remove(row);
+                    rows.Sort((r1, r2) => CompareConversionRows(dataGridViewConversions.SortedColumn.Index, r1, r2));
+
+                    if (dataGridViewConversions.SortOrder == SortOrder.Descending)
+                        rows.Reverse();
                 }
 
-                foreach (var conversion in CurrentConversionList)
-                    AddOrUpdateConversionRow(conversion);
+                dataGridViewConversions.Rows.AddRange(rows.Cast<DataGridViewRow>().ToArray());
+
+                foreach (ConversionRow row in dataGridViewConversions.Rows)
+                {
+                    if (row.Conversion.Id == selectedConversionId)
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+                }
+
+                if (dataGridViewConversions.SelectedRows.Count == 0 && dataGridViewConversions.Rows.Count > 0)
+                    dataGridViewConversions.Rows[0].Selected = true;
             }
             finally
             {
@@ -335,7 +401,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void AddOrUpdateConversionRow(Conversion conversion)
+        private void UpdateConversionRow(Conversion conversion)
         {
             foreach (ConversionRow row in dataGridViewConversions.Rows)
             {
@@ -350,17 +416,8 @@ namespace XenAdmin.Dialogs
                     row.RefreshRow(conversion);
                     if (row.Selected)
                         BuildDetailsView(row.Conversion);
-                    return;
                 }
             }
-
-            if (toolStripDdbFilterStatus.HideByStatus(conversion))
-                return;
-
-            var newRow = new ConversionRow(conversion);
-            dataGridViewConversions.Rows.Add(newRow);
-            if (newRow.Selected)
-                BuildDetailsView(newRow.Conversion);
         }
 
         private void BuildDetailsView(Conversion conversion)
@@ -394,11 +451,23 @@ namespace XenAdmin.Dialogs
             dataGridViewDetails.Rows.Add(new ConversionDetailRow(key, val));
         }
 
+        private void ClearDetailsView()
+        {
+            try
+            {
+                dataGridViewDetails.SuspendLayout();
+                dataGridViewDetails.Rows.Clear();
+            }
+            finally
+            {
+                dataGridViewDetails.ResumeLayout();
+            }
+        }
 
         private string[] GetDetailValues(Conversion conversion)
         {
             var startTime = conversion.StartTime.ToLocalTime();
-            var finishTime = conversion.CompletedTime > conversion.StartTime ? conversion.CompletedTime.ToLocalTime() : DateTime.Now;
+            var finishTime = conversion.CompletedTime >= conversion.StartTime ? conversion.CompletedTime.ToLocalTime() : DateTime.Now;
 
             var startTimeString = Messages.HYPHEN;
             var finishTimeString = Messages.HYPHEN;
@@ -407,7 +476,7 @@ namespace XenAdmin.Dialogs
             {
                 startTimeString = HelpersGUI.DateTimeToString(startTime, Messages.DATEFORMAT_DMY_HM, true);
 
-                if (conversion.CompletedTime > conversion.StartTime)
+                if (conversion.CompletedTime >= conversion.StartTime)
                     finishTimeString = HelpersGUI.DateTimeToString(finishTime, Messages.DATEFORMAT_DMY_HM, true);
             });
 
@@ -487,38 +556,57 @@ namespace XenAdmin.Dialogs
             toolStripLabelFiltersOnOff.Text = FilterIsOn ? Messages.FILTERS_ON : Messages.FILTERS_OFF;
         }
 
+        private int CompareConversionRows(int sortingColumnIndex, ConversionRow row1, ConversionRow row2)
+        {
+            var conv1 = row1.Conversion;
+            var conv2 = row2.Conversion;
+
+            if (sortingColumnIndex == ColumnVm.Index)
+                return Conversion.CompareOnVm(conv1, conv2);
+
+            if (sortingColumnIndex == ColumnSourceServer.Index)
+                return Conversion.CompareOnServer(conv1, conv2);
+
+            if (sortingColumnIndex == ColumnStartTime.Index)
+                return Conversion.CompareOnStartTime(conv1, conv2);
+
+            if (sortingColumnIndex == ColumnFinishTime.Index)
+                return Conversion.CompareOnCompletedTime(conv1, conv2);
+
+            if (sortingColumnIndex == ColumnStatus.Index)
+                return Conversion.CompareOnStatus(conv1, conv2);
+
+            return Conversion.CompareOnId(conv1, conv2);
+        }
+
 
         #region Event handlers
 
         private void timerVpx_Tick(object sender, EventArgs e)
         {
-            FetchConversionHistory();
+            //the timer ticks every second, but a request is sent only every as many seconds as specified by the HEARTBEAT
+            if (DateTime.Now.Second % HEARTBEAT == 0)
+                FetchConversionHistory();
+
+            if (dataGridViewConversions.SelectedRows.Count == 1 && dataGridViewConversions.SelectedRows[0] is ConversionRow row && !row.Conversion.IsCompleted)
+                BuildDetailsView(row.Conversion);
         }
 
         private void dataGridViewConversions_SelectionChanged(object sender, EventArgs e)
         {
             UpdateButtons();
+
             if (dataGridViewConversions.SelectedRows.Count == 1 && dataGridViewConversions.SelectedRows[0] is ConversionRow row)
                 BuildDetailsView(row.Conversion);
+            else
+                ClearDetailsView();
         }
 
         private void dataGridViewConversions_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            var conv1 = ((ConversionRow)dataGridViewConversions.Rows[e.RowIndex1]).Conversion;
-            var conv2 = ((ConversionRow)dataGridViewConversions.Rows[e.RowIndex2]).Conversion;
-
-            if (e.Column.Index == ColumnVm.Index)
-                e.SortResult = StringUtility.NaturalCompare(conv1.Configuration.SourceVmName, conv2.Configuration.SourceVmName);
-
-            else if (e.Column.Index == ColumnSourceServer.Index)
-                e.SortResult = StringUtility.NaturalCompare(conv1.Configuration.SourceServer.Hostname, conv2.Configuration.SourceServer.Hostname);
-
-            else if (e.Column.Index == ColumnStatus.Index)
-                e.SortResult = conv1.Status.CompareTo(conv2.Status);
-
-            if (e.SortResult == 0)
-                e.SortResult = StringUtility.NaturalCompare(conv1.Id, conv2.Id);
-
+            var row1 = (ConversionRow)dataGridViewConversions.Rows[e.RowIndex1];
+            var row2 = (ConversionRow)dataGridViewConversions.Rows[e.RowIndex2];
+            e.SortResult = CompareConversionRows(e.Column.Index, row1, row2);
             e.Handled = true;
         }
 
@@ -777,17 +865,17 @@ namespace XenAdmin.Dialogs
                 cellSourceVm.Value = conversion.Configuration.SourceVmName;
                 cellsourceServer.Value = conversion.Configuration.SourceServer.Hostname;
 
-                var startTime = conversion.StartTime.ToLocalTime();
-                var finishTime = conversion.CompletedTime > conversion.StartTime ? conversion.CompletedTime.ToLocalTime() : DateTime.Now;
+                cellStartTime.Value = HelpersGUI.DateTimeToString(conversion.StartTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
 
-                cellStartTime.Value = HelpersGUI.DateTimeToString(startTime, Messages.DATEFORMAT_DMY_HM, true);
-                cellFinishTime.Value = conversion.CompletedTime > conversion.StartTime
-                    ? HelpersGUI.DateTimeToString(finishTime, Messages.DATEFORMAT_DMY_HM, true)
+                cellFinishTime.Value = conversion.CompletedTime >= conversion.StartTime
+                    ? HelpersGUI.DateTimeToString(conversion.CompletedTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true)
                     : Messages.HYPHEN;
 
                 if (conversion.Status == (int)ConversionStatus.Completed)
                     cellStatus.Value = Images.StaticImages._000_Tick_h32bit_16;
-                else if (conversion.Status == (int)ConversionStatus.Aborted || conversion.Status == (int)ConversionStatus.UserAborted)
+                else if (conversion.Status == (int)ConversionStatus.Aborted)
+                    cellStatus.Value = Images.StaticImages._000_error_h32bit_16;
+                else if (conversion.Status == (int)ConversionStatus.UserAborted)
                     cellStatus.Value = Images.StaticImages.cancelled_action_16;
                 else if (conversion.Status == (int)ConversionStatus.Incomplete)
                     cellStatus.Value = Images.StaticImages._075_WarningRound_h32bit_16;

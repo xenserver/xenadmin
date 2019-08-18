@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using CookComputing.XmlRpc;
 using XenAdmin.Actions;
+using XenCenterLib;
 
 
 namespace XenAdmin.XCM
@@ -141,6 +142,45 @@ namespace XenAdmin.XCM
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
         public bool CanRetry => Status == (int)ConversionStatus.UserAborted || Status == (int)ConversionStatus.Aborted;
+        
+        #region Sorting methods
+
+        public static int CompareOnVm(Conversion conv1, Conversion conv2)
+        {
+            var result = StringUtility.NaturalCompare(conv1.Configuration.SourceVmName, conv2.Configuration.SourceVmName);
+            return result == 0 ? CompareOnId(conv1, conv2) : result;
+        }
+
+        public static int CompareOnServer(Conversion conv1, Conversion conv2)
+        {
+            var result = StringUtility.NaturalCompare(conv1.Configuration.SourceServer.Hostname, conv2.Configuration.SourceServer.Hostname);
+            return result == 0 ? CompareOnId(conv1, conv2) : result;
+        }
+
+        public static int CompareOnStatus(Conversion conv1, Conversion conv2)
+        {
+            var result = conv1.Status.CompareTo(conv2.Status);
+            return result == 0 ? CompareOnId(conv1, conv2) : result;
+        }
+
+        public static int CompareOnId(Conversion conv1, Conversion conv2)
+        {
+            return StringUtility.NaturalCompare(conv1.Id, conv2.Id);
+        }
+
+        public static int CompareOnStartTime(Conversion conv1, Conversion conv2)
+        {
+            var result = DateTime.Compare(conv1.StartTime, conv2.StartTime);
+            return result == 0 ? CompareOnId(conv1, conv2) : result;
+        }
+
+        public static int CompareOnCompletedTime(Conversion conv1, Conversion conv2)
+        {
+            var result = DateTime.Compare(conv1.CompletedTime, conv2.CompletedTime);
+            return result == 0 ? CompareOnId(conv1, conv2) : result;
+        }
+
+        #endregion
     }
 
     public struct NetworkInstance

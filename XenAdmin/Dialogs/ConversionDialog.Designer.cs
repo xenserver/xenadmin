@@ -31,13 +31,18 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConversionDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewConversions = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.ColumnVm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSourceServer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFinishTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnStatus = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewDetails = new System.Windows.Forms.DataGridView();
             this.columnKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,11 +72,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLinkLabel = new XenAdmin.Dialogs.ConversionDialog.ActionableLinkLabel();
-            this.ColumnVm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSourceServer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnFinishTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnStatus = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConversions)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
@@ -91,7 +91,6 @@
             // 
             // dataGridViewConversions
             // 
-            this.dataGridViewConversions.AllowUserToResizeColumns = false;
             this.dataGridViewConversions.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewConversions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewConversions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -114,6 +113,42 @@
             this.dataGridViewConversions.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewConversions.SelectionChanged += new System.EventHandler(this.dataGridViewConversions_SelectionChanged);
             this.dataGridViewConversions.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewConversions_SortCompare);
+            // 
+            // ColumnVm
+            // 
+            resources.ApplyResources(this.ColumnVm, "ColumnVm");
+            this.ColumnVm.Name = "ColumnVm";
+            this.ColumnVm.ReadOnly = true;
+            // 
+            // ColumnSourceServer
+            // 
+            resources.ApplyResources(this.ColumnSourceServer, "ColumnSourceServer");
+            this.ColumnSourceServer.Name = "ColumnSourceServer";
+            this.ColumnSourceServer.ReadOnly = true;
+            // 
+            // ColumnStartTime
+            // 
+            resources.ApplyResources(this.ColumnStartTime, "ColumnStartTime");
+            this.ColumnStartTime.Name = "ColumnStartTime";
+            this.ColumnStartTime.ReadOnly = true;
+            // 
+            // ColumnFinishTime
+            // 
+            resources.ApplyResources(this.ColumnFinishTime, "ColumnFinishTime");
+            this.ColumnFinishTime.Name = "ColumnFinishTime";
+            this.ColumnFinishTime.ReadOnly = true;
+            // 
+            // ColumnStatus
+            // 
+            this.ColumnStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.NullValue = "System.Drawing.Bitmap";
+            this.ColumnStatus.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
+            this.ColumnStatus.Name = "ColumnStatus";
+            this.ColumnStatus.ReadOnly = true;
+            this.ColumnStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // tableLayoutPanel3
             // 
@@ -342,7 +377,7 @@
             // 
             // timerVpx
             // 
-            this.timerVpx.Interval = 5000;
+            this.timerVpx.Interval = 1000;
             this.timerVpx.Tick += new System.EventHandler(this.timerVpx_Tick);
             // 
             // statusStrip1
@@ -370,42 +405,6 @@
             this.statusLinkLabel.Name = "statusLinkLabel";
             this.statusLinkLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.statusLinkLabel.VisitedLinkColor = System.Drawing.Color.Blue;
-            // 
-            // columnVm
-            // 
-            resources.ApplyResources(this.ColumnVm, "columnVm");
-            this.ColumnVm.Name = "ColumnVm";
-            this.ColumnVm.ReadOnly = true;
-            // 
-            // ColumnSourceServer
-            // 
-            resources.ApplyResources(this.ColumnSourceServer, "ColumnSourceServer");
-            this.ColumnSourceServer.Name = "ColumnSourceServer";
-            this.ColumnSourceServer.ReadOnly = true;
-            // 
-            // ColumnStartTime
-            // 
-            resources.ApplyResources(this.ColumnStartTime, "ColumnStartTime");
-            this.ColumnStartTime.Name = "ColumnStartTime";
-            this.ColumnStartTime.ReadOnly = true;
-            // 
-            // ColumnFinishTime
-            // 
-            resources.ApplyResources(this.ColumnFinishTime, "ColumnFinishTime");
-            this.ColumnFinishTime.Name = "ColumnFinishTime";
-            this.ColumnFinishTime.ReadOnly = true;
-            // 
-            // ColumnStatus
-            // 
-            this.ColumnStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.NullValue = "System.Drawing.Bitmap";
-            this.ColumnStatus.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
-            this.ColumnStatus.Name = "ColumnStatus";
-            this.ColumnStatus.ReadOnly = true;
-            this.ColumnStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ConversionDialog
             // 

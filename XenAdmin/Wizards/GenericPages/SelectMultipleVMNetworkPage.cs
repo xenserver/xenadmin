@@ -72,12 +72,12 @@ namespace XenAdmin.Wizards.GenericPages
             m_labelIntro.Text = IntroductionText;
             label2.Text = TableIntroductionText;
             m_colVmNetwork.HeaderText = NetworkColumnHeaderText;
-            m_checkBoxMac.Visible = ShowReserveMacAddressesCheckBoc;
+            m_checkBoxMac.Visible = ShowReserveMacAddressesCheckBox;
             m_buttonRefresh.Visible = ShowRefreshButton;
         }
 
         protected virtual string NetworkColumnHeaderText => m_colVmNetwork.HeaderText;
-        protected virtual bool ShowReserveMacAddressesCheckBoc => false;
+        protected virtual bool ShowReserveMacAddressesCheckBox => false;
         protected virtual bool ShowRefreshButton => false;
         protected virtual bool LoadsRemoteData => false;
 
@@ -110,7 +110,7 @@ namespace XenAdmin.Wizards.GenericPages
             set { targetConnection = value; }
         }
 
-        public bool PreserveMAC => m_checkBoxMac.Visible && m_checkBoxMac.Checked;
+        public bool PreserveMAC => ShowReserveMacAddressesCheckBox && m_checkBoxMac.Checked;
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
