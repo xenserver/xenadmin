@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAPI;
@@ -49,7 +48,9 @@ namespace XenAdmin.Dialogs
             _VM = vm;
             diskRadioButton.Enabled = _VM.allowed_operations.Contains(vm_operations.snapshot);
             pictureBoxSnapshotsInfo.Visible = !diskRadioButton.Enabled;
-            quiesceCheckBox.Enabled = _VM.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) 
+            var quiesceAvailable = !Helpers.QuebecOrGreater(_VM.Connection);
+            quiesceCheckBox.Visible = quiesceAvailable;
+            quiesceCheckBox.Enabled = quiesceAvailable && _VM.allowed_operations.Contains(vm_operations.snapshot_with_quiesce) 
                 && !Helpers.FeatureForbidden(_VM, Host.RestrictVss);
             pictureBoxQuiesceInfo.Visible = !quiesceCheckBox.Enabled;
             memoryRadioButton.Enabled = _VM.allowed_operations.Contains(vm_operations.checkpoint)
