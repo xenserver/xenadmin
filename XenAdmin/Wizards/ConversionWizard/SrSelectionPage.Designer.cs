@@ -36,16 +36,16 @@ namespace XenAdmin.Wizards.ConversionWizard
             this.label1 = new System.Windows.Forms.Label();
             this.SRLabel = new System.Windows.Forms.Label();
             this.comboBoxSr = new XenAdmin.Controls.EnableableComboBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.tableLayoutPanelError = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxError = new System.Windows.Forms.PictureBox();
             this.labelError = new System.Windows.Forms.Label();
-            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tableLayoutPanelError.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -79,28 +79,12 @@ namespace XenAdmin.Wizards.ConversionWizard
             this.comboBoxSr.Name = "comboBoxSr";
             this.comboBoxSr.SelectedIndexChanged += new System.EventHandler(this.comboBoxSr_SelectedIndexChanged);
             // 
-            // chart1
+            // buttonRefresh
             // 
-            this.chart1.BackColor = System.Drawing.SystemColors.Control;
-            this.chart1.BackImageTransparentColor = System.Drawing.SystemColors.Control;
-            this.chart1.BackSecondaryColor = System.Drawing.SystemColors.Control;
-            this.chart1.BorderlineColor = System.Drawing.SystemColors.Control;
-            chartArea1.BackColor = System.Drawing.SystemColors.Control;
-            chartArea1.BackSecondaryColor = System.Drawing.SystemColors.Control;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.tableLayoutPanel1.SetColumnSpan(this.chart1, 3);
-            resources.ApplyResources(this.chart1, "chart1");
-            legend1.BackColor = System.Drawing.SystemColors.Control;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Color = System.Drawing.SystemColors.Control;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            resources.ApplyResources(this.buttonRefresh, "buttonRefresh");
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // tableLayoutPanelError
             // 
@@ -122,12 +106,31 @@ namespace XenAdmin.Wizards.ConversionWizard
             resources.ApplyResources(this.labelError, "labelError");
             this.labelError.Name = "labelError";
             // 
-            // buttonRefresh
+            // chart1
             // 
-            resources.ApplyResources(this.buttonRefresh, "buttonRefresh");
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            this.chart1.BackColor = System.Drawing.SystemColors.Control;
+            this.chart1.BackImageTransparentColor = System.Drawing.SystemColors.Control;
+            this.chart1.BackSecondaryColor = System.Drawing.SystemColors.Control;
+            this.chart1.BorderlineColor = System.Drawing.SystemColors.Control;
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.BackColor = System.Drawing.SystemColors.Control;
+            chartArea1.BackSecondaryColor = System.Drawing.SystemColors.Control;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.tableLayoutPanel1.SetColumnSpan(this.chart1, 3);
+            resources.ApplyResources(this.chart1, "chart1");
+            legend1.BackColor = System.Drawing.SystemColors.Control;
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Color = System.Drawing.SystemColors.Control;
+            series1.CustomProperties = "PieLabelStyle=Outside, PieStartAngle=90";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             // 
             // backgroundWorker1
             // 
@@ -143,10 +146,10 @@ namespace XenAdmin.Wizards.ConversionWizard
             this.Name = "SrSelectionPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.tableLayoutPanelError.ResumeLayout(false);
             this.tableLayoutPanelError.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }

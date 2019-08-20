@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         public override string PageTitle => Messages.CONVERSION_STORAGE_PAGE_TITLE;
 
-        public override string HelpID => "SRSelectionWizard";
+        public override string HelpID => "SrSelection";
 
         public override bool EnableNext()
         {
@@ -120,26 +120,22 @@ namespace XenAdmin.Wizards.ConversionWizard
             var availableSpace = wrapper.AvailableSpace;
             var usedSpace = sr.physical_size - availableSpace;
 
+            //order of colours in palette: blue, yellow, red
+
             string[] xValues =
             {
-                string.Format(Messages.CONVERSION_STORAGE_PAGE_USED_SPACE, Util.DiskSizeString(usedSpace)),
+                string.Format(Messages.CONVERSION_STORAGE_PAGE_FREE_SPACE, Util.DiskSizeString(availableSpace)),
                 string.Format(Messages.CONVERSION_STORAGE_PAGE_REQUIRED_SPACE, Util.DiskSizeString(_requiredDiskSize)),
-                string.Format(Messages.CONVERSION_STORAGE_PAGE_FREE_SPACE, Util.DiskSizeString(availableSpace))
+                string.Format(Messages.CONVERSION_STORAGE_PAGE_USED_SPACE, Util.DiskSizeString(usedSpace))
             };
             long[] yValues =
             {
-                usedSpace,
+                availableSpace > _requiredDiskSize? availableSpace - _requiredDiskSize : 0,
                 availableSpace > _requiredDiskSize ? _requiredDiskSize : availableSpace,
-                availableSpace > _requiredDiskSize? availableSpace - _requiredDiskSize : 0
+                usedSpace
             };
 
-            chart1.Series["Series1"].Points.DataBindXY(xValues, yValues);
-            chart1.Series["Series1"]["PieLabelStyle"] = "Outside";
-            chart1.Series["Series1"]["PieDrawingStyle"] = "SoftEdge";
-            chart1.Series["Series1"].Points[2]["Exploded"] = "true";
-            chart1.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
-            chart1.Legends["Legend1"].Enabled = false;
-
+            chart1.Series[0].Points.DataBindXY(xValues, yValues);
             chart1.Visible = true;
         }
 

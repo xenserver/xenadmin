@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         public override string PageTitle => Messages.CONVERSION_CREDENTIALS_PAGE_TITLE;
 
-        public override string HelpID => "CredentialWizardPage";
+        public override string HelpID => "Credentials";
 
         public override bool EnableNext()
         {

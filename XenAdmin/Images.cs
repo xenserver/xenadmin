@@ -37,6 +37,7 @@ using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
+using XenAdmin.XCM;
 using XenAdmin.XenSearch;
 using XenAPI;
 
@@ -182,9 +183,7 @@ namespace XenAdmin
             ImageList16.Images.Add("000_Abort_h32bit_16.png", Properties.Resources._000_Abort_h32bit_16); //Error
             #endregion
 
-            ImageList16.Images.Add("xcm.png", Properties.Resources.xcm);
-
-            System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
+            System.Diagnostics.Debug.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");
 
             int i = 0;
@@ -262,6 +261,28 @@ namespace XenAdmin
 
             return StaticImages.usagebar_10;
         }
+
+        public static Image GetImageFor(Conversion conversion)
+        {
+            switch (conversion.Status)
+            {
+                case (int)ConversionStatus.Successful:
+                    return StaticImages._075_TickRound_h32bit_16;
+                case (int)ConversionStatus.Failed:
+                    return StaticImages._000_error_h32bit_16;
+                case (int)ConversionStatus.Cancelled:
+                    return Images.StaticImages.cancelled_action_16;
+                case (int)ConversionStatus.Incomplete:
+                    return Images.StaticImages._075_WarningRound_h32bit_16;
+                case (int)ConversionStatus.Running:
+                    return Images.GetImageForPercentage(conversion.PercentComplete);
+                case (int)ConversionStatus.Created:
+                case (int)ConversionStatus.Queued:
+                default:
+                    return Images.StaticImages.queued;
+            }
+        }
+
 
         public static Icons GetIconFor(IXenObject o)
         {
@@ -900,6 +921,7 @@ namespace XenAdmin
             public static Image XS = Properties.Resources.XS;
             public static Image ConversionManager = Properties.Resources.xcm;
             public static Image ConversionManager_32 = Properties.Resources.xcm_32x32;
+            public static Image queued = Properties.Resources.queued;
         }
     }
 }

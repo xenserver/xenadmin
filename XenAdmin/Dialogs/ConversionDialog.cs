@@ -82,6 +82,7 @@ namespace XenAdmin.Dialogs
             : base(conn)
         {
             InitializeComponent();
+            Text = string.Format(Messages.CONVERSION_MANAGER_TITLE, Helpers.GetName(Helpers.GetPoolOfOne(conn)).Ellipsise(80));
 
             toolStripSplitButtonRefresh.DefaultItem = toolStripMenuItemRefreshAll;
             toolStripSplitButtonRefresh.Text = toolStripMenuItemRefreshAll.Text;
@@ -124,6 +125,9 @@ namespace XenAdmin.Dialogs
                 _conversionVm.PropertyChanged -= _conversionVm_PropertyChanged;
             base.OnFormClosing(e);
         }
+
+        internal override string HelpName => "ConversionManager";
+
 
         private void ConnectToVpx()
         {
@@ -362,7 +366,7 @@ namespace XenAdmin.Dialogs
                     : null;
 
                 dataGridViewConversions.Rows.Clear();
-                var rows = CurrentConversionList.Select(c => new ConversionRow(c)).ToList();
+                var rows = CurrentConversionList.Where(c => !toolStripDdbFilterStatus.HideByStatus(c)).Select(c => new ConversionRow(c)).ToList();
 
                 if (dataGridViewConversions.SortedColumn != null)
                 {
@@ -588,7 +592,7 @@ namespace XenAdmin.Dialogs
             if (DateTime.Now.Second % HEARTBEAT == 0)
                 FetchConversionHistory();
 
-            if (dataGridViewConversions.SelectedRows.Count == 1 && dataGridViewConversions.SelectedRows[0] is ConversionRow row && !row.Conversion.IsCompleted)
+            if (dataGridViewConversions.SelectedRows.Count == 1 && dataGridViewConversions.SelectedRows[0] is ConversionRow row && row.Conversion.InProgress)
                 BuildDetailsView(row.Conversion);
         }
 
@@ -871,18 +875,7 @@ namespace XenAdmin.Dialogs
                     ? HelpersGUI.DateTimeToString(conversion.CompletedTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true)
                     : Messages.HYPHEN;
 
-                if (conversion.Status == (int)ConversionStatus.Completed)
-                    cellStatus.Value = Images.StaticImages._000_Tick_h32bit_16;
-                else if (conversion.Status == (int)ConversionStatus.Aborted)
-                    cellStatus.Value = Images.StaticImages._000_error_h32bit_16;
-                else if (conversion.Status == (int)ConversionStatus.UserAborted)
-                    cellStatus.Value = Images.StaticImages.cancelled_action_16;
-                else if (conversion.Status == (int)ConversionStatus.Incomplete)
-                    cellStatus.Value = Images.StaticImages._075_WarningRound_h32bit_16;
-                else if (conversion.Status == (int)ConversionStatus.Running)
-                    cellStatus.Value = Images.GetImageForPercentage(conversion.PercentComplete);
-                else
-                    cellStatus.Value = Images.GetImageForPercentage(0);
+                cellStatus.Value = Images.GetImageFor(conversion);
             }
         }
 

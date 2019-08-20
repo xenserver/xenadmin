@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         public override string PageTitle => Messages.CONVERSION_NETWORK_PAGE_TITLE;
 
-        public override string HelpID => "NetworkOptionsWizard";
+        public override string HelpID => "NetworkOptions";
 
         public override bool EnableNext()
         {

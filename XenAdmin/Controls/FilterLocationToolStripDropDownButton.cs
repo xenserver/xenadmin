@@ -71,9 +71,9 @@ namespace XenAdmin.Controls
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
             DeregisterEvents();
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnections_CollectionChanged;
+            base.Dispose(disposing);
         }
 
         private void OnFilterChanged()

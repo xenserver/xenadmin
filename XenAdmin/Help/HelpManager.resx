@@ -201,6 +201,24 @@
   <data name="ControlDomainMemoryDialog" xml:space="preserve">
     <value>hosts-control-domain-memory</value>
   </data>
+  <data name="ConversionManager" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConversionWizard_CredentialsPane" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConversionWizard_NetworkOptionsPane" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConversionWizard_SrSelectionPane" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConversionWizard_ConversionSummaryPane" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ConversionWizard_VmSelectionPane" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="CopyVMDialog" xml:space="preserve">
     <value>vms-copy</value>
   </data>

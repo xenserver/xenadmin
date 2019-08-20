@@ -174,7 +174,5 @@ namespace XenAdmin
         Warning,
         Error,
         #endregion
-
-        ConversionManager
     }
 }

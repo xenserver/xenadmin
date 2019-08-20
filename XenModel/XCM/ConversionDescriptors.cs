@@ -122,27 +122,35 @@ namespace XenAdmin.XCM
 
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public bool InProgress => Status == (int)ConversionStatus.Running;
+
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
         public bool IsCompleted =>
             !(Status == (int)ConversionStatus.Created || Status == (int)ConversionStatus.Queued || Status == (int)ConversionStatus.Running);
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public bool Succeeded =>
-            Status == (int)ConversionStatus.Completed;
+        public bool Succeeded => Status == (int)ConversionStatus.Successful;
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public bool Cancelled =>
-            Status == (int)ConversionStatus.Aborted || Status == (int)ConversionStatus.UserAborted;
+        public bool Cancelled => Status == (int)ConversionStatus.Cancelled;
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public bool IsError =>
-            Status == (int)ConversionStatus.Incomplete;
+        public bool IsError => Status == (int)ConversionStatus.Failed;
+
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public bool IsIncomplete => Status == (int)ConversionStatus.Incomplete;
+
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public bool IsQueued => Status == (int)ConversionStatus.Created || Status == (int)ConversionStatus.Queued;
+
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
         public bool CanCancel => Status == (int)ConversionStatus.Queued || Status == (int)ConversionStatus.Running;
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public bool CanRetry => Status == (int)ConversionStatus.UserAborted || Status == (int)ConversionStatus.Aborted;
+        public bool CanRetry => Status == (int)ConversionStatus.Cancelled || Status == (int)ConversionStatus.Failed;
         
+
         #region Sorting methods
 
         public static int CompareOnVm(Conversion conv1, Conversion conv2)
@@ -229,9 +237,9 @@ namespace XenAdmin.XCM
         Created = 0,
         Queued = 1,
         Running = 2,
-        Completed = 3,
-        Aborted = 4,
-        UserAborted = 5,
+        Successful = 3,
+        Failed = 4,
+        Cancelled = 5,
         Incomplete = 6,
     }
 

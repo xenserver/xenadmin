@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         public override string PageTitle => Messages.CONVERSION_VM_PAGE_TITLE;
 
-        public override string HelpID => "VMSelectionWizard";
+        public override string HelpID => "VmSelection";
 
         public override bool EnableNext()
         {

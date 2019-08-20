@@ -9252,6 +9252,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Conversions - {0}.
+        /// </summary>
+        public static string CONVERSION_MANAGER_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_MANAGER_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map the virtual ethernet adapters for the VMware VM(s) you are converting to networks in the destination pool or standalone server..
         /// </summary>
         public static string CONVERSION_NETWORK_PAGE_BLURB {
@@ -34094,6 +34103,24 @@ namespace XenAdmin {
         public static string STATUS_FILTER_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("STATUS_FILTER_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete.
+        /// </summary>
+        public static string STATUS_FILTER_INCOMPLETE {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_INCOMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queued.
+        /// </summary>
+        public static string STATUS_FILTER_QUEUED {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_QUEUED", resourceCulture);
             }
         }
         

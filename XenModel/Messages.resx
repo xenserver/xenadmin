@@ -3340,6 +3340,9 @@ This action cannot be undone. Are you sure you wish to continue?</value>
   <data name="CONVERSION_LOG_SAVED" xml:space="preserve">
     <value>Saved conversion log to {0}</value>
   </data>
+  <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
+    <value>Manage Conversions - {0}</value>
+  </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>Map the virtual ethernet adapters for the VMware VM(s) you are converting to networks in the destination pool or standalone server.</value>
   </data>
@@ -11819,8 +11822,14 @@ The upper limit: SR size / {2}</value>
   <data name="STATUS_FILTER_ERROR" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="STATUS_FILTER_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>In progress</value>
+  </data>
+  <data name="STATUS_FILTER_QUEUED" xml:space="preserve">
+    <value>Queued</value>
   </data>
   <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
     <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
