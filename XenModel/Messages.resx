@@ -6723,7 +6723,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Only OVF/OVA packages can be imported as vApps.</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
-    <value>All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva)|*.xva|XVA Version 1|ova.xml</value>
+    <value>All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
