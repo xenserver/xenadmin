@@ -18663,7 +18663,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A new CU is available on {0}. After {1} there will be no further hotfixes released on {2}. Please update to the latest Cumulative Update..
+        ///   Looks up a localized string similar to A new Cumulative Update is available for {0}. After {1} there will be no further hotfixes released for {2}. Please update to the latest Cumulative Update..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU {
             get {
@@ -18672,7 +18672,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} has reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version..
+        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL {
             get {
@@ -18681,7 +18681,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} has reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest CR..
+        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest CR..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE {
             get {
@@ -18690,7 +18690,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} has reached End of Life for express customers on {1}. You are no longer eligible for new hotfixes after this date. Please upgrade to the latest CR..
+        ///   Looks up a localized string similar to {0} reached End of Life for express customers on {1}. You are no longer eligible for hotfixes released after this date. Please upgrade to the latest CR..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE {
             get {
@@ -18726,7 +18726,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not eligible for new hotfixes after {0}.
+        ///   Looks up a localized string similar to No further hotfixes released after {0}.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_WARNING_CU {
             get {
@@ -18744,7 +18744,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not eligible for new hotfixes released after {0}.
+        ///   Looks up a localized string similar to Not eligible for hotfixes released after {0}.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_WARNING_FREE {
             get {
