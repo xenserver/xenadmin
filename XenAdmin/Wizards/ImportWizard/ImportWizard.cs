@@ -738,7 +738,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		public enum ImportType
 		{
 			/// <summary>
-			/// Exported VM or template; filetype *xva
+			/// Exported VM or template; filetype *.xva, *.xva.gz
 			/// </summary>
 			Xva,
 			/// <summary>

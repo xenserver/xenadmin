@@ -19143,7 +19143,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva)|*.xva|XVA Version 1|ova.xml.
+        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml.
         /// </summary>
         public static string IMPORT_SOURCE_PAGE_FILETYPES {
             get {
