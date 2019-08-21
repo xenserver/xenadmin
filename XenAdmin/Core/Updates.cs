@@ -41,6 +41,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
 using System.Text;
+using XenAdmin.Alerts.Types;
 using XenCenterLib;
 
 namespace XenAdmin.Core
@@ -945,6 +946,38 @@ namespace XenAdmin.Core
             if (string.IsNullOrEmpty(patchName))
                 return null;
             return FindPatchAlert(p => p.Name.Equals(patchName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public static hotfix_eligibility HotfixEligibility(Host host, out XenServerVersion xenServerVersion)
+        {
+            xenServerVersion = null;
+            if (XenServerVersions == null)
+                return hotfix_eligibility.all;
+
+            xenServerVersion = GetServerVersions(host, XenServerVersions).FirstOrDefault();
+
+            return xenServerVersion?.HotfixEligibility ?? hotfix_eligibility.all;
+        }
+
+        public static void CheckHotfixEligibility(IXenConnection connection)
+        {
+            var master = Helpers.GetMaster(connection);
+            if (master == null)
+                return;
+
+            var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
+
+            if (hotfixEligibility == hotfix_eligibility.all ||
+                hotfixEligibility == hotfix_eligibility.premium && !master.IsFreeLicenseOrExpired())
+            {
+                Alert.RemoveAlert(a => a.Connection != null && a.Connection.Equals(connection));
+                return;
+            }
+
+            var alert = new HotfixEligibilityAlert(connection, xenServerVersion);
+
+            if (Alert.FindAlert(alert) == null)
+                Alert.AddAlert(alert);
         }
     }
 }

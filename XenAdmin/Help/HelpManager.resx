@@ -1158,4 +1158,7 @@
   <data name="TabPageUSB" xml:space="preserve">
     <value>1020</value>
   </data>
+  <data name="HotfixEligibilityAlert" xml:space="preserve">
+    <value>6310</value>
+  </data>
 </root>

@@ -6432,6 +6432,36 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix check</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU" xml:space="preserve">
+    <value>A new Cumulative Update is available for {0}. After {1} there will be no further hotfixes released for {2}. Please update to the latest Cumulative Update.</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL" xml:space="preserve">
+    <value>{0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version.</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE" xml:space="preserve">
+    <value>{0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest CR.</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE" xml:space="preserve">
+    <value>{0} reached End of Life for express customers on {1}. You are no longer eligible for hotfixes released after this date. Please upgrade to the latest CR.</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_CU" xml:space="preserve">
+    <value>A new Cumulative Update is available</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL" xml:space="preserve">
+    <value>{0} has reached End of Life</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE" xml:space="preserve">
+    <value>{0} has reached End of Life for express customers</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU" xml:space="preserve">
+    <value>No further hotfixes released after {0}</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
+    <value>End of Life on {0}</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
+    <value>Not eligible for hotfixes released after {0}</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>Hourly; at {0} minutes past each hour</value>
   </data>
@@ -13828,6 +13858,9 @@ Are you sure you want to enable automated power management for this Host?</value
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
+  </data>
+  <data name="XENSERVER_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] Templates</value>
