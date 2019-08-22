@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards.ConversionWizard
             // SrSelectionPage
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SrSelectionPage";
             this.tableLayoutPanel1.ResumeLayout(false);
