@@ -3283,14 +3283,14 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_DETAIL_CONVERSION_ID" xml:space="preserve">
     <value>Conversion ID</value>
   </data>
+  <data name="CONVERSION_DETAIL_DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="CONVERSION_DETAIL_DISK_WRITE" xml:space="preserve">
     <value>Disk write</value>
   </data>
   <data name="CONVERSION_DETAIL_DURATION" xml:space="preserve">
     <value>Duration</value>
-  </data>
-  <data name="CONVERSION_DETAIL_ERROR" xml:space="preserve">
-    <value>Error</value>
   </data>
   <data name="CONVERSION_DETAIL_FINISH_TIME" xml:space="preserve">
     <value>Finish time</value>
@@ -3300,6 +3300,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_DETAIL_NETWORK_READ" xml:space="preserve">
     <value>Network read</value>
+  </data>
+  <data name="CONVERSION_DETAIL_NETWORK_READ_COMPRESSED" xml:space="preserve">
+    <value>{0} (compressed)</value>
   </data>
   <data name="CONVERSION_DETAIL_START_TIME" xml:space="preserve">
     <value>Start time</value>
@@ -3368,6 +3371,27 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>A {0} user does not have sufficient permissions to run the Conversion Manager. Please login using an account with one of the following roles:
 
 {1}</value>
+  </data>
+  <data name="CONVERSION_STATUS_CREATED" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="CONVERSION_STATUS_QUEUED" xml:space="preserve">
+    <value>Queued</value>
+  </data>
+  <data name="CONVERSION_STATUS_RUNNING" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="CONVERSION_STATUS_SUCCESSFUL" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="CONVERSION_STATUS_FAILED" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="CONVERSION_STATUS_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_FREE_SPACE" xml:space="preserve">
     <value>Free space {0}</value>

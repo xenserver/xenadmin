@@ -73,7 +73,7 @@ namespace XenAdmin.Dialogs
             Messages.CONVERSION_DETAIL_FINISH_TIME,
             Messages.CONVERSION_DETAIL_DURATION,
             Messages.CONVERSION_DETAIL_STATUS,
-            Messages.CONVERSION_DETAIL_ERROR
+            Messages.CONVERSION_DETAIL_DESCRIPTION
         };
 
         #endregion
@@ -368,7 +368,13 @@ namespace XenAdmin.Dialogs
                 dataGridViewConversions.Rows.Clear();
                 var rows = CurrentConversionList.Where(c => !toolStripDdbFilterStatus.HideByStatus(c)).Select(c => new ConversionRow(c)).ToList();
 
-                if (dataGridViewConversions.SortedColumn != null)
+                if (dataGridViewConversions.SortedColumn == null)
+                {
+                    rows.Sort((r1, r2) => CompareConversionRows(ColumnStartTime.Index, r1, r2));
+                    rows.Reverse();
+                    dataGridViewConversions.Sort(ColumnStartTime, ListSortDirection.Descending);
+                }
+                else
                 {
                     rows.Sort((r1, r2) => CompareConversionRows(dataGridViewConversions.SortedColumn.Index, r1, r2));
 
@@ -484,17 +490,21 @@ namespace XenAdmin.Dialogs
                     finishTimeString = HelpersGUI.DateTimeToString(finishTime, Messages.DATEFORMAT_DMY_HM, true);
             });
 
+            var statusDetail = conversion.StatusDetail;
+            if (!string.IsNullOrWhiteSpace(conversion.Error))
+                statusDetail = string.Format("{0}\n{1}", statusDetail, conversion.Error);
+
             return new[]
             {
                 conversion.Id,
                 conversion.SRName,
-                Util.DiskSizeString(conversion.CompressedBytesRead),
+                string.Format(Messages.CONVERSION_DETAIL_NETWORK_READ_COMPRESSED, Util.DiskSizeString(conversion.CompressedBytesRead)),
                 Util.DiskSizeString(conversion.UncompressedBytesWritten),
                 startTimeString,
                 finishTimeString,
                 (finishTime - startTime).ToString(@"h\:mm\:ss"),
-                conversion.StatusDetail,
-                string.IsNullOrWhiteSpace(conversion.Error) ? Messages.HYPHEN: conversion.Error
+                conversion.GetStatusString(),
+                statusDetail
             };
         }
 

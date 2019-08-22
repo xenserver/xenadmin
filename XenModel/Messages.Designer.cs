@@ -9081,6 +9081,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string CONVERSION_DETAIL_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk write.
         /// </summary>
         public static string CONVERSION_DETAIL_DISK_WRITE {
@@ -9095,15 +9104,6 @@ namespace XenAdmin {
         public static string CONVERSION_DETAIL_DURATION {
             get {
                 return ResourceManager.GetString("CONVERSION_DETAIL_DURATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error.
-        /// </summary>
-        public static string CONVERSION_DETAIL_ERROR {
-            get {
-                return ResourceManager.GetString("CONVERSION_DETAIL_ERROR", resourceCulture);
             }
         }
         
@@ -9131,6 +9131,15 @@ namespace XenAdmin {
         public static string CONVERSION_DETAIL_NETWORK_READ {
             get {
                 return ResourceManager.GetString("CONVERSION_DETAIL_NETWORK_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (compressed).
+        /// </summary>
+        public static string CONVERSION_DETAIL_NETWORK_READ_COMPRESSED {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_NETWORK_READ_COMPRESSED", resourceCulture);
             }
         }
         
@@ -9331,6 +9340,69 @@ namespace XenAdmin {
         public static string CONVERSION_RETRY_FAILURE {
             get {
                 return ResourceManager.GetString("CONVERSION_RETRY_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string CONVERSION_STATUS_CANCELLED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string CONVERSION_STATUS_CREATED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        public static string CONVERSION_STATUS_FAILED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete.
+        /// </summary>
+        public static string CONVERSION_STATUS_INCOMPLETE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_INCOMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queued.
+        /// </summary>
+        public static string CONVERSION_STATUS_QUEUED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_QUEUED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In progress.
+        /// </summary>
+        public static string CONVERSION_STATUS_RUNNING {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_RUNNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete.
+        /// </summary>
+        public static string CONVERSION_STATUS_SUCCESSFUL {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_SUCCESSFUL", resourceCulture);
             }
         }
         
