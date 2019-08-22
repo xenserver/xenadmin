@@ -3245,7 +3245,7 @@ You can only connect to a single [Citrix XenServer] Express Edition server at a 
   <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
     <value>This action will clear all the completed conversions from the Conversion Manager Virtual Appliance history.
 
-This action cannot be undone. Are you sure you wish to continue?</value>
+This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_CLEAR_HISTORY_FAILURE" xml:space="preserve">
     <value>Cannot clear the conversion history. Please see logs for details.</value>

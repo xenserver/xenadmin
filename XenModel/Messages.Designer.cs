@@ -8982,7 +8982,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to This action will clear all the completed conversions from the Conversion Manager Virtual Appliance history.
         ///
-        ///This action cannot be undone. Are you sure you wish to continue?.
+        ///This action cannot be undone. Are you sure you want to continue?.
         /// </summary>
         public static string CONVERSION_CLEAR_HISTORY_CONFIRM {
             get {
