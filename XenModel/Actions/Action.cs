@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
         bool InProgress { get; }
         bool IsCompleted { get; }
         bool Succeeded { get; }
-        bool Cancelled { get; }
+        bool IsCancelled { get; }
         bool IsError { get; }
         bool IsIncomplete { get; }
         bool IsQueued { get; }
@@ -327,7 +327,7 @@ namespace XenAdmin.Actions
         }
 
         public bool Succeeded => IsCompleted && Exception == null;
-        public bool Cancelled => IsCompleted && !Succeeded && Exception is CancelledException;
+        public bool IsCancelled => IsCompleted && !Succeeded && Exception is CancelledException;
         public bool IsError => IsCompleted && !Succeeded && !(Exception is CancelledException);
         public bool IsIncomplete => false;
         public bool IsQueued => false;
