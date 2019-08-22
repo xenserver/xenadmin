@@ -149,7 +149,30 @@ namespace XenAdmin.XCM
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
         public bool CanRetry => Status == (int)ConversionStatus.Cancelled || Status == (int)ConversionStatus.Failed;
-        
+
+
+        public string GetStatusString()
+        {
+            switch (Status)
+            {
+                case (int)ConversionStatus.Created:
+                    return Messages.CONVERSION_STATUS_CREATED;
+                case (int)ConversionStatus.Queued:
+                    return Messages.CONVERSION_STATUS_QUEUED;
+                case (int)ConversionStatus.Running:
+                    return Messages.CONVERSION_STATUS_RUNNING;
+                case (int)ConversionStatus.Successful:
+                    return Messages.CONVERSION_STATUS_SUCCESSFUL;
+                case (int)ConversionStatus.Failed:
+                    return Messages.CONVERSION_STATUS_FAILED;
+                case (int)ConversionStatus.Cancelled:
+                    return Messages.CONVERSION_STATUS_CANCELLED;
+                case (int)ConversionStatus.Incomplete:
+                    return Messages.CONVERSION_STATUS_INCOMPLETE;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(Status), "Unknown Conversion Status");
+            }
+        }
 
         #region Sorting methods
 
