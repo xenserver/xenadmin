@@ -77,6 +77,8 @@ namespace XenAdmin.TabPages
             // toolStripDdbFilterStatus
             // 
             this.toolStripDdbFilterStatus.AutoToolTip = false;
+            this.toolStripDdbFilterStatus.ImplementsQueued = false;
+            this.toolStripDdbFilterStatus.ImplementsIncomplete = false;
             this.toolStripDdbFilterStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDdbFilterStatus, "toolStripDdbFilterStatus");
             this.toolStripDdbFilterStatus.Name = "toolStripDdbFilterStatus";

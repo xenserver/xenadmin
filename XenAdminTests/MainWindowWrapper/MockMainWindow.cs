@@ -64,7 +64,7 @@ namespace XenAdminTests
 
         }
 
-        public void ShowPerConnectionWizard(IXenConnection connection, Form wizard)
+        public void ShowPerConnectionWizard(IXenConnection connection, Form wizard, Form parentForm = null)
         {
 
         }

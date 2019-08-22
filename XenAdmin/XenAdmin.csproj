@@ -88,6 +88,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +111,7 @@
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
+    <Compile Include="Commands\LaunchConversionManagerCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DisableChangedBlockTrackingCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
@@ -260,6 +262,12 @@
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
+    <Compile Include="Dialogs\ConversionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConversionDialog.Designer.cs">
+      <DependentUpon>ConversionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -744,6 +752,36 @@
     </Compile>
     <Compile Include="Wizards\BallooningWizard_Pages\MemorySettings.Designer.cs">
       <DependentUpon>MemorySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\ConversionWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\CredentialsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\CredentialsPage.Designer.cs">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\ConversionNetworkPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\SrSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\SrSelectionPage.Designer.cs">
+      <DependentUpon>SrSelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\SummaryPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\SummaryPage.Designer.cs">
+      <DependentUpon>SummaryPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\VmSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\ConversionWizard\VmSelectionPage.Designer.cs">
+      <DependentUpon>VmSelectionPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.cs">
       <SubType>UserControl</SubType>
@@ -1618,6 +1656,16 @@
     <EmbeddedResource Include="Dialogs\AttachUsbDialog.zh-CN.resx">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConversionDialog.ja.resx">
+      <DependentUpon>ConversionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConversionDialog.resx">
+      <DependentUpon>ConversionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConversionDialog.zh-CN.resx">
+      <DependentUpon>ConversionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -2180,6 +2228,42 @@
     <EmbeddedResource Include="Wizards\BallooningWizard_Pages\MemorySettings.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MemorySettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\CredentialsPage.ja.resx">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\CredentialsPage.resx">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\CredentialsPage.zh-CN.resx">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\SrSelectionPage.ja.resx">
+      <DependentUpon>SrSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\SrSelectionPage.resx">
+      <DependentUpon>SrSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\SrSelectionPage.zh-CN.resx">
+      <DependentUpon>SrSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\SummaryPage.ja.resx">
+      <DependentUpon>SummaryPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\SummaryPage.resx">
+      <DependentUpon>SummaryPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\SummaryPage.zh-CN.resx">
+      <DependentUpon>SummaryPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\VmSelectionPage.ja.resx">
+      <DependentUpon>VmSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\VmSelectionPage.resx">
+      <DependentUpon>VmSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ConversionWizard\VmSelectionPage.zh-CN.resx">
+      <DependentUpon>VmSelectionPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.ja.resx">
       <DependentUpon>CrossPoolMigrateCopyModePage.cs</DependentUpon>
@@ -4458,6 +4542,7 @@
     <None Include="Images\linx_16x.png" />
     <None Include="Images\yinhekylin_16x.png" />
     <None Include="Images\pool_32.png" />
+    <Content Include="Images\queued.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
@@ -6792,6 +6877,8 @@
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Images\VMTemplate_h32bit_32.png" />
+    <Content Include="Images\xcm.png" />
+    <Content Include="Images\xcm_32x32.png" />
     <Content Include="TestResources\credits.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
