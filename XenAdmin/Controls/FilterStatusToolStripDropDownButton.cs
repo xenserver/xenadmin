@@ -122,7 +122,7 @@ namespace XenAdmin.Controls
             return !(toolStripMenuItemComplete.Checked && iStatus.Succeeded
                 || toolStripMenuItemError.Checked && iStatus.IsError
                 || toolStripMenuItemInProgress.Checked && iStatus.InProgress
-                || toolStripMenuItemCancelled.Checked && iStatus.Cancelled
+                || toolStripMenuItemCancelled.Checked && iStatus.IsCancelled
                 || toolStripMenuItemIncomplete.Checked && iStatus.IsIncomplete
                 || toolStripMenuItemQueued.Checked && iStatus.IsQueued);
         }

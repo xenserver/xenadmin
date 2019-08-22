@@ -132,7 +132,7 @@ namespace XenAdmin.XCM
         public bool Succeeded => Status == (int)ConversionStatus.Successful;
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public bool Cancelled => Status == (int)ConversionStatus.Cancelled;
+        public bool IsCancelled => Status == (int)ConversionStatus.Cancelled;
 
         [XmlRpcMissingMapping(MappingAction.Ignore)]
         public bool IsError => Status == (int)ConversionStatus.Failed;
