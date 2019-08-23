@@ -101,7 +101,7 @@ namespace XenAdmin.Alerts.Types
                     case hotfix_eligibility.none:
                         return pool.IsFreeLicenseOrExpired()
                             ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(version.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                     default:
                         return string.Empty;
                 }
