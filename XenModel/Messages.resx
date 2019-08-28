@@ -3454,7 +3454,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>[XenCenter] is incompatible with this version of the Conversion Manager Virtual Appliance.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>?????</value>
+    <value>The version of the Conversion Manager Virtual Appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager Console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager Virtual Appliance matching your [XenServer] version.</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>Virtual Machines</value>

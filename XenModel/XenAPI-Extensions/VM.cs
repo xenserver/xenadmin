@@ -1469,7 +1469,7 @@ namespace XenAPI
 
         public bool IsConversionVM()
         {
-            return BoolKey(other_config, "conversionvm");
+            return is_a_real_vm() && BoolKey(other_config, "conversionvm");
         }
 
         public override string ToString()

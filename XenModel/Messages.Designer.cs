@@ -9587,7 +9587,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ?????.
+        ///   Looks up a localized string similar to The version of the Conversion Manager Virtual Appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager Console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager Virtual Appliance matching your [XenServer] version..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY_INFO {
             get {

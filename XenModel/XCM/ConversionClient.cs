@@ -43,8 +43,6 @@ namespace XenAdmin.XCM
         private readonly IConversionProxy _conversionProxy;
         private readonly NetworkCredential _credential;
 
-        public static readonly string[] SupportedVersions = {"7.6", "8.0"};
-
         public ConversionClient(IXenConnection connection, string vpxIp, bool useSsl)
         {
             Connection = connection;
@@ -151,20 +149,6 @@ namespace XenAdmin.XCM
         public void UpdateConversionProgress(Conversion conversion, ConversionProgressData progressData)
         {
             _conversionProxy.UpdateConversionProgress(conversion.Id, progressData);
-        }
-
-
-        public static int CompareVersions(string version1, string version2)
-        {
-            while (version1.Length < version2.Length)
-                version1 += ".0";
-
-            while (version1.Length > version2.Length)
-                version2 += ".0";
-
-            var v1 = new Version(version1);
-            var v2 = new Version(version2);
-            return v1.CompareTo(v2);
         }
     }
 }
