@@ -238,7 +238,7 @@ namespace XenAdmin.Dialogs
                 Program.Invoke(this, () =>
                 {
                     if (!Version.TryParse(version, out Version result) ||
-                        result.CompareTo(new Version(ConversionClient.MIN_SUPPORTED_VERSION)) < 0)
+                        result.CompareTo(new Version(Branding.ConversionVpxMinimumSupportedVersion)) < 0)
                     {
                         statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
                         statusLabel.Text = Messages.CONVERSION_VERSION_INCOMPATIBILITY;

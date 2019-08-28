@@ -43,8 +43,6 @@ namespace XenAdmin.XCM
         private readonly IConversionProxy _conversionProxy;
         private readonly NetworkCredential _credential;
 
-        public const string MIN_SUPPORTED_VERSION = "[BRANDING_XC_PRODUCT_7_0_VERSION]";
-
         public ConversionClient(IXenConnection connection, string vpxIp, bool useSsl)
         {
             Connection = connection;
