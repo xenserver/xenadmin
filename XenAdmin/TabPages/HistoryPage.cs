@@ -57,6 +57,8 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            toolStripDdbFilterStatus.ImplementsQueued = false;
+            toolStripDdbFilterStatus.ImplementsIncomplete = false;
             dataGridView.Sort(columnDate, ListSortDirection.Descending);
             toolStripTop.Renderer = new CustomToolStripRenderer();
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;

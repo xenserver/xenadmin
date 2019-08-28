@@ -84,6 +84,9 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
             Text = string.Format(Messages.CONVERSION_MANAGER_TITLE, Helpers.GetName(Helpers.GetPoolOfOne(conn)).Ellipsise(80));
 
+            toolStripDdbFilterStatus.ImplementsIncomplete = true;
+            toolStripDdbFilterStatus.ImplementsQueued = true;
+
             toolStripSplitButtonRefresh.DefaultItem = toolStripMenuItemRefreshAll;
             toolStripSplitButtonRefresh.Text = toolStripMenuItemRefreshAll.Text;
             toolStripSplitButtonLogs.DefaultItem = menuItemFetchAllLogs;
@@ -234,8 +237,8 @@ namespace XenAdmin.Dialogs
 
                 Program.Invoke(this, () =>
                 {
-                    if (!Version.TryParse(version, out _) ||
-                        ConversionClient.SupportedVersions.All(v => ConversionClient.CompareVersions(v, version) != 0))
+                    if (!Version.TryParse(version, out Version result) ||
+                        result.CompareTo(new Version(ConversionClient.MIN_SUPPORTED_VERSION)) < 0)
                     {
                         statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
                         statusLabel.Text = Messages.CONVERSION_VERSION_INCOMPATIBILITY;
@@ -551,14 +554,14 @@ namespace XenAdmin.Dialogs
             if (dataGridViewConversions.SelectedRows.Count == 1)
                 oneRow = dataGridViewConversions.SelectedRows[0] as ConversionRow;
 
-            toolStripButtonCancel.Enabled = oneRow != null && oneRow.Conversion.CanCancel;
-            toolStripButtonRetry.Enabled = oneRow != null && oneRow.Conversion.CanRetry;
+            contextItemCancel.Visible = toolStripButtonCancel.Enabled = oneRow != null && oneRow.Conversion.CanCancel;
+            contextItemRetry.Visible = toolStripButtonRetry.Enabled = oneRow != null && oneRow.Conversion.CanRetry;
 
-            toolStripMenuItemRefreshSelected.Enabled = oneRow != null;
+            contextItemRefresh.Visible = toolStripMenuItemRefreshSelected.Enabled = oneRow != null;
             toolStripMenuItemRefreshAll.Enabled = dataGridViewConversions.Rows.Count > 0;
             toolStripSplitButtonRefresh.Enabled = toolStripMenuItemRefreshAll.Enabled || toolStripMenuItemRefreshSelected.Enabled;
 
-            menuItemFetchSelectedLog.Enabled = oneRow != null;
+            contextItemFetchLogs.Visible = menuItemFetchSelectedLog.Enabled = oneRow != null;
             menuItemFetchAllLogs.Enabled = _conversionClient != null;
             toolStripSplitButtonLogs.Enabled = menuItemFetchSelectedLog.Enabled || menuItemFetchAllLogs.Enabled;
 
@@ -622,6 +625,33 @@ namespace XenAdmin.Dialogs
             var row2 = (ConversionRow)dataGridViewConversions.Rows[e.RowIndex2];
             e.SortResult = CompareConversionRows(e.Column.Index, row1, row2);
             e.Handled = true;
+        }
+
+        private void dataGridViewConversions_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+                return;
+
+            var hitTestInfo = dataGridViewConversions.HitTest(e.X, e.Y);
+
+            if (hitTestInfo.Type == DataGridViewHitTestType.Cell &&
+                0 <= hitTestInfo.RowIndex && hitTestInfo.RowIndex < dataGridViewConversions.Rows.Count)
+            {
+                dataGridViewConversions.Rows[hitTestInfo.RowIndex].Selected = true;
+                contextMenuStrip1.Show(dataGridViewConversions, new Point(e.X, e.Y));
+            }
+        }
+
+        private void dataGridViewConversions_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Apps)
+                return;
+
+            if (dataGridViewConversions.SelectedRows.Count > 0)
+            {
+                var row = dataGridViewConversions.SelectedRows[0];
+                contextMenuStrip1.Show(dataGridViewConversions, 3, row.Height * (row.Index + 2));
+            }
         }
 
         private void ConversionWizard_FormClosed(object sender, FormClosedEventArgs e)

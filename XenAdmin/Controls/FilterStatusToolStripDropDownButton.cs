@@ -127,14 +127,16 @@ namespace XenAdmin.Controls
                 || toolStripMenuItemQueued.Checked && iStatus.IsQueued);
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ImplementsQueued
         {
             get => toolStripMenuItemQueued.Visible;
             set => toolStripMenuItemQueued.Visible = value;
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ImplementsIncomplete
         {
             get => toolStripMenuItemIncomplete.Visible;

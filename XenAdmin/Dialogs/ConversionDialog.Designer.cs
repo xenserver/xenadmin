@@ -49,6 +49,11 @@
             this.columnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelDetails = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextItemFetchLogs = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextItemRetry = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextItemCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanelTop = new System.Windows.Forms.TableLayoutPanel();
             this.toolStripTop = new XenAdmin.Controls.ToolStripEx();
             this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
@@ -76,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConversions)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetails)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanelTop.SuspendLayout();
             this.toolStripTop.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -113,6 +119,8 @@
             this.dataGridViewConversions.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewConversions.SelectionChanged += new System.EventHandler(this.dataGridViewConversions_SelectionChanged);
             this.dataGridViewConversions.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewConversions_SortCompare);
+            this.dataGridViewConversions.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewConversions_KeyUp);
+            this.dataGridViewConversions.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewConversions_MouseUp);
             // 
             // ColumnVm
             // 
@@ -231,6 +239,40 @@
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextItemRefresh,
+            this.contextItemFetchLogs,
+            this.contextItemRetry,
+            this.contextItemCancel});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            // 
+            // contextItemRefresh
+            // 
+            this.contextItemRefresh.Name = "contextItemRefresh";
+            resources.ApplyResources(this.contextItemRefresh, "contextItemRefresh");
+            this.contextItemRefresh.Click += new System.EventHandler(this.toolStripMenuItemRefreshSelected_Click);
+            // 
+            // contextItemFetchLogs
+            // 
+            this.contextItemFetchLogs.Name = "contextItemFetchLogs";
+            resources.ApplyResources(this.contextItemFetchLogs, "contextItemFetchLogs");
+            this.contextItemFetchLogs.Click += new System.EventHandler(this.menuItemFetchSelectedLog_Click);
+            // 
+            // contextItemRetry
+            // 
+            this.contextItemRetry.Name = "contextItemRetry";
+            resources.ApplyResources(this.contextItemRetry, "contextItemRetry");
+            this.contextItemRetry.Click += new System.EventHandler(this.toolStripButtonRetry_Click);
+            // 
+            // contextItemCancel
+            // 
+            this.contextItemCancel.Name = "contextItemCancel";
+            resources.ApplyResources(this.contextItemCancel, "contextItemCancel");
+            this.contextItemCancel.Click += new System.EventHandler(this.toolStripButtonCancel_Click);
             // 
             // tableLayoutPanelTop
             // 
@@ -421,6 +463,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetails)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanelTop.ResumeLayout(false);
             this.toolStripTop.ResumeLayout(false);
             this.toolStripTop.PerformLayout();
@@ -469,6 +512,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFinishTime;
         private System.Windows.Forms.DataGridViewImageColumn ColumnStatus;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem contextItemRefresh;
+        private System.Windows.Forms.ToolStripMenuItem contextItemFetchLogs;
+        private System.Windows.Forms.ToolStripMenuItem contextItemRetry;
+        private System.Windows.Forms.ToolStripMenuItem contextItemCancel;
     }
 }
 
