@@ -39,12 +39,12 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Actions.Xcm;
 using XenAdmin.XCM;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Wizards.ConversionWizard;
 using XenAPI;
-using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs
@@ -62,6 +62,7 @@ namespace XenAdmin.Dialogs
         private volatile bool _updating;
         private volatile bool _updateRequired;
         private VM _conversionVm;
+        private ActivateConversionVpxAction _activateAction;
 
         private static readonly string[] DetailHeaders =
         {
@@ -124,8 +125,19 @@ namespace XenAdmin.Dialogs
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             timerVpx.Stop();
+
             if (_conversionVm != null)
                 _conversionVm.PropertyChanged -= _conversionVm_PropertyChanged;
+
+            if (_activateAction != null)
+            {
+                _activateAction.Completed -= ActivateConversionVpxAction_Completed;
+                _activateAction.Changed -= ActivateConversionVpxAction_Changed;
+
+                if (!_activateAction.IsCompleted)
+                    _activateAction.Cancel();
+            }
+
             base.OnFormClosing(e);
         }
 
@@ -138,62 +150,49 @@ namespace XenAdmin.Dialogs
             statusLabel.Text = Messages.CONVERSION_INITIALIZING_VPX;
             statusLinkLabel.Reset();
 
-            ThreadPool.QueueUserWorkItem(obj =>
+            _activateAction = new ActivateConversionVpxAction(connection);
+            _activateAction.Completed += ActivateConversionVpxAction_Completed;
+            _activateAction.Changed += ActivateConversionVpxAction_Changed;
+            _activateAction.RunAsync();
+        }
+
+        private void ActivateConversionVpxAction_Completed(ActionBase obj)
+        {
+            if (!(obj is ActivateConversionVpxAction action))
+                return;
+
+            action.Completed -= ActivateConversionVpxAction_Completed;
+            action.Changed -= ActivateConversionVpxAction_Changed;
+
+            Program.Invoke(this, () =>
             {
-                var master = Helpers.GetMaster(connection);
-
-                string serviceIp = null;
-                try
+                if (!action.Succeeded)
                 {
-                    serviceIp = Host.call_plugin(connection.Session, master.opaque_ref, "conversion", "main", null);
-                }
-                catch (Exception e)
-                {
-                    log.Error("Cannot communicate with the conversion plugin.", e);
+                    statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
+                    statusLabel.Text = action.Exception.Message;
+                    statusLinkLabel.Reset(Messages.CONVERSION_TRY_AGAIN, ConnectToVpx);
+                    return;
                 }
 
-                Program.Invoke(this, () =>
-                {
-                    if (string.IsNullOrEmpty(serviceIp))
-                    {
-                        statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
-                        statusLabel.Text = Messages.CONVERSION_INITIALIZING_VPX_FAILURE;
-                        statusLinkLabel.Reset(Messages.CONVERSION_TRY_AGAIN, ConnectToVpx);
-                        return;
-                    }
+                var useSsl = Properties.Settings.Default.ConversionClientUseSsl;
+                _conversionClient = new ConversionClient(connection, action.ServiceIp, useSsl);
 
-                    var useSsl = Properties.Settings.Default.ConversionClientUseSsl;
-                    _conversionClient = new ConversionClient(connection, serviceIp, useSsl);
-                    RegisterVM(serviceIp);
-                    CheckVersionCompatibility();
-                });
+                // if we're reconnecting the conversion VM, we need to clear the old one
+                if (_conversionVm != null)
+                    _conversionVm.PropertyChanged -= _conversionVm_PropertyChanged;
+                _conversionVm = action.ConversionVm;
+                _conversionVm.PropertyChanged += _conversionVm_PropertyChanged;
+
+                CheckVersionCompatibility();
             });
         }
 
-        private void RegisterVM(string ipAddress)
+        private void ActivateConversionVpxAction_Changed(ActionBase obj)
         {
-            // if we're reconnecting the conversion VM, we need to clear the old one
-            if (_conversionVm != null)
-            {
-                _conversionVm.PropertyChanged -= _conversionVm_PropertyChanged;
-                _conversionVm = null;
-            }
+            if (!(obj is ActivateConversionVpxAction action))
+                return;
 
-            var vifs = connection.Cache.VIFs;
-
-            foreach (var vif in vifs)
-            {
-                if (!vif.IPAddresses().Contains(ipAddress))
-                    continue;
-
-                var vm = connection.Resolve(vif.VM);
-                if (!vm.IsConversionVM())
-                    continue;
-
-                _conversionVm = vm;
-                _conversionVm.PropertyChanged += _conversionVm_PropertyChanged;
-                break;
-            }
+            Program.Invoke(this, () => { statusLabel.Text = action.Description; });
         }
 
         private void _conversionVm_PropertyChanged(object sender, PropertyChangedEventArgs e)
