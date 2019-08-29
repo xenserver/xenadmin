@@ -8980,6 +8980,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot find a Conversion Manager Virtual Appliance..
+        /// </summary>
+        public static string CONVERSION_CANNOT_FIND_VPX {
+            get {
+                return ResourceManager.GetString("CONVERSION_CANNOT_FIND_VPX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot obtain an IP address for the Conversion Manager Virtual Appliance..
+        /// </summary>
+        public static string CONVERSION_CANNOT_OBTAIN_VPX_IP {
+            get {
+                return ResourceManager.GetString("CONVERSION_CANNOT_OBTAIN_VPX_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This action will clear all the completed conversions from the Conversion Manager Virtual Appliance history.
         ///
         ///This action cannot be undone. Are you sure you want to continue?.
@@ -9610,6 +9628,51 @@ namespace XenAdmin {
         public static string CONVERSION_VM_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("CONVERSION_VM_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obtaining an IP address for the Conversion Manager Virtual Appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_OBTAIN_IP {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_OBTAIN_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resuming the Conversion Manager Virtual Appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_RESUME {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_RESUME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting the Conversion Manager Virtual Appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_START {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_START", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot deduce the power state of the Conversion Manager Virtual Appliance..
+        /// </summary>
+        public static string CONVERSION_VPX_UNKNOWN_POWER_STATE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_UNKNOWN_POWER_STATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Un-pausing the Conversion Manager Virtual Appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_UNPAUSE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_UNPAUSE", resourceCulture);
             }
         }
         

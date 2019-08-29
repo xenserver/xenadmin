@@ -3256,6 +3256,12 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_CANCEL_FAILURE" xml:space="preserve">
     <value>Cannot cancel the conversion. Please see logs for details.</value>
   </data>
+  <data name="CONVERSION_CANNOT_FIND_VPX" xml:space="preserve">
+    <value>Cannot find a Conversion Manager Virtual Appliance.</value>
+  </data>
+  <data name="CONVERSION_CANNOT_OBTAIN_VPX_IP" xml:space="preserve">
+    <value>Cannot obtain an IP address for the Conversion Manager Virtual Appliance.</value>
+  </data>
   <data name="CONVERSION_CONNECTING_VMWARE" xml:space="preserve">
     <value>Connecting to the VMware server...</value>
   </data>
@@ -3461,6 +3467,21 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TITLE" xml:space="preserve">
     <value>Select the VMs to convert</value>
+  </data>
+  <data name="CONVERSION_VPX_OBTAIN_IP" xml:space="preserve">
+    <value>Obtaining an IP address for the Conversion Manager Virtual Appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_RESUME" xml:space="preserve">
+    <value>Resuming the Conversion Manager Virtual Appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_START" xml:space="preserve">
+    <value>Starting the Conversion Manager Virtual Appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
+    <value>Un-pausing the Conversion Manager Virtual Appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_UNKNOWN_POWER_STATE" xml:space="preserve">
+    <value>Cannot deduce the power state of the Conversion Manager Virtual Appliance.</value>
   </data>
   <data name="CONVERSION_WIZARD_TEXT" xml:space="preserve">
     <value>New Conversion</value>
