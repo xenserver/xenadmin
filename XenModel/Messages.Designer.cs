@@ -18735,6 +18735,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End of Life on {0}.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_WARNING_EOL {
@@ -18744,11 +18753,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End of Life.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not eligible for hotfixes released after {0}.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_WARNING_FREE {
             get {
                 return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life for express customers.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE", resourceCulture);
             }
         }
         

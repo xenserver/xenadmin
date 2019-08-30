@@ -77,7 +77,7 @@ namespace XenAdmin.Core
         /// <param name="presentAsUpdate">Indicates that the new version (usually a CU) should be presented as an update where possible</param>
         public XenServerVersion(string version_oem, string name, bool latest, bool latestCr, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
             string timestamp, string buildNumber, string patchUuid, bool presentAsUpdate, string minXcVersion, string hotfixEligibility, string hotfixEligibilityPremiumDate,
-            string HotfixEligibilityNoneDate, string eolDate)
+            string hotfixEligibilityNoneDate, string eolDate)
         {
             ParseVersion(version_oem);
             Name = name;
@@ -93,7 +93,7 @@ namespace XenAdmin.Core
             ParseMinXcVersion(minXcVersion);
             Enum.TryParse(hotfixEligibility, out HotfixEligibility);
             DateTime.TryParse(hotfixEligibilityPremiumDate, out HotfixEligibilityPremiumDate);
-            DateTime.TryParse(HotfixEligibilityNoneDate, out this.HotfixEligibilityNoneDate);
+            DateTime.TryParse(hotfixEligibilityNoneDate, out HotfixEligibilityNoneDate);
             DateTime.TryParse(eolDate, out EolDate);
         }
 
