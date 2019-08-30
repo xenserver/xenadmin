@@ -6456,11 +6456,20 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOTFIX_ELIGIBILITY_WARNING_CU" xml:space="preserve">
     <value>No further hotfixes released after {0}</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE" xml:space="preserve">
+    <value>A new Cumulative Update is available</value>
+  </data>
   <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
     <value>End of Life on {0}</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE" xml:space="preserve">
+    <value>End of Life</value>
+  </data>
   <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
     <value>Not eligible for hotfixes released after {0}</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
+    <value>End of Life for express customers</value>
   </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>Hourly; at {0} minutes past each hour</value>
