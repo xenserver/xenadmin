@@ -4992,6 +4992,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Error Deactivating Virtual Disks</value>
   </data>
+  <data name="ERROR_DESTINATION_DIR_NON_EXIST" xml:space="preserve">
+    <value>Destination directory does not exist.</value>
+  </data>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE" xml:space="preserve">
     <value>The following storage could not be destroyed:</value>
   </data>
@@ -5285,9 +5288,6 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR" xml:space="preserve">
     <value>Destination directory is invalid.</value>
-  </data>
-  <data name="EXPORT_APPLIANCE_PAGE_ERROR_NON_EXIST_DIR" xml:space="preserve">
-    <value>Destination directory does not exist.</value>
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_PERMISSIONS" xml:space="preserve">
     <value>You do not have write permission on the destination directory.</value>

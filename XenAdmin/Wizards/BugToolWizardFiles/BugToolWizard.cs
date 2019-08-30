@@ -29,15 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
+
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
@@ -77,50 +72,6 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
-            // If the user has chosen a file that already exists, get confirmation
-            string path = bugToolPageDestination1.OutputFile;
-            if (File.Exists(path))
-            {
-                DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path), Messages.XENCENTER),
-                        ThreeButtonDialog.ButtonOK,
-                        new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true)))
-                {
-                    dialogResult = dlg.ShowDialog(this);
-                }
-                if (dialogResult != DialogResult.OK)
-                {
-                    FinishCanceled();
-                    return;
-                }
-            }
-
-            // Check we can write to the destination file - otherwise we only find out at the 
-            // end of the ZipStatusReportAction, and the downloaded server files are lost,
-            // and the user will have to run the wizard again.
-            try
-            {
-                using (FileStream temp = File.OpenWrite(path))
-                {
-                    // Yay, it worked
-                }
-            }
-            catch (Exception exn)
-            {
-                // Failure
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message),
-                       Messages.XENCENTER)))
-                {
-                    dlg.ShowDialog(this);
-                }
-                FinishCanceled();
-                return;
-            }
-
             AsyncAction action;
             if (bugToolPageDestination1.Upload)
             {
@@ -142,10 +93,6 @@ namespace XenAdmin.Wizards
             }
 
             action.RunAsync();
-
-
-            // Save away the output path for next time
-            XenAdmin.Properties.Settings.Default.ServerStatusPath = bugToolPageDestination1.OutputFile;
 
             log.Debug("Cleaning up crash dump logs on server");
             var capabilities = bugToolPageSelectCapabilities1.Capabilities;
