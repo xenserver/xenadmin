@@ -39,12 +39,12 @@ namespace XenAdmin.Alerts.Types
     public class HotfixEligibilityAlert: Alert
     {
         private readonly Pool pool;
-        private readonly XenServerVersion version;
+        public readonly XenServerVersion Version;
 
         public HotfixEligibilityAlert(IXenConnection connection, XenServerVersion version)
         {
             Connection = connection;
-            this.version = version;
+            this.Version = version;
             pool = Helpers.GetPoolOfOne(connection);
             _timestamp = DateTime.Now;
          }
@@ -55,14 +55,14 @@ namespace XenAdmin.Alerts.Types
         {
             get
             {
-                if (pool == null || version == null)
+                if (pool == null || Version == null)
                     return string.Empty;
 
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING,
                     Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : Messages.XENSERVER_LEGACY,
                     Helpers.GetMaster(Connection)?.ProductVersionText());
 
-                switch (version.HotfixEligibility)
+                switch (Version.HotfixEligibility)
                 {
                     case hotfix_eligibility.premium:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
@@ -90,18 +90,18 @@ namespace XenAdmin.Alerts.Types
                     Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : Messages.XENSERVER_LEGACY,
                     versionText);
 
-                switch (version.HotfixEligibility)
+                switch (Version.HotfixEligibility)
                 {
                     case hotfix_eligibility.premium:
-                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                     case hotfix_eligibility.cu:
                         return pool.IsFreeLicenseOrExpired()
-                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU, productVersionText, HelpersGUI.DateTimeToString(version.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
+                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
+                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
                     case hotfix_eligibility.none:
                         return pool.IsFreeLicenseOrExpired()
-                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
+                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                     default:
                         return string.Empty;
                 }
@@ -121,9 +121,7 @@ namespace XenAdmin.Alerts.Types
         public override bool Equals(Alert other)
         {
             if (other is HotfixEligibilityAlert alert)
-            {
-                return Connection == alert.Connection;
-            }
+                return Connection == alert.Connection && Version == alert.Version;
             return base.Equals(other);
         }
         #endregion
