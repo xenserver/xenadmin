@@ -1397,19 +1397,34 @@ namespace XenAdmin.TabPages
         private string AdditionalVersionString(Host host)
         {
             var hotfixEligibility = Updates.HotfixEligibility(host, out var xenServerVersion);
+            var unlicensed = host.IsFreeLicenseOrExpired();
 
             switch (hotfixEligibility)
             {
-                case hotfix_eligibility.premium:
-                    return host.IsFreeLicenseOrExpired() 
-                        ? string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_FREE, HelpersGUI.DateTimeToString(xenServerVersion.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                        : string.Empty;
+                // premium
+                case hotfix_eligibility.premium when unlicensed && xenServerVersion.HotfixEligibilityPremiumDate != DateTime.MinValue:
+                    return string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_FREE, HelpersGUI.DateTimeToString(xenServerVersion.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                case hotfix_eligibility.premium when unlicensed:
+                    return Messages.HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE;
+
+                // cu
+                case hotfix_eligibility.cu when unlicensed && xenServerVersion.HotfixEligibilityPremiumDate != DateTime.MinValue:
+                    return string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_FREE, HelpersGUI.DateTimeToString(xenServerVersion.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                case hotfix_eligibility.cu when unlicensed:
+                    return Messages.HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE;
+
+                case hotfix_eligibility.cu when xenServerVersion.HotfixEligibilityNoneDate != DateTime.MinValue:
+                    return string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_CU, HelpersGUI.DateTimeToString(xenServerVersion.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                 case hotfix_eligibility.cu:
-                    return host.IsFreeLicenseOrExpired() 
-                        ? string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_FREE, HelpersGUI.DateTimeToString(xenServerVersion.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                        : string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_CU, HelpersGUI.DateTimeToString(xenServerVersion.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
-                case hotfix_eligibility.none:
+                    return Messages.HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE;
+
+                // none
+                case hotfix_eligibility.none when xenServerVersion.EolDate != DateTime.MinValue:
                     return string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_EOL, HelpersGUI.DateTimeToString(xenServerVersion.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                case hotfix_eligibility.none:
+                    return Messages.HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE;
+                
+                // default
                 default:
                     return string.Empty;
             }

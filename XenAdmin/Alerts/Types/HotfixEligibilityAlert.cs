@@ -66,10 +66,10 @@ namespace XenAdmin.Alerts.Types
                 {
                     case hotfix_eligibility.premium:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
+                    case hotfix_eligibility.cu when pool.IsFreeLicenseOrExpired():
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
                     case hotfix_eligibility.cu:
-                        return pool.IsFreeLicenseOrExpired() 
-                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText) 
-                            : Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_CU;
+                        return Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_CU;
                     case hotfix_eligibility.none:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL, productVersionText);
                     default:
@@ -89,19 +89,27 @@ namespace XenAdmin.Alerts.Types
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING, 
                     Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : Messages.XENSERVER_LEGACY,
                     versionText);
+                var unlicensed = pool.IsFreeLicenseOrExpired();
 
                 switch (Version.HotfixEligibility)
                 {
-                    case hotfix_eligibility.premium:
+                    // premium
+                    case hotfix_eligibility.premium when Version.HotfixEligibilityPremiumDate != DateTime.MinValue: 
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
-                    case hotfix_eligibility.cu:
-                        return pool.IsFreeLicenseOrExpired()
-                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
-                    case hotfix_eligibility.none:
-                        return pool.IsFreeLicenseOrExpired()
-                            ? string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true))
-                            : string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+
+                    // cu
+                    case hotfix_eligibility.cu when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                    case hotfix_eligibility.cu when !unlicensed && Version.HotfixEligibilityNoneDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
+
+                    // none
+                    case hotfix_eligibility.none when unlicensed && Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                    case hotfix_eligibility.none when Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+
+                    // default
                     default:
                         return string.Empty;
                 }
