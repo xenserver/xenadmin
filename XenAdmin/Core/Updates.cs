@@ -964,17 +964,21 @@ namespace XenAdmin.Core
 
             var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
 
-            if (hotfixEligibility == hotfix_eligibility.all ||
+            if (xenServerVersion == null || hotfixEligibility == hotfix_eligibility.all ||
                 hotfixEligibility == hotfix_eligibility.premium && !master.IsFreeLicenseOrExpired())
             {
-                Alert.RemoveAlert(a => a.Connection != null && a.Connection.Equals(connection));
+                Alert.RemoveAlert(a => a is HotfixEligibilityAlert && connection.Equals(a.Connection));
                 return;
             }
 
-            var alert = new HotfixEligibilityAlert(connection, xenServerVersion);
-
-            if (Alert.FindAlert(alert) == null)
-                Alert.AddAlert(alert);
+            var alertIndex = Alert.FindAlertIndex(a => a is HotfixEligibilityAlert alert && connection.Equals(alert.Connection) && xenServerVersion == alert.Version);
+            if (alertIndex == -1)
+            {
+                Alert.RemoveAlert(a => a is HotfixEligibilityAlert && connection.Equals(a.Connection)); // ensure that there is no other alert for this connection
+                Alert.AddAlert(new HotfixEligibilityAlert(connection, xenServerVersion));
+            }
+            else
+                Alert.RefreshAlertAt(alertIndex);
         }
     }
 }
