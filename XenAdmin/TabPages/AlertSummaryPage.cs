@@ -600,6 +600,7 @@ namespace XenAdmin.TabPages
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
+                case CollectionChangeAction.Refresh:
                     Rebuild(); // rebuild entire alert list to ensure filtering and sorting
                     break;
                 case CollectionChangeAction.Remove:

@@ -91,6 +91,21 @@ namespace XenAdmin.Alerts
                 return XenCenterAlerts.Find(predicate);
         }
 
+        public static int FindAlertIndex(Predicate<Alert> predicate)
+        {
+            lock (XenCenterAlertsLock)
+                return XenCenterAlerts.FindIndex(predicate);
+        }
+
+        public static void RefreshAlertAt(int index)
+        {
+            lock (XenCenterAlertsLock)
+            {
+                if (index >= 0 && index < XenCenterAlerts.Count)
+                    XenCenterAlerts[index] = XenCenterAlerts[index]; // this will trigger the CollectionChanged event with CollectionChangeAction.Refresh
+            }
+        }
+
         /// <summary>
         /// locks the list of alerts before taking a total, and then returning that value
         /// </summary>
