@@ -14165,6 +14165,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Destination directory does not exist..
+        /// </summary>
+        public static string ERROR_DESTINATION_DIR_NON_EXIST {
+            get {
+                return ResourceManager.GetString("ERROR_DESTINATION_DIR_NON_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The following storage could not be destroyed:.
         /// </summary>
         public static string ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE {
@@ -14956,15 +14965,6 @@ namespace XenAdmin {
         public static string EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR {
             get {
                 return ResourceManager.GetString("EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Destination directory does not exist..
-        /// </summary>
-        public static string EXPORT_APPLIANCE_PAGE_ERROR_NON_EXIST_DIR {
-            get {
-                return ResourceManager.GetString("EXPORT_APPLIANCE_PAGE_ERROR_NON_EXIST_DIR", resourceCulture);
             }
         }
         

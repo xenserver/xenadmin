@@ -604,7 +604,11 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private bool Download()
         {
-            using (var dlog = new FolderBrowserDialog { Description = Messages.FOLDER_BROWSER_DOWNLOAD_APPLIANCE })
+            using (var dlog = new FolderBrowserDialog
+            {
+                Description = Messages.FOLDER_BROWSER_DOWNLOAD_APPLIANCE,
+                SelectedPath = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads)
+            })
             {
                 if (dlog.ShowDialog() == DialogResult.OK)
                 {
