@@ -298,7 +298,7 @@
     <value>PowerShell“ExecutionPolicy”等于“受限制”时，无法加载 XenServerPSSnapIn。</value>
   </data>
   <data name="Exception-PowerShellNotPresent" xml:space="preserve">
-    <value>必须安装 Powershell 才能使用 Powershell 插件。可以从 Microsoft 网站下载 Powershell。</value>
+    <value>必须安装 Powershell 才能使用 PowerShell 插件。可以从 Microsoft 网站下载 PowerShell。</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
     <value>必须安装 XenServerPSSnapIn 才能使用 [XenServer] PowerShell 命令。可以在 SDK 中找到 XenServerPSSnapIn。</value>

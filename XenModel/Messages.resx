@@ -5395,16 +5395,16 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
     <value>External command exited with Exit Code: {0}</value>
   </data>
   <data name="EXTERNAL_PLUGIN_FINISHED" xml:space="preserve">
-    <value>Plugin finished running</value>
+    <value>Plug-in finished running</value>
   </data>
   <data name="EXTERNAL_PLUGIN_RUNNING" xml:space="preserve">
     <value>Running '{0}'</value>
   </data>
   <data name="EXTERNAL_PLUGIN_TITLE" xml:space="preserve">
-    <value>Run '{0}' from plugin '{1}'</value>
+    <value>Run '{0}' from plug-in '{1}'</value>
   </data>
   <data name="EXTERNAL_PLUGIN_WIN32" xml:space="preserve">
-    <value>Failed to run plugin executable. Please see the client log for details.</value>
+    <value>Failed to run plug-in executable. Please see the client log for details.</value>
   </data>
   <data name="FAILED" xml:space="preserve">
     <value>Failed</value>
@@ -5605,7 +5605,7 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
     <value>&amp;Force close</value>
   </data>
   <data name="FORCE_CLOSE_PLUGIN_PROMPT" xml:space="preserve">
-    <value>Plugin {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?</value>
+    <value>Plug-in {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?</value>
   </data>
   <data name="FORCE_ENABLE_RDP" xml:space="preserve">
     <value>Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?</value>
@@ -10020,10 +10020,10 @@ File not found</value>
 Please reconnect the host and try again</value>
   </data>
   <data name="PLUGINS" xml:space="preserve">
-    <value>Plugins</value>
+    <value>Plug-ins</value>
   </data>
   <data name="PLUGINS_DESC" xml:space="preserve">
-    <value>Adjust settings for plugins to [XenCenter]</value>
+    <value>Adjust settings for plug-ins to [XenCenter]</value>
   </data>
   <data name="PLUGINS_MENU_ITEMS_ONLY_ONE_CHILD_ALLOWED" xml:space="preserve">
     <value>Menu item features must only have a single command XML node as a child</value>
@@ -10038,10 +10038,10 @@ Please reconnect the host and try again</value>
     <value>Copyright</value>
   </data>
   <data name="PLUGIN_ENABLED_COUNT" xml:space="preserve">
-    <value>{0} plugins enabled</value>
+    <value>{0} plug-ins enabled</value>
   </data>
   <data name="PLUGIN_ENABLED_COUNT_ONE" xml:space="preserve">
-    <value>1 plugin enabled</value>
+    <value>1 plug-in enabled</value>
   </data>
   <data name="PLUGIN_FEATURES" xml:space="preserve">
     <value>Features</value>
@@ -12054,7 +12054,7 @@ Verify that the file is a valid {1} export.</value>
     <value>Unlimited</value>
   </data>
   <data name="UNRECOGNISED_PLUGIN_VERSION" xml:space="preserve">
-    <value>Unrecognised plugin version '{0}'</value>
+    <value>Unrecognized plug-in version '{0}'</value>
   </data>
   <data name="UNSUPPORTED_SR_TYPE" xml:space="preserve">
     <value>Unsupported SR type</value>

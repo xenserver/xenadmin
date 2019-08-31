@@ -15356,7 +15356,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plugin finished running.
+        ///   Looks up a localized string similar to Plug-in finished running.
         /// </summary>
         public static string EXTERNAL_PLUGIN_FINISHED {
             get {
@@ -15374,7 +15374,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Run &apos;{0}&apos; from plugin &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Run &apos;{0}&apos; from plug-in &apos;{1}&apos;.
         /// </summary>
         public static string EXTERNAL_PLUGIN_TITLE {
             get {
@@ -15383,7 +15383,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to run plugin executable. Please see the client log for details..
+        ///   Looks up a localized string similar to Failed to run plug-in executable. Please see the client log for details..
         /// </summary>
         public static string EXTERNAL_PLUGIN_WIN32 {
             get {
@@ -15986,7 +15986,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plugin {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?.
+        ///   Looks up a localized string similar to Plug-in {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?.
         /// </summary>
         public static string FORCE_CLOSE_PLUGIN_PROMPT {
             get {
@@ -28830,7 +28830,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} plugins enabled.
+        ///   Looks up a localized string similar to {0} plug-ins enabled.
         /// </summary>
         public static string PLUGIN_ENABLED_COUNT {
             get {
@@ -28839,7 +28839,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1 plugin enabled.
+        ///   Looks up a localized string similar to 1 plug-in enabled.
         /// </summary>
         public static string PLUGIN_ENABLED_COUNT_ONE {
             get {
@@ -28893,7 +28893,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plugins.
+        ///   Looks up a localized string similar to Plug-ins.
         /// </summary>
         public static string PLUGINS {
             get {
@@ -28902,7 +28902,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adjust settings for plugins to [XenCenter].
+        ///   Looks up a localized string similar to Adjust settings for plug-ins to [XenCenter].
         /// </summary>
         public static string PLUGINS_DESC {
             get {
@@ -34791,7 +34791,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unrecognised plugin version &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Unrecognized plug-in version &apos;{0}&apos;.
         /// </summary>
         public static string UNRECOGNISED_PLUGIN_VERSION {
             get {
