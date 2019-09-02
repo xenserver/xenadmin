@@ -169,7 +169,6 @@ RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
 
 #mk
-rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
 rebranding_global ${REPO}/mk/package-and-sign.sh
 
 #WixInstaller
