@@ -40,37 +40,13 @@ namespace XenAdmin.Core
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        internal static bool AllowCredentialSave
-        {
-            get
-            {
-                return ReadBool(ALLOW_CREDENTIAL_SAVE, true);
-            }
-        }
+        internal static bool AllowCredentialSave => ReadBool(ALLOW_CREDENTIAL_SAVE, true);
 
-        internal static bool DisablePlugins
-        {
-            get
-            {
-                return ReadBool(DISABLE_PLUGINS, false);
-            }
-        }
+        internal static bool DisablePlugins => ReadBool(DISABLE_PLUGINS, false);
 
-        internal static bool ForceSystemFonts
-        {
-            get
-            {
-                return ReadBool(FORCE_SYSTEM_FONTS, false);
-            }
-        }
+        internal static bool ForceSystemFonts => ReadBool(FORCE_SYSTEM_FONTS, false);
 
-        internal static bool DontSudo
-        {
-            get
-            {
-                return ReadBool(DONT_SUDO, false);  // CA-38045
-            }
-        }
+        internal static bool DontSudo => ReadBool(DONT_SUDO, false);
 
         public static SSLCertificateTypes AlwaysShowSSLCertificates
         {
@@ -331,55 +307,25 @@ namespace XenAdmin.Core
             return (v != null) ? v : ReadKey(k, RegistryHive.LocalMachine);
         }
 
-        public static string HealthCheckIdentityTokenDomainName
-        {
-            get { return ReadKey(HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME); }
-        }
+        public static string HealthCheckIdentityTokenDomainName => ReadKey(HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME);
 
-        public static string HealthCheckUploadTokenDomainName
-        {
-            get { return ReadKey(HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME); }
-        }
+        public static string HealthCheckUploadTokenDomainName => ReadKey(HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME);
 
-        public static string HealthCheckUploadGrantTokenDomainName
-        {
-            get { return ReadKey(HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME); }
-        }
+        public static string HealthCheckUploadGrantTokenDomainName => ReadKey(HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME);
 
-        public static string HealthCheckUploadDomainName
-        {
-            get { return ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME); }
-        }
+        public static string HealthCheckUploadDomainName => ReadKey(HEALTH_CHECK_UPLOAD_DOMAIN_NAME);
 
-        public static string HealthCheckDiagnosticDomainName
-        {
-            get { return ReadKey(HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME); }
-        }
+        public static string HealthCheckDiagnosticDomainName => ReadKey(HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME);
 
-        public static string HealthCheckProductKey
-        {
-            get { return ReadKey(HEALTH_CHECK_PRODUCT_KEY); }
-        }
+        public static string HealthCheckProductKey => ReadKey(HEALTH_CHECK_PRODUCT_KEY);
 
-        public static string HiddenFeatures
-        {
-            get { return ReadInstalledKey(HIDDEN_FEATURES); }
-        }
+        public static string HiddenFeatures => ReadInstalledKey(HIDDEN_FEATURES);
 
-        public static string AdditionalFeatures
-        {
-            get { return ReadInstalledKey(ADDITIONAL_FEATURES); }
-        }
+        public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES);
 
-        public static string CustomUpdatesXmlLocation
-        {
-            get { return ReadKey(CUSTOM_UPDATES_XML_LOCATION); }
-        }
+        public static string CustomUpdatesXmlLocation => ReadKey(CUSTOM_UPDATES_XML_LOCATION);
 
-        public static string CustomHelpUrl
-        {
-            get { return ReadKey(HELP_URL_OVERRIDE); }
-        }
+        public static string CustomHelpUrl => ReadKey(HELP_URL_OVERRIDE);
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";

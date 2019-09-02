@@ -86,20 +86,11 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #region IVerticalTab Members
 
-        public override string Text
-        {
-            get { return Messages.SECURITY; }
-        }
+        public override string Text => Messages.SECURITY;
 
-        public string SubText
-        {
-            get { return Messages.SECURITY_DESC; }
-        }
+        public string SubText => Messages.SECURITY_DESC;
 
-        public Image Image
-        {
-            get { return Resources.padlock; }
-        }
+        public Image Image => Resources.padlock;
 
         #endregion
     }
