@@ -58,7 +58,6 @@ namespace XenAdmin.Dialogs
         private decimal min;
         private decimal max;
 
-        private bool SelectionNull = true;
         private readonly IEnumerable<VDI> _VDINamesInUse = new List<VDI>();
 
         private const int DecimalPlacesGB = 3; // show 3 decimal places for GB (CA-91322)
@@ -163,11 +162,6 @@ namespace XenAdmin.Dialogs
             return Helpers.MakeUniqueName(Messages.DEFAULT_VDI_NAME, usedNames);
         }
 
-        private void SrListBox_SrSelectionChanged(object obj)
-        {
-            SelectionNull = obj == null;
-        }
-
         private void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateErrorsAndButtons();
@@ -175,7 +169,7 @@ namespace XenAdmin.Dialogs
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (SrListBox.SR == null || SelectionNull || NameTextBox.Text == "" || !connection.IsConnected)
+            if (SrListBox.SR == null || NameTextBox.Text == "" || !connection.IsConnected)
                 return;
 
             if (DontCreateVDI)
@@ -372,7 +366,7 @@ namespace XenAdmin.Dialogs
                 setError(Messages.NO_VALID_DISK_LOCATION);
                 return;
             }
-            if (SelectionNull)
+            if (SrListBox.SR == null)
             {
                 OkButton.Enabled = false;
                 // shouldn't happen I think, previous if block should catch this, just to be safe

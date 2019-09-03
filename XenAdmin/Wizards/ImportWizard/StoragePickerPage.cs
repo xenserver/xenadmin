@@ -296,7 +296,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			});
 		}
 
-		private void m_srPicker_SrSelectionChanged(object obj)
+		private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (ImportInProgress())
 				return;
