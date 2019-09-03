@@ -194,7 +194,7 @@ namespace XenAdmin.Core
             get { return typeof(T) == typeof(VMSS) ? ((Predicate<Host>)Host.RestrictVMSnapshotSchedule) : (Predicate<Host>)Host.RestrictVMAppliances; }
         }
 
-        internal static bool IsQuescingSupported(IXenConnection connection)
+        internal static bool IsQuiescingSupported(IXenConnection connection)
         { 
             return typeof(T) == typeof(VMSS) && !Helpers.QuebecOrGreater(connection);
         }
