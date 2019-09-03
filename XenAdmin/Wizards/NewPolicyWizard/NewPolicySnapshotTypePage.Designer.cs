@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             // 
             // pictureBoxWarning
             // 
-            this.pictureBoxWarning.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            this.pictureBoxWarning.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             resources.ApplyResources(this.pictureBoxWarning, "pictureBoxWarning");
             this.pictureBoxWarning.Name = "pictureBoxWarning";
             this.pictureBoxWarning.TabStop = false;

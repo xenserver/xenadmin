@@ -37956,7 +37956,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapsh&amp;ot Schedules....
+        ///   Looks up a localized string similar to VM Snapsh&amp;ot Schedules....
         /// </summary>
         public static string VMSS_CONTEXT_MENU {
             get {

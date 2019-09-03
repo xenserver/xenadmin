@@ -12891,7 +12891,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>{0}. {1}: {2}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
-    <value>Snapsh&amp;ot Schedules...</value>
+    <value>VM Snapsh&amp;ot Schedules...</value>
   </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
