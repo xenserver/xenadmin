@@ -192,6 +192,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 }
             }
             tableLayoutPanelVss.Visible = vssFeatureExists && !quiesceCheckBox.Enabled;
+            tableLayoutPanelVssRemoved.Visible = !vssFeatureExists && quiesceCheckBox.Checked;
         }
 
         public AsyncAction SaveSettings()
@@ -221,6 +222,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             if (quiesceCheckBox.Checked)
                 radioButtonDiskOnly.Checked = true;
+            tableLayoutPanelVssRemoved.Visible = Helpers.QuebecOrGreater(_policy != null ? _policy.Connection : Connection) && quiesceCheckBox.Checked;
         }
 
         private void radioButtonDiskAndMemory_CheckedChanged(object sender, System.EventArgs e)
