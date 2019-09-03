@@ -76,7 +76,6 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.SrListBox, "SrListBox");
             this.SrListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.SrListBox.Name = "SrListBox";
-            this.SrListBox.SrSelectionChanged += new System.Action<object>(this.SrListBox_SrSelectionChanged);
             this.SrListBox.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
             // 
             // CloseButton

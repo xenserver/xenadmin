@@ -55,9 +55,7 @@ namespace XenAdmin.Controls
 
         private IXenConnection connection;
         private Host affinity;
-        private SrPickerItem LastSelectedItem;
 
-        public event Action<object> SrSelectionChanged;
         public long DiskSize = 0;
 
         private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
@@ -125,46 +123,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected override void OnSelectedIndexChanged(EventArgs e)
-        {
-            base.OnSelectedIndexChanged(e);
-            onItemSelect();
-        }
-
-        private void onItemSelect()
-        {
-            SrPickerItem item = SelectedItem as SrPickerItem;
-            if (item == null || !item.Enabled)
-            {
-                if (SrSelectionChanged != null)
-                    SrSelectionChanged(null);
-                return;
-            }
-
-            if (SrSelectionChanged != null)
-                SrSelectionChanged(item);
-
-            if (!item.Enabled && LastSelectedItem != null && LastSelectedItem.TheSR.opaque_ref != item.TheSR.opaque_ref)
-                SelectedItem = LastSelectedItem;
-            else if (!item.Enabled && LastSelectedItem != null && LastSelectedItem.TheSR.opaque_ref == item.TheSR.opaque_ref)
-            {
-                SrPickerItem first = Items[0] as SrPickerItem;
-                if (first != null && first.Enabled)
-                    SelectedItem = first;
-                else
-                    SelectedItem = null;
-            }
-            else
-                LastSelectedItem = item;
-        }
-
-        public SR SR
-        {
-            get
-            {
-                return SelectedItem is SrPickerItem && (SelectedItem as SrPickerItem).Enabled ? (SelectedItem as SrPickerItem).TheSR : null;
-            }
-        }
+        public SR SR => SelectedItem is SrPickerItem srpITem && srpITem.Enabled ? srpITem.TheSR : null;
 
         public SR DefaultSR = null;
 
@@ -214,7 +173,6 @@ namespace XenAdmin.Controls
                     if (node.TheSR != null && node.TheSR.uuid == selectedSr.uuid)
                     {
                         SelectedItem = node;
-                        onItemSelect();
                         selected = true;
                         break;
                     }
@@ -227,7 +185,6 @@ namespace XenAdmin.Controls
                 {
                     // If no default SR, select first entry in list
                     SelectedIndex = 0;
-                    onItemSelect();
                 }
             }
         }
@@ -245,7 +202,6 @@ namespace XenAdmin.Controls
             finally
             {
                 Refresh();
-                onItemSelect();
             }
         }
 
@@ -312,9 +268,6 @@ namespace XenAdmin.Controls
                     return;
                 }
             }
-
-            if (SrSelectionChanged != null)
-                SrSelectionChanged(null);
         }
 
         internal void selectDefaultSROrAny()
@@ -331,8 +284,6 @@ namespace XenAdmin.Controls
                     return;
                 }
             }
-            if (SrSelectionChanged != null)
-                SrSelectionChanged(null);
         }
 
         public void selectSRorDefaultorAny(SR sr)
