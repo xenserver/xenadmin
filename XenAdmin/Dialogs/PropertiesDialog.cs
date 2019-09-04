@@ -335,18 +335,18 @@ namespace XenAdmin.Dialogs
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            // Have any of the fields in the tab pages changed?
-            if (!HasChanged)
-            {
-                Close();
-                return;
-            }
-
             if (!ValidToSave)
             {
                 // Keep dialog open and allow user to correct the error as
                 // indicated by the balloon tooltip.
                 DialogResult = DialogResult.None;
+                return;
+            }
+
+            // Have any of the fields in the tab pages changed?
+            if (!HasChanged)
+            {
+                Close();
                 return;
             }
 

@@ -155,7 +155,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            using (var dialog = new NewDiskDialog(Connection, Template, SrPicker.SRPickerType.LunPerVDI, null, Affinity,
+            using (var dialog = new NewDiskDialog(Connection, Template, Affinity, SrPicker.SRPickerType.LunPerVDI, null,
                 true, 0, AddedVDIs) {DontCreateVDI = true})
             {
                 if (dialog.ShowDialog() != DialogResult.OK)
@@ -297,8 +297,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             DiskGridRowItem selectedItem = (DiskGridRowItem) DisksGridView.SelectedRows[0];
 
-            using (var dialog = new NewDiskDialog(Connection, Template, SrPicker.SRPickerType.LunPerVDI,
-                    selectedItem.Disk, Affinity, selectedItem.CanResize, selectedItem.MinSize, AddedVDIs)
+            using (var dialog = new NewDiskDialog(Connection, Template, Affinity, SrPicker.SRPickerType.LunPerVDI, 
+                    selectedItem.Disk, selectedItem.CanResize, selectedItem.MinSize, AddedVDIs)
                 {DontCreateVDI = true})
             {
                 if (dialog.ShowDialog(ParentForm) != DialogResult.OK)
