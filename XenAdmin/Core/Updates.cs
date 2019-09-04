@@ -980,5 +980,31 @@ namespace XenAdmin.Core
             else
                 Alert.RefreshAlertAt(alertIndex);
         }
+
+        public static void CheckHotfixEligibility()
+        {
+            var alerts = new List<HotfixEligibilityAlert>();
+         
+            foreach (var connection in ConnectionsManager.XenConnectionsCopy)
+            {
+                if (!connection.IsConnected)
+                    continue;
+
+                var master = Helpers.GetMaster(connection);
+                if (master == null)
+                    continue;
+                
+                var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
+
+                if (xenServerVersion == null || hotfixEligibility == hotfix_eligibility.all ||
+                    hotfixEligibility == hotfix_eligibility.premium && !master.IsFreeLicenseOrExpired())
+                    continue;
+
+                alerts.Add(new HotfixEligibilityAlert(connection, xenServerVersion));
+            }
+
+            Alert.RemoveAlert(a => a is HotfixEligibilityAlert);
+            Alert.AddAlertRange(alerts);
+        }
     }
 }
