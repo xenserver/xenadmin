@@ -12581,7 +12581,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk size needs to be at least {0} {1}.
+        ///   Looks up a localized string similar to Disk size cannot be more than {0}..
+        /// </summary>
+        public static string DISK_TOO_BIG_MAX_SIZE {
+            get {
+                return ResourceManager.GetString("DISK_TOO_BIG_MAX_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk size needs to be at least {0}..
         /// </summary>
         public static string DISK_TOO_SMALL {
             get {
@@ -37609,7 +37618,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TiB.
+        ///   Looks up a localized string similar to TB.
         /// </summary>
         public static string VAL_TERB {
             get {
@@ -37618,7 +37627,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TiBps.
+        ///   Looks up a localized string similar to TBps.
         /// </summary>
         public static string VAL_TERRATE {
             get {

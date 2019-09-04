@@ -4473,8 +4473,11 @@ This will also delete its subfolders.</value>
   <data name="DISK_TOO_BIG" xml:space="preserve">
     <value>There is not enough available space for this disk</value>
   </data>
+  <data name="DISK_TOO_BIG_MAX_SIZE" xml:space="preserve">
+    <value>Disk size cannot be more than {0}.</value>
+  </data>
   <data name="DISK_TOO_SMALL" xml:space="preserve">
-    <value>Disk size needs to be at least {0} {1}</value>
+    <value>Disk size needs to be at least {0}.</value>
   </data>
   <data name="DISMISS_ALL_CONFIRM_BUTTON" xml:space="preserve">
     <value>Dismiss &amp;all</value>
@@ -13009,10 +13012,10 @@ To start a [XenServer] trial, click the button below.</value>
     <value>s</value>
   </data>
   <data name="VAL_TERB" xml:space="preserve">
-    <value>TiB</value>
+    <value>TB</value>
   </data>
   <data name="VAL_TERRATE" xml:space="preserve">
-    <value>TiBps</value>
+    <value>TBps</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>

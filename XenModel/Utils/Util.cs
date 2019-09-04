@@ -52,6 +52,7 @@ namespace XenAdmin
         public const long BINARY_MEGA = BINARY_KILO * BINARY_KILO;
         public const long BINARY_GIGA = BINARY_KILO * BINARY_MEGA;
         public const long BINARY_TERA = BINARY_KILO * BINARY_GIGA;
+        public const long BINARY_PETA = BINARY_KILO * BINARY_TERA;
 
         public const long DEC_KILO = 1000;
         public const long DEC_MEGA = DEC_KILO * DEC_KILO;
@@ -110,7 +111,7 @@ namespace XenAdmin
         /// <returns></returns>
         public static string MemorySizeStringSuitableUnits(double bytes, bool showPoint0Decimal, string formatStringWhenZero)
         {
-            if(bytes == 0)
+            if (bytes == 0)
             {
                 return string.Format(formatStringWhenZero, bytes);
             }
@@ -134,8 +135,7 @@ namespace XenAdmin
 
         public static string DiskSizeString(ulong bytes)
         {
-            string unit;
-            string value = ByteSizeString(bytes, 1, false, out unit);
+            string value = ByteSizeString(bytes, 1, false, out var unit);
             return string.Format(Messages.VAL_FORMAT, value, unit);
         }       
 	
@@ -154,8 +154,7 @@ namespace XenAdmin
 
     	public static string DiskSizeStringWithoutUnits(long bytes)
     	{
-    	    string unit;
-            return ByteSizeString(bytes, 1, false, out unit);
+    	    return ByteSizeString(bytes, 1, false, out _);
         }
 
         public static string MemorySizeStringVariousUnits(double bytes)
@@ -501,7 +500,7 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Get the first node with name 'value' and returns its innerText. Used for gettings results of CGSL async actions.
+        /// Get the first node with name 'value' and returns its innerText. Used for getting results of CGSL async actions.
         /// </summary>
         /// <param name="xml">The XML.</param>
         /// <returns>The contents of the first node with name 'value'.</returns>
