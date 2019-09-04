@@ -61,6 +61,18 @@ namespace XenAdmin.Alerts
                 log.Error("Failed to add incoming alert", e);
             }
         }
+        public static void AddAlertRange(IEnumerable<Alert> collection)
+        {
+            try
+            {
+                lock (XenCenterAlertsLock)
+                    XenCenterAlerts.AddRange(collection);
+            }
+            catch (Exception e)
+            {
+                log.Error("Failed to add incoming alerts", e);
+            }
+        }
 
         public static void RemoveAlert(Alert a)
         {
