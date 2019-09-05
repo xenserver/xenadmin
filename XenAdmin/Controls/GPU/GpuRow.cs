@@ -210,7 +210,8 @@ namespace XenAdmin.Controls.GPU
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            new GpuConfiguration(SelectedPGPUs).ShowDialog(Program.MainWindow);
+            using (var dlog = new GpuConfiguration(SelectedPGPUs))
+                dlog.ShowDialog(Program.MainWindow);
         }
 
         private void CheckedChanged(object sender, EventArgs e)

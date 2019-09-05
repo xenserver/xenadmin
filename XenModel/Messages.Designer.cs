@@ -16616,7 +16616,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select which virtual GPU types are allowed on these GPUs:.
+        ///   Looks up a localized string similar to Select which virtual GPU types are allowed on these GPUs..
         /// </summary>
         public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE {
             get {
@@ -16625,7 +16625,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select which virtual GPU types are allowed on this GPU:.
+        ///   Looks up a localized string similar to Select which virtual GPU types are allowed on this GPU..
         /// </summary>
         public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE {
             get {
