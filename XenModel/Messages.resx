@@ -5815,10 +5815,10 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
     <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this server, so this option is not currently available.</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
-    <value>Select which virtual GPU types are allowed on these GPUs:</value>
+    <value>Select which virtual GPU types are allowed on these GPUs.</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
-    <value>Select which virtual GPU types are allowed on this GPU:</value>
+    <value>Select which virtual GPU types are allowed on this GPU.</value>
   </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
     <value>It is not possible to add new performance graphs on VM '{0}' because the VM is not running.</value>
