@@ -117,10 +117,13 @@ namespace XenAdmin.Wizards.ImportWizard
         /// Performs certain checks on the pages's input data and shows/hides an error accordingly
         /// </summary>
         /// <param name="checks">The checks to perform</param>
-        private void PerformCheck(params CheckDelegate[] checks)
+        private bool PerformCheck(params CheckDelegate[] checks)
         {
-            m_buttonNextEnabled = m_ctrlError.PerformCheck(checks);
+            var success = m_ctrlError.PerformCheck(checks);
+            m_buttonNextEnabled = success;
+            m_pictureBoxInfo.Visible = m_labelFixupISOInfo.Visible = success;
             OnPageUpdated();
+            return success;
         }
 
 		private bool IsIsoSrSelectable(SR sr)
@@ -208,6 +211,21 @@ namespace XenAdmin.Wizards.ImportWizard
 			error = Messages.IMPORT_OPTIONS_PAGE_ERROR_NO_FIXUP_ISO_INSTALLED;
 		    return false;
 		}
+
+        private bool CheckCanCreateVdiOnIsoSr(out string error)
+        {
+            error = string.Empty;
+
+            SM sm = null;
+            if (SelectedIsoSR != null)
+                sm = SM.GetByType(Connection, SelectedIsoSR.type);
+
+            if (sm != null && sm.capabilities.Contains("VDI_CREATE"))
+                return true;
+
+            error = Messages.IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY;
+            return false;
+        }
 
 		private void PBD_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
@@ -324,20 +342,26 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void ValidateSelection()
         {
-            SelectedIsoSR = m_comboBoxISOLibraries.SelectedItem is ToStringWrapper<SR> wrapper ? wrapper.item : null;
-
-            if (SelectedIsoSR == null)
+            if (m_radioButtonDontRunOSFixups.Checked)
             {
-                m_pictureBoxInfo.Visible = m_labelFixupISOInfo.Visible = false;
-                m_buttonNextEnabled = false;
+                m_buttonNextEnabled = true;
+                m_pictureBoxInfo.Visible = m_labelFixupISOInfo.Visible = m_ctrlError.Visible = false;
                 OnPageUpdated();
                 return;
             }
 
-            PerformCheck(CheckFixupIsoInXencenterInstallation);
+            SelectedIsoSR = m_radioButtonRunOSFixups.Checked && m_comboBoxISOLibraries.SelectedItem is ToStringWrapper<SR> wrapper
+                ? wrapper.item
+                : null;
 
-            m_pictureBoxInfo.Visible = m_labelFixupISOInfo.Visible = !m_ctrlError.Visible;
-            if (m_ctrlError.Visible)
+            if (!PerformCheck((out string error) =>
+            {
+                error = null;
+                return SelectedIsoSR != null;
+            }))
+                return;
+
+            if (!PerformCheck(CheckFixupIsoInXencenterInstallation))
                 return;
 
             var isoName = OVF.GetISOFixupFileName();
@@ -352,6 +376,9 @@ namespace XenAdmin.Wizards.ImportWizard
                 }
             }
 
+            if (!PerformCheck(CheckCanCreateVdiOnIsoSr))
+                return;
+
             m_labelFixupISOInfo.Text = Messages.IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY;
         }
 
@@ -361,6 +388,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void m_comboBoxISOLibraries_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!m_radioButtonRunOSFixups.Checked)
+                m_radioButtonRunOSFixups.Checked = true;
+
             ValidateSelection();
 
             if (IsNewISOLibraryItem())
@@ -374,24 +404,13 @@ namespace XenAdmin.Wizards.ImportWizard
         private void m_radioButtonRunOSFixups_CheckedChanged(object sender, EventArgs e)
         {
             if (m_radioButtonRunOSFixups.Checked)
-            {
-                m_labelLocationFixupISO.Enabled = true;
-                m_comboBoxISOLibraries.Enabled = true;
                 ValidateSelection();
-            }
         }
 
         private void m_radioButtonDontRunOSFixups_CheckedChanged(object sender, EventArgs e)
         {
             if (m_radioButtonDontRunOSFixups.Checked)
-            {
-                m_labelLocationFixupISO.Enabled = false;
-                m_comboBoxISOLibraries.Enabled = false;
-                m_pictureBoxInfo.Visible = false;
-                m_labelFixupISOInfo.Visible = false;
-                m_buttonNextEnabled = true;
-                OnPageUpdated();
-            }
+                ValidateSelection();
         }
 
         #endregion

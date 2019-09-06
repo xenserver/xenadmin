@@ -18933,6 +18933,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Fixup ISO cannot be copied to the selected SR.
+        /// </summary>
+        public static string IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY {
+            get {
+                return ResourceManager.GetString("IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [Choose an ISO SR].
         /// </summary>
         public static string IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR {

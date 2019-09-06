@@ -6674,6 +6674,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>The Fixup ISO will be automatically copied to the selected SR</value>
   </data>
+  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
+    <value>The Fixup ISO cannot be copied to the selected SR</value>
+  </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>Could not find the appliance certificate. The file is missing.</value>
   </data>
