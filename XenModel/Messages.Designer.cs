@@ -18663,6 +18663,123 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available for {0}. After {1} there will be no further hotfixes released for {2}. Please update to the latest Cumulative Update..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest CR..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} reached End of Life for express customers on {1}. You are no longer eligible for hotfixes released after this date. Please upgrade to the latest CR..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_CU {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_CU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has reached End of Life.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has reached End of Life for express customers.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No further hotfixes released after {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_CU {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_CU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life on {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not eligible for hotfixes released after {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life for express customers.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hourly; at {0} minutes past each hour.
         /// </summary>
         public static string HOURLY_SCHEDULE_FORMAT {
@@ -40678,6 +40795,15 @@ namespace XenAdmin {
         public static string XENSERVER_6_5 {
             get {
                 return ResourceManager.GetString("XENSERVER_6_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product].
+        /// </summary>
+        public static string XENSERVER_LEGACY {
+            get {
+                return ResourceManager.GetString("XENSERVER_LEGACY", resourceCulture);
             }
         }
         

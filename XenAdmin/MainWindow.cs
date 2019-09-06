@@ -971,6 +971,7 @@ namespace XenAdmin
             
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
+            Updates.CheckHotfixEligibility(connection);
 
             HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
@@ -1124,6 +1125,7 @@ namespace XenAdmin
                 case "license_params":
                     UpdateHeader();
                     UpdateToolbars();
+                    Updates.CheckHotfixEligibility(host.Connection);
                     break;
                 case "other_config":
                     // other_config may contain HideFromXenCenter
