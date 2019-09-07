@@ -951,7 +951,7 @@ namespace XenAdmin.Core
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
         static Regex SrReadWriteRegex = new Regex("^((read|write)(_latency)?)_([a-f0-9]{8})$");
-        static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_(([a-fA-F0-9]{4}\/)?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
+        static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_((([a-fA-F0-9]{4}\/)|([a-fA-F0-9]{8}\/))?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
 
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
         {
@@ -1113,10 +1113,16 @@ namespace XenAdmin.Core
             {
                 string pciId = m.Groups[6].Value.Replace(@"/", ":");
                 PGPU gpu = FindGpu(iXenObject, pciId);
+
+                if (gpu == null && string.IsNullOrEmpty(m.Groups[8].Value))
+                {
+                    pciId = pciId.Substring(4);
+                    gpu = FindGpu(iXenObject, pciId);
+                }
                 return gpu == null
-                           ? null
-                           : FormatFriendly(string.Format("Label-performance.gpu_{0}", m.Groups[1].Value),
-                                            gpu.Name(), pciId);
+                    ? null
+                    : FormatFriendly(string.Format("Label-performance.gpu_{0}", m.Groups[1].Value),
+                        gpu.Name(), pciId);
             }
 
             if (NetworkLatencyRegex.IsMatch(name))
