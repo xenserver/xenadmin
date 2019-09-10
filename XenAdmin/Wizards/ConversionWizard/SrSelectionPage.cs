@@ -171,6 +171,10 @@ namespace XenAdmin.Wizards.ConversionWizard
                 if (sr.content_type.ToLower() == "iso" || sr.type.ToLower() == "iso")
                     continue;
 
+                var hosts = Connection.Cache.Hosts;
+                if (hosts.Any(h => !sr.CanBeSeenFrom(h)))
+                    continue;
+
                 var reservedSpace = ConversionClient.GetReservedDiskSpace(sr.uuid);
                 var srFreeSpace = sr.FreeSpace();
 
@@ -183,6 +187,8 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            Dictionary<SR, long> spacePerSr;
+
             if (e.Cancelled)
             {
                 tableLayoutPanelError.Visible = false;
@@ -191,7 +197,7 @@ namespace XenAdmin.Wizards.ConversionWizard
             {
                 ShowError(Messages.CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE);
             }
-            else if (e.Result is Dictionary<SR, long> spacePerSr)
+            else if ((spacePerSr = e.Result as Dictionary<SR, long>) != null && spacePerSr.Count > 0)
             {
                 tableLayoutPanelError.Visible = false;
 
@@ -206,6 +212,10 @@ namespace XenAdmin.Wizards.ConversionWizard
                     else if (SelectedSR == null && SR.IsDefaultSr(sr))
                         comboBoxSr.SelectedItem = wrapper;
                 }
+            }
+            else if (spacePerSr != null)
+            {
+                ShowError(Messages.CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY);
             }
 
             buttonRefresh.Enabled = true;

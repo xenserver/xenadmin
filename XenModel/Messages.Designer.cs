@@ -9443,6 +9443,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no SR locations that can accommodate the disks for the converted VMs.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to retrieve available SRs.
         /// </summary>
         public static string CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE {

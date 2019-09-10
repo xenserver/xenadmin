@@ -3408,6 +3408,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE" xml:space="preserve">
     <value>Failed to retrieve available SRs</value>
   </data>
+  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY" xml:space="preserve">
+    <value>There are no SR locations that can accommodate the disks for the converted VMs</value>
+  </data>
   <data name="CONVERSION_STORAGE_PAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Required space {0}</value>
   </data>
