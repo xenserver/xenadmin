@@ -215,14 +215,33 @@ namespace XenAdmin.Dialogs
 
             ThreadPool.QueueUserWorkItem(obj =>
             {
+                const int sleep = 3000, timeout = 120000;
+                var tries = timeout / sleep;
+
+                Exception ex = null;
                 string version = null;
-                try
+
+                while (tries > 0)
                 {
-                    version = _conversionClient.GetVpxVersion();
+                    try
+                    {
+                        version = _conversionClient.GetVpxVersion();
+
+                        if (!string.IsNullOrEmpty(version))
+                            break;
+                    }
+                    catch (Exception e)
+                    {
+                        ex = e;
+                    }
+
+                    Thread.Sleep(sleep);
+                    tries--;
                 }
-                catch (Exception e)
+
+                if (string.IsNullOrEmpty(version))
                 {
-                    log.Error("Cannot retrieve XCM VPX version.", e);
+                    log.Error("Cannot retrieve XCM VPX version.", ex);
 
                     Program.Invoke(this, () =>
                     {
