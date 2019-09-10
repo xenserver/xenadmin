@@ -14130,4 +14130,13 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE" xml:space="preserve">
     <value>End of Life</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} will be End of Life on {1}. After this date {2} will be no longer eligible for support and there will be no further hotfixes released for this version. Please upgrade to latest supported version.</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE" xml:space="preserve">
+    <value>{0} will be End of Life on {1}. There will be no further hotfixes released after this date.  Please upgrade to the latest CR.</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} will be End of Life on {1}</value>
+  </data>
 </root>
