@@ -18412,7 +18412,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version..
+        ///   Looks up a localized string similar to {0} reached End of Life on {1} and is no longer eligible for support. There will be no further hotfixes released after this date. Please upgrade to the latest supported version..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL {
             get {
@@ -18484,7 +18484,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End of Life on {0}.
+        ///   Looks up a localized string similar to End of Life on {0}. No longer eligible for support.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_WARNING_EOL {
             get {
@@ -18493,7 +18493,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End of Life on {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End of Life.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life. No longer eligible for support.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE {
             get {

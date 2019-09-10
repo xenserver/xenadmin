@@ -1405,8 +1405,12 @@ namespace XenAdmin.TabPages
                     return Messages.HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE;
 
                 // none
+                case hotfix_eligibility.none when unlicensed && xenServerVersion.EolDate != DateTime.MinValue:
+                    return string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_EOL_FREE, HelpersGUI.DateTimeToString(xenServerVersion.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                 case hotfix_eligibility.none when xenServerVersion.EolDate != DateTime.MinValue:
                     return string.Format(Messages.HOTFIX_ELIGIBILITY_WARNING_EOL, HelpersGUI.DateTimeToString(xenServerVersion.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                case hotfix_eligibility.none when unlicensed:
+                    return Messages.HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE;
                 case hotfix_eligibility.none:
                     return Messages.HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE;
                 

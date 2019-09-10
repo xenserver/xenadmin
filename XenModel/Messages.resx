@@ -6436,7 +6436,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>A new Cumulative Update is available for {0}. After {1} there will be no further hotfixes released for {2}. Please update to the latest Cumulative Update.</value>
   </data>
   <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL" xml:space="preserve">
-    <value>{0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version.</value>
+    <value>{0} reached End of Life on {1} and is no longer eligible for support. There will be no further hotfixes released after this date. Please upgrade to the latest supported version.</value>
   </data>
   <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE" xml:space="preserve">
     <value>{0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest CR.</value>
@@ -6460,10 +6460,10 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>A new Cumulative Update is available</value>
   </data>
   <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
-    <value>End of Life on {0}</value>
+    <value>End of Life on {0}. No longer eligible for support</value>
   </data>
   <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE" xml:space="preserve">
-    <value>End of Life</value>
+    <value>End of Life. No longer eligible for support</value>
   </data>
   <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
     <value>Not eligible for hotfixes released after {0}</value>
@@ -13917,5 +13917,11 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE" xml:space="preserve">
+    <value>End of Life on {0}</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE" xml:space="preserve">
+    <value>End of Life</value>
   </data>
 </root>
