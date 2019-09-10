@@ -124,8 +124,10 @@ namespace XenAdmin.Actions.Xcm
                     if (metrics != null)
                     {
                         // device 0 is the internal network for the VM; find an external one
-                        var vif = Connection.ResolveAll(ConversionVm.VIFs).FirstOrDefault(v => v.device != "0");
-                        if (vif != null && metrics.networks.TryGetValue($"{vif.device}/ip", out ipAddress))
+                        var vif = Connection.ResolveAll(ConversionVm.VIFs).FirstOrDefault(v =>
+                            v.device != "0" && metrics.networks.TryGetValue($"{v.device}/ip", out ipAddress));
+
+                        if (vif != null)
                             break;
                     }
                 }
