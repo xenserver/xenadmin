@@ -18403,6 +18403,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} will be End of Life on {1}. After this date {2} will be no longer eligible for support and there will be no further hotfixes released for this version. Please upgrade to latest supported version..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} will be End of Life on {1}. There will be no further hotfixes released after this date.  Please upgrade to the latest CR..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A new Cumulative Update is available for {0}. After {1} there will be no further hotfixes released for {2}. Please update to the latest Cumulative Update..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU {
@@ -18435,6 +18453,15 @@ namespace XenAdmin {
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE {
             get {
                 return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} will be End of Life on {1}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL", resourceCulture);
             }
         }
         
