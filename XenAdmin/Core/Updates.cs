@@ -964,8 +964,7 @@ namespace XenAdmin.Core
 
             var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
 
-            if (xenServerVersion == null || hotfixEligibility == hotfix_eligibility.all ||
-                hotfixEligibility == hotfix_eligibility.premium && !master.IsFreeLicenseOrExpired())
+            if (!HotfixEligibilityAlert.IsAlertNeeded(hotfixEligibility, xenServerVersion, !master.IsFreeLicenseOrExpired()))
             {
                 Alert.RemoveAlert(a => a is HotfixEligibilityAlert && connection.Equals(a.Connection));
                 return;
@@ -995,9 +994,7 @@ namespace XenAdmin.Core
                     continue;
                 
                 var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
-
-                if (xenServerVersion == null || hotfixEligibility == hotfix_eligibility.all ||
-                    hotfixEligibility == hotfix_eligibility.premium && !master.IsFreeLicenseOrExpired())
+                if (!HotfixEligibilityAlert.IsAlertNeeded(hotfixEligibility, xenServerVersion, !master.IsFreeLicenseOrExpired()))
                     continue;
 
                 alerts.Add(new HotfixEligibilityAlert(connection, xenServerVersion));

@@ -61,15 +61,23 @@ namespace XenAdmin.Alerts.Types
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING,
                     Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : Messages.XENSERVER_LEGACY,
                     Helpers.GetMaster(Connection)?.ProductVersionText());
+                var unlicensed = pool.IsFreeLicenseOrExpired();
 
                 switch (Version.HotfixEligibility)
                 {
-                    case hotfix_eligibility.premium:
+                    case hotfix_eligibility.all when Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+
+                    case hotfix_eligibility.premium when unlicensed:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
+                    case hotfix_eligibility.premium when Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+
                     case hotfix_eligibility.cu when pool.IsFreeLicenseOrExpired():
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
                     case hotfix_eligibility.cu:
                         return Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_CU;
+
                     case hotfix_eligibility.none:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL, productVersionText);
                     default:
@@ -93,9 +101,17 @@ namespace XenAdmin.Alerts.Types
 
                 switch (Version.HotfixEligibility)
                 {
+                    //all
+                    case hotfix_eligibility.all when unlicensed && Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
+                    case hotfix_eligibility.all when Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
+
                     // premium
-                    case hotfix_eligibility.premium when Version.HotfixEligibilityPremiumDate != DateTime.MinValue: 
+                    case hotfix_eligibility.premium when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue: 
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                    case hotfix_eligibility.premium when !unlicensed && Version.EolDate != DateTime.MinValue:
+                        return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
 
                     // cu
                     case hotfix_eligibility.cu when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue:
@@ -133,5 +149,16 @@ namespace XenAdmin.Alerts.Types
             return base.Equals(other);
         }
         #endregion
+
+        public static bool IsAlertNeeded(hotfix_eligibility hotfixEligibility, XenServerVersion version, bool licensed)
+        {
+            if (version == null)
+                return false;
+
+            if (hotfixEligibility == hotfix_eligibility.all && version.EolDate == DateTime.MinValue ||
+                hotfixEligibility == hotfix_eligibility.premium && licensed && version.EolDate == DateTime.MinValue)
+                return false;
+            return true;
+        }
     }
 }
