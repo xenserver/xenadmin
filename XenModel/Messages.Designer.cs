@@ -8980,7 +8980,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot find a Conversion Manager Virtual Appliance..
+        ///   Looks up a localized string similar to Cannot find a Conversion Manager virtual appliance..
         /// </summary>
         public static string CONVERSION_CANNOT_FIND_VPX {
             get {
@@ -8989,7 +8989,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot obtain an IP address for the Conversion Manager Virtual Appliance..
+        ///   Looks up a localized string similar to Cannot obtain an IP address for the Conversion Manager virtual appliance..
         /// </summary>
         public static string CONVERSION_CANNOT_OBTAIN_VPX_IP {
             get {
@@ -8998,7 +8998,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This action will clear all the completed conversions from the Conversion Manager Virtual Appliance history.
+        ///   Looks up a localized string similar to This action will clear all the completed conversions from the Conversion Manager virtual appliance history.
         ///
         ///This action cannot be undone. Are you sure you want to continue?.
         /// </summary>
@@ -9045,7 +9045,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lost connection to the Conversion Manager Virtual Appliance. Will reconnect in {0} sec..
+        ///   Looks up a localized string similar to Lost connection to the Conversion Manager virtual appliance. Will reconnect in {0} sec..
         /// </summary>
         public static string CONVERSION_CONNECTING_VPX_INTERRUPTION {
             get {
@@ -9054,7 +9054,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connected to the Conversion Manager Virtual Appliance..
+        ///   Looks up a localized string similar to Connected to the Conversion Manager virtual appliance..
         /// </summary>
         public static string CONVERSION_CONNECTING_VPX_SUCCESS {
             get {
@@ -9225,7 +9225,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initializing the Conversion Manager Virtual Appliance....
+        ///   Looks up a localized string similar to Initializing the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_INITIALIZING_VPX {
             get {
@@ -9234,7 +9234,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot initialize the Conversion Manager Virtual Appliance. Please see logs for details..
+        ///   Looks up a localized string similar to Cannot initialize the Conversion Manager virtual appliance. Please see logs for details..
         /// </summary>
         public static string CONVERSION_INITIALIZING_VPX_FAILURE {
             get {
@@ -9587,7 +9587,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking compatibility with the Conversion Manager Virtual Appliance....
+        ///   Looks up a localized string similar to Checking compatibility with the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_VERSION_CHECK {
             get {
@@ -9596,7 +9596,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot retrieve the Conversion Manager Virtual Appliance version. Please see logs for details..
+        ///   Looks up a localized string similar to Cannot retrieve the Conversion Manager virtual appliance version. Please see logs for details..
         /// </summary>
         public static string CONVERSION_VERSION_CHECK_FAILURE {
             get {
@@ -9605,7 +9605,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is incompatible with this version of the Conversion Manager Virtual Appliance..
+        ///   Looks up a localized string similar to [XenCenter] is incompatible with this version of the Conversion Manager virtual appliance..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY {
             get {
@@ -9614,7 +9614,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The version of the Conversion Manager Virtual Appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager Console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager Virtual Appliance matching your [XenServer] version..
+        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY_INFO {
             get {
@@ -9641,7 +9641,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Obtaining an IP address for the Conversion Manager Virtual Appliance....
+        ///   Looks up a localized string similar to Obtaining an IP address for the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_VPX_OBTAIN_IP {
             get {
@@ -9650,7 +9650,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resuming the Conversion Manager Virtual Appliance....
+        ///   Looks up a localized string similar to Resuming the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_VPX_RESUME {
             get {
@@ -9659,7 +9659,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting the Conversion Manager Virtual Appliance....
+        ///   Looks up a localized string similar to Starting the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_VPX_START {
             get {
@@ -9668,7 +9668,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot deduce the power state of the Conversion Manager Virtual Appliance..
+        ///   Looks up a localized string similar to Cannot deduce the power state of the Conversion Manager virtual appliance..
         /// </summary>
         public static string CONVERSION_VPX_UNKNOWN_POWER_STATE {
             get {
@@ -9677,7 +9677,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Un-pausing the Conversion Manager Virtual Appliance....
+        ///   Looks up a localized string similar to Un-pausing the Conversion Manager virtual appliance....
         /// </summary>
         public static string CONVERSION_VPX_UNPAUSE {
             get {

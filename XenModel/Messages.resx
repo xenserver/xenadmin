@@ -3243,7 +3243,7 @@ You can only connect to a single [Citrix XenServer] Express Edition server at a 
     <value>Control domain on host {0}</value>
   </data>
   <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
-    <value>This action will clear all the completed conversions from the Conversion Manager Virtual Appliance history.
+    <value>This action will clear all the completed conversions from the Conversion Manager virtual appliance history.
 
 This action cannot be undone. Are you sure you want to continue?</value>
   </data>
@@ -3257,10 +3257,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Cannot cancel the conversion. Please see logs for details.</value>
   </data>
   <data name="CONVERSION_CANNOT_FIND_VPX" xml:space="preserve">
-    <value>Cannot find a Conversion Manager Virtual Appliance.</value>
+    <value>Cannot find a Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_CANNOT_OBTAIN_VPX_IP" xml:space="preserve">
-    <value>Cannot obtain an IP address for the Conversion Manager Virtual Appliance.</value>
+    <value>Cannot obtain an IP address for the Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_CONNECTING_VMWARE" xml:space="preserve">
     <value>Connecting to the VMware server...</value>
@@ -3272,10 +3272,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Connected successfully to the VMware server</value>
   </data>
   <data name="CONVERSION_CONNECTING_VPX_INTERRUPTION" xml:space="preserve">
-    <value>Lost connection to the Conversion Manager Virtual Appliance. Will reconnect in {0} sec.</value>
+    <value>Lost connection to the Conversion Manager virtual appliance. Will reconnect in {0} sec.</value>
   </data>
   <data name="CONVERSION_CONNECTING_VPX_SUCCESS" xml:space="preserve">
-    <value>Connected to the Conversion Manager Virtual Appliance.</value>
+    <value>Connected to the Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_CREATE_FAILURE" xml:space="preserve">
     <value>Cannot start a new conversion. Please see logs for details.</value>
@@ -3332,10 +3332,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>You have applied filters to the list of conversions. Do you want to export all conversions, or only the conversions you have chosen to view?</value>
   </data>
   <data name="CONVERSION_INITIALIZING_VPX" xml:space="preserve">
-    <value>Initializing the Conversion Manager Virtual Appliance...</value>
+    <value>Initializing the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_INITIALIZING_VPX_FAILURE" xml:space="preserve">
-    <value>Cannot initialize the Conversion Manager Virtual Appliance. Please see logs for details.</value>
+    <value>Cannot initialize the Conversion Manager virtual appliance. Please see logs for details.</value>
   </data>
   <data name="CONVERSION_LOG_SAVE" xml:space="preserve">
     <value>Save conversion log to {0}</value>
@@ -3454,16 +3454,16 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>&amp;Try again</value>
   </data>
   <data name="CONVERSION_VERSION_CHECK" xml:space="preserve">
-    <value>Checking compatibility with the Conversion Manager Virtual Appliance...</value>
+    <value>Checking compatibility with the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_VERSION_CHECK_FAILURE" xml:space="preserve">
-    <value>Cannot retrieve the Conversion Manager Virtual Appliance version. Please see logs for details.</value>
+    <value>Cannot retrieve the Conversion Manager virtual appliance version. Please see logs for details.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY" xml:space="preserve">
-    <value>[XenCenter] is incompatible with this version of the Conversion Manager Virtual Appliance.</value>
+    <value>[XenCenter] is incompatible with this version of the Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>The version of the Conversion Manager Virtual Appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager Console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager Virtual Appliance matching your [XenServer] version.</value>
+    <value>The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version.</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>Virtual Machines</value>
@@ -3472,19 +3472,19 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Select the VMs to convert</value>
   </data>
   <data name="CONVERSION_VPX_OBTAIN_IP" xml:space="preserve">
-    <value>Obtaining an IP address for the Conversion Manager Virtual Appliance...</value>
+    <value>Obtaining an IP address for the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_VPX_RESUME" xml:space="preserve">
-    <value>Resuming the Conversion Manager Virtual Appliance...</value>
+    <value>Resuming the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_VPX_START" xml:space="preserve">
-    <value>Starting the Conversion Manager Virtual Appliance...</value>
+    <value>Starting the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
-    <value>Un-pausing the Conversion Manager Virtual Appliance...</value>
+    <value>Un-pausing the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_VPX_UNKNOWN_POWER_STATE" xml:space="preserve">
-    <value>Cannot deduce the power state of the Conversion Manager Virtual Appliance.</value>
+    <value>Cannot deduce the power state of the Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_WIZARD_TEXT" xml:space="preserve">
     <value>New Conversion</value>
