@@ -111,7 +111,6 @@
     <Compile Include="UnitTests\EmailAddressValidatorTests.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
-    <Compile Include="UnitTests\HelpManagerTests.cs" />
     <Compile Include="UnitTests\NamesAndMessagesTests.cs" />
     <Compile Include="UnitTests\NaturalCompareTest.cs" />
     <Compile Include="UnitTests\StreamUtilitiesTests.cs" />
