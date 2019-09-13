@@ -114,6 +114,9 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
         }
+
+        public override string HelpID => "ManageUpdatesDialog";
+
         #endregion
 
         private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)

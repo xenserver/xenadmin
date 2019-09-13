@@ -110,6 +110,8 @@ namespace XenAdmin.TabPages
             Text = Messages.ACTIVE_DIRECTORY_TAB_TITLE;
         }
 
+        public override string HelpID => "TabPageAD";
+
         /// <summary>
         /// This method is used when the cache was not populated by the time we set the XenObject. It sets the appropriate event handlers,
         /// references to the master and the pool, and populates the tab with the correct configuration. It de-registers

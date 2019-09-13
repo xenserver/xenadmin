@@ -92,8 +92,11 @@ namespace XenAdmin.TabPages
         {
             Alert.DeregisterAlertCollectionChanged(m_alertCollectionChangedWithInvoke);
         }
+
+        public override string HelpID => "AlertSummaryDialog";
+
         #endregion
-        
+
         private void SetFilterLabel()
         {
             toolStripLabelFiltersOnOff.Text = FilterIsOn

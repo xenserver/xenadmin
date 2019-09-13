@@ -40,7 +40,6 @@ using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Wizards;
 using XenAPI;
 using XenCenterLib;
 
@@ -89,6 +88,8 @@ namespace XenAdmin.TabPages
                 Rebuild();
             }
         }
+
+        public override string HelpID => "TabPageHA";
 
         public HAPage()
         {

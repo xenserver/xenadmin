@@ -69,7 +69,7 @@ namespace XenAdmin
 {
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     [ComVisibleAttribute(true)]
-    public partial class MainWindow : Form, ISynchronizeInvoke, IMainWindow
+    public partial class MainWindow : Form, ISynchronizeInvoke, IMainWindow, IFormWithHelp
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2417,57 +2417,6 @@ namespace XenAdmin
 
         #region Help
 
-        private string TabHelpID()
-        {
-            string modelObj = getSelectedXenModelObjectType();
-
-            if (TheTabControl.SelectedTab == TabPageHome)
-                return "TabPageHome" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageSearch)
-                return "TabPageSearch" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageConsole)
-                return "TabPageConsole" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageCvmConsole)
-                return "TabPageCvmConsole" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageGeneral)
-                return "TabPageSettings" + modelObj;
-            if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)
-                return "TabPageStorage" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageNetwork)
-                return "TabPageNetwork" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageNICs)
-                return "TabPageNICs" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageWLB)
-                return "TabPageWLB" + modelObj;
-            if (TheTabControl.SelectedTab == TabPagePeformance)
-                return "TabPagePerformance" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageHA)
-                return "TabPageHA" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageHAUpsell)
-                return "TabPageHAUpsell" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageSnapshots)
-                return "TabPageSnapshots" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageBallooning)
-                return "TabPageBallooning" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageAD)
-                return "TabPageAD" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageADUpsell)
-                return "TabPageADUpsell" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageWLBUpsell)
-                return "TabPageWLBUpsell";
-            if (TheTabControl.SelectedTab == TabPageGPU)
-                return "TabPageGPU" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageDockerProcess)
-                return "TabPageDockerProcess" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageDockerDetails)
-                return "TabPageDockerDetails" + modelObj;
-            if (TheTabControl.SelectedTab == TabPagePvs)
-                return "TabPagePvs" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageUSB)
-                return "TabPageUSB" + modelObj;
-            return "TabPageUnknown";
-        }
-
         private string getSelectedXenModelObjectType()
         {
             // for now, since there are few topics which depend on the selected object we shall just check the special cases
@@ -2501,23 +2450,6 @@ namespace XenAdmin
             return "";
         }
 
-        public void ShowHelpTOC()
-        {
-            ShowHelpTopic(null);
-        }
-
-        public void ShowHelpTopic(string topicID)
-        {
-            var helpTopicUrl = HelpManager.GetHelpUrl(topicID);
-
-            if (!string.IsNullOrEmpty(helpTopicUrl))
-                Program.OpenURL(helpTopicUrl);
-
-            // record help usage
-            Properties.Settings.Default.HelpLastUsed = DateTime.UtcNow.ToString("u");
-            Settings.TrySaveSettings();
-        }
-
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             // CA-28064. MessageBox hack to kill the hlpevent it passes to MainWindows.
@@ -2527,7 +2459,7 @@ namespace XenAdmin
 
         private void helpTopicsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowHelpTOC();
+            HelpManager.Launch("TOC");
         }
 
         private void helpContextMenuItem_Click(object sender, EventArgs e)
@@ -2537,24 +2469,35 @@ namespace XenAdmin
 
         private void LaunchHelp()
         {
-            if (alertPage.Visible)
-                Help.HelpManager.Launch("AlertSummaryDialog");
-            else if (updatesPage.Visible)
-                Help.HelpManager.Launch("ManageUpdatesDialog");
-            else if (eventsPage.Visible)
-                Help.HelpManager.Launch("EventsPane");
-            else
+            if (TheTabControl.SelectedTab.Tag is TabPageFeature tpf && tpf.HasHelp)
             {
-                if (TheTabControl.SelectedTab.Tag is TabPageFeature && ((TabPageFeature)TheTabControl.SelectedTab.Tag).HasHelp)
-                    ((TabPageFeature)TheTabControl.SelectedTab.Tag).LaunchHelp();
-                else
-                    Help.HelpManager.Launch(TabHelpID());
+                tpf.LaunchHelp();
+                return;
             }
+
+            HelpManager.Launch(TabHelpID());
+        }
+
+        private string TabHelpID()
+        {
+            if (alertPage.Visible)
+                return alertPage.HelpID;
+
+            if (updatesPage.Visible)
+                return updatesPage.HelpID;
+
+            if (eventsPage.Visible)
+                return eventsPage.HelpID;
+
+            if (TheTabControl.SelectedTab.Controls.Count > 0 && TheTabControl.SelectedTab.Controls[0] is IControlWithHelp ctrl)
+                return ctrl.HelpID + getSelectedXenModelObjectType();
+
+            return "TOC";
         }
 
         public bool HasHelp()
         {
-            return Help.HelpManager.HasHelpFor(TabHelpID());
+            return HelpManager.TryGetTopicId(TabHelpID(), out _);
         }
 
         private void viewApplicationLogToolStripMenuItem_Click(object sender, EventArgs e)

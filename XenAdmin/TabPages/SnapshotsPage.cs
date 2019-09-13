@@ -83,6 +83,7 @@ namespace XenAdmin.TabPages
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
+        public override string HelpID => "TabPageSnapshots";
 
         void DataGridView_Sorted(object sender, EventArgs e)
         {

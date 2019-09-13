@@ -76,6 +76,8 @@ namespace XenAdmin.TabPages
             Searcher.ToggleExpandedState(false);
         }
 
+        public override string HelpID => "TabPageSearch";
+
         protected virtual void OnSearchChanged()
         {
             if (SearchChanged != null)

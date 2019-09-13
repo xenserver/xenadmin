@@ -401,18 +401,12 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                string pageref = "MessageAlert_" + Message.Type.ToString();
-                return HelpManager.GetID(pageref) == null ? null : pageref;
+                string pageRef = "MessageAlert_" + Message.Type;
+                return HelpManager.TryGetTopicId(pageRef, out _) ? pageRef : null;
             }
         }
 
-        public override string HelpLinkText
-        {
-            get
-            {
-                return Message.FriendlyHelp(Message.MessageTypeString());
-            }
-        }
+        public override string HelpLinkText => Message.FriendlyHelp(Message.MessageTypeString());
 
         public override string Title
         {
@@ -437,10 +431,7 @@ namespace XenAdmin.Alerts
             }
         }
 
-        public override string Name
-        {
-            get { return Message.MessageTypeString(); }
-        }
+        public override string Name => Message.MessageTypeString();
 
         public override void Dismiss()
         {

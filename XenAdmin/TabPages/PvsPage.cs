@@ -70,6 +70,8 @@ namespace XenAdmin.TabPages
             base.Text = Messages.PVS_TAB_TITLE;
         }
 
+        public override string HelpID => "TabPagePvs";
+
         public IXenConnection Connection
         {
             get

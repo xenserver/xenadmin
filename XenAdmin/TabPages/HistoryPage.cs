@@ -85,6 +85,9 @@ namespace XenAdmin.TabPages
             foreach (var action in ConnectionsManager.History)
                 DeregisterActionEvents(action);
         }
+
+        public override string HelpID => "EventsPane";
+
         #endregion
 
         private void Action_NewAction(ActionBase action)
