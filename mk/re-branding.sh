@@ -69,6 +69,7 @@ rebranding_global()
         -e "s#\[BRANDING_VERSION_7_0\]#${BRANDING_XC_PRODUCT_7_0_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_7_1_2\]#${BRANDING_XC_PRODUCT_7_1_2_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_8_0\]#${BRANDING_XC_PRODUCT_8_0_VERSION}#g" \
+		-e "s#\[BRANDING_VERSION_8_1\]#${BRANDING_XC_PRODUCT_8_1_VERSION}#g" \
         -e "s#\[BRANDING_XENSERVER_UPDATE_URL\]#${BRANDING_XENSERVER_UPDATE_URL}#g" \
         -e "s#\[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT\]#${BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT}#g" \
         $1    
@@ -169,7 +170,6 @@ RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
 
 #mk
-rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
 rebranding_global ${REPO}/mk/package-and-sign.sh
 
 #WixInstaller

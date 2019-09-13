@@ -210,6 +210,9 @@
   <data name="Description-host.system_status-network-status" xml:space="preserve">
     <value>ネットワーク インターフェイス、ルーティング テーブル、ファイアウォールの現在の状態</value>
   </data>
+  <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
+    <value>NVIDIA グラフィック ドライバーの問題を診断するのに役立つログと詳細が含まれています。</value>
+  </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
     <value>OEM プロバイダ固有のデータを収集します。</value>
   </data>
@@ -656,6 +659,9 @@
   </data>
   <data name="Label-host.system_status-network-status" xml:space="preserve">
     <value>ネットワークの状態</value>
+  </data>
+  <data name="Label-host.system_status-NVIDIA-logs" xml:space="preserve">
+    <value>NVIDIA グラフィック ドライバー ログ</value>
   </data>
   <data name="Label-host.system_status-oem" xml:space="preserve">
     <value>OEM 固有のログ</value>

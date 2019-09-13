@@ -379,7 +379,7 @@ namespace XenAdmin.TabPages
                     var vm = row.Tag as VM;
                     if (vm != null && vm.Equals(sender))
                     {
-                        row.Cells["columnVM"].Value = vm.Name();
+                        row.Cells[columnVM.Name].Value = vm.Name();
                         break;
                     }
                 }

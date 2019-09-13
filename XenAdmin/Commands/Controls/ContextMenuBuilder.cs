@@ -546,10 +546,11 @@ namespace XenAdmin.Commands
                                 
                 items.AddIfEnabled(new RemoveHostCrashDumpsCommand(mainWindow, selection));
 
-                if (host != Helpers.GetMaster(host.Connection) )
+                var cmd = new RemoveHostFromPoolCommand(mainWindow, selection);
+                if (cmd.CanExecute())
                 {
                     items.AddSeparator();
-                    items.Add(new RemoveHostFromPoolCommand(mainWindow, selection));
+                    items.Add(cmd);
                 }
 
                 items.AddPluginItems(PluginContextMenu.server, selection);

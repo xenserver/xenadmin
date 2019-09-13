@@ -655,7 +655,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}.label&apos; has not been defined in the resources file for plugin &apos;{1}&apos;..
+        ///   Looks up a localized string similar to &apos;{0}.label&apos; has not been defined in the resources file for plug-in &apos;{1}&apos;..
         /// </summary>
         public static string Exception_PluginLabelNotDefined {
             get {
@@ -673,7 +673,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find resources file for plugin &apos;{0}&apos; at &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Could not find resources file for plug-in &apos;{0}&apos; at &apos;{1}&apos;..
         /// </summary>
         public static string Exception_PluginResourcesFileNotFound {
             get {
@@ -691,7 +691,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XML node &apos;{0}&apos; is not recognised..
+        ///   Looks up a localized string similar to XML node &apos;{0}&apos; is not recognized..
         /// </summary>
         public static string Exception_PluginXMLNodeNotRecognised {
             get {
@@ -709,7 +709,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must have the Powershell installed to use Powershell Plugins. This can be downloaded from the Microsoft website..
+        ///   Looks up a localized string similar to You must have the PowerShell installed to use PowerShell Plug-ins. This can be downloaded from the Microsoft website..
         /// </summary>
         public static string Exception_PowerShellNotPresent {
             get {
@@ -727,7 +727,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not parse search &apos;{0}&apos; for plugin &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Could not parse search &apos;{0}&apos; for plug-in &apos;{1}&apos;..
         /// </summary>
         public static string Exception_SearchParseFailed {
             get {
@@ -1591,7 +1591,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RRD plugin logs.
+        ///   Looks up a localized string similar to RRD plug-in logs.
         /// </summary>
         public static string Label_host_system_status_xcp_rrdd_plugins {
             get {

@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -30,21 +30,31 @@
  */
 
 using System;
+using System.Text;
+using CFUValidator.Validators;
 
-namespace XenCenterLib
+namespace CFUValidator.OutputDecorators
 {
-
-    public class HelpString : System.Attribute
+    class HfxEligibilityValidatorDecorator : Decorator
     {
-        private string value;
-        public HelpString(string s)
+        private readonly string header;
+        private readonly HfxEligibilityValidator validator;
+        public HfxEligibilityValidatorDecorator(OuputComponent ouputComponent, HfxEligibilityValidator validator, string header)
         {
-            value = s;
+            SetComponent(ouputComponent);
+            this.validator = validator;
+            this.header = header;
         }
 
-        public string Value
+        public override StringBuilder Generate()
         {
-            get { return value; }
+            StringBuilder sb = base.Generate();
+            sb.AppendLine(header);
+            if (validator.ErrorsFound)
+                validator.Results.ForEach(v => sb.AppendLine(v));
+            else
+                sb.AppendLine("all OK");
+            return sb.AppendLine(String.Empty);
         }
     }
 }

@@ -216,20 +216,19 @@ namespace XenAdmin.Actions
                 var fi = new FileInfo(tmpFile);
                 log.DebugFormat("Progress of the action until exception: {0}", PercentComplete);
                 log.DebugFormat("Size file exported until exception: {0}", fi.Length);
+
                 try
                 {
                     using (Stream stream = new FileStream(tmpFile, FileMode.Open, FileAccess.Read))
+                    using (var iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, stream))
                     {
-                        ArchiveIterator iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Tar,
-                                                                                        stream);
                         while (iterator.HasNext())
-                        {
                             log.DebugFormat("Tar entry: {0} {1}", iterator.CurrentFileName(), iterator.CurrentFileSize());
-                        }
                     }
                 }
                 catch (Exception)
                 {}
+
                 log.DebugFormat("Deleting {0}", tmpFile);
                 File.Delete(tmpFile);
                 throw new Exception(Description);

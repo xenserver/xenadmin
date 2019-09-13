@@ -61,6 +61,18 @@ namespace XenAdmin.Alerts
                 log.Error("Failed to add incoming alert", e);
             }
         }
+        public static void AddAlertRange(IEnumerable<Alert> collection)
+        {
+            try
+            {
+                lock (XenCenterAlertsLock)
+                    XenCenterAlerts.AddRange(collection);
+            }
+            catch (Exception e)
+            {
+                log.Error("Failed to add incoming alerts", e);
+            }
+        }
 
         public static void RemoveAlert(Alert a)
         {
@@ -89,6 +101,21 @@ namespace XenAdmin.Alerts
         {
             lock (XenCenterAlertsLock)
                 return XenCenterAlerts.Find(predicate);
+        }
+
+        public static int FindAlertIndex(Predicate<Alert> predicate)
+        {
+            lock (XenCenterAlertsLock)
+                return XenCenterAlerts.FindIndex(predicate);
+        }
+
+        public static void RefreshAlertAt(int index)
+        {
+            lock (XenCenterAlertsLock)
+            {
+                if (index >= 0 && index < XenCenterAlerts.Count)
+                    XenCenterAlerts[index] = XenCenterAlerts[index]; // this will trigger the CollectionChanged event with CollectionChangeAction.Refresh
+            }
         }
 
         /// <summary>

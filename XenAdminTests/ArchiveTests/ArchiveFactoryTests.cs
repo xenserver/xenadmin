@@ -48,10 +48,8 @@ namespace XenAdminTests.ArchiveTests
             string target = TestUtils.GetTestResource("emptyfile.bz2");
 
             using (var ms = new MemoryStream(File.ReadAllBytes(target)))
-            {
-                var iterator = ArchiveFactory.Reader((ArchiveFactory.Type)archiveType, ms);
+            using (var iterator = ArchiveFactory.Reader((ArchiveFactory.Type)archiveType, ms))
                 return iterator.GetType();
-            }
         }
 
 
@@ -62,8 +60,8 @@ namespace XenAdminTests.ArchiveTests
         {
             using (var ms = new MemoryStream())
             {
-                var writer = ArchiveFactory.Writer((ArchiveFactory.Type)archiveType, ms);
-                return writer.GetType();
+                using (var writer = ArchiveFactory.Writer((ArchiveFactory.Type)archiveType, ms))
+                    return writer.GetType();
             }
         }
 

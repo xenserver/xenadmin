@@ -7078,7 +7078,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please type the root password for {0}:.
+        ///   Looks up a localized string similar to Please type the root password for &apos;{0}&apos;:.
         /// </summary>
         public static string CHANGEPASS_ROOT_PASS {
             get {
@@ -16089,7 +16089,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plugin finished running.
+        ///   Looks up a localized string similar to Plug-in finished running.
         /// </summary>
         public static string EXTERNAL_PLUGIN_FINISHED {
             get {
@@ -16107,7 +16107,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Run &apos;{0}&apos; from plugin &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Run &apos;{0}&apos; from plug-in &apos;{1}&apos;.
         /// </summary>
         public static string EXTERNAL_PLUGIN_TITLE {
             get {
@@ -16116,7 +16116,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to run plugin executable. Please see the client log for details..
+        ///   Looks up a localized string similar to Failed to run plug-in executable. Please see the client log for details..
         /// </summary>
         public static string EXTERNAL_PLUGIN_WIN32 {
             get {
@@ -16719,7 +16719,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plugin {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?.
+        ///   Looks up a localized string similar to Plug-in {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?.
         /// </summary>
         public static string FORCE_CLOSE_PLUGIN_PROMPT {
             get {
@@ -19396,6 +19396,123 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available for {0}. After {1} there will be no further hotfixes released for {2}. Please update to the latest Cumulative Update..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest supported version..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} reached End of Life on {1}. There will be no further hotfixes released after this date. Please upgrade to the latest CR..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} reached End of Life for express customers on {1}. You are no longer eligible for hotfixes released after this date. Please upgrade to the latest CR..
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_CU {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_CU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has reached End of Life.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has reached End of Life for express customers.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No further hotfixes released after {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_CU {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_CU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new Cumulative Update is available.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life on {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not eligible for hotfixes released after {0}.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_FREE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of Life for express customers.
+        /// </summary>
+        public static string HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE {
+            get {
+                return ResourceManager.GetString("HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hourly; at {0} minutes past each hour.
         /// </summary>
         public static string HOURLY_SCHEDULE_FORMAT {
@@ -19666,7 +19783,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify the manifest matches the appliance files. This option will only activate if the appliance has a manifest file..
+        ///   Looks up a localized string similar to The appliance has a manifest file. You can choose to verify the manifest matches the appliance files..
         /// </summary>
         public static string IMPORT_SECURITY_PAGE_VERIFY_CONTENT_DESCRIPTION {
             get {
@@ -19684,7 +19801,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify the digital signature of the appliance is valid. This option will activate only if the appliance has been digitally signed..
+        ///   Looks up a localized string similar to The appliance has been digitally signed. You can choose to verify the digital signature of the appliance is valid..
         /// </summary>
         public static string IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION {
             get {
@@ -19876,7 +19993,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva)|*.xva|XVA Version 1|ova.xml.
+        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml.
         /// </summary>
         public static string IMPORT_SOURCE_PAGE_FILETYPES {
             get {
@@ -28016,33 +28133,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created by [XenCenter] Disk Image Import.
-        /// </summary>
-        public static string OVF_CREATED {
-            get {
-                return ResourceManager.GetString("OVF_CREATED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual Disk.
-        /// </summary>
-        public static string OVF_DISK_CAPTION {
-            get {
-                return ResourceManager.GetString("OVF_DISK_CAPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual Network.
-        /// </summary>
-        public static string OVF_NET_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("OVF_NET_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parent folder.
         /// </summary>
         public static string PARENT_FOLDER {
@@ -29599,7 +29689,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} plugins enabled.
+        ///   Looks up a localized string similar to {0} plug-ins enabled.
         /// </summary>
         public static string PLUGIN_ENABLED_COUNT {
             get {
@@ -29608,7 +29698,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1 plugin enabled.
+        ///   Looks up a localized string similar to 1 plug-in enabled.
         /// </summary>
         public static string PLUGIN_ENABLED_COUNT_ONE {
             get {
@@ -29662,7 +29752,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plugins.
+        ///   Looks up a localized string similar to Plug-ins.
         /// </summary>
         public static string PLUGINS {
             get {
@@ -29671,7 +29761,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adjust settings for plugins to [XenCenter].
+        ///   Looks up a localized string similar to Adjust settings for plug-ins to [XenCenter].
         /// </summary>
         public static string PLUGINS_DESC {
             get {
@@ -31157,11 +31247,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Server from &amp;Pool.
+        ///   Looks up a localized string similar to Remove From &amp;Pool.
         /// </summary>
         public static string REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT {
             get {
                 return ResourceManager.GetString("REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re&amp;move Server.
+        /// </summary>
+        public static string REMOVE_SERVER_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("REMOVE_SERVER_MENU_ITEM", resourceCulture);
             }
         }
         
@@ -35578,7 +35677,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unrecognised plugin version &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Unrecognized plug-in version &apos;{0}&apos;.
         /// </summary>
         public static string UNRECOGNISED_PLUGIN_VERSION {
             get {
@@ -38752,7 +38851,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapsh&amp;ot Schedules....
+        ///   Looks up a localized string similar to VM Snapsh&amp;ot Schedules....
         /// </summary>
         public static string VMSS_CONTEXT_MENU {
             get {
@@ -41474,6 +41573,15 @@ namespace XenAdmin {
         public static string XENSERVER_6_5 {
             get {
                 return ResourceManager.GetString("XENSERVER_6_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Legacy XenServer product].
+        /// </summary>
+        public static string XENSERVER_LEGACY {
+            get {
+                return ResourceManager.GetString("XENSERVER_LEGACY", resourceCulture);
             }
         }
         

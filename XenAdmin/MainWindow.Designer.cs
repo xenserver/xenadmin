@@ -137,7 +137,7 @@ namespace XenAdmin
             this.AddPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.addServerToolStripMenuItem = new XenAdmin.Commands.AddHostToSelectedPoolToolStripMenuItem();
-            this.removeServerToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.removeServerToolStripMenuItem = new XenAdmin.Commands.PoolRemoveServerToolStripMenuItem();
             this.poolReconnectAsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disconnectPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
@@ -277,6 +277,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.menuItemRemoveFromPool = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -949,7 +950,6 @@ namespace XenAdmin
             // 
             // removeServerToolStripMenuItem
             // 
-            this.removeServerToolStripMenuItem.Command = new XenAdmin.Commands.RemoveHostFromPoolCommand();
             this.removeServerToolStripMenuItem.Name = "removeServerToolStripMenuItem";
             resources.ApplyResources(this.removeServerToolStripMenuItem, "removeServerToolStripMenuItem");
             // 
@@ -1083,6 +1083,7 @@ namespace XenAdmin
             this.toolStripSeparator1,
             this.connectDisconnectToolStripMenuItem,
             this.addServerToPoolMenuItem,
+            this.menuItemRemoveFromPool,
             this.toolStripSeparator3,
             this.backupToolStripMenuItem,
             this.restoreFromBackupToolStripMenuItem,
@@ -1884,12 +1885,18 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
+            // menuItemRemoveFromPool
+            // 
+            this.menuItemRemoveFromPool.Command = new XenAdmin.Commands.RemoveHostFromPoolCommand();
+            this.menuItemRemoveFromPool.Name = "menuItemRemoveFromPool";
+            resources.ApplyResources(this.menuItemRemoveFromPool, "menuItemRemoveFromPool");
+            // 
             // conversionToolStripMenuItem
             // 
             this.conversionToolStripMenuItem.Command = new XenAdmin.Commands.LaunchConversionManagerCommand();
             this.conversionToolStripMenuItem.Name = "conversionToolStripMenuItem";
             resources.ApplyResources(this.conversionToolStripMenuItem, "conversionToolStripMenuItem");
-            // 
+            //
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1969,7 +1976,7 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem wlbReportsToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem wlbDisconnectToolStripMenuItem;
         private XenAdmin.Commands.AddHostToSelectedPoolToolStripMenuItem addServerToolStripMenuItem;
-        private XenAdmin.Commands.CommandToolStripMenuItem removeServerToolStripMenuItem;
+        private XenAdmin.Commands.PoolRemoveServerToolStripMenuItem removeServerToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private XenAdmin.Commands.CommandToolStripMenuItem deleteToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem disconnectPoolToolStripMenuItem;
@@ -2159,6 +2166,7 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem disableCbtToolStripMenuItem;
         private System.Windows.Forms.Label LicenseStatusTitleLabel;
         private Controls.GradientPanel.VerticalGradientPanel TitleBackPanel;
+        private XenAdmin.Commands.CommandToolStripMenuItem menuItemRemoveFromPool;
         private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
     }
 

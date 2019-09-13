@@ -643,7 +643,7 @@ namespace XenAdmin.TabPages
                     subject = subj;
 
                 _cellExpander.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
-                _cellGroupOrUser.Value = IsLocalRootRow || !subject.IsGroup ? Resources._000_User_h32bit_16 : Resources._000_UserAndGroup_h32bit_32;
+                _cellGroupOrUser.Value = IsLocalRootRow || !subject.IsGroup ? Resources._000_User_h32bit_16 : Resources._000_UserAndGroup_h32bit_16;
                 _cellSubjectInfo.Value = expanded ? expandedSubjectInfo : contractedSubjectInfo;
                 _cellRoles.Value = expanded ? expandedRoles : contractedRoles;
                 _cellLoggedIn.Value = IsLocalRootRow || subject.IsGroup || statusLost
@@ -783,7 +783,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void buttonResolve_Click(object sender, EventArgs e)
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
             Program.AssertOnEventThread();
             if (!buttonAdd.Enabled)

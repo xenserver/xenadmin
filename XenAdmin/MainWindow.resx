@@ -1822,13 +1822,13 @@
     <value>163, 5</value>
   </metadata>
   <data name="ShowToolbarMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="ShowToolbarMenuItem.Text" xml:space="preserve">
     <value>Show &amp;Toolbar</value>
   </data>
   <data name="ToolBarContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 48</value>
+    <value>147, 26</value>
   </data>
   <data name="&gt;&gt;ToolBarContextMenu.Name" xml:space="preserve">
     <value>ToolBarContextMenu</value>
@@ -2047,7 +2047,7 @@
     <value>277, 22</value>
   </data>
   <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Delete Pool</value>
+    <value>Mak&amp;e into standalone server</value>
   </data>
   <data name="toolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
@@ -2192,6 +2192,12 @@
   </data>
   <data name="addServerToPoolMenuItem.Text" xml:space="preserve">
     <value>Add to &amp;Pool</value>
+  </data>
+  <data name="menuItemRemoveFromPool.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="menuItemRemoveFromPool.Text" xml:space="preserve">
+    <value>Remove From &amp;Pool</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 6</value>
@@ -3944,6 +3950,12 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuItemRemoveFromPool.Name" xml:space="preserve">
+    <value>menuItemRemoveFromPool</value>
+  </data>
+  <data name="&gt;&gt;menuItemRemoveFromPool.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;conversionToolStripMenuItem.Name" xml:space="preserve">
     <value>conversionToolStripMenuItem</value>

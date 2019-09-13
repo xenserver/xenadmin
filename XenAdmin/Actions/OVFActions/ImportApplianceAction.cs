@@ -55,6 +55,7 @@ namespace XenAdmin.Actions.OVFActions
 		private readonly string m_password;
 		private readonly bool m_runfixups;
 		private readonly SR m_selectedIsoSr;
+        private Import m_transportAction;
 
 		#endregion
 
@@ -73,6 +74,8 @@ namespace XenAdmin.Actions.OVFActions
 			m_runfixups = runfixups;
 			m_selectedIsoSr = selectedIsoSr;
 		}
+
+        protected override XenOvfTransportBase TransportAction => m_transportAction;
 
 		protected override void Run()
 		{
@@ -166,7 +169,7 @@ namespace XenAdmin.Actions.OVFActions
 											Cancel = Cancelling //in case the Cancel button has already been pressed
 				                    	};
 				m_transportAction.SetTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-				(m_transportAction as Import).Process(env, Path.GetDirectoryName(m_package.PackageSourceFile), m_password);
+                m_transportAction.Process(env, Path.GetDirectoryName(m_package.PackageSourceFile), m_password);
 			}
 			catch (OperationCanceledException)
 			{

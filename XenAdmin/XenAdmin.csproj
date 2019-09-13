@@ -101,6 +101,7 @@
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
+    <Compile Include="Alerts\Types\HotfixEligibilityAlert.cs" />
     <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
     <Compile Include="Alerts\Types\DuplicateIqnAlert.cs" />
     <Compile Include="Alerts\Types\MissingIqnAlert.cs" />
@@ -110,6 +111,9 @@
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
+    <Compile Include="Commands\Controls\PoolRemoveServerToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\LaunchConversionManagerCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
@@ -1490,10 +1494,10 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Help\HelpManager.cs" />
-    <Compile Include="Dialogs\LoadSessionDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\LoadSessionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\LoadSessionDialog.Designer.cs">
+    <Compile Include="Dialogs\RestoreSession\LoadSessionDialog.Designer.cs">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TreeViews\FlickerFreeTreeView.cs">
@@ -2739,7 +2743,7 @@
       <DependentUpon>HelpManager.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoadSessionDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -4488,6 +4492,8 @@
     <Content Include="Images\000_Sites_h32bit_16.png" />
     <None Include="Images\000_TCP-IPGroup_h32bit_16.png" />
     <None Include="Images\015_Download_h32bit_16.png" />
+    <Content Include="Images\000_UserAndGroup_h32bit_16.png" />
+    <Content Include="Images\000_User_h32bit_32.png" />
     <Content Include="Images\asterisk.png" />
     <Content Include="Images\attach_24.png" />
     <None Include="Images\cancelled_action_16.png" />
@@ -5359,10 +5365,10 @@
     <EmbeddedResource Include="Dialogs\LicenseManager\LicenseManager.zh-CN.resx">
       <DependentUpon>LicenseManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoadSessionDialog.ja.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.ja.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LoadSessionDialog.zh-CN.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.zh-CN.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\ManageUpdatesPage.ja.resx">
@@ -5524,6 +5530,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.ja.resx">
       <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.zh-CN.resx">
       <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
