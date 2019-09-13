@@ -1303,6 +1303,26 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _000_User_h32bit_32 {
+            get {
+                object obj = ResourceManager.GetObject("_000_User_h32bit_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _000_UserAndGroup_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_UserAndGroup_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _000_UserAndGroup_h32bit_32 {
             get {
                 object obj = ResourceManager.GetObject("_000_UserAndGroup_h32bit_32", resourceCulture);

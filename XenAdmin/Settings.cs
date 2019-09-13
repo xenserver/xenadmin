@@ -36,6 +36,7 @@ using System.Security.Cryptography.X509Certificates;
 
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.RestoreSession;
 using XenAdmin.Network;
 using System.Configuration;
 using XenCenterLib;
@@ -350,16 +351,11 @@ namespace XenAdmin
             // close the splash screen before opening the password dialog (the dialog comes up behind the splash screen)
             Program.CloseSplash();
 
-            LoadSessionDialog dialog = new LoadSessionDialog(isRetry);
-            dialog.ShowDialog(Program.MainWindow);
-            if (dialog.DialogResult == DialogResult.OK)
-            {
-                return dialog.PasswordHash;
-            }
-            else
-            {
-                return null;
-            }
+            using (var dialog = new LoadSessionDialog(isRetry))
+                if (dialog.ShowDialog(Program.MainWindow) == DialogResult.OK)
+                    return dialog.PasswordHash;
+
+            return null;
         }
 
         /// <summary>

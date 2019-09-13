@@ -376,6 +376,11 @@ namespace XenAdmin.Core
             get { return ReadKey(CUSTOM_UPDATES_XML_LOCATION); }
         }
 
+        public static string CustomHelpUrl
+        {
+            get { return ReadKey(HELP_URL_OVERRIDE); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -399,6 +404,7 @@ namespace XenAdmin.Core
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
         private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
+        private const string HELP_URL_OVERRIDE = "HelpUrlOverride";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             sb.AppendLine(string.Format(Messages.PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_ONE, GetUpdateName())).AppendLine();
 
-            if (!IsAutomaticMode && ManualTextInstructions.ContainsKey(pool))
+            if (!IsAutomaticMode && ManualTextInstructions != null && ManualTextInstructions.ContainsKey(pool))
                 sb.Append(ManualTextInstructions[pool]).AppendLine();
             
             return sb.ToString();

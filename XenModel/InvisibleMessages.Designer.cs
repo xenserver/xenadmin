@@ -97,11 +97,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://docs.citrix.com/{0}/xencenter/current-release/{1}.html?utm_campaign={2}&amp;utm_medium={3}&amp;utm_source={4}.
+        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/xencenter/current-release/.
         /// </summary>
         public static string HELP_URL {
             get {
                 return ResourceManager.GetString("HELP_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}.
+        /// </summary>
+        public static string HELP_URL_QUERY {
+            get {
+                return ResourceManager.GetString("HELP_URL_QUERY", resourceCulture);
             }
         }
         

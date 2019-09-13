@@ -29,12 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Resources;
-using System.Windows.Forms;
 using System.Drawing;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
 
@@ -129,16 +126,21 @@ namespace XenAdmin.Help
             return (pageref != null && pageref != "TabPageUnknown" && GetID(pageref) != null);
         }
 
-        public static string ProduceUrl(string topicId, string helpUrl, string locale, string campaign, string medium, string source)
+        public static string GetHelpUrl(string topicId)
         {
-            return string.Format(
-                helpUrl,
-                locale,
-                topicId ?? "index",
-                campaign.Replace('.', '_'),
-                medium,
-                source
-            ).ToLowerInvariant();
+            var helpQuery = string.Empty;
+            var helpUrl = Registry.CustomHelpUrl;
+
+            if (string.IsNullOrEmpty(helpUrl))
+            {
+                helpUrl = InvisibleMessages.HELP_URL;
+
+                helpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY,
+                    $"{Branding.XENCENTER_VERSION}.{Program.Version.Revision}".Replace('.', '_'),
+                    Messages.XENCENTER);
+            }
+
+            return (helpUrl + $"{topicId ?? "index"}.html" + helpQuery).ToLowerInvariant();
         }
     }
 }

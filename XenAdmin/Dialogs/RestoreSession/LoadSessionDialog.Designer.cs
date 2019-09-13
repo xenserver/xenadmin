@@ -1,4 +1,4 @@
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Dialogs.RestoreSession
 {
     partial class LoadSessionDialog
     {
@@ -36,6 +36,7 @@ namespace XenAdmin.Dialogs
             this.cancelButton = new System.Windows.Forms.Button();
             this.passwordFailure1 = new XenAdmin.Controls.Common.PasswordFailure();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,8 +54,8 @@ namespace XenAdmin.Dialogs
             // 
             // passBox
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.passBox, 3);
             resources.ApplyResources(this.passBox, "passBox");
+            this.tableLayoutPanel1.SetColumnSpan(this.passBox, 3);
             this.passBox.Name = "passBox";
             this.passBox.UseSystemPasswordChar = true;
             this.passBox.TextChanged += new System.EventHandler(this.passBox_TextChanged);
@@ -84,12 +85,19 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.EnterPassLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.passLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.passBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cancelButton, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.okButton, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.passLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.passBox, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cancelButton, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.okButton, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 4);
+            this.label1.Name = "label1";
             // 
             // LoadSessionDialog
             // 
@@ -100,8 +108,6 @@ namespace XenAdmin.Dialogs
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LoadSessionDialog";
             this.Load += new System.EventHandler(this.LoadSessionDialog_Load);
-            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.LoadSessionDialog_HelpButtonClicked);
-            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.LoadSessionDialog_HelpRequested);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -117,5 +123,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button cancelButton;
         private XenAdmin.Controls.Common.PasswordFailure passwordFailure1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -19,7 +19,7 @@ namespace XenOvf {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -214,6 +214,15 @@ namespace XenOvf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network {0}.
+        /// </summary>
+        public static string NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("NETWORK_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to find section with type {0} and id {1}..
         /// </summary>
         public static string OVF_CANNOT_FIND_SECTION {
@@ -268,6 +277,15 @@ namespace XenOvf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created by [XenCenter] Disk Image Import.
+        /// </summary>
+        public static string OVF_CREATED {
+            get {
+                return ResourceManager.GetString("OVF_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to find deployment configuration section..
         /// </summary>
         public static string OVF_DEPLOYMENT_CFG_SECTION_MISSING {
@@ -295,6 +313,15 @@ namespace XenOvf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Disk.
+        /// </summary>
+        public static string OVF_DISK_CAPTION {
+            get {
+                return ResourceManager.GetString("OVF_DISK_CAPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to find the disk section..
         /// </summary>
         public static string OVF_DISK_SECTION_MISSING {
@@ -318,6 +345,15 @@ namespace XenOvf {
         public static string OVF_INSTALL_SECTION_MISSING {
             get {
                 return ResourceManager.GetString("OVF_INSTALL_SECTION_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Network.
+        /// </summary>
+        public static string OVF_NET_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("OVF_NET_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -583,16 +619,25 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to find files listed in the manifest. Please refer to the log for the list of missing files..
+        ///   Looks up a localized string similar to The appliance contains a file that is not listed in the manifest. Please see logs for details..
         /// </summary>
-        public static string SECURITY_FILE_MISSING {
+        public static string SECURITY_FILE_MISSING_FROM_MANIFEST {
             get {
-                return ResourceManager.GetString("SECURITY_FILE_MISSING", resourceCulture);
+                return ResourceManager.GetString("SECURITY_FILE_MISSING_FROM_MANIFEST", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Security method {0} is not supported..
+        ///   Looks up a localized string similar to One or more of the files listed in the manifest are missing from the appliance. Please see logs for details..
+        /// </summary>
+        public static string SECURITY_FILE_MISSING_FROM_PACKAGE {
+            get {
+                return ResourceManager.GetString("SECURITY_FILE_MISSING_FROM_PACKAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not a valid hash algorithm..
         /// </summary>
         public static string SECURITY_NOT_SUPPORTED {
             get {
@@ -777,6 +822,15 @@ namespace XenOvf {
         public static string VERSION_PROMPT {
             get {
                 return ResourceManager.GetString("VERSION_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Machine.
+        /// </summary>
+        public static string VIRTUAL_MACHINE {
+            get {
+                return ResourceManager.GetString("VIRTUAL_MACHINE", resourceCulture);
             }
         }
     }
