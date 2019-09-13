@@ -1053,6 +1053,9 @@
   <data name="TabPageWLBUpsell" xml:space="preserve">
     <value>wlb-overview</value>
   </data>
+  <data name="TOC" xml:space="preserve">
+    <value>index</value>
+  </data>
   <data name="UnknownCertificateDialog" xml:space="preserve">
     <value>hosts-reconnect</value>
   </data>

@@ -35,10 +35,11 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using XenAdmin.Network;
 using XenAdmin.Core;
+using XenAdmin.Help;
 
 namespace XenAdmin.Dialogs
 {
-    public partial class XenDialogBase : Form
+    public partial class XenDialogBase : Form, IFormWithHelp
     {
         private static Dictionary<IXenConnection, List<XenDialogBase>> instances = new Dictionary<IXenConnection, List<XenDialogBase>>();
 
@@ -143,31 +144,25 @@ namespace XenAdmin.Dialogs
 
         public bool HasHelp()
         {
-            return Help.HelpManager.HasHelpFor(HelpName);
+            return HelpManager.TryGetTopicId(HelpName, out _);
         }
 
         private void XenDialogBase_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            Help.HelpManager.Launch(HelpName);
+            HelpManager.Launch(HelpName);
             e.Cancel = true;
         }
 
         private void XenDialogBase_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            Help.HelpManager.Launch(HelpName);
+            HelpManager.Launch(HelpName);
             hlpevent.Handled = true;
         }
 
         /// <summary>
         /// override if the reference in the help differs to the dialogs name
         /// </summary>
-        internal virtual string HelpName
-        {
-            get
-            {
-                return Name;
-            }
-        }
+        internal virtual string HelpName => Name;
 
         private void XenDialogBase_Shown(object sender, EventArgs e)
         {

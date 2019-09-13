@@ -123,6 +123,8 @@ namespace XenAdmin.TabPages
             }
         }
 
+        public override string HelpID => "TabPageBallooning";
+
         private bool VMWanted(VM vm, Host host)
         {
             return vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && vm.Home() == host;

@@ -93,6 +93,8 @@ namespace XenAdmin.TabPages
             }            
         }
 
+        public override string HelpID => "TabPageSettings";
+
         private void licenseStatus_ItemUpdated(object sender, EventArgs e)
         {
             if (pdSectionLicense == null || licenseStatus == null)

@@ -24,9 +24,6 @@
     <Setting Name="UserTemplatesVisible" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="DebugHelp" Roaming="true" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="WindowSize" Roaming="true" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

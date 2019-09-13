@@ -66,6 +66,8 @@ namespace XenAdmin.TabPages
             dataGridViewStorage.Sort(ColumnDevicePosition, ListSortDirection.Ascending);
         }
 
+        public override string HelpID => "TabPageStorage";
+
         public VM VM
         {
             set

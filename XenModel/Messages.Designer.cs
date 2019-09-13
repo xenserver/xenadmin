@@ -23106,24 +23106,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Help topic {0} does not exist..
-        /// </summary>
-        public static string MESSAGEBOX_HELP_TOPIC_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_HELP_TOPIC_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Launching help topic {0} ({1})..
-        /// </summary>
-        public static string MESSAGEBOX_HELP_TOPICS {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_HELP_TOPICS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Your saved settings appear to be corrupt. Revert changes to {0} or delete the file to return to default values..
         /// </summary>
         public static string MESSAGEBOX_LOAD_CORRUPTED {

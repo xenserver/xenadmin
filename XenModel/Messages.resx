@@ -8037,12 +8037,6 @@ This action is final and unrecoverable.</value>
   <data name="MESSAGEBOX_FORGET_SR_CONTINUE_YES_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Yes, Forget</value>
   </data>
-  <data name="MESSAGEBOX_HELP_TOPICS" xml:space="preserve">
-    <value>Launching help topic {0} ({1}).</value>
-  </data>
-  <data name="MESSAGEBOX_HELP_TOPIC_NOT_FOUND" xml:space="preserve">
-    <value>Help topic {0} does not exist.</value>
-  </data>
   <data name="MESSAGEBOX_LOAD_CORRUPTED" xml:space="preserve">
     <value>Your saved settings appear to be corrupt. Revert changes to {0} or delete the file to return to default values.</value>
   </data>
