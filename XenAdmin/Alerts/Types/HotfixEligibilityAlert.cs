@@ -65,21 +65,29 @@ namespace XenAdmin.Alerts.Types
 
                 switch (Version.HotfixEligibility)
                 {
+                    // all + the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.all when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
 
+                    // premium + unlicensed host -> "EOL for express customers" alert
                     case hotfix_eligibility.premium when unlicensed:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
+
+                    // premium + licensed host and the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.premium when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
 
+                    // cu -> "EOL for express customers" / "CU for licensed customers" alert
                     case hotfix_eligibility.cu when pool.IsFreeLicenseOrExpired():
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE, productVersionText);
                     case hotfix_eligibility.cu:
                         return Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_CU;
 
+                    // none -> EOL alert
                     case hotfix_eligibility.none:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL, productVersionText);
+
+                    // everything else
                     default:
                         return string.Empty;
                 }
@@ -101,31 +109,33 @@ namespace XenAdmin.Alerts.Types
 
                 switch (Version.HotfixEligibility)
                 {
-                    //all
+                    // all + the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.all when unlicensed && Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
                     case hotfix_eligibility.all when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
 
-                    // premium
+                    // premium + unlicensed host -> "EOL for express customers" alert
                     case hotfix_eligibility.premium when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue: 
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                    
+                    // premium + licensed host and the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.premium when !unlicensed && Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
 
-                    // cu
+                    // cu -> "EOL for express customers" / "CU for licensed customers" alert
                     case hotfix_eligibility.cu when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                     case hotfix_eligibility.cu when !unlicensed && Version.HotfixEligibilityNoneDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU, productVersionText, HelpersGUI.DateTimeToString(Version.HotfixEligibilityNoneDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true), versionText);
 
-                    // none
+                    // none -> EOL alert
                     case hotfix_eligibility.none when unlicensed && Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
                     case hotfix_eligibility.none when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL, productVersionText, HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
 
-                    // default
+                    // everything else
                     default:
                         return string.Empty;
                 }
@@ -155,10 +165,32 @@ namespace XenAdmin.Alerts.Types
             if (version == null)
                 return false;
 
-            if (hotfixEligibility == hotfix_eligibility.all && version.EolDate == DateTime.MinValue ||
-                hotfixEligibility == hotfix_eligibility.premium && licensed && version.EolDate == DateTime.MinValue)
-                return false;
-            return true;
+            switch (hotfixEligibility)
+            {
+                // all + the EOL date is known -> "Approaching EOL" alert
+                case hotfix_eligibility.all when version.EolDate != DateTime.MinValue:
+                    return true;
+
+                // premium + unlicensed host -> "EOL for express customers" alert
+                case hotfix_eligibility.premium when !licensed:
+                    return true;
+
+                // premium + licensed host and the EOL date is known -> "Approaching EOL" alert
+                case hotfix_eligibility.premium when version.EolDate != DateTime.MinValue:
+                    return true;
+
+                // cu -> "EOL for express customers" / "CU for licensed customers" alert
+                case hotfix_eligibility.cu:
+                    return true;
+
+                // none -> EOL alert
+                case hotfix_eligibility.none:
+                    return true;
+
+                // everything else -> no alert
+                default:
+                    return false;
+            }
         }
     }
 }

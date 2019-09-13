@@ -18403,7 +18403,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} will be End of Life on {1}. After this date {2} will be no longer eligible for support and there will be no further hotfixes released for this version. Please upgrade to latest supported version..
+        ///   Looks up a localized string similar to {0} will reach End of Life on {1}. After this date {2} will be no longer eligible for support and there will be no further hotfixes released for this version. Please upgrade to latest supported version..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL {
             get {
@@ -18412,7 +18412,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} will be End of Life on {1}. There will be no further hotfixes released after this date.  Please upgrade to the latest CR..
+        ///   Looks up a localized string similar to {0} will reach End of Life on {1}. There will be no further hotfixes released after this date.  Please upgrade to the latest CR..
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE {
             get {
@@ -18457,7 +18457,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} will be End of Life on {1}.
+        ///   Looks up a localized string similar to {0} will reach End of Life on {1}.
         /// </summary>
         public static string HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL {
             get {
