@@ -62,6 +62,7 @@ namespace XenAdmin.Dialogs
         private volatile bool _updating;
         private volatile bool _updateRequired;
         private VM _conversionVm;
+        private VM[] _conversionVms;
         private ActivateConversionVpxAction _activateAction;
 
         private static readonly string[] DetailHeaders =
@@ -79,11 +80,11 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        public ConversionDialog(IXenConnection conn)
+        public ConversionDialog(IXenConnection conn, params VM[] conversionVms)
             : base(conn)
         {
             InitializeComponent();
-            Text = string.Format(Messages.CONVERSION_MANAGER_TITLE, Helpers.GetName(Helpers.GetPoolOfOne(conn)).Ellipsise(80));
+            _conversionVms = conversionVms;
 
             toolStripDdbFilterStatus.ImplementsIncomplete = true;
             toolStripDdbFilterStatus.ImplementsQueued = true;
@@ -116,10 +117,38 @@ namespace XenAdmin.Dialogs
 
         private bool FilterIsOn => toolStripDdbFilterStatus.FilterIsOn;
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
-            base.OnLoad(e);
-            ConnectToVpx();
+            base.OnShown(e);
+            Text = string.Format(Messages.CONVERSION_MANAGER_TITLE, Helpers.GetName(Helpers.GetPoolOfOne(connection)).Ellipsise(80));
+
+            if (_conversionVms.Length == 0) //shouldn't happen, but just in case
+            {
+                statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
+                statusLabel.Text = Messages.CONVERSION_CANNOT_FIND_VPX;
+                statusLinkLabel.Reset();
+                return;
+            }
+
+            if (_conversionVms.Length == 1)
+            {
+                _conversionVm = _conversionVms[0];
+                ConnectToVpx();
+                return;
+            }
+
+            using (var dlg = new ConversionVmSelectionDialog(connection, _conversionVms))
+            {
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    _conversionVm = dlg.ConversionVm;
+                    ConnectToVpx();
+                }
+                else
+                {
+                    Close();
+                }
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -150,7 +179,7 @@ namespace XenAdmin.Dialogs
             statusLabel.Text = Messages.CONVERSION_INITIALIZING_VPX;
             statusLinkLabel.Reset();
 
-            _activateAction = new ActivateConversionVpxAction(connection);
+            _activateAction = new ActivateConversionVpxAction(_conversionVm);
             _activateAction.Completed += ActivateConversionVpxAction_Completed;
             _activateAction.Changed += ActivateConversionVpxAction_Changed;
             _activateAction.RunAsync();
@@ -703,7 +732,7 @@ namespace XenAdmin.Dialogs
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
                 {
-                    if (dlog.ShowDialog() == DialogResult.No)
+                    if (dlog.ShowDialog(this) == DialogResult.No)
                         return;
                 }
 
@@ -760,7 +789,7 @@ namespace XenAdmin.Dialogs
                 ThreeButtonDialog.ButtonYes,
                 ThreeButtonDialog.ButtonNo))
             {
-                if (dlog.ShowDialog() == DialogResult.No)
+                if (dlog.ShowDialog(this) == DialogResult.No)
                     return;
             }
 
