@@ -41,8 +41,6 @@ namespace XenAdmin.Commands
 {
     internal class LaunchConversionManagerCommand : Command
     {
-        private  static readonly RbacMethodList RequiredRbac = new RbacMethodList("Host.call_plugin");
-
         public LaunchConversionManagerCommand()
         {
         }
@@ -73,24 +71,27 @@ namespace XenAdmin.Commands
                 using (var dlg = new UpsellDialog(msg, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                     dlg.ShowDialog(Parent);
             }
-            else if (!con.Session.IsLocalSuperuser && !Registry.DontSudo &&
-                     !Role.CanPerform(RequiredRbac, con, out List<Role> validRoles))
+            else if (!con.Session.IsLocalSuperuser && !Registry.DontSudo && con.Session.Roles.All(r => r.name_label != Role.MR_ROLE_POOL_ADMIN))
             {
                 var currentRoles = con.Session.Roles;
                 currentRoles.Sort();
-                validRoles.Sort();
 
                 var msg = string.Format(Messages.CONVERSION_RBAC_RESTRICTION, currentRoles[0].FriendlyName(),
-                    string.Join(", ", validRoles.Select(r => r.FriendlyName())));
+                    Role.FriendlyName(Role.MR_ROLE_POOL_ADMIN));
 
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Error, msg),
                     ThreeButtonDialog.ButtonOK))
-                    dlg.ShowDialog();
+                    dlg.ShowDialog(Parent);
+            }
+            else if (selection.First is VM vm && vm.IsConversionVM())
+            {
+                MainWindowCommandInterface.ShowPerConnectionWizard(con, new ConversionDialog(con, vm));
             }
             else
             {
-                MainWindowCommandInterface.ShowPerConnectionWizard(con, new ConversionDialog(con));
+                var conversionVms = con.Cache.VMs.Where(v => v.IsConversionVM()).ToArray();
+                MainWindowCommandInterface.ShowPerConnectionWizard(con, new ConversionDialog(con, conversionVms));
             }
         }
     }

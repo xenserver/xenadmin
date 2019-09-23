@@ -3378,6 +3378,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
 
 {1}</value>
   </data>
+  <data name="CONVERSION_SELECT_VPX_TITLE" xml:space="preserve">
+    <value>Select Conversion Manager Virtual Appliance - {0}</value>
+  </data>
   <data name="CONVERSION_STATUS_CREATED" xml:space="preserve">
     <value>Created</value>
   </data>

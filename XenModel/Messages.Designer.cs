@@ -9362,6 +9362,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Conversion Manager Virtual Appliance - {0}.
+        /// </summary>
+        public static string CONVERSION_SELECT_VPX_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_SELECT_VPX_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Canceled.
         /// </summary>
         public static string CONVERSION_STATUS_CANCELLED {

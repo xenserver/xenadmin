@@ -272,6 +272,12 @@
     <Compile Include="Dialogs\ConversionDialog.Designer.cs">
       <DependentUpon>ConversionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ConversionVmSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConversionVmSelectionDialog.Designer.cs">
+      <DependentUpon>ConversionVmSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1669,6 +1675,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConversionDialog.zh-CN.resx">
       <DependentUpon>ConversionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConversionVmSelectionDialog.ja.resx">
+      <DependentUpon>ConversionVmSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConversionVmSelectionDialog.resx">
+      <DependentUpon>ConversionVmSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConversionVmSelectionDialog.zh-CN.resx">
+      <DependentUpon>ConversionVmSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>

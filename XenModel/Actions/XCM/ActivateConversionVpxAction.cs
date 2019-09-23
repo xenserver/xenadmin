@@ -33,7 +33,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using XenAdmin.Network;
 using XenAPI;
 
 
@@ -46,9 +45,10 @@ namespace XenAdmin.Actions.Xcm
         private const int TIMEOUT = 2 * 60 * 1000; //milliseconds
         private const int SLEEP = 2000; //milliseconds
 
-        public ActivateConversionVpxAction(IXenConnection connection)
-            : base(connection, "", true)
+        public ActivateConversionVpxAction(VM conversionVm)
+            : base(conversionVm?.Connection, "", true)
         {
+            ConversionVm = conversionVm;
         }
 
         public VM ConversionVm { get; private set; }
@@ -56,8 +56,6 @@ namespace XenAdmin.Actions.Xcm
 
         protected override void Run()
         {
-            ConversionVm = Connection.Cache.VMs.FirstOrDefault(vm => vm.IsConversionVM());
-
             if (ConversionVm == null)
                 throw new Exception(Messages.CONVERSION_CANNOT_FIND_VPX);
 
