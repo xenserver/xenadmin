@@ -575,7 +575,7 @@ namespace XenAdmin
                 }
                 else
                 {
-                    string filepath = GetLogFile();
+                    string filepath = GetLogFile() ?? Messages.MESSAGEBOX_LOGFILE_MISSING;
 
                     using (var d = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
@@ -715,7 +715,7 @@ namespace XenAdmin
         private static void FatalError()
         {
             string msg = String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED,
-                HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), GetLogFile_());
+                HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), GetLogFile());
 
             var msgWithStackTrace = string.Format("{0}\n{1}", msg, Environment.StackTrace);
             log.Fatal(msgWithStackTrace);
@@ -748,7 +748,7 @@ namespace XenAdmin
 
         public static void ViewLogFiles()
         {
-            string s = GetLogFile_();
+            string s = GetLogFile();
             if (s == null)
             {
                 using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.MESSAGEBOX_LOGFILE_MISSING, Messages.XENCENTER)))
@@ -762,13 +762,7 @@ namespace XenAdmin
             }
         }
 
-        private static string GetLogFile()
-        {
-            string s = GetLogFile_();
-            return s ?? "MISSING LOG FILE!";
-        }
-
-        public static string GetLogFile_()
+        public static string GetLogFile()
         {
             foreach (log4net.Appender.IAppender appender in log.Logger.Repository.GetAppenders())
             {

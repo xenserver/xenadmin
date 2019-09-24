@@ -163,7 +163,7 @@ namespace XenAdmin
 
         public string GetLogFile()
         {
-            return Program.GetLogFile_();
+            return Program.GetLogFile();
         }
 
         public void UpdateServerHistory(string hostnameWithPort)
