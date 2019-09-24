@@ -60,7 +60,7 @@ namespace XenAdmin
 
         public override object GetGroup(IXenObject o)
         {
-            throw new Exception("The method or operation is not implemented.");
+            throw new NotImplementedException();
         }
 
         public VirtualTreeNode RootNode
