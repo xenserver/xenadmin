@@ -30,7 +30,9 @@
  */
 
 using System;
+using System.Net;
 using System.Resources;
+using System.Threading;
 using XenAdmin.Core;
 
 
@@ -41,10 +43,55 @@ namespace XenAdmin.Help
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static readonly ResourceManager resources;
+        private static readonly string HelpUrl = Registry.CustomHelpUrl;
+        private static readonly string HelpQuery = string.Empty;
+        private static volatile string _helpVersion;
+
+        private static readonly object _helpLock = new object();
 
         static HelpManager()
         {
             resources = new ResourceManager("XenAdmin.Help.HelpManager", typeof(HelpManager).Assembly);
+
+            if (string.IsNullOrEmpty(HelpUrl))
+            {
+                HelpUrl = InvisibleMessages.HELP_URL;
+
+                HelpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY,
+                    $"{Branding.XENCENTER_VERSION}.{Program.Version.Revision}".Replace('.', '_'),
+                    Messages.XENCENTER);
+            }
+        }
+
+        internal static void SetHelpVersion()
+        {
+            ThreadPool.QueueUserWorkItem(obj =>
+            {
+                try
+                {
+                    var version = Program.Version;
+                    var helpVersion = $"{version.Major}-{version.Minor}/";
+                    var request = WebRequest.Create(HelpUrl + helpVersion + "index.html");
+                    request.Method = "HEAD";
+
+                    using (var response = request.GetResponse() as HttpWebResponse)
+                    {
+                        if (response != null && response.StatusCode == HttpStatusCode.OK)
+                            _helpVersion = helpVersion;
+                        else
+                            _helpVersion = "current-release/";
+                    }
+                }
+                catch
+                {
+                    _helpVersion = "current-release/";
+                }
+                finally
+                {
+                    lock (_helpLock)
+                        Monitor.PulseAll(_helpLock);
+                }
+            });
         }
 
         internal static bool TryGetTopicId(string pageRef, out string topicId)
@@ -68,29 +115,16 @@ namespace XenAdmin.Help
             else
                 log.DebugFormat("Found help topic ID {0} for {1}", topicId, pageRef);
 
-            var helpTopicUrl = GetHelpUrl(topicId);
-            Program.OpenURL(helpTopicUrl);
+            if (string.IsNullOrEmpty(_helpVersion))
+                lock (_helpLock)
+                    Monitor.Wait(_helpLock);
+
+            var helpTopicUrl = HelpUrl + _helpVersion + $"{topicId ?? "index"}.html" + HelpQuery;
+            Program.OpenURL(helpTopicUrl.ToLowerInvariant());
 
             // record help usage
             Properties.Settings.Default.HelpLastUsed = DateTime.UtcNow.ToString("u");
             Settings.TrySaveSettings();
-        }
-
-        private static string GetHelpUrl(string topicId)
-        {
-            var helpQuery = string.Empty;
-            var helpUrl = Registry.CustomHelpUrl;
-
-            if (string.IsNullOrEmpty(helpUrl))
-            {
-                helpUrl = InvisibleMessages.HELP_URL;
-
-                helpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY,
-                    $"{Branding.XENCENTER_VERSION}.{Program.Version.Revision}".Replace('.', '_'),
-                    Messages.XENCENTER);
-            }
-
-            return (helpUrl + $"{topicId ?? "index"}.html" + helpQuery).ToLowerInvariant();
         }
     }
 

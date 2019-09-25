@@ -193,7 +193,7 @@
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
   </data>
   <data name="HELP_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/en-us/xencenter/current-release/</value>
+    <value>http://docs.citrix.com/en-us/xencenter/</value>
   </data>
   <data name="HELP_URL_QUERY" xml:space="preserve">
     <value>?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}</value>

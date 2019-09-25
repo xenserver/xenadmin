@@ -97,7 +97,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/xencenter/current-release/.
+        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/xencenter/.
         /// </summary>
         public static string HELP_URL {
             get {
