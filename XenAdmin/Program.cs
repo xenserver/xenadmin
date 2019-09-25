@@ -44,6 +44,7 @@ using System.Drawing;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Dialogs;
+using XenAdmin.Help;
 using XenAdmin.XenSearch;
 using XenAPI;
 using XenCenterLib;
@@ -350,8 +351,13 @@ namespace XenAdmin
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
 
-            MainWindow mainWindow = new MainWindow(argType, args);
+            //set the help version before launching the main window;
+            //the call starts a different thread so it won't delay the main window launch;
+            //in most cases it is expected to have returned by the time the users request help;
+            //if they do before it has returned, the thread requesting help will wait for it
+            HelpManager.SetHelpVersion();
 
+            MainWindow mainWindow = new MainWindow(argType, args);
             Application.Run(mainWindow);
 
             log.Info("Application main thread exited");
