@@ -4991,6 +4991,9 @@
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>停用虚拟磁盘时出错</value>
   </data>
+  <data name="ERROR_DESTINATION_DIR_NON_EXIST" xml:space="preserve">
+    <value>目标目录不存在。</value>
+  </data>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE" xml:space="preserve">
     <value>无法销毁以下存储:</value>
   </data>
@@ -5284,9 +5287,6 @@
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR" xml:space="preserve">
     <value>目标目录无效。</value>
-  </data>
-  <data name="EXPORT_APPLIANCE_PAGE_ERROR_NON_EXIST_DIR" xml:space="preserve">
-    <value>目标目录不存在。</value>
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_PERMISSIONS" xml:space="preserve">
     <value>您没有目标目录的写权限。</value>
@@ -5814,10 +5814,10 @@
     <value>通过为 VM 分配专用的图形处理器(GPU)可以提高图形性能。但在该服务器中未检测到 GPU，因此，此选项当前不可用。</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
-    <value>选择允许在这些 GPU 上使用的虚拟 GPU 类型:</value>
+    <value>选择允许在这些 GPU 上使用的虚拟 GPU 类型。</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
-    <value>选择允许在此 GPU 上使用的虚拟 GPU 类型:</value>
+    <value>选择允许在此 GPU 上使用的虚拟 GPU 类型。</value>
   </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
     <value>无法在 VM“{0}”上添加新的性能图表，因为该 VM 未运行。</value>
@@ -6523,6 +6523,60 @@
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>修补程序检查</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} 将于 {1} 达到生命周期已结束状态。在此日期之后，{2} 将不再有资格获得支持，并且我们不会再为此版本发布更多修补程序。请升级到受支持的最新版本。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE" xml:space="preserve">
+    <value>{0} 将于 {1} 达到生命周期已结束状态。在此日期之后将不再发布更多修补程序。请升级到最新的 CR。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU" xml:space="preserve">
+    <value>新的累积更新可用于 {0}。在 {1} 之后，将不会有更多的修补程序面向 {2} 发布。请更新到最新的累积更新。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL" xml:space="preserve">
+    <value>{0} 已于 {1} 达到生命周期已结束状态，并且不再有资格获得支持。在此日期之后将不再发布更多修补程序。请升级到受支持的最新版本。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE" xml:space="preserve">
+    <value>{0} 已于 {1} 达到生命周期已结束状态。在此日期之后将不再发布更多修补程序。请升级到最新的 CR。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE" xml:space="preserve">
+    <value>{0} 已于 {1} 达到速成版客户的生命周期已结束状态。您不再有资格获得此日期之后发布的修补程序。请升级到最新的 CR。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} 将于 {1} 达到生命周期已结束状态</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_CU" xml:space="preserve">
+    <value>新的累积更新可用</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL" xml:space="preserve">
+    <value>{0} 已达到生命周期已结束状态</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE" xml:space="preserve">
+    <value>{0} 已达到速成版客户的生命周期已结束状态</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU" xml:space="preserve">
+    <value>在 {0} 之后不再发布更多修补程序</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE" xml:space="preserve">
+    <value>新的累积更新可用</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
+    <value>{0} 生命周期已结束。不再有资格获得支持</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE" xml:space="preserve">
+    <value>{0} 生命周期已结束</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE" xml:space="preserve">
+    <value>生命周期已结束</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE" xml:space="preserve">
+    <value>生命周期已结束。不再有资格获得支持</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
+    <value>没有资格获得 {0} 之后发布的修补程序</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
+    <value>速成版客户的生命周期已结束</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>每小时；在每小时的第 {0} 分钟</value>
   </data>
@@ -6634,6 +6688,9 @@
   <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>修复 ISO 将自动复制到所选 SR</value>
   </data>
+  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
+    <value>修复 ISO 无法复制到选定的 SR</value>
+  </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>找不到设备证书。缺少该文件。</value>
   </data>
@@ -6650,13 +6707,13 @@
     <value>验证清单文件内容(&amp;V)</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_CONTENT_DESCRIPTION" xml:space="preserve">
-    <value>验证清单文件与设备文件是否匹配。仅当设备具有清单文件时才会激活该选项。</value>
+    <value>设备具有清单文件。您可以选择验证清单是否与设备文件匹配。</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER" xml:space="preserve">
     <value>验证数字签名(&amp;V)</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION" xml:space="preserve">
-    <value>验证设备的数字签名是否有效。仅当设备已经过数字签名后才会激活该选项。</value>
+    <value>已对设备进行数字签名。您可以选择验证设备的数字签名是否有效。</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA" xml:space="preserve">
     <value>OVA 文件已破坏或包含无效数据。</value>
@@ -6722,7 +6779,8 @@
     <value>只有 OVF/OVA 包可以作为 vApp 导入。</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
-    <value>所有导入选项(*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml|OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|虚拟硬盘映像(*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA 文件(*.xva)|*.xva|XVA 版本 1|ova.xml</value>
+    <value>所有导入选项
+(*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|虚拟硬盘图像(*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA 文件(*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA 版本 1|ova.xml</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
@@ -6836,13 +6894,13 @@
     <value>无法解压缩文件 {0}。请参阅日志了解详细信息。</value>
   </data>
   <data name="IMPORT_WIZARD_NETWORKING_INTRO" xml:space="preserve">
-    <value>将所导入 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
+    <value>将要导入的 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
   </data>
   <data name="IMPORT_WIZARD_SPECIFIC_SR_RADIO" xml:space="preserve">
     <value>将导入的虚拟磁盘放在指定的目标 SR 上(&amp;S):</value>
   </data>
   <data name="IMPORT_WIZARD_STORAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>将所导入 VM 中的虚拟磁盘放在目标池或独立服务器中的存储库(SR)上。</value>
+    <value>将要导入的 VM 中的虚拟磁盘放在目标池或独立服务器中的存储库(SR)上。</value>
   </data>
   <data name="IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT" xml:space="preserve">
     <value>为导入模板选择存储库。</value>
@@ -6851,7 +6909,7 @@
     <value>正在解压缩文件 {0}，请稍候...</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
-    <value>所导入 VM 中的虚拟网络接口(&amp;V):</value>
+    <value>所导入的 VM 中的虚拟网络接口(&amp;V):</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SR_HINT_TEXT" xml:space="preserve">
     <value>为导入的虚拟机选择存储库。</value>
@@ -9492,15 +9550,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="OVERVIEW_UNITS" xml:space="preserve">
     <value>(平均/最大KB/秒)</value>
   </data>
-  <data name="OVF_CREATED" xml:space="preserve">
-    <value>由 [XenCenter] 磁盘映像导入创建</value>
-  </data>
-  <data name="OVF_DISK_CAPTION" xml:space="preserve">
-    <value>虚拟磁盘</value>
-  </data>
-  <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
-    <value>虚拟网络</value>
-  </data>
   <data name="PARENT_FOLDER" xml:space="preserve">
     <value>父文件夹</value>
   </data>
@@ -10031,7 +10080,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>插件</value>
   </data>
   <data name="PLUGINS_DESC" xml:space="preserve">
-    <value>调整 [XenCenter] 插件的设置</value>
+    <value>调整 [XenCenter] 的插件的设置</value>
   </data>
   <data name="PLUGINS_MENU_ITEMS_ONLY_ONE_CHILD_ALLOWED" xml:space="preserve">
     <value>菜单项功能必须只有一个命令 XML 节点作为子项</value>
@@ -10593,7 +10642,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>删除服务器(&amp;R)...</value>
   </data>
   <data name="REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT" xml:space="preserve">
-    <value>从池中删除服务器(&amp;P)</value>
+    <value>从池中删除(&amp;P)</value>
+  </data>
+  <data name="REMOVE_SERVER_MENU_ITEM" xml:space="preserve">
+    <value>删除服务器(&amp;M)</value>
   </data>
   <data name="REMOVE_SNAPSHOT" xml:space="preserve">
     <value>删除快照</value>
@@ -12894,7 +12946,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}。{1}: {2}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
-    <value>快照计划(&amp;O)...</value>
+    <value>VM 快照计划(&amp;O)...</value>
   </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>发送与快照计划作业警报有关的电子邮件通知(&amp;E)</value>
@@ -14034,6 +14086,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
+  </data>
+  <data name="XENSERVER_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] 模板</value>

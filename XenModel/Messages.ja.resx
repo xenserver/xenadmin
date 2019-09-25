@@ -2544,7 +2544,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>サーバーのパスワードの変更 - {0}</value>
   </data>
   <data name="CHANGEPASS_ROOT_PASS" xml:space="preserve">
-    <value>{0} のルート パスワードを入力してください。</value>
+    <value>'{0}' のルート パスワードを入力してください:</value>
   </data>
   <data name="CHANGE_POLICY_STATUS" xml:space="preserve">
     <value>ポリシー '{0}' の状態の変更</value>
@@ -4997,6 +4997,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>仮想ディスクの非アクティブ化エラー</value>
   </data>
+  <data name="ERROR_DESTINATION_DIR_NON_EXIST" xml:space="preserve">
+    <value>エクスポート先ディレクトリが存在しません。</value>
+  </data>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE" xml:space="preserve">
     <value>以下のストレージを破棄できません。</value>
   </data>
@@ -5290,9 +5293,6 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR" xml:space="preserve">
     <value>エクスポート先ディレクトリが無効です。</value>
-  </data>
-  <data name="EXPORT_APPLIANCE_PAGE_ERROR_NON_EXIST_DIR" xml:space="preserve">
-    <value>エクスポート先ディレクトリが存在しません。</value>
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_PERMISSIONS" xml:space="preserve">
     <value>エクスポート先ディレクトリに対する書き込み許可がありません。</value>
@@ -6529,6 +6529,60 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix チェック</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となります。この日付以降、{2} はサポート対象外となり、このバージョン向けの Hotfix はリリースされません。サポートされている最新のバージョンにアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となります。この日付以降、Hotfix はリリースされません。最新の CR にアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU" xml:space="preserve">
+    <value>{0} の新しい累積更新プログラムが利用可能です。{1} 以降、{2} の Hotfix はリリースされません。最新の累積更新プログラムに更新してください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となり、サポート対象外となりました。この日付以降、Hotfix はリリースされません。サポートされている最新のバージョンにアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となりました。この日付以降、Hotfix はリリースされません。最新の CR にアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE" xml:space="preserve">
+    <value>Express ライセンスの顧客向け {0} は、{1} に製品終了 (EOL) となりました。この日付以降にリリースされた Hotfix の対象外になります。最新の CR にアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となります</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_CU" xml:space="preserve">
+    <value>新しい累積更新プログラムが利用可能です</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL" xml:space="preserve">
+    <value>{0} は製品終了 (EOL) となりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE" xml:space="preserve">
+    <value>Express ライセンスの顧客向け {0} は製品終了 (EOL) になりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU" xml:space="preserve">
+    <value>{0} 以降、Hotfix はリリースされません</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE" xml:space="preserve">
+    <value>新しい累積更新プログラムが利用可能です</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
+    <value>製品終了 (EOL): {0}。サポート対象外となりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE" xml:space="preserve">
+    <value>製品終了 (EOL): {0}</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE" xml:space="preserve">
+    <value>製品終了 (EOL)</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE" xml:space="preserve">
+    <value>製品終了 (EOL)。サポート対象外となりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
+    <value>{0} 以降にリリースされた Hotfix の対象外です</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
+    <value>Express ライセンスの顧客向け製品終了 (EOL)</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>毎時 {0} 分過ぎ</value>
   </data>
@@ -6640,6 +6694,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>選択した SR に OS Fixup ISO が自動的にコピーされます。</value>
   </data>
+  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
+    <value>選択した SR に Fixup ISO をコピーできません</value>
+  </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>アプライアンスの証明書が見つかりません。ファイルがありません。</value>
   </data>
@@ -6656,13 +6713,13 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>マニフェストの検証(&amp;V)</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_CONTENT_DESCRIPTION" xml:space="preserve">
-    <value>アプライアンス ファイルのマニフェストを検証します。このオプションは、マニフェスト ファイルが追加されたアプライアンスでのみ使用可能です。</value>
+    <value>このアプライアンスには、マニフェスト ファイルが追加されています。アプライアンス ファイルのマニフェストを検証するかを選択できます。</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER" xml:space="preserve">
     <value>デジタル署名の検証(&amp;V)</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION" xml:space="preserve">
-    <value>アプライアンスのデジタル署名が有効であることを検証します。このオプションは、デジタル署名が追加されたアプライアンスでのみ使用可能です。</value>
+    <value>このアプライアンスには、デジタル署名が追加されています。アプライアンスのデジタル署名が有効であることを検証するかを選択できます。</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA" xml:space="preserve">
     <value>OVA ファイルが破損しているか、無効なデータを含んでいます。</value>
@@ -6728,7 +6785,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>vApp としてインポートできるのは OVF/OVA パッケージのみです。</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
-    <value>すべてのインポート オプション (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;ova.xml|OVF/OVA パッケージ ファイル (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|仮想ハード ディスク イメージ (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA ファイル (*.xva)|*.xva|XVA Version 1|ova.xml</value>
+    <value>すべてのインポート オプション (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA パッケージ ファイル (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|仮想ハード ディスク イメージ (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA ファイル (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA パッケージ (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
@@ -9494,15 +9551,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="OVERVIEW_UNITS" xml:space="preserve">
     <value>(平均/最大KB秒)</value>
   </data>
-  <data name="OVF_CREATED" xml:space="preserve">
-    <value>[XenCenter] ディスク イメージのインポート機能により作成</value>
-  </data>
-  <data name="OVF_DISK_CAPTION" xml:space="preserve">
-    <value>仮想ディスク</value>
-  </data>
-  <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
-    <value>仮想ネットワーク</value>
-  </data>
   <data name="PARENT_FOLDER" xml:space="preserve">
     <value>親フォルダ</value>
   </data>
@@ -10595,7 +10643,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>サーバーの削除(&amp;R)...</value>
   </data>
   <data name="REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT" xml:space="preserve">
-    <value>プールからのサーバーの削除(&amp;P)</value>
+    <value>プールから削除(&amp;P)</value>
+  </data>
+  <data name="REMOVE_SERVER_MENU_ITEM" xml:space="preserve">
+    <value>サーバーの削除(&amp;M)</value>
   </data>
   <data name="REMOVE_SNAPSHOT" xml:space="preserve">
     <value>スナップショットの削除</value>
@@ -12898,7 +12949,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}。{1}: {2}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
-    <value>スナップショット スケジュール(&amp;O)...</value>
+    <value>VM スナップショット スケジュール(&amp;O)...</value>
   </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>スナップショット スケジュール ジョブのアラートをメールで送信する(&amp;E)</value>
@@ -14038,6 +14089,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
+  </data>
+  <data name="XENSERVER_LEGACY" xml:space="preserve">
+    <value>[Legacy XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] テンプレート</value>
