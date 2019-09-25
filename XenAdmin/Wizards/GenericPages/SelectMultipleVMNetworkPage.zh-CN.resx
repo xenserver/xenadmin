@@ -139,7 +139,7 @@
     <value>0</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>将所导入 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
+    <value>将要导入的 VM 中的虚拟网络接口映射到目标池或独立服务器中的网络。</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
@@ -166,7 +166,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>所导入 &amp;VM 中的虚拟网络接口:</value>
+    <value>所导入的 &amp;VM 中的虚拟网络接口:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

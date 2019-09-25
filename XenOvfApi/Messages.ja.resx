@@ -168,6 +168,9 @@
   <data name="INVALID_DATA_IN_OVF" xml:space="preserve">
     <value>OVF 記述子のデシリアライズに失敗しました。</value>
   </data>
+  <data name="NETWORK_NAME" xml:space="preserve">
+    <value>ネットワーク {0}</value>
+  </data>
   <data name="OVF_CANNOT_FIND_SECTION" xml:space="preserve">
     <value>種類 {0}、ID {1} のセクションが見つかりません。</value>
   </data>
@@ -186,6 +189,9 @@
   <data name="OVF_COULD_NOT_OPEN_STREAM" xml:space="preserve">
     <value>{0} を開けません。</value>
   </data>
+  <data name="OVF_CREATED" xml:space="preserve">
+    <value>[XenCenter] ディスク イメージのインポート機能により作成</value>
+  </data>
   <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
     <value>展開構成セクションが見つかりません。</value>
   </data>
@@ -195,6 +201,9 @@
   <data name="OVF_DEVICE_OUT_OF_RANGE" xml:space="preserve">
     <value>デバイス番号 {0} が 0 未満または15 を超えています。</value>
   </data>
+  <data name="OVF_DISK_CAPTION" xml:space="preserve">
+    <value>仮想ディスク</value>
+  </data>
   <data name="OVF_DISK_SECTION_MISSING" xml:space="preserve">
     <value>ディスク セクションが見つかりません。</value>
   </data>
@@ -203,6 +212,9 @@
   </data>
   <data name="OVF_INSTALL_SECTION_MISSING" xml:space="preserve">
     <value>インストール セクションが見つかりません。</value>
+  </data>
+  <data name="OVF_NET_DESCRIPTION" xml:space="preserve">
+    <value>仮想ネットワーク</value>
   </data>
   <data name="OVF_POST_INSTALL_MISSING" xml:space="preserve">
     <value>インストール後セクションが見つかりません。</value>
@@ -291,11 +303,14 @@
   <data name="SECURITY_FAILURE" xml:space="preserve">
     <value>セキュリティ機能</value>
   </data>
-  <data name="SECURITY_FILE_MISSING" xml:space="preserve">
-    <value>マニフェストに記述されているファイルが見つかりません。不明なファイルの一覧についてはログを参照してください。</value>
+  <data name="SECURITY_FILE_MISSING_FROM_MANIFEST" xml:space="preserve">
+    <value>このアプライアンスには、マニフェストに記述されていないファイルが含まれています。 詳しくはログを参照してください。</value>
+  </data>
+  <data name="SECURITY_FILE_MISSING_FROM_PACKAGE" xml:space="preserve">
+    <value>このアプライアンスには、マニフェストに記述されている 1 つまたは複数のファイルが含まれていません。詳しくはログを参照してください。</value>
   </data>
   <data name="SECURITY_NOT_SUPPORTED" xml:space="preserve">
-    <value>セキュリティの方法 {0} はサポートされていません。</value>
+    <value>{0} は有効なハッシュ アルゴリズムではありません。</value>
   </data>
   <data name="SECURITY_SECTION_INVALID" xml:space="preserve">
     <value>セキュリティ セクションが無効です。</value>
@@ -356,5 +371,8 @@
   </data>
   <data name="VERSION_PROMPT" xml:space="preserve">
     <value>Version:</value>
+  </data>
+  <data name="VIRTUAL_MACHINE" xml:space="preserve">
+    <value>仮想マシン</value>
   </data>
 </root>
