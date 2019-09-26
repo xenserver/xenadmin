@@ -56,12 +56,12 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void build()
         {
             // SSL Certificates
-            CertificateFoundCheckBox.Checked    = Properties.Settings.Default.WarnUnrecognizedCertificate || 
-                                                    Registry.AlwaysShowSSLCertificates == SSLCertificateTypes.All;
-            CertificateChangedCheckBox.Checked  = Properties.Settings.Default.WarnChangedCertificate || 
-                                                    Registry.AlwaysShowSSLCertificates != SSLCertificateTypes.None;
-            CertificateFoundCheckBox.Enabled    = Registry.AlwaysShowSSLCertificates != SSLCertificateTypes.All;
-            CertificateChangedCheckBox.Enabled  = Registry.AlwaysShowSSLCertificates == SSLCertificateTypes.None;
+            CertificateFoundCheckBox.Checked = Properties.Settings.Default.WarnUnrecognizedCertificate ||
+                                               Registry.SSLCertificateTypes == SSLCertificateTypes.All;
+            CertificateChangedCheckBox.Checked = Properties.Settings.Default.WarnChangedCertificate ||
+                                                 Registry.SSLCertificateTypes != SSLCertificateTypes.None;
+            CertificateFoundCheckBox.Enabled = Registry.SSLCertificateTypes != SSLCertificateTypes.All;
+            CertificateChangedCheckBox.Enabled = Registry.SSLCertificateTypes == SSLCertificateTypes.None;
         }
 
         public static void Log()

@@ -142,15 +142,15 @@ namespace XenAdmin.Plugins
         public TabPageFeature(ResourceManager resourceManager, XmlNode node, PluginDescriptor plugin)
             : base(resourceManager, node, plugin)
         {
-            XenCenterOnly = Helpers.GetBoolXmlAttribute(node, ATT_XC_ONLY, false);
-            ContextEnabled = Helpers.GetBoolXmlAttribute(node, ATT_CONTEXT_MENU, false);
+            XenCenterOnly = Helpers.GetBoolXmlAttribute(node, ATT_XC_ONLY);
+            ContextEnabled = Helpers.GetBoolXmlAttribute(node, ATT_CONTEXT_MENU);
 
             // plugins v2
             HelpLink = Helpers.GetStringXmlAttribute(node, ATT_HELP_LINK, "");
-            RelativeUrl = Helpers.GetBoolXmlAttribute(node, ATT_RELATIVE, false);
-            Credentials = Helpers.GetBoolXmlAttribute(node, ATT_CREDENTIALS, false);
+            RelativeUrl = Helpers.GetBoolXmlAttribute(node, ATT_RELATIVE);
+            Credentials = Helpers.GetBoolXmlAttribute(node, ATT_CREDENTIALS);
 
-            Console = Helpers.GetBoolXmlAttribute(node, ATT_CONSOLE, false);
+            Console = Helpers.GetBoolXmlAttribute(node, ATT_CONSOLE);
             string urlString = Helpers.GetStringXmlAttribute(node, ATT_URL);
             Url = urlString == null ? "" : string.Format("{0}{1}", RelativeUrl ? string.Format("{0}/", Application.StartupPath) : "", urlString);
         }
