@@ -862,12 +862,10 @@ namespace XenAdmin.Core
         /// <returns>The parsed double.</returns>
         public static double ParseStringToDouble(string toParse, double defaultValue)
         {
-            double doubleValue;
-            if (!double.TryParse(toParse, NumberStyles.Any, _nfi, out doubleValue))
-            {
-                doubleValue = defaultValue;
-            }
-            return doubleValue;
+            if (double.TryParse(toParse, NumberStyles.Any, _nfi, out var doubleValue))
+                return doubleValue;
+
+            return defaultValue;
         }
 
         /// <summary>
@@ -1461,161 +1459,96 @@ namespace XenAdmin.Core
             return "";
         }
 
-        public static string GetStringXmlAttribute(XmlNode Node, string AttributeName)
+        /// <summary>
+        /// Retrieves a float value from an XML attribute.
+        /// Returns defaultValue if the attribute doesn't exist.
+        /// </summary>
+        public static string GetStringXmlAttribute(XmlNode node, string attributeName, string defaultValue = null)
         {
-            if (Node.Attributes[AttributeName] == null)
-                return null;
-            return Node.Attributes[AttributeName].Value;
-        }
+            if (node == null || node.Attributes == null || node.Attributes[attributeName] == null)
+                return defaultValue;
 
-        public static string GetStringXmlAttribute(XmlNode Node, string AttributeName, string Default)
-        {
-            if (Node.Attributes[AttributeName] == null)
-                return Default;
-            return Node.Attributes[AttributeName].Value;
+            return node.Attributes[attributeName].Value;
         }
 
         /// <summary>
-        /// Retrieves a true of false value from an XML attribute. Returns null-bool if the attribute doesnt exist or the
-        /// value is malformed.
+        /// Retrieves a true of false value from an XML attribute.
+        /// Returns defaultValue if the attribute doesn't exist or the value is malformed.
         /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="AttributeName"></param>
-        /// <returns></returns>
-        public static bool? GetBoolXmlAttribute(XmlNode Node, string AttributeName)
+        public static bool GetBoolXmlAttribute(XmlNode node, string attributeName, bool defaultValue = false)
         {
-            bool b;
-            if (Node.Attributes[AttributeName] == null)
-                return null;
+            if (node == null || node.Attributes == null || node.Attributes[attributeName] == null)
+                return defaultValue;
 
-            if (bool.TryParse(Node.Attributes[AttributeName].Value, out b))
+            if (bool.TryParse(node.Attributes[attributeName].Value, out bool b))
                 return b;
 
-            return null;
+            return defaultValue;
         }
 
         /// <summary>
-        /// Retrieves a true of false value from an XML attribute. Returns Default if the attribute doesnt exist or the
-        /// value is malformed.
+        /// Retrieves a float value from an XML attribute.
+        /// Returns defaultValue if the attribute doesn't exist or the value is malformed.
         /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="AttributeName"></param>
-        /// <returns></returns>
-        public static bool GetBoolXmlAttribute(XmlNode Node, string AttributeName, bool Default)
+        public static float GetFloatXmlAttribute(XmlNode node, string attributeName, float defaultValue)
         {
-            bool? b = GetBoolXmlAttribute(Node, AttributeName);
-            if (!b.HasValue)
-                return Default;
+            if (node == null || node.Attributes == null || node.Attributes[attributeName] == null)
+                return defaultValue;
 
-            return b.Value;
-        }
-
-        /// <summary>
-        /// Retrieves a float value from an XML attribute. Defaults to null-float if the attribute doesnt exist or the
-        /// value is malformed.
-        /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="AttributeName"></param>
-        /// <returns></returns>
-        public static float? GetFloatXmlAttribute(XmlNode Node, string AttributeName)
-        {
-            float f;
-            if (Node.Attributes[AttributeName] == null)
-                return null;
-
-            if (float.TryParse(Node.Attributes[AttributeName].Value, out f))
+            if (float.TryParse(node.Attributes[attributeName].Value, out float f))
                 return f;
 
-            return null;
+            return defaultValue;
         }
 
         /// <summary>
-        /// Retrieves a float value from an XML attribute. Returns Default if the attribute doesnt exist or the
-        /// value is malformed.
+        /// Retrieves an int value from an XML attribute.
+        /// Returns defaultValue if the attribute doesn't exist or the value is malformed.
         /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="AttributeName"></param>
-        /// <returns></returns>
-        public static float GetFloatXmlAttribute(XmlNode Node, string AttributeName, float Default)
+        public static int GetIntXmlAttribute(XmlNode node, string attributeName, int defaultValue)
         {
-            float? f = GetFloatXmlAttribute(Node, AttributeName);
-            if (!f.HasValue)
-                return Default;
+            if (node == null || node.Attributes == null || node.Attributes[attributeName] == null)
+                return defaultValue;
 
-            return f.Value;
-        }
-
-        /// <summary>
-        /// Retrieves an int value from an XML attribute. Defaults to null-int if the attribute doesnt exist or the
-        /// value is malformed.
-        /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="AttributeName"></param>
-        /// <returns></returns>
-        public static int? GetIntXmlAttribute(XmlNode Node, string AttributeName)
-        {
-            int i;
-            if (Node.Attributes[AttributeName] == null)
-                return null;
-
-            if (int.TryParse(Node.Attributes[AttributeName].Value, out i))
+            if (int.TryParse(node.Attributes[attributeName].Value, out int i))
                 return i;
 
-            return null;
+            return defaultValue;
         }
 
         /// <summary>
-        /// Retrieves an int value from an XML attribute. Returns Default if the attribute doesnt exist or the
-        /// value is malformed.
+        /// Retrieves the string content of an XmlNode attribute.
         /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="AttributeName"></param>
-        /// <returns></returns>
-        public static int GetIntXmlAttribute(XmlNode Node, string AttributeName, int Default)
+        /// <exception cref="I18NException">Thrown if the attribute is missing</exception>
+        public static string GetXmlAttribute(XmlNode node, string attributeName)
         {
-            int? i = GetIntXmlAttribute(Node, AttributeName);
-            if (!i.HasValue)
-                return Default;
+            if (node == null)
+                throw new I18NException(I18NExceptionType.XmlAttributeMissing, attributeName);
 
-            return i.Value;
+            if (node.Attributes == null || node.Attributes[attributeName] == null)
+                throw new I18NException(I18NExceptionType.XmlAttributeMissing, attributeName, node.Name);
+
+            return node.Attributes[attributeName].Value;
         }
 
         /// <summary>
-        /// Retrieves the string content of an XmlNode attribute or throws an I18NException if it missing.
+        /// Retrieves the enum content of an XmlNode attribute or defaultValue if it is missing. 
         /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="Attribute"></param>
-        /// <returns></returns>
-        public static string GetXmlAttribute(XmlNode Node, string Attribute)
+        public static T GetEnumXmlAttribute<T>(XmlNode node, string attributeName, T defaultValue)
         {
-            if (Node.Attributes[Attribute] == null)
-                throw new I18NException(I18NExceptionType.XmlAttributeMissing, Attribute, Node.Name);
-            return Node.Attributes[Attribute].Value;
-        }
+            if (node == null || node.Attributes == null || node.Attributes[attributeName] == null)
+                return defaultValue;
 
-        /// <summary>
-        /// Retrieves the enum content of an XmlNode attribute or Default if it is missing. 
-        /// 
-        /// WARNING: Runtime check that typeof(T).IsEnum (Sorry! C# doesnt support Enum generics very well).
-        /// </summary>
-        /// <param name="Node"></param>
-        /// <param name="Attribute"></param>
-        /// <returns></returns>
-        public static T GetEnumXmlAttribute<T>(XmlNode Node, string Attribute, T Default)
-        {
-            if (Node.Attributes[Attribute] == null)
-                return Default;
-
-            System.Diagnostics.Trace.Assert(typeof(T).IsEnum, "Supplied type to GetEnumXmlAttribute is not an enum");
+            if (!typeof(T).IsEnum)
+                return defaultValue;
 
             try
             {
-                T result = (T)Enum.Parse(typeof(T), Node.Attributes[Attribute].Value);
-                return result;
+                return (T)Enum.Parse(typeof(T), node.Attributes[attributeName].Value);
             }
             catch
             {
-                return Default;
+                return defaultValue;
             }
         }
 
