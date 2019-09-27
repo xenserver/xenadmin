@@ -36,7 +36,6 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
@@ -1656,6 +1655,7 @@ namespace XenAdmin
             localStorageToolStripMenuItem.Checked = Properties.Settings.Default.LocalSRsVisible;
             ShowHiddenObjectsToolStripMenuItem.Checked = Properties.Settings.Default.ShowHiddenVMs;
             connectDisconnectToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
+            conversionToolStripMenuItem.Available = conn != null && conn.Cache.VMs.Any(v => v.IsConversionVM());
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2292,16 +2292,17 @@ namespace XenAdmin
         /// Show the given wizard, and impose a one-wizard-per-connection limit.
         /// </summary>
         /// <param name="connection">The connection.  May be null, in which case the wizard
-        /// is not addded to any dictionary.  This should happen iff this is the New Pool Wizard.</param>
+        /// is not added to any dictionary.  This should happen iff this is the New Pool Wizard.</param>
         /// <param name="wizard">The new wizard to show. May not be null.</param>
-        public void ShowPerConnectionWizard(IXenConnection connection, Form wizard)
+        /// <param name="parentForm">The form owning the wizard to be launched.</param>
+        public void ShowPerConnectionWizard(IXenConnection connection, Form wizard, Form parentForm = null)
         {
             if (connection != null)
             {
 
                 if (activePoolWizards.ContainsKey(connection))
                 {
-                    var w = activePoolWizards[connection].Where(x => x.GetType() == wizard.GetType()).FirstOrDefault();
+                    var w = activePoolWizards[connection].FirstOrDefault(x => x.GetType() == wizard.GetType());
                     if (w != null && !w.IsDisposed)
                     {
                         if (w.WindowState == FormWindowState.Minimized)
@@ -2326,7 +2327,7 @@ namespace XenAdmin
 
             if (!wizard.Disposing && !wizard.IsDisposed && !Program.Exiting)
             {
-                wizard.Show(this);
+                wizard.Show(parentForm ?? this);
             }
         }
 
@@ -3006,7 +3007,6 @@ namespace XenAdmin
 
             History.PopulateForwardDropDown(button);
         }
-
 
         private void LicenseManagerMenuItem_Click(object sender, EventArgs e)
         {

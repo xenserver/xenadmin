@@ -278,6 +278,7 @@ namespace XenAdmin
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.menuItemRemoveFromPool = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -919,6 +920,7 @@ namespace XenAdmin
             this.exportResourceReportPoolToolStripMenuItem,
             this.wlbReportsToolStripMenuItem,
             this.wlbDisconnectToolStripMenuItem,
+            this.conversionToolStripMenuItem,
             this.toolStripSeparator9,
             this.changePoolPasswordToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -1889,6 +1891,12 @@ namespace XenAdmin
             this.menuItemRemoveFromPool.Name = "menuItemRemoveFromPool";
             resources.ApplyResources(this.menuItemRemoveFromPool, "menuItemRemoveFromPool");
             // 
+            // conversionToolStripMenuItem
+            // 
+            this.conversionToolStripMenuItem.Command = new XenAdmin.Commands.LaunchConversionManagerCommand();
+            this.conversionToolStripMenuItem.Name = "conversionToolStripMenuItem";
+            resources.ApplyResources(this.conversionToolStripMenuItem, "conversionToolStripMenuItem");
+            //
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2159,6 +2167,7 @@ namespace XenAdmin
         private System.Windows.Forms.Label LicenseStatusTitleLabel;
         private Controls.GradientPanel.VerticalGradientPanel TitleBackPanel;
         private XenAdmin.Commands.CommandToolStripMenuItem menuItemRemoveFromPool;
+        private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
     }
 
 }

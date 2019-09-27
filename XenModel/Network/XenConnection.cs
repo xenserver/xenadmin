@@ -336,6 +336,8 @@ namespace XenAdmin.Network
         /// Fired on the UI thread, once per batch of events in CacheUpdater.
         /// </summary>
         public event EventHandler<EventArgs> XenObjectsUpdated;
+
+        public NetworkCredential NetworkCredential { get; set; }
         public event EventHandler<EventArgs> TimeSkewUpdated;
 
         public bool IsConnected
@@ -426,6 +428,7 @@ namespace XenAdmin.Network
                 try
                 {
                     session.login_with_password(uname, pwd, !string.IsNullOrEmpty(Version) ? Version : Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
+                    NetworkCredential = new NetworkCredential(uname, pwd);
                     return session;
                 }
                 catch (Failure f)

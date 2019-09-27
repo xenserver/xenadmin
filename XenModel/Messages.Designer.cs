@@ -5004,29 +5004,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export &amp;all.
-        /// </summary>
-        public static string ALERT_EXPORT_ALL_BUTTON {
-            get {
-                return ResourceManager.GetString("ALERT_EXPORT_ALL_BUTTON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You have applied filters to the list of alerts. Do you want to export all alerts from every connected server, or only the alerts you have chosen to view?.
         /// </summary>
         public static string ALERT_EXPORT_ALL_OR_FILTERED {
             get {
                 return ResourceManager.GetString("ALERT_EXPORT_ALL_OR_FILTERED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Only export &amp;visible.
-        /// </summary>
-        public static string ALERT_EXPORT_FILTERED_BUTTON {
-            get {
-                return ResourceManager.GetString("ALERT_EXPORT_FILTERED_BUTTON", resourceCulture);
             }
         }
         
@@ -8976,6 +8958,748 @@ namespace XenAdmin {
         public static string CONTROL_DOMAIN_MEMORY_DIALOG_TITLE {
             get {
                 return ResourceManager.GetString("CONTROL_DOMAIN_MEMORY_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to cancel this conversion?.
+        /// </summary>
+        public static string CONVERSION_CANCEL_CONFIRM {
+            get {
+                return ResourceManager.GetString("CONVERSION_CANCEL_CONFIRM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot cancel the conversion. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_CANCEL_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_CANCEL_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find a Conversion Manager virtual appliance..
+        /// </summary>
+        public static string CONVERSION_CANNOT_FIND_VPX {
+            get {
+                return ResourceManager.GetString("CONVERSION_CANNOT_FIND_VPX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot obtain an IP address for the Conversion Manager virtual appliance..
+        /// </summary>
+        public static string CONVERSION_CANNOT_OBTAIN_VPX_IP {
+            get {
+                return ResourceManager.GetString("CONVERSION_CANNOT_OBTAIN_VPX_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This action will clear all the completed conversions from the Conversion Manager virtual appliance history.
+        ///
+        ///This action cannot be undone. Are you sure you want to continue?.
+        /// </summary>
+        public static string CONVERSION_CLEAR_HISTORY_CONFIRM {
+            get {
+                return ResourceManager.GetString("CONVERSION_CLEAR_HISTORY_CONFIRM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot clear the conversion history. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_CLEAR_HISTORY_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_CLEAR_HISTORY_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting to the VMware server....
+        /// </summary>
+        public static string CONVERSION_CONNECTING_VMWARE {
+            get {
+                return ResourceManager.GetString("CONVERSION_CONNECTING_VMWARE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot connect to the VMware server. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_CONNECTING_VMWARE_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_CONNECTING_VMWARE_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected successfully to the VMware server.
+        /// </summary>
+        public static string CONVERSION_CONNECTING_VMWARE_SUCCESS {
+            get {
+                return ResourceManager.GetString("CONVERSION_CONNECTING_VMWARE_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lost connection to the Conversion Manager virtual appliance. Will reconnect in {0} sec..
+        /// </summary>
+        public static string CONVERSION_CONNECTING_VPX_INTERRUPTION {
+            get {
+                return ResourceManager.GetString("CONVERSION_CONNECTING_VPX_INTERRUPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected to the Conversion Manager virtual appliance..
+        /// </summary>
+        public static string CONVERSION_CONNECTING_VPX_SUCCESS {
+            get {
+                return ResourceManager.GetString("CONVERSION_CONNECTING_VPX_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot start a new conversion. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_CREATE_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_CREATE_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMware Server.
+        /// </summary>
+        public static string CONVERSION_CREDENTIALS_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("CONVERSION_CREDENTIALS_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect to VMware server.
+        /// </summary>
+        public static string CONVERSION_CREDENTIALS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_CREDENTIALS_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conversion ID.
+        /// </summary>
+        public static string CONVERSION_DETAIL_CONVERSION_ID {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_CONVERSION_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string CONVERSION_DETAIL_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk write.
+        /// </summary>
+        public static string CONVERSION_DETAIL_DISK_WRITE {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_DISK_WRITE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string CONVERSION_DETAIL_DURATION {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish time.
+        /// </summary>
+        public static string CONVERSION_DETAIL_FINISH_TIME {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_FINISH_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot refresh the conversion. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_DETAIL_GET_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_GET_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network read.
+        /// </summary>
+        public static string CONVERSION_DETAIL_NETWORK_READ {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_NETWORK_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (compressed).
+        /// </summary>
+        public static string CONVERSION_DETAIL_NETWORK_READ_COMPRESSED {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_NETWORK_READ_COMPRESSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time.
+        /// </summary>
+        public static string CONVERSION_DETAIL_START_TIME {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_START_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string CONVERSION_DETAIL_STATUS {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target SR.
+        /// </summary>
+        public static string CONVERSION_DETAIL_TARGET_SR {
+            get {
+                return ResourceManager.GetString("CONVERSION_DETAIL_TARGET_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export conversions to {0}.
+        /// </summary>
+        public static string CONVERSION_EXPORT {
+            get {
+                return ResourceManager.GetString("CONVERSION_EXPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have applied filters to the list of conversions. Do you want to export all conversions, or only the conversions you have chosen to view?.
+        /// </summary>
+        public static string CONVERSION_EXPORT_ALL_OR_FILTERED {
+            get {
+                return ResourceManager.GetString("CONVERSION_EXPORT_ALL_OR_FILTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exported conversions to {0}.
+        /// </summary>
+        public static string CONVERSION_EXPORTED {
+            get {
+                return ResourceManager.GetString("CONVERSION_EXPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting conversions to {0}....
+        /// </summary>
+        public static string CONVERSION_EXPORTING {
+            get {
+                return ResourceManager.GetString("CONVERSION_EXPORTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing the Conversion Manager virtual appliance....
+        /// </summary>
+        public static string CONVERSION_INITIALIZING_VPX {
+            get {
+                return ResourceManager.GetString("CONVERSION_INITIALIZING_VPX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot initialize the Conversion Manager virtual appliance. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_INITIALIZING_VPX_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_INITIALIZING_VPX_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save conversion log to {0}.
+        /// </summary>
+        public static string CONVERSION_LOG_SAVE {
+            get {
+                return ResourceManager.GetString("CONVERSION_LOG_SAVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Conversion Log.
+        /// </summary>
+        public static string CONVERSION_LOG_SAVE_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_LOG_SAVE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saved conversion log to {0}.
+        /// </summary>
+        public static string CONVERSION_LOG_SAVED {
+            get {
+                return ResourceManager.GetString("CONVERSION_LOG_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving conversion log to {0}.
+        /// </summary>
+        public static string CONVERSION_LOG_SAVING {
+            get {
+                return ResourceManager.GetString("CONVERSION_LOG_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Conversions - {0}.
+        /// </summary>
+        public static string CONVERSION_MANAGER_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_MANAGER_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map the virtual ethernet adapters for the VMware VM(s) you are converting to networks in the destination pool or standalone server..
+        /// </summary>
+        public static string CONVERSION_NETWORK_PAGE_BLURB {
+            get {
+                return ResourceManager.GetString("CONVERSION_NETWORK_PAGE_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMware Network.
+        /// </summary>
+        public static string CONVERSION_NETWORK_PAGE_COLUMN_HEADER {
+            get {
+                return ResourceManager.GetString("CONVERSION_NETWORK_PAGE_COLUMN_HEADER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving source network data....
+        /// </summary>
+        public static string CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS {
+            get {
+                return ResourceManager.GetString("CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve source network data.
+        /// </summary>
+        public static string CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Networking.
+        /// </summary>
+        public static string CONVERSION_NETWORK_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("CONVERSION_NETWORK_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optionally, select [XenServer] networks to connect the VMs.
+        /// </summary>
+        public static string CONVERSION_NETWORK_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_NETWORK_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to run the Conversion Manager. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string CONVERSION_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("CONVERSION_RBAC_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot retry the conversion. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_RETRY_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_RETRY_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Conversion Manager Virtual Appliance - {0}.
+        /// </summary>
+        public static string CONVERSION_SELECT_VPX_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_SELECT_VPX_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string CONVERSION_STATUS_CANCELLED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string CONVERSION_STATUS_CREATED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        public static string CONVERSION_STATUS_FAILED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete.
+        /// </summary>
+        public static string CONVERSION_STATUS_INCOMPLETE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_INCOMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queued.
+        /// </summary>
+        public static string CONVERSION_STATUS_QUEUED {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_QUEUED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In progress.
+        /// </summary>
+        public static string CONVERSION_STATUS_RUNNING {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_RUNNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete.
+        /// </summary>
+        public static string CONVERSION_STATUS_SUCCESSFUL {
+            get {
+                return ResourceManager.GetString("CONVERSION_STATUS_SUCCESSFUL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free space {0}.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_FREE_SPACE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_FREE_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving available SRs....
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_QUERYING_SRS {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_QUERYING_SRS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no SR locations that can accommodate the disks for the converted VMs.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve available SRs.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required space {0}.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_REQUIRED_SPACE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_REQUIRED_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is not enough available space on this SR.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_SR_TOO_SMALL {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_SR_TOO_SMALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select target storage.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Used space {0}.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_USED_SPACE {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_USED_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preserve MAC addresses:.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_DATA_MAC {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_DATA_MAC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network:.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_DATA_NETWORK {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_DATA_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage:.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_DATA_SR {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_DATA_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM(s) to convert:.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_DATA_VMS {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_DATA_VMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMware server:.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_DATA_VMWARE_SERVER {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_DATA_VMWARE_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review the conversion settings.
+        /// </summary>
+        public static string CONVERSION_SUMMARY_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_SUMMARY_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (Template).
+        /// </summary>
+        public static string CONVERSION_TEMPLATE {
+            get {
+                return ResourceManager.GetString("CONVERSION_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Try again.
+        /// </summary>
+        public static string CONVERSION_TRY_AGAIN {
+            get {
+                return ResourceManager.GetString("CONVERSION_TRY_AGAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking compatibility with the Conversion Manager virtual appliance....
+        /// </summary>
+        public static string CONVERSION_VERSION_CHECK {
+            get {
+                return ResourceManager.GetString("CONVERSION_VERSION_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot retrieve the Conversion Manager virtual appliance version. Please see logs for details..
+        /// </summary>
+        public static string CONVERSION_VERSION_CHECK_FAILURE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VERSION_CHECK_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] is incompatible with this version of the Conversion Manager virtual appliance..
+        /// </summary>
+        public static string CONVERSION_VERSION_INCOMPATIBILITY {
+            get {
+                return ResourceManager.GetString("CONVERSION_VERSION_INCOMPATIBILITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
+        /// </summary>
+        public static string CONVERSION_VERSION_INCOMPATIBILITY_INFO {
+            get {
+                return ResourceManager.GetString("CONVERSION_VERSION_INCOMPATIBILITY_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Machines.
+        /// </summary>
+        public static string CONVERSION_VM_PAGE_TEXT {
+            get {
+                return ResourceManager.GetString("CONVERSION_VM_PAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the VMs to convert.
+        /// </summary>
+        public static string CONVERSION_VM_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VM_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obtaining an IP address for the Conversion Manager virtual appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_OBTAIN_IP {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_OBTAIN_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resuming the Conversion Manager virtual appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_RESUME {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_RESUME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting the Conversion Manager virtual appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_START {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_START", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot deduce the power state of the Conversion Manager virtual appliance..
+        /// </summary>
+        public static string CONVERSION_VPX_UNKNOWN_POWER_STATE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_UNKNOWN_POWER_STATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Un-pausing the Conversion Manager virtual appliance....
+        /// </summary>
+        public static string CONVERSION_VPX_UNPAUSE {
+            get {
+                return ResourceManager.GetString("CONVERSION_VPX_UNPAUSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Conversion.
+        /// </summary>
+        public static string CONVERSION_WIZARD_TEXT {
+            get {
+                return ResourceManager.GetString("CONVERSION_WIZARD_TEXT", resourceCulture);
             }
         }
         
@@ -14933,6 +15657,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export &amp;all.
+        /// </summary>
+        public static string EXPORT_ALL_BUTTON {
+            get {
+                return ResourceManager.GetString("EXPORT_ALL_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export OVF/OVA Package.
         /// </summary>
         public static string EXPORT_APPLIANCE {
@@ -15082,6 +15815,15 @@ namespace XenAdmin {
         public static string EXPORT_EULA_PAGE_TOOLTIP {
             get {
                 return ResourceManager.GetString("EXPORT_EULA_PAGE_TOOLTIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only export &amp;visible.
+        /// </summary>
+        public static string EXPORT_FILTERED_BUTTON {
+            get {
+                return ResourceManager.GetString("EXPORT_FILTERED_BUTTON", resourceCulture);
             }
         }
         
@@ -21675,6 +22417,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conv&amp;ersion Manager....
+        /// </summary>
+        public static string MAINWINDOW_CONVERSION_MANAGER_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_CONVERSION_MANAGER_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Convert to &amp;Template....
         /// </summary>
         public static string MAINWINDOW_CONVERT_VM_TO_TEMPLATE {
@@ -23447,6 +24198,15 @@ namespace XenAdmin {
         public static string MONDAY_SHORT {
             get {
                 return ResourceManager.GetString("MONDAY_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More info....
+        /// </summary>
+        public static string MORE_INFO {
+            get {
+                return ResourceManager.GetString("MORE_INFO", resourceCulture);
             }
         }
         
@@ -27935,15 +28695,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_MODEPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_MODEPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to More info....
-        /// </summary>
-        public static string PATCHINGWIZARD_MORE_INFO {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_MORE_INFO", resourceCulture);
             }
         }
         
@@ -33644,6 +34395,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incomplete.
+        /// </summary>
+        public static string STATUS_FILTER_INCOMPLETE {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_INCOMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queued.
+        /// </summary>
+        public static string STATUS_FILTER_QUEUED {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_QUEUED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server..
         /// </summary>
         public static string STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE {
@@ -34803,6 +35572,15 @@ namespace XenAdmin {
         public static string TVM_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("TVM_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Files.
+        /// </summary>
+        public static string TXT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("TXT_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -36321,6 +37099,15 @@ namespace XenAdmin {
         public static string UPSELL_BLURB_ALERTS {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_ALERTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade your server license to enable the Conversion Manager. This feature helps you migrate workloads from VMware to [XenServer] by moving batches of VMware virtual machines to your [XenServer] environment..
+        /// </summary>
+        public static string UPSELL_BLURB_CONVERSION {
+            get {
+                return ResourceManager.GetString("UPSELL_BLURB_CONVERSION", resourceCulture);
             }
         }
         

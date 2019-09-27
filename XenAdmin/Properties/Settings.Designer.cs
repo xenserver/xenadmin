@@ -799,7 +799,7 @@ namespace XenAdmin.Properties {
                 this["ShowUpdatesByServer"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -810,6 +810,31 @@ namespace XenAdmin.Properties {
             }
             set {
                 this["RememberLastSelectedTab"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public global::System.Windows.Forms.AutoCompleteStringCollection VMwareServerHistory {
+            get {
+                return ((global::System.Windows.Forms.AutoCompleteStringCollection)(this["VMwareServerHistory"]));
+            }
+            set {
+                this["VMwareServerHistory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool ConversionClientUseSsl {
+            get {
+                return ((bool)(this["ConversionClientUseSsl"]));
+            }
+            set {
+                this["ConversionClientUseSsl"] = value;
             }
         }
     }

@@ -2753,6 +2753,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap queued {
+            get {
+                object obj = ResourceManager.GetObject("queued", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap redhat_16x {
             get {
                 object obj = ResourceManager.GetObject("redhat_16x", resourceCulture);
@@ -3376,6 +3386,26 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap WLB {
             get {
                 object obj = ResourceManager.GetObject("WLB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap xcm {
+            get {
+                object obj = ResourceManager.GetObject("xcm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap xcm_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("xcm_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

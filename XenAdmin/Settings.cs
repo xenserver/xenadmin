@@ -517,6 +517,28 @@ namespace XenAdmin
             }
         }
 
+        public static AutoCompleteStringCollection GetVMwareServerHistory()
+        {
+            if (Properties.Settings.Default.VMwareServerHistory == null)
+                Properties.Settings.Default.VMwareServerHistory = new AutoCompleteStringCollection();
+
+            return Properties.Settings.Default.VMwareServerHistory;
+        }
+
+        public static void UpdateVMwareServerHistory(string server)
+        {
+            var history = GetVMwareServerHistory();
+            if (history.Contains(server))
+                return;
+
+            while (history.Count >= 20)
+                history.RemoveAt(0);
+
+            history.Add(server);
+            Properties.Settings.Default.VMwareServerHistory = history;
+            TrySaveSettings();
+        }
+
         /// <summary>
         /// 
         /// </summary>

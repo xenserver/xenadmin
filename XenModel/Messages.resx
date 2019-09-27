@@ -1847,14 +1847,8 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_DOM0_MEMORY_SUB_TEXT" xml:space="preserve">
     <value>When control domain memory usage exceeds {0} for {1} min(s)</value>
   </data>
-  <data name="ALERT_EXPORT_ALL_BUTTON" xml:space="preserve">
-    <value>Export &amp;all</value>
-  </data>
   <data name="ALERT_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of alerts. Do you want to export all alerts from every connected server, or only the alerts you have chosen to view?</value>
-  </data>
-  <data name="ALERT_EXPORT_FILTERED_BUTTON" xml:space="preserve">
-    <value>Only export &amp;visible</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>Help</value>
@@ -3247,6 +3241,256 @@ You can only connect to a single [Citrix XenServer] Express Edition server at a 
   </data>
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
+  </data>
+  <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
+    <value>This action will clear all the completed conversions from the Conversion Manager virtual appliance history.
+
+This action cannot be undone. Are you sure you want to continue?</value>
+  </data>
+  <data name="CONVERSION_CLEAR_HISTORY_FAILURE" xml:space="preserve">
+    <value>Cannot clear the conversion history. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_CANCEL_CONFIRM" xml:space="preserve">
+    <value>Are you sure you want to cancel this conversion?</value>
+  </data>
+  <data name="CONVERSION_CANCEL_FAILURE" xml:space="preserve">
+    <value>Cannot cancel the conversion. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_CANNOT_FIND_VPX" xml:space="preserve">
+    <value>Cannot find a Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_CANNOT_OBTAIN_VPX_IP" xml:space="preserve">
+    <value>Cannot obtain an IP address for the Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_CONNECTING_VMWARE" xml:space="preserve">
+    <value>Connecting to the VMware server...</value>
+  </data>
+  <data name="CONVERSION_CONNECTING_VMWARE_FAILURE" xml:space="preserve">
+    <value>Cannot connect to the VMware server. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_CONNECTING_VMWARE_SUCCESS" xml:space="preserve">
+    <value>Connected successfully to the VMware server</value>
+  </data>
+  <data name="CONVERSION_CONNECTING_VPX_INTERRUPTION" xml:space="preserve">
+    <value>Lost connection to the Conversion Manager virtual appliance. Will reconnect in {0} sec.</value>
+  </data>
+  <data name="CONVERSION_CONNECTING_VPX_SUCCESS" xml:space="preserve">
+    <value>Connected to the Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_CREATE_FAILURE" xml:space="preserve">
+    <value>Cannot start a new conversion. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_CREDENTIALS_PAGE_TEXT" xml:space="preserve">
+    <value>VMware Server</value>
+  </data>
+  <data name="CONVERSION_CREDENTIALS_PAGE_TITLE" xml:space="preserve">
+    <value>Connect to VMware server</value>
+  </data>
+  <data name="CONVERSION_DETAIL_CONVERSION_ID" xml:space="preserve">
+    <value>Conversion ID</value>
+  </data>
+  <data name="CONVERSION_DETAIL_DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CONVERSION_DETAIL_DISK_WRITE" xml:space="preserve">
+    <value>Disk write</value>
+  </data>
+  <data name="CONVERSION_DETAIL_DURATION" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="CONVERSION_DETAIL_FINISH_TIME" xml:space="preserve">
+    <value>Finish time</value>
+  </data>
+  <data name="CONVERSION_DETAIL_GET_FAILURE" xml:space="preserve">
+    <value>Cannot refresh the conversion. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_DETAIL_NETWORK_READ" xml:space="preserve">
+    <value>Network read</value>
+  </data>
+  <data name="CONVERSION_DETAIL_NETWORK_READ_COMPRESSED" xml:space="preserve">
+    <value>{0} (compressed)</value>
+  </data>
+  <data name="CONVERSION_DETAIL_START_TIME" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="CONVERSION_DETAIL_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CONVERSION_DETAIL_TARGET_SR" xml:space="preserve">
+    <value>Target SR</value>
+  </data>
+  <data name="CONVERSION_EXPORT" xml:space="preserve">
+    <value>Export conversions to {0}</value>
+  </data>
+  <data name="CONVERSION_EXPORTING" xml:space="preserve">
+    <value>Exporting conversions to {0}...</value>
+  </data>
+  <data name="CONVERSION_EXPORTED" xml:space="preserve">
+    <value>Exported conversions to {0}</value>
+  </data>
+  <data name="CONVERSION_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
+    <value>You have applied filters to the list of conversions. Do you want to export all conversions, or only the conversions you have chosen to view?</value>
+  </data>
+  <data name="CONVERSION_INITIALIZING_VPX" xml:space="preserve">
+    <value>Initializing the Conversion Manager virtual appliance...</value>
+  </data>
+  <data name="CONVERSION_INITIALIZING_VPX_FAILURE" xml:space="preserve">
+    <value>Cannot initialize the Conversion Manager virtual appliance. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_LOG_SAVE" xml:space="preserve">
+    <value>Save conversion log to {0}</value>
+  </data>
+  <data name="CONVERSION_LOG_SAVE_TITLE" xml:space="preserve">
+    <value>Save Conversion Log</value>
+  </data>
+  <data name="CONVERSION_LOG_SAVING" xml:space="preserve">
+    <value>Saving conversion log to {0}</value>
+  </data>
+  <data name="CONVERSION_LOG_SAVED" xml:space="preserve">
+    <value>Saved conversion log to {0}</value>
+  </data>
+  <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
+    <value>Manage Conversions - {0}</value>
+  </data>
+  <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
+    <value>Map the virtual ethernet adapters for the VMware VM(s) you are converting to networks in the destination pool or standalone server.</value>
+  </data>
+  <data name="CONVERSION_NETWORK_PAGE_COLUMN_HEADER" xml:space="preserve">
+    <value>VMware Network</value>
+  </data>
+  <data name="CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS" xml:space="preserve">
+    <value>Retrieving source network data...</value>
+  </data>
+  <data name="CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS_FAILURE" xml:space="preserve">
+    <value>Failed to retrieve source network data</value>
+  </data>
+  <data name="CONVERSION_NETWORK_PAGE_TEXT" xml:space="preserve">
+    <value>Networking</value>
+  </data>
+  <data name="CONVERSION_NETWORK_PAGE_TITLE" xml:space="preserve">
+    <value>Optionally, select [XenServer] networks to connect the VMs</value>
+  </data>
+  <data name="CONVERSION_RETRY_FAILURE" xml:space="preserve">
+    <value>Cannot retry the conversion. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_RBAC_RESTRICTION" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to run the Conversion Manager. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="CONVERSION_SELECT_VPX_TITLE" xml:space="preserve">
+    <value>Select Conversion Manager Virtual Appliance - {0}</value>
+  </data>
+  <data name="CONVERSION_STATUS_CREATED" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="CONVERSION_STATUS_QUEUED" xml:space="preserve">
+    <value>Queued</value>
+  </data>
+  <data name="CONVERSION_STATUS_RUNNING" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="CONVERSION_STATUS_SUCCESSFUL" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="CONVERSION_STATUS_FAILED" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="CONVERSION_STATUS_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_FREE_SPACE" xml:space="preserve">
+    <value>Free space {0}</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS" xml:space="preserve">
+    <value>Retrieving available SRs...</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE" xml:space="preserve">
+    <value>Failed to retrieve available SRs</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY" xml:space="preserve">
+    <value>There are no SR locations that can accommodate the disks for the converted VMs</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_REQUIRED_SPACE" xml:space="preserve">
+    <value>Required space {0}</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
+    <value>There is not enough available space on this SR</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_TEXT" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_TITLE" xml:space="preserve">
+    <value>Select target storage</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_USED_SPACE" xml:space="preserve">
+    <value>Used space {0}</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_DATA_MAC" xml:space="preserve">
+    <value>Preserve MAC addresses:</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_DATA_NETWORK" xml:space="preserve">
+    <value>Network:</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_DATA_SR" xml:space="preserve">
+    <value>Storage:</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_DATA_VMS" xml:space="preserve">
+    <value>VM(s) to convert:</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_DATA_VMWARE_SERVER" xml:space="preserve">
+    <value>VMware server:</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_PAGE_TEXT" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="CONVERSION_SUMMARY_PAGE_TITLE" xml:space="preserve">
+    <value>Review the conversion settings</value>
+  </data>
+  <data name="CONVERSION_TEMPLATE" xml:space="preserve">
+    <value>{0} (Template)</value>
+  </data>
+  <data name="CONVERSION_TRY_AGAIN" xml:space="preserve">
+    <value>&amp;Try again</value>
+  </data>
+  <data name="CONVERSION_VERSION_CHECK" xml:space="preserve">
+    <value>Checking compatibility with the Conversion Manager virtual appliance...</value>
+  </data>
+  <data name="CONVERSION_VERSION_CHECK_FAILURE" xml:space="preserve">
+    <value>Cannot retrieve the Conversion Manager virtual appliance version. Please see logs for details.</value>
+  </data>
+  <data name="CONVERSION_VERSION_INCOMPATIBILITY" xml:space="preserve">
+    <value>[XenCenter] is incompatible with this version of the Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
+    <value>The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version.</value>
+  </data>
+  <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
+    <value>Virtual Machines</value>
+  </data>
+  <data name="CONVERSION_VM_PAGE_TITLE" xml:space="preserve">
+    <value>Select the VMs to convert</value>
+  </data>
+  <data name="CONVERSION_VPX_OBTAIN_IP" xml:space="preserve">
+    <value>Obtaining an IP address for the Conversion Manager virtual appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_RESUME" xml:space="preserve">
+    <value>Resuming the Conversion Manager virtual appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_START" xml:space="preserve">
+    <value>Starting the Conversion Manager virtual appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
+    <value>Un-pausing the Conversion Manager virtual appliance...</value>
+  </data>
+  <data name="CONVERSION_VPX_UNKNOWN_POWER_STATE" xml:space="preserve">
+    <value>Cannot deduce the power state of the Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_WIZARD_TEXT" xml:space="preserve">
+    <value>New Conversion</value>
   </data>
   <data name="CONVERT" xml:space="preserve">
     <value>&amp;Convert</value>
@@ -5277,6 +5521,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="EXPORT_ALL" xml:space="preserve">
     <value>Export All</value>
   </data>
+  <data name="EXPORT_ALL_BUTTON" xml:space="preserve">
+    <value>Export &amp;all</value>
+  </data>
   <data name="EXPORT_APPLIANCE" xml:space="preserve">
     <value>Export OVF/OVA Package</value>
   </data>
@@ -5327,6 +5574,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   </data>
   <data name="EXPORT_EULA_PAGE_TOOLTIP" xml:space="preserve">
     <value>Maximum number of EULAs  ({0}) has been reached.</value>
+  </data>
+  <data name="EXPORT_FILTERED_BUTTON" xml:space="preserve">
+    <value>Only export &amp;visible</value>
   </data>
   <data name="EXPORT_OPTIONS_PAGE_TEXT" xml:space="preserve">
     <value>Advanced Options</value>
@@ -7545,6 +7795,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_CONTEXT_UPDATING" xml:space="preserve">
     <value>{0} (Updating...)</value>
   </data>
+  <data name="MAINWINDOW_CONVERSION_MANAGER_MENU_ITEM" xml:space="preserve">
+    <value>Conv&amp;ersion Manager...</value>
+  </data>
   <data name="MAINWINDOW_CONVERT_VM_TO_TEMPLATE" xml:space="preserve">
     <value>Convert to &amp;Template...</value>
   </data>
@@ -8165,6 +8418,9 @@ Do you want to continue?</value>
   </data>
   <data name="MOREONE_VM_SELECTED" xml:space="preserve">
     <value>{0} VMs selected</value>
+  </data>
+  <data name="MORE_INFO" xml:space="preserve">
+    <value>More info...</value>
   </data>
   <data name="MOVED" xml:space="preserve">
     <value>Moved</value>
@@ -9653,9 +9909,6 @@ This will cancel the update process and may leave your system in an unstable sta
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TITLE" xml:space="preserve">
     <value>Select the update mode</value>
-  </data>
-  <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
-    <value>More info...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>Resolve pool problems</value>
@@ -11665,8 +11918,14 @@ The upper limit: SR size / {2}</value>
   <data name="STATUS_FILTER_ERROR" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="STATUS_FILTER_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>In progress</value>
+  </data>
+  <data name="STATUS_FILTER_QUEUED" xml:space="preserve">
+    <value>Queued</value>
   </data>
   <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
     <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
@@ -12056,6 +12315,9 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="TVM_PAGE_TITLE" xml:space="preserve">
     <value>Configure networking options for the Transfer VM</value>
+  </data>
+  <data name="TXT_DESCRIPTION" xml:space="preserve">
+    <value>Text Files</value>
   </data>
   <data name="TYPE" xml:space="preserve">
     <value>Type</value>
@@ -12572,6 +12834,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your server license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
+  </data>
+  <data name="UPSELL_BLURB_CONVERSION" xml:space="preserve">
+    <value>Upgrade your server license to enable the Conversion Manager. This feature helps you migrate workloads from VMware to [XenServer] by moving batches of VMware virtual machines to your [XenServer] environment.</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
     <value>Upgrade your server license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
