@@ -126,29 +126,27 @@ namespace XenAdmin
                 // Missing or invalid token.
             }
 
-            PasswordsRequestDialog d = new PasswordsRequestDialog();
-            d.Application = exepath;
+            using (var d = new PasswordsRequestDialog { Application = exepath })
+                switch (d.ShowDialog())
+                {
+                    case DialogResult.OK:
+                        // Give passwords this time.
+                        CompleteRequest(destdir, null);
+                        break;
 
-            switch (d.ShowDialog())
-            {
-                case DialogResult.OK:
-                    // Give passwords this time.
-                    CompleteRequest(destdir, null);
-                    break;
+                    case DialogResult.Yes:
+                        // Give passwords always.
+                        CompleteRequest(destdir, GenerateToken(exepath, this_user.User.ToString()));
+                        break;
 
-                case DialogResult.Yes:
-                    // Give passwords always.
-                    CompleteRequest(destdir, GenerateToken(exepath, this_user.User.ToString()));
-                    break;
+                    case DialogResult.Cancel:
+                        WriteXML(destdir, null, "cancelled");
+                        break;
 
-                case DialogResult.Cancel:
-                    WriteXML(destdir, null, "cancelled");
-                    break;
-
-                default:
-                    log.Error("Unexpected result from PasswordsRequestDialog!");
-                    return;
-            }
+                    default:
+                        log.Error("Unexpected result from PasswordsRequestDialog!");
+                        return;
+                }
         }
 
         private static bool ParseToken(string destdir, out string token, out string token_exepath, out string user_sid)

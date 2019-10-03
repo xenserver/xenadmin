@@ -1731,7 +1731,12 @@ namespace XenAdmin
 
         private void DoLicenseAction(Host host, string filePath)
         {
-            ApplyLicenseAction action = new ApplyLicenseAction(host.Connection, host, filePath);
+            //null can happen if the application is started from, say,
+            //double clicking on a license file without any connections on the tree
+            if (host == null)
+                return;
+
+            var action = new ApplyLicenseAction(host, filePath);
             using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
                 actionProgress.Text = Messages.INSTALL_LICENSE_KEY;
