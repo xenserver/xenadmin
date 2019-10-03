@@ -643,12 +643,6 @@
     <Compile Include="Dialogs\ConnectingToServerDialog.designer.cs">
       <DependentUpon>ConnectingToServerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\MessageBoxTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\MessageBoxTest.Designer.cs">
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\EditVmHaPrioritiesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2033,10 +2027,6 @@
     <EmbeddedResource Include="Dialogs\ConnectingToServerDialog.resx">
       <DependentUpon>ConnectingToServerDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MessageBoxTest.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EditVmHaPrioritiesDialog.resx">
       <SubType>Designer</SubType>
@@ -5394,12 +5384,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\ManageUpdatesPage.zh-CN.resx">
       <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MessageBoxTest.ja.resx">
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MessageBoxTest.zh-CN.resx">
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\MoveVirtualDiskDialog.ja.resx">
       <DependentUpon>MoveVirtualDiskDialog.cs</DependentUpon>
