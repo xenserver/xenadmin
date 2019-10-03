@@ -64,7 +64,7 @@ namespace XenAdmin.Controls
             labelHostName.Text = Host.Name();
 
             // initialize cacheSize
-            SetupCacheSizeSpinner(OrigPvsCacheStorage == null ? DEFAULT_CACHE_SIZE_GB : (decimal)Util.ToGB(OrigPvsCacheStorage.size, 1, RoundingBehaviour.Nearest), 
+            SetupCacheSizeSpinner(OrigPvsCacheStorage == null ? DEFAULT_CACHE_SIZE_GB : (decimal)Util.ToGB(OrigPvsCacheStorage.size, RoundingBehaviour.Nearest, 1), 
                 MIN_CACHE_SIZE_GB, 
                 MAX_CACHE_SIZE_GB);
             origCacheSizeGb = numericUpDownCacheSize.Value;
@@ -202,7 +202,7 @@ namespace XenAdmin.Controls
             var selectedSr = CacheSr;
             if (selectedSr != null)
             {
-                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra() : selectedSr.FreeSpace(), 1, RoundingBehaviour.Down); 
+                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra() : selectedSr.FreeSpace(), RoundingBehaviour.Down, 1); 
                 maxSize = Math.Min(maxSize, MAX_CACHE_SIZE_GB);
 
                 if (maxSize != numericUpDownCacheSize.Maximum)

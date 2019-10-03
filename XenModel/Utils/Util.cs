@@ -267,36 +267,39 @@ namespace XenAdmin
             return t.ToString("0");
         }
 
-        public static double ToGB(double bytes, int dp, RoundingBehaviour rounding)
+        private static double DecimalAdjustment(double value, RoundingBehaviour rounding, int decimalPlaces)
         {
-            double value = (double)bytes / BINARY_GIGA;
-            int decimalsAdjustment = (int)Math.Pow(10, dp);
+            int decimalsAdjustment = (int)Math.Pow(10, decimalPlaces);
             switch (rounding)
             {
                 case RoundingBehaviour.None:
                     return value;
                 case RoundingBehaviour.Down:
-                    return (Math.Floor(value * decimalsAdjustment) / decimalsAdjustment);                     
+                    return Math.Floor(value * decimalsAdjustment) / decimalsAdjustment;
                 case RoundingBehaviour.Up:
-                   return (Math.Ceiling(value * decimalsAdjustment) / decimalsAdjustment);
-                default:  // case RoundingBehaviour.Nearest:
-                    return (Math.Round(value, 1, MidpointRounding.AwayFromZero));
-            }          
+                    return Math.Ceiling(value * decimalsAdjustment) / decimalsAdjustment;
+                case RoundingBehaviour.Nearest:
+                default:
+                    return (Math.Round(value, decimalPlaces, MidpointRounding.AwayFromZero));
+            }
         }
 
-        public static double ToMB(double bytes, RoundingBehaviour rounding)
+        public static double ToTB(double bytes, RoundingBehaviour rounding, int decimalPlaces)
         {
-            switch (rounding)
-            {
-                case RoundingBehaviour.None:
-                    return bytes / BINARY_MEGA;
-                case RoundingBehaviour.Down:
-                    return Math.Floor(bytes / BINARY_MEGA);
-                case RoundingBehaviour.Up:
-                    return Math.Ceiling(bytes / BINARY_MEGA);
-                default:  // case RoundingBehaviour.Nearest:
-                    return Math.Round(bytes / BINARY_MEGA, MidpointRounding.AwayFromZero);
-            }
+            double value = bytes / BINARY_TERA;
+            return DecimalAdjustment(value, rounding, decimalPlaces);
+        }
+
+        public static double ToGB(double bytes, RoundingBehaviour rounding, int decimalPlaces)
+        {
+            double value = bytes / BINARY_GIGA;
+            return DecimalAdjustment(value, rounding, decimalPlaces);
+        }
+
+        public static double ToMB(double bytes, RoundingBehaviour rounding, int decimalPlaces = 0)
+        {
+            double value = bytes / BINARY_MEGA;
+            return DecimalAdjustment(value, rounding, decimalPlaces);
         }
 
         public static double CorrectRoundingErrors(double amount)
@@ -304,7 +307,7 @@ namespace XenAdmin
             // Special case to cope with choosing an amount that's a multiple of 0.1G but not 0.5G --
             // sending it to the server as the nearest byte and getting it back later --
             // and finding it's fractionally changed, messing up our spinner permitted ranges.
-            double amountRounded = ToGB(amount, 1, RoundingBehaviour.Nearest) * BINARY_GIGA;
+            double amountRounded = ToGB(amount, RoundingBehaviour.Nearest, 1) * BINARY_GIGA;
             double roundingDiff = amountRounded - amount;
             if (roundingDiff > -1.0 && roundingDiff < 1.0)  // within 1 byte: although I think it will always be positive in the case we want to correct
                 return amountRounded;
