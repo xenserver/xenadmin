@@ -41,6 +41,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Dialogs;
@@ -243,7 +244,6 @@ namespace XenAdmin
             Search.InitSearch(Branding.Search);
             TreeSearch.InitSearch();
             
-            ArgType argType = ArgType.None;
             AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
@@ -325,41 +325,24 @@ namespace XenAdmin
             logSystemDetails();
             OptionsDialog.Log();
 
-            if (Args.Length > 0)
-                log.InfoFormat("Args[0]: {0}", Args[0]);
-
-            List<string> sanitizedArgs = new List<string>(Args);
             // Remove the '--wait' argument, which may have been passed to the splash screen
-            sanitizedArgs.Remove("--wait");
-            string[] args = null;
-            if (sanitizedArgs.Count > 1)
-            {
-                argType = ParseFileArgs(sanitizedArgs, out args);
+            var sanitizedArgs = Args.Where(ar => ar != "--wait").ToArray();
 
-                if (argType == ArgType.Passwords)
-                {
-                    log.DebugFormat("Handling password request using '{0}'", args[0]);
-                    try
-                    {
-                        PasswordsRequest.HandleRequest(args[0]);
-                    }
-                    catch (Exception exn)
-                    {
-                        log.Fatal(exn, exn);
-                    }
-                    Application.Exit();
-                    return;
-                }
-            }
-            else if (sanitizedArgs.Count == 1 && sanitizedArgs[0] == "messageboxtest")
+            var firstArgType = ParseFileArgs(sanitizedArgs, out string[] tailArgs);
+
+            if (firstArgType == ArgType.Passwords)
             {
-                new Dialogs.MessageBoxTest().ShowDialog();
+                try
+                {
+                    PasswordsRequest.HandleRequest(tailArgs[0]);
+                }
+                catch (Exception exn)
+                {
+                    log.Fatal(exn, exn);
+                }
+
                 Application.Exit();
                 return;
-            }
-            else if (sanitizedArgs.Count > 0)
-            {
-                log.Warn("Unrecognised command line options");
             }
 
             try
@@ -374,39 +357,59 @@ namespace XenAdmin
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
 
-            MainWindow mainWindow = new MainWindow(argType, args);
-
+            MainWindow mainWindow = new MainWindow(firstArgType, tailArgs);
             Application.Run(mainWindow);
 
             log.Info("Application main thread exited");
         }
 
-        private static ArgType ParseFileArgs(List<string> args, out string[] filePath)
+        private static ArgType ParseFileArgs(string[] args, out string[] tailArgs)
         {
-            filePath = new string[args.Count - 1];
-            for (int i = 0; i < filePath.Length; i++)
-                filePath[i] = args[i + 1];
+            tailArgs = new string[0];
+
+            if (args == null || args.Length < 2)
+            {
+                log.Warn("Too few args passed in via command line");
+                return ArgType.None;
+            }
+
+            var firstArgType = ArgType.None;
 
             switch (args[0])
             {
                 case "import":
-                    return ArgType.Import;
+                    firstArgType = ArgType.Import;
+                    break;
                 case "license":
-                    return ArgType.License;
+                    firstArgType = ArgType.License;
+                    break;
                 case "restore":
-                    return ArgType.Restore;
+                    firstArgType = ArgType.Restore;
+                    break;
                 case "update":
-                    return ArgType.Update;
+                    firstArgType = ArgType.Update;
+                    break;
                 case "search":
-                    return ArgType.XenSearch;
+                    firstArgType = ArgType.XenSearch;
+                    break;
                 case "passwords":
-                    return ArgType.Passwords;
+                    firstArgType = ArgType.Passwords;
+                    break;
                 case "connect":
-                    return ArgType.Connect;
+                    firstArgType = ArgType.Connect;
+                    break;
                 default:
-                    log.Warn("Unrecognised command line options");
-                    return ArgType.None;
+                    log.Warn("Wrong syntax or unknown command line options.");
+                    break;
             }
+
+            if (firstArgType != ArgType.None)
+            {
+                log.InfoFormat("Command line option passed in: {0}", firstArgType.ToString());
+                tailArgs = args.Skip(1).ToArray();
+            }
+
+            return firstArgType;
         }
 
         /// <summary>
@@ -430,64 +433,43 @@ namespace XenAdmin
             pipe = new NamedPipes.Pipe(pipe_path);
 
             log.InfoFormat(@"Successfully created pipe '{0}' - proceeding to launch XenCenter", pipe_path);
-            pipe.Read += new EventHandler<NamedPipes.PipeReadEventArgs>(delegate(object sender, NamedPipes.PipeReadEventArgs e)
+
+            pipe.Read += delegate(object sender, NamedPipes.PipeReadEventArgs e)
             {
                 MainWindow m = Program.MainWindow;
                 if (m == null || RunInAutomatedTestMode)
-                {
                     return;
-                }
-                Program.Invoke(m, delegate
+
+                Invoke(m, delegate
                 {
-                    log.InfoFormat(@"Received data from pipe '{0}': {1}", pipe_path, e.Message);
+                    var bits = e.Message.Split(' ').Where(ar => ar != "--wait").ToArray();
 
-                    ArgType argType = ArgType.None;
-                    string[] other_args;
-                    string file_arg = "";
-                    string[] bits = e.Message.Split(new char[] { ' ' }, 3);
-                    if (bits.Length == 2)
-                    {
-                        List<string> args = new List<string>();
-                        args.Add(bits[0]);
-                        args.Add(bits[1]);
-                        argType = ParseFileArgs(args, out other_args);
-                        file_arg = other_args[0];
+                    var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
 
-                        if (argType == ArgType.Passwords)
-                        {
-                            log.Error("Refusing to accept passwords request down pipe.  Use XenCenterMain.exe directly");
-                            return;
-                        }
-                        else if (argType == ArgType.Connect)
-                        {
-                            log.Error("Connect not supported down pipe. Use XenCenterMain.exe directly");
-                            return;
-                        }
-                        else if (argType == ArgType.None)
-                        {
-                            return;
-                        }
-                    }
-                    else if (e.Message.Length > 0)
+                    if (firstArgType == ArgType.Passwords)
                     {
-                        log.Error("Could not process data received from pipe.");
+                        log.Error("Refusing to accept passwords request down pipe.  Use XenCenterMain.exe directly");
                         return;
                     }
 
-                    m.WindowState = FormWindowState.Normal;
-
-                    // Note slight hack: the C++ splash screen passes its command line as a
-                    // literal string. This means we will get an e.Message e.g.
-                    //      open "C:\Documents and Settings\foo.xva"
-                    // INCLUDING double quotes. Thus we trim the quotes below.
-                    if (file_arg.Length > 1 && file_arg.StartsWith("\"") && file_arg.EndsWith("\""))
+                    if (firstArgType == ArgType.Connect)
                     {
-                        file_arg = file_arg.Substring(1, file_arg.Length - 2);
+                        log.Error("Connect not supported down pipe. Use XenCenterMain.exe directly");
+                        return;
                     }
 
-                    m.ProcessCommand(argType, new string[] { file_arg });
+                    if (firstArgType == ArgType.None)
+                        return;
+
+                    // The C++ splash screen passes its command line as a literal string.
+                    // This means we will get an e.Message like
+                    //      open "C:\Documents and Settings\foo.xva"
+                    // INCLUDING the double quotes, thus we need to trim them
+
+                    m.WindowState = FormWindowState.Normal;
+                    m.ProcessCommand(firstArgType, tailArgs[0].Trim('"'));
                 });
-            });
+            };
             pipe.BeginRead();
             // We created the pipe successfully - i.e. nobody was listening, so go ahead and start XenCenter
         }

@@ -270,7 +270,6 @@
     <Compile Include="DialogTests\DecompressApplianceDialogTests.cs" />
     <Compile Include="DialogTests\DownloadApplianceDialogTests.cs" />
     <Compile Include="DialogTests\IscsiDeviceConfigDialogTests.cs" />
-    <Compile Include="DialogTests\MessageBoxTestTests.cs" />
     <Compile Include="DialogTests\MoveVirtualDiskDialogTests.cs" />
     <Compile Include="DialogTests\ReconnectAsDialogTests.cs" />
     <Compile Include="DialogTests\RestoreVMsDialogTests.cs" />
