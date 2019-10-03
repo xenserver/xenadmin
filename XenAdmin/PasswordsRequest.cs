@@ -62,6 +62,8 @@ namespace XenAdmin
 
         internal static void HandleRequest(string destdir)
         {
+            log.DebugFormat("Handling password request");
+
             Process this_process = Process.GetCurrentProcess();
             Process parent = Processes.FindParent(this_process);
 

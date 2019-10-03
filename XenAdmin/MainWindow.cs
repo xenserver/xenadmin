@@ -667,7 +667,7 @@ namespace XenAdmin
         }
 
         private bool Launched = false;
-        internal void ProcessCommand(ArgType argType, string[] args)
+        internal void ProcessCommand(ArgType argType, params string[] args)
         {
             switch (argType)
             {
@@ -693,11 +693,15 @@ namespace XenAdmin
                     break;
                 case ArgType.Connect:
                     log.DebugFormat("Connecting to server '{0}'", args[0]);
-                    IXenConnection connection = new XenConnection();
-                    connection.Hostname = args[0];
-                    connection.Port = ConnectionsManager.DEFAULT_XEN_PORT;
-                    connection.Username = args[1];
-                    connection.Password = args[2];
+
+                    var connection = new XenConnection
+                    {
+                        Hostname = args[0],
+                        Port = ConnectionsManager.DEFAULT_XEN_PORT,
+                        Username = args.Length > 1 ? args[1] : "",
+                        Password = args.Length > 2 ? args[2] : ""
+                    };
+
                     if (ConnectionsManager.XenConnectionsContains(connection))
                         break;
 
@@ -710,7 +714,7 @@ namespace XenAdmin
                     if (Launched)
                     {
                         // The user has launched the splash screen, but we're already running.
-                        // Draw his attention.
+                        // Draw their attention.
                         HelpersGUI.BringFormToFront(this);
                         Activate();
                     }
