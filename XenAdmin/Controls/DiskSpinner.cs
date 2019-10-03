@@ -88,9 +88,9 @@ namespace XenAdmin.Controls
             SelectedSize = selectedSize;
             _minDiskSize = minSize;
 
-            comboBoxUnits.Items.Add(new DiskSizeWithUnits(3, 1, 0.001M, Util.BINARY_KILO, Util.BINARY_TERA, Messages.VAL_TERB));
-            comboBoxUnits.Items.Add(new DiskSizeWithUnits(3, 1, 0.001M, Util.BINARY_MEGA, Util.BINARY_GIGA, Messages.VAL_GIGB));
-            comboBoxUnits.Items.Add(new DiskSizeWithUnits(0, 256, 1, Util.BINARY_GIGA, Util.BINARY_MEGA, Messages.VAL_MEGB));
+            comboBoxUnits.Items.Add(new DiskSizeWithUnits(3, 1, 0.001M, Util.BINARY_KILO, Util.BINARY_TERA, Messages.VAL_TERB, Util.ToTB));
+            comboBoxUnits.Items.Add(new DiskSizeWithUnits(3, 1, 0.001M, Util.BINARY_MEGA, Util.BINARY_GIGA, Messages.VAL_GIGB, Util.ToGB));
+            comboBoxUnits.Items.Add(new DiskSizeWithUnits(0, 256, 1, Util.BINARY_GIGA, Util.BINARY_MEGA, Messages.VAL_MEGB, Util.ToMB));
 
             foreach (DiskSizeWithUnits item in comboBoxUnits.Items)
             {
@@ -209,8 +209,10 @@ namespace XenAdmin.Controls
             public decimal Maximum { get; }
             public long Multiplier { get; }
             public string Unit { get; }
+            public Func<double, RoundingBehaviour, int, double> RoundingFunction { get; }
 
-            public DiskSizeWithUnits(int decimalPlaces, int increment, decimal minimum, decimal maximum, long multiplier, string unit)
+            public DiskSizeWithUnits(int decimalPlaces, int increment, decimal minimum, decimal maximum, long multiplier,
+                string unit, Func<double, RoundingBehaviour, int, double> roundingFunction)
             {
                 DecimalPlaces = decimalPlaces;
                 Increment = increment;
@@ -218,6 +220,7 @@ namespace XenAdmin.Controls
                 Maximum = maximum;
                 Multiplier = multiplier;
                 Unit = unit;
+                RoundingFunction = roundingFunction;
             }
 
             public override string ToString()
@@ -227,7 +230,7 @@ namespace XenAdmin.Controls
 
             public decimal RoundSize(decimal size)
             {
-                var rounded = Math.Round(size / Multiplier, DecimalPlaces);
+                var rounded = (decimal)RoundingFunction((double)size, RoundingBehaviour.Up, DecimalPlaces);
                 if (rounded < Minimum)
                     return Minimum;
                 if (rounded > Maximum)
@@ -239,7 +242,7 @@ namespace XenAdmin.Controls
             {
                 if (size >= Multiplier)
                 {
-                    result = Math.Round(size / Multiplier, DecimalPlaces);
+                    result = (decimal)RoundingFunction((double)size, RoundingBehaviour.Up, DecimalPlaces);
                     return true;
                 }
 
