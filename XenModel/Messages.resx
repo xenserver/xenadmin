@@ -9836,9 +9836,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASSWORDS_EMPTY" xml:space="preserve">
     <value>Passwords cannot be empty</value>
   </data>
-  <data name="PASSWORDS_REQUEST_ALWAYS_DISABLED_TOOLTIP_BODY" xml:space="preserve">
-    <value>You have set a master password, so "Give Passwords Always" is not available.</value>
-  </data>
   <data name="PASSWORD_INCORRECT" xml:space="preserve">
     <value>The password you typed was incorrect</value>
   </data>

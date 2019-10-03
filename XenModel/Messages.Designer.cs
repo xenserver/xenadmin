@@ -28295,15 +28295,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have set a master password, so &quot;Give Passwords Always&quot; is not available..
-        /// </summary>
-        public static string PASSWORDS_REQUEST_ALWAYS_DISABLED_TOOLTIP_BODY {
-            get {
-                return ResourceManager.GetString("PASSWORDS_REQUEST_ALWAYS_DISABLED_TOOLTIP_BODY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Paste.
         /// </summary>
         public static string PASTE {
