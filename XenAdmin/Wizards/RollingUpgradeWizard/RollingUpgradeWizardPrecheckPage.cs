@@ -165,6 +165,21 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
             }
 
+            //Checking PV guests - for hosts that have any PV guests and warn the user before the update/upgrade.
+            var pvChecks = new List<Check>();
+            foreach (Host host in hostsToUpgradeOrUpdate.Where(h => !Helpers.QuebecOrGreater(h.Connection)))
+            {
+                if (host.GetPvVMs() != null && host.GetPvVMs().Count > 0)
+                {
+                    pvChecks.Add(new PVGuestsCheck(host));
+                    break;
+                }
+            }
+            if (pvChecks.Count > 0)
+            {
+                groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+            }
+
             //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated
             var livenessChecks = new List<Check>();
             foreach (Host host in hostsToUpgradeOrUpdate)
@@ -199,6 +214,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
+       
 
             //Checking can evacuate host - for hosts that will be upgraded or updated
             var evacuateChecks = new List<Check>();

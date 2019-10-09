@@ -6379,6 +6379,9 @@
   <data name="HOST_GONE" xml:space="preserve">
     <value>在 [XenCenter] 的缓存中找不到主机。</value>
   </data>
+  <data name="HOST_HAS_PV_GUEST_WARNING" xml:space="preserve">
+    <value>如果要升级到[XenServer] 8.1.0 或更高版本，某些PV OS模板将被删除。</value>
+  </data>
   <data name="HOST_INTERNAL_MANAGEMENT_NETWORK" xml:space="preserve">
     <value>主机内部管理网络</value>
   </data>
@@ -10314,6 +10317,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>不支持代理服务器。</value>
+  </data>
+  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>PV Guests 检测。</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS 加速器配置 - {0}</value>

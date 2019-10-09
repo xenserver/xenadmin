@@ -364,7 +364,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     haChecks.Add(new HAOffCheck(host));
             }
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
-
+ 
             //PBDsPluggedCheck
             var pbdChecks = new List<Check>();
             foreach (Host host in applicableServers)
@@ -469,6 +469,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Insert(0, new CheckGroup(Messages.CHECKING_XENCENTER_VERSION,
                     new List<Check> { new XenCenterVersionCheck(highestNewVersion ?? UpdateAlert.NewServerVersion) }));
             }
+
+            //PVGuestsCheck checks
+            var pvChecks = new List<Check>();
+            foreach (Host host in applicableServers.Where(h => !Helpers.QuebecOrGreater(h.Connection)))
+             {
+                if (host.GetPvVMs() != null && host.GetPvVMs().Count > 0)
+                {
+                    pvChecks.Add(new PVGuestsCheck(host)); 
+                    break;
+                }   
+            }
+             if (pvChecks.Count > 0)
+             {
+                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+             }
+            
 
             //GFS2 check for version updates
             if (WizardMode == WizardMode.NewVersion)

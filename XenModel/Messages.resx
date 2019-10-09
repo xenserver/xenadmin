@@ -2607,6 +2607,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host upgrade readiness check</value>
   </data>
+  <data name="CHECKING_PV_GUESTS" xml:space="preserve">
+    <value>Checking PV guests on hosts</value>
+  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
   </data>
@@ -6379,6 +6382,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HOST_GONE" xml:space="preserve">
     <value>Could not find host in [XenCenter]'s cache.</value>
+  </data>
+  <data name="HOST_HAS_PV_GUEST_WARNING" xml:space="preserve">
+    <value>If you are upgrading to [XenServer] 8.1.0 or higher, some PV OS templates will be removed.</value>
   </data>
   <data name="HOST_INTERNAL_MANAGEMENT_NETWORK" xml:space="preserve">
     <value>Host internal management network</value>
@@ -10363,6 +10369,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>Proxy servers are not supported.</value>
+  </data>
+  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>PV guest check.</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS-Accelerator configuration - '{0}'</value>

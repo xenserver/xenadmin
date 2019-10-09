@@ -866,6 +866,15 @@ namespace XenAPI
             return vms.ToList();
         }
 
+        public List<VM> GetPvVMs()
+        {
+            var vms = from VM vm in Connection.Cache.VMs
+                      where vm != null && vm.is_a_real_vm() && !vm.IsHVM() && !vm.other_config.ContainsKey("pvcheckpass")
+                      select vm;
+            
+            return vms.ToList();   
+        }
+
         public List<XenRef<VM>> GetRunningHvmVMs()
         {
             var vms = from XenRef<VM> vmref in resident_VMs

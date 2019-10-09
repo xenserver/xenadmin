@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -7200,6 +7200,15 @@ namespace XenAdmin {
         public static string CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION {
             get {
                 return ResourceManager.GetString("CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking PV guests on hosts.
+        /// </summary>
+        public static string CHECKING_PV_GUESTS {
+            get {
+                return ResourceManager.GetString("CHECKING_PV_GUESTS", resourceCulture);
             }
         }
         
@@ -18167,6 +18176,15 @@ namespace XenAdmin {
         public static string HOST_GONE {
             get {
                 return ResourceManager.GetString("HOST_GONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to [XenServer] 8.1.0 or higher, some PV OS templates will be removed..
+        /// </summary>
+        public static string HOST_HAS_PV_GUEST_WARNING {
+            get {
+                return ResourceManager.GetString("HOST_HAS_PV_GUEST_WARNING", resourceCulture);
             }
         }
         
@@ -29858,6 +29876,15 @@ namespace XenAdmin {
         public static string PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION {
             get {
                 return ResourceManager.GetString("PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PV guest check..
+        /// </summary>
+        public static string PV_GUESTS_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PV_GUESTS_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
