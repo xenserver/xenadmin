@@ -2611,6 +2611,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>ホストのアップグレードの準備チェック</value>
   </data>
+  <data name="CHECKING_PV_GUESTS" xml:space="preserve">
+    <value>PV ゲストの互換性チェック</value>
+  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>役割を確認しています...</value>
   </data>
@@ -7175,6 +7178,9 @@ SCSI ID: {2}
   <data name="LAUNCH_LICENSE_MANAGER" xml:space="preserve">
     <value>ライセンス マネージャ</value>
   </data>
+  <data name="LEARN_MORE" xml:space="preserve">
+    <value>より多くを理解する</value>
+  </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>マシン アカウントを Active Directory ドメインから削除するためのユーザー名およびパスワードを入力します。マシン アカウントを削除できない場合でも、Active Directory 認証は無効になります。</value>
   </data>
@@ -10209,6 +10215,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>このプールには共有ストレージがありません</value>
   </data>
+  <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
+    <value>{0}: [XenServer] [BRANDING_VERSION_8_1] 以降、準仮想化（PV）ゲストはサポートされなくなりました。[詳細]をクリックして、サポートされているゲストオペレーティングシステムのリストを表示します。 </value>
+  </data>
+  <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
+    <value>{0}: [XenServer] [BRANDING_VERSION_8_1] 以降、準仮想化（PV）ゲストはサポートされなくなりました。[詳細]をクリックして、サポートされているゲストオペレーティングシステムのリストを表示します。 </value>
+  </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>このプールは一部のみライセンスが適用されています</value>
   </data>
@@ -10364,6 +10376,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>プロキシ サーバーはサポートされません。</value>
+  </data>
+  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>ゲストの互換性チェック</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS アクセラレータ構成 - '{0}'</value>

@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -7182,6 +7182,15 @@ namespace XenAdmin {
         public static string CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION {
             get {
                 return ResourceManager.GetString("CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking guest compatibility.
+        /// </summary>
+        public static string CHECKING_PV_GUESTS {
+            get {
+                return ResourceManager.GetString("CHECKING_PV_GUESTS", resourceCulture);
             }
         }
         
@@ -21338,6 +21347,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Learn more.
+        /// </summary>
+        public static string LEARN_MORE {
+            get {
+                return ResourceManager.GetString("LEARN_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed..
         /// </summary>
         public static string LEAVING_AD {
@@ -30013,6 +30031,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        /// </summary>
+        public static string POOL_HAS_PV_GUEST_UPDATE_WARNING {
+            get {
+                return ResourceManager.GetString("POOL_HAS_PV_GUEST_UPDATE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        /// </summary>
+        public static string POOL_HAS_PV_GUEST_UPGRADE_WARNING {
+            get {
+                return ResourceManager.GetString("POOL_HAS_PV_GUEST_UPGRADE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The pool is partially licensed.
         /// </summary>
         public static string POOL_IS_PARTIALLY_LICENSED {
@@ -30573,6 +30609,15 @@ namespace XenAdmin {
         public static string PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION {
             get {
                 return ResourceManager.GetString("PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest compatibility check.
+        /// </summary>
+        public static string PV_GUESTS_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PV_GUESTS_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         

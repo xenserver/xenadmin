@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class InvisibleMessages {
@@ -237,6 +237,15 @@ namespace XenAdmin {
         public static string PRIVACY {
             get {
                 return ResourceManager.GetString("PRIVACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/system-requirements/guest-os-support.html.
+        /// </summary>
+        public static string PV_GUESTS_CHECK_URL {
+            get {
+                return ResourceManager.GetString("PV_GUESTS_CHECK_URL", resourceCulture);
             }
         }
         

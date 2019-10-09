@@ -331,6 +331,11 @@ namespace XenAPI
             HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower());
         }
 
+        public bool IsPvVm()
+        {
+            return is_a_real_vm() && !IsHVM() && !other_config.ContainsKey("pvcheckpass");
+        }
+
         public bool IsUEFIEnabled()
         {
             if (!IsHVM())

@@ -489,6 +489,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
             }
 
+            //PVGuestsCheck checks
+            if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
+            {
+                var pvChecks = new List<Check>();
+                foreach (var pool in SelectedPools.Where(p => Helpers.NaplesOrGreater(p.Connection)))
+                {
+                    if (pool.Connection.Resolve(pool.master) != null)
+                        pvChecks.Add(new PVGuestsCheck(pool, false));
+                }
+                if (pvChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+            }
+            
             return groups;
         }
 
