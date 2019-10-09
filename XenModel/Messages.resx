@@ -2607,6 +2607,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host upgrade readiness check</value>
   </data>
+  <data name="CHECKING_PV_GUESTS" xml:space="preserve">
+    <value>Checking guest compatibility</value>
+  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
   </data>
@@ -7170,6 +7173,9 @@ Size: {3}</value>
   <data name="LAUNCH_LICENSE_MANAGER" xml:space="preserve">
     <value>License Manager</value>
   </data>
+  <data name="LEARN_MORE" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed.</value>
   </data>
@@ -10208,6 +10214,12 @@ Please reconnect the host and try again</value>
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This pool has no shared storage</value>
   </data>
+  <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
+    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click "Learn more" to see the list of supported guest operating systems. </value>
+  </data>
+  <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
+    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click "Learn more" to see the list of supported guest operating systems. </value>
+  </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
   </data>
@@ -10363,6 +10375,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>Proxy servers are not supported.</value>
+  </data>
+  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Guest compatibility check</value>
   </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS-Accelerator configuration - '{0}'</value>

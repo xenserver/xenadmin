@@ -234,6 +234,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
             }
 
+            //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
+            var pvChecks = new List<Check>();
+            foreach (Pool pool in SelectedPools.Where(p => !Helpers.QuebecOrGreater(p.Connection)))
+            {
+                if (pool.Connection.Resolve(pool.master) != null)
+                    pvChecks.Add(new PVGuestsCheck(pool, true, InstallMethodConfig, ManualUpgrade)); 
+            }
+            if (pvChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+
             //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)
             {

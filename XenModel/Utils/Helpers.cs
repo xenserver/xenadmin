@@ -478,6 +478,10 @@ namespace XenAdmin.Core
             string platform_version = HostPlatformVersion(host);
             return platform_version != null && productVersionCompare(platform_version, "3.0.50") >= 0;
         }
+        public static bool QuebecOrGreater(string platformVersion)
+        {
+            return platformVersion != null && productVersionCompare(platformVersion, "3.0.50") >= 0;
+        }
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease

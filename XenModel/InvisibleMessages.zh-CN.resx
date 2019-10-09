@@ -168,6 +168,9 @@
   <data name="PRIVACY" xml:space="preserve">
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
   </data>
+  <data name="PV_GUESTS_CHECK_URL" xml:space="preserve">
+    <value>https://docs.citrix.com/zh-cn/citrix-hypervisor/system-requirements/guest-os-support.html</value>
+  </data>
   <data name="XEN_SEARCH" xml:space="preserve">
     <value>xensearch</value>
   </data>
