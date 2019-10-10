@@ -43,7 +43,7 @@ namespace XenAdmin.Controls.GPU
 {
     public partial class GpuConfiguration : XenDialogBase
     {
-        private List<PGPU> PGpuList { get; set; }
+        private List<PGPU> PGpuList { get; }
 
         internal override string HelpName => "GpuConfigurationDialog";
 
@@ -53,17 +53,11 @@ namespace XenAdmin.Controls.GPU
         }
 
         public GpuConfiguration(List<PGPU> pGpuList)
-            : this()
+            : base(pGpuList[0].Connection)
         {
-            if (pGpuList == null)
-                throw new ArgumentNullException(nameof(pGpuList));
-            if (pGpuList.Count == 0)
-                throw new ArgumentOutOfRangeException(nameof(pGpuList), "pGpuList list is empty");
-            if (pGpuList.ElementAt(0) == null)
-                throw new ArgumentOutOfRangeException(nameof(pGpuList), "First element of the pGpuList list is null");
+            InitializeComponent();
 
             PGpuList = pGpuList.ToList();
-            connection = PGpuList[0].Connection;
             PopulateGrid(pGpuList);
         }
 

@@ -62,9 +62,9 @@ namespace XenAdmin.Dialogs
         /// <param name="authorizedRoles">A list of roles that are able to complete the task</param>
         /// <param name="actionTitle">A description of the current action, if null or empty will not be displayed</param>
         public RoleElevationDialog(IXenConnection connection, Session session, List<Role> authorizedRoles, string actionTitle)
+            :base(connection)
         {
             InitializeComponent();
-            this.connection = connection;
             UserDetails ud = session.CurrentUserDetails;
             labelCurrentUserValue.Text = ud.UserDisplayName ?? ud.UserName ?? Messages.UNKNOWN_AD_USER;
             labelCurrentRoleValue.Text = Role.FriendlyCSVRoleList(session.Roles);
