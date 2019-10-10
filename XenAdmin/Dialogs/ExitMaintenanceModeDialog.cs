@@ -51,14 +51,13 @@ namespace XenAdmin.Dialogs
         /// empty list, this dialog makes no sense otherwise.</param>
         /// <param name="Host">The host which is exiting maintenance mode</param>
         public ExitMaintenanceModeDialog(List<VM> VMsToRestore, Host Host)
+            :base(VMsToRestore[0].Connection)
         {
             InitializeComponent();
-            System.Diagnostics.Trace.Assert(VMsToRestore != null && VMsToRestore.Count > 0, "There are no VMs to restore");
 
             this.VMsToRestore = VMsToRestore;
             TargetHost = Host;
             labelBlurb.Text = String.Format(labelBlurb.Text, Helpers.GetName(Host).Ellipsise(50));
-            this.connection = VMsToRestore[0].Connection;
 
             foreach (VM v in VMsToRestore)
                 v.PropertyChanged += v_PropertyChanged;
