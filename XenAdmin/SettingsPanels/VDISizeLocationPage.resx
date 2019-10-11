@@ -172,7 +172,7 @@
     <value>51, 13</value>
   </data>
   <data name="locationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="locationLabel.Text" xml:space="preserve">
     <value>Location:</value>
@@ -313,7 +313,7 @@
     <value>552, 22</value>
   </data>
   <data name="tableLayoutPanelInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelInfo.Name" xml:space="preserve">
     <value>tableLayoutPanelInfo</value>
@@ -349,7 +349,7 @@
     <value>51, 13</value>
   </data>
   <data name="labelLocationValueRO.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="labelLocationValueRO.Text" xml:space="preserve">
     <value>SR name</value>
@@ -385,7 +385,7 @@
     <value>501, 29</value>
   </data>
   <data name="diskSpinner1.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;diskSpinner1.Name" xml:space="preserve">
     <value>diskSpinner1</value>

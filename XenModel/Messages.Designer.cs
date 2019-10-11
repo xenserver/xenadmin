@@ -20070,7 +20070,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid number.
+        ///   Looks up a localized string similar to Invalid disk size.
         /// </summary>
         public static string INVALID_NUMBER {
             get {

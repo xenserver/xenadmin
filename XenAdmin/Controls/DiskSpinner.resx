@@ -231,7 +231,7 @@
     <value>304, 22</value>
   </data>
   <data name="tableLayoutPanelError.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelError.Name" xml:space="preserve">
     <value>tableLayoutPanelError</value>
@@ -258,7 +258,7 @@
     <value>50, 23</value>
   </data>
   <data name="comboBoxUnits.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;comboBoxUnits.Name" xml:space="preserve">
     <value>comboBoxUnits</value>
@@ -282,7 +282,7 @@
     <value>105, 23</value>
   </data>
   <data name="DiskSizeNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="DiskSizeNumericUpDown.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
