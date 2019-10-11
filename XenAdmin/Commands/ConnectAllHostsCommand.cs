@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
                         {
                             c.CachePopulated += c_CachePopulated;
                         }
-                        XenConnectionUI.BeginConnect(c, false, null, false);
+                        XenConnectionUI.BeginConnect(c, false, Program.MainWindow, false);
                     });
                 }
             }

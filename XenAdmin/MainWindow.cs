@@ -2234,34 +2234,29 @@ namespace XenAdmin
         {
             Program.Invoke(Program.MainWindow, delegate
             {
-                // Close and remove any active wizards for any VMs
-                foreach (VM vm in connection.Cache.VMs)
+                var vms = connection.Cache.VMs;
+                foreach (var kvp in activeXenModelObjectWizards)
                 {
-                    CloseActiveWizards(vm);
-                }
-                closeActivePoolWizards(connection);
-            });
-        }
-
-        /// <summary>
-        /// Closes all per-Connection wizards.
-        /// </summary>
-        /// <param name="connection"></param>
-        private void closeActivePoolWizards(IXenConnection connection)
-        {
-            IList<Form> wizards;
-            if (activePoolWizards.TryGetValue(connection, out wizards))
-            {
-                foreach (var wizard in wizards)
-                {
-                    if (!wizard.IsDisposed)
+                    if (kvp.Key is VM vm && vms.Contains(vm))
                     {
-                        wizard.Close();
+                        if (kvp.Value is Form wizard && !wizard.IsDisposed)
+                            wizard.Close();
+
+                        activeXenModelObjectWizards.Remove(vm);
                     }
                 }
 
-                activePoolWizards.Remove(connection);
-            }
+                if (activePoolWizards.TryGetValue(connection, out IList<Form> wizards))
+                {
+                    foreach (var wizard in wizards)
+                    {
+                        if (!wizard.IsDisposed)
+                            wizard.Close();
+                    }
+
+                    activePoolWizards.Remove(connection);
+                }
+            });
         }
 
         /// <summary>
@@ -2272,13 +2267,11 @@ namespace XenAdmin
         {
             Program.Invoke(Program.MainWindow, delegate
             {
-                Form wizard;
-                if (activeXenModelObjectWizards.TryGetValue(obj, out wizard))
+                if (activeXenModelObjectWizards.TryGetValue(obj, out Form wizard))
                 {
                     if (!wizard.IsDisposed)
-                    {
                         wizard.Close();
-                    }
+
                     activeXenModelObjectWizards.Remove(obj);
                 }
             });

@@ -199,7 +199,7 @@ namespace XenAdmin.Commands
 
                     if (socket.Connected)
                     {
-                        MainWindowCommandInterface.Invoke(() => XenConnectionUI.BeginConnect(connection, false, null, false));
+                        MainWindowCommandInterface.Invoke(() => XenConnectionUI.BeginConnect(connection, false, Program.MainWindow, false));
                         return;
                     }
                     i++;
