@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
                     {
                         item.Connection.CachePopulated += Connection_CachePopulated;
                     }
-                    XenConnectionUI.BeginConnect(item.Connection, true, null, false);
+                    XenConnectionUI.BeginConnect(item.Connection, true, Program.MainWindow, false);
                 }
             }
         }
