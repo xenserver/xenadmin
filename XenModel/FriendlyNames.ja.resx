@@ -517,7 +517,7 @@
     <value>停止</value>
   </data>
   <data name="Label-VM.power_state-Paused" xml:space="preserve">
-    <value>ポーズ</value>
+    <value>一時停止</value>
   </data>
   <data name="Label-VM.power_state-Running" xml:space="preserve">
     <value>実行中</value>
