@@ -186,7 +186,7 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void TestDiskSizeStringUlong()
         {
-            Assert.AreEqual("16777216 TiB", Util.DiskSizeString(ulong.MaxValue));
+            Assert.AreEqual("16777216 TB", Util.DiskSizeString(ulong.MaxValue));
         }
 
         [Test]
