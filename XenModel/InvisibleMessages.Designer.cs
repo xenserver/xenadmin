@@ -88,6 +88,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html.
+        /// </summary>
+        public static string DEPRECATION_URL {
+            get {
+                return ResourceManager.GetString("DEPRECATION_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
         /// </summary>
         public static string HEALTH_CHECK_PRIVACY_STATEMENT_URL {

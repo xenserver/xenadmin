@@ -12680,6 +12680,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dynamic Memory Control.
+        /// </summary>
+        public static string DMC {
+            get {
+                return ResourceManager.GetString("DMC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Dynamic Memory Control (DMC) is not available due to license restrictions on the server..
         /// </summary>
         public static string DMC_UNAVAILABLE_LICENSE_RESTRICTION {
@@ -41505,7 +41514,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} feature was deprecated in {1} and may be unavailable in future versions.
+        ///   Looks up a localized string similar to The {0} feature was deprecated in {1} and may be retired in future versions.
         /// </summary>
         public static string X_IS_DEPRECATED_IN_X {
             get {
@@ -41600,6 +41609,15 @@ namespace XenAdmin {
         public static string XENSERVER_6_5 {
             get {
                 return ResourceManager.GetString("XENSERVER_6_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_8_1].
+        /// </summary>
+        public static string XENSERVER_8_1 {
+            get {
+                return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
             }
         }
         
