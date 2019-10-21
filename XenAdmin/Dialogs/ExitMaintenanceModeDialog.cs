@@ -38,16 +38,19 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs
 {
-    public partial class RestoreVMsDialog : XenDialogBase
+    public partial class ExitMaintenanceModeDialog : XenDialogBase
     {
         private List<VM> VMsToRestore;
         private Host TargetHost;
+
         /// <summary>
-        /// A dialog which shows a list of VMs, their current locations and state and asks the user whether they want to restore them to their original locations.
+        /// A dialog which shows a list of VMs with their current locations and state,
+        /// and asks the user whether they want to restore them to their original locations.
         /// </summary>
-        /// <param name="VMsToRestore">List of VMs that would be restored. Do not pass null or an empty list, this dialog makes no sense otherwise.</param>
+        /// <param name="VMsToRestore">List of VMs to be restored. Do not pass null or an
+        /// empty list, this dialog makes no sense otherwise.</param>
         /// <param name="Host">The host which is exiting maintenance mode</param>
-        public RestoreVMsDialog(List<VM> VMsToRestore, Host Host)
+        public ExitMaintenanceModeDialog(List<VM> VMsToRestore, Host Host)
         {
             InitializeComponent();
             System.Diagnostics.Trace.Assert(VMsToRestore != null && VMsToRestore.Count > 0, "There are no VMs to restore");
@@ -91,24 +94,15 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        protected class VMRestoreRow : DataGridViewRow
+        private class VMRestoreRow : DataGridViewRow
         {
             public VMRestoreRow(VM vm)
             {
-                // The image cell, shows the current state of the VM
-                DataGridViewImageCell iconCell = new DataGridViewImageCell();
-                iconCell.Value = Images.GetImage16For(vm);
-                Cells.Add(iconCell);
-                
-                // The VM name cell
-                DataGridViewTextBoxCell nameCell = new DataGridViewTextBoxCell();
-                nameCell.Value = Helpers.GetName(vm);
-                Cells.Add(nameCell);
+                var iconCell = new DataGridViewImageCell {Value = Images.GetImage16For(vm)};
+                var nameCell = new DataGridViewTextBoxCell {Value = Helpers.GetName(vm)};
+                var locationCell = new DataGridViewTextBoxCell {Value = Helpers.GetName(vm.Connection.Resolve(vm.resident_on))};
 
-                // The current location cell
-                DataGridViewTextBoxCell locationCell = new DataGridViewTextBoxCell();
-                locationCell.Value = Helpers.GetName(vm.Connection.Resolve(vm.resident_on));
-                Cells.Add(locationCell);
+                Cells.AddRange(iconCell, nameCell, locationCell);
             }
         }
 
