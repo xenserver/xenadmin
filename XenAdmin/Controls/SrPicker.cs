@@ -31,7 +31,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Network;
 using XenAPI;
@@ -40,7 +39,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Controls
 {
-    public partial class SrPicker : CustomTreeView
+    public class SrPicker : CustomTreeView
     {
         // Migrate is the live VDI move operation
         public enum SRPickerType { VM, InstallFromTemplate, MoveOrCopy, Migrate, LunPerVDI };
@@ -65,29 +64,17 @@ namespace XenAdmin.Controls
             SR_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
         }
 
-        public override bool ShowCheckboxes
-        {
-            get { return false; }
-        }
+        public override bool ShowCheckboxes => false;
 
-        public override bool ShowDescription
-        {
-            get { return true; }
-        }
+        public override bool ShowDescription => true;
 
-        public override bool ShowImages
-        {
-            get { return true; }
-        }
+        public override bool ShowImages => true;
 
-        public override int NodeIndent
-        {
-            get { return 3; }
-        }
+        public override int NodeIndent => 3;
 
         public SRPickerType Usage
         {
-            set { usage = value; }
+            set => usage = value;
         }
 
         /// <summary>
@@ -133,7 +120,7 @@ namespace XenAdmin.Controls
 			refresh();
 		}
 
-    	public void refresh()
+    	private void refresh()
         {
             Program.AssertOnEventThread();
 
