@@ -184,7 +184,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 return;
 
             AddButton.Enabled = DisksRadioButton.Checked && DisksGridView.Rows.Count < Template.MaxVBDsAllowed() - 1;
-            PropertiesButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0;
+            EditButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0;
             DeleteButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
             DisksGridView.Enabled = DisksRadioButton.Checked;
             DisklessVMRadioButton.Enabled = Template.IsHVM() && InstallMethodIsNetwork;
@@ -290,7 +290,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             UpdateEnablement();
         }
 
-        private void PropertiesButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
             if (DisksGridView.SelectedRows.Count <= 0)
                 return;
