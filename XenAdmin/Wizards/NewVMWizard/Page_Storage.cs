@@ -243,11 +243,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 else
                     totalDiskSize[sr.opaque_ref] = item.Disk.virtual_size;
 
-                var initialSpace = Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, item.Disk);
                 if (totalDiskInitialAllocation.ContainsKey(sr.opaque_ref))
-                    totalDiskInitialAllocation[sr.opaque_ref] +=  initialSpace;
+                    totalDiskInitialAllocation[sr.opaque_ref] += item.Disk.virtual_size;
                 else
-                    totalDiskInitialAllocation[sr.opaque_ref] = initialSpace;
+                    totalDiskInitialAllocation[sr.opaque_ref] = item.Disk.virtual_size;
             }
             DiskOverCommit overcommitedDisk = DiskOverCommit.None;
             foreach (DiskGridRowItem item in DisksGridView.Rows)
@@ -527,46 +526,33 @@ namespace XenAdmin.Wizards.NewVMWizard
         }
 
         /// <summary>
-        /// Tries to find the best SR for the given VDI considering the suggestedSR which has priority over other SRs in this check.
-        /// SuggestedSR, default SR, other SRs are checked.
-        /// Returns first suitable SR or NULL.
+        /// Tries to find the best SR for the given VDI considering first the
+        /// suggestedSR then the pool's default SR, then other SRs.
         /// </summary>
+        /// <returns>The SR if a suitable one is found, otherwise null</returns>
         private static SR GetBeskDiskStorage(IXenConnection connection, VDI disk, Host affinity, SR suggestedSR)
         {
-            // try suggestion
-            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(suggestedSR, disk))
+            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) &&
+                suggestedSR.VdiCreationCanProceed(disk.virtual_size))
                 return suggestedSR;
 
-            // try default sr
             SR defaultSR = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
-            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(defaultSR, disk))
+            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) &&
+                defaultSR.VdiCreationCanProceed(disk.virtual_size))
                 return defaultSR;
 
-            // pick an sr
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (!sr.CanCreateVmOn())
-                    continue;
-
-                if (sr.CanBeSeenFrom(affinity) && IsSufficientFreeSpaceAvailableOnSrForVdi(sr, disk))
+                if (sr.CanCreateVmOn() &&
+                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(disk.virtual_size))
                     return sr;
             }
 
-            // there has been no suitable SR found
-            return null; 
-        }
-
-
-        /// <summary>
-        /// Checks whether there is enough space available on the SR to accommodate a VDI.
-        /// </summary>
-        private static bool IsSufficientFreeSpaceAvailableOnSrForVdi(SR sr, VDI disk)
-        {
-            return sr != null && sr.VdiCreationCanProceed(Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk));
+            return null;
         }
     }
 
-    public enum DiskOverCommit : int
+    public enum DiskOverCommit
     {
         None = 0,
         Warning = 1,

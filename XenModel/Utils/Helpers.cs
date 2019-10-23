@@ -1783,21 +1783,6 @@ namespace XenAdmin.Core
            return master != null && master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
        }
 
-       /// <summary>
-       /// This method returns the disk space required (bytes) on the provided SR for the provided VDI.
-       /// </summary>
-       /// <returns>Disk size required in bytes.</returns>
-       public static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI vdi)
-       {
-           if (sr == null)
-               throw new ArgumentNullException("sr");
-
-           if (vdi == null)
-               throw new ArgumentNullException("vdi");
-
-           return vdi.virtual_size;
-       }
-
         public static string UrlEncode(this string str)
         {
             if (string.IsNullOrEmpty(str))
