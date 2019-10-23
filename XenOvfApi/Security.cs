@@ -399,7 +399,7 @@ namespace XenOvf
             else if (result <= 128) { passStrength = 2; }   //= "Good;"; }
             else if (result > 128) { passStrength = 3; }    //= "Strong;"; }
 
-            return passStrength;;
+            return passStrength;
         }       
         #endregion
 
