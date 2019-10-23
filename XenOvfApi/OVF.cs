@@ -4438,7 +4438,7 @@ namespace XenOvf
             int priority = 99;
             foreach (VirtualHardwareSection_Type _vhs in vhsArray)
             {
-                if (_vhs.System == null)
+                if (_vhs.System?.VirtualSystemType?.Value == null)
                 {
                     vhs = _vhs;
                     log.Info("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [Unknown]");
@@ -4500,7 +4500,6 @@ namespace XenOvf
                         priority = 5;
                     }
                 }
-
             }
 
             if (vhs == null)
