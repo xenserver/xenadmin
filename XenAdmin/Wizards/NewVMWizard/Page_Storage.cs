@@ -109,8 +109,31 @@ namespace XenAdmin.Wizards.NewVMWizard
             XmlNode provision = Template.ProvisionXml();
             if (provision != null)
             {
-                foreach (XmlNode disk in provision.ChildNodes)
-                    rowList.Add(new DiskGridRowItem(Connection, disk, SelectedName, Affinity));
+                foreach (XmlNode diskNode in provision.ChildNodes)
+                {
+                    var device = new VBD
+                    {
+                        userdevice = diskNode.Attributes["device"].Value,
+                        bootable = diskNode.Attributes["bootable"].Value == "true",
+                        mode = vbd_mode.RW
+                    };
+
+                    var diskSize = long.Parse(diskNode.Attributes["size"].Value);
+                    SR srUuid = Connection.Cache.Find_By_Uuid<SR>(diskNode.Attributes["sr"].Value);
+                    SR sr = GetBestDiskStorage(Connection, diskSize, Affinity, srUuid);
+
+                    var disk = new VDI
+                    {
+                        name_label = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_VDINAME, SelectedName, device.userdevice),
+                        name_description = Messages.NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION,
+                        virtual_size = diskSize,
+                        type = (vdi_type)Enum.Parse(typeof(vdi_type), diskNode.Attributes["type"].Value),
+                        read_only = false,
+                        SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef)
+                    };
+
+                    rowList.Add(new DiskGridRowItem(Connection, disk, device, DiskSource.FromDefaultTemplate));
+                }
             }
             else
             {
@@ -121,12 +144,60 @@ namespace XenAdmin.Wizards.NewVMWizard
                         continue;
 
                     VDI vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi != null)
-                        rowList.Add(new DiskGridRowItem(Connection, vdi, vbd, false, Affinity));
+                    if (vdi == null)
+                        continue;
+
+                    var device = new VBD
+                    {
+                        userdevice = vbd.userdevice,
+                        bootable = vbd.bootable,
+                        mode = vbd.mode
+                    };
+
+                    SR sr = GetBestDiskStorage(Connection, vdi.virtual_size, Affinity, Connection.Resolve(vdi.SR));
+
+                    var disk = new VDI
+                    {
+                        name_label = vdi.name_label,
+                        name_description = vdi.name_description,
+                        virtual_size = vdi.virtual_size,
+                        type = vdi.type,
+                        read_only = vdi.read_only,
+                        sm_config = vdi.sm_config,
+                        SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef)
+                    };
+
+                    rowList.Add(new DiskGridRowItem(Connection, disk, device, DiskSource.FromCustomTemplate));
                 }
             }
 
             DisksGridView.Rows.AddRange(rowList.ToArray());
+        }
+
+        /// <summary>
+        /// Tries to find the best SR for the given VDI considering first the
+        /// suggestedSR then the pool's default SR, then other SRs.
+        /// </summary>
+        /// <returns>The SR if a suitable one is found, otherwise null</returns>
+        private static SR GetBestDiskStorage(IXenConnection connection, long diskSize, Host affinity, SR suggestedSR)
+        {
+            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) &&
+                suggestedSR.VdiCreationCanProceed(diskSize))
+                return suggestedSR;
+
+            SR defaultSR = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
+            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) &&
+                defaultSR.VdiCreationCanProceed(diskSize))
+                return defaultSR;
+
+            foreach (SR sr in connection.Cache.SRs)
+            {
+                if (sr.CanCreateVmOn() &&
+                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
+                    return sr;
+            }
+
+            return null;
         }
 
         public override bool EnableNext()
@@ -161,7 +232,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
 
-                DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.NewDisk(), dialog.NewDevice(), true, Affinity));
+                DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.NewDisk(), dialog.NewDevice(), DiskSource.New));
                 UpdateEnablement();
             }
         }
@@ -197,12 +268,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 foreach (DiskGridRowItem row in DisksGridView.Rows)
                 {
-                    if (!row.CanDelete)
+                    if (!row.CanDelete && row.SourceSR != null && row.Disk != null)
                     {
-                        SR src = row.SourceDisk == null ? null : Connection.Resolve<SR>(row.SourceDisk.SR);
-                        SR dest = Connection.Resolve<SR>(row.Disk.SR);
+                        SR dest = Connection.Resolve(row.Disk.SR);
 
-                        if (src != null && src.Equals(dest))
+                        if (row.SourceSR.Equals(dest))
                         {
                             CloneCheckBox.Enabled = true;
 
@@ -312,8 +382,11 @@ namespace XenAdmin.Wizards.NewVMWizard
         #region Accessors
 
         /// <summary>
-        /// Gets the SR that should be used as the parameter for VM.copy when the VM is created by the New VM Wizard. If null
-        /// is returned then VM.clone should be used.
+        /// When the VM is created by the New VM Wizard, VM.copy or VM.clone is
+        /// used depending on what SRs the disks are on:
+        /// - If the disks are all on the same SR, this SR is returned and VM.copy is used.
+        /// - If at least one disk is on same SR as the source disk, this SR is returned and VM.copy is used.
+        /// - Otherwise, this property returns null and VM.clone is used.
         /// </summary>
         public SR FullCopySR
         {
@@ -321,35 +394,23 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 if (!Template.DefaultTemplate() && !Template.is_a_snapshot && !CloneCheckBox.Checked)
                 {
-                    // if target disks are all on the same SR then use that SR
-                    // otherwise iterate through disks and find first target disks that is on same SR as source disk
-
                     SR sr = null;
                     List<SR> targetSRs = new List<SR>();
                     foreach (DiskGridRowItem row in DisksGridView.Rows)
                     {
-                        if (!row.CanDelete && row.SourceDisk != null && row.Disk != null)
+                        if (!row.CanDelete && row.SourceSR != null && row.Disk != null)
                         {
-                            SR src = Connection.Resolve<SR>(row.SourceDisk.SR);
-                            SR target = Connection.Resolve<SR>(row.Disk.SR);
+                            SR target = Connection.Resolve(row.Disk.SR);
 
-                            if (sr == null && src != null && src.Equals(target))
-                            {
-                                sr = src;
-                            }
+                            if (sr == null && row.SourceSR.Equals(target))
+                                sr = row.SourceSR;
 
                             if (!targetSRs.Contains(target))
-                            {
                                 targetSRs.Add(target);
-                            }
                         }
                     }
 
-                    if (targetSRs.Count == 1)
-                    {
-                        return targetSRs[0];
-                    }
-                    return sr;
+                    return targetSRs.Count == 1 ? targetSRs[0] : sr;
                 }
                 return null;
             }
@@ -403,7 +464,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
     public class DiskGridRowItem : DataGridViewRow
     {
-        public readonly VDI SourceDisk;
+        public readonly SR SourceSR;
         public VDI Disk;
         public readonly VBD Device;
         public readonly IXenConnection Connection;
@@ -413,75 +474,32 @@ namespace XenAdmin.Wizards.NewVMWizard
         public DiskOverCommit OverCommit = DiskOverCommit.None;
         public string ImageToolTip;
 
-        private DataGridViewImageCell ImageCell;
-        private DataGridViewTextBoxCell SizeCell;
-        private DataGridViewTextBoxCell NameCell;
-        private DataGridViewTextBoxCell SrCell;
-        private DataGridViewTextBoxCell SharedCell;
+        private readonly DataGridViewImageCell ImageCell = new DataGridViewImageCell(false) {ValueType = typeof(Image)};
+        private readonly DataGridViewTextBoxCell SizeCell = new DataGridViewTextBoxCell();
+        private readonly DataGridViewTextBoxCell NameCell = new DataGridViewTextBoxCell();
+        private readonly DataGridViewTextBoxCell SrCell = new DataGridViewTextBoxCell();
+        private readonly DataGridViewTextBoxCell SharedCell = new DataGridViewTextBoxCell();
 
-        public DiskGridRowItem(IXenConnection connection, XmlNode diskNode, string vmName, Host affinity)
+        public DiskGridRowItem(IXenConnection connection, VDI vdi, VBD vbd, DiskSource src)
         {
-            Disk = new VDI();
-            Device = new VBD();
+            Disk = vdi;
+            Device = vbd;
             Connection = connection;
 
-            Disk.virtual_size = long.Parse(diskNode.Attributes["size"].Value);
-            SR sruuid = connection.Cache.Find_By_Uuid<SR>(diskNode.Attributes["sr"].Value);
-            SR sr = GetBeskDiskStorage(Connection, Disk, affinity, sruuid == null ? null : sruuid);
-            Disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
-            Disk.type = (vdi_type)Enum.Parse(typeof(vdi_type), diskNode.Attributes["type"].Value);
-            Device.userdevice = diskNode.Attributes["device"].Value;
-            Device.bootable = diskNode.Attributes["bootable"].Value == "true";
+            if (src == DiskSource.FromCustomTemplate)
+            {
+                SourceSR = Connection.Resolve(vdi.SR);
+            }
+            else
+            {
+                CanDelete = Disk.type == vdi_type.user;
+                CanResize = true;
+            }
 
-            Disk.name_label = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_VDINAME, vmName, Device.userdevice); //Device.userdevice;
-            Disk.read_only = false;
-            Disk.name_description = Messages.NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION;
-            Device.mode = vbd_mode.RW;
-
-            CanDelete = Disk.type == vdi_type.user;
-            CanResize = true;
-            MinSize = Disk.virtual_size;
-
-            AddCells();
-        }
-
-        public DiskGridRowItem(IXenConnection connection, VDI vdi, VBD vbd, bool isNew, Host affinity)
-        {
-            SourceDisk = vdi;
-            Disk = new VDI();
-            Device = new VBD();
-            Connection = connection;
-
-            Disk.virtual_size = vdi.virtual_size;
-            SR sr = GetBeskDiskStorage(Connection, vdi, affinity, Connection.Resolve(vdi.SR));
-            Disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
-            Disk.type = vdi.type;
-            Device.userdevice = vbd.userdevice;
-            Device.bootable = vbd.bootable;
-
-            Disk.name_label = vdi.name_label;
-            Disk.read_only = vdi.read_only;
-            Disk.name_description = vdi.name_description;
-            Disk.sm_config = vdi.sm_config;
-            Device.mode = vbd.mode;
-
-            CanDelete = Disk.type == vdi_type.user && isNew;
-            CanResize = isNew;
-            MinSize = 0;
-
-            AddCells();
-        }
-
-        private void AddCells()
-        {
-            ImageCell = new DataGridViewImageCell(false) {ValueType = typeof(Image)};
-            NameCell = new DataGridViewTextBoxCell();
-            SizeCell = new DataGridViewTextBoxCell();
-            SrCell = new DataGridViewTextBoxCell();
-            SharedCell = new DataGridViewTextBoxCell();
+            if (src == DiskSource.FromDefaultTemplate)
+                MinSize = Disk.virtual_size;
 
             Cells.AddRange(ImageCell, NameCell, SrCell, SizeCell, SharedCell);
-
             UpdateDetails();
         }
 
@@ -499,6 +517,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     ImageCell.Value = Properties.Resources._000_error_h32bit_16;
                     break;
             }
+
             ImageCell.ToolTipText = ImageToolTip;
             SizeCell.ToolTipText = ImageToolTip;
             NameCell.ToolTipText = ImageToolTip;
@@ -524,32 +543,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 SharedCell.Value = "";
             }
         }
-
-        /// <summary>
-        /// Tries to find the best SR for the given VDI considering first the
-        /// suggestedSR then the pool's default SR, then other SRs.
-        /// </summary>
-        /// <returns>The SR if a suitable one is found, otherwise null</returns>
-        private static SR GetBeskDiskStorage(IXenConnection connection, VDI disk, Host affinity, SR suggestedSR)
-        {
-            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) &&
-                suggestedSR.VdiCreationCanProceed(disk.virtual_size))
-                return suggestedSR;
-
-            SR defaultSR = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
-            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) &&
-                defaultSR.VdiCreationCanProceed(disk.virtual_size))
-                return defaultSR;
-
-            foreach (SR sr in connection.Cache.SRs)
-            {
-                if (sr.CanCreateVmOn() &&
-                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(disk.virtual_size))
-                    return sr;
-            }
-
-            return null;
-        }
     }
 
     public enum DiskOverCommit
@@ -557,5 +550,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         None = 0,
         Warning = 1,
         Error = 2
+    }
+
+    public enum DiskSource
+    {
+        New,
+        FromDefaultTemplate,
+        FromCustomTemplate
     }
 }
