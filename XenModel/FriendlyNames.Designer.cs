@@ -700,7 +700,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot load the XenServerPSSnapIn if the PowerShell &apos;ExecutionPolicy&apos; is equal to &apos;Restricted&apos;..
+        ///   Looks up a localized string similar to Cannot load the XenServerPSModule if the PowerShell &apos;ExecutionPolicy&apos; is equal to &apos;Restricted&apos;..
         /// </summary>
         public static string Exception_PowerShellExecutionPolicyRestricted {
             get {
@@ -718,7 +718,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must have the XenServerPSSnapIn installed to use [XenServer] PowerShell Commands. This can be found in the SDK..
+        ///   Looks up a localized string similar to You must have the XenServerPSModule installed to use [XenServer] PowerShell Commands. This can be found in the SDK..
         /// </summary>
         public static string Exception_PowerShellSnapInNotPresent {
             get {

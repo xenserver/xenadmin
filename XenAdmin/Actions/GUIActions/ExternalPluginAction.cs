@@ -54,13 +54,12 @@ namespace XenAdmin.Actions
         private const string EmptyParameter = "null";
         private const string BlankParamter = "blank";
 
-        private static readonly string SnapInTrustedCertXml = 
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            Branding.COMPANY_NAME_SHORT, "\\XenServerPSSnapIn\\XenServer_Known_Certificates.xml");
+        private static readonly string SnapInTrustedCertXml =
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                @"WindowsPowerShell\XenServer_Known_Certificates.xml");
 
-        private static readonly string SnapInTrustedCertXmlDir = 
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            Branding.COMPANY_NAME_SHORT, "\\XenServerPSSnapIn");
+        private static readonly string SnapInTrustedCertXmlDir =
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WindowsPowerShell");
 
         private readonly ReadOnlyCollection<IXenObject> _targets = new ReadOnlyCollection<IXenObject>(new List<IXenObject>());
         private readonly bool XenCenterNodeTarget = false;

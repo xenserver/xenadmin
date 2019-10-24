@@ -295,13 +295,13 @@
     <value>XML node '{0}' is not recognized.</value>
   </data>
   <data name="Exception-PowerShellExecutionPolicyRestricted" xml:space="preserve">
-    <value>Cannot load the XenServerPSSnapIn if the PowerShell 'ExecutionPolicy' is equal to 'Restricted'.</value>
+    <value>Cannot load the XenServerPSModule if the PowerShell 'ExecutionPolicy' is equal to 'Restricted'.</value>
   </data>
   <data name="Exception-PowerShellNotPresent" xml:space="preserve">
     <value>You must have the PowerShell installed to use PowerShell Plug-ins. This can be downloaded from the Microsoft website.</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>You must have the XenServerPSSnapIn installed to use [XenServer] PowerShell Commands. This can be found in the SDK.</value>
+    <value>You must have the XenServerPSModule installed to use [XenServer] PowerShell Commands. This can be found in the SDK.</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>Could not parse search '{0}' for plug-in '{1}'.</value>
