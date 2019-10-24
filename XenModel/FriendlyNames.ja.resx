@@ -295,13 +295,13 @@
     <value>XML ノード '{0}' を認識できませんでした。</value>
   </data>
   <data name="Exception-PowerShellExecutionPolicyRestricted" xml:space="preserve">
-    <value>PowerShell の 'ExecutionPolicy' が 'Restricted' の場合、XenServerPSSnapIn を読み込めません。</value>
+    <value>PowerShell の 'ExecutionPolicy' が 'Restricted' の場合、XenServerPSModule を読み込めません。</value>
   </data>
   <data name="Exception-PowerShellNotPresent" xml:space="preserve">
     <value>PowerShell プラグインを使用するには、PowerShell をインストールしておく必要があります。PowerShell は、Microsoft 社の Web サイトからダウンロードできます。</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>[XenServer] PowerShell コマンドを使用するには、XenServerPSSnapIn をインストールしておく必要があります。XenServerPSSnapIn は SDK に含まれています。</value>
+    <value>[XenServer] PowerShell コマンドを使用するには、XenServerPSModule をインストールしておく必要があります。XenServerPSModule は SDK に含まれています。</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>プラグイン '{1}' の検索 '{0}' を構文解析できません。</value>
