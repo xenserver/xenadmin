@@ -9234,8 +9234,17 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
     <value>Created by template provisioner</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
+    <value>The default SR '{0}' does not have enough free space for the new VM's disks. [XenCenter] has selected a different SR for you.</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NAME" xml:space="preserve">
     <value>Storage</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_NOSPACE" xml:space="preserve">
+    <value>Neither the default SR nor the suggested by the template SR have enough free space for the new VM's disks. [XenCenter] has selected a different SR for you.</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
+    <value>The suggested by the template SR '{0}' does not have enough free space for the new VM's disks. [XenCenter] has selected a different SR for you.</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NOSTORAGE" xml:space="preserve">
     <value>&lt;no suitable storage&gt;</value>

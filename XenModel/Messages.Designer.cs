@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -27027,6 +27027,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The default SR &apos;{0}&apos; does not have enough free space for the new VM&apos;s disks. [XenCenter] has selected a different SR for you..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk &apos;{0}&apos;.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_DISK {
@@ -27054,6 +27063,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neither the default SR nor the suggested by the template SR have enough free space for the new VM&apos;s disks. [XenCenter] has selected a different SR for you..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_NOSPACE {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_NOSPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;no suitable storage&gt;.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_NOSTORAGE {
@@ -27068,6 +27086,15 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The suggested by the template SR &apos;{0}&apos; does not have enough free space for the new VM&apos;s disks. [XenCenter] has selected a different SR for you..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE", resourceCulture);
             }
         }
         
