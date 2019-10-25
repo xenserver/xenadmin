@@ -847,16 +847,16 @@
     <value>The Tools ISO must be ejected from all running VMs in the pool.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
-    <value>The patch precheck stage failed: the server does not have enough space.</value>
+    <value>The patch pre-check stage failed: the server does not have enough space.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
-    <value>The update precheck stage failed: prerequisite updates are missing.</value>
+    <value>The update pre-check stage failed: prerequisite updates are missing.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
-    <value>The update precheck stage failed with an unknown error.</value>
+    <value>The update pre-check stage failed with an unknown error.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_VM_RUNNING" xml:space="preserve">
-    <value>The update precheck stage failed: there are one or more VMs still running on the server.  All VMs must be shut down or suspended before the update can be applied.</value>
+    <value>The update pre-check stage failed: there are one or more VMs still running on the server.  All VMs must be shut down or suspended before the update can be applied.</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_BUILD" xml:space="preserve">
     <value>The current build number ({1}) is incompatible with the update build number ({2}).</value>
@@ -1656,13 +1656,13 @@ Authorized Roles: {1}</value>
     <value>The attempt to discover the iSCSI target/device failed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_84" xml:space="preserve">
-    <value>The iScsi target and received IQNs do not match</value>
+    <value>The iSCSI target and received IQNs do not match</value>
   </data>
   <data name="SR_BACKEND_FAILURE_85" xml:space="preserve">
     <value>The attempt to detach the iSCSI failed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_86" xml:space="preserve">
-    <value>The attempt to query the iSCSi daemon failed</value>
+    <value>The attempt to query the iSCSI daemon failed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_87" xml:space="preserve">
     <value>Either LUNid or LUNserial value must be provided</value>
@@ -1773,7 +1773,7 @@ Authorized Roles: {1}</value>
     <value>Retrieving system status from the server failed.</value>
   </data>
   <data name="TASK_CANCELLED" xml:space="preserve">
-    <value>The request was asynchronously cancelled.</value>
+    <value>The request was asynchronously canceled.</value>
   </data>
   <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
     <value>Cannot contact the other host using TLS on the specified address and port</value>
@@ -1818,22 +1818,22 @@ Authorized Roles: {1}</value>
     <value>The update cannot be applied for the following host(s).</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
-    <value>The update precheck stage failed: conflicting update(s) are present.</value>
+    <value>The update pre-check stage failed: conflicting update(s) are present.</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED" xml:space="preserve">
-    <value>The update precheck stage failed: RPM package validation requires a GPG key that is not present on the host.</value>
+    <value>The update pre-check stage failed: RPM package validation requires a GPG key that is not present on the host.</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
-    <value>The update precheck stage failed: the server does not have enough space.</value>
+    <value>The update pre-check stage failed: the server does not have enough space.</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
-    <value>The update precheck stage failed: prerequisite update(s) are missing.</value>
+    <value>The update pre-check stage failed: prerequisite update(s) are missing.</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
-    <value>The update precheck stage failed with an unknown error.</value>
+    <value>The update pre-check stage failed with an unknown error.</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
-    <value>The update precheck stage failed: the server is of an incorrect version.</value>
+    <value>The update pre-check stage failed: the server is of an incorrect version.</value>
   </data>
   <data name="USB_ALREADY_ATTACHED" xml:space="preserve">
     <value>The USB device is currently attached to a VM.</value>
@@ -2094,7 +2094,7 @@ Authorized Roles: {1}</value>
     <value>The operation attempted is not valid for templates</value>
   </data>
   <data name="VM_IS_USING_NESTED_VIRT" xml:space="preserve">
-    <value>This operation is illegal because the VM is using nested virtualisation.</value>
+    <value>This operation is illegal because the VM is using nested virtualization.</value>
   </data>
   <data name="VM_LACKS_FEATURE" xml:space="preserve">
     <value>You attempted an operation on a VM which lacks the feature.</value>
@@ -2127,7 +2127,7 @@ Authorized Roles: {1}</value>
     <value>The specified VM is not currently resident on the specified server.</value>
   </data>
   <data name="VM_NO_CRASHDUMP_SR" xml:space="preserve">
-    <value>This VM does not have a crashdump SR specified.</value>
+    <value>This VM does not have a crash dump SR specified.</value>
   </data>
   <data name="VM_NO_EMPTY_CD_VBD" xml:space="preserve">
     <value>The VM has no empty CD drive (VBD).</value>
@@ -2241,7 +2241,7 @@ Authorized Roles: {1}</value>
     <value>The configured WLB server name failed to resolve in DNS.</value>
   </data>
   <data name="WLB_URL_INVALID" xml:space="preserve">
-    <value>The WLB URL is invalid. Ensure it is in format: &lt;ipaddress&gt;:&lt;port&gt;. The configured/given URL is returned.</value>
+    <value>The WLB URL is invalid. Ensure it is in the format: &lt;ipaddress&gt;:&lt;port&gt;. The configured/given URL is returned.</value>
   </data>
   <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB reported that the server rejected its configured authentication details.</value>
@@ -2280,13 +2280,13 @@ Authorized Roles: {1}</value>
     <value>Initialization of the VSS requester failed</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED" xml:space="preserve">
-    <value>Could not find any volumes supported by the Vss Provider</value>
+    <value>Could not find any volumes supported by the VSS Provider</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PREPARING_WRITERS" xml:space="preserve">
     <value>An attempt to prepare VSS writers for the snapshot failed</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PROV_NOT_LOADED" xml:space="preserve">
-    <value>The Vss Provider is not loaded</value>
+    <value>The VSS Provider is not loaded</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_START_SNAPSHOT_SET_FAILED" xml:space="preserve">
     <value>An attempt to start a new VSS snapshot failed</value>
