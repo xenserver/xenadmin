@@ -4859,13 +4859,13 @@ Eject the CD and try again.</value>
     <value>Resolve</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE" xml:space="preserve">
-    <value>Failover prechecks completed: {0} issues found</value>
+    <value>Failover pre-checks completed: {0} issues found</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING" xml:space="preserve">
     <value>Running failover pre-checks:</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS" xml:space="preserve">
-    <value>Failover prechecks completed: No issues found</value>
+    <value>Failover pre-checks completed: No issues found</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_TEXT" xml:space="preserve">
     <value>Pre-checks</value>
@@ -6730,7 +6730,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Server is not reachable</value>
   </data>
   <data name="HOST_NO_CRASHDUMPS" xml:space="preserve">
-    <value>No crashdumps to remove</value>
+    <value>No crash dumps to remove</value>
   </data>
   <data name="HOST_POWER_ON" xml:space="preserve">
     <value>Server power on</value>
@@ -6748,16 +6748,16 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>You must reboot your server '{0}' to complete the restore process.</value>
   </data>
   <data name="HOST_REMOVED_MANY_CRASHDUMPS" xml:space="preserve">
-    <value>Removed {0} crashdumps from {1}</value>
+    <value>Removed {0} crash dumps from {1}</value>
   </data>
   <data name="HOST_REMOVED_ONE_CRASHDUMP" xml:space="preserve">
-    <value>Removed 1 crashdump from {0}</value>
+    <value>Removed 1 crash dump from {0}</value>
   </data>
   <data name="HOST_REMOVING_CRASHDUMP" xml:space="preserve">
-    <value>Removing crashdump {0} of {1} from {2}</value>
+    <value>Removing crash dump {0} of {1} from {2}</value>
   </data>
   <data name="HOST_REMOVING_CRASHDUMPS_TITLE" xml:space="preserve">
-    <value>Removing crashdumps from {0}</value>
+    <value>Removing crash dumps from {0}</value>
   </data>
   <data name="HOST_RESTORED" xml:space="preserve">
     <value>Server '{0}' restored.</value>
@@ -9929,10 +9929,10 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Reverting pool problems...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERT" xml:space="preserve">
-    <value>Revert resolved prechecks</value>
+    <value>Revert resolved pre-checks</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTED" xml:space="preserve">
-    <value>Resolved prechecks reverted</value>
+    <value>Resolved pre-checks reverted</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_SERVER_RESOLVE" xml:space="preserve">
     <value>Resolve server problems</value>
@@ -9962,16 +9962,16 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Checking disk space requirements</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FAILED" xml:space="preserve">
-    <value>Prechecks failed.</value>
+    <value>Pre-checks failed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
-    <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
+    <value>Update pre-checks are performed to verify that the update "{0}" can be applied to the servers.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
-    <value>Prechecks are performed to verify that automated updates can proceed.</value>
+    <value>Pre-checks are performed to verify that automated updates can proceed.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
-    <value>Update prechecks are performed to verify that the selected update can be applied to the servers.</value>
+    <value>Update pre-checks are performed to verify that the selected update can be applied to the servers.</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>Resolve</value>
@@ -9980,10 +9980,10 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Resolving issues...</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TEXT" xml:space="preserve">
-    <value>Prechecks</value>
+    <value>Pre-checks</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_TITLE" xml:space="preserve">
-    <value>Perform update prechecks on selected servers</value>
+    <value>Perform update pre-checks on selected servers</value>
   </data>
   <data name="PATCHINGWIZARD_REMOVED_UPDATES" xml:space="preserve">
     <value>Deleted update installation files</value>
@@ -10101,7 +10101,7 @@ Servers where this update cannot be applied appear disabled in this list.</value
     <value>The installation of update {0} was completed with warnings.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION" xml:space="preserve">
-    <value>The upload process was cancelled.</value>
+    <value>The upload process was canceled.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION_RECONSIDER" xml:space="preserve">
     <value>Are you sure you want to leave this page?
@@ -10169,7 +10169,7 @@ This will cancel the upload process.</value>
     <value>{0} ...</value>
   </data>
   <data name="PATCHING_WIZARD_RUNNING_PRECHECKS" xml:space="preserve">
-    <value>Running prechecks...</value>
+    <value>Running pre-checks...</value>
   </data>
   <data name="PATCHING_WIZARD_SOLVE_MANUALLY" xml:space="preserve">
     <value>Unable to resolve this issue:\n{0}\n\nPlease resolve this issue manually and then click Check Again.
@@ -11078,10 +11078,10 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>Reverting the power state of {0}</value>
   </data>
   <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
-    <value>Reverting resolved prechecks...</value>
+    <value>Reverting resolved pre-checks...</value>
   </data>
   <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
-    <value>Reverting resolved prechecks in {0}...</value>
+    <value>Reverting resolved pre-checks in {0}...</value>
   </data>
   <data name="REVERTING_WIZARD_CHANGES" xml:space="preserve">
     <value>Reverting all changes done by this wizard</value>
@@ -11090,7 +11090,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>        Revert pool state</value>
   </data>
   <data name="REVERT_PRECHECK_ACTIONS" xml:space="preserve">
-    <value>Revert precheck actions</value>
+    <value>Revert pre-check actions</value>
   </data>
   <data name="REVERT_WIZARD_CHANGES" xml:space="preserve">
     <value>Revert all changes done by this wizard</value>
@@ -11105,7 +11105,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>{0} on '{1}'</value>
   </data>
   <data name="ROLLINGUPGRADE_PRECHECKS" xml:space="preserve">
-    <value>Upgrade prechecks are performed on all the pools you selected to ensure that all the servers can be upgraded.</value>
+    <value>Upgrade pre-checks are performed on all the pools you selected to ensure that all the servers can be upgraded.</value>
   </data>
   <data name="ROLLING_POOL_UPGRADE" xml:space="preserve">
     <value>Rolling Pool Upgrade</value>
@@ -11235,7 +11235,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Policy started</value>
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
-    <value>&amp;Run Prechecks</value>
+    <value>&amp;Run Pre-checks</value>
   </data>
   <data name="RUN_REPORT" xml:space="preserve">
     <value>&amp;Run Report</value>
@@ -12630,7 +12630,7 @@ Please check your settings and try again.</value>
     <value>{0}: Prerequisite update(s) are missing: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_TITLE" xml:space="preserve">
-    <value>Update precheck failed on server '{0}'</value>
+    <value>Update pre-check failed on server '{0}'</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOT" xml:space="preserve">
     <value>Reboot</value>
@@ -12680,7 +12680,7 @@ Please check your settings and try again.</value>
     <value>Click here to resume this VM</value>
   </data>
   <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
-    <value>Precheck for {0} in {1}...</value>
+    <value>Pre-check for {0} in {1}...</value>
   </data>
   <data name="UPDATES_WIZARD_SERVER_SELECTION_PROBLEM" xml:space="preserve">
     <value>{0}: The update needs to be applied on all servers in the pool.</value>
@@ -12764,10 +12764,10 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Applying the upgrade to the pool.</value>
   </data>
   <data name="UPGRADEWIZARD_PRECHECK_TEXT" xml:space="preserve">
-    <value>Upgrade Prechecks</value>
+    <value>Upgrade Pre-checks</value>
   </data>
   <data name="UPGRADEWIZARD_PRECHECK_TITLE" xml:space="preserve">
-    <value>Problems encountered when performing upgrade prechecks.</value>
+    <value>Problems encountered when performing upgrade pre-checks.</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_CFU_STATUS" xml:space="preserve">
     <value>Error encountered when checking ability to download updates.</value>
@@ -12806,10 +12806,10 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Upgrade pool master '{0}'</value>
   </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
-    <value>Prechecks</value>
+    <value>Pre-checks</value>
   </data>
   <data name="UPGRADE_PRECHECKS_TITLE" xml:space="preserve">
-    <value>Perform upgrade prechecks on selected pools</value>
+    <value>Perform upgrade pre-checks on selected pools</value>
   </data>
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>Upgrade server '{0}</value>

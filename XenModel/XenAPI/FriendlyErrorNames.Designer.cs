@@ -2248,7 +2248,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The patch precheck stage failed: the server does not have enough space..
+        ///   Looks up a localized string similar to The patch pre-check stage failed: the server does not have enough space..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_OUT_OF_SPACE {
             get {
@@ -2257,7 +2257,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: prerequisite updates are missing..
+        ///   Looks up a localized string similar to The update pre-check stage failed: prerequisite updates are missing..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING {
             get {
@@ -2266,7 +2266,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed with an unknown error..
+        ///   Looks up a localized string similar to The update pre-check stage failed with an unknown error..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_UNKNOWN_ERROR {
             get {
@@ -2275,7 +2275,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: there are one or more VMs still running on the server.  All VMs must be shut down or suspended before the update can be applied..
+        ///   Looks up a localized string similar to The update pre-check stage failed: there are one or more VMs still running on the server.  All VMs must be shut down or suspended before the update can be applied..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_VM_RUNNING {
             get {
@@ -4665,7 +4665,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The iScsi target and received IQNs do not match.
+        ///   Looks up a localized string similar to The iSCSI target and received IQNs do not match.
         /// </summary>
         public static string SR_BACKEND_FAILURE_84 {
             get {
@@ -4683,7 +4683,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The attempt to query the iSCSi daemon failed.
+        ///   Looks up a localized string similar to The attempt to query the iSCSI daemon failed.
         /// </summary>
         public static string SR_BACKEND_FAILURE_86 {
             get {
@@ -5016,7 +5016,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The request was asynchronously cancelled..
+        ///   Looks up a localized string similar to The request was asynchronously canceled..
         /// </summary>
         public static string TASK_CANCELLED {
             get {
@@ -5151,7 +5151,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: conflicting update(s) are present..
+        ///   Looks up a localized string similar to The update pre-check stage failed: conflicting update(s) are present..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT {
             get {
@@ -5160,7 +5160,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: RPM package validation requires a GPG key that is not present on the host..
+        ///   Looks up a localized string similar to The update pre-check stage failed: RPM package validation requires a GPG key that is not present on the host..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED {
             get {
@@ -5169,7 +5169,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: the server does not have enough space..
+        ///   Looks up a localized string similar to The update pre-check stage failed: the server does not have enough space..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_OUT_OF_SPACE {
             get {
@@ -5178,7 +5178,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: prerequisite update(s) are missing..
+        ///   Looks up a localized string similar to The update pre-check stage failed: prerequisite update(s) are missing..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING {
             get {
@@ -5187,7 +5187,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed with an unknown error..
+        ///   Looks up a localized string similar to The update pre-check stage failed with an unknown error..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR {
             get {
@@ -5196,7 +5196,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: the server is of an incorrect version..
+        ///   Looks up a localized string similar to The update pre-check stage failed: the server is of an incorrect version..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION {
             get {
@@ -5943,7 +5943,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation is illegal because the VM is using nested virtualisation..
+        ///   Looks up a localized string similar to This operation is illegal because the VM is using nested virtualization..
         /// </summary>
         public static string VM_IS_USING_NESTED_VIRT {
             get {
@@ -6033,7 +6033,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM does not have a crashdump SR specified..
+        ///   Looks up a localized string similar to This VM does not have a crash dump SR specified..
         /// </summary>
         public static string VM_NO_CRASHDUMP_SR {
             get {
@@ -6420,7 +6420,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The WLB URL is invalid. Ensure it is in format: &lt;ipaddress&gt;:&lt;port&gt;. The configured/given URL is returned..
+        ///   Looks up a localized string similar to The WLB URL is invalid. Ensure it is in the format: &lt;ipaddress&gt;:&lt;port&gt;. The configured/given URL is returned..
         /// </summary>
         public static string WLB_URL_INVALID {
             get {
@@ -6519,7 +6519,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find any volumes supported by the Vss Provider.
+        ///   Looks up a localized string similar to Could not find any volumes supported by the VSS Provider.
         /// </summary>
         public static string XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED {
             get {
@@ -6537,7 +6537,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Vss Provider is not loaded.
+        ///   Looks up a localized string similar to The VSS Provider is not loaded.
         /// </summary>
         public static string XEN_VSS_REQ_ERROR_PROV_NOT_LOADED {
             get {

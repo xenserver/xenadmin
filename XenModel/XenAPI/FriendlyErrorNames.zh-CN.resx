@@ -1656,13 +1656,13 @@
     <value>尝试检测 iSCSI 目标/设备失败</value>
   </data>
   <data name="SR_BACKEND_FAILURE_84" xml:space="preserve">
-    <value>iScsi 目标与收到的 IQN 不匹配</value>
+    <value>iSCSI 目标与收到的 IQN 不匹配</value>
   </data>
   <data name="SR_BACKEND_FAILURE_85" xml:space="preserve">
     <value>尝试分离 iSCSI 失败</value>
   </data>
   <data name="SR_BACKEND_FAILURE_86" xml:space="preserve">
-    <value>尝试查询 iSCSi 守护程序失败</value>
+    <value>尝试查询 iSCSI 守护程序失败</value>
   </data>
   <data name="SR_BACKEND_FAILURE_87" xml:space="preserve">
     <value>必须提供 LUNid 或 LUNserial 值</value>
@@ -2241,7 +2241,7 @@
     <value>配置的 WLB 服务器名称无法在 DNS 中解析。</value>
   </data>
   <data name="WLB_URL_INVALID" xml:space="preserve">
-    <value>WLB URL 无效。请确保其格式为: &lt;ipaddress&gt;:&lt;port&gt;。将返回配置的/指定的 URL。</value>
+    <value>WLB URL 无效。请确保其格式为: &lt;IP address&gt;:&lt;port&gt;。将返回配置的/指定的 URL。</value>
   </data>
   <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB 报告服务器拒绝了所配置的身份验证详细信息。</value>

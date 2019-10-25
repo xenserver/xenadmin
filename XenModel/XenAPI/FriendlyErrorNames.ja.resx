@@ -2280,13 +2280,13 @@
     <value>VSS リクエスタの初期化に失敗しました。</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED" xml:space="preserve">
-    <value>Vss Provider でサポートされるボリュームが見つかりません</value>
+    <value>VSS Provider でサポートされるボリュームが見つかりません</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PREPARING_WRITERS" xml:space="preserve">
     <value>スナップショットの VSS ライタの準備に失敗しました。</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PROV_NOT_LOADED" xml:space="preserve">
-    <value>Vss Provider が読み込まれていません</value>
+    <value>VSS Provider が読み込まれていません</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_START_SNAPSHOT_SET_FAILED" xml:space="preserve">
     <value>新規 VSS スナップショットの開始に失敗しました。</value>

@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -13724,7 +13724,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failover prechecks completed: {0} issues found.
+        ///   Looks up a localized string similar to Failover pre-checks completed: {0} issues found.
         /// </summary>
         public static string DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE {
             get {
@@ -13742,7 +13742,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failover prechecks completed: No issues found.
+        ///   Looks up a localized string similar to Failover pre-checks completed: No issues found.
         /// </summary>
         public static string DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS {
             get {
@@ -19198,7 +19198,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No crashdumps to remove.
+        ///   Looks up a localized string similar to No crash dumps to remove.
         /// </summary>
         public static string HOST_NO_CRASHDUMPS {
             get {
@@ -19261,7 +19261,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed {0} crashdumps from {1}.
+        ///   Looks up a localized string similar to Removed {0} crash dumps from {1}.
         /// </summary>
         public static string HOST_REMOVED_MANY_CRASHDUMPS {
             get {
@@ -19270,7 +19270,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed 1 crashdump from {0}.
+        ///   Looks up a localized string similar to Removed 1 crash dump from {0}.
         /// </summary>
         public static string HOST_REMOVED_ONE_CRASHDUMP {
             get {
@@ -19279,7 +19279,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing crashdump {0} of {1} from {2}.
+        ///   Looks up a localized string similar to Removing crash dump {0} of {1} from {2}.
         /// </summary>
         public static string HOST_REMOVING_CRASHDUMP {
             get {
@@ -19288,7 +19288,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing crashdumps from {0}.
+        ///   Looks up a localized string similar to Removing crash dumps from {0}.
         /// </summary>
         public static string HOST_REMOVING_CRASHDUMPS_TITLE {
             get {
@@ -28480,7 +28480,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Running prechecks....
+        ///   Looks up a localized string similar to Running pre-checks....
         /// </summary>
         public static string PATCHING_WIZARD_RUNNING_PRECHECKS {
             get {
@@ -28762,7 +28762,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Revert resolved prechecks.
+        ///   Looks up a localized string similar to Revert resolved pre-checks.
         /// </summary>
         public static string PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERT {
             get {
@@ -28771,7 +28771,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resolved prechecks reverted.
+        ///   Looks up a localized string similar to Resolved pre-checks reverted.
         /// </summary>
         public static string PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTED {
             get {
@@ -28861,7 +28861,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prechecks failed..
+        ///   Looks up a localized string similar to Pre-checks failed..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FAILED {
             get {
@@ -28870,7 +28870,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update prechecks are performed to verify that the update &quot;{0}&quot; can be applied to the servers..
+        ///   Looks up a localized string similar to Update pre-checks are performed to verify that the update &quot;{0}&quot; can be applied to the servers..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE {
             get {
@@ -28879,7 +28879,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prechecks are performed to verify that automated updates can proceed..
+        ///   Looks up a localized string similar to Pre-checks are performed to verify that automated updates can proceed..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE {
             get {
@@ -28888,7 +28888,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update prechecks are performed to verify that the selected update can be applied to the servers..
+        ///   Looks up a localized string similar to Update pre-checks are performed to verify that the selected update can be applied to the servers..
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME {
             get {
@@ -28915,7 +28915,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prechecks.
+        ///   Looks up a localized string similar to Pre-checks.
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_TEXT {
             get {
@@ -28924,7 +28924,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Perform update prechecks on selected servers.
+        ///   Looks up a localized string similar to Perform update pre-checks on selected servers.
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_TITLE {
             get {
@@ -29271,7 +29271,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The upload process was cancelled..
+        ///   Looks up a localized string similar to The upload process was canceled..
         /// </summary>
         public static string PATCHINGWIZARD_SINGLEUPLOAD_CANCELLATION {
             get {
@@ -31904,7 +31904,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Revert precheck actions.
+        ///   Looks up a localized string similar to Revert pre-check actions.
         /// </summary>
         public static string REVERT_PRECHECK_ACTIONS {
             get {
@@ -31940,7 +31940,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reverting resolved prechecks....
+        ///   Looks up a localized string similar to Reverting resolved pre-checks....
         /// </summary>
         public static string REVERTING_RESOLVED_PRECHECKS {
             get {
@@ -31949,7 +31949,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reverting resolved prechecks in {0}....
+        ///   Looks up a localized string similar to Reverting resolved pre-checks in {0}....
         /// </summary>
         public static string REVERTING_RESOLVED_PRECHECKS_POOL {
             get {
@@ -32283,7 +32283,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade prechecks are performed on all the pools you selected to ensure that all the servers can be upgraded..
+        ///   Looks up a localized string similar to Upgrade pre-checks are performed on all the pools you selected to ensure that all the servers can be upgraded..
         /// </summary>
         public static string ROLLINGUPGRADE_PRECHECKS {
             get {
@@ -32337,7 +32337,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Run Prechecks.
+        ///   Looks up a localized string similar to &amp;Run Pre-checks.
         /// </summary>
         public static string RUN_PRECHECKS_WITH_ACCESS_KEY {
             get {
@@ -36633,7 +36633,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update precheck failed on server &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Update pre-check failed on server &apos;{0}&apos;.
         /// </summary>
         public static string UPDATES_WIZARD_PRECHECK_FAILED_TITLE {
             get {
@@ -36779,7 +36779,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Precheck for {0} in {1}....
+        ///   Looks up a localized string similar to Pre-check for {0} in {1}....
         /// </summary>
         public static string UPDATES_WIZARD_RUNNING_PRECHECK {
             get {
@@ -36923,7 +36923,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prechecks.
+        ///   Looks up a localized string similar to Pre-checks.
         /// </summary>
         public static string UPGRADE_PRECHECKS_TEXT {
             get {
@@ -36932,7 +36932,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Perform upgrade prechecks on selected pools.
+        ///   Looks up a localized string similar to Perform upgrade pre-checks on selected pools.
         /// </summary>
         public static string UPGRADE_PRECHECKS_TITLE {
             get {
@@ -36977,7 +36977,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade Prechecks.
+        ///   Looks up a localized string similar to Upgrade Pre-checks.
         /// </summary>
         public static string UPGRADEWIZARD_PRECHECK_TEXT {
             get {
@@ -36986,7 +36986,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problems encountered when performing upgrade prechecks..
+        ///   Looks up a localized string similar to Problems encountered when performing upgrade pre-checks..
         /// </summary>
         public static string UPGRADEWIZARD_PRECHECK_TITLE {
             get {
