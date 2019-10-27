@@ -324,17 +324,17 @@ namespace XenAdmin.Network
         /// <summary>
         /// Fired just before the cache is cleared (i.e. the cache is still populated).
         /// </summary>
-        public event EventHandler<EventArgs> ClearingCache;
-        public event EventHandler<EventArgs> CachePopulated;
+        public event Action<IXenConnection> ClearingCache;
+        public event Action<IXenConnection> CachePopulated;
         public event EventHandler<ConnectionResultEventArgs> ConnectionResult;
-        public event EventHandler<EventArgs> ConnectionStateChanged;
-        public event EventHandler<EventArgs> ConnectionLost;
-        public event EventHandler<EventArgs> ConnectionClosed;
-        public event EventHandler<EventArgs> ConnectionReconnecting;
-        public event EventHandler<EventArgs> BeforeConnectionEnd;
-        public event EventHandler<ConnectionMessageChangedEventArgs> ConnectionMessageChanged;
-        public event EventHandler<ConnectionMajorChangeEventArgs> BeforeMajorChange;
-        public event EventHandler<ConnectionMajorChangeEventArgs> AfterMajorChange;
+        public event Action<IXenConnection> ConnectionStateChanged;
+        public event Action<IXenConnection> ConnectionLost;
+        public event Action<IXenConnection> ConnectionClosed;
+        public event Action<IXenConnection> ConnectionReconnecting;
+        public event Action<IXenConnection> BeforeConnectionEnd;
+        public event Action<IXenConnection, string> ConnectionMessageChanged;
+        public event Action<IXenConnection, bool> BeforeMajorChange;
+        public event Action<IXenConnection, bool> AfterMajorChange;
 
         /// <summary>
         /// Fired on the UI thread, once per batch of events in CacheUpdater.
@@ -864,9 +864,7 @@ namespace XenAdmin.Network
                     heartbeat.Start();
             }
 
-            if (CachePopulated != null)
-                CachePopulated(this, EventArgs.Empty);
-
+            CachePopulated?.Invoke(this);
             MarkConnectActionComplete();
         }
 
@@ -1731,18 +1729,6 @@ namespace XenAdmin.Network
             }
         }
 
-        /*void XenConnection_CachePopulated(object sender, EventArgs e)
-        {
-            CachePopulated -= new EventHandler<EventArgs>(XenConnection_CachePopulated);
-            Program.MainWindow.CommandInterface.TrySelectNewObjectInTree(this, false, true, false);
-        }
-
-        void XenConnection_ConnectionResult(object sender, ConnectionResultEventArgs e)
-        {
-            if (!e.Connected)
-                CachePopulated -= new EventHandler<EventArgs>(XenConnection_CachePopulated);
-        }*/
-
         private void ReconnectMasterTimer(object state)
         {
             if (IsConnected || !ConnectionsManager.XenConnectionsContains(this))
@@ -1799,8 +1785,7 @@ namespace XenAdmin.Network
 
         private void OnClearingCache()
         {
-            if (ClearingCache != null)
-                ClearingCache(this, new EventArgs());
+            ClearingCache?.Invoke(this);
         }
 
         private void OnConnectionResult(bool connected, string reason, Exception error)
@@ -1812,53 +1797,45 @@ namespace XenAdmin.Network
 
         private void OnConnectionClosed()
         {
-            if (ConnectionClosed != null)
-                ConnectionClosed(this, null);
+            ConnectionClosed?.Invoke(this);
             OnConnectionStateChanged();
         }
 
         private void OnConnectionLost()
         {
-            if (ConnectionLost != null)
-                ConnectionLost(this, null);
+            ConnectionLost?.Invoke(this);
             OnConnectionStateChanged();
         }
 
         private void OnConnectionReconnecting()
         {
-            if (ConnectionReconnecting != null)
-                ConnectionReconnecting(this, null);
+            ConnectionReconnecting?.Invoke(this);
             OnConnectionStateChanged();
         }
 
         private void OnBeforeConnectionEnd()
         {
-            if (BeforeConnectionEnd != null)
-                BeforeConnectionEnd(this, null);
+            BeforeConnectionEnd?.Invoke(this);
         }
 
         private void OnConnectionStateChanged()
         {
-            if (ConnectionStateChanged != null)
-                ConnectionStateChanged(this, null);
+            ConnectionStateChanged?.Invoke(this);
         }
 
         private void OnConnectionMessageChanged(string message)
         {
-            if (ConnectionMessageChanged != null)
-                ConnectionMessageChanged(this, new ConnectionMessageChangedEventArgs(message));
+            ConnectionMessageChanged?.Invoke(this, message);
         }
 
         public void OnBeforeMajorChange(bool background)
         {
-            if (BeforeMajorChange != null)
-                BeforeMajorChange(this, new ConnectionMajorChangeEventArgs(background));
+            BeforeMajorChange?.Invoke(this, background);
         }
 
         public void OnAfterMajorChange(bool background)
         {
-            if (AfterMajorChange != null)
-                AfterMajorChange(this, new ConnectionMajorChangeEventArgs(background));
+            AfterMajorChange?.Invoke(this, background);
         }
 
         private void OnXenObjectsUpdated()

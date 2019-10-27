@@ -284,12 +284,12 @@ namespace XenAdmin.Controls
             host.PropertyChanged -= host_PropertyChanged;
         }
 
-        private void connection_ConnectionStateChanged(object sender, EventArgs e)
+        private void connection_ConnectionStateChanged(IXenConnection conn)
         {
             Program.Invoke(Program.MainWindow, RefreshLists);
         }
 
-        private void connection_CachePopulated(object sender, EventArgs e)
+        private void connection_CachePopulated(IXenConnection conn)
         {
             Program.Invoke(Program.MainWindow, RefreshLists);
         }

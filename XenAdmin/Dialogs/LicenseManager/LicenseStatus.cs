@@ -32,6 +32,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using XenAdmin.Network;
 using XenAdmin.Utils;
 using XenAPI;
 
@@ -109,7 +110,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        void Connection_ConnectionStateChanged(object sender, EventArgs e)
+        private void Connection_ConnectionStateChanged(IXenConnection conn)
         {
             if (LicencedHost != null)
             {

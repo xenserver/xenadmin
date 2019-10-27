@@ -38,6 +38,7 @@ using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
 using System.Linq;
+using XenAdmin.Network;
 using CheckGroup = System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<XenAdmin.Diagnostics.Checks.Check>>;
 
 
@@ -58,7 +59,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (Host master in SelectedMasters)
             {
                 master.Connection.ConnectionStateChanged += connection_ConnectionChanged;
-                master.Connection.CachePopulated += connection_ConnectionChanged;
+                master.Connection.CachePopulated += connection_CachePopulated;
             }
         }
 
@@ -67,11 +68,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (Host master in SelectedMasters)
             {
                 master.Connection.ConnectionStateChanged -= connection_ConnectionChanged;
-                master.Connection.CachePopulated -= connection_ConnectionChanged;
+                master.Connection.CachePopulated -= connection_CachePopulated;
             }
         }
 
-        private void connection_ConnectionChanged(object sender, EventArgs eventArgs)
+        private void connection_ConnectionChanged(IXenConnection conn)
+        {
+            Program.Invoke(this, RefreshRechecks);
+        }
+
+        private void connection_CachePopulated(IXenConnection conn)
         {
             Program.Invoke(this, RefreshRechecks);
         }

@@ -39,7 +39,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public abstract class RebootPlanAction : HostPlanAction
     {
-        private bool _cancelled = false;
+        private bool _cancelled;
+        private bool lostConnection;
 
         protected RebootPlanAction(Host host)
             : base(host)
@@ -271,9 +272,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             return session;
         }
 
-        private bool lostConnection = false;
-
-        private void connection_ConnectionLost(object sender, EventArgs e)
+        private void connection_ConnectionLost(IXenConnection conn)
         {
             lock (this)
             {

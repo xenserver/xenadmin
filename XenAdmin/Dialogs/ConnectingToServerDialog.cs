@@ -125,22 +125,22 @@ namespace XenAdmin.Dialogs
             connection.ConnectionMessageChanged -= Connection_ConnectionMessageChanged;
         }
 
-        private void Connection_ConnectionClosed(object sender, EventArgs e)
+        private void Connection_ConnectionClosed(IXenConnection conn)
         {
             CloseConnectingDialog();
         }
 
-        private void Connection_BeforeConnectionEnd(object sender, EventArgs e)
+        private void Connection_BeforeConnectionEnd(IXenConnection conn)
         {
             CloseConnectingDialog();
         }
 
-        private void Connection_ConnectionMessageChanged(object sender, ConnectionMessageChangedEventArgs e)
+        private void Connection_ConnectionMessageChanged(IXenConnection conn, string message)
         {
             Program.Invoke(Program.MainWindow, () =>
             {
                 if (Visible)
-                    lblStatus.Text = e.Message;
+                    lblStatus.Text = message;
             });
         }
 

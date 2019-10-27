@@ -43,6 +43,7 @@ using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAPI;
 using CheckGroup = System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<XenAdmin.Diagnostics.Checks.Check>>;
 
@@ -101,7 +102,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "UpdatePrechecks"; }
         }
 
-        void Connection_ConnectionStateChanged(object sender, EventArgs e)
+        void Connection_ConnectionStateChanged(IXenConnection conn)
         {
             Program.Invoke(this, RefreshRechecks);
         }
