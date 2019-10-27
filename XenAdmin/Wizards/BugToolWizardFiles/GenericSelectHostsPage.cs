@@ -311,7 +311,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             host.PropertyChanged -= host_PropertyChanged;
         }
 
-        private void connection_CachePopulated(object sender, EventArgs e)
+        private void connection_CachePopulated(IXenConnection conn)
         {
             Program.Invoke(this, buildList);
         }
@@ -345,7 +345,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
         }
 
-        private void connection_ConnectionStateChanged(object sender, EventArgs e)
+        private void connection_ConnectionStateChanged(IXenConnection conn)
         {
             Program.Invoke(this, (CollectionChangeEventHandler)XenConnections_CollectionChanged, this, null);
         }

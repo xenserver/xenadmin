@@ -568,12 +568,12 @@ namespace XenAdmin.Wizards.GenericPages
 			Program.BeginInvoke(this, PopulateComboBox);
 		}
 
-		private void xenConnection_CachePopulated(object sender, EventArgs e)
+		private void xenConnection_CachePopulated(IXenConnection conn)
         {
 			Program.Invoke(this, PopulateComboBox);
         }
 
-		private void xenConnection_ConnectionStateChanged(object sender, EventArgs e)
+		private void xenConnection_ConnectionStateChanged(IXenConnection conn)
 		{
 			Program.Invoke(this, PopulateComboBox);
 		}

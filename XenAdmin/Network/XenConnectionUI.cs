@@ -344,11 +344,8 @@ namespace XenAdmin.Network
             }
         }
 
-        private static void Connection_ConnectionStateChanged(object sender, EventArgs e)
+        private static void Connection_ConnectionStateChanged(IXenConnection conn)
         {
-            if (!(sender is IXenConnection conn))
-                return;
-
             if (conn.IsConnected)
                 return;
 

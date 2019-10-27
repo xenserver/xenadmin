@@ -72,9 +72,8 @@ namespace XenAdmin.Commands
             }
         }
 
-        private void c_CachePopulated(object sender, EventArgs e)
+        private void c_CachePopulated(IXenConnection c)
         {
-            IXenConnection c = (IXenConnection)sender;
             c.CachePopulated -= c_CachePopulated;
 
             MainWindowCommandInterface.TrySelectNewObjectInTree(c, false, true, false);

@@ -629,9 +629,8 @@ namespace XenAdmin
             }
         }
 
-        private void connection_CachePopulatedOnStartup(object sender, EventArgs e)
+        private void connection_CachePopulatedOnStartup(IXenConnection c)
         {
-            IXenConnection c = (IXenConnection)sender;
             c.CachePopulated -= connection_CachePopulatedOnStartup;
             if (expandTreeNodesOnStartup)
                 TrySelectNewNode(c, false, true, false);
@@ -639,9 +638,8 @@ namespace XenAdmin
             Program.Invoke(this, ShowAboutDialogOnStartup);
         }
 
-        private void Connection_ConnectionStateChangedOnStartup(object sender, EventArgs e)
+        private void Connection_ConnectionStateChangedOnStartup(IXenConnection c)
         {
-            IXenConnection c = (IXenConnection)sender;
             c.ConnectionStateChanged -= Connection_ConnectionStateChangedOnStartup;
 
             Program.Invoke(Program.MainWindow, delegate
@@ -842,11 +840,8 @@ namespace XenAdmin
         /// In many cases this is already covered (e.g. if the user explicitly disconnects). This method ensures we also
         /// do it when we unexpectedly lose the connection.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void connection_ClearingCache(object sender, EventArgs e)
+        private void connection_ClearingCache(IXenConnection connection)
         {
-            IXenConnection connection = (IXenConnection)sender;
             CloseActiveWizards(connection);
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
             Updates.CheckServerPatches();
@@ -855,12 +850,8 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        void connection_CachePopulated(object sender, EventArgs e)
+        void connection_CachePopulated(IXenConnection connection)
         {
-            IXenConnection connection = sender as IXenConnection;
-            if (connection == null)
-                return;
-
             Host master = Helpers.GetMaster(connection);
             if (master == null)
                 return;
@@ -1199,18 +1190,18 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        private void Connection_ConnectionClosed(object sender, EventArgs e)
+        private void Connection_ConnectionClosed(IXenConnection conn)
         {
             RequestRefreshTreeView();
             gc();
         }
 
         // called whenever our connection with the Xen server fails (i.e., after we've successfully logged in)
-        private void Connection_ConnectionLost(object sender, EventArgs e)
+        private void Connection_ConnectionLost(IXenConnection conn)
         {
             if (Program.Exiting)
                 return;
-            Program.Invoke(this, () => CloseActiveWizards((IXenConnection)sender));
+            Program.Invoke(this, () => CloseActiveWizards(conn));
             RequestRefreshTreeView();
             gc();
         }
@@ -1220,7 +1211,7 @@ namespace XenAdmin
             GC.Collect();
         }
 
-        void connection_ConnectionReconnecting(object sender, EventArgs e)
+        void connection_ConnectionReconnecting(IXenConnection conn)
         {
             if (Program.Exiting)
                 return;

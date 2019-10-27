@@ -47,18 +47,18 @@ namespace XenAdmin.Network
         bool ExpectDisruption { get; set; }
         int Port { get; set; }
         string FriendlyName { get; set; }
-        event EventHandler<EventArgs> BeforeConnectionEnd;
         bool CacheIsPopulated { get; }
-        event EventHandler<EventArgs> CachePopulated;
-        event EventHandler<EventArgs> ClearingCache;
-        event EventHandler<EventArgs> ConnectionClosed;
-        event EventHandler<EventArgs> ConnectionLost;
-        event EventHandler<EventArgs> ConnectionReconnecting;
+        event Action<IXenConnection> CachePopulated;
+        event Action<IXenConnection> ClearingCache;
+        event Action<IXenConnection> BeforeConnectionEnd;
+        event Action<IXenConnection> ConnectionClosed;
+        event Action<IXenConnection> ConnectionLost;
+        event Action<IXenConnection> ConnectionReconnecting;
         event EventHandler<ConnectionResultEventArgs> ConnectionResult;
-        event EventHandler<EventArgs> ConnectionStateChanged;
-        event EventHandler<ConnectionMessageChangedEventArgs> ConnectionMessageChanged;
-        event EventHandler<ConnectionMajorChangeEventArgs> BeforeMajorChange;
-        event EventHandler<ConnectionMajorChangeEventArgs> AfterMajorChange;
+        event Action<IXenConnection> ConnectionStateChanged;
+        event Action<IXenConnection, string> ConnectionMessageChanged;
+        event Action<IXenConnection, bool> BeforeMajorChange;
+        event Action<IXenConnection, bool> AfterMajorChange;
         Session DuplicateSession();
         Session DuplicateSession(int timeout);
         void EndConnect(bool resetState = true, bool exiting = false);
@@ -119,26 +119,6 @@ namespace XenAdmin.Network
             this.Connected = connected;
             this.Reason = reason;
             this.Error = error;
-        }
-    }
-
-    public class ConnectionMessageChangedEventArgs : EventArgs
-    {
-        public string Message;
-
-        public ConnectionMessageChangedEventArgs(string message)
-        {
-            this.Message = message;
-        }
-    }
-
-    public class ConnectionMajorChangeEventArgs : EventArgs
-    {
-        public bool Background;
-
-        public ConnectionMajorChangeEventArgs(bool background)
-        {
-            this.Background = background;
         }
     }
 }

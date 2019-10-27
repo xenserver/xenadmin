@@ -39,6 +39,7 @@ using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 
 
 namespace XenAdmin.Controls
@@ -145,7 +146,7 @@ namespace XenAdmin.Controls
                 if (vbds == null)
                 {
                     // let's come back when the cache is populated
-                    VM.Connection.CachePopulated += new EventHandler<EventArgs>(CachePopulatedMethod);
+                    VM.Connection.CachePopulated += CachePopulatedMethod;
                     return;
                 }
                 vbds.RemoveAll(vbd => !vbd.IsCDROM() && !vbd.IsFloppyDrive());
@@ -228,7 +229,7 @@ namespace XenAdmin.Controls
             refreshDrives();
         }
 
-        private void CachePopulatedMethod(object sender, EventArgs args)
+        private void CachePopulatedMethod(IXenConnection conn)
         {
             VM.Connection.CachePopulated -= CachePopulatedMethod;
             refreshDrives();

@@ -219,9 +219,8 @@ namespace XenAdmin.Dialogs
                 XenConnectionUI.BeginConnect(conn, true, Owner, false);
         }
 
-        private void conn_CachePopulated(object sender, EventArgs e)
+        private void conn_CachePopulated(IXenConnection conn)
         {
-            IXenConnection conn = (IXenConnection)sender;
             conn.CachePopulated -= conn_CachePopulated;
             OnCachePopulated(conn);
         }
