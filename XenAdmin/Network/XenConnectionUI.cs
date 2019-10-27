@@ -212,7 +212,7 @@ namespace XenAdmin.Network
             }
             else if (error is WebException w)
             {
-                if (((XenConnection)connection).SupressErrors)
+                if (((XenConnection)connection).SuppressErrors)
                     return;
 
                 var solutionCheckXenServer = 
@@ -291,7 +291,7 @@ namespace XenAdmin.Network
             }
             else
             {
-                if (((XenConnection)connection).SupressErrors)
+                if (((XenConnection)connection).SuppressErrors)
                     return;
 
                 AddError(owner, connection, string.Format(Messages.ERROR_UNKNOWN, ((XenConnection)connection).Hostname), Messages.SOLUTION_UNKNOWN);

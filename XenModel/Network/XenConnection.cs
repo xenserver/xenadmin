@@ -88,10 +88,14 @@ namespace XenAdmin.Network
         public bool ExpectPasswordIsCorrect { get; set; }
 
         /// <summary>
-        /// Used by the patch wizard, supress any errors coming from reconnect attempts
+        /// Used by the patch wizard, suppress any errors coming from reconnect attempts
         /// </summary>
-        private volatile bool _supressErrors = false;
-        public bool SupressErrors { get { return _supressErrors; } set { _supressErrors = value; } }
+        private volatile bool _suppressErrors;
+        public bool SuppressErrors
+        {
+            get => _suppressErrors;
+            set => _suppressErrors = value;
+        }
 
         /// <summary>
         /// Indicates whether we are expecting the pool master to change soon (e.g. when explicitly designating a new master).
