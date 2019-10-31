@@ -2145,6 +2145,9 @@ This is a potentially dangerous operation and is not allowed.</value>
   <data name="BIOS_BOOT" xml:space="preserve">
     <value>BIOS Boot</value>
   </data>
+  <data name="BIOS_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>The BIOS boot mode is not supported with the selected template.</value>
+  </data>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS strings copied</value>
   </data>
@@ -3245,14 +3248,6 @@ You can only connect to a single [Citrix XenServer] Express Edition server at a 
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>Control domain on host {0}</value>
   </data>
-  <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
-    <value>This action will clear all the completed conversions from the Conversion Manager virtual appliance history.
-
-This action cannot be undone. Are you sure you want to continue?</value>
-  </data>
-  <data name="CONVERSION_CLEAR_HISTORY_FAILURE" xml:space="preserve">
-    <value>Cannot clear the conversion history. Please see logs for details.</value>
-  </data>
   <data name="CONVERSION_CANCEL_CONFIRM" xml:space="preserve">
     <value>Are you sure you want to cancel this conversion?</value>
   </data>
@@ -3264,6 +3259,14 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_CANNOT_OBTAIN_VPX_IP" xml:space="preserve">
     <value>Cannot obtain an IP address for the Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
+    <value>This action will clear all the completed conversions from the Conversion Manager virtual appliance history.
+
+This action cannot be undone. Are you sure you want to continue?</value>
+  </data>
+  <data name="CONVERSION_CLEAR_HISTORY_FAILURE" xml:space="preserve">
+    <value>Cannot clear the conversion history. Please see logs for details.</value>
   </data>
   <data name="CONVERSION_CONNECTING_VMWARE" xml:space="preserve">
     <value>Connecting to the VMware server...</value>
@@ -3325,11 +3328,11 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_EXPORT" xml:space="preserve">
     <value>Export conversions to {0}</value>
   </data>
-  <data name="CONVERSION_EXPORTING" xml:space="preserve">
-    <value>Exporting conversions to {0}...</value>
-  </data>
   <data name="CONVERSION_EXPORTED" xml:space="preserve">
     <value>Exported conversions to {0}</value>
+  </data>
+  <data name="CONVERSION_EXPORTING" xml:space="preserve">
+    <value>Exporting conversions to {0}...</value>
   </data>
   <data name="CONVERSION_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of conversions. Do you want to export all conversions, or only the conversions you have chosen to view?</value>
@@ -3343,14 +3346,14 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_LOG_SAVE" xml:space="preserve">
     <value>Save conversion log to {0}</value>
   </data>
+  <data name="CONVERSION_LOG_SAVED" xml:space="preserve">
+    <value>Saved conversion log to {0}</value>
+  </data>
   <data name="CONVERSION_LOG_SAVE_TITLE" xml:space="preserve">
     <value>Save Conversion Log</value>
   </data>
   <data name="CONVERSION_LOG_SAVING" xml:space="preserve">
     <value>Saving conversion log to {0}</value>
-  </data>
-  <data name="CONVERSION_LOG_SAVED" xml:space="preserve">
-    <value>Saved conversion log to {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
     <value>Manage Conversions - {0}</value>
@@ -3373,19 +3376,28 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_NETWORK_PAGE_TITLE" xml:space="preserve">
     <value>Optionally, select [XenServer] networks to connect the VMs</value>
   </data>
-  <data name="CONVERSION_RETRY_FAILURE" xml:space="preserve">
-    <value>Cannot retry the conversion. Please see logs for details.</value>
-  </data>
   <data name="CONVERSION_RBAC_RESTRICTION" xml:space="preserve">
     <value>A {0} user does not have sufficient permissions to run the Conversion Manager. Please login using an account with one of the following roles:
 
 {1}</value>
   </data>
+  <data name="CONVERSION_RETRY_FAILURE" xml:space="preserve">
+    <value>Cannot retry the conversion. Please see logs for details.</value>
+  </data>
   <data name="CONVERSION_SELECT_VPX_TITLE" xml:space="preserve">
     <value>Select Conversion Manager Virtual Appliance - {0}</value>
   </data>
+  <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
   <data name="CONVERSION_STATUS_CREATED" xml:space="preserve">
     <value>Created</value>
+  </data>
+  <data name="CONVERSION_STATUS_FAILED" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="CONVERSION_STATUS_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
   </data>
   <data name="CONVERSION_STATUS_QUEUED" xml:space="preserve">
     <value>Queued</value>
@@ -3396,26 +3408,17 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_STATUS_SUCCESSFUL" xml:space="preserve">
     <value>Complete</value>
   </data>
-  <data name="CONVERSION_STATUS_FAILED" xml:space="preserve">
-    <value>Failed</value>
-  </data>
-  <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
-    <value>Canceled</value>
-  </data>
-  <data name="CONVERSION_STATUS_INCOMPLETE" xml:space="preserve">
-    <value>Incomplete</value>
-  </data>
   <data name="CONVERSION_STORAGE_PAGE_FREE_SPACE" xml:space="preserve">
     <value>Free space {0}</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS" xml:space="preserve">
     <value>Retrieving available SRs...</value>
   </data>
-  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE" xml:space="preserve">
-    <value>Failed to retrieve available SRs</value>
-  </data>
   <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY" xml:space="preserve">
     <value>There are no SR locations that can accommodate the disks for the converted VMs</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE" xml:space="preserve">
+    <value>Failed to retrieve available SRs</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Required space {0}</value>
@@ -3486,11 +3489,11 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_VPX_START" xml:space="preserve">
     <value>Starting the Conversion Manager virtual appliance...</value>
   </data>
-  <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
-    <value>Un-pausing the Conversion Manager virtual appliance...</value>
-  </data>
   <data name="CONVERSION_VPX_UNKNOWN_POWER_STATE" xml:space="preserve">
     <value>Cannot deduce the power state of the Conversion Manager virtual appliance.</value>
+  </data>
+  <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
+    <value>Un-pausing the Conversion Manager virtual appliance...</value>
   </data>
   <data name="CONVERSION_WIZARD_TEXT" xml:space="preserve">
     <value>New Conversion</value>
@@ -4496,6 +4499,9 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>Display options</value>
+  </data>
+  <data name="DMC" xml:space="preserve">
+    <value>Dynamic Memory Control</value>
   </data>
   <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
     <value>The Dynamic Memory Control (DMC) is not available due to license restrictions on the server.</value>
@@ -6921,6 +6927,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>The exported files are incomplete or in an unrecognised format.</value>
   </data>
+  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
+    <value>The Fixup ISO cannot be copied to the selected SR</value>
+  </data>
   <data name="IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR" xml:space="preserve">
     <value>[Choose an ISO SR]</value>
   </data>
@@ -6944,9 +6953,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>The Fixup ISO will be automatically copied to the selected SR</value>
-  </data>
-  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
-    <value>The Fixup ISO cannot be copied to the selected SR</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>Could not find the appliance certificate. The file is missing.</value>
@@ -10617,9 +10623,6 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>Proxy servers are not supported.</value>
   </data>
-  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Guest compatibility check</value>
-  </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS-Accelerator configuration - '{0}'</value>
   </data>
@@ -10667,6 +10670,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
     <value>[Citrix VM Tools] out of date</value>
+  </data>
+  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Guest compatibility check</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS limit must be between 1 and 2147483647 (or left empty).</value>
@@ -14357,6 +14363,9 @@ Are you sure you want to enable automated power management for this Host?</value
   <data name="XENSERVER_6_5" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
   </data>
+  <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
+  </data>
   <data name="XENSERVER_LEGACY" xml:space="preserve">
     <value>[Legacy XenServer product]</value>
   </data>
@@ -14406,14 +14415,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="DMC" xml:space="preserve">
-    <value>Dynamic Memory Control</value>
-  </data>
-  <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
-  </data>
-  <data name="BIOS_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
-    <value>The BIOS boot mode is not supported with the selected template.</value>
   </data>
 </root>
