@@ -1919,6 +1919,13 @@ namespace XenAPI
                 platform.ContainsKey("device-model") &&
                 platform["device-model"] == "qemu-upstream-compat";
         }
+        /// <summary>
+        /// Whether the VM's boot mode can be changed. A VM's boot mode cannot be changed once the VM has been started.
+        /// </summary>
+        public bool CanChangeBootMode()
+        {
+            return last_boot_CPU_flags == null || last_boot_CPU_flags.Count == 0;
+        }
     }
 
     public struct VMStartupOptions

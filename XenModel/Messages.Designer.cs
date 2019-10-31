@@ -5905,6 +5905,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The BIOS boot mode is not supported with the selected template..
+        /// </summary>
+        public static string BIOS_BOOT_MODE_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("BIOS_BOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BIOS strings copied.
         /// </summary>
         public static string BIOS_STRINGS_COPIED {

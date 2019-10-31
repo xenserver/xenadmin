@@ -14413,4 +14413,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="XENSERVER_8_1" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_8_1]</value>
   </data>
+  <data name="BIOS_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>The BIOS boot mode is not supported with the selected template.</value>
+  </data>
 </root>
