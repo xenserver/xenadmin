@@ -196,7 +196,6 @@ namespace XenAdmin.Wizards
                     return;
 
                 wizardFinished = true;
-                WizardProgress_EnteringStep(null, new WizardProgressEventArgs(true));
                 FinishWizard();
             }
             else
