@@ -103,7 +103,7 @@ namespace XenCenterLib
                 hashAlgorithm.TransformBlock(buffer, 0, bytesRead / 2, buffer, 0);
 
                 // Compute the final hash.
-                hashAlgorithm.TransformFinalBlock(buffer, bytesRead / 2, bytesRead / 2);
+                hashAlgorithm.TransformFinalBlock(buffer, bytesRead / 2, bytesRead / 2 + bytesRead % 2);
 
                 return cryptoServiceProvider == null
                     ? digest.SequenceEqual(hashAlgorithm.Hash)

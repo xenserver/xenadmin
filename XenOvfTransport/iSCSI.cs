@@ -283,7 +283,7 @@ namespace XenOvfTransport
                     hashAlgorithm.TransformBlock(_buffer, 0, bytesRead / 2, _buffer, 0);
 
                     // Compute the final hash.
-                    hashAlgorithm.TransformFinalBlock(_buffer, bytesRead / 2, bytesRead / 2);
+                    hashAlgorithm.TransformFinalBlock(_buffer, bytesRead / 2, bytesRead / 2 + bytesRead % 2);
 
                     _copyHash = hashAlgorithm.Hash;
                 }
@@ -354,7 +354,7 @@ namespace XenOvfTransport
                 hashAlgorithm.TransformBlock(_buffer, 0, bytesRead / 2, _buffer, 0);
 
                 // Compute the final hash.
-                hashAlgorithm.TransformFinalBlock(_buffer, bytesRead / 2, bytesRead / 2);
+                hashAlgorithm.TransformFinalBlock(_buffer, bytesRead / 2, bytesRead / 2 + bytesRead % 2);
 
                 // Compare targetHash with copyHash.
                 if (!System.Linq.Enumerable.SequenceEqual(_copyHash, hashAlgorithm.Hash))
