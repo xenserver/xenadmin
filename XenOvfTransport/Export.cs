@@ -336,9 +336,9 @@ namespace XenOvfTransport
                     OVF.AddOtherSystemSettingData(ovfEnv, vsId, "VM_has_vendor_device", vm.has_vendor_device.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
 
-                if (vm.VGPUs.Count != 0)
+                foreach(XenRef<VGPU> gpuRef in vm.VGPUs)
                 {
-                    VGPU vgpu = VGPU.get_record(xenSession, vm.VGPUs[0]);
+                    VGPU vgpu = VGPU.get_record(xenSession, gpuRef);
 
                     if (vgpu != null)
                     {
@@ -352,7 +352,7 @@ namespace XenOvfTransport
                                             : string.Join(";", vgpuGroup.GPU_types));
                         sb.AppendFormat("VGPU_type_vendor_name={0};", vgpuType.vendor_name ?? "");
                         sb.AppendFormat("VGPU_type_model_name={0};", vgpuType.model_name ?? "");
-                        OVF.AddOtherSystemSettingData(ovfEnv, vsId, "vgpu", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_4"));
+                        OVF.AddOtherSystemSettingData(ovfEnv, vsId, "vgpu", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_4"), true);
                     }
                 }
 
