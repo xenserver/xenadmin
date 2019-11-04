@@ -1047,9 +1047,9 @@ namespace XenOvf
             log.DebugFormat("OVF.AddOperatingSystemSection completed {0}", vsId);
         }
 
-		public static string AddOtherSystemSettingData(EnvelopeType ovfObj, string vsId, string name, string value, string description)
+		public static string AddOtherSystemSettingData(EnvelopeType ovfObj, string vsId, string name, string value, string description, bool permitMultiple=false)
         {
-            return AddOtherSystemSettingData(ovfObj, vsId, Properties.Settings.Default.Language, name, value, description);
+            return AddOtherSystemSettingData(ovfObj, vsId, Properties.Settings.Default.Language, name, value, description, permitMultiple);
         }
         /// <summary>
         /// Add XEN Specific configuration Items.
@@ -1059,7 +1059,8 @@ namespace XenOvf
         /// <param name="name">Name of Parameter: is:  HVM-boot-policy (case sensitive)</param>
         /// <param name="value">value for the parameter</param>
         /// <param name="description">Description of parameter</param>
-		public static string AddOtherSystemSettingData(EnvelopeType ovfObj, string vsId, string lang, string name, string value, string description)
+        /// <param name="permitMultiple">Whether the setting data permit multiple values, default false</param>
+        public static string AddOtherSystemSettingData(EnvelopeType ovfObj, string vsId, string lang, string name, string value, string description, bool permitMultiple=false)
         {
             VirtualHardwareSection_Type[] vhsArray = FindVirtualHardwareSection(ovfObj, vsId);
             VirtualHardwareSection_Type vhs = null;
@@ -1087,8 +1088,9 @@ namespace XenOvf
             {
                 foreach (Xen_ConfigurationSettingData_Type xencsd in vhs.VirtualSystemOtherConfigurationData)
                 {
-                    // if we already have the item skip it here, new replaces old.
-                    if (xencsd.Name.ToLower() != name.ToLower())
+                    // If permitMultiple, the old items are kept, and the new item will be added later,
+                    // otherwise, the old item is skipped here and will be overridden by the new one
+                    if (permitMultiple || xencsd.Name.ToLower() != name.ToLower())
                     {
                         xencfg.Add(xencsd);
                     }

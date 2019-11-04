@@ -334,18 +334,28 @@ namespace XenOvfTransport
 
                 #region Set vgpu
                 
-                GPU_group gpuGroup;              
-                VGPU_type vgpuType;
-                FindGpuGroupAndVgpuType(xenSession, vhs, out gpuGroup, out vgpuType);
-
-                if (gpuGroup != null)
+                List<Tuple<GPU_group, VGPU_type> >vgpus = FindGpuGroupAndVgpuType(xenSession, vhs);
+                foreach (var item in vgpus)
                 {
-                    var other_config = new Dictionary<string, string>();
+                    GPU_group gpuGroup = item.Item1;
+                    VGPU_type vgpuType = item.Item2;
+                    if (gpuGroup != null)
+                    {
+                        var other_config = new Dictionary<string, string>();
 
-                    if (Helpers.FeatureForbidden(xenSession, Host.RestrictVgpu))
-                        VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config);
-                    else if (vgpuType != null)
-                        VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config, vgpuType.opaque_ref);
+                        if (Helpers.FeatureForbidden(xenSession, Host.RestrictVgpu))
+                        {
+                            // The host does not support vGPU feature, so we create passthrough (default vGPU type) vGPU type
+                            // for the VM. However, passthrough vGPU type does not support multiple at this moment, so we only
+                            // create one vGPU for the VM and ignore the others. The limitation need to be released if multiple
+                            // passthrough can be supported
+                            log.Debug("The host license does not support vGPU, create one passthrough vGPU for the VM");
+                            VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config);
+                            break;
+                        }
+                        else if (vgpuType != null)
+                            VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config, vgpuType.opaque_ref);
+                    }
                 }
 
                 #endregion
@@ -1293,6 +1303,10 @@ namespace XenOvfTransport
 	                    case "nvram":
 		                    newVm.NVRAM = SplitStringIntoDictionary(xcsd.Value.Value);
 		                    break;
+                        case "vgpu":
+                            // Skip vGPUs here and do not put vGPUs into the hashtable,
+                            // as the vGPUs are updated in #region Set vgpu
+                            break;
                         default:
                             hashtable.Add(key, xcsd.Value.Value);
                             break;
@@ -1317,49 +1331,52 @@ namespace XenOvfTransport
         public static Regex VGPU_REGEX = new Regex("^GPU_types={(.*)};VGPU_type_vendor_name=(.*);VGPU_type_model_name=(.*);$");
         public static Regex PVS_SITE_REGEX = new Regex("^PVS_SITE={uuid=(.*)};$");
 
-        private void FindGpuGroupAndVgpuType(Session xenSession, VirtualHardwareSection_Type system, out GPU_group gpuGroup, out VGPU_type vgpuType)
+        private List<Tuple<GPU_group, VGPU_type>> FindGpuGroupAndVgpuType(Session xenSession, VirtualHardwareSection_Type system)
         {
-            gpuGroup = null;
-            vgpuType = null;
+            List<Tuple<GPU_group, VGPU_type>> vgpus = new List<Tuple<GPU_group, VGPU_type>>();
 
             var data = system.VirtualSystemOtherConfigurationData;
             if (data == null)
-                return;
+                return vgpus;
 
-            var datum = data.FirstOrDefault(s => s.Name == "vgpu");
-            if (datum == null)
-                return;
+            var datum = data.Where(s => s.Name == "vgpu");
 
-            Match m = VGPU_REGEX.Match(datum.Value.Value);
-            if (!m.Success)
-                return;
+            foreach (var item in datum)
+            {
+                Match m = VGPU_REGEX.Match(item.Value.Value);
+                if (!m.Success)
+                    continue;
+                var types = m.Groups[1].Value.Split(';');
 
-            var types = m.Groups[1].Value.Split(';');
+                var gpuGroups = GPU_group.get_all_records(xenSession);
+                var gpuKvp = gpuGroups.FirstOrDefault(g =>
+                    g.Value.supported_VGPU_types.Count > 0 &&
+                    g.Value.GPU_types.Length == types.Length &&
+                    g.Value.GPU_types.Intersect(types).Count() == types.Length);
 
-            var gpuGroups = GPU_group.get_all_records(xenSession);
-            var gpuKvp = gpuGroups.FirstOrDefault(g =>
-                g.Value.supported_VGPU_types.Count > 0 &&
-                g.Value.GPU_types.Length == types.Length &&
-                g.Value.GPU_types.Intersect(types).Count() == types.Length);
+                if (gpuKvp.Equals(default(KeyValuePair<XenRef<GPU_group>, GPU_group>)))
+                    continue;
 
-            if (gpuKvp.Equals(default(KeyValuePair<XenRef<GPU_group>, GPU_group>)))
-                return;
+                var gpuGroup = gpuKvp.Value;
+                VGPU_type vgpuType = null;
 
-            gpuGroup = gpuKvp.Value;
-            gpuGroup.opaque_ref = gpuKvp.Key.opaque_ref;
+                gpuGroup.opaque_ref = gpuKvp.Key.opaque_ref;
 
-            string vendorName = m.Groups[2].Value;
-            string modelName = m.Groups[3].Value;
+                string vendorName = m.Groups[2].Value;
+                string modelName = m.Groups[3].Value;
 
-            var vgpuTypes = VGPU_type.get_all_records(xenSession);
-            var vgpuKey = vgpuTypes.FirstOrDefault(v =>
-                v.Value.vendor_name == vendorName && v.Value.model_name == modelName);
+                var vgpuTypes = VGPU_type.get_all_records(xenSession);
+                var vgpuKey = vgpuTypes.FirstOrDefault(v =>
+                    v.Value.vendor_name == vendorName && v.Value.model_name == modelName);
 
-            if (vgpuKey.Equals(default(KeyValuePair<XenRef<VGPU_type>, VGPU_type>)))
-                return;
-
-            vgpuType = vgpuKey.Value;
-            vgpuType.opaque_ref = vgpuKey.Key.opaque_ref;
+                if (!vgpuKey.Equals(default(KeyValuePair<XenRef<VGPU_type>, VGPU_type>)))
+                {
+                    vgpuType = vgpuKey.Value;
+                    vgpuType.opaque_ref = vgpuKey.Key.opaque_ref;
+                }
+                vgpus.Add(new Tuple<GPU_group, VGPU_type>(gpuGroup, vgpuType));
+            }
+            return vgpus;
         }
 
         private PVS_site FindPvsSite(Session xenSession, VirtualHardwareSection_Type system)
