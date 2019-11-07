@@ -526,18 +526,18 @@ namespace XenAdmin.Dialogs
 
         private string[] GetDetailValues(Conversion conversion)
         {
-            var startTime = conversion.StartTime.ToLocalTime();
-            var finishTime = conversion.CompletedTime >= conversion.StartTime ? conversion.CompletedTime.ToLocalTime() : DateTime.Now;
+            GetConversionLocalTimes(conversion, out DateTime? startTime, out DateTime? finishTime, out TimeSpan? duration);
 
             var startTimeString = Messages.HYPHEN;
             var finishTimeString = Messages.HYPHEN;
 
             Program.Invoke(this, () =>
             {
-                startTimeString = HelpersGUI.DateTimeToString(startTime, Messages.DATEFORMAT_DMY_HM, true);
+                if (startTime.HasValue)
+                    startTimeString = HelpersGUI.DateTimeToString(startTime.Value, Messages.DATEFORMAT_DMY_HM, true);
 
-                if (conversion.CompletedTime >= conversion.StartTime)
-                    finishTimeString = HelpersGUI.DateTimeToString(finishTime, Messages.DATEFORMAT_DMY_HM, true);
+                if (finishTime.HasValue)
+                    finishTimeString = HelpersGUI.DateTimeToString(finishTime.Value, Messages.DATEFORMAT_DMY_HM, true);
             });
 
             var statusDetail = conversion.StatusDetail;
@@ -550,12 +550,33 @@ namespace XenAdmin.Dialogs
                 conversion.SRName,
                 string.Format(Messages.CONVERSION_DETAIL_NETWORK_READ_COMPRESSED, Util.DiskSizeString(conversion.CompressedBytesRead)),
                 Util.DiskSizeString(conversion.UncompressedBytesWritten),
-                startTimeString,
+                startTimeString, 
                 finishTimeString,
-                (finishTime - startTime).ToString(@"h\:mm\:ss"),
+                duration.HasValue ? duration.Value.ToString(@"h\:mm\:ss") : Messages.HYPHEN,
                 conversion.GetStatusString(),
                 statusDetail
             };
+        }
+
+        private static void GetConversionLocalTimes(Conversion conversion,
+            out DateTime? startTime, out DateTime? finishTime, out TimeSpan? duration)
+        {
+            var now = DateTime.Now;
+
+            startTime = conversion.StartTime.ToLocalTime();
+            if (now < startTime)
+                startTime = null;
+
+            finishTime = conversion.CompletedTime.ToLocalTime();
+            if (conversion.StartTime > conversion.CompletedTime)
+                finishTime = null;
+
+            if (startTime.HasValue && finishTime.HasValue)
+                duration = finishTime - startTime;
+            else if (startTime.HasValue)
+                duration = now - startTime;
+            else
+                duration = null;
         }
 
         private void FetchLogs(Conversion? conversion = null)
@@ -956,10 +977,14 @@ namespace XenAdmin.Dialogs
                 cellSourceVm.Value = conversion.Configuration.SourceVmName;
                 cellsourceServer.Value = conversion.Configuration.SourceServer.Hostname;
 
-                cellStartTime.Value = HelpersGUI.DateTimeToString(conversion.StartTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
+                GetConversionLocalTimes(conversion, out DateTime? startTime, out DateTime? finishTime, out _);
 
-                cellFinishTime.Value = conversion.CompletedTime >= conversion.StartTime
-                    ? HelpersGUI.DateTimeToString(conversion.CompletedTime.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true)
+                cellStartTime.Value = startTime.HasValue
+                    ? HelpersGUI.DateTimeToString(startTime.Value, Messages.DATEFORMAT_DMY_HM, true)
+                    : Messages.HYPHEN;
+
+                cellFinishTime.Value = finishTime.HasValue
+                    ? HelpersGUI.DateTimeToString(finishTime.Value, Messages.DATEFORMAT_DMY_HM, true)
                     : Messages.HYPHEN;
 
                 cellStatus.Value = Images.GetImageFor(conversion);
