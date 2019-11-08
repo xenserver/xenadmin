@@ -254,7 +254,6 @@ namespace XenAdmin.Controls.MainWindowControls
             catch (Exception e)
             {
                 log.Debug("Exception thrown by target of MajorChange.", e);
-                log.Debug(e, e);
                 throw;
             }
             finally

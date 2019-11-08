@@ -72,8 +72,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            log.Debug("Running SR repair");
-            log.DebugFormat("SR='{0}'", SR.Name());
+            log.DebugFormat("Repairing SR='{0}'", SR.Name());
 
             //CA-176935, CA-173497 - we need to run Plug for the master first - creating a new list of hosts where the master is always first
             var allHosts = new List<Host>();
@@ -101,10 +100,7 @@ namespace XenAdmin.Actions
                 return;
             }
 
-            for (int i = 0; i < _hostList.Count; i++)
-            {
-                log.DebugFormat("_hostList[{0}]='{1}'", i, _hostList[i].Name());
-            }
+            log.DebugFormat("_hostList: {0}", string.Join(",", _hostList.Select(s => s.Name())));
 
             int max = _hostList.Count * 2;
             int delta = 100 / max;

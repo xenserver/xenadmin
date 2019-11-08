@@ -172,7 +172,6 @@ namespace XenAdmin.Controls.XenSearch
             catch (Exception e)
             {
                 log.Debug("Exception firing OnQueryChanged in QueryElement", e);
-                log.Debug(e, e);
             }
         }
 

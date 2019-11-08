@@ -413,8 +413,7 @@ namespace XenAdmin
                     dlg.ShowDialog(Program.MainWindow);
                 }
 
-                log.Error("Could not save settings. Exiting application.");
-                log.Error(ex, ex);
+                log.Error("Could not save settings. Exiting application.", ex);
                 Application.Exit();
             }
 

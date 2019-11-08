@@ -1084,7 +1084,6 @@ namespace XenAdmin.Network
                     catch (Exception e)
                     {
                         log.Error("Exception updating cache.", e);
-                        log.Debug(e, e);
 #if DEBUG
                         if (System.Diagnostics.Debugger.IsAttached)
                             throw;
@@ -1103,7 +1102,6 @@ namespace XenAdmin.Network
                     catch (Exception e)
                     {
                         log.Error("Exception calling OnCachePopulated.", e);
-                        log.Debug(e, e);
 #if DEBUG
                         if (System.Diagnostics.Debugger.IsAttached)
                             throw;

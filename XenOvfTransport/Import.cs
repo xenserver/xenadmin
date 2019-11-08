@@ -827,10 +827,7 @@ namespace XenOvfTransport
         }
         private XenRef<VDI> UploadiSCSI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description, string vdiuuid)
         {
-            log.Debug("OVF.Import.UploadiSCSI Enter");
-            log.DebugFormat("OVF.Import.UploadiSCSI SRUUID: {0}", sruuid);
-            log.DebugFormat("OVF.Import.UploadiSCSI Label: {0}", label);
-            log.DebugFormat("OVF.Import.UploadiSCSI Capacity: {0}", capacity);
+            log.Debug($"OVF.Import.UploadiSCSI SRUUID: {sruuid}, Label: {label}, Capacity: {capacity}");
 
             XenRef<VDI> vdiRef = null;
 
@@ -884,11 +881,8 @@ namespace XenOvfTransport
 
         private XenRef<VDI> UploadiSCSIbyWimFile(Session xenSession, string sruuid, string label, WimFile wimDisk, int imageindex, long capacity, ulong wimFileCount, int arch, string description)
         {
-            log.Debug("OVF.Import.UploadiSCSIbyWimFile Enter");
-            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile SRUUID: {0}", sruuid);
-            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile Label: {0}", label);
-            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile ImageIndex: {0}", imageindex);
-            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile Capacity: {0}", capacity);
+            log.Debug($"OVF.Import.UploadiSCSIbyWimFile SRUUID: {sruuid}, Label: {label}, ImageIndex: {imageindex}, Capacity: {capacity}");
+
             string vdilabel = string.Format("{0}{1}", label, imageindex);
             XenRef<VDI> vdiRef = CreateVDI(xenSession, sruuid, vdilabel, capacity, description);
 
@@ -1100,10 +1094,7 @@ namespace XenOvfTransport
 
         private XenRef<VDI> UploadRawVDI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description)
         {
-            log.Debug("OVF.Import.UploadRawVDI Enter");
-            log.DebugFormat("OVF.Import.UpdoadRadVDI SRUUID: {0}", sruuid);
-            log.DebugFormat("OVF.Import.UpdoadRadVDI Label: {0}", label);
-            log.DebugFormat("OVF.Import.UpdoadRadVDI Capacity: {0}", capacity);
+            log.Debug($"OVF.Import.UploadRawVDI SRUUID: {sruuid}, Label: {label}, Capacity: {capacity}");
 
             #region CREATE A VDI
 
@@ -1816,11 +1807,13 @@ namespace XenOvfTransport
                                 }
                                 else
                                 {
-                                    log.WarnFormat("Import:  ================== ATTENTION NEEDED =======================");
-                                    log.WarnFormat("Import:  Could not determine appropriate number of device placement.");
-                                    log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", vmRef);
-                                    log.WarnFormat("Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +.");
-                                    log.Warn("Import:  ===========================================================");
+                                    log.WarnFormat(
+                                        "Import:  ================== ATTENTION NEEDED =======================" +
+                                        "Import:  Could not determine appropriate number of device placement." +
+                                        "Import:  Please Start, Logon, Shut down, System ({0})" +
+                                        "Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +." +
+                                        "Import:  ===========================================================", vmRef);
+
                                     OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
                                 }
                             }
@@ -2045,11 +2038,13 @@ namespace XenOvfTransport
                                     }
                                     else
                                     {
-                                        log.WarnFormat("Import:  ================== ATTENTION NEEDED =======================");
-                                        log.WarnFormat("Import:  Could not determine appropriate number for device placement.");
-                                        log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", vmName);
-                                        log.WarnFormat("Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}", vmName);
-                                        log.WarnFormat("Import:  ===========================================================");
+                                        log.WarnFormat(
+                                            "Import:  ================== ATTENTION NEEDED =======================" +
+                                            "Import:  Could not determine appropriate number for device placement." +
+                                            "Import:  Please Start, Logon, Shut down, System ({0})" +
+                                            "Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}" +
+                                            "Import:  ===========================================================",
+                                            vmName);
                                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
                                     }
                                 }

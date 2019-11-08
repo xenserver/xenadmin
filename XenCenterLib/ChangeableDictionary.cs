@@ -105,7 +105,6 @@ namespace XenCenterLib
                 catch (Exception e)
                 {
                     log.Debug("Exception firing batchCollectionChanged cache.", e);
-                    log.Debug(e, e);
 #if DEBUG
                     if (System.Diagnostics.Debugger.IsAttached)
                         throw;
