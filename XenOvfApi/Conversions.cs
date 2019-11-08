@@ -2012,7 +2012,7 @@ namespace XenOvf
 
                     if (deviceid == null)
                     {
-                        traceLog.Debug("No device id defined, continuing");
+                        log.Debug("No device id defined, continuing");
                         continue;
                     }
                     List<ManagementObject> ControllerAssociations = FindDeviceReferences("Win32_IDEControllerDevice", deviceid);
@@ -2033,7 +2033,7 @@ namespace XenOvf
                         }
                         if (_dependent == null)
                         {
-                            traceLog.Debug("PCI Association not available, continuing.");
+                            log.Debug("PCI Association not available, continuing.");
                             continue;
                         }
 
@@ -2135,7 +2135,7 @@ namespace XenOvf
                                 }
                                 if (_pnpdeviceid == null)
                                 {
-                                    traceLog.Debug("PNPDeviceID not available, continuing.");
+                                    log.Debug("PNPDeviceID not available, continuing.");
                                     continue;
                                 }
 
@@ -2198,7 +2198,7 @@ namespace XenOvf
                     }
                     if (_deviceid == null)
                     {
-                        traceLog.Debug("SCSI DeviceID not available, continuing.");
+                        log.Debug("SCSI DeviceID not available, continuing.");
                         continue;
                     }
 
@@ -2209,7 +2209,7 @@ namespace XenOvf
 
                     if (ControllerAssociations == null || ControllerAssociations.Count <= 0)
                     {
-                        traceLog.DebugFormat("No Controller associations for {0}", _deviceid);
+                        log.DebugFormat("No Controller associations for {0}", _deviceid);
                         continue;
                     }
 
@@ -2228,7 +2228,7 @@ namespace XenOvf
                         }
                         if (_dependent == null)
                         {
-                            traceLog.Debug("SCSI Association not available, continuing.");
+                            log.Debug("SCSI Association not available, continuing.");
                             continue;
                         }
 
@@ -2285,7 +2285,7 @@ namespace XenOvf
                                 }
                                 if (__deviceid == null)
                                 {
-                                    traceLog.Debug("SCSI DeviceID not available, continuing.");
+                                    log.Debug("SCSI DeviceID not available, continuing.");
                                     continue;
                                 }
 
@@ -2351,7 +2351,7 @@ namespace XenOvf
                                 }
                                 if (__deviceid == null)
                                 {
-                                    traceLog.Debug("SCSI DeviceID not available, continuing.");
+                                    log.Debug("SCSI DeviceID not available, continuing.");
                                     continue;
                                 }
 

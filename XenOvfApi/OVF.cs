@@ -48,8 +48,6 @@ namespace XenOvf
     public partial class OVF
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly log4net.ILog auditLog = log4net.LogManager.GetLogger("Audit");
-        private static readonly log4net.ILog traceLog = log4net.LogManager.GetLogger("Trace");
 
         /// <summary>
         /// Event Registration of changes in Ovf state.
@@ -2124,7 +2122,7 @@ namespace XenOvf
                     }
                 }
             }
-           traceLog.Debug("UpdateAnnotation Exit");
+           log.Debug("UpdateAnnotation Exit");
         }
         /// <summary>
         /// Add a CD/DVD Drive
@@ -5700,7 +5698,7 @@ namespace XenOvf
                 }
                 if (antecedent == null)
                 {
-                    traceLog.Debug("PCI Association not available, continuing.");
+                    log.Debug("PCI Association not available, continuing.");
                     continue;
                 }
                 #endregion
@@ -5735,7 +5733,7 @@ namespace XenOvf
                     }
                     if (_antecedent == null || _dependent == null)
                     {
-                        traceLog.Debug("Win32_DiskDriveToDiskPartition Association not available, continuing.");
+                        log.Debug("Win32_DiskDriveToDiskPartition Association not available, continuing.");
                         continue;
                     }
                     #endregion
@@ -5760,7 +5758,7 @@ namespace XenOvf
                             }
                             if (_deviceid == null)
                             {
-                                traceLog.Debug("Win32_DiskPartition DeviceID not available, continuing.");
+                                log.Debug("Win32_DiskPartition DeviceID not available, continuing.");
                                 continue;
                             }
                             #endregion
