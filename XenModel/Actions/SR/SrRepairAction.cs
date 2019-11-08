@@ -116,10 +116,9 @@ namespace XenAdmin.Actions
                     }
                 }
             }
-
             catch (Exception e)
             {
-                log.DebugFormat("Cluster pool resync failed with {0}", e.Message);
+                log.Debug("Cluster pool resync failed.", e);
             }
 
             foreach (Host host in _hostList)

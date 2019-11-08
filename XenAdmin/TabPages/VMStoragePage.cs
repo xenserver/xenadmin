@@ -260,7 +260,7 @@ namespace XenAdmin.TabPages
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Exception building VM storage list: {0}", e.Message);
+                log.Error("Exception while building the VM storage list.", e);
             }
             finally
             {

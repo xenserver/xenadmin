@@ -229,7 +229,7 @@ namespace XenAdmin.TabPages
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Encountered exception when building list: {0}", e);
+                log.Error("Encountered exception when building list.", e);
             }
             finally
             {

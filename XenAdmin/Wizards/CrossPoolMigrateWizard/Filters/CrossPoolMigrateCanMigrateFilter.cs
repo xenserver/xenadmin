@@ -189,7 +189,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     }
                     catch (Exception e)
                     {
-                        log.ErrorFormat("There was an error while asserting if the VM {0} can be migrated to {1}: {2}", vm.Name(), itemToFilterOn, e.Message);
+                        log.Error($"There was an error while asserting the VM {vm.Name()} can be migrated to {itemToFilterOn.Name()}:", e);
                         disableReason = Messages.HOST_MENU_UNKNOWN_ERROR;
                         vmIsMigratable = false;
                     }

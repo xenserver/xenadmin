@@ -50,8 +50,7 @@ namespace XenAdmin.Actions
 
     public class DownloadAndUnzipXenServerPatchAction : AsyncAction, IByteProgressAction
     {
-        private static readonly log4net.ILog log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS = 900;
         private const int SLEEP_TIME_BEFORE_RETRY_MS = 5000;
@@ -227,7 +226,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Exception occurred when extracting downloaded archive: {0}", e.Message);
+                log.Error("Exception occurred when extracting downloaded archive.", e);
                 throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR);
             }
             finally
@@ -284,7 +283,7 @@ namespace XenAdmin.Actions
                 }
                 catch (Exception e)
                 {
-                    log.ErrorFormat("Exception occurred when preparing archive: {0}", e.Message);
+                    log.Error("Exception occurred when preparing archive.", e);
                     throw;
                 }
             }

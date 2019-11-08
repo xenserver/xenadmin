@@ -163,9 +163,9 @@ namespace XenOvfTransport
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                log.Error("Could not determin LUN");
+                log.Error("Could not determine LUN", e);
                 throw;
             }
 
@@ -195,7 +195,7 @@ namespace XenOvfTransport
             }
             catch (Exception exn)
             {
-                log.DebugFormat("Failed to dispose iDisk: {0}. Continuing.", exn);
+                log.Debug("Failed to dispose iDisk. Continuing.", exn);
             }
 
             try
@@ -206,7 +206,7 @@ namespace XenOvfTransport
             }
             catch (Exception exn)
             {
-                log.DebugFormat("Failed to dispose iScsiSession: {0}. Continuing.", exn);
+                log.Debug("Failed to dispose iScsiSession. Continuing.", exn);
             }
 
             StopiScsiTarget(xenSession);

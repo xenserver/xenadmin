@@ -154,12 +154,12 @@ namespace XenOvfTransport
             }
             catch (EndOfStreamException eof)
             {
-                log.DebugFormat("Get::No Data: {0}", eof.Message);
+                log.Debug("OVF.Tools.Http.Get::No Data: ", eof);
             }
             catch (Exception ex)
             {
                 //marshal_response(http, tag.Failed);                
-                log.ErrorFormat("Get::Exception: {0}", ex.Message);
+                log.Error("OVF.Tools.Http.Get::Exception: ", ex);
             }
         }
 
@@ -347,8 +347,8 @@ namespace XenOvfTransport
                 }
                 catch (Exception ex)
                 {
-                    log.DebugFormat("EXCEPTION: {0} : {1}", ex.GetType(), ex.Message);
-                    throw new ReConnectException(string.Format("{0}", bytessent), ex);
+                    log.Debug(ex, ex);
+                    throw new ReConnectException($"Sent {bytessent} bytes.", ex);
                 }
 
                 string str1 = string.Format(">>> {0} <<< Block {1} : Total {2} : Full {3} Skipped: {4}\r",
@@ -403,7 +403,7 @@ namespace XenOvfTransport
                 }
                 catch (Exception ex)
                 {
-                    log.ErrorFormat("OVF.Tools.Http.SendData FAILED {0}", ex.Message);
+                    log.Error("OVF.Tools.Http.SendData failed.", ex);
                     throw;
                 }
             }

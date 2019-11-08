@@ -357,17 +357,17 @@ namespace XenAdmin.Actions
                 
                 // CA-33665: We found a situation before were the task handling had been messed up, we should check the exit code as a failsafe
 				if (exitCode != 0)
-					throw new Failure(new[] {Messages.IMPORT_GENERIC_FAIL});
+					throw new Failure(Messages.IMPORT_GENERIC_FAIL);
 
                 return Task.get_result(Session, RelatedTask);
             }
-            catch (Exception exn)
+            catch
             {
                 List<string> excep = TaskErrorInfo();
                 if (excep.Count > 0)
                     throw new Failure(excep);
                 else
-                    throw exn;
+                    throw;
             }
             finally
             {

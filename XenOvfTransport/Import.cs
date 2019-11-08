@@ -1668,7 +1668,7 @@ namespace XenOvfTransport
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    log.WarnFormat("Import.AddResourceSettingData: could not find SR: {0}", ex.Message);
+                                                    log.Warn("Import.AddResourceSettingData: could not find SR: ", ex);
                                                     isoUuid = null;
                                                 }
                                                 break;
@@ -1802,7 +1802,7 @@ namespace XenOvfTransport
                                     }
                                     catch (Exception ex)
                                     {
-                                        log.ErrorFormat("Import.AddResourceSettingData: {0}", ex.Message);
+                                        log.Error("Import.AddResourceSettingData: ", ex);
                                     }
                                 }
                                 else
@@ -2409,7 +2409,6 @@ namespace XenOvfTransport
 
         public bool IsKnownURIType(string filename)
         {
-            bool IsURI = false;
             string expression = Properties.Settings.Default.uriRegex;
             RegexStringValidator rsv = new RegexStringValidator(expression);
             if (rsv.CanValidate(filename.GetType()))
@@ -2417,17 +2416,15 @@ namespace XenOvfTransport
                 try
                 {
                     rsv.Validate(filename);
-                    IsURI = true;
-                    log.InfoFormat("Import.isURI: File: {0} is in URI format.", filename);
+                    log.InfoFormat("Import.isURI: File {0} is in URI format.", filename);
+                    return true;
                 }
                 catch
                 {
-                    log.InfoFormat("Import.isURI: File: {0} is not in URI format.", filename);
-                    IsURI = false;
+                    log.InfoFormat("Import.isURI: File {0} is not in URI format.", filename);
                 }
             }
-
-            return IsURI;
+            return false;
         }
         
         private void HideSystem(Session xenSession, XenRef<VM> vmRef)
@@ -2640,7 +2637,7 @@ namespace XenOvfTransport
         {
             if (e.Error != null)
             {
-                log.ErrorFormat("DownloadFileAsync: {0} ", e.Error.Message);
+                log.Error("DownloadFileAsync failure.", e.Error);
                 _downloadexception = e.Error;
             }
             log.Info("DownloadFileAsync: completed");

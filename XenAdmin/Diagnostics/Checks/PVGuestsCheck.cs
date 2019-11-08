@@ -73,7 +73,7 @@ namespace XenAdmin.Diagnostics.Checks
             }
             catch (Exception exception)
             {
-                log.WarnFormat("Plugin call prepare_host_upgrade.getVersion on {0} failed with {1}", Host.Name(), exception.Message);
+                log.Warn($"Plugin call prepare_host_upgrade.getVersion on {Host.Name()} threw an exception.", exception);
                 return new PoolHasPVGuestWarningUrl(this, _pool, _upgrade);
             }
             if (Helpers.QuebecOrGreater(upgradePlatformVersion))
