@@ -997,7 +997,7 @@
     <value>Transfer Health Check settings</value>
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
-    <value>Updating integrated GPU passthrough on '{0}'</value>
+    <value>Updating integrated GPU pass-through on '{0}'</value>
   </data>
   <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
     <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
@@ -1015,16 +1015,16 @@
     <value>Uploading report to [Citrix] Insight Services</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
-    <value>USB passthrough disabled</value>
+    <value>USB pass-through disabled</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
-    <value>Disabling USB passthrough for {0}</value>
+    <value>Disabling USB pass-through for {0}</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
-    <value>USB passthrough enabled</value>
+    <value>USB pass-through enabled</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
-    <value>Enabling USB passthrough for {0}</value>
+    <value>Enabling USB pass-through for {0}</value>
   </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>Virtual disk created</value>
@@ -1234,7 +1234,7 @@
     <value>Shut down</value>
   </data>
   <data name="ACTION_VM_SNAPSHOT_TITLE" xml:space="preserve">
-    <value>Snapshotting VM '{0}'...</value>
+    <value>Taking a snapshot of VM '{0}'...</value>
   </data>
   <data name="ACTION_VM_STARTED" xml:space="preserve">
     <value>Started</value>
@@ -1805,7 +1805,7 @@ This alarm is set to be triggered when network usage is more than {3}.</value>
   </data>
   <data name="ALERT_ALARM_SR_PHYSICAL_UTILISATION_DESCRIPTION" xml:space="preserve">
     <value>The physical utilization on {0} is about {1} of its capacity. 
-This alarm is set to be triggered when the physical utilisation of the SR goes above {2}.</value>
+This alarm is set to be triggered when the physical utilization of the SR goes above {2}.</value>
   </data>
   <data name="ALERT_ALARM_STORAGE" xml:space="preserve">
     <value>Storage Throughput Alarm</value>
@@ -2932,7 +2932,7 @@ Are you sure you want to export VM {2}?</value>
     <value>Rebooting a server will also shut down all the VMs running on it. '{0}' is running a storage virtual appliance and rebooting it might impact the availability of your storage. Are you sure you want to continue?</value>
   </data>
   <data name="CONFIRM_REBOOT_HCI_WARN_SERVERS" xml:space="preserve">
-    <value>Rebooting a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and rebooting them might impact the availablity of your storage:
+    <value>Rebooting a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and rebooting them might impact the availability of your storage:
 
 {0}
 
@@ -2988,7 +2988,7 @@ This will also shut down all the VMs currently running on them.</value>
     <value>Shutting down a server will also shut down all the VMs running on it. '{0}' is running a storage virtual appliance and shutting it down might impact the availability of your storage. Are you sure you want to continue?</value>
   </data>
   <data name="CONFIRM_SHUTDOWN_HCI_WARN_SERVERS" xml:space="preserve">
-    <value>Shutting down a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and shutting them down might impact the availablity of your storage:
+    <value>Shutting down a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and shutting them down might impact the availability of your storage:
 
 {0}
 
@@ -4350,22 +4350,22 @@ This will also delete its subfolders.</value>
     <value>No devices available</value>
   </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
-    <value>Disable passthrough</value>
+    <value>Disable pass-through</value>
   </data>
   <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
-    <value>Enable passthrough</value>
+    <value>Enable pass-through</value>
   </data>
   <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
-    <value>Are you sure that you want to enable passthrough on this device? This will allow this device to be passed through to virtual machines.</value>
+    <value>Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.</value>
   </data>
   <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
-    <value>Are you sure that you want to disable passthrough on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
+    <value>Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
   </data>
   <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
-    <value>&amp;Yes, Disable passthrough</value>
+    <value>&amp;Yes, Disable pass-through</value>
   </data>
   <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
-    <value>&amp;Yes, Enable passthrough</value>
+    <value>&amp;Yes, Enable pass-through</value>
   </data>
   <data name="DISABLE" xml:space="preserve">
     <value>Disa&amp;ble</value>
@@ -5938,7 +5938,7 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
     <value>Memory</value>
   </data>
   <data name="GENERAL_HEADING_MEMORY_VCPUS" xml:space="preserve">
-    <value>Memory and VCPUs</value>
+    <value>Memory and vCPUs</value>
   </data>
   <data name="GENERAL_HEADING_STATUS" xml:space="preserve">
     <value>Status</value>
@@ -6927,7 +6927,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>The server could not complete the import due to an unkown error.</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
-    <value>The exported files are incomplete or in an unrecognised format.</value>
+    <value>The exported files are incomplete or in an unrecognized format.</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>The Fixup ISO cannot be copied to the selected SR</value>
@@ -12921,10 +12921,10 @@ To start a [XenServer] trial, click the button below.</value>
     <value>USB</value>
   </data>
   <data name="USBLIST_DISABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
-    <value>&amp;Disable passthrough</value>
+    <value>&amp;Disable pass-through</value>
   </data>
   <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
-    <value>&amp;Enable passthrough</value>
+    <value>&amp;Enable pass-through</value>
   </data>
   <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
     <value>Cannot attach USB devices because the VM is currently protected by HA.</value>
@@ -13077,7 +13077,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>{0} - currently in use by '{1}'</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>The VCPUs can only be changed when the VM is shut down.</value>
+    <value>The vCPUs can only be changed when the VM is shut down.</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -13420,7 +13420,7 @@ Schedule:
     <value>This VM has a pass-through GPU assigned.</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
-    <value>Memory and/or VCPU changes will take effect when you restart the VM.</value>
+    <value>Memory and/or vCPU changes will take effect when you restart the VM.</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE" xml:space="preserve">
     <value>VM General Changes</value>
