@@ -111,7 +111,7 @@ namespace XenAdmin.Actions
             log.DebugFormat("Exporting {0} from {1} to {2}", VM.Name(), uriBuilder.ToString(), _filename);
 
             // The DownloadFile call will block, so we need a separate thread to poll for task status.
-            Thread taskThread = new Thread((ThreadStart)progressPoll);
+            Thread taskThread = new Thread(progressPoll);
             taskThread.Name = "Progress polling thread for ExportVmAction for " + VM.Name().Ellipsise(20);
             taskThread.IsBackground = true;
             taskThread.Start();
@@ -146,8 +146,8 @@ namespace XenAdmin.Actions
                 if (!Win32.FlushFileBuffers(fs.SafeFileHandle))
                 {
                     Win32Exception exn = new Win32Exception(System.Runtime.InteropServices.Marshal.GetLastWin32Error());
-                    log.ErrorFormat("FlushFileBuffers failed in ExportVmAction.\nNativeErrorCode={0}\nMessage={1}\nToString={2}",
-                        exn.NativeErrorCode, exn.Message, exn.ToString());
+                    log.Error(string.Format("FlushFileBuffers failed in ExportVmAction with NativeErrorCode={0}",
+                        exn.NativeErrorCode), exn);
                 }
             }
 
@@ -157,7 +157,7 @@ namespace XenAdmin.Actions
                 int i = 0;
                 long filesize = new FileInfo(tmpFile).Length / 50; //Div by 50 to save doing the * 50 in the callback
 
-                Export.verifyCallback callback = new Export.verifyCallback(delegate(uint size)
+                Export.verifyCallback callback = size =>
                     {
                         read += size;
                         i++;
@@ -169,7 +169,7 @@ namespace XenAdmin.Actions
                             PercentComplete = 50 + (int)(read / filesize);
                             i = 0;
                         }
-                    });
+                    };
 
                 try
                 {
@@ -179,7 +179,7 @@ namespace XenAdmin.Actions
                         this.Description = Messages.ACTION_EXPORT_VERIFY;
 
                         export = new Export();
-                        export.verify(fs, null, (Export.cancellingCallback)delegate() { return Cancelling; }, callback);
+                        export.verify(fs, null, () => Cancelling, callback);
                     }
                 }
                 catch (Exception e)
@@ -253,7 +253,7 @@ namespace XenAdmin.Actions
             {
                 using (Stream http = HTTPHelper.GET(uri, Connection, true, true))
                 {
-                    new Export().verify(http, fs, (Export.cancellingCallback)delegate() { return Cancelling; });
+                    new Export().verify(http, fs, () => Cancelling);
                 }
             }
         }

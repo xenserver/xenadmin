@@ -41,8 +41,6 @@ namespace XenCenterLib
 {
     public static class Win32
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         [DllImport("kernel32.dll")]
         public static extern void SetLastError(uint dwErrCode);
 
@@ -491,25 +489,16 @@ namespace XenCenterLib
         /// Will return null if the disk parameters could not be determined.
         /// </summary>
         /// <param name="path">An absolute path</param>
-        /// <returns></returns>
+        /// <exception cref="Exception">May be thrown</exception>>
         public static DiskSpaceInfo GetDiskSpaceInfo(string path)
         {
-            try
-            {
-                string DriveLetter = Path.GetPathRoot(path).TrimEnd(new char[] { '\\' });
-                System.Management.ManagementObject o = new System.Management.ManagementObject(
-                    string.Format("Win32_LogicalDisk.DeviceID=\"{0}\"", DriveLetter));
-                string fsType = o.Properties["FileSystem"].Value.ToString();
-                bool isFAT = (fsType == "FAT" || fsType == "FAT32");
-                UInt64 freeBytes = UInt64.Parse(o.Properties["FreeSpace"].Value.ToString());
-                UInt64 totalBytes = UInt64.Parse(o.Properties["Size"].Value.ToString());
-                return new DiskSpaceInfo(freeBytes, totalBytes, isFAT);
-            }
-            catch (Exception exn)
-            {
-                log.Warn(exn, exn);
-                return null;
-            }
+            string DriveLetter = Path.GetPathRoot(path).TrimEnd('\\');
+            var o = new System.Management.ManagementObject($"Win32_LogicalDisk.DeviceID=\"{DriveLetter}\"");
+            string fsType = o.Properties["FileSystem"].Value.ToString();
+            bool isFAT = (fsType == "FAT" || fsType == "FAT32");
+            UInt64 freeBytes = UInt64.Parse(o.Properties["FreeSpace"].Value.ToString());
+            UInt64 totalBytes = UInt64.Parse(o.Properties["Size"].Value.ToString());
+            return new DiskSpaceInfo(freeBytes, totalBytes, isFAT);
         }
 
         public class DiskSpaceInfo

@@ -111,9 +111,7 @@ namespace XenAdmin.Actions
                     if (!int.TryParse(m.Groups[1].Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out errorId))
                         throw f;
 
-                    Win32Exception winErr = new Win32Exception(errorId);
-
-                    log.ErrorFormat("Received error from likewise when attempting to join domain: {0}", winErr);
+                    log.Error($"Received errorId {errorId} from likewise when attempting to join domain.", f);
                 }
                 XenRef<Host> hostref = new XenRef<Host>(f.ErrorDescription[1]);
                 Host host = Connection.Resolve(hostref);
