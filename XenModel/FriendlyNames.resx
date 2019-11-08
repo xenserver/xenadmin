@@ -985,7 +985,7 @@
     <value>Apply License</value>
   </data>
   <data name="Message.body-alarm" xml:space="preserve">
-    <value>Alarm '{0}' was not recognised.</value>
+    <value>Alarm '{0}' was not recognized.</value>
   </data>
   <data name="Message.body-cluster_host_enable_failed" xml:space="preserve">
     <value>Server '{0}' failed to join the cluster.</value>
@@ -1749,7 +1749,7 @@
     <value>Fibre Channel over Ethernet (FCoE) logs</value>
   </data>
   <data name="Description-host.system_status-message-switch" xml:space="preserve">
-    <value>Logs of messages exchanged between system deamons</value>
+    <value>Logs of messages exchanged between system daemons</value>
   </data>
   <data name="Description-host.system_status-xenvm" xml:space="preserve">
     <value>Volume manager logs</value>

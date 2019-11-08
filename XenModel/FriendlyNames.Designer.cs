@@ -277,7 +277,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logs of messages exchanged between system deamons.
+        ///   Looks up a localized string similar to Logs of messages exchanged between system daemons.
         /// </summary>
         public static string Description_host_system_status_message_switch {
             get {
@@ -3643,7 +3643,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alarm &apos;{0}&apos; was not recognised..
+        ///   Looks up a localized string similar to Alarm &apos;{0}&apos; was not recognized..
         /// </summary>
         public static string Message_body_alarm {
             get {

@@ -2698,7 +2698,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating integrated GPU passthrough on &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Updating integrated GPU pass-through on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE {
             get {
@@ -2752,7 +2752,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to USB passthrough disabled.
+        ///   Looks up a localized string similar to USB pass-through disabled.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_DISABLED {
             get {
@@ -2761,7 +2761,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabling USB passthrough for {0}.
+        ///   Looks up a localized string similar to Disabling USB pass-through for {0}.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_DISABLING {
             get {
@@ -2770,7 +2770,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to USB passthrough enabled.
+        ///   Looks up a localized string similar to USB pass-through enabled.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_ENABLED {
             get {
@@ -2779,7 +2779,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling USB passthrough for {0}.
+        ///   Looks up a localized string similar to Enabling USB pass-through for {0}.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_ENABLING {
             get {
@@ -3346,7 +3346,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshotting VM &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Taking a snapshot of VM &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_VM_SNAPSHOT_TITLE {
             get {
@@ -4889,7 +4889,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to The physical utilization on {0} is about {1} of its capacity. 
-        ///This alarm is set to be triggered when the physical utilisation of the SR goes above {2}..
+        ///This alarm is set to be triggered when the physical utilization of the SR goes above {2}..
         /// </summary>
         public static string ALERT_ALARM_SR_PHYSICAL_UTILISATION_DESCRIPTION {
             get {
@@ -8059,7 +8059,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rebooting a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and rebooting them might impact the availablity of your storage:
+        ///   Looks up a localized string similar to Rebooting a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and rebooting them might impact the availability of your storage:
         ///
         ///{0}
         ///
@@ -8231,7 +8231,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shutting down a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and shutting them down might impact the availablity of your storage:
+        ///   Looks up a localized string similar to Shutting down a server will also shut down all the VMs running on it. The following servers are running a storage virtual appliance and shutting them down might impact the availability of your storage:
         ///
         ///{0}
         ///
@@ -12248,7 +12248,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable passthrough.
+        ///   Looks up a localized string similar to Disable pass-through.
         /// </summary>
         public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {
             get {
@@ -12257,7 +12257,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable passthrough.
+        ///   Looks up a localized string similar to Enable pass-through.
         /// </summary>
         public static string DIALOG_USB_USAGE_ENABLE_PASSTHROUGH {
             get {
@@ -12266,7 +12266,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to enable passthrough on this device? This will allow this device to be passed through to virtual machines..
+        ///   Looks up a localized string similar to Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines..
         /// </summary>
         public static string DIALOG_USB_USAGE_NOTE_ALLOW {
             get {
@@ -12275,7 +12275,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to disable passthrough on this device? This device will no longer be allowed to be passed through to virtual machines..
+        ///   Looks up a localized string similar to Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines..
         /// </summary>
         public static string DIALOG_USB_USAGE_NOTE_DENY {
             get {
@@ -12284,7 +12284,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Yes, Disable passthrough.
+        ///   Looks up a localized string similar to &amp;Yes, Disable pass-through.
         /// </summary>
         public static string DIALOG_USB_USAGE_OKBUTTON_DISABLE {
             get {
@@ -12293,7 +12293,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Yes, Enable passthrough.
+        ///   Looks up a localized string similar to &amp;Yes, Enable pass-through.
         /// </summary>
         public static string DIALOG_USB_USAGE_OKBUTTON_ENABLE {
             get {
@@ -16980,7 +16980,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Memory and VCPUs.
+        ///   Looks up a localized string similar to Memory and vCPUs.
         /// </summary>
         public static string GENERAL_HEADING_MEMORY_VCPUS {
             get {
@@ -19756,7 +19756,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The exported files are incomplete or in an unrecognised format..
+        ///   Looks up a localized string similar to The exported files are incomplete or in an unrecognized format..
         /// </summary>
         public static string IMPORT_INCOMPLETE_FILES {
             get {
@@ -37429,7 +37429,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Disable passthrough.
+        ///   Looks up a localized string similar to &amp;Disable pass-through.
         /// </summary>
         public static string USBLIST_DISABLE_PASSTHROUGH_HOTKEY {
             get {
@@ -37438,7 +37438,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Enable passthrough.
+        ///   Looks up a localized string similar to &amp;Enable pass-through.
         /// </summary>
         public static string USBLIST_ENABLE_PASSTHROUGH_HOTKEY {
             get {
@@ -37825,7 +37825,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VCPUs can only be changed when the VM is shut down..
+        ///   Looks up a localized string similar to The vCPUs can only be changed when the VM is shut down..
         /// </summary>
         public static string VCPU_ONLY_WHEN_HALTED {
             get {
@@ -38599,7 +38599,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Memory and/or VCPU changes will take effect when you restart the VM..
+        ///   Looks up a localized string similar to Memory and/or vCPU changes will take effect when you restart the VM..
         /// </summary>
         public static string VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE {
             get {
