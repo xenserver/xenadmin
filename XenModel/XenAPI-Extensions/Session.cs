@@ -51,7 +51,9 @@ namespace XenAPI
         {
             Connection = connection;
             proxy.RequestEvent += LogRequest;
+#if DEBUG
             proxy.ResponseEvent += LogResponse;
+#endif
         }
 
         public Session(Proxy proxy, IXenConnection connection)
@@ -100,7 +102,9 @@ namespace XenAPI
             {
                 InitializeXmlRpcProxy(session.Url, timeout);
                 proxy.RequestEvent += LogRequest;
+#if DEBUG
                 proxy.ResponseEvent += LogResponse;
+#endif
             }
 
             Connection = connection;
@@ -193,7 +197,11 @@ namespace XenAPI
 
             if (CanLogCall(methodName))
             {
+#if DEBUG
                 log.DebugFormat("Invoking XML-RPC method {0}: {1}", methodName, xml);
+#else
+                log.DebugFormat("Invoking XML-RPC method {0}", methodName);
+#endif
             }
             else
             {
@@ -201,11 +209,13 @@ namespace XenAPI
             }
         }
 
+#if DEBUG
         private void LogResponse(object o, XmlRpcResponseEventArgs args)
         {
             if(log.IsDebugEnabled)
                 log.DebugFormat(DumpStream(args.ResponseStream, "XML-RPC response: "));
         }
+#endif
 
         private string DumpStream(Stream s, string header)
         {

@@ -1063,7 +1063,7 @@ namespace XenAdmin
 
         public static void OpenURL(string url)
         {
-            if (RunInAutomatedTestMode)
+            if (RunInAutomatedTestMode || string.IsNullOrEmpty(url))
                 return;
             try
             {

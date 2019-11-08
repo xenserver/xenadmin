@@ -559,9 +559,9 @@ namespace XenOvfTransport
                     return true;
                 }
             }
-            catch (System.Xml.XmlException)
+            catch (System.Xml.XmlException ex)
             {
-                log.DebugFormat("Failed to parse the plugin record: '{0}'", rec);
+                log.Debug("Failed to parse the transfer plugin record.", ex);
             }
             return false;
         }
