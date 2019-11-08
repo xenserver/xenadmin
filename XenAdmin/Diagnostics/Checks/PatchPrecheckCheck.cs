@@ -132,15 +132,8 @@ namespace XenAdmin.Diagnostics.Checks
             }
             catch (Failure f)
             {
-                log.Error(f.ToString());
-                if(f.ErrorDescription.Count>0)
-                    log.Error(f.ErrorDescription[0]);
-                if (f.ErrorDescription.Count > 1)
-                    log.Error(f.ErrorDescription[1]);
-                if (f.ErrorDescription.Count > 2)
-                    log.Error(f.ErrorDescription[2]);
-                if (f.ErrorDescription.Count > 3)
-                    log.Error(f.ErrorDescription[3]);
+                log.Error(string.Join(",", f.ErrorDescription.ToArray()), f);
+
                 // try and find problem from the xapi failure
                 Problem problem = FindProblem(f);
                 return problem ?? new PrecheckFailed(this, Host, f);

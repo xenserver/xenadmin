@@ -4439,8 +4439,8 @@ namespace XenOvf
                 if (_vhs.System?.VirtualSystemType?.Value == null)
                 {
                     vhs = _vhs;
-                    log.Info("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [Unknown]");
-                    log.Info("Import.Process: Results may vary depending on hard disk image format.");
+                    log.Info("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [Unknown]. " +
+                             "Results may vary depending on hard disk image format.");
                     priority = 5;
                 }
                 else if (_vhs.System.VirtualSystemType.Value.ToLower().StartsWith(typeAffinity))
@@ -4493,8 +4493,9 @@ namespace XenOvf
                     if (priority >= 5)
                     {
                         vhs = _vhs;
-                        log.InfoFormat("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [{0}]", _vhs.System.VirtualSystemType.Value);
-                        log.InfoFormat("Import.Process: Results may vary depending on hard disk image format.");
+                        log.InfoFormat("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [{0}]. " +
+                                       "Results may vary depending on hard disk image format.",
+                            _vhs.System.VirtualSystemType.Value);
                         priority = 5;
                     }
                 }

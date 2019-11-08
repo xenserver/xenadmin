@@ -2214,8 +2214,7 @@ namespace XenAdmin
                 {
                     dlg.ShowDialog(this);
                 }
-                log.Error("Couldn't save settings");
-                log.Error(ex, ex);
+                log.Error("Could not save settings.", ex);
             }
             base.OnClosing(e);
         }

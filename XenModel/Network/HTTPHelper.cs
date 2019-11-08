@@ -154,8 +154,7 @@ namespace XenAPI
             }
             catch (Exception e)
             {
-                log.DebugFormat("Caught exception doing HTTP PUT from {0} to {1}", path, hostname);
-                log.Debug(e, e);
+                log.Debug($"Caught exception doing HTTP PUT from {path} to {hostname}", e);
                 PollTaskForResult(connection, ref session, cancellingDelegate2, task, true);
                 if (e is CancelledException || e.InnerException is CancelledException)
                     throw new XenAdmin.CancelledException();
@@ -252,8 +251,7 @@ namespace XenAPI
             }
             catch (Exception e)
             {
-                log.DebugFormat("Caught exception doing HTTP GET from {0} to {1}", hostname, path);
-                log.Debug(e, e);
+                log.Debug($"Caught exception doing HTTP GET from {hostname} to {path}", e);
 
                 if (e is WebException && e.InnerException is IOException && Win32.GetHResult(e.InnerException as IOException) == Win32.ERROR_DISK_FULL)
                     throw e.InnerException;

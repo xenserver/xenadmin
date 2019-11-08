@@ -30,12 +30,9 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Net;
 using XenAdmin.Core;
 using XenAPI;
 using System.Threading;
@@ -240,8 +237,7 @@ namespace XenAdmin.Actions
                         }
                         catch (Exception e)
                         {
-                            log.ErrorFormat("Exception while deleting network {0}. Squashing.", network.Name());
-                            log.Error(e, e);
+                            log.Error($"Exception while deleting network {network.Name()}. Squashing.", e);
                         }
                     }
                 }

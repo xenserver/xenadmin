@@ -168,8 +168,7 @@ namespace XenOvf
                 {
 					if (ex is OperationCanceledException)
 						throw;
-                    log.WarnFormat("Uncompression issue: {0}", ex);
-                    log.Warn("Previous warning may be ok, continuing with import, failures continue then this is the issue");
+                    log.Warn("Ignoring uncompression issue: ", ex);
                 }
                 finally
                 {

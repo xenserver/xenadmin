@@ -390,8 +390,7 @@ namespace XenAdmin.XenSearch
             }
             catch (Exception e)
             {
-                log.DebugFormat("Exception loading search from file '{0}'", filename);
-                log.Debug(e, e);
+                log.Debug($"Exception loading search from file '{filename}'", e);
                 return null;
             }
         }
