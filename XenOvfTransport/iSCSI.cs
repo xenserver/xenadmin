@@ -119,7 +119,7 @@ namespace XenOvfTransport
 
                 try
                 {
-                    log.DebugFormat(Messages.FILES_TRANSPORT_SETUP, vdiuuid);
+                    log.DebugFormat("Connecting virtual disk {0}... ", vdiuuid);
                     TargetAddress ta = new TargetAddress(ipaddress, ipport, targetGroupTag);
                     TargetInfo[] targets = initiator.GetTargets(ta);
                     log.InfoFormat("iSCSI.Connect found {0} targets, connecting to: {1}", targets.Length, targets[0].Name);
@@ -128,7 +128,7 @@ namespace XenOvfTransport
                 }
                 catch (Exception ex)
                 {
-                    log.ErrorFormat("{0} {1}", Messages.ISCSI_ERROR, ex.Message);
+                    log.Error($"Failed to connect to VDI {vdiuuid} over iSCSI.", ex);
                     Thread.Sleep(new TimeSpan(0, 0, 5));
                     iSCSIConnectRetry--;
                 }
@@ -179,7 +179,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {   
-                log.ErrorFormat("{0} {1}", Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex.Message);
+                log.Error("Failed to open virtual disk.", ex);
                 throw new Exception(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex);
             }
         }
@@ -232,7 +232,7 @@ namespace XenOvfTransport
                 {
                     if (Cancel)
                     {
-                        log.InfoFormat(Messages.ISCSI_COPY_CANCELLED, filename);
+                        log.InfoFormat("Canceled transfer of virtual disk {0}.", filename);
                         throw new OperationCanceledException(string.Format(Messages.ISCSI_COPY_CANCELLED, filename));
                     }
 
@@ -268,8 +268,8 @@ namespace XenOvfTransport
                     }
                     catch (Exception ex)
                     {
+                        log.Warn("Failed to transfer virtual disk.", ex);
                         var message = string.Format(Messages.ISCSI_COPY_ERROR, filename);
-                        log.Warn(message);
                         throw new Exception(message, ex);
                     }
                 }
@@ -314,7 +314,7 @@ namespace XenOvfTransport
                 {
                     if (Cancel)
                     {
-                        log.Info(Messages.ISCSI_VERIFY_CANCELLED);
+                        log.Info("Canceled virtual disk verification after export.");
                         throw new OperationCanceledException(Messages.ISCSI_VERIFY_CANCELLED);
                     }
 
@@ -341,8 +341,8 @@ namespace XenOvfTransport
                     }
                     catch (Exception ex)
                     {
+                        log.Warn($"Failed to verify virtual disk {filename}.", ex);
                         var message = string.Format(Messages.ISCSI_VERIFY_ERROR, filename);
-                        log.WarnFormat("{0} {1}", message, ex.Message);
                         throw new Exception(message, ex);
                     }
                 }
@@ -359,7 +359,7 @@ namespace XenOvfTransport
                 // Compare targetHash with copyHash.
                 if (!System.Linq.Enumerable.SequenceEqual(_copyHash, hashAlgorithm.Hash))
                 {
-                    log.Error(Messages.ISCSI_VERIFY_INVALID);
+                    log.Error("The exported virtual disk does not match the source.");
                     throw new Exception(Messages.ISCSI_VERIFY_INVALID);
                 }
             }
@@ -398,7 +398,7 @@ namespace XenOvfTransport
                     }
                     if (Cancel)
                     {
-                        log.WarnFormat(Messages.ISCSI_COPY_CANCELLED, filename);
+                        log.WarnFormat("Cancelled transfer of virtual disk {0}.", filename);
                         throw new OperationCanceledException(string.Format(Messages.ISCSI_COPY_CANCELLED, filename));
                     }
                     p += (ulong)n;
@@ -411,8 +411,8 @@ namespace XenOvfTransport
                 {
 					if (ex is OperationCanceledException)
 						throw;
+                    log.Warn($"Failed to transfer virtual disk {filename}.", ex);
                     var message = string.Format(Messages.ISCSI_COPY_ERROR, filename);
-                    log.Warn(message);
                     throw new Exception(message, ex);
                 }
             }
@@ -505,7 +505,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", Messages.ISCSI_START_ERROR, ex.Message);
+                log.Error("Failed to start Transfer VM.", ex);
                 throw new Exception(Messages.ISCSI_START_ERROR, ex);
             }
         }
@@ -531,7 +531,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.WarnFormat("{0} {1}", Messages.ISCSI_SHUTDOWN_ERROR, ex.Message);
+                log.Warn("Failed to shutdown Transfer VM.", ex);
                 throw new Exception(Messages.ISCSI_SHUTDOWN_ERROR, ex);
             }
         }

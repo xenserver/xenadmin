@@ -278,7 +278,7 @@ namespace XenOvfTransport
                 XenRef<VM> vmRef = DefineSystem(xenSession, vhs, ovfname);
                 if (vmRef == null)
                 {
-                    log.Error(Messages.ERROR_CREATE_VM_FAILED);
+                    log.Error("Failed to create a VM");
                     throw new ImportException(Messages.ERROR_CREATE_VM_FAILED);
 				}
 
@@ -439,7 +439,7 @@ namespace XenOvfTransport
                 {
 					if (ex is OperationCanceledException)
 						throw;
-                    log.Error(Messages.ERROR_IMPORT_FAILED);
+                    log.Error("Import failed", ex);
                     throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
                 }
             }
@@ -603,7 +603,7 @@ namespace XenOvfTransport
                         {
                             var statusMessage = string.Format(Messages.START_FILE_DECRYPTION, filename);
                             OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Security", statusMessage));
-                            log.Debug(statusMessage);
+                            log.Debug($"Decrypting {filename}");
                             OVF.DecryptToTempFile(EncryptionClass, filename, version, passcode, encryptfilename);
                             sourcefile = encryptfilename;
                             statusMessage += Messages.COMPLETE;
@@ -702,7 +702,7 @@ namespace XenOvfTransport
                     }
                     catch (Exception ex)
                     {
-                        log.Error(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK);
+                        log.Error("Failed to open virtual disk", ex);
                         throw new Exception(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex);
                     }
                 }
@@ -713,7 +713,7 @@ namespace XenOvfTransport
             }
             else
             {
-                log.Error(Messages.ERROR_FILE_NAME_NULL);
+                log.Error("The file to import was not provided");
                 throw new InvalidDataException(Messages.ERROR_FILE_NAME_NULL);
             }
             #endregion
@@ -740,9 +740,9 @@ namespace XenOvfTransport
                     }
 
                     if (freespace <= dataCapacity)
-                    { 
+                    {
+                        log.Error($"SR {sruuid} does not have {vhdDisk.Capacity} bytes of free space to import virtual disk {filename}.");
                         string message = string.Format(Messages.NOT_ENOUGH_SPACE_IN_SR, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
-                        log.Error(message);
                         throw new IOException(message);
                     }
                 }
@@ -781,7 +781,7 @@ namespace XenOvfTransport
                         }
                     default:
                 		{
-                            log.Error(Messages.UNSUPPORTED_TRANSPORT);
+                            log.Error($"Unsupported transfer type {useTransport.ToString()}");
                             throw new InvalidDataException(Messages.UNSUPPORTED_TRANSPORT);
                         }
                 }
@@ -867,7 +867,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-                log.ErrorFormat("{0} {1}", Messages.ERROR_ISCSI_UPLOAD_FAILED, ex.Message);
+                log.Error("Failed to import a virtual disk over iSCSI. ", ex);
                 vdiRef = null;
                 throw new Exception(Messages.ERROR_ISCSI_UPLOAD_FAILED, ex);
             }
@@ -965,7 +965,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-                log.ErrorFormat("{0} {1}", Messages.ERROR_ISCSI_UPLOAD_FAILED, ex.Message);
+                log.Error("Failed to import a virtual disk over iSCSI.", ex);
                 vdiRef = null;
                 throw new Exception(Messages.ERROR_ISCSI_UPLOAD_FAILED, ex);
             }
@@ -1011,7 +1011,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", Messages.ERROR_CANNOT_CREATE_VDI, ex.Message);
+                log.Error("Failed to create VDI. ", ex);
                 throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
             }
             log.Debug("Import.CeateVDI::VDI Created");
@@ -1131,7 +1131,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", Messages.ERROR_CANNOT_CREATE_VDI, ex.Message);
+                log.Error("Failed to create VDI", ex);
                 throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
             }
             log.Debug("Import.UploadRawVDI::VDI Created");
@@ -1153,9 +1153,19 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", Messages.ERROR_HTTP_UPLOAD_FAILED, ex.Message);
+                log.Error("Failed to import a virtual disk over HTTP. ", ex);
                 if (vdiRef != null)
-                    RemoveVDI(xenSession, vdiRef);
+                {
+                    try
+                    {
+                        VDI.destroy(xenSession, vdi.opaque_ref);
+                    }
+                    catch (Exception e)
+                    {
+                        log.Error("Failed to remove a virtual disk image (VDI). ", e);
+                        throw new Exception(Messages.ERROR_REMOVE_VDI_FAILED, e);
+                    }
+                }
                 vdiRef = null;
                 throw new Exception(Messages.ERROR_HTTP_UPLOAD_FAILED, ex);
             }
@@ -1334,7 +1344,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", Messages.ERROR_CREATE_VM_FAILED, ex.Message);
+                log.Error("Failed to create a virtual machine (VM).", ex);
                 throw new Exception(Messages.ERROR_CREATE_VM_FAILED, ex);
             }
         }
@@ -1421,24 +1431,9 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("{0} {1}", Messages.ERROR_REMOVE_VM_FAILED, ex.Message);
+                log.Error("Failed to remove a virtual machine (VM). ", ex);
                 throw new Exception(Messages.ERROR_REMOVE_VM_FAILED, ex);
             }
-            return;
-        }
-        private void RemoveVDI(Session xenSession, XenRef<VDI> vdi)
-        {
-            try
-            {
-                log.Error("OVF.Import.RemoveVDI: Something went wrong deleting associated VDI");
-				VDI.destroy(xenSession, vdi.opaque_ref);
-            }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("{0}, {1}", Messages.ERROR_REMOVE_VDI_FAILED, ex.Message);
-                throw new Exception(Messages.ERROR_REMOVE_VDI_FAILED, ex);
-            }
-            return;
         }
 
         private static Dictionary<string, string> SplitStringIntoDictionary(string inputStr)
@@ -1597,7 +1592,7 @@ namespace XenOvfTransport
                         }
                         catch (Exception ex)
                         {
-                            log.ErrorFormat("{0} {1}", Messages.ERROR_CREATE_VIF_FAILED, ex.Message);
+                            log.Error("Failed to create a virtual network interface (VIF). ", ex);
                             throw new Exception(Messages.ERROR_CREATE_VIF_FAILED, ex);
                         }
                         #endregion
@@ -1731,14 +1726,14 @@ namespace XenOvfTransport
                                             if (ex is OperationCanceledException)
                                                 throw;
                                             var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.ISO);
-                                            log.ErrorFormat("{0}, {1}", msg, ex.Message);
+                                            log.Error("Failed to add resource ISO.", ex);
                                             throw new Exception(msg, ex);
                                         }
                                         finally
                                         {
                                             if (vdiRef == null || vdiRef.Count <= 0)
                                             {
-                                                log.Error(string.Format(Messages.ERROR_IMPORT_DISK_FAILED, filename, isoUuid));
+                                                log.ErrorFormat("Failed to import virtual disk from file {0} to storage repository {1}.", filename, isoUuid);
                                                 RemoveSystem(xenSession, vmRef);
                                             }
                                         }
@@ -1960,7 +1955,7 @@ namespace XenOvfTransport
                                 {
                                     if (DefaultSRUUID == null)
                                     {
-                                        log.Error(Messages.ERROR_COULD_NOT_FIND_SR);
+                                        log.Error("The SR was not found and a default was not assigned.");
                                         throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
                                     }
 
@@ -1971,7 +1966,7 @@ namespace XenOvfTransport
                                         XenRef<VDI> tempVDI = VDI.get_by_uuid(xenSession, vdiuuid);
                                         if (tempVDI == null)
                                         {
-                                            log.Error(Messages.ERROR_COULD_NOT_FIND_SR);
+                                            log.Error("The SR was not found and a default was not assigned.");
                                             throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
                                         }
 
@@ -2002,15 +1997,14 @@ namespace XenOvfTransport
 									if (ex is OperationCanceledException)
 										throw;
 									var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.DISK_DEVICE);
-                                    log.ErrorFormat("{0} {1}", msg, ex.Message);
+                                    log.Error("Failed to add resource Hard Disk Image.", ex);
                                     throw new InvalidDataException(msg, ex);
                                 }
                                 finally
                                 {
                                     if (vdiRef == null)
                                     {
-                                    	var msg = string.Format(Messages.ERROR_IMPORT_DISK_FAILED, filename, sruuid);
-                                        log.Error(msg);
+                                    	log.ErrorFormat("Failed to import virtual disk from file {0} to storage repository {1}.", filename, sruuid);
                                         RemoveSystem(xenSession, vmRef);
                                     }
                                 }
@@ -2045,7 +2039,7 @@ namespace XenOvfTransport
                                         }
                                         catch (Exception ex)
                                         {
-                                            log.ErrorFormat("{0} {1}", Messages.ERROR_CREATE_VBD_FAILED, ex.Message);
+                                            log.Error("Failed to create a virtual block device (VBD).", ex);
                                             throw new Exception(Messages.ERROR_CREATE_VBD_FAILED, ex);
                                         }
                                     }
@@ -2393,7 +2387,7 @@ namespace XenOvfTransport
                 {
 					if (ex is OperationCanceledException)
 						throw;
-                    log.Error(Messages.ERROR_IMPORT_FAILED);
+                    log.Error("Failed to import.", ex);
                     throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
                 }
             }

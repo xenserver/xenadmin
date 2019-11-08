@@ -258,9 +258,9 @@ namespace XenOvf
                     {
 						if (ex is OperationCanceledException)
 							throw;
-                        var message = string.Format(Messages.COMPRESS_FAILED, filename);
-                        log.ErrorFormat("{0} {1}", message, ex.Message);
-                        throw new Exception(message, ex);
+
+                        log.Error("Compression failure", ex);
+                        throw new Exception(string.Format(Messages.COMPRESS_FAILED, filename), ex);
                     }
                     finally
                     {

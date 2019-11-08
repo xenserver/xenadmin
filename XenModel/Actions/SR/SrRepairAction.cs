@@ -134,7 +134,7 @@ namespace XenAdmin.Actions
                     if (template != null)
                     {
                         this.Description = string.Format(Messages.ACTION_SR_REPAIR_CREATE_PBD, Helpers.GetName(host));
-                        log.Debug(this.Description);
+                        log.Debug($"Creating PBD for {Helpers.GetName(host)}.");
 
                         var newPbd = new PBD
                         {
@@ -174,7 +174,7 @@ namespace XenAdmin.Actions
                 if (thePBD != null && !thePBD.currently_attached)
                 {
                     this.Description = string.Format(Messages.ACTION_SR_REPAIR_PLUGGING_PBD, Helpers.GetName(host));
-                    log.Debug(this.Description);
+                    log.Debug($"Plugging PBD for {Helpers.GetName(host)}.");
 
                     try
                     {
