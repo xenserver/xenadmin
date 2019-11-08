@@ -784,9 +784,9 @@ namespace XenAdmin.TabPages
                 }
                 e.Result = image;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                log.Debug("Error creating the screenshot for simple selection");
+                log.Debug("Error creating the screenshot for simple selection.", ex);
             }
 
 

@@ -259,7 +259,7 @@ namespace XenOvfTransport
                         }
                         catch (Exception ex)
                         {
-                            log.InfoFormat("Export: VBD Skipped: {0}: {1}", vbdref, ex.Message);
+                            log.Info($"Export: VBD {vbdref} Skipped.", ex);
                         }
                     }
                 }

@@ -87,7 +87,7 @@ namespace XenAdmin.Utils
             Host host = state as Host;
             if (host == null || host.Connection == null)
             {
-                log.ErrorFormat("Will not fetch server time: host or connection could not be resolved");
+                log.Error("Will not fetch server time: host or connection could not be resolved");
                 return;
             }
 
@@ -99,7 +99,7 @@ namespace XenAdmin.Utils
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Failed to fetch server time for host {0}: {1}", host.name_label, e);
+                log.Error($"Failed to fetch server time for host {host.name_label}: ", e);
             }
         }
     }

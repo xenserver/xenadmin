@@ -146,7 +146,7 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                log.DebugFormat("Tools.Deserialize failed attempt (may get retried) {0}", ex.Message);
+                log.Debug("Tools.Deserialize failed attempt (may retry) ", ex);
                 if (ex.InnerException != null && ex.InnerException.Message.ToLower().Contains("hexadecimal value 0x00"))
                 {
                     throw new InvalidDataException(Messages.INVALID_DATA_IN_OVF, ex);
@@ -317,7 +317,7 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                log.InfoFormat("Attempt reading xml failed. {0}", ex.Message);
+                log.Info("Attempt reading xml failed.", ex);
             }
 
             if (ovfEnv != null && ovfEnv.AnyAttr != null)

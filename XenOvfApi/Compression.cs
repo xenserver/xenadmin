@@ -33,7 +33,7 @@ using System;
 using System.IO;
 using XenCenterLib.Compression;
 using XenOvf.Definitions;
-using XenOvf.Utilities;
+
 
 namespace XenOvf
 {
@@ -251,7 +251,7 @@ namespace XenOvf
                     }
                     catch (EndOfStreamException eose)
                     {
-                        log.ErrorFormat("End of Stream: {0}", eose.Message);
+                        log.Error("End of Stream: ", eose);
                     }
                     catch (Exception ex)
                     {

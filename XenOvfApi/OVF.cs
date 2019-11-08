@@ -148,7 +148,7 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("File handling error. {0}", ex.Message);
+                log.Error("File handling error. ", ex);
             }
             FileStream fs = null;
             StreamWriter sw = null;
@@ -5774,7 +5774,7 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("OVF.IsBootDisk failed, could not determine if bootable, {0}", ex.Message);
+                log.Error("OVF.IsBootDisk failed, could not determine if bootable", ex);
             }
             log.DebugFormat("OVF.IsBootDisk completed Bootable = {0}", bootable);
             return bootable;

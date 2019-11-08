@@ -410,9 +410,9 @@ namespace XenAdmin.Wizards.ImportWizard
                 {
                     env = OVF.Load(path);
                 }
-                catch(OutOfMemoryException ex)
+                catch (OutOfMemoryException ex)
                 {
-                    log.ErrorFormat("Failed to load OVF {0} as we ran out of memory: {1}", path, ex.Message);
+                    log.Error($"Failed to load OVF {path} as we ran out of memory:", ex);
                     env = null;
                 }
 

@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAPI;
@@ -68,7 +67,7 @@ namespace XenAdmin.Diagnostics.Checks
                 if (failure?.ErrorDescription.Count == 4)
                     return new HostPrepareToUpgradeProblem(this, Host, failure.ErrorDescription[3]);
 
-                log.ErrorFormat("Error testing upgrade hotfix: {0}", exception);
+                log.Error("Error testing upgrade hotfix.", exception);
             }
 
             return new HostPrepareToUpgradeProblem(this, Host);
