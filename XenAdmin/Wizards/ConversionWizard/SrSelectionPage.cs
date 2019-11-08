@@ -43,8 +43,6 @@ namespace XenAdmin.Wizards.ConversionWizard
 {
     public partial class SrSelectionPage : XenTabPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private bool _buttonNextEnabled;
         private long _requiredDiskSize;
 

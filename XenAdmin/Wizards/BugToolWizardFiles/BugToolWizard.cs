@@ -44,6 +44,8 @@ namespace XenAdmin.Wizards
 {
     public partial class BugToolWizard : XenWizardBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly GenericSelectHostsPage bugToolPageSelectHosts1;
         private readonly BugToolPageSelectCapabilities bugToolPageSelectCapabilities1;
         private readonly BugToolPageRetrieveData bugToolPageRetrieveData;

@@ -47,8 +47,6 @@ namespace XenAdmin.TabPages
 {
     public partial class HistoryPage : NotificationsBasePage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private const int MAX_HISTORY_ITEM = 1000;
 
         internal event Action<IXenObject> GoToXenObjectRequested;

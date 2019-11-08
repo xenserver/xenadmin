@@ -45,8 +45,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeWizardPrecheckPage : PatchingWizard_PrecheckPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public RollingUpgradeWizardPrecheckPage()
         {
             InitializeComponent();

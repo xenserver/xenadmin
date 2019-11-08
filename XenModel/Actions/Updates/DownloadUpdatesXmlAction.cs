@@ -45,7 +45,6 @@ namespace XenAdmin.Actions
 {
     public class DownloadUpdatesXmlAction : AsyncAction
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const string XenCenterVersionsNode = "xencenterversions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
