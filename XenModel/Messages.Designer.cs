@@ -29235,6 +29235,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please carry out any pending post-update tasks from the list below:.
+        /// </summary>
+        public static string PATCHINGWIZARD_SINGLEUPDATE_MANUAL_POST_UPDATE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SINGLEUPDATE_MANUAL_POST_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The installation of update {0} on all selected servers was completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY {
@@ -29620,6 +29629,15 @@ namespace XenAdmin {
         public static string PLAN_ACTION_ERROR {
             get {
                 return ResourceManager.GetString("PLAN_ACTION_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; could not be evacuated because there were no servers available to accommodate all the VMs being migrated from this server. Please reboot the other servers that are pending a reboot following the update installation, and then press Retry to resume the process..
+        /// </summary>
+        public static string PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE", resourceCulture);
             }
         }
         
