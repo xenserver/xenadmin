@@ -170,7 +170,6 @@ namespace XenOvfTransport
             log.DebugFormat("Connect To: {0}:{1}", serverUri.Host, serverUri.Port);
             Stream http = Connect(serverUri.Host, serverUri.Port);
             String httprequest = string.Format("{0} {1} http:/1.0\r\n", method, p2vUri);
-            log.DebugFormat("Request: {0}", httprequest);
             if (http == null)
             {
                 throw new Exception("HTTP == NULL");

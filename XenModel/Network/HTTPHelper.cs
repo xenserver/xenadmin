@@ -307,25 +307,19 @@ namespace XenAPI
             }
         }
 
-        public static Stream CONNECT(Uri uri, IXenConnection connection, string session, bool timeout, bool do_log)
+        public static Stream CONNECT(Uri uri, IXenConnection connection, string session, bool timeout)
         {
-            if (do_log)
-                log.DebugFormat("HTTP CONNECTING to {0}", uri);
             return HTTP.CONNECT(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(connection), session, XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
         }
 
-        public static Stream PUT(Uri uri, long ContentLength, bool timeout, bool do_log)
+        public static Stream PUT(Uri uri, long ContentLength, bool timeout)
         {
-            if (do_log)
-                log.DebugFormat("HTTP PUTTING file to {0}", uri);
             return HTTP.PUT(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(null), ContentLength, XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
         }
 
-        public static Stream GET(Uri uri, IXenConnection connection, bool timeout, bool do_log, bool isForXenServer = true)
+        public static Stream GET(Uri uri, IXenConnection connection, bool timeout)
         {
-            if (do_log)
-                log.DebugFormat("HTTP GETTING file from {0}", uri);
-            return HTTP.GET(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(connection, isForXenServer), XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
+            return HTTP.GET(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(connection, true), XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
         }
     }
 }
