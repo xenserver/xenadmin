@@ -47,7 +47,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     public partial class GenericSelectHostsPage : XenTabPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         private bool inupdate;
 

@@ -30,16 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -47,8 +42,6 @@ namespace XenAdmin.Dialogs
 {
     public partial class EditVmHaPrioritiesDialog : XenDialogBase
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         /// <summary>
         /// Never null.
         /// </summary>

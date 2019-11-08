@@ -53,6 +53,8 @@ namespace XenAdmin.Wizards.PatchingWizard
     /// </summary>
     public partial class PatchingWizard : UpdateUpgradeWizard
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly PatchingWizard_PatchingPage PatchingWizard_PatchingPage;
         private readonly PatchingWizard_SelectPatchPage PatchingWizard_SelectPatchPage;
         private readonly PatchingWizard_ModePage PatchingWizard_ModePage;

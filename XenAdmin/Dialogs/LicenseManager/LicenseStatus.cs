@@ -70,7 +70,6 @@ namespace XenAdmin.Dialogs
         protected EventHandlerList Events { get { return events; } }
         private const string StatusUpdatedEventKey = "LicenseStatusStatusUpdatedEventKey";
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public Host LicencedHost { get; private set; }
         private readonly AsyncServerTime serverTime = new AsyncServerTime();
         public delegate void StatusUpdatedEvent(object sender, EventArgs e);

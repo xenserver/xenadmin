@@ -43,8 +43,6 @@ namespace XenAdmin.Wizards
 {
     public partial class XenWizardBase : Form, IFormWithHelp
     {
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private IXenConnection connection; // connection to use
 
         protected IXenConnection xenConnection

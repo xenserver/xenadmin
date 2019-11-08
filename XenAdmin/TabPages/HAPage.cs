@@ -47,8 +47,6 @@ namespace XenAdmin.TabPages
 {
     internal partial class HAPage : BaseTabPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private Pool pool;
 
         private IXenObject xenObject;

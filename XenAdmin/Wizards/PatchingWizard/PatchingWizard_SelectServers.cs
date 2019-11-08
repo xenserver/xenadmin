@@ -48,8 +48,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_SelectServers : XenTabPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private const int PLUS_MINUS_COL = 0;
         private const int POOL_CHECKBOX_COL = 1;
         private const int POOL_ICON_HOST_CHECKBOX_COL = 2;

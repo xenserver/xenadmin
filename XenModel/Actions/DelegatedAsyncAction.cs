@@ -46,8 +46,6 @@ namespace XenAdmin.Actions
     /// </summary>
     public class DelegatedAsyncAction : AsyncAction
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private readonly Action<Session> invoker;
         private readonly string endDescription;
 
