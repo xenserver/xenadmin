@@ -241,9 +241,9 @@ namespace XenAdmin.Actions
                     {
                         Session.logout();
                     }
-                    catch(Failure ex)
+                    catch (Failure f)
                     {
-                        log.Debug("Session.logout() failed for Session uuid " + Session.opaque_ref, ex);
+                        log.Debug("Session.logout() failed. ", f);
                     }
                 }
 
