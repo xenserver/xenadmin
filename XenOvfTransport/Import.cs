@@ -64,8 +64,6 @@ namespace XenOvfTransport
     public class Import : XenOvfTransportBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static readonly log4net.ILog auditLog = log4net.LogManager.GetLogger("Audit");
-        private static readonly log4net.ILog traceLog = log4net.LogManager.GetLogger("Trace");
 
         private const long KB = 1024;
         private const long MB = (KB * 1024);
@@ -271,7 +269,7 @@ namespace XenOvfTransport
             {
                //FIND/SET THE NAME OF THE VM
 				ovfname = OVF.FindSystemName(ovfObj, vSystem.id);
-                auditLog.DebugFormat("Import: {0}, {1}", ovfname, pathToOvf);
+                log.DebugFormat("Import: {0}, {1}", ovfname, pathToOvf);
 
 				VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(ovfObj, vSystem.id, "xen");
 
@@ -1036,7 +1034,7 @@ namespace XenOvfTransport
                 }
                 else
                 {
-                    traceLog.InfoFormat("Directory ReparsePoint {0}", dir.FullName);
+                    log.InfoFormat("Directory ReparsePoint {0}", dir.FullName);
                     ReparsePoint rp = w.GetReparsePoint(dir.FullName);
                     ntfs.CreateDirectory(dir.FullName);
                     ntfs.SetReparsePoint(dir.FullName, rp);
@@ -1071,7 +1069,7 @@ namespace XenOvfTransport
                 }
                 else
                 {
-                    traceLog.InfoFormat("Reparse Point: {0}", file.FullName);
+                    log.InfoFormat("Reparse Point: {0}", file.FullName);
                     ReparsePoint rp = w.GetReparsePoint(file.FullName);
                     ntfs.SetReparsePoint(file.FullName, rp);
                 }
@@ -1646,7 +1644,7 @@ namespace XenOvfTransport
                                                     }
                                                     catch
                                                     {
-                                                        traceLog.Debug("Import.AddResourceSettingData: iso sr uuid not found, trying name_label");
+                                                        log.Debug("Import.AddResourceSettingData: iso sr uuid not found, trying name_label");
                                                     }
                                                     #endregion
 
@@ -1662,7 +1660,7 @@ namespace XenOvfTransport
                                                     }
                                                     catch
                                                     {
-                                                        traceLog.Debug("Import.AddResourceSettingData: iso sr uuid not found, looking for vdi...");
+                                                        log.Debug("Import.AddResourceSettingData: iso sr uuid not found, looking for vdi...");
                                                     }
                                                     #endregion
                                                 }
@@ -1918,7 +1916,7 @@ namespace XenOvfTransport
                                     }
                                     catch
                                     {
-                                        traceLog.Debug("Import.AddResourceSettingData: SR missing... still looking..");
+                                        log.Debug("Import.AddResourceSettingData: SR missing... still looking..");
                                     }
                                     if (srref == null)
                                     {
@@ -1929,7 +1927,7 @@ namespace XenOvfTransport
                                         }
                                         catch
                                         {
-                                            traceLog.Debug("Import.AddResourceSettingData: SR missing... still looking..");
+                                            log.Debug("Import.AddResourceSettingData: SR missing... still looking..");
                                         }
                                         if (srlist != null && srlist.Count > 0)
                                         {
