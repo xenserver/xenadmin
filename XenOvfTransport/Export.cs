@@ -118,7 +118,7 @@ namespace XenOvfTransport
 					}
 					catch
 					{
-						log.ErrorFormat(Messages.ERROR_VM_NOT_FOUND, vmUuid);
+						log.ErrorFormat("Failed to find VM {0}.", vmUuid);
 						throw;
 					}
                 }
@@ -130,7 +130,7 @@ namespace XenOvfTransport
                 {
                 	var message = string.Format(Messages.ERROR_VM_NOT_HALTED, vm.Name());
                 	OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ExportProgress, "Export", message));
-                    log.Info(message);
+                    log.Info($"VM {vm.Name()} ({vmRef.opaque_ref}) is neither halted nor suspended.");
                     throw new Exception(message);
                 }
 
@@ -393,7 +393,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-                log.Error(Messages.ERROR_EXPORT_FAILED);
+                log.Error("Export failed", ex);
                 throw new Exception(Messages.ERROR_EXPORT_FAILED, ex);
             }
             return ovfEnv;
@@ -459,7 +459,7 @@ namespace XenOvfTransport
 						if (ex is OperationCanceledException)
 							throw;
                         var msg = string.Format(Messages.ISCSI_COPY_ERROR, destinationFilename);
-                        log.Error(msg);
+                        log.Error($"Failed to transfer virtual disk {destinationFilename}", ex);
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Failure, "Export", msg, ex));
                         throw new Exception(msg, ex);
                     }

@@ -44,8 +44,6 @@ namespace XenAdmin.Alerts
 {
     public class MessageAlert : Alert
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public XenAPI.Message Message;
         public IXenObject XenObject;
 
@@ -203,10 +201,7 @@ namespace XenAdmin.Alerts
 
                     case Message.MessageType.MULTIPATH_PERIODIC_ALERT:
                         if (XenObject != null)
-                        {
-                            log.InfoFormat("{0} - {1}", Title, Message.body);
                             return extractMultipathCurrentState(Message.body, FriendlyFormat());
-                        }
                         break;
 
                     case Message.MessageType.WLB_CONSULTATION_FAILED:

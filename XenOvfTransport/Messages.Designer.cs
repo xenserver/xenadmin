@@ -367,7 +367,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connecting virtual disk {0} ... .
+        ///   Looks up a localized string similar to Connecting virtual disk {0}... .
         /// </summary>
         internal static string FILES_TRANSPORT_SETUP {
             get {

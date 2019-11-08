@@ -948,7 +948,7 @@ namespace XenAdmin.Network
                               : string.Format("{0} ({1})", FriendlyName, taskHostname);
             string title = string.Format(Messages.CONNECTING_NOTICE_TITLE, name);
             string msg = string.Format(Messages.CONNECTING_NOTICE_TEXT, name);
-            log.Info(msg);
+            log.Info($"Connecting to {name} in progress.");
 
             ConnectAction = new ActionBase(title, msg, false, false);
 
@@ -1122,7 +1122,7 @@ namespace XenAdmin.Network
             {
                 string title = string.Format(Messages.CONNECTION_OK_NOTICE_TITLE, Hostname);
                 string msg = string.Format(Messages.CONNECTION_OK_NOTICE_TEXT, Hostname);
-                log.Info(msg);
+                log.Info($"Connection to {Hostname} successful.");
                 ConnectAction.Title = title;
                 ConnectAction.Description = msg;
                 SetPoolAndHostInAction(ConnectAction);
@@ -1415,9 +1415,9 @@ namespace XenAdmin.Network
                     EndConnect(true, task, false);
 
                     ExpressRestriction e = (ExpressRestriction)error;
+                    // This can happen when the user attempts to connect to a second XE Express host from the UI
                     string msg = string.Format(Messages.CONNECTION_RESTRICTED_MESSAGE, e.HostName, e.ExistingHostName);
-                    // Add an informational log message saying why the connection attempt failed
-                    log.Info(msg);
+                    log.Info($"Connection to Server {e.HostName} restricted because a connection already exists to another XE Express Server ({e.ExistingHostName})");
                     string title = string.Format(Messages.CONNECTION_RESTRICTED_NOTICE_TITLE, e.HostName);
                     ActionBase action = new ActionBase(title, msg, false, true, msg);
                     SetPoolAndHostInAction(action, pool, PoolOpaqueRef);

@@ -145,7 +145,11 @@ namespace XenAdmin.Actions
                         log.ErrorFormat(
                             "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
                             address, errorCount, MAX_NUMBER_OF_TRIES);
-                        log.Error(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
+
+                        if  (patchDownloadError == null)
+                            log.Error("An unknown error occurred.");
+                        else
+                            log.Error(patchDownloadError);
                     }
                 } while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry);
             }

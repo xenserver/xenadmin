@@ -370,7 +370,7 @@ namespace XenOvf
                 }
 
             }
-            auditLog.Debug(isValid ? Messages.PASSWORD_SUCCESS : Messages.PASSWORD_FAILED);
+            log.Debug(isValid ? "Password is valid." : "Password is not valid.");
             return isValid;
         }
         /// <summary>

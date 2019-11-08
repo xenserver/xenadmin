@@ -80,14 +80,10 @@ namespace XenOvf
 		internal static ResourceManager _ovfrm = new ResourceManager("XenOvf.Content", Assembly.GetExecutingAssembly());
 
         #region PUBLIC
-        #region CONSTRUCTOR
         public OVF()
         {
             UnLoad();
-            log.InfoFormat("XenOvf.Message.resources {0}", Messages.RESOURCES_LOADED);
-            log.InfoFormat("XenOvf.Content.resources {0}", Messages.RESOURCES_LOADED);
         }
-        #endregion
 
         #region PROPERTIES
 
@@ -4644,7 +4640,7 @@ namespace XenOvf
             if (nbr < 0 || nbr > 15)
             {
                 var message = string.Format(Messages.OVF_DEVICE_OUT_OF_RANGE, device);
-                log.Error(message);
+                log.ErrorFormat("Device number {0} is less than zero or greater than 15.", device);
                 throw new ArgumentOutOfRangeException(message);
             }
 
