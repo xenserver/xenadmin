@@ -520,6 +520,8 @@ namespace XenOvfTransport
 
         private void InstallSectionStartVirtualMachine(Session xenSession, XenRef<VM> vm, int initialBootStopDelayAsSeconds)
         {
+            log.InfoFormat("Running fixup on VM with opaque_ref {0}", vm.opaque_ref);
+
             // Start the VM.
             if (VM.get_power_state(xenSession, vm) != vm_power_state.Running)
                 VM.start(xenSession, vm, false, true);
@@ -546,8 +548,17 @@ namespace XenOvfTransport
             }
 
             // Ensure it is off.
-            if (VM.get_power_state(xenSession, vm) != vm_power_state.Halted)
+            if (VM.get_power_state(xenSession, vm) == vm_power_state.Halted)
+                return;
+
+            try
+            {
                 VM.hard_shutdown(xenSession, vm);
+            }
+            catch (Exception e)
+            {
+                log.InfoFormat("Unable to hard-shutdown VM {0}. Will ignore error: {1}", vm.opaque_ref, e.Message);
+            }
         }
 
 
