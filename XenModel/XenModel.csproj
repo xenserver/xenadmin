@@ -241,7 +241,6 @@
     <Compile Include="Actions\DelegatedAsyncAction.cs" />
     <Compile Include="Actions\GetDataSourcesAction.cs" />
     <Compile Include="Actions\Host\ActivationProxy.cs" />
-    <Compile Include="Actions\Host\ActivationRequestAction.cs" />
     <Compile Include="Actions\Host\ApplyLicenseAction.cs" />
     <Compile Include="Actions\Host\ChangeHostPasswordAction.cs" />
     <Compile Include="Actions\Host\DestroyHostCrashDumpAction.cs" />

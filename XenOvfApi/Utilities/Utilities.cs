@@ -29,28 +29,16 @@
  * SUCH DAMAGE.
  */
 
-// ============================================================================
-// Description:   Utilitiy functions built on top of libxen for use in all
-//                providers.
-// ============================================================================
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Security;
 using System.Security.Permissions;
-using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 using XenOvf.Definitions;
 
 
@@ -61,7 +49,7 @@ namespace XenOvf.Utilities
     /// </summary>
     public sealed class Tools
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private const long KB = 1024;
         private const long MB = (KB * 1024);
@@ -97,26 +85,9 @@ namespace XenOvf.Utilities
         [SecurityPermission(SecurityAction.LinkDemand)]
         public static string LoadFile(string filename)
         {
-            FileStream fs = null;
-            StreamReader sr = null;
-            string xmldoc = null;
-            try
-            {
-                fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-                sr = new StreamReader(fs);
-                xmldoc = sr.ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("Utilities.LoadFile: failed: {0}", ex.Message);
-                throw;
-            }
-            finally
-            {
-                if (sr != null) sr.Close();
-                if (fs != null) fs.Close();
-            }
-            return xmldoc;
+            using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var sr = new StreamReader(fs))
+                return sr.ReadToEnd();
         }
         #endregion
 
@@ -198,11 +169,6 @@ namespace XenOvf.Utilities
                 ms.Position = 0;
                 sr = new StreamReader(ms, true);
                 returnXml = sr.ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("OVF.Tools.Serialize failed {0}", ex.Message);
-                throw new CtxUtilitiesException(ex.Message,ex);
             }
             finally
             {
@@ -357,7 +323,6 @@ namespace XenOvf.Utilities
         public static bool ValidateXmlToSchema(string ovffilename)
         {
             bool isValid = false;
-            ValidationEventHandler eventHandler = new ValidationEventHandler(ShowSchemaValidationCompileErrors);
             string currentPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string xmlNamespaceSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.xmlNamespaceSchemaLocation);
             string cimCommonSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.cimCommonSchemaLocation);
@@ -583,17 +548,6 @@ namespace XenOvf.Utilities
         }
         #endregion
 
-
-        private static void ShowSchemaValidationCompileErrors(object sender, ValidationEventArgs args)
-        {
-            log.ErrorFormat("ShowSchemaValidationCompileErrors: {0}", args.Message);
-        }
-        private static bool ValidateField(string name, object target)
-        {
-            bool isValid = true;
-
-            return isValid;
-        }
         private static EnvelopeType LoadVmw40OvfXml(string ovfxml)
         {
             if (string.IsNullOrEmpty(ovfxml))
@@ -712,19 +666,6 @@ namespace XenOvf.Utilities
             
             return xenobj;
         }
-        private static T DeserializeNode<T>(XmlNode node)
-        {
-            XmlSerializer xs = new XmlSerializer(typeof(T));
-            try
-            {
-                return (T)xs.Deserialize(new XmlNodeReader(node));
-            }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("Tools.Deserialize FAILED {0}", ex.Message);
-            }
-            return (T) new object();
-        }
         private static void OpenArchive(string filename)
         {
             log.InfoFormat("Utilities.OpenArchive: Opening OVF Archive: {0}", filename);
@@ -735,27 +676,5 @@ namespace XenOvf.Utilities
             }
             OVF.OpenOva(Path.GetDirectoryName(filename), Path.GetFileName(filename));
        }
-        /// <summary>
-        /// Specific Exception starting from XenOvf.Utilities
-        /// </summary>
-        public class CtxUtilitiesException : Exception
-        {
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            public CtxUtilitiesException() : base() { }
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            public CtxUtilitiesException(string message) : base(message) { }
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            public CtxUtilitiesException(string message, Exception exception) : base(message, exception) { }
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            public CtxUtilitiesException(SerializationInfo serialinfo, StreamingContext context) : base(serialinfo, context) { }
-        }
     }
 }
