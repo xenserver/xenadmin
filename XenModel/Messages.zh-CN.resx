@@ -2145,6 +2145,9 @@
   <data name="BIOS_BOOT" xml:space="preserve">
     <value>BIOS 引导</value>
   </data>
+  <data name="BIOS_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>选定模板不支持 BIOS 引导模式。</value>
+  </data>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>已复制 BIOS 字符串</value>
   </data>
@@ -2602,7 +2605,7 @@
     <value>主机升级准备情况检查</value>
   </data>
   <data name="CHECKING_PV_GUESTS" xml:space="preserve">
-    <value>PV 来宾兼容性检查</value>
+    <value>正在检查来宾兼容性</value>
   </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>正在检查角色...</value>
@@ -3245,14 +3248,6 @@
   <data name="CONTROL_DOM_ON_HOST" xml:space="preserve">
     <value>主机 {0} 上的控制域</value>
   </data>
-  <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
-    <value>此操作将从 Conversion Manager 虚拟设备历史记录中清除所有已完成的转换。
-
-此操作无法撤消。是否确实要继续?</value>
-  </data>
-  <data name="CONVERSION_CLEAR_HISTORY_FAILURE" xml:space="preserve">
-    <value>无法清除转换历史记录。请参阅日志了解详细信息。</value>
-  </data>
   <data name="CONVERSION_CANCEL_CONFIRM" xml:space="preserve">
     <value>是否确实要取消此转换?</value>
   </data>
@@ -3264,6 +3259,14 @@
   </data>
   <data name="CONVERSION_CANNOT_OBTAIN_VPX_IP" xml:space="preserve">
     <value>无法获取 Conversion Manager 虚拟设备的 IP 地址。</value>
+  </data>
+  <data name="CONVERSION_CLEAR_HISTORY_CONFIRM" xml:space="preserve">
+    <value>此操作将从 Conversion Manager 虚拟设备历史记录中清除所有已完成的转换。
+
+此操作无法撤消。是否确实要继续?</value>
+  </data>
+  <data name="CONVERSION_CLEAR_HISTORY_FAILURE" xml:space="preserve">
+    <value>无法清除转换历史记录。请参阅日志了解详细信息。</value>
   </data>
   <data name="CONVERSION_CONNECTING_VMWARE" xml:space="preserve">
     <value>正在连接到 VMware 服务器...</value>
@@ -3325,11 +3328,11 @@
   <data name="CONVERSION_EXPORT" xml:space="preserve">
     <value>将转换导出到 {0}</value>
   </data>
-  <data name="CONVERSION_EXPORTING" xml:space="preserve">
-    <value>正在将转换导出到 {0}...</value>
-  </data>
   <data name="CONVERSION_EXPORTED" xml:space="preserve">
     <value>已将转换导出到 {0}</value>
+  </data>
+  <data name="CONVERSION_EXPORTING" xml:space="preserve">
+    <value>正在将转换导出到 {0}...</value>
   </data>
   <data name="CONVERSION_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>您已将过滤器应用到转换列表。要导出所有转换，还是仅导出您选择查看的转换?</value>
@@ -3343,14 +3346,14 @@
   <data name="CONVERSION_LOG_SAVE" xml:space="preserve">
     <value>将转换日志保存到 {0}</value>
   </data>
+  <data name="CONVERSION_LOG_SAVED" xml:space="preserve">
+    <value>已将转换日志保存到 {0}</value>
+  </data>
   <data name="CONVERSION_LOG_SAVE_TITLE" xml:space="preserve">
     <value>保存转换日志</value>
   </data>
   <data name="CONVERSION_LOG_SAVING" xml:space="preserve">
     <value>正在将转换日志保存到 {0}</value>
-  </data>
-  <data name="CONVERSION_LOG_SAVED" xml:space="preserve">
-    <value>已将转换日志保存到 {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
     <value>管理转换 - {0}</value>
@@ -3373,19 +3376,28 @@
   <data name="CONVERSION_NETWORK_PAGE_TITLE" xml:space="preserve">
     <value>(可选)选择 [XenServer] 网络以连接 VM</value>
   </data>
-  <data name="CONVERSION_RETRY_FAILURE" xml:space="preserve">
-    <value>无法重试转换。请参阅日志了解详细信息。</value>
-  </data>
   <data name="CONVERSION_RBAC_RESTRICTION" xml:space="preserve">
     <value>用户 {0} 的权限不足，无法运行 Conversion Manager。请使用具有以下角色之一的帐户登录:
 
 {1}</value>
   </data>
+  <data name="CONVERSION_RETRY_FAILURE" xml:space="preserve">
+    <value>无法重试转换。请参阅日志了解详细信息。</value>
+  </data>
   <data name="CONVERSION_SELECT_VPX_TITLE" xml:space="preserve">
     <value>选择 Conversion Manager 虚拟设备 - {0}</value>
   </data>
+  <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
+    <value>已取消</value>
+  </data>
   <data name="CONVERSION_STATUS_CREATED" xml:space="preserve">
     <value>已创建</value>
+  </data>
+  <data name="CONVERSION_STATUS_FAILED" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="CONVERSION_STATUS_INCOMPLETE" xml:space="preserve">
+    <value>未完成</value>
   </data>
   <data name="CONVERSION_STATUS_QUEUED" xml:space="preserve">
     <value>已排队</value>
@@ -3396,26 +3408,17 @@
   <data name="CONVERSION_STATUS_SUCCESSFUL" xml:space="preserve">
     <value>完成</value>
   </data>
-  <data name="CONVERSION_STATUS_FAILED" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="CONVERSION_STATUS_CANCELLED" xml:space="preserve">
-    <value>已取消</value>
-  </data>
-  <data name="CONVERSION_STATUS_INCOMPLETE" xml:space="preserve">
-    <value>未完成</value>
-  </data>
   <data name="CONVERSION_STORAGE_PAGE_FREE_SPACE" xml:space="preserve">
     <value>可用空间 {0}</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS" xml:space="preserve">
     <value>正在检索可用 SR...</value>
   </data>
-  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE" xml:space="preserve">
-    <value>无法检索可用 SR</value>
-  </data>
   <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_EMPTY" xml:space="preserve">
     <value>没有可以容纳转换后的 VM 的磁盘的 SR 位置</value>
+  </data>
+  <data name="CONVERSION_STORAGE_PAGE_QUERYING_SRS_FAILURE" xml:space="preserve">
+    <value>无法检索可用 SR</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>所需空间 {0}</value>
@@ -3486,11 +3489,11 @@
   <data name="CONVERSION_VPX_START" xml:space="preserve">
     <value>正在启动 Conversion Manager 虚拟设备...</value>
   </data>
-  <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
-    <value>正在取消暂停 Conversion Manager 虚拟设备...</value>
-  </data>
   <data name="CONVERSION_VPX_UNKNOWN_POWER_STATE" xml:space="preserve">
     <value>无法推断 Conversion Manager 虚拟设备的电源状态。</value>
+  </data>
+  <data name="CONVERSION_VPX_UNPAUSE" xml:space="preserve">
+    <value>正在取消暂停 Conversion Manager 虚拟设备...</value>
   </data>
   <data name="CONVERSION_WIZARD_TEXT" xml:space="preserve">
     <value>新转换</value>
@@ -4495,6 +4498,9 @@
   </data>
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>显示选项</value>
+  </data>
+  <data name="DMC" xml:space="preserve">
+    <value>动态内存控制</value>
   </data>
   <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
     <value>由于服务器上存在许可证限制，因此，动态内存控制(DMC)不可用。</value>
@@ -6747,16 +6753,16 @@
     <value>必须重新启动服务器“{0}”以完成还原进程。</value>
   </data>
   <data name="HOST_REMOVED_MANY_CRASHDUMPS" xml:space="preserve">
-    <value>已从 {1} 删除 {0} 个故障转储</value>
+    <value>已从 {1} 中删除 {0} 个故障转储</value>
   </data>
   <data name="HOST_REMOVED_ONE_CRASHDUMP" xml:space="preserve">
-    <value>已从 {0} 删除 1 个故障转储</value>
+    <value>已从 {0} 中删除 1 个故障转储</value>
   </data>
   <data name="HOST_REMOVING_CRASHDUMP" xml:space="preserve">
-    <value>正在从 {2} 删除 {1} 个故障转储中的第 {0} 个</value>
+    <value>正在从 {2} 中删除 {0} 个故障转储，共 {1} 个</value>
   </data>
   <data name="HOST_REMOVING_CRASHDUMPS_TITLE" xml:space="preserve">
-    <value>正在从 {0} 删除故障转储</value>
+    <value>正在从 {0} 中删除故障转储</value>
   </data>
   <data name="HOST_RESTORED" xml:space="preserve">
     <value>服务器“{0}”已还原。</value>
@@ -6920,6 +6926,9 @@
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>导出的文件不完整，或格式无法识别。</value>
   </data>
+  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
+    <value>修复 ISO 无法复制到选定的 SR</value>
+  </data>
   <data name="IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR" xml:space="preserve">
     <value>[选择一个 ISO SR]</value>
   </data>
@@ -6943,9 +6952,6 @@
   </data>
   <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>修复 ISO 将自动复制到所选 SR</value>
-  </data>
-  <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
-    <value>修复 ISO 无法复制到选定的 SR</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>找不到设备证书。缺少该文件。</value>
@@ -9965,7 +9971,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>预检查失败。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
-    <value>执行更新预检查是为了确认更新 {0} 能够在服务器上应用。</value>
+    <value>执行更新预检查是为了确认更新“{0}”可以应用于服务器。</value>
   </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>已执行预检查，以验证自动更新是否能够继续。</value>
@@ -10084,6 +10090,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_PER_POOL_ONE" xml:space="preserve">
     <value>安装更新 {0} 过程中出现以下错误:</value>
+  </data>
+  <data name="PATCHINGWIZARD_SINGLEUPDATE_MANUAL_POST_UPDATE" xml:space="preserve">
+    <value>请执行以下列表中所有待处理的更新后任务:</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_SUCCESS_MANY" xml:space="preserve">
     <value>已成功在所有选定的服务器上安装更新 {0}。</value>
@@ -10303,6 +10312,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> 错误。</value>
   </data>
+  <data name="PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE" xml:space="preserve">
+    <value>无法撤消服务器“{0}”，因为没有可用的服务器来容纳从此服务器迁移的所有 VM。请在安装更新后重新启动等待重新启动的其他服务器，然后按“重试”继续执行此过程。</value>
+  </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>服务器“{0}”无法撤离，因为其他服务器上没有足够的可用内存以迁移此服务器中的所有 VM。请暂停或关闭某些 VM，然后按“重试”以恢复该过程。</value>
   </data>
@@ -10456,10 +10468,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>该池无共享存储</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
-    <value>{0}: 从 [XenServer] [BRANDING_VERSION_8_1] 开始，不再支持半虚拟化（PV）来宾。单击“了解更多”以查看支持的来宾操作系统列表。 </value>
+    <value>{0}: 截至 [XenServer] [BRANDING_VERSION_8_1]，已放弃对半虚拟化的(PV)来宾的支持。单击“了解更多”可查看支持的来宾操作系统列表。 </value>
   </data>
   <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
-    <value>{0}: 从 [XenServer] [BRANDING_VERSION_8_1] 开始，不再支持半虚拟化（PV）来宾。单击“了解更多”以查看支持的来宾操作系统列表。 </value>
+    <value>{0}: 截至 [XenServer] [BRANDING_VERSION_8_1]，已放弃对半虚拟化的(PV)来宾的支持。单击“了解更多”可查看支持的来宾操作系统列表。 </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>池获得部分许可</value>
@@ -10617,9 +10629,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PROXY_SERVERS_NOT_SUPPORTED" xml:space="preserve">
     <value>不支持代理服务器。</value>
   </data>
-  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>来宾兼容性检查</value>
-  </data>
   <data name="PVS_CACHE_CONFIG_DIALOG_TITLE" xml:space="preserve">
     <value>PVS 加速器配置 - {0}</value>
   </data>
@@ -10667,6 +10676,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
     <value>[Citrix VM Tools] 已过期</value>
+  </data>
+  <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>来宾兼容性检查</value>
   </data>
   <data name="QOS_LIMIT_INVALID" xml:space="preserve">
     <value>QoS 限制必须介于 1 和 2147483647 之间(或者留空)。</value>
@@ -14355,6 +14367,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="XENSERVER_6_5" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
   </data>
+  <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
+  </data>
   <data name="XENSERVER_LEGACY" xml:space="preserve">
     <value>[Legacy XenServer product]</value>
   </data>
@@ -14385,7 +14400,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0} (隐藏)</value>
   </data>
   <data name="X_IS_DEPRECATED_IN_X" xml:space="preserve">
-    <value>“{0}”功能在 {1} 中已弃用，在将来的版本中可能不提供</value>
+    <value>{0} 功能在 {1} 中已弃用，并且可能会在将来的版本中停用</value>
   </data>
   <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
     <value>“{0}”功能在 {1} 及更高版本中不提供</value>

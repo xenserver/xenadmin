@@ -1773,7 +1773,7 @@
     <value>从服务器检索系统状态失败。</value>
   </data>
   <data name="TASK_CANCELLED" xml:space="preserve">
-    <value>以异步方式取消了请求。</value>
+    <value>请求已异步取消。</value>
   </data>
   <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
     <value>在指定的地址和端口上无法使用 TLS 联系其他主机</value>
@@ -2241,7 +2241,7 @@
     <value>配置的 WLB 服务器名称无法在 DNS 中解析。</value>
   </data>
   <data name="WLB_URL_INVALID" xml:space="preserve">
-    <value>WLB URL 无效。请确保其格式为: &lt;IP address&gt;:&lt;port&gt;。将返回配置的/指定的 URL。</value>
+    <value>WLB URL 无效。请确保其格式为: &lt;ipaddress&gt;:&lt;port&gt;。将返回配置的/指定的 URL。</value>
   </data>
   <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB 报告服务器拒绝了所配置的身份验证详细信息。</value>
