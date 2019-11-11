@@ -148,26 +148,17 @@ namespace XenOvf
             {
                 log.Error("File handling error. ", ex);
             }
-            FileStream fs = null;
-            StreamWriter sw = null;
-            try
+
+            using (var fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
+            using (var sw = new StreamWriter(fs))
             {
-                fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-                sw = new StreamWriter(fs);
                 sw.Write(OvfXml);
                 sw.Flush();
             }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("SaveAs FAILED: {0} with {1}", filename, ex.Message);
-                throw;
-            }
-            finally
-            {
-                if (sw != null) sw.Close();
-                if (fs != null) fs.Close();
-            }
-            if (File.Exists(oldfile)) { File.Delete(oldfile); }
+
+            if (File.Exists(oldfile))
+                File.Delete(oldfile);
+
             log.Debug("OVF.SaveAs completed");
         }
         #endregion
@@ -215,131 +206,6 @@ namespace XenOvf
             return false;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-                                                         Justification = "Streams are used in embedded streams and are disposed appropriately.")]
-        private static bool CheckForFileExt(string filename, string extension)
-        {
-            string ovfpath = Path.GetDirectoryName(filename);
-            string ovfname = Path.GetFileNameWithoutExtension(filename);
-            string findfile = Path.Combine(ovfpath, string.Format("{0}.{1}", ovfname, extension));
-            string ext = Path.GetExtension(filename);
-            bool foundfile = false;
-
-            if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2"))
-            {
-                ovfname = Path.GetFileNameWithoutExtension(ovfname);
-            }
-
-            if (ext.ToLower().EndsWith("ovf"))
-            {
-                if (File.Exists(findfile))
-                {
-                    log.InfoFormat("File: OVF: {0} found file with (.{1}) extension", filename, extension);
-                    foundfile = true;
-                }
-                else
-                {
-                    log.InfoFormat("File: OVF: {0} did not find file with (.{1}) extension", filename, extension);
-                    foundfile = false;
-                }
-            }
-            else if (ext.ToLower().EndsWith("ova") ||
-                     ext.ToLower().EndsWith("gz") ||
-                     ext.ToLower().EndsWith("bz2"))
-            {
-                string origDir = Directory.GetCurrentDirectory();
-                Directory.SetCurrentDirectory(ovfpath);
-
-                Stream inputStream = null; // new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.None);
-
-                #region DECOMPRESSION STREAM
-                try
-                {
-                    if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2"))  // need to decompress.
-                    {
-                        log.Info("OVA is compressed, de-compression stream inserted");
-                        string ovaext = Path.GetExtension(ovfname);
-                        if (ovaext.ToLower().EndsWith("ova"))
-                        {
-                            FileStream fsStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.None);
-                            if (Properties.Settings.Default.useGZip)
-                            {
-                                inputStream = CompressionFactory.Reader(CompressionFactory.Type.Gz, fsStream);
-                            }
-                            else
-                            {
-                                inputStream = CompressionFactory.Reader(CompressionFactory.Type.Bz2, fsStream);
-                            }
-                        }
-                        else
-                        {
-                            throw new ArgumentException(Messages.OVF_COMPRESSED_OVA_INVALID);
-                        }
-                    }
-                    else
-                    {
-                        inputStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.None);
-                    }
-                }
-                catch
-                {
-                    if (inputStream != null)
-                    {
-                        inputStream.Dispose();
-                    }
-                    throw;
-                }
-                #endregion
-
-                if (inputStream == null)
-                {
-                    throw new IOException(string.Format(Messages.OVF_COULD_NOT_OPEN_STREAM, filename));
-                }
-
-                ArchiveIterator tar = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream);
-
-                try
-                {
-                    while(tar.HasNext())
-                    {
-                        string ovaext = Path.GetExtension(tar.CurrentFileName());
-                        log.DebugFormat("OVA: File: {0}", tar.CurrentFileName());
-                        if (tar.CurrentFileName() != null && ovaext.ToLower().Contains(extension.ToLower()))
-                        {
-                            log.InfoFormat("OVF: File: {0} found file with (.{1}) extension", tar.CurrentFileName(), extension);
-                            foundfile = true;
-                            break;
-                        }
-                        if (tar.CurrentFileName() != null &&
-                            !(Path.GetExtension(tar.CurrentFileName()).EndsWith(Properties.Settings.Default.ovfFileExtension)) &&
-                            !(Path.GetExtension(tar.CurrentFileName()).EndsWith(Properties.Settings.Default.manifestFileExtension)) &&
-                            !(Path.GetExtension(tar.CurrentFileName()).EndsWith(Properties.Settings.Default.certificateFileExtension)))
-                        {
-                            foundfile = false;
-                            break;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    log.ErrorFormat("OVA search FAILED with {0}", ex.Message);
-                    throw;
-                }
-                finally
-                {
-                    if (inputStream != null) inputStream.Dispose();
-                    if (tar != null) tar.Dispose();
-                    Directory.SetCurrentDirectory(origDir);
-                }
-                return foundfile;
-            }
-            else
-            {
-                log.InfoFormat("Unknown extension {0}", ext);
-                foundfile = false;
-            }
-            return foundfile;
-        }
         #endregion
 
         #region ADDs
@@ -4937,35 +4803,32 @@ namespace XenOvf
             log.InfoFormat("OVF.OpenOva: TouchFile: {0}", _touchFile);
             if (!File.Exists(_touchFile))
             {
-                FileStream fs = File.Create(_touchFile); fs.Close();
+                using (FileStream fs = File.Create(_touchFile))
+                { }
 
                 string origDir = Directory.GetCurrentDirectory();
                 Directory.SetCurrentDirectory(pathToOva);
-                string ovafilename = ovaFileName;
-                string ext = Path.GetExtension(ovaFileName);
 
                 Stream inputStream = null;
                 FileStream fsStream = null;
+                ArchiveIterator tar = null;
 
-                #region DECOMPRESSION STREAM
                 try
                 {
+                    string ext = Path.GetExtension(ovaFileName);
+
                     if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2"))  // need to decompress.
                     {
                         log.Info("OVA is compressed, de-compression stream inserted");
-                        ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(ovaFileName));
+                        var ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(ovaFileName));
                         string ovaext = Path.GetExtension(ovafilename);
+
                         if (ovaext.ToLower().EndsWith("ova"))
                         {
                             fsStream = new FileStream(ovaFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                            if (Properties.Settings.Default.useGZip)
-                            {
-                                inputStream = CompressionFactory.Reader(CompressionFactory.Type.Gz, fsStream);
-                            }
-                            else
-                            {
-                                inputStream = CompressionFactory.Reader(CompressionFactory.Type.Bz2, fsStream);
-                            }
+
+                            var compType = Properties.Settings.Default.useGZip ? CompressionFactory.Type.Gz : CompressionFactory.Type.Bz2;
+                            inputStream = CompressionFactory.Reader(compType, fsStream);
                         }
                         else
                         {
@@ -4977,57 +4840,18 @@ namespace XenOvf
                     {
                         inputStream = new FileStream(ovaFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                     }
-                }
-                catch (Exception ex)
-                {
-                    if (fsStream != null)
-                    {
-                        fsStream.Close();
-                        fsStream = null;
-                    }
-                    if (inputStream != null)
-                    {
-                        inputStream.Close();
-                        inputStream = null;
-                    }
-                    log.ErrorFormat("OVF.OpenOva: open failure {0}", ex.Message);
-                    throw;
-                }
-                #endregion
 
-                #region UN-TAR
-                ArchiveIterator tar = null;
-                try
-                {
                     tar = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream);
                     tar.ExtractAllContents(pathToOva);
                 }
-                catch (Exception ex)
-                {
-                    log.ErrorFormat("OVF.OpenOva: Exception: {0}", ex.Message);
-                }
                 finally
                 {
-                    if (tar != null)
-                    {
-                        tar.Dispose();
-                        tar = null;
-                    }
-                    if (fsStream != null)
-                    {
-                        fsStream.Close();
-                        fsStream = null;
-                    }
-                    if (inputStream != null)
-                    {
-                        inputStream.Close();
-                        inputStream = null;
-                    }
+                    tar?.Dispose();
+                    inputStream?.Close();
+                    fsStream?.Close();
+                    
                     Directory.SetCurrentDirectory(origDir);
-                    log.Debug("OVF.OpenOva: Finally block");
                 }
-                #endregion
-                log.Debug("OVF.OpenOva completed");
             }
             else
             {
