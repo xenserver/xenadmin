@@ -53,7 +53,7 @@ do
   fi
 done
 
-for hfx in RPU004
+for hfx in RPU004 RPU005
 do
   if [ -d "${hfx}" ]; then
     latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
