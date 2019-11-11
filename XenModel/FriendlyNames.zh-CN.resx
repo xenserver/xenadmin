@@ -295,7 +295,7 @@
     <value>无法识别 XML 节点“{0}”。</value>
   </data>
   <data name="Exception-PowerShellExecutionPolicyRestricted" xml:space="preserve">
-    <value>PowerShell“ExecutionPolicy”等于“受限制”时，无法加载 XenServerPSModule。</value>
+    <value>PowerShell“ExecutionPolicy”设置为“受限制”时，无法加载 XenServerPSModule。</value>
   </data>
   <data name="Exception-PowerShellNotPresent" xml:space="preserve">
     <value>必须安装 PowerShell 才能使用 PowerShell 插件。可以从 Microsoft Web 站点下载 PowerShell。</value>
