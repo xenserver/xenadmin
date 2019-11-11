@@ -252,7 +252,7 @@ namespace XenAdmin.Commands
                 foreach (Host host in connection.Cache.Hosts)
                 {
                     reasons[host] = string.Empty;
-                    if (!isStart && VMOperationHostCommand.VmCpuFeaturesIncompatibleWithHost(host, vm))
+                    if (!isStart && VMOperationHostCommand.VmCpuIncompatibleWithHost(host, vm))
                     {
                         reasons[host] = FriendlyErrorNames.VM_INCOMPATIBLE_WITH_THIS_HOST;
                         continue;
