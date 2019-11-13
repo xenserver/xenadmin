@@ -5102,6 +5102,10 @@ namespace XenAPI
         Response<string>
         bond_get_links_up(string session, string _bond);
 
+        [XmlRpcMethod("Bond.get_auto_update_mac")]
+        Response<bool>
+        bond_get_auto_update_mac(string session, string _bond);
+
         [XmlRpcMethod("Bond.set_other_config")]
         Response<string>
         bond_set_other_config(string session, string _bond, Object _other_config);
@@ -7327,6 +7331,10 @@ namespace XenAPI
         Response<string>
         vgpu_get_extra_args(string session, string _vgpu);
 
+        [XmlRpcMethod("VGPU.get_PCI")]
+        Response<string>
+        vgpu_get_pci(string session, string _vgpu);
+
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
         vgpu_set_other_config(string session, string _vgpu, Object _other_config);
@@ -8866,6 +8874,7 @@ namespace XenAPI
         public string mode;
         public Object properties;
         public string links_up;
+        public bool auto_update_mac;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9198,6 +9207,7 @@ namespace XenAPI
         public string scheduled_to_be_resident_on;
         public Object compatibility_metadata;
         public string extra_args;
+        public string PCI;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

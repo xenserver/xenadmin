@@ -58,7 +58,8 @@ namespace XenAPI
             XenRef<PIF> primary_slave,
             bond_mode mode,
             Dictionary<string, string> properties,
-            long links_up)
+            long links_up,
+            bool auto_update_mac)
         {
             this.uuid = uuid;
             this.master = master;
@@ -68,6 +69,7 @@ namespace XenAPI
             this.mode = mode;
             this.properties = properties;
             this.links_up = links_up;
+            this.auto_update_mac = auto_update_mac;
         }
 
         /// <summary>
@@ -107,6 +109,7 @@ namespace XenAPI
             mode = update.mode;
             properties = update.properties;
             links_up = update.links_up;
+            auto_update_mac = update.auto_update_mac;
         }
 
         internal void UpdateFrom(Proxy_Bond proxy)
@@ -119,6 +122,7 @@ namespace XenAPI
             mode = proxy.mode == null ? (bond_mode) 0 : (bond_mode)Helper.EnumParseDefault(typeof(bond_mode), (string)proxy.mode);
             properties = proxy.properties == null ? null : Maps.convert_from_proxy_string_string(proxy.properties);
             links_up = proxy.links_up == null ? 0 : long.Parse(proxy.links_up);
+            auto_update_mac = (bool)proxy.auto_update_mac;
         }
 
         public Proxy_Bond ToProxy()
@@ -132,6 +136,7 @@ namespace XenAPI
             result_.mode = bond_mode_helper.ToString(mode);
             result_.properties = Maps.convert_to_proxy_string_string(properties);
             result_.links_up = links_up.ToString();
+            result_.auto_update_mac = auto_update_mac;
             return result_;
         }
 
@@ -159,6 +164,8 @@ namespace XenAPI
                 properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
             if (table.ContainsKey("links_up"))
                 links_up = Marshalling.ParseLong(table, "links_up");
+            if (table.ContainsKey("auto_update_mac"))
+                auto_update_mac = Marshalling.ParseBool(table, "auto_update_mac");
         }
 
         public bool DeepEquals(Bond other)
@@ -175,7 +182,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._primary_slave, other._primary_slave) &&
                 Helper.AreEqual2(this._mode, other._mode) &&
                 Helper.AreEqual2(this._properties, other._properties) &&
-                Helper.AreEqual2(this._links_up, other._links_up);
+                Helper.AreEqual2(this._links_up, other._links_up) &&
+                Helper.AreEqual2(this._auto_update_mac, other._auto_update_mac);
         }
 
         internal static List<Bond> ProxyArrayToObjectList(Proxy_Bond[] input)
@@ -342,6 +350,20 @@ namespace XenAPI
                 return session.JsonRpcClient.bond_get_links_up(session.opaque_ref, _bond);
             else
                 return long.Parse(session.proxy.bond_get_links_up(session.opaque_ref, _bond ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the auto_update_mac field of the given Bond.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_bond">The opaque_ref of the given bond</param>
+        public static bool get_auto_update_mac(Session session, string _bond)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_auto_update_mac(session.opaque_ref, _bond);
+            else
+                return (bool)session.proxy.bond_get_auto_update_mac(session.opaque_ref, _bond ?? "").parse();
         }
 
         /// <summary>
@@ -761,5 +783,24 @@ namespace XenAPI
             }
         }
         private long _links_up = 0;
+
+        /// <summary>
+        /// true if the MAC was taken from the primary slave when the bond was created, and false if the client specified the MAC
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool auto_update_mac
+        {
+            get { return _auto_update_mac; }
+            set
+            {
+                if (!Helper.AreEqual(value, _auto_update_mac))
+                {
+                    _auto_update_mac = value;
+                    Changed = true;
+                    NotifyPropertyChanged("auto_update_mac");
+                }
+            }
+        }
+        private bool _auto_update_mac = true;
     }
 }

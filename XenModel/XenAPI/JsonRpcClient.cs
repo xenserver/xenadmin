@@ -8894,6 +8894,13 @@ namespace XenAPI
             return Rpc<long>("Bond.get_links_up", new JArray(session, _bond ?? ""), serializer);
         }
 
+        public bool bond_get_auto_update_mac(string session, string _bond)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("Bond.get_auto_update_mac", new JArray(session, _bond ?? ""), serializer);
+        }
+
         public void bond_set_other_config(string session, string _bond, Dictionary<string, string> _other_config)
         {
             var converters = new List<JsonConverter> {new StringStringMapConverter()};
@@ -12785,6 +12792,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<string>("VGPU.get_extra_args", new JArray(session, _vgpu ?? ""), serializer);
+        }
+
+        public XenRef<PCI> vgpu_get_pci(string session, string _vgpu)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PCI>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<PCI>>("VGPU.get_PCI", new JArray(session, _vgpu ?? ""), serializer);
         }
 
         public void vgpu_set_other_config(string session, string _vgpu, Dictionary<string, string> _other_config)
