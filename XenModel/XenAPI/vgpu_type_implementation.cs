@@ -45,6 +45,10 @@ namespace XenAPI
         /// </summary>
         nvidia,
         /// <summary>
+        /// vGPU using NVIDIA hardware with SR-IOV
+        /// </summary>
+        nvidia_sriov,
+        /// <summary>
         /// vGPU using Intel GVT-g
         /// </summary>
         gvt_g,
@@ -73,6 +77,8 @@ namespace XenAPI
                     return "passthrough";
                 case vgpu_type_implementation.nvidia:
                     return "nvidia";
+                case vgpu_type_implementation.nvidia_sriov:
+                    return "nvidia_sriov";
                 case vgpu_type_implementation.gvt_g:
                     return "gvt_g";
                 case vgpu_type_implementation.mxgpu:

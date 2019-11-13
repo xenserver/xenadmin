@@ -2185,15 +2185,6 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The passthrough_enabled must be true before passthrough usb to vm..
-        /// </summary>
-        public static string PASSTHROUGH_NOT_ENABLED {
-            get {
-                return ResourceManager.GetString("PASSTHROUGH_NOT_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The update {0} has already been applied.
         /// </summary>
         public static string PATCH_ALREADY_APPLIED {
@@ -3009,7 +3000,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The SM plugin did not respond to a query..
+        ///   Looks up a localized string similar to The SM plug-in did not respond to a query..
         /// </summary>
         public static string SM_PLUGIN_COMMUNICATION_FAILURE {
             get {
@@ -3680,6 +3671,15 @@ namespace XenAPI {
         public static string SR_BACKEND_FAILURE_203 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_203", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gave up on leaf coalesce after leaf grew bigger than before snapshot taken.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_204 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_204", resourceCulture);
             }
         }
         
@@ -5574,6 +5574,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The guest driver does not support VGPU migration..
+        /// </summary>
+        public static string VGPU_GUEST_DRIVER_LIMIT {
+            get {
+                return ResourceManager.GetString("VGPU_GUEST_DRIVER_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot create a virtual GPU that is incompatible with the existing types on the VM..
         /// </summary>
         public static string VGPU_TYPE_NOT_COMPATIBLE {
@@ -5709,7 +5718,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is a minimal interval required between consecutive plugin calls made on the same VM, please wait before retry..
+        ///   Looks up a localized string similar to There is a minimal interval required between consecutive plug-in calls made on the same VM, please wait before retry..
         /// </summary>
         public static string VM_CALL_PLUGIN_RATE_LIMIT {
             get {
@@ -6483,6 +6492,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current version of Xen or its control libraries is incompatible with the Toolstack..
+        /// </summary>
+        public static string XEN_INCOMPATIBLE {
+            get {
+                return ResourceManager.GetString("XEN_INCOMPATIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some volumes to be snapshot could not be added to the VSS snapshot set.
         /// </summary>
         public static string XEN_VSS_REQ_ERROR_ADDING_VOLUME_TO_SNAPSET_FAILED {
@@ -6555,7 +6573,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The requested plugin could not be found..
+        ///   Looks up a localized string similar to The requested plug-in could not be found..
         /// </summary>
         public static string XENAPI_MISSING_PLUGIN {
             get {
@@ -6564,7 +6582,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was a failure communicating with the plugin..
+        ///   Looks up a localized string similar to There was a failure communicating with the plug-in..
         /// </summary>
         public static string XENAPI_PLUGIN_FAILURE {
             get {

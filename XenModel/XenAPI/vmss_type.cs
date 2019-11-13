@@ -45,7 +45,7 @@ namespace XenAPI
         /// </summary>
         checkpoint,
         /// <summary>
-        /// The snapshot is a VSS
+        /// Support for VSS has been removed.
         /// </summary>
         snapshot_with_quiesce,
         unknown
