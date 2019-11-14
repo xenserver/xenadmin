@@ -16,7 +16,7 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/dotnet46/Newtonsoft.Json.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/Newtonsoft.Json.CH.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
