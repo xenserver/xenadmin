@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.ImportWizard
 	{
 		private IEnumerable<Host> m_hostTargets;
         private bool m_buttonNextEnabled;
-        private List<SR> m_srsWithRegisteredEvents = new List<SR>();
+        private readonly List<SR> m_srsWithRegisteredEvents = new List<SR>();
         private readonly CollectionChangeEventHandler PBD_CollectionChangedWithInvoke;
 
 		public ImportOptionsPage()
@@ -136,10 +136,13 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void DeregisterEvents()
         {
-            Connection.Cache.DeregisterCollectionChanged<PBD>(PBD_CollectionChangedWithInvoke);
+            if (Connection != null)
+            {
+                Connection.Cache.DeregisterCollectionChanged<PBD>(PBD_CollectionChangedWithInvoke);
 
-            foreach (PBD pbd in Connection.Cache.PBDs)
-                pbd.PropertyChanged -= server_PropertyChanged;
+                foreach (PBD pbd in Connection.Cache.PBDs)
+                    pbd.PropertyChanged -= server_PropertyChanged;
+            }
 
             foreach (var sr in m_srsWithRegisteredEvents)
                 sr.PropertyChanged -= server_PropertyChanged;
