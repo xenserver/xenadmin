@@ -539,6 +539,9 @@ namespace XenAdmin.Wizards.GenericPages
 	            try
 	            {
 	                var selectedValue = cb.Value;
+	                if (cb.DataGridView == null)
+	                    return;
+
                     cb.DataGridView.RefreshEdit();
 	                if (item.Enabled && item.PreferAsSelectedItem)
 	                    cb.Value = item;
