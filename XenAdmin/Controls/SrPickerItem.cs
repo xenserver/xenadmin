@@ -117,7 +117,7 @@ namespace XenAdmin.Controls
                         ? string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
                         : Messages.SR_DETACHED;
 
-                if (Helpers.DundeePlusOrGreater(TheSR.Connection) && !TheSR.allowed_operations.Contains(storage_operations.vdi_mirror))
+                if (!TheSR.SupportsStorageMigration())
                     return Messages.UNSUPPORTED_SR_TYPE;
 
                 return base.DisabledReason;
@@ -133,7 +133,7 @@ namespace XenAdmin.Controls
                        (!TheSR.IsLocalSR() || existingVDIs.All(v => HomeHostCanSeeTargetSr(v, TheSR))) &&
                        TheSR.SupportsVdiCreate() &&
                        !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize) &&
-                       (!Helpers.DundeePlusOrGreater(TheSR.Connection) || TheSR.allowed_operations.Contains(storage_operations.vdi_mirror));
+                       TheSR.SupportsStorageMigration();
             }
         }
     }
