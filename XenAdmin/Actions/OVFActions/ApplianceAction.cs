@@ -90,7 +90,7 @@ namespace XenAdmin.Actions.OVFActions
             InitialiseTicker();
 	    }
 
-		protected void UpdateHandler(XenOvfTranportEventArgs e)
+		protected void UpdateHandler(XenOvfTransportEventArgs e)
 		{
 			if (!string.IsNullOrEmpty(e.Message))
 				Description = e.Message;

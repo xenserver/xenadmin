@@ -74,7 +74,7 @@ namespace XenOvfTransport
                 string ovffilename = Path.Combine(targetPath, string.Format(@"{0}.ovf", ovfname));
                 OVF.SaveAs(ovfEnv, ovffilename);
             }
-        	OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ExportThreadComplete, "Export", Messages.COMPLETED_EXPORT));
+        	OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, Messages.COMPLETED_EXPORT));
             return ovfEnv;
         }
 
@@ -127,7 +127,7 @@ namespace XenOvfTransport
                 if (vm.power_state != vm_power_state.Halted && vm.power_state != vm_power_state.Suspended)
                 {
                 	var message = string.Format(Messages.ERROR_VM_NOT_HALTED, vm.Name());
-                	OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ExportProgress, "Export", message));
+                	OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, message));
                     log.Info($"VM {vm.Name()} ({vmRef.opaque_ref}) is neither halted nor suspended.");
                     throw new Exception(message);
                 }
@@ -426,11 +426,11 @@ namespace XenOvfTransport
                                            label, uuid, Thread.CurrentThread.ManagedThreadId);
                         }
 
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Export", string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
+                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
 						
                         using (Stream source = m_iscsi.Connect(XenSession, uuid, true))
                         {
-                            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Export", ""));
+                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, ""));
                             using (FileStream fs = new FileStream(destinationFilename, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
                             {
                                 // Create a geometry to give to DiscUtils.Vhd.Disk.InitializeDynamic() just so it doesn't override capacity
@@ -458,14 +458,12 @@ namespace XenOvfTransport
 							throw;
                         var msg = string.Format(Messages.ISCSI_COPY_ERROR, destinationFilename);
                         log.Error($"Failed to transfer virtual disk {destinationFilename}", ex);
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Failure, "Export", msg, ex));
                         throw new Exception(msg, ex);
                     }
                     finally
                     {
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Export", string.Format(Messages.FILES_TRANSPORT_CLEANUP, uuid + ".vhd")));
+                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_CLEANUP, uuid + ".vhd")));
 						m_iscsi.Disconnect(XenSession);
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Export", ""));
                     }
                 }
             }
@@ -475,7 +473,7 @@ namespace XenOvfTransport
             }
         }
 
-		private void iscsi_UpdateHandler(XenOvfTranportEventArgs e)
+		private void iscsi_UpdateHandler(XenOvfTransportEventArgs e)
 		{
 			OnUpdate(e);
 		}
