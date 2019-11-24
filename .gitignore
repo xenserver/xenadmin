@@ -28,9 +28,7 @@ WixInstaller/*/*.msi
 WixInstaller/*/*.wixlib
 WixInstaller/*/*.wixobj
 WixInstaller/*/*.wixpdb
-WixInstaller/XenCenter.l10n.*
 WixInstaller/PrintEula.dll
-WixInstaller/XenCenter.l10n.wxs
 dotNetInstaller/*
 dotNetFx40_Full_setup/*
 packages/*

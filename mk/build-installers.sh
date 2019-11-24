@@ -85,7 +85,8 @@ compile_installer()
 
   mkdir -p out${name}
 
-${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+  ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib \
+           -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
 }
 
 sign_msi()
@@ -93,41 +94,37 @@ sign_msi()
   cd ${WIX}/out$1 && chmod a+rw $1.msi && ${REPO}/mk/sign.bat $1.msi
 }
 
-#create just english msi
 if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
 then
-  cd ${WIX}
-  mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
-  mv XenCenter.l10n.wxs ${BRANDING_BRAND_CONSOLE}.l10n.wxs
+  cd ${WIX} && mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
 fi
 
+#create l10n msi containing all resources
 compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}"
+compile_installer "${BRANDING_BRAND_CONSOLE}" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.ja-jp"
+compile_installer "${BRANDING_BRAND_CONSOLE}" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.zh-cn"
 
-#then create l10n msi containing all resources
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n"
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.ja-jp"
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.zh-cn"
-
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
+cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi \
+   ${WIX}/out${BRANDING_BRAND_CONSOLE}.ja-jp/${BRANDING_BRAND_CONSOLE}.ja-jp.msi \
+   ${WIX}/out${BRANDING_BRAND_CONSOLE}.zh-cn/${BRANDING_BRAND_CONSOLE}.zh-cn.msi \
    ${WIX}
 
-cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
-cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
+cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
 
 #create localised mst files and then embed them into l10n msi
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi ja-jp.mst
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi zh-cn.mst
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi zh-tw.mst
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi ja-jp.mst 1041
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-cn.mst 2052
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1028
-#sign again the combined msi because it seems the embedding breaks the signature
-cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
+cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.ja-jp.msi ja-jp.mst
+cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-cn.msi zh-cn.mst
+cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi zh-tw.mst
 
-#copy the msi installers
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
-cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}
+cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi ja-jp.mst 1041
+cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi zh-cn.mst 2052
+cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi zh-tw.mst 1028
+
+#sign again the combined msi because it seems the embedding breaks the signature
+cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.msi
+
+#copy the msi installer
+cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 
 set +u

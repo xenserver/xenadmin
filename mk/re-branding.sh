@@ -176,7 +176,7 @@ rebranding_global ${REPO}/mk/package-and-sign.sh
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
 rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
 rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
-branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs"
+branding_wxs ${REPO}/WixInstaller/XenCenter.wxs
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
