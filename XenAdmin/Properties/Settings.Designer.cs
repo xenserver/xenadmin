@@ -799,7 +799,7 @@ namespace XenAdmin.Properties {
                 this["ShowUpdatesByServer"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -812,7 +812,7 @@ namespace XenAdmin.Properties {
                 this["RememberLastSelectedTab"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -835,6 +835,19 @@ namespace XenAdmin.Properties {
             }
             set {
                 this["ConversionClientUseSsl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool IgnoreOvfValidationWarnings {
+            get {
+                return ((bool)(this["IgnoreOvfValidationWarnings"]));
+            }
+            set {
+                this["IgnoreOvfValidationWarnings"] = value;
             }
         }
     }

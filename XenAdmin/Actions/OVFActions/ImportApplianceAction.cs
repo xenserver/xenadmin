@@ -47,7 +47,6 @@ namespace XenAdmin.Actions.OVFActions
 	{
 		#region Private fields
 
-		private readonly EnvelopeType m_ovfEnvelope;
 		private readonly Package m_package;
 		private readonly Dictionary<string, VmMapping> m_vmMappings;
 		private readonly bool m_verifyManifest;
@@ -59,13 +58,12 @@ namespace XenAdmin.Actions.OVFActions
 
 		#endregion
 
-		public ImportApplianceAction(IXenConnection connection, EnvelopeType ovfEnv, Package package, Dictionary<string, VmMapping> vmMappings,
+		public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
 										bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr,
 										string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
-            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, GetApplianceName(ovfEnv, package), Helpers.GetName(connection)),
+            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection)),
                 networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
 		{
-			m_ovfEnvelope = ovfEnv;
 			m_package = package;
 			m_vmMappings = vmMappings;
 			m_verifyManifest = verifyManifest;
@@ -115,9 +113,6 @@ namespace XenAdmin.Actions.OVFActions
 				}
 			}
 
-			List<string> validationErrors;
-			OVF.Validate(m_package.PackageSourceFile, out validationErrors);
-
 			PercentComplete = 20;
 			Description = Messages.IMPORTING_VMS;
 
@@ -135,7 +130,7 @@ namespace XenAdmin.Actions.OVFActions
 
 				string systemid = vmMapping.Key;
 				var mapping = vmMapping.Value;
-				EnvelopeType[] envs = OVF.Split(m_ovfEnvelope, "system", new object[] {new[] {systemid}});
+                EnvelopeType[] envs = OVF.Split(m_package.OvfEnvelope, "system", new object[] {new[] {systemid}});
 
 				//storage
 				foreach (var kvp in mapping.Storage)
@@ -157,35 +152,38 @@ namespace XenAdmin.Actions.OVFActions
 				envelopes.Add(envs[0]);
 			}
 
-			var appName = GetApplianceName(m_ovfEnvelope, m_package);
-			EnvelopeType env = OVF.Merge(envelopes, appName);
+            EnvelopeType env = OVF.Merge(envelopes, m_package.Name);
+            var dir = m_package.ExtractToDir();
 
 			try //importVM
-			{
-				m_transportAction = new Import(uri, session)
-				                    	{
-				                    		ApplianceName = appName,
-				                    		UpdateHandler = UpdateHandler,
-											Cancel = Cancelling //in case the Cancel button has already been pressed
-				                    	};
+            {
+                m_transportAction = new Import(uri, session)
+                {
+                    ApplianceName = m_package.Name,
+                    UpdateHandler = UpdateHandler,
+                    Cancel = Cancelling //in case the Cancel button has already been pressed
+                };
 				m_transportAction.SetTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-                m_transportAction.Process(env, Path.GetDirectoryName(m_package.PackageSourceFile), m_password);
+                m_transportAction.Process(env, dir, m_password);
 			}
 			catch (OperationCanceledException)
 			{
 				throw new CancelledException();
 			}
+            finally
+            {
+                try
+                {
+                    Directory.Delete(dir, true);
+                }
+                catch
+                {
+                    //ignore
+                }
+            }
 
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
 		}
-
-        private static string GetApplianceName(EnvelopeType ovfEnv, Package package)
-	    {
-            var appName = ovfEnv.Name;
-            if (string.IsNullOrEmpty(appName))
-                appName = Path.GetFileNameWithoutExtension(package.PackageSourceFile);
-	        return appName;
-	    }
-	}
+    }
 }

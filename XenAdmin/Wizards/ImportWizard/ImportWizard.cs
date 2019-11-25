@@ -131,7 +131,6 @@ namespace XenAdmin.Wizards.ImportWizard
 					break;
 				case ImportType.Ovf:
 					(new ImportApplianceAction(TargetConnection,
-											   m_pageImportSource.SelectedOvfEnvelope,
 											   m_pageImportSource.SelectedOvfPackage,
 					                           m_vmMappings,
 					                           m_pageSecurity.VerifyManifest,
@@ -205,17 +204,17 @@ namespace XenAdmin.Wizards.ImportWizard
                             AddAfterPage(m_pageImportSource, appliancePages);
 						}
 
-						m_pageEula.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
+						m_pageEula.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfPackage.OvfEnvelope;
 						m_pageSecurity.SelectedOvfPackage = m_pageImportSource.SelectedOvfPackage;
 
 						CheckDisabledPages(m_pageEula, m_pageSecurity); //decide whether to disable these progress steps
-						ResetVmMappings(m_pageImportSource.SelectedOvfEnvelope);
-						m_pageHost.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
+						ResetVmMappings(m_pageImportSource.SelectedOvfPackage.OvfEnvelope);
+						m_pageHost.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfPackage.OvfEnvelope;
 				        m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
 						m_pageHost.VmMappings = m_vmMappings;
-						m_pageStorage.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
-                        lunPerVdiMappingPage.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
-						m_pageNetwork.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
+						m_pageStorage.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfPackage.OvfEnvelope;
+                        lunPerVdiMappingPage.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfPackage.OvfEnvelope;
+						m_pageNetwork.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfPackage.OvfEnvelope;
                         
 						NotifyNextPagesOfChange(m_pageEula, m_pageHost, m_pageStorage, m_pageNetwork, m_pageSecurity, m_pageOptions);
 						break;
@@ -520,10 +519,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			var temp = new List<Tuple>();
 			
-			var appName = m_pageImportSource.SelectedOvfEnvelope.Name;
-			if (string.IsNullOrEmpty(appName))
-				appName = Path.GetFileNameWithoutExtension(m_pageImportSource.SelectedOvfPackage.PackageSourceFile);
-
+			var appName = m_pageImportSource.SelectedOvfPackage.Name;
 			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_APPLIANCE, appName));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_VERIFY_MANIFEST, m_pageSecurity.VerifyManifest.ToYesNoStringI18n()));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_VERIFY_SIGNATURE, m_pageSecurity.VerifySignature.ToYesNoStringI18n()));

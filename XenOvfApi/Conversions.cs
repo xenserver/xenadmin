@@ -316,7 +316,7 @@ namespace XenOvf
         {
             string vpcstring = Tools.LoadFile(vpcFileName);
             vpcstring = vpcstring.Replace("utf-16", "utf-8").Replace("UTF-16", "UTF-8"); // fails if we don't do this. (not nice need to figure real answer)
-            Ms_Vmc_Type xca = (Ms_Vmc_Type)Tools.Deserialize(vpcstring, typeof(Ms_Vmc_Type));
+            Ms_Vmc_Type xca = Tools.Deserialize<Ms_Vmc_Type>(vpcstring);
             EnvelopeType env = ConvertFromVPCXml(xca, Path.GetFileNameWithoutExtension(vpcFileName), ovfName, lang);
             return Tools.Serialize(env, typeof(EnvelopeType), Tools.LoadNamespaces());
         }
@@ -390,7 +390,7 @@ namespace XenOvf
             string hvxml = Tools.LoadFile(hvxmlFileName);
             hvxml = hvxml.Replace("utf-16", "utf-8"); // fails if we don't do this.
             string xmlstring = null;
-            Ms_Declarations_Type hvobj = (Ms_Declarations_Type)Tools.Deserialize(hvxml, typeof(Ms_Declarations_Type));
+            Ms_Declarations_Type hvobj = Tools.Deserialize<Ms_Declarations_Type>(hvxml);
             if (hvobj != null &&
                 hvobj.declgroups != null &&
                 hvobj.declgroups.Count > 0 &&

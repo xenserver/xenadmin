@@ -673,52 +673,52 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OVF package {0} is invalid..
+        ///   Looks up a localized string similar to Processor quantity {0} exceeds the limit of {1}..
         /// </summary>
-        public static string VALIDATION_FAILURE {
+        public static string VALIDATION_CPU_EXCEEDS_LIMIT {
             get {
-                return ResourceManager.GetString("VALIDATION_FAILURE", resourceCulture);
+                return ResourceManager.GetString("VALIDATION_CPU_EXCEEDS_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processor quantity is invalid..
+        /// </summary>
+        public static string VALIDATION_CPU_INVALID_QUANTITY {
+            get {
+                return ResourceManager.GetString("VALIDATION_CPU_INVALID_QUANTITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk linkage (file to RASD) does not exist for {0}..
+        /// </summary>
+        public static string VALIDATION_FILE_INVALID_LINKAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_FILE_INVALID_LINKAGE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Failed to find file {0} listed in the reference section..
         /// </summary>
-        public static string VALIDATION_FILE_NOTFOUND {
+        public static string VALIDATION_FILE_NOT_FOUND {
             get {
-                return ResourceManager.GetString("VALIDATION_FILE_NOTFOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processor quantity {0} exceeds the limit of {1}..
-        /// </summary>
-        public static string VALIDATION_INVALID_CPU_EXCEEDS_LIMIT {
-            get {
-                return ResourceManager.GetString("VALIDATION_INVALID_CPU_EXCEEDS_LIMIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processor quantity {0} is invalid..
-        /// </summary>
-        public static string VALIDATION_INVALID_CPU_QUANTITY {
-            get {
-                return ResourceManager.GetString("VALIDATION_INVALID_CPU_QUANTITY", resourceCulture);
+                return ResourceManager.GetString("VALIDATION_FILE_NOT_FOUND", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to File {0} has an unsupported extension..
         /// </summary>
-        public static string VALIDATION_INVALID_FILETYPE {
+        public static string VALIDATION_FILE_UNSUPPORTED_EXTENSION {
             get {
-                return ResourceManager.GetString("VALIDATION_INVALID_FILETYPE", resourceCulture);
+                return ResourceManager.GetString("VALIDATION_FILE_UNSUPPORTED_EXTENSION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to InstanceId is empty..
+        ///   Looks up a localized string similar to Memory has an empty InstanceID, creating a new one..
         /// </summary>
         public static string VALIDATION_INVALID_INSTANCEID {
             get {
@@ -745,20 +745,20 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OVF envelope item has an unknown type..
+        ///   Looks up a localized string similar to This appliance does not contain a valid OVF file..
         /// </summary>
-        public static string VALIDATION_INVALID_TYPE {
+        public static string VALIDATION_INVALID_OVF {
             get {
-                return ResourceManager.GetString("VALIDATION_INVALID_TYPE", resourceCulture);
+                return ResourceManager.GetString("VALIDATION_INVALID_OVF", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OVF version number {0} is invalid..
+        ///   Looks up a localized string similar to OVF envelope item type &apos;{0}&apos; is not recognized..
         /// </summary>
-        public static string VALIDATION_INVALID_VERSION {
+        public static string VALIDATION_INVALID_TYPE {
             get {
-                return ResourceManager.GetString("VALIDATION_INVALID_VERSION", resourceCulture);
+                return ResourceManager.GetString("VALIDATION_INVALID_TYPE", resourceCulture);
             }
         }
         
@@ -781,7 +781,7 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OVF descriptor is invalid..
+        ///   Looks up a localized string similar to OVF descriptor does not comply with the OVF XML schema..
         /// </summary>
         public static string VALIDATION_SCHEMA_FAILED {
             get {
@@ -790,11 +790,29 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual hardware type {0} is invalid..
+        ///   Looks up a localized string similar to Found unexpected virtual hardware type &apos;{0}&apos;..
         /// </summary>
         public static string VALIDATION_UNKNOWN_HARDWARE_TYPE {
             get {
                 return ResourceManager.GetString("VALIDATION_UNKNOWN_HARDWARE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OVF version &apos;{0}&apos; is not supported..
+        /// </summary>
+        public static string VALIDATION_VERSION_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_VERSION_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The OVF version is not set; assuming 1.0.0..
+        /// </summary>
+        public static string VALIDATION_VERSION_UNSET {
+            get {
+                return ResourceManager.GetString("VALIDATION_VERSION_UNSET", resourceCulture);
             }
         }
         

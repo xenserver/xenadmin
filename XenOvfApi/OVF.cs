@@ -3658,7 +3658,7 @@ namespace XenOvf
                             File_Type filetype = FindFileReference(ovfObj, strings.fileRef);
                             if (!string.IsNullOrEmpty(filetype.href))
                             {
-                                stringtype = Tools.LoadFileXml<Strings_Type>(filetype.href);
+                                stringtype = Tools.Deserialize<Strings_Type>(Tools.LoadFile(filetype.href));
                                 break;
                             }
                         }
@@ -4753,6 +4753,7 @@ namespace XenOvf
 
 			return Serialize(ovfEnv);
         }
+
         /// <summary>
         /// Transform the OVF Object (EnvelopeType) to XML.
         /// </summary>
@@ -4777,87 +4778,56 @@ namespace XenOvf
                 throw new ArgumentNullException(Messages.OVF_ENVELOPE_IS_INVALID);
             }
         }
-        /// <summary>
-        /// Transform the OVF XML to Object (EnvelopeType)
-        /// </summary>
-        /// <param name="ovfxml">OVF XML</param>
-        /// <returns>object (EnvelopeType)</returns>
-        [SecurityPermission(SecurityAction.LinkDemand)]
-        public static object Deserialize(string ovfxml)
+
+        public static string ExtractArchive(string pathToOva)
         {
-            if (!string.IsNullOrEmpty(ovfxml))
+            Stream inputStream = null;
+            FileStream fsStream = null;
+            ArchiveIterator tar = null;
+
+            var dir = Path.GetDirectoryName(pathToOva);
+
+            try
             {
-                return Tools.Deserialize(ovfxml, typeof(EnvelopeType));
-            }
-            return null;
-        }
-        /// <summary>
-        /// Extract the contents of the OVA
-        /// </summary>
-        /// <param name="pathToOva">Absolute path to the OVF files</param>
-        /// <param name="ovaFileName">OVF file name (file.ovf)</param>
-        public static void OpenOva(string pathToOva, string ovaFileName)
-        {
-            _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
-            _touchFile = Path.Combine(pathToOva, "xen__" + _processId);
-            log.InfoFormat("OVF.OpenOva: TouchFile: {0}", _touchFile);
-            if (!File.Exists(_touchFile))
-            {
-                using (FileStream fs = File.Create(_touchFile))
-                { }
+                string ext = Path.GetExtension(pathToOva);
 
-                string origDir = Directory.GetCurrentDirectory();
-                Directory.SetCurrentDirectory(pathToOva);
-
-                Stream inputStream = null;
-                FileStream fsStream = null;
-                ArchiveIterator tar = null;
-
-                try
+                if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2")) // need to decompress.
                 {
-                    string ext = Path.GetExtension(ovaFileName);
+                    log.Info("OVA is compressed, de-compression stream inserted");
 
-                    if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2"))  // need to decompress.
+                    var ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(pathToOva));
+                    string ovaext = Path.GetExtension(ovafilename);
+
+                    if (ovaext.ToLower().EndsWith("ova"))
                     {
-                        log.Info("OVA is compressed, de-compression stream inserted");
-                        var ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(ovaFileName));
-                        string ovaext = Path.GetExtension(ovafilename);
+                        fsStream = new FileStream(Path.Combine(dir, ovafilename), FileMode.Open, FileAccess.Read, FileShare.Read);
 
-                        if (ovaext.ToLower().EndsWith("ova"))
-                        {
-                            fsStream = new FileStream(ovaFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-
-                            var compType = Properties.Settings.Default.useGZip ? CompressionFactory.Type.Gz : CompressionFactory.Type.Bz2;
-                            inputStream = CompressionFactory.Reader(compType, fsStream);
-                        }
-                        else
-                        {
-                            throw new ArgumentException(Messages.OVF_COMPRESSED_OVA_INVALID);
-                        }
-
+                        var compType = Properties.Settings.Default.useGZip ? CompressionFactory.Type.Gz : CompressionFactory.Type.Bz2;
+                        inputStream = CompressionFactory.Reader(compType, fsStream);
                     }
                     else
                     {
-                        inputStream = new FileStream(ovaFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        throw new ArgumentException(Messages.OVF_COMPRESSED_OVA_INVALID);
                     }
-
-                    tar = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream);
-                    tar.ExtractAllContents(pathToOva);
                 }
-                finally
+                else
                 {
-                    tar?.Dispose();
-                    inputStream?.Close();
-                    fsStream?.Close();
-                    
-                    Directory.SetCurrentDirectory(origDir);
+                    inputStream = new FileStream(pathToOva, FileMode.Open, FileAccess.Read, FileShare.Read);
                 }
+
+                var temp = Path.Combine(dir, Path.GetRandomFileName());
+                tar = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream);
+                tar.ExtractAllContents(temp);
+                return temp;
             }
-            else
+            finally
             {
-                log.Info("OVF.OpenOva: Previously Opened, using extracted files.");
+                tar?.Dispose();
+                inputStream?.Close();
+                fsStream?.Close();
             }
         }
+
         /// <summary>
         /// Extract the OVF xml meta data.
         /// </summary>
@@ -5627,14 +5597,5 @@ namespace XenOvf
             return fl.Length.CompareTo(fr.Length);
         }
         #endregion
-
-
-        internal class DiskMappings
-        {
-            public DeviceType dType = 0;
-            public string diskId = null;
-            public string controllerId = null;
-            public uint address = 0;
-        }
     }
 }

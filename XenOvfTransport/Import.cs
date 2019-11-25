@@ -141,42 +141,9 @@ namespace XenOvfTransport
 
 		#region PUBLIC
 
-        public void Process(string ovfFileName, string passcode)
-        {
-            if (XenSession == null)
-                throw new InvalidOperationException(Messages.ERROR_NOT_CONNECTED);
-
-            string ovfpath = Path.GetDirectoryName(ovfFileName);
-            string ovffilename = Path.GetFileName(ovfFileName);
-            string ovfname = Path.GetFileNameWithoutExtension(ovfFileName);
-            
-            string openovf = Path.Combine(ovfpath, string.Format(@"{0}.ovf", ovfname));
-
-            if (!File.Exists(ovfFileName))
-                throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, ovfFileName));
-
-            if (Path.GetExtension(ovffilename).ToLower().EndsWith("ova", StringComparison.InvariantCulture) ||
-                Path.GetExtension(ovffilename).ToLower().EndsWith("gz", StringComparison.InvariantCulture))
-            {
-                log.InfoFormat("Import.Process: Opening OVF Archive: {0}", ovfFileName);
-                OVF.OpenOva(ovfpath, ovffilename);
-                if (!File.Exists(openovf))
-                {
-                    throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, openovf));
-                }
-            }
-
-            EnvelopeType ovfEnv = OVF.Load(openovf);
-            Process(ovfEnv, ovfpath, passcode);
-        }
-        
         public void Process(EnvelopeType ovfObj, string pathToOvf, string passcode)
         {
-            Process(XenSession, ovfObj, pathToOvf, passcode);
-        }
-
-		public void Process(Session xenSession, EnvelopeType ovfObj, string pathToOvf, string passcode)
-        {
+            var xenSession = XenSession;
             if (xenSession == null)
                 throw new InvalidOperationException(Messages.ERROR_NOT_CONNECTED);
 
@@ -654,7 +621,7 @@ namespace XenOvfTransport
                             dataStream = null;
 
                             string manifest = wimDisk.Manifest;
-                            Wim_Manifest wimManifest = (Wim_Manifest)Tools.Deserialize(manifest, typeof(Wim_Manifest));
+                            Wim_Manifest wimManifest = Tools.Deserialize<Wim_Manifest>(manifest);
                             ulong imagesize = wimManifest.Image[wimDisk.BootImage].TotalBytes; // <----<<< Image data size
                             wimFileCount = wimManifest.Image[wimDisk.BootImage].FileCount;
                             dataCapacity = (long)(imagesize + AdditionalSpace);
@@ -757,7 +724,7 @@ namespace XenOvfTransport
                             {
                                 for (int i = 0; i < wimDisk.ImageCount; i++)
                                 {
-                                    Wim_Manifest wimManifest = (Wim_Manifest)Tools.Deserialize(wimDisk.Manifest, typeof(Wim_Manifest));
+                                    Wim_Manifest wimManifest = Tools.Deserialize<Wim_Manifest>(wimDisk.Manifest);
                                     wimFileCount = wimManifest.Image[i].FileCount;
                                     int wimArch = wimManifest.Image[i].Windows.Architecture;
                                     vdiRef.Add(UploadiSCSIbyWimFile(xenSession, sruuid, vmname, wimDisk, i, dataCapacity, wimFileCount, wimArch, ""));
