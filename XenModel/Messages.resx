@@ -2722,7 +2722,7 @@ Do you want to assign it to the schedule '{2}' instead?</value>
     <value>Confirmations</value>
   </data>
   <data name="CONFIRMATIONS_DETAIL" xml:space="preserve">
-    <value>Confirm dismissal of notifications</value>
+    <value>Confirm dismissal of warnings or notifications</value>
   </data>
   <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>Changing the Control Domain memory will cause the server to be rebooted.
@@ -6980,9 +6980,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION" xml:space="preserve">
     <value>The appliance has been digitally signed. You can choose to verify the digital signature of the appliance is valid.</value>
   </data>
-  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA" xml:space="preserve">
-    <value>OVA file is corrupt or contains invalid data.</value>
-  </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH" xml:space="preserve">
     <value>Path contains invalid characters.</value>
   </data>
@@ -7303,9 +7300,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>Invalid disk size</value>
-  </data>
-  <data name="INVALID_OVF" xml:space="preserve">
-    <value>This does not appear to be a valid OVF file.</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>Invalid parameter</value>

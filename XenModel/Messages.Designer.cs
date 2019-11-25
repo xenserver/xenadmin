@@ -8411,7 +8411,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm dismissal of notifications.
+        ///   Looks up a localized string similar to Confirm dismissal of warnings or notifications.
         /// </summary>
         public static string CONFIRMATIONS_DETAIL {
             get {
@@ -19918,15 +19918,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OVA file is corrupt or contains invalid data..
-        /// </summary>
-        public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA {
-            get {
-                return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Path contains invalid characters..
         /// </summary>
         public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH {
@@ -21024,15 +21015,6 @@ namespace XenAdmin {
         public static string INVALID_NUMBER {
             get {
                 return ResourceManager.GetString("INVALID_NUMBER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This does not appear to be a valid OVF file..
-        /// </summary>
-        public static string INVALID_OVF {
-            get {
-                return ResourceManager.GetString("INVALID_OVF", resourceCulture);
             }
         }
         

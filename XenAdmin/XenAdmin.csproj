@@ -298,6 +298,12 @@
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.Designer.cs">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\OvfValidationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OvfValidationDialog.Designer.cs">
+      <DependentUpon>OvfValidationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\PvsCacheConfigurationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1836,6 +1842,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.zh-CN.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OvfValidationDialog.ja.resx">
+      <DependentUpon>OvfValidationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OvfValidationDialog.resx">
+      <DependentUpon>OvfValidationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OvfValidationDialog.zh-CN.resx">
+      <DependentUpon>OvfValidationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PvsCacheConfigurationDialog.ja.resx">
       <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>

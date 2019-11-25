@@ -38,6 +38,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using XenCenterLib;
 using XenCenterLib.Archive;
+using XenOvf.Definitions;
+using XenOvf.Utilities;
 
 
 namespace XenOvf
@@ -120,8 +122,8 @@ namespace XenOvf
         private string _Folder;
 
         public FolderPackage(string path)
+            : base(path)
         {
-            PackageSourceFile = path;
             _Folder = path;
 
             var extension = Path.GetExtension(path);
@@ -177,6 +179,23 @@ namespace XenOvf
                 }
             }
         }
+
+        public override bool HasFile(string fileName)
+        {
+            try
+            {
+                return File.Exists(Path.Combine(_Folder, fileName));
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public override string ExtractToDir()
+        {
+            return Path.GetDirectoryName(PackageSourceFile);
+        }
     }
 
     /// <summary>
@@ -192,8 +211,8 @@ namespace XenOvf
         private readonly ArchiveFactory.Type _tarType = ArchiveFactory.Type.Tar;
 
         public TarPackage(string path)
+            : base(path)
         {
-            PackageSourceFile = path;
             var extension = Path.GetExtension(PackageSourceFile);
 
             if (string.Compare(extension, ".gz", true) == 0)
@@ -244,9 +263,6 @@ namespace XenOvf
             {
                 Open();
 
-                bool manifestFound = false;
-                bool certificateFound = false;
-
                 while (_archiveIterator.HasNext())
                 {
                     var extension = Path.GetExtension(_archiveIterator.CurrentFileName());
@@ -259,25 +275,20 @@ namespace XenOvf
                     {
                         if (_DescriptorFileName == null || string.Compare(_archiveIterator.CurrentFileName(), ManifestFileName, true) != 0)
                             continue;
-
-                        manifestFound = true;
                     }
                     else if (string.Compare(extension, Properties.Settings.Default.certificateFileExtension, true) == 0)
                     {
                         if (_DescriptorFileName == null || string.Compare(_archiveIterator.CurrentFileName(), CertificateFileName, true) != 0)
                             continue;
-
-                        certificateFound = true;
                     }
                     else
                     {
+                        //add other files to the directory cache without, obviously, loading them
+                        _DirectoryCache[_archiveIterator.CurrentFileName()] = null;
                         continue;
                     }
 
                     _DirectoryCache[_archiveIterator.CurrentFileName()] = ReadAllBytes();
-
-                    if (manifestFound && certificateFound)
-                        break;
                 }
             }
             finally
@@ -303,6 +314,11 @@ namespace XenOvf
         {
             _archiveIterator?.Dispose();
             _tarStream?.Dispose();
+        }
+
+        public override string ExtractToDir()
+        {
+            return OVF.ExtractArchive(PackageSourceFile);
         }
 
         public override void VerifyManifest()
@@ -347,6 +363,18 @@ namespace XenOvf
             }
         }
 
+        public override bool HasFile(string fileName)
+        {
+            try
+            {
+                return DescriptorFileName != null && _DirectoryCache.ContainsKey(fileName);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private byte[] ReadAllBytes()
         {
             using (var ms = new MemoryStream())
@@ -366,9 +394,15 @@ namespace XenOvf
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // Cache these properties because they are expensive to get
-        private string _Descriptor;
+        private string _descriptorXml;
         private byte[] _RawManifest;
         private byte[] _RawCertificate;
+        private EnvelopeType _ovfEnvelope;
+
+        protected Package(string path)
+        {
+            PackageSourceFile = path;
+        }
 
         public static Package Create(string path)
         {
@@ -386,7 +420,7 @@ namespace XenOvf
         /// <summary>
         /// According to the OVF specification, name of the *package* is base name of the descriptor file.
         /// </summary>
-        private string Name => Path.GetFileNameWithoutExtension(DescriptorFileName);
+        public string Name => Path.GetFileNameWithoutExtension(DescriptorFileName);
 
         /// <summary>
         /// According to the OVF specification, base name of the manifest file must be the same as the descriptor file.
@@ -401,13 +435,13 @@ namespace XenOvf
         /// <summary>
         /// Contents of the OVF file.
         /// </summary>
-        public string Descriptor
+        public string DescriptorXml
         {
             get
             {
-                if (_Descriptor == null)
-                    _Descriptor = ReadAllText(DescriptorFileName);
-                return _Descriptor;
+                if (_descriptorXml == null)
+                    _descriptorXml = ReadAllText(DescriptorFileName);
+                return _descriptorXml;
             }
         }
 
@@ -450,10 +484,36 @@ namespace XenOvf
             }
         }
 
-        public string PackageSourceFile { get; protected set; }
+        public string PackageSourceFile { get; }
+
+        /// <summary>
+        /// May be null if no valid OVF file has been found
+        /// </summary>
+        public EnvelopeType OvfEnvelope
+        {
+            get
+            {
+                if (_ovfEnvelope == null)
+                {
+                    try
+                    {
+                        _ovfEnvelope = Tools.DeserializeOvfXml(DescriptorXml);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error($"Failed to load OVF content from appliance {PackageSourceFile}", ex);
+                    }
+                }
+                return _ovfEnvelope;
+            }
+        }
 
         #endregion
 
+        public bool HasEncryption()
+        {
+            return OVF.HasEncryption(OvfEnvelope);
+        }
 
         public bool HasManifest()
         {
@@ -493,7 +553,6 @@ namespace XenOvf
             }
         }
 
-
         #region Abstract members
 
         /// <summary>
@@ -506,6 +565,11 @@ namespace XenOvf
         protected abstract string ReadAllText(string fileName);
 
         public abstract void VerifyManifest();
+
+        public abstract bool HasFile(string fileName);
+
+        /// <returns>The directory with the extracted files</returns>
+        public abstract string ExtractToDir();
 
         #endregion
     }

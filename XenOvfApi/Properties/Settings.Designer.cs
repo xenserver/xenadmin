@@ -296,19 +296,10 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Version, Files, Cpu, Memory, Networks, Capability, Schema")]
-        public string RequiredValidations {
+        [global::System.Configuration.DefaultSettingValueAttribute("127")]
+        public byte RequiredValidations {
             get {
-                return ((string)(this["RequiredValidations"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool enforceValidation {
-            get {
-                return ((bool)(this["enforceValidation"]));
+                return ((byte)(this["RequiredValidations"]));
             }
         }
         
