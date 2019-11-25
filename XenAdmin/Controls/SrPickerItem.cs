@@ -306,7 +306,7 @@ namespace XenAdmin.Controls
                     return string.Format(Messages.SR_PICKER_INSUFFICIENT_SPACE, Util.DiskSizeString(DiskSize, 2),
                                          Util.DiskSizeString(TheSR.FreeSpace(), 2));
                 if (DiskSize > SR.DISK_MAX_SIZE)
-                    return string.Format(Messages.SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE,
+                    return string.Format(Messages.SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE,
                         Util.DiskSizeString(SR.DISK_MAX_SIZE, 0));
                 return "";
             }

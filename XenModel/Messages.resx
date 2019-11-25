@@ -3422,6 +3422,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CONVERSION_STORAGE_PAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Required space {0}</value>
   </data>
+  <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
+    <value>The SR is overcommitted</value>
+  </data> 
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>There is not enough available space on this SR</value>
   </data>
@@ -6392,7 +6395,7 @@ Do you want to apply this HA configuration anyway?</value>
     <value>{0} - pool is overcommitted</value>
   </data>
   <data name="HA_OVERCOMMIT_BLURB" xml:space="preserve">
-    <value>When overcommited the pool cannot guarantee to tolerate the number of server failures specified.
+    <value>When overcommitted the pool cannot guarantee to tolerate the number of server failures specified.
 
 Reduce protection levels, or bring more servers online to increase the maximum supported capacity.</value>
   </data>
@@ -9238,7 +9241,7 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>&lt;no suitable storage&gt;</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
-    <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2}.</value>
+    <value>The SR '{0}' is overcommitted. There is only {1} of free space and the new VM requires {2}.</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
@@ -11810,6 +11813,9 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
     <value>Initial allocation: {0}
 Incremental allocation: {1}</value>
   </data>
+  <data name="SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>You cannot create a disk greater than {0} on this SR.</value>
+  </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>This SR does not need to be upgraded.</value>
   </data>
@@ -11827,9 +11833,6 @@ Incremental allocation: {1}</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs without a home server cannot have disks on local storage</value>
-  </data>
-  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
-    <value>You cannot create a disk greater than {0} on this SR.</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
