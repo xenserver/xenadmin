@@ -45,7 +45,6 @@ namespace XenAdmin.Wizards.ConversionWizard
     {
         private bool _buttonNextEnabled;
         private long _requiredDiskSize;
-
         public SrSelectionPage()
         {
             InitializeComponent();
@@ -139,14 +138,20 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         private void UpdateButtons()
         {
-            _buttonNextEnabled = comboBoxSr.SelectedItem is SrWrapper wrapper &&
-                                 wrapper.AvailableSpace >= _requiredDiskSize;
+            _buttonNextEnabled = comboBoxSr.SelectedItem is SrWrapper wrapper && wrapper.CanUse;
             OnPageUpdated();
         }
 
         private void ShowError(string msg)
         {
             pictureBoxError.Image = Images.StaticImages._000_error_h32bit_16;
+            labelError.Text = msg;
+            tableLayoutPanelError.Visible = true;
+        }
+
+        private void ShowWarning(string msg)
+        {
+            pictureBoxError.Image = Images.StaticImages._000_Alert2_h32bit_16;
             labelError.Text = msg;
             tableLayoutPanelError.Visible = true;
         }
@@ -229,13 +234,30 @@ namespace XenAdmin.Wizards.ConversionWizard
             if (comboBoxSr.SelectedItem is SrWrapper wrapper)
             {
                 SelectedSR = wrapper.item;
-
-                if (wrapper.AvailableSpace >= _requiredDiskSize)
-                    tableLayoutPanelError.Visible = false;
-                else
+                SM sm = SelectedSR.GetSM();
+                bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+                bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+                if (_requiredDiskSize > SR.DISK_MAX_SIZE && !vdiSizeUnlimited)
+                {
+                    ShowError(string.Format(Messages.SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE, Util.DiskSizeString(SR.DISK_MAX_SIZE, 0)));
+                    wrapper.CanUse = false;
+                }
+                else if (_requiredDiskSize > wrapper.AvailableSpace && !isThinlyProvisioned)
+                {
                     ShowError(Messages.CONVERSION_STORAGE_PAGE_SR_TOO_SMALL);
+                    wrapper.CanUse = false;
+                }
+                else if (_requiredDiskSize > wrapper.AvailableSpace)
+                {
+                    ShowWarning(Messages.CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT);
+                    wrapper.CanUse = true;
+                }
+                else
+                {
+                    tableLayoutPanelError.Visible = false;
+                    wrapper.CanUse = true;
+                }
             }
-
             UpdatePieChart();
             UpdateButtons();
         }
@@ -247,7 +269,7 @@ namespace XenAdmin.Wizards.ConversionWizard
         private class SrWrapper : ToStringWrapper<SR>
         {
             public readonly long AvailableSpace;
-
+            public bool CanUse;
             public SrWrapper(SR sr, long availableSpace)
                 : base(sr, $"{sr.Name()}, {Util.DiskSizeString(availableSpace)} {Messages.AVAILABLE}")
             {

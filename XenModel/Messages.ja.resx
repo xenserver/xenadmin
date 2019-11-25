@@ -3427,6 +3427,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONVERSION_STORAGE_PAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>必要な容量 {0}</value>
   </data>
+  <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
+    <value>SR はオーバーコミットされており</value>
+  </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>この SR には十分な空き容量がありません</value>
   </data>
@@ -11812,6 +11815,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>初回割り当て: {0} 
 増分割り当て: {1}</value>
   </data>
+  <data name="SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>この SR には、{0} を超えるサイズのディスクを作成できません。</value>
+  </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>この SR をアップグレードする必要はありません。</value>
   </data>
@@ -11829,9 +11835,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>ホーム サーバーが設定されていない VM はローカル ストレージにディスクを持つことはできません</value>
-  </data>
-  <data name="SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
-    <value>この SR には、{0} を超えるサイズのディスクを作成できません。</value>
   </data>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>ディスク サイズ ({0}) が SR サイズ ({1}) を超過しています</value>

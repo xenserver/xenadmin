@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -9497,6 +9497,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SR is overcommitted.
+        /// </summary>
+        public static string CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT {
+            get {
+                return ResourceManager.GetString("CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is not enough available space on this SR.
         /// </summary>
         public static string CONVERSION_STORAGE_PAGE_SR_TOO_SMALL {
@@ -18239,7 +18248,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When overcommited the pool cannot guarantee to tolerate the number of server failures specified.
+        ///   Looks up a localized string similar to When overcommitted the pool cannot guarantee to tolerate the number of server failures specified.
         ///
         ///Reduce protection levels, or bring more servers online to increase the maximum supported capacity..
         /// </summary>
@@ -27054,7 +27063,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The SR &apos;{0}&apos; is over committed. There is only {1} of free space and the new VM requires {2}..
+        ///   Looks up a localized string similar to The SR &apos;{0}&apos; is overcommitted. There is only {1} of free space and the new VM requires {2}..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT {
             get {
@@ -33923,6 +33932,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot create a disk greater than {0} on this SR..
+        /// </summary>
+        public static string SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE {
+            get {
+                return ResourceManager.GetString("SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This SR does not need to be upgraded..
         /// </summary>
         public static string SR_DOES_NOT_NEED_UPGRADE {
@@ -33982,15 +34000,6 @@ namespace XenAdmin {
         public static string SR_PICKER_DISK_TOO_BIG {
             get {
                 return ResourceManager.GetString("SR_PICKER_DISK_TOO_BIG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You cannot create a disk greater than {0} on this SR..
-        /// </summary>
-        public static string SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE {
-            get {
-                return ResourceManager.GetString("SR_PICKER_DISKSIZE_EXCEEDS_DISK_MAX_SIZE", resourceCulture);
             }
         }
         
