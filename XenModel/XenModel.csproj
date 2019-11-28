@@ -227,7 +227,6 @@
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="TimeSpanExtensions.cs" />
-    <Compile Include="Utils\AsyncServerTime.cs" />
     <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
     <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
     <Compile Include="WLB\WlbOptimizationRecommendation.cs" />

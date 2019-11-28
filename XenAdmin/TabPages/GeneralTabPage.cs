@@ -95,7 +95,7 @@ namespace XenAdmin.TabPages
 
         public override string HelpID => "TabPageSettings";
 
-        private void licenseStatus_ItemUpdated(object sender, EventArgs e)
+        private void licenseStatus_ItemUpdated()
         {
             if (pdSectionLicense == null || licenseStatus == null)
                 return;
@@ -108,8 +108,7 @@ namespace XenAdmin.TabPages
 
                 pdSectionLicense.UpdateEntryValueWithKey(Messages.LICENSE_STATUS, ss.ExpiryStatus, true);
 
-                Pool p = xenObject as Pool;
-                if (p != null)
+                if (xenObject is Pool p)
                 {
                     var additionalString = PoolAdditionalLicenseString();
                     pdSectionGeneral.UpdateEntryValueWithKey(
@@ -169,44 +168,40 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                RegisterLicenseStatusUpdater(value);
-
-                if (xenObject != value)
-                {
-                    UnregisterHandlers();
-
-                    xenObject = value;
-                    RegisterHandlers();
-                    BuildList();
-
-                    if (xenObject != null && !_expandedSections.ContainsKey(xenObject.GetType()))
-                    {
-                        _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSectionGeneral});
-                        pdSectionGeneral.Expand();
-                    }
-
-                    ResetExpandState();
-                }
-                else
+                if (value.Equals(xenObject))
                 {
                     BuildList();
+                    return;
                 }
-            }
-        }
 
-        private void RegisterLicenseStatusUpdater(IXenObject xenObject)
-        {
-            if (licenseStatus != null)
-                licenseStatus.ItemUpdated -= licenseStatus_ItemUpdated;
+                if (licenseStatus != null)
+                {
+                    licenseStatus.ItemUpdated -= licenseStatus_ItemUpdated;
+                    licenseStatus.Dispose();
+                    //set this to null to prevent updates if the object is not a host or pool
+                    licenseStatus = null;
+                }
 
-            if (xenObject.Connection != null && !xenObject.Connection.IsConnected)
-                return;
+                if (value.Connection != null && value.Connection.IsConnected && (value is Host || value is Pool))
+                {
+                    licenseStatus = new LicenseStatus(value);
+                    licenseStatus.ItemUpdated += licenseStatus_ItemUpdated;
+                    licenseStatus.BeginUpdate();
+                }
 
-            if (xenObject is Host || xenObject is Pool)
-            {
-                licenseStatus = new LicenseStatus(xenObject);
-                licenseStatus.ItemUpdated += licenseStatus_ItemUpdated;
-                licenseStatus.BeginUpdate();
+                UnregisterHandlers();
+
+                xenObject = value;
+                RegisterHandlers();
+                BuildList();
+
+                if (xenObject != null && !_expandedSections.ContainsKey(xenObject.GetType()))
+                {
+                    _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSectionGeneral});
+                    pdSectionGeneral.Expand();
+                }
+
+                ResetExpandState();
             }
         }
 
@@ -377,8 +372,7 @@ namespace XenAdmin.TabPages
         private void PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
-            if (e.PropertyName == "state" ||
-                e.PropertyName == "last_updated")
+            if (e.PropertyName == "state" || e.PropertyName == "last_updated")
             {
                 return;
             }
@@ -402,7 +396,7 @@ namespace XenAdmin.TabPages
                 else
                 {
                     // Atm we are rebuilding on almost any property changed event. 
-                    // As long as we are just clearing and readding the rows in the PDSections this seems to be super quick. 
+                    // As long as we are just clearing and re-adding the rows in the PDSections this seems to be super quick. 
                     // If it gets slower we should update specific boxes for specific property changes.
                     if (licenseStatus != null && licenseStatus.Updated)
                         licenseStatus.BeginUpdate();
