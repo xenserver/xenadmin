@@ -89,9 +89,9 @@ namespace XenAdminTests.UnitTests.LicenseManager
         [Test, TestCaseSource(typeof(ProductColumnComparerTests), nameof(TestCases))]
         public void ComparisonTests(TestCase tc)
         {
-            ProductColumnComparer comparer = new ProductColumnComparer();
-            Mock<LicenseDataGridViewRow> x = new Mock<LicenseDataGridViewRow>();
-            Mock<LicenseDataGridViewRow> y = new Mock<LicenseDataGridViewRow>();
+            var comparer = new ProductColumnComparer();
+            var x = new Mock<LicenseDataGridViewRow>(null);
+            var y = new Mock<LicenseDataGridViewRow>(null);
             x.Setup(l => l.LicenseProductVersion).Returns(tc.ProductVersionA);
             x.Setup(l => l.LicenseName).Returns(tc.LicenseNameA);
             y.Setup(l => l.LicenseProductVersion).Returns(tc.ProductVersionB);
