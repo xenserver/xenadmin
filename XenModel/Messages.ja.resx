@@ -3142,7 +3142,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
     <value>ほかの XE Express Server ({1}) に接続済みであるため、サーバー {0} への接続は制限されます</value>
-    <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
     <value>[Citrix XenServer] Express Edition サーバー ({1}) に接続済みであるため、サーバー {0} への接続は制限されます。
@@ -3428,8 +3427,8 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>必要な容量 {0}</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
-    <value>SR はオーバーコミットされており</value>
-  </data>
+    <value>SR がオーバーコミットされました</value>
+  </data> 
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>この SR には十分な空き容量がありません</value>
   </data>
@@ -9243,7 +9242,7 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>&lt;適切なストレージがありません&gt;</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
-    <value>SR '{0}' がオーバー コミットされました。空き容量が {1} しかありません。新規 VM では {2} 必要です。</value>
+    <value>SR '{0}' がオーバーコミットされました。空き容量が {1} しかありません。新規 VM では {2} 必要です。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>新規 VM のストレージを構成してください</value>

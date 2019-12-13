@@ -820,7 +820,7 @@
     <value>14</value>
   </data>
   <data name="labelExperimental.Text" xml:space="preserve">
-    <value>この種類の vGPU は 技術プレビューであり、現在のところ、実稼働での使用には適していません。</value>
+    <value>この種類の vGPU は Tech Preview 版であり、現在のところ、実稼働での使用には適していません。</value>
   </data>
   <data name="labelExperimental.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
