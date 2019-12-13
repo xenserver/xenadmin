@@ -825,9 +825,6 @@
   <data name="OUT_OF_SPACE" xml:space="preserve">
     <value>空间不足，无法上载更新</value>
   </data>
-  <data name="PASSTHROUGH_NOT_ENABLED" xml:space="preserve">
-    <value>将 USB 直通连接到 VM 之前，必须将 passthrough_enabled 设置为 true。</value>
-  </data>
   <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新 {0}</value>
   </data>
@@ -1327,6 +1324,9 @@
   </data>
   <data name="SR_BACKEND_FAILURE_203" xml:space="preserve">
     <value>已达到活动的 FIST 点，导致进程异常退出</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_204" xml:space="preserve">
+    <value>在叶子生长到超过快照拍摄之前的大小后放弃叶子合并</value>
   </data>
   <data name="SR_BACKEND_FAILURE_220" xml:space="preserve">
     <value>设备配置请求缺少位置参数</value>
@@ -1958,6 +1958,9 @@
   <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
     <value>VGPU 与目标中的任何 PGPU 都不兼容。</value>
   </data>
+  <data name="VGPU_GUEST_DRIVER_LIMIT" xml:space="preserve">
+    <value>来宾驱动程序不支持 VGPU 迁移。</value>
+  </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
     <value>无法创建与 VM 上的现有类型不兼容的虚拟 GPU。</value>
   </data>
@@ -2265,7 +2268,10 @@
     <value>找不到请求的插件。</value>
   </data>
   <data name="XENAPI_PLUGIN_FAILURE" xml:space="preserve">
-    <value>与该插件出现通信故障。</value>
+    <value>与插件通信时出现故障。</value>
+  </data>
+  <data name="XEN_INCOMPATIBLE" xml:space="preserve">
+    <value>Xen 的当前版本或其控制库与 Toolstack 不兼容。</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_ADDING_VOLUME_TO_SNAPSET_FAILED" xml:space="preserve">
     <value>要建立快照的一些卷无法添加到 VSS 快照集</value>

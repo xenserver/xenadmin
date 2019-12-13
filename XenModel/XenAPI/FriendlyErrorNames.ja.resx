@@ -825,9 +825,6 @@
   <data name="OUT_OF_SPACE" xml:space="preserve">
     <value>アップデートをアップロードするために必要な空き容量がありません。</value>
   </data>
-  <data name="PASSTHROUGH_NOT_ENABLED" xml:space="preserve">
-    <value>USB を VM にパススルーする前に、passthrough_enabled を true に設定する必要があります。</value>
-  </data>
   <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>アップデート {0} は適用済みです。</value>
   </data>
@@ -1327,6 +1324,9 @@
   </data>
   <data name="SR_BACKEND_FAILURE_203" xml:space="preserve">
     <value>アクティブな FIST ポイントに達したため、プロセスが異常終了しました。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_204" xml:space="preserve">
+    <value>スナップショット作成前よりもリーフが大きくなったため、リーフを結合できませんでした</value>
   </data>
   <data name="SR_BACKEND_FAILURE_220" xml:space="preserve">
     <value>デバイス構成要求に Location パラメーターがありません。</value>
@@ -1958,6 +1958,9 @@
   <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
     <value>この仮想 GPU は対象の物理 GPU と互換性がありません。</value>
   </data>
+  <data name="VGPU_GUEST_DRIVER_LIMIT" xml:space="preserve">
+    <value>ゲストドライバーは、仮想 GPU の移行をサポートしていません。</value>
+  </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
     <value>仮想 GPU が VM 上の既存の種類と互換性がない場合、作成できません。</value>
   </data>
@@ -2127,7 +2130,7 @@
     <value>現在、この VM は指定したサーバー上に配置されていません。</value>
   </data>
   <data name="VM_NO_CRASHDUMP_SR" xml:space="preserve">
-    <value>この VM にはクラッシュダンプ用の SR が指定されていません。</value>
+    <value>この VM にはクラッシュ ダンプ用の SR が指定されていません。</value>
   </data>
   <data name="VM_NO_EMPTY_CD_VBD" xml:space="preserve">
     <value>VM に空の CD ドライブ (VBD) がありません。</value>
@@ -2266,6 +2269,9 @@
   </data>
   <data name="XENAPI_PLUGIN_FAILURE" xml:space="preserve">
     <value>プラグインとの通信に失敗しました。</value>
+  </data>
+  <data name="XEN_INCOMPATIBLE" xml:space="preserve">
+    <value>Xen またはそのコントロール ライブラリの現在のバージョンは、ツールスタックと互換性がありません。</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_ADDING_VOLUME_TO_SNAPSET_FAILED" xml:space="preserve">
     <value>スナップショット対象の一部のボリュームを VSS スナップショット セットに追加できません。</value>
