@@ -35,6 +35,7 @@ packages/*
 !packages/DOTNET_BUILD_LOCATION
 !packages/DOTNET_BUILD_LOCATION_CTXSIGN
 !packages/download_packages.ps1
+!packages/download_hotfixes.ps1
 XenOvfApi/External Tools/*
 
 _ReSharper.*/

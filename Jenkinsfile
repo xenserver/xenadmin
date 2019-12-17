@@ -172,20 +172,8 @@ node("${params.BUILD_ON_NODE}") {
       if (params.XC_BRANDING == 'citrix') {
         println "Downloading hotfixes."
 
-        def remoteUrl = server.url
-        String remoteBranch = params.XC_BRANCH
-
-        try {
-          httpRequest httpMode: 'GET', url: "${remoteUrl}/builds/xs/hotfixes/${remoteBranch}"
-        }
-        catch (Exception ex) {
-          println "Hotfixes for ${remoteBranch} not found. Trying trunk instead."
-          httpRequest httpMode: 'GET', url: "${remoteUrl}/builds/xs/hotfixes/trunk"
-          remoteBranch = 'trunk'
-        }
-
         GString hotFixSpec = GString.EMPTY
-        hotFixSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim().replaceAll("@BRANCH@", remoteBranch)
+        hotFixSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim()
         server.download(hotFixSpec)
       }
     }
