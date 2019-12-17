@@ -35,13 +35,13 @@ version_cpp()
   sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
       -e "s/@BUILD_NUMBER@/${BUILD_NUMBER}/g" \
-      $1 
+      $1
 }
 
 version_csharp()
 {
   sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}/g" \
-      $1 
+      $1
 }
 
 rebranding_global()
@@ -69,36 +69,10 @@ rebranding_global()
         -e "s#\[BRANDING_VERSION_7_0\]#${BRANDING_XC_PRODUCT_7_0_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_7_1_2\]#${BRANDING_XC_PRODUCT_7_1_2_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_8_0\]#${BRANDING_XC_PRODUCT_8_0_VERSION}#g" \
-		-e "s#\[BRANDING_VERSION_8_1\]#${BRANDING_XC_PRODUCT_8_1_VERSION}#g" \
+        -e "s#\[BRANDING_VERSION_8_1\]#${BRANDING_XC_PRODUCT_8_1_VERSION}#g" \
         -e "s#\[BRANDING_XENSERVER_UPDATE_URL\]#${BRANDING_XENSERVER_UPDATE_URL}#g" \
         -e "s#\[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT\]#${BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT}#g" \
-        $1    
-}
-
-rebranding_features()
-{
-  sed -b -i -e "s#\[BRANDING_HIDDEN_FEATURES\]#${BRANDING_HIDDEN_FEATURES}#g" \
-	  -e "s#\[BRANDING_ADDITIONAL_FEATURES\]#${BRANDING_ADDITIONAL_FEATURES}#g" \
-	  $1   
-}
-
-rebranding_GUID()
-{
-  sed -b -i \
-      -e "s#\[BRANDING_XENCENTER_UPGRADE_CODE_GUID\]#${BRANDING_XENCENTER_UPGRADE_CODE_GUID}#g" \
-      -e "s#\[BRANDING_JA_RESOURCES_GUID\]#${BRANDING_JA_RESOURCES_GUID}#g" \
-      -e "s#\[BRANDING_SC_RESOURCES_GUID\]#${BRANDING_SC_RESOURCES_GUID}#g" \
-      -e "s#\[BRANDING_REPORT_VIEWER_GUID\]#${BRANDING_REPORT_VIEWER_GUID}#g" \
-      -e "s#\[BRANDING_MAIN_EXECUTABLE_GUID\]#${BRANDING_MAIN_EXECUTABLE_GUID}#g" \
-      -e "s#\[BRANDING_TEST_RESOURCES_GUID\]#${BRANDING_TEST_RESOURCES_GUID}#g" \
-      -e "s#\[BRANDING_EXTERNAL_TOOLS_GUID\]#${BRANDING_EXTERNAL_TOOLS_GUID}#g" \
-      -e "s#\[BRANDING_SCHEMAS_FILES_GUID\]#${BRANDING_SCHEMAS_FILES_GUID}#g" \
-      -e "s#\[BRANDING_REGISTRY_ENTRIES_GUID\]#${BRANDING_REGISTRY_ENTRIES_GUID}#g" \
-      -e "s#\[BRANDING_APPLICAION_SHOTCUT_GUID\]#${BRANDING_APPLICAION_SHOTCUT_GUID}#g" \
-      -e "s#\[BRANDING_README_FILE_GUID\]#${BRANDING_README_FILE_GUID}#g" \
-      -e "s#\[BRANDING_XSUPDATE_FILE_GUID\]#${BRANDING_XSUPDATE_FILE_GUID}#g" \
-      -e "s#\[BRANDING_HEALTH_CHECK_GUID\]#${BRANDING_HEALTH_CHECK_GUID}#g" \
-      $1   
+        $1
 }
 
 version_brand_cpp()
@@ -106,14 +80,6 @@ version_brand_cpp()
   for file in $1
   do
     version_cpp ${file} && rebranding_global ${file}
-  done
-}
-
-branding_wxs()
-{
-  for file in $1
-  do
-    rebranding_global ${file} && rebranding_features ${file} && rebranding_GUID ${file}
   done
 }
 
@@ -133,7 +99,7 @@ RESX_rebranding()
     rebranding_global ${resx}.resx
     rebranding_global ${resx}.zh-CN.resx
     rebranding_global ${resx}.ja.resx
-  done  
+  done
 }
 
 #splace rebranding
@@ -169,18 +135,22 @@ rebranding_global ${REPO}/XenOvfTransport/app.config
 #mk
 rebranding_global ${REPO}/mk/package-and-sign.sh
 
-#WixInstaller
-rebranding_global ${REPO}/WixInstaller/en-us.wxl
-rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
-rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
-branding_wxs ${REPO}/WixInstaller/XenCenter.wxs
+sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/$(uuidgen -c | tr -d [:space:])/g" \
+          -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION}/g" \
+          -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \
+          -e "s/@COMPANY_NAME_SHORT@/${BRANDING_COMPANY_NAME_SHORT}/g" \
+          -e "s/@BRAND_CONSOLE@/${BRANDING_BRAND_CONSOLE}/g" \
+          -e "s/@PRODUCT_BRAND@/${BRANDING_PRODUCT_BRAND}/g" \
+    ${REPO}/WixInstaller/branding.wxi
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/app.config
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-echo cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
-cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
+
+if [ "${BRANDING_UPDATE}" != "xsupdate" ] ; then
+  mv ${REPO}/XenAdminTests/TestResources/succeed.xsupdate ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
+fi
 
 #XenServerHealthCheck
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs

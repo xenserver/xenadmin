@@ -32,99 +32,116 @@
 
 set -eu
 
-#sign applications
-for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
-do
-  cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ${file}
-done
+#sign files
+SIGN_BAT=${REPO}/mk/sign.bat
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.exe
+if [ -f "${SIGN_BAT}" ] ; then
+  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+  do
+    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "Citrix XenCenter"
+  done
 
-cd ${REPO}/xe/bin/Release         && ${REPO}/mk/sign.bat xe.exe
-cd ${REPO}/xva_verify/bin/Release && ${REPO}/mk/sign.bat xva_verify.exe
+  cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.exe
+  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe
+  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe
 
-for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
-do
-  cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/mk/sign.bat ${file}
-done
+  for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
+  do
+    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "Citrix XenCenter"
+  done
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Newtonsoft.Json.CH.dll "JSON.NET"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll "Log4Net"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} CookComputing.XmlRpcV2.dll "XML-RPC.NET"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Newtonsoft.Json.CH.dll "JSON.NET"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} log4net.dll "Log4Net"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ICSharpCode.SharpZipLib.dll "SharpZipLib"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} DiscUtils.dll "DiscUtils"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
 
-#copy signed files in XenServerHealthService folder
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
-   ${REPO}/XenServerHealthCheck/bin/Release
+  #copy signed files in XenServerHealthService folder
+  cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+    ${REPO}/XenServerHealthCheck/bin/Release
 
-#sign XenServerHealthService
-cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/mk/sign.bat XenServerHealthCheck.exe
+  #sign XenServerHealthService
+  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "Citrix XenCenter"
+fi
 
-#create installers
-compile_installer()
-{
-  if [ "$2" = "ja-jp" ]
-  then
-    langid=1041
-    name=$1.$2
-  elif [ "$2" = "zh-cn" ]
-  then
-    langid=2052
-    name=$1.$2
-  else
-    langid=1033
-    name=$1
-  fi
+#prepare wix
 
-  cd ${WIX}
-  mkdir -p obj${name}
-  Branding=${BRANDING_BRAND_CONSOLE} WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
+WIX_BIN=${SCRATCH_DIR}/wixbin
+WIX_SRC=${SCRATCH_DIR}/wixsrc
+WIX=${REPO}/WixInstaller
 
-  mkdir -p out${name}
+CANDLE=${WIX_BIN}/candle.exe
+LIT=${WIX_BIN}/lit.exe
+LIGHT=${WIX_BIN}/light.exe
 
-  ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib \
-           -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+mkdir_clean ${WIX_BIN} && ${UNZIP} ${SCRATCH_DIR}/wix311-binaries.zip -d ${WIX_BIN}
+mkdir_clean ${WIX_SRC} && ${UNZIP} ${SCRATCH_DIR}/wix311-debug.zip -d ${WIX_SRC}
+cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${WIX}/
+cd ${WIX}/wixlib && cp CustomizeDlg.wxs CustomizeStdDlg.wxs
+cd ${WIX}/wixlib && patch -p1 --binary < ${WIX}/wix_src.patch
+touch ${WIX}/PrintEula.dll
+
+#compile_wix
+chmod -R u+rx ${WIX_BIN}
+cd ${WIX} && mkdir -p obj lib
+${CANDLE} -out obj/ @candleList.txt
+${LIT} -out lib/WixUI_InstallDir.wixlib @litList.txt
+
+locale_id() {
+  case "$1" in
+    "ja-jp") echo 1041 ;;
+    "zh-cn") echo 2052 ;;
+    "zh-tw") echo 1028 ;;
+    *)       echo 1033 ;; #en-us
+  esac
 }
 
-sign_msi()
-{
-  cd ${WIX}/out$1 && chmod a+rw $1.msi && ${REPO}/mk/sign.bat $1.msi
-}
-
-if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
-then
+if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ] ; then
   cd ${WIX} && mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
 fi
 
-#create l10n msi containing all resources
-compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}"
-compile_installer "${BRANDING_BRAND_CONSOLE}" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.ja-jp"
-compile_installer "${BRANDING_BRAND_CONSOLE}" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.zh-cn"
+#for each locale create an msi containing all resources
 
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.ja-jp/${BRANDING_BRAND_CONSOLE}.ja-jp.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.zh-cn/${BRANDING_BRAND_CONSOLE}.zh-cn.msi \
-   ${WIX}
+for locale in en-us ja-jp zh-cn
+do
+  if [ "${locale}" = "en-us" ] ; then
+    name=${BRANDING_BRAND_CONSOLE}
+  else
+    name=${BRANDING_BRAND_CONSOLE}.${locale}
+  fi
+
+  cd ${WIX}
+  mkdir -p obj${name} out${name}
+
+  WixLangId=$(locale_id ${locale} | tr -d [:space:]) \
+    ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE}.wxs branding.wxs
+
+  ${LIGHT} -ext WiXNetFxExtension -out out${name}/${name}.msi \
+          -loc wixlib/wixui_${locale}.wxl -loc ${locale}.wxl \
+          obj${name}/${BRANDING_BRAND_CONSOLE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
+
+  cp ${WIX}/out${name}/${name}.msi ${WIX}
+done
 
 cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
 cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
 
-#create localised mst files and then embed them into l10n msi
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.ja-jp.msi ja-jp.mst
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-cn.msi zh-cn.mst
-cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi zh-tw.mst
+#create localised mst files and then embed them into the combined msi
 
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi ja-jp.mst 1041
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi zh-cn.mst 2052
-cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi zh-tw.mst 1028
+for locale in ja-jp zh-cn zh-tw ; do
+  cd ${WIX} && \
+    wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.${locale}.msi ${locale}.mst && \
+    wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi ${locale}.mst $(locale_id ${locale} | tr -d [:space:])
+done
 
-#sign again the combined msi because it seems the embedding breaks the signature
-cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.msi
+#sign and copy the combined installer
 
-#copy the msi installer
+if [ -f "${SIGN_BAT}" ] ; then
+  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.msi
+fi
+
 cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 
 set +u
