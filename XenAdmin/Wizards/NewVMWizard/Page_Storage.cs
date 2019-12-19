@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions.VMActions;
 using XenAdmin.Dialogs;
@@ -185,43 +186,54 @@ namespace XenAdmin.Wizards.NewVMWizard
         /// suggestedSR then the pool's default SR, then other SRs.
         /// </summary>
         /// <returns>The SR if a suitable one is found, otherwise null</returns>
-        private SR GetBestDiskStorage(IXenConnection connection, long diskSize, Host affinity, SR suggestedSR,
+        private SR GetBestDiskStorage(IXenConnection connection, long diskSize, Host affinity, SR suggestedSr,
             out Image icon, out string tooltip)
         {
             icon = Images.StaticImages._000_VirtualStorage_h32bit_16;
             tooltip = null;
+            var sb = new StringBuilder();
 
-            if (suggestedSR != null && suggestedSR.CanBeSeenFrom(affinity) &&
-                suggestedSR.VdiCreationCanProceed(diskSize))
-                return suggestedSR;
+            var suggestedSrVisible = suggestedSr != null && suggestedSr.CanBeSeenFrom(affinity);
+            var suggestedSrHasSpace = suggestedSr != null && suggestedSr.VdiCreationCanProceed(diskSize);
 
-            SR defaultSR = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
-            if (defaultSR != null && defaultSR.CanBeSeenFrom(affinity) &&
-                defaultSR.VdiCreationCanProceed(diskSize))
+            if (suggestedSrVisible && suggestedSrHasSpace)
+                return suggestedSr;
+
+            if (suggestedSrVisible)
+                sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE, suggestedSr.Name().Ellipsise(50)).AppendLine();
+            else if (suggestedSrHasSpace)
+                sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL, suggestedSr.Name().Ellipsise(50)).AppendLine();
+
+            SR defaultSr = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
+            var defaultSrVisible = defaultSr != null && defaultSr.CanBeSeenFrom(affinity);
+            var defaultSrHasSpace = defaultSr != null && defaultSr.VdiCreationCanProceed(diskSize);
+
+            if (defaultSrVisible && defaultSrHasSpace)
             {
-                if (suggestedSR != null)
+                if (suggestedSr != null)
                 {
-                    tooltip = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE, suggestedSR.Name().Ellipsise(50));
+                    sb.AppendLine(Messages.NEWVMWIZARD_STORAGEPAGE_XC_SELECTION);
+                    tooltip = sb.ToString();
                     icon = Images.StaticImages._000_Alert2_h32bit_16;
                 }
-                return defaultSR;
+                return defaultSr;
             }
+
+            if (defaultSrVisible && !defaultSr.Equals(suggestedSr))
+                sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE, defaultSr.Name().Ellipsise(50)).AppendLine();
+            else if (defaultSrHasSpace && !defaultSr.Equals(suggestedSr))
+                sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL, defaultSr.Name().Ellipsise(50)).AppendLine();
 
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.CanCreateVmOn() &&
-                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
+                if (sr.CanCreateVmOn() && sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
                 {
-                    if (suggestedSR != null && defaultSR != null)
-                        tooltip = Messages.NEWVMWIZARD_STORAGEPAGE_NOSPACE;
-                    else if (suggestedSR != null)
-                        tooltip = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE, suggestedSR.Name().Ellipsise(50));
-                    else if (defaultSR != null)
-                        tooltip = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE, defaultSR.Name().Ellipsise(50));
-
-                    if (suggestedSR != null || defaultSR != null)
+                    if (suggestedSr != null || defaultSr != null)
+                    {
+                        sb.AppendLine(Messages.NEWVMWIZARD_STORAGEPAGE_XC_SELECTION);
+                        tooltip = sb.ToString();
                         icon = Images.StaticImages._000_Alert2_h32bit_16;
-
+                    }
                     return sr;
                 }
             }

@@ -27027,7 +27027,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The default SR &apos;{0}&apos; does not have enough free space for the new VM&apos;s disks. [XenCenter] has selected a different SR for you..
+        ///   Looks up a localized string similar to VMs without a home server cannot have disks on the default SR &apos;{0}&apos;..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The default SR &apos;{0}&apos; does not have enough free space for the new VM&apos;s disks..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE {
             get {
@@ -27063,15 +27072,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Neither the default SR nor the suggested by the template SR have enough free space for the new VM&apos;s disks. [XenCenter] has selected a different SR for you..
-        /// </summary>
-        public static string NEWVMWIZARD_STORAGEPAGE_NOSPACE {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_NOSPACE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;no suitable storage&gt;.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_NOSTORAGE {
@@ -27090,7 +27090,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The suggested by the template SR &apos;{0}&apos; does not have enough free space for the new VM&apos;s disks. [XenCenter] has selected a different SR for you..
+        ///   Looks up a localized string similar to VMs without a home server cannot have disks on the SR suggested by the template (&apos;{0}&apos;)..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The SR suggested by the template (&apos;{0}&apos;) does not have enough free space for the new VM&apos;s disks..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE {
             get {
@@ -27113,6 +27122,15 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_STORAGEPAGE_VDINAME {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_VDINAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] has selected a different SR for you..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_XC_SELECTION {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_XC_SELECTION", resourceCulture);
             }
         }
         
