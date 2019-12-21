@@ -48,8 +48,10 @@ namespace XenAdmin.Wizards.NewVMWizard
 {
     public partial class Page_Storage : XenTabPage
     {
-        private VM Template;
-        private bool InstallMethodIsNetwork;
+        private VM _template;
+        private InstallMethod _selectedInstallMethod;
+        private Host _affinity;
+        private bool _loadRequired = true;
         private bool loading;
 
         public Page_Storage()
@@ -74,18 +76,14 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            VM template = SelectedTemplate;
-            bool installMethodIsNetwork = SelectedInstallMethod == InstallMethod.Network;
-
-            if (template == Template && InstallMethodIsNetwork == installMethodIsNetwork)
+            if (!_loadRequired)
                 return;
 
             loading = true;
-            Template = template;
 
-            InstallMethodIsNetwork = installMethodIsNetwork;
-            if ((!Template.DefaultTemplate() && !Template.HasAtLeastOneDisk())
-                || (Template.IsHVM() && InstallMethodIsNetwork)) // CA-46213 The default should be "diskless" if the install method is "boot from network"
+            // CA-46213 The default should be "diskless" if the install method is "boot from network"
+            if (!Template.DefaultTemplate() && !Template.HasAtLeastOneDisk()
+                || Template.IsHVM() && SelectedInstallMethod == InstallMethod.Network)
             {
                 DisklessVMRadioButton.Checked = true;
             }
@@ -94,6 +92,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             LoadDisks();
             loading = false;
+            _loadRequired = false;
             UpdateEnablement(true);
         }
 
@@ -264,7 +263,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             EditButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0;
             DeleteButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
             DisksGridView.Enabled = DisksRadioButton.Checked;
-            DisklessVMRadioButton.Enabled = Template.IsHVM() && InstallMethodIsNetwork;
+            DisklessVMRadioButton.Enabled = Template.IsHVM() && SelectedInstallMethod == InstallMethod.Network;
 
             CloneCheckBox.Enabled = false;
 
@@ -394,8 +393,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             DiskGridRowItem selectedItem = (DiskGridRowItem) DisksGridView.SelectedRows[0];
 
-            using (var dialog = new NewDiskDialog(Connection, Template, Affinity, SrPicker.SRPickerType.LunPerVDI,
-                selectedItem.Disk, selectedItem.CanResize, selectedItem.MinSize, AddedVDIs) {DontCreateVDI = true})
+            using (var dialog = new NewDiskDialog(Connection, Template, Affinity, SrPicker.SRPickerType.LunPerVDI, 
+                    selectedItem.Disk, selectedItem.CanResize, selectedItem.MinSize, AddedVDIs)
+                {DontCreateVDI = true})
             {
                 if (dialog.ShowDialog(ParentForm) != DialogResult.OK)
                     return;
@@ -488,10 +488,43 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        public VM SelectedTemplate { private get; set; }
+        public VM Template
+        {
+            private get { return _template; }
+            set
+            {
+                if (_template != value)
+                    _loadRequired = true;
+
+                _template = value;
+            }
+        }
+
         public string SelectedName { private get; set; }
-        public InstallMethod SelectedInstallMethod { private get; set; }
-        public Host Affinity { private get; set; }
+
+        public InstallMethod SelectedInstallMethod
+        {
+            private get { return _selectedInstallMethod; }
+            set
+            {
+                if (_selectedInstallMethod != value)
+                    _loadRequired = true;
+
+                _selectedInstallMethod = value;
+            }
+        }
+
+        public Host Affinity
+        {
+            private get { return _affinity; }
+            set
+            {
+                if (_affinity != value)
+                    _loadRequired = true;
+
+                _affinity = value;
+            }
+        }
 
         #endregion
     }
@@ -535,6 +568,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 MinSize = Disk.virtual_size;
 
             Cells.AddRange(ImageCell, NameCell, SrCell, SizeCell, SharedCell);
+
             UpdateDetails();
         }
 
