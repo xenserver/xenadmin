@@ -57,12 +57,12 @@ source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
 #build
-MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
+MSBUILD=MSBuild.exe
+SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
 
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
-$MSBUILD XenAdmin.sln
-$MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
+"${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #prepare wix
 
@@ -70,18 +70,18 @@ WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
 
-CANDLE="${WIX_BIN}/candle.exe -nologo"
-LIT="${WIX_BIN}/lit.exe -nologo"
-LIGHT="${WIX_BIN}/light.exe -nologo"
+CANDLE="${WIX_BIN}/candle.exe"
+LIT="${WIX_BIN}/lit.exe"
+LIGHT="${WIX_BIN}/light.exe"
 
 mkdir_clean ${WIX_SRC}
-${UNZIP} ${SCRATCH_DIR}/wix310-debug.zip -d ${SCRATCH_DIR}/wixsrc
+${UNZIP} ${SCRATCH_DIR}/wix311-debug.zip -d ${SCRATCH_DIR}/wixsrc
 cp ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeDlg.wxs ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeStdDlg.wxs
-cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${REPO}/mk/patches/wix_src_patch
+cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${WIX}/wix_src.patch
 cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
 
 mkdir_clean ${WIX_BIN}
-${UNZIP} ${SCRATCH_DIR}/wix310-binaries.zip -d ${WIX_BIN}
+${UNZIP} ${SCRATCH_DIR}/wix311-binaries.zip -d ${WIX_BIN}
 touch ${REPO}/WixInstaller/PrintEula.dll
 
 #compile_wix
@@ -118,7 +118,7 @@ echo "Unsigned artifacts archived"
 
 #build the tests
 echo "INFO: Build the tests..."
-cd ${REPO}/XenAdminTests && $MSBUILD
+cd ${REPO}/XenAdminTests && "${MSBUILD}" ${SWITCHES}
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar *

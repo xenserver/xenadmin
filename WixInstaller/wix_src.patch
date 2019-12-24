@@ -270,14 +270,13 @@ diff -ru wixlib/WixUI_InstallDir.wxs wixlib/WixUI_InstallDir.wxs
  
              <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
              <Property Id="WixUI_Mode" Value="InstallDir" />
-@@ -57,22 +55,20 @@ Patch dialog sequence:
+@@ -44,22 +44,20 @@
              <DialogRef Id="ResumeDlg" />
              <DialogRef Id="UserExit" />
              
 -            <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath" Order="3">1</Publish>
--            <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
 +            <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath" Order="3">NOT WIXUI_DONTVALIDATEPATH</Publish>
-+            <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+             <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
  
              <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
  
@@ -299,7 +298,7 @@ diff -ru wixlib/WixUI_InstallDir.wxs wixlib/WixUI_InstallDir.wxs
              <Publish Dialog="InstallDirDlg" Control="ChangeFolder" Property="_BrowseProperty" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
              <Publish Dialog="InstallDirDlg" Control="ChangeFolder" Event="SpawnDialog" Value="BrowseDlg" Order="2">1</Publish>
              
-@@ -79,9 +80,11 @@ Patch dialog sequence:
+@@ -71,9 +69,11 @@
  
              <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
              <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>

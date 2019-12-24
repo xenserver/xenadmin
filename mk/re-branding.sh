@@ -143,7 +143,7 @@ version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/spla
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
 
 #AssemblyInfo rebranding
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer XenServerHealthCheck"
+version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServerHealthCheck"
 
 #XenAdmin rebranding
 rebranding_global ${REPO}/XenAdmin/Branding.cs

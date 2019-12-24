@@ -6979,7 +6979,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
@@ -6987,7 +6987,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">mt.exe -nologo -manifest "$(ProjectDir)$(ProjectName).manifest" -outputresource:"$(TargetDir)..\..\bin\$(Configuration)\$(TargetFileName)";#1</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">mt.exe -verbose -manifest "$(ProjectDir)$(ProjectName).manifest" -outputresource:"$(TargetDir)..\..\bin\$(Configuration)\$(TargetFileName)";#1</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"

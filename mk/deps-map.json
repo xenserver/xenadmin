@@ -51,7 +51,12 @@
       "flat": "true"
     },
     {
-      "pattern": "ctx-local-contrib/os/wix/3.10/wix310-*.zip",
+      "pattern": "ctx-local-contrib/os/wix/3.11.2/wix311-binaries.zip",
+      "target": "scratch/",
+      "flat": "true"
+    },
+    {
+      "pattern": "ctx-local-contrib/os/wix/3.11.2/wix311-debug.zip",
       "target": "scratch/",
       "flat": "true"
     },

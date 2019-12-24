@@ -36,16 +36,16 @@ ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 OUTPUT_DIR=${ROOT}/output
-	
+
 BRANDING_BRAND_CONSOLE=[XenCenter]
 BRANDING_COMPANY_NAME_SHORT=[Citrix]
 
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 
-CANDLE="${WIX_BIN}/candle.exe -nologo" 
-LIT="${WIX_BIN}/lit.exe -nologo"
-LIGHT="${WIX_BIN}/light.exe -nologo"
+CANDLE="${WIX_BIN}/candle.exe"
+LIT="${WIX_BIN}/lit.exe"
+LIGHT="${WIX_BIN}/light.exe"
 
 mkdir_clean()
 {
@@ -59,7 +59,7 @@ SIGN_FILE=${ROOT}/sign.bat
 if [ -f ${SIGN_FILE} ]; then
    mv -f ${SIGN_FILE} ${REPO}/mk
 fi
-   
+
 #build and sign the installers
 echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh

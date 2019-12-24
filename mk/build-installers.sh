@@ -85,7 +85,7 @@ compile_installer()
 
   mkdir -p out${name}
 
-  ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib \
+  ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib \
            -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
 }
 
@@ -110,7 +110,7 @@ cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi \
    ${WIX}
 
 cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
-cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
 
 #create localised mst files and then embed them into l10n msi
 cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.ja-jp.msi ja-jp.mst
