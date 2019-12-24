@@ -59,11 +59,6 @@ SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersi
 ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
-echo "INFO: Collecting unsigned files..."
-mkdir_clean ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Unsigned
-cp -R ${REPO}/* ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Unsigned
-cd ${OUTPUT_DIR} && zip -q -r -m ${BRANDING_BRAND_CONSOLE}Unsigned.zip ${BRANDING_BRAND_CONSOLE}Unsigned
-echo "Unsigned artifacts archived"
 #build and sign the installers
 . ${REPO}/mk/build-installers.sh
 
