@@ -15,4 +15,10 @@
     <String Id="Readme">README.TXT</String>
     <String Id="HealthCheckDescr">サーバーから Citrix Insight Services に定期的にデータをアップロードして Citrix Hypervisor プールのヘルス状態を監視する機能を有効にします。</String>
     <String Id="HealthCheckDescrShort">Citrix Hypervisor プールのヘルス状態の監視を有効にします。</String>
+    <String Id="Localization">Localization</String>
+    <String Id="LocalizationDescr">Install the languages in which you would like to use the application.</String>
+    <String Id="JapaneseTitle">Japanese</String>
+    <String Id="JapaneseDescr">Japanese</String>
+    <String Id="SimplifiedChineseTitle">Simplified Chinese</String>
+    <String Id="SimplifiedChineseDescr">Simplified Chinese</String>
 </WixLocalization>
