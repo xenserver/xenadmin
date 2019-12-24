@@ -9,8 +9,9 @@ TAGS
 *.rej
 *.suo
 *.cache
+*.dll
+
 bin
-Debug
 nant
 obj
 Thumbs.db
@@ -19,8 +20,9 @@ Thumbs.db
 *.user
 *.idc
 *.bak
+
+splash/Debug/*
 splash/Release/*
-Installer/Release/*
 WixInstaller/wixlib/*
 WixInstaller/outXenCenter*
 WixInstaller/*.mst
@@ -28,9 +30,6 @@ WixInstaller/*/*.msi
 WixInstaller/*/*.wixlib
 WixInstaller/*/*.wixobj
 WixInstaller/*/*.wixpdb
-WixInstaller/PrintEula.dll
-dotNetInstaller/*
-dotNetFx40_Full_setup/*
 packages/*
 !packages/DOTNET_BUILD_LOCATION
 !packages/DOTNET_BUILD_LOCATION_CTXSIGN
@@ -47,7 +46,6 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 ServiceFabricBackup/
-*.rptproj.bak
 
 .vs
 .vscode
