@@ -132,9 +132,6 @@ rebranding_global ${REPO}/XenOvfApi/app.config
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
 
-#mk
-rebranding_global ${REPO}/mk/package-and-sign.sh
-
 sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/$(uuidgen -c | tr -d [:space:])/g" \
           -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION}/g" \
           -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \

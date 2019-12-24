@@ -242,16 +242,6 @@ node("${params.BUILD_ON_NODE}") {
 
     stage('Run tests') {
 
-      if (params.XC_BRANDING != 'citrix') {
-        println "Testing package-and-sign script"
-        bat """
-            cd ${env.WORKSPACE}
-            mkdir TestXenAdminUnsigned
-            forfiles /p output /s /m *Unsigned.zip /c "cmd /c unzip -q -o @file -d ..\\TestXenAdminUnsigned"
-            forfiles /p TestXenAdminUnsigned /s /m package-and-sign.sh /c "cmd /c sh @file"
-            """
-      }
-
       if (params.SKIP_TESTS) {
         println "Skipping tests on request."
       } else {
@@ -278,10 +268,6 @@ type ${env.WORKSPACE}\\output\\nunit3-console.out
     stage('Upload') {
       if (!params.DEV_BUILD) {
         dir("${env.WORKSPACE}\\output") {
-
-          if (params.XC_BRANDING == 'citrix') {
-            bat """del /f /q "${env.WORKSPACE}\\output\\*Unsigned.zip" """
-          }
 
           def server = Artifactory.server('repo')
           def buildInfo = Artifactory.newBuildInfo()
