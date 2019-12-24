@@ -227,8 +227,6 @@
 
         <Feature Id="MainProgram" Title="$(var.CompanyNameShort) $(var.BrandConsole)" Description="$(var.CompanyNameShort) $(var.BrandConsole)" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
-            <ComponentRef Id="JaResources" />
-            <ComponentRef Id="ScResources" />
             <ComponentRef Id="UpdateFiles" />
             <ComponentRef Id="ReportViewer" />
             <ComponentRef Id="SchemasFilesComponent" />
@@ -238,6 +236,21 @@
             <ComponentRef Id="ProgramFilesShortcut" />
             <ComponentGroupRef Id="BrandedComponents" />
             <FeatureGroupRef Id="BrandedFeatures" />
+
+            <Feature Id="Languages" Title="!(loc.Localization)" Description="!(loc.LocalizationDescr)" Display="expand"
+                Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+
+                <Component Id="DummyComponent" Location="local" Directory="TARGETDIR" Guid="$(var.DummyGuid)" />
+
+                <Feature Id="LangJapanese" Title="!(loc.JapaneseTitle)" Description="!(loc.JapaneseDescr)" Display="expand"
+                     Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+                    <ComponentRef Id="JaResources" />
+                </Feature>
+                <Feature Id="LangSimplifiedChinese" Title="!(loc.SimplifiedChineseTitle)" Description="!(loc.SimplifiedChineseDescr)"
+                    Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+                    <ComponentRef Id="ScResources" />
+                </Feature>
+            </Feature>
         </Feature>
 
         <UIRef Id="$(var.BrandInstallerUI)" />
