@@ -70,14 +70,15 @@ fi
 
 WIX_BIN=${SCRATCH_DIR}/wixbin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
-WIX=${REPO}/WixInstaller
+WIX=${SCRATCH_DIR}/WixInstaller
 
 CANDLE=${WIX_BIN}/candle.exe
 LIT=${WIX_BIN}/lit.exe
 LIGHT=${WIX_BIN}/light.exe
 
-mkdir_clean ${WIX_BIN} && ${UNZIP} ${SCRATCH_DIR}/wix311-binaries.zip -d ${WIX_BIN}
-mkdir_clean ${WIX_SRC} && ${UNZIP} ${SCRATCH_DIR}/wix311-debug.zip -d ${WIX_SRC}
+mkdir_clean ${WIX_BIN} && ${UNZIP} ${REPO}/packages/wix311-binaries.zip -d ${WIX_BIN}
+mkdir_clean ${WIX_SRC} && ${UNZIP} ${REPO}/packages/wix311-debug.zip -d ${WIX_SRC}
+cp -r ${REPO}/WixInstaller ${SCRATCH_DIR}/
 cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${WIX}/
 cd ${WIX}/wixlib && cp CustomizeDlg.wxs CustomizeStdDlg.wxs
 cd ${WIX}/wixlib && patch -p1 --binary < ${WIX}/wix_src.patch
@@ -86,7 +87,7 @@ touch ${WIX}/PrintEula.dll
 #compile_wix
 chmod -R u+rx ${WIX_BIN}
 cd ${WIX} && mkdir -p obj lib
-${CANDLE} -out obj/ @candleList.txt
+RepoRoot=$(cygpath -w ${REPO}) ${CANDLE} -out obj/ @candleList.txt
 ${LIT} -out lib/WixUI_InstallDir.wixlib @litList.txt
 
 locale_id() {
@@ -115,7 +116,7 @@ do
   cd ${WIX}
   mkdir -p obj${name} out${name}
 
-  WixLangId=$(locale_id ${locale} | tr -d [:space:]) \
+  WixLangId=$(locale_id ${locale} | tr -d [:space:]) RepoRoot=$(cygpath -w ${REPO}) \
     ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE}.wxs branding.wxs
 
   ${LIGHT} -ext WiXNetFxExtension -out out${name}/${name}.msi \

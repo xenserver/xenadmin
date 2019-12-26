@@ -202,7 +202,7 @@ node("${params.BUILD_ON_NODE}") {
     }
 
     stage('Create manifest') {
-      GString manifestFile = "${env.WORKSPACE}\\output\\xenadmin-manifest.txt"
+      GString manifestFile = "${env.WORKSPACE}\\xenadmin.git\\_output\\xenadmin-manifest.txt"
       File file = new File(manifestFile)
 
       String branchInfo = (params.XC_BRANCH == 'master') ? 'trunk' : params.XC_BRANCH
@@ -237,7 +237,7 @@ node("${params.BUILD_ON_NODE}") {
       file << "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4\n"
       file << "chroot-lenny chroots.hg 1a75fa5848e8\n"
 
-      file << readFile("${env.WORKSPACE}\\scratch\\dotnet-packages-manifest.txt").trim()
+      file << readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\dotnet-packages-manifest.txt").trim()
     }
 
     stage('Run tests') {
@@ -251,15 +251,15 @@ node("${params.BUILD_ON_NODE}") {
 taskkill /f /fi "imagename eq nunit*"
 
 nunit3-console /labels=all /process=separate /timeout=40000 /where "cat==Unit" ^
-  /out="${env.WORKSPACE}\\output\\XenAdminTests.out" ^
-  /result="${env.WORKSPACE}\\output\\XenAdminTests.xml" ^
+  /out="${env.WORKSPACE}\\xenadmin.git\\_output\\XenAdminTests.out" ^
+  /result="${env.WORKSPACE}\\xenadmin.git\\_output\\XenAdminTests.xml" ^
   "${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release\\XenAdminTests.dll" ^
-  > ${env.WORKSPACE}\\output\\nunit3-console.out
+  > ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
 
-type ${env.WORKSPACE}\\output\\nunit3-console.out
+type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
 """
 
-          def text = readFile("${env.WORKSPACE}\\output\\nunit3-console.out")
+          def text = readFile("${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out")
           assert text.contains('Failed: 0')
         }
       }
@@ -267,7 +267,7 @@ type ${env.WORKSPACE}\\output\\nunit3-console.out
 
     stage('Upload') {
       if (!params.DEV_BUILD) {
-        dir("${env.WORKSPACE}\\output") {
+        dir("${env.WORKSPACE}\\xenadmin.git\\_output") {
 
           def server = Artifactory.server('repo')
           def buildInfo = Artifactory.newBuildInfo()
