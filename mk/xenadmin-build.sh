@@ -44,10 +44,12 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
-ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 REPO="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRATCH_DIR=${ROOT}/scratch
-OUTPUT_DIR=${ROOT}/output
+SCRATCH_DIR=${REPO}/_scratch
+OUTPUT_DIR=${REPO}/_output
+
+mkdir_clean ${SCRATCH_DIR}
+mkdir_clean ${OUTPUT_DIR}
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
@@ -56,7 +58,7 @@ source ${REPO}/mk/re-branding.sh
 MSBUILD=MSBuild.exe
 SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
 
-${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
+${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #build and sign the installers
@@ -75,6 +77,7 @@ cd ${REPO}/CFUValidator/bin/Release && zip CFUValidator.zip ./{*.dll,CFUValidato
 cp ${REPO}/CFUValidator/bin/Release/CFUValidator.zip ${OUTPUT_DIR}/CFUValidator.zip
 
 #now package the pdbs
+cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
