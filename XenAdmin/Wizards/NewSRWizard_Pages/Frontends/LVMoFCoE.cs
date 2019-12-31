@@ -44,9 +44,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         #region LVMoHBA overrides
 
-        public override bool ShowNicColumn { get { return true; } }
+        protected override bool ShowNicColumn => true;
 
-        public override string HelpID { get { return "Location_FCOE"; } }
+        public override string HelpID => "Location_FCOE";
 
         protected override FibreChannelDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
