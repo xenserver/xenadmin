@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public SR.SRTypes SrType { get; set; }
 
-        public virtual bool ShowNicColumn { get { return false; } }
+        protected virtual bool ShowNicColumn => false;
 
         private FibreChannelDescriptor CreateSrDescriptor(FibreChannelDevice device)
         {
@@ -76,11 +76,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         
         #region XenTabPage overrides
 
-        public override string PageTitle { get { return Messages.NEWSR_SELECT_LUN; } }
+        public override string PageTitle => Messages.NEWSR_SELECT_LUN;
 
-        public override string Text { get { return Messages.NEWSR_LOCATION; } }
+        public override string Text => Messages.NEWSR_LOCATION;
 
-        public override string HelpID { get { return "Location_HBA"; } }
+        public override string HelpID => "Location_HBA";
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
@@ -104,11 +104,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 // Start probe
                 var formatDiskDescriptor = CreateSrDescriptor(device);
-                List<SR.SRInfo> srs;
-
                 var currentSrDescriptor = formatDiskDescriptor;
 
-                if (!RunProbe(master, currentSrDescriptor, out srs))
+                if (!RunProbe(master, currentSrDescriptor, out List<SR.SRInfo> srs))
                 {
                     cancel = true;
                     return;
@@ -196,7 +194,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if (!cancel && formatDiskDescriptors.Count > 0)
             {
-                var launcher = new LVMoHBAWarningDialogLauncher(this, formatDiskDescriptors, SrType);
+                var launcher = new LVMoHBAWarningDialogLauncher(Connection, this, formatDiskDescriptors, SrType);
                 launcher.ShowWarnings();
                 cancel = launcher.Cancelled;
                 if (!cancel && launcher.SrDescriptors.Count > 0)
@@ -219,9 +217,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     srs = action.ProbeExtResult != null ? SR.ParseSRList(action.ProbeExtResult) : SR.ParseSRListXML(action.Result);
                     return true;
                 }
-                catch (Exception)
+                catch
                 {
-                    return false;
+                   //ignore
                 }
             }
 
@@ -507,12 +505,14 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             private readonly Dictionary<FibreChannelDescriptor, FibreChannelDescriptor> inputSrDescriptors;
             private readonly IWin32Window owner;
             private readonly SR.SRTypes requestedSrType;
+            private readonly IXenConnection _connection;
             
-            public List<FibreChannelDescriptor> SrDescriptors { get; private set; }
+            public List<FibreChannelDescriptor> SrDescriptors { get; }
             public bool Cancelled { get; private set; }
 
-            public LVMoHBAWarningDialogLauncher(IWin32Window owner, Dictionary<FibreChannelDescriptor, FibreChannelDescriptor> srDescriptors, SR.SRTypes requestedSrType)
+            public LVMoHBAWarningDialogLauncher(IXenConnection conn, IWin32Window owner, Dictionary<FibreChannelDescriptor, FibreChannelDescriptor> srDescriptors, SR.SRTypes requestedSrType)
             {
+                _connection = conn;
                 this.owner = owner;
                 inputSrDescriptors = srDescriptors;
                 this.requestedSrType = requestedSrType;
@@ -522,7 +522,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             private UserSelectedOption GetSelectedOption(FibreChannelDescriptor descriptor, int remainingCount, bool foundExistingSr, 
                 SR.SRTypes existingSrType, out bool repeatForRemainingLUNs)
             {
-                using (var dialog = new LVMoHBAWarningDialog(descriptor.Device, remainingCount, foundExistingSr, existingSrType, requestedSrType))
+                using (var dialog = new LVMoHBAWarningDialog(_connection, descriptor.Device, remainingCount, foundExistingSr, existingSrType, requestedSrType))
                 {
                     dialog.ShowDialog(owner);
                     repeatForRemainingLUNs = dialog.RepeatForRemainingLUNs;

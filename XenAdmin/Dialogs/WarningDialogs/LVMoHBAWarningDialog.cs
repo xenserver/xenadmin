@@ -31,9 +31,11 @@
 
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
 using XenAPI;
 
@@ -47,14 +49,16 @@ namespace XenAdmin.Dialogs.WarningDialogs
         private bool foundExistingSR;
         private readonly SR.SRTypes existingSrType;
         private readonly SR.SRTypes requestedSrType;
+        private readonly IXenConnection _connection;
 
         public LVMoHBA.UserSelectedOption SelectedOption { get; private set; }
-        public bool RepeatForRemainingLUNs { get { return checkBoxRepeat.Checked; } }
+        public bool RepeatForRemainingLUNs => checkBoxRepeat.Checked;
 
-        public LVMoHBAWarningDialog(FibreChannelDevice currentDevice, int remainingDevicesCount,
+        public LVMoHBAWarningDialog(IXenConnection connection, FibreChannelDevice currentDevice, int remainingDevicesCount,
             bool foundExistingSR, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
         {
             InitializeComponent();
+            _connection = connection;
             this.currentDevice = currentDevice;
             this.remainingDevicesCount = remainingDevicesCount;
             this.foundExistingSR = foundExistingSR;
@@ -64,17 +68,16 @@ namespace XenAdmin.Dialogs.WarningDialogs
             ActiveControl = buttonCancel;
         }
 
-        private object HighlightedPanel
+        private Panel HighlightedPanel
         {
-            get { return highlightedPanel; }
             set
             {
-                Panel panel = value as Panel;
-                if (panel == highlightedPanel) return;
+                if (highlightedPanel == value)
+                    return;
 
                 SetPanelColor(highlightedPanel, false);
-                SetPanelColor(panel, true);
-                highlightedPanel = panel;
+                SetPanelColor(value, true);
+                highlightedPanel = value;
             }
         }
 
@@ -88,26 +91,12 @@ namespace XenAdmin.Dialogs.WarningDialogs
 
             foreach (var control in panel.Controls)
             {
-                if (control is Button)
+                if (control is Button button)
                 {
-                    var button = control as Button;
                     button.FlatAppearance.MouseOverBackColor = color;
                     button.FlatAppearance.MouseDownBackColor = color;
                 }
             }
-        }
-
-        private void PanelClicked()
-        {
-            Panel panel = HighlightedPanel as Panel;
-            if (panel == null)
-                return;
-
-            SelectedOption = panel == panelFormat
-                                 ? LVMoHBA.UserSelectedOption.Format
-                                 : LVMoHBA.UserSelectedOption.Reattach;
-
-            DialogResult = DialogResult.OK;
         }
 
         private void panelReattach_MouseEnter(object sender, EventArgs e)
@@ -125,40 +114,48 @@ namespace XenAdmin.Dialogs.WarningDialogs
             HighlightedPanel = null;
         }
 
-        private void panel_Click(object sender, EventArgs e)
-        {
-            PanelClicked();
-        }
-
         private void PopulateControls()
         {
             labelHeader.Text = foundExistingSR
-                                   ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR, SR.getFriendlyTypeName(existingSrType))
-                                   : Messages.LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS;
+                ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR, SR.getFriendlyTypeName(existingSrType))
+                : Messages.LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS;
 
             checkBoxRepeat.Text = foundExistingSR
-                                      ? Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_WITH_SR
-                                      : Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_NO_SR;
+                ? Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_WITH_SR
+                : Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_NO_SR;
             checkBoxRepeat.Visible = remainingDevicesCount > 0;
 
-            labelLUNDetails.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_LUN_DETAILS, currentDevice.Vendor,
-                                                 currentDevice.Serial,
-                                                 string.IsNullOrEmpty(currentDevice.SCSIid)
-                                                     ? currentDevice.Path
-                                                     : currentDevice.SCSIid,
-                                                 Util.DiskSizeString(currentDevice.Size));
+            labelLUNDetails.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_LUN_DETAILS,
+                currentDevice.Vendor,
+                currentDevice.Serial,
+                string.IsNullOrEmpty(currentDevice.SCSIid) ? currentDevice.Path : currentDevice.SCSIid,
+                Util.DiskSizeString(currentDevice.Size));
 
-            labelReattachInfo.Text = foundExistingSR
-                                   ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_REATTACH_INFO, SR.getFriendlyTypeName(existingSrType))
-                                   : Messages.LVMOHBA_WARNING_DIALOG_REATTACH_LABEL_TEXT;
+            var isGfs2 = existingSrType == SR.SRTypes.gfs2;
+            var clusteringEnabled = _connection.Cache.Clusters.Any();
+            var restrictGfs2 = Helpers.FeatureForbidden(_connection, Host.RestrictCorosync);
 
-            labelFormatInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_FORMAT_INFO, SR.getFriendlyTypeName(requestedSrType));
+            if (foundExistingSR)
+            {
+                if (isGfs2 && restrictGfs2)
+                    labelReattachInfo.Text = Messages.GFS2_INCORRECT_POOL_LICENSE;
+                else if (isGfs2 && !clusteringEnabled)
+                    labelReattachInfo.Text = Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+                else
+                    labelReattachInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_REATTACH_INFO,
+                        SR.getFriendlyTypeName(existingSrType));
+            }
+            else
+            {
+                labelReattachInfo.Text = Messages.LVMOHBA_WARNING_DIALOG_REATTACH_LABEL_TEXT;
+            }
 
-            panelReattach.Enabled = foundExistingSR;
+            labelFormatInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_FORMAT_INFO,
+                SR.getFriendlyTypeName(requestedSrType));
+
+            panelReattach.Enabled = foundExistingSR && (!isGfs2 || clusteringEnabled && !restrictGfs2);
             if (!panelReattach.Enabled)
                 pictureBoxArrowReattach.Image = Drawing.ConvertToGreyScale(pictureBoxArrowReattach.Image);
-
-            
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -166,16 +163,18 @@ namespace XenAdmin.Dialogs.WarningDialogs
             SelectedOption = LVMoHBA.UserSelectedOption.Cancel;
         }
 
-        private void buttonReattach_Click(object sender, EventArgs e)
+        private void panelReattach_Click(object sender, EventArgs e)
         {
             HighlightedPanel = panelReattach;
-            PanelClicked();
+            SelectedOption = LVMoHBA.UserSelectedOption.Reattach;
+            DialogResult = DialogResult.OK;
         }
 
-        private void buttonFormat_Click(object sender, EventArgs e)
+        private void panelFormat_Click(object sender, EventArgs e)
         {
             HighlightedPanel = panelFormat;
-            PanelClicked();
+            SelectedOption = LVMoHBA.UserSelectedOption.Format;
+            DialogResult = DialogResult.OK;
         }
     }
 }

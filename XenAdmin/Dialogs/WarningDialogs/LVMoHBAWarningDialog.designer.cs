@@ -85,7 +85,7 @@
             this.panelReattach.Controls.Add(this.buttonReattach);
             this.panelReattach.Controls.Add(this.labelReattachInfo);
             this.panelReattach.Name = "panelReattach";
-            this.panelReattach.Click += new System.EventHandler(this.panel_Click);
+            this.panelReattach.Click += new System.EventHandler(this.panelReattach_Click);
             this.panelReattach.MouseEnter += new System.EventHandler(this.panelReattach_MouseEnter);
             // 
             // pictureBoxArrowReattach
@@ -94,7 +94,7 @@
             this.pictureBoxArrowReattach.Image = global::XenAdmin.Properties.Resources._112_RightArrowLong_Blue_24x24_72;
             this.pictureBoxArrowReattach.Name = "pictureBoxArrowReattach";
             this.pictureBoxArrowReattach.TabStop = false;
-            this.pictureBoxArrowReattach.Click += new System.EventHandler(this.panel_Click);
+            this.pictureBoxArrowReattach.Click += new System.EventHandler(this.panelReattach_Click);
             this.pictureBoxArrowReattach.MouseEnter += new System.EventHandler(this.panelReattach_MouseEnter);
             // 
             // buttonReattach
@@ -106,14 +106,14 @@
             this.buttonReattach.ForeColor = System.Drawing.Color.Navy;
             this.buttonReattach.Name = "buttonReattach";
             this.buttonReattach.UseVisualStyleBackColor = true;
-            this.buttonReattach.Click += new System.EventHandler(this.buttonReattach_Click);
+            this.buttonReattach.Click += new System.EventHandler(this.panelReattach_Click);
             this.buttonReattach.MouseEnter += new System.EventHandler(this.panelReattach_MouseEnter);
             // 
             // labelReattachInfo
             // 
             resources.ApplyResources(this.labelReattachInfo, "labelReattachInfo");
             this.labelReattachInfo.Name = "labelReattachInfo";
-            this.labelReattachInfo.Click += new System.EventHandler(this.panel_Click);
+            this.labelReattachInfo.Click += new System.EventHandler(this.panelReattach_Click);
             this.labelReattachInfo.MouseEnter += new System.EventHandler(this.panelReattach_MouseEnter);
             // 
             // panelFormat
@@ -125,7 +125,7 @@
             this.panelFormat.Controls.Add(this.buttonFormat);
             this.panelFormat.Controls.Add(this.labelFormatInfo);
             this.panelFormat.Name = "panelFormat";
-            this.panelFormat.Click += new System.EventHandler(this.panel_Click);
+            this.panelFormat.Click += new System.EventHandler(this.panelFormat_Click);
             this.panelFormat.MouseEnter += new System.EventHandler(this.panelFormat_MouseEnter);
             // 
             // pictureBoxArrowFormat
@@ -134,7 +134,7 @@
             this.pictureBoxArrowFormat.Image = global::XenAdmin.Properties.Resources._112_RightArrowLong_Blue_24x24_72;
             this.pictureBoxArrowFormat.Name = "pictureBoxArrowFormat";
             this.pictureBoxArrowFormat.TabStop = false;
-            this.pictureBoxArrowFormat.Click += new System.EventHandler(this.panel_Click);
+            this.pictureBoxArrowFormat.Click += new System.EventHandler(this.panelFormat_Click);
             this.pictureBoxArrowFormat.MouseEnter += new System.EventHandler(this.panelFormat_MouseEnter);
             // 
             // buttonFormat
@@ -146,14 +146,14 @@
             this.buttonFormat.ForeColor = System.Drawing.Color.Navy;
             this.buttonFormat.Name = "buttonFormat";
             this.buttonFormat.UseVisualStyleBackColor = true;
-            this.buttonFormat.Click += new System.EventHandler(this.buttonFormat_Click);
+            this.buttonFormat.Click += new System.EventHandler(this.panelFormat_Click);
             this.buttonFormat.MouseEnter += new System.EventHandler(this.panelFormat_MouseEnter);
             // 
             // labelFormatInfo
             // 
             resources.ApplyResources(this.labelFormatInfo, "labelFormatInfo");
             this.labelFormatInfo.Name = "labelFormatInfo";
-            this.labelFormatInfo.Click += new System.EventHandler(this.panel_Click);
+            this.labelFormatInfo.Click += new System.EventHandler(this.panelFormat_Click);
             this.labelFormatInfo.MouseEnter += new System.EventHandler(this.panelFormat_MouseEnter);
             // 
             // pictureBox2
