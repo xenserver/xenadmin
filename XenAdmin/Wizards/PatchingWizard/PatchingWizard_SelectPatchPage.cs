@@ -503,6 +503,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY,
                     true);
                 _webPageCell.Value = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
+                _webPageCell.ToolTipText = alert.WebPageLabel;
             }
 
             public XenServerPatchAlert UpdateAlert

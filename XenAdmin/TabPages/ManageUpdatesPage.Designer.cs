@@ -165,19 +165,17 @@
             // 
             // byUpdateToolStripMenuItem
             // 
-            this.byUpdateToolStripMenuItem.CheckOnClick = true;
             this.byUpdateToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
             resources.ApplyResources(this.byUpdateToolStripMenuItem, "byUpdateToolStripMenuItem");
             this.byUpdateToolStripMenuItem.Name = "byUpdateToolStripMenuItem";
-            this.byUpdateToolStripMenuItem.CheckedChanged += new System.EventHandler(this.byUpdateToolStripMenuItem_CheckedChanged);
+            this.byUpdateToolStripMenuItem.Click += new System.EventHandler(this.byUpdateToolStripMenuItem_Click);
             // 
             // byHostToolStripMenuItem
             // 
-            this.byHostToolStripMenuItem.CheckOnClick = true;
             this.byHostToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_TreeConnected_h32bit_16;
             resources.ApplyResources(this.byHostToolStripMenuItem, "byHostToolStripMenuItem");
             this.byHostToolStripMenuItem.Name = "byHostToolStripMenuItem";
-            this.byHostToolStripMenuItem.CheckedChanged += new System.EventHandler(this.byHostToolStripMenuItem_CheckedChanged);
+            this.byHostToolStripMenuItem.Click += new System.EventHandler(this.byHostToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
