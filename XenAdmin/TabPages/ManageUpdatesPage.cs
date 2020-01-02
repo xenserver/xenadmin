@@ -84,6 +84,7 @@ namespace XenAdmin.TabPages
                 checksQueue++;
                 byHostToolStripMenuItem.Checked = Properties.Settings.Default.ShowUpdatesByServer;
                 byUpdateToolStripMenuItem.Checked = !Properties.Settings.Default.ShowUpdatesByServer;
+                ToggleView();
             }
             finally
             {
@@ -129,17 +130,10 @@ namespace XenAdmin.TabPages
                     Rebuild(); // rebuild entire alert list to ensure filtering and sorting
                     break;
                 case CollectionChangeAction.Remove:
-                    Alert a = e.Element as Alert;
-                    if (a != null)
-                    {
+                    if (e.Element is Alert a)
                         RemoveUpdateRow(a);
-                    }
-                    else
-                    {
-                        var range = e.Element as List<Alert>;
-                        if (range != null)
-                            Rebuild();
-                    }
+                    else if (e.Element is List<Alert>)
+                        Rebuild();
                     break;
             }
         }
@@ -663,7 +657,6 @@ namespace XenAdmin.TabPages
         /// <summary>
         /// Runs all the current filters on the alert to determine if it should be shown in the list or not.
         /// </summary>
-        /// <param name="alert"></param>
         private bool FilterAlert(Alert alert)
         {
             var hosts = new List<string>();
@@ -809,7 +802,7 @@ namespace XenAdmin.TabPages
 
             if (!string.IsNullOrEmpty(alert.WebPageLabel))
             {
-                var fix = new ToolStripMenuItem(alert.FixLinkText);
+                var fix = new ToolStripMenuItem(alert.FixLinkText) {ToolTipText = alert.WebPageLabel};
                 fix.Click += ToolStripMenuItemGoToWebPage_Click;
                 items.Add(fix);
             }
@@ -855,7 +848,6 @@ namespace XenAdmin.TabPages
         /// After the Delete action is completed the page is refreshed and the restore dismissed 
         /// button is enabled again.
         /// </summary>
-        /// <param name="sender"></param>
         private void DeleteAllAlertsAction_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, () =>
@@ -881,8 +873,6 @@ namespace XenAdmin.TabPages
         /// If the answer of the user to the dialog is YES, then make a list with all the updates and call 
         /// DismissUpdates on that list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void dismissAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult result = DialogResult.Yes;
@@ -929,8 +919,6 @@ namespace XenAdmin.TabPages
         /// If the answer of the user to the dialog is YES, then make a list of all the selected rows
         /// and call DismissUpdates on that list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void dismissSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
@@ -1428,19 +1416,21 @@ namespace XenAdmin.TabPages
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
 
-        private void byUpdateToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        private void byUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (byUpdateToolStripMenuItem.Checked)
+            if (!byUpdateToolStripMenuItem.Checked)
             {
+                byUpdateToolStripMenuItem.Checked = true;
                 byHostToolStripMenuItem.Checked = false;
                 ToggleView();
             }
         }
 
-        private void byHostToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        private void byHostToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (byHostToolStripMenuItem.Checked)
+            if (!byHostToolStripMenuItem.Checked)
             {
+                byHostToolStripMenuItem.Checked = true;
                 byUpdateToolStripMenuItem.Checked = false;
                 ToggleView();
             }
