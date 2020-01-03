@@ -864,8 +864,12 @@ namespace XenAdmin.Core
 
             if (existingAlert != null && alert.CanIgnore)
                 RemoveUpdate(existingAlert);
-            else if (existingAlert != null)
-                ((XenServerUpdateAlert)existingAlert).CopyConnectionsAndHosts(alert);
+            else if (existingAlert is XenServerUpdateAlert updAlert)
+            {
+                RemoveUpdate(updAlert);
+                updAlert.CopyConnectionsAndHosts(alert);
+                AddUpdate(updAlert);
+            }
             else if (!alert.CanIgnore)
                 AddUpdate(alert);
         }

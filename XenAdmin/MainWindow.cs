@@ -1131,6 +1131,21 @@ namespace XenAdmin
                     if(Helpers.GetPool(host.Connection) == null)
                         host.Connection.FriendlyName = Helpers.GetName(host);
                     break;
+
+                case "patches":
+                    if (!Helpers.ElyOrGreater(host))
+                    {
+                        Updates.CheckServerPatches();
+                        Updates.CheckServerVersion();
+                    }
+                    break;
+                case "updates":
+                    if (Helpers.ElyOrGreater(host))
+                    {
+                        Updates.CheckServerPatches();
+                        Updates.CheckServerVersion();
+                    }
+                    break;
             }
         }
 
