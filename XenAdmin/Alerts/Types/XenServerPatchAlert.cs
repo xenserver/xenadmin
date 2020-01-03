@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Network;
-using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
 using System.Text;
@@ -43,8 +42,8 @@ namespace XenAdmin.Alerts
 {
     public class XenServerPatchAlert : XenServerUpdateAlert
     {
-        public XenServerPatch Patch;
-        public XenServerVersion NewServerVersion;
+        public readonly XenServerPatch Patch;
+        public readonly XenServerVersion NewServerVersion;
        
         /// <summary>
         /// Can we apply this alert. Calling this sets the CannotApplyReason where applicable
@@ -100,13 +99,7 @@ namespace XenAdmin.Alerts
             _timestamp = Patch.TimeStamp;
         }
 
-        public override string WebPageLabel
-        {
-            get
-            {
-                return Patch.Url;
-            }
-        }
+        public override string WebPageLabel => Patch.Url;
 
         public override AlertPriority Priority
         {
@@ -154,21 +147,9 @@ namespace XenAdmin.Alerts
             get { return () => Program.OpenURL(Patch.Url); }
         }
 
-        public override string FixLinkText
-        {
-            get
-            {
-                return Messages.ALERT_NEW_PATCH_DOWNLOAD;
-            }
-        }
+        public override string FixLinkText => Messages.ALERT_NEW_PATCH_DOWNLOAD;
 
-        public override string HelpID
-        {
-            get
-            {
-                return "XenServerPatchAlert";
-            }
-        }
+        public override string HelpID => "XenServerPatchAlert";
 
         public override string Title
         {
@@ -199,19 +180,12 @@ namespace XenAdmin.Alerts
 
         public override bool Equals(Alert other)
         {
-            if (other is XenServerPatchAlert)
-            {
-                return string.Equals(Patch.Uuid, ((XenServerPatchAlert)other).Patch.Uuid, StringComparison.OrdinalIgnoreCase);
-            }
+            if (other is XenServerPatchAlert patchAlert)
+                return string.Equals(Patch.Uuid, patchAlert.Patch.Uuid, StringComparison.OrdinalIgnoreCase);
+
             return base.Equals(other);
         }
 
-        public bool ShowAsNewVersion
-        {
-            get
-            {
-                return NewServerVersion != null && !NewServerVersion.PresentAsUpdate;
-            }
-        }
+        public bool ShowAsNewVersion => NewServerVersion != null && !NewServerVersion.PresentAsUpdate;
     }
 }

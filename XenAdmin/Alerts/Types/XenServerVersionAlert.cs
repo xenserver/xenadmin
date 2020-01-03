@@ -31,10 +31,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Actions;
 using XenAPI;
 
 
@@ -42,7 +40,7 @@ namespace XenAdmin.Alerts
 {
     public class XenServerVersionAlert : XenServerUpdateAlert
     {
-        public XenServerVersion Version;
+        public readonly XenServerVersion Version;
 
         public XenServerVersionAlert(XenServerVersion version)
         {
@@ -51,51 +49,24 @@ namespace XenAdmin.Alerts
             _timestamp = version.TimeStamp;
         }
 
-        public override string WebPageLabel
-        {
-            get { return Version.Url; }
-        }
+        public override string WebPageLabel => Version.Url;
 
-        public override string Name
-        {
-            get { return Version.Name; }
-        }
+        public override string Name => Version.Name;
 
-        public override string Title
-        {
-            get { return string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, Version.Name); }
-        }
+        public override string Title => string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, Version.Name);
 
-        public override string Description
-        {
-            get { return string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name); }
-        }
+        public override string Description => string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name);
 
-        public override string FixLinkText
-        {
-            get
-            {
-                return Messages.ALERT_NEW_VERSION_DOWNLOAD;
-            }
-        }
+        public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
 
-        public override AlertPriority Priority
-        {
-            get { return AlertPriority.Priority5; }
-        }
+        public override AlertPriority Priority => AlertPriority.Priority5;
 
         public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(Version.Url); }
         }
 
-        public override string HelpID
-        {
-            get
-            {
-                return "XenServerUpdateAlert";
-            }
-        }
+        public override string HelpID => "XenServerUpdateAlert";
 
         protected override bool IsDismissed(IXenConnection connection)
         {
@@ -116,10 +87,9 @@ namespace XenAdmin.Alerts
 
         public override bool Equals(Alert other)
         {
-            if (other is XenServerVersionAlert)
-            {
-                return Version.Version.ToString() == ((XenServerVersionAlert)other).Version.Version.ToString();
-            }
+            if (other is XenServerVersionAlert versionAlert)
+                return Version.Version.ToString() == versionAlert.Version.Version.ToString();
+
             return base.Equals(other);
         }
     }
