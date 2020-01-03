@@ -66,7 +66,9 @@ namespace XenAdmin.TabPages
         private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
-        private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
+
+        private volatile bool _buildInProgress;
+        private volatile bool _buildRequired;
 
         public ManageUpdatesPage()
         {
@@ -74,7 +76,6 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
-            m_updateCollectionChangedWithInvoke = Program.ProgramInvokeHandler(UpdatesCollectionChanged);
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
 
@@ -102,7 +103,7 @@ namespace XenAdmin.TabPages
 
         protected override void RegisterEventHandlers()
         {
-            Updates.RegisterCollectionChanged(m_updateCollectionChangedWithInvoke);
+            Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
@@ -110,7 +111,7 @@ namespace XenAdmin.TabPages
 
         protected override void DeregisterEventHandlers()
         {
-            Updates.DeregisterCollectionChanged(m_updateCollectionChangedWithInvoke);
+            Updates.DeregisterCollectionChanged(UpdatesCollectionChanged);
             Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
@@ -122,8 +123,6 @@ namespace XenAdmin.TabPages
 
         private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.AssertOnEventThread();
-            
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
@@ -131,7 +130,7 @@ namespace XenAdmin.TabPages
                     break;
                 case CollectionChangeAction.Remove:
                     if (e.Element is Alert a)
-                        RemoveUpdateRow(a);
+                        Program.Invoke(Program.MainWindow, () => RemoveUpdateRow(a));
                     else if (e.Element is List<Alert>)
                         Rebuild();
                     break;
@@ -246,18 +245,40 @@ namespace XenAdmin.TabPages
 
         private void Rebuild()
         {
-            Program.AssertOnEventThread();
-
-            if (!Visible || checksQueue > 0)
+            if (_buildInProgress)
+            {
+                _buildRequired = true;
                 return;
+            }
 
-            SetFilterLabel();
-            ToggleTopWarningVisibility();
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (!Visible || checksQueue > 0)
+                    return;
 
-            if (byUpdateToolStripMenuItem.Checked)
-                RebuildUpdateView();
-            else
-                RebuildHostView();
+                try
+                {
+                    _buildInProgress = true;
+
+                    SetFilterLabel();
+                    ToggleTopWarningVisibility();
+
+                    if (byUpdateToolStripMenuItem.Checked)
+                        RebuildUpdateView();
+                    else
+                        RebuildHostView();
+                }
+                finally
+                {
+                    _buildInProgress = false;
+
+                    if (_buildRequired)
+                    {
+                        _buildRequired = false;
+                        Rebuild();
+                    }
+                }
+            });
         }
 
         private class UpdatePageByHostDataGridView : CollapsingPoolHostDataGridView
@@ -354,16 +375,13 @@ namespace XenAdmin.TabPages
             // fill data into row
             private void UpdateDetails()
             {
-                Pool pool = Tag as Pool;
-
-                if (pool != null)
+                if (Tag is Pool pool)
                 {
                     Host master = pool.Connection.Resolve(pool.master);
                     SetCollapseIcon();
                     _poolIconCell.Value = Images.GetImage16For(pool);
 
-                    DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
-                    if (nc != null)
+                    if (_nameCell is DataGridViewTextAndImageCell nc)
                         nc.Image = null;
 
                     _nameCell.Value = pool.Name();
@@ -384,51 +402,42 @@ namespace XenAdmin.TabPages
                         _statusCell.Value = String.Empty;
                     }
                 }
-                
-                else
+                else if (Tag is Host host)
                 {
-                    Host host = Tag as Host;
-                    if (host != null)
+                    var hostRequired = RequiredUpdatesForHost(host);
+                    var hostInstalled = InstalledUpdatesForHost(host);
+                    var outOfDate = hostRequired.Length > 0;
+
+                    DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
+
+                    if (_hasPool && nc != null) // host in pool
                     {
-                        var hostRequired = RequiredUpdatesForHost(host);
-                        var hostInstalled = InstalledUpdatesForHost(host);
-                        var outOfDate = hostRequired.Length > 0;
-
-                        DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
-
-                        if (_hasPool && nc != null) // host in pool
+                        nc.Image = Images.GetImage16For(host);
+                        _statusCell.Value = String.Empty;
+                    }
+                    else if (!_hasPool && nc != null) // standalone host
+                    {
+                        _poolIconCell.Value = Images.GetImage16For(host);
+                        nc.Image = null;
+                        if (IsFullyPopulated)
                         {
-                            nc.Image = Images.GetImage16For(host);
+                            _patchingStatusCell.Value = outOfDate
+                                ? Properties.Resources._000_error_h32bit_16
+                                : Properties.Resources._000_Tick_h32bit_16;
+                            _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                        }
+                        else
+                        {
                             _statusCell.Value = String.Empty;
                         }
-                        else if (!_hasPool && nc != null) // standalone host
-                        {
-                            _poolIconCell.Value = Images.GetImage16For(host);
-                            nc.Image = null;
-                            if (IsFullyPopulated)
-                            {
-                                _patchingStatusCell.Value = outOfDate
-                                    ? Properties.Resources._000_error_h32bit_16
-                                    : Properties.Resources._000_Tick_h32bit_16;
-                                _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
-                            }
-                            else
-                            {
-                                _statusCell.Value = String.Empty;
-                            }
-                        }
-
-                        _nameCell.Value = host.Name();
-                        _versionCell.Value = host.ProductVersionTextShort();
-                        _installedUpdateCell.Value = hostInstalled;
-                        if (IsFullyPopulated)
-                            _requiredUpdateCell.Value = hostRequired;
-                        else
-                            _requiredUpdateCell.Value = String.Empty;
                     }
+
+                    _nameCell.Value = host.Name();
+                    _versionCell.Value = host.ProductVersionTextShort();
+                    _installedUpdateCell.Value = hostInstalled;
+                    _requiredUpdateCell.Value = IsFullyPopulated ? hostRequired : string.Empty;
                 }
             }
-
         }
 
         private static string RequiredUpdatesForHost(Host host)

@@ -60,6 +60,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webPageColumn = new System.Windows.Forms.DataGridViewLinkColumn();
+            this._backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -287,6 +288,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.webPageColumn.ReadOnly = true;
             this.webPageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // _backgroundWorker
+            // 
+            this._backgroundWorker.WorkerSupportsCancellation = true;
+            this._backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this._backgroundWorker_DoWork);
+            this._backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this._backgroundWorker_RunWorkerCompleted);
+            // 
             // PatchingWizard_SelectPatchPage
             // 
             resources.ApplyResources(this, "$this");
@@ -331,5 +338,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
+        private System.ComponentModel.BackgroundWorker _backgroundWorker;
     }
 }

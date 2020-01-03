@@ -69,22 +69,52 @@ namespace XenAdmin.Wizards.PatchingWizard
             downloadUpdateRadioButton.Checked = true;
         }
 
+        private void RegisterEvents()
+        {
+            Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
+            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+            Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
+        }
+
+        private void UnRegisterEvents()
+        {
+            Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
+            Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
+            Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
+        }
+        
         private void CheckForUpdates_CheckForUpdatesStarted()
         {
-            Program.Invoke(Program.MainWindow, StartCheckForUpdates);
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                StartCheckForUpdates(); //call this before setting CheckForUpdatesInProgress
+                CheckForUpdatesInProgress = true;
+            });
         }
 
         private void Updates_RestoreDismissedUpdatesStarted()
         {
-            Program.Invoke(Program.MainWindow, StartCheckForUpdates);
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                StartCheckForUpdates(); //call this before setting CheckForUpdatesInProgress
+                CheckForUpdatesInProgress = true;
+            });
+        }
+
+        private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
+        {
+            Program.Invoke(Program.MainWindow, ()=>
+            {
+                CheckForUpdatesInProgress = false;
+                FinishCheckForUpdates(); //call this after setting CheckForUpdatesInProgress
+            });
         }
 
         private void StartCheckForUpdates()
         {
-            if (CheckForUpdatesInProgress)
+            if (CheckForUpdatesInProgress || _backgroundWorker.IsBusy)
                 return;
 
-            CheckForUpdatesInProgress = true;
             dataGridViewPatches.Rows.Clear();
             tableLayoutPanelSpinner.Visible = true;
             RestoreDismUpdatesButton.Enabled = false;
@@ -92,17 +122,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
-        private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
+        private void FinishCheckForUpdates()
         {
-            Program.Invoke(Program.MainWindow, delegate
-            {
-                tableLayoutPanelSpinner.Visible = false;
-                PopulatePatchesBox();
-                RefreshListButton.Enabled = true;
-                RestoreDismUpdatesButton.Enabled = true;
-                CheckForUpdatesInProgress = false;
-                OnPageUpdated();
-            });
+            if (CheckForUpdatesInProgress || _backgroundWorker.IsBusy)
+                return;
+
+            tableLayoutPanelSpinner.Visible = false;
+            PopulatePatchesBox();
+            RefreshListButton.Enabled = true;
+            RestoreDismUpdatesButton.Enabled = true;
+            OnPageUpdated();
         }
 
         public void SelectDownloadAlert(XenServerPatchAlert alert)
@@ -113,30 +142,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (row.UpdateAlert.Equals(alert))
                 {
                     row.Selected = true;
+                    break;
                 }
             }
         }
 
-        public override string Text
-        {
-            get { return Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TEXT; }
-        }
+        public override string Text => Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TEXT;
 
-        public override string PageTitle
-        {
-            get { return Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "SelectUpdate"; }
-        }
+        public override string HelpID => "SelectUpdate";
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
-            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
-            Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
+            RegisterEvents();
 
             if (direction == PageLoadedDirection.Forward)
             {
@@ -159,18 +178,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                     downloadUpdateRadioButton.Checked = true;
                 }
 
-                Updates.CheckServerPatches();
-                PopulatePatchesBox();
-                OnPageUpdated();
+                StartCheckForUpdates(); //call this before starting the _backgroundWorker
+                _backgroundWorker.RunWorkerAsync();
             }
 
             firstLoad = false;
         }
 
-        private bool IsInAutomatedUpdatesMode
-        {
-            get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; }
-        }
+        private bool IsInAutomatedUpdatesMode =>
+            AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked;
 
         public WizardMode WizardMode
         {
@@ -188,6 +204,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return WizardMode.SingleUpdate;
             }
         }
+
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { get; private set; }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
@@ -252,8 +269,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                             }
                         }
                         
-                        if (!unzippedFiles.Contains(unzippedUpdateFilePath))
-                            unzippedFiles.Add(unzippedUpdateFilePath);
+                        if (!UnzippedUpdateFiles.Contains(unzippedUpdateFilePath))
+                            UnzippedUpdateFiles.Add(unzippedUpdateFilePath);
 
                         SelectedPatchFilePath = unzippedUpdateFilePath;
                     }
@@ -274,11 +291,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             if (!cancel) //unsubscribe only if we are really leaving this page
-            {
-                Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
-                Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
-                Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
-            }
+                UnRegisterEvents();
         }
 
         private XenServerPatchAlert GetAlertFromFile(string fileName, out bool hasUpdateXml)
@@ -356,15 +369,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 dataGridViewPatches.SuspendLayout();
                 dataGridViewPatches.Rows.Clear();
 
+                var rowList = new List<DataGridViewRow>();
+
                 foreach (Alert alert in updates)
                 {
                     if (!(alert is XenServerPatchAlert patchAlert))
                         continue;
 
                     PatchGridViewRow row = new PatchGridViewRow(patchAlert);
-                    if (!dataGridViewPatches.Rows.Contains(row))
+                    if (!rowList.Contains(row))
                     {
-                        dataGridViewPatches.Rows.Add(row);
+                        rowList.Add(row);
 
                         if (patchAlert.RequiredXenCenterVersion != null)
                         {
@@ -374,6 +389,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
                 }
+
+                dataGridViewPatches.Rows.AddRange(rowList.ToArray());
             }
             finally
             {
@@ -383,22 +400,19 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override void PageCancelled(ref bool cancel)
         {
-            Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
-            Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
-            Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
+            UnRegisterEvents();
+            
+            if (_backgroundWorker.IsBusy)
+                _backgroundWorker.CancelAsync();
         }
 
         public override bool EnableNext()
         {
-            if (CheckForUpdatesInProgress)
-            {
+            if (CheckForUpdatesInProgress || _backgroundWorker.IsBusy)
                 return false;
-            }
 
             if (IsInAutomatedUpdatesMode)
-            {
                 return true;
-            }
 
             if (downloadUpdateRadioButton.Checked)
             {
@@ -422,28 +436,33 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnablePrevious()
         {
-            return !CheckForUpdatesInProgress;
+            return !CheckForUpdatesInProgress && !_backgroundWorker.IsBusy;
         }
 
         /// <summary>
         /// List to store unzipped files to be removed later by PatchingWizard
         /// </summary>
-        private readonly List<string> unzippedFiles = new List<string>();
-
-        public List<string> UnzippedUpdateFiles
-        {
-            get { return unzippedFiles; }
-        }
+        public List<string> UnzippedUpdateFiles { get; } = new List<string>();
 
         public string FilePath
         {
-            get { return fileNameTextBox.Text; }
-            set { fileNameTextBox.Text = value; }
+            get => fileNameTextBox.Text;
+            set => fileNameTextBox.Text = value;
         }
 
-        public UpdateType SelectedUpdateType { get; set; }
+        public UpdateType SelectedUpdateType { get; private set; }
 
-        public string SelectedPatchFilePath { get; set; }
+        public string SelectedPatchFilePath { get; private set; }
+
+        private void _backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Updates.CheckServerPatches();
+        }
+
+        private void _backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            FinishCheckForUpdates();
+        }
 
         #region DataGridView
 
@@ -486,16 +505,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private class PatchGridViewRow : DataGridViewExRow, IEquatable<PatchGridViewRow>
         {
-            private readonly XenServerPatchAlert _alert;
-
-            private DataGridViewTextBoxCell _nameCell = new DataGridViewTextBoxCell();
-            private DataGridViewTextBoxCell _descriptionCell = new DataGridViewTextBoxCell();
-            private DataGridViewTextBoxCell _dateCell = new DataGridViewTextBoxCell();
-            private DataGridViewLinkCell _webPageCell = new DataGridViewLinkCell();
+            private readonly DataGridViewTextBoxCell _nameCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _descriptionCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _dateCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewLinkCell _webPageCell = new DataGridViewLinkCell();
 
             public PatchGridViewRow(XenServerPatchAlert alert)
             {
-                _alert = alert;
+                UpdateAlert = alert;
                 Cells.AddRange(_nameCell, _descriptionCell, _dateCell, _webPageCell);
 
                 _nameCell.Value = String.Format(alert.Name);
@@ -506,10 +523,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _webPageCell.ToolTipText = alert.WebPageLabel;
             }
 
-            public XenServerPatchAlert UpdateAlert
-            {
-                get { return _alert; }
-            }
+            public XenServerPatchAlert UpdateAlert { get; }
 
             public bool Equals(PatchGridViewRow other)
             {
@@ -525,8 +539,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             public override bool Equals(object obj)
             {
-                if (obj is PatchGridViewRow)
-                    return this.Equals((PatchGridViewRow) obj);
+                if (obj is PatchGridViewRow row)
+                    return Equals(row);
                 return false;
             }
 
@@ -537,9 +551,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (c is DataGridViewLinkCell)
                         continue;
 
-                    var cell = c as DataGridViewCell;
-                    if (c != null)
-                        ((DataGridViewCell) c).ToolTipText = toolTip;
+                    if (c is DataGridViewCell cell)
+                        cell.ToolTipText = toolTip;
                 }
             }
         }
@@ -628,7 +641,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #endregion
-    }        
+    }
 
     public enum UpdateType { Legacy, ISO }
 }
