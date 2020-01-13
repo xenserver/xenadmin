@@ -46,7 +46,7 @@ for (Object key : params.keySet()) {
   println "Build parameter ${key} set to ${keyVal}"
 }
 
-node(label 'xencenter') {
+node('xencenter') {
   try {
     /* The job name should be xencenter-<branding> */
     def jobNameParts = "${env.JOB_NAME}".split('-')
