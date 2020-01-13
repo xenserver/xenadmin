@@ -38,40 +38,7 @@ properties([
   [
     $class  : 'BuildDiscarderProperty',
     strategy: [$class: 'LogRotator', numToKeepStr: '10', artifactNumToKeepStr: '10']
-  ],
-  parameters(
-    [
-      stringParam(
-        name: 'XC_BRANDING',
-        defaultValue: 'citrix',
-        description: 'Branding to use. Default value is citrix.'
-      ),
-      stringParam(
-        name: 'XC_BRANCH',
-        defaultValue: 'master',
-        description: 'The branch to build. Default value is master.'
-      ),
-      booleanParam(
-        name: 'SKIP_CHECKS',
-        defaultValue: false,
-        description: 'Skips initial checks for a faster build. Default value is false.'
-      ),
-      booleanParam(
-        name: 'SKIP_TESTS',
-        defaultValue: false,
-        description: 'Skips tests for a faster build. Default value is false.'
-      ),
-      booleanParam(
-        name: 'DEV_BUILD',
-        defaultValue: false,
-        description: 'Skips bumping the global build number and uploading the artifacts. Default value is false.'
-      ),
-      stringParam(
-        name: 'BUILD_ON_NODE',
-        defaultValue: 'master',
-        description: 'The Jenkins node where to build. Default value is master, but ensure you set it to a node disallowing concurrent builds.'
-      )
-    ])
+  ]
 ])
 
 for (Object key : params.keySet()) {
@@ -79,37 +46,34 @@ for (Object key : params.keySet()) {
   println "Build parameter ${key} set to ${keyVal}"
 }
 
-node("${params.BUILD_ON_NODE}") {
+node(label 'xencenter') {
   try {
+    /* The job name should be xencenter-<branding> */
+    def jobNameParts = "${env.JOB_NAME}".split('-')
+    def XC_BRANDING = jobNameParts[1]
 
     stage('Bump build number') {
-      if (params.DEV_BUILD) {
-        println "Running development build. The global build number will not be incremented. The current job's build number will be used."
-      } else {
-        def calcBn = httpRequest httpMode: 'GET',
-          url: "${env.CGI_ENDPOINT}/next-xenadmin?job=${env.JOB_NAME}&number=${env.BUILD_NUMBER}&rev=na&repo=na"
+      def calcBn = httpRequest httpMode: 'GET',
+        url: "${env.CGI_ENDPOINT}/next-xenadmin?job=${env.JOB_NAME}&number=${env.BUILD_NUMBER}&rev=na&repo=na"
 
-        def nextBn = calcBn.content.trim()
-        println "Got next build number: " + nextBn
+      def nextBn = calcBn.content.trim()
+      println "Got next build number: " + nextBn
 
-        httpRequest httpMode: 'POST',
-          contentType: 'APPLICATION_FORM',
-          requestBody: "nextBuildNumber=${nextBn}",
-          url: "${env.JOB_URL}nextbuildnumber/submit",
-          authentication: 'authentication'
-      }
+      httpRequest httpMode: 'POST',
+        contentType: 'APPLICATION_FORM',
+        requestBody: "nextBuildNumber=${nextBn}",
+        url: "${env.JOB_URL}nextbuildnumber/submit",
+        authentication: 'authentication'
     }
 
     stage('Clean workspace') {
       deleteDir()
     }
 
-    String GIT_COMMIT_XENADMIN =''
-
     stage('Checkout sources') {
       checkout([
         $class           : 'GitSCM',
-        branches         : [[name: "refs/heads/${params.XC_BRANCH}"]],
+        branches         : scm.branches,
         extensions       : [
           [$class: 'RelativeTargetDirectory', relativeTargetDir: 'xenadmin.git'],
           [$class: 'LocalBranch', localBranch: '**'],
@@ -119,7 +83,7 @@ node("${params.BUILD_ON_NODE}") {
         userRemoteConfigs: scm.userRemoteConfigs
       ])
 
-      GIT_COMMIT_XENADMIN = bat(
+      def GIT_COMMIT_XENADMIN = bat(
         returnStdout: true,
         script: """
                 @echo off
@@ -128,13 +92,22 @@ node("${params.BUILD_ON_NODE}") {
                 """
       ).trim()
 
+      def GIT_BRANCH_XENADMIN = bat(
+      returnStdout: true,
+      script: """
+                @echo off
+                cd ${env.WORKSPACE}\\xenadmin.git
+                git rev-parse --abbrev-ref HEAD
+                """
+    ).trim()
+
       GString BRANDING_REMOTE = "${env.CODE_ENDPOINT}/xs/branding.git"
 
       def branchExistsOnBranding = bat(
         returnStatus: true,
-        script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
+        script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${GIT_BRANCH_XENADMIN}"""
       )
-      String branchToCloneOnBranding = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
+      String branchToCloneOnBranding = (branchExistsOnBranding == 0) ?  "${GIT_BRANCH_XENADMIN}" : 'master'
 
       bat """git clone -b ${branchToCloneOnBranding} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
 
@@ -145,9 +118,9 @@ node("${params.BUILD_ON_NODE}") {
 
         def branchExistsOnBrand = bat(
           returnStatus: true,
-          script: """git ls-remote --heads ${BRAND_REMOTE} | grep ${params.XC_BRANCH}"""
+          script: """git ls-remote --heads ${BRAND_REMOTE} | grep ${GIT_BRANCH_XENADMIN}"""
         )
-        String branchToClone = (branchExistsOnBrand == 0) ?  params.XC_BRANCH : 'master'
+        String branchToClone = (branchExistsOnBrand == 0) ?  ${GIT_BRANCH_XENADMIN} : 'master'
 
         bat """
             git clone -b ${branchToClone} ${BRAND_REMOTE} ${env.WORKSPACE}\\xenadmin-branding.git
@@ -180,17 +153,14 @@ node("${params.BUILD_ON_NODE}") {
     }
 
     stage('Run checks') {
-      if (params.SKIP_CHECKS) {
-        println "Skipping initial checks on request."
-      } else {
 
-        List<String> list = ["copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "spellcheck/spellcheck.sh"]
-        for (String item : list) {
-          bat """
-          cd ${env.WORKSPACE}\\xenadmin.git\\devtools
-          sh "${item}"
-          """
-        }
+      List<String> list = ["copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "spellcheck/spellcheck.sh"]
+
+      for (String item : list) {
+        bat """
+        cd ${env.WORKSPACE}\\xenadmin.git\\devtools
+        sh "${item}"
+        """
       }
     }
 
@@ -205,8 +175,7 @@ node("${params.BUILD_ON_NODE}") {
       GString manifestFile = "${env.WORKSPACE}\\xenadmin.git\\_output\\xenadmin-manifest.txt"
       File file = new File(manifestFile)
 
-      String branchInfo = (params.XC_BRANCH == 'master') ? 'trunk' : params.XC_BRANCH
-      file << "@branch=${branchInfo}\n"
+      file << "@branch=${GIT_BRANCH_XENADMIN}\n"
       file << "xenadmin xenadmin.git ${GIT_COMMIT_XENADMIN}\n"
 
       def SERVER_BRANDING_TIP = bat(
@@ -242,12 +211,9 @@ node("${params.BUILD_ON_NODE}") {
 
     stage('Run tests') {
 
-      if (params.SKIP_TESTS) {
-        println "Skipping tests on request."
-      } else {
-        timeout(time: 60, unit: 'MINUTES') {
+      timeout(time: 60, unit: 'MINUTES') {
 
-          bat """
+        bat """
 taskkill /f /fi "imagename eq nunit*"
 
 nunit3-console /labels=all /process=separate /timeout=40000 /where "cat==Unit" ^
@@ -259,35 +225,32 @@ nunit3-console /labels=all /process=separate /timeout=40000 /where "cat==Unit" ^
 type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
 """
 
-          def text = readFile("${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out")
-          assert text.contains('Failed: 0')
-        }
+        def text = readFile("${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out")
+        assert text.contains('Failed: 0')
       }
     }
 
     stage('Upload') {
-      if (!params.DEV_BUILD) {
-        dir("${env.WORKSPACE}\\xenadmin.git\\_output") {
+      dir("${env.WORKSPACE}\\xenadmin.git\\_output") {
 
-          def server = Artifactory.server('repo')
-          def buildInfo = Artifactory.newBuildInfo()
-          buildInfo.env.filter.addInclude("*")
-          buildInfo.env.collect()
+        def server = Artifactory.server('repo')
+        def buildInfo = Artifactory.newBuildInfo()
+        buildInfo.env.filter.addInclude("*")
+        buildInfo.env.collect()
 
-          GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${params.XC_BRANCH};vcs.revision=${GIT_COMMIT_XENADMIN}"
+        GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${GIT_BRANCH_XENADMIN};vcs.revision=${GIT_COMMIT_XENADMIN}"
 
-          // IMPORTANT: do not forget the slash at the end of the target path!
-          GString targetPath = "xc-local-build/xencenter/${params.XC_BRANCH}/${params.XC_BRANDING}/${env.BUILD_NUMBER}/"
-          GString uploadSpec = """ {
-              "files": [
-                { "pattern": "*", "flat": "false", "target": "${targetPath}", "props": "${artifactMeta}" }
-              ]}
-          """
+        // IMPORTANT: do not forget the slash at the end of the target path!
+        GString targetPath = "xc-local-build/xencenter/${GIT_BRANCH_XENADMIN}/${params.XC_BRANDING}/${env.BUILD_NUMBER}/"
+        GString uploadSpec = """ {
+            "files": [
+              { "pattern": "*", "flat": "false", "target": "${targetPath}", "props": "${artifactMeta}" }
+            ]}
+        """
 
-          def buildInfo_upload = server.upload(uploadSpec)
-          buildInfo.append buildInfo_upload
-          server.publishBuildInfo buildInfo
-        }
+        def buildInfo_upload = server.upload(uploadSpec)
+        buildInfo.append buildInfo_upload
+        server.publishBuildInfo buildInfo
       }
     }
 
@@ -297,7 +260,7 @@ type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
     currentBuild.result = 'FAILURE'
     throw ex as java.lang.Throwable
   } finally {
-    currentBuild.displayName = "${params.XC_BRANCH}-${params.XC_BRANDING}-${env.BUILD_NUMBER}"
+    currentBuild.displayName = "${env.BUILD_NUMBER}"
     step([
       $class                  : 'Mailer',
       notifyEveryUnstableBuild: true,
