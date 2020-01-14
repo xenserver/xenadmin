@@ -62,8 +62,7 @@ node('xencenter') {
       httpRequest httpMode: 'POST',
         contentType: 'APPLICATION_FORM',
         requestBody: "nextBuildNumber=${nextBn}",
-        url: "${env.JOB_URL}nextbuildnumber/submit",
-        authentication: 'authentication'
+        url: "${env.JOB_URL}nextbuildnumber/submit"
     }
 
     stage('Clean workspace') {
