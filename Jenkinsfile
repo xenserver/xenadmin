@@ -125,8 +125,7 @@ node('xencenter') {
         bat """
             git clone -b ${branchToClone} ${BRAND_REMOTE} ${env.WORKSPACE}\\xenadmin-branding.git
             rmdir /s /q "${env.WORKSPACE}\\xenadmin.git\\Branding"
-            xcopy /e /y "${env.WORKSPACE}\\xenadmin-branding.git\\${XC_BRANDING}\\*" "${env.WORKSPACE}\\xenadmin.git\\Branding\\"
-            copy /y "${env.WORKSPACE}\\xenadmin-branding.git\\${XC_BRANDING}\\WixInstaller\\branding.wx*" "${env.WORKSPACE}\\xenadmin.git\\WixInstaller\\"
+            xcopy /e /y "${env.WORKSPACE}\\xenadmin-branding.git\\${XC_BRANDING}\\*" "${env.WORKSPACE}\\xenadmin.git\\"
         """
       }
     }

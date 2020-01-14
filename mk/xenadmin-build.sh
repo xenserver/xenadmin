@@ -49,15 +49,23 @@ REPO="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SCRATCH_DIR=${REPO}/_scratch
 OUTPUT_DIR=${REPO}/_output
 
+#build
+MSBUILD=MSBuild.exe
+SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
+
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
+
+for conf in Debug Release ; do
+  cd ${REPO} && "${MSBUILD}" /verbosity:quiet /p:Configuration=${conf} /t:Clean XenAdmin.sln
+done
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
-#build
-MSBUILD=MSBuild.exe
-SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
+#packages sources
+cd ${REPO} && zip -x packages/\*.dll packages/\*.pdb packages/\*.exe packages/\*.zip \
+  Branding/Hotfixes/\* _\* .\* -q -r9 ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-sources.zip *
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
@@ -183,7 +191,7 @@ echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && "${MSBUILD}" ${SWITCHES}
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf ${OUTPUT_DIR}/XenAdminTests.tgz ./Release
-cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar *
+cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}TestResources.tar *
 
 #include cfu validator binary in output directory
 cd ${REPO}/CFUValidator/bin/Release && zip CFUValidator.zip ./{*.dll,CFUValidator.exe,XenCenterMain.exe}
@@ -198,6 +206,6 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
+cd ${OUTPUT_DIR} && tar cjf ${BRANDING_BRAND_CONSOLE}.Symbols.tar.bz2 --remove-files *.pdb
 
 set +u
