@@ -30,12 +30,13 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-set -ex
+# Script parameters:
+# 1 Signing node name
+# 2 Sign in SBE
+# 3 Self-signing certificate sha1 thumbprint
+# 4 Self-signing certificate sha256 thumbprint
 
-SET_ENV_FILE="/cygdrive/c/env.sh"
-if [ -f ${SET_ENV_FILE} ]; then
-   . ${SET_ENV_FILE}
-fi
+set -exu
 
 UNZIP="unzip -q -o"
 
@@ -61,16 +62,120 @@ SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersi
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
-#build and sign the installers
-. ${REPO}/mk/build-installers.sh
+#sign files
+SIGN_BAT="${REPO}/mk/sign.bat $1 $2 $3 $4"
+SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
+
+for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+do
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+done
+
+cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.exe "${SIGN_DESCR}"
+cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${SIGN_DESCR}"
+cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${SIGN_DESCR}"
+
+for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
+do
+  cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+done
+
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} CookComputing.XmlRpcV2.dll "XML-RPC.NET"
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Newtonsoft.Json.CH.dll "JSON.NET"
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} log4net.dll "Log4Net"
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ICSharpCode.SharpZipLib.dll "SharpZipLib"
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} DiscUtils.dll "DiscUtils"
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
+cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
+
+#copy files (signed accordingly) in XenServerHealthService folder
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+  ${REPO}/XenServerHealthCheck/bin/Release
+
+#sign XenServerHealthService
+cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${SIGN_DESCR}"
+
+#prepare wix
+
+WIX_BIN=${SCRATCH_DIR}/wixbin
+WIX_SRC=${SCRATCH_DIR}/wixsrc
+WIX=${SCRATCH_DIR}/WixInstaller
+
+CANDLE=${WIX_BIN}/candle.exe
+LIT=${WIX_BIN}/lit.exe
+LIGHT=${WIX_BIN}/light.exe
+
+mkdir_clean ${WIX_BIN} && ${UNZIP} ${REPO}/packages/wix311-binaries.zip -d ${WIX_BIN}
+mkdir_clean ${WIX_SRC} && ${UNZIP} ${REPO}/packages/wix311-debug.zip -d ${WIX_SRC}
+cp -r ${REPO}/WixInstaller ${SCRATCH_DIR}/
+cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${WIX}/
+cd ${WIX}/wixlib && cp CustomizeDlg.wxs CustomizeStdDlg.wxs
+cd ${WIX}/wixlib && patch -p1 --binary < ${WIX}/wix_src.patch
+touch ${WIX}/PrintEula.dll
+
+#compile_wix
+chmod -R u+rx ${WIX_BIN}
+cd ${WIX} && mkdir -p obj lib
+RepoRoot=$(cygpath -w ${REPO}) ${CANDLE} -out obj/ @candleList.txt
+${LIT} -out lib/WixUI_InstallDir.wixlib @litList.txt
+
+locale_id() {
+  case "$1" in
+    "ja-jp") echo 1041 ;;
+    "zh-cn") echo 2052 ;;
+    "zh-tw") echo 1028 ;;
+    *)       echo 1033 ;; #en-us
+  esac
+}
+
+if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ] ; then
+  cd ${WIX} && mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
+fi
+
+#for each locale create an msi containing all resources
+
+for locale in en-us ja-jp zh-cn
+do
+  if [ "${locale}" = "en-us" ] ; then
+    name=${BRANDING_BRAND_CONSOLE}
+  else
+    name=${BRANDING_BRAND_CONSOLE}.${locale}
+  fi
+
+  cd ${WIX}
+  mkdir -p obj${name} out${name}
+
+  WixLangId=$(locale_id ${locale} | tr -d [:space:]) RepoRoot=$(cygpath -w ${REPO}) \
+    ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE}.wxs branding.wxs
+
+  ${LIGHT} -ext WiXNetFxExtension -out out${name}/${name}.msi \
+          -loc wixlib/wixui_${locale}.wxl -loc ${locale}.wxl \
+          obj${name}/${BRANDING_BRAND_CONSOLE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
+
+  cp ${WIX}/out${name}/${name}.msi ${WIX}
+done
+
+cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+
+#create localised mst files and then embed them into the combined msi
+
+for locale in ja-jp zh-cn zh-tw ; do
+  cd ${WIX} && \
+    wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.${locale}.msi ${locale}.mst && \
+    wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi ${locale}.mst $(locale_id ${locale} | tr -d [:space:])
+done
+
+#copy and sign the combined installer
+chmod a+rw ${WIX}/${BRANDING_BRAND_CONSOLE}.msi && cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
+${SIGN_BAT} ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
 
 #build the tests
 echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && "${MSBUILD}" ${SWITCHES}
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
-cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
+cd ${REPO}/XenAdminTests/bin/ && tar -czf ${OUTPUT_DIR}/XenAdminTests.tgz ./Release
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar *
-cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 
 #include cfu validator binary in output directory
 cd ${REPO}/CFUValidator/bin/Release && zip CFUValidator.zip ./{*.dll,CFUValidator.exe,XenCenterMain.exe}
@@ -86,8 +191,5 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
    ${OUTPUT_DIR}
 
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
-
-echo "INFO:	Build phase succeeded at "
-date
 
 set +u
