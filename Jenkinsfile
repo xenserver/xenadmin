@@ -165,10 +165,13 @@ node('xencenter') {
     }
 
     stage('Build') {
+
+      def SBE=${GIT_BRANCH_XENADMIN}.startsWith('release').toString().toLowerCase()
+
       bat """
-          cd ${env.WORKSPACE}
-          sh "xenadmin.git/mk/xenadmin-build.sh"
-          """
+cd ${env.WORKSPACE}
+sh "xenadmin.git/mk/xenadmin-build.sh ${env.SIGNING_NODE_NAME} ${SBE} ${env.SELFSIGN_THUMBPRINT_SHA1} ${env.SELFSIGN_THUMBPRINT_SHA256}"
+      """
     }
 
     stage('Create manifest') {
