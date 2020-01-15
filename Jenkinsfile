@@ -52,6 +52,7 @@ node('xencenter') {
     // The job name should be xencenter-<branding>
     def jobNameParts = "${env.JOB_NAME}".split('-')
     def XC_BRANDING = jobNameParts[1]
+    println "Branding for ${XC_BRANDING}"
 
     stage('Clean workspace') {
       deleteDir()
@@ -98,7 +99,7 @@ node('xencenter') {
 
       bat """git clone -b ${branchToCloneOnBranding} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
 
-      if (params.XC_BRANDING != 'citrix') {
+      if (${XC_BRANDING} != 'citrix') {
 
         println "Overwriting Branding folder"
         GString BRAND_REMOTE = "${env.CODE_ENDPOINT}/xsc/xenadmin-branding.git"
@@ -127,9 +128,7 @@ node('xencenter') {
       def server = Artifactory.server('repo')
       server.download(downloadSpec)
 
-      println "Branding for " + params.XC_BRANDING
-
-      if (params.XC_BRANDING == 'citrix') {
+      if (${XC_BRANDING} == 'citrix') {
         println "Downloading hotfixes."
 
         GString hotFixSpec = GString.EMPTY
@@ -178,7 +177,7 @@ sh "xenadmin.git/mk/xenadmin-build.sh ${env.SIGNING_NODE_NAME} ${SBE} ${env.SELF
 
       file << "branding branding.git ${SERVER_BRANDING_TIP}\n"
 
-      if (params.XC_BRANDING != 'citrix') {
+      if (${XC_BRANDING} != 'citrix') {
         def XENADMIN_BRANDING_TIP = bat(
           returnStdout: true,
           script: """
@@ -230,7 +229,7 @@ type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
         GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${GLOBAL_BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${GIT_BRANCH_XENADMIN};vcs.revision=${GIT_COMMIT_XENADMIN}"
 
         // IMPORTANT: do not forget the slash at the end of the target path!
-        GString targetPath = "xc-local-build/xencenter/${GIT_BRANCH_XENADMIN}/${params.XC_BRANDING}/${GLOBAL_BUILD_NUMBER}/"
+        GString targetPath = "xc-local-build/xencenter/${GIT_BRANCH_XENADMIN}/${XC_BRANDING}/${GLOBAL_BUILD_NUMBER}/"
         GString uploadSpec = """ {
             "files": [
               { "pattern": "*", "flat": "false", "target": "${targetPath}", "props": "${artifactMeta}" }
