@@ -46,7 +46,7 @@ node('xencenter') {
 
     stage('Bump global build number') {
       final bnBuild = build('xencenter-global-build-number')
-      def GLOBAL_BUILD_NUMBER = ${bnBuild.number}
+      def GLOBAL_BUILD_NUMBER = bnBuild.getNumber().toString()
       currentBuild.displayName = ${GLOBAL_BUILD_NUMBER}
     }
 
