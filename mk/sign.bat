@@ -55,7 +55,7 @@ if "%~2"=="true" (
   signing in SBE
   set CTXSIGN=C:\ctxsign2\ctxsign.exe
 
-  %CTXSIGN%  --authorise --workerID %~1 --orchID %~1 --jobID XenServerWindowsLegacyPVTools_signing --task XenServerDotnetPackages-%BUILD_NUMBER% --debug > out.txt
+  %CTXSIGN%  --authorise --workerID %~1 --orchID %~1 --jobID XenServerWindowsLegacyPVTools_signing --task XenServerDotnetPackages-%GLOBAL_BUILD_NUMBER% --debug > out.txt
   echo OUTPUT FROM CTXSIGN --AUTHORISE:
   type out.txt
   echo OUTPUT ENDS

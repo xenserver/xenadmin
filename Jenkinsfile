@@ -41,29 +41,18 @@ properties([
   ]
 ])
 
-for (Object key : params.keySet()) {
-  def keyVal = params.get(key)
-  println "Build parameter ${key} set to ${keyVal}"
-}
-
 node('xencenter') {
   try {
-    /* The job name should be xencenter-<branding> */
+
+    stage('Bump global build number') {
+      final bnBuild = build('xencenter-build-number')
+      def GLOBAL_BUILD_NUMBER = ${bnBuild.number}
+      currentBuild.displayName = ${GLOBAL_BUILD_NUMBER}
+    }
+
+    // The job name should be xencenter-<branding>
     def jobNameParts = "${env.JOB_NAME}".split('-')
     def XC_BRANDING = jobNameParts[1]
-
-    stage('Bump build number') {
-      def calcBn = httpRequest httpMode: 'GET',
-        url: "${env.CGI_ENDPOINT}/next-xenadmin?job=${env.JOB_NAME}&number=${env.BUILD_NUMBER}&rev=na&repo=na"
-
-      def nextBn = calcBn.content.trim()
-      println "Got next build number: " + nextBn
-
-      httpRequest httpMode: 'POST',
-        contentType: 'APPLICATION_FORM',
-        requestBody: "nextBuildNumber=${nextBn}",
-        url: "${env.JOB_URL}nextbuildnumber/submit"
-    }
 
     stage('Clean workspace') {
       deleteDir()
@@ -239,10 +228,10 @@ type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
         buildInfo.env.filter.addInclude("*")
         buildInfo.env.collect()
 
-        GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${GIT_BRANCH_XENADMIN};vcs.revision=${GIT_COMMIT_XENADMIN}"
+        GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${GLOBAL_BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${GIT_BRANCH_XENADMIN};vcs.revision=${GIT_COMMIT_XENADMIN}"
 
         // IMPORTANT: do not forget the slash at the end of the target path!
-        GString targetPath = "xc-local-build/xencenter/${GIT_BRANCH_XENADMIN}/${params.XC_BRANDING}/${env.BUILD_NUMBER}/"
+        GString targetPath = "xc-local-build/xencenter/${GIT_BRANCH_XENADMIN}/${params.XC_BRANDING}/${GLOBAL_BUILD_NUMBER}/"
         GString uploadSpec = """ {
             "files": [
               { "pattern": "*", "flat": "false", "target": "${targetPath}", "props": "${artifactMeta}" }
@@ -261,7 +250,6 @@ type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
     currentBuild.result = 'FAILURE'
     throw ex as java.lang.Throwable
   } finally {
-    currentBuild.displayName = "${env.BUILD_NUMBER}"
     step([
       $class                  : 'Mailer',
       notifyEveryUnstableBuild: true,
