@@ -444,17 +444,14 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(IXenConnection conn)
         {
-            return conn == null || NaplesOrGreater(Helpers.GetMaster(conn));
+            return conn == null || NaplesOrGreater(GetMaster(conn));
         }
 
         /// Naples is ver. 3.0.0
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(Host host)
         {
-            if (host == null)
-                return true;
-
-            return NaplesOrGreater(HostPlatformVersion(host));
+            return host == null || NaplesOrGreater(HostPlatformVersion(host));
         }
 
         public static bool NaplesOrGreater(string platformVersion)
@@ -472,15 +469,30 @@ namespace XenAdmin.Core
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool QuebecOrGreater(Host host)
         {
-            if (host == null)
-                return true;
-
-            string platform_version = HostPlatformVersion(host);
-            return platform_version != null && productVersionCompare(platform_version, "3.0.50") >= 0;
+            return host == null || QuebecOrGreater(HostPlatformVersion(host));
         }
+
         public static bool QuebecOrGreater(string platformVersion)
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.0.50") >= 0;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool StockholmOrGreater(IXenConnection conn)
+        {
+            return conn == null || StockholmOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool StockholmOrGreater(Host host)
+        {
+            return host == null || StockholmOrGreater(HostPlatformVersion(host));
+        }
+
+        /// Stockholm is ver. 3.2.0
+        public static bool StockholmOrGreater(string platformVersion)
+        {
+            return platformVersion != null && productVersionCompare(platformVersion, "3.1.50") >= 0;
         }
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
