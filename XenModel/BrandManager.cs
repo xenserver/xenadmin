@@ -43,6 +43,8 @@ namespace XenAdmin.Core
 
         public static string PerfAlertMailDefaultLanguage => Get("PERF_ALERT_MAIL_DEFAULT_LANGUAGE");
 
+        public static string ExtensionSearch => Get("EXTENSION_SEARCH");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>

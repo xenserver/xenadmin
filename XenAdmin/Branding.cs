@@ -46,22 +46,12 @@ namespace XenAdmin
         public const string PRODUCT_BRAND = "[XenServer product]";
         public const string LEGACY_PRODUCT_BRAND = "[Legacy XenServer product]";
         public const string COMPANY_NAME_SHORT = "[Citrix]";
-        public const string SEARCH = "[xensearch]";
         public const string UPDATE = "[xsupdate]";
         public const string UPDATEISO = "[iso]";
         public const string BACKUP = "[xbk]";
         public const string PV_TOOLS = "[Citrix VM Tools]";
         public const string CONVERSION_VPX_MIN_SUPPORTED_VERSION = "[BRANDING_VERSION_7_0]";
 
-        public static string Search
-        {
-            get
-            {
-                var s = SEARCH;
-                return s != "[" + "xensearch]" ? s.ToLowerInvariant() : InvisibleMessages.XEN_SEARCH.ToLowerInvariant();
-            }
-        }
-        
         public static string Update
         {
             get

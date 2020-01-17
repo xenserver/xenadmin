@@ -123,4 +123,7 @@
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="EXTENSION_SEARCH" xml:space="preserve">
+    <value>xensearch</value>
+  </data>
 </root>
