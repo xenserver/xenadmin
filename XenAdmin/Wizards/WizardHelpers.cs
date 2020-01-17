@@ -128,7 +128,7 @@ namespace XenAdmin.Wizards
                 return null;
 
             var unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath),
-                null, zippedUpdatePath, true, BrandManager.ExtensionUpdate, Branding.UpdateIso);
+                null, zippedUpdatePath, true, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
 
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {

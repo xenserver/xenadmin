@@ -262,7 +262,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (SelectedPatchFilePath.EndsWith("." + BrandManager.ExtensionUpdate))
                         SelectedUpdateType = UpdateType.Legacy;
-                    else if (SelectedPatchFilePath.EndsWith("." + Branding.UpdateIso))
+                    else if (SelectedPatchFilePath.EndsWith("." + InvisibleMessages.ISO_UPDATE))
                         SelectedUpdateType = UpdateType.ISO;
 
                     AlertFromFileOnDisk = GetAlertFromFile(SelectedPatchFilePath, out var hasUpdateXml);
@@ -295,7 +295,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             hasUpdateXml = false;
 
-            if (!fileName.EndsWith(Branding.UpdateIso))
+            if (!fileName.EndsWith(InvisibleMessages.ISO_UPDATE))
                 return null;
 
             var xmlDoc = new XmlDocument();

@@ -45,18 +45,8 @@ namespace XenAdmin
         public const string BRAND_CONSOLE = "[XenCenter]";
         public const string PRODUCT_BRAND = "[XenServer product]";
         public const string COMPANY_NAME_SHORT = "[Citrix]";
-        public const string UPDATEISO = "[iso]";
         public const string PV_TOOLS = "[Citrix VM Tools]";
         public const string CONVERSION_VPX_MIN_SUPPORTED_VERSION = "[BRANDING_VERSION_7_0]";
-
-        public static string UpdateIso
-        {
-            get
-            {
-                var s = UPDATEISO;
-                return s != "[" + "iso]" ? s.ToLowerInvariant() : InvisibleMessages.ISO_UPDATE.ToLowerInvariant();
-            }
-        }
 
         public static string ConversionVpxMinimumSupportedVersion
         {

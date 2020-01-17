@@ -75,7 +75,7 @@ namespace CFUValidator.Validators
             string tempFileName = NewTempPath();
             DownloadAndUnzipXenServerPatchAction action = new DownloadAndUnzipXenServerPatchAction(patch.Patch.Name,
                 new Uri(patch.Patch.PatchUrl),
-                tempFileName, false, BrandManager.ExtensionUpdate, Branding.UpdateIso);
+                tempFileName, false, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
 
             try
             {
