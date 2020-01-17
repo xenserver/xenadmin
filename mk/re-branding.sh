@@ -61,7 +61,6 @@ rebranding_global()
         -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
-        -e "s#\[xbk\]#${BRANDING_BACKUP}#g" \
         -e "s#\[BRANDING_VERSION_5_6\]#${BRANDING_XC_PRODUCT_5_6_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_6_0\]#${BRANDING_XC_PRODUCT_6_0_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_6_2\]#${BRANDING_XC_PRODUCT_6_2_VERSION}#g" \

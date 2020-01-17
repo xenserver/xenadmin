@@ -129,4 +129,7 @@
   <data name="EXTENSION_UPDATE" xml:space="preserve">
     <value>xsupdate</value>
   </data>
+  <data name="EXTENSION_BACKUP" xml:space="preserve">
+    <value>xbk</value>
+  </data>
 </root>

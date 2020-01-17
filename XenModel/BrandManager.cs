@@ -47,6 +47,8 @@ namespace XenAdmin.Core
 
         public static string ExtensionUpdate => Get("EXTENSION_UPDATE");
 
+        public static string ExtensionBackup => Get("EXTENSION_BACKUP");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
