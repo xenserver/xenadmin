@@ -41,6 +41,8 @@ namespace XenAdmin.Core
 
         public static string UpdatesUrl => Get("UPDATES_URL");
 
+        public static string PerfAlertMailDefaultLanguage => Get("PERF_ALERT_MAIL_DEFAULT_LANGUAGE");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>

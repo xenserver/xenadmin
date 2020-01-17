@@ -120,4 +120,7 @@
   <data name="UPDATES_URL" xml:space="preserve">
     <value>https://updates.xensource.com/XenServer/updates.xml</value>
   </data>
+  <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
+    <value>en-US</value>
+  </data>
 </root>
