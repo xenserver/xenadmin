@@ -7469,31 +7469,31 @@ SCSI ID: {2}
     <value>[XenServer product] Premium Per-Socket (需要 {0})(&amp;R)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Enterprise Per-Socket (需要 {0})(&amp;N)</value>
+    <value>{1} Enterprise Per-Socket (需要 {0})(&amp;N)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
     <value>[XenServer product] Premium Per-User(&amp;E)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Enterprise Per-User(&amp;E)</value>
+    <value>{0} Enterprise Per-User(&amp;E)</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Per-Socket (需要 {0})(&amp;S)</value>
+    <value>{1} Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Standard Per-Socket (需要 {0})(&amp;S)</value>
+    <value>{1} Standard Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
     <value>[XenServer product] for [Citrix] Virtual Desktops(&amp;D)</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] for XenDesktop(&amp;X)</value>
+    <value>{0} for XenDesktop(&amp;X)</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>{0} 的许可操作失败。</value>
@@ -14369,9 +14369,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_8_1]</value>
-  </data>
-  <data name="XENSERVER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] 模板</value>

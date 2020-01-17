@@ -30,12 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -45,13 +40,14 @@ namespace XenAdmin.Dialogs
         public LegalNoticesDialog()
         {
             InitializeComponent();
+            label1.Text = string.Format(label1.Text, BrandManager.LegacyProduct);
             label2.Text = string.Format(Messages.COPYRIGHT, Branding.COMPANY_NAME_LEGAL);
-            this.label1.Visible = this.label2.Visible = !XenAdmin.Core.HiddenFeatures.CopyrightHidden;
+            label1.Visible = label2.Visible = !HiddenFeatures.CopyrightHidden;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

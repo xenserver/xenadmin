@@ -21473,7 +21473,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {1} E&amp;nterprise Per-Socket ({0} required).
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY {
             get {
@@ -21491,7 +21491,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] &amp;Enterprise Per-User.
+        ///   Looks up a localized string similar to {0} &amp;Enterprise Per-User.
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY {
             get {
@@ -21509,7 +21509,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Per-&amp;Socket ({0} required).
+        ///   Looks up a localized string similar to {1} Per-&amp;Socket ({0} required).
         /// </summary>
         public static string LICENSE_EDITION_PERSOCKET_LEGACY {
             get {
@@ -21527,7 +21527,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] &amp;Standard Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {1} &amp;Standard Per-Socket ({0} required).
         /// </summary>
         public static string LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY {
             get {
@@ -21545,7 +21545,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] for &amp;XenDesktop.
+        ///   Looks up a localized string similar to {0} for &amp;XenDesktop.
         /// </summary>
         public static string LICENSE_EDITION_XENDESKTOP_LEGACY {
             get {
@@ -41690,15 +41690,6 @@ namespace XenAdmin {
         public static string XENSERVER_8_1 {
             get {
                 return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product].
-        /// </summary>
-        public static string XENSERVER_LEGACY {
-            get {
-                return ResourceManager.GetString("XENSERVER_LEGACY", resourceCulture);
             }
         }
         

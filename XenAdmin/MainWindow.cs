@@ -1000,7 +1000,7 @@ namespace XenAdmin
         private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
-            return brand == Branding.PRODUCT_BRAND || brand == Branding.LEGACY_PRODUCT_BRAND ||  Branding.PRODUCT_BRAND == "[XenServer product]";
+            return brand == Branding.PRODUCT_BRAND || brand == BrandManager.LegacyProduct ||  Branding.PRODUCT_BRAND == "[XenServer product]";
         }
 
         /// <summary>

@@ -7474,31 +7474,31 @@ SCSI ID: {2}
     <value>[XenServer product] Premium Per-Socket ({0} ソケット分必要)(&amp;R)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Enterprise Per-Socket ({0} ソケット分必要)(&amp;N)</value>
+    <value>{1} Enterprise Per-Socket ({0} ソケット分必要)(&amp;N)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
     <value>[XenServer product] Premium Per-User(&amp;E)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Enterprise Per-User(&amp;E)</value>
+    <value>{0} Enterprise Per-User(&amp;E)</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] Per-Socket ({0} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Per-Socket ({0} ソケット分必要)(&amp;S)</value>
+    <value>{1} Per-Socket ({0} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] Standard Per-Socket ({0} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Standard Per-Socket ({0} ソケット分必要)(&amp;S)</value>
+    <value>{1} Standard Per-Socket ({0} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
     <value>[XenServer product] for [Citrix] Virtual Desktops(&amp;D)</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] for XenDesktop(&amp;X)</value>
+    <value>{0} for XenDesktop(&amp;X)</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>{0} に対するライセンス操作に失敗しました。</value>
@@ -14372,9 +14372,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_8_1]</value>
-  </data>
-  <data name="XENSERVER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] テンプレート</value>

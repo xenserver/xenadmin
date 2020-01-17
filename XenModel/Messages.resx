@@ -7468,31 +7468,31 @@ Size: {3}</value>
     <value>[XenServer product] P&amp;remium Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required)</value>
+    <value>{1} E&amp;nterprise Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
     <value>[XenServer product] Pr&amp;emium Per-User</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] &amp;Enterprise Per-User</value>
+    <value>{0} &amp;Enterprise Per-User</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Per-&amp;Socket ({0} required)</value>
+    <value>{1} Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+    <value>{1} &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
     <value>[XenServer product] for [Citrix] Virtual &amp;Desktops</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] for &amp;XenDesktop</value>
+    <value>{0} for &amp;XenDesktop</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>The licensing action for {0} failed.</value>
@@ -14370,9 +14370,6 @@ Are you sure you want to enable automated power management for this Host?</value
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_8_1]</value>
-  </data>
-  <data name="XENSERVER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] Templates</value>

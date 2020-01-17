@@ -44,7 +44,6 @@ namespace XenAdmin
         public const string COMPANY_NAME_LEGAL = "[BRANDING_COMPANY_NAME_LEGAL]";
         public const string BRAND_CONSOLE = "[XenCenter]";
         public const string PRODUCT_BRAND = "[XenServer product]";
-        public const string LEGACY_PRODUCT_BRAND = "[Legacy XenServer product]";
         public const string COMPANY_NAME_SHORT = "[Citrix]";
         public const string UPDATEISO = "[iso]";
         public const string PV_TOOLS = "[Citrix VM Tools]";

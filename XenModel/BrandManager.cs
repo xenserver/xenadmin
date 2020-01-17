@@ -49,6 +49,8 @@ namespace XenAdmin.Core
 
         public static string ExtensionBackup => Get("EXTENSION_BACKUP");
 
+        public static string LegacyProduct => Get("LEGACY_PRODUCT");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
