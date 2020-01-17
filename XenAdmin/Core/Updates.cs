@@ -276,13 +276,7 @@ namespace XenAdmin.Core
             return action.Succeeded;
         }
 
-        public static string CheckForUpdatesUrl
-        {
-            get
-            {
-                return Registry.CustomUpdatesXmlLocation ?? Branding.CheckForUpdatesUrl;
-            }
-        }
+        public static string CheckForUpdatesUrl => Registry.CustomUpdatesXmlLocation ?? BrandManager.UpdatesUrl;
 
         private static void actionCompleted(ActionBase sender)
         {

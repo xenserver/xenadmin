@@ -39,6 +39,8 @@ namespace XenAdmin.Core
     {
         private static readonly ResourceManager Branding = new ResourceManager("XenAdmin.Branding", typeof(BrandManager).Assembly);
 
+        public static string UpdatesUrl => Get("UPDATES_URL");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
