@@ -260,7 +260,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         unzippedUpdateFilePath = null;                  
 
-                    if (SelectedPatchFilePath.EndsWith("." + Branding.Update))
+                    if (SelectedPatchFilePath.EndsWith("." + BrandManager.ExtensionUpdate))
                         SelectedUpdateType = UpdateType.Legacy;
                     else if (SelectedPatchFilePath.EndsWith("." + Branding.UpdateIso))
                         SelectedUpdateType = UpdateType.ISO;

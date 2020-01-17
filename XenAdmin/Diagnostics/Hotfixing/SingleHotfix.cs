@@ -73,7 +73,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             if (patch == null)
             {
                 var master = Helpers.GetMaster(host.Connection);
-                var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.Update));
+                var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, BrandManager.ExtensionUpdate));
                 var action = new UploadPatchAction(master.Connection, filePath, false, false);
                 action.RunExternal(session);
                 patch = action.Patch;

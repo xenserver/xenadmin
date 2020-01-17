@@ -45,6 +45,8 @@ namespace XenAdmin.Core
 
         public static string ExtensionSearch => Get("EXTENSION_SEARCH");
 
+        public static string ExtensionUpdate => Get("EXTENSION_UPDATE");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
