@@ -14358,9 +14358,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="XENSERVER" xml:space="preserve">
     <value>[XenServer]</value>
   </data>
-  <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_6_2]</value>
-  </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
   </data>

@@ -41667,15 +41667,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string XENSERVER_6_2 {
-            get {
-                return ResourceManager.GetString("XENSERVER_6_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_6_5].
         /// </summary>
         public static string XENSERVER_6_5 {
