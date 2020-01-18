@@ -7574,9 +7574,6 @@ SCSI ID: {2}
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
     <value>激活 [XenServer] Express 时，必须一次选择一个服务器。</value>
   </data>
-  <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>向版本低于 [BRANDING_VERSION_5_6] 的服务器授权时，必须一次选择一个服务器。</value>
-  </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
   </data>

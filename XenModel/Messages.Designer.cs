@@ -21779,7 +21779,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers must be selected one at a time when licensing servers which have a version lower than [BRANDING_VERSION_5_6]..
+        ///   Looks up a localized string similar to When licensing servers earlier than {0}, you must select one server at a time..
         /// </summary>
         public static string LICENSE_NO_MULTISELECT_LICENSE {
             get {

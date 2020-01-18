@@ -51,6 +51,8 @@ namespace XenAdmin.Core
 
         public static string LegacyProduct => Get("LEGACY_PRODUCT");
 
+        public static string ProductVersion56 => Get("PRODUCT_VERSION_5_6");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>

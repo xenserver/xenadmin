@@ -7574,7 +7574,7 @@ Size: {3}</value>
     <value>Servers must be selected one at a time when activating Express [XenServer].</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>Servers must be selected one at a time when licensing servers which have a version lower than [BRANDING_VERSION_5_6].</value>
+    <value>When licensing servers earlier than {0}, you must select one server at a time.</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>

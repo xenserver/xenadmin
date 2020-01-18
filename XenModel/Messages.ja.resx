@@ -7579,9 +7579,6 @@ SCSI ID: {2}
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
     <value>[XenServer] Express をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
-  <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>[BRANDING_VERSION_5_6] よりも古い [XenServer] にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
-  </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
   </data>
