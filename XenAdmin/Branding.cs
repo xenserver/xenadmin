@@ -46,15 +46,5 @@ namespace XenAdmin
         public const string PRODUCT_BRAND = "[XenServer product]";
         public const string COMPANY_NAME_SHORT = "[Citrix]";
         public const string PV_TOOLS = "[Citrix VM Tools]";
-        public const string CONVERSION_VPX_MIN_SUPPORTED_VERSION = "[BRANDING_VERSION_7_0]";
-
-        public static string ConversionVpxMinimumSupportedVersion
-        {
-            get
-            {
-                var s = CONVERSION_VPX_MIN_SUPPORTED_VERSION;
-                return s != "[" + "BRANDING_VERSION_7_0]" ? s.ToLowerInvariant() : Program.Version.ToString();
-            }
-        }
     }
 }

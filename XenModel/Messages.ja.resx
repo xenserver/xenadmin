@@ -3476,7 +3476,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>[XenCenter] は、このバージョンの Conversion Manager 仮想アプライアンスと互換性がありません。</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>使用中の Conversion Manager 仮想アプライアンスのバージョンは [BRANDING_VERSION_7_0] より前です。従来の Conversion Manager コンソールを使用して、変換をセットアップおよび制御できます。ただし、お使いの [XenServer] のバージョンに一致する Conversion Manager 仮想アプライアンスをインポートして構成することを強くお勧めします。</value>
+    <value>使用中の Conversion Manager 仮想アプライアンスのバージョンは {0} より前です。従来の Conversion Manager コンソールを使用して、変換をセットアップおよび制御できます。ただし、お使いの [XenServer] のバージョンに一致する Conversion Manager 仮想アプライアンスをインポートして構成することを強くお勧めします。</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>仮想マシン</value>
@@ -9646,9 +9646,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>ローカル ディスク上の VM によって、ディスクの再パーティションが阻止されます。
 
- [XenServer] [BRANDING_VERSION_7_0] およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
+ [XenServer] {0} およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
 
-ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] [BRANDING_VERSION_7_0] およびそれ以降にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
+ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] {0} およびそれ以降にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: ローカル ディスク上の VM によってディスクの再パーティションが阻止されます。</value>
@@ -9656,7 +9656,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
     <value>ローカル ストレージのディスク サイズによって、ディスクの再パーティションが阻止されます。
 
-[XenServer] [BRANDING_VERSION_7_0] およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
+[XenServer] {0} およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
 
 ただし、ディスクの容量が不足しているため、再パーティションは行われず、現在のパーティション スキーマが保持されます。</value>
   </data>
@@ -10026,7 +10026,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>この [XenServer] のバージョンにはサプリメンタル パックをインストールできません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0" xml:space="preserve">
-    <value>マスターが [BRANDING_VERSION_7_0] より新しいバージョンを実行しているため、このホストにアップデートをインストールできません。</value>
+    <value>マスターが {0} より新しいバージョンを実行しているため、このホストにアップデートをインストールできません。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage が必要です</value>
@@ -11434,7 +11434,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>プール マスターの現在の時間: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>このバージョンの [XenCenter] では [XenServer] [BRANDING_VERSION_7_0] 以降のバージョンがサポートされます。</value>
+    <value>このバージョンの [XenCenter] では [XenServer] {0} 以降のバージョンがサポートされます。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>このサーバーを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
@@ -11612,7 +11612,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
 プール マスター '{1}' に接続しますか?</value>
   </data>
   <data name="SLAVE_TOO_OLD" xml:space="preserve">
-    <value>このプールには、[XenServer] [BRANDING_VERSION_7_0] より前のサーバーが含まれています。このプールを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
+    <value>このプールには、[XenServer] {0} より前のサーバーが含まれています。このプールを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>＜</value>

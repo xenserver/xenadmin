@@ -165,4 +165,7 @@
   <data name="PRODUCT_VERSION_6_5" xml:space="preserve">
     <value>6.5</value>
   </data>
+  <data name="PRODUCT_VERSION_7_0" xml:space="preserve">
+    <value>7.0</value>
+  </data>
 </root>

@@ -9641,7 +9641,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
+        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY_INFO {
             get {
@@ -27794,9 +27794,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] [BRANDING_VERSION_7_0] or above, VMs must be moved from local storage first..
+        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] {0} or above, VMs must be moved from local storage first..
         /// </summary>
         public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
             get {
@@ -27816,7 +27816,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
         ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
         /// </summary>
@@ -29051,7 +29051,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot install updates on this host because the master is running a version higher than [BRANDING_VERSION_7_0].
+        ///   Looks up a localized string similar to Cannot install updates on this host because the master is running a version higher than {0}.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0 {
             get {
@@ -32913,7 +32913,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_7_0] onwards..
+        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] {0} onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -33481,7 +33481,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] [BRANDING_VERSION_7_0]. Please use an earlier version of [XenCenter] to manage this pool..
+        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] {0}. Please use an earlier version of [XenCenter] to manage this pool..
         /// </summary>
         public static string SLAVE_TOO_OLD {
             get {

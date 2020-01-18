@@ -901,10 +901,10 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                    new ActionBase(title, "", false, true, Messages.SLAVE_TOO_OLD);
+                    new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
 
                     using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error, Messages.SLAVE_TOO_OLD, Messages.CONNECT_TO_SERVER),
+                        new ThreeButtonDialog.Details(SystemIcons.Error, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70), Messages.CONNECT_TO_SERVER),
                         ThreeButtonDialog.ButtonOK))
                     {
                         dlg.ShowDialog(this);

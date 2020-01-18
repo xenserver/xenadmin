@@ -3472,7 +3472,7 @@
     <value>[XenCenter] 与此版本的 Conversion Manager 虚拟设备不兼容。</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>您正在使用的 Conversion Manager 虚拟设备的版本早于 [BRANDING_VERSION_7_0]。可以使用旧版 Conversion Manager 控制台来设置和控制转换。但是，强烈建议您导入并配置与您的 [XenServer] 版本匹配的 Conversion Manager 虚拟设备。</value>
+    <value>您正在使用的 Conversion Manager 虚拟设备的版本早于 {0}。可以使用旧版 Conversion Manager 控制台来设置和控制转换。但是，强烈建议您导入并配置与您的 [XenServer] 版本匹配的 Conversion Manager 虚拟设备。</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>虚拟机</value>
@@ -9645,9 +9645,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>本地磁盘上的 VM 将阻止磁盘重新分区。
 
-新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 及更高版本中可用。
+新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] {0} 及更高版本中可用。
 
-但是，本地存储上存在 VM，因此将保留当前的分区方案。要在升级到 [XenServer] [BRANDING_VERSION_7_0] 或更高版本时从重新分区中获益，必须先移动本地存储中的 VM。</value>
+但是，本地存储上存在 VM，因此将保留当前的分区方案。要在升级到 [XenServer] {0} 或更高版本时从重新分区中获益，必须先移动本地存储中的 VM。</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: 本地磁盘上的 VM 将阻止磁盘重新分区。</value>
@@ -9655,7 +9655,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
     <value>本地存储的磁盘大小阻止重新分区。
 
-新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 及更高版本中可用。
+新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] {0} 及更高版本中可用。
 
 但是，由于空间不足，无法执行重新分区，因此将保留当前的分区方案。</value>
   </data>
@@ -10025,7 +10025,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>无法在此版本的 [XenServer] 上安装补充包</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0" xml:space="preserve">
-    <value>无法在此主机上安装更新，因为主机正在运行的版本高于 [BRANDING_VERSION_7_0]</value>
+    <value>无法在此主机上安装更新，因为主机正在运行的版本高于 {0}</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
@@ -11433,7 +11433,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池主服务器上的当前时间为: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>此版本的 [XenCenter] 支持 [XenServer] [BRANDING_VERSION_7_0] 及更高版本。</value>
+    <value>此版本的 [XenCenter] 支持 [XenServer] {0} 及更高版本。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>使用早期版本的 [XenCenter] 管理此服务器。</value>
@@ -11611,7 +11611,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 是否连接池主服务器“{1}”?</value>
   </data>
   <data name="SLAVE_TOO_OLD" xml:space="preserve">
-    <value>此池包含的服务器低于 [XenServer] [BRANDING_VERSION_7_0]。请使用早期版本的 [XenCenter] 来管理此池。</value>
+    <value>此池包含的服务器低于 [XenServer] {0}。请使用早期版本的 [XenCenter] 来管理此池。</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>小于</value>

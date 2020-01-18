@@ -287,7 +287,8 @@ namespace XenAdmin.Network
             else if (error is ServerNotSupported)
             {
                 // Server version is too old for this version of XenCenter
-                AddError(owner, connection, Messages.SERVER_TOO_OLD, Messages.SERVER_TOO_OLD_SOLUTION);
+                AddError(owner, connection, string.Format(Messages.SERVER_TOO_OLD, BrandManager.ProductVersion70),
+                    Messages.SERVER_TOO_OLD_SOLUTION);
             }
             else
             {
