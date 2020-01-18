@@ -10465,11 +10465,8 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>このプールには共有ストレージがありません</value>
   </data>
-  <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
-    <value>{0}: 準仮想化 (PV) されたゲストは、[XenServer] [BRANDING_VERSION_8_1] 以降サポートされません。サポートされるゲスト オペレーティング システムの一覧を表示するには、[詳細情報] をクリックしてください。 </value>
-  </data>
-  <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
-    <value>{0}: 準仮想化 (PV) されたゲストは、[XenServer] [BRANDING_VERSION_8_1] 以降サポートされません。サポートされるゲスト オペレーティング システムの一覧を表示するには、[詳細情報] をクリックしてください。 </value>
+  <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
+    <value>{0}: 準仮想化 (PV) されたゲストは、[XenServer] {1} 以降サポートされません。サポートされるゲスト オペレーティング システムの一覧を表示するには、[詳細情報] をクリックしてください。 </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>このプールは一部のみライセンスが適用されています</value>
@@ -14365,7 +14362,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
+    <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] テンプレート</value>

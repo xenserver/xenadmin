@@ -10466,11 +10466,8 @@ Please reconnect the host and try again</value>
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This pool has no shared storage</value>
   </data>
-  <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click "Learn more" to see the list of supported guest operating systems. </value>
-  </data>
-  <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click "Learn more" to see the list of supported guest operating systems. </value>
+  <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
+    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -14366,7 +14363,7 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
+    <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] Templates</value>

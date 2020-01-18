@@ -61,6 +61,8 @@ namespace XenAdmin.Core
 
         public static string ProductVersion80 => Get("PRODUCT_VERSION_8_0");
 
+        public static string ProductVersion81 => Get("PRODUCT_VERSION_8_1");
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>

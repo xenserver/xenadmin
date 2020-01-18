@@ -10464,11 +10464,8 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>该池无共享存储</value>
   </data>
-  <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
-    <value>{0}: 截至 [XenServer] [BRANDING_VERSION_8_1]，已放弃对半虚拟化的(PV)来宾的支持。单击“了解更多”可查看支持的来宾操作系统列表。 </value>
-  </data>
-  <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
-    <value>{0}: 截至 [XenServer] [BRANDING_VERSION_8_1]，已放弃对半虚拟化的(PV)来宾的支持。单击“了解更多”可查看支持的来宾操作系统列表。 </value>
+  <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
+    <value>{0}: 截至 [XenServer] {1}，已放弃对半虚拟化的(PV)来宾的支持。单击“了解更多”可查看支持的来宾操作系统列表。 </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>池获得部分许可</value>
@@ -14362,7 +14359,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
+    <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] 模板</value>

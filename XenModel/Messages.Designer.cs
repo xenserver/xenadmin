@@ -30067,20 +30067,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
         /// </summary>
-        public static string POOL_HAS_PV_GUEST_UPDATE_WARNING {
+        public static string POOL_HAS_PV_GUEST_WARNING {
             get {
-                return ResourceManager.GetString("POOL_HAS_PV_GUEST_UPDATE_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
-        /// </summary>
-        public static string POOL_HAS_PV_GUEST_UPGRADE_WARNING {
-            get {
-                return ResourceManager.GetString("POOL_HAS_PV_GUEST_UPGRADE_WARNING", resourceCulture);
+                return ResourceManager.GetString("POOL_HAS_PV_GUEST_WARNING", resourceCulture);
             }
         }
         
@@ -41676,7 +41667,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_8_1].
+        ///   Looks up a localized string similar to [XenServer] {0}.
         /// </summary>
         public static string XENSERVER_8_1 {
             get {
