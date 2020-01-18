@@ -6663,7 +6663,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>ローカルとリモート ({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_8_0] 以降にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
+    <value>[XenServer] {1} 以降にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
 
 そのため、プールのローリング アップグレード中にこのサーバーに VM を移行できないか、またはアップグレード後、このサーバーに現在配置されているすべての VM を格納できない可能性があります。</value>
   </data>

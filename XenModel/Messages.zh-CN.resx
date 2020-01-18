@@ -6657,7 +6657,7 @@
     <value>本地和远程({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>如果要升级到 [XenServer] [BRANDING_VERSION_8_0] 及更高版本，则将增加 {0} 上的控制域内存。
+    <value>如果要升级到 [XenServer] {1} 及更高版本，则将增加 {0} 上的控制域内存。
 
 这可能会导致在 RPU 期间无法将 VM 迁移到此服务器，或在升级后无法容纳当前位于此服务器上的所有 VM。</value>
   </data>

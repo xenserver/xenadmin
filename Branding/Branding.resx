@@ -171,4 +171,7 @@
   <data name="PRODUCT_VERSION_7_1_2" xml:space="preserve">
     <value>7.1.2</value>
   </data>
+  <data name="PRODUCT_VERSION_8_0" xml:space="preserve">
+    <value>8.0</value>
+  </data>
 </root>

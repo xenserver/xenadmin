@@ -18994,7 +18994,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+        ///   Looks up a localized string similar to If you are upgrading to [XenServer] {1} and above, the Control Domain memory on {0} will be increased. 
         ///
         ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
