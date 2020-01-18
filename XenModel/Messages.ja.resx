@@ -14362,7 +14362,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>[XenServer]</value>
   </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_6_5]</value>
+    <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
     <value>[XenServer] [BRANDING_VERSION_8_1]</value>

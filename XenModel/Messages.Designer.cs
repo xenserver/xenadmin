@@ -41667,7 +41667,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_6_5].
+        ///   Looks up a localized string similar to [XenServer] {0}.
         /// </summary>
         public static string XENSERVER_6_5 {
             get {
