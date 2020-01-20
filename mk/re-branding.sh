@@ -43,6 +43,7 @@ version_cpp()
 version_csharp()
 {
   sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}/g" \
+            -e "s/0000/${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}/g" \
       $1
 }
 
@@ -52,8 +53,6 @@ rebranding_global()
         -e "s#\[Citrix\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
         -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
         -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
-        -e "s#\"\[BRANDING_COPYRIGHT\]\"#${BRANDING_COPYRIGHT}#g" \
-        -e "s#\"\[BRANDING_COPYRIGHT_2\]\"#${BRANDING_COPYRIGHT_2}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
@@ -61,23 +60,6 @@ rebranding_global()
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
         $1
-}
-
-version_brand_cpp()
-{
-  for file in $1
-  do
-    version_cpp ${file} && rebranding_global ${file}
-  done
-}
-
-version_brand_csharp()
-{
-  for projectName in $1
-  do
-    assemblyInfo=${REPO}/${projectName}/Properties/AssemblyInfo.cs
-    version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
-  done
 }
 
 RESX_rebranding()
@@ -91,13 +73,18 @@ RESX_rebranding()
 }
 
 #splace rebranding
-version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj  ${REPO}/splash/util.cpp"
+for file in splash.rc main.cpp splash.vcproj splash.vcxproj  util.cpp
+do
+  version_cpp "${REPO}/splash/${file}" && rebranding_global "${REPO}/splash/${file}"
+done
 
 #AssemblyInfo rebranding
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServerHealthCheck"
+for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenCenterVNC XenModel XenOvfApi XenOvfTransport XenServerHealthCheck xva_verify
+do
+  assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
+  version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
+done
 
-#XenAdmin rebranding
-rebranding_global ${REPO}/XenAdmin/Branding.cs
 #XenAdmin controls
 XENADMIN_RESXS=$(/usr/bin/find ${REPO}/XenAdmin -name \*.resx)
 for XENADMIN_RESX in ${XENADMIN_RESXS}
@@ -108,7 +95,8 @@ done
 RESX_rebranding "${REPO}/XenAdmin/Properties/Resources"
 rebranding_global ${REPO}/XenAdmin/app.config
 
-#XenModel rebranding
+#XenModel
+rebranding_global ${REPO}/XenModel/BrandManager.cs
 RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
 rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
 
@@ -136,7 +124,6 @@ rebranding_global ${REPO}/XenAdminTests/app.config
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
 
 #XenServerHealthCheck
-rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
 rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
 set +u

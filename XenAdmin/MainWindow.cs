@@ -867,8 +867,8 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
-                Branding.XENCENTER_VERSION, Program.Version.Revision);
+                master.BuildNumberRaw(), Messages.XENCENTER, BrandManager.PRODUCT_VERSION_TEXT,
+                BrandManager.XENCENTER_VERSION, Program.Version.Revision);
 
             // Check the PRODUCT_BRAND
             if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
@@ -1000,7 +1000,8 @@ namespace XenAdmin
         private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
-            return brand == Branding.PRODUCT_BRAND || brand == BrandManager.LegacyProduct ||  Branding.PRODUCT_BRAND == "[XenServer product]";
+            return brand == BrandManager.PRODUCT_BRAND || brand == BrandManager.LegacyProduct ||
+                   BrandManager.PRODUCT_BRAND == "[XenServer product]";
         }
 
         /// <summary>

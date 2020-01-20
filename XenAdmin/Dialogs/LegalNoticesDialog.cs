@@ -41,7 +41,7 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             label1.Text = string.Format(label1.Text, BrandManager.LegacyProduct);
-            label2.Text = string.Format(Messages.COPYRIGHT, Branding.COMPANY_NAME_LEGAL);
+            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.COMPANY_NAME_LEGAL);
             label1.Visible = label2.Visible = !HiddenFeatures.CopyrightHidden;
         }
 

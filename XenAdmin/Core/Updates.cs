@@ -214,7 +214,7 @@ namespace XenAdmin.Core
 
         public static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(string checkForUpdatesUrl, bool checkForXenCenter = false, bool checkForServerVersion = false, bool checkForPatches = false)
         {
-            string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", Branding.BRAND_CONSOLE, Branding.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
+            string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", BrandManager.BRAND_CONSOLE, BrandManager.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
             string userAgentId = GetUniqueIdHash();
 
             return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches, userAgent, userAgentId, checkForUpdatesUrl);

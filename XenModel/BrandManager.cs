@@ -63,6 +63,15 @@ namespace XenAdmin.Core
 
         public static string ProductVersion81 => Get("PRODUCT_VERSION_8_1");
 
+
+        public const string PRODUCT_BRAND = "[XenServer product]";
+        public const string COMPANY_NAME_SHORT = "[Citrix]";
+        public const string COMPANY_AND_PRODUCT_BRAND = "[Citrix XenServer]";
+        public const string PRODUCT_VERSION_TEXT = "[BRANDING_PRODUCT_VERSION_TEXT]";
+        public const string XENCENTER_VERSION = "[BRANDING_PRODUCT_VERSION]";
+        public const string COMPANY_NAME_LEGAL = "[BRANDING_COMPANY_NAME_LEGAL]";
+        public const string BRAND_CONSOLE = "[XenCenter]";
+
         /// <summary>
         /// Returns null if no match is found.
         /// </summary>
