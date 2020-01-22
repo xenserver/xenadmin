@@ -36,6 +36,7 @@
 # 3 Sign in SBE
 # 4 Self-signing certificate sha1 thumbprint
 # 5 Self-signing certificate sha256 thumbprint
+# 6 Timestamp server
 
 set -exu
 
@@ -78,10 +79,10 @@ ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #sign files only if all parameters are set and non-empty
-SIGN_BAT="${REPO}/mk/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5"
+SIGN_BAT="${REPO}/mk/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
 SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
-if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] ; then
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
   echo "Some signing parameters are not set; skip signing binaries"
 else
   for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
@@ -187,7 +188,7 @@ done
 #copy and sign the combined installer
 chmod a+rw ${WIX}/${BRANDING_BRAND_CONSOLE}.msi && cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 
-if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] ; then
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
   echo "Some signing parameters are not set; skip signing installer"
 else
   ${SIGN_BAT} ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
