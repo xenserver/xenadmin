@@ -128,8 +128,7 @@ namespace XenAPI
         /// </summary>
         public static string getFriendlyTypeName(SRTypes srType)
         {
-            return FriendlyNameManager.GetFriendlyName(string.Format("Label-SR.SRTypes-{0}", srType.ToString()),
-                                                       "Label-SR.SRTypes-unknown");
+            return FriendlyNameManager.GetFriendlyName(string.Format("Label-SR.SRTypes-{0}", srType.ToString()));
         }
 
         /// <summary>

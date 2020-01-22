@@ -154,7 +154,7 @@ node('xencenter') {
 
       bat """
 cd ${env.WORKSPACE}
-sh xenadmin.git/mk/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_NODE_NAME} ${sbe} ${env.SELFSIGN_THUMBPRINT_SHA1} ${env.SELFSIGN_THUMBPRINT_SHA256}
+sh xenadmin.git/mk/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_NODE_NAME} ${sbe} ${env.SELFSIGN_THUMBPRINT_SHA1} ${env.SELFSIGN_THUMBPRINT_SHA256}  ${env.TIMESTAMP_SERVER_URL}
       """
     }
 

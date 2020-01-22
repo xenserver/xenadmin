@@ -862,24 +862,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Premium Per-Socket.
-        /// </summary>
-        public static string Label_host_edition_enterprise_per_socket {
-            get {
-                return ResourceManager.GetString("Label-host.edition-enterprise-per-socket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Premium Per-User.
-        /// </summary>
-        public static string Label_host_edition_enterprise_per_user {
-            get {
-                return ResourceManager.GetString("Label-host.edition-enterprise-per-user", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenServer product] Express.
         /// </summary>
         public static string Label_host_edition_express {
@@ -925,42 +907,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Enterprise Per-Socket.
-        /// </summary>
-        public static string Label_host_edition_legacy_enterprise_per_socket {
-            get {
-                return ResourceManager.GetString("Label-host.edition-legacy-enterprise-per-socket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Enterprise Per-User.
-        /// </summary>
-        public static string Label_host_edition_legacy_enterprise_per_user {
-            get {
-                return ResourceManager.GetString("Label-host.edition-legacy-enterprise-per-user", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product].
-        /// </summary>
-        public static string Label_host_edition_legacy_free {
-            get {
-                return ResourceManager.GetString("Label-host.edition-legacy-free", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Per-Socket.
-        /// </summary>
-        public static string Label_host_edition_legacy_per_socket {
-            get {
-                return ResourceManager.GetString("Label-host.edition-legacy-per-socket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [Citrix XenServer] Ultimate Edition.
         /// </summary>
         public static string Label_host_edition_legacy_premium {
@@ -975,24 +921,6 @@ namespace XenAdmin {
         public static string Label_host_edition_legacy_standard {
             get {
                 return ResourceManager.GetString("Label-host.edition-legacy-standard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Standard Per-Socket.
-        /// </summary>
-        public static string Label_host_edition_legacy_standard_per_socket {
-            get {
-                return ResourceManager.GetString("Label-host.edition-legacy-standard-per-socket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] for XenDesktop.
-        /// </summary>
-        public static string Label_host_edition_legacy_xendesktop {
-            get {
-                return ResourceManager.GetString("Label-host.edition-legacy-xendesktop", resourceCulture);
             }
         }
         
@@ -2860,6 +2788,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string Label_SR_SRTypes_dummy {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-dummy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elastic Block Storage.
         /// </summary>
         public static string Label_SR_SRTypes_ebs {
@@ -3045,6 +2982,15 @@ namespace XenAdmin {
         public static string Label_SR_SRTypes_smb {
             get {
                 return ResourceManager.GetString("Label-SR.SRTypes-smb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string Label_SR_SRTypes_tmpfs {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-tmpfs", resourceCulture);
             }
         }
         

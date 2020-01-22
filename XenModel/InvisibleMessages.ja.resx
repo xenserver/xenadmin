@@ -186,9 +186,6 @@
   <data name="XEN_UPDATE" xml:space="preserve">
     <value>xsupdate</value>
   </data>
-  <data name="XENSERVER_UPDATE_URL" xml:space="preserve">
-    <value>https://updates.xensource.com/XenServer/updates.xml</value>
-  </data>
   <data name="ISO_UPDATE" xml:space="preserve">
     <value>ISO</value>
   </data>

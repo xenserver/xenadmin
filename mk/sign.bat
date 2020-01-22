@@ -35,8 +35,9 @@ rem 2 Signing node name
 rem 3 Sign in SBE
 rem 4 Self-signing certificate sha1 thumbprint
 rem 5 Self-signing certificate sha256 thumbprint
-rem 6 File to be signed
-rem 7 Description
+rem 6 Timestamp server
+rem 7 File to be signed
+rem 8 Description
 
 rem reset error level
 cmd /c "exit /b 0"
@@ -46,17 +47,16 @@ set worker=%~2
 set sbe=%~3
 set thumb_sha1=%4
 set thumb_sha256=%5
-set descr=%~7
-set thefile=%~6
+set timestamp_server=%~6
+set descr=%~8
+set thefile=%~7
 
-if /I "%~x6"==".msi" (
+if /I "%~x7"==".msi" (
   set cross_sign=no
 ) else (
   set cross_sign=yes
 )
 
-set timestamp_sha1=http://timestamp.digicert.com
-set timestamp_sha2=http://timestamp.digicert.com
 set CTXSIGN=C:\ctxsign2\ctxsign.exe
 
 if "%sbe%"=="true" (
@@ -94,9 +94,9 @@ if "%sbe%"=="true" (
   echo "Self signing"
 
   if /I "%cross_sign%" == "yes" (
-    signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -t %timestamp_sha1% "%thefile%"
-    signtool sign -v -sm -as -sha1 %thumb_sha256% -d "%descr%" -tr %timestamp_sha2% -td sha256 "%thefile%"
+    signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -t %timestamp_server% "%thefile%"
+    signtool sign -v -sm -as -sha1 %thumb_sha256% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
   ) else (
-    signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -tr %timestamp_sha2% -td sha256 "%thefile%"
+    signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
   )
 )

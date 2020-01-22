@@ -2060,13 +2060,7 @@ namespace XenAdmin.Network
 
     public class ServerNotSupported : DisconnectionException
     {
-        public override string Message
-        {
-            get
-            {
-                return Messages.SERVER_TOO_OLD;
-            }
-        }
+        public override string Message => string.Format(Messages.SERVER_TOO_OLD, BrandManager.ProductVersion70);
     }
 
     public class ConnectionExists : DisconnectionException
