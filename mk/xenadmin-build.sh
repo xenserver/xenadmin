@@ -186,13 +186,14 @@ for locale in ja-jp zh-cn zh-tw ; do
 done
 
 #copy and sign the combined installer
-chmod a+rw ${WIX}/${BRANDING_BRAND_CONSOLE}.msi && cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 
 if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
   echo "Some signing parameters are not set; skip signing installer"
 else
-  ${SIGN_BAT} ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
+  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
 fi
+
+cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 
 #build the tests
 echo "INFO: Build the tests..."
