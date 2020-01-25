@@ -63,27 +63,6 @@ namespace XenOvf
 
         #region CONVERSIONS
 
-        public void ConvertOVAtoOVF(string ovaFileName)
-        {
-            try
-            {
-                Load(ovaFileName);
-                File.Delete(ovaFileName);
-            }
-            catch
-            {
-            }
-            finally
-            {
-                _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
-                _touchFile = Path.Combine(Path.GetDirectoryName(ovaFileName), "xen__" + _processId);
-                if (File.Exists(_touchFile))
-                {
-                    File.Delete(_touchFile);
-                }
-            }
-        }
-
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
              Justification = "Tar Object uses close not Dispose, it cleans up all streams used.")]
         public static void ConvertOVFtoOVA(string pathToOvf, string ovfFileName, bool compress, bool cleanup = true)
@@ -170,13 +149,6 @@ namespace XenOvf
             finally
             {
                 Directory.SetCurrentDirectory(origDir);
-
-                _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
-                _touchFile = Path.Combine(pathToOvf, "xen__" + _processId);
-                if (File.Exists(_touchFile))
-                {
-                    File.Delete(_touchFile);
-                }
             }
             log.Debug("OVF.ConvertOVFtoOVA completed");
         }

@@ -192,9 +192,9 @@ namespace XenOvf
             }
         }
 
-        public override string ExtractToDir()
+        public override void ExtractToWorkingDir()
         {
-            return Path.GetDirectoryName(PackageSourceFile);
+            WorkingDir = Path.GetDirectoryName(PackageSourceFile);
         }
     }
 
@@ -316,9 +316,21 @@ namespace XenOvf
             _tarStream?.Dispose();
         }
 
-        public override string ExtractToDir()
+        public override void CleanUpWorkingDir()
         {
-            return OVF.ExtractArchive(PackageSourceFile);
+            try
+            {
+                Directory.Delete(WorkingDir, true);
+            }
+            catch
+            {
+                //ignore
+            }
+        }
+
+        public override void ExtractToWorkingDir()
+        {
+            WorkingDir = OVF.ExtractArchive(PackageSourceFile);
         }
 
         public override void VerifyManifest()
@@ -486,6 +498,8 @@ namespace XenOvf
 
         public string PackageSourceFile { get; }
 
+        public string WorkingDir { get; protected set; }
+
         /// <summary>
         /// May be null if no valid OVF file has been found
         /// </summary>
@@ -553,6 +567,10 @@ namespace XenOvf
             }
         }
 
+        public virtual void CleanUpWorkingDir()
+        {
+        }
+
         #region Abstract members
 
         /// <summary>
@@ -569,7 +587,7 @@ namespace XenOvf
         public abstract bool HasFile(string fileName);
 
         /// <returns>The directory with the extracted files</returns>
-        public abstract string ExtractToDir();
+        public abstract void ExtractToWorkingDir();
 
         #endregion
     }
