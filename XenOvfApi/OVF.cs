@@ -70,8 +70,6 @@ namespace XenOvf
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
 
-        private static int _processId = 0;
-        private static string _touchFile;
         private static bool _promptForEula = true;
 
 		internal static ResourceManager _rm = new ResourceManager("XenOvf.Messages", Assembly.GetExecutingAssembly());

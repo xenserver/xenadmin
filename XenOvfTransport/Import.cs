@@ -98,36 +98,14 @@ namespace XenOvfTransport
         private ulong AdditionalSpace = 20 * GB;
         private int vifDeviceIndex = 0;  // used to count number of Networks attached and to be used as the device number.
         private string _currentfilename = null;
-        private bool _metadataonly = false;
         private Exception _downloadexception = null;
         private ulong _filedownloadsize = 0;
         private int xvadisk = 0;
         private AutoResetEvent uridownloadcomplete = new AutoResetEvent(false);
-        private string _appliancename = null;
 
-        public string ApplianceName
-        {
-            get
-            {
-                return _appliancename;
-            }
-            set
-            {
-                _appliancename = value;
-            }
-        }
+        public string ApplianceName { get; set; }
 
-        public bool MetaDataOnly
-        {
-            get
-            {
-                return _metadataonly;
-            }
-            set
-            {
-                _metadataonly = value;
-            }
-		}
+        public bool MetaDataOnly { get; set; }
 
 		#region Constructors
 
@@ -401,13 +379,6 @@ namespace XenOvfTransport
                     throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
                 }
             }
-
-            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, ""));
-            int _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
-            string _touchFile = Path.Combine(pathToOvf, "xen__" + _processId);
-			//added check again as Delete needs write permissions and even if the file does not exist import will fail if the user has read only permissions
-			if (File.Exists(_touchFile))
-				File.Delete(_touchFile);
 
             OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.COMPLETED_IMPORT));
         }

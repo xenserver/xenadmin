@@ -153,7 +153,7 @@ namespace XenAdmin.Actions.OVFActions
 			}
 
             EnvelopeType env = OVF.Merge(envelopes, m_package.Name);
-            var dir = m_package.ExtractToDir();
+            m_package.ExtractToWorkingDir();
 
 			try //importVM
             {
@@ -164,7 +164,7 @@ namespace XenAdmin.Actions.OVFActions
                     Cancel = Cancelling //in case the Cancel button has already been pressed
                 };
 				m_transportAction.SetTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-                m_transportAction.Process(env, dir, m_password);
+                m_transportAction.Process(env, m_package.WorkingDir, m_password);
 			}
 			catch (OperationCanceledException)
 			{
@@ -172,14 +172,7 @@ namespace XenAdmin.Actions.OVFActions
 			}
             finally
             {
-                try
-                {
-                    Directory.Delete(dir, true);
-                }
-                catch
-                {
-                    //ignore
-                }
+                m_package.CleanUpWorkingDir();
             }
 
 			PercentComplete = 100;
