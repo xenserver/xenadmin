@@ -2726,7 +2726,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>確認</value>
   </data>
   <data name="CONFIRMATIONS_DETAIL" xml:space="preserve">
-    <value>通知のクリアを確認</value>
+    <value>警告または通知のクリアを確認</value>
   </data>
   <data name="CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>コントロール ドメイン メモリを変更すると、サーバーが再起動されます。
@@ -6985,9 +6985,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_SECURITY_PAGE_VERIFY_PRODUCER_DESCRIPTION" xml:space="preserve">
     <value>このアプライアンスには、デジタル署名が追加されています。アプライアンスのデジタル署名が有効であることを検証するかを選択できます。</value>
   </data>
-  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_CORRUPT_OVA" xml:space="preserve">
-    <value>OVA ファイルが破損しているか、無効なデータを含んでいます。</value>
-  </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH" xml:space="preserve">
     <value>パスに無効な文字が含まれています。</value>
   </data>
@@ -7308,9 +7305,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>無効なディスク サイズ</value>
-  </data>
-  <data name="INVALID_OVF" xml:space="preserve">
-    <value>これは有効な OVF ファイルではありません。</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>無効なパラメーターです</value>
@@ -9235,8 +9229,20 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
     <value>テンプレートによるプロビジョニング</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
+    <value>ホーム サーバーが設定されていない VM はデフォルトの SR '{0}' にディスクを持つことはできません。</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
+    <value>デフォルトの SR '{0}' には、新しい VM のディスクに必要な空き領域がありません。</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NAME" xml:space="preserve">
     <value>ストレージ</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
+    <value>ホームサーバーのない VM は、テンプレート ('{0}') が示す SR 上にディスクを持つことはできません。</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
+    <value>テンプレート ('{0}') が示す SR には、新しい VM のディスクに必要な空き領域がありません。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NOSTORAGE" xml:space="preserve">
     <value>&lt;適切なストレージがありません&gt;</value>
@@ -9249,6 +9255,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_VDINAME" xml:space="preserve">
     <value>{0} {1}</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
+    <value>[XenCenter] は別の SR を選択しました。</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CENTOS" xml:space="preserve">
     <value>CentOS</value>
