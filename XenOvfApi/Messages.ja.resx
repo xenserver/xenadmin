@@ -321,23 +321,23 @@
   <data name="UNKNOWN" xml:space="preserve">
     <value>不明</value>
   </data>
-  <data name="VALIDATION_FAILURE" xml:space="preserve">
-    <value>OVF パッケージ {0} が無効です。</value>
-  </data>
-  <data name="VALIDATION_FILE_NOTFOUND" xml:space="preserve">
-    <value>参照セクションに記述されているファイル {0} が見つかりません。</value>
-  </data>
-  <data name="VALIDATION_INVALID_CPU_EXCEEDS_LIMIT" xml:space="preserve">
+  <data name="VALIDATION_CPU_EXCEEDS_LIMIT" xml:space="preserve">
     <value>プロセッサの数量 {0} が上限 {1} を超えています。</value>
   </data>
-  <data name="VALIDATION_INVALID_CPU_QUANTITY" xml:space="preserve">
-    <value>プロセッサの数量 {0} は無効です。</value>
+  <data name="VALIDATION_CPU_INVALID_QUANTITY" xml:space="preserve">
+    <value>プロセッサの数量は無効です。</value>
   </data>
-  <data name="VALIDATION_INVALID_FILETYPE" xml:space="preserve">
+  <data name="VALIDATION_FILE_INVALID_LINKAGE" xml:space="preserve">
+    <value>{0} のディスク リンケージ (RASD へのファイル) が存在しません。</value>
+  </data>
+  <data name="VALIDATION_FILE_NOT_FOUND" xml:space="preserve">
+    <value>参照セクションに記述されているファイル {0} が見つかりません。</value>
+  </data>
+  <data name="VALIDATION_FILE_UNSUPPORTED_EXTENSION" xml:space="preserve">
     <value>ファイル {0} の拡張子はサポートされていません。</value>
   </data>
   <data name="VALIDATION_INVALID_INSTANCEID" xml:space="preserve">
-    <value>InstanceId が空です。</value>
+    <value>メモリに空の InstanceId があり、新しいインスタンス ID が作成されます。</value>
   </data>
   <data name="VALIDATION_INVALID_MEMORY_ALLOCATIONUNITS" xml:space="preserve">
     <value>メモリ割り当てユニットが無効です。</value>
@@ -345,11 +345,11 @@
   <data name="VALIDATION_INVALID_MEMORY_QUANTITY" xml:space="preserve">
     <value>メモリの量が無効です。</value>
   </data>
-  <data name="VALIDATION_INVALID_TYPE" xml:space="preserve">
-    <value>OVF エンベロープ項目に不明な種類があります。</value>
+  <data name="VALIDATION_INVALID_OVF" xml:space="preserve">
+    <value>このアプライアンスには有効な OVF ファイルがありません。</value>
   </data>
-  <data name="VALIDATION_INVALID_VERSION" xml:space="preserve">
-    <value>OVF バージョン番号 {0} は無効です。</value>
+  <data name="VALIDATION_INVALID_TYPE" xml:space="preserve">
+    <value>OVF エンベロープ項目の種類 '{0}' が認識されません。</value>
   </data>
   <data name="VALIDATION_NETWORK_NO_DEVICE" xml:space="preserve">
     <value>デバイスがネットワークに接続されていません。</value>
@@ -358,10 +358,16 @@
     <value>ID {0} および名前 {1} の必須リソースが認識されません。</value>
   </data>
   <data name="VALIDATION_SCHEMA_FAILED" xml:space="preserve">
-    <value>OVF 記述子が無効です。</value>
+    <value>OVF 記述子が OVF XML スキーマに準拠していません。</value>
   </data>
   <data name="VALIDATION_UNKNOWN_HARDWARE_TYPE" xml:space="preserve">
-    <value>仮想ハードウェアの種類 {0} は無効です。</value>
+    <value>予期しない仮想ハードウェアの種類 '{0}' が見つかりました。</value>
+  </data>
+  <data name="VALIDATION_VERSION_INVALID" xml:space="preserve">
+    <value>OVF バージョン '{0}' はサポートされていません。</value>
+  </data>
+  <data name="VALIDATION_VERSION_UNSET" xml:space="preserve">
+    <value>OVF バージョンが設定されていません。1.0.0 と仮定します。</value>
   </data>
   <data name="VENDOR_PROMPT" xml:space="preserve">
     <value>ベンダ:</value>
