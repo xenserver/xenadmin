@@ -333,11 +333,5 @@ namespace XenAdmin.Dialogs
         {
             pictureBoxError.Visible = labelError.Visible = (labelError.Text != "");
         }
-
-        private void AddServerDialog_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (connection != null)
-                XenConnectionUI.connectionDialogs.Remove(connection);
-        }
     }
 }
