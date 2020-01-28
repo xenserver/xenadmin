@@ -1532,7 +1532,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uefi_certificates field of the given host.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3370,7 +3370,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets the UEFI certificates on a host
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3385,7 +3385,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets the UEFI certificates on a host
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -4530,7 +4530,7 @@ namespace XenAPI
 
         /// <summary>
         /// The UEFI certificates allowing Secure Boot
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         public virtual string uefi_certificates
         {

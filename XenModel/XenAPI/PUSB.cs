@@ -63,7 +63,8 @@ namespace XenAPI
             string version,
             string description,
             bool passthrough_enabled,
-            Dictionary<string, string> other_config)
+            Dictionary<string, string> other_config,
+            double speed)
         {
             this.uuid = uuid;
             this.USB_group = USB_group;
@@ -78,6 +79,7 @@ namespace XenAPI
             this.description = description;
             this.passthrough_enabled = passthrough_enabled;
             this.other_config = other_config;
+            this.speed = speed;
         }
 
         /// <summary>
@@ -122,6 +124,7 @@ namespace XenAPI
             description = update.description;
             passthrough_enabled = update.passthrough_enabled;
             other_config = update.other_config;
+            speed = update.speed;
         }
 
         internal void UpdateFrom(Proxy_PUSB proxy)
@@ -139,6 +142,7 @@ namespace XenAPI
             description = proxy.description == null ? null : proxy.description;
             passthrough_enabled = (bool)proxy.passthrough_enabled;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            speed = Convert.ToDouble(proxy.speed);
         }
 
         public Proxy_PUSB ToProxy()
@@ -157,6 +161,7 @@ namespace XenAPI
             result_.description = description ?? "";
             result_.passthrough_enabled = passthrough_enabled;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.speed = speed;
             return result_;
         }
 
@@ -194,6 +199,8 @@ namespace XenAPI
                 passthrough_enabled = Marshalling.ParseBool(table, "passthrough_enabled");
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            if (table.ContainsKey("speed"))
+                speed = Marshalling.ParseDouble(table, "speed");
         }
 
         public bool DeepEquals(PUSB other)
@@ -215,7 +222,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._version, other._version) &&
                 Helper.AreEqual2(this._description, other._description) &&
                 Helper.AreEqual2(this._passthrough_enabled, other._passthrough_enabled) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._speed, other._speed);
         }
 
         internal static List<PUSB> ProxyArrayToObjectList(Proxy_PUSB[] input)
@@ -452,6 +460,20 @@ namespace XenAPI
                 return session.JsonRpcClient.pusb_get_other_config(session.opaque_ref, _pusb);
             else
                 return Maps.convert_from_proxy_string_string(session.proxy.pusb_get_other_config(session.opaque_ref, _pusb ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the speed field of the given PUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pusb">The opaque_ref of the given pusb</param>
+        public static double get_speed(Session session, string _pusb)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pusb_get_speed(session.opaque_ref, _pusb);
+            else
+                return Convert.ToDouble(session.proxy.pusb_get_speed(session.opaque_ref, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -820,5 +842,24 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
+
+        /// <summary>
+        /// USB device speed
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual double speed
+        {
+            get { return _speed; }
+            set
+            {
+                if (!Helper.AreEqual(value, _speed))
+                {
+                    _speed = value;
+                    Changed = true;
+                    NotifyPropertyChanged("speed");
+                }
+            }
+        }
+        private double _speed = -1.000;
     }
 }

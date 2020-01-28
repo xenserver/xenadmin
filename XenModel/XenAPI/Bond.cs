@@ -354,7 +354,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the auto_update_mac field of the given Bond.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_bond">The opaque_ref of the given bond</param>
@@ -786,7 +786,7 @@ namespace XenAPI
 
         /// <summary>
         /// true if the MAC was taken from the primary slave when the bond was created, and false if the client specified the MAC
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         public virtual bool auto_update_mac
         {
