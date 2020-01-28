@@ -410,7 +410,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the extra_args field of the given VGPU.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu">The opaque_ref of the given vgpu</param>
@@ -424,7 +424,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PCI field of the given VGPU.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu">The opaque_ref of the given vgpu</param>
@@ -484,7 +484,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the extra_args field of the given VGPU.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu">The opaque_ref of the given vgpu</param>
@@ -814,7 +814,7 @@ namespace XenAPI
 
         /// <summary>
         /// Extra arguments for vGPU and passed to demu
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         public virtual string extra_args
         {
@@ -833,7 +833,7 @@ namespace XenAPI
 
         /// <summary>
         /// Device passed trough to VM, either as full device or SR-IOV virtual function
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<PCI>))]
         public virtual XenRef<PCI> PCI
