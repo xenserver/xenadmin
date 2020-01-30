@@ -380,6 +380,7 @@
     <Compile Include="XenAPI\LVHD.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="XenAPI\Message2.cs" />
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\network_purpose.cs" />
     <Compile Include="XenAPI\Network_sriov.cs" />
