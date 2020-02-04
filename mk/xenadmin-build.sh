@@ -72,8 +72,9 @@ source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh $1
 
 #packages sources
-cd ${REPO} && zip -x packages/\*.dll packages/\*.pdb packages/\*.exe packages/\*.zip \
-  Branding/Hotfixes/\* _\* .\* -q -r9 ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-sources.zip *
+cd ${REPO}
+gitCommit=`git rev-parse HEAD`
+git archive --format=zip -o ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-sources.zip ${gitCommit}
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
