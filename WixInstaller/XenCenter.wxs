@@ -235,23 +235,18 @@
             <ComponentRef Id="ApplicationShortcut" />
             <ComponentRef Id="ProgramFilesShortcut" />
             <ComponentGroupRef Id="BrandedComponents" />
-            <FeatureGroupRef Id="BrandedFeatures" />
 
-            <Feature Id="Languages" Title="!(loc.Localization)" Description="!(loc.LocalizationDescr)" Display="expand"
+
+            <Feature Id="LangJapanese" Title="!(loc.JapaneseTitle)" Description="!(loc.JapaneseDescr)" Display="expand"
                 Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-
-                <Component Id="DummyComponent" Location="local" Directory="TARGETDIR" Guid="$(var.DummyGuid)" />
-
-                <Feature Id="LangJapanese" Title="!(loc.JapaneseTitle)" Description="!(loc.JapaneseDescr)" Display="expand"
-                     Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-                    <ComponentRef Id="JaResources" />
-                </Feature>
-                <Feature Id="LangSimplifiedChinese" Title="!(loc.SimplifiedChineseTitle)" Description="!(loc.SimplifiedChineseDescr)"
-                    Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-                    <ComponentRef Id="ScResources" />
-                </Feature>
+                <ComponentRef Id="JaResources" />
+            </Feature>
+            <Feature Id="LangSimplifiedChinese" Title="!(loc.SimplifiedChineseTitle)" Description="!(loc.SimplifiedChineseDescr)"
+                Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+                <ComponentRef Id="ScResources" />
             </Feature>
         </Feature>
+        <FeatureGroupRef Id="BrandedFeatures" />
 
         <UIRef Id="$(var.BrandInstallerUI)" />
         <UIRef Id="WixUI_ErrorProgressText" />
