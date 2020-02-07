@@ -64,17 +64,13 @@ SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersi
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 
-for conf in Debug Release ; do
-  cd ${REPO} && "${MSBUILD}" /verbosity:quiet /p:Configuration=${conf} /t:Clean XenAdmin.sln
-done
-
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh $1
 
 #packages sources
 cd ${REPO}
 gitCommit=`git rev-parse HEAD`
-git archive --format=zip -o ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-sources.zip ${gitCommit}
+git archive --format=zip -o "_output/${BRANDING_BRAND_CONSOLE}-sources.zip" ${gitCommit}
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
