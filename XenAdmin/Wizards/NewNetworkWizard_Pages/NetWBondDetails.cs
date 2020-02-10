@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -54,11 +53,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         public override bool EnableNext()
         {
             return Details.Valid;
-        }
-
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            HelpersGUI.FocusFirstControl(Controls);
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)

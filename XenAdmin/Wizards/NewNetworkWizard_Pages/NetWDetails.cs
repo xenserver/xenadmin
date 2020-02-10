@@ -68,7 +68,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            HelpersGUI.FocusFirstControl(Controls);
+            comboBoxNICList.Focus();
         }
 
         public override void PopulatePage()
