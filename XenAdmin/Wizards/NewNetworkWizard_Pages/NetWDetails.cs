@@ -40,56 +40,84 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 {
     public partial class NetWDetails : XenTabPage
     {
-        List<int> vlans;
+        private List<int> vlans;
+        private bool _vlanError;
+        private bool _mtuError;
+        private bool _populatingNics;
 
         public NetWDetails()
         {
             InitializeComponent();
-            numericUpDownVLAN.LostFocus += checkVLAN;
+            //non-browsable events
             numericUpDownVLAN.TextChanged += numericUpDownVLAN_TextChanged;
+            numericUpDownMTU.TextChanged += numericUpDownMTU_TextChanged;
+
             numericUpDownMTU.Maximum = XenAPI.Network.MTU_MAX;
             numericUpDownMTU.Minimum = XenAPI.Network.MTU_MIN;
             numericUpDownMTU.Value = XenAPI.Network.MTU_DEFAULT;
+            numericUpDownVLAN.Maximum = 4094;
         }
 
-        public override string Text { get { return Messages.NETW_DETAILS_TEXT; } }
+        public override string Text => Messages.NETW_DETAILS_TEXT;
 
-        public override string PageTitle { get
-        {
-            return SelectedNetworkType == NetworkTypes.External
-                       ? Messages.NETW_EXTERNAL_DETAILS_TITLE
-                       : Messages.NETW_INTERNAL_DETAILS_TITLE;
-        } }
+        public override string PageTitle =>
+            SelectedNetworkType == NetworkTypes.External
+                ? Messages.NETW_EXTERNAL_DETAILS_TITLE
+                : Messages.NETW_INTERNAL_DETAILS_TITLE;
 
         public override bool EnableNext()
         {
-            return (SelectedHostNic != null || !comboBoxNICList.Visible) && !labelVlanError.Visible;
-        }
+            if (_vlanError || _mtuError)
+                return false;
 
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            comboBoxNICList.Focus();
+            return SelectedHostNic != null || !comboBoxNICList.Visible;
         }
 
         public override void PopulatePage()
         {
-            PopulateHostNicList(Host, Connection);
-            UpdateEnablement(SelectedNetworkType == NetworkTypes.External, Host);
-            //set minimum value for VLAN
-            numericUpDownVLAN.Minimum = Helpers.VLAN0Allowed(Connection) ? 0 : 1; 
-        }
+            var external = SelectedNetworkType == NetworkTypes.External;
 
-        private int CurrentVLANValue
-        {
-            get { return Convert.ToInt32(Math.Round(numericUpDownVLAN.Value, MidpointRounding.AwayFromZero)); }
-        }
+            labelExternal.Visible = external;
+            labelInternal.Visible = !external;
+            labelNIC.Visible = external;
+            comboBoxNICList.Visible = external;
 
-        private void checkVLAN(object sender, EventArgs e)
-        {
-            if (numericUpDownVLAN.Text == "")
+            if (comboBoxNICList.Visible)
             {
-                numericUpDownVLAN.Text = CurrentVLANValue.ToString();
+                try
+                {
+                    _populatingNics = true;
+                    comboBoxNICList.Items.Clear();
+
+                    foreach (PIF ThePIF in Connection.Cache.PIFs)
+                    {
+                        if (ThePIF.host.opaque_ref == Host.opaque_ref && ThePIF.IsPhysical() &&
+                            (Properties.Settings.Default.ShowHiddenVMs || ThePIF.Show(Properties.Settings.Default.ShowHiddenVMs)) &&
+                            !ThePIF.IsBondSlave())
+                        {
+                            comboBoxNICList.Items.Add(ThePIF);
+                        }
+                    }
+                }
+                finally
+                {
+                    _populatingNics = false;
+                }
+
+                if (comboBoxNICList.Items.Count > 0)
+                    comboBoxNICList.SelectedIndex = 0;
+
+                comboBoxNICList.Focus();
             }
+
+            labelVLAN.Visible = external;
+            numericUpDownVLAN.Visible = external;
+            numericUpDownVLAN.Minimum = Helpers.VLAN0Allowed(Connection) ? 0 : 1;
+            numericUpDownMTU.Visible = labelMTU.Visible = infoMtuPanel.Visible = external;
+
+            checkBoxSriov.Visible = SelectedHostNic != null && SelectedHostNic.IsSriovPhysicalPIF();
+
+            OnPageUpdated();
         }
 
         #region Accessors
@@ -98,73 +126,22 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
         public Host Host { private get; set; }
 
-        public PIF SelectedHostNic
-        {
-            get { return (PIF)comboBoxNICList.SelectedItem; }
-        }
+        public PIF SelectedHostNic => comboBoxNICList.SelectedItem as PIF;
 
-        public long VLAN
-        {
-            get { return CurrentVLANValue; }
-        }
+        public int VLAN => Convert.ToInt32(Math.Round(numericUpDownVLAN.Value, MidpointRounding.AwayFromZero));
 
-        public bool isAutomaticAddNicToVM
-        {
-            get { return checkBoxAutomatic.Checked; }
-        }
+        public bool AddNicToVmsAutomatically => checkBoxAutomatic.Checked;
 
-        public bool CreateVlanOnSriovNetwork
-        {
-            get { return checkBoxSriov.Visible && checkBoxSriov.Checked; }
-        }
+        public bool CreateVlanOnSriovNetwork => checkBoxSriov.Visible && checkBoxSriov.Checked;
 
         /// <summary>
-        /// Null if the custom MTU option is disabled
+        /// Returns -1 if the custom MTU option is disabled
         /// </summary>
-        public long? MTU
-        {
-            get
-            {
-                if (numericUpDownMTU.Enabled)
-                    return (long)numericUpDownMTU.Value;
-                else
-                    return null;
-            }
-        }
+        public int MTU => numericUpDownMTU.Visible && numericUpDownMTU.Enabled
+            ? Convert.ToInt32(Math.Round(numericUpDownMTU.Value, MidpointRounding.AwayFromZero))
+            : -1;
 
         #endregion
-
-        private void UpdateEnablement(bool external, Host host)
-        {
-            lblNicHelp.Text = external ? Messages.WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL : Messages.WIZARD_DESC_NETWORK_SETTINGS_INTERNAL;
-            comboBoxNICList.Visible = external;
-            labelVLAN.Visible = external;
-            numericUpDownVLAN.Visible = external;
-            numericUpDownMTU.Visible = labelMTU.Visible = infoMtuPanel.Visible = external;
-            labelNIC.Visible = external;
-            if (comboBoxNICList.Items.Count > 0)
-                comboBoxNICList.SelectedIndex = external ? comboBoxNICList.Items.Count - 1 : -1;
-            checkBoxSriov.Visible = SelectedHostNic != null && SelectedHostNic.IsSriovPhysicalPIF();
-
-            OnPageUpdated();
-        }
-
-        private void PopulateHostNicList(Host host, IXenConnection conn)
-        {
-            comboBoxNICList.Items.Clear();
-
-            foreach (PIF ThePIF in conn.Cache.PIFs)
-            {
-                if (ThePIF.host.opaque_ref == host.opaque_ref && ThePIF.IsPhysical() && (Properties.Settings.Default.ShowHiddenVMs || ThePIF.Show(Properties.Settings.Default.ShowHiddenVMs)) && !ThePIF.IsBondSlave())
-                {
-                    comboBoxNICList.Items.Add(ThePIF);
-                }
-            }
-            if (comboBoxNICList.Items.Count > 0)
-                comboBoxNICList.SelectedIndex = 0;
-
-            cmbHostNicList_SelectedIndexChanged(null, null);
-        }
 
         private List<int> GetVLANList(PIF nic)
         {
@@ -182,101 +159,145 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             return vlans;
         }
 
-        private int GetFirstAvailableVLAN(List<int> vlans)
+        private void ValidateVLANValue()
         {
-            //CA-19111: VLAN values should only go up to the numericUpDownVLAN.Maximum (4094)
-            for (int i = 1; i <= numericUpDownVLAN.Maximum; i++)
+            //CA-192746: do not call numericUpDown.Value or properties/methods that call it
+            //in the validation method, because it auto-corrects what the user has typed
+            
+            _vlanError = false;
+            string msg = null;
+
+            if (!int.TryParse(numericUpDownVLAN.Text.Trim(), out int currentValue))
             {
-                if (!vlans.Contains(i))
-                    return i;
+                _vlanError = true;
+                msg = Messages.INVALID_NUMBER;
+            }
+            else if (currentValue < numericUpDownVLAN.Minimum || numericUpDownVLAN.Maximum < currentValue)
+            {
+                _vlanError = true;
+                msg = string.Format(Messages.NETW_DETAILS_VLAN_RANGE, numericUpDownVLAN.Minimum, numericUpDownVLAN.Maximum);
+            }
+            else if (vlans != null && vlans.Contains(currentValue))
+            {
+                _vlanError = true;
+                msg = Messages.NETW_DETAILS_VLAN_NUMBER_IN_USE;
+            }
+            else if (currentValue == 0)
+            {
+                msg = Messages.NETW_VLAN_ZERO;
             }
 
-            return -1;
+            if (_vlanError)
+            {
+                pictureBoxVlan.Image = Images.StaticImages._000_error_h32bit_16;
+                labelVlanMessage.Text = msg;
+                infoVlanPanel.Visible = true;
+            }
+            else if (!string.IsNullOrEmpty(msg))
+            {
+                pictureBoxVlan.Image = Images.StaticImages._000_Info3_h32bit_16;
+                labelVlanMessage.Text = msg;
+                infoVlanPanel.Visible = true;
+            }
+            else
+                infoVlanPanel.Visible = false;
+
+            OnPageUpdated();
         }
+
+        private void ValidateMtuValue()
+        {
+            //CA-192746: do not call numericUpDown.Value or properties/methods that call it
+            //in the validation method, because it auto-corrects what the user has typed
+
+            _mtuError = false;
+
+            if (!int.TryParse(numericUpDownMTU.Text.Trim(), out int currentValue))
+            {
+                _mtuError = true;
+                pictureBoxMtu.Image = Images.StaticImages._000_error_h32bit_16;
+                labelMtuMessage.Text = Messages.INVALID_NUMBER;
+            }
+            else
+            {
+                if (currentValue < numericUpDownMTU.Minimum || numericUpDownMTU.Maximum < currentValue)
+                    _mtuError = true;
+
+                pictureBoxMtu.Image = Images.StaticImages._000_Info3_h32bit_16;
+                labelMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum
+                    ? string.Format(Messages.ALLOWED_MTU_VALUE, numericUpDownMTU.Minimum)
+                    : string.Format(Messages.ALLOWED_MTU_RANGE, numericUpDownMTU.Minimum, numericUpDownMTU.Maximum);
+            }
+
+            infoMtuPanel.Visible = true;
+            OnPageUpdated();
+        }
+
+        #region Event Handlers
 
         private void cmbHostNicList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OnPageUpdated();
-
-            if (SelectedHostNic == null)
+            if (_populatingNics || SelectedHostNic == null)
                 return;
 
             checkBoxSriov.Visible = SelectedHostNic.IsSriovPhysicalPIF();
 
             numericUpDownMTU.Maximum = Math.Min(SelectedHostNic.MTU, XenAPI.Network.MTU_MAX);
-
             numericUpDownMTU.Enabled = numericUpDownMTU.Minimum != numericUpDownMTU.Maximum;
-            
-            infoMtuMessage.Text = numericUpDownMTU.Minimum == numericUpDownMTU.Maximum
-                                    ? string.Format(Messages.ALLOWED_MTU_VALUE, numericUpDownMTU.Minimum)
-                                    : string.Format(Messages.ALLOWED_MTU_RANGE, numericUpDownMTU.Minimum, numericUpDownMTU.Maximum);
+            ValidateMtuValue();
 
             vlans = GetVLANList(SelectedHostNic);
 
             //CA-72484: check whether the currently selected VLAN is available and keep it
-            int curVlan = CurrentVLANValue;
-            if (!vlans.Contains(curVlan))
+            if (!vlans.Contains(VLAN))
             {
-                SetError(null);
+                ValidateVLANValue();
                 return;
             }
 
-            int avail_vlan = GetFirstAvailableVLAN(vlans);
+            //CA-19111: VLAN values should only go up to the numericUpDownVLAN.Maximum (4094)
+            for (int i = 1; i <= numericUpDownVLAN.Maximum; i++)
+            {
+                if (!vlans.Contains(i))
+                {
+                    numericUpDownVLAN.Value = i;
+                    break;
+                }
+            }
 
-            if (avail_vlan == -1)
-                return;
-
-            numericUpDownVLAN.Value = avail_vlan;
+            OnPageUpdated();
         }
 
-        private void nudVLAN_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownVLAN_Leave(object sender, EventArgs e)
+        {
+            if (numericUpDownVLAN.Text == "")
+                numericUpDownVLAN.Text = VLAN.ToString();
+        }
+
+        private void numericUpDownVLAN_TextChanged(object sender, EventArgs e)
         {
             ValidateVLANValue();
         }
 
-        void numericUpDownVLAN_TextChanged(object sender, EventArgs e)
+        private void numericUpDownVLAN_ValueChanged(object sender, EventArgs e)
         {
             ValidateVLANValue();
         }
 
-        private void SetError(string error)
+        private void numericUpDownMTU_Leave(object sender, EventArgs e)
         {
-            bool visible = !string.IsNullOrEmpty(error);
-            bool updatePage = labelVlanError.Visible != visible;
-            labelVlanError.Visible = visible;
-            if (visible)
-                labelVlanError.Text = error;
-            labelVLAN0Info.Visible = !visible && numericUpDownVLAN.Value == 0;
-            if (updatePage)
-                OnPageUpdated();
+            if (numericUpDownMTU.Text == "")
+                numericUpDownMTU.Text = MTU.ToString();
         }
 
-        private bool VLANValidNumber()
+        private void numericUpDownMTU_TextChanged(object sender, EventArgs e)
         {
-            int result;
-            return int.TryParse(numericUpDownVLAN.Text.Trim(), out result);
+            ValidateMtuValue();
         }
 
-        private bool VLANNumberUnique()
+        private void numericUpDownMTU_ValueChanged(object sender, EventArgs e)
         {
-            if (vlans == null)
-                return true;
-            return !vlans.Contains(CurrentVLANValue);
-        }
-
-        private void ValidateVLANValue()
-        {
-            if (!VLANValidNumber())
-            {
-                SetError(Messages.INVALID_NUMBER);
-                return;
-            }
-            if (!VLANNumberUnique())
-            {
-                SetError(Messages.NETW_DETAILS_VLAN_NUMBER_IN_USE);
-                return;
-            }
-            SetError(null);
+            ValidateMtuValue();
         }
 
         private void checkBoxSriov_CheckedChanged(object sender, EventArgs e)
@@ -284,5 +305,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             vlans = GetVLANList(SelectedHostNic);
             ValidateVLANValue();
         }
+
+        #endregion
     }
 }

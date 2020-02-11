@@ -100,15 +100,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             OnPageUpdated();
         }
 
-        public PIF SelectedHostNic
-        {
-            get { return (PIF)comboBoxNicList.SelectedItem; }
-        }
+        public PIF SelectedHostNic => (PIF)comboBoxNicList.SelectedItem;
 
-        public bool isAutomaticAddNicToVM
-        {
-            get { return cbxAutomatic.Checked; }
-        }
+        public bool AddNicToVmsAutomatically => cbxAutomatic.Checked;
 
         private void comboBoxNicList_SelectedIndexChanged(object sender, EventArgs e)
         {

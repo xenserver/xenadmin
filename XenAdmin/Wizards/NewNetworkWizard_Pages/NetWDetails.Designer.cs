@@ -29,111 +29,65 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetWDetails));
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.infoMtuPanel = new System.Windows.Forms.Panel();
-            this.infoMtuMessage = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.labelExternal = new System.Windows.Forms.Label();
+            this.labelInternal = new System.Windows.Forms.Label();
             this.labelNIC = new System.Windows.Forms.Label();
-            this.labelVLAN = new System.Windows.Forms.Label();
-            this.lblNicHelp = new System.Windows.Forms.Label();
-            this.numericUpDownVLAN = new System.Windows.Forms.NumericUpDown();
             this.comboBoxNICList = new System.Windows.Forms.ComboBox();
+            this.labelVLAN = new System.Windows.Forms.Label();
+            this.numericUpDownVLAN = new System.Windows.Forms.NumericUpDown();
+            this.infoVlanPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxVlan = new System.Windows.Forms.PictureBox();
+            this.labelVlanMessage = new System.Windows.Forms.Label();
             this.labelMTU = new System.Windows.Forms.Label();
             this.numericUpDownMTU = new System.Windows.Forms.NumericUpDown();
-            this.panelVLANInfo = new System.Windows.Forms.Panel();
-            this.labelVlanError = new System.Windows.Forms.Label();
-            this.labelVLAN0Info = new System.Windows.Forms.Label();
-            this.checkBoxAutomatic = new System.Windows.Forms.CheckBox();
+            this.infoMtuPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxMtu = new System.Windows.Forms.PictureBox();
+            this.labelMtuMessage = new System.Windows.Forms.Label();
             this.checkBoxSriov = new System.Windows.Forms.CheckBox();
-            this.panel1.SuspendLayout();
+            this.checkBoxAutomatic = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
-            this.infoMtuPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).BeginInit();
+            this.infoVlanPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVlan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
-            this.panelVLANInfo.SuspendLayout();
+            this.infoMtuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMtu)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Name = "panel1";
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.infoMtuPanel, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.labelNIC, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelVLAN, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblNicHelp, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDownVLAN, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.comboBoxNICList, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panelVLANInfo, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutomatic, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxSriov, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelExternal, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelInternal, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelNIC, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxNICList, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelVLAN, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownVLAN, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.infoVlanPanel, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.infoMtuPanel, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxSriov, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutomatic, 0, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // infoMtuPanel
+            // labelExternal
             // 
-            resources.ApplyResources(this.infoMtuPanel, "infoMtuPanel");
-            this.tableLayoutPanel1.SetColumnSpan(this.infoMtuPanel, 2);
-            this.infoMtuPanel.Controls.Add(this.infoMtuMessage);
-            this.infoMtuPanel.Controls.Add(this.pictureBox2);
-            this.infoMtuPanel.Name = "infoMtuPanel";
+            resources.ApplyResources(this.labelExternal, "labelExternal");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelExternal, 4);
+            this.labelExternal.Name = "labelExternal";
             // 
-            // infoMtuMessage
+            // labelInternal
             // 
-            resources.ApplyResources(this.infoMtuMessage, "infoMtuMessage");
-            this.infoMtuMessage.Name = "infoMtuMessage";
-            // 
-            // pictureBox2
-            // 
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
+            resources.ApplyResources(this.labelInternal, "labelInternal");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelInternal, 4);
+            this.labelInternal.Name = "labelInternal";
             // 
             // labelNIC
             // 
             resources.ApplyResources(this.labelNIC, "labelNIC");
             this.labelNIC.Name = "labelNIC";
-            // 
-            // labelVLAN
-            // 
-            resources.ApplyResources(this.labelVLAN, "labelVLAN");
-            this.labelVLAN.Name = "labelVLAN";
-            // 
-            // lblNicHelp
-            // 
-            resources.ApplyResources(this.lblNicHelp, "lblNicHelp");
-            this.tableLayoutPanel1.SetColumnSpan(this.lblNicHelp, 4);
-            this.lblNicHelp.Name = "lblNicHelp";
-            // 
-            // numericUpDownVLAN
-            // 
-            resources.ApplyResources(this.numericUpDownVLAN, "numericUpDownVLAN");
-            this.numericUpDownVLAN.Maximum = new decimal(new int[] {
-            4094,
-            0,
-            0,
-            0});
-            this.numericUpDownVLAN.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownVLAN.Name = "numericUpDownVLAN";
-            this.numericUpDownVLAN.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownVLAN.ValueChanged += new System.EventHandler(this.nudVLAN_ValueChanged);
             // 
             // comboBoxNICList
             // 
@@ -146,6 +100,37 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.comboBoxNICList.Sorted = true;
             this.comboBoxNICList.SelectedIndexChanged += new System.EventHandler(this.cmbHostNicList_SelectedIndexChanged);
             // 
+            // labelVLAN
+            // 
+            resources.ApplyResources(this.labelVLAN, "labelVLAN");
+            this.labelVLAN.Name = "labelVLAN";
+            // 
+            // numericUpDownVLAN
+            // 
+            resources.ApplyResources(this.numericUpDownVLAN, "numericUpDownVLAN");
+            this.numericUpDownVLAN.Name = "numericUpDownVLAN";
+            this.numericUpDownVLAN.ValueChanged += new System.EventHandler(this.numericUpDownVLAN_ValueChanged);
+            this.numericUpDownVLAN.Leave += new System.EventHandler(this.numericUpDownVLAN_Leave);
+            // 
+            // infoVlanPanel
+            // 
+            resources.ApplyResources(this.infoVlanPanel, "infoVlanPanel");
+            this.tableLayoutPanel1.SetColumnSpan(this.infoVlanPanel, 2);
+            this.infoVlanPanel.Controls.Add(this.pictureBoxVlan, 0, 0);
+            this.infoVlanPanel.Controls.Add(this.labelVlanMessage, 1, 0);
+            this.infoVlanPanel.Name = "infoVlanPanel";
+            // 
+            // pictureBoxVlan
+            // 
+            resources.ApplyResources(this.pictureBoxVlan, "pictureBoxVlan");
+            this.pictureBoxVlan.Name = "pictureBoxVlan";
+            this.pictureBoxVlan.TabStop = false;
+            // 
+            // labelVlanMessage
+            // 
+            resources.ApplyResources(this.labelVlanMessage, "labelVlanMessage");
+            this.labelVlanMessage.Name = "labelVlanMessage";
+            // 
             // labelMTU
             // 
             resources.ApplyResources(this.labelMTU, "labelMTU");
@@ -155,33 +140,27 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // 
             resources.ApplyResources(this.numericUpDownMTU, "numericUpDownMTU");
             this.numericUpDownMTU.Name = "numericUpDownMTU";
+            this.numericUpDownMTU.ValueChanged += new System.EventHandler(this.numericUpDownMTU_ValueChanged);
+            this.numericUpDownMTU.Leave += new System.EventHandler(this.numericUpDownMTU_Leave);
             // 
-            // panelVLANInfo
+            // infoMtuPanel
             // 
-            resources.ApplyResources(this.panelVLANInfo, "panelVLANInfo");
-            this.tableLayoutPanel1.SetColumnSpan(this.panelVLANInfo, 2);
-            this.panelVLANInfo.Controls.Add(this.labelVlanError);
-            this.panelVLANInfo.Controls.Add(this.labelVLAN0Info);
-            this.panelVLANInfo.Name = "panelVLANInfo";
+            resources.ApplyResources(this.infoMtuPanel, "infoMtuPanel");
+            this.tableLayoutPanel1.SetColumnSpan(this.infoMtuPanel, 2);
+            this.infoMtuPanel.Controls.Add(this.pictureBoxMtu, 0, 0);
+            this.infoMtuPanel.Controls.Add(this.labelMtuMessage, 1, 0);
+            this.infoMtuPanel.Name = "infoMtuPanel";
             // 
-            // labelVlanError
+            // pictureBoxMtu
             // 
-            resources.ApplyResources(this.labelVlanError, "labelVlanError");
-            this.labelVlanError.ForeColor = System.Drawing.Color.Red;
-            this.labelVlanError.Name = "labelVlanError";
+            resources.ApplyResources(this.pictureBoxMtu, "pictureBoxMtu");
+            this.pictureBoxMtu.Name = "pictureBoxMtu";
+            this.pictureBoxMtu.TabStop = false;
             // 
-            // labelVLAN0Info
+            // labelMtuMessage
             // 
-            resources.ApplyResources(this.labelVLAN0Info, "labelVLAN0Info");
-            this.labelVLAN0Info.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelVLAN0Info.Name = "labelVLAN0Info";
-            // 
-            // checkBoxAutomatic
-            // 
-            resources.ApplyResources(this.checkBoxAutomatic, "checkBoxAutomatic");
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutomatic, 4);
-            this.checkBoxAutomatic.Name = "checkBoxAutomatic";
-            this.checkBoxAutomatic.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.labelMtuMessage, "labelMtuMessage");
+            this.labelMtuMessage.Name = "labelMtuMessage";
             // 
             // checkBoxSriov
             // 
@@ -191,45 +170,51 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.checkBoxSriov.UseVisualStyleBackColor = true;
             this.checkBoxSriov.CheckedChanged += new System.EventHandler(this.checkBoxSriov_CheckedChanged);
             // 
+            // checkBoxAutomatic
+            // 
+            resources.ApplyResources(this.checkBoxAutomatic, "checkBoxAutomatic");
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutomatic, 4);
+            this.checkBoxAutomatic.Name = "checkBoxAutomatic";
+            this.checkBoxAutomatic.UseVisualStyleBackColor = true;
+            // 
             // NetWDetails
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "NetWDetails";
-            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).EndInit();
+            this.infoVlanPanel.ResumeLayout(false);
+            this.infoVlanPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVlan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
             this.infoMtuPanel.ResumeLayout(false);
             this.infoMtuPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
-            this.panelVLANInfo.ResumeLayout(false);
-            this.panelVLANInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMtu)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelNIC;
         private System.Windows.Forms.ComboBox comboBoxNICList;
-        private System.Windows.Forms.NumericUpDown numericUpDownVLAN;
         private System.Windows.Forms.Label labelVLAN;
-        private System.Windows.Forms.Label lblNicHelp;
+        private System.Windows.Forms.Label labelInternal;
         private System.Windows.Forms.CheckBox checkBoxAutomatic;
-        private System.Windows.Forms.Label labelVlanError;
         private System.Windows.Forms.Label labelMTU;
-        private System.Windows.Forms.NumericUpDown numericUpDownMTU;
-        private System.Windows.Forms.Panel panelVLANInfo;
-        private System.Windows.Forms.Label labelVLAN0Info;
-        private System.Windows.Forms.Panel infoMtuPanel;
-        private System.Windows.Forms.Label infoMtuMessage;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label labelMtuMessage;
+        private System.Windows.Forms.PictureBox pictureBoxMtu;
         private System.Windows.Forms.CheckBox checkBoxSriov;
+        private System.Windows.Forms.Label labelExternal;
+        private System.Windows.Forms.TableLayoutPanel infoMtuPanel;
+        private System.Windows.Forms.TableLayoutPanel infoVlanPanel;
+        private System.Windows.Forms.PictureBox pictureBoxVlan;
+        private System.Windows.Forms.Label labelVlanMessage;
+        private System.Windows.Forms.NumericUpDown numericUpDownVLAN;
+        private System.Windows.Forms.NumericUpDown numericUpDownMTU;
     }
 }
