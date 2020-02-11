@@ -21001,6 +21001,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid disk size.
+        /// </summary>
+        public static string INVALID_DISK_SIZE {
+            get {
+                return ResourceManager.GetString("INVALID_DISK_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid hostname.
         /// </summary>
         public static string INVALID_HOST {
@@ -21010,7 +21019,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid disk size.
+        ///   Looks up a localized string similar to Invalid number.
         /// </summary>
         public static string INVALID_NUMBER {
             get {
@@ -24537,6 +24546,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowed VLAN range: {0} to {1}.
+        /// </summary>
+        public static string NETW_DETAILS_VLAN_RANGE {
+            get {
+                return ResourceManager.GetString("NETW_DETAILS_VLAN_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure the new network.
         /// </summary>
         public static string NETW_EXTERNAL_DETAILS_TITLE {
@@ -24587,6 +24605,15 @@ namespace XenAdmin {
         public static string NETW_TYPE_SELECT_TITLE {
             get {
                 return ResourceManager.GetString("NETW_TYPE_SELECT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VLAN 0 will receive all traffic not on any other VLAN.
+        /// </summary>
+        public static string NETW_VLAN_ZERO {
+            get {
+                return ResourceManager.GetString("NETW_VLAN_ZERO", resourceCulture);
             }
         }
         
@@ -39559,24 +39586,6 @@ namespace XenAdmin {
         public static string WIZARD_BUTTON_NEXT {
             get {
                 return ResourceManager.GetString("WIZARD_BUTTON_NEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your new network will be mapped to an existing physical network interface and assigned a VLAN number to use on that interface. You can select the physical interface you would like to use below..
-        /// </summary>
-        public static string WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL {
-            get {
-                return ResourceManager.GetString("WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check the box below if you would like to automatically add this network to new VMs..
-        /// </summary>
-        public static string WIZARD_DESC_NETWORK_SETTINGS_INTERNAL {
-            get {
-                return ResourceManager.GetString("WIZARD_DESC_NETWORK_SETTINGS_INTERNAL", resourceCulture);
             }
         }
         
