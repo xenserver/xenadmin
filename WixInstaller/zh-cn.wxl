@@ -17,6 +17,6 @@
     <String Id="HealthCheckDescrShort">允许监视 Citrix Hypervisor 池的运行状况。</String>
     <String Id="JapaneseTitle">语言包：日语</String>
     <String Id="JapaneseDescr">日语资源文件</String>
-    <String Id="SimplifiedChineseTitle">Language Pack: Simplified Chinese</String>
-    <String Id="SimplifiedChineseDescr">语言包：简体中文</String>
+    <String Id="SimplifiedChineseTitle">语言包：简体中文</String>
+    <String Id="SimplifiedChineseDescr">简体中文资源文件</String>
 </WixLocalization>
