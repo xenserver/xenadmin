@@ -16,7 +16,7 @@
     <String Id="HealthCheckDescr">サーバーから Citrix Insight Services に定期的にデータをアップロードして Citrix Hypervisor プールのヘルス状態を監視する機能を有効にします。</String>
     <String Id="HealthCheckDescrShort">Citrix Hypervisor プールのヘルス状態の監視を有効にします。</String>
     <String Id="JapaneseTitle">言語パック：日本語</String>
-    <String Id="JapaneseDescr">日本語のリソースファイル</String>
+    <String Id="JapaneseDescr">日本語リソースファイル</String>
     <String Id="SimplifiedChineseTitle">言語パック：簡体字中国語</String>
     <String Id="SimplifiedChineseDescr">簡体字中国語リソースファイル</String>
 </WixLocalization>
