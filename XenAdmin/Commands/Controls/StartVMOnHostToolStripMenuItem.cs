@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
             {
                 VM vm = selection.XenObject as VM;
 
-                if (vm != null && !vm.is_a_template && !vm.Locked)
+                if (vm != null && !vm.is_a_template && !vm.Locked && !vm.IsHidden())
                 {
                     if (vm.allowed_operations != null && vm.allowed_operations.Contains(XenAPI.vm_operations.start)
                         && Helpers.EnabledTargetExists(selection.HostAncestor, selection.Connection))

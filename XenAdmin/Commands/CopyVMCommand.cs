@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(VM vm)
         {
-            return vm != null && (CrossPoolCopyVMCommand.CanExecute(vm, null) || vm.CanBeCopied());
+            return vm != null && (CrossPoolCopyVMCommand.CanExecute(vm, null) || vm.CanBeCopied()) && !vm.IsHidden();
         }
 
         public override string MenuText

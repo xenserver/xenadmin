@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(VM vm)
         {
-            return vm != null && !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.make_into_template);
+            return vm != null && !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.make_into_template) && !vm.IsHidden();
         }
 
         public override string MenuText

@@ -131,7 +131,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(VM vm)
         {
-            return vm != null && !vm.is_a_template && !vm.Locked && (vm.allowed_operations.Contains(vm_operations.snapshot) || vm.allowed_operations.Contains(vm_operations.checkpoint)); 
+            return vm != null && !vm.is_a_template && !vm.Locked && (vm.allowed_operations.Contains(vm_operations.snapshot) || vm.allowed_operations.Contains(vm_operations.checkpoint)) && !vm.IsHidden();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

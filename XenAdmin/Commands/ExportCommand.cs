@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
 
 		private bool CanExportVm(VM vm)
 		{
-			return !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.export);
+			return !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.export) && !vm.IsHidden();
 		}
     }
 }

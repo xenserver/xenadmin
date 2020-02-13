@@ -122,7 +122,7 @@ namespace XenAdmin.Commands
         {
             ReadOnlyCollection<SelectedItem> selection = GetSelection();
 
-            if (!vm.is_a_template && !vm.Locked && vm.allowed_operations.Contains(vm_operations.start) && EnabledTargetExists(vm, selection[0].Connection) && vm.power_state == vm_power_state.Halted)
+            if (!vm.is_a_template && !vm.Locked && vm.allowed_operations.Contains(vm_operations.start) && EnabledTargetExists(vm, selection[0].Connection) && vm.power_state == vm_power_state.Halted && !vm.IsHidden())
             {
                 return true;
             }
