@@ -30,6 +30,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
+# Script parameters:
+# 1 Global build number
+# 2 Signing node name
+# 3 Sign in SBE
+# 4 Self-signing certificate sha1 thumbprint
+# 5 Self-signing certificate sha256 thumbprint
+# 6 Timestamp server
+
 set -ex
 
 SET_ENV_FILE="/cygdrive/c/env.sh"
@@ -44,29 +52,31 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
-ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 REPO="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRATCH_DIR=${ROOT}/scratch
-OUTPUT_DIR=${ROOT}/output
+SCRATCH_DIR=${REPO}/_scratch
+OUTPUT_DIR=${REPO}/_output
 
 WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
 WIX_INSTALLER_DEFAULT_VERSION=1.0.0
-PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z])
+PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
+
+mkdir_clean ${SCRATCH_DIR}
+mkdir_clean ${OUTPUT_DIR}
 
 source ${REPO}/Branding/branding.sh
-source ${REPO}/mk/re-branding.sh
+source ${REPO}/mk/re-branding.sh $1
 
 #build
 MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
 
-${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
+${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO}
 $MSBUILD XenAdmin.sln
 $MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
 
 #prepare wix
 
-WIX=${REPO}/WixInstaller
+WIX=${SCRATCH_DIR}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
 
@@ -74,15 +84,13 @@ CANDLE="${WIX_BIN}/candle.exe -nologo"
 LIT="${WIX_BIN}/lit.exe -nologo"
 LIGHT="${WIX_BIN}/light.exe -nologo"
 
-mkdir_clean ${WIX_SRC}
-${UNZIP} ${SCRATCH_DIR}/wix310-debug.zip -d ${SCRATCH_DIR}/wixsrc
+mkdir_clean ${WIX_BIN} && ${UNZIP} ${REPO}/packages/wix310-binaries.zip -d ${WIX_BIN}
+mkdir_clean ${WIX_SRC} && ${UNZIP} ${REPO}/packages/wix310-debug.zip -d ${WIX_SRC}
+cp -r ${REPO}/WixInstaller ${SCRATCH_DIR}/
 cp ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeDlg.wxs ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeStdDlg.wxs
-cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${REPO}/mk/patches/wix_src_patch
-cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
-
-mkdir_clean ${WIX_BIN}
-${UNZIP} ${SCRATCH_DIR}/wix310-binaries.zip -d ${WIX_BIN}
-touch ${REPO}/WixInstaller/PrintEula.dll
+cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${WIX}/wix_src.patch
+cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${WIX}
+touch ${WIX}/PrintEula.dll
 
 #compile_wix
 
@@ -90,7 +98,7 @@ chmod -R u+rx ${WIX_BIN}
 cd ${WIX}
 mkdir -p obj
 
-${CANDLE} -out obj/ wixlib/WixUI_InstallDir.wxs wixlib/WixUI_FeatureTree.wxs wixlib/BrowseDlg.wxs wixlib/CancelDlg.wxs wixlib/Common.wxs wixlib/CustomizeDlg.wxs wixlib/CustomizeStdDlg.wxs wixlib/DiskCostDlg.wxs wixlib/ErrorDlg.wxs wixlib/ErrorProgressText.wxs wixlib/ExitDialog.wxs wixlib/FatalError.wxs wixlib/FilesInUse.wxs wixlib/InstallDirDlg.wxs wixlib/InvalidDirDlg.wxs wixlib/LicenseAgreementDlg.wxs wixlib/MaintenanceTypeDlg.wxs wixlib/MaintenanceWelcomeDlg.wxs wixlib/MsiRMFilesInUse.wxs wixlib/OutOfDiskDlg.wxs wixlib/OutOfRbDiskDlg.wxs wixlib/PrepareDlg.wxs wixlib/ProgressDlg.wxs wixlib/ResumeDlg.wxs wixlib/SetupTypeDlg.wxs wixlib/UserExit.wxs wixlib/VerifyReadyDlg.wxs wixlib/WaitForCostingDlg.wxs wixlib/WelcomeDlg.wxs
+RepoRoot=$(cygpath -w ${REPO}) ${CANDLE} -out obj/ wixlib/WixUI_InstallDir.wxs wixlib/WixUI_FeatureTree.wxs wixlib/BrowseDlg.wxs wixlib/CancelDlg.wxs wixlib/Common.wxs wixlib/CustomizeDlg.wxs wixlib/CustomizeStdDlg.wxs wixlib/DiskCostDlg.wxs wixlib/ErrorDlg.wxs wixlib/ErrorProgressText.wxs wixlib/ExitDialog.wxs wixlib/FatalError.wxs wixlib/FilesInUse.wxs wixlib/InstallDirDlg.wxs wixlib/InvalidDirDlg.wxs wixlib/LicenseAgreementDlg.wxs wixlib/MaintenanceTypeDlg.wxs wixlib/MaintenanceWelcomeDlg.wxs wixlib/MsiRMFilesInUse.wxs wixlib/OutOfDiskDlg.wxs wixlib/OutOfRbDiskDlg.wxs wixlib/PrepareDlg.wxs wixlib/ProgressDlg.wxs wixlib/ResumeDlg.wxs wixlib/SetupTypeDlg.wxs wixlib/UserExit.wxs wixlib/VerifyReadyDlg.wxs wixlib/WaitForCostingDlg.wxs wixlib/WelcomeDlg.wxs
 
 mkdir -p lib
 
@@ -111,14 +119,8 @@ version_installer()
 version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
 
-echo "INFO: Collecting unsigned files..."
-mkdir_clean ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Unsigned
-cp -R ${REPO}/* ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Unsigned
-cd ${OUTPUT_DIR} && zip -q -r -m ${BRANDING_BRAND_CONSOLE}Unsigned.zip ${BRANDING_BRAND_CONSOLE}Unsigned
-echo "Unsigned artifacts archived"
-
 #build and sign the installers
-. ${REPO}/mk/build-installers.sh
+. ${REPO}/mk/build-installers.sh $1 $2 $3 $4 $5 $6
 
 #build the tests
 echo "INFO: Build the tests..."
@@ -144,5 +146,3 @@ cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 
 echo "INFO:	Build phase succeeded at "
 date
-
-set +u
