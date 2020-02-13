@@ -26,22 +26,23 @@
 echo Entered re-branding.sh
 set -u
 
-ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+GLOBAL_BUILD_NUMBER=$1
+
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 version_cpp()
 {
-  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}" | sed 's/\./, /g')
+  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}" | sed 's/\./, /g')
   sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${BUILD_NUMBER}/g" \
-      $1 
+      -e "s/@BUILD_NUMBER@/${GLOBAL_BUILD_NUMBER}/g" \
+      $1
 }
 
 version_csharp()
 {
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}/g" \
-      $1 
+  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}/g" \
+      $1
 }
 
 rebranding_global()
@@ -56,7 +57,7 @@ rebranding_global()
         -e "s#\[Legacy XenServer product\]#${BRANDING_LEGACY_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
-        -e "s#\[BRANDING_BUILD_NUMBER\]#${BUILD_NUMBER}#g" \
+        -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
         -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
@@ -69,7 +70,7 @@ rebranding_global()
         -e "s#\[BRANDING_VERSION_7_0\]#${BRANDING_XC_PRODUCT_7_0_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_7_1_2\]#${BRANDING_XC_PRODUCT_7_1_2_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_8_0\]#${BRANDING_XC_PRODUCT_8_0_VERSION}#g" \
-		-e "s#\[BRANDING_VERSION_8_1\]#${BRANDING_XC_PRODUCT_8_1_VERSION}#g" \
+        -e "s#\[BRANDING_VERSION_8_1\]#${BRANDING_XC_PRODUCT_8_1_VERSION}#g" \
         -e "s#\[BRANDING_XENSERVER_UPDATE_URL\]#${BRANDING_XENSERVER_UPDATE_URL}#g" \
         -e "s#\[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT\]#${BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT}#g" \
         $1    
@@ -168,9 +169,6 @@ rebranding_global ${REPO}/XenOvfApi/app.config
 #XenOvfTransport XenOvfTransport
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
-
-#mk
-rebranding_global ${REPO}/mk/package-and-sign.sh
 
 #WixInstaller
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
