@@ -41,27 +41,6 @@ PRODUCT_MICRO_VERSION_OVERRIDE=1
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
-cd ${REPO}/Branding/Hotfixes
-
-for hfx in RPU003
-do
-  if [ -d "${hfx}" ]; then
-    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
-    echo "INFO: Latest version of ${hfx} hotfix is $latest"
-    cp ${hfx}/$latest/${hfx}.xsupdate ${hfx}.xsupdate
-  fi
-done
-
-for hfx in RPU004 RPU005
-do
-  if [ -d "${hfx}" ]; then
-    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
-    echo "INFO: Latest version of ${hfx} hotfix is $latest"
-    cp ${hfx}/$latest/${hfx}.iso ${hfx}.iso
-  fi
-done
-
-
 TOPLEVEL_VERSIONS=${ROOT}/branding.git/xenserver/toplevel-versions
 TOPLEVEL_BRANDING=${ROOT}/branding.git/xenserver/toplevel-branding
 
