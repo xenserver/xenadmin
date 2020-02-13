@@ -26,22 +26,25 @@
 echo Entered re-branding.sh
 set -u
 
+GLOBAL_BUILD_NUMBER=$1
+
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 version_cpp()
 {
-  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}" | sed 's/\./, /g')
+  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}" | sed 's/\./, /g')
   sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${BUILD_NUMBER}/g" \
-      $1 
+      -e "s/@BUILD_NUMBER@/${GLOBAL_BUILD_NUMBER}/g" \
+      $1
 }
 
 version_csharp()
 {
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}/g" \
-      $1 
+  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}/g" \
+            -e "s/0000/${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}/g" \
+      $1
 }
 
 rebranding_global()
@@ -50,80 +53,13 @@ rebranding_global()
         -e "s#\[Citrix\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
         -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
         -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
-        -e "s#\"\[BRANDING_COPYRIGHT\]\"#${BRANDING_COPYRIGHT}#g" \
-        -e "s#\"\[BRANDING_COPYRIGHT_2\]\"#${BRANDING_COPYRIGHT_2}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
-        -e "s#\[Legacy XenServer product\]#${BRANDING_LEGACY_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
-        -e "s#\[BRANDING_BUILD_NUMBER\]#${BUILD_NUMBER}#g" \
-        -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
-        -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
+        -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
-        -e "s#\[xbk\]#${BRANDING_BACKUP}#g" \
-        -e "s#\[BRANDING_VERSION_5_6\]#${BRANDING_XC_PRODUCT_5_6_VERSION}#g" \
-        -e "s#\[BRANDING_VERSION_6_0\]#${BRANDING_XC_PRODUCT_6_0_VERSION}#g" \
-        -e "s#\[BRANDING_VERSION_6_2\]#${BRANDING_XC_PRODUCT_6_2_VERSION}#g" \
-        -e "s#\[BRANDING_VERSION_6_5\]#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
-        -e "s#\[BRANDING_VERSION_7_0\]#${BRANDING_XC_PRODUCT_7_0_VERSION}#g" \
-        -e "s#\[BRANDING_VERSION_7_1_2\]#${BRANDING_XC_PRODUCT_7_1_2_VERSION}#g" \
-        -e "s#\[BRANDING_VERSION_8_0\]#${BRANDING_XC_PRODUCT_8_0_VERSION}#g" \
-		-e "s#\[BRANDING_VERSION_8_1\]#${BRANDING_XC_PRODUCT_8_1_VERSION}#g" \
-        -e "s#\[BRANDING_XENSERVER_UPDATE_URL\]#${BRANDING_XENSERVER_UPDATE_URL}#g" \
-        -e "s#\[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT\]#${BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT}#g" \
-        $1    
-}
-
-rebranding_features()
-{
-  sed -b -i -e "s#\[BRANDING_HIDDEN_FEATURES\]#${BRANDING_HIDDEN_FEATURES}#g" \
-	  -e "s#\[BRANDING_ADDITIONAL_FEATURES\]#${BRANDING_ADDITIONAL_FEATURES}#g" \
-	  $1   
-}
-
-rebranding_GUID()
-{
-  sed -b -i \
-      -e "s#\[BRANDING_XENCENTER_UPGRADE_CODE_GUID\]#${BRANDING_XENCENTER_UPGRADE_CODE_GUID}#g" \
-      -e "s#\[BRANDING_JA_RESOURCES_GUID\]#${BRANDING_JA_RESOURCES_GUID}#g" \
-      -e "s#\[BRANDING_SC_RESOURCES_GUID\]#${BRANDING_SC_RESOURCES_GUID}#g" \
-      -e "s#\[BRANDING_REPORT_VIEWER_GUID\]#${BRANDING_REPORT_VIEWER_GUID}#g" \
-      -e "s#\[BRANDING_MAIN_EXECUTABLE_GUID\]#${BRANDING_MAIN_EXECUTABLE_GUID}#g" \
-      -e "s#\[BRANDING_TEST_RESOURCES_GUID\]#${BRANDING_TEST_RESOURCES_GUID}#g" \
-      -e "s#\[BRANDING_EXTERNAL_TOOLS_GUID\]#${BRANDING_EXTERNAL_TOOLS_GUID}#g" \
-      -e "s#\[BRANDING_SCHEMAS_FILES_GUID\]#${BRANDING_SCHEMAS_FILES_GUID}#g" \
-      -e "s#\[BRANDING_REGISTRY_ENTRIES_GUID\]#${BRANDING_REGISTRY_ENTRIES_GUID}#g" \
-      -e "s#\[BRANDING_APPLICAION_SHOTCUT_GUID\]#${BRANDING_APPLICAION_SHOTCUT_GUID}#g" \
-      -e "s#\[BRANDING_README_FILE_GUID\]#${BRANDING_README_FILE_GUID}#g" \
-      -e "s#\[BRANDING_XSUPDATE_FILE_GUID\]#${BRANDING_XSUPDATE_FILE_GUID}#g" \
-      -e "s#\[BRANDING_HEALTH_CHECK_GUID\]#${BRANDING_HEALTH_CHECK_GUID}#g" \
-      $1   
-}
-
-version_brand_cpp()
-{
-  for file in $1
-  do
-    version_cpp ${file} && rebranding_global ${file}
-  done
-}
-
-branding_wxs()
-{
-  for file in $1
-  do
-    rebranding_global ${file} && rebranding_features ${file} && rebranding_GUID ${file}
-  done
-}
-
-version_brand_csharp()
-{
-  for projectName in $1
-  do
-    assemblyInfo=${REPO}/${projectName}/Properties/AssemblyInfo.cs
-    version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
-  done
+        $1
 }
 
 RESX_rebranding()
@@ -133,20 +69,22 @@ RESX_rebranding()
     rebranding_global ${resx}.resx
     rebranding_global ${resx}.zh-CN.resx
     rebranding_global ${resx}.ja.resx
-  done  
+  done
 }
 
 #splace rebranding
-version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj  ${REPO}/splash/util.cpp"
-
-#projects sign change
-cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
+for file in splash.rc main.cpp splash.vcproj splash.vcxproj  util.cpp
+do
+  version_cpp "${REPO}/splash/${file}" && rebranding_global "${REPO}/splash/${file}"
+done
 
 #AssemblyInfo rebranding
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer XenServerHealthCheck"
+for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenCenterVNC XenModel XenOvfApi XenOvfTransport XenServerHealthCheck xva_verify
+do
+  assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
+  version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
+done
 
-#XenAdmin rebranding
-rebranding_global ${REPO}/XenAdmin/Branding.cs
 #XenAdmin controls
 XENADMIN_RESXS=$(/usr/bin/find ${REPO}/XenAdmin -name \*.resx)
 for XENADMIN_RESX in ${XENADMIN_RESXS}
@@ -157,7 +95,8 @@ done
 RESX_rebranding "${REPO}/XenAdmin/Properties/Resources"
 rebranding_global ${REPO}/XenAdmin/app.config
 
-#XenModel rebranding
+#XenModel
+rebranding_global ${REPO}/XenModel/BrandManager.cs
 RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
 rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
 
@@ -169,24 +108,22 @@ rebranding_global ${REPO}/XenOvfApi/app.config
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
 
-#mk
-rebranding_global ${REPO}/mk/package-and-sign.sh
+PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
 
-#WixInstaller
-rebranding_global ${REPO}/WixInstaller/en-us.wxl
-rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
-rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
-branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs"
+sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
+          -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION}/g" \
+          -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \
+          -e "s/@COMPANY_NAME_SHORT@/${BRANDING_COMPANY_NAME_SHORT}/g" \
+          -e "s/@BRAND_CONSOLE@/${BRANDING_BRAND_CONSOLE}/g" \
+          -e "s/@PRODUCT_BRAND@/${BRANDING_PRODUCT_BRAND}/g" \
+    ${REPO}/WixInstaller/branding.wxi
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/app.config
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-echo cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
-cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
 
 #XenServerHealthCheck
-rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
 rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
 set +u
