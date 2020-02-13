@@ -503,7 +503,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the compatible_types_in_vm field of the given VGPU_type.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
@@ -826,7 +826,7 @@ namespace XenAPI
 
         /// <summary>
         /// List of VGPU types which are compatible in one VM
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.1.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<VGPU_type>))]
         public virtual List<XenRef<VGPU_type>> compatible_types_in_vm

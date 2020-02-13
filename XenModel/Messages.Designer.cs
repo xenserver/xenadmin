@@ -9650,7 +9650,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
+        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY_INFO {
             get {
@@ -19003,7 +19003,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+        ///   Looks up a localized string similar to If you are upgrading to [XenServer] {1} and above, the Control Domain memory on {0} will be increased. 
         ///
         ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
@@ -21464,7 +21464,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {1} E&amp;nterprise Per-Socket ({0} required).
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY {
             get {
@@ -21482,7 +21482,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] &amp;Enterprise Per-User.
+        ///   Looks up a localized string similar to {0} &amp;Enterprise Per-User.
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY {
             get {
@@ -21500,7 +21500,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] Per-&amp;Socket ({0} required).
+        ///   Looks up a localized string similar to {1} Per-&amp;Socket ({0} required).
         /// </summary>
         public static string LICENSE_EDITION_PERSOCKET_LEGACY {
             get {
@@ -21518,7 +21518,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] &amp;Standard Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {1} &amp;Standard Per-Socket ({0} required).
         /// </summary>
         public static string LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY {
             get {
@@ -21536,7 +21536,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product] for &amp;XenDesktop.
+        ///   Looks up a localized string similar to {0} for &amp;XenDesktop.
         /// </summary>
         public static string LICENSE_EDITION_XENDESKTOP_LEGACY {
             get {
@@ -21770,7 +21770,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers must be selected one at a time when licensing servers which have a version lower than [BRANDING_VERSION_5_6]..
+        ///   Looks up a localized string similar to When licensing servers earlier than {0}, you must select one server at a time..
         /// </summary>
         public static string LICENSE_NO_MULTISELECT_LICENSE {
             get {
@@ -27830,9 +27830,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] [BRANDING_VERSION_7_0] or above, VMs must be moved from local storage first..
+        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] {0} or above, VMs must be moved from local storage first..
         /// </summary>
         public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
             get {
@@ -27852,7 +27852,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
         ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
         /// </summary>
@@ -29087,7 +29087,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot install updates on this host because the master is running a version higher than [BRANDING_VERSION_7_0].
+        ///   Looks up a localized string similar to Cannot install updates on this host because the master is running a version higher than {0}.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0 {
             get {
@@ -30103,20 +30103,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
         /// </summary>
-        public static string POOL_HAS_PV_GUEST_UPDATE_WARNING {
+        public static string POOL_HAS_PV_GUEST_WARNING {
             get {
-                return ResourceManager.GetString("POOL_HAS_PV_GUEST_UPDATE_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
-        /// </summary>
-        public static string POOL_HAS_PV_GUEST_UPGRADE_WARNING {
-            get {
-                return ResourceManager.GetString("POOL_HAS_PV_GUEST_UPGRADE_WARNING", resourceCulture);
+                return ResourceManager.GetString("POOL_HAS_PV_GUEST_WARNING", resourceCulture);
             }
         }
         
@@ -32949,7 +32940,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_7_0] onwards..
+        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] {0} onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -33517,7 +33508,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] [BRANDING_VERSION_7_0]. Please use an earlier version of [XenCenter] to manage this pool..
+        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] {0}. Please use an earlier version of [XenCenter] to manage this pool..
         /// </summary>
         public static string SLAVE_TOO_OLD {
             get {
@@ -41703,16 +41694,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string XENSERVER_6_2 {
-            get {
-                return ResourceManager.GetString("XENSERVER_6_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_6_5].
+        ///   Looks up a localized string similar to [XenServer] {0}.
         /// </summary>
         public static string XENSERVER_6_5 {
             get {
@@ -41721,20 +41703,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] [BRANDING_VERSION_8_1].
+        ///   Looks up a localized string similar to [XenServer] {0}.
         /// </summary>
         public static string XENSERVER_8_1 {
             get {
                 return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Legacy XenServer product].
-        /// </summary>
-        public static string XENSERVER_LEGACY {
-            get {
-                return ResourceManager.GetString("XENSERVER_LEGACY", resourceCulture);
             }
         }
         

@@ -3474,7 +3474,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>[XenCenter] is incompatible with this version of the Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>The version of the Conversion Manager virtual appliance you are using is earlier than [BRANDING_VERSION_7_0]. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version.</value>
+    <value>The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version.</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>Virtual Machines</value>
@@ -6660,7 +6660,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Local and Remote ({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>If you are upgrading to [XenServer] [BRANDING_VERSION_8_0] and above, the Control Domain memory on {0} will be increased. 
+    <value>If you are upgrading to [XenServer] {1} and above, the Control Domain memory on {0} will be increased. 
 
 This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
   </data>
@@ -7465,31 +7465,31 @@ Size: {3}</value>
     <value>[XenServer product] P&amp;remium Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] E&amp;nterprise Per-Socket ({0} required)</value>
+    <value>{1} E&amp;nterprise Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
     <value>[XenServer product] Pr&amp;emium Per-User</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] &amp;Enterprise Per-User</value>
+    <value>{0} &amp;Enterprise Per-User</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] Per-&amp;Socket ({0} required)</value>
+    <value>{1} Per-&amp;Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
     <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+    <value>{1} &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
     <value>[XenServer product] for [Citrix] Virtual &amp;Desktops</value>
   </data>
   <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product] for &amp;XenDesktop</value>
+    <value>{0} for &amp;XenDesktop</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>The licensing action for {0} failed.</value>
@@ -7571,7 +7571,7 @@ Size: {3}</value>
     <value>Servers must be selected one at a time when activating Express [XenServer].</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>Servers must be selected one at a time when licensing servers which have a version lower than [BRANDING_VERSION_5_6].</value>
+    <value>When licensing servers earlier than {0}, you must select one server at a time.</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
@@ -9659,9 +9659,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>VMs on local disk will prevent disk repartitioning.
 
-A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
 
-However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] [BRANDING_VERSION_7_0] or above, VMs must be moved from local storage first.</value>
+However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] {0} or above, VMs must be moved from local storage first.</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: VMs on local disk will prevent disk repartitioning.</value>
@@ -9669,7 +9669,7 @@ However, there are VMs on local storage, so the current partitioning scheme will
   <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
     <value>The disk size of the local storage prevents repartitioning.
 
-A new disk partitioning scheme is available in [XenServer] [BRANDING_VERSION_7_0] and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
 
 However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained.</value>
   </data>
@@ -10039,7 +10039,7 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Cannot install supplemental packs on this [XenServer] version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0" xml:space="preserve">
-    <value>Cannot install updates on this host because the master is running a version higher than [BRANDING_VERSION_7_0]</value>
+    <value>Cannot install updates on this host because the master is running a version higher than {0}</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
@@ -10478,11 +10478,8 @@ Please reconnect the host and try again</value>
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This pool has no shared storage</value>
   </data>
-  <data name="POOL_HAS_PV_GUEST_UPDATE_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click "Learn more" to see the list of supported guest operating systems. </value>
-  </data>
-  <data name="POOL_HAS_PV_GUEST_UPGRADE_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] [BRANDING_VERSION_8_1]. Click "Learn more" to see the list of supported guest operating systems. </value>
+  <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
+    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -11447,7 +11444,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The current time on the pool master is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_7_0] onwards.</value>
+    <value>This version of [XenCenter] supports [XenServer] {0} onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of [XenCenter] to manage this server.</value>
@@ -11625,7 +11622,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
 Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SLAVE_TOO_OLD" xml:space="preserve">
-    <value>This pool contains servers earlier than [XenServer] [BRANDING_VERSION_7_0]. Please use an earlier version of [XenCenter] to manage this pool.</value>
+    <value>This pool contains servers earlier than [XenServer] {0}. Please use an earlier version of [XenCenter] to manage this pool.</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>smaller than</value>
@@ -14374,17 +14371,11 @@ Are you sure you want to enable automated power management for this Host?</value
   <data name="XENSERVER" xml:space="preserve">
     <value>[XenServer]</value>
   </data>
-  <data name="XENSERVER_6_2" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_6_2]</value>
-  </data>
   <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_6_5]</value>
+    <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] [BRANDING_VERSION_8_1]</value>
-  </data>
-  <data name="XENSERVER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product]</value>
+    <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] Templates</value>

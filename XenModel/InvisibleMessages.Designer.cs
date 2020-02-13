@@ -284,14 +284,5 @@ namespace XenAdmin {
                 return ResourceManager.GetString("XENDESKTOP_URL", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://updates.xensource.com/XenServer/updates.xml.
-        /// </summary>
-        public static string XENSERVER_UPDATE_URL {
-            get {
-                return ResourceManager.GetString("XENSERVER_UPDATE_URL", resourceCulture);
-            }
-        }
     }
 }

@@ -30,8 +30,17 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-set -ex
+# Script parameters:
+# 1 Global build number
+# 2 Signing node name
+# 3 Sign in SBE
+# 4 Self-signing certificate sha1 thumbprint
+# 5 Self-signing certificate sha256 thumbprint
+# 6 Timestamp server
 
+set -exu
+
+#TODO: remove this
 SET_ENV_FILE="/cygdrive/c/env.sh"
 if [ -f ${SET_ENV_FILE} ]; then
    . ${SET_ENV_FILE}
@@ -44,95 +53,158 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
-ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 REPO="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRATCH_DIR=${ROOT}/scratch
-OUTPUT_DIR=${ROOT}/output
-
-WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
-WIX_INSTALLER_DEFAULT_VERSION=1.0.0
-PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z])
-
-source ${REPO}/Branding/branding.sh
-source ${REPO}/mk/re-branding.sh
+SCRATCH_DIR=${REPO}/_scratch
+OUTPUT_DIR=${REPO}/_output
 
 #build
-MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
+MSBUILD=MSBuild.exe
+SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=15.0"
 
-${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
+mkdir_clean ${SCRATCH_DIR}
+mkdir_clean ${OUTPUT_DIR}
+
+source ${REPO}/Branding/branding.sh
+source ${REPO}/mk/re-branding.sh $1
+
+#packages sources
 cd ${REPO}
-$MSBUILD XenAdmin.sln
-$MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
+gitCommit=`git rev-parse HEAD`
+git archive --format=zip -o "_output/${BRANDING_BRAND_CONSOLE}-sources.zip" ${gitCommit}
+
+${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
+cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
+
+#sign files only if all parameters are set and non-empty
+SIGN_BAT="${REPO}/mk/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
+SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
+
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
+  echo "Some signing parameters are not set; skip signing binaries"
+else
+  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+  do
+    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+  done
+
+  cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.exe "${SIGN_DESCR}"
+  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${SIGN_DESCR}"
+  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${SIGN_DESCR}"
+
+  for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
+  do
+    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+  done
+
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} CookComputing.XmlRpcV2.dll "XML-RPC.NET"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Newtonsoft.Json.CH.dll "JSON.NET"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} log4net.dll "Log4Net"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ICSharpCode.SharpZipLib.dll "SharpZipLib"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} DiscUtils.dll "DiscUtils"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
+
+  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${SIGN_DESCR}"
+fi
+
+#copy files (signed accordingly) in XenServerHealthService folder
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+  ${REPO}/XenServerHealthCheck/bin/Release
 
 #prepare wix
 
-WIX=${REPO}/WixInstaller
-WIX_BIN=${WIX}/bin
+WIX_BIN=${SCRATCH_DIR}/wixbin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
+WIX=${SCRATCH_DIR}/WixInstaller
 
-CANDLE="${WIX_BIN}/candle.exe -nologo"
-LIT="${WIX_BIN}/lit.exe -nologo"
-LIGHT="${WIX_BIN}/light.exe -nologo"
+CANDLE=${WIX_BIN}/candle.exe
+LIT=${WIX_BIN}/lit.exe
+LIGHT=${WIX_BIN}/light.exe
 
-mkdir_clean ${WIX_SRC}
-${UNZIP} ${SCRATCH_DIR}/wix310-debug.zip -d ${SCRATCH_DIR}/wixsrc
-cp ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeDlg.wxs ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeStdDlg.wxs
-cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${REPO}/mk/patches/wix_src_patch
-cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
-
-mkdir_clean ${WIX_BIN}
-${UNZIP} ${SCRATCH_DIR}/wix310-binaries.zip -d ${WIX_BIN}
-touch ${REPO}/WixInstaller/PrintEula.dll
+mkdir_clean ${WIX_BIN} && ${UNZIP} ${REPO}/packages/wix311-binaries.zip -d ${WIX_BIN}
+mkdir_clean ${WIX_SRC} && ${UNZIP} ${REPO}/packages/wix311-debug.zip -d ${WIX_SRC}
+cp -r ${REPO}/WixInstaller ${SCRATCH_DIR}/
+cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${WIX}/
+cd ${WIX}/wixlib && cp CustomizeDlg.wxs CustomizeStdDlg.wxs
+cd ${WIX}/wixlib && patch -p1 --binary < ${WIX}/wix_src.patch
+touch ${WIX}/PrintEula.dll
 
 #compile_wix
-
 chmod -R u+rx ${WIX_BIN}
-cd ${WIX}
-mkdir -p obj
+cd ${WIX} && mkdir -p obj lib
+RepoRoot=$(cygpath -w ${REPO}) ${CANDLE} -out obj/ @candleList.txt
+${LIT} -out lib/WixUI_InstallDir.wixlib @litList.txt
 
-${CANDLE} -out obj/ wixlib/WixUI_InstallDir.wxs wixlib/WixUI_FeatureTree.wxs wixlib/BrowseDlg.wxs wixlib/CancelDlg.wxs wixlib/Common.wxs wixlib/CustomizeDlg.wxs wixlib/CustomizeStdDlg.wxs wixlib/DiskCostDlg.wxs wixlib/ErrorDlg.wxs wixlib/ErrorProgressText.wxs wixlib/ExitDialog.wxs wixlib/FatalError.wxs wixlib/FilesInUse.wxs wixlib/InstallDirDlg.wxs wixlib/InvalidDirDlg.wxs wixlib/LicenseAgreementDlg.wxs wixlib/MaintenanceTypeDlg.wxs wixlib/MaintenanceWelcomeDlg.wxs wixlib/MsiRMFilesInUse.wxs wixlib/OutOfDiskDlg.wxs wixlib/OutOfRbDiskDlg.wxs wixlib/PrepareDlg.wxs wixlib/ProgressDlg.wxs wixlib/ResumeDlg.wxs wixlib/SetupTypeDlg.wxs wixlib/UserExit.wxs wixlib/VerifyReadyDlg.wxs wixlib/WaitForCostingDlg.wxs wixlib/WelcomeDlg.wxs
-
-mkdir -p lib
-
-${LIT} -out lib/WixUI_InstallDir.wixlib obj/WixUI_InstallDir.wixobj obj/WixUI_FeatureTree.wixobj obj/BrowseDlg.wixobj obj/CancelDlg.wixobj obj/Common.wixobj obj/CustomizeDlg.wixobj obj/CustomizeStdDlg.wixobj obj/DiskCostDlg.wixobj obj/ErrorDlg.wixobj obj/ErrorProgressText.wixobj obj/ExitDialog.wixobj obj/FatalError.wixobj obj/FilesInUse.wixobj obj/InstallDirDlg.wixobj obj/InvalidDirDlg.wixobj obj/LicenseAgreementDlg.wixobj obj/MaintenanceTypeDlg.wixobj obj/MaintenanceWelcomeDlg.wixobj obj/MsiRMFilesInUse.wixobj obj/OutOfDiskDlg.wixobj obj/OutOfRbDiskDlg.wixobj obj/PrepareDlg.wixobj obj/ProgressDlg.wixobj obj/ResumeDlg.wixobj obj/SetupTypeDlg.wixobj obj/UserExit.wixobj obj/VerifyReadyDlg.wixobj obj/WaitForCostingDlg.wixobj obj/WelcomeDlg.wixobj
-
-#create mui wxs file
-cd ${WIX} && patch --binary --output XenCenter.l10n.wxs XenCenter.wxs XenCenter.l10n.diff
-
-#version installers
-version_installer()
-{
-  sed -e "s/${WIX_INSTALLER_DEFAULT_GUID}/${PRODUCT_GUID}/g" \
-      -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
+locale_id() {
+  case "$1" in
+    "ja-jp") echo 1041 ;;
+    "zh-cn") echo 2052 ;;
+    "zh-tw") echo 1028 ;;
+    *)       echo 1033 ;; #en-us
+  esac
 }
 
-version_installer ${WIX}/XenCenter.wxs
-version_installer ${WIX}/XenCenter.l10n.wxs
+if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ] ; then
+  cd ${WIX} && mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
+fi
 
-echo "INFO: Collecting unsigned files..."
-mkdir_clean ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Unsigned
-cp -R ${REPO}/* ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Unsigned
-cd ${OUTPUT_DIR} && zip -q -r -m ${BRANDING_BRAND_CONSOLE}Unsigned.zip ${BRANDING_BRAND_CONSOLE}Unsigned
-echo "Unsigned artifacts archived"
+#for each locale create an msi containing all resources
 
-#build and sign the installers
-. ${REPO}/mk/build-installers.sh
+for locale in en-us ja-jp zh-cn
+do
+  if [ "${locale}" = "en-us" ] ; then
+    name=${BRANDING_BRAND_CONSOLE}
+  else
+    name=${BRANDING_BRAND_CONSOLE}.${locale}
+  fi
+
+  cd ${WIX}
+  mkdir -p obj${name} out${name}
+
+  WixLangId=$(locale_id ${locale} | tr -d [:space:]) RepoRoot=$(cygpath -w ${REPO}) \
+    ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE}.wxs branding.wxs
+
+  ${LIGHT} -ext WiXNetFxExtension -out out${name}/${name}.msi \
+          -loc wixlib/wixui_${locale}.wxl -loc ${locale}.wxl \
+          obj${name}/${BRANDING_BRAND_CONSOLE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
+
+  cp ${WIX}/out${name}/${name}.msi ${WIX}
+done
+
+cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+
+#create localised mst files and then embed them into the combined msi
+
+for locale in ja-jp zh-cn zh-tw ; do
+  cd ${WIX} && \
+    wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.${locale}.msi ${locale}.mst && \
+    wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi ${locale}.mst $(locale_id ${locale} | tr -d [:space:])
+done
+
+#copy and sign the combined installer
+
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
+  echo "Some signing parameters are not set; skip signing installer"
+else
+  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
+fi
+
+cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 
 #build the tests
 echo "INFO: Build the tests..."
-cd ${REPO}/XenAdminTests && $MSBUILD
+cd ${REPO}/XenAdminTests && "${MSBUILD}" ${SWITCHES}
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
-cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
-cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar *
-cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
+cd ${REPO}/XenAdminTests/bin/ && tar -czf ${OUTPUT_DIR}/XenAdminTests.tgz ./Release
+cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}TestResources.tar *
 
 #include cfu validator binary in output directory
 cd ${REPO}/CFUValidator/bin/Release && zip CFUValidator.zip ./{*.dll,CFUValidator.exe,XenCenterMain.exe}
 cp ${REPO}/CFUValidator/bin/Release/CFUValidator.zip ${OUTPUT_DIR}/CFUValidator.zip
 
 #now package the pdbs
+cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
@@ -140,9 +212,6 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
-
-echo "INFO:	Build phase succeeded at "
-date
+cd ${OUTPUT_DIR} && tar cjf ${BRANDING_BRAND_CONSOLE}.Symbols.tar.bz2 --remove-files *.pdb
 
 set +u

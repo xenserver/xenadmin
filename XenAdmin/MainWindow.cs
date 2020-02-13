@@ -858,8 +858,8 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
-                Branding.XENCENTER_VERSION, Program.Version.Revision);
+                master.BuildNumberRaw(), Messages.XENCENTER, BrandManager.PRODUCT_VERSION_TEXT,
+                BrandManager.XENCENTER_VERSION, Program.Version.Revision);
 
             // Check the PRODUCT_BRAND
             if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
@@ -892,10 +892,10 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                    new ActionBase(title, "", false, true, Messages.SLAVE_TOO_OLD);
+                    new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
 
                     using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error, Messages.SLAVE_TOO_OLD, Messages.CONNECT_TO_SERVER),
+                        new ThreeButtonDialog.Details(SystemIcons.Error, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70), Messages.CONNECT_TO_SERVER),
                         ThreeButtonDialog.ButtonOK))
                     {
                         dlg.ShowDialog(this);
@@ -991,7 +991,8 @@ namespace XenAdmin
         private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
-            return brand == Branding.PRODUCT_BRAND || brand == Branding.LEGACY_PRODUCT_BRAND ||  Branding.PRODUCT_BRAND == "[XenServer product]";
+            return brand == BrandManager.PRODUCT_BRAND || brand == BrandManager.LegacyProduct ||
+                   BrandManager.PRODUCT_BRAND == "[XenServer product]";
         }
 
         /// <summary>
