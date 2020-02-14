@@ -30,11 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
-using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
@@ -48,7 +45,6 @@ namespace XenAdmin.SettingsPanels
         public SecurityEditPage()
         {
             InitializeComponent();
-            Text = Messages.SECURITY;
         }
 
         private void ShowHideWarning()
@@ -61,6 +57,8 @@ namespace XenAdmin.SettingsPanels
             ShowHideWarning();
         }
 
+        public override string Text => Messages.SECURITY;
+
         #region IEditPage Members
 
         public AsyncAction SaveSettings()
@@ -70,10 +68,14 @@ namespace XenAdmin.SettingsPanels
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            pool = Helpers.GetPoolOfOne(clone.Connection);  // clone could be a pool or a host
-
+            // clone could be a pool or a host
             if (clone is Host)
-                labelRubric.Text = Messages.SECURITYEDITPAGE_RUBRIC_HOST;  // the pool version is built into the page: this overrides it in the case of a host
+            {
+                labelRubricPool.Text = Messages.SECURITYEDITPAGE_RUBRIC_HOST;
+                labelDisruption.Text = Messages.SECURITYEDITPAGE_WARNING_HOST;
+            }
+
+            pool = Helpers.GetPoolOfOne(clone.Connection);
 
             if (pool.ssl_legacy())
                 radioButtonSSL.Checked = true;
@@ -82,10 +84,7 @@ namespace XenAdmin.SettingsPanels
             ShowHideWarning();
         }
 
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
+        public bool ValidToSave => true;
 
         public void ShowLocalValidationMessages()
         { }
@@ -93,24 +92,16 @@ namespace XenAdmin.SettingsPanels
         public void Cleanup()
         { }
 
-        public bool HasChanged
-        {
-            get { return radioButtonSSL.Checked != pool.ssl_legacy(); }
-        }
+        public bool HasChanged => radioButtonSSL.Checked != pool.ssl_legacy();
 
         #endregion
 
         #region IVerticalTab Members
 
-        public string SubText
-        {
-            get { return radioButtonTLS.Checked ? Messages.SECURITYEDITPAGE_SUBTEXT_TLS : Messages.SECURITYEDITPAGE_SUBTEXT_SSL; }
-        }
+        public string SubText =>
+            radioButtonTLS.Checked ? Messages.SECURITYEDITPAGE_SUBTEXT_TLS : Messages.SECURITYEDITPAGE_SUBTEXT_SSL;
 
-        public Image Image
-        {
-            get { return Properties.Resources.padlock; }
-        }
+        public Image Image => Properties.Resources.padlock;
 
         #endregion
     }
