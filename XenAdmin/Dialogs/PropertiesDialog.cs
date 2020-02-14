@@ -203,7 +203,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch))
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch) && !Helpers.StockholmOrGreater(connection))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
