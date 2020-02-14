@@ -32724,6 +32724,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing this setting will cause you to lose access to the server temporarily..
+        /// </summary>
+        public static string SECURITYEDITPAGE_WARNING_HOST {
+            get {
+                return ResourceManager.GetString("SECURITYEDITPAGE_WARNING_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a filter....
         /// </summary>
         public static string SELECT_A_FILTER {

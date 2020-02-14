@@ -11350,6 +11350,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>TLS 1.2 only</value>
   </data>
+  <data name="SECURITYEDITPAGE_WARNING_HOST" xml:space="preserve">
+    <value>Changing this setting will cause you to lose access to the server temporarily.</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>Security Checks</value>
   </data>
