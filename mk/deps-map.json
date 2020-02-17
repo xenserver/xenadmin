@@ -2,17 +2,12 @@
   "files": [
     {
       "pattern": "@REMOTE_DOTNET@/dotnet-packages-manifest.txt",
-      "target": "scratch/",
+      "target": "xenadmin.git/packages/",
       "flat": "true"
     },
     {
       "pattern": "@REMOTE_DOTNET@/dotnet46/putty.exe",
       "target": "xenadmin.git/packages/",
-      "flat": "true"
-    },
-    {
-      "pattern": "@REMOTE_DOTNET@/dotnet46/NDP46-KB3045560-Web.exe",
-      "target": "xenadmin.git/dotNetInstaller/",
       "flat": "true"
     },
     {
@@ -47,17 +42,22 @@
     },
     {
       "pattern": "@REMOTE_DOTNET@/dotnet46/*.pdb",
-      "target": "output/",
+      "target": "xenadmin.git/packages/",
       "flat": "true"
     },
     {
       "pattern": "xs-local-contrib/citrix/xencenter/XenCenterOVF.zip",
-      "target": "scratch/",
+      "target": "xenadmin.git/packages/",
       "flat": "true"
     },
     {
-      "pattern": "ctx-local-contrib/os/wix/3.10/wix310-*.zip",
-      "target": "scratch/",
+      "pattern": "ctx-local-contrib/os/wix/3.10/wix310-binaries.zip",
+      "target": "xenadmin.git/packages/",
+      "flat": "true"
+    },
+    {
+      "pattern": "ctx-local-contrib/os/wix/3.10/wix310-debug.zip",
+      "target": "xenadmin.git/packages/",
       "flat": "true"
     },
     {

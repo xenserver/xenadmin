@@ -30,38 +30,52 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-set -eu
+# Script parameters:
+# 1 Global build number
+# 2 Signing node name
+# 3 Sign in SBE
+# 4 Self-signing certificate sha1 thumbprint
+# 5 Self-signing certificate sha256 thumbprint
+# 6 Timestamp server
 
-#sign applications
-for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
-do
-  cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ${file}
-done
+set -ex
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.exe
+#sign files only if all parameters are set and non-empty
+SIGN_BAT="${REPO}/mk/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
+SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
-cd ${REPO}/xe/bin/Release         && ${REPO}/mk/sign.bat xe.exe
-cd ${REPO}/xva_verify/bin/Release && ${REPO}/mk/sign.bat xva_verify.exe
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
+  echo "Some signing parameters are not set; skip signing binaries"
+else
+  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+  do
+    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} ${SIGN_DESCR}
+  done
 
-for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
-do
-  cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/mk/sign.bat ${file}
-done
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.exe ${SIGN_DESCR}
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Newtonsoft.Json.dll "JSON.NET"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll "Log4Net"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY"
+  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe ${SIGN_DESCR}
+  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe ${SIGN_DESCR}
+
+  for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
+  do
+    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} ${SIGN_DESCR}
+  done
+
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} CookComputing.XmlRpcV2.dll "XML-RPC.NET"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Newtonsoft.Json.dll "JSON.NET"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} log4net.dll "Log4Net"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ICSharpCode.SharpZipLib.dll "SharpZipLib"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} DiscUtils.dll "DiscUtils"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
+  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
+
+  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe ${SIGN_DESCR}
+fi
 
 #copy signed files in XenServerHealthService folder
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
    ${REPO}/XenServerHealthCheck/bin/Release
-
-#sign XenServerHealthService
-cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/mk/sign.bat XenServerHealthCheck.exe
 
 #create installers
 compile_installer()
@@ -81,7 +95,7 @@ compile_installer()
 
   cd ${WIX}
   mkdir -p obj${name}
-  Branding=${BRANDING_BRAND_CONSOLE} WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
+  RepoRoot=$(cygpath -w ${REPO}) Branding=${BRANDING_BRAND_CONSOLE} WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
 
   mkdir -p out${name}
 
@@ -90,7 +104,11 @@ ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wi
 
 sign_msi()
 {
-  cd ${WIX}/out$1 && chmod a+rw $1.msi && ${REPO}/mk/sign.bat $1.msi
+  if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
+    echo "Some signing parameters are not set; skip signing binaries"
+  else
+    cd ${WIX}/out$1 && chmod a+rw $1.msi && ${SIGN_BAT} $1.msi ${SIGN_DESCR}
+  fi
 }
 
 #create just english msi
@@ -123,11 +141,14 @@ cd ${WIX} && wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BR
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi ja-jp.mst 1041
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-cn.mst 2052
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1028
+
 #sign again the combined msi because it seems the embedding breaks the signature
-cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
+  echo "Some signing parameters are not set; skip signing binaries"
+else
+  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.l10n.msi ${SIGN_DESCR}
+fi
 
 #copy the msi installers
 cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
 cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}
-
-set +u

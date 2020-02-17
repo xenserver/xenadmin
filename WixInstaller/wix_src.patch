@@ -53,8 +53,8 @@ diff -ru wixlib/Common.wxs wixlib/Common.wxs
 -        <Binary Id="WixUI_Ico_Info" SourceFile="!(wix.WixUIInfoIco=$(var.infoIco))" />
 -        <Binary Id="WixUI_Bmp_New" SourceFile="!(wix.WixUINewIco=$(var.newIco))" />
 -        <Binary Id="WixUI_Bmp_Up" SourceFile="!(wix.WixUIUpIco=$(var.upIco))" />
-+        <Binary Id="WixUI_Bmp_Banner" SourceFile="..\Branding\Images\bannrbmp.bmp" />
-+        <Binary Id="WixUI_Bmp_Dialog" SourceFile="..\Branding\Images\dlgbmp.bmp" />
++        <Binary Id="WixUI_Bmp_Banner" SourceFile="$(env.RepoRoot)\Branding\Images\bannrbmp.bmp" />
++        <Binary Id="WixUI_Bmp_Dialog" SourceFile="$(env.RepoRoot)\Branding\Images\dlgbmp.bmp" />
 +        <Binary Id="WixUI_Ico_Exclam" SourceFile="Bitmaps\exclamic.ico" />
 +        <Binary Id="WixUI_Ico_Info" SourceFile="Bitmaps\info.ico" />
 +        <Binary Id="WixUI_Bmp_New" SourceFile="Bitmaps\New.ico" />

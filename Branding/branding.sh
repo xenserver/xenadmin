@@ -40,7 +40,6 @@ PRODUCT_MICRO_VERSION_OVERRIDE=3
 
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-OUTPUT_DIR=${ROOT}/output
 
 TOPLEVEL_VERSIONS=${ROOT}/branding.git/xenserver/toplevel-versions
 TOPLEVEL_BRANDING=${ROOT}/branding.git/xenserver/toplevel-branding
