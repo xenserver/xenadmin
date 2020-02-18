@@ -6431,6 +6431,60 @@
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>修补程序检查</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} 将于 {1} 达到生命周期已结束状态。在此日期之后，{2} 将不再有资格获得支持，并且我们不会再为此版本发布更多修补程序。请升级到受支持的最新版本。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE" xml:space="preserve">
+    <value>{0} 将于 {1} 达到生命周期已结束状态。在此日期之后将不再发布更多修补程序。请升级到最新的 CR。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU" xml:space="preserve">
+    <value>新的累积更新可用于 {0}。在 {1} 之后，将不会有更多的修补程序面向 {2} 发布。请更新到最新的累积更新。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL" xml:space="preserve">
+    <value>{0} 已于 {1} 达到生命周期已结束状态，并且不再有资格获得支持。在此日期之后将不再发布更多修补程序。请升级到受支持的最新版本。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE" xml:space="preserve">
+    <value>{0} 已于 {1} 达到生命周期已结束状态。在此日期之后将不再发布更多修补程序。请升级到最新的 CR。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE" xml:space="preserve">
+    <value>{0} 已于 {1} 达到速成版客户的生命周期已结束状态。您不再有资格获得此日期之后发布的修补程序。请升级到最新的 CR。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} 将于 {1} 达到生命周期已结束状态</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_CU" xml:space="preserve">
+    <value>新的累积更新可用</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL" xml:space="preserve">
+    <value>{0} 已达到生命周期已结束状态</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE" xml:space="preserve">
+    <value>{0} 已达到速成版客户的生命周期已结束状态</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU" xml:space="preserve">
+    <value>在 {0} 之后不再发布更多修补程序</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE" xml:space="preserve">
+    <value>新的累积更新可用</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
+    <value>{0} 生命周期已结束。不再有资格获得支持</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE" xml:space="preserve">
+    <value>{0} 生命周期已结束</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE" xml:space="preserve">
+    <value>生命周期已结束</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE" xml:space="preserve">
+    <value>生命周期已结束。不再有资格获得支持</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
+    <value>没有资格获得 {0} 之后发布的修补程序</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
+    <value>速成版客户的生命周期已结束</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>每小时；在每小时的第 {0} 分钟</value>
   </data>

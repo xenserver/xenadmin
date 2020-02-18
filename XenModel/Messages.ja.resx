@@ -6437,6 +6437,60 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix チェック</value>
   </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となります。この日付以降、{2} はサポート対象外となり、このバージョン向けの Hotfix はリリースされません。サポートされている最新のバージョンにアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となります。この日付以降、Hotfix はリリースされません。最新の CR にアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU" xml:space="preserve">
+    <value>{0} の新しい累積更新プログラムが利用可能です。{1} 以降、{2} の Hotfix はリリースされません。最新の累積更新プログラムに更新してください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となり、サポート対象外となりました。この日付以降、Hotfix はリリースされません。サポートされている最新のバージョンにアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となりました。この日付以降、Hotfix はリリースされません。最新の CR にアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE" xml:space="preserve">
+    <value>Express ライセンスの顧客向け {0} は、{1} に製品終了 (EOL) となりました。この日付以降にリリースされた Hotfix の対象外になります。最新の CR にアップグレードしてください。</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL" xml:space="preserve">
+    <value>{0} は {1} に製品終了 (EOL) となります</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_CU" xml:space="preserve">
+    <value>新しい累積更新プログラムが利用可能です</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_EOL" xml:space="preserve">
+    <value>{0} は製品終了 (EOL) となりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_ALERT_TITLE_FREE" xml:space="preserve">
+    <value>Express ライセンスの顧客向け {0} は製品終了 (EOL) になりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU" xml:space="preserve">
+    <value>{0} 以降、Hotfix はリリースされません</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_CU_NO_DATE" xml:space="preserve">
+    <value>新しい累積更新プログラムが利用可能です</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL" xml:space="preserve">
+    <value>製品終了 (EOL): {0}。サポート対象外となりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE" xml:space="preserve">
+    <value>製品終了 (EOL): {0}</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE" xml:space="preserve">
+    <value>製品終了 (EOL)</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE" xml:space="preserve">
+    <value>製品終了 (EOL)。サポート対象外となりました</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE" xml:space="preserve">
+    <value>{0} 以降にリリースされた Hotfix の対象外です</value>
+  </data>
+  <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
+    <value>Express ライセンスの顧客向け製品終了 (EOL)</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>毎時 {0} 分過ぎ</value>
   </data>
