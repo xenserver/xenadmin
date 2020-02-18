@@ -48,9 +48,9 @@ namespace XenOvfTransport
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-		public Action<XenOvfTranportEventArgs> UpdateHandler { get; set; }
+		public Action<XenOvfTransportEventArgs> UpdateHandler { get; set; }
 		
-		private void OnUpdate(XenOvfTranportEventArgs e)
+		private void OnUpdate(XenOvfTransportEventArgs e)
 		{
 			if (UpdateHandler != null)
 				UpdateHandler.Invoke(e);
@@ -293,7 +293,7 @@ namespace XenOvfTransport
             long bytessent = offset;
             int i = 0;
             bool skipblock = false;
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", "Disk Copy", (ulong)offset, (ulong)filesize));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, "Disk Copy", (ulong)offset, (ulong)filesize));
             while (true)
             {
                 // Form: chunked
@@ -330,7 +330,7 @@ namespace XenOvfTransport
                             fullblock.AddRange(endblock);
                             http.Write(fullblock.ToArray(), 0, fullblock.Count);
                             bytessent += n;
-                            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", "Disk Copy", (ulong)bytessent, (ulong)filesize));
+                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, "Disk Copy", (ulong)bytessent, (ulong)filesize));
                             Thread.Sleep(100);
                         }
                         else
@@ -364,7 +364,7 @@ namespace XenOvfTransport
 
             http.Write(finalblock, 0, finalblock.Length);
             http.Flush();
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", "Disk Copy", (ulong)bytessent, (ulong)filesize));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, "Disk Copy", (ulong)bytessent, (ulong)filesize));
 
             string str2 = string.Format("=== {0} === Total {1} : Full {2}\r",
                                        i++,
@@ -378,7 +378,7 @@ namespace XenOvfTransport
             byte[] block = new byte[MB];
             ulong p = 0;
             int n = 0;
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", "Disk Copy", 0, (ulong)filesize));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, "Disk Copy", 0, (ulong)filesize));
             while (true)
             {
 
@@ -386,7 +386,7 @@ namespace XenOvfTransport
                 {                    
                     n = filestream.Read(block, 0, block.Length);
                     if (n <= 0) break;
-                    OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", "Disk Copy", p, (ulong)filesize));
+                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, "Disk Copy", p, (ulong)filesize));
                     if (Cancel)
                     {
                         log.Warn("OVF.Tools.Http.SendData IMPORT CANCELED: resulting vm may be bad.");
@@ -408,7 +408,7 @@ namespace XenOvfTransport
                 }
             }
             http.Flush();
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", "Disk Copy", p, (ulong)filesize));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, "Disk Copy", p, (ulong)filesize));
         }
 
         internal string ReadLine(Stream stream)

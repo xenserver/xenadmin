@@ -63,7 +63,7 @@ namespace XenOvfTransport
 
 		public bool Cancel { get; set; }
 
-		public Action<XenOvfTranportEventArgs> UpdateHandler { get; set; }
+		public Action<XenOvfTransportEventArgs> UpdateHandler { get; set; }
 
         public Disk ScsiDisk
         {
@@ -223,7 +223,7 @@ namespace XenOvfTransport
             _bytestotal = (ulong)source.Length;
 
             string updatemsg = string.Format(Messages.ISCSI_COPY_PROGRESS, filename);
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, 0, _bytestotal));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, 0, _bytestotal));
 
             // Create a hash algorithm to compute the hash from separate blocks during the copy.
             using (var hashAlgorithm = System.Security.Cryptography.HashAlgorithm.Create(_hashAlgorithmName))
@@ -264,7 +264,7 @@ namespace XenOvfTransport
 
                         _bytescopied = (ulong)offset;
 
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", updatemsg, _bytescopied, _bytestotal));
+                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, _bytescopied, _bytestotal));
                     }
                     catch (Exception ex)
                     {
@@ -290,7 +290,7 @@ namespace XenOvfTransport
             }
 
             destination.Flush();
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, _bytescopied, _bytestotal));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, _bytescopied, _bytestotal));
 
             log.InfoFormat("Finished copying {0} bytes to {1} via iSCSI.", source.Length, filename);
         }
@@ -305,7 +305,7 @@ namespace XenOvfTransport
             long limit = (long)_bytescopied;
 
             string updatemsg = string.Format(Messages.ISCSI_VERIFY_PROGRESS, filename);
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, 0, (ulong)limit));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, 0, (ulong)limit));
 
             // Create a hash algorithm to compute the hash from separate blocks in the same way as Copy().
             using (var hashAlgorithm = System.Security.Cryptography.HashAlgorithm.Create(_hashAlgorithmName))
@@ -337,7 +337,7 @@ namespace XenOvfTransport
 
                         offset += bytesRead;
 
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", updatemsg, (ulong)offset, (ulong)limit));
+                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, (ulong)offset, (ulong)limit));
                     }
                     catch (Exception ex)
                     {
@@ -364,7 +364,7 @@ namespace XenOvfTransport
                 }
             }
 
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, (ulong)offset, (ulong)limit));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, (ulong)offset, (ulong)limit));
 
             log.InfoFormat("Finished verifying {0} bytes in {1} after copy via iSCSI.", target.Length, filename);
         }
@@ -378,7 +378,7 @@ namespace XenOvfTransport
             ulong p = 0;
 			
             string updatemsg = string.Format(Messages.ISCSI_WIM_PROGRESS_FORMAT, fileindex, filecount, filename);
-			OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, 0, _bytestotal));
+			OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, 0, _bytestotal));
             
 			while (true)
             {
@@ -405,7 +405,7 @@ namespace XenOvfTransport
                     _bytescopied = p;
                     if (p >= (ulong)source.Length)
                         break;
-                    OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", updatemsg, _bytescopied, _bytestotal));
+                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, _bytescopied, _bytestotal));
                 }
                 catch (Exception ex)
                 {
@@ -422,7 +422,7 @@ namespace XenOvfTransport
                 if (source != null) source.Close();
                 if (destination != null) destination.Close();
             }
-			OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, _bytescopied, _bytestotal));
+			OnUpdate(new XenOvfTransportEventArgs(TransportStep.SendData, updatemsg, _bytescopied, _bytestotal));
             log.Info("iSCSI.Copy done with copy.");
         }
 
@@ -473,11 +473,10 @@ namespace XenOvfTransport
 
         #region PRIVATE
 
-		private void OnUpdate(XenOvfTranportEventArgs e)
-		{
-			if (UpdateHandler != null)
-				UpdateHandler.Invoke(e);
-		}
+		private void OnUpdate(XenOvfTransportEventArgs e)
+        {
+            UpdateHandler?.Invoke(e);
+        }
 
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         private void StartiScsiTarget(XenAPI.Session xenSession, string vdiuuid, bool read_only)
