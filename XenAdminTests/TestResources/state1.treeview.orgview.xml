@@ -2,7 +2,7 @@
 <VirtualTreeView>
   <node text="Objects by Type" imageindex="Objects" tag="XenAdmin.GroupingTag">
       <node text="Pools" imageindex="Pool" tag="XenAdmin.GroupingTag">
-        <node text="Hottub" imageindex="PoolConnected" tag="Hottub" />
+        <node text="Hottub" imageindex="PoolUnlicensed" tag="Hottub" />
       </node>
       <node text="Servers" imageindex="Host" tag="XenAdmin.GroupingTag">
         <node text="inflames" imageindex="HostConnected" tag="inflames" />
