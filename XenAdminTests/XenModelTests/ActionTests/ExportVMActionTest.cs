@@ -36,6 +36,7 @@ using XenAPI;
 namespace XenAdminTests.XenModelTests.ActionTests
 {
     [TestFixture, Category(TestCategories.UICategoryA)]
+    [Ignore]
     public class ExportVMActionTest : ActionTest<ExportVmAction>
     {
         protected override ExportVmAction NewAction()

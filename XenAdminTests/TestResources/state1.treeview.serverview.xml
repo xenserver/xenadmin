@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VirtualTreeView>
   <node text="[XenCenter]" imageindex="Home">
-    <node text="Hottub" imageindex="PoolConnected" tag="Hottub">
-      <node text="inflames" imageindex="HostConnected" tag="inflames">
+    <node text="Hottub" imageindex="PoolUnlicensed" tag="Hottub">
+      <node text="inflames" imageindex="ServerUnlicensed" tag="inflames">
         <node text="Windows Server 2003 x64 (1)" imageindex="VmRunning" tag="Windows Server 2003 x64 (1)" />
         <node text="Windows XP SP2 (1)" imageindex="VmRunning" tag="Windows XP SP2 (1)" />
         <node text="DVD drives" imageindex="Storage" tag="DVD drives on inflames" />
         <node text="Local storage" imageindex="Storage" tag="Local storage on inflames" />
         <node text="Removable storage" imageindex="Storage" tag="Removable storage on inflames" />
       </node>
-      <node text="incubus" imageindex="HostConnected" tag="incubus">
+      <node text="incubus" imageindex="ServerUnlicensed" tag="incubus">
         <node text="Iscsi Box" imageindex="VmRunning" tag="Iscsi Box" />
         <node text="DVD drives" imageindex="Storage" tag="DVD drives on incubus" />
         <node text="Local storage" imageindex="Storage" tag="Local storage on incubus" />
