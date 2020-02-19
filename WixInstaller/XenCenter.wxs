@@ -47,50 +47,50 @@
                 <Directory Id="Citrix" Name="[Citrix]">
                     <Directory Id="INSTALLDIR" ShortName="XenCente" Name="[XenCenter]">
                         <Component Id="ReportViewer" Guid="[BRANDING_REPORT_VIEWER_GUID]">
-                            <File Id="MicRepVwrCmnDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
-                            <File Id="MicRepVwrPrcObjDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
-                            <File Id="MicRepVwrWFDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.dll" />
-                            <File Id="HostHealthHistoryRDLC" Source="..\XenAdmin\ReportViewer\host_health_history.rdlc" />
-                            <File Id="PoolHealthRDLC" Source="..\XenAdmin\ReportViewer\pool_health.rdlc" />
-                            <File Id="opt_perf_histRDLC" Source="..\XenAdmin\ReportViewer\optimization_performance_history.rdlc" />
-                            <File Id="vmMovementHistoryRDLC" Source="..\XenAdmin\ReportViewer\vm_movement_history.rdlc" />
-                            <File Id="vmPerformanceHistoryRDLC" Source="..\XenAdmin\ReportViewer\vm_performance_history.rdlc" />
-                            <File Id="PoolHealthHistoryRDLC" Source="..\XenAdmin\ReportViewer\pool_health_history.rdlc" />
-                            <File Id="ReportConfigXML" Source="..\XenAdmin\ReportViewer\reports.xml" />
-                            <File Id="ResourceReportRDLC" Source="..\XenAdmin\ReportViewer\resource_report.rdlc" />
+                            <File Id="MicRepVwrCmnDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
+                            <File Id="MicRepVwrPrcObjDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
+                            <File Id="MicRepVwrWFDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.dll" />
+                            <File Id="HostHealthHistoryRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\host_health_history.rdlc" />
+                            <File Id="PoolHealthRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\pool_health.rdlc" />
+                            <File Id="opt_perf_histRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\optimization_performance_history.rdlc" />
+                            <File Id="vmMovementHistoryRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\vm_movement_history.rdlc" />
+                            <File Id="vmPerformanceHistoryRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\vm_performance_history.rdlc" />
+                            <File Id="PoolHealthHistoryRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\pool_health_history.rdlc" />
+                            <File Id="ReportConfigXML" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\reports.xml" />
+                            <File Id="ResourceReportRDLC" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\resource_report.rdlc" />
                         </Component>
                         <Component Id="MainExecutable" Guid="[BRANDING_MAIN_EXECUTABLE_GUID]">
                             <!-- XenCenter EXE -->
-                            <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\[XenCenter].exe" KeyPath="yes" />
+                            <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\[XenCenter].exe" KeyPath="yes" />
                             <!-- other EXEs -->
-                            <File Id="XenCenterMainEXE" Source="..\XenAdmin\bin\Release\XenCenterMain.exe" />
-                            <File Id="XeEXE" Source="..\xe\bin\Release\xe.exe" />
-                            <File Id="xva_verifyEXE" Source="..\xva_verify\bin\Release\xva_verify.exe" />
-							<File Id="PuTTYEXE" Source="..\XenAdmin\bin\Release\putty.exe" />
+                            <File Id="XenCenterMainEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterMain.exe" />
+                            <File Id="XeEXE" Source="$(env.RepoRoot)\xe\bin\Release\xe.exe" />
+                            <File Id="xva_verifyEXE" Source="$(env.RepoRoot)\xva_verify\bin\Release\xva_verify.exe" />
+							<File Id="PuTTYEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\putty.exe" />
                             <!-- config -->
-                            <File Id="XenCenterMainCONFIG" Source="..\XenAdmin\bin\Release\XenCenterMain.exe.config" />
+                            <File Id="XenCenterMainCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterMain.exe.config" />
                             <!-- DLLs -->
-                            <File Id="CommandLibDLL" Source="..\XenAdmin\bin\Release\CommandLib.dll" />
-                            <File Id="CookComputingDLL" Source="..\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll" />
-                            <File Id="NewtonsoftJsonDLL" Source="..\XenAdmin\bin\Release\Newtonsoft.Json.dll" />
-                            <File Id="log4netDLL" Source="..\XenAdmin\bin\Release\log4net.dll" />
-                            <File Id="SharpZipLibDLL" Source="..\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll" />
-                            <File Id="IonicZipDLL" Source="..\XenAdmin\bin\Release\Ionic.Zip.dll" />
-                            <File Id="MSTSCLibDLL" Source="..\XenAdmin\bin\Release\MSTSCLib.dll" />
-                            <File Id="XenCenterLibDLL" Source="..\XenAdmin\bin\Release\XenCenterLib.dll" />
-                            <File Id="XenCenterVNCDLL" Source="..\XenAdmin\bin\Release\XenCenterVNC.dll" />
-                            <File Id="XenModelDLL" Source="..\XenAdmin\bin\Release\XenModel.dll" />
-                            <File Id="DiscUtils" Source="..\XenAdmin\bin\Release\DiscUtils.dll" />
-                            <File Id="XenOvf" Source="..\XenAdmin\bin\Release\XenOvf.dll" />
-                            <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
+                            <File Id="CommandLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CommandLib.dll" />
+                            <File Id="CookComputingDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll" />
+                            <File Id="NewtonsoftJsonDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Newtonsoft.Json.CH.dll" />
+                            <File Id="log4netDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\log4net.dll" />
+                            <File Id="SharpZipLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll" />
+                            <File Id="IonicZipDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Ionic.Zip.dll" />
+                            <File Id="MSTSCLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\MSTSCLib.dll" />
+                            <File Id="XenCenterLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterLib.dll" />
+                            <File Id="XenCenterVNCDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterVNC.dll" />
+                            <File Id="XenModelDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenModel.dll" />
+                            <File Id="DiscUtils" Source="$(env.RepoRoot)\XenAdmin\bin\Release\DiscUtils.dll" />
+                            <File Id="XenOvf" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenOvf.dll" />
+                            <File Id="XenOvfTransport" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenOvfTransport.dll" />
                             <!-- Homepage -->
-                            <File Id="XenCenterHomePage" Source="..\XenAdmin\bin\Release\HomePage.mht" />
+                            <File Id="XenCenterHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.mht" />
                             <!-- Icons -->
-                            <File Id="XenCenterIcon" Source="..\Branding\Images\AppIcon.ico" />
-							<File Id="XvaIcon" Source="..\Branding\Images\file_vm.ico" />
-                            <File Id="XslicIcon" Source="..\Branding\Images\file_license.ico" />
-                            <File Id="XkbIcon" Source="..\Branding\Images\file_backup.ico" />
-                            <File Id="XsupdateIcon" Source="..\Branding\Images\file_updates.ico" />
+                            <File Id="XenCenterIcon" Source="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
+							<File Id="XvaIcon" Source="$(env.RepoRoot)\Branding\Images\file_vm.ico" />
+                            <File Id="XslicIcon" Source="$(env.RepoRoot)\Branding\Images\file_license.ico" />
+                            <File Id="XkbIcon" Source="$(env.RepoRoot)\Branding\Images\file_backup.ico" />
+                            <File Id="XsupdateIcon" Source="$(env.RepoRoot)\Branding\Images\file_updates.ico" />
 							<!-- Define XVA extension -->
 							<ProgId Id="XenCenter.xva" Description="XVA File" Icon="XvaIcon">
                                 <Extension Id="xva" ContentType="application/xva">
@@ -154,70 +154,69 @@
                         </Component>
                         <Component Id="UpdateFiles" Guid="[BRANDING_XSUPDATE_FILE_GUID]">
                             <?if "$(env.Branding)"="XenCenter"?>
-							<File Id="hotfixClearwater" Source="..\Branding\Hotfixes\RPU001.xsupdate" />
-                            <File Id="hotfixClearwaterSource" Source="..\Branding\Hotfixes\RPU001-src-pkgs.tar.gz" />
-							<?endif?>
-                            <File Id="hotfixCreedence" Source="..\Branding\Hotfixes\RPU002.[xsupdate]" />
-                            <File Id="hotfixDundee" Source="..\Branding\Hotfixes\RPU003.[xsupdate]" />
-                            <File Id="hotfixEly" Source="..\Branding\Hotfixes\RPU004.iso" />
+                              <File Id="hotfixClearwater" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU001.xsupdate" />
+                            <?endif?>
+                            <File Id="hotfixCreedence" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU002.xsupdate" />
+                            <File Id="hotfixDundee" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU003.xsupdate" />
+                            <File Id="hotfixEly" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU004.iso" />
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
 						<!-- TestResources -->
                         <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
                             <Component Id="TestResources" Guid="[BRANDING_TEST_RESOURCES_GUID]">
-                                <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
-                                <File Id="interes1.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
-                                <File Id="interes2.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
-                                <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
+                                <File Source="$(env.RepoRoot)\XenAdmin\bin\Release\TestResources\credits.xml" />
+                                <File Id="interes1.xml" Source="$(env.RepoRoot)\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
+                                <File Id="interes2.xml" Source="$(env.RepoRoot)\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
+                                <File Id="interes3.xml" Source="$(env.RepoRoot)\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
                             </Component>
                         </Directory>
                         <?else?>
                         <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
-                            <File Id="Readme" Source="..\Branding\WixInstaller\README.TXT" />
+                            <File Id="Readme" Source="$(env.RepoRoot)\Branding\WixInstaller\README.TXT" />
                         </Component>
                         <?endif?>
                         <Directory Id="Help" Name="Help">
                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
-                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
+                                <File Id="XenCenterCHM" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Help\[XenCenter].chm" />
                             </Component>
                         </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                             <Component Id="ExternalToolsComponent" Guid="[BRANDING_EXTERNAL_TOOLS_GUID]">
-                                <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
-                                <File Id="REFERENCEVHD" Source="..\XenOvfApi\External Tools\bootablereference.vhd.bz2" />
+                                <File Id="XENSERVERLINUXFIXUP" Source="$(env.RepoRoot)\_scratch\External Tools\xenserver-linuxfixup-disk.iso" />
+                                <File Id="REFERENCEVHD" Source="$(env.RepoRoot)\_scratch\External Tools\bootablereference.vhd.bz2" />
                             </Component>
                         </Directory>
                         <Directory Id="SCHEMAS" Name="Schemas">
                             <Component Id="SchemasFilesComponent" Guid="[BRANDING_SCHEMAS_FILES_GUID]">
-                                <File Id="CIMOSXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_OperatingSystem.xml" />
-                                <File Id="CIMRASDXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xml" />
-                                <File Id="CIMRASDXSD" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xsd" />
-                                <File Id="CIMVSSDXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_VirtualSystemSettingData.xml" />
-                                <File Id="CIMVSSDXSD" Source="..\XenAdmin\bin\Release\Schemas\CIM_VirtualSystemSettingData.xsd" />
-                                <File Id="COMMONXSD" Source="..\XenAdmin\bin\Release\Schemas\common.xsd" />
-                                <File Id="DSP8023XSD" Source="..\XenAdmin\bin\Release\Schemas\DSP8023.xsd" />
-                                <File Id="DSP8027XSD" Source="..\XenAdmin\bin\Release\Schemas\DSP8027.xsd" />
-                                <File Id="SECEXTXSD" Source="..\XenAdmin\bin\Release\Schemas\secext-1.0.xsd" />
-                                <File Id="WSSUTILXSD" Source="..\XenAdmin\bin\Release\Schemas\wss-utility-1.0.xsd" />
-                                <File Id="XENCXSD" Source="..\XenAdmin\bin\Release\Schemas\xenc-schema.xsd" />
-                                <File Id="XMLXSD" Source="..\XenAdmin\bin\Release\Schemas\xml.xsd" />
-                                <File Id="XMLDSIGXSD" Source="..\XenAdmin\bin\Release\Schemas\xmldsig-core-schema.xsd" />
+                                <File Id="CIMOSXML" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\CIM_OperatingSystem.xml" />
+                                <File Id="CIMRASDXML" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xml" />
+                                <File Id="CIMRASDXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xsd" />
+                                <File Id="CIMVSSDXML" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\CIM_VirtualSystemSettingData.xml" />
+                                <File Id="CIMVSSDXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\CIM_VirtualSystemSettingData.xsd" />
+                                <File Id="COMMONXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\common.xsd" />
+                                <File Id="DSP8023XSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\DSP8023.xsd" />
+                                <File Id="DSP8027XSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\DSP8027.xsd" />
+                                <File Id="SECEXTXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\secext-1.0.xsd" />
+                                <File Id="WSSUTILXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\wss-utility-1.0.xsd" />
+                                <File Id="XENCXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\xenc-schema.xsd" />
+                                <File Id="XMLXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\xml.xsd" />
+                                <File Id="XMLDSIGXSD" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Schemas\xmldsig-core-schema.xsd" />
                             </Component>
                         </Directory>
                     </Directory>
                     <?if "$(env.Branding)"="XenCenter"?>
                 	<Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
 							<Component Id="XenServerHealthCheck" Guid="{[BRANDING_HEALTH_CHECK_GUID]}">
-								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
-								<File Id="HealthCheck_CommandLib.dll" Name="CommandLib.dll" Source="..\XenServerHealthCheck\bin\Release\CommandLib.dll" />
-								<File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="..\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
-								<File Id="HealthCheck_NewtonsoftJsonDLL" Source="..\XenServerHealthCheck\bin\Release\Newtonsoft.Json.dll" />
-								<File Id="HealthCheck_ICSharpCode.SharpZipLib.dll" Name="ICSharpCode.SharpZipLib.dll" Source="..\XenServerHealthCheck\bin\Release\ICSharpCode.SharpZipLib.dll" />
-								<File Id="HealthCheck_Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="..\XenServerHealthCheck\bin\Release\Ionic.Zip.dll" />
-								<File Id="HealthCheck_log4net.dll" Name="log4net.dll" Source="..\XenServerHealthCheck\bin\Release\log4net.dll" />
-								<File Id="HealthCheck_XenCenterLib.dll" Name="XenCenterLib.dll" Source="..\XenServerHealthCheck\bin\Release\XenCenterLib.dll" />
-								<File Id="HealthCheck_XenModel.dll" Name="XenModel.dll" Source="..\XenServerHealthCheck\bin\Release\XenModel.dll" />
-								<File Id="HealthCheck_XenServerHealthCheck.exe.config" Name="XenServerHealthCheck.exe.config" Source="..\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe.config" />
+								<File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />
+								<File Id="HealthCheck_CommandLib.dll" Name="CommandLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\CommandLib.dll" />
+								<File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
+								<File Id="HealthCheck_NewtonsoftJsonDLL" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\Newtonsoft.Json.CH.dll" />
+								<File Id="HealthCheck_ICSharpCode.SharpZipLib.dll" Name="ICSharpCode.SharpZipLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\ICSharpCode.SharpZipLib.dll" />
+								<File Id="HealthCheck_Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\Ionic.Zip.dll" />
+								<File Id="HealthCheck_log4net.dll" Name="log4net.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\log4net.dll" />
+								<File Id="HealthCheck_XenCenterLib.dll" Name="XenCenterLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenCenterLib.dll" />
+								<File Id="HealthCheck_XenModel.dll" Name="XenModel.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenModel.dll" />
+								<File Id="HealthCheck_XenServerHealthCheck.exe.config" Name="XenServerHealthCheck.exe.config" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe.config" />
 								<ServiceInstall
 								  Id="ServiceInstaller"
 								  Type="ownProcess"
@@ -351,6 +350,6 @@
             <Custom Action="ClearAllUsers" After="FindRelatedProducts">NOT Installed AND PERMACHINEINSTALL</Custom>
             <ExecuteAction Sequence="1102" />
         </InstallUISequence>
-        <Icon Id="XenCenterICO" SourceFile="..\Branding\Images\AppIcon.ico" />
+        <Icon Id="XenCenterICO" SourceFile="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
     </Product>
 </Wix>

@@ -68,19 +68,19 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void UUIDLookedUpFromEnum()
         {
-            Assert.AreEqual("591d0209-531e-4ed8-9ed2-98df2a1a445c", 
+            Assert.AreEqual("932eb245-d132-40d3-b1c5-1390cf8caa4d", 
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Clearwater).UUID,
                             "Clearwater UUID lookup from enum");
 
-            Assert.AreEqual("3f92b111-0a90-4ec6-b85a-737f241a3fc1 ",
+            Assert.AreEqual("9adf434f-05b6-4c49-bf87-3447b5eb7850",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).UUID,
                             "Creedence UUID lookup from enum");
 
-            Assert.AreEqual("f6014211-7611-47ac-ac4c-e66bb1692c35",
+            Assert.AreEqual("b651dd22-df7d-45a4-8c0a-6be037bc1714",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
 
-            Assert.AreEqual("ddd68553-2bf8-411d-99bc-ed4a95265840",
+            Assert.AreEqual("1821854d-0171-4696-a9c4-01daf75a45a0",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.ElyJura).UUID,
                             "Ely-Jura UUID lookup from enum");
         }

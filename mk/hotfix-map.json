@@ -1,25 +1,24 @@
 {
   "files": [
     {
-      "pattern": "builds/xs/hotfixes/@BRANCH@/(*)/(*)/(*.xsupdate)",
-      "target": "xenadmin.git/Branding/Hotfixes/{1}/{2}/{3}",
-      "flat": "true",
-      "recursive": "false",
-      "regexp": "true"
+      "pattern": "builds/xs/hotfixes/trunk/RPU001/10.0/RPU001.xsupdate",
+      "target": "xenadmin.git/Branding/Hotfixes/RPU001.xsupdate",
+      "flat": "true"
     },
     {
-      "pattern": "builds/xs/hotfixes/@BRANCH@/(*)/(*)/(*.iso)",
-      "target": "xenadmin.git/Branding/Hotfixes/{1}/{2}/{3}",
-      "flat": "true",
-      "recursive": "false",
-      "regexp": "true"
+      "pattern": "builds/xs/hotfixes/trunk/RPU002/10.0/RPU002.xsupdate",
+      "target": "xenadmin.git/Branding/Hotfixes/RPU002.xsupdate",
+      "flat": "true"
     },
     {
-      "pattern": "builds/xs/hotfixes/@BRANCH@/(*)/(*)/(*-src-pkgs.tar)",
-      "target": "xenadmin.git/Branding/Hotfixes/{1}/{2}/{3}",
-      "flat": "true",
-      "recursive": "false",
-      "regexp": "true"
+      "pattern": "builds/xs/hotfixes/trunk/RPU003/9.0/RPU003.xsupdate",
+      "target": "xenadmin.git/Branding/Hotfixes/RPU003.xsupdate",
+      "flat": "true"
+    },
+    {
+      "pattern": "builds/xs/hotfixes/trunk/RPU004/8.0/RPU004.iso",
+      "target": "xenadmin.git/Branding/Hotfixes/RPU004.iso",
+      "flat": "true"
     }
   ]
 }

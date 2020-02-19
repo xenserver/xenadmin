@@ -46,27 +46,27 @@ namespace XenAdmin.Diagnostics.Hotfixing
         }
 
         private readonly Hotfix clearwaterHotfix = new SingleHotfix
-                                                         {
-                                                             Filename = "RPU001",
-                                                             UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
-                                                         };
+        {
+            Filename = "RPU001",
+            UUID = "932eb245-d132-40d3-b1c5-1390cf8caa4d"
+        };
 
         private readonly Hotfix creedenceHotfix = new SingleHotfix
-                                                         {
-                                                             Filename = "RPU002",
-                                                             UUID = "3f92b111-0a90-4ec6-b85a-737f241a3fc1 "
-                                                         };
+        {
+            Filename = "RPU002",
+            UUID = "9adf434f-05b6-4c49-bf87-3447b5eb7850"
+        };
 
         private readonly Hotfix dundeeHotfix = new SingleHotfix
         {
             Filename = "RPU003",
-            UUID = "f6014211-7611-47ac-ac4c-e66bb1692c35"
+            UUID = "b651dd22-df7d-45a4-8c0a-6be037bc1714"
         };
 
         private readonly Hotfix elyJuraHotfix = new SingleHotfix
         {
             Filename = "RPU004",
-            UUID = "ddd68553-2bf8-411d-99bc-ed4a95265840"
+            UUID = "1821854d-0171-4696-a9c4-01daf75a45a0"
         };
 
         public Hotfix Hotfix(Host host)

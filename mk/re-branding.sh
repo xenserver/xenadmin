@@ -26,22 +26,23 @@
 echo Entered re-branding.sh
 set -u
 
-ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+GLOBAL_BUILD_NUMBER=$1
+
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 version_cpp()
 {
-  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}" | sed 's/\./, /g')
+  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}" | sed 's/\./, /g')
   sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${BUILD_NUMBER}/g" \
-      $1 
+      -e "s/@BUILD_NUMBER@/${GLOBAL_BUILD_NUMBER}/g" \
+      $1
 }
 
 version_csharp()
 {
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}/g" \
-      $1 
+  sed -b -i -e "s#0\.0\.0\.0#${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}#g" \
+      $1
 }
 
 rebranding_global()
@@ -53,7 +54,7 @@ rebranding_global()
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
-        -e "s#\[BRANDING_BUILD_NUMBER\]#${BUILD_NUMBER}#g" \
+        -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
         -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
@@ -164,7 +165,6 @@ rebranding_global ${REPO}/XenOvfTransport/app.config
 
 #mk
 rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
-rebranding_global ${REPO}/mk/package-and-sign.sh
 
 #WixInstaller
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
@@ -202,15 +202,6 @@ if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
 then 
   rebranding_CHM "${REPO}/XenAdmin/XenAdmin.csproj"
   rebranding_CHM "${REPO}/XenModel/InvisibleMessages.zh-CN.resx ${REPO}/XenModel/InvisibleMessages.ja.resx ${REPO}/XenModel/InvisibleMessages.resx"
-  rm ${REPO}/XenAdmin/Help/XenCenter.chm ${REPO}/XenAdmin/Help/XenCenter.ja.chm ${REPO}/XenAdmin/Help/XenCenter.zh-CN.chm
-  mv ${REPO}/Branding/Help/*.chm ${REPO}/XenAdmin/Help/
-fi
-
-#Overwrite HomePage
-if [ -d ${REPO}/Branding/HomePage ]
-then 
-  rm ${REPO}/XenAdmin/HomePage*.mht
-  cp ${REPO}/Branding/HomePage/*.mht ${REPO}/XenAdmin/
 fi
 
 set +u

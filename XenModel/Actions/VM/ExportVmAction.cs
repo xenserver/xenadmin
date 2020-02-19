@@ -108,7 +108,7 @@ namespace XenAdmin.Actions
                 Uri.EscapeDataString(this.VM.uuid),
                 Uri.EscapeDataString(this.RelatedTask.opaque_ref));
 
-            log.DebugFormat("Exporting {0} from {1} to {2}", VM.Name(), uriBuilder.ToString(), _filename);
+            log.DebugFormat("Exporting {0} to {1}", VM.Name(), _filename);
 
             // The DownloadFile call will block, so we need a separate thread to poll for task status.
             Thread taskThread = new Thread((ThreadStart)progressPoll);
@@ -252,7 +252,7 @@ namespace XenAdmin.Actions
         {
             using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
             {
-                using (Stream http = HTTPHelper.GET(uri, Connection, true, true))
+                using (Stream http = HTTPHelper.GET(uri, Connection, true))
                 {
                     new Export().verify(http, fs, (Export.cancellingCallback)delegate() { return Cancelling; });
                 }

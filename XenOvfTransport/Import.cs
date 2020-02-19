@@ -395,8 +395,7 @@ namespace XenOvfTransport
 
                     if (installSection != null && installSection.Length == 1)
                     {
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Import", Messages.START_POST_INSTALL_INSTRUCTIONS));
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ImportProgress, "Import", Messages.START_POST_INSTALL_INSTRUCTIONS));
+                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.START_POST_INSTALL_INSTRUCTIONS));
                         HandleInstallSection(xenSession, vmRef, installSection[0]);
                     }
                     ShowSystem(xenSession, vmRef);
@@ -434,21 +433,21 @@ namespace XenOvfTransport
                 }
             }
 
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Import", ""));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, ""));
             int _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
             string _touchFile = Path.Combine(pathToOvf, "xen__" + _processId);
 			//added check again as Delete needs write permissions and even if the file does not exist import will fail if the user has read only permissions
 			if (File.Exists(_touchFile))
 				File.Delete(_touchFile);
 
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ImportThreadComplete, "Import", Messages.COMPLETED_IMPORT));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.COMPLETED_IMPORT));
         }
 
     	#endregion
 
         #region PRIVATE
 		
-		private void http_UpdateHandler(XenOvfTranportEventArgs e)
+		private void http_UpdateHandler(XenOvfTransportEventArgs e)
 		{
 			OnUpdate(e);
 		}
@@ -582,12 +581,12 @@ namespace XenOvfTransport
                         if (passcode != null)
                         {
                             var statusMessage = string.Format(Messages.START_FILE_DECRYPTION, filename);
-                            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Security", statusMessage));
+                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Security, statusMessage));
                             log.Debug(statusMessage);
                             OVF.DecryptToTempFile(EncryptionClass, filename, version, passcode, encryptfilename);
                             sourcefile = encryptfilename;
                             statusMessage += Messages.COMPLETE;
-                            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Security", statusMessage));
+                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Security, statusMessage));
                         }
                         #endregion 
 
@@ -607,13 +606,13 @@ namespace XenOvfTransport
                                 ext = Path.GetExtension(uncompressedfilename);
                             }
                             var statusMessage = string.Format(Messages.START_FILE_EXPANSION, filename);
-                            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Compression", statusMessage));
+                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Compression, statusMessage));
                         	var ovfCompressor = new OvfCompressor();
 							ovfCompressor.UncompressFile(sourcefile, uncompressedfilename, compression);
                             if (File.Exists(encryptfilename)) { File.Delete(encryptfilename); }
                             sourcefile = uncompressedfilename;
                             statusMessage += Messages.COMPLETE;
-                            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Compression", statusMessage));
+                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Compression, statusMessage));
                         }
                         #endregion
 
@@ -816,7 +815,7 @@ namespace XenOvfTransport
                 
 
             #region UPLOAD iSCSI STREAM
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Import", string.Format(Messages.FILES_TRANSPORT_SETUP, _currentfilename)));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_SETUP, _currentfilename)));
         	m_iscsi = new iSCSI
         	        	{
         	        		UpdateHandler = iscsi_UpdateHandler,
@@ -841,7 +840,7 @@ namespace XenOvfTransport
             }
             finally
             {
-                OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Import", string.Format(Messages.FILES_TRANSPORT_CLEANUP,_currentfilename)));
+                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_CLEANUP,_currentfilename)));
 				m_iscsi.Disconnect(xenSession);
             }
             #endregion
@@ -879,7 +878,7 @@ namespace XenOvfTransport
             }
 
             #region UPLOAD iSCSI STREAM
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Import", string.Format(Messages.FILES_TRANSPORT_SETUP, _currentfilename)));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_SETUP, _currentfilename)));
 			m_iscsi = new iSCSI
 			{
 				UpdateHandler = iscsi_UpdateHandler,
@@ -900,7 +899,7 @@ namespace XenOvfTransport
                 else
                 {
                     log.WarnFormat("System will not be bootable, cannot find [{0}] to extract master boot record.", vhdfile);
-                    OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Import", Messages.WARNING_TARGET_NOT_BOOTABLE));
+                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.WARNING_TARGET_NOT_BOOTABLE));
                 }
 				m_iscsi.ScsiDisk.Signature = new Random().Next();
 
@@ -939,7 +938,7 @@ namespace XenOvfTransport
             }
             finally
             {
-                OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Import", string.Format(Messages.FILES_TRANSPORT_CLEANUP, _currentfilename)));
+                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_CLEANUP, _currentfilename)));
 				m_iscsi.Disconnect(xenSession);
             }
             #endregion
@@ -948,7 +947,7 @@ namespace XenOvfTransport
             return vdiRef;
         }
 
-		private void iscsi_UpdateHandler(XenOvfTranportEventArgs e)
+		private void iscsi_UpdateHandler(XenOvfTransportEventArgs e)
 		{
 			OnUpdate(e);
 		}
@@ -1117,7 +1116,7 @@ namespace XenOvfTransport
             headers.Add("User-Agent", "XenP2VClient/1.5");
             try
             {
-                http.Put(filestream, _XenServer, p2VUri, headers, 0, capacity, false);
+                http.Put(filestream, _uri, p2VUri, headers, 0, capacity, false);
             }
             catch (Exception ex)
             {
@@ -1771,14 +1770,14 @@ namespace XenOvfTransport
                                     log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", vmRef);
                                     log.WarnFormat("Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +.");
                                     log.Warn("Import:  ===========================================================");
-                                    OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
+                                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.WARNING_ADMIN_REQUIRED));
                                 }
                             }
                             #endregion
 
                         }
                         #endregion
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ImportProgress, "CD/DVD Drive",
+                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.CdDvdDrive,
 							string.Format(Messages.DEVICE_ATTACHED, Messages.CD_DVD_DEVICE)));
                         log.Debug("Import.AddResourceSettingData: CD/DVD ROM Added");
 
@@ -2001,7 +2000,7 @@ namespace XenOvfTransport
                                         log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", vmName);
                                         log.WarnFormat("Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}", vmName);
                                         log.WarnFormat("Import:  ===========================================================");
-                                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
+                                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.WARNING_ADMIN_REQUIRED));
                                     }
                                 }
                             }
@@ -2571,11 +2570,11 @@ namespace XenOvfTransport
             {
                 downloadupdatemsg = string.Format(Messages.ISCSI_COPY_PROGRESS, tmpfilename);
                 _downloadexception = null;
-                OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Web Download Start", downloadupdatemsg, 0, _filedownloadsize));
+                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, 0, _filedownloadsize));
                 WebClient wc = new WebClient();
                 wc.Proxy = XenAdmin.XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
-                wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
-                wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
+                wc.DownloadFileCompleted += wc_DownloadFileCompleted;
+                wc.DownloadProgressChanged += wc_DownloadProgressChanged;
                 wc.DownloadFileAsync(filetodownload, tmpfilename);
                 uridownloadcomplete.WaitOne();
                 if (_downloadexception != null)
@@ -2583,14 +2582,14 @@ namespace XenOvfTransport
                     if (!Path.GetExtension(tmpfilename).Equals(".pvp"))  // don't worry bout pvp files, we don't use them.
                         throw _downloadexception;
                 }
-                OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "Web Download Completed", downloadupdatemsg, _filedownloadsize, _filedownloadsize));
+                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, _filedownloadsize, _filedownloadsize));
             }
             return tmpfilename;
         }
 
         private void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "Web Download Update", downloadupdatemsg, (ulong)e.BytesReceived, (ulong)_filedownloadsize));
+            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, (ulong)e.BytesReceived, (ulong)_filedownloadsize));
         }
         private void wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {

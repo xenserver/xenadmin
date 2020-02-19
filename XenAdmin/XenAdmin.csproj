@@ -609,12 +609,6 @@
     <Compile Include="Dialogs\ConnectingToServerDialog.designer.cs">
       <DependentUpon>ConnectingToServerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\MessageBoxTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\MessageBoxTest.Designer.cs">
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\EditVmHaPrioritiesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1931,10 +1925,6 @@
       <DependentUpon>ConnectingToServerDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MessageBoxTest.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EditVmHaPrioritiesDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditVmHaPrioritiesDialog.cs</DependentUpon>
@@ -2701,20 +2691,35 @@
       <DependentUpon>XenWizardBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="..\Branding\Help\XenCenter.chm">
+      <Link>Help\XenCenter.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\Help\XenCenter.ja.chm">
+      <Link>Help\XenCenter.ja.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\Help\XenCenter.zh-CN.chm">
+      <Link>Help\XenCenter.zh-CN.chm</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\HomePage\HomePage.ja.mht">
+      <Link>HomePage.ja.mht</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\HomePage\HomePage.mht">
+      <Link>HomePage.mht</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Branding\HomePage\HomePage.zh-CN.mht">
+      <Link>HomePage.zh-CN.mht</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="HomePage.zh-CN.mht">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="HomePage.ja.mht">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="HomePage.mht">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -2744,12 +2749,6 @@
     <Compile Include="Commands\DestroyHostCommand.cs" />
     <Compile Include="Commands\MigrateVirtualDiskCommand.cs" />
     <Compile Include="Commands\UpdateVIFCommand.cs" />
-    <Content Include="Help\XenCenter.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\XenCenter.ja.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Actions\OVFActions\ApplianceAction.cs" />
     <Compile Include="Actions\OVFActions\ExportApplianceAction.cs" />
     <Compile Include="Actions\GUIActions\GeneralEditPageAction.cs" />
@@ -4212,9 +4211,6 @@
     </Compile>
     <Compile Include="XenSearch\CustomFieldWrapper.cs" />
     <Compile Include="XenSearch\TreeSearch.cs" />
-    <Content Include="Help\XenCenter.zh-CN.chm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Images\attach_virtualstorage_32.png" />
     <None Include="Images\backup_restore_32.png" />
     <None Include="Images\copy_16.png" />
@@ -5372,12 +5368,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\ManageUpdatesPage.zh-CN.resx">
       <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MessageBoxTest.ja.resx">
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MessageBoxTest.zh-CN.resx">
-      <DependentUpon>MessageBoxTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\MoveVirtualDiskDialog.ja.resx">
       <DependentUpon>MoveVirtualDiskDialog.cs</DependentUpon>
