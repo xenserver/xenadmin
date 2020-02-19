@@ -13931,4 +13931,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>現在の位置</value>
   </data>
+  <data name="XENSERVER_LEGACY" xml:space="preserve">
+    <value>[XenServer product]</value>
+  </data>
 </root>

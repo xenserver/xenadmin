@@ -13887,7 +13887,7 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[XenServer] [BRANDING_VERSION_6_5]</value>
   </data>
   <data name="XENSERVER_LEGACY" xml:space="preserve">
-    <value>[Legacy XenServer product]</value>
+    <value>[XenServer product]</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>[XenServer] Templates</value>
