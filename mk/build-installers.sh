@@ -100,18 +100,9 @@ compile_installer()
   mkdir -p out${name}
 
   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
+  cp out${name}/${name}.msi ${WIX}
 }
 
-sign_msi()
-{
-  if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
-    echo "Some signing parameters are not set; skip signing binaries"
-  else
-    cd ${WIX}/out$1 && chmod a+rw $1.msi && ${SIGN_BAT} $1.msi "${SIGN_DESCR}"
-  fi
-}
-
-#create just english msi
 if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
 then
   cd ${WIX}
@@ -119,17 +110,13 @@ then
   mv XenCenter.l10n.wxs ${BRANDING_BRAND_CONSOLE}.l10n.wxs
 fi
 
-compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}"
+#create just english msi
+compile_installer "${BRANDING_BRAND_CONSOLE}" "en-us"
 
 #then create l10n msi containing all resources
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "en-us" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n"
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "ja-jp" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.ja-jp"
-compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "zh-cn" && sign_msi "${BRANDING_BRAND_CONSOLE}.l10n.zh-cn"
-
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
-   ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
-   ${WIX}
+compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "en-us"
+compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "ja-jp"
+compile_installer "${BRANDING_BRAND_CONSOLE}.l10n" "zh-cn"
 
 cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
 cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
@@ -142,13 +129,14 @@ cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi ja-jp.mst 1
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-cn.mst 2052
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1028
 
-#sign again the combined msi because it seems the embedding breaks the signature
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
+#copy installers to output directory and sign them
+cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.l10n.msi
+
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
   echo "Some signing parameters are not set; skip signing binaries"
 else
-  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.l10n.msi "${SIGN_DESCR}"
+  cd ${WIX} && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.msi ${SIGN_DESCR}
+  cd ${WIX} && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.l10n.msi ${SIGN_DESCR}
 fi
 
-#copy the msi installers
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
-cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}
+cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}

@@ -38,11 +38,14 @@ Param(
     [String]$DOMAIN,
 
     [Parameter(HelpMessage ="Whether to download symbols (*.pdb files)")]
-    [switch]$SYMBOLS
+    [switch]$SYMBOLS,
+
+    [Parameter(HelpMessage ="Whether to download all packages needed to build the installer")]
+    [switch]$ZIP
 )
 
 $DOMAIN = $DOMAIN.Trim()
-$PACKAGE_DIR = Get-Item "$PSScriptRoot" | select -ExpandProperty FullName
+$PACKAGE_DIR = Get-Item "$PSScriptRoot\" | select -ExpandProperty FullName
 $MK_DIR = Get-Item "$PSScriptRoot\..\mk" | select -ExpandProperty FullName
 
 #dotnet packages
@@ -56,12 +59,14 @@ foreach($dep in $DEPS_MAP.files) {
     $pattern = "https://$DOMAIN/" + $dep.pattern
     $filename = Split-Path $pattern -leaf
 
-    if (($filename -eq "putty.exe") -or ($filename -like "*.dll")) {
-        Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
+    if (($filename -like "*.dll") -and $SYMBOLS) {
+      $symbolfile = [IO.Path]::GetFileNameWithoutExtension($filename) + ".pdb"
+      Write-Output "Downloading $symbolfile"
+      Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
+    }
 
-        if ($SYMBOLS) {
-            $symbolfile = [IO.Path]::GetFileNameWithoutExtension($filename) + ".pdb"
-            Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
-        }
+    if (($filename -eq "putty.exe") -or ($filename -like "*.dll") -or (($filename -like "*.zip") -and $ZIP)) {
+      Write-Output "Downloading $filename"
+      Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
     }
 }
