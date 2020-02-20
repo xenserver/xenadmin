@@ -38,7 +38,10 @@ Param(
     [String]$DOMAIN,
 
     [Parameter(HelpMessage ="Whether to download symbols (*.pdb files)")]
-    [switch]$SYMBOLS
+    [switch]$SYMBOLS,
+
+    [Parameter(HelpMessage ="Whether to download all packages needed to build the installer")]
+    [switch]$ZIP
 )
 
 $DOMAIN = $DOMAIN.Trim()
@@ -56,22 +59,14 @@ foreach($dep in $DEPS_MAP.files) {
     $pattern = "https://$DOMAIN/" + $dep.pattern
     $filename = Split-Path $pattern -leaf
 
-    if (($filename -eq "putty.exe") -or ($filename -like "*.dll")) {
-        Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
+    if (($filename -like "*.dll") -and $SYMBOLS) {
+      $symbolfile = [IO.Path]::GetFileNameWithoutExtension($filename) + ".pdb"
+      Write-Output "Downloading $symbolfile"
+      Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
+    }
 
-        if ($SYMBOLS) {
-            $symbolfile = [IO.Path]::GetFileNameWithoutExtension($filename) + ".pdb"
-            Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
-        }
+    if (($filename -eq "putty.exe") -or ($filename -like "*.dll") -or (($filename -like "*.zip") -and $ZIP)) {
+      Write-Output "Downloading $filename"
+      Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
     }
 }
-
-#unit test dependencies
-
-$MOQ="Moq.dll"
-$MOQ_URL="https://$DOMAIN/ctx-local-contrib/Moq/4.0.10827.0/4.0/$MOQ"
-$NUNIT="nunit.framework.dll"
-$NUNIT_URL="https://$DOMAIN/ctx-local-contrib/NUnit/NUnit/2.5.2.9122/3.5/$NUNIT"
-
-Invoke-WebRequest -Uri $MOQ_URL   -Method Get -OutFile "$PACKAGE_DIR\$MOQ"
-Invoke-WebRequest -Uri $NUNIT_URL -Method Get -OutFile "$PACKAGE_DIR\$NUNIT"

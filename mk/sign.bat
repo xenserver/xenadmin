@@ -89,6 +89,7 @@ if "%sbe%"=="true" (
       --cross-sign --pagehashes yes "%thefile%"
   )
   %CTXSIGN% --end
+  echo.
 
 ) else (
   echo "Self signing"
