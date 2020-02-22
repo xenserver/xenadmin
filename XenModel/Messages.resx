@@ -2616,6 +2616,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host partition layout check</value>
   </data>
+  <data name="CHECKING_SECURITY_PROTOCOL" xml:space="preserve">
+    <value>Security protocol check</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
+    <value>Checking security protocol</value>
+  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
   </data>
@@ -10556,6 +10562,18 @@ Please reconnect the host and try again</value>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
   </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for protocols earlier than TLS 1.2 is dropped as of {1}</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_HELP" xml:space="preserve">
+    <value>Disable legacy protocols</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_POOL" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the pool and you may lose permanently access to it.</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
+    <value>If you are upgrading to [XenServer] {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
+  </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>The MAC address entered has already been assigned to the VM:
 {1}
@@ -14369,6 +14387,9 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] {0}</value>
+  </data>
+  <data name="XENSERVER_8_2" xml:space="preserve">
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">

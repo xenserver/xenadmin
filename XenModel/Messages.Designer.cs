@@ -7231,6 +7231,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Security protocol check.
+        /// </summary>
+        public static string CHECKING_SECURITY_PROTOCOL {
+            get {
+                return ResourceManager.GetString("CHECKING_SECURITY_PROTOCOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking security protocol.
+        /// </summary>
+        public static string CHECKING_SECURITY_PROTOCOL_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_SECURITY_PROTOCOL_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking reboots required.
         /// </summary>
         public static string CHECKING_SERVER_NEEDS_REBOOT {
@@ -30418,6 +30436,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for protocols earlier than TLS 1.2 is dropped as of {1}.
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable legacy protocols.
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the pool and you may lose permanently access to it..
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_INFO_POOL {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_INFO_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to [XenServer] {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it..
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_INFO_SERVER {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_INFO_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM:
         ///{1}
         ///
@@ -41690,6 +41744,15 @@ namespace XenAdmin {
         public static string XENSERVER_8_1 {
             get {
                 return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer] {0}.
+        /// </summary>
+        public static string XENSERVER_8_2 {
+            get {
+                return ResourceManager.GetString("XENSERVER_8_2", resourceCulture);
             }
         }
         
