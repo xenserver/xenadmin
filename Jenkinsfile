@@ -125,7 +125,7 @@ node('xencenter') {
     stage('Download dependencies') {
 
       def remoteDotnet = readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\DOTNET_BUILD_LOCATION").trim()
-      def downloadSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
+      def downloadSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\scripts\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
 
       def server = Artifactory.server('repo')
       server.download(downloadSpec)
@@ -133,20 +133,14 @@ node('xencenter') {
       if ("${XC_BRANDING}" == 'citrix') {
         println "Downloading hotfixes."
 
-        def hotFixSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim()
+        def hotFixSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\scripts\\hotfix-map.json").trim()
         server.download(hotFixSpec)
       }
     }
 
     stage('Run checks') {
-      List<String> list = ["copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "spellcheck/spellcheck.sh"]
-
-      for (String item : list) {
-        bat """
-        cd ${env.WORKSPACE}\\xenadmin.git\\devtools
-        sh "${item}"
-        """
-      }
+      powershell ".\\${env.WORKSPACE}\\xenadmin.git\\scripts\\check_copyright.ps1"
+      powershell ".\\${env.WORKSPACE}\\xenadmin.git\\scripts\\check_i18n.ps1"
     }
 
     stage('Build') {
@@ -154,7 +148,7 @@ node('xencenter') {
 
       bat """
 cd ${env.WORKSPACE}
-sh xenadmin.git/mk/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_NODE_NAME} ${sbe} ${env.SELFSIGN_THUMBPRINT_SHA1} ${env.SELFSIGN_THUMBPRINT_SHA256}  ${env.TIMESTAMP_SERVER_URL}
+sh xenadmin.git/scripts/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_NODE_NAME} ${sbe} ${env.SELFSIGN_THUMBPRINT_SHA1} ${env.SELFSIGN_THUMBPRINT_SHA256} ${env.TIMESTAMP_SERVER_URL}
       """
     }
 

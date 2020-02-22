@@ -28,49 +28,45 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-# help script to download hotfixes to local dev environment
+# help script to download third party binaries to local dev environment
 # NOTE: do not remove the Requires directive
 
 #Requires -Version 3.0
 
 Param(
-    [Parameter(Mandatory=$true, HelpMessage ="Artifactory domain (e.g. artifactory.domain.com)")]
+    [Parameter(Mandatory = $true, HelpMessage = "Artifactory domain (e.g. artifactory.domain.com)")]
     [String]$DOMAIN,
 
-    [Parameter(HelpMessage ="Whether to download source packages")]
-    [switch]$SOURCES
+    [Parameter(HelpMessage = "Whether to download symbols (*.pdb files)")]
+    [switch]$SYMBOLS,
+
+    [Parameter(HelpMessage = "Whether to download all packages needed to build the installer")]
+    [switch]$ZIP
 )
 
 $DOMAIN = $DOMAIN.Trim()
-$MK_DIR = Get-Item "$PSScriptRoot\..\mk" | select -ExpandProperty FullName
+$SCRIPT_DIR = Get-Item "$PSScriptRoot\" | select -ExpandProperty FullName
+$PACKAGE_DIR = Get-Item "$PSScriptRoot\..\packages" | select -ExpandProperty FullName
 
-$HOTFIX_DIR = "$PSScriptRoot\..\Branding\Hotfixes"
-if (-not (Test-Path $HOTFIX_DIR)) {
-  $HOTFIX_DIR = New-Item $HOTFIX_DIR -ItemType Directory | select -ExpandProperty FullName
-}
+#dotnet packages
 
-$HOTFIX_MAP = Get-Content "$MK_DIR\hotfix-map.json" | ConvertFrom-Json
+$BUILD_LOCATION = (Get-Content "$PACKAGE_DIR\DOTNET_BUILD_LOCATION").Trim()
+$DEPS_MAP = Get-Content "$SCRIPT_DIR\deps-map.json" |`
+    foreach { $_ -replace '@REMOTE_DOTNET@', "$BUILD_LOCATION" } |`
+    ConvertFrom-Json
 
-foreach($dep in $HOTFIX_MAP.files) {
+foreach ($dep in $DEPS_MAP.files) {
     $pattern = "https://$DOMAIN/" + $dep.pattern
     $filename = Split-Path $pattern -leaf
 
-    $download=$false
-
-    if ($filename -like "*.xsupdate") {
-      $download = $true
-    }
-    elseif ($filename -like "*-sources.iso") {
-      $download = $SOURCES
-    }
-    elseif ($filename -like "*.iso") {
-      $download = $true
-    }
-        elseif ($filename -like "*-src-pkgs.tar") {
-      $download = $SOURCES
+    if (($filename -like "*.dll") -and $SYMBOLS) {
+        $symbolfile = [IO.Path]::GetFileNameWithoutExtension($filename) + ".pdb"
+        Write-Output "Downloading $symbolfile"
+        Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
     }
 
-    if ($download) {
-      Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$HOTFIX_DIR\$filename"
+    if (($filename -eq "putty.exe") -or ($filename -like "*.dll") -or (($filename -like "*.zip") -and $ZIP)) {
+        Write-Output "Downloading $filename"
+        Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
     }
 }
