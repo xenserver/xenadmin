@@ -199,6 +199,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
             }
 
+            //protocol check - for each pool
+            var sslChecks = (from Host server in SelectedMasters.Where(m => !Helpers.StockholmOrGreater(m))
+                select new PoolLegacySslCheck(server, InstallMethodConfig) as Check).ToList();
+            
+            if (sslChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
+            
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();
