@@ -3424,7 +3424,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
     <value>The SR is overcommitted</value>
-  </data> 
+  </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>There is not enough available space on this SR</value>
   </data>
@@ -4105,7 +4105,7 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON" xml:space="preserve">
     <value>{0} - {1}</value>
   </data>
-  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN" xml:space="preserve">
+  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN" xml:space="preserve">
     <value>unable to determine failure reason</value>
   </data>
   <data name="DELAY_LOADING_COMBO_BOX_WAITING" xml:space="preserve">
@@ -5350,7 +5350,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Error Resuming VM on Server</value>
   </data>
   <data name="ERROR_DIALOG_RESUME_VM_TEXT" xml:space="preserve">
-    <value>The following Vms could not be resumed:</value>
+    <value>The following VMs could not be resumed:</value>
   </data>
   <data name="ERROR_DIALOG_RESUME_VM_TITLE" xml:space="preserve">
     <value>Error Resuming VM</value>
@@ -6924,7 +6924,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Review End User License Agreement (EULA)</value>
   </data>
   <data name="IMPORT_GENERIC_FAIL" xml:space="preserve">
-    <value>The server could not complete the import due to an unkown error.</value>
+    <value>The server could not complete the import due to an unknown error.</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>The exported files are incomplete or in an unrecognized format.</value>
@@ -7059,7 +7059,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Locate the file you want to import</value>
   </data>
   <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>The [Xenserver] Template that you are attempting to import already exists in the selected pool.</value>
+    <value>The [XenServer] Template that you are attempting to import already exists in the selected pool.</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new template</value>
@@ -7296,7 +7296,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Interfaces: {0}</value>
   </data>
   <data name="INVALID_HOST" xml:space="preserve">
-    <value>Invalid hostname</value>
+    <value>Invalid host name</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>Invalid disk size</value>
@@ -8739,7 +8739,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>This server does not have the same license as the pool master</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
-    <value>This server's linux pack installation state differs from that of the master</value>
+    <value>This server's Linux pack installation state differs from that of the master</value>
   </data>
   <data name="NEWPOOL_MASTER_CONNECTING" xml:space="preserve">
     <value>The master is still connecting</value>
@@ -8776,7 +8776,7 @@ You should only proceed if you have verified that these settings are correct.</v
 
 As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
+When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you want to attach to your host or pool.</value>
@@ -8957,7 +8957,7 @@ Do you want to reattach the SR?</value>
   <data name="NEWSR_NETAPP_BLURB" xml:space="preserve">
     <value>If you have access to a Network Appliance (NetApp) filer with sufficient disk space, running a version of Data ONTAP 7G (version 7.2 or greater), you can configure a custom NetApp Storage Repository. 
 
-The driver uses the ZAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
+The driver uses the XAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
 
 VM cloning uses the snapshot and clone capabilities of the filer to provide high performance and to ensure compatibility with existing ONTAP filer management tools.</value>
   </data>
@@ -9023,7 +9023,7 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
 
 As NFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure an NFS storage repository, you simply provide the hostname or IP address of the NFS server and the path to a directory that will be used to contain the storage repository. The NFS server must be configured to export the specified path to all servers in the pool.</value>
+When you configure an NFS storage repository, you simply provide the host name or IP address of the NFS server and the path to a directory that will be used to contain the storage repository. The NFS server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_VHDONFS_TYPE_NAME" xml:space="preserve">
     <value>NFS</value>
@@ -9596,7 +9596,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_AGILE_SR_NOT_SHARED" xml:space="preserve">
     <value>The VM is using a non-shared SR. Restart cannot be guaranteed.</value>
   </data>
-  <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
+  <data name="NOT_AGILE_UNKNOWN" xml:space="preserve">
     <value>The VM is not agile. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
@@ -10327,7 +10327,7 @@ File not found</value>
     <value>Server '{0}' could not be evacuated because there were no servers available to accommodate all the VMs being migrated from this server. Please reboot the other servers that are pending a reboot following the update installation, and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
-    <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process.</value>
+    <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shut down some VMs and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing [XenServer] on '{0}'...</value>
@@ -11724,7 +11724,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Please wait and then try again.</value>
   </data>
   <data name="SOLUTION_NOT_FOUND" xml:space="preserve">
-    <value>Enter a valid hostname or IP address and try again.</value>
+    <value>Enter a valid host name or IP address and try again.</value>
   </data>
   <data name="SOLUTION_NO_PERMISSION" xml:space="preserve">
     <value>Try again with a more privileged user account.</value>
@@ -12624,9 +12624,6 @@ Please check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
     <value>{0}: The VM {1} cannot be suspended until it has up to date [Citrix VM Tools].</value>
-  </data>
-  <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
-    <value>Select the checkboxes for each server you want to update. Select a pool checkbox to select all the available servers in the pool.</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: The update has already been applied to this server.  This server will be skipped.</value>

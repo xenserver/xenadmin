@@ -4110,7 +4110,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON" xml:space="preserve">
     <value>{0} - {1}</value>
   </data>
-  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN" xml:space="preserve">
+  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN" xml:space="preserve">
     <value>失敗理由を特定できません</value>
   </data>
   <data name="DELAY_LOADING_COMBO_BOX_WAITING" xml:space="preserve">
@@ -9594,7 +9594,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOT_AGILE_SR_NOT_SHARED" xml:space="preserve">
     <value>この VM の SR は共有されていません。再起動は保証されません。</value>
   </data>
-  <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
+  <data name="NOT_AGILE_UNKNOWN" xml:space="preserve">
     <value>この VM はアジャイルではありません。再起動は保証されません。</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
@@ -12622,9 +12622,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
     <value>{0}: 最新の [Citrix VM Tools] がインストールされるまで、VM {1} を一時停止することはできません。</value>
-  </data>
-  <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
-    <value>アップデート対象のサーバーのチェックボックスをオンにしてください。プール内で使用可能なすべてのサーバーをアップデートするには、プールのチェックボックスをオンにします。</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: アップデートはこのサーバーに適用済みです。このサーバーはスキップされます。</value>

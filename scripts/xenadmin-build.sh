@@ -65,7 +65,7 @@ mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 
 source ${REPO}/Branding/branding.sh
-source ${REPO}/mk/re-branding.sh $1
+source ${REPO}/scripts/re-branding.sh $1
 
 #packages sources
 cd ${REPO}
@@ -76,7 +76,7 @@ ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #sign files only if all parameters are set and non-empty
-SIGN_BAT="${REPO}/mk/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
+SIGN_BAT="${REPO}/scripts/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
 SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
 if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
