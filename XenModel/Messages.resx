@@ -3424,7 +3424,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
     <value>The SR is overcommitted</value>
-  </data> 
+  </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>There is not enough available space on this SR</value>
   </data>
@@ -10174,16 +10174,16 @@ This will cancel the upload process.</value>
     <value>Disable HA until after all the hosts have been rebooted</value>
   </data>
   <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
-    <value>{0} ok.</value>
+    <value>{0} OK.</value>
+  </data>
+  <data name="PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK" xml:space="preserve">
+    <value>{0}: {1} OK.</value>
   </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>The patch {0} is going to be deleted. Do you want to continue?</value>
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
-    <value>{0}: {1} ok.</value>
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
@@ -10479,7 +10479,7 @@ Please reconnect the host and try again</value>
     <value>This pool has no shared storage</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
+    <value>{0}: Support for paravirtualized (PV) guests is dropped as of {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -10585,14 +10585,8 @@ Are you sure you want to continue?</value>
 
 Click Previous if you need to go back and specify a different network location or select a different set of servers to upgrade.</value>
   </data>
-  <data name="PROBLEM_SRPROBLEM_TITLE" xml:space="preserve">
-    <value>SR '{0}'</value>
-  </data>
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
-  </data>
-  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -11973,9 +11967,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>There is a StorageLink Gateway SR that needs to be reattached.</value>
-  </data>
-  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
-    <value>StorageLink SR status</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>Storage Pools</value>

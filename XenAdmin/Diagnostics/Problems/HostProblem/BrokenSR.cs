@@ -29,39 +29,62 @@
  * SUCH DAMAGE.
  */
 
-using System.Diagnostics;
+using System.Windows.Forms;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
+using XenAdmin.Dialogs;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 
-namespace XenAdmin.Diagnostics.Checks
+
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public abstract class HostCheck : Check
+    public class BrokenSR : HostProblem
     {
-        private readonly Host _host;
-
-        protected HostCheck(Host host)
+        public BrokenSR(Check check, SR sr, Host host)
+            : base(check, host)
         {
-            Debug.Assert(host != null);
-            _host = host;
+            Sr = sr;
         }
 
-        protected Host Host
-        {
-            get { return _host; }
-        }
+        public SR Sr { get; }
 
-        public sealed override IXenObject XenObject
-        {
-            get { return _host; }
-        }
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, ServerName, Sr.NameWithoutHost());
 
-        public override string SuccessfulCheckDescription 
+        protected override AsyncAction CreateAction(out bool cancelled)
         {
-            get
+            Program.AssertOnEventThread();
+
+            RepairSRDialog dlg = new RepairSRDialog(Sr, false);
+            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.OK)
             {
-                return string.IsNullOrEmpty(Description)
-                    ? string.Empty
-                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Host.Name(), Description);
+                cancelled = false;
+                return dlg.RepairAction;
             }
+
+            cancelled = true;
+            return null;
         }
+
+        public override string HelpMessage => Messages.REPAIR_SR;
+    }
+
+    class BrokenSRWarning : Warning
+    {
+        private readonly Host host;
+        private readonly SR sr;
+
+        public BrokenSRWarning(Check check, Host host, SR sr)
+            : base(check)
+        {
+            this.sr = sr;
+            this.host = host;
+        }
+
+        public override string Title => Check.Description;
+
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, Helpers.GetName(host).Ellipsise(30), sr);
     }
 }

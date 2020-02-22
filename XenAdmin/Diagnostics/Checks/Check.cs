@@ -30,6 +30,8 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAPI;
 
@@ -39,8 +41,10 @@ namespace XenAdmin.Diagnostics.Checks
     {
         protected abstract Problem RunCheck();
 
-        // By default, most Checks return zero or one Problems: but a
-        // Check can override this to return multiple Problems
+        /// <summary>
+        /// By default, most Checks return zero or one Problems, but a 
+        /// Check can override this to return multiple Problems
+        /// </summary>
         public virtual List<Problem> RunAllChecks()
         {
             var list = new List<Problem>(1);
@@ -53,14 +57,46 @@ namespace XenAdmin.Diagnostics.Checks
         public abstract string Description { get; }
         public abstract IXenObject XenObject { get; }
 
-        public virtual string SuccessfulCheckDescription
+        public virtual string SuccessfulCheckDescription =>
+            string.IsNullOrEmpty(Description)
+                ? string.Empty
+                : string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description);
+    }
+
+
+    public abstract class PoolCheck : Check
+    {
+        protected PoolCheck(Pool pool)
         {
-            get
-            {
-                return string.IsNullOrEmpty(Description)
-                    ? string.Empty
-                    : string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description);
-            }
+            Pool = pool;
         }
+
+        protected Pool Pool { get; }
+
+        public sealed override IXenObject XenObject => Pool;
+
+        public override string SuccessfulCheckDescription =>
+            string.IsNullOrEmpty(Description)
+                ? string.Empty
+                : string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK, Helpers.GetPoolOfOne(Pool.Connection), Description);
+    }
+
+
+    public abstract class HostCheck : Check
+    {
+        protected HostCheck(Host host)
+        {
+            Debug.Assert(host != null);
+            Host = host;
+        }
+
+        protected Host Host { get; }
+
+        public sealed override IXenObject XenObject => Host;
+
+        public override string SuccessfulCheckDescription =>
+            string.IsNullOrEmpty(Description)
+                ? string.Empty
+                : string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK, Host.Name(), Description);
     }
 }

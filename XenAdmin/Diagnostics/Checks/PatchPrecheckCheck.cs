@@ -35,7 +35,6 @@ using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
 using System.IO;
 using XenAdmin.Diagnostics.Problems.HostProblem;
-using XenAdmin.Diagnostics.Problems.SRProblem;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Collections.Generic;

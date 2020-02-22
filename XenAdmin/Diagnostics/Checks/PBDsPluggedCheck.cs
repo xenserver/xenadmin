@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
-using XenAdmin.Diagnostics.Problems.SRProblem;
 using XenAPI;
 
 
