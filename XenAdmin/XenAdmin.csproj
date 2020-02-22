@@ -233,16 +233,15 @@
     <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
-    <Compile Include="Diagnostics\Checks\HostCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\PVGuestsCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
-    <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostPrepareToUpgradeProblem.cs" />
@@ -253,15 +252,11 @@
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\ConflictingUpdatePresent.cs" />
-    <Compile Include="Diagnostics\Problems\Information.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\NotLicensedForAutomatedUpdatesWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\ServerSelectionProblem.cs" />
-    <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
-    <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
-    <Compile Include="Diagnostics\Problems\WarningWithMoreInfo.cs" />
     <Compile Include="Dialogs\AddVGPUDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1476,7 +1471,6 @@
     <Compile Include="Wizards\HAWizard.Designer.cs">
       <DependentUpon>HAWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diagnostics\Problems\SRProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Checks\Check.cs" />
     <Compile Include="Diagnostics\Checks\HostLivenessCheck.cs" />
     <Compile Include="Diagnostics\Checks\PatchPrecheckCheck.cs" />
@@ -3097,7 +3091,6 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
-    <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3207,11 +3200,8 @@
     <Compile Include="Diagnostics\Checks\DR\RunningVmApplianceCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\RunningVmCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasHotfixCheck.cs" />
-    <Compile Include="Diagnostics\Checks\PoolCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\ExistingVmCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostDoesNotHaveHotfix.cs" />
-    <Compile Include="Diagnostics\Problems\PoolProblem\DrHAEnabledProblem.cs" />
-    <Compile Include="Diagnostics\Problems\PoolProblem\MissingSRWarning.cs" />
     <Compile Include="Diagnostics\Problems\VmApplianceProblem\ExistingVmApplianceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\WLBEnabledProblem.cs" />
     <Compile Include="Diagnostics\Problems\VmApplianceProblem\ExistingVmApplianceWarning.cs" />
@@ -4125,7 +4115,6 @@
     <Compile Include="Diagnostics\Problems\HostProblem\HostProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\WrongServerVersion.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolProblem.cs" />
-    <Compile Include="Diagnostics\Problems\SRProblem\SRProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\VMProblem.cs" />
     <Compile Include="Dialogs\AssignLicenseDialog.cs">
       <SubType>Form</SubType>

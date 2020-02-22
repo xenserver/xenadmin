@@ -57,20 +57,15 @@ namespace XenAdmin.Diagnostics.Checks
             return null;
         }
 
-        public override string Description
-        {
-            get
-            {
-                return Messages.HA_CHECK_DESCRIPTION;
-            }
-        }
+        public override string Description => Messages.HA_CHECK_DESCRIPTION;
 
         public override string SuccessfulCheckDescription
         {
             get
             {
                 var pool = Helpers.GetPool(Host.Connection);
-                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, pool != null ? pool.Name() : Host.Name(), Description);
+                return string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK,
+                    pool != null ? pool.Name() : Host.Name(), Description);
             }
         }
     }

@@ -30,20 +30,19 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Diagnostics.Problems
 {
     public abstract class Problem : IComparable<Problem>, IDisposable
     {
-        private AsyncAction solutionAction;
-        private readonly Check _check;
-
-        public virtual bool IsFixable
+        protected Problem(Check check)
         {
-            get { return true; }
+            Check = check ?? throw new ArgumentNullException();
         }
 
         private void SolutionAction_Completed(ActionBase sender)
@@ -53,27 +52,21 @@ namespace XenAdmin.Diagnostics.Problems
 
         private void RegisterSolutionActionEvent()
         {
-            if (solutionAction != null)
-                solutionAction.Completed += SolutionAction_Completed;
+            if (SolutionAction != null)
+                SolutionAction.Completed += SolutionAction_Completed;
         }
 
         private void DeregisterSolutionActionEvent()
         {
-            if (solutionAction != null)
-                solutionAction.Completed -= SolutionAction_Completed;
+            if (SolutionAction != null)
+                SolutionAction.Completed -= SolutionAction_Completed;
         }
 
-        protected Problem(Check check)
-        {
-            if (check == null)
-                throw new ArgumentNullException();
-            _check = check;
-        }
-
+        public virtual bool IsFixable => true;
         public abstract string Title { get; }
         public abstract string Description { get; }
         public bool SolutionActionCompleted { get; private set; }
-        public AsyncAction SolutionAction { get { return solutionAction; } }
+        public AsyncAction SolutionAction { get; private set; }
 
         protected virtual AsyncAction CreateAction(out bool cancelled)
         {
@@ -84,18 +77,15 @@ namespace XenAdmin.Diagnostics.Problems
         public AsyncAction GetSolutionAction(out bool cancelled)
         {
             DeregisterSolutionActionEvent();
-            solutionAction = CreateAction(out cancelled);
+            SolutionAction = CreateAction(out cancelled);
             SolutionActionCompleted = false;
             RegisterSolutionActionEvent();
-            return solutionAction;
+            return SolutionAction;
         }
 
         public abstract string HelpMessage { get; }
 
-        public Check Check
-        {
-            get { return _check; }
-        }
+        public Check Check { get; }
 
         public virtual AsyncAction CreateUnwindChangesAction()
         {
@@ -127,21 +117,15 @@ namespace XenAdmin.Diagnostics.Problems
             if (GetType() != other.GetType())
                 return false;
 
-            if (CompareTo(other) != 0)
-                return false;
-
-            return true;
+            return CompareTo(other) == 0;
         }
 
         public override int GetHashCode()
         {
-            return _check.GetHashCode();
+            return Check.GetHashCode();
         }
 
-        public virtual Image Image 
-        {
-            get { return Images.GetImage16For(Icons.Error); }
-        }
+        public virtual Image Image => Images.GetImage16For(Icons.Error);
 
         #region IDisposable Members
 
@@ -151,5 +135,39 @@ namespace XenAdmin.Diagnostics.Problems
         }
 
         #endregion
+    }
+
+    public abstract class ProblemWithInformationUrl : Problem
+    {
+        protected ProblemWithInformationUrl(Check check) : base(check)
+        {
+        }
+
+        public abstract Uri UriToLaunch { get; }
+
+        public override bool IsFixable => false;
+
+        public virtual string LinkText => UriToLaunch != null ? Messages.DETAILS : string.Empty;
+
+        public void LaunchUrlInBrowser()
+        {
+            try
+            {
+                if (UriToLaunch != null)
+                    Process.Start(UriToLaunch.AbsoluteUri);
+            }
+            catch (Exception)
+            {
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Error,
+                        string.Format(Messages.COULD_NOT_OPEN_URL,
+                            UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty),
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
+            }
+        }
     }
 }

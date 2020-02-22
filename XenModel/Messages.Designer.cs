@@ -28480,11 +28480,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} ok..
+        ///   Looks up a localized string similar to {0} OK..
         /// </summary>
         public static string PATCHING_WIZARD_CHECK_OK {
             get {
                 return ResourceManager.GetString("PATCHING_WIZARD_CHECK_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: {1} OK..
+        /// </summary>
+        public static string PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK {
+            get {
+                return ResourceManager.GetString("PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK", resourceCulture);
             }
         }
         
@@ -28503,15 +28512,6 @@ namespace XenAdmin {
         public static string PATCHING_WIZARD_DESC_CELL_INDENT {
             get {
                 return ResourceManager.GetString("PATCHING_WIZARD_DESC_CELL_INDENT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1} ok..
-        /// </summary>
-        public static string PATCHING_WIZARD_HOST_CHECK_OK {
-            get {
-                return ResourceManager.GetString("PATCHING_WIZARD_HOST_CHECK_OK", resourceCulture);
             }
         }
         
@@ -30103,7 +30103,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
         /// </summary>
         public static string POOL_HAS_PV_GUEST_WARNING {
             get {
@@ -30495,29 +30495,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SR &apos;{0}&apos;.
-        /// </summary>
-        public static string PROBLEM_SRPROBLEM_TITLE {
-            get {
-                return ResourceManager.GetString("PROBLEM_SRPROBLEM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect..
         /// </summary>
         public static string PROBLEM_STORAGELINK_CONNECTION_FAILED {
             get {
                 return ResourceManager.GetString("PROBLEM_STORAGELINK_CONNECTION_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading..
-        /// </summary>
-        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
-            get {
-                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR", resourceCulture);
             }
         }
         
@@ -34724,15 +34706,6 @@ namespace XenAdmin {
         public static string STORAGELINK_SR_NEEDS_REATTACH {
             get {
                 return ResourceManager.GetString("STORAGELINK_SR_NEEDS_REATTACH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink SR status.
-        /// </summary>
-        public static string STORAGELINK_UPGRADE_TEST {
-            get {
-                return ResourceManager.GetString("STORAGELINK_UPGRADE_TEST", resourceCulture);
             }
         }
         

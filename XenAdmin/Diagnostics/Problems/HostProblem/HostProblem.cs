@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.ComponentModel;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
@@ -39,35 +38,16 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
     public abstract class HostProblem : Problem
     {
-        private Host _server;
-
         protected HostProblem(Check check,  Host server)
             : base(check)
         {
-            _server = server;
+            Server = server;
         }
 
-        public string ServerName
-        {
-            get
-            {
-                return Helpers.GetName(_server).Ellipsise(30);
-            }
-        }
+        public string ServerName => Helpers.GetName(Server).Ellipsise(30);
 
-        public Host Server
-        {
-            get
-            {
-                return _server;
-            }
-        }
+        public Host Server { get; }
 
-        public sealed override string Title
-        {
-            get { return string.Format(Messages.PROBLEM_HOSTPROBLEM_TITLE, ServerName); }
-        }
-
-
+        public sealed override string Title => string.Format(Messages.PROBLEM_HOSTPROBLEM_TITLE, ServerName);
     }
 }
