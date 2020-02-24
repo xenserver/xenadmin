@@ -199,6 +199,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
             }
 
+            //vSwitch controller check - for each pool
+            var vswitchChecks = (from Host server in SelectedMasters.Where(m => !Helpers.StockholmOrGreater(m))
+                select new VSwitchControllerCheck(server, InstallMethodConfig) as Check).ToList();
+
+            if (vswitchChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vswitchChecks));
+            
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();

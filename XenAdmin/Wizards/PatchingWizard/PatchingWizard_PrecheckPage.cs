@@ -490,9 +490,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
             }
 
-            //PVGuestsCheck checks
             if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
             {
+                //PVGuestsCheck checks
                 var pvChecks = new List<Check>();
                 foreach (var pool in SelectedPools.Where(p => Helpers.NaplesOrGreater(p.Connection)))
                 {
@@ -501,6 +501,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 if (pvChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+
+                //vSwitch controller check - for each pool
+                var vSwitchChecks = (from Pool pool in SelectedPools.Where(
+                        p => Helpers.NaplesOrGreater(p.Connection) && !Helpers.StockholmOrGreater(p.Connection))
+                    let master = pool.Connection.Resolve(pool.master)
+                    where master != null
+                    select new VSwitchControllerCheck(master, highestNewVersion ?? UpdateAlert?.NewServerVersion) as Check).ToList();
+
+                if (vSwitchChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
             }
             
             return groups;

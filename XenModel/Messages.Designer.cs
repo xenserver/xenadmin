@@ -7294,6 +7294,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vSwitch Controller check.
+        /// </summary>
+        public static string CHECKING_VSWITCH_CONTROLLER {
+            get {
+                return ResourceManager.GetString("CHECKING_VSWITCH_CONTROLLER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking vSwitch Controller configuration.
+        /// </summary>
+        public static string CHECKING_VSWITCH_CONTROLLER_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_VSWITCH_CONTROLLER_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking [XenCenter] version.
         /// </summary>
         public static string CHECKING_XENCENTER_VERSION {
@@ -30567,6 +30585,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for the vSwitch Controller is dropped as of {1}.
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deconfigure vSwitch Controller.
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will need to deconfigure the vSwitch Controller, otherwise you may end up with an unstable, even vulnerable, system..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] version.
         /// </summary>
         public static string PROBLEM_XENCENTER_VERSION_TITLE {
@@ -41717,6 +41762,15 @@ namespace XenAdmin {
         public static string XENSERVER_8_1 {
             get {
                 return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer] {0}.
+        /// </summary>
+        public static string XENSERVER_8_2 {
+            get {
+                return ResourceManager.GetString("XENSERVER_8_2", resourceCulture);
             }
         }
         
