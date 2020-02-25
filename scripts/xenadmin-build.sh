@@ -68,9 +68,13 @@ source ${REPO}/Branding/branding.sh
 source ${REPO}/scripts/re-branding.sh $1
 
 #packages sources
+mkdir_clean ${SCRATCH_DIR}/SOURCES
 cd ${REPO}
 gitCommit=`git rev-parse HEAD`
-git archive --format=zip -o "_output/${BRANDING_BRAND_CONSOLE}-sources.zip" ${gitCommit}
+git archive --format=zip -o "_scratch/SOURCES/xenadmin-sources.zip" ${gitCommit}
+cp ${REPO}/packages/dotnet-packages-sources.zip ${SCRATCH_DIR}/SOURCES
+cd ${SCRATCH_DIR}/SOURCES && zip ${BRANDING_BRAND_CONSOLE}-source.zip dotnet-packages-sources.zip xenadmin-sources.zip
+cp ${SCRATCH_DIR}/SOURCES/${BRANDING_BRAND_CONSOLE}-source.zip ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
