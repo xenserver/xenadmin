@@ -2366,9 +2366,14 @@ namespace XenAdmin
             Program.Invoke(this, method);
         }
 
+        /// <summary>
+        /// Selects the specified object in the treeview.
+        /// </summary>
+        /// <param name="xenObject">The object to be selected.</param>
+        /// <returns>A value indicating whether selection was successful.</returns>
         public bool SelectObjectInTree(IXenObject xenObject)
         {
-            return SelectObject(xenObject);
+            return navigationPane.SelectObject(xenObject);
         }
 
         public Collection<IXenConnection> GetXenConnectionsCopy()
@@ -2395,7 +2400,6 @@ namespace XenAdmin
         {
             EditSelectedNodeInTreeView();
         }
-
 
         public void TrySelectNewObjectInTree(Predicate<object> tagMatch, bool selectNode, bool expandNode, bool ensureNodeVisible)
         {
@@ -2554,16 +2558,6 @@ namespace XenAdmin
                     Thread.Sleep(500);
                 }
             });
-        }
-
-        /// <summary>
-        /// Selects the specified object in the treeview.
-        /// </summary>
-        /// <param name="o">The object to be selected.</param>
-        /// <returns>A value indicating whether selection was successful.</returns>
-        public bool SelectObject(IXenObject o)
-        {
-            return navigationPane.SelectObject(o);
         }
 
         private void eventsPage_GoToXenObjectRequested(IXenObject obj)
