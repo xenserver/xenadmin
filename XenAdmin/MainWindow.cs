@@ -118,7 +118,6 @@ namespace XenAdmin
         private bool mainWindowResized = false;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
-        private readonly Dictionary<IXenObject, Form> activeXenModelObjectWizards = new Dictionary<IXenObject, Form>();
 
         /// <summary>
         /// The arguments passed in on the command line.
@@ -1015,7 +1014,7 @@ namespace XenAdmin
         {
             if (host.IsLive() && host.MaintenanceMode() && host.enabled)
             {
-                Program.MainWindow.CloseActiveWizards(host);
+                Program.Invoke(this, () => XenDialogBase.CloseAll(host));
 
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
@@ -1071,7 +1070,7 @@ namespace XenAdmin
                 {
                     VM vm = (VM)e.Element;
                     ConsolePanel.closeVNCForSource(vm);
-                    CloseActiveWizards(vm);
+                    XenDialogBase.CloseAll(vm);
                 }
 
                 selectedTabs.Remove(o);
@@ -2219,24 +2218,15 @@ namespace XenAdmin
         #region IMainWindowCommandInterface Members
 
         /// <summary>
-        /// Closes all per-Connection and per-VM wizards for the given connection.
+        /// Closes all per-Connection and per-XenObject forms for the given connection.
         /// </summary>
         /// <param name="connection"></param>
         public void CloseActiveWizards(IXenConnection connection)
         {
             Program.Invoke(Program.MainWindow, delegate
             {
-                var vms = connection.Cache.VMs;
-                foreach (var kvp in activeXenModelObjectWizards)
-                {
-                    if (kvp.Key is VM vm && vms.Contains(vm))
-                    {
-                        if (kvp.Value is Form wizard && !wizard.IsDisposed)
-                            wizard.Close();
-
-                        activeXenModelObjectWizards.Remove(vm);
-                    }
-                }
+                //so far we show per-xenObject forms only for VMs and Hosts
+                XenDialogBase.CloseAll(connection.Cache.VMs.Cast<IXenObject>().Union(connection.Cache.Hosts).ToArray());
 
                 if (activePoolWizards.TryGetValue(connection, out IList<Form> wizards))
                 {
@@ -2249,36 +2239,6 @@ namespace XenAdmin
                     activePoolWizards.Remove(connection);
                 }
             });
-        }
-
-        /// <summary>
-        /// Closes all per-XenObject wizards.
-        /// </summary>
-        /// <param name="obj"></param>
-        public void CloseActiveWizards(IXenObject obj)
-        {
-            Program.Invoke(Program.MainWindow, delegate
-            {
-                if (activeXenModelObjectWizards.TryGetValue(obj, out Form wizard))
-                {
-                    if (!wizard.IsDisposed)
-                        wizard.Close();
-
-                    activeXenModelObjectWizards.Remove(obj);
-                }
-            });
-        }
-
-        /// <summary>
-        /// Show the given wizard, and impose a one-wizard-per-XenObject limit.
-        /// </summary>
-        /// <param name="obj">The relevant VM</param>
-        /// <param name="wizard">The new wizard to show</param>
-        public void ShowPerXenModelObjectWizard(IXenObject obj, Form wizard)
-        {
-            CloseActiveWizards(obj);
-            activeXenModelObjectWizards.Add(obj, wizard);
-            wizard.Show(this);
         }
 
         /// <summary>
