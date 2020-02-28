@@ -33895,15 +33895,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be detached with [XenCenter]..
-        /// </summary>
-        public static string SR_CANNOT_BE_DETACHED_WITH_XC {
-            get {
-                return ResourceManager.GetString("SR_CANNOT_BE_DETACHED_WITH_XC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This SR cannot be forgotten with [XenCenter]..
         /// </summary>
         public static string SR_CANNOT_BE_FORGOTTEN_WITH_XC {

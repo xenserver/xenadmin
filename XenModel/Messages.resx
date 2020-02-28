@@ -11800,9 +11800,6 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
     <value>This SR cannot be destroyed with [XenCenter].</value>
   </data>
-  <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be detached with [XenCenter].</value>
-  </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
     <value>This SR cannot be forgotten with [XenCenter].</value>
   </data>
