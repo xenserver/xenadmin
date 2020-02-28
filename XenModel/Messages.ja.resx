@@ -13024,10 +13024,10 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>Mbps</value>
   </data>
   <data name="VAL_MICSEC" xml:space="preserve">
-    <value>マイクロ秒</value>
+    <value>μs</value>
   </data>
   <data name="VAL_MILSEC" xml:space="preserve">
-    <value>ミリ秒</value>
+    <value>ms</value>
   </data>
   <data name="VAL_MILWATT" xml:space="preserve">
     <value>mW</value>
@@ -13045,7 +13045,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>0.0</value>
   </data>
   <data name="VAL_SEC" xml:space="preserve">
-    <value>秒</value>
+    <value>s</value>
   </data>
   <data name="VAL_TERB" xml:space="preserve">
     <value>TB</value>
