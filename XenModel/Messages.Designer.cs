@@ -21383,7 +21383,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn more.
+        ///   Looks up a localized string similar to Learn more....
         /// </summary>
         public static string LEARN_MORE {
             get {
@@ -30148,7 +30148,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems..
         /// </summary>
         public static string POOL_HAS_PV_GUEST_WARNING {
             get {
@@ -30585,7 +30585,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for the vSwitch Controller is dropped as of {1}.
+        ///   Looks up a localized string similar to {0}: Support for the vSwitch Controller has been removed in {1}..
         /// </summary>
         public static string PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION {
             get {
@@ -30594,20 +30594,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deconfigure vSwitch Controller.
+        ///   Looks up a localized string similar to Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information..
         /// </summary>
-        public static string PROBLEM_VSWITCH_CONTROLLER_HELP {
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR {
             get {
-                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_HELP", resourceCulture);
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will need to deconfigure the vSwitch Controller, otherwise you may end up with an unstable, even vulnerable, system..
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information..
         /// </summary>
-        public static string PROBLEM_VSWITCH_CONTROLLER_INFO {
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING {
             get {
-                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO", resourceCulture);
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING", resourceCulture);
             }
         }
         

@@ -165,6 +165,9 @@ namespace XenAdmin.Diagnostics.Problems
 
         public abstract string Message { get; }
 
+        public virtual string LinkData => null;
+        public virtual string LinkText => LinkData;
+
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             Program.Invoke(Program.MainWindow, delegate ()
@@ -172,6 +175,12 @@ namespace XenAdmin.Diagnostics.Problems
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Error, Message)))
                 {
+                    if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
+                    {
+                        dlg.LinkText = LinkText;
+                        dlg.LinkData = LinkData;
+                        dlg.ShowLinkLabel = true;
+                    }
                     dlg.ShowDialog();
                 }
             });
