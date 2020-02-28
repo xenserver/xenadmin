@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
@@ -49,12 +48,15 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Title => Check.Description;
 
+        public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
+        public override string LinkText => Messages.LEARN_MORE;
+
         public override string Description =>
             string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, _pool,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
 
         public override string Message =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO,
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 
@@ -70,12 +72,15 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Title => Check.Description;
 
+        public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
+        public override string LinkText => Messages.LEARN_MORE;
+
         public override string Description =>
             string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, pool,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
 
         public override string Message =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO,
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 }
