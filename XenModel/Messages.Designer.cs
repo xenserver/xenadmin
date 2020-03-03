@@ -12395,15 +12395,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] has detected that an SR already exists on this LUN. This SR is not currently in use by &apos;{0}&apos;,  would you like to attach it?.
-        /// </summary>
-        public static string DETACHED_ISCI_DETECTED {
-            get {
-                return ResourceManager.GetString("DETACHED_ISCI_DETECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string DETAILS {
@@ -15878,17 +15869,6 @@ namespace XenAdmin {
         public static string EXCEPTION_USER_CANCELLED_MASTER {
             get {
                 return ResourceManager.GetString("EXCEPTION_USER_CANCELLED_MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
-        ///
-        ///Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including servers that are not connected to [XenCenter]..
-        /// </summary>
-        public static string EXISTING_SR_FOUND_ON_LUN {
-            get {
-                return ResourceManager.GetString("EXISTING_SR_FOUND_ON_LUN", resourceCulture);
             }
         }
         
@@ -21301,7 +21281,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid host name.
+        ///   Looks up a localized string similar to Invalid target host.
         /// </summary>
         public static string INVALID_HOST {
             get {
@@ -21487,18 +21467,6 @@ namespace XenAdmin {
         public static string ISCSI_DIALOG_SR_DETAILS {
             get {
                 return ResourceManager.GetString("ISCSI_DIALOG_SR_DETAILS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vendor: {0}
-        ///Serial Number: {1}
-        ///SCSI ID: {2}
-        ///Size: {3}.
-        /// </summary>
-        public static string ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL {
-            get {
-                return ResourceManager.GetString("ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL", resourceCulture);
             }
         }
         
@@ -26243,17 +26211,6 @@ namespace XenAdmin {
         public static string NEWSR_ISCSI_DESCRIPTION {
             get {
                 return ResourceManager.GetString("NEWSR_ISCSI_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any servers, or the virtual disk may become corrupted while in use.
-        ///
-        ///Do you want to format the disk?.
-        /// </summary>
-        public static string NEWSR_ISCSI_FORMAT_WARNING {
-            get {
-                return ResourceManager.GetString("NEWSR_ISCSI_FORMAT_WARNING", resourceCulture);
             }
         }
         
