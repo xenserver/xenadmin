@@ -401,6 +401,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             return false;
         }
+
         #region Accessors
 
         public List<FibreChannelDevice> FCDevices { private get; set; }
@@ -498,8 +499,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
-        public enum UserSelectedOption { Cancel, Reattach, Format, Skip }
-
         private class LVMoHBAWarningDialogLauncher
         {
             private readonly Dictionary<FibreChannelDescriptor, FibreChannelDescriptor> inputSrDescriptors;
@@ -519,10 +518,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 SrDescriptors = new List<FibreChannelDescriptor>();
             }
 
-            private UserSelectedOption GetSelectedOption(FibreChannelDescriptor descriptor, int remainingCount, bool foundExistingSr, 
+            private LVMoHBAWarningDialog.UserSelectedOption GetSelectedOption(FibreChannelDescriptor descriptor, int remainingCount, bool foundExistingSr, 
                 SR.SRTypes existingSrType, out bool repeatForRemainingLUNs)
             {
-                using (var dialog = new LVMoHBAWarningDialog(_connection, descriptor.Device, remainingCount, foundExistingSr, existingSrType, requestedSrType))
+                var deviceDetails = string.Format(Messages.LVMOHBA_WARNING_DIALOG_LUN_DETAILS,
+                    descriptor.Device.Vendor,
+                    descriptor.Device.Serial,
+                    string.IsNullOrEmpty(descriptor.Device.SCSIid) ? descriptor.Device.Path : descriptor.Device.SCSIid,
+                    Util.DiskSizeString(descriptor.Device.Size));
+
+                using (var dialog = new LVMoHBAWarningDialog(_connection, deviceDetails, remainingCount, foundExistingSr, existingSrType, requestedSrType))
                 {
                     dialog.ShowDialog(owner);
                     repeatForRemainingLUNs = dialog.RepeatForRemainingLUNs;
@@ -534,8 +539,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 // process LUNs where existing SRs have been found
                 bool repeatForRemainingLUNs = false;
-                UserSelectedOption selectedOption = UserSelectedOption.Cancel;
+                var selectedOption = LVMoHBAWarningDialog.UserSelectedOption.Cancel;
                 var descriptors = inputSrDescriptors.Keys.Where(d => inputSrDescriptors[d] != null).ToList();
+
                 foreach (var descriptor in descriptors)
                 {
                     if (!repeatForRemainingLUNs)
@@ -553,7 +559,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 // process LUNs where no existing have been found
                 repeatForRemainingLUNs = false;
-                selectedOption = UserSelectedOption.Cancel;
+                selectedOption = LVMoHBAWarningDialog.UserSelectedOption.Cancel;
                 descriptors = inputSrDescriptors.Keys.Where(d => inputSrDescriptors[d] == null).ToList();
                 
                 foreach (var descriptor in descriptors)
@@ -568,18 +574,18 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 }
             }
 
-            private void ProcessSelectedOption(UserSelectedOption selectedOption, FibreChannelDescriptor descriptor)
+            private void ProcessSelectedOption(LVMoHBAWarningDialog.UserSelectedOption selectedOption, FibreChannelDescriptor descriptor)
             {
                 switch (selectedOption)
                 {
-                    case UserSelectedOption.Format:
+                    case LVMoHBAWarningDialog.UserSelectedOption.Format:
                         descriptor.UUID = null;
                         SrDescriptors.Add(descriptor); // descriptor of requested SR
                         break;
-                    case UserSelectedOption.Reattach:
+                    case LVMoHBAWarningDialog.UserSelectedOption.Reattach:
                         SrDescriptors.Add(inputSrDescriptors[descriptor]); // value = descriptor of existing SR
                         break;
-                    case UserSelectedOption.Cancel:
+                    case LVMoHBAWarningDialog.UserSelectedOption.Cancel:
                         SrDescriptors.Clear();
                         Cancelled = true;
                         return;

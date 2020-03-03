@@ -1298,12 +1298,6 @@
     <Compile Include="Dialogs\DialogWithProgress.Designer.cs">
       <DependentUpon>DialogWithProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\IscsiChoicesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\IscsiChoicesDialog.Designer.cs">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ActionProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2643,10 +2637,6 @@
       <DependentUpon>ThreeButtonDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IscsiChoicesDialog.resx">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ActionProgressDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ActionProgressDialog.cs</DependentUpon>
@@ -3335,7 +3325,6 @@
     </Compile>
     <Compile Include="Core\ActionBaseExtensions.cs" />
     <Compile Include="TabPages\GeneralTabLicenseStatusStringifier.cs" />
-    <Compile Include="Utils\TemporaryDisablerForControls.cs" />
     <Compile Include="WinformsXenAdminConfigProvider.cs" />
     <Compile Include="Actions\GUIActions\Wlb\ExportReportAction.cs" />
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />
@@ -5381,12 +5370,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputPromptDialog.zh-CN.resx">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IscsiChoicesDialog.ja.resx">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IscsiChoicesDialog.zh-CN.resx">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IscsiDeviceConfigDialog.ja.resx">
       <DependentUpon>IscsiDeviceConfigDialog.cs</DependentUpon>

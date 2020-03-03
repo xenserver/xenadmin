@@ -33,10 +33,9 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
+using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAPI;
 
 namespace XenAdmin.Dialogs.WarningDialogs
@@ -44,22 +43,22 @@ namespace XenAdmin.Dialogs.WarningDialogs
     public partial class LVMoHBAWarningDialog : XenDialogBase
     {
         private Panel highlightedPanel;
-        private FibreChannelDevice currentDevice;
+        private string deviceDetails;
         private int remainingDevicesCount;
         private bool foundExistingSR;
         private readonly SR.SRTypes existingSrType;
         private readonly SR.SRTypes requestedSrType;
         private readonly IXenConnection _connection;
 
-        public LVMoHBA.UserSelectedOption SelectedOption { get; private set; }
+        public UserSelectedOption SelectedOption { get; private set; }
         public bool RepeatForRemainingLUNs => checkBoxRepeat.Checked;
 
-        public LVMoHBAWarningDialog(IXenConnection connection, FibreChannelDevice currentDevice, int remainingDevicesCount,
+        public LVMoHBAWarningDialog(IXenConnection connection, string deviceDetails, int remainingDevicesCount,
             bool foundExistingSR, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
         {
             InitializeComponent();
             _connection = connection;
-            this.currentDevice = currentDevice;
+            this.deviceDetails = deviceDetails;
             this.remainingDevicesCount = remainingDevicesCount;
             this.foundExistingSR = foundExistingSR;
             this.existingSrType = existingSrType;
@@ -85,7 +84,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
         {
             if (panel == null)
                 return;
-            
+
             Color color = highlighted ? SystemColors.ControlLight : SystemColors.Control;
             panel.BackColor = color;
 
@@ -109,7 +108,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             HighlightedPanel = panelFormat;
         }
 
-        private void ExistingSRsWarningDialog_MouseEnter(object sender, EventArgs e)
+        private void LVMoHBAWarningDialog_MouseEnter(object sender, EventArgs e)
         {
             HighlightedPanel = null;
         }
@@ -125,11 +124,8 @@ namespace XenAdmin.Dialogs.WarningDialogs
                 : Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_NO_SR;
             checkBoxRepeat.Visible = remainingDevicesCount > 0;
 
-            labelLUNDetails.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_LUN_DETAILS,
-                currentDevice.Vendor,
-                currentDevice.Serial,
-                string.IsNullOrEmpty(currentDevice.SCSIid) ? currentDevice.Path : currentDevice.SCSIid,
-                Util.DiskSizeString(currentDevice.Size));
+            labelLUNDetails.Text = deviceDetails;
+            labelSrDetails.Visible = false;
 
             var isGfs2 = existingSrType == SR.SRTypes.gfs2;
             var clusteringEnabled = _connection.Cache.Clusters.Any();
@@ -160,21 +156,69 @@ namespace XenAdmin.Dialogs.WarningDialogs
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            SelectedOption = LVMoHBA.UserSelectedOption.Cancel;
+            SelectedOption = UserSelectedOption.Cancel;
         }
 
         private void panelReattach_Click(object sender, EventArgs e)
         {
             HighlightedPanel = panelReattach;
-            SelectedOption = LVMoHBA.UserSelectedOption.Reattach;
+            SelectedOption = UserSelectedOption.Reattach;
             DialogResult = DialogResult.OK;
         }
 
         private void panelFormat_Click(object sender, EventArgs e)
         {
             HighlightedPanel = panelFormat;
-            SelectedOption = LVMoHBA.UserSelectedOption.Format;
+            SelectedOption = UserSelectedOption.Format;
             DialogResult = DialogResult.OK;
+        }
+
+
+        public enum UserSelectedOption
+        {
+            Cancel,
+            Reattach,
+            Format,
+            Skip
+        }
+    }
+
+    public class LVMoIsciWarningDialog : LVMoHBAWarningDialog
+    {
+        public LVMoIsciWarningDialog(IXenConnection connection, SR.SRInfo srInfo, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
+            : base(connection, "", 0, srInfo != null, existingSrType, requestedSrType)
+        {
+            labelLUNDetails.Visible = false;
+            labelSrDetails.Visible = srInfo != null;
+
+            // CA-17230: if the found SR is used by other connected pools, offer only to attach it
+
+            if (srInfo != null)
+            {
+                SR sr = SrWizardHelpers.SrInUse(srInfo.UUID);
+                if (sr != null)
+                {
+                    panelFormat.Visible = false;
+                    labelWarning.Text = GetSrInUseMessage(sr);
+                }
+
+                labelSrDetails.Text = string.Format(Messages.ISCSI_DIALOG_SR_DETAILS, Util.DiskSizeString(srInfo.Size), srInfo.UUID);
+            }
+        }
+
+        public static string GetSrInUseMessage(SR sr)
+        {
+            Pool pool = Helpers.GetPool(sr.Connection);
+            
+            if (pool != null)
+                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name(), pool.Name());
+            
+            Host master = Helpers.GetMaster(sr.Connection);
+            
+            if (master != null)
+                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), master.Name());
+
+            return Messages.NEWSR_LUN_IN_USE;
         }
     }
 }

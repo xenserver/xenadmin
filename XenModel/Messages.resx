@@ -4394,9 +4394,6 @@ This will also delete its subfolders.</value>
   <data name="DETACHED_BRACKETS" xml:space="preserve">
     <value>{0} (Detached)</value>
   </data>
-  <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
-    <value>[XenCenter] has detected that an SR already exists on this LUN. This SR is not currently in use by '{0}',  would you like to attach it?</value>
-  </data>
   <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Detach all</value>
   </data>
@@ -5570,11 +5567,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>User canceled. Master needs to be upgraded first.</value>
-  </data>
-  <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
-    <value>An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
-
-Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including servers that are not connected to [XenCenter].</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
@@ -7398,7 +7390,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Invalid disk size</value>
   </data>
   <data name="INVALID_HOST" xml:space="preserve">
-    <value>Invalid host name</value>
+    <value>Invalid target host.</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>Invalid number</value>
@@ -7457,12 +7449,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="ISCSI_DIALOG_SR_DETAILS" xml:space="preserve">
     <value>SR size: {0}
 SR UUID: {1}</value>
-  </data>
-  <data name="ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL" xml:space="preserve">
-    <value>Vendor: {0}
-Serial Number: {1}
-SCSI ID: {2}
-Size: {3}</value>
   </data>
   <data name="ISCSI_FAIL" xml:space="preserve">
     <value>Interrogation failed -- call succeeded!</value>
@@ -8960,11 +8946,6 @@ When you configure a SMB storage repository, you simply provide the host name or
   </data>
   <data name="NEWSR_ISCSI_DESCRIPTION" xml:space="preserve">
     <value>iSCSI SR [{0} ({1}; {2})]</value>
-  </data>
-  <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any servers, or the virtual disk may become corrupted while in use.
-
-Do you want to format the disk?</value>
   </data>
   <data name="NEWSR_ISO_DESCRIPTION" xml:space="preserve">
     <value>NFS ISO Library [{0}]</value>
