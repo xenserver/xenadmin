@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
@@ -703,18 +704,18 @@ namespace XenAdmin.Dialogs
                 this.CloseButton.Enabled = true;
                 this.NewMasterComboBox.Enabled = true;
 
-                Failure failure = hostAction.Exception as Failure;
-                if (failure == null)
-                    return;
-
-                if (failure.ErrorDescription.Count > 0 &&
-                    failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
+                if (hostAction.Exception is Failure failure)
                 {
-                    failure.ErrorDescription[0] = Failure.HA_NO_PLAN;
-                    failure.Setup();
-                }
+                    var errorParams = failure.ErrorDescription;
 
-                ProcessError(null, failure.ErrorDescription.ToArray());
+                    if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
+                    {
+                        errorParams = new List<string> {Failure.HA_NO_PLAN};
+                        errorParams.AddRange(failure.ErrorDescription.Skip(1));
+                    }
+
+                    ProcessError(null, errorParams.ToArray());
+                }
             });
 
             Program.Invoke(this, () => FinalizeProgressControls(sender));
