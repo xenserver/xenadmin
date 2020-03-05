@@ -139,8 +139,10 @@ node('xencenter') {
     }
 
     stage('Run checks') {
-      powershell ".\\${env.WORKSPACE}\\xenadmin.git\\scripts\\check_copyright.ps1"
-      powershell ".\\${env.WORKSPACE}\\xenadmin.git\\scripts\\check_i18n.ps1"
+      dir("${env.WORKSPACE}\\xenadmin.git") {
+        powershell ".\\scripts\\check_copyright.ps1"
+        powershell ".\\scripts\\check_i18n.ps1"
+      }
     }
 
     stage('Build') {
