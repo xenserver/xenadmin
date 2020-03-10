@@ -216,6 +216,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private bool RunProbe(Host master, FibreChannelDescriptor srDescriptor, out List<SR.SRInfo> srs)
         {
+            srs = new List<SR.SRInfo>();
             var action = new SrProbeAction(Connection, master, srDescriptor.SrType, srDescriptor.DeviceConfig);
 
             using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
@@ -233,8 +234,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     return false;
                 }
             }
-
-            srs = new List<SR.SRInfo>();
 
             //CA-335356 special treatment of case where gfs2 cannot see the same devices as lvmohba
             if (srDescriptor.SrType == SR.SRTypes.gfs2 && action.Exception is Failure f && f.ErrorDescription.Count > 1 &&
