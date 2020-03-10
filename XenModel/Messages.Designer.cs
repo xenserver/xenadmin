@@ -33204,6 +33204,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select License Key.
+        /// </summary>
+        public static string SELECT_LICENSE_KEY {
+            get {
+                return ResourceManager.GetString("SELECT_LICENSE_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no networks available for this network interface.
         /// </summary>
         public static string SELECT_NETWORK_TOOLTIP {

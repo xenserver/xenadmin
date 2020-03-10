@@ -1695,12 +1695,12 @@ namespace XenAdmin
                 {
                     dialog = new OpenFileDialog();
                     dialog.Multiselect = false;
-                    dialog.Title = Messages.INSTALL_LICENSE_KEY;
+                    dialog.Title = Messages.SELECT_LICENSE_KEY;
                     dialog.CheckFileExists = true;
                     dialog.CheckPathExists = true;
                     dialog.Filter = string.Format("{0} (*.xslic)|*.xslic|{1} (*.*)|*.*", Messages.XS_LICENSE_FILES, Messages.ALL_FILES);
                     dialog.ShowHelp = true;
-                    dialog.HelpRequest += new EventHandler(dialog_HelpRequest);
+                    dialog.HelpRequest += dialog_HelpRequest;
                     result = dialog.ShowDialog(this);
                 }
             }

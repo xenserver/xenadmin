@@ -11524,6 +11524,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SELECT_DEFAULT_SR" xml:space="preserve">
     <value>Select Default SR</value>
   </data>
+  <data name="SELECT_LICENSE_KEY" xml:space="preserve">
+    <value>Select License Key</value>
+  </data>
   <data name="SELECT_NETWORK_TOOLTIP" xml:space="preserve">
     <value>There are no networks available for this network interface</value>
   </data>
