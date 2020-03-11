@@ -338,7 +338,7 @@ namespace XenAdmin.XenSearch
                     if (i == null)
                         return null;
 
-                    return HelpersGUI.GetProgressImage(i.Value);
+                    return Images.GetImageForPercentage(i.Value);
                 }));
         }
 
