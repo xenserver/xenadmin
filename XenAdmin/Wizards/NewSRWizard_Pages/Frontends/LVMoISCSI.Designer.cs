@@ -165,14 +165,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.spinnerIconAtTargetIqn, "spinnerIconAtTargetIqn");
             this.spinnerIconAtTargetIqn.Name = "spinnerIconAtTargetIqn";
-            this.spinnerIconAtTargetIqn.SucceededImage = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
             this.spinnerIconAtTargetIqn.TabStop = false;
             // 
             // spinnerIconAtTargetLun
             // 
             resources.ApplyResources(this.spinnerIconAtTargetLun, "spinnerIconAtTargetLun");
             this.spinnerIconAtTargetLun.Name = "spinnerIconAtTargetLun";
-            this.spinnerIconAtTargetLun.SucceededImage = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
             this.spinnerIconAtTargetLun.TabStop = false;
             // 
             // errorLabelAtCHAPPassword
@@ -283,7 +281,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.spinnerIconAtScanTargetHostButton, "spinnerIconAtScanTargetHostButton");
             this.spinnerIconAtScanTargetHostButton.Name = "spinnerIconAtScanTargetHostButton";
-            this.spinnerIconAtScanTargetHostButton.SucceededImage = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
             this.spinnerIconAtScanTargetHostButton.TabStop = false;
             // 
             // toolTipContainerIQNscan

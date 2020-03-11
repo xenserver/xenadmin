@@ -349,7 +349,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             iscsiProbeError = false;
             if (comboBoxIscsiLuns.SelectedItem as string != Messages.SELECT_TARGET_LUN)
             {
-                spinnerIconAtTargetLun.DisplaySucceededImage();
+                spinnerIconAtTargetLun.ShowSuccessImage();
             }
             else
             {
@@ -601,7 +601,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                         iSCSITargetGroupBox.Enabled = true;
                     }
 
-                    spinnerIconAtScanTargetHostButton.DisplaySucceededImage();
+                    spinnerIconAtScanTargetHostButton.ShowSuccessImage();
 
                     comboBoxIscsiIqns.Focus();
                 }
@@ -740,7 +740,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 targetLunLabel.Enabled = true;
                 comboBoxIscsiLuns.Focus();
 
-                spinnerIconAtTargetIqn.DisplaySucceededImage();
+                spinnerIconAtTargetIqn.ShowSuccessImage();
             }
 
             comboBoxIscsiLuns.Enabled = true;
