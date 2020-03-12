@@ -2518,6 +2518,15 @@ This will cancel compilation of the status report.</value>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>DVD drive on {0}</value>
   </data>
+  <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
+    <value>Thumbprint</value>
+  </data>
+  <data name="CERTIFICATE_VALIDITY_PERIOD_KEY" xml:space="preserve">
+    <value>Validity period</value>
+  </data>
+  <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
+    <value>Valid from {0} to {1}</value>
+  </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Ability to download updates</value>
   </data>
