@@ -5877,6 +5877,13 @@ namespace XenAPI
             return Rpc<string>("host.get_uefi_certificates", new JArray(session, _host ?? ""), serializer);
         }
 
+        public List<XenRef<Certificate>> host_get_certificates(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Certificate>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<XenRef<Certificate>>>("host.get_certificates", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_set_name_label(string session, string _host, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -6575,6 +6582,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.host.get_server_certificate", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public void host_install_server_certificate(string session, string _host, string _certificate, string _private_key, string _certificate_chain)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("host.install_server_certificate", new JArray(session, _host ?? "", _certificate ?? "", _private_key ?? "", _certificate_chain ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_host_install_server_certificate(string session, string _host, string _certificate, string _private_key, string _certificate_chain)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.host.install_server_certificate", new JArray(session, _host ?? "", _certificate ?? "", _private_key ?? "", _certificate_chain ?? ""), serializer);
         }
 
         public void host_apply_edition(string session, string _host, string _edition)
@@ -14465,6 +14486,69 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Cluster_host>()};
             var serializer = CreateSerializer(converters);
             return Rpc<Dictionary<XenRef<Cluster_host>, Cluster_host>>("Cluster_host.get_all_records", new JArray(session), serializer);
+        }
+
+        public Certificate certificate_get_record(string session, string _certificate)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<Certificate>("Certificate.get_record", new JArray(session, _certificate ?? ""), serializer);
+        }
+
+        public XenRef<Certificate> certificate_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Certificate>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Certificate>>("Certificate.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public string certificate_get_uuid(string session, string _certificate)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("Certificate.get_uuid", new JArray(session, _certificate ?? ""), serializer);
+        }
+
+        public XenRef<Host> certificate_get_host(string session, string _certificate)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Host>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Host>>("Certificate.get_host", new JArray(session, _certificate ?? ""), serializer);
+        }
+
+        public DateTime certificate_get_not_before(string session, string _certificate)
+        {
+            var converters = new List<JsonConverter> {new XenDateTimeConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<DateTime>("Certificate.get_not_before", new JArray(session, _certificate ?? ""), serializer);
+        }
+
+        public DateTime certificate_get_not_after(string session, string _certificate)
+        {
+            var converters = new List<JsonConverter> {new XenDateTimeConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<DateTime>("Certificate.get_not_after", new JArray(session, _certificate ?? ""), serializer);
+        }
+
+        public string certificate_get_fingerprint(string session, string _certificate)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("Certificate.get_fingerprint", new JArray(session, _certificate ?? ""), serializer);
+        }
+
+        public List<XenRef<Certificate>> certificate_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Certificate>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<XenRef<Certificate>>>("Certificate.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<Certificate>, Certificate> certificate_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Certificate>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<Dictionary<XenRef<Certificate>, Certificate>>("Certificate.get_all_records", new JArray(session), serializer);
         }
     }
 }
