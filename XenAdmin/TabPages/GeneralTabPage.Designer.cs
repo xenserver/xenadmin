@@ -74,6 +74,8 @@ namespace XenAdmin.TabPages
             this.pdSectionLicense = new XenAdmin.Controls.PDSection();
             this.panelCustomFields = new System.Windows.Forms.Panel();
             this.pdSectionCustomFields = new XenAdmin.Controls.PDSection();
+            this.panelCertificate = new System.Windows.Forms.Panel();
+            this.pdSectionCertificate = new XenAdmin.Controls.PDSection();
             this.panelGeneral = new System.Windows.Forms.Panel();
             this.pdSectionGeneral = new XenAdmin.Controls.PDSection();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
@@ -97,6 +99,7 @@ namespace XenAdmin.TabPages
             this.panelVersion.SuspendLayout();
             this.panelLicense.SuspendLayout();
             this.panelCustomFields.SuspendLayout();
+            this.panelCertificate.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
             this.SuspendLayout();
@@ -163,6 +166,7 @@ namespace XenAdmin.TabPages
             this.panel2.Controls.Add(this.panelVersion);
             this.panel2.Controls.Add(this.panelLicense);
             this.panel2.Controls.Add(this.panelCustomFields);
+            this.panel2.Controls.Add(this.panelCertificate);
             this.panel2.Controls.Add(this.panelGeneral);
             this.panel2.Name = "panel2";
             // 
@@ -400,6 +404,19 @@ namespace XenAdmin.TabPages
             this.pdSectionCustomFields.Name = "pdSectionCustomFields";
             this.pdSectionCustomFields.ShowCellToolTips = true;
             // 
+            // panelCertificate
+            // 
+            resources.ApplyResources(this.panelCertificate, "panelCertificate");
+            this.panelCertificate.Controls.Add(this.pdSectionCertificate);
+            this.panelCertificate.Name = "panelCertificate";
+            // 
+            // pdSectionCertificate
+            // 
+            this.pdSectionCertificate.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.pdSectionCertificate, "pdSectionCertificate");
+            this.pdSectionCertificate.Name = "pdSectionCertificate";
+            this.pdSectionCertificate.ShowCellToolTips = false;
+            // 
             // panelGeneral
             // 
             resources.ApplyResources(this.panelGeneral, "panelGeneral");
@@ -451,6 +468,7 @@ namespace XenAdmin.TabPages
             this.panelVersion.ResumeLayout(false);
             this.panelLicense.ResumeLayout(false);
             this.panelCustomFields.ResumeLayout(false);
+            this.panelCertificate.ResumeLayout(false);
             this.panelGeneral.ResumeLayout(false);
             this.tableLayoutPanelButtons.ResumeLayout(false);
             this.tableLayoutPanelButtons.PerformLayout();
@@ -506,5 +524,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button buttonViewConsole;
         private System.Windows.Forms.Button buttonViewLog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
+        private System.Windows.Forms.Panel panelCertificate;
+        private Controls.PDSection pdSectionCertificate;
     }
 }

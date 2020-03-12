@@ -423,6 +423,7 @@ namespace XenAdmin.TabPages
             else
             {
                 generateGeneralBox();
+                GenerateCertificateBox();
                 generateCustomFieldsBox();
                 generateInterfaceBox();
                 generateMemoryBox();
@@ -1078,6 +1079,26 @@ namespace XenAdmin.TabPages
 
         }
 
+        private void GenerateCertificateBox()
+        {
+            if (xenObject is Host host && Helpers.StockholmOrGreater(host) && host.certificates != null && host.certificates.Count > 0)
+            {
+                var certificate = host.Connection.Resolve(host.certificates[0]);
+                if (certificate == null)
+                    return;
+
+                var cmdItem = new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true);
+
+                pdSectionCertificate.AddEntry(Messages.CERTIFICATE_VALIDITY_PERIOD_KEY,
+                    string.Format(Messages.CERTIFICATE_VALIDITY_PERIOD_VALUE,
+                        HelpersGUI.DateTimeToString(certificate.not_before.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true),
+                        HelpersGUI.DateTimeToString(certificate.not_after.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true)),
+                    new[] {cmdItem});
+
+                pdSectionCertificate.AddEntry(Messages.CERTIFICATE_THUMBPRINT_KEY, certificate.fingerprint);
+            }
+        }
+
         private void generateGeneralBox()
         {
             PDSection s = pdSectionGeneral;
@@ -1095,8 +1116,7 @@ namespace XenAdmin.TabPages
             GenTagRow(s);
             GenFolderRow(s);
 
-            Host host = xenObject as Host;
-            if (host != null)
+            if (xenObject is Host host)
             {
                 if (Helpers.GetPool(xenObject.Connection) != null)
                     s.AddEntry(Messages.POOL_MASTER, host.IsMaster() ? Messages.YES : Messages.NO);

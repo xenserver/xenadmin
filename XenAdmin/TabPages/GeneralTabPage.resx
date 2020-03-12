@@ -169,7 +169,7 @@
     <value>Top</value>
   </data>
   <data name="panelReadCaching.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 792</value>
+    <value>0, 836</value>
   </data>
   <data name="panelReadCaching.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -238,7 +238,7 @@
     <value>Top</value>
   </data>
   <data name="panelDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 748</value>
+    <value>0, 792</value>
   </data>
   <data name="panelDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -307,7 +307,7 @@
     <value>Top</value>
   </data>
   <data name="panelDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 704</value>
+    <value>0, 748</value>
   </data>
   <data name="panelDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -376,7 +376,7 @@
     <value>Top</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 660</value>
+    <value>0, 704</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -445,7 +445,7 @@
     <value>Top</value>
   </data>
   <data name="panelMultipathBoot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 616</value>
+    <value>0, 660</value>
   </data>
   <data name="panelMultipathBoot.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -514,7 +514,7 @@
     <value>Top</value>
   </data>
   <data name="panelStorageLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 572</value>
+    <value>0, 616</value>
   </data>
   <data name="panelStorageLink.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -583,7 +583,7 @@
     <value>Top</value>
   </data>
   <data name="panelMemoryAndVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 528</value>
+    <value>0, 572</value>
   </data>
   <data name="panelMemoryAndVCPUs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -652,7 +652,7 @@
     <value>Top</value>
   </data>
   <data name="panelMultipathing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 484</value>
+    <value>0, 528</value>
   </data>
   <data name="panelMultipathing.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -721,7 +721,7 @@
     <value>Top</value>
   </data>
   <data name="panelStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 440</value>
+    <value>0, 484</value>
   </data>
   <data name="panelStatus.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -790,7 +790,7 @@
     <value>Top</value>
   </data>
   <data name="panelHighAvailability.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 396</value>
+    <value>0, 440</value>
   </data>
   <data name="panelHighAvailability.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -859,7 +859,7 @@
     <value>Top</value>
   </data>
   <data name="panelBootOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 352</value>
+    <value>0, 396</value>
   </data>
   <data name="panelBootOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -928,7 +928,7 @@
     <value>Top</value>
   </data>
   <data name="panelCPU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 308</value>
+    <value>0, 352</value>
   </data>
   <data name="panelCPU.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -997,7 +997,7 @@
     <value>Top</value>
   </data>
   <data name="panelMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 264</value>
+    <value>0, 308</value>
   </data>
   <data name="panelMemory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -1066,7 +1066,7 @@
     <value>Top</value>
   </data>
   <data name="panelManagementInterfaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 220</value>
+    <value>0, 264</value>
   </data>
   <data name="panelManagementInterfaces.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -1135,7 +1135,7 @@
     <value>Top</value>
   </data>
   <data name="panelUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 176</value>
+    <value>0, 220</value>
   </data>
   <data name="panelUpdates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -1204,7 +1204,7 @@
     <value>Top</value>
   </data>
   <data name="panelVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 132</value>
+    <value>0, 176</value>
   </data>
   <data name="panelVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -1273,7 +1273,7 @@
     <value>Top</value>
   </data>
   <data name="panelLicense.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 88</value>
+    <value>0, 132</value>
   </data>
   <data name="panelLicense.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -1342,7 +1342,7 @@
     <value>Top</value>
   </data>
   <data name="panelCustomFields.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 44</value>
+    <value>0, 88</value>
   </data>
   <data name="panelCustomFields.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 5, 0, 5</value>
@@ -1364,6 +1364,75 @@
   </data>
   <data name="&gt;&gt;panelCustomFields.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="panelCertificate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelCertificate.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionCertificate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pdSectionCertificate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionCertificate.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>900, 9999999</value>
+  </data>
+  <data name="pdSectionCertificate.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionCertificate.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionCertificate.SectionTitle" xml:space="preserve">
+    <value>Certificate</value>
+  </data>
+  <data name="pdSectionCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 34</value>
+  </data>
+  <data name="pdSectionCertificate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionCertificate.Name" xml:space="preserve">
+    <value>pdSectionCertificate</value>
+  </data>
+  <data name="&gt;&gt;pdSectionCertificate.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionCertificate.Parent" xml:space="preserve">
+    <value>panelCertificate</value>
+  </data>
+  <data name="&gt;&gt;pdSectionCertificate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelCertificate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelCertificate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 44</value>
+  </data>
+  <data name="panelCertificate.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 44</value>
+  </data>
+  <data name="panelCertificate.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;panelCertificate.Name" xml:space="preserve">
+    <value>panelCertificate</value>
+  </data>
+  <data name="&gt;&gt;panelCertificate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelCertificate.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelCertificate.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="panelGeneral.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1432,7 +1501,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelGeneral.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

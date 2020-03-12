@@ -6944,6 +6944,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thumbprint.
+        /// </summary>
+        public static string CERTIFICATE_THUMBPRINT_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validity period.
+        /// </summary>
+        public static string CERTIFICATE_VALIDITY_PERIOD_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid from {0} to {1}.
+        /// </summary>
+        public static string CERTIFICATE_VALIDITY_PERIOD_VALUE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ability to download updates.
         /// </summary>
         public static string CFU_STATUS_CHECK_DESCRIPTION {
