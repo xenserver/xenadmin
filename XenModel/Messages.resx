@@ -2518,6 +2518,24 @@ This will cancel compilation of the status report.</value>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>DVD drive on {0}</value>
   </data>
+  <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>The TLS certificate of server '{0}' expired on {1}.</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>Certificate on {0} expired</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>The TLS certificate of server '{0}' will expire on {1}.</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE" xml:space="preserve">
+    <value>Certificate on {0} expiring in {1} days</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_ONE" xml:space="preserve">
+    <value>Certificate on {0} expiring in 1 day</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO" xml:space="preserve">
+    <value>Certificate on {0} expiring today</value>
+  </data>
   <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
     <value>Thumbprint</value>
   </data>
