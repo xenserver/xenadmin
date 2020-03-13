@@ -53,18 +53,26 @@ namespace XenAdmin.TabPages
 {
     public partial class GeneralTabPage : BaseTabPage
     {
+        #region Private fields
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private readonly List<PDSection> sections= new List<PDSection>();
         private readonly Dictionary<Type, List<PDSection>> _expandedSections = new Dictionary<Type, List<PDSection>>();
 
+        private IXenObject xenObject;
+
         /// <summary>
-        /// Set when we need to do a rebuild, but we are not visible, to queue up a rebuild.
+        /// Indicates whether rebuild requests have been queued,
+        /// in which case rebuilding the section list is necessary
         /// </summary>
-        private bool refreshNeeded = false;
+        private bool refreshNeeded;
+
+        private readonly CollectionChangeEventHandler VM_guest_metrics_CollectionChangedWithInvoke;
 
         private LicenseStatus licenseStatus;
 
-        private readonly List<PDSection> sections;
+        #endregion
 
         public LicenseManagerLauncher LicenseLauncher { private get; set; }
 
@@ -74,21 +82,20 @@ namespace XenAdmin.TabPages
 
             VM_guest_metrics_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
             OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
-            sections = new List<PDSection>();
+            
             foreach (Control control in panel2.Controls)
             {
-                Panel p = control as Panel;
-                if (p == null)
+                if (!(control is Panel p))
                     continue;
 
                 foreach (Control c in p.Controls)
                 {
-                    PDSection s = c as PDSection;
-                    if (s == null)
+                    if (!(c is PDSection s))
                         continue;
                     sections.Add(s);
-                    s.contentChangedSelection += s_contentChangedSelection;
-                    s.contentReceivedFocus += s_contentReceivedFocus;
+                    s.ContentChangedSelection += s_ContentChangedSelection;
+                    s.ContentReceivedFocus += s_ContentReceivedFocus;
+                    s.ExpandedChanged += s_ExpandedChanged;
                 }
             }            
         }
@@ -121,17 +128,7 @@ namespace XenAdmin.TabPages
             });
         }
 
-        void s_contentReceivedFocus(PDSection s)
-        {
-            scrollToSelectionIfNeeded(s);
-        }
-
-        void s_contentChangedSelection(PDSection s)
-        {
-            scrollToSelectionIfNeeded(s);
-        }
-
-        private void scrollToSelectionIfNeeded(PDSection s)
+        private void ScrollToSelectionIfNeeded(PDSection s)
         {
             if (s.HasNoSelection())
                 return;
@@ -155,12 +152,6 @@ namespace XenAdmin.TabPages
             panel2.ForceScrollTo(s);
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            new PropertiesCommand(Program.MainWindow, xenObject).Execute();
-        }
-
-        private IXenObject xenObject;
         public IXenObject XenObject
         {
             set
@@ -195,65 +186,16 @@ namespace XenAdmin.TabPages
                 RegisterHandlers();
                 BuildList();
 
-                if (xenObject != null && !_expandedSections.ContainsKey(xenObject.GetType()))
+                List<PDSection> expandedSections = null;
+
+                if (xenObject != null && !_expandedSections.TryGetValue(xenObject.GetType(), out expandedSections))
                 {
-                    _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSectionGeneral});
-                    pdSectionGeneral.Expand();
+                    expandedSections = new List<PDSection> {pdSectionGeneral};
+                    _expandedSections[xenObject.GetType()] = expandedSections;
                 }
 
-                ResetExpandState();
-            }
-        }
-
-        private void pdSection_ExpandedChanged(PDSection pdSection)
-        {
-            if (pdSection != null && xenObject != null)
-            {
-                List<PDSection> listSections;
-                if (_expandedSections.TryGetValue(xenObject.GetType(), out listSections))
-                {
-                    if (!listSections.Contains(pdSection) && pdSection.IsExpanded)
-                        listSections.Add(pdSection);
-                    else if (!pdSection.IsExpanded)
-                        listSections.Remove(pdSection);
-                }
-                else if (pdSection.IsExpanded)
-                {
-                    _expandedSections.Add(xenObject.GetType(), new List<PDSection> {pdSection});
-                }
-            }
-            SetStatesOfExpandingLinks();
-        }
-
-
-        private void ResetExpandState()
-        {
-            List<PDSection> expandedSections = null;
-            if (xenObject != null)
-                _expandedSections.TryGetValue(xenObject.GetType(), out expandedSections);
-
-            try
-            {
-                panel2.SuspendLayout();
-
-                foreach (PDSection s in sections)
-                {
-                    if (expandedSections == null)
-                    {
-                        if (s == pdSectionGeneral)
-                            s.Expand();
-                        else
-                            s.Contract();
-                    }
-                    else if (expandedSections.Contains(s))
-                        s.Expand();
-                    else
-                        s.Contract();
-                }
-            }
-            finally
-            {
-                panel2.ResumeLayout();
+                ToggleExpandedState(s => expandedSections == null && s == pdSectionGeneral ||
+                                         expandedSections != null && expandedSections.Contains(s));
             }
         }
 
@@ -300,7 +242,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        void VM_guest_metrics_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void VM_guest_metrics_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             if (!this.Visible)
                 return;
@@ -309,7 +251,6 @@ namespace XenAdmin.TabPages
             BuildList();
         }
 
-        private readonly CollectionChangeEventHandler VM_guest_metrics_CollectionChangedWithInvoke;
         private void RegisterHandlers()
         {
             if (xenObject != null)
@@ -343,22 +284,21 @@ namespace XenAdmin.TabPages
             }
         }
 
-        void Pool_patch_BatchCollectionChanged(object sender, EventArgs e)
+        private void Pool_patch_BatchCollectionChanged(object sender, EventArgs e)
         {
             Program.BeginInvoke(this, BuildList);
         }
 
-        void Pool_update_BatchCollectionChanged(object sender, EventArgs e)
+        private void Pool_update_BatchCollectionChanged(object sender, EventArgs e)
         {
             Program.BeginInvoke(this, BuildList);
         }
 
-        void OtherConfigAndTagsWatcher_TagsChanged()
+        private void OtherConfigAndTagsWatcher_TagsChanged()
         {
             BuildList();
         }
 
-        // We queue up a rebuild if we are not shown but the contents becomes out of date, this just fires off the rebuild
         protected override void OnVisibleChanged(EventArgs e)
         {
             if (Visible && refreshNeeded)
@@ -371,7 +311,6 @@ namespace XenAdmin.TabPages
 
         private void PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-
             if (e.PropertyName == "state" || e.PropertyName == "last_updated")
             {
                 return;
@@ -390,32 +329,25 @@ namespace XenAdmin.TabPages
                         pbd.PropertyChanged -= PropertyChanged;
                         pbd.PropertyChanged += PropertyChanged;
                     }
-
-                    BuildList();
                 }
                 else
                 {
-                    // Atm we are rebuilding on almost any property changed event. 
+                    // At the moment we are rebuilding on almost any property changed event. 
                     // As long as we are just clearing and re-adding the rows in the PDSections this seems to be super quick. 
                     // If it gets slower we should update specific boxes for specific property changes.
                     if (licenseStatus != null && licenseStatus.Updated)
                         licenseStatus.BeginUpdate();
-                    BuildList();
-                    EnableDisableEdit();
                 }
+
+                BuildList();
             });
         }
 
-        public void EnableDisableEdit()
+        public void UpdateButtons()
         {
-            buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
-
-            //keeping it separate
-            var container = xenObject as DockerContainer;
-            if (container != null)
+            if (xenObject is DockerContainer container)
             {
                 buttonProperties.Enabled = false;
-
                 buttonViewConsole.Visible = true;
                 buttonViewLog.Visible = true;
 
@@ -433,32 +365,27 @@ namespace XenAdmin.TabPages
             }
             else
             {
+                buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
                 buttonViewConsole.Visible = false;
                 buttonViewLog.Visible = false;
             }
-
         }
 
         public void BuildList()
         {
-            //Program.AssertOnEventThread();
-
-            if (!this.Visible)
+            if (!Visible)
             {
                 refreshNeeded = true;
                 return;
             }
+
             if (xenObject == null)
                 return;
 
             if (xenObject is Host && !xenObject.Connection.IsConnected)
                 base.Text = Messages.CONNECTION_GENERAL_TAB_TITLE;
             else if (xenObject is Host)
-            {
                 base.Text = Messages.HOST_GENERAL_TAB_TITLE;
-            }
-                
-                
             else if (xenObject is VM)
             {
                 VM vm = (VM)xenObject;
@@ -530,7 +457,7 @@ namespace XenAdmin.TabPages
                 s.StartLayout();
             }
             panel2.ResumeLayout();
-            EnableDisableEdit();
+            UpdateButtons();
         }
 
         private void generateInterfaceBox()
@@ -1371,7 +1298,7 @@ namespace XenAdmin.TabPages
                     s.AddEntry(Messages.VIRTUAL_MACHINE, vdiVms);
             }
 
-            s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
+            s.AddEntry(FriendlyName("host.uuid"), xenObject.Get("uuid") as string);
         }
 
         private string PoolAdditionalLicenseString()
@@ -1936,82 +1863,70 @@ namespace XenAdmin.TabPages
             return new KeyValuePair<string, string>(key, value);
         }
  
-        private static string GetUUID(IXenObject o)
-        {
-            return o.Get("uuid") as String;
-        }
-
         private static string FriendlyName(string propertyName)
         {
             return FriendlyNameManager.GetFriendlyName(string.Format("Label-{0}", propertyName)) ?? propertyName;
         }
 
+
+        #region Control Event Handlers
+
+        private void s_ContentChangedSelection(PDSection s)
+        {
+            ScrollToSelectionIfNeeded(s);
+        }
+
+        private void s_ContentReceivedFocus(PDSection s)
+        {
+            ScrollToSelectionIfNeeded(s);
+        }
+
+        private void s_ExpandedChanged(PDSection pdSection)
+        {
+            if (xenObject != null)
+                _expandedSections[xenObject.GetType()] = sections.Where(s => s.Parent.Visible && s.IsExpanded).ToList();
+
+            linkLabelExpand.Enabled = sections.Any(s => s.Parent.Visible && !s.IsExpanded);
+            linkLabelCollapse.Enabled = sections.Any(s => s.Parent.Visible && s.IsExpanded);
+        }
+
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            foreach (PDSection s in sections)
-            {
-                if (!s.Parent.Visible)
-                    continue;
-
-                s.DisableFocusEvent = true;
-                s.Expand();
-                s.DisableFocusEvent = false;
-            }
-
-            linkLabelCollapse.Focus();
+            ToggleExpandedState(s => true);
         }
 
         private void linkLabelCollapse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
-            foreach (PDSection s in sections)
-            {
-                if (!s.Parent.Visible)
-                    continue;
-
-                s.DisableFocusEvent = true;
-                s.Contract();
-                s.DisableFocusEvent = false;
-            }
-
-            linkLabelExpand.Focus();
+            ToggleExpandedState(s => false);
         }
 
-        private void SetStatesOfExpandingLinks()
+        private void buttonProperties_Click(object sender, EventArgs e)
         {
-            var sectionsVisible = sections.Where(section => section.Parent.Visible);
-            bool anyExpanded = sectionsVisible.Any(s => s.IsExpanded);
-            bool anyCollapsed = sectionsVisible.Any(s => !s.IsExpanded);
-            linkLabelExpand.Enabled = anyCollapsed;
-            linkLabelCollapse.Enabled = anyExpanded;
+            new PropertiesCommand(Program.MainWindow, xenObject).Execute();
         }
 
         private void buttonViewConsole_Click(object sender, EventArgs e)
         {
-            var dockerContainer = xenObject as DockerContainer;
-            if (dockerContainer != null)
-            {
-                string vmIp = dockerContainer.Parent.IPAddressForSSH();
-                //Set command 'docker attach' to attach to the container.
-                string dockerCmd = "env docker attach --sig-proxy=false " + dockerContainer.uuid;
-                startPutty(dockerCmd, vmIp);
-            }
+            //Set command 'docker attach' to attach to the container.
+            StartPutty("env docker attach --sig-proxy=false");
         }
 
         private void buttonViewLog_Click(object sender, EventArgs e)
         {
-            var dockerContainer = xenObject as DockerContainer;
-            if (dockerContainer != null)
-            {
-                string vmIp = dockerContainer.Parent.IPAddressForSSH();
-                //Set command 'docker logs' to retrieve the logs of the container.
-                string dockerCmd = "env docker logs --tail=50 --follow --timestamps " + dockerContainer.uuid;
-                startPutty(dockerCmd, vmIp);
-            }
+            //Set command 'docker logs' to retrieve the logs of the container.
+            StartPutty( "env docker logs --tail=50 --follow --timestamps");
         }
 
-        private void startPutty(string command, string ipAddr)
+        #endregion
+
+        private void StartPutty(string dockerCmd)
         {
+            if (!(xenObject is DockerContainer dockerContainer))
+                return;
+
+            string ipAddr = dockerContainer.Parent.IPAddressForSSH();
+            string command = $"{dockerCmd} {dockerContainer.uuid}";
+
             try
             {
                 //Write docker command to a temp file.
@@ -2039,6 +1954,38 @@ namespace XenAdmin.TabPages
                 {
                     dlg.ShowDialog(Parent);
                 }
+            }
+        }
+
+        private void ToggleExpandedState(Func<PDSection, bool> expand)
+        {
+            try
+            {
+                panel2.SuspendLayout();
+
+                foreach (PDSection s in sections)
+                {
+                    if (!s.Parent.Visible)
+                        continue;
+
+                    try
+                    {
+                        s.DisableFocusEvent = true;
+
+                        if (expand(s))
+                            s.Expand();
+                        else
+                            s.Contract();
+                    }
+                    finally
+                    {
+                        s.DisableFocusEvent = false;
+                    }
+                }
+            }
+            finally
+            {
+                panel2.ResumeLayout();
             }
         }
     }

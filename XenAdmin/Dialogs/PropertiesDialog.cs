@@ -353,7 +353,7 @@ namespace XenAdmin.Dialogs
             // Yes, save to the LocalXenObject.
             List<AsyncAction> actions = SaveSettings();
 
-            Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.EnableDisableEdit);
+            Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.UpdateButtons);
 
             // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.
             // Must come first because some pages' SaveChanges() rely on modifying the object via the xenObjectCopy before their actions are run.
@@ -396,7 +396,7 @@ namespace XenAdmin.Dialogs
 
         private void action_Completed(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.EnableDisableEdit);
+            Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.UpdateButtons);
         }
 
         /*
