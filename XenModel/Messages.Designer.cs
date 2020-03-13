@@ -6944,6 +6944,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} days.
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in 1 day.
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_ONE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring today.
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thumbprint.
         /// </summary>
         public static string CERTIFICATE_THUMBPRINT_KEY {
