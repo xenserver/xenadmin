@@ -107,8 +107,7 @@ namespace XenAdmin.Commands
                             SystemIcons.Error,
                             string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
                             Messages.CONFIGURE_HA),
-                        "HADisable",
-                        ThreeButtonDialog.ButtonOK))
+                        ThreeButtonDialog.ButtonOK){HelpName = "HADisable"})
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

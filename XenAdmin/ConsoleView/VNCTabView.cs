@@ -1156,9 +1156,8 @@ namespace XenAdmin.ConsoleView
                         DialogResult dialogResult;
                         using (ThreeButtonDialog dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Question, Messages.FORCE_ENABLE_RDP),
-                            "EnableRDPonVM",
                             new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes),
-                            new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)))
+                            new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)){HelpName = "EnableRDPonVM"})
                         {
                             dialogResult = dlg.ShowDialog(Program.MainWindow);
                         }

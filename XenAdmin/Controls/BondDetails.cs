@@ -267,9 +267,8 @@ namespace XenAdmin.Controls
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BOND_CREATE_WILL_DISTURB_PRIMARY, Messages.BOND_CREATE),
-                    "BondConfigError",
                     new ThreeButtonDialog.TBDButton(Messages.BOND_CREATE_CONTINUE, DialogResult.OK),
-                    ThreeButtonDialog.ButtonCancel))
+                    ThreeButtonDialog.ButtonCancel){HelpName = "BondConfigError"})
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }

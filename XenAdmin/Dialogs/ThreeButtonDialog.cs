@@ -45,31 +45,6 @@ namespace XenAdmin.Dialogs
         /// Gives you a dialog with a single OK button.
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="helpName"></param>
-        public ThreeButtonDialog(Details properties, string helpName)
-            : this(properties, ButtonOK)
-        {
-            this.helpName = helpName;
-            HelpButton = true;
-        }
-
-        /// <summary>
-        /// Gives you a dialog with the specified buttons.
-        /// </summary>
-        /// <param name="properties"></param>
-        /// <param name="helpName"></param>
-        /// <param name="buttons">Must be between 1 and 3 buttons</param>
-        public ThreeButtonDialog(Details properties, string helpName, params TBDButton[] buttons)
-            : this(properties, buttons)
-        {
-            this.helpName = helpName;
-            HelpButton = true;
-        }
-
-        /// <summary>
-        /// Gives you a dialog with a single OK button.
-        /// </summary>
-        /// <param name="properties"></param>
         public ThreeButtonDialog(Details properties)
             : this(properties, ButtonOK)
         {
@@ -223,11 +198,13 @@ namespace XenAdmin.Dialogs
                 buttonList.Add( button );
         }
 
-        internal override string HelpName
+        internal new string HelpName
         {
-            get
+            get => helpName;
+            set
             {
-                return helpName;
+                helpName = value;
+                HelpButton = true;
             }
         }
 

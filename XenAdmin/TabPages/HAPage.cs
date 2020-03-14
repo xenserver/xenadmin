@@ -635,8 +635,7 @@ namespace XenAdmin.TabPages
                         SystemIcons.Error,
                         string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
                         Messages.DISABLE_HA),
-                    "HADisable",
-                    ThreeButtonDialog.ButtonOK))
+                    ThreeButtonDialog.ButtonOK){HelpName = "HADisable"})
                 {
                     dlg.ShowDialog(this);
                     return;
@@ -649,9 +648,8 @@ namespace XenAdmin.TabPages
                     null,
                     string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
                     Messages.DISABLE_HA),
-                "HADisable",
                 ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo))
+                ThreeButtonDialog.ButtonNo){HelpName = "HADisable"})
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;

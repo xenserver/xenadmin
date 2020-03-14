@@ -229,9 +229,9 @@ namespace XenAdmin.Actions
                 {
                     using (var d = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(System.Drawing.SystemIcons.Warning, string.Format(Messages.FORCE_CLOSE_PLUGIN_PROMPT, _menuItemFeature.ToString())),
-                        "ProcessForceClosePrompt",
                         new ThreeButtonDialog.TBDButton(Messages.FORCE_CLOSE, DialogResult.Yes),
-                        new ThreeButtonDialog.TBDButton(Messages.ALLOW_TO_CONTINUE, DialogResult.No)))
+                        new ThreeButtonDialog.TBDButton(Messages.ALLOW_TO_CONTINUE, DialogResult.No))
+                        {HelpName = "ProcessForceClosePrompt"})
                     {
                         if (d.ShowDialog(Program.MainWindow) == DialogResult.Yes && !_extAppProcess.HasExited)
                             _extAppProcess.Kill();

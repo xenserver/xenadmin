@@ -147,10 +147,9 @@ namespace XenAdmin.Commands
                             DialogResult dr;
                             using (var d = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
-                                "ExportVmDialogInsufficientDiskSpace",
                                 new ThreeButtonDialog.TBDButton(Messages.CONTINUE_WITH_EXPORT, DialogResult.OK),
                                 new ThreeButtonDialog.TBDButton(Messages.CHOOSE_ANOTHER_DESTINATION, DialogResult.Retry),
-                                ThreeButtonDialog.ButtonCancel))
+                                ThreeButtonDialog.ButtonCancel){HelpName = "ExportVmDialogInsufficientDiskSpace"})
                             {
                                 dr = d.ShowDialog(Parent);
                             }
@@ -172,10 +171,9 @@ namespace XenAdmin.Commands
                             DialogResult dr;
                             using (var d = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
-                                "ExportVmDialogFSLimitExceeded",
                                 new ThreeButtonDialog.TBDButton(Messages.CONTINUE_WITH_EXPORT, DialogResult.OK),
                                 new ThreeButtonDialog.TBDButton(Messages.CHOOSE_ANOTHER_DESTINATION, DialogResult.Retry),
-                                ThreeButtonDialog.ButtonCancel))
+                                ThreeButtonDialog.ButtonCancel){HelpName = "ExportVmDialogFSLimitExceeded"})
                             {
                                 dr = d.ShowDialog(Parent);
                             }

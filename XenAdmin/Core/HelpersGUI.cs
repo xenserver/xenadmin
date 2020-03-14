@@ -115,9 +115,8 @@ namespace XenAdmin.Core
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(icon ?? SystemIcons.Exclamation, msg),
-                    helpName,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)){HelpName = helpName})
                 {
                     dialogResult = dlg.ShowDialog(Program.MainWindow);
                 }

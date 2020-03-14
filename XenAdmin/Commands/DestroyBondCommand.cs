@@ -108,9 +108,8 @@ namespace XenAdmin.Commands
                 DialogResult result;
                 using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.DELETE_BOND),
-                            "NetworkingConfigWarning",
                             new ThreeButtonDialog.TBDButton(Messages.BOND_DELETE_CONTINUE, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel))
+                            ThreeButtonDialog.ButtonCancel){HelpName = "NetworkingConfigWarning"})
                 {
                     result = dlg.ShowDialog(Parent);
                 }

@@ -3054,16 +3054,16 @@ namespace XenAdmin
                 args.Length == 0 ? msg : string.Format(msg, args), title);
 
             DialogResult dialogResult;
-            using (var dialog = String.IsNullOrEmpty(helpName)
-                             ? new ThreeButtonDialog(details, buttons)
-                             : new ThreeButtonDialog(details, helpName, buttons))
+            using (var dialog = new ThreeButtonDialog(details, buttons))
             {
+                if (!string.IsNullOrEmpty(helpName))
+                    dialog.HelpName = helpName;
+
                 dialogResult = dialog.ShowDialog(parent ?? Program.MainWindow);
             }
 
             if (dialogResult != DialogResult.Yes)
                 return false;
-
 
             if (conn != null && !conn.IsConnected)
             {
