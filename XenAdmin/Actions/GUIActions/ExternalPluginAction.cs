@@ -228,7 +228,7 @@ namespace XenAdmin.Actions
                 Program.Invoke(Program.MainWindow, delegate
                 {
                     using (var d = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(System.Drawing.SystemIcons.Warning, string.Format(Messages.FORCE_CLOSE_PLUGIN_PROMPT, _menuItemFeature.ToString())),
+                        System.Drawing.SystemIcons.Warning, string.Format(Messages.FORCE_CLOSE_PLUGIN_PROMPT, _menuItemFeature.ToString()),
                         new ThreeButtonDialog.TBDButton(Messages.FORCE_CLOSE, DialogResult.Yes),
                         new ThreeButtonDialog.TBDButton(Messages.ALLOW_TO_CONTINUE, DialogResult.No))
                         {HelpName = "ProcessForceClosePrompt"})

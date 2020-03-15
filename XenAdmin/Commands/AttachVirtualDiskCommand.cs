@@ -69,10 +69,8 @@ namespace XenAdmin.Commands
 
             if (vm.VBDs.Count >= vm.MaxVBDsAllowed())
             {
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Error,
-                            FriendlyErrorNames.VBDS_MAX_ALLOWED)){WindowTitle = Messages.DISK_ATTACH})
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, FriendlyErrorNames.VBDS_MAX_ALLOWED)
+                    {WindowTitle = Messages.DISK_ATTACH})
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }

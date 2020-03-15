@@ -107,8 +107,7 @@ namespace XenAdmin.Wizards
                         break;
 
                     DialogResult result;
-                    using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(null, Messages.REMOVE_CRASHDUMP_QUESTION),
+                    using (var dlg = new ThreeButtonDialog(null, Messages.REMOVE_CRASHDUMP_QUESTION,
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo){WindowTitle = Messages.REMOVE_CRASHDUMP_FILES})
                     {

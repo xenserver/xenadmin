@@ -103,7 +103,8 @@ namespace XenAdmin.Commands
                 {
                     string text = String.Format(Messages.HOST_ALREADY_IN_POOL, hostToAdd.Name(), _pool.Name(), hostPool.Name());
 
-                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, text)){WindowTitle = Messages.POOL_JOIN_IMPOSSIBLE})
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Exclamation, text)
+                        {WindowTitle = Messages.POOL_JOIN_IMPOSSIBLE})
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

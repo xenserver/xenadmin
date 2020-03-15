@@ -380,11 +380,9 @@ namespace XenAdmin.TabPages
 
         private void DeleteGraph()
         {
-            using (ThreeButtonDialog dlog = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                    string.Format(Messages.DELETE_GRAPH_MESSAGE, GraphList.SelectedGraph.DisplayName.EscapeAmpersands())),
-                ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo))
+            using (ThreeButtonDialog dlog = new ThreeButtonDialog(SystemIcons.Warning,
+                string.Format(Messages.DELETE_GRAPH_MESSAGE, GraphList.SelectedGraph.DisplayName.EscapeAmpersands()),
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
             {
                 if (dlog.ShowDialog(this) == DialogResult.Yes)
                     if (GraphList.AuthorizedRole)
@@ -397,11 +395,9 @@ namespace XenAdmin.TabPages
 
         private void RestoreDefaultGraphs()
         {
-            using (ThreeButtonDialog dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        Messages.GRAPHS_RESTORE_DEFAULT_MESSAGE),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            using (ThreeButtonDialog dlog = new ThreeButtonDialog(SystemIcons.Warning,
+                Messages.GRAPHS_RESTORE_DEFAULT_MESSAGE,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
             {
                 if (dlog.ShowDialog(this) == DialogResult.Yes)
                     if (GraphList.AuthorizedRole)

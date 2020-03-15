@@ -101,8 +101,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (_thisPageIsCompleted)
                 return;
 
-            using (var dlog = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, ReconsiderCancellationMessage()),
+            using (var dlog = new ThreeButtonDialog(SystemIcons.Warning, ReconsiderCancellationMessage(),
                 ThreeButtonDialog.ButtonYes,
                 ThreeButtonDialog.ButtonNo){WindowTitle = Text})
             {
@@ -544,11 +543,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             var skippableWorkers = failedWorkers.Where(w => w.FirstFailedSkippableAction != null).ToList();
             var msg = string.Join(Environment.NewLine, skippableWorkers.Select(w => w.FirstFailedSkippableAction.Title));
 
-            using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                    string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg)),
-                                ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo)
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
+                    string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {WindowTitle = ParentForm != null ? ParentForm.Text : Messages.XENCENTER})
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)

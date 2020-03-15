@@ -78,9 +78,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 .Any(master => master != null && master.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
             if(brokenSRs)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        Messages.BROKEN_SRS_AFTER_UPGRADE)))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.BROKEN_SRS_AFTER_UPGRADE))
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }
@@ -167,8 +165,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void ShowCanBeResumedInfo()
         {
-            using (var dialog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
-                    Messages.ROLLING_UPGRADE_CAN_RESUME_UPGRADE))
+            using (var dialog = new ThreeButtonDialog(SystemIcons.Information, Messages.ROLLING_UPGRADE_CAN_RESUME_UPGRADE)
                 {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
             {
                 dialog.ShowDialog(Program.MainWindow);

@@ -42,30 +42,22 @@ namespace XenAdmin.Dialogs
         private string helpName = "DefaultHelpTopic";
 
         /// <summary>
-        /// Gives you a dialog with a single OK button.
-        /// </summary>
-        /// <param name="properties"></param>
-        public ThreeButtonDialog(Details properties)
-            : this(properties, ButtonOK)
-        {
-        }
-
-        /// <summary>
         /// Gives you a dialog with the specified buttons.
         /// </summary>
-        /// <param name="properties"></param>
         /// <param name="buttons">>Must be between 1 and 3 buttons</param>
-        public ThreeButtonDialog(Details properties, params TBDButton[] buttons)
+        public ThreeButtonDialog(Icon icon, string mainMessage, params TBDButton[] buttons)
         {
-            System.Diagnostics.Trace.Assert(buttons.Length > 0 && buttons.Length < 4, "Three button dialog can only have between 1 and 3 buttons.");
             InitializeComponent();
 
-            if (properties.Icon == null)
+            if (buttons.Length == 0)
+                buttons = new[] {ButtonOK};
+
+            if (icon == null)
                 pictureBoxIcon.Visible = false;
             else
-                pictureBoxIcon.Image = properties.Icon.ToBitmap();
+                pictureBoxIcon.Image = icon.ToBitmap();
 
-            labelMessage.Text = properties.MainMessage;
+            labelMessage.Text = mainMessage;
 
             button1.Visible = true;
             button1.Text = buttons[0].label;
@@ -269,21 +261,6 @@ namespace XenAdmin.Dialogs
         public enum ButtonType { NONE, ACCEPT, CANCEL };
 
         /// <summary>
-        /// Describes the main properties of a dialog
-        /// </summary>
-        public class Details
-        {
-            public readonly Icon Icon;
-            public readonly string MainMessage;
-
-            public Details(Icon icon, string mainMessage)
-            {
-                Icon = icon;
-                MainMessage = mainMessage ?? "";
-            }
-        }
-
-        /// <summary>
         /// Retrieves a button with label Messages.YES_BUTTON_CAPTION and result DialogResult.Yes
         /// </summary>
         public static TBDButton ButtonYes
@@ -416,7 +393,7 @@ namespace XenAdmin.Dialogs
     public class NonModalThreeButtonDialog : ThreeButtonDialog
     {
         public NonModalThreeButtonDialog(Icon icon, string msg, string button1Text, string button2Text)
-            : base(new Details(icon, msg),
+            : base(icon, msg,
                 new TBDButton(button1Text, DialogResult.OK),
                 new TBDButton(button2Text, DialogResult.Cancel))
         {

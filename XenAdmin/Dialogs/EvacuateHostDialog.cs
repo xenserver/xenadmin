@@ -769,9 +769,8 @@ namespace XenAdmin.Dialogs
                     case Failure.HOST_NOT_ENOUGH_FREE_MEMORY:
                         if (vmRef == null)
                             using (var dlg = new ThreeButtonDialog(
-                               new ThreeButtonDialog.Details(
-                                   SystemIcons.Error,
-                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY))
+                                    SystemIcons.Error,
+                                    Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY)
                                 {WindowTitle = Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE})
                             {
                                 dlg.ShowDialog(this);
@@ -790,10 +789,8 @@ namespace XenAdmin.Dialogs
                         }
 
                         if (vmRef == null)
-                            using (var dlg = new ThreeButtonDialog(
-                               new ThreeButtonDialog.Details(
-                                   SystemIcons.Error,
-                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS))
+                            using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
+                                    Messages.EVACUATE_HOST_NO_OTHER_HOSTS)
                                 {WindowTitle = Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE})
                             {
                                 dlg.ShowDialog(this);

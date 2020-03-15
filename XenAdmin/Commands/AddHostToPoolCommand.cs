@@ -100,8 +100,7 @@ namespace XenAdmin.Commands
                                      : string.Format(Messages.ADD_HOST_TO_POOL_DISCONNECTED_POOL_MULTIPLE,
                                                      Helpers.GetName(_pool).Ellipsise(500));
 
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, message)))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, message))
                 {
                     dlg.ShowDialog(Parent);
                 }
@@ -224,8 +223,7 @@ namespace XenAdmin.Commands
                 string poolName = Helpers.GetName(pool).Ellipsise(500);
                 string hostName = Helpers.GetName(host).Ellipsise(500);
                 string msg = string.Format(Messages.HA_HOST_ENABLE_NTOL_RAISE_QUERY, poolName, hostName, currentNtol, max);
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, msg),
+                using (var dlg = new ThreeButtonDialog(null, msg,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
@@ -284,8 +282,7 @@ namespace XenAdmin.Commands
                     msg = string.Format(f, poolName, currentNtol, hostName, targetNtol);
                 }
 
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)
                         ){WindowTitle = Messages.HIGH_AVAILABILITY})

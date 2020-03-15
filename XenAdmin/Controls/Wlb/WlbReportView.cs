@@ -457,10 +457,8 @@ namespace XenAdmin.Controls.Wlb
                 }
                 else if (StartDatePicker.Value.CompareTo(EndDatePicker.Value) > 0)
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(
-                           SystemIcons.Warning,
-                           Messages.WLB_REPORT_DATE_ORDERING_MESSAGE))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
+                            Messages.WLB_REPORT_DATE_ORDERING_MESSAGE)
                         {WindowTitle = Messages.WLB_REPORT_DATE_ORDERING_CAPTION})
                     {
                         dlg.ShowDialog(this);
@@ -490,8 +488,7 @@ namespace XenAdmin.Controls.Wlb
             catch (Exception ex)
             {
                 log.Debug(ex, ex);
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Error, ex.Message)))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, ex.Message))
                 {
                     dlg.ShowDialog(this);
                 }
@@ -1482,8 +1479,7 @@ namespace XenAdmin.Controls.Wlb
                 catch (Exception ex)
                 {
                     log.Debug(ex, ex);
-                    using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(SystemIcons.Error, ex.Message)))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Error, ex.Message))
                     {
                         dlg.ShowDialog(this);
                     }

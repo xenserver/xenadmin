@@ -84,8 +84,7 @@ namespace XenAdmin.Wizards
                 return;
 
             if (!IsValidFile(dlg.FileName, out var failureReason))
-                using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, failureReason))
+                using (var popup = new ThreeButtonDialog(SystemIcons.Error, failureReason)
                     {WindowTitle =  Messages.UPDATES})
                 {
                     popup.ShowDialog();
@@ -96,8 +95,7 @@ namespace XenAdmin.Wizards
         public static string ParseSuppPackFile(string path, Control control, ref bool cancel)
         {
             if (!IsValidFile(path, out var pathFailure))
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, pathFailure))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, pathFailure)
                     {WindowTitle = Messages.UPDATES})
                 {
                     cancel = true;
@@ -110,8 +108,7 @@ namespace XenAdmin.Wizards
                 var unzippedPath = ExtractUpdate(path, control);
 
                 if (!IsValidFile(unzippedPath, out var zipFailure))
-                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                        SystemIcons.Error, zipFailure))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Error, zipFailure)
                         {WindowTitle = Messages.UPDATES})
                     {
                         cancel = true;

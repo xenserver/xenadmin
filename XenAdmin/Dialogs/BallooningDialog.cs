@@ -139,8 +139,7 @@ namespace XenAdmin.Dialogs
                             msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_PLURAL);
                         
                         DialogResult dialogResult;
-                        using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
+                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo))
                         {

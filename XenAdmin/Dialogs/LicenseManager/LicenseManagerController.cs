@@ -143,10 +143,8 @@ namespace XenAdmin.Dialogs
 
         private void ShowPoolHostNotConnectedError()
         {
-            using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       Messages.SELECTED_HOST_POOL_NOT_CONNECTED)))
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
+                Messages.SELECTED_HOST_POOL_NOT_CONNECTED))
             {
                 dlg.ShowDialog(View.Parent);
             }
@@ -221,10 +219,8 @@ namespace XenAdmin.Dialogs
                            }
                            catch (Exception)
                            {
-                               using (var dlg = new ThreeButtonDialog(
-                                   new ThreeButtonDialog.Details(
-                                       SystemIcons.Error,
-                                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url))))
+                               using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
+                                   string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url)))
                                 {
                                     dlg.ShowDialog(View.Parent);
                                 }

@@ -50,8 +50,7 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE))
             {
                 dlg.ShowDialog();
             }

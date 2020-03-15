@@ -111,15 +111,12 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             {
                 Program.Invoke(Program.MainWindow, delegate()
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Warning,
-                            diskSpaceReq.GetSpaceRequirementsMessage()),
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
+                        diskSpaceReq.GetSpaceRequirementsMessage(),
                         new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
                         ThreeButtonDialog.ButtonNo))
                     {
-                        DialogResult r = dlg.ShowDialog();
-                        if (r == DialogResult.Yes)
+                        if (dlg.ShowDialog() == DialogResult.Yes)
                         {
                             action = new CleanupDiskSpaceAction(this.Server, patch, true);
                         }
@@ -130,8 +127,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             { 
                 Program.Invoke(Program.MainWindow, delegate()
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceReq.GetSpaceRequirementsMessage())))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, diskSpaceReq.GetSpaceRequirementsMessage()))
                     {
                         dlg.ShowDialog();
                     }

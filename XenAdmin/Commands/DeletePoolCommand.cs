@@ -77,8 +77,8 @@ namespace XenAdmin.Commands
 
             if (msg != null)
             {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation,
-                    string.Format(msg, pool.Name()))))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Exclamation,
+                    string.Format(msg, pool.Name())))
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }
@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
 
             if (conn.Cache.HostCount > 1)
             {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SLAVES_EJECT)))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Exclamation, Messages.MESSAGEBOX_SLAVES_EJECT))
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 } 

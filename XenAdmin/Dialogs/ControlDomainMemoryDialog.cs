@@ -111,8 +111,7 @@ namespace XenAdmin.Dialogs
             var mem = memorySpinner.Value;
 
             DialogResult dialogResult;
-            using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY),
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY,
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
             {

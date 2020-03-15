@@ -139,9 +139,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                         continue;
                     }
 
-                    using (var dlog = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error,
-                            String.Format(Messages.INCORRECT_LUN_FOR_SR, SrWizardType.SrName))))
+                    using (var dlog = new ThreeButtonDialog(SystemIcons.Error,
+                        String.Format(Messages.INCORRECT_LUN_FOR_SR, SrWizardType.SrName)))
                     {
                         dlog.ShowDialog(this);
                     }
@@ -156,8 +155,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     // a new SR, ask the user if they want to proceed and format.
                     if (!SrWizardType.AllowToCreateNewSr)
                     {
-                        using (var dlog = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS)))
+                        using (var dlog = new ThreeButtonDialog(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS))
                         {
                             dlog.ShowDialog(this);
                         }
@@ -180,8 +178,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                             ? string.Format(Messages.NEWSR_LUN_IN_USE_ON_SELECTED_POOL, device.SCSIid, existingSr.Name())
                             : string.Format(Messages.NEWSR_LUN_IN_USE_ON_SELECTED_SERVER, device.SCSIid, existingSr.Name());
 
-                        using (var dlog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,
-                                errorText)))
+                        using (var dlog = new ThreeButtonDialog(SystemIcons.Error, errorText))
                         {
                             dlog.ShowDialog(this);
                         }
@@ -407,8 +404,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (devices != null && devices.Count > 0)
                 return true;
 
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS)))
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS))
             {
                 dlg.ShowDialog();
             }

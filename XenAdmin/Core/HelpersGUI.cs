@@ -113,8 +113,7 @@ namespace XenAdmin.Core
                     msg = string.Format(msg_multiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
 
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(icon ?? SystemIcons.Exclamation, msg),
+                using (var dlg = new ThreeButtonDialog(icon ?? SystemIcons.Exclamation, msg,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)){HelpName = helpName})
                 {

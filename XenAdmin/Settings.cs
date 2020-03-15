@@ -403,10 +403,8 @@ namespace XenAdmin
             catch (ConfigurationErrorsException ex)
             {
                 // Show a warning to the user and exit the application.
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Error,
-                        string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath())))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
+                        string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
                     {WindowTitle = Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(Program.MainWindow);
@@ -464,7 +462,7 @@ namespace XenAdmin
 
                 // Ugly, but we need to warn the user...
                 if (!Program.RunInAutomatedTestMode)
-                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SESSION_SAVE_UNABLE))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Exclamation, Messages.MESSAGEBOX_SESSION_SAVE_UNABLE)
                         {WindowTitle = Messages.MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE})
                     {
                         dlg.ShowDialog();

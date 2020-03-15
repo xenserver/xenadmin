@@ -498,8 +498,8 @@ namespace XenAdmin.Wizards
             if (pool == null)
             {
                 log.Error("New SR Wizard: Pool has disappeared");
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)))))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
+                    string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection))))
                 {
                     dlg.ShowDialog(this);
                 }
@@ -512,8 +512,8 @@ namespace XenAdmin.Wizards
             if (master == null)
             {
                 log.Error("New SR Wizard: Master has disappeared");
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)))))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
+                    string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection))))
                 {
                     dlg.ShowDialog(this);
                 }
@@ -711,8 +711,7 @@ namespace XenAdmin.Wizards
                     if (m_srWizardType.ShowIntroducePrompt)
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID)),
+                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, string.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID),
                                 ThreeButtonDialog.ButtonYes,
                                 new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                             {WindowTitle = Text})
@@ -729,8 +728,7 @@ namespace XenAdmin.Wizards
                     if (m_srWizardType.ShowReattachWarning)
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name())),
+                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, string.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name()),
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                             {WindowTitle = Text})
@@ -750,11 +748,8 @@ namespace XenAdmin.Wizards
                     // Warn user SR is already attached to other pool, and then introduce to this pool 
 
                     DialogResult dialogResult;
-                        using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Warning,
-                            string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name(), Helpers.GetName(xenConnection), 
-                            Text)),
+                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
+                            string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name(), Helpers.GetName(xenConnection), Text),
                         ThreeButtonDialog.ButtonOK,
                         ThreeButtonDialog.ButtonCancel))
                         {
@@ -778,10 +773,8 @@ namespace XenAdmin.Wizards
 
             if (xenTabPageChooseSrType.MatchingFrontends <= 0)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Error,
-                        String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type))))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
+                    String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type)))
                 {
                     dlg.ShowDialog(this);
                 }

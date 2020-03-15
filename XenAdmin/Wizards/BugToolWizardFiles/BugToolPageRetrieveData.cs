@@ -118,10 +118,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (allCompleted)
                 return;
 
-            using (var dlog = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL),
-                ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE})
+            using (var dlog = new ThreeButtonDialog(SystemIcons.Warning, Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL,
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {WindowTitle = Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE})
             {
                 if (dlog.ShowDialog(this) != DialogResult.Yes)
                 {

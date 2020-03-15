@@ -360,8 +360,7 @@ namespace XenAdmin.TabPages
             {
                 if (!Program.RunInAutomatedTestMode && !Properties.Settings.Default.DoNotConfirmDismissEvents)
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
+                    using (var dlg = new ThreeButtonDialog(null, Messages.MESSAGEBOX_LOG_DELETE,
                         ThreeButtonDialog.ButtonYes,
                         ThreeButtonDialog.ButtonNo)
                     {
@@ -436,8 +435,7 @@ namespace XenAdmin.TabPages
             {
                 if (FilterIsOn)
                 {
-                    using (var dlog = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE),
+                    using (var dlog = new ThreeButtonDialog(null, Messages.MESSAGEBOX_LOGS_DELETE,
                         new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
                         new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                         ThreeButtonDialog.ButtonCancel))
@@ -447,8 +445,7 @@ namespace XenAdmin.TabPages
                 }
                 else if (!Properties.Settings.Default.DoNotConfirmDismissEvents)
                 {
-                    using (var dlog = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER),
+                    using (var dlog = new ThreeButtonDialog(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER,
                         new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
                         ThreeButtonDialog.ButtonCancel)
                     {
@@ -477,8 +474,7 @@ namespace XenAdmin.TabPages
         {
             if (!Properties.Settings.Default.DoNotConfirmDismissEvents)
             {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED),
+                using (var dlog = new ThreeButtonDialog(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED,
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,

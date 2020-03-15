@@ -196,7 +196,7 @@ namespace XenAdmin
                 log.Error("Could not load settings.", ex);
                 var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
                                         string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()));
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,msg))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,msg)
                                {
                                    StartPosition = FormStartPosition.CenterScreen,
                                    //For reasons I do not fully comprehend at the moment, the runtime
@@ -564,10 +564,8 @@ namespace XenAdmin
                 {
                     string filepath = GetLogFile() ?? Messages.MESSAGEBOX_LOGFILE_MISSING;
 
-                    using (var d = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(
-                           SystemIcons.Error,
-                           String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath)))
+                    using (var d = new ThreeButtonDialog(SystemIcons.Error,
+                            String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath))
                         {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
                     {
                         // CA-44733
@@ -590,7 +588,7 @@ namespace XenAdmin
 
                 if (!RunInAutomatedTestMode)
                 {
-                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, exception.ToString())))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Error, exception.ToString()))
                     {
                         dlg.ShowDialog();
                     }
@@ -726,7 +724,7 @@ namespace XenAdmin
             }
             else
             {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, msg))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, msg)
                     {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
                 {
                     dlg.ShowDialog();
@@ -739,7 +737,7 @@ namespace XenAdmin
             string s = GetLogFile();
             if (s == null)
             {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.MESSAGEBOX_LOGFILE_MISSING)))
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, Messages.MESSAGEBOX_LOGFILE_MISSING))
                 {
                     dlg.ShowDialog();
                 }

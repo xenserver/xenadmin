@@ -947,8 +947,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     (preCheckHostRow.Problem as ProblemWithInformationUrl).LaunchUrlInBrowser();
                     
                 else if (!cancelled)
-                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
-                        string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n")))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Information,
+                            string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"))
                         {WindowTitle = Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT})
                     {
                         dlg.ShowDialog(this);

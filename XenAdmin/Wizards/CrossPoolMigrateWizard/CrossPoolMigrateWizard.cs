@@ -309,7 +309,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private static void ShowErrorMessageBox(string message)
         {
-            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)))
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Error, message))
             {
                 dlg.ShowDialog(Program.MainWindow);
             }
@@ -522,8 +522,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         internal static void ShowWarningMessageBox(string message)
         {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message)){WindowTitle = Messages.CPM_WIZARD_TITLE})
+            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, message)
+                {WindowTitle = Messages.CPM_WIZARD_TITLE})
             {
                 dlg.ShowDialog(Program.MainWindow);
             }

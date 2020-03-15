@@ -99,8 +99,7 @@ namespace XenAdmin.Commands
                 }
                 else
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.TAKE_SNAPSHOT_ERROR)))
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.TAKE_SNAPSHOT_ERROR))
                     {
                         dlg.ShowDialog(MainWindowCommandInterface.Form);
                     }

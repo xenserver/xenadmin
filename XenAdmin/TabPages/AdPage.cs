@@ -725,8 +725,7 @@ namespace XenAdmin.TabPages
                                 Helpers.GetName(_connection).Ellipsise(50).EscapeAmpersands(), Domain.Ellipsise(30));
 
                     DialogResult r;
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, msg),
+                    using (var dlg = new ThreeButtonDialog(null, msg,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                         {WindowTitle = Messages.AD_FEATURE_NAME})
@@ -746,8 +745,7 @@ namespace XenAdmin.TabPages
                                 Helpers.GetName(_connection).Ellipsise(50), Domain.Ellipsise(30));
 
                     DialogResult r;
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
+                    using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                         {WindowTitle = Messages.ACTIVE_DIRECTORY_TAB_TITLE})
@@ -814,8 +812,7 @@ namespace XenAdmin.TabPages
                 : string.Format(Messages.QUESTION_REMOVE_AD_USER_MANY, subjectsToRemove.Count);
 
             DialogResult questionDialog;
-            using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(null, removeMessage),
+            using (var dlg = new ThreeButtonDialog(null, removeMessage,
                                 ThreeButtonDialog.ButtonYes,
                                 new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                                 {WindowTitle = Messages.AD_FEATURE_NAME})
@@ -849,8 +846,7 @@ namespace XenAdmin.TabPages
                                     subjectName, Helpers.GetName(_connection).Ellipsise(50));
 
                         DialogResult r;
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
+                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                             {WindowTitle = Messages.AD_FEATURE_NAME})
@@ -1087,8 +1083,7 @@ namespace XenAdmin.TabPages
                 var warnMsg = string.Format(subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_SUICIDE_MANY : Messages.AD_LOGOUT_SUICIDE_ONE,
                     Helpers.GetName(_connection).Ellipsise(50));
 
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, warnMsg),
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, warnMsg,
                     ThreeButtonDialog.ButtonYes,
                     new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                     {WindowTitle = Messages.AD_FEATURE_NAME})
@@ -1108,8 +1103,7 @@ namespace XenAdmin.TabPages
 
             if (!suicide)//CA-68645
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, logoutMessage),
+                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, logoutMessage,
                     ThreeButtonDialog.ButtonYes,
                     new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
                     {WindowTitle = Messages.AD_FEATURE_NAME})
