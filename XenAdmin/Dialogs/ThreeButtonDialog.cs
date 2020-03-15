@@ -33,6 +33,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 
@@ -51,6 +52,8 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
 
+            Debug.Assert(buttons.Length <= 3);
+
             if (buttons.Length == 0)
                 buttons = new[] {ButtonOK};
 
@@ -61,55 +64,36 @@ namespace XenAdmin.Dialogs
 
             labelMessage.Text = mainMessage;
 
-            button1.Visible = true;
-            button1.Text = buttons[0].label;
-            button1.DialogResult = buttons[0].result;
-            if (buttons[0].defaultAction == ButtonType.ACCEPT)
-            {
-                AcceptButton = button1;
-                if (buttons.Length == 1)
-                    CancelButton = button1;
-            }
-            else if (buttons[0].defaultAction == ButtonType.CANCEL)
-                CancelButton = button1;
+            var allButtons = new List<Button> {button1, button2, button3};
 
-            if (buttons[0].selected)
-                button1.Select();
-
-            if (buttons.Length > 1)
+            int i = 0;
+            while (i < buttons.Length)
             {
-                button2.Visible = true;
-                button2.Text = buttons[1].label;
-                button2.DialogResult = buttons[1].result;
-                if (buttons[1].defaultAction == ButtonType.ACCEPT)
-                    AcceptButton = button2;
-                else if (buttons[1].defaultAction == ButtonType.CANCEL)
-                    CancelButton = button2;
+                allButtons[i].Visible = true;
+                allButtons[i].Text = buttons[i].label;
+                allButtons[i].DialogResult = buttons[i].result;
 
-                if (buttons[1].selected)
-                    button2.Select();
-            }
-            else
-            {
-                button2.Visible = false;
+                if (buttons[i].defaultAction == ButtonType.ACCEPT)
+                    AcceptButton = allButtons[i];
+                else if (buttons[i].defaultAction == ButtonType.CANCEL)
+                    CancelButton = allButtons[i];
+
+                if (buttons[i].selected)
+                    allButtons[i].Select();
+
+                i++;
             }
 
-            if (buttons.Length > 2)
+            if (buttons.Length == 1)
             {
-                button3.Visible = true;
-                button3.Text = buttons[2].label;
-                button3.DialogResult = buttons[2].result;
-                if (buttons[2].defaultAction == ButtonType.ACCEPT)
-                    AcceptButton = button3;
-                else if (buttons[2].defaultAction == ButtonType.CANCEL)
-                    CancelButton = button3;
-
-                if (buttons[2].selected)
-                    button3.Select();
+                CancelButton = allButtons[0];
+                allButtons[0].Select();
             }
-            else
+
+            while (i < allButtons.Count)
             {
-                button3.Visible = false;
+                allButtons[i].Visible = false;
+                i++;
             }
         }
 
