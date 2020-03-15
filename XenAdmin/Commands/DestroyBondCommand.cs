@@ -133,7 +133,7 @@ namespace XenAdmin.Commands
             {
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
-                        new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                        new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK, selected: true),
                         ThreeButtonDialog.ButtonCancel))
                 {
                     dialogResult = dlg.ShowDialog(Parent);

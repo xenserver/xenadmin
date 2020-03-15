@@ -573,8 +573,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 Path.GetFileName(_unzipFileOut), Path.GetFileName(_unzipFileIn));
 
             using (var dlog = new ThreeButtonDialog(SystemIcons.Exclamation, msg,
-                new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes),
-                new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)))
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
             {
                 if (dlog.ShowDialog(this) == DialogResult.Yes)
                 {

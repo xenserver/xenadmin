@@ -113,7 +113,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 {
                     using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
                         diskSpaceReq.GetSpaceRequirementsMessage(),
-                        new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                        new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, selected: true),
                         ThreeButtonDialog.ButtonNo))
                     {
                         if (dlg.ShowDialog() == DialogResult.Yes)

@@ -713,7 +713,7 @@ namespace XenAdmin.Wizards
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, string.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID),
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Text})
                         {
                             dialogResult = dlg.ShowDialog(this);
@@ -730,7 +730,7 @@ namespace XenAdmin.Wizards
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, string.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name()),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Text})
                         {
                             dialogResult = dlg.ShowDialog(this);

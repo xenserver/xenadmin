@@ -158,7 +158,7 @@ namespace XenAdmin.Dialogs
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY,
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true)){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }

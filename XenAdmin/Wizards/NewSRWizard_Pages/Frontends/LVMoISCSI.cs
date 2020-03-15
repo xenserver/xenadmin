@@ -800,7 +800,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     {
                         using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.NEWSR_ISCSI_FORMAT_WARNING,
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Text})
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                            {WindowTitle = Text})
                         {
                             result = dlg.ShowDialog(this);
                         }

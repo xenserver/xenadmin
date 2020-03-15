@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
                     string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path),
                     ThreeButtonDialog.ButtonOK,
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true)))
                 {
                     if (dlg.ShowDialog(this) != DialogResult.OK)
                     {

@@ -225,7 +225,8 @@ namespace XenAdmin.Commands
                 string msg = string.Format(Messages.HA_HOST_ENABLE_NTOL_RAISE_QUERY, poolName, hostName, currentNtol, max);
                 using (var dlg = new ThreeButtonDialog(null, msg,
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                    {WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
                     {
@@ -284,7 +285,7 @@ namespace XenAdmin.Commands
 
                 using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true)
                         ){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)

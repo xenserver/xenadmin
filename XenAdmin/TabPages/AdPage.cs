@@ -727,7 +727,7 @@ namespace XenAdmin.TabPages
                     DialogResult r;
                     using (var dlg = new ThreeButtonDialog(null, msg,
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                         {WindowTitle = Messages.AD_FEATURE_NAME})
                     {
                         r = dlg.ShowDialog(this);
@@ -747,7 +747,7 @@ namespace XenAdmin.TabPages
                     DialogResult r;
                     using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                         {WindowTitle = Messages.ACTIVE_DIRECTORY_TAB_TITLE})
                     {
                         r = dlg.ShowDialog(this);
@@ -814,7 +814,7 @@ namespace XenAdmin.TabPages
             DialogResult questionDialog;
             using (var dlg = new ThreeButtonDialog(null, removeMessage,
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                                 {WindowTitle = Messages.AD_FEATURE_NAME})
             {
                 questionDialog = dlg.ShowDialog(this);
@@ -848,7 +848,7 @@ namespace XenAdmin.TabPages
                         DialogResult r;
                         using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Messages.AD_FEATURE_NAME})
                         {
                             r = dlg.ShowDialog(this);
@@ -1085,7 +1085,7 @@ namespace XenAdmin.TabPages
 
                 using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, warnMsg,
                     ThreeButtonDialog.ButtonYes,
-                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                     {WindowTitle = Messages.AD_FEATURE_NAME})
                 {
                     //CA-64818: DialogResult can be No if the No button has been hit
@@ -1105,7 +1105,7 @@ namespace XenAdmin.TabPages
             {
                 using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, logoutMessage,
                     ThreeButtonDialog.ButtonYes,
-                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                     {WindowTitle = Messages.AD_FEATURE_NAME})
                 {
                     //CA-64818: DialogResult can be No if the No button has been hit

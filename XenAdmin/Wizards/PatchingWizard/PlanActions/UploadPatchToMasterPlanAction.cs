@@ -291,8 +291,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         {
                             using (var d = new ThreeButtonDialog(SystemIcons.Warning,
                                 e.DiskSpaceRequirements.GetSpaceRequirementsMessage(),
-                                new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
-                                new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel)))
+                                ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel))
                             {
                                 return d.ShowDialog(invokingControl);
                             }

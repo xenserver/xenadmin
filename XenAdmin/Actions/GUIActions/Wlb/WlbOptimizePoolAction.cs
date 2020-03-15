@@ -345,7 +345,8 @@ namespace XenAdmin.Actions.Wlb
                     {
                         using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                            {WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             DialogResult r = dlg.ShowDialog(Program.MainWindow);
                             if (r != DialogResult.Yes)
