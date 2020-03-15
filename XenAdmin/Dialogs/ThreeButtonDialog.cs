@@ -389,27 +389,4 @@ namespace XenAdmin.Dialogs
             catch { }
         }
     }
-
-    public class NonModalThreeButtonDialog : ThreeButtonDialog
-    {
-        public NonModalThreeButtonDialog(Icon icon, string msg, string button1Text, string button2Text)
-            : base(icon, msg,
-                new TBDButton(button1Text, DialogResult.OK),
-                new TBDButton(button2Text, DialogResult.Cancel))
-        {
-            Buttons[0].Click += button1_Click;
-            Buttons[1].Click += button2_Click;
-        }
-
-        void button1_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-        void button2_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
-    }
 }
