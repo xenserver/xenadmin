@@ -313,10 +313,9 @@ namespace XenAdmin.Dialogs
                         {
                             using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                    string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
-                                    Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE),
+                                    string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation())),
                                 new ThreeButtonDialog.TBDButton(Messages.YES_BUTTON_CAPTION, DialogResult.Yes),
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE})
                             {
                                 e.Cancel = dlg.ShowDialog(this) == DialogResult.No;
                                 return;

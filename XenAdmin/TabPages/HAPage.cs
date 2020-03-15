@@ -633,9 +633,12 @@ namespace XenAdmin.TabPages
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
-                        Messages.DISABLE_HA),
-                    ThreeButtonDialog.ButtonOK){HelpName = "HADisable"})
+                        string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30))),
+                    ThreeButtonDialog.ButtonOK)
+                {
+                    HelpName = "HADisable",
+                    WindowTitle = Messages.DISABLE_HA
+                })
                 {
                     dlg.ShowDialog(this);
                     return;
@@ -646,10 +649,13 @@ namespace XenAdmin.TabPages
             using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     null,
-                    string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
-                    Messages.DISABLE_HA),
+                    string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30))),
                 ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo){HelpName = "HADisable"})
+                ThreeButtonDialog.ButtonNo)
+            {
+                HelpName = "HADisable",
+                WindowTitle = Messages.DISABLE_HA
+            })
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;

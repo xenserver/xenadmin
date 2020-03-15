@@ -202,8 +202,7 @@ namespace XenAdmin.Diagnostics.Problems
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         string.Format(Messages.COULD_NOT_OPEN_URL,
-                            UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty),
-                        Messages.XENCENTER)))
+                            UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty))))
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }

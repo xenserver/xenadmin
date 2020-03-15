@@ -445,8 +445,7 @@ namespace XenAdmin.Dialogs
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Warning,
-                        Messages.NETWORK_RECONFIG_CONNECTION_LOST,
-                        Messages.XENCENTER)))
+                        Messages.NETWORK_RECONFIG_CONNECTION_LOST)))
                 {
                     dlg.ShowDialog(this);
                 }

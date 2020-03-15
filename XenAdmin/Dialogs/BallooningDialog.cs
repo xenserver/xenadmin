@@ -140,7 +140,7 @@ namespace XenAdmin.Dialogs
                         
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.XENCENTER),
+                                new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo))
                         {

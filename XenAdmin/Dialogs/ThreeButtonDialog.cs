@@ -67,9 +67,6 @@ namespace XenAdmin.Dialogs
 
             labelMessage.Text = properties.MainMessage;
 
-            if (properties.WindowTitle != null)
-                this.Text = properties.WindowTitle;
-
             button1.Visible = true;
             button1.Text = buttons[0].label;
             button1.DialogResult = buttons[0].result;
@@ -120,6 +117,11 @@ namespace XenAdmin.Dialogs
             {
                 button3.Visible = false;
             }
+        }
+
+        public string WindowTitle
+        {
+            set => Text = string.IsNullOrEmpty(value) ? Messages.XENCENTER : value;
         }
 
         public bool ShowLinkLabel
@@ -272,14 +274,12 @@ namespace XenAdmin.Dialogs
         public class Details
         {
             public readonly Icon Icon;
-            public readonly string WindowTitle;
             public readonly string MainMessage;
 
-            public Details(Icon icon, string mainMessage, string windowTitle = null)
+            public Details(Icon icon, string mainMessage)
             {
                 Icon = icon;
                 MainMessage = mainMessage ?? "";
-                WindowTitle = string.IsNullOrEmpty(windowTitle) ? Messages.XENCENTER : windowTitle;
             }
         }
 
@@ -415,8 +415,8 @@ namespace XenAdmin.Dialogs
 
     public class NonModalThreeButtonDialog : ThreeButtonDialog
     {
-        public NonModalThreeButtonDialog(Icon icon, string msg, string title, string button1Text, string button2Text)
-            : base(new Details(icon, msg, title),
+        public NonModalThreeButtonDialog(Icon icon, string msg, string button1Text, string button2Text)
+            : base(new Details(icon, msg),
                 new TBDButton(button1Text, DialogResult.OK),
                 new TBDButton(button2Text, DialogResult.Cancel))
         {

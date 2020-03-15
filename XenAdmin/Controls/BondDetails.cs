@@ -236,8 +236,7 @@ namespace XenAdmin.Controls
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        Messages.BOND_CREATE_WILL_DISTURB_BOTH,
-                        Messages.BOND_CREATE)))
+                        Messages.BOND_CREATE_WILL_DISTURB_BOTH)){WindowTitle = Messages.BOND_CREATE})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -255,8 +254,8 @@ namespace XenAdmin.Controls
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            string.Format(Messages.BOND_CREATE_HA_ENABLED, pool.Name()),
-                            Messages.BOND_CREATE)))
+                            string.Format(Messages.BOND_CREATE_HA_ENABLED, pool.Name())))
+                        {WindowTitle = Messages.BOND_CREATE})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -266,9 +265,13 @@ namespace XenAdmin.Controls
 
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BOND_CREATE_WILL_DISTURB_PRIMARY, Messages.BOND_CREATE),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BOND_CREATE_WILL_DISTURB_PRIMARY),
                     new ThreeButtonDialog.TBDButton(Messages.BOND_CREATE_CONTINUE, DialogResult.OK),
-                    ThreeButtonDialog.ButtonCancel){HelpName = "BondConfigError"})
+                    ThreeButtonDialog.ButtonCancel)
+                {
+                    HelpName = "BondConfigError",
+                    WindowTitle = Messages.BOND_CREATE
+                })
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }
@@ -285,10 +288,9 @@ namespace XenAdmin.Controls
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
-                            Messages.BOND_CREATE_WILL_DISTURB_CLUSTERING,
-                            Messages.BOND_CREATE),
+                            Messages.BOND_CREATE_WILL_DISTURB_CLUSTERING),
                         ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel))
+                        ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.BOND_CREATE})
                     {
                         dialogResult = dlg.ShowDialog(this);
                     }
@@ -299,10 +301,9 @@ namespace XenAdmin.Controls
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
-                            Messages.BOND_CREATE_WILL_DISTURB_SECONDARY,
-                            Messages.BOND_CREATE),
+                            Messages.BOND_CREATE_WILL_DISTURB_SECONDARY),
                         ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel))
+                        ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.BOND_CREATE})
                     {
                         dialogResult = dlg.ShowDialog(this);
                     }

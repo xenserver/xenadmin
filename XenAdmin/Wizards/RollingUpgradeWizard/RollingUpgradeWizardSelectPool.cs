@@ -94,7 +94,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     {
                         using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPGRADE_WIZARD_MESSAGE, selectedMaster.Connection.Username,
-                                selectedMaster.Name()), Messages.ROLLING_POOL_UPGRADE)))
+                                selectedMaster.Name())))
+                            {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                         {
                             dlg.ShowDialog(this);
                         }
@@ -125,8 +126,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        string.Format(Messages.ROLLING_UPGRADE_DISCONNECTED_SERVER, Helpers.StringifyList(disconnectedServerNames)),
-                        Messages.ROLLING_POOL_UPGRADE)))
+                        string.Format(Messages.ROLLING_UPGRADE_DISCONNECTED_SERVER, Helpers.StringifyList(disconnectedServerNames))))
+                    {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                 {
                     dlg.ShowDialog(this);
                 }

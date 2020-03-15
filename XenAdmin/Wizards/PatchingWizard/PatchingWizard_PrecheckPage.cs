@@ -948,8 +948,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     
                 else if (!cancelled)
                     using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                                        string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"),
-                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)))
+                        string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n")))
+                        {WindowTitle = Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT})
                     {
                         dlg.ShowDialog(this);
                     }

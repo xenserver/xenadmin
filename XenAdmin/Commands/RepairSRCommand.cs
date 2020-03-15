@@ -80,8 +80,7 @@ namespace XenAdmin.Commands
                 using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Warning,
-                                   Messages.MULTIPATH_FAILED,
-                                   Messages.MULTIPATHING)))
+                                   Messages.MULTIPATH_FAILED)){WindowTitle = Messages.MULTIPATHING})
                 {
                     dlg.ShowDialog(Parent);
                 }

@@ -460,8 +460,8 @@ namespace XenAdmin.Controls.Wlb
                     using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
-                           Messages.WLB_REPORT_DATE_ORDERING_MESSAGE,
-                           Messages.WLB_REPORT_DATE_ORDERING_CAPTION)))
+                           Messages.WLB_REPORT_DATE_ORDERING_MESSAGE))
+                        {WindowTitle = Messages.WLB_REPORT_DATE_ORDERING_CAPTION})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -491,10 +491,7 @@ namespace XenAdmin.Controls.Wlb
             {
                 log.Debug(ex, ex);
                 using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       ex.Message,
-                       Messages.XENCENTER)))
+                   new ThreeButtonDialog.Details(SystemIcons.Error, ex.Message)))
                 {
                     dlg.ShowDialog(this);
                 }
@@ -1486,10 +1483,7 @@ namespace XenAdmin.Controls.Wlb
                 {
                     log.Debug(ex, ex);
                     using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(
-                           SystemIcons.Error,
-                           ex.Message,
-                           Messages.XENCENTER)))
+                       new ThreeButtonDialog.Details(SystemIcons.Error, ex.Message)))
                     {
                         dlg.ShowDialog(this);
                     }

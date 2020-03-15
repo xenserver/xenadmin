@@ -133,8 +133,8 @@ namespace XenAdmin.Dialogs
                         using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Exclamation,
-                               String.Format(Messages.HA_WAS_DISABLED, pool.Name()),
-                               Messages.HIGH_AVAILABILITY)))
+                               String.Format(Messages.HA_WAS_DISABLED, pool.Name())))
+                            {WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             dlg.ShowDialog(this);
                         }
@@ -159,9 +159,9 @@ namespace XenAdmin.Dialogs
             {
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY, Messages.HIGH_AVAILABILITY),
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.HA_NTOL_ZERO_QUERY),
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }

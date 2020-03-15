@@ -88,8 +88,8 @@ namespace XenAdmin.Wizards
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                         SystemIcons.Warning,
-                        String.Format(Messages.HA_SRS_BROKEN_WARNING, String.Join("\n", brokenSRs.ToArray())),
-                        Messages.HIGH_AVAILABILITY)))
+                        String.Format(Messages.HA_SRS_BROKEN_WARNING, String.Join("\n", brokenSRs.ToArray()))))
+                    {WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     dlg.ShowDialog(this);
                 }

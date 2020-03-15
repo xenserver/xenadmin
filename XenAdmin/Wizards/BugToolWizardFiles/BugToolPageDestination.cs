@@ -118,7 +118,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (File.Exists(path)) //confirm ok to overwrite
             {
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path), Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path)),
                     ThreeButtonDialog.ButtonOK,
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true)))
                 {
@@ -143,8 +143,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message),
-                        Messages.XENCENTER)))
+                        string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message))))
                 {
                     dlg.ShowDialog(this);
                 }

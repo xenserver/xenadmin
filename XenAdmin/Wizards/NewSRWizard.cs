@@ -499,7 +499,7 @@ namespace XenAdmin.Wizards
             {
                 log.Error("New SR Wizard: Pool has disappeared");
                 using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)))))
                 {
                     dlg.ShowDialog(this);
                 }
@@ -513,7 +513,7 @@ namespace XenAdmin.Wizards
             {
                 log.Error("New SR Wizard: Master has disappeared");
                 using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)))))
                 {
                     dlg.ShowDialog(this);
                 }
@@ -712,9 +712,10 @@ namespace XenAdmin.Wizards
                     {
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID), Text),
+                                new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID)),
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                            {WindowTitle = Text})
                         {
                             dialogResult = dlg.ShowDialog(this);
                         }
@@ -729,9 +730,10 @@ namespace XenAdmin.Wizards
                     {
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name()), Text),
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name())),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true))
+                            {WindowTitle = Text})
                         {
                             dialogResult = dlg.ShowDialog(this);
                         }
@@ -779,8 +781,7 @@ namespace XenAdmin.Wizards
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type),
-                        Messages.XENCENTER)))
+                        String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type))))
                 {
                     dlg.ShowDialog(this);
                 }

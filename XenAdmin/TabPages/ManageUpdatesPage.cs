@@ -933,7 +933,7 @@ namespace XenAdmin.TabPages
             if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
             {
                 using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,
@@ -975,7 +975,7 @@ namespace XenAdmin.TabPages
             if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
             {
                 using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_CONFIRM, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(null, Messages.UPDATE_DISMISS_CONFIRM),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo)
                 {
@@ -1051,10 +1051,9 @@ namespace XenAdmin.TabPages
                        clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                  string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
-                                                               disconnectedServerNames),
-                                                  Messages.UPDATES_WIZARD)))
+                        new ThreeButtonDialog.Details(SystemIcons.Warning,
+                            string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, disconnectedServerNames)))
+                    {WindowTitle = Messages.UPDATES_WIZARD})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -1377,8 +1376,7 @@ namespace XenAdmin.TabPages
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK),
-                       Messages.XENCENTER)))
+                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK))))
                 {
                     dlg.ShowDialog(this);
                 }

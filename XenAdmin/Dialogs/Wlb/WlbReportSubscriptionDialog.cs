@@ -418,8 +418,7 @@ namespace XenAdmin.Dialogs.Wlb
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       String.Format(Messages.WLB_SUBSCRIPTION_ERROR, _subscription.Description),
-                       Messages.XENCENTER)))
+                       String.Format(Messages.WLB_SUBSCRIPTION_ERROR, _subscription.Description))))
                 {
                     dlg.ShowDialog(this);
                 }

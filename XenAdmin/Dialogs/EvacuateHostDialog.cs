@@ -771,8 +771,8 @@ namespace XenAdmin.Dialogs
                             using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Error,
-                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY,
-                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE)))
+                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY))
+                                {WindowTitle = Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE})
                             {
                                 dlg.ShowDialog(this);
                             }
@@ -793,8 +793,8 @@ namespace XenAdmin.Dialogs
                             using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Error,
-                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS,
-                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE)))
+                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS))
+                                {WindowTitle = Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE})
                             {
                                 dlg.ShowDialog(this);
                             }

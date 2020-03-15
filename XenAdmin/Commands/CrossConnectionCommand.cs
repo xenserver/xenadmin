@@ -68,8 +68,7 @@ namespace XenAdmin.Commands
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            MessageBoxMessage(failedConnections),
-                            Messages.PERMISSION_DENIED)))
+                            MessageBoxMessage(failedConnections))){WindowTitle = Messages.PERMISSION_DENIED})
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

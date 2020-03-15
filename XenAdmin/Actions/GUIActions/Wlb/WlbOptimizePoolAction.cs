@@ -247,8 +247,8 @@ namespace XenAdmin.Actions.Wlb
                         using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
                                 SystemIcons.Warning,
-                                String.Format(Messages.HA_INVALID_CONFIG_RESUME, Helpers.GetName(vm).Ellipsise(500)),
-                                Messages.HIGH_AVAILABILITY)))
+                                String.Format(Messages.HA_INVALID_CONFIG_RESUME, Helpers.GetName(vm).Ellipsise(500))))
+                            {WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }
@@ -331,8 +331,7 @@ namespace XenAdmin.Actions.Wlb
                         using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Warning,
-                               msg,
-                               Messages.HIGH_AVAILABILITY)))
+                               msg)){WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }
@@ -350,10 +349,9 @@ namespace XenAdmin.Actions.Wlb
                         using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
                                SystemIcons.Warning,
-                               msg,
-                               Messages.HIGH_AVAILABILITY),
+                               msg),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             DialogResult r = dlg.ShowDialog(Program.MainWindow);
                             if (r != DialogResult.Yes)

@@ -84,8 +84,7 @@ namespace XenAdmin.Commands
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         String.Format(Messages.HA_CANNOT_EVACUATE_MASTER,
-                            Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH)),
-                        Messages.XENCENTER)))
+                            Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH)))))
                 {
                     dlg.ShowDialog(Parent);
                 }

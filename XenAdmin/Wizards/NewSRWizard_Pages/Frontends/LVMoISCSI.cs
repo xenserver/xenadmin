@@ -789,7 +789,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     if (!SrWizardType.AllowToCreateNewSr)
                     {
                         using (var dlg = new ThreeButtonDialog(
-                           new ThreeButtonDialog.Details(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS, Messages.XENCENTER)))
+                           new ThreeButtonDialog.Details(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS)))
                         {
                             dlg.ShowDialog(this);
                         }
@@ -800,9 +800,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     if (!Program.RunInAutomatedTestMode)
                     {
                         using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEWSR_ISCSI_FORMAT_WARNING, this.Text),
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEWSR_ISCSI_FORMAT_WARNING),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Text})
                         {
                             result = dlg.ShowDialog(this);
                         }

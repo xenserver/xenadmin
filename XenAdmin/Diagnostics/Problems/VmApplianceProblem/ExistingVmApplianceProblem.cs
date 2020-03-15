@@ -73,9 +73,9 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
 
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VMS, vmNames, vmsToDestroy[0].Connection.Name), Messages.ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VMS, vmNames, vmsToDestroy[0].Connection.Name)),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                    ThreeButtonDialog.ButtonNo){WindowTitle = Messages.ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE})
             {
                 dialogResult = dlg.ShowDialog();
             }

@@ -120,8 +120,7 @@ namespace XenAdmin.Commands
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        String.Format(Messages.UNABLE_TO_IMPORT_SEARCH, filename, BrandManager.ExtensionSearch),
-                        Messages.XENCENTER)))
+                        String.Format(Messages.UNABLE_TO_IMPORT_SEARCH, filename, BrandManager.ExtensionSearch))))
                 {
                     dlg.ShowDialog(Parent);
                 }

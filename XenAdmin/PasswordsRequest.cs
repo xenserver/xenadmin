@@ -211,8 +211,8 @@ namespace XenAdmin
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                       string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath())))
+                    {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }
@@ -236,8 +236,7 @@ namespace XenAdmin
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_PASSWORD_WRITE_FAILED, exn.Message),
-                       Messages.XENCENTER)))
+                       string.Format(Messages.MESSAGEBOX_PASSWORD_WRITE_FAILED, exn.Message))))
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }

@@ -105,9 +105,12 @@ namespace XenAdmin.Commands
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
-                            Messages.CONFIGURE_HA),
-                        ThreeButtonDialog.ButtonOK){HelpName = "HADisable"})
+                            string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30))),
+                        ThreeButtonDialog.ButtonOK)
+                    {
+                        HelpName = "HADisable",
+                        WindowTitle = Messages.CONFIGURE_HA
+                    })
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

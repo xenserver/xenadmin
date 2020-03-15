@@ -102,9 +102,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
 
             using (var dlog = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, ReconsiderCancellationMessage(), Text),
+                new ThreeButtonDialog.Details(SystemIcons.Warning, ReconsiderCancellationMessage()),
                 ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo))
+                ThreeButtonDialog.ButtonNo){WindowTitle = Text})
             {
                 if (dlog.ShowDialog(this) != DialogResult.Yes)
                 {
@@ -546,10 +546,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                    string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
-                                    ParentForm != null ? ParentForm.Text : Messages.XENCENTER),
+                                    string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg)),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo)
+                {WindowTitle = ParentForm != null ? ParentForm.Text : Messages.XENCENTER})
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;

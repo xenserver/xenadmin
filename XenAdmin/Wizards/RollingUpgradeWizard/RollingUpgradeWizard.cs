@@ -168,8 +168,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void ShowCanBeResumedInfo()
         {
             using (var dialog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                                Messages.ROLLING_UPGRADE_CAN_RESUME_UPGRADE,
-                                                                Messages.ROLLING_POOL_UPGRADE)))
+                    Messages.ROLLING_UPGRADE_CAN_RESUME_UPGRADE))
+                {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
             {
                 dialog.ShowDialog(Program.MainWindow);
             }

@@ -150,7 +150,7 @@ namespace XenAdmin.Dialogs
                 if (pvsProxies.Count > 0)
                 {
                     using (var dlg = 
-                        new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED, Messages.XENCENTER)))
+                        new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED)))
                     {
                         dlg.ShowDialog(Parent);
                     }
@@ -164,7 +164,7 @@ namespace XenAdmin.Dialogs
                 : string.Format(Messages.CONFIRM_DELETE_PVS_SITE, siteName);
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, message),
                     ThreeButtonDialog.ButtonOK,
                     ThreeButtonDialog.ButtonCancel))
             {

@@ -237,8 +237,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
-                        Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED,
-                        Messages.SERVER_STATUS_REPORT)))
+                        Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED))
+                    {WindowTitle = Messages.SERVER_STATUS_REPORT})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -420,10 +420,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             catch
             {
                 using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       Messages.HOMEPAGE_ERROR_MESSAGE,
-                       Messages.XENCENTER)))
+                   new ThreeButtonDialog.Details(SystemIcons.Error, Messages.HOMEPAGE_ERROR_MESSAGE)))
                 {
                     dlg.ShowDialog(this);
                 }

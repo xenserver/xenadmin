@@ -101,7 +101,7 @@ namespace XenAdmin.Commands
                                                      Helpers.GetName(_pool).Ellipsise(500));
 
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, message, Messages.XENCENTER)))
+                    new ThreeButtonDialog.Details(SystemIcons.Error, message)))
                 {
                     dlg.ShowDialog(Parent);
                 }
@@ -225,9 +225,9 @@ namespace XenAdmin.Commands
                 string hostName = Helpers.GetName(host).Ellipsise(500);
                 string msg = string.Format(Messages.HA_HOST_ENABLE_NTOL_RAISE_QUERY, poolName, hostName, currentNtol, max);
                 using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, msg, Messages.HIGH_AVAILABILITY),
+                        new ThreeButtonDialog.Details(null, msg),
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
                     {
@@ -285,10 +285,10 @@ namespace XenAdmin.Commands
                 }
 
                 using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY),
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)
-                        ))
+                        ){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
                     {

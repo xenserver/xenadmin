@@ -85,8 +85,7 @@ namespace XenAdmin.Commands
                     using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Error,
-                           Messages.MESSAGEBOX_POOL_MASTER_REMOVE,
-                           Messages.XENCENTER)))
+                           Messages.MESSAGEBOX_POOL_MASTER_REMOVE)))
                     {
                         dlg.ShowDialog(MainWindowCommandInterface.Form);
                     }
@@ -166,9 +165,9 @@ namespace XenAdmin.Commands
             while (true)
             {
                 IXenConnection connection = (IXenConnection)o;
-                Thread.Sleep(30 * 1000);           // wait 30s for server to shutdown
+                Thread.Sleep(30 * 1000); // wait 30s for server to shutdown
                 int i = 0;
-                int max = 27;                                       // giveup after 5 mins
+                int max = 27; // give up after 5 mins
                 while (true)
                 {
                     if (i > max)
@@ -178,8 +177,8 @@ namespace XenAdmin.Commands
                             using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Exclamation,
-                                   string.Format(Messages.MESSAGEBOX_RECONNECT_FAIL, connection.Hostname),
-                                   Messages.MESSAGEBOX_RECONNECT_FAIL_TITLE)))
+                                   string.Format(Messages.MESSAGEBOX_RECONNECT_FAIL, connection.Hostname)))
+                                {WindowTitle = Messages.MESSAGEBOX_RECONNECT_FAIL_TITLE})
                             {
                                 dlg.ShowDialog(Parent);
                             }

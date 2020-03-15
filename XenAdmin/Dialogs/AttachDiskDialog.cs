@@ -223,7 +223,7 @@ namespace XenAdmin.Dialogs
                         using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(
                                 SystemIcons.Error,
-                                FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)))
+                                FriendlyErrorNames.VBDS_MAX_ALLOWED)){WindowTitle = Messages.DISK_ATTACH})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }

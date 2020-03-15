@@ -572,7 +572,7 @@ namespace XenAdmin.Wizards.ImportWizard
             var msg = string.Format(Messages.UNCOMPRESS_APPLIANCE_DESCRIPTION,
                 Path.GetFileName(_unzipFileOut), Path.GetFileName(_unzipFileIn));
 
-            using (var dlog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, msg, Messages.XENCENTER),
+            using (var dlog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, msg),
                 new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes),
                 new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)))
             {

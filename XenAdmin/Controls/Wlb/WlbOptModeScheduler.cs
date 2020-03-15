@@ -285,8 +285,7 @@ namespace XenAdmin.Controls.Wlb
                     using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)))
+                           Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB)){WindowTitle = Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -314,8 +313,7 @@ namespace XenAdmin.Controls.Wlb
                     using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)))
+                           Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB)){WindowTitle = Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -384,8 +382,7 @@ namespace XenAdmin.Controls.Wlb
                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB,
-                           Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE)))
+                           Messages.WLB_TASK_SCHEDULE_CONFLICT_BLURB)){WindowTitle = Messages.WLB_TASK_SCHEDULE_CONFLICT_TITLE})
                    {
                        dlg.ShowDialog(this);
                    }
@@ -657,11 +654,10 @@ namespace XenAdmin.Controls.Wlb
             {
                 DialogResult confirmResult;
                 using (var dlg = new ThreeButtonDialog(
-                                                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                                                Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING,
-                                                                                Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION),
-                                                ThreeButtonDialog.ButtonYes,
-                                                ThreeButtonDialog.ButtonNo))
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_WARNING),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {WindowTitle = Messages.DELETE_WLB_OPTIMIZATION_SCHEDULE_CAPTION})
                 {
                     confirmResult = dlg.ShowDialog(this);
                 }

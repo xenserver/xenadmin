@@ -240,7 +240,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (!WizardHelpers.IsValidFile(FilePath, out var pathFailure))
                         using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                            SystemIcons.Error, pathFailure, Messages.UPDATES)))
+                            SystemIcons.Error, pathFailure))
+                            {WindowTitle = Messages.UPDATES})
                         {
                             cancel = true;
                             dlg.ShowDialog();
@@ -261,7 +262,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (!WizardHelpers.IsValidFile(unzippedUpdateFilePath, out var zipFailure))
                         {
                             using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                                SystemIcons.Error, zipFailure, Messages.UPDATES)))
+                                SystemIcons.Error, zipFailure)){WindowTitle = Messages.UPDATES})
                             {
                                 cancel = true;
                                 dlg.ShowDialog();

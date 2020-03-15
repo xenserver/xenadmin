@@ -149,7 +149,7 @@ namespace XenAdmin.Dialogs
             {
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA, Messages.XENCENTER),
+                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo))
                 {

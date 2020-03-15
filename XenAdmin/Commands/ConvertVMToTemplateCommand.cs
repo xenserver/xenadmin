@@ -71,10 +71,9 @@ namespace XenAdmin.Commands
             using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
-                            string.Format(Messages.CONVERT_TEMPLATE_DIALOG_TEXT, vm.Name().Ellipsise(25)),
-                            Messages.CONVERT_TO_TEMPLATE),
+                            string.Format(Messages.CONVERT_TEMPLATE_DIALOG_TEXT, vm.Name().Ellipsise(25))),
                         new ThreeButtonDialog.TBDButton(Messages.CONVERT, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                        ThreeButtonDialog.ButtonCancel))
+                        ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.CONVERT_TO_TEMPLATE})
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {

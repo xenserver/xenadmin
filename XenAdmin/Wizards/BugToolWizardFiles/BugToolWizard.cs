@@ -108,9 +108,9 @@ namespace XenAdmin.Wizards
 
                     DialogResult result;
                     using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(null, Messages.REMOVE_CRASHDUMP_QUESTION, Messages.REMOVE_CRASHDUMP_FILES),
+                                new ThreeButtonDialog.Details(null, Messages.REMOVE_CRASHDUMP_QUESTION),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.REMOVE_CRASHDUMP_FILES})
                     {
                         result = dlg.ShowDialog(this);
                     }

@@ -263,10 +263,9 @@ namespace XenAdmin.SettingsPanels
             {
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.EDIT_SYS_DISK_WARNING,
-                        Messages.EDIT_SYS_DISK_WARNING_TITLE),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.EDIT_SYS_DISK_WARNING),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                    ThreeButtonDialog.ButtonNo){WindowTitle = Messages.EDIT_SYS_DISK_WARNING_TITLE})
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }
@@ -337,7 +336,7 @@ namespace XenAdmin.SettingsPanels
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     using (var dlg = new ThreeButtonDialog(
-                                    new ThreeButtonDialog.Details(SystemIcons.Information, Messages.DEVICE_POSITION_RESTART_REQUIRED, Messages.XENCENTER)))
+                                    new ThreeButtonDialog.Details(SystemIcons.Information, Messages.DEVICE_POSITION_RESTART_REQUIRED)))
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

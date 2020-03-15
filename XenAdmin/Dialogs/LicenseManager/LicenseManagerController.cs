@@ -146,8 +146,7 @@ namespace XenAdmin.Dialogs
             using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       Messages.SELECTED_HOST_POOL_NOT_CONNECTED,
-                       Messages.XENCENTER)))
+                       Messages.SELECTED_HOST_POOL_NOT_CONNECTED)))
             {
                 dlg.ShowDialog(View.Parent);
             }
@@ -225,8 +224,7 @@ namespace XenAdmin.Dialogs
                                using (var dlg = new ThreeButtonDialog(
                                    new ThreeButtonDialog.Details(
                                        SystemIcons.Error,
-                                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url),
-                                       Messages.XENCENTER)))
+                                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url))))
                                 {
                                     dlg.ShowDialog(View.Parent);
                                 }

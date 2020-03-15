@@ -437,9 +437,9 @@ namespace XenAdmin.Dialogs.VMAppliances
             }
 
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, text, Messages.DELETE_VM_APPLIANCE_TITLE),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, text),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                    ThreeButtonDialog.ButtonNo){WindowTitle = Messages.DELETE_VM_APPLIANCE_TITLE})
             {
                 if (dlg.ShowDialog(this) == DialogResult.Yes)
                     new DestroyVMApplianceAction(Pool.Connection, selectedAppliances).RunAsync();
@@ -479,9 +479,9 @@ namespace XenAdmin.Dialogs.VMAppliances
 				return;
 
 			using (var confirmDialog = new ThreeButtonDialog(
-				new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.CONFIRM_SHUT_DOWN_APPLIANCE, Messages.VM_APPLIANCE_SHUT_DOWN),
+				new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.CONFIRM_SHUT_DOWN_APPLIANCE),
 				ThreeButtonDialog.ButtonYes,
-				ThreeButtonDialog.ButtonNo))
+				ThreeButtonDialog.ButtonNo){WindowTitle = Messages.VM_APPLIANCE_SHUT_DOWN})
 			{
 				if (confirmDialog.ShowDialog(this) != DialogResult.Yes)
 					return;

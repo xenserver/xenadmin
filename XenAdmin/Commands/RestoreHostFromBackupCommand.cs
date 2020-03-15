@@ -160,8 +160,7 @@ namespace XenAdmin.Commands
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Information,
-                        string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host)),
-                        Messages.XENCENTER)))
+                        string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host)))))
                 {
                     dlg.ShowDialog(Parent);
                 }

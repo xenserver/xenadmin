@@ -349,7 +349,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			{
 				using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
 				                      	SystemIcons.Error,
-                                        FriendlyErrorNames.VIFS_MAX_ALLOWED, FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)))
+                                        FriendlyErrorNames.VIFS_MAX_ALLOWED))
+                    {WindowTitle = FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE})
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }

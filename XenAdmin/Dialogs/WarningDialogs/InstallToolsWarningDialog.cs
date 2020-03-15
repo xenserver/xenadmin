@@ -90,10 +90,9 @@ namespace XenAdmin.Dialogs
                         Hide();
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BROKEN_TOOLS_PROMPT,
-                                Messages.INSTALL_XS_TOOLS),
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BROKEN_TOOLS_PROMPT),
                             ThreeButtonDialog.ButtonOK,
-                            ThreeButtonDialog.ButtonCancel))
+                            ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.INSTALL_XS_TOOLS})
                         {
                             dialogResult = dlg.ShowDialog(this);
                         }

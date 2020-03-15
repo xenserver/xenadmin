@@ -123,8 +123,7 @@ namespace XenAdmin.Commands
                 using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             null,
-                            Messages.NEW_DVD_DRIVE_REQUIRED,
-                            Messages.XENCENTER),
+                            Messages.NEW_DVD_DRIVE_REQUIRED),
                         ThreeButtonDialog.ButtonYes,
                         ThreeButtonDialog.ButtonNo))
                 {
@@ -182,7 +181,7 @@ namespace XenAdmin.Commands
             if (newDvdDrivesRequired)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_DVD_DRIVES_REQUIRED, Messages.XENCENTER),
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_DVD_DRIVES_REQUIRED),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
                 {

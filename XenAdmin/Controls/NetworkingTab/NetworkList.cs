@@ -497,8 +497,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            FriendlyErrorNames.VIFS_MAX_ALLOWED,
-                            FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)))
+                            FriendlyErrorNames.VIFS_MAX_ALLOWED)){WindowTitle = FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE})
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }
@@ -557,8 +556,7 @@ namespace XenAdmin.Controls.NetworkingTab
             using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     SystemIcons.Information,
-                    Messages.VIF_HOTPLUG_FAILED_MESSAGE,
-                    Messages.VIF_HOTPLUG_FAILED_TITLE)))
+                    Messages.VIF_HOTPLUG_FAILED_MESSAGE)){WindowTitle = Messages.VIF_HOTPLUG_FAILED_TITLE})
             {
                 dlg.ShowDialog(Program.MainWindow);
             }
@@ -620,9 +618,9 @@ namespace XenAdmin.Controls.NetworkingTab
                 {
                     // Deleting a VIF, not a Network.
                     using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_VIF_DELETE, Messages.MESSAGEBOX_VIF_DELETE_TITLE),
+                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_VIF_DELETE),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.MESSAGEBOX_VIF_DELETE_TITLE})
                     {
                         result = dlg.ShowDialog(Program.MainWindow);
                     }
@@ -630,9 +628,9 @@ namespace XenAdmin.Controls.NetworkingTab
                 else
                 {
                     using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_NETWORK_DELETE, Messages.MESSAGEBOX_NETWORK_DELETE_TITLE),
+                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_NETWORK_DELETE),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.MESSAGEBOX_NETWORK_DELETE_TITLE})
                     {
                         result = dlg.ShowDialog(Program.MainWindow);
                     }

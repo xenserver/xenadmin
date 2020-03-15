@@ -124,7 +124,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             {
                 using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Information,
                     string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, GetResolvedHost().Name()),
-                    Messages.ROLLING_POOL_UPGRADE, Messages.REBOOT, Messages.SKIP_SERVER))
+                    Messages.ROLLING_POOL_UPGRADE, Messages.REBOOT)
+                    {WindowTitle = Messages.SKIP_SERVER})
                 {
                     if (dialog.ShowDialog(invokingControl) != DialogResult.OK) // Cancel or Unknown
                     {
@@ -162,7 +163,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Exclamation,
                             string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName),
                             Messages.ROLLING_POOL_UPGRADE,
-                            Messages.REBOOT_AGAIN_BUTTON_LABEL, Messages.SKIP_SERVER))
+                            Messages.REBOOT_AGAIN_BUTTON_LABEL)
+                            {WindowTitle = Messages.SKIP_SERVER})
                         {
                             if (dialog.ShowDialog(invokingControl) == DialogResult.OK)
                                 return;

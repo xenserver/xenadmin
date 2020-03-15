@@ -137,8 +137,7 @@ namespace XenAdmin.Dialogs
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       String.Format(Messages.USER_AUTHORIZATION_FAILED, TextBoxUsername.Text),
-                       Messages.XENCENTER)))
+                       String.Format(Messages.USER_AUTHORIZATION_FAILED, TextBoxUsername.Text))))
                 {
                     dlg.ShowDialog(Parent);
                 }
@@ -181,8 +180,7 @@ namespace XenAdmin.Dialogs
             using (var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     SystemIcons.Error,
-                    Messages.USER_NOT_AUTHORIZED,
-                    Messages.PERMISSION_DENIED)))
+                    Messages.USER_NOT_AUTHORIZED)){WindowTitle = Messages.PERMISSION_DENIED})
             {
                 dlg.ShowDialog(this);
             }

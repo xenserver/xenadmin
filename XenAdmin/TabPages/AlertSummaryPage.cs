@@ -507,7 +507,7 @@ namespace XenAdmin.TabPages
             if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
                 using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo)
                 {
@@ -574,7 +574,7 @@ namespace XenAdmin.TabPages
             if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
                 using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,

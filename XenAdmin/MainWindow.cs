@@ -546,8 +546,8 @@ namespace XenAdmin
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                       string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath())))
+                    {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -894,8 +894,8 @@ namespace XenAdmin
                     new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
 
                     using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70), Messages.CONNECT_TO_SERVER),
-                        ThreeButtonDialog.ButtonOK))
+                        new ThreeButtonDialog.Details(SystemIcons.Error, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70)),
+                        ThreeButtonDialog.ButtonOK){WindowTitle = Messages.CONNECT_TO_SERVER})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -2215,8 +2215,8 @@ namespace XenAdmin
                 using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)))
+                       string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath())))
+                    {WindowTitle =  Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -2617,7 +2617,7 @@ namespace XenAdmin
             }
             else
                 using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, failureReason, Messages.UPDATES)))
+                    SystemIcons.Error, failureReason)){WindowTitle = Messages.UPDATES})
                 {
                     popup.ShowDialog();
                 }
@@ -3051,10 +3051,10 @@ namespace XenAdmin
                 };
 
             var details = new ThreeButtonDialog.Details(SystemIcons.Exclamation,
-                args.Length == 0 ? msg : string.Format(msg, args), title);
+                args.Length == 0 ? msg : string.Format(msg, args));
 
             DialogResult dialogResult;
-            using (var dialog = new ThreeButtonDialog(details, buttons))
+            using (var dialog = new ThreeButtonDialog(details, buttons){WindowTitle = title})
             {
                 if (!string.IsNullOrEmpty(helpName))
                     dialog.HelpName = helpName;
@@ -3091,10 +3091,7 @@ namespace XenAdmin
                     return;
             }
             using (var dlg = new ThreeButtonDialog(
-               new ThreeButtonDialog.Details(
-                   SystemIcons.Warning,
-                   Messages.DISCONNECTED_BEFORE_ACTION_STARTED,
-                   Messages.XENCENTER)))
+               new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.DISCONNECTED_BEFORE_ACTION_STARTED)))
             {
                 dlg.ShowDialog(parent);
             }
@@ -3183,7 +3180,7 @@ namespace XenAdmin
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
                         using (var dlg = new ThreeButtonDialog(
-                                  new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST, Messages.XENCENTER)))
+                                  new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST)))
                         {
                             dlg.ShowDialog(this);
                         }

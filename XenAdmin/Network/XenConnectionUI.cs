@@ -159,8 +159,8 @@ namespace XenAdmin.Network
                                 using (var dlg = new ThreeButtonDialog(
                                     new ThreeButtonDialog.Details(
                                        SystemIcons.Information,
-                                       string.Format(Messages.OLD_CONNECTION_ALREADY_CONNECTED, pool_name),
-                                       Messages.ADD_NEW_CONNECT_TO)))
+                                       string.Format(Messages.OLD_CONNECTION_ALREADY_CONNECTED, pool_name)))
+                                    {WindowTitle = Messages.ADD_NEW_CONNECT_TO})
                                 {
                                     dlg.ShowDialog(owner);
                                 }
@@ -171,8 +171,8 @@ namespace XenAdmin.Network
                                 using (var dlg = new ThreeButtonDialog(
                                     new ThreeButtonDialog.Details(
                                        SystemIcons.Information,
-                                        string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name),
-                                       Messages.ADD_NEW_CONNECT_TO)))
+                                        string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name)))
+                                    {WindowTitle = Messages.ADD_NEW_CONNECT_TO})
                                 {
                                     dlg.ShowDialog(owner);
                                 }
@@ -185,10 +185,9 @@ namespace XenAdmin.Network
                         using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(
                                     SystemIcons.Warning,
-                                    String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
-                                    Messages.CONNECT_TO_SERVER),
+                                    String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName)),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.CONNECT_TO_SERVER})
                         {
                             dialogResult = dlg.ShowDialog(owner);
                         }
@@ -274,10 +273,7 @@ namespace XenAdmin.Network
                 if (!Program.RunInAutomatedTestMode)
                 {
                     using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(
-                           SystemIcons.Information,
-                           c.GetDialogMessage(connection),
-                           Messages.XENCENTER)))
+                       new ThreeButtonDialog.Details(SystemIcons.Information, c.GetDialogMessage(connection))))
                     {
                         dlg.ShowDialog(owner);
                     }
@@ -327,9 +323,9 @@ namespace XenAdmin.Network
             {
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, text, Messages.CONNECT_TO_SERVER),
+                    new ThreeButtonDialog.Details(SystemIcons.Error, text),
                     new ThreeButtonDialog.TBDButton(Messages.RETRY_BUTTON_LABEL, DialogResult.Retry, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                    ThreeButtonDialog.ButtonCancel))
+                    ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.CONNECT_TO_SERVER})
                 {
                     dialogResult = dlg.ShowDialog(owner);
                 }
@@ -341,10 +337,7 @@ namespace XenAdmin.Network
             else
             {
                 using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       text,
-                       Messages.CONNECT_TO_SERVER)))
+                   new ThreeButtonDialog.Details(SystemIcons.Error, text)){WindowTitle = Messages.CONNECT_TO_SERVER})
                 {
                     dlg.ShowDialog(owner);
                 }

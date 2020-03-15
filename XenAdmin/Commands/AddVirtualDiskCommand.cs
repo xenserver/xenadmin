@@ -83,8 +83,7 @@ namespace XenAdmin.Commands
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            FriendlyErrorNames.VBDS_MAX_ALLOWED,
-                            Messages.DISK_ADD)))
+                            FriendlyErrorNames.VBDS_MAX_ALLOWED)){WindowTitle = Messages.DISK_ADD})
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

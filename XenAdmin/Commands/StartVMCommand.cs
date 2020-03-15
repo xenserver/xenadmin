@@ -103,10 +103,11 @@ namespace XenAdmin.Commands
             {
                 DialogResult d;
                 using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.EJECT_BEFORE_VM_START_MESSAGE_BOX, vms.Count > 1 ? Messages.STARTING_VMS_MESSAGEBOX_TITLE : Messages.STARTING_VM_MESSAGEBOX_TITLE), 
+                    new ThreeButtonDialog.Details(null, Messages.EJECT_BEFORE_VM_START_MESSAGE_BOX), 
                     new ThreeButtonDialog.TBDButton(Messages.EJECT_BUTTON_LABEL, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true), 
                     new ThreeButtonDialog.TBDButton(Messages.IGNORE_BUTTON_LABEL, DialogResult.Ignore), 
-                    ThreeButtonDialog.ButtonCancel))
+                    ThreeButtonDialog.ButtonCancel)
+                    {WindowTitle = vms.Count > 1 ? Messages.STARTING_VMS_MESSAGEBOX_TITLE : Messages.STARTING_VM_MESSAGEBOX_TITLE})
                 {
                     d = dlg.ShowDialog(MainWindowCommandInterface.Form);
                 }

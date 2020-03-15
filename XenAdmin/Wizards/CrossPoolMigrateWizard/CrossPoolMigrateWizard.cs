@@ -523,7 +523,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         internal static void ShowWarningMessageBox(string message)
         {
             using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)))
+                new ThreeButtonDialog.Details(SystemIcons.Warning, message)){WindowTitle = Messages.CPM_WIZARD_TITLE})
             {
                 dlg.ShowDialog(Program.MainWindow);
             }

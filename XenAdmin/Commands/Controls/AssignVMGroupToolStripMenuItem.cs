@@ -196,9 +196,9 @@ namespace XenAdmin.Commands
 
                 DialogResult dialogResult;
                 using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, text, VMGroup<T>.ChangeVMsGroupString),
+                        new ThreeButtonDialog.Details(SystemIcons.Warning, text),
                         ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo))
+                        ThreeButtonDialog.ButtonNo){WindowTitle = VMGroup<T>.ChangeVMsGroupString})
                 {
                     dialogResult = dlg.ShowDialog();
                 }

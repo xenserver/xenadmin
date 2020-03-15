@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                     using (var dlog = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Error,
-                            String.Format(Messages.INCORRECT_LUN_FOR_SR, SrWizardType.SrName), Messages.XENCENTER)))
+                            String.Format(Messages.INCORRECT_LUN_FOR_SR, SrWizardType.SrName))))
                     {
                         dlog.ShowDialog(this);
                     }
@@ -157,8 +157,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     if (!SrWizardType.AllowToCreateNewSr)
                     {
                         using (var dlog = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Error,
-                                Messages.NEWSR_LUN_HAS_NO_SRS, Messages.XENCENTER)))
+                            new ThreeButtonDialog.Details(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS)))
                         {
                             dlog.ShowDialog(this);
                         }
@@ -182,7 +181,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                             : string.Format(Messages.NEWSR_LUN_IN_USE_ON_SELECTED_SERVER, device.SCSIid, existingSr.Name());
 
                         using (var dlog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,
-                                errorText, Messages.XENCENTER)))
+                                errorText)))
                         {
                             dlog.ShowDialog(this);
                         }
@@ -409,7 +408,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return true;
 
             using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS, Messages.XENCENTER)))
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS)))
             {
                 dlg.ShowDialog();
             }

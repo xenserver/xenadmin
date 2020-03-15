@@ -112,7 +112,7 @@ namespace XenAdmin.Dialogs
 
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY, Messages.XENCENTER),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.CONFIRM_CHANGE_CONTROL_DOMAIN_MEMORY),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
             {

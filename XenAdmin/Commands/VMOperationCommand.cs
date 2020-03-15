@@ -206,10 +206,9 @@ namespace XenAdmin.Commands
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning,
                         String.Format(isStart ? Messages.HA_INVALID_CONFIG_START : Messages.HA_INVALID_CONFIG_RESUME,
-                            Helpers.GetName(vm).Ellipsise(500)),
-                        Messages.HIGH_AVAILABILITY),
+                            Helpers.GetName(vm).Ellipsise(500))),
                     ThreeButtonDialog.ButtonOK,
-                    ThreeButtonDialog.ButtonCancel))
+                    ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     dialogResult = dlg.ShowDialog(Program.MainWindow);
                 }
@@ -315,7 +314,7 @@ namespace XenAdmin.Commands
                         Helpers.GetName(VMStartAction.VM).Ellipsise(100));
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY)))
+                        using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, msg)){WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }
@@ -332,9 +331,9 @@ namespace XenAdmin.Commands
                     {
                         DialogResult r;
                         using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY),
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, msg),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)){WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             r = dlg.ShowDialog(Program.MainWindow);
                         }

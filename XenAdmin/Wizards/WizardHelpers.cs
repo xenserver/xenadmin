@@ -85,7 +85,8 @@ namespace XenAdmin.Wizards
 
             if (!IsValidFile(dlg.FileName, out var failureReason))
                 using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, failureReason, Messages.UPDATES)))
+                    SystemIcons.Error, failureReason))
+                    {WindowTitle =  Messages.UPDATES})
                 {
                     popup.ShowDialog();
                     e.Cancel = true;
@@ -96,7 +97,8 @@ namespace XenAdmin.Wizards
         {
             if (!IsValidFile(path, out var pathFailure))
                 using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, pathFailure, Messages.UPDATES)))
+                    SystemIcons.Error, pathFailure))
+                    {WindowTitle = Messages.UPDATES})
                 {
                     cancel = true;
                     dlg.ShowDialog();
@@ -109,7 +111,8 @@ namespace XenAdmin.Wizards
 
                 if (!IsValidFile(unzippedPath, out var zipFailure))
                     using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                        SystemIcons.Error, zipFailure, Messages.UPDATES)))
+                        SystemIcons.Error, zipFailure))
+                        {WindowTitle = Messages.UPDATES})
                     {
                         cancel = true;
                         dlg.ShowDialog();
