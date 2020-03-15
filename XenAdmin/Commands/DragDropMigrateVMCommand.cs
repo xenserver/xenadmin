@@ -245,23 +245,23 @@ namespace XenAdmin.Commands
 
         private bool Confirm()
         {
+            if (Program.RunInAutomatedTestMode)
+                return true;
+
             List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
 
-            if (draggedVMs.Count == 1)
-            {
-                return Program.MainWindow.Confirm(null, Messages.MESSAGEBOX_CONFIRM, Messages.MAINWINDOW_CONFIRM_MIGRATE, draggedVMs[0].Name(), targetHost.Name());
-            }
+            var msg = draggedVMs.Count == 1
+                ? string.Format(Messages.MAINWINDOW_CONFIRM_MIGRATE, draggedVMs[0].Name().Ellipsise(50), targetHost.Name().Ellipsise(50))
+                : string.Format(Messages.MAINWINDOW_CONFIRM_MIGRATE_MULTIPLE, targetHost.Name().Ellipsise(50));
 
-            return Program.MainWindow.Confirm(null, Messages.MESSAGEBOX_CONFIRM, Messages.MAINWINDOW_CONFIRM_MIGRATE_MULTIPLE, targetHost.Name());
-        }
-
-        public override VirtualTreeNode HighlightNode
-        {
-            get
+            using (var dialog = new ThreeButtonDialog(SystemIcons.Exclamation, msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {WindowTitle = Messages.MESSAGEBOX_CONFIRM})
             {
-                return CanExecute() ? GetTargetNodeAncestor<Host>() : null;
+                return dialog.ShowDialog(Program.MainWindow) == DialogResult.Yes;
             }
         }
+
+        public override VirtualTreeNode HighlightNode => CanExecute() ? GetTargetNodeAncestor<Host>() : null;
     }
 }

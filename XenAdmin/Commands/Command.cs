@@ -309,77 +309,55 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets a value indicating whether a confirmation dialog should be shown.
         /// </summary>
-        protected virtual bool ConfirmationRequired
-        {
-            get { return false; }
-        }
+        protected virtual bool ConfirmationRequired => false;
 
         /// <summary>
         /// Gets the confirmation dialog title. The default for this is Messages.MESSAGEBOX_CONFIRM.
         /// </summary>
-        protected virtual string ConfirmationDialogTitle
-        {
-            get { return null; }
-        }
+        protected virtual string ConfirmationDialogTitle => null;
 
         /// <summary>
         /// Gets the confirmation dialog text.
         /// </summary>
-        protected virtual string ConfirmationDialogText
-        {
-            get { return null; }
-        }
+        protected virtual string ConfirmationDialogText => null;
 
         /// <summary>
         /// Gets the help id for the confirmatin dialog.
         /// </summary>
-        protected virtual string ConfirmationDialogHelpId
-        {
-            get { return null; }
-        }
+        protected virtual string ConfirmationDialogHelpId => null;
 
-        /// <summary>
-        /// Gets the confirmation dialog's "Yes" button label.
-        /// </summary>
-        protected virtual string ConfirmationDialogYesButtonLabel
-        {
-            get { return null; }
-        }
+        protected virtual string ConfirmationDialogYesButtonLabel => null;
 
-        /// <summary>
-        /// Gets the confirmation dialog's "No" button label.
-        /// </summary>
-        protected virtual string ConfirmationDialogNoButtonLabel
-        {
-            get { return null; }
-        }
+        protected virtual string ConfirmationDialogNoButtonLabel => null;
 
-        /// <summary>
-        /// Gets a value indicating whether the "No" button should be selected when a confirmation dialog is displayed.
-        /// </summary>
-        protected virtual bool ConfirmationDialogNoButtonSelected
-        {
-            get { return false; }
-        }
+        protected virtual bool ConfirmationDialogNoButtonSelected => false;
 
         /// <summary>
         /// Shows a confirmation dialog.
         /// </summary>
-        /// <returns>true if the user clicked Yes.</returns>
+        /// <returns>True if the user clicked Yes.</returns>
         protected bool ShowConfirmationDialog()
         {
-            ThreeButtonDialog.TBDButton buttonYes = ThreeButtonDialog.ButtonYes;
-            if (!string.IsNullOrEmpty(ConfirmationDialogYesButtonLabel))
-                buttonYes.label = ConfirmationDialogYesButtonLabel;
-            
-            ThreeButtonDialog.TBDButton buttonNo = ThreeButtonDialog.ButtonNo;
-            if (!string.IsNullOrEmpty(ConfirmationDialogNoButtonLabel))
-                buttonNo.label = ConfirmationDialogNoButtonLabel;
-            if (ConfirmationDialogNoButtonSelected)
-                buttonNo.selected = true;
+            if (Program.RunInAutomatedTestMode)
+                return true;
 
-            return MainWindow.Confirm(null, Parent, ConfirmationDialogTitle ?? Messages.XENCENTER,
-                ConfirmationDialogHelpId, buttonYes, buttonNo, ConfirmationDialogText);
+            var buttonYes = new ThreeButtonDialog.TBDButton(
+                string.IsNullOrEmpty(ConfirmationDialogYesButtonLabel) ? Messages.YES_BUTTON_CAPTION : ConfirmationDialogYesButtonLabel,
+                DialogResult.Yes);
+
+            var buttonNo = new ThreeButtonDialog.TBDButton(
+                string.IsNullOrEmpty(ConfirmationDialogNoButtonLabel) ? Messages.NO_BUTTON_CAPTION : ConfirmationDialogNoButtonLabel,
+                DialogResult.No,
+                selected: ConfirmationDialogNoButtonSelected);
+
+            using (var dialog = new ThreeButtonDialog(SystemIcons.Exclamation, ConfirmationDialogText, buttonYes, buttonNo)
+                {WindowTitle = ConfirmationDialogTitle})
+            {
+                if (!string.IsNullOrEmpty(ConfirmationDialogHelpId))
+                    dialog.HelpName = ConfirmationDialogHelpId;
+
+                return dialog.ShowDialog(Parent ?? Program.MainWindow) == DialogResult.Yes;
+            }
         }
 
         /// <summary>

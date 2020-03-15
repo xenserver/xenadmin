@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.CustomFields;
 using XenAdmin.Network;
@@ -100,8 +101,21 @@ namespace XenAdmin.Dialogs
 
             string name = customFieldDefinition.Name.Ellipsise(50);
 
-            if (!MainWindow.Confirm(connection, Program.MainWindow, Messages.MESSAGEBOX_CONFIRM, Messages.MESSAGEBOX_DELETE_CUSTOM_FIELD, name))
+            if (!Program.RunInAutomatedTestMode)
+                using (var dialog = new ThreeButtonDialog(SystemIcons.Exclamation,
+                        string.Format(Messages.MESSAGEBOX_DELETE_CUSTOM_FIELD, name),
+                        ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {WindowTitle = Messages.MESSAGEBOX_CONFIRM})
+                {
+                    if (dialog.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                        return;
+                }
+
+            if (connection != null && !connection.IsConnected)
+            {
+                MainWindow.ShowDisconnectedMessage(Program.MainWindow);
                 return;
+            }
 
             int selIdx = lbCustomFields.SelectedIndex;
 

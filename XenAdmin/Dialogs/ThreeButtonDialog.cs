@@ -167,10 +167,10 @@ namespace XenAdmin.Dialogs
 
         public class TBDButton
         {
-            public string label;
-            public DialogResult result;
-            public ButtonType defaultAction = ButtonType.NONE;
-            public bool selected;
+            public readonly string label;
+            public readonly DialogResult result;
+            public readonly ButtonType defaultAction = ButtonType.NONE;
+            public readonly bool selected;
 
             /// <summary>
             /// Describes a button for the three button dialog.
