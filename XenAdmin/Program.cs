@@ -196,13 +196,13 @@ namespace XenAdmin
                 log.Error("Could not load settings.", ex);
                 var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
                                         string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()));
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,msg)
+                using (var dlg = new ErrorDialog(msg)
                                {
                                    StartPosition = FormStartPosition.CenterScreen,
                                    //For reasons I do not fully comprehend at the moment, the runtime
                                    //overrides the above StartPosition with WindowsDefaultPosition if
                                    //ShowInTaskbar is false. However it's a good idea anyway to show it
-                                   //in the taskbar since the main form is not launcched at this point.
+                                   //in the taskbar since the main form is not launched at this point.
                                    ShowInTaskbar = true
                                })
                 {
@@ -564,8 +564,7 @@ namespace XenAdmin
                 {
                     string filepath = GetLogFile() ?? Messages.MESSAGEBOX_LOGFILE_MISSING;
 
-                    using (var d = new ThreeButtonDialog(SystemIcons.Error,
-                            String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath))
+                    using (var d = new ErrorDialog(String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath))
                         {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
                     {
                         // CA-44733
@@ -588,10 +587,8 @@ namespace XenAdmin
 
                 if (!RunInAutomatedTestMode)
                 {
-                    using (var dlg = new ThreeButtonDialog(SystemIcons.Error, exception.ToString()))
-                    {
+                    using (var dlg = new ErrorDialog(exception.ToString()))
                         dlg.ShowDialog();
-                    }
                     // To be handled by WER
                     throw;
                 }
@@ -724,11 +721,8 @@ namespace XenAdmin
             }
             else
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, msg)
-                    {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
-                {
+                using (var dlg = new ErrorDialog(msg) {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
                     dlg.ShowDialog();
-                }
             }
         }
 
@@ -737,10 +731,8 @@ namespace XenAdmin
             string s = GetLogFile();
             if (s == null)
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, Messages.MESSAGEBOX_LOGFILE_MISSING))
-                {
+                using (var dlg = new ErrorDialog(Messages.MESSAGEBOX_LOGFILE_MISSING))
                     dlg.ShowDialog();
-                }
             }
             else
             {

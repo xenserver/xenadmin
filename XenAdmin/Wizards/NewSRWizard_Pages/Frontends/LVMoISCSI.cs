@@ -788,17 +788,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     // No existing SRs were found on this LUN. If allowed to create new SR, ask the user if they want to proceed and format.
                     if (!SrWizardType.AllowToCreateNewSr)
                     {
-                        using (var dlg = new ThreeButtonDialog(SystemIcons.Error, Messages.NEWSR_LUN_HAS_NO_SRS))
-                        {
+                        using (var dlg = new ErrorDialog(Messages.NEWSR_LUN_HAS_NO_SRS))
                             dlg.ShowDialog(this);
-                        }
 
                         return false;
                     }
                     DialogResult result = DialogResult.Yes;
                     if (!Program.RunInAutomatedTestMode)
                     {
-                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.NEWSR_ISCSI_FORMAT_WARNING,
+                        using (var dlg = new WarningDialog(Messages.NEWSR_ISCSI_FORMAT_WARNING,
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Text})
@@ -821,8 +819,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     if (sr != null)
                     {
                         DialogResult res;
-                        using (var d = new ThreeButtonDialog(null,
-                            string.Format(Messages.DETACHED_ISCI_DETECTED, Helpers.GetName(sr.Connection)),
+                        using (var d = new NoIconDialog(string.Format(Messages.DETACHED_ISCI_DETECTED, Helpers.GetName(sr.Connection)),
                             new ThreeButtonDialog.TBDButton(Messages.ATTACH_SR, DialogResult.OK),
                             ThreeButtonDialog.ButtonCancel))
                         {

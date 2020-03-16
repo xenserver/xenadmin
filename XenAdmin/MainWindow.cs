@@ -543,8 +543,7 @@ namespace XenAdmin
             {
                 log.Error("Could not load settings.", ex);
                 Program.CloseSplash();
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                        string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
                     {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(this);
@@ -891,8 +890,7 @@ namespace XenAdmin
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                     new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
 
-                    using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                        string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70),
+                    using (var dlg = new ErrorDialog(string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70),
                         ThreeButtonDialog.ButtonOK){WindowTitle = Messages.CONNECT_TO_SERVER})
                     {
                         dlg.ShowDialog(this);
@@ -2210,8 +2208,7 @@ namespace XenAdmin
             }
             catch (ConfigurationErrorsException ex)
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                        string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
                     {WindowTitle =  Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(this);
@@ -2612,11 +2609,10 @@ namespace XenAdmin
                 wizard.AddFile(path);
             }
             else
-                using (var popup = new ThreeButtonDialog(SystemIcons.Error, failureReason)
-                    {WindowTitle = Messages.UPDATES})
-                {
+            {
+                using (var popup = new ErrorDialog(failureReason) {WindowTitle = Messages.UPDATES})
                     popup.ShowDialog();
-                }
+            }
         }
 
         #region XenSearch
@@ -3012,10 +3008,8 @@ namespace XenAdmin
                 if (parent.Disposing || parent.IsDisposed)
                     return;
             }
-            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.DISCONNECTED_BEFORE_ACTION_STARTED))
-            {
+            using (var dlg = new WarningDialog(Messages.DISCONNECTED_BEFORE_ACTION_STARTED))
                 dlg.ShowDialog(parent);
-            }
         }
 
         #region ISynchronizeInvoke Members
@@ -3090,10 +3084,8 @@ namespace XenAdmin
                     {
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
-                        using (var dlg = new ThreeButtonDialog(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST))
-                        {
+                        using (var dlg = new ErrorDialog(Messages.ERRO_IMPORTING_SERVER_LIST))
                             dlg.ShowDialog(this);
-                        }
                     }
                 }
             }

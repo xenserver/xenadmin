@@ -122,8 +122,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
             Program.Invoke(invokingControl, () =>
             {
-                using (var dialog = new ThreeButtonDialog(SystemIcons.Information,
-                    string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, GetResolvedHost().Name()),
+                using (var dialog = new InformationDialog(string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, GetResolvedHost().Name()),
                     new ThreeButtonDialog.TBDButton(Messages.ROLLING_POOL_UPGRADE, DialogResult.OK),
                     new ThreeButtonDialog.TBDButton(Messages.REBOOT, DialogResult.Cancel))
                     {WindowTitle = Messages.SKIP_SERVER})
@@ -161,8 +160,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     var obj = hostObj;
                     Program.Invoke(invokingControl, () =>
                     {
-                        using (var dialog = new ThreeButtonDialog(SystemIcons.Exclamation,
-                            string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName),
+                        using (var dialog = new WarningDialog(string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName),
                             new ThreeButtonDialog.TBDButton(Messages.ROLLING_POOL_UPGRADE, DialogResult.OK),
                             new ThreeButtonDialog.TBDButton(Messages.REBOOT_AGAIN_BUTTON_LABEL, DialogResult.Cancel))
                             {WindowTitle = Messages.SKIP_SERVER})

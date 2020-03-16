@@ -116,8 +116,8 @@ namespace XenAdmin.Commands
              {
                  Program.Invoke(Program.MainWindow, () =>
                  {
-                     using (var dlg = new ThreeButtonDialog(SystemIcons.Error, licenseFailures[0].AlertText,
-                         ThreeButtonDialog.ButtonOK) {WindowTitle = Messages.LICENSE_ERROR_TITLE})
+                     using (var dlg = new ErrorDialog(licenseFailures[0].AlertText)
+                         {WindowTitle = Messages.LICENSE_ERROR_TITLE})
                      {
                          dlg.ShowDialog(parent);
                      }

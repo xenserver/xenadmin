@@ -398,8 +398,7 @@ namespace XenAdmin.Dialogs.HealthCheck
                 string msg = Helpers.GetPool(poolRow.Pool.Connection) == null 
                     ? Messages.CONFIRM_DISABLE_HEALTH_CHECK_SERVER 
                     : Messages.CONFIRM_DISABLE_HEALTH_CHECK_POOL;
-                using (var dlg = new ThreeButtonDialog(null, msg, 
-                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+                using (var dlg = new NoIconDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
                         return;

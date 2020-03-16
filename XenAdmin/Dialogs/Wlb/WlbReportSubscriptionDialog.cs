@@ -415,8 +415,7 @@ namespace XenAdmin.Dialogs.Wlb
             }
             else if(!action.Cancelled)
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                    String.Format(Messages.WLB_SUBSCRIPTION_ERROR, _subscription.Description)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.WLB_SUBSCRIPTION_ERROR, _subscription.Description)))
                 {
                     dlg.ShowDialog(this);
                 }

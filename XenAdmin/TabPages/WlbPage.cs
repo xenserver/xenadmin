@@ -547,7 +547,7 @@ namespace XenAdmin.TabPages
                         {
                             string blurb = string.Format(Messages.WLB_PROMPT_FOR_MODE_CHANGE_BLURB, getOptModeText(scheduledPerfMode), getOptModeText(_wlbPoolConfiguration.PerformanceMode));
                             DialogResult drModeCheck;
-                            using (var dlg = new ThreeButtonDialog(null, blurb,
+                            using (var dlg = new NoIconDialog(blurb,
                                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                                 {WindowTitle = Messages.WLB_PROMPT_FOR_MODE_CHANGE_CAPTION})
                             {

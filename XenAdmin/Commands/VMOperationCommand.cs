@@ -203,8 +203,7 @@ namespace XenAdmin.Commands
             Program.Invoke(Program.MainWindow, () =>
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
-                    String.Format(isStart ? Messages.HA_INVALID_CONFIG_START : Messages.HA_INVALID_CONFIG_RESUME,
+                using (var dlg = new WarningDialog(string.Format(isStart ? Messages.HA_INVALID_CONFIG_START : Messages.HA_INVALID_CONFIG_RESUME,
                         Helpers.GetName(vm).Ellipsise(500)),
                     ThreeButtonDialog.ButtonOK,
                     ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.HIGH_AVAILABILITY})
@@ -313,10 +312,8 @@ namespace XenAdmin.Commands
                         Helpers.GetName(VMStartAction.VM).Ellipsise(100));
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg){WindowTitle = Messages.HIGH_AVAILABILITY})
-                        {
+                        using (var dlg = new WarningDialog(msg){WindowTitle = Messages.HIGH_AVAILABILITY})
                             dlg.ShowDialog(Program.MainWindow);
-                        }
                     });
                 }
                 else
@@ -329,7 +326,7 @@ namespace XenAdmin.Commands
                     Program.Invoke(Program.MainWindow, delegate()
                     {
                         DialogResult r;
-                        using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, msg,
+                        using (var dlg = new WarningDialog(msg,
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Messages.HIGH_AVAILABILITY})

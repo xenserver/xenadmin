@@ -102,7 +102,7 @@ namespace XenAdmin.Commands
             if (brokenCDs.Count > 0)
             {
                 DialogResult d;
-                using (var dlg = new ThreeButtonDialog(null, Messages.EJECT_BEFORE_VM_START_MESSAGE_BOX, 
+                using (var dlg = new NoIconDialog(Messages.EJECT_BEFORE_VM_START_MESSAGE_BOX, 
                     new ThreeButtonDialog.TBDButton(Messages.EJECT_BUTTON_LABEL, DialogResult.OK, selected: true), 
                     new ThreeButtonDialog.TBDButton(Messages.IGNORE_BUTTON_LABEL, DialogResult.Ignore), 
                     ThreeButtonDialog.ButtonCancel)

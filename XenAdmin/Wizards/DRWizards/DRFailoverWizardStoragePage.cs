@@ -295,11 +295,8 @@ namespace XenAdmin.Wizards.DRWizards
             }
 
             if (srs.Count == 0)
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Information,
-                    Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE))
-                {
+                using (var dlg = new InformationDialog(Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE))
                     dlg.ShowDialog(this);
-                }
         }
 
         private List<FibreChannelDevice> FiberChannelScan()

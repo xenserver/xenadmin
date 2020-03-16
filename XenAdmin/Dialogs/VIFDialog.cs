@@ -311,8 +311,7 @@ namespace XenAdmin.Dialogs
                         var vm = xenConnection.Resolve(vif.VM);
                         if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm())
                         {
-                            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
-                                string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
+                            using (var dlg = new WarningDialog(string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
                                 ThreeButtonDialog.ButtonYes,
                                 new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                                 {WindowTitle = Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE})

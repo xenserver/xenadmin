@@ -630,8 +630,7 @@ namespace XenAdmin.TabPages
 
             if (pool.ha_statefiles.All(sf => pool.Connection.Resolve(new XenRef<VDI>(sf)) == null)) //empty gives true, which is correct
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                    string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
+                using (var dlg = new ErrorDialog(string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
                     ThreeButtonDialog.ButtonOK)
                 {
                     HelpName = "HADisable",
@@ -644,8 +643,7 @@ namespace XenAdmin.TabPages
             }
 
             // Confirm the user wants to disable HA
-            using (var dlg = new ThreeButtonDialog(null,
-                string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
+            using (var dlg = new NoIconDialog(string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
                 ThreeButtonDialog.ButtonYes,
                 ThreeButtonDialog.ButtonNo)
             {

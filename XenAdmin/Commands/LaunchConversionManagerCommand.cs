@@ -79,8 +79,7 @@ namespace XenAdmin.Commands
                 var msg = string.Format(Messages.CONVERSION_RBAC_RESTRICTION, currentRoles[0].FriendlyName(),
                     Role.FriendlyName(Role.MR_ROLE_POOL_ADMIN));
 
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, msg,
-                    ThreeButtonDialog.ButtonOK))
+                using (var dlg = new ErrorDialog(msg))
                     dlg.ShowDialog(Parent);
             }
             else if (selection.First is VM vm && vm.IsConversionVM())

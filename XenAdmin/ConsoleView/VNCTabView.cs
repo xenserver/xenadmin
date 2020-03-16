@@ -1154,7 +1154,7 @@ namespace XenAdmin.ConsoleView
                     if (CanEnableRDP())
                     {
                         DialogResult dialogResult;
-                        using (ThreeButtonDialog dlg = new ThreeButtonDialog(SystemIcons.Question, Messages.FORCE_ENABLE_RDP,
+                        using (ThreeButtonDialog dlg = new NoIconDialog(Messages.FORCE_ENABLE_RDP,
                             ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                             {HelpName = "EnableRDPonVM"})
                         {
@@ -1494,10 +1494,8 @@ namespace XenAdmin.ConsoleView
                 {
                     log.Error("Error starting PuTTY.", ex);
 
-                    using (var dlg = new ThreeButtonDialog(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING))
-                    {    
+                    using (var dlg = new ErrorDialog(Messages.ERROR_PUTTY_LAUNCHING))
                         dlg.ShowDialog(Parent);
-                    }
                 }
             }
         }

@@ -91,7 +91,7 @@ namespace XenAdmin.Dialogs
             fired = true;
             Program.Invoke(Program.MainWindow, () =>
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error, DisplayMessage))
+                using (var dlg = new ErrorDialog(DisplayMessage))
                     dlg.ShowDialog(Program.MainWindow);
             });
         }

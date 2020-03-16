@@ -350,7 +350,7 @@ namespace XenAdmin.Commands
                 DialogResult.No,
                 selected: ConfirmationDialogNoButtonSelected);
 
-            using (var dialog = new ThreeButtonDialog(SystemIcons.Exclamation, ConfirmationDialogText, buttonYes, buttonNo)
+            using (var dialog = new WarningDialog(ConfirmationDialogText, buttonYes, buttonNo)
                 {WindowTitle = ConfirmationDialogTitle})
             {
                 if (!string.IsNullOrEmpty(ConfirmationDialogHelpId))

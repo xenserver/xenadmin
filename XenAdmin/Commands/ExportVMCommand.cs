@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
                                 Util.DiskSizeString((long)freeSpace), vm.Name());
 
                             DialogResult dr;
-                            using (var d = new ThreeButtonDialog(SystemIcons.Warning, msg,
+                            using (var d = new WarningDialog(msg,
                                 new ThreeButtonDialog.TBDButton(Messages.CONTINUE_WITH_EXPORT, DialogResult.OK),
                                 new ThreeButtonDialog.TBDButton(Messages.CHOOSE_ANOTHER_DESTINATION, DialogResult.Retry),
                                 ThreeButtonDialog.ButtonCancel){HelpName = "ExportVmDialogInsufficientDiskSpace"})
@@ -168,7 +168,7 @@ namespace XenAdmin.Commands
                                 Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name());
 
                             DialogResult dr;
-                            using (var d = new ThreeButtonDialog(SystemIcons.Warning, msg,
+                            using (var d = new WarningDialog(msg,
                                 new ThreeButtonDialog.TBDButton(Messages.CONTINUE_WITH_EXPORT, DialogResult.OK),
                                 new ThreeButtonDialog.TBDButton(Messages.CHOOSE_ANOTHER_DESTINATION, DialogResult.Retry),
                                 ThreeButtonDialog.ButtonCancel){HelpName = "ExportVmDialogFSLimitExceeded"})

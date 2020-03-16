@@ -300,8 +300,7 @@ namespace XenAdmin.Dialogs
                         statusLabel.Text = Messages.CONVERSION_VERSION_INCOMPATIBILITY;
                         statusLinkLabel.Reset(Messages.MORE_INFO, () =>
                         {
-                            using (var dlog = new ThreeButtonDialog(null,
-                                string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY_INFO, BrandManager.ProductVersion70)))
+                            using (var dlog = new NoIconDialog(string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY_INFO, BrandManager.ProductVersion70)))
                             {
                                 dlog.ShowDialog(this);
                             }
@@ -757,9 +756,8 @@ namespace XenAdmin.Dialogs
         {
             if (dataGridViewConversions.SelectedRows.Count == 1 && dataGridViewConversions.SelectedRows[0] is ConversionRow row)
             {
-                using (var dlog = new ThreeButtonDialog(SystemIcons.Warning, Messages.CONVERSION_CANCEL_CONFIRM,
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                using (var dlog = new WarningDialog(Messages.CONVERSION_CANCEL_CONFIRM,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     if (dlog.ShowDialog(this) == DialogResult.No)
                         return;
@@ -813,9 +811,8 @@ namespace XenAdmin.Dialogs
 
         private void toolStripButtonClear_Click(object sender, EventArgs e)
         {
-            using (var dlog = new ThreeButtonDialog(SystemIcons.Warning, Messages.CONVERSION_CLEAR_HISTORY_CONFIRM,
-                ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo))
+            using (var dlog = new WarningDialog(Messages.CONVERSION_CLEAR_HISTORY_CONFIRM,
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
             {
                 if (dlog.ShowDialog(this) == DialogResult.No)
                     return;
@@ -856,7 +853,7 @@ namespace XenAdmin.Dialogs
 
             if (FilterIsOn)
             {
-                using (var dlog = new ThreeButtonDialog(null, Messages.CONVERSION_EXPORT_ALL_OR_FILTERED,
+                using (var dlog = new NoIconDialog(Messages.CONVERSION_EXPORT_ALL_OR_FILTERED,
                     new ThreeButtonDialog.TBDButton(Messages.EXPORT_ALL_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.EXPORT_FILTERED_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                     ThreeButtonDialog.ButtonCancel))

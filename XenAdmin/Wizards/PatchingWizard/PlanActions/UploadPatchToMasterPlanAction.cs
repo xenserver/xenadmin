@@ -289,8 +289,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 var dialogResult = Program.Invoke(invokingControl, (Func<DialogResult>)(() =>
                         {
-                            using (var d = new ThreeButtonDialog(SystemIcons.Warning,
-                                e.DiskSpaceRequirements.GetSpaceRequirementsMessage(),
+                            using (var d = new WarningDialog(e.DiskSpaceRequirements.GetSpaceRequirementsMessage(),
                                 ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel))
                             {
                                 return d.ShowDialog(invokingControl);

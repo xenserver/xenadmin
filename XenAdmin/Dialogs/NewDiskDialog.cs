@@ -148,9 +148,8 @@ namespace XenAdmin.Dialogs
             if (!sr.shared && TheVM != null && TheVM.HaPriorityIsRestart())
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA,
-                                ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                using (var dlg = new WarningDialog(Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA,
+                                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     dialogResult = dlg.ShowDialog(Program.MainWindow);
                 }
@@ -217,10 +216,8 @@ namespace XenAdmin.Dialogs
             {
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    using (var dlg = new ThreeButtonDialog(SystemIcons.Information, message))
-                    {
+                    using (var dlg = new InformationDialog(message))
                         dlg.ShowDialog(Program.MainWindow);
-                    }
                 }
             });
         }

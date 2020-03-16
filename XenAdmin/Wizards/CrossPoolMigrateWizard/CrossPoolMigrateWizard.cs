@@ -309,10 +309,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private static void ShowErrorMessageBox(string message)
         {
-            using (var dlg = new ThreeButtonDialog(SystemIcons.Error, message))
-            {
+            using (var dlg = new ErrorDialog(message))
                 dlg.ShowDialog(Program.MainWindow);
-            }
         }
 
 	    private List<IXenConnection> GetSourceConnectionsForSelection(IEnumerable<SelectedItem> selection)
@@ -511,7 +509,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// Performs a certain check and shows a warning message if the check fails
         /// </summary>
         /// <param name="check">The check to perform</param>
-        /// <returns>true if check succeded, false if failed</returns>
+        /// <returns>true if check succeeded, false if failed</returns>
         private static bool PerformCheck(Func<bool> check)
         {
             if (check())
@@ -522,11 +520,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         internal static void ShowWarningMessageBox(string message)
         {
-            using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, message)
-                {WindowTitle = Messages.CPM_WIZARD_TITLE})
-            {
+            using (var dlg = new WarningDialog(message) {WindowTitle = Messages.CPM_WIZARD_TITLE})
                 dlg.ShowDialog(Program.MainWindow);
-            }
         }
 	}
 }

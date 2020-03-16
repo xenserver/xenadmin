@@ -48,7 +48,7 @@ namespace XenAdmin.Dialogs
         /// Gives you a dialog with the specified buttons.
         /// </summary>
         /// <param name="buttons">>Must be between 1 and 3 buttons</param>
-        public ThreeButtonDialog(Icon icon, string mainMessage, params TBDButton[] buttons)
+        protected ThreeButtonDialog(Image image, string mainMessage, params TBDButton[] buttons)
         {
             InitializeComponent();
 
@@ -57,10 +57,10 @@ namespace XenAdmin.Dialogs
             if (buttons.Length == 0)
                 buttons = new[] {ButtonOK};
 
-            if (icon == null)
+            if (image == null)
                 pictureBoxIcon.Visible = false;
             else
-                pictureBoxIcon.Image = icon.ToBitmap();
+                pictureBoxIcon.Image = image;
 
             labelMessage.Text = mainMessage;
 
@@ -272,6 +272,38 @@ namespace XenAdmin.Dialogs
                     System.Diagnostics.Process.Start(LinkData);
             }
             catch { }
+        }
+    }
+
+    public class ErrorDialog : ThreeButtonDialog
+    {
+        public ErrorDialog(string mainMessage, params TBDButton[] buttons)
+            : base(Images.StaticImages._000_error_h32bit_32, mainMessage, buttons)
+        {
+        }
+    }
+
+    public class WarningDialog : ThreeButtonDialog
+    {
+        public WarningDialog(string mainMessage, params TBDButton[] buttons)
+            : base(Images.StaticImages._000_WarningAlert_h32bit_32, mainMessage, buttons)
+        {
+        }
+    }
+
+    public class InformationDialog : ThreeButtonDialog
+    {
+        public InformationDialog(string mainMessage, params TBDButton[] buttons)
+            : base(SystemIcons.Information.ToBitmap(), mainMessage, buttons)
+        {
+        }
+    }
+
+    public class NoIconDialog : ThreeButtonDialog
+    {
+        public NoIconDialog(string mainMessage, params TBDButton[] buttons)
+            : base(null, mainMessage, buttons)
+        {
         }
     }
 }

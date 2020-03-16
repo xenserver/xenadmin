@@ -234,7 +234,7 @@ namespace XenAdmin.SettingsPanels
             if ((selectedRow != null) && (_vm != null))
             {
                 bool confirmed = false;
-                using (var dlg = new ThreeButtonDialog(null, Messages.ACTION_VUSB_DETACH_CONFIRM,
+                using (var dlg = new NoIconDialog(Messages.ACTION_VUSB_DETACH_CONFIRM,
                     ThreeButtonDialog.ButtonYes,
                     new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                     {WindowTitle = Messages.ACTION_VUSB_DETACH})

@@ -64,7 +64,7 @@ namespace XenAdmin.Diagnostics.Problems
         {
             Program.Invoke(Program.MainWindow, () =>
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Message))
+                using (var dlg = new WarningDialog(Message))
                 {
                     if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
                     {
@@ -106,8 +106,7 @@ namespace XenAdmin.Diagnostics.Problems
             }
             catch (Exception)
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                    string.Format(Messages.COULD_NOT_OPEN_URL,
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_OPEN_URL,
                         UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty)))
                 {
                     dlg.ShowDialog(Program.MainWindow);

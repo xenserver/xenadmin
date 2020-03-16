@@ -156,8 +156,7 @@ namespace XenAdmin.Commands
                         SR sr = cd.Connection.Resolve<SR>(vdi.SR);
                         if (sr != null && !sr.shared)
                         {
-                            using (var dlg = new ThreeButtonDialog(SystemIcons.Exclamation,
-                                    Messages.DRAG_DROP_LOCAL_CD_LOADED)
+                            using (var dlg = new WarningDialog(Messages.DRAG_DROP_LOCAL_CD_LOADED)
                                 {WindowTitle = Messages.DRAG_DROP_LOCAL_CD_LOADED_TITLE})
                             {
                                 dlg.ShowDialog(MainWindowCommandInterface.Form);

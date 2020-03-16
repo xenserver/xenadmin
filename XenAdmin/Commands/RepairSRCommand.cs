@@ -77,11 +77,8 @@ namespace XenAdmin.Commands
 
             if (srList.Find(s => !s.MultipathAOK()) != null)
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
-                    Messages.MULTIPATH_FAILED){WindowTitle = Messages.MULTIPATHING})
-                {
+                using (var dlg = new WarningDialog(Messages.MULTIPATH_FAILED) {WindowTitle = Messages.MULTIPATHING})
                     dlg.ShowDialog(Parent);
-                }
             }
 
             new RepairSRDialog(srList).Show(Parent);

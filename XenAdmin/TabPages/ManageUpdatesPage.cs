@@ -888,7 +888,7 @@ namespace XenAdmin.TabPages
 
             if (FilterIsOn)
             {
-                using (var dlog = new ThreeButtonDialog(null, Messages.UPDATE_DISMISS_ALL_CONTINUE,
+                using (var dlog = new NoIconDialog(Messages.UPDATE_DISMISS_ALL_CONTINUE,
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                     ThreeButtonDialog.ButtonCancel))
@@ -898,7 +898,7 @@ namespace XenAdmin.TabPages
             }
             else if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
             {
-                using (var dlog = new ThreeButtonDialog(null, Messages.UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE,
+                using (var dlog = new NoIconDialog(Messages.UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE,
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
                     ThreeButtonDialog.ButtonCancel)
                 {
@@ -930,7 +930,7 @@ namespace XenAdmin.TabPages
         {
             if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
             {
-                using (var dlog = new ThreeButtonDialog(null, Messages.UPDATE_DISMISS_SELECTED_CONFIRM,
+                using (var dlog = new NoIconDialog(Messages.UPDATE_DISMISS_SELECTED_CONFIRM,
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,
@@ -971,7 +971,7 @@ namespace XenAdmin.TabPages
 
             if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
             {
-                using (var dlog = new ThreeButtonDialog(null, Messages.UPDATE_DISMISS_CONFIRM,
+                using (var dlog = new NoIconDialog(Messages.UPDATE_DISMISS_CONFIRM,
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,
@@ -1045,8 +1045,7 @@ namespace XenAdmin.TabPages
                 string disconnectedServerNames =
                        clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning,
-                        string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, disconnectedServerNames))
+                using (var dlg = new WarningDialog(string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, disconnectedServerNames))
                     {WindowTitle = Messages.UPDATES_WIZARD})
                 {
                     dlg.ShowDialog(this);
@@ -1234,7 +1233,7 @@ namespace XenAdmin.TabPages
 
             if (FilterIsOn)
             {
-                using (var dlog = new ThreeButtonDialog(null, Messages.UPDATE_EXPORT_ALL_OR_FILTERED,
+                using (var dlog = new NoIconDialog(Messages.UPDATE_EXPORT_ALL_OR_FILTERED,
                     new ThreeButtonDialog.TBDButton(Messages.EXPORT_ALL_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.EXPORT_FILTERED_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                     ThreeButtonDialog.ButtonCancel))
@@ -1366,8 +1365,7 @@ namespace XenAdmin.TabPages
             }
             catch (Exception)
             {
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Error,
-                    string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK)))
                 {
                     dlg.ShowDialog(this);
                 }

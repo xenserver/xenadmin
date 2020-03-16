@@ -262,9 +262,9 @@ namespace XenAdmin.SettingsPanels
                 vdi.type == vdi_type.system)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(SystemIcons.Warning, Messages.EDIT_SYS_DISK_WARNING,
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo){WindowTitle = Messages.EDIT_SYS_DISK_WARNING_TITLE})
+                using (var dlg = new WarningDialog(Messages.EDIT_SYS_DISK_WARNING,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {WindowTitle = Messages.EDIT_SYS_DISK_WARNING_TITLE})
                 {
                     dialogResult = dlg.ShowDialog(this);
                 }
@@ -334,10 +334,8 @@ namespace XenAdmin.SettingsPanels
             {
                 Program.Invoke(Program.MainWindow, () =>
                 {
-                    using (var dlg = new ThreeButtonDialog(SystemIcons.Information, Messages.DEVICE_POSITION_RESTART_REQUIRED))
-                    {
+                    using (var dlg = new InformationDialog(Messages.DEVICE_POSITION_RESTART_REQUIRED))
                         dlg.ShowDialog(Program.MainWindow);
-                    }
                 });
             }
         }

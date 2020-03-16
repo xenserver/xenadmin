@@ -102,8 +102,7 @@ namespace XenAdmin.Dialogs
             string name = customFieldDefinition.Name.Ellipsise(50);
 
             if (!Program.RunInAutomatedTestMode)
-                using (var dialog = new ThreeButtonDialog(SystemIcons.Exclamation,
-                        string.Format(Messages.MESSAGEBOX_DELETE_CUSTOM_FIELD, name),
+                using (var dialog = new WarningDialog(string.Format(Messages.MESSAGEBOX_DELETE_CUSTOM_FIELD, name),
                         ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                     {WindowTitle = Messages.MESSAGEBOX_CONFIRM})
                 {
