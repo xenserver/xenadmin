@@ -160,7 +160,9 @@ namespace XenAdmin.Diagnostics.Problems
             : base(check)
         {
         }
-        
+
+        public override bool IsFixable => false;
+
         public override string HelpMessage => Messages.MORE_INFO;
 
         public abstract string Message { get; }
