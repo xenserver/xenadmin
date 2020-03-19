@@ -5151,6 +5151,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EMPTY" xml:space="preserve">
     <value>&lt;empty&gt;</value>
   </data>
+  <data name="EMPTY_KEY" xml:space="preserve">
+    <value>Empty key</value>
+  </data>
   <data name="EMPTY_LIST_DISK_SNAPSHOTS" xml:space="preserve">
     <value>There are no associated virtual disks or snapshots</value>
   </data>
@@ -10537,6 +10540,9 @@ Please reconnect the host and try again</value>
   </data>
   <data name="POWER_ON" xml:space="preserve">
     <value>Power On</value>
+  </data>
+  <data name="POWER_ON_CUSTOM_MODE_ERROR" xml:space="preserve">
+    <value>Please specify a script name</value>
   </data>
   <data name="POWER_ON_REQUEST_FAILED" xml:space="preserve">
     <value>Power on request to {0} failed. Check the network connectivity.</value>

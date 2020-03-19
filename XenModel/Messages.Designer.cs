@@ -14628,6 +14628,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empty key.
+        /// </summary>
+        public static string EMPTY_KEY {
+            get {
+                return ResourceManager.GetString("EMPTY_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no associated virtual disks or snapshots.
         /// </summary>
         public static string EMPTY_LIST_DISK_SNAPSHOTS {
@@ -30360,6 +30369,15 @@ namespace XenAdmin {
         public static string POWER_ON {
             get {
                 return ResourceManager.GetString("POWER_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a script name.
+        /// </summary>
+        public static string POWER_ON_CUSTOM_MODE_ERROR {
+            get {
+                return ResourceManager.GetString("POWER_ON_CUSTOM_MODE_ERROR", resourceCulture);
             }
         }
         
