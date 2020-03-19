@@ -2025,13 +2025,9 @@
     <EmbeddedResource Include="SettingsPanels\ClusteringEditPage.zh-CN.resx">
       <DependentUpon>ClusteringEditPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.resx">
+    <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PoolPowerONEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PerfmonAlertOptionsPage.resx">
       <SubType>Designer</SubType>
@@ -4162,13 +4158,10 @@
     <Compile Include="Plugins\UI\TabPageCredentialsDialog.Designer.cs">
       <DependentUpon>TabPageCredentialsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.cs">
+    <Compile Include="SettingsPanels\HostPowerONEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.Designer.cs">
+    <Compile Include="SettingsPanels\HostPowerONEditPage.Designer.cs">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\Wlb\WlbHostExclusionPage.cs">
@@ -5897,17 +5890,11 @@
     <EmbeddedResource Include="SettingsPanels\HostMultipathPage.zh-CN.resx">
       <DependentUpon>HostMultipathPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.ja.resx">
+    <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.ja.resx">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.zh-CN.resx">
+    <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.zh-CN.resx">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.ja.resx">
-      <DependentUpon>PoolPowerONEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.zh-CN.resx">
-      <DependentUpon>PoolPowerONEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\LogDestinationEditPage.ja.resx">
       <DependentUpon>LogDestinationEditPage.cs</DependentUpon>
@@ -6984,6 +6971,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
