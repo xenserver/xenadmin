@@ -511,6 +511,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (sslChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
+
+                //power on mode check - for each host
+                var iloChecks = (from Host host in SelectedServers.Where(
+                        h => Helpers.NaplesOrGreater(h) && !Helpers.StockholmOrGreater(h))
+                    select new PowerOniLoCheck(host, highestNewVersion ?? UpdateAlert?.NewServerVersion) as Check).ToList();
+
+                if (iloChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
             }
             
             return groups;

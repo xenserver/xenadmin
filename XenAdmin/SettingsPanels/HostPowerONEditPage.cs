@@ -105,6 +105,9 @@ namespace XenAdmin.SettingsPanels
             else if (_clone is Pool p)
                 hosts = p.Connection.Cache.Hosts.ToList();
 
+            if (Helpers.StockholmOrGreater(_connection))
+                radioButtonILO.Visible = false;
+
             foreach (var host in hosts)
             {
                 var mode = Host.PowerOnMode.Create(host);

@@ -202,10 +202,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //protocol check - for each pool
             var sslChecks = (from Host server in SelectedMasters.Where(m => !Helpers.StockholmOrGreater(m))
                 select new PoolLegacySslCheck(server, InstallMethodConfig) as Check).ToList();
-            
+
             if (sslChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
-            
+
+            //power on mode check - for each host
+            var iloChecks = (from Host server in hostsToUpgradeOrUpdate.Where(m => !Helpers.StockholmOrGreater(m))
+                select new PowerOniLoCheck(server, InstallMethodConfig) as Check).ToList();
+
+            if (iloChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
+
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();

@@ -7177,6 +7177,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Power On mode check.
+        /// </summary>
+        public static string CHECKING_POWER_ON_MODE {
+            get {
+                return ResourceManager.GetString("CHECKING_POWER_ON_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking Power On mode.
+        /// </summary>
+        public static string CHECKING_POWER_ON_MODE_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_POWER_ON_MODE_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking host upgrade readiness.
         /// </summary>
         public static string CHECKING_PREPARE_TO_UPGRADE {
@@ -30130,7 +30148,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed as of {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
         /// </summary>
         public static string POOL_HAS_PV_GUEST_WARNING {
             get {
@@ -30454,7 +30472,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for protocols earlier than TLS 1.2 is dropped as of {1}.
+        ///   Looks up a localized string similar to {0}: Support for protocols earlier than TLS 1.2 has been removed as of {1}.
         /// </summary>
         public static string PROBLEM_LEGACY_PROTOCOL_DESCRIPTION {
             get {
@@ -30481,7 +30499,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to [XenServer] {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it..
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it..
         /// </summary>
         public static string PROBLEM_LEGACY_PROTOCOL_INFO_SERVER {
             get {
@@ -30552,6 +30570,33 @@ namespace XenAdmin {
         public static string PROBLEM_POOLPROBLEM_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_POOLPROBLEM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for the Power On mode iLO has been removed as of {1}.
+        /// </summary>
+        public static string PROBLEM_POWER_ON_ILO_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_POWER_ON_ILO_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Power On mode iLO.
+        /// </summary>
+        public static string PROBLEM_POWER_ON_ILO_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_POWER_ON_ILO_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will not be able to use the Hewlett-Packard Integrated Lights-Out (iLO) feature to power on your server remotely..
+        /// </summary>
+        public static string PROBLEM_POWER_ON_ILO_INFO {
+            get {
+                return ResourceManager.GetString("PROBLEM_POWER_ON_ILO_INFO", resourceCulture);
             }
         }
         

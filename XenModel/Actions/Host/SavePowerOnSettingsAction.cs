@@ -61,6 +61,14 @@ namespace XenAdmin.Actions
             var config = mode.Config;
             string secretuuid = "";
 
+            
+            if (newMode == "iLO" && Helpers.StockholmOrGreater(Connection))
+            {
+                //the UI should have already prevented us from getting here, but be defensive
+                newMode = "";
+                config = new Dictionary<string, string>();
+            }
+
             try
             {
                 if (newMode == "DRAC" || newMode == "iLO" || newMode != "wake-on-lan" && newMode != "")

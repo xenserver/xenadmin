@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin;
+using XenAdmin.Core;
 
 
 namespace XenAPI
@@ -52,7 +53,10 @@ namespace XenAPI
                 if (host.power_on_mode == "wake-on-lan")
                     return new PowerOnModeWakeOnLan();
                 if (host.power_on_mode == "iLO")
-                    return new PowerOnModeiLO();
+                    if (Helpers.StockholmOrGreater(host.Connection))
+                        return new PowerOnModeDisabled();
+                    else
+                        return new PowerOnModeiLO();
                 if (host.power_on_mode == "DRAC")
                     return new PowerOnModeDRAC();
 
