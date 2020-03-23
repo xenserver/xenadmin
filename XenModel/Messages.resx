@@ -2598,6 +2598,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host memory check</value>
   </data>
+  <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
+    <value>Power On mode check</value>
+  </data>
+  <data name="CHECKING_POWER_ON_MODE_GROUP" xml:space="preserve">
+    <value>Checking Power On mode</value>
+  </data>
   <data name="CHECKING_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>Checking host upgrade readiness</value>
   </data>
@@ -10488,7 +10494,7 @@ Please reconnect the host and try again</value>
     <value>This pool has no shared storage</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
+    <value>{0}: Support for paravirtualized (PV) guests has been removed as of {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -10569,7 +10575,7 @@ Please reconnect the host and try again</value>
     <value>Server '{0}'</value>
   </data>
   <data name="PROBLEM_LEGACY_PROTOCOL_DESCRIPTION" xml:space="preserve">
-    <value>{0}: Support for protocols earlier than TLS 1.2 is dropped as of {1}</value>
+    <value>{0}: Support for protocols earlier than TLS 1.2 has been removed as of {1}</value>
   </data>
   <data name="PROBLEM_LEGACY_PROTOCOL_HELP" xml:space="preserve">
     <value>Disable legacy protocols</value>
@@ -10578,7 +10584,7 @@ Please reconnect the host and try again</value>
     <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the pool and you may lose permanently access to it.</value>
   </data>
   <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
-    <value>If you are upgrading to [XenServer] {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
+    <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>The MAC address entered has already been assigned to the VM:
@@ -10603,6 +10609,15 @@ Are you sure you want to continue?</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the Power On mode iLO has been removed as of {1}</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_HELP" xml:space="preserve">
+    <value>Disable Power On mode iLO</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_INFO" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use the Hewlett-Packard Integrated Lights-Out (iLO) feature to power on your server remotely.</value>
   </data>
   <data name="PROBLEM_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>Please ensure you have specified a network location that is visible from the server and contains an applicable version of installer files.
