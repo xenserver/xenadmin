@@ -151,6 +151,7 @@ namespace XenAdmin
             this.exportResourceReportPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbReportsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbDisconnectToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.changePoolPasswordToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -174,6 +175,7 @@ namespace XenAdmin
             this.connectAllToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disconnectAllToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.addServerToPoolMenuItem = new XenAdmin.Commands.AddSelectedHostToPoolToolStripMenuItem();
+            this.menuItemRemoveFromPool = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.backupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.restoreFromBackupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -277,8 +279,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.menuItemRemoveFromPool = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemInstallCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1032,6 +1033,12 @@ namespace XenAdmin
             this.wlbDisconnectToolStripMenuItem.Name = "wlbDisconnectToolStripMenuItem";
             resources.ApplyResources(this.wlbDisconnectToolStripMenuItem, "wlbDisconnectToolStripMenuItem");
             // 
+            // conversionToolStripMenuItem
+            // 
+            this.conversionToolStripMenuItem.Command = new XenAdmin.Commands.LaunchConversionManagerCommand();
+            this.conversionToolStripMenuItem.Name = "conversionToolStripMenuItem";
+            resources.ApplyResources(this.conversionToolStripMenuItem, "conversionToolStripMenuItem");
+            // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
@@ -1088,6 +1095,7 @@ namespace XenAdmin
             this.backupToolStripMenuItem,
             this.restoreFromBackupToolStripMenuItem,
             this.toolStripSeparator23,
+            this.toolStripMenuItemInstallCertificate,
             this.maintenanceModeToolStripMenuItem1,
             this.controlDomainMemoryToolStripMenuItem,
             this.RemoveCrashdumpsToolStripMenuItem,
@@ -1194,6 +1202,12 @@ namespace XenAdmin
             // 
             this.addServerToPoolMenuItem.Name = "addServerToPoolMenuItem";
             resources.ApplyResources(this.addServerToPoolMenuItem, "addServerToPoolMenuItem");
+            // 
+            // menuItemRemoveFromPool
+            // 
+            this.menuItemRemoveFromPool.Command = new XenAdmin.Commands.RemoveHostFromPoolCommand();
+            this.menuItemRemoveFromPool.Name = "menuItemRemoveFromPool";
+            resources.ApplyResources(this.menuItemRemoveFromPool, "menuItemRemoveFromPool");
             // 
             // toolStripSeparator3
             // 
@@ -1885,18 +1899,12 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
-            // menuItemRemoveFromPool
+            // toolStripMenuItemInstallCertificate
             // 
-            this.menuItemRemoveFromPool.Command = new XenAdmin.Commands.RemoveHostFromPoolCommand();
-            this.menuItemRemoveFromPool.Name = "menuItemRemoveFromPool";
-            resources.ApplyResources(this.menuItemRemoveFromPool, "menuItemRemoveFromPool");
+            this.toolStripMenuItemInstallCertificate.Command = new XenAdmin.Commands.InstallCertificateCommand();
+            this.toolStripMenuItemInstallCertificate.Name = "toolStripMenuItemInstallCertificate";
+            resources.ApplyResources(this.toolStripMenuItemInstallCertificate, "toolStripMenuItemInstallCertificate");
             // 
-            // conversionToolStripMenuItem
-            // 
-            this.conversionToolStripMenuItem.Command = new XenAdmin.Commands.LaunchConversionManagerCommand();
-            this.conversionToolStripMenuItem.Name = "conversionToolStripMenuItem";
-            resources.ApplyResources(this.conversionToolStripMenuItem, "conversionToolStripMenuItem");
-            //
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2168,6 +2176,7 @@ namespace XenAdmin
         private Controls.GradientPanel.VerticalGradientPanel TitleBackPanel;
         private XenAdmin.Commands.CommandToolStripMenuItem menuItemRemoveFromPool;
         private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemInstallCertificate;
     }
 
 }

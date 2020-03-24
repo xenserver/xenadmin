@@ -1666,6 +1666,7 @@ namespace XenAdmin
             ShowHiddenObjectsToolStripMenuItem.Checked = Properties.Settings.Default.ShowHiddenVMs;
             connectDisconnectToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
             conversionToolStripMenuItem.Available = conn != null && conn.Cache.VMs.Any(v => v.IsConversionVM());
+            toolStripMenuItemInstallCertificate.Available = Helpers.StockholmOrGreater(conn);
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)

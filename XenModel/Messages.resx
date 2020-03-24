@@ -7265,6 +7265,15 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>Install pending &amp;updates...</value>
   </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
+    <value>Install certi&amp;ficate...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_HA" xml:space="preserve">
+    <value>You cannot install a server certificate when HA is on.</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_MENU" xml:space="preserve">
+    <value>&amp;Install certificate...</value>
+  </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
     <value>Install [Citrix VM Tools]</value>
   </data>
