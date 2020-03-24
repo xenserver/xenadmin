@@ -547,7 +547,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The cluster stack is already in use..
+        ///   Looks up a localized string similar to The cluster stack is still in use by at least one plugged PBD..
         /// </summary>
         public static string CLUSTER_STACK_IN_USE {
             get {
@@ -2973,7 +2973,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided certificate has expired..
+        ///   Looks up a localized string similar to The provided certificate expired on {0}..
         /// </summary>
         public static string SERVER_CERTIFICATE_EXPIRED {
             get {
@@ -3036,7 +3036,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided certificate is not valid yet..
+        ///   Looks up a localized string similar to The provided certificate is not valid before {0}..
         /// </summary>
         public static string SERVER_CERTIFICATE_NOT_VALID_YET {
             get {

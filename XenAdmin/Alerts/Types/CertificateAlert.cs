@@ -70,16 +70,24 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30:
-                        var eta = GetRemainingDays();
-                        switch (eta)
+                        if (_certificateExpiryDate.HasValue && _certificateExpiryDate.Value > Timestamp)
                         {
-                            case 0:
-                                return string.Format(Messages.CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO, _host.Name());
-                            case 1:
-                                return string.Format(Messages.CERTIFICATE_ALERT_EXPIRING_TITLE_ONE, _host.Name());
-                            default:
-                                return string.Format(Messages.CERTIFICATE_ALERT_EXPIRING_TITLE, _host.Name(), eta);
+                            var eta = _certificateExpiryDate.Value - Timestamp;
+
+                            if (eta.TotalDays >= 1)
+                                return string.Format(Messages.CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS, _host.Name(),
+                                    Math.Round(eta.TotalDays, MidpointRounding.AwayFromZero));
+
+                            if (eta.TotalHours >= 1)
+                                return string.Format(Messages.CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS, _host.Name(),
+                                    Math.Round(eta.TotalHours, MidpointRounding.AwayFromZero));
+
+                            if (eta.TotalMinutes >= 1)
+                                return string.Format(Messages.CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES, _host.Name(),
+                                    Math.Round(eta.TotalMinutes, MidpointRounding.AwayFromZero));
                         }
+
+                        return string.Format(Messages.CERTIFICATE_ALERT_EXPIRED_TITLE, _host.Name());
                     default:
                         return base.Title;
                 }
@@ -120,7 +128,7 @@ namespace XenAdmin.Alerts
             }
         }
 
-        public override string FixLinkText => Messages.INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU;
+        public override string FixLinkText => Messages.INSTALL_SERVER_CERTIFICATE_ACTION_LINK;
 
         public override string HelpID => "CertificateAlert";
 
@@ -138,14 +146,6 @@ namespace XenAdmin.Alerts
                 });
 
             return date;
-        }
-
-        private double GetRemainingDays()
-        {
-            if (_certificateExpiryDate.HasValue && _certificateExpiryDate.Value > Timestamp)
-                return Math.Round((_certificateExpiryDate.Value - Timestamp).TotalDays, MidpointRounding.AwayFromZero);
-
-            return 0;
         }
     }
 }

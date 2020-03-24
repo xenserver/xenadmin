@@ -75,8 +75,8 @@ namespace XenAdmin.Commands
 
                 return;
             }
-            
-            //TODO: new InstallCertificateDialog(host).ShowPerXenObject(host, MainWindowCommandInterface.Form);
+
+            MainWindowCommandInterface.ShowForm(typeof(InstallCertificateDialog), new object[] {host});
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

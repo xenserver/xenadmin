@@ -585,6 +585,9 @@
   <data name="ImportWizard_VMConfigPane" xml:space="preserve">
     <value>vms-importdiskimage</value>
   </data>
+  <data name="InstallCertificate" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="InstallToolsWarningDialog" xml:space="preserve">
     <value>vms-installtools</value>
   </data>

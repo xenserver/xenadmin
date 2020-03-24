@@ -6971,29 +6971,111 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} days.
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} day(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE {
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in 1 day.
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} hour(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_ONE {
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_ONE", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring today.
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} minute(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO {
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TLS certificate files (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer.
+        /// </summary>
+        public static string CERTIFICATE_FILETYPES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation failed..
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_FAILURE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation failed.
+        ///{0}.
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_FAILURE_GENERIC {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_FAILURE_GENERIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation was completed successfully..
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_SUCCESS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid TLS certificate file {0}.
+        /// </summary>
+        public static string CERTIFICATE_INVALID {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TLS key files (*.pem;*.key)|*.pem;*.key.
+        /// </summary>
+        public static string CERTIFICATE_KEY_FILETYPES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected TLS key file is invalid..
+        /// </summary>
+        public static string CERTIFICATE_KEY_INVALID {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select TLS Certificate File.
+        /// </summary>
+        public static string CERTIFICATE_SELECT_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_SELECT_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select TLS Key File.
+        /// </summary>
+        public static string CERTIFICATE_SELECT_KEY_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_SELECT_KEY_TITLE", resourceCulture);
             }
         }
         
@@ -20017,15 +20099,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path does not exist..
-        /// </summary>
-        public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH {
-            get {
-                return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The selected file is not a valid appliance file..
         /// </summary>
         public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NOT_SUPPORTED {
@@ -20929,20 +21002,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools].
+        ///   Looks up a localized string similar to Install certificate....
         /// </summary>
-        public static string INSTALL_XENSERVER_TOOLS {
+        public static string INSTALL_SERVER_CERTIFICATE_ACTION_LINK {
             get {
-                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools]....
-        /// </summary>
-        public static string INSTALL_XENSERVER_TOOLS_DOTS {
-            get {
-                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_DOTS", resourceCulture);
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_ACTION_LINK", resourceCulture);
             }
         }
         
@@ -20952,6 +21016,15 @@ namespace XenAdmin {
         public static string INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU {
             get {
                 return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing server certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -20972,6 +21045,34 @@ namespace XenAdmin {
                 return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_MENU", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing certificate on server {0}....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install [Citrix VM Tools].
+        /// </summary>
+        public static string INSTALL_XENSERVER_TOOLS {
+            get {
+                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install [Citrix VM Tools]....
+        /// </summary>
+        public static string INSTALL_XENSERVER_TOOLS_DOTS {
+            get {
+                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_DOTS", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Install [Citrix VM Tools].
         /// </summary>
@@ -29565,6 +29666,24 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path does not exist..
+        /// </summary>
+        public static string PATH_DOES_NOT_EXIST {
+            get {
+                return ResourceManager.GetString("PATH_DOES_NOT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path {0} does not exist..
+        /// </summary>
+        public static string PATH_DOES_NOT_EXIST_PLACEHOLDER {
+            get {
+                return ResourceManager.GetString("PATH_DOES_NOT_EXIST_PLACEHOLDER", resourceCulture);
             }
         }
         
