@@ -20866,6 +20866,32 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install certi&amp;ficate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot install a server certificate when HA is on..
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_HA {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Install certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_MENU {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_MENU", resourceCulture);
+            }
+        }
+        /// <summary>
         ///   Looks up a localized string similar to Install [Citrix VM Tools].
         /// </summary>
         public static string INSTALL_XS_TOOLS {
