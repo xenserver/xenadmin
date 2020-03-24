@@ -1092,7 +1092,7 @@ Authorized Roles: {1}</value>
     <value>The provided intermediate certificates are not in a pem-encoded X509.</value>
   </data>
   <data name="SERVER_CERTIFICATE_EXPIRED" xml:space="preserve">
-    <value>The provided certificate has expired.</value>
+    <value>The provided certificate expired on {0}.</value>
   </data>
   <data name="SERVER_CERTIFICATE_INVALID" xml:space="preserve">
     <value>The provided certificate is not in a pem-encoded X509.</value>
@@ -1113,7 +1113,7 @@ Authorized Roles: {1}</value>
     <value>The provided RSA key is using more than 2 primes, expecting only 2.</value>
   </data>
   <data name="SERVER_CERTIFICATE_NOT_VALID_YET" xml:space="preserve">
-    <value>The provided certificate is not valid yet.</value>
+    <value>The provided certificate is not valid before {0}.</value>
   </data>
   <data name="SERVER_CERTIFICATE_SIGNATURE_NOT_SUPPORTED" xml:space="preserve">
     <value>The provided certificate is not using the SHA256 (SHA2) signature algorithm.</value>

@@ -2527,14 +2527,42 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
     <value>The TLS certificate of server '{0}' will expire on {1}.</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE" xml:space="preserve">
-    <value>Certificate on {0} expiring in {1} days</value>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>Certificate on {0} expiring in {1} day(s)</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_ONE" xml:space="preserve">
-    <value>Certificate on {0} expiring in 1 day</value>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>Certificate on {0} expiring in {1} hour(s)</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_ZERO" xml:space="preserve">
-    <value>Certificate on {0} expiring today</value>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>Certificate on {0} expiring in {1} minute(s)</value>
+  </data>
+  <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
+    <value>TLS certificate files (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_FAILURE" xml:space="preserve">
+    <value>The certificate installation failed.</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_FAILURE_GENERIC" xml:space="preserve">
+    <value>The certificate installation failed.
+{0}</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_SUCCESS" xml:space="preserve">
+    <value>The certificate installation was completed successfully.</value>
+  </data>
+  <data name="CERTIFICATE_INVALID" xml:space="preserve">
+    <value>Invalid TLS certificate file {0}</value>
+  </data>
+  <data name="CERTIFICATE_KEY_FILETYPES" xml:space="preserve">
+    <value>TLS key files (*.pem;*.key)|*.pem;*.key</value>
+  </data>
+  <data name="CERTIFICATE_KEY_INVALID" xml:space="preserve">
+    <value>The selected TLS key file is invalid.</value>
+  </data>
+  <data name="CERTIFICATE_SELECT_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>Select TLS Certificate File</value>
+  </data>
+  <data name="CERTIFICATE_SELECT_KEY_TITLE" xml:space="preserve">
+    <value>Select TLS Key File</value>
   </data>
   <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
     <value>Thumbprint</value>
@@ -7013,9 +7041,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI" xml:space="preserve">
     <value>Please specify a valid URI.</value>
   </data>
-  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH" xml:space="preserve">
-    <value>Path does not exist.</value>
-  </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NOT_SUPPORTED" xml:space="preserve">
     <value>The selected file is not a valid appliance file.</value>
   </data>
@@ -7292,14 +7317,23 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>Install pending &amp;updates...</value>
   </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
+    <value>Install certificate...</value>
+  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
     <value>Install certi&amp;ficate...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
+    <value>Installing server certificate...</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_HA" xml:space="preserve">
     <value>You cannot install a server certificate when HA is on.</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_MENU" xml:space="preserve">
     <value>&amp;Install certificate...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>Installing certificate on server {0}...</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
     <value>Install [Citrix VM Tools]</value>
@@ -10271,6 +10305,12 @@ File not found</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>Update uploaded to server '{0}' </value>
+  </data>
+  <data name="PATH_DOES_NOT_EXIST" xml:space="preserve">
+    <value>Path does not exist.</value>
+  </data>
+  <data name="PATH_DOES_NOT_EXIST_PLACEHOLDER" xml:space="preserve">
+    <value>Path {0} does not exist.</value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml</value>
