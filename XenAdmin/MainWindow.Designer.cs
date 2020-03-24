@@ -280,6 +280,9 @@ namespace XenAdmin
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripMenuItemInstallCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1879,8 +1882,11 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.StatusStrip, "StatusStrip");
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusProgressBar,
             this.statusLabel,
-            this.statusProgressBar});
+            this.statusLabelAlerts,
+            this.statusLabelUpdates,
+            this.statusLabelErrors});
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.ShowItemToolTips = true;
             // 
@@ -1904,6 +1910,42 @@ namespace XenAdmin
             this.toolStripMenuItemInstallCertificate.Command = new XenAdmin.Commands.InstallCertificateCommand();
             this.toolStripMenuItemInstallCertificate.Name = "toolStripMenuItemInstallCertificate";
             resources.ApplyResources(this.toolStripMenuItemInstallCertificate, "toolStripMenuItemInstallCertificate");
+            // 
+            // statusLabelAlerts
+            // 
+            this.statusLabelAlerts.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.IsLink = true;
+            this.statusLabelAlerts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.statusLabelAlerts.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.Name = "statusLabelAlerts";
+            resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
+            this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
+            // 
+            // statusLabelUpdates
+            // 
+            this.statusLabelUpdates.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelUpdates.IsLink = true;
+            this.statusLabelUpdates.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.statusLabelUpdates.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelUpdates.Name = "statusLabelUpdates";
+            resources.ApplyResources(this.statusLabelUpdates, "statusLabelUpdates");
+            this.statusLabelUpdates.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelUpdates.Click += new System.EventHandler(this.statusLabelUpdates_Click);
+            // 
+            // statusLabelErrors
+            // 
+            this.statusLabelErrors.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.IsLink = true;
+            this.statusLabelErrors.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.statusLabelErrors.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.Name = "statusLabelErrors";
+            resources.ApplyResources(this.statusLabelErrors, "statusLabelErrors");
+            this.statusLabelErrors.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.Click += new System.EventHandler(this.statusLabelErrors_Click);
             // 
             // MainWindow
             // 
@@ -2177,6 +2219,9 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem menuItemRemoveFromPool;
         private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemInstallCertificate;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelAlerts;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelUpdates;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelErrors;
     }
 
 }

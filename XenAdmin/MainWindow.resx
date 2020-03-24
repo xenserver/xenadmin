@@ -2802,6 +2802,12 @@
   <data name="StatusStrip.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="statusProgressBar.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="statusProgressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 17</value>
+  </data>
   <data name="statusLabel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
@@ -2809,16 +2815,28 @@
     <value>None</value>
   </data>
   <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>883, 22</value>
+    <value>498, 22</value>
   </data>
   <data name="statusLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="statusProgressBar.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 22</value>
   </data>
-  <data name="statusProgressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 17</value>
+  <data name="statusLabelAlerts.Text" xml:space="preserve">
+    <value>toolStripStatusLabel1</value>
+  </data>
+  <data name="statusLabelUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 22</value>
+  </data>
+  <data name="statusLabelUpdates.Text" xml:space="preserve">
+    <value>toolStripStatusLabel2</value>
+  </data>
+  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 22</value>
+  </data>
+  <data name="statusLabelErrors.Text" xml:space="preserve">
+    <value>toolStripStatusLabel3</value>
   </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 703</value>
@@ -3974,6 +3992,24 @@
   </data>
   <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
+    <value>statusLabelAlerts</value>
+  </data>
+  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusLabelUpdates.Name" xml:space="preserve">
+    <value>statusLabelUpdates</value>
+  </data>
+  <data name="&gt;&gt;statusLabelUpdates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
+    <value>statusLabelErrors</value>
+  </data>
+  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

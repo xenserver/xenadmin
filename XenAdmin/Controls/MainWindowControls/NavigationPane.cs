@@ -218,7 +218,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 buttonInfraBig.Checked = true;
         }
 
-        private void SwitchToNotificationsView(NotificationsSubMode subMode)
+        public void SwitchToNotificationsView(NotificationsSubMode subMode)
         {
             //check the button if switching has been requested programmatically
             if (!buttonNotifyBig.Checked)

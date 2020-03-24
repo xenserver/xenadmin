@@ -9680,11 +9680,20 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_READ" xml:space="preserve">
     <value>Alerts</value>
   </data>
+  <data name="NOTIFICATIONS_SUBMODE_ALERTS_STATUS" xml:space="preserve">
+    <value>Alerts: {0}</value>
+  </data>
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_UNREAD" xml:space="preserve">
     <value>Alerts ({0})</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>Events</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
+    <value>Events: {0} errors</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
+    <value>Events: 1 error</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>Events ({0} errors)</value>
@@ -9694,6 +9703,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
     <value>Updates</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>Updates: {0}</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
     <value>Updates ({0})</value>
