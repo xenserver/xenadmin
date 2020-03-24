@@ -28271,6 +28271,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alerts: {0}.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_ALERTS_STATUS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_ALERTS_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alerts ({0}).
         /// </summary>
         public static string NOTIFICATIONS_SUBMODE_ALERTS_UNREAD {
@@ -28285,6 +28294,24 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_EVENTS_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events: {0} errors.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events: 1 error.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE", resourceCulture);
             }
         }
         
@@ -28312,6 +28339,15 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates: {0}.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
             }
         }
         

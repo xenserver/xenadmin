@@ -250,6 +250,8 @@ namespace XenAdmin
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
+
+            statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
@@ -442,13 +444,18 @@ namespace XenAdmin
                                 }
                             }
 
-                            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
-                            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
+                            int errorCount = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
+                            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
+
+                            statusLabelErrors.Text = errorCount == 1
+                                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE
+                                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY, errorCount);
+                            statusLabelErrors.Visible = errorCount > 0;
 
                             if (eventsPage.Visible)
                             {
-                                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errors);
-                                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errors);
+                                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errorCount);
+                                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errorCount);
                             }
                             break;
                         }
@@ -509,13 +516,19 @@ namespace XenAdmin
                 }
             }
 
-            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
-            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
+            int errorCount = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
+
+            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
+
+            statusLabelErrors.Text = errorCount == 1
+                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE
+                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY, errorCount);
+            statusLabelErrors.Visible = errorCount > 0;
 
             if (eventsPage.Visible)
             {
-                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errors);
-                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errors);
+                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errorCount);
+                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errorCount);
             }
         }
 
@@ -2543,6 +2556,9 @@ namespace XenAdmin
                     int updatesCount = Updates.UpdateAlertsCount;
                     navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
 
+                    statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
+                    statusLabelUpdates.Visible = updatesCount > 0;
+
                     if (updatesPage.Visible)
                     {
                         TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
@@ -2921,19 +2937,22 @@ namespace XenAdmin
 
         #endregion
 
-        void XenCenterAlerts_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void XenCenterAlerts_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.BeginInvoke(Program.MainWindow, () =>
-                {
-                    navigationPane.UpdateNotificationsButton(
-                        NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+            {
+                var count = Alert.NonDismissingAlertCount;
+                navigationPane.UpdateNotificationsButton(NotificationsSubMode.Alerts, count);
 
-                    if (alertPage.Visible)
-                    {
-                        TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
-                        TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
-                    }
-                });
+                statusLabelAlerts.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_STATUS, count);
+                statusLabelAlerts.Visible = count > 0;
+
+                if (alertPage.Visible)
+                {
+                    TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Alerts, count);
+                    TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Alerts, count);
+                }
+            });
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -3198,6 +3217,21 @@ namespace XenAdmin
                 ConsolePanel.UpdateRDPResolution();
 
             SetTitleLabelMaxWidth();
+        }
+
+        private void statusLabelAlerts_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Alerts);
+        }
+
+        private void statusLabelUpdates_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Updates);
+        }
+
+        private void statusLabelErrors_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }
     }
 }
