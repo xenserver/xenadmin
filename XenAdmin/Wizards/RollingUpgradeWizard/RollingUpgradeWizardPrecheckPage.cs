@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var hotfixChecks = new List<Check>();
             foreach (var host in hostsToUpgrade)
             {
-                if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
+                if (HotfixFactory.IsHotfixRequired(host) && !ManualUpgrade)
                     hotfixChecks.Add(new HostHasHotfixCheck(host));
             }
             if (hotfixChecks.Count > 0)
@@ -201,7 +201,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             //vSwitch controller check - for each pool
             var vswitchChecks = (from Host server in SelectedMasters.Where(m => !Helpers.StockholmOrGreater(m))
-                select new VSwitchControllerCheck(server, InstallMethodConfig) as Check).ToList();
+                select new VSwitchControllerCheck(server, InstallMethodConfig, ManualUpgrade) as Check).ToList();
 
             if (vswitchChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vswitchChecks));
@@ -250,7 +250,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (Pool pool in SelectedPools.Where(p => !Helpers.QuebecOrGreater(p.Connection)))
             {
                 if (pool.Connection.Resolve(pool.master) != null)
-                    pvChecks.Add(new PVGuestsCheck(pool, true, InstallMethodConfig, ManualUpgrade)); 
+                    pvChecks.Add(new PVGuestsCheck(pool, true, ManualUpgrade, InstallMethodConfig)); 
             }
             if (pvChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));

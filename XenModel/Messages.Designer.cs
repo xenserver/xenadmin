@@ -31861,9 +31861,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}: The required hotfix is not installed.
         /// </summary>
-        public static string REQUIRED_HOTFIX_ISNOT_INSTALLED {
+        public static string REQUIRED_HOTFIX_NOT_INSTALLED {
             get {
-                return ResourceManager.GetString("REQUIRED_HOTFIX_ISNOT_INSTALLED", resourceCulture);
+                return ResourceManager.GetString("REQUIRED_HOTFIX_NOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because the required hotfix is not installed.
+        /// </summary>
+        public static string REQUIRED_HOTFIX_NOT_INSTALLED_WARNING {
+            get {
+                return ResourceManager.GetString("REQUIRED_HOTFIX_NOT_INSTALLED_WARNING", resourceCulture);
             }
         }
         

@@ -11061,8 +11061,11 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REPEATED_KEY" xml:space="preserve">
     <value>Repeated key</value>
   </data>
-  <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED" xml:space="preserve">
     <value>{0}: The required hotfix is not installed</value>
+  </data>
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because the required hotfix is not installed</value>
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>Required Updates</value>
