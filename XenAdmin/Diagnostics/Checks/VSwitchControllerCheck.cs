@@ -32,7 +32,9 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
 using XenAPI;
 
@@ -42,7 +44,8 @@ namespace XenAdmin.Diagnostics.Checks
     {
         private readonly Dictionary<string, string> _installMethodConfig;
         private readonly Pool _pool;
-        private XenServerVersion _newVersion;
+        private readonly XenServerVersion _newVersion;
+        private readonly bool _manualUpgrade;
 
         public VSwitchControllerCheck(Host host, XenServerVersion newVersion)
             : base(host)
@@ -51,10 +54,11 @@ namespace XenAdmin.Diagnostics.Checks
             _pool = Helpers.GetPoolOfOne(Host?.Connection);
         }
 
-        public VSwitchControllerCheck(Host host, Dictionary<string, string> installMethodConfig)
+        public VSwitchControllerCheck(Host host, Dictionary<string, string> installMethodConfig, bool manualUpgrade)
             : base(host)
         {
             _installMethodConfig = installMethodConfig;
+            _manualUpgrade = manualUpgrade;
             _pool = Helpers.GetPoolOfOne(Host?.Connection);
         }
 
@@ -74,6 +78,14 @@ namespace XenAdmin.Diagnostics.Checks
             }
 
             //upgrade case
+
+            if (!_manualUpgrade)
+            {
+                var hotfix = HotfixFactory.Hotfix(Host);
+                if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                    return new HostDoesNotHaveHotfixWarning(this, Host);
+            }
+
             string upgradePlatformVersion = null;
 
             if (_installMethodConfig != null)
