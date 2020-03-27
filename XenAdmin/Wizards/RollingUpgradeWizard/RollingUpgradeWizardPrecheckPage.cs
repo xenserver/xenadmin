@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var hotfixChecks = new List<Check>();
             foreach (var host in hostsToUpgrade)
             {
-                if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
+                if (HotfixFactory.IsHotfixRequired(host) && !ManualUpgrade)
                     hotfixChecks.Add(new HostHasHotfixCheck(host));
             }
             if (hotfixChecks.Count > 0)
@@ -201,14 +201,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             //protocol check - for each pool
             var sslChecks = (from Host server in SelectedMasters.Where(m => !Helpers.StockholmOrGreater(m))
-                select new PoolLegacySslCheck(server, InstallMethodConfig) as Check).ToList();
+                select new PoolLegacySslCheck(server, InstallMethodConfig, ManualUpgrade) as Check).ToList();
 
             if (sslChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
 
             //power on mode check - for each host
             var iloChecks = (from Host server in hostsToUpgradeOrUpdate.Where(m => !Helpers.StockholmOrGreater(m))
-                select new PowerOniLoCheck(server, InstallMethodConfig) as Check).ToList();
+                select new PowerOniLoCheck(server, InstallMethodConfig, ManualUpgrade) as Check).ToList();
 
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
@@ -257,7 +257,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (Pool pool in SelectedPools.Where(p => !Helpers.QuebecOrGreater(p.Connection)))
             {
                 if (pool.Connection.Resolve(pool.master) != null)
-                    pvChecks.Add(new PVGuestsCheck(pool, true, InstallMethodConfig, ManualUpgrade)); 
+                    pvChecks.Add(new PVGuestsCheck(pool, true, ManualUpgrade, InstallMethodConfig)); 
             }
             if (pvChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
