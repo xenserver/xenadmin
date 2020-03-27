@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="labelTitle.Text" xml:space="preserve">
-    <value>Clustering allows you to create and use thinly provisioned (GFS2) storage repositories. Select whether you want to enable clustering on this pool. Clustering can be enabled on any management or storage network that has an IP address configured on all hosts in the pool. It is recommended to use a bonded network that is not used for storage.</value>
+    <value>Clustering allows you to create and use thinly provisioned (GFS2) storage repositories. Select whether you want to enable clustering on this pool. For the cluster network use a dedicated bonded network that has an IP address configured on all hosts in the pool. Ensure that the bonded NICs are on the same L2 segment.</value>
   </data>
   <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
