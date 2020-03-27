@@ -32786,7 +32786,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SSL certificate options.
+        ///   Looks up a localized string similar to Certificate options.
         /// </summary>
         public static string SECURITY_DESC {
             get {
