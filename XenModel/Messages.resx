@@ -11390,7 +11390,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Security Checks</value>
   </data>
   <data name="SECURITY_DESC" xml:space="preserve">
-    <value>SSL certificate options</value>
+    <value>Certificate options</value>
   </data>
   <data name="SECURITY_GROUPS" xml:space="preserve">
     <value>Security Groups</value>
