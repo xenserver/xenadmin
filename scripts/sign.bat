@@ -87,8 +87,7 @@ if "%sbe%"=="true" (
     date /t && time /t
     %CTXSIGN% --sign --authenticode-append --authenticode-SHA256 --key XenServerSHA256.NET_KEY ^
       --cross-sign --pagehashes yes "%thefile%"
-  )
-  else (
+  ) else (
     %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --pagehashes yes --type Authenticode ^
         --description "%descr%" "%thefile%"
   )
