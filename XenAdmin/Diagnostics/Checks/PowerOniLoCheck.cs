@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAPI;
@@ -43,6 +44,7 @@ namespace XenAdmin.Diagnostics.Checks
     {
         private readonly Dictionary<string, string> _installMethodConfig;
         private XenServerVersion _newVersion;
+        private readonly bool _manualUpgrade;
 
         public PowerOniLoCheck(Host host, XenServerVersion newVersion)
             : base(host)
@@ -50,10 +52,11 @@ namespace XenAdmin.Diagnostics.Checks
             _newVersion = newVersion;
         }
 
-        public PowerOniLoCheck(Host host, Dictionary<string, string> installMethodConfig)
+        public PowerOniLoCheck(Host host, Dictionary<string, string> installMethodConfig, bool manualUpgrade)
             : base(host)
         {
             _installMethodConfig = installMethodConfig;
+            _manualUpgrade = manualUpgrade;
         }
 
         public override string Description => Messages.CHECKING_POWER_ON_MODE;
@@ -72,6 +75,14 @@ namespace XenAdmin.Diagnostics.Checks
             }
 
             //upgrade case
+
+            if (!_manualUpgrade)
+            {
+                var hotfix = HotfixFactory.Hotfix(Host);
+                if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                    return new HostDoesNotHaveHotfixWarning(this, Host);
+            }
+
             string upgradePlatformVersion = null;
 
             if (_installMethodConfig != null)
