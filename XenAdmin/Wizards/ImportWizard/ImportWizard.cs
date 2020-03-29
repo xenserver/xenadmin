@@ -448,16 +448,17 @@ namespace XenAdmin.Wizards.ImportWizard
 						//Check to see if they can import VMs at all
 						var importCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_XVA) {Blocking = true};
 						importCheck.ApiCallsToCheck.AddRange(ImportVmAction.ConstantRBACRequirements);
+                        importCheck.ApiCallsToCheck.Add("sr.scan");//CA-337323
 
 						//Check to see if they can set the VM's affinity
 						var affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_AFFINITY);
 						affinityCheck.ApiCallsToCheck.Add("vm.set_affinity");
-						affinityCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate
-						                                                                                	{
-						                                                                                		//We cannot allow them to set the affinity, so we are only going
-						                                                                                		//to offer them the choice of connection, not specific host
-						                                                                                		m_ignoreAffinitySet = true;
-						                                                                                	});
+						affinityCheck.WarningAction = delegate
+                        {
+                            //We cannot allow them to set the affinity, so we are only going
+                            //to offer them the choice of connection, not specific host
+                            m_ignoreAffinitySet = true;
+                        };
                         m_pageRbac.AddPermissionChecks(selectedConnection, importCheck, affinityCheck);
                         AddAfterPage(m_pageXvaHost, m_pageRbac);
 					}
