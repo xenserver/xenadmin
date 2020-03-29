@@ -42,7 +42,8 @@ namespace XenAdmin.Actions
     public abstract class AsyncAction : CancellingAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly Func<List<Role>, IXenConnection, string, SudoElevationResult> sudoDialog = XenAdminConfigManager.Provider.SudoDialogDelegate;
+
+        private readonly Func<List<Role>, IXenConnection, string, SudoElevationResult> getElevatedSession = XenAdminConfigManager.Provider.ElevatedSessionDelegate;
 
         private string _result;
 
@@ -89,10 +90,7 @@ namespace XenAdmin.Actions
         /// If empty, then no checks will be run.
         /// </summary>
         protected RbacMethodList ApiMethodsToRoleCheck = new RbacMethodList();
-        public virtual RbacMethodList GetApiMethodsToRoleCheck
-        {
-            get { return ApiMethodsToRoleCheck; }
-        }
+        public virtual RbacMethodList GetApiMethodsToRoleCheck => ApiMethodsToRoleCheck;
 
         /// <summary>
         /// If the sudoUsername and sudoPassword fields are both not null, then the action will use these credentials when making new sessions.
@@ -137,13 +135,7 @@ namespace XenAdmin.Actions
             return xc.ElevatedSession(sudoUsername, sudoPassword);
         }
 
-
-
-        
-        public static bool ForcedExiting
-        {
-            get { return XenAdminConfigManager.Provider.ForcedExiting; }
-        }
+        public static bool ForcedExiting => XenAdminConfigManager.Provider.ForcedExiting;
 
         /// <summary>
         /// Prepare the action's task for exit by removing the XenCenterUUID.
@@ -170,10 +162,10 @@ namespace XenAdmin.Actions
             }
         }
 
-        public virtual void RunAsync()
+        public void RunAsync()
         {
             AuditLogStarted();
-            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(RunWorkerThread), null);
+            System.Threading.ThreadPool.QueueUserWorkItem(RunWorkerThread, null);
         }
 
         /// <summary>
@@ -191,8 +183,6 @@ namespace XenAdmin.Actions
 
         protected abstract void Run();
 
-
-        /// <param name="o">A session to use for this action: if null, construct a new session and sudo it if necessary</param>
         private void RunWorkerThread(object o)
         {
             StartedRunning = true;
@@ -201,11 +191,11 @@ namespace XenAdmin.Actions
 
             try
             {
-                // Check that the current user credentials are enough to complete the api calls in this action (if specified)
                 if (o != null)
                     Session = (Session)o;
                 else
-                    SetSessionByRole();
+                    SetSessionByRole(); //construct a new session and sudo it if necessary
+
                 Run();
                 AuditLogSuccess();
                 MarkCompleted();
@@ -218,11 +208,9 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                Failure f = e as Failure;
-                if (f != null && Connection != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
-                {
+                if (e is Failure f && Connection != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                     Failure.ParseRBACFailure(f, Connection, Session ?? Connection.Session);
-                }
+
                 log.Error(e);
                 AuditLogFailure();
                 MarkCompleted(e);
@@ -254,14 +242,12 @@ namespace XenAdmin.Actions
 
         public virtual void DestroyTask()
         {
-            //Program.AssertOffEventThread();
-
             if (Session == null || string.IsNullOrEmpty(Session.opaque_ref) || RelatedTask == null)
                 return;
 
             try
             {
-                PerformSilentTaskOp(delegate() { XenAPI.Task.destroy(Session, RelatedTask); });
+                PerformSilentTaskOp(() => Task.destroy(Session, RelatedTask));
             }
             finally
             {
@@ -288,8 +274,9 @@ namespace XenAdmin.Actions
         }
 
         /// <summary>
-        /// If the action has detailed the Api calls that it will make then find the set of roles that can complete the entire action. If the
-        /// current user's role is not on that list then show the Role Elevation Dialog to give them the oppertunity to change to a new user.
+        /// Finds the roles allowed to perform the API calls this action has listed as subject to RBAC checks.
+        /// If the current user's role is not on the list, show the Role Elevation Dialog so they can enter
+        /// credentials of a user with a permitted role.
         /// </summary>
         private void SetSessionByRole()
         {
@@ -300,7 +287,7 @@ namespace XenAdmin.Actions
 
             RbacMethodList rbacMethodList;
 
-            if (Connection.Session.IsLocalSuperuser || XenAdminConfigManager.Provider.DontSudo)  // don't need / want to sudo
+            if (Connection.Session.IsLocalSuperuser || XenAdminConfigManager.Provider.DontSudo)
                 rbacMethodList = new RbacMethodList();
             else
                 rbacMethodList = GetApiMethodsToRoleCheck;
@@ -311,10 +298,9 @@ namespace XenAdmin.Actions
                 return;
             }
 
-            List<Role> rolesAbleToCompleteAction;
-            bool ableToCompleteAction = Role.CanPerform(rbacMethodList, Connection, out rolesAbleToCompleteAction);
+            bool ableToCompleteAction = Role.CanPerform(rbacMethodList, Connection, out var allowedRoles);
 
-            log.DebugFormat("Roles able to complete action: {0}", Role.FriendlyCSVRoleList(rolesAbleToCompleteAction));
+            log.DebugFormat("Roles able to complete action: {0}", Role.FriendlyCSVRoleList(allowedRoles));
             log.DebugFormat("Subject {0} has roles: {1}", Connection.Session.UserLogName(), Role.FriendlyCSVRoleList(Connection.Session.Roles));
 
             if (ableToCompleteAction)
@@ -325,19 +311,16 @@ namespace XenAdmin.Actions
             }
 
             log.Debug("Subject not authorized to complete action, showing sudo dialog");
-            var result = sudoDialog(rolesAbleToCompleteAction, Connection, Title);
-            if (result.Result)
-            {
-                sudoUsername = result.ElevatedUsername;
-                sudoPassword = result.ElevatedPassword;
-                Session = result.ElevatedSession;
-                return;
-            }
-            else
+            var result = getElevatedSession(allowedRoles, Connection, Title);
+            if (result == null)
             {
                 log.Debug("User cancelled sudo dialog, cancelling action");
                 throw new CancelledException();
             }
+
+            sudoUsername = result.ElevatedUsername;
+            sudoPassword = result.ElevatedPassword;
+            Session = result.ElevatedSession;
         }
 
         public class SudoElevationResult
@@ -345,11 +328,9 @@ namespace XenAdmin.Actions
             public readonly string ElevatedUsername;
             public readonly string ElevatedPassword;
             public readonly Session ElevatedSession;
-            public readonly bool Result;
 
-            public SudoElevationResult(bool result, string user, string password, Session session)
+            public SudoElevationResult(string user, string password, Session session)
             {
-                Result = result;
                 ElevatedUsername = user;
                 ElevatedPassword = password;
                 ElevatedSession = session;

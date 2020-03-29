@@ -361,8 +361,8 @@ namespace XenAdmin.TabPages
             
             if (GraphList.AuthorizedRole)
             {
-                GraphDetailsDialog dialog = new GraphDetailsDialog(GraphList, null);
-                dialog.ShowDialog();
+                using (var dialog = new GraphDetailsDialog(GraphList, null))
+                    dialog.ShowDialog();
             }
         }
 
@@ -373,8 +373,8 @@ namespace XenAdmin.TabPages
 
             if (GraphList.AuthorizedRole)
             {
-                GraphDetailsDialog dialog = new GraphDetailsDialog(GraphList, GraphList.SelectedGraph);
-                dialog.ShowDialog();
+                using (var dialog = new GraphDetailsDialog(GraphList, GraphList.SelectedGraph))
+                    dialog.ShowDialog();
             }
         }
 

@@ -45,7 +45,7 @@ namespace XenAdmin
 
     public interface IXenAdminConfigProvider
     {
-        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> SudoDialogDelegate { get; }
+        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate { get; }
         int ConnectionTimeout { get; }
         Session CreateActionSession(Session session, IXenConnection connection);
         bool Exiting { get; }

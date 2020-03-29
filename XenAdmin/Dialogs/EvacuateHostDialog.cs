@@ -855,21 +855,22 @@ namespace XenAdmin.Dialogs
             //We sudo once for all of them and store the session, or close the dialog.
             List<Role> validRoles = new List<Role>();
 
-            if (!connection.Session.IsLocalSuperuser
-                && !Registry.DontSudo
-                && !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
+            if (!connection.Session.IsLocalSuperuser &&
+                !Registry.DontSudo &&
+                !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
             {
-                var sudoDialog = XenAdminConfigManager.Provider.SudoDialogDelegate;
-                var result = sudoDialog(validRoles, connection, Text);
-                if (!result.Result)
-                {
-                    Close();
-                    return;
-                }
-
-                elevatedPass = result.ElevatedPassword;
-                elevatedUName = result.ElevatedUsername;
-                elevatedSession = result.ElevatedSession;
+                using (var d = new RoleElevationDialog(connection, connection.Session, validRoles, Text))
+                    if (d.ShowDialog(this) == DialogResult.OK)
+                    {
+                        elevatedPass = d.elevatedPassword;
+                        elevatedUName = d.elevatedUsername;
+                        elevatedSession = d.elevatedSession;
+                    }
+                    else
+                    {
+                        Close();
+                        return;
+                    }
             }
 
             update();

@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -50,7 +51,7 @@ namespace XenAdmin
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> SudoDialogDelegate => SudoDialog;
+        public Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate => GetElevatedSession;
 
         public int ConnectionTimeout => Properties.Settings.Default.ConnectionTimeout;
 
@@ -158,21 +159,31 @@ namespace XenAdmin
             Settings.SaveIfRequired();
         }
 
-        private AsyncAction.SudoElevationResult SudoDialog(List<Role> rolesAbleToCompleteAction,
+        private AsyncAction.SudoElevationResult GetElevatedSession(List<Role> allowedRoles,
             IXenConnection connection, string actionTitle)
         {
-            var d = new Dialogs.RoleElevationDialog(connection, connection.Session, rolesAbleToCompleteAction,
-                                                    actionTitle);
+            AsyncAction.SudoElevationResult result = null;
 
-            DialogResult result = DialogResult.None;
-            Program.Invoke(Program.MainWindow, delegate
-                                                   {
-                                                       result = d.ShowDialog(Program.MainWindow);
-                                                   });
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                Form owner;
+                try
+                {
+                    //CA-337323: make an attempt to find the right owning form
+                    //most likely it will be the last one opened
+                    owner = Application.OpenForms.Cast<Form>().Last();
+                }
+                catch
+                {
+                    owner = Program.MainWindow;
+                }
 
-            return new AsyncAction.SudoElevationResult(result == DialogResult.OK, d.elevatedUsername, 
-                                                                 d.elevatedPassword, d.elevatedSession);
+                using (var d = new RoleElevationDialog(connection, connection.Session, allowedRoles, actionTitle))
+                    if (d.ShowDialog(owner) == DialogResult.OK)
+                        result = new AsyncAction.SudoElevationResult(d.elevatedUsername, d.elevatedPassword, d.elevatedSession);
+            });
 
+            return result;
         }
 
         public bool ShowHiddenVMs => Properties.Settings.Default.ShowHiddenVMs;
