@@ -118,15 +118,11 @@ namespace XenAdmin.Wizards.ImportWizard
         }
 
         public override void PopulatePage()
-		{
-			// Select default SR
-			Pool pool = Helpers.GetPoolOfOne(m_targetConnection);
-			if (pool != null)
-				m_srPicker.DefaultSR = m_targetConnection.Resolve(pool.default_SR);
-
-			m_srPicker.selectDefaultSROrAny();
-			IsDirty = true;
-		}
+        {
+            SetButtonNextEnabled(false);
+            m_srPicker.PopulateAsync(SrPicker.SRPickerType.VM, m_targetConnection, m_targetHost, null, null, 0);
+            IsDirty = true;
+        }
 
         public override bool EnablePrevious()
         {
@@ -158,13 +154,11 @@ namespace XenAdmin.Wizards.ImportWizard
 		public void SetConnection(IXenConnection con)
 		{
 			m_targetConnection = con;
-			m_srPicker.Connection = con;
 		}
 
 		public void SetTargetHost(Host host)
 		{
 			m_targetHost = host;
-			m_srPicker.SetAffinity(host);
 		}
 
 		#region Private methods
@@ -296,7 +290,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			});
 		}
 
-		private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
+        private void m_srPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (ImportInProgress())
 				return;

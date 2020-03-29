@@ -66,38 +66,32 @@ namespace XenAdmin.Dialogs
         {
             base.OnLoad(e);
             
-            srPicker1.Usage = SrPickerType;
-            srPicker1.SetExistingVDIs(_vdis.ToArray());
-            srPicker1.DiskSize = _vdis.Sum(d => d.physical_utilisation);
-            srPicker1.Connection = connection;
-            srPicker1.Invalidate();
-            srPicker1.selectDefaultSROrAny();
+            UpdateButtons();
+            srPicker1.PopulateAsync(SrPickerType, connection, null, null, _vdis.ToArray(), _vdis.Sum(d => d.physical_utilisation));
         }
 
-        protected SR SelectedSR
+        internal override string HelpName => "VDIMigrateDialog";
+
+        protected SR SelectedSR => srPicker1.SR;
+
+        protected virtual SrPicker.SRPickerType SrPickerType => SrPicker.SRPickerType.MoveOrCopy;
+
+        private void UpdateButtons()
         {
-            get { return srPicker1.SR; }
+            buttonMove.Enabled = srPicker1.SR != null;
         }
 
-        protected virtual SrPicker.SRPickerType SrPickerType
-        {
-            get { return SrPicker.SRPickerType.MoveOrCopy; }
-        }
+        #region Control event handlers
 
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updateButtons();
+            UpdateButtons();
         }
 
         private void srPicker1_DoubleClickOnRow(object sender, EventArgs e)
         {
             if (buttonMove.Enabled)
                 buttonMove.PerformClick();
-        }
-
-        private void updateButtons()
-        {
-            buttonMove.Enabled = srPicker1.SR != null;
         }
 
         private void buttonMove_Click(object sender, EventArgs e)
@@ -110,6 +104,8 @@ namespace XenAdmin.Dialogs
         {
             Close();
         }
+
+        #endregion
 
         protected virtual void CreateAndRunParallelActions()
         {
@@ -127,11 +123,6 @@ namespace XenAdmin.Dialogs
                 new ParallelAction(connection, title, Messages.ACTION_MOVING_X_VDIS_STARTED,
                     Messages.ACTION_MOVING_X_VDIS_COMPLETED, batch.ToList(), BATCH_SIZE).RunAsync();
             }
-        }
-
-        internal override string HelpName
-        {
-            get { return "VDIMigrateDialog"; }
         }
 
         internal static Command MoveMigrateCommand(IMainWindow mainWindow, SelectedItemCollection selection)
@@ -154,10 +145,7 @@ namespace XenAdmin.Dialogs
         {
         }
 
-        protected override SrPicker.SRPickerType SrPickerType
-        {
-            get { return SrPicker.SRPickerType.Migrate; }
-        }
+        protected override SrPicker.SRPickerType SrPickerType => SrPicker.SRPickerType.Migrate;
 
         protected override void CreateAndRunParallelActions()
         {

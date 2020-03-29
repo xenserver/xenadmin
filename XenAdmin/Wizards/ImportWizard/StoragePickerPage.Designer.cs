@@ -37,7 +37,6 @@
             // 
             // m_srPicker
             // 
-            this.m_srPicker.Connection = null;
             resources.ApplyResources(this.m_srPicker, "m_srPicker");
             this.m_srPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.m_srPicker.Name = "m_srPicker";
@@ -47,7 +46,7 @@
             this.m_srPicker.ShowDescription = true;
             this.m_srPicker.ShowImages = true;
             this.m_srPicker.ShowRootLines = true;
-            this.m_srPicker.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
+            this.m_srPicker.SelectedIndexChanged += new System.EventHandler(this.m_srPicker_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
             // 
