@@ -48,7 +48,7 @@ namespace XenServerHealthCheck
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> SudoDialogDelegate => FakeSudoDialog;
+        public Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate => GetElevatedSession;
 
         public int ConnectionTimeout => Properties.Settings.Default.ConnectionTimeout;
 
@@ -153,12 +153,10 @@ namespace XenServerHealthCheck
         {
         }
 
-        private static AsyncAction.SudoElevationResult FakeSudoDialog(List<Role> roles, IXenConnection connection, string actionTitle)
+        private static AsyncAction.SudoElevationResult GetElevatedSession(List<Role> roles, IXenConnection connection, string actionTitle)
         {
-            return new AsyncAction.SudoElevationResult(true, string.Empty, string.Empty, null);
+            return new AsyncAction.SudoElevationResult(string.Empty, string.Empty, null);
         }
-
-
     }
 
     internal class XenServerHealthCheckSimulatorWebProxy : SimulatorWebProxy

@@ -450,15 +450,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         private string elevatedPassword;
         private Session elevatedSession;
 
-        private bool RbacRequired
-        {
-            get
-            {
-                return !XenObject.Connection.Session.IsLocalSuperuser &&
-                       !Registry.DontSudo;
-            }
-        }
-
         public bool AuthorizedRole
         {
             get
@@ -467,21 +458,21 @@ namespace XenAdmin.Controls.CustomDataGraph
                 elevatedUsername = string.Empty;
                 elevatedSession = null;
 
-                if (RbacRequired)
+                if (!XenObject.Connection.Session.IsLocalSuperuser && !Registry.DontSudo)
                 {
-                    SaveDataSourceStateAction action = new SaveDataSourceStateAction(XenObject.Connection, XenObject,
-                                                                                     null, null);
-                    List<Role> validRoles = new List<Role>();
-                    if (!Role.CanPerform(action.GetApiMethodsToRoleCheck, XenObject.Connection, out validRoles))
+                    var action = new SaveDataSourceStateAction(XenObject.Connection, XenObject, null, null);
+                    
+                    if (!Role.CanPerform(action.GetApiMethodsToRoleCheck, XenObject.Connection, out var validRoles))
                     {
-                        var sudoDialog = XenAdminConfigManager.Provider.SudoDialogDelegate;
-                        var result = sudoDialog(validRoles, action.Connection, action.Title);
-                        if (!result.Result)
-                            return false;
-
-                        elevatedPassword = result.ElevatedUsername;
-                        elevatedUsername = result.ElevatedPassword;
-                        elevatedSession = result.ElevatedSession;
+                        using (var d = new RoleElevationDialog(action.Connection, action.Connection.Session, validRoles, action.Title))
+                            if (d.ShowDialog(this) == DialogResult.OK)
+                            {
+                                elevatedPassword = d.elevatedPassword;
+                                elevatedUsername = d.elevatedUsername;
+                                elevatedSession = d.elevatedSession;
+                            }
+                            else
+                                return false;
                     }
                 }
                 return true;
