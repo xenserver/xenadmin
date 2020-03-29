@@ -34033,7 +34033,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scanning SR.
+        ///   Looks up a localized string similar to Scanning SR &apos;{0}&apos;....
         /// </summary>
         public static string SR_REFRESH_ACTION_DESC {
             get {
@@ -34047,6 +34047,15 @@ namespace XenAdmin {
         public static string SR_REFRESH_ACTION_TITLE {
             get {
                 return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning available SRs ....
+        /// </summary>
+        public static string SR_REFRESH_ACTION_TITLE_MANY {
+            get {
+                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_MANY", resourceCulture);
             }
         }
         

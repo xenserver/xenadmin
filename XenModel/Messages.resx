@@ -11849,10 +11849,13 @@ The lower limit: SR size / {0} (no lower than {1})
 The upper limit: SR size / {2}</value>
   </data>
   <data name="SR_REFRESH_ACTION_DESC" xml:space="preserve">
-    <value>Scanning SR</value>
+    <value>Scanning SR '{0}'...</value>
   </data>
   <data name="SR_REFRESH_ACTION_TITLE" xml:space="preserve">
     <value>Scanning SR '{0}'</value>
+  </data>
+  <data name="SR_REFRESH_ACTION_TITLE_MANY" xml:space="preserve">
+    <value>Scanning available SRs ...</value>
   </data>
   <data name="SR_SHARE_REVERTED" xml:space="preserve">
     <value>Reverting {0} to unshared completed.</value>

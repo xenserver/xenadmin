@@ -47,7 +47,6 @@ namespace XenAdmin.Dialogs
             // SrListBox
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.SrListBox, 3);
-            this.SrListBox.Connection = null;
             resources.ApplyResources(this.SrListBox, "SrListBox");
             this.SrListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.SrListBox.Name = "SrListBox";

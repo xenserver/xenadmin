@@ -59,13 +59,11 @@ namespace XenAdmin.Dialogs
             : base(connection ?? throw new ArgumentNullException(nameof(connection)))
         {
             InitializeComponent();
-            
+
             NameTextBox.Text = GetDefaultVDIName();
-            SrListBox.Connection = connection;
-            SrListBox.Usage = SrPicker.SRPickerType.InstallFromTemplate;
-            SrListBox.SetAffinity(null);
-            SrListBox.selectSRorNone(sr);
             diskSpinner1.Populate();
+            UpdateErrorsAndButtons();
+            SrListBox.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null, 0);
         }
 
         public NewDiskDialog(IXenConnection connection, VM vm)
@@ -81,35 +79,26 @@ namespace XenAdmin.Dialogs
 
             TheVM = vm;
             _VDINamesInUse = vdiNamesInUse ?? new List<VDI>();
-
-            SrListBox.Connection = connection;
-            SrListBox.Usage = pickerUsage;
-            SrListBox.SetAffinity(affinity);
-
-            Pool pool_sr = Helpers.GetPoolOfOne(connection);
-            if (pool_sr != null)
-            {
-                SrListBox.DefaultSR = connection.Resolve(pool_sr.default_SR); //if default sr resolves to null the first sr in the list will be selected
-            }
+            diskSpinner1.CanResize = canResize;
 
             if (diskTemplate == null)
             {
                 NameTextBox.Text = GetDefaultVDIName();
-                SrListBox.selectDefaultSROrAny();
                 diskSpinner1.Populate(minSize: minSize);
+                UpdateErrorsAndButtons();
+                SrListBox.PopulateAsync(pickerUsage, connection, affinity, null, null, 0);
             }
             else
             {
                 DiskTemplate = diskTemplate;
                 NameTextBox.Text = DiskTemplate.Name();
                 DescriptionTextBox.Text = DiskTemplate.Description();
-                SrListBox.selectSRorDefaultorAny(connection.Resolve(DiskTemplate.SR));
                 Text = Messages.EDIT_DISK;
                 OkButton.Text = Messages.OK;
                 diskSpinner1.Populate(DiskTemplate.virtual_size, minSize);
+                UpdateErrorsAndButtons();
+                SrListBox.PopulateAsync(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), null, 0);
             }
-
-            diskSpinner1.CanResize = canResize;
         }
 
         #endregion
@@ -305,13 +294,12 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            SrListBox.DiskSize = diskSpinner1.SelectedSize;
-            SrListBox.UpdateDiskSize();
+            SrListBox.UpdateDiskSize(diskSpinner1.SelectedSize);
 
             if (!SrListBox.ValidSelectionExists)//all SRs disabled
             {
                 OkButton.Enabled = false;
-                diskSpinner1.SetError(Messages.NO_VALID_DISK_LOCATION);
+                diskSpinner1.SetError(SrListBox.Items.Count > 0 ? Messages.NO_VALID_DISK_LOCATION : null);
                 return;
             }
 
