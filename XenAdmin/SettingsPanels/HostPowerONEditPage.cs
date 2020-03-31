@@ -50,7 +50,7 @@ namespace XenAdmin.SettingsPanels
         private IXenConnection _connection;
         private readonly ToolTip _invalidParamToolTip;
         private readonly Dictionary<Host, List<Host.PowerOnMode>> _hostModes = new Dictionary<Host, List<Host.PowerOnMode>>();
-        private bool _firstLoad = true;
+        private bool _isLoadedOnce;
         private bool _programmaticUpdate;
 
         public HostPowerONEditPage()
@@ -117,12 +117,15 @@ namespace XenAdmin.SettingsPanels
         }
 
         public bool HasChanged =>
-            _hostModes.Any(kvp => HasHostChanged(kvp.Key, kvp.Value.FirstOrDefault(m => m.Active)));
+            _isLoadedOnce && _hostModes.Any(kvp => HasHostChanged(kvp.Key, kvp.Value.FirstOrDefault(m => m.Active)));
         
         public bool ValidToSave
         {
             get
             {
+                if (!_isLoadedOnce)
+                    return true;
+
                 foreach (var kvp in _hostModes)
                 {
                     var mode = kvp.Value.FirstOrDefault(m => m.Active);
@@ -168,7 +171,7 @@ namespace XenAdmin.SettingsPanels
 
         public void LoadPowerOnMode()
         {
-            if (_firstLoad)
+            if (!_isLoadedOnce)
             {
                 labelServer.Visible = _clone is Host;
                 labelPool.Visible = tableLayoutPanelHosts.Visible = !labelServer.Visible;
@@ -178,7 +181,7 @@ namespace XenAdmin.SettingsPanels
                 spinnerIcon1.StartSpinning();
                 bgWorker.RunWorkerAsync();
 
-                _firstLoad = false;
+                _isLoadedOnce = true;
             }
         }
 
