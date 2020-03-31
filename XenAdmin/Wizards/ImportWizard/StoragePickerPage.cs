@@ -121,6 +121,8 @@ namespace XenAdmin.Wizards.ImportWizard
         public override void PopulatePage()
 		{
 			m_srPicker.SrHint.Text = Messages.IMPORT_VM_SELECT_SR;
+            m_srPicker.Connection = m_targetConnection;
+            m_srPicker.SetAffinity(m_targetHost);
 
 			// Select default SR
 			Pool pool = Helpers.GetPoolOfOne(m_targetConnection);
@@ -161,14 +163,12 @@ namespace XenAdmin.Wizards.ImportWizard
 		public void SetConnection(IXenConnection con)
 		{
 			m_targetConnection = con;
-			m_srPicker.Connection = con;
-		}
+        }
 
 		public void SetTargetHost(Host host)
 		{
 			m_targetHost = host;
-			m_srPicker.SetAffinity(host);
-		}
+        }
 
 		#region Private methods
 
