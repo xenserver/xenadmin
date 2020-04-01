@@ -48,20 +48,31 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly bool _manualUpgrade;
         private readonly Dictionary<string, string> _installMethodConfig;
 
-        public PVGuestsCheck(Pool pool, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
-            : base(Helpers.GetMaster(pool.Connection))
+        public PVGuestsCheck(Host master, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
+            : base(master)
         {
-            _pool = pool;
+            _pool = Helpers.GetPoolOfOne(Host?.Connection);
             _upgrade = upgrade;
             _manualUpgrade = manualUpgrade;
             _installMethodConfig = installMethodConfig;
         }
 
+        public override bool CanRun()
+        {
+            if (Helpers.QuebecOrGreater(Host))
+                return false;
+
+            if (_pool == null || !_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
+                return false;
+
+            if (!_upgrade && !Helpers.NaplesOrGreater(Host))
+                return false;
+
+            return true;
+        }
+
         protected override Problem RunHostCheck()
         {
-            if (!_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
-                return null;
-
             //update case
             if (!_upgrade)
                 return new PoolHasPVGuestWarningUrl(this, _pool);

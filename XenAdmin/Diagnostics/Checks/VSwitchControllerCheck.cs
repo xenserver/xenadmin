@@ -64,11 +64,22 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override string Description => Messages.CHECKING_VSWITCH_CONTROLLER;
 
+        public override bool CanRun()
+        {
+            if (Helpers.StockholmOrGreater(Host))
+                return false;
+
+            if (_pool == null || !_pool.vSwitchController())
+                return false;
+
+            if (_newVersion != null && !Helpers.NaplesOrGreater(Host))
+                return false;
+
+            return true;
+        }
+
         protected override Problem RunHostCheck()
         {
-            if (!_pool.vSwitchController() || Helpers.StockholmOrGreater(Host))
-                return null;
-
             //update case
             if (_newVersion != null)
             {
