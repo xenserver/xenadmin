@@ -200,11 +200,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             //vSwitch controller check - for each pool
-            var vswitchChecks = (from Host server in SelectedMasters.Where(m => !Helpers.StockholmOrGreater(m))
-                select new VSwitchControllerCheck(server, InstallMethodConfig, ManualUpgrade) as Check).ToList();
+            var vSwitchChecks = (from Host server in SelectedMasters
+                let check = new VSwitchControllerCheck(server, InstallMethodConfig, ManualUpgrade)
+                where check.CanRun()
+                select check as Check).ToList();
 
-            if (vswitchChecks.Count > 0)
-                groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vswitchChecks));
+            if (vSwitchChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
             
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
@@ -246,12 +248,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
-            var pvChecks = new List<Check>();
-            foreach (Pool pool in SelectedPools.Where(p => !Helpers.QuebecOrGreater(p.Connection)))
-            {
-                if (pool.Connection.Resolve(pool.master) != null)
-                    pvChecks.Add(new PVGuestsCheck(pool, true, ManualUpgrade, InstallMethodConfig)); 
-            }
+            var pvChecks = (from Host server in SelectedMasters
+                let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
             if (pvChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
