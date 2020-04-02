@@ -62,8 +62,6 @@ set CTXSIGN=C:\ctxsign2\ctxsign.exe
 if "%sbe%"=="true" (
   echo "Signing in SBE"
 
-  %CTXSIGN% --help
-
   echo %CTXSIGN%  --authorise --workerID %worker% --orchID %worker% --jobID XenServerWindowsLegacyPVTools_signing ^
     --task XenCenter-%global_build_number% --debug
 
@@ -86,12 +84,19 @@ if "%sbe%"=="true" (
     %CTXSIGN% --sign --key XenServer.NET_KEY --cross-sign --pagehashes yes --type Authenticode ^
         --description "%descr%" "%thefile%"
 
+    echo %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --cross-sign --pagehashes yes ^
+       --authenticode-SHA256 --authenticode-append "%thefile%"
+
     date /t && time /t
-    %CTXSIGN% --sign --authenticode-append --authenticode-SHA256 --key XenServerSHA256.NET_KEY ^
-      --cross-sign --pagehashes yes "%thefile%"
+    %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --cross-sign --pagehashes yes ^
+       --authenticode-SHA256 --authenticode-append "%thefile%"
   ) else (
-    %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --pagehashes yes --type Authenticode-SHA256 ^
-        --description "%descr%" "%thefile%"
+    echo %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --pagehashes yes --type Authenticode ^
+      --authenticode-SHA256 --description "%descr%" "%thefile%"
+
+    date /t && time /t
+    %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --pagehashes yes --type Authenticode ^
+      --authenticode-SHA256 --description "%descr%" "%thefile%"
   )
   %CTXSIGN% --end
   echo.
