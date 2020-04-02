@@ -61,11 +61,23 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override string Description => Messages.CHECKING_POWER_ON_MODE;
 
+        public override bool CanRun()
+        {
+            if (Helpers.StockholmOrGreater(Host))
+                return false;
+
+            if (Host == null || string.IsNullOrEmpty(Host.power_on_mode))
+                //check for disabled as this is when the check would raise an eyebrow
+                return false;
+
+            if (_newVersion != null && !Helpers.NaplesOrGreater(Host))
+                return false;
+
+            return true;
+        }
+
         protected override Problem RunHostCheck()
         {
-            if (Host.power_on_mode != "iLO" || Helpers.StockholmOrGreater(Host))
-                return null;
-
             //update case
             if (_newVersion != null)
             {
