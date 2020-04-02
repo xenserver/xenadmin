@@ -76,7 +76,7 @@ namespace XenAdmin.Dialogs
         {
             // Check if vSwitch Controller is configured for the pool (CA-46299)
             Pool pool = Helpers.GetPoolOfOne(connection);
-            var vSwitchController = pool != null && pool.vSwitchController();
+            var vSwitchController = !Helpers.StockholmOrGreater(connection) && pool != null && pool.vSwitchController();
 
             if (vSwitchController) 
             {
@@ -203,21 +203,9 @@ namespace XenAdmin.Dialogs
             comboBoxNetwork.SelectedIndex = 0;
         }
 
-        private XenAPI.Network SelectedNetwork
-        {
-            get
-            {
-                return ((NetworkComboBoxItem)comboBoxNetwork.SelectedItem).Network;
-            }
-        }
+        private XenAPI.Network SelectedNetwork => (comboBoxNetwork.SelectedItem as NetworkComboBoxItem)?.Network;
 
-        private string SelectedMac
-        {
-            get
-            {
-                return radioButtonAutogenerate.Checked ? "" : promptTextBoxMac.Text;
-            }
-        }
+        private string SelectedMac => radioButtonAutogenerate.Checked ? "" : promptTextBoxMac.Text;
 
         public VIF NewVif()
         {
@@ -387,16 +375,7 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        internal override string HelpName
-        {
-            get
-            {
-                if (ExistingVif != null)
-                    return "EditVmNetworkSettingsDialog";
-                else
-                    return "VIFDialog";
-            }
-        }
+        internal override string HelpName => ExistingVif == null ? "VIFDialog" : "EditVmNetworkSettingsDialog";
     }
 
     public class NetworkComboBoxItem : IEquatable<NetworkComboBoxItem>

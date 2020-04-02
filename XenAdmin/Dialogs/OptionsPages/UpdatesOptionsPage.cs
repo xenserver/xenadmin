@@ -29,12 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Properties;
 using XenAdmin.Core;
@@ -49,11 +44,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         public UpdatesOptionsPage()
         {
             InitializeComponent();
-
-            build();
+            Build();
         }
 
-        private void build()
+        private void Build()
         {
             // XenCenter updates
             AllowXenCenterUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
@@ -66,64 +60,43 @@ namespace XenAdmin.Dialogs.OptionsPages
         public static void Log()
         {
             // XenCenter updates
-            log.Info("=== AllowXenCenterUpdates: " + Properties.Settings.Default.AllowXenCenterUpdates.ToString());
+            log.Info("=== AllowXenCenterUpdates: " + Properties.Settings.Default.AllowXenCenterUpdates);
 
             // XenServer updates
-            log.Info("=== AllowPatchesUpdates: " + Properties.Settings.Default.AllowPatchesUpdates.ToString());
-            log.Info("=== AllowXenServerUpdates: " + Properties.Settings.Default.AllowXenServerUpdates.ToString());
+            log.Info("=== AllowPatchesUpdates: " + Properties.Settings.Default.AllowPatchesUpdates);
+            log.Info("=== AllowXenServerUpdates: " + Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         #region IOptionsPage Members
 
         public void Save()
         {
-            bool refreshUpdatesTab = IsCheckForUpdatesRequired();
+            bool checkXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
+            bool checkPatchUpdates = AllowXenServerPatchesCheckBox.Checked != Properties.Settings.Default.AllowPatchesUpdates;
+            bool checkVersionUpdates = AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates;
 
-            // XenCenter updates
-            if (AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates)
+            if (checkXenCenterUpdates)
                 Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
 
-            // XenServer updates
-            if (AllowXenServerPatchesCheckBox.Checked != Properties.Settings.Default.AllowPatchesUpdates)
+            if (checkPatchUpdates)
                 Properties.Settings.Default.AllowPatchesUpdates = AllowXenServerPatchesCheckBox.Checked;
-            if (AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates)
+
+            if (checkVersionUpdates)
                 Properties.Settings.Default.AllowXenServerUpdates = AllowXenServerUpdatesCheckBox.Checked;
 
-            if(refreshUpdatesTab)
-            {
+            if(checkXenCenterUpdates || checkPatchUpdates || checkVersionUpdates)
                 Updates.CheckForUpdates(false, true);
-            }
-        }
-
-        /// <summary>
-        /// Returns true if at least one box has been changed in Updates Options. Otherwise returns false.
-        /// </summary>
-        /// <returns></returns>
-        private bool IsCheckForUpdatesRequired()
-        {
-            return (AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates) ||
-                   (AllowXenServerPatchesCheckBox.Checked != Properties.Settings.Default.AllowPatchesUpdates) ||
-                   (AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         #endregion
 
         #region IVerticalTab Members
 
-        public override string Text
-        {
-            get { return Messages.UPDATES; }
-        }
+        public override string Text => Messages.UPDATES;
 
-        public string SubText
-        {
-            get { return Messages.UPDATES_DESC; }
-        }
+        public string SubText => Messages.UPDATES_DESC;
 
-        public Image Image
-        {
-            get { return Resources._000_Patch_h32bit_16; }
-        }
+        public Image Image => Resources._000_Patch_h32bit_16;
 
         #endregion
     }

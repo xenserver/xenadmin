@@ -109,7 +109,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Forward)
-                HelpersGUI.FocusFirstControl(Controls);
+                NfsServerPathComboBox.Focus();
         }
 
         #endregion

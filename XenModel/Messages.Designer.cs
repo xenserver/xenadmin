@@ -7330,6 +7330,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vSwitch Controller check.
+        /// </summary>
+        public static string CHECKING_VSWITCH_CONTROLLER {
+            get {
+                return ResourceManager.GetString("CHECKING_VSWITCH_CONTROLLER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking vSwitch Controller configuration.
+        /// </summary>
+        public static string CHECKING_VSWITCH_CONTROLLER_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_VSWITCH_CONTROLLER_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking [XenCenter] version.
         /// </summary>
         public static string CHECKING_XENCENTER_VERSION {
@@ -11568,9 +11586,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to unable to determine failure reason.
         /// </summary>
-        public static string DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN {
+        public static string DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN {
             get {
-                return ResourceManager.GetString("DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN", resourceCulture);
+                return ResourceManager.GetString("DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN", resourceCulture);
             }
         }
         
@@ -15276,7 +15294,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following Vms could not be resumed:.
+        ///   Looks up a localized string similar to The following VMs could not be resumed:.
         /// </summary>
         public static string ERROR_DIALOG_RESUME_VM_TEXT {
             get {
@@ -19792,7 +19810,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server could not complete the import due to an unkown error..
+        ///   Looks up a localized string similar to The server could not complete the import due to an unknown error..
         /// </summary>
         public static string IMPORT_GENERIC_FAIL {
             get {
@@ -20191,7 +20209,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The [Xenserver] Template that you are attempting to import already exists in the selected pool..
+        ///   Looks up a localized string similar to The [XenServer] Template that you are attempting to import already exists in the selected pool..
         /// </summary>
         public static string IMPORT_TEMPLATE_ALREADY_EXISTS {
             get {
@@ -21046,7 +21064,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid hostname.
+        ///   Looks up a localized string similar to Invalid disk size.
+        /// </summary>
+        public static string INVALID_DISK_SIZE {
+            get {
+                return ResourceManager.GetString("INVALID_DISK_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid host name.
         /// </summary>
         public static string INVALID_HOST {
             get {
@@ -21055,7 +21082,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid disk size.
+        ///   Looks up a localized string similar to Invalid number.
         /// </summary>
         public static string INVALID_NUMBER {
             get {
@@ -21401,7 +21428,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn more.
+        ///   Looks up a localized string similar to Learn more....
         /// </summary>
         public static string LEARN_MORE {
             get {
@@ -24582,6 +24609,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowed VLAN range: {0} to {1}.
+        /// </summary>
+        public static string NETW_DETAILS_VLAN_RANGE {
+            get {
+                return ResourceManager.GetString("NETW_DETAILS_VLAN_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure the new network.
         /// </summary>
         public static string NETW_EXTERNAL_DETAILS_TITLE {
@@ -24632,6 +24668,15 @@ namespace XenAdmin {
         public static string NETW_TYPE_SELECT_TITLE {
             get {
                 return ResourceManager.GetString("NETW_TYPE_SELECT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VLAN 0 will receive all traffic not on any other VLAN.
+        /// </summary>
+        public static string NETW_VLAN_ZERO {
+            get {
+                return ResourceManager.GetString("NETW_VLAN_ZERO", resourceCulture);
             }
         }
         
@@ -25637,7 +25682,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s linux pack installation state differs from that of the master.
+        ///   Looks up a localized string similar to This server&apos;s Linux pack installation state differs from that of the master.
         /// </summary>
         public static string NEWPOOL_LINUXPACK {
             get {
@@ -25749,7 +25794,7 @@ namespace XenAdmin {
         ///
         ///As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
         ///
-        ///When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the user name, the password and the path to a directory that will be [rest of string was truncated]&quot;;.
+        ///When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will b [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_CIFS_BLURB {
             get {
@@ -26251,7 +26296,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to If you have access to a Network Appliance (NetApp) filer with sufficient disk space, running a version of Data ONTAP 7G (version 7.2 or greater), you can configure a custom NetApp Storage Repository. 
         ///
-        ///The driver uses the ZAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
+        ///The driver uses the XAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
         ///
         ///VM cloning uses the snapshot and clone capabilities of the filer to provide high performance and to e [rest of string was truncated]&quot;;.
         /// </summary>
@@ -26437,7 +26482,7 @@ namespace XenAdmin {
         ///
         ///As NFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
         ///
-        ///When you configure an NFS storage repository, you simply provide the hostname or IP address of the NFS server and the path to a directory that will be used to contain the storage reposit [rest of string was truncated]&quot;;.
+        ///When you configure an NFS storage repository, you simply provide the host name or IP address of the NFS server and the path to a directory that will be used to contain the storage reposi [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_VHDONFS_BLURB {
             get {
@@ -27695,9 +27740,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The VM is not agile. Restart cannot be guaranteed..
         /// </summary>
-        public static string NOT_AGILE_UNKOWN {
+        public static string NOT_AGILE_UNKNOWN {
             get {
-                return ResourceManager.GetString("NOT_AGILE_UNKOWN", resourceCulture);
+                return ResourceManager.GetString("NOT_AGILE_UNKNOWN", resourceCulture);
             }
         }
         
@@ -29723,7 +29768,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shut down some VMs and then press Retry to resume the process..
         /// </summary>
         public static string PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY {
             get {
@@ -30148,7 +30193,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed as of {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems..
         /// </summary>
         public static string POOL_HAS_PV_GUEST_WARNING {
             get {
@@ -30635,6 +30680,33 @@ namespace XenAdmin {
         public static string PROBLEM_VMPROBLEM_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_VMPROBLEM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for the vSwitch Controller has been removed in {1}..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING", resourceCulture);
             }
         }
         
@@ -33940,7 +34012,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a valid hostname or IP address and try again..
+        ///   Looks up a localized string similar to Enter a valid host name or IP address and try again..
         /// </summary>
         public static string SOLUTION_NOT_FOUND {
             get {
@@ -34008,15 +34080,6 @@ namespace XenAdmin {
         public static string SR_CANNOT_BE_DESTROYED_WITH_XC {
             get {
                 return ResourceManager.GetString("SR_CANNOT_BE_DESTROYED_WITH_XC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be detached with [XenCenter]..
-        /// </summary>
-        public static string SR_CANNOT_BE_DETACHED_WITH_XC {
-            get {
-                return ResourceManager.GetString("SR_CANNOT_BE_DETACHED_WITH_XC", resourceCulture);
             }
         }
         
@@ -36719,15 +36782,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_OUT_OF_DATE_TOOLS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_OUT_OF_DATE_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the checkboxes for each server you want to update. Select a pool checkbox to select all the available servers in the pool..
-        /// </summary>
-        public static string UPDATES_WIZARD_PAGE1_TOPTEXT {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_PAGE1_TOPTEXT", resourceCulture);
             }
         }
         
@@ -39667,24 +39721,6 @@ namespace XenAdmin {
         public static string WIZARD_BUTTON_NEXT {
             get {
                 return ResourceManager.GetString("WIZARD_BUTTON_NEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your new network will be mapped to an existing physical network interface and assigned a VLAN number to use on that interface. You can select the physical interface you would like to use below..
-        /// </summary>
-        public static string WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL {
-            get {
-                return ResourceManager.GetString("WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check the box below if you would like to automatically add this network to new VMs..
-        /// </summary>
-        public static string WIZARD_DESC_NETWORK_SETTINGS_INTERNAL {
-            get {
-                return ResourceManager.GetString("WIZARD_DESC_NETWORK_SETTINGS_INTERNAL", resourceCulture);
             }
         }
         

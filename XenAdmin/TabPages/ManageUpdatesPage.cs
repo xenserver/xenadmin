@@ -66,7 +66,9 @@ namespace XenAdmin.TabPages
         private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
-        private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
+
+        private volatile bool _buildInProgress;
+        private volatile bool _buildRequired;
 
         public ManageUpdatesPage()
         {
@@ -74,7 +76,6 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
-            m_updateCollectionChangedWithInvoke = Program.ProgramInvokeHandler(UpdatesCollectionChanged);
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
 
@@ -84,6 +85,7 @@ namespace XenAdmin.TabPages
                 checksQueue++;
                 byHostToolStripMenuItem.Checked = Properties.Settings.Default.ShowUpdatesByServer;
                 byUpdateToolStripMenuItem.Checked = !Properties.Settings.Default.ShowUpdatesByServer;
+                ToggleView();
             }
             finally
             {
@@ -101,7 +103,7 @@ namespace XenAdmin.TabPages
 
         protected override void RegisterEventHandlers()
         {
-            Updates.RegisterCollectionChanged(m_updateCollectionChangedWithInvoke);
+            Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
@@ -109,7 +111,7 @@ namespace XenAdmin.TabPages
 
         protected override void DeregisterEventHandlers()
         {
-            Updates.DeregisterCollectionChanged(m_updateCollectionChangedWithInvoke);
+            Updates.DeregisterCollectionChanged(UpdatesCollectionChanged);
             Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
@@ -121,25 +123,16 @@ namespace XenAdmin.TabPages
 
         private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.AssertOnEventThread();
-            
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
                     Rebuild(); // rebuild entire alert list to ensure filtering and sorting
                     break;
                 case CollectionChangeAction.Remove:
-                    Alert a = e.Element as Alert;
-                    if (a != null)
-                    {
-                        RemoveUpdateRow(a);
-                    }
-                    else
-                    {
-                        var range = e.Element as List<Alert>;
-                        if (range != null)
-                            Rebuild();
-                    }
+                    if (e.Element is Alert a)
+                        Program.Invoke(Program.MainWindow, () => RemoveUpdateRow(a));
+                    else if (e.Element is List<Alert>)
+                        Rebuild();
                     break;
             }
         }
@@ -252,18 +245,40 @@ namespace XenAdmin.TabPages
 
         private void Rebuild()
         {
-            Program.AssertOnEventThread();
-
-            if (!Visible || checksQueue > 0)
+            if (_buildInProgress)
+            {
+                _buildRequired = true;
                 return;
+            }
 
-            SetFilterLabel();
-            ToggleTopWarningVisibility();
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (!Visible || checksQueue > 0)
+                    return;
 
-            if (byUpdateToolStripMenuItem.Checked)
-                RebuildUpdateView();
-            else
-                RebuildHostView();
+                try
+                {
+                    _buildInProgress = true;
+
+                    SetFilterLabel();
+                    ToggleTopWarningVisibility();
+
+                    if (byUpdateToolStripMenuItem.Checked)
+                        RebuildUpdateView();
+                    else
+                        RebuildHostView();
+                }
+                finally
+                {
+                    _buildInProgress = false;
+
+                    if (_buildRequired)
+                    {
+                        _buildRequired = false;
+                        Rebuild();
+                    }
+                }
+            });
         }
 
         private class UpdatePageByHostDataGridView : CollapsingPoolHostDataGridView
@@ -360,16 +375,13 @@ namespace XenAdmin.TabPages
             // fill data into row
             private void UpdateDetails()
             {
-                Pool pool = Tag as Pool;
-
-                if (pool != null)
+                if (Tag is Pool pool)
                 {
                     Host master = pool.Connection.Resolve(pool.master);
                     SetCollapseIcon();
                     _poolIconCell.Value = Images.GetImage16For(pool);
 
-                    DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
-                    if (nc != null)
+                    if (_nameCell is DataGridViewTextAndImageCell nc)
                         nc.Image = null;
 
                     _nameCell.Value = pool.Name();
@@ -390,51 +402,42 @@ namespace XenAdmin.TabPages
                         _statusCell.Value = String.Empty;
                     }
                 }
-                
-                else
+                else if (Tag is Host host)
                 {
-                    Host host = Tag as Host;
-                    if (host != null)
+                    var hostRequired = RequiredUpdatesForHost(host);
+                    var hostInstalled = InstalledUpdatesForHost(host);
+                    var outOfDate = hostRequired.Length > 0;
+
+                    DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
+
+                    if (_hasPool && nc != null) // host in pool
                     {
-                        var hostRequired = RequiredUpdatesForHost(host);
-                        var hostInstalled = InstalledUpdatesForHost(host);
-                        var outOfDate = hostRequired.Length > 0;
-
-                        DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
-
-                        if (_hasPool && nc != null) // host in pool
+                        nc.Image = Images.GetImage16For(host);
+                        _statusCell.Value = String.Empty;
+                    }
+                    else if (!_hasPool && nc != null) // standalone host
+                    {
+                        _poolIconCell.Value = Images.GetImage16For(host);
+                        nc.Image = null;
+                        if (IsFullyPopulated)
                         {
-                            nc.Image = Images.GetImage16For(host);
+                            _patchingStatusCell.Value = outOfDate
+                                ? Properties.Resources._000_error_h32bit_16
+                                : Properties.Resources._000_Tick_h32bit_16;
+                            _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                        }
+                        else
+                        {
                             _statusCell.Value = String.Empty;
                         }
-                        else if (!_hasPool && nc != null) // standalone host
-                        {
-                            _poolIconCell.Value = Images.GetImage16For(host);
-                            nc.Image = null;
-                            if (IsFullyPopulated)
-                            {
-                                _patchingStatusCell.Value = outOfDate
-                                    ? Properties.Resources._000_error_h32bit_16
-                                    : Properties.Resources._000_Tick_h32bit_16;
-                                _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
-                            }
-                            else
-                            {
-                                _statusCell.Value = String.Empty;
-                            }
-                        }
-
-                        _nameCell.Value = host.Name();
-                        _versionCell.Value = host.ProductVersionTextShort();
-                        _installedUpdateCell.Value = hostInstalled;
-                        if (IsFullyPopulated)
-                            _requiredUpdateCell.Value = hostRequired;
-                        else
-                            _requiredUpdateCell.Value = String.Empty;
                     }
+
+                    _nameCell.Value = host.Name();
+                    _versionCell.Value = host.ProductVersionTextShort();
+                    _installedUpdateCell.Value = hostInstalled;
+                    _requiredUpdateCell.Value = IsFullyPopulated ? hostRequired : string.Empty;
                 }
             }
-
         }
 
         private static string RequiredUpdatesForHost(Host host)
@@ -663,7 +666,6 @@ namespace XenAdmin.TabPages
         /// <summary>
         /// Runs all the current filters on the alert to determine if it should be shown in the list or not.
         /// </summary>
-        /// <param name="alert"></param>
         private bool FilterAlert(Alert alert)
         {
             var hosts = new List<string>();
@@ -809,7 +811,7 @@ namespace XenAdmin.TabPages
 
             if (!string.IsNullOrEmpty(alert.WebPageLabel))
             {
-                var fix = new ToolStripMenuItem(alert.FixLinkText);
+                var fix = new ToolStripMenuItem(alert.FixLinkText) {ToolTipText = alert.WebPageLabel};
                 fix.Click += ToolStripMenuItemGoToWebPage_Click;
                 items.Add(fix);
             }
@@ -855,7 +857,6 @@ namespace XenAdmin.TabPages
         /// After the Delete action is completed the page is refreshed and the restore dismissed 
         /// button is enabled again.
         /// </summary>
-        /// <param name="sender"></param>
         private void DeleteAllAlertsAction_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, () =>
@@ -881,8 +882,6 @@ namespace XenAdmin.TabPages
         /// If the answer of the user to the dialog is YES, then make a list with all the updates and call 
         /// DismissUpdates on that list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void dismissAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult result = DialogResult.Yes;
@@ -929,8 +928,6 @@ namespace XenAdmin.TabPages
         /// If the answer of the user to the dialog is YES, then make a list of all the selected rows
         /// and call DismissUpdates on that list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void dismissSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!Properties.Settings.Default.DoNotConfirmDismissUpdates)
@@ -1428,19 +1425,21 @@ namespace XenAdmin.TabPages
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
 
-        private void byUpdateToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        private void byUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (byUpdateToolStripMenuItem.Checked)
+            if (!byUpdateToolStripMenuItem.Checked)
             {
+                byUpdateToolStripMenuItem.Checked = true;
                 byHostToolStripMenuItem.Checked = false;
                 ToggleView();
             }
         }
 
-        private void byHostToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        private void byHostToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (byHostToolStripMenuItem.Checked)
+            if (!byHostToolStripMenuItem.Checked)
             {
+                byHostToolStripMenuItem.Checked = true;
                 byUpdateToolStripMenuItem.Checked = false;
                 ToggleView();
             }

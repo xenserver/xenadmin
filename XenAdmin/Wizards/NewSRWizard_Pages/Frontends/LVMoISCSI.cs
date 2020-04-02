@@ -122,7 +122,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             HelpersGUI.PerformIQNCheck();
 
             if (direction == PageLoadedDirection.Forward)
-                HelpersGUI.FocusFirstControl(Controls);
+                textBoxIscsiHost.Focus();
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)

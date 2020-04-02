@@ -74,7 +74,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Forward)
-                HelpersGUI.FocusFirstControl(Controls);
+                textBoxName.Focus();
         }
 
         public override void PopulatePage()

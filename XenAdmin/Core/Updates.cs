@@ -66,17 +66,11 @@ namespace XenAdmin.Core
         public const string IgnorePatchKey = "XenCenter.IgnorePatches";
         public const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
 
-        public static IEnumerable<Alert> UpdateAlerts
-        {
-            get { return updateAlerts; }
-        }
+        public static IEnumerable<Alert> UpdateAlerts => updateAlerts;
 
-        public static int UpdateAlertsCount
-        {
-            get { return updateAlerts.Count; }
-        }
+        public static int UpdateAlertsCount => updateAlerts.Count;
 
-        private static void AddUpate(Alert update)
+        private static void AddUpdate(Alert update)
         {
             try
             {
@@ -116,7 +110,6 @@ namespace XenAdmin.Core
         /// Dismisses the updates in the given list i.e. they are added in the 
         /// other_config list of each pool and removed from the Updates.UpdateAlerts list.
         /// </summary>
-        /// <param name="toBeDismissed"></param>
         public static void DismissUpdates(List<Alert> toBeDismissed)
         {
             if (toBeDismissed.Count == 0)
@@ -127,7 +120,7 @@ namespace XenAdmin.Core
                 if (!Alert.AllowedToDismiss(connection))
                     continue;
 
-                XenAPI.Pool pool = Helpers.GetPoolOfOne(connection);
+                Pool pool = Helpers.GetPoolOfOne(connection);
                 if (pool == null)
                     continue;
 
@@ -135,43 +128,43 @@ namespace XenAdmin.Core
 
                 foreach (Alert alert in toBeDismissed)
                 {
-                  
-                    if (alert is XenServerPatchAlert)
+                    if (alert is XenServerPatchAlert patchAlert)
                     {
-
                         if (other_config.ContainsKey(IgnorePatchKey))
                         {
                             List<string> current = new List<string>(other_config[IgnorePatchKey].Split(','));
-                            if (current.Contains(((XenServerPatchAlert)alert).Patch.Uuid, StringComparer.OrdinalIgnoreCase))
+                            if (current.Contains(patchAlert.Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                                 continue;
-                            current.Add(((XenServerPatchAlert)alert).Patch.Uuid);
+                            current.Add(patchAlert.Patch.Uuid);
                             other_config[IgnorePatchKey] = string.Join(",", current.ToArray());
                         }
                         else
                         {
-                            other_config.Add(IgnorePatchKey, ((XenServerPatchAlert)alert).Patch.Uuid);
+                            other_config.Add(IgnorePatchKey, patchAlert.Patch.Uuid);
                         }
                     }
-                    if (alert is XenServerVersionAlert)
+
+                    if (alert is XenServerVersionAlert versionAlert)
                     {
 
                         if (other_config.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
                         {
                             List<string> current = new List<string>(other_config[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
-                            if (current.Contains(((XenServerVersionAlert)alert).Version.Version.ToString()))
+                            if (current.Contains(versionAlert.Version.Version.ToString()))
                                 continue;
-                            current.Add(((XenServerVersionAlert)alert).Version.Version.ToString());
+                            current.Add(versionAlert.Version.Version.ToString());
                             other_config[LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
                         }
                         else
                         {
-                            other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, ((XenServerVersionAlert)alert).Version.Version.ToString());
+                            other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, versionAlert.Version.Version.ToString());
                         }                       
                     }
-                    Updates.RemoveUpdate(alert);
+
+                    RemoveUpdate(alert);
                 }
 
-                XenAPI.Pool.set_other_config(connection.Session, pool.opaque_ref, other_config);
+                Pool.set_other_config(connection.Session, pool.opaque_ref, other_config);
             }
         }
 
@@ -198,7 +191,6 @@ namespace XenAdmin.Core
                 Properties.Settings.Default.AllowPatchesUpdates || force || forceRefresh)
             {
                 var action = CreateDownloadUpdatesXmlAction(
-                    CheckForUpdatesUrl,
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
                     Properties.Settings.Default.AllowPatchesUpdates || force);
@@ -212,12 +204,14 @@ namespace XenAdmin.Core
             }
         }
 
-        public static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(string checkForUpdatesUrl, bool checkForXenCenter = false, bool checkForServerVersion = false, bool checkForPatches = false)
+        public static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(bool checkForXenCenter = false,
+            bool checkForServerVersion = false, bool checkForPatches = false)
         {
             string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", BrandManager.BRAND_CONSOLE, BrandManager.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
             string userAgentId = GetUniqueIdHash();
 
-            return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches, userAgent, userAgentId, checkForUpdatesUrl);
+            return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches,
+                userAgent, userAgentId, CheckForUpdatesUrl);
         }
 
         internal static string GetUniqueIdHash()
@@ -257,7 +251,7 @@ namespace XenAdmin.Core
             if (Helpers.CommonCriteriaCertificationRelease)
                 return false;
 
-            var action = CreateDownloadUpdatesXmlAction(CheckForUpdatesUrl, true, true, true);
+            var action = CreateDownloadUpdatesXmlAction(true, true, true);
             action.Completed += actionCompleted;
 
             if (CheckForUpdatesStarted != null)
@@ -380,8 +374,8 @@ namespace XenAdmin.Core
 
             if (alerts.Count == 0)
             {
-                log.Info(string.Format("Not alerting XenCenter update - latest = {0},  latestcr = {1}, detected = {2}", 
-                    latest != null ? latest.VersionAndLang : "", latestCr != null ? latestCr.VersionAndLang : "", Program.VersionAndLanguage));
+                log.InfoFormat("Not alerting XenCenter update - latest = {0},  latestcr = {1}, detected = {2}",
+                    latest != null ? latest.VersionAndLang : "", latestCr != null ? latestCr.VersionAndLang : "", Program.VersionAndLanguage);
             }
 
             return alerts;
@@ -453,7 +447,7 @@ namespace XenAdmin.Core
 
                         var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host)).ToList();
         
-                        if (noPatchHosts.Count() == hosts.Count)
+                        if (noPatchHosts.Count == hosts.Count)
                             alert.IncludeConnection(xenConnection);
                         else
                             alert.IncludeHosts(noPatchHosts);
@@ -519,8 +513,6 @@ namespace XenAdmin.Core
         /// If parameter is not null, it returns the minimum XenCenter version if it is greater than the current XC version,
         /// or null, if the minimum XC version couldn't be found or the current XC version is enough.
         /// </summary>
-        /// <param name="serverVersion"></param>
-        /// <returns></returns>
         public static XenCenterVersion GetRequiredXenCenterVersion(XenServerVersion serverVersion)
         {
             if (XenCenterVersions.Count == 0)
@@ -544,11 +536,10 @@ namespace XenAdmin.Core
         }
         
         /// <summary>
-        /// This method returns the minimal set of patches for a host if this class already has information about them. Otherwise it returns empty list.
+        /// This method returns the minimal set of patches for a host if this class already has information about them.
+        /// Otherwise it returns empty list.
         /// Calling this function will not initiate a download or update.
         /// </summary>
-        /// <param name="host"></param>
-        /// <returns></returns>
         public static List<XenServerPatch> RecommendedPatchesForHost(Host host)
         {
             var recommendedPatches = new List<XenServerPatch>();
@@ -632,7 +623,7 @@ namespace XenAdmin.Core
 
             var minimalPatches = new List<XenServerPatch> {alert.Patch};
 
-            // if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
+            // if it's a version upgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
             if (updateTheNewVersion && alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
             {
                 minimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
@@ -659,7 +650,7 @@ namespace XenAdmin.Core
 
             var allPatches = new List<XenServerPatch> { alert.Patch };
 
-            // if it's a version updgrade the update sequence will be this patch (the upgrade) and the patches for the new version
+            // if it's a version upgrade the update sequence will be this patch (the upgrade) and the patches for the new version
             if (updateTheNewVersion && alert.NewServerVersion != null)
             {
                 var newVersionPatches = GetAllPatches(alert.NewServerVersion);
@@ -707,7 +698,6 @@ namespace XenAdmin.Core
         /// Returns a XenServerVersion if all hosts of the pool have the same version
         /// Returns null if it is unknown or they don't match
         /// </summary>
-        /// <returns></returns>
         private static XenServerVersion GetCommonServerVersionOfHostsInAConnection(IXenConnection connection, List<XenServerVersion> xsVersions)
         {
             if (connection == null || xsVersions == null)
@@ -829,7 +819,7 @@ namespace XenAdmin.Core
                 var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version
                     && (patch == null || !PatchCanBeInstalledOnHost(patch, host))).ToList();
 
-                if (outOfDateHosts.Count() == hosts.Count)
+                if (outOfDateHosts.Count == hosts.Count)
                     alert.IncludeConnection(xc);
                 else
                     alert.IncludeHosts(outOfDateHosts);
@@ -853,10 +843,10 @@ namespace XenAdmin.Core
         public static void CheckServerVersion()
         {
             var alerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
-            if (alerts == null || alerts.Count == 0)
+            if (alerts == null)
                 return;
 
-            alerts.ForEach(a => CheckUpdate(a));
+            alerts.ForEach(CheckUpdate);
         }
 
         public static void CheckServerPatches()
@@ -865,7 +855,7 @@ namespace XenAdmin.Core
             if (alerts == null)
                 return;
 
-            alerts.ForEach(a => CheckUpdate(a));
+            alerts.ForEach(CheckUpdate);
         }
 
         private static void CheckUpdate(XenServerUpdateAlert alert)
@@ -874,10 +864,14 @@ namespace XenAdmin.Core
 
             if (existingAlert != null && alert.CanIgnore)
                 RemoveUpdate(existingAlert);
-            else if (existingAlert != null)
-                ((XenServerUpdateAlert)existingAlert).CopyConnectionsAndHosts(alert);
+            else if (existingAlert is XenServerUpdateAlert updAlert)
+            {
+                RemoveUpdate(updAlert);
+                updAlert.CopyConnectionsAndHosts(alert);
+                AddUpdate(updAlert);
+            }
             else if (!alert.CanIgnore)
-                AddUpate(alert);
+                AddUpdate(alert);
         }
 
         public static void RestoreDismissedUpdates()
@@ -908,7 +902,7 @@ namespace XenAdmin.Core
 
         private static XenServerPatchAlert FindPatchAlert(Predicate<XenServerPatch> predicate)
         {
-            var existingAlert = FindUpdate(a => a is XenServerPatchAlert && predicate(((XenServerPatchAlert)a).Patch));
+            var existingAlert = FindUpdate(a => a is XenServerPatchAlert patchAlert && predicate(patchAlert.Patch));
             if (existingAlert != null)
                 return existingAlert as XenServerPatchAlert;
 

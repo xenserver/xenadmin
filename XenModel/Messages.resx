@@ -2628,6 +2628,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
     <value>Checking security protocol</value>
   </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch Controller check</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>Checking vSwitch Controller configuration</value>
+  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
   </data>
@@ -4117,7 +4123,7 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON" xml:space="preserve">
     <value>{0} - {1}</value>
   </data>
-  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN" xml:space="preserve">
+  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN" xml:space="preserve">
     <value>unable to determine failure reason</value>
   </data>
   <data name="DELAY_LOADING_COMBO_BOX_WAITING" xml:space="preserve">
@@ -5365,7 +5371,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Error Resuming VM on Server</value>
   </data>
   <data name="ERROR_DIALOG_RESUME_VM_TEXT" xml:space="preserve">
-    <value>The following Vms could not be resumed:</value>
+    <value>The following VMs could not be resumed:</value>
   </data>
   <data name="ERROR_DIALOG_RESUME_VM_TITLE" xml:space="preserve">
     <value>Error Resuming VM</value>
@@ -6939,7 +6945,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Review End User License Agreement (EULA)</value>
   </data>
   <data name="IMPORT_GENERIC_FAIL" xml:space="preserve">
-    <value>The server could not complete the import due to an unkown error.</value>
+    <value>The server could not complete the import due to an unknown error.</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>The exported files are incomplete or in an unrecognized format.</value>
@@ -7074,7 +7080,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Locate the file you want to import</value>
   </data>
   <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>The [Xenserver] Template that you are attempting to import already exists in the selected pool.</value>
+    <value>The [XenServer] Template that you are attempting to import already exists in the selected pool.</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new template</value>
@@ -7310,11 +7316,14 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>Interfaces: {0}</value>
   </data>
+  <data name="INVALID_DISK_SIZE" xml:space="preserve">
+    <value>Invalid disk size</value>
+  </data>
   <data name="INVALID_HOST" xml:space="preserve">
-    <value>Invalid hostname</value>
+    <value>Invalid host name</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
-    <value>Invalid disk size</value>
+    <value>Invalid number</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>Invalid parameter</value>
@@ -7444,7 +7453,7 @@ Size: {3}</value>
     <value>License Manager</value>
   </data>
   <data name="LEARN_MORE" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Learn more...</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed.</value>
@@ -8678,6 +8687,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETW_DETAILS_VLAN_NUMBER_IN_USE" xml:space="preserve">
     <value>This VLAN number is already in use</value>
   </data>
+  <data name="NETW_DETAILS_VLAN_RANGE" xml:space="preserve">
+    <value>Allowed VLAN range: {0} to {1}</value>
+  </data>
   <data name="NETW_EXTERNAL_DETAILS_TITLE" xml:space="preserve">
     <value>Configure the new network</value>
   </data>
@@ -8695,6 +8707,9 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NETW_TYPE_SELECT_TITLE" xml:space="preserve">
     <value>Choose the type of network to create</value>
+  </data>
+  <data name="NETW_VLAN_ZERO" xml:space="preserve">
+    <value>VLAN 0 will receive all traffic not on any other VLAN</value>
   </data>
   <data name="NEVER" xml:space="preserve">
     <value>Never</value>
@@ -8754,7 +8769,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>This server does not have the same license as the pool master</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
-    <value>This server's linux pack installation state differs from that of the master</value>
+    <value>This server's Linux pack installation state differs from that of the master</value>
   </data>
   <data name="NEWPOOL_MASTER_CONNECTING" xml:space="preserve">
     <value>The master is still connecting</value>
@@ -8791,7 +8806,7 @@ You should only proceed if you have verified that these settings are correct.</v
 
 As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure a SMB storage repository, you simply provide the hostname or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
+When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you want to attach to your host or pool.</value>
@@ -8972,7 +8987,7 @@ Do you want to reattach the SR?</value>
   <data name="NEWSR_NETAPP_BLURB" xml:space="preserve">
     <value>If you have access to a Network Appliance (NetApp) filer with sufficient disk space, running a version of Data ONTAP 7G (version 7.2 or greater), you can configure a custom NetApp Storage Repository. 
 
-The driver uses the ZAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
+The driver uses the XAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
 
 VM cloning uses the snapshot and clone capabilities of the filer to provide high performance and to ensure compatibility with existing ONTAP filer management tools.</value>
   </data>
@@ -9038,7 +9053,7 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
 
 As NFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure an NFS storage repository, you simply provide the hostname or IP address of the NFS server and the path to a directory that will be used to contain the storage repository. The NFS server must be configured to export the specified path to all servers in the pool.</value>
+When you configure an NFS storage repository, you simply provide the host name or IP address of the NFS server and the path to a directory that will be used to contain the storage repository. The NFS server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_VHDONFS_TYPE_NAME" xml:space="preserve">
     <value>NFS</value>
@@ -9611,7 +9626,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_AGILE_SR_NOT_SHARED" xml:space="preserve">
     <value>The VM is using a non-shared SR. Restart cannot be guaranteed.</value>
   </data>
-  <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
+  <data name="NOT_AGILE_UNKNOWN" xml:space="preserve">
     <value>The VM is not agile. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
@@ -10342,7 +10357,7 @@ File not found</value>
     <value>Server '{0}' could not be evacuated because there were no servers available to accommodate all the VMs being migrated from this server. Please reboot the other servers that are pending a reboot following the update installation, and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
-    <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shutdown some VMs and then press Retry to resume the process.</value>
+    <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shut down some VMs and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing [XenServer] on '{0}'...</value>
@@ -10494,7 +10509,7 @@ Please reconnect the host and try again</value>
     <value>This pool has no shared storage</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests has been removed as of {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
+    <value>{0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems.</value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -10585,6 +10600,15 @@ Please reconnect the host and try again</value>
   </data>
   <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
     <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the vSwitch Controller has been removed in {1}.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information.</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>The MAC address entered has already been assigned to the VM:
@@ -11763,7 +11787,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Please wait and then try again.</value>
   </data>
   <data name="SOLUTION_NOT_FOUND" xml:space="preserve">
-    <value>Enter a valid hostname or IP address and try again.</value>
+    <value>Enter a valid host name or IP address and try again.</value>
   </data>
   <data name="SOLUTION_NO_PERMISSION" xml:space="preserve">
     <value>Try again with a more privileged user account.</value>
@@ -11838,9 +11862,6 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
     <value>This SR cannot be destroyed with [XenCenter].</value>
-  </data>
-  <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be detached with [XenCenter].</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
     <value>This SR cannot be forgotten with [XenCenter].</value>
@@ -12660,9 +12681,6 @@ Please check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
     <value>{0}: The VM {1} cannot be suspended until it has up to date [Citrix VM Tools].</value>
-  </data>
-  <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
-    <value>Select the checkboxes for each server you want to update. Select a pool checkbox to select all the available servers in the pool.</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: The update has already been applied to this server.  This server will be skipped.</value>
@@ -13697,12 +13715,6 @@ Schedule:
   </data>
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>&amp;Next &gt;</value>
-  </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL" xml:space="preserve">
-    <value>Your new network will be mapped to an existing physical network interface and assigned a VLAN number to use on that interface. You can select the physical interface you would like to use below.</value>
-  </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_INTERNAL" xml:space="preserve">
-    <value>Check the box below if you would like to automatically add this network to new VMs.</value>
   </data>
   <data name="WIZARD_INTERNAL_ERROR" xml:space="preserve">
     <value>There was an internal error completing this wizard. Please see the logs for more information.</value>

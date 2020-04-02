@@ -218,11 +218,6 @@ namespace XenAPI
             return null;
         }
 
-        public bool IsDetachable()
-        {
-            return !IsDetached() && !HasRunningVMs() && CanCreateWithXenCenter();
-        }
-
         /// <summary>
         /// Can create with XC, or is citrix storage link gateway. Special case alert!
         /// </summary>

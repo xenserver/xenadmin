@@ -997,7 +997,7 @@
     <value>ヘルス チェック設定の転送</value>
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
-    <value>'{0}' 上の統合された GPU パススルーの更新 </value>
+    <value>'{0}' 上の統合された GPU パススルーの更新</value>
   </data>
   <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
     <value>アップロード エラー。パッチはアップロードされましたが、ホストで見つかりません。</value>
@@ -4110,7 +4110,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON" xml:space="preserve">
     <value>{0} - {1}</value>
   </data>
-  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN" xml:space="preserve">
+  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN" xml:space="preserve">
     <value>失敗理由を特定できません</value>
   </data>
   <data name="DELAY_LOADING_COMBO_BOX_WAITING" xml:space="preserve">
@@ -5943,7 +5943,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>メモリ</value>
   </data>
   <data name="GENERAL_HEADING_MEMORY_VCPUS" xml:space="preserve">
-    <value>メモリと VCPU</value>
+    <value>メモリと vCPU</value>
   </data>
   <data name="GENERAL_HEADING_STATUS" xml:space="preserve">
     <value>状態</value>
@@ -7574,6 +7574,9 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
     <value>[XenServer] Express をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
+  </data>
+  <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
+    <value>{0} より前のサーバーにライセンスを適用する場合、一度に 1 つのサーバーのみを選択する必要があります。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
@@ -9594,7 +9597,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOT_AGILE_SR_NOT_SHARED" xml:space="preserve">
     <value>この VM の SR は共有されていません。再起動は保証されません。</value>
   </data>
-  <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
+  <data name="NOT_AGILE_UNKNOWN" xml:space="preserve">
     <value>この VM はアジャイルではありません。再起動は保証されません。</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
@@ -12623,9 +12626,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
     <value>{0}: 最新の [Citrix VM Tools] がインストールされるまで、VM {1} を一時停止することはできません。</value>
   </data>
-  <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
-    <value>アップデート対象のサーバーのチェックボックスをオンにしてください。プール内で使用可能なすべてのサーバーをアップデートするには、プールのチェックボックスをオンにします。</value>
-  </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: アップデートはこのサーバーに適用済みです。このサーバーはスキップされます。</value>
   </data>
@@ -13021,10 +13021,10 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>Mbps</value>
   </data>
   <data name="VAL_MICSEC" xml:space="preserve">
-    <value>マイクロ秒</value>
+    <value>μs</value>
   </data>
   <data name="VAL_MILSEC" xml:space="preserve">
-    <value>ミリ秒</value>
+    <value>ms</value>
   </data>
   <data name="VAL_MILWATT" xml:space="preserve">
     <value>mW</value>
@@ -13042,7 +13042,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>0.0</value>
   </data>
   <data name="VAL_SEC" xml:space="preserve">
-    <value>秒</value>
+    <value>s</value>
   </data>
   <data name="VAL_TERB" xml:space="preserve">
     <value>TB</value>
@@ -13418,7 +13418,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>この VM にはパススルー GPU が割り当てられています。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
-    <value>メモリや VCPU への変更は、VM の再起動後に反映されます。</value>
+    <value>メモリや vCPU への変更は、VM の再起動後に反映されます。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE" xml:space="preserve">
     <value>VM の全般設定の変更</value>

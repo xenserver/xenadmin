@@ -119,7 +119,7 @@ namespace XenAdmin.Controls
 
             if (!decimal.TryParse(DiskSizeNumericUpDown.Text.Trim(), out decimal result) || result < 0)
             {
-                SetError(Messages.INVALID_NUMBER);
+                SetError(Messages.INVALID_DISK_SIZE);
                 IsSizeValid = false;
                 return;
             }
@@ -142,7 +142,7 @@ namespace XenAdmin.Controls
 
             if (SelectedSize > DEFAULT_MAXIMUM)
             {
-                SetError(Messages.INVALID_NUMBER);
+                SetError(Messages.INVALID_DISK_SIZE);
                 IsSizeValid = false;
                 return;
             }
