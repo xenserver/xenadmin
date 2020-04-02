@@ -345,6 +345,9 @@
   <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
     <value>StorageLink</value>
   </data>
+  <data name="Label-SR.SRTypes-dummy" xml:space="preserve">
+    <value>未知</value>
+  </data>
   <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
     <value>弹性块存储</value>
   </data>
@@ -389,6 +392,9 @@
   </data>
   <data name="Label-SR.SRTypes-shm" xml:space="preserve">
     <value>本地性能监视</value>
+  </data>
+  <data name="Label-SR.SRTypes-tmpfs" xml:space="preserve">
+    <value>未知</value>
   </data>
   <data name="Label-SR.SRTypes-udev" xml:space="preserve">
     <value>udev</value>

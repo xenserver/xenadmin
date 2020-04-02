@@ -65,18 +65,22 @@ mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 
 source ${REPO}/Branding/branding.sh
-source ${REPO}/mk/re-branding.sh $1
+source ${REPO}/scripts/re-branding.sh $1
 
 #packages sources
+mkdir_clean ${SCRATCH_DIR}/SOURCES
 cd ${REPO}
 gitCommit=`git rev-parse HEAD`
-git archive --format=zip -o "_output/${BRANDING_BRAND_CONSOLE}-sources.zip" ${gitCommit}
+git archive --format=zip -o "_scratch/SOURCES/xenadmin-sources.zip" ${gitCommit}
+cp ${REPO}/packages/dotnet-packages-sources.zip ${SCRATCH_DIR}/SOURCES
+cd ${SCRATCH_DIR}/SOURCES && zip ${BRANDING_BRAND_CONSOLE}-source.zip dotnet-packages-sources.zip xenadmin-sources.zip
+cp ${SCRATCH_DIR}/SOURCES/${BRANDING_BRAND_CONSOLE}-source.zip ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #sign files only if all parameters are set and non-empty
-SIGN_BAT="${REPO}/mk/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
+SIGN_BAT="${REPO}/scripts/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
 SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
 if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then

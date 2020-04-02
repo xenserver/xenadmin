@@ -1234,7 +1234,7 @@
     <value>关闭</value>
   </data>
   <data name="ACTION_VM_SNAPSHOT_TITLE" xml:space="preserve">
-    <value>正在生成 VM“{0}”的快照...</value>
+    <value>正在创建 VM“{0}”的快照...</value>
   </data>
   <data name="ACTION_VM_STARTED" xml:space="preserve">
     <value>已启动</value>
@@ -4105,7 +4105,7 @@
   <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON" xml:space="preserve">
     <value>{0} - {1}</value>
   </data>
-  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN" xml:space="preserve">
+  <data name="DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN" xml:space="preserve">
     <value>无法确定失败原因</value>
   </data>
   <data name="DELAY_LOADING_COMBO_BOX_WAITING" xml:space="preserve">
@@ -5937,7 +5937,7 @@
     <value>内存</value>
   </data>
   <data name="GENERAL_HEADING_MEMORY_VCPUS" xml:space="preserve">
-    <value>内存和 VCPU</value>
+    <value>内存和 vCPU</value>
   </data>
   <data name="GENERAL_HEADING_STATUS" xml:space="preserve">
     <value>状态</value>
@@ -6659,9 +6659,9 @@
     <value>本地和远程({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>如果要升级到 [XenServer] {1} 及更高版本，则将增加 {0} 上的控制域内存。
+    <value>如果要升级到 [XenServer] {1} 及更高版本，则将增加 {0} 上的控制域内存。 
 
-这可能会导致在 RPU 期间无法将 VM 迁移到此服务器，或在升级后无法容纳当前位于此服务器上的所有 VM。</value>
+这可能会导致在 RPU 期间无法将 VM 迁移到此服务器，或者在升级后无法容纳当前位于此服务器上的所有 VM。</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: 由于控制域内存可能会增加，此服务器可能在升级后无法容纳其所有 VM。 </value>
@@ -6926,7 +6926,7 @@
     <value>服务器因出现未知错误而无法完成导入。</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
-    <value>导出的文件不完整，或格式无法识别。</value>
+    <value>导出的文件不完整，或者格式无法识别。</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_CANNOT_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
     <value>修复 ISO 无法复制到选定的 SR</value>
@@ -7569,6 +7569,9 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
     <value>激活 [XenServer] Express 时，必须一次选择一个服务器。</value>
+  </data>
+  <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
+    <value>许可使用早于 {0} 的服务器时，必须一次选择一台服务器。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
@@ -9593,7 +9596,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_AGILE_SR_NOT_SHARED" xml:space="preserve">
     <value>VM 使用非共享 SR。无法保证重新启动。</value>
   </data>
-  <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
+  <data name="NOT_AGILE_UNKNOWN" xml:space="preserve">
     <value>VM 无灵活性。无法保证重新启动。</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_SRIOV_VIF" xml:space="preserve">
@@ -11441,7 +11444,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>池主服务器上的当前时间为: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>此版本的 [XenCenter] 支持 [XenServer] {0} 及更高版本。</value>
+    <value>本版本的 [XenCenter] 支持 [XenServer] {0} 及更高版本。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>使用早期版本的 [XenCenter] 管理此服务器。</value>
@@ -12620,9 +12623,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
     <value>{0}: 安装最新版本的 [Citrix VM Tools] 之前不能暂停 VM {1}。</value>
   </data>
-  <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
-    <value>选中要更新的每个服务器对应的复选框。选中池的复选框可选择该池中的所有可用服务器。</value>
-  </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: 更新已应用到该服务器。将跳过该服务器。</value>
   </data>
@@ -13415,7 +13415,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已为此 VM 分配了直通 GPU。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
-    <value>内存和/或 VCPU 更改将在重新启动 VM 时生效。</value>
+    <value>内存和/或 vCPU 更改将在重新启动 VM 时生效。</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_TITLE" xml:space="preserve">
     <value>VM 常规更改</value>
