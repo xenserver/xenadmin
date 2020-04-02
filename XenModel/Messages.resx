@@ -2616,6 +2616,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host partition layout check</value>
   </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch Controller check</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>Checking vSwitch Controller configuration</value>
+  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
   </data>
@@ -7295,11 +7301,14 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>Interfaces: {0}</value>
   </data>
+  <data name="INVALID_DISK_SIZE" xml:space="preserve">
+    <value>Invalid disk size</value>
+  </data>
   <data name="INVALID_HOST" xml:space="preserve">
     <value>Invalid host name</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
-    <value>Invalid disk size</value>
+    <value>Invalid number</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>Invalid parameter</value>
@@ -7429,7 +7438,7 @@ Size: {3}</value>
     <value>License Manager</value>
   </data>
   <data name="LEARN_MORE" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Learn more...</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed.</value>
@@ -8663,6 +8672,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETW_DETAILS_VLAN_NUMBER_IN_USE" xml:space="preserve">
     <value>This VLAN number is already in use</value>
   </data>
+  <data name="NETW_DETAILS_VLAN_RANGE" xml:space="preserve">
+    <value>Allowed VLAN range: {0} to {1}</value>
+  </data>
   <data name="NETW_EXTERNAL_DETAILS_TITLE" xml:space="preserve">
     <value>Configure the new network</value>
   </data>
@@ -8680,6 +8692,9 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NETW_TYPE_SELECT_TITLE" xml:space="preserve">
     <value>Choose the type of network to create</value>
+  </data>
+  <data name="NETW_VLAN_ZERO" xml:space="preserve">
+    <value>VLAN 0 will receive all traffic not on any other VLAN</value>
   </data>
   <data name="NEVER" xml:space="preserve">
     <value>Never</value>
@@ -10479,7 +10494,7 @@ Please reconnect the host and try again</value>
     <value>This pool has no shared storage</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
+    <value>{0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems.</value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -10555,6 +10570,15 @@ Please reconnect the host and try again</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the vSwitch Controller has been removed in {1}.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information.</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>The MAC address entered has already been assigned to the VM:
@@ -11037,8 +11061,11 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REPEATED_KEY" xml:space="preserve">
     <value>Repeated key</value>
   </data>
-  <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED" xml:space="preserve">
     <value>{0}: The required hotfix is not installed</value>
+  </data>
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because the required hotfix is not installed</value>
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>Required Updates</value>
@@ -13656,12 +13683,6 @@ Schedule:
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>&amp;Next &gt;</value>
   </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL" xml:space="preserve">
-    <value>Your new network will be mapped to an existing physical network interface and assigned a VLAN number to use on that interface. You can select the physical interface you would like to use below.</value>
-  </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_INTERNAL" xml:space="preserve">
-    <value>Check the box below if you would like to automatically add this network to new VMs.</value>
-  </data>
   <data name="WIZARD_INTERNAL_ERROR" xml:space="preserve">
     <value>There was an internal error completing this wizard. Please see the logs for more information.</value>
   </data>
@@ -14369,6 +14390,9 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] {0}</value>
+  </data>
+  <data name="XENSERVER_8_2" xml:space="preserve">
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">

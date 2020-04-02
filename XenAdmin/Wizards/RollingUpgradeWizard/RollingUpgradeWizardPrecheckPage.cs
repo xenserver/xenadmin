@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var hotfixChecks = new List<Check>();
             foreach (var host in hostsToUpgrade)
             {
-                if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
+                if (HotfixFactory.IsHotfixRequired(host) && !ManualUpgrade)
                     hotfixChecks.Add(new HostHasHotfixCheck(host));
             }
             if (hotfixChecks.Count > 0)
@@ -199,6 +199,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
             }
 
+            //vSwitch controller check - for each pool
+            var vSwitchChecks = (from Host server in SelectedMasters
+                let check = new VSwitchControllerCheck(server, InstallMethodConfig, ManualUpgrade)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (vSwitchChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
+            
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();
@@ -239,12 +248,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
-            var pvChecks = new List<Check>();
-            foreach (Pool pool in SelectedPools.Where(p => !Helpers.QuebecOrGreater(p.Connection)))
-            {
-                if (pool.Connection.Resolve(pool.master) != null)
-                    pvChecks.Add(new PVGuestsCheck(pool, true, InstallMethodConfig, ManualUpgrade)); 
-            }
+            var pvChecks = (from Host server in SelectedMasters
+                let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
             if (pvChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 

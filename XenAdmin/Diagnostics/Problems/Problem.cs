@@ -33,6 +33,7 @@ using System;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Diagnostics.Problems
 {
@@ -151,5 +152,43 @@ namespace XenAdmin.Diagnostics.Problems
         }
 
         #endregion
+    }
+
+    public abstract class ProblemWithMoreInfo : Problem
+    {
+        protected ProblemWithMoreInfo(Check check)
+            : base(check)
+        {
+        }
+
+        public override bool IsFixable => false;
+
+        public override string HelpMessage => Messages.MORE_INFO;
+
+        public abstract string Message { get; }
+
+        public virtual string LinkData => null;
+        public virtual string LinkText => LinkData;
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            Program.Invoke(Program.MainWindow, delegate ()
+            {
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Error, Message)))
+                {
+                    if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
+                    {
+                        dlg.LinkText = LinkText;
+                        dlg.LinkData = LinkData;
+                        dlg.ShowLinkLabel = true;
+                    }
+                    dlg.ShowDialog();
+                }
+            });
+
+            cancelled = true;
+            return null;
+        }
     }
 }

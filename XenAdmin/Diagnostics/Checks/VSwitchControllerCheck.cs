@@ -30,42 +30,49 @@
  */
 
 using System;
-using System.Linq;
-using XenAdmin.Core;
-using XenAPI;
-using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Diagnostics.Problems.PoolProblem;
 using System.Collections.Generic;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Hotfixing;
+using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    class PVGuestsCheck : HostPostLivenessCheck
+    class VSwitchControllerCheck : HostPostLivenessCheck
     {
-        private readonly Pool _pool;
-        private readonly bool _upgrade;
-        private readonly bool _manualUpgrade;
         private readonly Dictionary<string, string> _installMethodConfig;
+        private readonly Pool _pool;
+        private readonly XenServerVersion _newVersion;
+        private readonly bool _manualUpgrade;
 
-        public PVGuestsCheck(Host master, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
-            : base(master)
+        public VSwitchControllerCheck(Host host, XenServerVersion newVersion)
+            : base(host)
         {
+            _newVersion = newVersion;
             _pool = Helpers.GetPoolOfOne(Host?.Connection);
-            _upgrade = upgrade;
-            _manualUpgrade = manualUpgrade;
-            _installMethodConfig = installMethodConfig;
         }
+
+        public VSwitchControllerCheck(Host host, Dictionary<string, string> installMethodConfig, bool manualUpgrade)
+            : base(host)
+        {
+            _installMethodConfig = installMethodConfig;
+            _manualUpgrade = manualUpgrade;
+            _pool = Helpers.GetPoolOfOne(Host?.Connection);
+        }
+
+        public override string Description => Messages.CHECKING_VSWITCH_CONTROLLER;
 
         public override bool CanRun()
         {
-            if (Helpers.QuebecOrGreater(Host))
+            if (Helpers.StockholmOrGreater(Host))
                 return false;
 
-            if (_pool == null || !_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
+            if (_pool == null || !_pool.vSwitchController())
                 return false;
 
-            if (!_upgrade && !Helpers.NaplesOrGreater(Host))
+            if (_newVersion != null && !Helpers.NaplesOrGreater(Host))
                 return false;
 
             return true;
@@ -74,8 +81,12 @@ namespace XenAdmin.Diagnostics.Checks
         protected override Problem RunHostCheck()
         {
             //update case
-            if (!_upgrade)
-                return new PoolHasPVGuestWarningUrl(this, _pool);
+            if (_newVersion != null)
+            {
+                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion82)) >= 0)
+                    return new VSwitchControllerProblem(this, _pool);
+                return null;
+            }
 
             //upgrade case
 
@@ -91,17 +102,16 @@ namespace XenAdmin.Diagnostics.Checks
             if (_installMethodConfig != null)
                 Host.TryGetUpgradeVersion(Host, _installMethodConfig, out upgradePlatformVersion, out _);
 
-            // we don't know the upgrade version, so add warning
+            // we don't know the upgrade version, so add generic warning
             // (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
             if (string.IsNullOrEmpty(upgradePlatformVersion))
-                return new PoolHasPVGuestWarningUrl(this, _pool);
-
-            if (Helpers.QuebecOrGreater(upgradePlatformVersion))
-                return new PoolHasPVGuestWarningUrl(this, _pool);
+                return new VSwitchControllerWarning(this, _pool);
+                
+            // we know they are upgrading to Stockholm or greater, so block them
+            if (Helpers.StockholmOrGreater(upgradePlatformVersion))
+                return new VSwitchControllerProblem(this, _pool);
 
             return null;
         }
-
-        public override string Description => Messages.PV_GUESTS_CHECK_DESCRIPTION;
     }
 }

@@ -45,11 +45,17 @@ namespace XenAdmin.Diagnostics.Problems
 
         protected override Actions.AsyncAction CreateAction(out bool cancelled)
         {
-            Program.Invoke(Program.MainWindow, delegate ()
+            Program.Invoke(Program.MainWindow, () =>
             {
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
                 {
+                    if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
+                    {
+                        dlg.LinkText = LinkText;
+                        dlg.LinkData = LinkData;
+                        dlg.ShowLinkLabel = true;
+                    }
                     dlg.ShowDialog();
                 }
             });
@@ -59,5 +65,8 @@ namespace XenAdmin.Diagnostics.Problems
         }
 
         public abstract string Message { get; }
+
+        public virtual string LinkData => null;
+        public virtual string LinkText => LinkData;
     }
 }

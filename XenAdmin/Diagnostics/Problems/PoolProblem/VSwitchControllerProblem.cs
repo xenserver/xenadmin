@@ -29,49 +29,58 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Diagnostics.Hotfixing;
 using XenAPI;
 
 
-namespace XenAdmin.Diagnostics.Problems.HostProblem
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class HostDoesNotHaveHotfix : HostProblem
+    class VSwitchControllerProblem : ProblemWithMoreInfo
     {
-        public HostDoesNotHaveHotfix(HostHasHotfixCheck check, Host server)
-            : base(check, server)
-        {
-        }
+        private Pool _pool;
 
-        public override string Description => string.Format(Messages.REQUIRED_HOTFIX_NOT_INSTALLED, ServerName);
-
-        public override string HelpMessage => Messages.APPLY_HOTFIX;
-
-        protected override Actions.AsyncAction CreateAction(out bool cancelled)
-        {
-            cancelled = false;
-            return new Actions.DelegatedAsyncAction(Server.Connection, string.Format(Messages.APPLYING_HOTFIX_TO_HOST, Server), "", "",
-                (ss) =>
-                    {
-                        Hotfix hotfix = HotfixFactory.Hotfix(Server);
-                        if (hotfix != null)
-                            hotfix.Apply(Server, ss);
-                    }, true);
-        }
-    }
-
-    class HostDoesNotHaveHotfixWarning : Warning
-    {
-        private readonly Host host;
-
-        public HostDoesNotHaveHotfixWarning(Check check, Host host)
+        public VSwitchControllerProblem(Check check, Pool pool)
             : base(check)
         {
-            this.host = host;
+            _pool = pool;
         }
 
         public override string Title => Check.Description;
 
-        public override string Description => string.Format(Messages.REQUIRED_HOTFIX_NOT_INSTALLED_WARNING, host);
+        public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
+        public override string LinkText => Messages.LEARN_MORE;
+
+        public override string Description =>
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, _pool,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string Message =>
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+    }
+
+    class VSwitchControllerWarning : WarningWithMoreInfo
+    {
+        private readonly Pool pool;
+
+        public VSwitchControllerWarning(Check check, Pool pool)
+            : base(check)
+        {
+            this.pool = pool;
+        }
+
+        public override string Title => Check.Description;
+
+        public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
+        public override string LinkText => Messages.LEARN_MORE;
+
+        public override string Description =>
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, pool,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string Message =>
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 }

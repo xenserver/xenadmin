@@ -43,10 +43,16 @@ namespace XenAdmin.Diagnostics.Checks
         // Check can override this to return multiple Problems
         public virtual List<Problem> RunAllChecks()
         {
-            var list = new List<Problem>(1);
-            var problem = RunCheck();
-            if (problem != null)
-                list.Add(problem);
+            var list = new List<Problem>();
+
+            //normally checks will have not been added to the list if they can't run, but check again
+            if (CanRun())
+            {
+                var problem = RunCheck();
+                if (problem != null)
+                    list.Add(problem);
+            }
+
             return list;
         }
 
@@ -61,6 +67,11 @@ namespace XenAdmin.Diagnostics.Checks
                     ? string.Empty
                     : string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description);
             }
+        }
+
+        public virtual bool CanRun()
+        {
+            return true;
         }
     }
 }

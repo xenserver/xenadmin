@@ -31,7 +31,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetWTypeSelect));
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lblNetTypeSel = new System.Windows.Forms.Label();
             this.rbtnExternalNetwork = new System.Windows.Forms.RadioButton();
             this.labelExternalNetwork = new System.Windows.Forms.Label();
@@ -43,50 +42,35 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.labelCHIN = new System.Windows.Forms.Label();
             this.rbtnSriov = new System.Windows.Forms.RadioButton();
             this.labelSriov = new System.Windows.Forms.Label();
-            this.warningsTable = new System.Windows.Forms.TableLayoutPanel();
-            this.iconWarningChinOption = new System.Windows.Forms.PictureBox();
+            this.warningTableChin = new System.Windows.Forms.TableLayoutPanel();
             this.labelWarningChinOption = new System.Windows.Forms.Label();
+            this.iconWarningChinOption = new System.Windows.Forms.PictureBox();
             this.warningTableSriov = new System.Windows.Forms.TableLayoutPanel();
-            this.iconWarningSriovOption = new System.Windows.Forms.PictureBox();
             this.labelWarningSriovOption = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.warningsTable.SuspendLayout();
+            this.iconWarningSriovOption = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.warningTableChin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).BeginInit();
             this.warningTableSriov.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningSriovOption)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolTip
             // 
             this.toolTip.ShowAlways = true;
             // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.Controls.Add(this.lblNetTypeSel);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnExternalNetwork);
-            this.flowLayoutPanel1.Controls.Add(this.labelExternalNetwork);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnInternalNetwork);
-            this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnBondedNetwork);
-            this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnCHIN);
-            this.flowLayoutPanel1.Controls.Add(this.labelCHIN);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnSriov);
-            this.flowLayoutPanel1.Controls.Add(this.labelSriov);
-            this.flowLayoutPanel1.Controls.Add(this.warningsTable);
-            this.flowLayoutPanel1.Controls.Add(this.warningTableSriov);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
             // lblNetTypeSel
             // 
             resources.ApplyResources(this.lblNetTypeSel, "lblNetTypeSel");
+            this.tableLayoutPanel1.SetColumnSpan(this.lblNetTypeSel, 2);
             this.lblNetTypeSel.Name = "lblNetTypeSel";
             // 
             // rbtnExternalNetwork
             // 
             resources.ApplyResources(this.rbtnExternalNetwork, "rbtnExternalNetwork");
             this.rbtnExternalNetwork.Checked = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.rbtnExternalNetwork, 2);
             this.rbtnExternalNetwork.Name = "rbtnExternalNetwork";
             this.rbtnExternalNetwork.TabStop = true;
             this.rbtnExternalNetwork.UseVisualStyleBackColor = true;
@@ -99,6 +83,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // rbtnInternalNetwork
             // 
             resources.ApplyResources(this.rbtnInternalNetwork, "rbtnInternalNetwork");
+            this.tableLayoutPanel1.SetColumnSpan(this.rbtnInternalNetwork, 2);
             this.rbtnInternalNetwork.Name = "rbtnInternalNetwork";
             this.rbtnInternalNetwork.UseVisualStyleBackColor = true;
             // 
@@ -110,6 +95,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // rbtnBondedNetwork
             // 
             resources.ApplyResources(this.rbtnBondedNetwork, "rbtnBondedNetwork");
+            this.tableLayoutPanel1.SetColumnSpan(this.rbtnBondedNetwork, 2);
             this.rbtnBondedNetwork.Name = "rbtnBondedNetwork";
             this.rbtnBondedNetwork.UseVisualStyleBackColor = true;
             // 
@@ -121,6 +107,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // rbtnCHIN
             // 
             resources.ApplyResources(this.rbtnCHIN, "rbtnCHIN");
+            this.tableLayoutPanel1.SetColumnSpan(this.rbtnCHIN, 2);
             this.rbtnCHIN.Name = "rbtnCHIN";
             this.rbtnCHIN.UseVisualStyleBackColor = true;
             // 
@@ -132,6 +119,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // rbtnSriov
             // 
             resources.ApplyResources(this.rbtnSriov, "rbtnSriov");
+            this.tableLayoutPanel1.SetColumnSpan(this.rbtnSriov, 2);
             this.rbtnSriov.Name = "rbtnSriov";
             this.rbtnSriov.UseVisualStyleBackColor = true;
             // 
@@ -140,12 +128,17 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             resources.ApplyResources(this.labelSriov, "labelSriov");
             this.labelSriov.Name = "labelSriov";
             // 
-            // warningsTable
+            // warningTableChin
             // 
-            resources.ApplyResources(this.warningsTable, "warningsTable");
-            this.warningsTable.Controls.Add(this.iconWarningChinOption, 0, 1);
-            this.warningsTable.Controls.Add(this.labelWarningChinOption, 1, 1);
-            this.warningsTable.Name = "warningsTable";
+            resources.ApplyResources(this.warningTableChin, "warningTableChin");
+            this.warningTableChin.Controls.Add(this.labelWarningChinOption, 1, 0);
+            this.warningTableChin.Controls.Add(this.iconWarningChinOption, 0, 0);
+            this.warningTableChin.Name = "warningTableChin";
+            // 
+            // labelWarningChinOption
+            // 
+            resources.ApplyResources(this.labelWarningChinOption, "labelWarningChinOption");
+            this.labelWarningChinOption.Name = "labelWarningChinOption";
             // 
             // iconWarningChinOption
             // 
@@ -154,17 +147,17 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.iconWarningChinOption.Name = "iconWarningChinOption";
             this.iconWarningChinOption.TabStop = false;
             // 
-            // labelWarningChinOption
-            // 
-            resources.ApplyResources(this.labelWarningChinOption, "labelWarningChinOption");
-            this.labelWarningChinOption.Name = "labelWarningChinOption";
-            // 
             // warningTableSriov
             // 
             resources.ApplyResources(this.warningTableSriov, "warningTableSriov");
-            this.warningTableSriov.Controls.Add(this.iconWarningSriovOption, 0, 1);
-            this.warningTableSriov.Controls.Add(this.labelWarningSriovOption, 1, 1);
+            this.warningTableSriov.Controls.Add(this.labelWarningSriovOption, 1, 0);
+            this.warningTableSriov.Controls.Add(this.iconWarningSriovOption, 0, 0);
             this.warningTableSriov.Name = "warningTableSriov";
+            // 
+            // labelWarningSriovOption
+            // 
+            resources.ApplyResources(this.labelWarningSriovOption, "labelWarningSriovOption");
+            this.labelWarningSriovOption.Name = "labelWarningSriovOption";
             // 
             // iconWarningSriovOption
             // 
@@ -173,27 +166,39 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.iconWarningSriovOption.Name = "iconWarningSriovOption";
             this.iconWarningSriovOption.TabStop = false;
             // 
-            // labelWarningSriovOption
+            // tableLayoutPanel1
             // 
-            resources.ApplyResources(this.labelWarningSriovOption, "labelWarningSriovOption");
-            this.labelWarningSriovOption.Name = "labelWarningSriovOption";
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.lblNetTypeSel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnExternalNetwork, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelExternalNetwork, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnInternalNetwork, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnBondedNetwork, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnCHIN, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelCHIN, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.warningTableChin, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnSriov, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.labelSriov, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.warningTableSriov, 1, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // NetWTypeSelect
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "NetWTypeSelect";
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            this.warningsTable.ResumeLayout(false);
-            this.warningsTable.PerformLayout();
+            this.warningTableChin.ResumeLayout(false);
+            this.warningTableChin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).EndInit();
             this.warningTableSriov.ResumeLayout(false);
             this.warningTableSriov.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningSriovOption)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -208,15 +213,15 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelCHIN;
         private System.Windows.Forms.RadioButton rbtnCHIN;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.TableLayoutPanel warningsTable;
-        private System.Windows.Forms.PictureBox iconWarningChinOption;
-        private System.Windows.Forms.Label labelWarningChinOption;
+        private System.Windows.Forms.TableLayoutPanel warningTableChin;
         private System.Windows.Forms.RadioButton rbtnSriov;
         private System.Windows.Forms.Label labelSriov;
         private System.Windows.Forms.TableLayoutPanel warningTableSriov;
         private System.Windows.Forms.PictureBox iconWarningSriovOption;
         private System.Windows.Forms.Label labelWarningSriovOption;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label labelWarningChinOption;
+        private System.Windows.Forms.PictureBox iconWarningChinOption;
     }
 }

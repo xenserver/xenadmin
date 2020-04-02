@@ -7294,6 +7294,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vSwitch Controller check.
+        /// </summary>
+        public static string CHECKING_VSWITCH_CONTROLLER {
+            get {
+                return ResourceManager.GetString("CHECKING_VSWITCH_CONTROLLER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking vSwitch Controller configuration.
+        /// </summary>
+        public static string CHECKING_VSWITCH_CONTROLLER_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_VSWITCH_CONTROLLER_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking [XenCenter] version.
         /// </summary>
         public static string CHECKING_XENCENTER_VERSION {
@@ -21001,6 +21019,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid disk size.
+        /// </summary>
+        public static string INVALID_DISK_SIZE {
+            get {
+                return ResourceManager.GetString("INVALID_DISK_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid host name.
         /// </summary>
         public static string INVALID_HOST {
@@ -21010,7 +21037,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid disk size.
+        ///   Looks up a localized string similar to Invalid number.
         /// </summary>
         public static string INVALID_NUMBER {
             get {
@@ -21356,7 +21383,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn more.
+        ///   Looks up a localized string similar to Learn more....
         /// </summary>
         public static string LEARN_MORE {
             get {
@@ -24537,6 +24564,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowed VLAN range: {0} to {1}.
+        /// </summary>
+        public static string NETW_DETAILS_VLAN_RANGE {
+            get {
+                return ResourceManager.GetString("NETW_DETAILS_VLAN_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure the new network.
         /// </summary>
         public static string NETW_EXTERNAL_DETAILS_TITLE {
@@ -24587,6 +24623,15 @@ namespace XenAdmin {
         public static string NETW_TYPE_SELECT_TITLE {
             get {
                 return ResourceManager.GetString("NETW_TYPE_SELECT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VLAN 0 will receive all traffic not on any other VLAN.
+        /// </summary>
+        public static string NETW_VLAN_ZERO {
+            get {
+                return ResourceManager.GetString("NETW_VLAN_ZERO", resourceCulture);
             }
         }
         
@@ -30103,7 +30148,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click &quot;Learn more&quot; to see the list of supported guest operating systems. .
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems..
         /// </summary>
         public static string POOL_HAS_PV_GUEST_WARNING {
             get {
@@ -30536,6 +30581,33 @@ namespace XenAdmin {
         public static string PROBLEM_VMPROBLEM_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_VMPROBLEM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for the vSwitch Controller has been removed in {1}..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information..
+        /// </summary>
+        public static string PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING {
+            get {
+                return ResourceManager.GetString("PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING", resourceCulture);
             }
         }
         
@@ -31789,9 +31861,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}: The required hotfix is not installed.
         /// </summary>
-        public static string REQUIRED_HOTFIX_ISNOT_INSTALLED {
+        public static string REQUIRED_HOTFIX_NOT_INSTALLED {
             get {
-                return ResourceManager.GetString("REQUIRED_HOTFIX_ISNOT_INSTALLED", resourceCulture);
+                return ResourceManager.GetString("REQUIRED_HOTFIX_NOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because the required hotfix is not installed.
+        /// </summary>
+        public static string REQUIRED_HOTFIX_NOT_INSTALLED_WARNING {
+            get {
+                return ResourceManager.GetString("REQUIRED_HOTFIX_NOT_INSTALLED_WARNING", resourceCulture);
             }
         }
         
@@ -39545,24 +39626,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your new network will be mapped to an existing physical network interface and assigned a VLAN number to use on that interface. You can select the physical interface you would like to use below..
-        /// </summary>
-        public static string WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL {
-            get {
-                return ResourceManager.GetString("WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check the box below if you would like to automatically add this network to new VMs..
-        /// </summary>
-        public static string WIZARD_DESC_NETWORK_SETTINGS_INTERNAL {
-            get {
-                return ResourceManager.GetString("WIZARD_DESC_NETWORK_SETTINGS_INTERNAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to There was an internal error completing this wizard. Please see the logs for more information..
         /// </summary>
         public static string WIZARD_INTERNAL_ERROR {
@@ -41690,6 +41753,15 @@ namespace XenAdmin {
         public static string XENSERVER_8_1 {
             get {
                 return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenServer] {0}.
+        /// </summary>
+        public static string XENSERVER_8_2 {
+            get {
+                return ResourceManager.GetString("XENSERVER_8_2", resourceCulture);
             }
         }
         
