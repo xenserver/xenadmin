@@ -64,6 +64,20 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override string Description => Messages.CHECKING_SECURITY_PROTOCOL;
 
+        public override bool CanRun()
+        {
+            if (Helpers.StockholmOrGreater(Host))
+                return false;
+
+            if (_pool == null || !_pool.ssl_legacy())
+                return false;
+
+            if (_newVersion != null && !Helpers.NaplesOrGreater(Host))
+                return false;
+
+            return true;
+        }
+
         protected override Problem RunHostCheck()
         {
             if (!_pool.ssl_legacy() || Helpers.StockholmOrGreater(Host))

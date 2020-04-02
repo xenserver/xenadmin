@@ -493,29 +493,29 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
             {
                 //PVGuestsCheck checks
-                var pvChecks = new List<Check>();
-                foreach (var pool in SelectedPools.Where(p => Helpers.NaplesOrGreater(p.Connection)))
-                {
-                    if (pool.Connection.Resolve(pool.master) != null)
-                        pvChecks.Add(new PVGuestsCheck(pool, false));
-                }
+                var pvChecks = (from Pool pool in SelectedPools
+                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), false)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
                 if (pvChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
                 //protocol check - for each pool
-                var sslChecks = (from Pool pool in SelectedPools.Where(
-                        p => Helpers.NaplesOrGreater(p.Connection) && !Helpers.StockholmOrGreater(p.Connection))
-                    let master = pool.Connection.Resolve(pool.master)
-                    where master != null
-                    select new PoolLegacySslCheck(master, highestNewVersion ?? UpdateAlert?.NewServerVersion) as Check).ToList();
+                var sslChecks = (from Pool pool in SelectedPools
+                    let check = new PoolLegacySslCheck(pool.Connection.Resolve(pool.master),
+                        highestNewVersion ?? UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
 
                 if (sslChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
 
                 //power on mode check - for each host
-                var iloChecks = (from Host host in SelectedServers.Where(
-                        h => Helpers.NaplesOrGreater(h) && !Helpers.StockholmOrGreater(h))
-                    select new PowerOniLoCheck(host, highestNewVersion ?? UpdateAlert?.NewServerVersion) as Check).ToList();
+                var iloChecks = (from Host host in SelectedServers
+                    let check = new PowerOniLoCheck(host, highestNewVersion ?? UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
 
                 if (iloChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
