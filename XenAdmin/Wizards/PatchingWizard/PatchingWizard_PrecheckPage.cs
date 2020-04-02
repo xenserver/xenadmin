@@ -366,6 +366,33 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (vSwitchChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
+
+                //protocol check - for each pool
+                var sslChecks = (from Pool pool in SelectedPools
+                    let check = new PoolLegacySslCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (sslChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
+
+                //power on mode check - for each host
+                var iloChecks = (from Host host in SelectedServers
+                    let check = new PowerOniLoCheck(host, UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (iloChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
+
+                //PVGuestsCheck checks
+                var pvChecks = (from Pool pool in SelectedPools
+                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), false)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (pvChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
             }
 
             //HA checks
@@ -502,37 +529,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
             }
 
-            if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
-            {
-                //PVGuestsCheck checks
-                var pvChecks = (from Pool pool in SelectedPools
-                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), false)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (pvChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
-
-                //protocol check - for each pool
-                var sslChecks = (from Pool pool in SelectedPools
-                    let check = new PoolLegacySslCheck(pool.Connection.Resolve(pool.master),
-                        highestNewVersion ?? UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (sslChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
-
-                //power on mode check - for each host
-                var iloChecks = (from Host host in SelectedServers
-                    let check = new PowerOniLoCheck(host, highestNewVersion ?? UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (iloChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
-            }
-            
             return groups;
         }
 

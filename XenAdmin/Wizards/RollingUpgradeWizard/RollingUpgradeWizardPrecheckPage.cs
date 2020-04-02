@@ -226,6 +226,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
 
+            //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
+            var pvChecks = (from Host server in SelectedMasters
+                let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (pvChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();
@@ -264,15 +273,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
             }
-
-            //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
-            var pvChecks = (from Host server in SelectedMasters
-                let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
-                where check.CanRun()
-                select check as Check).ToList();
-
-            if (pvChecks.Count > 0)
-                groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
             //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)
