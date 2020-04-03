@@ -37,6 +37,7 @@ using System.Net.Security;
 using System.IO;
 using System.Net.Sockets;
 using System.Security.Authentication;
+using System.Linq;
 
 
 
@@ -77,6 +78,7 @@ namespace CommandLib
 	    public int major = 0;
 	    public int minor = 1;
         public bool dropOut;
+        public List<string> EnteredParamValues;
 
         public thinCLIProtocol(delegateGlobalError dGlobalError, 
             delegateGlobalUsage dGlobalUsage, 
@@ -98,6 +100,7 @@ namespace CommandLib
             this.dProgress = dProgress;
             this.conf = conf;
             dropOut = false;
+            EnteredParamValues = new List<string>();
         }
         
     }        
@@ -495,6 +498,15 @@ namespace CommandLib
             }
         }
 
+
+        public static void CheckUploadFiles(String filename, thinCLIProtocol tCLIprotocol)
+        {
+            if (!(tCLIprotocol.EnteredParamValues.Any(filename.StartsWith)))
+            {
+                throw new Exception(string.Format("The file '{0}' to upload is not the same as the one entered at the command line.", filename));
+            }
+        }
+
         public static void interpreter(Stream stream, thinCLIProtocol tCLIprotocol)
         {
             string filename = "";
@@ -560,11 +572,13 @@ namespace CommandLib
                                 break;
                             case Messages.tag.Load:
                                 filename = Types.unmarshal_string(stream);
+                                CheckUploadFiles(filename, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: Load " + filename, tCLIprotocol);
                                 Messages.load(stream, filename, tCLIprotocol);
                                 break;
                             case Messages.tag.HttpPut:
                                 filename = Types.unmarshal_string(stream);
+                                CheckUploadFiles(filename, tCLIprotocol);
                                 path = Types.unmarshal_string(stream);
                                 Uri uri = ParseUri(path, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
