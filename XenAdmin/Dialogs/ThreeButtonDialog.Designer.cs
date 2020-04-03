@@ -37,6 +37,7 @@ namespace XenAdmin.Dialogs
             this.button1 = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.LinkLabel();
             this.checkBoxOption = new System.Windows.Forms.CheckBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -46,9 +47,10 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.pictureBoxIcon, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.labelMessage, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxOption, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxOption, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // pictureBoxIcon
@@ -99,6 +101,13 @@ namespace XenAdmin.Dialogs
             this.checkBoxOption.Name = "checkBoxOption";
             this.checkBoxOption.UseVisualStyleBackColor = true;
             // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // ThreeButtonDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -128,5 +137,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.LinkLabel labelMessage;
         private System.Windows.Forms.CheckBox checkBoxOption;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

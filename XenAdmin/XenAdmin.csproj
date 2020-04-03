@@ -241,6 +241,7 @@
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\NotLicensedForAutomatedUpdatesWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\ServerSelectionProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\VSwitchControllerProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
     <Compile Include="Dialogs\AddVGPUDialog.cs">

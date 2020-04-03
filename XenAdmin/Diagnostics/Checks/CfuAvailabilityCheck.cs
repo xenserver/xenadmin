@@ -42,7 +42,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
-            var action = Updates.CreateDownloadUpdatesXmlAction(Updates.CheckForUpdatesUrl);
+            var action = Updates.CreateDownloadUpdatesXmlAction();
 
             try
             {

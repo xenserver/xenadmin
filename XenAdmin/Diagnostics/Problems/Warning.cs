@@ -54,22 +54,25 @@ namespace XenAdmin.Diagnostics.Problems
 
     public abstract class WarningWithMoreInfo : Warning
     {
-        protected WarningWithMoreInfo(Check check)
-            : base(check)
+        protected WarningWithMoreInfo(Check check) : base(check)
         {
         }
         
         public override string HelpMessage => Messages.MORE_INFO;
 
-        public abstract string Message { get; }
-
         protected override Actions.AsyncAction CreateAction(out bool cancelled)
         {
-            Program.Invoke(Program.MainWindow, delegate ()
+            Program.Invoke(Program.MainWindow, () =>
             {
                 using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
                 {
+                    if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
+                    {
+                        dlg.LinkText = LinkText;
+                        dlg.LinkData = LinkData;
+                        dlg.ShowLinkLabel = true;
+                    }
                     dlg.ShowDialog();
                 }
             });
@@ -77,6 +80,11 @@ namespace XenAdmin.Diagnostics.Problems
             cancelled = true;
             return null;
         }
+
+        public abstract string Message { get; }
+
+        public virtual string LinkData => null;
+        public virtual string LinkText => LinkData;
     }
 
  

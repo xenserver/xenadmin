@@ -345,6 +345,9 @@
   <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
     <value>StorageLink</value>
   </data>
+  <data name="Label-SR.SRTypes-dummy" xml:space="preserve">
+    <value>不明</value>
+  </data>
   <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
     <value>Elastic Block Storage</value>
   </data>
@@ -389,6 +392,9 @@
   </data>
   <data name="Label-SR.SRTypes-shm" xml:space="preserve">
     <value>Local Performance Monitoring</value>
+  </data>
+  <data name="Label-SR.SRTypes-tmpfs" xml:space="preserve">
+    <value>不明</value>
   </data>
   <data name="Label-SR.SRTypes-udev" xml:space="preserve">
     <value>udev</value>

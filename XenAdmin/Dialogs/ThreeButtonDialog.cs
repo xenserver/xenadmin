@@ -147,6 +147,20 @@ namespace XenAdmin.Dialogs
             }
         }
 
+        public bool ShowLinkLabel
+        {
+            get { return linkLabel1.Visible; }
+            set { linkLabel1.Visible = value; }
+        }
+
+        public string LinkText
+        {
+            get { return linkLabel1.Text; }
+            set { linkLabel1.Text = value; }
+        }
+
+        public string LinkData { get; set; }
+
         public bool ShowCheckbox
         {
             get { return checkBoxOption.Visible; }
@@ -409,6 +423,16 @@ namespace XenAdmin.Dialogs
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
             }
             catch { }  // Best effort
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(LinkData))
+                    System.Diagnostics.Process.Start(LinkData);
+            }
+            catch { }
         }
     }
 

@@ -199,6 +199,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
             }
 
+            //vSwitch controller check - for each pool
+            var vSwitchChecks = (from Host server in SelectedMasters
+                let check = new VSwitchControllerCheck(server, InstallMethodConfig, ManualUpgrade)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (vSwitchChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
+
             //protocol check - for each pool
             var sslChecks = (from Host server in SelectedMasters
                 let check = new PoolLegacySslCheck(server, InstallMethodConfig, ManualUpgrade)
@@ -216,6 +225,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
+
+            //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
+            var pvChecks = (from Host server in SelectedMasters
+                let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (pvChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
@@ -255,15 +273,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
             }
-
-            //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
-            var pvChecks = (from Host server in SelectedMasters
-                    let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-            if (pvChecks.Count > 0)
-                groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
             //Checking automated updates are possible if apply updates checkbox is ticked
             if (ApplyUpdatesToNewVersion)

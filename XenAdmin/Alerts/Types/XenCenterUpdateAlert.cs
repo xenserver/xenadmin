@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Core;
 
 
@@ -47,59 +46,26 @@ namespace XenAdmin.Alerts
             _timestamp = NewVersion.TimeStamp;
         }
 
-        public override AlertPriority Priority { get { return AlertPriority.Priority5; } }
+        public override AlertPriority Priority => AlertPriority.Priority5;
 
-        public override string WebPageLabel
-        {
-            get { return NewVersion.Url; }
-        }
+        public override string WebPageLabel => NewVersion.Url;
 
-        public override string Name
-        {
-            get { return NewVersion.Name; }
-        }
+        public override string Name => NewVersion.Name;
 
-        public override string Title
-        {
-            get { return string.Format(Messages.ALERT_NEW_VERSION, NewVersion.Name); }
-        }
+        public override string Title => string.Format(Messages.ALERT_NEW_VERSION, NewVersion.Name);
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name);
-            }
-        }
+        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name);
 
         public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(NewVersion.Url); }
         }
 
-        public override string FixLinkText
-        {
-            get
-            {
-                return Messages.ALERT_NEW_VERSION_DOWNLOAD;
-            }
-        }
+        public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
 
-        public override string AppliesTo
-        {
-            get
-            {
-                return Messages.XENCENTER;
-            }
-        }
+        public override string AppliesTo => Messages.XENCENTER;
 
-        public override string HelpID
-        {
-            get
-            {
-                return "XenCenterUpdateAlert";
-            }
-        }
+        public override string HelpID => "XenCenterUpdateAlert";
 
         static int DISMISSED_XC_VERSIONS_LIMIT = 5;
 
@@ -124,10 +90,9 @@ namespace XenAdmin.Alerts
 
         public override bool Equals(Alert other)
         {
-            if (other is XenCenterUpdateAlert)
-            {
-                return NewVersion.VersionAndLang == ((XenCenterUpdateAlert)other).NewVersion.VersionAndLang;
-            }
+            if (other is XenCenterUpdateAlert xenCenterAlert)
+                return NewVersion.VersionAndLang == xenCenterAlert.NewVersion.VersionAndLang;
+
             return base.Equals(other);
         }
     }

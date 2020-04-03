@@ -158,45 +158,6 @@ namespace XenAdmin.Core
             f.Activate();
         }
 
-        public static bool FocusFirstControl(Control.ControlCollection cc)
-        {
-            bool found = false;
-
-            List<Control> controls = new List<Control>();
-            foreach (Control control in cc)
-                controls.Add(control);
-            controls.Sort((c1, c2) => c1.TabIndex.CompareTo(c2.TabIndex));
-            if (controls.Count > 0)
-            {
-                foreach (Control control in controls)
-                {
-                    if (control.HasChildren)
-                    {
-                        found = FocusFirstControl(control.Controls);
-                    }
-
-                    if (!found)
-                    {
-                        if (control is Label)
-                            continue;
-
-                        if (control is TextBox && (control as TextBox).ReadOnly)
-                            continue;
-
-                        if (control.CanSelect)
-                        {
-                            found = control.Focus();
-                        }
-                    }
-
-                    if (found)
-                        break;
-                }
-            }
-
-            return found;
-        }
-
         public static Dictionary<Host, Host> CheckHostIQNsDiffer()
         {
             Dictionary<Host, string> hosts = new Dictionary<Host, string>();

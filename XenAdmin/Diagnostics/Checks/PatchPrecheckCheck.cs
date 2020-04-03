@@ -39,6 +39,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Collections.Generic;
 using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -98,8 +99,6 @@ namespace XenAdmin.Diagnostics.Checks
 
             Session session = Host.Connection.DuplicateSession();
 
-            
-
             try
             {
                 if (Patch != null)
@@ -139,10 +138,7 @@ namespace XenAdmin.Diagnostics.Checks
             }
         }
 
-        public override string Description
-        {
-            get { return Messages.SERVER_SIDE_CHECK_DESCRIPTION; }
-        }
+        public override string Description => Messages.SERVER_SIDE_CHECK_DESCRIPTION;
 
         /// <summary>
         /// Find problem from xml result
@@ -184,7 +180,7 @@ namespace XenAdmin.Diagnostics.Checks
                 else if (node.Name == "required")
                     required = node.InnerXml;
             }
-            var problem = FindProblem(errorcode, found, required);
+            var problem = FindProblem(errorcode, "", found, required);
             return problem ?? new PrecheckFailed(this, Host, new Failure(errorcode));
         }
 
@@ -192,14 +188,25 @@ namespace XenAdmin.Diagnostics.Checks
         /// Find problem from xapi Failure
         /// </summary>
         /// <param name="failure">Xapi failure, thrown by Pool_patch.precheck() call.
-        ///     E.g.: failure.ErrorDescription.Count = 4
+        ///   E.g.: failure.ErrorDescription.Count = 4
         ///         ErrorDescription[0] = "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION"
         ///         ErrorDescription[1] = "OpaqueRef:612b5eee-03dc-bbf5-3385-6905fdc9b079"
         ///         ErrorDescription[2] = "6.5.0"
         ///         ErrorDescription[3] = "^6\\.2\\.0$"
-        ///     E.g.: failure.ErrorDescription.Count = 2
+        ///
+        ///   E.g.: failure.ErrorDescription.Count = 2
         ///         ErrorDescription[0] = "OUT_OF_SPACE"
         ///         ErrorDescription[1] = "/var/patch"
+        ///
+        ///   E.g.: failure.ErrorDescription.Count = 3 with the last parameter being an xml string
+        ///         ErrorDescription[0] = "UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR"
+        ///         ErrorDescription[1] = "test-update"
+        ///         ErrorDescription[2] = "<?x m l version="1.0" ?><error errorcode="LICENCE_RESTRICTION"></error>"
+        ///
+        ///   E.g.: failure.ErrorDescription.Count = 3 with the last parameter being a plain string
+        ///         ErrorDescription[0] = "UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR"
+        ///         ErrorDescription[1] = "CH82"
+        ///         ErrorDescription[2] = "VSWITCH_CONTROLLER_CONNECTED\nYou must [...] this update\n"
         /// </param>
         /// <returns>Problem or null, if no problem found</returns>
         private Problem FindProblem(Failure failure)
@@ -208,21 +215,17 @@ namespace XenAdmin.Diagnostics.Checks
                 return null;
 
             var errorcode = failure.ErrorDescription[0];
-            var found = "";
-            var required = "";
+            var param1 = failure.ErrorDescription.Count > 1 ? failure.ErrorDescription[1] : "";
+            var param2 = failure.ErrorDescription.Count > 2 ? failure.ErrorDescription[2] : "";
+            var param3 = failure.ErrorDescription.Count > 3 ? failure.ErrorDescription[3] : "";
 
-            if (failure.ErrorDescription.Count > 2)
-                found = failure.ErrorDescription[2];
-            if (failure.ErrorDescription.Count > 3)
-                required = failure.ErrorDescription[3];
-
-            return FindProblem(errorcode, found, required);  
+            return FindProblem(errorcode, param1, param2, param3);  
         }
 
-        private Problem FindProblem(string errorcode, string found, string required)
+        private Problem FindProblem(string errorcode, string param1, string param2, string param3)
         {
-            long requiredSpace = 0;
-            long foundSpace = 0;
+            long requiredSpace;
+            long foundSpace;
             long reclaimableDiskSpace = 0;
 
             DiskSpaceRequirements diskSpaceReq;
@@ -233,19 +236,19 @@ namespace XenAdmin.Diagnostics.Checks
                     return new WrongServerVersion(this, Host);
 
                 case "UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT":
-                    return new ConflictingUpdatePresent(this, found, Host);
+                    return new ConflictingUpdatePresent(this, param2, Host);
 
                 case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING":
-                    return new PrerequisiteUpdateMissing(this, found, Host);
+                    return new PrerequisiteUpdateMissing(this, param2, Host);
 
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
-                    return new WrongServerVersion(this, required, Host);
+                    return new WrongServerVersion(this, param3, Host);
 
                 case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
                     System.Diagnostics.Trace.Assert(!Helpers.ElyOrGreater(Host.Connection));   // If Ely or greater, we shouldn't get this error  
 
-                    long.TryParse(found, out foundSpace);
-                    long.TryParse(required, out requiredSpace);
+                    long.TryParse(param2, out foundSpace);
+                    long.TryParse(param3, out requiredSpace);
                     // get reclaimable disk space (excluding current patch)
                     try
                     {
@@ -264,8 +267,9 @@ namespace XenAdmin.Diagnostics.Checks
                    
                 case "UPDATE_PRECHECK_FAILED_OUT_OF_SPACE":
                     System.Diagnostics.Trace.Assert(Helpers.ElyOrGreater(Host.Connection));  // If not Ely or greater, we shouldn't get this error
-                    long.TryParse(found, out foundSpace);
-                    long.TryParse(required, out requiredSpace);
+
+                    long.TryParse(param2, out foundSpace);
+                    long.TryParse(param3, out requiredSpace);
 
                     diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Update.Name(), requiredSpace, foundSpace, 0);
 
@@ -294,12 +298,15 @@ namespace XenAdmin.Diagnostics.Checks
                 case "LICENCE_RESTRICTION":
                     return new LicenseRestrictionProblem(this, Host);
                 case "UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR":
-                    // try to find the problem from the error parameters as xml string
-                    // e.g.
-                    //   ErrorDescription[0] = "UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR"
-                    //   ErrorDescription[1] = "test-update"
-                    //   ErrorDescription[2] = "<?xml version="1.0" ?><error errorcode="LICENCE_RESTRICTION"></error>"
-                    return FindProblem(found);
+                    if (param1 == "CH82" && param2.StartsWith("VSWITCH_CONTROLLER_CONNECTED"))
+                    {
+                        var pool = Helpers.GetPoolOfOne(Host.Connection);
+                        if (pool.vSwitchController())
+                            return new VSwitchControllerProblem(this, pool);
+                        return null;
+                    }
+                    else
+                        return FindProblem(param2);
             }
             return null;
         }
