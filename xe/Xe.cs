@@ -30,7 +30,9 @@
  */
 
 using System;
+using System.Linq;
 using CommandLib;
+using System.Collections.Generic;
 
 
 namespace ThinCLI
@@ -45,6 +47,10 @@ namespace ThinCLI
 
             string body = "";
             char[] eqsep = {'='};
+
+            var uploadCmds = new List<string> {"pool-certificate-install", "pool-crl-install", "host-license-add", "vdi-import", "blob-put",
+            "pool-restore-database", "host-restore", "patch-upload", "update-upload"};
+            var fileName = new List<string> {"filename", "license-file", "file-name"};
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -83,6 +89,17 @@ namespace ThinCLI
                     {
                         Console.WriteLine("ThinCLI protocol: " + tCliProtocol.major + "." + tCliProtocol.minor);
                         Environment.Exit(0);
+                    }
+                    // Specify the upload cmds since download cmds also get 'filename' key
+                    else if(uploadCmds.Contains(s))
+                    {
+                        tCliProtocol.uploadCheck = true;
+                        body += s + "\n";
+                    }
+                    else if(fileName.Any(x => s.StartsWith(x)))
+                    {
+                        tCliProtocol.uploadFilename = s.Split(eqsep)[1];
+                        body += s + "\n";
                     }
                     else
                     {

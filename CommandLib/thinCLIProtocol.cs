@@ -77,6 +77,8 @@ namespace CommandLib
 	    public int major = 0;
 	    public int minor = 1;
         public bool dropOut;
+        public bool uploadCheck;
+        public string uploadFilename;
 
         public thinCLIProtocol(delegateGlobalError dGlobalError, 
             delegateGlobalUsage dGlobalUsage, 
@@ -98,6 +100,8 @@ namespace CommandLib
             this.dProgress = dProgress;
             this.conf = conf;
             dropOut = false;
+            uploadCheck = false;
+            uploadFilename = "";
         }
         
     }        
@@ -495,6 +499,14 @@ namespace CommandLib
             }
         }
 
+
+        public static void checkUploadFiles(String filename, thinCLIProtocol tCLIprotocol)
+        {
+            if (tCLIprotocol.uploadCheck == true && !filename.Equals(tCLIprotocol.uploadFilename)) {
+                throw new Exception(string.Format("The file '{0}' to upload is not same with initial one '{1}'", filename, tCLIprotocol.uploadFilename));
+            }
+        }
+
         public static void interpreter(Stream stream, thinCLIProtocol tCLIprotocol)
         {
             string filename = "";
@@ -560,11 +572,13 @@ namespace CommandLib
                                 break;
                             case Messages.tag.Load:
                                 filename = Types.unmarshal_string(stream);
+                                checkUploadFiles(filename, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: Load " + filename, tCLIprotocol);
                                 Messages.load(stream, filename, tCLIprotocol);
                                 break;
                             case Messages.tag.HttpPut:
                                 filename = Types.unmarshal_string(stream);
+                                checkUploadFiles(filename, tCLIprotocol);
                                 path = Types.unmarshal_string(stream);
                                 Uri uri = ParseUri(path, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
