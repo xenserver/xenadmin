@@ -40,32 +40,34 @@ namespace XenAdmin.Dialogs.Network
 {
     public partial class CertificateChangedDialog : XenDialogBase
     {
-        private X509Certificate NewCertificate;
+        private X509Certificate2 _newCertificate;
         private string _hostname;
 
         public CertificateChangedDialog(X509Certificate certificate, string hostname)
         {
             InitializeComponent();
             AlwaysIgnoreCheckBox.Enabled = Registry.SSLCertificateTypes == SSLCertificateTypes.None;
-            NewCertificate = certificate;
+            _newCertificate = new X509Certificate2(certificate);
             _hostname = hostname;
 
             string h = _hostname.Ellipsise(35);
-            X509Certificate2 cert2 = new X509Certificate2(NewCertificate);
+
             labelTrusted.Text = string.Format(labelTrusted.Text, h,
-                                              cert2.VerifyInAllStores() ? Messages.TRUSTED : Messages.NOT_TRUSTED);
+                _newCertificate.VerifyInAllStores() ? Messages.TRUSTED : Messages.NOT_TRUSTED);
+
             BlurbLabel.Text = string.Format(BlurbLabel.Text, h);
             Blurb2Label.Text = string.Format(Blurb2Label.Text, h);
         }
 
         private void ViewCertificateButton_Click(object sender, EventArgs e)
         {
-            X509Certificate2UI.DisplayCertificate(NewCertificate as X509Certificate2, Handle);
+            X509Certificate2UI.DisplayCertificate(_newCertificate, Handle);
         }
 
         private void Okbutton_Click(object sender, EventArgs e)
         {
-            Settings.ReplaceCertificate(_hostname, NewCertificate);
+            Settings.ReplaceCertificate(_hostname, _newCertificate.GetCertHashString());
+
             if (AlwaysIgnoreCheckBox.Enabled && AlwaysIgnoreCheckBox.Checked)
             {
                 Properties.Settings.Default.WarnChangedCertificate = false;

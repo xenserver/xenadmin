@@ -583,10 +583,10 @@ namespace XenAdmin
             TrySaveSettings();
         }
 
-        public static void AddCertificate(X509Certificate certificate, string hostname)
+        public static void AddCertificate(string hashString, string hostname)
         {
             Dictionary<string, string> known_servers = KnownServers;
-            known_servers.Add(hostname, certificate.GetCertHashString());
+            known_servers.Add(hostname, hashString);
             KnownServers = known_servers;
         }
 
@@ -620,10 +620,10 @@ namespace XenAdmin
             }
         }
 
-        public static void ReplaceCertificate(string hostname, X509Certificate certificate)
+        public static void ReplaceCertificate(string hostname, string hashString)
         {
             Dictionary<string, string> known_servers = KnownServers;
-            known_servers[hostname] = certificate.GetCertHashString();
+            known_servers[hostname] = hashString;
             KnownServers = known_servers;
         }
 
