@@ -38,7 +38,7 @@ namespace XenCenterLib
     {
         public const long TicksBefore1970 = 621355968000000000;
 
-        public const string ISO8601DateFormat = "yyyyMMddTHH:mm:ssZ";
+        public static readonly string[] Iso8601DateFormats = {"yyyyMMddTHH:mm:ssZ", "yyyy-MM-ddTHH:mm:ssZ"};
 
         public static long TicksToSeconds(long ticks)
         {
@@ -50,6 +50,12 @@ namespace XenCenterLib
             return (long)Math.Floor(new TimeSpan(ticks - (TicksBefore1970)).TotalSeconds);
         }
 
+        public static bool TryParseIso8601DateTime(string toParse, out DateTime result)
+        {
+            return DateTime.TryParseExact(toParse, Iso8601DateFormats, CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out result);
+        }
+
         /// <summary>
         /// Parses an ISO 8601 date/time into a DateTime.
         /// </summary>
@@ -57,12 +63,12 @@ namespace XenCenterLib
         /// <returns>The parsed DateTime with Kind DateTimeKind.Utc.</returns>
         public static DateTime ParseISO8601DateTime(string toParse)
         {
-            return DateTime.ParseExact(toParse, ISO8601DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
+            return DateTime.ParseExact(toParse, Iso8601DateFormats[0], CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
         }
 
         public static string ToISO8601DateTime(DateTime t)
         {
-            return t.ToUniversalTime().ToString(ISO8601DateFormat, CultureInfo.InvariantCulture);
+            return t.ToUniversalTime().ToString(Iso8601DateFormats[0], CultureInfo.InvariantCulture);
         }
     }
 }

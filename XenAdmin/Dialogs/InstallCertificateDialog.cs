@@ -32,12 +32,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs
@@ -46,7 +46,6 @@ namespace XenAdmin.Dialogs
     {
         private InstallCertificateAction _action;
         private readonly Host _host;
-        private const string DATE_FORMAT = "yyyyMMddTHH:mm:ssZ";
 
         public InstallCertificateDialog()
         {
@@ -122,8 +121,7 @@ namespace XenAdmin.Dialogs
         {
             string date = string.Empty;
 
-            if (!DateTime.TryParseExact(dateString, DATE_FORMAT, CultureInfo.InvariantCulture,
-                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var result))
+            if (!TimeUtil.TryParseIso8601DateTime(dateString, out DateTime result))
                 return dateString;
 
             Program.Invoke(this, () => { date = HelpersGUI.DateTimeToString(result.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true); });
