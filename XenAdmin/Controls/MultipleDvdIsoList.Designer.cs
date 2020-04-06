@@ -83,8 +83,6 @@ namespace XenAdmin.Controls
             // cdChanger1
             // 
             this.cdChanger1.connection = null;
-            this.cdChanger1.DisplayISO = false;
-            this.cdChanger1.DisplayPhysical = false;
             resources.ApplyResources(this.cdChanger1, "cdChanger1");
             this.cdChanger1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cdChanger1.Drive = null;
