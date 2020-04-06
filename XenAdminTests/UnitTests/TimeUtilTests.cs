@@ -56,7 +56,7 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void ISO8601DateFormatStringCheck()
         {
-            Assert.AreEqual("yyyyMMddTHH:mm:ssZ", TimeUtil.ISO8601DateFormat);
+            Assert.AreEqual("yyyyMMddTHH:mm:ssZ", TimeUtil.Iso8601DateFormats[0]);
         }
 
         [Test]

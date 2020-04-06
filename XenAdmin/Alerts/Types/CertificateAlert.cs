@@ -30,12 +30,12 @@
  */
 
 using System;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Xml;
 using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAPI;
+using XenCenterLib;
 
 
 namespace XenAdmin.Alerts
@@ -44,19 +44,25 @@ namespace XenAdmin.Alerts
     {
         private readonly Host _host;
         private readonly DateTime? _certificateExpiryDate;
-        private static readonly Regex _dateRegex = new Regex(@"(\d{8}T\d{2}:\d{2}:\d{2}Z)");
-        private const string DATE_FORMAT = "yyyyMMddTHH:mm:ssZ";
 
         public CertificateAlert(Message m)
             : base(m)
         {
             _host = m.Connection.Cache.Hosts.FirstOrDefault(h => h.uuid == m.obj_uuid);
 
-            var match = _dateRegex.Match(m.body);
+            try
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(m.body);
+                var nodes = doc.GetElementsByTagName("date");
 
-            if (match.Success && DateTime.TryParseExact(match.Value, DATE_FORMAT, CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var result))
-                _certificateExpiryDate = result;
+                if (nodes.Count > 0 && TimeUtil.TryParseIso8601DateTime(nodes[0].InnerText, out DateTime result))
+                    _certificateExpiryDate = result;
+            }
+            catch
+            {
+                //ignore
+            }
         }
 
         public override string Title
