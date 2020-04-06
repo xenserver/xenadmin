@@ -32,6 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Threading;
+using XenAdmin.Network;
 using XenAPI;
 
 
@@ -39,11 +42,18 @@ namespace XenAdmin.Actions
 {
     public class InstallCertificateAction : AsyncAction
     {
-        private readonly string _hostRef;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly string _privateKeyFile;
-        private readonly string  _certificateFile;
+        private readonly string _certificateFile;
         private readonly List<string> _chainFiles;
         private readonly Func<string, string> _dateConverter;
+        private readonly string _hostRef;
+        private readonly bool _isMaster;
+        private readonly string _oldCertificateUuid;
+        private volatile Session _session;
+
+        public event Action<IXenConnection> RequestReconnection;
 
         public InstallCertificateAction(Host host, string privateKeyFile, string certificateFile,
             List<string> chainFiles, Func<string, string> dateConverter)
@@ -51,11 +61,22 @@ namespace XenAdmin.Actions
                 Messages.INSTALL_SERVER_CERTIFICATE_DESCRIPTION, true)
         {
             Host = host;
+            _session = host.Connection.Session;
             _hostRef = host.opaque_ref;
+            _isMaster = host.IsMaster();
+
+            if (host.certificates != null && host.certificates.Count > 0)
+            {
+                var cert = host.Connection.Resolve(host.certificates[0]);
+                if (cert != null)
+                    _oldCertificateUuid = cert.uuid;
+            }
+
             _privateKeyFile = privateKeyFile;
             _certificateFile = certificateFile;
             _chainFiles = chainFiles ?? new List<string>();
             _dateConverter = dateConverter;
+
             SetRbacPermissions();
         }
 
@@ -69,7 +90,7 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.Add("host.install_server_certificate");
         }
 
-        protected override void Run()
+        private void CollectFileContents(out string privateKey, out string certificate, out string chain)
         {
             int fileCount = 2 + _chainFiles.Count;
             int i = 0;
@@ -80,7 +101,6 @@ namespace XenAdmin.Actions
                 throw new IOException();
             }
 
-            string privateKey;
             try
             {
                 privateKey = File.ReadAllText(_privateKeyFile);
@@ -94,7 +114,7 @@ namespace XenAdmin.Actions
             PercentComplete = ++i * 30 / fileCount;
 
             if (Cancelling)
-                return;
+                throw new CancelledException();
 
             if (!File.Exists(_certificateFile))
             {
@@ -102,7 +122,6 @@ namespace XenAdmin.Actions
                 throw new IOException();
             }
 
-            string certificate;
             try
             {
                 certificate = File.ReadAllText(_certificateFile);
@@ -116,9 +135,9 @@ namespace XenAdmin.Actions
             PercentComplete = ++i * 30 / fileCount;
 
             if (Cancelling)
-                return;
+                throw new CancelledException();
 
-            var chain = new List<string>();
+            var chainFiles = new List<string>();
 
             foreach (var file in _chainFiles)
             {
@@ -131,7 +150,7 @@ namespace XenAdmin.Actions
                 try
                 {
                     var content = File.ReadAllText(file);
-                    chain.Add(content);
+                    chainFiles.Add(content);
                 }
                 catch
                 {
@@ -142,18 +161,63 @@ namespace XenAdmin.Actions
                 PercentComplete = ++i * 30 / fileCount;
 
                 if (Cancelling)
-                    return;
+                    throw new CancelledException();
             }
+
+            chain = string.Join("\n", chainFiles.ToArray());
+        }
+
+        private void WaitForNewCertificate()
+        {
+            log.Info("Waiting for new certificate uuid...");
+
+            var startTime = DateTime.Now;
+            string newUuid = null;
+
+            do
+            {
+                if (Cancelling)
+                    throw new CancelledException();
+
+                var resolvedHost = Host.get_record(_session, _hostRef);
+                if (resolvedHost != null && resolvedHost.certificates != null && resolvedHost.certificates.Count > 0)
+                {
+                    var cert = Certificate.get_record(_session, resolvedHost.certificates[0]);
+                    newUuid = cert.uuid;
+                }
+
+                Thread.Sleep(3000);
+
+                var span = DateTime.Now - startTime;
+
+                if ((int)span.TotalSeconds % 60 == 0)
+                    log.InfoFormat("Been waiting for new certificate uuid for {0:0.0}sec...", span.TotalSeconds);
+            } while (newUuid == _oldCertificateUuid);
+
+            log.Info("New certificate uuid found");
+            Description = Messages.CERTIFICATE_INSTALLATION_SUCCESS;
+        }
+
+        protected override void Run()
+        {
+            CollectFileContents(out string privateKey, out string certificate, out string chain);
 
             try
             {
+                Connection.ConnectionStateChanged -= ConnectionStateChanged;
+                Connection.ConnectionStateChanged += ConnectionStateChanged;
                 Connection.ExpectDisruption = true;
-                Connection.SuppressErrors = true;
 
-                Host.install_server_certificate(Connection.Session, _hostRef, certificate, privateKey,
-                    string.Join("\n", chain.ToArray()));
-
-                Description = Messages.CERTIFICATE_INSTALLATION_SUCCESS;
+                try
+                {
+                    Host.install_server_certificate(_session, _hostRef, certificate, privateKey, chain);
+                    PercentComplete = 50;
+                    WaitForNewCertificate();
+                }
+                catch (WebException)
+                {
+                    ConnectionStateChanged(Connection);
+                }
             }
             catch (Failure f)
             {
@@ -190,7 +254,7 @@ namespace XenAdmin.Actions
             }
             finally
             {
-                Connection.SuppressErrors = false;
+                Connection.ConnectionStateChanged -= ConnectionStateChanged;
                 PercentComplete = 100;
             }
         }
@@ -198,6 +262,43 @@ namespace XenAdmin.Actions
         protected override void Clean()
         {
             Connection.ExpectDisruption = false;
+        }
+
+        private void ConnectionStateChanged(IXenConnection conn)
+        {
+            if (_isMaster)
+            {
+                if (Cancelling)
+                    throw new CancelledException();
+                
+                var startTime = DateTime.Now;
+
+                do
+                {
+                    if (Cancelling)
+                        throw new CancelledException();
+
+                    try
+                    {
+                        _session = Connection.DuplicateSession();
+                        log.InfoFormat("Reconnected after {0:0.0}sec...", (DateTime.Now - startTime).TotalSeconds);
+                    }
+                    catch (Exception e)
+                    {
+                        _session = null;
+                        Thread.Sleep(5000);
+
+                        var span = DateTime.Now - startTime;
+                        if ((int)span.TotalSeconds % 60 == 0)
+                            log.Info($"Been waiting for reconnection for {span.TotalSeconds:0.0}sec...", e);
+                    }
+                } while (_session == null);
+
+                RequestReconnection?.Invoke(Connection);
+            }
+
+            PercentComplete = 60;
+            WaitForNewCertificate();
         }
     }
 }
