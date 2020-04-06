@@ -99,8 +99,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.CdDropDownBox, "CdDropDownBox");
             this.CdDropDownBox.connection = null;
-            this.CdDropDownBox.DisplayISO = false;
-            this.CdDropDownBox.DisplayPhysical = false;
             this.CdDropDownBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CdDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CdDropDownBox.Empty = false;

@@ -45,10 +45,9 @@ namespace XenAdmin.Controls
     {
         public VM vm;
         protected VBD cdrom;
-        protected bool refreshOnClose = false;
+        protected bool refreshOnClose;
         protected bool changing = false;
         private IXenConnection _connection;
-        private bool noTools = false;
 
         private VDI selectedCD;
 
@@ -106,10 +105,7 @@ namespace XenAdmin.Controls
                 if (sr.content_type != SR.Content_Type_ISO)
                     continue;
 
-                if (DisplayPhysical && !sr.Physical())
-                    continue;
-
-                if (DisplayISO && (sr.Physical() || (noTools && sr.IsToolsSR())))
+                if (sr.IsToolsSR() && Helpers.StockholmOrGreater(connection))
                     continue;
 
                 if (vm == null && sr.IsBroken())
@@ -183,10 +179,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        public bool DisplayPhysical { get; set; }
-
-        public bool DisplayISO { get; set; }
-
         public bool Empty { get; set; }
 
         private void AddSR(ToStringWrapper<SR> srWrapper)
@@ -202,10 +194,8 @@ namespace XenAdmin.Controls
                     ToStringWrapper<VDI> vdiWrapper = new ToStringWrapper<VDI>(vdi, vdi.Name());
                     vdis.Add(vdiWrapper);
                 }
-                vdis.Sort(new Comparison<ToStringWrapper<VDI>>(delegate(ToStringWrapper<VDI> object1, ToStringWrapper<VDI> object2)
-                {
-                    return StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
-                }));
+                vdis.Sort((object1, object2) =>
+                    StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name()));
 
                 Host host = srWrapper.item.GetStorageHost();
                 if (host != null)
@@ -220,10 +210,13 @@ namespace XenAdmin.Controls
             {
                 if (srWrapper.item.IsToolsSR())
                 {
-                    foreach (VDI vdi in connection.ResolveAll<VDI>(srWrapper.item.VDIs))
+                    if (!Helpers.StockholmOrGreater(connection))
                     {
-                        if (vdi.IsToolsIso())
-                            items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name()));
+                        foreach (VDI vdi in connection.ResolveAll<VDI>(srWrapper.item.VDIs))
+                        {
+                            if (vdi.IsToolsIso())
+                                items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name()));
+                        }
                     }
                 }
                 else
@@ -232,10 +225,9 @@ namespace XenAdmin.Controls
                     {
                         items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name()));
                     }
-                    items.Sort(new Comparison<ToStringWrapper<VDI>>(delegate(ToStringWrapper<VDI> object1, ToStringWrapper<VDI> object2)
-                    {
-                        return StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
-                    }));
+
+                    items.Sort((object1, object2) =>
+                        StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name()));
                 }
             }
 
