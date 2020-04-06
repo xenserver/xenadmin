@@ -36,6 +36,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAPI;
 using XenCenterLib;
 
@@ -240,6 +241,7 @@ namespace XenAdmin.Dialogs
             _action = new InstallCertificateAction(_host, textBoxKey.Text.Trim(), textBoxCertificate.Text.Trim(),
                 certificateFiles, DateConverter);
 
+            _action.RequestReconnection += _action_RequestReconnection;
             _action.Changed += _action_Changed;
             _action.Completed += _action_Completed;
 
@@ -256,7 +258,11 @@ namespace XenAdmin.Dialogs
             UpdateButtons();
         }
 
-        
+        private void _action_RequestReconnection(IXenConnection conn)
+        {
+            Program.Invoke(Program.MainWindow, () => XenConnectionUI.BeginConnect(conn, false, null, false));
+        }
+
         private void _action_Changed(ActionBase action)
         {
             UpdateProgress();
