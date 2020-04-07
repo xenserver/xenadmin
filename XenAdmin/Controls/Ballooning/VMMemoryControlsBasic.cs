@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
@@ -41,7 +42,7 @@ namespace XenAdmin.Controls.Ballooning
     public partial class VMMemoryControlsBasic : VMMemoryControlsEdit
     {
         private bool ballooning = true;
-        public event EventHandler InstallTools;
+        public event Action InstallTools;
 
         public VMMemoryControlsBasic()
         {
@@ -114,7 +115,8 @@ namespace XenAdmin.Controls.Ballooning
                     }
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
-                    linkInstallTools.Visible = InstallToolsCommand.CanExecuteAll(vms);
+
+                    linkInstallTools.Visible = vms.All(InstallToolsCommand.CanExecute);
                 }
                 else if (vm0.is_a_template)
                 {
@@ -139,6 +141,11 @@ namespace XenAdmin.Controls.Ballooning
                     linkInstallTools.Visible = InstallToolsCommand.CanExecute(vm0);
                 }
             }
+
+            if (linkInstallTools.Visible)
+                linkInstallTools.Text = vms.All(v => Helpers.StockholmOrGreater(v.Connection))
+                    ? Messages.INSTALLTOOLS_READ_MORE
+                    : Messages.INSTALL_XENSERVER_TOOLS;
 
             // Spinners
             FreeSpinnerRanges();
@@ -255,14 +262,10 @@ namespace XenAdmin.Controls.Ballooning
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (new InstallToolsCommand(Program.MainWindow, vms).ConfirmAndExecute())
-                OnInstallTools();
-        }
-
-        private void OnInstallTools()
-        {
-            if (InstallTools != null)
-                InstallTools(this, new EventArgs());
+            if (vms.All(v => Helpers.StockholmOrGreater(v.Connection)))
+                Help.HelpManager.Launch("InstallToolsWarningDialog");
+            else if (new InstallToolsCommand(Program.MainWindow, vms).ConfirmAndExecute())
+                InstallTools?.Invoke();
         }
     }
 }

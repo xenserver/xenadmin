@@ -103,7 +103,7 @@ namespace XenAdmin.Dialogs
                 Close();
         }
 
-        private void BallooningDialog_InstallTools(object sender, EventArgs e)
+        private void BallooningDialog_InstallTools()
         {
             Close();
         }

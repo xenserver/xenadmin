@@ -555,13 +555,15 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = String.Format(vm.HasNewVirtualisationStates() ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = string.Format(vm.HasNewVirtualisationStates()
+                            ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT
+                            : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
                         // if the state is not unknown we have metrics and can show a detailed message.
                         // Otherwise go with the server and just say they aren't installed
-                        error = !vm.GetVirtualisationStatus().HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN)
+                        error = !vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
@@ -758,10 +760,10 @@ namespace XenAdmin.Dialogs
                         vmRef = ErrorDescription[1];
 
                         VM vm = connection.Resolve(new XenRef<VM>(vmRef));
-                        if (vm != null && InstallToolsCommand.CanExecute(vm))
-                            UpdateVMWithError(vmRef, String.Empty, Solution.InstallPVDrivers);
+                        if (InstallToolsCommand.CanExecute(vm) && !Helpers.StockholmOrGreater(connection))
+                            UpdateVMWithError(vmRef, string.Empty, Solution.InstallPVDrivers);
                         else
-                            UpdateVMWithError(vmRef, String.Empty, Solution.InstallPVDriversNoSolution);
+                            UpdateVMWithError(vmRef, string.Empty, Solution.InstallPVDriversNoSolution);
 
                         break;
 

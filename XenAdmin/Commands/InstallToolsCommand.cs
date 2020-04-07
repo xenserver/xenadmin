@@ -31,15 +31,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
 using XenAdmin.Network;
 using System.Drawing;
+using System.Linq;
 
 
 namespace XenAdmin.Commands
@@ -298,54 +297,32 @@ namespace XenAdmin.Commands
 
         public static bool CanExecute(VM vm)
         {
-            var virtualisationStatus = vm.GetVirtualisationStatus();
-
-            return vm != null && !vm.is_a_template && !vm.Locked &&
-                !virtualisationStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) &&
-                (!virtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) || !virtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)) &&
-                vm.power_state == vm_power_state.Running && !ResidentHostIsOlderThanMaster(vm)
-                && CanViewVMConsole(vm.Connection);
-        }
-
-        private static bool ResidentHostIsOlderThanMaster(VM vm)
-        {
-            var vmHome = vm.Home();
-            return vmHome != null && Helpers.IsOlderThanMaster(vmHome);
-        }
-
-        public static bool CanExecuteAll(List<VM> vms)
-        {
-            foreach (VM vm in vms)
-            {
-                if (!CanExecute(vm))
-                    return false;
-            }
-            return true;
-        }
-
-        private static bool CanViewVMConsole(XenAdmin.Network.IXenConnection xenConnection)
-        {
-            if (xenConnection.Session == null)
+            if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Running)
                 return false;
 
-            RbacMethodList r = new RbacMethodList("http/connect_console");
-            if (Role.CanPerform(r, xenConnection, false))
-                return true;
+            var vStatus = vm.GetVirtualisationStatus();
 
-            return false;
+            if (vStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) ||
+                vStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && vStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                return false;
+
+            var vmHome = vm.Home();
+            if (vmHome != null && Helpers.IsOlderThanMaster(vmHome))
+                return false;
+
+            //whether RBAC allows connection to the VM's console
+            return vm.Connection.Session != null &&
+                   Role.CanPerform(new RbacMethodList("http/connect_console"), vm.Connection, out _, false);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.Count > 0 &&
+                   selection.All(v => v.XenObject is VM vm &&
+                                      !Helpers.StockholmOrGreater(vm.Connection) &&
+                                      CanExecute(vm));
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_INSTALL_TOOLS;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_INSTALL_TOOLS;
     }
 }
