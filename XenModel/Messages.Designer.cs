@@ -20875,24 +20875,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools]....
-        /// </summary>
-        public static string INSTALL_XENSERVER_TOOLS_DOTS {
-            get {
-                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_DOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools].
-        /// </summary>
-        public static string INSTALL_XS_TOOLS {
-            get {
-                return ResourceManager.GetString("INSTALL_XS_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Installed Updates.
         /// </summary>
         public static string INSTALLED_UPDATES {
@@ -20934,6 +20916,15 @@ namespace XenAdmin {
         public static string INSTALLTOOLS_EXIST {
             get {
                 return ResourceManager.GetString("INSTALLTOOLS_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read more about installing [Citrix VM Tools].
+        /// </summary>
+        public static string INSTALLTOOLS_READ_MORE {
+            get {
+                return ResourceManager.GetString("INSTALLTOOLS_READ_MORE", resourceCulture);
             }
         }
         

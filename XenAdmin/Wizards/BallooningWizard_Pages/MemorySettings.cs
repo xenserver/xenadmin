@@ -31,11 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Ballooning;
 using XenAPI;
@@ -44,7 +39,7 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
 {
     public partial class MemorySettings : XenTabPage
     {
-        public event EventHandler InstallTools;
+        public event Action InstallTools;
 
         private VMMemoryControlsEdit memoryControls;
 
@@ -110,10 +105,9 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
             get { return memoryControls == memoryControlsAdvanced; }
         }
 
-        private void memoryControlsBasic_InstallTools(object sender, EventArgs e)
+        private void memoryControlsBasic_InstallTools()
         {
-            if (InstallTools != null)
-                InstallTools(sender, e);  // just pass it on
+            InstallTools?.Invoke();
         }
 
         public void UnfocusSpinners()

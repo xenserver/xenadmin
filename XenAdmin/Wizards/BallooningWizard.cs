@@ -58,6 +58,7 @@ namespace XenAdmin.Wizards
 
             xenTabPageVMs = new ChooseVMs();
             xenTabPageSettings = new MemorySettings();
+            xenTabPageSettings.InstallTools += xenTabPageSettings_InstallTools;
 
             xenTabPageVMs.VMs = vms;
             AddPage(xenTabPageVMs);
@@ -99,9 +100,9 @@ namespace XenAdmin.Wizards
                 FinishCanceled();
         }
         
-        private void xenTabPageSettings_InstallTools(object sender, EventArgs e)
+        private void xenTabPageSettings_InstallTools()
         {
-            this.Close();
+            Close();
         }
     }
 }
