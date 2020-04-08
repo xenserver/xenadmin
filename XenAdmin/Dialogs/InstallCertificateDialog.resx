@@ -300,7 +300,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>97, 15</value>
   </data>
   <data name="labelCertificate.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>5</value>
   </data>
   <data name="labelCertificate.Text" xml:space="preserve">
     <value>&amp;Server certificate:</value>
@@ -330,7 +330,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>404, 23</value>
   </data>
   <data name="textBoxCertificate.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;textBoxCertificate.Name" xml:space="preserve">
     <value>textBoxCertificate</value>
@@ -357,7 +357,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>81, 23</value>
   </data>
   <data name="buttonBrowseCertificate.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>7</value>
   </data>
   <data name="buttonBrowseCertificate.Text" xml:space="preserve">
     <value>B&amp;rowse...</value>
@@ -390,7 +390,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>594, 15</value>
   </data>
   <data name="labelChain.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="labelChain.Text" xml:space="preserve">
     <value>Intermediate &amp;certificates:</value>
@@ -426,7 +426,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>507, 160</value>
   </data>
   <data name="dataGridViewCertificates.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;dataGridViewCertificates.Name" xml:space="preserve">
     <value>dataGridViewCertificates</value>
@@ -459,7 +459,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>81, 25</value>
   </data>
   <data name="buttonAddCertificate.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="buttonAddCertificate.Text" xml:space="preserve">
     <value>&amp;Add...</value>
@@ -495,7 +495,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>81, 25</value>
   </data>
   <data name="buttonRemove.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="buttonRemove.Text" xml:space="preserve">
     <value>Re&amp;move</value>
@@ -525,7 +525,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>507, 15</value>
   </data>
   <data name="labelChainError.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="labelChainError.Text" xml:space="preserve">
     <value>label certificate error</value>
@@ -555,7 +555,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>81, 25</value>
   </data>
   <data name="buttonInstall.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="buttonInstall.Text" xml:space="preserve">
     <value>&amp;Install</value>
@@ -585,7 +585,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>81, 25</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -684,7 +684,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>594, 22</value>
   </data>
   <data name="tlpActionProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;tlpActionProgress.Name" xml:space="preserve">
     <value>tlpActionProgress</value>
@@ -717,7 +717,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>594, 23</value>
   </data>
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
@@ -747,7 +747,7 @@ Once you have finished, click Install to proceed with the certificate installati
     <value>404, 15</value>
   </data>
   <data name="labelCertificateError.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>8</value>
   </data>
   <data name="labelCertificateError.Text" xml:space="preserve">
     <value>label certificate error</value>

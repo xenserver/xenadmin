@@ -19514,6 +19514,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server is unreachable..
+        /// </summary>
+        public static string HOST_UNREACHABLE {
+            get {
+                return ResourceManager.GetString("HOST_UNREACHABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Host &apos;{0}&apos;:.
         /// </summary>
         public static string HOST_X {
@@ -29318,15 +29327,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The server is unreachable.
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE", resourceCulture);
             }
         }
         

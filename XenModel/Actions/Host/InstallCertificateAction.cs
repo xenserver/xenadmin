@@ -61,7 +61,7 @@ namespace XenAdmin.Actions
                 Messages.INSTALL_SERVER_CERTIFICATE_DESCRIPTION, true)
         {
             Host = host;
-            _session = host.Connection.Session;
+            _session = Session;
             _hostRef = host.opaque_ref;
             _isMaster = host.IsMaster();
 
@@ -202,6 +202,10 @@ namespace XenAdmin.Actions
         {
             CollectFileContents(out string privateKey, out string certificate, out string chain);
 
+            var host = Connection.Resolve(new XenRef<Host>(_hostRef));
+            if (host == null || !host.IsLive())
+                throw new Failure(Messages.HOST_UNREACHABLE);
+
             try
             {
                 Connection.ConnectionStateChanged -= ConnectionStateChanged;
@@ -210,7 +214,7 @@ namespace XenAdmin.Actions
 
                 try
                 {
-                    Host.install_server_certificate(_session, _hostRef, certificate, privateKey, chain);
+                    Host.install_server_certificate(Session, _hostRef, certificate, privateKey, chain);
                     PercentComplete = 50;
                     WaitForNewCertificate();
                 }

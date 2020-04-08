@@ -1842,7 +1842,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InstallCertificateDialog.ja.resx">
+      <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InstallCertificateDialog.resx">
+      <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InstallCertificateDialog.zh-CN.resx">
       <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.ja.resx">
