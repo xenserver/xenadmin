@@ -6834,6 +6834,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING" xml:space="preserve">
     <value>{0}: One or more servers in the pool are not licensed for automated updates</value>
   </data>
+  <data name="HOST_UNREACHABLE" xml:space="preserve">
+    <value>The server is unreachable.</value>
+  </data>
   <data name="HOST_X" xml:space="preserve">
     <value>Host '{0}':</value>
   </data>
@@ -10116,9 +10119,6 @@ This will cancel the update process and may leave your system in an unstable sta
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>One or more servers in the pool are not licensed for automated updates</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
-    <value>The server is unreachable</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
     <value>One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version.</value>

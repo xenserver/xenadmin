@@ -83,8 +83,8 @@ namespace XenAdmin.Dialogs
             // 
             // labelKeyBlurb
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.labelKeyBlurb, 3);
             resources.ApplyResources(this.labelKeyBlurb, "labelKeyBlurb");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelKeyBlurb, 3);
             this.labelKeyBlurb.Name = "labelKeyBlurb";
             // 
             // labelKey
@@ -107,8 +107,8 @@ namespace XenAdmin.Dialogs
             // 
             // labelKeyError
             // 
-            this.labelKeyError.AutoEllipsis = true;
             resources.ApplyResources(this.labelKeyError, "labelKeyError");
+            this.labelKeyError.AutoEllipsis = true;
             this.labelKeyError.ForeColor = System.Drawing.Color.Red;
             this.labelKeyError.Name = "labelKeyError";
             // 
@@ -138,6 +138,7 @@ namespace XenAdmin.Dialogs
             // 
             // dataGridViewCertificates
             // 
+            resources.ApplyResources(this.dataGridViewCertificates, "dataGridViewCertificates");
             this.dataGridViewCertificates.AllowUserToResizeColumns = false;
             this.dataGridViewCertificates.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewCertificates.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -146,7 +147,6 @@ namespace XenAdmin.Dialogs
             this.dataGridViewCertificates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnCertificate});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewCertificates, 2);
-            resources.ApplyResources(this.dataGridViewCertificates, "dataGridViewCertificates");
             this.dataGridViewCertificates.Name = "dataGridViewCertificates";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -180,9 +180,9 @@ namespace XenAdmin.Dialogs
             // 
             // labelChainError
             // 
+            resources.ApplyResources(this.labelChainError, "labelChainError");
             this.labelChainError.AutoEllipsis = true;
             this.tableLayoutPanel1.SetColumnSpan(this.labelChainError, 2);
-            resources.ApplyResources(this.labelChainError, "labelChainError");
             this.labelChainError.ForeColor = System.Drawing.Color.Red;
             this.labelChainError.Name = "labelChainError";
             // 
