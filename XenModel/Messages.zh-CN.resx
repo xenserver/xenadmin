@@ -2616,6 +2616,12 @@
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>主机分区布局检查</value>
   </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch Controller 检查</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>检查 vSwitch Controller 配置</value>
+  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>需要选中重新启动选项</value>
   </data>
@@ -7059,7 +7065,7 @@
     <value>查找要导入的文件</value>
   </data>
   <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>您正在尝试导入的 [Xenserver] 模板已存在于所选池中。</value>
+    <value>您正在尝试导入的 [XenServer] 模板已存在于所选池中。</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>配置新模板的存储</value>
@@ -7295,11 +7301,14 @@
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>接口: {0}</value>
   </data>
+  <data name="INVALID_DISK_SIZE" xml:space="preserve">
+    <value>磁盘大小无效</value>
+  </data>
   <data name="INVALID_HOST" xml:space="preserve">
     <value>主机名无效</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
-    <value>磁盘大小无效</value>
+    <value>数值无效</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>参数无效</value>
@@ -7429,7 +7438,7 @@ SCSI ID: {2}
     <value>许可证管理器</value>
   </data>
   <data name="LEARN_MORE" xml:space="preserve">
-    <value>了解更多</value>
+    <value>了解更多...</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>输入具有足够的从 AD 中删除计算机帐户权限的用户名和密码。即使无法删除计算机帐户，也将禁用身份验证。</value>
@@ -8663,6 +8672,9 @@ SCSI ID: {2}
   <data name="NETW_DETAILS_VLAN_NUMBER_IN_USE" xml:space="preserve">
     <value>此 VLAN 编号已在使用</value>
   </data>
+  <data name="NETW_DETAILS_VLAN_RANGE" xml:space="preserve">
+    <value>允许的 VLAN 范围: {0} 到 {1}</value>
+  </data>
   <data name="NETW_EXTERNAL_DETAILS_TITLE" xml:space="preserve">
     <value>配置新网络</value>
   </data>
@@ -8680,6 +8692,9 @@ SCSI ID: {2}
   </data>
   <data name="NETW_TYPE_SELECT_TITLE" xml:space="preserve">
     <value>选择要创建的网络类型</value>
+  </data>
+  <data name="NETW_VLAN_ZERO" xml:space="preserve">
+    <value>VLAN 0 将接收不在任何其他 VLAN 上的所有流量</value>
   </data>
   <data name="NEVER" xml:space="preserve">
     <value>从不</value>
@@ -8957,7 +8972,7 @@ SR:  {0}
   <data name="NEWSR_NETAPP_BLURB" xml:space="preserve">
     <value>如果您有权访问磁盘空间充足并运行某版本 Data ONTAP 7G (7.2 或更高版本)的网络设备(NetApp)文件管理器，则可以配置自定义的 NetApp 存储库。 
 
-驱动程序使用文件管理器的 ZAPI 接口来创建一组与 SR 对应的 FlexVol。VDI 作为虚拟 LUN 创建在文件管理器上，并使用 iSCSI 数据路径连接到主机。 
+驱动程序使用文件管理器的 XAPI 接口来创建一组与 SR 对应的 FlexVol。VDI 作为虚拟 LUN 创建在文件管理器上，并使用 iSCSI 数据路径连接到主机。 
 
 VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并确保与现有 ONTAP 文件管理器管理工具兼容。</value>
   </data>
@@ -10479,7 +10494,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>该池无共享存储</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: 截至 [XenServer] {1}，已放弃对半虚拟化的(PV)来宾的支持。单击“了解更多”可查看支持的来宾操作系统列表。 </value>
+    <value>{0}: 已在 {1} 中删除了对半虚拟化 (PV) 来宾的支持。单击“了解更多”可查看受支持的来宾操作系统的列表。</value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>池获得部分许可</value>
@@ -10555,6 +10570,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>服务器“{0}”</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: 已在 {1} 中删除了对 vSwitch Controller 的支持。</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>已在 {0} 中删除了对 vSwitch Controller 的支持。必须取消配置该控制器，因为需要该控制器的任何功能都将不再起作用。请单击下面的链接了解更多信息。</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>如果要升级到 {0} 及更高版本，必须取消配置 vSwitch Controller，因为此版本中已删除对该控制器的支持，并且需要该控制器的任何功能都将不再起作用。请单击下面的链接了解更多信息。</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>已将输入的 MAC 地址分配给以下 VM: 
@@ -11037,8 +11061,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="REPEATED_KEY" xml:space="preserve">
     <value>重复的密钥</value>
   </data>
-  <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED" xml:space="preserve">
     <value>{0}: 未安装所需修补程序</value>
+  </data>
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED_WARNING" xml:space="preserve">
+    <value>{0}: 已跳过检查，因为未安装所需的修补程序</value>
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>必需的更新</value>
@@ -11799,9 +11826,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
     <value>通过 [XenCenter] 无法销毁此 SR。</value>
-  </data>
-  <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>通过 [XenCenter] 无法分离此 SR。</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
     <value>通过 [XenCenter] 无法忘记此 SR。</value>
@@ -13657,12 +13681,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>下一步(&amp;N) &gt;</value>
   </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL" xml:space="preserve">
-    <value>新网络将映射到现有物理网络接口，并分配一个在该接口上使用的 VLAN 编号。可以在下面选择要使用的物理接口。</value>
-  </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_INTERNAL" xml:space="preserve">
-    <value>如果要将该网络自动添加到新 VM 中，请选中下面的复选框。</value>
-  </data>
   <data name="WIZARD_INTERNAL_ERROR" xml:space="preserve">
     <value>完成该向导时出现内部错误。有关详细信息，请参阅日志。</value>
   </data>
@@ -14370,6 +14388,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] {0}</value>
+  </data>
+  <data name="XENSERVER_8_2" xml:space="preserve">
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">

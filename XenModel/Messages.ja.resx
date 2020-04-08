@@ -2620,6 +2620,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>ホストのパーティション レイアウトの確認</value>
   </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch コントローラー チェック</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>vSwitch コントローラーの構成を確認しています</value>
+  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>再起動の確認が必要です</value>
   </data>
@@ -3428,7 +3434,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
     <value>SR がオーバーコミットされました</value>
-  </data> 
+  </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>この SR には十分な空き容量がありません</value>
   </data>
@@ -5355,7 +5361,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>VM のサーバーでの再開エラー</value>
   </data>
   <data name="ERROR_DIALOG_RESUME_VM_TEXT" xml:space="preserve">
-    <value>以下の VM を再開できません。</value>
+    <value>以下の VM を再開できません:</value>
   </data>
   <data name="ERROR_DIALOG_RESUME_VM_TITLE" xml:space="preserve">
     <value>VM の再開エラー</value>
@@ -7064,7 +7070,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>インポートするファイルの指定</value>
   </data>
   <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>インポートしようとしている [Xenserver] テンプレートは既に選択したプールに存在します。</value>
+    <value>インポートしようとしている [XenServer] テンプレートは選択したプールに既に存在します。</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>新規テンプレートのストレージを構成してください</value>
@@ -7300,11 +7306,14 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>インターフェイス: {0}</value>
   </data>
+  <data name="INVALID_DISK_SIZE" xml:space="preserve">
+    <value>無効なディスク サイズ</value>
+  </data>
   <data name="INVALID_HOST" xml:space="preserve">
     <value>無効なホスト名</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
-    <value>無効なディスク サイズ</value>
+    <value>無効な数</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>無効なパラメーターです</value>
@@ -7434,7 +7443,7 @@ SCSI ID: {2}
     <value>ライセンス マネージャ</value>
   </data>
   <data name="LEARN_MORE" xml:space="preserve">
-    <value>詳細情報</value>
+    <value>詳細情報...</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>マシン アカウントを Active Directory ドメインから削除するためのユーザー名およびパスワードを入力します。マシン アカウントを削除できない場合でも、Active Directory 認証は無効になります。</value>
@@ -8668,6 +8677,9 @@ SCSI ID: {2}
   <data name="NETW_DETAILS_VLAN_NUMBER_IN_USE" xml:space="preserve">
     <value>この VLAN 番号は既に使用されています。</value>
   </data>
+  <data name="NETW_DETAILS_VLAN_RANGE" xml:space="preserve">
+    <value>許容 VLAN 範囲: {1} 〜 {0}</value>
+  </data>
   <data name="NETW_EXTERNAL_DETAILS_TITLE" xml:space="preserve">
     <value>新規ネットワークの構成</value>
   </data>
@@ -8685,6 +8697,9 @@ SCSI ID: {2}
   </data>
   <data name="NETW_TYPE_SELECT_TITLE" xml:space="preserve">
     <value>作成するネットワークの種類を選択します</value>
+  </data>
+  <data name="NETW_VLAN_ZERO" xml:space="preserve">
+    <value>VLAN 0 はほかの VLAN 上にないすべてのトラフィックを受信します</value>
   </data>
   <data name="NEVER" xml:space="preserve">
     <value>なし</value>
@@ -8962,7 +8977,7 @@ SR を再接続しますか?</value>
   <data name="NEWSR_NETAPP_BLURB" xml:space="preserve">
     <value>Data ONTAP 7G (Version 7.0 またはそれ以降) が動作する、十分なディスク容量のある Network Appliance (NetApp) ファイラにアクセスできる場合は、カスタムの NetApp ストレージ リポジトリを構成できます。 
 
-ドライバーはファイラへの ZAPI インターフェイスを使用して、SR に対応する FlexVols グループを作成します。VDI は、ファイラ上の仮想 LUN として作成され、iSCSI データ パスを使用してホストに接続されます。 
+ドライバーはファイラへの XAPI インターフェイスを使用して、SR に対応する FlexVols グループを作成します。VDI は、ファイラ上の仮想 LUN として作成され、iSCSI データ パスを使用してホストに接続されます。 
 
 VM の複製では、ファイラの複製機能とスナップショット機能により高いパフォーマンスが提供され、既存の ONTAP ファイラ管理ツールとの互換性が保証されます。</value>
   </data>
@@ -10328,7 +10343,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>サーバー '{0}' は、このサーバーから移行されるすべての VM を格納できるサーバーがなかったため、退避できませんでした。アップデート インストール後に再起動を保留している他のサーバーを再起動してから、[再試行] をクリックしてプロセスを再開してください。</value>
   </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
-    <value>このサーバーからすべての VM を移行するのに十分な空きメモリが他のサーバーになかったため、サーバー '{0}' を退避できませんでした。一部の VM を一時停止またはシャットダウンしてから、[再試行] を押してプロセスを再開してください。</value>
+    <value>このサーバーからすべての VM を移行するのに十分な空きメモリが他のサーバーになかったため、サーバー '{0}' を退避できませんでした。一部の VM を一時停止またはシャット ダウンしてから、[再試行] を押してプロセスを再開してください。</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>'{0}' に [XenServer] をインストールしています...</value>
@@ -10480,7 +10495,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>このプールには共有ストレージがありません</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: 準仮想化 (PV) されたゲストは、[XenServer] {1} 以降サポートされません。サポートされるゲスト オペレーティング システムの一覧を表示するには、[詳細情報] をクリックしてください。 </value>
+    <value>{0}: 準仮想化 (PV) されたゲストは、{1} ではサポートされません。サポートされるゲスト オペレーティング システムの一覧を表示するには、[詳細情報] をクリックしてください。</value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>このプールは一部のみライセンスが適用されています</value>
@@ -10556,6 +10571,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>サーバー '{0}'</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: vSwitch コントローラーは、{1} ではサポートされません。</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>vSwitch コントローラーは、{0} ではサポートされません。このコントローラーを必要とするすべての機能が動作しなくなるため、構成を解除する必要があります。詳しくは、以下のリンクをクリックしてください。</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>{0} 以降にアップグレードする場合、このリリースで vSwitch コントローラーがサポートされなくなり、このコントローラーを必要とするすべての機能が動作しなくなるため、構成を解除する必要があります。詳しくは、以下のリンクをクリックしてください。</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>この MAC アドレスは、次の仮想マシンに割り当て済みです:
@@ -11038,8 +11062,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="REPEATED_KEY" xml:space="preserve">
     <value>繰り返されたキー</value>
   </data>
-  <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED" xml:space="preserve">
     <value>{0}: 必要な Hotfix がインストールされていません</value>
+  </data>
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED_WARNING" xml:space="preserve">
+    <value>{0}: 必要な Hotfix がインストールされていないため、チェックがスキップされました</value>
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>必要なアップデート</value>
@@ -11800,9 +11827,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
     <value>この SR は [XenCenter] で破棄できません。</value>
-  </data>
-  <data name="SR_CANNOT_BE_DETACHED_WITH_XC" xml:space="preserve">
-    <value>この SR は [XenCenter] で接続解除できません。</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
     <value>この SR は [XenCenter] で接続消去できません。</value>
@@ -13660,12 +13684,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>次へ(&amp;N) &gt;</value>
   </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL" xml:space="preserve">
-    <value>新しいネットワークは既存の物理ネットワーク インターフェイスにマップされ、VLAN 番号が割り当てられます。ここでは、使用する物理インターフェイスを選択できます。</value>
-  </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_INTERNAL" xml:space="preserve">
-    <value>新規 VM の作成時にこのネットワークを自動的に追加する場合は、このチェックボックスをオンにします。</value>
-  </data>
   <data name="WIZARD_INTERNAL_ERROR" xml:space="preserve">
     <value>ウィザードの終了時に内部エラーが発生しました。詳しくはログを参照してください。</value>
   </data>
@@ -14373,6 +14391,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] {0}</value>
+  </data>
+  <data name="XENSERVER_8_2" xml:space="preserve">
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
