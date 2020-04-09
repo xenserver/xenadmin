@@ -9244,6 +9244,9 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Created by template provisioner</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
+    <value>The default SR '{0}' cannot be seen from the VM's home server.</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME" xml:space="preserve">
     <value>VMs without a home server cannot have disks on the default SR '{0}'.</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
@@ -9253,6 +9256,9 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Storage</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
+    <value>The SR suggested by the template ('{0}') cannot be seen from the VM's home server.</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME" xml:space="preserve">
     <value>VMs without a home server cannot have disks on the SR suggested by the template ('{0}').</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">

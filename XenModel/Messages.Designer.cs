@@ -27054,11 +27054,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs without a home server cannot have disks on the default SR &apos;{0}&apos;..
+        ///   Looks up a localized string similar to The default SR &apos;{0}&apos; cannot be seen from the VM&apos;s home server..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMs without a home server cannot have disks on the default SR &apos;{0}&apos;..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME", resourceCulture);
             }
         }
         
@@ -27117,11 +27126,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs without a home server cannot have disks on the SR suggested by the template (&apos;{0}&apos;)..
+        ///   Looks up a localized string similar to The SR suggested by the template (&apos;{0}&apos;) cannot be seen from the VM&apos;s home server..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMs without a home server cannot have disks on the SR suggested by the template (&apos;{0}&apos;)..
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME", resourceCulture);
             }
         }
         
