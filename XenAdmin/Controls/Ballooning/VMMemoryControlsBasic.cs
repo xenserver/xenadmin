@@ -263,9 +263,14 @@ namespace XenAdmin.Controls.Ballooning
                 return;
 
             if (vms.All(v => Helpers.StockholmOrGreater(v.Connection)))
+            {
                 Help.HelpManager.Launch("InstallToolsWarningDialog");
-            else if (new InstallToolsCommand(Program.MainWindow, vms).ConfirmAndExecute())
-                InstallTools?.Invoke();
+                return;
+            }
+
+            var cmd = new InstallToolsCommand(Program.MainWindow, vms);
+            cmd.InstallTools += _ => InstallTools?.Invoke();
+            cmd.Execute();
         }
     }
 }

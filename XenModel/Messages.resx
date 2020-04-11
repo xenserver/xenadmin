@@ -7277,6 +7277,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
     <value>Install [Citrix VM Tools]</value>
   </data>
+  <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
+    <value>&amp;Install [Citrix VM Tools]</value>
+  </data>
   <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
     <value>Creating VM '{0}' from template '{1}'</value>
   </data>
@@ -14411,6 +14414,11 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[Citrix VM Tools] DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
 
 You will need to navigate to the Console on each of the selected VMs to complete the installation.</value>
+  </data>
+  <data name="XS_TOOLS_MESSAGE_ONE_VM" xml:space="preserve">
+    <value>Do you want [XenCenter] to insert the [Citrix VM Tools] DVD into your VM's DVD drive and take you to the VM's console?
+
+Any disk in your VM's DVD drive will be ejected when installing [Citrix VM Tools].</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
     <value>The [Citrix VM Tools] SR could not be found.</value>

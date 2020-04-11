@@ -36,7 +36,6 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
 using System.Drawing;
 using System.Linq;
 
@@ -48,6 +47,8 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class InstallToolsCommand : Command
     {
+        public event Action<AsyncAction> InstallTools;
+
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -84,37 +85,11 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Installs tools on the single VM selected.
-        /// </summary>
-        /// <returns>The <see cref="AsyncAction"/> for the Command.</returns>
-        public AsyncAction ExecuteGetAction()
-        {
-            SelectedItemCollection selection = GetSelection();
-
-            if (selection.Count > 1)
-            {
-                throw new InvalidOperationException("This method can only be used with a single VM selected.");
-            }
-
-            if (selection.ContainsOneItemOfType<VM>())
-            {
-                VM vm = (VM)selection[0].XenObject;
-
-                if (CanExecute(vm))
-                {
-                    return SingleVMExecute(vm);
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Attempts to install tools on the vm
         /// </summary>
         /// <param name="vm"></param>
         /// <returns>null if user cancels or an AsyncAction. This is either the InstallPVToolsAction or the CreateCdDriveAction if the VM needed a DVD drive.</returns>
-        private AsyncAction SingleVMExecute(VM vm)
+        private void SingleVMExecute(VM vm)
         {
             if (vm.FindVMCDROM() == null)
             {
@@ -135,30 +110,33 @@ namespace XenAdmin.Commands
                     var createDriveAction = new CreateCdDriveAction(vm);
 
                     using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
-                    {
                         dlg.ShowDialog(Parent);
-                    }
 
                     if (createDriveAction.Succeeded)
-                    {
                         ShowMustRebootBox();
-                    }
-                    return createDriveAction;
+
+                    InstallTools?.Invoke(createDriveAction);
                 }
+                return;
             }
-            else
+
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.XS_TOOLS_MESSAGE_ONE_VM, Messages.XENCENTER),
+                new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON, DialogResult.OK,
+                    ThreeButtonDialog.ButtonType.ACCEPT, true), ThreeButtonDialog.ButtonCancel)
             {
-                DialogResult dr = new InstallToolsWarningDialog(vm.Connection).ShowDialog(Parent);
-                if (dr == DialogResult.Yes)
+                ShowLinkLabel = true,
+                LinkText = Messages.INSTALLTOOLS_READ_MORE,
+                LinkAction = () => Help.HelpManager.Launch("InstallToolsWarningDialog")
+            })
+                if (dlg.ShowDialog(Parent) == DialogResult.OK && CheckToolSrs(vm))
                 {
                     var installToolsAction = new InstallPVToolsAction(vm, Properties.Settings.Default.ShowHiddenVMs);
                     installToolsAction.Completed += InstallToolsActionCompleted;
 
                     installToolsAction.RunAsync();
-                    return installToolsAction;
+                    InstallTools?.Invoke(installToolsAction);
                 }
-            }
-            return null;
         }
 
         /// <summary>
@@ -166,7 +144,7 @@ namespace XenAdmin.Commands
         /// </summary>
         /// <param name="vms"></param>
         /// <returns>Whether the action was launched (i.e., the user didn't Cancel)</returns>
-        private bool MultipleVMExecute(List<VM> vms)
+        private void MultipleVMExecute(List<VM> vms)
         {
             bool newDvdDrivesRequired = false;
             foreach (VM vm in vms)
@@ -203,35 +181,67 @@ namespace XenAdmin.Commands
                         }
                     }
                     ShowMustRebootBox();
-                    return true;
+                    InstallTools?.Invoke(null);
                 }
             }
             else
             {
-                List<IXenConnection> vmConnections = new List<IXenConnection>();
-                foreach (VM vm in vms)
-                    vmConnections.Add(vm.Connection);
-
-                if (new InstallToolsWarningDialog(null, true, vmConnections).ShowDialog(Parent) == DialogResult.Yes)
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM, Messages.XENCENTER),
+                    new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON, DialogResult.OK,
+                        ThreeButtonDialog.ButtonType.ACCEPT, true),
+                    ThreeButtonDialog.ButtonCancel)
                 {
-                    foreach (VM vm in vms)
+                    ShowLinkLabel = true,
+                    LinkText = Messages.INSTALLTOOLS_READ_MORE,
+                    LinkAction = () => Help.HelpManager.Launch("InstallToolsWarningDialog")
+                })
+                    if (dlg.ShowDialog(Parent) == DialogResult.OK && CheckToolSrs(vms.ToArray()))
                     {
-                        var installToolsAction = new InstallPVToolsAction(vm, Properties.Settings.Default.ShowHiddenVMs);
+                        foreach (VM vm in vms)
+                        {
+                            var installToolsAction = new InstallPVToolsAction(vm, Properties.Settings.Default.ShowHiddenVMs);
 
-                        if (vms.IndexOf(vm) == 0)
-                        {
-                            installToolsAction.Completed += FirstInstallToolsActionCompleted;
+                            if (vms.IndexOf(vm) == 0)
+                            {
+                                installToolsAction.Completed += FirstInstallToolsActionCompleted;
+                            }
+                            else
+                            {
+                                installToolsAction.Completed += InstallToolsActionCompleted;
+                            }
+
+                            installToolsAction.RunAsync();
                         }
-                        else
-                        {
-                            installToolsAction.Completed += InstallToolsActionCompleted;
-                        }
-                        installToolsAction.RunAsync();
+
+                        InstallTools?.Invoke(null);
                     }
-                    return true;
+            }
+        }
+
+        private bool CheckToolSrs(params VM[] vms)
+        {
+            // check all connections to make sure they don't have any broken SRs.
+            // If we find one tell the user we are going to fix it.
+            foreach (var vm in vms)
+            {
+                foreach (SR sr in vm.Connection.Cache.SRs)
+                {
+                    if (sr.IsToolsSR() && sr.IsBroken())
+                    {
+                        using (var dlg = new ThreeButtonDialog(
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BROKEN_TOOLS_PROMPT,
+                                Messages.INSTALL_XENSERVER_TOOLS),
+                            ThreeButtonDialog.ButtonOK,
+                            ThreeButtonDialog.ButtonCancel))
+                        {
+                            var dialogResult = dlg.ShowDialog(Parent);
+                            return dialogResult == DialogResult.OK;
+                        }
+                    }
                 }
             }
-            return false;
+            return true;
         }
 
         private void FirstInstallToolsActionCompleted(ActionBase sender)
@@ -280,19 +290,6 @@ namespace XenAdmin.Commands
                 SingleVMExecute(vms[0]);
             else
                 MultipleVMExecute(vms);
-        }
-
-        public bool ConfirmAndExecute()
-        {
-            List<VM> vms = GetSelection().AsXenObjects<VM>(CanExecute);
-
-            if (vms.Count == 0)
-                return true;
-
-            if (vms.Count == 1)
-                return (SingleVMExecute(vms[0]) != null);
-            
-            return MultipleVMExecute(vms);
         }
 
         public static bool CanExecute(VM vm)
