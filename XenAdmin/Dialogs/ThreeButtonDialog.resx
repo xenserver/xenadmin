@@ -277,7 +277,7 @@
     <value>243, 36</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="flowLayoutPanel1.WrapContents" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -313,10 +313,10 @@
     <value>409, 9999</value>
   </data>
   <data name="labelMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 15</value>
+    <value>53, 14</value>
   </data>
   <data name="labelMessage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="labelMessage.Text" xml:space="preserve">
     <value>Message</value>
@@ -340,13 +340,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="checkBoxOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 64</value>
+    <value>41, 57</value>
+  </data>
+  <data name="checkBoxOption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
   </data>
   <data name="checkBoxOption.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 19</value>
   </data>
   <data name="checkBoxOption.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="checkBoxOption.Text" xml:space="preserve">
     <value>checkBox1</value>
@@ -373,13 +376,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 46</value>
+    <value>41, 29</value>
+  </data>
+  <data name="linkLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 10</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 15</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>linkLabel1</value>

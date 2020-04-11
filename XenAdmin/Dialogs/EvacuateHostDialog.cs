@@ -603,7 +603,10 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        a = new InstallToolsCommand(Program.MainWindow, vm).ExecuteGetAction();
+                        var cmd = new InstallToolsCommand(Program.MainWindow, vm, DataGridView);
+                        cmd.InstallTools += action => a = action;
+                        cmd.Execute();
+
                         // The install pv tools action is marked as complete after they have taken the user to the console and loaded the disc
                         // Rescanning when the action is 'complete' in this case doesn't gain us anything then. Keep showing the "Click here to install PV drivers" text.
                         dialog.SetSession(a);

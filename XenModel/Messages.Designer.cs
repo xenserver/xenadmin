@@ -20875,6 +20875,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Install [Citrix VM Tools].
+        /// </summary>
+        public static string INSTALL_XENSERVER_TOOLS_BUTTON {
+            get {
+                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installed Updates.
         /// </summary>
         public static string INSTALLED_UPDATES {
@@ -41800,6 +41809,17 @@ namespace XenAdmin {
         public static string XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM {
             get {
                 return ResourceManager.GetString("XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want [XenCenter] to insert the [Citrix VM Tools] DVD into your VM&apos;s DVD drive and take you to the VM&apos;s console?
+        ///
+        ///Any disk in your VM&apos;s DVD drive will be ejected when installing [Citrix VM Tools]..
+        /// </summary>
+        public static string XS_TOOLS_MESSAGE_ONE_VM {
+            get {
+                return ResourceManager.GetString("XS_TOOLS_MESSAGE_ONE_VM", resourceCulture);
             }
         }
         
