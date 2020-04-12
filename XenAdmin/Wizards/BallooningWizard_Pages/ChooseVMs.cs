@@ -31,10 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAPI;
@@ -43,39 +39,51 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
 {
     public partial class ChooseVMs : XenTabPage
     {
+        private List<VM> _checkedVMs = new List<VM>();
+        private bool _updating;
+
         public ChooseVMs()
         {
             InitializeComponent();
-            CheckedVMs = new List<VM>();
         }
 
-        public override string Text { get { return Messages.BALLOONING_PAGE_CHOOSEVMS_TEXT; } }
+        public override string Text => Messages.BALLOONING_PAGE_CHOOSEVMS_TEXT;
 
-        public override string PageTitle { get { return Messages.BALLOONING_PAGE_CHOOSEVMS_PAGETITLE; } }
-        
-        public override string HelpID
-        {
-            get { return "VMs"; }
-        }
+        public override string PageTitle => Messages.BALLOONING_PAGE_CHOOSEVMS_PAGETITLE;
 
-        public List<VM> VMs
+        public override string HelpID => "VMs";
+
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            set
+            if (direction == PageLoadedDirection.Back)
+                return;
+
+            try
             {
-                // Fill the list box with the given items, and check them all
+                _updating = true;
                 listBox.Items.Clear();
-                listBox.Items.AddRange(value.ToArray());
-                CheckAll(true);
+                foreach (var vm in CheckedVMs)
+                    listBox.Items.Add(vm, true);
             }
-        }
+            finally
+            {
+                _updating = false;
+            }
 
-        public List<VM> CheckedVMs { get; private set; }
+            OnPageUpdated();
+        }
 
         public override bool EnableNext()
         {
             clearAllButton.Enabled = CheckedVMs.Count > 0;
             selectAllButton.Enabled = CheckedVMs.Count < listBox.Items.Count;
-            return CheckedVMs.Count >= 1;
+            return CheckedVMs.Count > 0;
+        }
+
+        public List<VM> CheckedVMs
+        {
+            get => _checkedVMs;
+            set => _checkedVMs = value == null ? new List<VM>() : new List<VM>(value);
         }
 
         private void CheckAll(bool check)
@@ -86,6 +94,9 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
 
         private void listBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            if (_updating)
+                return;
+
             // The ItemCheck event is called before the check changes,
             // and there is no event afterwards. Suggestions on the web for workarounds
             // (SelectedIndexChanged and MouseUp) don't work with keyboard access. So we

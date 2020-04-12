@@ -41,7 +41,6 @@ namespace XenAdmin.Controls.Ballooning
 {
     public partial class VMMemoryControlsBasic : VMMemoryControlsEdit
     {
-        private bool ballooning = true;
         public event Action InstallTools;
 
         public VMMemoryControlsBasic()
@@ -49,14 +48,13 @@ namespace XenAdmin.Controls.Ballooning
             InitializeComponent();
         }
         
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void Populate()
         {
             if (vms == null || vms.Count == 0)
                 return;
 
-            // If !firstPaint, don't re-intialize, because it will pull the rug from under our own edits.
-            if (!firstPaint)
-                return;
+            pictureBoxDynMin.Visible = hasBallooning;
+            pictureBoxDynMax.Visible = hasBallooning;
 
             // Calculate the maximum legal value of dynamic minimum
             CalcMaxDynMin();
@@ -66,7 +64,7 @@ namespace XenAdmin.Controls.Ballooning
             bool licenseRestriction = Helpers.FeatureForbidden(vm0.Connection, Host.RestrictDMC);
 
             // Radio buttons and "DMC Unavailable" warning
-            if (ballooning && !licenseRestriction)
+            if (hasBallooning && !licenseRestriction)
             {
                 if (vm0.memory_dynamic_min == vm0.memory_static_max)
                     radioFixed.Checked = true;
@@ -154,41 +152,27 @@ namespace XenAdmin.Controls.Ballooning
             memorySpinnerFixed.Initialize(vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
-            firstPaint = false;
         }
 
-        public override double dynamic_min
+        protected override double dynamic_min
         {
             get
             {
-                System.Diagnostics.Trace.Assert(ballooning);
-                return (radioDynamic.Checked ? memorySpinnerDynMin.Value : memorySpinnerFixed.Value);
+                System.Diagnostics.Trace.Assert(hasBallooning);
+                return radioDynamic.Checked ? memorySpinnerDynMin.Value : memorySpinnerFixed.Value;
             }
         }
 
-        public override double dynamic_max
+        protected override double dynamic_max
         {
             get
             {
-                System.Diagnostics.Trace.Assert(ballooning);
-                return (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
+                System.Diagnostics.Trace.Assert(hasBallooning);
+                return radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value;
             }
         }
 
-        public override double static_max
-        {
-            get
-            {
-                return (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
-            }
-        }
-
-        protected override void SetBallooning(bool hasBallooning)
-        {
-            ballooning = hasBallooning;
-            pictureBoxDynMin.Visible = hasBallooning;
-            pictureBoxDynMax.Visible = hasBallooning;
-        }
+        protected override double static_max => (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
 
         private void SetIncrements()
         {
@@ -197,8 +181,6 @@ namespace XenAdmin.Controls.Ballooning
 
         private void DynamicSpinners_ValueChanged(object sender, EventArgs e)
         {
-            if (firstPaint)  // still initialising
-                return;
             radioDynamic.Checked = true;
             if (sender == memorySpinnerDynMax)
             {
@@ -216,8 +198,6 @@ namespace XenAdmin.Controls.Ballooning
 
         private void FixedSpinner_ValueChanged(object sender, EventArgs e)
         {
-            if (firstPaint)  // still initialising
-                return;
             radioFixed.Checked = true;
             SetIncrements();
         }
@@ -228,7 +208,7 @@ namespace XenAdmin.Controls.Ballooning
             double maxFixed = ((maxDynMin >= 0 && maxDynMin <= MemorySpinnerMax) ? maxDynMin : MemorySpinnerMax);
             memorySpinnerFixed.SetRange(vm0.memory_static_min >= Util.BINARY_MEGA ? vm0.memory_static_min : Util.BINARY_MEGA, maxFixed);
 
-            if (!ballooning)
+            if (!hasBallooning)
                 return;
 
             // Calculate limits for the dynamic spinners
