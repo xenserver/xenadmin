@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Ballooning;
 using XenAPI;
@@ -42,37 +43,28 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
         public event Action InstallTools;
 
         private VMMemoryControlsEdit memoryControls;
+        private List<VM> _vms = new List<VM>();
+        private bool _changed;
 
         public MemorySettings()
         {
             InitializeComponent();
         }
 
-        public override string Text { get { return Messages.BALLOONING_PAGE_MEMORY_TEXT; } }
+        #region XenTabPage overrides
 
-        public override string PageTitle { get { return Messages.BALLOONING_PAGE_MEMORY_PAGETITLE; } }
+        public override string Text => Messages.BALLOONING_PAGE_MEMORY_TEXT;
 
-        public override string HelpID
+        public override string PageTitle => Messages.BALLOONING_PAGE_MEMORY_PAGETITLE;
+
+        public override string HelpID => "Settings";
+
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            get { return "Settings"; }
-        }
+            if (!_changed)
+                return;
 
-        bool alreadyChosen = false;
-        public List<VM> VMs
-        {
-            set
-            {
-                // Use any VM to decide which UI to show: they all have the same memory settings
-                if (!alreadyChosen)
-                    ChooseControls(value != null && value.Count > 0 && value[0].advanced_ballooning());
-                alreadyChosen = true;
-                memoryControls.VMs = value;
-            }
-        }
-
-        private void ChooseControls(bool advanced)
-        {
-            if (advanced)
+            if (VMs != null && VMs.Count > 0 && VMs[0].advanced_ballooning())
             {
                 memoryControlsBasic.Visible = false;
                 memoryControls = memoryControlsAdvanced;
@@ -82,37 +74,40 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
                 memoryControlsAdvanced.Visible = false;
                 memoryControls = memoryControlsBasic;
             }
+
+            memoryControls.VMs = VMs;
             memoryControls.Visible = true;
         }
 
-        public double static_max
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            get { return memoryControls.static_max; }
+            memoryControls.UnfocusSpinners();
+            cancel = !memoryControls.ChangeMemorySettings();
         }
 
-        public double dynamic_min
-        {
-            get { return memoryControls.dynamic_min; }
-        }
+        #endregion
 
-        public double dynamic_max
+        public List<VM> VMs
         {
-            get { return memoryControls.dynamic_max; }
-        }
+            get => _vms;
+            set
+            {
+                var newVMs = value == null ? new List<VM>() : new List<VM>(value);
 
-        public bool AdvancedMode
-        {
-            get { return memoryControls == memoryControlsAdvanced; }
+                if (_vms.Count != newVMs.Count)
+                    _changed = true;
+                else if (_vms.Any(v => !newVMs.Contains(v)))
+                    _changed = true;
+                else
+                    _changed = false;
+
+                _vms = newVMs;
+            }
         }
 
         private void memoryControlsBasic_InstallTools()
         {
             InstallTools?.Invoke();
-        }
-
-        public void UnfocusSpinners()
-        {
-            memoryControls.UnfocusSpinners();
         }
     }
 }
