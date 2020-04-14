@@ -82,6 +82,7 @@ namespace XenAdmin.Dialogs
         private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
+        private SrReadCachingEditPage SrReadCachingEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -269,6 +270,9 @@ namespace XenAdmin.Dialogs
                     ShowTab(newVMApplianceVMsPage1 = new NewVMGroupVMsPage<VM_appliance> { Pool = pool });
                     ShowTab(newVmApplianceVmOrderAndDelaysPage1 = new NewVMApplianceVMOrderAndDelaysPage { Pool = pool });
                 }
+
+                if (is_sr && ((SR)xenObjectCopy).SupportsReadCaching() && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictReadCaching))
+                    ShowTab(SrReadCachingEditPage = new SrReadCachingEditPage());
 
                 //
                 // Now add one tab per VBD (for VDIs only)
