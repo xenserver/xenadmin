@@ -2558,6 +2558,11 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_KEY_INVALID" xml:space="preserve">
     <value>The selected TLS key file is invalid.</value>
   </data>
+  <data name="CERTIFICATE_RBAC_RESTRICTION" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to install certificates on the server. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
   <data name="CERTIFICATE_SELECT_CERTIFICATE_TITLE" xml:space="preserve">
     <value>Select TLS Certificate File</value>
   </data>

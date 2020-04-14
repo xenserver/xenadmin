@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -7058,6 +7058,17 @@ namespace XenAdmin {
         public static string CERTIFICATE_KEY_INVALID {
             get {
                 return ResourceManager.GetString("CERTIFICATE_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to install certificates on the server. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string CERTIFICATE_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_RBAC_RESTRICTION", resourceCulture);
             }
         }
         

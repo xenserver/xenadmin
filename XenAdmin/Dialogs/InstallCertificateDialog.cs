@@ -302,7 +302,7 @@ namespace XenAdmin.Dialogs
                     }
                     else if (!string.IsNullOrEmpty(_action.ChainError))
                     {
-                        labelChainError.Text = _action.CertificateError;
+                        labelChainError.Text = _action.ChainError;
                         labelChainError.Visible = true;
                         labelActionProgress.Text = Messages.CERTIFICATE_INSTALLATION_FAILURE;
                     }
