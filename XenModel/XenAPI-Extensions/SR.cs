@@ -952,6 +952,37 @@ namespace XenAPI
             return sm != null && sm.features != null && sm.features.ContainsKey("SR_TRIM");
         }
 
+        /// <summary>
+        /// Whether the underlying SR backend supports read caching.
+        /// </summary>
+        /// <returns></returns>
+        public bool SupportsReadCaching()
+        {
+            // for Stockholm or greater versions, check if the SM has the VDI_READ_CACHING capability
+            if (Helpers.StockholmOrGreater(Connection))
+            {
+                var sm = SM.GetByType(Connection, type);
+                return sm != null && Array.IndexOf(sm.capabilities, "VDI_READ_CACHING") != -1;
+            }
+
+            // for older versions, use the SR type; read caching is available for NFS, EXT3 and SMB/CIFS SR types
+            var srType = GetSRType(false);
+            return srType == SRTypes.nfs || srType == SRTypes.ext || srType == SRTypes.smb;
+        }
+
+        public bool GetReadCachingEnabled()
+        {
+            // read caching is enabled when the o_direct key is not defined (or set to false) in other_config
+            // and is disabled if o_direct=true
+            return SupportsReadCaching() && !BoolKey(other_config, "o_direct");
+        }
+
+        public void SetReadCachingEnabled(bool value)
+        {
+            // to enable read caching, remove the o_direct key; to disable it, set o_direct=true
+            other_config = SetDictionaryKey(other_config, "o_direct", value ? null : bool.TrueString.ToLower());
+        }
+
         #region IEquatable<SR> Members
 
         /// <summary>

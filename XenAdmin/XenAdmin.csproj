@@ -435,6 +435,12 @@
     <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\SrReadCachingEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\SrReadCachingEditPage.Designer.cs">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\USBEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2133,6 +2139,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.resx">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.ja.resx">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.zh-CN.resx">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\USBEditPage.ja.resx">
       <DependentUpon>USBEditPage.cs</DependentUpon>

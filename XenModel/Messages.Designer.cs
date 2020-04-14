@@ -31267,6 +31267,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read caching.
+        /// </summary>
+        public static string READ_CACHING {
+            get {
+                return ResourceManager.GetString("READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read Only.
         /// </summary>
         public static string READ_ONLY {
