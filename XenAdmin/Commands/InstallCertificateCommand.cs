@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
                 var currentRoles = host.Connection.Session.Roles;
                 currentRoles.Sort();
 
-                var msg = string.Format(Messages.CONVERSION_RBAC_RESTRICTION, currentRoles[0].FriendlyName(),
+                var msg = string.Format(Messages.CERTIFICATE_RBAC_RESTRICTION, currentRoles[0].FriendlyName(),
                     Role.FriendlyName(Role.MR_ROLE_POOL_ADMIN));
 
                 using (var dlg = new ThreeButtonDialog(
