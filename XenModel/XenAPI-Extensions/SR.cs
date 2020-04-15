@@ -962,7 +962,7 @@ namespace XenAPI
             if (Helpers.StockholmOrGreater(Connection))
             {
                 var sm = SM.GetByType(Connection, type);
-                return sm != null && Array.IndexOf(sm.capabilities, "VDI_READ_CACHING") != -1;
+                return sm?.features != null && sm.features.ContainsKey("VDI_READ_CACHING");
             }
 
             // for older versions, use the SR type; read caching is available for NFS, EXT3 and SMB/CIFS SR types
