@@ -48,7 +48,7 @@ namespace XenAdmin.SettingsPanels
 
         public string SubText => checkBoxEnableReadCaching.Checked ? Messages.ENABLED : Messages.DISABLED;
 
-        public Image Image => Properties.Resources._000_Storage_h32bit_16;
+        public Image Image => Images.StaticImages._000_Storage_h32bit_16;
 
         public AsyncAction SaveSettings()
         {

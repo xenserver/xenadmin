@@ -10860,7 +10860,7 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
     <value>A {0} user cannot alter memory values and will be restricted to the settings on the template.</value>
   </data>
   <data name="READ_CACHING" xml:space="preserve">
-    <value>Read caching</value>
+    <value>Read Caching</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>Read Only</value>

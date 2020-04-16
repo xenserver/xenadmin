@@ -31267,7 +31267,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read caching.
+        ///   Looks up a localized string similar to Read Caching.
         /// </summary>
         public static string READ_CACHING {
             get {
