@@ -86,7 +86,7 @@ SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
   echo "Some signing parameters are not set; skip signing binaries"
 else
-  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
   do
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
   done
@@ -210,7 +210,7 @@ cp ${REPO}/CFUValidator/bin/Release/CFUValidator.zip ${OUTPUT_DIR}/CFUValidator.
 #now package the pdbs
 cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
