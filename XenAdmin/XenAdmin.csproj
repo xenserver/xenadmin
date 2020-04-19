@@ -769,7 +769,6 @@
     </Compile>
     <Compile Include="VNC\KeySet.cs" />
     <Compile Include="VNC\MyStream.cs" />
-    <Compile Include="VNC\ProtocolVersion.cs" />
     <Compile Include="VNC\VNCException.cs" />
     <Compile Include="VNC\VNCStream.cs" />
     <Compile Include="Wizards\BallooningWizard.cs">
