@@ -761,6 +761,17 @@
       <DependentUpon>UsbPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasGFS2SRProblem.cs" />
+    <Compile Include="VNC\GraphicsUtils.cs" />
+    <Compile Include="VNC\IVNCGraphicsClient.cs" />
+    <Compile Include="VNC\KeyMap.cs" />
+    <Compile Include="VNC\KeyMap.Designer.cs">
+      <DependentUpon>KeyMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VNC\KeySet.cs" />
+    <Compile Include="VNC\MyStream.cs" />
+    <Compile Include="VNC\ProtocolVersion.cs" />
+    <Compile Include="VNC\VNCException.cs" />
+    <Compile Include="VNC\VNCStream.cs" />
     <Compile Include="Wizards\BallooningWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2269,6 +2280,9 @@
     <EmbeddedResource Include="TabPages\PhysicalStoragePage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PhysicalStoragePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VNC\KeyMap.resx">
+      <DependentUpon>KeyMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BallooningWizard.resx">
       <SubType>Designer</SubType>
@@ -6941,10 +6955,6 @@
     <ProjectReference Include="..\XenCenterLib\XenCenterLib.csproj">
       <Project>{9861DFA1-B41F-432D-A43F-226257DEBBB9}</Project>
       <Name>XenCenterLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XenCenterVNC\XenCenterVNC.csproj">
-      <Project>{BD345C89-E8F4-4767-9BE0-1F0EAB7FA927}</Project>
-      <Name>XenCenterVNC</Name>
     </ProjectReference>
     <ProjectReference Include="..\XenModel\XenModel.csproj">
       <Project>{B306FC59-4441-4A5F-9F54-D3F68D4EE38D}</Project>

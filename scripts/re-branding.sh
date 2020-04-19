@@ -79,7 +79,7 @@ do
 done
 
 #AssemblyInfo rebranding
-for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenCenterVNC XenModel XenOvfApi XenOvfTransport XenServerHealthCheck xva_verify
+for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenOvfTransport XenServerHealthCheck xva_verify
 do
   assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
   version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}

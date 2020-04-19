@@ -74,7 +74,6 @@
                             <File Id="IonicZipDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Ionic.Zip.dll" />
                             <File Id="MSTSCLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\MSTSCLib.dll" />
                             <File Id="XenCenterLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterLib.dll" />
-                            <File Id="XenCenterVNCDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterVNC.dll" />
                             <File Id="XenModelDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenModel.dll" />
                             <File Id="DiscUtils" Source="$(env.RepoRoot)\XenAdmin\bin\Release\DiscUtils.dll" />
                             <File Id="XenOvf" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenOvf.dll" />
