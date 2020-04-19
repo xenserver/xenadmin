@@ -43,6 +43,7 @@ using XenAdmin.Alerts;
 using System.Linq;
 using System.Xml;
 using DiscUtils.Iso9660;
+using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -282,7 +283,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else if (SelectedPatchFilePath.EndsWith("." + InvisibleMessages.ISO_UPDATE))
                         SelectedUpdateType = UpdateType.ISO;
 
-                    AlertFromFileOnDisk = GetAlertFromFile(SelectedPatchFilePath, out var hasUpdateXml);
+                    AlertFromFileOnDisk = GetAlertFromFile(SelectedPatchFilePath, out var hasUpdateXml, out var isUpgradeIso);
+
+                    if (isUpgradeIso)
+                    {
+                        using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                            SystemIcons.Error, Messages.PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO)))
+                            dlg.ShowDialog(this);
+
+                        cancel = true;
+                        return;
+                    }
+
                     FileFromDiskHasUpdateXml = hasUpdateXml;
                     PatchFromDisk = AlertFromFileOnDisk == null
                         ? new KeyValuePair<XenServerPatch, string>(null, null)
@@ -294,9 +306,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 UnRegisterEvents();
         }
 
-        private XenServerPatchAlert GetAlertFromFile(string fileName, out bool hasUpdateXml)
+        private XenServerPatchAlert GetAlertFromFile(string fileName, out bool hasUpdateXml, out bool isUpgradeIso)
         {
-            var alertFromIso = GetAlertFromIsoFile(fileName, out hasUpdateXml);
+            var alertFromIso = GetAlertFromIsoFile(fileName, out hasUpdateXml, out isUpgradeIso);
             if (alertFromIso != null)
                 return alertFromIso;
 
@@ -304,9 +316,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             return Updates.FindPatchAlertByName(Path.GetFileNameWithoutExtension(fileName));
         }
 
-        private XenServerPatchAlert GetAlertFromIsoFile(string fileName, out bool hasUpdateXml)
+        private XenServerPatchAlert GetAlertFromIsoFile(string fileName, out bool hasUpdateXml, out bool isUpgradeIso)
         {
             hasUpdateXml = false;
+            isUpgradeIso = false;
 
             if (!fileName.EndsWith(InvisibleMessages.ISO_UPDATE))
                 return null;
@@ -324,6 +337,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             xmlDoc.Load(fileStream);
                             hasUpdateXml = true;
+                        }
+                    }
+
+                    if (cd.Exists(@"repodata\repomd.xml") && cd.FileExists(".treeinfo"))
+                    {
+                        using (var fileStream = cd.OpenFile(".treeinfo", FileMode.Open))
+                        {
+                            var iniDoc = new IniDocument(fileStream);
+                            var entry = iniDoc.FindEntry("platform", "name");
+                            if (entry != null && entry.Value == "XCP")
+                            {
+                                isUpgradeIso = true;
+                                return null;
+                            }
                         }
                     }
                 }
