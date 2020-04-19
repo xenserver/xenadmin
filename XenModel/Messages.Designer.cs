@@ -29059,6 +29059,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file you have selected is a Base Installation ISO file and cannot be used to update your system. Please select an Update ISO file, or use the Rolling Pool Upgrade wizard instead to upgrade to a new version..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Update.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_TEXT {

@@ -76,6 +76,7 @@
     <Compile Include="EncryptionUtils.cs" />
     <Compile Include="ComparableAddress.cs" />
     <Compile Include="ComparableList.cs" />
+    <Compile Include="IniDocument.cs" />
     <Compile Include="INotifyCollectionChanged.cs" />
     <Compile Include="LimitedStack.cs" />
     <Compile Include="LockFreeQueue.cs" />

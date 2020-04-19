@@ -10029,6 +10029,9 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>Choose Update File</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO" xml:space="preserve">
+    <value>The file you have selected is a Base Installation ISO file and cannot be used to update your system. Please select an Update ISO file, or use the Rolling Pool Upgrade wizard instead to upgrade to a new version.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TEXT" xml:space="preserve">
     <value>Select Update</value>
   </data>
