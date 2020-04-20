@@ -29,39 +29,54 @@
  * SUCH DAMAGE.
  */
 
-using System.Diagnostics;
+using XenAdmin.Actions;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
-namespace XenAdmin.Diagnostics.Checks
+
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    public abstract class HostCheck : Check
+    class LegacySslProblem : PoolProblem
     {
-        private readonly Host _host;
-
-        protected HostCheck(Host host)
+        public LegacySslProblem(Check check, Pool pool)
+            : base(check, pool)
         {
-            Debug.Assert(host != null);
-            _host = host;
         }
 
-        protected Host Host
+        protected override AsyncAction CreateAction(out bool cancelled)
         {
-            get { return _host; }
+            cancelled = false;
+            return new SetSslLegacyAction(Pool, false);
         }
 
-        public sealed override IXenObject XenObject
+        public override string Description =>
+            string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, Pool,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string HelpMessage => Messages.PROBLEM_LEGACY_PROTOCOL_HELP;
+    }
+
+    class LegacySslWarning : WarningWithMoreInfo
+    {
+        private readonly Pool pool;
+
+        public LegacySslWarning(Check check, Pool pool)
+            : base(check)
         {
-            get { return _host; }
+            this.pool = pool;
         }
 
-        public override string SuccessfulCheckDescription 
-        {
-            get
-            {
-                return string.IsNullOrEmpty(Description)
-                    ? string.Empty
-                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Host.Name(), Description);
-            }
-        }
+        public override string Title => Check.Description;
+
+        public override string Description =>
+            string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, pool,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string Message =>
+            string.Format(pool.IsVisible()
+                    ? Messages.PROBLEM_LEGACY_PROTOCOL_INFO_POOL
+                    : Messages.PROBLEM_LEGACY_PROTOCOL_INFO_SERVER,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 }

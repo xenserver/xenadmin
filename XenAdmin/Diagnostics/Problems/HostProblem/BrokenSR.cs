@@ -29,44 +29,62 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
+using System.Windows.Forms;
 using XenAdmin.Diagnostics.Checks;
+using XenAPI;
 using XenAdmin.Dialogs;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 
-namespace XenAdmin.Diagnostics.Problems
+
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public abstract class WarningWithMoreInfo : Warning
+    public class BrokenSR : HostProblem
     {
-        protected WarningWithMoreInfo(Check check) : base(check)
+        public BrokenSR(Check check, SR sr, Host host)
+            : base(check, host)
         {
+            Sr = sr;
         }
-        
-        public override string HelpMessage => Messages.MORE_INFO;
 
-        protected override Actions.AsyncAction CreateAction(out bool cancelled)
+        public SR Sr { get; }
+
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, ServerName, Sr.NameWithoutHost());
+
+        protected override AsyncAction CreateAction(out bool cancelled)
         {
-            Program.Invoke(Program.MainWindow, () =>
+            Program.AssertOnEventThread();
+
+            RepairSRDialog dlg = new RepairSRDialog(Sr, false);
+            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.OK)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
-                {
-                    if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
-                    {
-                        dlg.LinkText = LinkText;
-                        dlg.LinkData = LinkData;
-                        dlg.ShowLinkLabel = true;
-                    }
-                    dlg.ShowDialog();
-                }
-            });
+                cancelled = false;
+                return dlg.RepairAction;
+            }
 
             cancelled = true;
             return null;
         }
 
-        public abstract string Message { get; }
+        public override string HelpMessage => Messages.REPAIR_SR;
+    }
 
-        public virtual string LinkData => null;
-        public virtual string LinkText => LinkData;
+    class BrokenSRWarning : Warning
+    {
+        private readonly Host host;
+        private readonly SR sr;
+
+        public BrokenSRWarning(Check check, Host host, SR sr)
+            : base(check)
+        {
+            this.sr = sr;
+            this.host = host;
+        }
+
+        public override string Title => Check.Description;
+
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, Helpers.GetName(host).Ellipsise(30), sr);
     }
 }

@@ -7177,6 +7177,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Power On mode check.
+        /// </summary>
+        public static string CHECKING_POWER_ON_MODE {
+            get {
+                return ResourceManager.GetString("CHECKING_POWER_ON_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking Power On mode.
+        /// </summary>
+        public static string CHECKING_POWER_ON_MODE_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_POWER_ON_MODE_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking host upgrade readiness.
         /// </summary>
         public static string CHECKING_PREPARE_TO_UPGRADE {
@@ -7227,6 +7245,24 @@ namespace XenAdmin {
         public static string CHECKING_SAFE_TO_UPGRADE_DESCRIPTION {
             get {
                 return ResourceManager.GetString("CHECKING_SAFE_TO_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security protocol check.
+        /// </summary>
+        public static string CHECKING_SECURITY_PROTOCOL {
+            get {
+                return ResourceManager.GetString("CHECKING_SECURITY_PROTOCOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking security protocol.
+        /// </summary>
+        public static string CHECKING_SECURITY_PROTOCOL_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_SECURITY_PROTOCOL_GROUP", resourceCulture);
             }
         }
         
@@ -14624,6 +14660,15 @@ namespace XenAdmin {
         public static string EMPTY {
             get {
                 return ResourceManager.GetString("EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty key.
+        /// </summary>
+        public static string EMPTY_KEY {
+            get {
+                return ResourceManager.GetString("EMPTY_KEY", resourceCulture);
             }
         }
         
@@ -28525,11 +28570,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} ok..
+        ///   Looks up a localized string similar to {0} OK..
         /// </summary>
         public static string PATCHING_WIZARD_CHECK_OK {
             get {
                 return ResourceManager.GetString("PATCHING_WIZARD_CHECK_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: {1} OK..
+        /// </summary>
+        public static string PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK {
+            get {
+                return ResourceManager.GetString("PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK", resourceCulture);
             }
         }
         
@@ -28548,15 +28602,6 @@ namespace XenAdmin {
         public static string PATCHING_WIZARD_DESC_CELL_INDENT {
             get {
                 return ResourceManager.GetString("PATCHING_WIZARD_DESC_CELL_INDENT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1} ok..
-        /// </summary>
-        public static string PATCHING_WIZARD_HOST_CHECK_OK {
-            get {
-                return ResourceManager.GetString("PATCHING_WIZARD_HOST_CHECK_OK", resourceCulture);
             }
         }
         
@@ -30391,6 +30436,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please specify a script name.
+        /// </summary>
+        public static string POWER_ON_CUSTOM_MODE_ERROR {
+            get {
+                return ResourceManager.GetString("POWER_ON_CUSTOM_MODE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Power on request to {0} failed. Check the network connectivity..
         /// </summary>
         public static string POWER_ON_REQUEST_FAILED {
@@ -30463,6 +30517,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for protocols earlier than TLS 1.2 has been removed as of {1}.
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable legacy protocols.
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the pool and you may lose permanently access to it..
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_INFO_POOL {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_INFO_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it..
+        /// </summary>
+        public static string PROBLEM_LEGACY_PROTOCOL_INFO_SERVER {
+            get {
+                return ResourceManager.GetString("PROBLEM_LEGACY_PROTOCOL_INFO_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The MAC address entered has already been assigned to the VM:
         ///{1}
         ///
@@ -30529,6 +30619,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for the Power On mode iLO has been removed as of {1}.
+        /// </summary>
+        public static string PROBLEM_POWER_ON_ILO_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_POWER_ON_ILO_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Power On mode iLO.
+        /// </summary>
+        public static string PROBLEM_POWER_ON_ILO_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_POWER_ON_ILO_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, you will not be able to use the Hewlett-Packard Integrated Lights-Out (iLO) feature to power on your server remotely..
+        /// </summary>
+        public static string PROBLEM_POWER_ON_ILO_INFO {
+            get {
+                return ResourceManager.GetString("PROBLEM_POWER_ON_ILO_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please ensure you have specified a network location that is visible from the server and contains an applicable version of installer files.
         ///
         ///Click Previous if you need to go back and specify a different network location or select a different set of servers to upgrade..
@@ -30540,29 +30657,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SR &apos;{0}&apos;.
-        /// </summary>
-        public static string PROBLEM_SRPROBLEM_TITLE {
-            get {
-                return ResourceManager.GetString("PROBLEM_SRPROBLEM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect..
         /// </summary>
         public static string PROBLEM_STORAGELINK_CONNECTION_FAILED {
             get {
                 return ResourceManager.GetString("PROBLEM_STORAGELINK_CONNECTION_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading..
-        /// </summary>
-        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
-            get {
-                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR", resourceCulture);
             }
         }
         
@@ -32805,6 +32904,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing this setting will cause you to lose access to the server temporarily..
+        /// </summary>
+        public static string SECURITYEDITPAGE_WARNING_HOST {
+            get {
+                return ResourceManager.GetString("SECURITYEDITPAGE_WARNING_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a filter....
         /// </summary>
         public static string SELECT_A_FILTER {
@@ -34787,15 +34895,6 @@ namespace XenAdmin {
         public static string STORAGELINK_SR_NEEDS_REATTACH {
             get {
                 return ResourceManager.GetString("STORAGELINK_SR_NEEDS_REATTACH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink SR status.
-        /// </summary>
-        public static string STORAGELINK_UPGRADE_TEST {
-            get {
-                return ResourceManager.GetString("STORAGELINK_UPGRADE_TEST", resourceCulture);
             }
         }
         

@@ -2598,6 +2598,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host memory check</value>
   </data>
+  <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
+    <value>Power On mode check</value>
+  </data>
+  <data name="CHECKING_POWER_ON_MODE_GROUP" xml:space="preserve">
+    <value>Checking Power On mode</value>
+  </data>
   <data name="CHECKING_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>Checking host upgrade readiness</value>
   </data>
@@ -2615,6 +2621,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host partition layout check</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL" xml:space="preserve">
+    <value>Security protocol check</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
+    <value>Checking security protocol</value>
   </data>
   <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
     <value>vSwitch Controller check</value>
@@ -5150,6 +5162,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EMPTY" xml:space="preserve">
     <value>&lt;empty&gt;</value>
+  </data>
+  <data name="EMPTY_KEY" xml:space="preserve">
+    <value>Empty key</value>
   </data>
   <data name="EMPTY_LIST_DISK_SNAPSHOTS" xml:space="preserve">
     <value>There are no associated virtual disks or snapshots</value>
@@ -10189,16 +10204,16 @@ This will cancel the upload process.</value>
     <value>Disable HA until after all the hosts have been rebooted</value>
   </data>
   <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
-    <value>{0} ok.</value>
+    <value>{0} OK.</value>
+  </data>
+  <data name="PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK" xml:space="preserve">
+    <value>{0}: {1} OK.</value>
   </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>The patch {0} is going to be deleted. Do you want to continue?</value>
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
-    <value>{0}: {1} ok.</value>
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
@@ -10547,6 +10562,9 @@ Please reconnect the host and try again</value>
   <data name="POWER_ON" xml:space="preserve">
     <value>Power On</value>
   </data>
+  <data name="POWER_ON_CUSTOM_MODE_ERROR" xml:space="preserve">
+    <value>Please specify a script name</value>
+  </data>
   <data name="POWER_ON_REQUEST_FAILED" xml:space="preserve">
     <value>Power on request to {0} failed. Check the network connectivity.</value>
   </data>
@@ -10570,6 +10588,18 @@ Please reconnect the host and try again</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for protocols earlier than TLS 1.2 has been removed as of {1}</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_HELP" xml:space="preserve">
+    <value>Disable legacy protocols</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_POOL" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the pool and you may lose permanently access to it.</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
   </data>
   <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
     <value>{0}: Support for the vSwitch Controller has been removed in {1}.</value>
@@ -10604,19 +10634,22 @@ Are you sure you want to continue?</value>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
   </data>
+  <data name="PROBLEM_POWER_ON_ILO_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the Power On mode iLO has been removed as of {1}</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_HELP" xml:space="preserve">
+    <value>Disable Power On mode iLO</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_INFO" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use the Hewlett-Packard Integrated Lights-Out (iLO) feature to power on your server remotely.</value>
+  </data>
   <data name="PROBLEM_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>Please ensure you have specified a network location that is visible from the server and contains an applicable version of installer files.
 
 Click Previous if you need to go back and specify a different network location or select a different set of servers to upgrade.</value>
   </data>
-  <data name="PROBLEM_SRPROBLEM_TITLE" xml:space="preserve">
-    <value>SR '{0}'</value>
-  </data>
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
-  </data>
-  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -11377,6 +11410,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>TLS 1.2 only</value>
   </data>
+  <data name="SECURITYEDITPAGE_WARNING_HOST" xml:space="preserve">
+    <value>Changing this setting will cause you to lose access to the server temporarily.</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>Security Checks</value>
   </data>
@@ -11994,9 +12030,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>There is a StorageLink Gateway SR that needs to be reattached.</value>
-  </data>
-  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
-    <value>StorageLink SR status</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>Storage Pools</value>
