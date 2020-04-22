@@ -120,11 +120,7 @@ namespace XenAdmin.Commands
             if (vm.FindVMCDROM() == null)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            null,
-                            Messages.NEW_DVD_DRIVE_REQUIRED,
-                            Messages.XENCENTER),
+                using (var dlg = new NoIconDialog(Messages.NEW_DVD_DRIVE_REQUIRED,
                         ThreeButtonDialog.ButtonYes,
                         ThreeButtonDialog.ButtonNo))
                 {
@@ -182,9 +178,8 @@ namespace XenAdmin.Commands
             if (newDvdDrivesRequired)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_DVD_DRIVES_REQUIRED, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                using (var dlg = new WarningDialog(Messages.NEW_DVD_DRIVES_REQUIRED,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     dialogResult = dlg.ShowDialog(Parent);
                 }
@@ -265,11 +260,8 @@ namespace XenAdmin.Commands
         {
             if (!MainWindowCommandInterface.RunInAutomatedTestMode)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Information, Messages.NEW_DVD_DRIVE_REBOOT_TOOLS)))
-                {
+                using (var dlg = new InformationDialog(Messages.NEW_DVD_DRIVE_REBOOT_TOOLS))
                     dlg.ShowDialog(Parent);
-                }
             }
         }
 

@@ -149,11 +149,8 @@ namespace XenAdmin.Dialogs
                 var pvsProxies = connection.Cache.PVS_proxies.Where(s => s.site.opaque_ref == site.opaque_ref).ToList();
                 if (pvsProxies.Count > 0)
                 {
-                    using (var dlg = 
-                        new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.PVS_SITE_CANNOT_BE_REMOVED, Messages.XENCENTER)))
-                    {
+                    using (var dlg = new WarningDialog(Messages.PVS_SITE_CANNOT_BE_REMOVED))
                         dlg.ShowDialog(Parent);
-                    }
                     return false;
                 }
             }
@@ -163,10 +160,7 @@ namespace XenAdmin.Dialogs
                 ? string.Format(Messages.CONFIRM_DELETE_PVS_SITE_IN_USE, siteName)
                 : string.Format(Messages.CONFIRM_DELETE_PVS_SITE, siteName);
             DialogResult dialogResult;
-            using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonOK,
-                    ThreeButtonDialog.ButtonCancel))
+            using (var dlg = new WarningDialog(message, ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel))
             {
                 dialogResult = dlg.ShowDialog(Parent);
             }

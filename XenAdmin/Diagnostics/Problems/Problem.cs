@@ -156,10 +156,9 @@ namespace XenAdmin.Diagnostics.Problems
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
-            Program.Invoke(Program.MainWindow, delegate ()
+            Program.Invoke(Program.MainWindow, delegate
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, Message)))
+                using (var dlg = new ErrorDialog(Message))
                 {
                     if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
                     {
@@ -198,12 +197,8 @@ namespace XenAdmin.Diagnostics.Problems
             }
             catch (Exception)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Error,
-                        string.Format(Messages.COULD_NOT_OPEN_URL,
-                            UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty),
-                        Messages.XENCENTER)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_OPEN_URL,
+                        UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty)))
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }

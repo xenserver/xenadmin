@@ -208,11 +208,8 @@ namespace XenAdmin
             catch (ConfigurationErrorsException ex)
             {
                 log.Error("Could not load settings.", ex);
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
+                    {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }
@@ -233,14 +230,8 @@ namespace XenAdmin
             }
             catch (Exception exn)
             {
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_PASSWORD_WRITE_FAILED, exn.Message),
-                       Messages.XENCENTER)))
-                {
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_PASSWORD_WRITE_FAILED, exn.Message)))
                     dlg.ShowDialog(Program.MainWindow);
-                }
                 Application.Exit();
             }
         }

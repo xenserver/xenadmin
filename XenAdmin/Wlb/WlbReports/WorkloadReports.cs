@@ -162,10 +162,8 @@ namespace XenAdmin
             catch (Exception ex)
             {
                 log.Debug(ex, ex);
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.WLBREPORT_REPORT_CONFIG_ERROR, Messages.XENCENTER)))
-                {
+                using (var dlg = new ErrorDialog(Messages.WLBREPORT_REPORT_CONFIG_ERROR))
                     dlg.ShowDialog(this);
-                }
                 errorLoading = true;
             }
             finally
@@ -901,10 +899,8 @@ namespace XenAdmin
             catch (Exception ex)
             {
                 log.Debug(ex, ex);
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.WLBREPORT_REPORT_CONFIG_ERROR, Messages.XENCENTER)))
-                {
+                using (var dlg = new ErrorDialog(Messages.WLBREPORT_REPORT_CONFIG_ERROR))
                     dlg.ShowDialog(this);
-                }
                 this.Close();
             }
         }
@@ -1000,7 +996,8 @@ namespace XenAdmin
         /// <param name="e"></param>
         private void wlbReportView1_PoolConnectionLost(object sender, EventArgs e)
         {
-            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, String.Format(Messages.WLB_REPORT_POOL_CONNECTION_LOST, _pool.Name()), Messages.WLBREPORT_POOL_CONNECTION_LOST_CAPTION)))
+            using (var dlg = new InformationDialog(String.Format(Messages.WLB_REPORT_POOL_CONNECTION_LOST, _pool.Name()))
+                {WindowTitle = Messages.WLBREPORT_POOL_CONNECTION_LOST_CAPTION})
             {
                 dlg.ShowDialog(this);
             }

@@ -207,9 +207,8 @@ namespace XenAdmin.Commands
                         SR sr = cd.Connection.Resolve<SR>(vdi.SR);
                         if (sr != null && !sr.shared)
                         {
-                            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation,
-                                                                                Messages.DRAG_DROP_LOCAL_CD_LOADED,
-                                                                                Messages.DRAG_DROP_LOCAL_CD_LOADED_TITLE)))
+                            using (var dlg = new WarningDialog(Messages.DRAG_DROP_LOCAL_CD_LOADED)
+                                {WindowTitle = Messages.DRAG_DROP_LOCAL_CD_LOADED_TITLE})
                             {
                                 dlg.ShowDialog(MainWindowCommandInterface.Form);
                             }
@@ -245,23 +244,23 @@ namespace XenAdmin.Commands
 
         private bool Confirm()
         {
+            if (Program.RunInAutomatedTestMode)
+                return true;
+
             List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
 
-            if (draggedVMs.Count == 1)
-            {
-                return Program.MainWindow.Confirm(null, Messages.MESSAGEBOX_CONFIRM, Messages.MAINWINDOW_CONFIRM_MIGRATE, draggedVMs[0].Name(), targetHost.Name());
-            }
+            var msg = draggedVMs.Count == 1
+                ? string.Format(Messages.MAINWINDOW_CONFIRM_MIGRATE, draggedVMs[0].Name().Ellipsise(50), targetHost.Name().Ellipsise(50))
+                : string.Format(Messages.MAINWINDOW_CONFIRM_MIGRATE_MULTIPLE, targetHost.Name().Ellipsise(50));
 
-            return Program.MainWindow.Confirm(null, Messages.MESSAGEBOX_CONFIRM, Messages.MAINWINDOW_CONFIRM_MIGRATE_MULTIPLE, targetHost.Name());
-        }
-
-        public override VirtualTreeNode HighlightNode
-        {
-            get
+            using (var dialog = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {WindowTitle = Messages.MESSAGEBOX_CONFIRM})
             {
-                return CanExecute() ? GetTargetNodeAncestor<Host>() : null;
+                return dialog.ShowDialog(Program.MainWindow) == DialogResult.Yes;
             }
         }
+
+        public override VirtualTreeNode HighlightNode => CanExecute() ? GetTargetNodeAncestor<Host>() : null;
     }
 }

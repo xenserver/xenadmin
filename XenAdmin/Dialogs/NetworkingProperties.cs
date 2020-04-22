@@ -442,14 +442,8 @@ namespace XenAdmin.Dialogs
             }
             catch (Failure)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Warning,
-                        Messages.NETWORK_RECONFIG_CONNECTION_LOST,
-                        Messages.XENCENTER)))
-                {
+                using (var dlg = new WarningDialog(Messages.NETWORK_RECONFIG_CONNECTION_LOST))
                     dlg.ShowDialog(this);
-                }
                 this.Close();
                 return;
             }
@@ -499,11 +493,9 @@ namespace XenAdmin.Dialogs
                         : Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL;
 
                     DialogResult dialogResult;
-                    using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, title),
-                            "NetworkingPropertiesPMIWarning",
+                    using (var dlg = new WarningDialog(title,
                             new ThreeButtonDialog.TBDButton(Messages.NETWORKING_PROPERTIES_CHANGING_MANAGEMENT_CONTINUE, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel))
+                            ThreeButtonDialog.ButtonCancel){HelpName = "NetworkingPropertiesPMIWarning"})
                     {
                         dialogResult = dlg.ShowDialog(this);
                     }

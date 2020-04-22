@@ -244,11 +244,8 @@ namespace XenAdmin.Actions.Wlb
                     // Tell the user the VM will be started without HA protection.
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(
-                                SystemIcons.Warning,
-                                String.Format(Messages.HA_INVALID_CONFIG_RESUME, Helpers.GetName(vm).Ellipsise(500)),
-                                Messages.HIGH_AVAILABILITY)))
+                        using (var dlg = new WarningDialog(String.Format(Messages.HA_INVALID_CONFIG_RESUME, Helpers.GetName(vm).Ellipsise(500)))
+                            {WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }
@@ -328,11 +325,8 @@ namespace XenAdmin.Actions.Wlb
                         Helpers.GetName(vm).Ellipsise(100));
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        using (var dlg = new ThreeButtonDialog(
-                           new ThreeButtonDialog.Details(
-                               SystemIcons.Warning,
-                               msg,
-                               Messages.HIGH_AVAILABILITY)))
+                        using (var dlg = new WarningDialog(msg)
+                            {WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }
@@ -347,13 +341,10 @@ namespace XenAdmin.Actions.Wlb
 
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(
-                               SystemIcons.Warning,
-                               msg,
-                               Messages.HIGH_AVAILABILITY),
+                        using (var dlg = new WarningDialog(msg,
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                            {WindowTitle = Messages.HIGH_AVAILABILITY})
                         {
                             DialogResult r = dlg.ShowDialog(Program.MainWindow);
                             if (r != DialogResult.Yes)

@@ -311,12 +311,10 @@ namespace XenAdmin.Dialogs
                         var vm = xenConnection.Resolve(vif.VM);
                         if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm())
                         {
-                            using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                    string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
-                                    Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE),
-                                new ThreeButtonDialog.TBDButton(Messages.YES_BUTTON_CAPTION, DialogResult.Yes),
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            using (var dlg = new WarningDialog(string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
+                                ThreeButtonDialog.ButtonYes,
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                                {WindowTitle = Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE})
                             {
                                 e.Cancel = dlg.ShowDialog(this) == DialogResult.No;
                                 return;

@@ -100,17 +100,15 @@ namespace XenAdmin.Commands
                                      : string.Format(Messages.ADD_HOST_TO_POOL_DISCONNECTED_POOL_MULTIPLE,
                                                      Helpers.GetName(_pool).Ellipsise(500));
 
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, message, Messages.XENCENTER)))
-                {
+                using (var dlg = new ErrorDialog(message))
                     dlg.ShowDialog(Parent);
-                }
+
                 return;
             }
 
             // Check supp packs and warn
             List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(_hosts, _pool);
-            if (!HelpersGUI.GetPermissionFor(badSuppPacks, sp => true,
+            if (!HelpersGUI.GetPermissionFor(badSuppPacks,
                 Messages.ADD_HOST_TO_POOL_SUPP_PACK, Messages.ADD_HOST_TO_POOL_SUPP_PACKS, false, "PoolJoinSuppPacks"))
             {
                 return;
@@ -132,13 +130,13 @@ namespace XenAdmin.Commands
 
             // Get permission for any fix-ups: 1) Licensing free hosts; 2) CPU masking 3) Ad configuration 4) CPU feature levelling (Dundee or higher only)
             // (We already know that these things are fixable because we have been through CanJoinPool() above).
-            if (!HelpersGUI.GetPermissionFor(_hosts, host => PoolJoinRules.FreeHostPaidMaster(host, master, false),
+            if (!HelpersGUI.GetPermissionFor(_hosts.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false)),
                 Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE, Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE, true, "PoolJoinRelicensing")
                 ||
-                !HelpersGUI.GetPermissionFor(_hosts, host => !PoolJoinRules.CompatibleCPUs(host, master, false),
+                !HelpersGUI.GetPermissionFor(_hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false)),
                 Messages.ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking")
                 ||
-                !HelpersGUI.GetPermissionFor(_hosts, host => !PoolJoinRules.CompatibleAdConfig(host, master, false),
+                !HelpersGUI.GetPermissionFor(_hosts.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false)),
                 Messages.ADD_HOST_TO_POOL_AD_MESSAGE, Messages.ADD_HOST_TO_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring")  
                 ||
                 !HelpersGUI.GetPermissionForCpuFeatureLevelling(_hosts, _pool))
@@ -224,10 +222,10 @@ namespace XenAdmin.Commands
                 string poolName = Helpers.GetName(pool).Ellipsise(500);
                 string hostName = Helpers.GetName(host).Ellipsise(500);
                 string msg = string.Format(Messages.HA_HOST_ENABLE_NTOL_RAISE_QUERY, poolName, hostName, currentNtol, max);
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, msg, Messages.HIGH_AVAILABILITY),
+                using (var dlg = new NoIconDialog(msg,
                         ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                    {WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
                     {
@@ -284,11 +282,9 @@ namespace XenAdmin.Commands
                     msg = string.Format(f, poolName, currentNtol, hostName, targetNtol);
                 }
 
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY),
-                        ThreeButtonDialog.ButtonYes,
-                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)
-                        ))
+                using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes,
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true)
+                        ){WindowTitle = Messages.HIGH_AVAILABILITY})
                 {
                     if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
                     {
