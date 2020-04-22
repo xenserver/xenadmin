@@ -285,8 +285,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (isUpgradeIso)
                     {
-                        using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                            SystemIcons.Error, Messages.PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO)))
+                        using (var dlg = new ErrorDialog(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO))
                             dlg.ShowDialog(this);
 
                         cancel = true;
