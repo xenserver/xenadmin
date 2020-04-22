@@ -36,7 +36,7 @@ using System.Text;
 
 namespace xva_verify
 {
-    class MainClass
+    static class MainClass
     {
         public static void Main(string[] args)
         {
