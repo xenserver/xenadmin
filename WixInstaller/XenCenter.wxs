@@ -253,8 +253,10 @@
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-        <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
-        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
+        <PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
+        <Condition Message="!(loc.Required_For_Installation)">
+            <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
+        </Condition>
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsole)" Name="InstallDir" />
         </Property>
