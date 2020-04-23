@@ -105,9 +105,9 @@ if "%sbe%"=="true" (
   echo "Self signing"
 
   if /I "%is_msi%" == "no" (
-    signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -t %timestamp_server% "%thefile%"
-    signtool sign -v -sm -as -sha1 %thumb_sha256% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
+    signtool sign -v -sm     -sha1 %thumb_sha1%              -d "%descr%" -t  %timestamp_server%            "%thefile%"
+    signtool sign -v -sm -as -sha1 %thumb_sha256% -fd sha256 -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
   ) else (
-    signtool sign -v -sm -sha1 %thumb_sha256% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
+    signtool sign -v -sm     -sha1 %thumb_sha256% -fd sha256 -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
   )
 )
