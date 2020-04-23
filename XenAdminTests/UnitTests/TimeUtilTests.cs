@@ -30,47 +30,32 @@
  */
 
 using System;
-using XenCenterLib;
 using NUnit.Framework;
+using XenAdmin;
 
 namespace XenAdminTests.UnitTests
 {
     [TestFixture, Category(TestCategories.Unit)]
     class TimeUtilTests
     {
-        private readonly long ticksSecondsFactor = Convert.ToInt64(1e7);
-
-        [Test]
-        public void TicksToSecondsConversion()
-        {
-            Assert.AreEqual(73, TimeUtil.TicksToSeconds(73 * ticksSecondsFactor));
-            Assert.AreEqual(0, TimeUtil.TicksToSeconds(0));
-        }
-
         [Test]
         public void TicksBefore1970Check()
         {
-            Assert.AreEqual(621355968000000000, TimeUtil.TicksBefore1970);
-        }
-
-        [Test]
-        public void ISO8601DateFormatStringCheck()
-        {
-            Assert.AreEqual("yyyyMMddTHH:mm:ssZ", TimeUtil.ISO8601DateFormat);
+            Assert.AreEqual(621355968000000000, Util.TicksBefore1970);
         }
 
         [Test]
         public void TicksToSecondsSince1970Conversion()
         {
-            Assert.AreEqual((-1 * TimeUtil.TicksBefore1970 / ticksSecondsFactor), TimeUtil.TicksToSecondsSince1970(0));
-            Assert.AreEqual(0, TimeUtil.TicksToSecondsSince1970(TimeUtil.TicksBefore1970));
-            Assert.AreEqual(1324771200, TimeUtil.TicksToSecondsSince1970(new DateTime(2011, 12, 25).Ticks));
+            Assert.AreEqual((-1 * Util.TicksBefore1970 / TimeSpan.TicksPerSecond), Util.TicksToSecondsSince1970(0));
+            Assert.AreEqual(0, Util.TicksToSecondsSince1970(Util.TicksBefore1970));
+            Assert.AreEqual(1324771200, Util.TicksToSecondsSince1970(new DateTime(2011, 12, 25).Ticks));
         }
 
         [Test]
         public void ISODateTimeParse()
         {
-            DateTime derived = TimeUtil.ParseISO8601DateTime("20111225T10:20:37Z");
+            Util.TryParseIso8601DateTime("20111225T10:20:37Z", out var derived);
             Assert.AreEqual(new DateTime(2011, 12, 25, 10, 20, 37), derived);
             Assert.AreEqual(DateTimeKind.Utc, derived.Kind);
         }
@@ -78,19 +63,19 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void ISODateTimeParseWithBadFormat()
         {
-            Assert.Throws(typeof(FormatException), () => TimeUtil.ParseISO8601DateTime("20111225T1020:37Z"));
+            Assert.False(Util.TryParseIso8601DateTime("20111225T1020:37Z", out _));
         }
 
         [Test]
         public void ISODateTimeParseWithNullArg()
         {
-            Assert.Throws(typeof(ArgumentNullException), () => TimeUtil.ParseISO8601DateTime(null));
+            Assert.False(Util.TryParseIso8601DateTime(null, out _));
         }
 
         [Test]
         public void ToISODateTime()
         {
-            string derived = TimeUtil.ToISO8601DateTime(new DateTime(2011, 12, 25, 10, 20, 37, DateTimeKind.Utc));
+            string derived = Util.ToISO8601DateTime(new DateTime(2011, 12, 25, 10, 20, 37, DateTimeKind.Utc));
             Assert.AreEqual("20111225T10:20:37Z", derived);
         }
 
@@ -98,7 +83,10 @@ namespace XenAdminTests.UnitTests
         public void ISODateTimeRoundTrip()
         {
             const string dateToParse = "20111225T10:20:37Z";
-            string derived = TimeUtil.ToISO8601DateTime(TimeUtil.ParseISO8601DateTime(dateToParse));
+
+            string derived = Util.TryParseIso8601DateTime(dateToParse, out var result)
+                ? Util.ToISO8601DateTime(result)
+                : string.Empty;
             Assert.AreEqual(dateToParse, derived);
         }
     }

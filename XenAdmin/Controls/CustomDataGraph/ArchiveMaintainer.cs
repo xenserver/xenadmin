@@ -353,7 +353,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private static long ToSeconds(ArchiveInterval interval)
         {
-            return TimeUtil.TicksToSeconds(ToTicks(interval));
+            return ToTicks(interval) / TimeSpan.TicksPerSecond;
         }
 
         private long TimeFromInterval(ArchiveInterval interval)
@@ -362,19 +362,19 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 case ArchiveInterval.FiveSecond:
                     if (LastFiveSecondCollection != DateTime.MinValue)
-                        return TimeUtil.TicksToSecondsSince1970(LastFiveSecondCollection.Ticks - TicksInFiveSeconds);
+                        return Util.TicksToSecondsSince1970(LastFiveSecondCollection.Ticks - TicksInFiveSeconds);
                     break;
                 case ArchiveInterval.OneMinute:
                     if (LastOneMinuteCollection != DateTime.MinValue)
-                        return TimeUtil.TicksToSecondsSince1970(LastOneMinuteCollection.Ticks - TicksInOneMinute);
+                        return Util.TicksToSecondsSince1970(LastOneMinuteCollection.Ticks - TicksInOneMinute);
                     break;
                 case ArchiveInterval.OneHour:
                     if (LastOneHourCollection != DateTime.MinValue)
-                        return TimeUtil.TicksToSecondsSince1970(LastOneHourCollection.Ticks - TicksInOneHour);
+                        return Util.TicksToSecondsSince1970(LastOneHourCollection.Ticks - TicksInOneHour);
                     break;
                 case ArchiveInterval.OneDay:
                     if (LastOneDayCollection != DateTime.MinValue)
-                        return TimeUtil.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TicksInOneDay);
+                        return Util.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TicksInOneDay);
                     break;
             }
             return 0;
@@ -469,7 +469,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                                : CurrentInterval == 720 ? HoursInOneWeek     // 168 hours in a week
                                : DaysInOneYear;                              // 366 days in a year
 
-                CurrentTime = new DateTime((((EndTime - modInterval) - (StepSize * CurrentInterval * stepCount)) * TimeSpan.TicksPerSecond) + TimeUtil.TicksBefore1970).ToLocalTime().Ticks;
+                CurrentTime = new DateTime((((EndTime - modInterval) - (StepSize * CurrentInterval * stepCount)) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
             }
             else if (LastNode == "cf")
             {
@@ -516,7 +516,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             else if (LastNode == "t")
             {
                 string str = reader.ReadContentAsString();
-                CurrentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + TimeUtil.TicksBefore1970).ToLocalTime().Ticks;
+                CurrentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
             }
             else if (LastNode == "v")
             {
