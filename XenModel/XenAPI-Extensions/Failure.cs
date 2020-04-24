@@ -110,7 +110,7 @@ namespace XenAPI
             failure.ErrorDescription[1] = Session.FriendlyRoleDescription();
             // Authorized roles
             failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
-            failure.Setup();
+            failure.ParseExceptionMessage();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace XenAPI
             failure.ErrorDescription[1] = output;
             // Authorized roles
             failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
-            failure.Setup();
+            failure.ParseExceptionMessage();
         }
     }
 }

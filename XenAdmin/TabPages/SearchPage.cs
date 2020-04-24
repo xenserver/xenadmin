@@ -343,12 +343,9 @@ namespace XenAdmin.TabPages
             if (search == null)
                 return;
 
-            using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        String.Format(Messages.DELETE_SEARCH_PROMPT, search.Name),
-                        String.Format(Messages.DELETE_SEARCH, search.Name)),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            using (var dlog = new WarningDialog(String.Format(Messages.DELETE_SEARCH_PROMPT, search.Name),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {WindowTitle = String.Format(Messages.DELETE_SEARCH, search.Name)})
             {
                 if (dlog.ShowDialog(this) == DialogResult.Yes)
                     new SearchAction(search, SearchAction.Operation.delete).RunAsync();

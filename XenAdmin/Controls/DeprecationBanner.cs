@@ -74,15 +74,8 @@ namespace XenAdmin.Controls
             }
             catch (Exception)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Error,
-                        string.Format(Messages.COULD_NOT_OPEN_URL,
-                                      LinkUri.AbsoluteUri),
-                        Messages.XENCENTER)))
-                {
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_OPEN_URL, LinkUri.AbsoluteUri)))
                     dlg.ShowDialog(Program.MainWindow);
-                }
             }
         }
 

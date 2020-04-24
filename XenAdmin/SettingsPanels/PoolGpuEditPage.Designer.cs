@@ -38,12 +38,12 @@
             this.groupBoxPlacementPolicy = new System.Windows.Forms.GroupBox();
             this.groupBoxIntedratedGpu = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.optionsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.radioButtonEnable = new System.Windows.Forms.RadioButton();
             this.radioButtonDisable = new System.Windows.Forms.RadioButton();
             this.autoHeightLabel3 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.labelCurrentState = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.radioButtonEnable = new System.Windows.Forms.RadioButton();
-            this.optionsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.groupBoxPlacementPolicy.SuspendLayout();
@@ -61,9 +61,9 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelRubric, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.radioButtonMixture, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.radioButtonDepth, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.radioButtonBreadth, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonMixture, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // radioButtonMixture
@@ -111,11 +111,25 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.optionsLayoutPanel, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.autoHeightLabel3, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.labelCurrentState, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.autoHeightLabel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelCurrentState, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.autoHeightLabel3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.optionsLayoutPanel, 0, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // optionsLayoutPanel
+            // 
+            resources.ApplyResources(this.optionsLayoutPanel, "optionsLayoutPanel");
+            this.optionsLayoutPanel.Controls.Add(this.radioButtonEnable);
+            this.optionsLayoutPanel.Controls.Add(this.radioButtonDisable);
+            this.optionsLayoutPanel.Name = "optionsLayoutPanel";
+            // 
+            // radioButtonEnable
+            // 
+            resources.ApplyResources(this.radioButtonEnable, "radioButtonEnable");
+            this.radioButtonEnable.Name = "radioButtonEnable";
+            this.radioButtonEnable.TabStop = true;
+            this.radioButtonEnable.UseVisualStyleBackColor = true;
             // 
             // radioButtonDisable
             // 
@@ -138,20 +152,6 @@
             // 
             resources.ApplyResources(this.autoHeightLabel1, "autoHeightLabel1");
             this.autoHeightLabel1.Name = "autoHeightLabel1";
-            // 
-            // radioButtonEnable
-            // 
-            resources.ApplyResources(this.radioButtonEnable, "radioButtonEnable");
-            this.radioButtonEnable.Name = "radioButtonEnable";
-            this.radioButtonEnable.TabStop = true;
-            this.radioButtonEnable.UseVisualStyleBackColor = true;
-            // 
-            // optionsLayoutPanel
-            // 
-            resources.ApplyResources(this.optionsLayoutPanel, "optionsLayoutPanel");
-            this.optionsLayoutPanel.Controls.Add(this.radioButtonEnable);
-            this.optionsLayoutPanel.Controls.Add(this.radioButtonDisable);
-            this.optionsLayoutPanel.Name = "optionsLayoutPanel";
             // 
             // PoolGpuEditPage
             // 

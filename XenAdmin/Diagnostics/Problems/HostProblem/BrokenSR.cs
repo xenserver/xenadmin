@@ -29,35 +29,62 @@
  * SUCH DAMAGE.
  */
 
-using System;
+using System.Windows.Forms;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
+using XenAdmin.Dialogs;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 
 
-namespace XenAdmin.Diagnostics.Problems.PoolProblem
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public class MissingSRWarning : Warning
+    public class BrokenSR : HostProblem
     {
+        public BrokenSR(Check check, SR sr, Host host)
+            : base(check, host)
+        {
+            Sr = sr;
+        }
+
+        public SR Sr { get; }
+
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, ServerName, Sr.NameWithoutHost());
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            Program.AssertOnEventThread();
+
+            RepairSRDialog dlg = new RepairSRDialog(Sr, false);
+            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.OK)
+            {
+                cancelled = false;
+                return dlg.RepairAction;
+            }
+
+            cancelled = true;
+            return null;
+        }
+
+        public override string HelpMessage => Messages.REPAIR_SR;
+    }
+
+    class BrokenSRWarning : Warning
+    {
+        private readonly Host host;
         private readonly SR sr;
 
-        public MissingSRWarning(Check check, SR sr)
+        public BrokenSRWarning(Check check, Host host, SR sr)
             : base(check)
         {
             this.sr = sr;
+            this.host = host;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
-
-        public override string Description
-        {
-            get
-            {
-                return String.Format(sr.shared ? Messages.DR_WIZARD_PROBLEM_MISSING_SR : Messages.DR_WIZARD_PROBLEM_LOCAL_STORAGE, sr.Name());
-            }
-        }
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, Helpers.GetName(host).Ellipsise(30), sr);
     }
 }

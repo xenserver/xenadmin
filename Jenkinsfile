@@ -167,8 +167,8 @@ sh xenadmin.git/scripts/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_N
       ).trim()
 
       powershell """
-"xenadmin xenadmin.git ${GIT_COMMIT_XENADMIN}" | Out-File -FilePath ${manifestFile}
-"branding branding.git ${brandingTip}" | Out-File -FilePath ${manifestFile} -Append
+"xenadmin xenadmin.git ${GIT_COMMIT_XENADMIN}" | Out-File -FilePath ${manifestFile} -Encoding UTF8
+"branding branding.git ${brandingTip}" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
 """
 
       if ("${XC_BRANDING}" != 'citrix') {
@@ -182,16 +182,16 @@ sh xenadmin.git/scripts/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_N
         ).trim()
 
         powershell """
-"xenadmin-branding xenadmin-branding.git" ${xenadminBrandingTip} | Out-File -FilePath ${manifestFile} -Append
+"xenadmin-branding xenadmin-branding.git" ${xenadminBrandingTip} | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
 """
       }
 
       def dotNetManifest = readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\dotnet-packages-manifest.txt").trim()
 
       powershell """
-"xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" | Out-File -FilePath ${manifestFile} -Append
-"chroot-lenny chroots.hg 1a75fa5848e8" | Out-File -FilePath ${manifestFile} -Append
-"${dotNetManifest}" | Out-File -FilePath ${manifestFile} -Append
+"xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
+"chroot-lenny chroots.hg 1a75fa5848e8" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
+"${dotNetManifest}" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
 """
     }
 

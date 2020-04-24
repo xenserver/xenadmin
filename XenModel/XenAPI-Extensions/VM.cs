@@ -1114,7 +1114,7 @@ namespace XenAPI
                 return DateTime.MinValue;
 
             string importDate = other_config[P2V_IMPORT_DATE];
-            return TimeUtil.ParseISO8601DateTime(importDate);
+            return Util.TryParseIso8601DateTime(importDate, out var result) ? result : DateTime.MinValue;
         }
 
         public static XenRef<Task> async_live_migrate(Session session, string _vm, string _host)
@@ -1195,14 +1195,10 @@ namespace XenAPI
         /// </summary>
         public DateTime LastShutdownTime()
         {
-            if (other_config.ContainsKey("last_shutdown_time"))
-            {
-                return TimeUtil.ParseISO8601DateTime(other_config["last_shutdown_time"]);
-            }
-            else
-            {
-                return DateTime.MinValue;
-            }
+            return other_config.ContainsKey("last_shutdown_time") &&
+                   Util.TryParseIso8601DateTime(other_config["last_shutdown_time"], out var result)
+                ? result
+                : DateTime.MinValue;
         }
 
         /// <remarks>

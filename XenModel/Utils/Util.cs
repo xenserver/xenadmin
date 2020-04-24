@@ -32,6 +32,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml;
 
@@ -315,6 +316,28 @@ namespace XenAdmin
                 return amount;
         }
 
+        #region DateTime Utils
+
+        public const long TicksBefore1970 = 621355968000000000;
+
+        public static readonly string[] Iso8601DateFormats = {"yyyyMMddTHH:mm:ssZ", "yyyy-MM-ddTHH:mm:ssZ"};
+
+        public static long TicksToSecondsSince1970(long ticks)
+        {
+            return (long)Math.Floor(new TimeSpan(ticks - (TicksBefore1970)).TotalSeconds);
+        }
+
+        public static bool TryParseIso8601DateTime(string toParse, out DateTime result)
+        {
+            return DateTime.TryParseExact(toParse, Iso8601DateFormats, CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out result);
+        }
+
+        public static string ToISO8601DateTime(DateTime t)
+        {
+            return t.ToUniversalTime().ToString(Iso8601DateFormats[0], CultureInfo.InvariantCulture);
+        }
+        
         public static double ToUnixTime(DateTime time)
         {
             TimeSpan diff = time - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -337,6 +360,8 @@ namespace XenAdmin
             
             return Messages.TIME_NEGLIGIBLE;
         }
+
+        #endregion
 
         internal static string GThanSize(long min)
         {

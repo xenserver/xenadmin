@@ -220,10 +220,8 @@ namespace XenAdmin.Dialogs
                 {
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(
-                                SystemIcons.Error,
-                                FriendlyErrorNames.VBDS_MAX_ALLOWED, Messages.DISK_ATTACH)))
+                        using (var dlg = new ErrorDialog(FriendlyErrorNames.VBDS_MAX_ALLOWED)
+                            {WindowTitle = Messages.DISK_ATTACH})
                         {
                             dlg.ShowDialog(Program.MainWindow);
                         }
@@ -260,11 +258,8 @@ namespace XenAdmin.Dialogs
             {
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Information, message)))
-                    {
+                    using (var dlg = new InformationDialog(message))
                         dlg.ShowDialog(Program.MainWindow);
-                    }
                 }
             });
         }

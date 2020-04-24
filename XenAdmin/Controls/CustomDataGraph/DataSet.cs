@@ -383,7 +383,9 @@ namespace XenAdmin.Controls.CustomDataGraph
             int count = 0;
             foreach (DataPoint p in fine)
             {
-                if (TimeUtil.TicksToSecondsSince1970(new DateTime(p.X).ToUniversalTime().Ticks) % TimeUtil.TicksToSeconds(intervalneed) == TimeUtil.TicksToSecondsSince1970(new DateTime(p.X).ToUniversalTime().Ticks) % TimeUtil.TicksToSeconds(intervalat))
+                var secSince1970 = Util.TicksToSecondsSince1970(new DateTime(p.X).ToUniversalTime().Ticks);
+
+                if (secSince1970 % (intervalneed / TimeSpan.TicksPerSecond) == secSince1970 % (intervalat / TimeSpan.TicksPerSecond))
                 {
                     listout.Insert(0,new DataPoint(p.X,count != 0 ? cumulativey / count : p.Y));
                     cumulativey = 0;

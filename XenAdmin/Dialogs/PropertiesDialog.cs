@@ -66,7 +66,6 @@ namespace XenAdmin.Dialogs
         private UpsellPage PerfmonAlertOptionsUpsellEditPage;
         private PerfmonAlertOptionsPage PerfmonAlertOptionsEditPage;
         private HostPowerONEditPage HostPowerONEditPage;
-        private PoolPowerONEditPage PoolPowerONEditPage;
         private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
         private NewPolicySnapshotTypePage newPolicyVMSSTypePage1;
         private NewVMGroupVMsPage<VMSS> newVMSSVMsPage1;
@@ -82,6 +81,7 @@ namespace XenAdmin.Dialogs
         private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
+        private SrReadCachingEditPage SrReadCachingEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -190,12 +190,11 @@ namespace XenAdmin.Dialogs
                 if (is_host)
                 {
                     ShowTab(hostMultipathPage1 = new HostMultipathPage());
-                    ShowTab(HostPowerONEditPage = new HostPowerONEditPage());
                     ShowTab(LogDestinationEditPage = new LogDestinationEditPage());
                 }
                 
-                if (is_pool)
-                    ShowTab(PoolPowerONEditPage = new PoolPowerONEditPage());
+                if (is_host || is_pool)
+                    ShowTab(HostPowerONEditPage = new HostPowerONEditPage());
 
                 if ((is_pool_or_standalone && Helpers.VGpuCapability(xenObjectCopy.Connection))
                     || (is_host && ((Host)xenObjectCopy).CanEnableDisableIntegratedGpu()))
@@ -203,7 +202,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch))
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch) && !Helpers.StockholmOrGreater(connection))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
@@ -269,6 +268,9 @@ namespace XenAdmin.Dialogs
                     ShowTab(newVMApplianceVMsPage1 = new NewVMGroupVMsPage<VM_appliance> { Pool = pool });
                     ShowTab(newVmApplianceVmOrderAndDelaysPage1 = new NewVMApplianceVMOrderAndDelaysPage { Pool = pool });
                 }
+
+                if (is_sr && ((SR)xenObjectCopy).SupportsReadCaching() && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictReadCaching))
+                    ShowTab(SrReadCachingEditPage = new SrReadCachingEditPage());
 
                 //
                 // Now add one tab per VBD (for VDIs only)
@@ -501,7 +503,6 @@ namespace XenAdmin.Dialogs
 
         private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             var snapshotTypePage = verticalTabs.SelectedItem as NewPolicySnapshotTypePage;
             if (snapshotTypePage != null)
             {
@@ -538,6 +539,12 @@ namespace XenAdmin.Dialogs
             {
                 usbEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
                 usbEditPage.ShowHideWarnings();
+                return;
+            }
+
+            if (verticalTabs.SelectedItem == HostPowerONEditPage)
+            {
+                HostPowerONEditPage.LoadPowerOnMode();
                 return;
             }
         }

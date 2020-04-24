@@ -190,7 +190,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             GetDefaultParameters();
             if (errorRetrievingConfigParameters)
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT)))
+                using (var dlg = new ErrorDialog(Messages.VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT))
                 {
                     dlg.ShowDialog(this);
                 }
