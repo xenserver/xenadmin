@@ -10901,6 +10901,9 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>A {0} user cannot alter memory values and will be restricted to the settings on the template.</value>
   </data>
+  <data name="READ_CACHING" xml:space="preserve">
+    <value>Read Caching</value>
+  </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>Read Only</value>
   </data>
