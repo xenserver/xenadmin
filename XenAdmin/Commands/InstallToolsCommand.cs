@@ -286,7 +286,7 @@ namespace XenAdmin.Commands
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Running)
                 return false;
 
-            var vStatus = vm.GetVirtualisationStatus();
+            var vStatus = vm.GetVirtualisationStatus(out _);
 
             if (vStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) ||
                 vStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && vStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
