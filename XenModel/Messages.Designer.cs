@@ -38298,6 +38298,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
+        ///
+        ///To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs..
+        /// </summary>
+        public static string VCPUS_MORE_THAN_PCPUS {
+            get {
+                return ResourceManager.GetString("VCPUS_MORE_THAN_PCPUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VDI.
         /// </summary>
         public static string VDI {
