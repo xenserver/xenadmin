@@ -29,35 +29,54 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Dialogs;
+using XenAPI;
 
-namespace XenAdmin.Diagnostics.Problems
+
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    public abstract class WarningWithMoreInfo : Warning
+    class LegacySslProblem : PoolProblem
     {
-        protected WarningWithMoreInfo(Check check) : base(check)
+        public LegacySslProblem(Check check, Pool pool)
+            : base(check, pool)
         {
         }
-        
-        public override string HelpMessage => Messages.MORE_INFO;
 
-        protected override Actions.AsyncAction CreateAction(out bool cancelled)
+        protected override AsyncAction CreateAction(out bool cancelled)
         {
-            Program.Invoke(Program.MainWindow, delegate ()
-            {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
-                {
-                    dlg.ShowDialog();
-                }
-            });
-
-            cancelled = true;
-            return null;
+            cancelled = false;
+            return new SetSslLegacyAction(Pool, false);
         }
 
-        public abstract string Message { get; }
+        public override string Description =>
+            string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, Pool,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string HelpMessage => Messages.PROBLEM_LEGACY_PROTOCOL_HELP;
+    }
+
+    class LegacySslWarning : WarningWithMoreInfo
+    {
+        private readonly Pool pool;
+
+        public LegacySslWarning(Check check, Pool pool)
+            : base(check)
+        {
+            this.pool = pool;
+        }
+
+        public override string Title => Check.Description;
+
+        public override string Description =>
+            string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, pool,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string Message =>
+            string.Format(pool.IsVisible()
+                    ? Messages.PROBLEM_LEGACY_PROTOCOL_INFO_POOL
+                    : Messages.PROBLEM_LEGACY_PROTOCOL_INFO_SERVER,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 }

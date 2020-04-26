@@ -92,9 +92,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     if (!(selectedMaster.Connection.Session.IsLocalSuperuser || selectedMaster.Connection.Session.Roles.Any(role => role.name_label == Role.MR_ROLE_POOL_ADMIN)))
                     {
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPGRADE_WIZARD_MESSAGE, selectedMaster.Connection.Username,
-                                selectedMaster.Name()), Messages.ROLLING_POOL_UPGRADE)))
+                        using (var dlg = new WarningDialog(string.Format(Messages.RBAC_UPGRADE_WIZARD_MESSAGE,
+                                selectedMaster.Connection.Username, selectedMaster.Name()))
+                            {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                         {
                             dlg.ShowDialog(this);
                         }
@@ -123,10 +123,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (disconnectedServerNames.Count > 0)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        string.Format(Messages.ROLLING_UPGRADE_DISCONNECTED_SERVER, Helpers.StringifyList(disconnectedServerNames)),
-                        Messages.ROLLING_POOL_UPGRADE)))
+                using (var dlg = new WarningDialog(string.Format(Messages.ROLLING_UPGRADE_DISCONNECTED_SERVER, Helpers.StringifyList(disconnectedServerNames)))
+                    {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                 {
                     dlg.ShowDialog(this);
                 }

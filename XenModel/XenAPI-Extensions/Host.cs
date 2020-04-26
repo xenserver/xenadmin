@@ -39,6 +39,7 @@ using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Diagnostics;
+using System.Web.Script.Serialization;
 
 
 namespace XenAPI
@@ -189,8 +190,9 @@ namespace XenAPI
         /// </summary>
         public virtual DateTime LicenseExpiryUTC()
         {
-            if (license_params != null && license_params.ContainsKey("expiry"))
-                return TimeUtil.ParseISO8601DateTime(license_params["expiry"]);
+            if (license_params != null && license_params.ContainsKey("expiry") &&
+                Util.TryParseIso8601DateTime(license_params["expiry"], out var result))
+                return result;
             return new DateTime(2030, 1, 1);
         }
 
@@ -1225,7 +1227,6 @@ namespace XenAPI
             return vm != null ? vm.memory_static_max - vm.memory_static_min : 0;
         }
 
-
         /// <summary>
         /// Friendly string showing memory usage on the host
         /// </summary>
@@ -1580,6 +1581,28 @@ namespace XenAPI
         {
             return Helpers.GpuCapability(Connection) &&
                    !Helpers.FeatureForbidden(Connection, RestrictIntegratedGpuPassthrough);
+        }
+
+        public static bool TryGetUpgradeVersion(Host host, Dictionary<string, string> installMethodConfig,
+            out string platformVersion, out string productVersion)
+        {
+            platformVersion = productVersion = null;
+            
+            try
+            {
+                var result = call_plugin(host.Connection.Session, host.opaque_ref,
+                    "prepare_host_upgrade.py", "getVersion", installMethodConfig);
+                var serializer = new JavaScriptSerializer();
+                var version = (Dictionary<string, object>)serializer.DeserializeObject(result);
+                platformVersion = version.ContainsKey("platform-version") ? (string)version["platform-version"] : null;
+                productVersion = version.ContainsKey("product-version") ? (string)version["product-version"] : null;
+                return platformVersion != null || productVersion != null;
+            }
+            catch (Exception exception)
+            {
+                log.WarnFormat("Plugin call prepare_host_upgrade.getVersion on {0} failed with {1}", host.Name(), exception.Message);
+                return false;
+            }
         }
 
         #region IEquatable<Host> Members

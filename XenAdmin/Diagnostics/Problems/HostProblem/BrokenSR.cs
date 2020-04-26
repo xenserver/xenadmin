@@ -29,46 +29,62 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Globalization;
+using System.Windows.Forms;
+using XenAdmin.Diagnostics.Checks;
+using XenAPI;
+using XenAdmin.Dialogs;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 
-namespace XenCenterLib
+
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public class TimeUtil
+    public class BrokenSR : HostProblem
     {
-        public const long TicksBefore1970 = 621355968000000000;
-
-        public static readonly string[] Iso8601DateFormats = {"yyyyMMddTHH:mm:ssZ", "yyyy-MM-ddTHH:mm:ssZ"};
-
-        public static long TicksToSeconds(long ticks)
+        public BrokenSR(Check check, SR sr, Host host)
+            : base(check, host)
         {
-            return ticks / 10000000;
+            Sr = sr;
         }
 
-        public static long TicksToSecondsSince1970(long ticks)
+        public SR Sr { get; }
+
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, ServerName, Sr.NameWithoutHost());
+
+        protected override AsyncAction CreateAction(out bool cancelled)
         {
-            return (long)Math.Floor(new TimeSpan(ticks - (TicksBefore1970)).TotalSeconds);
+            Program.AssertOnEventThread();
+
+            RepairSRDialog dlg = new RepairSRDialog(Sr, false);
+            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.OK)
+            {
+                cancelled = false;
+                return dlg.RepairAction;
+            }
+
+            cancelled = true;
+            return null;
         }
 
-        public static bool TryParseIso8601DateTime(string toParse, out DateTime result)
+        public override string HelpMessage => Messages.REPAIR_SR;
+    }
+
+    class BrokenSRWarning : Warning
+    {
+        private readonly Host host;
+        private readonly SR sr;
+
+        public BrokenSRWarning(Check check, Host host, SR sr)
+            : base(check)
         {
-            return DateTime.TryParseExact(toParse, Iso8601DateFormats, CultureInfo.InvariantCulture,
-                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out result);
+            this.sr = sr;
+            this.host = host;
         }
 
-        /// <summary>
-        /// Parses an ISO 8601 date/time into a DateTime.
-        /// </summary>
-        /// <param name="toParse">Must be of the format yyyyMMddTHH:mm:ssZ. Must not be null.</param>
-        /// <returns>The parsed DateTime with Kind DateTimeKind.Utc.</returns>
-        public static DateTime ParseISO8601DateTime(string toParse)
-        {
-            return DateTime.ParseExact(toParse, Iso8601DateFormats[0], CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-        }
+        public override string Title => Check.Description;
 
-        public static string ToISO8601DateTime(DateTime t)
-        {
-            return t.ToUniversalTime().ToString(Iso8601DateFormats[0], CultureInfo.InvariantCulture);
-        }
+        public override string Description =>
+            string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, Helpers.GetName(host).Ellipsise(30), sr);
     }
 }

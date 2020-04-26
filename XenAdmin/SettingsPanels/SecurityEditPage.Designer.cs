@@ -29,22 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityEditPage));
-            this.labelRubric = new System.Windows.Forms.Label();
+            this.labelRubricPool = new System.Windows.Forms.Label();
             this.radioButtonTLS = new System.Windows.Forms.RadioButton();
             this.radioButtonSSL = new System.Windows.Forms.RadioButton();
             this.pictureBoxDisruption = new System.Windows.Forms.PictureBox();
             this.labelDisruption = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisruption)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelRubric
+            // labelRubricPool
             // 
-            resources.ApplyResources(this.labelRubric, "labelRubric");
-            this.labelRubric.Name = "labelRubric";
+            this.tableLayoutPanel1.SetColumnSpan(this.labelRubricPool, 2);
+            resources.ApplyResources(this.labelRubricPool, "labelRubricPool");
+            this.labelRubricPool.Name = "labelRubricPool";
             // 
             // radioButtonTLS
             // 
             resources.ApplyResources(this.radioButtonTLS, "radioButtonTLS");
+            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonTLS, 2);
             this.radioButtonTLS.Name = "radioButtonTLS";
             this.radioButtonTLS.TabStop = true;
             this.radioButtonTLS.UseVisualStyleBackColor = true;
@@ -53,6 +57,7 @@
             // radioButtonSSL
             // 
             resources.ApplyResources(this.radioButtonSSL, "radioButtonSSL");
+            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonSSL, 2);
             this.radioButtonSSL.Name = "radioButtonSSL";
             this.radioButtonSSL.TabStop = true;
             this.radioButtonSSL.UseVisualStyleBackColor = true;
@@ -69,28 +74,36 @@
             resources.ApplyResources(this.labelDisruption, "labelDisruption");
             this.labelDisruption.Name = "labelDisruption";
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelRubricPool, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelDisruption, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonTLS, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxDisruption, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonSSL, 0, 2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
             // SecurityEditPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.labelDisruption);
-            this.Controls.Add(this.pictureBoxDisruption);
-            this.Controls.Add(this.radioButtonSSL);
-            this.Controls.Add(this.radioButtonTLS);
-            this.Controls.Add(this.labelRubric);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SecurityEditPage";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisruption)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label labelRubric;
+        private System.Windows.Forms.Label labelRubricPool;
         private System.Windows.Forms.RadioButton radioButtonTLS;
         private System.Windows.Forms.RadioButton radioButtonSSL;
         private System.Windows.Forms.PictureBox pictureBoxDisruption;
         private System.Windows.Forms.Label labelDisruption;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

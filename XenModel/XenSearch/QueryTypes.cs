@@ -625,10 +625,14 @@ namespace XenAdmin.XenSearch
             : base(node)
         {
             string queryString = Helpers.GetXmlAttribute(node, "query");
+
             if (queryString.Length == 8)  // new style
-                this.query = DateTime.ParseExact(queryString, "yyyyMMdd", CultureInfo.InvariantCulture);
-            else  // old style
-                this.query = TimeUtil.ParseISO8601DateTime(queryString);
+                query = DateTime.ParseExact(queryString, "yyyyMMdd", CultureInfo.InvariantCulture);
+            else if (Util.TryParseIso8601DateTime(queryString, out var result)) // old style
+                query = result;
+            else
+                query = DateTime.MinValue;
+
             this.type = (PropertyQueryType)Enum.Parse(typeof(PropertyQueryType), Helpers.GetXmlAttribute(node, "type"));
             this.pretendNow = null;
         }

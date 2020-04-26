@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
@@ -50,6 +49,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
             this.installMethodConfig = installMethodConfig;
         }
+
         public override string Description => Messages.CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION;
 
         protected override Problem RunHostCheck()
@@ -73,7 +73,7 @@ namespace XenAdmin.Diagnostics.Checks
                 string upgradePlatformVersion = null;
                 string upgradeProductVersion = null;
                 if (installMethodConfig != null)
-                    TryGetUpgradeVersion(out upgradePlatformVersion, out upgradeProductVersion);
+                    Host.TryGetUpgradeVersion(Host, installMethodConfig, out upgradePlatformVersion, out upgradeProductVersion);
                 
                 if (Helpers.NaplesOrGreater(upgradePlatformVersion))
                 {
@@ -99,25 +99,6 @@ namespace XenAdmin.Diagnostics.Checks
             {
                 var failure = exception as Failure;
                 log.WarnFormat("Plugin call prepare_host_upgrade.getDom0DefaultMemory on {0} failed with {1}({2})", Host.Name(), exception.Message, failure?.ErrorDescription.Count>3? failure.ErrorDescription[3]:"");
-                return false;
-            }
-        }
-
-        private bool TryGetUpgradeVersion(out string platformVersion, out string productVersion)
-        {
-            platformVersion = productVersion = null;
-            try
-            {
-                var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "getVersion", installMethodConfig);
-                var serializer = new JavaScriptSerializer();
-                var version = (Dictionary<string, object>)serializer.DeserializeObject(result);
-                platformVersion = version.ContainsKey("platform-version") ? (string)version["platform-version"] : null;
-                productVersion = version.ContainsKey("product-version") ? (string)version["product-version"] : null;
-                return platformVersion != null || productVersion != null;
-            }
-            catch (Exception exception)
-            {
-                log.WarnFormat("Plugin call prepare_host_upgrade.getVersion on {0} failed with {1}", Host.Name(), exception.Message);
                 return false;
             }
         }

@@ -122,7 +122,7 @@ namespace XenAdmin.Dialogs
         {
             string date = string.Empty;
 
-            if (!TimeUtil.TryParseIso8601DateTime(dateString, out DateTime result))
+            if (!Util.TryParseIso8601DateTime(dateString, out DateTime result))
                 return dateString;
 
             Program.Invoke(this, () => { date = HelpersGUI.DateTimeToString(result.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true); });

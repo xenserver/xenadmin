@@ -230,11 +230,8 @@ namespace XenAdmin.Wizards
                 nic = pageNetworkDetails.SelectedHostNic;
             }
 
-
-            long vlan = pageNetworkDetails.VLAN;
-
             NetworkAction action = pageNetworkType.SelectedNetworkType == NetworkTypes.External
-                                       ? new NetworkAction(xenConnection, network, nic, vlan)
+                                       ? new NetworkAction(xenConnection, network, nic, pageNetworkDetails.VLAN)
                                        : new NetworkAction(xenConnection, network, true);
             action.RunAsync();
         }
@@ -251,14 +248,18 @@ namespace XenAdmin.Wizards
             var autoPlug = pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN
                 ? pageChinDetails.isAutomaticAddNicToVM
                 : pageNetworkType.SelectedNetworkType == NetworkTypes.SRIOV
-                    ? pageSriovDetails.isAutomaticAddNicToVM
-                    : pageNetworkDetails.isAutomaticAddNicToVM;
+                    ? pageSriovDetails.AddNicToVmsAutomatically
+                    : pageNetworkDetails.AddNicToVmsAutomatically;
             result.SetAutoPlug(autoPlug);
             
             if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
                 result.MTU = pageChinDetails.MTU;
-            else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something
-                result.MTU = pageNetworkDetails.MTU.Value;
+            else
+            {
+                int mtu = pageNetworkDetails.MTU;
+                if (mtu != -1) //Custom MTU may not be allowed if we are making a virtual network or something
+                    result.MTU = mtu;
+            }
 
             return result;
         }

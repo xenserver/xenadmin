@@ -70,39 +70,30 @@ namespace XenAdmin.Core
         /// Find which items from a list need some action, and get permission to perform the action.
         /// </summary>
         /// <typeparam name="T">Type of the items</typeparam>
-        /// <param name="items">List of items</param>
-        /// <param name="pred">Condition under which the items need action</param>
-        /// <param name="msg_single">Dialog message when one item needs action. {0} will be substituted for the name of the item.</param>
-        /// <param name="msg_multiple">Dialog message when more than one item needs action. {0} will be substituted for a list of the items.</param>
+        /// <param name="itemsToFixup">List of items</param>
+        /// <param name="msgSingle">Dialog message when one item needs action. {0} will be substituted for the name of the item.</param>
+        /// <param name="msgMultiple">Dialog message when more than one item needs action. {0} will be substituted for a list of the items.</param>
         /// <param name="defaultYes">Whether the default button should be Proceed (as opposed to Cancel)</param>
         /// <param name="helpName">Help ID for the dialog</param>
-        /// <param name="icon">Severity icon for the dialog</param>
         /// <returns>Whether permission was obtained (also true if no items needed action)</returns>
-        public static bool GetPermissionFor<T>(List<T> items, Predicate<T> pred, string msg_single, string msg_multiple, bool defaultYes, string helpName, Icon icon = null)
+        public static bool GetPermissionFor<T>(List<T> itemsToFixup, string msgSingle, string msgMultiple, bool defaultYes, string helpName)
         {
             if (Program.RunInAutomatedTestMode)
                 return true;
 
-            List<T> itemsToFixup = items.FindAll(pred);
             if (itemsToFixup.Count > 0)
             {
-                string msg;
-                if (itemsToFixup.Count == 1)
-                    msg = string.Format(msg_single, itemsToFixup[0]);
-                else
-                    msg = string.Format(msg_multiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
+                string msg = itemsToFixup.Count == 1
+                    ? string.Format(msgSingle, itemsToFixup[0])
+                    : string.Format(msgMultiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
 
-                DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(icon ?? SystemIcons.Exclamation, msg),
-                    helpName,
-                    new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                using (var dlg = new WarningDialog(msg,
+                    new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes, selected: defaultYes),
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No, selected: !defaultYes))
+                    {HelpName = helpName})
                 {
-                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                    return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
                 }
-
-                return DialogResult.Yes == dialogResult;
             }
             return true;
         }
@@ -136,45 +127,6 @@ namespace XenAdmin.Core
 
             f.BringToFront();
             f.Activate();
-        }
-
-        public static bool FocusFirstControl(Control.ControlCollection cc)
-        {
-            bool found = false;
-
-            List<Control> controls = new List<Control>();
-            foreach (Control control in cc)
-                controls.Add(control);
-            controls.Sort((c1, c2) => c1.TabIndex.CompareTo(c2.TabIndex));
-            if (controls.Count > 0)
-            {
-                foreach (Control control in controls)
-                {
-                    if (control.HasChildren)
-                    {
-                        found = FocusFirstControl(control.Controls);
-                    }
-
-                    if (!found)
-                    {
-                        if (control is Label)
-                            continue;
-
-                        if (control is TextBox && (control as TextBox).ReadOnly)
-                            continue;
-
-                        if (control.CanSelect)
-                        {
-                            found = control.Focus();
-                        }
-                    }
-
-                    if (found)
-                        break;
-                }
-            }
-
-            return found;
         }
 
         public static Dictionary<Host, Host> CheckHostIQNsDiffer()
@@ -577,16 +529,16 @@ namespace XenAdmin.Core
 
             if (hostsWithFewerFeatures.Count > 0 && hostsWithMoreFeatures.Count > 0)
             {
-                return GetPermissionFor(hostsWithFewerFeatures.Union(hostsWithMoreFeatures).ToList(), host => true,
+                return GetPermissionFor(hostsWithFewerFeatures.Union(hostsWithMoreFeatures).ToList(),
                      Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
             }
 
             if (hostsWithFewerFeatures.Count > 0)
-                return GetPermissionFor(hostsWithFewerFeatures, host => true,
+                return GetPermissionFor(hostsWithFewerFeatures,
                     Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
             
-            return GetPermissionFor(hostsWithMoreFeatures, host => true,
-                Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking", SystemIcons.Information);
+            return GetPermissionFor(hostsWithMoreFeatures,
+                Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
         }
     }
 }

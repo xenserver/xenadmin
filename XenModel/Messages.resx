@@ -2658,6 +2658,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host memory check</value>
   </data>
+  <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
+    <value>Power On mode check</value>
+  </data>
+  <data name="CHECKING_POWER_ON_MODE_GROUP" xml:space="preserve">
+    <value>Checking Power On mode</value>
+  </data>
   <data name="CHECKING_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>Checking host upgrade readiness</value>
   </data>
@@ -2675,6 +2681,18 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host partition layout check</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL" xml:space="preserve">
+    <value>Security protocol check</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
+    <value>Checking security protocol</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch Controller check</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>Checking vSwitch Controller configuration</value>
   </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
@@ -5205,6 +5223,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EMPTY" xml:space="preserve">
     <value>&lt;empty&gt;</value>
   </data>
+  <data name="EMPTY_KEY" xml:space="preserve">
+    <value>Empty key</value>
+  </data>
   <data name="EMPTY_LIST_DISK_SNAPSHOTS" xml:space="preserve">
     <value>There are no associated virtual disks or snapshots</value>
   </data>
@@ -7373,11 +7394,14 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>Interfaces: {0}</value>
   </data>
+  <data name="INVALID_DISK_SIZE" xml:space="preserve">
+    <value>Invalid disk size</value>
+  </data>
   <data name="INVALID_HOST" xml:space="preserve">
     <value>Invalid host name</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
-    <value>Invalid disk size</value>
+    <value>Invalid number</value>
   </data>
   <data name="INVALID_PARAMETER" xml:space="preserve">
     <value>Invalid parameter</value>
@@ -7507,7 +7531,7 @@ Size: {3}</value>
     <value>License Manager</value>
   </data>
   <data name="LEARN_MORE" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Learn more...</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
     <value>Enter a user name and password with sufficient privileges to remove your machine account from AD. Authentication will be disabled even if the machine account cannot be removed.</value>
@@ -8741,6 +8765,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETW_DETAILS_VLAN_NUMBER_IN_USE" xml:space="preserve">
     <value>This VLAN number is already in use</value>
   </data>
+  <data name="NETW_DETAILS_VLAN_RANGE" xml:space="preserve">
+    <value>Allowed VLAN range: {0} to {1}</value>
+  </data>
   <data name="NETW_EXTERNAL_DETAILS_TITLE" xml:space="preserve">
     <value>Configure the new network</value>
   </data>
@@ -8758,6 +8785,9 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NETW_TYPE_SELECT_TITLE" xml:space="preserve">
     <value>Choose the type of network to create</value>
+  </data>
+  <data name="NETW_VLAN_ZERO" xml:space="preserve">
+    <value>VLAN 0 will receive all traffic not on any other VLAN</value>
   </data>
   <data name="NEVER" xml:space="preserve">
     <value>Never</value>
@@ -9307,6 +9337,9 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Created by template provisioner</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
+    <value>The default SR '{0}' cannot be seen from the VM's home server.</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME" xml:space="preserve">
     <value>VMs without a home server cannot have disks on the default SR '{0}'.</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
@@ -9316,6 +9349,9 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Storage</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
+    <value>The SR suggested by the template ('{0}') cannot be seen from the VM's home server.</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME" xml:space="preserve">
     <value>VMs without a home server cannot have disks on the SR suggested by the template ('{0}').</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
@@ -10092,6 +10128,9 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>Choose Update File</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO" xml:space="preserve">
+    <value>The file you have selected is a Base Installation ISO file and cannot be used to update your system. Please select an Update ISO file, or use the Rolling Pool Upgrade wizard instead to upgrade to a new version.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TEXT" xml:space="preserve">
     <value>Select Update</value>
   </data>
@@ -10249,16 +10288,16 @@ This will cancel the upload process.</value>
     <value>Disable HA until after all the hosts have been rebooted</value>
   </data>
   <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
-    <value>{0} ok.</value>
+    <value>{0} OK.</value>
+  </data>
+  <data name="PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK" xml:space="preserve">
+    <value>{0}: {1} OK.</value>
   </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>The patch {0} is going to be deleted. Do you want to continue?</value>
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
-    <value>{0}: {1} ok.</value>
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
@@ -10560,7 +10599,7 @@ Please reconnect the host and try again</value>
     <value>This pool has no shared storage</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests is dropped as of [XenServer] {1}. Click "Learn more" to see the list of supported guest operating systems. </value>
+    <value>{0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems.</value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
@@ -10613,6 +10652,9 @@ Please reconnect the host and try again</value>
   <data name="POWER_ON" xml:space="preserve">
     <value>Power On</value>
   </data>
+  <data name="POWER_ON_CUSTOM_MODE_ERROR" xml:space="preserve">
+    <value>Please specify a script name</value>
+  </data>
   <data name="POWER_ON_REQUEST_FAILED" xml:space="preserve">
     <value>Power on request to {0} failed. Check the network connectivity.</value>
   </data>
@@ -10636,6 +10678,27 @@ Please reconnect the host and try again</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for protocols earlier than TLS 1.2 has been removed as of {1}</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_HELP" xml:space="preserve">
+    <value>Disable legacy protocols</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_POOL" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the pool and you may lose permanently access to it.</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the vSwitch Controller has been removed in {1}.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information.</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>The MAC address entered has already been assigned to the VM:
@@ -10661,19 +10724,22 @@ Are you sure you want to continue?</value>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
   </data>
+  <data name="PROBLEM_POWER_ON_ILO_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the Power On mode iLO has been removed as of {1}</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_HELP" xml:space="preserve">
+    <value>Disable Power On mode iLO</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_INFO" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you will not be able to use the Hewlett-Packard Integrated Lights-Out (iLO) feature to power on your server remotely.</value>
+  </data>
   <data name="PROBLEM_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>Please ensure you have specified a network location that is visible from the server and contains an applicable version of installer files.
 
 Click Previous if you need to go back and specify a different network location or select a different set of servers to upgrade.</value>
   </data>
-  <data name="PROBLEM_SRPROBLEM_TITLE" xml:space="preserve">
-    <value>SR '{0}'</value>
-  </data>
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
-  </data>
-  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs has been deprecated. Please remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -10916,6 +10982,9 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>A {0} user cannot alter memory values and will be restricted to the settings on the template.</value>
   </data>
+  <data name="READ_CACHING" xml:space="preserve">
+    <value>Read Caching</value>
+  </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>Read Only</value>
   </data>
@@ -11118,8 +11187,11 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REPEATED_KEY" xml:space="preserve">
     <value>Repeated key</value>
   </data>
-  <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED" xml:space="preserve">
     <value>{0}: The required hotfix is not installed</value>
+  </data>
+  <data name="REQUIRED_HOTFIX_NOT_INSTALLED_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because the required hotfix is not installed</value>
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>Required Updates</value>
@@ -11430,6 +11502,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>TLS 1.2 only</value>
+  </data>
+  <data name="SECURITYEDITPAGE_WARNING_HOST" xml:space="preserve">
+    <value>Changing this setting will cause you to lose access to the server temporarily.</value>
   </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>Security Checks</value>
@@ -12048,9 +12123,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>There is a StorageLink Gateway SR that needs to be reattached.</value>
-  </data>
-  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
-    <value>StorageLink SR status</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>Storage Pools</value>
@@ -13737,12 +13809,6 @@ Schedule:
   <data name="WIZARD_BUTTON_NEXT" xml:space="preserve">
     <value>&amp;Next &gt;</value>
   </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_EXTERNAL" xml:space="preserve">
-    <value>Your new network will be mapped to an existing physical network interface and assigned a VLAN number to use on that interface. You can select the physical interface you would like to use below.</value>
-  </data>
-  <data name="WIZARD_DESC_NETWORK_SETTINGS_INTERNAL" xml:space="preserve">
-    <value>Check the box below if you would like to automatically add this network to new VMs.</value>
-  </data>
   <data name="WIZARD_INTERNAL_ERROR" xml:space="preserve">
     <value>There was an internal error completing this wizard. Please see the logs for more information.</value>
   </data>
@@ -14450,6 +14516,9 @@ Are you sure you want to enable automated power management for this Host?</value
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_8_1" xml:space="preserve">
+    <value>[XenServer] {0}</value>
+  </data>
+  <data name="XENSERVER_8_2" xml:space="preserve">
     <value>[XenServer] {0}</value>
   </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">

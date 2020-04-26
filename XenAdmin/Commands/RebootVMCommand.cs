@@ -32,10 +32,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Network;
-using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions.VMActions;
@@ -77,10 +76,17 @@ namespace XenAdmin.Commands
 
             if (vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.clean_reboot) && !vm.is_a_template && !vm.Locked)
             {
-                if (EnabledTargetExists(selection[0].HostAncestor, selection[0].Connection))
-                {
+                var host = selection[0].HostAncestor;
+                if (host != null && host.enabled)
                     return true;
-                }
+
+                var connection = selection[0].Connection;
+                if (connection == null)
+                    return false;
+
+                var hosts = connection.Cache.Hosts;
+                if (hosts.Any(h => h != null && h.enabled))
+                    return true;
             }
             return false;
         }
@@ -90,94 +96,28 @@ namespace XenAdmin.Commands
             RunAction(vms, Messages.ACTION_VMS_REBOOTING_TITLE, Messages.ACTION_VMS_REBOOTING_TITLE, Messages.ACTION_VM_REBOOTED, null);
         }
 
-        private static bool EnabledTargetExists(Host host, IXenConnection connection)
-        {
-            if (host != null)
-                return host.enabled;
+        public override Image MenuImage => Images.StaticImages._001_Reboot_h32bit_16;
 
-            foreach (Host h in connection.Cache.Hosts)
-            {
-                if (h.enabled)
-                    return true;
-            }
-            return false;
-        }
+        public override string MenuText => Messages.MAINWINDOW_REBOOT;
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._001_Reboot_h32bit_16;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REBOOT;
-            }
-        }
+        protected override string ConfirmationDialogTitle =>
+            GetSelection().Count == 1 ? Messages.CONFIRM_REBOOT_VM_TITLE : Messages.CONFIRM_REBOOT_VMS_TITLE;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override string ConfirmationDialogText =>
+            GetSelection().Count == 1 ? Messages.CONFIRM_REBOOT_VM : Messages.CONFIRM_REBOOT_VMS;
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                if (GetSelection().Count == 1)
-                {
-                    return Messages.CONFIRM_REBOOT_VM_TITLE;
-                }
-
-                return Messages.CONFIRM_REBOOT_VMS_TITLE;
-            }
-        }
-
-        protected override string ConfirmationDialogText
-        {
-            get
-            {
-                if (GetSelection().Count == 1)
-                {
-                    return Messages.CONFIRM_REBOOT_VM;
-                }
-
-                return Messages.CONFIRM_REBOOT_VMS;
-            }
-        }
-
-        protected override string ConfirmationDialogHelpId
-        {
-            get { return "WarningVmLifeCycleReboot"; }
-        }
+        protected override string ConfirmationDialogHelpId => "WarningVmLifeCycleReboot";
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
         {
             return new CommandErrorDialog(Messages.ERROR_DIALOG_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_REBOOT_VM_TEXT, cantExecuteReasons);
         }
 
-        public override Keys ShortcutKeys
-        {
-            get
-            {
-                return Keys.Control | Keys.R;
-            }
-        }
+        public override Keys ShortcutKeys => Keys.Control | Keys.R;
 
-        public override string ShortcutKeyDisplayString
-        {
-            get
-            {
-                return Messages.MAINWINDOW_CTRL_R;
-            }
-        }
+        public override string ShortcutKeyDisplayString => Messages.MAINWINDOW_CTRL_R;
 
         protected override string GetCantExecuteReasonCore(IXenObject item)
         {
@@ -207,12 +147,6 @@ namespace XenAdmin.Commands
             return new VMCleanReboot(vm);
         }
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REBOOT_CONTEXT_MENU;
-            }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_REBOOT_CONTEXT_MENU;
     }
 }

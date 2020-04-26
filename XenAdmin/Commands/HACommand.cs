@@ -102,13 +102,12 @@ namespace XenAdmin.Commands
                     log.ErrorFormat("Cannot resolve HA statefile VDI (pool {0} has {1} statefiles).",
                         pool.Name(), pool.ha_statefiles.Length);
 
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Error,
-                            string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
-                            Messages.CONFIGURE_HA),
-                        "HADisable",
-                        ThreeButtonDialog.ButtonOK))
+                    using (var dlg = new ErrorDialog(string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
+                        ThreeButtonDialog.ButtonOK)
+                    {
+                        HelpName = "HADisable",
+                        WindowTitle = Messages.CONFIGURE_HA
+                    })
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

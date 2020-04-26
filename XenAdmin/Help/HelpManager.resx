@@ -1149,4 +1149,7 @@
   <data name="XenServerUpdateAlert" xml:space="preserve">
     <value>updates-applying</value>
   </data>
+  <data name="StorageReadCaching" xml:space="preserve">
+    <value>storage-readcaching</value>
+  </data>
 </root>

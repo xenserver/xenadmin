@@ -143,7 +143,7 @@ namespace XenAdmin.Dialogs
                 List<Host> slaves = getSlaves();
                 // Check supp packs and warn
                 List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(slaves, master);
-                if (!HelpersGUI.GetPermissionFor(badSuppPacks, sp => true,
+                if (!HelpersGUI.GetPermissionFor(badSuppPacks,
                     Messages.NEW_POOL_SUPP_PACK, Messages.NEW_POOL_SUPP_PACKS, false, "PoolJoinSuppPacks"))
                 {
                     return;
@@ -162,13 +162,13 @@ namespace XenAdmin.Dialogs
                     return;
                 }
 
-                if (!HelpersGUI.GetPermissionFor(slaves, host => PoolJoinRules.FreeHostPaidMaster(host, master, false),
+                if (!HelpersGUI.GetPermissionFor(slaves.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false)),
                     Messages.NEW_POOL_LICENSE_MESSAGE, Messages.NEW_POOL_LICENSE_MESSAGE_MULTIPLE, true, "PoolJoinRelicensing")
                     ||
-                    !HelpersGUI.GetPermissionFor(slaves, host => !PoolJoinRules.CompatibleCPUs(host, master, false),
+                    !HelpersGUI.GetPermissionFor(slaves.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false)),
                     Messages.NEW_POOL_CPU_MASKING_MESSAGE, Messages.NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking")
                     ||
-                    !HelpersGUI.GetPermissionFor(slaves, host => !PoolJoinRules.CompatibleAdConfig(host, master, false),
+                    !HelpersGUI.GetPermissionFor(slaves.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false)),
                     Messages.NEW_POOL_AD_MESSAGE, Messages.NEW_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring")
                     ||
                     !HelpersGUI.GetPermissionForCpuFeatureLevelling(slaves, Helpers.GetPoolOfOne(master.Connection)))

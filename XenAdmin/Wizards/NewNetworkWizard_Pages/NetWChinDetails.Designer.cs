@@ -89,7 +89,6 @@
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanelMTUWarning, 2);
             this.tableLayoutPanelMTUWarning.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanelMTUWarning.Controls.Add(this.labelMTUWarning, 1, 0);
-            this.tableLayoutPanelMTUWarning.MinimumSize = new System.Drawing.Size(0, 40);
             this.tableLayoutPanelMTUWarning.Name = "tableLayoutPanelMTUWarning";
             // 
             // pictureBox1

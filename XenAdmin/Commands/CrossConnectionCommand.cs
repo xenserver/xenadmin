@@ -65,11 +65,8 @@ namespace XenAdmin.Commands
             if (failedConnections.Count > 0)
             {
                 if (!Program.RunInAutomatedTestMode)
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Error,
-                            MessageBoxMessage(failedConnections),
-                            Messages.PERMISSION_DENIED)))
+                    using (var dlg = new ErrorDialog(MessageBoxMessage(failedConnections))
+                        {WindowTitle = Messages.PERMISSION_DENIED})
                     {
                         dlg.ShowDialog(Program.MainWindow);
                     }

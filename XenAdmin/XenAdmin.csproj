@@ -235,16 +235,20 @@
     <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
-    <Compile Include="Diagnostics\Checks\HostCheck.cs" />
+    <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
+    <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\PVGuestsCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
-    <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostPrepareToUpgradeProblem.cs" />
@@ -255,15 +259,12 @@
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\ConflictingUpdatePresent.cs" />
-    <Compile Include="Diagnostics\Problems\Information.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\NotLicensedForAutomatedUpdatesWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\ServerSelectionProblem.cs" />
-    <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
-    <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\VSwitchControllerProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
-    <Compile Include="Diagnostics\Problems\WarningWithMoreInfo.cs" />
     <Compile Include="Dialogs\AddVGPUDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -437,6 +438,12 @@
     </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\SrReadCachingEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\SrReadCachingEditPage.Designer.cs">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\USBEditPage.cs">
       <SubType>UserControl</SubType>
@@ -1484,7 +1491,6 @@
     <Compile Include="Wizards\HAWizard.Designer.cs">
       <DependentUpon>HAWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diagnostics\Problems\SRProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Checks\Check.cs" />
     <Compile Include="Diagnostics\Checks\HostLivenessCheck.cs" />
     <Compile Include="Diagnostics\Checks\PatchPrecheckCheck.cs" />
@@ -2046,13 +2052,9 @@
     <EmbeddedResource Include="SettingsPanels\ClusteringEditPage.zh-CN.resx">
       <DependentUpon>ClusteringEditPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.resx">
+    <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PoolPowerONEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PerfmonAlertOptionsPage.resx">
       <SubType>Designer</SubType>
@@ -2148,6 +2150,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.resx">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.ja.resx">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\SrReadCachingEditPage.zh-CN.resx">
+      <DependentUpon>SrReadCachingEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\USBEditPage.ja.resx">
       <DependentUpon>USBEditPage.cs</DependentUpon>
@@ -3114,7 +3125,6 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
-    <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3224,11 +3234,8 @@
     <Compile Include="Diagnostics\Checks\DR\RunningVmApplianceCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\RunningVmCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasHotfixCheck.cs" />
-    <Compile Include="Diagnostics\Checks\PoolCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\ExistingVmCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostDoesNotHaveHotfix.cs" />
-    <Compile Include="Diagnostics\Problems\PoolProblem\DrHAEnabledProblem.cs" />
-    <Compile Include="Diagnostics\Problems\PoolProblem\MissingSRWarning.cs" />
     <Compile Include="Diagnostics\Problems\VmApplianceProblem\ExistingVmApplianceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\WLBEnabledProblem.cs" />
     <Compile Include="Diagnostics\Problems\VmApplianceProblem\ExistingVmApplianceWarning.cs" />
@@ -4142,7 +4149,6 @@
     <Compile Include="Diagnostics\Problems\HostProblem\HostProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\WrongServerVersion.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolProblem.cs" />
-    <Compile Include="Diagnostics\Problems\SRProblem\SRProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\VMProblem.cs" />
     <Compile Include="Dialogs\AssignLicenseDialog.cs">
       <SubType>Form</SubType>
@@ -4188,13 +4194,10 @@
     <Compile Include="Plugins\UI\TabPageCredentialsDialog.Designer.cs">
       <DependentUpon>TabPageCredentialsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.cs">
+    <Compile Include="SettingsPanels\HostPowerONEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.Designer.cs">
+    <Compile Include="SettingsPanels\HostPowerONEditPage.Designer.cs">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\Wlb\WlbHostExclusionPage.cs">
@@ -5923,17 +5926,11 @@
     <EmbeddedResource Include="SettingsPanels\HostMultipathPage.zh-CN.resx">
       <DependentUpon>HostMultipathPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.ja.resx">
+    <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.ja.resx">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.zh-CN.resx">
+    <EmbeddedResource Include="SettingsPanels\HostPowerONEditPage.zh-CN.resx">
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.ja.resx">
-      <DependentUpon>PoolPowerONEditPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\HostPowerONPages\PoolPowerONEditPage.zh-CN.resx">
-      <DependentUpon>PoolPowerONEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\LogDestinationEditPage.ja.resx">
       <DependentUpon>LogDestinationEditPage.cs</DependentUpon>
@@ -5961,6 +5958,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PoolGpuEditPage.resx">
       <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PoolGpuEditPage.zh-CN.resx">
       <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
@@ -7010,6 +7008,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

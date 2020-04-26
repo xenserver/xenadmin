@@ -76,7 +76,7 @@ namespace XenAdmin.Dialogs
         {
             // Check if vSwitch Controller is configured for the pool (CA-46299)
             Pool pool = Helpers.GetPoolOfOne(connection);
-            var vSwitchController = pool != null && pool.vSwitchController();
+            var vSwitchController = !Helpers.StockholmOrGreater(connection) && pool != null && pool.vSwitchController();
 
             if (vSwitchController) 
             {
@@ -203,21 +203,9 @@ namespace XenAdmin.Dialogs
             comboBoxNetwork.SelectedIndex = 0;
         }
 
-        private XenAPI.Network SelectedNetwork
-        {
-            get
-            {
-                return ((NetworkComboBoxItem)comboBoxNetwork.SelectedItem).Network;
-            }
-        }
+        private XenAPI.Network SelectedNetwork => (comboBoxNetwork.SelectedItem as NetworkComboBoxItem)?.Network;
 
-        private string SelectedMac
-        {
-            get
-            {
-                return radioButtonAutogenerate.Checked ? "" : promptTextBoxMac.Text;
-            }
-        }
+        private string SelectedMac => radioButtonAutogenerate.Checked ? "" : promptTextBoxMac.Text;
 
         public VIF NewVif()
         {
@@ -323,12 +311,10 @@ namespace XenAdmin.Dialogs
                         var vm = xenConnection.Resolve(vif.VM);
                         if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm())
                         {
-                            using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                    string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
-                                    Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE),
-                                new ThreeButtonDialog.TBDButton(Messages.YES_BUTTON_CAPTION, DialogResult.Yes),
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                            using (var dlg = new WarningDialog(string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
+                                ThreeButtonDialog.ButtonYes,
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                                {WindowTitle = Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE})
                             {
                                 e.Cancel = dlg.ShowDialog(this) == DialogResult.No;
                                 return;
@@ -387,16 +373,7 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        internal override string HelpName
-        {
-            get
-            {
-                if (ExistingVif != null)
-                    return "EditVmNetworkSettingsDialog";
-                else
-                    return "VIFDialog";
-            }
-        }
+        internal override string HelpName => ExistingVif == null ? "VIFDialog" : "EditVmNetworkSettingsDialog";
     }
 
     public class NetworkComboBoxItem : IEquatable<NetworkComboBoxItem>

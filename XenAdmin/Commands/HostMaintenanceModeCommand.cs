@@ -80,12 +80,8 @@ namespace XenAdmin.Commands
 
             if (pool != null && pool.ha_enabled && host.IsMaster())
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(
-                        SystemIcons.Error,
-                        String.Format(Messages.HA_CANNOT_EVACUATE_MASTER,
-                            Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH)),
-                        Messages.XENCENTER)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.HA_CANNOT_EVACUATE_MASTER,
+                        Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH))))
                 {
                     dlg.ShowDialog(Parent);
                 }
