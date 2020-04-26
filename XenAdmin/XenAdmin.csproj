@@ -398,12 +398,6 @@
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\UsbUsageDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\UsbUsageDialog.Designer.cs">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\BallooningDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1925,15 +1919,6 @@
     <EmbeddedResource Include="Dialogs\ReconnectAsDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UsbUsageDialog.ja.resx">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UsbUsageDialog.resx">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UsbUsageDialog.zh-CN.resx">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\MoveVMDialog.resx">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>

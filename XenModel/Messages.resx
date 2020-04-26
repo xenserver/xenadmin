@@ -4428,16 +4428,12 @@ This will also delete its subfolders.</value>
     <value>No devices available</value>
   </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
-    <value>Disable pass-through</value>
+    <value>Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
   </data>
   <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
-    <value>Enable pass-through</value>
-  </data>
-  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
-    <value>Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.</value>
-  </data>
-  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
-    <value>Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
+    <value>Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.
+
+Plugging in untrustworthy USB devices to your computer may put your computer at risk. USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs.</value>
   </data>
   <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
     <value>&amp;Yes, Disable pass-through</value>

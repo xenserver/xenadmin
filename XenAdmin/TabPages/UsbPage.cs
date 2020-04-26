@@ -33,10 +33,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using XenAPI;
+using XenAdmin.Actions;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.DataGridViewEx;
-using XenAdmin.Core;
+using XenAPI;
 
 
 namespace XenAdmin.TabPages
@@ -206,10 +206,25 @@ namespace XenAdmin.TabPages
 
         private void buttonPassthrough_Click(object sender, EventArgs e)
         {
-            if (selectedRow != null)
+            if (selectedRow == null)
+                return;
+
+            var pusb = selectedRow.Pusb;
+
+            var message = pusb.passthrough_enabled 
+                ? Messages.DIALOG_USB_USAGE_DISABLE_PASSTHROUGH
+                : Messages.DIALOG_USB_USAGE_ENABLE_PASSTHROUGH;
+
+            var yesText = pusb.passthrough_enabled
+                ? Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE
+                : Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
+
+            using (var dialog = new WarningDialog(message,
+                new ThreeButtonDialog.TBDButton(yesText, DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                ThreeButtonDialog.ButtonNo))
             {
-                UsbUsageDialog dialog = new UsbUsageDialog(selectedRow.Pusb);
-                dialog.ShowDialog(Program.MainWindow);
+                if (dialog.ShowDialog(this) == DialogResult.Yes)
+                    new SetUsbPassthroughAction(pusb, !pusb.passthrough_enabled).RunAsync();
             }
         }
 

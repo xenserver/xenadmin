@@ -12476,7 +12476,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable pass-through.
+        ///   Looks up a localized string similar to Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines..
         /// </summary>
         public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {
             get {
@@ -12485,29 +12485,13 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable pass-through.
+        ///   Looks up a localized string similar to Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.
+        ///
+        ///Plugging in untrustworthy USB devices to your computer may put your computer at risk. USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs..
         /// </summary>
         public static string DIALOG_USB_USAGE_ENABLE_PASSTHROUGH {
             get {
                 return ResourceManager.GetString("DIALOG_USB_USAGE_ENABLE_PASSTHROUGH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines..
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_ALLOW {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_ALLOW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines..
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_DENY {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_DENY", resourceCulture);
             }
         }
         
