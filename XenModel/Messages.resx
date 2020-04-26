@@ -11051,6 +11051,9 @@ To log out of this server and log in again using a different user account, enter
 Click Server Status Report to open the Compile Server Status Report Wizard or click Remove Files to remove the crash dump files without compiling.
 </value>
   </data>
+  <data name="REMOVE_FILES" xml:space="preserve">
+    <value>&amp;Remove Files</value>
+  </data>
   <data name="REMOVE_FROM_FOLDER" xml:space="preserve">
     <value>Remove from &amp;folder</value>
   </data>
@@ -11590,7 +11593,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Server side patch check</value>
   </data>
   <data name="SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Server Status Report</value>
+    <value>&amp;Server Status Report</value>
   </data>
   <data name="SERVER_STATUS_REPORT_CAPABILITIES_FAILED" xml:space="preserve">
     <value>The selected servers failed when asked for their capabilities.  Please select different servers.</value>

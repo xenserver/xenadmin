@@ -31801,6 +31801,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Remove Files.
+        /// </summary>
+        public static string REMOVE_FILES {
+            get {
+                return ResourceManager.GetString("REMOVE_FILES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove from &amp;folder.
         /// </summary>
         public static string REMOVE_FROM_FOLDER {
@@ -33386,7 +33395,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server Status Report.
+        ///   Looks up a localized string similar to &amp;Server Status Report.
         /// </summary>
         public static string SERVER_STATUS_REPORT {
             get {

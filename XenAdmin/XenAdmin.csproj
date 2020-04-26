@@ -1338,12 +1338,6 @@
     <Compile Include="Dialogs\WarningDialogs\CloseXenCenterWarningDialog.Designer.cs">
       <DependentUpon>CloseXenCenterWarningDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.Designer.cs">
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="TabPages\HistoryPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2661,10 +2655,6 @@
     <EmbeddedResource Include="Dialogs\WarningDialogs\CloseXenCenterWarningDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CloseXenCenterWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HistoryPage.resx">
       <SubType>Designer</SubType>
@@ -5710,12 +5700,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LVMoHBAWarningDialog.zh-CN.resx">
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.ja.resx">
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.zh-CN.resx">
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.ja.resx">
       <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>

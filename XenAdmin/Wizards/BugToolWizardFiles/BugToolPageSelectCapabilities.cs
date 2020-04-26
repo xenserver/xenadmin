@@ -234,11 +234,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             if (combination == null || combination.Count <= 0)
             {
-                using (var dlg = new ErrorDialog(Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED)
-                    {WindowTitle = Messages.SERVER_STATUS_REPORT})
-                {
+                using (var dlg = new ErrorDialog(Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED))
                     dlg.ShowDialog(this);
-                }
 
                 cancelled = true;
                 return;
