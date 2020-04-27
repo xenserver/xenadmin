@@ -175,7 +175,7 @@
     <value>troubleshooting-bugtool</value>
   </data>
   <data name="CertificateAlert" xml:space="preserve">
-    <value></value>
+    <value>hosts-certificates</value>
   </data>
   <data name="CertificateChangedDialog" xml:space="preserve">
     <value>hosts-reconnect</value>
@@ -586,7 +586,7 @@
     <value>vms-importdiskimage</value>
   </data>
   <data name="InstallCertificate" xml:space="preserve">
-    <value></value>
+    <value>hosts-certificates</value>
   </data>
   <data name="InstallToolsWarningDialog" xml:space="preserve">
     <value>vms-installtools</value>
