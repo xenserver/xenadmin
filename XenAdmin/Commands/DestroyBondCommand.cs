@@ -92,11 +92,8 @@ namespace XenAdmin.Commands
                 Pool pool = Helpers.GetPool(network.Connection);
                 if (pool != null && pool.ha_enabled)
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Error,
-                            string.Format(Messages.BOND_DELETE_HA_ENABLED, pif.Name(), pool.Name()),
-                            Messages.DELETE_BOND)))
+                    using (var dlg = new ErrorDialog(string.Format(Messages.BOND_DELETE_HA_ENABLED, pif.Name(), pool.Name()))
+                        {WindowTitle = Messages.DELETE_BOND})
                     {
                         dlg.ShowDialog(Parent);
                     }
@@ -106,11 +103,13 @@ namespace XenAdmin.Commands
                 string message = string.Format(will_disturb_secondary ? Messages.BOND_DELETE_WILL_DISTURB_BOTH : Messages.BOND_DELETE_WILL_DISTURB_PRIMARY, msg);
 
                 DialogResult result;
-                using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.DELETE_BOND),
-                            "NetworkingConfigWarning",
+                using (var dlg = new WarningDialog(message,
                             new ThreeButtonDialog.TBDButton(Messages.BOND_DELETE_CONTINUE, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel))
+                            ThreeButtonDialog.ButtonCancel)
+                {
+                    HelpName = "NetworkingConfigWarning",
+                    WindowTitle = Messages.DELETE_BOND
+                })
                 {
                     result = dlg.ShowDialog(Parent);
                 }
@@ -120,8 +119,7 @@ namespace XenAdmin.Commands
             else if (will_disturb_secondary)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.BOND_DELETE_WILL_DISTURB_SECONDARY, msg), Messages.XENCENTER),
+                using (var dlg = new WarningDialog(string.Format(Messages.BOND_DELETE_WILL_DISTURB_SECONDARY, msg),
                         ThreeButtonDialog.ButtonOK,
                         ThreeButtonDialog.ButtonCancel))
                 {
@@ -133,9 +131,8 @@ namespace XenAdmin.Commands
             else
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.XENCENTER),
-                        new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                using (var dlg = new WarningDialog(msg,
+                        new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK, selected: true),
                         ThreeButtonDialog.ButtonCancel))
                 {
                     dialogResult = dlg.ShowDialog(Parent);

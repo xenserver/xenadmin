@@ -36,7 +36,8 @@ using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
+using XenAdmin.Diagnostics.Hotfixing;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -44,40 +45,60 @@ namespace XenAdmin.Diagnostics.Checks
     {
         private readonly Pool _pool;
         private readonly bool _upgrade;
-        private readonly Dictionary<string, string> _installMethodConfig;
         private readonly bool _manualUpgrade;
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly Dictionary<string, string> _installMethodConfig;
 
-        public PVGuestsCheck(Pool pool, bool upgrade, Dictionary<string, string> installMethodConfig = null, bool manualUpgrade = false)
-            : base(Helpers.GetMaster(pool.Connection))
+        public PVGuestsCheck(Host master, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
+            : base(master)
         {
-            _pool = pool;
+            _pool = Helpers.GetPoolOfOne(Host?.Connection);
             _upgrade = upgrade;
-            _installMethodConfig = installMethodConfig;
             _manualUpgrade = manualUpgrade;
+            _installMethodConfig = installMethodConfig;
+        }
+
+        public override bool CanRun()
+        {
+            if (Helpers.QuebecOrGreater(Host))
+                return false;
+
+            if (_pool == null || !_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
+                return false;
+
+            if (!_upgrade && !Helpers.NaplesOrGreater(Host))
+                return false;
+
+            return true;
         }
 
         protected override Problem RunHostCheck()
         {
-            string upgradePlatformVersion;
-            if (!_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
-                return null;
-            if (!_upgrade || _manualUpgrade)
+            //update case
+            if (!_upgrade)
                 return new PoolHasPVGuestWarningUrl(this, _pool);
-            try
+
+            //upgrade case
+
+            if (!_manualUpgrade)
             {
-                var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "getVersion", _installMethodConfig);
-                var serializer = new JavaScriptSerializer();
-                var version = (Dictionary<string, object>)serializer.DeserializeObject(result);
-                upgradePlatformVersion = version.ContainsKey("platform-version") ? (string)version["platform-version"] : null;
+                var hotfix = HotfixFactory.Hotfix(Host);
+                if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                    return new HostDoesNotHaveHotfixWarning(this, Host);
             }
-            catch (Exception exception)
-            {
-                log.Warn($"Plugin call prepare_host_upgrade.getVersion on {Host.Name()} threw an exception.", exception);
+
+            string upgradePlatformVersion = null;
+
+            if (_installMethodConfig != null)
+                Host.TryGetUpgradeVersion(Host, _installMethodConfig, out upgradePlatformVersion, out _);
+
+            // we don't know the upgrade version, so add warning
+            // (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
+            if (string.IsNullOrEmpty(upgradePlatformVersion))
                 return new PoolHasPVGuestWarningUrl(this, _pool);
-            }
+
             if (Helpers.QuebecOrGreater(upgradePlatformVersion))
                 return new PoolHasPVGuestWarningUrl(this, _pool);
+
             return null;
         }
 

@@ -89,6 +89,19 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         }
     }
 
+    class DrHAEnabledProblem : HAEnabledProblem
+    {
+        public DrHAEnabledProblem(Check check, Pool pool)
+            : base(check, pool)
+        {
+        }
+
+        public override string Description
+        {
+            get { return Messages.DR_WIZARD_PROBLEM_HA_ENABLED; }
+        }
+    }
+
     class HAEnabledWarning : Warning
     {
         private readonly Pool pool;

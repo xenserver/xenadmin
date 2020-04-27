@@ -29,12 +29,11 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Actions.Wlb;
+using XenAdmin.Core;
 using XenAdmin.Wlb;
 
 
@@ -42,99 +41,78 @@ namespace XenAdmin.Actions
 {
     public class SavePowerOnSettingsAction : PureAsyncAction
     {
-        private readonly List<Host> hosts;
-        private readonly string newMode, ip, user, password;
-        private readonly Dictionary<string, string> customConfig;
+        private readonly List<KeyValuePair<Host, Host.PowerOnMode>> hostModes;
 
-        public SavePowerOnSettingsAction(IXenConnection connection, List<Host> hosts, string newMode, string ip, string user, string password, Dictionary<string, string> customConfig, bool suppressHistory)
+        public SavePowerOnSettingsAction(IXenConnection connection, List<KeyValuePair<Host, Host.PowerOnMode>> hostModes, bool suppressHistory)
             : base(connection, Messages.ACTION_CHANGE_POWER_ON, Messages.ACTION_CHANGING_POWER_ON, suppressHistory)
         {
-            this.hosts = hosts;
-            this.newMode = newMode;
-            this.ip = ip;
-            this.user = user;
-            this.password = password;
-            this.customConfig = customConfig;
-        }
-
-        public SavePowerOnSettingsAction(Host host, string newMode, string ip, string user, string password,  Dictionary<string, string> customConfig, bool suppressHistory)
-            : this(host.Connection, new List<Host>(), newMode, ip, user, password, customConfig, suppressHistory)
-        {
-            hosts.Add(host);
+            this.hostModes = hostModes;
         }
 
         protected override void Run()
         {
-            foreach (Host host in hosts)
-                SaveConfig(host);
+            foreach (var kvp in hostModes)
+                SaveConfig(kvp.Key, kvp.Value);
         }
 
-        protected void SaveConfig(Host host)
+        private void SaveConfig(Host host, Host.PowerOnMode mode)
         {
+            var newMode = mode.ToString();
+            var config = mode.Config;
             string secretuuid = "";
+
+            
+            if (newMode == "iLO" && Helpers.StockholmOrGreater(Connection))
+            {
+                //the UI should have already prevented us from getting here, but be defensive
+                newMode = "";
+                config = new Dictionary<string, string>();
+            }
+
             try
             {
-                Dictionary<string, string> powerONConfig = new Dictionary<string, string>();
-                if (newMode == "DRAC" || newMode == "iLO")
+                if (newMode == "DRAC" || newMode == "iLO" || newMode != "wake-on-lan" && newMode != "")
                 {
-                    powerONConfig.Add("power_on_ip", ip);
-                    powerONConfig.Add("power_on_user", user);
-                    secretuuid = Secret.CreateSecret(Session, password);
-                    powerONConfig.Add("power_on_password_secret", secretuuid);
-                }
-                else if (newMode != "wake-on-lan" && newMode != "")
-                {
-                    foreach (KeyValuePair<string, string> pair in customConfig)
+                    if (config.ContainsKey("power_on_password_secret"))
                     {
-                        if (pair.Key == "power_on_password_secret")
-                        {
-                            secretuuid = Secret.CreateSecret(Session, pair.Value);
-                            powerONConfig.Add(pair.Key, secretuuid);
-                        }
-                        else
-                            powerONConfig.Add(pair.Key, pair.Value);
+                        secretuuid = Secret.CreateSecret(Session, config["power_on_password_secret"]);
+                        config["power_on_password_secret"] = secretuuid;
                     }
                 }
                 else if (string.IsNullOrEmpty(newMode))
                 {
-                    // We don't want this bit to alter the function of the main action so...
+                    //if WLB is on, we need to exclude the host from WLB power management,
+                    //since we cannot turn it back on if it is powered down automatically
+
                     try
                     {
-                        Pool pool = Core.Helpers.GetPool(this.Connection);
-                        if (null != pool)
+                        Pool pool = Helpers.GetPool(Connection);
+                        if (pool != null && WlbServerState.GetState(pool) == WlbServerState.ServerState.Enabled)
                         {
-                            if (WlbServerState.GetState(pool) == XenAdmin.Wlb.WlbServerState.ServerState.Enabled)
-                            {
-                                //Tell WLB to not allow this host to be powered down automatically, since we cannot turn it back on
-                                WlbHostConfiguration hostConfig = new WlbHostConfiguration(host.uuid);
-                                hostConfig.ParticipatesInPowerManagement = false;
-                                //Use the existing SendWlbConfig action, as it wraps the config functionality
-                                //  as well as the RBAC checks.
-                                SendWlbConfigurationAction wlbAction = new SendWlbConfigurationAction(pool,
-                                                                                       hostConfig.ToDictionary(),
-                                                                                       SendWlbConfigurationKind.SetHostConfiguration);
-                                wlbAction.RunExternal(Session);
-                            }
+                            var hostConfig = new WlbHostConfiguration(host.uuid) {ParticipatesInPowerManagement = false};
+
+                            var wlbAction = new SendWlbConfigurationAction(pool, hostConfig.ToDictionary(),
+                                SendWlbConfigurationKind.SetHostConfiguration);
+                            wlbAction.RunExternal(Session);
                         }
                     }
-
-                    catch (Exception)
+                    catch
                     {
                         //Do nothing on failure.
                     }
                 }
-                
-                Host.set_power_on_mode(Session, host.opaque_ref, newMode, powerONConfig);
 
+                Host.set_power_on_mode(Session, host.opaque_ref, newMode, config);
             }
-            catch (Exception e)
+            catch
             {
                 if (!string.IsNullOrEmpty(secretuuid))
                 {
                     string secretRef = Secret.get_by_uuid(Session, secretuuid);
                     Secret.destroy(Session, secretRef);
                 }
-                throw e;
+
+                throw;
             }
         }
     }

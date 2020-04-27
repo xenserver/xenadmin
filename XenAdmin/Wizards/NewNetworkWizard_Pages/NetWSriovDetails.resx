@@ -139,7 +139,7 @@
     <value>286, 17</value>
   </data>
   <data name="cbxAutomatic.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="cbxAutomatic.Text" xml:space="preserve">
     <value>&amp;Automatically add this network to new virtual machines.</value>

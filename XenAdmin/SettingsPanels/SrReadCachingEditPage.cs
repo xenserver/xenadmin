@@ -28,40 +28,55 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
  * SUCH DAMAGE.
  */
-
-using System.Diagnostics;
+ 
+using System.Drawing;
+using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Help;
 using XenAPI;
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.SettingsPanels
 {
-    public abstract class HostCheck : Check
+    public partial class SrReadCachingEditPage : UserControl, IEditPage
     {
-        private readonly Host _host;
-
-        protected HostCheck(Host host)
+        private SR sr;
+        public SrReadCachingEditPage()
         {
-            Debug.Assert(host != null);
-            _host = host;
+            InitializeComponent();
+            Text = Messages.READ_CACHING;
         }
 
-        protected Host Host
+        public string SubText => checkBoxEnableReadCaching.Checked ? Messages.ENABLED : Messages.DISABLED;
+
+        public Image Image => Images.StaticImages._000_Storage_h32bit_16;
+
+        public AsyncAction SaveSettings()
         {
-            get { return _host; }
+            sr.SetReadCachingEnabled(checkBoxEnableReadCaching.Checked);
+            return null;
         }
 
-        public sealed override IXenObject XenObject
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            get { return _host; }
+            sr = clone as SR;
+            if (sr == null)
+                return;
+            checkBoxEnableReadCaching.Checked = sr.GetReadCachingEnabled();
         }
 
-        public override string SuccessfulCheckDescription 
+        public bool ValidToSave => true;
+
+        public void ShowLocalValidationMessages()
+        { }
+
+        public void Cleanup()
+        { }
+
+        public bool HasChanged => checkBoxEnableReadCaching.Checked != sr.GetReadCachingEnabled();
+
+        private void linkLabelTellMeMore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            get
-            {
-                return string.IsNullOrEmpty(Description)
-                    ? string.Empty
-                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, Host.Name(), Description);
-            }
+            HelpManager.Launch("StorageReadCaching");
         }
     }
 }

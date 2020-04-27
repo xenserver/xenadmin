@@ -407,10 +407,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     ? Messages.CONFIRM_DELETE_POLICIES_0
                     : Messages.CONFIRM_DELETE_POLICIES, numberOfProtectedVMs);
 
-            using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, text, Messages.DELETE_VMSS_TITLE),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            using (var dlg = new WarningDialog(text, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {WindowTitle = Messages.DELETE_VMSS_TITLE})
             {
                 if (dlg.ShowDialog(this) == DialogResult.Yes)
                 {

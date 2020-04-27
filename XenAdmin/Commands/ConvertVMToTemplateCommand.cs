@@ -68,13 +68,9 @@ namespace XenAdmin.Commands
         {
             VM vm = (VM)selection[0].XenObject;
 
-            using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            SystemIcons.Warning,
-                            string.Format(Messages.CONVERT_TEMPLATE_DIALOG_TEXT, vm.Name().Ellipsise(25)),
-                            Messages.CONVERT_TO_TEMPLATE),
-                        new ThreeButtonDialog.TBDButton(Messages.CONVERT, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                        ThreeButtonDialog.ButtonCancel))
+            using (var dlg = new WarningDialog(string.Format(Messages.CONVERT_TEMPLATE_DIALOG_TEXT, vm.Name().Ellipsise(25)),
+                        new ThreeButtonDialog.TBDButton(Messages.CONVERT, DialogResult.OK, selected: true),
+                        ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.CONVERT_TO_TEMPLATE})
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {

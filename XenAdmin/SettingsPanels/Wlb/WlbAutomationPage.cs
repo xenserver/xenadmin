@@ -215,10 +215,9 @@ namespace XenAdmin.SettingsPanels
                              !_poolConfiguration.HostConfigurations[host.uuid].LastPowerOnSucceeded))
                         {
                             DialogResult dr;
-                            using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.WLB_UNTESTED_HOST_WARNING, Messages.WLB_UNTESTED_HOST_CAPTION),
+                            using (var dlg = new WarningDialog(Messages.WLB_UNTESTED_HOST_WARNING,
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.WLB_UNTESTED_HOST_CAPTION})
                             {
                                 dr = dlg.ShowDialog();
                             }

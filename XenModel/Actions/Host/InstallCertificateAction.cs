@@ -61,7 +61,6 @@ namespace XenAdmin.Actions
                 Messages.INSTALL_SERVER_CERTIFICATE_DESCRIPTION, true)
         {
             Host = host;
-            _session = Session;
             _hostRef = host.opaque_ref;
             _isMaster = host.IsMaster();
 
@@ -214,7 +213,8 @@ namespace XenAdmin.Actions
 
                 try
                 {
-                    Host.install_server_certificate(Session, _hostRef, certificate, privateKey, chain);
+                    _session = Session;
+                    Host.install_server_certificate(_session, _hostRef, certificate, privateKey, chain);
                     PercentComplete = 50;
                     WaitForNewCertificate();
                 }

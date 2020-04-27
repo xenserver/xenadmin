@@ -68,9 +68,7 @@ namespace XenAdmin.Commands
                 var msg = string.Format(Messages.CERTIFICATE_RBAC_RESTRICTION, currentRoles[0].FriendlyName(),
                     Role.FriendlyName(Role.MR_ROLE_POOL_ADMIN));
 
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, msg),
-                    ThreeButtonDialog.ButtonOK))
+                using (var dlg = new ErrorDialog(msg))
                     dlg.ShowDialog(Parent);
 
                 return;

@@ -112,18 +112,14 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="cbxAutomatic.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="cbxAutomatic.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -131,10 +127,11 @@
   <data name="lblNicHelp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="lblNicHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="lblNicHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -158,7 +155,7 @@
     <value>lblNicHelp</value>
   </data>
   <data name="&gt;&gt;lblNicHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblNicHelp.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -172,9 +169,6 @@
   <data name="comboInterfaces.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 47</value>
   </data>
-  <data name="comboInterfaces.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
   <data name="comboInterfaces.Size" type="System.Drawing.Size, System.Drawing">
     <value>371, 20</value>
   </data>
@@ -185,7 +179,7 @@
     <value>comboInterfaces</value>
   </data>
   <data name="&gt;&gt;comboInterfaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;comboInterfaces.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -193,17 +187,14 @@
   <data name="&gt;&gt;comboInterfaces.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 47</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 20</value>
@@ -221,7 +212,7 @@
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -238,14 +229,8 @@
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
-  </data>
-  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
   </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -254,7 +239,7 @@
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanelMTUWarning</value>
@@ -266,16 +251,13 @@
     <value>True</value>
   </data>
   <data name="labelMTUWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>Top</value>
   </data>
   <data name="labelMTUWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelMTUWarning.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 0</value>
-  </data>
-  <data name="labelMTUWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
   </data>
   <data name="labelMTUWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>474, 45</value>
@@ -290,7 +272,7 @@
     <value>labelMTUWarning</value>
   </data>
   <data name="&gt;&gt;labelMTUWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelMTUWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanelMTUWarning</value>
@@ -306,6 +288,9 @@
   </data>
   <data name="tableLayoutPanelMTUWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanelMTUWarning.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 40</value>
   </data>
   <data name="tableLayoutPanelMTUWarning.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -323,7 +308,7 @@
     <value>tableLayoutPanelMTUWarning</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelMTUWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelMTUWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -334,17 +319,14 @@
   <data name="tableLayoutPanelMTUWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelMTUWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,50,Percent,50" />&lt;Rows Styles="Percent,50" />&lt;/TableLayoutSettings></value>
   </data>
+  <data name="labelMTU.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelMTU.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelMTU.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelMTU.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 74</value>
-  </data>
-  <data name="labelMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 7, 3, 5</value>
   </data>
   <data name="labelMTU.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 19</value>
@@ -362,7 +344,7 @@
     <value>labelMTU</value>
   </data>
   <data name="&gt;&gt;labelMTU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelMTU.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -372,9 +354,6 @@
   </data>
   <data name="numericUpDownMTU.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 74</value>
-  </data>
-  <data name="numericUpDownMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 7, 0, 5</value>
   </data>
   <data name="numericUpDownMTU.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 19</value>
@@ -386,7 +365,7 @@
     <value>numericUpDownMTU</value>
   </data>
   <data name="&gt;&gt;numericUpDownMTU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;numericUpDownMTU.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -413,7 +392,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -422,7 +401,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="lblNicHelp" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="comboInterfaces" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="cbxAutomatic" Row="4" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="tableLayoutPanelMTUWarning" Row="3" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="labelMTU" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="numericUpDownMTU" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,45,Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="lblNicHelp" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="comboInterfaces" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="cbxAutomatic" Row="4" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="tableLayoutPanelMTUWarning" Row="3" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="labelMTU" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="numericUpDownMTU" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="cbxAutomatic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -449,7 +428,7 @@
     <value>cbxAutomatic</value>
   </data>
   <data name="&gt;&gt;cbxAutomatic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxAutomatic.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -457,7 +436,7 @@
   <data name="&gt;&gt;cbxAutomatic.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

@@ -201,7 +201,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (suggestedSrVisible)
                 sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE, suggestedSr.Name().Ellipsise(50)).AppendLine();
             else if (suggestedSrHasSpace)
-                sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL, suggestedSr.Name().Ellipsise(50)).AppendLine();
+                sb.AppendFormat(Affinity == null
+                        ? Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME
+                        : Messages.NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL,
+                    suggestedSr.Name().Ellipsise(50)).AppendLine();
 
             SR defaultSr = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
             var defaultSrVisible = defaultSr != null && defaultSr.CanBeSeenFrom(affinity);
@@ -221,7 +224,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (defaultSrVisible && !defaultSr.Equals(suggestedSr))
                 sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE, defaultSr.Name().Ellipsise(50)).AppendLine();
             else if (defaultSrHasSpace && !defaultSr.Equals(suggestedSr))
-                sb.AppendFormat(Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL, defaultSr.Name().Ellipsise(50)).AppendLine();
+                sb.AppendFormat(Affinity == null
+                        ? Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME
+                        : Messages.NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL,
+                    defaultSr.Name().Ellipsise(50)).AppendLine();
 
             foreach (SR sr in connection.Cache.SRs)
             {

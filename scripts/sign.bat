@@ -52,9 +52,9 @@ set descr=%~8
 set thefile=%~7
 
 if /I "%~x7"==".msi" (
-  set cross_sign=no
+  set is_msi=yes
 ) else (
-  set cross_sign=yes
+  set is_msi=no
 )
 
 set CTXSIGN=C:\ctxsign2\ctxsign.exe
@@ -76,27 +76,38 @@ if "%sbe%"=="true" (
 
   set /p CCSS_TICKET= < out.txt
 
-  echo %CTXSIGN% --sign --key XenServer.NET_KEY --cross-sign --pagehashes yes --type Authenticode ^
-      --description "%descr%" "%thefile%"
+  if "%is_msi%"=="no" (
+    echo %CTXSIGN% --sign --key XenServer.NET_KEY --cross-sign --pagehashes yes --type Authenticode ^
+        --description "%descr%" "%thefile%"
 
-  date /t && time /t
-  %CTXSIGN% --sign --key XenServer.NET_KEY --cross-sign --pagehashes yes --type Authenticode ^
-      --description "%descr%" "%thefile%"
-
-  if "%cross_sign%"=="yes" (
     date /t && time /t
-    %CTXSIGN% --sign --authenticode-append --authenticode-SHA256 --key XenServerSHA256.NET_KEY ^
-      --cross-sign --pagehashes yes "%thefile%"
+    %CTXSIGN% --sign --key XenServer.NET_KEY --cross-sign --pagehashes yes --type Authenticode ^
+        --description "%descr%" "%thefile%"
+
+    echo %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --cross-sign --pagehashes yes ^
+       --authenticode-SHA256 --authenticode-append "%thefile%"
+
+    date /t && time /t
+    %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --cross-sign --pagehashes yes ^
+       --authenticode-SHA256 --authenticode-append "%thefile%"
+  ) else (
+    echo %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --pagehashes yes --type Authenticode ^
+      --authenticode-SHA256 --description "%descr%" "%thefile%"
+
+    date /t && time /t
+    %CTXSIGN% --sign --key XenServerSHA256.NET_KEY --pagehashes yes --type Authenticode ^
+      --authenticode-SHA256 --description "%descr%" "%thefile%"
   )
   %CTXSIGN% --end
+  echo.
 
 ) else (
   echo "Self signing"
 
-  if /I "%cross_sign%" == "yes" (
+  if /I "%is_msi%" == "no" (
     signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -t %timestamp_server% "%thefile%"
     signtool sign -v -sm -as -sha1 %thumb_sha256% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
   ) else (
-    signtool sign -v -sm -sha1 %thumb_sha1% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
+    signtool sign -v -sm -sha1 %thumb_sha256% -d "%descr%" -tr %timestamp_server% -td sha256 "%thefile%"
   )
 )

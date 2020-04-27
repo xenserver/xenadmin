@@ -111,9 +111,8 @@ namespace XenAdmin
             catch (ConfigurationErrorsException e)
             {
                 log.Error("Error parsing 'ProxySetting' from settings - settings file deemed corrupt", e);
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,
-                    string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                    Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
+                    {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog();
                 }

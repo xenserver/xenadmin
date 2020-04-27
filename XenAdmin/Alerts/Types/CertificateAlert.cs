@@ -56,7 +56,7 @@ namespace XenAdmin.Alerts
                 doc.LoadXml(m.body);
                 var nodes = doc.GetElementsByTagName("date");
 
-                if (nodes.Count > 0 && TimeUtil.TryParseIso8601DateTime(nodes[0].InnerText, out DateTime result))
+                if (nodes.Count > 0 && Util.TryParseIso8601DateTime(nodes[0].InnerText, out DateTime result))
                     _certificateExpiryDate = result;
             }
             catch

@@ -29,14 +29,17 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Diagnostics.Problems
 {
     public abstract class Warning : Problem
     {
-        protected Warning(Check check) 
+        protected Warning(Check check)
             : base(check)
         {
         }
@@ -46,5 +49,79 @@ namespace XenAdmin.Diagnostics.Problems
         public override string HelpMessage => null;
 
         public override Image Image => Images.GetImage16For(Icons.Warning);
+    }
+
+
+    public abstract class WarningWithMoreInfo : Warning
+    {
+        protected WarningWithMoreInfo(Check check) : base(check)
+        {
+        }
+        
+        public override string HelpMessage => Messages.MORE_INFO;
+
+        protected override Actions.AsyncAction CreateAction(out bool cancelled)
+        {
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                using (var dlg = new WarningDialog(Message))
+                {
+                    if (!string.IsNullOrEmpty(LinkText) && !string.IsNullOrEmpty(LinkData))
+                    {
+                        dlg.LinkText = LinkText;
+                        dlg.LinkData = LinkData;
+                        dlg.ShowLinkLabel = true;
+                    }
+                    dlg.ShowDialog();
+                }
+            });
+
+            cancelled = true;
+            return null;
+        }
+
+        public abstract string Message { get; }
+
+        public virtual string LinkData => null;
+        public virtual string LinkText => LinkData;
+    }
+
+ 
+    public abstract class WarningWithInformationUrl : Warning
+    {
+        protected WarningWithInformationUrl(Check check) : base(check)
+        {
+        }
+
+        public abstract Uri UriToLaunch { get; }
+
+        public virtual string LinkText => UriToLaunch != null ? Messages.DETAILS : string.Empty;
+
+        public void LaunchUrlInBrowser()
+        {
+            try
+            {
+                if (UriToLaunch != null)
+                    Process.Start(UriToLaunch.AbsoluteUri);
+            }
+            catch (Exception)
+            {
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_OPEN_URL,
+                        UriToLaunch != null ? UriToLaunch.AbsoluteUri : string.Empty)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
+            }
+        }
+    }
+
+    public abstract class Information : Warning
+    {
+        protected Information(Check check)
+            : base(check)
+        {
+        }
+
+        public sealed override Image Image => Images.GetImage16For(Icons.Info);
     }
 }

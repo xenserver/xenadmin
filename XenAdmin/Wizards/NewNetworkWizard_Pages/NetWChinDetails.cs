@@ -31,13 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -55,9 +49,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             numericUpDownMTU.Visible = labelMTU.Visible = tableLayoutPanelMTUWarning.Visible = false;
         }
 
-        public override string Text { get { return Messages.NETW_DETAILS_TEXT; } }
-        
-        public override string PageTitle { get { return Messages.NETW_CHIN_DETAILS_TITLE; } }
+        public override string Text => Messages.NETW_DETAILS_TEXT;
+
+        public override string PageTitle => Messages.NETW_CHIN_DETAILS_TITLE;
 
         public override bool EnableNext()
         {
@@ -66,7 +60,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            HelpersGUI.FocusFirstControl(Controls);
+            comboInterfaces.Focus();
         }
 
         public override void PopulatePage()
@@ -77,20 +71,11 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         public Host Host { private get; set; }
         public Pool Pool { private get; set; }
 
-        public XenAPI.Network SelectedInterface
-        {
-            get { return (XenAPI.Network)comboInterfaces.SelectedItem; }
-        }
+        public XenAPI.Network SelectedInterface => (XenAPI.Network)comboInterfaces.SelectedItem;
 
-        public bool isAutomaticAddNicToVM
-        {
-            get { return cbxAutomatic.Checked; }
-        }
+        public bool isAutomaticAddNicToVM => cbxAutomatic.Checked;
 
-        public long MTU
-        {
-            get { return (long)numericUpDownMTU.Value; }
-        }
+        public long MTU => (long)numericUpDownMTU.Value;
 
         private void PopulateInterfaces(Pool pool, Host host, IXenConnection connection)
         {
@@ -116,7 +101,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                     }
                 }
             }
-            comboInterfaces.SelectedIndexChanged += new EventHandler(comboInterfaces_SelectedIndexChanged);
+            comboInterfaces.SelectedIndexChanged += comboInterfaces_SelectedIndexChanged;
 
             if (comboInterfaces.Items.Count > 0)
                 comboInterfaces.SelectedIndex = 0;

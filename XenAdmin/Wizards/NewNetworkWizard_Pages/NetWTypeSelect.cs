@@ -32,10 +32,8 @@
 using System;
 using System.Linq;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Controls;
-
 
 
 namespace XenAdmin.Wizards.NewNetworkWizard_Pages
@@ -45,91 +43,84 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         public NetWTypeSelect()
         {
             InitializeComponent();
-            this.rbtnExternalNetwork.Checked = true;
+            rbtnExternalNetwork.Checked = true;
         }
 
-        public override string Text { get { return Messages.NETW_TYPE_SELECT_TEXT; } }
+        public override string Text => Messages.NETW_TYPE_SELECT_TEXT;
 
-        public override string PageTitle { get { return Messages.NETW_TYPE_SELECT_TITLE; } }
+        public override string PageTitle => Messages.NETW_TYPE_SELECT_TITLE;
+
+        public NetworkTypes SelectedNetworkType =>
+            rbtnBondedNetwork.Checked
+                ? NetworkTypes.Bonded
+                : rbtnExternalNetwork.Checked
+                    ? NetworkTypes.External
+                    : rbtnCHIN.Checked
+                        ? NetworkTypes.CHIN
+                        : rbtnSriov.Checked
+                            ? NetworkTypes.SRIOV
+                            : NetworkTypes.Internal;
+
 
         public override void PopulatePage()
         {
-            Update(Connection);
-        }
-
-        public NetworkTypes SelectedNetworkType
-        {
-            get
-            {
-                return rbtnBondedNetwork.Checked
-                           ? NetworkTypes.Bonded
-                           : rbtnExternalNetwork.Checked
-                                 ? NetworkTypes.External
-                                 : rbtnCHIN.Checked
-                                       ? NetworkTypes.CHIN
-                                       : rbtnSriov.Checked
-                                           ? NetworkTypes.SRIOV
-                                           : NetworkTypes.Internal;
-            }
-        }
-
-        private void Update(IXenConnection connection)
-        {
-            Host master = Helpers.GetMaster(connection);
-            if (master == null)
+            Pool pool = Helpers.GetPoolOfOne(Connection);
+            if (pool == null)
                 return;
 
-            Pool pool = Helpers.GetPoolOfOne(connection);
-            labelCHIN.Visible = rbtnCHIN.Visible = !HiddenFeatures.CrossServerPrivateNetworkHidden;
-            if (!pool.vSwitchController())
+            if (HiddenFeatures.CrossServerPrivateNetworkHidden || Helpers.StockholmOrGreater(Connection))
             {
-                rbtnCHIN.Checked = false;
+                rbtnCHIN.Visible = labelCHIN.Visible = false;
+                warningTableChin.Visible = false;
+            }
+            else if (!pool.vSwitchController())
+            {
+                rbtnCHIN.Visible = labelCHIN.Visible = true;
                 rbtnCHIN.Enabled = labelCHIN.Enabled = false;
 
-                labelWarningChinOption.Text = 
-                    Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
-                    String.Format(Messages.FEATURE_DISABLED, Messages.CHIN) :
-                    Messages.CHINS_NEED_VSWITCHCONTROLLER;
+                labelWarningChinOption.Text = Helpers.FeatureForbidden(Connection, Host.RestrictVSwitchController)
+                    ? string.Format(Messages.FEATURE_DISABLED, Messages.CHIN)
+                    : Messages.CHINS_NEED_VSWITCHCONTROLLER;
 
-                iconWarningChinOption.Visible = labelWarningChinOption.Visible = !HiddenFeatures.CrossServerPrivateNetworkHidden;
-
-                rbtnExternalNetwork.Checked = true;
+                warningTableChin.Visible = true;
             }
             else
             {
+                rbtnCHIN.Visible = labelCHIN.Visible = true;
                 rbtnCHIN.Enabled = labelCHIN.Enabled = true;
-                iconWarningChinOption.Visible = labelWarningChinOption.Visible = false;
+                warningTableChin.Visible = false;
             }
 
             bool hasNicCanEnableSriov = pool.Connection.Cache.PIFs.Any(pif => pif.IsPhysical() && pif.SriovCapable() && !pif.IsSriovPhysicalPIF());
-            bool sriovFeatureForbidden = Helpers.FeatureForbidden(connection, Host.RestrictSriovNetwork);
+            bool sriovFeatureForbidden = Helpers.FeatureForbidden(Connection, Host.RestrictSriovNetwork);
 
             if (!Helpers.KolkataOrGreater(pool.Connection))
             {
-                iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = false;
                 rbtnSriov.Visible = labelSriov.Visible = false;
+                warningTableSriov.Visible = false;
             }
             else if (Helpers.FeatureForbidden(pool.Connection, Host.SriovNetworkDisabled) ||
-                sriovFeatureForbidden || !pool.HasSriovNic() || !hasNicCanEnableSriov)
+                     sriovFeatureForbidden || !pool.HasSriovNic() || !hasNicCanEnableSriov)
             {
-                rbtnSriov.Checked = false;
+                rbtnSriov.Visible = labelSriov.Visible = true;
                 rbtnSriov.Enabled = labelSriov.Enabled = false;
 
                 labelWarningSriovOption.Text =
                     Helpers.FeatureForbidden(pool.Connection, Host.SriovNetworkDisabled)
-                        ? String.Format(Messages.FEATURE_EXPERIMENTAL, Messages.NETWORK_SRIOV)
+                        ? string.Format(Messages.FEATURE_EXPERIMENTAL, Messages.NETWORK_SRIOV)
                         : sriovFeatureForbidden
-                            ? String.Format(Messages.FEATURE_DISABLED, Messages.NETWORK_SRIOV)
+                            ? string.Format(Messages.FEATURE_DISABLED, Messages.NETWORK_SRIOV)
                             : pool.HasSriovNic()
                                 ? Messages.NICS_ARE_SRIOV_ENABLED
                                 : Messages.SRIOV_NEED_NICSUPPORT;
 
-                iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = true;
+                warningTableSriov.Visible = true;
             }
             else
             {
-                rbtnSriov.Enabled = labelCHIN.Enabled = true;
-                iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = false;
+                rbtnSriov.Visible = labelSriov.Visible = true;
+                rbtnSriov.Enabled = labelSriov.Enabled = true;
+                warningTableSriov.Visible = false;
             }
         }
     }

@@ -68,10 +68,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             if (direction == PageLoadedDirection.Back)
                 return;
 
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(
-                    SystemIcons.Warning,
-                    Messages.SRIOV_NETWORK_CREATE_WARNING),
+            using (var dlg = new WarningDialog(Messages.SRIOV_NETWORK_CREATE_WARNING,
                 new ThreeButtonDialog.TBDButton(Messages.SRIOV_NETWORK_CREATE, DialogResult.OK),
                 ThreeButtonDialog.ButtonCancel))
             {
@@ -100,15 +97,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             OnPageUpdated();
         }
 
-        public PIF SelectedHostNic
-        {
-            get { return (PIF)comboBoxNicList.SelectedItem; }
-        }
+        public PIF SelectedHostNic => (PIF)comboBoxNicList.SelectedItem;
 
-        public bool isAutomaticAddNicToVM
-        {
-            get { return cbxAutomatic.Checked; }
-        }
+        public bool AddNicToVmsAutomatically => cbxAutomatic.Checked;
 
         private void comboBoxNicList_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -356,6 +356,45 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
+            if (WizardMode == WizardMode.NewVersion)
+            {
+                //vSwitch controller check - for each pool
+                var vSwitchChecks = (from Pool pool in SelectedPools
+                    let check = new VSwitchControllerCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (vSwitchChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
+
+                //protocol check - for each pool
+                var sslChecks = (from Pool pool in SelectedPools
+                    let check = new PoolLegacySslCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (sslChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
+
+                //power on mode check - for each host
+                var iloChecks = (from Host host in SelectedServers
+                    let check = new PowerOniLoCheck(host, UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (iloChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
+
+                //PVGuestsCheck checks
+                var pvChecks = (from Pool pool in SelectedPools
+                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), false)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (pvChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+            }
+
             //HA checks
 
             var haChecks = new List<Check>();
@@ -490,19 +529,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
             }
 
-            //PVGuestsCheck checks
-            if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
-            {
-                var pvChecks = new List<Check>();
-                foreach (var pool in SelectedPools.Where(p => Helpers.NaplesOrGreater(p.Connection)))
-                {
-                    if (pool.Connection.Resolve(pool.master) != null)
-                        pvChecks.Add(new PVGuestsCheck(pool, false));
-                }
-                if (pvChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
-            }
-            
             return groups;
         }
 
@@ -921,9 +947,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     (preCheckHostRow.Problem as ProblemWithInformationUrl).LaunchUrlInBrowser();
                     
                 else if (!cancelled)
-                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                                        string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"),
-                                                                        Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT)))
+                    using (var dlg = new InformationDialog(string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"))
+                        {WindowTitle = Messages.PATCHINGWIZARD_PRECHECKPAGE_TEXT})
                     {
                         dlg.ShowDialog(this);
                     }

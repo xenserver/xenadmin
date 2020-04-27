@@ -31,6 +31,7 @@
 
 using XenAdmin.Diagnostics.Checks;
 using System;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
@@ -48,7 +49,11 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         private string PVGuestCheckUrl => string.Format(InvisibleMessages.PV_GUESTS_CHECK_URL);
         public override Uri UriToLaunch => new Uri(PVGuestCheckUrl);
         public override string Title => Description;
-        public override string Description => string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name());
+
+        public override string Description =>
+            string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name(),
+                string.Format(Messages.XENSERVER_8_1, BrandManager.ProductVersion81));
+
         public override string HelpMessage => LinkText;
         public override string LinkText => Messages.LEARN_MORE;
     }

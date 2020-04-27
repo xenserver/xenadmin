@@ -77,20 +77,15 @@ namespace XenAdmin.Commands
 
             if (msg != null)
             {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation,
-                    string.Format(msg, pool.Name()), Messages.XENCENTER)))
-                {
+                using (var dlg = new WarningDialog(string.Format(msg, pool.Name())))
                     dlg.ShowDialog(Program.MainWindow);
-                }
                 return;
             }
 
             if (conn.Cache.HostCount > 1)
             {
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SLAVES_EJECT, Messages.XENCENTER)))
-                {
+                using (var dlg = new WarningDialog(Messages.MESSAGEBOX_SLAVES_EJECT))
                     dlg.ShowDialog(Program.MainWindow);
-                } 
                 return;
             }
 

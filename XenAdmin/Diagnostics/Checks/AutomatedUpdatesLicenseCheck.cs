@@ -55,19 +55,11 @@ namespace XenAdmin.Diagnostics.Checks
             return null;
         }
 
-        public override string Description
-        {
-            get { return Messages.AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION; }
-        }
+        public override string Description => Messages.AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION;
 
-        public override string SuccessfulCheckDescription
-        {
-            get
-            {
-                return _pool == null
-                    ? string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description)
-                    : string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _pool.Name(), Description);
-            }
-        }
+        public override string SuccessfulCheckDescription =>
+            _pool == null
+                ? string.Format(Messages.PATCHING_WIZARD_CHECK_OK, Description)
+                : string.Format(Messages.PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK, _pool.Name(), Description);
     }
 }
