@@ -603,6 +603,9 @@
   <data name="ACTION_ISCSI_IQN_SCANNING" xml:space="preserve">
     <value>Scanning for IQNs on iSCSI filer {0}</value>
   </data>
+  <data name="ACTION_ISCSI_IQN_SCANNING_GFS2" xml:space="preserve">
+    <value>Thinly provisioned (GFS2) SRs with CHAP authentication are not supported.</value>
+  </data>
   <data name="ACTION_ISCSI_LUN_SCANNING" xml:space="preserve">
     <value>Scanning for LUNs on iSCSI filer {0}</value>
   </data>

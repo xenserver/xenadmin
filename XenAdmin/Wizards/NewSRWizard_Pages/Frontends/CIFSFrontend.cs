@@ -167,7 +167,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (!action.Succeeded)
                     return;
 
-                List<SR.SRInfo> SRs = SR.ParseSRListXML(action.Result);
+                var SRs = action.SRs ?? new List<SR.SRInfo>();
                 if (SRs.Count == 0)
                 {
                     // Disable box

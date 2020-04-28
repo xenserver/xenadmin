@@ -175,7 +175,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 GetSupportedNfsVersionsAndSetUI(action.Result);
 
-                List<SR.SRInfo> SRs = SR.ParseSRListXML(action.Result);
+                var SRs = action.SRs ?? new List<SR.SRInfo>();
                 if (SRs.Count == 0)
                 {
                     // Disable box
