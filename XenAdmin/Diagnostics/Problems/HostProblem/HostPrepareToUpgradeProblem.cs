@@ -59,11 +59,8 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             Program.Invoke(Program.MainWindow, () =>
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Information, _longMessage)))
-                {
+                using (var dlg = new InformationDialog(_longMessage))
                     dlg.ShowDialog();
-                }
             });
 
             cancelled = true;

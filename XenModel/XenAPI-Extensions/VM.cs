@@ -403,15 +403,6 @@ namespace XenAPI
             return HVM_boot_policy != "";
         }
 
-        public bool HasStaticIP()
-        {
-            var metrics = Connection.Resolve(this.guest_metrics);
-            if (metrics == null)
-                return false;
-
-            return 0 != IntKey(metrics.other, "feature-static-ip-setting", 0);
-        }
-
         public bool HasRDP()
         {
             var metrics = Connection.Resolve(this.guest_metrics);
@@ -733,19 +724,9 @@ namespace XenAPI
             MANAGEMENT_INSTALLED        = 8,
         };
 
-        public string VirtualisationVersion()
-        {
-            if (Connection == null)
-                return "0.0";
-            VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
-            if (metrics == null || !metrics.PV_drivers_version.ContainsKey("major") || !metrics.PV_drivers_version.ContainsKey("minor"))
-                return "0.0";
-            return string.Format("{0}.{1}", metrics.PV_drivers_version["major"], metrics.PV_drivers_version["minor"]);
-        }
-
         public string GetVirtualisationWarningMessages()
         {
-            VirtualisationStatus status = GetVirtualisationStatus();
+            VirtualisationStatus status = GetVirtualisationStatus(out _);
 
             if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
                 || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
@@ -770,63 +751,6 @@ namespace XenAPI
             return HasNewVirtualisationStates() ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
         }
 
-        private VirtualisationStatus GetVirtualisationStatusOldVM()
-        {
-            Debug.Assert(!HasNewVirtualisationStates());
-
-            VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
-
-            if ((DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2)
-            {
-                // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
-                if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed())
-                {
-                    if (vm_guest_metrics.PV_drivers_up_to_date)
-                        return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                    else
-                        return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                }
-
-                return VirtualisationStatus.UNKNOWN;
-            }
-
-            if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed())
-            {
-                return 0;
-            }
-            else if (!vm_guest_metrics.PV_drivers_up_to_date)
-            {
-                return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-            }
-            else
-            {
-                return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-            }
-        }
-
-        private VirtualisationStatus GetVirtualisationStatusNewVM()
-        {
-            Debug.Assert(HasNewVirtualisationStates());
-
-            var flags = HasStaticIP()
-                ? VirtualisationStatus.MANAGEMENT_INSTALLED
-                : 0;
-
-            var vm_guest_metrics = Connection.Resolve(guest_metrics);
-            if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_detected)
-                flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
-
-            if ((DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2)
-            {
-                if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                    return flags;
-
-                return VirtualisationStatus.UNKNOWN;
-            }
-
-            return flags;
-        }
-
         /// <summary>
         /// Virtualization Status of the VM
         /// </summary>
@@ -846,18 +770,60 @@ namespace XenAPI
         ///    4 = I/O Optimized
         ///   12 = I/O and Management installed
         /// </remarks>
-        public VirtualisationStatus GetVirtualisationStatus()
+        public VirtualisationStatus GetVirtualisationStatus(out string friendlyStatus)
         {
-            if (Connection == null)
+            friendlyStatus = Messages.VIRTUALIZATION_UNKNOWN;
+
+            if (Connection == null || power_state != vm_power_state.Running || Connection.Resolve(metrics) == null)
                 return VirtualisationStatus.UNKNOWN;
 
-            VM_metrics vm_metrics = Connection.Resolve(metrics);
-            if (vm_metrics == null || power_state != vm_power_state.Running)
+            var vmGuestMetrics = Connection.Resolve(guest_metrics);
+            var lessThanTwoMin = (DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2;
+
+            if (HasNewVirtualisationStates())
             {
-                return VirtualisationStatus.UNKNOWN;
+                VirtualisationStatus flags = 0;
+
+                if (vmGuestMetrics != null && vmGuestMetrics.PV_drivers_detected)
+                    flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
+
+                if (vmGuestMetrics != null && IntKey(vmGuestMetrics.other, "feature-static-ip-setting", 0) != 0)
+                    flags |= VirtualisationStatus.MANAGEMENT_INSTALLED;
+
+                if (flags.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    friendlyStatus = Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
+                else if (flags.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                    friendlyStatus = Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
+                else if (lessThanTwoMin)
+                    flags = VirtualisationStatus.UNKNOWN;
+                else
+                    friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
+
+                return flags;
             }
 
-            return HasNewVirtualisationStates() ? GetVirtualisationStatusNewVM() : GetVirtualisationStatusOldVM();
+            if (vmGuestMetrics == null || !vmGuestMetrics.PV_drivers_installed())
+                if (lessThanTwoMin)
+                    return VirtualisationStatus.UNKNOWN;
+                else
+                {
+                    friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
+                    return 0;
+                }
+
+            if (!vmGuestMetrics.PV_drivers_version.TryGetValue("major", out var major))
+                major = "0";
+            if (!vmGuestMetrics.PV_drivers_version.TryGetValue("minor", out var minor))
+                minor = "0";
+
+            if (!vmGuestMetrics.PV_drivers_up_to_date)
+            {
+                friendlyStatus = string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, $"{major}.{minor}");
+                return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+            }
+
+            friendlyStatus = string.Format(Messages.VIRTUALIZATION_OPTIMIZED, $"{major}.{minor}");
+            return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
         }
 
         /// <summary>
@@ -1114,7 +1080,7 @@ namespace XenAPI
                 return DateTime.MinValue;
 
             string importDate = other_config[P2V_IMPORT_DATE];
-            return TimeUtil.ParseISO8601DateTime(importDate);
+            return Util.TryParseIso8601DateTime(importDate, out var result) ? result : DateTime.MinValue;
         }
 
         public static XenRef<Task> async_live_migrate(Session session, string _vm, string _host)
@@ -1195,14 +1161,10 @@ namespace XenAPI
         /// </summary>
         public DateTime LastShutdownTime()
         {
-            if (other_config.ContainsKey("last_shutdown_time"))
-            {
-                return TimeUtil.ParseISO8601DateTime(other_config["last_shutdown_time"]);
-            }
-            else
-            {
-                return DateTime.MinValue;
-            }
+            return other_config.ContainsKey("last_shutdown_time") &&
+                   Util.TryParseIso8601DateTime(other_config["last_shutdown_time"], out var result)
+                ? result
+                : DateTime.MinValue;
         }
 
         /// <remarks>
@@ -1493,34 +1455,6 @@ namespace XenAPI
                 return Messages.NONE;
 
             return host.Name();
-        }
-
-        /// <summary>
-        /// The virtualisation state of the vm as a friendly string (optimized, out of date, not installed, unknown)
-        /// </summary>
-        public string VirtualisationStatusString()
-        {
-            var status = GetVirtualisationStatus();
-
-            if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
-            {
-                if (!HasNewVirtualisationStates())
-                    return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion());
-                else
-                    return Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
-            }
-
-            if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion());
-
-            if (status == 0)
-                return Messages.PV_DRIVERS_NOT_INSTALLED;
-
-            if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
-                && !status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
-                return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
-
-            return Messages.VIRTUALIZATION_UNKNOWN;
         }
 
         public bool HasProvisionXML()

@@ -29,26 +29,55 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
 
-namespace XenAdmin.Diagnostics.Problems.PoolProblem
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    class DrHAEnabledProblem : HAEnabledProblem
+    class PowerOniLoProblem : HostProblem
     {
-        public DrHAEnabledProblem(Check check, Pool pool)
-            : base(check, pool)
+        public PowerOniLoProblem(Check check, Host host)
+            : base(check, host)
         {
         }
 
-        public override string Description
+        protected override AsyncAction CreateAction(out bool cancelled)
         {
-            get { return Messages.DR_WIZARD_PROBLEM_HA_ENABLED; }
+            cancelled = false;
+            var mode = new KeyValuePair<Host, Host.PowerOnMode>(Server, new Host.PowerOnModeDisabled());
+            return new SavePowerOnSettingsAction(Server.Connection,
+                new List<KeyValuePair<Host, Host.PowerOnMode>> {mode}, false);
         }
+
+        public override string Description =>
+            string.Format(Messages.PROBLEM_POWER_ON_ILO_DESCRIPTION, Server,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string HelpMessage => Messages.PROBLEM_POWER_ON_ILO_HELP;
+    }
+
+    class PowerOniLoWarning : WarningWithMoreInfo
+    {
+        private readonly Host host;
+
+        public PowerOniLoWarning(Check check, Host host)
+            : base(check)
+        {
+            this.host = host;
+        }
+
+        public override string Title => Check.Description;
+
+        public override string Description =>
+            string.Format(Messages.PROBLEM_POWER_ON_ILO_DESCRIPTION, host,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+
+        public override string Message =>
+            string.Format(Messages.PROBLEM_POWER_ON_ILO_INFO,
+                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 }

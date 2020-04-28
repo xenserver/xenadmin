@@ -156,11 +156,8 @@ namespace XenAdmin.Network
                         {
                             if (pool_name == oldHost)
                             {
-                                using (var dlg = new ThreeButtonDialog(
-                                    new ThreeButtonDialog.Details(
-                                       SystemIcons.Information,
-                                       string.Format(Messages.OLD_CONNECTION_ALREADY_CONNECTED, pool_name),
-                                       Messages.ADD_NEW_CONNECT_TO)))
+                                using (var dlg = new InformationDialog(string.Format(Messages.OLD_CONNECTION_ALREADY_CONNECTED, pool_name))
+                                    {WindowTitle = Messages.ADD_NEW_CONNECT_TO})
                                 {
                                     dlg.ShowDialog(owner);
                                 }
@@ -168,11 +165,8 @@ namespace XenAdmin.Network
                             else
                             {
 
-                                using (var dlg = new ThreeButtonDialog(
-                                    new ThreeButtonDialog.Details(
-                                       SystemIcons.Information,
-                                        string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name),
-                                       Messages.ADD_NEW_CONNECT_TO)))
+                                using (var dlg = new InformationDialog(string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name))
+                                    {WindowTitle = Messages.ADD_NEW_CONNECT_TO})
                                 {
                                     dlg.ShowDialog(owner);
                                 }
@@ -182,13 +176,9 @@ namespace XenAdmin.Network
                     else
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new ThreeButtonDialog(
-                                new ThreeButtonDialog.Details(
-                                    SystemIcons.Warning,
-                                    String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
-                                    Messages.CONNECT_TO_SERVER),
+                        using (var dlg = new WarningDialog(string.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo))
+                                ThreeButtonDialog.ButtonNo){WindowTitle = Messages.CONNECT_TO_SERVER})
                         {
                             dialogResult = dlg.ShowDialog(owner);
                         }
@@ -273,14 +263,8 @@ namespace XenAdmin.Network
 
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(
-                           SystemIcons.Information,
-                           c.GetDialogMessage(connection),
-                           Messages.XENCENTER)))
-                    {
+                    using (var dlg = new InformationDialog(c.GetDialogMessage(connection)))
                         dlg.ShowDialog(owner);
-                    }
                 }
             }
             else if (error is ArgumentException)
@@ -326,10 +310,9 @@ namespace XenAdmin.Network
             if (((XenConnection)connection).fromDialog)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Error, text, Messages.CONNECT_TO_SERVER),
+                using (var dlg = new ErrorDialog(text,
                     new ThreeButtonDialog.TBDButton(Messages.RETRY_BUTTON_LABEL, DialogResult.Retry, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                    ThreeButtonDialog.ButtonCancel))
+                    ThreeButtonDialog.ButtonCancel){WindowTitle = Messages.CONNECT_TO_SERVER})
                 {
                     dialogResult = dlg.ShowDialog(owner);
                 }
@@ -340,14 +323,8 @@ namespace XenAdmin.Network
             }
             else
             {
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       text,
-                       Messages.CONNECT_TO_SERVER)))
-                {
+                using (var dlg = new ErrorDialog(text) {WindowTitle = Messages.CONNECT_TO_SERVER})
                     dlg.ShowDialog(owner);
-                }
             }
         }
 

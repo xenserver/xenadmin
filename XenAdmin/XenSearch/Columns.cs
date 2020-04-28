@@ -100,7 +100,7 @@ namespace XenAdmin.XenSearch
             VM vm = o as VM;
             if (vm != null)
             {
-                VM.VirtualisationStatus status = vm.GetVirtualisationStatus();
+                VM.VirtualisationStatus status = vm.GetVirtualisationStatus(out _);
                 if (vm.power_state != vm_power_state.Running ||
                     status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED) ||
                     status.HasFlag(VM.VirtualisationStatus.UNKNOWN))

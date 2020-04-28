@@ -347,9 +347,8 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			if (m_networkGridView.Rows.Count >= m_vm.MaxVIFsAllowed())
 			{
-				using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-				                      	SystemIcons.Error,
-                                        FriendlyErrorNames.VIFS_MAX_ALLOWED, FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)))
+				using (var dlg = new ErrorDialog(FriendlyErrorNames.VIFS_MAX_ALLOWED)
+                    {WindowTitle = FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE})
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }

@@ -94,11 +94,7 @@ namespace XenAdmin.Commands
             if (vm.FindVMCDROM() == null)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(
-                            null,
-                            Messages.NEW_DVD_DRIVE_REQUIRED,
-                            Messages.XENCENTER),
+                using (var dlg = new NoIconDialog(Messages.NEW_DVD_DRIVE_REQUIRED,
                         ThreeButtonDialog.ButtonYes,
                         ThreeButtonDialog.ButtonNo))
                 {
@@ -120,10 +116,10 @@ namespace XenAdmin.Commands
                 return;
             }
 
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.XS_TOOLS_MESSAGE_ONE_VM, Messages.XENCENTER),
-                new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON, DialogResult.OK,
-                    ThreeButtonDialog.ButtonType.ACCEPT, true), ThreeButtonDialog.ButtonCancel)
+            using (var dlg = new WarningDialog(Messages.XS_TOOLS_MESSAGE_ONE_VM,
+                new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON,
+                    DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                ThreeButtonDialog.ButtonCancel)
             {
                 ShowLinkLabel = true,
                 LinkText = Messages.INSTALLTOOLS_READ_MORE,
@@ -159,9 +155,8 @@ namespace XenAdmin.Commands
             if (newDvdDrivesRequired)
             {
                 DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_DVD_DRIVES_REQUIRED, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                using (var dlg = new WarningDialog(Messages.NEW_DVD_DRIVES_REQUIRED,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     dialogResult = dlg.ShowDialog(Parent);
                 }
@@ -186,10 +181,9 @@ namespace XenAdmin.Commands
             }
             else
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM, Messages.XENCENTER),
-                    new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON, DialogResult.OK,
-                        ThreeButtonDialog.ButtonType.ACCEPT, true),
+                using (var dlg = new WarningDialog(Messages.XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM,
+                    new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON,
+                        DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
                     ThreeButtonDialog.ButtonCancel)
                 {
                     ShowLinkLabel = true,
@@ -229,11 +223,9 @@ namespace XenAdmin.Commands
                 {
                     if (sr.IsToolsSR() && sr.IsBroken())
                     {
-                        using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BROKEN_TOOLS_PROMPT,
-                                Messages.INSTALL_XENSERVER_TOOLS),
-                            ThreeButtonDialog.ButtonOK,
-                            ThreeButtonDialog.ButtonCancel))
+                        using (var dlg = new WarningDialog(Messages.BROKEN_TOOLS_PROMPT,
+                                ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel)
+                            {WindowTitle = Messages.INSTALL_XENSERVER_TOOLS})
                         {
                             var dialogResult = dlg.ShowDialog(Parent);
                             return dialogResult == DialogResult.OK;
@@ -274,11 +266,8 @@ namespace XenAdmin.Commands
         {
             if (!MainWindowCommandInterface.RunInAutomatedTestMode)
             {
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Information, Messages.NEW_DVD_DRIVE_REBOOT_TOOLS)))
-                {
+                using (var dlg = new InformationDialog(Messages.NEW_DVD_DRIVE_REBOOT_TOOLS))
                     dlg.ShowDialog(Parent);
-                }
             }
         }
 
@@ -297,7 +286,7 @@ namespace XenAdmin.Commands
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Running)
                 return false;
 
-            var vStatus = vm.GetVirtualisationStatus();
+            var vStatus = vm.GetVirtualisationStatus(out _);
 
             if (vStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) ||
                 vStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && vStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))

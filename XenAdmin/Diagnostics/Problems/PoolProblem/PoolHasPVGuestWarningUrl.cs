@@ -53,7 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public override string Description =>
             string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name(),
                 string.Format(Messages.XENSERVER_8_1, BrandManager.ProductVersion81));
-        
+
         public override string HelpMessage => LinkText;
         public override string LinkText => Messages.LEARN_MORE;
     }

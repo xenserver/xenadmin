@@ -338,6 +338,7 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\HostPowerOnMode.cs" />
     <Compile Include="XenAPI-Extensions\PUSB.cs" />
     <Compile Include="XenAPI-Extensions\VMSS.cs" />
     <Compile Include="XenAPI-Extensions\Pool_update.cs" />

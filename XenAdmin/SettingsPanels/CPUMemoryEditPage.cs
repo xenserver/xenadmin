@@ -99,10 +99,8 @@ namespace XenAdmin.SettingsPanels
                     ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR
                     : Messages.CONFIRM_CHANGE_MEMORY_SINGULAR;
 
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+                using (var dlg = new WarningDialog(msg,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
                         return null;

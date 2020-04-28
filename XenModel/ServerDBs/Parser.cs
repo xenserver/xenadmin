@@ -73,7 +73,7 @@ namespace XenAdmin.ServerDBs
                 }
                 if (type == typeof(DateTime))
                 {
-                    return TimeUtil.ParseISO8601DateTime(value);
+                    return Util.TryParseIso8601DateTime(value, out var result) ? result : DateTime.MinValue;
                 }
                 if (type == typeof(double))
                 {
@@ -150,7 +150,7 @@ namespace XenAdmin.ServerDBs
                 }
                 if (type == typeof(DateTime))
                 {
-                    return TimeUtil.ToISO8601DateTime((DateTime)value);
+                    return Util.ToISO8601DateTime((DateTime)value);
                 }
                 if (type == typeof(string) || type == typeof(bool) || type == typeof(double))
                 {

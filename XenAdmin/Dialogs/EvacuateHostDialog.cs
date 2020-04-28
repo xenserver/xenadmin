@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
@@ -563,7 +564,7 @@ namespace XenAdmin.Dialogs
                     case Solution.InstallPVDriversNoSolution:
                         // if the state is not unknown we have metrics and can show a detailed message.
                         // Otherwise go with the server and just say they aren't installed
-                        error = !vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.UNKNOWN)
+                        error = !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
@@ -708,18 +709,18 @@ namespace XenAdmin.Dialogs
                 this.CloseButton.Enabled = true;
                 this.NewMasterComboBox.Enabled = true;
 
-                Failure failure = hostAction.Exception as Failure;
-                if (failure == null)
-                    return;
-
-                if (failure.ErrorDescription.Count > 0 &&
-                    failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
+                if (hostAction.Exception is Failure failure)
                 {
-                    failure.ErrorDescription[0] = Failure.HA_NO_PLAN;
-                    failure.Setup();
-                }
+                    var errorParams = failure.ErrorDescription;
 
-                ProcessError(null, failure.ErrorDescription.ToArray());
+                    if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
+                    {
+                        errorParams = new List<string> {Failure.HA_NO_PLAN};
+                        errorParams.AddRange(failure.ErrorDescription.Skip(1));
+                    }
+
+                    ProcessError(null, errorParams.ToArray());
+                }
             });
 
             Program.Invoke(this, () => FinalizeProgressControls(sender));
@@ -772,11 +773,8 @@ namespace XenAdmin.Dialogs
 
                     case Failure.HOST_NOT_ENOUGH_FREE_MEMORY:
                         if (vmRef == null)
-                            using (var dlg = new ThreeButtonDialog(
-                               new ThreeButtonDialog.Details(
-                                   SystemIcons.Error,
-                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY,
-                                   Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE)))
+                            using (var dlg = new ErrorDialog(Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY)
+                                {WindowTitle = Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE})
                             {
                                 dlg.ShowDialog(this);
                             }
@@ -794,11 +792,8 @@ namespace XenAdmin.Dialogs
                         }
 
                         if (vmRef == null)
-                            using (var dlg = new ThreeButtonDialog(
-                               new ThreeButtonDialog.Details(
-                                   SystemIcons.Error,
-                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS,
-                                   Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE)))
+                            using (var dlg = new ErrorDialog(Messages.EVACUATE_HOST_NO_OTHER_HOSTS)
+                                {WindowTitle = Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE})
                             {
                                 dlg.ShowDialog(this);
                             }

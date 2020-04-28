@@ -68,10 +68,9 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             Program.AssertOnEventThread();
 
             DialogResult dialogResult;
-            using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VM, VM.Name(), VM.Connection.Name), Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            using (var dlg = new WarningDialog(string.Format(Messages.CONFIRM_DELETE_VM, VM.Name(), VM.Connection.Name),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {WindowTitle = Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE})
             {
                 dialogResult = dlg.ShowDialog();
             }

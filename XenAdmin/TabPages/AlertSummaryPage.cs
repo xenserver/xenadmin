@@ -506,10 +506,8 @@ namespace XenAdmin.TabPages
 
             if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo)
+                using (var dlog = new NoIconDialog(Messages.ALERT_DISMISS_CONFIRM,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,
                     CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
@@ -533,8 +531,7 @@ namespace XenAdmin.TabPages
 
             if (FilterIsOn)
             {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_CONTINUE),
+                using (var dlog = new NoIconDialog(Messages.ALERT_DISMISS_ALL_CONTINUE,
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                     ThreeButtonDialog.ButtonCancel))
@@ -544,8 +541,7 @@ namespace XenAdmin.TabPages
             }
             else if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
+                using (var dlog = new NoIconDialog(Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE,
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
                     ThreeButtonDialog.ButtonCancel)
                 {
@@ -573,8 +569,7 @@ namespace XenAdmin.TabPages
         {
             if (!Properties.Settings.Default.DoNotConfirmDismissAlerts)
             {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                using (var dlog = new NoIconDialog(Messages.ALERT_DISMISS_SELECTED_CONFIRM,
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {
                     ShowCheckbox = true,
@@ -746,8 +741,7 @@ namespace XenAdmin.TabPages
 
             if (FilterIsOn)
             {
-                using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.ALERT_EXPORT_ALL_OR_FILTERED),
+                using (var dlog = new NoIconDialog(Messages.ALERT_EXPORT_ALL_OR_FILTERED,
                     new ThreeButtonDialog.TBDButton(Messages.EXPORT_ALL_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.EXPORT_FILTERED_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
                     ThreeButtonDialog.ButtonCancel))

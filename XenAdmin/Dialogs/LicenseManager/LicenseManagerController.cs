@@ -143,14 +143,8 @@ namespace XenAdmin.Dialogs
 
         private void ShowPoolHostNotConnectedError()
         {
-            using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       Messages.SELECTED_HOST_POOL_NOT_CONNECTED,
-                       Messages.XENCENTER)))
-            {
+            using (var dlg = new ErrorDialog(Messages.SELECTED_HOST_POOL_NOT_CONNECTED))
                 dlg.ShowDialog(View.Parent);
-            }
         }
 
         private void SummariseDisconnectedRows(List<CheckableDataGridViewRow> rowsChecked)
@@ -215,23 +209,17 @@ namespace XenAdmin.Dialogs
         private Action LaunchUrl(string url)
         {
             return delegate
-                       {
-                           try
-                           {
-                               Process.Start(url);
-                           }
-                           catch (Exception)
-                           {
-                               using (var dlg = new ThreeButtonDialog(
-                                   new ThreeButtonDialog.Details(
-                                       SystemIcons.Error,
-                                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url),
-                                       Messages.XENCENTER)))
-                                {
-                                    dlg.ShowDialog(View.Parent);
-                                }
-                           }
-                       };
+            {
+                try
+                {
+                    Process.Start(url);
+                }
+                catch (Exception)
+                {
+                    using (var dlg = new ErrorDialog(string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url)))
+                        dlg.ShowDialog(View.Parent);
+                }
+            };
         }
 
         protected virtual IMainWindow CommandInterface

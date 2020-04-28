@@ -543,11 +543,8 @@ namespace XenAdmin
             {
                 log.Error("Could not load settings.", ex);
                 Program.CloseSplash();
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
+                    {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -893,9 +890,8 @@ namespace XenAdmin
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                     new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
 
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70), Messages.CONNECT_TO_SERVER),
-                        ThreeButtonDialog.ButtonOK))
+                    using (var dlg = new ErrorDialog(string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70),
+                        ThreeButtonDialog.ButtonOK){WindowTitle = Messages.CONNECT_TO_SERVER})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -2213,11 +2209,8 @@ namespace XenAdmin
             }
             catch (ConfigurationErrorsException ex)
             {
-                using (var dlg = new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()),
-                       Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
+                    {WindowTitle =  Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(this);
                 }
@@ -2617,11 +2610,10 @@ namespace XenAdmin
                 wizard.AddFile(path);
             }
             else
-                using (var popup = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                    SystemIcons.Error, failureReason, Messages.UPDATES)))
-                {
+            {
+                using (var popup = new ErrorDialog(failureReason) {WindowTitle = Messages.UPDATES})
                     popup.ShowDialog();
-                }
+            }
         }
 
         #region XenSearch
@@ -3002,80 +2994,6 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Equivalent to MainController.Confirm(conn, this, msg, args).
-        /// </summary>
-        public bool Confirm(IXenConnection conn, string title, string msg, params object[] args)
-        {
-            return Confirm(conn, this, title, msg, args);
-        }
-
-        /// <summary>
-        /// Show a MessageBox asking to confirm an operation. The MessageBox will be parented to the given Control.
-        /// Displays default "Yes" and "No" buttons ("Yes" button is selected by default).
-        /// The args given will be ellipsised to Helpers.DEFAULT_NAME_TRIM_LENGTH, if they are strings.
-        /// If in automated test mode, then always returns true.
-        /// If the user refuses the operation, then returns false.
-        /// If the given connection has disconnected in the time it takes the user to confirm,
-        /// then shows an information MessageBox, and returns false.
-        /// Otherwise, the user has agreed and the connection is still alive, so
-        /// sets MainWindow.AllowHistorySwitch to true and returns true.
-        /// </summary>
-        public static bool Confirm(IXenConnection conn, Control parent, string title, string msg, params object[] args)
-        {
-            return Confirm(conn, parent, title, null, null, null, msg, args);
-        }
-
-        /// <summary>
-        /// Show a MessageBox asking to confirm an operation. The MessageBox will be parented to the given Control.
-        /// "Yes" and "No" buttons can be customized.
-        /// The args given will be ellipsised to Helpers.DEFAULT_NAME_TRIM_LENGTH, if they are strings.
-        /// If in automated test mode, then always returns true.
-        /// If the user refuses the operation, then returns false.
-        /// If the given connection has disconnected in the time it takes the user to confirm,
-        /// then shows an information MessageBox, and returns false.
-        /// Otherwise, the user has agreed and the connection is still alive, so
-        /// sets MainWindow.AllowHistorySwitch to true and returns true.
-        /// </summary>
-        public static bool Confirm(IXenConnection conn, Control parent, string title,
-            string helpName, ThreeButtonDialog.TBDButton buttonYes, ThreeButtonDialog.TBDButton buttonNo,
-            string msg, params object[] args)
-        {
-            if (Program.RunInAutomatedTestMode)
-                return true;
-
-            Trim(args);
-
-            var buttons = new[]
-                {
-                    buttonYes ?? ThreeButtonDialog.ButtonYes,
-                    buttonNo ?? ThreeButtonDialog.ButtonNo
-                };
-
-            var details = new ThreeButtonDialog.Details(SystemIcons.Exclamation,
-                args.Length == 0 ? msg : string.Format(msg, args), title);
-
-            DialogResult dialogResult;
-            using (var dialog = String.IsNullOrEmpty(helpName)
-                             ? new ThreeButtonDialog(details, buttons)
-                             : new ThreeButtonDialog(details, helpName, buttons))
-            {
-                dialogResult = dialog.ShowDialog(parent ?? Program.MainWindow);
-            }
-
-            if (dialogResult != DialogResult.Yes)
-                return false;
-
-
-            if (conn != null && !conn.IsConnected)
-            {
-                ShowDisconnectedMessage(parent);
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Show a message telling the user that the connection has disappeared.  We check this after
         /// we've shown a dialog, in case it's happened in the time it took them to click OK.
         /// </summary>
@@ -3091,24 +3009,8 @@ namespace XenAdmin
                 if (parent.Disposing || parent.IsDisposed)
                     return;
             }
-            using (var dlg = new ThreeButtonDialog(
-               new ThreeButtonDialog.Details(
-                   SystemIcons.Warning,
-                   Messages.DISCONNECTED_BEFORE_ACTION_STARTED,
-                   Messages.XENCENTER)))
-            {
+            using (var dlg = new WarningDialog(Messages.DISCONNECTED_BEFORE_ACTION_STARTED))
                 dlg.ShowDialog(parent);
-            }
-        }
-
-        private static void Trim(object[] args)
-        {
-            int n = args.Length;
-            for (int i = 0; i < n; i++)
-            {
-                if (args[i] is string)
-                    args[i] = ((string)args[i]).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH);
-            }
         }
 
         #region ISynchronizeInvoke Members
@@ -3183,11 +3085,8 @@ namespace XenAdmin
                     {
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
-                        using (var dlg = new ThreeButtonDialog(
-                                  new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERRO_IMPORTING_SERVER_LIST, Messages.XENCENTER)))
-                        {
+                        using (var dlg = new ErrorDialog(Messages.ERRO_IMPORTING_SERVER_LIST))
                             dlg.ShowDialog(this);
-                        }
                     }
                 }
             }
