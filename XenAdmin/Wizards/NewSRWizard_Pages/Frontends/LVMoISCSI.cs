@@ -106,7 +106,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             HelpersGUI.PerformIQNCheck();
 
             if (direction == PageLoadedDirection.Forward)
+            {
                 textBoxIscsiHost.Focus();
+                ResetAll();
+            }
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
@@ -175,7 +178,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private bool RunProbe(Host master, SR.SRTypes srType, out List<SR.SRInfo> srs)
         {
-            srs = null;
+            srs = new List<SR.SRInfo>();
 
             var dconf = GetDeviceConfig(srType);
             if (dconf == null)
@@ -185,18 +188,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee) {ShowCancel = true})
                 dialog.ShowDialog(this);
 
+            srs = action.SRs ?? new List<SR.SRInfo>();
+
             if (action.Succeeded)
-            {
-                try
-                {
-                    srs = action.ProbeExtResult != null ? SR.ParseSRList(action.ProbeExtResult) : SR.ParseSRListXML(action.Result);
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
+                return true;
 
             HandleFailure(action);
             return false;

@@ -1519,6 +1519,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thinly provisioned (GFS2) SRs with CHAP authentication are not supported..
+        /// </summary>
+        public static string ACTION_ISCSI_IQN_SCANNING_GFS2 {
+            get {
+                return ResourceManager.GetString("ACTION_ISCSI_IQN_SCANNING_GFS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning for LUNs on iSCSI filer {0}.
         /// </summary>
         public static string ACTION_ISCSI_LUN_SCANNING {
@@ -21281,7 +21290,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid target host.
+        ///   Looks up a localized string similar to Invalid target host..
         /// </summary>
         public static string INVALID_HOST {
             get {

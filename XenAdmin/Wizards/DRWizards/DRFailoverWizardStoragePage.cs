@@ -329,7 +329,7 @@ namespace XenAdmin.Wizards.DRWizards
 
             try
             {
-                var metadataSrs = SR.ParseSRListXML(srProbeAction.Result);
+                var metadataSrs = srProbeAction.SRs ?? new List<SR.SRInfo>();
 
                 if (ScannedDevices.ContainsKey(deviceId))
                 {

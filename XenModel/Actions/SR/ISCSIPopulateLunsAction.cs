@@ -66,7 +66,7 @@ namespace XenAdmin.Actions
 
         public ISCSIPopulateLunsAction(IXenConnection connection, string targetHost,
             UInt16 targetPort, string targetIQN, string chapUsername, string chapPassword)
-            : base(connection, string.Format(Messages.ACTION_ISCSI_LUN_SCANNING, targetHost))
+            : base(connection, string.Format(Messages.ACTION_ISCSI_LUN_SCANNING, targetHost), true)
         {
             this.targetHost = targetHost;
             this.targetPort = targetPort;
@@ -212,8 +212,24 @@ namespace XenAdmin.Actions
                 deviceConfig["chappassword"] = chapPassword;
             }
 
-            var probeResults = SR.probe_ext(Session, pool.master.opaque_ref,
-                     deviceConfig, SR.SRTypes.gfs2.ToString().ToLowerInvariant(), new Dictionary<string, string>());
+            List<Probe_result> probeResults;
+            try
+            {
+                probeResults = SR.probe_ext(Session, pool.master.opaque_ref,
+                    deviceConfig, SR.SRTypes.gfs2.ToString().ToLowerInvariant(), new Dictionary<string, string>());
+            }
+            catch (Failure f)
+            {
+                if (f.ErrorDescription.Count > 1 && f.ErrorDescription[0] == "ISCSILogin")
+                {
+                    if (deviceConfig.ContainsKey("chapuser") && deviceConfig.ContainsKey("chappassword"))
+                        throw new Failure(Messages.ACTION_ISCSI_IQN_SCANNING_GFS2);
+                    
+                    throw new Failure("SR_BACKEND_FAILURE_68");
+                }
+
+                throw;
+            }
 
             var results = new List<ISCSIInfo>();
             foreach (var probeResult in probeResults)
