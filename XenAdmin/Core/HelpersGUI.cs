@@ -48,28 +48,8 @@ namespace XenAdmin.Core
 {
     public static class HelpersGUI
     {
-
-        private static Image[] progress_images = new Image[11];
-
         static HelpersGUI()
         {
-            progress_images[0] = Properties.Resources.usagebar_0;
-            progress_images[1] = Properties.Resources.usagebar_1;
-            progress_images[2] = Properties.Resources.usagebar_2;
-            progress_images[3] = Properties.Resources.usagebar_3;
-            progress_images[4] = Properties.Resources.usagebar_4;
-            progress_images[5] = Properties.Resources.usagebar_5;
-            progress_images[6] = Properties.Resources.usagebar_6;
-            progress_images[7] = Properties.Resources.usagebar_7;
-            progress_images[8] = Properties.Resources.usagebar_8;
-            progress_images[9] = Properties.Resources.usagebar_9;
-            progress_images[10] = Properties.Resources.usagebar_10;
-        }
-
-        internal static Image GetProgressImage(int pct)
-        {
-            int p = pct / 10;
-            return 0 <= p && p < 11 ? progress_images[p] : progress_images[0];
         }
 
         public static bool WindowIsOnScreen(Point location, Size size)

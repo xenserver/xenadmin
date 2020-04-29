@@ -2217,6 +2217,12 @@
   <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 6</value>
   </data>
+  <data name="toolStripMenuItemInstallCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="toolStripMenuItemInstallCertificate.Text" xml:space="preserve">
+    <value>&amp;Install Certificate...</value>
+  </data>
   <data name="maintenanceModeToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 22</value>
   </data>
@@ -2239,13 +2245,13 @@
     <value>Remove Crash Dump &amp;Files</value>
   </data>
   <data name="ChangeRootPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="ChangeRootPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Change...</value>
   </data>
   <data name="forgetSavedPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="forgetSavedPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Forget Password</value>
@@ -3133,7 +3139,7 @@
     <value>removeServerToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;removeServerToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Commands.PoolRemoveServerToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;poolReconnectAsToolStripMenuItem.Name" xml:space="preserve">
     <value>poolReconnectAsToolStripMenuItem</value>
@@ -3211,6 +3217,12 @@
     <value>wlbDisconnectToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;wlbDisconnectToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;conversionToolStripMenuItem.Name" xml:space="preserve">
+    <value>conversionToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;conversionToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
@@ -3350,6 +3362,12 @@
   </data>
   <data name="&gt;&gt;addServerToPoolMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AddSelectedHostToPoolToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;menuItemRemoveFromPool.Name" xml:space="preserve">
+    <value>menuItemRemoveFromPool</value>
+  </data>
+  <data name="&gt;&gt;menuItemRemoveFromPool.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
@@ -3951,16 +3969,10 @@
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;menuItemRemoveFromPool.Name" xml:space="preserve">
-    <value>menuItemRemoveFromPool</value>
+  <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Name" xml:space="preserve">
+    <value>toolStripMenuItemInstallCertificate</value>
   </data>
-  <data name="&gt;&gt;menuItemRemoveFromPool.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;conversionToolStripMenuItem.Name" xml:space="preserve">
-    <value>conversionToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;conversionToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

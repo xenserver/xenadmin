@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 
@@ -41,33 +40,33 @@ namespace XenAdmin.Dialogs.Network
     public partial class UnknownCertificateDialog : XenDialogBase
     {
         private string _hostname;
-        private X509Certificate Certificate;
+        private X509Certificate2 _certificate;
 
         public UnknownCertificateDialog(X509Certificate certificate,string hostname)
         {
             InitializeComponent();
             AutoAcceptCheckBox.Enabled = Registry.SSLCertificateTypes != SSLCertificateTypes.All;
             _hostname = hostname;
-            Certificate = certificate;
+            _certificate = new X509Certificate2(certificate);
 
             string h = _hostname.Ellipsise(35);
 
-            X509Certificate2 cert2=new X509Certificate2(Certificate);
-
             labelTrusted.Text = string.Format(labelTrusted.Text, h,
-                                              cert2.VerifyInAllStores() ? Messages.TRUSTED : Messages.NOT_TRUSTED);
+                _certificate.VerifyInAllStores() ? Messages.TRUSTED : Messages.NOT_TRUSTED);
+
             BlurbLabel.Text = string.Format(BlurbLabel.Text, h);
             Blurb2Label.Text = string.Format(Blurb2Label.Text, h);
         }
 
         private void ViewCertificateButton_Click(object sender, EventArgs e)
         {
-            X509Certificate2UI.DisplayCertificate(Certificate as X509Certificate2, Handle);
+            X509Certificate2UI.DisplayCertificate(_certificate, Handle);
         }
 
         private void Okbutton_Click(object sender, EventArgs e)
         {
-            Settings.AddCertificate(Certificate, _hostname);
+            Settings.AddCertificate(_certificate.GetCertHashString(), _hostname);
+
             if (AutoAcceptCheckBox.Enabled && AutoAcceptCheckBox.Checked)
             {
                 Properties.Settings.Default.WarnUnrecognizedCertificate = false;

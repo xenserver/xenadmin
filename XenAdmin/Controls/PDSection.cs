@@ -66,12 +66,12 @@ namespace XenAdmin.Controls
         /// <summary>
         /// Event for when the datagridview received focus
         /// </summary>
-        public event Action<PDSection> contentReceivedFocus;
+        public event Action<PDSection> ContentReceivedFocus;
 
         /// <summary>
         /// Event for when the datagridview receives focus
         /// </summary>
-        public event Action<PDSection> contentChangedSelection;
+        public event Action<PDSection> ContentChangedSelection;
 
         public event Action<PDSection> ExpandedChanged;
 
@@ -182,8 +182,7 @@ namespace XenAdmin.Controls
         private void dataGridViewEx1_GotFocus(object sender, EventArgs e)
         {
             dataGridViewEx1.HideSelection = false;
-            if (contentReceivedFocus != null)
-                contentReceivedFocus(this);
+            ContentReceivedFocus?.Invoke(this);
         }
 
         private void dataGridViewEx1_SelectionChanged(object sender, EventArgs e)
@@ -191,8 +190,7 @@ namespace XenAdmin.Controls
             if (inLayout)
                 return;
 
-            if (contentChangedSelection != null)
-                contentChangedSelection(this);
+            ContentChangedSelection?.Invoke(this);
         }
 
         private void dataGridViewEx1_MouseClick(object sender, MouseEventArgs e)
