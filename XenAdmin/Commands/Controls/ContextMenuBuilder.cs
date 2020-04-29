@@ -536,6 +536,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new NewSRCommand(mainWindow, selection));
 				items.AddIfEnabled(new ImportCommand(mainWindow, selection));
                 items.AddSeparator();
+                items.AddIfEnabled(new InstallCertificateCommand(mainWindow, selection));
                 items.AddIfEnabled(new HostMaintenanceModeCommand(mainWindow, selection));
                 items.AddSeparator();
 
@@ -587,7 +588,7 @@ namespace XenAdmin.Commands
 
                 items.AddIfEnabled(new AddSelectedHostToPoolToolStripMenuItem(mainWindow, selection, true));
                 items.AddSeparator();
-
+                items.AddIfEnabled(new InstallCertificateCommand(mainWindow, selection));
                 items.AddIfEnabled(new HostMaintenanceModeCommand(mainWindow, selection));
                 items.AddSeparator();
 

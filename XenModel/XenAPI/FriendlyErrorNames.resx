@@ -289,7 +289,7 @@
     <value>Cluster_host operation failed as the cluster_host has not joined the cluster.</value>
   </data>
   <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
-    <value>The cluster stack is already in use.</value>
+    <value>The cluster stack is still in use by at least one plugged PBD.</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
@@ -1087,6 +1087,36 @@ Authorized Roles: {1}</value>
   </data>
   <data name="ROLE_NOT_FOUND" xml:space="preserve">
     <value>Role cannot be found.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_CHAIN_INVALID" xml:space="preserve">
+    <value>The provided intermediate certificates are not in a pem-encoded X509.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_EXPIRED" xml:space="preserve">
+    <value>The provided certificate expired on {0}.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_INVALID" xml:space="preserve">
+    <value>The provided certificate is not in a pem-encoded X509.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_ALGORITHM_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided key uses an unsupported algorithm.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_INVALID" xml:space="preserve">
+    <value>The provided key is not in a pem-encoded PKCS#8 format.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_MISMATCH" xml:space="preserve">
+    <value>The provided key does not match the provided certificate&apos;s public key.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_RSA_LENGTH_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided RSA key does not have a length between 2048 and 4096.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_RSA_MULTI_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided RSA key is using more than 2 primes, expecting only 2.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_NOT_VALID_YET" xml:space="preserve">
+    <value>The provided certificate is not valid before {0}.</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_SIGNATURE_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided certificate is not using the SHA256 (SHA2) signature algorithm.</value>
   </data>
   <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>Could not authenticate session. Check your access credentials and try again.</value>

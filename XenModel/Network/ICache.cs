@@ -40,16 +40,14 @@ namespace XenAdmin.Network
     public interface ICache
     {
         Bond[] Bonds { get; }
-        void CheckFoldersBatchChange();
-        void Clear();
-        void DeregisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>;
-        void DeregisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>;
-        T Find_By_Uuid<T>(string uuid) where T : XenObject<T>;
-        XenRef<T> FindRef<T>(T needle) where T : XenObject<T>;
+        Certificate[] Certificates { get; }
+        Cluster[] Clusters { get; }
+        Cluster_host[] Cluster_hosts { get; }
+        DockerContainer[] DockerContainers { get; }
+        Feature[] Features { get; }
         Folder[] Folders { get; }
         GPU_group[] GPU_groups { get; }
         Host_cpu[] Host_cpus { get; }
-        int HostCount { get; }
         Host[] Hosts { get; }
         Message[] Messages { get; }
         XenAPI.Network[] Networks { get; }
@@ -60,37 +58,41 @@ namespace XenAdmin.Network
         Pool_patch[] Pool_patches { get; }
         Pool_update[] Pool_updates { get; }
         Pool[] Pools { get; }
-        void AddFolder(XenRef<Folder> path, Folder folder);
-        void RemoveFolder(XenRef<Folder> path);
-        void AddAll<T>(List<T> l, Predicate<T> p) where T : XenObject<T>;
-        void RegisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>;
-        void RegisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>;
-        T Resolve<T>(XenRef<T> xenRef) where T : XenObject<T>;
+        PVS_site[] PVS_sites { get; }
+        PVS_server[] PVS_servers { get; }
+        PVS_proxy[] PVS_proxies { get; }
+        PVS_cache_storage[] PVS_cache_storages { get; }
         Role[] Roles { get; }
         SM[] SMs { get; }
         SR[] SRs { get; }
         Subject[] Subjects { get; }
-        bool TryResolve<T>(XenRef<T> xenRef, out T result) where T : XenObject<T>;
         Tunnel[] Tunnels { get; }
-        bool UpdateFrom(IXenConnection connection, IList<ObjectChange> changes);
         VBD[] VBDs { get; }
         VDI[] VDIs { get; }
         VGPU[] VGPUs { get; }
         VGPU_type[] VGPU_types { get; }
         VIF[] VIFs { get; }
-        VMSS[] VMSSs { get; }
-        VM_appliance[] VM_appliances { get; }
         VM[] VMs { get; }
+        VM_appliance[] VM_appliances { get; }
+        VMSS[] VMSSs { get; }
+
+        int HostCount { get; }
         IEnumerable<IXenObject> XenSearchableObjects { get; }
-        DockerContainer[] DockerContainers { get; }
-        PVS_site[] PVS_sites { get; }
-        PVS_server[] PVS_servers { get; }
-        PVS_proxy[] PVS_proxies { get; }
-        PVS_cache_storage[] PVS_cache_storages { get; }
+        void AddAll<T>(List<T> l, Predicate<T> p) where T : XenObject<T>;
+        T Find_By_Uuid<T>(string uuid) where T : XenObject<T>;
+        XenRef<T> FindRef<T>(T needle) where T : XenObject<T>;
+        T Resolve<T>(XenRef<T> xenRef) where T : XenObject<T>;
+        bool TryResolve<T>(XenRef<T> xenRef, out T result) where T : XenObject<T>;
+        void Clear();
+        bool UpdateFrom(IXenConnection connection, IList<ObjectChange> changes);
         void UpdateDockerContainersForVM(IList<DockerContainer> d, VM v);
+        void AddFolder(XenRef<Folder> path, Folder folder);
+        void RemoveFolder(XenRef<Folder> path);
+        void CheckFoldersBatchChange();
+        void RegisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>;
+        void DeregisterBatchCollectionChanged<T>(EventHandler h) where T : XenObject<T>;
+        void RegisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>;
+        void DeregisterCollectionChanged<T>(CollectionChangeEventHandler h) where T : XenObject<T>;
         void CheckDockerContainersBatchChange();
-        Cluster[] Clusters { get; }
-        Cluster_host[] Cluster_hosts { get; }
-        Feature[] Features { get; }
     }
 }

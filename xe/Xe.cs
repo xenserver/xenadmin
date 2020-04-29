@@ -86,6 +86,10 @@ namespace ThinCLI
                     }
                     else
                     {
+                        if (s.Contains("="))
+                        {
+                            tCliProtocol.EnteredParamValues.Add(s.Split(eqsep)[1]);
+                        }
                         body += s + "\n";
                     }
                 }

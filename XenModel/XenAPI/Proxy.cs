@@ -3378,6 +3378,10 @@ namespace XenAPI
         Response<string>
         host_get_uefi_certificates(string session, string _host);
 
+        [XmlRpcMethod("host.get_certificates")]
+        Response<string []>
+        host_get_certificates(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3777,6 +3781,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.get_server_certificate")]
         Response<string>
         async_host_get_server_certificate(string session, string _host);
+
+        [XmlRpcMethod("host.install_server_certificate")]
+        Response<string>
+        host_install_server_certificate(string session, string _host, string _certificate, string _private_key, string _certificate_chain);
+
+        [XmlRpcMethod("Async.host.install_server_certificate")]
+        Response<string>
+        async_host_install_server_certificate(string session, string _host, string _certificate, string _private_key, string _certificate_chain);
 
         [XmlRpcMethod("host.apply_edition")]
         Response<string>
@@ -8286,6 +8298,42 @@ namespace XenAPI
         [XmlRpcMethod("Cluster_host.get_all_records")]
         Response<Object>
         cluster_host_get_all_records(string session);
+
+        [XmlRpcMethod("Certificate.get_record")]
+        Response<Proxy_Certificate>
+        certificate_get_record(string session, string _certificate);
+
+        [XmlRpcMethod("Certificate.get_by_uuid")]
+        Response<string>
+        certificate_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("Certificate.get_uuid")]
+        Response<string>
+        certificate_get_uuid(string session, string _certificate);
+
+        [XmlRpcMethod("Certificate.get_host")]
+        Response<string>
+        certificate_get_host(string session, string _certificate);
+
+        [XmlRpcMethod("Certificate.get_not_before")]
+        Response<DateTime>
+        certificate_get_not_before(string session, string _certificate);
+
+        [XmlRpcMethod("Certificate.get_not_after")]
+        Response<DateTime>
+        certificate_get_not_after(string session, string _certificate);
+
+        [XmlRpcMethod("Certificate.get_fingerprint")]
+        Response<string>
+        certificate_get_fingerprint(string session, string _certificate);
+
+        [XmlRpcMethod("Certificate.get_all")]
+        Response<string []>
+        certificate_get_all(string session);
+
+        [XmlRpcMethod("Certificate.get_all_records")]
+        Response<Object>
+        certificate_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8690,6 +8738,7 @@ namespace XenAPI
         public string iscsi_iqn;
         public bool multipathing;
         public string uefi_certificates;
+        public string [] certificates;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9380,5 +9429,15 @@ namespace XenAPI
         public string [] allowed_operations;
         public Object current_operations;
         public Object other_config;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Certificate
+    {
+        public string uuid;
+        public string host;
+        public DateTime not_before;
+        public DateTime not_after;
+        public string fingerprint;
     }
 }

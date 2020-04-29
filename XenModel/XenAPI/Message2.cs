@@ -35,6 +35,10 @@ namespace XenAPI
     {
         public enum MessageType
         {
+            HOST_SERVER_CERTIFICATE_EXPIRED,
+            HOST_SERVER_CERTIFICATE_EXPIRING_07,
+            HOST_SERVER_CERTIFICATE_EXPIRING_14,
+            HOST_SERVER_CERTIFICATE_EXPIRING_30,
             CLUSTER_HOST_FENCING,
             CLUSTER_HOST_ENABLE_FAILED,
             POOL_CPU_FEATURES_UP,
@@ -121,6 +125,14 @@ namespace XenAPI
             {
                 switch (this.name)
                 {
+                    case "HOST_SERVER_CERTIFICATE_EXPIRED":
+                        return MessageType.HOST_SERVER_CERTIFICATE_EXPIRED;
+                    case "HOST_SERVER_CERTIFICATE_EXPIRING_07":
+                        return MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07;
+                    case "HOST_SERVER_CERTIFICATE_EXPIRING_14":
+                        return MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14;
+                    case "HOST_SERVER_CERTIFICATE_EXPIRING_30":
+                        return MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30;
                     case "CLUSTER_HOST_FENCING":
                         return MessageType.CLUSTER_HOST_FENCING;
                     case "CLUSTER_HOST_ENABLE_FAILED":

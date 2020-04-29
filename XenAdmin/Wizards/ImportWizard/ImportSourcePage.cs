@@ -472,7 +472,7 @@ namespace XenAdmin.Wizards.ImportWizard
             if (File.Exists(FilePath))
 				return true;
 
-			error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH;
+			error = Messages.PATH_DOES_NOT_EXIST;
 			return false;
 		}
 

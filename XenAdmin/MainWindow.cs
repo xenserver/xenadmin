@@ -1663,6 +1663,7 @@ namespace XenAdmin
             connectDisconnectToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
             conversionToolStripMenuItem.Available = conn != null && conn.Cache.VMs.Any(v => v.IsConversionVM());
             installToolsToolStripMenuItem.Available = SelectionManager.Selection.Any(v => !Helpers.StockholmOrGreater(v.Connection));
+            toolStripMenuItemInstallCertificate.Available = Helpers.StockholmOrGreater(conn);
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)

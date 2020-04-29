@@ -235,7 +235,7 @@
     <value>0</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>Do you want to accept the SSL security certificate on server '{0}'?</value>
+    <value>Do you want to accept the security certificate on server '{0}'?</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
