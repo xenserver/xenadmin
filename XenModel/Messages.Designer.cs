@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -6940,6 +6940,180 @@ namespace XenAdmin {
         public static string CDDRIVE_MAX_ALLOWED_VBDS {
             get {
                 return ResourceManager.GetString("CDDRIVE_MAX_ALLOWED_VBDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} day(s).
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} hour(s).
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} minute(s).
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TLS certificate files (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer.
+        /// </summary>
+        public static string CERTIFICATE_FILETYPES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation failed..
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_FAILURE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation failed.
+        ///{0}.
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_FAILURE_GENERIC {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_FAILURE_GENERIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation was completed successfully..
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_SUCCESS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid TLS certificate file {0}.
+        /// </summary>
+        public static string CERTIFICATE_INVALID {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TLS key files (*.pem;*.key)|*.pem;*.key.
+        /// </summary>
+        public static string CERTIFICATE_KEY_FILETYPES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected TLS key file is invalid..
+        /// </summary>
+        public static string CERTIFICATE_KEY_INVALID {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to install certificates on the server. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string CERTIFICATE_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_RBAC_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select TLS Certificate File.
+        /// </summary>
+        public static string CERTIFICATE_SELECT_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_SELECT_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select TLS Key File.
+        /// </summary>
+        public static string CERTIFICATE_SELECT_KEY_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_SELECT_KEY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thumbprint.
+        /// </summary>
+        public static string CERTIFICATE_THUMBPRINT_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validity period.
+        /// </summary>
+        public static string CERTIFICATE_VALIDITY_PERIOD_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid from {0} to {1}.
+        /// </summary>
+        public static string CERTIFICATE_VALIDITY_PERIOD_VALUE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_VALUE", resourceCulture);
             }
         }
         
@@ -19414,6 +19588,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server is unreachable..
+        /// </summary>
+        public static string HOST_UNREACHABLE {
+            get {
+                return ResourceManager.GetString("HOST_UNREACHABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Host &apos;{0}&apos;:.
         /// </summary>
         public static string HOST_X {
@@ -19995,15 +20178,6 @@ namespace XenAdmin {
         public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI {
             get {
                 return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Path does not exist..
-        /// </summary>
-        public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH {
-            get {
-                return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH", resourceCulture);
             }
         }
         
@@ -20907,6 +21081,60 @@ namespace XenAdmin {
         public static string INSTALL_PENDING_UPDATES {
             get {
                 return ResourceManager.GetString("INSTALL_PENDING_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_ACTION_LINK {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_ACTION_LINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install certi&amp;ficate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing server certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot install a server certificate when HA is on..
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_HA {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Install certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_MENU {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing certificate on server {0}....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_TITLE", resourceCulture);
             }
         }
         
@@ -29231,15 +29459,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server is unreachable.
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {
@@ -29575,6 +29794,24 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path does not exist..
+        /// </summary>
+        public static string PATH_DOES_NOT_EXIST {
+            get {
+                return ResourceManager.GetString("PATH_DOES_NOT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path {0} does not exist..
+        /// </summary>
+        public static string PATH_DOES_NOT_EXIST_PLACEHOLDER {
+            get {
+                return ResourceManager.GetString("PATH_DOES_NOT_EXIST_PLACEHOLDER", resourceCulture);
             }
         }
         
@@ -32895,7 +33132,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SSL certificate options.
+        ///   Looks up a localized string similar to Certificate options.
         /// </summary>
         public static string SECURITY_DESC {
             get {
