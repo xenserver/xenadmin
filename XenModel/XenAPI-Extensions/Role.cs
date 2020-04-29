@@ -257,17 +257,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Can the main session on this connection already perform all the API methods? If on George or less this will return false.
-        /// </summary>
-        /// <param name="apiMethodsToRoleCheck">The methods to check</param>
-        /// <param name="connection">The connection on which to perform the methods</param>
-        public static bool CanPerform(RbacMethodList apiMethodsToRoleCheck, IXenConnection connection, bool debug)
-        {
-            List<Role> validRoleList;
-            return CanPerform(apiMethodsToRoleCheck, connection, out validRoleList, debug);
-        }
-
-        /// <summary>
         /// Can this subrole perform this API call?
         /// </summary>
         /// <param name="rbacMethod">The API call which we want to perform</param>

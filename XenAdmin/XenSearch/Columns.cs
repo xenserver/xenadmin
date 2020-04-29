@@ -100,7 +100,7 @@ namespace XenAdmin.XenSearch
             VM vm = o as VM;
             if (vm != null)
             {
-                VM.VirtualisationStatus status = vm.GetVirtualisationStatus();
+                VM.VirtualisationStatus status = vm.GetVirtualisationStatus(out _);
                 if (vm.power_state != vm_power_state.Running ||
                     status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED) ||
                     status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
@@ -131,16 +131,22 @@ namespace XenAdmin.XenSearch
                     if (InstallToolsCommand.CanExecute(vm))
                     {
                         item = new GridStringItem(warningMessage,
-                                                  HorizontalAlignment.Center,
-                                                  VerticalAlignment.Middle,
-                                                  false,
-                                                  false,
-                                                  QueryPanel.LinkBrush,
-                                                  Program.DefaultFontUnderline,
-                                                  QueryPanel.LinkBrush,
-                                                  Program.DefaultFontUnderline,
-                                                  colSpan,
-                                                  (sender, args) => new InstallToolsCommand(Program.MainWindow, vm).Execute(), null);
+                            HorizontalAlignment.Center,
+                            VerticalAlignment.Middle,
+                            false,
+                            false,
+                            QueryPanel.LinkBrush,
+                            Program.DefaultFontUnderline,
+                            QueryPanel.LinkBrush,
+                            Program.DefaultFontUnderline,
+                            colSpan,
+                            (sender, args) =>
+                            {
+                                if (Helpers.StockholmOrGreater(vm.Connection))
+                                    Help.HelpManager.Launch("InstallToolsWarningDialog");
+                                else
+                                    new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                            }, null);
                     }
                     else
                     {
@@ -162,17 +168,23 @@ namespace XenAdmin.XenSearch
 
                     if (InstallToolsCommand.CanExecute(vm))
                     {
-                        item = new GridStringItem(warningMessage, 
-                                                  HorizontalAlignment.Center,
-                                                  VerticalAlignment.Middle,
-                                                  false,
-                                                  false,
-                                                  QueryPanel.LinkBrush,
-                                                  Program.DefaultFontUnderline,
-                                                  QueryPanel.LinkBrush,
-                                                  Program.DefaultFontUnderline,
-                                                  colSpan,
-                                                  (sender, args) => new InstallToolsCommand(Program.MainWindow, vm).Execute(), null);
+                        item = new GridStringItem(warningMessage,
+                            HorizontalAlignment.Center,
+                            VerticalAlignment.Middle,
+                            false,
+                            false,
+                            QueryPanel.LinkBrush,
+                            Program.DefaultFontUnderline,
+                            QueryPanel.LinkBrush,
+                            Program.DefaultFontUnderline,
+                            colSpan,
+                            (sender, args) =>
+                            {
+                                if (Helpers.StockholmOrGreater(vm.Connection))
+                                    Help.HelpManager.Launch("InstallToolsWarningDialog");
+                                else
+                                    new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                            }, null);
                     }
                     else
                     {

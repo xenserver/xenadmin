@@ -115,6 +115,8 @@ namespace XenAdmin.Dialogs
         }
 
         public string LinkData { get; set; }
+        
+        public Action LinkAction { get; set; }
 
         public bool ShowCheckbox
         {
@@ -270,6 +272,8 @@ namespace XenAdmin.Dialogs
             {
                 if (!string.IsNullOrEmpty(LinkData))
                     System.Diagnostics.Process.Start(LinkData);
+                else if (LinkAction != null)
+                    LinkAction.Invoke();
             }
             catch { }
         }

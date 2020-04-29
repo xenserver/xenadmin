@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Windows.Forms;
 
 
 namespace XenAdmin.Controls.Ballooning
@@ -42,13 +41,9 @@ namespace XenAdmin.Controls.Ballooning
             InitializeComponent();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void Populate()
         {
             if (vms == null || vms.Count == 0)
-                return;
-
-            // If !firstPaint, don't re-initialize, because it will pull the rug from under our own edits.
-            if (!firstPaint)
                 return;
 
             // Calculate the maximum legal value of dynamic minimum
@@ -62,32 +57,13 @@ namespace XenAdmin.Controls.Ballooning
             memorySpinnerStatMax.Initialize(vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
-            firstPaint = false;
         }
 
-        public override double dynamic_min
-        {
-            get
-            {
-                return memorySpinnerDynMin.Value;
-            }
-        }
+        protected override double dynamic_min => memorySpinnerDynMin.Value;
 
-        public override double dynamic_max
-        {
-            get
-            {
-                return memorySpinnerDynMax.Value;
-            }
-        }
+        protected override double dynamic_max => memorySpinnerDynMax.Value;
 
-        public override double static_max
-        {
-            get
-            {
-                return memorySpinnerStatMax.Value;
-            }
-        }
+        protected override double static_max => memorySpinnerStatMax.Value;
 
         private void SetIncrements()
         {
@@ -96,9 +72,6 @@ namespace XenAdmin.Controls.Ballooning
 
         private void Spinners_ValueChanged(object sender, EventArgs e)
         {
-            if (firstPaint)  // still initializing
-                return;
-
             if (sender == memorySpinnerStatMax)
             {
                 // Force supported envelope

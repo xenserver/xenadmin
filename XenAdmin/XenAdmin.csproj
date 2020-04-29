@@ -1413,12 +1413,6 @@
     <Compile Include="Dialogs\DuplicateTemplateNameDialog.Designer.cs">
       <DependentUpon>DuplicateTemplateNameDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.Designer.cs">
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\RepairSRDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2716,10 +2710,6 @@
     <EmbeddedResource Include="Dialogs\DuplicateTemplateNameDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DuplicateTemplateNameDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RepairSRDialog.resx">
       <DependentUpon>RepairSRDialog.cs</DependentUpon>
@@ -5738,12 +5728,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LVMoHBAWarningDialog.resx">
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.ja.resx">
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.zh-CN.resx">
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LicenseWarningDialog.ja.resx">
       <DependentUpon>LicenseWarningDialog.cs</DependentUpon>

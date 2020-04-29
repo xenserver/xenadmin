@@ -32,9 +32,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Commands;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 namespace XenAdmin.Controls.Ballooning
@@ -43,26 +48,33 @@ namespace XenAdmin.Controls.Ballooning
     {
         // The maximum value allowed for memory for this VM
         private long maxMemAllowed = VM.DEFAULT_MEM_ALLOWED;
+        private long _origStaticMax;
 
-        protected bool firstPaint = true;
+        protected bool hasBallooning;
         protected List<VM> vms;
         protected VM vm0;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<VM> VMs
         {
+            get => vms;
             set
             {
-                vms = value;
-                if (vms == null)
-                    return;
+                vms = value ?? new List<VM>();
 
                 if (vms.Count > 0)
                 {
                     vm0 = vms[0];
-                    SetBallooning(vm0.has_ballooning());
+                    _origStaticMax = vm0.memory_static_max;
+                    hasBallooning = vm0.has_ballooning();
+                    maxMemAllowed = vms.Select(v => v.MaxMemAllowed()).Min();
+                    Populate();
                 }
-                firstPaint = true;
-                maxMemAllowed = CalcMaxMemAllowed();
+                else
+                {
+                    maxMemAllowed = VM.DEFAULT_MEM_ALLOWED;
+                }
             }
         }
 
@@ -70,44 +82,23 @@ namespace XenAdmin.Controls.Ballooning
         // base class of a control, otherwise the control can't be edited in the Designer.
 
         [Browsable(false)]
-        public virtual double dynamic_min
-        {
-            get { return 0; }
-        }
+        protected virtual double dynamic_min => 0;
 
         [Browsable(false)]
-        public virtual double dynamic_max
-        {
-            get { return 0; }
-        }
+        protected virtual double dynamic_max => 0;
 
         [Browsable(false)]
-        public virtual double static_max
-        {
-            get { return 0; }
-        }
+        protected virtual double static_max => 0;
 
-        protected virtual void SetBallooning(bool hasBallooning)
+        protected virtual void Populate()
         {
         }
 
         // A bit hacky, but needed to fix CA-35710. The ballooning dialog has to call this before
-        // closing, otherwise the settings on the spinners may not have taken yet.
-        public virtual void UnfocusSpinners()
+        // closing, otherwise the settings on the spinners may not have been taken yet.
+        public void UnfocusSpinners()
         {
             SelectNextControl(Controls[0], true, true, true, true);
-        }
-
-        private long CalcMaxMemAllowed()
-        {
-            long ans = (vms.Count == 0 ? VM.DEFAULT_MEM_ALLOWED : vms[0].MaxMemAllowed());
-            foreach (VM vm in vms)
-            {
-                long max = vm.MaxMemAllowed();
-                if (max < ans)
-                    ans = max;
-            }
-            return ans;
         }
 
         protected double maxDynMin = -1;  // signal value for no constraint
@@ -210,13 +201,13 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        public static double CalcIncrement(double static_max, string units)
+        public static double CalcIncrement(double staticMax, string units)
         {
             if (units == "MB")
             {
                 // Calculate a suitable increment if the static_max is small
                 int i = 1;
-                while (i < static_max / Util.BINARY_MEGA / 8 && i < 128)
+                while (i < staticMax / Util.BINARY_MEGA / 8 && i < 128)
                     i *= 2;
                 
                 return i * Util.BINARY_MEGA;
@@ -276,6 +267,76 @@ namespace XenAdmin.Controls.Ballooning
             if (frac < 0.0 || frac > 1.0)
                 frac = 0.25;  // default value for both HVM and PV if ratio absent or nonsensical
             return frac;
+        }
+
+        public bool ChangeMemorySettings()
+        {
+            // dynamic_min and dynamic_max should stay equal to static_max for VMs without ballooning
+
+            var dynamicMin = hasBallooning ? (long)dynamic_min : (long)static_max;
+            var dynamicMax = hasBallooning ? (long)dynamic_max : (long)static_max;
+            var staticMax = (long)static_max;
+
+            if (_origStaticMax / Util.BINARY_MEGA == staticMax / Util.BINARY_MEGA)
+            {
+                // don't want to show warning dialog just for rounding errors
+
+                if (dynamicMin == staticMax)
+                    dynamicMin = _origStaticMax;
+                if (dynamicMax == staticMax)
+                    dynamicMax = _origStaticMax;
+                staticMax = _origStaticMax;
+            }
+            else
+            {
+                foreach (VM vm in VMs)
+                {
+                    if (vm.power_state == vm_power_state.Halted)
+                        continue;
+                    
+                    // If not all VMs Halted, confirm static_max changes, and abort if necessary
+                    // Six possible messages depending on the exact configuration.
+                    // (Could have an additional message for VMs without ballooning but with tools,
+                    // e.g. on a free host, for which we can do a clean shutdown: but having a false
+                    // positive for the scarier message about force shutdown is not too bad).
+                    // We assume that all VMs have the same has_ballooning.
+
+                    string msg;
+                    if (GetType() == typeof(VMMemoryControlsAdvanced))
+                        msg = VMs.Count == 1
+                            ? Messages.CONFIRM_CHANGE_STATIC_MAX_SINGULAR
+                            : Messages.CONFIRM_CHANGE_STATIC_MAX_PLURAL;
+                    else if (vm.has_ballooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC))
+                        msg = VMs.Count == 1
+                            ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR
+                            : Messages.CONFIRM_CHANGE_MEMORY_MAX_PLURAL;
+                    else
+                        msg = VMs.Count == 1
+                            ? Messages.CONFIRM_CHANGE_MEMORY_SINGULAR
+                            : Messages.CONFIRM_CHANGE_MEMORY_PLURAL;
+
+                    using (var dlg = new WarningDialog(msg,
+                        ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+                    {
+                        if (dlg.ShowDialog(this) != DialogResult.Yes)
+                            return false;
+                    }
+
+                    break;
+                }
+            }
+
+            foreach (VM vm in VMs)
+            {
+                var action = new ChangeMemorySettingsAction(vm,
+                    string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name()),
+                    vm.memory_static_min, dynamicMin, dynamicMax, staticMax,
+                    VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm, false);
+                
+                action.RunAsync();
+            }
+
+            return VMs.Count > 0;
         }
     }
 }

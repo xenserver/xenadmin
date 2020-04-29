@@ -47,7 +47,6 @@ namespace XenAdmin.Controls.Ballooning
         private VM vm0;
         private List<VM_metrics> vm_metrics;
 
-
         public VMMemoryControlsNoEdit()
         {
             InitializeComponent();
@@ -92,15 +91,14 @@ namespace XenAdmin.Controls.Ballooning
             // Edit button: don't show if one of the VMs has just been rebooted, because we don't accurately
             // know what its capabilities are in that case (cf CA-31051). Also suspended VMs can't be edited.
             // So "good" VMs are ones which are halted, or running with known virtualisation status.
-            editButton.Visible =
-                (null == vms.Find(vm => !(vm.power_state == vm_power_state.Halted ||
-                    vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus().HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))));
+
+            editButton.Visible = vms.All(vm =>
+                vm.power_state == vm_power_state.Halted ||
+                vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN));
 
             vmShinyBar.Populate(vms, false);
 
-            // Spinners
-            bool ballooning = vm0.has_ballooning();
-            if (ballooning)
+            if (vm0.has_ballooning())
             {
                 valueDynMin.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_min, true);
                 valueDynMax.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_max, true);
@@ -123,19 +121,20 @@ namespace XenAdmin.Controls.Ballooning
         private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "power_state" || e.PropertyName == "virtualisation_status" || e.PropertyName == "name_label")
-                Program.Invoke(this,Refresh);
+                Program.Invoke(this, Refresh);
         }
 
         private void vm_metrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "memory_actual")
-                Refresh();
+                Program.Invoke(this, Refresh);
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
             if (vms.Count == 1)
-                new BallooningDialog(vm0, vm0.advanced_ballooning()).ShowDialog(Program.MainWindow);
+                using (var dlg = new BallooningDialog(vm0))
+                    dlg.ShowDialog(Program.MainWindow);
             else
                 Program.MainWindow.ShowPerConnectionWizard(vm0.Connection, new BallooningWizard(vms));
         }

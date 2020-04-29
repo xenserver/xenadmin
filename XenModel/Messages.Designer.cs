@@ -21148,20 +21148,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools]....
+        ///   Looks up a localized string similar to &amp;Install [Citrix VM Tools].
         /// </summary>
-        public static string INSTALL_XENSERVER_TOOLS_DOTS {
+        public static string INSTALL_XENSERVER_TOOLS_BUTTON {
             get {
-                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_DOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools].
-        /// </summary>
-        public static string INSTALL_XS_TOOLS {
-            get {
-                return ResourceManager.GetString("INSTALL_XS_TOOLS", resourceCulture);
+                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_BUTTON", resourceCulture);
             }
         }
         
@@ -21207,6 +21198,15 @@ namespace XenAdmin {
         public static string INSTALLTOOLS_EXIST {
             get {
                 return ResourceManager.GetString("INSTALLTOOLS_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read more about installing [Citrix VM Tools].
+        /// </summary>
+        public static string INSTALLTOOLS_READ_MORE {
+            get {
+                return ResourceManager.GetString("INSTALLTOOLS_READ_MORE", resourceCulture);
             }
         }
         
@@ -42181,6 +42181,17 @@ namespace XenAdmin {
         public static string XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM {
             get {
                 return ResourceManager.GetString("XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want [XenCenter] to insert the [Citrix VM Tools] DVD into your VM&apos;s DVD drive and take you to the VM&apos;s console?
+        ///
+        ///Any disk in your VM&apos;s DVD drive will be ejected when installing [Citrix VM Tools]..
+        /// </summary>
+        public static string XS_TOOLS_MESSAGE_ONE_VM {
+            get {
+                return ResourceManager.GetString("XS_TOOLS_MESSAGE_ONE_VM", resourceCulture);
             }
         }
         

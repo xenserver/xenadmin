@@ -964,12 +964,16 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.license_server-address"), host.license_server["address"]);
                 else
                 {
-                    var openUrl = new ToolStripMenuItem(Messages.LICENSE_SERVER_WEB_CONSOLE_GOTO);
-                    openUrl.Click += (sender, args) => Program.OpenURL(string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, licenseServerAddress, Host.LicenseServerWebConsolePort));
-                    s.AddEntryLink(FriendlyName("host.license_server-address"),
-                                   host.license_server["address"],
-                                   new[] {openUrl},
-                                   openUrl.PerformClick);
+                    void OpenWebConsole()
+                    {
+                        Program.OpenURL(string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, licenseServerAddress, Host.LicenseServerWebConsolePort));
+                    }
+
+                    var openUrl = new ToolStripMenuItem(Messages.LICENSE_SERVER_WEB_CONSOLE_GOTO, null,
+                        (sender, e) => OpenWebConsole());
+                    
+                    s.AddEntryLink(FriendlyName("host.license_server-address"), host.license_server["address"],
+                                   new[] {openUrl}, OpenWebConsole);
                 }
             }
             if (host.license_server.ContainsKey("port"))
@@ -1185,21 +1189,17 @@ namespace XenAdmin.TabPages
 					var appl = vm.Connection.Resolve(vm.appliance);
 					if (appl != null)
 					{
-                        var applProperties = new ToolStripMenuItem(Messages.VM_APPLIANCE_PROPERTIES);
-					    applProperties.Click +=
-					        (sender, e) =>
-					            {
-					                using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
-					                    propertiesDialog.ShowDialog(this);
-					            };
+                        void LaunchProperties()
+                        {
+                            using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
+                                propertiesDialog.ShowDialog(this);
+                        }
 
-						s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name(), new[] { applProperties },
-									   () =>
-									   {
-										   using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
-											   propertiesDialog.ShowDialog(this);
-									   });
-					}
+                        var applProperties = new ToolStripMenuItem(Messages.VM_APPLIANCE_PROPERTIES, null,
+                            (sender, e) => LaunchProperties());
+
+                        s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name(), new[] {applProperties}, LaunchProperties);
+                    }
 				}
 
             	if (vm.is_a_snapshot)
@@ -1382,48 +1382,29 @@ namespace XenAdmin.TabPages
             if (vm != null && vm.Connection != null)
             {
                 //For Dundee or higher Windows VMs
-                if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows())
+                if (vm.HasNewVirtualisationStates())
                 {
-                    var gm = vm.Connection.Resolve(vm.guest_metrics);
-
-                    bool isIoOptimized = gm != null && gm.PV_drivers_detected;
-                    bool isManagementAgentInstalled = vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED);
-                    bool canInstallIoDriversAndManagementAgent = InstallToolsCommand.CanExecute(vm) && !isIoOptimized;
-                    bool canInstallManagementAgentOnly = InstallToolsCommand.CanExecute(vm) && isIoOptimized && !isManagementAgentInstalled;
-                    //canInstallIoDriversOnly is missing - management agent communicates with XS using the I/O drivers
+                    var status = vm.GetVirtualisationStatus(out var statusString);
 
                     var sb = new StringBuilder();
 
                     if (vm.power_state == vm_power_state.Running)
                     {
-                        if (vm.GetVirtualisationStatus().HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN))
+                        if (status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                         {
-                            sb.AppendLine(vm.VirtualisationStatusString());
+                            sb.AppendLine(statusString);
                         }
                         else
                         {
                             //Row 1 : I/O Drivers
-                            if (isIoOptimized)
-                            {
-                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED);
-                            }
-                            else
-                            {
-                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED);
-                            }
-
-                            sb.Append(Environment.NewLine);
+                            sb.AppendLine(status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                                ? Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED
+                                : Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED);
 
                             //Row 2: Management Agent
-                            if (isManagementAgentInstalled)
-                            {
-                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED);
-                            }
-                            else
-                            {
-                                sb.Append(Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED);
-                            }
-                            sb.Append(Environment.NewLine);
+                            sb.AppendLine(status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                                ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED
+                                : Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED);
                         }
                     }
 
@@ -1438,25 +1419,37 @@ namespace XenAdmin.TabPages
                     {
                         //Row 4: Install Tools
                         string installMessage = string.Empty;
-                        if (canInstallIoDriversAndManagementAgent)
+                        var canInstall = InstallToolsCommand.CanExecute(vm);
+
+                        if (canInstall && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         {
                             installMessage = Messages.VIRTUALIZATION_STATE_VM_INSTALL_IO_DRIVERS_AND_MANAGEMENT_AGENT;
                         }
-                        else if (canInstallManagementAgentOnly)
+                        else if (canInstall && status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) &&
+                                 !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         {
                             installMessage = Messages.VIRTUALIZATION_STATE_VM_INSTALL_MANAGEMENT_AGENT;
                         }
 
                         if (!string.IsNullOrEmpty(installMessage))
                         {
-                            var installtools = new ToolStripMenuItem(installMessage);
-                            installtools.Click += delegate
+                            if (Helpers.StockholmOrGreater(vm.Connection))
                             {
-                                new InstallToolsCommand(Program.MainWindow, vm).Execute();
-                            };
-                            s.AddEntryLink(string.Empty, installMessage,
-                                new[] { installtools },
-                                new InstallToolsCommand(Program.MainWindow, vm));
+                                void GoToHelp()
+                                {
+                                    Help.HelpManager.Launch("InstallToolsWarningDialog");
+                                }
+
+                                var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null,
+                                    (sender, args) => GoToHelp());
+                                s.AddEntryLink(string.Empty, Messages.INSTALLTOOLS_READ_MORE, new[] {toolsItem}, GoToHelp);
+                            }
+                            else
+                            {
+                                var cmd = new InstallToolsCommand(Program.MainWindow, vm);
+                                var toolsItem = new ToolStripMenuItem(installMessage, null, (sender, args) => cmd.Execute());
+                                s.AddEntryLink(string.Empty, installMessage, new[] {toolsItem}, cmd);
+                            }
                         }
                     }
                 }
@@ -1464,29 +1457,42 @@ namespace XenAdmin.TabPages
                 //for everything else (All VMs on pre-Dundee hosts & All non-Windows VMs on any host)
                 else if (vm.power_state == vm_power_state.Running)
                 {
-                    var status = vm.GetVirtualisationStatus();
-                    if (status == 0 || status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                    var status = vm.GetVirtualisationStatus(out var statusString);
+
+                    if (status == 0 || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                     {
                         if (InstallToolsCommand.CanExecute(vm))
                         {
-                            var installtools = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS_DOTS);
-                            installtools.Click += delegate
+                            if (Helpers.StockholmOrGreater(vm.Connection))
                             {
-                                new InstallToolsCommand(Program.MainWindow, vm).Execute();
-                            };
-                            s.AddEntryLink(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString(),
-                                new[] { installtools },
-                                new InstallToolsCommand(Program.MainWindow, vm));
+                                void GoToHelp()
+                                {
+                                    Help.HelpManager.Launch("InstallToolsWarningDialog");
+                                }
+
+                                var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null, (sender, args) => GoToHelp());
+
+                                s.AddEntry(FriendlyName("VM.VirtualizationState"), statusString);
+                                s.AddEntryLink("", Messages.INSTALLTOOLS_READ_MORE, new[] {toolsItem}, GoToHelp);
+                            }
+                            else
+                            {
+                                var cmd = new InstallToolsCommand(Program.MainWindow, vm);
+                                var toolsItem = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS, null,
+                                    (sender, args) => cmd.Execute());
+
+                                s.AddEntryLink(FriendlyName("VM.VirtualizationState"), statusString,
+                                    new[] {toolsItem}, cmd);
+                            }
                         }
                         else
                         {
-                            s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString(), Color.Red);
+                            s.AddEntry(FriendlyName("VM.VirtualizationState"), statusString, Color.Red);
                         }
-
                     }
                     else
                     {
-                        s.AddEntry(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString());
+                        s.AddEntry(FriendlyName("VM.VirtualizationState"), statusString);
                     }
                 }
             }
