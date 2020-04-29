@@ -243,8 +243,6 @@ namespace XenOvf
         /// <param name="cdId">InstanceID</param>
         /// <param name="caption">string short description</param>
         /// <param name="description">string longer description</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging mechanism")]
 		public static string AddCDROM(EnvelopeType ovfObj, string vsId, string lang, string cdId, string caption, string description)
         {
             RASD_Type rasd = new RASD_Type();
@@ -289,8 +287,6 @@ namespace XenOvf
         /// <param name="deviceId">String identifying the device to match to the controller</param>
         /// <param name="iteration">which controller 0 = first, 1, 2, 3... (per type)</param>
         /// <returns>InstanceID of Controller</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging mechanism")]
 		public void AddController(EnvelopeType ovfObj, string vsId, string lang, DeviceType type, string deviceId, int iteration)
         {
             VirtualHardwareSection_Type[] vhsArray = FindVirtualHardwareSection(ovfObj, vsId);
@@ -312,8 +308,6 @@ namespace XenOvf
         /// <param name="deviceId">String identifying the device to match to the controller</param>
         /// <param name="iteration">which controller 0 = first, 1, 2, 3... (per type)</param>
         /// <returns>InstanceID of Controller</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging mechanism")]
         public void AddControllerToVHS(object vhsObj, string lang, DeviceType type, string deviceId, int iteration)
         {
             VirtualHardwareSection_Type vhs = (VirtualHardwareSection_Type)vhsObj;
@@ -429,8 +423,6 @@ namespace XenOvf
         /// <param name="deviceInstanceId">instance ID of device</param>
         /// <param name="controllerInstanceId">instance ID of controller</param>
         /// <param name="AddressOnController">where on controller 0...</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging mechanism")]
         public void AddDeviceToController(EnvelopeType ovfObj, string vsId, string lang, string deviceInstanceId, string controllerInstanceId, string AddressOnController)
         {
             VirtualHardwareSection_Type[] vhsArray = FindVirtualHardwareSection(ovfObj, vsId);
@@ -474,8 +466,6 @@ namespace XenOvf
         /// <param name="sysIdx">System Index in OVF to set memory value (0 = first VM)</param>
         /// <param name="idx">Section Index in Virtual Hardware Section (1 = VHS index)</param>
         /// <returns>Instance ID of Disk</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                        Justification = "Logging mechanism")]
         public static void AddDisk(EnvelopeType ovfEnv, string vsId, string diskId, string lang, string vhdFileName, bool bootable, string name, string description, ulong filesize, ulong capacity)
         {
             List<File_Type> files = new List<File_Type>();
@@ -5427,8 +5417,7 @@ namespace XenOvf
         {
             AddContent(systemColl, vsId, Properties.Settings.Default.Language, item);
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                        Justification = "Logging mechanism")]
+
         private static void AddContent(VirtualSystemCollection_Type systemColl, string vsId, string lang, object item)
         {
             List<Section_Type> sections = new List<Section_Type>();
