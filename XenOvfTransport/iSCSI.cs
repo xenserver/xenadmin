@@ -35,7 +35,6 @@ using System.IO;
 using System.Threading;
 using DiscUtils.Iscsi;
 using XenAPI;
-using SuppressMessage = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
 
 namespace XenOvfTransport
@@ -89,7 +88,6 @@ namespace XenOvfTransport
             }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public DiskStream Connect(XenAPI.Session xenSession, string vdiuuid, bool read_only)
         {
             StartiScsiTarget(xenSession, vdiuuid, read_only);
@@ -184,7 +182,6 @@ namespace XenOvfTransport
             }
         }
         
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Disconnect(XenAPI.Session xenSession)
         {
             try
@@ -212,7 +209,6 @@ namespace XenOvfTransport
             StopiScsiTarget(xenSession);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Copy(Stream source, Stream destination, string filename, bool shouldHash)
         {
             log.InfoFormat("Started copying {0} bytes to {1} via iSCSI.", source.Length, filename);
@@ -295,7 +291,6 @@ namespace XenOvfTransport
             log.InfoFormat("Finished copying {0} bytes to {1} via iSCSI.", source.Length, filename);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Verify(Stream target, string filename)
         {
             log.InfoFormat("Started verifying {0} bytes in {1} after copy via iSCSI.", _bytescopied, filename);
@@ -479,7 +474,6 @@ namespace XenOvfTransport
 				UpdateHandler.Invoke(e);
 		}
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         private void StartiScsiTarget(XenAPI.Session xenSession, string vdiuuid, bool read_only)
         {
             try
@@ -510,7 +504,6 @@ namespace XenOvfTransport
             }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         private void StopiScsiTarget(XenAPI.Session xenSession)
         {
             try

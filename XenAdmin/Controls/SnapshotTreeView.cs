@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
@@ -155,9 +154,6 @@ namespace XenAdmin.Controls
 
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters",
-            MessageId = "System.InvalidOperationException.#ctor(System.String)",
-            Justification = "Indicates a programming error - not user facing")]
         internal ListViewItem AddSnapshot(SnapshotIcon snapshot)
         {
             if (snapshot == null)

@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Management;
 using System.Reflection;
@@ -63,8 +62,6 @@ namespace XenOvf
 
         #region CONVERSIONS
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-             Justification = "Tar Object uses close not Dispose, it cleans up all streams used.")]
         public static void ConvertOVFtoOVA(string pathToOvf, string ovfFileName, bool compress, bool cleanup = true)
         {
             // throws exception if any of the parameters is null (which we want)
@@ -1464,9 +1461,6 @@ namespace XenOvf
             log.DebugFormat("OVF.TransformXvaOvf_SR completed {0}", vsId);
         }
 
-
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-             Justification = "Logging only usage")]
         private void CollectInformation()
         {
             Win32_ComputerSystem = null;
@@ -1708,8 +1702,6 @@ namespace XenOvf
             AddVssd(ovfEnv, vsId, vhsId, Properties.Settings.Default.Language);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-             Justification = "Logging mechanism")]
         private void AddVssd(EnvelopeType ovfEnv, string vsId, string vhsId, string lang)
         {
 
@@ -1775,8 +1767,6 @@ namespace XenOvf
             AddNetworks(ovfEnv, vsId, Properties.Settings.Default.Language);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-             Justification = "Logging mechanism")]
         private void AddNetworks(EnvelopeType ovfEnv, string vsId, string lang)
         {
             if (Win32_NetworkAdapter != null)
@@ -1875,8 +1865,6 @@ namespace XenOvf
             AddCPUs(ovfEnv, vsId, Properties.Settings.Default.Language);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-             Justification = "Logging mechanism")]
         private void AddCPUs(EnvelopeType ovfEnv, string vsId, string lang)
         {
             UInt64 cpucount = 0;
@@ -1916,8 +1904,6 @@ namespace XenOvf
             AddMemory(ovfEnv, vsId, Properties.Settings.Default.Language);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-             Justification = "Logging mechanism")]
         private void AddMemory(EnvelopeType ovfEnv, string vsId, string lang)
         {
             ulong divisor = 1024*1024;
@@ -1955,8 +1941,6 @@ namespace XenOvf
             CreateConnectedDevices(ovfEnv, vsId, Properties.Settings.Default.Language, vhdExports);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-             Justification = "Logging mechanism")]
         private void CreateConnectedDevices(EnvelopeType ovfEnv, string vsId, string lang, DiskInfo[] vhdExports)
         {
             //VirtualHardwareSection_Type vhs = FindVirtualHardwareSection(ovfEnv, vsId);
