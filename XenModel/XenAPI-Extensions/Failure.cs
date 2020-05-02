@@ -31,9 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin;
-using XenAdmin.Core;
 using XenAdmin.Network;
 
 
@@ -108,31 +105,6 @@ namespace XenAPI
             failure.ErrorDescription[0] = Failure.RBAC_PERMISSION_DENIED_FRIENDLY;
             // Current Role(s)
             failure.ErrorDescription[1] = Session.FriendlyRoleDescription();
-            // Authorized roles
-            failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
-            failure.ParseExceptionMessage();
-        }
-
-        /// <summary>
-        /// This overload is for the special case of us doing an action over multiple connections. Assumes the role requirement is the same across all conections.
-        /// </summary>
-        /// <param name="failure">The Failure to update</param>
-        /// <param name="Sessions">One session per connection, the ones used to perform the action. Passed separately because they could be elevated sessions, different to the heartbeat</param>
-        public static void ParseRBACFailure(Failure failure, Session[] Sessions)
-        {
-            List<Role> authRoles = Role.ValidRoleList(failure.ErrorDescription[1], Sessions[0].Connection);
-            failure.ErrorDescription[0] = Failure.RBAC_PERMISSION_DENIED_FRIENDLY;
-            // Current Role(s)
-            StringBuilder sb = new StringBuilder();
-            foreach (Session s in Sessions)
-            {
-                sb.Append(string.Format(Messages.ROLE_ON_CONNECTION, s.FriendlyRoleDescription(), Helpers.GetName(s.Connection).Ellipsise(50)));
-                sb.Append(", ");
-            }
-            string output = sb.ToString();
-            // remove trailing comma and space
-            output = output.Substring(0, output.Length - 2);
-            failure.ErrorDescription[1] = output;
             // Authorized roles
             failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
             failure.ParseExceptionMessage();

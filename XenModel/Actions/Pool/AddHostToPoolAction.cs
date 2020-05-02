@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -91,24 +92,31 @@ namespace XenAdmin.Actions
                 bool fixedCpus = FixCpus(Pool, _hostsToCpuMask, AcceptNTolChanges);
                 if (fixedCpus)
                     Session = NewSession();  // We've rebooted the server, so we need to grab the new session
-                RelatedTask = XenAPI.Pool.async_join(Session, Pool.Connection.Hostname, Pool.Connection.Username, Pool.Connection.Password);
+
+                var master = Pool.Connection.TryResolveWithTimeout(Pool.master);
+                var address = master != null ? master.address : Pool.Connection.Hostname;
+
+                RelatedTask = Pool.async_join(Session, address, Pool.Connection.Username, Pool.Connection.Password);
                 PollToCompletion(0, 90);
             }
-            catch (Exception e)
+            catch (Failure f)
             {
-                Failure f = e as Failure;
-                // I think we shouldn't trigger this any more, because it's now checked in PoolJoinRules.
+                // This is probably not needed any more, because it's now checked in PoolJoinRules.
                 // But let's leave it here in case. SRET.
-                if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                if (f.ErrorDescription.Count > 1 && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                 {
-                    Session[] sessions = new Session[] { Session, Pool.Connection.Session };
-                    // Special parse to cope with multiple connections.
-                    Failure.ParseRBACFailure(f, sessions);
-                    // Will not get RBAC parsed again after the throw as we have altered the error description in ParseRBACFailure
-                    throw f;
+                    var sessions = new[] {Session, Pool.Connection.Session};
+                    var authRoles = Role.ValidRoleList(f.ErrorDescription[1], Session.Connection);
+
+                    var output = string.Join(", ", sessions.Select(s => string.Format(Messages.ROLE_ON_CONNECTION,
+                        s.FriendlyRoleDescription(), Helpers.GetName(s.Connection).Ellipsise(50))));
+
+                    throw new Failure(Failure.RBAC_PERMISSION_DENIED_FRIENDLY, output, Role.FriendlyCSVRoleList(authRoles));
                 }
+
                 throw;
             }
+
             // We need a master session for ClearNonSharedSrs.
             // No need to log out the slave session, because the server is going to reset its database anyway.
 
