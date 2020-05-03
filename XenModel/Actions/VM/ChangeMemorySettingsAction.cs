@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Linq;
 using XenAPI;
 using XenAdmin.Actions.VMActions;
 
@@ -73,21 +74,9 @@ namespace XenAdmin.Actions
             #endregion
         }
 
-        private bool staticChanged
-        {
-            get
-            {
-                return (static_min != VM.memory_static_min || static_max != VM.memory_static_max);
-            }
-        }
+        private bool staticChanged => static_min != VM.memory_static_min || static_max != VM.memory_static_max;
 
-        private bool needReboot
-        {
-            get
-            {
-                return (staticChanged && VM.power_state != vm_power_state.Halted);
-            }
-        }
+        private bool needReboot => staticChanged && VM.power_state != vm_power_state.Halted;
 
         protected override void Run()
         {
@@ -103,7 +92,24 @@ namespace XenAdmin.Actions
                     action = new VMCleanShutdown(VM);
                 else
                     action = new VMHardShutdown(VM);
-                action.RunExternal(Session);
+
+                try
+                {
+                    action.RunExternal(Session);
+                }
+                catch
+                {
+                    if (VM.power_state == vm_power_state.Halted || VM.current_operations.Any(op =>
+                        op.Value == vm_operations.clean_shutdown || op.Value == vm_operations.hard_shutdown ||
+                        op.Value == vm_operations.shutdown))
+                    {
+                        //ignore if it got already powered off or there are other shutting down tasks in progress
+                    }
+                    else
+                        throw;
+                }
+
+                VM.Connection.WaitFor(() => VM.power_state == vm_power_state.Halted, GetCancelling);
             }
 
             // Now save the memory settings. We can't use VM.SaveChanges() for this,
@@ -129,7 +135,5 @@ namespace XenAdmin.Actions
 
             Description = string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS_DONE, VM.Name());
         }
-
-      
     }
 }
