@@ -47,13 +47,13 @@ namespace XenAdmin.Dialogs
             this.labelCurrentActionValue = new System.Windows.Forms.Label();
             this.labelServer = new System.Windows.Forms.Label();
             this.labelServerValue = new System.Windows.Forms.Label();
-            this.divider = new System.Windows.Forms.GroupBox();
             this.labelBlurb2 = new System.Windows.Forms.Label();
             this.TextBoxPassword = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.sectionHeaderLabel1 = new XenAdmin.Controls.SectionHeaderLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelBlurb
@@ -136,7 +136,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.labelCurrentUserValue, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.labelCurrentRole, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelCurrentRoleValue, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.divider, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabel1, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelBlurb2, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelRequiredRole, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.labelRequiredRoleValue, 3, 7);
@@ -144,7 +144,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.TextBoxUsername, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.labelPassword, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.TextBoxPassword, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // pictureBox1
@@ -152,7 +152,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_WarningAlert_h32bit_32;
             this.pictureBox1.Name = "pictureBox1";
-            this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 2);
+            this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 5);
             this.pictureBox1.TabStop = false;
             // 
             // labelCurrentAction
@@ -175,13 +175,6 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.labelServerValue, "labelServerValue");
             this.labelServerValue.Name = "labelServerValue";
             // 
-            // divider
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.divider, 2);
-            resources.ApplyResources(this.divider, "divider");
-            this.divider.Name = "divider";
-            this.divider.TabStop = false;
-            // 
             // labelBlurb2
             // 
             resources.ApplyResources(this.labelBlurb2, "labelBlurb2");
@@ -195,12 +188,21 @@ namespace XenAdmin.Dialogs
             this.TextBoxPassword.UseSystemPasswordChar = true;
             this.TextBoxPassword.TextChanged += new System.EventHandler(this.TextBoxPassword_TextChanged);
             // 
-            // panel1
+            // tableLayoutPanel2
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Controls.Add(this.buttonAuthorize);
-            this.panel1.Name = "panel1";
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.buttonAuthorize, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonCancel, 1, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // sectionHeaderLabel1
+            // 
+            resources.ApplyResources(this.sectionHeaderLabel1, "sectionHeaderLabel1");
+            this.tableLayoutPanel1.SetColumnSpan(this.sectionHeaderLabel1, 2);
+            this.sectionHeaderLabel1.LineColor = System.Drawing.SystemColors.ButtonShadow;
+            this.sectionHeaderLabel1.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
+            this.sectionHeaderLabel1.Name = "sectionHeaderLabel1";
+            this.sectionHeaderLabel1.TabStop = false;
             // 
             // RoleElevationDialog
             // 
@@ -213,7 +215,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,13 +237,13 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Button buttonAuthorize;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox TextBoxPassword;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelBlurb2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox divider;
         private System.Windows.Forms.Label labelCurrentActionValue;
         private System.Windows.Forms.Label labelCurrentAction;
         private System.Windows.Forms.Label labelServer;
         private System.Windows.Forms.Label labelServerValue;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private Controls.SectionHeaderLabel sectionHeaderLabel1;
     }
 }
