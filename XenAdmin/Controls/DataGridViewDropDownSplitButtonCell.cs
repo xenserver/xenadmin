@@ -122,7 +122,8 @@ namespace XenAdmin.Controls
 
         private void _contextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            DefaultItem = e.ClickedItem;
+            if (e.ClickedItem is ToolStripMenuItem)
+                DefaultItem = e.ClickedItem;
         }
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
