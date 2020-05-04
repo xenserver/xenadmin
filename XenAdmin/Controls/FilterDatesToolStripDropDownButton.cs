@@ -90,16 +90,14 @@ namespace XenAdmin.Controls
             return false;
         }
         
-        public bool FilterIsOn
-        {
-            get { return !toolStripMenuItemShowAll.Checked; }
-        }        
+        public bool FilterIsOn => !toolStripMenuItemShowAll.Checked;
 
         protected override void OnDropDownItemClicked(ToolStripItemClickedEventArgs e)
         {
             base.OnDropDownItemClicked(e);
 
-            var menuItem = (ToolStripMenuItem)e.ClickedItem;
+            if (!(e.ClickedItem is ToolStripMenuItem menuItem))
+                return;
             
             //we do not allow unchecking by clicking an already checked item
             if (menuItem.Checked)
@@ -131,8 +129,7 @@ namespace XenAdmin.Controls
 
             foreach (ToolStripItem t in DropDownItems)
             {
-                var mt = t as ToolStripMenuItem;
-                if (mt != null)
+                if (t is ToolStripMenuItem mt)
                     mt.Checked = false;
             }
 

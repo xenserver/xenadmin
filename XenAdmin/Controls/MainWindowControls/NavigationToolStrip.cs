@@ -83,24 +83,19 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void dropDownButton_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var curItem = e.ClickedItem as ToolStripMenuItem;
-
-            if (curItem == null || !curItem.Checked)
+            if (!(e.ClickedItem is ToolStripMenuItem curItem) || !curItem.Checked)
                 return;
 
             foreach (var toolStripItem in Items)
             {
-                var buttonItem = toolStripItem as ToolStripButton;
-
-                if (buttonItem != null && buttonItem.Checked)
+                if (toolStripItem is ToolStripButton buttonItem && buttonItem.Checked)
                     buttonItem.Checked = false;
 
-                var dropDownButton = toolStripItem as ToolStripDropDownButton;
-
-                if (dropDownButton != null && dropDownButton != curItem.OwnerItem)
+                if (toolStripItem is ToolStripDropDownButton dropDownButton && dropDownButton != curItem.OwnerItem)
                 {
-                    foreach (ToolStripMenuItem item in dropDownButton.DropDownItems)
-                        item.Checked = false;
+                    foreach (var it in dropDownButton.DropDownItems)
+                        if (it is ToolStripMenuItem item)
+                            item.Checked = false;
                 }
             }
 
