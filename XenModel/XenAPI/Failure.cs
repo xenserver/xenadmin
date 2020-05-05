@@ -48,7 +48,7 @@ namespace XenAPI
 
         private static ResourceManager errorDescriptions = FriendlyErrorNames.ResourceManager;
 
-        private readonly List<string> errorDescription;
+        private readonly List<string> errorDescription = new List<string>();
         private string errorText;
         private string shortError;
 
@@ -69,7 +69,8 @@ namespace XenAPI
 
         #region Constructors
 
-        public Failure() : base() { }
+        public Failure()
+        {}
 
         public Failure(params string[] err)
             : this(new List<string>(err))
