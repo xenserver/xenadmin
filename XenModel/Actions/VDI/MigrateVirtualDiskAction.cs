@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
         private readonly VDI vdi;
 
         public MigrateVirtualDiskAction(IXenConnection connection, VDI vdi, SR sr)
-            : base(connection, string.Format(Messages.ACTION_MOVING_VDI_TITLE, Helpers.GetName(vdi), Helpers.GetName(sr)))
+            : base(connection, string.Format(Messages.ACTION_MOVING_VDI_TO_SR, Helpers.GetName(vdi), Helpers.GetName(sr)))
         {
             Description = Messages.ACTION_PREPARING;
             this.vdi = vdi;
@@ -53,24 +53,10 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            try
-            {
-                Title = Description = string.Format(Messages.ACTION_MOVING_VDI_STATUS, Helpers.GetName(vdi));
-                RelatedTask = VDI.async_pool_migrate(Session, vdi.opaque_ref, SR.opaque_ref, new Dictionary<string, string>());
-                PollToCompletion();
-            }
-            catch (CancelledException)
-            {
-                Description = string.Format(Messages.ACTION_VM_MIGRATE_CANCELLED, vdi.Name());
-                throw;
-            }
-            catch (Failure boo)
-            {
-                Description = boo.Message;
-                throw;
-            }
-
-            Description = Messages.ACTION_VM_MIGRATED;
+            Description = string.Format(Messages.ACTION_MOVING_VDI, Helpers.GetName(vdi));
+            RelatedTask = VDI.async_pool_migrate(Session, vdi.opaque_ref, SR.opaque_ref, new Dictionary<string, string>());
+            PollToCompletion();
+            Description = Messages.MOVED;
         }
     }
 }

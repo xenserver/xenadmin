@@ -47,7 +47,7 @@ namespace XenAdmin.Actions
         private VDI vdi;
 
         public MoveVirtualDiskAction(IXenConnection connection, XenAPI.VDI vdi, SR sr)
-            : base(connection, string.Format(Messages.ACTION_MOVING_VDI_TITLE, Helpers.GetName(vdi), Helpers.GetName(sr)))
+            : base(connection, string.Format(Messages.ACTION_MOVING_VDI_TO_SR, Helpers.GetName(vdi), Helpers.GetName(sr)))
         {
             this.vdi = vdi;
             SR = sr;
@@ -63,7 +63,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = string.Format(Messages.ACTION_MOVING_VDI_STATUS, Helpers.GetName(vdi));
+            Description = string.Format(Messages.ACTION_MOVING_VDI, Helpers.GetName(vdi));
             PercentComplete = 10;
             log.DebugFormat("Moving VDI '{0}'", Helpers.GetName(vdi));
             RelatedTask = VDI.async_copy(Session, vdi.opaque_ref, SR.opaque_ref);
@@ -126,7 +126,7 @@ namespace XenAdmin.Actions
                 Connection.WaitForCache(VBD.create(Session, newVbd));
 
             PercentComplete = 100;
-            Description = Messages.COMPLETED;
+            Description = Messages.MOVED;
             log.DebugFormat("Moved VDI '{0}'", Helpers.GetName(vdi));
         }
 
