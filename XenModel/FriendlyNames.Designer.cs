@@ -2446,6 +2446,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk {0} Average I/O Latency.
+        /// </summary>
+        public static string Label_performance_vbd_latency {
+            get {
+                return ResourceManager.GetString("Label-performance.vbd_latency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk {0} Read.
         /// </summary>
         public static string Label_performance_vbd_read {

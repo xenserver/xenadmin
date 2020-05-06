@@ -858,6 +858,9 @@
   <data name="Label-performance.tap_tx_errors" xml:space="preserve">
     <value>TAP {0} Send Errors</value>
   </data>
+  <data name="Label-performance.vbd_latency" xml:space="preserve">
+    <value>Disk {0} Average I/O Latency</value>
+  </data>
   <data name="Label-performance.vbd_read" xml:space="preserve">
     <value>Disk {0} Read</value>
   </data>

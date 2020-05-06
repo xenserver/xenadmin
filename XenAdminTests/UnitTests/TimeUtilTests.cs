@@ -55,7 +55,7 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void ISODateTimeParse()
         {
-            Util.TryParseIso8601DateTime("20111225T10:20:37Z", out var derived);
+            Assert.True(Util.TryParseIso8601DateTime("20111225T10:20:37Z", out var derived));
             Assert.AreEqual(new DateTime(2011, 12, 25, 10, 20, 37), derived);
             Assert.AreEqual(DateTimeKind.Utc, derived.Kind);
         }

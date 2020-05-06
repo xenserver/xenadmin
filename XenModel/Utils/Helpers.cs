@@ -953,7 +953,7 @@ namespace XenAdmin.Core
         static Regex PifTapRegex = new Regex("^pif_tap([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifLoRegex = new Regex("^pif_lo_(tx|rx)((_errors)?)$");
         static Regex PifBondRegex = new Regex("^pif_(bond[0-9]+)_(tx|rx)((_errors)?)$");
-        static Regex DiskRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_(read|write)((_latency)?)$");
+        static Regex DiskRegex = new Regex("^vbd_((xvd|hd)[a-z]+)(_(read|write))?(_latency)?$");
         static Regex DiskIopsRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_iops_(read|write|total)$");
         static Regex DiskThroughputRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_io_throughput_(read|write|total)$");
         static Regex DiskOtherRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_(avgqu_sz|inflight|iowait)$");
@@ -1050,7 +1050,7 @@ namespace XenAdmin.Core
                 VBD vbd = FindVBD(iXenObject, m.Groups[1].Value);
                 return vbd == null
                            ? null
-                           : FormatFriendly(string.Format("Label-performance.vbd_{0}{1}", m.Groups[3].Value, m.Groups[4].Value), vbd.userdevice);
+                           : FormatFriendly(string.Format("Label-performance.vbd{0}{1}", m.Groups[3].Value, m.Groups[5].Value), vbd.userdevice);
             }
 
             m = DiskIopsRegex.Match(name);
@@ -1228,12 +1228,12 @@ namespace XenAdmin.Core
 
         private static VBD FindVBD(IXenObject iXenObject, string device)
         {
-            if (iXenObject is VM)
+            if (iXenObject is VM vm)
             {
-                VM vm = (VM)iXenObject;
-                foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
+                foreach (var vbdRef in vm.VBDs)
                 {
-                    if (vbd.device == device)
+                    var vbd = vm.Connection.Resolve(vbdRef);
+                    if (vbd != null && vbd.device == device)
                         return vbd;
                 }
             }
