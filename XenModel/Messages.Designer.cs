@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -1566,18 +1566,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
         /// </summary>
-        public static string ACTION_MOVING_VDI_STATUS {
+        public static string ACTION_MOVING_VDI {
             get {
-                return ResourceManager.GetString("ACTION_MOVING_VDI_STATUS", resourceCulture);
+                return ResourceManager.GetString("ACTION_MOVING_VDI", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; to SR &apos;{1}&apos;.
         /// </summary>
-        public static string ACTION_MOVING_VDI_TITLE {
+        public static string ACTION_MOVING_VDI_TO_SR {
             get {
-                return ResourceManager.GetString("ACTION_MOVING_VDI_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_MOVING_VDI_TO_SR", resourceCulture);
             }
         }
         
@@ -3202,7 +3202,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving VM to new storage....
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to new storage.
         /// </summary>
         public static string ACTION_VM_MOVING {
             get {
@@ -3216,6 +3216,15 @@ namespace XenAdmin {
         public static string ACTION_VM_MOVING_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_VM_MOVING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to finalize moving VM &apos;{0}&apos; to new storage. Please see logs for details..
+        /// </summary>
+        public static string ACTION_VM_MOVING_VDI_DESTROY_FAILURE {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MOVING_VDI_DESTROY_FAILURE", resourceCulture);
             }
         }
         
@@ -24533,15 +24542,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving {0} canceled.
-        /// </summary>
-        public static string MOVE_CANCELLED {
-            get {
-                return ResourceManager.GetString("MOVE_CANCELLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Move object &apos;{0}&apos; to folder &apos;{1}&apos;....
         /// </summary>
         public static string MOVE_OBJECT_TO_FOLDER {
@@ -24587,7 +24587,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moved.
+        ///   Looks up a localized string similar to Move completed..
         /// </summary>
         public static string MOVED {
             get {

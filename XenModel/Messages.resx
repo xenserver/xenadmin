@@ -618,10 +618,10 @@
   <data name="ACTION_MIGRATING_X_VDIS_STARTED" xml:space="preserve">
     <value>Started migrating virtual disks</value>
   </data>
-  <data name="ACTION_MOVING_VDI_STATUS" xml:space="preserve">
+  <data name="ACTION_MOVING_VDI" xml:space="preserve">
     <value>Moving virtual disk '{0}'...</value>
   </data>
-  <data name="ACTION_MOVING_VDI_TITLE" xml:space="preserve">
+  <data name="ACTION_MOVING_VDI_TO_SR" xml:space="preserve">
     <value>Moving Virtual Disk '{0}' to SR '{1}'</value>
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
@@ -1186,10 +1186,13 @@
     <value>Migrating VM '{0}'</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
-    <value>Moving VM to new storage...</value>
+    <value>Moving VM '{0}' to new storage</value>
   </data>
   <data name="ACTION_VM_MOVING_TITLE" xml:space="preserve">
     <value>Moving VM '{0}' to '{1}' on SR '{2}'</value>
+  </data>
+  <data name="ACTION_VM_MOVING_VDI_DESTROY_FAILURE" xml:space="preserve">
+    <value>Failed to finalize moving VM '{0}' to new storage. Please see logs for details.</value>
   </data>
   <data name="ACTION_VM_REBOOTED" xml:space="preserve">
     <value>Rebooted</value>
@@ -8525,10 +8528,7 @@ Do you want to continue?</value>
     <value>More info...</value>
   </data>
   <data name="MOVED" xml:space="preserve">
-    <value>Moved</value>
-  </data>
-  <data name="MOVE_CANCELLED" xml:space="preserve">
-    <value>Moving {0} canceled</value>
+    <value>Move completed.</value>
   </data>
   <data name="MOVE_OBJECTS_TO_FOLDER" xml:space="preserve">
     <value>Move selected objects to folder '{0}'...</value>

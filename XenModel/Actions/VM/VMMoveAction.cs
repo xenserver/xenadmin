@@ -40,20 +40,21 @@ namespace XenAdmin.Actions.VMActions
 {
     public class VMMoveAction : AsyncAction
     {
-        public Dictionary<string, SR> StorageMapping;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private Dictionary<string, SR> _storageMapping;
 
         public VMMoveAction(VM vm, Dictionary<string, SR> storageMapping, Host host)
-            : base(vm.Connection, Messages.ACTION_VM_MOVING)
+            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING, vm.Name()))
         {
-            this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;
             this.Host = host;
             this.Pool = Helpers.GetPool(vm.Connection);
             if (vm.is_a_template)
                 this.Template = vm;
 
-            StorageMapping = storageMapping;
-            SR = StorageMapping.Values.FirstOrDefault();
+            _storageMapping = storageMapping;
+            SR = _storageMapping.Values.FirstOrDefault();
 
             PopulateApiMethodsToRoleCheck();
         }
@@ -61,7 +62,6 @@ namespace XenAdmin.Actions.VMActions
         public VMMoveAction(VM vm, SR sr, Host host, string namelabel)
             : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name(), namelabel, sr.NameWithoutHost()))
         {
-            this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;
             this.Host = host;
             this.Pool = Helpers.GetPool(vm.Connection);
@@ -70,11 +70,12 @@ namespace XenAdmin.Actions.VMActions
                 this.Template = vm;
 
             // create a storage map where all VDIs are mapped to the same SR
-            StorageMapping = new Dictionary<string, SR>();
-            var vbds = vm.Connection.ResolveAll(vm.VBDs);
-            foreach (var vbd in vbds)
+            _storageMapping = new Dictionary<string, SR>();
+            foreach (var vbdRef in vm.VBDs)
             {
-                StorageMapping.Add(vbd.VDI.opaque_ref, sr);
+                var vbd = vm.Connection.Resolve(vbdRef);
+                if (vbd != null)
+                    _storageMapping.Add(vbd.VDI.opaque_ref, sr);
             }
 
             PopulateApiMethodsToRoleCheck();
@@ -95,68 +96,77 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_VM_MOVING;
-            try
+            Description = Messages.ACTION_PREPARING;
+
+            // move the progress bar above 0, it's more reassuring to see than a blank bar as we copy the first disk
+            PercentComplete += 10;
+            int halfstep = 90 / (VM.VBDs.Count * 2);
+
+            var exceptions = new List<Exception>();
+
+            foreach (var vbdRef in VM.VBDs)
             {
-                var vbds = Connection.ResolveAll(VM.VBDs);
-                int halfstep = (int)(90/(vbds.Count * 2));
-                // move the progress bar above 0, it's more reassuring to see than a blank bar as we copy the first disk
-                PercentComplete += 10;
-                Exception exn = null;
+                if (Cancelling)
+                    throw new CancelledException();
 
-                foreach (VBD oldVBD in vbds)
+                var oldVBD = Connection.Resolve(vbdRef);
+
+                if (oldVBD ==  null || !oldVBD.GetIsOwner())
+                    continue;
+
+                if (_storageMapping == null ||
+                    !_storageMapping.TryGetValue(oldVBD.VDI.opaque_ref, out SR sr) || sr == null)
+                    continue;
+
+                var curVdi = Connection.Resolve(oldVBD.VDI);
+                if (curVdi == null)
+                    continue;
+
+                if (curVdi.SR.opaque_ref == sr.opaque_ref)
+                    continue;
+
+                Description = string.Format(Messages.ACTION_MOVING_VDI_TO_SR,
+                    Helpers.GetName(curVdi), Helpers.GetName(sr));
+
+                RelatedTask = VDI.async_copy(Session, oldVBD.VDI.opaque_ref, sr.opaque_ref);
+                PollToCompletion(PercentComplete, PercentComplete + halfstep);
+                var newVDI = Connection.WaitForCache(new XenRef<VDI>(Result));
+
+                var newVBD = new VBD
                 {
-                    if (!oldVBD.GetIsOwner())
-                        continue;
+                    userdevice = oldVBD.userdevice,
+                    bootable = oldVBD.bootable,
+                    mode = oldVBD.mode,
+                    type = oldVBD.type,
+                    unpluggable = oldVBD.unpluggable,
+                    other_config = oldVBD.other_config,
+                    VDI = new XenRef<VDI>(newVDI.opaque_ref),
+                    VM = new XenRef<VM>(VM.opaque_ref)
+                };
+                newVBD.SetIsOwner(oldVBD.GetIsOwner());
 
-                    var curVdi = Connection.Resolve(oldVBD.VDI);
-                    if (curVdi == null)
-                        continue;
-
-                    if (StorageMapping == null || !StorageMapping.ContainsKey(oldVBD.VDI.opaque_ref))
-                        continue;
-
-                    SR sr = StorageMapping[oldVBD.VDI.opaque_ref];
-                    if (sr == null || curVdi.SR.opaque_ref == sr.opaque_ref)
-                        continue;
-
-                    RelatedTask = XenAPI.VDI.async_copy(Session, oldVBD.VDI.opaque_ref, sr.opaque_ref);
-                    PollToCompletion(PercentComplete, PercentComplete + halfstep);
-                    var newVDI = Connection.WaitForCache(new XenRef<VDI>(Result));
- 
-                    var newVBD = new VBD
-                                     {
-                                         userdevice = oldVBD.userdevice,
-                                         bootable = oldVBD.bootable,
-                                         mode = oldVBD.mode,
-                                         type = oldVBD.type,
-                                         unpluggable = oldVBD.unpluggable,
-                                         other_config = oldVBD.other_config,
-                                         VDI = new XenRef<VDI>(newVDI.opaque_ref),
-                                         VM = new XenRef<VM>(VM.opaque_ref)
-                                     };
-                    newVBD.SetIsOwner(oldVBD.GetIsOwner());
-
-                    VBD vbd = oldVBD;
-                    BestEffort(ref exn, () => VDI.destroy(Session, vbd.VDI.opaque_ref));
-                    Connection.WaitForCache<VBD>(VBD.create(Session, newVBD));
-
-                    PercentComplete += halfstep;
+                try
+                {
+                    VDI.destroy(Session, oldVBD.VDI.opaque_ref);
+                }
+                catch (Exception e)
+                {
+                    log.ErrorFormat("Failed to destroy old VDI {0}", oldVBD.VDI.opaque_ref);
+                    exceptions.Add(e);
                 }
 
-                if (SR != null)
-                    VM.set_suspend_SR(Session, VM.opaque_ref, SR.opaque_ref);
+                Connection.WaitForCache(VBD.create(Session, newVBD));
 
-                if (exn != null)
-                    throw exn;
+                PercentComplete += halfstep;
+            }
 
-            }
-            catch (CancelledException)
-            {
-                this.Description = string.Format(Messages.MOVE_CANCELLED, VM.Name());
-                throw;
-            }
-            this.Description = Messages.MOVED;
+            if (SR != null)
+                VM.set_suspend_SR(Session, VM.opaque_ref, SR.opaque_ref);
+
+            if (exceptions.Count > 0)
+                throw new Exception(Messages.ACTION_VM_MOVING_VDI_DESTROY_FAILURE);
+
+            Description = Messages.MOVED;
         }
     }
 }
