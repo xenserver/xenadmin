@@ -119,6 +119,7 @@
     <Compile Include="UnitTests\TimeUtilTests.cs" />
     <Compile Include="UnitTests\TokenizerTest.cs" />
     <Compile Include="UnitTests\UpdateManagerTests.cs" />
+    <Compile Include="UnitTests\RegexTests.cs" />
     <Compile Include="UnitTests\UtilTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbPoolConfigurationTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbReportSubscriptionTests.cs" />
