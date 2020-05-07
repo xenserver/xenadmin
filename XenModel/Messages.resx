@@ -8440,7 +8440,7 @@ This action is final and unrecoverable.</value>
     <value>[XenCenter] - Error</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL" xml:space="preserve">
-    <value>Unable to reconnect to {0} . Server is unavailable.</value>
+    <value>Unable to reconnect to {0}. Server is unavailable.</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL_TITLE" xml:space="preserve">
     <value>Failed to Reconnect</value>

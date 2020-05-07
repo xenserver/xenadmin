@@ -31,15 +31,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAPI;
-using XenAdmin.Dialogs;
-using System.Drawing;
-
 
 namespace XenAdmin.Commands
 {
@@ -121,38 +120,40 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.REMOVING_SERVERS_FROM_POOL, Messages.POOLCREATE_REMOVING, Messages.POOLCREATE_REMOVED, true);
         }
 
+        protected override string GetCantExecuteReasonCore(IXenObject item)
+        {
+            if (item is Host host)
+            {
+                if (host.IsMaster())
+                    return Messages.MESSAGEBOX_POOL_MASTER_REMOVE;
+
+                if (!host.IsLive())
+                    return Messages.HOST_UNREACHABLE;
+
+                if (host.resident_VMs != null && host.resident_VMs.Count > 1)
+                    return Messages.NEWPOOL_HAS_RUNNING_VMS;
+            }
+
+            return base.GetCantExecuteReasonCore(item);
+        }
+
         public static bool CanExecute(Host host)
         {
             if (host != null && host.Connection != null)
             {
                 Pool pool = Helpers.GetPool(host.Connection);
-                return pool != null && host.opaque_ref != pool.master && host.resident_VMs != null && host.resident_VMs.Count < 2 && host.IsLive();
+                return pool != null && host.opaque_ref != pool.master && host.IsLive() &&
+                       host.resident_VMs != null && host.resident_VMs.Count <= 1;
             }
             return false;
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.AllItemsAre<Host>())
-            {
-                // all hosts must be in same pool.
-                Pool commonPool = null;
-                foreach (Host host in selection.AsXenObjects<Host>())
-                {
-                    if (!CanExecute(host))
-                    {
-                        return false;
-                    }
-                    Pool pool = Helpers.GetPool(host.Connection);
-                    if (commonPool != null && !pool.Equals(commonPool))
-                    {
-                        return false;
-                    }
-                    commonPool = pool;
-                }
-                return true;
-            }
-            return false;
+            // all selected items must be hosts and in the same pool
+
+            return selection.Select(s => s.Connection).Count() == 1 &&
+                   selection.All(s => s.XenObject is Host h && CanExecute(h));
         }
 
         private void WaitForReboot(object o)
@@ -169,7 +170,7 @@ namespace XenAdmin.Commands
                     {
                         MainWindowCommandInterface.Invoke(delegate
                         {
-                            using (var dlg = new WarningDialog(string.Format(Messages.MESSAGEBOX_RECONNECT_FAIL, connection.Hostname))
+                            using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_RECONNECT_FAIL, connection.Hostname))
                                 {WindowTitle = Messages.MESSAGEBOX_RECONNECT_FAIL_TITLE})
                             {
                                 dlg.ShowDialog(Parent);
@@ -199,21 +200,9 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT;
-            }
-        }
+        public override string ContextMenuText => Messages.REMOVE_SERVER_FROM_POOL_CONTEXT_MENU_ITEM_TEXT;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -239,28 +228,10 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_TITLE;
-            }
-        }
+        protected override string ConfirmationDialogTitle => Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_TITLE;
 
-        protected override string ConfirmationDialogYesButtonLabel
-        {
-            get
-            {
-                return Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_YES_BUTTON_LABEL;
-            }
-        }
+        protected override string ConfirmationDialogYesButtonLabel => Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_YES_BUTTON_LABEL;
 
-        protected override bool ConfirmationDialogNoButtonSelected
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationDialogNoButtonSelected => true;
     }
 }
