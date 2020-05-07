@@ -24307,7 +24307,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to reconnect to {0} . Server is unavailable..
+        ///   Looks up a localized string similar to Unable to reconnect to {0}. Server is unavailable..
         /// </summary>
         public static string MESSAGEBOX_RECONNECT_FAIL {
             get {
