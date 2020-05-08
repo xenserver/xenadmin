@@ -2241,15 +2241,15 @@ namespace XenAdmin
         #region IMainWindowCommandInterface Members
 
         /// <summary>
-        /// Closes all per-Connection and per-XenObject forms for the given connection.
+        /// Closes all per-Connection and per-VM forms for the given connection.
+        /// Per-Host forms are excluded on purpose.
         /// </summary>
         /// <param name="connection"></param>
         public void CloseActiveWizards(IXenConnection connection)
         {
             Program.Invoke(Program.MainWindow, delegate
             {
-                //so far we show per-xenObject forms only for VMs and Hosts
-                XenDialogBase.CloseAll(connection.Cache.VMs.Cast<IXenObject>().Union(connection.Cache.Hosts).ToArray());
+                XenDialogBase.CloseAll(connection.Cache.VMs.Cast<IXenObject>().ToArray());
 
                 if (activePoolWizards.TryGetValue(connection, out IList<Form> wizards))
                 {
