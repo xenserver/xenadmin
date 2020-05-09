@@ -71,6 +71,7 @@ namespace XenAdmin.Core
             NonCompatibleManagementInterface,
             WrongRoleOnMaster,
             WrongRoleOnSlave,
+            HasClusteringEnabled,
             WrongNumberOfIpsCluster,
             WrongNumberOfIpsBond,
             NotConnected,
@@ -168,11 +169,11 @@ namespace XenAdmin.Core
             if (!Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && !HasCompatibleManagementInterface(slaveConnection))
                 return Reason.NonCompatibleManagementInterface;
 
-            bool clusterHostInBond;
-            if (!HasIpForClusterNetwork(masterConnection, slaveHost, out clusterHostInBond))
-            {
-                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;
-            }    
+            if (slaveHost?.Connection?.Cache.Clusters.FirstOrDefault() != null)
+                return Reason.HasClusteringEnabled;
+
+            if (!HasIpForClusterNetwork(masterConnection, slaveHost, out var clusterHostInBond))
+                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;    
 
             return Reason.Allowed;
         }
@@ -235,6 +236,8 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_MASTER_ROLE;
                 case Reason.WrongRoleOnSlave:
                     return Messages.NEWPOOL_SLAVE_ROLE;
+                case Reason.HasClusteringEnabled:
+                    return Messages.NEW_POOL_CLUSTERING_ENABLED;
                 case Reason.WrongNumberOfIpsCluster:
                     return Messages.NEWPOOL_IP_COUNT_CLUSTER;
                 case Reason.WrongNumberOfIpsBond:

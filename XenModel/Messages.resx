@@ -8796,6 +8796,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>New Private Network</value>
   </data>
+  <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>Clustering is enabled on this server.</value>
+  </data>
   <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
     <value>This server has different updates from the master</value>
   </data>
