@@ -716,7 +716,7 @@ namespace XenAdmin.Dialogs
                     if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
                     {
                         errorParams = new List<string> {Failure.HA_NO_PLAN};
-                        errorParams.AddRange(failure.ErrorDescription.Skip(1));
+                        errorParams.AddRange(failure.ErrorDescription.Skip(1).ToArray());
                     }
 
                     ProcessError(null, errorParams.ToArray());

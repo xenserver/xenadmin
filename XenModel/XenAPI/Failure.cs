@@ -131,7 +131,7 @@ namespace XenAPI
                 else
                 {
                     // We need a string array to pass to String.Format, and it must not contain the 0th element
-                    errorText = string.Format(formatString, ErrorDescription.Skip(1));
+                    errorText = string.Format(formatString, ErrorDescription.Skip(1).Cast<object>().ToArray());
                 }
             }
             catch (Exception)
