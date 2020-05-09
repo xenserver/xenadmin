@@ -25412,6 +25412,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clustering is enabled on this server..
+        /// </summary>
+        public static string NEW_POOL_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("NEW_POOL_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is using an older CPU.
         ///
         ///[XenServer] can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
