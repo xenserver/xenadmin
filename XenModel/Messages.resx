@@ -7869,12 +7869,12 @@ Size: {3}</value>
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL" xml:space="preserve">
     <value>Do you want to remove '{0}' from pool '{1}'? 
 
-This will permanently delete and reinitialize all local storage on '{2}'. Your data will be lost, and the server will be rebooted.</value>
+This will permanently delete and reinitialize all local storage on '{2}'. Your data will be lost, and the server will be rebooted. If Active Directory is configured for pool '{1}', the server will be removed from the domain.</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_MULTIPLE" xml:space="preserve">
     <value>Do you want to remove the selected servers from pool '{0}'?
 
-This will permanently delete and reinitialize all local storage on the servers. Your data will be lost, and the servers will be rebooted.</value>
+This will permanently delete and reinitialize all local storage on the servers. Your data will be lost, and the servers will be rebooted. If Active Directory is configured for pool '{0}', the servers will be removed from the domain.</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_TITLE" xml:space="preserve">
     <value>Remove From Pool</value>
