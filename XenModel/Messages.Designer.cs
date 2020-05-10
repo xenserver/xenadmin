@@ -22638,7 +22638,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to remove &apos;{0}&apos; from pool &apos;{1}&apos;? 
         ///
-        ///This will permanently delete and reinitialize all local storage on &apos;{2}&apos;. Your data will be lost, and the server will be rebooted..
+        ///This will permanently delete and reinitialize all local storage on &apos;{2}&apos;. Your data will be lost, and the server will be rebooted. If Active Directory is configured for pool &apos;{1}&apos;, the server will be removed from the domain..
         /// </summary>
         public static string MAINWINDOW_CONFIRM_REMOVE_FROM_POOL {
             get {
@@ -22649,7 +22649,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to remove the selected servers from pool &apos;{0}&apos;?
         ///
-        ///This will permanently delete and reinitialize all local storage on the servers. Your data will be lost, and the servers will be rebooted..
+        ///This will permanently delete and reinitialize all local storage on the servers. Your data will be lost, and the servers will be rebooted. If Active Directory is configured for pool &apos;{0}&apos;, the servers will be removed from the domain..
         /// </summary>
         public static string MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_MULTIPLE {
             get {
