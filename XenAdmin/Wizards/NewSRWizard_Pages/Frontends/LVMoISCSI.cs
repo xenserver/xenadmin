@@ -117,6 +117,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (direction == PageLoadedDirection.Back)
                 return;
 
+            HideErrors();
+
             Host master = Helpers.GetMaster(Connection);
             if (master == null)
             {
