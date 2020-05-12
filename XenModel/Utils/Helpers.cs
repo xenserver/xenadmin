@@ -1587,22 +1587,17 @@ namespace XenAdmin.Core
 
         public static string DefaultVMName(string p, IXenConnection connection)
         {
-            for (int i = 1; true; i++)
+            int i = 0;
+            do
             {
-                bool willDo = true;
-                string name = string.Format(Messages.NEWVM_DEFAULTNAME, p, i);
-                string hiddenName = Helpers.GuiTempObjectPrefix + name;
-                // Check to see if name is in use
-                foreach (VM v in connection.Cache.VMs)
-                {
-                    if (v.name_label == name || v.name_label == hiddenName)
-                    {
-                        willDo = false;
-                        break;
-                    }
-                }
-                if (willDo) return name;
-            }
+                string name = string.Format(Messages.NEWVM_DEFAULTNAME, p, ++i);
+                string hiddenName = MakeHiddenName(name);
+
+                if (connection.Cache.VMs.Any(v => v.name_label == name || v.name_label == hiddenName))
+                    continue;
+
+                return name;
+            } while (true);
         }
 
         public static bool CDsExist(IXenConnection connection)

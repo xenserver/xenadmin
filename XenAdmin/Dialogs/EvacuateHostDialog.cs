@@ -244,8 +244,8 @@ namespace XenAdmin.Dialogs
 
         private void Scan()
         {
-            DelegatedAsyncAction saveVMsAction = new DelegatedAsyncAction(connection, Messages.SAVING_VMS_ACTION_TITLE,
-                Messages.SAVING_VMS_ACTION_DESC, Messages.COMPLETED, delegate(Session session)
+            DelegatedAsyncAction saveVMsAction = new DelegatedAsyncAction(connection, Messages.SAVING_VM_PROPERTIES_ACTION_TITLE,
+                Messages.SAVING_VM_PROPERTIES_ACTION_DESC, Messages.COMPLETED, delegate(Session session)
                 {
                     //Save Evacuated VMs for later
                     host.SaveEvacuatedVMs(session);
