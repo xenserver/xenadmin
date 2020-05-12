@@ -789,9 +789,6 @@
   <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
     <value>Renaming server network interface</value>
   </data>
-  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
-    <value>Saving VM Configuration</value>
-  </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>Delete VMs</value>
   </data>
@@ -7368,11 +7365,11 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
     <value>&amp;Install [Citrix VM Tools]</value>
   </data>
-  <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
-    <value>Creating VM '{0}' from template '{1}'</value>
+  <data name="INSTANT_VM_CREATE_DESC_COMPLETED" xml:space="preserve">
+    <value>Created VM '{0}'</value>
   </data>
   <data name="INSTANT_VM_CREATE_TITLE" xml:space="preserve">
-    <value>Instant VM create</value>
+    <value>Creating VM quickly from template '{0}'</value>
   </data>
   <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED" xml:space="preserve">
     <value>This server is currently not using the integrated GPU.</value>
@@ -11445,11 +11442,11 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SAVING_SEARCH" xml:space="preserve">
     <value>Saving search '{0}'...</value>
   </data>
-  <data name="SAVING_VMS_ACTION_DESC" xml:space="preserve">
-    <value>Saving configuration...</value>
+  <data name="SAVING_VM_PROPERTIES_ACTION_TITLE" xml:space="preserve">
+    <value>Saving VM properties</value>
   </data>
-  <data name="SAVING_VMS_ACTION_TITLE" xml:space="preserve">
-    <value>Saving VM Configuration</value>
+  <data name="SAVING_VM_PROPERTIES_ACTION_DESC" xml:space="preserve">
+    <value>Saving configuration...</value>
   </data>
   <data name="SAVING_WLB_CONFIGURATION" xml:space="preserve">
     <value>Saving Workload Balancing configuration.</value>

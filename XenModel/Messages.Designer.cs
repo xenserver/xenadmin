@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -2073,15 +2073,6 @@ namespace XenAdmin {
         public static string ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving VM Configuration.
-        /// </summary>
-        public static string ACTION_SET_VM_OTHER_CONFIG_TITLE {
-            get {
-                return ResourceManager.GetString("ACTION_SET_VM_OTHER_CONFIG_TITLE", resourceCulture);
             }
         }
         
@@ -21218,16 +21209,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating VM &apos;{0}&apos; from template &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Created VM &apos;{0}&apos;.
         /// </summary>
-        public static string INSTANT_VM_CREATE_DESCRIPTION {
+        public static string INSTANT_VM_CREATE_DESC_COMPLETED {
             get {
-                return ResourceManager.GetString("INSTANT_VM_CREATE_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("INSTANT_VM_CREATE_DESC_COMPLETED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Instant VM create.
+        ///   Looks up a localized string similar to Creating VM quickly from template &apos;{0}&apos;.
         /// </summary>
         public static string INSTANT_VM_CREATE_TITLE {
             get {
@@ -32992,18 +32983,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Saving configuration....
         /// </summary>
-        public static string SAVING_VMS_ACTION_DESC {
+        public static string SAVING_VM_PROPERTIES_ACTION_DESC {
             get {
-                return ResourceManager.GetString("SAVING_VMS_ACTION_DESC", resourceCulture);
+                return ResourceManager.GetString("SAVING_VM_PROPERTIES_ACTION_DESC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving VM Configuration.
+        ///   Looks up a localized string similar to Saving VM properties.
         /// </summary>
-        public static string SAVING_VMS_ACTION_TITLE {
+        public static string SAVING_VM_PROPERTIES_ACTION_TITLE {
             get {
-                return ResourceManager.GetString("SAVING_VMS_ACTION_TITLE", resourceCulture);
+                return ResourceManager.GetString("SAVING_VM_PROPERTIES_ACTION_TITLE", resourceCulture);
             }
         }
         

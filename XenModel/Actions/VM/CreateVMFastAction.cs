@@ -37,19 +37,18 @@ using XenAPI;
 
 namespace XenAdmin.Actions.VMActions
 {
-    /// <summary>
-    /// This is for the "Instant VM From Template" Command.
-    /// </summary>
     public class CreateVMFastAction : AsyncAction
     {
-        private readonly String _nameLabel;
         private readonly bool _markVmAsBeingCreated;
 
         public CreateVMFastAction(IXenConnection connection, VM template, bool markVmAsBeingCreated = true)
-            : base(connection, Messages.INSTANT_VM_CREATE_TITLE, string.Format(Messages.INSTANT_VM_CREATE_DESCRIPTION, Helpers.DefaultVMName(Helpers.GetName(template), connection), Helpers.GetName(template)))
+            : base(connection, string.Format(Messages.INSTANT_VM_CREATE_TITLE, Helpers.GetName(template)), "")
         {
+            //CA-339370: the VM's name is calculated at a later stage to avoid duplicate
+            //names in the case of creating multiple VMs in quick succession;
+            //it comes with the downside that no VM name is shown on the title
+
             Template = template;
-            _nameLabel = Helpers.DefaultVMName(Helpers.GetName(Template), Connection);
             _markVmAsBeingCreated = markVmAsBeingCreated;
 
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
@@ -62,7 +61,10 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            RelatedTask = XenAPI.VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(_nameLabel));
+            var originalName = Helpers.GetName(Template);
+
+            Description = string.Format(Messages.CLONING_TEMPLATE, originalName);
+            RelatedTask = VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(originalName));
             PollToCompletion(0, 80);
 
             string new_vm_ref = Result;
@@ -75,19 +77,23 @@ namespace XenAdmin.Actions.VMActions
 
             XenAdminConfigManager.Provider.HideObject(new_vm_ref);
 
-            RelatedTask = XenAPI.VM.async_provision(Session, new_vm_ref);
+            Description = Messages.PROVISIONING_VM;
+            RelatedTask = VM.async_provision(Session, new_vm_ref);
             PollToCompletion(80, 90);
 
-            VM.set_name_label(Session, new_vm_ref, _nameLabel);
+            Description = Messages.SAVING_VM_PROPERTIES_ACTION_TITLE;
+            var newName = Helpers.DefaultVMName(originalName, Connection);
+            VM.set_name_label(Session, new_vm_ref, newName);
             XenAdminConfigManager.Provider.ShowObject(new_vm_ref);
 
             if (_markVmAsBeingCreated)
             {
-                VM.name_label = _nameLabel; //the set_name_label method takes some time, we want to show the VM right away
+                VM.name_label = newName; //the set_name_label method takes some time, we want to show the VM right away
                 VM.IsBeingCreated = false;
             }
 
             Result = new_vm_ref;
+            Description = string.Format(Messages.INSTANT_VM_CREATE_DESC_COMPLETED, newName);
         }
     }
 }
