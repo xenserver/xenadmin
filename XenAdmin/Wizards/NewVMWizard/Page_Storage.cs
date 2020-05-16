@@ -149,6 +149,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     if (vdi == null)
                         continue;
 
+                    var sourceSr = Connection.Resolve(vdi.SR);
+
                     var device = new VBD
                     {
                         userdevice = vbd.userdevice,
@@ -170,7 +172,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                         SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef)
                     };
 
-                    var row = new DiskGridRowItem(Connection, disk, device, DiskSource.FromCustomTemplate);
+                    var row = new DiskGridRowItem(Connection, disk, device, DiskSource.FromCustomTemplate, sourceSr);
                     row.UpdateStatus(icon, tooltip);
                     rowList.Add(row);
                 }
@@ -554,17 +556,14 @@ namespace XenAdmin.Wizards.NewVMWizard
         public bool HasError => Disk.SR.opaque_ref == Helper.NullOpaqueRef ||
                                 Cells.Count > 0 && Cells[0].Value == Images.StaticImages._000_error_h32bit_16;
 
-        public DiskGridRowItem(IXenConnection connection, VDI vdi, VBD vbd, DiskSource src)
+        public DiskGridRowItem(IXenConnection connection, VDI vdi, VBD vbd, DiskSource src, SR sourceSr = null)
         {
+            _connection = connection;
             Disk = vdi;
             Device = vbd;
-            _connection = connection;
+            SourceSR = sourceSr;
 
-            if (src == DiskSource.FromCustomTemplate)
-            {
-                SourceSR = _connection.Resolve(vdi.SR);
-            }
-            else
+            if (src != DiskSource.FromCustomTemplate)
             {
                 CanDelete = Disk.type == vdi_type.user;
                 CanResize = true;
