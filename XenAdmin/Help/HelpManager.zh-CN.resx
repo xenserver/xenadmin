@@ -174,6 +174,9 @@
   <data name="CancelActionDialog" xml:space="preserve">
     <value>troubleshooting-bugtool</value>
   </data>
+  <data name="CertificateAlert" xml:space="preserve">
+    <value>hosts-certificates</value>
+  </data>
   <data name="CertificateChangedDialog" xml:space="preserve">
     <value>hosts-reconnect</value>
   </data>
@@ -581,6 +584,9 @@
   </data>
   <data name="ImportWizard_VMConfigPane" xml:space="preserve">
     <value>vms-importdiskimage</value>
+  </data>
+  <data name="InstallCertificate" xml:space="preserve">
+    <value>hosts-certificates</value>
   </data>
   <data name="InstallToolsWarningDialog" xml:space="preserve">
     <value>vms-installtools</value>
@@ -1142,5 +1148,8 @@
   </data>
   <data name="XenServerUpdateAlert" xml:space="preserve">
     <value>updates-applying</value>
+  </data>
+  <data name="StorageReadCaching" xml:space="preserve">
+    <value>storage-readcaching</value>
   </data>
 </root>

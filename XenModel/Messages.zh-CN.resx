@@ -603,6 +603,9 @@
   <data name="ACTION_ISCSI_IQN_SCANNING" xml:space="preserve">
     <value>正在 iSCSI 文件管理器 {0} 上扫描 IQN</value>
   </data>
+  <data name="ACTION_ISCSI_IQN_SCANNING_GFS2" xml:space="preserve">
+    <value>不支持使用 CHAP 身份验证的精简预配(GFS2) SR。</value>
+  </data>
   <data name="ACTION_ISCSI_LUN_SCANNING" xml:space="preserve">
     <value>正在 iSCSI 文件管理器 {0} 上扫描 LUN</value>
   </data>
@@ -2518,6 +2521,66 @@
   <data name="CD_DRIVE" xml:space="preserve">
     <value>{0} 上的 DVD 驱动器</value>
   </data>
+  <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>服务器“{0}”的 TLS 证书已于 {1} 过期。</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>证书已于 {0} 过期</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>服务器“{0}”的 TLS 证书将于 {1} 过期。</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>{0} 上的证书将在 {1} 天后过期</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>{0} 上的证书将在 {1} 小时后过期</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>{0} 上的证书将在 {1} 分钟后过期</value>
+  </data>
+  <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
+    <value>TLS 证书文件 (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_FAILURE" xml:space="preserve">
+    <value>证书安装失败。</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_FAILURE_GENERIC" xml:space="preserve">
+    <value>证书安装失败。
+{0}</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_SUCCESS" xml:space="preserve">
+    <value>证书安装已成功完成。</value>
+  </data>
+  <data name="CERTIFICATE_INVALID" xml:space="preserve">
+    <value>无效的 TLS 证书文件 {0}</value>
+  </data>
+  <data name="CERTIFICATE_KEY_FILETYPES" xml:space="preserve">
+    <value>TLS 密钥文件 (*.pem;*.key)|*.pem;*.key</value>
+  </data>
+  <data name="CERTIFICATE_KEY_INVALID" xml:space="preserve">
+    <value>选定的 TLS 密钥文件无效。</value>
+  </data>
+  <data name="CERTIFICATE_RBAC_RESTRICTION" xml:space="preserve">
+    <value>{0} 用户的权限不足，无法在服务器上安装证书。请使用具有以下角色之一的帐户登录:
+
+{1}</value>
+  </data>
+  <data name="CERTIFICATE_SELECT_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>选择 TLS 证书文件</value>
+  </data>
+  <data name="CERTIFICATE_SELECT_KEY_TITLE" xml:space="preserve">
+    <value>选择 TLS 密钥文件</value>
+  </data>
+  <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
+    <value>指纹</value>
+  </data>
+  <data name="CERTIFICATE_VALIDITY_PERIOD_KEY" xml:space="preserve">
+    <value>有效期</value>
+  </data>
+  <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
+    <value>有效期从 {0} 到 {1}</value>
+  </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>能够下载更新</value>
   </data>
@@ -2598,6 +2661,12 @@
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>主机内存检查</value>
   </data>
+  <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
+    <value>开机模式检查</value>
+  </data>
+  <data name="CHECKING_POWER_ON_MODE_GROUP" xml:space="preserve">
+    <value>检查开机模式</value>
+  </data>
   <data name="CHECKING_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>正在检查主机升级准备情况</value>
   </data>
@@ -2615,6 +2684,12 @@
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>主机分区布局检查</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL" xml:space="preserve">
+    <value>安全协议检查</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
+    <value>检查安全协议</value>
   </data>
   <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
     <value>vSwitch Controller 检查</value>
@@ -3430,7 +3505,7 @@
   </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_OVERCOMMIT" xml:space="preserve">
     <value>SR 过度使用</value>
-  </data> 
+  </data>
   <data name="CONVERSION_STORAGE_PAGE_SR_TOO_SMALL" xml:space="preserve">
     <value>此 SR 上的可用空间不足</value>
   </data>
@@ -4321,9 +4396,6 @@
   <data name="DETACHED_BRACKETS" xml:space="preserve">
     <value>{0} (已分离)</value>
   </data>
-  <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
-    <value>[XenCenter] 检测到此 LUN 上已存在 SR。此 SR 当前未由“{0}”使用，是否要连接?</value>
-  </data>
   <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
     <value>全部分离(&amp;D)</value>
   </data>
@@ -5150,6 +5222,9 @@
   <data name="EMPTY" xml:space="preserve">
     <value>&lt;空&gt;</value>
   </data>
+  <data name="EMPTY_KEY" xml:space="preserve">
+    <value>空键</value>
+  </data>
   <data name="EMPTY_LIST_DISK_SNAPSHOTS" xml:space="preserve">
     <value>没有关联的虚拟磁盘或快照</value>
   </data>
@@ -5494,11 +5569,6 @@
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>用户已取消。需要先升级主服务器。</value>
-  </data>
-  <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
-    <value>在所选 LUN 上找到现有 {0} SR。请单击“重新连接”以使用现有 SR，或者单击“格式化”以销毁磁盘上现有的任何数据并创建一个新 {1} SR。
-
-警告: 为避免数据丢失，必须确保该 LUN 未由其他任何系统(包括未连接到 [XenCenter] 的服务器)使用。</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>退出维护模式(&amp;M)</value>
@@ -6784,6 +6854,9 @@
   <data name="HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING" xml:space="preserve">
     <value>{0}: 池中的一个或多个服务器未获许可，无法应用自动更新</value>
   </data>
+  <data name="HOST_UNREACHABLE" xml:space="preserve">
+    <value>此服务器无法访问。</value>
+  </data>
   <data name="HOST_X" xml:space="preserve">
     <value>主机“{0}”:</value>
   </data>
@@ -6990,9 +7063,6 @@
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI" xml:space="preserve">
     <value>请指定一个有效的 URI。</value>
-  </data>
-  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH" xml:space="preserve">
-    <value>路径不存在。</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NOT_SUPPORTED" xml:space="preserve">
     <value>所选文件不是有效的设备文件。</value>
@@ -7256,6 +7326,9 @@
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
     <value>已在此 VM 上安装 [Citrix VM Tools]。</value>
   </data>
+  <data name="INSTALLTOOLS_READ_MORE" xml:space="preserve">
+    <value>阅读有关安装 [Citrix VM Tools] 的更多信息</value>
+  </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
     <value>正在启动 [Citrix VM Tools] 安装。</value>
   </data>
@@ -7271,14 +7344,29 @@
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>安装待定更新(&amp;U)...</value>
   </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
+    <value>安装证书...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
+    <value>安装证书(&amp;F)...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
+    <value>正在安装服务器证书...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_HA" xml:space="preserve">
+    <value>启用了高可用性时，无法安装服务器证书。</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_MENU" xml:space="preserve">
+    <value>安装证书(&amp;I)...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>正在服务器 {0} 上安装证书...</value>
+  </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
     <value>安装 [Citrix VM Tools]</value>
   </data>
-  <data name="INSTALL_XENSERVER_TOOLS_DOTS" xml:space="preserve">
-    <value>安装 [Citrix VM Tools]...</value>
-  </data>
-  <data name="INSTALL_XS_TOOLS" xml:space="preserve">
-    <value>安装 [Citrix VM Tools]</value>
+  <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
+    <value>安装 [Citrix VM Tools](&amp;I)</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
     <value>正在从模板“{1}”创建 VM“{0}”</value>
@@ -7305,7 +7393,7 @@
     <value>磁盘大小无效</value>
   </data>
   <data name="INVALID_HOST" xml:space="preserve">
-    <value>主机名无效</value>
+    <value>目标主机无效。</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>数值无效</value>
@@ -7364,12 +7452,6 @@
   <data name="ISCSI_DIALOG_SR_DETAILS" xml:space="preserve">
     <value>SR 大小: {0}
 SR UUID: {1}</value>
-  </data>
-  <data name="ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL" xml:space="preserve">
-    <value>供应商: {0}
-序列号: {1}
-SCSI ID: {2}
-大小: {3}</value>
   </data>
   <data name="ISCSI_FAIL" xml:space="preserve">
     <value>询问失败 -- 呼叫成功!</value>
@@ -8868,11 +8950,6 @@ SCSI ID: {2}
   <data name="NEWSR_ISCSI_DESCRIPTION" xml:space="preserve">
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
-  <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>在此 LUN 中创建新虚拟磁盘将销毁其中的所有数据。必须确保没有其他系统正在使用该 LUN (包括任何服务器)，否则虚拟磁盘在使用时可能会被损坏。
-
-是否要格式化磁盘?</value>
-  </data>
   <data name="NEWSR_ISO_DESCRIPTION" xml:space="preserve">
     <value>NFS ISO 库 [{0}]</value>
   </data>
@@ -9244,6 +9321,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>由模板设置程序创建</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
+    <value>在 VM 的主服务器中看不到默认 SR“{0}”。</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME" xml:space="preserve">
     <value>没有主服务器的 VM 在默认 SR“{0}”上不能有磁盘。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
@@ -9253,6 +9333,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>存储</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
+    <value>在 VM 的主服务器中看不到模板({0})建议的 SR。</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME" xml:space="preserve">
     <value>没有主服务器的 VM 在模板({0})建议的 SR 上不能有磁盘。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
@@ -9581,11 +9664,20 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_READ" xml:space="preserve">
     <value>警报</value>
   </data>
+  <data name="NOTIFICATIONS_SUBMODE_ALERTS_STATUS" xml:space="preserve">
+    <value>警报: {0}</value>
+  </data>
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_UNREAD" xml:space="preserve">
     <value>警报({0})</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>事件</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
+    <value>事件: {0} 个错误</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
+    <value>事件: 1 个错误</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>事件({0} 个错误)</value>
@@ -9595,6 +9687,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
     <value>更新</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>更新: {0}</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
     <value>更新({0})</value>
@@ -10029,6 +10124,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>选择更新文件</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO" xml:space="preserve">
+    <value>您选择的文件是基本安装 ISO 文件，不能用于更新系统。请选择一个更新 ISO 文件，或者改为使用“滚动池升级”向导升级到新版本。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TEXT" xml:space="preserve">
     <value>选择更新</value>
   </data>
@@ -10061,9 +10159,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>池中的一个或多个服务器未获许可，无法应用自动更新</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
-    <value>此服务器无法访问</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
     <value>必须先升级池中的一个或多个服务器，[XenCenter] 才能应用选定的新版本。</value>
@@ -10191,14 +10286,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
     <value>{0} 正常。</value>
   </data>
+  <data name="PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK" xml:space="preserve">
+    <value>{0}: {1} 正常。</value>
+  </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>将删除修补程序 {0}。是否继续?</value>
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
-    <value>{0}: {1} 正常。</value>
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
@@ -10250,6 +10345,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>更新已上载到服务器“{0}” </value>
+  </data>
+  <data name="PATH_DOES_NOT_EXIST" xml:space="preserve">
+    <value>路径不存在。</value>
+  </data>
+  <data name="PATH_DOES_NOT_EXIST_PLACEHOLDER" xml:space="preserve">
+    <value>路径 {0} 不存在。</value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA 版本 1 (ova.xml)|ova.xml</value>
@@ -10547,6 +10648,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="POWER_ON" xml:space="preserve">
     <value>开机</value>
   </data>
+  <data name="POWER_ON_CUSTOM_MODE_ERROR" xml:space="preserve">
+    <value>请指定脚本名称</value>
+  </data>
   <data name="POWER_ON_REQUEST_FAILED" xml:space="preserve">
     <value>{0} 的开机请求失败。请检查网络连接。</value>
   </data>
@@ -10570,6 +10674,18 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>服务器“{0}”</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_DESCRIPTION" xml:space="preserve">
+    <value>{0}: 截至 {1}，对早于 TLS 1.2 的协议的支持已删除</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_HELP" xml:space="preserve">
+    <value>禁用旧版协议</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_POOL" xml:space="preserve">
+    <value>如果要升级到 {0} 及更高版本，您将无法使用 TLS 1.2 之前的安全协议与池进行通信，并且您可能会永久失去对该池的访问权限。</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
+    <value>如果要升级到 {0} 及更高版本，您将无法使用 TLS 1.2 之前的安全协议与服务器进行通信，并且您可能会永久失去对该服务器的访问权限。</value>
   </data>
   <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
     <value>{0}: 已在 {1} 中删除了对 vSwitch Controller 的支持。</value>
@@ -10604,19 +10720,22 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>池“{0}”</value>
   </data>
+  <data name="PROBLEM_POWER_ON_ILO_DESCRIPTION" xml:space="preserve">
+    <value>{0}: 截至 {1}，对开机模式 iLO 的支持已删除</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_HELP" xml:space="preserve">
+    <value>禁用开机模式 iLO</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_INFO" xml:space="preserve">
+    <value>如果要升级到 {0} 及更高版本，您将无法使用 Hewlett-Packard Integrated Lights-Out (iLO)功能远程打开服务器电源。</value>
+  </data>
   <data name="PROBLEM_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>请确保指定的网络位置可从服务器进行查看，且包含适用版本的安装程序文件。
 
 如果您需要返回并指定其他网络位置或选择另外一组要升级的服务器，请单击“上一步”。</value>
   </data>
-  <data name="PROBLEM_SRPROBLEM_TITLE" xml:space="preserve">
-    <value>SR“{0}”</value>
-  </data>
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>尝试连接到 StorageLink Gateway 时出错: \n\n{0}\n\n请检查此主机的设置并重新连接。</value>
-  </data>
-  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>StorageLink SR 的使用已被弃用。请在升级之前删除 StorageLink SR。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -10858,6 +10977,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>权限为“{0}”的用户无法更改内存值，将被限定使用模板上的设置。</value>
+  </data>
+  <data name="READ_CACHING" xml:space="preserve">
+    <value>读缓存</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>只读</value>
@@ -11377,11 +11499,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>仅限 TLS 1.2</value>
   </data>
+  <data name="SECURITYEDITPAGE_WARNING_HOST" xml:space="preserve">
+    <value>更改此设置将导致您暂时失去对服务器的访问权限。</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>安全检查</value>
   </data>
   <data name="SECURITY_DESC" xml:space="preserve">
-    <value>SSL 证书选项</value>
+    <value>证书选项</value>
   </data>
   <data name="SECURITY_GROUPS" xml:space="preserve">
     <value>安全组</value>
@@ -11394,6 +11519,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SELECT_DEFAULT_SR" xml:space="preserve">
     <value>选择默认 SR</value>
+  </data>
+  <data name="SELECT_LICENSE_KEY" xml:space="preserve">
+    <value>选择许可证密钥</value>
   </data>
   <data name="SELECT_NETWORK_TOOLTIP" xml:space="preserve">
     <value>没有可供该网络接口使用的网络</value>
@@ -11876,10 +12004,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 上限: SR 大小/{2}</value>
   </data>
   <data name="SR_REFRESH_ACTION_DESC" xml:space="preserve">
-    <value>正在扫描 SR</value>
+    <value>正在扫描 SR“{0}”...</value>
   </data>
   <data name="SR_REFRESH_ACTION_TITLE" xml:space="preserve">
     <value>正在扫描 SR“{0}”</value>
+  </data>
+  <data name="SR_REFRESH_ACTION_TITLE_MANY" xml:space="preserve">
+    <value>正在扫描可用的 SR...</value>
   </data>
   <data name="SR_SHARE_REVERTED" xml:space="preserve">
     <value>将 {0} 还原为非共享已完成。</value>
@@ -11994,9 +12125,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>存在需要重新连接的 StorageLink Gateway SR。</value>
-  </data>
-  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
-    <value>StorageLink SR 状态</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>存储池</value>
@@ -14412,6 +14540,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[Citrix VM Tools] DVD 现在将插入每个选定 VM 的 DVD 驱动器中。驱动器中当前的任何磁盘都将被弹出。
 
 您将需要导航到每个选定 VM 上的控制台才能完成安装。</value>
+  </data>
+  <data name="XS_TOOLS_MESSAGE_ONE_VM" xml:space="preserve">
+    <value>是否希望 [XenCenter] 将 [Citrix VM Tools] DVD 插入 VM 的 DVD 驱动器中并将您引导至 VM 的控制台?
+
+安装 [Citrix VM Tools] 时将弹出 VM 的 DVD 驱动器中的任何磁盘。</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
     <value>找不到 [Citrix VM Tools] SR。</value>

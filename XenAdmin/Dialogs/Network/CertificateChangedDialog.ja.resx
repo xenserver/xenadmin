@@ -160,7 +160,7 @@
     <value>0</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>'{0}' の SSL セキュリティ証明書は、前回接続時のものから変更されています。</value>
+    <value>'{0}' のセキュリティ証明書は、前回接続時のものから変更されています。</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
