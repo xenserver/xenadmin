@@ -342,6 +342,9 @@
   <data name="checkBoxOption.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 52</value>
   </data>
+  <data name="checkBoxOption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
   <data name="checkBoxOption.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 19</value>
   </data>
@@ -374,6 +377,9 @@
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 46</value>
+  </data>
+  <data name="linkLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 10</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 15</value>

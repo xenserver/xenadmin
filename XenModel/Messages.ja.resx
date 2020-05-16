@@ -603,6 +603,9 @@
   <data name="ACTION_ISCSI_IQN_SCANNING" xml:space="preserve">
     <value>iSCSI ファイラ {0} での IQN のスキャン</value>
   </data>
+  <data name="ACTION_ISCSI_IQN_SCANNING_GFS2" xml:space="preserve">
+    <value>CHAP 認証を使用したシン プロビジョニング (GFS2) SR はサポートされていません。</value>
+  </data>
   <data name="ACTION_ISCSI_LUN_SCANNING" xml:space="preserve">
     <value>iSCSI ファイラ {0} での LUN のスキャン</value>
   </data>
@@ -2522,6 +2525,66 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CD_DRIVE" xml:space="preserve">
     <value>{0} の DVD ドライブ</value>
   </data>
+  <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>サーバー '{0}' の TLS 証明書は、{1} に有効期限が切れました。</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>{0} の証明書の有効期限が切れました</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>サーバー '{0}' の TLS 証明書は、{1} に期限切れになります。</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>{0} の証明書は、あと {1} 日で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>{0} の証明書は、あと {1} 時間で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>{0} の証明書は、あと {1} 分で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
+    <value>TLS 証明書ファイル (*.pem、*.crt、*.cer)|*.pem;*.crt;*.cer</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_FAILURE" xml:space="preserve">
+    <value>証明書のインストールに失敗しました。</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_FAILURE_GENERIC" xml:space="preserve">
+    <value>証明書のインストールに失敗しました。
+{0}</value>
+  </data>
+  <data name="CERTIFICATE_INSTALLATION_SUCCESS" xml:space="preserve">
+    <value>証明書のインストールは正常に完了しました。</value>
+  </data>
+  <data name="CERTIFICATE_INVALID" xml:space="preserve">
+    <value>無効な TLS 証明書ファイル {0}</value>
+  </data>
+  <data name="CERTIFICATE_KEY_FILETYPES" xml:space="preserve">
+    <value>TLS キーファイル (*.pem、*.key)|*.pem;*.key</value>
+  </data>
+  <data name="CERTIFICATE_KEY_INVALID" xml:space="preserve">
+    <value>選択した TLS キー ファイルが無効です。</value>
+  </data>
+  <data name="CERTIFICATE_RBAC_RESTRICTION" xml:space="preserve">
+    <value>{0} ユーザーには、サーバーに証明書をインストールするための権限がありません。以下のいずれかの役割を持つアカウントを使用してログインしてください:
+
+{1}</value>
+  </data>
+  <data name="CERTIFICATE_SELECT_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>TLS 証明書ファイルの選択</value>
+  </data>
+  <data name="CERTIFICATE_SELECT_KEY_TITLE" xml:space="preserve">
+    <value>TLS キー ファイルの選択</value>
+  </data>
+  <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
+    <value>拇印</value>
+  </data>
+  <data name="CERTIFICATE_VALIDITY_PERIOD_KEY" xml:space="preserve">
+    <value>有効期間</value>
+  </data>
+  <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
+    <value>{0} から {1} まで有効</value>
+  </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>アップデートをダウンロードする機能</value>
   </data>
@@ -2602,6 +2665,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>ホストのメモリをチェック</value>
   </data>
+  <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
+    <value>電源投入モード チェック</value>
+  </data>
+  <data name="CHECKING_POWER_ON_MODE_GROUP" xml:space="preserve">
+    <value>電源投入モードのチェック</value>
+  </data>
   <data name="CHECKING_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>ホストのアップグレードの準備をチェックしています</value>
   </data>
@@ -2619,6 +2688,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CHECKING_SAFE_TO_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>ホストのパーティション レイアウトの確認</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL" xml:space="preserve">
+    <value>セキュリティ プロトコル チェック</value>
+  </data>
+  <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
+    <value>セキュリティ プロトコルのチェック</value>
   </data>
   <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
     <value>vSwitch コントローラー チェック</value>
@@ -4327,9 +4402,6 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DETACHED_BRACKETS" xml:space="preserve">
     <value>{0} (接続解除)</value>
   </data>
-  <data name="DETACHED_ISCI_DETECTED" xml:space="preserve">
-    <value>この LUN には既に SR が存在します。現在 '{0}' ではこの SR を使用していません。接続しますか?</value>
-  </data>
   <data name="DETACH_ALL_BUTTON_LABEL" xml:space="preserve">
     <value>すべて接続解除(&amp;D)</value>
   </data>
@@ -5156,6 +5228,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EMPTY" xml:space="preserve">
     <value>&lt;なし&gt;</value>
   </data>
+  <data name="EMPTY_KEY" xml:space="preserve">
+    <value>空のキー</value>
+  </data>
   <data name="EMPTY_LIST_DISK_SNAPSHOTS" xml:space="preserve">
     <value>関連付けられた仮想ディスクまたはスナップショットがありません</value>
   </data>
@@ -5500,11 +5575,6 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>キャンセルされました。最初にマスターをアップグレードしてください。</value>
-  </data>
-  <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
-    <value>選択した LUN に既存の {0} SR があります。この既存の SR を使用するには [再接続] をクリックします。[フォーマット] をクリックすると、このディスク上のすべてのデータが消去され、新しい {1} SR が作成されます。
-
-警告: データの損失を防ぐため、[XenCenter] に接続していないサーバーを含め、ほかのシステムがこの LUN を使用していないことを確認してください。</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>保守モードからの切り替え(&amp;M)</value>
@@ -6790,6 +6860,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING" xml:space="preserve">
     <value>{0}: プールの 1 つまたは複数のサーバーが自動アップデートのライセンス対象ではありません</value>
   </data>
+  <data name="HOST_UNREACHABLE" xml:space="preserve">
+    <value>サーバーに到達できません.</value>
+  </data>
   <data name="HOST_X" xml:space="preserve">
     <value>ホスト '{0}':</value>
   </data>
@@ -6996,9 +7069,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI" xml:space="preserve">
     <value>有効な URI を指定してください。</value>
-  </data>
-  <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH" xml:space="preserve">
-    <value>パスが存在しません。</value>
   </data>
   <data name="IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NOT_SUPPORTED" xml:space="preserve">
     <value>選択したファイルは有効なアプライアンス ファイルではありません。</value>
@@ -7261,6 +7331,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
     <value>[Citrix VM Tools] は、この VM に既にインストールされています。</value>
   </data>
+  <data name="INSTALLTOOLS_READ_MORE" xml:space="preserve">
+    <value>[Citrix VM Tools] のインストールの詳細情報</value>
+  </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
     <value>[Citrix VM Tools] のインストール プログラムを開始しています。</value>
   </data>
@@ -7276,14 +7349,29 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>保留中のアップデートのインストール(&amp;U)...</value>
   </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
+    <value>証明書のインストール...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
+    <value>証明書のインストール(&amp;F)...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
+    <value>サーバー証明書をインストールしています...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_HA" xml:space="preserve">
+    <value>高可用性がオンになっている場合は、サーバー証明書をインストールできません。</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_MENU" xml:space="preserve">
+    <value>証明書のインストール(&amp;I)...</value>
+  </data>
+  <data name="INSTALL_SERVER_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>サーバー {0} に証明書をインストールしています...</value>
+  </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
     <value>[Citrix VM Tools] をインストール</value>
   </data>
-  <data name="INSTALL_XENSERVER_TOOLS_DOTS" xml:space="preserve">
-    <value>[Citrix VM Tools] をインストール...</value>
-  </data>
-  <data name="INSTALL_XS_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] をインストール</value>
+  <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
+    <value>[Citrix VM Tools] をインストール(&amp;I)</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
     <value>テンプレート '{1}' からの VM '{0}' の作成</value>
@@ -7310,7 +7398,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>無効なディスク サイズ</value>
   </data>
   <data name="INVALID_HOST" xml:space="preserve">
-    <value>無効なホスト名</value>
+    <value>無効なターゲット ホストです。</value>
   </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>無効な数</value>
@@ -7369,12 +7457,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="ISCSI_DIALOG_SR_DETAILS" xml:space="preserve">
     <value>SR サイズ: {0}
 SR UUID: {1}</value>
-  </data>
-  <data name="ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL" xml:space="preserve">
-    <value>ベンダ: {0}
-シリアル番号: {1}
-SCSI ID: {2}
-サイズ: {3}</value>
   </data>
   <data name="ISCSI_FAIL" xml:space="preserve">
     <value>呼び出しに失敗しました -- 正常にコールされました。</value>
@@ -8363,7 +8445,7 @@ SCSI ID: {2}
     <value>[XenCenter] - エラー</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL" xml:space="preserve">
-    <value>サーバー '{0}' に再接続できません。サーバーが使用可能ではありません。</value>
+    <value>{0} に再接続できません。サーバーが使用可能ではありません。</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL_TITLE" xml:space="preserve">
     <value>再接続エラー</value>
@@ -8873,11 +8955,6 @@ SMB ストレージ リポジトリを構成する場合は、SMB サーバー�
   <data name="NEWSR_ISCSI_DESCRIPTION" xml:space="preserve">
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
-  <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>このLUN に仮想ディスクを作成すると、保存されているデータが失われます。サーバーを含むほかのシステムが LUN を使用していないことを確認してください。LUN が使用されていると、仮想ディスクが破損する場合があります。
-
-ディスクをフォーマットしてもよろしいですか?</value>
-  </data>
   <data name="NEWSR_ISO_DESCRIPTION" xml:space="preserve">
     <value>NFS ISO ライブラリ [{0}]</value>
   </data>
@@ -9245,6 +9322,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>テンプレートによるプロビジョニング</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
+    <value>デフォルトの SR '{0}' は、VM のホーム サーバーからアクセスできません。</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL_NO_HOME" xml:space="preserve">
     <value>ホーム サーバーが設定されていない VM はデフォルトの SR '{0}' にディスクを持つことはできません。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
@@ -9254,6 +9334,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>ストレージ</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
+    <value>テンプレートが示す SR ('{0}') は、VM のホーム サーバーからアクセスできません。</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL_NO_HOME" xml:space="preserve">
     <value>ホームサーバーのない VM は、テンプレート ('{0}') が示す SR 上にディスクを持つことはできません。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
@@ -9582,11 +9665,20 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_READ" xml:space="preserve">
     <value>アラート</value>
   </data>
+  <data name="NOTIFICATIONS_SUBMODE_ALERTS_STATUS" xml:space="preserve">
+    <value>アラート: {0} 個</value>
+  </data>
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_UNREAD" xml:space="preserve">
     <value>アラート ({0})</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>イベント</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
+    <value>イベント: {0} 個のエラー</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
+    <value>イベント: 1 個のエラー</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>イベント ({0} 個のエラー)</value>
@@ -9596,6 +9688,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
     <value>アップデート</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>アップデート: {0} 個</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
     <value>アップデート ({0})</value>
@@ -10030,6 +10125,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>アップデート ファイルの選択</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO" xml:space="preserve">
+    <value>選択したファイルは基本インストール用の ISO ファイルであるため、システムの更新に使用できません。アップデート用の ISO ファイルを選択するか、プールのローリング アップグレード ウィザードを使用して新しいバージョンにアップグレードしてください。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TEXT" xml:space="preserve">
     <value>アップデートの選択</value>
   </data>
@@ -10062,9 +10160,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>プールの 1 つまたは複数のサーバーが自動アップデートのライセンス対象ではありません</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
-    <value>サーバーに到達できません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
     <value>[XenCenter] が選択した新しいバージョンを適用する前に、プールの 1 つまたは複数のサーバーをアップグレードする必要があります。</value>
@@ -10192,14 +10287,14 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
     <value>{0}: OK。</value>
   </data>
+  <data name="PATCHING_WIZARD_CHECK_ON_XENOBJECT_OK" xml:space="preserve">
+    <value>{0}: {1} OK。</value>
+  </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>パッチ {0} を削除します。続行しますか?</value>
   </data>
   <data name="PATCHING_WIZARD_DESC_CELL_INDENT" xml:space="preserve">
     <value>{0,4}{1}</value>
-  </data>
-  <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
-    <value>{0}: {1} OK。</value>
   </data>
   <data name="PATCHING_WIZARD_PRECHECK_STATUS" xml:space="preserve">
     <value>{0} ...</value>
@@ -10251,6 +10346,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>アップデートがサーバー '{0}' にアップロードされました </value>
+  </data>
+  <data name="PATH_DOES_NOT_EXIST" xml:space="preserve">
+    <value>パスが存在しません。</value>
+  </data>
+  <data name="PATH_DOES_NOT_EXIST_PLACEHOLDER" xml:space="preserve">
+    <value>パス {0} は存在しません。</value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml</value>
@@ -10548,6 +10649,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="POWER_ON" xml:space="preserve">
     <value>電源投入</value>
   </data>
+  <data name="POWER_ON_CUSTOM_MODE_ERROR" xml:space="preserve">
+    <value>スクリプト名を指定してください</value>
+  </data>
   <data name="POWER_ON_REQUEST_FAILED" xml:space="preserve">
     <value>{0} の電源投入要求に失敗しました。ネットワーク接続を確認してください。</value>
   </data>
@@ -10571,6 +10675,18 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>サーバー '{0}'</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_DESCRIPTION" xml:space="preserve">
+    <value>{0}: TLS 1.2 より前のプロトコルは {1} 以降サポートされなくなりました</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_HELP" xml:space="preserve">
+    <value>従来のプロトコルの無効化</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_POOL" xml:space="preserve">
+    <value>{0} 以降にアップグレードする場合、プールとの通信に TLS 1.2 より前のセキュリティ プロトコルを使用できなくなり、プールに完全にアクセスできなくなる可能性があります。</value>
+  </data>
+  <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
+    <value>{0} 以降にアップグレードする場合、サーバーとの通信に TLS 1.2 より前のセキュリティ プロトコルを使用できなくなり、サーバーに完全にアクセスできなくなる可能性があります。</value>
   </data>
   <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
     <value>{0}: vSwitch コントローラーは、{1} ではサポートされません。</value>
@@ -10605,19 +10721,22 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>プール '{0}'</value>
   </data>
+  <data name="PROBLEM_POWER_ON_ILO_DESCRIPTION" xml:space="preserve">
+    <value>{0}: 電源投入モードにおいて iLO は {1} 以降サポートされなくなりました</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_HELP" xml:space="preserve">
+    <value>電源投入モード iLO の無効化</value>
+  </data>
+  <data name="PROBLEM_POWER_ON_ILO_INFO" xml:space="preserve">
+    <value>{0} 以降にアップグレードする場合、Hewlett-Packard Integrated Lights-Out (iLO) 機能を使用してリモートでサーバーの電源を投入することはできません。</value>
+  </data>
   <data name="PROBLEM_PREPARE_TO_UPGRADE" xml:space="preserve">
     <value>指定されたネットワークの場所がサーバーで表示され、使用できるバージョンのインストール ファイルが含まれていることを確認してください。
 
 別のネットワークの場所を指定する場合、または別のサーバーをアップグレードする場合は、[前へ] をクリックして前に戻ります。</value>
   </data>
-  <data name="PROBLEM_SRPROBLEM_TITLE" xml:space="preserve">
-    <value>SR '{0}'</value>
-  </data>
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>以下の StorageLink Gateway への接続時にエラーが発生しました。\n\n{0}\n\nこのホストの設定を確認して再接続してください。</value>
-  </data>
-  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>StorageLink SR を使用することはできません。StorageLink SR を削除してからアップグレードしてください。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -10859,6 +10978,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
     <value>{0} はメモリ サイズを変更できません。テンプレートで指定されている設定に制限されます</value>
+  </data>
+  <data name="READ_CACHING" xml:space="preserve">
+    <value>キャッシュの読み取り</value>
   </data>
   <data name="READ_ONLY" xml:space="preserve">
     <value>読み取り専用</value>
@@ -11378,11 +11500,14 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SECURITYEDITPAGE_SUBTEXT_TLS" xml:space="preserve">
     <value>TLS 1.2 のみ</value>
   </data>
+  <data name="SECURITYEDITPAGE_WARNING_HOST" xml:space="preserve">
+    <value>この設定を変更すると、一時的にサーバーにアクセスできなくなります。</value>
+  </data>
   <data name="SECURITY_CHECKS" xml:space="preserve">
     <value>セキュリティ チェック</value>
   </data>
   <data name="SECURITY_DESC" xml:space="preserve">
-    <value>SSL 証明書のオプション</value>
+    <value>証明書のオプション</value>
   </data>
   <data name="SECURITY_GROUPS" xml:space="preserve">
     <value>セキュリティ グループ</value>
@@ -11395,6 +11520,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="SELECT_DEFAULT_SR" xml:space="preserve">
     <value>デフォルト SR の選択</value>
+  </data>
+  <data name="SELECT_LICENSE_KEY" xml:space="preserve">
+    <value>ライセンス キーの選択</value>
   </data>
   <data name="SELECT_NETWORK_TOOLTIP" xml:space="preserve">
     <value>このネットワーク インターフェイスで使用できるネットワークがありません</value>
@@ -11877,10 +12005,13 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
 上限: SR サイズ/{2}</value>
   </data>
   <data name="SR_REFRESH_ACTION_DESC" xml:space="preserve">
-    <value>SR のスキャン</value>
+    <value>SR '{0}' をスキャンしています...</value>
   </data>
   <data name="SR_REFRESH_ACTION_TITLE" xml:space="preserve">
     <value>SR '{0}' のスキャン</value>
+  </data>
+  <data name="SR_REFRESH_ACTION_TITLE_MANY" xml:space="preserve">
+    <value>使用可能な SR をスキャンしています ...</value>
   </data>
   <data name="SR_SHARE_REVERTED" xml:space="preserve">
     <value>{0} を非共有に戻しました。</value>
@@ -11995,9 +12126,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="STORAGELINK_SR_NEEDS_REATTACH" xml:space="preserve">
     <value>再接続が必要な StorageLink Gateway SR があります。</value>
-  </data>
-  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
-    <value>StorageLink SR 状態</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>ストレージ プール</value>
@@ -14415,6 +14543,11 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>選択した各 VM の DVD ドライブに [Citrix VM Tools] DVD が挿入されます。これらのドライブに挿入されているディスクはすべてイジェクトされます。
 
 各 VM のコンソールを使用して、インストールを完了してください。</value>
+  </data>
+  <data name="XS_TOOLS_MESSAGE_ONE_VM" xml:space="preserve">
+    <value>[XenCenter] によって、この仮想マシンの DVD ドライブに [Citrix VM Tools] DVD が挿入され、コンソール画面に切り替わります。よろしいですか?
+
+[Citrix VM Tools] のインストールにより、現在仮想マシンの DVD ドライブにあるディスクはすべてイジェクトされます。</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
     <value>[Citrix VM Tools] SR が見つかりません。</value>

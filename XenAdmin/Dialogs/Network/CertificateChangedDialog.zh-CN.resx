@@ -160,7 +160,7 @@
     <value>0</value>
   </data>
   <data name="BlurbLabel.Text" xml:space="preserve">
-    <value>自您上次连接后，“{0}”上的 SSL 安全证书已更改。</value>
+    <value>自您上次连接后，“{0}”上的安全证书已更改。</value>
   </data>
   <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
