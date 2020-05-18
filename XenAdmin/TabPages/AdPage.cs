@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
@@ -443,7 +442,7 @@ namespace XenAdmin.TabPages
 
         private void subject_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "roles")
+            if (e.PropertyName != "roles" && e.PropertyName != "other_config")
                 return;
 
             var subject = sender as Subject;
