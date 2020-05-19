@@ -1218,6 +1218,8 @@ namespace XenAdmin.XenSearch
 
                             if (os.Contains("debian"))
                                 return Icons.Debian;
+                            if (os.Contains("Gooroom"))
+                                return Icons.Gooroom;
                             if (os.Contains("linx"))
                                 return Icons.Linx;     
                             if (os.Contains("red"))

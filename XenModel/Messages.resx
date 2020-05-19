@@ -9371,6 +9371,9 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_TEMPLATEPAGE_DEBIAN" xml:space="preserve">
     <value>Debian</value>
   </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_GOOROOM" xml:space="preserve">
+    <value>Gooroom</value>
+  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
     <value>Linx</value>
   </data>

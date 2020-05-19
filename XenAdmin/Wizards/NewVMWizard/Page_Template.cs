@@ -307,6 +307,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_CENTOS;
                 case VM.VmTemplateType.Debian:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_DEBIAN;
+                case VM.VmTemplateType.Gooroom:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_GOOROOM;
                 case VM.VmTemplateType.Linx:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_LINX; 
                 case VM.VmTemplateType.Oracle:
@@ -354,6 +356,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.centos_16x;
                 case VM.VmTemplateType.Debian:
                     return Resources.debian_16x;
+                case VM.VmTemplateType.Gooroom:
+                    return Resources.gooroom_16x;
                 case VM.VmTemplateType.Linx:
                     return Resources.linx_16x;     
                 case VM.VmTemplateType.Oracle:
