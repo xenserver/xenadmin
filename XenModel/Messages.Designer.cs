@@ -27464,6 +27464,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gooroom.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_GOOROOM {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_GOOROOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linx.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {

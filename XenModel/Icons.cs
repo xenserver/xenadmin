@@ -105,6 +105,7 @@ namespace XenAdmin
 
         CentOS,
         Debian,
+        Gooroom,
         Linx,
         Oracle,
         RHEL,
