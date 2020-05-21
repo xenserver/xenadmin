@@ -150,24 +150,6 @@ namespace XenAPI
             return null;
         }
 
-
-        public long TotalVMSize()
-        {
-            long size = 0;
-            foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
-            {
-                if (vbd.type == vbd_type.CD)
-                    continue;
-
-                VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
-                if (vdi == null)
-                    continue;
-
-                size += vdi.physical_utilisation;
-            }
-            return size;
-        }
-
         public VBD FindVMCDROM()
         {
             if (Connection == null)

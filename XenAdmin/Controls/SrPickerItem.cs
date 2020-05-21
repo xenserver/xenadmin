@@ -39,8 +39,8 @@ namespace XenAdmin.Controls
 {
     public class SrPickerLunPerVDIItem : SrPickerVmItem
     {
-        public SrPickerLunPerVDIItem(SR sr, Host aff, long diskSize, VDI[] vdis)
-            : base(sr, aff, diskSize, vdis)
+        public SrPickerLunPerVDIItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
         {
         }
 
@@ -60,8 +60,8 @@ namespace XenAdmin.Controls
 
     public class SrPickerMigrateItem : SrPickerItem
     {
-        public SrPickerMigrateItem(SR sr, Host aff, long diskSize, VDI[] vdis)
-            : base(sr, aff, diskSize, vdis)
+        public SrPickerMigrateItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
         {
         }
 
@@ -141,8 +141,8 @@ namespace XenAdmin.Controls
 
     public class SrPickerMoveCopyItem : SrPickerItem
     {
-        public SrPickerMoveCopyItem(SR sr, Host aff, long diskSize, VDI[] vdis)
-            : base(sr, aff, diskSize, vdis)
+        public SrPickerMoveCopyItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
         {
         }
 
@@ -172,8 +172,8 @@ namespace XenAdmin.Controls
 
     public class SrPickerInstallFromTemplateItem : SrPickerItem
     {
-        public SrPickerInstallFromTemplateItem(SR sr, Host aff, long diskSize, VDI[] vdis)
-            : base(sr, aff, diskSize, vdis)
+        public SrPickerInstallFromTemplateItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
         {
         }
 
@@ -197,8 +197,8 @@ namespace XenAdmin.Controls
 
     public class SrPickerVmItem : SrPickerItem
     {
-        public SrPickerVmItem(SR sr, Host aff, long diskSize, VDI[] vdis)
-            : base(sr, aff, diskSize, vdis)
+        public SrPickerVmItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
         {
         }
 
@@ -231,12 +231,13 @@ namespace XenAdmin.Controls
         protected long DiskSize { get; private set; }
         protected readonly VDI[] existingVDIs;
 
-        protected SrPickerItem(SR sr, Host aff, long diskSize, VDI[] vdis)
+        protected SrPickerItem(SR sr, Host aff, VDI[] vdis)
         {
             existingVDIs = vdis ?? new VDI[0];
             TheSR = sr;
             Affinity = aff;
-            DiskSize = diskSize;
+            DiskSize = existingVDIs.Sum(vdi =>
+                sr.GetSRType(true) == SR.SRTypes.gfs2 ? vdi.physical_utilisation : vdi.virtual_size);
             Update();
         }
 
@@ -332,20 +333,20 @@ namespace XenAdmin.Controls
         }
 
 
-        public static SrPickerItem Create(SR sr, SrPicker.SRPickerType usage, Host aff, long diskSize, VDI[] vdis)
+        public static SrPickerItem Create(SR sr, SrPicker.SRPickerType usage, Host aff, VDI[] vdis)
         {
             switch (usage)
             {
                 case SrPicker.SRPickerType.Migrate:
-                    return new SrPickerMigrateItem(sr, aff, diskSize, vdis);
+                    return new SrPickerMigrateItem(sr, aff, vdis);
                 case SrPicker.SRPickerType.MoveOrCopy:
-                    return new SrPickerMoveCopyItem(sr, aff, diskSize, vdis);
+                    return new SrPickerMoveCopyItem(sr, aff, vdis);
                 case SrPicker.SRPickerType.InstallFromTemplate:
-                    return new SrPickerInstallFromTemplateItem(sr, aff, diskSize, vdis);
+                    return new SrPickerInstallFromTemplateItem(sr, aff, vdis);
                 case SrPicker.SRPickerType.VM:
-                    return new SrPickerVmItem(sr, aff, diskSize, vdis);
+                    return new SrPickerVmItem(sr, aff, vdis);
                 case SrPicker.SRPickerType.LunPerVDI:
-                    return new SrPickerLunPerVDIItem(sr, aff, diskSize, vdis);
+                    return new SrPickerLunPerVDIItem(sr, aff, vdis);
                 default:
                     throw new ArgumentException("There is no SRPickerItem for the type: " + usage);
             }

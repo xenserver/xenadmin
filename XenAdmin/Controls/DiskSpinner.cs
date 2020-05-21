@@ -109,6 +109,7 @@ namespace XenAdmin.Controls
 
             if (string.IsNullOrEmpty(DiskSizeNumericUpDown.Text.Trim())) //do not issue error here
             {
+                SelectedSize = 0;
                 SetError(null);
                 IsSizeValid = false;
                 return;
@@ -119,6 +120,7 @@ namespace XenAdmin.Controls
 
             if (!decimal.TryParse(DiskSizeNumericUpDown.Text.Trim(), out decimal result) || result < 0)
             {
+                SelectedSize = 0;
                 SetError(Messages.INVALID_DISK_SIZE);
                 IsSizeValid = false;
                 return;

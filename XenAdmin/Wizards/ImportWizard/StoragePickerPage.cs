@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.ImportWizard
         public override void PopulatePage()
         {
             SetButtonNextEnabled(false);
-            m_srPicker.PopulateAsync(SrPicker.SRPickerType.VM, m_targetConnection, m_targetHost, null, null, 0);
+            m_srPicker.PopulateAsync(SrPicker.SRPickerType.VM, m_targetConnection, m_targetHost, null, null);
             IsDirty = true;
         }
 
