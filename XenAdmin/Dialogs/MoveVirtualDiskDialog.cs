@@ -67,7 +67,7 @@ namespace XenAdmin.Dialogs
             base.OnLoad(e);
             
             UpdateButtons();
-            srPicker1.PopulateAsync(SrPickerType, connection, null, null, _vdis.ToArray(), _vdis.Sum(d => d.physical_utilisation));
+            srPicker1.PopulateAsync(SrPickerType, connection, null, null, _vdis.ToArray());
         }
 
         internal override string HelpName => "VDIMigrateDialog";

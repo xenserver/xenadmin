@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
@@ -126,8 +127,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                                    : Messages.COPY_VM_INTRA_POOL_RUBRIC;
 
             UpdateButtons();
+
+            var vdis = (from VBD vbd in TheVM.Connection.ResolveAll(TheVM.VBDs)
+                where vbd.type != vbd_type.CD
+                let vdi = TheVM.Connection.Resolve(vbd.VDI)
+                where vdi != null
+                select vdi).ToArray();
+
             srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, TheVM.Connection,
-                TheVM.Home(), null, null, TheVM.TotalVMSize());
+                TheVM.Home(), null, vdis);
         }
 
         public override bool EnableNext()
