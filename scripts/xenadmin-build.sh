@@ -58,7 +58,7 @@ SCRATCH_DIR=${REPO}/_scratch
 OUTPUT_DIR=${REPO}/_output
 
 #build
-MSBUILD=MSBuild.exe
+MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe"
 SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.8 /p:VisualStudioVersion=16.0"
 
 mkdir_clean ${SCRATCH_DIR}
