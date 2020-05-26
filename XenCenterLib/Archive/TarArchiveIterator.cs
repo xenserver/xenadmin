@@ -44,6 +44,10 @@ namespace XenCenterLib.Archive
         private TarEntry tarEntry;
         private bool disposed;
 
+        public SharpZipTarArchiveIterator()
+        {
+        }
+
         public SharpZipTarArchiveIterator(Stream compressedTarFile, CompressionFactory.Type compressionType)
         {
             if (compressionType == CompressionFactory.Type.Gz)

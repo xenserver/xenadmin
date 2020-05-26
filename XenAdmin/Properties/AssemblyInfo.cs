@@ -63,5 +63,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0000")]
 [assembly: XenCenterLib.XSVersion("[BRANDING_PRODUCT_VERSION]")]
-[assembly: InternalsVisibleTo("XenAdminTests"),
-           InternalsVisibleTo("XenAdminScalabilityTests")]
+[assembly: InternalsVisibleTo("XenAdminTests")]

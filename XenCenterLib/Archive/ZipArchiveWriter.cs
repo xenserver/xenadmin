@@ -38,17 +38,17 @@ namespace XenCenterLib.Archive
 {
     class DotNetZipZipWriter : ArchiveWriter
     {
-        private ZipOutputStream zip = null;
+        private ZipOutputStream zip;
         private bool disposed;
 
-        public DotNetZipZipWriter(Stream outputStream) : this()
+        public DotNetZipZipWriter(Stream outputStream)
         {
             zip = new ZipOutputStream( outputStream ) {EnableZip64 = Zip64Option.AsNecessary};
+            disposed = false;
         }
 
         public DotNetZipZipWriter()
         {
-            disposed = false;
         }
 
         public override void SetBaseStream(Stream outputStream)
