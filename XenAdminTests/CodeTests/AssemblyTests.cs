@@ -51,7 +51,7 @@ namespace XenAdminTests.CodeTests
             var assembly = FindAssemblyByNameRecursively(assemblyName);
             Assert.NotNull($"Assembly {assemblyName} was not found.");
 
-            var excludeFromCheck = new[] {"XenAdmin.Help.HelpManager", "XenAdmin.Branding"};
+            var excludeFromCheck = new[] {"XenAdmin.Help.HelpManager", "XenAdmin.Branding", "DotNetVnc.KeyMap"};
             var missing = new List<string>();
             var extra = new List<string>();
 
