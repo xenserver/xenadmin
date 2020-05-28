@@ -62,6 +62,7 @@ namespace XenAPI
             bool is_default_template,
             XenRef<VDI> suspend_VDI,
             XenRef<Host> resident_on,
+            XenRef<Host> scheduled_to_be_resident_on,
             XenRef<Host> affinity,
             long memory_overhead,
             long memory_target,
@@ -148,6 +149,7 @@ namespace XenAPI
             this.is_default_template = is_default_template;
             this.suspend_VDI = suspend_VDI;
             this.resident_on = resident_on;
+            this.scheduled_to_be_resident_on = scheduled_to_be_resident_on;
             this.affinity = affinity;
             this.memory_overhead = memory_overhead;
             this.memory_target = memory_target;
@@ -264,6 +266,7 @@ namespace XenAPI
             is_default_template = update.is_default_template;
             suspend_VDI = update.suspend_VDI;
             resident_on = update.resident_on;
+            scheduled_to_be_resident_on = update.scheduled_to_be_resident_on;
             affinity = update.affinity;
             memory_overhead = update.memory_overhead;
             memory_target = update.memory_target;
@@ -353,6 +356,7 @@ namespace XenAPI
             is_default_template = (bool)proxy.is_default_template;
             suspend_VDI = proxy.suspend_VDI == null ? null : XenRef<VDI>.Create(proxy.suspend_VDI);
             resident_on = proxy.resident_on == null ? null : XenRef<Host>.Create(proxy.resident_on);
+            scheduled_to_be_resident_on = proxy.scheduled_to_be_resident_on == null ? null : XenRef<Host>.Create(proxy.scheduled_to_be_resident_on);
             affinity = proxy.affinity == null ? null : XenRef<Host>.Create(proxy.affinity);
             memory_overhead = proxy.memory_overhead == null ? 0 : long.Parse(proxy.memory_overhead);
             memory_target = proxy.memory_target == null ? 0 : long.Parse(proxy.memory_target);
@@ -443,6 +447,7 @@ namespace XenAPI
             result_.is_default_template = is_default_template;
             result_.suspend_VDI = suspend_VDI ?? "";
             result_.resident_on = resident_on ?? "";
+            result_.scheduled_to_be_resident_on = scheduled_to_be_resident_on ?? "";
             result_.affinity = affinity ?? "";
             result_.memory_overhead = memory_overhead.ToString();
             result_.memory_target = memory_target.ToString();
@@ -550,6 +555,8 @@ namespace XenAPI
                 suspend_VDI = Marshalling.ParseRef<VDI>(table, "suspend_VDI");
             if (table.ContainsKey("resident_on"))
                 resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
+            if (table.ContainsKey("scheduled_to_be_resident_on"))
+                scheduled_to_be_resident_on = Marshalling.ParseRef<Host>(table, "scheduled_to_be_resident_on");
             if (table.ContainsKey("affinity"))
                 affinity = Marshalling.ParseRef<Host>(table, "affinity");
             if (table.ContainsKey("memory_overhead"))
@@ -720,6 +727,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._is_default_template, other._is_default_template) &&
                 Helper.AreEqual2(this._suspend_VDI, other._suspend_VDI) &&
                 Helper.AreEqual2(this._resident_on, other._resident_on) &&
+                Helper.AreEqual2(this._scheduled_to_be_resident_on, other._scheduled_to_be_resident_on) &&
                 Helper.AreEqual2(this._affinity, other._affinity) &&
                 Helper.AreEqual2(this._memory_overhead, other._memory_overhead) &&
                 Helper.AreEqual2(this._memory_target, other._memory_target) &&
@@ -1244,6 +1252,20 @@ namespace XenAPI
                 return session.JsonRpcClient.vm_get_resident_on(session.opaque_ref, _vm);
             else
                 return XenRef<Host>.Create(session.XmlRpcProxy.vm_get_resident_on(session.opaque_ref, _vm ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the scheduled_to_be_resident_on field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Host> get_scheduled_to_be_resident_on(Session session, string _vm)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_scheduled_to_be_resident_on(session.opaque_ref, _vm);
+            else
+                return XenRef<Host>.Create(session.XmlRpcProxy.vm_get_scheduled_to_be_resident_on(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -5388,6 +5410,24 @@ namespace XenAPI
             }
         }
         private XenRef<Host> _resident_on = new XenRef<Host>(Helper.NullOpaqueRef);
+
+        /// <summary>
+        /// the host on which the VM is due to be started/resumed/migrated. This acts as a memory reservation indicator
+        /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Host>))]
+        public virtual XenRef<Host> scheduled_to_be_resident_on
+        {
+            get { return _scheduled_to_be_resident_on; }
+            set
+            {
+                if (!Helper.AreEqual(value, _scheduled_to_be_resident_on))
+                {
+                    _scheduled_to_be_resident_on = value;
+                    NotifyPropertyChanged("scheduled_to_be_resident_on");
+                }
+            }
+        }
+        private XenRef<Host> _scheduled_to_be_resident_on = new XenRef<Host>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// A host which the VM has some affinity for (or NULL). This is used as a hint to the start call when it decides where to run the VM. Resource constraints may cause the VM to be started elsewhere.

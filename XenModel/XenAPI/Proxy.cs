@@ -446,6 +446,10 @@ namespace XenAPI
         Response<string>
         task_set_status(string session, string _task, string _value);
 
+        [XmlRpcMethod("task.set_progress")]
+        Response<string>
+        task_set_progress(string session, string _task, double _value);
+
         [XmlRpcMethod("task.get_all")]
         Response<string []>
         task_get_all(string session);
@@ -1397,6 +1401,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.get_resident_on")]
         Response<string>
         vm_get_resident_on(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_scheduled_to_be_resident_on")]
+        Response<string>
+        vm_get_scheduled_to_be_resident_on(string session, string _vm);
 
         [XmlRpcMethod("VM.get_affinity")]
         Response<string>
@@ -3382,6 +3390,10 @@ namespace XenAPI
         Response<string []>
         host_get_certificates(string session, string _host);
 
+        [XmlRpcMethod("host.get_editions")]
+        Response<string []>
+        host_get_editions(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3789,6 +3801,10 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.install_server_certificate")]
         Response<string>
         async_host_install_server_certificate(string session, string _host, string _certificate, string _private_key, string _certificate_chain);
+
+        [XmlRpcMethod("host.emergency_reset_server_certificate")]
+        Response<string>
+        host_emergency_reset_server_certificate(string session);
 
         [XmlRpcMethod("host.apply_edition")]
         Response<string>
@@ -8334,6 +8350,18 @@ namespace XenAPI
         [XmlRpcMethod("Certificate.get_all_records")]
         Response<Object>
         certificate_get_all_records(string session);
+
+        [XmlRpcMethod("Diagnostics.gc_compact")]
+        Response<string>
+        diagnostics_gc_compact(string session, string _host);
+
+        [XmlRpcMethod("Async.Diagnostics.gc_compact")]
+        Response<string>
+        async_diagnostics_gc_compact(string session, string _host);
+
+        [XmlRpcMethod("Diagnostics.get_all_records")]
+        Response<Object>
+        diagnostics_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8502,6 +8530,7 @@ namespace XenAPI
         public bool is_default_template;
         public string suspend_VDI;
         public string resident_on;
+        public string scheduled_to_be_resident_on;
         public string affinity;
         public string memory_overhead;
         public string memory_target;
@@ -8739,6 +8768,7 @@ namespace XenAPI
         public bool multipathing;
         public string uefi_certificates;
         public string [] certificates;
+        public string [] editions;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9439,5 +9469,10 @@ namespace XenAPI
         public DateTime not_before;
         public DateTime not_after;
         public string fingerprint;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Diagnostics
+    {
     }
 }
