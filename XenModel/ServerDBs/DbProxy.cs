@@ -91,24 +91,7 @@ namespace XenAdmin.ServerDBs
         /// </summary>
         static DbProxy()
         {
-            dummyEvent.class_ = "vtpm"; // This will cause XenCenter to ignore the event;
-
-            // load the api-version.xml file to detect whether a call is made for the wrong version of the server being simulated.
-            
-            /*XmlDocument doc = new XmlDocument();
-            doc.Load(Assembly.GetExecutingAssembly().GetManifestResourceStream("XenAdmin.TestResources.api-version.xml"));
-
-            foreach (XmlNode node in doc.SelectNodes("ApiVersionTool/version"))
-            {
-                string ver = node.Attributes["name"].Value;
-                callVersions.Add(ver, new List<string>());
-
-                foreach (XmlNode n in node.SelectNodes("call"))
-                {
-                    callVersions[ver].Add(n.Attributes["name"].Value);
-                }
-            }
-            */
+            dummyEvent.class_ = "vtpm"; // This will cause XenCenter to ignore the event
         }
 
         /// <summary>
@@ -374,7 +357,7 @@ namespace XenAdmin.ServerDBs
             return url.EndsWith(".db") || url.EndsWith(".xml") || url.EndsWith(".tmp");
         }
 
-        // Code to create fake asynchronous tasks that just return a known value
+        #region Code to create fake asynchronous tasks that just return a known value
 
         private static Dictionary<string, Proxy_Task> tasks = new Dictionary<string, Proxy_Task>();
         private readonly Random rand = new Random();
@@ -431,6 +414,8 @@ namespace XenAdmin.ServerDBs
             return tasks.Remove(uuid);
         }
 
+        #endregion
+
         public enum EditTypes { Replace, AddToDict, RemoveFromDict, AddToArray, RemoveFromArray }
 
         public void EditObject_(EditTypes editType, string typeName, string opaqueRef, string field, params object[] args)
@@ -439,7 +424,7 @@ namespace XenAdmin.ServerDBs
             edit_record(editType, typeName, opaqueRef, field, args);
 
             // Make a Proxy object from the new XML
-            Type proxyT = TypeCache.GetProxyType(typeName);
+            TypeCache.TryGetProxyType(typeName, out Type proxyT);
             object proxy = get_record(typeName, opaqueRef, false);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
@@ -647,7 +632,7 @@ namespace XenAdmin.ServerDBs
         public void SendCreateObject(string typeName, string opaqueRef)
         {
             // Make a Proxy object from the new XML
-            Type proxyT = TypeCache.GetProxyType(typeName);
+            TypeCache.TryGetProxyType(typeName, out Type proxyT);
             object proxy = get_record(typeName, opaqueRef, false);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
@@ -660,7 +645,7 @@ namespace XenAdmin.ServerDBs
         public void SendDestroyObject(string typeName, string opaqueRef)
         {
             // Make a Proxy object from the new XML
-            Type proxyT = TypeCache.GetProxyType(typeName);
+            TypeCache.TryGetProxyType(typeName, out Type proxyT);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
             lock (eventsListLock)
@@ -672,7 +657,7 @@ namespace XenAdmin.ServerDBs
         public void SendModObject(string typeName, string opaqueRef)
         {
             // Make a Proxy object from the new XML
-            Type proxyT = TypeCache.GetProxyType(typeName);
+            TypeCache.TryGetProxyType(typeName, out Type proxyT);
             object proxy = get_record(typeName, opaqueRef, false);
 
             // Make a Proxy_Event representing this edit, and add it to the events queue
