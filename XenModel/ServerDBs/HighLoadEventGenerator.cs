@@ -95,7 +95,8 @@ namespace XenAdmin.ServerDBs
                     {
                         foreach (string opaqueRef in ((Hashtable)resp.Value).Keys)
                         {
-                            output.Add(DbProxy.MakeProxyEvent(typeName, opaqueRef, eventOperation, TypeCache.GetProxyType(typeName), _proxy.get_record(typeName, opaqueRef, false)));
+                            TypeCache.TryGetProxyType(typeName, out Type proxyT);
+                            output.Add(DbProxy.MakeProxyEvent(typeName, opaqueRef, eventOperation, proxyT, _proxy.get_record(typeName, opaqueRef, false)));
                         }
                     }
                 }

@@ -240,7 +240,7 @@ namespace XenAdmin.ServerDBs
                 _rows = new RowDictionary(this);
                 _name = name.ToLower();
                 _db = db;
-                _xapiType = TypeCache.GetProxyType(name);
+                TypeCache.TryGetProxyType(name, out _xapiType);
 
                 _rows.Changed += delegate { OnChanged(EventArgs.Empty); };
             }
