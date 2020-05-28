@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,39 +26,39 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
-  -->
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
-    <value>An activation key can only be applied when the edition is set to &apos;free&apos;.</value>
+    <value>An activation key can only be applied when the edition is set to 'free'.</value>
   </data>
   <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
     <value>The specified IP address violates the VIF locking configuration.</value>
@@ -343,7 +343,7 @@
     <value>The operation could not be performed because the VBD was not connected to the VM.</value>
   </data>
   <data name="DISK_VBD_MUST_BE_READWRITE_FOR_HVM" xml:space="preserve">
-    <value>All VBDs of type &apos;disk&apos; must be read/write for HVM guests</value>
+    <value>All VBDs of type 'disk' must be read/write for HVM guests</value>
   </data>
   <data name="DOMAIN_BUILDER_ERROR" xml:space="preserve">
     <value>An internal error generated by the domain builder.</value>
@@ -367,7 +367,7 @@
     <value>Some events have been lost from the queue and cannot be retrieved.</value>
   </data>
   <data name="EVENT_FROM_TOKEN_PARSE_FAILURE" xml:space="preserve">
-    <value>The event.from token could not be parsed. Valid values include: &apos;&apos;, and a value returned from a previous event.from call.</value>
+    <value>The event.from token could not be parsed. Valid values include: '', and a value returned from a previous event.from call.</value>
   </data>
   <data name="EVENT_SUBSCRIPTION_PARSE_FAILURE" xml:space="preserve">
     <value>The server failed to parse your event subscription. Valid values include: *, class-name, class-name/object-reference.</value>
@@ -451,7 +451,7 @@
     <value>This server cannot join the pool because the pool has HA enabled but this server has HA disabled.</value>
   </data>
   <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
-    <value>Server cannot rejoin pool because it should have fenced (it is not in the master&apos;s partition)</value>
+    <value>Server cannot rejoin pool because it should have fenced (it is not in the master's partition)</value>
   </data>
   <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
     <value>HA can only be enabled for 2 servers or more. Note that 2 servers requires a pre-configured quorum tiebreak script.</value>
@@ -553,7 +553,7 @@
     <value>The server is still booting.</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>The master says the server is not known to it. Perhaps the server was deleted from the master&apos;s database?</value>
+    <value>The master says the server is not known to it. Perhaps the server was deleted from the master's database?</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>The specified VBD device is not recognized: please use a non-negative integer</value>
@@ -625,7 +625,7 @@
     <value>The uploaded update package is invalid.</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
-    <value>The value &apos;{1}&apos; is invalid for field &apos;{0}&apos;.</value>
+    <value>The value '{1}' is invalid for field '{0}'.</value>
   </data>
   <data name="IS_TUNNEL_ACCESS_PIF" xml:space="preserve">
     <value>Cannot create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead.</value>
@@ -649,7 +649,7 @@
     <value>The connection to the joining server failed</value>
   </data>
   <data name="JOINING_HOST_SERVICE_FAILED" xml:space="preserve">
-    <value>There was an error connecting to the server. the service contacted didn&apos;t reply properly.</value>
+    <value>There was an error connecting to the server. the service contacted didn't reply properly.</value>
   </data>
   <data name="LICENCE_RESTRICTION" xml:space="preserve">
     <value>This operation is not allowed with your current license</value>
@@ -664,7 +664,7 @@
     <value>This server cannot join a pool because its license does not support pooling</value>
   </data>
   <data name="LICENSE_DOES_NOT_SUPPORT_XHA" xml:space="preserve">
-    <value>HA cannot be enabled because this server&apos;s license does not allow it</value>
+    <value>HA cannot be enabled because this server's license does not allow it</value>
   </data>
   <data name="LICENSE_EXPIRED" xml:space="preserve">
     <value>Your license has expired</value>
@@ -685,7 +685,7 @@
     <value>A VDI with the specified location already exists within the SR</value>
   </data>
   <data name="MAC_DOES_NOT_EXIST" xml:space="preserve">
-    <value>The MAC address specified doesn&apos;t exist on this server.</value>
+    <value>The MAC address specified doesn't exist on this server.</value>
   </data>
   <data name="MAC_INVALID" xml:space="preserve">
     <value>The MAC address specified is not valid.</value>
@@ -694,10 +694,16 @@
     <value>The MAC address specified still exists on this server.</value>
   </data>
   <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
-    <value>INTERNAL ERROR: Attempted to set &apos;{0}&apos;.&apos;{1}&apos;:&apos;{3}&apos;=&apos;{2}&apos;, but the key &apos;{3}&apos; was already present in map &apos;{1}&apos;.</value>
+    <value>INTERNAL ERROR: Attempted to set '{0}'.'{1}':'{3}'='{2}', but the key '{3}' was already present in map '{1}'.</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
     <value>The dynamic memory range does not satisfy the following constraint.</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_MAXPIN" xml:space="preserve">
+    <value>The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max.</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_ORDER" xml:space="preserve">
+    <value>The dynamic memory range violates constraint static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max.</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum amount of memory allowed for this virtual machine.</value>
@@ -907,7 +913,7 @@
     <value>PIF has no network configuration</value>
   </data>
   <data name="PIF_HAS_NO_V6_NETWORK_CONFIGURATION" xml:space="preserve">
-    <value>PIF has no IPv6 configuration (mode currently set to &apos;none&apos;)</value>
+    <value>PIF has no IPv6 configuration (mode currently set to 'none')</value>
   </data>
   <data name="PIF_INCOMPATIBLE_PRIMARY_ADDRESS_TYPE" xml:space="preserve">
     <value>The primary address types are not compatible</value>
@@ -991,7 +997,7 @@
     <value>Failed to enable external authentication, the supplied credentials were invalid.</value>
   </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
-    <value>The external authentication configuration of the server joining the pool must match the pool&apos;s own external authentication configuration.</value>
+    <value>The external authentication configuration of the server joining the pool must match the pool's own external authentication configuration.</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>The host joining the pool must not have any bonds.</value>
@@ -1077,7 +1083,7 @@ Authorized Roles: {1}</value>
     <value>The restore could not be performed because the restore script failed. Your backup file may be corrupt. See the logs for more information.</value>
   </data>
   <data name="RESTORE_TARGET_MGMT_IF_NOT_IN_BACKUP" xml:space="preserve">
-    <value>The restore could not be performed because the server&apos;s current management interface is not in the backup. The interfaces mentioned in the backup are:</value>
+    <value>The restore could not be performed because the server's current management interface is not in the backup. The interfaces mentioned in the backup are:</value>
   </data>
   <data name="RESTORE_TARGET_MISSING_DEVICE" xml:space="preserve">
     <value>The restore could not be performed because a network interface is missing</value>
@@ -1104,7 +1110,7 @@ Authorized Roles: {1}</value>
     <value>The provided key is not in a pem-encoded PKCS#8 format.</value>
   </data>
   <data name="SERVER_CERTIFICATE_KEY_MISMATCH" xml:space="preserve">
-    <value>The provided key does not match the provided certificate&apos;s public key.</value>
+    <value>The provided key does not match the provided certificate's public key.</value>
   </data>
   <data name="SERVER_CERTIFICATE_KEY_RSA_LENGTH_NOT_SUPPORTED" xml:space="preserve">
     <value>The provided RSA key does not have a length between 2048 and 4096.</value>
@@ -1293,7 +1299,7 @@ Authorized Roles: {1}</value>
     <value>Invalid snap-reserver-percentage value, must be an integer indicating the amount of space, as a percentage of the VDI size, to reserve for snapshots.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_166" xml:space="preserve">
-    <value>Invalid snap-depletion value, must be one of &apos;delete-oldest&apos; or &apos;volume-offline&apos;</value>
+    <value>Invalid snap-depletion value, must be one of 'delete-oldest' or 'volume-offline'</value>
   </data>
   <data name="SR_BACKEND_FAILURE_167" xml:space="preserve">
     <value>Volume out of space, probably due to insufficient snapshot reserve allocation.</value>
@@ -1320,7 +1326,7 @@ Authorized Roles: {1}</value>
     <value>Invalid SNMP response received for a CLI command</value>
   </data>
   <data name="SR_BACKEND_FAILURE_175" xml:space="preserve">
-    <value>Volume metadata stored in the &apos;Description&apos; field is invalid, this field contains encoded data and is not user editable</value>
+    <value>Volume metadata stored in the 'Description' field is invalid, this field contains encoded data and is not user editable</value>
   </data>
   <data name="SR_BACKEND_FAILURE_176" xml:space="preserve">
     <value>Invalid EOF response received for a CLI command</value>
@@ -1383,7 +1389,7 @@ Authorized Roles: {1}</value>
     <value>Given SMB version is not allowed. Choose either 1.0 or 3.0</value>
   </data>
   <data name="SR_BACKEND_FAILURE_228" xml:space="preserve">
-    <value>Require &quot;-o&quot; along with xe-mount-iso-sr</value>
+    <value>Require "-o" along with xe-mount-iso-sr</value>
   </data>
   <data name="SR_BACKEND_FAILURE_24" xml:space="preserve">
     <value>The specified VDI is currently in use</value>
@@ -1464,7 +1470,7 @@ Authorized Roles: {1}</value>
     <value>The VDI failed to be introduced to the database</value>
   </data>
   <data name="SR_BACKEND_FAILURE_427" xml:space="preserve">
-    <value>The CSLG software doesn&apos;t seem to be installed</value>
+    <value>The CSLG software doesn't seem to be installed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_428" xml:space="preserve">
     <value>Failed to create multiple sub-pools from parent pool</value>
@@ -1737,7 +1743,7 @@ Authorized Roles: {1}</value>
     <value>The SR operation cannot be performed because a device underlying the SR is in use by the server.</value>
   </data>
   <data name="SR_DOES_NOT_SUPPORT_MIGRATION" xml:space="preserve">
-    <value>You attempted to migrate a VDI to or from an SR that doesn&apos;t support migration</value>
+    <value>You attempted to migrate a VDI to or from an SR that doesn't support migration</value>
   </data>
   <data name="SR_FULL" xml:space="preserve">
     <value>The SR is full. Requested size {0} exceeds the maximum size {1}</value>
@@ -1752,7 +1758,7 @@ Authorized Roles: {1}</value>
     <value>The SR {0} is still connected to a server by a PBD. It cannot be destroyed.</value>
   </data>
   <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
-    <value>The SR could not be destroyed because the &apos;indestructible&apos; flag was set on it.</value>
+    <value>The SR could not be destroyed because the 'indestructible' flag was set on it.</value>
   </data>
   <data name="SR_IS_CACHE_SR" xml:space="preserve">
     <value>The SR is currently being used as a local cache SR.</value>
@@ -1785,7 +1791,7 @@ Authorized Roles: {1}</value>
     <value>The operation could not proceed because necessary VDIs were already locked at the storage level.</value>
   </data>
   <data name="SSL_VERIFY_ERROR" xml:space="preserve">
-    <value>The remote system&apos;s SSL certificate failed to verify against our certificate library.</value>
+    <value>The remote system's SSL certificate failed to verify against our certificate library.</value>
   </data>
   <data name="SUBJECT_ALREADY_EXISTS" xml:space="preserve">
     <value>Subject already exists.</value>
@@ -1926,7 +1932,7 @@ Authorized Roles: {1}</value>
     <value>The requested operation is not allowed for VDIs with CBT enabled or VMs having such VDIs, and CBT is enabled for the specified VDI.</value>
   </data>
   <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
-    <value>The VDI could not be opened for metadata recovery as it contains the current pool&apos;s metadata.</value>
+    <value>The VDI could not be opened for metadata recovery as it contains the current pool's metadata.</value>
   </data>
   <data name="VDI_COPY_FAILED" xml:space="preserve">
     <value>The VDI copy action has failed</value>
@@ -1968,13 +1974,13 @@ Authorized Roles: {1}</value>
     <value>This operation cannot be performed because the system does not manage this VDI</value>
   </data>
   <data name="VDI_NOT_SPARSE" xml:space="preserve">
-    <value>The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.</value>
+    <value>The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or 'block differences' or 'disk deltas') between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.</value>
   </data>
   <data name="VDI_NO_CBT_METADATA" xml:space="preserve">
     <value>The requested operation is not allowed because the specified VDI does not have changed block tracking metadata.</value>
   </data>
   <data name="VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION" xml:space="preserve">
-    <value>This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.</value>
+    <value>This operation is not permitted on VDIs in the 'on-boot=reset' mode, or on VMs having such VDIs.</value>
   </data>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>The operation required write access but VDI {0} is read-only</value>
@@ -1998,10 +2004,10 @@ Authorized Roles: {1}</value>
     <value>The VM cannot start because all GPUs are fully used or are running other types of virtual GPU</value>
   </data>
   <data name="VGPU_TYPE_NOT_ENABLED" xml:space="preserve">
-    <value>Virtual GPU type is not one of the GPU&apos;s enabled types.</value>
+    <value>Virtual GPU type is not one of the GPU's enabled types.</value>
   </data>
   <data name="VGPU_TYPE_NOT_SUPPORTED" xml:space="preserve">
-    <value>Virtual GPU type is not one of the GPU&apos;s supported types.</value>
+    <value>Virtual GPU type is not one of the GPU's supported types.</value>
   </data>
   <data name="VIFS_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum number of virtual network interfaces allowed for this virtual machine.</value>
@@ -2040,10 +2046,10 @@ Authorized Roles: {1}</value>
     <value>This VM is assigned to a snapshot schedule.</value>
   </data>
   <data name="VM_ATTACHED_TO_MORE_THAN_ONE_VDI_WITH_TIMEOFFSET_MARKED_AS_RESET_ON_BOOT" xml:space="preserve">
-    <value>You attempted to start a VM that&apos;s attached to more than one VDI with a timeoffset marked as reset-on-boot.</value>
+    <value>You attempted to start a VM that's attached to more than one VDI with a timeoffset marked as reset-on-boot.</value>
   </data>
   <data name="VM_BAD_POWER_STATE" xml:space="preserve">
-    <value>You attempted an operation on a VM that needed it to be in state &apos;{1}&apos; but was in state &apos;{2}&apos;.</value>
+    <value>You attempted an operation on a VM that needed it to be in state '{1}' but was in state '{2}'.</value>
   </data>
   <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
     <value>The BIOS strings for this VM have already been set and cannot be changed.</value>
@@ -2067,10 +2073,10 @@ Authorized Roles: {1}</value>
     <value>The specified VM has a duplicate VBD device and cannot be started.</value>
   </data>
   <data name="VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT" xml:space="preserve">
-    <value>VM didn&apos;t acknowledge the need to shut down.</value>
+    <value>VM didn't acknowledge the need to shut down.</value>
   </data>
   <data name="VM_FAILED_SUSPEND_ACKNOWLEDGMENT" xml:space="preserve">
-    <value>VM didn&apos;t acknowledge the need to suspend.</value>
+    <value>VM didn't acknowledge the need to suspend.</value>
   </data>
   <data name="VM_HALTED" xml:space="preserve">
     <value>The VM unexpectedly halted</value>
@@ -2103,7 +2109,7 @@ Authorized Roles: {1}</value>
     <value>Cannot migrate a VM to a destination host which is older than the source host.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
-    <value>The VM&apos;s Virtual Hardware Platform version is incompatible with this host.</value>
+    <value>The VM's Virtual Hardware Platform version is incompatible with this host.</value>
   </data>
   <data name="VM_HVM_REQUIRED" xml:space="preserve">
     <value>HVM is required for this operation</value>
@@ -2184,13 +2190,13 @@ Authorized Roles: {1}</value>
     <value>The VM unexpectedly rebooted</value>
   </data>
   <data name="VM_REQUIRES_GPU" xml:space="preserve">
-    <value>You attempted to run a VM on a host which doesn&apos;t have a GPU available in the GPU group needed by the VM. The VM has a virtual GPU attached to this GPU group.</value>
+    <value>You attempted to run a VM on a host which doesn't have a GPU available in the GPU group needed by the VM. The VM has a virtual GPU attached to this GPU group.</value>
   </data>
   <data name="VM_REQUIRES_GPU-SHORT" xml:space="preserve">
     <value>GPU not available</value>
   </data>
   <data name="VM_REQUIRES_IOMMU" xml:space="preserve">
-    <value>You attempted to run a VM on a host which doesn&apos;t have I/O virtualization (IOMMU/VT-d) enabled, which is needed by the VM.</value>
+    <value>You attempted to run a VM on a host which doesn't have I/O virtualization (IOMMU/VT-d) enabled, which is needed by the VM.</value>
   </data>
   <data name="VM_REQUIRES_NETWORK" xml:space="preserve">
     <value>This VM needs a network that cannot be seen from that server</value>
@@ -2241,7 +2247,7 @@ Authorized Roles: {1}</value>
     <value>The VM cannot be imported unforced because it is either the same version or an older version of an existing VM.</value>
   </data>
   <data name="VM_UNSAFE_BOOT" xml:space="preserve">
-    <value>You attempted an operation on VM {0} that was judged to be unsafe by the server. This can happen if the VM would run on a CPU that has a potentially incompatible set of feature flags to those the VM requires. If you want to override this warning then use the &apos;force&apos; option.</value>
+    <value>You attempted an operation on VM {0} that was judged to be unsafe by the server. This can happen if the VM would run on a CPU that has a potentially incompatible set of feature flags to those the VM requires. If you want to override this warning then use the 'force' option.</value>
   </data>
   <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB rejected our configured authentication details.</value>
@@ -2259,10 +2265,10 @@ Authorized Roles: {1}</value>
     <value>WLB reported an internal error.</value>
   </data>
   <data name="WLB_MALFORMED_REQUEST" xml:space="preserve">
-    <value>WLB rejected the server&apos;s request as malformed.</value>
+    <value>WLB rejected the server's request as malformed.</value>
   </data>
   <data name="WLB_MALFORMED_RESPONSE" xml:space="preserve">
-    <value>The WLB server said something that the server wasn&apos;t expecting or didn&apos;t understand.</value>
+    <value>The WLB server said something that the server wasn't expecting or didn't understand.</value>
   </data>
   <data name="WLB_NOT_INITIALIZED" xml:space="preserve">
     <value>No WLB connection is configured.</value>
@@ -2280,10 +2286,10 @@ Authorized Roles: {1}</value>
     <value>WLB reported that the server rejected its configured authentication details.</value>
   </data>
   <data name="WLB_XENSERVER_CONNECTION_REFUSED" xml:space="preserve">
-    <value>WLB reported that the server refused to let it connect (even though we&apos;re connecting perfectly fine in the other direction).</value>
+    <value>WLB reported that the server refused to let it connect (even though we're connecting perfectly fine in the other direction).</value>
   </data>
   <data name="WLB_XENSERVER_MALFORMED_RESPONSE" xml:space="preserve">
-    <value>WLB reported that the server said something to it that WLB wasn&apos;t expecting or didn&apos;t understand.</value>
+    <value>WLB reported that the server said something to it that WLB wasn't expecting or didn't understand.</value>
   </data>
   <data name="WLB_XENSERVER_TIMEOUT" xml:space="preserve">
     <value>WLB reported that communication with the server timed out.</value>
@@ -2333,4 +2339,4 @@ Authorized Roles: {1}</value>
   <data name="XMLRPC_UNMARSHAL_FAILURE" xml:space="preserve">
     <value>The server failed to unmarshal the XMLRPC message; it was expecting one element and received something else.</value>
   </data>
-</root>
+</root>

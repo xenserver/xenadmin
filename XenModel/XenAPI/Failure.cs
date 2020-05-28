@@ -52,7 +52,7 @@ namespace XenAPI
         private string errorText;
         private string shortError;
 
-        public List<string> ErrorDescription 
+        public List<string> ErrorDescription
         {
             get { return errorDescription; }
         }
@@ -257,4 +257,4 @@ namespace XenAPI
             base.GetObjectData(info, context);
         }
     }
-}
+}

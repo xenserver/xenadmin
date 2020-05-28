@@ -1825,6 +1825,24 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max..
+        /// </summary>
+        public static string MEMORY_CONSTRAINT_VIOLATION_MAXPIN {
+            get {
+                return ResourceManager.GetString("MEMORY_CONSTRAINT_VIOLATION_MAXPIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max..
+        /// </summary>
+        public static string MEMORY_CONSTRAINT_VIOLATION_ORDER {
+            get {
+                return ResourceManager.GetString("MEMORY_CONSTRAINT_VIOLATION_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This message has been deprecated..
         /// </summary>
         public static string MESSAGE_DEPRECATED {
