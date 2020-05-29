@@ -5427,7 +5427,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Host> _scheduled_to_be_resident_on = new XenRef<Host>(Helper.NullOpaqueRef);
+        private XenRef<Host> _scheduled_to_be_resident_on = new XenRef<Host>("OpaqueRef:NULL");
 
         /// <summary>
         /// A host which the VM has some affinity for (or NULL). This is used as a hint to the start call when it decides where to run the VM. Resource constraints may cause the VM to be started elsewhere.
