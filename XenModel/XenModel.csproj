@@ -365,7 +365,6 @@
     <Compile Include="XenAPI\cluster_operation.cs" />
     <Compile Include="XenAPI\Converters.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
-    <Compile Include="XenAPI\Diagnostics.cs" />
     <Compile Include="XenAPI\domain_type.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
     <Compile Include="XenAPI\Feature.cs" />

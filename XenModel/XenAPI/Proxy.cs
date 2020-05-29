@@ -8350,18 +8350,6 @@ namespace XenAPI
         [XmlRpcMethod("Certificate.get_all_records")]
         Response<Object>
         certificate_get_all_records(string session);
-
-        [XmlRpcMethod("Diagnostics.gc_compact")]
-        Response<string>
-        diagnostics_gc_compact(string session, string _host);
-
-        [XmlRpcMethod("Async.Diagnostics.gc_compact")]
-        Response<string>
-        async_diagnostics_gc_compact(string session, string _host);
-
-        [XmlRpcMethod("Diagnostics.get_all_records")]
-        Response<Object>
-        diagnostics_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9469,10 +9457,5 @@ namespace XenAPI
         public DateTime not_before;
         public DateTime not_after;
         public string fingerprint;
-    }
-
-    [XmlRpcMissingMapping(MappingAction.Ignore)]
-    public class Proxy_Diagnostics
-    {
     }
 }

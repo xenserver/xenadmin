@@ -14578,26 +14578,5 @@ namespace XenAPI
             var serializer = CreateSerializer(converters);
             return Rpc<Dictionary<XenRef<Certificate>, Certificate>>("Certificate.get_all_records", new JArray(session), serializer);
         }
-
-        public void diagnostics_gc_compact(string session, string _host)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<Host>()};
-            var serializer = CreateSerializer(converters);
-            Rpc("Diagnostics.gc_compact", new JArray(session, _host ?? ""), serializer);
-        }
-
-        public XenRef<Task> async_diagnostics_gc_compact(string session, string _host)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Host>()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Task>>("Async.Diagnostics.gc_compact", new JArray(session, _host ?? ""), serializer);
-        }
-
-        public Dictionary<XenRef<Diagnostics>, Diagnostics> diagnostics_get_all_records(string session)
-        {
-            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Diagnostics>()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<Dictionary<XenRef<Diagnostics>, Diagnostics>>("Diagnostics.get_all_records", new JArray(session), serializer);
-        }
     }
 }
