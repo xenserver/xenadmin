@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -69,7 +68,7 @@ namespace XenAdmin.Controls
         /// <summary>
         /// Image to be displayed when DisplaySucceededImage() was called.
         /// </summary>
-        [Browsable(true), Category("Appearance"), Description("SuccessImage")]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue(typeof(int), "Image that is displayed after DisplaySuccessImage() is invoked.")]
         public Image SuccessImage
         {
@@ -81,7 +80,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        [Browsable(true), Category("Appearance"), Description("FailureImage")]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue(typeof(int), "Image that is displayed after DisplayFailureImage() is invoked.")]
         public Image FailureImage
         {

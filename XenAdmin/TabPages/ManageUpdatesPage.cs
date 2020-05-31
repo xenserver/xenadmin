@@ -48,7 +48,6 @@ using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenCenterLib;
 using XenAPI;
-using Timer = System.Windows.Forms.Timer;
 
 
 namespace XenAdmin.TabPages
@@ -57,10 +56,6 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        private int currentSpinningFrame;
-        private Timer spinningTimer = new Timer();
-        private ImageList imageList = new ImageList();
-
         private Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
         private List<string> collapsedPoolRowsList = new List<string>();
@@ -73,7 +68,7 @@ namespace XenAdmin.TabPages
         public ManageUpdatesPage()
         {
             InitializeComponent();
-            InitializeProgressControls();
+            spinner.SuccessImage = SystemIcons.Information.ToBitmap();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
@@ -94,6 +89,7 @@ namespace XenAdmin.TabPages
         }
 
         #region NotificationPage overrides
+
         protected override void RefreshPage()
         {
             toolStripDropDownButtonServerFilter.InitializeHostList();
@@ -169,8 +165,8 @@ namespace XenAdmin.TabPages
 
             checkForUpdatesNowLink.Enabled = false;
             checkForUpdatesNowButton.Visible = false;
-            spinningTimer.Start();
             labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
+            spinner.StartSpinning();
             tableLayoutPanel3.Visible = true;
         }
 
@@ -183,7 +179,11 @@ namespace XenAdmin.TabPages
                     toolStripButtonRestoreDismissed.Enabled = true;
                     checkForUpdatesNowLink.Enabled = true;
                     checkForUpdatesNowButton.Visible = true;
-                    spinningTimer.Stop();
+
+                    //to avoid flickering, make first the panel invisible and then stop the spinner, because
+                    //it may be a few fractions of the second until the panel reappears if no updates are found
+                    tableLayoutPanel3.Visible = false;
+                    spinner.StopSpinning();
 
                     if (succeeded)
                     {
@@ -191,7 +191,7 @@ namespace XenAdmin.TabPages
                     }
                     else
                     {
-                        pictureBoxProgress.Image = SystemIcons.Error.ToBitmap();
+                        spinner.ShowFailureImage();
                         labelProgress.Text = string.IsNullOrEmpty(errorMessage)
                                                  ? Messages.AVAILABLE_UPDATES_NOT_FOUND
                                                  : errorMessage;
@@ -199,32 +199,6 @@ namespace XenAdmin.TabPages
 
                     CheckForUpdatesInProgress = false;
                 });
-        }
-
-        private void InitializeProgressControls()
-        {
-            imageList.ColorDepth = ColorDepth.Depth32Bit;
-            imageList.ImageSize = new Size(32, 32);
-            imageList.Images.AddRange(new Image[]
-                {
-                    Properties.Resources.SpinningFrame0,
-                    Properties.Resources.SpinningFrame1,
-                    Properties.Resources.SpinningFrame2,
-                    Properties.Resources.SpinningFrame3,
-                    Properties.Resources.SpinningFrame4,
-                    Properties.Resources.SpinningFrame5,
-                    Properties.Resources.SpinningFrame6,
-                    Properties.Resources.SpinningFrame7
-                });
-
-            spinningTimer.Tick += timer_Tick;
-            spinningTimer.Interval = 150;
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            int imageIndex = ++currentSpinningFrame <= 7 ? currentSpinningFrame : currentSpinningFrame = 0;
-            pictureBoxProgress.Image = imageList.Images[imageIndex];
         }
 
         private void SetFilterLabel()
@@ -638,7 +612,7 @@ namespace XenAdmin.TabPages
         {
             if (byUpdateToolStripMenuItem.Checked && Updates.UpdateAlertsCount == 0)
             {
-                pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
+                spinner.ShowSuccessImage();
                 labelProgress.Text =  Messages.AVAILABLE_UPDATES_NOT_FOUND;
                 tableLayoutPanel3.Visible = true;
             }

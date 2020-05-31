@@ -69,7 +69,7 @@
             this.checkForUpdatesNowButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelProgress = new System.Windows.Forms.Label();
-            this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
+            this.spinner = new XenAdmin.Controls.SpinnerIcon();
             this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewHosts = new XenAdmin.TabPages.ManageUpdatesPage.UpdatePageByHostDataGridView();
@@ -94,7 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinner)).BeginInit();
             this.tableLayouPanel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).BeginInit();
@@ -318,7 +318,7 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
             this.tableLayoutPanel4.Controls.Add(this.labelProgress, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.pictureBoxProgress, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.spinner, 0, 0);
             this.tableLayoutPanel4.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
@@ -327,11 +327,11 @@
             resources.ApplyResources(this.labelProgress, "labelProgress");
             this.labelProgress.Name = "labelProgress";
             // 
-            // pictureBoxProgress
+            // spinner
             // 
-            resources.ApplyResources(this.pictureBoxProgress, "pictureBoxProgress");
-            this.pictureBoxProgress.Name = "pictureBoxProgress";
-            this.pictureBoxProgress.TabStop = false;
+            resources.ApplyResources(this.spinner, "spinner");
+            this.spinner.Name = "spinner";
+            this.spinner.TabStop = false;
             // 
             // tableLayouPanel5
             // 
@@ -534,7 +534,7 @@
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinner)).EndInit();
             this.tableLayouPanel5.ResumeLayout(false);
             this.tableLayouPanel5.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -548,7 +548,6 @@
         #endregion
 
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewUpdates;
-        private System.Windows.Forms.PictureBox pictureBoxProgress;
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -595,5 +594,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRequiredUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstalledUpdate;
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
+        private Controls.SpinnerIcon spinner;
     }
 }
