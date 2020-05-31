@@ -17,22 +17,21 @@ namespace XenAdmin.ConsoleView
 
             UnregisterEventListeners();
 
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-
             if (this.undockedForm != null)
             {
                 undockedForm.Hide();
                 undockedForm.Dispose();
             }
 
-            if (disposing && this.vncTabView != null)
+            if (disposing)
             {
-                this.vncTabView.Dispose();
+                if (vncTabView != null && !vncTabView.IsDisposed)
+                    vncTabView.Dispose();
+
+                if (components != null)
+                    components.Dispose();
             }
+            base.Dispose(disposing);
         }
 
         #region Component Designer generated code
