@@ -66,8 +66,8 @@ namespace XenAdmin.Dialogs.HealthCheck
                 healthCheckSettings.Status = HealthCheckStatus.Enabled;
             authenticated = healthCheckSettings.TryGetExistingTokens(pool.Connection, out authenticationToken, out diagnosticToken);
             authenticationRequired = !authenticated;
-            xsUserName = healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-            xsPassword = healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+            xsUserName = healthCheckSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+            xsPassword = healthCheckSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
             PopulateControls();
             InitializeControls();
@@ -157,7 +157,7 @@ namespace XenAdmin.Dialogs.HealthCheck
                 return true;
             if (timeOfDayComboBox.SelectedIndex != healthCheckSettings.TimeOfDay)
                 return true;
-            if (authenticationToken != healthCheckSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET))
+            if (authenticationToken != healthCheckSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET))
                 return true;
             if (textboxXSUserName.Text != xsUserName)
                 return true;

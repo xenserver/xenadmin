@@ -71,7 +71,7 @@ namespace XenAdmin.Actions
             {
                 var healthCheckSettings = Pool.HealthCheckSettings();
 
-                var diagnosticToken = healthCheckSettings.GetSecretyInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
+                var diagnosticToken = healthCheckSettings.GetSecretInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
                 if (string.IsNullOrEmpty(diagnosticToken))
                 {
                     log.DebugFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name());

@@ -992,8 +992,8 @@ namespace XenAdmin
                 return;
             var newHealthCheckSSettings = pool.HealthCheckSettings();
             new TransferHealthCheckSettingsAction(pool, newHealthCheckSSettings,
-                newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
-                newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
+                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
+                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
         private static bool SameProductBrand(Host host)
