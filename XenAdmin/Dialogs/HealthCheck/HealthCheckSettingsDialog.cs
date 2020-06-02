@@ -36,7 +36,6 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Model;
-using XenAdmin.Properties;
 using XenAPI;
 
 
@@ -55,7 +54,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         private string xsUserName;
         private string xsPassword;
 
-        internal override string HelpName { get { return "HealthCheckSettingsDialog"; } }
+        internal override string HelpName => "HealthCheckSettingsDialog";
 
         public HealthCheckSettingsDialog(Pool pool, bool enrollNow)
             :base(pool.Connection)
@@ -113,21 +112,21 @@ namespace XenAdmin.Dialogs.HealthCheck
         private void InitializeControls()
         {
             Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name());
-            
-            string noAuthTokenMessage = string.Format(Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN, Messages.MY_CITRIX_CREDENTIALS_URL);
-            string existingAuthTokenMessage = Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
-            string authenticationRubricLabelText = authenticationRequired ? noAuthTokenMessage : existingAuthTokenMessage;
+            tableLayoutPanel5.Visible = false;
 
-            if (authenticationRubricLabelText == noAuthTokenMessage)
+            if (authenticationRequired)
             {
-                authRubricTextLabel.Visible = false;
+                string noAuthTokenMessage = string.Format(Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN,
+                    Messages.MY_CITRIX_CREDENTIALS_URL);
+
                 authRubricLinkLabel.Text = noAuthTokenMessage;
-                authRubricLinkLabel.LinkArea = new System.Windows.Forms.LinkArea(authenticationRubricLabelText.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL), Messages.MY_CITRIX_CREDENTIALS_URL.Length);
+                authRubricLinkLabel.LinkArea = new LinkArea(noAuthTokenMessage.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL),
+                    Messages.MY_CITRIX_CREDENTIALS_URL.Length);
             }
             else
             {
-                authRubricLinkLabel.Visible = false;
-                authRubricTextLabel.Text = existingAuthTokenMessage;
+                authRubricLinkLabel.Text = Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
+                authRubricLinkLabel.LinkArea = new LinkArea(0, 0);
             }
 
             enrollmentCheckBox.Checked = healthCheckSettings.Status != HealthCheckStatus.Disabled;
@@ -168,19 +167,19 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void UpdateButtons()
         {
-            okButton.Enabled = m_ctrlError.PerformCheck(CheckCredentialsEntered) && !errorLabel.Visible;
+            okButton.Enabled = CheckCredentialsEntered() && !errorLabel.Visible;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            okButton.Enabled = false;
-            if (enrollmentCheckBox.Checked && newAuthenticationRadioButton.Checked 
-                && !m_ctrlError.PerformCheck(CheckUploadAuthentication))
-            {
-                okButton.Enabled = true;
-                return;
-            }
+            if (enrollmentCheckBox.Checked && newAuthenticationRadioButton.Checked)
+                CheckUploadAuthentication();
+            else
+                SaveAndClose();
+        }
 
+        private void SaveAndClose()
+        {
             if (ChangesMade())
             {
                 var newHealthCheckSettings = new HealthCheckSettings(pool.health_check_config);
@@ -194,7 +193,7 @@ namespace XenAdmin.Dialogs.HealthCheck
                 new SaveHealthCheckSettingsAction(pool, newHealthCheckSettings, authenticationToken, diagnosticToken, textboxXSUserName.Text.Trim(), textboxXSPassword.Text, false).RunAsync();
                 new TransferHealthCheckSettingsAction(pool, newHealthCheckSettings, textboxXSUserName.Text.Trim(), textboxXSPassword.Text, true).RunAsync();
             }
-            okButton.Enabled = true;
+            
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -212,12 +211,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             UpdateButtons();
         }
 
-        private void newAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            SetMyCitrixCredentials(existingAuthenticationRadioButton.Checked);
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void newXsCredentialsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             SetXSCredentials(currentXsCredentialsRadioButton.Checked);
             testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
@@ -277,43 +271,55 @@ namespace XenAdmin.Dialogs.HealthCheck
             return true;
         }
 
-        private bool CheckCredentialsEntered(out string error)
+        private void CheckUploadAuthentication()
         {
-            error = string.Empty;
-            return CheckCredentialsEntered();
-        }
-
-        private bool CheckUploadAuthentication(out string error)
-        {
-            error = string.Empty;
-
-            if (!CheckCredentialsEntered())
-                return false;
-
             var action = new HealthCheckAuthenticationAction(textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
                 Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName, Registry.HealthCheckUploadTokenDomainName,
-                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 0, false);
+                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 0, true);
+            action.Completed += action_Completed;
 
-            try
-            {
-                action.RunExternal(null);
-            }
-            catch
-            {
-                error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
-                authenticationToken = null;
-                authenticated = false;
-                return authenticated;
-            }
+            okButton.Enabled = false;
+            pictureBoxStatus.Image = Images.StaticImages.ajax_loader;
+            labelStatus.Text = action.Description;
+            labelStatus.ForeColor = SystemColors.ControlText;
+            tableLayoutPanel5.Visible = true;
+            action.RunAsync();
+        }
 
-            authenticationToken = action.UploadToken;  // curent upload token
-            diagnosticToken = action.DiagnosticToken;  // curent diagnostic token
-            authenticated = !String.IsNullOrEmpty(authenticationToken) && !String.IsNullOrEmpty(diagnosticToken);
-            return authenticated;
+        private void action_Completed(ActionBase a)
+        {
+            Program.Invoke(this, () =>
+            {
+                if (!a.Succeeded || !(a is HealthCheckAuthenticationAction action))
+                {
+                    authenticationToken = null;
+                    authenticated = false;
+                }
+                else
+                {
+                    authenticationToken = action.UploadToken; // current upload token
+                    diagnosticToken = action.DiagnosticToken; // current diagnostic token
+                    authenticated = !string.IsNullOrEmpty(authenticationToken) && !string.IsNullOrEmpty(diagnosticToken);
+                }
+
+                if (!authenticated)
+                {
+                    pictureBoxStatus.Image = Images.StaticImages._000_error_h32bit_16;
+                    labelStatus.Text = a.Exception != null ? a.Exception.Message : Messages.ERROR_UNKNOWN;
+                    labelStatus.ForeColor = Color.Red;
+                    okButton.Enabled = true;
+                    return;
+                }
+
+                tableLayoutPanel5.Visible = false;
+                okButton.Enabled = true;
+                SaveAndClose();
+            });
         }
 
         private void credentials_TextChanged(object sender, EventArgs e)
         {
+            tableLayoutPanel5.Visible = false;
             UpdateButtons();
         }
 
@@ -379,20 +385,20 @@ namespace XenAdmin.Dialogs.HealthCheck
                 {
                     if (passedRbacChecks)
                     {
-                         ShowTestCredentialsStatus(Resources._000_Tick_h32bit_16, null);
+                         ShowTestCredentialsStatus(Images.StaticImages._000_Tick_h32bit_16, null);
                          okButton.Enabled = true;
                     }
                     else
                     {
                         okButton.Enabled = false;
-                        ShowTestCredentialsStatus(Resources._000_error_h32bit_16, action.Exception != null ? action.Exception.Message : Messages.HEALTH_CHECK_USER_NOT_AUTHORIZED);
+                        ShowTestCredentialsStatus(Images.StaticImages._000_error_h32bit_16, action.Exception != null ? action.Exception.Message : Messages.HEALTH_CHECK_USER_NOT_AUTHORIZED);
                     }   
                     textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked;
                 });
             };
 
             log.Debug("Testing logging in with the new credentials");
-            ShowTestCredentialsStatus(Resources.ajax_loader, null);
+            ShowTestCredentialsStatus(Images.StaticImages.ajax_loader, null);
             textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = false;
             action.RunAsync();
         }
@@ -426,8 +432,15 @@ namespace XenAdmin.Dialogs.HealthCheck
             return false;
         }
 
+        private void newAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            tableLayoutPanel5.Visible = false;
+            SetMyCitrixCredentials(existingAuthenticationRadioButton.Checked);
+        }
+
         private void existingAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            tableLayoutPanel5.Visible = false;
             UpdateButtons();
         }
 
@@ -435,6 +448,5 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             Program.OpenURL(Messages.MY_CITRIX_CREDENTIALS_URL);
         }
-
     }
 }
