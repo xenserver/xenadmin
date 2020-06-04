@@ -1001,6 +1001,9 @@
 
 {1}</value>
   </data>
+  <data name="Message.body-gfs2_capacity" xml:space="preserve">
+    <value>Space utilization on SR '{0}' has exceeded 80%.</value>
+  </data>
   <data name="Message.body-grace_license" xml:space="preserve">
     <value>A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
   </data>
@@ -1228,6 +1231,9 @@
   </data>
   <data name="Message.name-extauth_init_in_host_failed" xml:space="preserve">
     <value>Active Directory authorization is not available</value>
+  </data>
+  <data name="Message.name-gfs2_capacity" xml:space="preserve">
+    <value>Storage repository low on space</value>
   </data>
   <data name="Message.name-grace_license" xml:space="preserve">
     <value>Grace license issued.</value>
