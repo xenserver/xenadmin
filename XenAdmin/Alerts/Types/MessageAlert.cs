@@ -114,7 +114,7 @@ namespace XenAdmin.Alerts
                         }
                         break;
 
-                    // applies to is hosts, vms and pools where only the name is required
+                    // applies to hosts, vms and pools where only the name is required
                     case Message.MessageType.HA_HEARTBEAT_APPROACHING_TIMEOUT:
                     case Message.MessageType.HA_HOST_FAILED:
                     case Message.MessageType.HA_HOST_WAS_FENCED:
@@ -240,6 +240,11 @@ namespace XenAdmin.Alerts
                         VMSS vmss = Helpers.XenObjectFromMessage(Message) as VMSS;
                         var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, (vmss == null) ? "" : vmss.Name());
                         return policyAlertVMSS.Text;
+
+                    case Message.MessageType.unknown when Message.name == "GFS2_CAPACITY":
+                        if (XenObject != null)
+                            return string.Format(Message.FriendlyBody(Message.name), XenObject.Name());
+                        break;
                 }
 
                 return Message.body;
@@ -407,6 +412,9 @@ namespace XenAdmin.Alerts
         {
             get
             {
+                if (Message.name == "GFS2_CAPACITY")
+                    return Message.FriendlyName(Message.name);
+
                 string title = Message.FriendlyName(Message.MessageTypeString());
                 if (string.IsNullOrEmpty(title))
                     title = Message.name;

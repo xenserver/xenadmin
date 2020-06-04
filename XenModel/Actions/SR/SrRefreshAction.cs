@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = Messages.SR_REFRESH_ACTION_DESC;
+            Description = string.Format(Messages.SR_REFRESH_ACTION_DESC, SR.NameWithoutHost());
             XenAPI.SR.scan(Session, SR.opaque_ref);
             Description = Messages.COMPLETED;
         }
