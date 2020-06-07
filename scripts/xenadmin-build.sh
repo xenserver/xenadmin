@@ -91,6 +91,14 @@ else
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
   done
 
+  for locale in ja zh-CN
+  do
+    for file in XenCenterMain.resources.dll  XenModel.resources.dll  XenOvf.resources.dll  XenOvfTransport.resources.dll
+    do
+      cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+    done
+  done
+
   cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.exe "${SIGN_DESCR}"
   cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${SIGN_DESCR}"
   cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${SIGN_DESCR}"
