@@ -152,8 +152,8 @@
                                 <File Id="JaXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
                                 <File Id="JaMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
                                 <File Id="JaMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
-                                <File Id="JaXOResourcesDLL" Source="$(env.RepoRoot)\XenOvfApi\bin\Release\ja\XenOvf.resources.dll" />
-                                <File Id="JaXOTResourcesDLL" Source="$(env.RepoRoot)\XenOvfTransport\bin\Release\ja\XenOvfTransport.resources.dll" />
+                                <File Id="JaXOResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenOvf.resources.dll" />
+                                <File Id="JaXOTResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenOvfTransport.resources.dll" />
                             </Component>
                         </Directory>
                         <Directory Id="sc" Name="zh-CN">
@@ -162,8 +162,8 @@
                                 <File Id="ScXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
                                 <File Id="ScMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
                                 <File Id="ScMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
-                                <File Id="ScXOResourcesDLL" Source="$(env.RepoRoot)\XenOvfApi\bin\Release\zh-CN\XenOvf.resources.dll" />
-                                <File Id="ScXOTResourcesDLL" Source="$(env.RepoRoot)\XenOvfTransport\bin\Release\zh-CN\XenOvfTransport.resources.dll" />
+                                <File Id="ScXOResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenOvf.resources.dll" />
+                                <File Id="ScXOTResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenOvfTransport.resources.dll" />
                             </Component>
                         </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
