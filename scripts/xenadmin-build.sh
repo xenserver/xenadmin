@@ -103,7 +103,7 @@ else
   cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${SIGN_DESCR}"
   cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${SIGN_DESCR}"
 
-  for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
+  for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll Microsoft.ReportViewer.Common.resources.dll Microsoft.ReportViewer.WinForms.resources.dll
   do
     cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
   done
