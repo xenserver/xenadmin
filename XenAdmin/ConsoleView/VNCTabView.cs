@@ -529,7 +529,7 @@ namespace XenAdmin.ConsoleView
 
                 UpdateOpenSSHConsoleButtonState(); //guest_metrics change when there is an IP address change on a VIF
             }
-            else if (e.PropertyName == "VIFs" || e.PropertyName == "PIFs")
+            else if (e.PropertyName == "VIFs" || e.PropertyName == "PIFs" || e.PropertyName == "domid")
             {
                 UpdateOpenSSHConsoleButtonState();
             }
