@@ -1001,6 +1001,9 @@
 
 {1}</value>
   </data>
+  <data name="Message.body-gfs2_capacity" xml:space="preserve">
+    <value>SR '{0}' の領域使用率が 80% を超えています。</value>
+  </data>
   <data name="Message.body-grace_license" xml:space="preserve">
     <value>{0} に猶予ライセンスが発行されました。ライセンス サーバーに接続できないか、ライセンス サーバーのバージョンが古いか、ホストがアップグレード直後である場合に猶予ランセンスが発行されます。</value>
   </data>
@@ -1228,6 +1231,9 @@
   </data>
   <data name="Message.name-extauth_init_in_host_failed" xml:space="preserve">
     <value>Active Directory 認証が使用不可です</value>
+  </data>
+  <data name="Message.name-gfs2_capacity" xml:space="preserve">
+    <value>ストレージ リポジトリの領域が不足しています</value>
   </data>
   <data name="Message.name-grace_license" xml:space="preserve">
     <value>猶予ライセンスが発行されました。</value>
