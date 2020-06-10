@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -698,6 +698,12 @@
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
     <value>动态内存范围不满足以下约束。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_MAXPIN" xml:space="preserve">
+    <value>动态内存范围违反了约束 static_min = dynamic_min = dynamic_max = static_max。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_ORDER" xml:space="preserve">
+    <value>动态内存范围违反了约束 static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max。</value>
   </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>已达到此虚拟机允许使用的最大内存量。</value>
