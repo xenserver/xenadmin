@@ -789,9 +789,6 @@
   <data name="ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE" xml:space="preserve">
     <value>仮想ネットワーク インタフェースの名前の変更</value>
   </data>
-  <data name="ACTION_SET_VM_OTHER_CONFIG_TITLE" xml:space="preserve">
-    <value>VM 構成の保存</value>
-  </data>
   <data name="ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE" xml:space="preserve">
     <value>VM の削除</value>
   </data>
@@ -7373,11 +7370,11 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
     <value>[Citrix VM Tools] をインストール(&amp;I)</value>
   </data>
-  <data name="INSTANT_VM_CREATE_DESCRIPTION" xml:space="preserve">
-    <value>テンプレート '{1}' からの VM '{0}' の作成</value>
+  <data name="INSTANT_VM_CREATE_DESC_COMPLETED" xml:space="preserve">
+    <value>VM '{0}' が作成されました</value>
   </data>
   <data name="INSTANT_VM_CREATE_TITLE" xml:space="preserve">
-    <value>高速 VM 作成</value>
+    <value>テンプレート '{0}' から VM を高速作成</value>
   </data>
   <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED" xml:space="preserve">
     <value>このサーバーは現在統合された GPU を使用していません。</value>
@@ -7872,14 +7869,14 @@ SCSI ID: {2}
     <value>選択したサーバーをプール {0} に移動してもよろしいですか?</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL" xml:space="preserve">
-    <value>'{0}' をプール '{1}' から削除してもよろしいですか? 
+    <value>'{0}' をプール '{1}' から削除してもよろしいですか?
 
-これにより、'{2}' 上のローカル ストレージが完全に削除され、再初期化されます。また、すべてのデータが削除され、サーバーが再起動されます。</value>
+これにより、'{2}' 上のローカル ストレージが完全に削除され、再初期化されます。また、すべてのデータが削除され、サーバーが再起動されます。プール '{1}' 用に Active Directory が構成されている場合、サーバーはドメインから削除されます。</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_MULTIPLE" xml:space="preserve">
     <value>選択したサーバーをプール '{0}' から削除してもよろしいですか?
 
-これにより、これらのサーバー上のローカル ストレージが完全に削除され、再初期化されます。また、すべてのデータが削除され、サーバーが再起動されます。</value>
+これにより、これらのサーバー上のローカル ストレージが完全に削除され、再初期化されます。また、すべてのデータが削除され、サーバーが再起動されます。プール '{0}' 用に Active Directory が構成されている場合、サーバーはドメインから削除されます。</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_TITLE" xml:space="preserve">
     <value>プールからの削除</value>
@@ -8800,6 +8797,9 @@ SCSI ID: {2}
   </data>
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>新規プライベート ネットワーク</value>
+  </data>
+  <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>このサーバーでクラスタリングが有効になっています。</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
     <value>このサーバーにはマスターのものと異なるアップデートがあります</value>
@@ -11446,11 +11446,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SAVING_SEARCH" xml:space="preserve">
     <value>検索 '{0}' を保存しています...</value>
   </data>
-  <data name="SAVING_VMS_ACTION_DESC" xml:space="preserve">
-    <value>構成を保存しています...</value>
+  <data name="SAVING_VM_PROPERTIES_ACTION_TITLE" xml:space="preserve">
+    <value>VM プロパティの保存</value>
   </data>
-  <data name="SAVING_VMS_ACTION_TITLE" xml:space="preserve">
-    <value>VM 構成の保存</value>
+  <data name="SAVING_VM_PROPERTIES_ACTION_DESC" xml:space="preserve">
+    <value>構成を保存しています...</value>
   </data>
   <data name="SAVING_WLB_CONFIGURATION" xml:space="preserve">
     <value>ワークロード バランス構成を保存しています。</value>
