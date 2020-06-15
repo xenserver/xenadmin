@@ -76,18 +76,15 @@ namespace XenAdmin.Controls.MainWindowControls
 
         protected override void OnDropDownItemClicked(ToolStripItemClickedEventArgs e)
         {
-            var curItem = e.ClickedItem as ToolStripMenuItem;
-
-            if (curItem != null && !curItem.Checked)
+            if (e.ClickedItem is ToolStripMenuItem curItem && !curItem.Checked)
             {
-                foreach (ToolStripMenuItem item in DropDownItems)
+                foreach (var it in DropDownItems)
                 {
-                    if (item != null)
+                    if (it is ToolStripMenuItem item)
                         item.Checked = item == curItem;
                 }
 
-                if (NavigationViewChanged != null)
-                    NavigationViewChanged(curItem.Tag);
+                NavigationViewChanged?.Invoke(curItem.Tag);
             }
             base.OnDropDownItemClicked(e);
         }

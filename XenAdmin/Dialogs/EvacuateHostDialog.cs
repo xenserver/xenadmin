@@ -244,8 +244,8 @@ namespace XenAdmin.Dialogs
 
         private void Scan()
         {
-            DelegatedAsyncAction saveVMsAction = new DelegatedAsyncAction(connection, Messages.SAVING_VMS_ACTION_TITLE,
-                Messages.SAVING_VMS_ACTION_DESC, Messages.COMPLETED, delegate(Session session)
+            DelegatedAsyncAction saveVMsAction = new DelegatedAsyncAction(connection, Messages.SAVING_VM_PROPERTIES_ACTION_TITLE,
+                Messages.SAVING_VM_PROPERTIES_ACTION_DESC, Messages.COMPLETED, delegate(Session session)
                 {
                     //Save Evacuated VMs for later
                     host.SaveEvacuatedVMs(session);
@@ -556,13 +556,15 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = String.Format(vm.HasNewVirtualisationStates() ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = string.Format(vm.HasNewVirtualisationStates()
+                            ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT
+                            : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
                         // if the state is not unknown we have metrics and can show a detailed message.
                         // Otherwise go with the server and just say they aren't installed
-                        error = !vm.GetVirtualisationStatus().HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN)
+                        error = !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
@@ -602,7 +604,10 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        a = new InstallToolsCommand(Program.MainWindow, vm).ExecuteGetAction();
+                        var cmd = new InstallToolsCommand(Program.MainWindow, vm, DataGridView);
+                        cmd.InstallTools += action => a = action;
+                        cmd.Execute();
+
                         // The install pv tools action is marked as complete after they have taken the user to the console and loaded the disc
                         // Rescanning when the action is 'complete' in this case doesn't gain us anything then. Keep showing the "Click here to install PV drivers" text.
                         dialog.SetSession(a);
@@ -711,7 +716,7 @@ namespace XenAdmin.Dialogs
                     if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
                     {
                         errorParams = new List<string> {Failure.HA_NO_PLAN};
-                        errorParams.AddRange(failure.ErrorDescription.Skip(1));
+                        errorParams.AddRange(failure.ErrorDescription.Skip(1).ToArray());
                     }
 
                     ProcessError(null, errorParams.ToArray());
@@ -759,10 +764,10 @@ namespace XenAdmin.Dialogs
                         vmRef = ErrorDescription[1];
 
                         VM vm = connection.Resolve(new XenRef<VM>(vmRef));
-                        if (vm != null && InstallToolsCommand.CanExecute(vm))
-                            UpdateVMWithError(vmRef, String.Empty, Solution.InstallPVDrivers);
+                        if (InstallToolsCommand.CanExecute(vm) && !Helpers.StockholmOrGreater(connection))
+                            UpdateVMWithError(vmRef, string.Empty, Solution.InstallPVDrivers);
                         else
-                            UpdateVMWithError(vmRef, String.Empty, Solution.InstallPVDriversNoSolution);
+                            UpdateVMWithError(vmRef, string.Empty, Solution.InstallPVDriversNoSolution);
 
                         break;
 
@@ -850,21 +855,22 @@ namespace XenAdmin.Dialogs
             //We sudo once for all of them and store the session, or close the dialog.
             List<Role> validRoles = new List<Role>();
 
-            if (!connection.Session.IsLocalSuperuser
-                && !Registry.DontSudo
-                && !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
+            if (!connection.Session.IsLocalSuperuser &&
+                !Registry.DontSudo &&
+                !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
             {
-                var sudoDialog = XenAdminConfigManager.Provider.SudoDialogDelegate;
-                var result = sudoDialog(validRoles, connection, Text);
-                if (!result.Result)
-                {
-                    Close();
-                    return;
-                }
-
-                elevatedPass = result.ElevatedPassword;
-                elevatedUName = result.ElevatedUsername;
-                elevatedSession = result.ElevatedSession;
+                using (var d = new RoleElevationDialog(connection, connection.Session, validRoles, Text))
+                    if (d.ShowDialog(this) == DialogResult.OK)
+                    {
+                        elevatedPass = d.elevatedPassword;
+                        elevatedUName = d.elevatedUsername;
+                        elevatedSession = d.elevatedSession;
+                    }
+                    else
+                    {
+                        Close();
+                        return;
+                    }
             }
 
             update();

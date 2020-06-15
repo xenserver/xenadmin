@@ -63,7 +63,6 @@
             // 
             resources.ApplyResources(this.srPicker1, "srPicker1");
             this.tableLayoutPanel2.SetColumnSpan(this.srPicker1, 2);
-            this.srPicker1.Connection = null;
             this.srPicker1.Name = "srPicker1";
             this.srPicker1.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
             this.srPicker1.DoubleClickOnRow += new System.EventHandler(this.srPicker1_DoubleClickOnRow);

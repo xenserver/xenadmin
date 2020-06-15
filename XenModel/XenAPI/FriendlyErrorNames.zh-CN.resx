@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -289,7 +289,7 @@
     <value>cluster_host 操作失败，因为 cluster_host 尚未加入群集。</value>
   </data>
   <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
-    <value>群集堆栈已在使用中。</value>
+    <value>至少一个插入的 PBD 仍在使用群集堆栈。</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>找不到具有指定设备名称和 MAC 地址的网络接口。</value>
@@ -699,6 +699,12 @@
   <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
     <value>动态内存范围不满足以下约束。</value>
   </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_MAXPIN" xml:space="preserve">
+    <value>动态内存范围违反了约束 static_min = dynamic_min = dynamic_max = static_max。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_ORDER" xml:space="preserve">
+    <value>动态内存范围违反了约束 static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max。</value>
+  </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>已达到此虚拟机允许使用的最大内存量。</value>
   </data>
@@ -1087,6 +1093,36 @@
   </data>
   <data name="ROLE_NOT_FOUND" xml:space="preserve">
     <value>找不到角色。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_CHAIN_INVALID" xml:space="preserve">
+    <value>提供的中间证书不是 PEM 编码的 X509 证书。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_EXPIRED" xml:space="preserve">
+    <value>提供的证书已于 {0} 过期。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_INVALID" xml:space="preserve">
+    <value>提供的证书不是 PEM 编码的 X509 证书。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_ALGORITHM_NOT_SUPPORTED" xml:space="preserve">
+    <value>提供的密钥使用的算法不受支持。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_INVALID" xml:space="preserve">
+    <value>提供的密钥未采用 PEM 编码的 PKCS#8 格式。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_MISMATCH" xml:space="preserve">
+    <value>提供的密钥与提供的证书的公钥不匹配。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_RSA_LENGTH_NOT_SUPPORTED" xml:space="preserve">
+    <value>提供的 RSA 密钥的长度不在 2048 到 4096 之间。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_RSA_MULTI_NOT_SUPPORTED" xml:space="preserve">
+    <value>提供的 RSA 密钥使用了 2 个以上的素数，仅应使用 2 个。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_NOT_VALID_YET" xml:space="preserve">
+    <value>提供的证书在 {0} 之前无效。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_SIGNATURE_NOT_SUPPORTED" xml:space="preserve">
+    <value>提供的证书未使用 SHA256 (SHA2) 签名算法。</value>
   </data>
   <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>无法对会话进行身份验证。请检查访问凭据并重试。</value>

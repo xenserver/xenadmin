@@ -2124,7 +2124,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Install an SSL certificate pool-wide.
+        /// Install a TLS CA certificate, pool-wide.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2139,7 +2139,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Install an SSL certificate pool-wide.
+        /// Install a TLS CA certificate, pool-wide.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2154,7 +2154,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Remove an SSL certificate.
+        /// Remove a pool-wide TLS CA certificate.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2168,7 +2168,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Remove an SSL certificate.
+        /// Remove a pool-wide TLS CA certificate.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2182,7 +2182,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// List all installed SSL certificates.
+        /// List the names of all installed TLS CA certificates.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2195,7 +2195,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// List all installed SSL certificates.
+        /// List the names of all installed TLS CA certificates.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2208,7 +2208,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Install an SSL certificate revocation list, pool-wide.
+        /// Install a TLS Certificate Revocation List, pool-wide.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2223,7 +2223,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Install an SSL certificate revocation list, pool-wide.
+        /// Install a TLS Certificate Revocation List, pool-wide.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2238,7 +2238,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Remove an SSL certificate revocation list.
+        /// Remove a pool-wide TLS Certificate Revocation List.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2252,7 +2252,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Remove an SSL certificate revocation list.
+        /// Remove a pool-wide TLS Certificate Revocation List.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2266,7 +2266,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// List all installed SSL certificate revocation lists.
+        /// List the names of all installed TLS Certificate Revocation Lists.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2279,7 +2279,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// List all installed SSL certificate revocation lists.
+        /// List the names of all installed TLS Certificate Revocation Lists.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2292,7 +2292,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sync SSL certificates from master to slaves.
+        /// Copy the TLS CA certificates and CRLs of the master to all slaves.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2305,7 +2305,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sync SSL certificates from master to slaves.
+        /// Copy the TLS CA certificates and CRLs of the master to all slaves.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2561,11 +2561,13 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
+        /// Sets ssl_legacy false on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
         /// First published in XenServer 7.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
+        [Deprecated("Unreleased")]
         public static void disable_ssl_legacy(Session session, string _pool)
         {
             if (session.JsonRpcClient != null)
@@ -2575,11 +2577,13 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
+        /// Sets ssl_legacy false on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
         /// First published in XenServer 7.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
+        [Deprecated("Unreleased")]
         public static XenRef<Task> async_disable_ssl_legacy(Session session, string _pool)
         {
           if (session.JsonRpcClient != null)
@@ -3134,7 +3138,7 @@ namespace XenAPI
         private bool _wlb_enabled = false;
 
         /// <summary>
-        /// true if communication with the WLB server should enforce SSL certificate verification.
+        /// true if communication with the WLB server should enforce TLS certificate verification.
         /// First published in XenServer 5.5.
         /// </summary>
         public virtual bool wlb_verify_cert

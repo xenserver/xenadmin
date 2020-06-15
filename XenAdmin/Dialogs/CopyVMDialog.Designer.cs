@@ -53,8 +53,14 @@ namespace XenAdmin.Dialogs
             // srPicker1
             // 
             resources.ApplyResources(this.srPicker1, "srPicker1");
-            this.srPicker1.Connection = null;
+            this.srPicker1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.srPicker1.Name = "srPicker1";
+            this.srPicker1.NodeIndent = 3;
+            this.srPicker1.RootAlwaysExpanded = false;
+            this.srPicker1.ShowCheckboxes = false;
+            this.srPicker1.ShowDescription = true;
+            this.srPicker1.ShowImages = true;
+            this.srPicker1.ShowRootLines = true;
             this.srPicker1.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
             // 
             // CloseButton
@@ -98,7 +104,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.CopyRadioButton, "CopyRadioButton");
             this.CopyRadioButton.Name = "CopyRadioButton";
             this.CopyRadioButton.UseVisualStyleBackColor = true;
-            this.CopyRadioButton.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.CopyRadioButton.CheckedChanged += new System.EventHandler(this.CopyRadioButton_CheckedChanged);
             // 
             // DescriptionTextBox
             // 
@@ -167,7 +173,6 @@ namespace XenAdmin.Dialogs
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "CopyVMDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Shown += new System.EventHandler(this.CopyVMDialog_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanelSrPicker.ResumeLayout(false);

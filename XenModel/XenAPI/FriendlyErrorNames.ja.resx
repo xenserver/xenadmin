@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -289,7 +289,7 @@
     <value>cluster_host がクラスターに参加していないため、cluster_host 操作は失敗しました。</value>
   </data>
   <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
-    <value>クラスター スタックは既に使用されています。</value>
+    <value>少なくとも 1 つの接続された PBD によって、クラスター スタックが使用されています。</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>指定したデバイス名および MAC アドレスのネットワーク インターフェイスが見つかりません。</value>
@@ -699,6 +699,12 @@
   <data name="MEMORY_CONSTRAINT_VIOLATION" xml:space="preserve">
     <value>動的メモリの範囲が次の制約を満たしていません。</value>
   </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_MAXPIN" xml:space="preserve">
+    <value>動的メモリの範囲が、static_min = dynamic_min = dynamic_max = static_max 制約に違反しています。</value>
+  </data>
+  <data name="MEMORY_CONSTRAINT_VIOLATION_ORDER" xml:space="preserve">
+    <value>動的メモリの範囲が、static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max 制約に違反しています。</value>
+  </data>
   <data name="MEM_MAX_ALLOWED" xml:space="preserve">
     <value>この仮想マシンに設定可能なメモリの最大値に達しました。</value>
   </data>
@@ -1087,6 +1093,36 @@
   </data>
   <data name="ROLE_NOT_FOUND" xml:space="preserve">
     <value>役割が見つかりません。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_CHAIN_INVALID" xml:space="preserve">
+    <value>指定された中間証明書は、PEM エンコードされた X509 ではありません。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_EXPIRED" xml:space="preserve">
+    <value>指定された証明書は、{0} に有効期限が切れました。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_INVALID" xml:space="preserve">
+    <value>指定された証明書は、PEM エンコードされた X509 ではありません。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_ALGORITHM_NOT_SUPPORTED" xml:space="preserve">
+    <value>指定されたキーでは、サポートされていないアルゴリズムが使用されています。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_INVALID" xml:space="preserve">
+    <value>提供されたキーは、PEM エンコードされた PKCS#8 形式ではありません。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_MISMATCH" xml:space="preserve">
+    <value>指定されたキーが、指定された証明書の公開キーと一致しません。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_RSA_LENGTH_NOT_SUPPORTED" xml:space="preserve">
+    <value>RSA キーの長さは 2048 ～ 4096 で指定する必要があります。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_KEY_RSA_MULTI_NOT_SUPPORTED" xml:space="preserve">
+    <value>指定された RSA キーには、3 個以上の素数が使用されています。予期されている素数は 2 個のみです。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_NOT_VALID_YET" xml:space="preserve">
+    <value>指定された証明書は、{0} まで有効ではありません。</value>
+  </data>
+  <data name="SERVER_CERTIFICATE_SIGNATURE_NOT_SUPPORTED" xml:space="preserve">
+    <value>指定された証明書は SHA256 (SHA2) 署名アルゴリズムを使用していません。</value>
   </data>
   <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>セッションを認証できません。アカウント情報を確認し、もう一度実行してください。</value>

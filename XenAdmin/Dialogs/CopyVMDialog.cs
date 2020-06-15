@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Actions.VMActions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -41,59 +42,74 @@ namespace XenAdmin.Dialogs
 {
     public partial class CopyVMDialog : XenDialogBase
     {
-        private readonly VM TheVM;
-        private readonly bool IsRealVm;
+        private readonly VM _vm;
 
         public CopyVMDialog(VM vm)
         {
             InitializeComponent();
-            this.MinimumSize = this.Size;
-            IsRealVm = !vm.is_a_template;
-            TheVM = vm;
-            srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            Host affinity = TheVM.Home();
-            srPicker1.Connection = TheVM.Connection;
-            srPicker1.DiskSize = vm.TotalVMSize();
-            labelSrHint.Text = IsRealVm ? Messages.COPY_VM_SELECT_SR : Messages.COPY_TEMPLATE_SELECT_SR;
-            srPicker1.SetAffinity(affinity);
-            Pool pool = Helpers.GetPoolOfOne(vm.Connection);
-            if (pool != null)
-                srPicker1.DefaultSR = vm.Connection.Resolve(pool.default_SR);
+            _vm = vm;
+        }
 
-            NameTextBox.Text = GetDefaultCopyName(TheVM);
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
 
-            Text = IsRealVm ? Messages.COPY_VM : Messages.COPY_TEMPLATE;
+            labelSrHint.Text = _vm.is_a_template ? Messages.COPY_TEMPLATE_SELECT_SR : Messages.COPY_VM_SELECT_SR;
 
-            bool allow_copy = !vm.is_a_template || vm.allowed_operations.Contains(vm_operations.copy);
-            bool anyDiskFastCloneable = vm.AnyDiskFastClonable();
-            bool hasAtLeastOneDisk = vm.HasAtLeastOneDisk();
+            NameTextBox.Text = GetDefaultCopyName(_vm);
 
-            CopyRadioButton.Enabled = allow_copy && hasAtLeastOneDisk;
-            FastClonePanel.Enabled = !allow_copy || anyDiskFastCloneable || !hasAtLeastOneDisk;
+            Text = _vm.is_a_template ? Messages.COPY_TEMPLATE : Messages.COPY_VM;
+
+            bool allowCopy = !_vm.is_a_template || _vm.allowed_operations.Contains(vm_operations.copy);
+            bool anyDiskFastCloneable = _vm.AnyDiskFastClonable();
+            bool hasAtLeastOneDisk = _vm.HasAtLeastOneDisk();
+
+            CopyRadioButton.Enabled = allowCopy && hasAtLeastOneDisk;
+            FastClonePanel.Enabled = !allowCopy || anyDiskFastCloneable || !hasAtLeastOneDisk;
+
             if (!FastClonePanel.Enabled)
-            {
                 CloneRadioButton.Checked = false;
-            }
+
+            if (!CloneRadioButton.Enabled)
+                CopyRadioButton.Checked = true;
+
+            tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
+
             toolTipContainer1.SetToolTip(Messages.FAST_CLONE_UNAVAILABLE);
-            if (vm.is_a_template && !(anyDiskFastCloneable || allow_copy))
+
+            if (_vm.is_a_template && !(anyDiskFastCloneable || allowCopy))
             {
                 CloneRadioButton.Text = Messages.COPY_VM_CLONE_TEMPLATE_SLOW;
                 FastCloneDescription.Text = Messages.COPY_VM_SLOW_CLONE_DESCRIPTION;
             }
             else
             {
-                FastCloneDescription.Text = !vm.is_a_template ? Messages.COPY_VM_FAST_CLONE_DESCRIPTION : Messages.COPY_TEMPLATE_FAST_CLONE_DESCRIPTION;
+                FastCloneDescription.Text = !_vm.is_a_template
+                    ? Messages.COPY_VM_FAST_CLONE_DESCRIPTION
+                    : Messages.COPY_TEMPLATE_FAST_CLONE_DESCRIPTION;
             }
 
-            if (!CloneRadioButton.Enabled)
-                CopyRadioButton.Checked = true;
+            if (_vm.DescriptionType() != VM.VmDescriptionType.None)
+                DescriptionTextBox.Text = _vm.Description();
 
-            if (vm.DescriptionType() != VM.VmDescriptionType.None)
-                DescriptionTextBox.Text = vm.Description();
-
-            srPicker1.Invalidate();
-            srPicker1.selectDefaultSROrAny();
+            EnableMoveButton();
+            srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, _vm.Connection,
+                _vm.Home(), null, null, _vm.TotalVMSize());
         }
+
+        private void EnableMoveButton()
+        {
+            MoveButton.Enabled = NameTextBox.Text.Trim().Length > 0 && srPicker1.SR != null;
+        }
+
+        private static string GetDefaultCopyName(VM vmToCopy)
+        {
+            var takenNames = vmToCopy.Connection.Cache.VMs.Select(vm => vm.Name()).ToList();
+
+            return Helpers.MakeUniqueName(string.Format(Messages.ACTION_TEMPLATE_CLONE_NEW_NAME, vmToCopy.Name()), takenNames);
+        }
+
+        #region Control event handlers
 
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -105,11 +121,6 @@ namespace XenAdmin.Dialogs
             EnableMoveButton();
         }
 
-        private void EnableMoveButton()
-        {
-            MoveButton.Enabled = NameTextBox.Text.Trim().Length > 0 && srPicker1.SR != null;
-        }
-
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Close();
@@ -119,68 +130,21 @@ namespace XenAdmin.Dialogs
         {
             if (!tableLayoutPanelSrPicker.Enabled || CloneRadioButton.Checked)
             {
-                new VMCloneAction(TheVM,NameTextBox.Text, DescriptionTextBox.Text).RunAsync();
+                new VMCloneAction(_vm,NameTextBox.Text, DescriptionTextBox.Text).RunAsync();
                 Close();
                 return;
             }
 
             if (srPicker1.SR == null)
                 return;
-            //TODO  this
-            //bool sameSr = true;
-            //XenObject<SR> vm_sr = null;
-            //foreach (XenObject<VBD> vbd in TheVM.Connection.ResolveAll(TheVM.VBDs))
-            //{
-            //    if (vbd.type != vbd_type.Disk)
-            //        continue;
 
-            //    XenObject<VDI> vdi = TheVM.Connection.Resolve(vbd.VDI);
-            //    if (vdi == null)
-            //        continue;
+            var action = new VMCopyAction(_vm, _vm.GetStorageHost(false), srPicker1.SR, NameTextBox.Text, DescriptionTextBox.Text);
 
-            //    XenObject<SR> sr = TheVM.Connection.Resolve(vdi.SR);
-            //    if(sr == null)
-            //        continue;
-
-            //    if (vm_sr == null)
-            //    {
-            //        vm_sr = sr;
-            //        continue;
-            //    }
-
-            //    if (vm_sr.opaque_ref != sr.opaque_ref)
-            //    {
-            //        sameSr = false;
-            //        break;
-            //    }
-            //}
-
-
-            //if (sameSr && vm_sr != null && srPicker1.SR.opaque_ref == vm_sr.opaque_ref) // if we dont change the sr use clone
-            //{
-            //    action = new VmAction(TheVM.Connection, TheVM, TheVM.GetStorageHost(TheVM.Connection), NameTextBox.Text);
-            //}
-            //else
-            //{
-
-            var action = new VMCopyAction(TheVM, TheVM.GetStorageHost(false), srPicker1.SR, NameTextBox.Text, DescriptionTextBox.Text);
-            //}
             action.RunAsync();
             Close();
         }
 
-
-        private static string GetDefaultCopyName(VM vmToCopy)
-        {
-            List<string> takenNames = new List<string>();
-            foreach (VM vm in vmToCopy.Connection.Cache.VMs)
-            {
-                takenNames.Add(vm.Name());
-            }
-            return Helpers.MakeUniqueName(string.Format(Messages.ACTION_TEMPLATE_CLONE_NEW_NAME, vmToCopy.Name()), takenNames);
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void CopyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Checked;
             // Since the radiobuttons aren't in the same panel, we have to do manual mutual exclusion
@@ -193,9 +157,6 @@ namespace XenAdmin.Dialogs
             CopyRadioButton.Checked = !CloneRadioButton.Checked;
         }
 
-        private void CopyVMDialog_Shown(object sender, EventArgs e)
-        {
-            tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
-        }
+        #endregion
     }
 }

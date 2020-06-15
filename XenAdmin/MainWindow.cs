@@ -250,6 +250,8 @@ namespace XenAdmin
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
+
+            statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
@@ -442,13 +444,18 @@ namespace XenAdmin
                                 }
                             }
 
-                            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
-                            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
+                            int errorCount = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
+                            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
+
+                            statusLabelErrors.Text = errorCount == 1
+                                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE
+                                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY, errorCount);
+                            statusLabelErrors.Visible = errorCount > 0;
 
                             if (eventsPage.Visible)
                             {
-                                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errors);
-                                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errors);
+                                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errorCount);
+                                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errorCount);
                             }
                             break;
                         }
@@ -509,13 +516,19 @@ namespace XenAdmin
                 }
             }
 
-            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
-            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
+            int errorCount = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
+
+            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
+
+            statusLabelErrors.Text = errorCount == 1
+                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE
+                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY, errorCount);
+            statusLabelErrors.Visible = errorCount > 0;
 
             if (eventsPage.Visible)
             {
-                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errors);
-                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errors);
+                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errorCount);
+                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errorCount);
             }
         }
 
@@ -979,8 +992,8 @@ namespace XenAdmin
                 return;
             var newHealthCheckSSettings = pool.HealthCheckSettings();
             new TransferHealthCheckSettingsAction(pool, newHealthCheckSSettings,
-                newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
-                newHealthCheckSSettings.GetSecretyInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
+                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
+                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
         private static bool SameProductBrand(Host host)
@@ -1662,6 +1675,8 @@ namespace XenAdmin
             ShowHiddenObjectsToolStripMenuItem.Checked = Properties.Settings.Default.ShowHiddenVMs;
             connectDisconnectToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
             conversionToolStripMenuItem.Available = conn != null && conn.Cache.VMs.Any(v => v.IsConversionVM());
+            installToolsToolStripMenuItem.Available = SelectionManager.Selection.Any(v => !Helpers.StockholmOrGreater(v.Connection));
+            toolStripMenuItemInstallCertificate.Available = Helpers.StockholmOrGreater(conn);
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1693,12 +1708,12 @@ namespace XenAdmin
                 {
                     dialog = new OpenFileDialog();
                     dialog.Multiselect = false;
-                    dialog.Title = Messages.INSTALL_LICENSE_KEY;
+                    dialog.Title = Messages.SELECT_LICENSE_KEY;
                     dialog.CheckFileExists = true;
                     dialog.CheckPathExists = true;
                     dialog.Filter = string.Format("{0} (*.xslic)|*.xslic|{1} (*.*)|*.*", Messages.XS_LICENSE_FILES, Messages.ALL_FILES);
                     dialog.ShowHelp = true;
-                    dialog.HelpRequest += new EventHandler(dialog_HelpRequest);
+                    dialog.HelpRequest += dialog_HelpRequest;
                     result = dialog.ShowDialog(this);
                 }
             }
@@ -2226,15 +2241,15 @@ namespace XenAdmin
         #region IMainWindowCommandInterface Members
 
         /// <summary>
-        /// Closes all per-Connection and per-XenObject forms for the given connection.
+        /// Closes all per-Connection and per-VM forms for the given connection.
+        /// Per-Host forms are excluded on purpose.
         /// </summary>
         /// <param name="connection"></param>
         public void CloseActiveWizards(IXenConnection connection)
         {
             Program.Invoke(Program.MainWindow, delegate
             {
-                //so far we show per-xenObject forms only for VMs and Hosts
-                XenDialogBase.CloseAll(connection.Cache.VMs.Cast<IXenObject>().Union(connection.Cache.Hosts).ToArray());
+                XenDialogBase.CloseAll(connection.Cache.VMs.Cast<IXenObject>().ToArray());
 
                 if (activePoolWizards.TryGetValue(connection, out IList<Form> wizards))
                 {
@@ -2540,6 +2555,9 @@ namespace XenAdmin
                 {
                     int updatesCount = Updates.UpdateAlertsCount;
                     navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
+
+                    statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
+                    statusLabelUpdates.Visible = updatesCount > 0;
 
                     if (updatesPage.Visible)
                     {
@@ -2919,19 +2937,22 @@ namespace XenAdmin
 
         #endregion
 
-        void XenCenterAlerts_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void XenCenterAlerts_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.BeginInvoke(Program.MainWindow, () =>
-                {
-                    navigationPane.UpdateNotificationsButton(
-                        NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+            {
+                var count = Alert.NonDismissingAlertCount;
+                navigationPane.UpdateNotificationsButton(NotificationsSubMode.Alerts, count);
 
-                    if (alertPage.Visible)
-                    {
-                        TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
-                        TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
-                    }
-                });
+                statusLabelAlerts.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_STATUS, count);
+                statusLabelAlerts.Visible = count > 0;
+
+                if (alertPage.Visible)
+                {
+                    TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Alerts, count);
+                    TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Alerts, count);
+                }
+            });
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -3196,6 +3217,21 @@ namespace XenAdmin
                 ConsolePanel.UpdateRDPResolution();
 
             SetTitleLabelMaxWidth();
+        }
+
+        private void statusLabelAlerts_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Alerts);
+        }
+
+        private void statusLabelUpdates_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Updates);
+        }
+
+        private void statusLabelErrors_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }
     }
 }

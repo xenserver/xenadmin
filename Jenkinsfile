@@ -186,12 +186,12 @@ sh xenadmin.git/scripts/xenadmin-build.sh ${GLOBAL_BUILD_NUMBER} ${env.SIGNING_N
 """
       }
 
-      def dotNetManifest = readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\dotnet-packages-manifest.txt").trim()
+      def dotNetManifest = "${env.WORKSPACE}\\xenadmin.git\\packages\\dotnet-packages-manifest.txt"
 
       powershell """
 "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
 "chroot-lenny chroots.hg 1a75fa5848e8" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
-"${dotNetManifest}" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
+Get-Content -Path "${dotNetManifest}" | Out-File -FilePath ${manifestFile} -Append -Encoding UTF8
 """
     }
 

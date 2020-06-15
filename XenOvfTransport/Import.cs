@@ -491,8 +491,6 @@ namespace XenOvfTransport
         }
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging mechanism")]
         internal List<XenRef<VDI>> ImportFile(Session xenSession, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid)
         {
             List<XenRef<VDI>> vdiRef = new List<XenRef<VDI>>();
@@ -1982,8 +1980,7 @@ namespace XenOvfTransport
                     }
             }
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging mechanism")]
+
         private string VerifyUserDevice(Session xenSession, XenRef<VM> vmRef, string device)
         {
             log.DebugFormat("Import.VerifyUserDevice, checking device: {0} (99 = autoselect)", device);

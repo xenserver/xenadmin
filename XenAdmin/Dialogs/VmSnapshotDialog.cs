@@ -139,7 +139,7 @@ namespace XenAdmin.Dialogs
                 labelQuiesceInfo.Text = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 labelQuiesceInfo.Text = Messages.INFO_QUIESCE_MODE_POWER_STATE;
-            else if (!_VM.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+            else if (!_VM.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                 labelQuiesceInfo.Text = _VM.HasNewVirtualisationStates()
                     ? Messages.INFO_QUIESCE_MODE_NO_MGMNT
                     : Messages.INFO_QUIESCE_MODE_NO_TOOLS;
@@ -150,7 +150,7 @@ namespace XenAdmin.Dialogs
                 labelCheckpointInfo.Text = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 labelCheckpointInfo.Text = Messages.INFO_DISKMEMORY_MODE_POWER_STATE;
-            else if (!_VM.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+            else if (!_VM.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 labelCheckpointInfo.Text = (_VM.HasNewVirtualisationStates() ? Messages.INFO_DISKMEMORY_MODE_NO_IO_DRIVERS : Messages.INFO_DISKMEMORY_MODE_NO_TOOLS);
             else
                 labelCheckpointInfo.Text = Messages.INFO_DISKMEMORY_MODE_MISC;

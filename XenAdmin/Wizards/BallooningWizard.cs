@@ -31,12 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using XenAdmin.Dialogs;
 using XenAdmin.Controls;
 using XenAdmin.Wizards.BallooningWizard_Pages;
 using XenAPI;
@@ -47,36 +41,23 @@ namespace XenAdmin.Wizards
     {
         private readonly ChooseVMs xenTabPageVMs;
         private readonly MemorySettings xenTabPageSettings;
-        
-        private long origStaticMax;
-        private bool has_ballooning;
 
         public BallooningWizard(List<VM> vms)
             : base(vms[0].Connection)
         {
             InitializeComponent();
 
-            xenTabPageVMs = new ChooseVMs();
+            xenTabPageVMs = new ChooseVMs {CheckedVMs = vms};
             xenTabPageSettings = new MemorySettings();
+            xenTabPageSettings.InstallTools += xenTabPageSettings_InstallTools;
 
-            xenTabPageVMs.VMs = vms;
-            AddPage(xenTabPageVMs);
-            AddPage(xenTabPageSettings);
+            AddPages(xenTabPageVMs, xenTabPageSettings);
 
             if (vms.Count == 1)  // if there is only one VM, don't offer a choice
             {
                 xenTabPageVMs.DisableStep = true;
                 NextStep();
             }
-
-            origStaticMax = vms[0].memory_static_max;
-            has_ballooning = vms[0].has_ballooning();
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            UpdateWizard();
-            base.OnShown(e);
         }
 
         protected override void UpdateWizardContent(XenTabPage senderPage)
@@ -85,23 +66,9 @@ namespace XenAdmin.Wizards
                 xenTabPageSettings.VMs = xenTabPageVMs.CheckedVMs;
         }
 
-        protected override void FinishWizard()
+        private void xenTabPageSettings_InstallTools()
         {
-            xenTabPageSettings.UnfocusSpinners();
-            bool canCloseWizard = BallooningDialog.ConfirmAndChange(this, xenTabPageVMs.CheckedVMs,
-                has_ballooning ? (long)xenTabPageSettings.dynamic_min : (long)xenTabPageSettings.static_max,
-                // dynamic_min and _max should stay equal to static_max for VMs without ballooning
-                has_ballooning ? (long)xenTabPageSettings.dynamic_max : (long)xenTabPageSettings.static_max,
-                (long)xenTabPageSettings.static_max, origStaticMax, xenTabPageSettings.AdvancedMode);
-            if (canCloseWizard)
-                base.FinishWizard();
-            else
-                FinishCanceled();
-        }
-        
-        private void xenTabPageSettings_InstallTools(object sender, EventArgs e)
-        {
-            this.Close();
+            Close();
         }
     }
 }

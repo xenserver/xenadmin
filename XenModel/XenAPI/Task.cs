@@ -677,6 +677,21 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the task progress
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_task">The opaque_ref of the given task</param>
+        /// <param name="_value">Task progress value to be set</param>
+        public static void set_progress(Session session, string _task, double _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.task_set_progress(session.opaque_ref, _task, _value);
+            else
+                session.XmlRpcProxy.task_set_progress(session.opaque_ref, _task ?? "", _value).parse();
+        }
+
+        /// <summary>
         /// Return a list of all the tasks known to the system.
         /// First published in XenServer 4.0.
         /// </summary>

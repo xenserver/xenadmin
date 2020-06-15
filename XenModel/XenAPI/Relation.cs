@@ -161,6 +161,7 @@ namespace XenAPI
             });
 
             relations.Add(typeof(Proxy_Host), new Relation[] {
+                new Relation("certificates", "Certificate", "host"),
                 new Relation("features", "Feature", "host"),
                 new Relation("PUSBs", "PUSB", "host"),
                 new Relation("PGPUs", "PGPU", "host"),

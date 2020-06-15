@@ -87,15 +87,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public override void PopulatePage()
         {
-            srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            Host affinity = TheVM.Home();
-            srPicker1.Connection = TheVM.Connection;
-            srPicker1.DiskSize = TheVM.TotalVMSize();
             labelSrHint.Text = TheVM.is_a_template ? Messages.COPY_TEMPLATE_SELECT_SR : Messages.COPY_VM_SELECT_SR;
-            srPicker1.SetAffinity(affinity);
-            Pool pool = Helpers.GetPoolOfOne(TheVM.Connection);
-            if (pool != null)
-                srPicker1.DefaultSR = TheVM.Connection.Resolve(pool.default_SR);
 
             NameTextBox.Text = GetDefaultCopyName(TheVM);
 
@@ -105,11 +97,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             CopyRadioButton.Enabled = allow_copy && hasAtLeastOneDisk;
             FastClonePanel.Enabled = !allow_copy || anyDiskFastCloneable || !hasAtLeastOneDisk;
+
             if (!FastClonePanel.Enabled)
-            {
                 CloneRadioButton.Checked = false;
-            }
+
+            if (!CloneRadioButton.Enabled)
+                CopyRadioButton.Checked = true;
+
             toolTipContainer1.SetToolTip(Messages.FAST_CLONE_UNAVAILABLE);
+
             if (TheVM.is_a_template && !(anyDiskFastCloneable || allow_copy))
             {
                 CloneRadioButton.Text = Messages.COPY_VM_CLONE_TEMPLATE_SLOW;
@@ -120,20 +116,18 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 FastCloneDescription.Text = !TheVM.is_a_template ? Messages.COPY_VM_FAST_CLONE_DESCRIPTION : Messages.COPY_TEMPLATE_FAST_CLONE_DESCRIPTION;
             }
 
-            if (!CloneRadioButton.Enabled)
-                CopyRadioButton.Checked = true;
-
             if (TheVM.DescriptionType() != VM.VmDescriptionType.None)
                 DescriptionTextBox.Text = TheVM.Description();
-
-            srPicker1.Invalidate();
-            srPicker1.selectDefaultSROrAny();
 
             tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
 
             labelRubric.Text = TheVM.is_a_template
                                    ? Messages.COPY_TEMPLATE_INTRA_POOL_RUBRIC
                                    : Messages.COPY_VM_INTRA_POOL_RUBRIC;
+
+            UpdateButtons();
+            srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, TheVM.Connection,
+                TheVM.Home(), null, null, TheVM.TotalVMSize());
         }
 
         public override bool EnableNext()

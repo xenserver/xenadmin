@@ -114,7 +114,7 @@ namespace XenAdmin.Alerts
                         }
                         break;
 
-                    // applies to is hosts, vms and pools where only the name is required
+                    // applies to hosts, vms and pools where only the name is required
                     case Message.MessageType.HA_HEARTBEAT_APPROACHING_TIMEOUT:
                     case Message.MessageType.HA_HOST_FAILED:
                     case Message.MessageType.HA_HOST_WAS_FENCED:
@@ -240,6 +240,11 @@ namespace XenAdmin.Alerts
                         VMSS vmss = Helpers.XenObjectFromMessage(Message) as VMSS;
                         var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, (vmss == null) ? "" : vmss.Name());
                         return policyAlertVMSS.Text;
+
+                    case Message.MessageType.unknown when Message.name == "GFS2_CAPACITY":
+                        if (XenObject != null)
+                            return string.Format(Message.FriendlyBody(Message.name), XenObject.Name());
+                        break;
                 }
 
                 return Message.body;
@@ -407,6 +412,9 @@ namespace XenAdmin.Alerts
         {
             get
             {
+                if (Message.name == "GFS2_CAPACITY")
+                    return Message.FriendlyName(Message.name);
+
                 string title = Message.FriendlyName(Message.MessageTypeString());
                 if (string.IsNullOrEmpty(title))
                     title = Message.name;
@@ -440,38 +448,30 @@ namespace XenAdmin.Alerts
             base.Dismiss();
         }
 
-        /// <summary>
-        /// Find the MessageAlert corresponding to the given Message, or null if none exists.
-        /// </summary>
-        /// <param name="m"></param>
-        public static Alert FindAlert(Message m)
-        {
-            return FindAlert(a => a is MessageAlert &&
-                                  ((MessageAlert)a).Message.opaque_ref == m.opaque_ref &&
-                                  m.Connection == a.Connection);
-        }
-
         public static void RemoveAlert(Message m)
         {
-            Alert a = FindAlert(m);
-            if (a != null)
-                RemoveAlert(a);
+            var alert = FindAlert(a => a is MessageAlert msgAlert &&
+                                       msgAlert.Message.opaque_ref == m.opaque_ref &&
+                                       msgAlert.Connection == m.Connection);
+            if (alert != null)
+                RemoveAlert(alert);
         }
 
-        /// <summary>
-        /// Parses a XenAPI.Message into an Alert object.
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
         public static Alert ParseMessage(Message msg)
         {
-            if (msg.IsPerfmonAlarm())
+            switch (msg.Type)
             {
-                return new AlarmMessageAlert(msg);
+                case Message.MessageType.ALARM:
+                    return new AlarmMessageAlert(msg);
+                case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRED:
+                case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
+                case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
+                case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30:
+                    return new CertificateAlert(msg);
+                default:
+                    // For all other kinds of alert
+                    return new MessageAlert(msg);
             }
-
-            // For all other kinds of alert
-            return new MessageAlert(msg);
         }
     }
 }

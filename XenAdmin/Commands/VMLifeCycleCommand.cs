@@ -169,7 +169,7 @@ namespace XenAdmin.Commands
             if (vm == null)
                 return null;
 
-            var status = vm.GetVirtualisationStatus();
+            var status = vm.GetVirtualisationStatus(out _);
             //trying to guess the reason
             if (vm.HasNewVirtualisationStates())
             {

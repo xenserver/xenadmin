@@ -46,24 +46,30 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             InitializeComponent();
             this.vm = vm;
-            srPicker1.DoubleClickOnRow += srPicker1_DoubleClickOnRow;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
             Host affinity = vm.Home();
-            srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            //this has to be set after ImportTemplate, otherwise the usage will be reset to VM
+
             var vdis = (from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
-                                           where vbd.GetIsOwner()
-                                           let vdi = vm.Connection.Resolve(vbd.VDI)
-                                           where vdi != null
-                                           select vdi).ToArray();
-            srPicker1.SetExistingVDIs(vdis);
-            srPicker1.Connection = vm.Connection;
-            srPicker1.DiskSize = vm.TotalVMSize();
-            srPicker1.SetAffinity(affinity);
-            srPicker1.Invalidate();
-            srPicker1.selectDefaultSROrAny();
+                where vbd.GetIsOwner()
+                let vdi = vm.Connection.Resolve(vbd.VDI)
+                where vdi != null
+                select vdi).ToArray();
 
             EnableMoveButton();
+            srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, vm.Connection,
+                affinity, null, vdis, vm.TotalVMSize());
         }
+
+        private void EnableMoveButton()
+        {
+            buttonMove.Enabled = srPicker1.SR != null;
+        }
+
+        #region Control event handlers
 
         private void srPicker1_DoubleClickOnRow(object sender, EventArgs e)
         {
@@ -78,11 +84,6 @@ namespace XenAdmin.Dialogs.VMDialogs
             Close();
         }
 
-        private void EnableMoveButton()
-        {
-            buttonMove.Enabled = srPicker1.SR != null;
-        }
-
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
             EnableMoveButton();
@@ -92,5 +93,7 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             Close();
         }
+
+        #endregion
     }
 }

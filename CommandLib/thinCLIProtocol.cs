@@ -37,6 +37,7 @@ using System.Net.Security;
 using System.IO;
 using System.Net.Sockets;
 using System.Security.Authentication;
+using System.Linq;
 
 
 
@@ -77,6 +78,7 @@ namespace CommandLib
 	    public int major = 0;
 	    public int minor = 1;
         public bool dropOut;
+        public List<string> EnteredParamValues;
 
         public thinCLIProtocol(delegateGlobalError dGlobalError, 
             delegateGlobalUsage dGlobalUsage, 
@@ -98,6 +100,7 @@ namespace CommandLib
             this.dProgress = dProgress;
             this.conf = conf;
             dropOut = false;
+            EnteredParamValues = new List<string>();
         }
         
     }        
@@ -495,6 +498,43 @@ namespace CommandLib
             }
         }
 
+
+        public static void CheckPermitFiles(String filename, thinCLIProtocol tCLIprotocol, bool includeCurrentDir = false)
+        {
+            string fullpath = "";
+
+            try
+            {
+                fullpath = Path.GetFullPath(filename);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Failed to retrieve full path of file '{0}', '{1}'", filename, ex.Message));
+            }
+
+            if (includeCurrentDir)
+                tCLIprotocol.EnteredParamValues.Add(Directory.GetCurrentDirectory());
+
+            foreach (string value in tCLIprotocol.EnteredParamValues)
+            {
+                try
+                {
+                    String valueFullPath = Path.GetFullPath(value);
+
+                    if (fullpath.StartsWith(valueFullPath))
+                    {
+                        tCLIprotocol.dGlobalDebug("Passed permit files check", tCLIprotocol);
+                        return;
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+            throw new Exception(string.Format("The file with name '{0}' is not present at the command line.", filename));
+        }
+
         public static void interpreter(Stream stream, thinCLIProtocol tCLIprotocol)
         {
             string filename = "";
@@ -560,11 +600,13 @@ namespace CommandLib
                                 break;
                             case Messages.tag.Load:
                                 filename = Types.unmarshal_string(stream);
+                                CheckPermitFiles(filename, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: Load " + filename, tCLIprotocol);
                                 Messages.load(stream, filename, tCLIprotocol);
                                 break;
                             case Messages.tag.HttpPut:
                                 filename = Types.unmarshal_string(stream);
+                                CheckPermitFiles(filename, tCLIprotocol);
                                 path = Types.unmarshal_string(stream);
                                 Uri uri = ParseUri(path, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
@@ -572,6 +614,7 @@ namespace CommandLib
                                 break;
                             case Messages.tag.HttpGet:
                                 filename = Types.unmarshal_string(stream);
+                                CheckPermitFiles(filename, tCLIprotocol, true);
                                 path = Types.unmarshal_string(stream);
                                 uri = ParseUri(path, tCLIprotocol);
                                 tCLIprotocol.dGlobalDebug("Read: HttpGet " + filename + " -> " + uri, tCLIprotocol);

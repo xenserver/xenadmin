@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
@@ -40,22 +41,20 @@ namespace XenAdmin.Controls.Ballooning
 {
     public partial class VMMemoryControlsBasic : VMMemoryControlsEdit
     {
-        private bool ballooning = true;
-        public event EventHandler InstallTools;
+        public event Action InstallTools;
 
         public VMMemoryControlsBasic()
         {
             InitializeComponent();
         }
         
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void Populate()
         {
             if (vms == null || vms.Count == 0)
                 return;
 
-            // If !firstPaint, don't re-intialize, because it will pull the rug from under our own edits.
-            if (!firstPaint)
-                return;
+            pictureBoxDynMin.Visible = hasBallooning;
+            pictureBoxDynMax.Visible = hasBallooning;
 
             // Calculate the maximum legal value of dynamic minimum
             CalcMaxDynMin();
@@ -65,7 +64,7 @@ namespace XenAdmin.Controls.Ballooning
             bool licenseRestriction = Helpers.FeatureForbidden(vm0.Connection, Host.RestrictDMC);
 
             // Radio buttons and "DMC Unavailable" warning
-            if (ballooning && !licenseRestriction)
+            if (hasBallooning && !licenseRestriction)
             {
                 if (vm0.memory_dynamic_min == vm0.memory_static_max)
                     radioFixed.Checked = true;
@@ -88,11 +87,11 @@ namespace XenAdmin.Controls.Ballooning
                 {
                     // If all the Virtualisation Statuses are the same, report that reason.
                     // Otherwise give a generic message.
-                    VM.VirtualisationStatus vs0 = vm0.GetVirtualisationStatus();
+                    VM.VirtualisationStatus vs0 = vm0.GetVirtualisationStatus(out _);
                     bool identical = true;
                     foreach (VM vm in vms)
                     {
-                        if (vm.GetVirtualisationStatus() != vs0)
+                        if (vm.GetVirtualisationStatus(out _) != vs0)
                         {
                             identical = false;
                             break;
@@ -100,7 +99,7 @@ namespace XenAdmin.Controls.Ballooning
                     }
                     if (identical)
                     {
-                        var status = vm0.GetVirtualisationStatus();
+                        var status = vm0.GetVirtualisationStatus(out _);
                         if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED_PLURAL;
                         else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
@@ -114,7 +113,8 @@ namespace XenAdmin.Controls.Ballooning
                     }
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
-                    linkInstallTools.Visible = InstallToolsCommand.CanExecuteAll(vms);
+
+                    linkInstallTools.Visible = vms.All(InstallToolsCommand.CanExecute);
                 }
                 else if (vm0.is_a_template)
                 {
@@ -123,7 +123,7 @@ namespace XenAdmin.Controls.Ballooning
                 }
                 else
                 {
-                    var status = vm0.GetVirtualisationStatus();
+                    var status = vm0.GetVirtualisationStatus(out _);
 
                     if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_NOTSUPPORTED;
@@ -140,6 +140,11 @@ namespace XenAdmin.Controls.Ballooning
                 }
             }
 
+            if (linkInstallTools.Visible)
+                linkInstallTools.Text = vms.All(v => Helpers.StockholmOrGreater(v.Connection))
+                    ? Messages.INSTALLTOOLS_READ_MORE
+                    : Messages.INSTALL_XENSERVER_TOOLS;
+
             // Spinners
             FreeSpinnerRanges();
             memorySpinnerDynMin.Initialize(vm0.memory_dynamic_min, vm0.memory_static_max);
@@ -147,41 +152,27 @@ namespace XenAdmin.Controls.Ballooning
             memorySpinnerFixed.Initialize(vm0.memory_static_max, vm0.memory_static_max);
             SetIncrements();
             SetSpinnerRanges();
-            firstPaint = false;
         }
 
-        public override double dynamic_min
+        protected override double dynamic_min
         {
             get
             {
-                System.Diagnostics.Trace.Assert(ballooning);
-                return (radioDynamic.Checked ? memorySpinnerDynMin.Value : memorySpinnerFixed.Value);
+                System.Diagnostics.Trace.Assert(hasBallooning);
+                return radioDynamic.Checked ? memorySpinnerDynMin.Value : memorySpinnerFixed.Value;
             }
         }
 
-        public override double dynamic_max
+        protected override double dynamic_max
         {
             get
             {
-                System.Diagnostics.Trace.Assert(ballooning);
-                return (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
+                System.Diagnostics.Trace.Assert(hasBallooning);
+                return radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value;
             }
         }
 
-        public override double static_max
-        {
-            get
-            {
-                return (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
-            }
-        }
-
-        protected override void SetBallooning(bool hasBallooning)
-        {
-            ballooning = hasBallooning;
-            pictureBoxDynMin.Visible = hasBallooning;
-            pictureBoxDynMax.Visible = hasBallooning;
-        }
+        protected override double static_max => (radioDynamic.Checked ? memorySpinnerDynMax.Value : memorySpinnerFixed.Value);
 
         private void SetIncrements()
         {
@@ -190,8 +181,6 @@ namespace XenAdmin.Controls.Ballooning
 
         private void DynamicSpinners_ValueChanged(object sender, EventArgs e)
         {
-            if (firstPaint)  // still initialising
-                return;
             radioDynamic.Checked = true;
             if (sender == memorySpinnerDynMax)
             {
@@ -209,8 +198,6 @@ namespace XenAdmin.Controls.Ballooning
 
         private void FixedSpinner_ValueChanged(object sender, EventArgs e)
         {
-            if (firstPaint)  // still initialising
-                return;
             radioFixed.Checked = true;
             SetIncrements();
         }
@@ -221,7 +208,7 @@ namespace XenAdmin.Controls.Ballooning
             double maxFixed = ((maxDynMin >= 0 && maxDynMin <= MemorySpinnerMax) ? maxDynMin : MemorySpinnerMax);
             memorySpinnerFixed.SetRange(vm0.memory_static_min >= Util.BINARY_MEGA ? vm0.memory_static_min : Util.BINARY_MEGA, maxFixed);
 
-            if (!ballooning)
+            if (!hasBallooning)
                 return;
 
             // Calculate limits for the dynamic spinners
@@ -255,14 +242,15 @@ namespace XenAdmin.Controls.Ballooning
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (new InstallToolsCommand(Program.MainWindow, vms).ConfirmAndExecute())
-                OnInstallTools();
-        }
+            if (vms.All(v => Helpers.StockholmOrGreater(v.Connection)))
+            {
+                Help.HelpManager.Launch("InstallToolsWarningDialog");
+                return;
+            }
 
-        private void OnInstallTools()
-        {
-            if (InstallTools != null)
-                InstallTools(this, new EventArgs());
+            var cmd = new InstallToolsCommand(Program.MainWindow, vms);
+            cmd.InstallTools += _ => InstallTools?.Invoke();
+            cmd.Execute();
         }
     }
 }

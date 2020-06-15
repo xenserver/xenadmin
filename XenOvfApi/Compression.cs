@@ -152,8 +152,6 @@ namespace XenOvf
         /// <param name="inputfile"></param>
         /// <param name="outputfile"></param>
         /// <param name="method"></param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging only usage")]
         public void UncompressFile(string inputfile, string outputfile, string method)
         {
             if (method.ToLower() == "gzip")
@@ -185,8 +183,7 @@ namespace XenOvf
 
 
         #region PRIVATE
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                                                         Justification = "Logging only usage")]
+
         private void ProcessCompression(EnvelopeType env, string path, string method, bool compress)
         {
             if (env.References != null && env.References.File != null && env.References.File.Length > 0)

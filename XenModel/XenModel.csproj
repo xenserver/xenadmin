@@ -80,6 +80,7 @@
     <Compile Include="Actions\GPU\VgpuConfigurationAction.cs" />
     <Compile Include="Actions\Host\ApplyLicenseEditionAction.cs" />
     <Compile Include="Actions\Host\ChangeControlDomainMemoryAction.cs" />
+    <Compile Include="Actions\Host\InstallCertificateAction.cs" />
     <Compile Include="Actions\Host\DestroyHostAction.cs" />
     <Compile Include="Actions\Host\EnableHostAction.cs" />
     <Compile Include="Actions\Host\EvacuateHostAction.cs" />
@@ -357,6 +358,7 @@
     <Compile Include="XenAPI\allocation_algorithm.cs" />
     <Compile Include="XenAPI\ApiVersion.cs" />
     <Compile Include="XenAPI\bond_mode.cs" />
+    <Compile Include="XenAPI\Certificate.cs" />
     <Compile Include="XenAPI\Cluster.cs" />
     <Compile Include="XenAPI\Cluster_host.cs" />
     <Compile Include="XenAPI\cluster_host_operation.cs" />

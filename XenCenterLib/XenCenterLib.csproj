@@ -88,7 +88,6 @@
     <Compile Include="Set.cs" />
     <Compile Include="StreamUtilities.cs" />
     <Compile Include="StringUtility.cs" />
-    <Compile Include="TimeUtil.cs" />
     <Compile Include="ToStringWrapper.cs" />
     <Compile Include="Win32.cs" />
     <Compile Include="XSVersionAttribute.cs" />

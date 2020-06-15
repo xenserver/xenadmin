@@ -330,7 +330,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             // We can get a lot of refresh flickering in the ISO box as all the VDIs are discovered
             // Possibly slightly rude, but were going to have a pretend action here which gives it some breathing space before we look for VDIs
-            DelegatedAsyncAction waitAction = new DelegatedAsyncAction(Connection, Messages.SR_REFRESH_ACTION_DESC, Messages.SR_REFRESH_ACTION_DESC, Messages.COMPLETED,
+            DelegatedAsyncAction waitAction = new DelegatedAsyncAction(Connection, Messages.SR_REFRESH_ACTION_TITLE, Messages.SR_REFRESH_ACTION_DESC, Messages.COMPLETED,
                 delegate
                 {
                     System.Threading.Thread.Sleep(10000);

@@ -89,7 +89,8 @@ namespace XenAdmin.Commands
                 return;
             }
 
-            if (!host.GetRunningVMs().Any() && (pool == null || !host.IsMaster()))
+            if (!host.GetRunningVMs().Any() &&
+                (pool == null || pool.Connection.Cache.Hosts.Length == 1 || !host.IsMaster()))
             {
                 Program.MainWindow.CloseActiveWizards(host.Connection);
                 var action = new EvacuateHostAction(host, null, new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);

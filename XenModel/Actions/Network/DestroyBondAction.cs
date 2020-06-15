@@ -31,11 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Net;
 using XenAPI;
 using XenAdmin.Core;
-
 using XenAdmin.Network;
+
 
 namespace XenAdmin.Actions
 {
@@ -54,11 +54,6 @@ namespace XenAdmin.Actions
         private readonly List<PIF> Masters = new List<PIF>();
 
         /// <summary>
-        /// Masters that held secondary management interfaces.  These are discovered when bringing masters down.
-        /// </summary>
-        private readonly List<PIF> Secondaries = new List<PIF>();
-
-        /// <summary>
         /// All slaves under each bond in Bonds.  These will be plugged at the end, in order to
         /// get metrics like the carrier flag, if they haven't already been brought up as a
         /// management interface.
@@ -69,11 +64,6 @@ namespace XenAdmin.Actions
         /// The first slave (ordered by name) under each master.
         /// </summary>
         private readonly Dictionary<PIF, PIF> FirstSlaves = new Dictionary<PIF, PIF>();
-
-        /// <summary>
-        /// A dictionary of copies of the equivalent entries in FirstSlaves, but with the IP details that we're carrying across.
-        /// </summary>
-        private readonly Dictionary<PIF, PIF> NewFirstSlaves = new Dictionary<PIF, PIF>();
 
         /// <summary>
         /// The network that we're either going to destroy or rename.
@@ -152,39 +142,51 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            PercentComplete = 0;
             Connection.ExpectDisruption = true;
-            List<VIF> unplugged_vifs = new List<VIF>();
-            string old_network_name = Network == null ? "" : Network.Name();
-            Exception e = null;
 
-            BestEffort(ref e, ReconfigureManagementInterfaces);
+            int incr = Masters.Count > 0 ? 50 / Masters.Count : 0;
 
-            if (e != null)
-                throw e;
+            try
+            {
+                foreach (PIF master in Masters)
+                {
+                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstSlaves[master]);
+                    PercentComplete += incr;
+                }
+            }
+            catch (WebException we)
+            {
+                //ignore keep-alive failure since disruption is expected
+                if (we.Status != WebExceptionStatus.KeepAliveFailure)
+                    throw;
+            }
 
             PercentComplete = 50;
 
-            int inc = 40 / Bonds.Count;
+            Exception e = null;
 
-            int lo = PercentComplete;
+            int inc = Bonds.Count > 0 ? 40 / Bonds.Count : 0;
+
             foreach (Bond bond in Bonds)
             {
                 Bond bond1 = bond;
-                int lo1 = lo;
                 BestEffort(ref e, delegate() { RelatedTask = Bond.async_destroy(Session, bond1.opaque_ref);});
-                PollToCompletion(lo1, lo1 + inc);
-
-                lo += inc;
+                PollToCompletion(PercentComplete, PercentComplete + inc);
             }
+
+            PercentComplete = 90;
 
             if (Network != null)
             {
+                string oldNetworkName = Network.Name();
+
                 // Destroy the old network
-                log.DebugFormat("Destroying network {0} ({1})...", old_network_name, Network.uuid);
+                log.DebugFormat("Destroying network {0} ({1})...", oldNetworkName, Network.uuid);
                 BestEffort(ref e, delegate()
                     {
                         XenAPI.Network.destroy(Session, Network.opaque_ref);
-                        log.DebugFormat("Network {0} ({1}) destroyed.", old_network_name, Network.uuid);
+                        log.DebugFormat("Network {0} ({1}) destroyed.", oldNetworkName, Network.uuid);
                     });
             }
 
@@ -192,18 +194,6 @@ namespace XenAdmin.Actions
                 throw e;
 
             Description = string.Format(Messages.ACTION_DESTROY_BOND_DONE, Name);
-        }
-
-        private void ReconfigureManagementInterfaces()
-        {
-            int progress = 0;
-            int inc = 50 / Masters.Count;
-
-            foreach (PIF master in Masters)
-            {
-                progress += inc;
-                NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstSlaves[master]);
-            }
         }
 
         private void UnlockAll()

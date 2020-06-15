@@ -31,10 +31,11 @@
 
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
+using XenAdmin.Network;
+using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAPI;
 
 namespace XenAdmin.Dialogs.WarningDialogs
@@ -42,20 +43,22 @@ namespace XenAdmin.Dialogs.WarningDialogs
     public partial class LVMoHBAWarningDialog : XenDialogBase
     {
         private Panel highlightedPanel;
-        private FibreChannelDevice currentDevice;
+        private string deviceDetails;
         private int remainingDevicesCount;
         private bool foundExistingSR;
         private readonly SR.SRTypes existingSrType;
         private readonly SR.SRTypes requestedSrType;
+        private readonly IXenConnection _connection;
 
-        public LVMoHBA.UserSelectedOption SelectedOption { get; private set; }
-        public bool RepeatForRemainingLUNs { get { return checkBoxRepeat.Checked; } }
+        public UserSelectedOption SelectedOption { get; private set; }
+        public bool RepeatForRemainingLUNs => checkBoxRepeat.Checked;
 
-        public LVMoHBAWarningDialog(FibreChannelDevice currentDevice, int remainingDevicesCount,
+        public LVMoHBAWarningDialog(IXenConnection connection, string deviceDetails, int remainingDevicesCount,
             bool foundExistingSR, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
         {
             InitializeComponent();
-            this.currentDevice = currentDevice;
+            _connection = connection;
+            this.deviceDetails = deviceDetails;
             this.remainingDevicesCount = remainingDevicesCount;
             this.foundExistingSR = foundExistingSR;
             this.existingSrType = existingSrType;
@@ -64,17 +67,16 @@ namespace XenAdmin.Dialogs.WarningDialogs
             ActiveControl = buttonCancel;
         }
 
-        private object HighlightedPanel
+        private Panel HighlightedPanel
         {
-            get { return highlightedPanel; }
             set
             {
-                Panel panel = value as Panel;
-                if (panel == highlightedPanel) return;
+                if (highlightedPanel == value)
+                    return;
 
                 SetPanelColor(highlightedPanel, false);
-                SetPanelColor(panel, true);
-                highlightedPanel = panel;
+                SetPanelColor(value, true);
+                highlightedPanel = value;
             }
         }
 
@@ -82,32 +84,18 @@ namespace XenAdmin.Dialogs.WarningDialogs
         {
             if (panel == null)
                 return;
-            
+
             Color color = highlighted ? SystemColors.ControlLight : SystemColors.Control;
             panel.BackColor = color;
 
             foreach (var control in panel.Controls)
             {
-                if (control is Button)
+                if (control is Button button)
                 {
-                    var button = control as Button;
                     button.FlatAppearance.MouseOverBackColor = color;
                     button.FlatAppearance.MouseDownBackColor = color;
                 }
             }
-        }
-
-        private void PanelClicked()
-        {
-            Panel panel = HighlightedPanel as Panel;
-            if (panel == null)
-                return;
-
-            SelectedOption = panel == panelFormat
-                                 ? LVMoHBA.UserSelectedOption.Format
-                                 : LVMoHBA.UserSelectedOption.Reattach;
-
-            DialogResult = DialogResult.OK;
         }
 
         private void panelReattach_MouseEnter(object sender, EventArgs e)
@@ -120,62 +108,117 @@ namespace XenAdmin.Dialogs.WarningDialogs
             HighlightedPanel = panelFormat;
         }
 
-        private void ExistingSRsWarningDialog_MouseEnter(object sender, EventArgs e)
+        private void LVMoHBAWarningDialog_MouseEnter(object sender, EventArgs e)
         {
             HighlightedPanel = null;
-        }
-
-        private void panel_Click(object sender, EventArgs e)
-        {
-            PanelClicked();
         }
 
         private void PopulateControls()
         {
             labelHeader.Text = foundExistingSR
-                                   ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR, SR.getFriendlyTypeName(existingSrType))
-                                   : Messages.LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS;
+                ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR, SR.getFriendlyTypeName(existingSrType))
+                : Messages.LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS;
 
             checkBoxRepeat.Text = foundExistingSR
-                                      ? Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_WITH_SR
-                                      : Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_NO_SR;
+                ? Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_WITH_SR
+                : Messages.LVMOHBA_WARNING_DIALOG_REPEAT_FOR_REMAINING_NO_SR;
             checkBoxRepeat.Visible = remainingDevicesCount > 0;
 
-            labelLUNDetails.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_LUN_DETAILS, currentDevice.Vendor,
-                                                 currentDevice.Serial,
-                                                 string.IsNullOrEmpty(currentDevice.SCSIid)
-                                                     ? currentDevice.Path
-                                                     : currentDevice.SCSIid,
-                                                 Util.DiskSizeString(currentDevice.Size));
+            labelLUNDetails.Text = deviceDetails;
+            labelSrDetails.Visible = false;
 
-            labelReattachInfo.Text = foundExistingSR
-                                   ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_REATTACH_INFO, SR.getFriendlyTypeName(existingSrType))
-                                   : Messages.LVMOHBA_WARNING_DIALOG_REATTACH_LABEL_TEXT;
+            var isGfs2 = existingSrType == SR.SRTypes.gfs2;
+            var clusteringEnabled = _connection.Cache.Clusters.Any();
+            var restrictGfs2 = Helpers.FeatureForbidden(_connection, Host.RestrictCorosync);
 
-            labelFormatInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_FORMAT_INFO, SR.getFriendlyTypeName(requestedSrType));
+            if (foundExistingSR)
+            {
+                if (isGfs2 && restrictGfs2)
+                    labelReattachInfo.Text = Messages.GFS2_INCORRECT_POOL_LICENSE;
+                else if (isGfs2 && !clusteringEnabled)
+                    labelReattachInfo.Text = Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+                else
+                    labelReattachInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_REATTACH_INFO,
+                        SR.getFriendlyTypeName(existingSrType));
+            }
+            else
+            {
+                labelReattachInfo.Text = Messages.LVMOHBA_WARNING_DIALOG_REATTACH_LABEL_TEXT;
+            }
 
-            panelReattach.Enabled = foundExistingSR;
+            labelFormatInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_FORMAT_INFO,
+                SR.getFriendlyTypeName(requestedSrType));
+
+            panelReattach.Enabled = foundExistingSR && (!isGfs2 || clusteringEnabled && !restrictGfs2);
             if (!panelReattach.Enabled)
                 pictureBoxArrowReattach.Image = Drawing.ConvertToGreyScale(pictureBoxArrowReattach.Image);
-
-            
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            SelectedOption = LVMoHBA.UserSelectedOption.Cancel;
+            SelectedOption = UserSelectedOption.Cancel;
         }
 
-        private void buttonReattach_Click(object sender, EventArgs e)
+        private void panelReattach_Click(object sender, EventArgs e)
         {
             HighlightedPanel = panelReattach;
-            PanelClicked();
+            SelectedOption = UserSelectedOption.Reattach;
+            DialogResult = DialogResult.OK;
         }
 
-        private void buttonFormat_Click(object sender, EventArgs e)
+        private void panelFormat_Click(object sender, EventArgs e)
         {
             HighlightedPanel = panelFormat;
-            PanelClicked();
+            SelectedOption = UserSelectedOption.Format;
+            DialogResult = DialogResult.OK;
+        }
+
+
+        public enum UserSelectedOption
+        {
+            Cancel,
+            Reattach,
+            Format,
+            Skip
+        }
+    }
+
+    public class LVMoIsciWarningDialog : LVMoHBAWarningDialog
+    {
+        public LVMoIsciWarningDialog(IXenConnection connection, SR.SRInfo srInfo, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
+            : base(connection, "", 0, srInfo != null, existingSrType, requestedSrType)
+        {
+            labelLUNDetails.Visible = false;
+            labelSrDetails.Visible = srInfo != null;
+
+            // CA-17230: if the found SR is used by other connected pools, offer only to attach it
+
+            if (srInfo != null)
+            {
+                SR sr = SrWizardHelpers.SrInUse(srInfo.UUID);
+                if (sr != null)
+                {
+                    panelFormat.Visible = false;
+                    labelWarning.Text = GetSrInUseMessage(sr);
+                }
+
+                labelSrDetails.Text = string.Format(Messages.ISCSI_DIALOG_SR_DETAILS, Util.DiskSizeString(srInfo.Size), srInfo.UUID);
+            }
+        }
+
+        public static string GetSrInUseMessage(SR sr)
+        {
+            Pool pool = Helpers.GetPool(sr.Connection);
+            
+            if (pool != null)
+                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name(), pool.Name());
+            
+            Host master = Helpers.GetMaster(sr.Connection);
+            
+            if (master != null)
+                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), master.Name());
+
+            return Messages.NEWSR_LUN_IN_USE;
         }
     }
 }

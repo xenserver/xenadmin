@@ -43,26 +43,21 @@ namespace XenAdmin.Dialogs
 {
     public partial class BallooningDialog : XenDialogBase
     {
-        private long origStaticMax;
-        private List<VM> vmList;
+        private readonly VM _vm;
         private VMMemoryControlsEdit memoryControls;
-        private bool advanced;
 
         public BallooningDialog()
         {
             InitializeComponent();
         }
 
-        public BallooningDialog(VM vm, bool advanced)
+        public BallooningDialog(VM vm)
             : base(vm.Connection)
         {
             InitializeComponent();
+            _vm = vm;
 
-            vmList = new List<VM>(1) {vm};
-            origStaticMax = vm.memory_static_max;
-            this.advanced = advanced;
-
-            if (advanced)
+            if (vm.advanced_ballooning())
             {
                 memoryControls = new VMMemoryControlsAdvanced();
 
@@ -83,105 +78,23 @@ namespace XenAdmin.Dialogs
             panel1.Controls.Add(memoryControls);
         }
 
-        protected override void OnShown(EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
-            memoryControls.VMs = vmList;
-            base.OnShown(e);
+            memoryControls.VMs = new List<VM> {_vm};
+            base.OnLoad(e);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
             memoryControls.UnfocusSpinners();
-            var hasBallooning = vmList[0].has_ballooning();
 
-            var confirmChange = ConfirmAndChange(this, vmList,
-                hasBallooning ? (long)memoryControls.dynamic_min : (long)memoryControls.static_max, // dynamic_min and _max should stay equal to static_max for VMs without ballooning
-                hasBallooning ? (long)memoryControls.dynamic_max : (long)memoryControls.static_max,
-                (long)memoryControls.static_max, origStaticMax, advanced);
-
-            if (confirmChange)
+            if (memoryControls.ChangeMemorySettings())
                 Close();
         }
 
-        private void BallooningDialog_InstallTools(object sender, EventArgs e)
+        private void BallooningDialog_InstallTools()
         {
             Close();
-        }
-
-        
-        private static List<ChangeMemorySettingsAction> ConfirmAndCalcActions(IWin32Window parentWindow, List<VM> VMs, long dynamic_min, long dynamic_max, long static_max, long prev_static_max, bool advanced, bool suppressHistory)
-        {
-            if (prev_static_max / Util.BINARY_MEGA == static_max / Util.BINARY_MEGA)  // don't want to throw warning dialog just for rounding errors
-            {
-                if (dynamic_min == static_max)
-                    dynamic_min = prev_static_max;
-                if (dynamic_max == static_max)
-                    dynamic_max = prev_static_max;
-                static_max = prev_static_max;
-            }
-            else
-            {
-                // If not all VMs Halted, confirm static_max changes, and abort if necessary
-                foreach (VM vm in VMs)
-                {
-                    if (vm.power_state != vm_power_state.Halted)
-                    {
-                        // Six(!) possible messages depending on the exact configuration.
-                        // (Could have an additional message for VMs without ballooning but with tools, e.g. on a free host, for which we can do a
-                        // clean shutdown: but having a false positive for the scarier message about force shutdown is not too bad).
-                        // We assume that all VMs have the same has_ballooning.
-                        string msg;
-                        if (advanced)
-                            msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_STATIC_MAX_SINGULAR : Messages.CONFIRM_CHANGE_STATIC_MAX_PLURAL);
-                        else if (vm.has_ballooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC))
-                            msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_MAX_PLURAL);
-                        else
-                            msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_PLURAL);
-                        
-                        DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
-                        {
-                            dialogResult = dlg.ShowDialog(parentWindow);
-                        }
-                        if (DialogResult.Yes != dialogResult)
-                            return null;
-                        break;
-                    }
-                }
-            }
-
-            List<ChangeMemorySettingsAction> actions = new List<ChangeMemorySettingsAction>(VMs.Count);
-            foreach (VM vm in VMs)
-            {
-                ChangeMemorySettingsAction action = new ChangeMemorySettingsAction(
-                    vm,
-                    string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name()),
-                    (long)vm.memory_static_min, dynamic_min, dynamic_max, static_max,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm, suppressHistory);
-                actions.Add(action);
-            }
-
-            return actions;
-        }
-
-        public static bool ConfirmAndChange(IWin32Window parentWindow, List<VM> VMs, long dynamic_min, long dynamic_max, long static_max, long prev_static_max, bool advanced)
-        {
-            List<ChangeMemorySettingsAction> actions = ConfirmAndCalcActions(parentWindow, VMs, dynamic_min, dynamic_max, static_max, prev_static_max, advanced, false);
-            if (actions == null)
-                return false;
-            foreach (ChangeMemorySettingsAction action in actions)
-                action.RunAsync();
-            return true;
-        }
-
-        public static ChangeMemorySettingsAction ConfirmAndReturnAction(IWin32Window parentWindow, VM vm, long dynamic_min, long dynamic_max, long static_max, long prev_static_max, bool advanced)
-        {
-            List<VM> vms = new List<VM>(1);
-            vms.Add(vm);
-            List<ChangeMemorySettingsAction> actions = ConfirmAndCalcActions(parentWindow, vms, dynamic_min, dynamic_max, static_max, prev_static_max, advanced, true);
-            if (actions == null || actions.Count == 0)
-                return null;
-            else
-                return actions[0];
         }
     }
 }

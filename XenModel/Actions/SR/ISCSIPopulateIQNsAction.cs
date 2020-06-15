@@ -225,8 +225,25 @@ namespace XenAdmin.Actions
                 deviceConfig["chappassword"] = chapPassword;
             }
 
-            var probeResults = SR.probe_ext(Session, pool.master.opaque_ref,
-                     deviceConfig, SR.SRTypes.gfs2.ToString(), new Dictionary<string, string>());
+            List<Probe_result> probeResults;
+            try
+            {
+                probeResults = SR.probe_ext(Session, pool.master.opaque_ref,
+                    deviceConfig, SR.SRTypes.gfs2.ToString(), new Dictionary<string, string>());
+            }
+            catch (Failure f)
+            {
+                //this will probably not happen for this scan, but be defensive
+                if (f.ErrorDescription.Count > 1 && f.ErrorDescription[0] == "ISCSILogin")
+                {
+                    if (deviceConfig.ContainsKey("chapuser") && deviceConfig.ContainsKey("chappassword"))
+                        throw new Exception(Messages.ACTION_ISCSI_IQN_SCANNING_GFS2);
+                    
+                    throw new Failure("SR_BACKEND_FAILURE_68");
+                }
+
+                throw;
+            }
 
             var results = new List<IScsiIqnInfo>();
             var index = -1;

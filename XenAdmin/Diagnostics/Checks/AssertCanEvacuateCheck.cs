@@ -236,7 +236,7 @@ namespace XenAdmin.Diagnostics.Checks
         private static CannotMigrateVM.CannotMigrateVMReason GetMoreSpecificReasonForCannotMigrateVm(VM vm, CannotMigrateVM.CannotMigrateVMReason reason)
         {
             var gm = vm.Connection.Resolve(vm.guest_metrics);
-            var status = vm.GetVirtualisationStatus();
+            var status = vm.GetVirtualisationStatus(out _);
 
             if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows())
             {

@@ -3690,6 +3690,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Space utilization on SR &apos;{0}&apos; has exceeded 80%..
+        /// </summary>
+        public static string Message_body_gfs2_capacity {
+            get {
+                return ResourceManager.GetString("Message.body-gfs2_capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded..
         /// </summary>
         public static string Message_body_grace_license {
@@ -4505,6 +4514,15 @@ namespace XenAdmin {
         public static string Message_name_extauth_init_in_host_failed {
             get {
                 return ResourceManager.GetString("Message.name-extauth_init_in_host_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage repository low on space.
+        /// </summary>
+        public static string Message_name_gfs2_capacity {
+            get {
+                return ResourceManager.GetString("Message.name-gfs2_capacity", resourceCulture);
             }
         }
         

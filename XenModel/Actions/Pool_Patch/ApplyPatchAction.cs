@@ -133,8 +133,17 @@ namespace XenAdmin.Actions
             Description = string.Format(Messages.APPLYING_PATCH, patch.Name(), host.Name());
             log.DebugFormat("Applying update '{0}' to server '{1}'", patch.Name(), host.Name());
 
-            RelatedTask = Pool_patch.async_apply(Session, patchRef, host.opaque_ref);
-            PollToCompletion();
+            try
+            {
+                RelatedTask = Pool_patch.async_apply(Session, patchRef, host.opaque_ref);
+                PollToCompletion();
+            }
+            catch (Failure f)
+            {
+                log.ErrorFormat("Failed to apply patch '{0}' on server '{1}': '{2}'",
+                    patch.Name(), host.Name(), string.Join(", ", f.ErrorDescription)); //CA-339237
+                throw;
+            }
 
             log.DebugFormat("Applied update '{0}' to server '{1}'. Result: {2}.", patch.Name(), host.Name(), Result);
             Description = string.Format(Messages.PATCH_APPLIED, patch.Name(), host.Name());

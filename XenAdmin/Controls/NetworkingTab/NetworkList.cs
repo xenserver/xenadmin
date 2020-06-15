@@ -446,7 +446,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 }
                 else
                 {
-                    if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                    if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                     {
                         RemoveButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_REMOVE_NETWORK_IO_DRIVERS : Messages.TOOLTIP_REMOVE_NETWORK_TOOLS);
                         EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);

@@ -547,7 +547,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The cluster stack is already in use..
+        ///   Looks up a localized string similar to The cluster stack is still in use by at least one plugged PBD..
         /// </summary>
         public static string CLUSTER_STACK_IN_USE {
             get {
@@ -1825,6 +1825,24 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max..
+        /// </summary>
+        public static string MEMORY_CONSTRAINT_VIOLATION_MAXPIN {
+            get {
+                return ResourceManager.GetString("MEMORY_CONSTRAINT_VIOLATION_MAXPIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max..
+        /// </summary>
+        public static string MEMORY_CONSTRAINT_VIOLATION_ORDER {
+            get {
+                return ResourceManager.GetString("MEMORY_CONSTRAINT_VIOLATION_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This message has been deprecated..
         /// </summary>
         public static string MESSAGE_DEPRECATED {
@@ -2960,6 +2978,96 @@ namespace XenAPI {
         public static string ROLE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("ROLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided intermediate certificates are not in a pem-encoded X509..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_CHAIN_INVALID {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_CHAIN_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided certificate expired on {0}..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_EXPIRED {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided certificate is not in a pem-encoded X509..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_INVALID {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided key uses an unsupported algorithm..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_KEY_ALGORITHM_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_KEY_ALGORITHM_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided key is not in a pem-encoded PKCS#8 format..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_KEY_INVALID {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided key does not match the provided certificate&apos;s public key..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_KEY_MISMATCH {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_KEY_MISMATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided RSA key does not have a length between 2048 and 4096..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_KEY_RSA_LENGTH_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_KEY_RSA_LENGTH_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided RSA key is using more than 2 primes, expecting only 2..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_KEY_RSA_MULTI_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_KEY_RSA_MULTI_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided certificate is not valid before {0}..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_NOT_VALID_YET {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_NOT_VALID_YET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided certificate is not using the SHA256 (SHA2) signature algorithm..
+        /// </summary>
+        public static string SERVER_CERTIFICATE_SIGNATURE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SERVER_CERTIFICATE_SIGNATURE_NOT_SUPPORTED", resourceCulture);
             }
         }
         

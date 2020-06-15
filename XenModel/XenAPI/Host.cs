@@ -109,7 +109,9 @@ namespace XenAPI
             List<XenRef<Feature>> features,
             string iscsi_iqn,
             bool multipathing,
-            string uefi_certificates)
+            string uefi_certificates,
+            List<XenRef<Certificate>> certificates,
+            string[] editions)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -170,6 +172,8 @@ namespace XenAPI
             this.iscsi_iqn = iscsi_iqn;
             this.multipathing = multipathing;
             this.uefi_certificates = uefi_certificates;
+            this.certificates = certificates;
+            this.editions = editions;
         }
 
         /// <summary>
@@ -260,6 +264,8 @@ namespace XenAPI
             iscsi_iqn = update.iscsi_iqn;
             multipathing = update.multipathing;
             uefi_certificates = update.uefi_certificates;
+            certificates = update.certificates;
+            editions = update.editions;
         }
 
         internal void UpdateFrom(Proxy_Host proxy)
@@ -323,6 +329,8 @@ namespace XenAPI
             iscsi_iqn = proxy.iscsi_iqn == null ? null : proxy.iscsi_iqn;
             multipathing = (bool)proxy.multipathing;
             uefi_certificates = proxy.uefi_certificates == null ? null : proxy.uefi_certificates;
+            certificates = proxy.certificates == null ? null : XenRef<Certificate>.Create(proxy.certificates);
+            editions = proxy.editions == null ? new string[] {} : (string [])proxy.editions;
         }
 
         public Proxy_Host ToProxy()
@@ -387,6 +395,8 @@ namespace XenAPI
             result_.iscsi_iqn = iscsi_iqn ?? "";
             result_.multipathing = multipathing;
             result_.uefi_certificates = uefi_certificates ?? "";
+            result_.certificates = certificates == null ? new string[] {} : Helper.RefListToStringArray(certificates);
+            result_.editions = editions;
             return result_;
         }
 
@@ -516,6 +526,10 @@ namespace XenAPI
                 multipathing = Marshalling.ParseBool(table, "multipathing");
             if (table.ContainsKey("uefi_certificates"))
                 uefi_certificates = Marshalling.ParseString(table, "uefi_certificates");
+            if (table.ContainsKey("certificates"))
+                certificates = Marshalling.ParseSetRef<Certificate>(table, "certificates");
+            if (table.ContainsKey("editions"))
+                editions = Marshalling.ParseStringArray(table, "editions");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -585,7 +599,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._features, other._features) &&
                 Helper.AreEqual2(this._iscsi_iqn, other._iscsi_iqn) &&
                 Helper.AreEqual2(this._multipathing, other._multipathing) &&
-                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates);
+                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
+                Helper.AreEqual2(this._certificates, other._certificates) &&
+                Helper.AreEqual2(this._editions, other._editions);
         }
 
         internal static List<Host> ProxyArrayToObjectList(Proxy_Host[] input)
@@ -1407,9 +1423,11 @@ namespace XenAPI
         /// <summary>
         /// Get the ssl_legacy field of the given host.
         /// First published in XenServer 7.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("Unreleased")]
         public static bool get_ssl_legacy(Session session, string _host)
         {
             if (session.JsonRpcClient != null)
@@ -1542,6 +1560,34 @@ namespace XenAPI
                 return session.JsonRpcClient.host_get_uefi_certificates(session.opaque_ref, _host);
             else
                 return session.XmlRpcProxy.host_get_uefi_certificates(session.opaque_ref, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the certificates field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<Certificate>> get_certificates(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_certificates(session.opaque_ref, _host);
+            else
+                return XenRef<Certificate>.Create(session.XmlRpcProxy.host_get_certificates(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the editions field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static string[] get_editions(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_editions(session.opaque_ref, _host);
+            else
+                return (string [])session.XmlRpcProxy.host_get_editions(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -3010,6 +3056,53 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Install the TLS server certificate.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_certificate">The server certificate, in PEM form</param>
+        /// <param name="_private_key">The unencrypted private key used to sign the certificate, in PKCS#8 form</param>
+        /// <param name="_certificate_chain">The certificate chain, in PEM form</param>
+        public static void install_server_certificate(Session session, string _host, string _certificate, string _private_key, string _certificate_chain)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_install_server_certificate(session.opaque_ref, _host, _certificate, _private_key, _certificate_chain);
+            else
+                session.XmlRpcProxy.host_install_server_certificate(session.opaque_ref, _host ?? "", _certificate ?? "", _private_key ?? "", _certificate_chain ?? "").parse();
+        }
+
+        /// <summary>
+        /// Install the TLS server certificate.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_certificate">The server certificate, in PEM form</param>
+        /// <param name="_private_key">The unencrypted private key used to sign the certificate, in PKCS#8 form</param>
+        /// <param name="_certificate_chain">The certificate chain, in PEM form</param>
+        public static XenRef<Task> async_install_server_certificate(Session session, string _host, string _certificate, string _private_key, string _certificate_chain)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_install_server_certificate(session.opaque_ref, _host, _certificate, _private_key, _certificate_chain);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_install_server_certificate(session.opaque_ref, _host ?? "", _certificate ?? "", _private_key ?? "", _certificate_chain ?? "").parse());
+        }
+
+        /// <summary>
+        /// Delete the current TLS server certificate and replace by a new, self-signed one. This should only be used with extreme care.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static void emergency_reset_server_certificate(Session session)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_emergency_reset_server_certificate(session.opaque_ref);
+            else
+                session.XmlRpcProxy.host_emergency_reset_server_certificate(session.opaque_ref).parse();
+        }
+
+        /// <summary>
         /// Change to another edition, or reactivate the current edition after a license has expired. This may be subject to the successful checkout of an appropriate license.
         /// First published in XenServer 5.6.
         /// </summary>
@@ -3074,11 +3167,11 @@ namespace XenAPI
 
         /// <summary>
         /// Set the power-on-mode, host, user and password 
-        /// First published in XenServer 5.6.
+        /// First published in XenServer 5.6 FP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        /// <param name="_power_on_mode">power-on-mode can be empty,iLO,wake-on-lan, DRAC or other</param>
+        /// <param name="_power_on_mode">power-on-mode can be empty, wake-on-lan, DRAC or other</param>
         /// <param name="_power_on_config">Power on config</param>
         public static void set_power_on_mode(Session session, string _host, string _power_on_mode, Dictionary<string, string> _power_on_config)
         {
@@ -3090,11 +3183,11 @@ namespace XenAPI
 
         /// <summary>
         /// Set the power-on-mode, host, user and password 
-        /// First published in XenServer 5.6.
+        /// First published in XenServer 5.6 FP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        /// <param name="_power_on_mode">power-on-mode can be empty,iLO,wake-on-lan, DRAC or other</param>
+        /// <param name="_power_on_mode">power-on-mode can be empty, wake-on-lan, DRAC or other</param>
         /// <param name="_power_on_config">Power on config</param>
         public static XenRef<Task> async_set_power_on_mode(Session session, string _host, string _power_on_mode, Dictionary<string, string> _power_on_config)
         {
@@ -4487,5 +4580,42 @@ namespace XenAPI
             }
         }
         private string _uefi_certificates = "";
+
+        /// <summary>
+        /// List of certificates installed in the host
+        /// First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Certificate>))]
+        public virtual List<XenRef<Certificate>> certificates
+        {
+            get { return _certificates; }
+            set
+            {
+                if (!Helper.AreEqual(value, _certificates))
+                {
+                    _certificates = value;
+                    NotifyPropertyChanged("certificates");
+                }
+            }
+        }
+        private List<XenRef<Certificate>> _certificates = new List<XenRef<Certificate>>() {};
+
+        /// <summary>
+        /// List of all available product editions
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string[] editions
+        {
+            get { return _editions; }
+            set
+            {
+                if (!Helper.AreEqual(value, _editions))
+                {
+                    _editions = value;
+                    NotifyPropertyChanged("editions");
+                }
+            }
+        }
+        private string[] _editions = {};
     }
 }

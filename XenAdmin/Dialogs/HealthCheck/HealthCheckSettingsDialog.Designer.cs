@@ -50,10 +50,10 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.existingAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
             this.newAuthenticationRadioButton = new System.Windows.Forms.RadioButton();
             this.authRubricLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.authRubricTextLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxStatus = new System.Windows.Forms.PictureBox();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.rubricLabel = new System.Windows.Forms.Label();
-            this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.enrollmentCheckBox = new System.Windows.Forms.CheckBox();
             this.decentGroupBoxXSCredentials = new XenAdmin.Controls.DecentGroupBox();
@@ -68,12 +68,15 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.currentXsCredentialsRadioButton = new System.Windows.Forms.RadioButton();
             this.newXsCredentialsRadioButton = new System.Windows.Forms.RadioButton();
             this.testCredentialsButton = new System.Windows.Forms.Button();
+            this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.decentGroupBox2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frequencyNumericBox)).BeginInit();
             this.decentGroupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStatus)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.decentGroupBoxXSCredentials.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -98,14 +101,13 @@ namespace XenAdmin.Dialogs.HealthCheck
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox1, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBox1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.rubricLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.PolicyStatementLinkLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.enrollmentCheckBox, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.decentGroupBoxXSCredentials, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.enrollmentCheckBox, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.decentGroupBoxXSCredentials, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.PolicyStatementLinkLabel, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // decentGroupBox2
@@ -195,14 +197,14 @@ namespace XenAdmin.Dialogs.HealthCheck
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixPassword, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixUsername, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.existingAuthenticationRadioButton, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.newAuthenticationRadioButton, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixPassword, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxMyCitrixUsername, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.existingAuthenticationRadioButton, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.newAuthenticationRadioButton, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.authRubricLinkLabel, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.authRubricTextLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 1, 5);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // label1
@@ -254,11 +256,24 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.authRubricLinkLabel.TabStop = true;
             this.authRubricLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.authRubricLinkLabel_LinkClicked);
             // 
-            // authRubricTextLabel
+            // tableLayoutPanel5
             // 
-            resources.ApplyResources(this.authRubricTextLabel, "authRubricTextLabel");
-            this.tableLayoutPanel2.SetColumnSpan(this.authRubricTextLabel, 2);
-            this.authRubricTextLabel.Name = "authRubricTextLabel";
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.pictureBoxStatus, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.labelStatus, 1, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // pictureBoxStatus
+            // 
+            resources.ApplyResources(this.pictureBoxStatus, "pictureBoxStatus");
+            this.pictureBoxStatus.Name = "pictureBoxStatus";
+            this.pictureBoxStatus.TabStop = false;
+            // 
+            // labelStatus
+            // 
+            resources.ApplyResources(this.labelStatus, "labelStatus");
+            this.labelStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelStatus.Name = "labelStatus";
             // 
             // rubricLabel
             // 
@@ -266,22 +281,10 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.tableLayoutPanel1.SetColumnSpan(this.rubricLabel, 2);
             this.rubricLabel.Name = "rubricLabel";
             // 
-            // PolicyStatementLinkLabel
-            // 
-            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.PolicyStatementLinkLabel, 2);
-            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
-            this.PolicyStatementLinkLabel.TabStop = true;
-            this.PolicyStatementLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PolicyStatementLinkLabel_LinkClicked);
-            // 
-            // m_ctrlError
-            // 
-            resources.ApplyResources(this.m_ctrlError, "m_ctrlError");
-            this.m_ctrlError.Name = "m_ctrlError";
-            // 
             // flowLayoutPanel1
             // 
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
             this.flowLayoutPanel1.Controls.Add(this.cancelButton);
             this.flowLayoutPanel1.Controls.Add(this.okButton);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -289,7 +292,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             // enrollmentCheckBox
             // 
             resources.ApplyResources(this.enrollmentCheckBox, "enrollmentCheckBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.enrollmentCheckBox, 2);
             this.enrollmentCheckBox.Name = "enrollmentCheckBox";
             this.enrollmentCheckBox.UseVisualStyleBackColor = true;
             this.enrollmentCheckBox.CheckedChanged += new System.EventHandler(this.enrollmentCheckBox_CheckedChanged);
@@ -319,8 +321,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             // 
             // errorLabel
             // 
-            this.errorLabel.AutoEllipsis = true;
             resources.ApplyResources(this.errorLabel, "errorLabel");
+            this.errorLabel.AutoEllipsis = true;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLabel.Name = "errorLabel";
             // 
@@ -377,7 +379,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.newXsCredentialsRadioButton.Name = "newXsCredentialsRadioButton";
             this.newXsCredentialsRadioButton.TabStop = true;
             this.newXsCredentialsRadioButton.UseVisualStyleBackColor = true;
-            this.newXsCredentialsRadioButton.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.newXsCredentialsRadioButton.CheckedChanged += new System.EventHandler(this.newXsCredentialsRadioButton_CheckedChanged);
             // 
             // testCredentialsButton
             // 
@@ -385,6 +387,13 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.testCredentialsButton.Name = "testCredentialsButton";
             this.testCredentialsButton.UseVisualStyleBackColor = true;
             this.testCredentialsButton.Click += new System.EventHandler(this.testCredentialsButton_Click);
+            // 
+            // PolicyStatementLinkLabel
+            // 
+            resources.ApplyResources(this.PolicyStatementLinkLabel, "PolicyStatementLinkLabel");
+            this.PolicyStatementLinkLabel.Name = "PolicyStatementLinkLabel";
+            this.PolicyStatementLinkLabel.TabStop = true;
+            this.PolicyStatementLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PolicyStatementLinkLabel_LinkClicked);
             // 
             // HealthCheckSettingsDialog
             // 
@@ -405,6 +414,9 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.decentGroupBox1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStatus)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.decentGroupBoxXSCredentials.ResumeLayout(false);
@@ -450,13 +462,14 @@ namespace XenAdmin.Dialogs.HealthCheck
         protected System.Windows.Forms.TextBox textboxXSUserName;
         private System.Windows.Forms.RadioButton currentXsCredentialsRadioButton;
         private System.Windows.Forms.RadioButton newXsCredentialsRadioButton;
-        private Controls.Common.PasswordFailure m_ctrlError;
         private System.Windows.Forms.Button testCredentialsButton;
         private System.Windows.Forms.PictureBox testCredentialsStatusImage;
         private System.Windows.Forms.Label errorLabel;
         protected System.Windows.Forms.Label label2;
         protected System.Windows.Forms.TextBox textBoxMyCitrixPassword;
         private System.Windows.Forms.LinkLabel authRubricLinkLabel;
-        private System.Windows.Forms.Label authRubricTextLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.PictureBox pictureBoxStatus;
+        private System.Windows.Forms.Label labelStatus;
     }
 }

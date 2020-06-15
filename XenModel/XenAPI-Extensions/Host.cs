@@ -190,8 +190,9 @@ namespace XenAPI
         /// </summary>
         public virtual DateTime LicenseExpiryUTC()
         {
-            if (license_params != null && license_params.ContainsKey("expiry"))
-                return TimeUtil.ParseISO8601DateTime(license_params["expiry"]);
+            if (license_params != null && license_params.ContainsKey("expiry") &&
+                Util.TryParseIso8601DateTime(license_params["expiry"], out var result))
+                return result;
             return new DateTime(2030, 1, 1);
         }
 

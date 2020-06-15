@@ -298,7 +298,7 @@ namespace XenAdmin.Model
 
         #endregion
 
-        public string GetSecretyInfo(Session session, string secretType)
+        public string GetSecretInfo(Session session, string secretType)
         {
             string UUID = string.Empty;
             switch (secretType)
@@ -334,11 +334,11 @@ namespace XenAdmin.Model
             }
         }
 
-        public string GetSecretyInfo(IXenConnection connection, string secretType)
+        public string GetSecretInfo(IXenConnection connection, string secretType)
         {
             if (connection == null)
                 return null;
-            return GetSecretyInfo(connection.Session, secretType);
+            return GetSecretInfo(connection.Session, secretType);
         }
 
         public bool TryGetExistingTokens(IXenConnection connection, out string uploadToken, out string diagnosticToken)
@@ -348,8 +348,8 @@ namespace XenAdmin.Model
             if (connection == null)
                 return false;
 
-            uploadToken = GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
-            diagnosticToken = GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
+            uploadToken = GetSecretInfo(connection, UPLOAD_TOKEN_SECRET);
+            diagnosticToken = GetSecretInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
 
             if (!String.IsNullOrEmpty(uploadToken) && !String.IsNullOrEmpty(diagnosticToken))
                 return true;
@@ -369,8 +369,8 @@ namespace XenAdmin.Model
                 if (poolOfOne != null)
                 {
                     var healthCheckSettings = poolOfOne.HealthCheckSettings();
-                    uploadToken = healthCheckSettings.GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
-                    diagnosticToken = healthCheckSettings.GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
+                    uploadToken = healthCheckSettings.GetSecretInfo(connection, UPLOAD_TOKEN_SECRET);
+                    diagnosticToken = healthCheckSettings.GetSecretInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
                     if (!String.IsNullOrEmpty(uploadToken) && !String.IsNullOrEmpty(diagnosticToken))
                         return true;
                 }

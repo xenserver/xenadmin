@@ -101,6 +101,7 @@
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
+    <Compile Include="Alerts\Types\CertificateAlert.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
     <Compile Include="Alerts\Types\HotfixEligibilityAlert.cs" />
     <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
@@ -116,6 +117,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
+    <Compile Include="Commands\InstallCertificateCommand.cs" />
     <Compile Include="Commands\LaunchConversionManagerCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DisableChangedBlockTrackingCommand.cs" />
@@ -293,6 +295,9 @@
     </Compile>
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.Designer.cs">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\InstallCertificateDialog.Designer.cs">
+      <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -788,6 +793,9 @@
     </Compile>
     <Compile Include="Wizards\BallooningWizard_Pages\MemorySettings.Designer.cs">
       <DependentUpon>MemorySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\InstallCertificateDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Wizards\ConversionWizard\ConversionWizard.cs">
       <SubType>Form</SubType>
@@ -1300,12 +1308,6 @@
     <Compile Include="Dialogs\DialogWithProgress.Designer.cs">
       <DependentUpon>DialogWithProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\IscsiChoicesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\IscsiChoicesDialog.Designer.cs">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ActionProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1414,12 +1416,6 @@
     </Compile>
     <Compile Include="Dialogs\DuplicateTemplateNameDialog.Designer.cs">
       <DependentUpon>DuplicateTemplateNameDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.Designer.cs">
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\RepairSRDialog.cs">
       <SubType>Form</SubType>
@@ -1849,6 +1845,15 @@
     <EmbeddedResource Include="Dialogs\AdPasswordPrompt.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InstallCertificateDialog.ja.resx">
+      <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InstallCertificateDialog.resx">
+      <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InstallCertificateDialog.zh-CN.resx">
+      <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.ja.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
@@ -2645,10 +2650,6 @@
       <DependentUpon>ThreeButtonDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IscsiChoicesDialog.resx">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ActionProgressDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ActionProgressDialog.cs</DependentUpon>
@@ -2712,10 +2713,6 @@
     <EmbeddedResource Include="Dialogs\DuplicateTemplateNameDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DuplicateTemplateNameDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RepairSRDialog.resx">
       <DependentUpon>RepairSRDialog.cs</DependentUpon>
@@ -3341,7 +3338,6 @@
     </Compile>
     <Compile Include="Core\ActionBaseExtensions.cs" />
     <Compile Include="TabPages\GeneralTabLicenseStatusStringifier.cs" />
-    <Compile Include="Utils\TemporaryDisablerForControls.cs" />
     <Compile Include="WinformsXenAdminConfigProvider.cs" />
     <Compile Include="Actions\GUIActions\Wlb\ExportReportAction.cs" />
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />
@@ -5388,12 +5384,6 @@
     <EmbeddedResource Include="Dialogs\InputPromptDialog.zh-CN.resx">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IscsiChoicesDialog.ja.resx">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\IscsiChoicesDialog.zh-CN.resx">
-      <DependentUpon>IscsiChoicesDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IscsiDeviceConfigDialog.ja.resx">
       <DependentUpon>IscsiDeviceConfigDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5734,12 +5724,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LVMoHBAWarningDialog.resx">
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.ja.resx">
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\InstallToolsWarningDialog.zh-CN.resx">
-      <DependentUpon>InstallToolsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LicenseWarningDialog.ja.resx">
       <DependentUpon>LicenseWarningDialog.cs</DependentUpon>

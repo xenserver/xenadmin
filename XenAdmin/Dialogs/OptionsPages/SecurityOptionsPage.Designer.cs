@@ -30,10 +30,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityOptionsPage));
             this.SecurityTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.SSLLabel = new System.Windows.Forms.Label();
             this.SSLTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CertificateChangedCheckBox = new System.Windows.Forms.CheckBox();
             this.CertificateFoundCheckBox = new System.Windows.Forms.CheckBox();
+            this.SSLLabel = new System.Windows.Forms.Label();
             this.SecurityTableLayoutPanel.SuspendLayout();
             this.SSLTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -44,11 +44,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.SecurityTableLayoutPanel.Controls.Add(this.SSLTableLayoutPanel, 0, 1);
             this.SecurityTableLayoutPanel.Controls.Add(this.SSLLabel, 0, 0);
             this.SecurityTableLayoutPanel.Name = "SecurityTableLayoutPanel";
-            // 
-            // SSLLabel
-            // 
-            resources.ApplyResources(this.SSLLabel, "SSLLabel");
-            this.SSLLabel.Name = "SSLLabel";
             // 
             // SSLTableLayoutPanel
             // 
@@ -68,6 +63,11 @@ namespace XenAdmin.Dialogs.OptionsPages
             resources.ApplyResources(this.CertificateFoundCheckBox, "CertificateFoundCheckBox");
             this.CertificateFoundCheckBox.Name = "CertificateFoundCheckBox";
             this.CertificateFoundCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SSLLabel
+            // 
+            resources.ApplyResources(this.SSLLabel, "SSLLabel");
+            this.SSLLabel.Name = "SSLLabel";
             // 
             // SecurityOptionsPage
             // 

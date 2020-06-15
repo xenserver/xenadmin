@@ -642,7 +642,7 @@ namespace XenAdmin.Network
             }
             try
             {
-                while (true)
+                for (int i = 0; i < 120; i++)
                 {
                     lock (WaitForMonitor)
                     {

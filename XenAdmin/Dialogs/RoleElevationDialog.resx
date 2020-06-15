@@ -159,9 +159,6 @@
   <data name="labelCurrentAction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelCurrentAction.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelCurrentAction.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -169,16 +166,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelCurrentAction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 33</value>
+    <value>41, 28</value>
   </data>
   <data name="labelCurrentAction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelCurrentAction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 15</value>
+    <value>86, 15</value>
   </data>
   <data name="labelCurrentAction.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="labelCurrentAction.Text" xml:space="preserve">
     <value>Current action:</value>
@@ -198,9 +195,6 @@
   <data name="labelCurrentActionValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelCurrentActionValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelCurrentActionValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -208,16 +202,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelCurrentActionValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 33</value>
+    <value>143, 28</value>
   </data>
   <data name="labelCurrentActionValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 15, 3</value>
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelCurrentActionValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 15</value>
+    <value>50, 15</value>
   </data>
   <data name="labelCurrentActionValue.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="labelCurrentActionValue.Text" xml:space="preserve">
     <value>&lt;none&gt;</value>
@@ -237,20 +231,20 @@
   <data name="labelServer.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelServer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelServer.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelServer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 51</value>
+    <value>41, 49</value>
+  </data>
+  <data name="labelServer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 15</value>
+    <value>42, 15</value>
   </data>
   <data name="labelServer.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="labelServer.Text" xml:space="preserve">
     <value>Server:</value>
@@ -270,20 +264,20 @@
   <data name="labelServerValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelServerValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelServerValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelServerValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 51</value>
+    <value>143, 49</value>
+  </data>
+  <data name="labelServerValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelServerValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 15</value>
+    <value>50, 15</value>
   </data>
   <data name="labelServerValue.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="labelServerValue.Text" xml:space="preserve">
     <value>&lt;none&gt;</value>
@@ -303,9 +297,6 @@
   <data name="labelCurrentUser.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelCurrentUser.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelCurrentUser.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -313,16 +304,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelCurrentUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 69</value>
+    <value>41, 70</value>
   </data>
   <data name="labelCurrentUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelCurrentUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 15</value>
+    <value>75, 15</value>
   </data>
   <data name="labelCurrentUser.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="labelCurrentUser.Text" xml:space="preserve">
     <value>Current user:</value>
@@ -342,9 +333,6 @@
   <data name="labelCurrentUserValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelCurrentUserValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelCurrentUserValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -352,16 +340,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelCurrentUserValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 69</value>
+    <value>143, 70</value>
   </data>
   <data name="labelCurrentUserValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 15, 3</value>
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelCurrentUserValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 15</value>
+    <value>50, 15</value>
   </data>
   <data name="labelCurrentUserValue.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="labelCurrentUserValue.Text" xml:space="preserve">
     <value>&lt;none&gt;</value>
@@ -381,9 +369,6 @@
   <data name="labelCurrentRole.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelCurrentRole.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelCurrentRole.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -391,16 +376,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelCurrentRole.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 90</value>
+    <value>41, 91</value>
   </data>
   <data name="labelCurrentRole.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelCurrentRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 15</value>
+    <value>73, 15</value>
   </data>
   <data name="labelCurrentRole.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="labelCurrentRole.Text" xml:space="preserve">
     <value>Current role:</value>
@@ -420,9 +405,6 @@
   <data name="labelCurrentRoleValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelCurrentRoleValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelCurrentRoleValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -430,19 +412,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelCurrentRoleValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 90</value>
+    <value>143, 91</value>
   </data>
   <data name="labelCurrentRoleValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 15, 3</value>
-  </data>
-  <data name="labelCurrentRoleValue.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>250, 0</value>
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelCurrentRoleValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 15</value>
+    <value>50, 15</value>
   </data>
   <data name="labelCurrentRoleValue.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="labelCurrentRoleValue.Text" xml:space="preserve">
     <value>&lt;none&gt;</value>
@@ -459,34 +438,61 @@
   <data name="&gt;&gt;labelCurrentRoleValue.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="divider.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="sectionHeaderLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
-  <data name="divider.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="sectionHeaderLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sectionHeaderLabel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="sectionHeaderLabel1.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="sectionHeaderLabel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="divider.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 118</value>
+  <data name="sectionHeaderLabel1.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <data name="divider.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 10, 20, 3</value>
+  <data name="sectionHeaderLabel1.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="divider.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 8</value>
+  <data name="sectionHeaderLabel1.LabelText" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="divider.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="sectionHeaderLabel1.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="&gt;&gt;divider.Name" xml:space="preserve">
-    <value>divider</value>
+  <data name="sectionHeaderLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 119</value>
   </data>
-  <data name="&gt;&gt;divider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="sectionHeaderLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 10</value>
   </data>
-  <data name="&gt;&gt;divider.Parent" xml:space="preserve">
+  <data name="sectionHeaderLabel1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="sectionHeaderLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 1</value>
+  </data>
+  <data name="sectionHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="sectionHeaderLabel1.UseMnemonic" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabel1.Name" xml:space="preserve">
+    <value>sectionHeaderLabel1</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabel1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;divider.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel1.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="labelBlurb2.AutoSize" type="System.Boolean, mscorlib">
@@ -502,19 +508,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelBlurb2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 139</value>
+    <value>41, 129</value>
   </data>
   <data name="labelBlurb2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 20, 10</value>
-  </data>
-  <data name="labelBlurb2.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>380, 0</value>
+    <value>3, 0, 3, 10</value>
   </data>
   <data name="labelBlurb2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 15</value>
+    <value>419, 15</value>
   </data>
   <data name="labelBlurb2.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="labelBlurb2.Text" xml:space="preserve">
     <value>Enter the credentials of a privileged user to authorize this task.</value>
@@ -534,9 +537,6 @@
   <data name="labelRequiredRole.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelRequiredRole.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelRequiredRole.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -544,7 +544,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelRequiredRole.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 167</value>
+    <value>41, 157</value>
   </data>
   <data name="labelRequiredRole.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -553,7 +553,7 @@
     <value>96, 15</value>
   </data>
   <data name="labelRequiredRole.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="labelRequiredRole.Text" xml:space="preserve">
     <value>Authorized roles:</value>
@@ -573,9 +573,6 @@
   <data name="labelRequiredRoleValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelRequiredRoleValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="labelRequiredRoleValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -583,19 +580,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelRequiredRoleValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 167</value>
+    <value>143, 157</value>
   </data>
   <data name="labelRequiredRoleValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 15, 3</value>
-  </data>
-  <data name="labelRequiredRoleValue.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>250, 0</value>
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="labelRequiredRoleValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 15</value>
+    <value>50, 15</value>
   </data>
   <data name="labelRequiredRoleValue.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="labelRequiredRoleValue.Text" xml:space="preserve">
     <value>&lt;none&gt;</value>
@@ -612,11 +606,11 @@
   <data name="&gt;&gt;labelRequiredRoleValue.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="labelUserName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelUserName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelUserName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelUserName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -625,16 +619,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 188</value>
+    <value>41, 182</value>
   </data>
   <data name="labelUserName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelUserName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
+    <value>63, 15</value>
   </data>
   <data name="labelUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="labelUserName.Text" xml:space="preserve">
     <value>&amp;Username:</value>
@@ -654,23 +648,20 @@
   <data name="&gt;&gt;labelUserName.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="TextBoxUsername.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TextBoxUsername.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="TextBoxUsername.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="TextBoxUsername.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 188</value>
-  </data>
-  <data name="TextBoxUsername.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 20, 3</value>
+    <value>143, 178</value>
   </data>
   <data name="TextBoxUsername.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 23</value>
+    <value>317, 23</value>
   </data>
   <data name="TextBoxUsername.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;TextBoxUsername.Name" xml:space="preserve">
     <value>TextBoxUsername</value>
@@ -684,11 +675,11 @@
   <data name="&gt;&gt;TextBoxUsername.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="labelPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelPassword.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelPassword.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -697,16 +688,16 @@
     <value>NoControl</value>
   </data>
   <data name="labelPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 217</value>
+    <value>41, 211</value>
   </data>
   <data name="labelPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
+    <value>60, 15</value>
   </data>
   <data name="labelPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="labelPassword.Text" xml:space="preserve">
     <value>&amp;Password:</value>
@@ -726,23 +717,20 @@
   <data name="&gt;&gt;labelPassword.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="TextBoxPassword.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TextBoxPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="TextBoxPassword.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="TextBoxPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 217</value>
-  </data>
-  <data name="TextBoxPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 20, 3</value>
+    <value>143, 207</value>
   </data>
   <data name="TextBoxPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 23</value>
+    <value>317, 23</value>
   </data>
   <data name="TextBoxPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;TextBoxPassword.Name" xml:space="preserve">
     <value>TextBoxPassword</value>
@@ -756,41 +744,17 @@
   <data name="&gt;&gt;TextBoxPassword.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tableLayoutPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="panel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 4</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 26</value>
-  </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="buttonAuthorize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -802,7 +766,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonAuthorize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 4</value>
+    <value>3, 3</value>
   </data>
   <data name="buttonAuthorize.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 26</value>
@@ -820,34 +784,70 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonAuthorize.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;buttonAuthorize.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
-  <data name="panel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 246</value>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 3</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 33</value>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 26</value>
   </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 236</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 32</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonAuthorize" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonCancel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -856,13 +856,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
+    <value>10, 10</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>478, 288</value>
+    <value>463, 289</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -880,28 +880,22 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="2" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelCurrentAction" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentActionValue" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelServer" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelServerValue" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentUser" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentUserValue" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentRole" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentRoleValue" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="divider" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelBlurb2" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelRequiredRole" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRequiredRoleValue" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelUserName" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TextBoxUsername" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPassword" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TextBoxPassword" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="10" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="labelBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="5" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelCurrentAction" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentActionValue" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelServer" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelServerValue" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentUser" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentUserValue" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentRole" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelCurrentRoleValue" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabel1" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelBlurb2" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelRequiredRole" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRequiredRoleValue" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelUserName" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TextBoxUsername" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPassword" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TextBoxPassword" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="10" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,300" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="labelBlurb.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 5</value>
+    <value>41, 0</value>
   </data>
   <data name="labelBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 20, 10</value>
-  </data>
-  <data name="labelBlurb.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>380, 0</value>
+    <value>3, 0, 3, 10</value>
   </data>
   <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 15</value>
+    <value>307, 15</value>
   </data>
   <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
     <value>Your current role is not authorized to perform this action.</value>
@@ -931,7 +925,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>483, 293</value>
+    <value>483, 309</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -940,7 +934,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 0, 0</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>[XenCenter]</value>

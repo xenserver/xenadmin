@@ -234,7 +234,7 @@ namespace XenAdmin.ConsoleView
         {
             if (e.PropertyName == "name_label" && undockedForm != null)
             {
-                undockedForm.Text = source.name_label;
+                undockedForm.Text = UndockedWindowTitle(source);
             }
         }
 

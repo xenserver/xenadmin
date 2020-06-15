@@ -367,10 +367,10 @@ namespace XenAdmin.Dialogs.HealthCheck
             if (healthCheckSettings.CanRequestNewUpload)
             {
                 healthCheckSettings.NewUploadRequest = HealthCheckSettings.DateTimeToString(DateTime.UtcNow);
-                var token = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
-                var diagnosticToken = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
-                var user = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
-                var password = healthCheckSettings.GetSecretyInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
+                var token = healthCheckSettings.GetSecretInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_TOKEN_SECRET);
+                var diagnosticToken = healthCheckSettings.GetSecretInfo(poolRow.Pool.Connection, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
+                var user = healthCheckSettings.GetSecretInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
+                var password = healthCheckSettings.GetSecretInfo(poolRow.Pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
                 new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, token, diagnosticToken, user, password, false).RunAsync();
             }
         }

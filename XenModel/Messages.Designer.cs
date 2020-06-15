@@ -1519,6 +1519,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thinly provisioned (GFS2) SRs with CHAP authentication are not supported..
+        /// </summary>
+        public static string ACTION_ISCSI_IQN_SCANNING_GFS2 {
+            get {
+                return ResourceManager.GetString("ACTION_ISCSI_IQN_SCANNING_GFS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning for LUNs on iSCSI filer {0}.
         /// </summary>
         public static string ACTION_ISCSI_LUN_SCANNING {
@@ -2064,15 +2073,6 @@ namespace XenAdmin {
         public static string ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_SET_SECONDARY_MANAGEMENT_PURPOSE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving VM Configuration.
-        /// </summary>
-        public static string ACTION_SET_VM_OTHER_CONFIG_TITLE {
-            get {
-                return ResourceManager.GetString("ACTION_SET_VM_OTHER_CONFIG_TITLE", resourceCulture);
             }
         }
         
@@ -6940,6 +6940,180 @@ namespace XenAdmin {
         public static string CDDRIVE_MAX_ALLOWED_VBDS {
             get {
                 return ResourceManager.GetString("CDDRIVE_MAX_ALLOWED_VBDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} day(s).
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} hour(s).
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} minute(s).
+        /// </summary>
+        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TLS certificate files (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer.
+        /// </summary>
+        public static string CERTIFICATE_FILETYPES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation failed..
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_FAILURE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation failed.
+        ///{0}.
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_FAILURE_GENERIC {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_FAILURE_GENERIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The certificate installation was completed successfully..
+        /// </summary>
+        public static string CERTIFICATE_INSTALLATION_SUCCESS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INSTALLATION_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid TLS certificate file {0}.
+        /// </summary>
+        public static string CERTIFICATE_INVALID {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TLS key files (*.pem;*.key)|*.pem;*.key.
+        /// </summary>
+        public static string CERTIFICATE_KEY_FILETYPES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected TLS key file is invalid..
+        /// </summary>
+        public static string CERTIFICATE_KEY_INVALID {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to install certificates on the server. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string CERTIFICATE_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_RBAC_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select TLS Certificate File.
+        /// </summary>
+        public static string CERTIFICATE_SELECT_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_SELECT_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select TLS Key File.
+        /// </summary>
+        public static string CERTIFICATE_SELECT_KEY_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_SELECT_KEY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thumbprint.
+        /// </summary>
+        public static string CERTIFICATE_THUMBPRINT_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validity period.
+        /// </summary>
+        public static string CERTIFICATE_VALIDITY_PERIOD_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid from {0} to {1}.
+        /// </summary>
+        public static string CERTIFICATE_VALIDITY_PERIOD_VALUE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_VALUE", resourceCulture);
             }
         }
         
@@ -12221,15 +12395,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] has detected that an SR already exists on this LUN. This SR is not currently in use by &apos;{0}&apos;,  would you like to attach it?.
-        /// </summary>
-        public static string DETACHED_ISCI_DETECTED {
-            get {
-                return ResourceManager.GetString("DETACHED_ISCI_DETECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string DETAILS {
@@ -15704,17 +15869,6 @@ namespace XenAdmin {
         public static string EXCEPTION_USER_CANCELLED_MASTER {
             get {
                 return ResourceManager.GetString("EXCEPTION_USER_CANCELLED_MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
-        ///
-        ///Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including servers that are not connected to [XenCenter]..
-        /// </summary>
-        public static string EXISTING_SR_FOUND_ON_LUN {
-            get {
-                return ResourceManager.GetString("EXISTING_SR_FOUND_ON_LUN", resourceCulture);
             }
         }
         
@@ -19414,6 +19568,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server is unreachable..
+        /// </summary>
+        public static string HOST_UNREACHABLE {
+            get {
+                return ResourceManager.GetString("HOST_UNREACHABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Host &apos;{0}&apos;:.
         /// </summary>
         public static string HOST_X {
@@ -19995,15 +20158,6 @@ namespace XenAdmin {
         public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI {
             get {
                 return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_URI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Path does not exist..
-        /// </summary>
-        public static string IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH {
-            get {
-                return ResourceManager.GetString("IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH", resourceCulture);
             }
         }
         
@@ -20911,6 +21065,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_ACTION_LINK {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_ACTION_LINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install certi&amp;ficate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing server certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot install a server certificate when HA is on..
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_HA {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Install certificate....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_MENU {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing certificate on server {0}....
+        /// </summary>
+        public static string INSTALL_SERVER_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install [Citrix VM Tools].
         /// </summary>
         public static string INSTALL_XENSERVER_TOOLS {
@@ -20920,20 +21128,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools]....
+        ///   Looks up a localized string similar to &amp;Install [Citrix VM Tools].
         /// </summary>
-        public static string INSTALL_XENSERVER_TOOLS_DOTS {
+        public static string INSTALL_XENSERVER_TOOLS_BUTTON {
             get {
-                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_DOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools].
-        /// </summary>
-        public static string INSTALL_XS_TOOLS {
-            get {
-                return ResourceManager.GetString("INSTALL_XS_TOOLS", resourceCulture);
+                return ResourceManager.GetString("INSTALL_XENSERVER_TOOLS_BUTTON", resourceCulture);
             }
         }
         
@@ -20983,6 +21182,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read more about installing [Citrix VM Tools].
+        /// </summary>
+        public static string INSTALLTOOLS_READ_MORE {
+            get {
+                return ResourceManager.GetString("INSTALLTOOLS_READ_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Launching [Citrix VM Tools] installation..
         /// </summary>
         public static string INSTALLTOOLS_STARTING {
@@ -21001,16 +21209,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating VM &apos;{0}&apos; from template &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Created VM &apos;{0}&apos;.
         /// </summary>
-        public static string INSTANT_VM_CREATE_DESCRIPTION {
+        public static string INSTANT_VM_CREATE_DESC_COMPLETED {
             get {
-                return ResourceManager.GetString("INSTANT_VM_CREATE_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("INSTANT_VM_CREATE_DESC_COMPLETED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Instant VM create.
+        ///   Looks up a localized string similar to Creating VM quickly from template &apos;{0}&apos;.
         /// </summary>
         public static string INSTANT_VM_CREATE_TITLE {
             get {
@@ -21073,7 +21281,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid host name.
+        ///   Looks up a localized string similar to Invalid target host..
         /// </summary>
         public static string INVALID_HOST {
             get {
@@ -21259,18 +21467,6 @@ namespace XenAdmin {
         public static string ISCSI_DIALOG_SR_DETAILS {
             get {
                 return ResourceManager.GetString("ISCSI_DIALOG_SR_DETAILS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vendor: {0}
-        ///Serial Number: {1}
-        ///SCSI ID: {2}
-        ///Size: {3}.
-        /// </summary>
-        public static string ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL {
-            get {
-                return ResourceManager.GetString("ISCSI_DIALOG_SR_DETAILS_FOR_FIBRECHANNEL", resourceCulture);
             }
         }
         
@@ -22442,7 +22638,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to remove &apos;{0}&apos; from pool &apos;{1}&apos;? 
         ///
-        ///This will permanently delete and reinitialize all local storage on &apos;{2}&apos;. Your data will be lost, and the server will be rebooted..
+        ///This will permanently delete and reinitialize all local storage on &apos;{2}&apos;. Your data will be lost, and the server will be rebooted. If Active Directory is configured for pool &apos;{1}&apos;, the server will be removed from the domain..
         /// </summary>
         public static string MAINWINDOW_CONFIRM_REMOVE_FROM_POOL {
             get {
@@ -22453,7 +22649,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to remove the selected servers from pool &apos;{0}&apos;?
         ///
-        ///This will permanently delete and reinitialize all local storage on the servers. Your data will be lost, and the servers will be rebooted..
+        ///This will permanently delete and reinitialize all local storage on the servers. Your data will be lost, and the servers will be rebooted. If Active Directory is configured for pool &apos;{0}&apos;, the servers will be removed from the domain..
         /// </summary>
         public static string MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_MULTIPLE {
             get {
@@ -24102,7 +24298,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to reconnect to {0} . Server is unavailable..
+        ///   Looks up a localized string similar to Unable to reconnect to {0}. Server is unavailable..
         /// </summary>
         public static string MESSAGEBOX_RECONNECT_FAIL {
             get {
@@ -25216,6 +25412,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clustering is enabled on this server..
+        /// </summary>
+        public static string NEW_POOL_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("NEW_POOL_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is using an older CPU.
         ///
         ///[XenServer] can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
@@ -26015,17 +26220,6 @@ namespace XenAdmin {
         public static string NEWSR_ISCSI_DESCRIPTION {
             get {
                 return ResourceManager.GetString("NEWSR_ISCSI_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Creating a new virtual disk on this LUN will destroy any data present. You must ensure that no other system is using the LUN, including any servers, or the virtual disk may become corrupted while in use.
-        ///
-        ///Do you want to format the disk?.
-        /// </summary>
-        public static string NEWSR_ISCSI_FORMAT_WARNING {
-            get {
-                return ResourceManager.GetString("NEWSR_ISCSI_FORMAT_WARNING", resourceCulture);
             }
         }
         
@@ -28043,6 +28237,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alerts: {0}.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_ALERTS_STATUS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_ALERTS_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alerts ({0}).
         /// </summary>
         public static string NOTIFICATIONS_SUBMODE_ALERTS_UNREAD {
@@ -28057,6 +28260,24 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_EVENTS_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events: {0} errors.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events: 1 error.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE", resourceCulture);
             }
         }
         
@@ -28084,6 +28305,15 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates: {0}.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
             }
         }
         
@@ -29231,15 +29461,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server is unreachable.
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {
@@ -29575,6 +29796,24 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path does not exist..
+        /// </summary>
+        public static string PATH_DOES_NOT_EXIST {
+            get {
+                return ResourceManager.GetString("PATH_DOES_NOT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path {0} does not exist..
+        /// </summary>
+        public static string PATH_DOES_NOT_EXIST_PLACEHOLDER {
+            get {
+                return ResourceManager.GetString("PATH_DOES_NOT_EXIST_PLACEHOLDER", resourceCulture);
             }
         }
         
@@ -32753,18 +32992,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Saving configuration....
         /// </summary>
-        public static string SAVING_VMS_ACTION_DESC {
+        public static string SAVING_VM_PROPERTIES_ACTION_DESC {
             get {
-                return ResourceManager.GetString("SAVING_VMS_ACTION_DESC", resourceCulture);
+                return ResourceManager.GetString("SAVING_VM_PROPERTIES_ACTION_DESC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving VM Configuration.
+        ///   Looks up a localized string similar to Saving VM properties.
         /// </summary>
-        public static string SAVING_VMS_ACTION_TITLE {
+        public static string SAVING_VM_PROPERTIES_ACTION_TITLE {
             get {
-                return ResourceManager.GetString("SAVING_VMS_ACTION_TITLE", resourceCulture);
+                return ResourceManager.GetString("SAVING_VM_PROPERTIES_ACTION_TITLE", resourceCulture);
             }
         }
         
@@ -32895,7 +33134,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SSL certificate options.
+        ///   Looks up a localized string similar to Certificate options.
         /// </summary>
         public static string SECURITY_DESC {
             get {
@@ -32963,6 +33202,15 @@ namespace XenAdmin {
         public static string SELECT_DEFAULT_SR {
             get {
                 return ResourceManager.GetString("SELECT_DEFAULT_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select License Key.
+        /// </summary>
+        public static string SELECT_LICENSE_KEY {
+            get {
+                return ResourceManager.GetString("SELECT_LICENSE_KEY", resourceCulture);
             }
         }
         
@@ -34258,7 +34506,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scanning SR.
+        ///   Looks up a localized string similar to Scanning SR &apos;{0}&apos;....
         /// </summary>
         public static string SR_REFRESH_ACTION_DESC {
             get {
@@ -34272,6 +34520,15 @@ namespace XenAdmin {
         public static string SR_REFRESH_ACTION_TITLE {
             get {
                 return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning available SRs ....
+        /// </summary>
+        public static string SR_REFRESH_ACTION_TITLE_MANY {
+            get {
+                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_MANY", resourceCulture);
             }
         }
         
@@ -41944,6 +42201,17 @@ namespace XenAdmin {
         public static string XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM {
             get {
                 return ResourceManager.GetString("XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want [XenCenter] to insert the [Citrix VM Tools] DVD into your VM&apos;s DVD drive and take you to the VM&apos;s console?
+        ///
+        ///Any disk in your VM&apos;s DVD drive will be ejected when installing [Citrix VM Tools]..
+        /// </summary>
+        public static string XS_TOOLS_MESSAGE_ONE_VM {
+            get {
+                return ResourceManager.GetString("XS_TOOLS_MESSAGE_ONE_VM", resourceCulture);
             }
         }
         

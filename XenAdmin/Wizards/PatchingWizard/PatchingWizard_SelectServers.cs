@@ -196,7 +196,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             //if host is unreachable
             if (!host.IsLive())
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
+                tooltipText = Messages.HOST_UNREACHABLE;
                 return false;
             }
 

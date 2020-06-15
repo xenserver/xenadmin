@@ -85,7 +85,7 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            return !vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
+            return !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
         }
 
         private bool CanExecute(VBD vbd)

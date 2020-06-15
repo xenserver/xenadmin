@@ -36,6 +36,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
+using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Dialogs;
@@ -76,13 +77,40 @@ namespace XenAdmin.SettingsPanels
                 if (HasMemoryChanged)
                 {
                     long mem = Convert.ToInt64(this.nudMemory.Value * Util.BINARY_MEGA);
-                    memoryAction = BallooningDialog.ConfirmAndReturnAction(Program.MainWindow, vm, mem, mem, mem, (long)vm.memory_static_max, false);
+                    memoryAction = ConfirmAndCalcActions(mem);
                     if (memoryAction == null)
                         return false;
                 }
 
                 return true;
             }
+        }
+
+        private ChangeMemorySettingsAction ConfirmAndCalcActions(long mem)
+        {
+            if (vm.memory_static_max / Util.BINARY_MEGA == mem / Util.BINARY_MEGA)
+            {
+                // don't want to show warning dialog just for rounding errors
+                mem = vm.memory_static_max;
+            }
+            else if (vm.power_state != vm_power_state.Halted)
+            {
+                var msg = vm.has_ballooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC)
+                    ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR
+                    : Messages.CONFIRM_CHANGE_MEMORY_SINGULAR;
+
+                using (var dlg = new WarningDialog(msg,
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+                {
+                    if (dlg.ShowDialog(this) != DialogResult.Yes)
+                        return null;
+                }
+            }
+
+            return new ChangeMemorySettingsAction(vm,
+                string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name()),
+                vm.memory_static_min, mem, mem, mem,
+                VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm, true);
         }
 
         public CPUMemoryEditPage()

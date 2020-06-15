@@ -40,45 +40,62 @@ namespace XenAdmin.ServerDBs
     /// </summary>
     internal static class TypeCache
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private static readonly Dictionary<String, TypeCacheEntry> Entries = new Dictionary<string, TypeCacheEntry>();
         private static readonly object Lck = new object();
 
-        private static TypeCacheEntry GetEntry(string className)
+        private static bool TryGetCacheEntry(string className, out TypeCacheEntry entry)
         {
             Util.ThrowIfStringParameterNullOrEmpty(className, "className");
 
-            TypeCacheEntry entry;
             lock (Lck)
             {
-                if (!Entries.TryGetValue(className, out entry))
+                if (Entries.TryGetValue(className, out entry))
+                    return true;
+
+                try
                 {
                     entry = new TypeCacheEntry(className);
                     Entries.Add(className, entry);
+                    return true;
+                }
+                catch (TypeLoadException)
+                {
+                    log.Warn($"The class '{className}' is not exposed in the XenAPI.");
+                    return false;
                 }
             }
-            return entry;
         }
 
         /// <summary>
-        /// Gets the XAPI <see cref="Type"/> for the specified name.
-        /// (assembly.GetType("XenAPI." + className, true, true))
+        /// Tries to retrieve the XenAPI class type for the specified className
         /// </summary>
-        /// <param name="className">The name for which the XAPI <see cref="Type"/> is required.</param>
-        /// <returns>The XAPI <see cref="Type"/> for the specified name.</returns>
-        public static Type GetClassType(string className)
+        public static bool TryGetClassType(string className, out Type classType)
         {
-            return GetEntry(className).ClassType;
+            if (TryGetCacheEntry(className, out TypeCacheEntry entry))
+            {
+                classType = entry.ClassType;
+                return true;
+            }
+
+            classType = null;
+            return false;
         }
 
         /// <summary>
-        /// Gets the XAPI Proxy <see cref="Type"/> for the specified name.
-        /// (assembly.GetType("XenAPI.Proxy_" + className, true, true))
+        /// Tries to retrieve the XmlRpcProxy type for the specified className
         /// </summary>
-        /// <param name="className">The name for which the XAPI <see cref="Type"/> is required.</param>
-        /// <returns>The XAPI <see cref="Type"/> for the specified name.</returns>
-        public static Type GetProxyType(string className)
+        public static bool TryGetProxyType(string className, out Type proxyType)
         {
-            return GetEntry(className).ProxyType;
+            if (TryGetCacheEntry(className, out TypeCacheEntry entry))
+            {
+                proxyType = entry.ProxyType;
+                return true;
+            }
+
+            proxyType = null;
+            return false;
         }
 
         /// <summary>
@@ -90,8 +107,8 @@ namespace XenAdmin.ServerDBs
         public static Type GetFieldType(string className, string fieldName)
         {
             Util.ThrowIfStringParameterNullOrEmpty(fieldName, "fieldName");
-            
-            return GetEntry(className).GetFieldType(fieldName);
+
+            return TryGetCacheEntry(className, out TypeCacheEntry entry) ? entry.GetFieldType(fieldName) : null;
         }
 
         private class TypeCacheEntry
@@ -115,7 +132,6 @@ namespace XenAdmin.ServerDBs
                 {
                     if (!_fieldTypes.TryGetValue(fieldName, out output))
                     {
-                        output = null;
                         FieldInfo fi = ProxyType.GetField(fieldName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
                         if (fi != null)

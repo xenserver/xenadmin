@@ -368,7 +368,7 @@ namespace XenAdmin.Wizards
             labelWizard.Text = wizardProgress.CurrentStepTabPage.PageTitle;
         }
 
-        protected void UpdateWizard()
+        private void UpdateWizard()
         {
             buttonPrevious.Enabled = !wizardProgress.IsFirstStep && wizardProgress.CurrentStepTabPage.EnablePrevious();
 

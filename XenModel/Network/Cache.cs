@@ -100,6 +100,7 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<VMSS>, VMSS> _vmss = new ChangeableDictionary<XenRef<VMSS>, VMSS>();
         private readonly ChangeableDictionary<XenRef<VM_appliance>, VM_appliance> _vm_appliance = new ChangeableDictionary<XenRef<VM_appliance>, VM_appliance>();
         private readonly ChangeableDictionary<XenRef<Crashdump>, Crashdump> _crashdump = new ChangeableDictionary<XenRef<Crashdump>, Crashdump>();
+        private readonly ChangeableDictionary<XenRef<Certificate>, Certificate> _certificates = new ChangeableDictionary<XenRef<Certificate>, Certificate>();
 
 #pragma warning restore 0414
 
@@ -117,205 +118,87 @@ namespace XenAdmin.Network
             }
         }
 
+        public Certificate[] Certificates => contents(_certificates);
 
-        public Bond[] Bonds
-        {
-            get { return contents(_bond); }
-        }
+        public Bond[] Bonds => contents(_bond);
 
-        public VMSS[] VMSSs
-        {
-            get { return contents(_vmss); }
-        }
+        public VMSS[] VMSSs => contents(_vmss);
 
-        public VM_appliance[] VM_appliances
-        {
-            get { return contents(_vm_appliance); }
-        }
+        public VM_appliance[] VM_appliances => contents(_vm_appliance);
 
-        public Cluster[] Clusters
-        {
-            get { return contents(_cluster); }
-        }
+        public Cluster[] Clusters => contents(_cluster);
 
-        public Cluster_host[] Cluster_hosts
-        {
-            get { return contents(_cluster_host); }
-        }
+        public Cluster_host[] Cluster_hosts => contents(_cluster_host);
 
-        public Feature[] Features
-        {
-            get { return contents(_feature); }
-        }
+        public Feature[] Features => contents(_feature);
 
-        public Folder[] Folders
-        {
-            get { return contents(_folders); }
-        }
+        public Folder[] Folders => contents(_folders);
 
-        public DockerContainer[] DockerContainers
-        {
-            get { return contents(_dockerContainers); }
-        }
+        public DockerContainer[] DockerContainers => contents(_dockerContainers);
 
-        public GPU_group[] GPU_groups
-        {
-            get { return contents(_gpu_groups); }
-        }
-        
-        public Host[] Hosts
-        {
-            get { return contents(_host); }
-        }
+        public GPU_group[] GPU_groups => contents(_gpu_groups);
 
-        public int HostCount
-        {
-            get { return _host.Count; }
-        }
+        public Host[] Hosts => contents(_host);
 
-        public Host_cpu[] Host_cpus
-        {
-            get { return contents(_host_cpu); }
-        }
+        public int HostCount => _host.Count;
 
-        public XenAPI.Message[] Messages
-        {
-            get { return contents(_message); }
-        }
+        public Host_cpu[] Host_cpus => contents(_host_cpu);
 
-        public XenAPI.Network[] Networks
-        {
-            get { return contents(_network); }
-        }
+        public Message[] Messages => contents(_message);
 
-        public XenAPI.Network_sriov[] Network_sriov
-        {
-            get { return contents(_network_sriov); }
-        }
+        public XenAPI.Network[] Networks => contents(_network);
 
-        public PBD[] PBDs
-        {
-            get { return contents(_pbd); }
-        }
+        public Network_sriov[] Network_sriov => contents(_network_sriov);
 
-        public PUSB[] PUSBs
-        {
-            get { return contents(_pusb); }
-        }
+        public PBD[] PBDs => contents(_pbd);
 
-        public VUSB[] VUSBs
-        {
-            get { return contents(_vusb); }
-        }
+        public PUSB[] PUSBs => contents(_pusb);
 
-        public USB_group[] USB_groups
-        {
-            get { return contents(_usb_group); }
-        }
+        public VUSB[] VUSBs => contents(_vusb);
 
-        public PCI[] PCIs
-        {
-            get { return contents(_pcis); }
-        }
+        public USB_group[] USB_groups => contents(_usb_group);
 
-        public PGPU[] PGPUs
-        {
-            get { return contents(_pgpu); }
-        }
+        public PCI[] PCIs => contents(_pcis);
 
-        public PIF[] PIFs
-        {
-            get { return contents(_pif); }
-        }
+        public PGPU[] PGPUs => contents(_pgpu);
 
-        public Pool[] Pools
-        {
-            get { return contents(_pool); }
-        }
+        public PIF[] PIFs => contents(_pif);
 
-        public Pool_patch[] Pool_patches
-        {
-            get { return contents(_pool_patch); }
-        }
+        public Pool[] Pools => contents(_pool);
 
-        public Pool_update[] Pool_updates
-        {
-            get { return contents(_pool_update); }
-        }
-        
-        public PVS_site[] PVS_sites
-        {
-            get { return contents(_pvs_site); }
-        }
-        
-        public PVS_server[] PVS_servers
-        {
-            get { return contents(_pvs_server); }
-        }
+        public Pool_patch[] Pool_patches => contents(_pool_patch);
 
-        public PVS_proxy[] PVS_proxies
-        {
-            get { return contents(_pvs_proxy); }
-        }
+        public Pool_update[] Pool_updates => contents(_pool_update);
 
-        public PVS_cache_storage[] PVS_cache_storages
-        {
-            get { return contents(_pvs_cache_storage); }
-        }
+        public PVS_site[] PVS_sites => contents(_pvs_site);
 
-        public Role[] Roles
-        {
-            get { return contents(_role); }
-        }
+        public PVS_server[] PVS_servers => contents(_pvs_server);
 
-        public SM[] SMs
-        {
-            get { return contents(_sm); }
-        }
+        public PVS_proxy[] PVS_proxies => contents(_pvs_proxy);
 
-        public SR[] SRs
-        {
-            get { return contents(_sr); }
-        }
+        public PVS_cache_storage[] PVS_cache_storages => contents(_pvs_cache_storage);
 
-        public Subject[] Subjects
-        {
-            get { return contents(_subject); }
-        }
+        public Role[] Roles => contents(_role);
 
-        public Tunnel[] Tunnels
-        {
-            get { return contents(_tunnel); }
-        }
+        public SM[] SMs => contents(_sm);
 
-        public VBD[] VBDs
-        {
-            get { return contents(_vbd); }
-        }
+        public SR[] SRs => contents(_sr);
 
-        public VDI[] VDIs
-        {
-            get { return contents(_vdi); }
-        }
+        public Subject[] Subjects => contents(_subject);
 
-        public VGPU[] VGPUs
-        {
-            get { return contents(_vgpu); }
-        }
+        public Tunnel[] Tunnels => contents(_tunnel);
 
-        public VGPU_type[] VGPU_types
-        {
-            get { return contents(_vgpu_types); } }
+        public VBD[] VBDs => contents(_vbd);
 
-        public VIF[] VIFs
-        {
-            get { return contents(_vif); }
-        }
+        public VDI[] VDIs => contents(_vdi);
 
-        public VM[] VMs
-        {
-            get { return contents(_vm); }
-        }
+        public VGPU[] VGPUs => contents(_vgpu);
+
+        public VGPU_type[] VGPU_types => contents(_vgpu_types);
+
+        public VIF[] VIFs => contents(_vif);
+
+        public VM[] VMs => contents(_vm);
 
 
         private static T[] contents<T>(ChangeableDictionary<XenRef<T>, T> d) where T : XenObject<T>
