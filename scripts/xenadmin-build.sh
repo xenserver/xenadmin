@@ -32,11 +32,6 @@
 
 # Script parameters:
 # 1 Global build number
-# 2 Signing node name
-# 3 Sign in SBE
-# 4 Self-signing certificate sha1 thumbprint
-# 5 Self-signing certificate sha256 thumbprint
-# 6 Timestamp server
 
 set -exu
 
@@ -80,12 +75,10 @@ ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #sign files only if all parameters are set and non-empty
-SIGN_BAT="${REPO}/scripts/sign.bat ${GLOBAL_BUILD_NUMBER} $2 $3 $4 $5 $6"
+SIGN_BAT="${REPO}/scripts/sign.bat"
 SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
-if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
-  echo "Some signing parameters are not set; skip signing binaries"
-else
+if [ -f "${SIGN_BAT}" ] ; then
   for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
   do
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
@@ -117,6 +110,8 @@ else
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
 
   cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${SIGN_DESCR}"
+else
+  echo "Sign script does not exist; skip signing binaries"
 fi
 
 #copy files (signed accordingly) in XenServerHealthService folder
@@ -196,10 +191,10 @@ done
 
 #copy and sign the combined installer
 
-if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] ; then
-  echo "Some signing parameters are not set; skip signing installer"
-else
+if [ -f "${SIGN_BAT}" ] ; then
   cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
+else
+  echo "Sign script does not exist; skip signing installer"
 fi
 
 cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
