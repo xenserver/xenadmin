@@ -1370,10 +1370,6 @@ namespace XenAPI
         Response<Object>
         vm_get_current_operations(string session, string _vm);
 
-        [XmlRpcMethod("VM.get_power_state")]
-        Response<string>
-        vm_get_power_state(string session, string _vm);
-
         [XmlRpcMethod("VM.get_name_label")]
         Response<string>
         vm_get_name_label(string session, string _vm);
@@ -1381,6 +1377,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.get_name_description")]
         Response<string>
         vm_get_name_description(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_power_state")]
+        Response<string>
+        vm_get_power_state(string session, string _vm);
 
         [XmlRpcMethod("VM.get_user_version")]
         Response<string>
@@ -6887,6 +6887,10 @@ namespace XenAPI
         Response<Object>
         tunnel_get_other_config(string session, string _tunnel);
 
+        [XmlRpcMethod("tunnel.get_protocol")]
+        Response<string>
+        tunnel_get_protocol(string session, string _tunnel);
+
         [XmlRpcMethod("tunnel.set_status")]
         Response<string>
         tunnel_set_status(string session, string _tunnel, Object _status);
@@ -6911,6 +6915,10 @@ namespace XenAPI
         Response<string>
         tunnel_remove_from_other_config(string session, string _tunnel, string _key);
 
+        [XmlRpcMethod("tunnel.set_protocol")]
+        Response<string>
+        tunnel_set_protocol(string session, string _tunnel, string _protocol);
+
         [XmlRpcMethod("tunnel.create")]
         Response<string>
         tunnel_create(string session, string _transport_pif, string _network);
@@ -6918,6 +6926,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.tunnel.create")]
         Response<string>
         async_tunnel_create(string session, string _transport_pif, string _network);
+
+        [XmlRpcMethod("tunnel.create")]
+        Response<string>
+        tunnel_create(string session, string _transport_pif, string _network, string _protocol);
+
+        [XmlRpcMethod("Async.tunnel.create")]
+        Response<string>
+        async_tunnel_create(string session, string _transport_pif, string _network, string _protocol);
 
         [XmlRpcMethod("tunnel.destroy")]
         Response<string>
@@ -8510,9 +8526,9 @@ namespace XenAPI
         public string uuid;
         public string [] allowed_operations;
         public Object current_operations;
-        public string power_state;
         public string name_label;
         public string name_description;
+        public string power_state;
         public string user_version;
         public bool is_a_template;
         public bool is_default_template;
@@ -9204,6 +9220,7 @@ namespace XenAPI
         public string transport_PIF;
         public Object status;
         public Object other_config;
+        public string protocol;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

@@ -464,7 +464,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the speed field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -832,7 +832,7 @@ namespace XenAPI
 
         /// <summary>
         /// USB device speed
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         public virtual double speed
         {

@@ -2363,13 +2363,6 @@ namespace XenAPI
             return Rpc<Dictionary<string, vm_operations>>("VM.get_current_operations", new JArray(session, _vm ?? ""), serializer);
         }
 
-        public vm_power_state vm_get_power_state(string session, string _vm)
-        {
-            var converters = new List<JsonConverter> {new vm_power_stateConverter()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<vm_power_state>("VM.get_power_state", new JArray(session, _vm ?? ""), serializer);
-        }
-
         public string vm_get_name_label(string session, string _vm)
         {
             var converters = new List<JsonConverter> {};
@@ -2382,6 +2375,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<string>("VM.get_name_description", new JArray(session, _vm ?? ""), serializer);
+        }
+
+        public vm_power_state vm_get_power_state(string session, string _vm)
+        {
+            var converters = new List<JsonConverter> {new vm_power_stateConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<vm_power_state>("VM.get_power_state", new JArray(session, _vm ?? ""), serializer);
         }
 
         public long vm_get_user_version(string session, string _vm)
@@ -12017,6 +12017,13 @@ namespace XenAPI
             return Rpc<Dictionary<string, string>>("tunnel.get_other_config", new JArray(session, _tunnel ?? ""), serializer);
         }
 
+        public tunnel_protocol tunnel_get_protocol(string session, string _tunnel)
+        {
+            var converters = new List<JsonConverter> {new tunnel_protocolConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<tunnel_protocol>("tunnel.get_protocol", new JArray(session, _tunnel ?? ""), serializer);
+        }
+
         public void tunnel_set_status(string session, string _tunnel, Dictionary<string, string> _status)
         {
             var converters = new List<JsonConverter> {new StringStringMapConverter()};
@@ -12059,6 +12066,13 @@ namespace XenAPI
             Rpc("tunnel.remove_from_other_config", new JArray(session, _tunnel ?? "", _key ?? ""), serializer);
         }
 
+        public void tunnel_set_protocol(string session, string _tunnel, tunnel_protocol _protocol)
+        {
+            var converters = new List<JsonConverter> {new tunnel_protocolConverter()};
+            var serializer = CreateSerializer(converters);
+            Rpc("tunnel.set_protocol", new JArray(session, _tunnel ?? "", _protocol.StringOf()), serializer);
+        }
+
         public XenRef<Tunnel> tunnel_create(string session, string _transport_pif, string _network)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Tunnel>(), new XenRefConverter<PIF>(), new XenRefConverter<Network>()};
@@ -12071,6 +12085,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<PIF>(), new XenRefConverter<Network>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.tunnel.create", new JArray(session, _transport_pif ?? "", _network ?? ""), serializer);
+        }
+
+        public XenRef<Tunnel> tunnel_create(string session, string _transport_pif, string _network, tunnel_protocol _protocol)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Tunnel>(), new XenRefConverter<PIF>(), new XenRefConverter<Network>(), new tunnel_protocolConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Tunnel>>("tunnel.create", new JArray(session, _transport_pif ?? "", _network ?? "", _protocol.StringOf()), serializer);
+        }
+
+        public XenRef<Task> async_tunnel_create(string session, string _transport_pif, string _network, tunnel_protocol _protocol)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<PIF>(), new XenRefConverter<Network>(), new tunnel_protocolConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.tunnel.create", new JArray(session, _transport_pif ?? "", _network ?? "", _protocol.StringOf()), serializer);
         }
 
         public void tunnel_destroy(string session, string _tunnel)

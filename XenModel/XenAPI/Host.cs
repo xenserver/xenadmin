@@ -1423,11 +1423,11 @@ namespace XenAPI
         /// <summary>
         /// Get the ssl_legacy field of the given host.
         /// First published in XenServer 7.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("Citrix Hypervisor 8.2")]
         public static bool get_ssl_legacy(Session session, string _host)
         {
             if (session.JsonRpcClient != null)
@@ -1564,7 +1564,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the certificates field of the given host.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1578,7 +1578,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the editions field of the given host.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3057,7 +3057,7 @@ namespace XenAPI
 
         /// <summary>
         /// Install the TLS server certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3074,7 +3074,7 @@ namespace XenAPI
 
         /// <summary>
         /// Install the TLS server certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3091,7 +3091,7 @@ namespace XenAPI
 
         /// <summary>
         /// Delete the current TLS server certificate and replace by a new, self-signed one. This should only be used with extreme care.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static void emergency_reset_server_certificate(Session session)
@@ -4583,7 +4583,7 @@ namespace XenAPI
 
         /// <summary>
         /// List of certificates installed in the host
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<Certificate>))]
         public virtual List<XenRef<Certificate>> certificates
@@ -4602,7 +4602,7 @@ namespace XenAPI
 
         /// <summary>
         /// List of all available product editions
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         public virtual string[] editions
         {

@@ -678,7 +678,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the task progress
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_task">The opaque_ref of the given task</param>

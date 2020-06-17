@@ -33,27 +33,23 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(sriov_configuration_modeConverter))]
-    public enum sriov_configuration_mode
+    [JsonConverter(typeof(tunnel_protocolConverter))]
+    public enum tunnel_protocol
     {
         /// <summary>
-        /// Configure network sriov by sysfs, do not need reboot
+        /// GRE protocol
         /// </summary>
-        sysfs,
+        gre,
         /// <summary>
-        /// Configure network sriov by modprobe, need reboot
+        /// VxLAN Protocol
         /// </summary>
-        modprobe,
-        /// <summary>
-        /// Configure network sriov manually
-        /// </summary>
-        manual,
+        vxlan,
         unknown
     }
 
-    public static class sriov_configuration_mode_helper
+    public static class tunnel_protocol_helper
     {
-        public static string ToString(sriov_configuration_mode x)
+        public static string ToString(tunnel_protocol x)
         {
             return x.StringOf();
         }
@@ -61,27 +57,25 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this sriov_configuration_mode x)
+        public static string StringOf(this tunnel_protocol x)
         {
             switch (x)
             {
-                case sriov_configuration_mode.sysfs:
-                    return "sysfs";
-                case sriov_configuration_mode.modprobe:
-                    return "modprobe";
-                case sriov_configuration_mode.manual:
-                    return "manual";
+                case tunnel_protocol.gre:
+                    return "gre";
+                case tunnel_protocol.vxlan:
+                    return "vxlan";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class sriov_configuration_modeConverter : XenEnumConverter
+    internal class tunnel_protocolConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((sriov_configuration_mode)value).StringOf());
+            writer.WriteValue(((tunnel_protocol)value).StringOf());
         }
     }
 }
