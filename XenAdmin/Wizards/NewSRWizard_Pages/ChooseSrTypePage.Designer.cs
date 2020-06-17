@@ -72,7 +72,6 @@
             // upsellPage1
             // 
             resources.ApplyResources(this.upsellPage1, "upsellPage1");
-            this.upsellPage1.Image = ((System.Drawing.Image)(resources.GetObject("upsellPage1.Image")));
             this.upsellPage1.Name = "upsellPage1";
             // 
             // SRBlurb
