@@ -55,13 +55,15 @@ namespace XenAPI
             XenRef<PIF> access_PIF,
             XenRef<PIF> transport_PIF,
             Dictionary<string, string> status,
-            Dictionary<string, string> other_config)
+            Dictionary<string, string> other_config,
+            tunnel_protocol protocol)
         {
             this.uuid = uuid;
             this.access_PIF = access_PIF;
             this.transport_PIF = transport_PIF;
             this.status = status;
             this.other_config = other_config;
+            this.protocol = protocol;
         }
 
         /// <summary>
@@ -98,6 +100,7 @@ namespace XenAPI
             transport_PIF = update.transport_PIF;
             status = update.status;
             other_config = update.other_config;
+            protocol = update.protocol;
         }
 
         internal void UpdateFrom(Proxy_Tunnel proxy)
@@ -107,6 +110,7 @@ namespace XenAPI
             transport_PIF = proxy.transport_PIF == null ? null : XenRef<PIF>.Create(proxy.transport_PIF);
             status = proxy.status == null ? null : Maps.convert_from_proxy_string_string(proxy.status);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            protocol = proxy.protocol == null ? (tunnel_protocol) 0 : (tunnel_protocol)Helper.EnumParseDefault(typeof(tunnel_protocol), (string)proxy.protocol);
         }
 
         public Proxy_Tunnel ToProxy()
@@ -117,6 +121,7 @@ namespace XenAPI
             result_.transport_PIF = transport_PIF ?? "";
             result_.status = Maps.convert_to_proxy_string_string(status);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.protocol = tunnel_protocol_helper.ToString(protocol);
             return result_;
         }
 
@@ -138,6 +143,8 @@ namespace XenAPI
                 status = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "status"));
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            if (table.ContainsKey("protocol"))
+                protocol = (tunnel_protocol)Helper.EnumParseDefault(typeof(tunnel_protocol), Marshalling.ParseString(table, "protocol"));
         }
 
         public bool DeepEquals(Tunnel other)
@@ -151,7 +158,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._access_PIF, other._access_PIF) &&
                 Helper.AreEqual2(this._transport_PIF, other._transport_PIF) &&
                 Helper.AreEqual2(this._status, other._status) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._protocol, other._protocol);
         }
 
         internal static List<Tunnel> ProxyArrayToObjectList(Proxy_Tunnel[] input)
@@ -179,6 +187,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_other_config, server._other_config))
                 {
                     Tunnel.set_other_config(session, opaqueRef, _other_config);
+                }
+                if (!Helper.AreEqual2(_protocol, server._protocol))
+                {
+                    Tunnel.set_protocol(session, opaqueRef, _protocol);
                 }
 
                 return null;
@@ -283,6 +295,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the protocol field of the given tunnel.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        public static tunnel_protocol get_protocol(Session session, string _tunnel)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.tunnel_get_protocol(session.opaque_ref, _tunnel);
+            else
+                return (tunnel_protocol)Helper.EnumParseDefault(typeof(tunnel_protocol), (string)session.XmlRpcProxy.tunnel_get_protocol(session.opaque_ref, _tunnel ?? "").parse());
+        }
+
+        /// <summary>
         /// Set the status field of the given tunnel.
         /// First published in XenServer 5.6 FP1.
         /// </summary>
@@ -375,12 +401,27 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the protocol field of the given tunnel.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_protocol">New value to set</param>
+        public static void set_protocol(Session session, string _tunnel, tunnel_protocol _protocol)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.tunnel_set_protocol(session.opaque_ref, _tunnel, _protocol);
+            else
+                session.XmlRpcProxy.tunnel_set_protocol(session.opaque_ref, _tunnel ?? "", tunnel_protocol_helper.ToString(_protocol)).parse();
+        }
+
+        /// <summary>
         /// Create a tunnel
         /// First published in XenServer 5.6 FP1.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_transport_pif">PIF which receives the tagged traffic</param>
-        /// <param name="_network">Network to receive the tunnelled traffic</param>
+        /// <param name="_transport_pif">PIF which receives the tagged traffic First published in XenServer 7.0.</param>
+        /// <param name="_network">Network to receive the tunnelled traffic First published in XenServer 7.0.</param>
         public static XenRef<Tunnel> create(Session session, string _transport_pif, string _network)
         {
             if (session.JsonRpcClient != null)
@@ -394,14 +435,46 @@ namespace XenAPI
         /// First published in XenServer 5.6 FP1.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_transport_pif">PIF which receives the tagged traffic</param>
-        /// <param name="_network">Network to receive the tunnelled traffic</param>
+        /// <param name="_transport_pif">PIF which receives the tagged traffic First published in XenServer 7.0.</param>
+        /// <param name="_network">Network to receive the tunnelled traffic First published in XenServer 7.0.</param>
         public static XenRef<Task> async_create(Session session, string _transport_pif, string _network)
         {
           if (session.JsonRpcClient != null)
               return session.JsonRpcClient.async_tunnel_create(session.opaque_ref, _transport_pif, _network);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_tunnel_create(session.opaque_ref, _transport_pif ?? "", _network ?? "").parse());
+        }
+
+        /// <summary>
+        /// Create a tunnel
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_transport_pif">PIF which receives the tagged traffic First published in XenServer 7.0.</param>
+        /// <param name="_network">Network to receive the tunnelled traffic First published in XenServer 7.0.</param>
+        /// <param name="_protocol">Protocol used for the tunnel (GRE or VxLAN) First published in Unreleased.</param>
+        public static XenRef<Tunnel> create(Session session, string _transport_pif, string _network, tunnel_protocol _protocol)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.tunnel_create(session.opaque_ref, _transport_pif, _network, _protocol);
+            else
+                return XenRef<Tunnel>.Create(session.XmlRpcProxy.tunnel_create(session.opaque_ref, _transport_pif ?? "", _network ?? "", tunnel_protocol_helper.ToString(_protocol)).parse());
+        }
+
+        /// <summary>
+        /// Create a tunnel
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_transport_pif">PIF which receives the tagged traffic First published in XenServer 7.0.</param>
+        /// <param name="_network">Network to receive the tunnelled traffic First published in XenServer 7.0.</param>
+        /// <param name="_protocol">Protocol used for the tunnel (GRE or VxLAN) First published in Unreleased.</param>
+        public static XenRef<Task> async_create(Session session, string _transport_pif, string _network, tunnel_protocol _protocol)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_tunnel_create(session.opaque_ref, _transport_pif, _network, _protocol);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_tunnel_create(session.opaque_ref, _transport_pif ?? "", _network ?? "", tunnel_protocol_helper.ToString(_protocol)).parse());
         }
 
         /// <summary>
@@ -546,5 +619,24 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
+
+        /// <summary>
+        /// The protocol used for tunneling (either GRE or VxLAN)
+        /// First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(tunnel_protocolConverter))]
+        public virtual tunnel_protocol protocol
+        {
+            get { return _protocol; }
+            set
+            {
+                if (!Helper.AreEqual(value, _protocol))
+                {
+                    _protocol = value;
+                    NotifyPropertyChanged("protocol");
+                }
+            }
+        }
+        private tunnel_protocol _protocol = tunnel_protocol.gre;
     }
 }

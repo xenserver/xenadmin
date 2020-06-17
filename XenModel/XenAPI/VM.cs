@@ -54,9 +54,9 @@ namespace XenAPI
         public VM(string uuid,
             List<vm_operations> allowed_operations,
             Dictionary<string, vm_operations> current_operations,
-            vm_power_state power_state,
             string name_label,
             string name_description,
+            vm_power_state power_state,
             long user_version,
             bool is_a_template,
             bool is_default_template,
@@ -141,9 +141,9 @@ namespace XenAPI
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
             this.current_operations = current_operations;
-            this.power_state = power_state;
             this.name_label = name_label;
             this.name_description = name_description;
+            this.power_state = power_state;
             this.user_version = user_version;
             this.is_a_template = is_a_template;
             this.is_default_template = is_default_template;
@@ -258,9 +258,9 @@ namespace XenAPI
             uuid = update.uuid;
             allowed_operations = update.allowed_operations;
             current_operations = update.current_operations;
-            power_state = update.power_state;
             name_label = update.name_label;
             name_description = update.name_description;
+            power_state = update.power_state;
             user_version = update.user_version;
             is_a_template = update.is_a_template;
             is_default_template = update.is_default_template;
@@ -348,9 +348,9 @@ namespace XenAPI
             uuid = proxy.uuid == null ? null : proxy.uuid;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<vm_operations>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_vm_operations(proxy.current_operations);
-            power_state = proxy.power_state == null ? (vm_power_state) 0 : (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)proxy.power_state);
             name_label = proxy.name_label == null ? null : proxy.name_label;
             name_description = proxy.name_description == null ? null : proxy.name_description;
+            power_state = proxy.power_state == null ? (vm_power_state) 0 : (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)proxy.power_state);
             user_version = proxy.user_version == null ? 0 : long.Parse(proxy.user_version);
             is_a_template = (bool)proxy.is_a_template;
             is_default_template = (bool)proxy.is_default_template;
@@ -439,9 +439,9 @@ namespace XenAPI
             result_.uuid = uuid ?? "";
             result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
             result_.current_operations = Maps.convert_to_proxy_string_vm_operations(current_operations);
-            result_.power_state = vm_power_state_helper.ToString(power_state);
             result_.name_label = name_label ?? "";
             result_.name_description = name_description ?? "";
+            result_.power_state = vm_power_state_helper.ToString(power_state);
             result_.user_version = user_version.ToString();
             result_.is_a_template = is_a_template;
             result_.is_default_template = is_default_template;
@@ -539,12 +539,12 @@ namespace XenAPI
                 allowed_operations = Helper.StringArrayToEnumList<vm_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
                 current_operations = Maps.convert_from_proxy_string_vm_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            if (table.ContainsKey("power_state"))
-                power_state = (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), Marshalling.ParseString(table, "power_state"));
             if (table.ContainsKey("name_label"))
                 name_label = Marshalling.ParseString(table, "name_label");
             if (table.ContainsKey("name_description"))
                 name_description = Marshalling.ParseString(table, "name_description");
+            if (table.ContainsKey("power_state"))
+                power_state = (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), Marshalling.ParseString(table, "power_state"));
             if (table.ContainsKey("user_version"))
                 user_version = Marshalling.ParseLong(table, "user_version");
             if (table.ContainsKey("is_a_template"))
@@ -719,9 +719,9 @@ namespace XenAPI
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._power_state, other._power_state) &&
                 Helper.AreEqual2(this._name_label, other._name_label) &&
                 Helper.AreEqual2(this._name_description, other._name_description) &&
+                Helper.AreEqual2(this._power_state, other._power_state) &&
                 Helper.AreEqual2(this._user_version, other._user_version) &&
                 Helper.AreEqual2(this._is_a_template, other._is_a_template) &&
                 Helper.AreEqual2(this._is_default_template, other._is_default_template) &&
@@ -917,6 +917,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_hardware_platform_version, server._hardware_platform_version))
                 {
                     VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
+                }
+                if (!Helper.AreEqual2(_suspend_VDI, server._suspend_VDI))
+                {
+                    VM.set_suspend_VDI(session, opaqueRef, _suspend_VDI);
                 }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
@@ -1143,20 +1147,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the power_state field of the given VM.
-        /// First published in XenServer 4.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        public static vm_power_state get_power_state(Session session, string _vm)
-        {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_power_state(session.opaque_ref, _vm);
-            else
-                return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.XmlRpcProxy.vm_get_power_state(session.opaque_ref, _vm ?? "").parse());
-        }
-
-        /// <summary>
         /// Get the name/label field of the given VM.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1182,6 +1172,20 @@ namespace XenAPI
                 return session.JsonRpcClient.vm_get_name_description(session.opaque_ref, _vm);
             else
                 return session.XmlRpcProxy.vm_get_name_description(session.opaque_ref, _vm ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the power_state field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static vm_power_state get_power_state(Session session, string _vm)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_power_state(session.opaque_ref, _vm);
+            else
+                return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.XmlRpcProxy.vm_get_power_state(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -5272,24 +5276,6 @@ namespace XenAPI
         private Dictionary<string, vm_operations> _current_operations = new Dictionary<string, vm_operations>() {};
 
         /// <summary>
-        /// Current power state of the machine
-        /// </summary>
-        [JsonConverter(typeof(vm_power_stateConverter))]
-        public virtual vm_power_state power_state
-        {
-            get { return _power_state; }
-            set
-            {
-                if (!Helper.AreEqual(value, _power_state))
-                {
-                    _power_state = value;
-                    NotifyPropertyChanged("power_state");
-                }
-            }
-        }
-        private vm_power_state _power_state;
-
-        /// <summary>
         /// a human-readable name
         /// </summary>
         public virtual string name_label
@@ -5322,6 +5308,24 @@ namespace XenAPI
             }
         }
         private string _name_description = "";
+
+        /// <summary>
+        /// Current power state of the machine
+        /// </summary>
+        [JsonConverter(typeof(vm_power_stateConverter))]
+        public virtual vm_power_state power_state
+        {
+            get { return _power_state; }
+            set
+            {
+                if (!Helper.AreEqual(value, _power_state))
+                {
+                    _power_state = value;
+                    NotifyPropertyChanged("power_state");
+                }
+            }
+        }
+        private vm_power_state _power_state = vm_power_state.Halted;
 
         /// <summary>
         /// Creators of VMs and templates may store version information here.
@@ -5391,7 +5395,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VDI> _suspend_VDI = new XenRef<VDI>(Helper.NullOpaqueRef);
+        private XenRef<VDI> _suspend_VDI = new XenRef<VDI>("OpaqueRef:NULL");
 
         /// <summary>
         /// the host the VM is currently resident on

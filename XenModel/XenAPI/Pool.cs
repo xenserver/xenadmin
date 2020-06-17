@@ -2563,11 +2563,11 @@ namespace XenAPI
         /// <summary>
         /// Sets ssl_legacy false on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
         /// First published in XenServer 7.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("Citrix Hypervisor 8.2")]
         public static void disable_ssl_legacy(Session session, string _pool)
         {
             if (session.JsonRpcClient != null)
@@ -2579,11 +2579,11 @@ namespace XenAPI
         /// <summary>
         /// Sets ssl_legacy false on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
         /// First published in XenServer 7.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("Citrix Hypervisor 8.2")]
         public static XenRef<Task> async_disable_ssl_legacy(Session session, string _pool)
         {
           if (session.JsonRpcClient != null)

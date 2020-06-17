@@ -41,7 +41,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Description
-    /// First published in Unreleased.
+    /// First published in Citrix Hypervisor 8.2.
     /// </summary>
     public partial class Certificate : XenObject<Certificate>
     {
@@ -177,7 +177,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -191,7 +191,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Certificate instance with the specified UUID.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -205,7 +205,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -219,7 +219,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the host field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -233,7 +233,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the not_before field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -247,7 +247,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the not_after field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -261,7 +261,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the fingerprint field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -275,7 +275,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the Certificates known to the system.
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Certificate>> get_all(Session session)
@@ -288,7 +288,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Certificate Records at once, in a single XML RPC call
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Certificate>, Certificate> get_all_records(Session session)
