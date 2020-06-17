@@ -135,23 +135,6 @@
   <data name="upsellPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACeUlEQVQ4T42Ta0iTURjH89qXQMjNTJbm
-        poiGbhISGYVggtICNWs6xrpY2aIIlaJiztrUIBKLIrp9GymNJKQ+hHb5oOJcWzedJkqwoVaiXebytvTf
-        OY+bbhnRCz/ec877/P/neZ73nFUAAojYdEPEKGeYGE4vfMzXRH/GB0y8Qdic/xg5h9pRfNpO8DFf4994
-        jL/GX2yK3WZEnuY1iip7UFDetwL+jcfw2AAD7irKNCL76Lv/gsf6MvHVjAylGVvVrzDo+I75eQ+GnD/Y
-        3EZkqq141vUJU9OzRE7pc185Itp9Y/YjyEosRGGZEQsLC4Thdh+2qLvR2vWZbfaLjDXnmiBVdCA26yE3
-        qKfaJfI2JBdbvHTjTF0zEwDTMx70f/zGRh5MuidRdbMHivNvKC5uZwv1ghs4E/Z2IpEt+kgu6cSHoREy
-        AebgGBmB7p4NwReEhEzTglRVO0Q7HlADnfEKMyQqGyE7bMXw2E8m9Czq2TPumkCwbj3qXUrUThQhqCoa
-        6SealwxMGwpeQnzwLeTaHszMzjGJBy63G9IjbTh7f4AEl74W49qUir0Lsa8zDaH6GCTu1rZSE6Nzn6Di
-        zgCreYYa5Rj+gqQDTyE+ZqeUfeLa8T0oe5+Ok/2ZUJmlCNLGUAbsN15HfGkHxMcthOSUHQkVgwRPnWcQ
-        fjWUxLrRXQgxrCVW10UtH2HB9kYkVTn/iqTaQgJuUD0qR0hNJNbk72/g2oCjLMhqQlK1AymXx1YQro9C
-        QqMQ2uFcaHozyJBllbFk4DWhyyRSvoCkshcpV5iYwcfrSu8i9GIUIhoiqQy1NRVhesGy2M/kn9c57lZa
-        XphBuJhBjRC/AXh6ZjmqSS3xAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="upsellPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 51</value>
   </data>

@@ -45,7 +45,8 @@ namespace XenAdmin.Dialogs
         public UpsellDialog(string blurb, string learnMoreUrl)
         {
             InitializeComponent();
-            upsellPage1.SetAllTexts(blurb, learnMoreUrl);
+            upsellPage1.BlurbText = blurb;
+            upsellPage1.LearnMoreUrl = learnMoreUrl;
             upsellPage1.enableOkButton();
             this.CancelButton = upsellPage1.OKButton;
             Height = upsellPage1.Height;

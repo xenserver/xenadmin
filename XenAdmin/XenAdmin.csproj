@@ -5635,9 +5635,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UpsellDialog.ja.resx">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UpsellDialog.zh-CN.resx">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UserDeviceDialog.ja.resx">
       <DependentUpon>UserDeviceDialog.cs</DependentUpon>
@@ -6105,9 +6107,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\UpsellTabPage.ja.resx">
       <DependentUpon>UpsellTabPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\UpsellTabPage.zh-CN.resx">
       <DependentUpon>UpsellTabPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\VMStoragePage.ja.resx">
       <DependentUpon>VMStoragePage.cs</DependentUpon>
@@ -6506,12 +6510,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrTypePage.ja.resx">
       <DependentUpon>ChooseSrTypePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrTypePage.resx">
       <DependentUpon>ChooseSrTypePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrTypePage.zh-CN.resx">
       <DependentUpon>ChooseSrTypePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFS_ISO.ja.resx">
       <DependentUpon>CIFS_ISO.cs</DependentUpon>
