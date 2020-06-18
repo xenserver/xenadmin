@@ -29,10 +29,12 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections;
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Reflection;
 using NUnit.Framework;
 
@@ -42,6 +44,34 @@ namespace XenAdminTests.CodeTests
     [TestFixture, Category(TestCategories.Unit)]
     public class AssemblyTests
     {
+        [Test]
+        [Description("Checks that there are no Bitmaps in XenAdmin.Resources" +
+                     "without a counterpart in XenAdmin.Images.StaticImages")]
+        public void TestEnsureStaticImages()
+        {
+            var manager = new System.Resources.ResourceManager("XenAdmin.Properties.Resources",
+                typeof(XenAdmin.Properties.Resources).Assembly);
+
+            var images = manager.GetResourceSet(CultureInfo.CurrentCulture, true, true)
+                .Cast<DictionaryEntry>().Where(e => e.Value is Bitmap).ToList();
+
+            var staticImages = typeof(XenAdmin.Images.StaticImages).GetFields()
+                .Where(f => f.IsStatic && f.FieldType == typeof(Bitmap)).ToList();
+
+            var extraImages = (from DictionaryEntry e in images
+                let key = e.Key as string
+                where !staticImages.Exists(s => s.Name == key)
+                select key).ToList();
+
+            var extraStatics = (from FieldInfo s in staticImages
+                where !images.Exists(i => s.Name == (string)i.Key)
+                select s.Name).ToList();
+
+            Assert.True(extraStatics.Count == 0 && extraImages.Count == 0,
+                $"Orphaned static images: {string.Join(", ", extraStatics)}\n" +
+                $"Resources without a static counterpart: {string.Join(", ", extraImages)}");
+        }
+
         [Test, Combinatorial]
         [Description("Checks all resx files in the project have their i18n counterparts in place")]
         public void TestEnsureI18NFilesInPlace(
