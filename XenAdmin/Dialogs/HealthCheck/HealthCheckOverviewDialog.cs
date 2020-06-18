@@ -133,15 +133,15 @@ namespace XenAdmin.Dialogs.HealthCheck
             private Image GetSeverityImage(HealthCheckSettings healthCheckSettings)
             {
                 if (healthCheckSettings.ReportAnalysisIssuesDetected == 0)
-                    return Properties.Resources._000_Tick_h32bit_16;
+                    return Images.StaticImages._000_Tick_h32bit_16;
                 switch (healthCheckSettings.ReportAnalysisSeverity)
                 {
                     case DiagnosticAlertSeverity.Error:
-                        return Properties.Resources._000_error_h32bit_16;
+                        return Images.StaticImages._000_error_h32bit_16;
                     case DiagnosticAlertSeverity.Warning:
-                        return Properties.Resources._000_Alert2_h32bit_16;
+                        return Images.StaticImages._000_Alert2_h32bit_16;
                     default:
-                        return Properties.Resources._000_Info3_h32bit_16;
+                        return Images.StaticImages._000_Info3_h32bit_16;
                 }
             }
         }

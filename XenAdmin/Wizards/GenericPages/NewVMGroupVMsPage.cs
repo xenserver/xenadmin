@@ -82,10 +82,7 @@ namespace XenAdmin.Wizards.GenericPages
             get { return VMGroup<T>.ChooseVMsPage_HelpID; } 
         }
 
-        public override Image Image
-        {
-            get { return Properties.Resources._000_VM_h32bit_16; }
-        }
+        public override Image Image => Images.StaticImages._000_VM_h32bit_16;
 
         public override string PageTitle
         {

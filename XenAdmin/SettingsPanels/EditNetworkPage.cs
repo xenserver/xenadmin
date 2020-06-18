@@ -68,13 +68,7 @@ namespace XenAdmin.SettingsPanels
             get { return _ValidToSave; }
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_Network_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_Network_h32bit_16;
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {

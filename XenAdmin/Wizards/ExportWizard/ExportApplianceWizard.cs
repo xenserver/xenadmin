@@ -143,13 +143,13 @@ namespace XenAdmin.Wizards.ExportWizard
 			        if ((bool)m_exportAsXva)
 			        {
 			            Text = Messages.MAINWINDOW_XVA_TITLE;
-			            pictureBoxWizard.Image = Properties.Resources.export_32;
+			            pictureBoxWizard.Image = Images.StaticImages.export_32;
 			            RemovePages(ovfPages);
 			        }
 			        else
 			        {
 			            Text = Messages.EXPORT_APPLIANCE;
-			            pictureBoxWizard.Image = Properties.Resources._000_ExportVirtualAppliance_h32bit_32;
+			            pictureBoxWizard.Image = Images.StaticImages._000_ExportVirtualAppliance_h32bit_32;
 			            AddAfterPage(m_pageExportSelectVMs, ovfPages);
 			        }
 

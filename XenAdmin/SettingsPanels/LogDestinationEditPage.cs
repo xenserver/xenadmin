@@ -68,7 +68,7 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTabs implementation
 
-        public Image Image => Properties.Resources.log_destination_16;
+        public Image Image => Images.StaticImages.log_destination_16;
 
         public string SubText
         {

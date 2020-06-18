@@ -153,7 +153,6 @@
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.HelpButton = true;
-            this.Icon = global::XenAdmin.Properties.Resources.AppIcon;
             this.Name = "WorkloadReports";
             this.Load += new System.EventHandler(this.ReportForm_Load);
             this.Shown += new System.EventHandler(this.WlbReportWindow_Shown);

@@ -39,7 +39,6 @@ using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAdmin.Wizards.NewPolicyWizard;
 using XenAPI;
 
@@ -57,7 +56,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             Pool = pool;
             InitializeComponent();
             ShowHideRunHistoryButton.Text = Messages.SHOW_RUN_HISTORY;
-            ShowHideRunHistoryButton.Image = Properties.Resources.PDChevronDown;
+            ShowHideRunHistoryButton.Image = Images.StaticImages.PDChevronDown;
 
             ColumnExpand.DefaultCellStyle.NullValue = null;
             comboBoxTimeSpan.SelectedIndex = 0;
@@ -149,12 +148,12 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     if (AlertMessages[0].priority == PolicyAlert.INFO_PRIORITY)
                     {
                         PolicyLastResult = Messages.VMSS_SUCCEEDED;
-                        PolicyLastResultImage = Resources._075_TickRound_h32bit_16;
+                        PolicyLastResultImage = Images.StaticImages._075_TickRound_h32bit_16;
                     }
                     else
                     {
                         PolicyLastResult = Messages.FAILED;
-                        PolicyLastResultImage = Resources._075_WarningRound_h32bit_16;
+                        PolicyLastResultImage = Images.StaticImages._075_WarningRound_h32bit_16;
                     }
                 }
                 else
@@ -428,12 +427,12 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             if (tableLayoutPanel2.Visible)
             {
                 ShowHideRunHistoryButton.Text = Messages.HIDE_RUN_HISTORY;
-                ShowHideRunHistoryButton.Image = Resources.PDChevronUp;
+                ShowHideRunHistoryButton.Image = Images.StaticImages.PDChevronUp;
             }
             else
             {
                 ShowHideRunHistoryButton.Text = Messages.SHOW_RUN_HISTORY;
-                ShowHideRunHistoryButton.Image = Resources.PDChevronDown;
+                ShowHideRunHistoryButton.Image = Images.StaticImages.PDChevronDown;
             }
         }
 
@@ -554,23 +553,23 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
             public void RefreshRow()
             {
-                _expand.Value = Expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
+                _expand.Value = Expanded ? Images.StaticImages.expanded_triangle : Images.StaticImages.contracted_triangle;
                 if (Alert.Type == "info")
                     _expand.Value = null;
 
                 if (Alert.Type == "error")
                 {
-                    _result.Image = Properties.Resources._075_WarningRound_h32bit_16;
+                    _result.Image = Images.StaticImages._075_WarningRound_h32bit_16;
                     _result.Value = Messages.ERROR;
                 }
                 else if (Alert.Type == "warn")
                 {
-                    _result.Image = Properties.Resources._075_WarningRound_h32bit_16;
+                    _result.Image = Images.StaticImages._075_WarningRound_h32bit_16;
                     _result.Value = Messages.WARNING;
                 }
                 else if (Alert.Type == "info")
                 {
-                    _result.Image = Properties.Resources._075_TickRound_h32bit_16;
+                    _result.Image = Images.StaticImages._075_TickRound_h32bit_16;
                     _result.Value = Messages.INFORMATION;
                 }
                 _dateTime.Value = Alert.Time;

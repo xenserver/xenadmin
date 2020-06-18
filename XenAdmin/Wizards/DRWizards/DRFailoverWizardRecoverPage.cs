@@ -514,13 +514,13 @@ namespace XenAdmin.Wizards.DRWizards
                 switch (state)
                 {
                     case RecoverState.Recovered:
-                        imageCell.Value = Resources._000_Tick_h32bit_16;
+                        imageCell.Value = Images.StaticImages._000_Tick_h32bit_16;
                         break;
                     case RecoverState.Recovering:
                         imageCell.Value = animatedImage;
                         break;
                     case RecoverState.Error:
-                        imageCell.Value = Resources._000_Abort_h32bit_16;
+                        imageCell.Value = Images.StaticImages._000_Abort_h32bit_16;
                         break;
                     case RecoverState.NotRecovered:
                         imageCell.Value = new Bitmap(1, 1);

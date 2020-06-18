@@ -31,12 +31,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using XenAdmin.Properties;
+
 
 namespace XenAdmin.Controls
 {
@@ -49,7 +46,7 @@ namespace XenAdmin.Controls
         {
             InitializeComponent();
 
-            base.Image = Resources.expanded_triangle;
+            base.Image = Images.StaticImages.expanded_triangle;
             base.ImageAlign = ContentAlignment.MiddleRight;
             DoubleBuffered = true;
         }

@@ -30,17 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.RestoreSession;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -245,10 +239,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             get { return Messages.SAVE_AND_RESTORE_DESC; }
         }
 
-        public Image Image
-        {
-            get { return Resources._000_BackupMetadata_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_BackupMetadata_h32bit_16;
 
         #endregion
     }

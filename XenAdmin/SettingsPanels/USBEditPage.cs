@@ -91,10 +91,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image
-        {
-            get { return Resources.usb_16; }
-        }
+        public Image Image => Images.StaticImages.usb_16;
 
         public AsyncAction SaveSettings()
         {

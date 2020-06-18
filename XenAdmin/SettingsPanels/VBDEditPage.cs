@@ -74,13 +74,7 @@ namespace XenAdmin.SettingsPanels
             InvalidParamToolTip.ToolTipTitle = Messages.INVALID_PARAMETER;
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_VM_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_VM_h32bit_16;
 
         public bool ValidToSave
         {

@@ -36,7 +36,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using System.Linq;
 using XenAdmin.Commands;
 
@@ -316,11 +315,11 @@ namespace XenAdmin.Controls
         {
             if (IsExpanded)
             {
-                chevron.Image = chevronHot ? Resources.PDChevronUpOver : Resources.PDChevronUp;
+                chevron.Image = chevronHot ? Images.StaticImages.PDChevronUpOver : Images.StaticImages.PDChevronUp;
             }
             else
             {
-                chevron.Image = chevronHot ? Resources.PDChevronDownOver : Resources.PDChevronDown;
+                chevron.Image = chevronHot ? Images.StaticImages.PDChevronDownOver : Images.StaticImages.PDChevronDown;
             }
         }
 

@@ -899,7 +899,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 if (Metrics != null)
                     Metrics.PropertyChanged += Server_PropertyChanged;
 
-                ImageCell.Value = Properties.Resources._000_Network_h32bit_16;
+                ImageCell.Value = Images.StaticImages._000_Network_h32bit_16;
                 DeviceCell.Value = Vif.device;
                 MacCell.Value = Helpers.GetMacString(Vif.MAC);
                 LimitCell.Value = Vif.qos_algorithm_type != "" ? Vif.LimitString() : "";
@@ -970,7 +970,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 RegisterPifEvents();
 
-                ImageCell.Value = Properties.Resources._000_Network_h32bit_16;
+                ImageCell.Value = Images.StaticImages._000_Network_h32bit_16;
                 NameCell.Value = NetworkName();
                 DescriptionCell.Value = Network.Description();
                 NicCell.Value = Helpers.GetName(Pif);

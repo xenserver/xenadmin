@@ -93,13 +93,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_Email_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_Email_h32bit_16;
 
         // match anything with an @ sign in the middle
         private static readonly Regex emailRegex = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", RegexOptions.IgnoreCase);

@@ -111,10 +111,7 @@ namespace XenAdmin.SettingsPanels
             get { return radioButtonEnable.Checked? Messages.ENABLED : Messages.DISABLED; }
         }
 
-        public Image Image
-        {
-            get { return Properties.Resources._000_Patch_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_Patch_h32bit_16;
 
         #endregion
     }

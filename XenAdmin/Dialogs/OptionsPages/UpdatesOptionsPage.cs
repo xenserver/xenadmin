@@ -31,7 +31,6 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using XenAdmin.Core;
 
 
@@ -96,7 +95,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.UPDATES_DESC;
 
-        public Image Image => Resources._000_Patch_h32bit_16;
+        public Image Image => Images.StaticImages._000_Patch_h32bit_16;
 
         #endregion
     }

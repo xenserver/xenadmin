@@ -168,7 +168,7 @@ namespace XenAdmin.Wizards
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Bitmap bg = Properties.Resources.wizard_background;
+            Bitmap bg = Images.StaticImages.wizard_background;
             int bg_h = (int)(bg.Height * (Width / (float)bg.Width)); //The assumption made is that Width/bg.Width ratio always matches the system's dpi setting. Normally (at 100% dpi setting) this equals to 1.
             int bg_top = Height - bg_h;
             if (bg_top > 0)

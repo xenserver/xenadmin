@@ -32,7 +32,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using XenAPI;
 using XenCenterLib;
 
@@ -275,10 +274,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             get { return Messages.CONNECTION_DESC; }
         }
 
-        public Image Image
-        {
-            get { return Resources._000_Network_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_Network_h32bit_16;
 
         #endregion
     }

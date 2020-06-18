@@ -29,14 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using XenAdmin.Core;
 
 
@@ -90,7 +84,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.SECURITY_DESC;
 
-        public Image Image => Resources.padlock;
+        public Image Image => Images.StaticImages.padlock;
 
         #endregion
     }

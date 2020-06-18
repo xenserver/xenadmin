@@ -227,7 +227,7 @@ namespace XenAdmin.Dialogs
             Rectangle b = e.Bounds;
 
             // draw Delete icon
-            Image deleteIcon = Properties.Resources._000_Abort_h32bit_16;
+            Image deleteIcon = Images.StaticImages._000_Abort_h32bit_16;
             if (deleteIcon != null)
             {
                 page.DeleteIconBounds = new Rectangle(b.Right - deleteIcon.Width - ((32 - deleteIcon.Width) / 2),

@@ -229,16 +229,16 @@ namespace XenAdmin.TabPages
             foreach (Search search in customSearches)
             {
                 customItems.Add(new ToolStripMenuItem(search.Name.EscapeAmpersands(),
-                                                 Properties.Resources._000_Search_h32bit_16,
-                                                 applySavedSearch_Click) { Tag = search });
+                    Images.StaticImages._000_Search_h32bit_16,
+                    applySavedSearch_Click) {Tag = search});
             }
 
             var defaultItems = new List<ToolStripMenuItem>();
             foreach (Search search in defaultSearches)
             {
                 defaultItems.Add(new ToolStripMenuItem(search.Name.EscapeAmpersands(),
-                                                       Properties.Resources._000_defaultSpyglass_h32bit_16,
-                                                       applySavedSearch_Click) { Tag = search });
+                    Images.StaticImages._000_defaultSpyglass_h32bit_16,
+                    applySavedSearch_Click) {Tag = search});
             }
 
             contextMenuStripSearches.Items.Clear();
@@ -257,8 +257,8 @@ namespace XenAdmin.TabPages
                 foreach (Search search in customSearches)
                 {
                     deleteableItems.Add(new ToolStripMenuItem(search.Name.EscapeAmpersands(),
-                                                              Properties.Resources._000_Search_h32bit_16,
-                                                              deleteSavedSearch_Click) { Tag = search });
+                        Images.StaticImages._000_Search_h32bit_16,
+                        deleteSavedSearch_Click) {Tag = search});
                 }
                 deleteItem.DropDownItems.AddRange(deleteableItems.ToArray());
             }

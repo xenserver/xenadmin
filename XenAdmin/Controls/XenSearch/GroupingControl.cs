@@ -375,7 +375,7 @@ namespace XenAdmin.Controls.XenSearch
             button.TextAlign = ContentAlignment.MiddleLeft;
             button.TextImageRelation = TextImageRelation.TextBeforeImage;
             button.Padding = new Padding(0, 0, 2, 0);
-            button.Image = Properties.Resources.expanded_triangle;
+            button.Image = Images.StaticImages.expanded_triangle;
             button.ImageAlign = ContentAlignment.MiddleRight;
 
             button.Tag = groupType;

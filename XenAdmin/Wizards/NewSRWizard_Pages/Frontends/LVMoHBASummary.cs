@@ -35,7 +35,6 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using System.Linq;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
@@ -177,7 +176,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 this.success = success;
                 this.count = count;
-                icon = success ? Resources._000_Tick_h32bit_16 : Resources._000_Abort_h32bit_16;
+                icon = success ? Images.StaticImages._000_Tick_h32bit_16 : Images.StaticImages._000_Abort_h32bit_16;
                 SetupCells();
             }
 
@@ -197,7 +196,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             protected override DataGridViewImageCell GetImageCell()
             {
-                return new DataGridViewImageCell {Value = Resources.contracted_triangle};
+                return new DataGridViewImageCell {Value = Images.StaticImages.contracted_triangle};
             }
 
             protected override DataGridViewTextBoxCell GetDetailsCell()
@@ -208,7 +207,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             public void ToggleExpanded()
             {
                 expanded = !expanded;
-                imageCell.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
+                imageCell.Value = expanded ? Images.StaticImages.expanded_triangle : Images.StaticImages.contracted_triangle;
             }
 
             protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow)

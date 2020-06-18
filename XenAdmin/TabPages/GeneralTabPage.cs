@@ -483,7 +483,7 @@ namespace XenAdmin.TabPages
         {
             PDSection s = pdSectionManagementInterfaces;
 
-            ToolStripMenuItem editValue = new ToolStripMenuItem(Messages.EDIT) { Image = Properties.Resources.edit_16 };
+            var editValue = new ToolStripMenuItem(Messages.EDIT) { Image = Images.StaticImages.edit_16 };
             editValue.Click += delegate
                 {
                     NetworkingProperties p = new NetworkingProperties(Host, null);
@@ -539,7 +539,7 @@ namespace XenAdmin.TabPages
 
             foreach (CustomField customField in customFields)
             {
-                ToolStripMenuItem editValue = new ToolStripMenuItem(Messages.EDIT){Image= Properties.Resources.edit_16};
+                var editValue = new ToolStripMenuItem(Messages.EDIT) {Image = Images.StaticImages.edit_16};
                 editValue.Click += delegate
                     {
                         using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
@@ -674,10 +674,10 @@ namespace XenAdmin.TabPages
             bool broken = sr.IsBroken() || !sr.MultipathAOK();
             bool detached = !sr.HasPBDs();
 
-            ToolStripMenuItem repair = new ToolStripMenuItem
+            var repair = new ToolStripMenuItem
                 {
                     Text = Messages.GENERAL_SR_CONTEXT_REPAIR,
-                    Image = Properties.Resources._000_StorageBroken_h32bit_16
+                    Image = Images.StaticImages._000_StorageBroken_h32bit_16
                 };
             repair.Click += delegate
                 {

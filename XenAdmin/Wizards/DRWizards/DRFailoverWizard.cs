@@ -370,18 +370,18 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 case DRWizardType.Failover:
                     Text = string.Format(Messages.DR_WIZARD_FAILOVER_TITLE, xenConnection.Name);
-                    pictureBoxWizard.Image = Properties.Resources._000_Failover_h32bit_32;
+                    pictureBoxWizard.Image = Images.StaticImages._000_Failover_h32bit_32;
                     break;
                 case DRWizardType.Failback:
                     Text = string.Format(Messages.DR_WIZARD_FAILBACK_TITLE, xenConnection.Name);
-                    pictureBoxWizard.Image = Properties.Resources._000_Failback_h32bit_32;
+                    pictureBoxWizard.Image = Images.StaticImages._000_Failback_h32bit_32;
                     break;
                 case DRWizardType.Dryrun:
                     Text = string.Format(Messages.DR_WIZARD_DRYRUN_TITLE, xenConnection.Name);
-                    pictureBoxWizard.Image = Properties.Resources._000_TestFailover_h32bit_32;
+                    pictureBoxWizard.Image = Images.StaticImages._000_TestFailover_h32bit_32;
                     break;
                 default:
-                    pictureBoxWizard.Image = Properties.Resources._000_DisasterRecovery_h32bit_32;
+                    pictureBoxWizard.Image = Images.StaticImages._000_DisasterRecovery_h32bit_32;
                     break;
             }
 

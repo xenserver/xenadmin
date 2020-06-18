@@ -107,10 +107,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image
-        {
-            get { return Resources._000_GetMemoryInfo_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_GetMemoryInfo_h32bit_16;
 
         #endregion
 

@@ -43,7 +43,7 @@ namespace XenAdmin.Controls.SummaryPanel
         public SummaryPanelController(ISummaryPanelView view)
         {
             View = view;
-            View.DrawInformationIcon = XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            View.DrawInformationIcon = Images.StaticImages._000_Info3_h32bit_16;
             View.DrawInformationVisible = false;
         }
 

@@ -61,10 +61,7 @@ namespace XenAdmin.SettingsPanels
             get { return enlightenCheckBox.Checked ? Messages.ENABLED : Messages.DISABLED; }
         }
 
-        public Image Image
-        {
-            get { return Resources.DC_16; }
-        }
+        public Image Image => Images.StaticImages.DC_16;
 
         #endregion
 

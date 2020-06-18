@@ -59,7 +59,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image => Properties.Resources._000_VirtualStorage_h32bit_16;
+        public Image Image => Images.StaticImages._000_VirtualStorage_h32bit_16;
 
         public bool ValidToSave => _validToSave;
 

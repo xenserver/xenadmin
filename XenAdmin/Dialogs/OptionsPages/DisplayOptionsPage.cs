@@ -32,7 +32,6 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -80,7 +79,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.DISPLAY_DETAILS;
 
-        public Image Image => Resources._001_PerformanceGraph_h32bit_16;
+        public Image Image => Images.StaticImages._001_PerformanceGraph_h32bit_16;
 
         #endregion
     }
