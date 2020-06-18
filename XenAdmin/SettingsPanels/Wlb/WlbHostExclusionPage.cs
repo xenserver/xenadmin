@@ -30,13 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-
 using XenAdmin.Actions;
 using XenAdmin.Wlb;
 using XenAPI;
@@ -187,10 +182,9 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTab Members
 
-
         public string SubText => Messages.WLB_HOST_EXCLUSION;
 
-        public Image Image => Properties.Resources._000_ExcludeHost_h32bit_16;
+        public Image Image => Images.StaticImages._000_ExcludeHost_h32bit_16;
 
         #endregion
 

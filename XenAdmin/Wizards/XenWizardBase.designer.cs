@@ -183,6 +183,7 @@ namespace XenAdmin.Wizards
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanelNavigation);
             this.DoubleBuffered = true;
+            this.Icon = global::XenAdmin.Properties.Resources.AppIcon;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "XenWizardBase";

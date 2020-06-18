@@ -33,11 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -354,13 +351,13 @@ namespace XenAdmin.Controls.Ballooning
             Image min_image, max_image;
             if (allowEdit)
             {
-                min_image = XenAdmin.Properties.Resources.memory_dynmin_slider;
-                max_image = XenAdmin.Properties.Resources.memory_dynmax_slider;
+                min_image = Images.StaticImages.memory_dynmin_slider;
+                max_image = Images.StaticImages.memory_dynmax_slider;
             }
             else
             {
-                min_image = XenAdmin.Properties.Resources.memory_dynmin_slider_noedit;
-                max_image = XenAdmin.Properties.Resources.memory_dynmax_slider_noedit;                
+                min_image = Images.StaticImages.memory_dynmin_slider_noedit;
+                max_image = Images.StaticImages.memory_dynmax_slider_noedit;                
             }
 
             // Calculate where to draw the sliders
@@ -373,16 +370,16 @@ namespace XenAdmin.Controls.Ballooning
             if (allowEdit)
             {
                 if (activeSlider == Slider.MIN)
-                    min_image = XenAdmin.Properties.Resources.memory_dynmin_slider_dark;
+                    min_image = Images.StaticImages.memory_dynmin_slider_dark;
                 if (activeSlider == Slider.MAX)
-                    max_image = XenAdmin.Properties.Resources.memory_dynmax_slider_dark;
+                    max_image = Images.StaticImages.memory_dynmax_slider_dark;
 
                 if (activeSlider == Slider.NONE && !mouseIsDown)
                 {
                     if (min_slider_rect.Contains(mouseLocation))
-                        min_image = XenAdmin.Properties.Resources.memory_dynmin_slider_light;
+                        min_image = Images.StaticImages.memory_dynmin_slider_light;
                     else if (max_slider_rect.Contains(mouseLocation))
-                        max_image = XenAdmin.Properties.Resources.memory_dynmax_slider_light;
+                        max_image = Images.StaticImages.memory_dynmax_slider_light;
                 }
             }
 

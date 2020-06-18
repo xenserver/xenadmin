@@ -348,48 +348,48 @@ namespace XenAdmin.Wizards.NewVMWizard
             switch (templateType)
             {
                 case VM.VmTemplateType.Custom:
-                    return Resources._000_UserTemplate_h32bit_16;
+                    return Images.StaticImages._000_UserTemplate_h32bit_16;
                 case VM.VmTemplateType.Windows:
                 case VM.VmTemplateType.LegacyWindows:
-                    return Resources.windows_h32bit_16;
+                    return Images.StaticImages.windows_h32bit_16;
                 case VM.VmTemplateType.Centos:
-                    return Resources.centos_16x;
+                    return Images.StaticImages.centos_16x;
                 case VM.VmTemplateType.Debian:
-                    return Resources.debian_16x;
+                    return Images.StaticImages.debian_16x;
                 case VM.VmTemplateType.Gooroom:
-                    return Resources.gooroom_16x;
+                    return Images.StaticImages.gooroom_16x;
                 case VM.VmTemplateType.Linx:
-                    return Resources.linx_16x;     
+                    return Images.StaticImages.linx_16x;     
                 case VM.VmTemplateType.Oracle:
-                    return Resources.oracle_16x;
+                    return Images.StaticImages.oracle_16x;
                 case VM.VmTemplateType.RedHat:
-                    return Resources.redhat_16x;
+                    return Images.StaticImages.redhat_16x;
                 case VM.VmTemplateType.SciLinux:
-                    return Resources.scilinux_16x;
+                    return Images.StaticImages.scilinux_16x;
                 case VM.VmTemplateType.Suse:
-                    return Resources.suse_16x;
+                    return Images.StaticImages.suse_16x;
                 case VM.VmTemplateType.Ubuntu:
-                    return Resources.ubuntu_16x;
+                    return Images.StaticImages.ubuntu_16x;
                 case VM.VmTemplateType.YinheKylin:
-                    return Resources.yinhekylin_16x;
+                    return Images.StaticImages.yinhekylin_16x;
                 case VM.VmTemplateType.NeoKylin:
-                    return Resources.neokylin_16x;
+                    return Images.StaticImages.neokylin_16x;
                 case VM.VmTemplateType.Asianux:
-                    return Resources.asianux_16x;   
+                    return Images.StaticImages.asianux_16x;   
                 case VM.VmTemplateType.Turbo:
-                    return Resources.turbo_16x;                      
+                    return Images.StaticImages.turbo_16x;                      
                 case VM.VmTemplateType.Citrix:
-                    return Resources.Logo;
+                    return Images.StaticImages.Logo;
                 case VM.VmTemplateType.Solaris:
                 case VM.VmTemplateType.Misc:
-                    return Resources._000_VMTemplate_h32bit_16;
+                    return Images.StaticImages._000_VMTemplate_h32bit_16;
                 case VM.VmTemplateType.CoreOS:
-                    return Resources.coreos_globe_icon;
+                    return Images.StaticImages.coreos_globe_icon;
                 case VM.VmTemplateType.Snapshot:
                 case VM.VmTemplateType.SnapshotFromVmpp:
                 default:
-                    return Resources._000_VMSession_h32bit_16;
-                // Also modify PropertyNames.os_name in XenServer/Common.cs
+                    return Images.StaticImages._000_VMSession_h32bit_16;
+                // Also modify 'case PropertyNames.os_name' in method GetImagesFor(PropertyNames p) in XenModel/XenSearch/Common.cs
             }
         }
     }

@@ -502,7 +502,7 @@ namespace XenAdmin
                 // Don't show cancelled exception
                 if (action.Exception != null && !(action.Exception is CancelledException))
                 {
-                    SetStatusBar(Properties.Resources._000_error_h32bit_16, action.Exception.Message);
+                    SetStatusBar(Images.StaticImages._000_error_h32bit_16, action.Exception.Message);
                 }
                 else
                 {
@@ -2736,7 +2736,7 @@ namespace XenAdmin
             else
             {
                 TitleLabel.Text = Messages.XENCENTER;
-                TitleIcon.Image = Properties.Resources.Logo;
+                TitleIcon.Image = Images.StaticImages.Logo;
                 loggedInLabel1.Connection = null;
             }
 

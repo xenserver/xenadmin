@@ -166,7 +166,7 @@ namespace XenAdmin.TabPages
                 if (vmss == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
                 {
                     labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_IN_VMSS;
-                    pictureBoxVMPPInfo.Image = Resources._000_Info3_h32bit_16;
+                    pictureBoxVMPPInfo.Image = Images.StaticImages._000_Info3_h32bit_16;
 
                     linkLabelVMPPInfo.Text = Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule) ? Messages.TELL_ME_MORE : Messages.VIEW_VMSS_POLICIES;
 
@@ -174,7 +174,7 @@ namespace XenAdmin.TabPages
                 else
                 {
                     labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_IN_VMSS, vmss.Name());
-                    pictureBoxVMPPInfo.Image = Resources._000_Tick_h32bit_16;
+                    pictureBoxVMPPInfo.Image = Images.StaticImages._000_Tick_h32bit_16;
                     linkLabelVMPPInfo.Text = Messages.VIEW_VMSS_POLICIES;
                 }
             }
@@ -1255,14 +1255,14 @@ namespace XenAdmin.TabPages
             {
                 contentTableLayoutPanel.ColumnStyles[1].Width = defaultWidthProperties;
                 chevronButton1.Text = Messages.HIDE_DETAILS;
-                chevronButton1.Image = Resources.PDChevronRight;
+                chevronButton1.Image = Images.StaticImages.PDChevronRight;
             }
             else
             {
                 defaultWidthProperties = contentTableLayoutPanel.ColumnStyles[1].Width;
                 contentTableLayoutPanel.ColumnStyles[1].Width = 0;
                 chevronButton1.Text = Messages.SHOW_DETAILS;
-                chevronButton1.Image = Resources.PDChevronLeft;
+                chevronButton1.Image = Images.StaticImages.PDChevronLeft;
             }
             snapshotTreeView.Invalidate();
         }

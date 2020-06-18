@@ -334,10 +334,9 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTab Members
 
-
         public string SubText => Messages.WLB_ADVANCED_CONFIGURATION_SUBTEXT;
 
-        public Image Image => Properties.Resources._002_Configure_h32bit_16;
+        public Image Image => Images.StaticImages._002_Configure_h32bit_16;
 
         #endregion
     }

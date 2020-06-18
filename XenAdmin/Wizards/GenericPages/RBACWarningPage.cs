@@ -38,8 +38,7 @@ using XenAdmin.Network;
 using XenAPI;
 using System.Threading;
 using XenAdmin.Core;
-using XenAdmin.Properties;
-using System.Linq;
+
 
 namespace XenAdmin.Wizards.GenericPages
 {
@@ -364,7 +363,7 @@ namespace XenAdmin.Wizards.GenericPages
 
             public void SetPermissionCheckInProgress(bool value)
             {
-                iconCell.Value = value ? XenAdmin.Properties.Resources.ajax_loader : new Bitmap(1, 1);
+                iconCell.Value = value ? Images.StaticImages.ajax_loader : new Bitmap(1, 1);
             }
         }
 
@@ -373,10 +372,10 @@ namespace XenAdmin.Wizards.GenericPages
             public PermissionCheckDetailsRow(string desc, PermissionCheckResult checkResult)
             {
                 iconCell.Value = checkResult == PermissionCheckResult.OK
-                                     ? Resources._000_Tick_h32bit_16
+                                     ? Images.StaticImages._000_Tick_h32bit_16
                                      : checkResult == PermissionCheckResult.Warning
-                                           ? Resources._000_Alert2_h32bit_16
-                                           : Resources._000_Abort_h32bit_16;
+                                           ? Images.StaticImages._000_Alert2_h32bit_16
+                                           : Images.StaticImages._000_Abort_h32bit_16;
                 descriptionCell.Value = desc;
             }
         }

@@ -125,13 +125,7 @@ namespace XenAdmin.SettingsPanels
             this.nudMemory.LostFocus += new EventHandler(nudMemory_LostFocus);
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_CPU_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_CPU_h32bit_16;
 
         void nudMemory_LostFocus(object sender, EventArgs e)
         {

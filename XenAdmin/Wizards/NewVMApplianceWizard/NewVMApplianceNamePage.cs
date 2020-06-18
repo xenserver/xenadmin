@@ -60,10 +60,7 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
             get { return string.Empty; }
         }
 
-        public Image Image
-        {
-            get { return Resources.edit_16; }
-        }
+        public Image Image => Images.StaticImages.edit_16;
 
         public override string PageTitle
         {

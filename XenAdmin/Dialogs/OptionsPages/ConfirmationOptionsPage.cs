@@ -91,7 +91,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.CONFIRMATIONS_DETAIL;
 
-        public Image Image => Resources._075_TickRound_h32bit_16;
+        public Image Image => Images.StaticImages._075_TickRound_h32bit_16;
 
         #endregion
     }

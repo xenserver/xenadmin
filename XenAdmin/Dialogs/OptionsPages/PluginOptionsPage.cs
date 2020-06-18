@@ -263,7 +263,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
         }
 
-        public Image Image { get { return Properties.Resources._000_Module_h32bit_16; } }
+        public Image Image => Images.StaticImages._000_Module_h32bit_16;
 
         #endregion
 

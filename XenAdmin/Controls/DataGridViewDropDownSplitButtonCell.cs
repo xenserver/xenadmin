@@ -220,7 +220,7 @@ namespace XenAdmin.Controls
                 graphics.SmoothingMode = mode;
             }
 
-            var img = Properties.Resources.expanded_triangle;
+            var img = Images.StaticImages.expanded_triangle;
             graphics.DrawImage(img,
                 cellBounds.Right - cellStyle.Padding.Right - img.Width - (SPLITTER_FROM_RIGHT - img.Width) / 2,
                 cellBounds.Top + (CELL_HEIGHT - img.Height) / 2);

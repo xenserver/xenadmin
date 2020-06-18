@@ -124,13 +124,13 @@ namespace XenAdmin.Controls.DataGridViewEx
 
         public void SetCollapseIcon()
         {
-            _expansionCell.Value = Resources.tree_minus;
+            _expansionCell.Value = Images.StaticImages.tree_minus;
             IsACollapsedRow = false;
         }
 
         public void SetExpandIcon()
         {
-            _expansionCell.Value = Resources.tree_plus;
+            _expansionCell.Value = Images.StaticImages.tree_plus;
             IsACollapsedRow = true;
         }
 

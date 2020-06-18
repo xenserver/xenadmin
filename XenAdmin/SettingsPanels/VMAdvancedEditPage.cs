@@ -30,15 +30,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-
 using XenAdmin.Core;
-
 using XenAPI;
 using XenAdmin.Actions;
 using System.Globalization;
@@ -86,13 +80,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._002_Configure_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._002_Configure_h32bit_16;
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {

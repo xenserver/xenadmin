@@ -61,7 +61,6 @@ namespace XenAdmin.Wizards
         protected XenWizardBase()
         {
             InitializeComponent();
-            Icon = Properties.Resources.AppIcon;
         }
 
         protected XenWizardBase(IXenConnection connection)

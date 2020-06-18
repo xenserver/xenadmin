@@ -72,10 +72,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             get { return IncludeConfigDriveCheckBox.Checked ? Messages.VM_CLOUD_CONFIG_DRIVE_INCLUDED : Messages.VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED; }
         }
 
-        public Image Image
-        {
-            get { return Properties.Resources.coreos_16; }
-        }
+        public Image Image => Images.StaticImages.coreos_16;
 
         public override string PageTitle
         {

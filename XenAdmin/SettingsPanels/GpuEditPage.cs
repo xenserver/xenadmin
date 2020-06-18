@@ -40,7 +40,6 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Properties;
 using XenAPI;
 
 
@@ -126,10 +125,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image
-        {
-            get { return Resources._000_GetMemoryInfo_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_GetMemoryInfo_h32bit_16;
 
         #endregion
 

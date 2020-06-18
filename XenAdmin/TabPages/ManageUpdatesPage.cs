@@ -367,8 +367,8 @@ namespace XenAdmin.TabPages
                     {
                         var outOfDate = pool.Connection.Cache.Hosts.Any(h => RequiredUpdatesForHost(h).Length > 0);
                         _patchingStatusCell.Value = outOfDate
-                            ? Properties.Resources._000_error_h32bit_16
-                            : Properties.Resources._000_Tick_h32bit_16;
+                            ? Images.StaticImages._000_error_h32bit_16
+                            : Images.StaticImages._000_Tick_h32bit_16;
                         _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
                     }
                     else
@@ -396,8 +396,8 @@ namespace XenAdmin.TabPages
                         if (IsFullyPopulated)
                         {
                             _patchingStatusCell.Value = outOfDate
-                                ? Properties.Resources._000_error_h32bit_16
-                                : Properties.Resources._000_Tick_h32bit_16;
+                                ? Images.StaticImages._000_error_h32bit_16
+                                : Images.StaticImages._000_Tick_h32bit_16;
                             _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
                         }
                         else
@@ -728,13 +728,13 @@ namespace XenAdmin.TabPages
             if (expandedState.ContainsKey(alert.uuid))
             {
                 // show the expanded arrow and the body detail
-                expanderCell.Value = Properties.Resources.expanded_triangle;
+                expanderCell.Value = Images.StaticImages.expanded_triangle;
                 detailCell.Value = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
             }
             else
             {
                 // show the expand arrow and just the title
-                expanderCell.Value = Properties.Resources.contracted_triangle;
+                expanderCell.Value = Images.StaticImages.contracted_triangle;
                 detailCell.Value = alert.Title;
             }
 
@@ -1170,14 +1170,14 @@ namespace XenAdmin.TabPages
             {
                 expandedState.Remove(alert.uuid);
                 dataGridViewUpdates.Rows[rowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
-                dataGridViewUpdates.Rows[rowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+                dataGridViewUpdates.Rows[rowIndex].Cells[ColumnExpand.Index].Value = Images.StaticImages.contracted_triangle;
             }
             else
             {
                 expandedState.Add(alert.uuid, true);
-                dataGridViewUpdates.Rows[rowIndex].Cells[ColumnMessage.Index].Value
-                    = string.Format("{0}\n\n{1}", alert.Title, alert.Description);
-                dataGridViewUpdates.Rows[rowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
+                dataGridViewUpdates.Rows[rowIndex].Cells[ColumnMessage.Index].Value =
+                    string.Format("{0}\n\n{1}", alert.Title, alert.Description);
+                dataGridViewUpdates.Rows[rowIndex].Cells[ColumnExpand.Index].Value = Images.StaticImages.expanded_triangle;
             }
         }
         

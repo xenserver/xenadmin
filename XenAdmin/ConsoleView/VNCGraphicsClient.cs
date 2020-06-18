@@ -78,7 +78,7 @@ namespace XenAdmin.ConsoleView
         }
 
         private CustomCursor RemoteCursor = null;
-        private CustomCursor LocalCursor = new CustomCursor(XenAdmin.Properties.Resources.vnc_local_cursor, 2, 2);
+        private CustomCursor LocalCursor = new CustomCursor(Images.StaticImages.vnc_local_cursor, 2, 2);
 
         /// <summary>
         /// This field is locked before any drawing is done through backGraphics or frontGraphics.
@@ -864,14 +864,14 @@ namespace XenAdmin.ConsoleView
 
             ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY);
 
-            copyItem.Image = XenAdmin.Properties.Resources.copy_16;
+            copyItem.Image = Images.StaticImages.copy_16;
             copyItem.Click += copyItem_Click;
 
             popupMenu.Items.Add(copyItem);
             if (sourceVM != null && sourceVM.power_state == XenAPI.vm_power_state.Running)
             {
                 ToolStripMenuItem pasteItem = new ToolStripMenuItem(Messages.PASTE);
-                pasteItem.Image = XenAdmin.Properties.Resources.paste_16;
+                pasteItem.Image = Images.StaticImages.paste_16;
                 pasteItem.Click += pasteItem_Click;
 
                 popupMenu.Items.Add(pasteItem);

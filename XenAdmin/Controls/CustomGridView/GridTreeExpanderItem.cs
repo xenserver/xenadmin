@@ -29,13 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using XenAdmin.Core;
+
 
 namespace XenAdmin.Controls.CustomGridView
 {
@@ -69,7 +66,7 @@ namespace XenAdmin.Controls.CustomGridView
 
             else
             {
-                itemPaintArgs.Graphics.DrawImage(Row.Expanded ? Properties.Resources.tree_minus : Properties.Resources.tree_plus, rect);
+                itemPaintArgs.Graphics.DrawImage(Row.Expanded ? Images.StaticImages.tree_minus : Images.StaticImages.tree_plus, rect);
             }
         }
 

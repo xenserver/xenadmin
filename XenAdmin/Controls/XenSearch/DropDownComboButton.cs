@@ -53,7 +53,7 @@ namespace XenAdmin.Controls.XenSearch
             this.TextAlign = ContentAlignment.MiddleLeft;
             this.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.Padding = new Padding(0, 0, 2, 0);
-            this.Image = Properties.Resources.expanded_triangle;
+            this.Image = Images.StaticImages.expanded_triangle;
             this.ImageAlign = ContentAlignment.MiddleRight;
         }
 

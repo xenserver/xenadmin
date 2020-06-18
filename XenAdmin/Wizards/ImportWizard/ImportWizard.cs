@@ -196,7 +196,7 @@ namespace XenAdmin.Wizards.ImportWizard
 						if (oldTypeOfImport != ImportType.Ovf)
 						{
 							Text = Messages.WIZARD_TEXT_IMPORT_OVF;
-							pictureBoxWizard.Image = Properties.Resources._000_ImportVirtualAppliance_h32bit_32;
+							pictureBoxWizard.Image = Images.StaticImages._000_ImportVirtualAppliance_h32bit_32;
 							m_pageFinish.ShowStartVmsGroupBox = false;
                             RemovePages(imagePages);
                             RemovePage(m_pageBootOptions);
@@ -222,7 +222,7 @@ namespace XenAdmin.Wizards.ImportWizard
 						if (oldTypeOfImport != ImportType.Vhd)
 						{
 							Text = Messages.WIZARD_TEXT_IMPORT_VHD;
-							pictureBoxWizard.Image = Properties.Resources._000_ImportVM_h32bit_32;
+							pictureBoxWizard.Image = Images.StaticImages._000_ImportVM_h32bit_32;
 							m_pageFinish.ShowStartVmsGroupBox = false;
                             RemovePages(appliancePages);
                             RemovePages(xvaPages);
@@ -238,7 +238,7 @@ namespace XenAdmin.Wizards.ImportWizard
 						if (oldTypeOfImport != ImportType.Xva)
 						{
 							Text = Messages.WIZARD_TEXT_IMPORT_XVA;
-							pictureBoxWizard.Image = Properties.Resources._000_ImportVM_h32bit_32;
+							pictureBoxWizard.Image = Images.StaticImages._000_ImportVM_h32bit_32;
 							m_pageFinish.ShowStartVmsGroupBox = true;
                             RemovePages(imagePages);
 						    RemovePage(m_pageBootOptions);

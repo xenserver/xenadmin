@@ -1027,7 +1027,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Host master = pool.Connection.Resolve(pool.master);
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
-                    _expansionCell.Value = Resources.tree_minus;
+                    _expansionCell.Value = Images.StaticImages.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
                     _versionCell.Value = master.ProductVersionTextShort();
@@ -1039,7 +1039,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
-                    _expansionCell.Value = Resources.tree_plus;
+                    _expansionCell.Value = Images.StaticImages.tree_plus;
                     if (_hasPool)
                     {
                         if (_poolIconHostCheckCell.Value == null)

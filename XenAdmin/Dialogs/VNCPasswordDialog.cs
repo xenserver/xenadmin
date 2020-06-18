@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Windows.Forms;
 using DotNetVnc;
 using System.Security.Cryptography;
 using XenAPI;
@@ -43,7 +42,6 @@ namespace XenAdmin.Dialogs
             : base(vm.Connection)
         {
             InitializeComponent();
-            Icon = Properties.Resources.AppIcon;
             passwordFailure1.Visible = error is VNCAuthenticationException || error is CryptographicException;
         }
 

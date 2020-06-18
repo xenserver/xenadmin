@@ -101,7 +101,7 @@ namespace XenAdmin.SettingsPanels
         public string SubText =>
             radioButtonTLS.Checked ? Messages.SECURITYEDITPAGE_SUBTEXT_TLS : Messages.SECURITYEDITPAGE_SUBTEXT_SSL;
 
-        public Image Image => Properties.Resources.padlock;
+        public Image Image => Images.StaticImages.padlock;
 
         #endregion
     }
