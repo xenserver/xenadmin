@@ -32,15 +32,12 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Security.Cryptography.X509Certificates;
-
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.RestoreSession;
 using XenAdmin.Network;
 using System.Configuration;
 using XenCenterLib;
-using System.Drawing;
 using System.Linq;
 
 
@@ -632,11 +629,59 @@ namespace XenAdmin
 
         public static bool IsPluginEnabled(string name, string org)
         {
-            string id = string.Format("{0}::{1}", org, name);
-            foreach (string s in Properties.Settings.Default.DisabledPlugins)
-                if (s == id)
-                    return false;
-            return true;
+            string id = $"{org}::{name}";
+            return Properties.Settings.Default.DisabledPlugins.All(s => s != id);
+            //returns true for empty collection, which is correct
+        }
+
+        public static void Log()
+        {
+            log.Info("Tools Options Settings -");
+
+            log.Info($"=== ProxySetting: {Properties.Settings.Default.ProxySetting}");
+            log.Info($"=== ProxyAddress: {Properties.Settings.Default.ProxyAddress}");
+            log.Info($"=== ProxyPort: {Properties.Settings.Default.ProxyPort}");
+            log.Info($"=== ByPassProxyForServers: {Properties.Settings.Default.BypassProxyForServers}");
+            log.Info($"=== ProvideProxyAuthentication: {Properties.Settings.Default.ProvideProxyAuthentication}");
+            log.Info($"=== ProxyAuthenticationMethod: {Properties.Settings.Default.ProxyAuthenticationMethod}");
+            log.Info($"=== ConnectionTimeout: {Properties.Settings.Default.ConnectionTimeout}");
+
+            log.Info($"=== FullScreenShortcutKey: {Properties.Settings.Default.FullScreenShortcutKey}");
+            log.Info($"=== DockShortcutKey: {Properties.Settings.Default.DockShortcutKey}");
+            log.Info($"=== UncaptureShortcutKey: {Properties.Settings.Default.UncaptureShortcutKey}");
+            log.Info($"=== ClipboardAndPrinterRedirection: {Properties.Settings.Default.ClipboardAndPrinterRedirection}");
+            log.Info($"=== WindowsShortcuts: {Properties.Settings.Default.WindowsShortcuts}");
+            log.Info($"=== ReceiveSoundFromRDP: {Properties.Settings.Default.ReceiveSoundFromRDP}");
+            log.Info($"=== AutoSwitchToRDP: {Properties.Settings.Default.AutoSwitchToRDP}");
+            log.Info($"=== ConnectToServerConsole: {Properties.Settings.Default.ConnectToServerConsole}");
+            log.Info($"=== PreserveScaleWhenUndocked: {Properties.Settings.Default.PreserveScaleWhenUndocked}");
+            log.Info($"=== PreserveScaleWhenSwitchBackToVNC: {Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC}");
+
+            log.Info($"=== WarnUnrecognizedCertificate: {Properties.Settings.Default.WarnUnrecognizedCertificate}");
+            log.Info($"=== WarnChangedCertificate: {Properties.Settings.Default.WarnChangedCertificate}");
+
+            if (!Helpers.CommonCriteriaCertificationRelease)
+            {
+                log.Info($"=== AllowXenCenterUpdates: {Properties.Settings.Default.AllowXenCenterUpdates}");
+                log.Info($"=== AllowPatchesUpdates: {Properties.Settings.Default.AllowPatchesUpdates}");
+                log.Info($"=== AllowXenServerUpdates: {Properties.Settings.Default.AllowXenServerUpdates}");
+            }
+            
+            log.Info($"=== FillAreaUnderGraphs: {Properties.Settings.Default.FillAreaUnderGraphs}");
+            log.Info($"=== RememberLastSelectedTab: {Properties.Settings.Default.RememberLastSelectedTab}");
+
+            log.Info($"=== SaveSession: {Properties.Settings.Default.SaveSession}");
+            log.Info($"=== RequirePass: {Properties.Settings.Default.RequirePass}");
+
+            var disabledPlugins = Properties.Settings.Default.DisabledPlugins.Length == 0
+                ? "<None>"
+                : string.Join(", ", Properties.Settings.Default.DisabledPlugins);
+            log.InfoFormat($"=== DisabledPlugins: {disabledPlugins}");
+
+            log.Info($"=== DoNotConfirmDismissAlerts: {Properties.Settings.Default.DoNotConfirmDismissAlerts}");
+            log.Info($"=== DoNotConfirmDismissUpdates: {Properties.Settings.Default.DoNotConfirmDismissUpdates}" );
+            log.Info($"=== DoNotConfirmDismissEvents: {Properties.Settings.Default.DoNotConfirmDismissEvents}" );
+            log.Info($"=== IgnoreOvfValidationWarnings: {Properties.Settings.Default.IgnoreOvfValidationWarnings}");
         }
     }
 }

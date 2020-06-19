@@ -38,8 +38,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class ConfirmationOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public ConfirmationOptionsPage()
         {
             InitializeComponent();
@@ -55,15 +53,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             checkBoxDontConfirmDismissEvents.Checked = def.DoNotConfirmDismissEvents;
 
             checkBoxIgnoreOvfWarnings.Checked = def.IgnoreOvfValidationWarnings;
-        }
-
-        public static void Log()
-        {
-            log.InfoFormat("=== DoNotConfirmDismissAlerts: {0}", Properties.Settings.Default.DoNotConfirmDismissAlerts);
-            log.InfoFormat("=== DoNotConfirmDismissUpdates: {0}", Properties.Settings.Default.DoNotConfirmDismissUpdates);
-            log.InfoFormat("=== DoNotConfirmDismissEvents: {0}", Properties.Settings.Default.DoNotConfirmDismissEvents);
-
-            log.InfoFormat("=== IgnoreOvfValidationWarnings: {0}", Properties.Settings.Default.IgnoreOvfValidationWarnings);
         }
 
         #region IOptionsPage Members

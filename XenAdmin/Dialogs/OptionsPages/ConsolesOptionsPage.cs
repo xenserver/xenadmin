@@ -37,9 +37,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class ConsolesOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string ConsoleTabSettingsHeader = "Console Tab Settings -";
-
         public ConsolesOptionsPage()
         {
             InitializeComponent();
@@ -110,29 +107,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void selectUncaptureKeyCombo()
         {
             UncaptureKeyComboBox.SelectedIndex = Properties.Settings.Default.UncaptureShortcutKey;
-        }
-
-        public static void Log()
-        {
-            log.Info(ConsoleTabSettingsHeader);
-
-            // Fullscreen shortcut keys
-            log.Info($"=== FullScreenShortcutKey: {Properties.Settings.Default.FullScreenShortcutKey}");
-            // Dock-undock shortcut keys
-            log.Info($"=== DockShortcutKey: {Properties.Settings.Default.DockShortcutKey}");
-            // Uncapture keyboard and mouse shortcut keys
-            log.Info($"=== UncaptureShortcutKey: {Properties.Settings.Default.UncaptureShortcutKey}");
-
-            // Windows Remote Desktop console
-            log.Info($"=== ClipboardAndPrinterRedirection: {Properties.Settings.Default.ClipboardAndPrinterRedirection}");
-            log.Info($"=== WindowsShortcuts: {Properties.Settings.Default.WindowsShortcuts}");
-            log.Info($"=== ReceiveSoundFromRDP: {Properties.Settings.Default.ReceiveSoundFromRDP}");
-            log.Info($"=== AutoSwitchToRDP: {Properties.Settings.Default.AutoSwitchToRDP}");
-            log.Info($"=== ConnectToServerConsole: {Properties.Settings.Default.ConnectToServerConsole}");
-
-            // Console scaling
-            log.Info($"=== PreserveScaleWhenUndocked: {Properties.Settings.Default.PreserveScaleWhenUndocked}");
-            log.Info($"=== PreserveScaleWhenSwitchBackToVNC: {Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC}");
         }
 
         #region IOptionsPage Members

@@ -56,16 +56,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             AllowXenServerUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenServerUpdates;
         }
 
-        public static void Log()
-        {
-            // XenCenter updates
-            log.Info("=== AllowXenCenterUpdates: " + Properties.Settings.Default.AllowXenCenterUpdates);
-
-            // XenServer updates
-            log.Info("=== AllowPatchesUpdates: " + Properties.Settings.Default.AllowPatchesUpdates);
-            log.Info("=== AllowXenServerUpdates: " + Properties.Settings.Default.AllowXenServerUpdates);
-        }
-
         #region IOptionsPage Members
 
         public void Save()
