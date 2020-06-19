@@ -38,8 +38,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class SecurityOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public SecurityOptionsPage()
         {
             InitializeComponent();
@@ -56,13 +54,6 @@ namespace XenAdmin.Dialogs.OptionsPages
                                                  Registry.SSLCertificateTypes != SSLCertificateTypes.None;
             CertificateFoundCheckBox.Enabled = Registry.SSLCertificateTypes != SSLCertificateTypes.All;
             CertificateChangedCheckBox.Enabled = Registry.SSLCertificateTypes == SSLCertificateTypes.None;
-        }
-
-        public static void Log()
-        {
-            // SSL Certificates
-            log.Info("=== WarnUnrecognizedCertificate: " + Properties.Settings.Default.WarnUnrecognizedCertificate.ToString());
-            log.Info("=== WarnChangedCertificate: " + Properties.Settings.Default.WarnChangedCertificate.ToString());
         }
 
         #region IOptionsPage Members

@@ -39,8 +39,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class ConnectionOptionsPage : UserControl, IOptionsPage
     {
-        private const string ConnectionTabSettingsHeader = "Connection Tab Settings -";
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private OptionsDialog optionsDialog;
 
         // used for preventing the event handlers from doing anything when changing controls through code
@@ -194,19 +192,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             {
                 optionsDialog.okButton.Enabled = false;
             }
-        }
-
-        public static void Log()
-        {
-            log.Info(ConnectionTabSettingsHeader);
-            // Proxy server
-            log.Info("=== ProxySetting: " + Properties.Settings.Default.ProxySetting.ToString());
-            log.Info("=== ProxyAddress: " + Properties.Settings.Default.ProxyAddress.ToString());
-            log.Info("=== ProxyPort: " + Properties.Settings.Default.ProxyPort.ToString());
-            log.Info("=== ByPassProxyForServers: " + Properties.Settings.Default.BypassProxyForServers.ToString());
-            log.Info("=== ProvideProxyAuthentication: " + Properties.Settings.Default.ProvideProxyAuthentication.ToString());
-            log.Info("=== ProxyAuthenticationMethod: " + Properties.Settings.Default.ProxyAuthenticationMethod.ToString());
-            log.Info("=== ConnectionTimeout: " + Properties.Settings.Default.ConnectionTimeout.ToString());
         }
 
         #region IOptionsPage Members

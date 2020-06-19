@@ -2598,8 +2598,8 @@ namespace XenAdmin
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OptionsDialog dialog = new OptionsDialog(pluginManager);
-            dialog.ShowDialog(this);
+            using (var dialog = new OptionsDialog(pluginManager))
+                dialog.ShowDialog(this);
         }
 
         internal void action_Completed(ActionBase sender)

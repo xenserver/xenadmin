@@ -38,8 +38,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class DisplayOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public DisplayOptionsPage()
         {
             InitializeComponent();
@@ -51,12 +49,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             GraphAreasRadioButton.Checked = Properties.Settings.Default.FillAreaUnderGraphs;
             GraphLinesRadioButton.Checked = !Properties.Settings.Default.FillAreaUnderGraphs;
             checkBoxStoreTab.Checked = Properties.Settings.Default.RememberLastSelectedTab;
-        }
-
-        public static void Log()
-        {
-            log.Info("=== FillAreaUnderGraphs: " + Properties.Settings.Default.FillAreaUnderGraphs);
-            log.Info("=== RememberLastSelectedTab: " + Properties.Settings.Default.RememberLastSelectedTab);
         }
 
         #region IOptionsPage Members
