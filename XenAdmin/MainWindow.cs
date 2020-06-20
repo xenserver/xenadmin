@@ -1891,12 +1891,12 @@ namespace XenAdmin
                             else
                             {
                                 //If multiple items have been selected we count the number of the grouping tags in the selection
-                                var selectedGroups = SelectionManager.Selection.Where(s => s.GroupingTag != null);
+                                var selectedGroups = SelectionManager.Selection.Where(s => s.GroupingTag != null).ToList();
 
                                 //if exactly one grouping tag has been selected we show the search view for that one tag, but only if all the other items in the selection belong to this group/tag
-                                if (selectedGroups.Count() == 1)
+                                if (selectedGroups.Count == 1)
                                 {
-                                    var groupingTag = selectedGroups.First().GroupingTag;
+                                    var groupingTag = selectedGroups[0].GroupingTag;
 
                                     if (SelectionManager.Selection.Where(s => s.GroupingTag == null).All(s => s.GroupAncestor == groupingTag))
                                         gt = groupingTag;

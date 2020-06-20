@@ -31,7 +31,6 @@
 
 
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
@@ -57,9 +56,9 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            var host = selection.AsXenObjects<Host>().First();
+            var host = selection.AsXenObjects<Host>().FirstOrDefault();
 
-            if (!host.Connection.Session.IsLocalSuperuser && !Registry.DontSudo &&
+            if (host != null && !host.Connection.Session.IsLocalSuperuser && !Registry.DontSudo &&
                 host.Connection.Session.Roles.All(r => r.name_label != Role.MR_ROLE_POOL_ADMIN))
             {
                 var currentRoles = host.Connection.Session.Roles;
@@ -82,7 +81,7 @@ namespace XenAdmin.Commands
             if (!selection.AllItemsAre<Host>() || selection.Count > 1)
                 return false;
 
-            var host = selection.AsXenObjects<Host>().First();
+            var host = selection.AsXenObjects<Host>().FirstOrDefault();
             if (host == null)
                 return false;
 

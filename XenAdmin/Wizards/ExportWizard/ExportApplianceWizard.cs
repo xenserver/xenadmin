@@ -95,9 +95,10 @@ namespace XenAdmin.Wizards.ExportWizard
 				if (!filename.EndsWith(".xva"))
 					filename += ".xva";
 				
-				var vm = m_pageExportSelectVMs.VMsToExport.First();
+                var vm = m_pageExportSelectVMs.VMsToExport.FirstOrDefault();
 
-				new ExportVmAction(xenConnection, vm.Home(), vm, filename, m_pageFinish.VerifyExport).RunAsync();
+                if (vm != null)
+                    new ExportVmAction(xenConnection, vm.Home(), vm, filename, m_pageFinish.VerifyExport).RunAsync();
 			}
 			else
 			{

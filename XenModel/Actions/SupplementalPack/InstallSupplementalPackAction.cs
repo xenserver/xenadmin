@@ -44,11 +44,11 @@ namespace XenAdmin.Actions
         private Dictionary<Host, VDI> suppPackVdis;
 
         public InstallSupplementalPackAction(Dictionary<Host, VDI> suppPackVdis, bool suppressHistory)
-            : base(null, 
-            suppPackVdis.Count > 1
-                ? string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS, suppPackVdis.Count) 
-                : string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, suppPackVdis.First().Value, suppPackVdis.First().Key), 
-            suppressHistory)
+            : base(null,
+                suppPackVdis.Count == 1
+                    ? string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, suppPackVdis.First().Value, suppPackVdis.First().Key)
+                    : string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS, suppPackVdis.Count),
+                suppressHistory)
         {
             this.suppPackVdis = suppPackVdis;
         }

@@ -87,7 +87,7 @@ namespace XenAdmin.Actions.OVFActions
             m_shouldVerify = shouldVerify;
 
 			if (m_vmsToExport.Count == 1)
-				VM = m_vmsToExport.First();
+				VM = m_vmsToExport[0];
 		}
 
         protected override XenOvfTransportBase TransportAction => m_transportAction;

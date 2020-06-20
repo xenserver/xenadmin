@@ -181,7 +181,9 @@ namespace XenAdmin.Actions
 
                     if (xo is Pool)
                     {
-                        Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, xo.Connection.Cache.Hosts.First().GetEditionText(_edition));
+                        var firstHost = xo.Connection.Cache.Hosts.FirstOrDefault();
+                        if (firstHost != null)
+                            Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, firstHost.GetEditionText(_edition));
                     }
 
                     Description = Messages.APPLYLICENSE_UPDATED;

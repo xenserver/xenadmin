@@ -84,12 +84,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        /// <summary>
-        /// Attempts to install tools on the vm
-        /// </summary>
-        /// <param name="vm"></param>
-        /// <returns>null if user cancels or an AsyncAction. This is either the InstallPVToolsAction or the CreateCdDriveAction if the VM needed a DVD drive.</returns>
-        private void SingleVMExecute(VM vm)
+        private void InstallToolsOnOneVm(VM vm)
         {
             if (vm.FindVMCDROM() == null)
             {
@@ -135,12 +130,7 @@ namespace XenAdmin.Commands
                 }
         }
 
-        /// <summary>
-        /// Attempts to install tools on several VMs
-        /// </summary>
-        /// <param name="vms"></param>
-        /// <returns>Whether the action was launched (i.e., the user didn't Cancel)</returns>
-        private void MultipleVMExecute(List<VM> vms)
+        private void InstallToolsOnManyVms(List<VM> vms)
         {
             bool newDvdDrivesRequired = false;
             foreach (VM vm in vms)
@@ -276,9 +266,9 @@ namespace XenAdmin.Commands
             List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
 
             if (vms.Count == 1)
-                SingleVMExecute(vms[0]);
+                InstallToolsOnOneVm(vms[0]);
             else
-                MultipleVMExecute(vms);
+                InstallToolsOnManyVms(vms);
         }
 
         public static bool CanExecute(VM vm)
