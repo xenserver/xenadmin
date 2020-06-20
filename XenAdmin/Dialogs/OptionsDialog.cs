@@ -47,7 +47,8 @@ namespace XenAdmin.Dialogs
             pluginOptionsPage1.PluginManager = pluginManager;
             verticalTabs.SelectedItem = securityOptionsPage1;
 
-            connectionOptionsPage1.OptionsDialog = this;
+            connectionOptionsPage1.IsValidChanged += ConnectionOptionsPage1_IsValidChanged;
+
             if (!Application.RenderWithVisualStyles)
                 ContentPanel.BackColor = SystemColors.Control;
             // call save serverlist on OK
@@ -55,6 +56,11 @@ namespace XenAdmin.Dialogs
 
             if (Helpers.CommonCriteriaCertificationRelease)
                 verticalTabs.Items.Remove(updatesOptionsPage1);
+        }
+
+        private void ConnectionOptionsPage1_IsValidChanged(bool isPageValid)
+        {
+            okButton.Enabled = isPageValid;
         }
 
         private void okButton_Click(object sender, EventArgs e)
