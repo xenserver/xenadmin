@@ -155,7 +155,7 @@ namespace XenAdmin.Dialogs
         protected System.Windows.Forms.Panel ContentPanel;
         protected XenAdmin.Controls.VerticalTabs verticalTabs;
         protected System.Windows.Forms.Button cancelButton;
-        public System.Windows.Forms.Button okButton;
+        protected System.Windows.Forms.Button okButton;
         protected System.Windows.Forms.SplitContainer splitContainer;
         protected XenAdmin.Controls.BlueBorderPanel blueBorder;
     }
