@@ -150,14 +150,13 @@ namespace XenAdmin.Dialogs
         private void SummariseDisconnectedRows(List<CheckableDataGridViewRow> rowsChecked)
         {
             //Refresh current row's details if the pool/host is no longer connected
-            CheckableDataGridViewRow row = rowsChecked.Find(r => r.Highlighted && !r.XenObject.Connection.IsConnected);
+            CheckableDataGridViewRow row = rowsChecked.FirstOrDefault(r => r.Highlighted && !r.XenObject.Connection.IsConnected);
             if (row != null)
                 SummariseSelectedRow(row);
         }
 
         public void AssignLicense(List<CheckableDataGridViewRow> rowsChecked)
         {
-
             if (rowsChecked.Any(r => !r.XenObject.Connection.IsConnected))
             {
                 ShowPoolHostNotConnectedError();
@@ -166,12 +165,14 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            List<LicenseDataGridViewRow> licenseRows = rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow);
-            AssignLicenseDialog ald = new AssignLicenseDialog(licenseRows.ConvertAll(r=>r.XenObject),
-                                                                  licenseRows.First().LicenseServerAddress,
-                                                                  licenseRows.First().LicenseServerPort,
-                                                                  licenseRows.First().LicenseEdition);
-            ald.ShowDialog(View.Parent);
+            var licenseRows = rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow);
+            var row = licenseRows.FirstOrDefault();
+            var xenObjects = licenseRows.ConvertAll(r => r.XenObject);
+
+            if (row != null && xenObjects.Count > 0)
+                using (var ald = new AssignLicenseDialog(xenObjects,
+                    row.LicenseServerAddress, row.LicenseServerPort, row.LicenseEdition))
+                    ald.ShowDialog(View.Parent);
 
             SummariseDisconnectedRows(rowsChecked);
             ResetButtonEnablement();

@@ -49,7 +49,6 @@ namespace XenAdmin.Dialogs
         /// </summary>
         public AssignLicenseDialog(IEnumerable<IXenObject> xos, String firstHost, String firstPort, Host.Edition firstEdition)
         {
-            Util.ThrowIfEnumerableParameterNullOrEmpty(xos, "XenObjects");
             this.xos = new List<IXenObject>(xos);
             this.currentEdition = firstEdition;
             InitializeComponent();

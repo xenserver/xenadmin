@@ -55,16 +55,6 @@ namespace XenAdmin.Commands
         {
         }
 
-        public DestroyHostCommand(IMainWindow mainWindow, Host host)
-            : base(mainWindow, host)
-        {
-        }
-
-        public DestroyHostCommand(IMainWindow mainWindow, IEnumerable<Host> hosts)
-            : base(mainWindow, ConvertToSelection<Host>(hosts))
-        {
-        }
-
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
@@ -81,10 +71,9 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(Host host)
         {
-            if (host == null || host.Connection == null)
-            {
+            if (host?.Connection == null)
                 return false;
-            }
+
             Pool pool = Helpers.GetPool(host.Connection);
             return pool != null && !Helpers.HostIsMaster(host) && !host.IsLive();
         }
@@ -92,28 +81,14 @@ namespace XenAdmin.Commands
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             if (!selection.AllItemsAre<Host>() || selection.Count > 1)
-            {
                 return false;
-            }
             
-            return CanExecute(selection.AsXenObjects<Host>().First());
+            return CanExecute(selection.AsXenObjects<Host>().FirstOrDefault());
         }
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.DESTROY_HOST_CONTEXT_MENU_ITEM_TEXT;
-            }
-        }
+        public override string ContextMenuText => Messages.DESTROY_HOST_CONTEXT_MENU_ITEM_TEXT;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -123,7 +98,6 @@ namespace XenAdmin.Commands
                 if (selection.Count > 0)
                 {
                     Host host = (Host)selection[0].XenObject;
-                    Pool pool = Helpers.GetPool(host.Connection);
                     
                     return string.Format(Messages.CONFIRM_DESTROY_HOST, host.Name());
                 }
@@ -131,28 +105,10 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return Messages.CONFIRM_DESTROY_HOST_TITLE;
-            }
-        }
+        protected override string ConfirmationDialogTitle => Messages.CONFIRM_DESTROY_HOST_TITLE;
 
-        protected override string ConfirmationDialogYesButtonLabel
-        {
-            get
-            {
-                return Messages.CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL;
-            }
-        }
+        protected override string ConfirmationDialogYesButtonLabel => Messages.CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL;
 
-        protected override bool ConfirmationDialogNoButtonSelected
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationDialogNoButtonSelected => true;
     }
 }

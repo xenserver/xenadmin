@@ -266,8 +266,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private int FindSrItem(SR sr)
         {
-            var existing = m_comboBoxISOLibraries.Items.OfType<ToStringWrapper<SR>>().Where(wrapper => sr.Equals(wrapper.item)).ToList();
-            return existing.Count > 0 ? m_comboBoxISOLibraries.Items.IndexOf(existing.First()) : -1;
+            var existing = m_comboBoxISOLibraries.Items.OfType<ToStringWrapper<SR>>().FirstOrDefault(wrapper => sr.Equals(wrapper.item));
+            return existing == null ? -1 : m_comboBoxISOLibraries.Items.IndexOf(existing);
         }
 
         private int AddReplaceSrItem(SR sr)
