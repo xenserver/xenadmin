@@ -5301,9 +5301,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENTER_MAINTENANCE_MODE_CONTEXT_MENU" xml:space="preserve">
     <value>&amp;Enter Maintenance Mode...</value>
   </data>
-  <data name="ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT" xml:space="preserve">
-    <value>To access your saved session it is required that you enter the master password when starting [XenCenter]</value>
-  </data>
   <data name="ENTER_VALID_QOS" xml:space="preserve">
     <value>The QoS limit value should be an integer greater than zero</value>
   </data>
@@ -7924,9 +7921,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_CTRL_R" xml:space="preserve">
     <value>Ctrl+R</value>
   </data>
-  <data name="MAINWINDOW_CTRL_S" xml:space="preserve">
-    <value>Ctrl+S</value>
-  </data>
   <data name="MAINWINDOW_CTRL_Y" xml:space="preserve">
     <value>Ctrl+Y</value>
   </data>
@@ -8109,9 +8103,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_RESUME_ON_HOST" xml:space="preserve">
     <value>Resume on Ser&amp;ver</value>
-  </data>
-  <data name="MAINWINDOW_SAVE_AND_RESTORE" xml:space="preserve">
-    <value>Sa&amp;ve and Restore...</value>
   </data>
   <data name="MAINWINDOW_SET_AS_DEFAULT_SR" xml:space="preserve">
     <value>Set as Defaul&amp;t</value>

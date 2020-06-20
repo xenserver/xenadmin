@@ -379,7 +379,8 @@ namespace XenAdmin
                     log.Debug("In automated test mode: not showing save session dialog");
                 else
                 {
-                    new Dialogs.RestoreSession.SaveAndRestoreDialog(false).ShowDialog(Program.MainWindow);
+                    using (var dialog = new SaveAndRestoreDialog())
+                        dialog.ShowDialog(Program.MainWindow);
                     Program.SkipSessionSave = true;
                 }
             }

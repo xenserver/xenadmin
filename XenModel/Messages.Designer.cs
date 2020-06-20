@@ -15072,15 +15072,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To access your saved session it is required that you enter the master password when starting [XenCenter].
-        /// </summary>
-        public static string ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT {
-            get {
-                return ResourceManager.GetString("ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The QoS limit value should be an integer greater than zero.
         /// </summary>
         public static string ENTER_VALID_QOS {
@@ -22811,15 +22802,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ctrl+S.
-        /// </summary>
-        public static string MAINWINDOW_CTRL_S {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_CTRL_S", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ctrl+Y.
         /// </summary>
         public static string MAINWINDOW_CTRL_Y {
@@ -23365,15 +23347,6 @@ namespace XenAdmin {
         public static string MAINWINDOW_RESUME_ON_HOST {
             get {
                 return ResourceManager.GetString("MAINWINDOW_RESUME_ON_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sa&amp;ve and Restore....
-        /// </summary>
-        public static string MAINWINDOW_SAVE_AND_RESTORE {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_SAVE_AND_RESTORE", resourceCulture);
             }
         }
         

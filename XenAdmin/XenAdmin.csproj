@@ -3539,7 +3539,6 @@
     </Compile>
     <Compile Include="Commands\ResumeVMCommand.cs" />
     <Compile Include="Commands\RevertToSnapshotCommand.cs" />
-    <Compile Include="Commands\SaveSessionCommand.cs" />
     <Compile Include="Commands\SelectedItem.cs" />
     <Compile Include="Commands\SelectedItemCollection.cs" />
     <Compile Include="Commands\SelectionBroadcaster.cs" />
