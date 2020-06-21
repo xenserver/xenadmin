@@ -3073,12 +3073,6 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
-    <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ConnectionRefusedDialog.Designer.cs">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\ILicenseCheckableDataGridViewView.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\LicenseCheckableDataGridView.cs">
       <SubType>Component</SubType>
@@ -5000,16 +4994,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\XenSearch\SearchOutput.zh-CN.resx">
       <DependentUpon>SearchOutput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConnectionRefusedDialog.ja.resx">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConnectionRefusedDialog.resx">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConnectionRefusedDialog.zh-CN.resx">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\GraphDetailsDialog.ja.resx">
       <DependentUpon>GraphDetailsDialog.cs</DependentUpon>
