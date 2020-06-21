@@ -123,9 +123,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             Program.Invoke(invokingControl, () =>
             {
                 using (var dialog = new InformationDialog(string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, GetResolvedHost().Name()),
-                    new ThreeButtonDialog.TBDButton(Messages.ROLLING_POOL_UPGRADE, DialogResult.OK),
-                    new ThreeButtonDialog.TBDButton(Messages.REBOOT, DialogResult.Cancel))
-                    {WindowTitle = Messages.SKIP_SERVER})
+                    new ThreeButtonDialog.TBDButton(Messages.REBOOT, DialogResult.OK),
+                    new ThreeButtonDialog.TBDButton(Messages.SKIP_SERVER, DialogResult.Cancel))
+                    {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                 {
                     if (dialog.ShowDialog(invokingControl) != DialogResult.OK) // Cancel or Unknown
                     {
@@ -161,9 +161,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     Program.Invoke(invokingControl, () =>
                     {
                         using (var dialog = new WarningDialog(string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName),
-                            new ThreeButtonDialog.TBDButton(Messages.ROLLING_POOL_UPGRADE, DialogResult.OK),
-                            new ThreeButtonDialog.TBDButton(Messages.REBOOT_AGAIN_BUTTON_LABEL, DialogResult.Cancel))
-                            {WindowTitle = Messages.SKIP_SERVER})
+                            new ThreeButtonDialog.TBDButton(Messages.REBOOT_AGAIN_BUTTON_LABEL, DialogResult.OK),
+                            new ThreeButtonDialog.TBDButton(Messages.SKIP_SERVER, DialogResult.Cancel))
+                            {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                         {
                             if (dialog.ShowDialog(invokingControl) == DialogResult.OK)
                                 return;
