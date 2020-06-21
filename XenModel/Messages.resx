@@ -4415,6 +4415,12 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>Position {0} is already in use. Your VM will not boot with two disks in the same position. Do you want to swap the disk at '{0}' with this disk?</value>
   </data>
+  <data name="DEVICE_POSITION_CONFLICT_CONFIGURE" xml:space="preserve">
+    <value>&amp;Configure just this disk anyway</value>
+  </data>
+  <data name="DEVICE_POSITION_CONFLICT_SWAP" xml:space="preserve">
+    <value>&amp;Swap these disks</value>
+  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>You will have to restart the VM for changes in device position to take effect.</value>
   </data>

@@ -12440,6 +12440,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Configure just this disk anyway.
+        /// </summary>
+        public static string DEVICE_POSITION_CONFLICT_CONFIGURE {
+            get {
+                return ResourceManager.GetString("DEVICE_POSITION_CONFLICT_CONFIGURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Swap these disks.
+        /// </summary>
+        public static string DEVICE_POSITION_CONFLICT_SWAP {
+            get {
+                return ResourceManager.GetString("DEVICE_POSITION_CONFLICT_SWAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You will have to restart the VM for changes in device position to take effect..
         /// </summary>
         public static string DEVICE_POSITION_RESTART_REQUIRED {

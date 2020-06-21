@@ -4417,6 +4417,12 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>場所 {0} は既に使用されています。同じ場所に 2 つのディスクを設定すると、VM は起動しません。'{0}' のディスクをこのディスクに置換しますか?</value>
   </data>
+  <data name="DEVICE_POSITION_CONFLICT_CONFIGURE" xml:space="preserve">
+    <value>このディスクを構成する(&amp;C)</value>
+  </data>
+  <data name="DEVICE_POSITION_CONFLICT_SWAP" xml:space="preserve">
+    <value>これらのディスクを置換する(&amp;S)</value>
+  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>デバイスの場所の変更を反映させるには、VM を再起動する必要があります。</value>
   </data>

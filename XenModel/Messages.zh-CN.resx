@@ -4411,6 +4411,12 @@
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>位置 {0} 已在使用。如果同一位置存在两个磁盘，虚拟机将不会启动。是否将位于“{0}”的磁盘与该磁盘交换?</value>
   </data>
+  <data name="DEVICE_POSITION_CONFLICT_CONFIGURE" xml:space="preserve">
+    <value>仍然仅配置此磁盘(&amp;C)</value>
+  </data>
+  <data name="DEVICE_POSITION_CONFLICT_SWAP" xml:space="preserve">
+    <value>交换这些磁盘(&amp;S)</value>
+  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>必须重新启动 VM，设备位置的更改才能生效。</value>
   </data>
