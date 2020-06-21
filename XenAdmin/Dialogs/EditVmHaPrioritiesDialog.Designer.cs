@@ -59,6 +59,7 @@ namespace XenAdmin.Dialogs
             // pictureBoxWarningIcon
             // 
             resources.ApplyResources(this.pictureBoxWarningIcon, "pictureBoxWarningIcon");
+            this.pictureBoxWarningIcon.Image = global::XenAdmin.Properties.Resources._000_WarningAlert_h32bit_32;
             this.pictureBoxWarningIcon.Name = "pictureBoxWarningIcon";
             this.pictureBoxWarningIcon.TabStop = false;
             // 

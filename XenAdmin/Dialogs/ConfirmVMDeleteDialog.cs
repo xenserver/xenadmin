@@ -31,10 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Core;
@@ -51,7 +48,6 @@ namespace XenAdmin.Dialogs
             Util.ThrowIfParameterNull(vms, "vms");
 
             InitializeComponent();
-            pictureBox1.Image = SystemIcons.Warning.ToBitmap();
             HelpButton = true;
 
             // We have to set the header text again here because they're in base64
