@@ -68,7 +68,6 @@ namespace XenAdmin.Dialogs
             pool.PropertyChanged += pool_PropertyChanged;
             originalNtol = pool.ha_host_failures_to_tolerate;
 
-            pictureBoxWarningIcon.Image = SystemIcons.Warning.ToBitmap();
             Rebuild();
         }
 

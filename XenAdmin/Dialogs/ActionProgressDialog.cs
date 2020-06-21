@@ -175,7 +175,7 @@ namespace XenAdmin.Dialogs
             ShowIcon = true;
             labelException.Visible = true;
             icon.Visible = true;
-            icon.Image = SystemIcons.Error.ToBitmap();
+            icon.Image = Images.StaticImages._000_error_h32bit_32;
             labelBottom.Visible = showTryAgain;
 
             if (action.Exception == null)
