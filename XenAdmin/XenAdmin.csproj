@@ -664,12 +664,6 @@
     <Compile Include="Dialogs\EditVmHaPrioritiesDialog.Designer.cs">
       <DependentUpon>EditVmHaPrioritiesDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\HostRequiresRebootDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\HostRequiresRebootDialog.Designer.cs">
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\NetworkingPropertiesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2032,10 +2026,6 @@
     <EmbeddedResource Include="Dialogs\EditVmHaPrioritiesDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditVmHaPrioritiesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\NetworkingPropertiesPage.resx">
       <SubType>Designer</SubType>
@@ -3673,9 +3663,6 @@
     <Compile Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.Designer.cs">
       <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Dialogs\Wlb\WlbConfigurationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5286,12 +5273,6 @@
     <EmbeddedResource Include="Dialogs\GraphDetailsDialog.zh-CN.resx">
       <DependentUpon>GraphDetailsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.ja.resx">
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.zh-CN.resx">
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputPromptDialog.ja.resx">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5631,15 +5612,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LVMoHBAWarningDialog.zh-CN.resx">
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.ja.resx">
-      <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.resx">
-      <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.zh-CN.resx">
-      <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbConfigurationDialog.ja.resx">
       <DependentUpon>WlbConfigurationDialog.cs</DependentUpon>

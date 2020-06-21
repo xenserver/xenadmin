@@ -6830,9 +6830,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOST_REBOOTING" xml:space="preserve">
     <value>Rebooting server</value>
   </data>
-  <data name="HOST_REBOOT_REQUIRED" xml:space="preserve">
-    <value>You must reboot your server '{0}' to complete the restore process.</value>
-  </data>
   <data name="HOST_REMOVED_MANY_CRASHDUMPS" xml:space="preserve">
     <value>Removed {0} crash dumps from {1}</value>
   </data>

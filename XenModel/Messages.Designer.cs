@@ -19480,15 +19480,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must reboot your server &apos;{0}&apos; to complete the restore process..
-        /// </summary>
-        public static string HOST_REBOOT_REQUIRED {
-            get {
-                return ResourceManager.GetString("HOST_REBOOT_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade failed. The server rebooted with the same version..
         /// </summary>
         public static string HOST_REBOOTED_SAME_VERSION {
