@@ -29,15 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
 
@@ -48,8 +43,6 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class DisconnectWlbServerCommand : Command
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -62,30 +55,23 @@ namespace XenAdmin.Commands
         {
             if (Helpers.FeatureForbidden(selection[0].XenObject, Host.RestrictWLB))
             {
-                // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_WLB : Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_TRIAL,
-                                                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
+                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden
+                        ? Messages.UPSELL_BLURB_WLB
+                        : Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_TRIAL,
+                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                     dlg.ShowDialog(Parent);
                 return;
             }
 
-                try
+            using (var dialog = new WarningDialog(Messages.WLB_DISCONNECT_SERVER,
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+                if (dialog.ShowDialog(Program.MainWindow) == DialogResult.Yes)
                 {
-                    Dialogs.Wlb.DisableWLBDialog disableDialog = new XenAdmin.Dialogs.Wlb.DisableWLBDialog(string.Empty);
-                    DialogResult dr = disableDialog.ShowDialog(MainWindow.ActiveForm);
-
-                    if (dr == DialogResult.OK)
-                    {
-                        Actions.Wlb.DisableWLBAction action = new Actions.Wlb.DisableWLBAction(selection[0].PoolAncestor, true);
-                        action.Completed += Program.MainWindow.action_Completed;
-                        action.RunAsync();
-                    }
+                    var action = new Actions.Wlb.DisableWLBAction(selection[0].PoolAncestor, true);
+                    action.Completed += Program.MainWindow.action_Completed;
+                    action.RunAsync();
                 }
-                catch (Failure exn)
-                {
-                    log.Error(exn, exn);
-                }
-       }
+        }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {

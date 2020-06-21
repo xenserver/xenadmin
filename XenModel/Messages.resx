@@ -13915,6 +13915,11 @@ A {0} user cannot alter the Workload Balancing settings.</value>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>Are you sure you want to disable Workload Balancing for pool '{0}'?</value>
   </data>
+  <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
+    <value>Are you sure you want to disconnect the Workload Balancing server from this pool?
+
+Disconnecting will stop all Workload Balancing operations for this resource pool and delete all information about this pool from the Workload Balancing database.</value>
+  </data>
   <data name="WLB_ENABLED" xml:space="preserve">
     <value>Enabled</value>
   </data>

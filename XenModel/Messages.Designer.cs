@@ -40206,6 +40206,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to disconnect the Workload Balancing server from this pool?
+        ///
+        ///Disconnecting will stop all Workload Balancing operations for this resource pool and delete all information about this pool from the Workload Balancing database..
+        /// </summary>
+        public static string WLB_DISCONNECT_SERVER {
+            get {
+                return ResourceManager.GetString("WLB_DISCONNECT_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workload Balancing is currently paused for pool {0}.
         ///
         ///Click Resume to continue analyzing the pool for possible optimizations..

@@ -3702,9 +3702,6 @@
     <Compile Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Wlb\DisableWLBDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Dialogs\Wlb\WlbConfigurationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5691,15 +5688,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.zh-CN.resx">
       <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\DisableWLBDialog.ja.resx">
-      <DependentUpon>DisableWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\DisableWLBDialog.resx">
-      <DependentUpon>DisableWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\DisableWLBDialog.zh-CN.resx">
-      <DependentUpon>DisableWLBDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbConfigurationDialog.ja.resx">
       <DependentUpon>WlbConfigurationDialog.cs</DependentUpon>
