@@ -34118,6 +34118,26 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to revert to &apos;{0}&apos;?
+        ///
+        ///Reverting to this snapshot will revert the VM back to the point in time that the snapshot was created, and the current state of the VM will be lost..
+        /// </summary>
+        public static string SNAPSHOT_REVERT_BLURB {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_REVERT_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Take a snapshot of the VM&apos;s current state and then revert.
+        /// </summary>
+        public static string SNAPSHOT_REVERT_NEW_SNAPSHOT {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_REVERT_NEW_SNAPSHOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Taken on: {0}.
         /// </summary>
         public static string SNAPSHOT_TAKEN_ON {

@@ -11849,6 +11849,14 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>スナップショットの復元</value>
   </data>
+  <data name="SNAPSHOT_REVERT_BLURB" xml:space="preserve">
+    <value>'{0}' の状態に戻してもよろしいですか?
+
+これにより、現在の状態の VM は失われ、このスナップショットが作成されたときの状態が復元されます。</value>
+  </data>
+  <data name="SNAPSHOT_REVERT_NEW_SNAPSHOT" xml:space="preserve">
+    <value>現在のスナップショットを作成してから復元する(&amp;T)</value>
+  </data>
   <data name="SNAPSHOT_TAKEN_ON" xml:space="preserve">
     <value>作成日: {0}</value>
   </data>

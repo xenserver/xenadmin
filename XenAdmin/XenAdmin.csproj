@@ -380,12 +380,6 @@
     <Compile Include="Dialogs\RoleSelectionDialog.Designer.cs">
       <DependentUpon>RoleSelectionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RevertDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\RevertDialog.Designer.cs">
-      <DependentUpon>RevertDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ScreenShotDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1949,10 +1943,6 @@
     <EmbeddedResource Include="Dialogs\PropertiesDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RevertDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RevertDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ResolvingSubjectsDialog.resx">
       <SubType>Designer</SubType>
@@ -5519,12 +5509,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.zh-CN.resx">
       <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RevertDialog.ja.resx">
-      <DependentUpon>RevertDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RevertDialog.zh-CN.resx">
-      <DependentUpon>RevertDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RoleElevationDialog.ja.resx">
       <DependentUpon>RoleElevationDialog.cs</DependentUpon>

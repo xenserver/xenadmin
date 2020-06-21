@@ -11847,6 +11847,14 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>Snapshot revert</value>
   </data>
+  <data name="SNAPSHOT_REVERT_BLURB" xml:space="preserve">
+    <value>Are you sure you want to revert to '{0}'?
+
+Reverting to this snapshot will revert the VM back to the point in time that the snapshot was created, and the current state of the VM will be lost.</value>
+  </data>
+  <data name="SNAPSHOT_REVERT_NEW_SNAPSHOT" xml:space="preserve">
+    <value>&amp;Take a snapshot of the VM's current state and then revert</value>
+  </data>
   <data name="SNAPSHOT_TAKEN_ON" xml:space="preserve">
     <value>Taken on: {0}</value>
   </data>
