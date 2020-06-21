@@ -39,7 +39,6 @@ using XenAdmin.Dialogs.Wlb;
 using XenAPI;
 
 
-
 namespace XenAdmin.Controls.Wlb
 {
     public partial class WlbReportSubscriptionView : UserControl
@@ -51,28 +50,17 @@ namespace XenAdmin.Controls.Wlb
         public event EventHandler PoolConnectionLost;
 
         private WlbReportSubscription _subscription;
-        private Pool _pool;
 
         #endregion
 
         #region Properties
 
-        public Pool Pool
-        {
-            get { return _pool; }
-            set { _pool = value; }
-        }
+        public Pool Pool { get; set; }
 
         public WlbReportSubscription ReportSubscription
         {
-            get
-            {
-                if (_subscription == null)
-                    return new WlbReportSubscription(String.Empty);
-                else
-                    return _subscription;
-            }
-            set { _subscription = value; }
+            get => _subscription ?? new WlbReportSubscription(string.Empty);
+            set => _subscription = value;
         }
 
         #endregion
@@ -88,9 +76,6 @@ namespace XenAdmin.Controls.Wlb
 
         #region Public Methods
 
-        /// <summary>
-        /// Rebuilds the panel contents
-        /// </summary>
         public void BuildPanel()
         {
             // Subscription section
@@ -173,9 +158,6 @@ namespace XenAdmin.Controls.Wlb
             return range;
         }
 
-        /// <summary>
-        /// Reset subscription view
-        /// </summary>
         public void ResetSubscriptionView(WlbReportSubscription subscription)
         {
             this.ReportSubscription = subscription;
@@ -189,7 +171,7 @@ namespace XenAdmin.Controls.Wlb
 
         private void DeleteReportSubscription(object sender, EventArgs e)
         {
-            SendWlbConfigurationAction action = new SendWlbConfigurationAction(_pool, this._subscription.ToDictionary(), SendWlbConfigurationKind.DeleteReportSubscription);
+            SendWlbConfigurationAction action = new SendWlbConfigurationAction(Pool, this._subscription.ToDictionary(), SendWlbConfigurationKind.DeleteReportSubscription);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
             {
                 dialog.ShowCancel = true;
@@ -197,16 +179,12 @@ namespace XenAdmin.Controls.Wlb
             }
 
             if (action.Succeeded)
-            {
-                // Update treeView
-                OnChangeOK(this, e);
-            }
+                OnChangeOK?.Invoke(this, e);
         }
         #endregion
 
         #region Event Handlers
 
-        // Load report subscription view
         private void ReportSubscriptionView_Load(object sender, EventArgs e)
         {
             BuildPanel();
@@ -214,57 +192,37 @@ namespace XenAdmin.Controls.Wlb
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            // Make sure the pool is okay
-            if (!_pool.Connection.IsConnected)
+            if (!Pool.Connection.IsConnected)
             {
-                PoolConnectionLost(this, EventArgs.Empty);
+                PoolConnectionLost?.Invoke(this, EventArgs.Empty);
+                return;
             }
-            else
-            {
 
-                WlbReportSubscriptionDialog rpSubDialog = new WlbReportSubscriptionDialog(this._subscription.ReportDisplayName, _subscription, _pool);
-                DialogResult dr = rpSubDialog.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    // Update treeView
-                    OnChangeOK(this, e);
-                }
-            }
+            using (var rpSubDialog = new WlbReportSubscriptionDialog(_subscription.ReportDisplayName, _subscription, Pool))
+                if (rpSubDialog.ShowDialog() == DialogResult.OK)
+                    OnChangeOK?.Invoke(this, e);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
-            // Make sure the pool is okay
-            if (!_pool.Connection.IsConnected)
+            if (!Pool.Connection.IsConnected)
             {
-                PoolConnectionLost(this, EventArgs.Empty);
+                PoolConnectionLost?.Invoke(this, EventArgs.Empty);
+                return;
             }
-            else
-            {
 
-                // Show "Are you sure..." dialog
-                DialogResult dr = new WlbDeleteReportSubscriptionDialog(string.Format(Messages.WLB_REPORT_DELETE_SUBSCRIPTION_QUERY, this._subscription.ReportDisplayName)).ShowDialog(this);
-                
-                // Do the deletion
-                if (dr == DialogResult.Yes)
-                {
+            using (var dr = new WarningDialog(
+                string.Format(Messages.WLB_REPORT_DELETE_SUBSCRIPTION_QUERY, _subscription.ReportDisplayName),
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+            {
+                if (dr.ShowDialog(this) == DialogResult.Yes)
                     DeleteReportSubscription(this, e);
-                }
             }
         }
 
-        /// <summary>
-        /// Close button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (Close != null)
-            {
-                Close(this, e);
-            }
+            Close?.Invoke(this, e);
         }
 
         #endregion

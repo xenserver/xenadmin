@@ -3717,9 +3717,6 @@
     <Compile Include="Dialogs\Wlb\WlbCredentialsDialog.Designer.cs">
       <DependentUpon>WlbCredentialsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Dialogs\Wlb\WlbReportCustomFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5721,15 +5718,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbCredentialsDialog.zh-CN.resx">
       <DependentUpon>WlbCredentialsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.ja.resx">
-      <DependentUpon>WlbDeleteReportSubscriptionDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.resx">
-      <DependentUpon>WlbDeleteReportSubscriptionDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.zh-CN.resx">
-      <DependentUpon>WlbDeleteReportSubscriptionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbEditScheduledTask.ja.resx">
       <DependentUpon>WlbEditScheduledTask.cs</DependentUpon>
