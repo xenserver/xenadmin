@@ -565,6 +565,10 @@ namespace XenAdmin.ConsoleView
                     EnableRDPIfCapable();
                 UpdateButtons();
             }
+            else if (e.PropertyName == "networks")
+            {
+                UpdateOpenSSHConsoleButtonState();
+            }
         }
 
         private void EnableRDPIfCapable()
@@ -1481,7 +1485,7 @@ namespace XenAdmin.ConsoleView
 
         private void buttonSSH_Click(object sender, EventArgs e)
         {
-            if (CanStartSSHConsole)
+            if (IsSSHConsoleSupported && CanStartSSHConsole)
             {
                 var puttyPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
 
@@ -1502,17 +1506,9 @@ namespace XenAdmin.ConsoleView
 
         private void UpdateOpenSSHConsoleButtonState()
         {
-            buttonSSH.Visible = IsSSHConsoleButtonShown;
-            buttonSSH.Enabled = CanStartSSHConsole;
-        }
-
-        private bool IsSSHConsoleButtonShown
-        {
-            get
-            {
-                return
-                    IsSSHConsoleSupported && source.power_state != vm_power_state.Halted;
-            }
+            var isSshConsoleSupported = IsSSHConsoleSupported;
+            buttonSSH.Visible = isSshConsoleSupported && source.power_state != vm_power_state.Halted;
+            buttonSSH.Enabled = isSshConsoleSupported && CanStartSSHConsole;
         }
 
         private bool IsSSHConsoleSupported
@@ -1540,16 +1536,8 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private bool CanStartSSHConsole
-        {
-            get
-            {
-               return
-                   IsSSHConsoleSupported &&
-                   source.power_state == vm_power_state.Running &&
-                   !string.IsNullOrEmpty(source.IPAddressForSSH());
-            }
-        }
+        private bool CanStartSSHConsole =>
+            source.power_state == vm_power_state.Running && !string.IsNullOrEmpty(source.IPAddressForSSH());
 
         #endregion SSH Console methods
     }
