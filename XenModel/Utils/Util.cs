@@ -172,34 +172,68 @@ namespace XenAdmin
 
         private static string ByteSizeString(double bytes, int decPlaces, bool isRate, out string unit, string format = null)
         {
+            if (isRate)
+            {
+                if (bytes >= DEC_TERA)
+                {
+                    unit = Messages.VAL_TERRATE;
+                    var result = Math.Round(bytes / DEC_TERA, decPlaces);
+                    return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
+                }
+
+                if (bytes >= DEC_GIGA)
+                {
+                    unit = Messages.VAL_GIGRATE;
+                    var result = Math.Round(bytes / DEC_GIGA, decPlaces);
+                    return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
+                }
+
+                if (bytes >= DEC_MEGA)
+                {
+                    unit = Messages.VAL_MEGRATE;
+                    var result = Math.Round(bytes / DEC_MEGA, decPlaces);
+                    return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
+                }
+
+                if (bytes >= DEC_KILO)
+                {
+                    unit = Messages.VAL_KILRATE;
+                    var result = Math.Round(bytes / DEC_KILO, decPlaces);
+                    return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
+                }
+
+                unit = Messages.VAL_RATE;
+                return bytes.ToString();
+            }
+
             if (bytes >= BINARY_TERA)
             {
-                unit = isRate ? Messages.VAL_TERRATE : Messages.VAL_TERB;
+                unit = Messages.VAL_TERB;
                 var result = Math.Round(bytes / BINARY_TERA, decPlaces);
                 return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
             if (bytes >= BINARY_GIGA)
             {
-                unit = isRate ? Messages.VAL_GIGRATE : Messages.VAL_GIGB;
+                unit = Messages.VAL_GIGB;
                 var result = Math.Round(bytes / BINARY_GIGA, decPlaces);
                 return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
 
             if (bytes >= BINARY_MEGA)
             {
-                unit = isRate ? Messages.VAL_MEGRATE : Messages.VAL_MEGB;
+                unit = Messages.VAL_MEGB;
                 var result = Math.Round(bytes / BINARY_MEGA, decPlaces);
                 return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
 
             if (bytes >= BINARY_KILO)
             {
-                unit = isRate ? Messages.VAL_KILRATE : Messages.VAL_KILB;
+                unit = Messages.VAL_KILB;
                 var result = Math.Round(bytes / BINARY_KILO, decPlaces);
                 return string.IsNullOrEmpty(format) ? result.ToString() : result.ToString(format);
             }
 
-            unit = isRate ? Messages.VAL_RATE : Messages.VAL_BYTE;
+            unit = Messages.VAL_BYTE;
             return bytes.ToString();
         }
 

@@ -38037,7 +38037,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GBps.
+        ///   Looks up a localized string similar to GB/s.
         /// </summary>
         public static string VAL_GIGRATE {
             get {
@@ -38073,7 +38073,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to kBps.
+        ///   Looks up a localized string similar to kB/s.
         /// </summary>
         public static string VAL_KILRATE {
             get {
@@ -38109,7 +38109,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBps.
+        ///   Looks up a localized string similar to MB/s.
         /// </summary>
         public static string VAL_MEGRATE {
             get {
@@ -38163,7 +38163,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bps.
+        ///   Looks up a localized string similar to B/s.
         /// </summary>
         public static string VAL_RATE {
             get {
@@ -38199,7 +38199,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TBps.
+        ///   Looks up a localized string similar to TB/s.
         /// </summary>
         public static string VAL_TERRATE {
             get {
