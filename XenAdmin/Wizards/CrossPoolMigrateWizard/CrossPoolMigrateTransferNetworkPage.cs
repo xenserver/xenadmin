@@ -90,7 +90,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             networkComboBox.PopulateComboBox(Connection, item => !item.IsManagement);
 
             if (networkComboBox.SelectedItem == null)
-                networkComboBox.SelectedItem = networkComboBox.Items.Cast<NetworkComboBoxItem>().FirstOrDefault(item => item.IsManagement);
+                networkComboBox.SelectItem(item => item.IsManagement);
         }
 
         public KeyValuePair<string, string> NetworkUuid => networkComboBox.SelectedNetworkUuid;

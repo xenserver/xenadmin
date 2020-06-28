@@ -71,11 +71,9 @@ namespace XenAdmin.SettingsPanels
         {
             if (CheckBoxEnableClustering.Checked)
             {
-                var network = ((NetworkComboBoxItem)comboBoxNetwork.SelectedItem).Network;
+                var network = comboBoxNetwork.SelectedNetwork;
                 if (network != null)
-                {
                     return new EnableClusteringAction(pool, network);
-                }
             }
             else
             {
