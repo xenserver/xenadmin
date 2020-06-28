@@ -126,8 +126,7 @@ namespace XenAdmin.SettingsPanels
         #region PrivateMethods
         private void LoadNetworks(Cluster cluster)
         {
-            comboBoxNetwork.IncludeOnlyEnabledNetworksInComboBox = false;
-            comboBoxNetwork.IncludeOnlyNetworksWithIPAddresses = true;
+            comboBoxNetwork.ExcludeNetworksWithoutIpAddresses = true;
 
             if (cluster == null)
             {

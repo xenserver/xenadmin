@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Network;
@@ -45,9 +46,14 @@ namespace XenAdmin.Controls
             DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        public bool IncludePoolNameInComboBox { get; set; }
-        public bool IncludeOnlyEnabledNetworksInComboBox { get; set; }
-        public bool IncludeOnlyNetworksWithIPAddresses { get; set; }
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ShowPoolName { get; set; }
+
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ExcludeDisconnectedNetworks { get; set; }
+        
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ExcludeNetworksWithoutIpAddresses { get; set; }
 
         private IXenConnection PopulateConnection { get; set; }
 
@@ -72,9 +78,9 @@ namespace XenAdmin.Controls
                 
                 var item = CreateNewItem(pif);
 
-                if (IncludeOnlyEnabledNetworksInComboBox && !item.NetworkIsConnected)
+                if (ExcludeDisconnectedNetworks && !item.NetworkIsConnected)
                     continue;
-                if (IncludeOnlyNetworksWithIPAddresses && !item.HasIPAddress)
+                if (ExcludeNetworksWithoutIpAddresses && !item.HasIPAddress)
                     continue;
 
                 Items.Add(item);
@@ -94,7 +100,7 @@ namespace XenAdmin.Controls
 
             return new NetworkComboBoxItem
                        {
-                           IncludePoolNameInComboBox = IncludePoolNameInComboBox,
+                           IncludePoolNameInComboBox = ShowPoolName,
                            IsManagement = pif.management,
                            Network = network,
                            NetworkIsConnected = pif.LinkStatus() == PIF.LinkState.Connected,
