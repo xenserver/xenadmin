@@ -41,8 +41,10 @@ using XenAPI;
 
 namespace XenAdmin.Controls
 {
-    public class NetworkComboBox : LongStringComboBox
+    public class NetworkComboBox : EnableableComboBox
     {
+        private List<PIF> _pifArray = new List<PIF>();
+
         public NetworkComboBox()
         {
             DropDownStyle = ComboBoxStyle.DropDownList;
@@ -77,18 +79,15 @@ namespace XenAdmin.Controls
         public void PopulateComboBox(IXenConnection connection, Func<NetworkComboBoxItem, bool> matchSelectionCriteria)
         {
             Items.Clear();
+            UnRegisterEvents();
 
-            var pifArray = connection.Cache.PIFs;
+            _pifArray = new List<PIF>(connection.Cache.PIFs);
+            RegisterEvents();
 
-            foreach (var pif in pifArray)
+            foreach (var pif in _pifArray)
             {
                 var curPif = pif;
-
-                if (Items.Cast<NetworkComboBoxItem>().Any(i => i.Network.opaque_ref == curPif.network.opaque_ref))
-                    continue;
-                if (ExcludeDisconnectedNetworks && curPif.LinkStatus() != PIF.LinkState.Connected)
-                    continue;
-                if (ExcludeNetworksWithoutIpAddresses && !pif.IsManagementInterface(false))
+                if (!CanShowItem(curPif, out _))
                     continue;
 
                 var item = new NetworkComboBoxItem(curPif, ShowPoolName);
@@ -104,16 +103,110 @@ namespace XenAdmin.Controls
             SelectedItem = Items.Cast<NetworkComboBoxItem>().FirstOrDefault(matchSelectionCriteria);
         }
 
+        private bool CanShowItem(PIF pif, out NetworkComboBoxItem existingItem)
+        {
+            existingItem = Items.Cast<NetworkComboBoxItem>().FirstOrDefault(i => i.Network.opaque_ref == pif.network.opaque_ref);
+            
+            if (existingItem != null)
+                return false;
 
-        public class NetworkComboBoxItem
+            if (ExcludeDisconnectedNetworks && pif.LinkStatus() != PIF.LinkState.Connected)
+                return false;
+            
+            if (ExcludeNetworksWithoutIpAddresses && !pif.IsManagementInterface(false))
+                return false;
+            
+            return true;
+        }
+
+        private void RegisterEvents()
+        {
+            foreach (var pif in _pifArray)
+            {
+                if (pif != null)
+                    pif.PropertyChanged += PropertyChanged;
+            }
+        }
+
+        private void UnRegisterEvents()
+        {
+            foreach (var pif in _pifArray)
+            {
+                if (pif != null)
+                    pif.PropertyChanged -= PropertyChanged;
+            }
+        }
+
+        private void PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!(sender is PIF pif) || e.PropertyName.ToLower() != "locked")
+                return;
+
+            Program.Invoke(this, () =>
+            {
+                var canShow = CanShowItem(pif, out var existingItem);
+                
+                if (existingItem == null)
+                {
+                    if (canShow)
+                        Items.Add(new NetworkComboBoxItem(pif, ShowPoolName));
+                }
+                else
+                {
+                    if (canShow)
+                    {
+                        int index = Items.IndexOf(existingItem);
+                        if (-1 < index && index < Items.Count)
+                            RefreshItem(index);
+                    }
+                    else
+                    {
+                        //close the dropdown before removing the last item, otherwise it
+                        //will crash if it loses focus while the dropdown is empty
+                        if (Items.Count <= 1)
+                            DroppedDown = false;
+                        
+                        Items.Remove(existingItem);
+
+                        //the dropdown is not resized when items are removed,
+                        //unlike when they are added
+                        if (Items.Count > 0)
+                            DropDownHeight = Items.Count * ItemHeight;
+                    }
+                }
+            });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            UnRegisterEvents();
+            base.Dispose(disposing);
+        }
+
+
+        public class NetworkComboBoxItem : IEnableableComboBoxItem
         {
             private readonly string _name;
 
+            public PIF Pif { get; }
             public bool IsManagement { get; }
             public XenAPI.Network Network { get; }
+            
+            public bool Enabled
+            {
+                get
+                {
+                    if (Pif != null && Pif.Locked)
+                        return false;
+                    if (Network != null && Network.Locked)
+                        return false;
+                    return true;
+                }
+            }
 
             public NetworkComboBoxItem(PIF pif, bool showPoolName)
             {
+                Pif = pif;
                 IsManagement = pif.management;
                 Network = pif.Connection.Resolve(pif.network);
 
@@ -132,7 +225,7 @@ namespace XenAdmin.Controls
 
             public override string ToString()
             {
-                return _name;
+                return Enabled ? _name : $"{_name} - {Messages.NETWORK_LOCKED}";
             }
         }
     }

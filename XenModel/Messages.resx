@@ -8690,6 +8690,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (in use by {1})</value>
   </data>
+  <data name="NETWORK_LOCKED" xml:space="preserve">
+    <value>currently in use by a different operation</value>
+  </data>
   <data name="NETWORK_NAME" xml:space="preserve">
     <value>Network {0}</value>
   </data>

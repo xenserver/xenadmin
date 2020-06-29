@@ -75,10 +75,6 @@ namespace XenAdmin.Actions
         /// </summary>
         private readonly string Name;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bond"></param>
         public DestroyBondAction(Bond bond)
             : base(bond.Connection, string.Format(Messages.ACTION_DESTROY_BOND_TITLE, bond.Name()),
                    string.Format(Messages.ACTION_DESTROY_BOND_DESCRIPTION, bond.Name()))
@@ -199,19 +195,16 @@ namespace XenAdmin.Actions
         private void UnlockAll()
         {
             foreach (Bond bond in Bonds)
-            {
                 bond.Locked = false;
-            }
 
             foreach (PIF master in Masters)
-            {
                 master.Locked = false;
-            }
+
+            foreach (PIF pif in Slaves)
+                pif.Locked = false;
 
             if (Network != null)
-            {
                 Network.Locked = false;
-            }
         }
 
         
