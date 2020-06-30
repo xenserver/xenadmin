@@ -924,6 +924,16 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// List of distros that we treat as Linux/Non-Windows (written in the VM.guest_metrics
+        /// by the Linux Guest Agent after evaluating xe-linux-distribution)
+        /// </summary>
+        private static string[] linuxDistros =
+        {
+            "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
+            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom"
+        };
+
+        /// <summary>
         /// Sort in the following order:
         /// 1) User Templates
         /// 2) Windows VMs
@@ -1734,42 +1744,53 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns true if this VM is Windows.
+        /// Returns whether this is a Windows VM by checking the distro value in the
+        /// guest_metrics before falling back to the viridian flag. The result may not be
+        /// correct at all times (a Linux distro can be detected if the guest agent is
+        /// running on the VM). It is more reliable if the VM has already booted once, and
+        /// also works for the "Other Install Media" template and unbooted VMs made from it.
         /// </summary>
-        /// <remarks>
-        /// To get an acceptable result, this getter is trying to detect some specific cases before falling back to the viridian flag 
-        /// that may not be correct at all times. (Linux distro can be detected if the guest agent is running on a Linux VM.)
-        /// 
-        /// Note that this test is better once the VM has already booted once: before then, we can't tell with complete certainty what
-        /// OS is inside the VM. In particular, this also catches the "Other Install Media" template, and unbooted VMs made from it.
-        /// </remarks>
         public bool IsWindows()
         {
-            var gm = Connection.Resolve(this.guest_metrics);
-
-            if (gm != null && gm.IsVmNotWindows())
+            var gm = Connection.Resolve(guest_metrics);
+            if (CanTreatAsNonWindows(gm))
                 return false;
 
             var gmFromLastBootedRecord = GuestMetricsFromLastBootedRecord();
-            if (gmFromLastBootedRecord != null && gmFromLastBootedRecord.IsVmNotWindows())
+            if (CanTreatAsNonWindows(gmFromLastBootedRecord))
                 return false;
 
-            //generic check
             return
-                this.IsHVM() && BoolKey(this.platform, "viridian");
+                IsHVM() && BoolKey(platform, "viridian");
+        }
+
+        private static bool CanTreatAsNonWindows(VM_guest_metrics guestMetrics)
+        {
+            if (guestMetrics?.os_version == null)
+                return false;
+
+            if (guestMetrics.os_version.TryGetValue("distro", out var distro) &&
+                !string.IsNullOrEmpty(distro) && linuxDistros.Contains(distro.ToLowerInvariant()))
+                return true;
+
+            if (guestMetrics.os_version.TryGetValue("uname", out var uname) &&
+                !string.IsNullOrEmpty(uname) && uname.ToLowerInvariant().Contains("netscaler"))
+                return true;
+
+            return false;
         }
 
         private VM_guest_metrics GuestMetricsFromLastBootedRecord()
         {
-            if (!string.IsNullOrEmpty(this.last_booted_record))
+            if (!string.IsNullOrEmpty(last_booted_record))
             {
                 Regex regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
 
-                var v = regex.Match(this.last_booted_record);
+                var v = regex.Match(last_booted_record);
                 if (v.Success)
                 {
                     string s = v.Groups[1].ToString();
-                    return this.Connection.Resolve<VM_guest_metrics>(new XenRef<VM_guest_metrics>(s));
+                    return Connection.Resolve(new XenRef<VM_guest_metrics>(s));
                 }
             }
 
