@@ -182,11 +182,11 @@ namespace XenAdminTests.UnitTests.AlertTests
 
             hostA = new Mock<Host>(MockBehavior.Strict);
             hostA.Setup(n => n.Name()).Returns("HostAName");
-            hostA.Setup(n => n.Equals(It.IsAny<object>())).Returns((object o) => ReferenceEquals(o, hostA.Object));
+            hostA.Setup(n => n.Equals(It.IsAny<Host>())).Returns((Host o) => ReferenceEquals(o, hostA.Object));
 
             hostB = new Mock<Host>(MockBehavior.Strict);
             hostB.Setup(n => n.Name()).Returns("HostBName");
-            hostB.Setup(n => n.Equals(It.IsAny<object>())).Returns((object o) => ReferenceEquals(o, hostB.Object));
+            hostB.Setup(n => n.Equals(It.IsAny<Host>())).Returns((Host o) => ReferenceEquals(o, hostB.Object));
         }
 
         [TearDown]

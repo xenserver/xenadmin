@@ -1611,7 +1611,7 @@ namespace XenAPI
         /// Indicates whether the current object is equal to the specified object. This calls the implementation from XenObject.
         /// This implementation is required for ToStringWrapper.
         /// </summary>
-        public bool Equals(Host other)
+        public virtual bool Equals(Host other)
         {
             return base.Equals(other);
         }
