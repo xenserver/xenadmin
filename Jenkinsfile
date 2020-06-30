@@ -240,9 +240,9 @@ type ${env.WORKSPACE}\\xenadmin.git\\_output\\nunit3-console.out
 
     currentBuild.result = 'SUCCESS'
 
-  } catch (Exception ex) {
+  } catch (Throwable ex) {
     currentBuild.result = 'FAILURE'
-    throw ex as java.lang.Throwable
+    throw ex
   } finally {
     step([
       $class                  : 'Mailer',
