@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
         {
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
-            if (vm == null || vm.not_a_real_vm() || vdi == null)
+            if (vm == null || !vm.is_a_real_vm() || vdi == null)
                 return false;
             if (vm.power_state != vm_power_state.Running)
                 return false;
@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
 
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
-            if (vm == null || vm.not_a_real_vm() || vdi == null)
+            if (vm == null || !vm.is_a_real_vm() || vdi == null)
                 return base.GetCantExecuteReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);

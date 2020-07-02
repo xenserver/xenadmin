@@ -414,10 +414,7 @@ namespace XenAdmin.Controls.XenSearch
         /// <summary>
         /// Populate a combo box, trying to preserve the selected index
         /// </summary>
-        /// <param name="comboButton"></param>
-        /// <param name="values"></param>
-        /// <param name="imageDelegate"></param>
-        private void PopulateComboButton(DropDownComboButton comboButton, Object[] values, ImageDelegate<Object> imageDelegate)
+        private void PopulateComboButton(DropDownComboButton comboButton, Object[] values, Func<object, Icons> imageDelegate)
         {
             populatingComboButton = true;
             try
@@ -1034,7 +1031,7 @@ namespace XenAdmin.Controls.XenSearch
         internal abstract class PropertyQueryType<T> : QueryType
         {
             protected readonly PropertyNames property;
-            protected readonly PropertyAccessor propertyAccessor;
+            protected readonly Func<IXenObject, IComparable> propertyAccessor;
             protected readonly String i18n;
 
             protected PropertyQueryType(int group, ObjectTypes appliesTo, PropertyNames property, String i18n)

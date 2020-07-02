@@ -1403,14 +1403,9 @@ namespace XenAPI
             return first != null && first.opaque_ref == opaque_ref;
         }
 
-        public bool not_a_real_vm()
-        {
-            return is_a_snapshot || is_a_template || is_control_domain;
-        }
-
         public bool is_a_real_vm()
         {
-            return !not_a_real_vm();
+            return !is_a_snapshot && !is_a_template && !is_control_domain;
         }
 
         private bool _isBeingCreated;

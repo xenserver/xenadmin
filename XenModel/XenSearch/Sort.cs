@@ -45,7 +45,7 @@ namespace XenAdmin.XenSearch
         private readonly string column;
         private readonly bool ascending;
 
-        private readonly PropertyAccessor property;
+        private readonly Func<IXenObject, IComparable> property;
 
         public string Column
         {
@@ -64,7 +64,7 @@ namespace XenAdmin.XenSearch
             this.property = CalcProperty();
         }
 
-        private PropertyAccessor CalcProperty()
+        private Func<IXenObject, IComparable> CalcProperty()
         {
             if (column.StartsWith(CustomFieldsManager.CUSTOM_FIELD))
             {

@@ -48,10 +48,6 @@ namespace XenAdmin.XenSearch
     // to allow for serialisation
     //
 
-    public delegate Icons ImageDelegate<T>(T o);
-
-    public delegate IComparable PropertyAccessor(IXenObject o);
-
     // The order of this enum determines the order of types in the
     // tree in Folder View (CA-28418). But on the search-for
     // menu, see SearchFor.PopulateSearchForComboButton().
@@ -180,7 +176,7 @@ namespace XenAdmin.XenSearch
     public class PropertyAccessors
     {
         private static Dictionary<PropertyNames, Type> property_types = new Dictionary<PropertyNames, Type>();
-        private static Dictionary<PropertyNames, PropertyAccessor> properties = new Dictionary<PropertyNames, PropertyAccessor>();
+        private static Dictionary<PropertyNames, Func<IXenObject, IComparable>> properties = new Dictionary<PropertyNames, Func<IXenObject, IComparable>>();
 
         public static readonly Dictionary<String, vm_power_state> VM_power_state_i18n = new Dictionary<string, vm_power_state>();
         public static readonly Dictionary<String, VM.VirtualisationStatus> VirtualisationStatus_i18n = new Dictionary<string, VM.VirtualisationStatus>();
@@ -306,57 +302,28 @@ namespace XenAdmin.XenSearch
 			property_types.Add(PropertyNames.in_any_appliance, typeof(bool));
             property_types.Add(PropertyNames.disks, typeof(VDI));
 
-            properties[PropertyNames.os_name] = delegate(IXenObject o)
-                {
-                    return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                                        {
-                                            return vm.GetOSName();
-                                        });
-                };
-            properties[PropertyNames.power_state] = delegate(IXenObject o)
-                {
-                    return GetForRealVM(o, delegate(VM vm, IXenConnection _)
-                                        {
-                                            return vm.power_state;
-                                        });
-                };
-            
-            properties[PropertyNames.vendor_device_state] = delegate(IXenObject o)
+            properties[PropertyNames.os_name] = o => o is VM vm && vm.is_a_real_vm() ? vm.GetOSName() : null;
+            properties[PropertyNames.power_state] = o => o is VM vm && vm.is_a_real_vm() ? (IComparable)vm.power_state : null;
+            properties[PropertyNames.vendor_device_state] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.WindowsUpdateCapable() : null;
+            properties[PropertyNames.virtualisation_status] = o =>
             {
-                return GetForRealVM(o, (vm, conn) => (bool?)vm.WindowsUpdateCapable());
+                if (o is VM vm && vm.is_a_real_vm())
+                {
+                    var status = vm.GetVirtualisationStatus(out _);
+                    if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                        return null;
+                    return status;
+                }
+                return null;
             };
 
-            properties[PropertyNames.virtualisation_status] = delegate(IXenObject o)
-                {
-                    return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                                        {
-                                            var status = vm.GetVirtualisationStatus(out _);
-                                            if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                                                return null;
-                                            return status;
-                                        });
-                };
-            properties[PropertyNames.start_time] = delegate(IXenObject o)
-                {
-                    return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                                        {
-                                            return vm.GetStartTime();
-                                        });
-                };
+            properties[PropertyNames.start_time] = o => o is VM vm && vm.is_a_real_vm() ? (DateTime?)vm.GetStartTime() : null;
 
-            properties[PropertyNames.label] = delegate(IXenObject o)
-                {
-                    return o == null ? null : Helpers.GetName(o);
-                };
-
-            properties[PropertyNames.pool] = delegate(IXenObject o)
-                {
-                    return o == null ? null : Helpers.GetPool(o.Connection);
-                };
-
+            properties[PropertyNames.label] = Helpers.GetName;
+            properties[PropertyNames.pool] = o => o == null ? null : Helpers.GetPool(o.Connection);
             properties[PropertyNames.host] = HostProperty;
             properties[PropertyNames.vm] = VMProperty;
-            properties[PropertyNames.dockervm] = DockerVMProperty;
+            properties[PropertyNames.dockervm] = o => o is DockerContainer dc ? new ComparableList<VM> {dc.Parent} : new ComparableList<VM>();
             properties[PropertyNames.networks] = NetworksProperty;
             properties[PropertyNames.storage] = StorageProperty;
             properties[PropertyNames.disks] = DisksProperty;
@@ -370,65 +337,54 @@ namespace XenAdmin.XenSearch
                 return ret;
             };
 
-            properties[PropertyNames.memory] = delegate(IXenObject o)
+            properties[PropertyNames.memory] = o =>
             {
-                return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                                   {
-                                       VM_metrics metrics = conn.Resolve(vm.metrics);
-                                       return metrics == null ? null : (IComparable)metrics.memory_actual;
-                                   });
+                if (o is VM vm && vm.is_a_real_vm() && vm.Connection != null)
+                {
+                    var metrics = vm.Connection.Resolve(vm.metrics);
+                    if (metrics != null)
+                        return metrics.memory_actual;
+                }
+                return null;
             };
 
             properties[PropertyNames.ha_restart_priority] = delegate(IXenObject o)
+            {
+                if (o is VM vm && vm.is_a_real_vm())
                 {
-                    return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                                        {
-                                            Pool pool = Helpers.GetPool(conn);
-                                            if (pool == null || !pool.ha_enabled)
-                                                return null;
+                    Pool pool = Helpers.GetPool(vm.Connection);
+                    if (pool != null && pool.ha_enabled)
+                        return vm.HaPriorityIsRestart() ? VM.HA_Restart_Priority.Restart : vm.HARestartPriority();
 
-                                            //CA-57600 - From Boston onwards, the HA restart priority list contains Restart instead of AlwaysRestartHighPriority and AlwaysRestart
-                                            // when searching in a pre-Boston pool for VMs with HA restart priority = Restart, the search will return VMs with restart priority = AlwaysRestartHighPriority or AlwaysRestart
-                                            if (vm.HaPriorityIsRestart()) 
-                                                return VM.HA_Restart_Priority.Restart;
-                                            return vm.HARestartPriority();
-                                        });
-                };
+                    // CA-57600 - From Boston onwards, the HA_restart_priority enum contains Restart instead of
+                    // AlwaysRestartHighPriority and AlwaysRestart. When searching in a pre-Boston pool for VMs
+                    // with HA_restart_priority.Restart, the search will return VMs with HA_restart_priority
+                    // AlwaysRestartHighPriority or AlwaysRestart
+                }
+                return null;
+            };
 
-        	properties[PropertyNames.appliance] = delegate(IXenObject o)
-                {
-                    if (o is VM_appliance)
-                        return (VM_appliance)o;
+            properties[PropertyNames.appliance] = delegate(IXenObject o)
+            {
+                if (o is VM_appliance app)
+                    return app;
 
-                    return GetForRealVM(o, (vm, conn) =>
-                                            	{
-                                            		if (vm.appliance == null || vm.Connection == null)
-                                            			return null;
+                if (o is VM vm && vm.is_a_real_vm() && vm.Connection != null)
+                    return vm.Connection.Resolve(vm.appliance);
 
-                                            		var appl = vm.Connection.Resolve(vm.appliance);
-                                            		return appl;
-                                            	});
-                };
+                return null;
+            };
 
 			properties[PropertyNames.in_any_appliance] = delegate(IXenObject o)
 			{
 				if (o is VM_appliance)
-					return o != null;
-
-				return GetForRealVM(o, (vm, conn) =>
-				{
-					if (vm.appliance == null || vm.Connection == null)
-						return false;
-
-					var appl = vm.Connection.Resolve(vm.appliance);
-					return appl != null;
-				});
-			};
-
-            properties[PropertyNames.read_caching_enabled] = delegate(IXenObject o)
-            {
-                return GetForRealVM(o, (vm, conn) => (bool?)vm.ReadCachingEnabled());
+					return true;
+                if (o is VM vm && vm.is_a_real_vm() && vm.Connection != null)
+                    return vm.Connection.Resolve(vm.appliance) != null;
+                return null;
             };
+
+            properties[PropertyNames.read_caching_enabled] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.ReadCachingEnabled() : null;
 
             properties[PropertyNames.connection_hostname] = ConnectionHostnameProperty;
             properties[PropertyNames.cpuText] = CPUTextProperty;
@@ -438,8 +394,8 @@ namespace XenAdmin.XenSearch
             properties[PropertyNames.folder] = Folders.GetFolder;
             properties[PropertyNames.folders] = Folders.GetAncestorFolders;
             properties[PropertyNames.haText] = HATextProperty;
-            properties[PropertyNames.ha_enabled] = HAEnabledProperty;
-            properties[PropertyNames.isNotFullyUpgraded] = IsNotFullyUpgradedProperty;
+            properties[PropertyNames.ha_enabled] = o => o is Pool pool ? (IComparable)pool.ha_enabled : null;
+            properties[PropertyNames.isNotFullyUpgraded] = o => o is Pool pool ? (IComparable)!pool.IsPoolFullyUpgraded() : null;
             properties[PropertyNames.ip_address] = IPAddressProperty;
             properties[PropertyNames.license] = LicenseProperty;
             properties[PropertyNames.memoryText] = MemoryTextProperty;
@@ -447,8 +403,8 @@ namespace XenAdmin.XenSearch
             properties[PropertyNames.memoryRank] = MemoryRankProperty;
             properties[PropertyNames.networkText] = NetworkTextProperty;
             properties[PropertyNames.shared] = SharedProperty;
-            properties[PropertyNames.size] = SizeProperty;
-            properties[PropertyNames.sr_type] = SRTypeProperty;
+            properties[PropertyNames.size] = o => o is VDI vdi ? (IComparable)vdi.virtual_size : null;
+            properties[PropertyNames.sr_type] = o => o is SR sr ? (IComparable)sr.GetSRType(false) : null;
             properties[PropertyNames.tags] = Tags.GetTagList;
             properties[PropertyNames.type] = TypeProperty;
             properties[PropertyNames.uptime] = UptimeProperty;
@@ -466,8 +422,7 @@ namespace XenAdmin.XenSearch
 
         private static IComparable DescriptionProperty(IXenObject o)
         {
-            VM vm = o as VM;
-            if (vm != null && vm.DescriptionType() == VM.VmDescriptionType.None)
+            if (o is VM vm && vm.DescriptionType() == VM.VmDescriptionType.None)
             {
                 //return string.Empty instead of null, or it prints hyphens and looks ugly
                 return string.Empty;
@@ -475,27 +430,13 @@ namespace XenAdmin.XenSearch
 
             return o.Description();
         }
-        
-        private static IComparable SizeProperty(IXenObject o)
-        {
-            if (o is VDI)
-            {
-                VDI vdi = o as VDI;
-
-                return vdi.virtual_size;
-            }
-
-            return null;
-        }
 
         private static IComparable UptimeProperty(IXenObject o)
         {
-            VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm())
-                return vm.RunningTime();
+            if (o is VM vm)
+                return vm.is_a_real_vm() ? vm.RunningTime() : null;
 
-            Host host = o as Host;
-            if (host != null)
+            if (o is Host host)
                 return host.Uptime();
 
             return null;
@@ -503,206 +444,138 @@ namespace XenAdmin.XenSearch
 
         private static IComparable CPUTextProperty(IXenObject o)
         {
-            VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm())
-            {
-                if (vm.power_state != vm_power_state.Running)
-                    return null;
+            if (o is VM vm)
+                return vm.is_a_real_vm() && vm.power_state == vm_power_state.Running
+                    ? PropertyAccessorHelper.vmCpuUsageString(vm)
+                    : null;
 
-                return PropertyAccessorHelper.vmCpuUsageString(vm);
-            }
-
-            Host host = o as Host;
-            if (host != null)
-            {
-                if (!host.Connection.IsConnected)
-                    return null;
-
-                return PropertyAccessorHelper.hostCpuUsageString(host);
-            }
+            if (o is Host host)
+                return host.Connection != null && host.Connection.IsConnected
+                    ? PropertyAccessorHelper.hostCpuUsageString(host)
+                    : null;
 
             return null;
         }
 
         private static IComparable CPUValueProperty(IXenObject o)
         {
-            VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm())
-            {
-                if (vm.power_state != vm_power_state.Running)
-                    return null;
+            if (o is VM vm)
+                return vm.is_a_real_vm() && vm.power_state == vm_power_state.Running
+                    ? (IComparable)PropertyAccessorHelper.vmCpuUsageRank(vm)
+                    : null;
 
-                return PropertyAccessorHelper.vmCpuUsageRank(vm);
-            }
-
-            Host host = o as Host;
-            if (host != null)
-            {
-                if (!host.Connection.IsConnected)
-                    return null;
-
-                return PropertyAccessorHelper.hostCpuUsageRank(host);
-            }
+            if (o is Host host)
+                return host.Connection != null && host.Connection.IsConnected
+                    ? (IComparable)PropertyAccessorHelper.hostCpuUsageRank(host)
+                    : null;
 
             return null;
         }
 
         private static IComparable MemoryTextProperty(IXenObject o)
         {
-            return Switch<IComparable>(o,
-                delegate(VM vm)
-                {
-                    if (vm.not_a_real_vm() ||
-                        vm.power_state != vm_power_state.Running)
-                        return null;
+            if (o is VM vm)
+            {
+                return vm.is_a_real_vm() &&
+                       vm.power_state == vm_power_state.Running &&
+                       vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                    ? PropertyAccessorHelper.vmMemoryUsageString(vm)
+                    : null;
+            }
 
-                    if (!vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                        return null;
+            if (o is Host host)
+                return host.Connection != null && host.Connection.IsConnected
+                    ? PropertyAccessorHelper.hostMemoryUsageString(host)
+                    : null;
+            
+            if (o is VDI vdi)
+                return PropertyAccessorHelper.vdiMemoryUsageString(vdi);
 
-                    return PropertyAccessorHelper.vmMemoryUsageString(vm);
-                },
-                delegate(Host host)
-                {
-                    if (!host.Connection.IsConnected)
-                        return null;
-
-                    return PropertyAccessorHelper.hostMemoryUsageString(host);
-                },
-                null,
-                null,
-                delegate(VDI vdi)
-                {
-                    return PropertyAccessorHelper.vdiMemoryUsageString(vdi);
-                },
-                delegate(Folder folder)
-                {
-                    return String.Empty;
-                }
-                );
+            return null;
         }
 
         private static IComparable MemoryRankProperty(IXenObject o)
         {
-            return Switch<IComparable>(o,
-                delegate(VM vm)
-                {
-                    if (vm.not_a_real_vm() ||
-                        vm.power_state != vm_power_state.Running)
-                        return null;
+            if (o is VM vm)
+            {
+                return vm.is_a_real_vm() &&
+                       vm.power_state == vm_power_state.Running &&
+                       vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                    ? (IComparable)PropertyAccessorHelper.vmMemoryUsageRank(vm)
+                    : null;
+            }
 
-                    if (!vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                        return null;
+            if (o is Host host)
+                return host.Connection != null && host.Connection.IsConnected
+                    ? (IComparable)PropertyAccessorHelper.hostMemoryUsageRank(host)
+                    : null;
 
-                    return PropertyAccessorHelper.vmMemoryUsageRank(vm);
+            if (o is VDI vdi)
+                return vdi.virtual_size == 0 ? 0 : (int)(vdi.physical_utilisation * 100 / vdi.virtual_size);
 
-                },
-                delegate(Host host)
-                {
-                    if (!host.Connection.IsConnected)
-                        return null;
-
-                    return PropertyAccessorHelper.hostMemoryUsageRank(host);
-                },
-                null,
-                null,
-                delegate(VDI vdi)
-                {
-                    if (vdi.virtual_size == 0)
-                        return 0;
-
-                    return (int)((vdi.physical_utilisation * 100) / vdi.virtual_size);
-                },
-                null);
+            return null;
         }
 
         private static IComparable MemoryValueProperty(IXenObject o)
         {
-            return Switch<IComparable>(o,
-                delegate(VM vm)
+                if (o is VM vm)
                 {
-                    if (vm.not_a_real_vm() ||
-                        vm.power_state != vm_power_state.Running)
-                        return null;
+                    return vm.is_a_real_vm() &&
+                           vm.power_state == vm_power_state.Running &&
+                           vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
+                        ? (IComparable)PropertyAccessorHelper.vmMemoryUsageValue(vm)
+                        : null;
+                }
 
-                    if (!vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                        return null;
+                if (o is Host host)
+                    return host.Connection != null && host.Connection.IsConnected
+                        ? (IComparable)PropertyAccessorHelper.hostMemoryUsageValue(host)
+                        : null;
 
-                    return PropertyAccessorHelper.vmMemoryUsageValue(vm);
+                if (o is VDI vdi)
+                    return vdi.virtual_size == 0 ? 0.0 : vdi.physical_utilisation;
 
-                },
-                delegate(Host host)
-                {
-                    if (!host.Connection.IsConnected)
-                        return null;
-
-                    return PropertyAccessorHelper.hostMemoryUsageValue(host);
-                },
-                null,
-                null,
-                delegate(VDI vdi)
-                {
-                    if (vdi.virtual_size == 0)
-                        return 0.0;
-
-                    return (double)vdi.physical_utilisation;
-                },
-                null);
+                return null;
         }
 
         private static IComparable NetworkTextProperty(IXenObject o)
         {
-            VM vm = o as VM;
-            if (vm != null)
+            if (o is VM vm)
             {
-                if (vm.not_a_real_vm() ||
-                    vm.power_state != vm_power_state.Running)
-                    return null;
-
-                if (!vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                    return null;
-
-                return PropertyAccessorHelper.vmNetworkUsageString(vm);
+                return vm.is_a_real_vm() &&
+                       vm.power_state != vm_power_state.Running &&
+                       vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                    ? PropertyAccessorHelper.vmNetworkUsageString(vm)
+                    : null;
             }
 
-            Host host = o as Host;
-            if (host != null)
-            {
-                if (!host.Connection.IsConnected)
-                    return null;
-
-                return PropertyAccessorHelper.hostNetworkUsageString(host);
-            }
+            if (o is Host host)
+                return host.Connection != null && host.Connection.IsConnected
+                    ? PropertyAccessorHelper.hostNetworkUsageString(host)
+                    : null;
 
             return null;
         }
 
         private static IComparable DiskTextProperty(IXenObject o)
         {
-            VM vm = o as VM;
-            if (vm == null || vm.not_a_real_vm())
-                return null;
-
-            if (vm.power_state != vm_power_state.Running)
-                return null;
-
-            if (!vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                return null;
-
-            return PropertyAccessorHelper.vmDiskUsageString(vm);
+            return o is VM vm &&
+                   vm.is_a_real_vm() &&
+                   vm.power_state == vm_power_state.Running &&
+                   vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                ? PropertyAccessorHelper.vmDiskUsageString(vm)
+                : null;
         }
 
         private static IComparable HATextProperty(IXenObject o)
         {
-            return Switch<IComparable>(o,
-                PropertyAccessorHelper.GetVMHAStatus,
-                null,
-                PropertyAccessorHelper.GetPoolHAStatus,
-                PropertyAccessorHelper.GetSRHAStatus,
-                null,
-                delegate(Folder folder)
-                {
-                    return "";
-                });
+            if (o is VM vm)
+                return PropertyAccessorHelper.GetVMHAStatus(vm);
+            if (o is Pool pool)
+                return PropertyAccessorHelper.GetPoolHAStatus(pool);
+            if (o is SR sr)
+                return PropertyAccessorHelper.GetSRHAStatus(sr);
+            return null;
         }
 
         private static IComparable UUIDProperty(IXenObject o)
@@ -719,23 +592,10 @@ namespace XenAdmin.XenSearch
 
         private static IComparable ConnectionHostnameProperty(IXenObject o)
         {
-            if (o == null)
-                return null;
-
-            IXenConnection xc = o.Connection;
+            IXenConnection xc = o?.Connection;
             if (xc != null && xc.IsConnected)
                 return xc.Hostname;
             return null;
-        }
-
-        private static IComparable SRTypeProperty(IXenObject o)
-        {
-            if (!(o is SR))
-                return null;
-
-            SR sr = (SR)o;
-
-            return sr.GetSRType(false);
         }
 
         private static IComparable LicenseProperty(IXenObject o)
@@ -752,12 +612,10 @@ namespace XenAdmin.XenSearch
 
         private static IComparable SharedProperty(IXenObject o)
         {
-            SR sr = o as SR;
-            if (sr != null)
+            if (o is SR sr)
                 return sr.shared;
 
-            VDI vdi = o as VDI;
-            if (vdi != null)
+            if (o is VDI vdi && vdi.Connection != null)
             {
                 int vms = 0;
                 foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
@@ -775,99 +633,68 @@ namespace XenAdmin.XenSearch
             return null;
         }
 
-        private static IComparable HAEnabledProperty(IXenObject o)
-        {
-            Pool pool = o as Pool;
-            return pool == null ? null : (IComparable)pool.ha_enabled;
-        }
-
-        private static IComparable IsNotFullyUpgradedProperty(IXenObject o)
-        {
-            Pool pool = o as Pool;
-            return pool == null ? null : (IComparable)(!pool.IsPoolFullyUpgraded());
-        }
-
         private static IComparable TypeProperty(IXenObject o)
         {
-            if (o is VM)
+            if (o is VM vm)
             {
-                VM vm = o as VM;
                 if (vm.is_a_snapshot)
-                {
                     return ObjectTypes.Snapshot;
-                }
-                else if (vm.is_a_template)
-                {
+
+                if (vm.is_a_template)
                     return vm.DefaultTemplate() ? ObjectTypes.DefaultTemplate : ObjectTypes.UserTemplate;
-                }
-                else if (vm.is_control_domain)
-                {
+
+                if (vm.is_control_domain)
                     return null;
-                }
-                else
-                {
-                    return ObjectTypes.VM;
-                }
+
+                return ObjectTypes.VM;
             }
-            else if (o is VM_appliance)
-            {
+
+            if (o is VM_appliance)
                 return ObjectTypes.Appliance;
-            }
-            else if (o is Host)
-            {
-                return o.Connection.IsConnected ? ObjectTypes.Server : ObjectTypes.DisconnectedServer;
-            }
-            else if (o is Pool)
-            {
+
+            if (o is Host)
+                return o.Connection != null && o.Connection.IsConnected ? ObjectTypes.Server : ObjectTypes.DisconnectedServer;
+
+            if (o is Pool)
                 return ObjectTypes.Pool;
-            }
-            else if (o is SR)
-            {
-                SR sr = o as SR;
+
+            if (o is SR sr)
                 return sr.IsLocalSR() ? ObjectTypes.LocalSR : ObjectTypes.RemoteSR;
-            }
-            else if (o is XenAPI.Network)
-            {
+
+            if (o is XenAPI.Network)
                 return ObjectTypes.Network;
-            }
-            else if (o is VDI)
-            {
+
+            if (o is VDI)
                 return ObjectTypes.VDI;
-            }
-            else if (o is Folder)
-            {
+
+            if (o is Folder)
                 return ObjectTypes.Folder;
-            }
-            else if (o is DockerContainer)
-            {
+
+            if (o is DockerContainer)
                 return ObjectTypes.DockerContainer;
-            }
 
             return null;
         }
 
         private static ComparableList<XenAPI.Network> NetworksProperty(IXenObject o)
         {
-            ComparableList<XenAPI.Network> networks = new ComparableList<XenAPI.Network>();
+            var networks = new ComparableList<XenAPI.Network>();
 
-            if (o is VM)
+            if (o is VM vm)
             {
-                VM vm = o as VM;
-                if (vm.not_a_real_vm())
-                    return null;
+                if (vm.is_a_real_vm() && vm.Connection != null)
+                    foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
+                    {
+                        XenAPI.Network network = vm.Connection.Resolve(vif.network);
+                        if (network == null)
+                            continue;
 
-                foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
-                {
-                    XenAPI.Network network = vm.Connection.Resolve(vif.network);
-                    if (network == null)
-                        continue;
-
-                    networks.Add(network);
-                }
+                        networks.Add(network);
+                    }
             }
-            else if (o is XenAPI.Network)
+            else if (o is XenAPI.Network network)
             {
-                networks.Add((XenAPI.Network)o);
+                networks.Add(network);
             }
 
             return networks;
@@ -875,21 +702,20 @@ namespace XenAdmin.XenSearch
 
         private static ComparableList<VM> VMProperty(IXenObject o)
         {
-            ComparableList<VM> vms = new ComparableList<VM>();
+            var vms = new ComparableList<VM>();
+            if (o.Connection == null)
+                return vms;
 
             if (o is Pool)
             {
                 vms.AddRange(o.Connection.Cache.VMs);
             }
-            else if (o is Host)
+            else if (o is Host host)
             {
-                Host host = o as Host;
-
                 vms.AddRange(host.Connection.ResolveAll(host.resident_VMs));
             }
-            else if (o is SR)
+            else if (o is SR sr)
             {
-                SR sr = o as SR;
                 foreach (VDI vdi in sr.Connection.ResolveAll(sr.VDIs))
                     foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
                     {
@@ -900,10 +726,8 @@ namespace XenAdmin.XenSearch
                         vms.Add(vm);
                     }
             }
-            else if (o is XenAPI.Network)
+            else if (o is XenAPI.Network network)
             {
-                XenAPI.Network network = o as XenAPI.Network;
-
                 foreach (VIF vif in network.Connection.ResolveAll(network.VIFs))
                 {
                     VM vm = vif.Connection.Resolve(vif.VM);
@@ -913,10 +737,8 @@ namespace XenAdmin.XenSearch
                     vms.Add(vm);
                 }
             }
-            else if (o is VDI)
+            else if (o is VDI vdi)
             {
-                VDI vdi = o as VDI;
-
                 foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
                 {
                     VM vm = vbd.Connection.Resolve(vbd.VM);
@@ -926,10 +748,8 @@ namespace XenAdmin.XenSearch
                     vms.Add(vm);
                 }
             }
-            else if (o is VM)
+            else if (o is VM vm)
             {
-                VM vm = o as VM;
-
                 if (vm.is_a_snapshot)
                 {
                     VM from = vm.Connection.Resolve(vm.snapshot_of);
@@ -939,78 +759,61 @@ namespace XenAdmin.XenSearch
                 else
                     vms.Add(vm);
             }
-            else if (o as DockerContainer != null)
+            else if (o is DockerContainer container)
             {
-                vms.Add(((DockerContainer)o).Parent);
-            }
-            vms.RemoveAll(vm => vm.not_a_real_vm());
-            return vms;
-        }
-
-        private static ComparableList<VM> DockerVMProperty(IXenObject o)
-        {
-            ComparableList<VM> vms = new ComparableList<VM>();
-
-            if (o as DockerContainer != null)
-            {
-                vms.Add(((DockerContainer)o).Parent);
+                vms.Add(container.Parent);
             }
 
+            vms.RemoveAll(vm => !vm.is_a_real_vm());
             return vms;
         }
 
         private static ComparableList<Host> HostProperty(IXenObject o)
         {
-            ComparableList<Host> hosts = new ComparableList<Host>();
+            var hosts = new ComparableList<Host>();
+            if (o.Connection == null)
+                return hosts;
 
             // If we're not in a pool then just group everything under the same host 
             Pool pool = Helpers.GetPool(o.Connection);
+
             if (pool == null)
             {
-                // If pool == null there should only be one host
-                foreach (Host host in o.Connection.Cache.Hosts)
-                {
-                    hosts.Add(host);
-                }
+                hosts.AddRange(o.Connection.Cache.Hosts);
             }
-            else if (o is VM)
+            else if (o is VM vm)
             {
-                Host host = ((VM)o).Home();
-                if (host != null)
-                    hosts.Add(host);
-            }
-            else if (o is SR)
-            {
-                Host host = ((SR)o).Home();
-                if (host != null)
-                    hosts.Add(host);
-            }
-            else if (o is XenAPI.Network)
-            {
-                XenAPI.Network network = o as XenAPI.Network;
-
-                if (network.PIFs.Count == 0)
-                    hosts.AddRange(network.Connection.Cache.Hosts);
-            }
-            else if (o is Host)
-            {
-                hosts.Add(o as Host);
-            }
-            else if (o is VDI)
-            {
-                VDI vdi = o as VDI;
-                SR sr = vdi.Connection.Resolve(vdi.SR);
-                if (sr == null)
-                    return null;
-
-                hosts.Add(sr.Home());
-            }
-            else if (o is DockerContainer)
-            {
-                VM vm = (o as DockerContainer).Parent;
                 Host host = vm.Home();
                 if (host != null)
                     hosts.Add(host);
+            }
+            else if (o is SR sr)
+            {
+                Host host = sr.Home();
+                if (host != null)
+                    hosts.Add(host);
+            }
+            else if (o is XenAPI.Network network)
+            {
+                if (network.PIFs.Count == 0)
+                    hosts.AddRange(network.Connection.Cache.Hosts);
+            }
+            else if (o is Host host)
+            {
+                hosts.Add(host);
+            }
+            else if (o is VDI vdi)
+            {
+                SR theSr = vdi.Connection.Resolve(vdi.SR);
+                if (theSr != null)
+                    hosts.Add(theSr.Home());
+            }
+            else if (o is DockerContainer container)
+            {
+                VM parent = container.Parent;
+                Host homeHost = parent.Home();
+                if (homeHost != null)
+                    hosts.Add(homeHost);
             }
 
             return hosts;
@@ -1018,40 +821,35 @@ namespace XenAdmin.XenSearch
 
         private static ComparableList<SR> StorageProperty(IXenObject o)
         {
-            ComparableList<SR> srs = new ComparableList<SR>();
+            var srs = new ComparableList<SR>();
+            if (o.Connection == null)
+                return srs;
 
-            if (o is VM)
+            if (o is VM vm)
             {
-                VM vm = o as VM;
-                if (vm.not_a_real_vm())
-                    return null;
+                if (vm.is_a_real_vm())
+                    foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
+                    {
+                        VDI vdi = vbd.Connection.Resolve(vbd.VDI);
+                        if (vdi == null)
+                            continue;
 
-                foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
-                {
-                    VDI vdi = vbd.Connection.Resolve(vbd.VDI);
-                    if (vdi == null)
-                        continue;
-
-                    SR sr = vdi.Connection.Resolve(vdi.SR);
-                    if (sr == null)
-                        continue;
-
-                    if (!srs.Contains(sr))
-                        srs.Add(sr);
-                }
+                        SR sr = vdi.Connection.Resolve(vdi.SR);
+                        if (sr != null && !srs.Contains(sr))
+                                srs.Add(sr);
+                    }
             }
-            else if (o is SR)
+            else if (o is SR sr)
             {
-                srs.Add((SR)o);
-            }
-            else if (o is VDI)
-            {
-                VDI vdi = o as VDI;
-                SR sr = vdi.Connection.Resolve(vdi.SR);
-                if (sr == null)
-                    return null;
-
                 srs.Add(sr);
+            }
+            else if (o is VDI vdi)
+            {
+                SR theSr = vdi.Connection.Resolve(vdi.SR);
+                if (theSr == null)
+                    return null;
+
+                srs.Add(theSr);
             }
 
             return srs;
@@ -1059,24 +857,23 @@ namespace XenAdmin.XenSearch
 
         private static ComparableList<VDI> DisksProperty(IXenObject o)
         {
-            ComparableList<VDI> vdis = new ComparableList<VDI>();
+            var vdis = new ComparableList<VDI>();
+            if (o.Connection == null)
+                return vdis;
 
-            if (o is VDI)
+            if (o is VDI theVdi)
             {
-                vdis.Add(o as VDI);
+                vdis.Add(theVdi);
             }
-            else if (o is VM)
+            else if (o is VM vm)
             {
-                VM vm = o as VM;
-                if (vm.not_a_real_vm())
-                    return null;
-
-                foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
-                {
-                    VDI vdi = vbd.Connection.Resolve(vbd.VDI);
-                    if (vdi != null && !vdis.Contains(vdi))
-                        vdis.Add(vdi);
-                }
+                if (vm.is_a_real_vm())
+                    foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
+                    {
+                        VDI vdi = vbd.Connection.Resolve(vbd.VDI);
+                        if (vdi != null && !vdis.Contains(vdi))
+                            vdis.Add(vdi);
+                    }
             }
 
             return vdis;
@@ -1084,13 +881,14 @@ namespace XenAdmin.XenSearch
 
         private static ComparableList<ComparableAddress> IPAddressProperty(IXenObject o)
         {
-            ComparableList<ComparableAddress> addresses = new ComparableList<ComparableAddress>();
+            var addresses = new ComparableList<ComparableAddress>();
+            if (o.Connection == null)
+                return addresses;
 
-            if (o is VM)
+            if (o is VM vm)
             {
-                VM vm = o as VM;
-                if (vm.not_a_real_vm())
-                    return null;
+                if (!vm.is_a_real_vm())
+                    return addresses;
 
                 VM_guest_metrics metrics = vm.Connection.Resolve(vm.guest_metrics);
                 if (metrics == null)
@@ -1102,54 +900,35 @@ namespace XenAdmin.XenSearch
                 {
                     foreach (var value in Helpers.FindIpAddresses(metrics.networks, vif.device))
                     {
-                        ComparableAddress ipAddress;
-                        if (!ComparableAddress.TryParse(value, false, true, out ipAddress)) 
-                            continue;
-
-                        addresses.Add(ipAddress);
+                        if (ComparableAddress.TryParse(value, false, true, out var ipAddress))
+                            addresses.Add(ipAddress);
                     }
                 }
-                addresses =new ComparableList<ComparableAddress>(addresses.Distinct());
-            }
-            else if (o is Host)
-            {
-                Host host = o as Host;
 
+                addresses = new ComparableList<ComparableAddress>(addresses.Distinct());
+            }
+            else if (o is Host host)
+            {
                 foreach (PIF pif in host.Connection.ResolveAll(host.PIFs))
                 {
-                    ComparableAddress ipAddress;
-                    if (!ComparableAddress.TryParse(pif.IP, false, true, out ipAddress))
-                        continue;
-
-                    addresses.Add(ipAddress);
+                    if (ComparableAddress.TryParse(pif.IP, false, true, out var ipAddress))
+                        addresses.Add(ipAddress);
                 }
             }
-            else if (o is SR)
+            else if (o is SR sr)
             {
-                SR sr = (SR)o;
-
                 string target = sr.Target();
                 if (!string.IsNullOrEmpty(target))
                 {
-                    ComparableAddress ipAddress;
-                    if (ComparableAddress.TryParse(target, false, true, out ipAddress))
+                    if (ComparableAddress.TryParse(target, false, true, out var ipAddress))
                         addresses.Add(ipAddress);
                 }
             }
 
-            return (addresses.Count == 0 ? null : addresses);   // CA-28300
+            return addresses.Count == 0 ? null : addresses;   // CA-28300
         }
 
-        private delegate IComparable VMGetter(VM vm, IXenConnection conn);
-        private static IComparable GetForRealVM(IXenObject o, VMGetter getter)
-        {
-            VM vm = o as VM;
-            if (vm == null || vm.not_a_real_vm())
-                return null;
-            return getter(vm, vm.Connection);
-        }
-
-        public static PropertyAccessor Get(PropertyNames p)
+        public static Func<IXenObject, IComparable> Get(PropertyNames p)
         {
             return properties[p];
         }
@@ -1183,156 +962,88 @@ namespace XenAdmin.XenSearch
             }
         }
 
-        public static Object GetImagesFor(PropertyNames p)
+        public static object GetImagesFor(PropertyNames p)
         {
             switch (p)
             {
                 case PropertyNames.type:
-                    return (ImageDelegate<ObjectTypes>)delegate(ObjectTypes type)
-                        {
-                            return ObjectTypes_images[type];
-                        };
+                    return (Func<ObjectTypes, Icons>)(type => ObjectTypes_images[type]);
 
                 case PropertyNames.power_state:
-                    return (ImageDelegate<vm_power_state>)delegate(vm_power_state type)
-                        {
-                            return VM_power_state_images[type];
-                        };
+                    return (Func<vm_power_state, Icons>)(state => VM_power_state_images[state]);
 
                 case PropertyNames.networks:
-                    return (ImageDelegate<XenAPI.Network>)delegate 
-                        {
-                            return Icons.Network;
-                        }; 
+                    return (Func<XenAPI.Network, Icons>)(_ => Icons.Network); 
 
                 case PropertyNames.appliance:
-                    return (ImageDelegate<VM_appliance>)delegate
-                        {
-                            return Icons.VmAppliance;
-                        };
+                    return (Func<VM_appliance, Icons>)(o => Icons.VmAppliance);
 
                 case PropertyNames.os_name:
-                    return (ImageDelegate<String>)delegate(String os_name)
-                        {
-                            String os = os_name.ToLowerInvariant();
+                    return (Func<string, Icons>)(osName =>
+                    {
+                        string os = osName.ToLowerInvariant();
 
-                            if (os.Contains("debian"))
-                                return Icons.Debian;
-                            if (os.Contains("Gooroom"))
-                                return Icons.Gooroom;
-                            if (os.Contains("linx"))
-                                return Icons.Linx;     
-                            if (os.Contains("red"))
-                                return Icons.RHEL;
-                            if (os.Contains("cent"))
-                                return Icons.CentOS;
-                            if (os.Contains("oracle"))
-                                return Icons.Oracle;
-                            if (os.Contains("suse"))
-                                return Icons.SUSE;
-                            if (os.Contains("ubuntu"))
-                                return Icons.Ubuntu;
-                            if (os.Contains("scientific"))
-                                return Icons.SciLinux;
-                            if (os.Contains("yinhe"))
-                                return Icons.YinheKylin;    
-                            if (os.Contains("kylin"))
-                                return Icons.NeoKylin;
-                            if (os.Contains("asianux"))
-                                return Icons.Asianux; 
-                            if (os.Contains("turbo"))
-                                return Icons.Turbo;         
-                            if (os.Contains("windows"))
-                                return Icons.Windows;
-                            if (os.Contains("coreos"))
-                                return Icons.CoreOS;
+                        if (os.Contains("debian"))
+                            return Icons.Debian;
+                        if (os.Contains("gooroom"))
+                            return Icons.Gooroom;
+                        if (os.Contains("linx"))
+                            return Icons.Linx;
+                        if (os.Contains("red"))
+                            return Icons.RHEL;
+                        if (os.Contains("cent"))
+                            return Icons.CentOS;
+                        if (os.Contains("oracle"))
+                            return Icons.Oracle;
+                        if (os.Contains("suse"))
+                            return Icons.SUSE;
+                        if (os.Contains("ubuntu"))
+                            return Icons.Ubuntu;
+                        if (os.Contains("scientific"))
+                            return Icons.SciLinux;
+                        if (os.Contains("yinhe"))
+                            return Icons.YinheKylin;
+                        if (os.Contains("kylin"))
+                            return Icons.NeoKylin;
+                        if (os.Contains("asianux"))
+                            return Icons.Asianux;
+                        if (os.Contains("turbo"))
+                            return Icons.Turbo;
+                        if (os.Contains("windows"))
+                            return Icons.Windows;
+                        if (os.Contains("coreos"))
+                            return Icons.CoreOS;
 
-                            return Icons.XenCenter;
-                        };
+                        return Icons.XenCenter;
+                    });
 
                 case PropertyNames.virtualisation_status:
-                    return (ImageDelegate<VM.VirtualisationStatus>)delegate(VM.VirtualisationStatus status)
-                        {
-                            if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                                return Icons.ToolInstalled;
+                    return (Func<VM.VirtualisationStatus, Icons>)(status =>
+                    {
+                        if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                            return Icons.ToolInstalled;
 
-                            if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                                return Icons.ToolsOutOfDate;
+                        if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                            return Icons.ToolsOutOfDate;
 
-                            return Icons.ToolsNotInstalled;
-                        };
+                        return Icons.ToolsNotInstalled;
+                    });
 
                 case PropertyNames.sr_type:
-                    return (ImageDelegate<SR.SRTypes>)delegate(SR.SRTypes type)
-                        {
-                            return Icons.Storage;
-                        };
+                    return (Func<SR.SRTypes, Icons>)(_ => Icons.Storage);
 
                 case PropertyNames.tags:
-                    return (ImageDelegate<string>)delegate(string tag)
-                        {
-                            return Icons.Tag;
-                        };
+                    return (Func<string, Icons>)(_ => Icons.Tag);
 
                 case PropertyNames.ha_restart_priority:
-                    return (ImageDelegate<VM.HA_Restart_Priority>)delegate(VM.HA_Restart_Priority _)
-                        {
-                            return Icons.HA;
-                        };
+                    return (Func<VM.HA_Restart_Priority, Icons>)(_ => Icons.HA);
 
                 case PropertyNames.read_caching_enabled:
-                    return (ImageDelegate<bool>)delegate(bool _)
-                        {
-                            return Icons.VDI;
-                        };
+                    return (Func<bool, Icons>)(_ => Icons.VDI);
 
                 default:
                     return null;
             }
-        }
-
-        public delegate S WithDelegate<S, T>(T t) where T : XenObject<T>;
-
-        public static Object With<S, T>(IXenObject o, WithDelegate<S, T> withDelegate) where T : XenObject<T>
-        {
-            T t = o as T;
-
-            if (t != null)
-                return withDelegate(t);
-
-            return default(S);
-        }
-
-        public static S Switch<S>(IXenObject o, WithDelegate<S, VM> vmDelegate,
-            WithDelegate<S, Host> hostDelegate, WithDelegate<S, Pool> poolDelegate,
-            WithDelegate<S, SR> srDelegate, WithDelegate<S, VDI> vdiDelegate,
-            WithDelegate<S, Folder> folderDelegate)
-        {
-            VM vm = o as VM;
-            if (vm != null && vmDelegate != null)
-                return vmDelegate(vm);
-
-            Host host = o as Host;
-            if (host != null && hostDelegate != null)
-                return hostDelegate(host);
-
-            Pool pool = o as Pool;
-            if (pool != null && poolDelegate != null)
-                return poolDelegate(pool);
-
-            SR sr = o as SR;
-            if (sr != null && srDelegate != null)
-                return srDelegate(sr);
-
-            VDI vdi = o as VDI;
-            if (vdi != null && vdiDelegate != null)
-                return vdiDelegate(vdi);
-
-            Folder folder = o as Folder;
-            if (folder != null && folderDelegate != null)
-                return folderDelegate(folder);
-
-            return default(S);
         }
 
         public static PropertyNames GetSortPropertyName(ColumnNames c)
@@ -1343,7 +1054,7 @@ namespace XenAdmin.XenSearch
 
     public class PropertyWrapper
     {
-        private readonly PropertyAccessor property;
+        private readonly Func<IXenObject, IComparable> property;
         private readonly IXenObject o;
 
         public PropertyWrapper(PropertyNames property, IXenObject o)
