@@ -134,7 +134,7 @@ namespace XenAdmin.XenSearch
 
         private ObjectTypes? ObjectTypeOf(IXenObject o)
         {
-            PropertyAccessor pa = PropertyAccessors.Get(PropertyNames.type);
+            var pa = PropertyAccessors.Get(PropertyNames.type);
             Object obj = pa(o);
             return (ObjectTypes?)obj;
         }
