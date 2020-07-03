@@ -88,6 +88,7 @@
     <Compile Include="PluginTests\TabPageFeatureTests.cs" />
     <Compile Include="PluginTests\TestPluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchTests\VirtualisationStatePropertyQueryTests.cs" />
     <Compile Include="SearchTests\DatePropertyQueryTests.cs" />
     <Compile Include="StringExtensionsTests\EllipsiseStringTests.cs" />
     <Compile Include="StringExtensionsTests\EscapeAmpersandsTests.cs" />
