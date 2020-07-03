@@ -38667,6 +38667,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Management Agent installed only.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Management Agent not installed.
         /// </summary>
         public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED {
