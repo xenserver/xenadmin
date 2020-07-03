@@ -199,7 +199,7 @@ namespace XenAdmin.XenSearch
             foreach (SR.SRTypes type in Enum.GetValues(typeof(SR.SRTypes)))
                 SRType_i18n[SR.getFriendlyTypeName(type)] = type;
 
-            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED] = 0;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_NOT_OPTIMIZED] = VM.VirtualisationStatus.NOT_INSTALLED;
             VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
             VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
             VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;

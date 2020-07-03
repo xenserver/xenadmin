@@ -1459,7 +1459,7 @@ namespace XenAdmin.TabPages
                 {
                     var status = vm.GetVirtualisationStatus(out var statusString);
 
-                    if (status == 0 || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                    if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                     {
                         if (InstallToolsCommand.CanExecute(vm))
                         {
