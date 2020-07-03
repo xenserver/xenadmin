@@ -33,7 +33,7 @@ using System;
 using NUnit.Framework;
 using XenAdmin.XenSearch;
 
-namespace XenAdminTests.UnitTests
+namespace XenAdminTests.SearchTests
 {
     [TestFixture, Category(TestCategories.Unit)]
     public class DatePropertyQueryTests
