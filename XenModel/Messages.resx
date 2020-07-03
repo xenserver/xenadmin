@@ -13324,6 +13324,9 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
     <value>Management Agent installed</value>
   </data>
+  <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY" xml:space="preserve">
+    <value>Management Agent installed only</value>
+  </data>
   <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED" xml:space="preserve">
     <value>Management Agent not installed</value>
   </data>

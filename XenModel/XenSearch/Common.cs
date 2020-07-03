@@ -203,9 +203,9 @@ namespace XenAdmin.XenSearch
             VirtualisationStatus_i18n[Messages.OUT_OF_DATE] = VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
             VirtualisationStatus_i18n[Messages.UNKNOWN] = VM.VirtualisationStatus.UNKNOWN;
             VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_IO_OPTIMIZED_ONLY] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED;
+            VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY] = VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
             VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
 
-            
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
             ObjectTypes_i18n[Messages.XENSERVER_TEMPLATES] = ObjectTypes.DefaultTemplate;
             ObjectTypes_i18n[Messages.CUSTOM_TEMPLATES] = ObjectTypes.UserTemplate;
@@ -305,19 +305,9 @@ namespace XenAdmin.XenSearch
             properties[PropertyNames.os_name] = o => o is VM vm && vm.is_a_real_vm() ? vm.GetOSName() : null;
             properties[PropertyNames.power_state] = o => o is VM vm && vm.is_a_real_vm() ? (IComparable)vm.power_state : null;
             properties[PropertyNames.vendor_device_state] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.WindowsUpdateCapable() : null;
-            properties[PropertyNames.virtualisation_status] = o =>
-            {
-                if (o is VM vm && vm.is_a_real_vm())
-                {
-                    var status = vm.GetVirtualisationStatus(out _);
-                    if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                        return null;
-                    return status;
-                }
-                return null;
-            };
-
+            properties[PropertyNames.virtualisation_status] = o => o is VM vm && vm.is_a_real_vm() ? (IComparable)vm.GetVirtualisationStatus(out _) : null;
             properties[PropertyNames.start_time] = o => o is VM vm && vm.is_a_real_vm() ? (DateTime?)vm.GetStartTime() : null;
+            properties[PropertyNames.read_caching_enabled] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.ReadCachingEnabled() : null;
 
             properties[PropertyNames.label] = Helpers.GetName;
             properties[PropertyNames.pool] = o => o == null ? null : Helpers.GetPool(o.Connection);
@@ -383,8 +373,6 @@ namespace XenAdmin.XenSearch
                     return vm.Connection.Resolve(vm.appliance) != null;
                 return null;
             };
-
-            properties[PropertyNames.read_caching_enabled] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.ReadCachingEnabled() : null;
 
             properties[PropertyNames.connection_hostname] = ConnectionHostnameProperty;
             properties[PropertyNames.cpuText] = CPUTextProperty;
