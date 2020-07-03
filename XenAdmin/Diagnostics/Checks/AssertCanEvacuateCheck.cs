@@ -245,7 +245,7 @@ namespace XenAdmin.Diagnostics.Checks
                     reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
                 }
             }
-            else if (status == 0 || status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            else if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
             {
                 reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
             }
