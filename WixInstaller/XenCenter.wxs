@@ -74,7 +74,6 @@
                             <File Id="IonicZipDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Ionic.Zip.dll" />
                             <File Id="MSTSCLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\MSTSCLib.dll" />
                             <File Id="XenCenterLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterLib.dll" />
-                            <File Id="XenCenterVNCDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterVNC.dll" />
                             <File Id="XenModelDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenModel.dll" />
                             <File Id="DiscUtils" Source="$(env.RepoRoot)\XenAdmin\bin\Release\DiscUtils.dll" />
                             <File Id="XenOvf" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenOvf.dll" />
@@ -254,8 +253,10 @@
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-        <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
-        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
+        <PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
+        <Condition Message="!(loc.Required_For_Installation)">
+            <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
+        </Condition>
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsole)" Name="InstallDir" />
         </Property>

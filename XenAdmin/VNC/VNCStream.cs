@@ -181,7 +181,7 @@ namespace DotNetVnc
             thread.Start(password);
         }
 
-        private ProtocolVersion getProtocolVersion()
+        private void CheckProtocolVersion()
         {
             byte[] buffer = new byte[12];
             this.stream.readFully(buffer, 0, 12);
@@ -191,12 +191,13 @@ namespace DotNetVnc
             Regex regex = new Regex("RFB ([0-9]{3})\\.([0-9]{3})\n");
             Match match = regex.Match(s);
             if (!match.Success)
-            {
-                throw new VNCException("expected protocol version: " + s);
-            }
+                throw new VNCException("Unexpected protocol version " + s);
 
-            return new ProtocolVersion(Int32.Parse(match.Groups[1].Value),
-                                       Int32.Parse(match.Groups[2].Value));
+            int major = Int32.Parse(match.Groups[1].Value);
+            int minor = Int32.Parse(match.Groups[2].Value);
+
+            if (major < 3)
+                throw new VNCException($"Unsupported protocol version {major}.{minor}");
         }
 
         private void sendProtocolVersion()
@@ -328,17 +329,6 @@ namespace DotNetVnc
             this.stream.writeInt16(y);
             this.stream.writeInt16(width);
             this.stream.writeInt16(height);
-        }
-
-        private void handshake()
-        {
-            ProtocolVersion protocolVersion = getProtocolVersion();
-            if (protocolVersion.major < 3)
-            {
-                throw new VNCException(
-                    "don't know protocol version " + protocolVersion.major
-                 );
-            }
         }
 
         private void authenticationExchange(char[] password)
@@ -1387,7 +1377,7 @@ namespace DotNetVnc
 
             try
             {
-                handshake();
+                CheckProtocolVersion();
                 sendProtocolVersion();
                 authenticationExchange(password);
                 clientInitialization();
