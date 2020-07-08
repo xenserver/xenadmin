@@ -1657,18 +1657,11 @@ namespace XenAdmin
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
             IXenConnection conn = SelectionManager.Selection.GetConnectionOfAllItems();
-            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn)))
-            {
-                assignSnapshotScheduleToolStripMenuItem.Available = true;
-                VMSnapshotScheduleToolStripMenuItem.Available = true;
-
-            }
-            else /* hide VMSS */
-            {
-                assignSnapshotScheduleToolStripMenuItem.Available = false;
-                VMSnapshotScheduleToolStripMenuItem.Available = false;
-            }
             
+            bool vmssOn = conn != null && Helpers.FalconOrGreater(conn);
+            assignSnapshotScheduleToolStripMenuItem.Available = vmssOn;
+            VMSnapshotScheduleToolStripMenuItem.Available = vmssOn;
+
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;
             customTemplatesToolStripMenuItem.Checked = Properties.Settings.Default.UserTemplatesVisible;
             localStorageToolStripMenuItem.Checked = Properties.Settings.Default.LocalSRsVisible;
@@ -1677,6 +1670,9 @@ namespace XenAdmin
             conversionToolStripMenuItem.Available = conn != null && conn.Cache.VMs.Any(v => v.IsConversionVM());
             installToolsToolStripMenuItem.Available = SelectionManager.Selection.Any(v => !Helpers.StockholmOrGreater(v.Connection));
             toolStripMenuItemInstallCertificate.Available = Helpers.StockholmOrGreater(conn);
+            toolStripMenuItemRotateSecret.Available = SelectionManager.Selection.Any(s =>
+                s.Connection != null && Helpers.StockholmOrGreater(s.Connection) &&
+                !s.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation));
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)

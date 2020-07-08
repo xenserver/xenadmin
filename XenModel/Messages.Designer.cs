@@ -32810,6 +32810,53 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot rotate the pool secret when HA is on..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_HA {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotate &amp;Pool Secret.
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_MENU {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to rotate the pool secret. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_RBAC_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot rotate the pool secret when a Rolling Pool Upgrade is in progress..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_RPU {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_RPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotating pool secret.
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_TITLE {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} could be skipped..
         /// </summary>
         public static string RPU_WIZARD_ERROR_SKIP_MSG {

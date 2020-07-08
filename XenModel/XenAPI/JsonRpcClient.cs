@@ -1838,6 +1838,20 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.remove_from_guest_agent_config", new JArray(session, _pool ?? "", _key ?? ""), serializer);
         }
 
+        public void pool_rotate_secret(string session)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.rotate_secret", new JArray(session), serializer);
+        }
+
+        public XenRef<Task> async_pool_rotate_secret(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.rotate_secret", new JArray(session), serializer);
+        }
+
         public List<XenRef<Pool>> pool_get_all(string session)
         {
             var converters = new List<JsonConverter> {new XenRefListConverter<Pool>()};

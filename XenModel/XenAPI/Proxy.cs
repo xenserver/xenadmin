@@ -1070,6 +1070,14 @@ namespace XenAPI
         Response<string>
         async_pool_remove_from_guest_agent_config(string session, string _pool, string _key);
 
+        [XmlRpcMethod("pool.rotate_secret")]
+        Response<string>
+        pool_rotate_secret(string session);
+
+        [XmlRpcMethod("Async.pool.rotate_secret")]
+        Response<string>
+        async_pool_rotate_secret(string session);
+
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
         pool_get_all(string session);
