@@ -180,6 +180,7 @@ namespace XenAdmin
             this.backupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.restoreFromBackupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemInstallCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.maintenanceModeToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.controlDomainMemoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.RemoveCrashdumpsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -277,12 +278,12 @@ namespace XenAdmin
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripMenuItemInstallCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripMenuItemRotateSecret = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -927,6 +928,7 @@ namespace XenAdmin
             this.conversionToolStripMenuItem,
             this.toolStripSeparator9,
             this.changePoolPasswordToolStripMenuItem,
+            this.toolStripMenuItemRotateSecret,
             this.toolStripMenuItem1,
             this.deleteToolStripMenuItem,
             this.toolStripSeparator26,
@@ -1233,6 +1235,12 @@ namespace XenAdmin
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
             resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
+            // 
+            // toolStripMenuItemInstallCertificate
+            // 
+            this.toolStripMenuItemInstallCertificate.Command = new XenAdmin.Commands.InstallCertificateCommand();
+            this.toolStripMenuItemInstallCertificate.Name = "toolStripMenuItemInstallCertificate";
+            resources.ApplyResources(this.toolStripMenuItemInstallCertificate, "toolStripMenuItemInstallCertificate");
             // 
             // maintenanceModeToolStripMenuItem1
             // 
@@ -1890,14 +1898,6 @@ namespace XenAdmin
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.ShowItemToolTips = true;
             // 
-            // statusLabel
-            // 
-            this.statusLabel.AutoToolTip = true;
-            resources.ApplyResources(this.statusLabel, "statusLabel");
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.statusLabel.Spring = true;
-            // 
             // statusProgressBar
             // 
             resources.ApplyResources(this.statusProgressBar, "statusProgressBar");
@@ -1905,11 +1905,13 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
-            // toolStripMenuItemInstallCertificate
+            // statusLabel
             // 
-            this.toolStripMenuItemInstallCertificate.Command = new XenAdmin.Commands.InstallCertificateCommand();
-            this.toolStripMenuItemInstallCertificate.Name = "toolStripMenuItemInstallCertificate";
-            resources.ApplyResources(this.toolStripMenuItemInstallCertificate, "toolStripMenuItemInstallCertificate");
+            this.statusLabel.AutoToolTip = true;
+            resources.ApplyResources(this.statusLabel, "statusLabel");
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.statusLabel.Spring = true;
             // 
             // statusLabelAlerts
             // 
@@ -1946,6 +1948,12 @@ namespace XenAdmin
             resources.ApplyResources(this.statusLabelErrors, "statusLabelErrors");
             this.statusLabelErrors.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelErrors.Click += new System.EventHandler(this.statusLabelErrors_Click);
+            // 
+            // toolStripMenuItemRotateSecret
+            // 
+            this.toolStripMenuItemRotateSecret.Name = "toolStripMenuItemRotateSecret";
+            this.toolStripMenuItemRotateSecret.Command = new XenAdmin.Commands.RotatePoolSecretCommand();
+            resources.ApplyResources(this.toolStripMenuItemRotateSecret, "toolStripMenuItemRotateSecret");
             // 
             // MainWindow
             // 
@@ -2222,6 +2230,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripStatusLabel statusLabelAlerts;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelUpdates;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelErrors;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemRotateSecret;
     }
 
 }

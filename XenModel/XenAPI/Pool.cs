@@ -2715,6 +2715,32 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// 
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static void rotate_secret(Session session)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_rotate_secret(session.opaque_ref);
+            else
+                session.XmlRpcProxy.pool_rotate_secret(session.opaque_ref).parse();
+        }
+
+        /// <summary>
+        /// 
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static XenRef<Task> async_rotate_secret(Session session)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_rotate_secret(session.opaque_ref);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_rotate_secret(session.opaque_ref).parse());
+        }
+
+        /// <summary>
         /// Return a list of all the pools known to the system.
         /// First published in XenServer 4.0.
         /// </summary>

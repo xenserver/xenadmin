@@ -11385,6 +11385,23 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="ROLLING_UPGRADE_WARNING_ONE" xml:space="preserve">
     <value>The rolling pool upgrade process was completed with warnings.</value>
   </data>
+  <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
+    <value>You cannot rotate the pool secret when HA is on.</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
+    <value>Rotate &amp;Pool Secret</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_RBAC_RESTRICTION" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to rotate the pool secret. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_RPU" xml:space="preserve">
+    <value>You cannot rotate the pool secret when a Rolling Pool Upgrade is in progress.</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_TITLE" xml:space="preserve">
+    <value>Rotating pool secret</value>
+  </data>
   <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
     <value>{0} could be skipped.</value>
   </data>
