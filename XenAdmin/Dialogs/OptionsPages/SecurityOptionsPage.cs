@@ -29,12 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Properties;
 using XenAdmin.Core;
@@ -62,6 +57,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                                                  Registry.SSLCertificateTypes != SSLCertificateTypes.None;
             CertificateFoundCheckBox.Enabled = Registry.SSLCertificateTypes != SSLCertificateTypes.All;
             CertificateChangedCheckBox.Enabled = Registry.SSLCertificateTypes == SSLCertificateTypes.None;
+
+            checkBoxReminder.Checked = Properties.Settings.Default.RemindChangePassword;
         }
 
         public static void Log()
@@ -69,6 +66,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             // SSL Certificates
             log.Info("=== WarnUnrecognizedCertificate: " + Properties.Settings.Default.WarnUnrecognizedCertificate.ToString());
             log.Info("=== WarnChangedCertificate: " + Properties.Settings.Default.WarnChangedCertificate.ToString());
+            log.Info("=== RemindChangePassword: " + Properties.Settings.Default.RemindChangePassword.ToString());
         }
 
         #region IOptionsPage Members
@@ -80,6 +78,9 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.WarnUnrecognizedCertificate = CertificateFoundCheckBox.Checked;
             if (CertificateChangedCheckBox.Enabled && CertificateChangedCheckBox.Checked != Properties.Settings.Default.WarnChangedCertificate)
                 Properties.Settings.Default.WarnChangedCertificate = CertificateChangedCheckBox.Checked;
+
+            if (Properties.Settings.Default.RemindChangePassword != checkBoxReminder.Checked)
+                Properties.Settings.Default.RemindChangePassword = checkBoxReminder.Checked;
         }
 
         #endregion

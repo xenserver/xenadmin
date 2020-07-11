@@ -802,27 +802,48 @@ namespace XenAdmin.TabPages
             if (!ButtonRemove.Enabled)
                 return;
 
-            List<Subject> subjectsToRemove = new List<Subject>();
-            foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
-                subjectsToRemove.Add(r.subject);
+            var subjectsToRemove = GridViewSubjectList.SelectedRows.Cast<AdSubjectRow>().Select(r => r.subject).ToList();
+            if (subjectsToRemove.Count < 1)
+                return;
 
             var removeMessage = subjectsToRemove.Count == 1
                 ? string.Format(Messages.QUESTION_REMOVE_AD_USER_ONE, subjectsToRemove[0].DisplayName ?? subjectsToRemove[0].SubjectName)
                 : string.Format(Messages.QUESTION_REMOVE_AD_USER_MANY, subjectsToRemove.Count);
 
-            DialogResult questionDialog;
-            using (var dlg = new NoIconDialog(removeMessage,
+            string adminMessage = null;
+            var conn = subjectsToRemove.FirstOrDefault(s => s.Connection != null)?.Connection;
+
+            if (conn != null && Helpers.StockholmOrGreater(conn) && !conn.Cache.Hosts.Any(Host.RestrictPoolSecretRotation))
+            {
+                var poolAdminsToRemove = (from Subject s in subjectsToRemove
+                    let roles = s.Connection.ResolveAll(s.roles)
+                    where roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)
+                    select s).ToList();
+
+                if (subjectsToRemove.Count == poolAdminsToRemove.Count)
+                    adminMessage = poolAdminsToRemove.Count == 1
+                        ? Messages.QUESTION_ADMIN_EXIT_PROCEDURE_ONE
+                        : Messages.QUESTION_ADMIN_EXIT_PROCEDURE_MANY;
+                else if (poolAdminsToRemove.Count > 0)
+                    adminMessage = poolAdminsToRemove.Count == 1
+                        ? Messages.QUESTION_ADMIN_EXIT_PROCEDURE_ONE_OF_MANY
+                        : string.Format(Messages.QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY, poolAdminsToRemove.Count);
+
+                if (!string.IsNullOrEmpty(adminMessage))
+                    removeMessage = string.Format("{0}\n\n{1} {2}", removeMessage, adminMessage, Messages.QUESTION_ADMIN_EXIT_PROCEDURE_ADVISORY);
+            }
+
+            using (var dlg = new WarningDialog(removeMessage,
                                 ThreeButtonDialog.ButtonYes,
                                 new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                                 {WindowTitle = Messages.AD_FEATURE_NAME})
             {
-                questionDialog = dlg.ShowDialog(this);
-            }
+                //CA-64818: DialogResult can be No if the No button has been hit
+                //or Cancel if the dialog has been closed from the control box
 
-            //CA-64818: DialogResult can be No if the No button has been hit
-            //or Cancel if the dialog has been closed from the control box
-            if (questionDialog != DialogResult.Yes)
-                return;
+                if (dlg.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
 
             // Warn if user is revoking his currently-in-use credentials
             Session session = _connection.Session;
@@ -1029,26 +1050,20 @@ namespace XenAdmin.TabPages
                     InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                     dlg.ShowDialog(this);
                 return;
-
             }
-
 
             // Double check, this method is called from a context menu as well and the state could have changed under it
             if (!ButtonChangeRoles.Enabled)
                 return;
 
-            List<Subject> selectedSubjects = new List<Subject>();
-            foreach (DataGridViewRow r in GridViewSubjectList.SelectedRows)
-            {
-                AdSubjectRow selectedRow = (AdSubjectRow)r;
-                // Should not be here, you can't change the root man!
-                if (selectedRow.IsLocalRootRow)
-                    continue;
-                selectedSubjects.Add(selectedRow.subject);
-            }
+            var selectedSubjects = GridViewSubjectList.SelectedRows.Cast<AdSubjectRow>().Where(r => !r.IsLocalRootRow).Select(r => r.subject).ToList();
 
-            using (var dialog = new RoleSelectionDialog(_connection, selectedSubjects.ToArray()))
-                dialog.ShowDialog(this);
+            using (var dialog = new RoleSelectionDialog(_connection, selectedSubjects))
+                if (dialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    foreach (Subject s in selectedSubjects)
+                        new AddRemoveRolesAction(_connection, s, dialog.SelectedRoles).RunAsync();
+                }
         }
 
         private void ButtonLogout_Click(object sender, EventArgs e)

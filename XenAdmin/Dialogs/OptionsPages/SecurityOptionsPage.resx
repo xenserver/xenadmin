@@ -128,115 +128,10 @@
   <data name="SecurityTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="SSLTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SSLTableLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="SSLTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="CertificateChangedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CertificateChangedCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="CertificateChangedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CertificateChangedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
-  </data>
-  <data name="CertificateChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 17</value>
-  </data>
-  <data name="CertificateChangedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="CertificateChangedCheckBox.Text" xml:space="preserve">
-    <value>Warn me when a certificate ch&amp;anges</value>
-  </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.Name" xml:space="preserve">
-    <value>CertificateChangedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.Parent" xml:space="preserve">
-    <value>SSLTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="CertificateFoundCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CertificateFoundCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="CertificateFoundCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CertificateFoundCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="CertificateFoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 17</value>
-  </data>
-  <data name="CertificateFoundCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="CertificateFoundCheckBox.Text" xml:space="preserve">
-    <value>Warn me when a &amp;new certificate is found</value>
-  </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.Name" xml:space="preserve">
-    <value>CertificateFoundCheckBox</value>
-  </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.Parent" xml:space="preserve">
-    <value>SSLTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SSLTableLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="SSLTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 41</value>
-  </data>
-  <data name="SSLTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="SSLTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 46</value>
-  </data>
-  <data name="SSLTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.Name" xml:space="preserve">
-    <value>SSLTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.Parent" xml:space="preserve">
-    <value>SecurityTableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="SSLTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="CertificateChangedCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CertificateFoundCheckBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
   <data name="SSLLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="SSLLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
@@ -268,7 +163,130 @@
     <value>SecurityTableLayoutPanel</value>
   </data>
   <data name="&gt;&gt;SSLLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CertificateFoundCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CertificateFoundCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="CertificateFoundCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CertificateFoundCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 41</value>
+  </data>
+  <data name="CertificateFoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 17</value>
+  </data>
+  <data name="CertificateFoundCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="CertificateFoundCheckBox.Text" xml:space="preserve">
+    <value>Warn me when a &amp;new certificate is found</value>
+  </data>
+  <data name="&gt;&gt;CertificateFoundCheckBox.Name" xml:space="preserve">
+    <value>CertificateFoundCheckBox</value>
+  </data>
+  <data name="&gt;&gt;CertificateFoundCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CertificateFoundCheckBox.Parent" xml:space="preserve">
+    <value>SecurityTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;CertificateFoundCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CertificateChangedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CertificateChangedCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="CertificateChangedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CertificateChangedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 64</value>
+  </data>
+  <data name="CertificateChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 17</value>
+  </data>
+  <data name="CertificateChangedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="CertificateChangedCheckBox.Text" xml:space="preserve">
+    <value>Warn me when a certificate ch&amp;anges</value>
+  </data>
+  <data name="&gt;&gt;CertificateChangedCheckBox.Name" xml:space="preserve">
+    <value>CertificateChangedCheckBox</value>
+  </data>
+  <data name="&gt;&gt;CertificateChangedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CertificateChangedCheckBox.Parent" xml:space="preserve">
+    <value>SecurityTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;CertificateChangedCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelReminder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelReminder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 104</value>
+  </data>
+  <data name="labelReminder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 20, 3, 12</value>
+  </data>
+  <data name="labelReminder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 26</value>
+  </data>
+  <data name="labelReminder.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelReminder.Text" xml:space="preserve">
+    <value>You can configure [XenCenter] to display a reminder for changing the server root password whenever you rotate the pool secret.</value>
+  </data>
+  <data name="&gt;&gt;labelReminder.Name" xml:space="preserve">
+    <value>labelReminder</value>
+  </data>
+  <data name="&gt;&gt;labelReminder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReminder.Parent" xml:space="preserve">
+    <value>SecurityTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;labelReminder.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="checkBoxReminder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxReminder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 145</value>
+  </data>
+  <data name="checkBoxReminder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 17</value>
+  </data>
+  <data name="checkBoxReminder.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="checkBoxReminder.Text" xml:space="preserve">
+    <value>&amp;Remind me to change the server root password when I rotate the pool secret</value>
+  </data>
+  <data name="&gt;&gt;checkBoxReminder.Name" xml:space="preserve">
+    <value>checkBoxReminder</value>
+  </data>
+  <data name="&gt;&gt;checkBoxReminder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxReminder.Parent" xml:space="preserve">
+    <value>SecurityTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;checkBoxReminder.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="SecurityTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -280,13 +298,13 @@
     <value>0, 0</value>
   </data>
   <data name="SecurityTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="SecurityTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>511, 251</value>
   </data>
   <data name="SecurityTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;SecurityTableLayoutPanel.Name" xml:space="preserve">
     <value>SecurityTableLayoutPanel</value>
@@ -301,7 +319,7 @@
     <value>0</value>
   </data>
   <data name="SecurityTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="SSLTableLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SSLLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="SSLLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CertificateFoundCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CertificateChangedCheckBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelReminder" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="checkBoxReminder" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

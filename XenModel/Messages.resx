@@ -1545,10 +1545,10 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Adding/removing users from Active Directory ACL on '{0}'</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES" xml:space="preserve">
-    <value>Adding/removing roles from subject</value>
+    <value>Assigning new roles to subject</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES_ON" xml:space="preserve">
-    <value>Adding/removing roles from subject '{0}'</value>
+    <value>Assigning new roles to subject '{0}'</value>
   </data>
   <data name="AD_ALWAYS_GRANTED_ACCESS" xml:space="preserve">
     <value>(Always granted access)</value>
@@ -2598,9 +2598,6 @@ This will cancel compilation of the status report.</value>
   </data>
   <data name="CHANGEPASS_DIALOG_TITLE" xml:space="preserve">
     <value>Change Server Password - {0}</value>
-  </data>
-  <data name="CHANGEPASS_ROOT_PASS" xml:space="preserve">
-    <value>Please type the root password for '{0}':</value>
   </data>
   <data name="CHANGE_POLICY_STATUS" xml:space="preserve">
     <value>Change policy '{0}' status</value>
@@ -10852,28 +10849,32 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="QUERY_PERCENT_OF_CPUS" xml:space="preserve">
     <value>{0}% of {1} CPUs</value>
   </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_ADVISORY" xml:space="preserve">
+    <value>To reduce the risk of unauthorized access to your system, it is recommended that you also change the server root password and rotate the pool secret.</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_MANY" xml:space="preserve">
+    <value>The users you are about to remove are Pool Administrators.</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_ONE" xml:space="preserve">
+    <value>The user you are about to remove is a Pool Administrator.</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_ONE_OF_MANY" xml:space="preserve">
+    <value>One of the users you are about to remove is a Pool Administrator.</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY" xml:space="preserve">
+    <value>{0} of the users you are about to remove are Pool Administrators.</value>
+  </data>
   <data name="QUESTION_LOGOUT_AD_USER_MANY" xml:space="preserve">
-    <value>You are about to log out {0} users.
-
-Do you want to continue?</value>
+    <value>Are you sure you want to log out these {0} users?</value>
   </data>
   <data name="QUESTION_LOGOUT_AD_USER_ONE" xml:space="preserve">
-    <value>You are about to log out the user '{0}'.
-
-Do you want to continue?</value>
-  </data>
-  <data name="QUESTION_MARK" xml:space="preserve">
-    <value>?</value>
+    <value>Are you sure you want to log out the user '{0}'?</value>
   </data>
   <data name="QUESTION_REMOVE_AD_USER_MANY" xml:space="preserve">
-    <value>You are about to remove {0} users.
-
-Do you want to continue?</value>
+    <value>Are you sure you want to remove these {0} users?</value>
   </data>
   <data name="QUESTION_REMOVE_AD_USER_ONE" xml:space="preserve">
-    <value>You are about to remove the user '{0}'.
-
-Do you want to continue?</value>
+    <value>Are you sure you want to remove the user '{0}'?</value>
   </data>
   <data name="QUIESCED_SNAPSHOTS" xml:space="preserve">
     <value>Quiesced snapshots</value>
@@ -11395,6 +11396,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>A {0} user does not have sufficient permissions to rotate the pool secret. Please login using an account with one of the following roles:
 
 {1}</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_REMIND_CHANGE_PASSWORD" xml:space="preserve">
+    <value>To reduce the risk of unauthorized access to your system, it is recommended that you also change the server root password.</value>
   </data>
   <data name="ROTATE_POOL_SECRET_RPU" xml:space="preserve">
     <value>You cannot rotate the pool secret when a Rolling Pool Upgrade is in progress.</value>

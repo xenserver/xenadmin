@@ -30,27 +30,23 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityOptionsPage));
             this.SecurityTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.SSLTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CertificateChangedCheckBox = new System.Windows.Forms.CheckBox();
             this.CertificateFoundCheckBox = new System.Windows.Forms.CheckBox();
             this.SSLLabel = new System.Windows.Forms.Label();
+            this.labelReminder = new System.Windows.Forms.Label();
+            this.checkBoxReminder = new System.Windows.Forms.CheckBox();
             this.SecurityTableLayoutPanel.SuspendLayout();
-            this.SSLTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SecurityTableLayoutPanel
             // 
             resources.ApplyResources(this.SecurityTableLayoutPanel, "SecurityTableLayoutPanel");
-            this.SecurityTableLayoutPanel.Controls.Add(this.SSLTableLayoutPanel, 0, 1);
             this.SecurityTableLayoutPanel.Controls.Add(this.SSLLabel, 0, 0);
+            this.SecurityTableLayoutPanel.Controls.Add(this.CertificateFoundCheckBox, 0, 1);
+            this.SecurityTableLayoutPanel.Controls.Add(this.CertificateChangedCheckBox, 0, 2);
+            this.SecurityTableLayoutPanel.Controls.Add(this.labelReminder, 0, 3);
+            this.SecurityTableLayoutPanel.Controls.Add(this.checkBoxReminder, 0, 4);
             this.SecurityTableLayoutPanel.Name = "SecurityTableLayoutPanel";
-            // 
-            // SSLTableLayoutPanel
-            // 
-            resources.ApplyResources(this.SSLTableLayoutPanel, "SSLTableLayoutPanel");
-            this.SSLTableLayoutPanel.Controls.Add(this.CertificateChangedCheckBox, 0, 1);
-            this.SSLTableLayoutPanel.Controls.Add(this.CertificateFoundCheckBox, 0, 0);
-            this.SSLTableLayoutPanel.Name = "SSLTableLayoutPanel";
             // 
             // CertificateChangedCheckBox
             // 
@@ -69,6 +65,17 @@ namespace XenAdmin.Dialogs.OptionsPages
             resources.ApplyResources(this.SSLLabel, "SSLLabel");
             this.SSLLabel.Name = "SSLLabel";
             // 
+            // labelReminder
+            // 
+            resources.ApplyResources(this.labelReminder, "labelReminder");
+            this.labelReminder.Name = "labelReminder";
+            // 
+            // checkBoxReminder
+            // 
+            resources.ApplyResources(this.checkBoxReminder, "checkBoxReminder");
+            this.checkBoxReminder.Name = "checkBoxReminder";
+            this.checkBoxReminder.UseVisualStyleBackColor = true;
+            // 
             // SecurityOptionsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -77,8 +84,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.Name = "SecurityOptionsPage";
             this.SecurityTableLayoutPanel.ResumeLayout(false);
             this.SecurityTableLayoutPanel.PerformLayout();
-            this.SSLTableLayoutPanel.ResumeLayout(false);
-            this.SSLTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,8 +93,9 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private System.Windows.Forms.TableLayoutPanel SecurityTableLayoutPanel;
         private System.Windows.Forms.Label SSLLabel;
-        private System.Windows.Forms.TableLayoutPanel SSLTableLayoutPanel;
         private System.Windows.Forms.CheckBox CertificateChangedCheckBox;
         private System.Windows.Forms.CheckBox CertificateFoundCheckBox;
+        private System.Windows.Forms.Label labelReminder;
+        private System.Windows.Forms.CheckBox checkBoxReminder;
     }
 }

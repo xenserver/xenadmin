@@ -60,6 +60,14 @@ namespace XenAdmin.Commands
                 return;
             }
 
+            if (Properties.Settings.Default.RemindChangePassword)
+                using (var dlg = new InformationDialog(Messages.ROTATE_POOL_SECRET_REMIND_CHANGE_PASSWORD)
+                    {ShowCheckbox = true, CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE})
+                {
+                    dlg.ShowDialog(Parent);
+                    Properties.Settings.Default.RemindChangePassword = !dlg.IsCheckBoxChecked;
+                }
+
             new DelegatedAsyncAction(connection, Messages.ROTATE_POOL_SECRET_TITLE,
                 Messages.ROTATE_POOL_SECRET_TITLE, Messages.COMPLETED,
                 Pool.rotate_secret, "pool.rotate_secret").RunAsync();
