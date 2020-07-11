@@ -31,6 +31,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -45,27 +46,19 @@ namespace XenAdmin.Dialogs
         private readonly Pool pool;
 
         public ChangeServerPasswordDialog(Host host)
+            : base(host.Connection)
         {
             InitializeComponent();
-            
             this.host = host;
-
             host.PropertyChanged += Server_PropertyChanged;
-
-            UpdateText();
-            UpdateButtons();
         }
 
         public ChangeServerPasswordDialog(Pool pool)
+            : base(pool.Connection)
         {
             InitializeComponent();
-
             this.pool = pool;
-
             pool.PropertyChanged += Server_PropertyChanged;
-
-            UpdateText();
-            UpdateButtons();
         }
 
         private void Server_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -91,15 +84,12 @@ namespace XenAdmin.Dialogs
             if (pool != null)
                 name = pool.Name();
 
-            this.Text = string.Format(Messages.CHANGEPASS_DIALOG_TITLE, name.Ellipsise(30));
-            ServerNameLabel.Text = string.Format(Messages.CHANGEPASS_ROOT_PASS, name.Ellipsise(30));
+            Text = string.Format(Messages.CHANGEPASS_DIALOG_TITLE, name.Ellipsise(30));
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            bool isOldPasswordCorrect = (host == null)
-                    ? oldPassBox.Text == pool.Connection.Password
-                    : oldPassBox.Text == host.Connection.Password;
+            bool isOldPasswordCorrect = connection != null && oldPassBox.Text == connection.Password;
 
             // Check old password was correct
             if (!isOldPasswordCorrect)
@@ -119,10 +109,7 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            ChangeHostPasswordAction action = (host == null)
-                    ? new ChangeHostPasswordAction(pool.Connection, oldPassBox.Text.ToCharArray(), newPassBox.Text.ToCharArray())
-                    : new ChangeHostPasswordAction(host.Connection, oldPassBox.Text.ToCharArray(), newPassBox.Text.ToCharArray());
-            action.RunAsync();
+            new ChangeHostPasswordAction(connection, oldPassBox.Text.ToCharArray(), newPassBox.Text.ToCharArray()).RunAsync();
 
             DialogResult = DialogResult.OK;
             Close();
@@ -132,6 +119,15 @@ namespace XenAdmin.Dialogs
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            tableLayoutPanel3.Visible = connection != null && Helpers.StockholmOrGreater(connection) &&
+                                        !connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation);
+            UpdateText();
+            UpdateButtons();
         }
 
         protected override void OnClosing(CancelEventArgs e)

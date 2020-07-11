@@ -29,13 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Network;
-using XenAPI;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -58,72 +54,38 @@ namespace XenAdmin.Commands
         {
         }
 
-        public ChangeHostPasswordCommand(IMainWindow mainWindow, Host host)
-            : base(mainWindow, host)
-        {
-        }
-
-        public ChangeHostPasswordCommand(IMainWindow mainWindow, Pool pool)
-            : base(mainWindow, pool)
-        {
-        }
-
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            Host host = selection[0].XenObject as Host;
-            Pool pool = selection[0].XenObject as Pool;
-
-            if (host != null)
-                MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new ChangeServerPasswordDialog(host));
-            if (pool != null)
-                MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new ChangeServerPasswordDialog(pool));
+            if (selection[0].XenObject is Host host)
+                MainWindowCommandInterface.ShowPerConnectionWizard(host.Connection, new ChangeServerPasswordDialog(host));
+            else if (selection[0].XenObject is Pool pool)
+                MainWindowCommandInterface.ShowPerConnectionWizard(pool.Connection, new ChangeServerPasswordDialog(pool));
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
+            // Only allow password change if the user is logged in as local root
+            // (i.e. disallow password change if the user is logged in via AD)
+
             if (selection.Count == 1)
             {
-                IXenConnection connection = selection[0].Connection;
-                Host host = selection[0].XenObject as Host;
-                Pool pool = selection[0].XenObject as Pool;
-                Session session = connection != null ? connection.Session : null;
+                var session = selection[0].Connection?.Session;
 
-                if (host != null)
-                    return host.IsLive() && session != null && session.IsLocalSuperuser;
-                if (pool != null)
-                    return  session != null && session.IsLocalSuperuser;                
+                if (session != null && session.IsLocalSuperuser)
+                    return selection[0].XenObject is Host host && host.IsLive() || selection[0].XenObject is Pool;
             }
+
             return false;
         }
 
-        public override string ToolTipText
+        protected override string GetCantExecuteReasonCore(IXenObject item)
         {
-            get
-            {
-                ReadOnlyCollection<SelectedItem> selection = GetSelection();
+            var session = item.Connection?.Session;
 
-                if (selection.Count == 1)
-                {
-                    IXenConnection connection = selection[0].Connection;
-
-                    // Only allow password change if the user is logged in as local root
-                    // (i.e. disallow password change if the user is logged in via AD)
-
-                    Host host = selection[0].XenObject as Host;
-                    Pool pool = selection[0].XenObject as Pool;
-
-                    if (host != null && host.IsLive() && connection.Session != null && !connection.Session.IsLocalSuperuser)
-                    {
-                        return Messages.AD_CANNOT_CHANGE_PASSWORD;
-                    }
-                    
-                    if (pool != null && connection.Session != null && !connection.Session.IsLocalSuperuser)
-                    {
-                        return Messages.AD_CANNOT_CHANGE_PASSWORD;
-                    }                   
-                }
-                return string.Empty;
-            }
+            if (session != null && !session.IsLocalSuperuser && (item is Host host && host.IsLive() || item is Pool))
+                return Messages.AD_CANNOT_CHANGE_PASSWORD;
+            
+            return base.GetCantExecuteReasonCore(item);
         }
     }
 }

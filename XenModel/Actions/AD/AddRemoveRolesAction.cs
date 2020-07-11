@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -41,11 +42,10 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<Role> toAdd;
-        private readonly List<Role> toRemove;
+        private readonly List<Role> _newRoles;
         private readonly Subject subject;
 
-        public AddRemoveRolesAction(IXenConnection connection, Subject subject, List<Role> toAdd, List<Role> toRemove)
+        public AddRemoveRolesAction(IXenConnection connection, Subject subject, List<Role> newRoles)
             : base(connection,
                 string.Format(Messages.AD_ADDING_REMOVING_ROLES_ON, (subject.DisplayName ?? subject.SubjectName ?? subject.subject_identifier).Ellipsise(50)),
                 Messages.AD_ADDING_REMOVING_ROLES,
@@ -56,32 +56,40 @@ namespace XenAdmin.Actions
                 Pool = pool;
             else
                 Host = Helpers.GetMaster(connection);
-            this.toAdd = toAdd;
-            this.toRemove = toRemove;
+
+            _newRoles = newRoles;
             this.subject = subject;
         }
 
         protected override void Run()
         {
+            var serverRoles = Connection.Cache.Roles.Where(r => r.subroles.Count > 0).ToList();
+
+            var toAdd = serverRoles.Where(role => _newRoles.Contains(role) &&
+                                                  !subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
+
+            var toRemove = serverRoles.Where(role => !_newRoles.Contains(role) &&
+                                                     subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
+
             int count = toAdd.Count + toRemove.Count;
             int done = 0;
             var subj = subject.DisplayName ?? subject.SubjectName ?? subject.subject_identifier;
 
-            log.DebugFormat("Adding {0} roles on subject '{1}'.", toAdd.Count, subj);
             foreach (Role r in toAdd)
             {
+                log.DebugFormat("Adding role {0} to subject '{1}'.", r.FriendlyName(), subj);
                 Subject.add_to_roles(Session, subject.opaque_ref, r.opaque_ref);
-                done++;
-                PercentComplete = (100 * done) / count;  
+                PercentComplete = 100 * ++done / count;
             }
 
-            log.DebugFormat("Removing {0} roles on subject '{1}'.", toRemove.Count, subj);
             foreach (Role r in toRemove)
             {
+                log.DebugFormat("Removing role {0} from subject '{1}'.", r.FriendlyName(), subj);
                 Subject.remove_from_roles(Session, subject.opaque_ref, r.opaque_ref);
                 done++;
-                PercentComplete = (100 * done) / count;
+                PercentComplete = 100 * ++done / count;
             }
+
             Description = Messages.COMPLETED;
         }
     }
