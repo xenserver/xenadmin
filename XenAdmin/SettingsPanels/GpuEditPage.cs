@@ -269,14 +269,6 @@ namespace XenAdmin.SettingsPanels
                 labelNeedDriver.Visible = imgNeedDriver.Visible = vGpus.Count > 0;
         }
 
-        private void warningsTable_SizeChanged(object sender, EventArgs e)
-        {
-            int[] columnsWidth = warningsTable.GetColumnWidths();
-            int textColumnWidth = columnsWidth.Length > 1 ? columnsWidth[1] : 1;
-
-            labelRDP.MaximumSize = labelStopVM.MaximumSize = new Size(textColumnWidth, 999);
-        }
-
         private void addButton_Click(object sender, EventArgs e)
         {
             using (var dialog = new AddVGPUDialog(vm, VGpus))
@@ -321,8 +313,6 @@ namespace XenAdmin.SettingsPanels
         private readonly DataGridViewTextBoxCell deviceColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell nameColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell vGpusPerGpuColumn = new DataGridViewTextBoxCell();
-        private readonly DataGridViewTextBoxCell maxResolutionColumn = new DataGridViewTextBoxCell();
-        private readonly DataGridViewTextBoxCell maxDisplaysColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell videoRamColumn = new DataGridViewTextBoxCell();
         // Xapi reserves device numbers [0,20] for vGPU for backwards compatibility.
         // The guest PCI bus slots lie within [11,31], hence XenCenter needs to
@@ -336,7 +326,7 @@ namespace XenAdmin.SettingsPanels
             VGpu = vGpu;
 
             SetCells();
-            Cells.AddRange(deviceColumn, nameColumn, vGpusPerGpuColumn, maxResolutionColumn, maxDisplaysColumn, videoRamColumn);
+            Cells.AddRange(deviceColumn, nameColumn, vGpusPerGpuColumn, videoRamColumn);
         }
 
         private void SetCells()
@@ -359,17 +349,6 @@ namespace XenAdmin.SettingsPanels
                 vGpusPerGpuColumn.Value = vGpuType.Capacity();
             else
                 vGpusPerGpuColumn.Value = string.Empty;
-
-            if (!isPassThru)
-            {
-                var maxRes = vGpuType.MaxResolution();
-                maxResolutionColumn.Value = maxRes == "0x0" || String.IsNullOrEmpty(maxRes) ? "" : maxRes;
-            }
-
-            if (!isPassThru)
-                maxDisplaysColumn.Value = vGpuType.max_heads < 1 ? "" : String.Format("{0}", vGpuType.max_heads);
-            else
-                maxDisplaysColumn.Value = string.Empty;
 
             videoRamColumn.Value = vGpuType.framebuffer_size != 0 ? Util.MemorySizeStringSuitableUnits(vGpuType.framebuffer_size, true) : string.Empty;
         }
