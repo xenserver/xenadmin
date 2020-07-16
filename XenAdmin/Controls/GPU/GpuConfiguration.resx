@@ -216,30 +216,6 @@
   <data name="VGPUsPerGPUColumn.Width" type="System.Int32, mscorlib">
     <value>124</value>
   </data>
-  <metadata name="MaxResolutionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MaxResolutionColumn.HeaderText" xml:space="preserve">
-    <value>Max resolution</value>
-  </data>
-  <data name="MaxResolutionColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="MaxResolutionColumn.Width" type="System.Int32, mscorlib">
-    <value>91</value>
-  </data>
-  <metadata name="MaxDisplaysColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MaxDisplaysColumn.HeaderText" xml:space="preserve">
-    <value>Max displays</value>
-  </data>
-  <data name="MaxDisplaysColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="MaxDisplaysColumn.Width" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
   <metadata name="VideoRAMColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -388,18 +364,6 @@
     <value>VGPUsPerGPUColumn</value>
   </data>
   <data name="&gt;&gt;VGPUsPerGPUColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MaxResolutionColumn.Name" xml:space="preserve">
-    <value>MaxResolutionColumn</value>
-  </data>
-  <data name="&gt;&gt;MaxResolutionColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MaxDisplaysColumn.Name" xml:space="preserve">
-    <value>MaxDisplaysColumn</value>
-  </data>
-  <data name="&gt;&gt;MaxDisplaysColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;VideoRAMColumn.Name" xml:space="preserve">

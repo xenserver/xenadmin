@@ -87,9 +87,6 @@ namespace XenAdmin.Controls.GPU
 
                     dataGridViewEx1.Rows.AddRange(rows.Cast<DataGridViewRow>().ToArray());
                 }
-
-                HideColumnIfEmpty(MaxResolutionColumn);
-                HideColumnIfEmpty(MaxDisplaysColumn);
             }
             finally
             {
@@ -141,22 +138,6 @@ namespace XenAdmin.Controls.GPU
                 ? Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE
                 : Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE;
         }
-
-        private void HideColumnIfEmpty(DataGridViewColumn column)
-        {
-            bool columnEmpty = true;
-            foreach (DataGridViewRow row in dataGridViewEx1.Rows)
-            {
-                var value = row.Cells[column.Name].Value as string;
-                if (!string.IsNullOrEmpty(value))
-                {
-                    columnEmpty = false;
-                    break;
-                }
-            }
-            if (columnEmpty)
-                column.Visible = false;
-        }
     }
 
     class VGpuDetailWithCheckBoxRow : DataGridViewExRow
@@ -173,8 +154,6 @@ namespace XenAdmin.Controls.GPU
         };
         private readonly DataGridViewTextBoxCell nameColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell vGpusPerGpuColumn = new DataGridViewTextBoxCell();
-        private readonly DataGridViewTextBoxCell maxResolutionColumn = new DataGridViewTextBoxCell();
-        private readonly DataGridViewTextBoxCell maxDisplaysColumn = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell videoRamColumn = new DataGridViewTextBoxCell();
 
         public VGPU_type VGpuType { get; }
@@ -190,7 +169,7 @@ namespace XenAdmin.Controls.GPU
             this.allowed = allowed;
             this.isInUse = isInUse;
 
-            Cells.AddRange(checkBoxCell, nameColumn, vGpusPerGpuColumn, maxResolutionColumn, maxDisplaysColumn, videoRamColumn);
+            Cells.AddRange(checkBoxCell, nameColumn, vGpusPerGpuColumn, videoRamColumn);
             SetCells();
         }
 
@@ -206,17 +185,6 @@ namespace XenAdmin.Controls.GPU
                 vGpusPerGpuColumn.Value = VGpuType.Capacity();
             else
                 vGpusPerGpuColumn.Value = string.Empty;
-
-            if (!isPassThru)
-            {
-                var maxRes = VGpuType.MaxResolution();
-                maxResolutionColumn.Value = maxRes == "0x0" || String.IsNullOrEmpty(maxRes) ? "" : maxRes;
-            }
-
-            if (!isPassThru)
-                maxDisplaysColumn.Value = VGpuType.max_heads < 1 ? "" : String.Format("{0}",VGpuType.max_heads);
-            else
-                maxDisplaysColumn.Value = string.Empty;
 
             videoRamColumn.Value = VGpuType.framebuffer_size != 0 ? Util.MemorySizeStringSuitableUnits(VGpuType.framebuffer_size, true) : string.Empty;
         }

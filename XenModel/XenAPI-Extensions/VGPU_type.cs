@@ -41,7 +41,7 @@ namespace XenAPI
             if (IsPassthrough())
                 return Messages.VGPU_PASSTHRU_TOSTRING;
 
-            return string.Format(Messages.VGPU_TOSTRING, model_name, Capacity());
+            return string.Format(Messages.VGPU_DESCRIPTION, model_name, Capacity());
         }
 
         public override string Description()
@@ -51,20 +51,9 @@ namespace XenAPI
 
             bool multipleVgpuSupport = compatible_types_in_vm.Count > 0;
 
-            var maxRes = MaxResolution();
-            if ((maxRes == "0x0" || string.IsNullOrEmpty(maxRes)) && max_heads < 1)
-                return multipleVgpuSupport ? string.Format(Messages.VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT, model_name, Capacity()) : 
-                    string.Format(Messages.VGPU_DESCRIPTION_ZEROES, model_name, Capacity());
-
-            return string.Format(max_heads == 1 ? 
-                (multipleVgpuSupport ? Messages.VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT : Messages.VGPU_DESCRIPTION_ONE) : 
-                (multipleVgpuSupport ? Messages.VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT : Messages.VGPU_DESCRIPTION_MANY),
-                model_name, Capacity(), maxRes, max_heads);
-        }
-
-        public string MaxResolution()
-        {
-            return max_resolution_x + "x" + max_resolution_y;
+            return multipleVgpuSupport
+                ? string.Format(Messages.VGPU_DESCRIPTION_MULTIPLE_VGPU_SUPPORT, model_name, Capacity())
+                : string.Format(Messages.VGPU_DESCRIPTION, model_name, Capacity());
         }
 
         #region IEquatable<VGPU_type> Members
@@ -87,6 +76,9 @@ namespace XenAPI
         // * In case of ties, highest resolution is biggest
         public override int CompareTo(VGPU_type other)
         {
+            if (other == null)
+                return 1;
+
             bool thisPassthrough = this.IsPassthrough();
             bool otherPassthrough = other.IsPassthrough();
             if (thisPassthrough != otherPassthrough)
