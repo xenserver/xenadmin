@@ -1002,22 +1002,16 @@ namespace XenAdmin.TabPages
             if (string.IsNullOrEmpty(patchUri))
                 return;
 
-            PatchingWizard wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
-            if (!wizard.IsFirstPage())
-                return;
-            wizard.NextStep();
-            wizard.AddAlert(patchAlert);
-            wizard.NextStep();
-
             var hosts = patchAlert.DistinctHosts;
+
             if (hosts.Count > 0)
-            {                          
-                wizard.SelectServers(hosts);
+            {
+                var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+                wizard.PrepareToInstallUpdate(patchAlert, hosts);
             }
             else
             {
-                string disconnectedServerNames =
-                       clickedRow.Cells[ColumnLocation.Index].Value.ToString();
+                string disconnectedServerNames = clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
                 using (var dlg = new WarningDialog(string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, disconnectedServerNames))
                     {WindowTitle = Messages.UPDATES_WIZARD})
@@ -1430,9 +1424,7 @@ namespace XenAdmin.TabPages
 
         private void toolStripButtonUpdate_Click(object sender, EventArgs e)
         {
-            PatchingWizard wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
-            if (wizard.IsFirstPage())
-                wizard.NextStep();
+            Program.MainWindow.ShowForm(typeof(PatchingWizard));
         }
     }
 }

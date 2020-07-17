@@ -2627,10 +2627,8 @@ namespace XenAdmin
         {
             if (WizardHelpers.IsValidFile(path, out var failureReason))
             {
-                var wizard = new PatchingWizard();
-                wizard.Show(this);
-                wizard.NextStep();
-                wizard.AddFile(path);
+                var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+                wizard.PrepareToInstallUpdate(path);
             }
             else
             {

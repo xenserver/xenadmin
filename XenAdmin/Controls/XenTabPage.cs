@@ -43,8 +43,6 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Controls
 {
-    public delegate void XenTabPageStatusChanged(XenTabPage sender);
-
     [Designer(typeof(ParentControlDesigner))]
     public partial class XenTabPage : UserControl, IControlWithHelp
     {
@@ -186,7 +184,7 @@ namespace XenAdmin.Controls
         /// Fired when the page is ready (or not) for the user to advance to the next page).
         /// Currently not implemented by all pages.
         /// </summary>
-        public event XenTabPageStatusChanged StatusChanged;
+        public event Action<XenTabPage> StatusChanged;
 
         /// <summary>
         /// Not always overriden in derived classes
