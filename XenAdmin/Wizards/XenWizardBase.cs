@@ -335,25 +335,19 @@ namespace XenAdmin.Wizards
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public XenTabPage CurrentStepTabPage
-        {
-            get
-            {
-                return wizardProgress.CurrentStepTabPage;
-            }
-        }
+        public XenTabPage CurrentStepTabPage => wizardProgress.CurrentStepTabPage;
 
-        public void NextStep()
+        protected void NextStep()
         {
             wizardProgress.NextStep();
         }
 
-        public void PreviousStep()
+        protected void PreviousStep()
         {
             wizardProgress.PreviousStep();
         }
 
-        public bool IsFirstPage()
+        protected bool IsFirstPage()
         {
             return wizardProgress.IsFirstStep;
         }
@@ -385,16 +379,6 @@ namespace XenAdmin.Wizards
         private void page_StatusChanged(XenTabPage sender)
         {
             UpdateWizard();
-        }
-
-        internal void DisablePage(XenTabPage wizardTabPage, bool disable)
-        {
-            foreach (XenTabPage p in wizardProgress.Steps)
-                if (p == wizardTabPage)
-                {
-                    p.DisableStep = disable;
-                    return;
-                }
         }
 
         protected virtual IEnumerable<KeyValuePair<string, string>> GetSummary()

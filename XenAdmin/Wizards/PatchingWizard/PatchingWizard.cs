@@ -86,24 +86,33 @@ namespace XenAdmin.Wizards.PatchingWizard
             AddPage(PatchingWizard_PatchingPage);
         }
 
-        public void AddAlert(XenServerPatchAlert alert)
+        public void PrepareToInstallUpdate(string path)
         {
-            PatchingWizard_SelectPatchPage.SelectDownloadAlert(alert);
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWeb = alert;
-            PatchingWizard_SelectServers.UpdateAlertFromWeb = alert;
-            PatchingWizard_PrecheckPage.UpdateAlert = alert;
-            PatchingWizard_UploadPage.SelectedUpdateAlert = alert;
-        }
+            if (!IsFirstPage())
+                return;
 
-        public void AddFile(string path)
-        {
+            //set the page before landing on it so it is populated correctly
             PatchingWizard_SelectPatchPage.FilePath = path;
+            NextStep(); //FirstPage -> SelectPatchPage
+            NextStep(); //SelectPatchPage -> SelectServers
         }
 
-        public void SelectServers(List<Host> selectedServers)
+        public void PrepareToInstallUpdate(XenServerPatchAlert alert, List<Host> hosts)
         {
-            PatchingWizard_SelectServers.SelectServers(selectedServers);
-            PatchingWizard_SelectServers.DisableUnselectedServers();
+            if (!IsFirstPage())
+                return;
+
+            //set the pages before landing on them so they are populated correctly
+            PatchingWizard_SelectPatchPage.UpdateAlertFromWeb = alert;
+            PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected +=page_UpdateAlertFromWebSelected;
+            PatchingWizard_SelectServers.SelectedServers = hosts;
+            NextStep(); //FirstPage -> SelectPatchPage
+        }
+
+        private void page_UpdateAlertFromWebSelected()
+        {
+            PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected -= page_UpdateAlertFromWebSelected;
+            NextStep(); //SelectPatchPage -> SelectServers
         }
 
         protected override void UpdateWizardContent(XenTabPage senderPage)

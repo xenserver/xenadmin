@@ -53,6 +53,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private static readonly log4net.ILog log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public event Action UpdateAlertFromWebSelected;
+
         private bool CheckForUpdatesInProgress;
         public XenServerPatchAlert UpdateAlertFromWeb;
         public XenServerPatchAlert AlertFromFileOnDisk;
@@ -135,19 +137,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
-        public void SelectDownloadAlert(XenServerPatchAlert alert)
-        {
-            downloadUpdateRadioButton.Checked = true;
-            foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
-            {
-                if (row.UpdateAlert.Equals(alert))
-                {
-                    row.Selected = true;
-                    break;
-                }
-            }
-        }
-
         public override string Text => Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TEXT;
 
         public override string PageTitle => Messages.PATCHINGWIZARD_SELECTPATCHPAGE_TITLE;
@@ -171,8 +160,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (firstLoad)
                 {
-                    AutomatedUpdatesRadioButton.Checked = automatedUpdatesPossible;
-                    downloadUpdateRadioButton.Checked = !automatedUpdatesPossible;
+                    if (automatedUpdatesPossible && UpdateAlertFromWeb == null)
+                        AutomatedUpdatesRadioButton.Checked = true;
+                    else if (!string.IsNullOrEmpty(FilePath))
+                        selectFromDiskRadioButton.Checked = true;
+                    else
+                        downloadUpdateRadioButton.Checked = true;
                 }
                 else if (!automatedUpdatesPossible && AutomatedUpdatesRadioButton.Checked)
                 {
@@ -415,6 +408,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 dataGridViewPatches.Rows.AddRange(rowList.ToArray());
+
+                if (UpdateAlertFromWeb != null)
+                {
+                    var foundRow = dataGridViewPatches.Rows.Cast<PatchGridViewRow>()
+                        .FirstOrDefault(r => r.UpdateAlert.Equals(UpdateAlertFromWeb));
+                    if (foundRow != null)
+                    {
+                        foundRow.Selected = true;
+                        UpdateAlertFromWebSelected?.Invoke();
+                    }
+                }
             }
             finally
             {
