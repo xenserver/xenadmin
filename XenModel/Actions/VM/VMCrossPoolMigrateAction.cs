@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAPI;
@@ -75,7 +76,6 @@ namespace XenAdmin.Actions.VMActions
                 return list;
             }
         }
-            
 
         public static string GetTitle(VM vm, Host toHost, bool copy)
         {
@@ -96,32 +96,66 @@ namespace XenAdmin.Actions.VMActions
             {
                 PercentComplete = 0;
                 Session session = Host.Connection.DuplicateSession();
-                Dictionary<string, string> sendData = Host.migrate_receive(session, Host.opaque_ref, 
-                                                                           transferNetwork.opaque_ref, new Dictionary<string, string>());
+                var sendData = Host.migrate_receive(session, Host.opaque_ref,
+                    transferNetwork.opaque_ref, new Dictionary<string, string>());
                 PercentComplete = 5;
-                LiveMigrateOptionsVmMapping options = new LiveMigrateOptionsVmMapping(mapping, VM);
-                var _options = new Dictionary<string, string>(options.Options);
-                if (copy)
-                    _options.Add("copy", "true");
-                RelatedTask = VM.async_migrate_send(Session, VM.opaque_ref, sendData, 
-                                                    options.Live, options.VdiMap,
-                                                    options.VifMap, _options);
+
+                var options = copy
+                    ? new Dictionary<string, string> {{"copy", "true"}}
+                    : new Dictionary<string, string>();
+
+                RelatedTask = VM.async_migrate_send(Session, VM.opaque_ref, sendData,
+                    true, GetVdiMap(mapping), GetVifMap(mapping, VM), options);
 
                 PollToCompletion(PercentComplete, 100);
             }
             catch (CancelledException)
             {
-                Description = string.Format(copy ? Messages.ACTION_VM_CROSS_POOL_COPY_CANCELLED : Messages.ACTION_VM_MIGRATE_CANCELLED, 
-                                            VM.Name());
+                Description = string.Format(copy
+                        ? Messages.ACTION_VM_CROSS_POOL_COPY_CANCELLED
+                        : Messages.ACTION_VM_MIGRATE_CANCELLED,
+                    VM.Name());
                 throw;
             }
             catch (Failure ex)
             {
                 Description = ex.Message;
-                List<string> errors = ex.ErrorDescription;
                 throw;
             }
             Description = copy ? Messages.ACTION_VM_COPIED: Messages.ACTION_VM_MIGRATED;
+        }
+
+        /// <summary>
+        /// VDI ref to SR ref Map
+        /// </summary>
+        private Dictionary<XenRef<VDI>, XenRef<SR>> GetVdiMap(VmMapping vmMap)
+        {
+            return vmMap.Storage.ToDictionary(pair => new XenRef<VDI>(pair.Key),
+                pair => new XenRef<SR>(pair.Value));
+        }
+
+        /// <summary>
+        /// VIF ref to remote Network ref
+        /// </summary>
+        private Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>> GetVifMap(VmMapping vmMap, VM vm) 
+        { 
+            var map = new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>();
+
+            //VM mapping is local network to remote network
+            foreach (var pair in vmMap.Networks)
+            {
+                var network = vm.Connection.Resolve(new XenRef<XenAPI.Network>(pair.Key));
+                if (network == null)
+                    continue;
+
+                foreach (var vifRef in network.VIFs)
+                {
+                    if (vm.VIFs.Contains(vifRef))
+                        map.Add(new XenRef<VIF>(vifRef), new XenRef<XenAPI.Network>(pair.Value.opaque_ref));
+                }
+            }
+
+            return map;
         }
     }
 }
