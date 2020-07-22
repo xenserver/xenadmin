@@ -78,24 +78,18 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 	        return true;
 	    }
 
-		/// <summary>
-		/// Gets the page's title (headline)
-		/// </summary>
-		public override string PageTitle { get { return Messages.CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE; } }
 
-        /// <summary>
-        /// Gets the page's label in the (left hand side) wizard progress panel
-        /// </summary>
-        public override string Text { get { return Messages.CPM_WIZARD_SELECT_STORAGE_PAGE_TEXT; } }
+        public override string PageTitle => Messages.CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE;
+        public override string Text => Messages.CPM_WIZARD_SELECT_STORAGE_PAGE_TEXT;
+        public override string HelpID => wizardMode == WizardMode.Copy ? "StorageCopyMode" : "Storage";
 
-        protected override string IntroductionText { get { return Messages.CPM_WIZARD_STORAGE_INSTRUCTIONS; } }
-        protected override string AllOnSameSRRadioButtonText { get { return Messages.CPM_WIZARD_ALL_ON_SAME_SR_RADIO; } }
-        protected override string OnSpecificSRRadioButtonText { get { return Messages.CPM_WIZARD_SPECIFIC_SR_RADIO; } }
+        protected override string IntroductionText => Messages.CPM_WIZARD_STORAGE_INSTRUCTIONS;
+        protected override string AllOnSameSRRadioButtonText => Messages.CPM_WIZARD_ALL_ON_SAME_SR_RADIO;
+        protected override string OnSpecificSRRadioButtonText => Messages.CPM_WIZARD_SPECIFIC_SR_RADIO;
+        protected override string VmDiskColumnHeaderText => templatesOnly
+            ? Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE
+            : Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM;
 
-        /// <summary>
-        /// Gets the value by which the help files section for this page is identified
-        /// </summary>
-        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "StorageCopyMode" : "Storage"; } }
 
         public override StorageResourceContainer ResourceData(string sysId)
         {
@@ -119,19 +113,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
         }
 
-        protected override string VmDiskColumnHeaderText
-        {
-            get
-            {
-                return templatesOnly ? Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE : Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM;
-            }
-        }
-
         /// <summary>
-        /// Add storage mappings for snapshots
+        /// Add storage mappings for snapshots and CD-ROMs
         /// </summary>
-        /// <param name="vmMappings"></param>
-        protected override void AddAditionalMappings(Dictionary<string, VmMapping> vmMappings)
+        protected override void AddAdditionalMappings(Dictionary<string, VmMapping> vmMappings)
         {
             foreach (var kvp in vmMappings)
             {
@@ -156,6 +141,26 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                         else if (suitableSr != null)
                             vmMapping.Storage[snapshotVdi.opaque_ref] = suitableSr;
                     }
+                }
+
+                if (suitableSr == null || suitableSr.Connection != vm.Connection)
+                    continue;
+
+                //CA-339584: for intra-pool migrations ensure any CDs (except guest tools)
+                //will remain in their drives
+
+                foreach (var vbdRef in vm.VBDs)
+                {
+                    var vbd = vm.Connection.Resolve(vbdRef);
+                    if (vbd == null || !vbd.IsCDROM())
+                        continue;
+
+                    var vdi = vm.Connection.Resolve(vbd.VDI);
+                    if (vdi == null || vdi.IsToolsIso())
+                        continue;
+
+                    var sr = vm.Connection.Resolve(vdi.SR);
+                    vmMapping.Storage[vdi.opaque_ref] = sr;
                 }
             }
         }

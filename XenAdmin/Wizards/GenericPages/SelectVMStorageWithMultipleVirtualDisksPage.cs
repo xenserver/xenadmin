@@ -155,7 +155,7 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
-        protected virtual void AddAditionalMappings(Dictionary<string, VmMapping> vmMappings)
+        protected virtual void AddAdditionalMappings(Dictionary<string, VmMapping> vmMappings)
         {}
 
 		#region Base class (XenTabPage) overrides
@@ -378,7 +378,7 @@ namespace XenAdmin.Wizards.GenericPages
                     }
                 }
 
-                AddAditionalMappings(m_vmMappings);
+                AddAdditionalMappings(m_vmMappings);
 
                 return m_vmMappings;
             }
@@ -390,7 +390,7 @@ namespace XenAdmin.Wizards.GenericPages
 		#region Private methods
 
         /// <summary>
-        /// Performs certain checks on the pages's input data and shows/hides an error accordingly
+        /// Performs certain checks on the page's input data and shows/hides an error accordingly
         /// </summary>
         /// <param name="checks">The checks to perform</param>
         private bool PerformCheck(params CheckDelegate[] checks)
