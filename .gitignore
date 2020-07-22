@@ -40,3 +40,5 @@ ServiceFabricBackup/
 
 .vs
 .vscode
+
+vim.exe.stackdump
