@@ -69,7 +69,7 @@ namespace XenAdmin
             }
         }
 
-        public static void InitEventHandlers()
+        public static void RegisterEventHandlers()
         {
             PoolCollectionChangedWithInvoke = InvokeHelper.InvokeHandler(CollectionChanged<Pool>);
             VMCollectionChangedWithInvoke = InvokeHelper.InvokeHandler(CollectionChanged<VM>);

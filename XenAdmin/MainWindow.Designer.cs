@@ -15,24 +15,17 @@ namespace XenAdmin
         {
             Program.Exiting = true;
 
-            XenAdmin.Core.Clip.UnregisterClipboardViewer();
-
             pluginManager.PluginsChanged -= pluginManager_PluginsChanged;
-            pluginManager.Dispose();
+            UnRegisterEvents();
 
-            OtherConfigAndTagsWatcher.DeregisterEventHandlers();
-            ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
-            XenAdmin.Alerts.Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
-            XenAdmin.Core.Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
-            ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
-            Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
-            SearchPage.SearchChanged -= SearchPanel_SearchChanged;
-
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (components != null)
+                    components.Dispose();
 
-                log.Debug("MainWindow disoposing license timer");
+                pluginManager.Dispose();
+
+                log.Debug("MainWindow disposing of license timer");
                 if (licenseTimer != null)
                     licenseTimer.Dispose();
             }
