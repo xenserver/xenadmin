@@ -70,7 +70,6 @@ namespace XenAdmin.TabPages
             InitializeComponent();
             spinner.SuccessImage = SystemIcons.Information.ToBitmap();
             tableLayoutPanel1.Visible = false;
-            UpdateButtonEnablement();
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
 
@@ -86,6 +85,8 @@ namespace XenAdmin.TabPages
             {
                 checksQueue--;
             }
+
+            UpdateButtonEnablement();
         }
 
         #region NotificationPage overrides
@@ -99,7 +100,7 @@ namespace XenAdmin.TabPages
 
         protected override void RegisterEventHandlers()
         {
-            Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
+            Updates.UpdateAlertCollectionChanged += UpdatesCollectionChanged;
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
@@ -107,7 +108,7 @@ namespace XenAdmin.TabPages
 
         protected override void DeregisterEventHandlers()
         {
-            Updates.DeregisterCollectionChanged(UpdatesCollectionChanged);
+            Updates.UpdateAlertCollectionChanged -= UpdatesCollectionChanged;
             Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
@@ -117,12 +118,12 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void UpdatesCollectionChanged(CollectionChangeEventArgs e)
         {
             switch (e.Action)
             {
-                case CollectionChangeAction.Add:
-                    Rebuild(); // rebuild entire alert list to ensure filtering and sorting
+                case CollectionChangeAction.Refresh:
+                    Rebuild();
                     break;
                 case CollectionChangeAction.Remove:
                     if (e.Element is Alert a)
@@ -422,7 +423,7 @@ namespace XenAdmin.TabPages
             {
                 // versions with no minimum patches
                 var updatesList = new List<string>();
-                var alerts = new List<Alert>(Updates.UpdateAlerts);
+                var alerts = Updates.UpdateAlerts;
                 if (alerts.Count == 0)
                     return String.Empty;
 
@@ -581,7 +582,7 @@ namespace XenAdmin.TabPages
 
                 ToggleCentreWarningVisibility();
                 
-                var updates = new List<Alert>(Updates.UpdateAlerts);
+                var updates = Updates.UpdateAlerts;
                 if (updates.Count == 0)
                     return;
 
@@ -610,7 +611,7 @@ namespace XenAdmin.TabPages
 
         private void ToggleCentreWarningVisibility()
         {
-            if (byUpdateToolStripMenuItem.Checked && Updates.UpdateAlertsCount == 0)
+            if (byUpdateToolStripMenuItem.Checked && Updates.UpdateAlerts.Count == 0)
             {
                 spinner.ShowSuccessImage();
                 labelProgress.Text =  Messages.AVAILABLE_UPDATES_NOT_FOUND;
@@ -691,7 +692,29 @@ namespace XenAdmin.TabPages
         {
             if (byUpdateToolStripMenuItem.Checked)
             {
-                toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;
+                var allAlerts = Updates.UpdateAlerts;
+                toolStripButtonExportAll.Enabled = allAlerts.Count > 0;
+
+                dismissSelectedToolStripMenuItem.Enabled = (from DataGridViewRow row in dataGridViewUpdates.SelectedRows
+                    select row.Tag as Alert).Any(a => a.AllowedToDismiss());
+
+                dismissAllToolStripMenuItem.Enabled = allAlerts.Any(a => a.AllowedToDismiss());
+                toolStripSplitButtonDismiss.Enabled = dismissAllToolStripMenuItem.Enabled || dismissSelectedToolStripMenuItem.Enabled;
+
+                if (toolStripSplitButtonDismiss.DefaultItem != null && !toolStripSplitButtonDismiss.DefaultItem.Enabled)
+                {
+                    foreach (ToolStripItem item in toolStripSplitButtonDismiss.DropDownItems)
+                    {
+                        if (item.Enabled)
+                        {
+                            toolStripSplitButtonDismiss.DefaultItem = item;
+                            toolStripSplitButtonDismiss.Text = item.Text;
+                            break;
+                        }
+                    }
+                }
+
+                ShowInformationHelper();
             }
             else
             {
@@ -700,8 +723,19 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void ShowInformationHelper(string reason)
+        private void ShowInformationHelper()
         {
+            string reason = null;
+
+            foreach (DataGridViewRow row in dataGridViewUpdates.SelectedRows)
+            {
+                if (row.Tag is XenServerPatchAlert alert)
+                {
+                    reason = alert.CannotApplyReason;
+                    break;
+                }
+            }
+
             if (string.IsNullOrEmpty(reason))
             {
                 tableLayoutPanel1.Visible = false;
@@ -758,25 +792,22 @@ namespace XenAdmin.TabPages
         {
             var items = new List<ToolStripItem>();
 
-            var patchAlert = alert as XenServerPatchAlert;
-
-            if (Alert.AllowedToDismiss(alert))
+            if (alert.AllowedToDismiss())
             {
                 var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
                 dismiss.Click += ToolStripMenuItemDismiss_Click;
                 items.Add(dismiss);
             }
 
-            if (patchAlert != null && patchAlert.CanApply && !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredXenCenterVersion == null)
+            if (alert is XenServerPatchAlert patchAlert && patchAlert.CanApply &&
+                !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredXenCenterVersion == null)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownload_Click;
                 items.Add(download);
             }
 
-            var updateAlert = alert as XenServerUpdateAlert;
-
-            if (updateAlert != null && updateAlert.RequiredXenCenterVersion != null)
+            if (alert is XenServerUpdateAlert updateAlert && updateAlert.RequiredXenCenterVersion != null)
             {
                 var downloadNewXenCenter = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER);
                 downloadNewXenCenter.Click += ToolStripMenuItemDownloadNewXenCenter_Click;
@@ -803,28 +834,17 @@ namespace XenAdmin.TabPages
       
         #region Update dismissal
  
-        private void DismissUpdates(IEnumerable<Alert> alerts)
+        private void DismissUpdates(List<Alert> alerts)
         {
-            var groups = from Alert alert in alerts
-                         where alert != null && !alert.Dismissing
-                         group alert by alert.Connection
-                         into g
-                         select new { Connection = g.Key, Alerts = g };
+            var filtered = alerts.Where(a => a.AllowedToDismiss()).ToList();
 
-            foreach (var g in groups)
-            {
-                if (Alert.AllowedToDismiss(g.Connection))
-                {
-                    foreach (Alert alert in g.Alerts)
-                    {
-                        alert.Dismissing = true;
-                    }
-                    toolStripButtonRestoreDismissed.Enabled = false;
-                    DeleteAllAlertsAction action = new DeleteAllAlertsAction(g.Connection, g.Alerts);
-                    action.Completed += DeleteAllAlertsAction_Completed;
-                    action.RunAsync();
-                }
-            }
+            foreach (Alert alert in filtered)
+                alert.Dismissing = true;
+
+            toolStripButtonRestoreDismissed.Enabled = false;
+            var action = new DeleteAllAlertsAction(filtered);
+            action.Completed += DeleteAllAlertsAction_Completed;
+            action.RunAsync();
         }
 
         /// <summary>
@@ -890,7 +910,7 @@ namespace XenAdmin.TabPages
                 return;
 
             var alerts = result == DialogResult.No
-                         ? from DataGridViewRow row in dataGridViewUpdates.Rows select row.Tag as Alert
+                         ? (from DataGridViewRow row in dataGridViewUpdates.Rows select row.Tag as Alert).ToList()
                          : Updates.UpdateAlerts;
 
             DismissUpdates(alerts);
@@ -923,7 +943,7 @@ namespace XenAdmin.TabPages
             if (dataGridViewUpdates.SelectedRows.Count > 0)
             {
                 var selectedAlerts = from DataGridViewRow row in dataGridViewUpdates.SelectedRows select row.Tag as Alert;
-                DismissUpdates(selectedAlerts);
+                DismissUpdates(selectedAlerts.ToList());
             }
         }
 
@@ -961,7 +981,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            DismissUpdates(new List<Alert> { (Alert)clickedRow.Tag });
+            DismissUpdates(new List<Alert> {(Alert)clickedRow.Tag});
         }
 
         private DataGridViewRow FindAlertRow(ToolStripMenuItem toolStripMenuItem)
@@ -1077,17 +1097,10 @@ namespace XenAdmin.TabPages
 
         private void dataGridViewUpdates_SelectionChanged(object sender, EventArgs e)
         {
-            string reason = null;
+            if (_buildInProgress)
+                return;
 
-            if (dataGridViewUpdates.SelectedRows.Count > 0)
-            {
-                var alert = dataGridViewUpdates.SelectedRows[0].Tag as XenServerPatchAlert;
-                
-                if (alert != null)
-                    reason = alert.CannotApplyReason;
-            }
-
-            ShowInformationHelper(reason);
+            UpdateButtonEnablement();
         }
 
         private void dataGridViewUpdates_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1255,15 +1268,15 @@ namespace XenAdmin.TabPages
 
                             if (exportAll)
                             {
-                                foreach (Alert a in Updates.UpdateAlerts)
+                                var alerts = Updates.UpdateAlerts;
+                                foreach (Alert a in alerts)
                                     stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
                             }
                             else
                             {
                                 foreach (DataGridViewRow row in dataGridViewUpdates.Rows)
                                 {
-                                    var a = row.Tag as Alert;
-                                    if (a != null)
+                                    if (row.Tag is Alert a)
                                         stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
                                 }
                             }

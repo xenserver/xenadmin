@@ -253,7 +253,7 @@ namespace XenAdmin
             //ClipboardViewer is registered in OnHandleCreated
             OtherConfigAndTagsWatcher.RegisterEventHandlers();
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
-            Updates.RegisterCollectionChanged(Updates_CollectionChanged);
+            Updates.UpdateAlertCollectionChanged += Updates_CollectionChanged;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             //ConnectionsManager.XenConnections.CollectionChanged is registered in OnShown
             Properties.Settings.Default.SettingChanging += Default_SettingChanging;
@@ -266,7 +266,7 @@ namespace XenAdmin
             Clip.UnregisterClipboardViewer();
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
-            Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
+            Updates.UpdateAlertCollectionChanged -= Updates_CollectionChanged;
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Properties.Settings.Default.SettingChanging -= Default_SettingChanging;
@@ -873,8 +873,7 @@ namespace XenAdmin
         {
             CloseActiveWizards(connection);
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
-            Updates.CheckServerPatches();
-            Updates.CheckServerVersion();
+            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
 
             RequestRefreshTreeView();
         }
@@ -996,9 +995,8 @@ namespace XenAdmin
                 ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
             ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
             ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
-            
-            Updates.CheckServerPatches();
-            Updates.CheckServerVersion();
+
+            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
             Updates.CheckHotfixEligibility(connection);
 
             HealthCheck.SendMetadataToHealthCheck();
@@ -1122,8 +1120,7 @@ namespace XenAdmin
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
                     // other_config contains which patches to ignore
-                    Updates.CheckServerPatches();
-                    Updates.CheckServerVersion();
+                    Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
                     break;
 
                 case "name_label":
@@ -1169,17 +1166,11 @@ namespace XenAdmin
 
                 case "patches":
                     if (!Helpers.ElyOrGreater(host))
-                    {
-                        Updates.CheckServerPatches();
-                        Updates.CheckServerVersion();
-                    }
+                        Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
                     break;
                 case "updates":
                     if (Helpers.ElyOrGreater(host))
-                    {
-                        Updates.CheckServerPatches();
-                        Updates.CheckServerVersion();
-                    }
+                        Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
                     break;
             }
         }
@@ -2575,11 +2566,11 @@ namespace XenAdmin
             navigationPane.SelectObject(obj);
         }
 
-        private void Updates_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void Updates_CollectionChanged(CollectionChangeEventArgs e)
         {
             Program.Invoke(this, () =>
                 {
-                    int updatesCount = Updates.UpdateAlertsCount;
+                    int updatesCount = Updates.UpdateAlerts.Count;
                     navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
 
                     statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);

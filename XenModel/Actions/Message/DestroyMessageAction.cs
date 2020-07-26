@@ -29,24 +29,35 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
     public class DestroyMessageAction : PureAsyncAction
     {
-        private readonly string OpaqueRef;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public DestroyMessageAction(IXenConnection connection, string messageopaqueref)
-            : base(connection, "destroying message", string.Format("message opaque_ref = {0}", messageopaqueref), true)
+        private readonly string _opaqueRef;
+
+        public DestroyMessageAction(Message message)
+            : base(message.Connection, "destroying message", string.Format("message opaque_ref = {0}", message.opaque_ref), true)
         {
-            OpaqueRef = messageopaqueref;
+            _opaqueRef = message.opaque_ref;
         }
 
         protected override void Run()
         {
-            Message.destroy(Session, OpaqueRef);
+            try
+            {
+                Message.destroy(Session, _opaqueRef);
+            }
+            catch (Failure exn)
+            {
+                if (exn.ErrorDescription[0] != Failure.HANDLE_INVALID)
+                    throw;
+
+                log.Error(exn);
+            }
         }
     }
 }

@@ -216,24 +216,14 @@ namespace XenAdmin.Alerts
         /// </summary>
         public DateTime Timestamp => _timestamp;
 
-        /// <summary>
-        /// Dismisses the Alert: marks it as dealt with in some way. May only be called once.
-        /// </summary>
         public virtual void Dismiss()
         {
             RemoveAlert(this);
         }
 
-        /// <summary>
-        /// Dismiss the alert, making a single API call if this is a remote message (Dismiss will launch a complete
-        /// action).
-        /// 
-        /// The normal behaviour here is the same as Dismiss() -- it's only when overridden by MessageAlert that there
-        /// is a difference.
-        /// </summary>
-        public virtual void DismissSingle(Session s)
+        public virtual bool AllowedToDismiss()
         {
-            Dismiss();
+            return !Dismissing;
         }
 
         public virtual bool IsDismissed()
@@ -278,7 +268,7 @@ namespace XenAdmin.Alerts
         /// </summary>
         public abstract string HelpID { get; }
 
-        public IXenConnection Connection;
+        public IXenConnection Connection { get; protected set; }
 
         public virtual bool Equals(Alert other)
         {
@@ -358,52 +348,8 @@ namespace XenAdmin.Alerts
                 sortResult = string.Compare(alert1.uuid, alert2.uuid);
             return sortResult;
         }
-
-
-        #region Update dismissal
-
-        public static bool AllowedToDismiss(Alert alert)
-        {
-            return AllowedToDismiss(new[] { alert });
-        }
-
-        public static bool AllowedToDismiss(IEnumerable<Alert> alerts)
-        {
-            var alertConnections = (from Alert alert in alerts
-                                    where alert != null && !alert.Dismissing
-                                    let con = alert.Connection
-                                    select con).Distinct();
-
-            return alertConnections.Any(AllowedToDismiss);
-        }
-
-        /// <summary>
-        /// Checks the user has sufficient RBAC privileges to clear updates on a given connection
-        /// </summary>
-        public static bool AllowedToDismiss(IXenConnection c)
-        {
-            // check if local alert
-            if (c == null)
-                return true;
-
-            // have we disconnected? Alert will disappear soon, but for now block dismissal.
-            if (c.Session == null)
-                return false;
-
-            if (c.Session.IsLocalSuperuser)
-                return true;
-
-            List<Role> rolesAbleToCompleteAction = Role.ValidRoleList("Message.destroy", c);
-            foreach (Role possibleRole in rolesAbleToCompleteAction)
-            {
-                if (c.Session.Roles.Contains(possibleRole))
-                    return true;
-            }
-            return false;
-        }
-
-        #endregion
     }
+
     public enum AlertPriority
     {
         /// <summary>
