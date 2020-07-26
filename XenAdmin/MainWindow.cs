@@ -213,7 +213,8 @@ namespace XenAdmin
             SRCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<SR>);
             FolderCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Folder>);
             TaskCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MeddlingActionManager.TaskCollectionChanged);
-            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
+
+            RegisterEvents();
 
             CommandLineArgType = argType;
             CommandLineParam = args;
@@ -224,16 +225,10 @@ namespace XenAdmin
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, this);
             ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = pluginManager;
 
-            eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
-            SearchPage.SearchChanged += SearchPanel_SearchChanged;
-            Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
-            Updates.RegisterCollectionChanged(Updates_CollectionChanged);
-
             FormFontFixer.Fix(this);
 
             Folders.InitFolders();
             DockerContainers.InitDockerContainers();
-            OtherConfigAndTagsWatcher.InitEventHandlers();
 
             // Fix colour of text on gradient panels
             TitleLabel.ForeColor = Program.TitleBarForeColor;
@@ -243,7 +238,6 @@ namespace XenAdmin
 
             SelectionManager.BindTo(MainMenuBar.Items, this);
             SelectionManager.BindTo(ToolStrip.Items, this);
-            Properties.Settings.Default.SettingChanging += Default_SettingChanging;
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
@@ -252,6 +246,32 @@ namespace XenAdmin
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
 
             statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
+        }
+
+        private void RegisterEvents()
+        {
+            //ClipboardViewer is registered in OnHandleCreated
+            OtherConfigAndTagsWatcher.RegisterEventHandlers();
+            Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
+            Updates.RegisterCollectionChanged(Updates_CollectionChanged);
+            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
+            //ConnectionsManager.XenConnections.CollectionChanged is registered in OnShown
+            Properties.Settings.Default.SettingChanging += Default_SettingChanging;
+            eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
+            SearchPage.SearchChanged += SearchPanel_SearchChanged;
+        }
+
+        private void UnRegisterEvents()
+        {
+            Clip.UnregisterClipboardViewer();
+            OtherConfigAndTagsWatcher.DeregisterEventHandlers();
+            Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
+            Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
+            ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
+            ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
+            Properties.Settings.Default.SettingChanging -= Default_SettingChanging;
+            eventsPage.GoToXenObjectRequested -= eventsPage_GoToXenObjectRequested;
+            SearchPage.SearchChanged -= SearchPanel_SearchChanged;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
