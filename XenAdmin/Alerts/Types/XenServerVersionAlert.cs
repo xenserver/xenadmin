@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -40,6 +41,8 @@ namespace XenAdmin.Alerts
 {
     public class XenServerVersionAlert : XenServerUpdateAlert
     {
+        public const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
+
         public readonly XenServerVersion Version;
 
         public XenServerVersionAlert(XenServerVersion version)
@@ -76,13 +79,29 @@ namespace XenAdmin.Alerts
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            if (other_config.ContainsKey(Updates.LAST_SEEN_SERVER_VERSION_KEY))
+            if (other_config.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
             {
-                List<string> current = new List<string>(other_config[Updates.LAST_SEEN_SERVER_VERSION_KEY].Split(','));
+                List<string> current = new List<string>(other_config[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
                 if (current.Contains(Version.Version.ToString()))
                     return true;
             }
             return false;
+        }
+
+        protected override void Dismiss(Dictionary<string, string> otherConfig)
+        {
+            if (otherConfig.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
+            {
+                List<string> current = new List<string>(otherConfig[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
+                if (current.Contains(Version.Version.ToString()))
+                    return;
+                current.Add(Version.Version.ToString());
+                otherConfig[LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
+            }
+            else
+            {
+                otherConfig.Add(LAST_SEEN_SERVER_VERSION_KEY, Version.Version.ToString());
+            }
         }
 
         public override bool Equals(Alert other)

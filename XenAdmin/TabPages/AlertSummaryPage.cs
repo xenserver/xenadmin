@@ -522,7 +522,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            DismissAlerts(new List<Alert> {(Alert) clickedRow.Tag});
+            DismissAlerts((Alert)clickedRow.Tag);
         }
 
         private void tsmiDismissAll_Click(object sender, EventArgs e)
@@ -559,7 +559,7 @@ namespace XenAdmin.TabPages
                 return;
 
             var alerts = result == DialogResult.No
-                ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert)
+                ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert).ToArray()
                 : Alert.Alerts;
 
             DismissAlerts(alerts);
@@ -588,7 +588,7 @@ namespace XenAdmin.TabPages
             if (GridViewAlerts.SelectedRows.Count > 0)
             {
                 var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows select row.Tag as Alert;
-                DismissAlerts(selectedAlerts);
+                DismissAlerts(selectedAlerts.ToArray());
             }
         }
 
@@ -621,7 +621,7 @@ namespace XenAdmin.TabPages
         {
             toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
 
-            tsmiDismissAll.Enabled = Alert.AllowedToDismiss(Alert.Alerts);
+            tsmiDismissAll.Enabled = Alert.Alerts.Any(a => a.AllowedToDismiss());
             tsmiDismissAll.AutoToolTip = !tsmiDismissAll.Enabled;
             tsmiDismissAll.ToolTipText = tsmiDismissAll.Enabled
                                                           ? string.Empty
@@ -629,16 +629,25 @@ namespace XenAdmin.TabPages
                                                                 ? Messages.DELETE_ANY_MESSAGE_RBAC_BLOCKED
                                                                 : Messages.NO_MESSAGES_TO_DISMISS;
 
-            var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows
-                                 select row.Tag as Alert;
+            var selectedAlerts = (from DataGridViewRow row in GridViewAlerts.SelectedRows
+                select row.Tag as Alert).ToArray();
 
-            tsmiDismissSelected.Enabled = Alert.AllowedToDismiss(selectedAlerts);
+            tsmiDismissSelected.Enabled = selectedAlerts.Any(a => a.AllowedToDismiss());
             tsmiDismissSelected.AutoToolTip = !tsmiDismissSelected.Enabled;
             tsmiDismissSelected.ToolTipText = tsmiDismissSelected.Enabled
                                                   ? string.Empty
                                                   : Messages.DELETE_MESSAGE_RBAC_BLOCKED;
 
             toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled || tsmiDismissSelected.Enabled;
+            toolStripSplitButtonDismiss.AutoToolTip = tsmiDismissAll.AutoToolTip || tsmiDismissSelected.AutoToolTip;
+
+            if (toolStripSplitButtonDismiss.AutoToolTip)
+            {
+                if (!string.IsNullOrEmpty(tsmiDismissAll.ToolTipText))
+                    toolStripSplitButtonDismiss.ToolTipText = tsmiDismissAll.ToolTipText;
+                else if (!string.IsNullOrEmpty(tsmiDismissSelected.ToolTipText))
+                    toolStripSplitButtonDismiss.ToolTipText = tsmiDismissSelected.ToolTipText;
+            }
 
             if (toolStripSplitButtonDismiss.DefaultItem != null && !toolStripSplitButtonDismiss.DefaultItem.Enabled)
             {
@@ -656,23 +665,20 @@ namespace XenAdmin.TabPages
 
         #region Alert dismissal
 
-        private void DismissAlerts(IEnumerable<Alert> alerts)
+        private void DismissAlerts(params Alert[] alerts)
         {
             var groups = from Alert alert in alerts
-                         where alert != null && !alert.Dismissing
+                         where alert != null && alert.AllowedToDismiss()
                          group alert by alert.Connection
                          into g
                          select new { Connection = g.Key, Alerts = g };
 
             foreach (var g in groups)
             {
-                if (Alert.AllowedToDismiss(g.Connection))
-                {
-                    foreach (var alert in g.Alerts)
-                        alert.Dismissing = true;
-                    Rebuild();
-                    new DeleteAllAlertsAction(g.Connection, g.Alerts).RunAsync();
-                }
+                foreach (var alert in g.Alerts)
+                    alert.Dismissing = true;
+
+                new DeleteAllAlertsAction(g.Alerts.ToList(), g.Connection).RunAsync();
             }
         }
 
@@ -682,7 +688,7 @@ namespace XenAdmin.TabPages
         {
             var items = new List<ToolStripItem>();
 
-            if (Alert.AllowedToDismiss(alert))
+            if (alert.AllowedToDismiss())
             {
                 var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
                 dismiss.Click += ToolStripMenuItemDismiss_Click;
@@ -797,8 +803,7 @@ namespace XenAdmin.TabPages
                         {
                             foreach (DataGridViewRow row in GridViewAlerts.Rows)
                             {
-                                var a = row.Tag as Alert;
-                                if (a != null && !a.Dismissing)
+                                if (row.Tag is Alert a && !a.Dismissing)
                                     stream.WriteLine(a.GetAlertDetailsCSVQuotes());
                             }
                         }

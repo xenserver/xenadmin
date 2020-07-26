@@ -364,7 +364,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             try
             {
-                var updates = Updates.UpdateAlerts.ToList();
+                var updates = Updates.UpdateAlerts;
 
                 if (dataGridViewPatches.SortedColumn != null)
                 {
@@ -484,7 +484,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void _backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Updates.CheckServerPatches();
+            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches);
         }
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

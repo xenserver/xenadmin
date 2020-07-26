@@ -250,7 +250,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             CleanUploadedPatches();
             RemoveDownloadedPatches();
-            Updates.CheckServerPatches();
+            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches);
             base.FinishWizard();
         }
 

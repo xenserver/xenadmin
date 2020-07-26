@@ -42,6 +42,8 @@ namespace XenAdmin.Alerts
 {
     public class XenServerPatchAlert : XenServerUpdateAlert
     {
+        public const string IgnorePatchKey = "XenCenter.IgnorePatches";
+
         public readonly XenServerPatch Patch;
         public readonly XenServerVersion NewServerVersion;
        
@@ -169,13 +171,30 @@ namespace XenAdmin.Alerts
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            if (other_config.ContainsKey(Updates.IgnorePatchKey))
+            if (other_config.ContainsKey(IgnorePatchKey))
             {
-                List<string> current = new List<string>(other_config[Updates.IgnorePatchKey].Split(','));
+                List<string> current = new List<string>(other_config[IgnorePatchKey].Split(','));
                 if (current.Contains(Patch.Uuid, StringComparer.OrdinalIgnoreCase))
                     return true;
             }
             return false;
+        }
+
+        protected override void Dismiss(Dictionary<string, string> otherConfig)
+        {
+            if (otherConfig.ContainsKey(IgnorePatchKey))
+            {
+                var current = new List<string>(otherConfig[IgnorePatchKey].Split(','));
+                if (current.Contains(Patch.Uuid, StringComparer.OrdinalIgnoreCase))
+                    return;
+
+                current.Add(Patch.Uuid);
+                otherConfig[IgnorePatchKey] = string.Join(",", current.ToArray());
+            }
+            else
+            {
+                otherConfig.Add(IgnorePatchKey, Patch.Uuid);
+            }
         }
 
         public override bool Equals(Alert other)

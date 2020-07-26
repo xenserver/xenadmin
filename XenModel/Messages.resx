@@ -4278,7 +4278,7 @@ This will also delete its subfolders.</value>
     <value>Are you sure you want to delete '{0}'?  This operation cannot be undone.</value>
   </data>
   <data name="DELETE_MESSAGE_RBAC_BLOCKED" xml:space="preserve">
-    <value>There are no alerts remaining which you have permission to dismiss.</value>
+    <value>You have no permission to dismiss the selected alerts.</value>
   </data>
   <data name="DELETE_PATCH" xml:space="preserve">
     <value>Delete Patch</value>

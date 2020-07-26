@@ -44,7 +44,7 @@ namespace XenAdmin.Alerts
 {
     public class MessageAlert : Alert
     {
-        public XenAPI.Message Message;
+        public readonly Message Message;
         public IXenObject XenObject;
 
         private const int DEFAULT_PRIORITY = 0;
@@ -438,14 +438,28 @@ namespace XenAdmin.Alerts
 
         public override void Dismiss()
         {
-            new DestroyMessageAction(Message.Connection, Message.opaque_ref).RunAsync();
-            base.Dismiss();
+            new DestroyMessageAction(Message).RunExternal(Connection.Session);
+            RemoveAlert(this);
         }
 
-        public override void DismissSingle(Session s)
+        public override bool AllowedToDismiss()
         {
-            Message.destroy(s, Message.opaque_ref);
-            base.Dismiss();
+            if (Dismissing)
+                return false;
+
+            // this shouldn't happen for this type of alert, but check for safety
+            if (Connection == null)
+                return true;
+
+            // if we are disconnected do not dismiss as the alert will disappear soon
+            if (Connection.Session == null)
+                return false;
+
+            if (Connection.Session.IsLocalSuperuser)
+                return true;
+
+            var allowedRoles = Role.ValidRoleList("Message.destroy", Connection);
+            return allowedRoles.Any(r => Connection.Session.Roles.Contains(r));
         }
 
         public static void RemoveAlert(Message m)

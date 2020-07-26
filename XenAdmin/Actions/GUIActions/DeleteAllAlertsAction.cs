@@ -29,29 +29,23 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
 using XenAdmin.Core;
-using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
     public class DeleteAllAlertsAction : AsyncAction
     {
-        private readonly IEnumerable<Alert> Alerts;
+        private readonly List<Alert> _alerts;
 
-        /// <param name="connection">May be null; this is expected for client-side alerts.</param>
-        /// <param name="alerts"></param>
-        public DeleteAllAlertsAction(IXenConnection connection, IEnumerable<Alert> alerts)
-            : base(connection,
-                   GetActionTitle(connection, alerts.Count()), 
-                   Messages.ACTION_REMOVE_ALERTS_DESCRIPTION)
+        public DeleteAllAlertsAction(List<Alert> alerts, IXenConnection connection = null)
+            : base(connection, GetActionTitle(connection, alerts.Count),
+                Messages.ACTION_REMOVE_ALERTS_DESCRIPTION)
         {
-            this.Alerts = alerts;
+            _alerts = new List<Alert>(alerts);
 
             if (connection != null)
             {
@@ -73,58 +67,25 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            int i = 0;
-            int max = Alerts.Count();
-            Exception e = null;
             LogDescriptionChanges = false;
-            List<Alert> toBeDismissed = new List<Alert>();
 
             try
             {
-                var myList = new List<Alert>(Alerts);
-                foreach (Alert a in myList)
+                for (var i = 0; i < _alerts.Count; i++)
                 {
-                    PercentComplete = (i * 100) / max;
-                    i++;
-                    Description = string.Format(Messages.ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION, i, max);
-
-                    Alert a1 = a;
-                    BestEffort(ref e, delegate
-                        {
-                            try
-                            {
-                                if (a1 is XenServerPatchAlert || a1 is XenServerVersionAlert)
-                                {
-                                    toBeDismissed.Add(a1);
-                                }
-                                else if(a1 is XenCenterUpdateAlert)
-                                {
-                                    a1.Dismiss();
-                                }
-                                else
-                                {
-                                    a1.DismissSingle(Session);
-                                }
-                            }
-                            catch (Failure exn)
-                            {
-                                if (exn.ErrorDescription[0] != Failure.HANDLE_INVALID)
-                                    throw;
-                                //remove alert from XenCenterAlerts; this will trigger the CollectionChanged event, on which we update the alert count
-                                if (Alert.FindAlert(a1) != null)
-                                    Alert.RemoveAlert(a1); 
-                            }
-                        });
+                    Description = string.Format(Messages.ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION, i, _alerts.Count);
+                    _alerts[i].Dismiss();
+                    PercentComplete = i * 100 / _alerts.Count;
                 }
-
-                Updates.DismissUpdates(toBeDismissed);
             }
             finally
             {
                 LogDescriptionChanges = true;
             }
 
-            Description = max == 1 ? Messages.ACTION_REMOVE_ALERTS_DONE_ONE : string.Format(Messages.ACTION_REMOVE_ALERTS_DONE, max);
+            Description = _alerts.Count == 1
+                ? Messages.ACTION_REMOVE_ALERTS_DONE_ONE
+                : string.Format(Messages.ACTION_REMOVE_ALERTS_DONE, _alerts.Count);
         }
     }
 }

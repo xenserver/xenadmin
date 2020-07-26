@@ -11954,7 +11954,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no alerts remaining which you have permission to dismiss..
+        ///   Looks up a localized string similar to You have no permission to dismiss the selected alerts..
         /// </summary>
         public static string DELETE_MESSAGE_RBAC_BLOCKED {
             get {
