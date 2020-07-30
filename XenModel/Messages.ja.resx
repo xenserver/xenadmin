@@ -4417,6 +4417,12 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>場所 {0} は既に使用されています。同じ場所に 2 つのディスクを設定すると、VM は起動しません。'{0}' のディスクをこのディスクに置換しますか?</value>
   </data>
+  <data name="DEVICE_POSITION_CONFLICT_CONFIGURE" xml:space="preserve">
+    <value>このディスクを構成する(&amp;C)</value>
+  </data>
+  <data name="DEVICE_POSITION_CONFLICT_SWAP" xml:space="preserve">
+    <value>これらのディスクを置換する(&amp;S)</value>
+  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>デバイスの場所の変更を反映させるには、VM を再起動する必要があります。</value>
   </data>
@@ -11843,6 +11849,14 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>スナップショットの復元</value>
   </data>
+  <data name="SNAPSHOT_REVERT_BLURB" xml:space="preserve">
+    <value>'{0}' の状態に戻してもよろしいですか?
+
+これにより、現在の状態の VM は失われ、このスナップショットが作成されたときの状態が復元されます。</value>
+  </data>
+  <data name="SNAPSHOT_REVERT_NEW_SNAPSHOT" xml:space="preserve">
+    <value>現在のスナップショットを作成してから復元する(&amp;T)</value>
+  </data>
   <data name="SNAPSHOT_TAKEN_ON" xml:space="preserve">
     <value>作成日: {0}</value>
   </data>
@@ -13232,6 +13246,11 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>vCPU を変更するには、VM がシャットダウン状態である必要があります。</value>
   </data>
+  <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
+    <value>VCPU の数がホスト サーバー上の物理 CPU よりも多いため、 VM のパフォーマンスが大幅に低下します。
+
+VM のパフォーマンスを最適化するために、VCPU の数を物理 CPU と同じか、または少なくしてください。</value>
+  </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
   </data>
@@ -13926,6 +13945,11 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>プール '{0}' のワークロード バランスを無効にしてもよろしいですか?</value>
+  </data>
+  <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
+    <value>ワークロード バランス サーバーから切断しますか?
+
+これにより、このリソース プールのすべてのワークロード バランス処理が停止し、このプールのすべてのワークロード バランス情報がワークロード バランス データベースから削除されます。</value>
   </data>
   <data name="WLB_ENABLED" xml:space="preserve">
     <value>有効</value>

@@ -880,7 +880,7 @@ namespace XenAdmin
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                     new ActionBase(title, "", false, true, Messages.INCOMPATIBLE_PRODUCTS);
 
-                    using (var dlog = new ConnectionRefusedDialog {ErrorMessage = Messages.INCOMPATIBLE_PRODUCTS, Url = ""})
+                    using (var dlog = new ErrorDialog(Messages.INCOMPATIBLE_PRODUCTS) {WindowTitle = title})
                         dlog.ShowDialog(this);
                 });
                 return;
@@ -942,7 +942,13 @@ namespace XenAdmin
 
                         new ActionBase(title, "", false, true, error);
 
-                        using (var dlog = new ConnectionRefusedDialog {ErrorMessage = msg, Url = url})
+                        using (var dlog = new ErrorDialog(msg)
+                        {
+                            WindowTitle = title,
+                            ShowLinkLabel = !HiddenFeatures.LinkLabelHidden,
+                            LinkText = url,
+                            LinkData = url
+                        })
                             dlog.ShowDialog(this);
                     });
                     return;

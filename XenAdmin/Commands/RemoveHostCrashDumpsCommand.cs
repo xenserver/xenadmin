@@ -29,14 +29,11 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAPI;
 using System.Windows.Forms;
-using XenAdmin.Dialogs.WarningDialogs;
 using XenAdmin.Actions;
-using System.Collections.ObjectModel;
+using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -68,11 +65,17 @@ namespace XenAdmin.Commands
         {
             Host host = selection[0].HostAncestor;
 
-            DialogResult result = new RemoveCrashDumpsWarningDialog(host).ShowDialog(Parent);
-
-            if (result == DialogResult.OK)
+            using (var dialog = new WarningDialog(string.Format(Messages.REMOVE_CRASHDUMP_WARNING, host.Name().Ellipsise(30)),
+                new ThreeButtonDialog.TBDButton(Messages.SERVER_STATUS_REPORT, DialogResult.Ignore, ThreeButtonDialog.ButtonType.CANCEL, true),
+                new ThreeButtonDialog.TBDButton(Messages.SERVER_STATUS_REPORT, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT),
+                ThreeButtonDialog.ButtonCancel))
             {
-                new DestroyHostCrashDumpAction(host).RunAsync();
+                var result = dialog.ShowDialog(Parent);
+
+                if (result == DialogResult.OK)
+                    new DestroyHostCrashDumpAction(host).RunAsync();
+                else if (result == DialogResult.Ignore)
+                    new Wizards.BugToolWizard(host).Show();
             }
         }
 
@@ -86,20 +89,8 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REMOVE_HOST_CRASHDUMPS;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_REMOVE_HOST_CRASHDUMPS;
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU;
-            }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU;
     }
 }

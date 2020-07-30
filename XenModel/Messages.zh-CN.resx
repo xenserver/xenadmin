@@ -4411,6 +4411,12 @@
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>位置 {0} 已在使用。如果同一位置存在两个磁盘，虚拟机将不会启动。是否将位于“{0}”的磁盘与该磁盘交换?</value>
   </data>
+  <data name="DEVICE_POSITION_CONFLICT_CONFIGURE" xml:space="preserve">
+    <value>仍然仅配置此磁盘(&amp;C)</value>
+  </data>
+  <data name="DEVICE_POSITION_CONFLICT_SWAP" xml:space="preserve">
+    <value>交换这些磁盘(&amp;S)</value>
+  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>必须重新启动 VM，设备位置的更改才能生效。</value>
   </data>
@@ -11842,6 +11848,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>快照还原</value>
   </data>
+  <data name="SNAPSHOT_REVERT_BLURB" xml:space="preserve">
+    <value>是否确实要还原到“{0}”?
+
+还原到此快照时，VM 将还原回创建快照时的时间点，VM 的当前状态将丢失。</value>
+  </data>
+  <data name="SNAPSHOT_REVERT_NEW_SNAPSHOT" xml:space="preserve">
+    <value>生成 VM 当前状态的快照，然后还原(&amp;T)</value>
+  </data>
   <data name="SNAPSHOT_TAKEN_ON" xml:space="preserve">
     <value>生成时间: {0}</value>
   </data>
@@ -13229,6 +13243,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>仅当 VM 关闭时才能更改 vCPU。</value>
   </data>
+  <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
+    <value>VCPU 数大于主机服务器上的物理 CPU 数。这样将显著降低 VM 性能。
+要优化 VM 性能，应减少 VCPU 数，使其小于或等于物理 CPU 数。</value>
+  </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
   </data>
@@ -13923,6 +13941,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>是否确实要为池“{0}”禁用 Workload Balancing?</value>
+  </data>
+  <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
+    <value>是否要与此池中的 Workload Balancing 服务器断开连接?
+
+如果断开连接，则将停止此资源池的所有 Workload Balancing 操作，并从 Workload Balancing 数据库中删除与此池有关的所有信息。</value>
   </data>
   <data name="WLB_ENABLED" xml:space="preserve">
     <value>已启用</value>

@@ -4415,6 +4415,12 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>Position {0} is already in use. Your VM will not boot with two disks in the same position. Do you want to swap the disk at '{0}' with this disk?</value>
   </data>
+  <data name="DEVICE_POSITION_CONFLICT_CONFIGURE" xml:space="preserve">
+    <value>&amp;Configure just this disk anyway</value>
+  </data>
+  <data name="DEVICE_POSITION_CONFLICT_SWAP" xml:space="preserve">
+    <value>&amp;Swap these disks</value>
+  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>You will have to restart the VM for changes in device position to take effect.</value>
   </data>
@@ -4428,16 +4434,12 @@ This will also delete its subfolders.</value>
     <value>No devices available</value>
   </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
-    <value>Disable pass-through</value>
+    <value>Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
   </data>
   <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
-    <value>Enable pass-through</value>
-  </data>
-  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
-    <value>Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.</value>
-  </data>
-  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
-    <value>Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
+    <value>Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.
+
+Plugging in untrustworthy USB devices to your computer may put your computer at risk. USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs.</value>
   </data>
   <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
     <value>&amp;Yes, Disable pass-through</value>
@@ -6824,9 +6826,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="HOST_REBOOTING" xml:space="preserve">
     <value>Rebooting server</value>
-  </data>
-  <data name="HOST_REBOOT_REQUIRED" xml:space="preserve">
-    <value>You must reboot your server '{0}' to complete the restore process.</value>
   </data>
   <data name="HOST_REMOVED_MANY_CRASHDUMPS" xml:space="preserve">
     <value>Removed {0} crash dumps from {1}</value>
@@ -11042,6 +11041,9 @@ To log out of this server and log in again using a different user account, enter
 Click Server Status Report to open the Compile Server Status Report Wizard or click Remove Files to remove the crash dump files without compiling.
 </value>
   </data>
+  <data name="REMOVE_FILES" xml:space="preserve">
+    <value>&amp;Remove Files</value>
+  </data>
   <data name="REMOVE_FROM_FOLDER" xml:space="preserve">
     <value>Remove from &amp;folder</value>
   </data>
@@ -11581,7 +11583,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Server side patch check</value>
   </data>
   <data name="SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Server Status Report</value>
+    <value>&amp;Server Status Report</value>
   </data>
   <data name="SERVER_STATUS_REPORT_CAPABILITIES_FAILED" xml:space="preserve">
     <value>The selected servers failed when asked for their capabilities.  Please select different servers.</value>
@@ -11832,6 +11834,14 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SNAPSHOT_REVERT" xml:space="preserve">
     <value>Snapshot revert</value>
+  </data>
+  <data name="SNAPSHOT_REVERT_BLURB" xml:space="preserve">
+    <value>Are you sure you want to revert to '{0}'?
+
+Reverting to this snapshot will revert the VM back to the point in time that the snapshot was created, and the current state of the VM will be lost.</value>
+  </data>
+  <data name="SNAPSHOT_REVERT_NEW_SNAPSHOT" xml:space="preserve">
+    <value>&amp;Take a snapshot of the VM's current state and then revert</value>
   </data>
   <data name="SNAPSHOT_TAKEN_ON" xml:space="preserve">
     <value>Taken on: {0}</value>
@@ -13222,6 +13232,11 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>The vCPUs can only be changed when the VM is shut down.</value>
   </data>
+  <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
+    <value>The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
+
+To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs.</value>
+  </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
   </data>
@@ -13904,6 +13919,11 @@ A {0} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>Are you sure you want to disable Workload Balancing for pool '{0}'?</value>
+  </data>
+  <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
+    <value>Are you sure you want to disconnect the Workload Balancing server from this pool?
+
+Disconnecting will stop all Workload Balancing operations for this resource pool and delete all information about this pool from the Workload Balancing database.</value>
   </data>
   <data name="WLB_ENABLED" xml:space="preserve">
     <value>Enabled</value>

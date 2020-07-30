@@ -380,12 +380,6 @@
     <Compile Include="Dialogs\RoleSelectionDialog.Designer.cs">
       <DependentUpon>RoleSelectionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RevertDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\RevertDialog.Designer.cs">
-      <DependentUpon>RevertDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ScreenShotDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -397,12 +391,6 @@
     </Compile>
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\UsbUsageDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\UsbUsageDialog.Designer.cs">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\BallooningDialog.cs">
       <SubType>Form</SubType>
@@ -675,12 +663,6 @@
     </Compile>
     <Compile Include="Dialogs\EditVmHaPrioritiesDialog.Designer.cs">
       <DependentUpon>EditVmHaPrioritiesDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\HostRequiresRebootDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\HostRequiresRebootDialog.Designer.cs">
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\NetworkingPropertiesPage.cs">
       <SubType>UserControl</SubType>
@@ -1326,29 +1308,11 @@
     <Compile Include="Dialogs\SelectHostDialog.Designer.cs">
       <DependentUpon>SelectHostDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\UserDeviceDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\UserDeviceDialog.Designer.cs">
-      <DependentUpon>UserDeviceDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\WarningDialogs\CloseXenCenterWarningDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\WarningDialogs\CloseXenCenterWarningDialog.Designer.cs">
       <DependentUpon>CloseXenCenterWarningDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\LicenseWarningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\LicenseWarningDialog.Designer.cs">
-      <DependentUpon>LicenseWarningDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.Designer.cs">
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\HistoryPage.cs">
       <SubType>UserControl</SubType>
@@ -1404,12 +1368,6 @@
     </Compile>
     <Compile Include="Dialogs\EvacuateHostDialog.Designer.cs">
       <DependentUpon>EvacuateHostDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\VcpuWarningDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\WarningDialogs\VcpuWarningDialog.Designer.cs">
-      <DependentUpon>VcpuWarningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\DuplicateTemplateNameDialog.cs">
       <SubType>Form</SubType>
@@ -1944,15 +1902,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UsbUsageDialog.ja.resx">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UsbUsageDialog.resx">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UsbUsageDialog.zh-CN.resx">
-      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\MoveVMDialog.resx">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1988,10 +1937,6 @@
     <EmbeddedResource Include="Dialogs\PropertiesDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RevertDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RevertDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ResolvingSubjectsDialog.resx">
       <SubType>Designer</SubType>
@@ -2081,10 +2026,6 @@
     <EmbeddedResource Include="Dialogs\EditVmHaPrioritiesDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditVmHaPrioritiesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\NetworkingPropertiesPage.resx">
       <SubType>Designer</SubType>
@@ -2666,21 +2607,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>SelectHostDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UserDeviceDialog.resx">
-      <DependentUpon>UserDeviceDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\CloseXenCenterWarningDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CloseXenCenterWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\LicenseWarningDialog.resx">
-      <DependentUpon>LicenseWarningDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HistoryPage.resx">
       <SubType>Designer</SubType>
@@ -2704,10 +2633,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EvacuateHostDialog.resx">
       <DependentUpon>EvacuateHostDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\VcpuWarningDialog.resx">
-      <DependentUpon>VcpuWarningDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DuplicateTemplateNameDialog.resx">
@@ -3118,12 +3043,6 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
-    <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ConnectionRefusedDialog.Designer.cs">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\ILicenseCheckableDataGridViewView.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\LicenseCheckableDataGridView.cs">
       <SubType>Component</SubType>
@@ -3743,12 +3662,6 @@
     <Compile Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.Designer.cs">
       <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\Wlb\DisableWLBDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Dialogs\Wlb\WlbConfigurationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3760,9 +3673,6 @@
     </Compile>
     <Compile Include="Dialogs\Wlb\WlbCredentialsDialog.Designer.cs">
       <DependentUpon>WlbCredentialsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Wlb\WlbReportCustomFilter.cs">
       <SubType>Form</SubType>
@@ -5051,16 +4961,6 @@
     <EmbeddedResource Include="Controls\XenSearch\SearchOutput.zh-CN.resx">
       <DependentUpon>SearchOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConnectionRefusedDialog.ja.resx">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConnectionRefusedDialog.resx">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConnectionRefusedDialog.zh-CN.resx">
-      <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\GraphDetailsDialog.ja.resx">
       <DependentUpon>GraphDetailsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5372,12 +5272,6 @@
     <EmbeddedResource Include="Dialogs\GraphDetailsDialog.zh-CN.resx">
       <DependentUpon>GraphDetailsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.ja.resx">
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HostRequiresRebootDialog.zh-CN.resx">
-      <DependentUpon>HostRequiresRebootDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputPromptDialog.ja.resx">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5596,12 +5490,6 @@
     <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.zh-CN.resx">
       <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RevertDialog.ja.resx">
-      <DependentUpon>RevertDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RevertDialog.zh-CN.resx">
-      <DependentUpon>RevertDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RoleElevationDialog.ja.resx">
       <DependentUpon>RoleElevationDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5639,12 +5527,6 @@
     <EmbeddedResource Include="Dialogs\UpsellDialog.zh-CN.resx">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UserDeviceDialog.ja.resx">
-      <DependentUpon>UserDeviceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\UserDeviceDialog.zh-CN.resx">
-      <DependentUpon>UserDeviceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VerticallyTabbedDialog.ja.resx">
       <DependentUpon>VerticallyTabbedDialog.cs</DependentUpon>
@@ -5727,44 +5609,8 @@
     <EmbeddedResource Include="Dialogs\WarningDialogs\LVMoHBAWarningDialog.resx">
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\LicenseWarningDialog.ja.resx">
-      <DependentUpon>LicenseWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\LicenseWarningDialog.zh-CN.resx">
-      <DependentUpon>LicenseWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WarningDialogs\LVMoHBAWarningDialog.zh-CN.resx">
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.ja.resx">
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\RemoveCrashDumpsWarningDialog.zh-CN.resx">
-      <DependentUpon>RemoveCrashDumpsWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\VcpuWarningDialog.ja.resx">
-      <DependentUpon>VcpuWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\WarningDialogs\VcpuWarningDialog.zh-CN.resx">
-      <DependentUpon>VcpuWarningDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.ja.resx">
-      <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.resx">
-      <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.zh-CN.resx">
-      <DependentUpon>ConfirmDeconfigureWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\DisableWLBDialog.ja.resx">
-      <DependentUpon>DisableWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\DisableWLBDialog.resx">
-      <DependentUpon>DisableWLBDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\DisableWLBDialog.zh-CN.resx">
-      <DependentUpon>DisableWLBDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbConfigurationDialog.ja.resx">
       <DependentUpon>WlbConfigurationDialog.cs</DependentUpon>
@@ -5783,15 +5629,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbCredentialsDialog.zh-CN.resx">
       <DependentUpon>WlbCredentialsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.ja.resx">
-      <DependentUpon>WlbDeleteReportSubscriptionDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.resx">
-      <DependentUpon>WlbDeleteReportSubscriptionDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Wlb\WlbDeleteReportSubscriptionDialog.zh-CN.resx">
-      <DependentUpon>WlbDeleteReportSubscriptionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Wlb\WlbEditScheduledTask.ja.resx">
       <DependentUpon>WlbEditScheduledTask.cs</DependentUpon>

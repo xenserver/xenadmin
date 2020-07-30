@@ -135,10 +135,15 @@ namespace XenAdmin.Network
         {
             if (error is ExpressRestriction e)
             {
-                Program.Invoke(Program.MainWindow, delegate()
+                using (var dialog = new WarningDialog(string.Format(
+                    Messages.CONNECTION_RESTRICTED_MESSAGE_LONG, e.HostName, e.ExistingHostName))
                 {
-                    new LicenseWarningDialog(e.HostName, e.ExistingHostName).ShowDialog(owner);
-                });
+                    ShowLinkLabel = true,
+                    LinkText = InvisibleMessages.HTTP_LICENSES,
+                    LinkData = InvisibleMessages.HTTP_LICENSES
+                })
+                    dialog.ShowDialog(owner);
+                
                 return;
             }
 
