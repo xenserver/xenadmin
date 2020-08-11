@@ -56,24 +56,6 @@ namespace XenAPI
             return false;
         }
 
-        public VBD FindVMCDROM(VM vm)
-        {
-            if (vm == null)
-                return null;
-
-            List<VBD> vbds = vm.Connection.ResolveAll(vm.VBDs).FindAll(vbd => vbd.IsCDROM());
-
-            if (vbds.Count > 0)
-            {
-                vbds.Sort();
-                return vbds[0];
-            }
-            else
-            {
-                return null;
-            }
-        }
-
         public bool GetIsOwner()
         {
             return other_config != null && other_config.ContainsKey("owner");

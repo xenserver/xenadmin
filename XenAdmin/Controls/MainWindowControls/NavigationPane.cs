@@ -266,8 +266,8 @@ namespace XenAdmin.Controls.MainWindowControls
                                    Text = search.Name.EscapeAmpersands(),
                                    Tag = search,
                                    Image = search.DefaultSearch
-                                               ? Properties.Resources._000_defaultSpyglass_h32bit_16
-                                               : Properties.Resources._000_Search_h32bit_16,
+                                               ? Images.StaticImages._000_defaultSpyglass_h32bit_16
+                                               : Images.StaticImages._000_Search_h32bit_16,
 
                                };
                 itemList.Add(item);

@@ -45,7 +45,6 @@ namespace XenAdmin.Dialogs
             : base(connection)
         {
             InitializeComponent();
-            Icon = Properties.Resources.AppIcon;
             lblStatus.Text = string.Format(Messages.LABEL_ATTEMPT, connection.Hostname);
         }
 

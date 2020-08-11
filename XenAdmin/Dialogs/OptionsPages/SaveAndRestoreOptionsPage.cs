@@ -30,17 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.RestoreSession;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -50,8 +44,6 @@ namespace XenAdmin.Dialogs.OptionsPages
     /// </summary>
     public partial class SaveAndRestoreOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private byte[] TemporaryMasterPassword;
         // call save serverlist on OK
         protected internal bool SaveAllAfter { get; set; }
@@ -61,13 +53,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             InitializeComponent();
             // setup all the controls with the current state of the settings
             FillCurrentSettings();
-        }
-
-        public static void Log()
-        {
-            // SSL Certificates
-            log.Info("=== SaveSession: " + Properties.Settings.Default.SaveSession.ToString());
-            log.Info("=== RequirePass: " + Properties.Settings.Default.RequirePass.ToString());
         }
 
         // all prompts for old password should have been made
@@ -235,20 +220,11 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #region IVerticalTab Members
 
-        public override string Text
-        {
-            get { return Messages.SAVE_AND_RESTORE; }
-        }
+        public override string Text => Messages.SAVE_AND_RESTORE;
 
-        public string SubText
-        {
-            get { return Messages.SAVE_AND_RESTORE_DESC; }
-        }
+        public string SubText => Messages.SAVE_AND_RESTORE_DESC;
 
-        public Image Image
-        {
-            get { return Resources._000_BackupMetadata_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_BackupMetadata_h32bit_16;
 
         #endregion
     }

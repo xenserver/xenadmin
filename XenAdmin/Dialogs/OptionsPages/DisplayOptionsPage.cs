@@ -32,15 +32,12 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class DisplayOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public DisplayOptionsPage()
         {
             InitializeComponent();
@@ -52,12 +49,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             GraphAreasRadioButton.Checked = Properties.Settings.Default.FillAreaUnderGraphs;
             GraphLinesRadioButton.Checked = !Properties.Settings.Default.FillAreaUnderGraphs;
             checkBoxStoreTab.Checked = Properties.Settings.Default.RememberLastSelectedTab;
-        }
-
-        public static void Log()
-        {
-            log.Info("=== FillAreaUnderGraphs: " + Properties.Settings.Default.FillAreaUnderGraphs);
-            log.Info("=== RememberLastSelectedTab: " + Properties.Settings.Default.RememberLastSelectedTab);
         }
 
         #region IOptionsPage Members
@@ -80,7 +71,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.DISPLAY_DETAILS;
 
-        public Image Image => Resources._001_PerformanceGraph_h32bit_16;
+        public Image Image => Images.StaticImages._001_PerformanceGraph_h32bit_16;
 
         #endregion
     }

@@ -31,7 +31,6 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using XenAdmin.Core;
 
 
@@ -39,8 +38,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class SecurityOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public SecurityOptionsPage()
         {
             InitializeComponent();
@@ -59,14 +56,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             CertificateChangedCheckBox.Enabled = Registry.SSLCertificateTypes == SSLCertificateTypes.None;
 
             checkBoxReminder.Checked = Properties.Settings.Default.RemindChangePassword;
-        }
-
-        public static void Log()
-        {
-            // SSL Certificates
-            log.Info("=== WarnUnrecognizedCertificate: " + Properties.Settings.Default.WarnUnrecognizedCertificate.ToString());
-            log.Info("=== WarnChangedCertificate: " + Properties.Settings.Default.WarnChangedCertificate.ToString());
-            log.Info("=== RemindChangePassword: " + Properties.Settings.Default.RemindChangePassword.ToString());
         }
 
         #region IOptionsPage Members
@@ -91,7 +80,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.SECURITY_DESC;
 
-        public Image Image => Resources.padlock;
+        public Image Image => Images.StaticImages.padlock;
 
         #endregion
     }

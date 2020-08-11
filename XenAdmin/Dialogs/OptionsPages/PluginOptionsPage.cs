@@ -40,8 +40,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     internal partial class PluginOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private PluginManager _pluginManager;
         public PluginManager PluginManager
         {
@@ -69,14 +67,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             m_tlpScanning.Visible = false;
             labelNoPlugins.Visible = false;
             this.linkLabel1.Visible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
-        }
-
-        public static void Log()
-        {
-            log.InfoFormat("=== DisabledPlugins: {0}",
-                Properties.Settings.Default.DisabledPlugins.Length == 0
-                    ? "<None>"
-                    : string.Join(",", Properties.Settings.Default.DisabledPlugins));
         }
 
         #region Private methods
@@ -251,19 +241,14 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #region Implementation of IVerticalTab
 
-        public override string Text { get { return Messages.PLUGINS; } }
+        public override string Text => Messages.PLUGINS;
 
-        public string SubText
-        {
-            get
-            {
-                return _pluginManager.EnabledPluginsCount == 1
-                           ? Messages.PLUGIN_ENABLED_COUNT_ONE
-                           : string.Format(Messages.PLUGIN_ENABLED_COUNT, _pluginManager.EnabledPluginsCount);
-            }
-        }
+        public string SubText =>
+            _pluginManager.EnabledPluginsCount == 1
+                ? Messages.PLUGIN_ENABLED_COUNT_ONE
+                : string.Format(Messages.PLUGIN_ENABLED_COUNT, _pluginManager.EnabledPluginsCount);
 
-        public Image Image { get { return Properties.Resources._000_Module_h32bit_16; } }
+        public Image Image => Images.StaticImages._000_Module_h32bit_16;
 
         #endregion
 

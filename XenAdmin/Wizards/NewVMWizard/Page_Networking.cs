@@ -286,7 +286,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public void UpdateDetails()
         {
-            ImageCell.Value = Properties.Resources._000_Network_h32bit_16;
+            ImageCell.Value = Images.StaticImages._000_Network_h32bit_16;
             MacCell.Value = string.IsNullOrEmpty(Vif.MAC) ? Messages.NEWVMWIZARD_NETWORKINGPAGE_AUTOGEN : Vif.MAC;
             NetworkCell.Value = Helpers.GetName(Vif.Connection.Resolve(Vif.network));
         }

@@ -134,8 +134,8 @@ namespace XenAdmin.Controls
                 {
                     if (i > 0)
                     {
-                        g.DrawImage(Properties.Resources.folder_separator, p + new Size(0, IMAGE_OFFSET));
-                        p.X += Properties.Resources.folder_separator.Width + INNER_PADDING;
+                        g.DrawImage(Images.StaticImages.folder_separator, p + new Size(0, IMAGE_OFFSET));
+                        p.X += Images.StaticImages.folder_separator.Width + INNER_PADDING;
                     }
 
                     string s = pathParts[i];
@@ -204,7 +204,7 @@ namespace XenAdmin.Controls
                 for (int i = 0; i < pathParts.Length; ++i)
                 {
                     if (i > 0)
-                        theSize.Width += Properties.Resources.folder_separator.Width + INNER_PADDING;
+                        theSize.Width += Images.StaticImages.folder_separator.Width + INNER_PADDING;
                     string s = pathParts[i];
                     Size sz = Drawing.MeasureText(g, s, Font, bigSize, TextFormatFlags.NoPadding);
                     theSize.Width += sz.Width + INNER_PADDING;
@@ -242,7 +242,7 @@ namespace XenAdmin.Controls
                     if (trunc1 == 0)
                         theSize.Width += Drawing.MeasureText(g, Messages.ELLIPSIS, Font, bigSize, TextFormatFlags.NoPadding).Width;
                     else
-                        theSize.Width -= Properties.Resources.folder_separator.Width + 2 * INNER_PADDING;
+                        theSize.Width -= Images.StaticImages.folder_separator.Width + 2 * INNER_PADDING;
                     theSize.Width -= Drawing.MeasureText(g, pathParts[trunc1], Font, bigSize, TextFormatFlags.NoPadding).Width;
                 }
 

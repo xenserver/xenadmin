@@ -234,11 +234,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             if (combination == null || combination.Count <= 0)
             {
-                using (var dlg = new ErrorDialog(Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED)
-                    {WindowTitle = Messages.SERVER_STATUS_REPORT})
-                {
+                using (var dlg = new ErrorDialog(Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED))
                     dlg.ShowDialog(this);
-                }
 
                 cancelled = true;
                 return;
@@ -474,17 +471,17 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 switch(Capability.PII)
                 {
                     case PrivateInformationIncluded.maybe:
-                        cellImage.Value = Properties.Resources.alert2_16;
+                        cellImage.Value = Images.StaticImages.alert2_16;
                         break;
                     case PrivateInformationIncluded.customized:
-                        cellImage.Value = Properties.Resources.alert3_16;
+                        cellImage.Value = Images.StaticImages.alert3_16;
                         break;
                     case PrivateInformationIncluded.no:
-                        cellImage.Value = Properties.Resources.alert4_16;
+                        cellImage.Value = Images.StaticImages.alert4_16;
                         break;
                     case PrivateInformationIncluded.yes:
                     default:
-                        cellImage.Value = Properties.Resources.alert1_16;
+                        cellImage.Value = Images.StaticImages.alert1_16;
                         break;
                 }
 

@@ -477,7 +477,7 @@ namespace XenAdmin.ConsoleView
             {
                 dockButton.Text += Messages.VNC_DOCK_F11;
             }
-            dockButton.Image = parentVNCView.isDocked ? Properties.Resources.detach_24 : Properties.Resources.attach_24;
+            dockButton.Image = parentVNCView.isDocked ? Images.StaticImages.detach_24 : Images.StaticImages.attach_24;
         }
 
         public void UpdateFullScreenButton()
@@ -1392,28 +1392,22 @@ namespace XenAdmin.ConsoleView
 
         private void pictureBox1_MouseEnter(object sender, EventArgs e)
         {
-            pictureBox1.Image = Properties.Resources.lifecycle_hot;
+            pictureBox1.Image = Images.StaticImages.lifecycle_hot;
         }
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
-            if (droppedDown)
-                pictureBox1.Image = Properties.Resources.lifecycle_pressed;
-            else
-                pictureBox1.Image = Properties.Resources._001_LifeCycle_h32bit_24;
+            pictureBox1.Image = droppedDown ? Images.StaticImages.lifecycle_pressed : Images.StaticImages._001_LifeCycle_h32bit_24;
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            pictureBox1.Image = Properties.Resources.lifecycle_pressed;
+            pictureBox1.Image = Images.StaticImages.lifecycle_pressed;
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (droppedDown)
-                pictureBox1.Image = Properties.Resources.lifecycle_pressed;
-            else
-                pictureBox1.Image = Properties.Resources.lifecycle_hot;
+            pictureBox1.Image = droppedDown ? Images.StaticImages.lifecycle_pressed : Images.StaticImages.lifecycle_hot;
         }
 
         private void LifeCycleMenuStrip_Opened(object sender, EventArgs e)
@@ -1426,7 +1420,7 @@ namespace XenAdmin.ConsoleView
             if (e.CloseReason != ToolStripDropDownCloseReason.AppClicked || !pictureBox1.ClientRectangle.Contains(this.PointToClient(MousePosition)))
             {
                 droppedDown = false;
-                pictureBox1.Image = Properties.Resources._001_LifeCycle_h32bit_24;
+                pictureBox1.Image = Images.StaticImages._001_LifeCycle_h32bit_24;
             }
             else
             {

@@ -643,8 +643,8 @@ namespace XenAdmin.TabPages
                 if (subj != null)
                     subject = subj;
 
-                _cellExpander.Value = expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
-                _cellGroupOrUser.Value = IsLocalRootRow || !subject.IsGroup ? Resources._000_User_h32bit_16 : Resources._000_UserAndGroup_h32bit_16;
+                _cellExpander.Value = expanded ? Images.StaticImages.expanded_triangle : Images.StaticImages.contracted_triangle;
+                _cellGroupOrUser.Value = IsLocalRootRow || !subject.IsGroup ? Images.StaticImages._000_User_h32bit_16 : Images.StaticImages._000_UserAndGroup_h32bit_16;
                 _cellSubjectInfo.Value = expanded ? expandedSubjectInfo : contractedSubjectInfo;
                 _cellRoles.Value = expanded ? expandedRoles : contractedRoles;
                 _cellLoggedIn.Value = IsLocalRootRow || subject.IsGroup || statusLost

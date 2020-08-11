@@ -87,7 +87,6 @@ namespace XenAdmin.TabPages
 
             base.Text = Messages.WORKLOAD_BALANCING;
             pdSectionConfiguration.fixFirstColumnWidth(200);
-            pictureBoxWarningTriangle.Image = SystemIcons.Warning.ToBitmap();
 
             RefreshControls();
         }

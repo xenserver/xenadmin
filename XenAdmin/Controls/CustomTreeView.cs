@@ -220,14 +220,14 @@ namespace XenAdmin.Controls
                     if(Application.RenderWithVisualStyles)
 						plusRenderer.DrawBackground(e.Graphics, new Rectangle(e.Bounds.Left + indent - ItemHeight, e.Bounds.Top + 3 + topMargin, 9, 9));
                     else
-						e.Graphics.DrawImage(Properties.Resources.tree_plus, new Rectangle(e.Bounds.Left + indent - ItemHeight, e.Bounds.Top + 3 + topMargin, 9, 9));
+						e.Graphics.DrawImage(Images.StaticImages.tree_plus, new Rectangle(e.Bounds.Left + indent - ItemHeight, e.Bounds.Top + 3 + topMargin, 9, 9));
                 }
                 else
                 {
                     if (Application.RenderWithVisualStyles)
 						minusRenderer.DrawBackground(e.Graphics, new Rectangle(e.Bounds.Left + indent - ItemHeight, e.Bounds.Top + 3 + topMargin, 9, 9));
                     else
-						e.Graphics.DrawImage(Properties.Resources.tree_minus, new Rectangle(e.Bounds.Left + indent - ItemHeight, e.Bounds.Top + 3 + topMargin, 9, 9));
+						e.Graphics.DrawImage(Images.StaticImages.tree_minus, new Rectangle(e.Bounds.Left + indent - ItemHeight, e.Bounds.Top + 3 + topMargin, 9, 9));
                 }
             }
 

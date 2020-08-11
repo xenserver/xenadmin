@@ -150,13 +150,7 @@ namespace XenAdmin.SettingsPanels
             txtIQN.Select();
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources.edit_16;
-            }
-        }
+        public Image Image => Images.StaticImages.edit_16;
 
         private void Repopulate()
         {

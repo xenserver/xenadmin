@@ -165,13 +165,7 @@ namespace XenAdmin.SettingsPanels
 			}
 		}
 
-		public Image Image
-		{
-			get
-			{
-				return Resources._001_PowerOn_h32bit_16;
-			}
-		}
+        public Image Image => Images.StaticImages._001_PowerOn_h32bit_16;
 
 		#endregion
 

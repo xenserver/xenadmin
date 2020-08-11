@@ -30,11 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -61,21 +58,12 @@ namespace XenAdmin.Controls
 
         public string BlurbText
         {
-            set
-            {
-                Blurb.Text = value;
-            }
+            set => Blurb.Text = value;
         }
 
         public string LearnMoreUrl
         {
-            set { learnMoreUrl = value; }
-        }
-
-        public void SetAllTexts(string blurb, string learnMoreUrl)
-        {
-            BlurbText = blurb;
-            LearnMoreUrl = learnMoreUrl;
+            set => learnMoreUrl = value;
         }
 
         private void LearnMoreButton_Clicked(object sender, EventArgs e)
@@ -101,10 +89,7 @@ namespace XenAdmin.Controls
         {
         }
 
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
+        public bool ValidToSave => true;
 
         public void ShowLocalValidationMessages()
         {
@@ -114,34 +99,16 @@ namespace XenAdmin.Controls
         {
         }
 
-        public bool HasChanged
-        {
-            get { return false; }
-        }
+        public bool HasChanged => false;
 
 
         #region IVerticalTab Members
 
-        public string SubText
-        {
-            get
-            {
-                return Messages.XENSERVER_UPGRADE_REQUIRED;
-            }
-        }
+        public string SubText => Messages.XENSERVER_UPGRADE_REQUIRED;
 
-        private Image image = Properties.Resources.upsell_16;
-        public Image Image
-        {
-            get
-            {
-                return image;
-            }
-            set
-            {
-                image = value;
-            }
-        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Image Image { get; set; } = Images.StaticImages.upsell_16;
 
         #endregion
 
@@ -149,7 +116,7 @@ namespace XenAdmin.Controls
 
         private void OKButton_Click(object sender, EventArgs e)
         {
-            ParentForm.Close();
+            ParentForm?.Close();
         }
     }
 }

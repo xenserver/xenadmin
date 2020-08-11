@@ -84,7 +84,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public string SubText { get; private set; }
 
-        public Image Image => Properties.Resources.notif_events_16;
+        public Image Image => Images.StaticImages.notif_events_16;
 
         #endregion
 

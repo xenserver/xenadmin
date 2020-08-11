@@ -32,7 +32,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using XenAPI;
 using XenCenterLib;
 
@@ -40,9 +39,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class ConnectionOptionsPage : UserControl, IOptionsPage
     {
-        private const string ConnectionTabSettingsHeader = "Connection Tab Settings -";
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private OptionsDialog optionsDialog;
+        public event Action<bool> IsValidChanged;
 
         // used for preventing the event handlers from doing anything when changing controls through code
         private bool eventsDisabled = true;
@@ -50,16 +47,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         public ConnectionOptionsPage()
         {
             InitializeComponent();
-
-            build();
+            Build();
         }
 
-        public OptionsDialog OptionsDialog
-        {
-            set { this.optionsDialog = value; }
-        }
-
-        private void build()
+        private void Build()
         {
             // Proxy server
             switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)
@@ -113,7 +104,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (eventsDisabled)
                 return;
 
-            enableOK();
+            CheckValid();
         }
 
         private void AuthenticationCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -132,7 +123,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             eventsDisabled = false;
 
-            enableOK();
+            CheckValid();
         }
 
         private void GeneralProxySettingsChanged(object sender, EventArgs e)
@@ -140,7 +131,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (eventsDisabled)
                 return;
             SelectUseThisProxyServer();
-            enableOK();
+            CheckValid();
         }
 
         private void ProxyAuthenticationSettingsChanged(object sender, EventArgs e)
@@ -148,7 +139,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (eventsDisabled)
                 return;
             SelectProvideCredentials();
-            enableOK();
+            CheckValid();
         }
 
         private void SelectUseThisProxyServer()
@@ -162,52 +153,35 @@ namespace XenAdmin.Dialogs.OptionsPages
             UseProxyRadioButton.Checked = true;
         }
 
-        private void enableOK()
+        private void CheckValid()
         {
-            if (optionsDialog == null)
-                return;
-
             if (!UseProxyRadioButton.Checked)
             {
-                optionsDialog.okButton.Enabled = true;
+                IsValidChanged?.Invoke(true);
                 return;
             }
-            else if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
+            
+            if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
             {
-                optionsDialog.okButton.Enabled = false;
+                IsValidChanged?.Invoke(false);
+                return;
+            }
+
+            if (!Util.IsValidPort(ProxyPortTextBox.Text))
+            {
+                IsValidChanged?.Invoke(false);
                 return;
             }
 
             try
             {
-                if (!Util.IsValidPort(ProxyPortTextBox.Text))
-                {
-                    optionsDialog.okButton.Enabled = false;
-                    return;
-                }
-
                 var uriHostNameType = Uri.CheckHostName(ProxyAddressTextBox.Text);
-
-                optionsDialog.okButton.Enabled =  uriHostNameType != UriHostNameType.Unknown && uriHostNameType != UriHostNameType.IPv6;
-                return;
+                IsValidChanged?.Invoke(uriHostNameType != UriHostNameType.Unknown && uriHostNameType != UriHostNameType.IPv6);
             }
             catch
             {
-                optionsDialog.okButton.Enabled = false;
+                IsValidChanged?.Invoke(false);
             }
-        }
-
-        public static void Log()
-        {
-            log.Info(ConnectionTabSettingsHeader);
-            // Proxy server
-            log.Info("=== ProxySetting: " + Properties.Settings.Default.ProxySetting.ToString());
-            log.Info("=== ProxyAddress: " + Properties.Settings.Default.ProxyAddress.ToString());
-            log.Info("=== ProxyPort: " + Properties.Settings.Default.ProxyPort.ToString());
-            log.Info("=== ByPassProxyForServers: " + Properties.Settings.Default.BypassProxyForServers.ToString());
-            log.Info("=== ProvideProxyAuthentication: " + Properties.Settings.Default.ProvideProxyAuthentication.ToString());
-            log.Info("=== ProxyAuthenticationMethod: " + Properties.Settings.Default.ProxyAuthenticationMethod.ToString());
-            log.Info("=== ConnectionTimeout: " + Properties.Settings.Default.ConnectionTimeout.ToString());
         }
 
         #region IOptionsPage Members
@@ -265,20 +239,11 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #region IVerticalTab Members
 
-        public override string Text
-        {
-            get { return Messages.CONNECTION; }
-        }
+        public override string Text => Messages.CONNECTION;
 
-        public string SubText
-        {
-            get { return Messages.CONNECTION_DESC; }
-        }
+        public string SubText => Messages.CONNECTION_DESC;
 
-        public Image Image
-        {
-            get { return Resources._000_Network_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_Network_h32bit_16;
 
         #endregion
     }

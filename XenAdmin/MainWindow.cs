@@ -502,7 +502,7 @@ namespace XenAdmin
                 // Don't show cancelled exception
                 if (action.Exception != null && !(action.Exception is CancelledException))
                 {
-                    SetStatusBar(Properties.Resources._000_error_h32bit_16, action.Exception.Message);
+                    SetStatusBar(Images.StaticImages._000_error_h32bit_16, action.Exception.Message);
                 }
                 else
                 {
@@ -880,7 +880,7 @@ namespace XenAdmin
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                     new ActionBase(title, "", false, true, Messages.INCOMPATIBLE_PRODUCTS);
 
-                    using (var dlog = new ConnectionRefusedDialog {ErrorMessage = Messages.INCOMPATIBLE_PRODUCTS, Url = ""})
+                    using (var dlog = new ErrorDialog(Messages.INCOMPATIBLE_PRODUCTS) {WindowTitle = title})
                         dlog.ShowDialog(this);
                 });
                 return;
@@ -942,7 +942,13 @@ namespace XenAdmin
 
                         new ActionBase(title, "", false, true, error);
 
-                        using (var dlog = new ConnectionRefusedDialog {ErrorMessage = msg, Url = url})
+                        using (var dlog = new ErrorDialog(msg)
+                        {
+                            WindowTitle = title,
+                            ShowLinkLabel = !HiddenFeatures.LinkLabelHidden,
+                            LinkText = url,
+                            LinkData = url
+                        })
                             dlog.ShowDialog(this);
                     });
                     return;
@@ -2594,8 +2600,8 @@ namespace XenAdmin
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OptionsDialog dialog = new OptionsDialog(pluginManager);
-            dialog.ShowDialog(this);
+            using (var dialog = new OptionsDialog(pluginManager))
+                dialog.ShowDialog(this);
         }
 
         internal void action_Completed(ActionBase sender)
@@ -2617,10 +2623,8 @@ namespace XenAdmin
         {
             if (WizardHelpers.IsValidFile(path, out var failureReason))
             {
-                var wizard = new PatchingWizard();
-                wizard.Show(this);
-                wizard.NextStep();
-                wizard.AddFile(path);
+                var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+                wizard.PrepareToInstallUpdate(path);
             }
             else
             {
@@ -2732,7 +2736,7 @@ namespace XenAdmin
             else
             {
                 TitleLabel.Text = Messages.XENCENTER;
-                TitleIcon.Image = Properties.Resources.Logo;
+                TitleIcon.Image = Images.StaticImages.Logo;
                 loggedInLabel1.Connection = null;
             }
 

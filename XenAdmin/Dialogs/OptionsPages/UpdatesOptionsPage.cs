@@ -31,7 +31,6 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using XenAdmin.Core;
 
 
@@ -55,16 +54,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             // XenServer updates
             AllowXenServerPatchesCheckBox.Checked = Properties.Settings.Default.AllowPatchesUpdates;
             AllowXenServerUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenServerUpdates;
-        }
-
-        public static void Log()
-        {
-            // XenCenter updates
-            log.Info("=== AllowXenCenterUpdates: " + Properties.Settings.Default.AllowXenCenterUpdates);
-
-            // XenServer updates
-            log.Info("=== AllowPatchesUpdates: " + Properties.Settings.Default.AllowPatchesUpdates);
-            log.Info("=== AllowXenServerUpdates: " + Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         #region IOptionsPage Members
@@ -96,7 +85,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => Messages.UPDATES_DESC;
 
-        public Image Image => Resources._000_Patch_h32bit_16;
+        public Image Image => Images.StaticImages._000_Patch_h32bit_16;
 
         #endregion
     }

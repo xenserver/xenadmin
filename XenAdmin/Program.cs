@@ -300,7 +300,7 @@ namespace XenAdmin
 
             log.Info("Application started");
             logSystemDetails();
-            OptionsDialog.Log();
+            Settings.Log();
 
             // Remove the '--wait' argument, which may have been passed to the splash screen
             var sanitizedArgs = Args.Where(ar => ar != "--wait").ToArray();

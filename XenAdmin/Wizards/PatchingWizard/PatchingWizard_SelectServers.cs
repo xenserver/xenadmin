@@ -57,7 +57,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private const int INDETERMINATE = 2;
 
         private bool poolSelectionOnly;
-        private readonly List<Host> selectedServers = new List<Host>();
 
         public XenServerPatchAlert UpdateAlertFromWeb { private get; set; }
         public XenServerPatchAlert AlertFromFileOnDisk { private get; set; }
@@ -183,7 +182,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             // restore server selection
-            SelectServers(selectedServers);
+            SelectServers(SelectedServers);
         }
 
         public override void SelectDefaultControl()
@@ -404,8 +403,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            selectedServers.Clear();
-            selectedServers.AddRange(GetSelectedServers());
+            SelectedServers.Clear();
+            SelectedServers.AddRange(GetSelectedServers());
 
             if (direction == PageLoadedDirection.Forward)
             {
@@ -513,10 +512,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public List<Host> SelectedServers
-        {
-            get { return selectedServers; }
-        }
+        public List<Host> SelectedServers { get; set; } = new List<Host>();
 
         private List<Host> GetSelectedServers()
         {
@@ -587,7 +583,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public UpdateType SelectedUpdateType { private get; set; }
 
-        public void SelectServers(List<Host> selectedServers)
+        private void SelectServers(List<Host> selectedServers)
         {
             if (selectedServers.Count > 0)
             {
@@ -615,17 +611,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                             }
                         }
                     }
-                }
-            }
-        }
-
-        public void DisableUnselectedServers()
-        {
-            foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
-            {
-                if (row.Enabled && row.CheckValue == UNCHECKED)
-                {
-                    row.Enabled = false;
                 }
             }
         }
@@ -1027,7 +1012,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Host master = pool.Connection.Resolve(pool.master);
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
-                    _expansionCell.Value = Resources.tree_minus;
+                    _expansionCell.Value = Images.StaticImages.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
                     _versionCell.Value = master.ProductVersionTextShort();
@@ -1039,7 +1024,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
-                    _expansionCell.Value = Resources.tree_plus;
+                    _expansionCell.Value = Images.StaticImages.tree_plus;
                     if (_hasPool)
                     {
                         if (_poolIconHostCheckCell.Value == null)

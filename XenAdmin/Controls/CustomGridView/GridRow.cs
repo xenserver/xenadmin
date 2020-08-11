@@ -43,8 +43,8 @@ namespace XenAdmin.Controls.CustomGridView
         public readonly Dictionary<String, GridItemBase> Items = new Dictionary<string, GridItemBase>();
         public readonly List<GridRow> Rows = new List<GridRow>();
 
-        public static Image ExpandedImage = Properties.Resources.expanded_triangle;
-        public static Image ShrunkenImage = Properties.Resources.contracted_triangle;
+        public static Image ExpandedImage = Images.StaticImages.expanded_triangle;
+        public static Image ShrunkenImage = Images.StaticImages.contracted_triangle;
 
         public string OpaqueRef;
         public object Tag;

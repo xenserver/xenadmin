@@ -359,7 +359,7 @@ namespace XenAdmin.XenSearch
     public abstract class PropertyQuery<T> : QueryFilter
     {
         public readonly PropertyNames property;
-        private readonly PropertyAccessor propertyAccessor;
+        private readonly Func<IXenObject, IComparable> propertyAccessor;
 
         internal readonly bool nullProtect; 
 

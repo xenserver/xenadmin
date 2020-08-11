@@ -169,6 +169,8 @@ namespace XenAdmin
 
         #endregion
 
+        Usb16,
+
         #region Status Icons
         Ok,
         Info,

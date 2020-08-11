@@ -61,7 +61,7 @@ namespace XenAdmin.Controls
                                          Text = Messages.SEVERITY_FILTER_0,
                                          Checked = true,
                                          CheckOnClick = true,
-                                         Image = Properties.Resources.alert6_16,
+                                         Image = Images.StaticImages.alert6_16,
                                          ToolTipText = Messages.SEVERITY_FILTER_0_DETAIL
                                      };
             toolStripMenuItem1 = new ToolStripMenuItem
@@ -69,7 +69,7 @@ namespace XenAdmin.Controls
                                          Text = Messages.SEVERITY_FILTER_1,
                                          Checked = true,
                                          CheckOnClick = true,
-                                         Image = Properties.Resources.alert1_16,
+                                         Image = Images.StaticImages.alert1_16,
                                          ToolTipText = Messages.SEVERITY_FILTER_1_DETAIL
                                      };
             toolStripMenuItem2 = new ToolStripMenuItem
@@ -77,7 +77,7 @@ namespace XenAdmin.Controls
                                          Text = Messages.SEVERITY_FILTER_2,
                                          Checked = true,
                                          CheckOnClick = true,
-                                         Image = Properties.Resources.alert2_16,
+                                         Image = Images.StaticImages.alert2_16,
                                          ToolTipText = Messages.SEVERITY_FILTER_2_DETAIL
                                      };
             toolStripMenuItem3 = new ToolStripMenuItem
@@ -85,7 +85,7 @@ namespace XenAdmin.Controls
                                          Text = Messages.SEVERITY_FILTER_3,
                                          Checked = true,
                                          CheckOnClick = true,
-                                         Image = Properties.Resources.alert3_16,
+                                         Image = Images.StaticImages.alert3_16,
                                          ToolTipText = Messages.SEVERITY_FILTER_3_DETAIL
                                      };
             toolStripMenuItem4 = new ToolStripMenuItem
@@ -93,7 +93,7 @@ namespace XenAdmin.Controls
                                          Text = Messages.SEVERITY_FILTER_4,
                                          Checked = true,
                                          CheckOnClick = true,
-                                         Image = Properties.Resources.alert4_16,
+                                         Image = Images.StaticImages.alert4_16,
                                          ToolTipText = Messages.SEVERITY_FILTER_4_DETAIL
                                      };
             toolStripMenuItem5 = new ToolStripMenuItem
@@ -101,7 +101,7 @@ namespace XenAdmin.Controls
                                          Text = Messages.SEVERITY_FILTER_5,
                                          Checked = true,
                                          CheckOnClick = true,
-                                         Image = Properties.Resources.alert5_16,
+                                         Image = Images.StaticImages.alert5_16,
                                          ToolTipText = Messages.SEVERITY_FILTER_5_DETAIL
                                      };
             toolStripMenuItemAll = new ToolStripMenuItem

@@ -185,10 +185,9 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTab Members
 
-
         public string SubText => Messages.WLB_THRESHOLDS_SUBTEXT;
 
-        public Image Image => Properties.Resources._000_GetMemoryInfo_h32bit_16;
+        public Image Image => Images.StaticImages._000_GetMemoryInfo_h32bit_16;
 
         #endregion
     }

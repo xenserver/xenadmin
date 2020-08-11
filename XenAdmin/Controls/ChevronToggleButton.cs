@@ -64,8 +64,8 @@ namespace XenAdmin.Controls
 
         public ChevronToggleButton(string toogleUpText, string toogleDownText)
         {
-            ToggleUpImage = Properties.Resources.PDChevronRight;
-            ToggleDownImage = Properties.Resources.PDChevronDown;
+            ToggleUpImage = Images.StaticImages.PDChevronRight;
+            ToggleDownImage = Images.StaticImages.PDChevronDown;
             ToggleUpText = toogleUpText;
             ToggleDownText = toogleDownText;
             CurrentTogglePosition = TogglePosition.Collapsed;

@@ -30,11 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace XenAdmin.Controls
@@ -54,13 +50,13 @@ namespace XenAdmin.Controls
             base.OnResize(e);
 
             NormalImage =
-                Width == 24 ? Properties.Resources.help_24 :
-                Width == 32 ? Properties.Resources._000_HelpIM_h32bit_32 :
-                              Properties.Resources._000_HelpIM_h32bit_16;
+                Width == 24 ? Images.StaticImages.help_24 :
+                Width == 32 ? Images.StaticImages._000_HelpIM_h32bit_32 :
+                              Images.StaticImages._000_HelpIM_h32bit_16;
             HoverImage =
-                Width == 24 ? Properties.Resources.help_24_hover :
-                Width == 32 ? Properties.Resources.help_32_hover :
-                              Properties.Resources.help_16_hover;
+                Width == 24 ? Images.StaticImages.help_24_hover :
+                Width == 32 ? Images.StaticImages.help_32_hover :
+                              Images.StaticImages.help_16_hover;
 
             Image = NormalImage;
         }

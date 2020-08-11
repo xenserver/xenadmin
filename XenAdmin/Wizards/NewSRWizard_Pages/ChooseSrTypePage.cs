@@ -254,7 +254,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     selectedStoreTypeLabel.Text = string.Empty;
                     SRBlurb.Visible = false;
                     upsellPage1.Visible = true;
-                    upsellPage1.SetAllTexts(Messages.UPSELL_BLURB_ENHANCEDSR, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
+                    upsellPage1.BlurbText = Messages.UPSELL_BLURB_ENHANCEDSR;
+                    upsellPage1.LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL;
                     m_allowNext = false;
                 }
                 else

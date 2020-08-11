@@ -62,7 +62,9 @@ namespace XenAdmin.Dialogs
             var allAreGroups = subjects.Count > 0 && subjects.All(s => s.IsGroup);
             var allAreUsers = subjects.Count > 0 && subjects.All(s => !s.IsGroup);
 
-            pictureBoxSubjectType.Image = allAreUsers ? Properties.Resources._000_User_h32bit_32 : Properties.Resources._000_UserAndGroup_h32bit_32;
+            pictureBoxSubjectType.Image = allAreUsers
+                ? Images.StaticImages._000_User_h32bit_32
+                : Images.StaticImages._000_UserAndGroup_h32bit_32;
 
             if (subjects.Count == 1)
             {

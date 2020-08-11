@@ -178,7 +178,7 @@ namespace XenAdmin.Commands
             }
             else
             {
-                if (status == 0 || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+                if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     return FriendlyErrorNames.VM_MISSING_PV_DRIVERS;
 
                 if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))

@@ -65,10 +65,7 @@ namespace XenAdmin.SettingsPanels
             get { return CheckBoxEnableClustering.Checked ? Messages.ENABLED : Messages.DISABLED; } 
         }
 
-        public Image Image
-        {
-            get { return Properties.Resources._000_Storage_h32bit_16; }
-        }
+        public Image Image => Images.StaticImages._000_Storage_h32bit_16;
 
         public AsyncAction SaveSettings()
         {

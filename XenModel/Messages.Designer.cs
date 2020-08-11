@@ -12431,6 +12431,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Configure just this disk anyway.
+        /// </summary>
+        public static string DEVICE_POSITION_CONFLICT_CONFIGURE {
+            get {
+                return ResourceManager.GetString("DEVICE_POSITION_CONFLICT_CONFIGURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Swap these disks.
+        /// </summary>
+        public static string DEVICE_POSITION_CONFLICT_SWAP {
+            get {
+                return ResourceManager.GetString("DEVICE_POSITION_CONFLICT_SWAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You will have to restart the VM for changes in device position to take effect..
         /// </summary>
         public static string DEVICE_POSITION_RESTART_REQUIRED {
@@ -12467,7 +12485,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable pass-through.
+        ///   Looks up a localized string similar to Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines..
         /// </summary>
         public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {
             get {
@@ -12476,29 +12494,13 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable pass-through.
+        ///   Looks up a localized string similar to Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines.
+        ///
+        ///Plugging in untrustworthy USB devices to your computer may put your computer at risk. USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs..
         /// </summary>
         public static string DIALOG_USB_USAGE_ENABLE_PASSTHROUGH {
             get {
                 return ResourceManager.GetString("DIALOG_USB_USAGE_ENABLE_PASSTHROUGH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to enable pass-through on this device? This will allow this device to be passed through to virtual machines..
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_ALLOW {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_ALLOW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to disable pass-through on this device? This device will no longer be allowed to be passed through to virtual machines..
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_DENY {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_DENY", resourceCulture);
             }
         }
         
@@ -15059,15 +15061,6 @@ namespace XenAdmin {
         public static string ENTER_MAINTENANCE_MODE_CONTEXT_MENU {
             get {
                 return ResourceManager.GetString("ENTER_MAINTENANCE_MODE_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To access your saved session it is required that you enter the master password when starting [XenCenter].
-        /// </summary>
-        public static string ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT {
-            get {
-                return ResourceManager.GetString("ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT", resourceCulture);
             }
         }
         
@@ -19469,15 +19462,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must reboot your server &apos;{0}&apos; to complete the restore process..
-        /// </summary>
-        public static string HOST_REBOOT_REQUIRED {
-            get {
-                return ResourceManager.GetString("HOST_REBOOT_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade failed. The server rebooted with the same version..
         /// </summary>
         public static string HOST_REBOOTED_SAME_VERSION {
@@ -22802,15 +22786,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ctrl+S.
-        /// </summary>
-        public static string MAINWINDOW_CTRL_S {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_CTRL_S", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ctrl+Y.
         /// </summary>
         public static string MAINWINDOW_CTRL_Y {
@@ -23356,15 +23331,6 @@ namespace XenAdmin {
         public static string MAINWINDOW_RESUME_ON_HOST {
             get {
                 return ResourceManager.GetString("MAINWINDOW_RESUME_ON_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sa&amp;ve and Restore....
-        /// </summary>
-        public static string MAINWINDOW_SAVE_AND_RESTORE {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_SAVE_AND_RESTORE", resourceCulture);
             }
         }
         
@@ -31820,6 +31786,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Remove Files.
+        /// </summary>
+        public static string REMOVE_FILES {
+            get {
+                return ResourceManager.GetString("REMOVE_FILES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove from &amp;folder.
         /// </summary>
         public static string REMOVE_FROM_FOLDER {
@@ -33461,7 +33436,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server Status Report.
+        ///   Looks up a localized string similar to &amp;Server Status Report.
         /// </summary>
         public static string SERVER_STATUS_REPORT {
             get {
@@ -34178,6 +34153,26 @@ namespace XenAdmin {
         public static string SNAPSHOT_REVERT {
             get {
                 return ResourceManager.GetString("SNAPSHOT_REVERT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to revert to &apos;{0}&apos;?
+        ///
+        ///Reverting to this snapshot will revert the VM back to the point in time that the snapshot was created, and the current state of the VM will be lost..
+        /// </summary>
+        public static string SNAPSHOT_REVERT_BLURB {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_REVERT_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Take a snapshot of the VM&apos;s current state and then revert.
+        /// </summary>
+        public static string SNAPSHOT_REVERT_NEW_SNAPSHOT {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_REVERT_NEW_SNAPSHOT", resourceCulture);
             }
         }
         
@@ -38112,7 +38107,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GBps.
+        ///   Looks up a localized string similar to GB/s.
         /// </summary>
         public static string VAL_GIGRATE {
             get {
@@ -38148,7 +38143,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to kBps.
+        ///   Looks up a localized string similar to kB/s.
         /// </summary>
         public static string VAL_KILRATE {
             get {
@@ -38184,7 +38179,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBps.
+        ///   Looks up a localized string similar to MB/s.
         /// </summary>
         public static string VAL_MEGRATE {
             get {
@@ -38238,7 +38233,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bps.
+        ///   Looks up a localized string similar to B/s.
         /// </summary>
         public static string VAL_RATE {
             get {
@@ -38274,7 +38269,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TBps.
+        ///   Looks up a localized string similar to TB/s.
         /// </summary>
         public static string VAL_TERRATE {
             get {
@@ -38369,6 +38364,17 @@ namespace XenAdmin {
         public static string VCPU_ONLY_WHEN_HALTED {
             get {
                 return ResourceManager.GetString("VCPU_ONLY_WHEN_HALTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
+        ///
+        ///To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs..
+        /// </summary>
+        public static string VCPUS_MORE_THAN_PCPUS {
+            get {
+                return ResourceManager.GetString("VCPUS_MORE_THAN_PCPUS", resourceCulture);
             }
         }
         
@@ -38472,56 +38478,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays).
-        /// </summary>
-        public static string VGPU_DESCRIPTION_MANY {
-            get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION_MANY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays, multiple vGPU support).
-        /// </summary>
-        public static string VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT {
-            get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display).
-        /// </summary>
-        public static string VGPU_DESCRIPTION_ONE {
-            get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} display, multiple vGPU support).
-        /// </summary>
-        public static string VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT {
-            get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
         /// </summary>
-        public static string VGPU_DESCRIPTION_ZEROES {
+        public static string VGPU_DESCRIPTION {
             get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION_ZEROES", resourceCulture);
+                return ResourceManager.GetString("VGPU_DESCRIPTION", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, multiple vGPU support).
         /// </summary>
-        public static string VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT {
+        public static string VGPU_DESCRIPTION_MULTIPLE_VGPU_SUPPORT {
             get {
-                return ResourceManager.GetString("VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT", resourceCulture);
+                return ResourceManager.GetString("VGPU_DESCRIPTION_MULTIPLE_VGPU_SUPPORT", resourceCulture);
             }
         }
         
@@ -38531,15 +38501,6 @@ namespace XenAdmin {
         public static string VGPU_PASSTHRU_TOSTRING {
             get {
                 return ResourceManager.GetString("VGPU_PASSTHRU_TOSTRING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
-        /// </summary>
-        public static string VGPU_TOSTRING {
-            get {
-                return ResourceManager.GetString("VGPU_TOSTRING", resourceCulture);
             }
         }
         
@@ -38738,6 +38699,15 @@ namespace XenAdmin {
         public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED {
             get {
                 return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Management Agent installed only.
+        /// </summary>
+        public static string VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY {
+            get {
+                return ResourceManager.GetString("VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY", resourceCulture);
             }
         }
         
@@ -40318,6 +40288,17 @@ namespace XenAdmin {
         public static string WLB_DISABLED {
             get {
                 return ResourceManager.GetString("WLB_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to disconnect the Workload Balancing server from this pool?
+        ///
+        ///Disconnecting will stop all Workload Balancing operations for this resource pool and delete all information about this pool from the Workload Balancing database..
+        /// </summary>
+        public static string WLB_DISCONNECT_SERVER {
+            get {
+                return ResourceManager.GetString("WLB_DISCONNECT_SERVER", resourceCulture);
             }
         }
         

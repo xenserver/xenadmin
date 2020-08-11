@@ -448,7 +448,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 {
                     labelHaStatus.Text = Messages.HA_UNABLE_TO_CALCULATE_MESSAGE;
                     labelHaStatus.ForeColor = Color.Red;
-                    pictureBoxStatus.Image = Resources._000_Alert2_h32bit_16;
+                    pictureBoxStatus.Image = Images.StaticImages._000_Alert2_h32bit_16;
                     return;
                 }
 
@@ -456,13 +456,13 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 {
                     labelHaStatus.Text = Messages.HA_OVERCOMMIT_MESSAGE;
                     labelHaStatus.ForeColor = Color.Red;
-                    pictureBoxStatus.Image = Resources._000_Alert2_h32bit_16;
+                    pictureBoxStatus.Image = Images.StaticImages._000_Alert2_h32bit_16;
                     return;
                 }
 
                 labelHaStatus.Text = string.Format(Messages.HA_GUARANTEED_MESSAGE, haNtolIndicator.NtolMax);
                 labelHaStatus.ForeColor = SystemColors.ControlText;
-                pictureBoxStatus.Image = Resources._000_Tick_h32bit_16;
+                pictureBoxStatus.Image = Images.StaticImages._000_Tick_h32bit_16;
             }
         }
 

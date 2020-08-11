@@ -41,7 +41,8 @@ namespace XenAdmin.TabPages
             InitializeComponent();
             base.Text = title;
 
-            upsellPage1.SetAllTexts(blurb, learnMoreUrl);
+            upsellPage1.BlurbText = blurb;
+            upsellPage1.LearnMoreUrl = learnMoreUrl;
         }
     }
 

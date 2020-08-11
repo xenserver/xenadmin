@@ -34,23 +34,16 @@ using System;
 namespace XenAdmin.Dialogs.RestoreSession
 {
     /// <summary>
-    /// The dialog used to set whether or not to save server usernames and passwords and whether a master password should be set to protect these passwords
+    /// The dialog used to set whether or not to save server usernames and passwords
+    /// and whether a master password should be set to protect these passwords
     /// </summary>
     public partial class SaveAndRestoreDialog : XenDialogBase
     {
-        public SaveAndRestoreDialog(bool saveAllAfter)
+        public SaveAndRestoreDialog()
         {
             InitializeComponent();
-            // register the checked and clicked events after the inital values of the controls have been set, saves compications of events accidentally being fired programtically
-            RegisterEvents();
-            // call save serverlist on OK
-            saveAndRestoreOptionsPage1.SaveAllAfter = saveAllAfter;
-        }
-
-        private void RegisterEvents()
-        {
-            okButton.Click += new EventHandler(okButton_Click);
-            cancelButton.Click += new EventHandler(cancelButton_Click);
+            // do not call SaveServerlist on OK
+            saveAndRestoreOptionsPage1.SaveAllAfter = false;
         }
 
         void cancelButton_Click(object sender, EventArgs e)
@@ -60,14 +53,13 @@ namespace XenAdmin.Dialogs.RestoreSession
 
         void okButton_Click(object sender, EventArgs e)
         {
-            // ronseal
             SaveEverything();
             Close();
         }
 
-        // all prompts for old password should have been made
         private void SaveEverything()
         {
+            // all prompts for old password must have been made
             saveAndRestoreOptionsPage1.Save();
             Settings.TrySaveSettings();
         }

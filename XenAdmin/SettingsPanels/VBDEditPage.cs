@@ -74,13 +74,7 @@ namespace XenAdmin.SettingsPanels
             InvalidParamToolTip.ToolTipTitle = Messages.INVALID_PARAMETER;
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_VM_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_VM_h32bit_16;
 
         public bool ValidToSave
         {
@@ -307,13 +301,17 @@ namespace XenAdmin.SettingsPanels
                 }
                 else
                 {
-                    // The selected userdevice is already in use. Ask the user what to do about this.
-                    DialogResult result = new UserDeviceDialog(devicePosition).ShowDialog(this);
+                    using (var dialog = new WarningDialog(string.Format(Messages.DEVICE_POSITION_CONFLICT, devicePosition),
+                        new ThreeButtonDialog.TBDButton(Messages.DEVICE_POSITION_CONFLICT_SWAP, DialogResult.Yes),
+                        new ThreeButtonDialog.TBDButton(Messages.DEVICE_POSITION_CONFLICT_CONFIGURE, DialogResult.No),
+                        ThreeButtonDialog.ButtonCancel))
+                    {
+                        var result = dialog.ShowDialog(this);
+                        changeDevicePosition = result != DialogResult.Cancel;
 
-                    changeDevicePosition = result != DialogResult.Cancel;
-
-                    if (result == DialogResult.No || !changeDevicePosition)
-                        other = null;
+                        if (result == DialogResult.No || !changeDevicePosition)
+                            other = null;
+                    }
                 }
             }
             WarnUserSwap(vbd, other);

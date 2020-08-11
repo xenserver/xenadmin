@@ -152,13 +152,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_Fields_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_Fields_h32bit_16;
 
         #endregion
 

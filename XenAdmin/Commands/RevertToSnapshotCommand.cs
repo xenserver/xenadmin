@@ -84,15 +84,25 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
+            Program.AssertOnEventThread();
+
             VM vm = (VM)selection[0].XenObject;
+            var snapshotAllowed = vm.allowed_operations.Contains(vm_operations.snapshot);
 
-            Program.Invoke(Program.MainWindow, () => Program.MainWindow.ConsolePanel.setCurrentSource(vm));
+            Program.MainWindow.ConsolePanel.setCurrentSource(vm);
 
-            RevertDialog dialog = new RevertDialog(vm, _snapshot.Name());
-
-            if (dialog.ShowDialog() == DialogResult.Yes)
+            using (var dialog = new WarningDialog(string.Format(Messages.SNAPSHOT_REVERT_BLURB, _snapshot.Name()),
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
             {
-                if (dialog.TakeSnapshot)
+                ShowCheckbox = snapshotAllowed,
+                IsCheckBoxChecked = snapshotAllowed,
+                CheckboxCaption = Messages.SNAPSHOT_REVERT_NEW_SNAPSHOT
+            })
+            {
+                if (dialog.ShowDialog() != DialogResult.Yes)
+                    return;
+
+                if (dialog.IsCheckBoxChecked)
                 {
                     TakeSnapshotCommand command = new TakeSnapshotCommand(MainWindowCommandInterface, vm);
                     var action = command.GetCreateSnapshotAction();
@@ -105,7 +115,7 @@ namespace XenAdmin.Commands
                                 ExecuteRevertAction();
                         };
                         action.RunAsync();
-                    } 
+                    }
                 }
                 else
                 {

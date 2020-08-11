@@ -30,11 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.OptionsPages;
@@ -44,9 +40,6 @@ namespace XenAdmin.Dialogs
 {
     public partial class OptionsDialog : VerticallyTabbedDialog
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string ToolsOptionsLogHeader = "Tools Options Settings -";
-
         internal OptionsDialog(PluginManager pluginManager)
         {
             InitializeComponent();
@@ -54,7 +47,8 @@ namespace XenAdmin.Dialogs
             pluginOptionsPage1.PluginManager = pluginManager;
             verticalTabs.SelectedItem = securityOptionsPage1;
 
-            connectionOptionsPage1.OptionsDialog = this;
+            connectionOptionsPage1.IsValidChanged += ConnectionOptionsPage1_IsValidChanged;
+
             if (!Application.RenderWithVisualStyles)
                 ContentPanel.BackColor = SystemColors.Control;
             // call save serverlist on OK
@@ -64,33 +58,19 @@ namespace XenAdmin.Dialogs
                 verticalTabs.Items.Remove(updatesOptionsPage1);
         }
 
+        private void ConnectionOptionsPage1_IsValidChanged(bool isPageValid)
+        {
+            okButton.Enabled = isPageValid;
+        }
+
         private void okButton_Click(object sender, EventArgs e)
         {
             foreach (IOptionsPage page in verticalTabs.Items)
-            {
                 page.Save();
-            }
 
             Settings.TrySaveSettings();
-
-            Log();
-
+            Settings.Log();
             Close();
-        }
-
-        public static void Log()
-        {
-            log.Info(ToolsOptionsLogHeader);
-
-            ConnectionOptionsPage.Log();
-            ConsolesOptionsPage.Log();
-            SecurityOptionsPage.Log();
-            if (!Helpers.CommonCriteriaCertificationRelease)
-                UpdatesOptionsPage.Log();
-            DisplayOptionsPage.Log();
-            SaveAndRestoreOptionsPage.Log();
-            PluginOptionsPage.Log();
-            ConfirmationOptionsPage.Log();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

@@ -161,9 +161,16 @@ namespace XenAdmin.Dialogs
                 {
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {
-                        PerfmonAlertUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Alert2_h32bit_16, Text = Messages.ALERTS};
-                        PerfmonAlertUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL, 
-                                                                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
+                        PerfmonAlertUpsellEditPage = new UpsellPage
+                        {
+                            Image = Images.StaticImages._000_Alert2_h32bit_16,
+                            Text = Messages.ALERTS,
+                            BlurbText = HiddenFeatures.LinkLabelHidden
+                                ? Messages.UPSELL_BLURB_ALERTS
+                                : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
+                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                        };
+
                         ShowTab(PerfmonAlertUpsellEditPage);
                     }
                     else
@@ -176,9 +183,15 @@ namespace XenAdmin.Dialogs
                 {
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {
-                        PerfmonAlertOptionsUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Email_h32bit_16, Text = Messages.EMAIL_OPTIONS};
-                        PerfmonAlertOptionsUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
-                                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
+                        PerfmonAlertOptionsUpsellEditPage = new UpsellPage
+                        {
+                            Image = Images.StaticImages._000_Email_h32bit_16,
+                            Text = Messages.EMAIL_OPTIONS,
+                            BlurbText = HiddenFeatures.LinkLabelHidden
+                                ? Messages.UPSELL_BLURB_ALERTS
+                                : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
+                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                        };
                         ShowTab(PerfmonAlertOptionsUpsellEditPage);
                     }
                     else
@@ -224,9 +237,15 @@ namespace XenAdmin.Dialogs
                 {
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
                     {
-                        GpuUpsellEditPage = new UpsellPage { Image = Properties.Resources._000_GetMemoryInfo_h32bit_16, Text = Messages.GPU };
-                        GpuUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_GPU : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_TRIAL,
-                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
+                        GpuUpsellEditPage = new UpsellPage
+                        {
+                            Image = Images.StaticImages._000_GetMemoryInfo_h32bit_16,
+                            Text = Messages.GPU,
+                            BlurbText = HiddenFeatures.LinkLabelHidden
+                                ? Messages.UPSELL_BLURB_GPU
+                                : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_TRIAL,
+                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                        };
                         ShowTab(GpuUpsellEditPage);
                     }
                     else

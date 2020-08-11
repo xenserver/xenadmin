@@ -30,15 +30,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAPI;
 
@@ -196,10 +190,9 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTab Members
 
-
         public string SubText => Messages.WLB_OPTIMIZATION_MODE_SUBTEXT;
 
-        public Image Image => Properties.Resources._000_Optimize_h32bit_16;
+        public Image Image => Images.StaticImages._000_Optimize_h32bit_16;
 
         #endregion
 

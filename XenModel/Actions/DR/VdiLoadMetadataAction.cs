@@ -122,7 +122,7 @@ namespace XenAdmin.Actions.DR
                     foreach (var vmRef in vms.Keys)
                     {
                         VM vm = vms[vmRef];
-                        if (vm.not_a_real_vm())
+                        if (!vm.is_a_real_vm())
                             continue;
                         vm.opaque_ref = vmRef.opaque_ref;
                         _poolMetadata.Vms.Add(vmRef, vm);

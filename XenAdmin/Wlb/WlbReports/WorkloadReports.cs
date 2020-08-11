@@ -375,9 +375,9 @@ namespace XenAdmin
 
             reportImageList = new ImageList();
 
-            reportImageList.Images.Add(XenAdmin.Properties.Resources._000_GetServerReport_h32bit_16);
-            reportImageList.Images.Add(XenAdmin.Properties.Resources.subscribe);
-            reportImageList.Images.Add(XenAdmin.Properties.Resources._000_Folder_open_h32bit_16);
+            reportImageList.Images.Add(Images.StaticImages._000_GetServerReport_h32bit_16);
+            reportImageList.Images.Add(Images.StaticImages.subscribe);
+            reportImageList.Images.Add(Images.StaticImages._000_Folder_open_h32bit_16);
 
             return reportImageList;
         }

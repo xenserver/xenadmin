@@ -32,13 +32,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
-using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -192,13 +189,13 @@ namespace XenAdmin.Dialogs
                                          switch (lRow.RowStatus)
                                          {
                                              case LicenseDataGridViewRow.Status.Information:
-                                                 summaryPanel.WarningIcon = Resources._000_Alert2_h32bit_16;
+                                                 summaryPanel.WarningIcon = Images.StaticImages._000_Alert2_h32bit_16;
                                                  break;
                                              case LicenseDataGridViewRow.Status.Warning:
-                                                 summaryPanel.WarningIcon = Resources._000_error_h32bit_16;
+                                                 summaryPanel.WarningIcon = Images.StaticImages._000_error_h32bit_16;
                                                  break;
                                              default:
-                                                 summaryPanel.WarningIcon = Resources._000_Tick_h32bit_16;
+                                                 summaryPanel.WarningIcon = Images.StaticImages._000_Tick_h32bit_16;
                                                  break;
                                          }
                                          summaryPanel.InformationVisible = false;

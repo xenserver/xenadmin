@@ -30,15 +30,11 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Controls
@@ -105,7 +101,9 @@ namespace XenAdmin.Controls
             g.TextRenderingHint = Drawing.TextRenderingHint;
 
             // Draw magnifying glass or cross icon
-            Image image = textBox1.Text.Length > 0 && textBox1.Text != Messages.SEARCH_TEXT_BOX_INITIAL_TEXT ? Resources.cross : Resources._000_Search_h32bit_16;
+            Image image = textBox1.Text.Length > 0 && textBox1.Text != Messages.SEARCH_TEXT_BOX_INITIAL_TEXT
+                ? Images.StaticImages.cross
+                : Images.StaticImages._000_Search_h32bit_16;
 
             g.DrawImage(image, new Rectangle(textBox1.Width + textBox1.Left, Height / 2 - image.Height / 2, image.Width, image.Height));
         }

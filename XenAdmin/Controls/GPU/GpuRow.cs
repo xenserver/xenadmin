@@ -35,7 +35,6 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
 
 namespace XenAdmin.Controls.GPU
@@ -265,7 +264,7 @@ namespace XenAdmin.Controls.GPU
 
         public void UpdateDetails()
         {
-            ImageCell.Value = EnabledType ? Resources._000_Tick_h32bit_16 : Resources._000_Abort_h32bit_16;
+            ImageCell.Value = EnabledType ? Images.StaticImages._000_Tick_h32bit_16 : Images.StaticImages._000_Abort_h32bit_16;
             NameCell.Value = VGpuType.Name();
         }
     }

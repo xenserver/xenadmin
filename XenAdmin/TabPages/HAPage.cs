@@ -563,7 +563,7 @@ namespace XenAdmin.TabPages
             {
                 menu.Items.Add(item);
             }
-            ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY) { Image = Properties.Resources.copy_16 };
+            var copyItem = new ToolStripMenuItem(Messages.COPY) { Image = Images.StaticImages.copy_16 };
             copyItem.Click += delegate
                 {
                     String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);

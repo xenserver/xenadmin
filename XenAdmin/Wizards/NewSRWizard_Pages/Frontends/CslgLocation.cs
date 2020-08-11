@@ -199,7 +199,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 if (storageSystem != null)
                 {
-                    e.Graphics.DrawImageUnscaled(Resources.sl_system_16, new Point(e.Bounds.X + indent, e.Bounds.Y + 1));
+                    e.Graphics.DrawImageUnscaled(Images.StaticImages.sl_system_16, new Point(e.Bounds.X + indent, e.Bounds.Y + 1));
                     Drawing.DrawText(e.Graphics, item.ToString(), e.Font, textRect, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
                 else if (nonSelectable != null)

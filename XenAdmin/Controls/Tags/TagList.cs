@@ -55,8 +55,8 @@ namespace XenAdmin.Controls
             tagsLabel = new Label();
             tagsLabel.Width = width;
 
-            icon.Image = Properties.Resources._000_Tag_h32bit_16;
-            icon.Size = Properties.Resources._000_Tag_h32bit_16.Size;
+            icon.Image = Images.StaticImages._000_Tag_h32bit_16;
+            icon.Size = Images.StaticImages._000_Tag_h32bit_16.Size;
 
             linkDialogLabel.Text = Messages.NEW_TAG_LINK;
             linkDialogLabel.TabStop = true;

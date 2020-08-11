@@ -43,8 +43,6 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Controls
 {
-    public delegate void XenTabPageStatusChanged(XenTabPage sender);
-
     [Designer(typeof(ParentControlDesigner))]
     public partial class XenTabPage : UserControl, IControlWithHelp
     {
@@ -85,28 +83,29 @@ namespace XenAdmin.Controls
         public Action<XenTabPage> WizardContentUpdater { protected get; set; }
         public Func<XenTabPage, bool> NextPagePrecheck { protected get; set; }
 
-        protected override bool ScaleChildren
-        {
-            get { return false; }
-        }
+        protected override bool ScaleChildren => false;
 
+        /// <summary>
+        /// Gets the page's label in the (left hand side) wizard progress panel
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Always)]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Bindable(true)]
         public override string Text
         {
-            get { return base.Text; }
-            set { base.Text = value; }
-        }
-
-        public virtual string PageTitle
-        {
-            get { return null; }
+            get => base.Text;
+            set => base.Text = value;
         }
 
         /// <summary>
-        /// Note that most derived classes override the getter to return a fixed string
+        /// Gets the page's title (headline)
+        /// </summary>
+        public virtual string PageTitle => null;
+
+        /// <summary>
+        /// Gets the value by which the help files section for this page is identified
+        /// Most derived classes override it to return a fixed string
         /// </summary>
         public virtual string HelpID => "";
 
@@ -186,7 +185,7 @@ namespace XenAdmin.Controls
         /// Fired when the page is ready (or not) for the user to advance to the next page).
         /// Currently not implemented by all pages.
         /// </summary>
-        public event XenTabPageStatusChanged StatusChanged;
+        public event Action<XenTabPage> StatusChanged;
 
         /// <summary>
         /// Not always overriden in derived classes

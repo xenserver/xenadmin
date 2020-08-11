@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 EnableShapshotTypes(Connection);
         }
 
-        public Image Image => Properties.Resources._000_VMSession_h32bit_16;
+        public Image Image => Images.StaticImages._000_VMSession_h32bit_16;
 
         public bool ValidToSave => true;
 

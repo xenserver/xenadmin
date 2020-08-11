@@ -35,7 +35,7 @@ using NUnit.Framework;
 using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.LicenseManagerLicenseRowComparers;
 
-namespace XenAdminTests.UnitTests.LicenseManager
+namespace XenAdminTests.LicensingTests
 {
     [TestFixture, Category(TestCategories.Unit)]
     public class ProductColumnComparerTests

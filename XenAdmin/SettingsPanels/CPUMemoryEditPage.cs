@@ -46,6 +46,8 @@ namespace XenAdmin.SettingsPanels
 {
     public partial class CPUMemoryEditPage : UserControl, IEditPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private VM vm;
         bool ShowMemory = false;       // If this VM has DMC, we don't show the memory controls on this page.
 
@@ -125,13 +127,7 @@ namespace XenAdmin.SettingsPanels
             this.nudMemory.LostFocus += new EventHandler(nudMemory_LostFocus);
         }
 
-        public Image Image
-        {
-            get
-            {
-                return Properties.Resources._000_CPU_h32bit_16;
-            }
-        }
+        public Image Image => Images.StaticImages._000_CPU_h32bit_16;
 
         void nudMemory_LostFocus(object sender, EventArgs e)
         {
@@ -455,12 +451,42 @@ namespace XenAdmin.SettingsPanels
             if (vm == null)
             {
                 System.Diagnostics.Trace.Assert(false, "Selected object should be a vm");
+                return;
             }
-            else
+
+            using (var dialog = new WarningDialog(Messages.VCPUS_MORE_THAN_PCPUS)
             {
-                new Dialogs.VcpuWarningDialog(vm).ShowDialog();
-                this.Refresh();
+                ShowCheckbox = true,
+                CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+            })
+            {
+                dialog.ShowDialog(this);
+
+                if (dialog.IsCheckBoxChecked)
+                {
+                    // User clicked 'ignore': set flag in VM.
+                    log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", vm.Name());
+
+                    VM copyVm = (VM)vm.Clone();
+                    copyVm.SetIgnoreExcessiveVcpus(true);
+
+                    try
+                    {
+                        vm.Locked = true;
+                        copyVm.SaveChanges(vm.Connection.Session);
+                    }
+                    finally
+                    {
+                        vm.Locked = false;
+                    }
+                }
+                else if (Program.MainWindow.SelectObjectInTree(vm))
+                {
+                    Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
+                }
             }
+
+            Refresh();
         }
 
         private void nudMemory_ValueChanged(object sender, EventArgs e)

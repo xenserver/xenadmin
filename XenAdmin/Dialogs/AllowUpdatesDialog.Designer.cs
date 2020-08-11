@@ -29,20 +29,12 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllowUpdatesDialog));
-            this.QuestionPictureBox = new System.Windows.Forms.PictureBox();
             this.BlurbLabel = new System.Windows.Forms.Label();
             this.NoButton = new System.Windows.Forms.Button();
             this.YesButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.QuestionPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // QuestionPictureBox
-            // 
-            resources.ApplyResources(this.QuestionPictureBox, "QuestionPictureBox");
-            this.QuestionPictureBox.Name = "QuestionPictureBox";
-            this.QuestionPictureBox.TabStop = false;
             // 
             // BlurbLabel
             // 
@@ -86,18 +78,14 @@ namespace XenAdmin.Dialogs
             this.Controls.Add(this.YesButton);
             this.Controls.Add(this.NoButton);
             this.Controls.Add(this.BlurbLabel);
-            this.Controls.Add(this.QuestionPictureBox);
             this.Name = "AllowUpdatesDialog";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AllowUpdatesDialog_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.QuestionPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox QuestionPictureBox;
         private System.Windows.Forms.Label BlurbLabel;
         private System.Windows.Forms.Button NoButton;
         private System.Windows.Forms.Button YesButton;

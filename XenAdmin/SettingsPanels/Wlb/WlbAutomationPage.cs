@@ -345,10 +345,9 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTab Members
 
-
         public string SubText => Messages.WLB_AUTOMATION_SUBTEXT;
 
-        public Image Image => Properties.Resources._000_EnablePowerControl_h32bit_16;
+        public Image Image => Images.StaticImages._000_EnablePowerControl_h32bit_16;
 
         #endregion
 

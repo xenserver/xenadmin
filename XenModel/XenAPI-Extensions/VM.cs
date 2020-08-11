@@ -718,6 +718,7 @@ namespace XenAPI
         [Flags]
         public enum VirtualisationStatus
         {
+            NOT_INSTALLED               = 0,
             UNKNOWN                     = 1,
             PV_DRIVERS_OUT_OF_DATE      = 2,
             IO_DRIVERS_INSTALLED        = 4,
@@ -782,7 +783,7 @@ namespace XenAPI
 
             if (HasNewVirtualisationStates())
             {
-                VirtualisationStatus flags = 0;
+                var flags = VirtualisationStatus.NOT_INSTALLED;
 
                 if (vmGuestMetrics != null && vmGuestMetrics.PV_drivers_detected)
                     flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
@@ -808,7 +809,7 @@ namespace XenAPI
                 else
                 {
                     friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
-                    return 0;
+                    return VirtualisationStatus.NOT_INSTALLED;
                 }
 
             if (!vmGuestMetrics.PV_drivers_version.TryGetValue("major", out var major))
@@ -1403,14 +1404,9 @@ namespace XenAPI
             return first != null && first.opaque_ref == opaque_ref;
         }
 
-        public bool not_a_real_vm()
-        {
-            return is_a_snapshot || is_a_template || is_control_domain;
-        }
-
         public bool is_a_real_vm()
         {
-            return !not_a_real_vm();
+            return !is_a_snapshot && !is_a_template && !is_control_domain;
         }
 
         private bool _isBeingCreated;
