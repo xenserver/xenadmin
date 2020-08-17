@@ -237,33 +237,6 @@ namespace XenOvf
         }
 
         /// <summary>
-        /// Comverts an ova.xml V 0.1 from a XenServer 3 export into an OVF Xml String
-        /// </summary>
-        /// <param name="vhdExports">DiskInfo[] an array of disk names / identifiers</param>
-        /// <param name="ovaxmlFileName">ova xml file name</param>
-        /// <param name="ovfName">OVF Name</param>
-        /// <returns>OVF Xml String</returns>
-        public string ConvertXVAv1toOVF(DiskInfo[] vhdExports, string ovaxmlFileName, string ovfName)
-        {
-            return ConvertXVAv1toOVF(vhdExports, ovaxmlFileName, ovfName, Properties.Settings.Default.Language);
-        }
-
-        /// <summary>
-        /// Comverts an ova.xml V 0.1 from a XenServer 3 export into an OVF Xml String
-        /// </summary>
-        /// <param name="vhdExports">DiskInfo[] an array of disk names / identifiers</param>
-        /// <param name="ovaxmlFileName">ova xml file name</param>
-        /// <param name="ovfName">OVF Name</param>
-        /// <param name="lang"></param>
-        /// <returns>OVF Xml String</returns>
-        public string ConvertXVAv1toOVF(DiskInfo[] vhdExports, string ovaxmlFileName, string ovfName, string lang)
-        {
-            XcAppliance xca = Tools.LoadOldOvaXml(ovaxmlFileName);
-            EnvelopeType env = ConvertFromXenOVAv1(xca, vhdExports, ovfName, lang);
-            return Tools.Serialize(env, typeof(EnvelopeType), Tools.LoadNamespaces());
-        }
-
-        /// <summary>
         /// Convert Virtual PC configuration file to an OVF Xml string.
         /// </summary>
         /// <param name="vpcFileName">filename</param>

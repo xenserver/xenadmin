@@ -60,7 +60,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string[] m_supportedImageTypes = { ".vhd", ".vmdk" };//CA-61385: remove ".vdi", ".wim" support for Boston
         private readonly string[] m_supportedApplianceTypes = { ".ovf", ".ova", ".ova.gz" };
-        private readonly string[] m_supportedXvaTypes = {".xva", ".xva.gz", "ova.xml"};
+        private readonly string[] m_supportedXvaTypes = {".xva", ".xva.gz"};
 
 		/// <summary>
 		/// Stores the last valid selected appliance
@@ -94,17 +94,17 @@ namespace XenAdmin.Wizards.ImportWizard
 		/// <summary>
 		/// Gets the page's title (headline)
 		/// </summary>
-		public override string PageTitle { get { return Messages.IMPORT_SOURCE_PAGE_TITLE; } }
+        public override string PageTitle => Messages.IMPORT_SOURCE_PAGE_TITLE;
 
 		/// <summary>
 		/// Gets the page's label in the (left hand side) wizard progress panel
 		/// </summary>
-		public override string Text { get { return Messages.IMPORT_SOURCE_PAGE_TEXT; } }
+        public override string Text => Messages.IMPORT_SOURCE_PAGE_TEXT;
 
 		/// <summary>
 		/// Gets the value by which the help files section for this page is identified
 		/// </summary>
-		public override string HelpID { get { return "Source"; } }
+        public override string HelpID => "Source";
 
         protected override bool ImplementsIsDirty()
         {
@@ -206,8 +206,6 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		public bool IsWIM { get; private set; }
 
-		public bool IsXvaVersion1 { get; private set; }
-
 		public ulong DiskCapacity { get; private set; }
 
 		#endregion
@@ -239,29 +237,13 @@ namespace XenAdmin.Wizards.ImportWizard
                 FileInfo info = new FileInfo(FilePath);
 				ImageLength = info.Length > 0 ? (ulong)info.Length : 0;
 
-				DiskCapacity = IsXvaVersion1
-				               	? GetTotalSizeFromXmlGeneva() //Geneva style
-				               	: GetTotalSizeFromXmlXva(GetXmlStringFromTarXVA()); //xva style
+                DiskCapacity = GetTotalSizeFromXmlXva(GetXmlStringFromTarXVA());
 			}
 			catch (Exception)
 			{
 				DiskCapacity = ImageLength;
 			}
 			return true;
-		}
-
-		private ulong GetTotalSizeFromXmlGeneva()
-		{
-			ulong totalSize = 0;
-			XmlDocument xmlMetadata = new XmlDocument();
-            xmlMetadata.Load(FilePath);
-			XPathNavigator nav = xmlMetadata.CreateNavigator();
-			XPathNodeIterator nodeIterator = nav.Select(".//vdi");
-
-			while (nodeIterator.MoveNext())
-				totalSize += UInt64.Parse(nodeIterator.Current.GetAttribute("size", ""));
-
-			return totalSize;
 		}
 
 		private string GetXmlStringFromTarXVA()
@@ -423,9 +405,6 @@ namespace XenAdmin.Wizards.ImportWizard
 						error = Messages.IMPORT_SOURCE_PAGE_ERROR_OVF_ONLY;
 						return false;
 					}
-
-					if (ext == "ova.xml")
-						IsXvaVersion1 = true;
 
 					TypeOfImport = ImportWizard.ImportType.Xva;
 					return true;
@@ -813,9 +792,9 @@ namespace XenAdmin.Wizards.ImportWizard
                 LocalPath = localPath;
             }
 
-            public Uri RemoteUri { get; private set; }
+            public Uri RemoteUri { get; }
 
-            public string LocalPath { get; private set; }
+            public string LocalPath { get; }
         }
     }
 }

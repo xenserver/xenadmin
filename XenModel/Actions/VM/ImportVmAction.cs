@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
@@ -59,7 +58,7 @@ namespace XenAdmin.Actions
     	/// <summary>
         /// These calls are always required to import a VM, as opposed to the set which are only called if needed set in the constructor of this action.
         /// </summary>
-        public readonly static RbacMethodList ConstantRBACRequirements = new RbacMethodList(            
+        public static readonly RbacMethodList ConstantRBACRequirements = new RbacMethodList(            
             "vm.set_name_label",
             "network.destroy",
             "vif.create",
@@ -83,10 +82,6 @@ namespace XenAdmin.Actions
 
 			if (affinity != null)
 				ApiMethodsToRoleCheck.Add("vm.set_affinity");
-
-			//??
-			//if (startAutomatically)
-			//	ApiMethodsToRoleCheck.Add("vm.start");
 
 			ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
 			ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
@@ -118,23 +113,11 @@ namespace XenAdmin.Actions
 
         	try
             {
-                string vmRef;
-
-				if (m_filename.EndsWith("ova.xml"))//importing version 1 from of VM
-				{
-					m_filename = m_filename.Replace("ova.xml", "");
-					vmRef = GetVmRef(applyVersionOneFiles());
-				}
-				else//importing current format of VM
-					vmRef = GetVmRef(applyFile());
-
-            	if (Cancelling)
-                    throw new CancelledException();
-
-                // Now lets try and set the affinity and start the VM
-
+                string vmRef = GetVmRef(applyFile());
                 if (string.IsNullOrEmpty(vmRef))
                     return;
+
+                // Now let's try and set the affinity and start the VM
 
                 while (!Cancelling && (VM = Connection.Resolve(new XenRef<VM>(vmRef))) == null)
                     Thread.Sleep(100);
@@ -286,98 +269,9 @@ namespace XenAdmin.Actions
             return name;
         }
 
-        private List<string> TaskErrorInfo()
-        {
-            return new List<string>(Task.get_error_info(Session, RelatedTask));
-        }
-
-        private long getSize(DirectoryInfo dir, long count)
-        {
-            long s = count;
-            foreach (FileInfo f in dir.GetFiles("*.gz"))
-                s += f.Length;
-
-            foreach (DirectoryInfo d in dir.GetDirectories())
-                s += getSize(d, s);
-
-            return s;
-        }
-
-        private string applyVersionOneFiles()
-        {
-            RelatedTask = Task.create(Session, "importTask", Messages.IMPORTING);
-
-            try
-            {
-				long totalSize = getSize(new DirectoryInfo(m_filename), 0);
-                long bytesWritten = 0;
-
-                if (totalSize == 0)
-                {
-                    // We didn't find any .gz files, just bail out here
-                    throw new Exception(Messages.IMPORT_INCOMPLETE_FILES);
-                }
-
-            	CommandLib.Config config = new CommandLib.Config
-            	                           	{
-            	                           		hostname = Connection.Hostname,
-            	                           		username = Connection.Username,
-            	                           		password = Connection.Password
-            	                           	};
-                
-                CommandLib.thinCLIProtocol tCLIprotocol = null;
-                int exitCode = 0;
-            	tCLIprotocol = new CommandLib.thinCLIProtocol(delegate(string s) { throw new Exception(s); },
-            	                                              delegate { throw new Exception(Messages.EXPORTVM_NOT_HAPPEN); },
-            	                                              delegate(string s, CommandLib.thinCLIProtocol t) { log.Debug(s); },
-            	                                              delegate(string s) { log.Debug(s); },
-            	                                              delegate(string s) { log.Debug(s); },
-            	                                              delegate { throw new Exception(Messages.EXPORTVM_NOT_HAPPEN); },
-            	                                              delegate(int i)
-            	                                              	{
-            	                                              		exitCode = i;
-            	                                              		tCLIprotocol.dropOut = true;
-            	                                              	},
-            	                                              delegate(int i)
-            	                                              	{
-            	                                              		bytesWritten += i;
-            	                                              		PercentComplete = (int)(100.0*bytesWritten/totalSize);
-            	                                              	},
-            	                                              config);
-
-                string body = string.Format("vm-import\nsr-uuid={0}\nfilename={1}\ntask_id={2}\n",
-											SR.uuid, m_filename, RelatedTask.opaque_ref);
-				log.DebugFormat("Importing Geneva-style XVA from {0} to SR {1} using {2}", m_filename, SR.Name(), body);
-                CommandLib.Messages.performCommand(body, tCLIprotocol);
-
-                // Check the task status -- Geneva-style XVAs don't raise an error, so we need to check manually.
-                List<string> excep = TaskErrorInfo();
-                if (excep.Count > 0)
-                    throw new Failure(excep);
-                
-                // CA-33665: We found a situation before were the task handling had been messed up, we should check the exit code as a failsafe
-				if (exitCode != 0)
-					throw new Failure(Messages.IMPORT_GENERIC_FAIL);
-
-                return Task.get_result(Session, RelatedTask);
-            }
-            catch
-            {
-                List<string> excep = TaskErrorInfo();
-                if (excep.Count > 0)
-                    throw new Failure(excep);
-                else
-                    throw;
-            }
-            finally
-            {
-                Task.destroy(Session, RelatedTask);
-            }
-        }
-
         private string applyFile()
         {
-            log.DebugFormat("Importing Rio-style XVA from {0} to SR {1}", m_filename, SR.Name());
+            log.DebugFormat("Importing XVA from {0} to SR {1}", m_filename, SR.Name());
 
             Host host = SR.GetStorageHost();
 
@@ -421,6 +315,9 @@ namespace XenAdmin.Actions
 		{
 			m_startAutomatically = start;
 			m_VIFs = vifs;
+
+            if (m_startAutomatically)
+                ApiMethodsToRoleCheck.Add("vm.start");
 
 			lock (monitor)
 			{
