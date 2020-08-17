@@ -6994,9 +6994,6 @@
   <data name="IMPORT_EULA_PAGE_TITLE" xml:space="preserve">
     <value>查看最终用户许可协议(EULA)</value>
   </data>
-  <data name="IMPORT_GENERIC_FAIL" xml:space="preserve">
-    <value>服务器因出现未知错误而无法完成导入。</value>
-  </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>导出的文件不完整，或者格式无法识别。</value>
   </data>
@@ -7110,7 +7107,7 @@
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
     <value>所有导入选项
-(*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|虚拟硬盘图像(*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA 文件(*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA 版本 1|ova.xml</value>
+(*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|虚拟硬盘图像(*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA 文件(*.xva;*.xva.gz)|*.xva;*.xva.gz</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
@@ -10341,9 +10338,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATH_DOES_NOT_EXIST_PLACEHOLDER" xml:space="preserve">
     <value>路径 {0} 不存在。</value>
-  </data>
-  <data name="PATHPICKER_FILETYPE" xml:space="preserve">
-    <value>XVA (*.xva)|*.xva|XVA 版本 1 (ova.xml)|ova.xml</value>
   </data>
   <data name="PBDS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>存储连接检查</value>

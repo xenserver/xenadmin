@@ -19928,15 +19928,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server could not complete the import due to an unknown error..
-        /// </summary>
-        public static string IMPORT_GENERIC_FAIL {
-            get {
-                return ResourceManager.GetString("IMPORT_GENERIC_FAIL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The exported files are incomplete or in an unrecognized format..
         /// </summary>
         public static string IMPORT_INCOMPLETE_FILES {
@@ -20264,7 +20255,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml.
+        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz.
         /// </summary>
         public static string IMPORT_SOURCE_PAGE_FILETYPES {
             get {
@@ -29742,15 +29733,6 @@ namespace XenAdmin {
         public static string PATH_DOES_NOT_EXIST_PLACEHOLDER {
             get {
                 return ResourceManager.GetString("PATH_DOES_NOT_EXIST_PLACEHOLDER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml.
-        /// </summary>
-        public static string PATHPICKER_FILETYPE {
-            get {
-                return ResourceManager.GetString("PATHPICKER_FILETYPE", resourceCulture);
             }
         }
         
