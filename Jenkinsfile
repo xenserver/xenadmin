@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  */
 
-def XENADMIN_BRANDING_TAG = 'v1.0'
+def XENADMIN_BRANDING_TAG = 'v2.0'
 def BRANDING_TAG = 'master' //use tag on release branches
 
 @Library(["xencenter-pipeline@v1.0"])
