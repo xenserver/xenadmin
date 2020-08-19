@@ -6,7 +6,7 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/dotnet48/putty.exe",
+      "pattern": "@REMOTE_DOTNET@/putty.exe",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
@@ -46,7 +46,7 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/SOURCES/dotnet-packages-sources.zip",
+      "pattern": "@REMOTE_DOTNET@/dotnet-packages-sources.zip",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
