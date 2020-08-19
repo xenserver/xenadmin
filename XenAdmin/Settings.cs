@@ -660,6 +660,7 @@ namespace XenAdmin
 
             log.Info($"=== WarnUnrecognizedCertificate: {Properties.Settings.Default.WarnUnrecognizedCertificate}");
             log.Info($"=== WarnChangedCertificate: {Properties.Settings.Default.WarnChangedCertificate}");
+            log.Info($"=== RemindChangePassword: {Properties.Settings.Default.RemindChangePassword}");
 
             if (!Helpers.CommonCriteriaCertificationRelease)
             {

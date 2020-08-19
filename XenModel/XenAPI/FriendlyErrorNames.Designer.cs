@@ -1348,7 +1348,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The master says the server is not known to it. Perhaps the server was deleted from the master&apos;s database?.
+        ///   Looks up a localized string similar to The master says the server is not known to it. Is the server in the master&apos;s database and pointing to the correct master? Are all servers using the same pool secret?.
         /// </summary>
         public static string HOST_UNKNOWN_TO_MASTER {
             get {

@@ -553,7 +553,7 @@
     <value>The server is still booting.</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>The master says the server is not known to it. Perhaps the server was deleted from the master's database?</value>
+    <value>The master says the server is not known to it. Is the server in the master's database and pointing to the correct master? Are all servers using the same pool secret?</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>The specified VBD device is not recognized: please use a non-negative integer</value>

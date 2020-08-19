@@ -35,6 +35,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Network;
 
 
@@ -42,35 +43,30 @@ namespace XenAdmin.Dialogs
 {
     public partial class RoleSelectionDialog : XenDialogBase
     {
-        private Subject[] subjects;
+        private List<Subject> subjects;
 
-        private Dictionary<Role, List<Subject>> roleAssignment;
-        // Used to stop 'changes made' checks during a batch select
-        private bool batchChange;
-        private IXenConnection _connection;
+        private Dictionary<Role, List<Subject>> _subjectsPerRole;
 
         public RoleSelectionDialog()
         {
             InitializeComponent();
         }
 
-        public RoleSelectionDialog(IXenConnection connection, Subject[] subjects)
+        public RoleSelectionDialog(IXenConnection connection, List<Subject> subjects)
+            : base(connection)
         {
             InitializeComponent();
 
-            _connection = connection;
-
             this.subjects = subjects;
-            roleAssignment = new Dictionary<Role,List<Subject>>();
 
-            var allAreGroups = subjects.Length > 0 && subjects.All(s => s.IsGroup);
-            var allAreUsers = subjects.Length > 0 && subjects.All(s => !s.IsGroup);
+            var allAreGroups = subjects.Count > 0 && subjects.All(s => s.IsGroup);
+            var allAreUsers = subjects.Count > 0 && subjects.All(s => !s.IsGroup);
 
             pictureBoxSubjectType.Image = allAreUsers
                 ? Images.StaticImages._000_User_h32bit_32
                 : Images.StaticImages._000_UserAndGroup_h32bit_32;
 
-            if (subjects.Length == 1)
+            if (subjects.Count == 1)
             {
                 Subject subject = subjects[0];
                 string sName = (subject.DisplayName ?? subject.SubjectName ?? Messages.UNKNOWN_AD_USER).Ellipsise(30);
@@ -87,163 +83,122 @@ namespace XenAdmin.Dialogs
             }
 
             // Get the list of roles off the server and arrange them into rank
-            List<Role> serverRoles = new List<Role>(_connection.Cache.Roles);
-            //hide basic permissions, we only want the roles.
-            serverRoles.RemoveAll(delegate(Role r){return r.subroles.Count < 1;});
-            serverRoles.Sort();
-            serverRoles.Reverse();
-            foreach (Role r in serverRoles)
-            {
-                roleAssignment.Add(r, new List<Subject>());
-            }
-            foreach (Subject s in subjects)
-            {
-                List<Role> subjectRoles = _connection.ResolveAll(s.roles);
-                foreach (Role r in subjectRoles)
-                {
-                    roleAssignment[r].Add(s);
-                }
-            }
+            var serverRoles = connection.Cache.Roles.Where(r => r.subroles.Count > 0).OrderBy(r => r).Reverse().ToList();
+            _subjectsPerRole = new Dictionary<Role, List<Subject>>();
+
             foreach (Role role in serverRoles)
             {
-                DataGridViewRow r = new DataGridViewRow();
-                DataGridViewCheckBoxCellEx c1 = new DataGridViewCheckBoxCellEx();
-                c1.ThreeState = true;
-                if (roleAssignment[role].Count == subjects.Length)
-                {
-                    c1.Value = CheckState.Checked;
-                    c1.CheckState = CheckState.Checked;
-                }
-                else if (roleAssignment[role].Count == 0)
-                {
-                    c1.Value = CheckState.Unchecked;
-                    c1.CheckState = CheckState.Unchecked;
-                }
-                else
-                {
-                    c1.Value = CheckState.Indeterminate;
-                    c1.CheckState = CheckState.Indeterminate;
-                }
-                DataGridViewTextBoxCell c2 = new DataGridViewTextBoxCell();
-                c2.Value = role.FriendlyName();
-                r.Cells.Add(c1);
-                r.Cells.Add(c2);
-                r.Tag = role;
-                gridRoles.Rows.Add(r);
+                var subjectsWithRole = subjects.Where(s => s.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
+                _subjectsPerRole[role] = subjectsWithRole;
+
+                var row = new RoleDataGridViewRow(role);
+
+                if (subjectsWithRole.Count == subjects.Count)
+                    row.IsChecked = true;
+                else if (subjectsWithRole.Count == 0)
+                    row.IsChecked = false;
+
+                gridRoles.Rows.Add(row);
             }
-            setRoleDescription();
+
+            UpdateRoleDescription();
+            tableLayoutPanel2.Visible = false;
+            buttonSave.Enabled = false;
         }
 
-        private void setRoleDescription()
+        public List<Role> SelectedRoles =>
+            gridRoles.Rows.Cast<RoleDataGridViewRow>().Where(r => r.IsChecked).Select(r => r.Role).ToList();
+
+        private void UpdateRoleDescription()
         {
-            if (gridRoles.SelectedRows.Count < 1)
-                return;
-            Role r = gridRoles.SelectedRows[0].Tag as Role;
-            if (r == null)
-                return;
-
-            labelDescription.Text = r.FriendlyDescription();
+            if (gridRoles.SelectedRows.Count == 1 && gridRoles.SelectedRows[0] is RoleDataGridViewRow row)
+                labelDescription.Text = row.Role.FriendlyDescription();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            foreach (Subject s in subjects)
-            {
-                List<Role> rolesToAdd = new List<Role>();
-                List<Role> rolesToRemove = new List<Role>();
-                foreach (DataGridViewRow r in gridRoles.Rows)
-                {
-                    bool check = (bool)r.Cells[0].Value;
-                    Role role = r.Tag as Role;
-                    if (check && !(roleAssignment[role].Contains(s)))
-                        rolesToAdd.Add(role);
-                    else if (!check && (roleAssignment[role].Contains(s)))
-                        rolesToRemove.Add(role);
-                }
-
-                new AddRemoveRolesAction(_connection, s, rolesToAdd, rolesToRemove).RunAsync();
-            }
-            Close();
-        }
-
-        private bool changesMade()
+        private void UpdateButtonsAndInfo()
         {
             foreach (DataGridViewRow r in gridRoles.Rows)
             {
-                Role role = r.Tag as Role;
-                DataGridViewCheckBoxCellEx c = r.Cells[0] as DataGridViewCheckBoxCellEx;
-                if (c.CheckState == CheckState.Checked && roleAssignment[role].Count < subjects.Length)
+                if (r is RoleDataGridViewRow row)
                 {
-                    return true;
-                }
-                else if (c.CheckState == CheckState.Unchecked && roleAssignment[role].Count > 0)
-                {
-                    return true;
-                }
-                // Don't care about intermediate values, it's not possible to set them in the dialog
-            }
-            return false;
-        }
+                    if (row.IsChecked && _subjectsPerRole[row.Role].Count < subjects.Count)
+                    {
+                        buttonSave.Enabled =  true;
+                        tableLayoutPanel2.Visible = false;
+                        return;
+                    }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Close();
+                    if (!row.IsChecked && _subjectsPerRole[row.Role].Count > 0)
+                    {
+                        buttonSave.Enabled =  true;
+                        tableLayoutPanel2.Visible = row.Role.name_label == Role.MR_ROLE_POOL_ADMIN &&
+                                                    connection != null && Helpers.StockholmOrGreater(connection) &&
+                                                    !connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation);
+                        return;
+                    }
+                }
+            }
+
+            tableLayoutPanel2.Visible = false;
+            buttonSave.Enabled = false;
         }
 
         private void gridRoles_SelectionChanged(object sender, EventArgs e)
         {
-            setRoleDescription();
+            UpdateRoleDescription();
         }
 
-
-        // We want to allow the user to select rows without changing the check boxes so they can browse the descriptions
-        // so handle mouseclicks only on the check box column
-        // Only allow them to select a single role, which also means all that tri state rubbish dissapears as soon as they make a selection
         private void gridRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 0 || e.RowIndex < 0 || batchChange)
+            //handle mouse clicks only on the check box column because the user should be able
+            //to select rows by clicking but without checking them so as to browse the descriptions
+
+            if (e.ColumnIndex != 0 || e.RowIndex < 0 || e.RowIndex >= gridRoles.RowCount)
                 return;
 
-            selectIndex(e.RowIndex);
-            buttonSave.Enabled = changesMade();
+            CheckRowByIndex(e.RowIndex);
         }
 
-        // We want to allow the user to select rows without changing the check boxes so they can browse the descriptions
-        // but we want it to be keyboard accessible. Capture the select keypress and toggle the checkbox
         private void gridRoles_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // makes assumption about multiselect
-            System.Diagnostics.Trace.Assert(!gridRoles.MultiSelect);
-
-            if (batchChange || e.KeyChar != ' ') 
+            if (e.KeyChar != (char)Keys.Space || gridRoles.SelectedRows.Count != 1) 
                 return;
 
-            selectIndex(gridRoles.SelectedRows[0].Index);
-            buttonSave.Enabled = changesMade();
+            CheckRowByIndex(gridRoles.SelectedRows[0].Index);
         }
 
-        private void selectIndex(int i)
+        private void CheckRowByIndex(int index)
         {
-            batchChange = true;
             foreach (DataGridViewRow r in gridRoles.Rows)
             {
-                if (i == r.Index)
-                {
-                    r.Cells[0].Value = true;
-                    ((DataGridViewCheckBoxCellEx)(r.Cells[0])).CheckState = CheckState.Checked;
-                    continue;
-                }
-                r.Cells[0].Value = false;
-                ((DataGridViewCheckBoxCellEx)(r.Cells[0])).CheckState = CheckState.Unchecked;
+                if (r is RoleDataGridViewRow row)
+                    row.IsChecked = index == r.Index;
             }
-            batchChange = false;
+
+            UpdateButtonsAndInfo();
         }
 
-        // Data grid view check box cells dont commit their value immeadiately, though the UI updates (edit mode).
-        // To prevent messing around we handle the check state value ourselves.
-        class DataGridViewCheckBoxCellEx : DataGridViewCheckBoxCell
+
+        private class RoleDataGridViewRow : DataGridViewRow
         {
-            public CheckState CheckState = CheckState.Unchecked;
+            private readonly DataGridViewCheckBoxCell _c1 = new DataGridViewCheckBoxCell {ThreeState = true};
+            private readonly DataGridViewTextBoxCell _c2 = new DataGridViewTextBoxCell();
+
+            public RoleDataGridViewRow(Role role)
+            {
+                Role = role;
+                _c1.Value = CheckState.Indeterminate;
+                _c2.Value = role.FriendlyName();
+                Cells.AddRange(_c1, _c2);
+            }
+
+            public Role Role { get; }
+
+            public bool IsChecked
+            {
+                get => (CheckState)_c1.Value == CheckState.Checked;
+                set => _c1.Value = value ? CheckState.Checked : CheckState.Unchecked;
+            }
         }
     }
 }

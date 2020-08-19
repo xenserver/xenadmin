@@ -54,6 +54,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                                                  Registry.SSLCertificateTypes != SSLCertificateTypes.None;
             CertificateFoundCheckBox.Enabled = Registry.SSLCertificateTypes != SSLCertificateTypes.All;
             CertificateChangedCheckBox.Enabled = Registry.SSLCertificateTypes == SSLCertificateTypes.None;
+
+            checkBoxReminder.Checked = Properties.Settings.Default.RemindChangePassword;
         }
 
         #region IOptionsPage Members
@@ -65,6 +67,9 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.WarnUnrecognizedCertificate = CertificateFoundCheckBox.Checked;
             if (CertificateChangedCheckBox.Enabled && CertificateChangedCheckBox.Checked != Properties.Settings.Default.WarnChangedCertificate)
                 Properties.Settings.Default.WarnChangedCertificate = CertificateChangedCheckBox.Checked;
+
+            if (Properties.Settings.Default.RemindChangePassword != checkBoxReminder.Checked)
+                Properties.Settings.Default.RemindChangePassword = checkBoxReminder.Checked;
         }
 
         #endregion

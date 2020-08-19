@@ -117,6 +117,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
+    <Compile Include="Commands\RotatePoolSecretCommand.cs" />
     <Compile Include="Commands\InstallCertificateCommand.cs" />
     <Compile Include="Commands\LaunchConversionManagerCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />

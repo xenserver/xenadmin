@@ -308,6 +308,11 @@ namespace XenAPI
             return !BoolKey(h.license_params, "enable_xha");
         }
 
+        public static bool RestrictPoolSecretRotation(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_pool_secret_rotation");
+        }
+
         public static bool RestrictAlerts(Host h)
         {
             return BoolKeyPreferTrue(h.license_params, "restrict_email_alerting");

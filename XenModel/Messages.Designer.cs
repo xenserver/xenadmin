@@ -3774,7 +3774,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adding/removing roles from subject.
+        ///   Looks up a localized string similar to Assigning new roles to subject.
         /// </summary>
         public static string AD_ADDING_REMOVING_ROLES {
             get {
@@ -3783,7 +3783,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adding/removing roles from subject &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Assigning new roles to subject &apos;{0}&apos;.
         /// </summary>
         public static string AD_ADDING_REMOVING_ROLES_ON {
             get {
@@ -7266,15 +7266,6 @@ namespace XenAdmin {
         public static string CHANGEPASS_DIALOG_TITLE {
             get {
                 return ResourceManager.GetString("CHANGEPASS_DIALOG_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please type the root password for &apos;{0}&apos;:.
-        /// </summary>
-        public static string CHANGEPASS_ROOT_PASS {
-            get {
-                return ResourceManager.GetString("CHANGEPASS_ROOT_PASS", resourceCulture);
             }
         }
         
@@ -31268,9 +31259,52 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are about to log out {0} users.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to To reduce the risk of unauthorized access to your system, it is recommended that you also change the server root password and rotate the pool secret..
+        /// </summary>
+        public static string QUESTION_ADMIN_EXIT_PROCEDURE_ADVISORY {
+            get {
+                return ResourceManager.GetString("QUESTION_ADMIN_EXIT_PROCEDURE_ADVISORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The users you are about to remove are Pool Administrators..
+        /// </summary>
+        public static string QUESTION_ADMIN_EXIT_PROCEDURE_MANY {
+            get {
+                return ResourceManager.GetString("QUESTION_ADMIN_EXIT_PROCEDURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user you are about to remove is a Pool Administrator..
+        /// </summary>
+        public static string QUESTION_ADMIN_EXIT_PROCEDURE_ONE {
+            get {
+                return ResourceManager.GetString("QUESTION_ADMIN_EXIT_PROCEDURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One of the users you are about to remove is a Pool Administrator..
+        /// </summary>
+        public static string QUESTION_ADMIN_EXIT_PROCEDURE_ONE_OF_MANY {
+            get {
+                return ResourceManager.GetString("QUESTION_ADMIN_EXIT_PROCEDURE_ONE_OF_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of the users you are about to remove are Pool Administrators..
+        /// </summary>
+        public static string QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY {
+            get {
+                return ResourceManager.GetString("QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to log out these {0} users?.
         /// </summary>
         public static string QUESTION_LOGOUT_AD_USER_MANY {
             get {
@@ -31279,9 +31313,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are about to log out the user &apos;{0}&apos;.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to Are you sure you want to log out the user &apos;{0}&apos;?.
         /// </summary>
         public static string QUESTION_LOGOUT_AD_USER_ONE {
             get {
@@ -31290,18 +31322,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ?.
-        /// </summary>
-        public static string QUESTION_MARK {
-            get {
-                return ResourceManager.GetString("QUESTION_MARK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to remove {0} users.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to Are you sure you want to remove these {0} users?.
         /// </summary>
         public static string QUESTION_REMOVE_AD_USER_MANY {
             get {
@@ -31310,9 +31331,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are about to remove the user &apos;{0}&apos;.
-        ///
-        ///Do you want to continue?.
+        ///   Looks up a localized string similar to Are you sure you want to remove the user &apos;{0}&apos;?.
         /// </summary>
         public static string QUESTION_REMOVE_AD_USER_ONE {
             get {
@@ -32781,6 +32800,62 @@ namespace XenAdmin {
         public static string ROLLINGUPGRADE_PRECHECKS {
             get {
                 return ResourceManager.GetString("ROLLINGUPGRADE_PRECHECKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot rotate the pool secret when HA is on..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_HA {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotate &amp;Pool Secret.
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_MENU {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to rotate the pool secret. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_RBAC_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To reduce the risk of unauthorized access to your system, it is recommended that you also change the server root password..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_REMIND_CHANGE_PASSWORD {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_REMIND_CHANGE_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot rotate the pool secret when a Rolling Pool Upgrade is in progress..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_RPU {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_RPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotating pool secret.
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_TITLE {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_TITLE", resourceCulture);
             }
         }
         
