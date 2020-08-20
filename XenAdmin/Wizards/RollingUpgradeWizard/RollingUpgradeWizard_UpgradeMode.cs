@@ -33,25 +33,16 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAPI;
 
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeWizardUpgradeModePage : XenTabPage
     {
-        private enum RollingUpgradeInstallMethod
-        {
-            http,
-            nfs,
-            ftp
-        }
-
-        private RollingUpgradeInstallMethod _installMethod = RollingUpgradeInstallMethod.http;
-
         public RollingUpgradeWizardUpgradeModePage()
         {
             InitializeComponent();
+            comboBoxUpgradeMethod.Items.AddRange(new object[] {new HttpItem(), new NfsItem(), new FtpItem()});
             comboBoxUpgradeMethod.SelectedIndex = 0;
         }
 
@@ -93,38 +84,47 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         #endregion
 
+        private void UpdateInstallMethod()
+        {
+            if (string.IsNullOrWhiteSpace(watermarkTextBox1.Text))
+                return;
+            
+            var url = watermarkTextBox1.Text.Replace(" ", "");
+
+            foreach (var item in comboBoxUpgradeMethod.Items)
+            {
+                if (item is UpgradeMethodItem method && url.ToLower().StartsWith(method.Prefix))
+                {
+                    comboBoxUpgradeMethod.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
         private Dictionary<string, string> CalculateInstallMethodConfig()
         {
             if (string.IsNullOrWhiteSpace(watermarkTextBox1.Text))
                 return null;
 
-            var url = watermarkTextBox1.Text.Trim().Replace(" ", "");
+            var url = watermarkTextBox1.Text.Replace(" ", "");
             if (!url.EndsWith("/"))
                 url = $"{url}/";
 
-            foreach (string method in Enum.GetNames(typeof(RollingUpgradeInstallMethod)))
+            foreach (var item in comboBoxUpgradeMethod.Items)
             {
-                string prefix = method.ToLower() + @"://";
-                if (url.ToLower().StartsWith(prefix))
+                if (item is UpgradeMethodItem method && url.ToLower().StartsWith(method.Prefix))
                 {
-                    url = url.Substring(prefix.Length);
+                    url = url.Substring(method.Prefix.Length);
                     break;
                 }
             }
 
             watermarkTextBox1.Text = url;
 
-            var config = new Dictionary<string, string>();
+            if (comboBoxUpgradeMethod.SelectedItem is UpgradeMethodItem umItem)
+                return new Dictionary<string, string> {{"url", umItem.FormatUrl(url, textBoxUser.Text, textBoxPassword.Text)}};
 
-            if (_installMethod != RollingUpgradeInstallMethod.nfs &&
-                !string.IsNullOrWhiteSpace(textBoxUser.Text) && !string.IsNullOrWhiteSpace(textBoxPassword.Text))
-            {
-                config["url"] = $"{_installMethod}://{textBoxUser.Text.UrlEncode()}:{textBoxPassword.Text.UrlEncode()}@{url}";
-            }
-            else
-                config["url"] = $"{_installMethod}://{url}";
-
-            return config;
+            return null;
         }
 
         #region Control event handlers
@@ -133,26 +133,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             radioButtonAutomatic.Checked = true;
 
-            switch (comboBoxUpgradeMethod.SelectedIndex)
+            if (comboBoxUpgradeMethod.SelectedItem is UpgradeMethodItem item)
             {
-                case 0:
-                    _installMethod = RollingUpgradeInstallMethod.http;
-                    CueBannersManager.SetWatermark(watermarkTextBox1, "www.example.com/");
-                    break;
-                case 1:
-                    _installMethod = RollingUpgradeInstallMethod.nfs;
-                    CueBannersManager.SetWatermark(watermarkTextBox1, "server:path/");
-                    break;
-                case 2:
-                    _installMethod = RollingUpgradeInstallMethod.ftp;
-                    CueBannersManager.SetWatermark(watermarkTextBox1, "ftp.example.com/");
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
+                CueBannersManager.SetWatermark(watermarkTextBox1, item.ExampleUrl);
 
-            labelUser.Visible = textBoxUser.Visible =
-                labelPassword.Visible = textBoxPassword.Visible = _installMethod != RollingUpgradeInstallMethod.nfs;
+                labelUser.Visible = textBoxUser.Visible =
+                    labelPassword.Visible = textBoxPassword.Visible = !(item is NfsItem);
+            }
 
             OnPageUpdated();
         }
@@ -160,6 +147,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void watermarkTextBox1_TextChanged(object sender, EventArgs e)
         {
             radioButtonAutomatic.Checked = true;
+            UpdateInstallMethod();
             OnPageUpdated();
         }
 
@@ -185,6 +173,54 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             if (radioButtonManual.Checked)
                 OnPageUpdated();
+        }
+
+        #endregion
+
+        #region Nested items
+
+        private abstract class UpgradeMethodItem
+        {
+            public abstract string ExampleUrl { get; }
+
+            protected abstract string Name{ get; }
+
+            public string Prefix => Name.ToLower() + @"://";
+
+            public override string ToString()
+            {
+                return Name;
+            }
+
+            public virtual string FormatUrl(string url, string username = null, string password = null)
+            {
+                return string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password)
+                    ? $"{Name.ToLower()}://{url}"
+                    : $"{Name.ToLower()}://{username.UrlEncode()}:{password.UrlEncode()}@{url}";
+            }
+        }
+
+        private class HttpItem : UpgradeMethodItem
+        {
+            protected override string Name => "HTTP";
+            public override string ExampleUrl => "www.example.com/";
+        }
+
+        private class NfsItem : UpgradeMethodItem
+        {
+            protected override string Name => "NFS";
+            public override string ExampleUrl => "server:path/";
+
+            public override string FormatUrl(string url, string username = null, string password = null)
+            {
+                return $"{Name.ToLower()}://{url}";
+            }
+        }
+
+        private class FtpItem : UpgradeMethodItem
+        {
+            protected override string Name => "FTP";
+            public override string ExampleUrl => "ftp.example.com/";
         }
 
         #endregion

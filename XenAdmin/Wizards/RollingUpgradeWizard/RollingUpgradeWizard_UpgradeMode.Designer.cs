@@ -117,10 +117,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             // 
             this.comboBoxUpgradeMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUpgradeMethod.FormattingEnabled = true;
-            this.comboBoxUpgradeMethod.Items.AddRange(new object[] {
-            resources.GetString("comboBoxUpgradeMethod.Items"),
-            resources.GetString("comboBoxUpgradeMethod.Items1"),
-            resources.GetString("comboBoxUpgradeMethod.Items2")});
             resources.ApplyResources(this.comboBoxUpgradeMethod, "comboBoxUpgradeMethod");
             this.comboBoxUpgradeMethod.Name = "comboBoxUpgradeMethod";
             this.comboBoxUpgradeMethod.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);

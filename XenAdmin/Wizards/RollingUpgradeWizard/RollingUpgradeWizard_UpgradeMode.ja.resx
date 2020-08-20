@@ -267,15 +267,6 @@
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="comboBoxUpgradeMethod.Items" xml:space="preserve">
-    <value>HTTP</value>
-  </data>
-  <data name="comboBoxUpgradeMethod.Items1" xml:space="preserve">
-    <value>NFS</value>
-  </data>
-  <data name="comboBoxUpgradeMethod.Items2" xml:space="preserve">
-    <value>FTP</value>
-  </data>
   <data name="comboBoxUpgradeMethod.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
