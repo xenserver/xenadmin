@@ -44,10 +44,6 @@ namespace XenAPI
         /// Configure network sriov by modprobe, need reboot
         /// </summary>
         modprobe,
-        /// <summary>
-        /// Configure network sriov manually
-        /// </summary>
-        manual,
         unknown
     }
 
@@ -69,8 +65,6 @@ namespace XenAPI
                     return "sysfs";
                 case sriov_configuration_mode.modprobe:
                     return "modprobe";
-                case sriov_configuration_mode.manual:
-                    return "manual";
                 default:
                     return "unknown";
             }

@@ -87,7 +87,8 @@ namespace XenAPI
             bool policy_no_vendor_device,
             bool live_patching_disabled,
             bool igmp_snooping_enabled,
-            string uefi_certificates)
+            string uefi_certificates,
+            bool is_psr_pending)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -126,6 +127,7 @@ namespace XenAPI
             this.live_patching_disabled = live_patching_disabled;
             this.igmp_snooping_enabled = igmp_snooping_enabled;
             this.uefi_certificates = uefi_certificates;
+            this.is_psr_pending = is_psr_pending;
         }
 
         /// <summary>
@@ -194,6 +196,7 @@ namespace XenAPI
             live_patching_disabled = update.live_patching_disabled;
             igmp_snooping_enabled = update.igmp_snooping_enabled;
             uefi_certificates = update.uefi_certificates;
+            is_psr_pending = update.is_psr_pending;
         }
 
         internal void UpdateFrom(Proxy_Pool proxy)
@@ -235,6 +238,7 @@ namespace XenAPI
             live_patching_disabled = (bool)proxy.live_patching_disabled;
             igmp_snooping_enabled = (bool)proxy.igmp_snooping_enabled;
             uefi_certificates = proxy.uefi_certificates == null ? null : proxy.uefi_certificates;
+            is_psr_pending = (bool)proxy.is_psr_pending;
         }
 
         public Proxy_Pool ToProxy()
@@ -277,6 +281,7 @@ namespace XenAPI
             result_.live_patching_disabled = live_patching_disabled;
             result_.igmp_snooping_enabled = igmp_snooping_enabled;
             result_.uefi_certificates = uefi_certificates ?? "";
+            result_.is_psr_pending = is_psr_pending;
             return result_;
         }
 
@@ -362,6 +367,8 @@ namespace XenAPI
                 igmp_snooping_enabled = Marshalling.ParseBool(table, "igmp_snooping_enabled");
             if (table.ContainsKey("uefi_certificates"))
                 uefi_certificates = Marshalling.ParseString(table, "uefi_certificates");
+            if (table.ContainsKey("is_psr_pending"))
+                is_psr_pending = Marshalling.ParseBool(table, "is_psr_pending");
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
@@ -409,7 +416,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._policy_no_vendor_device, other._policy_no_vendor_device) &&
                 Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled) &&
                 Helper.AreEqual2(this._igmp_snooping_enabled, other._igmp_snooping_enabled) &&
-                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates);
+                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
+                Helper.AreEqual2(this._is_psr_pending, other._is_psr_pending);
         }
 
         internal static List<Pool> ProxyArrayToObjectList(Proxy_Pool[] input)
@@ -489,6 +497,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_uefi_certificates, server._uefi_certificates))
                 {
                     Pool.set_uefi_certificates(session, opaqueRef, _uefi_certificates);
+                }
+                if (!Helper.AreEqual2(_is_psr_pending, server._is_psr_pending))
+                {
+                    Pool.set_is_psr_pending(session, opaqueRef, _is_psr_pending);
                 }
 
                 return null;
@@ -1043,6 +1055,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the is_psr_pending field of the given pool.
+        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_is_psr_pending(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_get_is_psr_pending(session.opaque_ref, _pool);
+            else
+                return (bool)session.XmlRpcProxy.pool_get_is_psr_pending(session.opaque_ref, _pool ?? "").parse();
+        }
+
+        /// <summary>
         /// Set the name_label field of the given pool.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1388,6 +1414,21 @@ namespace XenAPI
                 session.JsonRpcClient.pool_set_uefi_certificates(session.opaque_ref, _pool, _uefi_certificates);
             else
                 session.XmlRpcProxy.pool_set_uefi_certificates(session.opaque_ref, _pool ?? "", _uefi_certificates ?? "").parse();
+        }
+
+        /// <summary>
+        /// Set the is_psr_pending field of the given pool.
+        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_is_psr_pending">New value to set</param>
+        public static void set_is_psr_pending(Session session, string _pool, bool _is_psr_pending)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_set_is_psr_pending(session.opaque_ref, _pool, _is_psr_pending);
+            else
+                session.XmlRpcProxy.pool_set_is_psr_pending(session.opaque_ref, _pool ?? "", _is_psr_pending).parse();
         }
 
         /// <summary>
@@ -2716,7 +2757,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2 Hotfix n.
         /// </summary>
         /// <param name="session">The session</param>
         public static void rotate_secret(Session session)
@@ -2729,7 +2770,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in Citrix Hypervisor 8.2 Hotfix n.
         /// </summary>
         /// <param name="session">The session</param>
         public static XenRef<Task> async_rotate_secret(Session session)
@@ -3435,5 +3476,23 @@ namespace XenAPI
             }
         }
         private string _uefi_certificates = "";
+
+        /// <summary>
+        /// True if either a PSR is running or we are waiting for a PSR to be re-run
+        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// </summary>
+        public virtual bool is_psr_pending
+        {
+            get { return _is_psr_pending; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_psr_pending))
+                {
+                    _is_psr_pending = value;
+                    NotifyPropertyChanged("is_psr_pending");
+                }
+            }
+        }
+        private bool _is_psr_pending = false;
     }
 }
