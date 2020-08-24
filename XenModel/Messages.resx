@@ -8074,7 +8074,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Remove Crash Dump &amp;Files</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
-    <value>Remove Crash Dump &amp;Files</value>
+    <value>Remove Crash Dump Fi&amp;les</value>
   </data>
   <data name="MAINWINDOW_RENAME_TAG" xml:space="preserve">
     <value>&amp;Rename Tag...</value>
