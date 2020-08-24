@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
 
             using (var dialog = new WarningDialog(string.Format(Messages.REMOVE_CRASHDUMP_WARNING, host.Name().Ellipsise(30)),
                 new ThreeButtonDialog.TBDButton(Messages.SERVER_STATUS_REPORT, DialogResult.Ignore, ThreeButtonDialog.ButtonType.CANCEL, true),
-                new ThreeButtonDialog.TBDButton(Messages.SERVER_STATUS_REPORT, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT),
+                new ThreeButtonDialog.TBDButton(Messages.REMOVE_FILES, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT),
                 ThreeButtonDialog.ButtonCancel))
             {
                 var result = dialog.ShowDialog(Parent);
