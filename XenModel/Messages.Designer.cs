@@ -23254,7 +23254,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Crash Dump &amp;Files.
+        ///   Looks up a localized string similar to Remove Crash Dump Fi&amp;les.
         /// </summary>
         public static string MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU {
             get {
