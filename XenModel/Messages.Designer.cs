@@ -8909,35 +8909,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to Server {0} restricted because a connection already exists to another XE Express Server ({1}).
-        /// </summary>
-        public static string CONNECTION_RESTRICTED_MESSAGE {
-            get {
-                return ResourceManager.GetString("CONNECTION_RESTRICTED_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection to server {0} restricted - a connection to a [Citrix XenServer] Express Edition server ({1}) already exists.
-        ///
-        ///You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below..
-        /// </summary>
-        public static string CONNECTION_RESTRICTED_MESSAGE_LONG {
-            get {
-                return ResourceManager.GetString("CONNECTION_RESTRICTED_MESSAGE_LONG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot connect to {0} due to license restrictions on the server.
-        /// </summary>
-        public static string CONNECTION_RESTRICTED_NOTICE_TITLE {
-            get {
-                return ResourceManager.GetString("CONNECTION_RESTRICTED_NOTICE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Connection to {0}: trying to find pool at {1}.
         /// </summary>
         public static string CONNECTION_RETRYING_SLAVE {
@@ -22045,15 +22016,6 @@ namespace XenAdmin {
         public static string LICENSE_REGULAR_GRACE_TOOLTIP {
             get {
                 return ResourceManager.GetString("LICENSE_REGULAR_GRACE_TOOLTIP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1}).
-        /// </summary>
-        public static string LICENSE_RESTRICTION_MESSAGE {
-            get {
-                return ResourceManager.GetString("LICENSE_RESTRICTION_MESSAGE", resourceCulture);
             }
         }
         

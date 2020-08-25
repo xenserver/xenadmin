@@ -3214,18 +3214,6 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
     <value>Refused connection to {0}</value>
   </data>
-  <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
-    <value>Connection to Server {0} restricted because a connection already exists to another XE Express Server ({1})</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>Connection to server {0} restricted - a connection to a [Citrix XenServer] Express Edition server ({1}) already exists.
-
-You can only connect to a single [Citrix XenServer] Express Edition server at a time. To find out how to upgrade your license, follow the link below.</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
-    <value>Cannot connect to {0} due to license restrictions on the server</value>
-    <comment>Title of notice shown when connection to a host is restricted by license</comment>
-  </data>
   <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
     <value>Connection to {0}: trying to find pool at {1}</value>
   </data>
@@ -7659,9 +7647,6 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
-  </data>
-  <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
-    <value>License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1})</value>
   </data>
   <data name="LICENSE_SA_EXPIRED" xml:space="preserve">
     <value>Your support and maintenance has expired</value>

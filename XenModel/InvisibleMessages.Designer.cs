@@ -115,15 +115,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to www.citrix.com/xenserverenterprise.
-        /// </summary>
-        public static string HTTP_LICENSES {
-            get {
-                return ResourceManager.GetString("HTTP_LICENSES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://support.citrix.com/article/CTX141433.
         /// </summary>
         public static string ISL_DEPRECATION_URL {

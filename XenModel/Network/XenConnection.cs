@@ -1399,7 +1399,7 @@ namespace XenAdmin.Network
         {
             if (task != connectTask)
             {
-                // We've been superceded by a newer ConnectTask. Exit silently without firing events.
+                // We've been superseded by a newer ConnectTask. Exit silently without firing events.
                 // Can happen when user disconnects while sync is taking place, then reconnects
                 // (creating a new _connectTask) before the sync is complete.
             }
@@ -1410,21 +1410,7 @@ namespace XenAdmin.Network
                 connectTask = null;
                 HandleConnectionTermination();
 
-                if (error is ExpressRestriction)
-                {
-                    EndConnect(true, task, false);
-
-                    ExpressRestriction e = (ExpressRestriction)error;
-                    // This can happen when the user attempts to connect to a second XE Express host from the UI
-                    string msg = string.Format(Messages.CONNECTION_RESTRICTED_MESSAGE, e.HostName, e.ExistingHostName);
-                    log.Info($"Connection to Server {e.HostName} restricted because a connection already exists to another XE Express Server ({e.ExistingHostName})");
-                    string title = string.Format(Messages.CONNECTION_RESTRICTED_NOTICE_TITLE, e.HostName);
-                    ActionBase action = new ActionBase(title, msg, false, true, msg);
-                    SetPoolAndHostInAction(action, pool, PoolOpaqueRef);
-
-                    OnConnectionResult(false, Messages.CONNECTION_RESTRICTED_MESSAGE, error);
-                }
-                else if (error is ServerNotSupported)
+                if (error is ServerNotSupported)
                 {
                     EndConnect(true, task, false);
                     log.Info(error.Message);
@@ -2016,27 +2002,6 @@ namespace XenAdmin.Network
 
 
         #endregion
-    }
-
-
-    public class ExpressRestriction : DisconnectionException
-    {
-        public readonly string HostName;
-        public readonly string ExistingHostName;
-
-        public ExpressRestriction(string HostName, string ExistingHostName)
-        {
-            this.HostName = HostName;
-            this.ExistingHostName = ExistingHostName;
-        }
-
-        public override string Message
-        {
-            get
-            {
-                return string.Format(Messages.LICENSE_RESTRICTION_MESSAGE, HostName, ExistingHostName);
-            }
-        }
     }
 
     public class ServerNotSupported : DisconnectionException
