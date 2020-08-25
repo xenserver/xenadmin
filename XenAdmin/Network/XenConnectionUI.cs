@@ -133,20 +133,6 @@ namespace XenAdmin.Network
 
         private static void ShowConnectingDialogError(Form owner, IXenConnection connection, Exception error)
         {
-            if (error is ExpressRestriction e)
-            {
-                using (var dialog = new WarningDialog(string.Format(
-                    Messages.CONNECTION_RESTRICTED_MESSAGE_LONG, e.HostName, e.ExistingHostName))
-                {
-                    ShowLinkLabel = true,
-                    LinkText = InvisibleMessages.HTTP_LICENSES,
-                    LinkData = InvisibleMessages.HTTP_LICENSES
-                })
-                    dialog.ShowDialog(owner);
-                
-                return;
-            }
-
             if (error is Failure f)
             {
                 if (f.ErrorDescription[0] == Failure.HOST_IS_SLAVE)
