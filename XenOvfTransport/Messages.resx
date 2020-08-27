@@ -282,13 +282,13 @@
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>Imported.</value>
   </data>
+  <data name="UNSUPPORTED_FILE_TYPE" xml:space="preserve">
+    <value>File type {0} is not supported.</value>
+  </data>
   <data name="UNSUPPORTED_TRANSPORT" xml:space="preserve">
     <value>Transfer type is not supported.</value>
   </data>
   <data name="WARNING_ADMIN_REQUIRED" xml:space="preserve">
     <value>Please view the log for details about a failure to import.</value>
-  </data>
-  <data name="WARNING_TARGET_NOT_BOOTABLE" xml:space="preserve">
-    <value>The imported virtual machine is not bootable because a master boot record was not found.</value>
   </data>
 </root>

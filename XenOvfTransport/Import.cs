@@ -43,18 +43,11 @@ using System.Text.RegularExpressions;
 using System.Threading;
 
 using DiscUtils;
-using DiscUtils.BootConfig;
-using DiscUtils.Ntfs;
-using DiscUtils.Partitions;
-using DiscUtils.Registry;
-using DiscUtils.Wim;
 using XenAdmin.Core;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Definitions.XENC;
-using XenOvf.Definitions.VMC;
-using XenCenterLib.Compression;
 
 using XenOvf.Utilities;
 
@@ -78,29 +71,16 @@ namespace XenOvfTransport
             Unknown = 4 
         }
 
-        public enum TransferMethod 
-        {
-            Image = 0,
-            Files = 1,
-            Unknown = 2
-        }
-
 		private string downloadupdatemsg;
         private string EncryptionClass;
         private int EncryptionKeySize;
-        private List<XenRef<VM>> P2VVMServerList = new List<XenRef<VM>>();
         private XenRef<SR> DefaultSRUUID = null;
         private readonly Http http;
         private VirtualDisk vhdDisk = null;
-        private WimFile wimDisk = null;
-        private ulong wimFileCount = 0;
-        private ulong wimFileIndex = 0;
-        private ulong AdditionalSpace = 20 * GB;
         private int vifDeviceIndex = 0;  // used to count number of Networks attached and to be used as the device number.
         private string _currentfilename = null;
         private Exception _downloadexception = null;
         private ulong _filedownloadsize = 0;
-        private int xvadisk = 0;
         private AutoResetEvent uridownloadcomplete = new AutoResetEvent(false);
 
         public string ApplianceName { get; set; }
@@ -327,7 +307,6 @@ namespace XenOvfTransport
 
                                 VirtualDiskDesc_Type vdisk = OVF.FindDiskReference(ovfObj, rasd);
 								SetIfDeviceIsBootable(ovfObj, rasd);
-                                AdditionalSpace = OVF.ComputeCapacity(Convert.ToInt64(vdisk.capacity), vdisk.capacityAllocationUnits);  // used in Wim file imports only.
 								AddResourceSettingData(xenSession, vmRef, rasd, pathToOvf, OVF.FindRasdFileName(ovfObj, rasd, out compression), compression, encryptionVersion, thisPassCode);
                             }
                         }
@@ -446,7 +425,6 @@ namespace XenOvfTransport
             VM.set_HVM_boot_params(xenSession, vm, bootParameters);
         }
 
-
         private void InstallSectionStartVirtualMachine(Session xenSession, XenRef<VM> vm, int initialBootStopDelayAsSeconds)
         {
             log.InfoFormat("Running fixup on VM with opaque_ref {0}", vm.opaque_ref);
@@ -490,14 +468,12 @@ namespace XenOvfTransport
             }
         }
 
-
         internal List<XenRef<VDI>> ImportFile(Session xenSession, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid)
         {
             List<XenRef<VDI>> vdiRef = new List<XenRef<VDI>>();
 
             // Get the disk transport method from the configuration in XenOvfTransport.Properties.Settings.TransferType.
             TransferType useTransport = (TransferType)Enum.Parse(typeof(TransferType), Properties.Settings.Default.TransferType, true);
-            TransferMethod useTransferMethod = TransferMethod.Image;
             string sourcefile = filename;
             string encryptfilename = null;
             string uncompressedfilename = null;
@@ -581,37 +557,6 @@ namespace XenOvfTransport
                             dataStream = vhdDisk.Content;
                             dataCapacity = vhdDisk.Capacity;
                         }
-                        else if (ext.ToLower().Contains("wim"))
-                        {
-                            log.WarnFormat("EXPERIMENTAL CODE: Found file {0} using WIM file structure", filename);
-                            wimDisk = new DiscUtils.Wim.WimFile(new FileStream(sourcefile, FileMode.Open, FileAccess.Read));
-                            //wimFS = wimDisk.GetImage(wimDisk.BootImage);
-
-                            dataStream = null;
-
-                            string manifest = wimDisk.Manifest;
-                            Wim_Manifest wimManifest = Tools.Deserialize<Wim_Manifest>(manifest);
-                            ulong imagesize = wimManifest.Image[wimDisk.BootImage].TotalBytes; // <----<<< Image data size
-                            wimFileCount = wimManifest.Image[wimDisk.BootImage].FileCount;
-                            dataCapacity = (long)(imagesize + AdditionalSpace);
-                            useTransferMethod = TransferMethod.Files;
-                        }
-                        else if (ext.ToLower().Contains("xva"))
-                        {
-                            log.WarnFormat("EXPERIMENTAL CODE: Found file {0} using XVA Stream (DISK {1} is being imported).", filename, xvadisk);
-                            DiscUtils.Xva.VirtualMachine vm = new DiscUtils.Xva.VirtualMachine(new FileStream(sourcefile, FileMode.Open, FileAccess.Read));
-                            int i = 0;
-                            foreach (DiscUtils.Xva.Disk d in vm.Disks)
-                            {
-                                if (i == xvadisk)
-                                {
-                                    vhdDisk = d;
-                                    break;
-                                }
-                            }
-                            dataStream = vhdDisk.Content;
-                            dataCapacity = vhdDisk.Capacity;
-                        }
                         else if (ext.ToLower().EndsWith("iso"))
                         {
                             if (string.IsNullOrEmpty(sruuid))
@@ -624,6 +569,10 @@ namespace XenOvfTransport
                                 dataStream = File.OpenRead(filename);
                                 dataCapacity = dataStream.Length + (512 * KB);  // Xen does 512KB rounding this is to ensure it doesn't round down below size.
                             }
+                        }
+                        else
+                        {
+                            throw new IOException(string.Format(Messages.UNSUPPORTED_FILE_TYPE, ext));
                         }
                         #endregion
                     }
@@ -685,20 +634,7 @@ namespace XenOvfTransport
                         }
                     case TransferType.iSCSI:
                         {
-                            if (useTransferMethod == TransferMethod.Image)
-                            {
-                                vdiRef.Add(UploadiSCSI(xenSession, sruuid, vmname, dataStream, dataCapacity, description, vdiuuid));
-                            }
-                            else
-                            {
-                                for (int i = 0; i < wimDisk.ImageCount; i++)
-                                {
-                                    Wim_Manifest wimManifest = Tools.Deserialize<Wim_Manifest>(wimDisk.Manifest);
-                                    wimFileCount = wimManifest.Image[i].FileCount;
-                                    int wimArch = wimManifest.Image[i].Windows.Architecture;
-                                    vdiRef.Add(UploadiSCSIbyWimFile(xenSession, sruuid, vmname, wimDisk, i, dataCapacity, wimFileCount, wimArch, ""));
-                                }
-                            }
+                            vdiRef.Add(UploadiSCSI(xenSession, sruuid, vmname, dataStream, dataCapacity, description, vdiuuid));
                             break;
                         }
                     case TransferType.Skip:
@@ -726,10 +662,6 @@ namespace XenOvfTransport
                 {
                     vhdDisk.Dispose();
                     vhdDisk = null;
-                }
-                if (wimDisk != null)
-                {
-                    wimDisk = null;
                 }
 
                 try
@@ -807,101 +739,6 @@ namespace XenOvfTransport
             return vdiRef;
         }
 
-        private XenRef<VDI> UploadiSCSIbyWimFile(Session xenSession, string sruuid, string label, WimFile wimDisk, int imageindex, long capacity, ulong wimFileCount, int arch, string description)
-        {
-            log.Debug($"OVF.Import.UploadiSCSIbyWimFile SRUUID: {sruuid}, Label: {label}, ImageIndex: {imageindex}, Capacity: {capacity}");
-
-            string vdilabel = string.Format("{0}{1}", label, imageindex);
-            XenRef<VDI> vdiRef = CreateVDI(xenSession, sruuid, vdilabel, capacity, description);
-
-            byte[] mbr = null;
-            byte[] boot = null;
-            //byte[] bcd = null;
-            //byte[] bootmgr = null;
-
-            string vhdfile = FindReferenceVHD(Properties.Settings.Default.ReferenceVHDName);
-            if (File.Exists(vhdfile))
-            {
-                mbr = ExtractMBRFromVHD(vhdfile);
-                boot = ExtractBootFromVHD(vhdfile);
-                //bcd = ExtractBCDFromVHD(vhdfile, arch);
-                //bootmgr = ExtractBootmgrFromVHD(vhdfile, arch);
-            }
-            else
-            {
-                log.WarnFormat("Reference VHD not found [{0}]", Properties.Settings.Default.ReferenceVHDName);
-            }
-
-            #region UPLOAD iSCSI STREAM
-            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_SETUP, _currentfilename)));
-			m_iscsi = new iSCSI
-			{
-				UpdateHandler = iscsi_UpdateHandler,
-				Cancel = Cancel //in case it has already been cancelled
-			};
-			m_iscsi.ConfigureTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-            try
-            {
-                wimFileIndex = 0;
-                string vdiuuid = VDI.get_uuid(xenSession, vdiRef);
-				Stream iSCSIStream = m_iscsi.Connect(xenSession, vdiuuid, false);
-                WimFileSystem w = wimDisk.GetImage(imageindex);
-
-                if (mbr != null)
-                {
-					m_iscsi.ScsiDisk.SetMasterBootRecord(mbr);
-                }
-                else
-                {
-                    log.WarnFormat("System will not be bootable, cannot find [{0}] to extract master boot record.", vhdfile);
-                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.WARNING_TARGET_NOT_BOOTABLE));
-                }
-				m_iscsi.ScsiDisk.Signature = new Random().Next();
-
-				BiosPartitionTable table = BiosPartitionTable.Initialize(m_iscsi.ScsiDisk, WellKnownPartitionType.WindowsNtfs);
-				VolumeManager volmgr = new VolumeManager(m_iscsi.ScsiDisk);
-
-                NtfsFileSystem ntfs = null;
-                if (wimDisk.BootImage == imageindex && boot != null)
-                {
-                    table.SetActivePartition(0);
-                    ntfs = NtfsFileSystem.Format(volmgr.GetLogicalVolumes()[0], "New Volume", boot);
-                }
-                else
-                {
-                    ntfs = NtfsFileSystem.Format(volmgr.GetLogicalVolumes()[0], "New Volume");
-                }
-
-                //AddBCD(ntfs, bcd);
-                //AddBootMgr(ntfs, bootmgr);  // If it's not there it'll be created if it is it will not.. not below filecopy will overwrite if one it exists.
-
-				FileCopy(m_iscsi, w.Root.GetFiles(), w, ntfs);
-				FileCopy(m_iscsi, w.Root.GetDirectories(), w, ntfs);
-
-                FixBCD(ntfs, volmgr);
-
-                ntfs.Dispose();
-
-            }
-            catch (Exception ex)
-            {
-				if (ex is OperationCanceledException)
-					throw;
-                log.Error("Failed to import a virtual disk over iSCSI.", ex);
-                vdiRef = null;
-                throw new Exception(Messages.ERROR_ISCSI_UPLOAD_FAILED, ex);
-            }
-            finally
-            {
-                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_CLEANUP, _currentfilename)));
-				m_iscsi.Disconnect(xenSession);
-            }
-            #endregion
-
-            log.Debug("OVF.Import.UploadiSCSIbyWimFile Leave");
-            return vdiRef;
-        }
-
 		private void iscsi_UpdateHandler(XenOvfTransportEventArgs e)
 		{
 			OnUpdate(e);
@@ -937,88 +774,6 @@ namespace XenOvfTransport
                 log.Error("Failed to create VDI. ", ex);
                 throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
             }
-        }
-
-        private void FileCopy(iSCSI iscsi, DiscDirectoryInfo[] DirInfos, WimFileSystem w, NtfsFileSystem ntfs)
-        {
-            foreach (DiscDirectoryInfo dir in DirInfos)
-            {
-                if (IsExcluded(dir.FullName))
-                {
-                    log.InfoFormat("Directory Skip {0}", dir.FullName);
-                    continue;
-                }
-                FileAttributes attr = dir.Attributes;
-                if ((dir.Attributes & FileAttributes.ReparsePoint) == 0)
-                {
-                    ntfs.CreateDirectory(dir.FullName);
-                    if ((attr & FileAttributes.Temporary) == FileAttributes.Temporary)
-                        attr = attr & ~FileAttributes.Temporary;
-                    if ((attr & FileAttributes.Offline) == FileAttributes.Offline)
-                        attr = attr & ~FileAttributes.Offline;
-                    ntfs.SetAttributes(dir.FullName, attr);
-
-                    FileCopy(iscsi, dir.GetDirectories(), w, ntfs);
-                    FileCopy(iscsi, dir.GetFiles(), w, ntfs);
-                }
-                else
-                {
-                    log.InfoFormat("Directory ReparsePoint {0}", dir.FullName);
-                    ReparsePoint rp = w.GetReparsePoint(dir.FullName);
-                    ntfs.CreateDirectory(dir.FullName);
-                    ntfs.SetReparsePoint(dir.FullName, rp);
-                }
-            }
-        }
-
-        private void FileCopy(iSCSI iscsi, DiscFileInfo[] FileInfos, WimFileSystem w, NtfsFileSystem ntfs)
-        {
-            foreach (DiscFileInfo file in FileInfos)
-            {
-                if (IsExcluded(file.FullName))
-                {
-                    log.InfoFormat("File Skip {0}", file.FullName);
-                    continue;
-                }
-                FileAttributes attr = file.Attributes;
-                if ((attr & FileAttributes.ReparsePoint) == 0)
-                {
-                    using (Stream source = w.OpenFile(file.FullName, FileMode.Open, FileAccess.Read))
-                    {
-                        using (Stream destin = ntfs.OpenFile(file.FullName, FileMode.Create, FileAccess.Write))
-                        {
-                            iscsi.WimCopy(source, destin, Path.GetFileName(file.FullName), false, wimFileIndex++, wimFileCount);
-                        }
-                    }
-
-                    if ((attr & FileAttributes.Temporary) == FileAttributes.Temporary)
-                        attr = attr & ~FileAttributes.Temporary;
-                    if ((attr & FileAttributes.Offline) == FileAttributes.Offline)
-                        attr = attr & ~FileAttributes.Offline;
-                    ntfs.SetAttributes(file.FullName, attr);
-                }
-                else
-                {
-                    log.InfoFormat("Reparse Point: {0}", file.FullName);
-                    ReparsePoint rp = w.GetReparsePoint(file.FullName);
-                    ntfs.SetReparsePoint(file.FullName, rp);
-                }
-            }
-        }
-
-        private bool IsExcluded(string path)
-        {
-            string pathUpper = path.ToUpperInvariant();
-
-            foreach(string excluded in Properties.Settings.Default.EXCLUDED_FILES_COPY)
-            {
-                if (pathUpper == excluded.ToUpperInvariant())
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private XenRef<VDI> UploadRawVDI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description)
@@ -2238,23 +1993,6 @@ namespace XenOvfTransport
                 rasd.Connection = new cimString[] { new cimString(string.Format("bootable={0}", isBootable)) };
             }
         }
-        private XenRef<VDI> CheckForISOVDI(Session xenSession, string filename)
-        {
-            XenRef<VDI> vdiref = null;
-
-            Dictionary<XenRef<VDI>, VDI> vdidict = VDI.get_all_records(xenSession);
-
-            foreach (XenRef<VDI> key in vdidict.Keys)
-            {
-                if (vdidict[key].name_label.ToLower().Equals(filename.ToLower()))
-                {
-                    vdiref = key;
-                    break;
-                }
-            }
-
-            return vdiref;
-        }
 
         public bool IsKnownURIType(string filename)
         {
@@ -2285,173 +2023,6 @@ namespace XenOvfTransport
             VM.remove_from_other_config(xenSession, vmRef, "HideFromXenCenter");
         }
         
-        private byte[] ExtractMBRFromVHD(string referenceVHD)
-        {
-            byte[] mbr = null;
-            using (VirtualDisk vhdx = DiscUtils.Vhd.Disk.OpenDisk(referenceVHD, FileAccess.Read))
-            {
-                mbr = vhdx.GetMasterBootRecord();
-            }
-            return mbr;
-        }
-        private byte[] ExtractBootFromVHD(string referenceVHD)
-        {
-            return ExtractFileFromVHD(@"$Boot", referenceVHD);
-        }
-        private byte[] ExtractBCDFromVHD(string referenceVHD, int arch)
-        {
-            string architecture = "x86";
-            if (arch == 0) { architecture = "x86"; }
-            else if (arch == 9) { architecture = "x64"; }
-            string filename = string.Format("{0}{1}", Path.DirectorySeparatorChar, Path.Combine(architecture, "BCD"));
-            return ExtractFileFromVHD(filename, referenceVHD);
-        }
-        private byte[] ExtractBootmgrFromVHD(string referenceVHD, int arch)
-        {
-            string architecture = "x86";
-            if (arch == 0)  { architecture = "x86"; }
-            else if (arch == 9) { architecture = "x64"; }
-            string filename = string.Format("{0}{1}", Path.DirectorySeparatorChar, Path.Combine(architecture, "bootmgr"));
-            return ExtractFileFromVHD(filename, referenceVHD);
-        }
-        private byte[] ExtractFileFromVHD(string filename, string referenceVHD)
-        {
-            byte[] file = null;
-            using (VirtualDisk vhdx = DiscUtils.Vhd.Disk.OpenDisk(referenceVHD, FileAccess.Read))
-            {
-                NtfsFileSystem vhdbNtfs = new NtfsFileSystem(vhdx.Partitions[0].Open());
-                using (Stream bootStream = vhdbNtfs.OpenFile(filename, FileMode.Open, FileAccess.Read))
-                {
-                    file = new byte[bootStream.Length];
-                    int totalRead = 0;
-                    while (totalRead < file.Length)
-                    {
-                        totalRead += bootStream.Read(file, totalRead, file.Length - totalRead);
-                    }
-                }
-            }
-            return file;
-        }
-
-
-        private void AddBCD(NtfsFileSystem ntfs, byte[] BCD)
-        {
-            if (!ntfs.DirectoryExists(@"\boot"))
-            {
-                ntfs.CreateDirectory(@"\boot");
-            }
-            if (!ntfs.FileExists(@"\boot\BCD"))
-            {
-                using (Stream bcdStream = ntfs.OpenFile(@"\boot\BCD", FileMode.CreateNew, FileAccess.ReadWrite))
-                {
-                    bcdStream.Write(BCD, 0, BCD.Length);
-                }
-            }
-        }
-        private void AddBootMgr(NtfsFileSystem ntfs, byte[] BootMgr)
-        {
-            if (!ntfs.FileExists(@"\bootmgr"))
-            {
-                using (Stream bcdStream = ntfs.OpenFile(@"\bootmgr", FileMode.CreateNew, FileAccess.ReadWrite))
-                {
-                    bcdStream.Write(BootMgr, 0, BootMgr.Length);
-                }
-            }
-        }
-
-        private void FixBCD(NtfsFileSystem ntfs, VolumeManager volMgr)
-        {
-            if (ntfs.FileExists(@"\boot\BCD"))
-            {
-                // Force all boot entries in the BCD to point to the newly created NTFS partition - does _not_ cope with
-                // complex multi-volume / multi-boot scenarios at all.
-                using (Stream bcdStream = ntfs.OpenFile(@"\boot\BCD", FileMode.Open, FileAccess.ReadWrite))
-                {
-                    using (RegistryHive hive = new RegistryHive(bcdStream))
-                    {
-                        Store store = new Store(hive.Root);
-                        foreach (var obj in store.Objects)
-                        {
-                            foreach (var elem in obj.Elements)
-                            {
-                                if (elem.Format == DiscUtils.BootConfig.ElementFormat.Device)
-                                {
-                                    elem.Value = DiscUtils.BootConfig.ElementValue.ForDevice(elem.Value.ParentObject, volMgr.GetPhysicalVolumes()[0]);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        private string FindReferenceVHD(string referenceVHD)
-        {
-            string bzip2ext = Properties.Settings.Default.bzip2ext;
-            string reffilename = Path.GetFileName(referenceVHD);
-            string refVHD = null;
-            string appdata = null;
-            string datapath = null;
-
-            appdata = System.Environment.GetEnvironmentVariable("APPDATA");
-            if (string.IsNullOrEmpty(appdata))
-            {
-                appdata = System.Environment.GetEnvironmentVariable("ProgramData");
-            }
-
-            if (string.IsNullOrEmpty(appdata))
-            {
-                appdata = Path.Combine("C:", "Temp");
-            }
-
-            datapath = Path.Combine(appdata, Path.Combine("citrix", "temp"));
-
-            if (!Directory.Exists(datapath))
-                Directory.CreateDirectory(datapath);
-
-            refVHD = Path.Combine(datapath, reffilename);
-            if (!File.Exists(refVHD))
-            {
-
-                string apath = Assembly.GetExecutingAssembly().Location;
-                string assempath = Path.GetDirectoryName(apath);
-                while (assempath.Length > 3)
-                {
-                    string testPath = Path.Combine(assempath, referenceVHD);
-                    if (File.Exists(testPath))
-                    {
-                        refVHD = testPath;
-                        break;
-                    }
-                    else if (File.Exists(testPath + bzip2ext))
-                    {
-                        refVHD = testPath + bzip2ext;
-                        break;
-                    }
-                    assempath = Path.GetDirectoryName(assempath);
-                }
-
-                if (Path.GetExtension(refVHD) == bzip2ext)
-                {
-                    string outfile = Path.Combine(datapath, Path.GetFileNameWithoutExtension(refVHD));
-                    if (!File.Exists(outfile))
-                    {
-                        try
-                        {
-                            using (CompressionStream bzos = CompressionFactory.Writer(CompressionFactory.Type.Bz2, File.OpenWrite(outfile)))
-                            {
-                                bzos.BufferedWrite(File.OpenRead(refVHD));
-                            }
-                        }
-                        finally { }
-                    }
-                    refVHD = outfile;
-                    log.Info("A Compressed Reference VHD was found and uncompressed.");
-                }
-            }
-            log.InfoFormat("Reference VHD: {0}", refVHD);
-            return refVHD;
-        }
-
     	public string DownloadFileAsync(Uri filetodownload, ulong totalsize)
         {
             log.InfoFormat("DownloadFileAsync: {0}", filetodownload);
@@ -2493,10 +2064,6 @@ namespace XenOvfTransport
             uridownloadcomplete.Set();
         }
 
-        private static int comparePostInstallCommand(Xen_PostInstallOperationCommand_Type postOpLeft, Xen_PostInstallOperationCommand_Type postOpRight)
-        {
-            return postOpLeft.Order.CompareTo(postOpRight.Order);
-        }
         private static int compareControllerRasd(RASD_Type rasd1, RASD_Type rasd2)
         {
             if (rasd1.ResourceType.Value >= 5 &&
