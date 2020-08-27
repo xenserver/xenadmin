@@ -168,7 +168,6 @@
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                             <Component Id="ExternalToolsComponent" Guid="$(var.ExtToolsGuid)">
                                 <File Id="XENSERVERLINUXFIXUP" Source="$(env.RepoRoot)\_scratch\External Tools\xenserver-linuxfixup-disk.iso" />
-                                <File Id="REFERENCEVHD" Source="$(env.RepoRoot)\_scratch\External Tools\bootablereference.vhd.bz2" />
                             </Component>
                         </Directory>
                         <Directory Id="SCHEMAS" Name="Schemas">

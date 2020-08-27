@@ -556,6 +556,15 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File type {0} is not supported..
+        /// </summary>
+        internal static string UNSUPPORTED_FILE_TYPE {
+            get {
+                return ResourceManager.GetString("UNSUPPORTED_FILE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transfer type is not supported..
         /// </summary>
         internal static string UNSUPPORTED_TRANSPORT {
@@ -570,15 +579,6 @@ namespace XenOvfTransport {
         internal static string WARNING_ADMIN_REQUIRED {
             get {
                 return ResourceManager.GetString("WARNING_ADMIN_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The imported virtual machine is not bootable because a master boot record was not found..
-        /// </summary>
-        internal static string WARNING_TARGET_NOT_BOOTABLE {
-            get {
-                return ResourceManager.GetString("WARNING_TARGET_NOT_BOOTABLE", resourceCulture);
             }
         }
     }
