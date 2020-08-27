@@ -32,14 +32,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
-using DiscUtils;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
 using XenAPI;
-using System.Linq;
+using XenAdmin;
 
 
 namespace XenOvfTransport
@@ -55,8 +55,8 @@ namespace XenOvfTransport
 
         private List<XenRef<VDI>> _vdiRefs = new List<XenRef<VDI>>();
 
-        public Export(Uri xenserver, Session session)
-            : base(xenserver, session)
+        public Export(Session session)
+            : base(session)
         {
         }
 
@@ -399,71 +399,35 @@ namespace XenOvfTransport
 
         private void _copydisks(EnvelopeType ovfEnv, string label, string targetPath)
         {
-        	m_iscsi = new iSCSI
-        	          	{
-        	          		UpdateHandler = iscsi_UpdateHandler,
-        	          		Cancel = Cancel//in case it has already been cancelled
-        	          	};
-			m_iscsi.ConfigureTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-
-            try
+        	try
             {
                 foreach (XenRef<VDI> vdiuuid in _vdiRefs)
                 {
-                    string uuid = "";
-                    string destinationFilename = "";
+                    string uuid = VDI.get_uuid(XenSession, vdiuuid);
+                    var diskFilename = string.Format(@"{0}.vhd", uuid);
+                    var diskPath = Path.Combine(targetPath, diskFilename);
 
-                    try
+                    if (File.Exists(diskPath))
                     {
-                        uuid = VDI.get_uuid(XenSession, vdiuuid);
-                        destinationFilename = Path.Combine(targetPath, string.Format(@"{0}.vhd", uuid));
-                        
-                        if (File.Exists(destinationFilename))
-                        {
-                            destinationFilename = Path.Combine(targetPath, string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
-                            OVF.UpdateFilename(ovfEnv, string.Format(@"{0}.vhd", uuid), string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
-                            log.InfoFormat("{0}: VHD Name collision, renamed {1}.vhd to {1}_{2}.vhd",
-                                           label, uuid, Thread.CurrentThread.ManagedThreadId);
-                        }
-
-                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
-						
-                        using (Stream source = m_iscsi.Connect(XenSession, uuid, true))
-                        {
-                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, ""));
-                            using (FileStream fs = new FileStream(destinationFilename, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
-                            {
-                                // Create a geometry to give to DiscUtils.Vhd.Disk.InitializeDynamic() just so it doesn't override capacity
-                                // when initializing the .
-                                DiscUtils.Geometry geometry = DiscUtils.Geometry.FromCapacity(source.Length);
-
-                                using (DiscUtils.Vhd.Disk destination = DiscUtils.Vhd.Disk.InitializeDynamic(fs, Ownership.None, source.Length, geometry))
-                                {
-									m_iscsi.Copy(source, destination.Content, Path.GetFileName(destinationFilename), ShouldVerifyDisks);
-                                }
-                            }
-                        }
-
-                        if (ShouldVerifyDisks)
-                        {
-                            using (var target = new DiscUtils.Vhd.Disk(destinationFilename, FileAccess.Read))
-                            {
-								m_iscsi.Verify(target.Content, destinationFilename);
-                            }
-                        }
+                        diskPath = Path.Combine(targetPath, string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
+                        OVF.UpdateFilename(ovfEnv, string.Format(@"{0}.vhd", uuid), string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
+                        log.InfoFormat("{0}: VHD Name collision, renamed {1}.vhd to {1}_{2}.vhd",
+                            label, uuid, Thread.CurrentThread.ManagedThreadId);
                     }
-                    catch (Exception ex)
+
+                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
+
+                    var taskRef = Task.create(XenSession, "export_raw_vdi_task", "export_raw_vdi_task");
+                    HTTP_actions.get_export_raw_vdi(
+                        b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export,
+                            $"Exporting {diskFilename} ({Util.DiskSizeString(b)} done")),
+                        () => Cancel, XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                        XenSession.Connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(XenSession.Connection),
+                        diskPath, taskRef, XenSession.opaque_ref, vdiuuid, "vhd");
+
+                    if (ShouldVerifyDisks)
                     {
-						if (ex is OperationCanceledException)
-							throw;
-                        var msg = string.Format(Messages.ISCSI_COPY_ERROR, destinationFilename);
-                        log.Error($"Failed to transfer virtual disk {destinationFilename}", ex);
-                        throw new Exception(msg, ex);
-                    }
-                    finally
-                    {
-                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_CLEANUP, uuid + ".vhd")));
-						m_iscsi.Disconnect(XenSession);
+                        //TODO
                     }
                 }
             }
@@ -472,10 +436,5 @@ namespace XenOvfTransport
                 _vdiRefs.Clear();
             }
         }
-
-		private void iscsi_UpdateHandler(XenOvfTransportEventArgs e)
-		{
-			OnUpdate(e);
-		}
     }
 }

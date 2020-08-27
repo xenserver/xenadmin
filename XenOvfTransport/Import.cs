@@ -32,7 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -43,13 +42,14 @@ using System.Text.RegularExpressions;
 using System.Threading;
 
 using DiscUtils;
+using XenAdmin;
 using XenAdmin.Core;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Definitions.XENC;
-
 using XenOvf.Utilities;
+
 
 namespace XenOvfTransport
 {
@@ -62,20 +62,10 @@ namespace XenOvfTransport
         private const long GB = (MB * 1024);
         private const long STATMEMMIN = 16 * MB;
 
-        public enum TransferType 
-        { 
-            UploadRawVDI = 0,
-            iSCSI = 1,
-            SFTP = 2,
-            Skip = 3,
-            Unknown = 4 
-        }
-
 		private string downloadupdatemsg;
         private string EncryptionClass;
         private int EncryptionKeySize;
         private XenRef<SR> DefaultSRUUID = null;
-        private readonly Http http;
         private VirtualDisk vhdDisk = null;
         private int vifDeviceIndex = 0;  // used to count number of Networks attached and to be used as the device number.
         private string _currentfilename = null;
@@ -89,10 +79,9 @@ namespace XenOvfTransport
 
 		#region Constructors
 
-        public Import(Uri xenserver, Session session)
-            : base(xenserver, session)
+        public Import(Session session)
+            : base(session)
         {
-            http = new Http { UpdateHandler = http_UpdateHandler };
         }
 
 		#endregion
@@ -365,11 +354,6 @@ namespace XenOvfTransport
     	#endregion
 
         #region PRIVATE
-		
-		private void http_UpdateHandler(XenOvfTransportEventArgs e)
-		{
-			OnUpdate(e);
-		}
 
         private void HandleInstallSection(Session xenSession, XenRef<VM> vm, InstallSection_Type installsection)
         {
@@ -468,12 +452,8 @@ namespace XenOvfTransport
             }
         }
 
-        internal List<XenRef<VDI>> ImportFile(Session xenSession, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid)
+        private XenRef<VDI> ImportFile(Session xenSession, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid)
         {
-            List<XenRef<VDI>> vdiRef = new List<XenRef<VDI>>();
-
-            // Get the disk transport method from the configuration in XenOvfTransport.Properties.Settings.TransferType.
-            TransferType useTransport = (TransferType)Enum.Parse(typeof(TransferType), Properties.Settings.Default.TransferType, true);
             string sourcefile = filename;
             string encryptfilename = null;
             string uncompressedfilename = null;
@@ -561,7 +541,8 @@ namespace XenOvfTransport
                         {
                             if (string.IsNullOrEmpty(sruuid))
                             {
-                                useTransport = TransferType.Skip;
+                                log.Info("ImportFile: Upload Skipped");
+                                return null;
                             }
                             else
                             {
@@ -597,58 +578,64 @@ namespace XenOvfTransport
             try
             {
                 #region SEE IF TARGET SR HAS ENOUGH SPACE
-                if (useTransport == TransferType.UploadRawVDI || useTransport == TransferType.iSCSI)
+                long freespace;
+                string contenttype = string.Empty;
+                if(vdiuuid != null)
                 {
-                    long freespace;
-                    string contenttype = string.Empty;
-                    if(vdiuuid != null)
-                    {
-                        XenRef<VDI> vdiLookup = VDI.get_by_uuid(xenSession, vdiuuid);
-                        freespace = VDI.get_virtual_size(xenSession, vdiLookup);
-                    }
-                    else
-                    {
-                        XenRef<SR> srRef = SR.get_by_uuid(xenSession, sruuid);
-                        long size = SR.get_physical_size(xenSession, srRef);
-                        long usage = SR.get_physical_utilisation(xenSession, srRef);
-                        contenttype = SR.get_content_type(xenSession, srRef);
-                        freespace = size - usage;
-                    }
+                    XenRef<VDI> vdiLookup = VDI.get_by_uuid(xenSession, vdiuuid);
+                    freespace = VDI.get_virtual_size(xenSession, vdiLookup);
+                }
+                else
+                {
+                    XenRef<SR> srRef = SR.get_by_uuid(xenSession, sruuid);
+                    long size = SR.get_physical_size(xenSession, srRef);
+                    long usage = SR.get_physical_utilisation(xenSession, srRef);
+                    contenttype = SR.get_content_type(xenSession, srRef);
+                    freespace = size - usage;
+                }
 
-                    if (freespace <= dataCapacity)
-                    {
-                        log.Error($"SR {sruuid} does not have {vhdDisk.Capacity} bytes of free space to import virtual disk {filename}.");
-                        string message = string.Format(Messages.NOT_ENOUGH_SPACE_IN_SR, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
-                        throw new IOException(message);
-                    }
+                if (freespace <= dataCapacity)
+                {
+                    log.Error($"SR {sruuid} does not have {vhdDisk.Capacity} bytes of free space to import virtual disk {filename}.");
+                    string message = string.Format(Messages.NOT_ENOUGH_SPACE_IN_SR, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
+                    throw new IOException(message);
                 }
                 #endregion
 
                 #region UPLOAD FILE
-                switch (useTransport)
+                XenRef<VDI> vdiRef = null;
+
+                //If no VDI uuid is provided create a VDI, otherwise use the one provided as
+                //the target for the import. Used for SRs such as Lun per VDI (PR-1544)
+                if (string.IsNullOrEmpty(vdiuuid))
                 {
-                    case TransferType.UploadRawVDI:
-                        {
-                            vdiRef.Add(UploadRawVDI(xenSession, sruuid, vmname, dataStream, dataCapacity, description));
-                            break;
-                        }
-                    case TransferType.iSCSI:
-                        {
-                            vdiRef.Add(UploadiSCSI(xenSession, sruuid, vmname, dataStream, dataCapacity, description, vdiuuid));
-                            break;
-                        }
-                    case TransferType.Skip:
-                        {
-                            log.Info("ImportFile: Upload Skipped");
-                            break;
-                        }
-                    default:
-                		{
-                            log.Error($"Unsupported transfer type {useTransport.ToString()}");
-                            throw new InvalidDataException(Messages.UNSUPPORTED_TRANSPORT);
-                        }
+                    vdiRef = CreateVDI(xenSession, sruuid, vmname, dataCapacity, description);
+                    vdiuuid = VDI.get_uuid(xenSession, vdiRef);
                 }
+                else
+                {
+                    vdiRef = new XenRef<VDI>(VDI.get_by_uuid(xenSession, vdiuuid));
+                }
+
+                var taskRef = Task.create(xenSession, "import_raw_vdi_task", "import_raw_vdi_task");
+                var uriBuilder = new UriBuilder
+                {
+                    Scheme = XenSession.Connection.UriScheme,
+                    Host = XenSession.Connection.Hostname,
+                    Port = XenSession.Connection.Port,
+                    Path = "/import_raw_vdi",
+                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}",
+                        xenSession.opaque_ref, taskRef.opaque_ref, vdiuuid)
+                };
+
+                using (Stream outStream = HTTPHelper.PUT(uriBuilder.Uri, dataStream.Length, true))
+                    HTTP.CopyStream(dataStream, outStream,
+                        b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import,
+                            $"Importing disk {filename} ({Util.DiskSizeString(b)} of {Util.DiskSizeString(dataCapacity)} done)")),
+                        () => XenAdminConfigManager.Provider.ForcedExiting);
                 #endregion
+
+                return vdiRef;
             }
             catch (Exception ex)
             {
@@ -679,70 +666,7 @@ namespace XenOvfTransport
 
                 Directory.SetCurrentDirectory(StartPath);
             }
-
-
-            log.DebugFormat("OVF.Import.ImportFile leave: created {0} VDIs", vdiRef.Count);
-            return vdiRef;
         }
-
-        private XenRef<VDI> UploadiSCSI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description, string vdiuuid)
-        {
-            log.Debug($"OVF.Import.UploadiSCSI SRUUID: {sruuid}, Label: {label}, Capacity: {capacity}");
-
-            XenRef<VDI> vdiRef = null;
-
-            //If no VDI uuid is provided create a VDI, otherwise use the one provided as
-            //the target for the import. Used for SRs such as Lun per VDI (PR-1544)
-            if(String.IsNullOrEmpty(vdiuuid))
-            {
-                vdiRef = CreateVDI(xenSession, sruuid, label, capacity, description);
-                vdiuuid = VDI.get_uuid(xenSession, vdiRef);
-            }
-            else
-            {
-                vdiRef = new XenRef<VDI>(VDI.get_by_uuid(xenSession, vdiuuid));
-            }
-                
-
-            #region UPLOAD iSCSI STREAM
-            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_SETUP, _currentfilename)));
-        	m_iscsi = new iSCSI
-        	        	{
-        	        		UpdateHandler = iscsi_UpdateHandler,
-        	        		Cancel = Cancel //in case it has already been cancelled
-        	        	};
-			m_iscsi.ConfigureTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-            try
-            {
-                using (Stream iSCSIStream = m_iscsi.Connect(xenSession, vdiuuid, false))
-                {
-					m_iscsi.Copy(filestream, iSCSIStream, label, false);
-                    iSCSIStream.Flush();
-                }
-            }
-            catch (Exception ex)
-            {
-				if (ex is OperationCanceledException)
-					throw;
-                log.Error("Failed to import a virtual disk over iSCSI. ", ex);
-                vdiRef = null;
-                throw new Exception(Messages.ERROR_ISCSI_UPLOAD_FAILED, ex);
-            }
-            finally
-            {
-                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, string.Format(Messages.FILES_TRANSPORT_CLEANUP,_currentfilename)));
-				m_iscsi.Disconnect(xenSession);
-            }
-            #endregion
-
-            log.Debug("OVF.Import.UploadiSCSI Leave");
-            return vdiRef;
-        }
-
-		private void iscsi_UpdateHandler(XenOvfTransportEventArgs e)
-		{
-			OnUpdate(e);
-		}
 
         private XenRef<VDI> CreateVDI(Session xenSession, string sruuid, string label, long capacity, string description)
         {
@@ -774,85 +698,6 @@ namespace XenOvfTransport
                 log.Error("Failed to create VDI. ", ex);
                 throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
             }
-        }
-
-        private XenRef<VDI> UploadRawVDI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description)
-        {
-            log.Debug($"OVF.Import.UploadRawVDI SRUUID: {sruuid}, Label: {label}, Capacity: {capacity}");
-
-            #region CREATE A VDI
-
-            VDI vdi = new VDI
-            {
-                uuid = Guid.NewGuid().ToString(),
-                name_label = label,
-                name_description = description,
-                SR = sruuid.ToLower().StartsWith("opaque") ? new XenRef<SR>(sruuid) : SR.get_by_uuid(xenSession, sruuid),
-                // Add 2MB, VDIs appear to round down making it too small.
-                virtual_size = capacity + 2*MB,
-                physical_utilisation = capacity + 2*MB,
-                type = vdi_type.user,
-                sharable = false,
-                read_only = false,
-                storage_lock = false,
-                managed = true,
-                is_a_snapshot = false
-            };
-
-            XenRef<VDI> vdiRef = null;
-            try
-            {
-                vdiRef = VDI.create(xenSession, vdi);
-                log.Debug("Import.UploadRawVDI::VDI Created");
-            }
-            catch (Exception ex)
-            {
-                log.Error("Failed to create VDI", ex);
-                throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
-            }
-
-            #endregion
-
-            #region UPLOAD HTTP STREAM
-            XenRef<Task> taskRef = Task.create(xenSession, "UpdateStream", "UpdateStream");
-            string p2VUri = string.Format("/import_raw_vdi?session_id={0}&task_id={1}&vdi={2}", xenSession.opaque_ref, taskRef.opaque_ref, vdiRef.opaque_ref);
-            NameValueCollection headers = new NameValueCollection();
-            headers.Add("Content-Length", Convert.ToString(capacity));
-            headers.Add("Content-Type", "application/octet-stream");
-            headers.Add("Expect", "100-continue");
-            headers.Add("Accept", "*/*");
-            headers.Add("Connection", "close");
-            headers.Add("User-Agent", "XenP2VClient/1.5");
-            try
-            {
-                http.Put(filestream, _uri, p2VUri, headers, 0, capacity, false);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Failed to import a virtual disk over HTTP. ", ex);
-                if (vdiRef != null)
-                {
-                    try
-                    {
-                        VDI.destroy(xenSession, vdi.opaque_ref);
-                    }
-                    catch (Exception e)
-                    {
-                        log.Error("Failed to remove a virtual disk image (VDI). ", e);
-                        throw new Exception(Messages.ERROR_REMOVE_VDI_FAILED, e);
-                    }
-                }
-                vdiRef = null;
-                throw new Exception(Messages.ERROR_HTTP_UPLOAD_FAILED, ex);
-            }
-            log.Debug("Import.UploadRawVDI::http.put complete");
-            #endregion
-            
-            // give it time to catch up.
-            Thread.Sleep(new TimeSpan(0, 0, 5));
-            log.Debug("OVF.UploadRawVDI Leave");
-            return vdiRef;
-
         }
 
         private XenRef<VM> DefineSystem(Session xenSession, VirtualHardwareSection_Type system, string ovfName)
@@ -1384,7 +1229,9 @@ namespace XenOvfTransport
                                         _currentfilename = filename;
                                         try
                                         {
-                                            vdiRefs = ImportFile(xenSession, filename, pathToOvf, filename, compression, version, passcode, isoUuid, "", null);
+                                            var vdiRef = ImportFile(xenSession, filename, pathToOvf, filename, compression, version, passcode, isoUuid, "", null);
+                                            if (vdiRef != null)
+                                                vdiRefs.Add(vdiRef);
                                         }
                                         catch (Exception ex)
                                         {
@@ -1538,7 +1385,7 @@ namespace XenOvfTransport
                             {
                                 _currentfilename = filename;
 
-                                List<XenRef<VDI>> vdiRef = null;
+                                List<XenRef<VDI>> vdiRefs = new List<XenRef<VDI>>();
 
                                 #region PARSE CONNECTION
                                 if (Tools.ValidateProperty("Connection", rasd))
@@ -1645,6 +1492,8 @@ namespace XenOvfTransport
                                 }
                                 #endregion
 
+                                XenRef<VDI> vdiRef = null;
+
                                 try
                                 {
                                     string disklabel = string.Format("{0}_{1}", vmName, userdeviceid);
@@ -1658,6 +1507,8 @@ namespace XenOvfTransport
                                         description = rasd.Description.Value;
 
                                     vdiRef = ImportFile(xenSession, disklabel, pathToOvf, filename, compression, version, passcode, sruuid, description, vdiuuid);
+                                    if (vdiRef != null)
+                                        vdiRefs.Add(vdiRef);
                                 }
                                 catch (Exception ex)
                                 {
@@ -1676,10 +1527,10 @@ namespace XenOvfTransport
                                     }
                                 }
 
-                                log.DebugFormat("Import.AddResourceSettingData counts {0} VDIs", vdiRef.Count);
+                                log.DebugFormat("Import.AddResourceSettingData counts {0} VDIs", vdiRefs.Count);
 
 
-                                foreach (XenRef<VDI> currentVDI in vdiRef)
+                                foreach (XenRef<VDI> currentVDI in vdiRefs)
                                 {
                                     VBD vbd = new VBD
                                     {
