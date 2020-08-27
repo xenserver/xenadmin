@@ -81,8 +81,6 @@ namespace XenAdmin.Actions.OVFActions
 			var mapping = m_vmMappings.Values.ElementAt(0);
 
 			var session = Connection.Session;
-			var url = session.Url;
-			Uri uri = new Uri(url);
 
 			PercentComplete = 20;
 			Description = Messages.IMPORTING_DISK_IMAGE;
@@ -107,7 +105,7 @@ namespace XenAdmin.Actions.OVFActions
 
 			try //importVM
 			{
-				m_transportAction = new Import(uri, session)
+				m_transportAction = new Import(session)
 				                    	{
 				                    		UpdateHandler = UpdateHandler,
 											Cancel = Cancelling //in case the Cancel button has already been pressed

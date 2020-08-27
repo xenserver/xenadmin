@@ -191,15 +191,6 @@ namespace XenOvfTransport.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("iSCSI")]
-        public string TransferType {
-            get {
-                return ((string)(this["TransferType"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1.5,1.6,LATEST")]
         public string xenSupportedVersions {
             get {

@@ -97,10 +97,6 @@ namespace XenAdmin.Actions.OVFActions
             base.Run();
 		    
 			var session = Connection.Session;
-
-			var url = session.Url;
-			Uri uri = new Uri(url);
-
 			var appFolder = Path.Combine(m_applianceDirectory, m_applianceFileName);
 			var appFile = string.Format("{0}.ovf", m_applianceFileName);
 
@@ -112,7 +108,7 @@ namespace XenAdmin.Actions.OVFActions
 			EnvelopeType env;
 			try
 			{
-                m_transportAction = new Export(uri, session)
+                m_transportAction = new Export(session)
 				                    	{
 				                    		UpdateHandler = UpdateHandler,
 				                    		ShouldVerifyDisks = m_shouldVerify,

@@ -157,7 +157,7 @@ namespace XenAdmin.Actions.OVFActions
 
 			try //importVM
             {
-                m_transportAction = new Import(uri, session)
+                m_transportAction = new Import(session)
                 {
                     ApplianceName = m_package.Name,
                     UpdateHandler = UpdateHandler,

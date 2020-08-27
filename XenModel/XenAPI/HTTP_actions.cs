@@ -92,10 +92,10 @@ namespace XenAPI
         }
 
         public static void get_export_raw_vdi(HTTP.DataCopiedDelegate dataCopiedDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
-            string hostname, IWebProxy proxy, string path, string task_id, string session_id, string vdi)
+            string hostname, IWebProxy proxy, string path, string task_id, string session_id, string vdi, string diskFormat)
         {
             Get(dataCopiedDelegate, cancellingDelegate, timeout_ms, hostname, "/export_raw_vdi", proxy, path,
-                "task_id", task_id, "session_id", session_id, "vdi", vdi);
+                "task_id", task_id, "session_id", session_id, "vdi", vdi, "format", diskFormat);
         }
 
         public static void get_host_backup(HTTP.DataCopiedDelegate dataCopiedDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,

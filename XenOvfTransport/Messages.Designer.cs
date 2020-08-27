@@ -61,15 +61,6 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Appliances.
-        /// </summary>
-        internal static string APPLIANCE_FOLDER_PATH {
-            get {
-                return ResourceManager.GetString("APPLIANCE_FOLDER_PATH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to CD/DVD Drive.
         /// </summary>
         internal static string CD_DVD_DEVICE {
@@ -259,15 +250,6 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to import a virtual disk over iSCSI..
-        /// </summary>
-        internal static string ERROR_ISCSI_UPLOAD_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_ISCSI_UPLOAD_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A password was not provided to decrypt an OVF package..
         /// </summary>
         internal static string ERROR_NO_PASSWORD {
@@ -385,24 +367,6 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Canceled transfer of virtual disk {0}..
-        /// </summary>
-        internal static string ISCSI_COPY_CANCELLED {
-            get {
-                return ResourceManager.GetString("ISCSI_COPY_CANCELLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to transfer virtual disk {0}..
-        /// </summary>
-        internal static string ISCSI_COPY_ERROR {
-            get {
-                return ResourceManager.GetString("ISCSI_COPY_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Transferring virtual disk {0} ... .
         /// </summary>
         internal static string ISCSI_COPY_PROGRESS {
@@ -412,92 +376,11 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to connect to virtual disk over iSCSI..
-        /// </summary>
-        internal static string ISCSI_ERROR {
-            get {
-                return ResourceManager.GetString("ISCSI_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed to open virtual disk..
         /// </summary>
         internal static string ISCSI_ERROR_CANNOT_OPEN_DISK {
             get {
                 return ResourceManager.GetString("ISCSI_ERROR_CANNOT_OPEN_DISK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The address of the Transfer VM is unknown..
-        /// </summary>
-        internal static string ISCSI_ERROR_NO_IPADDRESS {
-            get {
-                return ResourceManager.GetString("ISCSI_ERROR_NO_IPADDRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to shut down the Transfer VM..
-        /// </summary>
-        internal static string ISCSI_SHUTDOWN_ERROR {
-            get {
-                return ResourceManager.GetString("ISCSI_SHUTDOWN_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to start the Transfer VM..
-        /// </summary>
-        internal static string ISCSI_START_ERROR {
-            get {
-                return ResourceManager.GetString("ISCSI_START_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Canceled virtual disk verification after export..
-        /// </summary>
-        internal static string ISCSI_VERIFY_CANCELLED {
-            get {
-                return ResourceManager.GetString("ISCSI_VERIFY_CANCELLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to verify virtual disk {0}..
-        /// </summary>
-        internal static string ISCSI_VERIFY_ERROR {
-            get {
-                return ResourceManager.GetString("ISCSI_VERIFY_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The exported virtual disk does not match the source..
-        /// </summary>
-        internal static string ISCSI_VERIFY_INVALID {
-            get {
-                return ResourceManager.GetString("ISCSI_VERIFY_INVALID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Verifying disk {0} ... .
-        /// </summary>
-        internal static string ISCSI_VERIFY_PROGRESS {
-            get {
-                return ResourceManager.GetString("ISCSI_VERIFY_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transferring file {0} of {1}, {2}, from WIM ... .
-        /// </summary>
-        internal static string ISCSI_WIM_PROGRESS_FORMAT {
-            get {
-                return ResourceManager.GetString("ISCSI_WIM_PROGRESS_FORMAT", resourceCulture);
             }
         }
         
@@ -561,15 +444,6 @@ namespace XenOvfTransport {
         internal static string UNSUPPORTED_FILE_TYPE {
             get {
                 return ResourceManager.GetString("UNSUPPORTED_FILE_TYPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer type is not supported..
-        /// </summary>
-        internal static string UNSUPPORTED_TRANSPORT {
-            get {
-                return ResourceManager.GetString("UNSUPPORTED_TRANSPORT", resourceCulture);
             }
         }
         

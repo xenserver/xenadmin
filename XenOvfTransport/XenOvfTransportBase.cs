@@ -45,14 +45,10 @@ namespace XenOvfTransport
 		protected string m_tvmSubnetMask;
 		protected string m_tvmGateway;
         protected readonly Session XenSession;
-        protected readonly Uri _uri;
-		protected iSCSI m_iscsi;
-		private bool m_cancel;
 
-        protected XenOvfTransportBase(Uri uri, Session session)
+        protected XenOvfTransportBase(Session session)
         {
-            _uri = uri;
-        	XenSession = session;
+            XenSession = session;
         }
 
         protected void OnUpdate(XenOvfTransportEventArgs e)
@@ -60,18 +56,9 @@ namespace XenOvfTransport
             UpdateHandler?.Invoke(e);
         }
 
-		public bool Cancel
-		{
-			protected get { return m_cancel; }
-			set
-			{
-				m_cancel = value;
-				if (m_iscsi != null)
-					m_iscsi.Cancel = value;
-			}
-		}
+        public bool Cancel { protected get; set; }
 
-		public void SetTvmNetwork(string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
+        public void SetTvmNetwork(string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
 		{
 			m_networkUuid = networkUuid;
 			m_isTvmIpStatic = isTvmIpStatic;

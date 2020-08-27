@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="APPLIANCE_FOLDER_PATH" xml:space="preserve">
-    <value>Appliances</value>
-  </data>
   <data name="CD_DVD_DEVICE" xml:space="preserve">
     <value>CD/DVD Drive</value>
   </data>
@@ -183,9 +180,6 @@
   <data name="ERROR_IMPORT_FAILED" xml:space="preserve">
     <value>Failed to import.</value>
   </data>
-  <data name="ERROR_ISCSI_UPLOAD_FAILED" xml:space="preserve">
-    <value>Failed to import a virtual disk over iSCSI.</value>
-  </data>
   <data name="ERROR_NOT_CONNECTED" xml:space="preserve">
     <value>Disconnected from [XenServer].</value>
   </data>
@@ -225,44 +219,11 @@
   <data name="IMPORT_PROMPT" xml:space="preserve">
     <value>Import: </value>
   </data>
-  <data name="ISCSI_COPY_CANCELLED" xml:space="preserve">
-    <value>Canceled transfer of virtual disk {0}.</value>
-  </data>
-  <data name="ISCSI_COPY_ERROR" xml:space="preserve">
-    <value>Failed to transfer virtual disk {0}.</value>
-  </data>
   <data name="ISCSI_COPY_PROGRESS" xml:space="preserve">
     <value>Transferring virtual disk {0} ... </value>
   </data>
-  <data name="ISCSI_ERROR" xml:space="preserve">
-    <value>Failed to connect to virtual disk over iSCSI.</value>
-  </data>
   <data name="ISCSI_ERROR_CANNOT_OPEN_DISK" xml:space="preserve">
     <value>Failed to open virtual disk.</value>
-  </data>
-  <data name="ISCSI_ERROR_NO_IPADDRESS" xml:space="preserve">
-    <value>The address of the Transfer VM is unknown.</value>
-  </data>
-  <data name="ISCSI_SHUTDOWN_ERROR" xml:space="preserve">
-    <value>Failed to shut down the Transfer VM.</value>
-  </data>
-  <data name="ISCSI_START_ERROR" xml:space="preserve">
-    <value>Failed to start the Transfer VM.</value>
-  </data>
-  <data name="ISCSI_VERIFY_CANCELLED" xml:space="preserve">
-    <value>Canceled virtual disk verification after export.</value>
-  </data>
-  <data name="ISCSI_VERIFY_ERROR" xml:space="preserve">
-    <value>Failed to verify virtual disk {0}.</value>
-  </data>
-  <data name="ISCSI_VERIFY_INVALID" xml:space="preserve">
-    <value>The exported virtual disk does not match the source.</value>
-  </data>
-  <data name="ISCSI_VERIFY_PROGRESS" xml:space="preserve">
-    <value>Verifying disk {0} ... </value>
-  </data>
-  <data name="ISCSI_WIM_PROGRESS_FORMAT" xml:space="preserve">
-    <value>Transferring file {0} of {1}, {2}, from WIM ... </value>
   </data>
   <data name="ISO" xml:space="preserve">
     <value>ISO</value>
@@ -284,9 +245,6 @@
   </data>
   <data name="UNSUPPORTED_FILE_TYPE" xml:space="preserve">
     <value>File type {0} is not supported.</value>
-  </data>
-  <data name="UNSUPPORTED_TRANSPORT" xml:space="preserve">
-    <value>Transfer type is not supported.</value>
   </data>
   <data name="WARNING_ADMIN_REQUIRED" xml:space="preserve">
     <value>Please view the log for details about a failure to import.</value>
