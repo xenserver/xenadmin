@@ -39,11 +39,6 @@ namespace XenOvfTransport
     {
         public Action<XenOvfTransportEventArgs> UpdateHandler { private get; set; }
 
-		protected string m_networkUuid;
-		protected bool m_isTvmIpStatic;
-		protected string m_tvmIpAddress;
-		protected string m_tvmSubnetMask;
-		protected string m_tvmGateway;
         protected readonly Session XenSession;
 
         protected XenOvfTransportBase(Session session)
@@ -57,14 +52,5 @@ namespace XenOvfTransport
         }
 
         public bool Cancel { protected get; set; }
-
-        public void SetTvmNetwork(string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
-		{
-			m_networkUuid = networkUuid;
-			m_isTvmIpStatic = isTvmIpStatic;
-			m_tvmIpAddress = tvmIpAddress;
-			m_tvmSubnetMask = tvmSubnetMask;
-			m_tvmGateway = tvmGateway;
-		}
     }
 }

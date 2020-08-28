@@ -459,9 +459,6 @@
   <data name="ExportApplianceWizard_SelectVMsXvaPane" xml:space="preserve">
     <value>vms-export</value>
   </data>
-  <data name="ExportApplianceWizard_TvmIpExportPane" xml:space="preserve">
-    <value>vms-export-ovf</value>
-  </data>
   <data name="ExportVMDialog" xml:space="preserve">
     <value>vms-export</value>
   </data>
@@ -575,12 +572,6 @@
   </data>
   <data name="ImportWizard_StoragePickerPane" xml:space="preserve">
     <value>vms-import</value>
-  </data>
-  <data name="ImportWizard_TvmIpImportImagePane" xml:space="preserve">
-    <value>vms-importdiskimage</value>
-  </data>
-  <data name="ImportWizard_TvmIpImportOvfPane" xml:space="preserve">
-    <value>vms-import-ovf</value>
   </data>
   <data name="ImportWizard_VMConfigPane" xml:space="preserve">
     <value>vms-importdiskimage</value>

@@ -54,7 +54,6 @@ namespace XenAdmin.Wizards.ExportWizard
         private readonly ExportSelectVMsPage m_pageExportSelectVMs;
         private readonly ExportEulaPage m_pageExportEula;
 	    private readonly ExportOptionsPage m_pageExportOptions;
-        private readonly TvmIpPage m_pageTvmIp;
         private readonly ExportFinishPage m_pageFinish;
         #endregion
 
@@ -71,7 +70,6 @@ namespace XenAdmin.Wizards.ExportWizard
 		    m_pageExportSelectVMs = new ExportSelectVMsPage();
             m_pageExportEula = new ExportEulaPage();
 		    m_pageExportOptions = new ExportOptionsPage();
-		    m_pageTvmIp = new TvmIpPage();
             m_pageFinish = new ExportFinishPage();
 
 			m_selectedObject = selection.FirstAsXenObject;
@@ -80,7 +78,6 @@ namespace XenAdmin.Wizards.ExportWizard
 				m_pageExportAppliance.ApplianceFileName = m_selectedObject.Name();
 
 			m_pageExportAppliance.OvfModeOnly = m_selectedObject is VM_appliance;
-			m_pageTvmIp.IsExportMode = true;
 			m_pageFinish.SummaryRetreiver = GetSummary;
 			m_pageExportSelectVMs.SelectedItems = selection;
 
@@ -102,24 +99,19 @@ namespace XenAdmin.Wizards.ExportWizard
 			}
 			else
 			{
-				(new ExportApplianceAction(xenConnection,
-										   m_pageExportAppliance.ApplianceDirectory,
-										   m_pageExportAppliance.ApplianceFileName,
-										   m_pageExportSelectVMs.VMsToExport,
-										   m_pageExportEula.Eulas,
-										   m_pageExportOptions.SignAppliance,
-										   m_pageExportOptions.CreateManifest,
-										   m_pageExportOptions.Certificate,
-										   m_pageExportOptions.EncryptFiles,
-										   m_pageExportOptions.EncryptPassword,
-										   m_pageExportOptions.CreateOVA,
-										   m_pageExportOptions.CompressOVFfiles,
-										   m_pageTvmIp.NetworkUuid.Key,
-										   m_pageTvmIp.IsTvmIpStatic,
-										   m_pageTvmIp.TvmIpAddress,
-										   m_pageTvmIp.TvmSubnetMask,
-										   m_pageTvmIp.TvmGateway,
-                                           m_pageFinish.VerifyExport)).RunAsync();
+                new ExportApplianceAction(xenConnection,
+                    m_pageExportAppliance.ApplianceDirectory,
+                    m_pageExportAppliance.ApplianceFileName,
+                    m_pageExportSelectVMs.VMsToExport,
+                    m_pageExportEula.Eulas,
+                    m_pageExportOptions.SignAppliance,
+                    m_pageExportOptions.CreateManifest,
+                    m_pageExportOptions.Certificate,
+                    m_pageExportOptions.EncryptFiles,
+                    m_pageExportOptions.EncryptPassword,
+                    m_pageExportOptions.CreateOVA,
+                    m_pageExportOptions.CompressOVFfiles,
+                    m_pageFinish.VerifyExport).RunAsync();
 			}
 
 			base.FinishWizard();
@@ -134,7 +126,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			    var oldExportasXva = m_exportAsXva;
 			    m_exportAsXva = m_pageExportAppliance.ExportAsXva; //this ensures that m_exportAsXva is assigned a value
 
-			    var ovfPages = new XenTabPage[] {m_pageExportEula, m_pageExportOptions, m_pageTvmIp};
+			    var ovfPages = new XenTabPage[] {m_pageExportEula, m_pageExportOptions};
 
 			    if (oldExportasXva != m_exportAsXva)
 			    {
@@ -174,9 +166,6 @@ namespace XenAdmin.Wizards.ExportWizard
 
             if (curPageType == typeof(RBACWarningPage))
                 return FormatHelpId((bool)m_exportAsXva ? "RbacExportXva" : "RbacExportOvf");
-
-            if (curPageType == typeof(TvmIpPage))
-                return FormatHelpId("TvmIpExport");
 
             if (curPageType == typeof(ExportFinishPage))
                return FormatHelpId((bool)m_exportAsXva ? "ExportFinishXva" : "ExportFinishOvf");
@@ -230,18 +219,6 @@ namespace XenAdmin.Wizards.ExportWizard
 
 			temp.Add(new Tuple(Messages.FINISH_PAGE_CREATE_OVA, m_pageExportOptions.CreateOVA.ToYesNoStringI18n()));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_COMPRESS, m_pageExportOptions.CompressOVFfiles.ToYesNoStringI18n()));
-
-			temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_NETWORK, m_pageTvmIp.NetworkUuid.Value));
-			if (m_pageTvmIp.IsTvmIpStatic)
-			{
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_IP, m_pageTvmIp.TvmIpAddress));
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_MASK, m_pageTvmIp.TvmSubnetMask));
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_GATEWAY, m_pageTvmIp.TvmGateway));
-			}
-			else
-			{
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_IP, Messages.FINISH_PAGE_TVM_DHCP));
-			}
 
 			return temp;
 		}

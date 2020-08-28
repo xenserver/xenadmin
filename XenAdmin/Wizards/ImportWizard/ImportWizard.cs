@@ -61,9 +61,8 @@ namespace XenAdmin.Wizards.ImportWizard
         private readonly ImportOptionsPage m_pageOptions;
         private readonly ImportFinishPage m_pageFinish;
         private readonly RBACWarningPage m_pageRbac;
-        private readonly TvmIpPage m_pageTvmIp;
         private readonly ImageVMConfigPage m_pageVMconfig;
-        private ImportSourcePage m_pageImportSource;
+        private readonly ImportSourcePage m_pageImportSource;
         private readonly StoragePickerPage m_pageXvaStorage;
         private readonly NetworkPickerPage m_pageXvaNetwork;
         private readonly GlobalSelectHost m_pageXvaHost;
@@ -94,7 +93,6 @@ namespace XenAdmin.Wizards.ImportWizard
 		    m_pageOptions = new ImportOptionsPage();
 		    m_pageFinish = new ImportFinishPage();
 		    m_pageRbac = new RBACWarningPage();
-		    m_pageTvmIp = new TvmIpPage();
 		    m_pageVMconfig = new ImageVMConfigPage();
 		    m_pageImportSource = new ImportSourcePage();
 		    m_pageXvaStorage = new StoragePickerPage();
@@ -104,7 +102,6 @@ namespace XenAdmin.Wizards.ImportWizard
 		    m_pageBootOptions = new ImportBootOptionPage();
 
 			m_selectedObject = xenObject;
-            m_pageTvmIp.IsExportMode = false;
 			m_pageFinish.SummaryRetriever = GetSummary;
 			m_pageXvaStorage.ImportVmCompleted += m_pageXvaStorage_ImportVmCompleted;
 
@@ -130,32 +127,22 @@ namespace XenAdmin.Wizards.ImportWizard
 						m_pageXvaStorage.ImportXvaAction.EndWizard(m_pageFinish.StartVmsAutomatically, m_pageXvaNetwork.VIFs);
 					break;
 				case ImportType.Ovf:
-					(new ImportApplianceAction(TargetConnection,
-											   m_pageImportSource.SelectedOvfPackage,
-					                           m_vmMappings,
-					                           m_pageSecurity.VerifyManifest,
-					                           m_pageSecurity.VerifySignature,
-					                           m_pageSecurity.Password,
-					                           m_pageOptions.RunFixups,
-					                           m_pageOptions.SelectedIsoSR,
-					                           m_pageTvmIp.NetworkUuid.Key,
-					                           m_pageTvmIp.IsTvmIpStatic,
-					                           m_pageTvmIp.TvmIpAddress,
-					                           m_pageTvmIp.TvmSubnetMask,
-					                           m_pageTvmIp.TvmGateway)).RunAsync();
+                    new ImportApplianceAction(TargetConnection,
+                        m_pageImportSource.SelectedOvfPackage,
+                        m_vmMappings,
+                        m_pageSecurity.VerifyManifest,
+                        m_pageSecurity.VerifySignature,
+                        m_pageSecurity.Password,
+                        m_pageOptions.RunFixups,
+                        m_pageOptions.SelectedIsoSR).RunAsync();
 					break;
 				case ImportType.Vhd:
-                    (new ImportImageAction(TargetConnection,
-										   m_envelopeFromVhd,
-										   Path.GetDirectoryName(m_pageImportSource.FilePath),
-					                       m_vmMappings,
-					                       m_pageOptions.RunFixups,
-					                       m_pageOptions.SelectedIsoSR,
-					                       m_pageTvmIp.NetworkUuid.Key,
-					                       m_pageTvmIp.IsTvmIpStatic,
-					                       m_pageTvmIp.TvmIpAddress,
-					                       m_pageTvmIp.TvmSubnetMask,
-					                       m_pageTvmIp.TvmGateway)).RunAsync();
+                    new ImportImageAction(TargetConnection,
+                        m_envelopeFromVhd,
+                        Path.GetDirectoryName(m_pageImportSource.FilePath),
+                        m_vmMappings,
+                        m_pageOptions.RunFixups,
+                        m_pageOptions.SelectedIsoSR).RunAsync();
 					break;
 			}
 
@@ -186,8 +173,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
 				var oldTypeOfImport = m_typeOfImport;//store previous type
 				m_typeOfImport = m_pageImportSource.TypeOfImport;
-				var appliancePages = new XenTabPage[] {m_pageEula, m_pageHost, m_pageStorage, m_pageNetwork, m_pageSecurity, m_pageOptions, m_pageTvmIp};
-                var imagePages = new XenTabPage[] { m_pageVMconfig, m_pageHost, m_pageStorage, m_pageNetwork, m_pageOptions, m_pageTvmIp };
+				var appliancePages = new XenTabPage[] {m_pageEula, m_pageHost, m_pageStorage, m_pageNetwork, m_pageSecurity, m_pageOptions};
+                var imagePages = new XenTabPage[] { m_pageVMconfig, m_pageHost, m_pageStorage, m_pageNetwork, m_pageOptions };
                 var xvaPages = new XenTabPage[] { m_pageXvaHost, m_pageXvaStorage, m_pageXvaNetwork };
 
 				switch (m_typeOfImport)
@@ -278,7 +265,6 @@ namespace XenAdmin.Wizards.ImportWizard
                 m_pageStorage.Connection = TargetConnection;
                 m_pageNetwork.Connection = TargetConnection;
                 m_pageOptions.Connection = TargetConnection;
-                m_pageTvmIp.Connection = TargetConnection;
 			    RemovePage(m_pageBootOptions);
                 if (m_typeOfImport == ImportType.Vhd && BootModesControl.ShowBootModeOptions(TargetConnection))
 			    {
@@ -286,7 +272,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			        m_pageBootOptions.Connection = TargetConnection;
 			    }
 			    m_pageBootOptions.Connection = TargetConnection;
-				NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions, m_pageTvmIp);
+				NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions);
 			}
 			else if (type == typeof(ImportSelectStoragePage))
 			{
@@ -391,16 +377,7 @@ namespace XenAdmin.Wizards.ImportWizard
                         return FormatHelpId("ImportOptionsImage");
                 }
             }
-            if (curPageType == typeof(TvmIpPage))
-            {
-                switch (m_typeOfImport)
-                {
-                    case ImportType.Ovf:
-                        return FormatHelpId("TvmIpImportOvf");
-                    case ImportType.Vhd:
-                        return FormatHelpId("TvmIpImportImage");
-                }
-            }
+
             if (curPageType == typeof(ImportFinishPage))
             {
                 switch (m_typeOfImport)
@@ -530,7 +507,6 @@ namespace XenAdmin.Wizards.ImportWizard
 				temp.Add(new Tuple(Messages.FINISH_PAGE_ISOSR, m_pageOptions.SelectedIsoSR.Name()));
 
 			temp.AddRange(GetVmMappingsSummary());
-			temp.AddRange(GetTransferVmSummary());
 			return temp;
 		}
 
@@ -552,7 +528,6 @@ namespace XenAdmin.Wizards.ImportWizard
 				temp.Add(new Tuple(Messages.FINISH_PAGE_ISOSR, m_pageOptions.SelectedIsoSR.Name()));
 
 			temp.AddRange(GetVmMappingsSummary());
-			temp.AddRange(GetTransferVmSummary());
 			return temp;
 		}
 
@@ -580,24 +555,6 @@ namespace XenAdmin.Wizards.ImportWizard
 					temp.Add(new Tuple(first ? networkLbl : "", net.Value.Name()));
 					first = false;
 				}
-			}
-			return temp;
-		}
-
-		private IEnumerable<Tuple> GetTransferVmSummary()
-		{
-			var temp = new List<Tuple>();
-			temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_NETWORK, m_pageTvmIp.NetworkUuid.Value));
-
-			if (m_pageTvmIp.IsTvmIpStatic)
-			{
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_IP, m_pageTvmIp.TvmIpAddress));
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_MASK, m_pageTvmIp.TvmSubnetMask));
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_GATEWAY, m_pageTvmIp.TvmGateway));
-			}
-			else
-			{
-				temp.Add(new Tuple(Messages.FINISH_PAGE_TVM_IP, Messages.FINISH_PAGE_TVM_DHCP));
 			}
 			return temp;
 		}

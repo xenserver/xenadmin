@@ -39,12 +39,6 @@ namespace XenAdmin.Actions.OVFActions
 {
 	public abstract class ApplianceAction : AsyncAction
 	{
-		protected string m_networkUuid;
-		protected bool m_isTvmIpStatic;
-		protected string m_tvmIpAddress;
-		protected string m_tvmSubnetMask;
-		protected string m_tvmGateway;
-
         protected abstract XenOvfTransportBase TransportAction { get; }
 
         private const int SLEEP_TIME = 900;
@@ -67,16 +61,9 @@ namespace XenAdmin.Actions.OVFActions
 																				 "VIF.create",
 																				 "Host.call_plugin");
 
-		protected ApplianceAction(IXenConnection connection, string title,
-			string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
+		protected ApplianceAction(IXenConnection connection, string title)
 			: base(connection, title)
 		{
-			m_networkUuid = networkUuid;
-			m_isTvmIpStatic = isTvmIpStatic;
-			m_tvmIpAddress = tvmIpAddress;
-			m_tvmSubnetMask = tvmSubnetMask;
-			m_tvmGateway = tvmGateway;
-
 			Pool pool = Helpers.GetPool(connection);
 			if (pool != null)
 				Pool = pool;

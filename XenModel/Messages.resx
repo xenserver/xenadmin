@@ -5877,21 +5877,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FINISH_PAGE_TITLE_IMPORT" xml:space="preserve">
     <value>Review the import settings</value>
   </data>
-  <data name="FINISH_PAGE_TVM_DHCP" xml:space="preserve">
-    <value>Obtain automatically through DHCP</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_GATEWAY" xml:space="preserve">
-    <value>Transfer VM gateway:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_IP" xml:space="preserve">
-    <value>Transfer VM IP address:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_MASK" xml:space="preserve">
-    <value>Transfer VM subnet mask:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_NETWORK" xml:space="preserve">
-    <value>Transfer VM network interface:</value>
-  </data>
   <data name="FINISH_PAGE_VERIFY_MANIFEST" xml:space="preserve">
     <value>Verify manifest content:</value>
   </data>
@@ -12488,18 +12473,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>Turn HA off</value>
-  </data>
-  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
-    <value>Select the network on which the temporary VM (Transfer VM) used to perform the export operation will run.</value>
-  </data>
-  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
-    <value>Select the network on which the temporary VM (Transfer VM) used to perform the import operation will run.</value>
-  </data>
-  <data name="TVM_PAGE_TEXT" xml:space="preserve">
-    <value>Transfer VM Settings</value>
-  </data>
-  <data name="TVM_PAGE_TITLE" xml:space="preserve">
-    <value>Configure networking options for the Transfer VM</value>
   </data>
   <data name="TXT_DESCRIPTION" xml:space="preserve">
     <value>Text Files</value>
