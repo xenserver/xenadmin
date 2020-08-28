@@ -16801,51 +16801,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Obtain automatically through DHCP.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_DHCP {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_DHCP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM gateway:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_GATEWAY {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_GATEWAY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM IP address:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_IP {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_IP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM subnet mask:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_MASK {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_MASK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM network interface:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_NETWORK {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_NETWORK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Verify manifest content:.
         /// </summary>
         public static string FINISH_PAGE_VERIFY_MANIFEST {
@@ -36113,42 +36068,6 @@ namespace XenAdmin {
         public static string TURN_HA_OFF {
             get {
                 return ResourceManager.GetString("TURN_HA_OFF", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the export operation will run..
-        /// </summary>
-        public static string TVM_PAGE_DESCRIPTION_EXPORT {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION_EXPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the import operation will run..
-        /// </summary>
-        public static string TVM_PAGE_DESCRIPTION_IMPORT {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION_IMPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM Settings.
-        /// </summary>
-        public static string TVM_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configure networking options for the Transfer VM.
-        /// </summary>
-        public static string TVM_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_TITLE", resourceCulture);
             }
         }
         

@@ -65,13 +65,11 @@ namespace XenAdmin.Actions.OVFActions
 
 		#endregion
 
-		public ExportApplianceAction(IXenConnection connection, string applianceDirectory, string applianceFileName, List<VM> vmsToExport,
-										IEnumerable<string> eulas, bool signAppliance, bool createManifest, X509Certificate2 certificate,
-										bool encryptFiles, string encryptPassword, bool createOVA, bool compressOVFfiles,
-										string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway, bool shouldVerify)
-			: base(connection,
-                string.Format(createOVA ? Messages.EXPORT_OVA_PACKAGE : Messages.EXPORT_OVF_PACKAGE, applianceFileName, Helpers.GetName(connection)),
-                networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
+        public ExportApplianceAction(IXenConnection connection, string applianceDirectory, string applianceFileName, List<VM> vmsToExport,
+            IEnumerable<string> eulas, bool signAppliance, bool createManifest, X509Certificate2 certificate,
+            bool encryptFiles, string encryptPassword, bool createOVA, bool compressOVFfiles, bool shouldVerify)
+            : base(connection, string.Format(createOVA ? Messages.EXPORT_OVA_PACKAGE : Messages.EXPORT_OVF_PACKAGE,
+                applianceFileName, Helpers.GetName(connection)))
 		{
 			m_applianceDirectory = applianceDirectory;
 			m_applianceFileName = applianceFileName;
@@ -114,7 +112,6 @@ namespace XenAdmin.Actions.OVFActions
 				                    		ShouldVerifyDisks = m_shouldVerify,
 				                    		Cancel = Cancelling //in case the Cancel button has already been pressed
 				                    	};
-				m_transportAction.SetTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
                 env = m_transportAction.Process(appFolder, m_applianceFileName, (from VM vm in m_vmsToExport select vm.uuid).ToArray());
 				PercentComplete = 60;
 			}

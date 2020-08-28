@@ -3989,12 +3989,6 @@
     <Compile Include="Wizards\ImportWizard\ImageVMConfigPage.Designer.cs">
       <DependentUpon>ImageVMConfigPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\GenericPages\TvmIpPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\GenericPages\TvmIpPage.Designer.cs">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -6144,9 +6138,6 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.zh-CN.resx">
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.zh-CN.resx">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\HAWizard.ja.resx">
       <DependentUpon>HAWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -6636,13 +6627,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\ImportWizard\ImageVMConfigPage.resx">
       <DependentUpon>ImageVMConfigPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.ja.resx">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.resx">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_Template.zh-CN.resx">
       <DependentUpon>Page_Template.cs</DependentUpon>

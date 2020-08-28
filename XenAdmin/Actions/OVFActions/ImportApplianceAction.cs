@@ -58,11 +58,9 @@ namespace XenAdmin.Actions.OVFActions
 
 		#endregion
 
-		public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
-										bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr,
-										string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
-            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection)),
-                networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
+        public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
+            bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr)
+            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection)))
 		{
 			m_package = package;
 			m_vmMappings = vmMappings;
@@ -163,7 +161,6 @@ namespace XenAdmin.Actions.OVFActions
                     UpdateHandler = UpdateHandler,
                     Cancel = Cancelling //in case the Cancel button has already been pressed
                 };
-				m_transportAction.SetTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
                 m_transportAction.Process(env, m_package.WorkingDir, m_password);
 			}
 			catch (OperationCanceledException)
