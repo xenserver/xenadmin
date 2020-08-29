@@ -79,15 +79,6 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Completed export..
-        /// </summary>
-        internal static string COMPLETED_EXPORT {
-            get {
-                return ResourceManager.GetString("COMPLETED_EXPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Completed import..
         /// </summary>
         internal static string COMPLETED_IMPORT {

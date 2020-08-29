@@ -44,45 +44,11 @@ using XenAdmin;
 
 namespace XenOvfTransport
 {
-    public class Export : XenOvfTransportBase
+    public class Export
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const long KB = 1024;
-        private const long MB = (KB * 1024);
-        private const long GB = (MB * 1024);
-        private const long MEMMIN = 128 * MB;
-
-        public Export(Session session)
-            : base(session)
-        {
-        }
-
-        public EnvelopeType Process(string targetPath, string ovfname, string[] vmUuid)
-        {
-            List<EnvelopeType> envList = new List<EnvelopeType>();
-
-            foreach (string vmuuid in vmUuid)
-                envList.Add(_export(XenSession, targetPath, ovfname, vmuuid));
-
-            EnvelopeType ovfEnv = OVF.Merge(envList, ovfname);
-
-			if (AutoSave)
-            {
-                string ovffilename = Path.Combine(targetPath, string.Format(@"{0}.ovf", ovfname));
-                OVF.SaveAs(ovfEnv, ovffilename);
-            }
-        	OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, Messages.COMPLETED_EXPORT));
-            return ovfEnv;
-        }
-
-		public bool AutoSave { get; set; }
-
-        public bool ShouldVerifyDisks { get; set; }
-
-		public bool MetaDataOnly { get; set; }
-
-        private EnvelopeType _export(Session xenSession, string targetPath, string ovfname, string vmUuid)
+        public static EnvelopeType _export(Session xenSession, string targetPath, string ovfname, string vmUuid, Action<XenOvfTransportEventArgs> OnUpdate, HTTP.FuncBool onCancel, bool verifyDisks, bool metaDataOnly = false)
         {
         	EnvelopeType ovfEnv;
 
@@ -195,7 +161,7 @@ namespace XenOvfTransport
                 #endregion
 
                 #region ADD MEMORY
-                OVF.SetMemory(ovfEnv, vsId, (ulong)(vm.memory_dynamic_max / MB), "MB");
+                OVF.SetMemory(ovfEnv, vsId, (ulong)(vm.memory_dynamic_max / Util.BINARY_MEGA), "MB");
                 #endregion
 
                 #region ADD NETWORKS
@@ -248,19 +214,19 @@ namespace XenOvfTransport
                                     log.InfoFormat("{0}: VHD Name collision, renamed {1} to {2}", ovfname, oldFileName, diskFilename);
                                 }
 
-                                if (!MetaDataOnly)
+                                if (!metaDataOnly)
                                 {
                                     OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, diskFilename)));
 
-                                    var taskRef = Task.create(XenSession, "export_raw_vdi_task", "export_raw_vdi_task");
+                                    var taskRef = Task.create(xenSession, "export_raw_vdi_task", "export_raw_vdi_task");
                                     HTTP_actions.get_export_raw_vdi(
                                         b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export,
                                             $"Exporting {diskFilename} ({Util.DiskSizeString(b)} done")),
-                                        () => Cancel, XenAdminConfigManager.Provider.GetProxyTimeout(true),
-                                        XenSession.Connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(XenSession.Connection),
-                                        diskPath, taskRef, XenSession.opaque_ref, vdi.uuid, "vhd");
+                                        onCancel, XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                                        xenSession.Connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(xenSession.Connection),
+                                        diskPath, taskRef, xenSession.opaque_ref, vdi.uuid, "vhd");
 
-                                    if (ShouldVerifyDisks)
+                                    if (verifyDisks)
                                     {
                                         //TODO
                                     }
@@ -277,6 +243,10 @@ namespace XenOvfTransport
 
                                 diskIndex++;
                             }
+                        }
+                        catch (HTTP.CancelledException)
+                        {
+                            throw new CancelledException();
                         }
                         catch (Exception ex)
                         {

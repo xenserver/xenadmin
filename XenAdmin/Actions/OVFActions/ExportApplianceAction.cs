@@ -61,7 +61,6 @@ namespace XenAdmin.Actions.OVFActions
 		private readonly bool m_compressOVFfiles;
         private readonly bool m_shouldVerify;
 		private OvfCompressor m_compressor;
-        private Export m_transportAction;
 
 		#endregion
 
@@ -88,56 +87,57 @@ namespace XenAdmin.Actions.OVFActions
 				VM = m_vmsToExport[0];
 		}
 
-        protected override XenOvfTransportBase TransportAction => m_transportAction;
+        protected override XenOvfTransportBase TransportAction => null;
 
 		protected override void Run()
 		{
             base.Run();
-		    
+
 			var session = Connection.Session;
 			var appFolder = Path.Combine(m_applianceDirectory, m_applianceFileName);
 			var appFile = string.Format("{0}.ovf", m_applianceFileName);
 
 			if (!Directory.Exists(appFolder))
 				Directory.CreateDirectory(appFolder);
-			PercentComplete = 5;
 
 			Description = Messages.EXPORTING_VMS;
-			EnvelopeType env;
-			try
-			{
-                m_transportAction = new Export(session)
-				                    	{
-				                    		UpdateHandler = UpdateHandler,
-				                    		ShouldVerifyDisks = m_shouldVerify,
-				                    		Cancel = Cancelling //in case the Cancel button has already been pressed
-				                    	};
-                env = m_transportAction.Process(appFolder, m_applianceFileName, (from VM vm in m_vmsToExport select vm.uuid).ToArray());
-				PercentComplete = 60;
-			}
-			catch (OperationCanceledException)
-			{
-				throw new CancelledException();
-			}
+
+            var envList = new List<EnvelopeType>();
+
+            foreach (VM vm in m_vmsToExport)
+            {
+                CheckForCancellation();
+
+                try
+                {
+                    var envelope = Export._export(session, appFolder, m_applianceFileName, vm.uuid,
+                        UpdateHandler, () => Cancelling, m_shouldVerify);
+                    envList.Add(envelope);
+                    PercentComplete += 80 / m_vmsToExport.Count;
+                }
+                catch (OperationCanceledException)
+                {
+                    throw new CancelledException();
+                }
+            }
+
+            EnvelopeType env = OVF.Merge(envList, m_applianceFileName);
+            PercentComplete = 80;
 
 			foreach (var eula in m_eulas)
 			{
-				if (Cancelling)
-					throw new CancelledException();
+                CheckForCancellation();
 				Description = Messages.ADDING_EULAS;
 				OVF.AddEula(env, eula);
 			}
 
-			if (Cancelling)
-				throw new CancelledException();
-
+            CheckForCancellation();
 			var ovfPath = Path.Combine(appFolder, appFile);
 			Description = String.Format(Messages.CREATING_FILE, appFile);
 			OVF.SaveAs(env, ovfPath);
-			PercentComplete = 70;
-			
-			if (Cancelling)
-					throw new CancelledException();
+			PercentComplete = 85;
+
+            CheckForCancellation();
 
 			if (m_signAppliance)
 			{	
@@ -150,10 +150,8 @@ namespace XenAdmin.Actions.OVFActions
 				OVF.Manifest(appFolder, appFile);
 			}
 
-			PercentComplete = 90;
-			
-			if (Cancelling)
-					throw new CancelledException();
+            PercentComplete = 90;
+            CheckForCancellation();
 
 			if (m_createOVA)
 			{
@@ -178,6 +176,12 @@ namespace XenAdmin.Actions.OVFActions
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
 		}
+
+        private void CheckForCancellation()
+        {
+            if (Cancelling)
+                throw new CancelledException();
+        }
 
 		protected override void CancelRelatedTask()
 		{
