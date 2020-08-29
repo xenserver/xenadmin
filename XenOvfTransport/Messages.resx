@@ -123,9 +123,6 @@
   <data name="COMPLETE" xml:space="preserve">
     <value>complete</value>
   </data>
-  <data name="COMPLETED_EXPORT" xml:space="preserve">
-    <value>Completed export.</value>
-  </data>
   <data name="COMPLETED_IMPORT" xml:space="preserve">
     <value>Completed import.</value>
   </data>
