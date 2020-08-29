@@ -53,8 +53,6 @@ namespace XenOvfTransport
         private const long GB = (MB * 1024);
         private const long MEMMIN = 128 * MB;
 
-        private List<XenRef<VDI>> _vdiRefs = new List<XenRef<VDI>>();
-
         public Export(Session session)
             : base(session)
         {
@@ -217,9 +215,8 @@ namespace XenOvfTransport
 				OVF.AddStartupSection(ovfEnv, true, vsId, vm.order, vm.start_delay, vm.shutdown_delay);
 				#endregion
 
-				#region GET AND EXPORT DISKS using iSCSI
+				#region EXPORT DISKS
 				List<XenRef<VBD>> vbdlist = VM.get_VBDs(xenSession, vmRef);
-                _vdiRefs.Clear();
 
                 int diskIndex = 0;
 
@@ -236,21 +233,47 @@ namespace XenOvfTransport
                     {
                         try
                         {
-                            XenRef<VDI> vdi = VBD.get_VDI(xenSession, vbdref);
-                            if (vdi != null && !string.IsNullOrEmpty(vdi.opaque_ref) && !(vdi.opaque_ref.ToLower().Contains("null")))
+                            XenRef<VDI> vdiRef = VBD.get_VDI(xenSession, vbdref);
+                            if (vdiRef != null && !string.IsNullOrEmpty(vdiRef.opaque_ref) && !(vdiRef.opaque_ref.ToLower().Contains("null")))
                             {
-                                _vdiRefs.Add(vdi);
-                                VDI lVdi = VDI.get_record(xenSession, vdi);
-                                string destinationFilename = Path.Combine(targetPath, string.Format(@"{0}.vhd", lVdi.uuid));
-                                string diskid = Guid.NewGuid().ToString();
+                                VDI vdi = VDI.get_record(xenSession, vdiRef);
+                                var diskFilename = string.Format(@"{0}.vhd", vdi.uuid);
+                                var diskPath = Path.Combine(targetPath, diskFilename);
 
-                                string diskName = lVdi.name_label;
+                                if (File.Exists(diskPath))
+                                {
+                                    var oldFileName = diskFilename;
+                                    diskFilename = string.Format(@"{0}_{1}.vhd", vdi.uuid, Thread.CurrentThread.ManagedThreadId);
+                                    diskPath = Path.Combine(targetPath, diskFilename);
+                                    log.InfoFormat("{0}: VHD Name collision, renamed {1} to {2}", ovfname, oldFileName, diskFilename);
+                                }
 
-                                if (diskName == null)
+                                if (!MetaDataOnly)
+                                {
+                                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, diskFilename)));
+
+                                    var taskRef = Task.create(XenSession, "export_raw_vdi_task", "export_raw_vdi_task");
+                                    HTTP_actions.get_export_raw_vdi(
+                                        b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export,
+                                            $"Exporting {diskFilename} ({Util.DiskSizeString(b)} done")),
+                                        () => Cancel, XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                                        XenSession.Connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(XenSession.Connection),
+                                        diskPath, taskRef, XenSession.opaque_ref, vdi.uuid, "vhd");
+
+                                    if (ShouldVerifyDisks)
+                                    {
+                                        //TODO
+                                    }
+                                }
+
+                                string diskId = Guid.NewGuid().ToString();
+                                string diskName = vdi.name_label;
+                                if (string.IsNullOrEmpty(diskName))
                                     diskName = string.Format("{0} {1}", OVF.GetContentMessage("RASD_19_CAPTION"), diskIndex);
 
-                                OVF.AddDisk(ovfEnv, vsId, diskid, Path.GetFileName(destinationFilename), vbd.bootable, diskName, lVdi.name_description, (ulong)lVdi.physical_utilisation, (ulong)lVdi.virtual_size);
-                                OVF.SetTargetDeviceInRASD(ovfEnv, vsId, diskid, vbd.userdevice);
+                                OVF.AddDisk(ovfEnv, vsId, diskId, diskFilename, vbd.bootable, diskName,
+                                    vdi.name_description, (ulong)vdi.physical_utilisation, (ulong)vdi.virtual_size);
+                                OVF.SetTargetDeviceInRASD(ovfEnv, vsId, diskId, vbd.userdevice);
 
                                 diskIndex++;
                             }
@@ -262,11 +285,6 @@ namespace XenOvfTransport
                     }
                 }
                 #endregion
-
-				if (!MetaDataOnly)
-                {
-                    _copydisks(ovfEnv, ovfname, targetPath);
-                }
 
 				#region ADD XEN SPECIFICS
 
@@ -395,46 +413,6 @@ namespace XenOvfTransport
                 throw new Exception(Messages.ERROR_EXPORT_FAILED, ex);
             }
             return ovfEnv;
-        }
-
-        private void _copydisks(EnvelopeType ovfEnv, string label, string targetPath)
-        {
-        	try
-            {
-                foreach (XenRef<VDI> vdiuuid in _vdiRefs)
-                {
-                    string uuid = VDI.get_uuid(XenSession, vdiuuid);
-                    var diskFilename = string.Format(@"{0}.vhd", uuid);
-                    var diskPath = Path.Combine(targetPath, diskFilename);
-
-                    if (File.Exists(diskPath))
-                    {
-                        diskPath = Path.Combine(targetPath, string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
-                        OVF.UpdateFilename(ovfEnv, string.Format(@"{0}.vhd", uuid), string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
-                        log.InfoFormat("{0}: VHD Name collision, renamed {1}.vhd to {1}_{2}.vhd",
-                            label, uuid, Thread.CurrentThread.ManagedThreadId);
-                    }
-
-                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
-
-                    var taskRef = Task.create(XenSession, "export_raw_vdi_task", "export_raw_vdi_task");
-                    HTTP_actions.get_export_raw_vdi(
-                        b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export,
-                            $"Exporting {diskFilename} ({Util.DiskSizeString(b)} done")),
-                        () => Cancel, XenAdminConfigManager.Provider.GetProxyTimeout(true),
-                        XenSession.Connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(XenSession.Connection),
-                        diskPath, taskRef, XenSession.opaque_ref, vdiuuid, "vhd");
-
-                    if (ShouldVerifyDisks)
-                    {
-                        //TODO
-                    }
-                }
-            }
-            finally
-            {
-                _vdiRefs.Clear();
-            }
         }
     }
 }
