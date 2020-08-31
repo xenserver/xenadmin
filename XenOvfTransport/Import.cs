@@ -32,10 +32,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -57,16 +55,12 @@ namespace XenOvfTransport
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		private string downloadupdatemsg;
         private string EncryptionClass;
         private int EncryptionKeySize;
         private XenRef<SR> DefaultSRUUID = null;
         private VirtualDisk vhdDisk = null;
         private int vifDeviceIndex = 0;  // used to count number of Networks attached and to be used as the device number.
         private string _currentfilename = null;
-        private Exception _downloadexception = null;
-        private ulong _filedownloadsize = 0;
-        private AutoResetEvent uridownloadcomplete = new AutoResetEvent(false);
 
         public string ApplianceName { get; set; }
 
@@ -240,9 +234,6 @@ namespace XenOvfTransport
                                 File_Type file = OVF.FindFileReferenceByRASD(ovfObj, rasd);
 								if (file == null)
 									continue;
-                                
-								if (IsKnownURIType(file.href))
-                                    _filedownloadsize = file.size;
 
                                 VirtualDiskDesc_Type vdisk = OVF.FindDiskReference(ovfObj, rasd);
 								SetIfDeviceIsBootable(ovfObj, rasd);
@@ -415,13 +406,6 @@ namespace XenOvfTransport
             #region SET UP TRANSPORT
             if (filename != null)
             {
-                if (IsKnownURIType(filename))
-                {
-                    Uri fileUri = new Uri(filename);
-                    filename = DownloadFileAsync(fileUri, 0);
-                    sourcefile = filename;
-                }
-
                 if (File.Exists(filename))
                 {
                     string ext = Path.GetExtension(filename);
@@ -1792,71 +1776,9 @@ namespace XenOvfTransport
             }
         }
 
-        public bool IsKnownURIType(string filename)
-        {
-            string expression = Properties.Settings.Default.uriRegex;
-            RegexStringValidator rsv = new RegexStringValidator(expression);
-            if (rsv.CanValidate(filename.GetType()))
-            {
-                try
-                {
-                    rsv.Validate(filename);
-                    log.InfoFormat("Import.isURI: File {0} is in URI format.", filename);
-                    return true;
-                }
-                catch
-                {
-                    log.InfoFormat("Import.isURI: File {0} is not in URI format.", filename);
-                }
-            }
-            return false;
-        }
-
         private void ShowSystem(Session xenSession, XenRef<VM> vmRef)
         {
             VM.remove_from_other_config(xenSession, vmRef, "HideFromXenCenter");
-        }
-        
-    	public string DownloadFileAsync(Uri filetodownload, ulong totalsize)
-        {
-            log.InfoFormat("DownloadFileAsync: {0}", filetodownload);
-            _downloadexception = null;
-            string tmpfilename = filetodownload.AbsolutePath.Substring(filetodownload.AbsolutePath.LastIndexOf('/') + 1);
-            if (!File.Exists(tmpfilename))
-            {
-                downloadupdatemsg = string.Format(Messages.ISCSI_COPY_PROGRESS, tmpfilename);
-                _downloadexception = null;
-                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, 0, _filedownloadsize));
-                WebClient wc = new WebClient();
-                wc.Proxy = XenAdmin.XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
-                wc.DownloadFileCompleted += wc_DownloadFileCompleted;
-                wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                wc.DownloadFileAsync(filetodownload, tmpfilename);
-                uridownloadcomplete.WaitOne();
-                if (_downloadexception != null)
-                {
-                    if (!Path.GetExtension(tmpfilename).Equals(".pvp"))  // don't worry bout pvp files, we don't use them.
-                        throw _downloadexception;
-                }
-                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, _filedownloadsize, _filedownloadsize));
-            }
-            return tmpfilename;
-        }
-
-        private void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, (ulong)e.BytesReceived, (ulong)_filedownloadsize));
-        }
-
-        private void wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                log.Error("DownloadFileAsync failure.", e.Error);
-                _downloadexception = e.Error;
-            }
-            log.Info("DownloadFileAsync: completed");
-            uridownloadcomplete.Set();
         }
 
         private static int compareControllerRasd(RASD_Type rasd1, RASD_Type rasd2)
