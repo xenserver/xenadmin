@@ -87,9 +87,7 @@ namespace XenAdmin.Actions.OVFActions
 				VM = m_vmsToExport[0];
 		}
 
-        protected override XenOvfTransportBase TransportAction => null;
-
-		protected override void Run()
+        protected override void Run()
 		{
             base.Run();
 

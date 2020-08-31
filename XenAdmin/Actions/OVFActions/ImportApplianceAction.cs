@@ -54,7 +54,6 @@ namespace XenAdmin.Actions.OVFActions
 		private readonly string m_password;
 		private readonly bool m_runfixups;
 		private readonly SR m_selectedIsoSr;
-        private Import m_transportAction;
 
 		#endregion
 
@@ -70,8 +69,6 @@ namespace XenAdmin.Actions.OVFActions
 			m_runfixups = runfixups;
 			m_selectedIsoSr = selectedIsoSr;
 		}
-
-        protected override XenOvfTransportBase TransportAction => m_transportAction;
 
 		protected override void Run()
 		{
@@ -114,10 +111,6 @@ namespace XenAdmin.Actions.OVFActions
 			PercentComplete = 20;
 			Description = Messages.IMPORTING_VMS;
 
-			var session = Connection.Session;
-			var url = session.Url;
-			Uri uri = new Uri(url);
-
 			//create a copy of the OVF
 			var envelopes = new List<EnvelopeType>();
 
@@ -155,13 +148,7 @@ namespace XenAdmin.Actions.OVFActions
 
 			try //importVM
             {
-                m_transportAction = new Import(session)
-                {
-                    ApplianceName = m_package.Name,
-                    UpdateHandler = UpdateHandler,
-                    Cancel = Cancelling //in case the Cancel button has already been pressed
-                };
-                m_transportAction.Process(env, m_package.WorkingDir, m_password);
+                Import.Process(Connection, env, m_package.WorkingDir, UpdateHandler, m_password, m_package.Name);
 			}
 			catch (OperationCanceledException)
 			{
