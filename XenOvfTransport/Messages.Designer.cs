@@ -196,15 +196,6 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to export..
-        /// </summary>
-        internal static string ERROR_EXPORT_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_EXPORT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The file to import was not provided..
         /// </summary>
         internal static string ERROR_FILE_NAME_NULL {

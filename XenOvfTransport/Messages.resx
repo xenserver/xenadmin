@@ -162,9 +162,6 @@
   <data name="ERROR_EULAS_NOT_ACCEPTED" xml:space="preserve">
     <value>End User License Agreements were not accepted.</value>
   </data>
-  <data name="ERROR_EXPORT_FAILED" xml:space="preserve">
-    <value>Failed to export.</value>
-  </data>
   <data name="ERROR_FILE_NAME_NULL" xml:space="preserve">
     <value>The file to import was not provided.</value>
   </data>
