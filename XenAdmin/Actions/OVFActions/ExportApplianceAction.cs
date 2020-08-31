@@ -93,7 +93,6 @@ namespace XenAdmin.Actions.OVFActions
 		{
             base.Run();
 
-			var session = Connection.Session;
 			var appFolder = Path.Combine(m_applianceDirectory, m_applianceFileName);
 			var appFile = string.Format("{0}.ovf", m_applianceFileName);
 
@@ -110,7 +109,7 @@ namespace XenAdmin.Actions.OVFActions
 
                 try
                 {
-                    var envelope = Export._export(session, appFolder, m_applianceFileName, vm.uuid,
+                    var envelope = Export._export(Connection, appFolder, m_applianceFileName, vm,
                         UpdateHandler, () => Cancelling, m_shouldVerify);
                     envList.Add(envelope);
                     PercentComplete += 80 / m_vmsToExport.Count;
