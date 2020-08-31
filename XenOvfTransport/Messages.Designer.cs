@@ -412,7 +412,7 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imported..
+        ///   Looks up a localized string similar to Imported VM.
         /// </summary>
         internal static string UNDEFINED_NAME_LABEL {
             get {

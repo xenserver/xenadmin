@@ -57,11 +57,6 @@ namespace XenOvfTransport
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const long KB = 1024;
-        private const long MB = (KB * 1024);
-        private const long GB = (MB * 1024);
-        private const long STATMEMMIN = 16 * MB;
-
 		private string downloadupdatemsg;
         private string EncryptionClass;
         private int EncryptionKeySize;
@@ -93,8 +88,6 @@ namespace XenOvfTransport
             var xenSession = XenSession;
             if (xenSession == null)
                 throw new InvalidOperationException(Messages.ERROR_NOT_CONNECTED);
-
-            string ovfname = Guid.NewGuid().ToString();
 
             vifDeviceIndex = 0;
             string encryptionVersion = null;
@@ -151,12 +144,9 @@ namespace XenOvfTransport
             }
             #endregion
 
-            //
-            // So the process is the same below, change this
-            //
-            if (ovfObj.Item is VirtualSystem_Type)
+            //Normalise the process
+            if (ovfObj.Item is VirtualSystem_Type vstemp)
             {
-				VirtualSystem_Type vstemp = (VirtualSystem_Type)ovfObj.Item;
 				ovfObj.Item = new VirtualSystemCollection_Type();
 				((VirtualSystemCollection_Type)ovfObj.Item).Content = new Content_Type[] { vstemp };
             }
@@ -166,76 +156,37 @@ namespace XenOvfTransport
         	XenRef<VM_appliance> applRef = null;
 			if (ApplianceName != null)
 			{
-				var vmAppliance = new VM_appliance {name_label = ApplianceName, Connection = xenSession.Connection};
+                var vmAppliance = new VM_appliance {name_label = ApplianceName};
 				applRef = VM_appliance.create(xenSession, vmAppliance);
 			}
 
+            StartupSection_TypeItem[] vmStartupSections = null;
+            if (ovfObj.Sections != null)
+            {
+                StartupSection_Type[] startUpArray = OVF.FindSections<StartupSection_Type>(ovfObj.Sections);
+                if (startUpArray != null && startUpArray.Length > 0)
+                    vmStartupSections = startUpArray[0]?.Item;
+            }
+
         	#endregion
 
-			foreach (VirtualSystem_Type vSystem in ((VirtualSystemCollection_Type)ovfObj.Item).Content)
+            foreach (Content_Type contentType in ((VirtualSystemCollection_Type)ovfObj.Item).Content)
             {
-               //FIND/SET THE NAME OF THE VM
-				ovfname = OVF.FindSystemName(ovfObj, vSystem.id);
-                log.DebugFormat("Import: {0}, {1}", ovfname, pathToOvf);
+                if (!(contentType is VirtualSystem_Type vSystem))
+                    continue;
 
+                var vmName = OVF.FindSystemName(ovfObj, vSystem.id);
 				VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(ovfObj, vSystem.id, "xen");
+                var vmStartupSection = vmStartupSections?.FirstOrDefault(it => it.id == vSystem.id);
 
-                XenRef<VM> vmRef = DefineSystem(xenSession, vhs, ovfname);
+                XenRef<VM> vmRef = CreateVm(xenSession, vmName, vhs, applRef, vmStartupSection);
                 if (vmRef == null)
                 {
                     log.Error("Failed to create a VM");
                     throw new Exception(Messages.ERROR_CREATE_VM_FAILED);
 				}
 
-				HideSystem(xenSession, vmRef);
                 log.DebugFormat("OVF.Import.Process: DefineSystem completed ({0})", VM.get_name_label(xenSession, vmRef));
-				
-				#region Set appliance
-				if (applRef != null)
-					VM.set_appliance(xenSession, vmRef.opaque_ref, applRef.opaque_ref);
-
-				if (ovfObj.Sections != null)
-				{
-					StartupSection_Type[] startUpArray = OVF.FindSections<StartupSection_Type>(ovfObj.Sections);
-					if (startUpArray != null && startUpArray.Length > 0)
-					{
-						var startupSection = startUpArray[0];
-						var itemList = startupSection.Item;
-
-						if (itemList != null)
-						{
-							var item = itemList.FirstOrDefault(it => it.id == vSystem.id);
-
-							if (item != null)
-							{
-								VM.set_start_delay(xenSession, vmRef.opaque_ref, item.startDelay);
-								VM.set_shutdown_delay(xenSession, vmRef.opaque_ref, item.stopDelay);
-								VM.set_order(xenSession, vmRef.opaque_ref, item.order);
-							}
-						}
-					}
-				}
-
-            	#endregion
-
-                #region set has_vendor_device
-
-                if (Helpers.DundeeOrGreater(xenSession.Connection))
-                {
-                    var data = vhs.VirtualSystemOtherConfigurationData;
-                    if (data != null)
-                    {
-                        var datum = data.FirstOrDefault(s => s.Name == "VM_has_vendor_device");
-                        if (datum != null)
-                        {
-                            bool hasVendorDevice;
-                            if (bool.TryParse(datum.Value.Value, out hasVendorDevice) && hasVendorDevice)
-                                VM.set_has_vendor_device(xenSession, vmRef.opaque_ref, hasVendorDevice);
-                        }
-                    }
-                }
-
-                #endregion
 
                 #region Set vgpu
                 
@@ -250,11 +201,10 @@ namespace XenOvfTransport
 
                         if (Helpers.FeatureForbidden(xenSession, Host.RestrictVgpu))
                         {
-                            // The host does not support vGPU feature, so we create passthrough (default vGPU type) vGPU type
-                            // for the VM. However, passthrough vGPU type does not support multiple at this moment, so we only
-                            // create one vGPU for the VM and ignore the others. The limitation need to be released if multiple
-                            // passthrough can be supported
-                            log.Debug("The host license does not support vGPU, create one passthrough vGPU for the VM");
+                            //If the current licence does not allow vGPU, we create one pass-through vGPU
+                            //(default vGPU type) for the VM (multiple pass-through vGPUs are not supported yet)
+
+                            log.Debug("The host license does not support vGPU, create one pass-through vGPU for the VM");
                             VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config);
                             break;
                         }
@@ -383,7 +333,7 @@ namespace XenOvfTransport
             long dynamicMemoryMax = VM.get_memory_dynamic_max(xenSession, vm);
 
             // Minimize the memory capacity for the fixup OS.
-            long fixupMemorySize = Properties.Settings.Default.FixupOsMemorySizeAsMB * MB;
+            long fixupMemorySize = Properties.Settings.Default.FixupOsMemorySizeAsMB * Util.BINARY_MEGA;
 
             VM.set_memory_limits(xenSession, vm, fixupMemorySize, fixupMemorySize, fixupMemorySize, fixupMemorySize);
 
@@ -546,9 +496,8 @@ namespace XenOvfTransport
                             }
                             else
                             {
-                                //DiscUtils.Iso9660.CDReader cdr = new DiscUtils.Iso9660.CDReader(File.OpenRead(filename), true);
                                 dataStream = File.OpenRead(filename);
-                                dataCapacity = dataStream.Length + (512 * KB);  // Xen does 512KB rounding this is to ensure it doesn't round down below size.
+                                dataCapacity = dataStream.Length;
                             }
                         }
                         else
@@ -672,7 +621,6 @@ namespace XenOvfTransport
         {
             VDI vdi = new VDI
             {
-                uuid = Guid.NewGuid().ToString(),
                 name_label = label,
                 name_description = description,
                 SR = sruuid.ToLower().StartsWith("opaque") ? new XenRef<SR>(sruuid) : SR.get_by_uuid(xenSession, sruuid),
@@ -700,120 +648,94 @@ namespace XenOvfTransport
             }
         }
 
-        private XenRef<VM> DefineSystem(Session xenSession, VirtualHardwareSection_Type system, string ovfName)
+        private XenRef<VM> CreateVm(Session xenSession, string vmName, VirtualHardwareSection_Type system, XenRef<VM_appliance> applRef, StartupSection_TypeItem vmStartupSection)
         {
-            // Set Defaults:
-            Random rand = new Random();
-            string vM_name_label = null;
-            if (ovfName != null)
-            {
-                vM_name_label = ovfName;
-            }
-
-            string vmUuid = Guid.NewGuid().ToString();
-            string systemType = "301";
-            ulong memorySize = 512 * MB;  // default size.
-            string description = Messages.DEFAULT_IMPORT_DESCRIPTION;
-
-            if (system.System == null)
-            {
-                log.Debug("OVF.Import.DefineSystem: System VSSD is empty, guessing. HVM style");
-                if (vM_name_label == null)
-                {
-                	vM_name_label = Messages.UNDEFINED_NAME_LABEL;
-                }
-                vmUuid = Guid.NewGuid().ToString();
-                systemType = "hvm-3.0-unknown";
-            }
-            else
-            {                
-                if (vM_name_label == null)
-                {
-                	vM_name_label = Messages.UNDEFINED_NAME_LABEL;
-                }
-                vmUuid = Guid.NewGuid().ToString();
-
-                if (system.System.VirtualSystemType != null && !string.IsNullOrEmpty(system.System.VirtualSystemType.Value))
-                {
-                    systemType = system.System.VirtualSystemType.Value;
-                }
-
-                if (system.System.Description != null)
-                    description = system.System.Description.Value;
-
-            }
+            string description = system.System?.Description?.Value ?? Messages.DEFAULT_IMPORT_DESCRIPTION;
 
             #region MEMORY
-            // Get Memory, huh? what? oh.. ya..
+
+            ulong memorySize = 0;
             RASD_Type[] rasds = OVF.FindRasdByType(system, 4);
+
             if (rasds != null && rasds.Length > 0)
             {
-                // hopefully only one. but if more ... then deal with it.
-                memorySize = 0;
-                // These are Default to MB... if other ensure RASD is correct.
+                //The default memory unit is MB (2^20), however, the RASD may contain a different
+                //one with format Bytes*memoryBase^memoryPower (Bytes being a literal string)
+
                 double memoryPower = 20.0;
-                double memoryRaise = 2.0;
+                double memoryBase = 2.0;
                
                 foreach (RASD_Type rasd in rasds)
                 {
                     if (rasd.AllocationUnits.Value.ToLower().StartsWith("bytes"))
                     {
-                        // Format:  Bytes * 2 ^ 20
                         string[] a1 = rasd.AllocationUnits.Value.Split('*', '^');
                         if (a1.Length == 3)
                         {
-                            memoryRaise = Convert.ToDouble(a1[1]);
+                            memoryBase = Convert.ToDouble(a1[1]);
                             memoryPower = Convert.ToDouble(a1[2]);
                         }
                     }
-                    double memoryMultiplier = Math.Pow(memoryRaise,memoryPower);
+
+                    double memoryMultiplier = Math.Pow(memoryBase, memoryPower);
                     memorySize += rasd.VirtualQuantity.Value * Convert.ToUInt64(memoryMultiplier);
                 }
             }
+
+            ulong minimumMemory = 512 * Util.BINARY_MEGA; //default minimum
+
+            if (memorySize < minimumMemory)
+                memorySize = minimumMemory;
+            else if (memorySize > long.MaxValue)
+                memorySize = long.MaxValue;
+
             #endregion
 
             #region CPU COUNT
-            // Get Memory, huh? what? oh.. ya..
+
+            ulong cpuCount = 0;
             rasds = OVF.FindRasdByType(system, 3);
-            ulong CpuCount = 1;
+
             if (rasds != null && rasds.Length > 0)
             {
-                //
-                // Ok this can have more than one CPU and cores each so...
-                // Normally each entry is a CPU, the VirtualQuatity is Cores.
-                //
-                CpuCount = 0;
-                foreach (RASD_Type rasd in rasds)
-                {
-                    CpuCount += rasd.VirtualQuantity.Value;
-                }
-            }
-            #endregion
+                //There may be more than one entries corresponding to CPUs
+                //The VirtualQuantity in each one is Cores
 
-            var longMemorySize = memorySize > long.MaxValue ? 0 : (long)memorySize;
-            var longCpuCount = CpuCount > long.MaxValue ? 0 : (long)CpuCount;
+                foreach (RASD_Type rasd in rasds)
+                    cpuCount += rasd.VirtualQuantity.Value;
+            }
+
+            if (cpuCount < 1) //default minimum
+                cpuCount = 1;
+            else if (cpuCount > long.MaxValue) //unlikely, but better be safe
+                cpuCount = long.MaxValue;
+
+            #endregion
 
             VM newVm = new VM
             {
-                uuid = vmUuid,
-                name_label = vM_name_label,
+                name_label = vmName ?? Messages.UNDEFINED_NAME_LABEL,
                 name_description = description,
                 user_version = 1,
                 is_a_template = false,
                 is_a_snapshot = false,
-                memory_target = longMemorySize,
-                memory_static_max = longMemorySize,
-                memory_dynamic_max = longMemorySize,
-                memory_dynamic_min = longMemorySize,
-                memory_static_min = STATMEMMIN,
-                VCPUs_max = longCpuCount,
-                VCPUs_at_startup = longCpuCount,
+                memory_target = (long)memorySize,
+                memory_static_max = (long)memorySize,
+                memory_dynamic_max = (long)memorySize,
+                memory_dynamic_min = (long)memorySize,
+                memory_static_min = (long)memorySize,
+                VCPUs_max = (long)cpuCount,
+                VCPUs_at_startup = (long)cpuCount,
                 actions_after_shutdown = on_normal_exit.destroy,
                 actions_after_reboot = on_normal_exit.restart,
                 actions_after_crash = on_crash_behaviour.restart,
                 HVM_shadow_multiplier = 1.0,
-                ha_always_run = false
+                ha_always_run = false,
+                other_config = new Dictionary<string, string> {{"HideFromXenCenter", "true"}}
             };
+
+            //Note that the VM has to be created hidden.
+            //We'll make it visible in the end, after all the setup is done
 
             #region XEN SPECIFIC CONFIGURATION INFORMATION
 
@@ -833,12 +755,12 @@ namespace XenOvfTransport
                     switch (key.ToLower())
                     {
                         case "hvm_boot_params":
-	                        var xcsdValue = xcsd.Value.Value;
-							// Backward Compatibility
-							// Before this change, the string in xcsd.Value.Value is just a plain string.
-							// And now we would like to change it to support a dictionary string like "key1=value1;key2=value2"
-							// However, this logic should also work if a plain string is passed in from an old OVF file 
-							newVm.HVM_boot_params = xcsdValue.IndexOf('=') > -1 ? SplitStringIntoDictionary(xcsdValue) : new Dictionary<string, string> { { "order", xcsdValue } };
+                            var xcsdValue = xcsd.Value.Value;
+                            //In new OVFs the xcsd.Value.Value is a dictionary string like "key1=value1;key2=value2"
+                            //However, we want to be backwards compatible with old OVFs where it was a plain string
+                            newVm.HVM_boot_params = xcsdValue.IndexOf('=') > -1
+                                ? SplitStringIntoDictionary(xcsdValue)
+                                : new Dictionary<string, string> {{"order", xcsdValue}};
 							break;
                         case "platform":
                             newVm.platform = MakePlatformHash(xcsd.Value.Value);
@@ -847,8 +769,8 @@ namespace XenOvfTransport
 		                    newVm.NVRAM = SplitStringIntoDictionary(xcsd.Value.Value);
 		                    break;
                         case "vgpu":
-                            // Skip vGPUs here and do not put vGPUs into the hashtable,
-                            // as the vGPUs are updated in #region Set vgpu
+                            //Skip vGPUs here; we'll set them up after the VM is created
+                            //because we need the VM's opaque_ref for them
                             break;
                         default:
                             hashtable.Add(key, xcsd.Value.Value);
@@ -860,15 +782,36 @@ namespace XenOvfTransport
 
             #endregion
 
-            try
+            #region Set appliance
+
+            if (applRef != null)
+                newVm.appliance = applRef;
+
+            if (vmStartupSection != null)
             {
-                return VM.create(xenSession, newVm);                
+                newVm.start_delay = vmStartupSection.startDelay;
+                newVm.shutdown_delay = vmStartupSection.stopDelay;
+                newVm.order = vmStartupSection.order;
             }
-            catch (Exception ex)
+
+            #endregion
+
+            #region set has_vendor_device
+
+            if (Helpers.DundeeOrGreater(xenSession.Connection))
             {
-                log.Error("Failed to create a virtual machine (VM).", ex);
-                throw new Exception(Messages.ERROR_CREATE_VM_FAILED, ex);
+                var data = system.VirtualSystemOtherConfigurationData;
+                var datum = data?.FirstOrDefault(s => s.Name == "VM_has_vendor_device");
+                if (datum != null)
+                {
+                    if (bool.TryParse(datum.Value.Value, out var hasVendorDevice) && hasVendorDevice)
+                        newVm.has_vendor_device = hasVendorDevice;
+                }
             }
+
+            #endregion
+
+            return VM.create(xenSession, newVm);
         }
 
         public static Regex VGPU_REGEX = new Regex("^GPU_types={(.*)};VGPU_type_vendor_name=(.*);VGPU_type_model_name=(.*);$");
@@ -1625,6 +1568,7 @@ namespace XenOvfTransport
             }
             return usethisdevice;
         }
+
         private void SetDeviceConnections(EnvelopeType ovfEnv, VirtualHardwareSection_Type vhs)
         {
             int[] connections = new int[16];
@@ -1690,6 +1634,7 @@ namespace XenOvfTransport
                 }
             }
         }
+
         private int FindNextAvailable(int offset, int[] ids, int unusedkey)
         {
             int available = 0;
@@ -1704,6 +1649,7 @@ namespace XenOvfTransport
             }
             return available;
         }
+
         private List<RASD_Type> FindConnectedItems(string instanceId, RASD_Type[] rasds, string value22)
         {
             List<RASD_Type> connectedRasds = new List<RASD_Type>();
@@ -1759,6 +1705,7 @@ namespace XenOvfTransport
             connectedRasds.Sort(diskcomparison);
             return connectedRasds;
         }
+
         private void SetIfDeviceIsBootable(EnvelopeType ovfEnv, RASD_Type rasd)
         {
             // This is a best guess algorithm. without opening the VHD itself, there is no guarrenteed method
@@ -1864,11 +1811,7 @@ namespace XenOvfTransport
             }
             return false;
         }
-        
-        private void HideSystem(Session xenSession, XenRef<VM> vmRef)
-        {
-            VM.add_to_other_config(xenSession, vmRef, "HideFromXenCenter", "true");
-        }
+
         private void ShowSystem(Session xenSession, XenRef<VM> vmRef)
         {
             VM.remove_from_other_config(xenSession, vmRef, "HideFromXenCenter");
@@ -1904,6 +1847,7 @@ namespace XenOvfTransport
         {
             OnUpdate(new XenOvfTransportEventArgs(TransportStep.Download, downloadupdatemsg, (ulong)e.BytesReceived, (ulong)_filedownloadsize));
         }
+
         private void wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             if (e.Error != null)
@@ -1937,6 +1881,7 @@ namespace XenOvfTransport
                 return rasd1.ResourceType.Value.CompareTo(rasd2.ResourceType.Value);
             }
         }
+
         private static int compareConnectedDisks(RASD_Type rasd1, RASD_Type rasd2)
         {
             if (rasd1.AddressOnParent != null &&

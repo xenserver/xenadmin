@@ -235,7 +235,7 @@
     <value>Configuring virtual machine for the server ... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
-    <value>Imported.</value>
+    <value>Imported VM</value>
   </data>
   <data name="UNSUPPORTED_FILE_TYPE" xml:space="preserve">
     <value>File type {0} is not supported.</value>
