@@ -75,10 +75,10 @@ namespace XenAdmin.Actions.OVFActions
             InitialiseTicker();
 	    }
 
-		protected void UpdateHandler(XenOvfTransportEventArgs e)
+		protected void UpdateHandler(string message)
 		{
-			if (!string.IsNullOrEmpty(e.Message))
-				Description = e.Message;
+			if (!string.IsNullOrEmpty(message))
+				Description = message;
 		}
 
 		public override void RecomputeCanCancel()
@@ -105,7 +105,5 @@ namespace XenAdmin.Actions.OVFActions
                 Thread.Sleep(SLEEP_TIME);
 	        }
 	    }
-
-
-	}
+    }
 }

@@ -48,14 +48,14 @@ namespace XenOvfTransport
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static EnvelopeType _export(IXenConnection connection, string targetPath, string ovfname, VM vm, Action<XenOvfTransportEventArgs> OnUpdate, HTTP.FuncBool onCancel, bool verifyDisks, bool metaDataOnly = false)
+        public static EnvelopeType _export(IXenConnection connection, string targetPath, string ovfname, VM vm, Action<string> OnUpdate, HTTP.FuncBool onCancel, bool verifyDisks, bool metaDataOnly = false)
         {
                 log.DebugFormat("Export: {0}, {1}", ovfname, targetPath);
 
                 if (vm.power_state != vm_power_state.Halted && vm.power_state != vm_power_state.Suspended)
                 {
                 	var message = string.Format(Messages.ERROR_VM_NOT_HALTED, vm.Name());
-                	OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, message));
+                	OnUpdate(message);
                     log.Info($"VM {vm.Name()} ({vm.opaque_ref}) is neither halted nor suspended.");
                     throw new Exception(message);
                 }
@@ -164,12 +164,11 @@ namespace XenOvfTransport
 
                                 if (!metaDataOnly)
                                 {
-                                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export, string.Format(Messages.FILES_TRANSPORT_SETUP, diskFilename)));
+                                    OnUpdate(string.Format(Messages.FILES_TRANSPORT_SETUP, diskFilename));
 
                                     var taskRef = Task.create(connection.Session, "export_raw_vdi_task", "export_raw_vdi_task");
                                     HTTP_actions.get_export_raw_vdi(
-                                        b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Export,
-                                            $"Exporting {diskFilename} ({Util.DiskSizeString(b)} done")),
+                                        b => OnUpdate($"Exporting {diskFilename} ({Util.DiskSizeString(b)} done)"),
                                         onCancel, XenAdminConfigManager.Provider.GetProxyTimeout(true),
                                         connection.Hostname, XenAdminConfigManager.Provider.GetProxyFromSettings(connection),
                                         diskPath, taskRef, connection.Session.opaque_ref, vdi.uuid, "vhd");

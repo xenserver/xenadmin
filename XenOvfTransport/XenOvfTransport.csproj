@@ -63,7 +63,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="XenOvfTransportEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommandLib\CommandLib.csproj">

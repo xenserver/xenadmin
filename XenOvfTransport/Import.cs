@@ -58,7 +58,7 @@ namespace XenOvfTransport
 
 		#region PUBLIC
 
-        public static void Process(IXenConnection connection, EnvelopeType ovfObj, string pathToOvf, Action<XenOvfTransportEventArgs> OnUpdate, string passCode = null, string applianceName = null, bool metaDataOnly = false)
+        public static void Process(IXenConnection connection, EnvelopeType ovfObj, string pathToOvf, Action<string> OnUpdate, string passCode = null, string applianceName = null, bool metaDataOnly = false)
         {
             var xenSession = connection.Session;
             if (xenSession == null)
@@ -223,7 +223,7 @@ namespace XenOvfTransport
 
                     if (installSection != null && installSection.Length == 1)
                     {
-                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.START_POST_INSTALL_INSTRUCTIONS));
+                        OnUpdate(Messages.START_POST_INSTALL_INSTRUCTIONS);
                         HandleInstallSection(xenSession, vmRef, installSection[0]);
                     }
                     ShowSystem(xenSession, vmRef);
@@ -261,7 +261,7 @@ namespace XenOvfTransport
                 }
             }
 
-            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.COMPLETED_IMPORT));
+            OnUpdate(Messages.COMPLETED_IMPORT);
         }
 
     	#endregion
@@ -365,7 +365,7 @@ namespace XenOvfTransport
             }
         }
 
-        private static XenRef<VDI> ImportFile(Session xenSession, Action<XenOvfTransportEventArgs> OnUpdate, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid, string encryptionClass)
+        private static XenRef<VDI> ImportFile(Session xenSession, Action<string> OnUpdate, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid, string encryptionClass)
         {
             string sourcefile = filename;
             string encryptfilename = null;
@@ -392,12 +392,12 @@ namespace XenOvfTransport
                         if (passcode != null)
                         {
                             var statusMessage = string.Format(Messages.START_FILE_DECRYPTION, filename);
-                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Security, statusMessage));
+                            OnUpdate(statusMessage);
                             log.Debug($"Decrypting {filename}");
                             OVF.DecryptToTempFile(encryptionClass, filename, version, passcode, encryptfilename);
                             sourcefile = encryptfilename;
                             statusMessage += Messages.COMPLETE;
-                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Security, statusMessage));
+                            OnUpdate(statusMessage);
                         }
                         #endregion 
 
@@ -417,13 +417,13 @@ namespace XenOvfTransport
                                 ext = Path.GetExtension(uncompressedfilename);
                             }
                             var statusMessage = string.Format(Messages.START_FILE_EXPANSION, filename);
-                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Compression, statusMessage));
+                            OnUpdate(statusMessage);
                         	var ovfCompressor = new OvfCompressor();
 							ovfCompressor.UncompressFile(sourcefile, uncompressedfilename, compression);
                             if (File.Exists(encryptfilename)) { File.Delete(encryptfilename); }
                             sourcefile = uncompressedfilename;
                             statusMessage += Messages.COMPLETE;
-                            OnUpdate(new XenOvfTransportEventArgs(TransportStep.Compression, statusMessage));
+                            OnUpdate(statusMessage);
                         }
                         #endregion
 
@@ -536,8 +536,7 @@ namespace XenOvfTransport
 
                 using (Stream outStream = HTTPHelper.PUT(uriBuilder.Uri, dataStream.Length, true))
                     HTTP.CopyStream(dataStream, outStream,
-                        b => OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import,
-                            $"Importing disk {filename} ({Util.DiskSizeString(b)} of {Util.DiskSizeString(dataCapacity)} done)")),
+                        b => OnUpdate($"Importing disk {filename} ({Util.DiskSizeString(b)} of {Util.DiskSizeString(dataCapacity)} done)"),
                         () => XenAdminConfigManager.Provider.ForcedExiting);
                 #endregion
 
@@ -884,7 +883,7 @@ namespace XenOvfTransport
             return hPlatform;
         }
 
-        private static void AddResourceSettingData(Session xenSession, Action<XenOvfTransportEventArgs> OnUpdate, XenRef<VM> vmRef, RASD_Type rasd, string pathToOvf, string filename, string compression, string version, string passcode, bool metaDataOnly, string encryptionClass, ref int vifDeviceIndex)
+        private static void AddResourceSettingData(Session xenSession, Action<string> OnUpdate, XenRef<VM> vmRef, RASD_Type rasd, string pathToOvf, string filename, string compression, string version, string passcode, bool metaDataOnly, string encryptionClass, ref int vifDeviceIndex)
         {
             switch (rasd.ResourceType.Value)
             {
@@ -1234,15 +1233,14 @@ namespace XenOvfTransport
                                         "Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +." +
                                         "Import:  ===========================================================", vmRef);
 
-                                    OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.WARNING_ADMIN_REQUIRED));
+                                    OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
                                 }
                             }
                             #endregion
 
                         }
                         #endregion
-                        OnUpdate(new XenOvfTransportEventArgs(TransportStep.CdDvdDrive,
-							string.Format(Messages.DEVICE_ATTACHED, Messages.CD_DVD_DEVICE)));
+                        OnUpdate(string.Format(Messages.DEVICE_ATTACHED, Messages.CD_DVD_DEVICE));
                         log.Debug("Import.AddResourceSettingData: CD/DVD ROM Added");
 
                         break;
@@ -1474,7 +1472,7 @@ namespace XenOvfTransport
                                     "Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}" +
                                     "Import:  ===========================================================",
                                     vmName);
-                                OnUpdate(new XenOvfTransportEventArgs(TransportStep.Import, Messages.WARNING_ADMIN_REQUIRED));
+                                OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
                             }
                         }
 
