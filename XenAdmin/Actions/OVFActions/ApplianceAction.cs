@@ -39,8 +39,6 @@ namespace XenAdmin.Actions.OVFActions
 {
 	public abstract class ApplianceAction : AsyncAction
 	{
-        protected abstract XenOvfTransportBase TransportAction { get; }
-
         private const int SLEEP_TIME = 900;
         private const int MAX_ITERATIONS = 60 * 60 * 24 / SLEEP_TIME * 1000; //iterations in 24h
 
@@ -91,14 +89,11 @@ namespace XenAdmin.Actions.OVFActions
 		protected override void CancelRelatedTask()
 		{
 			Description = Messages.CANCELING;
-
-            if (TransportAction != null)
-                TransportAction.Cancel = true;
 		}
 
 	    private void InitialiseTicker()
 	    {
-	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion());
+	        System.Threading.Tasks.Task.Run(TickUntilCompletion);
 	    }
 
 	    private void TickUntilCompletion()

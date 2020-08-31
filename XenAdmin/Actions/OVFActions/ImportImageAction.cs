@@ -53,7 +53,6 @@ namespace XenAdmin.Actions.OVFActions
 		private readonly bool m_runfixups;
 		private readonly SR m_selectedIsoSr;
 		private readonly string m_directory;
-        private Import m_transportAction;
 
 		#endregion
 
@@ -67,8 +66,6 @@ namespace XenAdmin.Actions.OVFActions
 			m_selectedIsoSr = selectedIsoSr;
 		}
 
-        protected override XenOvfTransportBase TransportAction => m_transportAction;
-
 		protected override void Run()
 		{
 		    base.Run();
@@ -77,8 +74,6 @@ namespace XenAdmin.Actions.OVFActions
 
 			string systemid = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);
-
-			var session = Connection.Session;
 
 			PercentComplete = 20;
 			Description = Messages.IMPORTING_DISK_IMAGE;
@@ -103,12 +98,7 @@ namespace XenAdmin.Actions.OVFActions
 
 			try //importVM
 			{
-				m_transportAction = new Import(session)
-				                    	{
-				                    		UpdateHandler = UpdateHandler,
-											Cancel = Cancelling //in case the Cancel button has already been pressed
-				                    	};
-                m_transportAction.Process(curEnv, m_directory, null);
+                Import.Process(Connection, curEnv, m_directory, UpdateHandler);
 
 				PercentComplete = 100;
 				Description = Messages.COMPLETED;

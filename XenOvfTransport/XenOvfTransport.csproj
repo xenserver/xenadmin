@@ -63,7 +63,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="XenOvfTransportBase.cs" />
     <Compile Include="XenOvfTransportEvent.cs" />
   </ItemGroup>
   <ItemGroup>
