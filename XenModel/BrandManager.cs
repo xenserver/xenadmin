@@ -73,6 +73,7 @@ namespace XenAdmin.Core
         public const string XENCENTER_VERSION = "[BRANDING_PRODUCT_VERSION]";
         public const string COMPANY_NAME_LEGAL = "[BRANDING_COMPANY_NAME_LEGAL]";
         public const string BRAND_CONSOLE = "[XenCenter]";
+        public const string VM_TOOLS = "[Citrix VM Tools]";
 
         /// <summary>
         /// Returns null if no match is found.

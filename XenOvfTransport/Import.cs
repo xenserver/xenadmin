@@ -287,7 +287,7 @@ namespace XenOvfTransport
                 VM.hard_shutdown(xenSession, vm);
 
             while (VM.get_power_state(xenSession, vm) != vm_power_state.Halted)
-                Thread.Sleep(Properties.Settings.Default.FixupPollTimeAsMs);
+                Thread.Sleep(1000);
 
             // Save its original memory configuration.
             long staticMemoryMin  = VM.get_memory_static_min(xenSession, vm);
@@ -296,12 +296,12 @@ namespace XenOvfTransport
             long dynamicMemoryMax = VM.get_memory_dynamic_max(xenSession, vm);
 
             // Minimize the memory capacity for the fixup OS.
-            long fixupMemorySize = Properties.Settings.Default.FixupOsMemorySizeAsMB * Util.BINARY_MEGA;
+            long fixupMemorySize = 256 * Util.BINARY_MEGA;
 
             VM.set_memory_limits(xenSession, vm, fixupMemorySize, fixupMemorySize, fixupMemorySize, fixupMemorySize);
 
             // Run the fixup OS on the VM.
-            InstallSectionStartVirtualMachine(xenSession, vm, Properties.Settings.Default.FixupDurationAsSeconds);
+            InstallSectionStartVirtualMachine(xenSession, vm, 600);
 
             // Restore the original memory configuration.
             VM.set_memory_limits(xenSession, vm, staticMemoryMin, staticMemoryMax, dynamicMemoryMin, dynamicMemoryMax);
@@ -336,7 +336,7 @@ namespace XenOvfTransport
 
             // Wait for it to start.
             while (VM.get_power_state(xenSession, vm) != vm_power_state.Running)
-                Thread.Sleep(Properties.Settings.Default.FixupPollTimeAsMs);
+                Thread.Sleep(1000);
 
             // Let it run for the requested duration.
             int bootStopDelayAsMs = initialBootStopDelayAsSeconds * 1000;
@@ -344,8 +344,8 @@ namespace XenOvfTransport
 
             while (VM.get_power_state(xenSession, vm) == vm_power_state.Running)
             {
-                Thread.Sleep(Properties.Settings.Default.FixupPollTimeAsMs);
-                msRunning += Properties.Settings.Default.FixupPollTimeAsMs;
+                Thread.Sleep(1000);
+                msRunning += 1000;
 
                 if (msRunning > bootStopDelayAsMs)
                     break;
@@ -698,9 +698,10 @@ namespace XenOvfTransport
             if (system.VirtualSystemOtherConfigurationData == null || system.VirtualSystemOtherConfigurationData.Length <= 0)
             {
                 // DEFAULT should work for all of HVM type or 301
-                newVm.HVM_boot_policy = Properties.Settings.Default.xenBootOptions;
-                newVm.HVM_boot_params = SplitStringIntoDictionary(Properties.Settings.Default.xenBootParams);
-				newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
+                newVm.HVM_boot_policy = "BIOS order";
+                newVm.HVM_boot_params = new Dictionary<string, string> {{"order", "dc"}};
+                newVm.platform = new Dictionary<string, string>
+                    {{"nx", "true"}, {"acpi", "true"}, {"apic", "true"}, {"pae", "true"}, {"stdvga", "0"}};
             }
             else
             {
@@ -719,7 +720,9 @@ namespace XenOvfTransport
                                 : new Dictionary<string, string> {{"order", xcsdValue}};
 							break;
                         case "platform":
-                            newVm.platform = MakePlatformHash(xcsd.Value.Value);
+                            newVm.platform = SplitStringIntoDictionary(xcsd.Value.Value);
+                            if (!newVm.platform.ContainsKey("nx"))
+                                newVm.platform.Add("nx", "true");
                             break;
 	                    case "nvram":
 		                    newVm.NVRAM = SplitStringIntoDictionary(xcsd.Value.Value);
@@ -872,17 +875,6 @@ namespace XenOvfTransport
 				.ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
         }
 
-        private static Dictionary<string, string> MakePlatformHash(string platform)
-        {
-            var hPlatform = SplitStringIntoDictionary(platform);
-
-            // Handle the case when NX isn't in the platform string.
-            if (!hPlatform.ContainsKey("nx"))
-                hPlatform.Add("nx", "true");
-
-            return hPlatform;
-        }
-
         private static void AddResourceSettingData(Session xenSession, Action<string> OnUpdate, XenRef<VM> vmRef, RASD_Type rasd, string pathToOvf, string filename, string compression, string version, string passcode, bool metaDataOnly, string encryptionClass, ref int vifDeviceIndex)
         {
             switch (rasd.ResourceType.Value)
@@ -925,14 +917,13 @@ namespace XenOvfTransport
                                 // During Network Selection the UUID for Network was set in Connection Field
                                 // Makes data self contained here.
 
-                                if (rasd.Connection[0].Value.Contains(Properties.Settings.Default.xenNetworkKey) ||
-                                    rasd.Connection[0].Value.Contains(Properties.Settings.Default.xenNetworkUuidKey))
+                                if (rasd.Connection[0].Value.Contains("network=") ||
+                                    rasd.Connection[0].Value.Contains("XenNetwork="))
                                 {
                                     string[] s = rasd.Connection[0].Value.Split(',');
                                     for (int i = 0; i < s.Length; i++)
                                     {
-                                        if (s[i].StartsWith(Properties.Settings.Default.xenNetworkKey) ||
-                                            s[i].StartsWith(Properties.Settings.Default.xenNetworkUuidKey))
+                                        if (s[i].StartsWith("network=") || s[i].StartsWith("XenNetwork="))
                                         {
                                             string[] s1 = s[i].Split('=');
                                             netuuid = s1[1];
@@ -960,7 +951,7 @@ namespace XenOvfTransport
                                         net = netRef;
                                     }
                                     // ok find the default.
-                                    if (networks[netRef].bridge.ToLower().Contains(Properties.Settings.Default.xenDefaultNetwork))
+                                    if (networks[netRef].bridge.ToLower().Contains("xenbr0"))
                                     {
                                         netDefault = netRef;
                                     }
@@ -1112,7 +1103,7 @@ namespace XenOvfTransport
                                         {
                                             if (srDictionary[key].content_type.ToLower() == "iso" && srDictionary[key].type.ToLower() == "iso")
                                             {
-                                                if (srDictionary[key].name_label.ToLower().Equals(Properties.Settings.Default.xenTools.ToLower()))
+                                                if (srDictionary[key].name_label.ToLower().Equals(BrandManager.VM_TOOLS))
                                                 {
                                                     isoUuid = srDictionary[key].uuid;
                                                     break;
