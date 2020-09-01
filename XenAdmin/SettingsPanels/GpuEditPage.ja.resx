@@ -225,27 +225,6 @@
   <data name="VGPUsPerGPUColumn.Width" type="System.Int32, mscorlib">
     <value>154</value>
   </data>
-  <metadata name="MaxResolutionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MaxResolutionColumn.HeaderText" xml:space="preserve">
-    <value>最大解像度</value>
-  </data>
-  <data name="MaxResolutionColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="MaxResolutionColumn.Width" type="System.Int32, mscorlib">
-    <value>113</value>
-  </data>
-  <metadata name="MaxDisplaysColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MaxDisplaysColumn.HeaderText" xml:space="preserve">
-    <value>最大ディスプレイ</value>
-  </data>
-  <data name="MaxDisplaysColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
   <metadata name="VideoRAMColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -345,11 +324,11 @@
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="addButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="gpuGrid" Row="1" RowSpan="2" Column="0" ColumnSpan="1" />&lt;Control Name="warningsTable" Row="3" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="deleteButton" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,172,Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
-  <data name="labelMulti.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelMulti.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelMulti.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelMulti.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -450,11 +429,11 @@
   <data name="&gt;&gt;imgRDP.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="labelRDP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelRDP.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelRDP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelRDP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -519,11 +498,11 @@
   <data name="&gt;&gt;imgNeedDriver.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="labelNeedDriver.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelNeedDriver.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelNeedDriver.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelNeedDriver.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -532,7 +511,10 @@
     <value>25, 50</value>
   </data>
   <data name="labelNeedDriver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelNeedDriver.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>590, 9999</value>
   </data>
   <data name="labelNeedDriver.Size" type="System.Drawing.Size, System.Drawing">
     <value>818, 17</value>
@@ -588,11 +570,11 @@
   <data name="&gt;&gt;imgNeedGpu.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="labelNeedGpu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelNeedGpu.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelNeedGpu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -602,6 +584,9 @@
   </data>
   <data name="labelNeedGpu.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelNeedGpu.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>590, 9999</value>
   </data>
   <data name="labelNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
     <value>818, 17</value>
@@ -660,11 +645,11 @@
   <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="labelStopVM.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelStopVM.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelStopVM.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -735,11 +720,11 @@
   <data name="&gt;&gt;imgHA.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="labelHA.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelHA.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelHA.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelHA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -801,17 +786,20 @@
   <data name="&gt;&gt;imgExperimental.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="labelExperimental.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="labelExperimental.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelExperimental.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="labelExperimental.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 3</value>
   </data>
   <data name="labelExperimental.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelExperimental.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>590, 9999</value>
   </data>
   <data name="labelExperimental.Size" type="System.Drawing.Size, System.Drawing">
     <value>818, 17</value>
@@ -876,9 +864,6 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>120, 120</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>856, 562</value>
   </data>
@@ -898,18 +883,6 @@
     <value>VGPUsPerGPUColumn</value>
   </data>
   <data name="&gt;&gt;VGPUsPerGPUColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MaxResolutionColumn.Name" xml:space="preserve">
-    <value>MaxResolutionColumn</value>
-  </data>
-  <data name="&gt;&gt;MaxResolutionColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MaxDisplaysColumn.Name" xml:space="preserve">
-    <value>MaxDisplaysColumn</value>
-  </data>
-  <data name="&gt;&gt;MaxDisplaysColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;VideoRAMColumn.Name" xml:space="preserve">

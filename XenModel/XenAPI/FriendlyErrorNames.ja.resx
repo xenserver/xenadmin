@@ -553,7 +553,7 @@
     <value>サーバーがまだ起動中です。</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>マスターがサーバーを識別できません。マスターのデータベースからこのサーバーが削除されている可能性があります。</value>
+    <value>マスターがサーバーを認識できません。このサーバーがマスターのデータベースにあり、正しいマスターをポイントしていること、すべてのサーバーが同じプール シークレットを使用していることを確認してください。</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>指定した VBD デバイスが認識されません。正の整数を指定してください。</value>
