@@ -142,7 +142,7 @@
     <value>0</value>
   </data>
   <data name="labelMessage.Text" xml:space="preserve">
-    <value>Fill in this message informing the user what they are about to do</value>
+    <value>ユーザーが実行しようとしていることを通知するメッセージを入力する</value>
   </data>
   <data name="&gt;&gt;labelMessage.Name" xml:space="preserve">
     <value>labelMessage</value>

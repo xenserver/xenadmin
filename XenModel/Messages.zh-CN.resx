@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -618,10 +618,10 @@
   <data name="ACTION_MIGRATING_X_VDIS_STARTED" xml:space="preserve">
     <value>已开始迁移虚拟磁盘</value>
   </data>
-  <data name="ACTION_MOVING_VDI_STATUS" xml:space="preserve">
+  <data name="ACTION_MOVING_VDI" xml:space="preserve">
     <value>正在移动虚拟磁盘“{0}”...</value>
   </data>
-  <data name="ACTION_MOVING_VDI_TITLE" xml:space="preserve">
+  <data name="ACTION_MOVING_VDI_TO_SR" xml:space="preserve">
     <value>正在将虚拟磁盘“{0}”移至 SR“{1}”</value>
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
@@ -1183,10 +1183,13 @@
     <value>正在迁移 VM“{0}”</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
-    <value>正在将 VM 迁移至新存储...</value>
+    <value>将 VM“{0}”移动到新存储</value>
   </data>
   <data name="ACTION_VM_MOVING_TITLE" xml:space="preserve">
     <value>正在将 VM“{0}”迁移至 SR“{2}”上的“{1}”</value>
+  </data>
+  <data name="ACTION_VM_MOVING_VDI_DESTROY_FAILURE" xml:space="preserve">
+    <value>无法完成将 VM“{0}”移动到新存储的操作。有关详细信息，请参阅日志。</value>
   </data>
   <data name="ACTION_VM_REBOOTED" xml:space="preserve">
     <value>已重新启动</value>
@@ -1542,10 +1545,10 @@
     <value>正在“{0}”上的 Active Directory ACL 中添加/删除用户</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES" xml:space="preserve">
-    <value>正在使用者中添加/删除角色</value>
+    <value>将新角色分配给使用者</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES_ON" xml:space="preserve">
-    <value>正在使用者“{0}”中添加/删除角色</value>
+    <value>将新角色分配给使用者“{0}”</value>
   </data>
   <data name="AD_ALWAYS_GRANTED_ACCESS" xml:space="preserve">
     <value>(始终授予访问权限)</value>
@@ -2595,9 +2598,6 @@
   </data>
   <data name="CHANGEPASS_DIALOG_TITLE" xml:space="preserve">
     <value>更改服务器密码 - {0}</value>
-  </data>
-  <data name="CHANGEPASS_ROOT_PASS" xml:space="preserve">
-    <value>请键入 {0} 的 root 用户密码:</value>
   </data>
   <data name="CHANGE_POLICY_STATUS" xml:space="preserve">
     <value>更改策略“{0}”状态</value>
@@ -4277,7 +4277,7 @@
     <value>是否确实要删除 {0}? 此操作无法撤消。</value>
   </data>
   <data name="DELETE_MESSAGE_RBAC_BLOCKED" xml:space="preserve">
-    <value>剩余的警报您都无权消除。</value>
+    <value>您无权消除所选警报。</value>
   </data>
   <data name="DELETE_PATCH" xml:space="preserve">
     <value>删除修补程序</value>
@@ -4430,16 +4430,12 @@
     <value>无可用设备</value>
   </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
-    <value>禁用直通功能</value>
+    <value>是否确实要在此设备上禁用直通功能? 不再允许将此设备传递到虚拟机。</value>
   </data>
   <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
-    <value>启用直通功能</value>
-  </data>
-  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
-    <value>是否确实要在此设备上启用直通功能? 这允许您将此设备传递到虚拟机。</value>
-  </data>
-  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
-    <value>是否确实要在此设备上禁用直通功能? 不再允许将此设备传递到虚拟机。</value>
+    <value>是否确实要在此设备上启用直通功能? 这允许您将此设备传递到虚拟机。
+
+将不受信任的 USB 设备插入到您的计算机可能会使计算机面临风险。应仅将具有可修改行为的 USB 设备分配给受信任的来宾 VM。</value>
   </data>
   <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
     <value>是，禁用直通功能(&amp;Y)</value>
@@ -5302,9 +5298,6 @@
   </data>
   <data name="ENTER_MAINTENANCE_MODE_CONTEXT_MENU" xml:space="preserve">
     <value>进入维护模式(&amp;E)...</value>
-  </data>
-  <data name="ENTER_MASTER_PASSWORD_TO_ACCESS_SETTINGS_TT" xml:space="preserve">
-    <value>要访问保存的会话，需要在启动 [XenCenter] 时输入主密码</value>
   </data>
   <data name="ENTER_VALID_QOS" xml:space="preserve">
     <value>QoS 限制值应为大于零的整数</value>
@@ -6830,9 +6823,6 @@
   <data name="HOST_REBOOTING" xml:space="preserve">
     <value>正在重新启动服务器</value>
   </data>
-  <data name="HOST_REBOOT_REQUIRED" xml:space="preserve">
-    <value>必须重新启动服务器“{0}”以完成还原进程。</value>
-  </data>
   <data name="HOST_REMOVED_MANY_CRASHDUMPS" xml:space="preserve">
     <value>已从 {1} 中删除 {0} 个故障转储</value>
   </data>
@@ -7927,9 +7917,6 @@ SCSI ID: {2}
   <data name="MAINWINDOW_CTRL_R" xml:space="preserve">
     <value>Ctrl+R</value>
   </data>
-  <data name="MAINWINDOW_CTRL_S" xml:space="preserve">
-    <value>Ctrl+S</value>
-  </data>
   <data name="MAINWINDOW_CTRL_Y" xml:space="preserve">
     <value>Ctrl+Y</value>
   </data>
@@ -8087,7 +8074,7 @@ SCSI ID: {2}
     <value>删除故障转储文件(&amp;F)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS_CONTEXT_MENU" xml:space="preserve">
-    <value>删除故障转储文件(&amp;F)</value>
+    <value>删除故障转储文件(&amp;L)</value>
   </data>
   <data name="MAINWINDOW_RENAME_TAG" xml:space="preserve">
     <value>重命名标记(&amp;R)...</value>
@@ -8112,9 +8099,6 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_RESUME_ON_HOST" xml:space="preserve">
     <value>在服务器上恢复(&amp;V)</value>
-  </data>
-  <data name="MAINWINDOW_SAVE_AND_RESTORE" xml:space="preserve">
-    <value>保存并还原(&amp;V)...</value>
   </data>
   <data name="MAINWINDOW_SET_AS_DEFAULT_SR" xml:space="preserve">
     <value>设为默认值(&amp;T)</value>
@@ -8528,10 +8512,7 @@ SCSI ID: {2}
     <value>更多信息...</value>
   </data>
   <data name="MOVED" xml:space="preserve">
-    <value>已移动</value>
-  </data>
-  <data name="MOVE_CANCELLED" xml:space="preserve">
-    <value>已取消移动 {0}</value>
+    <value>移动已完成。</value>
   </data>
   <data name="MOVE_OBJECTS_TO_FOLDER" xml:space="preserve">
     <value>将所选对象移动到文件夹“{0}”...</value>
@@ -10858,28 +10839,32 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="QUERY_PERCENT_OF_CPUS" xml:space="preserve">
     <value>{1} 个 CPU 的 {0}%</value>
   </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_ADVISORY" xml:space="preserve">
+    <value>为了降低未经授权访问系统的风险，建议您同时更改服务器 root 用户密码并轮换池密码。</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_MANY" xml:space="preserve">
+    <value>您将要删除的用户是池管理员。</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_ONE" xml:space="preserve">
+    <value>您将要删除的用户是池管理员。</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_ONE_OF_MANY" xml:space="preserve">
+    <value>您将要删除的其中一个用户是池管理员。</value>
+  </data>
+  <data name="QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY" xml:space="preserve">
+    <value>您将要删除的用户中有 {0} 个是池管理员。</value>
+  </data>
   <data name="QUESTION_LOGOUT_AD_USER_MANY" xml:space="preserve">
-    <value>您将注销 {0} 个用户。
-
-是否要继续?</value>
+    <value>是否确实要注销这 {0} 个用户?</value>
   </data>
   <data name="QUESTION_LOGOUT_AD_USER_ONE" xml:space="preserve">
-    <value>您将注销用户 {0}。
-
-是否要继续?</value>
-  </data>
-  <data name="QUESTION_MARK" xml:space="preserve">
-    <value>?</value>
+    <value>是否确实要注销用户“{0}”?</value>
   </data>
   <data name="QUESTION_REMOVE_AD_USER_MANY" xml:space="preserve">
-    <value>您将删除 {0} 个用户。
-
-是否要继续?</value>
+    <value>是否确实要删除这 {0} 个用户?</value>
   </data>
   <data name="QUESTION_REMOVE_AD_USER_ONE" xml:space="preserve">
-    <value>您将删除用户 {0}。
-
-是否要继续?</value>
+    <value>是否确实要删除用户“{0}”?</value>
   </data>
   <data name="QUIESCED_SNAPSHOTS" xml:space="preserve">
     <value>静止快照</value>
@@ -11056,6 +11041,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 单击“服务器状态报告”以打开“编译服务器状态报告向导”，或单击“删除文件”以删除故障转储文件而不进行编译。
 </value>
+  </data>
+  <data name="REMOVE_FILES" xml:space="preserve">
+    <value>删除文件(&amp;R)</value>
   </data>
   <data name="REMOVE_FROM_FOLDER" xml:space="preserve">
     <value>从文件夹删除(&amp;F)</value>
@@ -11391,6 +11379,26 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="ROLLING_UPGRADE_WARNING_ONE" xml:space="preserve">
     <value>滚动池升级过程已完成，但出现警告。</value>
   </data>
+  <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
+    <value>当高可用性功能处于打开状态时，您将无法轮换池密码。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
+    <value>轮换池密码(&amp;P)</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_RBAC_RESTRICTION" xml:space="preserve">
+    <value>{0} 用户的权限不足，无法轮换池密码。请使用具有以下角色之一的帐户登录:
+
+{1}</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_REMIND_CHANGE_PASSWORD" xml:space="preserve">
+    <value>为了降低未经授权访问系统的风险，建议您同时更改服务器 root 用户密码。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_RPU" xml:space="preserve">
+    <value>正在进行滚动池升级时，不能轮换池密码。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_TITLE" xml:space="preserve">
+    <value>轮换池密码</value>
+  </data>
   <data name="RPU_WIZARD_ERROR_SKIP_MSG" xml:space="preserve">
     <value>可能已跳过 {0}。</value>
   </data>
@@ -11596,7 +11604,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>服务器端修补程序检查</value>
   </data>
   <data name="SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>服务器状态报告</value>
+    <value>服务器状态报告(&amp;S)</value>
   </data>
   <data name="SERVER_STATUS_REPORT_CAPABILITIES_FAILED" xml:space="preserve">
     <value>所选服务器在请求容量时失败。请选择其他服务器。</value>
@@ -11849,9 +11857,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>快照还原</value>
   </data>
   <data name="SNAPSHOT_REVERT_BLURB" xml:space="preserve">
-    <value>是否确实要还原到“{0}”?
+    <value>是否确实要还原为“{0}”?
 
-还原到此快照时，VM 将还原回创建快照时的时间点，VM 的当前状态将丢失。</value>
+还原为此快照会将 VM 还原回创建该快照的时间点，并且 VM 的当前状态将丢失。</value>
   </data>
   <data name="SNAPSHOT_REVERT_NEW_SNAPSHOT" xml:space="preserve">
     <value>生成 VM 当前状态的快照，然后还原(&amp;T)</value>
@@ -11902,7 +11910,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>使用权限更大的用户帐户重试。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>遇到一些错误。有关详细信息，请参阅 [XenCenter] 日志。</value>
@@ -12527,7 +12535,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>从 OVF 或 OVA 包导入设备。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>将本地存储的 VM、模板或快照作为新 VM 导入。</value>
@@ -13160,7 +13168,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>GHz</value>
   </data>
   <data name="VAL_GIGRATE" xml:space="preserve">
-    <value>GB/s</value>
+    <value>GB/秒</value>
   </data>
   <data name="VAL_KB" xml:space="preserve">
     <value>{0} KB</value>
@@ -13172,7 +13180,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>kW</value>
   </data>
   <data name="VAL_KILRATE" xml:space="preserve">
-    <value>kB/s</value>
+    <value>kB/秒</value>
   </data>
   <data name="VAL_MB" xml:space="preserve">
     <value>{0} MB</value>
@@ -13184,7 +13192,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>MHz</value>
   </data>
   <data name="VAL_MEGRATE" xml:space="preserve">
-    <value>MB/s</value>
+    <value>MB/秒</value>
   </data>
   <data name="VAL_MICSEC" xml:space="preserve">
     <value>μs</value>
@@ -13202,7 +13210,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>ns</value>
   </data>
   <data name="VAL_RATE" xml:space="preserve">
-    <value>B/s</value>
+    <value>B/秒</value>
   </data>
   <data name="VAL_RATE_NUM_FORMAT" xml:space="preserve">
     <value>0.0</value>
@@ -13214,7 +13222,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>TB</value>
   </data>
   <data name="VAL_TERRATE" xml:space="preserve">
-    <value>TB/s</value>
+    <value>TB/秒</value>
   </data>
   <data name="VAL_WATT" xml:space="preserve">
     <value>W</value>
@@ -13280,29 +13288,14 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>[XenCenter] {0} (build {1}.{2}) {3} 位</value>
   </data>
-  <data name="VGPU_DESCRIPTION_MANY" xml:space="preserve">
-    <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
-  </data>
-  <data name="VGPU_DESCRIPTION_MANY_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
-    <value>{0} 虚拟 GPU (每个 GPU {1}，{2}，{3} 个显示器，支持多 vGPU)</value>
-  </data>
-  <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
-    <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
-  </data>
-  <data name="VGPU_DESCRIPTION_ONE_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
-    <value>{0} 虚拟 GPU (每个 GPU {1}，{2}，{3} 个显示器，支持多 vGPU)</value>
-  </data>
-  <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
+  <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1} 个)</value>
   </data>
-  <data name="VGPU_DESCRIPTION_ZEROES_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
+  <data name="VGPU_DESCRIPTION_MULTIPLE_VGPU_SUPPORT" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1}，支持多 vGPU)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>在整个 GPU 中直通</value>
-  </data>
-  <data name="VGPU_TOSTRING" xml:space="preserve">
-    <value>{0} 虚拟 GPU (每个 GPU {1} 个)</value>
   </data>
   <data name="VIEW_FOLDER_MENU_OPTION" xml:space="preserve">
     <value>查看文件夹...</value>
@@ -13354,6 +13347,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED" xml:space="preserve">
     <value>已安装管理代理</value>
+  </data>
+  <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_INSTALLED_ONLY" xml:space="preserve">
+    <value>仅安装管理代理</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED" xml:space="preserve">
     <value>未安装管理代理</value>
@@ -13885,7 +13881,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>高级</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大值</value>
@@ -13943,9 +13939,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>是否确实要为池“{0}”禁用 Workload Balancing?</value>
   </data>
   <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
-    <value>是否要与此池中的 Workload Balancing 服务器断开连接?
+    <value>是否确实要断开 Workload Balancing 与此池的连接?
 
-如果断开连接，则将停止此资源池的所有 Workload Balancing 操作，并从 Workload Balancing 数据库中删除与此池有关的所有信息。</value>
+断开连接将停止此资源池的所有 Workload Balancing 操作，并从 Workload Balancing 数据库中删除有关此池的所有信息。</value>
   </data>
   <data name="WLB_ENABLED" xml:space="preserve">
     <value>已启用</value>

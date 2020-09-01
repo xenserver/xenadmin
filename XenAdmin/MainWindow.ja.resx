@@ -2040,6 +2040,12 @@
   <data name="changePoolPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>サーバー パスワードの変更(&amp;W)...</value>
   </data>
+  <data name="toolStripMenuItemRotateSecret.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="toolStripMenuItemRotateSecret.Text" xml:space="preserve">
+    <value>プール シークレットの入れ替え(&amp;P)</value>
+  </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
   </data>
@@ -3411,6 +3417,12 @@
   <data name="&gt;&gt;toolStripSeparator23.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Name" xml:space="preserve">
+    <value>toolStripMenuItemInstallCertificate</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;maintenanceModeToolStripMenuItem1.Name" xml:space="preserve">
     <value>maintenanceModeToolStripMenuItem1</value>
   </data>
@@ -3975,23 +3987,17 @@
   <data name="&gt;&gt;securityGroupsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;statusLabel.Name" xml:space="preserve">
-    <value>statusLabel</value>
-  </data>
-  <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;statusProgressBar.Name" xml:space="preserve">
     <value>statusProgressBar</value>
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Name" xml:space="preserve">
-    <value>toolStripMenuItemInstallCertificate</value>
+  <data name="&gt;&gt;statusLabel.Name" xml:space="preserve">
+    <value>statusLabel</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
     <value>statusLabelAlerts</value>
@@ -4010,6 +4016,12 @@
   </data>
   <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
+    <value>toolStripMenuItemRotateSecret</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>
