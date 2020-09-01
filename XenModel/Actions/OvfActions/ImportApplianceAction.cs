@@ -35,13 +35,12 @@ using System.IO;
 using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
-
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
-using XenOvfTransport;
 
-namespace XenAdmin.Actions.OVFActions
+
+namespace XenAdmin.Actions.OvfActions
 {
 	public class ImportApplianceAction : ApplianceAction
 	{

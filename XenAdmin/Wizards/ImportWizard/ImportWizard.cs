@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using XenAdmin.Actions;
-using XenAdmin.Actions.OVFActions;
+using XenAdmin.Actions.OvfActions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Mappings;

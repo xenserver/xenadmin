@@ -40,7 +40,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 
 using DiscUtils;
-using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -50,7 +49,7 @@ using XenOvf.Definitions.XENC;
 using XenOvf.Utilities;
 
 
-namespace XenOvfTransport
+namespace XenAdmin.Actions.OvfActions
 {
     public class Import
     {
@@ -61,8 +60,6 @@ namespace XenOvfTransport
         public static void Process(IXenConnection connection, EnvelopeType ovfObj, string pathToOvf, Action<string> OnUpdate, string passCode = null, string applianceName = null, bool metaDataOnly = false)
         {
             var xenSession = connection.Session;
-            if (xenSession == null)
-                throw new InvalidOperationException(Messages.ERROR_NOT_CONNECTED);
 
             int vifDeviceIndex = 0;
 
@@ -260,8 +257,6 @@ namespace XenOvfTransport
                     throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
                 }
             }
-
-            OnUpdate(Messages.COMPLETED_IMPORT);
         }
 
     	#endregion
@@ -396,7 +391,7 @@ namespace XenOvfTransport
                             log.Debug($"Decrypting {filename}");
                             OVF.DecryptToTempFile(encryptionClass, filename, version, passcode, encryptfilename);
                             sourcefile = encryptfilename;
-                            statusMessage += Messages.COMPLETE;
+                            statusMessage += Messages.COMPLETED;
                             OnUpdate(statusMessage);
                         }
                         #endregion 
@@ -422,7 +417,7 @@ namespace XenOvfTransport
 							ovfCompressor.UncompressFile(sourcefile, uncompressedfilename, compression);
                             if (File.Exists(encryptfilename)) { File.Delete(encryptfilename); }
                             sourcefile = uncompressedfilename;
-                            statusMessage += Messages.COMPLETE;
+                            statusMessage += Messages.COMPLETED;
                             OnUpdate(statusMessage);
                         }
                         #endregion
@@ -466,12 +461,12 @@ namespace XenOvfTransport
                     catch (Exception ex)
                     {
                         log.Error("Failed to open virtual disk", ex);
-                        throw new Exception(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex);
+                        throw new Exception(Messages.ERROR_CANNOT_OPEN_DISK, ex);
                     }
                 }
                 else
                 {
-                    throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, filename));
+                    throw new FileNotFoundException(string.Format(Messages.ERROR_FILE_NOT_FOUND, filename));
                 }
             }
             else
@@ -503,7 +498,7 @@ namespace XenOvfTransport
                 if (freespace <= dataCapacity)
                 {
                     log.Error($"SR {sruuid} does not have {vhdDisk.Capacity} bytes of free space to import virtual disk {filename}.");
-                    string message = string.Format(Messages.NOT_ENOUGH_SPACE_IN_SR, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
+                    string message = string.Format(Messages.SR_NOT_ENOUGH_SPACE, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
                     throw new IOException(message);
                 }
                 #endregion
@@ -546,7 +541,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-				throw new Exception(Messages.FILE_TRANSPORT_FAILED, ex);
+				throw new Exception(Messages.ERROR_FILE_TRANSPORT, ex);
             }
             finally
             {
@@ -600,7 +595,7 @@ namespace XenOvfTransport
             catch (Exception ex)
             {
                 log.Error("Failed to create VDI. ", ex);
-                throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
+                throw new Exception(Messages.ERROR_CREATE_VDI_FAILED, ex);
             }
         }
 
@@ -903,12 +898,12 @@ namespace XenOvfTransport
                     }
                 case 10: // Network
                     {
-                        XenRef<Network> net = null;
-                        XenRef<Network> netDefault = null;
+                        XenRef<XenAPI.Network> net = null;
+                        XenRef<XenAPI.Network> netDefault = null;
                         string netuuid = null;
 
                         #region SELECT NETWORK
-                        Dictionary<XenRef<Network>, Network> networks = Network.get_all_records(xenSession);
+                        var networks = XenAPI.Network.get_all_records(xenSession);
                         if (rasd.Connection != null && rasd.Connection.Length > 0)
                         {
                             if (!string.IsNullOrEmpty(rasd.Connection[0].Value))
@@ -930,7 +925,7 @@ namespace XenOvfTransport
                                         }
                                     }
                                 }
-                                foreach (XenRef<Network> netRef in networks.Keys)
+                                foreach (XenRef<XenAPI.Network> netRef in networks.Keys)
                                 {
                                     // if its a UUID and we find it... use it..
                                     if (net == null && netuuid != null && 
@@ -1126,9 +1121,9 @@ namespace XenOvfTransport
                                         {
                                             if (ex is OperationCanceledException)
                                                 throw;
-                                            var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.ISO);
+
                                             log.Error("Failed to add resource ISO.", ex);
-                                            throw new Exception(msg, ex);
+                                            throw new Exception(Messages.ERROR_ADD_RASD_ISO, ex);
                                         }
                                         finally
                                         {
@@ -1224,14 +1219,14 @@ namespace XenOvfTransport
                                         "Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +." +
                                         "Import:  ===========================================================", vmRef);
 
-                                    OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
+                                    //TODO: OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
                                 }
                             }
                             #endregion
 
                         }
                         #endregion
-                        OnUpdate(string.Format(Messages.DEVICE_ATTACHED, Messages.CD_DVD_DEVICE));
+                        OnUpdate(Messages.CD_DVD_DEVICE_ATTACHED);
                         log.Debug("Import.AddResourceSettingData: CD/DVD ROM Added");
 
                         break;
@@ -1408,9 +1403,9 @@ namespace XenOvfTransport
                         {
 							if (ex is OperationCanceledException)
 								throw;
-							var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.DISK_DEVICE);
+
                             log.Error("Failed to add resource Hard Disk Image.", ex);
-                            throw new InvalidDataException(msg, ex);
+                            throw new InvalidDataException(Messages.ERROR_ADD_RASD_DISK_DEVICE, ex);
                         }
                         finally
                         {
@@ -1463,7 +1458,7 @@ namespace XenOvfTransport
                                     "Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}" +
                                     "Import:  ===========================================================",
                                     vmName);
-                                OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
+                                //TODO: OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
                             }
                         }
 

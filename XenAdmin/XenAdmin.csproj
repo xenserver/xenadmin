@@ -2859,14 +2859,8 @@
     <Compile Include="Commands\CrossPoolMigrateCommand.cs" />
     <Compile Include="Commands\DestroyHostCommand.cs" />
     <Compile Include="Commands\MigrateVirtualDiskCommand.cs" />
-    <Compile Include="Actions\OVFActions\ApplianceAction.cs" />
-    <Compile Include="Actions\OVFActions\ExportApplianceAction.cs" />
     <Compile Include="Actions\GUIActions\GeneralEditPageAction.cs" />
     <Compile Include="Actions\GUIActions\SaveCustomFieldsAction.cs" />
-    <Compile Include="Actions\OVFActions\ImportApplianceAction.cs" />
-    <Compile Include="Actions\OVFActions\ImportImageAction.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Commands\Controls\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -6773,10 +6767,6 @@
     <ProjectReference Include="..\XenOvfApi\XenOvfApi.csproj">
       <Project>{2D78AC6C-B867-484A-A447-3C6FC8B8EAF7}</Project>
       <Name>XenOvfApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XenOvfTransport\XenOvfTransport.csproj">
-      <Project>{9F7E6285-5CBF-41B4-8CB9-AB06DFF90DC0}</Project>
-      <Name>XenOvfTransport</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

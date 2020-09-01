@@ -33,8 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-
-using XenAdmin.Controls;
+using XenAdmin.Actions.OvfActions;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
@@ -176,7 +175,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             foreach (var vgpuSetting in vgpuSettings)
             {
-                Match m = XenOvfTransport.Import.VGPU_REGEX.Match(vgpuSetting.Value.Value);
+                Match m = Import.VGPU_REGEX.Match(vgpuSetting.Value.Value);
                 if (!m.Success)
                     continue;
 
