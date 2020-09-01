@@ -858,6 +858,9 @@
   <data name="Label-performance.tap_tx_errors" xml:space="preserve">
     <value>TAP {0} 送信エラー</value>
   </data>
+  <data name="Label-performance.vbd_latency" xml:space="preserve">
+    <value>ディスク {0} 平均 I/O 遅延</value>
+  </data>
   <data name="Label-performance.vbd_read" xml:space="preserve">
     <value>ディスク {0} 読み取り</value>
   </data>

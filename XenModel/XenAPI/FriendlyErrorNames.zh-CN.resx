@@ -553,7 +553,7 @@
     <value>服务器仍在启动中。</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>主服务器报告该服务器为未知服务器。该服务器或许已从主服务器的数据库中删除?</value>
+    <value>主服务器表示自己不知道该服务器。该服务器是否在主服务器的数据库中并指向正确的主服务器? 所有服务器是否都使用相同的池密码?</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>无法识别指定的 VBD 设备: 请使用非负整数</value>
