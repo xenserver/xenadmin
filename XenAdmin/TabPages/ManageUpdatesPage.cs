@@ -69,6 +69,7 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
             spinner.SuccessImage = SystemIcons.Information.ToBitmap();
+            spinner.FailureImage = Images.StaticImages._000_error_h32bit_32;
             tableLayoutPanel1.Visible = false;
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
@@ -193,6 +194,7 @@ namespace XenAdmin.TabPages
                     else
                     {
                         spinner.ShowFailureImage();
+                        tableLayoutPanel3.Visible = true;
                         labelProgress.Text = string.IsNullOrEmpty(errorMessage)
                                                  ? Messages.AVAILABLE_UPDATES_NOT_FOUND
                                                  : errorMessage;
