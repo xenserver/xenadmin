@@ -858,6 +858,9 @@
   <data name="Label-performance.tap_tx_errors" xml:space="preserve">
     <value>TAP {0} 发送错误</value>
   </data>
+  <data name="Label-performance.vbd_latency" xml:space="preserve">
+    <value>磁盘 {0} 平均 I/O 延迟</value>
+  </data>
   <data name="Label-performance.vbd_read" xml:space="preserve">
     <value>磁盘 {0} 读取</value>
   </data>
