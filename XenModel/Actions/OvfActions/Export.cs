@@ -38,17 +38,16 @@ using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
 using XenAPI;
-using XenAdmin;
 using XenAdmin.Network;
 
 
-namespace XenOvfTransport
+namespace XenAdmin.Actions.OvfActions
 {
-    public class Export
+    public partial class ExportApplianceAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static EnvelopeType _export(IXenConnection connection, string targetPath, string ovfname, VM vm, Action<string> OnUpdate, HTTP.FuncBool onCancel, bool verifyDisks, bool metaDataOnly = false)
+        private static EnvelopeType Export(IXenConnection connection, string targetPath, string ovfname, VM vm, Action<string> OnUpdate, HTTP.FuncBool onCancel, bool verifyDisks, bool metaDataOnly = false)
         {
                 log.DebugFormat("Export: {0}, {1}", ovfname, targetPath);
 
@@ -117,7 +116,7 @@ namespace XenOvfTransport
                     if (vif == null)
                         continue;
 
-                    Network net = connection.Resolve(vif.network);
+                    XenAPI.Network net = connection.Resolve(vif.network);
                     if (net == null)
                         continue;
 
@@ -164,8 +163,6 @@ namespace XenOvfTransport
 
                                 if (!metaDataOnly)
                                 {
-                                    OnUpdate(string.Format(Messages.FILES_TRANSPORT_SETUP, diskFilename));
-
                                     var taskRef = Task.create(connection.Session, "export_raw_vdi_task", "export_raw_vdi_task");
                                     HTTP_actions.get_export_raw_vdi(
                                         b => OnUpdate($"Exporting {diskFilename} ({Util.DiskSizeString(b)} done)"),

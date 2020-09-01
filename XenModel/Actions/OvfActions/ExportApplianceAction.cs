@@ -32,19 +32,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-
 using XenOvf;
 using XenOvf.Definitions;
-using XenOvfTransport;
 
-namespace XenAdmin.Actions.OVFActions
+
+namespace XenAdmin.Actions.OvfActions
 {
-	public class ExportApplianceAction : ApplianceAction
+	public partial class ExportApplianceAction : ApplianceAction
 	{
 		#region Private fields
 
@@ -107,7 +105,7 @@ namespace XenAdmin.Actions.OVFActions
 
                 try
                 {
-                    var envelope = Export._export(Connection, appFolder, m_applianceFileName, vm,
+                    var envelope = Export(Connection, appFolder, m_applianceFileName, vm,
                         UpdateHandler, () => Cancelling, m_shouldVerify);
                     envList.Add(envelope);
                     PercentComplete += 80 / m_vmsToExport.Count;

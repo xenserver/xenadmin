@@ -33,9 +33,9 @@ using System.Threading;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using XenOvfTransport;
 
-namespace XenAdmin.Actions.OVFActions
+
+namespace XenAdmin.Actions.OvfActions
 {
 	public abstract class ApplianceAction : AsyncAction
 	{

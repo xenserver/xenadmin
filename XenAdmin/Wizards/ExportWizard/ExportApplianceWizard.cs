@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using XenAdmin.Actions;
-using XenAdmin.Actions.OVFActions;
+using XenAdmin.Actions.OvfActions;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;

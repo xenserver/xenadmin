@@ -76,7 +76,7 @@ namespace XenAdminTests.CodeTests
         [Description("Checks all resx files in the project have their i18n counterparts in place")]
         public void TestEnsureI18NFilesInPlace(
             [Values("ja", "zh-CN")] string locale,
-            [Values("XenCenterMain", "XenModel", "XenOvf", "XenOvfTransport")] string assemblyName)
+            [Values("XenCenterMain", "XenModel", "XenOvf")] string assemblyName)
         {
             var assembly = FindAssemblyByNameRecursively(assemblyName);
             Assert.NotNull($"Assembly {assemblyName} was not found.");
@@ -112,7 +112,7 @@ namespace XenAdminTests.CodeTests
         [Test]
         [Description("Checks that if there are user-scoped settings in an assembly, these have roaming=true")]
         public void TestUserSettingsAreRoaming(
-            [Values("XenCenterMain", "XenOvf", "XenOvfTransport", "XenServerHealthCheck")] string assemblyName)
+            [Values("XenCenterMain", "XenOvf", "XenServerHealthCheck")] string assemblyName)
         {
             var assembly = FindAssemblyByNameRecursively(assemblyName);
             Assert.NotNull($"Assembly {assemblyName} was not found.");

@@ -3116,7 +3116,7 @@ namespace XenAdmin
                     {
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
-                        using (var dlg = new ErrorDialog(Messages.ERRO_IMPORTING_SERVER_LIST))
+                        using (var dlg = new ErrorDialog(Messages.ERROR_IMPORTING_SERVER_LIST))
                             dlg.ShowDialog(this);
                     }
                 }
