@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -85,9 +86,13 @@ namespace XenAdmin.Actions.OvfActions
 				VM = m_vmsToExport[0];
 		}
 
+		public bool MetaDataOnly { private get; set; }
+
         protected override void Run()
 		{
             base.Run();
+
+			log.Info($"Exporting VMs to package {m_applianceFileName}");
 
 			var appFolder = Path.Combine(m_applianceDirectory, m_applianceFileName);
 			var appFile = string.Format("{0}.ovf", m_applianceFileName);
@@ -95,20 +100,25 @@ namespace XenAdmin.Actions.OvfActions
 			if (!Directory.Exists(appFolder))
 				Directory.CreateDirectory(appFolder);
 
-			Description = Messages.EXPORTING_VMS;
+			var envList = new List<EnvelopeType>();
 
-            var envList = new List<EnvelopeType>();
-
-            foreach (VM vm in m_vmsToExport)
+            for (int i = 0; i < m_vmsToExport.Count; i++)
             {
+                var vm = m_vmsToExport[i];
                 CheckForCancellation();
+                Description = string.Format(Messages.EXPORTING_VM_PREPARE, vm.Name());
+
+                int curVm = i;
+                void UpdatePercentage(float x)
+                {
+                    PercentComplete = (int)((curVm + x) * 80 / m_vmsToExport.Count);
+                }
 
                 try
                 {
-                    var envelope = Export(Connection, appFolder, m_applianceFileName, vm,
-                        UpdateHandler, () => Cancelling, m_shouldVerify);
+                    var envelope = Export(appFolder, vm, UpdatePercentage);
                     envList.Add(envelope);
-                    PercentComplete += 80 / m_vmsToExport.Count;
+                    PercentComplete = (i + 1) * 80 / m_vmsToExport.Count;
                 }
                 catch (OperationCanceledException)
                 {
@@ -150,11 +160,13 @@ namespace XenAdmin.Actions.OvfActions
 
 			if (m_createOVA)
 			{
+                log.Info($"Archiving OVF package {m_applianceFileName} into OVA");
 				Description = String.Format(Messages.CREATING_FILE, String.Format("{0}.ova", m_applianceFileName));
 				OVF.ConvertOVFtoOVA(appFolder, appFile, m_compressOVFfiles);
 			}
 			else if (m_compressOVFfiles)
 			{
+                log.Info($"Compressing package {m_applianceFileName}");
 				Description = Messages.COMPRESSING_FILES;
 				m_compressor = new OvfCompressor { CancelCompression = Cancelling }; //in case the Cancel button has already been pressed}
 
@@ -185,5 +197,22 @@ namespace XenAdmin.Actions.OvfActions
 			if (m_compressor != null)
 				m_compressor.CancelCompression = true;
 		}
+
+        protected override void CleanOnError()
+        {
+            if (!Directory.Exists(m_applianceDirectory))
+                return;
+            if (Directory.EnumerateFileSystemEntries(m_applianceDirectory).Any())
+                return;
+
+            try
+            {
+                Directory.Delete(m_applianceDirectory);
+            }
+            catch
+            {
+                //ignore
+            }
+        }
 	}
 }
