@@ -3956,7 +3956,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>Creating disks</value>
   </data>
   <data name="CREATING_FILE" xml:space="preserve">
-    <value>Archiving appliance files into single package file {0}...</value>
+    <value>Archiving appliance files into single package file '{0}'...</value>
   </data>
   <data name="CREATING_MANIFEST" xml:space="preserve">
     <value>Creating manifest file...</value>
@@ -5541,7 +5541,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Unknown file type.</value>
   </data>
   <data name="ERROR_VM_NOT_HALTED" xml:space="preserve">
-    <value>Please shut down or suspend virtual machine {0} before exporting.</value>
+    <value>Please shut down or suspend VM '{0}' before exporting.</value>
   </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>
@@ -5631,14 +5631,17 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORTING_UPDATES" xml:space="preserve">
     <value>Exporting updates to {0}...</value>
   </data>
-  <data name="EXPORTING_VMS" xml:space="preserve">
-    <value>Exporting VMs...</value>
+  <data name="EXPORTING_VDI" xml:space="preserve">
+    <value>Exporting disk '{0}' to '{1}' ({2} of {3})...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION" xml:space="preserve">
+    <value>Verifying disk '{0}'...</value>
+  </data>
+  <data name="EXPORTING_VM_PREPARE" xml:space="preserve">
+    <value>Preparing to export VM '{0}'...</value>
   </data>
   <data name="EXPORTVM_COULD_NOT_SHOW" xml:space="preserve">
     <value>Could not show file open dialog - {0}</value>
-  </data>
-  <data name="EXPORTVM_NOT_HAPPEN" xml:space="preserve">
-    <value>Should not happen</value>
   </data>
   <data name="EXPORT_ALL" xml:space="preserve">
     <value>Export All</value>

@@ -11081,7 +11081,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Archiving appliance files into single package file {0}....
+        ///   Looks up a localized string similar to Archiving appliance files into single package file &apos;{0}&apos;....
         /// </summary>
         public static string CREATING_FILE {
             get {
@@ -15792,7 +15792,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please shut down or suspend virtual machine {0} before exporting..
+        ///   Looks up a localized string similar to Please shut down or suspend VM &apos;{0}&apos; before exporting..
         /// </summary>
         public static string ERROR_VM_NOT_HALTED {
             get {
@@ -16423,11 +16423,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporting VMs....
+        ///   Looks up a localized string similar to Exporting disk &apos;{0}&apos; to &apos;{1}&apos; ({2} of {3})....
         /// </summary>
-        public static string EXPORTING_VMS {
+        public static string EXPORTING_VDI {
             get {
-                return ResourceManager.GetString("EXPORTING_VMS", resourceCulture);
+                return ResourceManager.GetString("EXPORTING_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verifying disk &apos;{0}&apos;....
+        /// </summary>
+        public static string EXPORTING_VDI_VERIFICATION {
+            get {
+                return ResourceManager.GetString("EXPORTING_VDI_VERIFICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing to export VM &apos;{0}&apos;....
+        /// </summary>
+        public static string EXPORTING_VM_PREPARE {
+            get {
+                return ResourceManager.GetString("EXPORTING_VM_PREPARE", resourceCulture);
             }
         }
         
@@ -16437,15 +16455,6 @@ namespace XenAdmin {
         public static string EXPORTVM_COULD_NOT_SHOW {
             get {
                 return ResourceManager.GetString("EXPORTVM_COULD_NOT_SHOW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Should not happen.
-        /// </summary>
-        public static string EXPORTVM_NOT_HAPPEN {
-            get {
-                return ResourceManager.GetString("EXPORTVM_NOT_HAPPEN", resourceCulture);
             }
         }
         
