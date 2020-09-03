@@ -15099,38 +15099,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to add Hard Disk Image.
-        /// </summary>
-        public static string ERROR_ADD_RASD_DISK_DEVICE {
-            get {
-                return ResourceManager.GetString("ERROR_ADD_RASD_DISK_DEVICE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to add ISO..
-        /// </summary>
-        public static string ERROR_ADD_RASD_ISO {
-            get {
-                return ResourceManager.GetString("ERROR_ADD_RASD_ISO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to User name and password mismatch..
         /// </summary>
         public static string ERROR_AUTHENTICATION {
             get {
                 return ResourceManager.GetString("ERROR_AUTHENTICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to open virtual disk..
-        /// </summary>
-        public static string ERROR_CANNOT_OPEN_DISK {
-            get {
-                return ResourceManager.GetString("ERROR_CANNOT_OPEN_DISK", resourceCulture);
             }
         }
         
@@ -15149,42 +15122,6 @@ namespace XenAdmin {
         public static string ERROR_COULD_NOT_FIND_SR {
             get {
                 return ResourceManager.GetString("ERROR_COULD_NOT_FIND_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to create a VBD..
-        /// </summary>
-        public static string ERROR_CREATE_VBD_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_CREATE_VBD_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to create VDI..
-        /// </summary>
-        public static string ERROR_CREATE_VDI_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_CREATE_VDI_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to create VIF..
-        /// </summary>
-        public static string ERROR_CREATE_VIF_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_CREATE_VIF_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to create VM..
-        /// </summary>
-        public static string ERROR_CREATE_VM_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_CREATE_VM_FAILED", resourceCulture);
             }
         }
         
@@ -15630,29 +15567,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to import virtual disk file..
-        /// </summary>
-        public static string ERROR_FILE_TRANSPORT {
-            get {
-                return ResourceManager.GetString("ERROR_FILE_TRANSPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Server is still booting..
         /// </summary>
         public static string ERROR_HOST_STILL_BOOTING {
             get {
                 return ResourceManager.GetString("ERROR_HOST_STILL_BOOTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to import..
-        /// </summary>
-        public static string ERROR_IMPORT_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_IMPORT_FAILED", resourceCulture);
             }
         }
         
@@ -15752,15 +15671,6 @@ namespace XenAdmin {
         public static string ERROR_PUTTY_LAUNCHING {
             get {
                 return ResourceManager.GetString("ERROR_PUTTY_LAUNCHING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to remove VM..
-        /// </summary>
-        public static string ERROR_REMOVE_VM_FAILED {
-            get {
-                return ResourceManager.GetString("ERROR_REMOVE_VM_FAILED", resourceCulture);
             }
         }
         
@@ -20009,6 +19919,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preparing to import appliance &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_APPLIANCE_PREPARING {
+            get {
+                return ResourceManager.GetString("IMPORT_APPLIANCE_PREPARING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating appliance &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_CREATING_APPLIANCE {
+            get {
+                return ResourceManager.GetString("IMPORT_CREATING_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating VM &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_CREATING_VM {
+            get {
+                return ResourceManager.GetString("IMPORT_CREATING_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import VM &apos;{0}&apos; from Disk Image to &apos;{1}&apos;.
         /// </summary>
         public static string IMPORT_DISK_IMAGE {
@@ -20552,6 +20489,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Importing &apos;{0}&apos; ({1} of {2})....
+        /// </summary>
+        public static string IMPORT_VDI {
+            get {
+                return ResourceManager.GetString("IMPORT_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing VDI for &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_VDI_PREPARE {
+            get {
+                return ResourceManager.GetString("IMPORT_VDI_PREPARE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure storage for the new VM.
         /// </summary>
         public static string IMPORT_VM_CONFIGURE_STORAGE {
@@ -20782,15 +20737,6 @@ namespace XenAdmin {
         public static string IMPORTING_DISK_IMAGE {
             get {
                 return ResourceManager.GetString("IMPORTING_DISK_IMAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Importing VMs....
-        /// </summary>
-        public static string IMPORTING_VMS {
-            get {
-                return ResourceManager.GetString("IMPORTING_VMS", resourceCulture);
             }
         }
         
@@ -34608,7 +34554,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Storage repository {0} does not have {1} bytes of free space to import virtual disk {2}..
+        ///   Looks up a localized string similar to SR &apos;{0}&apos; does not have {1} of free space to import virtual disk {2}..
         /// </summary>
         public static string SR_NOT_ENOUGH_SPACE {
             get {
@@ -34891,7 +34837,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrypting {0} ... .
+        ///   Looks up a localized string similar to Decrypting {0}... .
         /// </summary>
         public static string START_FILE_DECRYPTION {
             get {
@@ -34900,7 +34846,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expanding {0} ... .
+        ///   Looks up a localized string similar to Expanding {0}... .
         /// </summary>
         public static string START_FILE_EXPANSION {
             get {
@@ -38472,6 +38418,15 @@ namespace XenAdmin {
         public static string VDI_COPYING {
             get {
                 return ResourceManager.GetString("VDI_COPYING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A VDI with size {0} is required to import virtual disk {1}..
+        /// </summary>
+        public static string VDI_NOT_ENOUGH_SPACE {
+            get {
+                return ResourceManager.GetString("VDI_NOT_ENOUGH_SPACE", resourceCulture);
             }
         }
         

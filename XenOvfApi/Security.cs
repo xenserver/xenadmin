@@ -207,13 +207,54 @@ namespace XenOvf
         /// <summary>
         /// Checks to see if an OVF is encrypted by checking whether a security section is defined
         /// </summary>
-        public static bool HasEncryption(EnvelopeType ovfObj)
+        public static bool HasEncryption(EnvelopeType ovfObj, out SecuritySection_Type[] security)
         {
+            security = null;
+
             if (ovfObj == null)
                 return false;
-            var security = FindSections<SecuritySection_Type>(ovfObj.Sections);
+            
+            security = FindSections<SecuritySection_Type>(ovfObj.Sections);
             return security != null && security.Length > 0;
         }
+        
+        public static void ParseEncryption(EnvelopeType ovfObj, out string encryptionClass, out string encryptionVersion)
+        {
+            encryptionClass = null;
+            encryptionVersion = null;
+
+            if (!HasEncryption(ovfObj, out SecuritySection_Type[] securitysection))
+                return;
+
+            string fileUuids = "";
+                
+            foreach (Security_Type securitytype in securitysection[0].Security)
+            {
+                if (securitytype.ReferenceList.Items != null)
+                {
+                    foreach (ReferenceType refType in securitytype.ReferenceList.Items)
+                    {
+                        if (refType is DataReference dataRef)
+                            fileUuids += ":" + dataRef.ValueType;
+                    }
+                }
+
+                if (securitytype.EncryptionMethod?.Algorithm != null)
+                {
+                    string[] parts = securitytype.EncryptionMethod.Algorithm.Split('#');
+
+                    if (parts.Length > 1)
+                    {
+                        string algoname = parts[1].ToLower().Replace('-', '_');
+                        encryptionClass = OVF.AlgorithmMap(algoname) as string;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(securitytype.version))
+                    encryptionVersion = securitytype.version;
+            }
+        }
+        
         /// <summary>
         /// An ovf can contain both encrypted and non-encrypted file mixed together.
         /// find if file name is encrypted.

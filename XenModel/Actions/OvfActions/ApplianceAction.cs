@@ -69,16 +69,15 @@ namespace XenAdmin.Actions.OvfActions
 				Host = Helpers.GetMaster(connection);
 		}
 
-	    protected override void Run()
+        public bool MetaDataOnly { protected get; set; }
+
+        protected abstract void RunCore();
+
+	    protected sealed override void Run()
 	    {
 	        SafeToExit = false; 
             InitialiseTicker();
-	    }
-
-		protected void UpdateHandler(string message)
-		{
-			if (!string.IsNullOrEmpty(message))
-				Description = message;
+            RunCore();
 		}
 
 		public override void RecomputeCanCancel()

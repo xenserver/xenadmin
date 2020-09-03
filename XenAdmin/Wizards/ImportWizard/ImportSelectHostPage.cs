@@ -175,7 +175,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             foreach (var vgpuSetting in vgpuSettings)
             {
-                Match m = Import.VGPU_REGEX.Match(vgpuSetting.Value.Value);
+                Match m = ImportApplianceAction.VGPU_REGEX.Match(vgpuSetting.Value.Value);
                 if (!m.Success)
                     continue;
 

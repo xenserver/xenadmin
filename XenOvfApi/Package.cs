@@ -526,7 +526,7 @@ namespace XenOvf
 
         public bool HasEncryption()
         {
-            return OVF.HasEncryption(OvfEnvelope);
+            return OVF.HasEncryption(OvfEnvelope, out _);
         }
 
         public bool HasManifest()

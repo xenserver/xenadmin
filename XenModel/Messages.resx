@@ -5309,35 +5309,14 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_ACTIVATING_VDIS_TITLE" xml:space="preserve">
     <value>Error Activating Virtual Disks</value>
   </data>
-  <data name="ERROR_ADD_RASD_DISK_DEVICE" xml:space="preserve">
-    <value>Failed to add Hard Disk Image</value>
-  </data>
-  <data name="ERROR_ADD_RASD_ISO" xml:space="preserve">
-    <value>Failed to add ISO.</value>
-  </data>
   <data name="ERROR_AUTHENTICATION" xml:space="preserve">
     <value>User name and password mismatch.</value>
-  </data>
-  <data name="ERROR_CANNOT_OPEN_DISK" xml:space="preserve">
-    <value>Failed to open virtual disk.</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
     <value>[XenCenter] has encountered a problem connecting to this server.</value>
   </data>
   <data name="ERROR_COULD_NOT_FIND_SR" xml:space="preserve">
     <value>The storage repository was not found and a default was not assigned.</value>
-  </data>
-  <data name="ERROR_CREATE_VBD_FAILED" xml:space="preserve">
-    <value>Failed to create a VBD.</value>
-  </data>
-  <data name="ERROR_CREATE_VDI_FAILED" xml:space="preserve">
-    <value>Failed to create VDI.</value>
-  </data>
-  <data name="ERROR_CREATE_VIF_FAILED" xml:space="preserve">
-    <value>Failed to create VIF.</value>
-  </data>
-  <data name="ERROR_CREATE_VM_FAILED" xml:space="preserve">
-    <value>Failed to create VM.</value>
   </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>The following virtual disks could not be deactivated:</value>
@@ -5486,17 +5465,11 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_FILE_NOT_FOUND" xml:space="preserve">
     <value>File {0} not found</value>
   </data>
-  <data name="ERROR_FILE_TRANSPORT" xml:space="preserve">
-    <value>Failed to import virtual disk file.</value>
-  </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
     <value>Server is still booting.</value>
   </data>
   <data name="ERROR_IMPORTING_SERVER_LIST" xml:space="preserve">
     <value>Error importing server list. Check that the xml format in the file is correct.</value>
-  </data>
-  <data name="ERROR_IMPORT_FAILED" xml:space="preserve">
-    <value>Failed to import.</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>Gateway is invalid.</value>
@@ -5527,9 +5500,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] has encountered a problem launching PuTTY.</value>
-  </data>
-  <data name="ERROR_REMOVE_VM_FAILED" xml:space="preserve">
-    <value>Failed to remove VM.</value>
   </data>
   <data name="ERROR_SECURE_CHANNEL_FAILURE" xml:space="preserve">
     <value>Could not create SSL/TLS secure channel.</value>
@@ -6977,9 +6947,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORTING_DISK_IMAGE" xml:space="preserve">
     <value>Importing Disk Image...</value>
   </data>
-  <data name="IMPORTING_VMS" xml:space="preserve">
-    <value>Importing VMs...</value>
-  </data>
   <data name="IMPORTVM_DESCRIP" xml:space="preserve">
     <value>Importing VM from backup file</value>
   </data>
@@ -7009,6 +6976,15 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
     <value>Import Appliance '{0}' to '{1}'</value>
+  </data>
+  <data name="IMPORT_APPLIANCE_PREPARING" xml:space="preserve">
+    <value>Preparing to import appliance '{0}'...</value>
+  </data>
+  <data name="IMPORT_CREATING_APPLIANCE" xml:space="preserve">
+    <value>Creating appliance '{0}'...</value>
+  </data>
+  <data name="IMPORT_CREATING_VM" xml:space="preserve">
+    <value>Creating VM '{0}'...</value>
   </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>Import VM '{0}' from Disk Image to '{1}'</value>
@@ -7192,6 +7168,12 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_URI_NO_DESTINATION" xml:space="preserve">
     <value>Import is a URI but no destination path defined.</value>
+  </data>
+  <data name="IMPORT_VDI" xml:space="preserve">
+    <value>Importing '{0}' ({1} of {2})...</value>
+  </data>
+  <data name="IMPORT_VDI_PREPARE" xml:space="preserve">
+    <value>Preparing VDI for '{0}'...</value>
   </data>
   <data name="IMPORT_VM_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
@@ -12036,7 +12018,7 @@ Incremental allocation: {1}</value>
     <value>Disk size ({0}) exceeds SR size ({1})</value>
   </data>
   <data name="SR_NOT_ENOUGH_SPACE" xml:space="preserve">
-    <value>Storage repository {0} does not have {1} bytes of free space to import virtual disk {2}.</value>
+    <value>SR '{0}' does not have {1} of free space to import virtual disk {2}.</value>
   </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} required when only {1} available</value>
@@ -12110,10 +12092,10 @@ The upper limit: SR size / {2}</value>
     <value>starts with</value>
   </data>
   <data name="START_FILE_DECRYPTION" xml:space="preserve">
-    <value>Decrypting {0} ... </value>
+    <value>Decrypting {0}... </value>
   </data>
   <data name="START_FILE_EXPANSION" xml:space="preserve">
-    <value>Expanding {0} ... </value>
+    <value>Expanding {0}... </value>
   </data>
   <data name="START_HOST" xml:space="preserve">
     <value>Start host</value>
@@ -13287,6 +13269,9 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
   </data>
   <data name="VDI_COPYING" xml:space="preserve">
     <value>Copying disk '{0}' from SR '{1}' to SR '{2}'</value>
+  </data>
+  <data name="VDI_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>A VDI with size {0} is required to import virtual disk {1}.</value>
   </data>
   <data name="VDI_ON_SR_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>

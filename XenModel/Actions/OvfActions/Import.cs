@@ -35,80 +35,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
 using DiscUtils;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
-using XenOvf.Definitions.XENC;
 using XenOvf.Utilities;
 
 
 namespace XenAdmin.Actions.OvfActions
 {
-    public class Import
+    public partial class ImportApplianceAction
     {
+        public static Regex VGPU_REGEX = new Regex("^GPU_types={(.*)};VGPU_type_vendor_name=(.*);VGPU_type_model_name=(.*);$");
+        public static Regex PVS_SITE_REGEX = new Regex("^PVS_SITE={uuid=(.*)};$");
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		#region PUBLIC
-
-        public static void Process(IXenConnection connection, EnvelopeType ovfObj, string pathToOvf, Action<string> OnUpdate, string passCode = null, string applianceName = null, bool metaDataOnly = false)
+        protected void Process(EnvelopeType ovfObj, string pathToOvf, string applianceName = null)
         {
-            var xenSession = connection.Session;
-
             int vifDeviceIndex = 0;
-
-            #region CHECK ENCRYPTION
-            string encryptionClass = null;
-            string encryptionVersion = null;
-            int encryptionKeySize;
-
-            if (OVF.HasEncryption(ovfObj))
-            {
-                if (passCode == null)
-                {
-                	throw new InvalidDataException(Messages.ERROR_NO_PASSWORD);
-                }
-                string fileuuids = null;
-                SecuritySection_Type[] securitysection = OVF.FindSections<SecuritySection_Type>((ovfObj).Sections);
-                if (securitysection != null && securitysection.Length >= 0)
-                {
-                    foreach (Security_Type securitytype in securitysection[0].Security)
-                    {
-                        if (securitytype.ReferenceList.Items != null && securitytype.ReferenceList.Items.Length > 0)
-                        {
-                            foreach (XenOvf.Definitions.XENC.ReferenceType dataref in securitytype.ReferenceList.Items)
-                            {
-                                if (dataref is DataReference)
-                                {
-                                    fileuuids += ":" + ((DataReference)dataref).ValueType;
-                                }
-                            }
-                        }
-                        if (securitytype.EncryptionMethod != null && securitytype.EncryptionMethod.Algorithm != null)
-                        {
-                            string algoname = (securitytype.EncryptionMethod.Algorithm.Split('#'))[1].ToLower().Replace('-', '_');
-                            object x = OVF.AlgorithmMap(algoname);
-                            if (x != null)
-                            {
-                                encryptionClass = (string)x;
-                                encryptionKeySize = Convert.ToInt32(securitytype.EncryptionMethod.KeySize);
-                            }
-                        }
-
-                        if (!string.IsNullOrEmpty(securitytype.version))
-                        {
-                            encryptionVersion = securitytype.version;                                
-                        }
-                    }
-                }
-            }
-            #endregion
 
             //Normalise the process
             if (ovfObj.Item is VirtualSystem_Type vstemp)
@@ -121,158 +70,96 @@ namespace XenAdmin.Actions.OvfActions
 
         	XenRef<VM_appliance> applRef = null;
 			if (applianceName != null)
-			{
+            {
+                Description = string.Format(Messages.IMPORT_CREATING_APPLIANCE, applianceName);
                 var vmAppliance = new VM_appliance {name_label = applianceName};
-				applRef = VM_appliance.create(xenSession, vmAppliance);
+                var appliance = Connection.WaitForCache(VM_appliance.create(Connection.Session, vmAppliance));
+                applRef = new XenRef<VM_appliance>(appliance.opaque_ref);
+                log.Info($"Created appliance {applianceName} ({applRef.opaque_ref})");
 			}
 
-            StartupSection_TypeItem[] vmStartupSections = null;
+            StartupSection_TypeItem[] startupSections = null;
             if (ovfObj.Sections != null)
             {
                 StartupSection_Type[] startUpArray = OVF.FindSections<StartupSection_Type>(ovfObj.Sections);
                 if (startUpArray != null && startUpArray.Length > 0)
-                    vmStartupSections = startUpArray[0]?.Item;
+                    startupSections = startUpArray[0]?.Item;
             }
 
-        	#endregion
+            #endregion
 
-            foreach (Content_Type contentType in ((VirtualSystemCollection_Type)ovfObj.Item).Content)
+            var vmsToImport = ((VirtualSystemCollection_Type)ovfObj.Item).Content
+                .Where(c => c is VirtualSystem_Type).Cast<VirtualSystem_Type>().ToList();
+
+            for (int i = 0; i < vmsToImport.Count; i++)
             {
-                if (!(contentType is VirtualSystem_Type vSystem))
-                    continue;
-
+                int curVm = i;
+                VirtualSystem_Type vSystem = vmsToImport[i];
                 var vmName = OVF.FindSystemName(ovfObj, vSystem.id);
-				VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(ovfObj, vSystem.id, "xen");
-                var vmStartupSection = vmStartupSections?.FirstOrDefault(it => it.id == vSystem.id);
+                VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(ovfObj, vSystem.id, "xen");
+                var vmStartupSection = startupSections?.FirstOrDefault(it => it.id == vSystem.id);
 
-                XenRef<VM> vmRef = CreateVm(xenSession, vmName, vhs, applRef, vmStartupSection);
-                if (vmRef == null)
-                {
-                    log.Error("Failed to create a VM");
-                    throw new Exception(Messages.ERROR_CREATE_VM_FAILED);
-				}
-
-                log.DebugFormat("OVF.Import.Process: DefineSystem completed ({0})", VM.get_name_label(xenSession, vmRef));
-
-                #region Set vgpu
-                
-                List<Tuple<GPU_group, VGPU_type> >vgpus = FindGpuGroupAndVgpuType(xenSession, vhs);
-                foreach (var item in vgpus)
-                {
-                    GPU_group gpuGroup = item.Item1;
-                    VGPU_type vgpuType = item.Item2;
-                    if (gpuGroup != null)
-                    {
-                        var other_config = new Dictionary<string, string>();
-
-                        if (Helpers.FeatureForbidden(connection, Host.RestrictVgpu))
-                        {
-                            //If the current licence does not allow vGPU, we create one pass-through vGPU
-                            //(default vGPU type) for the VM (multiple pass-through vGPUs are not supported yet)
-
-                            log.Debug("The host license does not support vGPU, create one pass-through vGPU for the VM");
-                            VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config);
-                            break;
-                        }
-                        else if (vgpuType != null)
-                            VGPU.create(xenSession, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", other_config, vgpuType.opaque_ref);
-                    }
-                }
-
-                #endregion
-
-                SetDeviceConnections(ovfObj, vhs);
+                XenRef<VM> vmRef = null;
                 try
                 {
-                    foreach (RASD_Type rasd in vhs.Item)
+                    vmRef = CreateVm(vmName, vhs, applRef, vmStartupSection);
+                    SetDeviceConnections(vhs);
+
+                    for (int j = 0; j < vhs.Item.Length; j++)
                     {
-                        string thisPassCode = null;
-                        // Check to see if THIS rasd is encrypted, if so, set the passCode.
-                        if (OVF.IsThisEncrypted(ovfObj, rasd))
-                            thisPassCode = passCode;
-
-                        if (rasd.ResourceType.Value == 17 || rasd.ResourceType.Value == 19 || rasd.ResourceType.Value == 21)
+                        int curVhs = j;
+                        void UpdatePercentage(float x)
                         {
-							bool skip = Tools.ValidateProperty("Caption", rasd) &&
-								 (
-								  rasd.Caption.Value.ToUpper().Contains("COM") ||
-								  rasd.Caption.Value.ToUpper().Contains("FLOPPY") ||
-								  rasd.Caption.Value.ToUpper().Contains("ISO")
-								 );
-
-                            if (!skip)
-                            {
-                                File_Type file = OVF.FindFileReferenceByRASD(ovfObj, rasd);
-								if (file == null)
-									continue;
-
-								SetIfDeviceIsBootable(ovfObj, rasd);
-								AddResourceSettingData(xenSession, OnUpdate, vmRef, rasd, pathToOvf, OVF.FindRasdFileName(ovfObj, rasd, out string compression), compression, encryptionVersion, thisPassCode, metaDataOnly, encryptionClass, ref vifDeviceIndex);
-                            }
+                            PercentComplete = (int)(20 + curVm * 80 / vmsToImport.Count + (curVhs + x) * 80 / (vmsToImport.Count * vhs.Item.Length));
                         }
-                        else
-                        {
-							AddResourceSettingData(xenSession, OnUpdate, vmRef, rasd, pathToOvf, OVF.FindRasdFileName(ovfObj, rasd, out string compression), compression, encryptionVersion, thisPassCode, metaDataOnly, encryptionClass, ref vifDeviceIndex);
-                        }
+
+                        AddResourceSettingData(ovfObj, vmRef, vhs.Item[j], pathToOvf, ref vifDeviceIndex, UpdatePercentage);
+                        PercentComplete = 20 + i * 80 / vmsToImport.Count + (j + 1) * 80 / (vmsToImport.Count * vhs.Item.Length);
                     }
 
-                    InstallSection_Type[] installSection = OVF.FindSections<InstallSection_Type>(vSystem.Items);
+                    CreateVgpus(vhs, vmRef);
+                    CreatePvsProxy(vhs, vmRef);
 
-                    if (installSection != null && installSection.Length == 1)
-                    {
-                        OnUpdate(Messages.START_POST_INSTALL_INSTRUCTIONS);
-                        HandleInstallSection(xenSession, vmRef, installSection[0]);
-                    }
-                    ShowSystem(xenSession, vmRef);
-
-                    #region PVS Proxy
-                    var site = FindPvsSite(xenSession, vhs);
-
-                    if (site != null)
-                    {
-                        var vm =  connection.Resolve(vmRef);
-                        if (vm != null)
-                        {
-                            var vifs = connection.ResolveAll(vm.VIFs);
-                            var firstVif = vifs.FirstOrDefault(v => v.device.Equals("0"));
-
-                            if (firstVif != null)
-                            {
-                                var foundSite = PVS_site.get_by_uuid(xenSession, site.uuid);
-
-                                if (foundSite != null)
-                                {
-                                    PVS_proxy.create(xenSession, foundSite.opaque_ref, firstVif.opaque_ref);
-                                }
-                            }
-                        }
-                    }
-                    #endregion
+                    HandleInstallSection(Connection.Session, vmRef, vSystem);
+                    VM.remove_from_other_config(Connection.Session, vmRef, "HideFromXenCenter");
+                    PercentComplete = 20 + (i + 1) * 80 / vmsToImport.Count;
                 }
-                catch (Exception ex)
+                catch
                 {
-					if (ex is OperationCanceledException)
-						throw;
-                    log.Error("Import failed", ex);
-                    throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
+                    if (vmRef != null)
+                        try
+                        {
+                            log.Info($"Import failed. Destroying VM {vmRef.opaque_ref}");
+                            VM.destroy(Connection.Session, vmRef);
+                        }
+                        catch
+                        {
+                            //ignore
+                        }
+
+                    throw;
                 }
             }
         }
 
-    	#endregion
-
-        #region PRIVATE
-
-        private static void HandleInstallSection(Session xenSession, XenRef<VM> vm, InstallSection_Type installsection)
+        private void HandleInstallSection(Session xenSession, XenRef<VM> vmRef, VirtualSystem_Type vSystem)
         {
+            InstallSection_Type[] installSections = OVF.FindSections<InstallSection_Type>(vSystem.Items);
+
+            if (installSections == null || installSections.Length <= 0)
+                return;
+            
+            Description = Messages.START_POST_INSTALL_INSTRUCTIONS;
+            var installSection = installSections[0];
+
             // Configure for XenServer as requested by OVF.SetRunOnceBootCDROM() with the presence of a post install operation that is specific to XenServer.
-            if (installsection.PostInstallOperations != null)
-                ConfigureForXenServer(xenSession, vm);
+            if (installSection.PostInstallOperations != null)
+                ConfigureForXenServer(xenSession, vmRef);
 
             // Run the VM for the requested duration if this appliance had its own install section -- one not added to fixup for XenServer.
-            if (installsection.Info == null ||
-                installsection.Info != null && installsection.Info.Value.CompareTo("ConfigureForXenServer") != 0)
-                InstallSectionStartVirtualMachine(xenSession, vm, installsection.initialBootStopDelay);
+            if (installSection.Info == null ||
+                installSection.Info != null && installSection.Info.Value.CompareTo("ConfigureForXenServer") != 0)
+                InstallSectionStartVirtualMachine(xenSession, vmRef, installSection.initialBootStopDelay);
         }
 
         private static void ConfigureForXenServer(Session xenSession, XenRef<VM> vm)
@@ -360,247 +247,197 @@ namespace XenAdmin.Actions.OvfActions
             }
         }
 
-        private static XenRef<VDI> ImportFile(Session xenSession, Action<string> OnUpdate, string vmname, string pathToOvf, string filename, string compression, string version, string passcode, string sruuid, string description, string vdiuuid, string encryptionClass)
+        private XenRef<VDI> ImportFile(string diskName, string pathToOvf, string filename, string compression, string sruuid, string description, string vdiuuid, bool isEncrypted, Action<float> updatePercentage)
         {
-            string sourcefile = filename;
-            string encryptfilename = null;
-            string uncompressedfilename = null;
-            string StartPath = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(pathToOvf);
-            Stream dataStream = null;
-            long dataCapacity = 0;
-            VirtualDisk vhdDisk = null;
-
-            #region SET UP TRANSPORT
-            if (filename != null)
-            {
-                if (File.Exists(filename))
-                {
-                    string ext = Path.GetExtension(filename);
-
-                    try
-                    {
-                        encryptfilename = "enc_" + filename;
-                        uncompressedfilename = "unc_" + filename;
-                        // OK.. lets see is the file encrypted?
-                        #region ENCRYPTION
-                        if (passcode != null)
-                        {
-                            var statusMessage = string.Format(Messages.START_FILE_DECRYPTION, filename);
-                            OnUpdate(statusMessage);
-                            log.Debug($"Decrypting {filename}");
-                            OVF.DecryptToTempFile(encryptionClass, filename, version, passcode, encryptfilename);
-                            sourcefile = encryptfilename;
-                            statusMessage += Messages.COMPLETED;
-                            OnUpdate(statusMessage);
-                        }
-                        #endregion 
-
-                        #region COMPRESSION
-                        // Identity == no compression, it is meant when a URL is used to identify the compression during transport.
-                        if (compression != null && 
-                            !compression.ToLower().Equals("none") && 
-                            !compression.ToLower().Equals("identity"))
-                        {
-                            // gz is the only understood 'compressed' format, strip it..
-                            // the OVF is marked with "compressed=gzip" therefor it will get decompress
-                            // correctly and use with its disk extension (vmdk/vhd/vdi)...
-                            if (ext.ToLower().EndsWith(".gz"))
-                            {
-                                string newfilename = Path.GetFileNameWithoutExtension(uncompressedfilename);
-                                uncompressedfilename = newfilename;
-                                ext = Path.GetExtension(uncompressedfilename);
-                            }
-                            var statusMessage = string.Format(Messages.START_FILE_EXPANSION, filename);
-                            OnUpdate(statusMessage);
-                        	var ovfCompressor = new OvfCompressor();
-							ovfCompressor.UncompressFile(sourcefile, uncompressedfilename, compression);
-                            if (File.Exists(encryptfilename)) { File.Delete(encryptfilename); }
-                            sourcefile = uncompressedfilename;
-                            statusMessage += Messages.COMPLETED;
-                            OnUpdate(statusMessage);
-                        }
-                        #endregion
-
-                        #region DISK SELECTION
-                        bool knownDisk = false;
-                        foreach (string diskext in VirtualDisk.SupportedDiskFormats)
-                        {
-                            if (ext.ToLower().Contains(diskext.ToLower()))
-                            {
-                                knownDisk = true;
-                                break;
-                            }
-                        }
-                        if (knownDisk)
-                        {
-                            log.DebugFormat("Found file {0} using {1} Stream", filename, ext);
-                            vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
-                            dataStream = vhdDisk.Content;
-                            dataCapacity = vhdDisk.Capacity;
-                        }
-                        else if (ext.ToLower().EndsWith("iso"))
-                        {
-                            if (string.IsNullOrEmpty(sruuid))
-                            {
-                                log.Info("ImportFile: Upload Skipped");
-                                return null;
-                            }
-                            else
-                            {
-                                dataStream = File.OpenRead(filename);
-                                dataCapacity = dataStream.Length;
-                            }
-                        }
-                        else
-                        {
-                            throw new IOException(string.Format(Messages.UNSUPPORTED_FILE_TYPE, ext));
-                        }
-                        #endregion
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("Failed to open virtual disk", ex);
-                        throw new Exception(Messages.ERROR_CANNOT_OPEN_DISK, ex);
-                    }
-                }
-                else
-                {
-                    throw new FileNotFoundException(string.Format(Messages.ERROR_FILE_NOT_FOUND, filename));
-                }
-            }
-            else
-            {
-                log.Error("The file to import was not provided");
+            if (filename == null)
                 throw new InvalidDataException(Messages.ERROR_FILE_NAME_NULL);
-            }
-            #endregion
-                        
+
+            string filePath = Path.Combine(pathToOvf, filename);
+            
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException(string.Format(Messages.ERROR_FILE_NOT_FOUND, filename));
+
+            string ext = Path.GetExtension(filename);
+            string sourcefile = filePath;
+            VirtualDisk vhdDisk = null;
+            Stream dataStream = null;
+
             try
             {
-                #region SEE IF TARGET SR HAS ENOUGH SPACE
-                long freespace;
-                string contenttype = string.Empty;
-                if(vdiuuid != null)
+                #region ENCRYPTION
+
+                if (isEncrypted)
                 {
-                    XenRef<VDI> vdiLookup = VDI.get_by_uuid(xenSession, vdiuuid);
-                    freespace = VDI.get_virtual_size(xenSession, vdiLookup);
+                    if (m_password == null)
+                        throw new InvalidDataException(Messages.ERROR_NO_PASSWORD);
+
+                    Description = string.Format(Messages.START_FILE_DECRYPTION, filename);
+                    log.Debug($"Decrypting {filename} to temporary file enc_{filename}");
+                    sourcefile = Path.Combine(pathToOvf, "enc_" + filename);
+                    OVF.DecryptToTempFile(m_encryptionClass, filePath, m_encryptionVersion, m_password, sourcefile);
+                }
+
+                #endregion
+
+                #region COMPRESSION
+
+                // Identity == no compression, it is meant when a URL is used to identify the compression during transport.
+                if (compression != null && !compression.ToLower().Equals("none") && !compression.ToLower().Equals("identity"))
+                {
+                    Description = string.Format(Messages.START_FILE_EXPANSION, filename);
+                    log.Debug($"Uncompressing {filename} to temporary file unc_{filename}");
+
+                    // gz is the only understood 'compressed' format;
+                    // the OVF is marked with "compressed=gzip" therefore the disk will be decompressed
+                    // and used with its disk extension (vmdk/vhd/vdi)...
+                    if (ext.ToLower().EndsWith(".gz"))
+                    {
+                        sourcefile = Path.Combine(pathToOvf, "unc_" + Path.GetFileNameWithoutExtension(filename));
+                        ext = Path.GetExtension(sourcefile);
+                    }
+
+                    var ovfCompressor = new OvfCompressor();
+                    ovfCompressor.UncompressFile(filePath, sourcefile, compression);
+                }
+
+                #endregion
+
+                #region OPEN DISK
+
+                long dataCapacity;
+
+                if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
+                {
+                    vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
+                    dataStream = vhdDisk.Content;
+                    dataCapacity = vhdDisk.Capacity;
+                }
+                else if (ext.ToLower().EndsWith("iso"))
+                {
+                    if (string.IsNullOrEmpty(sruuid))
+                    {
+                        log.Info($"Import of file {filename} was skipped");
+                        return null;
+                    }
+
+                    dataStream = File.OpenRead(filePath);
+                    dataCapacity = dataStream.Length;
                 }
                 else
                 {
-                    XenRef<SR> srRef = SR.get_by_uuid(xenSession, sruuid);
-                    long size = SR.get_physical_size(xenSession, srRef);
-                    long usage = SR.get_physical_utilisation(xenSession, srRef);
-                    contenttype = SR.get_content_type(xenSession, srRef);
-                    freespace = size - usage;
+                    throw new IOException(string.Format(Messages.UNSUPPORTED_FILE_TYPE, ext));
                 }
 
-                if (freespace <= dataCapacity)
+                #endregion
+
+                #region CREATE VDI IF SR HAS ENOUGH FREE SPACE
+
+                //If no VDI uuid is provided create one, otherwise use the one provided as
+                //the target for the import. Used for SRs such as Lun per VDI (PR-1544)
+
+                Description = string.Format(Messages.IMPORT_VDI_PREPARE, filename);
+                XenRef<VDI> vdiRef = null;
+                long freespace = 0;
+
+                if (string.IsNullOrEmpty(vdiuuid))
                 {
-                    log.Error($"SR {sruuid} does not have {vhdDisk.Capacity} bytes of free space to import virtual disk {filename}.");
-                    string message = string.Format(Messages.SR_NOT_ENOUGH_SPACE, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
-                    throw new IOException(message);
+                    SR sr = Connection.Cache.SRs.FirstOrDefault(s => s.uuid == sruuid);
+                    if (sr != null)
+                        freespace = sr.physical_size - sr.physical_utilisation;
+
+                    if (freespace < dataCapacity)
+                        throw new IOException(string.Format(Messages.SR_NOT_ENOUGH_SPACE,
+                            sruuid, Util.DiskSizeString(dataCapacity), filename));
+
+                    VDI newVdi = new VDI
+                    {
+                        name_label = diskName,
+                        name_description = description,
+                        SR = new XenRef<SR>(sr == null ? Helper.NullOpaqueRef : sr.opaque_ref),//sr==null is unlikely
+                        virtual_size = dataCapacity,
+                        physical_utilisation = dataCapacity,
+                        type = vdi_type.user,
+                        sharable = false,
+                        read_only = false,
+                        storage_lock = false,
+                        managed = true,
+                        is_a_snapshot = false
+                    };
+
+                    VDI vdi = Connection.WaitForCache(VDI.create(Connection.Session, newVdi));
+                    if (vdi != null)
+                    {
+                        vdiuuid = vdi.uuid;
+                        vdiRef = new XenRef<VDI>(vdi.opaque_ref);
+                    }
                 }
+                else
+                {
+                    VDI vdi = Connection.Cache.VDIs.FirstOrDefault(v => v.uuid == vdiuuid);
+                    if (vdi != null)
+                    {
+                        freespace = vdi.virtual_size;
+                        vdiuuid = vdi.uuid;
+                        vdiRef = new XenRef<VDI>(vdi.opaque_ref);
+                    }
+
+                    if (freespace < dataCapacity)
+                        throw new IOException(string.Format(Messages.VDI_NOT_ENOUGH_SPACE,
+                            vdiuuid, Util.DiskSizeString(dataCapacity), filename));
+                }
+
                 #endregion
 
                 #region UPLOAD FILE
-                XenRef<VDI> vdiRef = null;
 
-                //If no VDI uuid is provided create a VDI, otherwise use the one provided as
-                //the target for the import. Used for SRs such as Lun per VDI (PR-1544)
-                if (string.IsNullOrEmpty(vdiuuid))
-                {
-                    vdiRef = CreateVDI(xenSession, sruuid, vmname, dataCapacity, description);
-                    vdiuuid = VDI.get_uuid(xenSession, vdiRef);
-                }
-                else
-                {
-                    vdiRef = new XenRef<VDI>(VDI.get_by_uuid(xenSession, vdiuuid));
-                }
+                var taskRef = Task.create(Connection.Session, "import_raw_vdi_task",
+                    $"Importing disk {sourcefile} to VDI {vdiuuid}");
 
-                var taskRef = Task.create(xenSession, "import_raw_vdi_task", "import_raw_vdi_task");
                 var uriBuilder = new UriBuilder
                 {
-                    Scheme = xenSession.Connection.UriScheme,
-                    Host = xenSession.Connection.Hostname,
-                    Port = xenSession.Connection.Port,
+                    Scheme = Connection.UriScheme,
+                    Host = Connection.Hostname,
+                    Port = Connection.Port,
                     Path = "/import_raw_vdi",
                     Query = string.Format("session_id={0}&task_id={1}&vdi={2}",
-                        xenSession.opaque_ref, taskRef.opaque_ref, vdiuuid)
+                        Connection.Session.opaque_ref, taskRef.opaque_ref, vdiuuid)
                 };
 
                 using (Stream outStream = HTTPHelper.PUT(uriBuilder.Uri, dataStream.Length, true))
                     HTTP.CopyStream(dataStream, outStream,
-                        b => OnUpdate($"Importing disk {filename} ({Util.DiskSizeString(b)} of {Util.DiskSizeString(dataCapacity)} done)"),
+                        b =>
+                        {
+                            Description = string.Format(Messages.IMPORT_VDI, filename,
+                                Util.DiskSizeString(b, 1, "F1"), Util.DiskSizeString(dataCapacity));
+
+                            updatePercentage((float)b / dataCapacity);
+                        },
                         () => XenAdminConfigManager.Provider.ForcedExiting);
+
                 #endregion
 
                 return vdiRef;
             }
-            catch (Exception ex)
-            {
-				if (ex is OperationCanceledException)
-					throw;
-				throw new Exception(Messages.ERROR_FILE_TRANSPORT, ex);
-            }
             finally
             {
-                if (vhdDisk != null)
-                {
-                    vhdDisk.Dispose();
-                    vhdDisk = null;
-                }
+                dataStream?.Dispose();
+                vhdDisk?.Dispose();
 
                 try
                 {
-                    if (File.Exists(encryptfilename))
-                        File.Delete(encryptfilename);
-
-                    if (File.Exists(uncompressedfilename))
-                        File.Delete(uncompressedfilename);
+                    if ((sourcefile.StartsWith("enc_") || sourcefile.StartsWith("unc_")) && File.Exists(sourcefile))
+                        File.Delete(sourcefile);
                 }
                 catch
                 {
                     //ignore errors
                 }
-
-                Directory.SetCurrentDirectory(StartPath);
             }
         }
 
-        private static XenRef<VDI> CreateVDI(Session xenSession, string sruuid, string label, long capacity, string description)
+        private XenRef<VM> CreateVm(string vmName, VirtualHardwareSection_Type system, XenRef<VM_appliance> applRef, StartupSection_TypeItem vmStartupSection)
         {
-            VDI vdi = new VDI
-            {
-                name_label = label,
-                name_description = description,
-                SR = sruuid.ToLower().StartsWith("opaque") ? new XenRef<SR>(sruuid) : SR.get_by_uuid(xenSession, sruuid),
-                virtual_size = capacity,
-                physical_utilisation = capacity,
-                type = vdi_type.user,
-                sharable = false,
-                read_only = false,
-                storage_lock = false,
-                managed = true,
-                is_a_snapshot = false
-            };
-
-            try
-            {
-                // Note that XenServer will round the capacity up to the nearest multiple of a 2 MB block.
-                var vdiRef = VDI.create(xenSession, vdi);
-                log.Debug("Import.CeateVDI::VDI Created");
-                return vdiRef;
-            }
-            catch (Exception ex)
-            {
-                log.Error("Failed to create VDI. ", ex);
-                throw new Exception(Messages.ERROR_CREATE_VDI_FAILED, ex);
-            }
-        }
-
-        private static XenRef<VM> CreateVm(Session xenSession, string vmName, VirtualHardwareSection_Type system, XenRef<VM_appliance> applRef, StartupSection_TypeItem vmStartupSection)
-        {
+            Description = string.Format(Messages.IMPORT_CREATING_VM, vmName);
             string description = system.System?.Description?.Value ?? Messages.DEFAULT_IMPORT_DESCRIPTION;
 
             #region MEMORY
@@ -711,16 +548,16 @@ namespace XenAdmin.Actions.OvfActions
                             //In new OVFs the xcsd.Value.Value is a dictionary string like "key1=value1;key2=value2"
                             //However, we want to be backwards compatible with old OVFs where it was a plain string
                             newVm.HVM_boot_params = xcsdValue.IndexOf('=') > -1
-                                ? SplitStringIntoDictionary(xcsdValue)
+                                ? xcsdValue.SplitToDictionary(';')
                                 : new Dictionary<string, string> {{"order", xcsdValue}};
 							break;
                         case "platform":
-                            newVm.platform = SplitStringIntoDictionary(xcsd.Value.Value);
+                            newVm.platform = xcsd.Value.Value.SplitToDictionary(';');
                             if (!newVm.platform.ContainsKey("nx"))
                                 newVm.platform.Add("nx", "true");
                             break;
 	                    case "nvram":
-		                    newVm.NVRAM = SplitStringIntoDictionary(xcsd.Value.Value);
+		                    newVm.NVRAM = xcsd.Value.Value.SplitToDictionary(';');
 		                    break;
                         case "vgpu":
                             //Skip vGPUs here; we'll set them up after the VM is created
@@ -752,33 +589,26 @@ namespace XenAdmin.Actions.OvfActions
 
             #region set has_vendor_device
 
-            if (Helpers.DundeeOrGreater(xenSession.Connection))
+            var data = system.VirtualSystemOtherConfigurationData;
+            var datum = data?.FirstOrDefault(s => s.Name == "VM_has_vendor_device");
+            if (datum != null)
             {
-                var data = system.VirtualSystemOtherConfigurationData;
-                var datum = data?.FirstOrDefault(s => s.Name == "VM_has_vendor_device");
-                if (datum != null)
-                {
-                    if (bool.TryParse(datum.Value.Value, out var hasVendorDevice) && hasVendorDevice)
-                        newVm.has_vendor_device = hasVendorDevice;
-                }
+                if (bool.TryParse(datum.Value.Value, out var hasVendorDevice) && hasVendorDevice)
+                    newVm.has_vendor_device = hasVendorDevice;
             }
 
             #endregion
 
-            return VM.create(xenSession, newVm);
+            var vm = Connection.WaitForCache(VM.create(Connection.Session, newVm));
+            log.Info($"Created VM {vmName} ({vm.opaque_ref})");
+            return new XenRef<VM>(vm.opaque_ref);
         }
 
-        public static Regex VGPU_REGEX = new Regex("^GPU_types={(.*)};VGPU_type_vendor_name=(.*);VGPU_type_model_name=(.*);$");
-
-        public static Regex PVS_SITE_REGEX = new Regex("^PVS_SITE={uuid=(.*)};$");
-
-        private static List<Tuple<GPU_group, VGPU_type>> FindGpuGroupAndVgpuType(Session xenSession, VirtualHardwareSection_Type system)
+        private void CreateVgpus(VirtualHardwareSection_Type system, XenRef<VM> vmRef)
         {
-            List<Tuple<GPU_group, VGPU_type>> vgpus = new List<Tuple<GPU_group, VGPU_type>>();
-
             var data = system.VirtualSystemOtherConfigurationData;
             if (data == null)
-                return vgpus;
+                return;
 
             var datum = data.Where(s => s.Name == "vgpu");
 
@@ -787,695 +617,428 @@ namespace XenAdmin.Actions.OvfActions
                 Match m = VGPU_REGEX.Match(item.Value.Value);
                 if (!m.Success)
                     continue;
+                
                 var types = m.Groups[1].Value.Split(';');
 
-                var gpuGroups = GPU_group.get_all_records(xenSession);
-                var gpuKvp = gpuGroups.FirstOrDefault(g =>
-                    g.Value.supported_VGPU_types.Count > 0 &&
-                    g.Value.GPU_types.Length == types.Length &&
-                    g.Value.GPU_types.Intersect(types).Count() == types.Length);
+                var gpuGroup = Connection.Cache.GPU_groups.FirstOrDefault(g =>
+                    g.supported_VGPU_types.Count > 0 &&
+                    g.GPU_types.Length == types.Length &&
+                    g.GPU_types.Intersect(types).Count() == types.Length);
 
-                if (gpuKvp.Equals(default(KeyValuePair<XenRef<GPU_group>, GPU_group>)))
+                if (gpuGroup ==  null)
                     continue;
-
-                var gpuGroup = gpuKvp.Value;
-                VGPU_type vgpuType = null;
-
-                gpuGroup.opaque_ref = gpuKvp.Key.opaque_ref;
 
                 string vendorName = m.Groups[2].Value;
                 string modelName = m.Groups[3].Value;
 
-                var vgpuTypes = VGPU_type.get_all_records(xenSession);
-                var vgpuKey = vgpuTypes.FirstOrDefault(v =>
-                    v.Value.vendor_name == vendorName && v.Value.model_name == modelName);
+                VGPU_type vgpuType = Connection.Cache.VGPU_types.FirstOrDefault(v =>
+                    v.vendor_name == vendorName && v.model_name == modelName);
 
-                if (!vgpuKey.Equals(default(KeyValuePair<XenRef<VGPU_type>, VGPU_type>)))
+                if (vgpuType == null)
+                    continue;
+
+                var otherConfig = new Dictionary<string, string>();
+
+                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
                 {
-                    vgpuType = vgpuKey.Value;
-                    vgpuType.opaque_ref = vgpuKey.Key.opaque_ref;
+                    //If the current licence does not allow vGPU, we create one pass-through vGPU
+                    //(default vGPU type) for the VM (multiple pass-through vGPUs are not supported yet)
+
+                    var oneVgpu = Connection.WaitForCache(VGPU.create(Connection.Session, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", otherConfig));
+                    log.Info($"The host license does not support vGPU. Created one pass-through vGPU ({oneVgpu.opaque_ref}) for the VM");
+                    break;
                 }
-                vgpus.Add(new Tuple<GPU_group, VGPU_type>(gpuGroup, vgpuType));
+
+                var vgpu = Connection.WaitForCache(VGPU.create(Connection.Session, vmRef.opaque_ref, gpuGroup.opaque_ref, "0", otherConfig, vgpuType.opaque_ref));
+                log.Info($"Created vGPU {vgpu.opaque_ref}");
             }
-            return vgpus;
         }
 
-        private static PVS_site FindPvsSite(Session xenSession, VirtualHardwareSection_Type system)
+        private void CreatePvsProxy(VirtualHardwareSection_Type system, XenRef<VM> vmRef)
         {
-            var data = system.VirtualSystemOtherConfigurationData;
-            if (data == null)
-                return null;
-
-            var datum = data.FirstOrDefault(s => s.Name == "pvssite");
+            var datum = system.VirtualSystemOtherConfigurationData?.FirstOrDefault(s => s.Name == "pvssite");
             if (datum == null)
-                return null;
+                return;
 
             Match m = PVS_SITE_REGEX.Match(datum.Value.Value);
             if (!m.Success)
-                return null;
-
+                return;
+            
             var siteUuid = m.Groups[1].Value;
+            var site = Connection.Cache.PVS_sites.FirstOrDefault(p => p.uuid == siteUuid);
+            if (site == null)
+                return;
 
-            var allSites = PVS_site.get_all_records(xenSession);
+            var vm = Connection.TryResolveWithTimeout(vmRef);
+            if (vm == null)
+                return;
 
-            var site = allSites.Select(kvp => kvp.Value).FirstOrDefault(p => p.uuid == siteUuid);
-
-            return site;
-        }
-
-        private static void RemoveSystem(Session xenSession, XenRef<VM> vm)
-        {
-            try
+            foreach (var vifRef in vm.VIFs)
             {
-                VM.destroy(xenSession, vm);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Failed to remove a virtual machine (VM). ", ex);
-                throw new Exception(Messages.ERROR_REMOVE_VM_FAILED, ex);
+                var vif = Connection.TryResolveWithTimeout(vifRef);
+                if (vif != null && vif.device.Equals("0"))
+                {
+                    var pvs = Connection.WaitForCache(PVS_proxy.create(Connection.Session, site.opaque_ref, vif.opaque_ref));
+                    log.Info($"Created PVS_proxy {pvs.opaque_ref}");
+                    break;
+                }
             }
         }
 
-        private static Dictionary<string, string> SplitStringIntoDictionary(string inputStr)
-        {
-			/* Comment for the usage o.Split(new[] { '=' }, 2)
-			 * The second parameter "2" is used to handle the case when the delimiter '=' appears in the content of the string
-			 *
-			 * For example, inputStr = "EFI-variables-backend=xapidb;EFI-variabbles-on-boot=reset;EFI-variables=dGVzdA=="
-			 * Notice there are 2 extra '=' in the last section
-			 * The expected output of that section should be { 'EFI-variables':'dGVzdA==' }
-			 * But if we do not the second parameter "2" in the Split function, the actual output will be { 'EFI-variables':'' }
-			 */
-			return inputStr.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(o => o.Split(new[] { '=' }, 2))
-				.ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
-        }
-
-        private static void AddResourceSettingData(Session xenSession, Action<string> OnUpdate, XenRef<VM> vmRef, RASD_Type rasd, string pathToOvf, string filename, string compression, string version, string passcode, bool metaDataOnly, string encryptionClass, ref int vifDeviceIndex)
+        private void AddResourceSettingData(EnvelopeType ovfObj, XenRef<VM> vmRef, RASD_Type rasd, string pathToOvf, ref int vifDeviceIndex, Action<float> updatePercentage)
         {
             switch (rasd.ResourceType.Value)
             {
-                case 3: // Processor: Already set in DefineSystem
-                case 4: // Memory: Already set in DefineSystem
-                case 5: // Internal Disk Controller of one type or another.
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    {
-                        // For Xen really nothing to do here, does not support the different
-                        // controller types, therefore we must ensure
-                        // via positional on controllers.
-                        // IDE - #1
-                        // SCSI - #2
-                        // IDE 0 Disk  0 Goes to Xen: userdevice=0
-                        // IDE 0 Disk  1 Goes to Xen: userdevice=1 
-                        // IDE 1 Disk  0 Goes to Xen: userdevice=2
-                        // IDE 1 CDDVD 1 Goes to Xen: userdevice=3
-                        // SCSI 0 Disk 0 Goes to Xen: userdevice=4
-                        // SCSI 0 Disk 1 Goes to Xen: userdevice=5
-                        // and so forth.
-                        break;
-                    }
                 case 10: // Network
+                {
+                    #region FIND NETWORK
+
+                    XenRef<XenAPI.Network> net = null;
+                    XenRef<XenAPI.Network> netDefault = null;
+
+                    if (rasd.Connection != null && rasd.Connection.Length > 0 && !string.IsNullOrEmpty(rasd.Connection[0].Value))
                     {
-                        XenRef<XenAPI.Network> net = null;
-                        XenRef<XenAPI.Network> netDefault = null;
-                        string netuuid = null;
+                        // Ignore the NetworkSection/Network
+                        // During Network Selection the UUID for Network was set in Connection Field
 
-                        #region SELECT NETWORK
-                        var networks = XenAPI.Network.get_all_records(xenSession);
-                        if (rasd.Connection != null && rasd.Connection.Length > 0)
+                        var dict = rasd.Connection[0].Value.SplitToDictionary(',');
+
+                        if (!dict.TryGetValue("network", out string netuuid))
+                            dict.TryGetValue("XenNetwork", out netuuid);
+
+                        var networks = Connection.Cache.Networks;
+
+                        foreach (XenAPI.Network network in networks)
                         {
-                            if (!string.IsNullOrEmpty(rasd.Connection[0].Value))
-                            {
-                                // Ignore the NetworkSection/Network
-                                // During Network Selection the UUID for Network was set in Connection Field
-                                // Makes data self contained here.
+                            if (net == null && netuuid != null &&
+                                (netuuid.Equals(network.uuid) ||
+                                 network.name_label.ToLower().Contains(netuuid) ||
+                                 network.bridge.ToLower().Contains(netuuid)))
+                                net = new XenRef<XenAPI.Network>(network.opaque_ref);
 
-                                if (rasd.Connection[0].Value.Contains("network=") ||
-                                    rasd.Connection[0].Value.Contains("XenNetwork="))
-                                {
-                                    string[] s = rasd.Connection[0].Value.Split(',');
-                                    for (int i = 0; i < s.Length; i++)
-                                    {
-                                        if (s[i].StartsWith("network=") || s[i].StartsWith("XenNetwork="))
-                                        {
-                                            string[] s1 = s[i].Split('=');
-                                            netuuid = s1[1];
-                                        }
-                                    }
-                                }
-                                foreach (XenRef<XenAPI.Network> netRef in networks.Keys)
-                                {
-                                    // if its a UUID and we find it... use it..
-                                    if (net == null && netuuid != null && 
-                                        netuuid.Equals(networks[netRef].uuid))
-                                    {
-                                        net = netRef;
-                                    }
-                                    // Ok second is to match it as a NAME_LABEL
-                                    else if (net == null && netuuid != null && 
-                                        networks[netRef].name_label.ToLower().Contains(netuuid))
-                                    {
-                                        net = netRef;
-                                    }
-                                    // hhmm neither... is it a BRIDGE name?
-                                    else if (net == null && netuuid != null && 
-                                        networks[netRef].bridge.ToLower().Contains(netuuid))
-                                    {
-                                        net = netRef;
-                                    }
-                                    // ok find the default.
-                                    if (networks[netRef].bridge.ToLower().Contains("xenbr0"))
-                                    {
-                                        netDefault = netRef;
-                                    }
-                                }
-                                if (net == null)
-                                {
-                                    net = netDefault;
-                                }
-                            }
-                        }
-                        #endregion
-
-                        #region ATTACH NETWORK TO VM
-
-                        VIF vif = new VIF
-                        {
-                            uuid = Guid.NewGuid().ToString(),
-                            allowed_operations = new List<vif_operations> {vif_operations.attach},
-                            device = Convert.ToString(vifDeviceIndex++),
-                            network = net,
-                            VM = vmRef,
-                            MTU = 1500,
-                            locking_mode = vif_locking_mode.network_default
-                        };
-
-                        // This is MAC address if available use it.
-                        // needs to be in form:  00:00:00:00:00:00
-                        if (Tools.ValidateProperty("Address", rasd))
-                        {
-                            StringBuilder networkAddress = new StringBuilder();
-                            if (!rasd.Address.Value.Contains(":"))
-                            {
-                                for (int i = 0; i < rasd.Address.Value.Length; i++)
-                                {
-                                    if ((i > 0) && (i % 2) == 0)
-                                    {
-                                        networkAddress.Append(":");
-                                    }
-                                    networkAddress.Append(rasd.Address.Value[i]);
-                                }
-                            }
-                            if (networkAddress.Length == 0)
-                            {
-                                networkAddress.Append(rasd.Address.Value);
-                            }
-                            vif.MAC = networkAddress.ToString();
+                            if (network.bridge.ToLower().Contains("xenbr0"))
+                                netDefault = new XenRef<XenAPI.Network>(network.opaque_ref);
                         }
 
+                        if (net == null)
+                            net = netDefault;
+                    }
+
+                    #endregion
+
+                    #region CREATE VIF
+
+                    VIF newVif = new VIF
+                    {
+                        allowed_operations = new List<vif_operations> {vif_operations.attach},
+                        device = Convert.ToString(vifDeviceIndex++),
+                        network = net,
+                        VM = vmRef,
+                        MTU = 1500,
+                        locking_mode = vif_locking_mode.network_default
+                    };
+
+                    // This is MAC address if available use it.
+                    // needs to be in form:  00:00:00:00:00:00
+                    if (Tools.ValidateProperty("Address", rasd))
+                    {
+                        if (rasd.Address.Value != null && !rasd.Address.Value.Contains(":"))
+                            newVif.MAC = string.Join(":", rasd.Address.Value.SplitInChunks(2));
+
+                        if (string.IsNullOrEmpty(newVif.MAC))
+                            newVif.MAC = rasd.Address.Value;
+                    }
+
+                    var vif = Connection.WaitForCache(VIF.create(Connection.Session, newVif));
+                    log.Info($"Created VIF {vif.opaque_ref}");
+
+                    #endregion
+
+                    break;
+                }
+                case 15: // CD Drive
+                case 16: // DVD Drive
+                {
+                    var vm = Connection.Resolve(vmRef);
+                    if (vm != null)
+                    {
+                        foreach (var vbdRef in vm.VBDs)
+                        {
+                            var vbd = Connection.Resolve(vbdRef);
+                            if (vbd != null && vbd.type == vbd_type.CD)
+                                return; //currently XenServer allows only one CD/DVD drive per VM
+                        }
+                    }
+
+                    #region CHECK FOR VDI TO UPLOAD
+
+                    Description = Messages.CD_DVD_DEVICE_ATTACHED;
+
+                    var filename = OVF.FindRasdFileName(ovfObj, rasd, out string compression);
+                    var isoImage = Connection.Cache.VDIs.FirstOrDefault(v => v.name_label == filename);
+                    XenRef<VDI> vdiRef = null;
+
+                    if (isoImage != null)
+                    {
+                        vdiRef = new XenRef<VDI>(isoImage.opaque_ref);
+                    }
+                    else if (filename != null && !MetaDataOnly)
+                    {
+                        //find the ISO SR mapped in the OVF and import the ISO
+
+                        string isoSrUuid = null;
+
+                        if (rasd.Connection != null && rasd.Connection.Length > 0 && !string.IsNullOrEmpty(rasd.Connection[0].Value))
+                        {
+                            var dict = rasd.Connection[0].Value.SplitToDictionary(',');
+                            dict.TryGetValue("sr", out string srId);
+                            isoSrUuid = Connection.Cache.SRs.FirstOrDefault(s => s.uuid == srId || s.name_label == srId)?.uuid;
+                        }
+
+                        if (isoSrUuid != null)
+                            vdiRef = ImportFile(filename, pathToOvf, filename,
+                                compression, isoSrUuid, "", null, OVF.IsThisEncrypted(ovfObj, rasd), updatePercentage);
+                    }
+
+                    #endregion
+
+                    #region CREATE VBD CONNECTION
+
+                    var hashtable = new Hashtable();
+
+                    if (rasd.Connection != null && rasd.Connection.Length > 0 && !string.IsNullOrEmpty(rasd.Connection[0].Value))
+                    {
+                        var dict = rasd.Connection[0].Value.SplitToDictionary(',');
+
+                        foreach (var kvp in dict)
+                        {
+                            switch (kvp.Key)
+                            {
+                                case "sr":
+                                case "vdi":
+                                    continue;
+                                case "device":
+                                    hashtable.Add("userdevice", kvp.Value);
+                                    break;
+                                default:
+                                    hashtable.Add(kvp.Key, kvp.Value);
+                                    break;
+                            }
+                        }
+                    }
+
+                    VBD isoVbd = new VBD
+                    {
+                        VM = vmRef,
+                        mode = vbd_mode.RO,
+                        userdevice = "3",
+                        type = vbd_type.CD,
+                        storage_lock = false,
+                        status_code = 0
+                    };
+
+                    isoVbd.UpdateFrom(hashtable);
+
+                    if (vdiRef == null || Helper.IsNullOrEmptyOpaqueRef(vdiRef))
+                    {
+                        isoVbd.empty = true;
+                    }
+                    else
+                    {
+                        isoVbd.VDI = vdiRef;
+                        isoVbd.empty = false;
+                        isoVbd.bootable = true;
+                        isoVbd.unpluggable = true;
+                    }
+
+                    isoVbd.userdevice = VerifyUserDevice(vmRef, isoVbd.userdevice);
+                    isoVbd.other_config = new Dictionary<string, string> {{"owner", "true"}};
+
+                    if (!isoVbd.userdevice.EndsWith("+"))
+                    {
                         try
                         {
-                            xenSession.Connection.WaitForCache(VIF.create(xenSession, vif));
+                            Connection.WaitForCache(VBD.create(Connection.Session, isoVbd));
+                            log.Info("Created VBD for CD/DVD ROM");
                         }
                         catch (Exception ex)
                         {
-                            log.Error("Failed to create a virtual network interface (VIF). ", ex);
-                            throw new Exception(Messages.ERROR_CREATE_VIF_FAILED, ex);
+                            log.Error("Failed to create VBD for CD/DVD ROM.", ex);
                         }
-                        #endregion
-                        log.Debug("OVF.Import.AddResourceSettingData: Network Added");
-
-                        break;
                     }
-                case 15: // CD Drive
-                case 16: // DVD Drive
+                    else
                     {
-                        // We always attach as "EMPTY".
-                        // Currently Xen Server can only have ONE CD, so we must 
-                        // Skip the others.
-                        // If it's not necessary.. skip it.
-
-                        #region Attach DVD to VM
-                        bool SkipCD = false;
-                        List<XenRef<VBD>> vbds = VM.get_VBDs(xenSession, vmRef);
-                        foreach (XenRef<VBD> vbd in vbds)
-                        {
-                            vbd_type vbdType = VBD.get_type(xenSession, vbd);
-                            if (vbdType == vbd_type.CD)
-                            {
-                                SkipCD = true;
-                                break;
-                            }
-                        }
-
-                        if (!SkipCD)
-                        {
-                            List<XenRef<VDI>> vdiRefs = new List<XenRef<VDI>>();
-                            if (filename != null)
-                            {
-                                #region FIND THE ISO SR MAPPED IN THE OVF
-                                string isoUuid = null;
-                                if (rasd.Connection != null && rasd.Connection.Length > 0)
-                                {
-                                    if (rasd.Connection[0].Value.ToLower().Contains("sr="))
-                                    {
-                                        string[] vpairs = rasd.Connection[0].Value.Split(',');
-                                        foreach (string vset in vpairs)
-                                        {
-                                            if (vset.ToLower().StartsWith("sr="))
-                                            {
-                                                var srToFind = vset.Substring(vset.LastIndexOf('=') + 1);
-
-                                                try
-                                                {
-                                                    XenRef<SR> srRef = SR.get_by_uuid(xenSession, srToFind);
-                                                    if (srRef != null && srRef != Helper.NullOpaqueRef)
-                                                    {
-                                                        isoUuid = srToFind;
-                                                        break;
-                                                    }
-                                                }
-                                                catch
-                                                {
-                                                    log.Debug("Import.AddResourceSettingData: iso sr uuid not found, trying name_label");
-                                                }
-
-                                                try
-                                                {
-                                                    var srRecords = SR.get_all_records(xenSession);
-
-                                                    isoUuid = (from SR sr in srRecords.Values
-                                                        where sr.name_label == srToFind
-                                                        select sr.uuid).FirstOrDefault();
-                                                }
-                                                catch
-                                                {
-                                                    log.Debug("Import.AddResourceSettingData: iso sr uuid not found, looking for vdi...");
-                                                }
-
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                #endregion
-
-                                // VDI trumps SR
-                                List<XenRef<VDI>> isoVDIlist = VDI.get_by_name_label(xenSession, filename);
-                                if (isoVDIlist.Count > 0)
-                                {
-                                    vdiRefs.Add(isoVDIlist[0]);
-                                }
-                                else
-                                {
-                                    #region LAST CHANCE USE XENTOOLS ISO SR
-                                    if (isoUuid == null)
-                                    {
-                                        Dictionary<XenRef<SR>, SR> srDictionary = SR.get_all_records(xenSession);
-                                        foreach (XenRef<SR> key in srDictionary.Keys)
-                                        {
-                                            if (srDictionary[key].content_type.ToLower() == "iso" && srDictionary[key].type.ToLower() == "iso")
-                                            {
-                                                if (srDictionary[key].name_label.ToLower().Equals(BrandManager.VM_TOOLS))
-                                                {
-                                                    isoUuid = srDictionary[key].uuid;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    #endregion
-
-                                    #region DO IMPORT ISO FILE
-                                    if (isoUuid != null && !metaDataOnly)
-                                    {
-                                        try
-                                        {
-                                            var vdiRef = ImportFile(xenSession, OnUpdate, filename, pathToOvf, filename, compression, version, passcode, isoUuid, "", null, encryptionClass);
-                                            if (vdiRef != null)
-                                                vdiRefs.Add(vdiRef);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            if (ex is OperationCanceledException)
-                                                throw;
-
-                                            log.Error("Failed to add resource ISO.", ex);
-                                            throw new Exception(Messages.ERROR_ADD_RASD_ISO, ex);
-                                        }
-                                        finally
-                                        {
-                                            if (vdiRefs == null || vdiRefs.Count <= 0)
-                                            {
-                                                log.ErrorFormat("Failed to import virtual disk from file {0} to storage repository {1}.", filename, isoUuid);
-                                                RemoveSystem(xenSession, vmRef);
-                                            }
-                                        }
-                                    }
-                                    #endregion
-                                }
-                            }
-                            else
-                            {
-                                vdiRefs.Add(XenRef<VDI>.Create(string.Empty));
-                            }
-
-                            #region CREATE VBD CONNECTION
-                         
-                            foreach (XenRef<VDI> currentVDI in vdiRefs)
-                            {
-                                var hashtable = new Hashtable();
-
-                                if (rasd.Connection != null && rasd.Connection.Length > 0)
-                                {
-                                    string[] valuepairs = rasd.Connection[0].Value.Split(',');
-
-                                    foreach (string valuepair in valuepairs)
-                                    {
-                                        string[] namevalue = valuepair.Split('=');
-                                        string name = namevalue[0].ToLower();
-
-                                        switch (name)
-                                        {
-                                            case "sr":
-                                            case "vdi":
-                                                continue;
-                                            case "device":
-                                                hashtable.Add("userdevice", namevalue[1]);
-                                                break;
-                                            default:
-                                                hashtable.Add(namevalue[0], namevalue[1]);
-                                                break;
-                                        }
-                                    }
-                                }
-
-                                VBD vbd = new VBD
-                                {
-                                    VM = vmRef,
-                                    mode = vbd_mode.RO,
-                                    userdevice = "3",
-                                    type = vbd_type.CD,
-                                    storage_lock = false,
-                                    status_code = 0
-                                };
-
-                                vbd.UpdateFrom(hashtable);
-
-                                if (currentVDI != null && !string.IsNullOrEmpty(currentVDI.opaque_ref))
-                                {
-                                    vbd.VDI = currentVDI;
-                                    vbd.empty = false;
-                                    vbd.bootable = true;
-                                    vbd.unpluggable = true;
-                                }
-                                else
-                                {
-                                    vbd.empty = true;
-                                }
-
-                                vbd.userdevice = VerifyUserDevice(xenSession, vmRef, vbd.userdevice);
-                                vbd.other_config = new Dictionary<string, string> { { "owner", "true" } };
-
-                                if (!vbd.userdevice.EndsWith("+"))
-                                {
-                                    try
-                                    {
-                                        VBD.create(xenSession, vbd);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        log.Error("Import.AddResourceSettingData: ", ex);
-                                    }
-                                }
-                                else
-                                {
-                                    log.WarnFormat(
-                                        "Import:  ================== ATTENTION NEEDED =======================" +
-                                        "Import:  Could not determine appropriate number of device placement." +
-                                        "Import:  Please Start, Logon, Shut down, System ({0})" +
-                                        "Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +." +
-                                        "Import:  ===========================================================", vmRef);
-
-                                    //TODO: OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
-                                }
-                            }
-                            #endregion
-
-                        }
-                        #endregion
-                        OnUpdate(Messages.CD_DVD_DEVICE_ATTACHED);
-                        log.Debug("Import.AddResourceSettingData: CD/DVD ROM Added");
-
-                        break;
+                        log.WarnFormat(
+                            "Import:  ================== ATTENTION NEEDED =======================" +
+                            "Import:  Could not determine appropriate number of device placement." +
+                            "Import:  Please Start, Logon, Shut down VM ({0}), then manually attach" +
+                            "Import:  disks with labels ending with \"+\" to the device number defined before the +." +
+                            "Import:  ===========================================================", vmRef);
                     }
+
+                    #endregion
+
+                    break;
+                }
                 case 17: // Disk Drive
                 case 19: // Storage Extent
                 case 21: // Microsoft: Hard drive/Floppy/ISO
+                {
+                    #region ADD DISK
+
+                    if (Tools.ValidateProperty("Caption", rasd) &&
+                        (rasd.Caption.Value.ToUpper().Contains("COM") ||
+                         rasd.Caption.Value.ToUpper().Contains("FLOPPY") ||
+                         rasd.Caption.Value.ToUpper().Contains("ISO")))
+                        break;
+
+                    File_Type file = OVF.FindFileReferenceByRASD(ovfObj, rasd);
+                    if (file == null)
+                        break;
+
+                    SetIfDeviceIsBootable(ovfObj, rasd);
+
+                    var filename = OVF.FindRasdFileName(ovfObj, rasd, out string compression);
+                    if (filename == null)
                     {
-                        #region ADD DISK
-                        if (filename == null)
-                        {
-                            log.Warn($"No file available to import, skipping RASD {rasd.ResourceType.Value}: {rasd.InstanceID.Value}");
-                            return;
-                        }
+                        log.Warn($"No file available to import, skipping RASD {rasd.ResourceType.Value}: {rasd.InstanceID.Value}");
+                        return;
+                    }
 
-                        if (Tools.ValidateProperty("Caption", rasd) &&
-                            (rasd.Caption.Value.ToUpper().Contains("COM") ||
-                             rasd.Caption.Value.ToUpper().Contains("FLOPPY") ||
-                             rasd.Caption.Value.ToUpper().Contains("ISO")))
-                        {
-                            log.Info($"Resource {filename} is {rasd.Caption.Value}. Skipping import.");
-                            return;
-                        }
+                    if (Tools.ValidateProperty("Caption", rasd) &&
+                        (rasd.Caption.Value.ToUpper().Contains("COM") ||
+                         rasd.Caption.Value.ToUpper().Contains("FLOPPY") ||
+                         rasd.Caption.Value.ToUpper().Contains("ISO")))
+                    {
+                        log.Info($"Resource {filename} is {rasd.Caption.Value}. Skipping import.");
+                        return;
+                    }
 
-                        if (metaDataOnly)
-                        {
-                            log.Info($"Importing metadata only. Skipping resource {filename}.");
-                            return;
-                        }
+                    if (MetaDataOnly)
+                    {
+                        log.Info($"Importing metadata only. Skipping resource {filename}.");
+                        return;
+                    }
 
-                        string sruuid = null;
-                        string vdiuuid = null;
-                        string userdeviceid = null;
-                        string vmName = VM.get_name_label(xenSession, vmRef);
-                        bool isbootable = false;
-                        vbd_mode mode = vbd_mode.RW;
+                    string sruuid = null;
+                    string vdiuuid = null;
+                    string userdeviceid = null;
+                    bool isbootable = false;
+                    vbd_mode mode = vbd_mode.RW;
 
-                        #region IMPORT DISKS
+                    #region PARSE CONNECTION
 
-                        List<XenRef<VDI>> vdiRefs = new List<XenRef<VDI>>();
+                    if (Tools.ValidateProperty("Connection", rasd) && !string.IsNullOrEmpty(rasd.Connection[0].Value))
+                    {
+                        var dict = rasd.Connection[0].Value.SplitToDictionary(',');
 
-                        #region PARSE CONNECTION
-                        if (Tools.ValidateProperty("Connection", rasd))
-                        {
-                            string[] s = rasd.Connection[0].Value.Split('=', ',');
-                            for (int i = 0; i < s.Length; i++)
-                            {
-                                string checkme = s[i].ToLower().Trim();
-                                switch (checkme)
-                                {
-                                    case "device":
-                                        {
-                                            userdeviceid = s[++i];
-                                            break;
-                                        }
-                                    case "bootable":
-                                        {
-                                            isbootable = Convert.ToBoolean(s[++i]);
-                                            break;
-                                        }
-                                    case "mode":
-                                        {
-                                            if (s[++i].Equals("r"))
-                                            {
-                                                mode = vbd_mode.RO;
-                                            }
-                                            break;
-                                        }
-                                    case "vdi":
-                                        {
-                                            vdiuuid = s[++i];
-                                            break;
-                                        }
-                                    case "sr":
-                                        {
-                                            sruuid = s[++i];
-                                            break;
-                                        }
-                                }
-                            }
-                        }
-                        #endregion
+                        dict.TryGetValue("device", out userdeviceid);
+                        dict.TryGetValue("vdi", out vdiuuid);
 
-                        #region VERIFY SR UUID
-                        if (!string.IsNullOrEmpty(sruuid))
-                        {
-                            XenRef<SR> srref = null;
-                            try
-                            {
-                                srref = SR.get_by_uuid(xenSession, sruuid);
-                            }
-                            catch
-                            {
-                                log.Debug("Import.AddResourceSettingData: SR missing... still looking..");
-                            }
-                            if (srref == null)
-                            {
-                                List<XenRef<SR>> srlist = null;
-                                try
-                                {
-                                    srlist = SR.get_by_name_label(xenSession, sruuid);
-                                }
-                                catch
-                                {
-                                    log.Debug("Import.AddResourceSettingData: SR missing... still looking..");
-                                }
-                                if (srlist != null && srlist.Count > 0)
-                                {
-                                    sruuid = SR.get_uuid(xenSession, srlist[0]);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sruuid = null;
-                        }
-                        #endregion
+                        if (dict.TryGetValue("sr", out var srId))
+                            sruuid = Connection.Cache.SRs.FirstOrDefault(s => s.uuid == srId || s.name_label == srId)?.uuid;
 
-                        #region LAST CHANGE TO FIND SR
-                        if (sruuid == null)
-                        {
-                            XenRef<SR> DefaultSRUUID = null;
-                            Dictionary<XenRef<Pool>, Pool> pools = Pool.get_all_records(xenSession);
-                            foreach (XenRef<Pool> pool in pools.Keys)
-                            {
-                                DefaultSRUUID = pools[pool].default_SR;
-                                break;
-                            }
+                        if (dict.TryGetValue("bootable", out var bootable))
+                            isbootable = Convert.ToBoolean(bootable);
 
-                            if (DefaultSRUUID == null)
-                            {
-                                log.Error("The SR was not found and a default was not assigned.");
-                                throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
-                            }
+                        if (dict.TryGetValue("mode", out var theMode) && theMode == "r")
+                            mode = vbd_mode.RO;
+                    }
 
-                            Dictionary<XenRef<SR>, SR> srDict = SR.get_all_records(xenSession);
-                            if (vdiuuid != null)
-                            {
-                                //Try and get the SR that belongs to the VDI attached
-                                XenRef<VDI> tempVDI = VDI.get_by_uuid(xenSession, vdiuuid);
-                                if (tempVDI == null)
-                                {
-                                    log.Error("The SR was not found and a default was not assigned.");
-                                    throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
-                                }
+                    #endregion
 
-                                XenRef<SR> tempSR = VDI.get_SR(xenSession, tempVDI.opaque_ref);
-                                sruuid = srDict[tempSR].uuid;
-                            }
-                            else
-                                sruuid = srDict[DefaultSRUUID].uuid;
-                        }
-                        #endregion
+                    #region FIND SR
 
-                        XenRef<VDI> vdiRef = null;
+                    if (sruuid == null && vdiuuid != null)
+                    {
+                        var mappedVdi = Connection.Cache.VDIs.FirstOrDefault(v => v.uuid == vdiuuid);
+                        if (mappedVdi != null)
+                            sruuid = Connection.Cache.SRs.FirstOrDefault(s => s.opaque_ref == mappedVdi.SR.opaque_ref)?.uuid;
+                    }
 
+                    if (sruuid == null)
+                    {
+                        var pool = Helpers.GetPoolOfOne(Connection);
+                        if (pool != null)
+                            sruuid = Connection.Resolve(pool.default_SR)?.uuid;
+                    }
+
+                    if (sruuid == null)
+                        throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
+
+                    #endregion
+
+                    #region IMPORT DISK
+
+                    var vm = Connection.Resolve(vmRef);
+
+                    string disklabel = rasd.ElementName?.Value;
+                    if (string.IsNullOrEmpty(disklabel))
+                        disklabel = $"{vm.Name()}_{userdeviceid}";
+
+                    string description = rasd.Description?.Value ?? "";
+
+                    XenRef<VDI> vdiRef = ImportFile(disklabel, pathToOvf, filename, compression, sruuid, description, vdiuuid, OVF.IsThisEncrypted(ovfObj, rasd), updatePercentage);
+
+                    #endregion
+
+                    #region CONNECT VBD
+
+                    VBD vbd = new VBD
+                    {
+                        userdevice = VerifyUserDevice(vmRef, userdeviceid ?? "99"),
+                        bootable = isbootable,
+                        VDI = vdiRef,
+                        mode = mode,
+                        VM = vmRef,
+                        empty = false,
+                        type = vbd_type.Disk,
+                        currently_attached = false,
+                        storage_lock = false,
+                        status_code = 0,
+                        // below other_config keys XS to delete the disk along with the VM.
+                        other_config = new Dictionary<string, string> {{"owner", "true"}}
+                    };
+
+                    if (!vbd.userdevice.EndsWith("+"))
+                    {
                         try
                         {
-                            string disklabel = string.Format("{0}_{1}", vmName, userdeviceid);
-
-                            if ((rasd.ElementName != null) && (!string.IsNullOrEmpty(rasd.ElementName.Value)))
-                                disklabel = rasd.ElementName.Value;
-
-                            string description = "";
-
-                            if ((rasd.Description != null) && (!string.IsNullOrEmpty(rasd.Description.Value)))
-                                description = rasd.Description.Value;
-
-                            vdiRef = ImportFile(xenSession, OnUpdate, disklabel, pathToOvf, filename, compression, version, passcode, sruuid, description, vdiuuid, encryptionClass);
-                            if (vdiRef != null)
-                                vdiRefs.Add(vdiRef);
+                            Connection.WaitForCache(VBD.create(Connection.Session, vbd));
+                            log.Info($"Created VBD for disk {filename}.");
                         }
                         catch (Exception ex)
                         {
-							if (ex is OperationCanceledException)
-								throw;
-
-                            log.Error("Failed to add resource Hard Disk Image.", ex);
-                            throw new InvalidDataException(Messages.ERROR_ADD_RASD_DISK_DEVICE, ex);
+                            log.Error($"Failed to create VBD for disk {filename}." +
+                                "Please attach disk manually.", ex);
                         }
-                        finally
-                        {
-                            if (vdiRef == null)
-                            {
-                                log.ErrorFormat("Failed to import virtual disk from file {0} to storage repository {1}.", filename, sruuid);
-                                RemoveSystem(xenSession, vmRef);
-                            }
-                        }
-
-                        log.DebugFormat("Import.AddResourceSettingData counts {0} VDIs", vdiRefs.Count);
-
-                        foreach (XenRef<VDI> currentVDI in vdiRefs)
-                        {
-                            VBD vbd = new VBD
-                            {
-                                userdevice = VerifyUserDevice(xenSession, vmRef, userdeviceid ?? "99"),
-                                bootable = isbootable,
-                                VDI = currentVDI,
-                                mode = mode,
-                                uuid = Guid.NewGuid().ToString(),
-                                VM = vmRef,
-                                empty = false,
-                                type = vbd_type.Disk,
-                                currently_attached = false,
-                                storage_lock = false,
-                                status_code = 0,
-                                // below other_config keys XS to delete the disk along with the VM.
-                                other_config = new Dictionary<string, string> {{"owner", "true"}}
-                            };
-
-                            if (!vbd.userdevice.EndsWith("+"))
-                            {
-                                try
-                                {
-                                    VBD.create(xenSession, vbd);
-                                }
-                                catch (Exception ex)
-                                {
-                                    log.Error("Failed to create a virtual block device (VBD).", ex);
-                                    throw new Exception(Messages.ERROR_CREATE_VBD_FAILED, ex);
-                                }
-                            }
-                            else
-                            {
-                                log.WarnFormat(
-                                    "Import:  ================== ATTENTION NEEDED =======================" +
-                                    "Import:  Could not determine appropriate number for device placement." +
-                                    "Import:  Please Start, Logon, Shut down, System ({0})" +
-                                    "Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}" +
-                                    "Import:  ===========================================================",
-                                    vmName);
-                                //TODO: OnUpdate(Messages.WARNING_ADMIN_REQUIRED);
-                            }
-                        }
-
-                        #endregion
-
-                        break;
-                        #endregion
                     }
+                    else
+                    {
+                        log.WarnFormat(
+                            "Import:  ================== ATTENTION NEEDED =======================" +
+                            "Import:  Could not determine appropriate number for device placement." +
+                            "Import:  Please Start, Logon, Shut down VM ({0}), then manually attach" +
+                            "Import:  disks with labels with {0}_# that are not attached to {0}." +
+                            "Import:  ===========================================================",
+                            vm.Name());
+                    }
+
+                    #endregion
+
+                    break;
+
+                    #endregion
+                }
             }
         }
 
-        private static string VerifyUserDevice(Session xenSession, XenRef<VM> vmRef, string device)
+        private string VerifyUserDevice(XenRef<VM> vmRef, string device)
         {
             log.DebugFormat("Import.VerifyUserDevice, checking device: {0} (99 = autoselect)", device);
             string usethisdevice = null;
 
-            string[] allowedVBDs = VM.get_allowed_VBD_devices(xenSession, vmRef);
+            string[] allowedVBDs = VM.get_allowed_VBD_devices(Connection.Session, vmRef);
 
             if (allowedVBDs == null || allowedVBDs.Length <= 0)
             {
@@ -1509,24 +1072,21 @@ namespace XenAdmin.Actions.OvfActions
             return usethisdevice;
         }
 
-        private static void SetDeviceConnections(EnvelopeType ovfEnv, VirtualHardwareSection_Type vhs)
+        private static void SetDeviceConnections(VirtualHardwareSection_Type vhs)
         {
             int[] connections = new int[16];
-            int deviceoffset = 0;
-            List<RASD_Type> rasdList = new List<RASD_Type>();
-            
-            rasdList.AddRange(vhs.Item);
-            rasdList.Sort(compareControllerRasd);  // sorts based on ResourceType.Value
 
-            // For Xen really nothing to do here, does not support the different
-            // controller types, therefore we must ensure
-            // via positional on controllers.
+            var rasdList = new List<RASD_Type>(vhs.Item);
+            rasdList.Sort(OVF.CompareControllerRasd);  // sorts based on ResourceType.Value
+
+            // Xen does not support the different controller types,
+            // therefore we must ensure via positional on controllers.
             // IDE - #1
             // SCSI - #2
             // IDE 0 Disk 0  Goes to Xen: userdevice=0
             // IDE 0 Disk 1  Goes to Xen: userdevice=1 
             // IDE 1 CD/DVD 0  Goes to Xen: userdevice=2
-            // IDE 1 Disk 1  UnUsed
+            // IDE 1 Disk 1  UnUsed ??????
             // SCSI 0 Disk 0 Goes to Xen: userdevice=3
             // SCSI 0 Disk 1 Goes to Xen: userdevice=4
             // and so forth.
@@ -1541,22 +1101,12 @@ namespace XenAdmin.Actions.OvfActions
                     case 8:  // iSCSI HBA #4
                     case 9:  // IB HCA #5
                         {
-                            List<RASD_Type> connectedrasds = FindConnectedItems(rasd.InstanceID.Value, vhs.Item, null);
+                            List<RASD_Type> connectedrasds = OVF.FindConnectedItems(rasd.InstanceID.Value, vhs.Item, null);
+                            
                             foreach (RASD_Type _rasd in connectedrasds)
                             {
-                                //if (_rasd.Connection != null &&
-                                //    _rasd.Connection.Length > 0 &&
-                                //    _rasd.Connection[0] != null &&
-                                //    _rasd.Connection[0].Value != null &&
-                                //    _rasd.Connection[0].Value.Length > 0)
-                                if (_rasd.ResourceType.Value == 15 || _rasd.ResourceType.Value == 16)
-                                {
-                                    deviceoffset = 2;
-                                }
-                                else
-                                {
-                                    deviceoffset = 0;
-                                }
+                                int deviceoffset = _rasd.ResourceType.Value == 15 || _rasd.ResourceType.Value == 16 ? 2 : 0;
+
                                 if (Tools.ValidateProperty("Connection", _rasd))
                                 {
                                     if (!_rasd.Connection[0].Value.ToLower().Contains("device="))
@@ -1566,7 +1116,7 @@ namespace XenAdmin.Actions.OvfActions
                                 }
                                 else
                                 {
-                                    _rasd.Connection = new cimString[] { new cimString(string.Format("device={0}", FindNextAvailable(deviceoffset, connections, 0))) };
+                                    _rasd.Connection = new[] { new cimString(string.Format("device={0}", FindNextAvailable(deviceoffset, connections, 0))) };
                                 }
                             }
                             break;
@@ -1590,201 +1140,62 @@ namespace XenAdmin.Actions.OvfActions
             return available;
         }
 
-        private static List<RASD_Type> FindConnectedItems(string instanceId, RASD_Type[] rasds, string value22)
-        {
-            List<RASD_Type> connectedRasds = new List<RASD_Type>();
-            foreach (RASD_Type rasd in rasds)
-            {
-                if (rasd.Parent != null && !string.IsNullOrEmpty(rasd.Parent.Value) )
-                {
-                    string parent = rasd.Parent.Value.Replace(@"\", "");
-                    string instance = instanceId.Replace(@"\", "");
-                    if (parent.Contains(instance))
-                    {
-                        switch (rasd.ResourceType.Value)
-                        {
-                            case 15:
-                            case 16:
-                                {
-                                    connectedRasds.Add(rasd);
-                                    break;
-                                }
-                            case 22: // Check to see if it's Microsoft Synthetic Disk Drive
-                                {
-                                    if (Tools.ValidateProperty("ResourceSubType", rasd) && 
-                                        rasd.ResourceSubType.Value.ToLower().Contains("synthetic")
-                                        )
-                                    {
-                                        connectedRasds.AddRange(FindConnectedItems(rasd.InstanceID.Value, rasds, rasd.Address.Value));
-                                    }
-                                    break;
-                                }
-                            case 17: // VMware Hard Disk
-                            case 19: // XenServer/XenConvert Storage Extent
-                            case 21: // Microsoft Hard Disk Image
-                                {
-                                    if ((Tools.ValidateProperty("ElementName", rasd) && rasd.ElementName.Value.ToLower().Contains("hard disk")) ||
-                                        (Tools.ValidateProperty("Caption", rasd) && rasd.Caption.Value.ToLower().Contains("hard disk")) ||
-                                        (Tools.ValidateProperty("Caption", rasd) && rasd.Caption.Value.ToLower().StartsWith("disk"))
-                                        )
-                                    {
-                                        if (value22 != null)
-                                        {
-                                            rasd.Address = new cimString(value22);
-                                        }
-                                        if (!connectedRasds.Contains(rasd))
-                                            connectedRasds.Add(rasd);
-                                    }
-                                    break;
-                                }
-                        }
-                    }
-                }
-            }
-            Comparison<RASD_Type> diskcomparison = new Comparison<RASD_Type>(compareConnectedDisks);
-            connectedRasds.Sort(diskcomparison);
-            return connectedRasds;
-        }
-
         private static void SetIfDeviceIsBootable(EnvelopeType ovfEnv, RASD_Type rasd)
         {
-            // This is a best guess algorithm. without opening the VHD itself, there is no guarrenteed method
-            // to delineate this, so we guess.
-            // IF it's created by Kensho/XenConvert there will be a chance of having a clue.
-            // Otherwise it'll be based upon 'order' and device 0 will win the bootable device.
-            bool isBootable = true;
+            // This is a best guess algorithm.
+            // Without opening the VHD itself, there is no guaranteed method to delineate this.
+            // If it's created by Kensho/XenConvert there will be a chance of having a clue.
+            // Otherwise it'll be based upon 'order' and device 0 will be the bootable device.
+
+            if (!Tools.ValidateProperty("Connection", rasd))
+                rasd.Connection = new[] {new cimString("")};
+
+            if (rasd.Connection[0].Value.Contains("bootable"))
+                return;
+
+            bool isBootable = false;
+            
             VirtualDiskDesc_Type[] disks = null;
 
             foreach (Section_Type sect in ovfEnv.Sections)
             {
-                if (sect is DiskSection_Type)
+                if (sect is DiskSection_Type diskSect)
+                    disks = diskSect.Disk;
+            }
+
+            if (disks != null)
+            {
+                bool useHostResource = Tools.ValidateProperty("HostResource", rasd);
+                var quantity = useHostResource ? rasd.HostResource[0].Value : rasd.InstanceID.Value;
+
+                foreach (VirtualDiskDesc_Type disk in disks)
                 {
-                    disks = ((DiskSection_Type)sect).Disk;
+                    if (quantity.Contains(disk.diskId))
+                    {
+                        isBootable = disk.isBootable;
+                        break;
+                    }
                 }
             }
 
-            if (disks == null)
-                return;
+            if (!isBootable && Tools.ValidateProperty("Address", rasd) &&
+                (rasd.ResourceType.Value == 21 || rasd.ResourceType.Value == 5) &&
+                rasd.Address.Value == "0")
+            {
+                isBootable = true;
+            }
 
-            bool useHostResource = false;
-            if (Tools.ValidateProperty("HostResource", rasd))
+            if (!isBootable && Tools.ValidateProperty("AddressOnParent", rasd) &&
+                (rasd.ResourceType.Value == 17 || rasd.ResourceType.Value == 19) &&
+                rasd.AddressOnParent.Value == "0")
             {
-                log.Debug("Using HostResource to find Disk");
-                useHostResource = true;
+                isBootable = true;
             }
-            else
-            {
-                log.Debug("Using InstanceID to find Disk");
-            }
+
+            if (!isBootable && rasd.Connection[0].Value.Contains("device=0"))
+                isBootable = true;
             
-            foreach(VirtualDiskDesc_Type disk in disks)
-            {
-                if (useHostResource)
-                {
-                    if (rasd.HostResource[0].Value.Contains(disk.diskId))
-                    {
-                        isBootable = disk.isBootable;
-                    }
-                }
-                else
-                {
-                    if (rasd.InstanceID.Value.Contains(disk.diskId))
-                    {
-                        isBootable = disk.isBootable;
-                    }
-                }
-            }
-
-            if (Tools.ValidateProperty("Address", rasd))
-            {
-                if ((rasd.ResourceType.Value == 21 ||
-                    rasd.ResourceType.Value == 5) &&
-                    rasd.Address.Value == "0")
-                {
-                    isBootable = true;
-                }
-            }
-
-            if (Tools.ValidateProperty("AddressOnParent", rasd))
-            {
-                if ((rasd.ResourceType.Value == 17 ||
-                    rasd.ResourceType.Value == 19) &&
-                    rasd.AddressOnParent.Value == "0")
-                {
-                    isBootable = true;
-                }
-            }
-
-            if (Tools.ValidateProperty("Connection", rasd))
-            {
-                if (rasd.Connection[0].Value.Contains("device=0"))
-                {
-                    isBootable = true;
-                }
-                if (!rasd.Connection[0].Value.Contains("bootable"))
-                {
-                    rasd.Connection[0].Value = string.Format("{0},bootable={1}", rasd.Connection[0].Value, isBootable);
-                }
-            }
-            else
-            {
-                rasd.Connection = new cimString[] { new cimString(string.Format("bootable={0}", isBootable)) };
-            }
+            rasd.Connection[0].Value = $"{rasd.Connection[0].Value},bootable={isBootable}";
         }
-
-        private static void ShowSystem(Session xenSession, XenRef<VM> vmRef)
-        {
-            VM.remove_from_other_config(xenSession, vmRef, "HideFromXenCenter");
-        }
-
-        private static int compareControllerRasd(RASD_Type rasd1, RASD_Type rasd2)
-        {
-            if (rasd1.ResourceType.Value >= 5 &&
-                rasd1.ResourceType.Value <= 9 &&
-                rasd2.ResourceType.Value >= 5 &&
-                rasd2.ResourceType.Value <= 9 && 
-                rasd1.Address != null &&
-                rasd1.Address.Value != null &&
-                rasd2.Address != null &&
-                rasd2.Address.Value != null)
-            {
-                ushort address1 = Convert.ToUInt16(rasd1.Address.Value);
-                ushort address2 = Convert.ToUInt16(rasd2.Address.Value);
-                int left = (rasd1.ResourceType.Value * 10) + address1;
-                int right = (rasd2.ResourceType.Value * 10) + address2;
-                return (left).CompareTo(right);
-            }
-            else
-            {
-                return rasd1.ResourceType.Value.CompareTo(rasd2.ResourceType.Value);
-            }
-        }
-
-        private static int compareConnectedDisks(RASD_Type rasd1, RASD_Type rasd2)
-        {
-            if (rasd1.AddressOnParent != null &&
-                rasd1.AddressOnParent.Value != null &&
-                rasd2.AddressOnParent != null &&
-                rasd2.AddressOnParent.Value != null)
-            {
-
-                return (rasd1.AddressOnParent.Value).CompareTo(rasd2.AddressOnParent.Value);
-            }
-            else
-            {
-                if (rasd1.Address != null &&
-                    rasd1.Address.Value != null &&
-                    rasd2.Address != null &&
-                    rasd2.Address.Value != null)
-                {
-                    ushort address1 = Convert.ToUInt16(rasd1.Address.Value);
-                    ushort address2 = Convert.ToUInt16(rasd2.Address.Value);
-                    return (address1).CompareTo(address2);
-                }
-                throw new ArgumentNullException("Cannot compare null values");
-            }
-        }
-        #endregion
-
     }
 }
