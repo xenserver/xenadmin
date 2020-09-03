@@ -42,17 +42,19 @@ using XenOvf.Definitions;
 
 namespace XenAdmin.Actions.OvfActions
 {
-	public class ImportApplianceAction : ApplianceAction
+	public partial class ImportApplianceAction : ApplianceAction
 	{
 		#region Private fields
 
 		private readonly Package m_package;
-		private readonly Dictionary<string, VmMapping> m_vmMappings;
+        protected readonly Dictionary<string, VmMapping> m_vmMappings;
 		private readonly bool m_verifyManifest;
 		private readonly bool m_verifySignature;
 		private readonly string m_password;
-		private readonly bool m_runfixups;
-		private readonly SR m_selectedIsoSr;
+        private string m_encryptionClass;
+        private string m_encryptionVersion;
+        protected readonly bool m_runfixups;
+		protected readonly SR m_selectedIsoSr;
 
 		#endregion
 
@@ -69,11 +71,9 @@ namespace XenAdmin.Actions.OvfActions
 			m_selectedIsoSr = selectedIsoSr;
 		}
 
-		protected override void Run()
-		{
-		    base.Run();
-
-			if (m_verifySignature)
+        protected override void RunCore()
+        {
+            if (m_verifySignature)
 			{
 				Description = Messages.VERIFYING_SIGNATURE;
 
@@ -108,7 +108,7 @@ namespace XenAdmin.Actions.OvfActions
 			}
 
 			PercentComplete = 20;
-			Description = Messages.IMPORTING_VMS;
+			Description = string.Format(Messages.IMPORT_APPLIANCE_PREPARING, m_package.Name);
 
 			//create a copy of the OVF
 			var envelopes = new List<EnvelopeType>();
@@ -145,9 +145,10 @@ namespace XenAdmin.Actions.OvfActions
             EnvelopeType env = OVF.Merge(envelopes, m_package.Name);
             m_package.ExtractToWorkingDir();
 
-			try //importVM
+			try //import VMs
             {
-                Import.Process(Connection, env, m_package.WorkingDir, UpdateHandler, m_password, m_package.Name);
+                OVF.ParseEncryption(env, out m_encryptionClass, out m_encryptionVersion);
+                Process(env, m_package.WorkingDir, m_package.Name);
 			}
 			catch (OperationCanceledException)
 			{

@@ -43,33 +43,26 @@ using XenOvf.Definitions;
 
 namespace XenAdmin.Actions.OvfActions
 {
-	public class ImportImageAction : ApplianceAction
+	public class ImportImageAction : ImportApplianceAction
 	{
 		#region Private fields
 
 		private readonly EnvelopeType m_ovfEnvelope;
-		private readonly Dictionary<string, VmMapping> m_vmMappings;
-		private readonly bool m_runfixups;
-		private readonly SR m_selectedIsoSr;
-		private readonly string m_directory;
+        private readonly string m_directory;
 
 		#endregion
 
 		public ImportImageAction(IXenConnection connection, EnvelopeType ovfEnv, string directory, Dictionary<string, VmMapping> vmMappings, bool runfixups, SR selectedIsoSr)
-			: base(connection, string.Format(Messages.IMPORT_DISK_IMAGE, ovfEnv.Name, Helpers.GetName(connection)))
+			: base(connection, null, vmMappings, false, false, null, runfixups, selectedIsoSr)
 		{
 			m_ovfEnvelope = ovfEnv;
 			m_directory = directory;
-			m_vmMappings = vmMappings;
-			m_runfixups = runfixups;
-			m_selectedIsoSr = selectedIsoSr;
-		}
+            Title = string.Format(Messages.IMPORT_DISK_IMAGE, ovfEnv.Name, Helpers.GetName(connection));
+        }
 
-		protected override void Run()
-		{
-		    base.Run();
-
-			Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
+        protected override void RunCore()
+        {
+            Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
 
 			string systemid = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);
@@ -97,7 +90,7 @@ namespace XenAdmin.Actions.OvfActions
 
 			try //importVM
 			{
-                Import.Process(Connection, curEnv, m_directory, UpdateHandler);
+                Process(curEnv, m_directory);
 
 				PercentComplete = 100;
 				Description = Messages.COMPLETED;

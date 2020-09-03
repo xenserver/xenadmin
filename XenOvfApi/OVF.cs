@@ -5584,5 +5584,85 @@ namespace XenOvf
             return fl.Length.CompareTo(fr.Length);
         }
         #endregion
+
+        public static List<RASD_Type> FindConnectedItems(string instanceId, RASD_Type[] rasds, string value22)
+        {
+            List<RASD_Type> connectedRasds = new List<RASD_Type>();
+            foreach (RASD_Type rasd in rasds)
+            {
+                if (rasd.Parent == null || string.IsNullOrEmpty(rasd.Parent.Value))
+                    continue;
+
+                string parent = rasd.Parent.Value.Replace(@"\", "");
+                string instance = instanceId.Replace(@"\", "");
+
+                if (!parent.Contains(instance))
+                    continue;
+
+                switch (rasd.ResourceType.Value)
+                {
+                    case 15:
+                    case 16:
+                        connectedRasds.Add(rasd);
+                        break;
+                    case 22: // Check to see if it's Microsoft Synthetic Disk Drive
+                        if (Tools.ValidateProperty("ResourceSubType", rasd) &&
+                            rasd.ResourceSubType.Value.ToLower().Contains("synthetic"))
+                        {
+                            connectedRasds.AddRange(FindConnectedItems(rasd.InstanceID.Value, rasds, rasd.Address.Value));
+                        }
+                        break;
+                    case 17: // VMware Hard Disk
+                    case 19: // XenServer/XenConvert Storage Extent
+                    case 21: // Microsoft Hard Disk Image
+                        if (Tools.ValidateProperty("ElementName", rasd) && rasd.ElementName.Value.ToLower().Contains("hard disk") ||
+                            Tools.ValidateProperty("Caption", rasd) && rasd.Caption.Value.ToLower().Contains("hard disk") ||
+                            Tools.ValidateProperty("Caption", rasd) && rasd.Caption.Value.ToLower().StartsWith("disk"))
+                        {
+                            if (value22 != null)
+                                rasd.Address = new cimString(value22);
+
+                            if (!connectedRasds.Contains(rasd))
+                                connectedRasds.Add(rasd);
+                        }
+                        break;
+                }
+            }
+
+            connectedRasds.Sort(CompareConnectedDisks);
+            return connectedRasds;
+        }
+
+        public static int CompareControllerRasd(RASD_Type rasd1, RASD_Type rasd2)
+        {
+            ushort type1 = rasd1.ResourceType.Value;
+            ushort type2 = rasd2.ResourceType.Value;
+
+            if (type1 >= 5 && type1 <= 9 && type2 >= 5 && type2 <= 9 &&
+                ushort.TryParse(rasd1.Address?.Value, out var address1) &&
+                ushort.TryParse(rasd2.Address?.Value, out var address2))
+            {
+                int left = type1 * 10 + address1;
+                int right = type2 * 10 + address2;
+                return left.CompareTo(right);
+            }
+
+            return type1.CompareTo(type2);
+        }
+
+        public static int CompareConnectedDisks(RASD_Type rasd1, RASD_Type rasd2)
+        {
+            var val1 = rasd1.AddressOnParent?.Value;
+            var val2 = rasd2.AddressOnParent?.Value;
+
+            if (val1 != null && val2 != null)
+                return val1.CompareTo(val2);
+
+            if (ushort.TryParse(rasd1.Address?.Value, out var address1) &&
+                ushort.TryParse(rasd2.Address?.Value, out var address2))
+                return address1.CompareTo(address2);
+
+            throw new ArgumentNullException("Cannot compare null values");
+        }
     }
 }

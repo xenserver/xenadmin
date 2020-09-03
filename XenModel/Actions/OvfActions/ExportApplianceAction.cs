@@ -86,12 +86,8 @@ namespace XenAdmin.Actions.OvfActions
 				VM = m_vmsToExport[0];
 		}
 
-		public bool MetaDataOnly { private get; set; }
-
-        protected override void Run()
+        protected override void RunCore()
 		{
-            base.Run();
-
 			log.Info($"Exporting VMs to package {m_applianceFileName}");
 
 			var appFolder = Path.Combine(m_applianceDirectory, m_applianceFileName);

@@ -30,11 +30,46 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XenAdmin
 {
     public static class StringExtensions
     {
+        public static string[] SplitInChunks(this string input, int chunkSize)
+        {
+            if (input == null)
+                throw new NullReferenceException();
+
+            if (chunkSize < 1)
+                throw new ArgumentException("ChunkSize cannot be less than 1");
+
+            if (input == "")
+                return new string[] { };
+
+            int numberOfChunks = input.Length / chunkSize;
+            if (input.Length % chunkSize > 0)
+                numberOfChunks++;
+
+            var result = new string[numberOfChunks];
+            for (int i = 0; i < numberOfChunks; i++)
+            {
+                if (i < numberOfChunks - 1)
+                    result[i] = input.Substring(i * chunkSize, chunkSize);
+                else
+                    result[i] = input.Substring(i * chunkSize);
+            }
+
+            return result;
+        }
+
+        public static Dictionary<string, string> SplitToDictionary(this string input, char pairDelimiter)
+        {
+            return input.Split(new[] {pairDelimiter}, StringSplitOptions.RemoveEmptyEntries)
+                .Select(o => o.Split(new[] {'='}, 2)) //2 is used in case the delimiter appears within the string
+                .ToDictionary(o => o.FirstOrDefault(), o => o.LastOrDefault());
+        }
 
         /// <summary>
         /// Ellipsise string by appending the ellipsis - no truncation is performed
