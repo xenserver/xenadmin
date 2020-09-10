@@ -397,7 +397,7 @@
     <value>Corresponding Server Time</value>
   </data>
   <data name="ColumnCorrespondingServerTime.Width" type="System.Int32, mscorlib">
-    <value>176</value>
+    <value>175</value>
   </data>
   <metadata name="ColumnLastResult.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -750,17 +750,14 @@
   <data name="ColumnExpand.Width" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <metadata name="ColumnResult.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnResult.HeaderText" xml:space="preserve">
-    <value>Event Type</value>
+  <data name="ColumnImage.HeaderText" xml:space="preserve">
+    <value />
   </data>
-  <data name="ColumnResult.MinimumWidth" type="System.Int32, mscorlib">
-    <value>90</value>
-  </data>
-  <data name="ColumnResult.Width" type="System.Int32, mscorlib">
-    <value>90</value>
+  <data name="ColumnImage.Width" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <metadata name="ColumnDateTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1098,11 +1095,11 @@
   <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnResult.Name" xml:space="preserve">
-    <value>ColumnResult</value>
+  <data name="&gt;&gt;ColumnImage.Name" xml:space="preserve">
+    <value>ColumnImage</value>
   </data>
-  <data name="&gt;&gt;ColumnResult.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ColumnImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnDateTime.Name" xml:space="preserve">
     <value>ColumnDateTime</value>

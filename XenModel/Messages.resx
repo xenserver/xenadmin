@@ -12209,7 +12209,7 @@ The upper limit: SR size / {2}</value>
     <value>{0} {1}</value>
   </data>
   <data name="SUCCEEDED" xml:space="preserve">
-    <value>succeeded</value>
+    <value>Succeeded</value>
   </data>
   <data name="SUNDAY_LONG" xml:space="preserve">
     <value>Sunday</value>
@@ -13385,7 +13385,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Details:</value>
   </data>
   <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
-    <value>{0}. {1}: {2}</value>
+    <value>- {0}: {1}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>VM Snapsh&amp;ot Schedules...</value>
@@ -13438,9 +13438,6 @@ Schedule:
   </data>
   <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
     <value>Snapshot schedules defined in server '{0}' ({1} out of {2} VMs currently in schedule):</value>
-  </data>
-  <data name="VMSS_SUCCEEDED" xml:space="preserve">
-    <value>Succeeded</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>Virtual Machines</value>

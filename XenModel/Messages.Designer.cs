@@ -35278,7 +35278,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to succeeded.
+        ///   Looks up a localized string similar to Succeeded.
         /// </summary>
         public static string SUCCEEDED {
             get {
@@ -39448,7 +39448,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}. {1}: {2}.
+        ///   Looks up a localized string similar to - {0}: {1}.
         /// </summary>
         public static string VMSS_ALERT_VM_ERROR_FORMAT {
             get {
@@ -39589,15 +39589,6 @@ namespace XenAdmin {
         public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
             get {
                 return ResourceManager.GetString("VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Succeeded.
-        /// </summary>
-        public static string VMSS_SUCCEEDED {
-            get {
-                return ResourceManager.GetString("VMSS_SUCCEEDED", resourceCulture);
             }
         }
         

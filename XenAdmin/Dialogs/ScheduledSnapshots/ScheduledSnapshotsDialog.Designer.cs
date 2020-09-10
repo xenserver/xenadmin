@@ -61,14 +61,14 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewRunHistory = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ColumnResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelHistory = new System.Windows.Forms.Label();
             this.labelShow = new System.Windows.Forms.Label();
             this.comboBoxTimeSpan = new System.Windows.Forms.ComboBox();
             this.ShowHideRunHistoryButton = new System.Windows.Forms.Button();
+            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panelPolicies.SuspendLayout();
@@ -297,7 +297,7 @@
             this.dataGridViewRunHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewRunHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnExpand,
-            this.ColumnResult,
+            this.ColumnImage,
             this.ColumnDateTime,
             this.ColumnDescription});
             this.tableLayoutPanel2.SetColumnSpan(this.dataGridViewRunHistory, 3);
@@ -317,40 +317,6 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewRunHistory.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewRunHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRunHistory_CellClick);
-            // 
-            // ColumnExpand
-            // 
-            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle3.NullValue = "System.Drawing.Bitmap";
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
-            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
-            this.ColumnExpand.Name = "ColumnExpand";
-            this.ColumnExpand.ReadOnly = true;
-            // 
-            // ColumnResult
-            // 
-            this.ColumnResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnResult.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.ColumnResult, "ColumnResult");
-            this.ColumnResult.Name = "ColumnResult";
-            this.ColumnResult.ReadOnly = true;
-            // 
-            // ColumnDateTime
-            // 
-            this.ColumnDateTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnDateTime, "ColumnDateTime");
-            this.ColumnDateTime.Name = "ColumnDateTime";
-            this.ColumnDateTime.ReadOnly = true;
-            // 
-            // ColumnDescription
-            // 
-            this.ColumnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.ColumnDescription, "ColumnDescription");
-            this.ColumnDescription.Name = "ColumnDescription";
-            this.ColumnDescription.ReadOnly = true;
             // 
             // labelHistory
             // 
@@ -381,6 +347,41 @@
             this.ShowHideRunHistoryButton.Name = "ShowHideRunHistoryButton";
             this.ShowHideRunHistoryButton.UseVisualStyleBackColor = true;
             this.ShowHideRunHistoryButton.Click += new System.EventHandler(this.ShowHideRunHistoryButton_Click);
+            // 
+            // ColumnExpand
+            // 
+            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.NullValue = "System.Drawing.Bitmap";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
+            this.ColumnExpand.Name = "ColumnExpand";
+            this.ColumnExpand.ReadOnly = true;
+            // 
+            // ColumnImage
+            // 
+            this.ColumnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(1);
+            this.ColumnImage.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.ColumnImage, "ColumnImage");
+            this.ColumnImage.Name = "ColumnImage";
+            this.ColumnImage.ReadOnly = true;
+            // 
+            // ColumnDateTime
+            // 
+            this.ColumnDateTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnDateTime, "ColumnDateTime");
+            this.ColumnDateTime.Name = "ColumnDateTime";
+            this.ColumnDateTime.ReadOnly = true;
+            // 
+            // ColumnDescription
+            // 
+            this.ColumnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnDescription, "ColumnDescription");
+            this.ColumnDescription.Name = "ColumnDescription";
+            this.ColumnDescription.ReadOnly = true;
             // 
             // ScheduledSnapshotsDialog
             // 
@@ -429,10 +430,6 @@
         private System.Windows.Forms.PictureBox pictureBoxSpinner;
         private System.Windows.Forms.Label labelLoading;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewRunHistory;
-        private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnResult;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label labelHistory;
         private System.Windows.Forms.Label labelShow;
@@ -447,5 +444,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
         private System.Windows.Forms.Button ShowHideRunHistoryButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
     }
 }
