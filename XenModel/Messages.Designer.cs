@@ -6488,6 +6488,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disks belonging to templates cannot be activated or deactivated..
+        /// </summary>
+        public static string CANNOT_ACTIVATE_TEMPLATE_DISK {
+            get {
+                return ResourceManager.GetString("CANNOT_ACTIVATE_TEMPLATE_DISK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This virtual disk is already activated on VM &apos;{0}&apos;..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_ALREADY_ACTIVE {
@@ -6668,8 +6677,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to deactivate and delete this virtual disk on the VM &apos;{0}&apos;: 
-        ///
+        ///   Looks up a localized string similar to It is not possible to deactivate and delete this virtual disk on the VM &apos;{0}&apos;:
         ///{1}.
         /// </summary>
         public static string CANNOT_DELETE_CANNOT_DEACTIVATE_REASON {

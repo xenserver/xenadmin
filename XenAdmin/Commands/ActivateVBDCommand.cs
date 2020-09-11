@@ -62,13 +62,9 @@ namespace XenAdmin.Commands
 
         }
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MESSAGEBOX_ACTIVATE_VD_TITLE;
-            }
-        }
+        public override string ContextMenuText => Messages.MESSAGEBOX_ACTIVATE_VD_TITLE;
+
+        public override string ButtonText => Messages.ACTIVATE;
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
@@ -112,7 +108,13 @@ namespace XenAdmin.Commands
 
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
-            if (vm == null || !vm.is_a_real_vm() || vdi == null)
+            if (vm == null || vdi == null)
+                return base.GetCantExecuteReasonCore(item);
+
+            if (vm.is_a_template)
+                return Messages.CANNOT_ACTIVATE_TEMPLATE_DISK;
+            
+            if (!vm.is_a_real_vm())
                 return base.GetCantExecuteReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);

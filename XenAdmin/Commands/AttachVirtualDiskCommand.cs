@@ -29,14 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
-using System.Windows.Forms;
 using XenAdmin.Dialogs;
-using System.Collections.ObjectModel;
-using System.Drawing;
+
 
 namespace XenAdmin.Commands
 {
@@ -83,14 +79,8 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1)
-            {
-                VM vm = selection[0].XenObject as VM;
-
-                return vm != null && !vm.is_a_snapshot && !vm.Locked;
-
-            }
-            return false;
+            return selection.Count == 1 && selection[0].XenObject is VM vm &&
+                   !vm.is_a_snapshot && !vm.Locked;
         }
     }
 }

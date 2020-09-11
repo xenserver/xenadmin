@@ -2362,6 +2362,9 @@ This will cancel compilation of the status report.</value>
   <data name="CANNOT_ACTIVATE_SNAPSHOT_IN_USE" xml:space="preserve">
     <value>This snapshot is in use and cannot be activated.</value>
   </data>
+  <data name="CANNOT_ACTIVATE_TEMPLATE_DISK" xml:space="preserve">
+    <value>Disks belonging to templates cannot be activated or deactivated.</value>
+  </data>
   <data name="CANNOT_ACTIVATE_VD_ALREADY_ACTIVE" xml:space="preserve">
     <value>This virtual disk is already activated on VM '{0}'.</value>
   </data>
@@ -2423,8 +2426,7 @@ This will cancel compilation of the status report.</value>
     <value>ISO storage must be ejected from VMs before being deleted. This storage is in use by the VM '{0}'.</value>
   </data>
   <data name="CANNOT_DELETE_CANNOT_DEACTIVATE_REASON" xml:space="preserve">
-    <value>It is not possible to deactivate and delete this virtual disk on the VM '{0}': 
-
+    <value>It is not possible to deactivate and delete this virtual disk on the VM '{0}':
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
