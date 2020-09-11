@@ -466,7 +466,7 @@
     <value>Name</value>
   </data>
   <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>20</value>
   </data>
   <data name="ColumnName.Width" type="System.Int32, mscorlib">
     <value>61</value>
@@ -478,7 +478,7 @@
     <value>Description</value>
   </data>
   <data name="ColumnDesc.MinimumWidth" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>20</value>
   </data>
   <metadata name="ColumnSR.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -487,7 +487,7 @@
     <value>SR</value>
   </data>
   <data name="ColumnSR.MinimumWidth" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>20</value>
   </data>
   <data name="ColumnSR.Width" type="System.Int32, mscorlib">
     <value>45</value>
@@ -499,7 +499,7 @@
     <value>Volume</value>
   </data>
   <data name="ColumnSRVolume.MinimumWidth" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>20</value>
   </data>
   <data name="ColumnSRVolume.Width" type="System.Int32, mscorlib">
     <value>71</value>
