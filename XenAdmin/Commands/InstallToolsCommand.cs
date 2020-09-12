@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         }
 
         public InstallToolsCommand(IMainWindow mainWindow, IEnumerable<VM> vms)
-            : this(mainWindow, ConvertToSelection(vms))
+            : this(mainWindow, vms.Select(v => new SelectedItem(v)).ToList())
         {
         }
 
