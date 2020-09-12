@@ -113,20 +113,6 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Gets a list of <see cref="SelectedItem"/>s from the specified <see cref="IXenObject"/>s.
-        /// </summary>
-        protected static IEnumerable<SelectedItem> ConvertToSelection<T>(IEnumerable<T> xenObjects) where T : IXenObject
-        {
-            Util.ThrowIfParameterNull(xenObjects, "selection");
-            List<SelectedItem> selection = new List<SelectedItem>();
-            foreach (T xenObject in xenObjects)
-            {
-                selection.Add(new SelectedItem(xenObject));
-            }
-            return selection;
-        }
-
-        /// <summary>
         /// Gets the current selection context for the Command.
         /// </summary>
         public SelectedItemCollection GetSelection()
