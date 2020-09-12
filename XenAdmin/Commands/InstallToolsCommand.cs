@@ -36,7 +36,6 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using System.Linq;
 
 
@@ -76,7 +75,7 @@ namespace XenAdmin.Commands
         public InstallToolsCommand(IMainWindow mainWindow, VM vm, Control parent)
             : base(mainWindow, vm)
         {
-            SetParent(parent);
+            Parent = parent;
         }
 
         public InstallToolsCommand(IMainWindow mainWindow, VM vm)

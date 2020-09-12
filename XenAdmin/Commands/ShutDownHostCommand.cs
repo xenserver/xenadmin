@@ -35,7 +35,6 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Dialogs;
 using System.Text;
@@ -64,7 +63,7 @@ namespace XenAdmin.Commands
         public ShutDownHostCommand(IMainWindow mainWindow, Host host, Control parent)
             : base(mainWindow, host)
         {
-            SetParent(parent);
+            Parent = parent;
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
@@ -90,29 +89,11 @@ namespace XenAdmin.Commands
             return host != null && host.IsLive() && !HelpersGUI.HasActiveHostAction(host) ;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_SHUTDOWN;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_SHUTDOWN;
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._001_ShutDown_h32bit_16;
-            }
-        }
+        public override Image MenuImage => Images.StaticImages._001_ShutDown_h32bit_16;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogTitle
         {
@@ -216,20 +197,8 @@ namespace XenAdmin.Commands
             return base.GetCantExecuteReasonCore(item);
         }
 
-        protected override string ConfirmationDialogYesButtonLabel
-        {
-            get
-            {
-                return Messages.CONFIRM_SHUTDOWN_SERVER_YES_BUTTON_LABEL;
-            }
-        }
+        protected override string ConfirmationDialogYesButtonLabel => Messages.CONFIRM_SHUTDOWN_SERVER_YES_BUTTON_LABEL;
 
-        protected override bool ConfirmationDialogNoButtonSelected
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationDialogNoButtonSelected => true;
     }
 }

@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
         public AddHostCommand(IMainWindow mainWindow, Control parent)
             : base(mainWindow)
         {
-            SetParent(parent);
+            Parent = parent;
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
@@ -91,29 +91,10 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.TrySelectNewObjectInTree(conn, true, true, true);
         }
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._000_AddApplicationServer_h32bit_16;
-            }
-        }
+        public override Image MenuImage => Images.StaticImages._000_AddApplicationServer_h32bit_16;
 
-        public override Image ToolBarImage
-        {
-            get
-            {
-                
-                return Images.StaticImages._000_AddApplicationServer_h32bit_24;
-            }
-        }
+        public override Image ToolBarImage => Images.StaticImages._000_AddApplicationServer_h32bit_24;
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_ADD_HOST;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_ADD_HOST;
     }
 }
