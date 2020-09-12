@@ -29,17 +29,11 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using XenAdmin.Actions;
 using System.Windows.Forms;
-using XenAdmin.Network;
-using System.Collections.ObjectModel;
-using XenAdmin.Core;
-using System.Threading;
-using XenAdmin.Actions.VMActions;
+
 
 namespace XenAdmin.Commands
 {
@@ -66,7 +60,7 @@ namespace XenAdmin.Commands
         protected VMLifeCycleCommand(IMainWindow mainWindow, VM vm, Control parent)
             : base(mainWindow, new SelectedItem(vm))
         {
-            SetParent(parent);
+            Parent = parent;
         }
 
         protected abstract bool CanExecute(VM vm);

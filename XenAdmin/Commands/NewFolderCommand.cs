@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
         public NewFolderCommand(IMainWindow mainWindow, Folder folder, Control parent)
             : base(mainWindow, folder)
         {
-            SetParent(parent);
+            Parent = parent;
         }
 
         private void Execute(Folder folder, IWin32Window ownerWindow)
@@ -173,21 +173,9 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.NEW_FOLDER;
-            }
-        }
+        public override string MenuText => Messages.NEW_FOLDER;
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._000_Folder_open_h32bit_16;
-            }
-        }
+        public override Image MenuImage => Images.StaticImages._000_Folder_open_h32bit_16;
 
         protected override string GetCantExecuteReasonCore(IXenObject item)
         {
