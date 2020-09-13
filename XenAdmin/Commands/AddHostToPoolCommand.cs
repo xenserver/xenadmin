@@ -30,7 +30,6 @@
  */
 
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -86,10 +85,18 @@ namespace XenAdmin.Commands
                 return;
             }
 
-            if (_confirm && !ShowConfirmationDialog())
+            if (_confirm)
             {
-                // Bail out if the user doesn't want to continue.
-                return;
+                var msg = _hosts.Count > 1
+                    ? string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL_MULTIPLE, _pool.Name().Ellipsise(500))
+                    : string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL, _hosts[0].Name().Ellipsise(500), _pool.Name().Ellipsise(500));
+
+                using (var dialog = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {WindowTitle = Messages.POOLCREATE_ADDING})
+                {
+                    if (dialog.ShowDialog(Parent ?? Program.MainWindow) == DialogResult.No)
+                        return;
+                }
             }
 
             if (!Helpers.IsConnected(_pool))
@@ -176,30 +183,6 @@ namespace XenAdmin.Commands
                 return true;
             }
             return false;
-        }
-
-        protected override string ConfirmationDialogText
-        {
-            get
-            {
-                if (_hosts.Count == 1)
-                {
-                    return string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL, _hosts[0].Name().Ellipsise(500), _pool.Name().Ellipsise(500));
-                }
-                else if (_hosts.Count > 1)
-                {
-                    return string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL_MULTIPLE, _pool.Name().Ellipsise(500));
-                }
-                return null;
-            }
-        }
-
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return Messages.POOLCREATE_ADDING;
-            }
         }
 
         public static PoolAbstractAction.AdUserAndPassword GetAdPrompt(Host poolMaster)

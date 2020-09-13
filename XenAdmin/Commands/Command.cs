@@ -278,7 +278,7 @@ namespace XenAdmin.Commands
         protected virtual string ConfirmationDialogText => null;
 
         /// <summary>
-        /// Gets the help id for the confirmatin dialog.
+        /// Gets the help id for the confirmation dialog.
         /// </summary>
         protected virtual string ConfirmationDialogHelpId => null;
 
@@ -292,7 +292,7 @@ namespace XenAdmin.Commands
         /// Shows a confirmation dialog.
         /// </summary>
         /// <returns>True if the user clicked Yes.</returns>
-        protected bool ShowConfirmationDialog()
+        private bool ShowConfirmationDialog()
         {
             if (Program.RunInAutomatedTestMode)
                 return true;
