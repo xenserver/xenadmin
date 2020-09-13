@@ -12055,7 +12055,7 @@ The upper limit: SR size / {2}</value>
     <value>{0} used of {1} total ({2} allocated)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
-    <value>Cannot reclaim freed space, because the SR is detached.</value>
+    <value>Cannot reclaim freed space because the SR is detached.</value>
   </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>Unable to connect to iSCSI target</value>
@@ -12489,10 +12489,10 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>This network cannot be removed because it is a physical device</value>
   </data>
   <data name="TOOLTIP_SR_TRIM_UNSUPPORTED" xml:space="preserve">
-    <value>Reclaiming freed space not supported on this SR</value>
+    <value>Reclaiming freed space is not supported on this SR</value>
   </data>
   <data name="TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE" xml:space="preserve">
-    <value>Reclaiming freed space not supported on these SRs</value>
+    <value>Reclaiming freed space is not supported on these SRs</value>
   </data>
   <data name="TREESEARCHBOX_DROPDOWN_TOOLTIP" xml:space="preserve">
     <value>Views and Saved Searches</value>

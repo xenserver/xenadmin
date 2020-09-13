@@ -35,9 +35,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Core;
-using XenAPI;
 using XenAdmin.Dialogs;
-using System.Drawing;
+using XenAPI;
+
 
 namespace XenAdmin.Commands
 {
@@ -153,7 +153,7 @@ namespace XenAdmin.Commands
                 get { return (String.IsNullOrEmpty(_menuText) ? _group.Name() : _menuText).Ellipsise(30); }
             }
 
-            protected override string EnabledToolTipText
+            public override string EnabledToolTipText
             {
                 get { return _group.Name(); }
             }

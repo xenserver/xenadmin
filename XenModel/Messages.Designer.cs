@@ -34672,7 +34672,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot reclaim freed space, because the SR is detached..
+        ///   Looks up a localized string similar to Cannot reclaim freed space because the SR is detached..
         /// </summary>
         public static string SR_TRIM_NO_STORAGE_HOST_ERROR {
             get {
@@ -36116,7 +36116,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reclaiming freed space not supported on this SR.
+        ///   Looks up a localized string similar to Reclaiming freed space is not supported on this SR.
         /// </summary>
         public static string TOOLTIP_SR_TRIM_UNSUPPORTED {
             get {
@@ -36125,7 +36125,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reclaiming freed space not supported on these SRs.
+        ///   Looks up a localized string similar to Reclaiming freed space is not supported on these SRs.
         /// </summary>
         public static string TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE {
             get {

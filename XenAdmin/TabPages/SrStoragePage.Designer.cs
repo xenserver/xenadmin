@@ -29,7 +29,7 @@ namespace XenAdmin.TabPages
             this.editVirtualDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.RemoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.RemoveButton = new System.Windows.Forms.Button();
+            this.RemoveButton = new XenAdmin.Commands.CommandButton();
             this.EditButtonContainer = new XenAdmin.Controls.ToolTipContainer();
             this.EditButton = new System.Windows.Forms.Button();
             this.addVirtualDiskButton = new System.Windows.Forms.Button();
@@ -38,7 +38,7 @@ namespace XenAdmin.TabPages
             this.toolTipContainerRescan = new XenAdmin.Controls.ToolTipContainer();
             this.buttonRescan = new System.Windows.Forms.Button();
             this.toolTipContainerMove = new XenAdmin.Controls.ToolTipContainer();
-            this.buttonMove = new System.Windows.Forms.Button();
+            this.buttonMove = new XenAdmin.Commands.CommandButton();
             this.dataGridViewVDIs = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,7 +130,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.RemoveButton, "RemoveButton");
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.UseVisualStyleBackColor = true;
-            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // EditButtonContainer
             // 
@@ -191,7 +190,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.buttonMove, "buttonMove");
             this.buttonMove.Name = "buttonMove";
             this.buttonMove.UseVisualStyleBackColor = true;
-            this.buttonMove.Click += new System.EventHandler(this.buttonMove_Click);
             // 
             // dataGridViewVDIs
             // 
@@ -298,13 +296,13 @@ namespace XenAdmin.TabPages
         private XenAdmin.Controls.ToolTipContainer EditButtonContainer;
         private System.Windows.Forms.Button EditButton;
         private XenAdmin.Controls.ToolTipContainer RemoveButtonContainer;
-        private System.Windows.Forms.Button RemoveButton;
+        private XenAdmin.Commands.CommandButton RemoveButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button buttonRescan;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerRescan;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerMove;
-        private System.Windows.Forms.Button buttonMove;
+        private XenAdmin.Commands.CommandButton buttonMove;
         private System.Windows.Forms.ToolStripMenuItem moveVirtualDiskToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewVDIs;

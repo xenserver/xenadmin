@@ -29,17 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAPI;
-using XenAdmin.Core;
-using System.Drawing;
-using XenAdmin.Network;
-using XenAdmin.Actions;
-using System.Windows.Forms;
 using System.Collections.ObjectModel;
-using XenAdmin.Properties;
+using System.Drawing;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -86,15 +79,9 @@ namespace XenAdmin.Commands
             return new ShutDownVMCommand(MainWindowCommandInterface, selection).CanExecute() || new ShutDownHostCommand(MainWindowCommandInterface, selection).CanExecute();
         }
 
-        public override Image ToolBarImage
-        {
-            get
-            {
-                return Images.StaticImages._001_ShutDown_h32bit_24;
-            }
-        }
+        public override Image ToolBarImage => Images.StaticImages._001_ShutDown_h32bit_24;
 
-        protected override string EnabledToolTipText
+        public override string EnabledToolTipText
         {
             get
             {
@@ -107,12 +94,6 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override string ToolBarText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_TOOLBAR_SHUTDOWN;
-            }
-        }
+        public override string ToolBarText => Messages.MAINWINDOW_TOOLBAR_SHUTDOWN;
     }
 }

@@ -29,13 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using XenAPI;
-using XenAdmin.Properties;
 using System.Drawing;
 using System.Collections.ObjectModel;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -72,7 +68,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string EnabledToolTipText
+        public override string EnabledToolTipText
         {
             get
             {
@@ -91,12 +87,6 @@ namespace XenAdmin.Commands
             return new RebootVMCommand(MainWindowCommandInterface, selection).CanExecute() || new RebootHostCommand(MainWindowCommandInterface, selection).CanExecute();
         }
 
-        public override Image ToolBarImage
-        {
-            get
-            {
-                return Images.StaticImages._001_Reboot_h32bit_24;
-            }
-        }
+        public override Image ToolBarImage => Images.StaticImages._001_Reboot_h32bit_24;
     }
 }

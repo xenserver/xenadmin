@@ -206,43 +206,24 @@ namespace XenAdmin.Commands
         public virtual string ButtonText => null;
 
         /// <summary>
-        /// Gets the tool tip text. By default this is the can't execute reason if execution is not possible and
-        /// blank if it can. Override EnabledToolTipText to provide a descriptive tooltip when the command is enabled.
+        /// Gets the tool tip text when execution is not possible. This is the
+        /// can't execute reason for single selection, and null otherwise.
         /// </summary>
-        public virtual string ToolTipText
+        public virtual string DisabledToolTipText
         {
-            get 
+            get
             {
-                if (CanExecute())
-                    return EnabledToolTipText;
-
-                return DisabledToolTipText;  
-            }
-        }
-
-        /// <summary>
-        /// Gets the tool tip text when the command is not able to run. CantExectuteReason for single items,
-        /// null for multiple.
-        /// </summary>
-        protected virtual string DisabledToolTipText
-        {
-            get 
-            {
-                var reasons = GetCantExecuteReasons();
-                // It's necessary to double check that we have one reason which matches up with a single selection
-                // as CanExecuteCore and GetCantExecuteReasons aren't required to match up.
-                if (reasons.Count == 1 && GetSelection().Count == 1)
+                var selection = GetSelection();
+                if (selection.Count == 1)
                 {
-                    foreach (string s in reasons.Values)
-                    {
-                        if (s.Equals(Messages.UNKNOWN))
-                        {
-                            //This is the default, and not a useful tooltip
-                            return null;
-                        }
-                        return s;
-                    }
+                    var item = selection[0];
+                    if (item?.XenObject == null)
+                        return null;
+
+                    string reason = GetCantExecuteReasonCore(item.XenObject);
+                    return reason == Messages.UNKNOWN ? null : reason;
                 }
+
                 return null;
             }
         }
@@ -250,7 +231,7 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the tool tip text when the command is able to run. Null by default.
         /// </summary>
-        protected virtual string EnabledToolTipText => null;
+        public virtual string EnabledToolTipText => null;
 
         /// <summary>
         /// Gets the shortcut key display string. This is only used if this Command is used on the main menu.
