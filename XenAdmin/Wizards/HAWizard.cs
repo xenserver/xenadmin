@@ -33,10 +33,11 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Wizards.GenericPages;
 using XenAdmin.Wizards.HAWizard_Pages;
 using XenAPI;
-using System.Drawing;
 
 
 namespace XenAdmin.Wizards
@@ -44,10 +45,12 @@ namespace XenAdmin.Wizards
     public partial class HAWizard : XenWizardBase
     {
         private readonly Intro xenTabPageIntro;
+        private readonly RBACWarningPage m_pageRbac;
         private readonly AssignPriorities xenTabPageAssignPriorities;
         private readonly ChooseSR xenTabPageChooseSR;
         private readonly HAFinishPage xenTabPageHaFinish;
-        
+
+        private readonly bool _rbacNeeded;
         private readonly Pool pool;
 
         public HAWizard(Pool pool)
@@ -56,18 +59,40 @@ namespace XenAdmin.Wizards
             InitializeComponent();
 
             xenTabPageIntro = new Intro();
+            m_pageRbac = new RBACWarningPage();
             xenTabPageAssignPriorities = new AssignPriorities();
             xenTabPageChooseSR = new ChooseSR();
             xenTabPageHaFinish = new HAFinishPage();
 
             this.pool = pool;
+            _rbacNeeded = !pool.Connection.Session.IsLocalSuperuser &&
+                          Helpers.GetMaster(pool.Connection).external_auth_type != Auth.AUTH_TYPE_NONE;
 
             AddPage(xenTabPageIntro);
+
+            if (_rbacNeeded)
+            {
+                var check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_HA_ENABLE_WARNING) {Blocking = true};
+                check.AddApiCheckRange(
+                    "vm.set_ha_restart_priority",
+                    "vm.set_order",
+                    "vm.set_start_delay",
+                    "pool.sync_database",
+                    "pool.ha_compute_hypothetical_max_host_failures_to_tolerate",
+                    "pool.set_ha_host_failures_to_tolerate",
+                    "pool.enable_ha",
+                    "sr.assert_can_host_ha_statefile"
+                );
+                
+                m_pageRbac.AddPermissionChecks(xenConnection, check);
+                AddPage(m_pageRbac);
+            }
+
             AddPage(xenTabPageChooseSR);
             xenTabPageChooseSR.Pool = pool;
             AddPage(xenTabPageAssignPriorities);
             xenTabPageAssignPriorities.ProtectVmsByDefault = true;
-            xenTabPageAssignPriorities.Connection = pool.Connection;//set the connection again after the pafe has been added
+            xenTabPageAssignPriorities.Connection = pool.Connection;//set the connection again after the page has been added
             AddPage(xenTabPageHaFinish);
         }
 
@@ -132,7 +157,9 @@ namespace XenAdmin.Wizards
 
         protected override bool RunNextPagePrecheck(XenTabPage senderPage)
         {
-            if (senderPage.GetType() == typeof(Intro))
+            var pageType = senderPage.GetType();
+
+            if (pageType == typeof(Intro) && !_rbacNeeded || pageType == typeof(RBACWarningPage))
             {
                 // Start HB SR scan
                 // If scan finds no suitable SRs ChooseSR will show sensible text and disallow progress.

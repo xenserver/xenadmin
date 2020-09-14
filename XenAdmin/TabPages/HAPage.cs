@@ -33,13 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAPI;
 using XenCenterLib;
 
@@ -189,63 +187,35 @@ namespace XenAdmin.TabPages
                 if (xenObject == null)
                     return;
 
+                buttonConfigure.Command = new HAConfigureCommand(Program.MainWindow, xenObject.Connection);
+                buttonDisableHa.Command = new HADisableCommand(Program.MainWindow, xenObject.Connection);
+
                 AsyncAction action = HelpersGUI.FindActiveHaAction(xenObject.Connection);
                 if (action != null)
                 {
                     // There is an EnableHAAction or DisableHAAction in progress relating to this connection.
-                    // Show some text and disable editing
-                    buttonConfigure.Enabled = false;
-                    buttonDisableHa.Enabled = false;
 
-                    pictureBoxWarningTriangle.Visible = false;
                     labelStatus.Text = String.Format(action is EnableHAAction ? Messages.HA_PAGE_ENABLING : Messages.HA_PAGE_DISABLING,
                         Helpers.GetName(xenObject.Connection));
                 }
                 else
                 {
                     //CA-250234 no need to rebuild HA page if we lost connection to the pool 
-                    if (pool.Connection == null || pool.Connection.Session == null || !pool.Connection.IsConnected)
+                    if (pool.Connection?.Session == null || !pool.Connection.IsConnected)
                         return;
-
-                    // Generate the tab contents depending on what XenObject we're displaying
 
                     if (pool.ha_enabled)
                     {
-                        if (PassedRbacChecks())
-                        {
-                            bool haRestricted = Helpers.FeatureForbidden(pool, Host.RestrictHA);
-
-                            buttonConfigure.Visible = !haRestricted;
-                            buttonConfigure.Enabled = !haRestricted;
-                            buttonDisableHa.Visible = true;
-                            buttonDisableHa.Enabled = true;
-
-                            pictureBoxWarningTriangle.Visible = false;
-                            labelStatus.Text = string.Format(haRestricted ? Messages.HA_TAB_CONFIGURED_UNLICENSED : Messages.HA_TAB_CONFIGURED_BLURB, Helpers.GetName(pool).Ellipsise(30));
-                        }
-                        else
-                        {
-                            buttonConfigure.Visible = false;
-                            buttonDisableHa.Visible = false;
-
-                            pictureBoxWarningTriangle.Visible = true;
-                            labelStatus.Text = String.Format(Messages.RBAC_HA_TAB_WARNING,
-                                Role.FriendlyCSVRoleList(Role.ValidRoleList(HA_PERMISSION_CHECKS, pool.Connection)),
-                                Role.FriendlyCSVRoleList(pool.Connection.Session.Roles));
-                        }
+                        buttonConfigure.Visible = buttonDisableHa.Visible = true;
+                        labelStatus.Text = string.Format(Messages.HA_TAB_CONFIGURED_BLURB, Helpers.GetName(pool).Ellipsise(30));
                     }
                     else
                     {
-                        buttonConfigure.Visible = true;
-                        buttonConfigure.Enabled = true;
                         buttonDisableHa.Visible = false;
-
-                        pictureBoxWarningTriangle.Visible = false;
                         labelStatus.Text = String.Format(Messages.HAPANEL_BLURB, Helpers.GetName(pool).Ellipsise(30));
                     }
 
-                    var sr = xenObject as SR;
-                    if (sr != null)
+                    if ( xenObject is SR sr)
                     {
                         // Currently unused
                         generateSRHABox(sr);
@@ -261,18 +231,6 @@ namespace XenAdmin.TabPages
             {
                 customListPanel.EndUpdate();
             }
-        }
-
-        private RbacMethodList HA_PERMISSION_CHECKS = new RbacMethodList(
-            "pool.set_ha_host_failures_to_tolerate",
-            "pool.sync_database",
-            "vm.set_ha_restart_priority",
-            "pool.ha_compute_hypothetical_max_host_failures_to_tolerate"
-        );
-
-        private bool PassedRbacChecks()
-        {
-            return Role.CanPerform(HA_PERMISSION_CHECKS, pool.Connection);
         }
 
         private void pool_PropertyChanged(object sender1, PropertyChangedEventArgs e)
@@ -328,7 +286,7 @@ namespace XenAdmin.TabPages
                 {
                     newChild.Items[1].ForeColor = Color.Red;
                     ToolStripMenuItem editHa = new ToolStripMenuItem(Messages.CONFIGURE_HA_ELLIPSIS);
-                    editHa.Click += delegate { EditHA(pool); };
+                    editHa.Click += (sender, args) => EditHA();
                     newChild.MenuItems.Add(editHa);
                     newChild.DefaultMenuItem = editHa;
                 }
@@ -348,7 +306,7 @@ namespace XenAdmin.TabPages
                 {
                     newChild.Items[1].ForeColor = Color.Red;
                     ToolStripMenuItem editHa = new ToolStripMenuItem(Messages.CONFIGURE_HA_ELLIPSIS);
-                    editHa.Click += delegate { EditHA(pool); };
+                    editHa.Click += (sender, args) => EditHA();
                     newChild.MenuItems.Add(editHa);
                     newChild.DefaultMenuItem = editHa;
                 }
@@ -609,64 +567,10 @@ namespace XenAdmin.TabPages
             return FriendlyNameManager.GetFriendlyName(string.Format("Label-{0}", propertyName));
         }
 
-        private void buttonConfigure_Click(object sender, EventArgs e)
+        private void EditHA()
         {
-            if (pool == null)
-                return;
-            EditHA(pool);
-        }
-
-        private void buttonDisableHa_Click(object sender, EventArgs e)
-        {
-            if (pool == null)
-                return;
-
-            if (!pool.ha_enabled)
-            {
-                // Start HA wizard
-                EditHA(pool);
-                return;
-            }
-
-            if (pool.ha_statefiles.All(sf => pool.Connection.Resolve(new XenRef<VDI>(sf)) == null)) //empty gives true, which is correct
-            {
-                using (var dlg = new ErrorDialog(string.Format(Messages.HA_DISABLE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
-                    ThreeButtonDialog.ButtonOK)
-                {
-                    HelpName = "HADisable",
-                    WindowTitle = Messages.DISABLE_HA
-                })
-                {
-                    dlg.ShowDialog(this);
-                    return;
-                }
-            }
-
-            // Confirm the user wants to disable HA
-            using (var dlg = new NoIconDialog(string.Format(Messages.HA_DISABLE_QUERY, Helpers.GetName(pool).Ellipsise(30)),
-                ThreeButtonDialog.ButtonYes,
-                ThreeButtonDialog.ButtonNo)
-            {
-                HelpName = "HADisable",
-                WindowTitle = Messages.DISABLE_HA
-            })
-            {
-                if (dlg.ShowDialog(this) != DialogResult.Yes)
-                    return;
-            }
-
-            DisableHAAction action = new DisableHAAction(pool);
-            // We will need to re-enable buttons when the action completes
-            action.Completed += Program.MainWindow.action_Completed;
-            action.RunAsync();
-        }
-
-        /// <param name="pool">Must not be null.</param>
-        internal static void EditHA(Pool pool)
-        {
-            var cmd = new HACommand(Program.MainWindow, pool);
-            if (cmd.CanExecute())
-                cmd.Execute();
+            if (buttonConfigure.Visible && buttonConfigure.Enabled)
+                buttonConfigure.PerformClick();
         }
 
         private void SetNetworkHBInitDelay()

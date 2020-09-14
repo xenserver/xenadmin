@@ -360,7 +360,7 @@ namespace XenAdmin.Alerts
 					case Message.MessageType.HA_STATEFILE_APPROACHING_TIMEOUT:
 					case Message.MessageType.HA_STATEFILE_LOST:
 					case Message.MessageType.HA_XAPI_HEALTHCHECK_APPROACHING_TIMEOUT:
-						return () => new HACommand(Program.MainWindow, XenObject.Connection).Execute();
+						return () => new HAConfigureCommand(Program.MainWindow, XenObject.Connection).Execute();
 
 					case Message.MessageType.LICENSE_EXPIRES_SOON:
 					case Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
