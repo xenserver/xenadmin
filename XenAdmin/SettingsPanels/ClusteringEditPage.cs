@@ -178,6 +178,8 @@ namespace XenAdmin.SettingsPanels
             }
             else if (pool.ha_enabled)
                 DisableControls(Messages.GFS2_HA_ENABLED);
+            else if (!pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) && pool.is_psr_pending)
+                DisableControls(Messages.ROTATE_POOL_SECRET_PENDING_CLUSTER);
 
             labelHostCountWarning.Visible = pool.Connection.Cache.HostCount < 3;
         }
