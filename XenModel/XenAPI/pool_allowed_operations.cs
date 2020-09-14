@@ -48,6 +48,10 @@ namespace XenAPI
         /// Indicates this pool is in the process of creating a cluster
         /// </summary>
         cluster_create,
+        /// <summary>
+        /// Indicates this pool is in the process of changing master
+        /// </summary>
+        designate_new_master,
         unknown
     }
 
@@ -71,6 +75,8 @@ namespace XenAPI
                     return "ha_disable";
                 case pool_allowed_operations.cluster_create:
                     return "cluster_create";
+                case pool_allowed_operations.designate_new_master:
+                    return "designate_new_master";
                 default:
                     return "unknown";
             }

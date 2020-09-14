@@ -1040,6 +1040,13 @@ namespace XenAPI
             return Rpc<string>("pool.get_uefi_certificates", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public bool pool_get_is_psr_pending(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("pool.get_is_psr_pending", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public void pool_set_name_label(string session, string _pool, string _name_label)
         {
             var converters = new List<JsonConverter> {};
@@ -1199,6 +1206,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             Rpc("pool.set_uefi_certificates", new JArray(session, _pool ?? "", _uefi_certificates ?? ""), serializer);
+        }
+
+        public void pool_set_is_psr_pending(string session, string _pool, bool _is_psr_pending)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_is_psr_pending", new JArray(session, _pool ?? "", _is_psr_pending), serializer);
         }
 
         public void pool_join(string session, string _master_address, string _master_username, string _master_password)

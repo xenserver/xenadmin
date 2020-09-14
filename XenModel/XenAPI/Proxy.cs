@@ -614,6 +614,10 @@ namespace XenAPI
         Response<string>
         pool_get_uefi_certificates(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_is_psr_pending")]
+        Response<bool>
+        pool_get_is_psr_pending(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -705,6 +709,10 @@ namespace XenAPI
         [XmlRpcMethod("pool.set_uefi_certificates")]
         Response<string>
         pool_set_uefi_certificates(string session, string _pool, string _uefi_certificates);
+
+        [XmlRpcMethod("pool.set_is_psr_pending")]
+        Response<string>
+        pool_set_is_psr_pending(string session, string _pool, bool _is_psr_pending);
 
         [XmlRpcMethod("pool.join")]
         Response<string>
@@ -8495,6 +8503,7 @@ namespace XenAPI
         public bool live_patching_disabled;
         public bool igmp_snooping_enabled;
         public string uefi_certificates;
+        public bool is_psr_pending;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
