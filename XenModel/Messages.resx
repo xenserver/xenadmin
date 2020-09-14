@@ -11369,6 +11369,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
     <value>You cannot rotate the pool secret when HA is on.</value>
   </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_CLUSTER" xml:space="preserve">
+    <value>You cannot enable clustering while a pool secret rotation is in progress.</value>
+  </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>
   </data>
