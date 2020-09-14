@@ -32802,6 +32802,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot configure HA while a pool secret rotation is in progress..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_PENDING_HA {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_PENDING_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to rotate the pool secret. Please login using an account with one of the following roles:
         ///
         ///{1}.
