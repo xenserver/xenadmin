@@ -12530,6 +12530,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Disable HA.
+        /// </summary>
+        public static string DISABLE_HA_HOTKEY {
+            get {
+                return ResourceManager.GetString("DISABLE_HA_HOTKEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable.
         /// </summary>
         public static string DISABLE_NOAMP {
@@ -18570,15 +18579,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA is currently enabled for pool &apos;{0}&apos;..
-        /// </summary>
-        public static string HA_TAB_CONFIGURED_UNLICENSED {
-            get {
-                return ResourceManager.GetString("HA_TAB_CONFIGURED_UNLICENSED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unable to calculate maximum pool failure capacity..
         /// </summary>
         public static string HA_UNABLE_TO_CALCULATE_MESSAGE {
@@ -22991,7 +22991,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;High Availability....
+        ///   Looks up a localized string similar to &amp;High Availability.
         /// </summary>
         public static string MAINWINDOW_HIGH_AVAILABILITY {
             get {
@@ -31379,9 +31379,18 @@ namespace XenAdmin {
         ///
         ///{0}.
         /// </summary>
-        public static string RBAC_HA_TAB_WARNING {
+        public static string RBAC_HA_CONFIGURE_WARNING {
             get {
-                return ResourceManager.GetString("RBAC_HA_TAB_WARNING", resourceCulture);
+                return ResourceManager.GetString("RBAC_HA_CONFIGURE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot configure HA settings. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_HA_ENABLE_WARNING {
+            get {
+                return ResourceManager.GetString("RBAC_HA_ENABLE_WARNING", resourceCulture);
             }
         }
         

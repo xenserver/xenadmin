@@ -277,6 +277,8 @@ namespace XenAdmin
             this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripMenuItemRotateSecret = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemHaConfigure = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemHaDisable = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -983,6 +985,9 @@ namespace XenAdmin
             // highAvailabilityToolStripMenuItem
             // 
             this.highAvailabilityToolStripMenuItem.Command = new XenAdmin.Commands.HACommand();
+            this.highAvailabilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemHaConfigure,
+            this.toolStripMenuItemHaDisable});
             this.highAvailabilityToolStripMenuItem.Name = "highAvailabilityToolStripMenuItem";
             resources.ApplyResources(this.highAvailabilityToolStripMenuItem, "highAvailabilityToolStripMenuItem");
             // 
@@ -1948,6 +1953,18 @@ namespace XenAdmin
             this.toolStripMenuItemRotateSecret.Command = new XenAdmin.Commands.RotatePoolSecretCommand();
             resources.ApplyResources(this.toolStripMenuItemRotateSecret, "toolStripMenuItemRotateSecret");
             // 
+            // toolStripMenuItemHaConfigure
+            // 
+            this.toolStripMenuItemHaConfigure.Name = "toolStripMenuItemHaConfigure";
+            this.toolStripMenuItemHaConfigure.Command = new XenAdmin.Commands.HAConfigureCommand();
+            resources.ApplyResources(this.toolStripMenuItemHaConfigure, "toolStripMenuItemHaConfigure");
+            // 
+            // toolStripMenuItemHaDisable
+            // 
+            this.toolStripMenuItemHaDisable.Name = "toolStripMenuItemHaDisable";
+            this.toolStripMenuItemHaDisable.Command = new XenAdmin.Commands.HADisableCommand();
+            resources.ApplyResources(this.toolStripMenuItemHaDisable, "toolStripMenuItemHaDisable");
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2224,6 +2241,8 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripStatusLabel statusLabelUpdates;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelErrors;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemRotateSecret;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaConfigure;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaDisable;
     }
 
 }
