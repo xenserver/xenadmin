@@ -142,6 +142,25 @@ namespace XenAdmin.Commands
             return CanExecuteHACommand(selection);
         }
 
+        protected override string GetCantExecuteReasonCore(IXenObject item)
+        {
+            var reason = base.GetCantExecuteReasonCore(item);
+            if (!string.IsNullOrEmpty(reason) && reason != Messages.UNKNOWN)
+                return reason;
+
+            Pool pool = item == null ? null : Helpers.GetPool(item.Connection);
+
+            if (pool != null && !pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) && pool.is_psr_pending)
+                return Messages.ROTATE_POOL_SECRET_PENDING_HA;
+
+            return Messages.UNKNOWN;
+        }
+
+        protected override bool CanExecute(Pool pool)
+        {
+            return pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) || !pool.is_psr_pending;
+        }
+
         public override string MenuText => Messages.CONFIGURE_HA_ELLIPSIS;
     }
 
