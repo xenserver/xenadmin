@@ -39,7 +39,7 @@
     <Reference Include="CookComputing.XmlRpcV2, Version=2.5.0.1, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
       <HintPath>..\packages\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="DiscUtils, Version=0.8.0.0, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
+    <Reference Include="DiscUtils, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DiscUtils.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
