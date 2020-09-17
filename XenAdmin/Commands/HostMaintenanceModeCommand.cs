@@ -98,8 +98,32 @@ namespace XenAdmin.Commands
                 action.RunAsync();
                 return;
             }
-            
-            new EvacuateHostDialog(host).ShowPerXenObject(host, Program.MainWindow);
+
+            //The EvacuateHostDialog uses several different actions all of which might need an elevated session
+            //We sudo once for all of them and store the session
+
+            string elevatedUsername = null;
+            string elevatedPassword = null;
+            Session elevatedSession = null;
+
+            if (!host.Connection.Session.IsLocalSuperuser &&
+                !Registry.DontSudo &&
+                !Role.CanPerform(new RbacMethodList(EvacuateHostDialog.RbacMethods), host.Connection, out var validRoles))
+            {
+                using (var d = new RoleElevationDialog(host.Connection, host.Connection.Session, validRoles,
+                    string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, host.Name())))
+                    if (d.ShowDialog(Program.MainWindow) == DialogResult.OK)
+                    {
+                        elevatedUsername = d.elevatedUsername;
+                        elevatedPassword = d.elevatedPassword;
+                        elevatedSession = d.elevatedSession;
+                    }
+                    else
+                        return;
+            }
+
+            new EvacuateHostDialog(host, elevatedUsername, elevatedPassword, elevatedSession)
+                .ShowPerXenObject(host, Program.MainWindow);
         }
 
         private void ExitMaintenanceMode(Host host)

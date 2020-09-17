@@ -45,223 +45,122 @@ using XenCenterLib;
 
 namespace XenAdmin.Dialogs
 {
-    public partial class EvacuateHostDialog : DialogWithProgress
+    public partial class EvacuateHostDialog : XenDialogBase
     {
         #region Private fields
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Host host;
+        private readonly Host _host;
+        private readonly Pool _pool;
+        private DelegatedAsyncAction vmErrorsAction;
         private EvacuateHostAction hostAction;
-        private Dictionary<string, VmPrecheckRow> vms;
+        private ToStringWrapper<Host> hostSelection;
+        private Dictionary<string, AsyncAction> solveActionsByVmUuid;
         private Dictionary<XenRef<VM>, String[]> reasons;
-        private string elevatedUName;
-        private string elevatedPass;
+        private string elevatedUsername;
+        private string elevatedPassword;
         private Session elevatedSession;
+        private volatile bool _rebuildInProgress;
+        private volatile bool _rebuildRequired;
 
-        private readonly string[] rbacMethods = new[]
-            {
-                "host.remove_from_other_config", // save VM list
-                "host.add_to_other_config",
+        public static readonly string[] RbacMethods =
+        {
+            "host.remove_from_other_config", // save VM list
+            "host.add_to_other_config",
+            "host.disable", // disable the host
 
-                "host.disable", // disable the host
+            "pbd.plug", // Repair SR and install tools
+            "pbd.create",
 
-                "pbd.plug", // Repair SR and install tools
-                "pbd.create",
-                "vbd.eject",
-                "vbd.insert",
+            "vm.suspend", // Suspend VMs
 
-                "vm.suspend", // Suspend VMs
-
-                "vbd.async_eject", // Change ISO
-                "vbd.async_insert"
-            };
+            "vbd.async_eject", // Change ISO
+            "vbd.async_insert",
+            "vbd.eject",
+            "vbd.insert",
+        };
 
         #endregion
 
-        /* README
-         * 
-         * This dialog inherits from DialogWithProgress. Be extremely careful about resizing it, as the DialogWithProgress
-         * class asserts that the controls which inherit it must match its dimensions... otherwise the expanding progress
-         * bar may not show.
-         *
-         */
-
-        public EvacuateHostDialog(Host host)
+        public EvacuateHostDialog(Host host, string elevatedUserName, string elevatedPassword, Session elevatedSession)
             : base(host.Connection)
         {
-            this.host = host;
-
             InitializeComponent();
 
-            Shrink();
+            this.elevatedUsername = elevatedUserName;
+            this.elevatedPassword = elevatedPassword;
+            this.elevatedSession = elevatedSession;
 
-            NewMasterComboBox.DrawMode = DrawMode.OwnerDrawFixed;
-            NewMasterComboBox.DrawItem += new DrawItemEventHandler(NewMasterComboBox_DrawItem);
-            NewMasterComboBox.ItemHeight = 16;
+            _host = host;
+            _pool = Helpers.GetPoolOfOne(_host.Connection);
 
-            if (!host.IsMaster() || connection.Cache.HostCount <= 1)
-            {
-                NewMasterComboBox.Enabled = false;
-                NewMasterComboBox.Visible = false;
-                NewMasterLabel.Visible = false;
-                labelMasterBlurb.Visible = false;
+            if (!_host.IsMaster() || connection.Cache.HostCount <= 1)
+                tableLayoutPanelNewMaster.Visible = false;
+            else
+                tableLayoutPanelPSr.Visible = false;
 
-                // Move the panel containing the VM listbox up to fill the gap where the labels were
-                const int pad = 6;
-                int extraSize = panel2.Top - labelMasterBlurb.Top - pad;
-                panel2.Top = labelMasterBlurb.Top + pad;
-                panel2.Height += extraSize;
-            }
+            tableLayoutPanelWlb.Visible = _pool.IsVisible() && Helpers.WlbEnabled(_host.Connection) &&
+                                          WlbServerState.GetState(_pool) == WlbServerState.ServerState.Enabled;
 
-            Pool pool = Core.Helpers.GetPool(host.Connection);
-            if (Helpers.WlbEnabled(host.Connection) && WlbServerState.GetState(pool) == WlbServerState.ServerState.Enabled)
-                lableWLBEnabled.Visible = true;
+            tableLayoutPanelSpinner.Visible = false;
+            tableLayoutPanelStatus.Visible = false;
+            progressBar1.Visible = false;
 
-            vms = new Dictionary<string, VmPrecheckRow>();
-            this.host.PropertyChanged += new PropertyChangedEventHandler(hostUpdate);
+            _host.PropertyChanged += hostUpdate;
+            _pool.PropertyChanged += poolUpdate;
 
             ActiveControl = CloseButton;
         }
 
-        void NewMasterComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        protected override void OnShown(EventArgs e)
         {
-            if (NewMasterComboBox.Enabled)
-            {
-                using (SolidBrush backBrush = new SolidBrush(NewMasterComboBox.BackColor))
-                {
-                    e.Graphics.FillRectangle(backBrush, e.Bounds);
-                }
-
-                if (e.Index == -1)
-                    return;
-
-                ToStringWrapper<Host> host = NewMasterComboBox.Items[e.Index] as ToStringWrapper<Host>;
-
-                if (host == null)
-                    return;
-
-                Graphics g = e.Graphics;
-                Rectangle bounds = e.Bounds;
-
-                Image icon = Images.GetImage16For(host.item);
-
-                // Now draw the image
-                g.DrawImage(icon, bounds.Left + 1, bounds.Top + 1, bounds.Height - 2, bounds.Height - 2);
-
-                Rectangle bump = new Rectangle(bounds.Height, bounds.Y, bounds.Width - bounds.Height - RIGHT_PADDING, bounds.Height);
-
-                // And the text
-                Drawing.DrawText(g, host.ToString(), e.Font,
-                    bump, e.ForeColor, e.BackColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
-            }
-            else
-            {
-                using (SolidBrush backBrush = new SolidBrush(SystemColors.Control))
-                {
-                    e.Graphics.FillRectangle(backBrush, e.Bounds);
-                }
-
-                if (e.Index == -1)
-                    return;
-
-                ToStringWrapper<Host> host = NewMasterComboBox.Items[e.Index] as ToStringWrapper<Host>;
-
-                if (host == null)
-                    return;
-
-                Graphics g = e.Graphics;
-                Rectangle bounds = e.Bounds;
-
-                Image icon = Images.GetImage16For(host.item);
-
-                // Now draw the image
-                g.DrawImage(icon, new Rectangle(bounds.Left + 1, bounds.Top + 1, bounds.Height - 2, bounds.Height - 2), 0, 0, icon.Width, icon.Height, GraphicsUnit.Pixel, Core.Drawing.GreyScaleAttributes);
-
-                Rectangle bump = new Rectangle(bounds.Height, bounds.Y, bounds.Width - bounds.Height - RIGHT_PADDING, bounds.Height);
-
-                // And the text
-                Drawing.DrawText(g, host.ToString(), e.Font,
-                    bump, SystemColors.GrayText, SystemColors.Control, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
-            }
+            base.OnShown(e);
+            Text = string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, _host.Name());
+            Rebuild();
         }
 
-        const int RIGHT_PADDING = 5;
-       
-        private void dataGridViewVms_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        private void Rebuild()
         {
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount
-                && e.ColumnIndex == columnAction.Index)
+            if (_rebuildInProgress || hostAction != null && !hostAction.IsCompleted)
             {
-                var row = dataGridViewVms.Rows[e.RowIndex] as VmPrecheckRow;
-                if (row != null && row.hasSolution())
-                {
-                    Cursor.Current = Cursors.Hand;
-                    return;
-                }
+                _rebuildRequired = true;
+                return;
             }
 
-            Cursor.Current = Cursors.Default;
-        }
-
-        private void dataGridViewVms_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount
-                && e.ColumnIndex == columnAction.Index)
+            Program.Invoke(this, () =>
             {
-                var row = dataGridViewVms.Rows[e.RowIndex] as VmPrecheckRow;
-                if (row != null && row.hasSolution())
-                {
-                    AsyncAction a = row.Solve();
-                    if (a != null)
-                        a.Completed += solveActionCompleted;
-
-                    row.Update();
-                }
-            }
-        }
-
-        void solveActionCompleted(ActionBase sender)
-        {
-            // this should rescan the vm errors and update the dialog.
-            Program.Invoke(this, update);
-        }
-
-        private void hostUpdate(object o, PropertyChangedEventArgs args)
-        {
-            if (args == null || args.PropertyName == "name_label" || args.PropertyName == "resident_VMs")
-            {
-                Program.Invoke(this, update);
-            }
-        }
-
-        private void update()
-        {
-            Program.AssertOnEventThread();
-            populateVMs();
-            populateHosts();
-            Scan();
+                _rebuildInProgress = true;
+                tableLayoutPanelStatus.Visible = false;
+                progressBar1.Visible = false;
+                DisableButtons();
+                ClearVMs();
+                ClearHosts();
+                labelSpinner.Text = Messages.SCANNING_VMS;
+                spinnerIcon1.StartSpinning();
+                tableLayoutPanelSpinner.Visible = true;
+                Scan();
+            });
         }
 
         private void Scan()
         {
-            DelegatedAsyncAction saveVMsAction = new DelegatedAsyncAction(connection, Messages.SAVING_VM_PROPERTIES_ACTION_TITLE,
-                Messages.SAVING_VM_PROPERTIES_ACTION_DESC, Messages.COMPLETED, delegate(Session session)
-                {
-                    //Save Evacuated VMs for later
-                    host.SaveEvacuatedVMs(session);
-                }, "host.remove_from_other_config", "host.add_to_other_config");
+            //Save Evacuated VMs for later
+            var saveVMsAction = new DelegatedAsyncAction(connection,
+                Messages.SAVING_VM_PROPERTIES_ACTION_TITLE, Messages.SAVING_VM_PROPERTIES_ACTION_DESC, Messages.COMPLETED,
+                session => _host.SaveEvacuatedVMs(session), true, "host.remove_from_other_config", "host.add_to_other_config");
+            
+            saveVMsAction.RunAsync(GetSudoElevationResult());
 
-            DelegatedAsyncAction action = new DelegatedAsyncAction(connection, Messages.MAINTENANCE_MODE,
-                Messages.SCANNING_VMS, Messages.SCANNING_VMS, delegate(Session session)
+            vmErrorsAction = new DelegatedAsyncAction(connection, Messages.MAINTENANCE_MODE,
+                Messages.SCANNING_VMS, Messages.COMPLETED, delegate(Session session)
                 {
-                    reasons = new Dictionary<XenRef<VM>, string[]>();
+                    var cantEvacuateReasons = new Dictionary<XenRef<VM>, string[]>();
 
-                    // WLB: get host wlb evacuate recommendation if wlb is enabled
-                    if (Helpers.WlbEnabled(host.Connection))
+                    if (Helpers.WlbEnabled(_host.Connection))
                     {
                         try
                         {
-                            reasons = XenAPI.Host.retrieve_wlb_evacuate_recommendations(session, host.opaque_ref);
+                            cantEvacuateReasons = Host.retrieve_wlb_evacuate_recommendations(session, _host.opaque_ref);
                         }
                         catch (Exception ex)
                         {
@@ -269,634 +168,14 @@ namespace XenAdmin.Dialogs
                         }
                     }
 
+                    if (cantEvacuateReasons.Count == 0 || !ValidRecommendation(cantEvacuateReasons))
+                        cantEvacuateReasons = Host.get_vms_which_prevent_evacuation(session, _host.opaque_ref);
 
-                    // WLB: in case wlb has no recommendations or get errors when retrieve recommendation, 
-                    //      assume retrieve_wlb_evacuate_recommendations returns 0 recommendation 
-                    //      or return recommendations for all running vms on this host
-                    if (reasons.Count == 0 || !ValidRecommendation(reasons))
-                        reasons = Host.get_vms_which_prevent_evacuation(session, host.opaque_ref);
-
-                    // take care of errors
-                    Program.Invoke(this, delegate()
-                    {
-                        foreach (KeyValuePair<XenRef<VM>, String[]> kvp in reasons)
-                        {
-                            //WLB: filter out errors
-                            if (string.Compare(kvp.Value[0].Trim(), "wlb", true) != 0)
-                                ProcessError(kvp.Key.opaque_ref, kvp.Value);
-
-                            //Update NewMasterComboBox for host power on recommendation
-                            if ((session.Connection.Resolve(kvp.Key)).is_control_domain)
-                            {
-                                Host powerOnHost = session.Connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]);
-                                if (powerOnHost != null)
-                                {
-                                    var previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-                                    var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name());
-                                    if (NewMasterComboBox.Items.Count == 0)
-                                    {
-                                        powerOnHost.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
-                                        powerOnHost.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
-                                        NewMasterComboBox.Items.Add(hostToAdd);
-                                    }
-                                    else
-                                    {
-                                        foreach (ToStringWrapper<Host> tswh in NewMasterComboBox.Items)
-                                        {
-                                            if (tswh.item.CompareTo(powerOnHost) != 0)
-                                            {
-                                                powerOnHost.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
-                                                powerOnHost.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
-                                                NewMasterComboBox.Items.Add(hostToAdd);
-                                            }
-                                        }
-                                    }
-                                    SelectProperItemInNewMasterComboBox(previousSelection);
-                                }
-                            }
-                        }
-                    });
-
+                    return cantEvacuateReasons;
                 }, true);
-            SetSession(saveVMsAction);
-            SetSession(action);
-            saveVMsAction.RunAsync();
-            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-                dlg.ShowDialog(this);
-            RefreshEntermaintenanceButton();
-        }
 
-        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName == "resident_on" || args.PropertyName == "allowed_operations" || args.PropertyName == "current_operations")
-            {
-                Program.Invoke(this, () => RefreshVM(sender as VM));
-            }
-            else if (args.PropertyName == "virtualisation_status")
-            {
-                Program.Invoke(this, update);
-            }
-            else if (args.PropertyName == "guest_metrics")
-            {
-                VM v = sender as VM;
-                VM_guest_metrics gm = connection.Resolve(v.guest_metrics);
-                if (gm == null)
-                    return;
-
-                gm.PropertyChanged -= new PropertyChangedEventHandler(gm_PropertyChanged);
-                gm.PropertyChanged += new PropertyChangedEventHandler(gm_PropertyChanged);
-            }
-        }
-
-        void gm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "PV_drivers_version")
-                Program.Invoke(this, update);
-        }
-
-        private void host_PropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            populateHosts();
-            Program.Invoke(this, NewMasterComboBox.Refresh);
-        }
-
-        private void populateVMs()
-        {
-            Program.AssertOnEventThread();
-
-            deregisterVMEvents();
-
-            Dictionary<string, AsyncAction> solveActionsByUuid = new Dictionary<string,AsyncAction>();
-
-            foreach (VmPrecheckRow i in vms.Values)
-                solveActionsByUuid.Add(i.vm.uuid, i.solutionAction);
-
-            vms = new Dictionary<string, VmPrecheckRow>();
-            
-            try
-            {
-                dataGridViewVms.SuspendLayout();
-                dataGridViewVms.Rows.Clear();
-
-                foreach (VM vm in connection.ResolveAll(host.resident_VMs))
-                {
-                    if (vm.is_control_domain || vm.is_a_template)
-                        continue;
-
-                    vm.PropertyChanged += VM_PropertyChanged;
-
-                    var row = new VmPrecheckRow(this, vm);
-                    if (solveActionsByUuid.ContainsKey(vm.uuid))
-                        row.UpdateSolutionAction(solveActionsByUuid[vm.uuid]);
-
-                    vms.Add(vm.opaque_ref, row);
-                    dataGridViewVms.Rows.Add(row);
-                }
-            }
-            finally
-            {
-                dataGridViewVms.ResumeLayout();
-                RefreshEntermaintenanceButton();
-            }
-        }
-
-        private void RefreshEntermaintenanceButton()
-        {
-            EvacuateButton.Enabled = true;
-
-            foreach (var row in dataGridViewVms.Rows)
-            {
-                var precheckRow = row as VmPrecheckRow;
-                if (precheckRow != null && (precheckRow.hasSolution() || precheckRow.hasSolutionActionInProgress()))
-                {
-                    EvacuateButton.Enabled = false;
-                    break;
-                }
-            }
-        }
-
-        private void deregisterVMEvents()
-        {
-            //Deregister event handlers from these VMs
-            foreach (var row in vms.Values)
-            {
-                VM v = row.vm;
-                v.PropertyChanged -= VM_PropertyChanged;
-                VM_guest_metrics gm = connection.Resolve(v.guest_metrics);
-                if (gm == null)
-                    return;
-                gm.PropertyChanged -= gm_PropertyChanged;
-
-            }
-        }
-
-        private void populateHosts()
-        {
-            Program.AssertOnEventThread();
-
-            ToStringWrapper<Host> previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-
-            NewMasterComboBox.BeginUpdate();
-            try
-            {
-                NewMasterComboBox.Items.Clear();
-
-                foreach (Host host in connection.Cache.Hosts)
-                {
-                    Host_metrics metrics = connection.Resolve<Host_metrics>(host.metrics);
-                    if (host.opaque_ref == this.host.opaque_ref)
-                        continue;
-
-                    host.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
-                    host.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
-                    if (host.enabled && metrics != null && metrics.live)
-                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host, host.Name()));
-                }
-
-                SelectProperItemInNewMasterComboBox(previousSelection);
-            }
-            finally
-            {
-                NewMasterComboBox.EndUpdate();
-            }
-        }
-
-        private void RefreshVM(VM vm)
-        {
-            foreach (var row in dataGridViewVms.Rows)
-            {
-                var precheckRow = row as VmPrecheckRow;
-                if (precheckRow != null && (precheckRow.vm == vm))
-                {
-                    precheckRow.Update();
-                    break;
-                }
-            }
-            dataGridViewVms.Refresh();
-        }
-
-
-        private class VmPrecheckRow : DataGridViewRow, IComparable<VmPrecheckRow>
-        {
-            public readonly VM vm;
-            EvacuateHostDialog dialog;
-            Solution solution;
-            public AsyncAction solutionAction;
-            public string error { get; private set; }
-
-            private DataGridViewImageCell cellImage = new DataGridViewImageCell();
-            private DataGridViewTextBoxCell cellVm = new DataGridViewTextBoxCell();
-            private DataGridViewTextBoxCell cellAction = new DataGridViewTextBoxCell();
-
-            public VmPrecheckRow(EvacuateHostDialog dialog, VM vm)
-            {
-                this.dialog = dialog;
-                this.vm = vm;
-                this.error = "";
-                this.solution = Solution.None;
-
-                Cells.AddRange(cellImage, cellVm, cellAction);
-                Update();
-            }
-
-            public void Update()
-            {
-                cellImage.Value = Images.GetImage16For(vm);
-                cellVm.Value = ToString();
-                cellAction.Value = error;
-
-                if (hasSolution())
-                {
-                    cellAction.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
-                    cellAction.Style.ForeColor = Color.Blue;
-                }
-                else
-                {
-                    cellAction.Style.Font = Program.DefaultFont;
-                    cellAction.Style.ForeColor = DefaultForeColor;
-                }
-
-                cellAction.Style.SelectionForeColor = cellAction.Style.ForeColor;
-                cellAction.Style.SelectionBackColor = cellAction.Style.BackColor;
-            }
-
-            public override string ToString()
-            {
-                return vm.Name();
-            }
-
-            public int CompareTo(VmPrecheckRow otherVM)
-            {
-                return vm.CompareTo(otherVM.vm);
-            }
-
-            public void UpdateError(string message, Solution solution)
-            {
-                // still running action to solve a previous error, no point in overwriting or we could end up 'solving' it twice
-                if (hasSolutionActionInProgress())
-                {
-                    this.error = Messages.EVACUATE_SOLUTION_IN_PROGRESS;
-                    return;
-                }
-                 
-                this.solution = solution;
-
-                switch (solution)
-                {
-                    case Solution.EjectCD:
-                        error = String.Format(Messages.EVACUATE_HOST_EJECT_CD_PROMPT, message);
-                        break;
-
-                    case Solution.Suspend:
-                        error = String.Format(Messages.EVACUATE_HOST_SUSPEND_VM_PROMPT, message);
-                        break;
-
-                    case Solution.Shutdown:
-                        error = String.Format(Messages.EVACUATE_HOST_SHUTDOWN_VM_PROMPT, message);
-                        break;
-
-                    case Solution.InstallPVDrivers:
-                        error = string.Format(vm.HasNewVirtualisationStates()
-                            ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT
-                            : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
-                        break;
-
-                    case Solution.InstallPVDriversNoSolution:
-                        // if the state is not unknown we have metrics and can show a detailed message.
-                        // Otherwise go with the server and just say they aren't installed
-                        error = !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN)
-                            ? vm.GetVirtualisationWarningMessages()
-                            : Messages.PV_DRIVERS_NOT_INSTALLED;
-                        break;
-                }
-
-                Update();
-            }
-            
-            public void UpdateSolutionAction(AsyncAction action)
-            {
-                this.solutionAction = action;
-                this.error = hasSolutionActionInProgress() ? Messages.EVACUATE_SOLUTION_IN_PROGRESS : "";
-                Update();
-            }
-
-            public AsyncAction Solve()
-            {
-                AsyncAction a = null;
-                switch (solution)
-                {
-                    case Solution.EjectCD:
-                        a = new ChangeVMISOAction(vm.Connection, vm, null, vm.FindVMCDROM());
-                        dialog.SetSession(a);
-                        dialog.DoAction(a);
-                        break;
-
-                    case Solution.Suspend:
-                        a = new VMSuspendAction(vm);
-                        dialog.SetSession(a);
-                        dialog.DoAction(a);
-                        break;
-
-                    case Solution.Shutdown:
-                        a = new VMHardShutdown(vm);
-                        dialog.SetSession(a);
-                        dialog.DoAction(a);
-                        break;
-
-                    case Solution.InstallPVDrivers:
-                        var cmd = new InstallToolsCommand(Program.MainWindow, vm, DataGridView);
-                        cmd.InstallTools += action => a = action;
-                        cmd.Execute();
-
-                        // The install pv tools action is marked as complete after they have taken the user to the console and loaded the disc
-                        // Rescanning when the action is 'complete' in this case doesn't gain us anything then. Keep showing the "Click here to install PV drivers" text.
-                        dialog.SetSession(a);
-                        solutionAction = a;
-                        return a;
-                }
-                solutionAction = a;
-                solution = Solution.None;
-                // we show this, then register an event handler on the action completed to re-update the text/solution
-                this.error = Messages.EVACUATE_SOLUTION_IN_PROGRESS;
-                return a;
-            }
-
-            internal bool hasSolution()
-            {
-                return solution != Solution.None 
-                    && solution != Solution.InstallPVDriversNoSolution;
-            }
-
-            internal bool hasSolutionActionInProgress()
-            {
-                return solutionAction != null && !solutionAction.IsCompleted;
-            }
-            
-        }
-
-        private void RepairButton_Click(object sender, EventArgs e)
-        {
-            CloseButton.Text = Messages.CLOSE;
-
-            NewMasterComboBox.Enabled = false;
-            ToStringWrapper<Host> newMaster = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-
-            hostAction = new EvacuateHostAction(host, newMaster != null ? newMaster.item : null, reasons ?? new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
-            hostAction.Completed += Program.MainWindow.action_Completed;
-            SetSession(hostAction);
-
-            //Closes all per-Connection and per-VM wizards for the given connection.
-            Program.MainWindow.CloseActiveWizards(host.Connection);
-
-            EvacuateButton.Enabled = false; // disable evac button, it will get re-enabled when action completes
-
-            DoAction(hostAction);
-        }
-
-        private void SetSession(AsyncAction action)
-        {
-            Program.AssertOnEventThread();
-            if (elevatedUName == null)
-                return;
-            
-            action.sudoPassword = elevatedPass;
-            action.sudoUsername = elevatedUName;
-            if (elevatedSession != null)
-            {
-                // we still have the session from the role elevation dialog
-                // use this first
-                action.Session = elevatedSession;
-                elevatedSession = null;
-            }
-            else
-                action.Session = action.NewSession();
-        }
-
-        private void DoAction(AsyncAction action)
-        {
-            action.Changed += action_Changed;
-            action.Completed += action_Completed;
-
-            Grow(action.RunAsync);
-        }
-
-        private void action_Changed(ActionBase action)
-        {
-            Program.Invoke(this, () => UpdateProgressControls(action));
-        }
-
-        private void action_Completed(ActionBase sender)
-        {
-            Program.Invoke(this, delegate()
-            {
-                if (sender == null)
-                    return;
-
-                if (sender != hostAction)
-                {
-                    //re-enable the buttons
-                    this.EvacuateButton.Enabled = true;
-                    this.CloseButton.Enabled = true;
-                    return;
-                }
-
-                if (hostAction.Exception == null)
-                {
-                    Close();
-                }
-
-                this.EvacuateButton.Enabled = true;
-                this.CloseButton.Enabled = true;
-                this.NewMasterComboBox.Enabled = true;
-
-                if (hostAction.Exception is Failure failure)
-                {
-                    var errorParams = failure.ErrorDescription;
-
-                    if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
-                    {
-                        errorParams = new List<string> {Failure.HA_NO_PLAN};
-                        errorParams.AddRange(failure.ErrorDescription.Skip(1).ToArray());
-                    }
-
-                    ProcessError(null, errorParams.ToArray());
-                }
-            });
-
-            Program.Invoke(this, () => FinalizeProgressControls(sender));
-        }
-
-        private bool CanSuspendVm(String vmRef)
-        {
-            if (vmRef == null)
-                return false;
-            VM vm = connection.Resolve(new XenRef<VM>(vmRef));
-            return vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.suspend);
-        }
-
-        private void ProcessError(String vmRef, String[] ErrorDescription)
-        {
-            try
-            {
-                if (ErrorDescription.Length == 0)
-                    return;
-
-                switch (ErrorDescription[0])
-                {
-                    case Failure.VM_REQUIRES_SR:
-                        vmRef = ErrorDescription[1];
-                        SR sr = connection.Resolve(new XenRef<SR>(ErrorDescription[2]));
-                        if (sr == null)
-                            return;
-
-                        if (sr.content_type == SR.Content_Type_ISO)
-                        {
-                            UpdateVMWithError(vmRef, Messages.EVACUATE_HOST_LOCAL_CD, Solution.EjectCD);
-                        }
-                        else
-                        {
-                            UpdateVMWithError(vmRef, Messages.EVACUATE_HOST_LOCAL_STORAGE, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
-                        }
-
-                        break;
-
-                    case Failure.VM_MISSING_PV_DRIVERS:
-                        vmRef = ErrorDescription[1];
-
-                        VM vm = connection.Resolve(new XenRef<VM>(vmRef));
-                        if (InstallToolsCommand.CanExecute(vm) && !Helpers.StockholmOrGreater(connection))
-                            UpdateVMWithError(vmRef, string.Empty, Solution.InstallPVDrivers);
-                        else
-                            UpdateVMWithError(vmRef, string.Empty, Solution.InstallPVDriversNoSolution);
-
-                        break;
-
-                    case Failure.HOST_NOT_ENOUGH_FREE_MEMORY:
-                        if (vmRef == null)
-                            using (var dlg = new ErrorDialog(Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY)
-                                {WindowTitle = Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE})
-                            {
-                                dlg.ShowDialog(this);
-                            }
-
-                        vmRef = ErrorDescription[1];
-                        UpdateVMWithError(vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
-
-                        break;
-
-                    case Failure.HA_NO_PLAN:
-
-                        foreach (string _vmRef in vms.Keys)
-                        {
-                            UpdateVMWithError(_vmRef, String.Empty, CanSuspendVm(_vmRef) ? Solution.Suspend : Solution.Shutdown);
-                        }
-
-                        if (vmRef == null)
-                            using (var dlg = new ErrorDialog(Messages.EVACUATE_HOST_NO_OTHER_HOSTS)
-                                {WindowTitle = Messages.EVACUATE_HOST_NO_OTHER_HOSTS_TITLE})
-                            {
-                                dlg.ShowDialog(this);
-                            }
-
-                        break;
-
-                    case Failure.VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT:
-                        if (ErrorDescription.Length > 1)
-                            vmRef = ErrorDescription[1];
-                        AddDefaultSuspendOperation(vmRef);
-                        break;
-
-                    default:
-                        AddDefaultSuspendOperation(vmRef);
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                log.Debug("Exception processing exception", e);
-                AddDefaultSuspendOperation(vmRef);
-            }
-        }
-
-        private void AddDefaultSuspendOperation(String vmRef)
-        {
-            if (vmRef == null)
-                return;
-
-            UpdateVMWithError(vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
-        }
-
-        enum Solution { None, EjectCD, Suspend, InstallPVDrivers, InstallPVDriversNoSolution, Shutdown };
-
-        void UpdateVMWithError(string opaqueRef, string message, Solution solution)
-        {
-            if (opaqueRef == null || !vms.ContainsKey(opaqueRef))
-                return;
-
-            var row = vms[opaqueRef];
-
-            row.UpdateError(message, solution);
-
-            Program.Invoke(this, dataGridViewVms.Refresh);
-        }
-
-        private void CloseButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-
-            Text = string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, host.Name());
-
-            //This dialog uses several different actions all of which might need an elevated session
-            //We sudo once for all of them and store the session, or close the dialog.
-            List<Role> validRoles = new List<Role>();
-
-            if (!connection.Session.IsLocalSuperuser &&
-                !Registry.DontSudo &&
-                !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
-            {
-                using (var d = new RoleElevationDialog(connection, connection.Session, validRoles, Text))
-                    if (d.ShowDialog(this) == DialogResult.OK)
-                    {
-                        elevatedPass = d.elevatedPassword;
-                        elevatedUName = d.elevatedUsername;
-                        elevatedSession = d.elevatedSession;
-                    }
-                    else
-                    {
-                        Close();
-                        return;
-                    }
-            }
-
-            update();
-        }
-
-        private void SelectProperItemInNewMasterComboBox(ToStringWrapper<Host> previousSelection)
-        {
-            bool selected = false;
-
-            if (previousSelection != null)
-            {
-                foreach (ToStringWrapper<Host> host in NewMasterComboBox.Items)
-                {
-                    if (host.item.opaque_ref == previousSelection.item.opaque_ref)
-                    {
-                        NewMasterComboBox.SelectedItem = host;
-                        selected = true;
-                        break;
-                    }
-                }
-            }
-
-            if (NewMasterComboBox.Items.Count > 0 && !selected)
-            {
-                NewMasterComboBox.SelectedIndex = 0;
-            }
+            vmErrorsAction.Completed += VmErrorsAction_Completed;
+            vmErrorsAction.RunAsync(GetSudoElevationResult());
         }
 
         private bool ValidRecommendation(Dictionary<XenRef<VM>, String[]> reasons)
@@ -928,15 +207,505 @@ namespace XenAdmin.Dialogs
             return valid;
         }
 
+        private void VmErrorsAction_Completed(ActionBase obj)
+        {
+            if (!(obj is DelegatedAsyncAction action))
+                return;
+
+            try
+            {
+                Program.Invoke(this, () =>
+                {
+                    if (action.Succeeded)
+                    {
+                        if (action.ResultObject is Dictionary<XenRef<VM>, string[]> cantEvacuateReasons)
+                            reasons = cantEvacuateReasons;
+
+                        tableLayoutPanelSpinner.Visible = false;
+                        spinnerIcon1.StopSpinning();
+                        PopulateVMs();
+                        PopulateHosts();
+                        EnableButtons();
+                    }
+                    else
+                    {
+                        spinnerIcon1.ShowFailureImage();
+                        labelSpinner.Text = action.Exception.Message;
+                    }
+                });
+            }
+            finally
+            {
+                _rebuildInProgress = false;
+                if (_rebuildRequired)
+                {
+                    _rebuildRequired = false;
+                    Rebuild();
+                }
+            }
+        }
+
+        
+        private void hostUpdate(object o, PropertyChangedEventArgs args)
+        {
+            if (args == null || args.PropertyName == "name_label" || args.PropertyName == "resident_VMs")
+                Rebuild();
+        }
+
+        private void poolUpdate(object o, PropertyChangedEventArgs args)
+        {
+            if (args == null || args.PropertyName == "is_psr_pending" ||
+                args.PropertyName == "allowed_operations" || args.PropertyName == "current_operations")
+                Program.Invoke(this, ()=>
+                {
+                    EnableComboBox();
+                    EnableButtons();
+                });
+        }
+        
+        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "name_label" || args.PropertyName == "allowed_operations" ||
+                args.PropertyName == "current_operations")
+            {
+                Program.Invoke(this, () =>
+                {
+                    if (sender is VM vm)
+                        dataGridViewVms.Rows.Cast<VmPrecheckRow>()
+                            .FirstOrDefault(r => r.vm.opaque_ref == vm.opaque_ref)?.Refresh();
+                });
+            }
+            else if (args.PropertyName == "virtualisation_status" || args.PropertyName == "resident_on")
+            {
+                Rebuild();
+            }
+            else if (args.PropertyName == "guest_metrics")
+            {
+                VM v = sender as VM;
+                VM_guest_metrics gm = connection.Resolve(v?.guest_metrics);
+                if (gm == null)
+                    return;
+
+                gm.PropertyChanged -= gm_PropertyChanged;
+                gm.PropertyChanged += gm_PropertyChanged;
+            }
+        }
+
+        private void gm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "PV_drivers_version")
+                Rebuild();
+        }
+
+        private void host_PropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args == null || args.PropertyName == "name_label" ||
+                args.PropertyName == "enabled" || args.PropertyName == "metrics")
+            {
+                Program.Invoke(this, () =>
+                {
+                    ClearHosts();
+                    PopulateHosts();
+                });
+            }
+        }
+
+        
+        private void ClearVMs()
+        {
+            solveActionsByVmUuid = new Dictionary<string, AsyncAction>();
+
+            foreach (DataGridViewRow row in dataGridViewVms.Rows)
+            {
+                if (row is VmPrecheckRow precheckRow)
+                {
+                    DeregisterVmRowEvents(precheckRow);
+                    solveActionsByVmUuid.Add(precheckRow.vm.uuid, precheckRow.SolutionAction);
+                }
+            }
+
+            dataGridViewVms.Rows.Clear();
+        }
+
+        private void PopulateVMs()
+        {
+            Program.AssertOnEventThread();
+
+            try
+            {
+                dataGridViewVms.SuspendLayout();
+
+                foreach (VM vm in connection.ResolveAll(_host.resident_VMs))
+                {
+                    if (vm.is_control_domain || vm.is_a_template)
+                        continue;
+
+                    vm.PropertyChanged += VM_PropertyChanged;
+                    solveActionsByVmUuid.TryGetValue(vm.uuid, out var action);
+                    var row = new VmPrecheckRow(vm) {SolutionAction = action};
+                    dataGridViewVms.Rows.Add(row);
+                }
+
+                foreach (KeyValuePair<XenRef<VM>, string[]> kvp in reasons)
+                {
+                    if (kvp.Value[0].Trim().ToLower() != "wlb")
+                        UpdateVMWithError(kvp.Value, kvp.Key.opaque_ref);
+                }
+            }
+            finally
+            {
+                dataGridViewVms.ResumeLayout();
+            }
+        }
+
+        private void ClearHosts()
+        {
+            if (tableLayoutPanelNewMaster.Visible)
+            {
+                NewMasterComboBox.Enabled = false;
+                hostSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
+                NewMasterComboBox.Items.Clear();
+            }
+        }
+
+        private void PopulateHosts()
+        {
+            Program.AssertOnEventThread();
+
+            if (!tableLayoutPanelNewMaster.Visible)
+                return;
+
+            try
+            {
+                NewMasterComboBox.BeginUpdate();
+                var hosts = connection.Cache.Hosts.Where(h => h.opaque_ref != _host.opaque_ref).ToList();
+                hosts.Sort();
+
+                foreach (Host host in hosts)
+                {
+                    host.PropertyChanged -= host_PropertyChanged;
+                    host.PropertyChanged += host_PropertyChanged;
+
+                    Host_metrics metrics = connection.Resolve(host.metrics);
+                    if (host.enabled && metrics != null && metrics.live)
+                    {
+                        var item = new ToStringWrapper<Host>(host, host.Name());
+                        NewMasterComboBox.Items.Add(item);
+
+                        if (hostSelection != null && host.opaque_ref == hostSelection.item.opaque_ref)
+                            NewMasterComboBox.SelectedItem = item;
+                    }
+                }
+
+                //Update NewMasterComboBox for host power on recommendation
+                foreach (KeyValuePair<XenRef<VM>, string[]> kvp in reasons)
+                {
+                    var vm = connection.Resolve(kvp.Key);
+                    if (vm != null && vm.is_control_domain)
+                    {
+                        Host powerOnHost = connection.Cache.Hosts.FirstOrDefault(h =>
+                            h.uuid == kvp.Value[(int)RecProperties.ToHost]);
+
+                        if (powerOnHost != null)
+                        {
+                            var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name());
+
+                            if (NewMasterComboBox.Items.Cast<ToStringWrapper<Host>>().FirstOrDefault(i =>
+                                i.item.opaque_ref == powerOnHost.opaque_ref) == null)
+                            {
+                                powerOnHost.PropertyChanged -= host_PropertyChanged;
+                                powerOnHost.PropertyChanged += host_PropertyChanged;
+                                NewMasterComboBox.Items.Add(hostToAdd);
+                            }
+                        }
+                    }
+                }
+
+                if (NewMasterComboBox.SelectedItem == null && NewMasterComboBox.Items.Count > 0)
+                    NewMasterComboBox.SelectedIndex = 0;
+            }
+            finally
+            {
+                EnableComboBox();
+                NewMasterComboBox.EndUpdate();
+            }
+        }
+
+        private void EnableComboBox()
+        {
+            if (tableLayoutPanelNewMaster.Visible)
+            {
+                bool enable = connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) ||
+                              !_pool.is_psr_pending &&
+                              _pool.allowed_operations.Contains(pool_allowed_operations.designate_new_master);
+
+                if (!enable)
+                {
+                    if (_pool.is_psr_pending)
+                        labelWarning.Text = Messages.ROTATE_POOL_SECRET_PENDING_NEW_MASTER;
+                    else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_enable))
+                        labelWarning.Text = Messages.EVACUATE_HOST_HA_ENABLING;
+                    else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_disable))
+                        labelWarning.Text = Messages.EVACUATE_HOST_HA_DISABLING;
+                    else if (_pool.current_operations.Values.Contains(pool_allowed_operations.cluster_create))
+                        labelWarning.Text = Messages.EVACUATE_HOST_CLUSER_CREATING;
+                }
+
+                NewMasterComboBox.Enabled = enable;
+                tableLayoutPanelPSr.Visible = !enable;
+            }
+        }
+
+        private void EnableButtons()
+        {
+            buttonCheckAgain.Enabled = true;
+
+            var canMigrate = dataGridViewVms.Rows.Cast<VmPrecheckRow>().All(r => !r.HasSolution() && !r.HasSolutionActionInProgress());
+            //empty returns true, which is correct
+
+            EvacuateButton.Enabled = canMigrate && (!tableLayoutPanelNewMaster.Visible || NewMasterComboBox.Enabled);
+        }
+
+        private void DisableButtons()
+        {
+            buttonCheckAgain.Enabled = false;
+            EvacuateButton.Enabled = false;
+        }
+
+        private void DeregisterVmRowEvents(VmPrecheckRow row)
+        {
+            if (row.vm != null)
+            {
+                row.vm.PropertyChanged -= VM_PropertyChanged;
+                VM_guest_metrics gm = connection.Resolve(row.vm.guest_metrics);
+                if (gm == null)
+                    return;
+                gm.PropertyChanged -= gm_PropertyChanged;
+            }
+        }
+
+        private bool CanSuspendVm(String vmRef)
+        {
+            if (vmRef == null)
+                return false;
+            VM vm = connection.Resolve(new XenRef<VM>(vmRef));
+            return vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.suspend);
+        }
+
+        private void UpdateVMWithError(string[] errorDescription, string vmRef = null)
+        {
+            if (errorDescription.Length == 0)
+                return;
+
+            Solution solution;
+            string error = "";
+
+            switch (errorDescription[0])
+            {
+                case Failure.VM_REQUIRES_SR:
+                    vmRef = errorDescription[1];
+                    SR sr = connection.Resolve(new XenRef<SR>(errorDescription[2]));
+
+                    if (sr != null && sr.content_type == SR.Content_Type_ISO)
+                    {
+                        error = Messages.EVACUATE_HOST_LOCAL_CD;
+                        solution = Solution.EjectCD;
+                    }
+                    else
+                    {
+                        error = Messages.EVACUATE_HOST_LOCAL_STORAGE;
+                        solution = CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown;
+                    }
+                    break;
+
+                case Failure.VM_MISSING_PV_DRIVERS:
+                    vmRef = errorDescription[1];
+                    VM vm = connection.Resolve(new XenRef<VM>(vmRef));
+                    solution = InstallToolsCommand.CanExecute(vm) && !Helpers.StockholmOrGreater(connection)
+                        ? Solution.InstallPVDrivers
+                        : Solution.InstallPVDriversNoSolution;
+                    break;
+
+                case Failure.HA_NO_PLAN:
+                    dataGridViewVms.Rows.Cast<VmPrecheckRow>().ToList().ForEach(r =>
+                        r.SetError("", CanSuspendVm(r.vm.opaque_ref) ? Solution.Suspend : Solution.Shutdown));
+                    return; //exit the method
+
+                case Failure.HOST_NOT_ENOUGH_FREE_MEMORY:
+                case Failure.VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT:
+                    vmRef = errorDescription[1];
+                    solution = CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown;
+                    break;
+
+                default:
+                    solution = CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown;
+                    break;
+            }
+
+            var row = dataGridViewVms.Rows.Cast<VmPrecheckRow>().FirstOrDefault(r => r.vm.opaque_ref == vmRef);
+            row?.SetError(error, solution);
+        }
+
+        private AsyncAction.SudoElevationResult GetSudoElevationResult()
+        {
+            if (elevatedUsername == null)
+                return null;
+
+            var ser = new AsyncAction.SudoElevationResult(elevatedUsername, elevatedPassword, elevatedSession);
+            //use the session from the role elevation dialog, but only the first time
+            elevatedSession = null;
+            return ser;
+        }
+
+
+        #region Control event handlers
+
+        private void NewMasterComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var backColor = NewMasterComboBox.Enabled ? NewMasterComboBox.BackColor : SystemColors.Control;
+
+            using (SolidBrush backBrush = new SolidBrush(backColor))
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+            if (e.Index < 0 || e.Index > NewMasterComboBox.Items.Count - 1)
+                return;
+
+            if (!(NewMasterComboBox.Items[e.Index] is ToStringWrapper<Host> host))
+                return;
+
+            Image icon = Images.GetImage16For(host.item);
+
+            var imageRectangle = new Rectangle(e.Bounds.Left + 1, e.Bounds.Top + 1, 16, 16);
+            Rectangle textRectangle = new Rectangle(e.Bounds.Height, e.Bounds.Y,
+                e.Bounds.Width - e.Bounds.Height - 5, e.Bounds.Height);
+
+            using (var g = e.Graphics)
+            {
+                if (NewMasterComboBox.Enabled)
+                {
+                    g.DrawImage(icon, imageRectangle);
+
+                    Drawing.DrawText(g, host.ToString(), e.Font, textRectangle,
+                        e.ForeColor, e.BackColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                }
+                else
+                {
+                    g.DrawImage(icon, imageRectangle, 0, 0, icon.Width, icon.Height, GraphicsUnit.Pixel, Drawing.GreyScaleAttributes);
+
+                    Drawing.DrawText(g, host.ToString(), e.Font, textRectangle,
+                        SystemColors.GrayText, SystemColors.Control, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                }
+            }
+        }
+
+        
+        private void dataGridViewVms_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount &&
+                e.ColumnIndex == columnAction.Index &&
+                dataGridViewVms.Rows[e.RowIndex] is VmPrecheckRow row && row.HasSolution())
+            {
+                Cursor.Current = Cursors.Hand;
+                return;
+            }
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void dataGridViewVms_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount &&
+                e.ColumnIndex == columnAction.Index &&
+                dataGridViewVms.Rows[e.RowIndex] is VmPrecheckRow row && row.HasSolution())
+            {
+                AsyncAction action = null;
+                switch (row.Solution)
+                {
+                    case Solution.EjectCD:
+                        action = new ChangeVMISOAction(row.vm.Connection, row.vm, null, row.vm.FindVMCDROM());
+                        break;
+                    case Solution.Suspend:
+                        action = new VMSuspendAction(row.vm);
+                        break;
+                    case Solution.Shutdown:
+                        action = new VMHardShutdown(row.vm);
+                        break;
+                    case Solution.InstallPVDrivers:
+                        var cmd = new InstallToolsCommand(Program.MainWindow, row.vm, dataGridViewVms);
+                        cmd.Execute();
+                        // The install pv tools action is marked as complete after they have taken the user to the
+                        // console and loaded the disc. Rescanning when the action is 'complete' in this case
+                        // doesn't gain us anything then. Keep showing the "Click here to install PV drivers" text.
+                        return;
+                }
+
+                if (action != null)
+                {
+                    action.Completed += a => Rebuild();
+                    action.RunAsync(GetSudoElevationResult());
+                }
+                //set this after starting the action so that the row is updated correctly
+                row.SolutionAction = action;
+            }
+        }
+
+
+        private void buttonCheckAgain_Click(object sender, EventArgs e)
+        {
+            Rebuild();
+        }
+
+        private void EvacuateButton_Click(object sender, EventArgs e)
+        {
+            var newMaster = tableLayoutPanelNewMaster.Visible
+                ? NewMasterComboBox.SelectedItem as ToStringWrapper<Host>
+                : null;
+
+            hostAction = new EvacuateHostAction(_host, newMaster?.item,
+                reasons ?? new Dictionary<XenRef<VM>, string[]>(),
+                AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
+
+            hostAction.Completed += Program.MainWindow.action_Completed;
+            hostAction.Changed += HostAction_Changed;
+            hostAction.Completed += HostAction_Completed;
+
+            //Closes all per-Connection and per-VM wizards for the given connection.
+            Program.MainWindow.CloseActiveWizards(_host.Connection);
+
+            DisableButtons();
+            progressBar1.Visible = true;
+            pictureBoxStatus.Visible = false;
+            tableLayoutPanelStatus.Visible = true;
+            hostAction.RunAsync(GetSudoElevationResult());
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
         private void EvacuateHostDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (host != null)
-                host.PropertyChanged -= hostUpdate;
+            vmErrorsAction?.Cancel();
+            hostAction?.Cancel();
+
+            if (_host != null)
+                _host.PropertyChanged -= hostUpdate;
+            if (_pool != null)
+                _pool.PropertyChanged -= poolUpdate;
             
             foreach (var h in connection.Cache.Hosts)
                 h.PropertyChanged -= host_PropertyChanged;
-            
-            deregisterVMEvents();
+
+            foreach (DataGridViewRow row in dataGridViewVms.Rows)
+            {
+                if (row is VmPrecheckRow precheckRow)
+                {
+                    DeregisterVmRowEvents(precheckRow);
+                    precheckRow.SolutionAction?.Cancel();
+                }
+            }
 
             if (elevatedSession != null && elevatedSession.opaque_ref != null)
             {
@@ -946,5 +715,200 @@ namespace XenAdmin.Dialogs
                 elevatedSession.logout();
             }
         }
+
+        #endregion
+
+        
+        private void HostAction_Changed(ActionBase obj)
+        {
+            if (obj != hostAction)
+                return;
+
+            Program.Invoke(this, UpdateProgress);
+        }
+
+        private void HostAction_Completed(ActionBase obj)
+        {
+            if (obj != hostAction)
+                return;
+
+            hostAction.Changed -= HostAction_Changed;
+            hostAction.Completed -= HostAction_Completed;
+
+            Program.Invoke(this, () =>
+            {
+                if (hostAction.Succeeded)
+                {
+                    Close();
+                    return;
+                }
+
+                UpdateProgress();
+                EnableButtons();
+                pictureBoxStatus.Visible = true;
+                tableLayoutPanelStatus.Visible = true;
+                progressBar1.Visible = false;
+
+                if (hostAction.Exception is Failure failure && failure.ErrorDescription.Count > 0 &&
+                    (failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY ||
+                     failure.ErrorDescription[0] == Failure.HA_NO_PLAN))
+                {
+                    if (failure.ErrorDescription[0] == Failure.HOST_NOT_ENOUGH_FREE_MEMORY)
+                        labelProgress.Text = Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY;
+                    else if (failure.ErrorDescription[0] == Failure.HA_NO_PLAN)
+                        labelProgress.Text = Messages.EVACUATE_HOST_NO_OTHER_HOSTS;
+
+                    UpdateVMWithError(failure.ErrorDescription.ToArray());
+                }
+                else
+                    labelProgress.Text = hostAction.Exception.Message;
+
+                if (_rebuildRequired)
+                    Rebuild();
+            });
+        }
+
+        private void UpdateProgress()
+        {
+            labelProgress.Text = hostAction.Description;
+
+            if (hostAction.PercentComplete < 0)
+                progressBar1.Value = 0;
+            else if (hostAction.PercentComplete > 100)
+                progressBar1.Value = 100;
+            else
+                progressBar1.Value = hostAction.PercentComplete;
+        }
+
+ 
+        #region Nested items
+
+        enum Solution { None, EjectCD, Suspend, InstallPVDrivers, InstallPVDriversNoSolution, Shutdown }
+
+        private class VmPrecheckRow : DataGridViewRow, IComparable<VmPrecheckRow>
+        {
+            public readonly VM vm;
+            private AsyncAction _solutionAction;
+            private string error = string.Empty;
+
+            public Solution Solution { get; private set; } = Solution.None;
+
+            public AsyncAction SolutionAction
+            {
+                get => _solutionAction;
+                set
+                {
+                    _solutionAction = value;
+
+                    if (HasSolutionActionInProgress())
+                    {
+                        Solution = Solution.None;
+                        error = _solutionAction.Title;
+                    }
+                    
+                    Refresh();
+                }
+            }
+
+            private readonly DataGridViewImageCell cellImage = new DataGridViewImageCell();
+            private readonly DataGridViewTextBoxCell cellVm = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell cellAction = new DataGridViewTextBoxCell();
+
+            public VmPrecheckRow(VM vm)
+            {
+                this.vm = vm;
+                Cells.AddRange(cellImage, cellVm, cellAction);
+                Refresh();
+            }
+
+            public void Refresh()
+            {
+                cellImage.Value = Images.GetImage16For(vm);
+                cellVm.Value = ToString();
+                cellAction.Value = error;
+
+                if (HasSolution())
+                {
+                    cellAction.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
+                    cellAction.Style.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    cellAction.Style.Font = Program.DefaultFont;
+                    cellAction.Style.ForeColor = DefaultForeColor;
+                }
+
+                cellAction.Style.SelectionForeColor = cellAction.Style.ForeColor;
+                cellAction.Style.SelectionBackColor = cellAction.Style.BackColor;
+            }
+
+            public override string ToString()
+            {
+                return vm.Name();
+            }
+
+            public int CompareTo(VmPrecheckRow otherVM)
+            {
+                return vm.CompareTo(otherVM?.vm);
+            }
+
+            public void SetError(string message, Solution solution)
+            {
+                // still running action to solve a previous error, no point in overwriting or we could end up 'solving' it twice
+                if (HasSolutionActionInProgress())
+                {
+                    Solution = Solution.None;
+                    error = SolutionAction.Title;
+                    Refresh();
+                    return;
+                }
+                 
+                Solution = solution;
+
+                switch (solution)
+                {
+                    case Solution.EjectCD:
+                        error = String.Format(Messages.EVACUATE_HOST_EJECT_CD_PROMPT, message);
+                        break;
+
+                    case Solution.Suspend:
+                        error = String.Format(Messages.EVACUATE_HOST_SUSPEND_VM_PROMPT, message);
+                        break;
+
+                    case Solution.Shutdown:
+                        error = String.Format(Messages.EVACUATE_HOST_SHUTDOWN_VM_PROMPT, message);
+                        break;
+
+                    case Solution.InstallPVDrivers:
+                        error = string.Format(vm.HasNewVirtualisationStates()
+                            ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT
+                            : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        break;
+
+                    case Solution.InstallPVDriversNoSolution:
+                        // if the state is not unknown we have metrics and can show a detailed message.
+                        // Otherwise go with the server and just say they aren't installed
+                        error = !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN)
+                            ? vm.GetVirtualisationWarningMessages()
+                            : Messages.PV_DRIVERS_NOT_INSTALLED;
+                        break;
+                }
+
+                Refresh();
+            }
+
+            internal bool HasSolution()
+            {
+                return Solution != Solution.None 
+                    && Solution != Solution.InstallPVDriversNoSolution;
+            }
+
+            internal bool HasSolutionActionInProgress()
+            {
+                return SolutionAction != null && !SolutionAction.IsCompleted;
+            }
+        }
+
+        #endregion
     }
 }
