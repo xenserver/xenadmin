@@ -106,7 +106,7 @@ namespace XenAdmin.Actions
         /// using the basic credentials of the IXenConnection. Important - will throw exceptions similar to connection.NewSession
         /// </summary>
         /// <returns></returns>
-        public override Session NewSession()
+        protected override Session NewSession()
         {
             if (Connection == null)
                 return null;
@@ -124,7 +124,7 @@ namespace XenAdmin.Actions
         /// </summary>
         /// <param name="xc"></param>
         /// <returns></returns>
-        public Session NewSession(IXenConnection xc)
+        protected Session NewSession(IXenConnection xc)
         {
             if (Connection == null)
                 return null;
@@ -164,8 +164,13 @@ namespace XenAdmin.Actions
 
         public void RunAsync()
         {
+            RunAsync(null);
+        }
+
+        public void RunAsync(SudoElevationResult sudoElevationResult)
+        {
             AuditLogStarted();
-            System.Threading.ThreadPool.QueueUserWorkItem(RunWorkerThread, null);
+            System.Threading.ThreadPool.QueueUserWorkItem(RunWorkerThread, sudoElevationResult);
         }
 
         /// <summary>
@@ -191,8 +196,14 @@ namespace XenAdmin.Actions
 
             try
             {
-                if (o != null)
-                    Session = (Session)o;
+                if (o is Session session)
+                    Session = session;
+                else if (o is SudoElevationResult ser)
+                {
+                    sudoUsername = ser.ElevatedUsername;
+                    sudoPassword = ser.ElevatedPassword;
+                    Session = ser.ElevatedSession ?? NewSession();
+                }
                 else
                     SetSessionByRole(); //construct a new session and sudo it if necessary
 

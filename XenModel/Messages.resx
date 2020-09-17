@@ -5512,6 +5512,15 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0} Eject the CD</value>
   </data>
+  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
+    <value>You cannot nominate a new master while the pool is in the process of creating a cluster.</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
+    <value>You cannot nominate a new master while HA is being disabled on the pool.</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
+    <value>You cannot nominate a new master while HA is being enabled on the pool.</value>
+  </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} Install Management Agent</value>
   </data>
@@ -5527,23 +5536,14 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>There is not enough free memory available on the other servers in the pool to migrate all the running VMs off this server. Please suspend some of the VMs</value>
   </data>
-  <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE" xml:space="preserve">
-    <value>Not enough memory</value>
-  </data>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS" xml:space="preserve">
-    <value>There are no other servers available in the pool to migrate the running VMs to.  Please suspend the VMs instead.</value>
-  </data>
-  <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
-    <value>No servers available</value>
+    <value>There are no other servers available in the pool to migrate the running VMs to. Please suspend the VMs instead.</value>
   </data>
   <data name="EVACUATE_HOST_SHUTDOWN_VM_PROMPT" xml:space="preserve">
     <value>{0} Shut down the VM</value>
   </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
     <value>{0} Suspend the VM</value>
-  </data>
-  <data name="EVACUATE_SOLUTION_IN_PROGRESS" xml:space="preserve">
-    <value>Action in progress...</value>
   </data>
   <data name="EXACT_MATCH" xml:space="preserve">
     <value>exactly matches</value>
@@ -6656,13 +6656,13 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Server '{0}' entered maintenance mode</value>
   </data>
   <data name="HOSTACTION_EVACUATING" xml:space="preserve">
-    <value>Server '{0}' entering maintenance mode...</value>
+    <value>Server '{0}' is entering maintenance mode...</value>
   </data>
   <data name="HOSTACTION_EXITED_MAINTENANCE_MODE" xml:space="preserve">
     <value>Server '{0}' exited maintenance mode</value>
   </data>
   <data name="HOSTACTION_EXITING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Server '{0}' exiting maintenance mode...</value>
+    <value>Server '{0}' is exiting maintenance mode...</value>
   </data>
   <data name="HOSTACTION_REBOOT_VM_SHUTDOWN" xml:space="preserve">
     <value>Preparing to reboot server: shutting down {0} ({1} of {2})</value>
@@ -11377,6 +11377,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
     <value>You cannot configure HA while a pool secret rotation is in progress.</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
+    <value>You cannot nominate a new master while a pool secret rotation is in progress.</value>
   </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>

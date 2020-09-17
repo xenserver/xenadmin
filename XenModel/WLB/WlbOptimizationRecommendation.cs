@@ -48,7 +48,7 @@ namespace XenAdmin.Wlb
         WLB = 0,
 
         /// <summary>
-        /// Recommendate moving to host.
+        /// Recommend moving to host.
         /// </summary>
         ToHost = 1,
 
@@ -63,7 +63,7 @@ namespace XenAdmin.Wlb
         RecId = 3,
 
         /// <summary>
-        /// Recommendate moving reason
+        /// Recommend moving reason
         /// </summary>
         Reason = 4
     }
@@ -84,7 +84,7 @@ namespace XenAdmin.Wlb
         public const string OPTIMIZINGPOOL = "wlb_optimizing_pool";
 
         /// <summary>
-        /// Set optimizal vm properties
+        /// Set optimization vm properties
         /// </summary>
         /// <param name="vm">vm from optimize pool recommendations.</param>
         /// <param name="fromHost">host vm resides on.</param>
