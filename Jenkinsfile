@@ -33,7 +33,7 @@
 
 def XENADMIN_BRANDING_TAG = 'v3.0'
 
-@Library(["xencenter-pipeline@v2.0"])
+@Library(['PacmanSharedLibrary', 'xencenter-pipeline@v3.0'])
 import com.citrix.pipeline.xencenter.*
 
 properties([
@@ -48,10 +48,11 @@ properties([
 ])
 
 def builder = null
+def globals = globals()
 
-node('xencenter') {
+node(globals.buildNodeLabel) {
     try {
-        builder = new Build(globals())
+        builder = new Build(globals)
         builder.xenadminBrandingTag = XENADMIN_BRANDING_TAG
 
         runPipeline(builder)
