@@ -20777,15 +20777,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting VM....
-        /// </summary>
-        public static string IMPORTVM_STARTING {
-            get {
-                return ResourceManager.GetString("IMPORTVM_STARTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Import VM from &apos;{0}&apos; to &apos;{1}&apos;.
         /// </summary>
         public static string IMPORTVM_TITLE {

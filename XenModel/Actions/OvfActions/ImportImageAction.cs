@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using XenAdmin.Actions.VMActions;
 using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
@@ -49,20 +50,26 @@ namespace XenAdmin.Actions.OvfActions
 
 		private readonly EnvelopeType m_ovfEnvelope;
         private readonly string m_directory;
+        private readonly Action<VM, bool> _warningDelegate;
+        private readonly Action<VMStartAbstractAction, Failure> _failureDiagnosisDelegate;
 
 		#endregion
 
-		public ImportImageAction(IXenConnection connection, EnvelopeType ovfEnv, string directory, Dictionary<string, VmMapping> vmMappings, bool runfixups, SR selectedIsoSr)
-			: base(connection, null, vmMappings, false, false, null, runfixups, selectedIsoSr)
-		{
-			m_ovfEnvelope = ovfEnv;
-			m_directory = directory;
+        public ImportImageAction(IXenConnection connection, EnvelopeType ovfEnv, string directory,
+            Dictionary<string, VmMapping> vmMappings, bool runfixups, SR selectedIsoSr, bool startAutomatically,
+            Action<VM, bool> warningDelegate, Action<VMStartAbstractAction, Failure> failureDiagnosisDelegate)
+            : base(connection, null, vmMappings, false, false, null, runfixups, selectedIsoSr, startAutomatically)
+        {
+            m_ovfEnvelope = ovfEnv;
+            m_directory = directory;
             Title = string.Format(Messages.IMPORT_DISK_IMAGE, ovfEnv.Name, Helpers.GetName(connection));
+            _warningDelegate = warningDelegate;
+            _failureDiagnosisDelegate = failureDiagnosisDelegate;
         }
 
         protected override void RunCore()
         {
-            Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
+            Debug.Assert(m_vmMappings.Count == 1, "There must be only one VM mapping");
 
 			string systemid = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);
@@ -88,9 +95,10 @@ namespace XenAdmin.Actions.OvfActions
 				OVF.SetTargetISOSRInRASD(curEnv, systemid, cdId, m_selectedIsoSr.uuid);
 			}
 
+            object importedObject;
 			try //importVM
 			{
-                Process(curEnv, m_directory);
+                importedObject = Process(curEnv, m_directory);
 
 				PercentComplete = 100;
 				Description = Messages.COMPLETED;
@@ -99,6 +107,13 @@ namespace XenAdmin.Actions.OvfActions
 			{
 				throw new CancelledException();
 			}
+
+            if (_startAutomatically && importedObject is XenRef<VM> vmRef)
+            {
+                var vm = Connection.Resolve(vmRef);
+                if (vm != null)
+                    new VMStartAction(vm, _warningDelegate, _failureDiagnosisDelegate).RunAsync();
+            }
 		}
 	}
 }

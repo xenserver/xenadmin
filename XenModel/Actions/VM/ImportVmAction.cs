@@ -35,6 +35,7 @@ using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 using System.Threading;
+using XenAdmin.Actions.VMActions;
 using XenAdmin.Network;
 
 
@@ -55,6 +56,9 @@ namespace XenAdmin.Actions
     	private object monitor = new object();
 		private bool m_wizardDone;
 
+        private readonly Action<VM, bool> _warningDelegate;
+        private readonly Action<VMStartAbstractAction, Failure> _failureDiagnosisDelegate;
+
     	/// <summary>
         /// These calls are always required to import a VM, as opposed to the set which are only called if needed set in the constructor of this action.
         /// </summary>
@@ -66,7 +70,8 @@ namespace XenAdmin.Actions
             "http/put_import"
         );
 
-		public ImportVmAction(IXenConnection connection, Host affinity, string filename, SR sr)
+        public ImportVmAction(IXenConnection connection, Host affinity, string filename, SR sr,
+            Action<VM, bool> warningDelegate, Action<VMStartAbstractAction, Failure> failureDiagnosisDelegate)
 			: base(connection, string.Format(Messages.IMPORTVM_TITLE, filename, Helpers.GetName(connection)), Messages.IMPORTVM_PREP)
 		{
 			Pool = Helpers.GetPoolOfOne(connection);
@@ -75,6 +80,8 @@ namespace XenAdmin.Actions
 			SR = sr;
 			VM = null;
 			m_filename = filename;
+            _warningDelegate = warningDelegate;
+            _failureDiagnosisDelegate = failureDiagnosisDelegate;
 
 			#region RBAC Dependencies
 
@@ -111,136 +118,127 @@ namespace XenAdmin.Actions
             SafeToExit = false;
         	bool isTemplate;
 
-        	try
+            string vmRef = GetVmRef(applyFile());
+            if (string.IsNullOrEmpty(vmRef))
+                return;
+
+            // Now let's try and set the affinity and start the VM
+
+            while (!Cancelling && (VM = Connection.Resolve(new XenRef<VM>(vmRef))) == null)
+                Thread.Sleep(100);
+
+            if (Cancelling)
+                throw new CancelledException();
+
+            isTemplate = VM.get_is_a_template(Session, vmRef);
+            if (isTemplate && Helpers.FalconOrGreater(Connection) && VM.get_is_default_template(Session, vmRef))
             {
-                string vmRef = GetVmRef(applyFile());
-                if (string.IsNullOrEmpty(vmRef))
-                    return;
-
-                // Now let's try and set the affinity and start the VM
-
-                while (!Cancelling && (VM = Connection.Resolve(new XenRef<VM>(vmRef))) == null)
-                    Thread.Sleep(100);
-
-                if (Cancelling)
-                    throw new CancelledException();
-
-                isTemplate = VM.get_is_a_template(Session, vmRef);
-                if (isTemplate && Helpers.FalconOrGreater(Connection) && VM.get_is_default_template(Session, vmRef))
+                var otherConfig = VM.get_other_config(Session, vmRef);
+                if (!otherConfig.ContainsKey(IMPORT_TASK) || otherConfig[IMPORT_TASK] != RelatedTask.opaque_ref)
                 {
-                    var otherConfig = VM.get_other_config(Session, vmRef);
-                    if (!otherConfig.ContainsKey(IMPORT_TASK) || otherConfig[IMPORT_TASK] != RelatedTask.opaque_ref)
+                    throw new Exception(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS);
+                }
+            }
+
+            Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_TEMPLATE : Messages.IMPORTVM_UPDATING_VM;
+            VM.set_name_label(Session, vmRef, DefaultVMName(VM.get_name_label(Session, vmRef)));
+
+			if (!isTemplate && m_affinity != null)
+				VM.set_affinity(Session, vmRef, m_affinity.opaque_ref);
+
+            // Wait here for the wizard to finish
+            Description = isTemplate ? Messages.IMPORT_TEMPLATE_WAITING_FOR_WIZARD : Messages.IMPORTVM_WAITING_FOR_WIZARD;
+			lock (monitor)
+			{
+				while (!(m_wizardDone || Cancelling))
+					Monitor.Wait(monitor);
+			}
+
+            if (Cancelling)
+                throw new CancelledException();
+
+            if (m_VIFs != null)
+            {
+                Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_NETWORKS : Messages.IMPORTVM_UPDATING_NETWORKS;
+
+                // For ElyOrGreater hosts, we can move the VIFs to another network, 
+                // but for older hosts we need to destroy all vifs and recreate them
+
+                List<XenRef<VIF>> vifs = VM.get_VIFs(Session, vmRef);
+                List<XenAPI.Network> networks = new List<XenAPI.Network>();
+
+                bool canMoveVifs = Helpers.ElyOrGreater(Connection);
+
+                foreach (XenRef<VIF> vif in vifs)
+                {
+                    // Save the network as we may have to delete it later
+                    XenAPI.Network network = Connection.Resolve(VIF.get_network(Session, vif));
+                    if (network != null)
+                        networks.Add(network);
+
+                    if (canMoveVifs)
                     {
-                        throw new Exception(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS);
+                        var vifObj = Connection.Resolve(vif);
+                        if (vifObj == null)
+                            continue;
+                        // try to find a matching VIF in the m_proxyVIFs list, based on the device field
+                        var matchingProxyVif = m_VIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
+                        if (matchingProxyVif != null)
+                        {
+                            // move the VIF to the desired network
+                            VIF.move(Session, vif, matchingProxyVif.network);
+                            // remove matchingProxyVif from the list, so we don't create the VIF again later
+                            m_VIFs.Remove(matchingProxyVif);
+                            continue;
+                        }
                     }
+
+                    // destroy the VIF, if we haven't managed to move it
+                    VIF.destroy(Session, vif);
                 }
 
-                Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_TEMPLATE : Messages.IMPORTVM_UPDATING_VM;
-                VM.set_name_label(Session, vmRef, DefaultVMName(VM.get_name_label(Session, vmRef)));
-
-				if (!isTemplate && m_affinity != null)
-					VM.set_affinity(Session, vmRef, m_affinity.opaque_ref);
-
-                // Wait here for the wizard to finish
-                Description = isTemplate ? Messages.IMPORT_TEMPLATE_WAITING_FOR_WIZARD : Messages.IMPORTVM_WAITING_FOR_WIZARD;
-				lock (monitor)
-				{
-					while (!(m_wizardDone || Cancelling))
-						Monitor.Wait(monitor);
-				}
-
-                if (Cancelling)
-                    throw new CancelledException();
-
-                if (m_VIFs != null)
+                // recreate VIFs if needed (m_proxyVIFs can be empty, if we moved all the VIFs in the previous step)
+                foreach (VIF vif in m_VIFs)
                 {
-                    Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_NETWORKS : Messages.IMPORTVM_UPDATING_NETWORKS;
-
-                    // For ElyOrGreater hosts, we can move the VIFs to another network, 
-                    // but for older hosts we need to destroy all vifs and recreate them
-
-                    List<XenRef<VIF>> vifs = VM.get_VIFs(Session, vmRef);
-                    List<XenAPI.Network> networks = new List<XenAPI.Network>();
-
-                    bool canMoveVifs = Helpers.ElyOrGreater(Connection);
-
-                    foreach (XenRef<VIF> vif in vifs)
-                    {
-                        // Save the network as we may have to delete it later
-                        XenAPI.Network network = Connection.Resolve(VIF.get_network(Session, vif));
-                        if (network != null)
-                            networks.Add(network);
-
-                        if (canMoveVifs)
-                        {
-                            var vifObj = Connection.Resolve(vif);
-                            if (vifObj == null)
-                                continue;
-                            // try to find a matching VIF in the m_proxyVIFs list, based on the device field
-                            var matchingProxyVif = m_VIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
-                            if (matchingProxyVif != null)
-                            {
-                                // move the VIF to the desired network
-                                VIF.move(Session, vif, matchingProxyVif.network);
-                                // remove matchingProxyVif from the list, so we don't create the VIF again later
-                                m_VIFs.Remove(matchingProxyVif); 
-                                continue;
-                            }
-                        }
-                        // destroy the VIF, if we haven't managed to move it
-                        VIF.destroy(Session, vif);
-                    }
-
-                    // recreate VIFs if needed (m_proxyVIFs can be empty, if we moved all the VIFs in the previous step)
-                    foreach (VIF vif in m_VIFs)
-                    {
-                        vif.VM = new XenRef<VM>(vmRef);
-                        VIF.create(Session, vif);
-                    }
-
-                    // now delete any Networks associated with this task if they have no VIFs
-
-                    foreach (XenAPI.Network network in networks)
-                    {
-                        if (!network.other_config.ContainsKey(IMPORT_TASK))
-                            continue;
-
-                        if (network.other_config[IMPORT_TASK] != RelatedTask.opaque_ref)
-                            continue;
-
-                        try
-                        {
-                            if (XenAPI.Network.get_VIFs(Session, network.opaque_ref).Count > 0)
-                                continue;
-
-                            if (XenAPI.Network.get_PIFs(Session, network.opaque_ref).Count > 0)
-                                continue;
-
-                            XenAPI.Network.destroy(Session, network.opaque_ref);
-                        }
-                        catch (Exception e)
-                        {
-                            log.Error($"Exception while deleting network {network.Name()}. Squashing.", e);
-                        }
-                    }
+                    vif.VM = new XenRef<VM>(vmRef);
+                    VIF.create(Session, vif);
                 }
 
-                if (!VM.get_is_a_template(Session, vmRef))
+                // now delete any Networks associated with this task if they have no VIFs
+
+                foreach (XenAPI.Network network in networks)
                 {
-                    if (m_startAutomatically)
+                    if (!network.other_config.ContainsKey(IMPORT_TASK))
+                        continue;
+
+                    if (network.other_config[IMPORT_TASK] != RelatedTask.opaque_ref)
+                        continue;
+
+                    try
                     {
-                        Description = Messages.IMPORTVM_STARTING;
-                        VM.start(Session, vmRef, false, false);
+                        if (XenAPI.Network.get_VIFs(Session, network.opaque_ref).Count > 0)
+                            continue;
+
+                        if (XenAPI.Network.get_PIFs(Session, network.opaque_ref).Count > 0)
+                            continue;
+
+                        XenAPI.Network.destroy(Session, network.opaque_ref);
+                    }
+                    catch (Exception e)
+                    {
+                        log.Error($"Exception while deleting network {network.Name()}. Squashing.", e);
                     }
                 }
             }
-            catch (CancelledException)
-            {
-                Description = Messages.CANCELLED_BY_USER;
-                throw;
-            }
+
+            //get the record before marking the action as completed
+            var vm = VM.get_record(Session, vmRef);
+            vm.opaque_ref = vmRef;
 
             Description = isTemplate ? Messages.IMPORT_TEMPLATE_IMPORTCOMPLETE : Messages.IMPORTVM_IMPORTCOMPLETE;
+
+            if (!vm.is_a_template && m_startAutomatically)
+                new VMStartAction(vm, _warningDelegate, _failureDiagnosisDelegate).RunAsync();
         }
 
         private int VMsWithName(string name)
@@ -315,9 +313,6 @@ namespace XenAdmin.Actions
 		{
 			m_startAutomatically = start;
 			m_VIFs = vifs;
-
-            if (m_startAutomatically)
-                ApiMethodsToRoleCheck.Add("vm.start");
 
 			lock (monitor)
 			{

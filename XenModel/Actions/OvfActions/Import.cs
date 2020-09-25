@@ -55,7 +55,7 @@ namespace XenAdmin.Actions.OvfActions
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        protected void Process(EnvelopeType ovfObj, string pathToOvf, string applianceName = null)
+        protected object Process(EnvelopeType ovfObj, string pathToOvf, string applianceName = null)
         {
             int vifDeviceIndex = 0;
 
@@ -68,7 +68,7 @@ namespace XenAdmin.Actions.OvfActions
 
 			#region Create appliance
 
-        	XenRef<VM_appliance> applRef = null;
+            XenRef<VM_appliance> applRef = null;
 			if (applianceName != null)
             {
                 Description = string.Format(Messages.IMPORT_CREATING_APPLIANCE, applianceName);
@@ -91,6 +91,7 @@ namespace XenAdmin.Actions.OvfActions
             var vmsToImport = ((VirtualSystemCollection_Type)ovfObj.Item).Content
                 .Where(c => c is VirtualSystem_Type).Cast<VirtualSystem_Type>().ToList();
 
+            XenRef<VM> vmRef = null;
             for (int i = 0; i < vmsToImport.Count; i++)
             {
                 int curVm = i;
@@ -99,7 +100,7 @@ namespace XenAdmin.Actions.OvfActions
                 VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(ovfObj, vSystem.id, "xen");
                 var vmStartupSection = startupSections?.FirstOrDefault(it => it.id == vSystem.id);
 
-                XenRef<VM> vmRef = null;
+                vmRef = null;
                 try
                 {
                     vmRef = CreateVm(vmName, vhs, applRef, vmStartupSection);
@@ -136,10 +137,19 @@ namespace XenAdmin.Actions.OvfActions
                         {
                             //ignore
                         }
+                        finally
+                        {
+                            vmRef = null;
+                        }
 
                     throw;
                 }
             }
+
+            if (applRef != null)
+                return applRef;
+            
+            return vmRef;
         }
 
         private void HandleInstallSection(Session xenSession, XenRef<VM> vmRef, VirtualSystem_Type vSystem)
