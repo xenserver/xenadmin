@@ -55,11 +55,12 @@ namespace XenAdmin.Actions.OvfActions
         private string m_encryptionVersion;
         protected readonly bool m_runfixups;
 		protected readonly SR m_selectedIsoSr;
+        protected readonly bool _startAutomatically;
 
 		#endregion
 
         public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
-            bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr)
+            bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr, bool startAutomatically)
             : base(connection, string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection)))
 		{
 			m_package = package;
@@ -69,6 +70,7 @@ namespace XenAdmin.Actions.OvfActions
 			m_password = password;
 			m_runfixups = runfixups;
 			m_selectedIsoSr = selectedIsoSr;
+            _startAutomatically = startAutomatically;
 		}
 
         protected override void RunCore()
@@ -145,10 +147,11 @@ namespace XenAdmin.Actions.OvfActions
             EnvelopeType env = OVF.Merge(envelopes, m_package.Name);
             m_package.ExtractToWorkingDir();
 
+            object importedObject;
 			try //import VMs
             {
                 OVF.ParseEncryption(env, out m_encryptionClass, out m_encryptionVersion);
-                Process(env, m_package.WorkingDir, m_package.Name);
+                importedObject = Process(env, m_package.WorkingDir, m_package.Name);
 			}
 			catch (OperationCanceledException)
 			{
@@ -161,6 +164,13 @@ namespace XenAdmin.Actions.OvfActions
 
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
+
+            if (_startAutomatically && importedObject is XenRef<VM_appliance> applianceRef)
+            {
+                var appliance = Connection.Resolve(applianceRef);
+                if (appliance != null)
+                    new StartApplianceAction(appliance, false).RunAsync();
+            }
 		}
     }
 }

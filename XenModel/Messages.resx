@@ -6959,9 +6959,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>Preparing to Import VM</value>
   </data>
-  <data name="IMPORTVM_STARTING" xml:space="preserve">
-    <value>Starting VM...</value>
-  </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
     <value>Import VM from '{0}' to '{1}'</value>
   </data>

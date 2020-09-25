@@ -33,8 +33,8 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Commands;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAPI;
@@ -98,10 +98,9 @@ namespace XenAdmin.Wizards.ImportWizard
 				SetButtonNextEnabled(false);
                 m_buttonPreviousEnabled = false;
                 OnPageUpdated();
-				ImportXvaAction = new ImportVmAction(m_targetHost == null ? m_targetConnection : m_targetHost.Connection,
-				                                       m_targetHost,
-				                                       FilePath,
-				                                       SR);
+                ImportXvaAction = new ImportVmAction(m_targetHost == null ? m_targetConnection : m_targetHost.Connection,
+                    m_targetHost, FilePath, SR,
+                    VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
 				ImportXvaAction.Completed += m_importXvaAction_Completed;
 
 				m_actionDialog = new ActionProgressDialog(ImportXvaAction, ProgressBarStyle.Blocks) {ShowCancel = true};

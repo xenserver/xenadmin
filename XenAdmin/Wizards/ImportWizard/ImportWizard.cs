@@ -43,6 +43,7 @@ using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 using System.Linq;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.Commands;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
@@ -134,7 +135,8 @@ namespace XenAdmin.Wizards.ImportWizard
                         m_pageSecurity.VerifySignature,
                         m_pageSecurity.Password,
                         m_pageOptions.RunFixups,
-                        m_pageOptions.SelectedIsoSR).RunAsync();
+                        m_pageOptions.SelectedIsoSR,
+                        m_pageFinish.StartVmsAutomatically).RunAsync();
 					break;
 				case ImportType.Vhd:
                     new ImportImageAction(TargetConnection,
@@ -142,7 +144,10 @@ namespace XenAdmin.Wizards.ImportWizard
                         Path.GetDirectoryName(m_pageImportSource.FilePath),
                         m_vmMappings,
                         m_pageOptions.RunFixups,
-                        m_pageOptions.SelectedIsoSR).RunAsync();
+                        m_pageOptions.SelectedIsoSR,
+                        m_pageFinish.StartVmsAutomatically,
+                        VMOperationCommand.WarningDialogHAInvalidConfig,
+                        VMOperationCommand.StartDiagnosisForm).RunAsync();
 					break;
 			}
 
@@ -184,7 +189,6 @@ namespace XenAdmin.Wizards.ImportWizard
 						{
 							Text = Messages.WIZARD_TEXT_IMPORT_OVF;
 							pictureBoxWizard.Image = Images.StaticImages._000_ImportVirtualAppliance_h32bit_32;
-							m_pageFinish.ShowStartVmsGroupBox = false;
                             RemovePages(imagePages);
                             RemovePage(m_pageBootOptions);
                             RemovePages(xvaPages);
@@ -210,7 +214,6 @@ namespace XenAdmin.Wizards.ImportWizard
 						{
 							Text = Messages.WIZARD_TEXT_IMPORT_VHD;
 							pictureBoxWizard.Image = Images.StaticImages._000_ImportVM_h32bit_32;
-							m_pageFinish.ShowStartVmsGroupBox = false;
                             RemovePages(appliancePages);
                             RemovePages(xvaPages);
                             AddAfterPage(m_pageImportSource, imagePages);
@@ -226,7 +229,6 @@ namespace XenAdmin.Wizards.ImportWizard
 						{
 							Text = Messages.WIZARD_TEXT_IMPORT_XVA;
 							pictureBoxWizard.Image = Images.StaticImages._000_ImportVM_h32bit_32;
-							m_pageFinish.ShowStartVmsGroupBox = true;
                             RemovePages(imagePages);
 						    RemovePage(m_pageBootOptions);
                             RemovePages(appliancePages);
@@ -668,7 +670,6 @@ namespace XenAdmin.Wizards.ImportWizard
 											NextStep();
 			                     		}	
 			                     	});
-
 		}
 
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)
