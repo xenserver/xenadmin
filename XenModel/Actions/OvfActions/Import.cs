@@ -40,6 +40,7 @@ using System.Threading;
 
 using DiscUtils;
 using XenAdmin.Core;
+using XenCenterLib.Compression;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
@@ -257,7 +258,7 @@ namespace XenAdmin.Actions.OvfActions
             }
         }
 
-        private XenRef<VDI> ImportFile(string diskName, string pathToOvf, string filename, string compression, string sruuid, string description, string vdiuuid, bool isEncrypted, Action<float> updatePercentage)
+        private XenRef<VDI> ImportFile(string diskName, string pathToOvf, string filename, CompressionFactory.Type? compression, string sruuid, string description, string vdiuuid, bool isEncrypted, Action<float> updatePercentage)
         {
             if (filename == null)
                 throw new InvalidDataException(Messages.ERROR_FILE_NAME_NULL);
@@ -291,23 +292,20 @@ namespace XenAdmin.Actions.OvfActions
 
                 #region COMPRESSION
 
-                // Identity == no compression, it is meant when a URL is used to identify the compression during transport.
-                if (compression != null && !compression.ToLower().Equals("none") && !compression.ToLower().Equals("identity"))
+                if (compression.HasValue)
                 {
                     Description = string.Format(Messages.START_FILE_EXPANSION, filename);
                     log.Debug($"Uncompressing {filename} to temporary file unc_{filename}");
 
-                    // gz is the only understood 'compressed' format;
-                    // the OVF is marked with "compressed=gzip" therefore the disk will be decompressed
-                    // and used with its disk extension (vmdk/vhd/vdi)...
-                    if (ext.ToLower().EndsWith(".gz"))
+                    // the compressed file will be replaced by the uncompressed, hence we need
+                    // to use it with its disk extension (vmdk, vhd, etc.)
+                    if (ext.ToLower().EndsWith(".gz") || ext.ToLower().EndsWith(".bz2"))
                     {
                         sourcefile = Path.Combine(pathToOvf, "unc_" + Path.GetFileNameWithoutExtension(filename));
                         ext = Path.GetExtension(sourcefile);
                     }
 
-                    var ovfCompressor = new OvfCompressor();
-                    ovfCompressor.UncompressFile(filePath, sourcefile, compression);
+                    CompressionFactory.UncompressFile(filePath, sourcefile, compression.Value, () => Cancelling);
                 }
 
                 #endregion
@@ -422,11 +420,15 @@ namespace XenAdmin.Actions.OvfActions
 
                             updatePercentage((float)b / dataCapacity);
                         },
-                        () => XenAdminConfigManager.Provider.ForcedExiting);
+                        () => Cancelling);
 
                 #endregion
 
                 return vdiRef;
+            }
+            catch (HTTP.CancelledException)
+            {
+                throw new CancelledException();
             }
             finally
             {
@@ -435,7 +437,9 @@ namespace XenAdmin.Actions.OvfActions
 
                 try
                 {
-                    if ((sourcefile.StartsWith("enc_") || sourcefile.StartsWith("unc_")) && File.Exists(sourcefile))
+                    var sourcefileName = Path.GetFileName(sourcefile);
+                    
+                    if ((sourcefileName.StartsWith("enc_") || sourcefileName.StartsWith("unc_")) && File.Exists(sourcefile))
                         File.Delete(sourcefile);
                 }
                 catch
@@ -784,7 +788,7 @@ namespace XenAdmin.Actions.OvfActions
 
                     Description = Messages.CD_DVD_DEVICE_ATTACHED;
 
-                    var filename = OVF.FindRasdFileName(ovfObj, rasd, out string compression);
+                    var filename = OVF.FindRasdFileName(ovfObj, rasd, out CompressionFactory.Type? compression);
                     var isoImage = Connection.Cache.VDIs.FirstOrDefault(v => v.name_label == filename);
                     XenRef<VDI> vdiRef = null;
 
@@ -908,7 +912,7 @@ namespace XenAdmin.Actions.OvfActions
 
                     SetIfDeviceIsBootable(ovfObj, rasd);
 
-                    var filename = OVF.FindRasdFileName(ovfObj, rasd, out string compression);
+                    var filename = OVF.FindRasdFileName(ovfObj, rasd, out CompressionFactory.Type? compression);
                     if (filename == null)
                     {
                         log.Warn($"No file available to import, skipping RASD {rasd.ResourceType.Value}: {rasd.InstanceID.Value}");

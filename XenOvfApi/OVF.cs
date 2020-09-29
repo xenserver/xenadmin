@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Management;
 using System.Reflection;
 using System.Resources;
@@ -70,8 +71,6 @@ namespace XenOvf
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
 
-        private static bool _promptForEula = true;
-
 		internal static ResourceManager _rm = new ResourceManager("XenOvf.Messages", Assembly.GetExecutingAssembly());
 		internal static ResourceManager _ovfrm = new ResourceManager("XenOvf.Content", Assembly.GetExecutingAssembly());
 
@@ -86,25 +85,6 @@ namespace XenOvf
         public static object AlgorithmMap(string key)
         {
             return Properties.Settings.Default[key];
-        }
-
-        public bool PromptForEula
-        {
-            get { return _promptForEula; }
-            set { _promptForEula = value; }
-        }
- 
-        #endregion
-
-        #region LOAD OVF
-        /// <summary>
-        /// Load an OVF XML File into OVF class context
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static EnvelopeType Load(string filename)
-        {
-        	return Tools.LoadOvfXml(filename);
         }
 
         #endregion
@@ -1498,29 +1478,7 @@ namespace XenOvf
 
             return ovfEnv;
         }
-        /// <summary>
-        /// Create an OVA (Tar file) from the OVF and associated files.
-        /// </summary>
-        /// <param name="pathToOvf">Absolute path to the OVF files</param>
-        /// <param name="ovfFileName">OVF file name (file.ovf)</param>
-        /// <param name="compress">Compress the OVA (NOT IMPLEMENTED)</param>
-        /// <param name="cleanup">Remove source files after addition to archive. (true = delete, false = keep)</param>
-        [SecurityPermission(SecurityAction.LinkDemand)]
-        public void CreateOva(string pathToOvf, string ovfFileName, bool compress, bool cleanup)
-        {
-            ConvertOVFtoOVA(pathToOvf, ovfFileName, compress, cleanup);
-        }
-        /// <summary>
-        /// Create an OVA (Tar file) from the OVF and associated files.
-        /// </summary>
-        /// <param name="pathToOvf">Absolute path to the OVF files</param>
-        /// <param name="ovfFileName">OVF file name (file.ovf)</param>
-        /// <param name="compress">Compress the OVA (NOT IMPLEMENTED)</param>
-        [SecurityPermission(SecurityAction.LinkDemand)]
-        public void CreateOva(string pathToOvf, string ovfFileName, bool compress)
-        {
-            ConvertOVFtoOVA(pathToOvf, ovfFileName, compress);
-        }
+
         #endregion
 
         #region REMOVEs
@@ -3193,16 +3151,7 @@ namespace XenOvf
         #endregion
 
         #region FINDs
-        /// <summary>
-        /// Provided the full path / filename of an OVF return a list of 
-        /// filenames/references contained with in the OVF.
-        /// </summary>
-        /// <param name="filename">fullpath/filename</param>
-        /// <returns>array of filenames/references</returns>
-        public string[] FindAttachedFiles(string filename)
-        {
-            return FindAttachedFiles(Load(filename));
-        }
+
         /// <summary>
         /// Find all attached filenames.
         /// </summary>
@@ -3466,24 +3415,22 @@ namespace XenOvf
             log.Debug("OVF.FindRasdById completed, not found");
             return null;
         }
+
         /// <summary>
         /// Find the filename for the given RASD.  
         /// The RASD must Resource Type: 17, 19, 21 and be a hard disk image.
+        /// The file may be compressed (gzip/bzip2)
         /// </summary>
-        /// <param name="ovfEnv">EnvelopeType</param>
-        /// <param name="rasd">RASD_Type</param>
-        /// <param name="compressed">GZip or BZip2</param>
-        /// <returns>string: filename or NULL</returns>
-        public static string FindRasdFileName(EnvelopeType ovfEnv, RASD_Type rasd, out string compressed)
+        public static string FindRasdFileName(EnvelopeType ovfEnv, RASD_Type rasd, out CompressionFactory.Type? compression)
         {
-            //string filename = null;
+            compression = null;
             string diskReference = null;
-            //
+
             // Use in order of priority
-            // 1. HostResource should have binding's if exists.
+            // 1. HostResource should have bindings if exists.
             // 2. InstanceID referenced
             // 3. Connection maybe used by Microsoft (older CIM Spec)
-            //
+
             if (Tools.ValidateProperty("HostResource", rasd))
             {
                 diskReference = rasd.HostResource[0].Value;
@@ -3497,82 +3444,45 @@ namespace XenOvf
                 diskReference = rasd.Connection[0].Value;
             }
 
-
             if (diskReference == null)
-            {
-                compressed = "None";
                 return null;
-            }
 
-            DiskSection_Type disksection = null;
-            foreach (object section in ovfEnv.Sections)
-            {
-                if (section is DiskSection_Type)
-                {
-                    disksection = (DiskSection_Type)section;
-                    break;
-                }
-            }
-
-            if (disksection == null)
-            {
-                compressed = "None";
+            var section = ovfEnv.Sections.FirstOrDefault(s => s is DiskSection_Type);
+            if (!(section is DiskSection_Type diskSection))
                 return null;
-            }
 
-
-            File_Type fileReference = null;
-
-            foreach (VirtualDiskDesc_Type vdisk in disksection.Disk)
+            foreach (VirtualDiskDesc_Type vdisk in diskSection.Disk)
             {
-                if (diskReference.Contains(vdisk.diskId))
+                if (!diskReference.Contains(vdisk.diskId))
+                    continue;
+
+                foreach (File_Type filer in ovfEnv.References.File)
                 {
-                    foreach (File_Type filer in ovfEnv.References.File)
+                    if (!filer.id.Contains(vdisk.fileRef))
+                        continue;
+
+                    if (string.IsNullOrEmpty(filer.compression) || filer.compression.ToLower() == "identity")
+                        return filer.href;
+
+                    if (filer.compression.ToLower().Equals("gzip"))
                     {
-                        if (filer.id.Contains(vdisk.fileRef))
-                        {
-                            fileReference = filer;
-                        }
+                        compression = CompressionFactory.Type.Gz;
+                        return filer.href;
                     }
+
+                    if (filer.compression.ToLower().Equals("bzip2"))
+                    {
+                        compression = CompressionFactory.Type.Bz2;
+                        return filer.href;
+                    }
+
+                    throw new NotSupportedException(string.Format(Messages.COMPRESS_INVALID_METHOD, filer.compression));
                 }
             }
 
-            if (fileReference == null)
-            {
-                compressed = "None";
-                return null;
-            }
-
-            if (fileReference.compression != null &&
-                (fileReference.compression.ToUpper().Equals("GZIP") ||
-                 fileReference.compression.ToUpper().Equals("BZIP2")))
-            {
-                compressed = fileReference.compression;
-            }
-            else
-            {
-                compressed = "None";
-            }
-
-            //
-            // @DONE: What if the file is compressed? Need to handle.
-            //
-            // @DONE. here: This will break in case of: http:// and https://
-            // and may break in case of file:// if it's on a different server.
-            //
-            //if (fileReference.href.Contains("/"))
-            //{
-            //    filename = fileReference.href.Substring(fileReference.href.LastIndexOf('/') + 1);
-            //}
-            //else
-            //{
-            //    filename = fileReference.href;
-            //}
-
-
-            // Let the actual import mechanism figure this out for late time decision on a per-file basis.
-            return fileReference.href;
+            return null;
         }
+
         /// <summary>
         /// Find the localize string.
         /// </summary>
@@ -4764,55 +4674,6 @@ namespace XenOvf
             else
             {
                 throw new ArgumentNullException(Messages.OVF_ENVELOPE_IS_INVALID);
-            }
-        }
-
-        public static string ExtractArchive(string pathToOva)
-        {
-            Stream inputStream = null;
-            FileStream fsStream = null;
-            ArchiveIterator tar = null;
-
-            var dir = Path.GetDirectoryName(pathToOva);
-
-            try
-            {
-                string ext = Path.GetExtension(pathToOva);
-
-                if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2")) // need to decompress.
-                {
-                    log.Info("OVA is compressed, de-compression stream inserted");
-
-                    var ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(pathToOva));
-                    string ovaext = Path.GetExtension(ovafilename);
-
-                    if (ovaext.ToLower().EndsWith("ova"))
-                    {
-                        fsStream = new FileStream(Path.Combine(dir, ovafilename), FileMode.Open, FileAccess.Read, FileShare.Read);
-
-                        var compType = Properties.Settings.Default.useGZip ? CompressionFactory.Type.Gz : CompressionFactory.Type.Bz2;
-                        inputStream = CompressionFactory.Reader(compType, fsStream);
-                    }
-                    else
-                    {
-                        throw new ArgumentException(Messages.OVF_COMPRESSED_OVA_INVALID);
-                    }
-                }
-                else
-                {
-                    inputStream = new FileStream(pathToOva, FileMode.Open, FileAccess.Read, FileShare.Read);
-                }
-
-                var temp = Path.Combine(dir, Path.GetRandomFileName());
-                tar = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream);
-                tar.ExtractAllContents(temp);
-                return temp;
-            }
-            finally
-            {
-                tar?.Dispose();
-                inputStream?.Close();
-                fsStream?.Close();
             }
         }
 

@@ -145,11 +145,11 @@ namespace XenAdmin.Actions.OvfActions
 			}
 
             EnvelopeType env = OVF.Merge(envelopes, m_package.Name);
-            m_package.ExtractToWorkingDir();
 
             object importedObject;
 			try //import VMs
             {
+                m_package.ExtractToWorkingDir(() => Cancelling);
                 OVF.ParseEncryption(env, out m_encryptionClass, out m_encryptionVersion);
                 importedObject = Process(env, m_package.WorkingDir, m_package.Name);
 			}

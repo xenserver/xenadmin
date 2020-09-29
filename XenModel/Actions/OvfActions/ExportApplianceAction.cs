@@ -37,6 +37,7 @@ using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
+using XenCenterLib.Compression;
 using XenOvf;
 using XenOvf.Definitions;
 
@@ -59,7 +60,6 @@ namespace XenAdmin.Actions.OvfActions
 		private readonly bool m_createOVA;
 		private readonly bool m_compressOVFfiles;
         private readonly bool m_shouldVerify;
-		private OvfCompressor m_compressor;
 
 		#endregion
 
@@ -158,17 +158,24 @@ namespace XenAdmin.Actions.OvfActions
 			{
                 log.Info($"Archiving OVF package {m_applianceFileName} into OVA");
 				Description = String.Format(Messages.CREATING_FILE, String.Format("{0}.ova", m_applianceFileName));
-				OVF.ConvertOVFtoOVA(appFolder, appFile, m_compressOVFfiles);
+
+                try
+                {
+                    OVF.ConvertOVFtoOVA(env, ovfPath, () => Cancelling, m_compressOVFfiles);
+                }
+                catch (OperationCanceledException)
+                {
+                    throw new CancelledException();
+                }
 			}
 			else if (m_compressOVFfiles)
 			{
                 log.Info($"Compressing package {m_applianceFileName}");
 				Description = Messages.COMPRESSING_FILES;
-				m_compressor = new OvfCompressor { CancelCompression = Cancelling }; //in case the Cancel button has already been pressed}
 
 				try
 				{
-					m_compressor.CompressOvfFiles(ovfPath, "GZip");
+                    OVF.CompressFiles(env, ovfPath, CompressionFactory.Type.Gz, () => Cancelling);
 				}
 				catch (OperationCanceledException)
 				{
@@ -185,14 +192,6 @@ namespace XenAdmin.Actions.OvfActions
             if (Cancelling)
                 throw new CancelledException();
         }
-
-		protected override void CancelRelatedTask()
-		{
-			base.CancelRelatedTask();
-
-			if (m_compressor != null)
-				m_compressor.CancelCompression = true;
-		}
 
         protected override void CleanOnError()
         {
