@@ -62,50 +62,30 @@ namespace XenOvf
 
         #region CONVERSIONS
 
-        public static void ConvertOVFtoOVA(string pathToOvf, string ovfFileName, bool compress, bool cleanup = true)
+        public static void ConvertOVFtoOVA(EnvelopeType ovfEnv, string ovfPath, Func<bool> cancellingDelegate,
+            bool compress, CompressionFactory.Type method = CompressionFactory.Type.Gz, bool deleteOriginalFiles = true)
         {
-            // throws exception if any of the parameters is null (which we want)
-            string fullOvfPath = Path.Combine(pathToOvf, ovfFileName);
-            
-            if (!File.Exists(fullOvfPath))
-                throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, fullOvfPath));
-
-            // File Order is:
-            // 1. OVF File
-            // 2. Manifest (if exists)
-            // 3. Signature File (if exists)
-            // 4. All files listed in References.File.
-
             string origDir = "";
+            Stream ovaStream = null;
+            FileStream fsStream = null;
+
             try
             {
                 origDir = Directory.GetCurrentDirectory();
-                Directory.SetCurrentDirectory(pathToOvf);
+                Directory.SetCurrentDirectory(Path.GetDirectoryName(ovfPath));
 
-                EnvelopeType ovfenv = Load(ovfFileName);
-                File_Type[] files = ovfenv.References.File;
-
-                string ovafilename = string.Format("{0}.ova", Path.GetFileNameWithoutExtension(ovfFileName));
-                string manifestfile = string.Format("{0}.mf", Path.GetFileNameWithoutExtension(ovfFileName));
-                string signaturefile = string.Format("{0}.cert", Path.GetFileNameWithoutExtension(ovfFileName));
+                var ovfFileName = Path.GetFileName(ovfPath);
+                var applianceName = Path.GetFileNameWithoutExtension(ovfFileName);
+                string ovafilename = $"{applianceName}.ova";
+                string manifestfile = $"{applianceName}.mf";
+                string signaturefile = $"{applianceName}.cert";
 
                 #region COMPRESSION STREAM
 
-                Stream ovaStream;
                 if (compress)
                 {
-                    if (Properties.Settings.Default.useGZip)
-                    {
-                        log.Info("OVF.ConvertOVFtoOVA GZIP compression stream inserted");
-                        FileStream fsStream = new FileStream(ovafilename + ".gz", FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                        ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Gz, fsStream);
-                    }
-                    else
-                    {
-                        log.Info("OVF.ConvertOVFtoOVA BZIP2 compression stream inserted");
-                        FileStream fsStream = new FileStream(ovafilename + ".bz2", FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                        ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Bz2, fsStream);
-                    }
+                    fsStream = new FileStream(ovafilename + method.FileExtension(), FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    ovaStream = CompressionFactory.Writer(method, fsStream);
                 }
                 else
                 {
@@ -116,52 +96,60 @@ namespace XenOvf
 
                 #region TAR
 
+                // File Order is:
+                // 1. OVF File
+                // 2. Manifest (if exists)
+                // 3. Signature File (if it and the manifest exist)
+                // 4. All files listed in References.File.
+
                 using (var tar = ArchiveFactory.Writer(ArchiveFactory.Type.Tar, ovaStream))
                 {
-                    AddFileToArchiveWriter(tar, ovfFileName, cleanup);
+                    AddFileToArchiveWriter(tar, ovfFileName, deleteOriginalFiles, cancellingDelegate);
 
                     if (File.Exists(manifestfile))
                     {
-                        AddFileToArchiveWriter(tar, manifestfile, cleanup);
+                        AddFileToArchiveWriter(tar, manifestfile, deleteOriginalFiles, cancellingDelegate);
                        
                         // Cannot exist without manifest file.
                         if (File.Exists(signaturefile))
-                            AddFileToArchiveWriter(tar, signaturefile, cleanup);
+                            AddFileToArchiveWriter(tar, signaturefile, deleteOriginalFiles, cancellingDelegate);
                     }
 
+                    File_Type[] files = ovfEnv.References.File;
                     if (files != null)
                     {
                         foreach (File_Type file in files)
-                            AddFileToArchiveWriter(tar, file.href, cleanup);
+                            AddFileToArchiveWriter(tar, file.href, deleteOriginalFiles, cancellingDelegate);
                     }
                 }
 
                 #endregion
             }
-            catch (Exception ex)
-            {
-                log.ErrorFormat("{0} {1}", Messages.CONVERSION_FAILED, ex.Message);
-                throw new Exception(Messages.CONVERSION_FAILED, ex);
-            }
             finally
             {
+                ovaStream?.Close();
+                fsStream?.Dispose();
                 Directory.SetCurrentDirectory(origDir);
             }
-            log.Debug("OVF.ConvertOVFtoOVA completed");
         }
 
-        private static void AddFileToArchiveWriter(ArchiveWriter tar, string fileName, bool cleanup)
+        private static void AddFileToArchiveWriter(ArchiveWriter tar, string fileName,
+            bool deleteOriginalFile, Func<bool> cancellingDelegate)
         {
+            if (cancellingDelegate())
+                throw new OperationCanceledException();
+
             using (FileStream fs = File.OpenRead(fileName))
                 tar.Add(fs, fileName);
 
             log.InfoFormat("Added file {0} to OVA archive", fileName);
 
-            if (cleanup)
+            if (deleteOriginalFile)
             {
                 try
                 {
                     File.Delete(fileName);
+                    log.InfoFormat("Deleted original file {0}", fileName);
                 }
                 catch
                 {

@@ -91,18 +91,7 @@ namespace XenOvf
 
 
         #region ENCRYPTION
-        /// <summary>
-        /// Encrypt the files associated with the provided OVF package.
-        /// </summary>
-        /// <param name="pathToOvf">Path to the OVF Package</param>
-        /// <param name="ovfFileName">Filename of the ovf file.</param>
-        /// <param name="password">password to use during encryption.</param>
-        public void Encrypt(string pathToOvf, string ovfFileName, string password)
-        {
-            string filename = Path.Combine(pathToOvf, ovfFileName);
-            EnvelopeType env = Tools.LoadOvfXml(filename);
-            Encrypt(env, filename, password);
-        }
+
         /// <summary>
         /// Encrypt the files associated with the provided OVF package.
         /// </summary>
@@ -122,18 +111,7 @@ namespace XenOvf
                 SaveAs(env, ovfFileName);
             }
         }
-        /// <summary>
-        /// Decrypt the files associated with the provided OVF package.
-        /// </summary>
-        /// <param name="pathToOvf">Path to the OVF Package</param>
-        /// <param name="ovfFileName">Filename of the ovf file.</param>
-        /// <param name="password">password to use during decryption.</param>
-        public void Decrypt(string pathToOvf, string ovfFileName, string password)
-        {
-            string filename = Path.Combine(pathToOvf, ovfFileName);
-            EnvelopeType env = Tools.LoadOvfXml(filename);
-            Decrypt(env, filename, password);
-        }
+
         /// <summary>
         /// Decrypt the files associated with the provided OVF package.
         /// </summary>
@@ -333,18 +311,7 @@ namespace XenOvf
         }
 
         /// <summary>
-        /// Validate password prior do decrypting, depends on sample encrypted section in The SecuritySection.
-        /// </summary>
-        /// <param name="ovfFilename">ovf file name</param>
-        /// <param name="password">password to check</param>
-        /// <returns>true = valid password, false = password failed</returns>
-        public bool CheckPassword(string ovfFilename, string password)
-        {
-            EnvelopeType env = Load(ovfFilename);
-            return CheckPassword(env, password);
-        }
-        /// <summary>
-        /// Validate password prior do decrypting, depends on sample encrypted section in The SecuritySection.
+        /// Validate password prior to decrypting, depends on sample encrypted section in The SecuritySection.
         /// </summary>
         /// <param name="ovfObj">EnvelopeType OVF Object</param>
         /// <param name="password">password to check</param>

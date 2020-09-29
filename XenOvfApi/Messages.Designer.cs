@@ -79,29 +79,11 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to compress {0}..
-        /// </summary>
-        public static string COMPRESS_FAILED {
-            get {
-                return ResourceManager.GetString("COMPRESS_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Compression method {0} is not supported..
         /// </summary>
         public static string COMPRESS_INVALID_METHOD {
             get {
                 return ResourceManager.GetString("COMPRESS_INVALID_METHOD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to convert OVF to OVA..
-        /// </summary>
-        public static string CONVERSION_FAILED {
-            get {
-                return ResourceManager.GetString("CONVERSION_FAILED", resourceCulture);
             }
         }
         
