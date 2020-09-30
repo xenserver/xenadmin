@@ -140,24 +140,13 @@ namespace XenAdmin.Actions.OvfActions
 
             CheckForCancellation();
 
-			if (m_signAppliance)
-			{	
-				Description = Messages.SIGNING_APPLIANCE;
-				OVF.Sign(m_certificate, appFolder, appFile);
-			}
-			else if (m_createManifest)
-			{
-				Description = Messages.CREATING_MANIFEST;
-				OVF.Manifest(appFolder, appFile);
-			}
-
-            PercentComplete = 90;
-            CheckForCancellation();
-
 			if (m_createOVA)
 			{
                 log.Info($"Archiving OVF package {m_applianceFileName} into OVA");
 				Description = String.Format(Messages.CREATING_FILE, String.Format("{0}.ova", m_applianceFileName));
+
+                ManifestAndSign(appFolder, appFile);
+                PercentComplete = 90;
 
                 try
                 {
@@ -181,11 +170,28 @@ namespace XenAdmin.Actions.OvfActions
 				{
 					throw new CancelledException();
 				}
+
+                PercentComplete = 95;
+                ManifestAndSign(appFolder, appFile);
 			}
 
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
 		}
+
+        private void ManifestAndSign(string appFolder, string appFile)
+        {
+            if (m_signAppliance)
+            {	
+                Description = Messages.SIGNING_APPLIANCE;
+                OVF.Sign(m_certificate, appFolder, appFile);
+            }
+            else if (m_createManifest)
+            {
+                Description = Messages.CREATING_MANIFEST;
+                OVF.Manifest(appFolder, appFile);
+            }
+        }
 
         private void CheckForCancellation()
         {
