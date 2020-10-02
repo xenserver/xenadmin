@@ -90,7 +90,7 @@ namespace XenAdmin.Core
                 using (var dlg = new WarningDialog(msg,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes, selected: defaultYes),
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No, selected: !defaultYes))
-                    {HelpName = helpName})
+                    {HelpNameSetter = helpName})
                 {
                     return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
                 }

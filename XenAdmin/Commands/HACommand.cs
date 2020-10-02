@@ -105,7 +105,6 @@ namespace XenAdmin.Commands
                     using (var dlg = new ErrorDialog(string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
                         ThreeButtonDialog.ButtonOK)
                     {
-                        HelpName = "HADisable",
                         WindowTitle = Messages.CONFIGURE_HA
                     })
                     {
@@ -196,7 +195,6 @@ namespace XenAdmin.Commands
                         Helpers.GetName(pool).Ellipsise(30)),
                     ThreeButtonDialog.ButtonOK)
                 {
-                    HelpName = "HADisable",
                     WindowTitle = Messages.DISABLE_HA
                 })
                 {
@@ -210,7 +208,7 @@ namespace XenAdmin.Commands
                     Helpers.GetName(pool).Ellipsise(30)),
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
             {
-                HelpName = "HADisable",
+                HelpNameSetter = "HADisable",
                 WindowTitle = Messages.DISABLE_HA
             })
             {

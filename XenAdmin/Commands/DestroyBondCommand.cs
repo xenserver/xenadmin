@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
                             new ThreeButtonDialog.TBDButton(Messages.BOND_DELETE_CONTINUE, DialogResult.OK),
                             ThreeButtonDialog.ButtonCancel)
                 {
-                    HelpName = "NetworkingConfigWarning",
+                    HelpNameSetter = "NetworkingConfigWarning",
                     WindowTitle = Messages.DELETE_BOND
                 })
                 {
