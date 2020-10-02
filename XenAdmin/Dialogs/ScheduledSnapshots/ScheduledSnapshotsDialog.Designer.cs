@@ -317,6 +317,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewRunHistory.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewRunHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRunHistory_CellClick);
+            this.dataGridViewRunHistory.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewRunHistory_ColumnHeaderMouseClick);
             // 
             // labelHistory
             // 
@@ -368,6 +369,7 @@
             resources.ApplyResources(this.ColumnImage, "ColumnImage");
             this.ColumnImage.Name = "ColumnImage";
             this.ColumnImage.ReadOnly = true;
+            this.ColumnImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // ColumnDateTime
             // 

@@ -446,6 +446,28 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             }
         }
 
+        private void dataGridViewRunHistory_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != ColumnImage.Index)
+            {
+                if (0 <= e.ColumnIndex && e.ColumnIndex < dataGridViewRunHistory.ColumnCount &&
+                    dataGridViewRunHistory.Columns[e.ColumnIndex].SortMode != DataGridViewColumnSortMode.NotSortable)
+                    ColumnImage.HeaderCell.SortGlyphDirection = SortOrder.None;
+                return;
+            }
+
+            if (ColumnImage.HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+            {
+                dataGridViewRunHistory.Sort(new HistoryRowSorter(ListSortDirection.Descending));
+                ColumnImage.HeaderCell.SortGlyphDirection = SortOrder.Descending;
+            }
+            else
+            {
+                dataGridViewRunHistory.Sort(new HistoryRowSorter(ListSortDirection.Ascending));
+                ColumnImage.HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+            }
+        }
+
         private void comboBoxTimeSpan_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshHistoryGrid();
@@ -556,6 +578,39 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
                 _image.Value = Alert.Type.GetImage();
                 _dateTime.Value = HelpersGUI.DateTimeToString(Alert.Time, Messages.DATEFORMAT_DMY_HM, true);
+            }
+        }
+
+        private class HistoryRowSorter : System.Collections.IComparer
+        {
+            private readonly ListSortDirection _direction;
+
+            public HistoryRowSorter(ListSortDirection direction)
+            {
+                _direction = direction;
+            }
+
+            public int Compare(object first, object second)
+            {
+                var row1 = first as HistoryRow;
+                var row2 = second as HistoryRow;
+                int result = 0;
+
+                if (row1 != null && row2 != null)
+                {
+                    result = row1.Alert.Type.CompareTo(row2.Alert.Type);
+                    if (result == 0)
+                        result = Alert.CompareOnDate(row1.Alert, row2.Alert);
+                }
+                else if (row1 != null)
+                    result = -1;
+                else if (row2 != null)
+                    result = 1;
+
+                if (_direction == ListSortDirection.Descending)
+                    return -1 * result;
+
+                return result;
             }
         }
     }
