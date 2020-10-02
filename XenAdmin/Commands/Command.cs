@@ -354,7 +354,7 @@ namespace XenAdmin.Commands
                 {WindowTitle = ConfirmationDialogTitle})
             {
                 if (!string.IsNullOrEmpty(ConfirmationDialogHelpId))
-                    dialog.HelpName = ConfirmationDialogHelpId;
+                    dialog.HelpNameSetter = ConfirmationDialogHelpId;
 
                 return dialog.ShowDialog(Parent ?? Program.MainWindow) == DialogResult.Yes;
             }

@@ -495,7 +495,7 @@ namespace XenAdmin.Dialogs
                     DialogResult dialogResult;
                     using (var dlg = new WarningDialog(title,
                             new ThreeButtonDialog.TBDButton(Messages.NETWORKING_PROPERTIES_CHANGING_MANAGEMENT_CONTINUE, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel){HelpName = "NetworkingPropertiesPMIWarning"})
+                            ThreeButtonDialog.ButtonCancel){HelpNameSetter = "NetworkingPropertiesPMIWarning"})
                     {
                         dialogResult = dlg.ShowDialog(this);
                     }

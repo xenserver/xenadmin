@@ -141,15 +141,19 @@ namespace XenAdmin.Dialogs
         /// </summary>
         public string Message => labelMessage.Text;
 
-        internal new string HelpName
+        /// <summary>
+        /// Use this to set the get-only base class property HelpName
+        /// </summary>
+        internal string HelpNameSetter
         {
-            get => helpName;
             set
             {
                 helpName = value;
                 HelpButton = true;
             }
         }
+
+        internal override string HelpName => helpName;
 
         public class TBDButton
         {
