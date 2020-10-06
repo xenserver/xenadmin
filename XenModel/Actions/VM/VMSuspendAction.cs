@@ -46,7 +46,7 @@ namespace XenAdmin.Actions.VMActions
         {
             this.Description = Messages.ACTION_VM_SUSPENDING;
             RelatedTask = VM.async_suspend(Session, VM.opaque_ref);
-            PollToCompletion(0, 100);
+            PollToCompletion();
             this.Description = Messages.ACTION_VM_SUSPENDED;
         }
     }

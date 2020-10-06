@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
         {
             Description = Messages.DISABLING;
             RelatedTask = PVS_proxy.async_destroy(Session, proxy.opaque_ref);
-            PollToCompletion(0, 100);
+            PollToCompletion();
             Description = Messages.DISABLED;
         }
     }

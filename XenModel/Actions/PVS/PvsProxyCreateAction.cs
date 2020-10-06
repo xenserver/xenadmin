@@ -58,7 +58,7 @@ namespace XenAdmin.Actions
         {
             Description = Messages.ENABLING;
             RelatedTask = PVS_proxy.async_create(Session, site.opaque_ref, vif.opaque_ref);         
-            PollToCompletion(0, 100);
+            PollToCompletion();
             Description = Messages.ENABLED;
         }
     }

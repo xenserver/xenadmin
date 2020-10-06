@@ -45,15 +45,15 @@ namespace XenAdmin.Network
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private AsyncAction _action;
-        private readonly int _lo;
+        private readonly double _lo;
         private readonly double _scale;
-        private bool taskCompleted = false;
+        private bool taskCompleted;
 
         /// <summary>
-        /// Polls the action regularly and updates the history item's progress from the task's progress,
+        /// Polls the task regularly and updates the action's progress from the task's progress,
         /// scaled to a value between lo and hi.
         /// </summary>
-        public TaskPoller(AsyncAction action, int lo, int hi)
+        public TaskPoller(AsyncAction action, double lo, double hi)
         {
             _action = action;
             _lo = lo;
@@ -71,6 +71,7 @@ namespace XenAdmin.Network
             {
                 DateTime startTime = DateTime.Now;
                 int lastDebug = 0;
+                log.InfoFormat("Started polling task {0}", _action.RelatedTask.opaque_ref);
                 log.DebugFormat("Polling for action {0}", _action.Description);//log once we start
                 
                 while (!taskCompleted)
@@ -86,7 +87,7 @@ namespace XenAdmin.Network
                         log.DebugFormat("Polling for action {0}", _action.Description);
                     }
 
-                    poll();
+                    Poll();
                     Thread.Sleep(SLEEP_TIME);
                 }
             }
@@ -96,7 +97,7 @@ namespace XenAdmin.Network
             }
         }
 
-        private void poll()
+        private void Poll()
         {
             Session session = _action.Session;
             Task task;
@@ -137,11 +138,13 @@ namespace XenAdmin.Network
                     }
                     else
                     {
-                        log.WarnFormat("Action failed due to API failure:\n{0}", Environment.StackTrace);
+                        log.WarnFormat("Task {0} failed: {1}", _action.RelatedTask.opaque_ref,
+                            task.error_info.Length > 0 ? task.error_info[0] : "Unknown failure");
                         throw new Failure(new List<string>(task.error_info));
                     }
 
                 case task_status_type.success:
+                    log.InfoFormat("Task {0} finished successfully", _action.RelatedTask.opaque_ref);
                     taskCompleted = true;
                     _action.Result = task.result;
                     // Work around CA-6597.
@@ -157,7 +160,7 @@ namespace XenAdmin.Network
                     break;
 
                 case task_status_type.cancelled:
-                    log.Debug("Action cancelled");
+                    log.InfoFormat("Task {0} was cancelled", _action.RelatedTask.opaque_ref);
                     throw new CancelledException();
 
                 case task_status_type.cancelling:
@@ -168,7 +171,7 @@ namespace XenAdmin.Network
 
         private void GotInvalidHandle()
         {
-            log.WarnFormat("Invalid task handle - task is finished:\n{0}", Environment.StackTrace);
+            log.WarnFormat("Invalid task handle {0} - task is finished.", _action.RelatedTask.opaque_ref);
             taskCompleted = true;
             _action.PercentComplete = (int)(_scale + _lo);
             _action.Result = "";

@@ -266,22 +266,9 @@ namespace XenAdmin.Actions
             }
         }
 
-        public void PollToCompletion(int start, int finish)
+        public void PollToCompletion(double start = 0, double finish = 100)
         {
             new TaskPoller(this, start, finish).PollToCompletion();
-        }
-
-        public void PollToCompletion(double start, double finish)
-        {
-            PollToCompletion((int)start, (int)finish);
-        }
-
-        /// <summary>
-        /// Equivalent to PollToCompletion(0, 100).
-        /// </summary>
-        public void PollToCompletion()
-        {
-            PollToCompletion(0, 100);
         }
 
         /// <summary>
