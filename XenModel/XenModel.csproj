@@ -444,7 +444,6 @@
     <Compile Include="Icons.cs" />
     <Compile Include="Network\IXenConnection.cs" />
     <Compile Include="ObjectChange.cs" />
-    <Compile Include="Alerts\PolicyAlert.cs" />
     <Compile Include="Utils\PrettyTimeSpan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RbacMethod.cs" />
