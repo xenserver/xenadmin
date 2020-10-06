@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
             try
             {
                 RelatedTask = Pool_patch.async_destroy(Session, patch.opaque_ref);
-                PollToCompletion(0, 100);
+                PollToCompletion();
             }
             catch (Failure f)
             {
