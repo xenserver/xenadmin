@@ -37,7 +37,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class SrProbeAction : PureAsyncAction
+    public class SrProbeAction : AsyncAction
     {
         private readonly Host host;
         private readonly Dictionary<string, string> dconf;
@@ -81,6 +81,20 @@ namespace XenAdmin.Actions
             Description = string.Format(Messages.ACTION_SR_SCANNING, SR.getFriendlyTypeName(srType), target);
 
             this.smconf = smconf ?? new Dictionary<string, string>();
+
+            #region RBAC Dependencies
+
+            if (SrType == SR.SRTypes.gfs2)
+            {
+                ApiMethodsToRoleCheck.Add("sr.probe_ext");
+            }
+            else
+            {
+                ApiMethodsToRoleCheck.Add("sr.probe");
+                ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
+            }
+
+            #endregion
         }
 
         protected override void Run()
