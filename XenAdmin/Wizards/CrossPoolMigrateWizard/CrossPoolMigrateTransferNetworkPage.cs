@@ -39,26 +39,20 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     public partial class CrossPoolMigrateTransferNetworkPage : XenTabPage
     {
         private List<VM> selectedVMs;
-        private readonly bool templatesOnly = false;
         private readonly WizardMode wizardMode;
 
         public CrossPoolMigrateTransferNetworkPage(List<VM> selectedVMs, bool templatesOnly, WizardMode wizardMode)
         {
             this.selectedVMs = selectedVMs;
-            this.templatesOnly = templatesOnly;
             this.wizardMode = wizardMode;
 
             InitializeComponent();
-            InitializeCustomPageElements();
-        }
 
-        private void InitializeCustomPageElements()
-        {
             blurbText.Text = templatesOnly ? Messages.CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE : Messages.CPS_WIZARD_MIGRATION_PAGE_TITLE_VM;
 
-            networkComboBox.IncludePoolNameInComboBox = true;
-            networkComboBox.IncludeOnlyEnabledNetworksInComboBox = true;
-            networkComboBox.IncludeOnlyNetworksWithIPAddresses = true;
+            networkComboBox.ShowPoolName = true;
+            networkComboBox.ExcludeDisconnectedNetworks = true;
+            networkComboBox.ExcludeNetworksWithoutIpAddresses = true;
         }
 
         private bool m_buttonNextEnabled;
@@ -69,17 +63,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
-        public override string PageTitle { get { return Messages.CPM_WIZARD_SELECT_TRANSFER_NETWORK_TITLE; } }
+        public override string PageTitle => Messages.CPM_WIZARD_SELECT_TRANSFER_NETWORK_TITLE;
 
         /// <summary>
         /// Gets the page's label in the (left hand side) wizard progress panel
         /// </summary>
-        public override string Text { get { return Messages.CPM_WIZARD_SELECT_TRANSFER_NETWORK_PAGE_TEXT; } }
+        public override string Text => Messages.CPM_WIZARD_SELECT_TRANSFER_NETWORK_PAGE_TEXT;
 
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "TransferNetworkCopyMode" : "TransferNetwork"; } }
+        public override string HelpID => wizardMode == WizardMode.Copy ? "TransferNetworkCopyMode" : "TransferNetwork";
 
         protected override bool ImplementsIsDirty()
         {
@@ -96,13 +90,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             networkComboBox.PopulateComboBox(Connection, item => !item.IsManagement);
 
             if (networkComboBox.SelectedItem == null)
-                networkComboBox.SelectedItem = networkComboBox.Items.Cast<NetworkComboBoxItem>().FirstOrDefault(item => item.IsManagement);
+                networkComboBox.SelectItem(item => item.IsManagement);
         }
 
-        public KeyValuePair<string, string> NetworkUuid
-        {
-            get { return networkComboBox.SelectedNetworkUuid; }
-        }
+        public KeyValuePair<string, string> NetworkUuid => networkComboBox.SelectedNetworkUuid;
 
         public override bool EnableNext()
         {
@@ -124,7 +115,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         }
         #endregion
 
-        protected void SetButtonsEnabled(bool enabled)
+        private void SetButtonsEnabled(bool enabled)
         {
             m_buttonNextEnabled = enabled;
             m_buttonPreviousEnabled = enabled;

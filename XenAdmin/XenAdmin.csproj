@@ -3037,7 +3037,6 @@
     <Compile Include="Controls\ComboBoxes\NetworkComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ComboBoxes\NetworkComboBoxItem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\VmHasVgpu.cs" />
     <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />

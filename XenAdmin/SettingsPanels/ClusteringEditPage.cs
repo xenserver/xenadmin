@@ -71,11 +71,9 @@ namespace XenAdmin.SettingsPanels
         {
             if (CheckBoxEnableClustering.Checked)
             {
-                var network = ((NetworkComboBoxItem)comboBoxNetwork.SelectedItem).Network;
+                var network = comboBoxNetwork.SelectedNetwork;
                 if (network != null)
-                {
                     return new EnableClusteringAction(pool, network);
-                }
             }
             else
             {
@@ -126,8 +124,7 @@ namespace XenAdmin.SettingsPanels
         #region PrivateMethods
         private void LoadNetworks(Cluster cluster)
         {
-            comboBoxNetwork.IncludeOnlyEnabledNetworksInComboBox = false;
-            comboBoxNetwork.IncludeOnlyNetworksWithIPAddresses = true;
+            comboBoxNetwork.ExcludeNetworksWithoutIpAddresses = true;
 
             if (cluster == null)
             {

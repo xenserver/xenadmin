@@ -24912,6 +24912,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to currently in use by a different operation.
+        /// </summary>
+        public static string NETWORK_LOCKED {
+            get {
+                return ResourceManager.GetString("NETWORK_LOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Network {0}.
         /// </summary>
         public static string NETWORK_NAME {
