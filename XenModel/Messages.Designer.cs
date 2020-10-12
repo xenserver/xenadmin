@@ -16351,6 +16351,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verification for disk &apos;{0}&apos; failed. See logs for details..
+        /// </summary>
+        public static string EXPORTING_VDI_VERIFICATION_FAILURE {
+            get {
+                return ResourceManager.GetString("EXPORTING_VDI_VERIFICATION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preparing to export VM &apos;{0}&apos;....
         /// </summary>
         public static string EXPORTING_VM_PREPARE {
@@ -21146,7 +21155,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the [Citrix VM Tools] install disc..
+        ///   Looks up a localized string similar to Could not find the [Citrix VM Tools] install disk..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_WIN {
             get {

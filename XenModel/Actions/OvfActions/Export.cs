@@ -34,6 +34,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using DiscUtils;
+using DiscUtils.Vhd;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
@@ -187,7 +189,15 @@ namespace XenAdmin.Actions.OvfActions
                         {
                             Description = string.Format(Messages.EXPORTING_VDI_VERIFICATION, diskFilename);
 
-                            //TODO
+                            using (var stream = new FileStream(diskPath, FileMode.Open, FileAccess.Read))
+                            using (var sw = new StringWriter())
+                            {
+                                var vhdChecker = new FileChecker(stream);
+                                var result = vhdChecker.Check(sw, ReportLevels.All);
+                                log.InfoFormat("Verifying disk {0}:\n{1}", diskFilename, sw.ToString().Replace("\0", ""));
+                                if (!result)
+                                    throw new Exception(Messages.EXPORTING_VDI_VERIFICATION_FAILURE);
+                            }
                         }
                     }
 
@@ -202,10 +212,6 @@ namespace XenAdmin.Actions.OvfActions
                 catch (HTTP.CancelledException)
                 {
                     throw new CancelledException();
-                }
-                catch (Exception ex)
-                {
-                    log.Warn($"Failed to export disk for VBD {vbdRef.opaque_ref}. Continuing.", ex);
                 }
             }
 
