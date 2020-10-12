@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.ExportWizard
 				m_pageExportAppliance.ApplianceFileName = m_selectedObject.Name();
 
 			m_pageExportAppliance.OvfModeOnly = m_selectedObject is VM_appliance;
-			m_pageFinish.SummaryRetreiver = GetSummary;
+			m_pageFinish.SummaryRetriever = GetSummary;
 			m_pageExportSelectVMs.SelectedItems = selection;
 
             AddPages(m_pageExportAppliance, m_pageExportSelectVMs, m_pageFinish);
@@ -154,6 +154,8 @@ namespace XenAdmin.Wizards.ExportWizard
                     NotifyNextPagesOfChange(m_pageExportSelectVMs);
 
 			    m_pageExportSelectVMs.ApplianceDirectory = m_pageExportAppliance.ApplianceDirectory;
+
+                m_pageFinish.ExportAsXva = (bool)m_exportAsXva;
 			}
 
             if (type != typeof(ExportFinishPage))

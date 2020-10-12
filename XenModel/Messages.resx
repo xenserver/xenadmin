@@ -5607,6 +5607,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORTING_VDI_VERIFICATION" xml:space="preserve">
     <value>Verifying disk '{0}'...</value>
   </data>
+  <data name="EXPORTING_VDI_VERIFICATION_FAILURE" xml:space="preserve">
+    <value>Verification for disk '{0}' failed. See logs for details.</value>
+  </data>
   <data name="EXPORTING_VM_PREPARE" xml:space="preserve">
     <value>Preparing to export VM '{0}'...</value>
   </data>
@@ -7311,7 +7314,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>Could not find the [Citrix VM Tools] install disc.</value>
+    <value>Could not find the [Citrix VM Tools] install disk.</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
     <value>[Citrix VM Tools] installation launched.</value>
