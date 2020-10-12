@@ -126,9 +126,6 @@
   <data name="HOMEPAGE_FILENAME" xml:space="preserve">
     <value>HomePage.ja.mht</value>
   </data>
-  <data name="HTTP_LICENSES" xml:space="preserve">
-    <value>www.citrix.com/xenserverenterprise</value>
-  </data>
   <data name="ISL_DEPRECATION_URL" xml:space="preserve">
     <value>http://support.citrix.com/article/CTX141433</value>
   </data>

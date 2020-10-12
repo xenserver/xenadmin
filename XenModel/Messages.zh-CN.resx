@@ -2362,6 +2362,9 @@
   <data name="CANNOT_ACTIVATE_SNAPSHOT_IN_USE" xml:space="preserve">
     <value>此快照正在使用，无法激活。</value>
   </data>
+  <data name="CANNOT_ACTIVATE_TEMPLATE_DISK" xml:space="preserve">
+    <value>无法激活或停用属于模板的磁盘。</value>
+  </data>
   <data name="CANNOT_ACTIVATE_VD_ALREADY_ACTIVE" xml:space="preserve">
     <value>该虚拟磁盘已在 VM“{0}”上激活。</value>
   </data>
@@ -2423,8 +2426,7 @@
     <value>ISO 存储必须从 VM 中弹出，然后才能删除。该存储正由 VM“{0}”使用。</value>
   </data>
   <data name="CANNOT_DELETE_CANNOT_DEACTIVATE_REASON" xml:space="preserve">
-    <value>无法在 VM“{0}”上停用该虚拟磁盘并将其删除: 
-
+    <value>无法在 VM“{0}”上停用此虚拟磁盘并将其删除: 
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
@@ -3213,18 +3215,6 @@
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
     <value>已拒绝连接到 {0}</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
-    <value>与服务器 {0} 的连接受到限制，因为已经与另一个 XE 速成版服务器({1})建立连接</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>与服务器 {0} 的连接受到限制 - 已与 [Citrix XenServer] Express Edition 服务器({1})建立连接。
-
-一次只能连接到一个 [Citrix XenServer] Express Edition 服务器。要了解许可证的升级方法，请单击下面的链接。</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
-    <value>由于服务器上的许可证限制，无法连接到 {0}</value>
-    <comment>Title of notice shown when connection to a host is restricted by license</comment>
   </data>
   <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
     <value>连接 {0}: 尝试在 {1} 查找池</value>
@@ -4464,6 +4454,9 @@
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>如果要配置管理接口，请禁用高可用性</value>
   </data>
+  <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
+    <value>禁用高可用性(&amp;D)</value>
+  </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>禁用</value>
   </data>
@@ -5518,6 +5511,15 @@
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0}弹出 CD</value>
   </data>
+  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
+    <value>在池创建集群的过程中，您无法指定新的主服务器。</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
+    <value>在池中禁用高可用性时，您无法指定新的主服务器。</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
+    <value>在池中启用高可用性时，您无法指定新的主服务器。</value>
+  </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} 安装管理代理</value>
   </data>
@@ -5533,23 +5535,14 @@
   <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>池中其他服务器上的可用内存不足，无法将所有运行中的 VM 迁移出此服务器。请挂起部分 VM。</value>
   </data>
-  <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE" xml:space="preserve">
-    <value>内存不足</value>
-  </data>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS" xml:space="preserve">
-    <value>池中没有可用来将运行中的 VM 迁移到的其他服务器。请改为挂起 VM。</value>
-  </data>
-  <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
-    <value>没有可用服务器</value>
+    <value>池中没有可用来迁移运行中的 VM 的其他服务器。请改为挂起 VM。</value>
   </data>
   <data name="EVACUATE_HOST_SHUTDOWN_VM_PROMPT" xml:space="preserve">
     <value>{0} 关闭 VM</value>
   </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
     <value>{0}暂停 VM</value>
-  </data>
-  <data name="EVACUATE_SOLUTION_IN_PROGRESS" xml:space="preserve">
-    <value>正在执行操作...</value>
   </data>
   <data name="EXACT_MATCH" xml:space="preserve">
     <value>完全匹配</value>
@@ -6512,9 +6505,6 @@
     <value>池“{0}”当前已启用高可用性。
 
 请单击“配置高可用性”更改下面显示的设置。</value>
-  </data>
-  <data name="HA_TAB_CONFIGURED_UNLICENSED" xml:space="preserve">
-    <value>当前已为池“{0}”启用高可用性。</value>
   </data>
   <data name="HA_UNABLE_TO_CALCULATE_MESSAGE" xml:space="preserve">
     <value>无法计算最大池故障容量。</value>
@@ -7660,9 +7650,6 @@ SR UUID: {1}</value>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>无法访问许可证服务器 {0}。您可以在 {1} 之前重新连接许可证服务器。</value>
   </data>
-  <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
-    <value>许可证限制: 无法连接 {0}，已存在使用 XE 速成版许可证的服务器({1})</value>
-  </data>
   <data name="LICENSE_SA_EXPIRED" xml:space="preserve">
     <value>您的支持和维护已过期</value>
   </data>
@@ -7999,7 +7986,7 @@ SCSI ID: {2}
     <value>(未获授权)</value>
   </data>
   <data name="MAINWINDOW_HIGH_AVAILABILITY" xml:space="preserve">
-    <value>高可用性(&amp;H)...</value>
+    <value>高可用性(&amp;H)</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
     <value>安装 [Citrix VM Tools](&amp;A)...</value>
@@ -8704,6 +8691,9 @@ SCSI ID: {2}
   </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (正由 {1} 使用)</value>
+  </data>
+  <data name="NETWORK_LOCKED" xml:space="preserve">
+    <value>当前正由其他操作使用</value>
   </data>
   <data name="NETWORK_NAME" xml:space="preserve">
     <value>网络 {0}</value>
@@ -10895,12 +10885,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
     <value>用户 {0} 权限不足，无法运行“灾难恢复”向导。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
-  <data name="RBAC_HA_TAB_WARNING" xml:space="preserve">
+  <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>您当前的角色为“{1}”。
 
 要配置高可用性设置，请切换到具有以下角色之一的帐户: 
 
 {0}</value>
+  </data>
+  <data name="RBAC_HA_ENABLE_WARNING" xml:space="preserve">
+    <value>{0} 用户无法配置高可用性设置。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
     <value>权限为“{0}”的用户无法执行该操作。</value>
@@ -11381,6 +11374,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
     <value>当高可用性功能处于打开状态时，您将无法轮换池密码。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_CLUSTER" xml:space="preserve">
+    <value>在池密码轮换过程中，您无法启用群集。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
+    <value>在池密码轮换过程中，您无法配置高可用性。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
+    <value>在池密码轮换过程中，您不能指定新的主服务器。</value>
   </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>轮换池密码(&amp;P)</value>
@@ -13397,7 +13399,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>详细信息:</value>
   </data>
   <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
-    <value>{0}。{1}: {2}</value>
+    <value>- {0}: {1}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>VM 快照计划(&amp;O)...</value>
@@ -13450,9 +13452,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
     <value>在服务器“{0}”中定义的快照计划(计划中当前包含 {1} 个 VM，共 {2} 个):</value>
-  </data>
-  <data name="VMSS_SUCCEEDED" xml:space="preserve">
-    <value>成功</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>虚拟机</value>
