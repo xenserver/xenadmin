@@ -2366,6 +2366,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CANNOT_ACTIVATE_SNAPSHOT_IN_USE" xml:space="preserve">
     <value>このスナップショットは使用中でありアクティブにできません。</value>
   </data>
+  <data name="CANNOT_ACTIVATE_TEMPLATE_DISK" xml:space="preserve">
+    <value>テンプレートに属しているディスクは、アクティブまたは非アクティブにできません。</value>
+  </data>
   <data name="CANNOT_ACTIVATE_VD_ALREADY_ACTIVE" xml:space="preserve">
     <value>この仮想ディスクは VM '{0}' 上で既にアクティブになっています。</value>
   </data>
@@ -2427,8 +2430,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>ISO を削除するには、まず VM からイジェクトする必要があります。このストレージは VM '{0}' により使用されています。</value>
   </data>
   <data name="CANNOT_DELETE_CANNOT_DEACTIVATE_REASON" xml:space="preserve">
-    <value>この仮想ディスクを VM '{0}' 上で非アクティブにして削除することができません。 
-
+    <value>この仮想ディスクを VM '{0}' 上で非アクティブにして削除することができません:
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
@@ -3217,18 +3219,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
     <value>{0} への接続が拒否されました</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_MESSAGE" xml:space="preserve">
-    <value>ほかの XE Express Server ({1}) に接続済みであるため、サーバー {0} への接続は制限されます</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>[Citrix XenServer] Express Edition サーバー ({1}) に接続済みであるため、サーバー {0} への接続は制限されます。
-
-同時に複数の [Citrix XenServer] Express Edition サーバーに接続することはできません。ライセンスのアップグレードについては、下のリンクを参照してください。</value>
-  </data>
-  <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
-    <value>サーバーのライセンス条件により、{0} に接続できません。</value>
-    <comment>Title of notice shown when connection to a host is restricted by license</comment>
   </data>
   <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
     <value>{0} への接続: {1} のプールを検索しています</value>
@@ -4470,6 +4460,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>管理インターフェイスを構成する場合は、高可用性機能を無効にしてください。</value>
   </data>
+  <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
+    <value>高可用性の無効化(&amp;D)</value>
+  </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>無効化</value>
   </data>
@@ -5524,6 +5517,15 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0} CD をイジェクトしてください</value>
   </data>
+  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
+    <value>プールがクラスターを作成している間は、新しいマスターを選出することはできません。</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
+    <value>プールで高可用性の無効化を実行中は、新しいマスターを選出できません。</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
+    <value>プールで高可用性の有効化の実行中は、新しいマスターを選出できません。</value>
+  </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} 管理エージェントのインストール</value>
   </data>
@@ -5539,23 +5541,14 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>プール内のほかのサーバーには、このサーバーで実行中のすべての VM を移行するための空きメモリがありません。実行中の VM のいくつかを一時停止してください</value>
   </data>
-  <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE" xml:space="preserve">
-    <value>移行先サーバーのメモリ不足</value>
-  </data>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS" xml:space="preserve">
     <value>実行中の VM の移行先となるサーバーがプール内にありません。代わりに VM を一時停止してください。</value>
-  </data>
-  <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
-    <value>移行先サーバーの問題</value>
   </data>
   <data name="EVACUATE_HOST_SHUTDOWN_VM_PROMPT" xml:space="preserve">
     <value>{0} VM のシャットダウン</value>
   </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
     <value>{0} VM を一時停止してください</value>
-  </data>
-  <data name="EVACUATE_SOLUTION_IN_PROGRESS" xml:space="preserve">
-    <value>実行中の処理...</value>
   </data>
   <data name="EXACT_MATCH" xml:space="preserve">
     <value>完全一致</value>
@@ -6519,9 +6512,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
 
 以下のを変更するには、[高可用性の構成] をクリックします。</value>
   </data>
-  <data name="HA_TAB_CONFIGURED_UNLICENSED" xml:space="preserve">
-    <value>プール '{0}' の高可用性は有効になっています。</value>
-  </data>
   <data name="HA_UNABLE_TO_CALCULATE_MESSAGE" xml:space="preserve">
     <value>プールの最大許容障害数を計算できません。</value>
   </data>
@@ -6677,7 +6667,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>サーバー {0} は保守モードから切り替わりました</value>
   </data>
   <data name="HOSTACTION_EXITING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>サーバー {0} を保守モードから切り替えています...</value>
+    <value>サーバー '{0}' を保守モードから切り替えています...</value>
   </data>
   <data name="HOSTACTION_REBOOT_VM_SHUTDOWN" xml:space="preserve">
     <value>サーバーの再起動準備: {0} のシャットダウン中 ({1} / {2})</value>
@@ -7665,9 +7655,6 @@ SR UUID: {1}</value>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
   </data>
-  <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
-    <value>ライセンスによる制限: {0} に接続できません。XE Express ライセンスを使用するサーバーが既に存在しています ({1})</value>
-  </data>
   <data name="LICENSE_SA_EXPIRED" xml:space="preserve">
     <value>サポートおよび保守の有効期限が切れました</value>
   </data>
@@ -8004,7 +7991,7 @@ SCSI ID: {2}
     <value>(ライセンス無効)</value>
   </data>
   <data name="MAINWINDOW_HIGH_AVAILABILITY" xml:space="preserve">
-    <value>高可用性(&amp;H)...</value>
+    <value>高可用性(&amp;H)</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
     <value>[Citrix VM Tools] をインストール(&amp;A)...</value>
@@ -8709,6 +8696,9 @@ SCSI ID: {2}
   </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} ({1} で使用中)</value>
+  </data>
+  <data name="NETWORK_LOCKED" xml:space="preserve">
+    <value>別の操作によって現在使用中</value>
   </data>
   <data name="NETWORK_NAME" xml:space="preserve">
     <value>ネットワーク {0}</value>
@@ -10896,12 +10886,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
     <value>ユーザー {0} には、障害回復ウィザードを実行するための権限がありません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
-  <data name="RBAC_HA_TAB_WARNING" xml:space="preserve">
+  <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>現在の役割は '{1}' です。
 
 高可用性を構成するには、以下のいずれかの役割が設定されたアカウントに切り替える必要があります。 
 
 {0}</value>
+  </data>
+  <data name="RBAC_HA_ENABLE_WARNING" xml:space="preserve">
+    <value>{0} ユーザーは高可用性を構成できません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
     <value>{0} ユーザーはこの操作を実行できません。</value>
@@ -11382,6 +11375,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
     <value>[高可用性] がオンの場合、プール シークレットを入れ替えることはできません。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_CLUSTER" xml:space="preserve">
+    <value>プール シークレットの入れ替えの実行中は、クラスタリングを有効にできません。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
+    <value>プール シークレットの入れ替えの実行中は、高可用性を構成できません。</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
+    <value>プール シークレットの入れ替えの実行中は、新しいマスターを選出できません。</value>
   </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>プール シークレットの入れ替え(&amp;P)</value>
@@ -13401,7 +13403,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>詳細:</value>
   </data>
   <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
-    <value>{0}。{1}: {2}</value>
+    <value>- {0}: {1}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>VM スナップショット スケジュール(&amp;O)...</value>
@@ -13454,9 +13456,6 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   </data>
   <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
     <value>サーバー '{0}' に定義されているスナップショット スケジュール ({2} 項目中 {1} 項目の VM がスケジュールされています):</value>
-  </data>
-  <data name="VMSS_SUCCEEDED" xml:space="preserve">
-    <value>成功</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>仮想マシン</value>
