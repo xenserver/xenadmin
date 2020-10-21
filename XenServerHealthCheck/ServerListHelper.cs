@@ -70,13 +70,31 @@ namespace XenServerHealthCheck
                 string[] encServerList = Properties.Settings.Default.ServerList ?? new string[0];
                 foreach (string encServer in encServerList)
                 {
-                    string decryptCredential = EncryptionUtils.Unprotect(encServer);
+                    string decryptCredential;
+                    try
+                    {
+                        decryptCredential = EncryptionUtils.Unprotect(encServer);
+                    }
+                    catch (Exception e)
+                    {
+                        log.Warn("Could not unprotect server list.", e);
+                        return; //return and not continue; same behaviour as XenCenter settings
+                    }
+
                     string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
-                    ServerInfo connection = new ServerInfo();
-                    connection.HostName = decryptCredentialComps[0];
-                    connection.UserName = decryptCredentialComps[1];
-                    connection.Password = decryptCredentialComps[2];
-                    connection.task = null;
+                    if (decryptCredentialComps.Length < 3)
+                    {
+                        log.Warn("Server list was not decrypted to valid entries.");
+                        return; //return and not continue; same behaviour as XenCenter settings
+                    }
+                    
+                    var connection = new ServerInfo
+                    {
+                        HostName = decryptCredentialComps[0],
+                        UserName = decryptCredentialComps[1],
+                        Password = decryptCredentialComps[2],
+                        task = null
+                    };
                     serverList.Add(connection);
                 }
             }
@@ -176,7 +194,17 @@ namespace XenServerHealthCheck
         {
             log.Info("Receive credential update message");
 
-            string decryptCredential = EncryptionUtils.UnprotectForLocalMachine(credential);
+            string decryptCredential;
+            try
+            {
+                decryptCredential = EncryptionUtils.UnprotectForLocalMachine(credential);
+            }
+            catch (Exception e)
+            {
+                log.Warn("Could not unprotect credential.", e);
+                return;
+            }
+
             string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
 
             if (decryptCredentialComps.Length != 1 && decryptCredentialComps.Length != 3)

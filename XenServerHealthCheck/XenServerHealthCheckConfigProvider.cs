@@ -102,12 +102,31 @@ namespace XenServerHealthCheck
 
                         if (Properties.Settings.Default.ProvideProxyAuthentication)
                         {
-                            string protectedUsername = Properties.Settings.Default.ProxyUsername;
-                            string protectedPassword = Properties.Settings.Default.ProxyPassword;
-                            return new WebProxy(address, false, null, new NetworkCredential(
-                                // checks for empty default username/password which starts out unencrypted
-                                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
-                                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword)));
+                            string username = "";
+                            try
+                            {
+                                string protectedUsername = Properties.Settings.Default.ProxyUsername;
+                                if (!string.IsNullOrEmpty(protectedUsername))
+                                    username = EncryptionUtils.Unprotect(protectedUsername);
+                            }
+                            catch (Exception e)
+                            {
+                                log.Warn("Could not unprotect internet proxy username.", e);
+                            }
+
+                            string password = "";
+                            try
+                            {
+                                string protectedPassword = Properties.Settings.Default.ProxyPassword;
+                                if (!string.IsNullOrEmpty(protectedPassword))
+                                    password = EncryptionUtils.Unprotect(protectedPassword);
+                            }
+                            catch (Exception e)
+                            {
+                                log.Warn("Could not unprotect internet proxy password.", e);
+                            }
+
+                            return new WebProxy(address, false, null, new NetworkCredential(username, password));
                         }
                         else
                             return new WebProxy(address, false);

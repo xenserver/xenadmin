@@ -52,19 +52,10 @@ namespace XenAdmin.Actions
         {
         }
 
-        protected override void Run()
-        {
-            var message = GetMessageToBeSent();
-            SendMessageToHealthCheck(message);
-        }
-
         protected abstract string GetMessageToBeSent();
 
-        private void SendMessageToHealthCheck(string message)
+        protected override void Run()
         {
-            if (string.IsNullOrEmpty(message))
-                return;
-
             ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
             try
             {
@@ -80,6 +71,11 @@ namespace XenAdmin.Actions
                 return;
             }
 
+            //only collect metadata if needed, i.e. if the service is installed and running
+            var message = GetMessageToBeSent();
+            if (string.IsNullOrEmpty(message))
+                return;
+
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             int retryCount = 120;
             do
@@ -88,9 +84,9 @@ namespace XenAdmin.Actions
                 {
                     pipeClient.Connect(0);
                 }
-                catch (System.TimeoutException exp)
+                catch (System.TimeoutException)
                 {
-                    throw exp;
+                    throw;
                 }
                 catch
                 {
