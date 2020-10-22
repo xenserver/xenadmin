@@ -38,6 +38,9 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     interface IOptionsPage : VerticalTabs.IVerticalTab
     {
+        void Build();
+        bool IsValidToSave();
+        void ShowValidationMessages();
         void Save();
     }
 }

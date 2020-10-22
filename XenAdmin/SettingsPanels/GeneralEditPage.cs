@@ -267,7 +267,7 @@ namespace XenAdmin.SettingsPanels
             if (txtName.Text.Trim() == "")
             {
                 // Show invalid target host local validation error message.
-                HelpersGUI.ShowBalloonMessage(txtName, Messages.GENERAL_EDIT_INVALID_NAME, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(txtName, InvalidParamToolTip, Messages.GENERAL_EDIT_INVALID_NAME);
             }
             else if (xenObjectCopy is Host)
             {
@@ -277,7 +277,7 @@ namespace XenAdmin.SettingsPanels
                     return;
 
                 // Allow invalid IQN only if previously set from CLI
-                HelpersGUI.ShowBalloonMessage(txtIQN, Messages.GENERAL_EDIT_INVALID_IQN, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(txtIQN, InvalidParamToolTip, Messages.GENERAL_EDIT_INVALID_IQN);
             }
         }
 

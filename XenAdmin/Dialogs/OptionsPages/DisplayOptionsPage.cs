@@ -41,10 +41,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         public DisplayOptionsPage()
         {
             InitializeComponent();
-            Build();
         }
 
-        private void Build()
+        public void Build()
         {
             GraphAreasRadioButton.Checked = Properties.Settings.Default.FillAreaUnderGraphs;
             GraphLinesRadioButton.Checked = !Properties.Settings.Default.FillAreaUnderGraphs;
@@ -52,6 +51,15 @@ namespace XenAdmin.Dialogs.OptionsPages
         }
 
         #region IOptionsPage Members
+
+        public bool IsValidToSave()
+        {
+            return true;
+        }
+
+        public void ShowValidationMessages()
+        {
+        }
 
         public void Save()
         {
