@@ -326,8 +326,7 @@ namespace XenAdmin.SettingsPanels
                  && val % 5 != 0)
             {
                 HelpersGUI.ShowBalloonMessage(nudAlertInterval,
-                    Messages.PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE,
-                    m_invalidParamToolTip);
+                    m_invalidParamToolTip, Messages.PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE);
             }
         }
 

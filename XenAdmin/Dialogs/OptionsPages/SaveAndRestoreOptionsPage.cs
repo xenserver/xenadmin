@@ -51,8 +51,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         public SaveAndRestoreOptionsPage() 
         {
             InitializeComponent();
-            // setup all the controls with the current state of the settings
-            FillCurrentSettings();
         }
 
         // all prompts for old password should have been made
@@ -188,7 +186,9 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #endregion
 
-        private void FillCurrentSettings()
+        #region IOptionsPage Members
+
+        public void Build()
         {
             bool allowCredSave = Registry.AllowCredentialSave;
             bool saveSession = Properties.Settings.Default.SaveSession;
@@ -209,8 +209,15 @@ namespace XenAdmin.Dialogs.OptionsPages
             TemporaryMasterPassword = Program.MasterPassword;
         }
 
-        #region IOptionsPage Members
+        public bool IsValidToSave()
+        {
+            return true;
+        }
 
+        public void ShowValidationMessages()
+        {
+        }
+        
         public void Save()
         {
             SaveEverything();

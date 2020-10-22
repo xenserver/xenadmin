@@ -312,7 +312,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public void ShowLocalValidationMessages()
         {
-            HelpersGUI.ShowBalloonMessage(flowLayoutPanel1, Messages.VMSS_INVALID_SCHEDULE, InvalidParamToolTip);
+            HelpersGUI.ShowBalloonMessage(flowLayoutPanel1, InvalidParamToolTip, Messages.VMSS_INVALID_SCHEDULE);
         }
 
         public void Cleanup()

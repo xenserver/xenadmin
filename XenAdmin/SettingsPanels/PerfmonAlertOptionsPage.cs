@@ -182,15 +182,15 @@ namespace XenAdmin.SettingsPanels
         {
             if (!IsValidEmail(EmailAddressTextBox.Text))
             {
-                HelpersGUI.ShowBalloonMessage(EmailAddressTextBox, Messages.INVALID_PARAMETER, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(EmailAddressTextBox, InvalidParamToolTip, Messages.INVALID_PARAMETER);
             }
             else if (!IsValidSmtpAddress())
             {
-                HelpersGUI.ShowBalloonMessage(SmtpServerAddrTextBox, Messages.INVALID_PARAMETER, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(SmtpServerAddrTextBox, InvalidParamToolTip, Messages.INVALID_PARAMETER);
             }
             else if (!Util.IsValidPort(SmtpServerPortTextBox.Text))
             {
-                HelpersGUI.ShowBalloonMessage(SmtpServerPortTextBox, Messages.INVALID_PARAMETER, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(SmtpServerPortTextBox, InvalidParamToolTip, Messages.INVALID_PARAMETER);
             }
         }
 

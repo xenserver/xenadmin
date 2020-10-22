@@ -32,6 +32,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using XenAdmin.Core;
 using XenAPI;
 using XenCenterLib;
 
@@ -41,19 +42,27 @@ namespace XenAdmin.Dialogs.OptionsPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public event Action<bool> IsValidChanged;
+        private readonly ToolTip validationToolTip;
+        private Control invalidControl;
 
         // used for preventing the event handlers from doing anything when changing controls through code
-        private bool eventsDisabled = true;
+        private bool eventsDisabled;
 
         public ConnectionOptionsPage()
         {
             InitializeComponent();
-            Build();
+            validationToolTip = new ToolTip
+            {
+                IsBalloon = true,
+                ToolTipIcon = ToolTipIcon.Warning,
+                ToolTipTitle = Messages.INVALID_PARAMETER
+            };
         }
 
-        private void Build()
+        public void Build()
         {
+            eventsDisabled = true;
+
             // Proxy server
             switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)
             {
@@ -116,14 +125,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             eventsDisabled = false;
         }
 
-        private void UseProxyRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (eventsDisabled)
-                return;
-
-            CheckValid();
-        }
-
         private void AuthenticationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (eventsDisabled)
@@ -139,8 +140,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             SelectUseThisProxyServer();
 
             eventsDisabled = false;
-
-            CheckValid();
         }
 
         private void GeneralProxySettingsChanged(object sender, EventArgs e)
@@ -148,7 +147,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (eventsDisabled)
                 return;
             SelectUseThisProxyServer();
-            CheckValid();
         }
 
         private void ProxyAuthenticationSettingsChanged(object sender, EventArgs e)
@@ -156,7 +154,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (eventsDisabled)
                 return;
             SelectProvideCredentials();
-            CheckValid();
         }
 
         private void SelectUseThisProxyServer()
@@ -170,38 +167,44 @@ namespace XenAdmin.Dialogs.OptionsPages
             UseProxyRadioButton.Checked = true;
         }
 
-        private void CheckValid()
+        #region IOptionsPage Members
+
+        public bool IsValidToSave()
         {
             if (!UseProxyRadioButton.Checked)
             {
-                IsValidChanged?.Invoke(true);
-                return;
+                invalidControl = null;
+                return true;
             }
             
-            if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
+            var uriHostNameType = Uri.CheckHostName(ProxyAddressTextBox.Text);
+            if (uriHostNameType == UriHostNameType.Unknown || uriHostNameType == UriHostNameType.IPv6)
             {
-                IsValidChanged?.Invoke(false);
-                return;
+                invalidControl = ProxyAddressTextBox;
+                return false;
             }
 
             if (!Util.IsValidPort(ProxyPortTextBox.Text))
             {
-                IsValidChanged?.Invoke(false);
-                return;
+                invalidControl = ProxyPortTextBox;
+                return false;
             }
 
-            try
+            if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
             {
-                var uriHostNameType = Uri.CheckHostName(ProxyAddressTextBox.Text);
-                IsValidChanged?.Invoke(uriHostNameType != UriHostNameType.Unknown && uriHostNameType != UriHostNameType.IPv6);
+                invalidControl = ProxyUsernameTextBox;
+                return false;
             }
-            catch
-            {
-                IsValidChanged?.Invoke(false);
-            }
+
+            invalidControl = null;
+            return true;
         }
 
-        #region IOptionsPage Members
+        public void ShowValidationMessages()
+        {
+            if (invalidControl != null)
+                HelpersGUI.ShowBalloonMessage(invalidControl, validationToolTip);
+        }
 
         public void Save()
         {

@@ -40,11 +40,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         public ConsolesOptionsPage()
         {
             InitializeComponent();
-
-            build();
         }
 
-        private void build()
+        public void Build()
         {
             // Fullscreen shortcut keys
             buildKeyCodeListBox();
@@ -110,6 +108,15 @@ namespace XenAdmin.Dialogs.OptionsPages
         }
 
         #region IOptionsPage Members
+
+        public bool IsValidToSave()
+        {
+            return true;
+        }
+
+        public void ShowValidationMessages()
+        {
+        }
 
         public void Save()
         {

@@ -13,9 +13,12 @@ namespace XenAdmin.Dialogs.OptionsPages
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                validationToolTip.Dispose();
+
+                if (components != null)
+                    components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -205,7 +208,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.UseProxyRadioButton.Name = "UseProxyRadioButton";
             this.UseProxyRadioButton.TabStop = true;
             this.UseProxyRadioButton.UseVisualStyleBackColor = true;
-            this.UseProxyRadioButton.CheckedChanged += new System.EventHandler(this.UseProxyRadioButton_CheckedChanged);
             // 
             // DirectConnectionRadioButton
             // 
