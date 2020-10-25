@@ -53,7 +53,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return string.Format(Messages.SIZE_LOCATION_SUB,
+                return string.Format(Messages.STRING_COMMA_SPACE_STRING,
                     Util.DiskSizeString(diskSpinner1.CanResize ? diskSpinner1.SelectedSize : vdi.virtual_size, 2),
                     vdi.Connection.Resolve<SR>(vdi.SR));
             }
