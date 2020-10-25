@@ -255,8 +255,9 @@ namespace XenAdmin.Actions
                 _percentComplete = 100;
                 _isCompleted = true;
             }
-            if (NewAction != null && !suppressHistory)
-                NewAction(this);
+
+            if (!suppressHistory)
+                NewAction?.Invoke(this);
         }
 
         public string Description
@@ -309,7 +310,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        public bool SuppressProgressReport { get; set; }
+        protected bool SuppressProgressReport { get; set; }
 
         public void Tick(int percent, string description)
         {
@@ -380,31 +381,13 @@ namespace XenAdmin.Actions
 
         protected void OnChanged()
         {
-            if (Changed != null)
-                try
-                {
-                    if (!SuppressProgressReport)
-                        Changed(this);
-                }
-                catch (Exception e)
-                {
-                    log.Debug($"Exception firing OnChanged for Action {Title}.", e);
-                }
+            if (!SuppressProgressReport)
+                Changed?.Invoke(this);
         }
 
         protected virtual void OnCompleted()
         {
-            if (Completed != null)
-            {
-                try
-                {
-                    Completed(this);
-                }
-                catch (Exception ex)
-                {
-                    log.Debug($"Exception firing OnCompleted for Action {Title}.", ex);
-                }
-            }
+            Completed?.Invoke(this);
         }
 
         protected void MarkCompleted(Exception e = null)

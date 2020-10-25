@@ -1890,9 +1890,9 @@ namespace XenAdmin
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusProgressBar,
             this.statusLabel,
-            this.statusLabelAlerts,
+            this.statusLabelErrors,
             this.statusLabelUpdates,
-            this.statusLabelErrors});
+            this.statusLabelAlerts});
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.ShowItemToolTips = true;
             // 
