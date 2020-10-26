@@ -447,7 +447,7 @@ namespace XenAdmin.TabPages
         private void toolStripMenuItemAttach_Click(object sender, EventArgs e)
         {
             if (AttachButton.Visible && AttachButton.Enabled)
-                AddButton.PerformClick();
+                AttachButton.PerformClick();
             UpdateButtons();
         }
 
