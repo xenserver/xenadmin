@@ -97,6 +97,7 @@ namespace XenAdmin.Dialogs
             this.Controls.Add(this.DiskListTreeView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "AttachDiskDialog";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AttachDiskDialog_FormClosing);
             this.readonlyCheckboxToolTipContainer.ResumeLayout(false);
             this.readonlyCheckboxToolTipContainer.PerformLayout();
