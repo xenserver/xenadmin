@@ -43,7 +43,7 @@ namespace CFUValidator.Updates
         private readonly string _url;
 
         public AlternativeUrlDownloadUpdatesXmlSourceAction(string url)
-            : base(true, true, true, "CFU", "1")
+            : base(true, true, true, "CFU")
         {
             _url = url ?? throw new ArgumentNullException(nameof(url));
         }
