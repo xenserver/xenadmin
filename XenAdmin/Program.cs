@@ -484,7 +484,7 @@ namespace XenAdmin
             try
             {
                 // Lets save the connections first, so we can save their connected state
-                Settings.SaveIfRequired();
+                Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
             }
             catch (Exception)
             {
