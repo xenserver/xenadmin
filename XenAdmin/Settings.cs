@@ -98,6 +98,7 @@ namespace XenAdmin
                 Properties.Settings.Default.SaveSession = false;
                 return;
             }
+
             if (!Registry.AllowCredentialSave)
             {
                 Program.SkipSessionSave = true;
@@ -106,81 +107,63 @@ namespace XenAdmin
                 RestoreSessionWithPassword(null, false);
                 return;
             }
-            // Only try if the user has specified he actually wants to save sessions...
-            if (Properties.Settings.Default.SaveSession == true || Properties.Settings.Default.RequirePass)
+
+            Program.MasterPassword = null;
+
+            if (Properties.Settings.Default.SaveSession || Properties.Settings.Default.RequirePass)
             {
-                // Only try if we actually have a saved session list...
-                if ((Properties.Settings.Default.ServerList != null && Properties.Settings.Default.ServerList.Length > 0) || (Properties.Settings.Default.ServerAddressList != null && Properties.Settings.Default.ServerAddressList.Length > 0))
+                if (Properties.Settings.Default.ServerList != null && Properties.Settings.Default.ServerList.Length > 0 ||
+                    Properties.Settings.Default.ServerAddressList != null && Properties.Settings.Default.ServerAddressList.Length > 0)
                 {
                     if (!Properties.Settings.Default.RequirePass)
                     {
-                        Program.MasterPassword = null;
                         Program.SkipSessionSave = true;
                         RestoreSessionWithPassword(null, true);
                         return;
                     }
-                    byte[] passHash = PromptForMasterPassword(false);
 
-                    // passHash will be null if the user cancelled...
-                    if (passHash != null)
+                    // close the splash screen before opening the password dialog (the main window closes the
+                    // splash screen after this method is called, however, this cannot happen because the dialog
+                    // is launched modally blocking the UI thread and is additionally behind the splash screen)
+                    Program.CloseSplash();
+
+                    string password = null;
+                    do
                     {
-                        if (!RestoreSessionWithPassword(passHash, true))
-                        {
-                            // User got the password wrong. Repeat until he gets it
-                            // right or cancels...
-                            while (passHash != null)
-                            {
-                                passHash = PromptForMasterPassword(true);
-                                if (passHash != null)
-                                {
-                                    if (RestoreSessionWithPassword(passHash, true))
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                    // if the user has cancelled we start a new session
-                    if (passHash == null)
-                    {
-                        // an error state which can only occur on cancelled clicked
-                        Properties.Settings.Default.SaveSession = false;
-                        Properties.Settings.Default.RequirePass = true;
-                        RestoreSessionWithPassword(null, false);
-                    }
-                    else
-                    {
-                        // otherwise make sure we have the correct settings
-                        Properties.Settings.Default.SaveSession = true;
-                        Properties.Settings.Default.RequirePass = true;
-                    }
+                        using (var dialog = new LoadSessionDialog(password != null))
+                            password = dialog.ShowDialog(Program.MainWindow) == DialogResult.OK
+                                ? dialog.Password
+                                : null;
+                    } while (password != null && !RestoreSessionWithPassword(password, true));
+
+                    Properties.Settings.Default.SaveSession = password != null;
+                    Properties.Settings.Default.RequirePass = true;
                     Program.SkipSessionSave = true;
-                    Program.MasterPassword = passHash;
+
+                    if (password == null)
+                        RestoreSessionWithPassword(null, false); //if the user has cancelled start a new session
+                    else
+                        Program.MasterPassword = EncryptionUtils.ComputeHash(password);
                 }
                 else
                 {
-                    // this is where the user comes in if it is the first time connecting
                     Properties.Settings.Default.RequirePass = false;
                     Properties.Settings.Default.SaveSession = false;
-                    Program.MasterPassword = null;
                 }
             }
             else
             {
-                Program.MasterPassword = null;
                 Program.SkipSessionSave = true;
                 RestoreSessionWithPassword(null, false);
             }
         }
 
         /// <summary>
-        /// Tries to restore the session list using the given password hash as
-        /// the key. Returns true if successful, false otherwise (usu. due to
+        /// Tries to restore the session list using the given password as the key.
+        /// Returns true if successful, false otherwise (usually due to
         /// a decryption failure, in turn due to a wrong password).
         /// </summary>
-        /// <param name="passHash"></param>
-        /// <param name="useOriginalList"></param>
-        /// <returns></returns>
-        private static bool RestoreSessionWithPassword(byte[] passHash, bool useOriginalList)
+        private static bool RestoreSessionWithPassword(string password, bool useOriginalList)
         {
             string[] encServerList;
 
@@ -220,7 +203,7 @@ namespace XenAdmin
                 {
                     foreach (string encEntry in encServerList)
                     {
-                        decryptedList[idx] = EncryptionUtils.DecryptString(encEntry, passHash);
+                        decryptedList[idx] = EncryptionUtils.DecryptString(encEntry, password);
                         idx++;
                     }
                 }
@@ -338,24 +321,6 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Prompts for the password to use to decrypt the server list.
-        /// Returns the secure hash of the password entered.
-        /// </summary>
-        /// <param name="isRetry"></param>
-        /// <returns></returns>
-        private static byte[] PromptForMasterPassword(bool isRetry)
-        {
-            // close the splash screen before opening the password dialog (the dialog comes up behind the splash screen)
-            Program.CloseSplash();
-
-            using (var dialog = new LoadSessionDialog(isRetry))
-                if (dialog.ShowDialog(Program.MainWindow) == DialogResult.OK)
-                    return dialog.PasswordHash;
-
-            return null;
-        }
-
-        /// <summary>
         /// If an exception is thrown while saving the list, this method will notify the user
         /// and then call Application.Exit().
         /// </summary>
@@ -434,7 +399,7 @@ namespace XenAdmin
                     }
 
                     // Save the address, port and friendly name in case the user clicks cancel on the resume password dialog
-                    string entryAddress = protectCredentials(connection.Hostname, port, connection.FriendlyName);
+                    string entryAddress = ProtectCredentials(connection.Hostname, port, connection.FriendlyName);
                     encServerAddressList.Add(entryAddress);
                 }
 
@@ -467,7 +432,7 @@ namespace XenAdmin
             }
         }
 
-        private static string protectCredentials(String serverName, int port, string friendlyName)
+        private static string ProtectCredentials(String serverName, int port, string friendlyName)
         {
             string entryStr = string.Join(SEPARATOR.ToString(), new string[] { serverName, port.ToString(), friendlyName });
             return EncryptionUtils.Protect(entryStr);
@@ -554,28 +519,7 @@ namespace XenAdmin
         public static void SetVNCPassword(string vm_uuid, char[] password)
         {
             VNCPasswords[vm_uuid] = password == null ? null : new string(password);
-            EncryptServerList();
             SaveServerList();
-        }
-
-        /// <summary>
-        /// Compares the hash of 'p' with the given byte array.
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="temporaryPassword"></param>
-        /// <returns></returns>
-        internal static bool PassCorrect(string p, byte[] temporaryPassword)
-        {
-            if (p.Length == 0)
-                return false;
-
-            return Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(p), temporaryPassword);
-        }
-
-        public static void SaveIfRequired()
-        {
-            SaveServerList();
-            TrySaveSettings();
         }
 
         public static void AddCertificate(string hashString, string hostname)
