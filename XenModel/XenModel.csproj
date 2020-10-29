@@ -158,6 +158,8 @@
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
+    <Compile Include="Utils\TimeSpanExtensions.cs" />
     <Compile Include="XCM\ConversionClient.cs" />
     <Compile Include="XCM\ConversionDescriptors.cs" />
     <Compile Include="XCM\IConversion.cs" />
@@ -222,9 +224,7 @@
     <Compile Include="ServerDBs\StatusReportXmlDocReader.cs" />
     <Compile Include="ServerDBs\TypeCache.cs" />
     <Compile Include="StorageLinkAPI\StorageLinkAdapterBoston.cs" />
-    <Compile Include="StringExtensions.cs" />
     <Compile Include="Tags.cs" />
-    <Compile Include="TimeSpanExtensions.cs" />
     <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
     <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
     <Compile Include="WLB\WlbOptimizationRecommendation.cs" />
