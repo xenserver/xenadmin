@@ -1445,25 +1445,6 @@ namespace XenAdmin.Core
             return null;
         }
 
-        /// <summary>
-        /// Load an xml stream and ignore comments and whitespace
-        /// </summary>
-        /// <param name="xmlStream"></param>
-        /// <returns></returns>
-        public static XmlDocument LoadXmlDocument(Stream xmlStream)
-        {
-            XmlDocument doc = new XmlDocument();
-            XmlReaderSettings settings = new XmlReaderSettings();
-
-            settings.IgnoreComments = true;
-            settings.IgnoreWhitespace = true;
-            settings.IgnoreProcessingInstructions = true;
-
-            doc.Load(XmlReader.Create(xmlStream, settings));
-
-            return doc;
-        }
-
         public static Regex HostnameOrIpRegex = new Regex(@"[\w.]+");
 
         public static string HostnameFromLocation(string p)

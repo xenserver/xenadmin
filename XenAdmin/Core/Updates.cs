@@ -50,8 +50,6 @@ namespace XenAdmin.Core
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static readonly string CheckForUpdatesUrl = Registry.CustomUpdatesXmlLocation ?? BrandManager.UpdatesUrl;
-
         public static event Action<bool, string> CheckForUpdatesCompleted;
         public static event Action CheckForUpdatesStarted;
         public static event Action RestoreDismissedUpdatesStarted;
@@ -122,7 +120,7 @@ namespace XenAdmin.Core
             string userAgentId = GetUniqueIdHash();
 
             return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches,
-                userAgent, userAgentId, CheckForUpdatesUrl);
+                userAgent, userAgentId);
         }
 
         internal static string GetUniqueIdHash()

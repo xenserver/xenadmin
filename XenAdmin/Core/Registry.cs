@@ -165,7 +165,11 @@ namespace XenAdmin.Core
 
         public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES);
 
-        public static string CustomUpdatesXmlLocation => ReadString(CUSTOM_UPDATES_XML_LOCATION);
+        public static string GetCustomUpdatesXmlLocation()
+        {
+            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, CUSTOM_UPDATES_XML_LOCATION) ??
+                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, CUSTOM_UPDATES_XML_LOCATION);
+        }
 
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
 

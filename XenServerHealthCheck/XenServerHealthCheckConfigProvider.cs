@@ -73,6 +73,11 @@ namespace XenServerHealthCheck
             return metadataString.Replace(HealthCheckSettings.REPORT_TIME_PLACEHOLDER, DateTime.UtcNow.ToString("u"));
         }
 
+        public string GetCustomUpdatesXmlLocation()
+        {
+            return string.Empty;
+        }
+
         public int GetProxyTimeout(bool timeout)
         {
             return timeout ? Properties.Settings.Default.HttpTimeout : 0;
