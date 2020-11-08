@@ -108,7 +108,7 @@ namespace XenAdmin.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Image Image { get; set; } = Images.StaticImages.upsell_16;
+        public Image Image { get; set; } = Images.StaticImages.Logo; //serving as default value; never really shown
 
         #endregion
 

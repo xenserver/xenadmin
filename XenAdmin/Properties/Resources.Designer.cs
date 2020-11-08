@@ -1533,16 +1533,6 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _000_XenCenterAlerts_h32bit_24 {
-            get {
-                object obj = ResourceManager.GetObject("_000_XenCenterAlerts_h32bit_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _001_Back_h32bit_24 {
             get {
                 object obj = ResourceManager.GetObject("_001_Back_h32bit_24", resourceCulture);
@@ -1856,16 +1846,6 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap alert6_16 {
             get {
                 object obj = ResourceManager.GetObject("alert6_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap alerts_32 {
-            get {
-                object obj = ResourceManager.GetObject("alerts_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3186,16 +3166,6 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap ubuntu_16x {
             get {
                 object obj = ResourceManager.GetObject("ubuntu_16x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap upsell_16 {
-            get {
-                object obj = ResourceManager.GetObject("upsell_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
