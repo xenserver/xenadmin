@@ -403,7 +403,6 @@
     <Compile Include="XenAPI\sr_health.cs" />
     <Compile Include="XenAPI\Sr_stat.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
-    <Compile Include="XenAPI\tunnel_protocol.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\USB_group.cs" />
     <Compile Include="XenAPI\Vdi_nbd_server_info.cs" />
