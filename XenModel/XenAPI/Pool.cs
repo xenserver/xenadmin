@@ -1056,7 +1056,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_psr_pending field of the given pool.
-        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// First published in Citrix Hypervisor 8.2 Hotfix 2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1418,7 +1418,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the is_psr_pending field of the given pool.
-        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// First published in Citrix Hypervisor 8.2 Hotfix 2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2757,7 +2757,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// First published in Citrix Hypervisor 8.2 Hotfix 2.
         /// </summary>
         /// <param name="session">The session</param>
         public static void rotate_secret(Session session)
@@ -2770,7 +2770,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// First published in Citrix Hypervisor 8.2 Hotfix 2.
         /// </summary>
         /// <param name="session">The session</param>
         public static XenRef<Task> async_rotate_secret(Session session)
@@ -3479,7 +3479,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if either a PSR is running or we are waiting for a PSR to be re-run
-        /// First published in Citrix Hypervisor 8.2 Hotfix n.
+        /// First published in Citrix Hypervisor 8.2 Hotfix 2.
         /// </summary>
         public virtual bool is_psr_pending
         {
