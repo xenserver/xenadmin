@@ -36,7 +36,7 @@
 #Set and uncomment this to override the 3rd value of the product number 
 #normally fetched from branding
 #
-#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
+PRODUCT_MICRO_VERSION_OVERRIDE=2
 
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
