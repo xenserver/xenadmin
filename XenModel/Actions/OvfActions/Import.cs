@@ -69,6 +69,8 @@ namespace XenAdmin.Actions.OvfActions
 
 			#region Create appliance
 
+            CheckForCancellation();
+
             XenRef<VM_appliance> applRef = null;
 			if (applianceName != null)
             {
@@ -95,6 +97,8 @@ namespace XenAdmin.Actions.OvfActions
             XenRef<VM> vmRef = null;
             for (int i = 0; i < vmsToImport.Count; i++)
             {
+                CheckForCancellation();
+
                 int curVm = i;
                 VirtualSystem_Type vSystem = vmsToImport[i];
                 var vmName = OVF.FindSystemName(ovfObj, vSystem.id);
@@ -109,6 +113,8 @@ namespace XenAdmin.Actions.OvfActions
 
                     for (int j = 0; j < vhs.Item.Length; j++)
                     {
+                        CheckForCancellation();
+
                         int curVhs = j;
                         void UpdatePercentage(float x)
                         {
@@ -155,6 +161,8 @@ namespace XenAdmin.Actions.OvfActions
 
         private void HandleInstallSection(Session xenSession, XenRef<VM> vmRef, VirtualSystem_Type vSystem)
         {
+            CheckForCancellation();
+
             InstallSection_Type[] installSections = OVF.FindSections<InstallSection_Type>(vSystem.Items);
 
             if (installSections == null || installSections.Length <= 0)
@@ -620,6 +628,8 @@ namespace XenAdmin.Actions.OvfActions
 
         private void CreateVgpus(VirtualHardwareSection_Type system, XenRef<VM> vmRef)
         {
+            CheckForCancellation();
+
             var data = system.VirtualSystemOtherConfigurationData;
             if (data == null)
                 return;
@@ -670,6 +680,8 @@ namespace XenAdmin.Actions.OvfActions
 
         private void CreatePvsProxy(VirtualHardwareSection_Type system, XenRef<VM> vmRef)
         {
+            CheckForCancellation();
+
             var datum = system.VirtualSystemOtherConfigurationData?.FirstOrDefault(s => s.Name == "pvssite");
             if (datum == null)
                 return;

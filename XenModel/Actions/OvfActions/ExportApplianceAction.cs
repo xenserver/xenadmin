@@ -193,12 +193,6 @@ namespace XenAdmin.Actions.OvfActions
             }
         }
 
-        private void CheckForCancellation()
-        {
-            if (Cancelling)
-                throw new CancelledException();
-        }
-
         protected override void CleanOnError()
         {
             if (!Directory.Exists(m_applianceDirectory))

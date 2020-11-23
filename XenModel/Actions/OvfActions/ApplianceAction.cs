@@ -90,6 +90,12 @@ namespace XenAdmin.Actions.OvfActions
 			Description = Messages.CANCELING;
 		}
 
+        protected void CheckForCancellation()
+        {
+            if (Cancelling)
+                throw new CancelledException();
+        }
+
 	    private void InitialiseTicker()
 	    {
 	        System.Threading.Tasks.Task.Run(TickUntilCompletion);

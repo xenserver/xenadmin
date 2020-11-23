@@ -117,8 +117,7 @@ namespace XenAdmin.Actions.OvfActions
 
 			foreach (var vmMapping in m_vmMappings)
 			{
-				if (Cancelling)
-					throw new CancelledException();
+                CheckForCancellation();
 
 				string systemid = vmMapping.Key;
 				var mapping = vmMapping.Value;
@@ -150,6 +149,7 @@ namespace XenAdmin.Actions.OvfActions
 			try //import VMs
             {
                 m_package.ExtractToWorkingDir(() => Cancelling);
+                CheckForCancellation();
                 OVF.ParseEncryption(env, out m_encryptionClass, out m_encryptionVersion);
                 importedObject = Process(env, m_package.WorkingDir, m_package.Name);
 			}
