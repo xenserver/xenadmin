@@ -61,9 +61,9 @@ namespace XenAdmin.Actions.OvfActions
 
         public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
             bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr, bool startAutomatically)
-            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection)))
+            : base(connection, string.Empty)
 		{
-			m_package = package;
+			m_package = package; //this is null if importing a disk Image
 			m_vmMappings = vmMappings;
 			m_verifyManifest = verifyManifest;
 			m_verifySignature = verifySignature;
@@ -71,6 +71,9 @@ namespace XenAdmin.Actions.OvfActions
 			m_runfixups = runfixups;
 			m_selectedIsoSr = selectedIsoSr;
             _startAutomatically = startAutomatically;
+
+            if (package != null) 
+                Title = string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection));
 		}
 
         protected override void RunCore()
