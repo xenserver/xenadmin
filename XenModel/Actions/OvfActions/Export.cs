@@ -196,7 +196,7 @@ namespace XenAdmin.Actions.OvfActions
                                 var result = vhdChecker.Check(sw, ReportLevels.All);
                                 log.InfoFormat("Verifying disk {0}:\n{1}", diskFilename, sw.ToString().Replace("\0", ""));
                                 if (!result)
-                                    throw new Exception(Messages.EXPORTING_VDI_VERIFICATION_FAILURE);
+                                    throw new Exception(string.Format(Messages.EXPORTING_VDI_VERIFICATION_FAILURE, diskFilename));
                             }
                         }
                     }
