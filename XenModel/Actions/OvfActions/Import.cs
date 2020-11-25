@@ -424,7 +424,7 @@ namespace XenAdmin.Actions.OvfActions
                         b =>
                         {
                             Description = string.Format(Messages.IMPORT_VDI, filename,
-                                Util.DiskSizeString(b, 1, "F1"), Util.DiskSizeString(dataCapacity));
+                                Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(dataCapacity));
 
                             updatePercentage((float)b / dataCapacity);
                         },

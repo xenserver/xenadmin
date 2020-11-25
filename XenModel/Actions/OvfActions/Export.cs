@@ -178,7 +178,7 @@ namespace XenAdmin.Actions.OvfActions
                         HTTP_actions.get_export_raw_vdi(b =>
                             {
                                 Description = string.Format(Messages.EXPORTING_VDI, diskName, diskFilename,
-                                    Util.DiskSizeString(b, 1, "F1"), Util.DiskSizeString(vdi.virtual_size));
+                                    Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(vdi.virtual_size));
                                 updatePercentage((curVbd + (float)b / vdi.virtual_size) / vbdRefs.Count);
                             },
                             () => Cancelling, XenAdminConfigManager.Provider.GetProxyTimeout(true),
