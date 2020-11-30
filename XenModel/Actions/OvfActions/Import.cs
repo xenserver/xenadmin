@@ -129,19 +129,10 @@ namespace XenAdmin.Actions.OvfActions
                 catch
                 {
                     if (vmRef != null)
-                        try
-                        {
-                            log.Info($"Import failed. Destroying VM {vmRef.opaque_ref}");
-                            VM.destroy(Connection.Session, vmRef);
-                        }
-                        catch
-                        {
-                            //ignore
-                        }
-                        finally
-                        {
-                            vmRef = null;
-                        }
+                    {
+                        log.Info($"Import interrupted. Destroying VM {vmRef.opaque_ref}");
+                        CleanUpVm(vmRef);
+                    }
 
                     throw;
                 }
@@ -272,6 +263,7 @@ namespace XenAdmin.Actions.OvfActions
             string sourcefile = filePath;
             VirtualDisk vhdDisk = null;
             Stream dataStream = null;
+            XenRef<VDI> vdiRef = null;
 
             try
             {
@@ -344,7 +336,6 @@ namespace XenAdmin.Actions.OvfActions
                 //the target for the import. Used for SRs such as Lun per VDI (PR-1544)
 
                 Description = string.Format(Messages.IMPORT_VDI_PREPARE, filename);
-                XenRef<VDI> vdiRef = null;
                 long freespace = 0;
 
                 if (string.IsNullOrEmpty(vdiuuid))
@@ -426,9 +417,31 @@ namespace XenAdmin.Actions.OvfActions
 
                 return vdiRef;
             }
-            catch (HTTP.CancelledException)
+            catch (Exception e)
             {
-                throw new CancelledException();
+                if (vdiRef != null)
+                {
+                    log.Info($"Import interrupted. Destroying VDI {vdiRef.opaque_ref}");
+                    try
+                    {
+                        //need to wait for a bit until the VDI is released from the import task
+                        Connection.WaitFor(() =>
+                        {
+                            var vdi = Connection.Resolve(vdiRef);
+                            return vdi != null && vdi.allowed_operations.Contains(vdi_operations.destroy);
+                        }, null);
+                        VDI.destroy(Connection.Session, vdiRef);
+                    }
+                    catch
+                    {
+                        log.Error($"Failed to destroy VDI {vdiRef.opaque_ref} after interrupted import.");
+                    }
+                }
+
+                if (e is HTTP.CancelledException)
+                    throw new CancelledException();
+                
+                throw;
             }
             finally
             {
@@ -1210,6 +1223,43 @@ namespace XenAdmin.Actions.OvfActions
                 isBootable = true;
             
             rasd.Connection[0].Value = $"{rasd.Connection[0].Value},bootable={isBootable}";
+        }
+
+        private void CleanUpVm(XenRef<VM> vmRef)
+        {
+            var vdiRefs = new List<XenRef<VDI>>();
+
+            var vm = Connection.Resolve(vmRef);
+            if (vm != null)
+                foreach (var vbdRef in vm.VBDs)
+                {
+                    VBD vbd = Connection.Resolve(vbdRef);
+                    if (vbd != null)
+                    {
+                        var vdi = Connection.Resolve(vbd.VDI);
+                        if (vdi != null)
+                            vdiRefs.Add(vbd.VDI);
+                    }
+                }
+
+            try
+            {
+                VM.destroy(Connection.Session, vmRef);
+            }
+            catch
+            {
+                log.Error($"Failed to destroy VM {vmRef.opaque_ref} after interrupted import.");
+            }
+
+            foreach (var vdiRef in vdiRefs)
+                try
+                {
+                    VDI.destroy(Connection.Session, vdiRef);
+                }
+                catch
+                {
+                    log.Error($"Failed to destroy VDI {vdiRef.opaque_ref} after interrupted import.");
+                }
         }
     }
 }
