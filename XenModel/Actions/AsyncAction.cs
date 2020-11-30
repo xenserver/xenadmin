@@ -335,33 +335,6 @@ namespace XenAdmin.Actions
             }
         }
 
-        protected static void BestEffort(ref Exception caught, bool expectDisruption, Action func)
-        {
-            try
-            {
-                func();
-            }
-            catch (Exception exn)
-            {
-                if (expectDisruption &&
-                    exn is WebException && ((WebException)exn).Status == WebExceptionStatus.KeepAliveFailure)  // ignore keep-alive failures if disruption is expected
-                {
-                    return;
-                }
-
-                log.Error(exn, exn);
-                if (caught == null)
-                {
-                    caught = exn;
-                }
-            }
-        }
-
-        protected void BestEffort(ref Exception caught, Action func)
-        {
-            BestEffort(ref caught, Connection != null && Connection.ExpectDisruption, func);
-        }
-
         protected void AddCommonAPIMethodsToRoleCheck()
         {
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
