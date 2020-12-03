@@ -58,8 +58,6 @@ namespace XenAdmin.Actions.OvfActions
 
         protected object Process(EnvelopeType ovfObj, string pathToOvf, string applianceName = null)
         {
-            int vifDeviceIndex = 0;
-
             //Normalise the process
             if (ovfObj.Item is VirtualSystem_Type vstemp)
             {
@@ -110,6 +108,7 @@ namespace XenAdmin.Actions.OvfActions
                 {
                     vmRef = CreateVm(vmName, vhs, applRef, vmStartupSection);
                     SetDeviceConnections(vhs);
+                    int vifDeviceIndex = 0;
 
                     for (int j = 0; j < vhs.Item.Length; j++)
                     {
