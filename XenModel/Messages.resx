@@ -3955,11 +3955,11 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>Creating disks</value>
   </data>
-  <data name="CREATING_FILE" xml:space="preserve">
-    <value>Archiving appliance files into single package file '{0}'...</value>
-  </data>
   <data name="CREATING_MANIFEST" xml:space="preserve">
     <value>Creating manifest file...</value>
+  </data>
+  <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
+    <value>Calculating checksum for file '{0}'...</value>
   </data>
   <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
     <value>Creating new pool '{0}' with master '{1}'</value>
@@ -3969,6 +3969,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   </data>
   <data name="CREATING_NEW_FOLDERS" xml:space="preserve">
     <value>Creating new folders...</value>
+  </data>
+  <data name="CREATING_OVA_FILE" xml:space="preserve">
+    <value>Archiving appliance files into single package file '{0}'...</value>
   </data>
   <data name="CREATING_VMSS" xml:space="preserve">
     <value>Creating snapshot schedule '{0}'...</value>

@@ -11081,20 +11081,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Archiving appliance files into single package file &apos;{0}&apos;....
-        /// </summary>
-        public static string CREATING_FILE {
-            get {
-                return ResourceManager.GetString("CREATING_FILE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Creating manifest file....
         /// </summary>
         public static string CREATING_MANIFEST {
             get {
                 return ResourceManager.GetString("CREATING_MANIFEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculating checksum for file &apos;{0}&apos;....
+        /// </summary>
+        public static string CREATING_MANIFEST_CHECKSUM {
+            get {
+                return ResourceManager.GetString("CREATING_MANIFEST_CHECKSUM", resourceCulture);
             }
         }
         
@@ -11122,6 +11122,15 @@ namespace XenAdmin {
         public static string CREATING_NEW_FOLDERS {
             get {
                 return ResourceManager.GetString("CREATING_NEW_FOLDERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archiving appliance files into single package file &apos;{0}&apos;....
+        /// </summary>
+        public static string CREATING_OVA_FILE {
+            get {
+                return ResourceManager.GetString("CREATING_OVA_FILE", resourceCulture);
             }
         }
         

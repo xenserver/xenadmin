@@ -49,6 +49,8 @@ namespace XenOvf
     /// </summary>
     public class FileDigest
     {
+        public const string DEFAULT_HASHING_ALGORITHM = "SHA256";
+
         /// <summary>
         /// Creates a new instance from a line in the manifest.
         /// </summary>
@@ -69,6 +71,14 @@ namespace XenOvf
             Digest = ToArray(DigestAsString);
         }
 
+        public FileDigest(string fileName, byte[] digest, string hashingAlgorithm = DEFAULT_HASHING_ALGORITHM)
+        {
+            AlgorithmName = hashingAlgorithm;
+            Name = fileName;
+            Digest = digest;
+            DigestAsString = Digest == null ? "" : string.Join("", Digest.Select(b => $"{b:x2}"));
+        }
+
         /// <summary>
         /// Name of the file with the digest.
         /// </summary>
@@ -82,6 +92,11 @@ namespace XenOvf
         public string DigestAsString { get; }
 
         public byte[] Digest{ get; }
+
+        public string ToManifestLine()
+        {
+            return $"{AlgorithmName}({Name})= {DigestAsString}";
+        }
 
         /// <summary>
         /// Convert a hex string to a binary array.
@@ -271,12 +286,12 @@ namespace XenOvf
                     {
                         _DescriptorFileName = _archiveIterator.CurrentFileName();
                     }
-                    else if (string.Compare(extension, Properties.Settings.Default.manifestFileExtension, true) == 0)
+                    else if (string.Compare(extension, MANIFEST_EXT, true) == 0)
                     {
                         if (_DescriptorFileName == null || string.Compare(_archiveIterator.CurrentFileName(), ManifestFileName, true) != 0)
                             continue;
                     }
-                    else if (string.Compare(extension, Properties.Settings.Default.certificateFileExtension, true) == 0)
+                    else if (string.Compare(extension, CERTIFICATE_EXT, true) == 0)
                     {
                         if (_DescriptorFileName == null || string.Compare(_archiveIterator.CurrentFileName(), CertificateFileName, true) != 0)
                             continue;
@@ -357,8 +372,8 @@ namespace XenOvf
                 while (_archiveIterator.HasNext())
                 {
                     var extension = Path.GetExtension(_archiveIterator.CurrentFileName());
-                    if (string.Compare(extension, Properties.Settings.Default.manifestFileExtension, true) == 0 ||
-                        string.Compare(extension, Properties.Settings.Default.certificateFileExtension, true) == 0)
+                    if (string.Compare(extension, MANIFEST_EXT, true) == 0 ||
+                        string.Compare(extension, CERTIFICATE_EXT, true) == 0)
                         continue;
 
                     var fileDigest = manifest.Find(fd => string.Compare(fd.Name, _archiveIterator.CurrentFileName(), true) == 0);
@@ -417,6 +432,9 @@ namespace XenOvf
     {
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public const string MANIFEST_EXT = ".mf";
+        public const string CERTIFICATE_EXT = ".cert";
+
         // Cache these properties because they are expensive to get
         private string _descriptorXml;
         private byte[] _RawManifest;
@@ -449,12 +467,12 @@ namespace XenOvf
         /// <summary>
         /// According to the OVF specification, base name of the manifest file must be the same as the descriptor file.
         /// </summary>
-        protected string ManifestFileName => Name + Properties.Settings.Default.manifestFileExtension;
+        protected string ManifestFileName => Name + MANIFEST_EXT;
 
         /// <summary>
         /// According to the OVF specification, base name of the certificate file must be the same as the descriptor file.
         /// </summary>
-        protected string CertificateFileName => Name + Properties.Settings.Default.certificateFileExtension;
+        protected string CertificateFileName => Name + CERTIFICATE_EXT;
 
         /// <summary>
         /// Contents of the OVF file.
@@ -551,6 +569,7 @@ namespace XenOvf
             return RawCertificate != null;
         }
 
+        /// <exception cref="Exception">Thrown when verification fails for any reason</exception>>
         public void VerifySignature()
         {
             using (var certificate = new X509Certificate2(RawCertificate))
@@ -594,6 +613,7 @@ namespace XenOvf
 
         protected abstract string ReadAllText(string fileName);
 
+        /// <exception cref="Exception">Thrown when verification fails for any reason</exception>>
         public abstract void VerifyManifest();
 
         public abstract bool HasFile(string fileName);
