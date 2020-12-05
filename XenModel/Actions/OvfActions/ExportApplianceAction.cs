@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -75,6 +76,8 @@ namespace XenAdmin.Actions.OvfActions
 			m_eulas = eulas;
 			m_signAppliance = signAppliance;
 			m_createManifest = createManifest;
+            if (m_signAppliance && m_certificate == null)
+                throw new ArgumentNullException(nameof(m_certificate));
 			m_certificate = certificate;
 			m_encryptFiles = encryptFiles;
 			m_encryptPassword = encryptPassword;
@@ -134,7 +137,6 @@ namespace XenAdmin.Actions.OvfActions
 
             CheckForCancellation();
 			var ovfPath = Path.Combine(appFolder, appFile);
-			Description = String.Format(Messages.CREATING_FILE, appFile);
 			OVF.SaveAs(env, ovfPath);
 			PercentComplete = 85;
 
@@ -142,11 +144,11 @@ namespace XenAdmin.Actions.OvfActions
 
 			if (m_createOVA)
 			{
-                log.Info($"Archiving OVF package {m_applianceFileName} into OVA");
-				Description = String.Format(Messages.CREATING_FILE, String.Format("{0}.ova", m_applianceFileName));
-
-                ManifestAndSign(appFolder, appFile);
+                ManifestAndSign(env, appFolder, appFile);
                 PercentComplete = 90;
+
+                log.Info($"Archiving OVF package {m_applianceFileName} into OVA");
+                Description = string.Format(Messages.CREATING_OVA_FILE, string.Format("{0}.ova", m_applianceFileName));
 
                 try
                 {
@@ -172,25 +174,110 @@ namespace XenAdmin.Actions.OvfActions
 				}
 
                 PercentComplete = 95;
-                ManifestAndSign(appFolder, appFile);
+                ManifestAndSign(env, appFolder, appFile);
+            }
+            else
+            {
+                ManifestAndSign(env, appFolder, appFile);
 			}
 
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
 		}
 
-        private void ManifestAndSign(string appFolder, string appFile)
+        private void ManifestAndSign(EnvelopeType ovfEnv, string appFolder, string appFile)
         {
+            if (m_signAppliance || m_createManifest)
+                Manifest(ovfEnv, appFolder, appFile);
+            
             if (m_signAppliance)
-            {	
-                Description = Messages.SIGNING_APPLIANCE;
-                OVF.Sign(m_certificate, appFolder, appFile);
-            }
-            else if (m_createManifest)
+                Sign(m_certificate, appFolder, appFile);
+        }
+
+        private void Manifest(EnvelopeType ovfEnv, string pathToOvf, string ovfFileName)
+        {
+            var manifestFiles = new List<string> {ovfFileName};
+            
+            var files = ovfEnv?.References?.File;
+            if (files != null)
+                manifestFiles.AddRange(files.Select(f => f.href).ToList());
+
+            var fileDigests = new List<FileDigest>();
+            foreach (var mf in manifestFiles)
             {
-                Description = Messages.CREATING_MANIFEST;
-                OVF.Manifest(appFolder, appFile);
+                CheckForCancellation();
+
+                var mfPath = Path.Combine(pathToOvf, mf);
+                if (!File.Exists(mfPath))
+                    continue;
+
+                Description = string.Format(Messages.CREATING_MANIFEST_CHECKSUM, mf);
+                log.Info($"Calculating checksum for file {mf}");
+
+                using (FileStream stream = new FileStream(mfPath, FileMode.Open, FileAccess.Read))
+                using (var hasher = HashAlgorithm.Create(FileDigest.DEFAULT_HASHING_ALGORITHM))
+                {
+                    var hash = hasher?.ComputeHash(stream);
+                    fileDigests.Add(new FileDigest(Path.GetFileName(mf), hash));
+                }
             }
+
+            CheckForCancellation();
+            Description = Messages.CREATING_MANIFEST;
+            string manifest = Path.Combine(pathToOvf, $"{Path.GetFileNameWithoutExtension(ovfFileName)}{Package.MANIFEST_EXT}");
+
+            using (var stream = new FileStream(manifest, FileMode.Create, FileAccess.Write))
+            using (var sw = new StreamWriter(stream))
+            {
+                foreach (var fileDigest in fileDigests)
+                    sw.WriteLine(fileDigest.ToManifestLine());
+                sw.Flush();
+            }
+
+            log.Info($"Created manifest for package {ovfFileName}");
+        }
+
+        private void Sign(X509Certificate2 certificate, string pathToOvf, string ovfFileName)
+        {
+            Description = Messages.SIGNING_APPLIANCE;
+
+            var packageName = Path.GetFileNameWithoutExtension(ovfFileName);
+            string manifestFileName = packageName + Package.MANIFEST_EXT;
+            string manifestPath = Path.Combine(pathToOvf, manifestFileName);
+
+            CheckForCancellation();
+
+            byte[] signedHash = null;
+            using (FileStream stream = new FileStream(manifestPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var hasher = HashAlgorithm.Create(FileDigest.DEFAULT_HASHING_ALGORITHM))
+            {
+                var hash = hasher?.ComputeHash(stream);
+                if (hash != null)
+                {
+                    using (var csp = (RSACryptoServiceProvider)certificate.PrivateKey)
+                        signedHash = csp.SignHash(hash, CryptoConfig.MapNameToOID(FileDigest.DEFAULT_HASHING_ALGORITHM));
+                }
+            }
+
+            var fileDigest = new FileDigest(manifestFileName, signedHash);
+            string signatureFileName = packageName + Package.CERTIFICATE_EXT;
+            string signaturePath = Path.Combine(pathToOvf, signatureFileName);
+
+            using (FileStream stream = new FileStream(signaturePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                writer.WriteLine(fileDigest.ToManifestLine());
+
+                // Export the certificate encoded in Base64 using DER
+                string b64Cert = Convert.ToBase64String(certificate.Export(X509ContentType.SerializedCert));
+                
+                writer.WriteLine("-----BEGIN CERTIFICATE-----");
+                writer.WriteLine(b64Cert);
+                writer.WriteLine("-----END CERTIFICATE-----");
+                writer.Flush();
+            }
+
+            log.Info($"Digitally signed package {ovfFileName}");
         }
 
         protected override void CleanOnError()

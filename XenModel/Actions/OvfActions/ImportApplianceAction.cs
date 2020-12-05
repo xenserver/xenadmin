@@ -78,36 +78,40 @@ namespace XenAdmin.Actions.OvfActions
 
         protected override void RunCore()
         {
+            // The appliance has a signature and the user asked to verify it.
             if (m_verifySignature)
 			{
 				Description = Messages.VERIFYING_SIGNATURE;
 
 				try
 				{
-					// The appliance is known to have a signature and the user asked to verify it.
 					m_package.VerifySignature();
-
-					// If the appliance has a signature, then it has a manifest.
-					// Always verify the manifest after verifying the signature.
-					m_package.VerifyManifest();
+                    log.Info($"Verified signature for package {m_package.Name}");
 				}
 				catch (Exception e)
 				{
+					log.Error($"Signature verification failed for package {m_package.Name}", e);
 					throw new Exception(String.Format(Messages.VERIFYING_SIGNATURE_ERROR, e.Message));
 				}
 			}
-			else if (m_verifyManifest)
+			
+            // The appliance has
+            // - a signature (in which case it also has a manifest that should be verified AFTER the signature); or
+            // - a manifest without a signature
+            // and the user asked to verify it
+
+            if (m_verifySignature || m_verifyManifest)
 			{
 				Description = Messages.VERIFYING_MANIFEST;
 
 				try
 				{
-					// The appliance had a manifest without a signature and the user asked to verify it.
-					// VerifyManifest() throws an exception when verification fails for any reason.
 					m_package.VerifyManifest();
+                    log.Info($"Verified manifest for package {m_package.Name}");
 				}
 				catch (Exception e)
 				{
+                    log.Error($"Manifest verification failed for package {m_package.Name}", e);
 					throw new Exception(String.Format(Messages.VERIFYING_MANIFEST_ERROR, e.Message));
 				}
 			}

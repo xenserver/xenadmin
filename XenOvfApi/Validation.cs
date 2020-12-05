@@ -207,7 +207,7 @@ namespace XenOvf
             foreach (File_Type file in files)
             {
 				string ext = Path.GetExtension(file.href).ToLower();
-				if (ext == Properties.Settings.Default.manifestFileExtension || ext == Properties.Settings.Default.certificateFileExtension)
+				if (ext == Package.MANIFEST_EXT || ext == Package.CERTIFICATE_EXT)
 					continue;
 
                 if (package.HasFile(file.href))

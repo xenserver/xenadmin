@@ -104,15 +104,6 @@
     <Setting Name="knownFileExtensions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">.vhd,.pvp,.vmdk,.mf,.cert,.xva,.ovf,.wim,.vdi,.sdi,.iso,.gz</Value>
     </Setting>
-    <Setting Name="manifestFileExtension" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.mf</Value>
-    </Setting>
-    <Setting Name="certificateFileExtension" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.cert</Value>
-    </Setting>
-    <Setting Name="securityAlgorithm" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SHA1</Value>
-    </Setting>
     <Setting Name="wsseSchemaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Schemas\secext-1.0.xsd</Value>
     </Setting>
