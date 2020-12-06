@@ -146,33 +146,15 @@ namespace XenAdmin.Actions.OvfActions
 			{
                 ManifestAndSign(env, appFolder, appFile);
                 PercentComplete = 90;
-
                 log.Info($"Archiving OVF package {m_applianceFileName} into OVA");
                 Description = string.Format(Messages.CREATING_OVA_FILE, string.Format("{0}.ova", m_applianceFileName));
-
-                try
-                {
-                    OVF.ConvertOVFtoOVA(env, ovfPath, () => Cancelling, m_compressOVFfiles);
-                }
-                catch (OperationCanceledException)
-                {
-                    throw new CancelledException();
-                }
+                OVF.ConvertOVFtoOVA(env, ovfPath, CheckForCancellation, m_compressOVFfiles);
 			}
 			else if (m_compressOVFfiles)
 			{
                 log.Info($"Compressing package {m_applianceFileName}");
 				Description = Messages.COMPRESSING_FILES;
-
-				try
-				{
-                    OVF.CompressFiles(env, ovfPath, CompressionFactory.Type.Gz, () => Cancelling);
-				}
-				catch (OperationCanceledException)
-				{
-					throw new CancelledException();
-				}
-
+                OVF.CompressFiles(env, ovfPath, CompressionFactory.Type.Gz, CheckForCancellation);
                 PercentComplete = 95;
                 ManifestAndSign(env, appFolder, appFile);
             }

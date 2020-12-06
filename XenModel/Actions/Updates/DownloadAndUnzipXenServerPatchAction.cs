@@ -214,7 +214,7 @@ namespace XenAdmin.Actions
 
                             using (Stream outputStream = new FileStream(path, FileMode.Create))
                             {
-                                iterator.ExtractCurrentFile(outputStream);
+                                iterator.ExtractCurrentFile(outputStream, null);
                                 PatchPath = path;
 
                                 log.InfoFormat("Update file extracted to '{0}'", path);

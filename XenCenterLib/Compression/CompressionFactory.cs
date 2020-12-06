@@ -110,8 +110,7 @@ namespace XenCenterLib.Compression
             throw new NotSupportedException(String.Format("Type: {0} is not supported by CompressionStream Writer", compressionType));
         }
 
-        /// <exception cref="OperationCanceledException"></exception>
-        public static void UncompressFile(string inputFile, string outputFile, Type method, Func<bool> cancellingDelegate = null)
+        public static void UncompressFile(string inputFile, string outputFile, Type method, Action cancellingDelegate = null)
         {
             using (var inputStream = new FileStream(inputFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             using (var outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
@@ -121,8 +120,7 @@ namespace XenCenterLib.Compression
             }
         }
 
-        /// <exception cref="OperationCanceledException"></exception>
-        public static void CompressFile(string inputFile, string outputFile, Type method, Func<bool> cancellingDelegate = null)
+        public static void CompressFile(string inputFile, string outputFile, Type method, Action cancellingDelegate = null)
         {
             using (var inputStream = new FileStream(inputFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             using (var outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
@@ -132,20 +130,14 @@ namespace XenCenterLib.Compression
             }
         }
 
-        /// <exception cref="OperationCanceledException"></exception>
-        private static void StreamCopy(Stream input, Stream output, Func<bool> cancellingDelegate = null)
+        private static void StreamCopy(Stream input, Stream output, Action cancellingDelegate = null)
         {
             byte[] block = new byte[2 * 1024 * 1024];
 
-            while (true)
+            int n;
+            while ((n = input.Read(block, 0, block.Length)) > 0)
             {
-                if (cancellingDelegate != null && cancellingDelegate())
-                    throw new OperationCanceledException();
-
-                int n = input.Read(block, 0, block.Length);
-                if (n <= 0)
-                    break;
-
+                cancellingDelegate?.Invoke();
                 output.Write(block, 0, n);
             }
 

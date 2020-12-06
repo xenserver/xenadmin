@@ -62,7 +62,7 @@ namespace XenOvf
 
         #region CONVERSIONS
 
-        public static void ConvertOVFtoOVA(EnvelopeType ovfEnv, string ovfPath, Func<bool> cancellingDelegate,
+        public static void ConvertOVFtoOVA(EnvelopeType ovfEnv, string ovfPath, Action cancellingDelegate,
             bool compress, CompressionFactory.Type method = CompressionFactory.Type.Gz, bool deleteOriginalFiles = true)
         {
             string origDir = "";
@@ -134,13 +134,10 @@ namespace XenOvf
         }
 
         private static void AddFileToArchiveWriter(ArchiveWriter tar, string fileName,
-            bool deleteOriginalFile, Func<bool> cancellingDelegate)
+            bool deleteOriginalFile, Action cancellingDelegate)
         {
-            if (cancellingDelegate())
-                throw new OperationCanceledException();
-
             using (FileStream fs = File.OpenRead(fileName))
-                tar.Add(fs, fileName);
+                tar.Add(fs, fileName, File.GetCreationTime(fileName), cancellingDelegate);
 
             log.InfoFormat("Added file {0} to OVA archive", fileName);
 

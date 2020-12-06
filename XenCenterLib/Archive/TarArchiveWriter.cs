@@ -73,7 +73,7 @@ namespace XenCenterLib.Archive
             tar.CloseEntry();
         }
 
-        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime)
+        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
         {
             TarEntry entry = TarEntry.CreateTarEntry(fileName);
             entry.Size = filetoAdd.Length;
@@ -89,6 +89,7 @@ namespace XenCenterLib.Archive
 
             while ((n = filetoAdd.Read(buffer, 0, buffer.Length)) > 0)
             {
+                cancellingDelegate?.Invoke();
                 tar.Write(buffer, 0, n);
             }
             

@@ -36,7 +36,7 @@ namespace XenCenterLib.Archive
 {
     public abstract class ArchiveWriter : IDisposable
     {
-        public abstract void Add(Stream filetoAdd, string fileName, DateTime modificationTime);
+        public abstract void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate);
 
         public virtual void SetBaseStream(Stream outputStream)
         {
@@ -64,7 +64,7 @@ namespace XenCenterLib.Archive
 
                 using (FileStream fs = File.OpenRead(filePath))
                 {
-                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(filePath));
+                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(filePath), cancellingDelegate);
                     progressDelegate?.Invoke((int)50.0 * i / files.Length);
                 }
             }
@@ -79,16 +79,6 @@ namespace XenCenterLib.Archive
             }
         }
 
-        public void Add(Stream filetoAdd, string fileName)
-        {
-            Add( filetoAdd, fileName, DateTime.Now );
-        }
-
-        public void AddDirectory(string directoryName)
-        {
-            AddDirectory(directoryName, DateTime.Now);
-        }
-           
         public void Dispose()
         {
             Dispose(true);

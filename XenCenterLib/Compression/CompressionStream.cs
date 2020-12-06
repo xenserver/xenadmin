@@ -51,10 +51,7 @@ namespace XenCenterLib.Compression
             private get { return storedStream; }
         }
 
-        public virtual void SetBaseStream(Stream baseStream)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void SetBaseStream(Stream baseStream);
 
         private bool disposed = true;
 

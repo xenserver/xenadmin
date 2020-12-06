@@ -254,7 +254,7 @@ namespace XenAdmin.Wizards.ImportWizard
                     if (iterator.HasNext())
                     {
                         Stream ofs = new MemoryStream();
-                        iterator.ExtractCurrentFile(ofs);
+                        iterator.ExtractCurrentFile(ofs, null);
                         return new StreamReader(ofs).ReadToEnd();
                     }
 
