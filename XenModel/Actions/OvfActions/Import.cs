@@ -304,7 +304,7 @@ namespace XenAdmin.Actions.OvfActions
                         ext = Path.GetExtension(sourcefile);
                     }
 
-                    CompressionFactory.UncompressFile(filePath, sourcefile, compression.Value, () => Cancelling);
+                    CompressionFactory.UncompressFile(filePath, sourcefile, compression.Value, CheckForCancellation);
                 }
 
                 #endregion

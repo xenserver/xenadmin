@@ -46,16 +46,13 @@ namespace XenCenterLib.Archive
         /// <param name="cancellingDelegate"></param>
         /// <exception cref="ArgumentNullException">If null path is passed in</exception>
         /// <exception cref="NullReferenceException">If while combining path and current file name a null arises</exception>
-        public void ExtractAllContents(string pathToExtractTo, Func<bool> cancellingDelegate = null)
+        public void ExtractAllContents(string pathToExtractTo, Action cancellingDelegate = null)
         {
             if (String.IsNullOrEmpty(pathToExtractTo))
                 throw new ArgumentNullException();
 
             while (HasNext())
             {
-                if (cancellingDelegate != null && cancellingDelegate())
-                    throw new OperationCanceledException();
-
                 //Make the file path from the details in the archive making the path windows friendly
                 string conflatedPath = Path.Combine(pathToExtractTo, CurrentFileName()).Replace('/', Path.DirectorySeparatorChar);
 
@@ -66,9 +63,7 @@ namespace XenCenterLib.Archive
                 if (!IsDirectory())
                 {
                     using (FileStream fs = File.Create(conflatedPath))
-                    {
-                        ExtractCurrentFile(fs);
-                    }
+                        ExtractCurrentFile(fs, cancellingDelegate);
                 }
             }
         }
@@ -88,7 +83,7 @@ namespace XenCenterLib.Archive
         }
 
         public abstract bool HasNext();
-        public abstract void ExtractCurrentFile(Stream extractedFileContents);
+        public abstract void ExtractCurrentFile(Stream extractedFileContents, Action cancellingDelegate);
         public abstract string CurrentFileName();
         public abstract long CurrentFileSize();
         public abstract DateTime CurrentFileModificationTime();

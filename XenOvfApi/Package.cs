@@ -207,7 +207,7 @@ namespace XenOvf
             }
         }
 
-        public override void ExtractToWorkingDir(Func<bool> cancellingDelegate)
+        public override void ExtractToWorkingDir(Action cancellingDelegate)
         {
             WorkingDir = Path.GetDirectoryName(PackageSourceFile);
         }
@@ -343,7 +343,7 @@ namespace XenOvf
             }
         }
 
-        public override void ExtractToWorkingDir(Func<bool> cancellingDelegate)
+        public override void ExtractToWorkingDir(Action cancellingDelegate)
         {
             try
             {
@@ -351,8 +351,8 @@ namespace XenOvf
 
                 var dir = Path.GetDirectoryName(PackageSourceFile);
                 var temp = Path.Combine(dir, Path.GetRandomFileName());
+                WorkingDir = temp; //set this before extraction so it can be cleaned up if extraction is aborted
                 _archiveIterator.ExtractAllContents(temp, cancellingDelegate);
-                WorkingDir = temp;
             }
             finally
             {
@@ -418,7 +418,7 @@ namespace XenOvf
         {
             using (var ms = new MemoryStream())
             {
-                _archiveIterator.ExtractCurrentFile(ms);
+                _archiveIterator.ExtractCurrentFile(ms, null);
                 return ms.Length > 0 ? ms.ToArray() : null;
             }
         }
@@ -619,7 +619,7 @@ namespace XenOvf
         public abstract bool HasFile(string fileName);
 
         /// <returns>The directory with the extracted files</returns>
-        public abstract void ExtractToWorkingDir(Func<bool> cancellingDelegate);
+        public abstract void ExtractToWorkingDir(Action cancellingDelegate);
 
         #endregion
     }

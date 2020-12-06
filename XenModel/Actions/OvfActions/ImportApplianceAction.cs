@@ -155,7 +155,7 @@ namespace XenAdmin.Actions.OvfActions
             object importedObject;
 			try //import VMs
             {
-                m_package.ExtractToWorkingDir(() => Cancelling);
+                m_package.ExtractToWorkingDir(CheckForCancellation);
                 CheckForCancellation();
                 OVF.ParseEncryption(env, out m_encryptionClass, out m_encryptionVersion);
                 importedObject = Process(env, m_package.WorkingDir, m_package.Name);

@@ -52,6 +52,11 @@ namespace XenAdminTests.CompressionTests
                 Dispose();
                 zipStream = new MemoryStream();
             }
+
+            public override void SetBaseStream(Stream baseStream)
+            {
+                throw new System.NotImplementedException();
+            }
         }
 
         private CompressionStreamFake fakeCompressionStream;

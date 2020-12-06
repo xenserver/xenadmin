@@ -31,7 +31,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using XenCenterLib.Compression;
 using XenOvf.Definitions;
 
@@ -40,20 +39,20 @@ namespace XenOvf
 {
     public partial class OVF
     {
-        public static void CompressFiles(EnvelopeType env, string ovfPath, CompressionFactory.Type method, Func<bool> cancellingDelegate)
+        public static void CompressFiles(EnvelopeType env, string ovfPath, CompressionFactory.Type method, Action cancellingDelegate)
         {
             ProcessCompression(env, ovfPath, true, cancellingDelegate, method);
             SaveAs(env, ovfPath);
         }
 
-        public static void UncompressFiles(EnvelopeType env, string ovfPath, Func<bool> cancellingDelegate)
+        public static void UncompressFiles(EnvelopeType env, string ovfPath, Action cancellingDelegate)
         {
             ProcessCompression(env, ovfPath, false, cancellingDelegate);
             SaveAs(env, ovfPath);
         }
 
         private static void ProcessCompression(EnvelopeType env, string ovfPath, bool compress,
-            Func<bool> cancellingDelegate, CompressionFactory.Type method = CompressionFactory.Type.Gz)
+            Action cancellingDelegate, CompressionFactory.Type method = CompressionFactory.Type.Gz)
         {
             if (env.References?.File == null)
                 return;

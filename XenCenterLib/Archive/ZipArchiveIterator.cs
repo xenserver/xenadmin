@@ -146,7 +146,7 @@ namespace XenCenterLib.Archive
             return zipEntry.IsDirectory;
         }
 
-        public override void ExtractCurrentFile(Stream extractedFileContents)
+        public override void ExtractCurrentFile(Stream extractedFileContents, Action cancellingDelegate)
         {
             if (IsDirectory())
                 return;
