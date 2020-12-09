@@ -101,9 +101,6 @@
     <Setting Name="vmwEnvelopeNamespace" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.vmware.com/schema/ovf/1/envelope</Value>
     </Setting>
-    <Setting Name="knownFileExtensions" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.vhd,.pvp,.vmdk,.mf,.cert,.xva,.ovf,.wim,.vdi,.sdi,.iso,.gz</Value>
-    </Setting>
     <Setting Name="wsseSchemaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Schemas\secext-1.0.xsd</Value>
     </Setting>

@@ -323,15 +323,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".vhd,.pvp,.vmdk,.mf,.cert,.xva,.ovf,.wim,.vdi,.sdi,.iso,.gz")]
-        public string knownFileExtensions {
-            get {
-                return ((string)(this["knownFileExtensions"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Schemas\\secext-1.0.xsd")]
         public string wsseSchemaLocation {
             get {
