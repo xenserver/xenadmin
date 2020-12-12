@@ -231,13 +231,10 @@ namespace XenAdmin.Actions
                 }
             }
 
-            //get the record before marking the action as completed
-            var vm = VM.get_record(Session, vmRef);
-            vm.opaque_ref = vmRef;
-
+            var vm = Connection.WaitForCache(new XenRef<VM>(vmRef));
             Description = isTemplate ? Messages.IMPORT_TEMPLATE_IMPORTCOMPLETE : Messages.IMPORTVM_IMPORTCOMPLETE;
 
-            if (!vm.is_a_template && m_startAutomatically)
+            if (vm != null && !vm.is_a_template && m_startAutomatically)
                 new VMStartAction(vm, _warningDelegate, _failureDiagnosisDelegate).RunAsync();
         }
 
