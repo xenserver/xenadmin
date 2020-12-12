@@ -84,13 +84,10 @@ namespace XenCenterLib
                     if (bytesRead <= 0)
                         break;
 
-                    if (buffer.Any(b => b != 0x0))
+                    if (offset + bytesRead < limit)
                     {
-                        if (offset + bytesRead < limit)
-                        {
-                            // This is not the last block. Compute the partial hash.
-                            hashAlgorithm.TransformBlock(buffer, 0, bytesRead, buffer, 0);
-                        }
+                        // This is not the last block. Compute the partial hash.
+                        hashAlgorithm.TransformBlock(buffer, 0, bytesRead, buffer, 0);
                     }
 
                     offset += bytesRead;
