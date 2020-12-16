@@ -5013,6 +5013,105 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All {0} attempts originated from unknown sources..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The most common attempts originated from the following sources:.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There has been a total of {0} failed login attempts..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} attempts originated from unknown sources..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last attempt on: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP address: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of attempts: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Originator: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_ORIGINATOR {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_ORIGINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User agent: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERAGENT {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERAGENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERNAME {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There has been a number of failed attempts to login to &apos;{0}&apos; within the past hour..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string ALERT_GENERIC_HELP {
@@ -6961,56 +7060,56 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; expired on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; expired on {1}..
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRED_DESCIRPTION {
+        public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expired.
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expired.
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRED_TITLE {
+        public static string CERTIFICATE_CA_ALERT_EXPIRED_TITLE {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_TITLE", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRED_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; will expire on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; will expire on {1}..
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_DESCRIPTION {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} day(s).
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} day(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} hour(s).
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} hour(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} minute(s).
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} minute(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
             }
         }
         
@@ -7020,6 +7119,114 @@ namespace XenAdmin {
         public static string CERTIFICATE_FILETYPES {
             get {
                 return ResourceManager.GetString("CERTIFICATE_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The identity certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The identity certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expiring in {1} day(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expiring in {1} hour(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expiring in {1} minute(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The internal identity certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The internal identity certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expiring in {1} day(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expiring in {1} hour(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expiring in {1} minute(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
             }
         }
         
