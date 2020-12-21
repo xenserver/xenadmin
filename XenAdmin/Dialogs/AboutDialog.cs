@@ -48,9 +48,10 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
 
+            var revision = Program.Version.Revision;
             string buildText = Helpers.CommonCriteriaCertificationRelease
-                                   ? string.Format("{0}: {1}", Program.Version.Revision, Messages.COMMON_CRITERIA_TEXT)
-                                   : Program.Version.Revision.ToString();
+                                   ? string.Format("{0}: {1}", revision, Messages.COMMON_CRITERIA_TEXT)
+                                   : revision.ToString();
 
             VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.PRODUCT_VERSION_TEXT,
                 BrandManager.XENCENTER_VERSION, buildText, IntPtr.Size * 8);

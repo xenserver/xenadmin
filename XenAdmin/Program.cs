@@ -169,14 +169,12 @@ namespace XenAdmin
         static public void Main(string[] Args)
         {
             //Upgrade settings
-            Assembly a = Assembly.GetExecutingAssembly();
-            Version appVersion = a.GetName().Version;
-            string appVersionString = appVersion.ToString();
+            string appVersionString = Version.ToString();
             log.DebugFormat("Application version of new settings {0}", appVersionString);
 
             try
             {
-                if (Properties.Settings.Default.ApplicationVersion != appVersion.ToString())
+                if (Properties.Settings.Default.ApplicationVersion != appVersionString)
                 {
                     log.Debug("Upgrading settings...");
                     Properties.Settings.Default.Upgrade();
@@ -294,7 +292,7 @@ namespace XenAdmin
             ServicePointManager.DefaultConnectionLimit = 20;
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-            Session.UserAgent = string.Format("XenCenter/{0}", ClientVersion());
+            Session.UserAgent = $"XenCenter/{Version}";
             RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
 
@@ -466,7 +464,7 @@ namespace XenAdmin
 
         private static void logSystemDetails()
         {
-            log.InfoFormat("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            log.InfoFormat("Version: {0}", Version);
             log.InfoFormat(".NET runtime version: {0}", Environment.Version.ToString(4));
             log.InfoFormat("OS version: {0}", Environment.OSVersion);
             log.InfoFormat("UI Culture: {0}", Thread.CurrentThread.CurrentUICulture.EnglishName);
@@ -961,20 +959,6 @@ namespace XenAdmin
         }
         #endregion
 
-        private static string ClientVersion()
-        {
-            foreach (object o in Assembly.GetExecutingAssembly().GetCustomAttributes(true))
-            {
-                var attr = o as XSVersionAttribute;
-                if (attr != null)
-                {
-                    string result = attr.Version;
-                    return result == "[BRANDING_PRODUCT_VERSION]" ? "PRIVATE" : result;
-                }
-            }
-            return "MISSING";
-        }
-
         public static void ReconfigureConnectionSettings()
         {
             ReconfigureProxyAuthenticationSettings();
@@ -1061,37 +1045,13 @@ namespace XenAdmin
         /// </summary>
         public static bool ForcedExiting = false;
 
-        public static Version Version
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version;
-            }
-        }
+        public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
-		public static string CurrentLanguage
-        {
-            get
-            {
-                return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            }
-        }
+        public static string CurrentLanguage => Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
-        public static string VersionAndLanguage
-        {
-            get
-            {
-                return string.Format("{0}.{1}", Version, CurrentLanguage);
-            }
-        }
+        public static string VersionAndLanguage => $"{Version}.{CurrentLanguage}";
 
-        public static CultureInfo CurrentCulture
-        {
-            get
-            {
-                return Thread.CurrentThread.CurrentCulture;
-            }
-        }
+        public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
     }
 
     public enum ArgType { Import, License, Restore, Update, None, XenSearch, Passwords, Connect }
