@@ -87,7 +87,6 @@
     <Compile Include="StringUtility.cs" />
     <Compile Include="ToStringWrapper.cs" />
     <Compile Include="Win32.cs" />
-    <Compile Include="XSVersionAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
