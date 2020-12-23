@@ -455,7 +455,6 @@
     <Compile Include="XenAPI-Extensions\Bond.cs" />
     <Compile Include="XenAPI-Extensions\Failure.cs" />
     <Compile Include="XenAPI-Extensions\Host.cs" />
-    <Compile Include="XenAPI-Extensions\HTTP_actions.cs" />
     <Compile Include="XenAPI-Extensions\IXenObject.cs" />
     <Compile Include="XenAPI-Extensions\Message.cs" />
     <Compile Include="XenAPI-Extensions\Network.cs" />

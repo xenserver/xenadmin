@@ -31,15 +31,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Core;
+using System.IO;
+using System.Net;
 using XenAPI;
+using XenCenterLib;
 
 
 namespace XenAdmin.Actions
 {
     public class HostBackupRestoreAction : AsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public enum HostBackupRestoreType {backup, restore};
 
         private readonly HostBackupRestoreType type; 
@@ -71,47 +74,75 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            LogDescriptionChanges = false;
+
             try
             {
                 switch (type)
                 {
                     case HostBackupRestoreType.backup:
-                        this.Description = String.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name(), Util.MemorySizeStringSuitableUnits(0, false));
+                        RelatedTask = Task.create(Session, "get_host_backup_task", Host.address);
+                        log.DebugFormat("HTTP GETTING file from {0} to {1}", Host.address, filename);
 
-                        LogDescriptionChanges = false;
-                        try
-                        {
-                            HTTPHelper.Get(this, true, DataReceived, filename, Host.address,
-                                (HTTP_actions.get_ss)HTTP_actions.get_host_backup, Session.opaque_ref);
-                        }
-                        finally
-                        {
-                            LogDescriptionChanges = true;
-                        }
+                        HTTP_actions.get_host_backup(DataReceived,
+                            () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
+                            XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                            Host.address,
+                            XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                            filename, RelatedTask.opaque_ref, Session.opaque_ref);
 
-                        this.Description = String.Format(Messages.HOST_BACKEDUP, Host.Name());
+                        PollToCompletion();
+                        Description = string.Format(Messages.HOST_BACKEDUP, Host.Name());
                         break;
 
                     case HostBackupRestoreType.restore:
-                        this.Description = String.Format(Messages.RESTORING_HOST, Host.Name());
+                        Description = string.Format(Messages.RESTORING_HOST, Host.Name());
+                        RelatedTask = Task.create(Session, "put_host_restore_task", Host.address);
+                        log.DebugFormat("HTTP PUTTING file from {0} to {1}", filename, Host.address);
 
-                        HTTPHelper.Put(this, true, filename, Host.address,
-                            (HTTP_actions.put_ss)HTTP_actions.put_host_restore, Session.opaque_ref);
+                        HTTP_actions.put_host_restore(percent => PercentComplete = percent,
+                            () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
+                            XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                            Host.address,
+                            XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                            filename, RelatedTask.opaque_ref, Session.opaque_ref);
 
-                        this.Description = String.Format(Messages.HOST_RESTORED, Host.Name());
+                        PollToCompletion();
+                        Description = string.Format(Messages.HOST_RESTORED, Host.Name());
                         break;
                 }
             }
-            catch (HTTP.CancelledException)
+            catch (Exception e)
             {
-                Description = Messages.CANCELLED_BY_USER;
-                throw new CancelledException();
+                PollToCompletion(suppressFailures: true);
+
+                if (e is WebException && e.InnerException is IOException ioe && Win32.GetHResult(ioe) == Win32.ERROR_DISK_FULL)
+                    throw e.InnerException;
+
+                if (e is CancelledException || e is HTTP.CancelledException || e.InnerException is CancelledException)
+                    throw new CancelledException();
+
+                if (e.InnerException?.Message == "Received error code HTTP/1.1 403 Forbidden\r\n from the server")
+                {
+                    // RBAC Failure
+                    List<Role> roles = Connection.Session.Roles;
+                    roles.Sort();
+                    throw new Exception(String.Format(Messages.RBAC_HTTP_FAILURE, roles[0].FriendlyName()), e);
+                }
+
+                if (e.InnerException != null)
+                    throw e.InnerException;
+                throw;
+            }
+            finally
+            {
+                LogDescriptionChanges = true;
             }
         }
 
         private void DataReceived(long bytes)
         {
-            this.Description = String.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name(), Util.MemorySizeStringSuitableUnits(bytes, false));
+            Description = string.Format(Messages.BACKINGUP_HOST_WITH_DATA, Host.Name(), Util.MemorySizeStringSuitableUnits(bytes, false));
         }
 
         public override void RecomputeCanCancel()

@@ -2084,7 +2084,7 @@ Warning: you must ensure that the SR is not in use by any server not connected t
     <value>Backing up server '{0}'</value>
   </data>
   <data name="BACKINGUP_HOST_WITH_DATA" xml:space="preserve">
-    <value>Backing up server '{0}', {1} received... </value>
+    <value>Backing up server '{0}' ({1} received)... </value>
   </data>
   <data name="BACKUP_HOST" xml:space="preserve">
     <value>Back Up Server...</value>
@@ -4693,7 +4693,7 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
     <value>{0} is now available</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>Downloading update from '{0}'...</value>
+    <value>Downloading update from '{0}' ({1} of {2})...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>Downloading update {0}</value>

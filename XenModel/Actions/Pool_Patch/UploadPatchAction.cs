@@ -117,34 +117,41 @@ namespace XenAdmin.Actions
             log.InfoFormat("Uploading file '{0}' to server '{1}'", _patchName, master.Name());
             this.Description = string.Format(Messages.UPLOAD_PATCH_UPLOADING_DESCRIPTION, _patchName);
 
-            RelatedTask = Task.create(session, "uploadTask", retailPatchPath);
-
             try
             {
-                var result = HTTPHelper.Put(UpdateProgress, GetCancelling, true, Connection, RelatedTask, ref session, retailPatchPath,
-                    master.address, (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, session.opaque_ref);
+                RelatedTask = Task.create(session, "put_pool_patch_upload_task", master.address);
+                log.DebugFormat("HTTP PUTTING file from {0} to {1}", retailPatchPath, master.address);
 
-                return Connection.WaitForCache(new XenRef<Pool_patch>(result));
+                HTTP_actions.put_pool_patch_upload(UpdateProgress,
+                    () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
+                    XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                    master.address,
+                    XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                    retailPatchPath, RelatedTask.opaque_ref, session.opaque_ref);
+
+                PollToCompletion();
+                return Connection.WaitForCache(new XenRef<Pool_patch>(new XenRef<Pool_patch>(Result)));
             }
-            catch (CancelledException)
+            catch (Exception e)
             {
-                if (deleteFileOnCancel && File.Exists(retailPatchPath))
+                PollToCompletion(suppressFailures: true);
+
+                if (e is TargetInvocationException ex)
                 {
-                    File.Delete(retailPatchPath);
+                    if (ex.InnerException == null)
+                        throw;
+                    else
+                        throw ex.InnerException;
                 }
+
+                if (e is CancelledException || e is HTTP.CancelledException || e.InnerException is CancelledException)
+                {
+                    if (deleteFileOnCancel && File.Exists(retailPatchPath))
+                        File.Delete(retailPatchPath);
+                    throw new CancelledException();
+                }
+
                 throw;
-            }
-            catch (TargetInvocationException ex)
-            {
-                if (ex.InnerException != null)
-                    throw ex.InnerException;
-                else
-                    throw;
-            }
-            finally
-            {
-                Task.destroy(session, RelatedTask);
-                RelatedTask = null;
             }
         }
 
