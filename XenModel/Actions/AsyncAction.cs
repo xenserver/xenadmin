@@ -266,7 +266,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        public void PollToCompletion(double start = 0, double finish = 100)
+        public void PollToCompletion(double start = 0, double finish = 100, bool suppressFailures = false)
         {
             try
             {
@@ -288,8 +288,18 @@ namespace XenAdmin.Actions
                         log.DebugFormat("Polling for action {0}", Description);
                     }
 
-                    if (Poll(start, finish))
-                        break;
+                    try
+                    {
+                        if (Poll(start, finish))
+                            break;
+                    }
+                    catch
+                    {
+                        if (suppressFailures)
+                            break;
+                        throw;
+                    }
+
                     Thread.Sleep(900);
                 }
             }

@@ -5723,7 +5723,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backing up server &apos;{0}&apos;, {1} received... .
+        ///   Looks up a localized string similar to Backing up server &apos;{0}&apos; ({1} received)... .
         /// </summary>
         public static string BACKINGUP_HOST_WITH_DATA {
             get {
@@ -13393,7 +13393,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos; ({1} of {2})....
         /// </summary>
         public static string DOWNLOADING_PATCH_FROM {
             get {

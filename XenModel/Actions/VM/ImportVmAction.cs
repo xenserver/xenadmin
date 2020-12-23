@@ -284,9 +284,27 @@ namespace XenAdmin.Actions
 
             log.DebugFormat("Using {0} for import", hostURL);
 
-            return HTTPHelper.Put(this, HTTP_PUT_TIMEOUT, m_filename, hostURL,
-                                  (HTTP_actions.put_ssbbs)HTTP_actions.put_import,
-                                  Session.opaque_ref, false, false, SR.opaque_ref);
+            try
+            {
+                RelatedTask = Task.create(Session, "put_import_task", hostURL);
+                log.DebugFormat("HTTP PUTTING file from {0} to {1}", m_filename, hostURL);
+
+                HTTP_actions.put_import(percent => PercentComplete = percent,
+                    () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
+                    HTTP_PUT_TIMEOUT, hostURL,
+                    XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                    m_filename, RelatedTask.opaque_ref, Session.opaque_ref, false, false, SR.opaque_ref);
+                
+                PollToCompletion();
+                return Result;
+            }
+            catch (Exception e)
+            {
+                PollToCompletion(suppressFailures: true);
+                if (e is CancelledException || e is HTTP.CancelledException || e.InnerException is CancelledException)
+                    throw new CancelledException();
+                throw;
+            }
         }
 
 		public override void RecomputeCanCancel()
