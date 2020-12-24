@@ -30,34 +30,39 @@
  */
 
 using System;
-using XenAdmin.Core;
 using XenAPI;
 using System.Drawing;
-using System.IO;
 using System.Drawing.Imaging;
-using System.Threading;
+using System.IO;
+using System.Text.RegularExpressions;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Actions
 {
-
     public enum SnapshotType { DISK, DISK_AND_MEMORY, QUIESCED_DISK };
+
     public class VMSnapshotCreateAction : AsyncAction
     {
-        public const String VNC_SNAPSHOT = "XenCenter.VNCSnapshot";
-        private readonly String NewName;
-        private readonly string m_NewDescription;
-        private readonly SnapshotType m_Type;
-        private String taskResult = null;
-        private Func<VM,String,String,Image> _screenShotProvider; // 3 parameters: vm, username, password (username and password can be null)
-        public VMSnapshotCreateAction(VM vm, string NewName, string newDescription, SnapshotType type,Func<VM,String,String,Image> screenShotProvider )
-            : base(vm.Connection, String.Format(Messages.ACTION_VM_SNAPSHOT_TITLE, vm.Name()))
+        public const string VNC_SNAPSHOT = "XenCenter.VNCSnapshot";
+        private readonly string _newName;
+        private readonly string _newDescription;
+        private readonly SnapshotType _type;
+        /// <summary>
+        /// 3 parameters: vm, username, password (username and password can be null)
+        /// </summary>
+        private readonly Func<VM, string, string, Image> _screenShotProvider; 
+
+        public VMSnapshotCreateAction(VM vm, string newName, string newDescription,
+            SnapshotType type, Func<VM, string, string, Image> screenShotProvider)
+            : base(vm.Connection, string.Format(Messages.ACTION_VM_SNAPSHOT_TITLE, vm.Name()))
         {
-            this.VM = vm;
-            this.NewName = NewName;
-            this.m_Type = type;
+            VM = vm;
+            _newName = newName;
+            _newDescription = newDescription;
+            _type = type;
             _screenShotProvider = screenShotProvider;
-            this.m_NewDescription = newDescription;
+
             switch (type)
             {
                 case SnapshotType.QUIESCED_DISK:
@@ -70,7 +75,8 @@ namespace XenAdmin.Actions
                     ApiMethodsToRoleCheck.Add("vm.snapshot");
                     break;
             }
-            ApiMethodsToRoleCheck.Add("vm.set_name_description");
+
+            ApiMethodsToRoleCheck.Add("vm.set_name_description", "vm.create_new_blob");
         }
 
         protected override void Run()
@@ -78,40 +84,40 @@ namespace XenAdmin.Actions
             Description = Messages.SNAPSHOTTING;
 
             // Take screenshot before snapshot begins, to avoid possible console switching (CA-211369)
-            // The screenshot is optional. If it throws an exception, we will do without it. CA-37095/CA-37103.
-            Image snapshot = null;
+            Image screenshot = null;
             try
             {
-                if (VM.power_state == vm_power_state.Running && m_Type == SnapshotType.DISK_AND_MEMORY)
+                if (VM.power_state == vm_power_state.Running && _type == SnapshotType.DISK_AND_MEMORY)
                 {
-                    // use the sudo credentials for the snapshot (can be null) (CA-91132)
-                    snapshot = _screenShotProvider(VM, sudoUsername, sudoPassword);
+                    // use the sudo credentials for the screenshot (can be null) (CA-91132)
+                    screenshot = _screenShotProvider(VM, sudoUsername, sudoPassword);
                 }
             }
-            catch (Exception)
+            catch
             {
+                //Ignore; the screenshot is optional, we will do without it (CA-37095/CA-37103)
             }
 
-            if (m_Type == SnapshotType.QUIESCED_DISK)
+            switch (_type)
             {
-                RelatedTask = XenAPI.VM.async_snapshot_with_quiesce(Session, VM.opaque_ref, NewName);
+                case SnapshotType.QUIESCED_DISK:
+                    RelatedTask = VM.async_snapshot_with_quiesce(Session, VM.opaque_ref, _newName);
+                    break;
+                case SnapshotType.DISK_AND_MEMORY:
+                    RelatedTask = VM.async_checkpoint(Session, VM.opaque_ref, _newName);
+                    break;
+                default:
+                    RelatedTask = VM.async_snapshot(Session, VM.opaque_ref, _newName);
+                    break;
             }
-            else if (m_Type == SnapshotType.DISK_AND_MEMORY)
-            {
-                RelatedTask = XenAPI.VM.async_checkpoint(Session, VM.opaque_ref, NewName);
-            }
-            else
-            {
-                RelatedTask = XenAPI.VM.async_snapshot(Session, VM.opaque_ref, NewName);
-            }
+            
             PollToCompletion();
-            if (String.IsNullOrEmpty(taskResult) || !taskResult.StartsWith("<value>") || !taskResult.EndsWith("</value>"))
+
+            if (string.IsNullOrEmpty(Result))
                 return;
 
-            string newVmRef = taskResult.Substring(7, taskResult.Length - 15);
-            XenAPI.VM.set_name_description(Session, newVmRef, m_NewDescription);
-
-            SaveImageInBlob(newVmRef, snapshot);
+            VM.set_name_description(Session, Result, _newDescription);
+            SaveImageInBlob(Result, screenshot);
 
             Description = Messages.SNAPSHOTTED;
         }
@@ -119,25 +125,20 @@ namespace XenAdmin.Actions
         private void SaveImageInBlob(string newVmRef, Image image)
         {
             if (image == null)
-                return;  // Discarded
+                return;
 
-            XenRef<Blob> blobRef = XenAPI.VM.create_new_blob(Session, newVmRef, VNC_SNAPSHOT, "image/jpeg", false);
+            XenRef<Blob> blobRef = VM.create_new_blob(Session, newVmRef, VNC_SNAPSHOT, "image/jpeg", false);
 
-            Blob blob = null;
-            while ((blob = Connection.Resolve(blobRef)) == null) Thread.Sleep(1000);
+            Blob blob = Connection.WaitForCache(blobRef);
+            if (blob == null)
+                return;
+
             using (MemoryStream saveStream = new MemoryStream())
             {
                 image.Save(saveStream, ImageFormat.Jpeg);
                 saveStream.Position = 0;
                 blob.Save(saveStream, Session);
             }
-        }
-
-        public override void DestroyTask()
-        {
-            taskResult = XenAPI.Task.get_result(Session, RelatedTask.opaque_ref);
-
-            base.DestroyTask();
         }
     }
 }

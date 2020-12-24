@@ -251,7 +251,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        public virtual void DestroyTask()
+        public void DestroyTask()
         {
             if (Session == null || string.IsNullOrEmpty(Session.opaque_ref) || RelatedTask == null)
                 return;
