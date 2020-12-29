@@ -314,7 +314,7 @@ namespace XenAdmin.Actions.GUIActions
         /// </summary>
         public static bool IsTaskUnwanted(Task task)
         {
-            return task.XenCenterUUID() == Program.XenCenterUUID ||
+            return task.GetXenCenterUUID() == Program.XenCenterUUID ||
                    task.Connection.Resolve(task.subtask_of) != null ||
                    GetVmOperation(task) == vm_operations.unknown;
         }
