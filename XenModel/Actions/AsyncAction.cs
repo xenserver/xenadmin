@@ -32,6 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text.RegularExpressions;
+using System.Threading;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -134,8 +136,6 @@ namespace XenAdmin.Actions
 
             return xc.ElevatedSession(sudoUsername, sudoPassword);
         }
-
-        public static bool ForcedExiting => XenAdminConfigManager.Provider.ForcedExiting;
 
         /// <summary>
         /// Prepare the action's task for exit by removing the XenCenterUUID.
@@ -251,7 +251,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        public void DestroyTask()
+        protected void DestroyTask()
         {
             if (Session == null || string.IsNullOrEmpty(Session.opaque_ref) || RelatedTask == null)
                 return;
@@ -268,7 +268,107 @@ namespace XenAdmin.Actions
 
         public void PollToCompletion(double start = 0, double finish = 100)
         {
-            new TaskPoller(this, start, finish).PollToCompletion();
+            try
+            {
+                DateTime startTime = DateTime.Now;
+                int lastDebug = 0;
+                log.InfoFormat("Started polling task {0}", RelatedTask.opaque_ref);
+                log.DebugFormat("Polling for action {0}", Description); //log once we start
+
+                while (true)
+                {
+                    if (XenAdminConfigManager.Provider.ForcedExiting && !SafeToExit)
+                        throw new CancelledException();
+
+                    //then log every 30sec
+                    int currDebug = (int)(DateTime.Now - startTime).TotalSeconds / 30;
+                    if (currDebug > lastDebug)
+                    {
+                        lastDebug = currDebug;
+                        log.DebugFormat("Polling for action {0}", Description);
+                    }
+
+                    if (Poll(start, finish))
+                        break;
+                    Thread.Sleep(900);
+                }
+            }
+            finally
+            {
+                DestroyTask();
+            }
+        }
+
+        /// <summary>
+        /// Polls task and returns whether it is completed
+        /// </summary>
+        private bool Poll(double start, double finish)
+        {
+            Session session = Session;
+            Task task;
+            Result = "";
+
+            try
+            {
+                task = (Task)DoWithSessionRetry(ref session, (Task.TaskGetRecordOp)Task.get_record,
+                    RelatedTask.opaque_ref);
+            }
+            catch (Failure exn)
+            {
+                if (exn.ErrorDescription.Count > 1 && 
+                    exn.ErrorDescription[0] == Failure.HANDLE_INVALID &&
+                    exn.ErrorDescription[1] == "task")
+                {
+                    log.WarnFormat("Invalid task handle {0} - task is finished.", RelatedTask.opaque_ref);
+                    PercentComplete = (int)finish;
+                    return true;
+                }
+                else
+                    throw;
+            }
+            finally
+            {
+                Session = session;
+            }
+
+            Tick((int)(start + task.progress * (finish - start)),
+                task.Description() == "" ? Description : task.Description());
+
+            switch (task.status)
+            {
+                case task_status_type.failure:
+                    if (task.error_info.Length > 1 &&
+                        task.error_info[0] == Failure.HANDLE_INVALID &&
+                        task.error_info[1] == "task")
+                    {
+                        log.WarnFormat("Invalid task handle {0} - task is finished.", RelatedTask.opaque_ref);
+                        PercentComplete = (int)finish;
+                        return true;
+                    }
+                    else
+                    {
+                        log.WarnFormat("Task {0} failed: {1}", RelatedTask.opaque_ref,
+                            task.error_info.Length > 0 ? task.error_info[0] : "Unknown failure");
+                        throw new Failure(task.error_info);
+                    }
+
+                case task_status_type.success:
+                    log.InfoFormat("Task {0} finished successfully", RelatedTask.opaque_ref);
+                    if (task.result != "") // Work around CA-6597
+                    {
+                        Match m = Regex.Match(Result, "<value>(.*)</value>");
+                        if (m.Success)
+                            Result = m.Groups[1].Value;
+                    }
+                    return true;
+
+                case task_status_type.cancelled:
+                    log.InfoFormat("Task {0} was cancelled", RelatedTask.opaque_ref);
+                    throw new CancelledException();
+
+                default:
+                    return false;
+            }
         }
 
         /// <summary>

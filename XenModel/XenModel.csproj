@@ -330,7 +330,6 @@
     <Compile Include="Network\DisconnectionException.cs" />
     <Compile Include="Folder.cs" />
     <Compile Include="Network\NetworkingHelper.cs" />
-    <Compile Include="Network\TaskPoller.cs" />
     <Compile Include="WLB\WlbConfigurationBase.cs" />
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
