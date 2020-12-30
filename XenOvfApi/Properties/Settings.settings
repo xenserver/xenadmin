@@ -93,7 +93,7 @@
       <Value Profile="(Default)">false</Value>
     </Setting>
     <Setting Name="RequiredValidations" Type="System.Byte" Scope="Application">
-      <Value Profile="(Default)">127</Value>
+      <Value Profile="(Default)">63</Value>
     </Setting>
     <Setting Name="vmwNamespacePrefix" Type="System.String" Scope="Application">
       <Value Profile="(Default)">vmwovf</Value>

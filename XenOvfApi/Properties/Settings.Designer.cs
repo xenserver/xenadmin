@@ -296,7 +296,7 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127")]
+        [global::System.Configuration.DefaultSettingValueAttribute("63")]
         public byte RequiredValidations {
             get {
                 return ((byte)(this["RequiredValidations"]));
