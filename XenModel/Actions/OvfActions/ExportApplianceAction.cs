@@ -76,9 +76,9 @@ namespace XenAdmin.Actions.OvfActions
 			m_eulas = eulas;
 			m_signAppliance = signAppliance;
 			m_createManifest = createManifest;
+            m_certificate = certificate;
             if (m_signAppliance && m_certificate == null)
                 throw new ArgumentNullException(nameof(m_certificate));
-			m_certificate = certificate;
 			m_encryptFiles = encryptFiles;
 			m_encryptPassword = encryptPassword;
 			m_createOVA = createOVA;
