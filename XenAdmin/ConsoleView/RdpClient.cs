@@ -225,7 +225,6 @@ namespace XenAdmin.ConsoleView
             get { return rdpControl == null ? 0 : (rdpClient9 == null ? rdpClient6.DesktopWidth : rdpClient9.DesktopWidth); }
         }
 
-        private static readonly List<System.Windows.Forms.Timer> RdpCleanupTimers = new List<System.Windows.Forms.Timer>();
         void rdpClient_OnDisconnected(object sender, AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent e)
         {
             Program.AssertOnEventThread();
@@ -375,44 +374,57 @@ namespace XenAdmin.ConsoleView
         }
 
         private bool disposed;
-        public void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
-            if(!disposed)
+            if (!disposed && disposing)
             {
-                if(disposing)
+                if (rdpControl != null)
                 {
-                    if (rdpControl != null)
+                    // We need to dispose the rdp control. However, doing it immediately (in the control's own
+                    // OnDisconnected event) will cause a horrible crash. Instead, start a timer that will
+                    // call the dispose method on the GUI thread at the next available opportunity. CA-12902
+                    // Do not use too small an interval as the accuracy of System.Windows.Forms.Timer is 55ms.
+
+                    int disposalAttempts = 5;
+                    Timer timer = new Timer {Interval = 100};
+
+                    timer.Tick += (sender, e) =>
                     {
-                        // We need to dispose the rdp control. However, doing it immediately (in the control's own
-                        // OnDisconnected event) will cause a horrible crash. Instead, start a timer that will
-                        // call the dispose method on the GUI thread at the next available opportunity. CA-12902
-                        Timer t = new Timer();
-                        t.Tick += delegate
-                                      {
-                                          try
-                                          {
-                                              Log.Debug("RdpClient Dispose(): rdpControl.Dispose() in delegate");
-                                              rdpControl.Dispose();
-                                          }
-                                          catch (Exception)
-                                          {
-                                              // We often get NullReferenceException here
-                                          }
-                                          t.Stop();
-                                          RdpCleanupTimers.Remove(t);
-                                          Log.Debug("RdpClient Dispose(): Timer stopped and removed in delegate");
-                                      };
-                        t.Interval = 1;
-                        RdpCleanupTimers.Add(t);
-                        Log.DebugFormat("RdpClient Dispose(): Start timer (timers count {0})", RdpCleanupTimers.Count);
-                        t.Start();
-                    }
-                    else
-                        Log.Debug("RdpClient Dispose(): rdpControl == null");
+                        if (rdpControl != null)
+                        {
+                            try
+                            {
+                                rdpControl.Dispose();
+                                Log.Debug("Disposed of rdpControl in timer's tick.");
+                            }
+                            catch (Exception ex)
+                            {
+                                if (disposalAttempts > 0)
+                                {
+                                    disposalAttempts--;
+                                    Log.Debug($"Failed to dispose of rdpControl. Retrying ({disposalAttempts} left).");
+                                    return;
+                                }
+
+                                Log.Debug("Failed to dispose of rdpControl. Quitting.", ex);
+                            }
+                        }
+
+                        rdpControl = null;
+                        disposed = true;
+
+                        if (sender is Timer t)
+                        {
+                            t.Stop();
+                            t.Dispose();
+                            Log.Debug("Stopped and disposed of the timer.");
+                        }
+                    };
+
+                    timer.Start();
                 }
-                rdpControl = null;
-                Log.Debug("RdpClient Dispose(): disposed = true");
-                disposed = true;
+                else
+                    Log.Debug("RdpControl is null");
             }
         }
 
