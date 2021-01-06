@@ -30,8 +30,10 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;
@@ -135,6 +137,20 @@ namespace XenAdmin.Diagnostics.Problems
         }
 
         #endregion
+
+        public static List<AsyncAction> GetUnwindChangesActions(List<Problem> problems)
+        {
+            if (problems == null)
+                return new List<AsyncAction>();
+
+            var actions = from problem in problems
+                where problem.SolutionActionCompleted
+                let action = problem.CreateUnwindChangesAction()
+                where action != null && action.Connection != null && action.Connection.IsConnected
+                select action;
+
+            return actions.ToList();
+        }
     }
 
 
