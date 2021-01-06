@@ -38,12 +38,13 @@ using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using System.Windows.Forms;
+using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
-    public partial class RollingUpgradeWizard : UpdateUpgradeWizard
+    public partial class RollingUpgradeWizard : XenWizardBase
     {
         private readonly RollingUpgradeUpgradePage RollingUpgradeUpgradePage;
         private readonly RollingUpgradeWizardSelectPool RollingUpgradeWizardSelectPool;
@@ -136,7 +137,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void RevertResolvedPreChecks()
         {
-            var subActions = GetUnwindChangesActions(RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved);
+            var subActions = Problem.GetUnwindChangesActions(RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved);
             if (subActions.Count > 0)
             {
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, Messages.REVERT_WIZARD_CHANGES,

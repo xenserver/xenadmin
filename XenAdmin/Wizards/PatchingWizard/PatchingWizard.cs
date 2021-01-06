@@ -40,6 +40,7 @@ using System.Linq;
 using System.IO;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -51,7 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     /// we are not allow to override equals. YOU SHOULD NOT USE ANY OPERATION THAT IMPLIES CALL EQUALS OF Pool_patch or Host_patch
     /// You should do it manually or use delegates.
     /// </summary>
-    public partial class PatchingWizard : UpdateUpgradeWizard
+    public partial class PatchingWizard : XenWizardBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -240,7 +241,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                 Messages.REVERTED_WIZARD_CHANGES,
-                GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
+                Problem.GetUnwindChangesActions(PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved));
 
             CleanUploadedPatches(true);
             RemoveDownloadedPatches();
