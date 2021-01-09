@@ -109,7 +109,6 @@
             resources.ApplyResources(this.sectionHeaderLabel3, "sectionHeaderLabel3");
             this.sectionHeaderLabel3.LineColor = System.Drawing.SystemColors.Window;
             this.sectionHeaderLabel3.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionHeaderLabel3.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionHeaderLabel3.Name = "sectionHeaderLabel3";
             // 
             // m_tableLayoutPanelEncryption
@@ -165,7 +164,6 @@
             resources.ApplyResources(this.sectionHeaderLabel2, "sectionHeaderLabel2");
             this.sectionHeaderLabel2.LineColor = System.Drawing.SystemColors.Window;
             this.sectionHeaderLabel2.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionHeaderLabel2.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionHeaderLabel2.Name = "sectionHeaderLabel2";
             // 
             // sectionHeaderLabel1
@@ -173,7 +171,6 @@
             resources.ApplyResources(this.sectionHeaderLabel1, "sectionHeaderLabel1");
             this.sectionHeaderLabel1.LineColor = System.Drawing.SystemColors.Window;
             this.sectionHeaderLabel1.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionHeaderLabel1.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionHeaderLabel1.Name = "sectionHeaderLabel1";
             // 
             // tableLayoutPanel2
@@ -189,12 +186,12 @@
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_labelCertificate, 2, 1);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_labelPrivateKeyPwd, 2, 2);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_checkBoxSign, 1, 0);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonBrowseCert, 5, 1);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonBrowseCert, 4, 1);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_textBoxPrivateKeyPwd, 3, 2);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_textBoxCertificate, 3, 1);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_ctrlErrorCert, 3, 3);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonValidate, 5, 2);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_pictureBoxTickValidate, 6, 2);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonValidate, 4, 2);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_pictureBoxTickValidate, 5, 2);
             this.m_tableLayoutPanelManifest.Name = "m_tableLayoutPanelManifest";
             // 
             // m_labelCertificate
@@ -224,7 +221,6 @@
             // 
             // m_textBoxPrivateKeyPwd
             // 
-            this.m_tableLayoutPanelManifest.SetColumnSpan(this.m_textBoxPrivateKeyPwd, 2);
             resources.ApplyResources(this.m_textBoxPrivateKeyPwd, "m_textBoxPrivateKeyPwd");
             this.m_textBoxPrivateKeyPwd.Name = "m_textBoxPrivateKeyPwd";
             this.m_textBoxPrivateKeyPwd.UseSystemPasswordChar = true;
@@ -232,7 +228,6 @@
             // 
             // m_textBoxCertificate
             // 
-            this.m_tableLayoutPanelManifest.SetColumnSpan(this.m_textBoxCertificate, 2);
             resources.ApplyResources(this.m_textBoxCertificate, "m_textBoxCertificate");
             this.m_textBoxCertificate.Name = "m_textBoxCertificate";
             this.m_textBoxCertificate.TextChanged += new System.EventHandler(this.m_textBoxCertificate_TextChanged);
@@ -240,7 +235,6 @@
             // m_ctrlErrorCert
             // 
             resources.ApplyResources(this.m_ctrlErrorCert, "m_ctrlErrorCert");
-            this.m_tableLayoutPanelManifest.SetColumnSpan(this.m_ctrlErrorCert, 2);
             this.m_ctrlErrorCert.Name = "m_ctrlErrorCert";
             // 
             // m_buttonValidate
