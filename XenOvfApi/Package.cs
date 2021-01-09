@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using XenCenterLib;
@@ -49,8 +48,6 @@ namespace XenOvf
     /// </summary>
     public class FileDigest
     {
-        public const string DEFAULT_HASHING_ALGORITHM = "SHA256";
-
         /// <summary>
         /// Creates a new instance from a line in the manifest.
         /// </summary>
@@ -71,7 +68,7 @@ namespace XenOvf
             Digest = ToArray(DigestAsString);
         }
 
-        public FileDigest(string fileName, byte[] digest, string hashingAlgorithm = DEFAULT_HASHING_ALGORITHM)
+        public FileDigest(string fileName, byte[] digest, string hashingAlgorithm)
         {
             AlgorithmName = hashingAlgorithm;
             Name = fileName;
@@ -592,7 +589,7 @@ namespace XenOvf
                 // Do this independently to minimize the number of files opened concurrently.
                 using (Stream stream = new MemoryStream(RawManifest))
                 {
-                    if (!StreamUtilities.VerifyAgainstDigest(stream, stream.Length, fileDigest.AlgorithmName, fileDigest.Digest, certificate.PublicKey.Key as RSACryptoServiceProvider))
+                    if (!StreamUtilities.VerifyAgainstDigest(stream, stream.Length, fileDigest.AlgorithmName, fileDigest.Digest, certificate))
                         throw new Exception(string.Format(Messages.SECURITY_SIGNATURE_FAILED, fileDigest.Name));
                 }
             }

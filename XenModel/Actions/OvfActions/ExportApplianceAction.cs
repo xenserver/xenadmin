@@ -33,11 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
+using XenCenterLib;
 using XenCenterLib.Compression;
 using XenOvf;
 using XenOvf.Definitions;
@@ -197,10 +197,9 @@ namespace XenAdmin.Actions.OvfActions
                 log.Info($"Calculating checksum for file {mf}");
 
                 using (FileStream stream = new FileStream(mfPath, FileMode.Open, FileAccess.Read))
-                using (var hasher = HashAlgorithm.Create(FileDigest.DEFAULT_HASHING_ALGORITHM))
                 {
-                    var hash = hasher?.ComputeHash(stream);
-                    fileDigests.Add(new FileDigest(Path.GetFileName(mf), hash));
+                    var hash = StreamUtilities.ComputeHash(stream, out var hashAlgorithm);
+                    fileDigests.Add(new FileDigest(Path.GetFileName(mf), hash, hashAlgorithm));
                 }
             }
 
@@ -229,19 +228,13 @@ namespace XenAdmin.Actions.OvfActions
 
             CheckForCancellation();
 
-            byte[] signedHash = null;
+            FileDigest fileDigest;
             using (FileStream stream = new FileStream(manifestPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (var hasher = HashAlgorithm.Create(FileDigest.DEFAULT_HASHING_ALGORITHM))
             {
-                var hash = hasher?.ComputeHash(stream);
-                if (hash != null)
-                {
-                    using (var csp = (RSACryptoServiceProvider)certificate.PrivateKey)
-                        signedHash = csp.SignHash(hash, CryptoConfig.MapNameToOID(FileDigest.DEFAULT_HASHING_ALGORITHM));
-                }
+                var signedHash = StreamUtilities.ComputeSignedHash(stream, certificate, out var hashAlgorithm);
+                fileDigest = new FileDigest(manifestFileName, signedHash, hashAlgorithm);
             }
 
-            var fileDigest = new FileDigest(manifestFileName, signedHash);
             string signatureFileName = packageName + Package.CERTIFICATE_EXT;
             string signaturePath = Path.Combine(pathToOvf, signatureFileName);
 
