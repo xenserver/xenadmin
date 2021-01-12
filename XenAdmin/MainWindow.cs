@@ -243,7 +243,7 @@ namespace XenAdmin
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
-            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
+            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter");
 
             statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
         }
@@ -570,7 +570,8 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                HealthCheck.SendProxySettingsToHealthCheck();
+                if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+                    HealthCheck.SendProxySettingsToHealthCheck();
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -623,7 +624,7 @@ namespace XenAdmin
                 Updates.CheckForUpdates(false);
             }
 
-            if (!Program.RunInAutomatedTestMode)
+            if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter"))
             {
                 // start healthCheckResult thread
                 healthCheckResultTimer.Interval = 1000 * 60 * 60; // 1 hour
@@ -990,15 +991,18 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
-                ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
-            ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
-            ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+            {
+                if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
+                    ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
+                ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
+                ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
+            }
 
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
             Updates.CheckHotfixEligibility(connection);
-
-            HealthCheck.SendMetadataToHealthCheck();
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+                HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
         }
 
