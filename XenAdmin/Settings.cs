@@ -411,7 +411,8 @@ namespace XenAdmin
                 Application.Exit();
             }
 
-            HealthCheck.SendMetadataToHealthCheck();
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+                HealthCheck.SendMetadataToHealthCheck();
         }
 
         private static void EncryptServerList()
