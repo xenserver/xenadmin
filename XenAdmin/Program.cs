@@ -429,12 +429,12 @@ namespace XenAdmin
 
                     if (firstArgType == ArgType.Passwords)
                     {
-                        log.Error("Refusing to accept passwords request down pipe.  Use XenCenterMain.exe directly");
+                        log.ErrorFormat("Refusing to accept passwords request down pipe.  Use {0}Main.exe directly", BrandManager.BRAND_CONSOLE.Replace(" ",""));
                         return;
                     }
                     if (firstArgType == ArgType.Connect)
                     {
-                        log.Error("Connect not supported down pipe. Use XenCenterMain.exe directly");
+                        log.ErrorFormat("Connect not supported down pipe. Use {0}Main.exe directly", BrandManager.BRAND_CONSOLE.Replace(" ",""));
                         return;
                     }
                     if (firstArgType == ArgType.None)

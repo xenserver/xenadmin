@@ -59,6 +59,7 @@ rebranding_global()
         -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
+		-e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
         $1
 }
 
@@ -94,6 +95,7 @@ done
 #xenadmin resouces
 RESX_rebranding "${REPO}/XenAdmin/Properties/Resources"
 rebranding_global ${REPO}/XenAdmin/app.config
+rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 
 #XenModel
 rebranding_global ${REPO}/XenModel/BrandManager.cs
@@ -115,6 +117,8 @@ sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
           -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \
           -e "s/@COMPANY_NAME_SHORT@/${BRANDING_COMPANY_NAME_SHORT}/g" \
           -e "s/@BRAND_CONSOLE@/${BRANDING_BRAND_CONSOLE}/g" \
+		  -e "s/@BRAND_CONSOLE_NO_SPACE@/${BRANDING_BRAND_CONSOLE_NO_SPACE}/g" \
+		  -e "s/@BRAND_CONSOLE_SHORT@/${BRANDING_BRAND_CONSOLE_SHORT}/g" \
           -e "s/@PRODUCT_BRAND@/${BRANDING_PRODUCT_BRAND}/g" \
     ${REPO}/WixInstaller/branding.wxi
 
