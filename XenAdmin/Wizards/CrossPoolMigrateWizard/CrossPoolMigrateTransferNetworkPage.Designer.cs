@@ -54,9 +54,6 @@
             resources.ApplyResources(this.networkComboBox, "networkComboBox");
             this.networkComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.networkComboBox.FormattingEnabled = true;
-            this.networkComboBox.IncludeOnlyEnabledNetworksInComboBox = false;
-            this.networkComboBox.IncludeOnlyNetworksWithIPAddresses = false;
-            this.networkComboBox.IncludePoolNameInComboBox = false;
             this.networkComboBox.Name = "networkComboBox";
             // 
             // blurbText

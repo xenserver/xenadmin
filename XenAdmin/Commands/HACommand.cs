@@ -29,32 +29,215 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Network;
+using System.Linq;
+using System.Windows.Forms;
 using XenAPI;
+using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAdmin.Wizards;
-using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Linq;
 
 
 namespace XenAdmin.Commands
 {
     /// <summary>
-    /// Launches the HA wizard.
+    /// IF HA is not enabled, it launches the HA wizard, otherwise the HA config dialog
     /// </summary>
-    internal class HACommand : Command
+    internal class HAConfigureCommand : HACommand
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private RbacMethodList HA_PERMISSION_CHECKS = new RbacMethodList(
+            "pool.set_ha_host_failures_to_tolerate",
+            "pool.sync_database",
+            "vm.set_ha_restart_priority",
+            "pool.ha_compute_hypothetical_max_host_failures_to_tolerate"
+        );
 
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
         /// </summary>
+        public HAConfigureCommand()
+        {
+        }
+
+        public HAConfigureCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+            : base(mainWindow, selection)
+        {
+        }
+
+        public HAConfigureCommand(IMainWindow mainWindow, IXenConnection connection)
+            : base(mainWindow, Helpers.GetPoolOfOne(connection))
+        {
+        }
+
+        public HAConfigureCommand(IMainWindow mainWindow, Pool pool)
+            : base(mainWindow, pool)
+        {
+        }
+
+        private void Execute(IXenConnection connection)
+        {
+            if (connection == null)
+                return;
+
+            Pool pool = Helpers.GetPool(connection);
+            if (pool == null)
+                return;
+
+            if (Helpers.FeatureForbidden(pool, Host.RestrictHA))
+            {
+                // Show upsell dialog
+                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL,
+                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
+                    dlg.ShowDialog(Parent);
+            }
+            else if (pool.ha_enabled)
+            {
+                if (pool.ha_statefiles.All(sf => pool.Connection.Resolve(new XenRef<VDI>(sf)) == null))//empty gives true, which is correct
+                {
+                    log.ErrorFormat("Cannot resolve HA statefile VDI (pool {0} has {1} statefiles).",
+                        pool.Name(), pool.ha_statefiles.Length);
+
+                    using (var dlg = new ErrorDialog(string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
+                        ThreeButtonDialog.ButtonOK)
+                    {
+                        WindowTitle = Messages.CONFIGURE_HA
+                    })
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
+                }
+                else if (!Role.CanPerform(HA_PERMISSION_CHECKS, pool.Connection))
+                {
+                    var msg = string.Format(Messages.RBAC_HA_CONFIGURE_WARNING,
+                        Role.FriendlyCSVRoleList(Role.ValidRoleList(HA_PERMISSION_CHECKS, pool.Connection)),
+                        Role.FriendlyCSVRoleList(pool.Connection.Session.Roles));
+
+                    using (var dlg = new ErrorDialog(msg))
+                        dlg.ShowDialog(Parent);
+                }
+                else
+                {
+                    MainWindowCommandInterface.ShowPerConnectionWizard(connection, new EditVmHaPrioritiesDialog(pool));
+                }
+            }
+            else
+            {
+                MainWindowCommandInterface.ShowPerConnectionWizard(connection, new HAWizard(pool));
+            }
+        }
+
+        protected override void ExecuteCore(SelectedItemCollection selection)
+        {
+            Execute(selection[0].Connection);
+        }
+
+        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        {
+            return CanExecuteHACommand(selection);
+        }
+
+        protected override string GetCantExecuteReasonCore(IXenObject item)
+        {
+            var reason = base.GetCantExecuteReasonCore(item);
+            if (!string.IsNullOrEmpty(reason) && reason != Messages.UNKNOWN)
+                return reason;
+
+            Pool pool = item == null ? null : Helpers.GetPool(item.Connection);
+
+            if (pool != null && !pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) && pool.is_psr_pending)
+                return Messages.ROTATE_POOL_SECRET_PENDING_HA;
+
+            return Messages.UNKNOWN;
+        }
+
+        protected override bool CanExecute(Pool pool)
+        {
+            return pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) || !pool.is_psr_pending;
+        }
+
+        public override string MenuText => Messages.CONFIGURE_HA_ELLIPSIS;
+    }
+
+    internal class HADisableCommand : HACommand
+    {
+        /// <summary>
+        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
+        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
+        /// </summary>
+        public HADisableCommand()
+        {
+        }
+
+        public HADisableCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+            : base(mainWindow, selection)
+        {
+        }
+
+        public HADisableCommand(IMainWindow mainWindow, IXenConnection connection)
+            : base(mainWindow, Helpers.GetPoolOfOne(connection))
+        {
+        }
+
+        protected override void ExecuteCore(SelectedItemCollection selection)
+        {
+            Pool pool = selection.Count == 1 ? selection[0].PoolAncestor : null;
+            if (pool == null || !pool.ha_enabled)
+                return;
+
+            if (pool.ha_statefiles.All(sf => pool.Connection.Resolve(new XenRef<VDI>(sf)) == null)) //empty gives true, which is correct
+            {
+                using (var dlg = new ErrorDialog(string.Format(Messages.HA_DISABLE_NO_STATEFILE,
+                        Helpers.GetName(pool).Ellipsise(30)),
+                    ThreeButtonDialog.ButtonOK)
+                {
+                    WindowTitle = Messages.DISABLE_HA
+                })
+                {
+                    dlg.ShowDialog(Parent);
+                    return;
+                }
+            }
+
+            // Confirm the user wants to disable HA
+            using (var dlg = new NoIconDialog(string.Format(Messages.HA_DISABLE_QUERY, 
+                    Helpers.GetName(pool).Ellipsise(30)),
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+            {
+                HelpNameSetter = "HADisable",
+                WindowTitle = Messages.DISABLE_HA
+            })
+            {
+                if (dlg.ShowDialog(Parent) != DialogResult.Yes)
+                    return;
+            }
+
+            var action = new DisableHAAction(pool);
+            // We will need to re-enable buttons when the action completes
+            action.Completed += Program.MainWindow.action_Completed;
+            action.RunAsync();
+        }
+
+        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        {
+            return CanExecuteHACommand(selection);
+        }
+
+        protected override bool CanExecute(Pool pool)
+        {
+            return pool.ha_enabled;
+        }
+
+        public override string MenuText => Messages.DISABLE_HA_HOTKEY;
+    }
+
+
+    internal class HACommand : Command
+    {
         public HACommand()
         {
         }
@@ -74,106 +257,58 @@ namespace XenAdmin.Commands
         {
         }
 
-        private void Execute(IXenConnection connection)
-        {
-            if (connection == null)
-                return;
-
-            Pool pool = Helpers.GetPool(connection);
-            if (pool == null)
-                return;
-
-            if (Helpers.FeatureForbidden(pool, Host.RestrictHA))
-            {
-                // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL,
-                                                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
-            }
-            else if (pool.ha_enabled)
-            {
-                if (pool.ha_statefiles.Any(sf => pool.Connection.Resolve(new XenRef<VDI>(sf)) != null))
-                {
-                    // Show VM restart priority editor
-                    MainWindowCommandInterface.ShowPerConnectionWizard(connection, new EditVmHaPrioritiesDialog(pool));
-                }
-                else
-                {
-                    log.ErrorFormat("Cannot resolve HA statefile VDI (pool {0} has {1} statefiles).",
-                        pool.Name(), pool.ha_statefiles.Length);
-
-                    using (var dlg = new ErrorDialog(string.Format(Messages.HA_CONFIGURE_NO_STATEFILE, Helpers.GetName(pool).Ellipsise(30)),
-                        ThreeButtonDialog.ButtonOK)
-                    {
-                        HelpName = "HADisable",
-                        WindowTitle = Messages.CONFIGURE_HA
-                    })
-                    {
-                        dlg.ShowDialog(Program.MainWindow);
-                    }
-                }
-            }
-            else
-            {
-                // Show wizard to enable HA
-                MainWindowCommandInterface.ShowPerConnectionWizard(connection, new HAWizard(pool));
-            }
-        }
-
-        protected override void ExecuteCore(SelectedItemCollection selection)
-        {
-            Execute(selection[0].Connection);
-        }
-
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count != 1)
-                return false;
-
-            Pool poolAncestor = selection[0].PoolAncestor;
-            if (poolAncestor == null || poolAncestor.Locked)
-                return false;
-
-            if (poolAncestor.Connection ==  null || !poolAncestor.Connection.IsConnected)
-                return false;
-
-            if (HelpersGUI.FindActiveHaAction(poolAncestor.Connection) != null)
-                return false;
-
-            Host master = Helpers.GetMaster(poolAncestor.Connection);
-            if (master == null)
-                return false;
-
-            return true;
+            return new HAConfigureCommand(MainWindowCommandInterface, selection).CanExecute() ||
+                   new HADisableCommand(MainWindowCommandInterface, selection).CanExecute();
         }
 
         protected override string GetCantExecuteReasonCore(IXenObject item)
         {
-            Pool poolAncestor = item == null ? null : Helpers.GetPool(item.Connection);
-            bool inPool = poolAncestor != null;
+            Pool pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
 
-            if (inPool)
-            {
-                Host master = Helpers.GetMaster(poolAncestor.Connection);
+            if (pool == null)
+                return Messages.POOL_GONE;
 
-                if (master == null)
-                {
-                    return Messages.FIELD_DISABLED;
-                }
-                else if (HelpersGUI.FindActiveHaAction(poolAncestor.Connection) != null || poolAncestor.Locked)
-                {
-                    return Messages.POOL_EDIT_IN_PROGRESS;
-                }
-            }
-            return base.GetCantExecuteReasonCore(item);
+            if (!pool.IsVisible())
+                return Messages.HA_STANDALONE_SERVER;
+ 
+            Host master = Helpers.GetMaster(pool.Connection);
+            if (master == null)
+                return Messages.POOL_MASTER_GONE;
+
+            if (pool.Locked)
+                return Messages.POOL_EDIT_IN_PROGRESS;
+
+            var action = HelpersGUI.FindActiveHaAction(pool.Connection);
+            if (action != null)
+                return string.Format(action is EnableHAAction ? Messages.HA_PAGE_ENABLING : Messages.HA_PAGE_DISABLING,
+                    Helpers.GetName(pool.Connection));
+
+            return Messages.UNKNOWN;
         }
 
-        public override string MenuText
+        protected bool CanExecuteHACommand(SelectedItemCollection selection)
         {
-            get
-            {
-                return Messages.MAINWINDOW_HIGH_AVAILABILITY;
-            }
+            if (selection.Count != 1)
+                return false;
+
+            Pool pool = selection[0].PoolAncestor;
+
+            if (pool == null || pool.Locked ||
+                pool.Connection == null || !pool.Connection.IsConnected ||
+                Helpers.GetMaster(pool.Connection) == null ||
+                HelpersGUI.FindActiveHaAction(pool.Connection) != null)
+                return false;
+
+            return CanExecute(pool);
         }
+
+        protected virtual bool CanExecute(Pool pool)
+        {
+            return true;
+        }
+
+        public override string MenuText => Messages.MAINWINDOW_HIGH_AVAILABILITY;
     }
 }

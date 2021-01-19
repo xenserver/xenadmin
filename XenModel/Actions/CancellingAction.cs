@@ -367,11 +367,9 @@ namespace XenAdmin.Actions
         /// </summary>
         protected virtual void Clean() { }
 
-        public virtual Session NewSession()
+        protected virtual Session NewSession()
         {
-            if (Connection == null)
-                return null;
-            return Connection.DuplicateSession();
+            return Connection?.DuplicateSession();
         }
 
         /// <summary>

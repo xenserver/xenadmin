@@ -106,7 +106,7 @@ namespace XenAdmin.Actions
         /// using the basic credentials of the IXenConnection. Important - will throw exceptions similar to connection.NewSession
         /// </summary>
         /// <returns></returns>
-        public override Session NewSession()
+        protected override Session NewSession()
         {
             if (Connection == null)
                 return null;
@@ -124,7 +124,7 @@ namespace XenAdmin.Actions
         /// </summary>
         /// <param name="xc"></param>
         /// <returns></returns>
-        public Session NewSession(IXenConnection xc)
+        protected Session NewSession(IXenConnection xc)
         {
             if (Connection == null)
                 return null;
@@ -164,8 +164,13 @@ namespace XenAdmin.Actions
 
         public void RunAsync()
         {
+            RunAsync(null);
+        }
+
+        public void RunAsync(SudoElevationResult sudoElevationResult)
+        {
             AuditLogStarted();
-            System.Threading.ThreadPool.QueueUserWorkItem(RunWorkerThread, null);
+            System.Threading.ThreadPool.QueueUserWorkItem(RunWorkerThread, sudoElevationResult);
         }
 
         /// <summary>
@@ -191,8 +196,14 @@ namespace XenAdmin.Actions
 
             try
             {
-                if (o != null)
-                    Session = (Session)o;
+                if (o is Session session)
+                    Session = session;
+                else if (o is SudoElevationResult ser)
+                {
+                    sudoUsername = ser.ElevatedUsername;
+                    sudoPassword = ser.ElevatedPassword;
+                    Session = ser.ElevatedSession ?? NewSession();
+                }
                 else
                     SetSessionByRole(); //construct a new session and sudo it if necessary
 
@@ -255,22 +266,9 @@ namespace XenAdmin.Actions
             }
         }
 
-        public void PollToCompletion(int start, int finish)
+        public void PollToCompletion(double start = 0, double finish = 100)
         {
             new TaskPoller(this, start, finish).PollToCompletion();
-        }
-
-        public void PollToCompletion(double start, double finish)
-        {
-            PollToCompletion((int)start, (int)finish);
-        }
-
-        /// <summary>
-        /// Equivalent to PollToCompletion(0, 100).
-        /// </summary>
-        public void PollToCompletion()
-        {
-            PollToCompletion(0, 100);
         }
 
         /// <summary>
@@ -335,33 +333,6 @@ namespace XenAdmin.Actions
                 ElevatedPassword = password;
                 ElevatedSession = session;
             }
-        }
-
-        protected static void BestEffort(ref Exception caught, bool expectDisruption, Action func)
-        {
-            try
-            {
-                func();
-            }
-            catch (Exception exn)
-            {
-                if (expectDisruption &&
-                    exn is WebException && ((WebException)exn).Status == WebExceptionStatus.KeepAliveFailure)  // ignore keep-alive failures if disruption is expected
-                {
-                    return;
-                }
-
-                log.Error(exn, exn);
-                if (caught == null)
-                {
-                    caught = exn;
-                }
-            }
-        }
-
-        protected void BestEffort(ref Exception caught, Action func)
-        {
-            BestEffort(ref caught, Connection != null && Connection.ExpectDisruption, func);
         }
 
         protected void AddCommonAPIMethodsToRoleCheck()

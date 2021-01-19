@@ -6488,6 +6488,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disks belonging to templates cannot be activated or deactivated..
+        /// </summary>
+        public static string CANNOT_ACTIVATE_TEMPLATE_DISK {
+            get {
+                return ResourceManager.GetString("CANNOT_ACTIVATE_TEMPLATE_DISK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This virtual disk is already activated on VM &apos;{0}&apos;..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_ALREADY_ACTIVE {
@@ -6668,8 +6677,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not possible to deactivate and delete this virtual disk on the VM &apos;{0}&apos;: 
-        ///
+        ///   Looks up a localized string similar to It is not possible to deactivate and delete this virtual disk on the VM &apos;{0}&apos;:
         ///{1}.
         /// </summary>
         public static string CANNOT_DELETE_CANNOT_DEACTIVATE_REASON {
@@ -12557,6 +12565,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Disable HA.
+        /// </summary>
+        public static string DISABLE_HA_HOTKEY {
+            get {
+                return ResourceManager.GetString("DISABLE_HA_HOTKEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable.
         /// </summary>
         public static string DISABLE_NOAMP {
@@ -15738,6 +15755,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot nominate a new master while the pool is in the process of creating a cluster..
+        /// </summary>
+        public static string EVACUATE_HOST_CLUSER_CREATING {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_CLUSER_CREATING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Maintenance Mode - {0}.
         /// </summary>
         public static string EVACUATE_HOST_DIALOG_TITLE {
@@ -15752,6 +15778,24 @@ namespace XenAdmin {
         public static string EVACUATE_HOST_EJECT_CD_PROMPT {
             get {
                 return ResourceManager.GetString("EVACUATE_HOST_EJECT_CD_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot nominate a new master while HA is being disabled on the pool..
+        /// </summary>
+        public static string EVACUATE_HOST_HA_DISABLING {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_HA_DISABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot nominate a new master while HA is being enabled on the pool..
+        /// </summary>
+        public static string EVACUATE_HOST_HA_ENABLING {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_HA_ENABLING", resourceCulture);
             }
         }
         
@@ -15792,20 +15836,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no other servers available in the pool to migrate the running VMs to.  Please suspend the VMs instead..
+        ///   Looks up a localized string similar to There are no other servers available in the pool to migrate the running VMs to. Please suspend the VMs instead..
         /// </summary>
         public static string EVACUATE_HOST_NO_OTHER_HOSTS {
             get {
                 return ResourceManager.GetString("EVACUATE_HOST_NO_OTHER_HOSTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No servers available.
-        /// </summary>
-        public static string EVACUATE_HOST_NO_OTHER_HOSTS_TITLE {
-            get {
-                return ResourceManager.GetString("EVACUATE_HOST_NO_OTHER_HOSTS_TITLE", resourceCulture);
             }
         }
         
@@ -15815,15 +15850,6 @@ namespace XenAdmin {
         public static string EVACUATE_HOST_NOT_ENOUGH_MEMORY {
             get {
                 return ResourceManager.GetString("EVACUATE_HOST_NOT_ENOUGH_MEMORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not enough memory.
-        /// </summary>
-        public static string EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE {
-            get {
-                return ResourceManager.GetString("EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE", resourceCulture);
             }
         }
         
@@ -15842,15 +15868,6 @@ namespace XenAdmin {
         public static string EVACUATE_HOST_SUSPEND_VM_PROMPT {
             get {
                 return ResourceManager.GetString("EVACUATE_HOST_SUSPEND_VM_PROMPT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Action in progress....
-        /// </summary>
-        public static string EVACUATE_SOLUTION_IN_PROGRESS {
-            get {
-                return ResourceManager.GetString("EVACUATE_SOLUTION_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -18606,15 +18623,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA is currently enabled for pool &apos;{0}&apos;..
-        /// </summary>
-        public static string HA_TAB_CONFIGURED_UNLICENSED {
-            get {
-                return ResourceManager.GetString("HA_TAB_CONFIGURED_UNLICENSED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unable to calculate maximum pool failure capacity..
         /// </summary>
         public static string HA_UNABLE_TO_CALCULATE_MESSAGE {
@@ -19586,7 +19594,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; entering maintenance mode....
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is entering maintenance mode....
         /// </summary>
         public static string HOSTACTION_EVACUATING {
             get {
@@ -19604,7 +19612,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; exiting maintenance mode....
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is exiting maintenance mode....
         /// </summary>
         public static string HOSTACTION_EXITING_MAINTENANCE_MODE {
             get {
@@ -23045,7 +23053,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;High Availability....
+        ///   Looks up a localized string similar to &amp;High Availability.
         /// </summary>
         public static string MAINWINDOW_HIGH_AVAILABILITY {
             get {
@@ -24954,6 +24962,15 @@ namespace XenAdmin {
         public static string NETWORK_IN_USE_BY {
             get {
                 return ResourceManager.GetString("NETWORK_IN_USE_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to currently in use by a different operation.
+        /// </summary>
+        public static string NETWORK_LOCKED {
+            get {
+                return ResourceManager.GetString("NETWORK_LOCKED", resourceCulture);
             }
         }
         
@@ -31424,9 +31441,18 @@ namespace XenAdmin {
         ///
         ///{0}.
         /// </summary>
-        public static string RBAC_HA_TAB_WARNING {
+        public static string RBAC_HA_CONFIGURE_WARNING {
             get {
-                return ResourceManager.GetString("RBAC_HA_TAB_WARNING", resourceCulture);
+                return ResourceManager.GetString("RBAC_HA_CONFIGURE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot configure HA settings. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_HA_ENABLE_WARNING {
+            get {
+                return ResourceManager.GetString("RBAC_HA_ENABLE_WARNING", resourceCulture);
             }
         }
         
@@ -32825,6 +32851,33 @@ namespace XenAdmin {
         public static string ROTATE_POOL_SECRET_MENU {
             get {
                 return ResourceManager.GetString("ROTATE_POOL_SECRET_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable clustering while a pool secret rotation is in progress..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_PENDING_CLUSTER {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_PENDING_CLUSTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot configure HA while a pool secret rotation is in progress..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_PENDING_HA {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_PENDING_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot nominate a new master while a pool secret rotation is in progress..
+        /// </summary>
+        public static string ROTATE_POOL_SECRET_PENDING_NEW_MASTER {
+            get {
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_PENDING_NEW_MASTER", resourceCulture);
             }
         }
         
@@ -35359,7 +35412,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to succeeded.
+        ///   Looks up a localized string similar to Succeeded.
         /// </summary>
         public static string SUCCEEDED {
             get {
@@ -39520,7 +39573,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}. {1}: {2}.
+        ///   Looks up a localized string similar to - {0}: {1}.
         /// </summary>
         public static string VMSS_ALERT_VM_ERROR_FORMAT {
             get {
@@ -39661,15 +39714,6 @@ namespace XenAdmin {
         public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
             get {
                 return ResourceManager.GetString("VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Succeeded.
-        /// </summary>
-        public static string VMSS_SUCCEEDED {
-            get {
-                return ResourceManager.GetString("VMSS_SUCCEEDED", resourceCulture);
             }
         }
         

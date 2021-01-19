@@ -93,8 +93,15 @@ namespace XenAdmin.Dialogs
                 DescriptionTextBox.Text = _vm.Description();
 
             EnableMoveButton();
+
+            var vdis = (from VBD vbd in _vm.Connection.ResolveAll(_vm.VBDs)
+                where vbd.type != vbd_type.CD
+                let vdi = _vm.Connection.Resolve(vbd.VDI)
+                where vdi != null
+                select vdi).ToArray();
+
             srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, _vm.Connection,
-                _vm.Home(), null, null, _vm.TotalVMSize());
+                _vm.Home(), null, vdis);
         }
 
         private void EnableMoveButton()

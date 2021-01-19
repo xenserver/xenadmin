@@ -37,6 +37,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
+using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.TabPages;
@@ -575,7 +576,10 @@ namespace XenAdmin.SettingsPanels
 		{
 			if (pool == null)
 				return;
-			HAPage.EditHA(pool);
+			
+            var cmd = new HAConfigureCommand(Program.MainWindow, pool);
+            if (cmd.CanExecute())
+                cmd.Execute();
 		}
 
 		#endregion

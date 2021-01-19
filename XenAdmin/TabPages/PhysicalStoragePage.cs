@@ -65,6 +65,8 @@ namespace XenAdmin.TabPages
             base.Text = Messages.STORAGE_TAB_TITLE;
             PBD_CollectionChangedWithInvoke=Program.ProgramInvokeHandler(PBD_CollectionChanged);
 
+            trimButton.Command = new TrimSRCommand();
+            newSRButton.Command = new NewSRCommand();
         }
 
         public override string HelpID => "TabPageStorage";

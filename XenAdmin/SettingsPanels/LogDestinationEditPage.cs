@@ -141,7 +141,7 @@ namespace XenAdmin.SettingsPanels
         public void ShowLocalValidationMessages()
         {
             if (!_validToSave)
-                HelpersGUI.ShowBalloonMessage(ServerTextBox, Messages.GENERAL_EDIT_INVALID_REMOTE, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(ServerTextBox, InvalidParamToolTip, Messages.GENERAL_EDIT_INVALID_REMOTE);
         }
 
         public void Cleanup()

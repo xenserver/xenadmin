@@ -231,16 +231,6 @@ namespace XenAdmin.Alerts
                         }
                         break;
 
-                    case Message.MessageType.VMSS_SNAPSHOT_MISSED_EVENT:
-                    case Message.MessageType.VMSS_XAPI_LOGON_FAILURE:
-                    case Message.MessageType.VMSS_LICENSE_ERROR:
-                    case Message.MessageType.VMSS_SNAPSHOT_FAILED:
-                    case Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED:
-                    case Message.MessageType.VMSS_SNAPSHOT_LOCK_FAILED:
-                        VMSS vmss = Helpers.XenObjectFromMessage(Message) as VMSS;
-                        var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, (vmss == null) ? "" : vmss.Name());
-                        return policyAlertVMSS.Text;
-
                     case Message.MessageType.unknown when Message.name == "GFS2_CAPACITY":
                         if (XenObject != null)
                             return string.Format(Message.FriendlyBody(Message.name), XenObject.Name());
@@ -360,7 +350,7 @@ namespace XenAdmin.Alerts
 					case Message.MessageType.HA_STATEFILE_APPROACHING_TIMEOUT:
 					case Message.MessageType.HA_STATEFILE_LOST:
 					case Message.MessageType.HA_XAPI_HEALTHCHECK_APPROACHING_TIMEOUT:
-						return () => new HACommand(Program.MainWindow, XenObject.Connection).Execute();
+						return () => new HAConfigureCommand(Program.MainWindow, XenObject.Connection).Execute();
 
 					case Message.MessageType.LICENSE_EXPIRES_SOON:
 					case Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
@@ -477,6 +467,15 @@ namespace XenAdmin.Alerts
             {
                 case Message.MessageType.ALARM:
                     return new AlarmMessageAlert(msg);
+
+                case Message.MessageType.VMSS_SNAPSHOT_MISSED_EVENT:
+                case Message.MessageType.VMSS_XAPI_LOGON_FAILURE:
+                case Message.MessageType.VMSS_LICENSE_ERROR:
+                case Message.MessageType.VMSS_SNAPSHOT_FAILED:
+                case Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED:
+                case Message.MessageType.VMSS_SNAPSHOT_LOCK_FAILED:
+                    return new PolicyAlert(msg);
+
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRED:
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:

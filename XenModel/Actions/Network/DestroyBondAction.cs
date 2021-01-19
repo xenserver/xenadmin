@@ -75,10 +75,6 @@ namespace XenAdmin.Actions
         /// </summary>
         private readonly string Name;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bond"></param>
         public DestroyBondAction(Bond bond)
             : base(bond.Connection, string.Format(Messages.ACTION_DESTROY_BOND_TITLE, bond.Name()),
                    string.Format(Messages.ACTION_DESTROY_BOND_DESCRIPTION, bond.Name()))
@@ -164,14 +160,30 @@ namespace XenAdmin.Actions
 
             PercentComplete = 50;
 
-            Exception e = null;
+            var caughtExceptions = new List<Exception>();
 
             int inc = Bonds.Count > 0 ? 40 / Bonds.Count : 0;
 
             foreach (Bond bond in Bonds)
             {
                 Bond bond1 = bond;
-                BestEffort(ref e, delegate() { RelatedTask = Bond.async_destroy(Session, bond1.opaque_ref);});
+                try
+                {
+                    RelatedTask = Bond.async_destroy(Session, bond1.opaque_ref);
+                }
+                catch (Exception exn)
+                {
+                    if (Connection != null && Connection.ExpectDisruption &&
+                        exn is WebException webEx && webEx.Status == WebExceptionStatus.KeepAliveFailure)
+                    {
+                        //ignore
+                    }
+                    else
+                    {
+                        log.Error($"Failed to destroy bond {bond1.opaque_ref}", exn);
+                        caughtExceptions.Add(exn);
+                    }
+                }
                 PollToCompletion(PercentComplete, PercentComplete + inc);
             }
 
@@ -181,17 +193,30 @@ namespace XenAdmin.Actions
             {
                 string oldNetworkName = Network.Name();
 
-                // Destroy the old network
                 log.DebugFormat("Destroying network {0} ({1})...", oldNetworkName, Network.uuid);
-                BestEffort(ref e, delegate()
+
+                try
+                {
+                    XenAPI.Network.destroy(Session, Network.opaque_ref);
+                    log.DebugFormat("Network {0} ({1}) destroyed.", oldNetworkName, Network.uuid);
+                }
+                catch (Exception exn)
+                {
+                    if (Connection != null && Connection.ExpectDisruption &&
+                        exn is WebException webEx && webEx.Status == WebExceptionStatus.KeepAliveFailure)
                     {
-                        XenAPI.Network.destroy(Session, Network.opaque_ref);
-                        log.DebugFormat("Network {0} ({1}) destroyed.", oldNetworkName, Network.uuid);
-                    });
+                        //ignore
+                    }
+                    else
+                    {
+                        log.Error($"Failed to destroy bond {Network.opaque_ref}", exn);
+                        caughtExceptions.Add(exn);
+                    }
+                }
             }
 
-            if (e != null)
-                throw e;
+            if (caughtExceptions.Count > 0)
+                throw caughtExceptions[0];
 
             Description = string.Format(Messages.ACTION_DESTROY_BOND_DONE, Name);
         }
@@ -199,19 +224,16 @@ namespace XenAdmin.Actions
         private void UnlockAll()
         {
             foreach (Bond bond in Bonds)
-            {
                 bond.Locked = false;
-            }
 
             foreach (PIF master in Masters)
-            {
                 master.Locked = false;
-            }
+
+            foreach (PIF pif in Slaves)
+                pif.Locked = false;
 
             if (Network != null)
-            {
                 Network.Locked = false;
-            }
         }
 
         

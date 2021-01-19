@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -87,17 +86,38 @@ namespace XenAdmin
                             return null;
 
                         string address = string.Format("http://{0}:{1}",
-                            XenAdmin.Properties.Settings.Default.ProxyAddress,
-                            XenAdmin.Properties.Settings.Default.ProxyPort);
+                            Properties.Settings.Default.ProxyAddress,
+                            Properties.Settings.Default.ProxyPort);
 
-                        if (XenAdmin.Properties.Settings.Default.ProvideProxyAuthentication)
+                        if (Properties.Settings.Default.ProvideProxyAuthentication)
                         {
-                            string protectedUsername = XenAdmin.Properties.Settings.Default.ProxyUsername;
-                            string protectedPassword = XenAdmin.Properties.Settings.Default.ProxyPassword;
-                            return new WebProxy(address, false, null, new NetworkCredential(
-                                // checks for empty default username/password which starts out unencrypted
-                                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
-                                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword)));
+                            // checks for empty default username/password which starts out unencrypted
+
+                            string username = "";
+                            try
+                            {
+                                string protectedUsername = Properties.Settings.Default.ProxyUsername;
+                                if (!string.IsNullOrEmpty(protectedUsername))
+                                    username = EncryptionUtils.Unprotect(protectedUsername);
+                            }
+                            catch (Exception e)
+                            {
+                                log.Warn("Could not unprotect internet proxy username.", e);
+                            }
+
+                            string password = "";
+                            try
+                            {
+                                string protectedPassword = Properties.Settings.Default.ProxyPassword;
+                                if (!string.IsNullOrEmpty(protectedPassword))
+                                    password = EncryptionUtils.Unprotect(protectedPassword);
+                            }
+                            catch (Exception e)
+                            {
+                                log.Warn("Could not unprotect internet proxy password.", e);
+                            }
+
+                            return new WebProxy(address, false, null, new NetworkCredential(username, password));
                         }
                         else
                             return new WebProxy(address, false);
@@ -155,7 +175,7 @@ namespace XenAdmin
 
         public void SaveSettingsIfRequired()
         {
-            Settings.SaveIfRequired();
+            Settings.SaveServerList();
         }
 
         private AsyncAction.SudoElevationResult GetElevatedSession(List<Role> allowedRoles,
@@ -192,6 +212,11 @@ namespace XenAdmin
         public string GetXenCenterMetadata(bool isForXenCenter)
         {
             return Metadata.Generate(PluginManager, isForXenCenter);
-        }      
+        }
+
+        public string GetCustomUpdatesXmlLocation()
+        {
+            return Registry.GetCustomUpdatesXmlLocation();
+        }
     }
 }

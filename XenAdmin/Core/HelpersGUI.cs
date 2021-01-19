@@ -90,7 +90,7 @@ namespace XenAdmin.Core
                 using (var dlg = new WarningDialog(msg,
                     new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes, selected: defaultYes),
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No, selected: !defaultYes))
-                    {HelpName = helpName})
+                    {HelpNameSetter = helpName})
                 {
                     return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
                 }
@@ -99,19 +99,14 @@ namespace XenAdmin.Core
         }
 
         public static int BALLOON_DURATION = 5000;
-        public static void ShowBalloonMessage(Control control, string caption, ToolTip toolTip)
+        public static void ShowBalloonMessage(Control control, ToolTip toolTip, string caption = " ")
         {
             toolTip.Hide(control);
             toolTip.RemoveAll();
             toolTip.IsBalloon = true;
             toolTip.Active = true;
-            toolTip.SetToolTip(control, caption); // required to improve the ballon position.
+            toolTip.SetToolTip(control, caption); // required to improve the balloon position.
             toolTip.Show(caption, control, BALLOON_DURATION);
-        }
-
-        public static void ShowBalloonMessage(Control control, ToolTip toolTip)
-        {
-            ShowBalloonMessage(control, " ", toolTip);
         }
 
         /// <summary>

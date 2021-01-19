@@ -43,10 +43,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         public UpdatesOptionsPage()
         {
             InitializeComponent();
-            Build();
         }
 
-        private void Build()
+        #region IOptionsPage Members
+
+        public void Build()
         {
             // XenCenter updates
             AllowXenCenterUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
@@ -56,7 +57,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             AllowXenServerUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenServerUpdates;
         }
 
-        #region IOptionsPage Members
+        public bool IsValidToSave()
+        {
+            return true;
+        }
+
+        public void ShowValidationMessages()
+        {
+        }
 
         public void Save()
         {

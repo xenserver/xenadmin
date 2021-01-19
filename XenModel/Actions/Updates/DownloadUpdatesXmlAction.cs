@@ -32,13 +32,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using XenAPI;
 using System.IO;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
 using System.Net;
-using System.Text;
 
 
 namespace XenAdmin.Actions
@@ -54,9 +52,9 @@ namespace XenAdmin.Actions
         private const string RequiredPatchNode = "requiredpatch";
 
 
-        public List<XenCenterVersion> XenCenterVersions { get; private set; }
-        public List<XenServerVersion> XenServerVersions { get; private set; }
-        public List<XenServerPatch> XenServerPatches { get; private set; }
+        public List<XenCenterVersion> XenCenterVersions { get; } = new List<XenCenterVersion>();
+        public List<XenServerVersion> XenServerVersions { get; } = new List<XenServerVersion>();
+        public List<XenServerPatch> XenServerPatches { get; } = new List<XenServerPatch>();
 
         public List<XenServerVersion> XenServerVersionsForAutoCheck
         {
@@ -73,38 +71,28 @@ namespace XenAdmin.Actions
         private readonly bool _checkForXenCenter;
         private readonly bool _checkForServerVersion;
         private readonly bool _checkForPatches;
-        private readonly string _checkForUpdatesUrl;
         private readonly string _userAgent;
-        private readonly string _userAgentId;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent, string userAgentId, string checkForUpdatesUrl)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent)
             : base(null, "_get_updates", "_get_updates", true)
         {
-            Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
-            Debug.Assert(!string.IsNullOrWhiteSpace(userAgent) && !string.IsNullOrWhiteSpace(userAgentId));
-
-            XenServerPatches = new List<XenServerPatch>();
-            XenServerVersions = new List<XenServerVersion>();
-            XenCenterVersions = new List<XenCenterVersion>();
+            Debug.Assert(!string.IsNullOrWhiteSpace(userAgent));
 
             _checkForXenCenter = checkForXenCenter;
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
-            _checkForUpdatesUrl = checkForUpdatesUrl;
             _userAgent = userAgent;
-            _userAgentId = userAgentId;
         }
 
         protected override void Run()
         {
             this.Description = Messages.AVAILABLE_UPDATES_SEARCHING;
 
-            XmlDocument xdoc = FetchCheckForUpdatesXml(_checkForUpdatesUrl);
+            XmlDocument xdoc = FetchCheckForUpdatesXml();
 
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);
             GetXenServerVersions(xdoc);
-
         }
 
         private void GetXenCenterVersions(XmlDocument xdoc)
@@ -327,28 +315,27 @@ namespace XenAdmin.Actions
             }
         }
 
-        protected virtual XmlDocument FetchCheckForUpdatesXml(string location)
+        protected virtual XmlDocument FetchCheckForUpdatesXml()
         {
             var xdoc = new XmlDocument();
-            var uri = new Uri(location);
-            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
-            
+            var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
+            var uri = new Uri(checkForUpdatesUrl);
+
             if (uri.IsFile)
             {
-                xdoc.Load(location);
+                xdoc.Load(checkForUpdatesUrl);
             }
             else
             {
+                var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
+
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    webClient.Headers.Add("X-User-Agent-Id", _userAgentId);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
-                    {
                         xdoc.Load(stream);
-                    }
                 }
             }
 

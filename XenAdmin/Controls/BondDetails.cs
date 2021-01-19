@@ -263,7 +263,7 @@ namespace XenAdmin.Controls
                     new ThreeButtonDialog.TBDButton(Messages.BOND_CREATE_CONTINUE, DialogResult.OK),
                     ThreeButtonDialog.ButtonCancel)
                 {
-                    HelpName = "BondConfigError",
+                    HelpNameSetter = "BondConfigError",
                     WindowTitle = Messages.BOND_CREATE
                 })
                 {

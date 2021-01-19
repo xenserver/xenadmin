@@ -84,9 +84,6 @@
             // 
             this.comboBoxNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNetwork.FormattingEnabled = true;
-            this.comboBoxNetwork.IncludeOnlyEnabledNetworksInComboBox = false;
-            this.comboBoxNetwork.IncludeOnlyNetworksWithIPAddresses = false;
-            this.comboBoxNetwork.IncludePoolNameInComboBox = false;
             resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
             this.comboBoxNetwork.Name = "comboBoxNetwork";
             this.comboBoxNetwork.SelectedIndexChanged += new System.EventHandler(this.comboBoxNetwork_SelectedIndexChanged);

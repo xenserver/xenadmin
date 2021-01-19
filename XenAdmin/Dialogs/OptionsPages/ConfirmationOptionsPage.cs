@@ -41,10 +41,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         public ConfirmationOptionsPage()
         {
             InitializeComponent();
-            LoadSettings();
         }
 
-        private void LoadSettings()
+        #region IOptionsPage Members
+
+        public void Build()
         {
             var def = Properties.Settings.Default;
 
@@ -55,7 +56,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             checkBoxIgnoreOvfWarnings.Checked = def.IgnoreOvfValidationWarnings;
         }
 
-        #region IOptionsPage Members
+        public bool IsValidToSave()
+        {
+            return true;
+        }
+
+        public void ShowValidationMessages()
+        {
+        }
 
         public void Save()
         {

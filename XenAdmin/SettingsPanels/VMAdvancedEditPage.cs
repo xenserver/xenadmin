@@ -143,8 +143,7 @@ namespace XenAdmin.SettingsPanels
             if (!ValidToSave)
             {
                 HelpersGUI.ShowBalloonMessage(ShadowMultiplierTextBox,
-                   Messages.SHADOW_MEMORY_MULTIPLIER_VALUE,
-                   m_invalidParamToolTip);
+                   m_invalidParamToolTip, Messages.SHADOW_MEMORY_MULTIPLIER_VALUE);
             }
         }
 

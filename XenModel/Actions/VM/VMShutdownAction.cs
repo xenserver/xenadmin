@@ -59,7 +59,7 @@ namespace XenAdmin.Actions.VMActions
             this.Description = Messages.ACTION_VM_SHUTTING_DOWN;
 
             RelatedTask = VM.async_clean_shutdown(Session, VM.opaque_ref);
-            PollToCompletion(0, 100);
+            PollToCompletion();
             this.Description = Messages.ACTION_VM_SHUT_DOWN;
         }
     }
@@ -76,7 +76,7 @@ namespace XenAdmin.Actions.VMActions
             this.Description = Messages.ACTION_VM_SHUTTING_DOWN;
 
             RelatedTask = VM.async_hard_shutdown(Session, VM.opaque_ref);
-            PollToCompletion(0, 100);
+            PollToCompletion();
 
             this.Description = Messages.ACTION_VM_SHUT_DOWN;
         }

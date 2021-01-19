@@ -70,22 +70,23 @@ namespace XenAdmin.Actions.VMActions
 
         private static void DestroyVM(Session session, VM vm, List<VBD> deleteDisks, IEnumerable<VM> deleteSnapshots)
         {
-            Exception caught = null;
-
+            var caught = new List<Exception>();
 
             foreach (VM snapshot in deleteSnapshots)
             {
                 VM snap = snapshot;
-                BestEffort(ref caught, session.Connection.ExpectDisruption, () =>
-                                           {
-                                               if (snap.power_state == vm_power_state.Suspended)
-                                               {
-                                                   XenAPI.VM.hard_shutdown(session, snap.opaque_ref);
-                                               }
-                                               DestroyVM(session, snap, true);
-                                           });
+                try
+                {
+                    if (snap.power_state == vm_power_state.Suspended)
+                        VM.hard_shutdown(session, snap.opaque_ref);
+                    DestroyVM(session, snap, true);
+                }
+                catch (Exception e)
+                {
+                    log.Error($"Failed to delete snapshot {snap.opaque_ref}", e);
+                    caught.Add(e);
+                }
             }
-
 
             List<XenRef<VDI>> vdiRefs = new List<XenRef<VDI>>();
 
@@ -94,7 +95,6 @@ namespace XenAdmin.Actions.VMActions
                 VBD vbd = vm.Connection.Resolve(vbdRef);
                 if (vbd == null)
                     continue;
-
 
                 if (deleteDisks.Contains(vbd))
                 {
@@ -108,25 +108,34 @@ namespace XenAdmin.Actions.VMActions
             if (suspendVDI != null)
                 vdiRefs.Add(vm.suspend_VDI);
 
-            XenAPI.VM.destroy(session, vm.opaque_ref);
-
+            VM.destroy(session, vm.opaque_ref);
 
             foreach (XenRef<VDI> vdiRef in vdiRefs)
             {
-                XenRef<VDI> vdi = vdiRef;
-                BestEffort(ref caught, session.Connection.ExpectDisruption, () => XenAPI.VDI.destroy(session, vdi.opaque_ref));
-
-                //CA-115249. XenAPI could have already deleted the VDI. Destroy suspended VM and destroy snapshot functions are affected.
-                var failure = caught as Failure;
-                if (failure != null && failure.ErrorDescription != null && failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == "HANDLE_INVALID")
+                try
                 {
-                    log.InfoFormat("VDI:{0} has already been deleted -- ignoring exception.", vdi.opaque_ref);
-                    caught = null;
+                    VDI.destroy(session, vdiRef.opaque_ref);
+                }
+                catch (Exception e)
+                {
+                    //CA-115249. XenAPI could have already deleted the VDI.
+                    //Destroy suspended VM and destroy snapshot functions are affected.
+
+                    if (e is Failure failure && failure.ErrorDescription != null &&
+                        failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == "HANDLE_INVALID")
+                    {
+                        log.InfoFormat($"VDI {vdiRef.opaque_ref} has already been deleted; ignoring API failure.");
+                    }
+                    else
+                    {
+                        log.Error($"Failed to delete VDI {vdiRef.opaque_ref}", e);
+                        caught.Add(e);
+                    }
                 }
             }
 
-            if (caught != null)
-                throw caught;
+            if (caught.Count > 0)
+                throw caught[0];
         }
     }
 }

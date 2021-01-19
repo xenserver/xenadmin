@@ -1301,40 +1301,54 @@ namespace XenAPI
             bool allPBDsReady = false;
             int timeout = 120;
             log.DebugFormat("Waiting for PBDs on host {0} to become plugged", Name());
-            
-            do
+
+            while (timeout > 0)
             {
-                if (this.enabled)  // if the Host is not yet enabled, pbd.currently_attached may not be accurate: see CA-66496.
+                if (enabled) // if the Host is not yet enabled, pbd.currently_attached may not be accurate: see CA-66496.
                 {
                     allPBDsReady = true;
-                    foreach (PBD pbd in Connection.ResolveAll(PBDs))
+                    foreach (var pbdRef in PBDs)
                     {
-                        if (!pbd.currently_attached)
+                        var pbd = Connection.Resolve(pbdRef);
+
+                        if (pbd == null || pbd.currently_attached)
+                            continue;
+
+                        if (Helpers.StockholmOrGreater(this)) //CA-350406
                         {
-                            allPBDsReady = false;
-                            break;
+                            var sr = Connection.Resolve(pbd.SR);
+                            if (sr != null && sr.is_tools_sr)
+                                continue;
                         }
+
+                        allPBDsReady = false;
+                        break;
                     }
                 }
 
-                if (!allPBDsReady)
-                {
-                    Thread.Sleep(1000);
-                    timeout--;
-                }
-            } while (!allPBDsReady && timeout > 0);
+                if (allPBDsReady)
+                    return;
 
-            if (allPBDsReady)
-                return;
+                Thread.Sleep(1000);
+                timeout--;
+            }
 
-            foreach (var pbd in Connection.ResolveAll(PBDs))
+            foreach (var pbdRef in PBDs)
             {
-                if (pbd.currently_attached)
+                var pbd = Connection.Resolve(pbdRef);
+                if (pbd == null || pbd.currently_attached)
                     continue;
+
+                if (Helpers.StockholmOrGreater(this))
+                {
+                    var sr = Connection.Resolve(pbd.SR);
+                    if (sr != null && sr.is_tools_sr)
+                        continue;
+                }
 
                 Session session = Connection.DuplicateSession();
 
-                // If we still havent plugged, then try and plug it - this will probably
+                // If we still haven't plugged, then try and plug it - this will probably
                 // fail, but at least we'll get a better error message.
 
                 try

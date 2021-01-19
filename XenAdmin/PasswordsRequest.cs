@@ -113,10 +113,6 @@ namespace XenAdmin
                     log.WarnFormat("Valid token, but for the wrong app. Will re-prompt");
                 }
             }
-            else
-            {
-                log.Warn("Missing or invalid token.");
-            }
 
             using (var d = new PasswordsRequestDialog { Application = exePath })
                 switch (d.ShowDialog())
@@ -143,15 +139,28 @@ namespace XenAdmin
 
         private static bool ParseToken(string destdir, out string token, out string token_exepath, out string user_sid)
         {
+            token = null;
+            token_exepath = null;
+            user_sid = null;
+
             string enc = GetToken(destdir);
             if (enc != null)
             {
-                string plain = EncryptionUtils.Unprotect(enc);
+                string plain;
+                try
+                {
+                    plain = EncryptionUtils.Unprotect(enc);
+                }
+                catch (Exception e)
+                {
+                    log.Warn("Could not unprotect token.", e);
+                    return false;
+                }
+
                 if (plain != null)
                 {
                     string[] bits = plain.Split(Separator);
-                    long ticks;
-                    if (bits.Length == 4 && bits[0] == TokenIdentifier && long.TryParse(bits[1], out ticks))
+                    if (bits.Length == 4 && bits[0] == TokenIdentifier && long.TryParse(bits[1], out long ticks))
                     {
                         token = enc;
                         token_exepath = bits[2];
@@ -161,9 +170,7 @@ namespace XenAdmin
                 }
             }
 
-            token = null;
-            token_exepath = null;
-            user_sid = null;
+            log.Warn("Missing or invalid token.");
             return false;
         }
 

@@ -32,50 +32,51 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Xml;
 using XenAdmin.Actions;
-using XenAdmin.Core;
-using XenAPI;
+
 
 namespace CFUValidator.Updates
 {
     class AlternativeUrlDownloadUpdatesXmlSourceAction : DownloadUpdatesXmlAction, ICheckForUpdatesXMLSource
     {
-        private readonly string newLocation;
+        private readonly string _url;
 
         public AlternativeUrlDownloadUpdatesXmlSourceAction(string url)
-            : base(true, true, true, "CFU", "1", url)
+            : base(true, true, true, "CFU")
         {
-            newLocation = url;
-            ErrorRaised = null;
+            _url = url ?? throw new ArgumentNullException(nameof(url));
         }
 
-        protected override XmlDocument FetchCheckForUpdatesXml(string location)
-        {
-            XmlDocument xdoc;
-            using (Stream xmlstream = GetXmlDoc())
-            {
-                xdoc = Helpers.LoadXmlDocument(xmlstream);
-            }
-            return xdoc;
-        }
-
-        private Stream GetXmlDoc()
+        protected override XmlDocument FetchCheckForUpdatesXml()
         {
             try
             {
-                WebRequest wr = WebRequest.Create(newLocation);
-                return wr.GetResponse().GetResponseStream();
+                XmlDocument doc = new XmlDocument();
+                XmlReaderSettings settings = new XmlReaderSettings
+                {
+                    IgnoreComments = true,
+                    IgnoreWhitespace = true,
+                    IgnoreProcessingInstructions = true
+                };
+
+                WebRequest wr = WebRequest.Create(_url);
+                using (Stream xmlStream = wr.GetResponse().GetResponseStream())
+                {
+                    if (xmlStream != null)
+                        using (var reader = XmlReader.Create(xmlStream, settings))
+                            doc.Load(reader);
+                }
+
+                return doc;
             }
             catch (Exception)
             {
-                ErrorRaised = new CFUValidationException("Failed to wget the URL: " + newLocation);
+                ErrorRaised = new CFUValidationException("Failed to wget the URL: " + _url);
                 throw ErrorRaised;
             }
         }
 
         public Exception ErrorRaised { get; private set; }
-
     }
 }

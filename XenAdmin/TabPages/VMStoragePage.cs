@@ -271,207 +271,58 @@ namespace XenAdmin.TabPages
             UpdateButtons();
         }
 
-        private List<VBDRow> SelectedVBDRows
-        {
-            get
-            {
-                if (dataGridViewStorage.SelectedRows.Count == 0)
-                    return null;
-
-                List<VBDRow> rows = new List<VBDRow>();
-                foreach (DataGridViewRow r in dataGridViewStorage.SelectedRows)
-                    rows.Add(r as VBDRow);
-
-                return rows;
-            }
-        }
-
         private void UpdateButtons()
         {
-            AttachVirtualDiskCommand attachCmd = new AttachVirtualDiskCommand(Program.MainWindow, vm);
-            AttachButton.Enabled = attachCmd.CanExecute();
-            AddButton.Enabled = attachCmd.CanExecute();
+            var selectedVMs = new List<SelectedItem>();
+            var vbdRows = new List<VBDRow>();
+            var selectedVDIs = new List<SelectedItem>();
+            var selectedVBDs = new List<SelectedItem>();
 
-            List<VBDRow> vbdRows = SelectedVBDRows;
-
-            if (dataGridViewStorage.Rows.Count == 0 || vbdRows == null || vm == null)
+            if (vm != null)
             {
-                DeactivateButton.Enabled = false;
-                DetachButton.Enabled = false;
-                DeleteButton.Enabled = false;
-                EditButton.Enabled = false;
-                MoveButton.Enabled = false;
-                return;
+                selectedVMs = new List<SelectedItem> {new SelectedItem(vm)};
+                vbdRows = dataGridViewStorage.SelectedRows.Cast<VBDRow>().ToList();
+
+                foreach (VBDRow r in vbdRows)
+                {
+                    selectedVDIs.Add(new SelectedItem(r.VDI));
+                    selectedVBDs.Add(new SelectedItem(r.VBD));
+                }
             }
+
+            AddButton.Command = new AddVirtualDiskCommand(Program.MainWindow, selectedVMs);
+            AttachButton.Command = new AttachVirtualDiskCommand(Program.MainWindow, selectedVMs);
+
             EditButton.Enabled = vbdRows.Count == 1 && !vbdRows[0].VBD.Locked && !vbdRows[0].VDI.Locked;
+            EditButton.Tag = EditButton.Enabled ? vbdRows[0].VDI : null;
 
-            List<SelectedItem> selectedVDIs = new List<SelectedItem>();
-            List<SelectedItem> selectedVBDs = new List<SelectedItem>();
+            // The user can see that this disk in use by this VM. Allow unplug + delete in single
+            // step (non default behaviour), but only if we are the only VBD (default behaviour)
 
-            foreach (VBDRow r in vbdRows)
-            {
-                selectedVDIs.Add(new SelectedItem(r.VDI));
-                selectedVBDs.Add(new SelectedItem(r.VBD));
-            }
-            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, selectedVDIs);
-            // User has visibility that this disk in use by this VM. Allow unplug + delete in single step (non default behaviour),
-            // but only if we are the only VBD (default behaviour)
-            deleteCmd.AllowRunningVMDelete = true;
-            if (deleteCmd.CanExecute())
-            {
-                DeleteButtonContainer.RemoveAll();
-                DeleteButton.Enabled = true;
-            }
+            DeleteButton.Command = new DeleteVirtualDiskCommand(Program.MainWindow, selectedVDIs)
+                {AllowRunningVMDelete = true};
+
+            //If the selection contains a mixture of attached and detached VBDs, go with the activation scenario.
+            //The action will report afterwards which ones failed because they were attached
+
+            if (selectedVBDs.Any(v => v.XenObject is VBD vbd && !vbd.currently_attached))
+                DeactivateButton.Command = new ActivateVBDCommand(Program.MainWindow, selectedVBDs);
             else
-            {
-                DeleteButtonContainer.SetToolTip(deleteCmd.ToolTipText);
-                DeleteButton.Enabled = false;
-            }
+                DeactivateButton.Command = new DeactivateVBDCommand(Program.MainWindow, selectedVBDs);
 
-            Command activationCmd = null;
+            DetachButton.Command = new DetachVirtualDiskCommand(Program.MainWindow, selectedVDIs, vm);
 
-            SelectedItemCollection vbdCol = new SelectedItemCollection(selectedVBDs);
-            if (vbdCol.AsXenObjects<VBD>().Find(delegate(VBD vbd) { return !vbd.currently_attached; }) == null)
-            {
-                // no VBDs are attached so we are deactivating
-                toolStripMenuItemDeactivate.Text = DeactivateButton.Text = Messages.DEACTIVATE;
-                activationCmd = new DeactivateVBDCommand(Program.MainWindow, selectedVBDs);
-            }
-            else
-            {
-                // this is the default cause in the mixed attached/detached scenario. We try to activate all the selection
-                // The command error reports afterwards about the ones which are already attached
-                toolStripMenuItemDeactivate.Text = DeactivateButton.Text = Messages.ACTIVATE;
-                activationCmd = new ActivateVBDCommand(Program.MainWindow, selectedVBDs);
-            }
-
-            if (activationCmd.CanExecute())
-            {
-                DeactivateButtonContainer.RemoveAll();
-                DeactivateButton.Enabled = true;
-            }
-            else
-            {
-                DeactivateButtonContainer.SetToolTip(activationCmd.ToolTipText);
-                DeactivateButton.Enabled = false;
-            }
-
-            DetachVirtualDiskCommand detachCmd = new DetachVirtualDiskCommand(Program.MainWindow, selectedVDIs, vm);
-            if (detachCmd.CanExecute())
-            {
-                DetachButtonContainer.RemoveAll();
-                DetachButton.Enabled = true;
-            }
-            else
-            {
-                DetachButtonContainer.SetToolTip(detachCmd.ToolTipText);
-                DetachButton.Enabled = false;
-            }
-
-            // Move button
-            Command moveCmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, new SelectedItemCollection(selectedVDIs));
-            if (moveCmd.CanExecute())
-            {
-                MoveButton.Enabled = true;
-                MoveButtonContainer.RemoveAll();
-            }
-            else
-            {
-                MoveButton.Enabled = false;
-                MoveButtonContainer.SetToolTip(moveCmd.ToolTipText);
-            }
+            MoveButton.Command = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow,
+                new SelectedItemCollection(selectedVDIs));
         }
 
         #region Actions on VDIs
 
-        private void AddVdi()
-        {
-            var cmd = new AddVirtualDiskCommand(Program.MainWindow, vm);
-            if (cmd.CanExecute())
-                cmd.Execute();
-        }
-
-        private void AttachVdi()
-        {
-            AttachVirtualDiskCommand cmd = new AttachVirtualDiskCommand(Program.MainWindow, vm);
-            if (cmd.CanExecute())
-                cmd.Execute();
-        }
-
-        private void MoveVdi()
-        {
-            List<VBDRow> rows = SelectedVBDRows;
-            if (rows == null)
-                return;
-
-            var vdis = (from VBDRow r in rows select new SelectedItem(r.VDI)).ToList();
-
-            var cmd = MoveVirtualDiskDialog.MoveMigrateCommand(Program.MainWindow, new SelectedItemCollection(vdis));
-            if (cmd.CanExecute())
-                cmd.Execute();
-        }
-
-        private void DetachVdi()
-        {
-            List<VBDRow> rows = SelectedVBDRows;
-            if (rows == null)
-                return;
-            List<SelectedItem> l = new List<SelectedItem>();
-            foreach (VBDRow r in rows)
-                l.Add(new SelectedItem(r.VDI));
-
-            DetachVirtualDiskCommand cmd = new DetachVirtualDiskCommand(Program.MainWindow, l, vm);
-            if (cmd.CanExecute())
-                cmd.Execute();
-        }
-
-        private void DeleteVdi()
-        {
-            List<VBDRow> rows = SelectedVBDRows;
-            if (rows == null)
-                return;
-            List<SelectedItem> l = new List<SelectedItem>();
-            foreach (VBDRow r in rows)
-                l.Add(new SelectedItem(r.VDI));
-
-            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow, l);
-            // User has visibility that this disk in use by this VM. Allow unplug + delete in single step (non default behaviour),
-            // but only if we are the only VBD (default behaviour)
-            cmd.AllowRunningVMDelete = true;
-            if (cmd.CanExecute())
-                cmd.Execute();
-        }
-
         private void EditVdi()
         {
-            if (vm == null)
-                return;
-
-            List<VBDRow> rows = SelectedVBDRows;
-
-            if (rows == null)
-                return;
-
-            new PropertiesDialog(rows[0].VDI).ShowDialog(this);
-        }
-
-        private void ActivateDeactivateVdi()
-        {
-            List<VBDRow> rows = SelectedVBDRows;
-            if (rows == null)
-                return;
-
-            var selection = from VBDRow r in rows select new SelectedItem(r.VBD);
-            SelectedItemCollection col = new SelectedItemCollection(selection);
-
-            Command cmd = null;
-            if (col.AsXenObjects<VBD>().Find(vbd => !vbd.currently_attached) == null)
-                cmd = new DeactivateVBDCommand(Program.MainWindow, col);
-            else
-                cmd = new ActivateVBDCommand(Program.MainWindow, col);
-
-            if (cmd.CanExecute())
-                cmd.Execute();
+            if (EditButton.Tag is VDI vdi)
+                using (var dlg = new PropertiesDialog(vdi))
+                    dlg.ShowDialog(this);
         }
 
         #endregion
@@ -588,34 +439,40 @@ namespace XenAdmin.TabPages
 
         private void toolStripMenuItemAdd_Click(object sender, EventArgs e)
         {
-            AddVdi();
+            if (AddButton.Visible && AddButton.Enabled)
+                AddButton.PerformClick();
             UpdateButtons();
         }
 
         private void toolStripMenuItemAttach_Click(object sender, EventArgs e)
         {
-            AttachVdi();
+            if (AttachButton.Visible && AttachButton.Enabled)
+                AttachButton.PerformClick();
             UpdateButtons();
         }
 
         private void toolStripMenuItemDeactivate_Click(object sender, EventArgs e)
         {
-            ActivateDeactivateVdi();
+            if (DeactivateButton.Enabled)
+                DeactivateButton.PerformClick();
         }
 
         private void toolStripMenuItemMove_Click(object sender, EventArgs e)
         {
-            MoveVdi();
+            if (MoveButton.Enabled)
+                MoveButton.PerformClick();
         }
 
         private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
         {
-            DeleteVdi();
+            if (DeleteButton.Visible && DeleteButton.Enabled)
+                DeleteButton.PerformClick();
         }
 
         private void toolStripMenuItemDetach_Click(object sender, EventArgs e)
         {
-            DetachVdi();
+            if (DetachButton.Visible && DetachButton.Enabled)
+                DetachButton.PerformClick();
         }
 
         private void toolStripMenuItemProperties_Click(object sender, EventArgs e)
@@ -626,34 +483,12 @@ namespace XenAdmin.TabPages
         
         private void AddButton_Click(object sender, EventArgs e)
         {
-            AddVdi();
             UpdateButtons();
         }
 
         private void AttachButton_Click(object sender, EventArgs e)
         {
-            AttachVdi();
             UpdateButtons();
-        }
-
-        private void DeactivateButton_Click(object sender, EventArgs e)
-        {
-            ActivateDeactivateVdi();
-        }
-
-        private void MoveButton_Click(object sender, EventArgs e)
-        {
-            MoveVdi();
-        }
-
-        private void DeleteDriveButton_Click(object sender, EventArgs e)
-        {
-            DeleteVdi();
-        }
-
-        private void DetachButton_Click(object sender, EventArgs e)
-        {
-            DetachVdi();
         }
 
         private void EditButton_Click(object sender, EventArgs e)

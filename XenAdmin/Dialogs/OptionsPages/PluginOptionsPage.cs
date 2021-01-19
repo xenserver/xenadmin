@@ -41,25 +41,6 @@ namespace XenAdmin.Dialogs.OptionsPages
     internal partial class PluginOptionsPage : UserControl, IOptionsPage
     {
         private PluginManager _pluginManager;
-        public PluginManager PluginManager
-        {
-            set
-            {
-                _pluginManager = value;
-
-                if (_pluginManager.Plugins.Count > 0)
-                {
-                    label2.Visible = m_gridPlugins.Visible = label3.Visible = m_gridFeatures.Visible = true;
-                    LoadPluginList();
-                }
-                else
-                {
-                    label2.Visible = m_gridPlugins.Visible = label3.Visible = m_gridFeatures.Visible = false;
-                    labelNoPlugins.Visible = true;
-                }
-                Refresh();
-            }
-        }
 
         public PluginOptionsPage()
         {
@@ -69,9 +50,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.linkLabel1.Visible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
         }
 
-        #region Private methods
-
-        private void LoadPluginList()
+        public void Build()
         {
             if (_pluginManager.Plugins.Count > 0)
             {
@@ -108,7 +87,13 @@ namespace XenAdmin.Dialogs.OptionsPages
             Refresh();
         }
 
-        #endregion
+        public void SetPluginManager(PluginManager pluginManager, bool rebuild)
+        {
+            _pluginManager = pluginManager;
+            Enabled = pluginManager.Enabled;
+            if (rebuild)
+                Build();
+        }
 
         #region Control event handlers
 
@@ -121,7 +106,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             _pluginManager.ReloadPlugins();
             m_tlpScanning.Visible = false;
-            LoadPluginList();
+            Build();
             refreshButton.Enabled = true;
             Refresh();
         }
@@ -253,6 +238,15 @@ namespace XenAdmin.Dialogs.OptionsPages
         #endregion
 
         #region Implementation of IOptionsPage
+
+        public bool IsValidToSave()
+        {
+            return true;
+        }
+
+        public void ShowValidationMessages()
+        {
+        }
 
         public void Save()
         {

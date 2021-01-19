@@ -1160,7 +1160,7 @@ namespace XenAdmin.ConsoleView
                         DialogResult dialogResult;
                         using (ThreeButtonDialog dlg = new NoIconDialog(Messages.FORCE_ENABLE_RDP,
                             ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                            {HelpName = "EnableRDPonVM"})
+                            {HelpNameSetter = "EnableRDPonVM"})
                         {
                             dialogResult = dlg.ShowDialog(Program.MainWindow);
                         }

@@ -374,27 +374,32 @@ namespace XenAdmin.Dialogs
         #endregion
 
         internal override string HelpName => ExistingVif == null ? "VIFDialog" : "EditVmNetworkSettingsDialog";
-    }
 
-    public class NetworkComboBoxItem : IEquatable<NetworkComboBoxItem>
-    {
-        public XenAPI.Network Network;
-
-        public NetworkComboBoxItem(XenAPI.Network network)
+        
+        private class NetworkComboBoxItem : IEquatable<NetworkComboBoxItem>
         {
-            Network = network;
-        }
+            public XenAPI.Network Network;
 
-        public override string ToString()
-        {
-            return Network == null ? Messages.NONE : Helpers.GetName(Network);
-        }
+            public NetworkComboBoxItem(XenAPI.Network network)
+            {
+                Network = network;
+            }
 
-        public bool Equals(NetworkComboBoxItem other)
-        {
-            if (Network == null)
-                return other.Network == null;
-            return Network.Equals(other.Network);
+            public override string ToString()
+            {
+                return Network == null ? Messages.NONE : Helpers.GetName(Network);
+            }
+
+            public bool Equals(NetworkComboBoxItem other)
+            {
+                if (other == null)
+                    return false;
+                
+                if (Network == null)
+                    return other.Network == null;
+
+                return Network.Equals(other.Network);
+            }
         }
     }
 }

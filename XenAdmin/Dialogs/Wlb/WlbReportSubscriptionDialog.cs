@@ -246,7 +246,7 @@ namespace XenAdmin.Dialogs.Wlb
             {
                 if (!IsValidControl(ctl))
                 {
-                    HelpersGUI.ShowBalloonMessage(ctl, Messages.INVALID_PARAMETER, InvalidParamToolTip);
+                    HelpersGUI.ShowBalloonMessage(ctl, InvalidParamToolTip, Messages.INVALID_PARAMETER);
                     return false;
                 }
             }
@@ -255,7 +255,7 @@ namespace XenAdmin.Dialogs.Wlb
             {
                 if (!IsValidControl(ctl))
                 {
-                    HelpersGUI.ShowBalloonMessage(ctl, Messages.INVALID_PARAMETER, InvalidParamToolTip);
+                    HelpersGUI.ShowBalloonMessage(ctl, InvalidParamToolTip, Messages.INVALID_PARAMETER);
                     return false;
                 }
             }

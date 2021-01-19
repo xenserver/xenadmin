@@ -31,6 +31,7 @@
 
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.OptionsPages;
@@ -43,11 +44,8 @@ namespace XenAdmin.Dialogs
         internal OptionsDialog(PluginManager pluginManager)
         {
             InitializeComponent();
-            pluginOptionsPage1.Enabled = pluginManager.Enabled;
-            pluginOptionsPage1.PluginManager = pluginManager;
+            pluginOptionsPage1.SetPluginManager(pluginManager, false);//do not request rebuild; it will be done on load
             verticalTabs.SelectedItem = securityOptionsPage1;
-
-            connectionOptionsPage1.IsValidChanged += ConnectionOptionsPage1_IsValidChanged;
 
             if (!Application.RenderWithVisualStyles)
                 ContentPanel.BackColor = SystemColors.Control;
@@ -58,13 +56,27 @@ namespace XenAdmin.Dialogs
                 verticalTabs.Items.Remove(updatesOptionsPage1);
         }
 
-        private void ConnectionOptionsPage1_IsValidChanged(bool isPageValid)
+        protected override void OnLoad(EventArgs e)
         {
-            okButton.Enabled = isPageValid;
+            base.OnLoad(e);
+
+            foreach (IOptionsPage page in verticalTabs.Items)
+                page.Build();
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            foreach (IOptionsPage page in verticalTabs.Items)
+            {
+                if (!page.IsValidToSave())
+                {
+                    SelectPage(page);
+                    page.ShowValidationMessages();
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+            }
+
             foreach (IOptionsPage page in verticalTabs.Items)
                 page.Save();
 

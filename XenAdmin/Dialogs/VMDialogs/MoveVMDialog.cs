@@ -51,17 +51,16 @@ namespace XenAdmin.Dialogs.VMDialogs
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            Host affinity = vm.Home();
+            EnableMoveButton();
 
             var vdis = (from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
-                where vbd.GetIsOwner()
+                where vbd.GetIsOwner() && vbd.type != vbd_type.CD
                 let vdi = vm.Connection.Resolve(vbd.VDI)
                 where vdi != null
                 select vdi).ToArray();
 
-            EnableMoveButton();
             srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, vm.Connection,
-                affinity, null, vdis, vm.TotalVMSize());
+                vm.Home(), null, vdis);
         }
 
         private void EnableMoveButton()
