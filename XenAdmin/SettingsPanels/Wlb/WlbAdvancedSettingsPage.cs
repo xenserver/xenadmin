@@ -312,7 +312,7 @@ namespace XenAdmin.SettingsPanels
         {
             if (!this.ValidToSave)
             {
-                HelpersGUI.ShowBalloonMessage(textBoxSMTPServer, Messages.INVALID_PARAMETER, InvalidParamToolTip);
+                HelpersGUI.ShowBalloonMessage(textBoxSMTPServer, InvalidParamToolTip, Messages.INVALID_PARAMETER);
             }
             //BL: Disable it for now, will enable it after adding the port to WLB side
             /*

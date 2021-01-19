@@ -38,40 +38,37 @@ namespace CFUValidator.Updates
 {
     class ReadFromFileUpdatesXmlSource : DownloadUpdatesXmlAction, ICheckForUpdatesXMLSource
     {
-        private readonly string newLocation;
+        private readonly string _location;
+
         public ReadFromFileUpdatesXmlSource(string location)
-            : base(true, true, true, "CFU", "1", location)
+            : base(true, true, true, "CFU")
         {
-            newLocation = location;
-            ErrorRaised = null;
+            _location = location ?? throw new ArgumentNullException(nameof(location));
         }
 
-        protected override XmlDocument FetchCheckForUpdatesXml(string location)
+        protected override XmlDocument FetchCheckForUpdatesXml()
         {
-            if (!File.Exists(newLocation))
+            if (!File.Exists(_location))
             {
-                ErrorRaised = new CFUValidationException("File not found at: " + newLocation);
+                ErrorRaised = new CFUValidationException("File not found at: " + _location);
                 throw ErrorRaised;
             }
                  
             try
             {
                 XmlDocument xdoc = new XmlDocument();
-                using (StreamReader sr = new StreamReader(newLocation))
-                {
+                using (StreamReader sr = new StreamReader(_location))
                     xdoc.Load(sr);
-                }
                 return xdoc;
             }
             catch(Exception)
             {
-                ErrorRaised = new CFUValidationException("Could not read/parse file: " + newLocation);
+                ErrorRaised = new CFUValidationException("Could not read/parse file: " + _location);
                 throw ErrorRaised;
             }
             
         }
 
         public Exception ErrorRaised { get; private set; }
-
     }
 }

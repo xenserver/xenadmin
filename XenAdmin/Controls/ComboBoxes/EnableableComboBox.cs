@@ -59,7 +59,7 @@ namespace XenAdmin.Controls
         {
             int index = e.Index;
 
-            if (index > -1)
+            if (-1 < index && index < Items.Count)
             {
                 e.DrawBackground();
 

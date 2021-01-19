@@ -230,7 +230,7 @@ namespace XenAdmin.Actions
                     using (var d = new WarningDialog(string.Format(Messages.FORCE_CLOSE_PLUGIN_PROMPT, _menuItemFeature.ToString()),
                         new ThreeButtonDialog.TBDButton(Messages.FORCE_CLOSE, DialogResult.Yes),
                         new ThreeButtonDialog.TBDButton(Messages.ALLOW_TO_CONTINUE, DialogResult.No))
-                        {HelpName = "ProcessForceClosePrompt"})
+                        {HelpNameSetter = "ProcessForceClosePrompt"})
                     {
                         if (d.ShowDialog(Program.MainWindow) == DialogResult.Yes && !_extAppProcess.HasExited)
                             _extAppProcess.Kill();

@@ -705,8 +705,15 @@ namespace XenAdmin.Commands
                 items.Add(new NewSRCommand(mainWindow, selection));
 				items.Add(new ImportCommand(mainWindow, selection));
                 items.AddSeparator();
-                if (selection.FirstAsXenObject != null )
-                    items.Add(new HACommand(mainWindow, selection));
+                
+                var haItem = new CommandToolStripMenuItem(new HACommand(mainWindow, selection), true);
+                if (haItem.Command.CanExecute())
+                {
+                    haItem.DropDownItems.Add(new CommandToolStripMenuItem(new HAConfigureCommand(mainWindow, selection), true));
+                    haItem.DropDownItems.Add(new CommandToolStripMenuItem(new HADisableCommand(mainWindow, selection), true));
+                    items.Add(haItem);
+                }
+
                 items.AddIfEnabled(new VMGroupCommand<VMSS>(mainWindow, selection));
                 items.AddIfEnabled(new VMGroupCommand<VM_appliance>(mainWindow, selection));
 

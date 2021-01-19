@@ -2229,20 +2229,7 @@ namespace XenAdmin
 
             Properties.Settings.Default.WindowSize = this.Size;
             Properties.Settings.Default.WindowLocation = this.Location;
-            try
-            {
-                Settings.SaveServerList();
-                Properties.Settings.Default.Save();
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
-                    {WindowTitle =  Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
-                {
-                    dlg.ShowDialog(this);
-                }
-                log.Error("Could not save settings.", ex);
-            }
+            Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
             base.OnClosing(e);
         }
 

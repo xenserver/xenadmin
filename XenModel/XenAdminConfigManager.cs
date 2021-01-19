@@ -63,5 +63,6 @@ namespace XenAdmin
         void SaveSettingsIfRequired();
         bool ShowHiddenVMs { get; }
         string GetXenCenterMetadata(bool isForXenCenter);
+        string GetCustomUpdatesXmlLocation();
     }
 }

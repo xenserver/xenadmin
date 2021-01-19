@@ -713,7 +713,6 @@ namespace XenAdmin.TabPages
             // 
             // contextMenuStripView
             // 
-            this.contextMenuStripView.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonListView,
             this.toolStripButtonTreeView,

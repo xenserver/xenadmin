@@ -30,11 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
-using System.Drawing.Design;
 using XenAdmin.Controls;
 
 namespace XenAdmin.Commands
@@ -48,17 +45,10 @@ namespace XenAdmin.Commands
         private SelectionBroadcaster _selectionBroadcaster;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandButton"/> class.
-        /// </summary>
-        public CommandButton()
-        {
-        }
-
-        /// <summary>
         /// Gets or sets the command which is being used by the Command control.
         /// </summary>
-        [DefaultValue(null)]
-        [Editor(typeof(CommandEditor<Command>), typeof(UITypeEditor))]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Command Command
         {
             get
@@ -95,8 +85,8 @@ namespace XenAdmin.Commands
                     Text = _command.ButtonText;
                 }
 
-                if (Parent is ToolTipContainer)
-                    (Parent as ToolTipContainer).SetToolTip(_command.ToolTipText);
+                if (Parent is ToolTipContainer ttContainer)
+                    ttContainer.SetToolTip(_command.ToolTipText);
             }
         }
 
@@ -132,7 +122,6 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Sets the <see cref="SelectionBroadcaster"/> that should be listened to for selection changes.
         /// </summary>
-        /// <value></value>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SelectionBroadcaster SelectionBroadcaster

@@ -36,20 +36,20 @@ namespace XenAdmin.TabPages
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxWarningTriangle = new System.Windows.Forms.PictureBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonConfigure = new System.Windows.Forms.Button();
-            this.buttonDisableHa = new System.Windows.Forms.Button();
+            this.toolTipContainer1 = new XenAdmin.Controls.ToolTipContainer();
+            this.buttonConfigure = new XenAdmin.Commands.CommandButton();
+            this.toolTipContainer2 = new XenAdmin.Controls.ToolTipContainer();
+            this.buttonDisableHa = new XenAdmin.Commands.CommandButton();
             this.tableLatencies = new System.Windows.Forms.TableLayoutPanel();
             this.customListPanel = new XenAdmin.Controls.CustomListPanel();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarningTriangle)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            this.toolTipContainer1.SuspendLayout();
+            this.toolTipContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -85,25 +85,11 @@ namespace XenAdmin.TabPages
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatus, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLatencies, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.customListPanel, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.pictureBoxWarningTriangle, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.labelStatus, 1, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // pictureBoxWarningTriangle
-            // 
-            this.pictureBoxWarningTriangle.Image = global::XenAdmin.Properties.Resources._000_WarningAlert_h32bit_32;
-            resources.ApplyResources(this.pictureBoxWarningTriangle, "pictureBoxWarningTriangle");
-            this.pictureBoxWarningTriangle.Name = "pictureBoxWarningTriangle";
-            this.pictureBoxWarningTriangle.TabStop = false;
             // 
             // labelStatus
             // 
@@ -114,23 +100,33 @@ namespace XenAdmin.TabPages
             // flowLayoutPanel1
             // 
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.Controls.Add(this.buttonConfigure);
-            this.flowLayoutPanel1.Controls.Add(this.buttonDisableHa);
+            this.flowLayoutPanel1.Controls.Add(this.toolTipContainer1);
+            this.flowLayoutPanel1.Controls.Add(this.toolTipContainer2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // toolTipContainer1
+            // 
+            this.toolTipContainer1.Controls.Add(this.buttonConfigure);
+            resources.ApplyResources(this.toolTipContainer1, "toolTipContainer1");
+            this.toolTipContainer1.Name = "toolTipContainer1";
             // 
             // buttonConfigure
             // 
             resources.ApplyResources(this.buttonConfigure, "buttonConfigure");
             this.buttonConfigure.Name = "buttonConfigure";
             this.buttonConfigure.UseVisualStyleBackColor = true;
-            this.buttonConfigure.Click += new System.EventHandler(this.buttonConfigure_Click);
+            // 
+            // toolTipContainer2
+            // 
+            this.toolTipContainer2.Controls.Add(this.buttonDisableHa);
+            resources.ApplyResources(this.toolTipContainer2, "toolTipContainer2");
+            this.toolTipContainer2.Name = "toolTipContainer2";
             // 
             // buttonDisableHa
             // 
             resources.ApplyResources(this.buttonDisableHa, "buttonDisableHa");
             this.buttonDisableHa.Name = "buttonDisableHa";
             this.buttonDisableHa.UseVisualStyleBackColor = true;
-            this.buttonDisableHa.Click += new System.EventHandler(this.buttonDisableHa_Click);
             // 
             // tableLatencies
             // 
@@ -159,10 +155,9 @@ namespace XenAdmin.TabPages
             this.pageContainerPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarningTriangle)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.toolTipContainer1.ResumeLayout(false);
+            this.toolTipContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,12 +173,12 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.PictureBox pictureBoxWarningTriangle;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button buttonDisableHa;
-        private System.Windows.Forms.Button buttonConfigure;
+        private XenAdmin.Commands.CommandButton buttonDisableHa;
+        private XenAdmin.Commands.CommandButton buttonConfigure;
         private System.Windows.Forms.TableLayoutPanel tableLatencies;
         private XenAdmin.Controls.CustomListPanel customListPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private Controls.ToolTipContainer toolTipContainer1;
+        private Controls.ToolTipContainer toolTipContainer2;
     }
 }

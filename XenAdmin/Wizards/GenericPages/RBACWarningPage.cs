@@ -410,6 +410,11 @@ namespace XenAdmin.Wizards.GenericPages
                 ApiCallsToCheck.Add(method);
             }
 
+            public void AddApiCheckRange(params string[] strings)
+            {
+                ApiCallsToCheck.AddRange(strings);
+            }
+
 			public void AddApiCheckRange(RbacMethodList methodList)
 			{
 				foreach (var method in methodList)

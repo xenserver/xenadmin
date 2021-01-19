@@ -32,18 +32,18 @@ namespace XenAdmin.TabPages
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VMStoragePage));
-            this.AddButton = new System.Windows.Forms.Button();
+            this.AddButton = new XenAdmin.Commands.CommandButton();
             this.EditButton = new System.Windows.Forms.Button();
-            this.AttachButton = new System.Windows.Forms.Button();
+            this.AttachButton = new XenAdmin.Commands.CommandButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.DeactivateButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DeactivateButton = new System.Windows.Forms.Button();
+            this.DeactivateButton = new XenAdmin.Commands.CommandButton();
             this.MoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.MoveButton = new System.Windows.Forms.Button();
+            this.MoveButton = new XenAdmin.Commands.CommandButton();
             this.DetachButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DetachButton = new System.Windows.Forms.Button();
+            this.DetachButton = new XenAdmin.Commands.CommandButton();
             this.DeleteButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.DeleteButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new XenAdmin.Commands.CommandButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAttach = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,7 +136,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.DeactivateButton, "DeactivateButton");
             this.DeactivateButton.Name = "DeactivateButton";
             this.DeactivateButton.UseVisualStyleBackColor = true;
-            this.DeactivateButton.Click += new System.EventHandler(this.DeactivateButton_Click);
             // 
             // MoveButtonContainer
             // 
@@ -149,7 +148,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.MoveButton, "MoveButton");
             this.MoveButton.Name = "MoveButton";
             this.MoveButton.UseVisualStyleBackColor = true;
-            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
             // DetachButtonContainer
             // 
@@ -162,7 +160,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.DetachButton, "DetachButton");
             this.DetachButton.Name = "DetachButton";
             this.DetachButton.UseVisualStyleBackColor = true;
-            this.DetachButton.Click += new System.EventHandler(this.DetachButton_Click);
             // 
             // DeleteButtonContainer
             // 
@@ -175,7 +172,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.DeleteButton, "DeleteButton");
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteDriveButton_Click);
             // 
             // contextMenuStrip1
             // 
@@ -185,8 +181,8 @@ namespace XenAdmin.TabPages
             this.toolStripMenuItemAttach,
             this.toolStripMenuItemDeactivate,
             this.toolStripMenuItemMove,
-            this.toolStripMenuItemDelete,
             this.toolStripMenuItemDetach,
+            this.toolStripMenuItemDelete,
             this.toolStripSeparator1,
             this.toolStripMenuItemProperties});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -448,15 +444,15 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        private System.Windows.Forms.Button AttachButton;
-        private System.Windows.Forms.Button AddButton;
+        private XenAdmin.Commands.CommandButton AttachButton;
+        private XenAdmin.Commands.CommandButton AddButton;
         private System.Windows.Forms.Button EditButton;
-        private System.Windows.Forms.Button DetachButton;
-        private System.Windows.Forms.Button DeleteButton;
+        private XenAdmin.Commands.CommandButton DetachButton;
+        private XenAdmin.Commands.CommandButton DeleteButton;
         private XenAdmin.Controls.ToolTipContainer DetachButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeleteButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeactivateButtonContainer;
-        private System.Windows.Forms.Button DeactivateButton;
+        private XenAdmin.Commands.CommandButton DeactivateButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewStorage;
@@ -471,7 +467,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private XenAdmin.Controls.ToolTipContainer MoveButtonContainer;
-        private System.Windows.Forms.Button MoveButton;
+        private XenAdmin.Commands.CommandButton MoveButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdd;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAttach;

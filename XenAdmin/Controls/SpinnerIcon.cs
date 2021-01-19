@@ -66,7 +66,8 @@ namespace XenAdmin.Controls
         #region Properties
 
         /// <summary>
-        /// Image to be displayed when DisplaySucceededImage() was called.
+        /// Image to be displayed when DisplaySuccessImage() is called.
+        /// Default value is _000_Tick_h32bit_16
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue(typeof(int), "Image that is displayed after DisplaySuccessImage() is invoked.")]
@@ -80,6 +81,10 @@ namespace XenAdmin.Controls
             }
         }
 
+        /// <summary>
+        /// Image to be displayed when DisplayFailureImage() is called.
+        /// Default value is _000_error_h32bit_16
+        /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue(typeof(int), "Image that is displayed after DisplayFailureImage() is invoked.")]
         public Image FailureImage

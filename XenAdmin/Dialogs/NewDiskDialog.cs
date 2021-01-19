@@ -63,7 +63,7 @@ namespace XenAdmin.Dialogs
             NameTextBox.Text = GetDefaultVDIName();
             diskSpinner1.Populate();
             UpdateErrorsAndButtons();
-            SrListBox.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null, 0);
+            SrListBox.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null);
         }
 
         public NewDiskDialog(IXenConnection connection, VM vm)
@@ -86,7 +86,7 @@ namespace XenAdmin.Dialogs
                 NameTextBox.Text = GetDefaultVDIName();
                 diskSpinner1.Populate(minSize: minSize);
                 UpdateErrorsAndButtons();
-                SrListBox.PopulateAsync(pickerUsage, connection, affinity, null, null, 0);
+                SrListBox.PopulateAsync(pickerUsage, connection, affinity, null, null);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace XenAdmin.Dialogs
                 OkButton.Text = Messages.OK;
                 diskSpinner1.Populate(DiskTemplate.virtual_size, minSize);
                 UpdateErrorsAndButtons();
-                SrListBox.PopulateAsync(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), null, 0);
+                SrListBox.PopulateAsync(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), null);
             }
         }
 
@@ -283,13 +283,13 @@ namespace XenAdmin.Dialogs
             // Ordering is important here, we want to show the most relevant message
             // The error should be shown only for size errors
 
+            SrListBox.UpdateDiskSize(diskSpinner1.SelectedSize);
+
             if (!diskSpinner1.IsSizeValid)
             {
                 OkButton.Enabled = false;
                 return;
             }
-
-            SrListBox.UpdateDiskSize(diskSpinner1.SelectedSize);
 
             if (!SrListBox.ValidSelectionExists)//all SRs disabled
             {

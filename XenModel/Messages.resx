@@ -2362,6 +2362,9 @@ This will cancel compilation of the status report.</value>
   <data name="CANNOT_ACTIVATE_SNAPSHOT_IN_USE" xml:space="preserve">
     <value>This snapshot is in use and cannot be activated.</value>
   </data>
+  <data name="CANNOT_ACTIVATE_TEMPLATE_DISK" xml:space="preserve">
+    <value>Disks belonging to templates cannot be activated or deactivated.</value>
+  </data>
   <data name="CANNOT_ACTIVATE_VD_ALREADY_ACTIVE" xml:space="preserve">
     <value>This virtual disk is already activated on VM '{0}'.</value>
   </data>
@@ -2423,8 +2426,7 @@ This will cancel compilation of the status report.</value>
     <value>ISO storage must be ejected from VMs before being deleted. This storage is in use by the VM '{0}'.</value>
   </data>
   <data name="CANNOT_DELETE_CANNOT_DEACTIVATE_REASON" xml:space="preserve">
-    <value>It is not possible to deactivate and delete this virtual disk on the VM '{0}': 
-
+    <value>It is not possible to deactivate and delete this virtual disk on the VM '{0}':
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
@@ -4462,6 +4464,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
     <value>Disable HA if you want to configure the management interfaces</value>
   </data>
+  <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
+    <value>&amp;Disable HA</value>
+  </data>
   <data name="DISABLE_NOAMP" xml:space="preserve">
     <value>Disable</value>
   </data>
@@ -5528,6 +5533,15 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0} Eject the CD</value>
   </data>
+  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
+    <value>You cannot nominate a new master while the pool is in the process of creating a cluster.</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
+    <value>You cannot nominate a new master while HA is being disabled on the pool.</value>
+  </data>
+  <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
+    <value>You cannot nominate a new master while HA is being enabled on the pool.</value>
+  </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} Install Management Agent</value>
   </data>
@@ -5543,23 +5557,14 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>There is not enough free memory available on the other servers in the pool to migrate all the running VMs off this server. Please suspend some of the VMs</value>
   </data>
-  <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE" xml:space="preserve">
-    <value>Not enough memory</value>
-  </data>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS" xml:space="preserve">
-    <value>There are no other servers available in the pool to migrate the running VMs to.  Please suspend the VMs instead.</value>
-  </data>
-  <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
-    <value>No servers available</value>
+    <value>There are no other servers available in the pool to migrate the running VMs to. Please suspend the VMs instead.</value>
   </data>
   <data name="EVACUATE_HOST_SHUTDOWN_VM_PROMPT" xml:space="preserve">
     <value>{0} Shut down the VM</value>
   </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
     <value>{0} Suspend the VM</value>
-  </data>
-  <data name="EVACUATE_SOLUTION_IN_PROGRESS" xml:space="preserve">
-    <value>Action in progress...</value>
   </data>
   <data name="EXACT_MATCH" xml:space="preserve">
     <value>exactly matches</value>
@@ -6514,9 +6519,6 @@ Reduce protection levels, or bring more servers online to increase the maximum s
 
 Click Configure HA to alter the settings displayed below.</value>
   </data>
-  <data name="HA_TAB_CONFIGURED_UNLICENSED" xml:space="preserve">
-    <value>HA is currently enabled for pool '{0}'.</value>
-  </data>
   <data name="HA_UNABLE_TO_CALCULATE_MESSAGE" xml:space="preserve">
     <value>Unable to calculate maximum pool failure capacity.</value>
   </data>
@@ -6666,13 +6668,13 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Server '{0}' entered maintenance mode</value>
   </data>
   <data name="HOSTACTION_EVACUATING" xml:space="preserve">
-    <value>Server '{0}' entering maintenance mode...</value>
+    <value>Server '{0}' is entering maintenance mode...</value>
   </data>
   <data name="HOSTACTION_EXITED_MAINTENANCE_MODE" xml:space="preserve">
     <value>Server '{0}' exited maintenance mode</value>
   </data>
   <data name="HOSTACTION_EXITING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Server '{0}' exiting maintenance mode...</value>
+    <value>Server '{0}' is exiting maintenance mode...</value>
   </data>
   <data name="HOSTACTION_REBOOT_VM_SHUTDOWN" xml:space="preserve">
     <value>Preparing to reboot server: shutting down {0} ({1} of {2})</value>
@@ -8002,7 +8004,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>(Unlicensed)</value>
   </data>
   <data name="MAINWINDOW_HIGH_AVAILABILITY" xml:space="preserve">
-    <value>&amp;High Availability...</value>
+    <value>&amp;High Availability</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
     <value>Inst&amp;all [Citrix VM Tools]...</value>
@@ -8707,6 +8709,9 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (in use by {1})</value>
+  </data>
+  <data name="NETWORK_LOCKED" xml:space="preserve">
+    <value>currently in use by a different operation</value>
   </data>
   <data name="NETWORK_NAME" xml:space="preserve">
     <value>Network {0}</value>
@@ -10895,12 +10900,15 @@ To access this console switch to an account with the following role:
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
     <value>User {0} does not have sufficient permissions to run a Disaster Recovery wizard. Login as a different user with sufficient privileges and try again.</value>
   </data>
-  <data name="RBAC_HA_TAB_WARNING" xml:space="preserve">
+  <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>Your current role is '{1}'.
 
 To configure HA settings, switch to an account with one of the following roles: 
 
 {0}</value>
+  </data>
+  <data name="RBAC_HA_ENABLE_WARNING" xml:space="preserve">
+    <value>A {0} user cannot configure HA settings. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
     <value>A {0} user cannot perform this action.</value>
@@ -11381,6 +11389,15 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
     <value>You cannot rotate the pool secret when HA is on.</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_CLUSTER" xml:space="preserve">
+    <value>You cannot enable clustering while a pool secret rotation is in progress.</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
+    <value>You cannot configure HA while a pool secret rotation is in progress.</value>
+  </data>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
+    <value>You cannot nominate a new master while a pool secret rotation is in progress.</value>
   </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>
@@ -12236,7 +12253,7 @@ The upper limit: SR size / {2}</value>
     <value>{0} {1}</value>
   </data>
   <data name="SUCCEEDED" xml:space="preserve">
-    <value>succeeded</value>
+    <value>Succeeded</value>
   </data>
   <data name="SUNDAY_LONG" xml:space="preserve">
     <value>Sunday</value>
@@ -13409,7 +13426,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Details:</value>
   </data>
   <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
-    <value>{0}. {1}: {2}</value>
+    <value>- {0}: {1}</value>
   </data>
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>VM Snapsh&amp;ot Schedules...</value>
@@ -13462,9 +13479,6 @@ Schedule:
   </data>
   <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
     <value>Snapshot schedules defined in server '{0}' ({1} out of {2} VMs currently in schedule):</value>
-  </data>
-  <data name="VMSS_SUCCEEDED" xml:space="preserve">
-    <value>Succeeded</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
     <value>Virtual Machines</value>

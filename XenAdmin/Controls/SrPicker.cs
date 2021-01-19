@@ -53,7 +53,6 @@ namespace XenAdmin.Controls
         private VDI[] _existingVDIs;
         private IXenConnection _connection;
         private Host _affinity;
-        private long _diskSize;
         private SR defaultSR;
         private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
         private volatile int _scanCount;
@@ -106,13 +105,12 @@ namespace XenAdmin.Controls
         }
 
         public void PopulateAsync(SRPickerType usage, IXenConnection connection, Host affinity,
-            SR preselectedSR, VDI[] existingVdis, long diskSize)
+            SR preselectedSR, VDI[] existingVdis)
         {
             _usage = usage;
             _connection = connection;
             _affinity = affinity;
             _existingVDIs = existingVdis;
-            _diskSize = diskSize;
 
             if (_connection == null)
                 return;
@@ -157,7 +155,7 @@ namespace XenAdmin.Controls
 
             foreach (SR sr in _connection.Cache.SRs)
             {
-                var item = SrPickerItem.Create(sr, _usage, _affinity, _diskSize, _existingVDIs);
+                var item = SrPickerItem.Create(sr, _usage, _affinity, _existingVDIs);
                 if (item.Show)
                     items.Add(item);
 
@@ -200,14 +198,11 @@ namespace XenAdmin.Controls
             _ = SelectSR(selectedSr) || SelectDefaultSR() || SelectAnySR();
         }
 
-        public void UpdateDiskSize(long diskSize = 0)
+        public void UpdateDiskSize(long diskSize)
         {
             Program.AssertOnEventThread();
             try
             {
-                if (diskSize == 0)
-                    diskSize = _diskSize;
-
                 foreach (SrPickerItem node in Items)
                     node.UpdateDiskSize(diskSize);
             }

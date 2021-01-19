@@ -32,15 +32,12 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs.RestoreSession
 {
     public partial class LoadSessionDialog : XenDialogBase
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public LoadSessionDialog(bool isRetry = false)
         {
             InitializeComponent();
@@ -48,25 +45,8 @@ namespace XenAdmin.Dialogs.RestoreSession
         }
 
         internal override string HelpName => "LoadSessionDialog";
-        public byte[] PasswordHash
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(passBox.Text))
-                {
-                    try
-                    {
-                        return EncryptionUtils.ComputeHash(passBox.Text);
-                    }
-                    catch (Exception exp)
-                    {
-                        log.Error("Could not hash entered password.", exp);
-                    }
-                }
 
-                return null;
-            }
-        }
+        public string Password => passBox.Text;
 
         private void passBox_TextChanged(object sender, EventArgs e)
         {

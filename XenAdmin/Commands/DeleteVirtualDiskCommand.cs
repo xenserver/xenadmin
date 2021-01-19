@@ -392,13 +392,10 @@ namespace XenAdmin.Commands
 
                 if (vdiType == VDI.FriendlyType.SYSTEM_DISK)
                 {
-                  
-
-                    if (vm.power_state == vm_power_state.Running)
-                        return string.Format(
-                            Messages.CANNOT_DELETE_IN_USE_SYS_VD,
-                            Helpers.GetName(vm).Ellipsise(20));
+                    if (vm != null && vm.power_state == vm_power_state.Running)
+                        return string.Format(Messages.CANNOT_DELETE_IN_USE_SYS_VD, vm.Name());
                 }
+
                 if (vbd.Locked)
                     return vdiType == VDI.FriendlyType.SNAPSHOT ? Messages.CANNOT_DELETE_SNAPSHOT_IN_USE
                     : vdiType == VDI.FriendlyType.ISO ? Messages.CANNOT_DELETE_ISO_IN_USE
@@ -406,18 +403,16 @@ namespace XenAdmin.Commands
 
                 if (vbd.currently_attached)
                 {
-                    if (!AllowRunningVMDelete)
-                    {
-                        return string.Format(Messages.CANNOT_DELETE_VDI_ACTIVE_ON,
-                            Helpers.GetName(vm).Ellipsise(20));
-                    }
+                    if (!AllowRunningVMDelete && vm != null)
+                        return string.Format(Messages.CANNOT_DELETE_VDI_ACTIVE_ON, vm.Name());
+
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
                     if (!cmd.CanExecute())
                     {
-                        var reasons = cmd.GetCantExecuteReasons();
-                        return reasons.Count > 0
-                            ? string.Format(Messages.CANNOT_DELETE_CANNOT_DEACTIVATE_REASON,
-                                Helpers.GetName(vm).Ellipsise(20), reasons.ElementAt(0).Value)
+                        var reason = cmd.GetCantExecuteReasons().Values.FirstOrDefault();
+
+                        return vm != null && reason != null && reason != Messages.UNKNOWN
+                            ? string.Format(Messages.CANNOT_DELETE_CANNOT_DEACTIVATE_REASON, vm.Name(), reason)
                             : Messages.UNKNOWN;
                     }
                 }

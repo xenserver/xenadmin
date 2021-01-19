@@ -41,11 +41,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         public SecurityOptionsPage()
         {
             InitializeComponent();
-
-            build();
         }
 
-        private void build()
+        #region IOptionsPage Members
+
+        public void Build()
         {
             // SSL Certificates
             CertificateFoundCheckBox.Checked = Properties.Settings.Default.WarnUnrecognizedCertificate ||
@@ -58,7 +58,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             checkBoxReminder.Checked = Properties.Settings.Default.RemindChangePassword;
         }
 
-        #region IOptionsPage Members
+        public bool IsValidToSave()
+        {
+            return true;
+        }
+
+        public void ShowValidationMessages()
+        {
+        }
 
         public void Save()
         {

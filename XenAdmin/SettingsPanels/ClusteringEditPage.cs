@@ -71,11 +71,9 @@ namespace XenAdmin.SettingsPanels
         {
             if (CheckBoxEnableClustering.Checked)
             {
-                var network = ((NetworkComboBoxItem)comboBoxNetwork.SelectedItem).Network;
+                var network = comboBoxNetwork.SelectedNetwork;
                 if (network != null)
-                {
                     return new EnableClusteringAction(pool, network);
-                }
             }
             else
             {
@@ -126,8 +124,7 @@ namespace XenAdmin.SettingsPanels
         #region PrivateMethods
         private void LoadNetworks(Cluster cluster)
         {
-            comboBoxNetwork.IncludeOnlyEnabledNetworksInComboBox = false;
-            comboBoxNetwork.IncludeOnlyNetworksWithIPAddresses = true;
+            comboBoxNetwork.ExcludeNetworksWithoutIpAddresses = true;
 
             if (cluster == null)
             {
@@ -178,6 +175,8 @@ namespace XenAdmin.SettingsPanels
             }
             else if (pool.ha_enabled)
                 DisableControls(Messages.GFS2_HA_ENABLED);
+            else if (!pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) && pool.is_psr_pending)
+                DisableControls(Messages.ROTATE_POOL_SECRET_PENDING_CLUSTER);
 
             labelHostCountWarning.Visible = pool.Connection.Cache.HostCount < 3;
         }

@@ -163,7 +163,6 @@ namespace XenAdmin.TabPages
             // 
             // newSRButton
             // 
-            this.newSRButton.Command = new XenAdmin.Commands.NewSRCommand();
             resources.ApplyResources(this.newSRButton, "newSRButton");
             this.newSRButton.Name = "newSRButton";
             this.newSRButton.UseVisualStyleBackColor = true;
@@ -176,7 +175,6 @@ namespace XenAdmin.TabPages
             // 
             // trimButton
             // 
-            this.trimButton.Command = new XenAdmin.Commands.TrimSRCommand();
             resources.ApplyResources(this.trimButton, "trimButton");
             this.trimButton.Name = "trimButton";
             this.trimButton.UseVisualStyleBackColor = true;

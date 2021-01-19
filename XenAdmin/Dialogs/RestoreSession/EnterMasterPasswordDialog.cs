@@ -31,24 +31,27 @@
 
 using System;
 using System.Windows.Forms;
+using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs.RestoreSession
 {
     public partial class EnterMasterPasswordDialog : XenDialogBase
     {
-        private byte[] TemporaryMasterPassword;
+        private readonly byte[] _temporaryMasterPassword;
 
         public EnterMasterPasswordDialog(byte[] temporaryMasterPassword)
         {
             InitializeComponent();
-            TemporaryMasterPassword = temporaryMasterPassword;
+            _temporaryMasterPassword = temporaryMasterPassword;
             passwordError.Visible = false;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (Settings.PassCorrect(masterTextBox.Text,TemporaryMasterPassword))
+            if (!string.IsNullOrEmpty(masterTextBox.Text) &&
+                Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(masterTextBox.Text), _temporaryMasterPassword))
             {
                 DialogResult = DialogResult.OK;
             }
@@ -63,6 +66,7 @@ namespace XenAdmin.Dialogs.RestoreSession
         private void masterTextBox_TextChanged(object sender, EventArgs e)
         {
             passwordError.Visible = false;
+            okButton.Enabled = !string.IsNullOrEmpty(masterTextBox.Text);
         }
     }
 }

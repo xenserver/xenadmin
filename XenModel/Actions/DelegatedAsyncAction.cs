@@ -30,9 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -47,7 +44,11 @@ namespace XenAdmin.Actions
     public class DelegatedAsyncAction : AsyncAction
     {
         private readonly Action<Session> invoker;
+        private readonly Func<Session, object> function;
         private readonly string endDescription;
+
+        //TODO: this should move to AsyncAction and replace Result really
+        public object ResultObject { get; private set; }
 
         public DelegatedAsyncAction(IXenConnection connection, string title, string startDescription, string endDescription,
             Action<Session> invoker, params string[] rbacMethods)
@@ -64,9 +65,29 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck = new RbacMethodList(rbacMethods);
         }
 
+        public DelegatedAsyncAction(IXenConnection connection, string title, string startDescription, string endDescription,
+            Func<Session, object> function, params string[] rbacMethods)
+            : this(connection, title, startDescription, endDescription, function, false, rbacMethods)
+        {
+        }
+
+        public DelegatedAsyncAction(IXenConnection connection, string title, string startDescription, string endDescription,
+            Func<Session, object> function, bool suppressHistory, params string[] rbacMethods)
+            : base(connection, title, startDescription, suppressHistory)
+        {
+            this.endDescription = endDescription;
+            this.function = function;
+            ApiMethodsToRoleCheck = new RbacMethodList(rbacMethods);
+        }
+
+
         protected override void Run()
         {
-            invoker(Session);
+            if (invoker != null)
+                invoker(Session);
+            else if (function != null)
+                ResultObject = function(Session);
+
             Description = endDescription;
         }
     }
