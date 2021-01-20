@@ -59,7 +59,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscUtils, Version=0.8.0.0, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
+    <Reference Include="DiscUtils, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DiscUtils.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
@@ -2860,14 +2860,8 @@
     <Compile Include="Commands\CrossPoolMigrateCommand.cs" />
     <Compile Include="Commands\DestroyHostCommand.cs" />
     <Compile Include="Commands\MigrateVirtualDiskCommand.cs" />
-    <Compile Include="Actions\OVFActions\ApplianceAction.cs" />
-    <Compile Include="Actions\OVFActions\ExportApplianceAction.cs" />
     <Compile Include="Actions\GUIActions\GeneralEditPageAction.cs" />
     <Compile Include="Actions\GUIActions\SaveCustomFieldsAction.cs" />
-    <Compile Include="Actions\OVFActions\ImportApplianceAction.cs" />
-    <Compile Include="Actions\OVFActions\ImportImageAction.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Commands\Controls\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3988,12 +3982,6 @@
     </Compile>
     <Compile Include="Wizards\ImportWizard\ImageVMConfigPage.Designer.cs">
       <DependentUpon>ImageVMConfigPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\GenericPages\TvmIpPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\GenericPages\TvmIpPage.Designer.cs">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeExtrasPage.cs">
       <SubType>UserControl</SubType>
@@ -6144,9 +6132,6 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.zh-CN.resx">
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.zh-CN.resx">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\HAWizard.ja.resx">
       <DependentUpon>HAWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -6637,13 +6622,6 @@
     <EmbeddedResource Include="Wizards\ImportWizard\ImageVMConfigPage.resx">
       <DependentUpon>ImageVMConfigPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.ja.resx">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.resx">
-      <DependentUpon>TvmIpPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_Template.zh-CN.resx">
       <DependentUpon>Page_Template.cs</DependentUpon>
     </EmbeddedResource>
@@ -6789,10 +6767,6 @@
     <ProjectReference Include="..\XenOvfApi\XenOvfApi.csproj">
       <Project>{2D78AC6C-B867-484A-A447-3C6FC8B8EAF7}</Project>
       <Name>XenOvfApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XenOvfTransport\XenOvfTransport.csproj">
-      <Project>{9F7E6285-5CBF-41B4-8CB9-AB06DFF90DC0}</Project>
-      <Name>XenOvfTransport</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

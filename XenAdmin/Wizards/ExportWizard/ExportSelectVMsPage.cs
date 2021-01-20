@@ -67,7 +67,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			InitializeComponent();
 			m_tlpWarning.Visible = false;
-			VMsToExport = new List<VM>();
+            m_ctrlError.HideError();
 		}
 
 		#region Accessors
@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// Gets a list of the VMs that will be included in the exported appliance
 		/// </summary>
-		public List<VM> VMsToExport { get; private set; }
+        public List<VM> VMsToExport { get; } = new List<VM>();
 
 		public string ApplianceDirectory { get; set; }
 
@@ -94,17 +94,19 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// Gets the page's title (headline)
 		/// </summary>
-		public override string PageTitle { get { return ExportAsXva ? Messages.EXPORT_SELECTVMS_PAGE_TITLE_XVA : Messages.EXPORT_SELECTVMS_PAGE_TITLE_OVF; } }
+		public override string PageTitle => ExportAsXva
+            ? Messages.EXPORT_SELECTVMS_PAGE_TITLE_XVA
+            : Messages.EXPORT_SELECTVMS_PAGE_TITLE_OVF;
 
 		/// <summary>
 		/// Gets the page's label in the (left hand side) wizard progress panel
 		/// </summary>
-		public override string Text { get { return Messages.EXPORT_SELECTVMS_PAGE_TEXT; } }
+		public override string Text => Messages.EXPORT_SELECTVMS_PAGE_TEXT;
 
 		/// <summary>
 		/// Gets the value by which the help files section for this page is identified
 		/// </summary>
-        public override string HelpID { get { return ExportAsXva ? "SelectVMsXva" : "SelectVMsOvf"; } }
+        public override string HelpID => ExportAsXva ? "SelectVMsXva" : "SelectVMsOvf";
 
         protected override bool ImplementsIsDirty()
         {
@@ -170,7 +172,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		#region Private methods
 
         /// <summary>
-        /// Performs certain checks on the pages's input data and shows/hides an error accordingly
+        /// Performs certain checks on the page's input data and shows/hides an error accordingly
         /// </summary>
         /// <param name="checks">The checks to perform</param>
         private bool PerformCheck(params CheckDelegate[] checks)
@@ -256,7 +258,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			if (spaceNeeded > availableSpace)
 			{
 			    errorMsg = String.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH, Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
-				//Log.Error(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TargeSpaceNotEnough);
+
 				return false;
 			}
 
@@ -322,8 +324,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			{
 				dataGridViewRow.Cells[0].Value = true;
 
-				var vm = dataGridViewRow.Tag as VM;
-				if (vm != null && !VMsToExport.Contains(vm))
+                if (dataGridViewRow.Tag is VM vm && !VMsToExport.Contains(vm))
 					VMsToExport.Add(vm);
 			}
 		}
@@ -336,8 +337,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			{
 				dataGridViewRow.Cells[0].Value = false;
 
-				var vm = dataGridViewRow.Tag as VM;
-				if (vm != null)
+                if (dataGridViewRow.Tag is VM vm)
 					VMsToExport.Remove(vm);
 			}
 		}
@@ -379,9 +379,8 @@ namespace XenAdmin.Wizards.ExportWizard
 				return;
 
 			var row = m_dataGridView.Rows[e.RowIndex];
-			var vm = row.Tag as VM;
 
-			if (vm != null)
+            if (row.Tag is VM vm)
 			{
 				if ((bool)row.Cells[0].Value)
 				{

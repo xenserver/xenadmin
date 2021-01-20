@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Management;
 using System.Reflection;
 using System.Resources;
@@ -70,8 +71,6 @@ namespace XenOvf
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
 
-        private static bool _promptForEula = true;
-
 		internal static ResourceManager _rm = new ResourceManager("XenOvf.Messages", Assembly.GetExecutingAssembly());
 		internal static ResourceManager _ovfrm = new ResourceManager("XenOvf.Content", Assembly.GetExecutingAssembly());
 
@@ -86,25 +85,6 @@ namespace XenOvf
         public static object AlgorithmMap(string key)
         {
             return Properties.Settings.Default[key];
-        }
-
-        public bool PromptForEula
-        {
-            get { return _promptForEula; }
-            set { _promptForEula = value; }
-        }
- 
-        #endregion
-
-        #region LOAD OVF
-        /// <summary>
-        /// Load an OVF XML File into OVF class context
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static EnvelopeType Load(string filename)
-        {
-        	return Tools.LoadOvfXml(filename);
         }
 
         #endregion
@@ -1498,29 +1478,7 @@ namespace XenOvf
 
             return ovfEnv;
         }
-        /// <summary>
-        /// Create an OVA (Tar file) from the OVF and associated files.
-        /// </summary>
-        /// <param name="pathToOvf">Absolute path to the OVF files</param>
-        /// <param name="ovfFileName">OVF file name (file.ovf)</param>
-        /// <param name="compress">Compress the OVA (NOT IMPLEMENTED)</param>
-        /// <param name="cleanup">Remove source files after addition to archive. (true = delete, false = keep)</param>
-        [SecurityPermission(SecurityAction.LinkDemand)]
-        public void CreateOva(string pathToOvf, string ovfFileName, bool compress, bool cleanup)
-        {
-            ConvertOVFtoOVA(pathToOvf, ovfFileName, compress, cleanup);
-        }
-        /// <summary>
-        /// Create an OVA (Tar file) from the OVF and associated files.
-        /// </summary>
-        /// <param name="pathToOvf">Absolute path to the OVF files</param>
-        /// <param name="ovfFileName">OVF file name (file.ovf)</param>
-        /// <param name="compress">Compress the OVA (NOT IMPLEMENTED)</param>
-        [SecurityPermission(SecurityAction.LinkDemand)]
-        public void CreateOva(string pathToOvf, string ovfFileName, bool compress)
-        {
-            ConvertOVFtoOVA(pathToOvf, ovfFileName, compress);
-        }
+
         #endregion
 
         #region REMOVEs
@@ -3193,16 +3151,7 @@ namespace XenOvf
         #endregion
 
         #region FINDs
-        /// <summary>
-        /// Provided the full path / filename of an OVF return a list of 
-        /// filenames/references contained with in the OVF.
-        /// </summary>
-        /// <param name="filename">fullpath/filename</param>
-        /// <returns>array of filenames/references</returns>
-        public string[] FindAttachedFiles(string filename)
-        {
-            return FindAttachedFiles(Load(filename));
-        }
+
         /// <summary>
         /// Find all attached filenames.
         /// </summary>
@@ -3466,24 +3415,22 @@ namespace XenOvf
             log.Debug("OVF.FindRasdById completed, not found");
             return null;
         }
+
         /// <summary>
         /// Find the filename for the given RASD.  
         /// The RASD must Resource Type: 17, 19, 21 and be a hard disk image.
+        /// The file may be compressed (gzip/bzip2)
         /// </summary>
-        /// <param name="ovfEnv">EnvelopeType</param>
-        /// <param name="rasd">RASD_Type</param>
-        /// <param name="compressed">GZip or BZip2</param>
-        /// <returns>string: filename or NULL</returns>
-        public static string FindRasdFileName(EnvelopeType ovfEnv, RASD_Type rasd, out string compressed)
+        public static string FindRasdFileName(EnvelopeType ovfEnv, RASD_Type rasd, out CompressionFactory.Type? compression)
         {
-            //string filename = null;
+            compression = null;
             string diskReference = null;
-            //
+
             // Use in order of priority
-            // 1. HostResource should have binding's if exists.
+            // 1. HostResource should have bindings if exists.
             // 2. InstanceID referenced
             // 3. Connection maybe used by Microsoft (older CIM Spec)
-            //
+
             if (Tools.ValidateProperty("HostResource", rasd))
             {
                 diskReference = rasd.HostResource[0].Value;
@@ -3497,82 +3444,45 @@ namespace XenOvf
                 diskReference = rasd.Connection[0].Value;
             }
 
-
             if (diskReference == null)
-            {
-                compressed = "None";
                 return null;
-            }
 
-            DiskSection_Type disksection = null;
-            foreach (object section in ovfEnv.Sections)
-            {
-                if (section is DiskSection_Type)
-                {
-                    disksection = (DiskSection_Type)section;
-                    break;
-                }
-            }
-
-            if (disksection == null)
-            {
-                compressed = "None";
+            var section = ovfEnv.Sections.FirstOrDefault(s => s is DiskSection_Type);
+            if (!(section is DiskSection_Type diskSection))
                 return null;
-            }
 
-
-            File_Type fileReference = null;
-
-            foreach (VirtualDiskDesc_Type vdisk in disksection.Disk)
+            foreach (VirtualDiskDesc_Type vdisk in diskSection.Disk)
             {
-                if (diskReference.Contains(vdisk.diskId))
+                if (!diskReference.Contains(vdisk.diskId))
+                    continue;
+
+                foreach (File_Type filer in ovfEnv.References.File)
                 {
-                    foreach (File_Type filer in ovfEnv.References.File)
+                    if (!filer.id.Contains(vdisk.fileRef))
+                        continue;
+
+                    if (string.IsNullOrEmpty(filer.compression) || filer.compression.ToLower() == "identity")
+                        return filer.href;
+
+                    if (filer.compression.ToLower().Equals("gzip"))
                     {
-                        if (filer.id.Contains(vdisk.fileRef))
-                        {
-                            fileReference = filer;
-                        }
+                        compression = CompressionFactory.Type.Gz;
+                        return filer.href;
                     }
+
+                    if (filer.compression.ToLower().Equals("bzip2"))
+                    {
+                        compression = CompressionFactory.Type.Bz2;
+                        return filer.href;
+                    }
+
+                    throw new NotSupportedException(string.Format(Messages.COMPRESS_INVALID_METHOD, filer.compression));
                 }
             }
 
-            if (fileReference == null)
-            {
-                compressed = "None";
-                return null;
-            }
-
-            if (fileReference.compression != null &&
-                (fileReference.compression.ToUpper().Equals("GZIP") ||
-                 fileReference.compression.ToUpper().Equals("BZIP2")))
-            {
-                compressed = fileReference.compression;
-            }
-            else
-            {
-                compressed = "None";
-            }
-
-            //
-            // @DONE: What if the file is compressed? Need to handle.
-            //
-            // @DONE. here: This will break in case of: http:// and https://
-            // and may break in case of file:// if it's on a different server.
-            //
-            //if (fileReference.href.Contains("/"))
-            //{
-            //    filename = fileReference.href.Substring(fileReference.href.LastIndexOf('/') + 1);
-            //}
-            //else
-            //{
-            //    filename = fileReference.href;
-            //}
-
-
-            // Let the actual import mechanism figure this out for late time decision on a per-file basis.
-            return fileReference.href;
+            return null;
         }
+
         /// <summary>
         /// Find the localize string.
         /// </summary>
@@ -4767,145 +4677,6 @@ namespace XenOvf
             }
         }
 
-        public static string ExtractArchive(string pathToOva)
-        {
-            Stream inputStream = null;
-            FileStream fsStream = null;
-            ArchiveIterator tar = null;
-
-            var dir = Path.GetDirectoryName(pathToOva);
-
-            try
-            {
-                string ext = Path.GetExtension(pathToOva);
-
-                if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2")) // need to decompress.
-                {
-                    log.Info("OVA is compressed, de-compression stream inserted");
-
-                    var ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(pathToOva));
-                    string ovaext = Path.GetExtension(ovafilename);
-
-                    if (ovaext.ToLower().EndsWith("ova"))
-                    {
-                        fsStream = new FileStream(Path.Combine(dir, ovafilename), FileMode.Open, FileAccess.Read, FileShare.Read);
-
-                        var compType = Properties.Settings.Default.useGZip ? CompressionFactory.Type.Gz : CompressionFactory.Type.Bz2;
-                        inputStream = CompressionFactory.Reader(compType, fsStream);
-                    }
-                    else
-                    {
-                        throw new ArgumentException(Messages.OVF_COMPRESSED_OVA_INVALID);
-                    }
-                }
-                else
-                {
-                    inputStream = new FileStream(pathToOva, FileMode.Open, FileAccess.Read, FileShare.Read);
-                }
-
-                var temp = Path.Combine(dir, Path.GetRandomFileName());
-                tar = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream);
-                tar.ExtractAllContents(temp);
-                return temp;
-            }
-            finally
-            {
-                tar?.Dispose();
-                inputStream?.Close();
-                fsStream?.Close();
-            }
-        }
-
-        /// <summary>
-        /// Extract the OVF xml meta data.
-        /// </summary>
-        /// <param name="pathtoova"></param>
-        /// <param name="ovafilename"></param>
-        /// <returns></returns>
-		/// <exception cref="ArgumentException"></exception>
-		/// <exception cref="InvalidDataException"></exception>
-		public static string ExtractOVFXml(string ovapath)
-        {
-        	FileStream fsStream = null;
-        	Stream inputStream = null;
-			try
-			{
-				#region DECOMPRESSION STREAM
-
-				if (ovapath.ToLower().EndsWith("gz") || ovapath.ToLower().EndsWith("bz2")) // need to decompress.
-				{
-					log.Info("OVA is compressed, de-compression stream inserted");
-					string ovaext = Path.GetExtension(Path.GetFileNameWithoutExtension(ovapath));
-
-					if (ovaext.ToLower().EndsWith("ova"))
-					{
-						fsStream = new FileStream(ovapath, FileMode.Open, FileAccess.Read, FileShare.None);
-						if (Properties.Settings.Default.useGZip)
-                            inputStream = CompressionFactory.Reader(CompressionFactory.Type.Gz, fsStream);
-						else
-                            inputStream = CompressionFactory.Reader(CompressionFactory.Type.Bz2, fsStream);
-					}
-					else
-					{
-                        throw new ArgumentException(Messages.OVF_COMPRESSED_OVA_INVALID);
-                    }
-				}
-				else
-				{
-					inputStream = new FileStream(ovapath, FileMode.Open, FileAccess.Read, FileShare.None);
-				}
-
-				#endregion
-
-				using (ArchiveIterator tis = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream))
-				{
-					var ovfxml = new StringBuilder();
-
-					while (tis.HasNext())
-					{
-						if (tis.CurrentFileSize() == 0)
-							throw new InvalidDataException(Messages.INVALID_DATA_IN_OVA);
-
-						if (tis.CurrentFileName().EndsWith(Properties.Settings.Default.ovfFileExtension))
-						{
-                            using( MemoryStream ms = new MemoryStream() )
-                            {
-                                tis.ExtractCurrentFile( ms );
-                                ovfxml.Append( Encoding.UTF8.GetString(ms.ToArray()));
-                                return ovfxml.ToString();
-                            }
-						}
-					}
-				}
-			}
-			finally
-			{
-				if (inputStream != null)
-					inputStream.Close();
-				if (fsStream != null)
-					fsStream.Close();
-			}
-
-            return null;
-        }
-
-        public Stream ExtractFileFromOva(string ovafilename, string extractfile)
-        {
-            MemoryStream ms = new MemoryStream();
-            using (Stream inputStream = File.OpenRead(ovafilename))
-            {
-                using( ArchiveIterator it = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, inputStream))
-                {
-                    while( it.HasNext() )
-                    {
-                        if (it.CurrentFileName().ToLower().EndsWith(extractfile.ToLower()))
-                            it.ExtractCurrentFile( ms );
-                    }
-                }
-            }
-            ms.Position = 0;
-            return ms;
-        }
         /// <summary>
         /// Finalize the OVF to provide the 'roll up' information in the System Setting Data.
         /// </summary>
@@ -5584,5 +5355,85 @@ namespace XenOvf
             return fl.Length.CompareTo(fr.Length);
         }
         #endregion
+
+        public static List<RASD_Type> FindConnectedItems(string instanceId, RASD_Type[] rasds, string value22)
+        {
+            List<RASD_Type> connectedRasds = new List<RASD_Type>();
+            foreach (RASD_Type rasd in rasds)
+            {
+                if (rasd.Parent == null || string.IsNullOrEmpty(rasd.Parent.Value))
+                    continue;
+
+                string parent = rasd.Parent.Value.Replace(@"\", "");
+                string instance = instanceId.Replace(@"\", "");
+
+                if (!parent.Contains(instance))
+                    continue;
+
+                switch (rasd.ResourceType.Value)
+                {
+                    case 15:
+                    case 16:
+                        connectedRasds.Add(rasd);
+                        break;
+                    case 22: // Check to see if it's Microsoft Synthetic Disk Drive
+                        if (Tools.ValidateProperty("ResourceSubType", rasd) &&
+                            rasd.ResourceSubType.Value.ToLower().Contains("synthetic"))
+                        {
+                            connectedRasds.AddRange(FindConnectedItems(rasd.InstanceID.Value, rasds, rasd.Address.Value));
+                        }
+                        break;
+                    case 17: // VMware Hard Disk
+                    case 19: // XenServer/XenConvert Storage Extent
+                    case 21: // Microsoft Hard Disk Image
+                        if (Tools.ValidateProperty("ElementName", rasd) && rasd.ElementName.Value.ToLower().Contains("hard disk") ||
+                            Tools.ValidateProperty("Caption", rasd) && rasd.Caption.Value.ToLower().Contains("hard disk") ||
+                            Tools.ValidateProperty("Caption", rasd) && rasd.Caption.Value.ToLower().StartsWith("disk"))
+                        {
+                            if (value22 != null)
+                                rasd.Address = new cimString(value22);
+
+                            if (!connectedRasds.Contains(rasd))
+                                connectedRasds.Add(rasd);
+                        }
+                        break;
+                }
+            }
+
+            connectedRasds.Sort(CompareConnectedDisks);
+            return connectedRasds;
+        }
+
+        public static int CompareControllerRasd(RASD_Type rasd1, RASD_Type rasd2)
+        {
+            ushort type1 = rasd1.ResourceType.Value;
+            ushort type2 = rasd2.ResourceType.Value;
+
+            if (type1 >= 5 && type1 <= 9 && type2 >= 5 && type2 <= 9 &&
+                ushort.TryParse(rasd1.Address?.Value, out var address1) &&
+                ushort.TryParse(rasd2.Address?.Value, out var address2))
+            {
+                int left = type1 * 10 + address1;
+                int right = type2 * 10 + address2;
+                return left.CompareTo(right);
+            }
+
+            return type1.CompareTo(type2);
+        }
+
+        public static int CompareConnectedDisks(RASD_Type rasd1, RASD_Type rasd2)
+        {
+            var val1 = rasd1.AddressOnParent?.Value;
+            var val2 = rasd2.AddressOnParent?.Value;
+
+            if (val1 != null && val2 != null)
+                return val1.CompareTo(val2);
+
+            if (ushort.TryParse(rasd1.Address?.Value, out var address1) &&
+                ushort.TryParse(rasd2.Address?.Value, out var address2))
+                return address1.CompareTo(address2);
+
+            throw new ArgumentNullException("Cannot compare null values");
+        }
     }
 }

@@ -2523,6 +2523,9 @@ This will cancel compilation of the status report.</value>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>DVD drive on {0}</value>
   </data>
+  <data name="CD_DVD_DEVICE_ATTACHED" xml:space="preserve">
+    <value>Attached CD/DVD Drive.</value>
+  </data>
   <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>The TLS certificate of server '{0}' expired on {1}.</value>
   </data>
@@ -3954,11 +3957,11 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>Creating disks</value>
   </data>
-  <data name="CREATING_FILE" xml:space="preserve">
-    <value>Archiving appliance files into single package file {0}...</value>
-  </data>
   <data name="CREATING_MANIFEST" xml:space="preserve">
     <value>Creating manifest file...</value>
+  </data>
+  <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
+    <value>Calculating checksum for file '{0}'...</value>
   </data>
   <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
     <value>Creating new pool '{0}' with master '{1}'</value>
@@ -3968,6 +3971,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   </data>
   <data name="CREATING_NEW_FOLDERS" xml:space="preserve">
     <value>Creating new folders...</value>
+  </data>
+  <data name="CREATING_OVA_FILE" xml:space="preserve">
+    <value>Archiving appliance files into single package file '{0}'...</value>
   </data>
   <data name="CREATING_VMSS" xml:space="preserve">
     <value>Creating snapshot schedule '{0}'...</value>
@@ -4139,6 +4145,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   </data>
   <data name="DEFAULT" xml:space="preserve">
     <value>Default</value>
+  </data>
+  <data name="DEFAULT_IMPORT_DESCRIPTION" xml:space="preserve">
+    <value>Imported from an OVF/OVA package.</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
     <value>Default install of {0}</value>
@@ -5314,6 +5323,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
     <value>[XenCenter] has encountered a problem connecting to this server.</value>
   </data>
+  <data name="ERROR_COULD_NOT_FIND_SR" xml:space="preserve">
+    <value>The storage repository was not found and a default was not assigned.</value>
+  </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>The following virtual disks could not be deactivated:</value>
   </data>
@@ -5455,11 +5467,17 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_DIALOG_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>Error Suspending VM</value>
   </data>
+  <data name="ERROR_FILE_NAME_NULL" xml:space="preserve">
+    <value>The file to import was not provided.</value>
+  </data>
   <data name="ERROR_FILE_NOT_FOUND" xml:space="preserve">
     <value>File {0} not found</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
     <value>Server is still booting.</value>
+  </data>
+  <data name="ERROR_IMPORTING_SERVER_LIST" xml:space="preserve">
+    <value>Error importing server list. Check that the xml format in the file is correct.</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>Gateway is invalid.</value>
@@ -5475,6 +5493,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ERROR_NOT_FOUND" xml:space="preserve">
     <value>The server '{0}' could not be found.</value>
+  </data>
+  <data name="ERROR_NO_PASSWORD" xml:space="preserve">
+    <value>A password was not provided to decrypt the OVF package.</value>
   </data>
   <data name="ERROR_NO_PERMISSION" xml:space="preserve">
     <value>You are not authorized to access this server.</value>
@@ -5497,8 +5518,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_UNSUPPORTED_FILE_TYPE" xml:space="preserve">
     <value>Unknown file type.</value>
   </data>
-  <data name="ERRO_IMPORTING_SERVER_LIST" xml:space="preserve">
-    <value>Error importing server list. Check that the xml format in the file is correct.</value>
+  <data name="ERROR_VM_NOT_HALTED" xml:space="preserve">
+    <value>Please shut down or suspend VM '{0}' before exporting.</value>
   </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>
@@ -5588,14 +5609,20 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORTING_UPDATES" xml:space="preserve">
     <value>Exporting updates to {0}...</value>
   </data>
-  <data name="EXPORTING_VMS" xml:space="preserve">
-    <value>Exporting VMs...</value>
+  <data name="EXPORTING_VDI" xml:space="preserve">
+    <value>Exporting disk '{0}' to '{1}' ({2} of {3})...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION" xml:space="preserve">
+    <value>Verifying disk '{0}'...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION_FAILURE" xml:space="preserve">
+    <value>Verification for disk '{0}' failed. See logs for details.</value>
+  </data>
+  <data name="EXPORTING_VM_PREPARE" xml:space="preserve">
+    <value>Preparing to export VM '{0}'...</value>
   </data>
   <data name="EXPORTVM_COULD_NOT_SHOW" xml:space="preserve">
     <value>Could not show file open dialog - {0}</value>
-  </data>
-  <data name="EXPORTVM_NOT_HAPPEN" xml:space="preserve">
-    <value>Should not happen</value>
   </data>
   <data name="EXPORT_ALL" xml:space="preserve">
     <value>Export All</value>
@@ -5881,21 +5908,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FINISH_PAGE_TITLE_IMPORT" xml:space="preserve">
     <value>Review the import settings</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_DHCP" xml:space="preserve">
-    <value>Obtain automatically through DHCP</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_GATEWAY" xml:space="preserve">
-    <value>Transfer VM gateway:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_IP" xml:space="preserve">
-    <value>Transfer VM IP address:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_MASK" xml:space="preserve">
-    <value>Transfer VM subnet mask:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_NETWORK" xml:space="preserve">
-    <value>Transfer VM network interface:</value>
   </data>
   <data name="FINISH_PAGE_VERIFY_MANIFEST" xml:space="preserve">
     <value>Verify manifest content:</value>
@@ -6943,9 +6955,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORTING_DISK_IMAGE" xml:space="preserve">
     <value>Importing Disk Image...</value>
   </data>
-  <data name="IMPORTING_VMS" xml:space="preserve">
-    <value>Importing VMs...</value>
-  </data>
   <data name="IMPORTVM_DESCRIP" xml:space="preserve">
     <value>Importing VM from backup file</value>
   </data>
@@ -6957,9 +6966,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>Preparing to Import VM</value>
-  </data>
-  <data name="IMPORTVM_STARTING" xml:space="preserve">
-    <value>Starting VM...</value>
   </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
     <value>Import VM from '{0}' to '{1}'</value>
@@ -6976,6 +6982,15 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
     <value>Import Appliance '{0}' to '{1}'</value>
   </data>
+  <data name="IMPORT_APPLIANCE_PREPARING" xml:space="preserve">
+    <value>Preparing to import appliance '{0}'...</value>
+  </data>
+  <data name="IMPORT_CREATING_APPLIANCE" xml:space="preserve">
+    <value>Creating appliance '{0}'...</value>
+  </data>
+  <data name="IMPORT_CREATING_VM" xml:space="preserve">
+    <value>Creating VM '{0}'...</value>
+  </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>Import VM '{0}' from Disk Image to '{1}'</value>
   </data>
@@ -6984,9 +6999,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_EULA_PAGE_TITLE" xml:space="preserve">
     <value>Review End User License Agreement (EULA)</value>
-  </data>
-  <data name="IMPORT_GENERIC_FAIL" xml:space="preserve">
-    <value>The server could not complete the import due to an unknown error.</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>The exported files are incomplete or in an unrecognized format.</value>
@@ -7100,7 +7112,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Only OVF/OVA packages can be imported as vApps.</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
-    <value>All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml</value>
+    <value>All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
@@ -7161,6 +7173,12 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_URI_NO_DESTINATION" xml:space="preserve">
     <value>Import is a URI but no destination path defined.</value>
+  </data>
+  <data name="IMPORT_VDI" xml:space="preserve">
+    <value>Importing '{0}' ({1} of {2})...</value>
+  </data>
+  <data name="IMPORT_VDI_PREPARE" xml:space="preserve">
+    <value>Preparing VDI for '{0}'...</value>
   </data>
   <data name="IMPORT_VM_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
@@ -7301,7 +7319,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>Could not find the [Citrix VM Tools] install disc.</value>
+    <value>Could not find the [Citrix VM Tools] install disk.</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
     <value>[Citrix VM Tools] installation launched.</value>
@@ -10332,9 +10350,6 @@ File not found</value>
   <data name="PATH_DOES_NOT_EXIST_PLACEHOLDER" xml:space="preserve">
     <value>Path {0} does not exist.</value>
   </data>
-  <data name="PATHPICKER_FILETYPE" xml:space="preserve">
-    <value>XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml</value>
-  </data>
   <data name="PBDS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Storage connection check</value>
   </data>
@@ -12022,6 +12037,9 @@ Incremental allocation: {1}</value>
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>Disk size ({0}) exceeds SR size ({1})</value>
   </data>
+  <data name="SR_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>SR '{0}' does not have {1} of free space to import virtual disk {2}.</value>
+  </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} required when only {1} available</value>
   </data>
@@ -12093,6 +12111,12 @@ The upper limit: SR size / {2}</value>
   <data name="STARTS_WITH" xml:space="preserve">
     <value>starts with</value>
   </data>
+  <data name="START_FILE_DECRYPTION" xml:space="preserve">
+    <value>Decrypting {0}... </value>
+  </data>
+  <data name="START_FILE_EXPANSION" xml:space="preserve">
+    <value>Expanding {0}... </value>
+  </data>
   <data name="START_HOST" xml:space="preserve">
     <value>Start host</value>
   </data>
@@ -12101,6 +12125,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="START_ON" xml:space="preserve">
     <value>Start On</value>
+  </data>
+  <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
+    <value>Configuring VM for the server... </value>
   </data>
   <data name="START_SHUTDOWN_VMS" xml:space="preserve">
     <value>Start shut down VMs</value>
@@ -12512,18 +12539,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>Turn HA off</value>
   </data>
-  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
-    <value>Select the network on which the temporary VM (Transfer VM) used to perform the export operation will run.</value>
-  </data>
-  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
-    <value>Select the network on which the temporary VM (Transfer VM) used to perform the import operation will run.</value>
-  </data>
-  <data name="TVM_PAGE_TEXT" xml:space="preserve">
-    <value>Transfer VM Settings</value>
-  </data>
-  <data name="TVM_PAGE_TITLE" xml:space="preserve">
-    <value>Configure networking options for the Transfer VM</value>
-  </data>
   <data name="TXT_DESCRIPTION" xml:space="preserve">
     <value>Text Files</value>
   </data>
@@ -12559,6 +12574,9 @@ Verify that the file is a valid {1} export.</value>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>[XenCenter] will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
   </data>
+  <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
+    <value>Imported VM</value>
+  </data>
   <data name="UNINSTALL" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -12576,6 +12594,9 @@ Verify that the file is a valid {1} export.</value>
   </data>
   <data name="UNRECOGNISED_PLUGIN_VERSION" xml:space="preserve">
     <value>Unrecognized plug-in version '{0}'</value>
+  </data>
+  <data name="UNSUPPORTED_FILE_TYPE" xml:space="preserve">
+    <value>File type {0} is not supported.</value>
   </data>
   <data name="UNSUPPORTED_SR_TYPE" xml:space="preserve">
     <value>Unsupported SR type</value>
@@ -13268,6 +13289,9 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
   </data>
   <data name="VDI_COPYING" xml:space="preserve">
     <value>Copying disk '{0}' from SR '{1}' to SR '{2}'</value>
+  </data>
+  <data name="VDI_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>A VDI with size {0} is required to import virtual disk {1}.</value>
   </data>
   <data name="VDI_ON_SR_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>

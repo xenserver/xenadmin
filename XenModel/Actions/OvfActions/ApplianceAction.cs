@@ -33,20 +33,12 @@ using System.Threading;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using XenOvfTransport;
 
-namespace XenAdmin.Actions.OVFActions
+
+namespace XenAdmin.Actions.OvfActions
 {
 	public abstract class ApplianceAction : AsyncAction
 	{
-		protected string m_networkUuid;
-		protected bool m_isTvmIpStatic;
-		protected string m_tvmIpAddress;
-		protected string m_tvmSubnetMask;
-		protected string m_tvmGateway;
-
-        protected abstract XenOvfTransportBase TransportAction { get; }
-
         private const int SLEEP_TIME = 900;
         private const int MAX_ITERATIONS = 60 * 60 * 24 / SLEEP_TIME * 1000; //iterations in 24h
 
@@ -67,16 +59,9 @@ namespace XenAdmin.Actions.OVFActions
 																				 "VIF.create",
 																				 "Host.call_plugin");
 
-		protected ApplianceAction(IXenConnection connection, string title,
-			string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
+		protected ApplianceAction(IXenConnection connection, string title)
 			: base(connection, title)
 		{
-			m_networkUuid = networkUuid;
-			m_isTvmIpStatic = isTvmIpStatic;
-			m_tvmIpAddress = tvmIpAddress;
-			m_tvmSubnetMask = tvmSubnetMask;
-			m_tvmGateway = tvmGateway;
-
 			Pool pool = Helpers.GetPool(connection);
 			if (pool != null)
 				Pool = pool;
@@ -84,16 +69,15 @@ namespace XenAdmin.Actions.OVFActions
 				Host = Helpers.GetMaster(connection);
 		}
 
-	    protected override void Run()
+        public bool MetaDataOnly { protected get; set; }
+
+        protected abstract void RunCore();
+
+	    protected sealed override void Run()
 	    {
 	        SafeToExit = false; 
             InitialiseTicker();
-	    }
-
-		protected void UpdateHandler(XenOvfTransportEventArgs e)
-		{
-			if (!string.IsNullOrEmpty(e.Message))
-				Description = e.Message;
+            RunCore();
 		}
 
 		public override void RecomputeCanCancel()
@@ -104,14 +88,17 @@ namespace XenAdmin.Actions.OVFActions
 		protected override void CancelRelatedTask()
 		{
 			Description = Messages.CANCELING;
-
-            if (TransportAction != null)
-                TransportAction.Cancel = true;
 		}
+
+        protected void CheckForCancellation()
+        {
+            if (Cancelling)
+                throw new CancelledException();
+        }
 
 	    private void InitialiseTicker()
 	    {
-	        System.Threading.Tasks.Task.Run(() => TickUntilCompletion());
+	        System.Threading.Tasks.Task.Run(TickUntilCompletion);
 	    }
 
 	    private void TickUntilCompletion()
@@ -123,7 +110,5 @@ namespace XenAdmin.Actions.OVFActions
                 Thread.Sleep(SLEEP_TIME);
 	        }
 	    }
-
-
-	}
+    }
 }

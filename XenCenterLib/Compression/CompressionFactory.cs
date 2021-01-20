@@ -48,6 +48,32 @@ namespace XenCenterLib.Compression
             Bz2
         }
 
+        public static string StringOf(this Type t)
+        {
+            switch (t)
+            {
+                case Type.Gz:
+                    return "Gzip";
+                case Type.Bz2:
+                    return "BZip2";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(t), t, null);
+            }
+        }
+
+        public static string FileExtension(this Type t)
+        {
+            switch (t)
+            {
+                case Type.Gz:
+                    return ".gz";
+                case Type.Bz2:
+                    return ".bz2";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(t), t, null);
+            }
+        }
+
         /// <summary>
         /// Instantiate a class that can decompress a data stream type
         /// </summary>
@@ -82,6 +108,40 @@ namespace XenCenterLib.Compression
                 return new DotNetZipBZip2OutputStream(compressedDataTarget);
 
             throw new NotSupportedException(String.Format("Type: {0} is not supported by CompressionStream Writer", compressionType));
+        }
+
+        public static void UncompressFile(string inputFile, string outputFile, Type method, Action cancellingDelegate = null)
+        {
+            using (var inputStream = new FileStream(inputFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            using (var outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
+            {
+                using (var uncompressedStream = Reader(method, inputStream))
+                    StreamCopy(uncompressedStream, outputStream, cancellingDelegate);
+            }
+        }
+
+        public static void CompressFile(string inputFile, string outputFile, Type method, Action cancellingDelegate = null)
+        {
+            using (var inputStream = new FileStream(inputFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            using (var outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
+            {
+                using (var compressedStream = Writer(method, outputStream))
+                    StreamCopy(inputStream, compressedStream, cancellingDelegate);
+            }
+        }
+
+        private static void StreamCopy(Stream input, Stream output, Action cancellingDelegate = null)
+        {
+            byte[] block = new byte[2 * 1024 * 1024];
+
+            int n;
+            while ((n = input.Read(block, 0, block.Length)) > 0)
+            {
+                cancellingDelegate?.Invoke();
+                output.Write(block, 0, n);
+            }
+
+            output.Flush();
         }
     }
 }

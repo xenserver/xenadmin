@@ -35,98 +35,96 @@ using System.IO;
 using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
-
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
-using XenOvfTransport;
 
-namespace XenAdmin.Actions.OVFActions
+
+namespace XenAdmin.Actions.OvfActions
 {
-	public class ImportApplianceAction : ApplianceAction
+	public partial class ImportApplianceAction : ApplianceAction
 	{
 		#region Private fields
 
 		private readonly Package m_package;
-		private readonly Dictionary<string, VmMapping> m_vmMappings;
+        protected readonly Dictionary<string, VmMapping> m_vmMappings;
 		private readonly bool m_verifyManifest;
 		private readonly bool m_verifySignature;
 		private readonly string m_password;
-		private readonly bool m_runfixups;
-		private readonly SR m_selectedIsoSr;
-        private Import m_transportAction;
+        private string m_encryptionClass;
+        private string m_encryptionVersion;
+        protected readonly bool m_runfixups;
+		protected readonly SR m_selectedIsoSr;
+        protected readonly bool _startAutomatically;
 
 		#endregion
 
-		public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
-										bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr,
-										string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
-            : base(connection, string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection)),
-                networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
+        public ImportApplianceAction(IXenConnection connection, Package package, Dictionary<string, VmMapping> vmMappings,
+            bool verifyManifest, bool verifySignature, string password, bool runfixups, SR selectedIsoSr, bool startAutomatically)
+            : base(connection, string.Empty)
 		{
-			m_package = package;
+			m_package = package; //this is null if importing a disk Image
 			m_vmMappings = vmMappings;
 			m_verifyManifest = verifyManifest;
 			m_verifySignature = verifySignature;
 			m_password = password;
 			m_runfixups = runfixups;
 			m_selectedIsoSr = selectedIsoSr;
+            _startAutomatically = startAutomatically;
+
+            if (package != null) 
+                Title = string.Format(Messages.IMPORT_APPLIANCE, package.Name, Helpers.GetName(connection));
 		}
 
-        protected override XenOvfTransportBase TransportAction => m_transportAction;
-
-		protected override void Run()
-		{
-		    base.Run();
-
-			if (m_verifySignature)
+        protected override void RunCore()
+        {
+            // The appliance has a signature and the user asked to verify it.
+            if (m_verifySignature)
 			{
 				Description = Messages.VERIFYING_SIGNATURE;
 
 				try
 				{
-					// The appliance is known to have a signature and the user asked to verify it.
 					m_package.VerifySignature();
-
-					// If the appliance has a signature, then it has a manifest.
-					// Always verify the manifest after verifying the signature.
-					m_package.VerifyManifest();
+                    log.Info($"Verified signature for package {m_package.Name}");
 				}
 				catch (Exception e)
 				{
+					log.Error($"Signature verification failed for package {m_package.Name}", e);
 					throw new Exception(String.Format(Messages.VERIFYING_SIGNATURE_ERROR, e.Message));
 				}
 			}
-			else if (m_verifyManifest)
+			
+            // The appliance has
+            // - a signature (in which case it also has a manifest that should be verified AFTER the signature); or
+            // - a manifest without a signature
+            // and the user asked to verify it
+
+            if (m_verifySignature || m_verifyManifest)
 			{
 				Description = Messages.VERIFYING_MANIFEST;
 
 				try
 				{
-					// The appliance had a manifest without a signature and the user asked to verify it.
-					// VerifyManifest() throws an exception when verification fails for any reason.
 					m_package.VerifyManifest();
+                    log.Info($"Verified manifest for package {m_package.Name}");
 				}
 				catch (Exception e)
 				{
+                    log.Error($"Manifest verification failed for package {m_package.Name}", e);
 					throw new Exception(String.Format(Messages.VERIFYING_MANIFEST_ERROR, e.Message));
 				}
 			}
 
 			PercentComplete = 20;
-			Description = Messages.IMPORTING_VMS;
-
-			var session = Connection.Session;
-			var url = session.Url;
-			Uri uri = new Uri(url);
+			Description = string.Format(Messages.IMPORT_APPLIANCE_PREPARING, m_package.Name);
 
 			//create a copy of the OVF
 			var envelopes = new List<EnvelopeType>();
 
 			foreach (var vmMapping in m_vmMappings)
 			{
-				if (Cancelling)
-					throw new CancelledException();
+                CheckForCancellation();
 
 				string systemid = vmMapping.Key;
 				var mapping = vmMapping.Value;
@@ -153,18 +151,14 @@ namespace XenAdmin.Actions.OVFActions
 			}
 
             EnvelopeType env = OVF.Merge(envelopes, m_package.Name);
-            m_package.ExtractToWorkingDir();
 
-			try //importVM
+            object importedObject;
+			try //import VMs
             {
-                m_transportAction = new Import(uri, session)
-                {
-                    ApplianceName = m_package.Name,
-                    UpdateHandler = UpdateHandler,
-                    Cancel = Cancelling //in case the Cancel button has already been pressed
-                };
-				m_transportAction.SetTvmNetwork(m_networkUuid, m_isTvmIpStatic, m_tvmIpAddress, m_tvmSubnetMask, m_tvmGateway);
-                m_transportAction.Process(env, m_package.WorkingDir, m_password);
+                m_package.ExtractToWorkingDir(CheckForCancellation);
+                CheckForCancellation();
+                OVF.ParseEncryption(env, out m_encryptionClass, out m_encryptionVersion);
+                importedObject = Process(env, m_package.WorkingDir, m_package.Name);
 			}
 			catch (OperationCanceledException)
 			{
@@ -177,6 +171,13 @@ namespace XenAdmin.Actions.OVFActions
 
 			PercentComplete = 100;
 			Description = Messages.COMPLETED;
+
+            if (_startAutomatically && importedObject is XenRef<VM_appliance> applianceRef)
+            {
+                var appliance = Connection.Resolve(applianceRef);
+                if (appliance != null)
+                    new StartApplianceAction(appliance, false).RunAsync();
+            }
 		}
     }
 }

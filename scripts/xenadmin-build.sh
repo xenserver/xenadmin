@@ -79,14 +79,14 @@ SIGN_BAT="${REPO}/scripts/sign.bat"
 SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
 if [ -f "${SIGN_BAT}" ] ; then
-  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenModel.dll XenOvf.dll
   do
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
   done
 
   for locale in ja zh-CN
   do
-    for file in XenCenterMain.resources.dll  XenModel.resources.dll  XenOvf.resources.dll  XenOvfTransport.resources.dll
+    for file in XenCenterMain.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
     do
       cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
     done
@@ -213,7 +213,7 @@ cp ${REPO}/CFUValidator/bin/Release/CFUValidator.zip ${OUTPUT_DIR}/CFUValidator.
 #now package the pdbs
 cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenModel.pdb,XenOvf.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
