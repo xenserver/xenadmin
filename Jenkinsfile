@@ -31,10 +31,9 @@
  * SUCH DAMAGE.
  */
 
-def XENADMIN_BRANDING_TAG = 'v2.0'
-def BRANDING_TAG = 'v8.2.50-2'
+def XENADMIN_BRANDING_TAG = 'v3.0'
 
-@Library(["xencenter-pipeline@v1.0"])
+@Library(["xencenter-pipeline@v2.0"])
 import com.citrix.pipeline.xencenter.*
 
 properties([
@@ -54,18 +53,8 @@ node('xencenter') {
     try {
         builder = new Build(globals())
         builder.xenadminBrandingTag = XENADMIN_BRANDING_TAG
-        builder.brandingTag = BRANDING_TAG
 
-        bumpBuildNumber(builder)
-        cleanWorkspace(builder)
-        checkoutSources(builder)
-        downloadDeps(builder)
-        runChecks(builder)
-        buildAndManifest(builder)
-        runTests(builder)
-        uploadArtifacts(builder)
-        scanBuild(builder)
-
+        runPipeline(builder)
         currentBuild.result = 'SUCCESS'
 
     } catch (Throwable ex) {
