@@ -17873,6 +17873,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This version of [XenCenter] can only connect to {0} 7.1 CU2, [XenServer] 8.2, and greater versions. It cannot connect to {1}.
+        ///
+        ///You can get a compatible version of [XenCenter] from the following location:.
+        /// </summary>
+        public static string GUI_NOT_COMPATIBLE {
+            get {
+                return ResourceManager.GetString("GUI_NOT_COMPATIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This version of [XenCenter] is out of date and cannot connect to {0}.
         ///
         ///You can get a compatible version of [XenCenter] from the following location:.
