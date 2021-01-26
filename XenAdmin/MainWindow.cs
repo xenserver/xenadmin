@@ -972,6 +972,34 @@ namespace XenAdmin
                     });
                     return;
                 }
+
+                // Allow Citrix Hypervisor Center connect to Havana, Stockholm and cloud released CH only
+                //
+                if ((int)API_Version.LATEST >= (int)API_Version.API_2_16
+                        && !Helpers.StockholmOrGreater(master) && !Helpers.HavanaOrGreater(master))
+                {
+                    connection.EndConnect();
+
+                    Program.Invoke(Program.MainWindow, delegate
+                    {
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.LegacyProduct, Helpers.GetName(master));
+                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                        var error = $"{msg}\n{url}";
+
+                        new ActionBase(title, "", false, true, error);
+
+                        using (var dlog = new ErrorDialog(msg)
+                        {
+                            WindowTitle = title,
+                            ShowLinkLabel = !HiddenFeatures.LinkLabelHidden,
+                            LinkText = url,
+                            LinkData = url
+                        })
+                            dlog.ShowDialog(this);
+                    });
+                    return;
+                }
                 
                 if (server_max > current_version)
                     Alert.AddAlert(new GuiOldAlert());
