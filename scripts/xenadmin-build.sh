@@ -59,7 +59,13 @@ SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersi
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 
-source ${REPO}/Branding/branding.sh
+if [ -f ${REPO}/Branding/branding.sh ]; then
+  source ${REPO}/Branding/branding.sh
+else
+  ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd )"
+  source ${ROOT}/xenadmin-branding/citrix/Branding/branding.sh #local dev
+fi
+
 source ${REPO}/scripts/re-branding.sh $1
 
 #packages sources
