@@ -120,12 +120,18 @@ namespace XenCenterLib.Archive
             return tarEntry.IsDirectory;
         }
 
-        public override void ExtractCurrentFile(Stream extractedFileContents)
+        public override void ExtractCurrentFile(Stream extractedFileContents, Action cancellingDelegate)
         {
             if (IsDirectory())
                 return;
 
-            tarStream.CopyEntryContents(extractedFileContents);
+            byte[] buffer = new byte[32768];
+            int count;
+            while ((count = tarStream.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                cancellingDelegate?.Invoke();
+                extractedFileContents.Write(buffer, 0, count);
+            }
         }
 
         protected override void Dispose(bool disposing)

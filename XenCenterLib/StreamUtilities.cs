@@ -33,11 +33,31 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace XenCenterLib
 {
     public static class StreamUtilities
     {
+        private enum HashMethod
+        {
+            Sha1,
+            Sha256
+        }
+
+        private static string StringOf(this HashMethod method)
+        {
+            switch (method)
+            {
+                case HashMethod.Sha1:
+                    return "SHA1";
+                case HashMethod.Sha256:
+                    return "SHA256";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(method), method, null);
+            }
+        }
+
         /// <summary>
         /// Perform a copy of the contents of one stream class to another in a buffered fashion
         /// 
@@ -65,7 +85,39 @@ namespace XenCenterLib
             outputData.Flush();
         }
 
-        public static bool VerifyAgainstDigest(Stream stream, long limit, string algorithmName, byte[] digest, RSACryptoServiceProvider cryptoServiceProvider = null)
+        public static byte[] ComputeHash(Stream stream, out string hashAlgorithm)
+        {
+            hashAlgorithm = HashMethod.Sha256.StringOf();
+
+            using (var hasher = HashAlgorithm.Create(hashAlgorithm))
+                return hasher?.ComputeHash(stream);
+        }
+
+        public static byte[] ComputeSignedHash(Stream stream, X509Certificate2 certificate, out string hashAlgorithm)
+        {
+            hashAlgorithm = HashMethod.Sha256.StringOf();
+
+            if (!certificate.SignatureAlgorithm.FriendlyName.ToUpper().Contains(hashAlgorithm))
+            {
+                hashAlgorithm = HashMethod.Sha1.StringOf();
+                if (!certificate.SignatureAlgorithm.FriendlyName.ToUpper().Contains(hashAlgorithm))
+                    throw new NotSupportedException("Unsupported hash algorithm");
+            }
+
+            byte[] hash;
+            using (var hasher = HashAlgorithm.Create(hashAlgorithm))
+                hash = hasher?.ComputeHash(stream);
+
+            if (hash == null || !(certificate.PrivateKey is RSACryptoServiceProvider csp))
+                return null;
+
+            if (hashAlgorithm == HashMethod.Sha256.StringOf())
+                return csp.SignData(hash, CryptoConfig.MapNameToOID(hashAlgorithm));
+
+            return csp.SignHash(hash, CryptoConfig.MapNameToOID(hashAlgorithm));
+        }
+
+        public static bool VerifyAgainstDigest(Stream stream, long limit, string algorithmName, byte[] digest, X509Certificate2 certificate = null)
         {
             int bytesRead = 0;
             long offset = 0;
@@ -84,13 +136,10 @@ namespace XenCenterLib
                     if (bytesRead <= 0)
                         break;
 
-                    if (buffer.Any(b => b != 0x0))
+                    if (offset + bytesRead < limit)
                     {
-                        if (offset + bytesRead < limit)
-                        {
-                            // This is not the last block. Compute the partial hash.
-                            hashAlgorithm.TransformBlock(buffer, 0, bytesRead, buffer, 0);
-                        }
+                        // This is not the last block. Compute the partial hash.
+                        hashAlgorithm.TransformBlock(buffer, 0, bytesRead, buffer, 0);
                     }
 
                     offset += bytesRead;
@@ -105,9 +154,16 @@ namespace XenCenterLib
                 // Compute the final hash.
                 hashAlgorithm.TransformFinalBlock(buffer, bytesRead / 2, bytesRead / 2 + bytesRead % 2);
 
-                return cryptoServiceProvider == null
-                    ? digest.SequenceEqual(hashAlgorithm.Hash)
-                    : cryptoServiceProvider.VerifyHash(hashAlgorithm.Hash, CryptoConfig.MapNameToOID(algorithmName), digest);
+                if (certificate == null)
+                    return digest.SequenceEqual(hashAlgorithm.Hash);
+
+                if (!(certificate.PublicKey.Key is RSACryptoServiceProvider csp))
+                    return false;
+
+                if (algorithmName == HashMethod.Sha256.StringOf())
+                    return csp.VerifyData(hashAlgorithm.Hash, CryptoConfig.MapNameToOID(algorithmName), digest);
+
+                return csp.VerifyHash(hashAlgorithm.Hash, CryptoConfig.MapNameToOID(algorithmName), digest);
             }
         }
     }

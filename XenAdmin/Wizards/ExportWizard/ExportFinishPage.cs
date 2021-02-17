@@ -54,22 +54,19 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// The pages' label in the (left hand side) wizard progress panel
 		/// </summary>
-		public override string Text
-		{
-			get { return Messages.FINISH_PAGE_TEXT; }
-		}
+        public override string Text => Messages.FINISH_PAGE_TEXT;
 
 		/// <summary>
 		/// Gets the page's title (headline)
 		/// </summary>
-		public override string PageTitle { get { return Messages.FINISH_PAGE_TITLE_EXPORT; } }
+        public override string PageTitle => Messages.FINISH_PAGE_TITLE_EXPORT;
 
 		public override void PopulatePage()
 		{
-			if (SummaryRetreiver == null)
+			if (SummaryRetriever == null)
 				return;
 
-			var entries = SummaryRetreiver.Invoke();
+			var entries = SummaryRetriever.Invoke();
 			m_dataGridView.Rows.Clear();
 
 			foreach (var pair in entries)
@@ -89,14 +86,17 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		#endregion
 
-        public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetreiver { private get; set; }
+        public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetriever { private get; set; }
 
-		public bool VerifyExport { get { return m_checkBoxVerify.Checked; } }
+        public bool VerifyExport => m_checkBoxVerify.Checked;
+
+        public bool ExportAsXva { private get; set; }
 
         private void m_checkBoxVerify_CheckStateChanged(object sender, EventArgs e)
         {
-            warningLabel.Visible = m_checkBoxVerify.Checked;
-            warningPicture.Visible = m_checkBoxVerify.Checked;
+            //verification does not last too long for OVF/OVA
+            warningLabel.Visible = m_checkBoxVerify.Checked && ExportAsXva;
+            warningPicture.Visible = m_checkBoxVerify.Checked && ExportAsXva;
         }
 	}
 }

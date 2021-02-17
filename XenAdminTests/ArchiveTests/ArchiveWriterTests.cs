@@ -77,7 +77,7 @@ namespace XenAdminTests.ArchiveTests
                 }
             }
 
-            public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime)
+            public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
             {
                 disposed = false;
                 AddedStreamData.Add(filetoAdd);
@@ -131,7 +131,7 @@ namespace XenAdminTests.ArchiveTests
             const string fileName = "test.file";
             using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes("This is a test")))
             {
-                fakeWriter.Add(ms, fileName);
+                fakeWriter.Add(ms, fileName, DateTime.Now, null);
                 Assert.AreEqual(1, fakeWriter.AddedFileNameData.Count);
                 Assert.AreEqual(1, fakeWriter.AddedStreamData.Count);
                 Assert.AreEqual(1, fakeWriter.AddedDates.Count);
@@ -158,7 +158,7 @@ namespace XenAdminTests.ArchiveTests
             const int totalAdded = 3;
             for (int i = 0; i < totalAdded; i++)
             {
-                fakeWriter.AddDirectory(dirName);
+                fakeWriter.AddDirectory(dirName, DateTime.Now);
             }
 
             Assert.AreEqual(totalAdded, fakeWriter.AddedFileNameData.Count);

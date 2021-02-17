@@ -32,7 +32,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAPI;
 
 
@@ -78,61 +77,40 @@ namespace XenAdmin.Commands
             return sr != null && sr.SupportsTrim() && sr.GetFirstAttachedStorageHost() != null;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_TRIM_SR;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_TRIM_SR;
 
         protected override string GetCantExecuteReasonCore(IXenObject item)
         {
-            SR sr = item as SR;
-            if (sr != null && !sr.SupportsTrim())
+            if (item is SR sr && !sr.SupportsTrim())
             {
                 return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED;
             }
             return base.GetCantExecuteReasonCore(item);
         }
 
-        /// <summary>
-        /// Gets the tool tip text when the command is not able to run. 
-        /// If multiple items and Trim is not supported on all, then return this reason.
-        /// Otherwise, the default behaviour: CantExectuteReason for single items, null for multiple.
-        /// </summary>
-        protected override string DisabledToolTipText
+        public override string DisabledToolTipText
         {
             get
             {
                 var selection = GetSelection();
-                var allUnsuported = selection.Count > 1 && selection.Select(item => item.XenObject as SR).All(sr => sr != null && !sr.SupportsTrim());
-                return allUnsuported ? Messages.TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE : base.DisabledToolTipText;
+
+                var unsupportedCount = selection.Count(i => i.XenObject is SR sr && !sr.SupportsTrim());
+                if (unsupportedCount == selection.Count)
+                {
+                    if (unsupportedCount > 1)
+                        return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE;
+                    if (unsupportedCount == 1)
+                        return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED;
+                }
+
+                return null;
             }
         }
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return Messages.CONFIRM_TRIM_SR_TITLE;
-            }
-        }
+        protected override string ConfirmationDialogTitle => Messages.CONFIRM_TRIM_SR_TITLE;
 
-        protected override string ConfirmationDialogText
-        {
-            get
-            {
-                return Messages.CONFIRM_TRIM_SR;
-            }
-        }
+        protected override string ConfirmationDialogText => Messages.CONFIRM_TRIM_SR;
     }
 }

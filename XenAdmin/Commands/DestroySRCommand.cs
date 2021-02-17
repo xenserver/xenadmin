@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
@@ -51,18 +52,18 @@ namespace XenAdmin.Commands
         {
         }
 
-        public DestroySRCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
-            : base(mainWindow, selection)
+        public DestroySRCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selectedItems)
+            : base(mainWindow, selectedItems)
         {
         }
 
-        public DestroySRCommand(IMainWindow mainWindow, SR selection)
-            : base(mainWindow, selection)
+        public DestroySRCommand(IMainWindow mainWindow, SR sr)
+            : base(mainWindow, sr)
         {
         }
 
-        public DestroySRCommand(IMainWindow mainWindow, IEnumerable<SR> selection)
-            : base(mainWindow, ConvertToSelection(selection))
+        public DestroySRCommand(IMainWindow mainWindow, IEnumerable<SR> srs)
+            : base(mainWindow, srs.Select(s => new SelectedItem(s)).ToList())
         {
         }
 
@@ -90,21 +91,9 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the text for a menu item which launches this Command.
         /// </summary>
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_DESTROY_SR;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_DESTROY_SR;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -163,20 +152,8 @@ namespace XenAdmin.Commands
             return base.GetCantExecuteReasonCore(item);
         }
 
-        protected override string ConfirmationDialogYesButtonLabel
-        {
-            get
-            {
-                return Messages.MESSAGEBOX_DESTROY_SR_YES_BUTTON_LABEL;
-            }
-        }
+        protected override string ConfirmationDialogYesButtonLabel => Messages.MESSAGEBOX_DESTROY_SR_YES_BUTTON_LABEL;
 
-        protected override bool ConfirmationDialogNoButtonSelected
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationDialogNoButtonSelected => true;
     }
 }

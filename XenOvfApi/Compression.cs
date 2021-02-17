@@ -37,281 +37,92 @@ using XenOvf.Definitions;
 
 namespace XenOvf
 {
-    public class OvfCompressor
+    public partial class OVF
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-    	/// <summary>
-    	/// Set to TRUE to Cancel current Compression process.
-    	/// </summary>
-		public bool CancelCompression { get; set; }
-
-        /// <summary>
-        /// Check the Envelope to see if the files are compressed.
-        /// </summary>
-        /// <param name="ovfFilename">fullpath/filename to OVF</param>
-        /// <param name="method">out method used: Gzip | BZip2</param>
-        /// <returns>True|False</returns>
-        public bool IsCompressed(string ovfFilename, out string method)
+        public static void CompressFiles(EnvelopeType env, string ovfPath, CompressionFactory.Type method, Action cancellingDelegate)
         {
-            EnvelopeType env = OVF.Load(ovfFilename);
-            return IsCompressed(env, out method);
+            ProcessCompression(env, ovfPath, true, cancellingDelegate, method);
+            SaveAs(env, ovfPath);
         }
-        /// <summary>
-        /// Check the Envelope to see if the files are compressed.
-        /// </summary>
-        /// <param name="env">EnvelopeType</param>
-        /// <param name="method">out method used: Gzip | BZip2</param>
-        /// <returns>True|False</returns>
-        public bool IsCompressed(EnvelopeType env, out string method)
+
+        public static void UncompressFiles(EnvelopeType env, string ovfPath, Action cancellingDelegate)
         {
-            if (env.References != null && env.References.File != null && env.References.File.Length > 0)
+            ProcessCompression(env, ovfPath, false, cancellingDelegate);
+            SaveAs(env, ovfPath);
+        }
+
+        private static void ProcessCompression(EnvelopeType env, string ovfPath, bool compress,
+            Action cancellingDelegate, CompressionFactory.Type method = CompressionFactory.Type.Gz)
+        {
+            if (env.References?.File == null)
+                return;
+
+            string path = Path.GetDirectoryName(ovfPath);
+
+            foreach (File_Type file in env.References.File)
             {
-                foreach (File_Type file in env.References.File)
+                if (!compress)
                 {
-                    if (!string.IsNullOrEmpty(file.compression))
+                    if (file.compression == null)
                     {
-                        method = file.compression;
-                        return true;
+                        log.InfoFormat("File {0} was not marked as compressed, skipped.", file.href);
+                        continue;
+                    }
+
+                    if (file.compression.ToLower() == "gzip")
+                        method = CompressionFactory.Type.Gz;
+                    else if (file.compression.ToLower() == "bzip2")
+                        method = CompressionFactory.Type.Bz2;
+                    else
+                    {
+                        log.ErrorFormat("File {0} uses unsupported method {1}. Must be Gzip or BZip2. Skipping.",
+                            file.href, file.compression);
+                        continue;
                     }
                 }
-            }
-            method = "none";
-            return false;
-        }
-        /// <summary>
-        /// Open the OVF file and compress the uncompressed files.
-        /// </summary>
-        /// <param name="ovfFilename">pull path and filename.</param>
-        /// <param name="method">GZip | BZip2</param>
-        public void CompressOvfFiles(string ovfFilename, string method)
-        {
-			CompressOvfFiles(OVF.Load(ovfFilename), ovfFilename, method, true);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="env"></param>
-        /// <param name="ovfilename"></param>
-        /// <param name="method"></param>
-        /// <param name="compress"></param>
-        public void CompressOvfFiles(EnvelopeType env, string ovfilename, string method, bool compress)
-        {
-            ProcessCompression(env, Path.GetDirectoryName(ovfilename), method, compress);
-			OVF.SaveAs(env, ovfilename);
-        }
-        /// <summary>
-        /// Open the OVF file and uncompress the compressed files.
-        /// </summary>
-        /// <param name="ovfFilename">pull path and filename.</param>
-        public void UncompressOvfFiles(string ovfFilename)
-        {
-			EnvelopeType env = OVF.Load(ovfFilename);
-            ProcessCompression(env, Path.GetDirectoryName(ovfFilename), null, false);
-			OVF.SaveAs(env, ovfFilename);
-        }
-        /// <summary>
-        /// Uncompress a stream
-        /// </summary>
-        /// <param name="inputstream">compressed stream</param>
-        /// <param name="method">GZip or Bzip2</param>
-        /// <returns>uncompressed stream</returns>
-        public CompressionStream UncompressFileStream(Stream inputstream, string method)
-        {
-        	switch (method.ToLower())
-        	{
-        		case "gzip":
-                    return CompressionFactory.Reader(CompressionFactory.Type.Gz, inputstream);
-        		case "bzip2":
-                    return CompressionFactory.Reader(CompressionFactory.Type.Bz2, inputstream);
-        	}
-        	throw new InvalidDataException(string.Format(Messages.COMPRESS_INVALID_METHOD, method));
-        }
 
-    	/// <summary>
-        /// Compress a Stream 
-        /// </summary>
-        /// <param name="inputstream">Source Input</param>
-        /// <param name="method">GZip or BZip2</param>
-        /// <returns>compressed stream</returns>
-        public CompressionStream CompressFileStream(Stream inputstream, string method)
-        {
-        	switch (method.ToLower())
-        	{
-        		case "gzip":
-        			return CompressionFactory.Writer(CompressionFactory.Type.Gz, inputstream);
-        		case "bzip2":
-        			return CompressionFactory.Writer(CompressionFactory.Type.Bz2, inputstream);
-        	}
-        	throw new InvalidDataException(string.Format(Messages.COMPRESS_INVALID_METHOD, method));
-        }
+                int slash = file.href.LastIndexOf('/');
+                string stem = slash >= 0 ? file.href.Substring(0, slash + 1) : "";
+                string filePath = Path.Combine(path,  slash >= 0 ? file.href.Substring(slash + 1) : file.href);
+                string tempfile = Path.Combine(path, Path.GetRandomFileName());
 
-    	/// <summary>
-        /// 
-        /// </summary>
-        /// <param name="inputfile"></param>
-        /// <param name="outputfile"></param>
-        /// <param name="method"></param>
-        public void UncompressFile(string inputfile, string outputfile, string method)
-        {
-            if (method.ToLower() == "gzip")
-            {
-                Stream InStream = File.Open(inputfile, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
-                Stream OutStream = File.Open(outputfile, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
                 try
                 {
-                    GZipDecompress(InStream, OutStream);
+                    if (compress)
+                        CompressionFactory.CompressFile(filePath, tempfile, method, cancellingDelegate);
+                    else
+                        CompressionFactory.UncompressFile(filePath, tempfile, method, cancellingDelegate);
+
+                    File.Delete(filePath);
+                    var ext = method.FileExtension();
+
+                    if (compress)
+                        filePath += ext;
+                    else if (filePath.EndsWith(ext))
+                        filePath = filePath.Substring(0, filePath.Length - ext.Length);
+
+                    File.Move(tempfile, filePath);
+                    file.href = stem + Path.GetFileName(filePath);
+                    file.compression = compress ? method.StringOf() : null;
+                    FileInfo fi = new FileInfo(filePath);
+                    file.size = (ulong)fi.Length;
                 }
-                catch (Exception ex)
+                catch (EndOfStreamException eose)
                 {
-					if (ex is OperationCanceledException)
-						throw;
-                    log.Warn("Ignoring uncompression issue: ", ex);
+                    log.Error("End of Stream: ", eose);
                 }
                 finally
                 {
-                    InStream.Dispose();
-                    OutStream.Flush();
-                    OutStream.Dispose();
-                }
-            }
-            else
-            {
-                throw new InvalidDataException(string.Format(Messages.COMPRESS_INVALID_METHOD, method));
-            }
-        }
-
-
-        #region PRIVATE
-
-        private void ProcessCompression(EnvelopeType env, string path, string method, bool compress)
-        {
-            if (env.References != null && env.References.File != null && env.References.File.Length > 0)
-            {
-                foreach (File_Type file in env.References.File)
-                {
-                    if (compress)
-                    {
-                        if (method.ToLower() != "gzip" && method.ToLower() != "bzip2")
-                            throw new InvalidDataException(string.Format(Messages.COMPRESS_INVALID_METHOD, method));
-                    }
-                    else
-                    {
-                        if (file.compression == null)
-                        {
-                            log.InfoFormat("File {0} was not marked as compressed, skipped.", file.href);
-                            continue;
-                        }
-						if (file.compression.ToLower() != "gzip" && file.compression.ToLower() != "bzip2")
-                        {
-                            log.ErrorFormat("Invalid compression method File: {0} Method: {1}, must be Gzip or BZip2", file.href, file.compression);
-                            continue;
-                        }
-
-                    	method = file.compression;
-                    }
-
-                    int slash = file.href.LastIndexOf('/');
-                    string filename =  slash >= 0 ? file.href.Substring(slash + 1) : file.href;
-
-                    filename = Path.Combine(path, filename);
-
-                    string tempfile = Path.Combine(path, Path.GetFileName(Path.GetTempFileName()));
-
                     try
                     {
-                    	if (method.ToLower() == "gzip")
-						{
-							using(var inputFile = new FileStream(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-							{
-								using (var outputFile = new FileStream(tempfile, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
-								{
-									if (compress)
-										GZipCompress(inputFile, outputFile);
-									else
-										GZipDecompress(inputFile, outputFile);
-								}
-								inputFile.Flush();
-							}
-
-							//the original file should be overwritten only if the process has succeeded, so it should
-							//be done here and not in the finally block, because if compression/decompression fails
-							//for some reason, the original file is lost
-							File.Delete(filename);
-							File.Move(tempfile, filename);
-						}
-                        else
-                        {
-                            throw new InvalidDataException(string.Format(Messages.COMPRESS_INVALID_METHOD, method));
-                        }
-                    	file.compression = compress ? method : null;
+                        File.Delete(tempfile);
                     }
-                    catch (EndOfStreamException eose)
+                    catch
                     {
-                        log.Error("End of Stream: ", eose);
+                        //ignore
                     }
-                    catch (Exception ex)
-                    {
-						if (ex is OperationCanceledException)
-							throw;
-
-                        log.Error("Compression failure", ex);
-                        throw new Exception(string.Format(Messages.COMPRESS_FAILED, filename), ex);
-                    }
-                    finally
-                    {
-                    	//in case of failure or cancellation delete the temp file;
-						//in case of success it won't be there, but no exception is thrown
-						File.Delete(tempfile);
-                    }
-                    FileInfo fi = new FileInfo(filename);
-                    file.size = (ulong)fi.Length;
                 }
             }
         }
-        
-		private void GZipCompress(Stream inputStream, Stream outputStream)
-        {
-            if (inputStream == null || outputStream == null) { throw new ArgumentNullException(); }
-            CompressionStream bzos = CompressionFactory.Writer(CompressionFactory.Type.Gz, outputStream);
-            StreamCopy(inputStream, (CompressionStream)bzos);
-            bzos.Dispose();
-        }
-
-        private void GZipDecompress(Stream inputStream, Stream outputStream)
-        {
-            if (inputStream == null || outputStream == null) { throw new ArgumentNullException(); }
-            CompressionStream bzis = CompressionFactory.Reader(CompressionFactory.Type.Gz, inputStream);
-            StreamCopy((CompressionStream)bzis, outputStream);           
-            outputStream.Flush();
-            bzis.Dispose();
-        }
-
-		/// <summary>
-		/// This code is similar to the one in XenOvf.Utilities.Tool.StreamCopy.
-		/// It's duplicated (almost duplicated, I removed the block clearing to improve performance) as part
-		/// of the fix to CA-54859 in order to avoid too large scale changes at a late stage of development.
-		/// </summary>
-		private void StreamCopy(Stream Input, Stream Output)
-		{
-			int bufsize = 2 * MB;
-			byte[] block = new byte[bufsize];
-
-			while (true)
-			{
-				int n = Input.Read(block, 0, block.Length);
-				if (n <= 0)
-					break;
-				Output.Write(block, 0, n);
-
-				if (CancelCompression)
-					throw new OperationCanceledException();
-			}
-			Output.Flush();
-		}
-
-		private const int KB = 1024;
-		private const int MB = (KB * 1024);
-        #endregion
     }
 }

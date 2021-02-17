@@ -69,7 +69,7 @@ namespace XenCenterLib.Archive
             entry.ModifiedTime = modificationTime;
         }
 
-        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime)
+        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
         {
             ZipEntry entry = zip.PutNextEntry(fileName);
             entry.ModifiedTime = modificationTime;

@@ -91,18 +91,7 @@ namespace XenOvf
 
 
         #region ENCRYPTION
-        /// <summary>
-        /// Encrypt the files associated with the provided OVF package.
-        /// </summary>
-        /// <param name="pathToOvf">Path to the OVF Package</param>
-        /// <param name="ovfFileName">Filename of the ovf file.</param>
-        /// <param name="password">password to use during encryption.</param>
-        public void Encrypt(string pathToOvf, string ovfFileName, string password)
-        {
-            string filename = Path.Combine(pathToOvf, ovfFileName);
-            EnvelopeType env = Tools.LoadOvfXml(filename);
-            Encrypt(env, filename, password);
-        }
+
         /// <summary>
         /// Encrypt the files associated with the provided OVF package.
         /// </summary>
@@ -122,18 +111,7 @@ namespace XenOvf
                 SaveAs(env, ovfFileName);
             }
         }
-        /// <summary>
-        /// Decrypt the files associated with the provided OVF package.
-        /// </summary>
-        /// <param name="pathToOvf">Path to the OVF Package</param>
-        /// <param name="ovfFileName">Filename of the ovf file.</param>
-        /// <param name="password">password to use during decryption.</param>
-        public void Decrypt(string pathToOvf, string ovfFileName, string password)
-        {
-            string filename = Path.Combine(pathToOvf, ovfFileName);
-            EnvelopeType env = Tools.LoadOvfXml(filename);
-            Decrypt(env, filename, password);
-        }
+
         /// <summary>
         /// Decrypt the files associated with the provided OVF package.
         /// </summary>
@@ -207,13 +185,54 @@ namespace XenOvf
         /// <summary>
         /// Checks to see if an OVF is encrypted by checking whether a security section is defined
         /// </summary>
-        public static bool HasEncryption(EnvelopeType ovfObj)
+        public static bool HasEncryption(EnvelopeType ovfObj, out SecuritySection_Type[] security)
         {
+            security = null;
+
             if (ovfObj == null)
                 return false;
-            var security = FindSections<SecuritySection_Type>(ovfObj.Sections);
+            
+            security = FindSections<SecuritySection_Type>(ovfObj.Sections);
             return security != null && security.Length > 0;
         }
+        
+        public static void ParseEncryption(EnvelopeType ovfObj, out string encryptionClass, out string encryptionVersion)
+        {
+            encryptionClass = null;
+            encryptionVersion = null;
+
+            if (!HasEncryption(ovfObj, out SecuritySection_Type[] securitysection))
+                return;
+
+            string fileUuids = "";
+                
+            foreach (Security_Type securitytype in securitysection[0].Security)
+            {
+                if (securitytype.ReferenceList.Items != null)
+                {
+                    foreach (ReferenceType refType in securitytype.ReferenceList.Items)
+                    {
+                        if (refType is DataReference dataRef)
+                            fileUuids += ":" + dataRef.ValueType;
+                    }
+                }
+
+                if (securitytype.EncryptionMethod?.Algorithm != null)
+                {
+                    string[] parts = securitytype.EncryptionMethod.Algorithm.Split('#');
+
+                    if (parts.Length > 1)
+                    {
+                        string algoname = parts[1].ToLower().Replace('-', '_');
+                        encryptionClass = OVF.AlgorithmMap(algoname) as string;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(securitytype.version))
+                    encryptionVersion = securitytype.version;
+            }
+        }
+        
         /// <summary>
         /// An ovf can contain both encrypted and non-encrypted file mixed together.
         /// find if file name is encrypted.
@@ -292,18 +311,7 @@ namespace XenOvf
         }
 
         /// <summary>
-        /// Validate password prior do decrypting, depends on sample encrypted section in The SecuritySection.
-        /// </summary>
-        /// <param name="ovfFilename">ovf file name</param>
-        /// <param name="password">password to check</param>
-        /// <returns>true = valid password, false = password failed</returns>
-        public bool CheckPassword(string ovfFilename, string password)
-        {
-            EnvelopeType env = Load(ovfFilename);
-            return CheckPassword(env, password);
-        }
-        /// <summary>
-        /// Validate password prior do decrypting, depends on sample encrypted section in The SecuritySection.
+        /// Validate password prior to decrypting, depends on sample encrypted section in The SecuritySection.
         /// </summary>
         /// <param name="ovfObj">EnvelopeType OVF Object</param>
         /// <param name="password">password to check</param>
@@ -387,167 +395,6 @@ namespace XenOvf
 
             return passStrength;
         }       
-        #endregion
-
-        #region SIGNATURES
-        /// <summary>
-        /// Create a Manifest for the OVF
-        /// </summary>
-        /// <param name="pathToOvf">Absolute path to the OVF files</param>
-        /// <param name="ovfFileName">OVF file name (file.ovf)</param>
-		public static void Manifest(string pathToOvf, string ovfFileName)
-        {
-        	List<ManifestFileEntry> mfes = new List<ManifestFileEntry>();
-        	SHA1 sha1 = SHA1.Create();
-        	EnvelopeType ovfenv;
-
-			try
-			{
-				using (FileStream stream = new FileStream(Path.Combine(pathToOvf, ovfFileName), FileMode.Open, FileAccess.Read))
-				{
-					ManifestFileEntry mfe = new ManifestFileEntry();
-					mfe.Algorithm = Properties.Settings.Default.securityAlgorithm;
-					mfe.Filename = ovfFileName;
-					mfe.Digest = sha1.ComputeHash(stream);
-					mfes.Add(mfe);
-					stream.Position = 0;
-
-					using (StreamReader sr = new StreamReader(stream))
-                        ovfenv = Tools.Deserialize<EnvelopeType>(sr.ReadToEnd());
-				}
-			}
-			catch (Exception ex)
-			{
-				log.ErrorFormat("OVF.Security.Manifest: {0}", ex.Message);
-				throw;
-			}
-
-        	if (ovfenv != null && ovfenv.References != null && ovfenv.References.File != null && ovfenv.References.File.Length > 0)
-			{
-				File_Type[] files = ovfenv.References.File;
-
-				foreach (File_Type file in files)
-				{
-					string currentfile = Path.Combine(pathToOvf, file.href);
-					if (!File.Exists(currentfile))
-						continue;
-
-					ManifestFileEntry mfe = new ManifestFileEntry();
-
-					using (FileStream computestream = new FileStream(currentfile, FileMode.Open, FileAccess.Read))
-					{
-						mfe.Algorithm = Properties.Settings.Default.securityAlgorithm;
-						mfe.Filename = file.href;
-						mfe.Digest = sha1.ComputeHash(computestream);
-						mfes.Add(mfe);
-					}
-				}
-			}
-
-        	string manifest = Path.Combine(pathToOvf, string.Format("{0}{1}", Path.GetFileNameWithoutExtension(ovfFileName), Properties.Settings.Default.manifestFileExtension));
-
-        	File.Delete(manifest); //no exception is thrown if file does not exist, so no need to check
-
-        	using (FileStream stream = new FileStream(manifest, FileMode.CreateNew, FileAccess.Write))
-        	{
-				using (StreamWriter sw = new StreamWriter(stream))
-        		{
-        			foreach (ManifestFileEntry mf in mfes)
-        				sw.WriteLine(mf.ToString());
-
-        			sw.Flush();
-        		}
-        	}
-
-        	log.Debug("OVF.Manifest completed");
-        }
-
-
-        /// <summary>
-        /// Digitaly Sign the OVF
-        /// </summary>
-        /// <param name="x509">Signing Certificate</param>
-        /// <param name="pathToOvf">Absolute path to the OVF files</param>
-        /// <param name="ovfFileName">OVF file name (file.ovf)</param>
-        public static void Sign(X509Certificate2 Certificate, string PackageFolder, string PackageFileName)
-        {
-            if (Certificate == null)
-            {
-                throw new ArgumentException(Messages.CERTIFICATE_IS_INVALID);
-            }
-
-            string PackageName = PackageNameFromFileName(PackageFileName);
-
-            string ManifestPath = Path.Combine(PackageFolder, PackageName) + Properties.Settings.Default.manifestFileExtension;
-
-            // Create the manifest if it doesn't exist.
-            if (!File.Exists(ManifestPath))
-            {
-                Manifest(PackageFolder, PackageFileName);
-            }
-
-            // Compute the SHA1 hash of the manifest.
-            byte[] hash = null;
-
-            using (FileStream stream = new FileStream(ManifestPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (SHA1 sha1 = SHA1.Create())
-            {
-                hash = sha1.ComputeHash(stream);
-            }
-
-            // Describe the file to sign.
-            ManifestFileEntry signed = new ManifestFileEntry();
-            signed.Algorithm = Properties.Settings.Default.securityAlgorithm;
-            signed.Filename = Path.GetFileName(ManifestPath);
-
-            // Compute the signature.
-            try
-            {
-                RSACryptoServiceProvider csp = (RSACryptoServiceProvider)Certificate.PrivateKey;
-
-                signed.Digest = csp.SignHash(hash, CryptoConfig.MapNameToOID("SHA1"));
-            }
-            catch (Exception exception)
-            {
-                string message = exception.Message;
-            }
-
-            // Create the signature file.
-            string SignaturePath = Path.Combine(PackageFolder, PackageName) + Properties.Settings.Default.certificateFileExtension;
-
-            if (File.Exists(SignaturePath))
-                File.Delete(SignaturePath);
-
-            using (FileStream stream = new FileStream(SignaturePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-            using (StreamWriter writer = new StreamWriter(stream))
-            {
-                // Describe the signed file.
-                writer.WriteLine(signed.ToString());
-
-                // Export the certificate encoded in Base64 using DER.
-                writer.WriteLine("-----BEGIN CERTIFICATE-----");
-                string b64Cert = Convert.ToBase64String(Certificate.Export(X509ContentType.SerializedCert));
-                writer.WriteLine(b64Cert);
-                writer.WriteLine("-----END CERTIFICATE-----");
-                writer.WriteLine("\r\n");
-                writer.Flush();
-            }
-        }
-
-
-        public static string PackageNameFromFileName(string FileName)
-        {
-            // Always drop the last extension.
-            string PackageName = Path.GetFileNameWithoutExtension(FileName);
-
-            if (Path.HasExtension(PackageName) && Path.GetExtension(PackageName).ToLower().EndsWith("ova"))
-            {
-                // Drop any .ova extension.
-                PackageName = Path.GetFileNameWithoutExtension(PackageName);
-            }
-
-            return PackageName;
-        }
         #endregion
 
         #region PRIVATE
@@ -998,31 +845,5 @@ namespace XenOvf
                 iv[loop - key.Length] = result[loop];
         }
         #endregion
-
-        internal class ManifestFileEntry
-        {
-            public string Algorithm = null;
-            public string Filename = null;
-            public byte[] Digest = null;
-
-            public override string ToString()
-            {
-                if (Algorithm != null && Filename != null && Digest != null)
-                {
-                    StringBuilder sb = new StringBuilder();
-                    foreach (byte b in Digest)
-                    {
-                        sb.AppendFormat("{0:x2}", b);
-                    }
-                    // same as:
-                    //string bc = BitConverter.ToString(Digest).Replace("-","");;
-                    return string.Format("{0}({1})= {2}", Algorithm, Filename, sb.ToString());
-                }
-                else
-                {
-                    throw new ArgumentNullException("NULL data inside ManifestFileEntry");
-                }
-            }
-        }
     }
 }

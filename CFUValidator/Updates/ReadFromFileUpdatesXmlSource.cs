@@ -41,7 +41,7 @@ namespace CFUValidator.Updates
         private readonly string _location;
 
         public ReadFromFileUpdatesXmlSource(string location)
-            : base(true, true, true, "CFU", "1")
+            : base(true, true, true, "CFU")
         {
             _location = location ?? throw new ArgumentNullException(nameof(location));
         }

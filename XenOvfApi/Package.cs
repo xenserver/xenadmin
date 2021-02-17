@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using XenCenterLib;
@@ -69,6 +68,14 @@ namespace XenOvf
             Digest = ToArray(DigestAsString);
         }
 
+        public FileDigest(string fileName, byte[] digest, string hashingAlgorithm)
+        {
+            AlgorithmName = hashingAlgorithm;
+            Name = fileName;
+            Digest = digest;
+            DigestAsString = Digest == null ? "" : string.Join("", Digest.Select(b => $"{b:x2}"));
+        }
+
         /// <summary>
         /// Name of the file with the digest.
         /// </summary>
@@ -82,6 +89,11 @@ namespace XenOvf
         public string DigestAsString { get; }
 
         public byte[] Digest{ get; }
+
+        public string ToManifestLine()
+        {
+            return $"{AlgorithmName}({Name})= {DigestAsString}";
+        }
 
         /// <summary>
         /// Convert a hex string to a binary array.
@@ -192,7 +204,7 @@ namespace XenOvf
             }
         }
 
-        public override void ExtractToWorkingDir()
+        public override void ExtractToWorkingDir(Action cancellingDelegate)
         {
             WorkingDir = Path.GetDirectoryName(PackageSourceFile);
         }
@@ -271,12 +283,12 @@ namespace XenOvf
                     {
                         _DescriptorFileName = _archiveIterator.CurrentFileName();
                     }
-                    else if (string.Compare(extension, Properties.Settings.Default.manifestFileExtension, true) == 0)
+                    else if (string.Compare(extension, MANIFEST_EXT, true) == 0)
                     {
                         if (_DescriptorFileName == null || string.Compare(_archiveIterator.CurrentFileName(), ManifestFileName, true) != 0)
                             continue;
                     }
-                    else if (string.Compare(extension, Properties.Settings.Default.certificateFileExtension, true) == 0)
+                    else if (string.Compare(extension, CERTIFICATE_EXT, true) == 0)
                     {
                         if (_DescriptorFileName == null || string.Compare(_archiveIterator.CurrentFileName(), CertificateFileName, true) != 0)
                             continue;
@@ -328,9 +340,21 @@ namespace XenOvf
             }
         }
 
-        public override void ExtractToWorkingDir()
+        public override void ExtractToWorkingDir(Action cancellingDelegate)
         {
-            WorkingDir = OVF.ExtractArchive(PackageSourceFile);
+            try
+            {
+                Open();
+
+                var dir = Path.GetDirectoryName(PackageSourceFile);
+                var temp = Path.Combine(dir, Path.GetRandomFileName());
+                WorkingDir = temp; //set this before extraction so it can be cleaned up if extraction is aborted
+                _archiveIterator.ExtractAllContents(temp, cancellingDelegate);
+            }
+            finally
+            {
+                Close();
+            }
         }
 
         public override void VerifyManifest()
@@ -345,8 +369,8 @@ namespace XenOvf
                 while (_archiveIterator.HasNext())
                 {
                     var extension = Path.GetExtension(_archiveIterator.CurrentFileName());
-                    if (string.Compare(extension, Properties.Settings.Default.manifestFileExtension, true) == 0 ||
-                        string.Compare(extension, Properties.Settings.Default.certificateFileExtension, true) == 0)
+                    if (string.Compare(extension, MANIFEST_EXT, true) == 0 ||
+                        string.Compare(extension, CERTIFICATE_EXT, true) == 0)
                         continue;
 
                     var fileDigest = manifest.Find(fd => string.Compare(fd.Name, _archiveIterator.CurrentFileName(), true) == 0);
@@ -391,7 +415,7 @@ namespace XenOvf
         {
             using (var ms = new MemoryStream())
             {
-                _archiveIterator.ExtractCurrentFile(ms);
+                _archiveIterator.ExtractCurrentFile(ms, null);
                 return ms.Length > 0 ? ms.ToArray() : null;
             }
         }
@@ -404,6 +428,9 @@ namespace XenOvf
     public abstract class Package
     {
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public const string MANIFEST_EXT = ".mf";
+        public const string CERTIFICATE_EXT = ".cert";
 
         // Cache these properties because they are expensive to get
         private string _descriptorXml;
@@ -437,12 +464,12 @@ namespace XenOvf
         /// <summary>
         /// According to the OVF specification, base name of the manifest file must be the same as the descriptor file.
         /// </summary>
-        protected string ManifestFileName => Name + Properties.Settings.Default.manifestFileExtension;
+        protected string ManifestFileName => Name + MANIFEST_EXT;
 
         /// <summary>
         /// According to the OVF specification, base name of the certificate file must be the same as the descriptor file.
         /// </summary>
-        protected string CertificateFileName => Name + Properties.Settings.Default.certificateFileExtension;
+        protected string CertificateFileName => Name + CERTIFICATE_EXT;
 
         /// <summary>
         /// Contents of the OVF file.
@@ -526,7 +553,7 @@ namespace XenOvf
 
         public bool HasEncryption()
         {
-            return OVF.HasEncryption(OvfEnvelope);
+            return OVF.HasEncryption(OvfEnvelope, out _);
         }
 
         public bool HasManifest()
@@ -539,6 +566,7 @@ namespace XenOvf
             return RawCertificate != null;
         }
 
+        /// <exception cref="Exception">Thrown when verification fails for any reason</exception>>
         public void VerifySignature()
         {
             using (var certificate = new X509Certificate2(RawCertificate))
@@ -561,7 +589,7 @@ namespace XenOvf
                 // Do this independently to minimize the number of files opened concurrently.
                 using (Stream stream = new MemoryStream(RawManifest))
                 {
-                    if (!StreamUtilities.VerifyAgainstDigest(stream, stream.Length, fileDigest.AlgorithmName, fileDigest.Digest, certificate.PublicKey.Key as RSACryptoServiceProvider))
+                    if (!StreamUtilities.VerifyAgainstDigest(stream, stream.Length, fileDigest.AlgorithmName, fileDigest.Digest, certificate))
                         throw new Exception(string.Format(Messages.SECURITY_SIGNATURE_FAILED, fileDigest.Name));
                 }
             }
@@ -582,12 +610,13 @@ namespace XenOvf
 
         protected abstract string ReadAllText(string fileName);
 
+        /// <exception cref="Exception">Thrown when verification fails for any reason</exception>>
         public abstract void VerifyManifest();
 
         public abstract bool HasFile(string fileName);
 
         /// <returns>The directory with the extracted files</returns>
-        public abstract void ExtractToWorkingDir();
+        public abstract void ExtractToWorkingDir(Action cancellingDelegate);
 
         #endregion
     }

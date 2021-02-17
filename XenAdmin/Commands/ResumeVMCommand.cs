@@ -35,8 +35,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions.VMActions;
@@ -92,53 +90,17 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_RESUME;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_RESUME;
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_RESUME_CONTEXT_MENU;
-            }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_RESUME_CONTEXT_MENU;
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._000_Resumed_h32bit_16;
-            }
-        }
+        public override Image MenuImage => Images.StaticImages._000_Resumed_h32bit_16;
 
-        public override Image ToolBarImage
-        {
-            get
-            {
-                return Images.StaticImages._000_Resumed_h32bit_24;
-            }
-        }
+        public override Image ToolBarImage => Images.StaticImages._000_Resumed_h32bit_24;
 
-        protected override string EnabledToolTipText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_TOOLBAR_RESUMEVM;
-            }
-        }
+        public override string EnabledToolTipText => Messages.MAINWINDOW_TOOLBAR_RESUMEVM;
 
-        public override string ToolBarText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_TOOLBAR_RESUME;
-            }
-        }
+        public override string ToolBarText => Messages.MAINWINDOW_TOOLBAR_RESUME;
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
         {
@@ -152,21 +114,9 @@ namespace XenAdmin.Commands
             return null;
         }
 
-        public override string ShortcutKeyDisplayString
-        {
-            get
-            {
-                return Messages.MAINWINDOW_CTRL_Y;
-            }
-        }
+        public override string ShortcutKeyDisplayString => Messages.MAINWINDOW_CTRL_Y;
 
-        public override Keys ShortcutKeys
-        {
-            get
-            {
-                return Keys.Control | Keys.Y;
-            }
-        }
+        public override Keys ShortcutKeys => Keys.Control | Keys.Y;
 
         protected override string GetCantExecuteReasonCore(IXenObject item)
         {

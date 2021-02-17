@@ -29,16 +29,12 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Core;
-using XenAPI;
-using System.Windows.Forms;
-using XenAdmin.Dialogs;
-using XenAdmin.Properties;
 using System.Drawing;
-using System.Collections.ObjectModel;
+using System.Linq;
+using XenAdmin.Core;
+using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -66,8 +62,8 @@ namespace XenAdmin.Commands
         {
         }
 
-        public RepairSRCommand(IMainWindow mainWindow, IEnumerable<SR> selection)
-            : base(mainWindow, ConvertToSelection<SR>(selection))
+        public RepairSRCommand(IMainWindow mainWindow, IEnumerable<SR> srs)
+            : base(mainWindow, srs.Select(s => new SelectedItem(s)).ToList())
         {
         }
 
@@ -94,28 +90,10 @@ namespace XenAdmin.Commands
             return sr != null && sr.HasPBDs() && (sr.IsBroken() || !sr.MultipathAOK()) && !HelpersGUI.GetActionInProgress(sr) && sr.CanRepairAfterUpgradeFromLegacySL();
         }
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._000_StorageBroken_h32bit_16;
-            }
-        }
+        public override Image MenuImage => Images.StaticImages._000_StorageBroken_h32bit_16;
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REPAIR_SR;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_REPAIR_SR;
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REPAIR_SR_CONTEXT_MENU;
-            }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_REPAIR_SR_CONTEXT_MENU;
     }
 }

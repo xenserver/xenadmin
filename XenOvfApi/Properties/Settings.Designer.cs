@@ -12,7 +12,7 @@ namespace XenOvf.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -296,7 +296,7 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127")]
+        [global::System.Configuration.DefaultSettingValueAttribute("63")]
         public byte RequiredValidations {
             get {
                 return ((byte)(this["RequiredValidations"]));
@@ -318,42 +318,6 @@ namespace XenOvf.Properties {
         public string vmwEnvelopeNamespace {
             get {
                 return ((string)(this["vmwEnvelopeNamespace"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".vhd,.pvp,.vmdk,.mf,.cert,.xva,.ovf,.wim,.vdi,.sdi,.iso,.gz")]
-        public string knownFileExtensions {
-            get {
-                return ((string)(this["knownFileExtensions"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".mf")]
-        public string manifestFileExtension {
-            get {
-                return ((string)(this["manifestFileExtension"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".cert")]
-        public string certificateFileExtension {
-            get {
-                return ((string)(this["certificateFileExtension"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SHA1")]
-        public string securityAlgorithm {
-            get {
-                return ((string)(this["securityAlgorithm"]));
             }
         }
         
@@ -405,15 +369,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string encryptMicrosoftAlgorithmClass {
-            get {
-                return ((string)(this["encryptMicrosoftAlgorithmClass"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("192")]
         public string encryptKeyLength {
             get {
@@ -436,141 +391,6 @@ namespace XenOvf.Properties {
         public string encryptKeyName {
             get {
                 return ((string)(this["encryptKeyName"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.TripleDESCryptoServiceProvider")]
-        public string tripledes_cbc {
-            get {
-                return ((string)(this["tripledes_cbc"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string aes128_cbc {
-            get {
-                return ((string)(this["aes128_cbc"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string aes256_cbc {
-            get {
-                return ((string)(this["aes256_cbc"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string aes192_cbc {
-            get {
-                return ((string)(this["aes192_cbc"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RSACryptoServiceProvider")]
-        public string rsa_1_5 {
-            get {
-                return ((string)(this["rsa_1_5"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RSACryptoServiceProvider")]
-        public string rsa_oaep_mgf1p {
-            get {
-                return ((string)(this["rsa_oaep_mgf1p"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.TripleDESCryptoServiceProvider")]
-        public string kw_tripledes {
-            get {
-                return ((string)(this["kw_tripledes"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string kw_aes128 {
-            get {
-                return ((string)(this["kw_aes128"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string kw_aes256 {
-            get {
-                return ((string)(this["kw_aes256"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RijndaelManaged")]
-        public string kw_aes192 {
-            get {
-                return ((string)(this["kw_aes192"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.SHA1CryptoServiceProvider")]
-        public string sha1 {
-            get {
-                return ((string)(this["sha1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.SHA256CryptoServiceProvider")]
-        public string sha256 {
-            get {
-                return ((string)(this["sha256"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.FromBase64Transform")]
-        public string base64 {
-            get {
-                return ((string)(this["base64"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.SHA384CryptoServiceProvider")]
-        public string sha384 {
-            get {
-                return ((string)(this["sha384"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.SHA512CryptoServiceProvider")]
-        public string sha512 {
-            get {
-                return ((string)(this["sha512"]));
             }
         }
         
@@ -634,24 +454,6 @@ namespace XenOvf.Properties {
         public string xenDeviceKey {
             get {
                 return ((string)(this["xenDeviceKey"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.DESCryptoServiceProvider")]
-        public string des {
-            get {
-                return ((string)(this["des"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System.Security.Cryptography.RC2CryptoServiceProvider\r\n")]
-        public string rc2 {
-            get {
-                return ((string)(this["rc2"]));
             }
         }
         

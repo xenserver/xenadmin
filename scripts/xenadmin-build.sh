@@ -35,12 +35,6 @@
 
 set -exu
 
-#TODO: remove this
-SET_ENV_FILE="/cygdrive/c/env.sh"
-if [ -f ${SET_ENV_FILE} ]; then
-   . ${SET_ENV_FILE}
-fi
-
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -53,8 +47,13 @@ SCRATCH_DIR=${REPO}/_scratch
 OUTPUT_DIR=${REPO}/_output
 
 #build
-MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe"
+MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe"
 SWITCHES="/m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.8 /p:VisualStudioVersion=16.0"
+
+if [ ! -f "${MSBUILD}" ] ; then
+  echo "DEBUG: Did not find VS Community edition. Trying Professional"
+  MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe"
+fi
 
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
@@ -68,8 +67,7 @@ cd ${REPO}
 gitCommit=`git rev-parse HEAD`
 git archive --format=zip -o "_scratch/SOURCES/xenadmin-sources.zip" ${gitCommit}
 cp ${REPO}/packages/dotnet-packages-sources.zip ${SCRATCH_DIR}/SOURCES
-cd ${SCRATCH_DIR}/SOURCES && zip ${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip dotnet-packages-sources.zip xenadmin-sources.zip
-cp ${SCRATCH_DIR}/SOURCES/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip
+cd ${SCRATCH_DIR}/SOURCES && zip ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip dotnet-packages-sources.zip xenadmin-sources.zip
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
@@ -79,14 +77,14 @@ SIGN_BAT="${REPO}/scripts/sign.bat"
 SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}"
 
 if [ -f "${SIGN_BAT}" ] ; then
-  for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe CommandLib.dll MSTSCLib.dll CoreUtilsLib.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
+  for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe CommandLib.dll MSTSCLib.dll CoreUtilsLib.dll XenModel.dll XenOvf.dll
   do
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
   done
 
   for locale in ja zh-CN
   do
-    for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.resources.dll  XenModel.resources.dll  XenOvf.resources.dll  XenOvfTransport.resources.dll
+    for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
     do
       cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
     done
@@ -171,7 +169,7 @@ do
   WixLangId=$(locale_id ${locale} | tr -d [:space:]) RepoRoot=$(cygpath -w ${REPO}) \
     ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE_NO_SPACE}.wxs branding.wxs
 
-  ${LIGHT} -ext WiXNetFxExtension -out out${name}/${name}.msi \
+  ${LIGHT} -sval -ext WiXNetFxExtension -out out${name}/${name}.msi \
           -loc wixlib/wixui_${locale}.wxl -loc ${locale}.wxl \
           obj${name}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
 
@@ -203,22 +201,21 @@ cp ${WIX}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${OUTPUT_DIR}
 echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && "${MSBUILD}" ${SWITCHES}
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
-cd ${REPO}/XenAdminTests/bin/ && tar -czf ${OUTPUT_DIR}/XenAdminTests.tgz ./Release
-cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}TestResources.tar *
+cd ${REPO}/XenAdminTests/bin/ && zip -r ${OUTPUT_DIR}/XenAdminTests.zip Release
+cd ${REPO}/XenAdmin/TestResources && zip -r ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}TestResources.zip *
 
 #include cfu validator binary in output directory
-cd ${REPO}/CFUValidator/bin/Release && zip CFUValidator.zip ./{*.dll,CFUValidator.exe,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe}
-cp ${REPO}/CFUValidator/bin/Release/CFUValidator.zip ${OUTPUT_DIR}/CFUValidator.zip
+cd ${REPO}/CFUValidator/bin/Release && zip ${OUTPUT_DIR}/CFUValidator.zip ./{*.dll,CFUValidator.exe,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe}
 
 #now package the pdbs
 cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.pdb,XenModel.pdb,XenOvf.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-cd ${OUTPUT_DIR} && tar cjf ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.tar.bz2 --remove-files *.pdb
+cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.zip *.pdb
 
 set +u

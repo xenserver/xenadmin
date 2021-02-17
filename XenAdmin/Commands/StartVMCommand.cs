@@ -29,19 +29,16 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Actions;
-using XenAdmin.Core;
-using XenAPI;
-using XenAdmin.Network;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.ObjectModel;
-using XenAdmin.Properties;
-using XenAdmin.Dialogs;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.Actions;
+using XenAdmin.Core;
+using XenAdmin.Dialogs;
+using XenAdmin.Network;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -136,53 +133,17 @@ namespace XenAdmin.Commands
             return Helpers.EnabledTargetExists(host, connection);
         }
 
-        protected override string EnabledToolTipText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_TOOLBAR_STARTVM;
-            }
-        }
+        public override string EnabledToolTipText => Messages.MAINWINDOW_TOOLBAR_STARTVM;
 
-        public override Image ToolBarImage
-        {
-            get
-            {
-                return Images.StaticImages._001_PowerOn_h32bit_24;
-            }
-        }
+        public override Image ToolBarImage => Images.StaticImages._001_PowerOn_h32bit_24;
 
-        public override string ToolBarText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_TOOLBAR_START;
-            }
-        }
+        public override string ToolBarText => Messages.MAINWINDOW_TOOLBAR_START;
 
-        public override Image MenuImage
-        {
-            get
-            {
-                return Images.StaticImages._001_PowerOn_h32bit_16;
-            }
-        }
+        public override Image MenuImage => Images.StaticImages._001_PowerOn_h32bit_16;
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_START;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_START;
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_START_CONTEXT_MENU;
-            }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_START_CONTEXT_MENU;
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
         {
@@ -191,21 +152,9 @@ namespace XenAdmin.Commands
             return null;
         }
 
-        public override Keys ShortcutKeys
-        {
-            get
-            {
-                return Keys.Control | Keys.B;
-            }
-        }
+        public override Keys ShortcutKeys => Keys.Control | Keys.B;
 
-        public override string ShortcutKeyDisplayString
-        {
-            get
-            {
-                return Messages.MAINWINDOW_CTRL_B;
-            }
-        }
+        public override string ShortcutKeyDisplayString => Messages.MAINWINDOW_CTRL_B;
 
         protected override AsyncAction BuildAction(VM vm)
         {

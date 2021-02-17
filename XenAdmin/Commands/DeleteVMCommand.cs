@@ -85,7 +85,7 @@ namespace XenAdmin.Commands
 
                 if (cantExecuteReasons.Count > 0)
                 {
-                    errorDialog = new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, GetCantExecuteReasons());
+                    errorDialog = new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
                 }
 
                 List<AsyncAction> actions = new List<AsyncAction>();

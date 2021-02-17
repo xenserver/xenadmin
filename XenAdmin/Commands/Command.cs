@@ -113,20 +113,6 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Gets a list of <see cref="SelectedItem"/>s from the specified <see cref="IXenObject"/>s.
-        /// </summary>
-        protected static IEnumerable<SelectedItem> ConvertToSelection<T>(IEnumerable<T> xenObjects) where T : IXenObject
-        {
-            Util.ThrowIfParameterNull(xenObjects, "selection");
-            List<SelectedItem> selection = new List<SelectedItem>();
-            foreach (T xenObject in xenObjects)
-            {
-                selection.Add(new SelectedItem(xenObject));
-            }
-            return selection;
-        }
-
-        /// <summary>
         /// Gets the current selection context for the Command.
         /// </summary>
         public SelectedItemCollection GetSelection()
@@ -187,97 +173,57 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the text for a menu item which launches this Command.
         /// </summary>
-        public virtual string MenuText
-        {
-            get { return null; }
-        }
+        public virtual string MenuText => null;
 
         /// <summary>
         /// Gets the text for a context menu item which launches this Command.
         /// </summary>
-        public virtual string ContextMenuText
-        {
-            get { return null; }
-        }
+        public virtual string ContextMenuText => null;
 
         /// <summary>
         /// Gets the image for a menu item which launches this Command.
         /// </summary>
-        public virtual Image MenuImage
-        {
-            get { return null; }
-        }
+        public virtual Image MenuImage => null;
 
         /// <summary>
         /// Gets the image for a context menu item which launches this Command.
         /// </summary>
-        public virtual Image ContextMenuImage
-        {
-            get { return null; }
-        }
+        public virtual Image ContextMenuImage => null;
 
         /// <summary>
         /// Gets the text for the toolbar button which launches this Command.
         /// </summary>
-        public virtual string ToolBarText
-        {
-            get { return null; }
-        }
+        public virtual string ToolBarText => null;
 
         /// <summary>
         /// Gets the image for a toolbar button which launches this Command.
         /// </summary>
-        public virtual Image ToolBarImage
-        {
-            get { return null; }
-        }
+        public virtual Image ToolBarImage => null;
 
         /// <summary>
         /// Gets the text for a button which launches this Command.
         /// </summary>
-        public virtual string ButtonText
-        {
-            get { return null; }
-        }
+        public virtual string ButtonText => null;
 
         /// <summary>
-        /// Gets the tool tip text. By default this is the can't execute reason if execution is not possible and
-        /// blank if it can. Override EnabledToolTipText to provide a descriptive tooltip when the command is enabled.
+        /// Gets the tool tip text when execution is not possible. This is the
+        /// can't execute reason for single selection, and null otherwise.
         /// </summary>
-        public virtual string ToolTipText
+        public virtual string DisabledToolTipText
         {
-            get 
+            get
             {
-                if (CanExecute())
-                    return EnabledToolTipText;
-
-                return DisabledToolTipText;  
-            }
-        }
-
-        /// <summary>
-        /// Gets the tool tip text when the command is not able to run. CantExectuteReason for single items,
-        /// null for multiple.
-        /// </summary>
-        protected virtual string DisabledToolTipText
-        {
-            get 
-            {
-                var reasons = GetCantExecuteReasons();
-                // It's necessary to double check that we have one reason which matches up with a single selection
-                // as CanExecuteCore and GetCantExecuteReasons aren't required to match up.
-                if (reasons.Count == 1 && GetSelection().Count == 1)
+                var selection = GetSelection();
+                if (selection.Count == 1)
                 {
-                    foreach (string s in reasons.Values)
-                    {
-                        if (s.Equals(Messages.UNKNOWN))
-                        {
-                            //This is the default, and not a useful tooltip
-                            return null;
-                        }
-                        return s;
-                    }
+                    var item = selection[0];
+                    if (item?.XenObject == null)
+                        return null;
+
+                    string reason = GetCantExecuteReasonCore(item.XenObject);
+                    return reason == Messages.UNKNOWN ? null : reason;
                 }
+
                 return null;
             }
         }
@@ -285,26 +231,17 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the tool tip text when the command is able to run. Null by default.
         /// </summary>
-        protected virtual string EnabledToolTipText
-        {
-            get { return null; }
-        }
+        public virtual string EnabledToolTipText => null;
 
         /// <summary>
         /// Gets the shortcut key display string. This is only used if this Command is used on the main menu.
         /// </summary>
-        public virtual string ShortcutKeyDisplayString
-        {
-            get { return null; }
-        }
+        public virtual string ShortcutKeyDisplayString => null;
 
         /// <summary>
         /// Gets the shortcut keys. This is only used if this Command is used on the main menu.
         /// </summary>
-        public virtual Keys ShortcutKeys
-        {
-            get { return Keys.None; }
-        }
+        public virtual Keys ShortcutKeys => Keys.None;
 
         /// <summary>
         /// Gets a value indicating whether a confirmation dialog should be shown.
@@ -322,7 +259,7 @@ namespace XenAdmin.Commands
         protected virtual string ConfirmationDialogText => null;
 
         /// <summary>
-        /// Gets the help id for the confirmatin dialog.
+        /// Gets the help id for the confirmation dialog.
         /// </summary>
         protected virtual string ConfirmationDialogHelpId => null;
 
@@ -336,7 +273,7 @@ namespace XenAdmin.Commands
         /// Shows a confirmation dialog.
         /// </summary>
         /// <returns>True if the user clicked Yes.</returns>
-        protected bool ShowConfirmationDialog()
+        private bool ShowConfirmationDialog()
         {
             if (Program.RunInAutomatedTestMode)
                 return true;
@@ -415,31 +352,19 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the main window to be used by the Command.
         /// </summary>
-        public IMainWindow MainWindowCommandInterface
-        {
-            get { return _mainWindow; }
-        }
+        public IMainWindow MainWindowCommandInterface => _mainWindow;
+
 
         /// <summary>
-        /// Sets the parent for any dialogs. If not called, then the main window is used.
-        /// </summary>
-        /// <param name="parent">The parent.</param>
-        public void SetParent(Control parent)
-        {
-            _parent = parent;
-        }
-
-        /// <summary>
-        /// Gets the parent for any dialogs. If SetParent() hasn't been called then the MainWindow is returned.
+        /// Gets or sets the parent control for any dialogs launched during the
+        /// execution of the command. Defaults to the MainWindow Form.
         /// </summary>
         public Control Parent
         {
-            get
-            {
-                return _parent ?? _mainWindow.Form;
-            }
+            get => _parent ?? _mainWindow?.Form;
+            set => _parent = value;
         }
-        
+
         /// <summary>
         /// Runs the specified <see cref="AsyncAction"/>s such that they are synchronous per connection but asynchronous across connections.
         /// </summary>
