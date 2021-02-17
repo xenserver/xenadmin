@@ -45,7 +45,7 @@
                     <File Id="HealthCheck_ICSharpCode.SharpZipLib.dll" Name="ICSharpCode.SharpZipLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\ICSharpCode.SharpZipLib.dll" />
                     <File Id="HealthCheck_Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\Ionic.Zip.dll" />
                     <File Id="HealthCheck_log4net.dll" Name="log4net.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\log4net.dll" />
-                    <File Id="HealthCheck_XenCenterLib.dll" Name="XenCenterLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenCenterLib.dll" />
+                    <File Id="HealthCheck_CoreUtilsLib.dll" Name="CoreUtilsLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\CoreUtilsLib.dll" />
                     <File Id="HealthCheck_XenModel.dll" Name="XenModel.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenModel.dll" />
                     <File Id="HealthCheck_XenServerHealthCheck.exe.config" Name="XenServerHealthCheck.exe.config" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe.config" />
                     <ServiceInstall
