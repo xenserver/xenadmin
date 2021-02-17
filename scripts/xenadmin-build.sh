@@ -58,13 +58,7 @@ fi
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 
-if [ -f ${REPO}/Branding/branding.sh ]; then
-  source ${REPO}/Branding/branding.sh
-else
-  ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd )"
-  source ${ROOT}/xenadmin-branding/citrix/Branding/branding.sh #local dev
-fi
-
+source ${REPO}/Branding/branding.sh
 source ${REPO}/scripts/re-branding.sh $1
 
 #packages sources
