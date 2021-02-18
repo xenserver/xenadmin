@@ -366,7 +366,7 @@ namespace XenAdmin.Actions
                     log.InfoFormat("Task {0} finished successfully", RelatedTask.opaque_ref);
                     if (task.result != "") // Work around CA-6597
                     {
-                        Match m = Regex.Match(Result, "<value>(.*)</value>");
+                        Match m = Regex.Match(task.result, "<value>(.*)</value>");
                         if (m.Success)
                             Result = m.Groups[1].Value;
                     }
