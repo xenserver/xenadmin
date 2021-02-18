@@ -2651,6 +2651,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HA_STATUS" xml:space="preserve">
     <value>Checking HA and WLB status</value>
   </data>
+  <data name="CHECKING_HEALTH_CHECK_SERVICE" xml:space="preserve">
+    <value>Checking pool enrollment to the Health Check service</value>
+  </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
   </data>
@@ -10657,6 +10660,12 @@ Please reconnect the host and try again</value>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>Probing for LUNs on {0}</value>
   </data>
+  <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
+    <value>{0}: The Health Check service has been removed in [XenServer] {1}.</value>
+  </data>
+  <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
+    <value>Disable Health Check</value>
+  </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
   </data>
@@ -13796,6 +13805,9 @@ Schedule:
   </data>
   <data name="WARNING_DELETE_VD_MULTIPLE" xml:space="preserve">
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
+  </data>
+  <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
+    <value>The Health Check service has been removed in [XenServer] {0}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>
