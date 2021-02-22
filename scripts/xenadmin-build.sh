@@ -218,4 +218,7 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
 
 cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE}.Symbols.zip *.pdb
 
+sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi.checksum
+sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip.checksum
+
 set +u
