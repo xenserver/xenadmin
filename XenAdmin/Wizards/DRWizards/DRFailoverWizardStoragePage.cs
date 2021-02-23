@@ -570,7 +570,7 @@ namespace XenAdmin.Wizards.DRWizards
                 var cellTick = new DataGridViewCheckBoxCell { Value = selected };
                 var cellName = new DataGridViewTextBoxCell { Value = srInfo.Name };
                 var cellDesc = new DataGridViewTextBoxCell { Value = srInfo.Description };
-                var cellType = new DataGridViewTextBoxCell { Value = SR.getFriendlyTypeName(type) };
+                var cellType = new DataGridViewTextBoxCell { Value = SR.GetFriendlyTypeName(type) };
                 var cellMetadata = new DataGridViewTextBoxCell { Value = poolMetadataDetected.ToStringI18n() };
                 Cells.AddRange(cellTick, cellName, cellDesc, cellType, cellMetadata);
             }

@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
         public SrScanAction(IXenConnection connection, string hostname, string username, 
             string password, SR.SRTypes type)
             : base(connection, String.Format(Messages.ACTION_SR_SCAN_NAME, hostname),
-            String.Format(Messages.ACTION_SR_SCAN_DESCRIPTION, XenAPI.SR.getFriendlyTypeName(type), hostname), true)
+            String.Format(Messages.ACTION_SR_SCAN_DESCRIPTION, SR.GetFriendlyTypeName(type), hostname), true)
         {
             this.hostname = hostname;
             this.username = username;

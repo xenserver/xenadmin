@@ -120,13 +120,13 @@ namespace XenAPI
 
         public string FriendlyTypeName()
         {
-            return getFriendlyTypeName(GetSRType(false));
+            return GetFriendlyTypeName(GetSRType(false));
         }
 
         /// <summary>
         /// A friendly (internationalized) name for the SR type.
         /// </summary>
-        public static string getFriendlyTypeName(SRTypes srType)
+        public static string GetFriendlyTypeName(SRTypes srType)
         {
             return FriendlyNameManager.GetFriendlyName(string.Format("Label-SR.SRTypes-{0}", srType.ToString()));
         }
