@@ -348,28 +348,28 @@
   <data name="&gt;&gt;m_labelDisable2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="pictureBoxWarning.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="pictureBoxWarning1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="pictureBoxWarning.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pictureBoxWarning1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="pictureBoxWarning.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pictureBoxWarning1.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
   </data>
-  <data name="pictureBoxWarning.TabIndex" type="System.Int32, mscorlib">
+  <data name="pictureBoxWarning1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.Name" xml:space="preserve">
-    <value>pictureBoxWarning</value>
+  <data name="&gt;&gt;pictureBoxWarning1.Name" xml:space="preserve">
+    <value>pictureBoxWarning1</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning1.Parent" xml:space="preserve">
     <value>m_tableLpWarning</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarning1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_labelDisable1.AutoSize" type="System.Boolean, mscorlib">
@@ -436,7 +436,7 @@
     <value>3</value>
   </data>
   <data name="m_tableLpWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_labelDisable2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="pictureBoxWarning" Row="0" RowSpan="2" Column="0" ColumnSpan="1" />&lt;Control Name="m_labelDisable1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_labelDisable2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="pictureBoxWarning1" Row="0" RowSpan="2" Column="0" ColumnSpan="1" />&lt;Control Name="m_labelDisable1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="m_tableLpInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -550,7 +550,7 @@
     <value>4</value>
   </data>
   <data name="m_tableLpInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_labelEnable" Row="0" RowSpan="1" Column="9" ColumnSpan="1" />&lt;Control Name="pictureBoxInfo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_labelEnable" Row="0" RowSpan="1" Column="9" ColumnSpan="1" />&lt;Control Name="pictureBoxInfo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,Absolute,47" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="spinnerIcon1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>

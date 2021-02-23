@@ -189,14 +189,17 @@
   <data name="m_colVmNetwork.HeaderText" xml:space="preserve">
     <value>VM - 仮想ネットワーク インターフェイス</value>
   </data>
-  <data name="m_colVmNetwork.Width" type="System.Int32, mscorlib">
-    <value>174</value>
+  <data name="m_colVmNetwork.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
   <metadata name="m_colTargetNet.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="m_colTargetNet.HeaderText" xml:space="preserve">
     <value>マップするネットワーク</value>
+  </data>
+  <data name="m_colTargetNet.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
   <data name="m_dataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
