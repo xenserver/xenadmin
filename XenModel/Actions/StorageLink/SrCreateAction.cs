@@ -66,7 +66,7 @@ namespace XenAdmin.Actions
             string srDescription, SR.SRTypes srType, string srContentType,
             Dictionary<string, string> dconf, Dictionary<string, string> smconf)
             : base(connection, string.Format(Messages.ACTION_SR_CREATING_TITLE,
-            XenAPI.SR.getFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
+            XenAPI.SR.GetFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
         {
             Host = host;
             Pool = Helpers.GetPool(connection);

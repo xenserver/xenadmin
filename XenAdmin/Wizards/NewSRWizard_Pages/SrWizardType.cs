@@ -235,7 +235,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public virtual void ResetSrName(IXenConnection connection)
         {
-            SrName = SrWizardHelpers.DefaultSRName(String.Format(Messages.SRWIZARD_STORAGE_NAME, SR.getFriendlyTypeName(Type)), connection);
+            SrName = SrWizardHelpers.DefaultSRName(String.Format(Messages.SRWIZARD_STORAGE_NAME, SR.GetFriendlyTypeName(Type)), connection);
         }
 
         public virtual IEnumerable<SR.SRTypes> PossibleTypes { get { return new SR.SRTypes[] { Type }; } }
@@ -417,7 +417,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         public override bool IsEnhancedSR { get { return true; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_NETAPP_BLURB; } }
-        public override string FrontendTypeName { get { return SR.getFriendlyTypeName(Type); } }
+        public override string FrontendTypeName { get { return SR.GetFriendlyTypeName(Type); } }
         public override SR.SRTypes Type { get { return SR.SRTypes.netapp; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return true; } }
@@ -429,7 +429,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         public override bool IsEnhancedSR { get { return true; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_EQUAL_LOGIC_BLURB; } }
-        public override string FrontendTypeName { get { return SR.getFriendlyTypeName(Type); } }
+        public override string FrontendTypeName { get { return SR.GetFriendlyTypeName(Type); } }
         public override SR.SRTypes Type { get { return SR.SRTypes.equal; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return true; } }

@@ -78,7 +78,7 @@ namespace XenAdmin.Actions
                     break;
             }
 
-            Description = string.Format(Messages.ACTION_SR_SCANNING, SR.getFriendlyTypeName(srType), target);
+            Description = string.Format(Messages.ACTION_SR_SCANNING, SR.GetFriendlyTypeName(srType), target);
 
             this.smconf = smconf ?? new Dictionary<string, string>();
 
