@@ -120,7 +120,19 @@ namespace XenAPI
 
         public string FriendlyTypeName()
         {
-            return GetFriendlyTypeName(GetSRType(false));
+            var srType = GetSRType(false);
+
+            if (srType == SRTypes.unknown)
+            {
+                var sm = SM.GetByType(Connection, type);
+
+                if (sm != null &&
+                    Version.TryParse(sm.required_api_version, out var smapiVersion) &&
+                    smapiVersion.CompareTo(new Version(3, 0)) >= 0)
+                    return !string.IsNullOrEmpty(sm.name_label) ? sm.name_label : type;
+            }
+
+            return GetFriendlyTypeName(srType);
         }
 
         /// <summary>
