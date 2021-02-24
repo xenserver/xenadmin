@@ -298,6 +298,23 @@ namespace XenAPI
             return false;
         }
 
+        public bool HasDriverDomain(out VM vm)
+        {
+            foreach (var pbdRef in PBDs)
+            {
+                var pbd = Connection.Resolve(pbdRef);
+                if (pbd != null && pbd.other_config.TryGetValue("storage_driver_domain", out string vmRef))
+                {
+                    vm = Connection.Resolve(new XenRef<VM>(vmRef));
+                    if (vm != null && !vm.IsControlDomainZero(out _))
+                        return true;
+                }
+            }
+
+            vm = null;
+            return false;
+        }
+
         /// <summary>
         /// If host is non-null, return whether this storage can be seen from the given host.
         /// If host is null, return whether the storage is shared, with a PBD for each host and at least one PBD plugged.

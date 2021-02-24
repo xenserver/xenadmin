@@ -3249,9 +3249,6 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>This server is unavailable.</value>
   </data>
-  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
-    <value>{0} Nutanix CVM console</value>
-  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>This VM is currently shut down.</value>
   </data>
@@ -3269,6 +3266,9 @@ Would you like to carry out the operation at this time?</value>
   </data>
   <data name="CONSOLE_POWER_STATE_SUSPENDED_RESUME" xml:space="preserve">
     <value>This VM is currently suspended.  Click here to resume it.</value>
+  </data>
+  <data name="CONSOLE_SR_DRIVER_DOMAIN" xml:space="preserve">
+    <value>SR '{0}' Driver Domain Console</value>
   </data>
   <data name="CONTAINED_IN" xml:space="preserve">
     <value>contained in</value>
