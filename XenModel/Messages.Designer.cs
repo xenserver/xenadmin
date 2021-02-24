@@ -8989,15 +8989,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Nutanix CVM console.
-        /// </summary>
-        public static string CONSOLE_HOST_NUTANIX {
-            get {
-                return ResourceManager.GetString("CONSOLE_HOST_NUTANIX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM is currently shut down..
         /// </summary>
         public static string CONSOLE_POWER_STATE_HALTED {
@@ -9048,6 +9039,15 @@ namespace XenAdmin {
         public static string CONSOLE_POWER_STATE_SUSPENDED_RESUME {
             get {
                 return ResourceManager.GetString("CONSOLE_POWER_STATE_SUSPENDED_RESUME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR &apos;{0}&apos; Driver Domain Console.
+        /// </summary>
+        public static string CONSOLE_SR_DRIVER_DOMAIN {
+            get {
+                return ResourceManager.GetString("CONSOLE_SR_DRIVER_DOMAIN", resourceCulture);
             }
         }
         

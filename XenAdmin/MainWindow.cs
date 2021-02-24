@@ -1390,13 +1390,13 @@ namespace XenAdmin
             bool isPoolSelected = SelectionManager.Selection.FirstIs<Pool>();
             bool isVMSelected = SelectionManager.Selection.FirstIs<VM>();
             bool isHostSelected = SelectionManager.Selection.FirstIs<Host>();
-            bool isSRSelected = SelectionManager.Selection.FirstIs<SR>();
+            SR selectedSr = SelectionManager.Selection.First as SR;
+            bool isSRSelected = selectedSr != null;
             bool isVdiSelected = SelectionManager.Selection.FirstIs<VDI>();
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
             bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
-            bool hasManyControlDomains = isHostSelected && ((Host)SelectionManager.Selection.First).HasManyControlDomains();
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML();
 
@@ -1453,8 +1453,8 @@ namespace XenAdmin
 
             if (consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
                 newTabs.Add(TabPageConsole);
-            
-            if (consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains)
+
+            if (consoleFeatures.Count == 0 && !multi && !SearchMode && isSRSelected && selectedSr.HasDriverDomain(out _))
                 newTabs.Add(TabPageCvmConsole);
 
             if (!multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
@@ -1822,9 +1822,9 @@ namespace XenAdmin
             }
             else if (t == TabPageCvmConsole)
             {
-                if (SelectionManager.Selection.FirstIs<Host>())
+                if (SelectionManager.Selection.First is SR sr && sr.HasDriverDomain(out var vm))
                 {
-                    CvmConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    CvmConsolePanel.setCurrentSource(vm);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
             }

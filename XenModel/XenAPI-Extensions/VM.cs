@@ -1369,12 +1369,13 @@ namespace XenAPI
         /// <summary>
         /// Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
         /// </summary>
-        public bool IsControlDomainZero()
+        public bool IsControlDomainZero(out Host host)
         {
+            host = null;
             if (!is_control_domain)
                 return false;
 
-            var host = Connection.Resolve(resident_on);
+            host = Connection.Resolve(resident_on);
             if (host == null)
                 return false;
 
@@ -1384,6 +1385,28 @@ namespace XenAPI
             var vms = Connection.ResolveAll(host.resident_VMs);
             var first = vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
             return first != null && first.opaque_ref == opaque_ref;
+        }
+
+        public bool IsSrDriverDomain(out SR sr)
+        {
+            sr = null;
+
+            if (!is_control_domain || IsControlDomainZero(out _))
+                return false;
+
+            foreach (var pbd in Connection.Cache.PBDs)
+            {
+                if (pbd != null &&
+                    pbd.other_config.TryGetValue("storage_driver_domain", out string vmRef) &&
+                    vmRef == opaque_ref)
+                {
+                    sr = Connection.Resolve(pbd.SR);
+                    if (sr != null)
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         public bool is_a_real_vm()
