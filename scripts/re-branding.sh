@@ -98,7 +98,7 @@ rebranding_global ${REPO}/XenAdmin/app.config
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 
 #XenModel
-rebranding_global ${REPO}/XenModel/BrandManager.cs
+rebranding_global ${REPO}/Branding/Branding.resx
 RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
 rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
 

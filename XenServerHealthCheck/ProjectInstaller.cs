@@ -29,25 +29,21 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
-using System.Linq;
 using XenAdmin.Core;
 
 
 namespace XenServerHealthCheck
 {
     [RunInstaller(true)]
-    public partial class ProjectInstaller : System.Configuration.Install.Installer
+    public partial class ProjectInstaller : Installer
     {
         public ProjectInstaller()
         {
             InitializeComponent();
-            this.XenServerHealthCheckInstaller.Description = BrandManager.COMPANY_AND_PRODUCT_BRAND + " Health Check";
-            this.XenServerHealthCheckInstaller.DisplayName = BrandManager.COMPANY_AND_PRODUCT_BRAND + " Health Check";
+            XenServerHealthCheckInstaller.Description = BrandManager.ProductBrandWithCompany + " Health Check";
+            XenServerHealthCheckInstaller.DisplayName = BrandManager.ProductBrandWithCompany + " Health Check";
         }
 
         private void XenServerHealthCheckInstaller_AfterInstall(object sender, InstallEventArgs e)

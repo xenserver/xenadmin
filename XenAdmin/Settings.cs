@@ -376,7 +376,7 @@ namespace XenAdmin
                 Application.Exit();
             }
 
-            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
                 HealthCheck.SendMetadataToHealthCheck();
         }
 
