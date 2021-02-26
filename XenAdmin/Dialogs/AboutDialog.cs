@@ -53,9 +53,9 @@ namespace XenAdmin.Dialogs
                                    ? string.Format("{0}: {1}", revision, Messages.COMMON_CRITERIA_TEXT)
                                    : revision.ToString();
 
-            VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.PRODUCT_VERSION_TEXT,
-                BrandManager.XENCENTER_VERSION, buildText, IntPtr.Size * 8);
-            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.COMPANY_NAME_LEGAL);
+            VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.ProductVersionText,
+                BrandManager.XenCenterVersion, buildText, IntPtr.Size * 8);
+            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.CompanyNameLegal);
             label2.Visible = !HiddenFeatures.CopyrightHidden;
 
             showAgainCheckBox.Checked = Properties.Settings.Default.ShowAboutDialog;

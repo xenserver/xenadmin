@@ -49,11 +49,11 @@ namespace XenAdminTests.UnitTests.AlertTests
             ClassVerifiers.VerifyGetters(new XenCenterUpdateAlert(version),
                 new AlertClassUnitTestData
                 {
-                    AppliesTo = BrandManager.BRAND_CONSOLE,
+                    AppliesTo = BrandManager.BrandConsole,
                     FixLinkText = "Go to Web Page",
                     HelpID = "XenCenterUpdateAlert",
                     Description = "xc is now available. Download the new version from the "
-                                  + BrandManager.COMPANY_NAME_SHORT + " website.",
+                                  + BrandManager.CompanyNameShort + " website.",
                     HelpLinkText = "Help",
                     Title = "xc is now available",
                     Priority = "Priority5"

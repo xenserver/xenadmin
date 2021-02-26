@@ -243,7 +243,7 @@ namespace XenAdmin
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
-            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter");
+            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
 
             statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
         }
@@ -570,7 +570,7 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+                if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
                     HealthCheck.SendProxySettingsToHealthCheck();
             }
             catch (ConfigurationErrorsException ex)
@@ -624,7 +624,7 @@ namespace XenAdmin
                 Updates.CheckForUpdates(false);
             }
 
-            if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter"))
+            if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter"))
             {
                 // start healthCheckResult thread
                 healthCheckResultTimer.Interval = 1000 * 60 * 60; // 1 hour
@@ -887,7 +887,7 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), Messages.XENCENTER, BrandManager.PRODUCT_VERSION_TEXT, Program.Version);
+                master.BuildNumberRaw(), Messages.XENCENTER, BrandManager.ProductVersionText, Program.Version);
 
             // Check the PRODUCT_BRAND
             if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
@@ -1018,7 +1018,7 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
             {
                 if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
                     ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
@@ -1028,7 +1028,7 @@ namespace XenAdmin
 
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
             Updates.CheckHotfixEligibility(connection);
-            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BRAND_CONSOLE == "XenCenter")
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
                 HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
         }
@@ -1053,8 +1053,8 @@ namespace XenAdmin
         private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
-            return brand == BrandManager.PRODUCT_BRAND || brand == BrandManager.LegacyProduct ||
-                   BrandManager.PRODUCT_BRAND == "[XenServer product]";
+            return brand == BrandManager.ProductBrand || brand == BrandManager.LegacyProduct ||
+                   BrandManager.ProductBrand == "[XenServer product]";
         }
 
         /// <summary>

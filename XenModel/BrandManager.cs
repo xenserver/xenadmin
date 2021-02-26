@@ -39,43 +39,53 @@ namespace XenAdmin.Core
     {
         private static readonly ResourceManager Branding = new ResourceManager("XenAdmin.Branding", typeof(BrandManager).Assembly);
 
-        public static string UpdatesUrl => Get("UPDATES_URL");
 
-        public static string PerfAlertMailDefaultLanguage => Get("PERF_ALERT_MAIL_DEFAULT_LANGUAGE");
+        public static readonly string BrandConsole = Get("BRAND_CONSOLE");
 
-        public static string ExtensionSearch => Get("EXTENSION_SEARCH");
+        public static readonly string CompanyNameLegal = Get("COMPANY_NAME_LEGAL");
 
-        public static string ExtensionUpdate => Get("EXTENSION_UPDATE");
+        public static readonly string CompanyNameShort = Get("COMPANY_NAME_SHORT");
 
-        public static string ExtensionBackup => Get("EXTENSION_BACKUP");
+        public static readonly string ExtensionBackup = Get("EXTENSION_BACKUP");
 
-        public static string LegacyProduct => Get("LEGACY_PRODUCT");
+        public static readonly string ExtensionSearch = Get("EXTENSION_SEARCH");
 
-        public static string ProductVersion56 => Get("PRODUCT_VERSION_5_6");
+        public static readonly string ExtensionUpdate = Get("EXTENSION_UPDATE");
 
-        public static string ProductVersion65 => Get("PRODUCT_VERSION_6_5");
+        public static readonly string LegacyProduct = Get("LEGACY_PRODUCT");
 
-        public static string ProductVersion70 => Get("PRODUCT_VERSION_7_0");
+        public static readonly string PerfAlertMailDefaultLanguage = Get("PERF_ALERT_MAIL_DEFAULT_LANGUAGE");
 
-        public static string ProductVersion712 => Get("PRODUCT_VERSION_7_1_2");
+        public static readonly string ProductBrand = Get("PRODUCT_BRAND");
 
-        public static string ProductVersion80 => Get("PRODUCT_VERSION_8_0");
+        public static readonly string ProductBrandWithCompany = Get("PRODUCT_BRAND_WITH_COMPANY");
 
-        public static string ProductVersion81 => Get("PRODUCT_VERSION_8_1");
+        public static readonly string ProductServer = Get("PRODUCT_SERVER");
 
-        public static string ProductVersion82 => Get("PRODUCT_VERSION_8_2");
+        public static readonly string ProductVersion56 = Get("PRODUCT_VERSION_5_6");
 
-        public static string ProductVersionPost82 => Get("PRODUCT_VERSION_POST_8_2");
+        public static readonly string ProductVersion65 = Get("PRODUCT_VERSION_6_5");
 
+        public static readonly string ProductVersion70 = Get("PRODUCT_VERSION_7_0");
 
-        public const string PRODUCT_BRAND = "[XenServer product]";
-        public const string COMPANY_NAME_SHORT = "[Citrix]";
-        public const string COMPANY_AND_PRODUCT_BRAND = "[Citrix XenServer]";
-        public const string PRODUCT_VERSION_TEXT = "[BRANDING_PRODUCT_VERSION_TEXT]";
-        public const string XENCENTER_VERSION = "[BRANDING_PRODUCT_VERSION]";
-        public const string COMPANY_NAME_LEGAL = "[BRANDING_COMPANY_NAME_LEGAL]";
-        public const string BRAND_CONSOLE = "[XenCenter]";
-        public const string VM_TOOLS = "[Citrix VM Tools]";
+        public static readonly string ProductVersion712 = Get("PRODUCT_VERSION_7_1_2");
+
+        public static readonly string ProductVersion80 = Get("PRODUCT_VERSION_8_0");
+
+        public static readonly string ProductVersion81 = Get("PRODUCT_VERSION_8_1");
+
+        public static readonly string ProductVersion82 = Get("PRODUCT_VERSION_8_2");
+
+        public static readonly string ProductVersionPost82 => Get("PRODUCT_VERSION_POST_8_2");
+
+        public static readonly string ProductVersionText = Get("PRODUCT_VERSION_TEXT");
+
+        public static readonly string UpdatesUrl = Get("UPDATES_URL");
+
+        public static readonly string VmTools = Get("VM_TOOLS");
+
+        public static readonly string XenCenterVersion = Get("XENCENTER_VERSION");
+
 
         /// <summary>
         /// Returns null if no match is found.
