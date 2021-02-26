@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		private bool m_isEncryptionOk = true;
 		private bool m_isSignatureOk = true;
         private bool m_buttonNextEnabled;
+        private bool _updating;
 
 		public ExportOptionsPage()
 		{
@@ -63,7 +64,6 @@ namespace XenAdmin.Wizards.ExportWizard
 			m_labelStrength.Visible = false;
 			m_pictureBoxTick.Visible = false;
 			m_pictureBoxTickValidate.Visible = false;
-			m_tableLayoutPanelManifest.Enabled = m_checkBoxManifest.Checked;
 
 			//CA-59159: encryption is not supported for Boston
 			sectionHeaderLabel2.Visible = false;
@@ -75,12 +75,12 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// Gets a value indicating whether to create a manifest file
 		/// </summary>
-		public bool CreateManifest { get { return m_checkBoxManifest.Checked; } }
+		public bool CreateManifest => m_checkBoxManifest.Checked;
 
 		/// <summary>
 		/// Gets a value indicating whether to sign the appliance
 		/// </summary>
-		public bool SignAppliance { get { return m_checkBoxSign.Checked; } }
+		public bool SignAppliance => m_checkBoxSign.Checked;
 
 		/// <summary>
 		/// Gets the certificate used to create the signature
@@ -90,22 +90,22 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// Gets a value indicating whether to encrypt the files reference in the OVF package.
 		/// </summary>
-		public bool EncryptFiles { get { return m_checkBoxEncrypt.Checked; } }
+		public bool EncryptFiles => m_checkBoxEncrypt.Checked;
 
 		/// <summary>
 		/// Gets the password used for the encryption of the OVF files
 		/// </summary>
-		public string EncryptPassword { get { return m_textBoxPwd.Text; } }
+		public string EncryptPassword => m_textBoxPwd.Text;
 
 		/// <summary>
 		/// Gets a value indicating whether the appliance will be exproted as a single OVA file
 		/// </summary>
-		public bool CreateOVA { get { return m_checkBoxCreateOVA.Checked; } }
+		public bool CreateOVA => m_checkBoxCreateOVA.Checked;
 
 		/// <summary>
 		/// Gets a value indicating whether the OVF files should be compressed
 		/// </summary>
-		public bool CompressOVFfiles { get { return m_checkBoxCompressFiles.Checked; } }
+		public bool CompressOVFfiles => m_checkBoxCompressFiles.Checked;
 
 		#endregion
 
@@ -114,21 +114,21 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// <summary>
 		/// Gets the page's title (headline)
 		/// </summary>
-		public override string PageTitle { get { return Messages.EXPORT_OPTIONS_PAGE_TITLE; } }
+		public override string PageTitle => Messages.EXPORT_OPTIONS_PAGE_TITLE;
 
 		/// <summary>
 		/// Gets the page's label in the (left hand side) wizard progress panel
 		/// </summary>
-		public override string Text { get { return Messages.EXPORT_OPTIONS_PAGE_TEXT; } }
+		public override string Text => Messages.EXPORT_OPTIONS_PAGE_TEXT;
 
 		/// <summary>
 		/// Gets the value by which the help files section for this page is identified
 		/// </summary>
-		public override string HelpID { get { return "ExportOptions"; } }
+		public override string HelpID => "ExportOptions";
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-			SetButtonNextEnabled(true);
+			SetButtonNextEnabled(!IsDirty || m_isEncryptionOk && m_isSignatureOk);
 		}
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
@@ -150,17 +150,6 @@ namespace XenAdmin.Wizards.ExportWizard
 		#endregion
 
 		#region Private methods
-
-        /// <summary>
-        /// Performs certain checks on the pages's input data and shows/hides an error accordingly
-        /// </summary>
-        /// <param name="checks">The checks to perform</param>
-        private bool PerformCheck(params CheckDelegate[] checks)
-        {
-            bool success = m_ctrlErrorCert.PerformCheck(checks);
-            SetButtonNextEnabled(success);
-            return m_buttonNextEnabled;
-        }
 
         private void SetButtonNextEnabled(bool enabled)
         {
@@ -198,7 +187,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			SetButtonNextEnabled(m_isEncryptionOk && m_isSignatureOk);
 		}
 
-		private void CalculatePassordStrength()
+		private void CalculatePasswordStrength()
 		{
 			if (String.IsNullOrEmpty(m_textBoxPwd.Text))
 			{
@@ -276,8 +265,8 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			if (m_checkBoxManifest.Checked && m_checkBoxSign.Checked)
 			{
-				if (String.IsNullOrEmpty(m_textBoxCertificate.Text) || String.IsNullOrEmpty(m_textBoxPrivateKeyPwd.Text)
-					|| !PerformCheck(CheckCertificatePathValid, CheckCertificatePathExists, CheckSignPasswordValid, CheckCertificateValid))
+				if (string.IsNullOrEmpty(m_textBoxCertificate.Text) || string.IsNullOrEmpty(m_textBoxPrivateKeyPwd.Text)
+					|| !m_ctrlErrorCert.PerformCheck(CheckCertificatePathValid, CheckCertificatePathExists, CheckSignPasswordValid, CheckCertificateValid))
 				{
 					m_pictureBoxTickValidate.Visible = false;
 					m_isSignatureOk = false;
@@ -358,13 +347,28 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		private void m_checkBoxManifest_CheckedChanged(object sender, EventArgs e)
 		{
-			m_tableLayoutPanelManifest.Enabled = m_checkBoxManifest.Checked;
+            if (_updating)
+                return;
+
+            _updating = true;
+            if (!m_checkBoxManifest.Checked)
+                m_checkBoxSign.Checked = false;
+            _updating = false;
+
 			OnSignatureChanged();
 			IsDirty = true;
 		}
 
 		private void m_checkBoxSign_CheckedChanged(object sender, EventArgs e)
 		{
+            if (_updating)
+                return;
+
+            _updating = true;
+            if (m_checkBoxSign.Checked)
+                m_checkBoxManifest.Checked = true;
+            _updating = false;
+
 			OnSignatureChanged();
 			IsDirty = true;
 		}
@@ -412,7 +416,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		private void m_textBoxPwd_TextChanged(object sender, EventArgs e)
 		{
 			ToggleEncryptionCheckBoxCheckedState();
-			CalculatePassordStrength();
+			CalculatePasswordStrength();
 			OnEncryptionChanged();
 			IsDirty = true;
 		}

@@ -36,87 +36,112 @@ using System.Text;
 
 namespace XenCenterLib
 {
-    /// <summary>
-    /// Used to centralise the encryption routines used for master password
-    /// and session lists
-    /// </summary>
-    public class EncryptionUtils
+    public static class EncryptionUtils
     {
-        private static byte[] salt;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private const int SALT_LENGTH = 16;
+
+        public enum HashMethod
+        {
+            Md5,
+            Sha256
+        }
+
+        private static string StringOf(this HashMethod method)
+        {
+            switch (method)
+            {
+                case HashMethod.Md5:
+                    return "MD5";
+                case HashMethod.Sha256:
+                    return "SHA256";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(method), method, null);
+            }
+        }
 
         /// <summary>
-        /// Returns a secure hash of the given input string (usually the
-        /// master password). We currently use SHA-1.
+        /// Returns a secure hash of the given input string.
         /// </summary>
-        /// <param name="password">The string to hash</param>
+        /// <param name="input">The string to hash</param>
+        /// <param name="method">The hash algorithm implementation to use.</param>
         /// <returns>The secure hash</returns>
-        public static byte[] ComputeHash(String password)
+        public static byte[] ComputeHash(string input, HashMethod method = HashMethod.Sha256)
         {
-            //SHA1 hasher = SHA1.Create();
-            MD5 hasher = MD5.Create();
-            UnicodeEncoding ue = new UnicodeEncoding();
-            byte[] bytes = ue.GetBytes(password);
-            
-            byte[] hash = hasher.ComputeHash(bytes);
+            if (input == null)
+                return null;
 
-            return hash;
+            UnicodeEncoding ue = new UnicodeEncoding();
+            byte[] bytes = ue.GetBytes(input);
+
+            using (var hasher = HashAlgorithm.Create(method.StringOf()))
+                return hasher?.ComputeHash(bytes);
         }
 
         public static string Protect(string data)
         {
-            byte[] dataBytes = Encoding.Unicode.GetBytes(data);
-            byte[] protectedBytes = ProtectedData.Protect(dataBytes, GetSalt(), DataProtectionScope.CurrentUser);
-            return Convert.ToBase64String(protectedBytes);
+            return ProtectForScope(data, DataProtectionScope.CurrentUser);
         }
 
-        public static string Unprotect(string protectedstring)
+        public static string Unprotect(string protectedString)
         {
-            byte[] protectedBytes = Convert.FromBase64String(protectedstring);
-            byte[] dataBytes = ProtectedData.Unprotect(protectedBytes, GetSalt(), DataProtectionScope.CurrentUser);
-            return Encoding.Unicode.GetString(dataBytes);
+            return UnprotectForScope(protectedString, DataProtectionScope.CurrentUser);
         }
 
         public static string ProtectForLocalMachine(string data)
         {
-            byte[] dataBytes = Encoding.Unicode.GetBytes(data);
-            byte[] protectedBytes = ProtectedData.Protect(dataBytes, GetSalt(), DataProtectionScope.LocalMachine);
-            return Convert.ToBase64String(protectedBytes);
+            return ProtectForScope(data, DataProtectionScope.LocalMachine);
         }
 
-        public static string UnprotectForLocalMachine(string protectedstring)
+        public static string UnprotectForLocalMachine(string protectedString)
         {
-            byte[] protectedBytes = Convert.FromBase64String(protectedstring);
-            byte[] dataBytes = ProtectedData.Unprotect(protectedBytes, GetSalt(), DataProtectionScope.LocalMachine);
+            return UnprotectForScope(protectedString, DataProtectionScope.LocalMachine);
+        }
+
+        private static string ProtectForScope(string data, DataProtectionScope scope)
+        {
+            byte[] saltBytes = GetSalt();
+            byte[] dataBytes = Encoding.Unicode.GetBytes(data);
+            byte[] protectedBytes = ProtectedData.Protect(dataBytes, saltBytes, scope);
+            return $"{Convert.ToBase64String(protectedBytes)},{Convert.ToBase64String(saltBytes)}";
+        }
+
+        private static string UnprotectForScope(string protectedString, DataProtectionScope scope)
+        {
+            var parts = protectedString.Split(new[] {','}, 2);
+            byte[] saltBytes = parts.Length == 2
+                ? Convert.FromBase64String(parts[1])
+                : new UnicodeEncoding().GetBytes("XenRocks"); //backwards compatibility
+            byte[] protectedBytes = Convert.FromBase64String(parts[0]);
+            byte[] dataBytes = ProtectedData.Unprotect(protectedBytes, saltBytes, scope);
             return Encoding.Unicode.GetString(dataBytes);
         }
 
         /// <summary>
-        /// Encrypt a given string using the given key. The cipherText is Base64
-        /// encoded and returned. The algorithjm currently used is "Rijndael"
+        /// Encrypt a given string using the given key.
         /// </summary>
         /// <param name="clearString">The string to encrypt.</param>
         /// <param name="keyBytes">The key for the encryption algorithm</param>
         /// <returns>The Base64 encoded cipher text</returns>
-        public static String EncryptString(String clearString, byte[] keyBytes)
+        public static string EncryptString(string clearString, byte[] keyBytes)
         {
-            MemoryStream ms = new MemoryStream();
+            byte[] saltBytes = GetSalt();
 
-            //DES alg = DES.Create();
-            //RC2 alg = RC2.Create();
-            Rijndael alg = Rijndael.Create();
+            using (var alg = new AesManaged())
+            {
+                alg.Key = keyBytes;
+                alg.IV = saltBytes;
 
-            alg.Key = keyBytes;
-            alg.IV = GetSalt();
-
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearString);
-
-            CryptoStream cs = new CryptoStream(ms, alg.CreateEncryptor(), CryptoStreamMode.Write);
-            cs.Write(clearBytes, 0, clearBytes.Length);
-            cs.Close();
-
-            byte[] cipherText = ms.ToArray();
-
-            return Convert.ToBase64String(cipherText);
+                using (var ms = new MemoryStream())
+                using (var cs = new CryptoStream(ms, alg.CreateEncryptor(), CryptoStreamMode.Write))
+                {
+                    byte[] clearBytes = Encoding.Unicode.GetBytes(clearString);
+                    cs.Write(clearBytes, 0, clearBytes.Length);
+                    cs.FlushFinalBlock(); //important for getting the padding right
+                    return $"{Convert.ToBase64String(ms.ToArray())},{Convert.ToBase64String(saltBytes)}";
+                }
+            }
         }
 
         /// <summary>
@@ -124,38 +149,59 @@ namespace XenCenterLib
         /// </summary>
         /// <param name="cipherText64">The base64 encoded cipher text that was produced
         /// by encryptString</param>
-        /// <param name="keyBytes">The key to use to decrypt</param>
+        /// <param name="key">The key for the decryption algorithm</param>
         /// <returns>The decrypted text.</returns>
-        public static String DecryptString(String cipherText64, byte[] keyBytes)
+        public static string DecryptString(string cipherText64, string key)
         {
-            MemoryStream ms = new MemoryStream();
+            var parts = cipherText64.Split(new[] {','}, 2);
+            byte[] saltBytes = parts.Length == 2
+                ? Convert.FromBase64String(parts[1])
+                : new UnicodeEncoding().GetBytes("XenRocks"); //backwards compatibility
+            byte[] cipherBytes = Convert.FromBase64String(parts[0]);
 
-            byte[] cipherBytes = Convert.FromBase64String(cipherText64);
-            Rijndael alg = Rijndael.Create();
-            alg.Key = keyBytes;
-            alg.IV = GetSalt();
+            try
+            {
+                using (var alg = new AesManaged())
+                {
+                    alg.IV = saltBytes;
+                    alg.Key = ComputeHash(key);
+                    return DecryptString(cipherBytes, alg);
+                }
+            }
+            catch (Exception e)
+            {
+                log.Warn("Failed to decrypt. Trying legacy mode.", e);
 
-            CryptoStream cs = new CryptoStream(ms, alg.CreateDecryptor(), CryptoStreamMode.Write);
-            cs.Write(cipherBytes, 0, cipherBytes.Length);
-            cs.Close();
-
-            byte[] plainBytes = ms.ToArray();
-
-            return Encoding.Unicode.GetString(plainBytes);
+                using (var alg = Rijndael.Create())
+                {
+                    alg.IV = saltBytes;
+                    alg.Key = ComputeHash(key, HashMethod.Md5);
+                    return DecryptString(cipherBytes, alg); //backwards compatibility
+                }
+            }
         }
 
+        private static string DecryptString(byte[] cipherBytes, SymmetricAlgorithm alg)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var cs = new CryptoStream(ms, alg.CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(cipherBytes, 0, cipherBytes.Length);
+                    cs.FlushFinalBlock(); //important for getting the padding right
+                    return Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+        }
 
         private static byte[] GetSalt()
         {
-            // NOTE: This is what we did in Geneva - may want
-            // to do something less lame in future...
-            if (salt == null)
+            using (var rngCsProvider = new RNGCryptoServiceProvider())
             {
-                UnicodeEncoding ue = new UnicodeEncoding();
-                salt = ue.GetBytes("XenRocks");
+                var saltBytes = new byte[SALT_LENGTH];
+                rngCsProvider.GetBytes(saltBytes);
+                return saltBytes;
             }
-
-            return salt;
         }
     }
 }

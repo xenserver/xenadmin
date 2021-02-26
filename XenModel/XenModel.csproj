@@ -39,6 +39,9 @@
     <Reference Include="CookComputing.XmlRpcV2, Version=2.5.0.1, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
       <HintPath>..\packages\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
+    <Reference Include="DiscUtils, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiscUtils.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
@@ -94,6 +97,12 @@
     <Compile Include="Actions\MultipleActionLauncher.cs" />
     <Compile Include="Actions\Network\CreateSriovAction.cs" />
     <Compile Include="Actions\Network\SetSecondaryManagementPurposeAction.cs" />
+    <Compile Include="Actions\OvfActions\ApplianceAction.cs" />
+    <Compile Include="Actions\OvfActions\Export.cs" />
+    <Compile Include="Actions\OvfActions\ExportApplianceAction.cs" />
+    <Compile Include="Actions\OvfActions\Import.cs" />
+    <Compile Include="Actions\OvfActions\ImportApplianceAction.cs" />
+    <Compile Include="Actions\OvfActions\ImportImageAction.cs" />
     <Compile Include="Actions\ParallelAction.cs" />
     <Compile Include="Actions\Pool\AddHostToPoolAction.cs" />
     <Compile Include="Actions\Pool\CreatePoolAction.cs" />
@@ -330,7 +339,6 @@
     <Compile Include="Network\DisconnectionException.cs" />
     <Compile Include="Folder.cs" />
     <Compile Include="Network\NetworkingHelper.cs" />
-    <Compile Include="Network\TaskPoller.cs" />
     <Compile Include="WLB\WlbConfigurationBase.cs" />
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
@@ -456,7 +464,6 @@
     <Compile Include="XenAPI-Extensions\Bond.cs" />
     <Compile Include="XenAPI-Extensions\Failure.cs" />
     <Compile Include="XenAPI-Extensions\Host.cs" />
-    <Compile Include="XenAPI-Extensions\HTTP_actions.cs" />
     <Compile Include="XenAPI-Extensions\IXenObject.cs" />
     <Compile Include="XenAPI-Extensions\Message.cs" />
     <Compile Include="XenAPI-Extensions\Network.cs" />
@@ -610,6 +617,10 @@
     <ProjectReference Include="..\XenCenterLib\XenCenterLib.csproj">
       <Project>{9861DFA1-B41F-432D-A43F-226257DEBBB9}</Project>
       <Name>XenCenterLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XenOvfApi\XenOvfApi.csproj">
+      <Project>{2d78ac6c-b867-484a-a447-3c6fc8b8eaf7}</Project>
+      <Name>XenOvfApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

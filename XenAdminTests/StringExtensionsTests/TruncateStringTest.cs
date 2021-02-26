@@ -29,6 +29,9 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using XenAdmin;
 
@@ -59,6 +62,52 @@ namespace XenAdminTests.StringExtensionsTests
         public string Utf16SurrogatePairsTest(int size)
         {
             return "短𠀁𪛕".Truncate(size); // The first character is 2 bytes, but the other two are 4-byte characters (UTF-16 surrogate pairs).
+        }
+    }
+
+    [Category(TestCategories.Unit)]
+    class SplitInChunksTest
+    {
+        [TestCase("", 2, ExpectedResult = new string[0])]
+        [TestCase("abc", 1, ExpectedResult = new[] {"a", "b", "c"})]
+        [TestCase("abc", 3, ExpectedResult = new[] {"abc"})]
+        [TestCase("abc", 8, ExpectedResult = new[] {"abc"})]
+        [TestCase("abcdef", 2, ExpectedResult = new[] {"ab", "cd", "ef"})]
+        [TestCase("abcdefgh", 3, ExpectedResult = new[] {"abc", "def", "gh"})]
+        [Test]
+        public string[] TestSplitInChunks(string input, int chunkSize)
+        {
+            return input.SplitInChunks(chunkSize);
+        }
+
+        [Test]
+        public void TestSplitInChunksInvalidArguments()
+        {
+            Assert.Throws(typeof(ArgumentException), () => "abc".SplitInChunks(-2));
+            Assert.Throws(typeof(NullReferenceException), () =>
+            {
+                string found = new[] {"1", "2"}.FirstOrDefault(x => x == "3");
+                found.SplitInChunks(2);
+            });
+        }
+    }
+
+    [Category(TestCategories.Unit)]
+    class SplitToDictionaryTest
+    {
+        [Test]
+        public void TestSplitToDictionary()
+        {
+            string input = "EFI-variables-backend=xapidb;EFI-variables-on-boot=reset;EFI-variables=dGVzdA==";
+            
+            var output = new Dictionary<string, string>
+            {
+                {"EFI-variables-backend", "xapidb"},
+                {"EFI-variables-on-boot", "reset"},
+                {"EFI-variables", "dGVzdA=="}
+            };
+            
+            Assert.AreEqual(output, input.SplitToDictionary(';'));
         }
     }
 }

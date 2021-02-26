@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
@@ -117,38 +116,9 @@ namespace XenAdmin.Core
             bool checkForServerVersion = false, bool checkForPatches = false)
         {
             string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", BrandManager.BRAND_CONSOLE, BrandManager.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
-            string userAgentId = GetUniqueIdHash();
 
             return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches,
-                userAgent, userAgentId);
-        }
-
-        internal static string GetUniqueIdHash()
-        {
-            string uniqueIdHash = "nil";
-
-            try
-            {
-                var managementObj = new System.Management.ManagementObject("Win32_OperatingSystem=@");
-                string serialNumber = (string)managementObj["SerialNumber"];
-
-                if (!string.IsNullOrWhiteSpace(serialNumber))
-                {
-                    var serialBytes = Encoding.ASCII.GetBytes(serialNumber);
-
-                    using (var md = new System.Security.Cryptography.MD5CryptoServiceProvider()) // MD5 to keep it short enough as this hash is not used for security in any way
-                    {
-                        var hash = md.ComputeHash(serialBytes);
-                        uniqueIdHash = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-            }
-
-            return uniqueIdHash;
+                userAgent);
         }
 
         /// <summary>

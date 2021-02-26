@@ -27,6 +27,7 @@ Thumbs.db
 
 packages/*
 !packages/DOTNET_BUILD_LOCATION
+Branding/Hotfixes/*
 
 _ReSharper.*/
 *.opensdf

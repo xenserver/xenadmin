@@ -41,7 +41,7 @@ namespace XenAPI
 {
     partial class Task
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public delegate task_status_type TaskStatusOp(Session session, string task);
         public delegate double TaskProgressOp(Session session, string task);
@@ -52,11 +52,6 @@ namespace XenAPI
         /// If it fails with a web exception or invalid session, try again.
         /// Only retry 60 times. 
         /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="session"></param>
-        /// <param name="f"></param>
-        /// <param name="p"></param>
-        /// <returns></returns>
         public static Object DoWithSessionRetry(IXenConnection connection, ref Session session, Delegate f, params object[] p)
         {
             int retries = 60;
@@ -80,7 +75,9 @@ namespace XenAPI
                     }
                     catch (TargetInvocationException exn)
                     {
-                        throw exn.InnerException;
+                        if (exn.InnerException != null)
+                            throw exn.InnerException;
+                        throw;
                     }
                 }
                 catch (WebException we)
@@ -97,7 +94,7 @@ namespace XenAPI
                     if (retries <= 0)
                         throw;
 
-                    if (failure.ErrorDescription.Count < 1 || failure.ErrorDescription[0] != XenAPI.Failure.SESSION_INVALID)
+                    if (failure.ErrorDescription.Count < 1 || failure.ErrorDescription[0] != Failure.SESSION_INVALID)
                         throw;
                 }
 
@@ -119,8 +116,6 @@ namespace XenAPI
             }
         }
 
-
-
         /// <summary>
         /// A list of OpaqueRefs of objects to which the current task applies.  This is set
         /// by one XenCenter instance, and picked up by other ones.
@@ -131,63 +126,65 @@ namespace XenAPI
             return s == null ? null : new List<string>(s.Split(','));
         }
 
-        public static void SetAppliesTo(Session session, string _task, List<string> applies_to)
+        public static void SetAppliesTo(Session session, string task, List<string> applies_to)
         {
             try
             {
-                remove_from_other_config(session, _task, "applies_to"); 
-                add_to_other_config(session, _task, "applies_to", string.Join(",", applies_to.ToArray()));
+                remove_from_other_config(session, task, "applies_to"); 
+                add_to_other_config(session, task, "applies_to", string.Join(",", applies_to.ToArray()));
             }
-            catch (XenAPI.Failure f)
+            catch (Failure f)
             {
                 if (f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                 {
                     // Read only user without task.other_config rights - just ignore this request
                     return;
                 }
-                throw f;
+                throw;
             }
         }
 
-        public string XenCenterUUID()
+        public string GetXenCenterUUID()
         {
             return Get(other_config, "XenCenterUUID");
         }
 
-        public static void SetXenCenterUUID(Session session, string _task, string uuid)
+        public static void SetXenCenterUUID(Session session, string task, string uuid)
         {
             try
             {
-                remove_from_other_config(session, _task, "XenCenterUUID");
-                add_to_other_config(session, _task, "XenCenterUUID", uuid);
+                remove_from_other_config(session, task, "XenCenterUUID");
+                add_to_other_config(session, task, "XenCenterUUID", uuid);
             }
-            catch (XenAPI.Failure f)
+            catch (Failure f)
             {
-                if (f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                if (f.ErrorDescription.Count > 0 && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                 {
                     // Read only user without task.other_config rights - just ignore this request
                     return;
                 }
-                throw f;
+
+                throw;
             }
         }
 
         public static void RemoveXenCenterUUID(Session session, string task)
         {
-            if(session == null || String.IsNullOrEmpty(task))
+            if (session == null || string.IsNullOrEmpty(task))
                 return;
 
             try
             {
                 remove_from_other_config(session, task, "XenCenterUUID");
             }
-            catch (XenAPI.Failure f)
+            catch (Failure f)
             {
-                if (f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                if (f.ErrorDescription.Count > 0 && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                 {
                     // Read only user without task.other_config rights - just ignore this request
                     return;
                 }
+
                 throw;
             }
         }
@@ -202,10 +199,15 @@ namespace XenAPI
             return name_description;
         }
 
-        private static List<string> tasksToIgnore = new List<string>(new string[] { "SR.scan" });
         public bool IgnoreInCacheUpdate()
         {
-            return tasksToIgnore.Contains(name_label);
+            switch (name_label)
+            {
+                case "SR.scan":
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

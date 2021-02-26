@@ -54,6 +54,7 @@ namespace XenAdminTests.Controls.Folders
             parent.Dispose();
         }
 
+        [Ignore("Needs revisiting")]
         [Test]
         [TestCase("", ExpectedResult = 43)]
         [TestCase("mypath", ExpectedResult = 44)]

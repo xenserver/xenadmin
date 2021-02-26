@@ -80,7 +80,7 @@ do
 done
 
 #AssemblyInfo rebranding
-for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenOvfTransport XenServerHealthCheck xva_verify
+for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
 do
   assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
   version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
@@ -105,10 +105,6 @@ rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
 #XenOvfApi rebranding
 RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
 rebranding_global ${REPO}/XenOvfApi/app.config
-
-#XenOvfTransport XenOvfTransport
-RESX_rebranding ${REPO}/XenOvfTransport/Messages
-rebranding_global ${REPO}/XenOvfTransport/app.config
 
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
 

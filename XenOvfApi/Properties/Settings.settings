@@ -93,25 +93,13 @@
       <Value Profile="(Default)">false</Value>
     </Setting>
     <Setting Name="RequiredValidations" Type="System.Byte" Scope="Application">
-      <Value Profile="(Default)">127</Value>
+      <Value Profile="(Default)">63</Value>
     </Setting>
     <Setting Name="vmwNamespacePrefix" Type="System.String" Scope="Application">
       <Value Profile="(Default)">vmwovf</Value>
     </Setting>
     <Setting Name="vmwEnvelopeNamespace" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.vmware.com/schema/ovf/1/envelope</Value>
-    </Setting>
-    <Setting Name="knownFileExtensions" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.vhd,.pvp,.vmdk,.mf,.cert,.xva,.ovf,.wim,.vdi,.sdi,.iso,.gz</Value>
-    </Setting>
-    <Setting Name="manifestFileExtension" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.mf</Value>
-    </Setting>
-    <Setting Name="certificateFileExtension" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">.cert</Value>
-    </Setting>
-    <Setting Name="securityAlgorithm" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SHA1</Value>
     </Setting>
     <Setting Name="wsseSchemaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Schemas\secext-1.0.xsd</Value>
@@ -128,9 +116,6 @@
     <Setting Name="xmldsigSchemaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Schemas\xmldsig-core-schema.xsd</Value>
     </Setting>
-    <Setting Name="encryptMicrosoftAlgorithmClass" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
     <Setting Name="encryptKeyLength" Type="System.String" Scope="Application">
       <Value Profile="(Default)">192</Value>
     </Setting>
@@ -139,51 +124,6 @@
     </Setting>
     <Setting Name="encryptKeyName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">CitrixEncryptedKey</Value>
-    </Setting>
-    <Setting Name="tripledes_cbc" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.TripleDESCryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="aes128_cbc" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
-    <Setting Name="aes256_cbc" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
-    <Setting Name="aes192_cbc" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
-    <Setting Name="rsa_1_5" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RSACryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="rsa_oaep_mgf1p" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RSACryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="kw_tripledes" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.TripleDESCryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="kw_aes128" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
-    <Setting Name="kw_aes256" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
-    <Setting Name="kw_aes192" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RijndaelManaged</Value>
-    </Setting>
-    <Setting Name="sha1" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.SHA1CryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="sha256" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.SHA256CryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="base64" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.FromBase64Transform</Value>
-    </Setting>
-    <Setting Name="sha384" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.SHA384CryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="sha512" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.SHA512CryptoServiceProvider</Value>
     </Setting>
     <Setting Name="xenDefaultPVVirtualSystemType" Type="System.String" Scope="Application">
       <Value Profile="(Default)">xen-3.0-unknown</Value>
@@ -205,13 +145,6 @@
     </Setting>
     <Setting Name="xenDeviceKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">device=</Value>
-    </Setting>
-    <Setting Name="des" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.DESCryptoServiceProvider</Value>
-    </Setting>
-    <Setting Name="rc2" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">System.Security.Cryptography.RC2CryptoServiceProvider
-</Value>
     </Setting>
     <Setting Name="useGZip" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>

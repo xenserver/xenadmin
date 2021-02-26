@@ -74,9 +74,7 @@
             // 
             this.m_dataGridView.AllowUserToAddRows = false;
             this.m_dataGridView.AllowUserToDeleteRows = false;
-            this.m_dataGridView.AllowUserToResizeColumns = false;
             this.m_dataGridView.AllowUserToResizeRows = false;
-            this.m_dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.m_dataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -99,13 +97,15 @@
             // 
             // m_colVmNetwork
             // 
+            this.m_colVmNetwork.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.m_colVmNetwork.FillWeight = 60F;
             resources.ApplyResources(this.m_colVmNetwork, "m_colVmNetwork");
             this.m_colVmNetwork.Name = "m_colVmNetwork";
             this.m_colVmNetwork.ReadOnly = true;
             // 
             // m_colTargetNet
             // 
-            this.m_colTargetNet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.m_colTargetNet.FillWeight = 40F;
             this.m_colTargetNet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             resources.ApplyResources(this.m_colTargetNet, "m_colTargetNet");
             this.m_colTargetNet.Name = "m_colTargetNet";

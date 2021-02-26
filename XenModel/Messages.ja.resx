@@ -6990,9 +6990,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_EULA_PAGE_TITLE" xml:space="preserve">
     <value>ライセンス契約書 (EULA) を確認します</value>
   </data>
-  <data name="IMPORT_GENERIC_FAIL" xml:space="preserve">
-    <value>不明なエラーが発生したため、インポートを完了できません。</value>
-  </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>エクスポートされたファイルが不完全であるか、形式を認識できません。</value>
   </data>
@@ -7105,7 +7102,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>vApp としてインポートできるのは OVF/OVA パッケージのみです。</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
-    <value>すべてのインポート オプション (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA パッケージ ファイル (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|仮想ハード ディスク イメージ (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA ファイル (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml</value>
+    <value>すべてのインポート オプション (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA パッケージ ファイル (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|仮想ハード ディスク イメージ (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA ファイル (*.xva;*.xva.gz)|*.xva;*.xva.gz</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA パッケージ (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
@@ -10332,9 +10329,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PATH_DOES_NOT_EXIST_PLACEHOLDER" xml:space="preserve">
     <value>パス {0} は存在しません。</value>
-  </data>
-  <data name="PATHPICKER_FILETYPE" xml:space="preserve">
-    <value>XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml</value>
   </data>
   <data name="PBDS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>ストレージ接続のチェック</value>

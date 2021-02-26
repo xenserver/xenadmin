@@ -175,7 +175,7 @@ namespace XenAdmin
 
         public void SaveSettingsIfRequired()
         {
-            Settings.SaveIfRequired();
+            Settings.SaveServerList();
         }
 
         private AsyncAction.SudoElevationResult GetElevatedSession(List<Role> allowedRoles,

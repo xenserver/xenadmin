@@ -72,18 +72,16 @@ namespace XenAdmin.Actions
         private readonly bool _checkForServerVersion;
         private readonly bool _checkForPatches;
         private readonly string _userAgent;
-        private readonly string _userAgentId;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent, string userAgentId)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent)
             : base(null, "_get_updates", "_get_updates", true)
         {
-            Debug.Assert(!string.IsNullOrWhiteSpace(userAgent) && !string.IsNullOrWhiteSpace(userAgentId));
+            Debug.Assert(!string.IsNullOrWhiteSpace(userAgent));
 
             _checkForXenCenter = checkForXenCenter;
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
             _userAgent = userAgent;
-            _userAgentId = userAgentId;
         }
 
         protected override void Run()
@@ -335,7 +333,6 @@ namespace XenAdmin.Actions
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    webClient.Headers.Add("X-User-Agent-Id", _userAgentId);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                         xdoc.Load(stream);

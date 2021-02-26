@@ -73,37 +73,40 @@ namespace XenAdmin.Actions
 
             log.DebugFormat("Getting system status for {0} on {1}", entries_string, hostname);
 
+            if (Session == null)
+                throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
+
             try
             {
-                if (Session == null)
-                    throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
+                RelatedTask = Task.create(Session, "get_system_status_task", host.address);
+                log.DebugFormat("HTTP GETTING file from {0} to {1}", host.address, filename);
 
-                HTTPHelper.Get(this, false, dataRxDelegate, filename, host.address,
-                    (HTTP_actions.get_ssss)HTTP_actions.get_system_status,
-                    Session.opaque_ref, entries_string, "tar");
+                HTTP_actions.get_system_status(dataRxDelegate,
+                    () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
+                    XenAdminConfigManager.Provider.GetProxyTimeout(false),
+                    host.address,
+                    XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                    filename, RelatedTask.opaque_ref, Session.opaque_ref, entries_string, "tar");
 
-                log.DebugFormat("Getting system status from {0} successful", hostname);
-
+                PollToCompletion();
                 Status = ReportStatus.succeeded;
                 Description = Messages.COMPLETED;
                 PercentComplete = 100;
             }
-            catch (HTTP.CancelledException)
-            {
-                throw new CancelledException();
-            }
-            catch (CancelledException ce)
-            {
-                log.Info("Getting system status cancelled");
-                Status = ReportStatus.cancelled;
-                Error = ce;
-                Description = Messages.ACTION_SYSTEM_STATUS_CANCELLED;
-                throw;
-            }
             catch (Exception e)
             {
-                log.Error(string.Format("Getting system status from {0} failed", hostname), e);
+                PollToCompletion(suppressFailures: true);
 
+                if (e is HTTP.CancelledException || e is CancelledException)
+                {
+                    log.Info("Getting system status cancelled");
+                    Status = ReportStatus.cancelled;
+                    Error = e;
+                    Description = Messages.ACTION_SYSTEM_STATUS_CANCELLED;
+                    throw new CancelledException();
+                }
+
+                log.Error(string.Format("Getting system status from {0} failed", hostname), e);
                 Status = ReportStatus.failed;
                 Error = e;
 

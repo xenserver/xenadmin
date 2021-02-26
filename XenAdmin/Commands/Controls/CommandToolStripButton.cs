@@ -98,22 +98,19 @@ namespace XenAdmin.Commands
 
         private void Update()
         {
+            Enabled = _command != null && _command.CanExecute();
             base.Enabled = DesignMode || Enabled;
 
             if (_command != null)
             {
                 if (_command.ToolBarText != null)
-                {
                     Text = _command.ToolBarText;
-                }
 
                 if (_command.ToolBarImage != null)
-                {
                     Image = _command.ToolBarImage;
-                }
 
                 //null is allowed (CA-147657)
-                ToolTipText = _command.ToolTipText;
+                ToolTipText = Enabled ? _command.EnabledToolTipText : _command.DisabledToolTipText;
             }
         }
 
@@ -138,13 +135,7 @@ namespace XenAdmin.Commands
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool Enabled
-        {
-            get
-            {
-                return _command != null && _command.CanExecute();
-            }
-        }
+        public new bool Enabled { get; private set; }
 
         /// <summary>
         /// Sets the <see cref="SelectionBroadcaster"/> that should be listened to for selection changes.

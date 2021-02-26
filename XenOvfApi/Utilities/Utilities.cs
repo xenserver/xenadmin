@@ -181,60 +181,6 @@ namespace XenOvf.Utilities
         /// <returns>object EnvelopeType or NULL</returns>
 
         [SecurityPermission(SecurityAction.LinkDemand)]
-        internal static EnvelopeType LoadOvfXml(string appliancePath)
-        {
-            string ovfFilePath = appliancePath;
-
-            string extension = Path.GetExtension(appliancePath);
-
-            if ((String.Compare(extension, ".gz", true) == 0) ||
-                (String.Compare(extension, ".bz2", true) == 0) ||
-                (String.Compare(extension, ".ova", true) == 0) ||
-                (String.Compare(extension, ".tar", true) == 0))
-            {
-                // Extract the contents of the archive.
-                OVF.ExtractArchive(appliancePath);
-
-                // Get the OVF name from within the archive because it may not share the base name of the archive.
-                Package package = Package.Create(appliancePath);
-
-                string ovfFileName = package.DescriptorFileName;
-
-                if (string.IsNullOrEmpty(ovfFileName))
-                {
-                    // An OVF file was not found.
-                    // Default to the base file name of the archive.
-                    // Remove the last extension that could be .gz, .bz2, .ova, or .tar.
-                    ovfFileName = Path.GetFileNameWithoutExtension(appliancePath);
-
-                    extension = Path.GetFileNameWithoutExtension(ovfFileName);
-
-                    if ((String.Compare(extension, ".ova", true) == 0) ||
-                        (String.Compare(extension, ".tar", true) == 0))
-                    {
-                        // Remove the second to last extension that could be ..ova, or .tar.
-                        ovfFileName = Path.GetFileNameWithoutExtension(ovfFileName);
-                    }
-
-                    // Add the .ovf extension.
-                    ovfFileName = ovfFileName + Properties.Settings.Default.ovfFileExtension;
-                }
-
-                string directory = Path.GetDirectoryName(appliancePath);
-
-                ovfFilePath = Path.Combine(directory, ovfFileName);
-            }
-
-            if (!File.Exists(ovfFilePath))
-            {
-                log.ErrorFormat("Utilities.LoadOvfXml: File not found: {0}", ovfFilePath);
-                throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, ovfFilePath));
-            }
-
-            return DeserializeOvfXml(LoadFile(ovfFilePath));
-        }
-
-        [SecurityPermission(SecurityAction.LinkDemand)]
         public static EnvelopeType DeserializeOvfXml(string ovfxml)
         {
             EnvelopeType ovfEnv = null;

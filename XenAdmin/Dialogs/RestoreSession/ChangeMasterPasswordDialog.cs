@@ -31,6 +31,7 @@
 
 using System;
 using System.Windows.Forms;
+using XenAdmin.Core;
 using XenCenterLib;
 
 
@@ -38,12 +39,12 @@ namespace XenAdmin.Dialogs.RestoreSession
 {
     public partial class ChangeMasterPasswordDialog : XenDialogBase
     {
-        private readonly byte[] OldProposedPassword;
+        private readonly byte[] _currentPasswordHash;
 
-        public ChangeMasterPasswordDialog(byte[] proposedPassword)
+        public ChangeMasterPasswordDialog(byte[] currentPasswordHash)
         {
             InitializeComponent();
-            OldProposedPassword = proposedPassword;
+            _currentPasswordHash = currentPasswordHash;
             currentPasswordError.Visible = false;
             newPasswordError.Visible = false;
         }
@@ -67,9 +68,10 @@ namespace XenAdmin.Dialogs.RestoreSession
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            var oldPasswordCorrect = Settings.PassCorrect(currentTextBox.Text, OldProposedPassword);
+            var currentPasswordCorrect = !string.IsNullOrEmpty(currentTextBox.Text) &&
+                                     Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(currentTextBox.Text), _currentPasswordHash);
 
-            if (oldPasswordCorrect && !string.IsNullOrEmpty(masterTextBox.Text) &&
+            if (currentPasswordCorrect && !string.IsNullOrEmpty(masterTextBox.Text) &&
                 masterTextBox.Text == reEnterMasterTextBox.Text)
             {
                 NewPassword = EncryptionUtils.ComputeHash(masterTextBox.Text);
@@ -77,7 +79,7 @@ namespace XenAdmin.Dialogs.RestoreSession
                 return;
             }
 
-            if (!oldPasswordCorrect)
+            if (!currentPasswordCorrect)
                 currentPasswordError.ShowError(Messages.PASSWORD_INCORRECT);
             else if (masterTextBox.Text != reEnterMasterTextBox.Text)
                 newPasswordError.ShowError(Messages.PASSWORDS_DONT_MATCH);

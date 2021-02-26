@@ -85,8 +85,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
                 AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
-                foreach (var host in Connection.Cache.Hosts)
-                    host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
+                hostObj = GetResolvedHost();
+                //plug PBDs on the rebooted host (and not on all hosts; see CA-350406)
+                hostObj.CheckAndPlugPBDs();
             }
             finally
             {

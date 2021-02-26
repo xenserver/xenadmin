@@ -94,7 +94,7 @@ namespace XenAdminTests.ArchiveTests
                         expectedFiles.Remove(reader.CurrentFileName());
                         using (MemoryStream ms = new MemoryStream())
                         {
-                            reader.ExtractCurrentFile(ms);
+                            reader.ExtractCurrentFile(ms, null);
                             Assert.IsTrue(ms.Length > 0, "Extracted file contents have data");
                         }
                     }
@@ -122,15 +122,15 @@ namespace XenAdminTests.ArchiveTests
 
                 using (MemoryStream ms1 = new MemoryStream(Encoding.ASCII.GetBytes("This is a test")))
                 {
-                    writer.Add(ms1, "tf1");
+                    writer.Add(ms1, "tf1", DateTime.Now, null);
                 }
 
                 using (MemoryStream ms2 = new MemoryStream(Encoding.ASCII.GetBytes("This is a test")))
                 {
-                    writer.Add(ms2, "adir2/a/tf2", DateTime.Now);
+                    writer.Add(ms2, "adir2/a/tf2", DateTime.Now, null);
                 }
 
-                writer.AddDirectory("adir/");
+                writer.AddDirectory("adir/", DateTime.Now);
                 writer.AddDirectory("adir2/a", DateTime.Now);
             }
 

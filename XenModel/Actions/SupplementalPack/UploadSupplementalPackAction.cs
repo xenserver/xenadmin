@@ -144,22 +144,28 @@ namespace XenAdmin.Actions
                 };
 
                 Session session = NewSession();
-                RelatedTask = Task.create(Session, "uploadTask", hostUrl);
+                RelatedTask = Task.create(Session, "put_import_raw_vdi_task", hostUrl);
+                log.DebugFormat("HTTP PUTTING file from {0} to {1}", suppPackFilePath, hostUrl);
 
-                result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session,  suppPackFilePath, hostUrl,
-                                        (HTTP_actions.put_sss)HTTP_actions.put_import_raw_vdi,
-                                        session.opaque_ref, vdiRef.opaque_ref);
+                HTTP_actions.put_import_raw_vdi(progressDelegate,
+                    () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
+                    XenAdminConfigManager.Provider.GetProxyTimeout(true),
+                    hostUrl,
+                    XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
+                    suppPackFilePath, RelatedTask.opaque_ref, session.opaque_ref, vdiRef.opaque_ref);
+
+                PollToCompletion();
+                result = Result;
             }
             catch (Exception ex)
             {
-                log.Error("Failed to import a virtual disk over HTTP", ex);
+                PollToCompletion(suppressFailures: true);
 
                 if (vdiRef != null)
                 {
                     try
                     {
-                        log.ErrorFormat("Deleting VDI '{0}' on a best effort basis.", vdiRef.opaque_ref);
-                        Thread.Sleep(1000);
+                        log.ErrorFormat("Failed to import a virtual disk over HTTP. Deleting VDI '{0}' on a best effort basis.", vdiRef.opaque_ref);
                         VDI.destroy(Session, vdiRef);
                     }
                     catch (Exception removeEx)
@@ -168,16 +174,16 @@ namespace XenAdmin.Actions
                     }
                 }
 
+                if (ex is CancelledException || ex is HTTP.CancelledException || ex.InnerException is CancelledException)
+                    throw new CancelledException();
+
+                log.Error("Failed to import a virtual disk over HTTP", ex);
+
                 //after having tried to remove the VDI, the original exception is thrown for the UI
                 if (ex is TargetInvocationException && ex.InnerException != null)
                     throw ex.InnerException;
                 else
                     throw; 
-            }
-            finally
-            {
-                Task.destroy(Session, RelatedTask);
-                RelatedTask = null;
             }
 
             //introduce ISO for Ely and higher

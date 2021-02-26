@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
@@ -66,7 +65,7 @@ namespace XenAdmin.Commands
             this.xos = xos;
             _licenseServerAddress = licenseServerAddress;
             _licenseServerPort = licenseServerPort;
-            SetParent(parent);
+            Parent = parent;
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

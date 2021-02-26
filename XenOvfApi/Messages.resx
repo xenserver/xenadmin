@@ -123,14 +123,8 @@
   <data name="CERTIFICATE_IS_INVALID" xml:space="preserve">
     <value>Certificate is invalid.</value>
   </data>
-  <data name="COMPRESS_FAILED" xml:space="preserve">
-    <value>Failed to compress {0}.</value>
-  </data>
   <data name="COMPRESS_INVALID_METHOD" xml:space="preserve">
     <value>Compression method {0} is not supported.</value>
-  </data>
-  <data name="CONVERSION_FAILED" xml:space="preserve">
-    <value>Failed to convert OVF to OVA.</value>
   </data>
   <data name="CONVERSION_NO_DATA" xml:space="preserve">
     <value>Failed to convert HyperV configuration file.</value>

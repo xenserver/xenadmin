@@ -55,6 +55,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -116,6 +117,7 @@
     <Compile Include="UnitTests\TokenizerTest.cs" />
     <Compile Include="UnitTests\UpdateManagerTests.cs" />
     <Compile Include="UnitTests\RegexTests.cs" />
+    <Compile Include="UnitTests\EncryptionUtilTests.cs" />
     <Compile Include="UnitTests\UtilTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbPoolConfigurationTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbReportSubscriptionTests.cs" />

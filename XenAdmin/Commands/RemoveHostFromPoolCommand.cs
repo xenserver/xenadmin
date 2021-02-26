@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
         }
 
         public RemoveHostFromPoolCommand(IMainWindow mainWindow, IEnumerable<Host> hosts)
-            : base(mainWindow, ConvertToSelection<Host>(hosts))
+            : base(mainWindow, hosts.Select(h => new SelectedItem(h)).ToList())
         {
         }
 

@@ -31,17 +31,19 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using ICSharpCode.SharpZipLib.Tar;
 
 namespace XenCenterLib.Archive
 {
-
     public class SharpZipTarArchiveWriter : ArchiveWriter
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private TarOutputStream tar = null;
-        private const long bufferSize = 32*1024;
-        protected bool disposed;
+        private const long bufferSize = 32 * 1024;
+        private bool disposed;
 
         public SharpZipTarArchiveWriter()
         {
@@ -62,7 +64,7 @@ namespace XenCenterLib.Archive
         public override void AddDirectory(string directoryName, DateTime modificationTime)
         {
             StringBuilder sb = new StringBuilder(directoryName);
-            
+
             //Need to add a terminal front-slash to add a directory
             if (!directoryName.EndsWith("/"))
                 sb.Append("/");
@@ -73,13 +75,13 @@ namespace XenCenterLib.Archive
             tar.CloseEntry();
         }
 
-        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime)
+        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
         {
             TarEntry entry = TarEntry.CreateTarEntry(fileName);
             entry.Size = filetoAdd.Length;
             entry.ModTime = modificationTime;
 
-            tar.PutNextEntry( entry );
+            tar.PutNextEntry(entry);
             byte[] buffer = new byte[bufferSize];
             int n;
 
@@ -89,30 +91,32 @@ namespace XenCenterLib.Archive
 
             while ((n = filetoAdd.Read(buffer, 0, buffer.Length)) > 0)
             {
+                cancellingDelegate?.Invoke();
                 tar.Write(buffer, 0, n);
             }
-            
+
             tar.Flush();
             tar.CloseEntry();
         }
 
         protected override void Dispose(bool disposing)
         {
-            
-            if( !disposed )
+            if (!disposed && disposing)
             {
-                if( disposing )
+                try
                 {
-                   if (tar != null)
-                    {
-                        tar.Dispose();
-                    }
-                    disposed = true;
-                }  
+                    tar?.Dispose();
+                }
+                catch (Exception e)
+                {
+                    //workaround for CA-347483
+                    log.Error("Failed to dispose tar output stream", e);
+                }
+
+                disposed = true;
             }
-            base.Dispose(disposing);   
+
+            base.Dispose(disposing);
         }
     }
-
-
 }

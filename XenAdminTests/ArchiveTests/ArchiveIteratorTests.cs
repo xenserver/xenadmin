@@ -85,7 +85,7 @@ namespace XenAdminTests.ArchiveTests
                 return true;
             }
 
-            public override void ExtractCurrentFile(Stream extractedFileContents)
+            public override void ExtractCurrentFile(Stream extractedFileContents, Action cancellingDelegate)
             {
                 byte[] buffer = new byte[2 * 1024 * 1024];
                 int read;

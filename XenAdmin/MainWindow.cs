@@ -2260,20 +2260,7 @@ namespace XenAdmin
 
             Properties.Settings.Default.WindowSize = this.Size;
             Properties.Settings.Default.WindowLocation = this.Location;
-            try
-            {
-                Settings.SaveServerList();
-                Properties.Settings.Default.Save();
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
-                    {WindowTitle =  Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
-                {
-                    dlg.ShowDialog(this);
-                }
-                log.Error("Could not save settings.", ex);
-            }
+            Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
             base.OnClosing(e);
         }
 
@@ -3147,7 +3134,7 @@ namespace XenAdmin
                     {
                         log.ErrorFormat("Failed to import server list from '{0}'", dialog.FileName);
 
-                        using (var dlg = new ErrorDialog(Messages.ERRO_IMPORTING_SERVER_LIST))
+                        using (var dlg = new ErrorDialog(Messages.ERROR_IMPORTING_SERVER_LIST))
                             dlg.ShowDialog(this);
                     }
                 }

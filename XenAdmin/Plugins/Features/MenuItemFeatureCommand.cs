@@ -29,19 +29,15 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Model;
-using XenAdmin.Network;
-using XenAdmin.Core;
 using XenAdmin.XenSearch;
 using System.Windows.Forms;
-using System.Diagnostics;
 using XenAdmin.Commands;
+
 
 namespace XenAdmin.Plugins
 {
@@ -224,12 +220,8 @@ namespace XenAdmin.Plugins
             }
         }
 
-        public override string ToolTipText
-        {
-            get
-            {
-                return _menuItemFeature.Tooltip ?? string.Empty;
-            }
-        }
+        public override string EnabledToolTipText => _menuItemFeature.Tooltip;
+
+        public override string DisabledToolTipText => _menuItemFeature.Tooltip;
     }
 }

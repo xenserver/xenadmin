@@ -5723,7 +5723,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backing up server &apos;{0}&apos;, {1} received... .
+        ///   Looks up a localized string similar to Backing up server &apos;{0}&apos; ({1} received)... .
         /// </summary>
         public static string BACKINGUP_HOST_WITH_DATA {
             get {
@@ -6948,6 +6948,15 @@ namespace XenAdmin {
         public static string CD_DRIVE {
             get {
                 return ResourceManager.GetString("CD_DRIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attached CD/DVD Drive..
+        /// </summary>
+        public static string CD_DVD_DEVICE_ATTACHED {
+            get {
+                return ResourceManager.GetString("CD_DVD_DEVICE_ATTACHED", resourceCulture);
             }
         }
         
@@ -11080,20 +11089,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Archiving appliance files into single package file {0}....
-        /// </summary>
-        public static string CREATING_FILE {
-            get {
-                return ResourceManager.GetString("CREATING_FILE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Creating manifest file....
         /// </summary>
         public static string CREATING_MANIFEST {
             get {
                 return ResourceManager.GetString("CREATING_MANIFEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculating checksum for file &apos;{0}&apos;....
+        /// </summary>
+        public static string CREATING_MANIFEST_CHECKSUM {
+            get {
+                return ResourceManager.GetString("CREATING_MANIFEST_CHECKSUM", resourceCulture);
             }
         }
         
@@ -11121,6 +11130,15 @@ namespace XenAdmin {
         public static string CREATING_NEW_FOLDERS {
             get {
                 return ResourceManager.GetString("CREATING_NEW_FOLDERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archiving appliance files into single package file &apos;{0}&apos;....
+        /// </summary>
+        public static string CREATING_OVA_FILE {
+            get {
+                return ResourceManager.GetString("CREATING_OVA_FILE", resourceCulture);
             }
         }
         
@@ -11634,6 +11652,15 @@ namespace XenAdmin {
         public static string DEFAULT {
             get {
                 return ResourceManager.GetString("DEFAULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imported from an OVF/OVA package..
+        /// </summary>
+        public static string DEFAULT_IMPORT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DEFAULT_IMPORT_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -13366,7 +13393,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos; ({1} of {2})....
         /// </summary>
         public static string DOWNLOADING_PATCH_FROM {
             get {
@@ -15071,15 +15098,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error importing server list. Check that the xml format in the file is correct..
-        /// </summary>
-        public static string ERRO_IMPORTING_SERVER_LIST {
-            get {
-                return ResourceManager.GetString("ERRO_IMPORTING_SERVER_LIST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string ERROR {
@@ -15121,6 +15139,15 @@ namespace XenAdmin {
         public static string ERROR_CONNECTING_BLURB {
             get {
                 return ResourceManager.GetString("ERROR_CONNECTING_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The storage repository was not found and a default was not assigned..
+        /// </summary>
+        public static string ERROR_COULD_NOT_FIND_SR {
+            get {
+                return ResourceManager.GetString("ERROR_COULD_NOT_FIND_SR", resourceCulture);
             }
         }
         
@@ -15548,6 +15575,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file to import was not provided..
+        /// </summary>
+        public static string ERROR_FILE_NAME_NULL {
+            get {
+                return ResourceManager.GetString("ERROR_FILE_NAME_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File {0} not found.
         /// </summary>
         public static string ERROR_FILE_NOT_FOUND {
@@ -15562,6 +15598,15 @@ namespace XenAdmin {
         public static string ERROR_HOST_STILL_BOOTING {
             get {
                 return ResourceManager.GetString("ERROR_HOST_STILL_BOOTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error importing server list. Check that the xml format in the file is correct..
+        /// </summary>
+        public static string ERROR_IMPORTING_SERVER_LIST {
+            get {
+                return ResourceManager.GetString("ERROR_IMPORTING_SERVER_LIST", resourceCulture);
             }
         }
         
@@ -15598,6 +15643,15 @@ namespace XenAdmin {
         public static string ERROR_INVALID_URI {
             get {
                 return ResourceManager.GetString("ERROR_INVALID_URI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A password was not provided to decrypt the OVF package..
+        /// </summary>
+        public static string ERROR_NO_PASSWORD {
+            get {
+                return ResourceManager.GetString("ERROR_NO_PASSWORD", resourceCulture);
             }
         }
         
@@ -15670,6 +15724,15 @@ namespace XenAdmin {
         public static string ERROR_UNSUPPORTED_FILE_TYPE {
             get {
                 return ResourceManager.GetString("ERROR_UNSUPPORTED_FILE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please shut down or suspend VM &apos;{0}&apos; before exporting..
+        /// </summary>
+        public static string ERROR_VM_NOT_HALTED {
+            get {
+                return ResourceManager.GetString("ERROR_VM_NOT_HALTED", resourceCulture);
             }
         }
         
@@ -16296,11 +16359,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporting VMs....
+        ///   Looks up a localized string similar to Exporting disk &apos;{0}&apos; to &apos;{1}&apos; ({2} of {3})....
         /// </summary>
-        public static string EXPORTING_VMS {
+        public static string EXPORTING_VDI {
             get {
-                return ResourceManager.GetString("EXPORTING_VMS", resourceCulture);
+                return ResourceManager.GetString("EXPORTING_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verifying disk &apos;{0}&apos;....
+        /// </summary>
+        public static string EXPORTING_VDI_VERIFICATION {
+            get {
+                return ResourceManager.GetString("EXPORTING_VDI_VERIFICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verification for disk &apos;{0}&apos; failed. See logs for details..
+        /// </summary>
+        public static string EXPORTING_VDI_VERIFICATION_FAILURE {
+            get {
+                return ResourceManager.GetString("EXPORTING_VDI_VERIFICATION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing to export VM &apos;{0}&apos;....
+        /// </summary>
+        public static string EXPORTING_VM_PREPARE {
+            get {
+                return ResourceManager.GetString("EXPORTING_VM_PREPARE", resourceCulture);
             }
         }
         
@@ -16310,15 +16400,6 @@ namespace XenAdmin {
         public static string EXPORTVM_COULD_NOT_SHOW {
             get {
                 return ResourceManager.GetString("EXPORTVM_COULD_NOT_SHOW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Should not happen.
-        /// </summary>
-        public static string EXPORTVM_NOT_HAPPEN {
-            get {
-                return ResourceManager.GetString("EXPORTVM_NOT_HAPPEN", resourceCulture);
             }
         }
         
@@ -16814,51 +16895,6 @@ namespace XenAdmin {
         public static string FINISH_PAGE_TITLE_IMPORT {
             get {
                 return ResourceManager.GetString("FINISH_PAGE_TITLE_IMPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Obtain automatically through DHCP.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_DHCP {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_DHCP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM gateway:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_GATEWAY {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_GATEWAY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM IP address:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_IP {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_IP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM subnet mask:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_MASK {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_MASK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM network interface:.
-        /// </summary>
-        public static string FINISH_PAGE_TVM_NETWORK {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TVM_NETWORK", resourceCulture);
             }
         }
         
@@ -19920,6 +19956,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preparing to import appliance &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_APPLIANCE_PREPARING {
+            get {
+                return ResourceManager.GetString("IMPORT_APPLIANCE_PREPARING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating appliance &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_CREATING_APPLIANCE {
+            get {
+                return ResourceManager.GetString("IMPORT_CREATING_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating VM &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_CREATING_VM {
+            get {
+                return ResourceManager.GetString("IMPORT_CREATING_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import VM &apos;{0}&apos; from Disk Image to &apos;{1}&apos;.
         /// </summary>
         public static string IMPORT_DISK_IMAGE {
@@ -19943,15 +20006,6 @@ namespace XenAdmin {
         public static string IMPORT_EULA_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("IMPORT_EULA_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The server could not complete the import due to an unknown error..
-        /// </summary>
-        public static string IMPORT_GENERIC_FAIL {
-            get {
-                return ResourceManager.GetString("IMPORT_GENERIC_FAIL", resourceCulture);
             }
         }
         
@@ -20283,7 +20337,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz;ova.xml|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz|XVA Version 1|ova.xml.
+        ///   Looks up a localized string similar to All import options (*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA Package files (*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|Virtual Hard Disk images (*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA files (*.xva;*.xva.gz)|*.xva;*.xva.gz.
         /// </summary>
         public static string IMPORT_SOURCE_PAGE_FILETYPES {
             get {
@@ -20468,6 +20522,24 @@ namespace XenAdmin {
         public static string IMPORT_URI_NO_DESTINATION {
             get {
                 return ResourceManager.GetString("IMPORT_URI_NO_DESTINATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing &apos;{0}&apos; ({1} of {2})....
+        /// </summary>
+        public static string IMPORT_VDI {
+            get {
+                return ResourceManager.GetString("IMPORT_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing VDI for &apos;{0}&apos;....
+        /// </summary>
+        public static string IMPORT_VDI_PREPARE {
+            get {
+                return ResourceManager.GetString("IMPORT_VDI_PREPARE", resourceCulture);
             }
         }
         
@@ -20706,15 +20778,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importing VMs....
-        /// </summary>
-        public static string IMPORTING_VMS {
-            get {
-                return ResourceManager.GetString("IMPORTING_VMS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Importing VM from backup file.
         /// </summary>
         public static string IMPORTVM_DESCRIP {
@@ -20747,15 +20810,6 @@ namespace XenAdmin {
         public static string IMPORTVM_PREP {
             get {
                 return ResourceManager.GetString("IMPORTVM_PREP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Starting VM....
-        /// </summary>
-        public static string IMPORTVM_STARTING {
-            get {
-                return ResourceManager.GetString("IMPORTVM_STARTING", resourceCulture);
             }
         }
         
@@ -21129,7 +21183,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the [Citrix VM Tools] install disc..
+        ///   Looks up a localized string similar to Could not find the [Citrix VM Tools] install disk..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_WIN {
             get {
@@ -29774,15 +29828,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml.
-        /// </summary>
-        public static string PATHPICKER_FILETYPE {
-            get {
-                return ResourceManager.GetString("PATHPICKER_FILETYPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Storage connection check.
         /// </summary>
         public static string PBDS_CHECK_DESCRIPTION {
@@ -34582,6 +34627,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SR &apos;{0}&apos; does not have {1} of free space to import virtual disk {2}..
+        /// </summary>
+        public static string SR_NOT_ENOUGH_SPACE {
+            get {
+                return ResourceManager.GetString("SR_NOT_ENOUGH_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk size ({0}) exceeds SR size ({1}).
         /// </summary>
         public static string SR_PICKER_DISK_TOO_BIG {
@@ -34683,7 +34737,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot reclaim freed space, because the SR is detached..
+        ///   Looks up a localized string similar to Cannot reclaim freed space because the SR is detached..
         /// </summary>
         public static string SR_TRIM_NO_STORAGE_HOST_ERROR {
             get {
@@ -34856,6 +34910,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decrypting {0}... .
+        /// </summary>
+        public static string START_FILE_DECRYPTION {
+            get {
+                return ResourceManager.GetString("START_FILE_DECRYPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expanding {0}... .
+        /// </summary>
+        public static string START_FILE_EXPANSION {
+            get {
+                return ResourceManager.GetString("START_FILE_EXPANSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start host.
         /// </summary>
         public static string START_HOST {
@@ -34879,6 +34951,15 @@ namespace XenAdmin {
         public static string START_ON {
             get {
                 return ResourceManager.GetString("START_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring VM for the server... .
+        /// </summary>
+        public static string START_POST_INSTALL_INSTRUCTIONS {
+            get {
+                return ResourceManager.GetString("START_POST_INSTALL_INSTRUCTIONS", resourceCulture);
             }
         }
         
@@ -36127,7 +36208,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reclaiming freed space not supported on this SR.
+        ///   Looks up a localized string similar to Reclaiming freed space is not supported on this SR.
         /// </summary>
         public static string TOOLTIP_SR_TRIM_UNSUPPORTED {
             get {
@@ -36136,7 +36217,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reclaiming freed space not supported on these SRs.
+        ///   Looks up a localized string similar to Reclaiming freed space is not supported on these SRs.
         /// </summary>
         public static string TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE {
             get {
@@ -36195,42 +36276,6 @@ namespace XenAdmin {
         public static string TURN_HA_OFF {
             get {
                 return ResourceManager.GetString("TURN_HA_OFF", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the export operation will run..
-        /// </summary>
-        public static string TVM_PAGE_DESCRIPTION_EXPORT {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION_EXPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the import operation will run..
-        /// </summary>
-        public static string TVM_PAGE_DESCRIPTION_IMPORT {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION_IMPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer VM Settings.
-        /// </summary>
-        public static string TVM_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configure networking options for the Transfer VM.
-        /// </summary>
-        public static string TVM_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("TVM_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -36336,6 +36381,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Imported VM.
+        /// </summary>
+        public static string UNDEFINED_NAME_LABEL {
+            get {
+                return ResourceManager.GetString("UNDEFINED_NAME_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string UNINSTALL {
@@ -36386,6 +36440,15 @@ namespace XenAdmin {
         public static string UNRECOGNISED_PLUGIN_VERSION {
             get {
                 return ResourceManager.GetString("UNRECOGNISED_PLUGIN_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File type {0} is not supported..
+        /// </summary>
+        public static string UNSUPPORTED_FILE_TYPE {
+            get {
+                return ResourceManager.GetString("UNSUPPORTED_FILE_TYPE", resourceCulture);
             }
         }
         
@@ -38428,6 +38491,15 @@ namespace XenAdmin {
         public static string VDI_COPYING {
             get {
                 return ResourceManager.GetString("VDI_COPYING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A VDI with size {0} is required to import virtual disk {1}..
+        /// </summary>
+        public static string VDI_NOT_ENOUGH_SPACE {
+            get {
+                return ResourceManager.GetString("VDI_NOT_ENOUGH_SPACE", resourceCulture);
             }
         }
         
