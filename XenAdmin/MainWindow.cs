@@ -615,7 +615,34 @@ namespace XenAdmin
             if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease)
             {
                 if (!Properties.Settings.Default.SeenAllowUpdatesDialog)
-                    new AllowUpdatesDialog(pluginManager).ShowDialog(this);
+                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE,
+                            BrandManager.BrandConsole, BrandManager.ProductBrand),
+                        ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {
+                        HelpButton = true,
+                        HelpNameSetter = "AllowUpdatesDialog",
+                        ShowCheckbox = true,
+                        CheckboxCaption = Messages.ALLOWED_UPDATES_DIALOG_CHECKBOX
+                    })
+                    {
+                        var result = dlg.ShowDialog(this) == DialogResult.Yes;
+
+                        Properties.Settings.Default.AllowXenCenterUpdates = result;
+                        Properties.Settings.Default.AllowPatchesUpdates = result;
+                        Properties.Settings.Default.AllowXenServerUpdates = result;
+                        Properties.Settings.Default.SeenAllowUpdatesDialog = true;
+
+                        if (result && dlg.IsCheckBoxChecked)
+                        {
+                            using (var dialog = new OptionsDialog(pluginManager))
+                            {
+                                dialog.SelectConnectionOptionsPage();
+                                dialog.ShowDialog(this);
+                            }
+                        }
+
+                        Settings.TrySaveSettings();
+                    }
 
                 // start checkforupdates thread
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours

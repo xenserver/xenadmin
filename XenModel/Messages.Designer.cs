@@ -5220,6 +5220,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Show internet proxy settings.
+        /// </summary>
+        public static string ALLOWED_UPDATES_DIALOG_CHECKBOX {
+            get {
+                return ResourceManager.GetString("ALLOWED_UPDATES_DIALOG_CHECKBOX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for {1} updates and new versions of {0}?.
+        /// </summary>
+        public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
+            get {
+                return ResourceManager.GetString("ALLOWED_UPDATES_DIALOG_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SR &apos;{0}&apos; is currently attached elsewhere. Do you want to attach it to &apos;{1}&apos;? 
         ///
         ///Warning: you must ensure that the SR is not in use by any server not connected to [XenCenter]. Failure to do so may result in data loss..

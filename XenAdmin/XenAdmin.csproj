@@ -642,12 +642,6 @@
     <Compile Include="Diagnostics\Checks\HAOffCheck.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\CannotMigrateVM.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HAEnabledProblem.cs" />
-    <Compile Include="Dialogs\AllowUpdatesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\AllowUpdatesDialog.Designer.cs">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\BondProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2009,10 +2003,6 @@
     <EmbeddedResource Include="Controls\CustomDataGraph\GraphList.resx">
       <SubType>Designer</SubType>
       <DependentUpon>GraphList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BondProperties.resx">
       <DependentUpon>BondProperties.cs</DependentUpon>
@@ -5130,12 +5120,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\AlertSummaryPage.zh-CN.resx">
       <DependentUpon>AlertSummaryPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.ja.resx">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.zh-CN.resx">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AssignLicenseDialog.ja.resx">
       <DependentUpon>AssignLicenseDialog.cs</DependentUpon>
