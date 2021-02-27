@@ -70,15 +70,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
-        /// </summary>
-        public static string HEALTH_CHECK_PRIVACY_STATEMENT_URL {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_PRIVACY_STATEMENT_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://docs.citrix.com/en-us/xencenter/.
         /// </summary>
         public static string HELP_URL {
@@ -160,38 +151,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter].log.
-        /// </summary>
-        public static string LOG_FILENAME {
-            get {
-                return ResourceManager.GetString("LOG_FILENAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home.htm.
-        /// </summary>
-        public static string MAINWINDOW_HOME_PATH {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_HOME_PATH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/downloads/citrix-hypervisor.
         /// </summary>
         public static string OUT_OF_DATE_WEBSITE {
             get {
                 return ResourceManager.GetString("OUT_OF_DATE_WEBSITE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/buy/partnerlocator.html.
-        /// </summary>
-        public static string PARTNEROFFERS_URL {
-            get {
-                return ResourceManager.GetString("PARTNEROFFERS_URL", resourceCulture);
             }
         }
         
@@ -223,15 +187,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://support.citrix.com/.
-        /// </summary>
-        public static string SUPPORT_URL {
-            get {
-                return ResourceManager.GetString("SUPPORT_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {
@@ -246,33 +201,6 @@ namespace XenAdmin {
         public static string UPSELL_SA {
             get {
                 return ResourceManager.GetString("UPSELL_SA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to xensearch.
-        /// </summary>
-        public static string XEN_SEARCH {
-            get {
-                return ResourceManager.GetString("XEN_SEARCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to xsupdate.
-        /// </summary>
-        public static string XEN_UPDATE {
-            get {
-                return ResourceManager.GetString("XEN_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/TryXenDesktop.
-        /// </summary>
-        public static string XENDESKTOP_URL {
-            get {
-                return ResourceManager.GetString("XENDESKTOP_URL", resourceCulture);
             }
         }
     }
