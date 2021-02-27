@@ -29,12 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+
 using System.Windows.Forms;
 using XenAdmin.Core;
 
@@ -48,8 +43,19 @@ namespace XenAdmin.Dialogs
             upsellPage1.BlurbText = blurb;
             upsellPage1.LearnMoreUrl = learnMoreUrl;
             upsellPage1.enableOkButton();
-            this.CancelButton = upsellPage1.OKButton;
+            CancelButton = upsellPage1.OKButton;
             Height = upsellPage1.Height;
+        }
+
+        public override string Text => BrandManager.BrandConsole;
+
+        public static void ShowUpsellDialog(string message, IWin32Window parent)
+        {
+            using (var upsellDialog = new UpsellDialog(HiddenFeatures.LinkLabelHidden
+                    ? message
+                    : message + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand),
+                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
+                upsellDialog.ShowDialog(parent);
         }
     }  
 }

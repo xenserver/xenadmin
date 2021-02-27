@@ -55,11 +55,7 @@ namespace XenAdmin.Commands
         {
             if (Helpers.FeatureForbidden(selection[0].XenObject, Host.RestrictWLB))
             {
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden
-                        ? Messages.UPSELL_BLURB_WLB
-                        : Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_TRIAL,
-                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_WLB, Parent);
                 return;
             }
 

@@ -32,6 +32,7 @@
 using System.Collections.Generic;
 using XenAPI;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAdmin.Wizards.CrossPoolMigrateWizard;
 
 
@@ -59,7 +60,7 @@ namespace XenAdmin.Commands
 
             if (Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
             {
-                ShowUpsellDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPM, Parent);
             }
             else
             {

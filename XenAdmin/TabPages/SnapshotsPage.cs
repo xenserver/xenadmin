@@ -1505,7 +1505,7 @@ namespace XenAdmin.TabPages
         {
             if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
             {
-                VMGroupCommand<VMSS>.ShowUpsellDialog(this);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_VMSS, this);
             }
             else
             {

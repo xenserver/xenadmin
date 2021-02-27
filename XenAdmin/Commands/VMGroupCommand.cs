@@ -69,21 +69,14 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            
             var pool = Helpers.GetPoolOfOne(selection.FirstAsXenObject.Connection);
             if (pool != null)
             {
-                if (Helpers.FeatureForbidden(pool.Connection, VMGroup<T>.FeatureRestricted)) 
-                    ShowUpsellDialog(Parent);
+                if (Helpers.FeatureForbidden(pool.Connection, VMGroup<T>.FeatureRestricted))
+                    UpsellDialog.ShowUpsellDialog(VMGroup<T>.UpsellBlurb, Parent);
                 else
                     this.MainWindowCommandInterface.ShowPerConnectionWizard(pool.Connection, VMGroup<T>.ManageGroupsDialog(pool));
             }
-        }
-
-        public static void ShowUpsellDialog(IWin32Window parent)
-        {
-            using (var dlg = new UpsellDialog(VMGroup<T>.UpsellBlurb, VMGroup<T>.UpsellLearnMoreUrl))
-                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

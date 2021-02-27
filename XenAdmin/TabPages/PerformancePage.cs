@@ -323,9 +323,7 @@ namespace XenAdmin.TabPages
 
         private void ShowUpsell()
         {
-            using (var upsellDialog = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_PERFORMANCE : Messages.UPSELL_BLURB_PERFORMANCE + Messages.UPSELL_BLURB_TRIAL,
-                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                upsellDialog.ShowDialog(this);
+            UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_PERFORMANCE, this);
         }
 
         private void MoveGraphUp()

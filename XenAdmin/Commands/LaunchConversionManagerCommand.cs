@@ -64,12 +64,7 @@ namespace XenAdmin.Commands
 
             if (Helpers.FeatureForbidden(con, Host.RestrictConversion))
             {
-                var msg = HiddenFeatures.LinkLabelHidden
-                    ? Messages.UPSELL_BLURB_CONVERSION
-                    : Messages.UPSELL_BLURB_CONVERSION + Messages.UPSELL_BLURB_TRIAL;
-
-                using (var dlg = new UpsellDialog(msg, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CONVERSION, Parent);
             }
             else if (!con.Session.IsLocalSuperuser && !Registry.DontSudo && con.Session.Roles.All(r => r.name_label != Role.MR_ROLE_POOL_ADMIN))
             {
