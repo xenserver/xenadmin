@@ -156,9 +156,7 @@ namespace XenAdmin.Dialogs
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
                     !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
                 {
-                    using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPUMASKING : Messages.UPSELL_BLURB_CPUMASKING + Messages.UPSELL_BLURB_TRIAL,
-                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                        dlg.ShowDialog(this);
+                    UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, this);
                     return;
                 }
 

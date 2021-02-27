@@ -65,12 +65,7 @@ namespace XenAdmin.Commands
             bool featureForbidden = vdis.TrueForAll(vdi => Helpers.FeatureForbidden(vdi.Connection, Host.RestrictCrossPoolMigrate));
             if (featureForbidden)
             {
-                string theText = HiddenFeatures.LinkLabelHidden
-                    ? Messages.UPSELL_BLURB_MIGRATE_VDI
-                    : Messages.UPSELL_BLURB_MIGRATE_VDI + Messages.UPSELL_BLURB_TRIAL;
-
-                using (var dlg = new UpsellDialog(theText, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_MIGRATE_VDI, Parent);
             }
             else
             {

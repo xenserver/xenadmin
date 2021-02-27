@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
 
             if (Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
             {
-                ShowUpsellDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPM, Parent);
             }
             else
             {
@@ -100,13 +100,6 @@ namespace XenAdmin.Commands
         protected override Host GetHost(VM vm)
         {
             return Helpers.GetMaster(vm.Connection);
-        }
-
-        public static void ShowUpsellDialog(IWin32Window parent)
-        {
-            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM : Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_TRIAL,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                dlg.ShowDialog(parent);
         }
 
         private readonly Dictionary<VM, string> cantExecuteReasons = new Dictionary<VM, string>();
