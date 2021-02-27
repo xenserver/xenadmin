@@ -577,7 +577,9 @@
       <LastGenOutput>FriendlyNames.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FriendlyNames.zh-CN.resx" />
+    <EmbeddedResource Include="FriendlyNames.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="InvisibleMessages.ja.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
