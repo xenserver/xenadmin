@@ -555,9 +555,6 @@
   <data name="Label-host.edition" xml:space="preserve">
     <value>ライセンス</value>
   </data>
-  <data name="Label-host.edition-express" xml:space="preserve">
-    <value>[XenServer product] Express</value>
-  </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>有効</value>
   </data>
@@ -1571,12 +1568,6 @@
   <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
     <value>解放されるメモリ (概算値)</value>
   </data>
-  <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>[XenServer product] Per-Socket</value>
-  </data>
-  <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>[XenServer product] for [Citrix] Virtual Desktops</value>
-  </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>AD のヘルプ</value>
   </data>
@@ -1646,15 +1637,6 @@
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
     <value>ライセンス サーバーのバージョンが古すぎます。</value>
   </data>
-  <data name="Label-host.edition-premium-per-socket" xml:space="preserve">
-    <value>[XenServer product] Premium Per-Socket</value>
-  </data>
-  <data name="Label-host.edition-premium-per-user" xml:space="preserve">
-    <value>[XenServer product] Premium Per-User</value>
-  </data>
-  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>[XenServer product] Standard Per-Socket</value>
-  </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>ライセンスのヘルプ</value>
   </data>
@@ -1672,12 +1654,6 @@
   </data>
   <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops</value>
-  </data>
-  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops Premium</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>インストールされたサプリメンタル パック</value>
@@ -1775,12 +1751,6 @@
   <data name="Label-host.system_status-xenvm" xml:space="preserve">
     <value>ボリューム マネージャーのログ</value>
   </data>
-  <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix XenServer] Ultimate Edition</value>
-  </data>
-  <data name="Label-host.edition-basic" xml:space="preserve">
-    <value>[Citrix XenServer] Basic Edition</value>
-  </data>
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>コンテナー管理のログ</value>
   </data>
@@ -1798,9 +1768,6 @@
   </data>
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>接続テスト</value>
-  </data>
-  <data name="Label-host.edition-standard" xml:space="preserve">
-    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>必要なアップデート</value>
@@ -1885,27 +1852,6 @@
   </data>
   <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
     <value>GFS2</value>
-  </data>
-  <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud</value>
-  </data>
-  <data name="Label-host.edition-legacy-basic" xml:space="preserve">
-    <value>[Citrix XenServer] Basic Edition</value>
-  </data>
-  <data name="Label-host.edition-legacy-desktop" xml:space="preserve">
-    <value>XenApp/XenDesktop</value>
-  </data>
-  <data name="Label-host.edition-legacy-desktop-cloud" xml:space="preserve">
-    <value>XenApp/XenDesktop [Citrix] Cloud</value>
-  </data>
-  <data name="Label-host.edition-legacy-desktop-plus" xml:space="preserve">
-    <value>XenApp/XenDesktop Platinum</value>
-  </data>
-  <data name="Label-host.edition-legacy-premium" xml:space="preserve">
-    <value>[Citrix XenServer] Ultimate Edition</value>
-  </data>
-  <data name="Label-host.edition-legacy-standard" xml:space="preserve">
-    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Description-host.system_status-v6d" xml:space="preserve">
     <value>[XenServer] ライセンス デーモン ログ</value>
