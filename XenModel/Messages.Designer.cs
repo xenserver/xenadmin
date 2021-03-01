@@ -30748,7 +30748,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: The Health Check service has been removed in [XenServer] {1}..
+        ///   Looks up a localized string similar to {0}: The Health Check service has been removed in {1}..
         /// </summary>
         public static string PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION {
             get {
@@ -40008,7 +40008,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Health Check service has been removed in [XenServer] {0}. If you are going to upgrade the pool to this version, you must disable Health Check first..
+        ///   Looks up a localized string similar to The Health Check service has been removed in {0}. If you are going to upgrade the pool to this version, you must disable Health Check first..
         /// </summary>
         public static string WARNING_HEALTH_CHECK_SERVICE_INFO {
             get {

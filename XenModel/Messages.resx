@@ -10661,7 +10661,7 @@ Please reconnect the host and try again</value>
     <value>Probing for LUNs on {0}</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
-    <value>{0}: The Health Check service has been removed in [XenServer] {1}.</value>
+    <value>{0}: The Health Check service has been removed in {1}.</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
     <value>Disable Health Check</value>
@@ -13807,7 +13807,7 @@ Schedule:
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
   </data>
   <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
-    <value>The Health Check service has been removed in [XenServer] {0}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
+    <value>The Health Check service has been removed in {0}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>

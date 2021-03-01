@@ -29,9 +29,11 @@
  * SUCH DAMAGE.
  */
 
+using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 using XenAdmin.Model;
 using XenAPI;
 
@@ -79,5 +81,26 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Message =>
             string.Format(Messages.WARNING_HEALTH_CHECK_SERVICE_INFO, BrandManager.ProductVersionPost82);
+
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            AsyncAction action = null;
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                using (var dlg = new WarningDialog(Message,
+                    new ThreeButtonDialog.TBDButton(Messages.PROBLEM_HEALTH_CHECK_HELP, DialogResult.Yes),
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                {
+                    if (dlg.ShowDialog() == DialogResult.Yes)
+                    {
+                        var healthCheckSettings = pool.HealthCheckSettings();
+                        healthCheckSettings.Status = HealthCheckStatus.Disabled;
+                        action = new SaveHealthCheckSettingsAction(pool, healthCheckSettings, null, null, null, null, false);
+                    }
+                }
+            });
+            cancelled = action == null;
+            return action;
+        }
     }
 }
