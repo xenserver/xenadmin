@@ -973,16 +973,15 @@ namespace XenAdmin
                     return;
                 }
 
-                // Allow Citrix Hypervisor Center connect to Havana, Stockholm and cloud released CH only
+                // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
                 //
-                if ((int)API_Version.LATEST >= (int)API_Version.API_2_16
-                        && !Helpers.StockholmOrGreater(master) && !Helpers.HavanaOrGreater(master))
+                if ((int)API_Version.LATEST >= (int)API_Version.API_2_16 && !Helpers.StockholmOrGreater(master))
                 {
                     connection.EndConnect();
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.LegacyProduct, Helpers.GetName(master));
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, Helpers.GetName(master));
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                         var error = $"{msg}\n{url}";
