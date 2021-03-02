@@ -7341,6 +7341,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking pool enrollment to the Health Check service.
+        /// </summary>
+        public static string CHECKING_HEALTH_CHECK_SERVICE {
+            get {
+                return ResourceManager.GetString("CHECKING_HEALTH_CHECK_SERVICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking host liveness status.
         /// </summary>
         public static string CHECKING_HOST_LIVENESS_STATUS {
@@ -30775,6 +30784,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Health Check.
+        /// </summary>
+        public static string PROBLEM_HEALTH_CHECK_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_HEALTH_CHECK_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: The Health Check service has been removed in {1}..
+        /// </summary>
+        public static string PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server &apos;{0}&apos;.
         /// </summary>
         public static string PROBLEM_HOSTPROBLEM_TITLE {
@@ -40049,6 +40076,15 @@ namespace XenAdmin {
         public static string WARNING_DELETE_VD_MULTIPLE {
             get {
                 return ResourceManager.GetString("WARNING_DELETE_VD_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Health Check service has been removed in {0}. If you are going to upgrade the pool to this version, you must disable Health Check first..
+        /// </summary>
+        public static string WARNING_HEALTH_CHECK_SERVICE_INFO {
+            get {
+                return ResourceManager.GetString("WARNING_HEALTH_CHECK_SERVICE_INFO", resourceCulture);
             }
         }
         

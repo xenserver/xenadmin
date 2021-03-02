@@ -208,6 +208,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (vSwitchChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
 
+            //Health Check check - for each pool
+            var hcChecks = (from Pool pool in SelectedPools
+                let check = new HealthCheckServiceCheck(pool, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (hcChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_HEALTH_CHECK_SERVICE, hcChecks));
+
             //protocol check - for each pool
             var sslChecks = (from Host server in SelectedMasters
                 let check = new PoolLegacySslCheck(server, InstallMethodConfig, ManualUpgrade)
