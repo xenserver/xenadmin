@@ -43,18 +43,11 @@
 namespace XenOvf.Definitions
 {
     using System;
-    using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    using XenOvf.Definitions.WSSE;
-    using XenOvf.Definitions.WSU;
-    using XenOvf.Definitions.XENC;
-    using XenOvf.Definitions.XDIGSIG;
-    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Xsd2Code", "1.0.3177.19956")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]

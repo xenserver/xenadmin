@@ -29,13 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Core;
 using XenAPI;
 using System.Collections;
-using XenAdmin.Network;
 
 namespace XenAdmin.ServerDBs.FakeAPI
 {

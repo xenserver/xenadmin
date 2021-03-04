@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Globalization;
 using XenAdmin.Wlb;
 using XenAdmin.Controls.Wlb;
 using XenAdmin.Core;

@@ -38,7 +38,6 @@ using XenAdmin.Core;
 using XenAPI;
 using System.IO;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using XenAdmin.Alerts;
 using System.Linq;
 using System.Xml;

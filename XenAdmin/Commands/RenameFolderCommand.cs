@@ -30,10 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Model;
-using XenAPI;
 using XenAdmin.Actions;
 
 namespace XenAdmin.Commands

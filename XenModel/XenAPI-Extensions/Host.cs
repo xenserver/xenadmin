@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using XenCenterLib;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;

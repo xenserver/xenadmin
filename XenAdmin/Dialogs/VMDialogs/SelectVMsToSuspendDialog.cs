@@ -31,10 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
@@ -42,7 +39,6 @@ using XenAdmin.Actions;
 using XenAPI;
 using XenAdmin.Actions.HostActions;
 using XenAdmin.Controls.DataGridViewEx;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.VMDialogs

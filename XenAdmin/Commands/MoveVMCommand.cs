@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Linq;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Wizards.CrossPoolMigrateWizard;

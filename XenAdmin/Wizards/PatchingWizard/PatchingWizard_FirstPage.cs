@@ -29,10 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
-using System.Windows.Forms;
 using XenAdmin.Controls;
-using XenAdmin.Dialogs;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {

@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.ServiceProcess;
 using System.Reflection;
 using System.IO;

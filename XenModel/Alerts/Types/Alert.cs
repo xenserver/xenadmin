@@ -32,10 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-
 using XenAdmin.Network;
-using XenAPI;
 using XenCenterLib;
 
 namespace XenAdmin.Alerts

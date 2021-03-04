@@ -42,7 +42,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
 using XenAdmin.Controls;
-using System.Drawing;
 using XenAdmin.Actions.DR;
 
 namespace XenAdmin.Wizards

@@ -31,15 +31,9 @@
 
 namespace XenOvf.Definitions.VMX
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.IO;
-    using System.Xml;
     using System.Xml.Serialization;
-    using System.Xml.Schema;
 
     [XmlRoot("Foundry")]
     public class Vmw_Foundry_Type

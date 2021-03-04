@@ -38,7 +38,6 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAPI;
 using XenAdmin.Controls;
 

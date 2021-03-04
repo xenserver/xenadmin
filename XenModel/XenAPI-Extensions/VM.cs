@@ -35,7 +35,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Xml;
-using XenCenterLib;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;

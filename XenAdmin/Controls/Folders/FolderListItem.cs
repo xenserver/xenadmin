@@ -32,13 +32,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Model;
-using XenAPI;
 
 
 namespace XenAdmin.Controls

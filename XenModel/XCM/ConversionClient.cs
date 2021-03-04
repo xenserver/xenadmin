@@ -30,7 +30,6 @@
  */
 
 
-using System;
 using System.Net;
 using CookComputing.XmlRpc;
 using XenAdmin.Network;

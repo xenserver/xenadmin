@@ -30,10 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Reporting.WinForms;
-using XenAPI;
 
 
 namespace XenAdmin.Actions.Wlb

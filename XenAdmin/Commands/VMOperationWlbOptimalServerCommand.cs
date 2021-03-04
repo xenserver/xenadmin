@@ -29,11 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
-using XenAdmin.Properties;
 using System.Drawing;
 using XenAdmin.Dialogs;
 

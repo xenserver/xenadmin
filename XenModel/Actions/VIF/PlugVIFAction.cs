@@ -29,9 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Actions;
-
-
 namespace XenAdmin.Actions
 {
     public class PlugVIFAction : PureAsyncAction

@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using XenAPI;
 
 

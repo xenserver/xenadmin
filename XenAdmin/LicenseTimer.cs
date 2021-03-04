@@ -31,7 +31,6 @@
 
 using System;
 using System.Timers;
-using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;

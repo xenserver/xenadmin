@@ -31,11 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.CustomFields;
 using XenAPI;
 using XenAdmin.Core;
-using XenAdmin.XenSearch;
 
 
 namespace XenAdmin.Actions

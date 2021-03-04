@@ -30,7 +30,6 @@
  */
 
 
-using System.Drawing;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;

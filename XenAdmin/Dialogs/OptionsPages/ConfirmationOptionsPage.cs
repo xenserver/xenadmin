@@ -31,7 +31,6 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Dialogs.OptionsPages

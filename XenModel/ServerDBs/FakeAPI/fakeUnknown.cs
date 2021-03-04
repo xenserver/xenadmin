@@ -29,10 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace XenAdmin.ServerDBs.FakeAPI
 {
     internal class fakeUnknown : fakeXenObject

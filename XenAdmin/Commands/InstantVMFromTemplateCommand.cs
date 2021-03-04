@@ -29,15 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-
 using XenAdmin.Actions;
-
 using XenAPI;
 using XenAdmin.Actions.VMActions;
-using System.Collections.ObjectModel;
 
 
 namespace XenAdmin.Commands

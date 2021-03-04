@@ -30,8 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using XenAdmin.Network;
 using XenAdmin.Core;

@@ -29,10 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using XenAdmin.Actions.VMActions;
 using XenAdmin.Controls;
 using XenAdmin.Wizards.GenericPages;

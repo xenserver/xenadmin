@@ -33,7 +33,6 @@ using System;
 using System.Xml;
 using XenAdmin.Wizards.GenericPages;
 using XenOvf.Definitions;
-using XenAPI;
 using XenOvf;
 
 

@@ -31,12 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
-using System.Windows;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using XenAdmin.TabPages;
 
 namespace XenAdmin.Controls
 {

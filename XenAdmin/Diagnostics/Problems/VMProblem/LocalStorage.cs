@@ -29,11 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
-using XenAdmin.Actions.VMActions;
 
 
 namespace XenAdmin.Diagnostics.Problems.VMProblem

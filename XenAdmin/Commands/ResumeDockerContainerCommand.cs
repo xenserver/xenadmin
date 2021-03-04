@@ -34,7 +34,6 @@ using System.Drawing;
 using System.Linq;
 using XenAdmin.Actions;
 using XenAdmin.Model;
-using XenAdmin.Properties;
 using XenAPI;
 
 namespace XenAdmin.Commands

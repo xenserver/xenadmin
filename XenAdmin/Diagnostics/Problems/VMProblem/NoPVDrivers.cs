@@ -31,7 +31,6 @@
 
 using System;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 

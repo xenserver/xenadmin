@@ -29,18 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Text;
-using System.Xml;
-using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Wlb;
-using XenAdmin.Dialogs;
-using XenAdmin.Actions;
-using XenAdmin.Help;
-using System.Windows.Forms;
 
 namespace XenAdmin.Wlb
 {

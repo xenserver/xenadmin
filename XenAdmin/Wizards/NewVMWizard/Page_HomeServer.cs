@@ -33,7 +33,6 @@ using System.Collections.Generic;
 using XenAdmin.Actions.VMActions;
 using XenAPI;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Wizards.NewVMWizard
