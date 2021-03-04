@@ -28129,46 +28129,146 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
-        ///
-        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
-        ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] {0} or above, VMs must be moved from local storage first..
+        ///   Looks up a localized string similar to Disk repartitioning is not possible..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: VMs on local disk will prevent disk repartitioning..
+        ///   Looks up a localized string similar to However, the new partitioning scheme cannot be applied on your server. This could be because there are VMs on local storage, the partition table type is DOS or there is a utility partition present. To upgrade to {0}, you must identify and resolve the issue first..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
-        ///
-        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
-        ///
-        ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
+        ///   Looks up a localized string similar to However, the new partitioning scheme cannot be applied on your server. This could be because there are VMs on local storage, the partition table type is DOS or there is a utility partition present. To upgrade to {0} or above, or to benefit from repartitioning on upgrade to a version older than {0}, you must identify and resolve the issue first..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: The disk size of the local storage prevents repartitioning..
+        ///   Looks up a localized string similar to The partition table type prevents repartitioning..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT {
+        public static string NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, the partition table type on your server is DOS, which prevents repartitioning. The current partitioning scheme cannot be retained. Therefore the server cannot be upgraded to {0}..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, the partition table type on your server is DOS, which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so an upgrade to {0} or above is not possible. .
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As of {0} the current partitioning scheme is no longer supported. A new disk partitioning scheme is available that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is not enough space to perform the repartitioning. To upgrade to {0}, the size of the local storage needs to be increased first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is not enough space to perform the repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the size of the local storage needs to be increased first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A utility partition prevents repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is a utility partition present which prevents repartitioning. To upgrade to {0}, the utility partition must be removed..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so existing utility partition must be removed first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_VDI_PRESENT {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_VDI_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there are VMs on local storage, so the new disk partitioning can not be applied. To upgrade to {0} or above, VMs must be moved from local storage first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there are VMs on local storage, so the new partitioning scheme cannot be applied.  To upgrade to {0} or above, or to benefit from repartitioning on upgrade to a version older than {0}, VMs must be moved from local storage first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING", resourceCulture);
             }
         }
         
