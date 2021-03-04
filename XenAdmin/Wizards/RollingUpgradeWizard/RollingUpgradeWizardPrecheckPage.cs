@@ -188,15 +188,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //SafeToUpgrade- and PrepareToUpgrade- checks - in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
             {
-                var prepareToUpgradeChecks = new List<Check>();
-                foreach (var host in hostsToUpgrade)
-                    prepareToUpgradeChecks.Add(new PrepareToUpgradeCheck(host, InstallMethodConfig));
-                groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
+                var safeToUpgradeChecks = (from Host host in hostsToUpgrade
+                    let check = new SafeToUpgradeCheck(host, InstallMethodConfig)
+                    where check.CanRun()
+                    select check as Check).ToList();
 
-                var safeToUpgradeChecks = new List<Check>();
-                foreach (var host in hostsToUpgrade)
-                    safeToUpgradeChecks.Add(new SafeToUpgradeCheck(host));
-                groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
+                if (safeToUpgradeChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
+
+                var prepareToUpgradeChecks = (from Host host in hostsToUpgrade
+                    select new PrepareToUpgradeCheck(host, InstallMethodConfig) as Check).ToList();
+
+                groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
             }
 
             //vSwitch controller check - for each pool
