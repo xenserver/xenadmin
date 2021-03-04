@@ -31,12 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
-using XenAdmin.TabPages;
 using XenAdmin.Dialogs;
 using System.Xml;
-using System.Text.RegularExpressions;
 using XenAdmin.Core;
 using System.Globalization;
 

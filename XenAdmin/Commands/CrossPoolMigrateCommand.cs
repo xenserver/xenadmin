@@ -29,15 +29,12 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
-using XenAdmin.Properties;
 using XenAdmin.Wizards.CrossPoolMigrateWizard;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAPI;

@@ -31,13 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
-using XenAdmin.Dialogs;
-using XenAPI;
 
 namespace XenAdmin.Dialogs
 {

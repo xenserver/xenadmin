@@ -36,7 +36,6 @@ using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Controls;
 using XenCenterLib;
-using XenAdmin.Properties;
 using System.Collections;
 
 

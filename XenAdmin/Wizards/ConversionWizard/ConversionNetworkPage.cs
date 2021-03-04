@@ -30,11 +30,8 @@
  */
 
 
-using System.Collections.Generic;
-using System.Windows.Forms;
 using XenAdmin.XCM;
 using XenAdmin.Wizards.GenericPages;
-using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.ConversionWizard

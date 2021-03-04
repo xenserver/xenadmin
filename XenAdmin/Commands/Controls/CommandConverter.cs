@@ -30,11 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
 using System.Reflection;
-using System.Windows.Forms;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 

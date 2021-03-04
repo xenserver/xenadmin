@@ -31,10 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -42,8 +38,6 @@ using XenAPI;
 using XenAdmin.Actions.Wlb;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
-using XenAdmin.Controls;
-
 
 
 namespace XenAdmin.Dialogs.Wlb

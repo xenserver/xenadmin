@@ -40,9 +40,7 @@ using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.TabPages;
 using XenAPI;
-using XenAdmin.Controls;
 
 
 namespace XenAdmin.SettingsPanels

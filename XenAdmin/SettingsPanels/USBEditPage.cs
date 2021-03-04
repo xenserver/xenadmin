@@ -37,7 +37,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Properties;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;

@@ -30,7 +30,6 @@
  */
 
 using System;
-using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Core;

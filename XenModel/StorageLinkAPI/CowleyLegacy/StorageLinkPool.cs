@@ -29,10 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using XenAdmin;
 using System;
-using System.Collections.ObjectModel;
 
 namespace XenAPI
 {

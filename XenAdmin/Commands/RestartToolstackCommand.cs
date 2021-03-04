@@ -33,10 +33,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using XenAdmin.Actions;
-using XenAdmin.Core;
-
 using XenAPI;
-using XenAdmin.Wizards.PatchingWizard.PlanActions;
 
 
 namespace XenAdmin.Commands

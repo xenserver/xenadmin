@@ -41,7 +41,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
-using XenCenterLib.Archive;
 using XenCenterLib.Compression;
 
 namespace XenOvf

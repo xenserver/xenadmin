@@ -34,18 +34,6 @@
 //                providers.
 // ============================================================================
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Threading;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Xml.Schema;
-using System.Text;
 
 namespace XenOvf.Definitions
 {

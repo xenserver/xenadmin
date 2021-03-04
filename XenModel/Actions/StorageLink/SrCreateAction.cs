@@ -31,10 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections;
-using System.Text;
-
-using XenAdmin;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;

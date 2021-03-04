@@ -35,7 +35,6 @@ using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.TestResources;
 using XenCenterLib;

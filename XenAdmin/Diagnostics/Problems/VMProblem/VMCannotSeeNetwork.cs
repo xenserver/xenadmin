@@ -30,9 +30,7 @@
  */
 
 using System;
-using System.Windows.Forms;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Network;
 using XenAPI;
 
 

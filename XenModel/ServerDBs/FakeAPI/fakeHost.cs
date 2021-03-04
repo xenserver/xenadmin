@@ -31,12 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
-using System.Text.RegularExpressions;
 using System.Collections;
 using System.Globalization;
-using System.Reflection;
 using System.Threading;
 
 namespace XenAdmin.ServerDBs.FakeAPI

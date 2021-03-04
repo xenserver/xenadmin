@@ -40,7 +40,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.StorageLinkAPI;
 using XenAPI;
 using System.Drawing;
-using XenAdmin.Properties;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {

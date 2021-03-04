@@ -34,7 +34,6 @@ using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
-using XenAdmin.Core;
 using XenAdmin.Wizards.ExportWizard.ApplianceChecks;
 using XenCenterLib;
 

@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using XenAPI;
-using XenAdmin.Core;
 using XenAdmin.Wizards.CrossPoolMigrateWizard;
 
 

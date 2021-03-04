@@ -32,8 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using XenAdmin.Commands;
 using XenAdmin.Controls.CheckableDataGridView;

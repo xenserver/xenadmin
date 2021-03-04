@@ -32,8 +32,6 @@
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
-using System.Collections.Generic;
-
 namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
     public class PrerequisiteUpdateMissing : HostProblem

@@ -35,7 +35,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
 
 namespace XenAdmin.SettingsPanels
