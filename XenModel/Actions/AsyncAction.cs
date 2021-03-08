@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -366,9 +367,15 @@ namespace XenAdmin.Actions
                     log.InfoFormat("Task {0} finished successfully", RelatedTask.opaque_ref);
                     if (task.result != "") // Work around CA-6597
                     {
-                        Match m = Regex.Match(task.result, "<value>(.*)</value>");
-                        if (m.Success)
-                            Result = m.Groups[1].Value;
+                        var doc = new XmlDocument();
+                        doc.LoadXml(task.result);
+                        var nodes = doc.GetElementsByTagName("value");
+
+                        foreach (XmlNode node in nodes)
+                        {
+                            Result = node.InnerText;
+                            break;
+                        }
                     }
                     return true;
 
