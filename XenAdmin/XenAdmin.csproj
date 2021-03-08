@@ -62,7 +62,7 @@
     <Reference Include="DiscUtils, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DiscUtils.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=683ddba221ac0742, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=d247b8b0ac7959e9, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -6800,7 +6800,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)AddManifest.targets"/>
+  <Import Project="$(SolutionDir)AddManifest.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
