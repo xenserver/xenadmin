@@ -40,116 +40,91 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     public class HostNotSafeToUpgradeWarning : WarningWithMoreInfo
     {
         private readonly Host _host;
-        private readonly HostNotSafeToUpgradeReason _reason;
+        private readonly string _shortMessage;
 
         public HostNotSafeToUpgradeWarning(Check check, Host host, HostNotSafeToUpgradeReason reason)
             : base(check)
         {
-            this._host = host;
-            this._reason = reason;
+            _host = host;
+            var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, BrandManager.ProductVersionPost82);
+
+            string detail;
+
+            switch (reason)
+            {
+                case HostNotSafeToUpgradeReason.NotEnoughSpace:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING, BrandManager.ProductVersionPost82);
+                    break;
+                case HostNotSafeToUpgradeReason.VdiPresent:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING, BrandManager.ProductVersionPost82);
+                    break;
+                case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING, BrandManager.ProductVersionPost82);
+                    break;
+                case HostNotSafeToUpgradeReason.LegacyPartitionTable:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING, BrandManager.ProductVersionPost82);
+                    break;
+                default:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_DEFAULT;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING, BrandManager.ProductVersionPost82);
+                    break;
+            }
+            Message = $"{_shortMessage}\n\n{newPartitionInfo}\n\n{detail}";
         }
+
+        public override string Message { get; }
 
         public override string Title => Description;
 
-        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host.name_label, ShortMessage);
-
-        public override string Message
-        {
-            get
-            {
-                var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, BrandManager.ProductVersionPost82);
-                switch (_reason)
-                {
-                    case HostNotSafeToUpgradeReason.NotEnoughSpace:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING, BrandManager.ProductVersionPost82)}";
-                    case HostNotSafeToUpgradeReason.VdiPresent:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING, BrandManager.ProductVersionPost82)}";
-                    case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING, BrandManager.ProductVersionPost82)}";
-                    case HostNotSafeToUpgradeReason.LegacyPartitionTable:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING, BrandManager.ProductVersionPost82)}";
-                    default:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_DEFAULT}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING, BrandManager.ProductVersionPost82)}";
-                }
-            }
-        }
-
-        private string ShortMessage
-        {
-            get
-            {
-                switch (_reason)
-                {
-                    case HostNotSafeToUpgradeReason.NotEnoughSpace:
-                        return Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE;
-                    case HostNotSafeToUpgradeReason.VdiPresent:
-                        return Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT;
-                    case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
-                        return Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION;
-                    case HostNotSafeToUpgradeReason.LegacyPartitionTable:
-                        return Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE;
-                    default:
-                        return Messages.NOT_SAFE_TO_UPGRADE_DEFAULT;
-                }
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host.name_label, _shortMessage);
     }
 
     public class HostNotSafeToUpgradeProblem : ProblemWithMoreInfo
     {
         private readonly Host _host;
-        private readonly HostNotSafeToUpgradeReason _reason;
+        private readonly string _shortMessage;
 
         public HostNotSafeToUpgradeProblem(Check check, Host host, HostNotSafeToUpgradeReason reason)
             : base(check)
         {
-            this._host = host;
-            this._reason = reason;
+            _host = host;
+            var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, BrandManager.ProductVersionPost82);
+            string detail;
+
+            switch (reason)
+            {
+                case HostNotSafeToUpgradeReason.NotEnoughSpace:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM, BrandManager.ProductVersionPost82);
+                    break;
+                case HostNotSafeToUpgradeReason.VdiPresent:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM, BrandManager.ProductVersionPost82);
+                    break;
+                case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM, BrandManager.ProductVersionPost82);
+                    break;
+                case HostNotSafeToUpgradeReason.LegacyPartitionTable:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM, BrandManager.ProductVersionPost82);
+                    break;
+                default:
+                    _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_DEFAULT;
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM, BrandManager.ProductVersionPost82);
+                    break;
+            }
+            Message = $"{_shortMessage}\n\n{newPartitionInfo}\n\n{detail}";
         }
+
+        public override string Message { get; }
 
         public override string Title => Description;
 
-        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host.name_label, ShortMessage);
-
-        public override string Message
-        {
-            get
-            {
-                var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, BrandManager.ProductVersionPost82);
-                switch (_reason)
-                {
-                    case HostNotSafeToUpgradeReason.NotEnoughSpace:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM, BrandManager.ProductVersionPost82)}";
-                    case HostNotSafeToUpgradeReason.VdiPresent:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM, BrandManager.ProductVersionPost82)}";
-                    case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM, BrandManager.ProductVersionPost82)}";
-                    case HostNotSafeToUpgradeReason.LegacyPartitionTable:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM, BrandManager.ProductVersionPost82)}";
-                    default:
-                        return $"{Messages.NOT_SAFE_TO_UPGRADE_DEFAULT}\n\n{newPartitionInfo}\n\n{string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM, BrandManager.ProductVersionPost82)}";
-                }
-            }
-        }
-
-        private string ShortMessage
-        {
-            get
-            {
-                switch (_reason)
-                {
-                    case HostNotSafeToUpgradeReason.NotEnoughSpace:
-                        return Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE;
-                    case HostNotSafeToUpgradeReason.VdiPresent:
-                        return Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT;
-                    case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
-                        return Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION;
-                    case HostNotSafeToUpgradeReason.LegacyPartitionTable:
-                        return Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE;
-                    default:
-                        return Messages.NOT_SAFE_TO_UPGRADE_DEFAULT;
-                }
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host.name_label, _shortMessage);
     }
 }
