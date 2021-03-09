@@ -28237,7 +28237,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so existing utility partition must be removed first..
+        ///   Looks up a localized string similar to However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the existing utility partition must be removed first..
         /// </summary>
         public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING {
             get {

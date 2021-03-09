@@ -44,6 +44,8 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
+        public override bool CanRun() => Helpers.KolkataOrGreater(Host.Connection) && !Helpers.LimaOrGreater(Host.Connection);
+
         protected override Problem RunHostCheck()
         {
             var clusteringEnabled = Host.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);

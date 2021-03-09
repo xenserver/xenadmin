@@ -9801,7 +9801,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>However, there is a utility partition present which prevents repartitioning. To upgrade to {0}, the utility partition must be removed.</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING" xml:space="preserve">
-    <value>However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so existing utility partition must be removed first.</value>
+    <value>However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the existing utility partition must be removed first.</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT" xml:space="preserve">
     <value>VMs on local disk will prevent disk repartitioning.</value>
