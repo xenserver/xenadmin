@@ -79,9 +79,7 @@ namespace XenAdmin.Actions.Wlb
         {
             Description = Messages.ACTION_WLB_REPORT_DOWNLOADING;
 
-            RelatedTask = XenAPI.Task.create(Session,
-                string.Format(Messages.ACTION_WLB_REPORT_TASK_NAME, reportName),
-                string.Format(Messages.ACTION_WLB_REPORT_TASK_DESCRIPTION, reportName));
+            RelatedTask = Task.create(Session, "wlb_report", $"Downloading WLB report {reportName}");
 
             UriBuilder uriBuilder = new UriBuilder(Session.Url);
             uriBuilder.Path = "wlb_report";

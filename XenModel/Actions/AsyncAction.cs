@@ -141,7 +141,7 @@ namespace XenAdmin.Actions
         /// <summary>
         /// Prepare the action's task for exit by removing the XenCenterUUID.
         /// A call here just before exit will mean that the task will get picked 
-        /// up as a meddling action on restart of xencenter, and thus reappear in the log.
+        /// up as a meddling action on restart of xencenter, and thus reappear in the EventsTab.
         /// </summary>
         public void PrepareForLogReloadAfterRestart()
         {
@@ -269,6 +269,9 @@ namespace XenAdmin.Actions
 
         public void PollToCompletion(double start = 0, double finish = 100, bool suppressFailures = false)
         {
+            if (RelatedTask == null)
+                return;
+
             try
             {
                 DateTime startTime = DateTime.Now;
@@ -342,8 +345,7 @@ namespace XenAdmin.Actions
                 Session = session;
             }
 
-            Tick((int)(start + task.progress * (finish - start)),
-                task.Description() == "" ? Description : task.Description());
+            PercentComplete = (int)(start + task.progress * (finish - start));
 
             switch (task.status)
             {

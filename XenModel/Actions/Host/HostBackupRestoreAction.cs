@@ -81,6 +81,7 @@ namespace XenAdmin.Actions
                 switch (type)
                 {
                     case HostBackupRestoreType.backup:
+                        Description = string.Format(Messages.BACKINGUP_HOST, Host.Name());
                         RelatedTask = Task.create(Session, "get_host_backup_task", Host.address);
                         log.DebugFormat("HTTP GETTING file from {0} to {1}", Host.address, filename);
 

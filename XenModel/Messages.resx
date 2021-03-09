@@ -498,9 +498,6 @@
   <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
     <value>Exporting pool resource list from '{0}'</value>
   </data>
-  <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>Exporting {0} to backup file</value>
-  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>Exporting {0}</value>
   </data>
@@ -1322,12 +1319,6 @@
   </data>
   <data name="ACTION_WLB_REPORT_SUCCESSFUL" xml:space="preserve">
     <value>Downloaded</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>Downloading WLB report {0}</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
-    <value>Downloading WLB report {0}</value>
   </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>A&amp;ctivate</value>

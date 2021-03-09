@@ -1204,15 +1204,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporting {0} to backup file.
-        /// </summary>
-        public static string ACTION_EXPORT_TASK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_EXPORT_TASK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Exporting {0}.
         /// </summary>
         public static string ACTION_EXPORT_TASK_NAME {
@@ -3675,24 +3666,6 @@ namespace XenAdmin {
         public static string ACTION_WLB_REPORT_SUCCESSFUL {
             get {
                 return ResourceManager.GetString("ACTION_WLB_REPORT_SUCCESSFUL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading WLB report {0}.
-        /// </summary>
-        public static string ACTION_WLB_REPORT_TASK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_WLB_REPORT_TASK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading WLB report {0}.
-        /// </summary>
-        public static string ACTION_WLB_REPORT_TASK_NAME {
-            get {
-                return ResourceManager.GetString("ACTION_WLB_REPORT_TASK_NAME", resourceCulture);
             }
         }
         
