@@ -40107,6 +40107,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} or upgrade {1} using the Rolling Pool Upgrade wizard..
+        /// </summary>
+        public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
+            get {
+                return ResourceManager.GetString("WARNING_PRE_CLOUD_VERSION_CONNECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot find &apos;{0}&apos;..
         /// </summary>
         public static string WEB_BROWSER_FAILED {
@@ -42258,7 +42267,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} feature was deprecated in {1} and may be retired in future versions.
+        ///   Looks up a localized string similar to The {0} feature was deprecated in {1} and may be retired in future versions..
         /// </summary>
         public static string X_IS_DEPRECATED_IN_X {
             get {
@@ -42267,7 +42276,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} feature is not available in {1} and later versions.
+        ///   Looks up a localized string similar to The {0} feature is not available in {1} and later versions..
         /// </summary>
         public static string X_IS_REMOVED_IN_X {
             get {

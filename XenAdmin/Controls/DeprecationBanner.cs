@@ -42,12 +42,14 @@ namespace XenAdmin.Controls
         public enum Type
         {
             Deprecation,
-            Removal
+            Removal,
+            Warning
         }
 
         public Type BannerType { private get; set; }
         public string FeatureName { private get; set; }
         public string AppliesToVersion { private get; set; }
+        public string WarningMessage { private get; set; }
         public string LinkText { set { helperLink.Text = value; } }
         public Uri LinkUri { set; private get; }
         public bool HelperLinkVisible { set { helperLink.Visible = value; } }
@@ -96,7 +98,6 @@ namespace XenAdmin.Controls
                 message.Text = String.Format(Messages.X_IS_DEPRECATED_IN_X, FeatureName, AppliesToVersion);
                 return;
             }
-                
             
             if (BannerType == Type.Removal)
             {
@@ -104,6 +105,12 @@ namespace XenAdmin.Controls
                 return;
             } 
             
+            if (BannerType == Type.Warning)
+            {
+                message.Text = WarningMessage;
+                return;
+            }
+
             message.Text = String.Empty;
         }
 

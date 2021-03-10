@@ -13839,6 +13839,9 @@ Schedule:
   <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
     <value>The Health Check service has been removed in {0}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
+  <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
+    <value>{0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} or upgrade {1} using the Rolling Pool Upgrade wizard.</value>
+  </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>
   </data>
@@ -14624,10 +14627,10 @@ Any disk in your VM's DVD drive will be ejected when installing [Citrix VM Tools
     <value>{0} (hidden)</value>
   </data>
   <data name="X_IS_DEPRECATED_IN_X" xml:space="preserve">
-    <value>The {0} feature was deprecated in {1} and may be retired in future versions</value>
+    <value>The {0} feature was deprecated in {1} and may be retired in future versions.</value>
   </data>
   <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
-    <value>The {0} feature is not available in {1} and later versions</value>
+    <value>The {0} feature is not available in {1} and later versions.</value>
   </data>
   <data name="X_WITH_WARNING_X" xml:space="preserve">
     <value>{0} with warning: {1}</value>

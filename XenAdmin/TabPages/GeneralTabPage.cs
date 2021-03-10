@@ -459,6 +459,8 @@ namespace XenAdmin.TabPages
             }
             panel2.ResumeLayout();
             UpdateButtons();
+
+            SetupDeprecationBanner();
         }
 
         private void generateInterfaceBox()
@@ -2010,6 +2012,22 @@ namespace XenAdmin.TabPages
             finally
             {
                 panel2.ResumeLayout();
+            }
+        }
+
+        private void SetupDeprecationBanner()
+        {
+            if (Helpers.PostStockholm(xenObject.Connection) || (int)API_Version.LATEST < (int)API_Version.API_2_16)
+            {
+                Banner.Visible = false;
+            }
+            else
+            {
+                Banner.BannerType = DeprecationBanner.Type.Warning;
+                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
+                Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
+                Banner.Visible = true;
             }
         }
     }

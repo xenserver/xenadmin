@@ -140,6 +140,9 @@
   <data name="LEGACY_PRODUCT" xml:space="preserve">
     <value>XenServer</value>
   </data>
+  <data name="LEGACY_CONSOLE" xml:space="preserve">
+    <value>XenCenter</value>
+  </data>
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>
   </data>
