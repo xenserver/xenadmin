@@ -8,7 +8,7 @@
     <ProjectGuid>{9861DFA1-B41F-432D-A43F-226257DEBBB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoreUtilsLib</RootNamespace>
+    <RootNamespace>XenCenterLib</RootNamespace>
     <AssemblyName>CoreUtilsLib</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
