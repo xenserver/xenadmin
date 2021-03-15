@@ -139,13 +139,13 @@
     <value>COM,FLOPPY,ISO,DISPLAY</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_1" xml:space="preserve">
-    <value>[XenServer] Specific Information</value>
+    <value>{0} Specific Information</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_2" xml:space="preserve">
     <value>Boot Order: CD/DVD - Network - Disk</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
-    <value>[XenServer] Platform Information</value>
+    <value>{0} Platform Information</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
     <value>Virtual GPU Information</value>
@@ -158,9 +158,6 @@
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_7" xml:space="preserve">
     <value>Non-Volatile Random-Access Memory</value>
-  </data>
-  <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
-    <value>[XenServer] Post Install Operations ONLY (Attempt to fix up Linux distributions.)</value>
   </data>
   <data name="RASD_10_ALLOCATIONUNITS" xml:space="preserve">
     <value>Ports</value>
@@ -293,11 +290,5 @@
   </data>
   <data name="VSSD_CAPTION" xml:space="preserve">
     <value>Xen Virtual Machine</value>
-  </data>
-  <data name="XENSERVER_PLATFORM_DESCRIPTION" xml:space="preserve">
-    <value>[XenServer] Platform Configuration Item</value>
-  </data>
-  <data name="XENSERVER_SPECIFIC_DESCRIPTION" xml:space="preserve">
-    <value>[XenServer] Specific Configuration Item</value>
   </data>
 </root>

@@ -139,13 +139,13 @@
     <value>COM,FLOPPY,ISO,DISPLAY</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_1" xml:space="preserve">
-    <value>[XenServer] 专有信息</value>
+    <value>{0} 专有信息</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_2" xml:space="preserve">
     <value>启动顺序: CD/DVD - 网络 - 磁盘</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
-    <value>[XenServer] 平台信息</value>
+    <value>{0} 平台信息</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
     <value>虚拟 GPU 信息</value>
@@ -158,9 +158,6 @@
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_7" xml:space="preserve">
     <value>非易失性随机存取内存</value>
-  </data>
-  <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
-    <value>仅限 [XenServer] 安装后操作(尝试修复 Linux 发行版。)</value>
   </data>
   <data name="RASD_10_ALLOCATIONUNITS" xml:space="preserve">
     <value>端口</value>
@@ -293,11 +290,5 @@
   </data>
   <data name="VSSD_CAPTION" xml:space="preserve">
     <value>Xen 虚拟机</value>
-  </data>
-  <data name="XENSERVER_PLATFORM_DESCRIPTION" xml:space="preserve">
-    <value>[XenServer] 平台配置项目</value>
-  </data>
-  <data name="XENSERVER_SPECIFIC_DESCRIPTION" xml:space="preserve">
-    <value>[XenServer] 专有配置项目</value>
   </data>
 </root>
