@@ -36,6 +36,7 @@ using System.Text;
 using System.Threading;
 using DiscUtils;
 using DiscUtils.Vhd;
+using XenAdmin.Core;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
@@ -219,6 +220,9 @@ namespace XenAdmin.Actions.OvfActions
 
             #region ADD XEN SPECIFICS
 
+            var hypervisorInfo = string.Format(OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"), BrandManager.ProductBrand);
+            var platformInfo = string.Format(OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"), BrandManager.ProductBrand);
+
             var _params = vm.HVM_boot_params;
             if (_params != null && _params.Count > 0)
             {
@@ -232,13 +236,14 @@ namespace XenAdmin.Actions.OvfActions
 
             if (vm.HVM_shadow_multiplier != 1.0)
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_shadow_multiplier", Convert.ToString(vm.HVM_shadow_multiplier), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_shadow_multiplier", Convert.ToString(vm.HVM_shadow_multiplier), hypervisorInfo);
             }
 
             var platform = vm.platform;
             if (platform != null && platform.Count > 0)
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", string.Join(";", platform.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", string.Join(";",
+                    platform.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value))), platformInfo);
             }
 
             var nvram = vm.NVRAM;
@@ -249,48 +254,48 @@ namespace XenAdmin.Actions.OvfActions
 
             if (!string.IsNullOrEmpty(vm.PV_args))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_args", vm.PV_args, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_args", vm.PV_args, hypervisorInfo);
             }
 
             if (!string.IsNullOrEmpty(vm.PV_bootloader))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_bootloader", vm.PV_bootloader, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_bootloader", vm.PV_bootloader, hypervisorInfo);
             }
 
             if (!string.IsNullOrEmpty(vm.PV_bootloader_args))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_bootloader_args", vm.PV_bootloader_args, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_bootloader_args", vm.PV_bootloader_args, hypervisorInfo);
             }
 
             if (!string.IsNullOrEmpty(vm.PV_kernel))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_kernel", vm.PV_kernel, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_kernel", vm.PV_kernel, hypervisorInfo);
             }
 
             if (!string.IsNullOrEmpty(vm.PV_legacy_args))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_legacy_args", vm.PV_legacy_args, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_legacy_args", vm.PV_legacy_args, hypervisorInfo);
             }
 
             if (!string.IsNullOrEmpty(vm.PV_ramdisk))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_ramdisk", vm.PV_ramdisk, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_ramdisk", vm.PV_ramdisk, hypervisorInfo);
             }
 
             if (vm.hardware_platform_version >= 0)
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "hardware_platform_version", vm.hardware_platform_version.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "hardware_platform_version", vm.hardware_platform_version.ToString(), hypervisorInfo);
             }
 
             if (!string.IsNullOrEmpty(vm.recommendations))
             {
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "recommendations", vm.recommendations.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "recommendations", vm.recommendations, hypervisorInfo);
             }
 
             if (vm.has_vendor_device)
             {
                 //serialise it with a different name to avoid it being deserialised automatically and getting the wrong type
-                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "VM_has_vendor_device", vm.has_vendor_device.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                OVF.AddOtherSystemSettingData(ovfEnv, vsId, "VM_has_vendor_device", vm.has_vendor_device.ToString(), hypervisorInfo);
             }
 
             foreach (XenRef<VGPU> gpuRef in vm.VGPUs)

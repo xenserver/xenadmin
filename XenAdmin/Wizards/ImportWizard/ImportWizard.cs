@@ -249,7 +249,7 @@ namespace XenAdmin.Wizards.ImportWizard
                     m_pageVMconfig.CpuCount, m_pageVMconfig.Memory,
                     m_pageBootOptions.BootParams, m_pageBootOptions.PlatformSettings,
                     m_pageImportSource.DiskCapacity, m_pageImportSource.IsWIM, m_pageVMconfig.AdditionalSpace,
-                    m_pageImportSource.FilePath, m_pageImportSource.ImageLength);
+                    m_pageImportSource.FilePath, m_pageImportSource.ImageLength, BrandManager.ProductBrand);
 
 				m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
 			    lunPerVdiMappingPage.SelectedOvfEnvelope = m_envelopeFromVhd;

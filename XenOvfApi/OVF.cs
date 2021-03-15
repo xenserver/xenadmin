@@ -1392,7 +1392,7 @@ namespace XenOvf
 
         public static EnvelopeType CreateOvfEnvelope(string vmName, ulong cpuCount, ulong memory,
             string bootParams, string platformSettings, ulong diskCapacity, bool isWim, ulong additionalSpace,
-            string diskPath, ulong imageLength)
+            string diskPath, ulong imageLength, string productBrand)
         {
             EnvelopeType env = CreateEnvelope(vmName);
             string systemID = AddVirtualSystem(env, vmName);
@@ -1407,7 +1407,8 @@ namespace XenOvf
             AddOtherSystemSettingData(env, systemID, "HVM_boot_params", bootParams, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
 
             var platformSetting = Properties.Settings.Default.xenPlatformSetting + platformSettings;
-            AddOtherSystemSettingData(env, systemID, "platform", platformSetting, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+            AddOtherSystemSettingData(env, systemID, "platform", platformSetting,
+                string.Format(GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"), productBrand));
 
             SetCPUs(env, systemID, cpuCount);
             SetMemory(env, systemID, memory, "MB");
@@ -4515,9 +4516,9 @@ namespace XenOvf
         }
 
         /// <returns>string of the InstanceID of the CDROM RASD</returns>
-        public static string SetRunOnceBootCDROMOSFixup(EnvelopeType ovfObj, string vsId, string ovfPath)
+        public static string SetRunOnceBootCDROMOSFixup(EnvelopeType ovfObj, string vsId, string ovfPath, string productBrand)
         {
-            return SetRunOnceBootCDROM(ovfObj, vsId, ovfPath, Properties.Settings.Default.xenLinuxFixUpDisk);
+            return SetRunOnceBootCDROM(ovfObj, vsId, ovfPath, Properties.Settings.Default.xenLinuxFixUpDisk, productBrand);
         }
         /// <summary>
         /// Add an ISO as a run-once device
@@ -4527,9 +4528,9 @@ namespace XenOvf
         /// <param name="ovfPath">Path to ovf</param>
         /// <param name="isofilename">fullpath/filename of iso to attach</param>
         /// <returns>string of the InstanceID of the CDROM RASD</returns>
-		public static string SetRunOnceBootCDROM(EnvelopeType ovfObj, string vsId, string ovfPath, string isofilename)
+		public static string SetRunOnceBootCDROM(EnvelopeType ovfObj, string vsId, string ovfPath, string isofilename, string productBrand)
         {
-            return SetRunOnceBootCDROM(ovfObj, vsId, Properties.Settings.Default.Language, ovfPath, isofilename);
+            return SetRunOnceBootCDROM(ovfObj, vsId, Properties.Settings.Default.Language, ovfPath, isofilename, productBrand);
         }
         /// <summary>
         /// Add an ISO as a run-once device
@@ -4540,7 +4541,7 @@ namespace XenOvf
         /// <param name="ovfPath">Path to ovf</param>
         /// <param name="isofilename">fullpath/filename of iso to attach</param>
         /// <returns>string of the InstanceID of the CDROM RASD</returns>
-		public static string SetRunOnceBootCDROM(EnvelopeType ovfObj, string vsId, string lang, string ovfPath, string isofilename)
+		public static string SetRunOnceBootCDROM(EnvelopeType ovfObj, string vsId, string lang, string ovfPath, string isofilename, string productBrand)
         {
             //
             // @TODO Need to check if Fixup CD is already attached and just need to add to vsid.
@@ -4595,11 +4596,11 @@ namespace XenOvf
                 {
                     AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
                     AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_params", "dnc", _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
-                    AddOtherSystemSettingData(ovfObj, vsId, "platform", Properties.Settings.Default.xenPlatformSetting, _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
+                    AddOtherSystemSettingData(ovfObj, vsId, "platform", Properties.Settings.Default.xenPlatformSetting,
+                        string.Format(GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"), productBrand));
                 }
                 else
                 {
-                    List<Xen_ConfigurationSettingData_Type> newCSD = new List<Xen_ConfigurationSettingData_Type>();
                     foreach (Xen_ConfigurationSettingData_Type csd in vhs.VirtualSystemOtherConfigurationData)
                     {
                         if (csd.Name.ToLower().Equals("hvm_boot_params"))
