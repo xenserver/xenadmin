@@ -106,7 +106,7 @@ namespace XenAdmin.Dialogs
                         ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                     {WindowTitle = Messages.MESSAGEBOX_CONFIRM})
                 {
-                    if (dialog.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                    if (dialog.ShowDialog(Program.MainWindow) != DialogResult.Yes)
                         return;
                 }
 
