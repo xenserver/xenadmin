@@ -86,6 +86,7 @@ namespace XenAdmin.Dialogs
             : base(host.Connection)
         {
             InitializeComponent();
+            labelMasterBlurb.Text = string.Format(labelMasterBlurb.Text, BrandManager.BrandConsole);
 
             this.elevatedUsername = elevatedUserName;
             this.elevatedPassword = elevatedPassword;
@@ -880,9 +881,9 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = string.Format(vm.HasNewVirtualisationStates()
-                            ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT
-                            : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = vm.HasNewVirtualisationStates()
+                            ? string.Format(Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT, message)
+                            : string.Format(Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message, BrandManager.VmTools);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
@@ -890,7 +891,7 @@ namespace XenAdmin.Dialogs
                         // Otherwise go with the server and just say they aren't installed
                         error = !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
-                            : Messages.PV_DRIVERS_NOT_INSTALLED;
+                            : string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
                         break;
                 }
 

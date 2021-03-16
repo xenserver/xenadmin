@@ -52,6 +52,7 @@ namespace XenAdmin.SettingsPanels
         {
             InitializeComponent();
 
+            CPSOptimizationRadioButton.Text = string.Format(CPSOptimizationRadioButton.Text, BrandManager.CompanyNameShort);
             Text = Messages.ADVANCED_OPTIONS;
 
             m_invalidParamToolTip = new ToolTip

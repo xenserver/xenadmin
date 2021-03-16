@@ -67,7 +67,9 @@ namespace XenAdmin.Actions
 
         public StatusReportClientSideAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
             : base(null,
-                includeClientLogs ? Messages.BUGTOOL_CLIENT_ACTION_LOGS_META : Messages.BUGTOOL_CLIENT_ACTION_META,
+                includeClientLogs
+                    ? string.Format(Messages.BUGTOOL_CLIENT_ACTION_LOGS_META, BrandManager.BrandConsole)
+                    : string.Format(Messages.BUGTOOL_CLIENT_ACTION_META, BrandManager.BrandConsole),
                 filePath, timeString)
         {
             this.hosts = hosts;

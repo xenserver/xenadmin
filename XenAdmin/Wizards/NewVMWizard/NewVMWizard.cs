@@ -308,7 +308,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)
         {
             if (connection != null && connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled() || h.DesktopCloudFeaturesEnabled()))
-                ShowInformationMessage(Helpers.GetPool(connection) != null ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER);
+            {
+                var format = Helpers.GetPool(connection) != null
+                    ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL
+                    : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER;
+                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameShort));
+            }
             else
                 HideInformationMessage();
         }

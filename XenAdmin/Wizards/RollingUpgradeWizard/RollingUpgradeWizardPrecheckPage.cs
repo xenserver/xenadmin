@@ -166,7 +166,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (latestCrVersion != null &&
                 hostsToUpgradeOrUpdate.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
             {
-                groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
+                groups.Add(new CheckGroup(string.Format(Messages.CHECKING_XENCENTER_VERSION, BrandManager.BrandConsole),
+                    new List<Check> {new XenCenterVersionCheck(null)}));
             }
 
             //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated

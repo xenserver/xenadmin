@@ -208,7 +208,7 @@ namespace XenAdmin.XenSearch
                 {
                     var master = pool.Connection.Resolve(pool.master);
 
-                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText()),
+                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, master.ProductVersionText()),
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,

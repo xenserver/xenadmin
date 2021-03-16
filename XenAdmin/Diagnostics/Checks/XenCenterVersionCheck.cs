@@ -55,14 +55,8 @@ namespace XenAdmin.Diagnostics.Checks
                 return new XenCenterVersionWarning(this, requiredXenCenterVersion);
         }
 
-        public override string Description
-        {
-            get { return Messages.XENCENTER_VERSION_CHECK_DESCRIPTION; }
-        }
+        public override string Description => string.Format(Messages.XENCENTER_VERSION_CHECK_DESCRIPTION, BrandManager.BrandConsole);
 
-        public override IXenObject XenObject
-        {
-            get { return null; }
-        }
+        public override IXenObject XenObject => null;
     }
 }

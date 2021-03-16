@@ -32,6 +32,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -45,10 +46,16 @@ namespace XenAdmin.Dialogs
         public PasswordsRequestDialog()
         {
             InitializeComponent();
-
+            label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
             bool requirePass = Properties.Settings.Default.RequirePass;
             OKAlwaysButton.Enabled = !requirePass;
             tableLayoutPanel2.Visible = requirePass;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = BrandManager.BrandConsole;
         }
 
         public string Application

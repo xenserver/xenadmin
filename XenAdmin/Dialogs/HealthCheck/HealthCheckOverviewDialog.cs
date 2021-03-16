@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -47,11 +46,12 @@ namespace XenAdmin.Dialogs.HealthCheck
     public partial class HealthCheckOverviewDialog : XenDialogBase
     {
 
-        internal override string HelpName { get { return "HealthCheckOverviewDialog"; } }
+        internal override string HelpName => "HealthCheckOverviewDialog";
 
         public HealthCheckOverviewDialog()
         {
             InitializeComponent();
+            rubricLabel.Text = string.Format(rubricLabel.Text, BrandManager.Cis, BrandManager.ProductBrand);
             Core.HealthCheck.CheckForAnalysisResultsCompleted += HealthCheck_CheckForUpdatesCompleted;
         }
 

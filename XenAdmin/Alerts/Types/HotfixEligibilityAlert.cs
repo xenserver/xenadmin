@@ -59,7 +59,7 @@ namespace XenAdmin.Alerts.Types
                     return string.Empty;
 
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING,
-                    Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : BrandManager.LegacyProduct,
+                    Helpers.NaplesOrGreater(Connection) ? BrandManager.ProductBrand : BrandManager.LegacyProduct,
                     Helpers.GetMaster(Connection)?.ProductVersionText());
                 var unlicensed = pool.IsFreeLicenseOrExpired();
 
@@ -105,7 +105,7 @@ namespace XenAdmin.Alerts.Types
 
                 var versionText = Helpers.GetMaster(Connection)?.ProductVersionText();
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING, 
-                    Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : BrandManager.LegacyProduct,
+                    Helpers.NaplesOrGreater(Connection) ? BrandManager.ProductBrand : BrandManager.LegacyProduct,
                     versionText);
                 var unlicensed = pool.IsFreeLicenseOrExpired();
 

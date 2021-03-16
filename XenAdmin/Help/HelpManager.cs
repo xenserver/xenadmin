@@ -59,7 +59,7 @@ namespace XenAdmin.Help
 
                 HelpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY,
                     $"{BrandManager.XenCenterVersion}.{Program.Version.Revision}".Replace('.', '_'),
-                    Messages.XENCENTER);
+                    BrandManager.BrandConsole);
             }
         }
 

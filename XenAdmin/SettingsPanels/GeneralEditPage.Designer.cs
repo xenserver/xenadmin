@@ -87,7 +87,6 @@ namespace XenAdmin.SettingsPanels
             // txtDescription
             // 
             resources.ApplyResources(this.txtDescription, "txtDescription");
-            this.txtDescription.MinimumSize = new System.Drawing.Size(4, 50);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.TextChanged += new System.EventHandler(this.AnyTextChanged);
             // 
@@ -125,7 +124,6 @@ namespace XenAdmin.SettingsPanels
             // 
             this.txtDescrReadOnly.AutoEllipsis = true;
             resources.ApplyResources(this.txtDescrReadOnly, "txtDescrReadOnly");
-            this.txtDescrReadOnly.MinimumSize = new System.Drawing.Size(0, 50);
             this.txtDescrReadOnly.Name = "txtDescrReadOnly";
             // 
             // labelTitle

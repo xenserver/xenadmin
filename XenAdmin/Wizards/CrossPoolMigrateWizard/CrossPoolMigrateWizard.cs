@@ -514,7 +514,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             if (check())
                 return true;
-            ShowErrorMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
+            ShowErrorMessageBox(string.Format(Messages.CPM_WIZARD_VM_MISSING_ERROR, BrandManager.BrandConsole));
             return false;
         }
 

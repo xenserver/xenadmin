@@ -35,6 +35,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -43,6 +44,7 @@ namespace XenAdmin.Dialogs
     {
         private bool closedFromButton;
         private string helpName = "DefaultHelpTopic";
+        private string _windowTitle = BrandManager.BrandConsole;
 
         /// <summary>
         /// Gives you a dialog with the specified buttons.
@@ -97,9 +99,16 @@ namespace XenAdmin.Dialogs
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = _windowTitle;
+        }
+
         public string WindowTitle
         {
-            set => Text = string.IsNullOrEmpty(value) ? Messages.XENCENTER : value;
+            get => _windowTitle;
+            set => _windowTitle = string.IsNullOrEmpty(value) ? BrandManager.BrandConsole : value;
         }
 
         public bool ShowLinkLabel

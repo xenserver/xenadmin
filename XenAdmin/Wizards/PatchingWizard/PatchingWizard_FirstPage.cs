@@ -29,10 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
-using System.Windows.Forms;
 using XenAdmin.Controls;
-using XenAdmin.Dialogs;
+using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -41,27 +39,13 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
+            label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
         }
 
-        public override string Text
-        {
-            get
-            {
-                return Messages.BEFORE_YOU_START;
-            }
-        }
+        public override string Text => Messages.BEFORE_YOU_START;
 
-        public override string  PageTitle
-        {
-            get
-            {
-                return Messages.BEFORE_YOU_START;
-            }
-        }
+        public override string  PageTitle => Messages.BEFORE_YOU_START;
 
-        public override string HelpID
-        {
-            get { return "Beforeyoustart"; }
-        }
+        public override string HelpID => "Beforeyoustart";
     }
 }

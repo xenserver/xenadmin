@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -53,6 +52,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageDestination()
         {
             InitializeComponent();
+            uploadCheckBox.Text = string.Format(uploadCheckBox.Text, BrandManager.Cis);
         }
 
         public override string Text => Messages.BUGTOOL_PAGE_DESTINATION_TEXT;
@@ -91,7 +91,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             else
                 m_textBoxLocation.Text = initialDirectory;
 
-            string enterCredentialsMessage = string.Format(Messages.STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE, Messages.MY_CITRIX_CREDENTIALS_URL);
+            string enterCredentialsMessage = string.Format(Messages.STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE,
+                Messages.MY_CITRIX_CREDENTIALS_URL, BrandManager.Cis);
             enterCredentialsLinkLabel.Text = enterCredentialsMessage;
             enterCredentialsLinkLabel.LinkArea = new LinkArea(enterCredentialsMessage.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL), Messages.MY_CITRIX_CREDENTIALS_URL.Length);
 

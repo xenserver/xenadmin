@@ -898,7 +898,7 @@
     <value>5</value>
   </data>
   <data name="decentGroupBox1.Text" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services</value>
+    <value>Authentication with {0}</value>
   </data>
   <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
     <value>decentGroupBox1</value>
@@ -940,7 +940,7 @@
     <value>0</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>Health Check will automatically upload a server status report to [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pool.</value>
+    <value>Health Check will automatically upload a server status report to {0}, based on a predefined schedule configured on your {1} pool.</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>
@@ -1144,7 +1144,7 @@
     <value>0</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Enter the credentials the Health Check Service will use to connect to [XenServer].</value>
+    <value>Enter the credentials the Health Check Service will use to connect to {0}.</value>
   </data>
   <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1303,13 +1303,13 @@
     <value>3, 24</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 19</value>
+    <value>182, 19</value>
   </data>
   <data name="currentXsCredentialsRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
-    <value>Use the cu&amp;rrent [XenCenter] credentials</value>
+    <value>Use the cu&amp;rrent {0} credentials</value>
   </data>
   <data name="&gt;&gt;currentXsCredentialsRadioButton.Name" xml:space="preserve">
     <value>currentXsCredentialsRadioButton</value>
@@ -1438,7 +1438,7 @@
     <value>4</value>
   </data>
   <data name="decentGroupBoxXSCredentials.Text" xml:space="preserve">
-    <value>[XenServer] Credentials</value>
+    <value>{0} Credentials</value>
   </data>
   <data name="&gt;&gt;decentGroupBoxXSCredentials.Name" xml:space="preserve">
     <value>decentGroupBoxXSCredentials</value>

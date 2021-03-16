@@ -38,7 +38,6 @@ using XenAdmin.Core;
 using XenAPI;
 using System.IO;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using XenAdmin.Alerts;
 using System.Linq;
 using System.Xml;
@@ -65,6 +64,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_SelectPatchPage()
         {
             InitializeComponent();
+
+            labelWithAutomatedUpdates.Text = string.Format(labelWithAutomatedUpdates.Text, BrandManager.CompanyNameShort);
+            labelWithoutAutomatedUpdates.Text = string.Format(labelWithoutAutomatedUpdates.Text, BrandManager.CompanyNameShort);
+            automatedUpdatesOptionLabel.Text = string.Format(automatedUpdatesOptionLabel.Text, BrandManager.BrandConsole, BrandManager.CompanyNameShort);
+            downloadUpdateRadioButton.Text = string.Format(downloadUpdateRadioButton.Text, BrandManager.CompanyNameShort);
+
             tableLayoutPanelSpinner.Visible = false;
 
             labelWithAutomatedUpdates.Visible =
@@ -402,7 +407,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             row.Enabled = false;
                             row.SetToolTip(string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED,
-                                patchAlert.RequiredXenCenterVersion.Version));
+                                BrandManager.BrandConsole, patchAlert.RequiredXenCenterVersion.Version));
                         }
                     }
                 }

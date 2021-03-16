@@ -28,7 +28,6 @@ set -u
 
 GLOBAL_BUILD_NUMBER=$1
 
-ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 version_cpp()
@@ -54,23 +53,13 @@ rebranding_global()
         -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
         -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
+        -e "s#0\.0\.0#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
-        -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
-		-e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
+        -e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
         $1
-}
-
-RESX_rebranding()
-{
-  for resx in $1
-  do
-    rebranding_global ${resx}.resx
-    rebranding_global ${resx}.zh-CN.resx
-    rebranding_global ${resx}.ja.resx
-  done
 }
 
 #splace rebranding
@@ -86,24 +75,13 @@ do
   version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
 done
 
-#XenAdmin controls
-XENADMIN_RESXS=$(/usr/bin/find ${REPO}/XenAdmin -name \*.resx)
-for XENADMIN_RESX in ${XENADMIN_RESXS}
-do
-    rebranding_global ${XENADMIN_RESX}
-done
-#xenadmin resouces
-RESX_rebranding "${REPO}/XenAdmin/Properties/Resources"
 rebranding_global ${REPO}/XenAdmin/app.config
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 
 #XenModel
 rebranding_global ${REPO}/Branding/Branding.resx
-RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
-rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
 
 #XenOvfApi rebranding
-RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
 rebranding_global ${REPO}/XenOvfApi/app.config
 
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
@@ -113,8 +91,8 @@ sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
           -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \
           -e "s/@COMPANY_NAME_SHORT@/${BRANDING_COMPANY_NAME_SHORT}/g" \
           -e "s/@BRAND_CONSOLE@/${BRANDING_BRAND_CONSOLE}/g" \
-		  -e "s/@BRAND_CONSOLE_NO_SPACE@/${BRANDING_BRAND_CONSOLE_NO_SPACE}/g" \
-		  -e "s/@BRAND_CONSOLE_SHORT@/${BRANDING_BRAND_CONSOLE_SHORT}/g" \
+          -e "s/@BRAND_CONSOLE_NO_SPACE@/${BRANDING_BRAND_CONSOLE_NO_SPACE}/g" \
+          -e "s/@BRAND_CONSOLE_SHORT@/${BRANDING_BRAND_CONSOLE_SHORT}/g" \
           -e "s/@PRODUCT_BRAND@/${BRANDING_PRODUCT_BRAND}/g" \
     ${REPO}/WixInstaller/branding.wxi
 

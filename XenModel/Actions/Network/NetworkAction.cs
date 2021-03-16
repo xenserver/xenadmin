@@ -275,7 +275,7 @@ namespace XenAdmin.Actions
         {
             Host host = Helpers.GetMaster(Connection);
             if (host == null)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_MASTER_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole));
             Pool.create_VLAN_from_PIF(Session, pif.opaque_ref, network_ref, vlan);
         }
 

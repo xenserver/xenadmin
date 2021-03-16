@@ -30,9 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
 namespace XenAdmin.Plugins
@@ -42,27 +40,28 @@ namespace XenAdmin.Plugins
         public TabPageCredentialsDialog()
         {
             InitializeComponent();
+            PersistCredentialsCheckBox.Text = string.Format(PersistCredentialsCheckBox.Text, BrandManager.ProductBrand);
         }
 
         public string ServiceName
         {
-            set { TopLabel.Text = string.Format(TopLabel.Text, value); }
+            set => TopLabel.Text = string.Format(TopLabel.Text, value);
         }
 
         public bool PersistCredentials
         {
-            get { return PersistCredentialsCheckBox.Checked; }
-            set { PersistCredentialsCheckBox.Checked = value; }
+            get => PersistCredentialsCheckBox.Checked;
+            set => PersistCredentialsCheckBox.Checked = value;
         }
 
-        public string Username
-        {
-            get { return UsernameTextBox.Text; }
-        }
+        public string Username => UsernameTextBox.Text;
 
-        public string Password
+        public string Password => PasswordTextBox.Text;
+
+        protected override void OnLoad(EventArgs e)
         {
-            get { return PasswordTextBox.Text; }
+            base.OnLoad(e);
+            Text = BrandManager.BrandConsole;
         }
     }
 }

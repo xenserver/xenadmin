@@ -126,7 +126,7 @@
     <value>3, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 13</value>
+    <value>319, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -224,7 +224,7 @@
     <value>6</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Ensure that you are logged in to [XenCenter] as a Pool Administrator or Pool Operator, or using a local root account.</value>
+    <value>Ensure that you are logged in to {0} as a Pool Administrator or Pool Operator, or using a local root account.</value>
   </data>
   <data name="label9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

@@ -46,6 +46,7 @@ namespace XenAdmin.Controls.Ballooning
         public VMMemoryControlsBasic()
         {
             InitializeComponent();
+            linkInstallTools.Text = string.Format(linkInstallTools.Text, BrandManager.VmTools);
         }
         
         protected override void Populate()
@@ -105,9 +106,9 @@ namespace XenAdmin.Controls.Ballooning
                         else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                             labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates()
                                 ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT_PLURAL
-                                : Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL;
+                                : string.Format(Messages.DMC_UNAVAILABLE_NOTOOLS_PLURAL, BrandManager.VmTools);
                         else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_OLDTOOLS_PLURAL;
+                            labelDMCUnavailable.Text = string.Format(Messages.DMC_UNAVAILABLE_OLDTOOLS_PLURAL, BrandManager.VmTools);
                         else
                             labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
                     }
@@ -130,9 +131,9 @@ namespace XenAdmin.Controls.Ballooning
                     else if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         labelDMCUnavailable.Text = vm0.HasNewVirtualisationStates()
                             ? Messages.DMC_UNAVAILABLE_NO_IO_NO_MGMNT
-                            : Messages.DMC_UNAVAILABLE_NOTOOLS;
+                            : string.Format(Messages.DMC_UNAVAILABLE_NOTOOLS, BrandManager.VmTools);
                     else if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                            labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_OLDTOOLS;
+                            labelDMCUnavailable.Text = string.Format(Messages.DMC_UNAVAILABLE_OLDTOOLS, BrandManager.VmTools);
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VM;
                     
@@ -142,8 +143,8 @@ namespace XenAdmin.Controls.Ballooning
 
             if (linkInstallTools.Visible)
                 linkInstallTools.Text = vms.All(v => Helpers.StockholmOrGreater(v.Connection))
-                    ? Messages.INSTALLTOOLS_READ_MORE
-                    : Messages.INSTALL_XENSERVER_TOOLS;
+                    ? string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools)
+                    : string.Format(Messages.INSTALL_XENSERVER_TOOLS, BrandManager.VmTools);
 
             // Spinners
             FreeSpinnerRanges();

@@ -42,6 +42,8 @@ namespace XenAdmin.Core
 
         public static readonly string BrandConsole = Get("BRAND_CONSOLE");
 
+        public static readonly string Cis = Get("CIS");
+
         public static readonly string CompanyNameLegal = Get("COMPANY_NAME_LEGAL");
 
         public static readonly string CompanyNameShort = Get("COMPANY_NAME_SHORT");
@@ -61,8 +63,6 @@ namespace XenAdmin.Core
         public static readonly string ProductBrand = Get("PRODUCT_BRAND");
 
         public static readonly string ProductBrandWithCompany = Get("PRODUCT_BRAND_WITH_COMPANY");
-
-        public static readonly string ProductServer = Get("PRODUCT_SERVER");
 
         public static readonly string ProductVersion56 = Get("PRODUCT_VERSION_5_6");
 

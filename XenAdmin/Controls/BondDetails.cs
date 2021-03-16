@@ -259,7 +259,7 @@ namespace XenAdmin.Controls
                 }
 
                 DialogResult dialogResult;
-                using (var dlg = new WarningDialog(Messages.BOND_CREATE_WILL_DISTURB_PRIMARY,
+                using (var dlg = new WarningDialog(string.Format(Messages.BOND_CREATE_WILL_DISTURB_PRIMARY, BrandManager.BrandConsole),
                     new ThreeButtonDialog.TBDButton(Messages.BOND_CREATE_CONTINUE, DialogResult.OK),
                     ThreeButtonDialog.ButtonCancel)
                 {

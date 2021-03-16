@@ -723,15 +723,16 @@ namespace XenAPI
                         && guestMetrics.PV_drivers_version.ContainsKey("major")
                         && guestMetrics.PV_drivers_version.ContainsKey("minor"))
                     {
-                        return String.Format(Messages.PV_DRIVERS_OUT_OF_DATE, String.Format("{0}.{1}",
-                            guestMetrics.PV_drivers_version["major"],
-                            guestMetrics.PV_drivers_version["minor"]));
+                        return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE, BrandManager.VmTools,
+                            guestMetrics.PV_drivers_version["major"], guestMetrics.PV_drivers_version["minor"]);
                     }
-                    else
-                        return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
+                    
+                    return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION, BrandManager.VmTools);
             }
 
-            return HasNewVirtualisationStates() ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
+            return HasNewVirtualisationStates()
+                ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED
+                : string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
         }
 
         /// <summary>
@@ -780,7 +781,7 @@ namespace XenAPI
                 else if (lessThanTwoMin)
                     flags = VirtualisationStatus.UNKNOWN;
                 else
-                    friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
+                    friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
 
                 return flags;
             }
@@ -790,7 +791,7 @@ namespace XenAPI
                     return VirtualisationStatus.UNKNOWN;
                 else
                 {
-                    friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
+                    friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
                     return VirtualisationStatus.NOT_INSTALLED;
                 }
 

@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Core;
@@ -53,46 +52,23 @@ namespace XenAdmin.SettingsPanels
 
         private readonly ToolTip InvalidParamToolTip;
 
-        public bool ValidToSave
-        {
-            get { return _ValidToSave; }
-        }
+        public bool ValidToSave => _ValidToSave;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName
         {
-            set
-            {
-                this.txtName.Text = value;
-            }
-            get
-            {
-                return this.txtName.Text.Trim();
-            }
+            set => txtName.Text = value;
+            get => txtName.Text.Trim();
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectDescription
-        {
-            get
-            {
-                return saveDescription
-                           ? txtDescription.Text
-                           : txtDescrReadOnly.Text;
-            }
-        }
+        public string ObjectDescription => saveDescription ? txtDescription.Text : txtDescrReadOnly.Text;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ServerIQN
         {
-            set
-            {
-                this.txtIQN.Text = value;
-            }
-            get
-            {
-                return this.txtIQN.Text.Trim();
-            }
+            set => txtIQN.Text = value;
+            get => txtIQN.Text.Trim();
         }
 
         private TagsEditor tagsEditor;
@@ -126,6 +102,7 @@ namespace XenAdmin.SettingsPanels
         public GeneralEditPage()
         {
             InitializeComponent();
+            labelTitle.Text = string.Format(labelTitle.Text, BrandManager.BrandConsole);
 
             Text = Messages.NAME_DESCRIPTION_TAGS;
 
@@ -217,13 +194,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        private bool FolderChanged
-        {
-            get
-            {
-                return folderEditor.Path != xenObjectCopy.Path;
-            }
-        }
+        private bool FolderChanged => folderEditor.Path != xenObjectCopy.Path;
 
         private bool TagsChanged
         {
@@ -326,13 +297,6 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        public String SubText
-        {
-            get
-            {
-                return txtName.Text;
-            }
-        }
-
+        public string SubText => txtName.Text;
     }
 }

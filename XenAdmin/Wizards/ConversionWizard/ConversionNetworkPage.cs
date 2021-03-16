@@ -30,11 +30,10 @@
  */
 
 
-using System.Collections.Generic;
-using System.Windows.Forms;
+using System;
+using XenAdmin.Core;
 using XenAdmin.XCM;
 using XenAdmin.Wizards.GenericPages;
-using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.ConversionWizard
@@ -48,7 +47,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         public override string Text => Messages.CONVERSION_NETWORK_PAGE_TEXT;
 
-        public override string PageTitle => Messages.CONVERSION_NETWORK_PAGE_TITLE;
+        public override string PageTitle => String.Format(Messages.CONVERSION_NETWORK_PAGE_TITLE, BrandManager.ProductBrand);
 
         public override string HelpID => "NetworkOptions";
 

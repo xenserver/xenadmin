@@ -46,6 +46,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeExtrasPage()
         {
             InitializeComponent();
+            applyUpdatesLabel.Text = string.Format(applyUpdatesLabel.Text, BrandManager.BrandConsole);
+            label4.Text = string.Format(label4.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
         }
 
         #region XenTabPage overrides
@@ -115,21 +117,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             set { fileNameTextBox.Text = value; }
         }
 
-        public bool ApplySuppPackAfterUpgrade
-        {
-            get
-            {
-                return checkBoxInstallSuppPack.Checked;
-            }
-        }
+        public bool ApplySuppPackAfterUpgrade => checkBoxInstallSuppPack.Checked;
 
-        public bool ApplyUpdatesToNewVersion
-        {
-            get
-            {
-                return applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
-            }
-        }
+        public bool ApplyUpdatesToNewVersion => applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {

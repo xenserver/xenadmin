@@ -43,6 +43,12 @@ namespace XenAdmin.Dialogs.OptionsPages
         public UpdatesOptionsPage()
         {
             InitializeComponent();
+            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
+            XenServerGroupBox.Text = string.Format(XenServerGroupBox.Text, BrandManager.ProductBrand);
+            XenCenterGroupBox.Text = string.Format(XenCenterGroupBox.Text, BrandManager.BrandConsole);
+            AllowXenServerPatchesCheckBox.Text = string.Format(AllowXenServerPatchesCheckBox.Text, BrandManager.ProductBrand);
+            AllowXenServerUpdatesCheckBox.Text = string.Format(AllowXenServerUpdatesCheckBox.Text, BrandManager.ProductBrand);
+            AllowXenCenterUpdatesCheckBox.Text = string.Format(AllowXenCenterUpdatesCheckBox.Text, BrandManager.BrandConsole);
         }
 
         #region IOptionsPage Members
@@ -91,7 +97,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public override string Text => Messages.UPDATES;
 
-        public string SubText => Messages.UPDATES_DESC;
+        public string SubText => string.Format(Messages.UPDATES_DESC, BrandManager.ProductBrand, BrandManager.BrandConsole);
 
         public Image Image => Images.StaticImages._000_Patch_h32bit_16;
 

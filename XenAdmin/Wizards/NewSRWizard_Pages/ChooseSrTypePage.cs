@@ -73,7 +73,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         {
             if(visible)
             {
-                deprecationBanner.AppliesToVersion = string.Format(Messages.XENSERVER_6_5, BrandManager.ProductVersion65);
+                deprecationBanner.AppliesToVersion = string.Format(Messages.STRING_SPACE_STRING,
+                    BrandManager.LegacyProduct, BrandManager.ProductVersion65);
                 deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
                 deprecationBanner.FeatureName = Messages.ISL_SR;
                 deprecationBanner.LinkUri = HiddenFeatures.LinkLabelHidden ? null : new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
@@ -255,7 +256,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     SRBlurb.Visible = false;
                     upsellPage1.Visible = true;
                     upsellPage1.BlurbText = Messages.UPSELL_BLURB_ENHANCEDSR;
-                    upsellPage1.LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL;
                     m_allowNext = false;
                 }
                 else

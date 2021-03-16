@@ -30,8 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Alerts
@@ -43,51 +42,21 @@ namespace XenAdmin.Alerts
             _timestamp = DateTime.Now;
         }
 
-        public override AlertPriority Priority { get { return AlertPriority.Priority5; } }
+        public override AlertPriority Priority => AlertPriority.Priority5;
 
-        public override string AppliesTo
-        {
-            get
-            {
-                return Messages.XENCENTER;
-            }
-        }
+        public override string AppliesTo => BrandManager.BrandConsole;
 
-        public override string Description
-        {
-            get
-            {
-                return Messages.NEWER_GUI_AVAILABLE;
-            }
-        }
+        public override string Description => string.Format(Messages.NEWER_GUI_AVAILABLE, BrandManager.BrandConsole);
 
         public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(InvisibleMessages.OUT_OF_DATE_WEBSITE); }
         }
 
-        public override string FixLinkText
-        {
-            get
-            {
-                return Messages.ALERT_NEW_VERSION_DOWNLOAD;
-            }
-        }
+        public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
 
-        public override string HelpID
-        {
-            get
-            {
-                return "GuiOldAlert";
-            }
-        }
+        public override string HelpID => "GuiOldAlert";
 
-        public override string Title
-        {
-            get
-            {
-                return Messages.XENCENTER_NEWER_AVAILABLE;
-            }
-        }
+        public override string Title => string.Format(Messages.XENCENTER_NEWER_AVAILABLE, BrandManager.BrandConsole);
     }
 }

@@ -47,6 +47,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.NameTextBox, "NameTextBox");
             this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // label1
             // 

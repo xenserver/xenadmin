@@ -142,7 +142,7 @@ namespace XenAdmin.Dialogs
             else if (!_VM.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                 labelQuiesceInfo.Text = _VM.HasNewVirtualisationStates()
                     ? Messages.INFO_QUIESCE_MODE_NO_MGMNT
-                    : Messages.INFO_QUIESCE_MODE_NO_TOOLS;
+                    : string.Format(Messages.INFO_QUIESCE_MODE_NO_TOOLS, BrandManager.VmTools);
             else
                 labelQuiesceInfo.Text = Messages.INFO_QUIESCE_MODE; // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
 
@@ -151,7 +151,9 @@ namespace XenAdmin.Dialogs
             else if (_VM.power_state != vm_power_state.Running)
                 labelCheckpointInfo.Text = Messages.INFO_DISKMEMORY_MODE_POWER_STATE;
             else if (!_VM.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                labelCheckpointInfo.Text = (_VM.HasNewVirtualisationStates() ? Messages.INFO_DISKMEMORY_MODE_NO_IO_DRIVERS : Messages.INFO_DISKMEMORY_MODE_NO_TOOLS);
+                labelCheckpointInfo.Text = _VM.HasNewVirtualisationStates()
+                    ? Messages.INFO_DISKMEMORY_MODE_NO_IO_DRIVERS
+                    : string.Format(Messages.INFO_DISKMEMORY_MODE_NO_TOOLS, BrandManager.VmTools);
             else
                 labelCheckpointInfo.Text = Messages.INFO_DISKMEMORY_MODE_MISC;
         }

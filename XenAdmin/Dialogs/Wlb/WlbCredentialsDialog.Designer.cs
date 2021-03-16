@@ -28,7 +28,6 @@ namespace XenAdmin.Dialogs.Wlb
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WlbCredentialsDialog));
             this.textboxWLBPort = new System.Windows.Forms.TextBox();
             this.LabelWLBServerPort = new System.Windows.Forms.Label();
@@ -58,7 +57,6 @@ namespace XenAdmin.Dialogs.Wlb
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
             this.decentGroupBoxWLBServerAddress.SuspendLayout();
             this.decentGroupBoxWLBCredentials.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -260,15 +258,6 @@ namespace XenAdmin.Dialogs.Wlb
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // imageListIcons
-            // 
-            this.imageListIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListIcons.ImageStream")));
-            this.imageListIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListIcons.Images.SetKeyName(0, "WlbServer");
-            this.imageListIcons.Images.SetKeyName(1, "XenServer");
-            this.imageListIcons.Images.SetKeyName(2, "LeftArrow");
-            this.imageListIcons.Images.SetKeyName(3, "RightArrow");
-            // 
             // WlbCredentialsDialog
             // 
             this.AcceptButton = this.buttonOK;
@@ -321,7 +310,6 @@ namespace XenAdmin.Dialogs.Wlb
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ImageList imageListIcons;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;

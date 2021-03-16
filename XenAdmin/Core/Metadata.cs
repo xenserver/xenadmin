@@ -158,7 +158,7 @@ namespace XenAdmin.Core
                     Connected = ConnectionsManager.XenConnectionsCopy.Count(c => c.IsConnected)
                 },
                 Plugins = new List<Plugin>(),
-                SourceOfData = isForXenCenter ? Messages.XENCENTER : Messages.HEALTH_CHECK,
+                SourceOfData = isForXenCenter ? BrandManager.BrandConsole : Messages.HEALTH_CHECK,
                 Created = DateTime.UtcNow.ToString("u"),
                 Reported = isForXenCenter ? DateTime.UtcNow.ToString("u") : HealthCheckSettings.REPORT_TIME_PLACEHOLDER
             };
@@ -176,7 +176,7 @@ namespace XenAdmin.Core
                 }
             }
 
-            var obj = new Dictionary<string, object> {{Messages.XENCENTER, metadata}};
+            var obj = new Dictionary<string, object> {{BrandManager.BrandConsole, metadata}};
             return new JavaScriptSerializer().Serialize(obj);
         }
 
