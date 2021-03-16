@@ -879,7 +879,7 @@ namespace XenAdmin.Network
                 // This happens if the server API is incompatible with our bindings.  This should
                 // never happen in production, but will happen during development if a field
                 // changes type, for example.
-                return Messages.SERVER_API_INCOMPATIBLE;
+                return string.Format(Messages.SERVER_API_INCOMPATIBLE, BrandManager.BrandConsole);
             }
             else if (error is WebException)
             {
@@ -2006,7 +2006,8 @@ namespace XenAdmin.Network
 
     public class ServerNotSupported : DisconnectionException
     {
-        public override string Message => string.Format(Messages.SERVER_TOO_OLD, BrandManager.ProductVersion70);
+        public override string Message => string.Format(Messages.SERVER_TOO_OLD,
+            BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion70);
     }
 
     public class ConnectionExists : DisconnectionException

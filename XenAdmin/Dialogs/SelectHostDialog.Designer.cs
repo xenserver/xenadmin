@@ -45,9 +45,11 @@ namespace XenAdmin.Dialogs
             this.poolHostPicker1.FormattingEnabled = true;
             this.poolHostPicker1.Name = "poolHostPicker1";
             this.poolHostPicker1.NodeIndent = 19;
+            this.poolHostPicker1.RootAlwaysExpanded = false;
             this.poolHostPicker1.ShowCheckboxes = false;
             this.poolHostPicker1.ShowDescription = true;
             this.poolHostPicker1.ShowImages = true;
+            this.poolHostPicker1.ShowRootLines = true;
             // 
             // connectbutton
             // 

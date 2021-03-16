@@ -218,7 +218,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             var pool = Helpers.GetPool(host.Connection);
             if (WizardMode != WizardMode.NewVersion && pool != null && !pool.IsPoolFullyUpgraded()) //partially upgraded pool is not supported
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED;
+                tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED, BrandManager.ProductBrand);
                 return false;
             }
 
@@ -234,7 +234,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 tooltipText = versionSupportsAutomatedUpdates
                     ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE
-                    : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
+                    : string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION, BrandManager.ProductBrand);
                 return false;
             }
 
@@ -357,7 +357,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (0 < nonApplicables && nonApplicables < host.Connection.Cache.Hosts.Length)
                     {
-                        tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST;
+                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST, BrandManager.BrandConsole);
                         return false;
                     }
                 }

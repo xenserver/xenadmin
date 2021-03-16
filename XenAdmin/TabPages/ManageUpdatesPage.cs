@@ -811,7 +811,7 @@ namespace XenAdmin.TabPages
 
             if (alert is XenServerUpdateAlert updateAlert && updateAlert.RequiredXenCenterVersion != null)
             {
-                var downloadNewXenCenter = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER);
+                var downloadNewXenCenter = new ToolStripMenuItem(string.Format(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER, BrandManager.BrandConsole));
                 downloadNewXenCenter.Click += ToolStripMenuItemDownloadNewXenCenter_Click;
                 items.Add(downloadNewXenCenter);
             }

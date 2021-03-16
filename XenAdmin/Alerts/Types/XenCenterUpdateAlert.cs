@@ -54,7 +54,8 @@ namespace XenAdmin.Alerts
 
         public override string Title => string.Format(Messages.ALERT_NEW_VERSION, NewVersion.Name);
 
-        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name);
+        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS,
+            NewVersion.Name, BrandManager.CompanyNameShort);
 
         public override Action FixLinkAction
         {
@@ -63,7 +64,7 @@ namespace XenAdmin.Alerts
 
         public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
 
-        public override string AppliesTo => Messages.XENCENTER;
+        public override string AppliesTo => BrandManager.BrandConsole;
 
         public override string HelpID => "XenCenterUpdateAlert";
 

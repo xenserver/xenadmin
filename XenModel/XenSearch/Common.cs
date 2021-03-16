@@ -207,7 +207,7 @@ namespace XenAdmin.XenSearch
             VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
 
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
-            ObjectTypes_i18n[Messages.XENSERVER_TEMPLATES] = ObjectTypes.DefaultTemplate;
+            ObjectTypes_i18n[string.Format(Messages.XENSERVER_TEMPLATES, BrandManager.ProductBrand)] = ObjectTypes.DefaultTemplate;
             ObjectTypes_i18n[Messages.CUSTOM_TEMPLATES] = ObjectTypes.UserTemplate;
             ObjectTypes_i18n[Messages.POOLS] = ObjectTypes.Pool;
             ObjectTypes_i18n[Messages.SERVERS] = ObjectTypes.Server;

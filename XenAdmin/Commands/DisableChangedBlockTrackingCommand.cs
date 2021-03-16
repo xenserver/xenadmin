@@ -120,36 +120,18 @@ namespace XenAdmin.Commands
                 selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }
 
-        public override string MenuText
-        {
-            get { return Messages.MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING; }
-        }
+        public override string MenuText => Messages.MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING;
 
-        protected override bool ConfirmationRequired
-        {
-            get { return true; }
-        }
+        protected override bool ConfirmationRequired => true;
 
-        protected override string ConfirmationDialogText
-        {
-            get
-            {
-                return GetSelection().Count == 1 ? Messages.CONFIRM_DISABLE_CBT_VM : Messages.CONFIRM_DISABLE_CBT_VMS;
-            }
-        }
+        protected override string ConfirmationDialogText => GetSelection().Count == 1
+            ? string.Format(Messages.CONFIRM_DISABLE_CBT_VM, BrandManager.BrandConsole)
+            : string.Format(Messages.CONFIRM_DISABLE_CBT_VMS, BrandManager.BrandConsole);
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return GetSelection().Count == 1 ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name()) :
-                                                   Messages.CONFIRM_DISABLE_CBT_VMS_TITLE;
-            }
-        }
+        protected override string ConfirmationDialogTitle => GetSelection().Count == 1
+                ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name())
+                : Messages.CONFIRM_DISABLE_CBT_VMS_TITLE;
 
-        protected override string ConfirmationDialogHelpId
-        {
-            get { return "WarningVmDisableChangedBlockTracking"; }
-        }
+        protected override string ConfirmationDialogHelpId => "WarningVmDisableChangedBlockTracking";
     }
 }

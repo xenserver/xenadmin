@@ -175,7 +175,7 @@
     <value>9</value>
   </data>
   <data name="applyUpdatesLabel.Text" xml:space="preserve">
-    <value>Choose whether you want [XenCenter] to automatically download and install all the released updates after the selected pools are upgraded. Please note that internet connection is required for this option.</value>
+    <value>Choose whether you want {0} to automatically download and install all the released updates after the selected pools are upgraded. Please note that internet connection is required for this option.</value>
   </data>
   <data name="&gt;&gt;applyUpdatesLabel.Name" xml:space="preserve">
     <value>applyUpdatesLabel</value>
@@ -379,13 +379,13 @@
     <value>3, 0, 3, 3</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 39</value>
+    <value>504, 39</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Choose whether you want [XenCenter] to install an update or supplemental pack from disk after the selected pools are upgraded. Please note that installation will fail if a file incompatible with the [XenServer] version you have upgraded to is selected.</value>
+    <value>Choose whether you want {0} to install an update or supplemental pack from disk after the selected pools are upgraded. Please note that installation will fail if a file incompatible with the {1} version you have upgraded to is selected.</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>

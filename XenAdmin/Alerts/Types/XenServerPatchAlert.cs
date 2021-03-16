@@ -128,7 +128,7 @@ namespace XenAdmin.Alerts
                 if (RequiredXenCenterVersion != null)
                 {
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.PATCH_NEEDS_NEW_XENCENTER, RequiredXenCenterVersion.Version);
+                    sb.AppendFormat(Messages.PATCH_NEEDS_NEW_XENCENTER, BrandManager.BrandConsole, RequiredXenCenterVersion.Version);
                 }
                 return sb.ToString();
             }

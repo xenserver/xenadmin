@@ -33,6 +33,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Network;
@@ -68,7 +69,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             if (direction == PageLoadedDirection.Back)
                 return;
 
-            using (var dlg = new WarningDialog(Messages.SRIOV_NETWORK_CREATE_WARNING,
+            using (var dlg = new WarningDialog(string.Format(Messages.SRIOV_NETWORK_CREATE_WARNING, BrandManager.BrandConsole),
                 new ThreeButtonDialog.TBDButton(Messages.SRIOV_NETWORK_CREATE, DialogResult.OK),
                 ThreeButtonDialog.ButtonCancel))
             {

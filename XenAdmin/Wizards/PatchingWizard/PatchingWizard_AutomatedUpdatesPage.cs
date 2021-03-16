@@ -78,9 +78,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string BlurbText()
         {
-            return WizardMode == WizardMode.AutomatedUpdates
-                ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
-                : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+            return string.Format(WizardMode == WizardMode.AutomatedUpdates
+                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
+                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE,
+                BrandManager.BrandConsole);
         }
 
         protected override string SuccessMessageOnCompletion(bool multiplePools)

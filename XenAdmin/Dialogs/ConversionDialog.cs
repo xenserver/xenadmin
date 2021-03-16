@@ -297,10 +297,10 @@ namespace XenAdmin.Dialogs
                         result.CompareTo(ConversionVpxMinimumSupportedVersion) < 0)
                     {
                         statusLabel.Image = Images.StaticImages._000_error_h32bit_16;
-                        statusLabel.Text = Messages.CONVERSION_VERSION_INCOMPATIBILITY;
+                        statusLabel.Text = string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY, BrandManager.BrandConsole);
                         statusLinkLabel.Reset(Messages.MORE_INFO, () =>
                         {
-                            using (var dlog = new NoIconDialog(string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY_INFO, BrandManager.ProductVersion70)))
+                            using (var dlog = new NoIconDialog(string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY_INFO, BrandManager.ProductVersion70, BrandManager.ProductBrand)))
                             {
                                 dlog.ShowDialog(this);
                             }

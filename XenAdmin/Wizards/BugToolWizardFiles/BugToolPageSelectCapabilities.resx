@@ -556,13 +556,13 @@
     <value>3, 409</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 13</value>
+    <value>110, 13</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
-    <value>[Citrix] Privacy Statement</value>
+    <value>{0} Privacy Statement</value>
   </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>

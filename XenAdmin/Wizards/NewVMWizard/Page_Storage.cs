@@ -216,7 +216,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 if (suggestedSr != null)
                 {
-                    sb.AppendLine(Messages.NEWVMWIZARD_STORAGEPAGE_XC_SELECTION);
+                    sb.AppendLine(string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_XC_SELECTION, BrandManager.BrandConsole));
                     tooltip = sb.ToString();
                     icon = Images.StaticImages._000_Alert2_h32bit_16;
                 }
@@ -237,7 +237,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     if (suggestedSr != null || defaultSr != null)
                     {
-                        sb.AppendLine(Messages.NEWVMWIZARD_STORAGEPAGE_XC_SELECTION);
+                        sb.AppendLine(string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_XC_SELECTION, BrandManager.BrandConsole));
                         tooltip = sb.ToString();
                         icon = Images.StaticImages._000_Alert2_h32bit_16;
                     }

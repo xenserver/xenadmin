@@ -145,13 +145,13 @@
     <value>3, 0, 3, 10</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 26</value>
+    <value>407, 26</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>You can configure [XenCenter] to display the warnings issued when validating the OVF/OVA packages you want to import.</value>
+    <value>You can configure {0} to display the warnings issued when validating the OVF/OVA packages you want to import.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -181,13 +181,13 @@
     <value>3, 0, 3, 10</value>
   </data>
   <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 26</value>
+    <value>417, 26</value>
   </data>
   <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>You can configure [XenCenter] to display a warning whenever you dismiss one or more alerts, updates, or events on the 'Notifications' view.</value>
+    <value>You can configure {0} to display a warning whenever you dismiss one or more alerts, updates, or events on the 'Notifications' view.</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>

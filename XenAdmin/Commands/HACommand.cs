@@ -265,14 +265,14 @@ namespace XenAdmin.Commands
             Pool pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
 
             if (pool == null)
-                return Messages.POOL_GONE;
+                return string.Format(Messages.POOL_GONE, BrandManager.BrandConsole);
 
             if (!pool.IsVisible())
                 return Messages.HA_STANDALONE_SERVER;
  
             Host master = Helpers.GetMaster(pool.Connection);
             if (master == null)
-                return Messages.POOL_MASTER_GONE;
+                return string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole);
 
             if (pool.Locked)
                 return Messages.POOL_EDIT_IN_PROGRESS;

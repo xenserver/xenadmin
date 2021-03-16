@@ -36,6 +36,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -81,7 +82,7 @@ namespace XenAdmin.Controls.Ballooning
 
             // A bar for Xen memory
             double left = (double)barArea.Left;
-            DrawSegment(g, xen_memory - dom0_memory, bytesPerPixel, Messages.MEMORY_XEN, null, BallooningColors.HostShinyBar_Xen, ref left);
+            DrawSegment(g, xen_memory - dom0_memory, bytesPerPixel, BrandManager.ProductBrand, null, BallooningColors.HostShinyBar_Xen, ref left);
 
             // A bar for Dom0 memory
             DrawSegment(g, dom0_memory, bytesPerPixel, string.Format(Messages.CONTROL_DOM_ON_HOST, host.Name()), null, BallooningColors.HostShinyBar_ControlDomain, ref left);

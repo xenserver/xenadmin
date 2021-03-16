@@ -709,7 +709,7 @@ namespace XenAdmin.Wizards
                     if (m_srWizardType.ShowIntroducePrompt)
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(string.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID),
+                        using (var dlg = new WarningDialog(string.Format(Messages.NEWSR_MULTI_POOL_WARNING, BrandManager.BrandConsole, m_srWizardType.UUID),
                                 ThreeButtonDialog.ButtonYes,
                                 new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Text})
@@ -726,7 +726,7 @@ namespace XenAdmin.Wizards
                     if (m_srWizardType.ShowReattachWarning)
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(string.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name()),
+                        using (var dlg = new WarningDialog(string.Format(Messages.NEWSR_MULTI_POOL_WARNING, BrandManager.BrandConsole, _srToReattach.Name()),
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
                             {WindowTitle = Text})
@@ -746,7 +746,7 @@ namespace XenAdmin.Wizards
                     // Warn user SR is already attached to other pool, and then introduce to this pool 
 
                     DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name(), Helpers.GetName(xenConnection), Text),
+                        using (var dlg = new WarningDialog(string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name(), Helpers.GetName(xenConnection), Text, BrandManager.BrandConsole),
                         ThreeButtonDialog.ButtonOK,
                         ThreeButtonDialog.ButtonCancel))
                         {
@@ -770,7 +770,8 @@ namespace XenAdmin.Wizards
 
             if (xenTabPageChooseSrType.MatchingFrontends <= 0)
             {
-                using (var dlg = new ErrorDialog(string.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE,
+                    _srToReattach.type, BrandManager.BrandConsole)))
                     dlg.ShowDialog(this);
 
                 Close();

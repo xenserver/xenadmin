@@ -81,7 +81,9 @@ namespace XenAdmin.Commands
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.AddExtension = true;
-                dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*", Messages.XS_BACKUP_FILES, BrandManager.ExtensionBackup, Messages.ALL_FILES);
+                dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*",
+                    string.Format(Messages.XS_BACKUP_FILES, BrandManager.ProductBrand),
+                    BrandManager.ExtensionBackup, Messages.ALL_FILES);
                 dialog.FilterIndex = 0;
                 dialog.RestoreDirectory = true;
                 dialog.DefaultExt = BrandManager.ExtensionBackup;

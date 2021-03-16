@@ -1258,7 +1258,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Health Check analysis result from [Citrix] Insight Services.
+        ///   Looks up a localized string similar to Get Health Check analysis result from {0}.
         /// </summary>
         public static string ACTION_GET_HEALTH_CHECK_RESULT {
             get {
@@ -1366,7 +1366,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services.
+        ///   Looks up a localized string similar to Authentication with {0}.
         /// </summary>
         public static string ACTION_HEALTHCHECK_AUTHENTICATION {
             get {
@@ -1375,7 +1375,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authenticating with [Citrix] Insight Services.
+        ///   Looks up a localized string similar to Authenticating with {0}.
         /// </summary>
         public static string ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS {
             get {
@@ -2707,7 +2707,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload server status report to [Citrix] Insight Services.
+        ///   Looks up a localized string similar to Upload server status report to {0}.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
             get {
@@ -2725,7 +2725,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services ({0} of {1}).
+        ///   Looks up a localized string similar to Uploading report to {0} ({1} of {2}).
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE {
             get {
@@ -2734,7 +2734,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services.
+        ///   Looks up a localized string similar to Uploading report to {0}.
         /// </summary>
         public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
             get {
@@ -3706,20 +3706,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is unable to contact the activation server.
-        ///
-        ///If you are not currently connected to the internet, we can save
-        ///the activation request to a file, for you to upload at a later date.
-        ///
-        ///To use this file, visit https://{0}..
-        /// </summary>
-        public static string ACTIVATION_FAILED_MESSAGE {
-            get {
-                return ResourceManager.GetString("ACTIVATION_FAILED_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Saved activation request to {0}..
         /// </summary>
         public static string ACTIVATION_REQUEST_SAVED {
@@ -4076,7 +4062,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please wait while [XenCenter] establishes your current external authentication configuration..
+        ///   Looks up a localized string similar to Please wait while {0} establishes your current external authentication configuration..
         /// </summary>
         public static string AD_MASTER_UNAVAILABLE_BLURB {
             get {
@@ -4375,7 +4361,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that is using older CPUs.
         ///
-        ///[XenServer] can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+        ///{1} can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -4390,7 +4376,7 @@ namespace XenAdmin {
         ///
         ///{0}
         ///
-        ///[XenServer] can continue by rebooting the servers and reducing their CPUs to the level of the existing servers in the pool. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+        ///{1} can continue by rebooting the servers and reducing their CPUs to the level of the existing servers in the pool. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -4667,7 +4653,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed..
+        ///   Looks up a localized string similar to {0} can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed..
         /// </summary>
         public static string ADDSERVER_PASS_NEW {
             get {
@@ -4823,7 +4809,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk usage for the Control Domain on {0} has reached {1}. [XenServer]&apos;s performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed..
+        ///   Looks up a localized string similar to Disk usage for the Control Domain on {0} has reached {1}. {2}&apos;s performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed..
         /// </summary>
         public static string ALERT_ALARM_FILESYSTEM_DESCRIPTION {
             get {
@@ -5067,7 +5053,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the new version from the [Citrix] website..
+        ///   Looks up a localized string similar to {0} is now available. Download the new version from the {1} website..
         /// </summary>
         public static string ALERT_NEW_VERSION_DETAILS {
             get {
@@ -5240,7 +5226,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The SR &apos;{0}&apos; is currently attached elsewhere. Do you want to attach it to &apos;{1}&apos;? 
         ///
-        ///Warning: you must ensure that the SR is not in use by any server not connected to [XenCenter]. Failure to do so may result in data loss..
+        ///Warning: you must ensure that the SR is not in use by any server not connected to {2}. Failure to do so may result in data loss..
         /// </summary>
         public static string ALREADY_ATTACHED_ELSEWHERE {
             get {
@@ -5633,7 +5619,7 @@ namespace XenAdmin {
         ///
         ///- Ensure automated updates are not restricted on any hosts in the pool.
         ///
-        ///- Deselect the updates application checkbox on the previous page. [XenCenter] will upgrade the selected servers to the new version without applying any updates..
+        ///- Deselect the updates application checkbox on the previous page. {0} will upgrade the selected servers to the new version without applying any updates..
         /// </summary>
         public static string AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO {
             get {
@@ -6014,9 +6000,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Creating this bond will automatically move the management interface on one of your selected bond members to the bond itself:
         ///
-        ///- [XenCenter] connections to the pool will temporarily be disturbed
+        ///- {0} connections to the pool will temporarily be disturbed
         ///
-        ///- If your network configuration is incorrect then [XenCenter] may permanently lose the connection to the pool, or pool members may be unable to contact each other..
+        ///- If your network configuration is incorrect then {0} may permanently lose the connection to the pool, or pool members may be unable to contact each other..
         /// </summary>
         public static string BOND_CREATE_WILL_DISTURB_PRIMARY {
             get {
@@ -6060,11 +6046,11 @@ namespace XenAdmin {
         ///
         ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
         ///
-        ///- [XenCenter] connections to the pool will temporarily be disturbed
+        ///- {1} connections to the pool will temporarily be disturbed
         ///
         ///- Traffic through the secondary interface will be disrupted
         ///
-        ///- If your network configuration is incorrect then [XenCenter] may permanently lose the connection to the pool, or pool members may be unable to contact each other..
+        ///- If your network configuration is incorrect then {1} may permanently lose the connection to the pool, or pool members may be unable to contact each other..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_BOTH {
             get {
@@ -6077,9 +6063,9 @@ namespace XenAdmin {
         ///
         ///Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
         ///
-        ///- [XenCenter] connections to the pool will temporarily be disturbed
+        ///- {1} connections to the pool will temporarily be disturbed
         ///
-        ///- If your network configuration is incorrect then [XenCenter] may permanently lose the connection to the pool, or pool members may be unable to contact each other..
+        ///- If your network configuration is incorrect then {1} may permanently lose the connection to the pool, or pool members may be unable to contact each other..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_PRIMARY {
             get {
@@ -6099,7 +6085,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the bond in [XenCenter]&apos;s cache..
+        ///   Looks up a localized string similar to Could not find the bond in {0}&apos;s cache..
         /// </summary>
         public static string BOND_GONE {
             get {
@@ -6108,7 +6094,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the bond master in [XenCenter]&apos;s cache..
+        ///   Looks up a localized string similar to Could not find the bond master in {0}&apos;s cache..
         /// </summary>
         public static string BOND_MASTER_GONE {
             get {
@@ -6171,7 +6157,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Tools ISO is on a broken SR, [XenCenter] will attempt to fix it before proceeding. Do you want to continue?.
+        ///   Looks up a localized string similar to Your Tools ISO is on a broken SR, {0} will attempt to fix it before proceeding. Do you want to continue?.
         /// </summary>
         public static string BROKEN_TOOLS_PROMPT {
             get {
@@ -6180,7 +6166,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compiling [XenCenter] logs and metadata.
+        ///   Looks up a localized string similar to Compiling {0} logs and metadata.
         /// </summary>
         public static string BUGTOOL_CLIENT_ACTION_LOGS_META {
             get {
@@ -6189,7 +6175,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compiling [XenCenter] metadata.
+        ///   Looks up a localized string similar to Compiling {0} metadata.
         /// </summary>
         public static string BUGTOOL_CLIENT_ACTION_META {
             get {
@@ -6198,7 +6184,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] logs and metadata.
+        ///   Looks up a localized string similar to {0} logs and metadata.
         /// </summary>
         public static string BUGTOOL_CLIENT_LOGS_META {
             get {
@@ -6207,7 +6193,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] metadata.
+        ///   Looks up a localized string similar to {0} metadata.
         /// </summary>
         public static string BUGTOOL_CLIENT_META {
             get {
@@ -6551,7 +6537,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install [Citrix VM Tools] on VM &apos;{0}&apos; before you can activate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install {0} on VM &apos;{1}&apos; before you can activate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS {
             get {
@@ -6659,7 +6645,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must install [Citrix VM Tools] on VM &apos;{0}&apos; before you can deactivate this virtual disk for the VM..
+        ///   Looks up a localized string similar to You must install {0} on VM &apos;{1}&apos; before you can deactivate this virtual disk for the VM..
         /// </summary>
         public static string CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS {
             get {
@@ -6705,7 +6691,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] templates cannot be deleted..
+        ///   Looks up a localized string similar to {0} templates cannot be deleted..
         /// </summary>
         public static string CANNOT_DELETE_DEFAULT_TEMPLATE {
             get {
@@ -6777,7 +6763,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting the [Citrix VM Tools] ISO storage is not supported..
+        ///   Looks up a localized string similar to Deleting the {0} ISO storage is not supported..
         /// </summary>
         public static string CANNOT_DELETE_TOOLS_SR {
             get {
@@ -6849,7 +6835,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot configure an SR of type &apos;{0}&apos; using [XenCenter]..
+        ///   Looks up a localized string similar to You cannot configure an SR of type &apos;{0}&apos; using {1}..
         /// </summary>
         public static string CANNOT_FIND_SR_WIZARD_TYPE {
             get {
@@ -7189,15 +7175,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert [XenServer] CD.
-        /// </summary>
-        public static string CHANGE_SERVER_CD {
-            get {
-                return ResourceManager.GetString("CHANGE_SERVER_CD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Change Server Password....
         /// </summary>
         public static string CHANGE_SERVER_PASSWORD {
@@ -7269,7 +7246,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed [XenCenter] master password.
+        ///   Looks up a localized string similar to Changed {0} master password.
         /// </summary>
         public static string CHANGED_MASTER_PASSWORD {
             get {
@@ -7278,7 +7255,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed [XenCenter] master password for session restore.
+        ///   Looks up a localized string similar to Changed {0} master password for session restore.
         /// </summary>
         public static string CHANGED_MASTER_PASSWORD_LONG {
             get {
@@ -7566,7 +7543,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking [XenCenter] version.
+        ///   Looks up a localized string similar to Checking {0} version.
         /// </summary>
         public static string CHECKING_XENCENTER_VERSION {
             get {
@@ -7728,7 +7705,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to for use with Common Criteria versions of [XenServer] only.
+        ///   Looks up a localized string similar to {0}: for use with Common Criteria versions of {1} only.
         /// </summary>
         public static string COMMON_CRITERIA_TEXT {
             get {
@@ -8132,7 +8109,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. If you are using any third-party solutions to back up the VM, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?.
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. If you are using any third-party solutions to back up the VM, they might be affected. Note that Changed Block Tracking cannot be enabled again from {0}. Do you want to continue?.
         /// </summary>
         public static string CONFIRM_DISABLE_CBT_VM {
             get {
@@ -8150,7 +8127,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?.
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from {0}. Do you want to continue?.
         /// </summary>
         public static string CONFIRM_DISABLE_CBT_VMS {
             get {
@@ -8447,7 +8424,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on the selected servers? Note that [XenCenter] will temporarily lose connection to them..
+        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on the selected servers? Note that {0} will temporarily lose connection to them..
         /// </summary>
         public static string CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS {
             get {
@@ -8456,7 +8433,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on &apos;{0}&apos;? Note that [XenCenter] will temporarily lose connection to the server..
+        ///   Looks up a localized string similar to Are you sure you want to restart the toolstack on &apos;{0}&apos;? Note that {1} will temporarily lose connection to the server..
         /// </summary>
         public static string CONFIRM_RESTART_TOOLSTACK_ONE_SERVER {
             get {
@@ -9594,7 +9571,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, select [XenServer] networks to connect the VMs.
+        ///   Looks up a localized string similar to Optionally, select {0} networks to connect the VMs.
         /// </summary>
         public static string CONVERSION_NETWORK_PAGE_TITLE {
             get {
@@ -9884,7 +9861,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is incompatible with this version of the Conversion Manager virtual appliance..
+        ///   Looks up a localized string similar to {0} is incompatible with this version of the Conversion Manager virtual appliance..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY {
             get {
@@ -9893,7 +9870,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version..
+        ///   Looks up a localized string similar to The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your {1} version..
         /// </summary>
         public static string CONVERSION_VERSION_INCOMPATIBILITY_INFO {
             get {
@@ -10698,7 +10675,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected VMs are no longer available in [XenCenter]&apos;s cache. Please verify your selection is valid and relaunch the wizard..
+        ///   Looks up a localized string similar to The selected VMs are no longer available in {0}&apos;s cache. Please verify your selection is valid and relaunch the wizard..
         /// </summary>
         public static string CPM_WIZARD_VM_MISSING_ERROR {
             get {
@@ -11764,7 +11741,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs without [Citrix VM Tools].
+        ///   Looks up a localized string similar to VMs without {0}.
         /// </summary>
         public static string DEFAULT_SEARCH_VMS_WO_XS_TOOLS {
             get {
@@ -13006,7 +12983,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because [Citrix VM Tools] are not installed on this VM..
+        ///   Looks up a localized string similar to A memory range cannot be set because {0} are not installed on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_NOTOOLS {
             get {
@@ -13015,7 +12992,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because [Citrix VM Tools] are not installed on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because {0} are not installed on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_NOTOOLS_PLURAL {
             get {
@@ -13042,7 +13019,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because [Citrix VM Tools] are out of date on this VM..
+        ///   Looks up a localized string similar to A memory range cannot be set because {0} are out of date on this VM..
         /// </summary>
         public static string DMC_UNAVAILABLE_OLDTOOLS {
             get {
@@ -13051,7 +13028,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A memory range cannot be set because [Citrix VM Tools] are out of date on these VMs..
+        ///   Looks up a localized string similar to A memory range cannot be set because {0} are out of date on these VMs..
         /// </summary>
         public static string DMC_UNAVAILABLE_OLDTOOLS_PLURAL {
             get {
@@ -13411,7 +13388,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the latest at the [Citrix] website..
+        ///   Looks up a localized string similar to {0} is now available. Download the latest at the {1} website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {
@@ -14221,7 +14198,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Disaster Recovery is complete..
+        ///   Looks up a localized string similar to {0} Disaster Recovery is complete..
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER {
             get {
@@ -14275,7 +14252,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Disaster Recovery is in progress. This may take some time..
+        ///   Looks up a localized string similar to {0} Disaster Recovery is in progress. This may take some time..
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER {
             get {
@@ -14374,7 +14351,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Disaster Recovery progress.
+        ///   Looks up a localized string similar to {0} Disaster Recovery progress.
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER {
             get {
@@ -15161,7 +15138,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] has encountered a problem connecting to this server..
+        ///   Looks up a localized string similar to {0} has encountered a problem connecting to this server..
         /// </summary>
         public static string ERROR_CONNECTING_BLURB {
             get {
@@ -15719,7 +15696,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] has encountered a problem launching PuTTY..
+        ///   Looks up a localized string similar to A problem was encountered while launching PuTTY..
         /// </summary>
         public static string ERROR_PUTTY_LAUNCHING {
             get {
@@ -15836,7 +15813,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Install [Citrix VM Tools].
+        ///   Looks up a localized string similar to {0} Install {1}.
         /// </summary>
         public static string EVACUATE_HOST_INSTALL_TOOLS_PROMPT {
             get {
@@ -17700,7 +17677,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To view memory data for this VM, you need to install [Citrix VM Tools].
+        ///   Looks up a localized string similar to To view memory data for this VM, you need to install {0}.
         /// </summary>
         public static string GRAPH_NEEDS_TOOLS {
             get {
@@ -17855,7 +17832,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
+        ///   Looks up a localized string similar to Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}..
         /// </summary>
         public static string GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING {
             get {
@@ -17882,7 +17859,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
+        ///   Looks up a localized string similar to Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}..
         /// </summary>
         public static string GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING {
             get {
@@ -17918,7 +17895,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer]..
+        ///   Looks up a localized string similar to Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}..
         /// </summary>
         public static string GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING {
             get {
@@ -17936,9 +17913,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] can only connect to [XenServer] 8.2 and greater versions. It cannot connect to {0}.
+        ///   Looks up a localized string similar to This version of {0} can only connect to {1} {2} and greater versions. It cannot connect to {3}.
         ///
-        ///You can get a compatible version of {1} from the following location:.
+        ///You can get a compatible version of {4} from the following location:.
         /// </summary>
         public static string GUI_NOT_COMPATIBLE {
             get {
@@ -17947,9 +17924,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] is out of date and cannot connect to {0}.
+        ///   Looks up a localized string similar to This version of {0} is out of date and cannot connect to {1}.
         ///
-        ///You can get a compatible version of [XenCenter] from the following location:.
+        ///You can get a compatible version of {0} from the following location:.
         /// </summary>
         public static string GUI_OUT_OF_DATE {
             get {
@@ -18194,15 +18171,6 @@ namespace XenAdmin {
         public static string HA_DISABLE_QUERY {
             get {
                 return ResourceManager.GetString("HA_DISABLE_QUERY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] High Availability (HA) allows virtual machines to automatically be restarted in the event of an underlying hardware failure or loss of an individual server. HA is enabled for &apos;{0}&apos;..
-        /// </summary>
-        public static string HA_EDIT_DIALOG_BLURB {
-            get {
-                return ResourceManager.GetString("HA_EDIT_DIALOG_BLURB", resourceCulture);
             }
         }
         
@@ -18771,7 +18739,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services failed. See the application log files for more information..
+        ///   Looks up a localized string similar to Authentication with {0} failed. See the application log files for more information..
         /// </summary>
         public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
             get {
@@ -18807,7 +18775,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}..
+        ///   Looks up a localized string similar to The information that Health Check uploads to {0} will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the {0} Policy at {1} and {2} Privacy Policy at {3}..
         /// </summary>
         public static string HEALTH_CHECK_PRIVACY_POLICY {
             get {
@@ -18834,7 +18802,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. [XenCenter] detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
+        ///   Looks up a localized string similar to Authentication with {0} is required in order to enable this feature. {1} detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
             get {
@@ -18843,7 +18811,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with {0} is required in order to enable this feature. Please register by providing MyCitrix credentials (see {1}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
@@ -19212,7 +19180,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find host in [XenCenter]&apos;s cache..
+        ///   Looks up a localized string similar to Could not find host in {0}&apos;s cache..
         /// </summary>
         public static string HOST_GONE {
             get {
@@ -19266,7 +19234,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to [XenServer] {1} and above, the Control Domain memory on {0} will be increased. 
+        ///   Looks up a localized string similar to If you are upgrading to {0} {1} and above, the Control Domain memory on {2} will be increased. 
         ///
         ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
@@ -19306,7 +19274,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
+        ///   Looks up a localized string similar to The Control Domain memory on {0} will be increased when upgrading to {1} {2}. 
         ///
         ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
@@ -20418,7 +20386,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The [XenServer] Template that you are attempting to import already exists in the selected pool..
+        ///   Looks up a localized string similar to The {0} Template that you are attempting to import already exists in the selected pool..
         /// </summary>
         public static string IMPORT_TEMPLATE_ALREADY_EXISTS {
             get {
@@ -20913,7 +20881,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server version is incompatible with [XenCenter]..
+        ///   Looks up a localized string similar to This server version is incompatible with {0}..
         /// </summary>
         public static string INCOMPATIBLE_PRODUCTS {
             get {
@@ -20994,7 +20962,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk and memory snapshots need [Citrix VM Tools] to be installed.
+        ///   Looks up a localized string similar to Disk and memory snapshots need {0} to be installed.
         /// </summary>
         public static string INFO_DISKMEMORY_MODE_NO_TOOLS {
             get {
@@ -21030,7 +20998,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quiesced snapshots need [Citrix VM Tools] to be installed.
+        ///   Looks up a localized string similar to Quiesced snapshots need {0} to be installed.
         /// </summary>
         public static string INFO_QUIESCE_MODE_NO_TOOLS {
             get {
@@ -21174,7 +21142,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install [Citrix VM Tools].
+        ///   Looks up a localized string similar to Install {0}.
         /// </summary>
         public static string INSTALL_XENSERVER_TOOLS {
             get {
@@ -21183,7 +21151,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Install [Citrix VM Tools].
+        ///   Looks up a localized string similar to &amp;Install {0}.
         /// </summary>
         public static string INSTALL_XENSERVER_TOOLS_BUTTON {
             get {
@@ -21210,7 +21178,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the [Citrix VM Tools] install disk..
+        ///   Looks up a localized string similar to Could not find the {0} install disk..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_WIN {
             get {
@@ -21219,7 +21187,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] installation launched..
+        ///   Looks up a localized string similar to {0} installation launched..
         /// </summary>
         public static string INSTALLTOOLS_DONE {
             get {
@@ -21228,7 +21196,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] are already installed on this VM..
+        ///   Looks up a localized string similar to {0} are already installed on this VM..
         /// </summary>
         public static string INSTALLTOOLS_EXIST {
             get {
@@ -21237,7 +21205,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read more about installing [Citrix VM Tools].
+        ///   Looks up a localized string similar to Read more about installing {0}.
         /// </summary>
         public static string INSTALLTOOLS_READ_MORE {
             get {
@@ -21246,7 +21214,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Launching [Citrix VM Tools] installation..
+        ///   Looks up a localized string similar to Launching {0} installation..
         /// </summary>
         public static string INSTALLTOOLS_STARTING {
             get {
@@ -21255,7 +21223,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing [Citrix VM Tools] on VM {0}.
+        ///   Looks up a localized string similar to Installing {0} on VM {1}.
         /// </summary>
         public static string INSTALLTOOLS_TITLE {
             get {
@@ -21724,7 +21692,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Virtual &amp;Apps and Desktops.
+        ///   Looks up a localized string similar to {0} Virtual &amp;Apps and Desktops.
         /// </summary>
         public static string LICENSE_EDITION_DESKTOP {
             get {
@@ -21733,7 +21701,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops [Citrix] &amp;Cloud.
+        ///   Looks up a localized string similar to {0} Virtual Apps and Desktops {0} &amp;Cloud.
         /// </summary>
         public static string LICENSE_EDITION_DESKTOP_CLOUD {
             get {
@@ -21742,7 +21710,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] &amp;Cloud.
+        ///   Looks up a localized string similar to XenApp/XenDesktop {0} &amp;Cloud.
         /// </summary>
         public static string LICENSE_EDITION_DESKTOP_CLOUD_LEGACY {
             get {
@@ -21760,7 +21728,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Virtual Apps and Desktops &amp;Premium.
+        ///   Looks up a localized string similar to {0} Virtual Apps and Desktops &amp;Premium.
         /// </summary>
         public static string LICENSE_EDITION_DESKTOP_PLUS {
             get {
@@ -21778,7 +21746,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] P&amp;remium Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {0} P&amp;remium Per-Socket ({1} required).
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERSOCKET {
             get {
@@ -21787,7 +21755,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {1} E&amp;nterprise Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {0} E&amp;nterprise Per-Socket ({1} required).
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY {
             get {
@@ -21796,7 +21764,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Pr&amp;emium Per-User.
+        ///   Looks up a localized string similar to {0} Pr&amp;emium Per-User.
         /// </summary>
         public static string LICENSE_EDITION_ENTERPRISE_PERUSER {
             get {
@@ -21814,25 +21782,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Per-&amp;Socket ({0} required).
-        /// </summary>
-        public static string LICENSE_EDITION_PERSOCKET {
-            get {
-                return ResourceManager.GetString("LICENSE_EDITION_PERSOCKET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {1} Per-&amp;Socket ({0} required).
-        /// </summary>
-        public static string LICENSE_EDITION_PERSOCKET_LEGACY {
-            get {
-                return ResourceManager.GetString("LICENSE_EDITION_PERSOCKET_LEGACY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] &amp;Standard Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {0} &amp;Standard Per-Socket ({1} required).
         /// </summary>
         public static string LICENSE_EDITION_STANDARD_PERSOCKET {
             get {
@@ -21841,29 +21791,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {1} &amp;Standard Per-Socket ({0} required).
+        ///   Looks up a localized string similar to {0} &amp;Standard Per-Socket ({1} required).
         /// </summary>
         public static string LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY {
             get {
                 return ResourceManager.GetString("LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] for [Citrix] Virtual &amp;Desktops.
-        /// </summary>
-        public static string LICENSE_EDITION_XENDESKTOP {
-            get {
-                return ResourceManager.GetString("LICENSE_EDITION_XENDESKTOP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} for &amp;XenDesktop.
-        /// </summary>
-        public static string LICENSE_EDITION_XENDESKTOP_LEGACY {
-            get {
-                return ResourceManager.GetString("LICENSE_EDITION_XENDESKTOP_LEGACY", resourceCulture);
             }
         }
         
@@ -21954,15 +21886,6 @@ namespace XenAdmin {
         public static string LICENSE_EXPIRES_ONE_MIN {
             get {
                 return ResourceManager.GetString("LICENSE_EXPIRES_ONE_MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Online.
-        /// </summary>
-        public static string LICENSE_EXPIRY_PURCHACE {
-            get {
-                return ResourceManager.GetString("LICENSE_EXPIRY_PURCHACE", resourceCulture);
             }
         }
         
@@ -22084,7 +22007,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Servers must be selected one at a time when activating Express [XenServer]..
+        ///   Looks up a localized string similar to Servers must be selected one at a time when activating Express {0}..
         /// </summary>
         public static string LICENSE_NO_MULTISELECT_ACTIVATE {
             get {
@@ -22184,7 +22107,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///[Citrix] Virtual Apps and Desktops [Citrix] Cloud features enabled.
+        ///{0} Virtual Apps and Desktops {0} Cloud features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED {
             get {
@@ -22194,7 +22117,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///[Citrix] Virtual Apps and Desktops features enabled.
+        ///{0} Virtual Apps and Desktops features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
             get {
@@ -22204,7 +22127,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///[Citrix] Virtual Apps and Desktops Premium features enabled.
+        ///{0} Virtual Apps and Desktops Premium features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED {
             get {
@@ -22239,15 +22162,6 @@ namespace XenAdmin {
         public static string LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED {
             get {
                 return ResourceManager.GetString("LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activation keys can only be applied to one Express [XenServer] product at a time..
-        /// </summary>
-        public static string LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION {
-            get {
-                return ResourceManager.GetString("LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION", resourceCulture);
             }
         }
         
@@ -22320,24 +22234,6 @@ namespace XenAdmin {
         public static string LICENSE_YOUR_LICENCE_HAS_EXPIRED {
             get {
                 return ResourceManager.GetString("LICENSE_YOUR_LICENCE_HAS_EXPIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to One or more managed servers have expired. Either assign [XenServer] licenses, or activate Express [XenServer] products..
-        /// </summary>
-        public static string LICENSING_DIALOG_EXPIRED_TEXT {
-            get {
-                return ResourceManager.GetString("LICENSING_DIALOG_EXPIRED_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Express [XenServer] products..
-        /// </summary>
-        public static string LICENSING_DIALOG_EXPIRING_SOON_TEXT {
-            get {
-                return ResourceManager.GetString("LICENSING_DIALOG_EXPIRING_SOON_TEXT", resourceCulture);
             }
         }
         
@@ -22974,7 +22870,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The [XenServer] license on &apos;{0}&apos; will expire in {1}..
+        ///   Looks up a localized string similar to The {0} license on &apos;{1}&apos; will expire in {2}..
         /// </summary>
         public static string MAINWINDOW_EXPIRE_MESSAGE {
             get {
@@ -22983,7 +22879,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The [XenServer] license on &apos;{0}&apos; has expired..
+        ///   Looks up a localized string similar to The {0} license on &apos;{1}&apos; has expired..
         /// </summary>
         public static string MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE {
             get {
@@ -23100,7 +22996,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inst&amp;all [Citrix VM Tools]....
+        ///   Looks up a localized string similar to Inst&amp;all {0}....
         /// </summary>
         public static string MAINWINDOW_INSTALL_TOOLS {
             get {
@@ -23298,7 +23194,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remo&amp;ve from [XenCenter].
+        ///   Looks up a localized string similar to Remo&amp;ve from {0}.
         /// </summary>
         public static string MAINWINDOW_REMOVE_HOST {
             get {
@@ -23744,15 +23640,6 @@ namespace XenAdmin {
         public static string MEMORY_COLON {
             get {
                 return ResourceManager.GetString("MEMORY_COLON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer].
-        /// </summary>
-        public static string MEMORY_XEN {
-            get {
-                return ResourceManager.GetString("MEMORY_XEN", resourceCulture);
             }
         }
         
@@ -24317,7 +24204,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] - Error.
+        ///   Looks up a localized string similar to {0} - Error.
         /// </summary>
         public static string MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE {
             get {
@@ -24669,7 +24556,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more paths to at least one of your storages has failed. Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for information about configuring storage multipathing..
+        ///   Looks up a localized string similar to One or more paths to at least one of your storages has failed. Refer to the &quot;{0} Administrator&apos;s Guide&quot; for information about configuring storage multipathing..
         /// </summary>
         public static string MULTIPATH_FAILED {
             get {
@@ -25186,7 +25073,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then [XenCenter] may permanently lose the connection to the server.
+        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then {0} may permanently lose the connection to the server.
         ///
         ///You should only proceed if you have verified that these settings are correct..
         /// </summary>
@@ -25197,7 +25084,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then [XenCenter] may permanently lose the connection to the server, or pool members may be unable to contact each other.
+        ///   Looks up a localized string similar to You are reconfiguring the primary management interface.  If the new settings are incorrect then {0} may permanently lose the connection to the server, or pool members may be unable to contact each other.
         ///
         ///You should only proceed if you have verified that these settings are correct..
         /// </summary>
@@ -25344,7 +25231,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to You must shut down and then restart the VM to finish the installation of the new DVD drive.
-        ///Once the VM has restarted click the Install [Citrix VM Tools] menu item once again..
+        ///Once the VM has restarted click the Install {0} menu item once again..
         /// </summary>
         public static string NEW_DVD_DRIVE_REBOOT_TOOLS {
             get {
@@ -25353,7 +25240,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM you want to install [Citrix VM Tools] onto has no DVD drive, would you like to create one?.
+        ///   Looks up a localized string similar to The VM you want to install {0} onto has no DVD drive, would you like to create one?.
         /// </summary>
         public static string NEW_DVD_DRIVE_REQUIRED {
             get {
@@ -25362,7 +25249,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?.
+        ///   Looks up a localized string similar to At least one of the VMs you want to install {0} onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?.
         /// </summary>
         public static string NEW_DVD_DRIVES_REQUIRED {
             get {
@@ -25451,7 +25338,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is using an older CPU.
         ///
-        ///[XenServer] can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+        ///{1} can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -25466,7 +25353,7 @@ namespace XenAdmin {
         ///
         ///{0}
         ///
-        ///[XenServer] can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+        ///{1} can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -25744,15 +25631,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New [XenCenter] version required.
-        /// </summary>
-        public static string NEW_XENCENTER_REQUIRED_INFO {
-            get {
-                return ResourceManager.GetString("NEW_XENCENTER_REQUIRED_INFO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You need to shut down and then restart the VM before it can access the new disk..
         /// </summary>
         public static string NEWDISKWIZARD_MESSAGE {
@@ -25762,7 +25640,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is a newer version of [XenCenter] available. Please contact your support representative..
+        ///   Looks up a localized string similar to There is a newer version of {0} available. Please contact your support representative..
         /// </summary>
         public static string NEWER_GUI_AVAILABLE {
             get {
@@ -26180,7 +26058,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support [XenServer] features such as Live Migration and High Availability..
+        ///   Looks up a localized string similar to Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support {0} features such as Live Migration and High Availability..
         /// </summary>
         public static string NEWSR_EQUAL_LOGIC_BLURB {
             get {
@@ -26324,11 +26202,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
+        ///   Looks up a localized string similar to {0} hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
         ///
         ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
         ///
-        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SC [rest of string was truncated]&quot;;.
+        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI devic [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOFCOE_BLURB {
             get {
@@ -26355,11 +26233,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
+        ///   Looks up a localized string similar to {0} hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
         ///
-        ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the [XenServer] host.
+        ///All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the {0} host.
         ///
-        ///Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the LUN as if i [rest of string was truncated]&quot;;.
+        ///Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the LUN as if it were a locally [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOHBA_BLURB {
             get {
@@ -26485,9 +26363,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning: you must ensure that the following SR is not in use by any server not connected to [XenCenter]. Failure to do so may result in data loss.
+        ///   Looks up a localized string similar to Warning: you must ensure that the following SR is not in use by any server not connected to {0}. Failure to do so may result in data loss.
         ///
-        ///SR:  {0}
+        ///SR:  {1}
         ///
         ///Do you want to reattach the SR?.
         /// </summary>
@@ -27438,7 +27316,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] has selected a different SR for you..
+        ///   Looks up a localized string similar to {0} has selected a different SR for you..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_XC_SELECTION {
             get {
@@ -27452,15 +27330,6 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_TEMPLATEPAGE_CENTOS {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_CENTOS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix].
-        /// </summary>
-        public static string NEWVMWIZARD_TEMPLATEPAGE_CITRIX {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_CITRIX", resourceCulture);
             }
         }
         
@@ -27645,7 +27514,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads.
+        ///   Looks up a localized string similar to This pool is only licensed for {0} Virtual Apps and Desktops workloads.
         /// </summary>
         public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL {
             get {
@@ -27654,7 +27523,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is only licensed for [Citrix] Virtual Apps and Desktops workloads.
+        ///   Looks up a localized string similar to This server is only licensed for {0} Virtual Apps and Desktops workloads.
         /// </summary>
         public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER {
             get {
@@ -28113,7 +27982,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] can free up {0} by removing residual update files. Do you want to proceed with the cleanup?.
+        ///   Looks up a localized string similar to {0} can free up {1} by removing residual update files. Do you want to proceed with the cleanup?.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_CLEANUP {
             get {
@@ -28169,9 +28038,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in {0} {1} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] {0} or above, VMs must be moved from local storage first..
+        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to {0} {1} or above, VMs must be moved from local storage first..
         /// </summary>
         public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
             get {
@@ -28191,7 +28060,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
         ///
-        ///A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
+        ///A new disk partitioning scheme is available in {0} {1} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
         ///
         ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
         /// </summary>
@@ -28800,7 +28669,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version requires [XenCenter] {0} or newer.
+        ///   Looks up a localized string similar to This version requires {0} {1} or newer.
         /// </summary>
         public static string PATCH_NEEDS_NEW_XENCENTER {
             get {
@@ -29416,7 +29285,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Updates and Supplemental Packs (*.{0}, *.iso,*.zip)|*.{0};*.iso;*.zip.
+        ///   Looks up a localized string similar to {0} Updates and Supplemental Packs (*.{1}, *.iso,*.zip)|*.{1};*.iso;*.zip.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
@@ -29443,7 +29312,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automated updates are not supported on this [XenServer] version.
+        ///   Looks up a localized string similar to Automated updates are not supported on this {0} version.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION {
             get {
@@ -29452,21 +29321,12 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automated updates are not supported on partially upgraded [XenServer] pools.
+        ///   Looks up a localized string similar to Automated updates are not supported on partially upgraded {0} pools.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADE" +
                         "D", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot install supplemental packs on this [XenServer] version.
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS", resourceCulture);
             }
         }
         
@@ -29498,7 +29358,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version..
+        ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before {0} can apply the selected new version..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {
             get {
@@ -29673,7 +29533,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is now installing update {0} on your system..
+        ///   Looks up a localized string similar to {0} is now installing update {1} on your system..
         /// </summary>
         public static string PATCHINGWIZARD_SINGLEUPDATE_TITLE {
             get {
@@ -29774,7 +29634,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is now performing the operations necessary to upload your update to the servers specified in the previous step. Please wait for these operations to complete, then click Next to continue with the installation..
+        ///   Looks up a localized string similar to {0} is now performing the operations necessary to upload your update to the servers specified in the previous step. Please wait for these operations to complete, then click Next to continue with the installation..
         /// </summary>
         public static string PATCHINGWIZARD_SINGLEUPLOAD_TITLE {
             get {
@@ -29801,7 +29661,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is now installing updates on your system..
+        ///   Looks up a localized string similar to {0} is now installing updates on your system..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE {
             get {
@@ -29810,7 +29670,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] is now installing the new version on your system..
+        ///   Looks up a localized string similar to {0} is now installing the new version on your system..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE {
             get {
@@ -30071,7 +29931,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing [XenServer] on &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Installing {0} on &apos;{1}&apos;....
         /// </summary>
         public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER {
             get {
@@ -30080,7 +29940,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing [XenServer] {0} on &apos;{1}&apos;....
+        ///   Looks up a localized string similar to Installing {0} {1} on &apos;{2}&apos;....
         /// </summary>
         public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION {
             get {
@@ -30258,15 +30118,6 @@ namespace XenAdmin {
         public static string PLUGINS {
             get {
                 return ResourceManager.GetString("PLUGINS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Adjust settings for plug-ins to [XenCenter].
-        /// </summary>
-        public static string PLUGINS_DESC {
-            get {
-                return ResourceManager.GetString("PLUGINS_DESC", resourceCulture);
             }
         }
         
@@ -30460,7 +30311,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the pool in [XenCenter]&apos;s cache..
+        ///   Looks up a localized string similar to Could not find the pool in {0}&apos;s cache..
         /// </summary>
         public static string POOL_GONE {
             get {
@@ -30559,7 +30410,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the pool master in [XenCenter]&apos;s cache..
+        ///   Looks up a localized string similar to Could not find the pool master in {0}&apos;s cache..
         /// </summary>
         public static string POOL_MASTER_GONE {
             get {
@@ -30595,7 +30446,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a pool or stand alone server to import this VM to. The home server setting will be taken from the template.\n\nIf this value does not correspond to a server within the selected resource pool then it will be ignored for all resourcing decisions..
+        ///   Looks up a localized string similar to Select a pool or stand alone server to import this VM to. The home server setting will be taken from the template.
+        ///
+        ///If this value does not correspond to a server within the selected resource pool then it will be ignored for all resourcing decisions..
         /// </summary>
         public static string POOL_PICKER_BLURB_NO_AFFINITY {
             get {
@@ -30604,7 +30457,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the pool update in [XenCenter]&apos;s cache..
+        ///   Looks up a localized string similar to Could not find the pool update in {0}&apos;s cache..
         /// </summary>
         public static string POOL_UPDATE_GONE {
             get {
@@ -30613,7 +30466,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool partially upgraded to [XenServer] {0}.
+        ///   Looks up a localized string similar to Pool partially upgraded to {0} {1}.
         /// </summary>
         public static string POOL_VERSIONS_LINK_TEXT {
             get {
@@ -31023,7 +30876,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] version.
+        ///   Looks up a localized string similar to {0} version.
         /// </summary>
         public static string PROBLEM_XENCENTER_VERSION_TITLE {
             get {
@@ -31037,16 +30890,6 @@ namespace XenAdmin {
         public static string PROCEED {
             get {
                 return ResourceManager.GetString("PROCEED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please insert the [XenServer] CD into the physical drive on server &apos;{0}&apos;.
-        ///Press OK to continue the wizard and return to the server and follow the instructions on screen..
-        /// </summary>
-        public static string PROMPT_XS_CD {
-            get {
-                return ResourceManager.GetString("PROMPT_XS_CD", resourceCulture);
             }
         }
         
@@ -31132,7 +30975,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] not installed.
+        ///   Looks up a localized string similar to {0} not installed.
         /// </summary>
         public static string PV_DRIVERS_NOT_INSTALLED {
             get {
@@ -31141,7 +30984,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] out of date (version {0} installed).
+        ///   Looks up a localized string similar to {0} out of date (version {1}.{2} installed).
         /// </summary>
         public static string PV_DRIVERS_OUT_OF_DATE {
             get {
@@ -31150,7 +30993,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] out of date.
+        ///   Looks up a localized string similar to {0} out of date.
         /// </summary>
         public static string PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION {
             get {
@@ -32370,7 +32213,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;.  Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
+        ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;. Refer to the &quot;{1} Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
         /// </summary>
         public static string RESTORE_FROM_BACKUP_FINALIZE {
             get {
@@ -32761,13 +32604,13 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To install the [XenServer] upgrade on {0}, follow these steps:
+        ///   Looks up a localized string similar to To install the {0} upgrade on {1}, follow these steps:
         ///    
-        ///1. Insert the [XenServer] installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
+        ///1. Insert the {0} installation CD-ROM in the server&apos;s CD/DVD drive or set up a PXE network boot.
         ///2. Click the Reboot Now button below to reboot the server and begin the installation.
         ///3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
         ///
-        ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of [X [rest of string was truncated]&quot;;.
+        ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of {0} is not support [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ROLLING_UPGRADE_REBOOT_MESSAGE {
             get {
@@ -32794,7 +32637,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Still waiting for the installation of [XenServer] on &apos;{0}&apos; to complete. Please check the server console for possible errors. Keep waiting if the installation is still running....
+        ///   Looks up a localized string similar to Still waiting for the installation of {0} on &apos;{1}&apos; to complete. Please check the server console for possible errors. Keep waiting if the installation is still running....
         /// </summary>
         public static string ROLLING_UPGRADE_TIMEOUT {
             get {
@@ -32803,7 +32646,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Still waiting for the installation of [XenServer] {0} on &apos;{1}&apos; to complete. Please check the server console for possible errors. Keep waiting if the installation is still running....
+        ///   Looks up a localized string similar to Still waiting for the installation of {0} {1} on &apos;{2}&apos; to complete. Please check the server console for possible errors. Keep waiting if the installation is still running....
         /// </summary>
         public static string ROLLING_UPGRADE_TIMEOUT_VERSION {
             get {
@@ -33462,7 +33305,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is using an API that is incompatible with [XenCenter]..
+        ///   Looks up a localized string similar to This server is using an API that is incompatible with {0}..
         /// </summary>
         public static string SERVER_API_INCOMPATIBLE {
             get {
@@ -33494,15 +33337,6 @@ namespace XenAdmin {
         public static string SERVER_LABLE {
             get {
                 return ResourceManager.GetString("SERVER_LABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Out of Date.
-        /// </summary>
-        public static string SERVER_OUT_OF_DATE {
-            get {
-                return ResourceManager.GetString("SERVER_OUT_OF_DATE", resourceCulture);
             }
         }
         
@@ -33588,7 +33422,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] {0} onwards..
+        ///   Looks up a localized string similar to This version of {0} supports {1} {2} onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -33597,7 +33431,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use an earlier version of [XenCenter] to manage this server..
+        ///   Looks up a localized string similar to Use an earlier version of {0} to manage this server..
         /// </summary>
         public static string SERVER_TOO_OLD_SOLUTION {
             get {
@@ -34156,7 +33990,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] {0}. Please use an earlier version of [XenCenter] to manage this pool..
+        ///   Looks up a localized string similar to This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool..
         /// </summary>
         public static string SLAVE_TOO_OLD {
             get {
@@ -34446,7 +34280,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check that the proxy server on &apos;{0}&apos; is configured correctly and [XenCenter]&apos;s connection settings are correct and try again..
+        ///   Looks up a localized string similar to Check that the proxy server on &apos;{0}&apos; is configured correctly and {1}&apos;s connection settings are correct and try again..
         /// </summary>
         public static string SOLUTION_CHECK_PROXY {
             get {
@@ -34455,7 +34289,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check that [XenServer] is configured correctly on &apos;{0}&apos; and try again..
+        ///   Looks up a localized string similar to Check that {0} is configured correctly on &apos;{1}&apos; and try again..
         /// </summary>
         public static string SOLUTION_CHECK_XENSERVER {
             get {
@@ -34464,7 +34298,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check the proxy settings and that the server is configured correctly on &apos;{0}&apos; and try again..
+        ///   Looks up a localized string similar to Check the proxy settings and that {0} is configured correctly on &apos;{1}&apos; and try again..
         /// </summary>
         public static string SOLUTION_CHECK_XENSERVER_WITH_PROXY {
             get {
@@ -34509,7 +34343,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some errors were encountered. See the [XenCenter] log for more information..
+        ///   Looks up a localized string similar to Some errors were encountered. See the application log for more information..
         /// </summary>
         public static string SOME_ERRORS_ENCOUNTERED {
             get {
@@ -34554,7 +34388,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be destroyed with [XenCenter]..
+        ///   Looks up a localized string similar to This SR cannot be destroyed with {0}..
         /// </summary>
         public static string SR_CANNOT_BE_DESTROYED_WITH_XC {
             get {
@@ -34563,7 +34397,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This SR cannot be forgotten with [XenCenter]..
+        ///   Looks up a localized string similar to This SR cannot be forgotten with {0}..
         /// </summary>
         public static string SR_CANNOT_BE_FORGOTTEN_WITH_XC {
             get {
@@ -34836,7 +34670,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
+        ///   Looks up a localized string similar to Creating this SR-IOV network will temporarily disturb {0} connections to the pool.
         ///
         ///You may need to reboot your server(s) to enable SR-IOV network..
         /// </summary>
@@ -35207,7 +35041,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with {1} once and will not be stored on this machine or on your server..
         /// </summary>
         public static string STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE {
             get {
@@ -35506,7 +35340,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Failed to install supplemental pack &apos;{0}&apos; on &apos;{1}&apos;.
         ///
-        ///Refer to the &quot;[XenServer product] Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a server..
+        ///Refer to the &quot;{2} Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a server..
         /// </summary>
         public static string SUPP_PACK_INSTALL_FAILED {
             get {
@@ -35763,33 +35597,6 @@ namespace XenAdmin {
         public static string TEMPLATE_INFO_OS {
             get {
                 return ResourceManager.GetString("TEMPLATE_INFO_OS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools]: Not present.
-        /// </summary>
-        public static string TEMPLATE_INFO_TOOLSNOTPRESENT {
-            get {
-                return ResourceManager.GetString("TEMPLATE_INFO_TOOLSNOTPRESENT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools]: Out of date (version {0}.{1} installed).
-        /// </summary>
-        public static string TEMPLATE_INFO_TOOLSOLD {
-            get {
-                return ResourceManager.GetString("TEMPLATE_INFO_TOOLSOLD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools]: Up to date.
-        /// </summary>
-        public static string TEMPLATE_INFO_TOOLSUPTODATE {
-            get {
-                return ResourceManager.GetString("TEMPLATE_INFO_TOOLSUPTODATE", resourceCulture);
             }
         }
         
@@ -36082,15 +35889,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disks cannot be activated or deactivated from running VMs without [Citrix VM Tools] installed.
-        /// </summary>
-        public static string TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS {
-            get {
-                return ResourceManager.GetString("TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Networks cannot be deactivated while the VM is suspended.
         /// </summary>
         public static string TOOLTIP_DEACTIVATE_VIF_SUSPENDED {
@@ -36127,15 +35925,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disks cannot be deleted from running VMs without [Citrix VM Tools] installed.
-        /// </summary>
-        public static string TOOLTIP_DELETE_VDI_NEED_TOOLS {
-            get {
-                return ResourceManager.GetString("TOOLTIP_DELETE_VDI_NEED_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disks cannot be removed while the VM is suspended.
         /// </summary>
         public static string TOOLTIP_DETACH_SUSPENDED {
@@ -36163,15 +35952,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disks cannot be removed from running VMs without [Citrix VM Tools] installed.
-        /// </summary>
-        public static string TOOLTIP_DETACH_VDI_NEED_TOOLS {
-            get {
-                return ResourceManager.GetString("TOOLTIP_DETACH_VDI_NEED_TOOLS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to I/O drivers must be installed to edit a network on a running VM.
         /// </summary>
         public static string TOOLTIP_EDIT_NETWORK_IO_DRIVERS {
@@ -36181,7 +35961,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] must be installed to edit a network on a running VM.
+        ///   Looks up a localized string similar to {0} must be installed to edit a network on a running VM.
         /// </summary>
         public static string TOOLTIP_EDIT_NETWORK_TOOLS {
             get {
@@ -36208,15 +35988,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] only supports {0} NICs per Bond..
-        /// </summary>
-        public static string TOOLTIP_NICS_PER_BOND_LIMIT {
-            get {
-                return ResourceManager.GetString("TOOLTIP_NICS_PER_BOND_LIMIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to I/O drivers must be installed to remove a network on a running VM.
         /// </summary>
         public static string TOOLTIP_REMOVE_NETWORK_IO_DRIVERS {
@@ -36235,7 +36006,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] must be installed to remove a network on a running VM.
+        ///   Looks up a localized string similar to {0} must be installed to remove a network on a running VM.
         /// </summary>
         public static string TOOLTIP_REMOVE_NETWORK_TOOLS {
             get {
@@ -36397,9 +36168,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] was unable to import a saved search from file &apos;{0}&apos;.
+        ///   Looks up a localized string similar to {0} was unable to import a saved search from file &apos;{1}&apos;.
         ///
-        ///Verify that the file is a valid {1} export..
+        ///Verify that the file is a valid {2} export..
         /// </summary>
         public static string UNABLE_TO_IMPORT_SEARCH {
             get {
@@ -36417,7 +36188,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] will uncompress the file to &apos;{0}&apos;. After uncompression the original file &apos;{1}&apos; will be deleted. Continue?.
+        ///   Looks up a localized string similar to {0} will uncompress the file to &apos;{1}&apos;. After uncompression the original file &apos;{2}&apos; will be deleted. Continue?.
         /// </summary>
         public static string UNCOMPRESS_APPLIANCE_DESCRIPTION {
             get {
@@ -36693,7 +36464,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically check for [XenServer] or [XenCenter] updates.
+        ///   Looks up a localized string similar to Automatically check for {0} or {1} updates.
         /// </summary>
         public static string UPDATES_DESC {
             get {
@@ -36847,7 +36618,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download [XenCenter].
+        ///   Looks up a localized string similar to Download {0}.
         /// </summary>
         public static string UPDATES_DOWNLOAD_REQUIRED_XENCENTER {
             get {
@@ -37211,7 +36982,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] version {0} or newer is required..
+        ///   Looks up a localized string similar to {0} version {1} or newer is required..
         /// </summary>
         public static string UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED {
             get {
@@ -37220,7 +36991,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ensure you have upgraded [XenCenter] before upgrading [XenServer]..
+        ///   Looks up a localized string similar to Ensure you have upgraded to {0} {1} before upgrading {2}..
         /// </summary>
         public static string UPDATES_WIZARD_NEWER_XENCENTER_WARNING {
             get {
@@ -37274,7 +37045,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: The VM {1} does not have [Citrix VM Tools] installed..
+        ///   Looks up a localized string similar to {0}: The VM {1} does not have {2} installed..
         /// </summary>
         public static string UPDATES_WIZARD_NO_TOOLS {
             get {
@@ -37283,7 +37054,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: The VM {1} cannot be suspended until it has up to date [Citrix VM Tools]..
+        ///   Looks up a localized string similar to {0}: The VM {1} cannot be suspended until it has up to date {2}..
         /// </summary>
         public static string UPDATES_WIZARD_OUT_OF_DATE_TOOLS {
             get {
@@ -37843,7 +37614,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Active Directory.  Active Directory allows you to configure {0} access control by adding named user accounts..
         /// </summary>
         public static string UPSELL_BLURB_AD {
             get {
@@ -37861,7 +37632,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable the Conversion Manager. This feature helps you migrate workloads from VMware to [XenServer] by moving batches of VMware virtual machines to your [XenServer] environment..
+        ///   Looks up a localized string similar to Upgrade your server license to enable the Conversion Manager. This feature helps you migrate workloads from VMware to {0} by moving batches of VMware virtual machines to your {0} environment..
         /// </summary>
         public static string UPSELL_BLURB_CONVERSION {
             get {
@@ -37933,7 +37704,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
+        ///   Looks up a localized string similar to Upgrade your {0} license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. .
         /// </summary>
         public static string UPSELL_BLURB_MIGRATE_VDI {
             get {
@@ -37951,7 +37722,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your {0} resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup..
         /// </summary>
         public static string UPSELL_BLURB_RBAC {
             get {
@@ -37962,7 +37733,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to 
         ///
-        ///To start a [XenServer] trial, click the button below..
+        ///To start a {0} trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_TRIAL {
             get {
@@ -38115,7 +37886,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] was unable to authorize the action as {0}. See the application log files for more information..
+        ///   Looks up a localized string similar to {0} was unable to authorize the action as {1}. See the application log files for more information..
         /// </summary>
         public static string USER_AUTHORIZATION_FAILED {
             get {
@@ -38612,7 +38383,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] version {0} (build {1}.{2}) {3}-bit.
+        ///   Looks up a localized string similar to {0} version {1} (build {2}.{3}) {4}-bit.
         /// </summary>
         public static string VERSION_NUMBER {
             get {
@@ -42294,16 +42065,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter].
-        /// </summary>
-        public static string XENCENTER {
-            get {
-                return ResourceManager.GetString("XENCENTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] Settings|*.config.
+        ///   Looks up a localized string similar to {0} Settings|*.config.
         /// </summary>
         public static string XENCENTER_CONFIG_FILTER {
             get {
@@ -42312,7 +42074,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Newer [XenCenter] Available.
+        ///   Looks up a localized string similar to Newer {0} Available.
         /// </summary>
         public static string XENCENTER_NEWER_AVAILABLE {
             get {
@@ -42321,7 +42083,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenCenter] version check.
+        ///   Looks up a localized string similar to {0} version check.
         /// </summary>
         public static string XENCENTER_VERSION_CHECK_DESCRIPTION {
             get {
@@ -42339,43 +42101,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer].
-        /// </summary>
-        public static string XENSERVER {
-            get {
-                return ResourceManager.GetString("XENSERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] {0}.
-        /// </summary>
-        public static string XENSERVER_6_5 {
-            get {
-                return ResourceManager.GetString("XENSERVER_6_5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] {0}.
-        /// </summary>
-        public static string XENSERVER_8_1 {
-            get {
-                return ResourceManager.GetString("XENSERVER_8_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] {0}.
-        /// </summary>
-        public static string XENSERVER_8_2 {
-            get {
-                return ResourceManager.GetString("XENSERVER_8_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Templates.
+        ///   Looks up a localized string similar to {0} Templates.
         /// </summary>
         public static string XENSERVER_TEMPLATES {
             get {
@@ -42393,7 +42119,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Backup Files.
+        ///   Looks up a localized string similar to {0} Backup Files.
         /// </summary>
         public static string XS_BACKUP_FILES {
             get {
@@ -42402,7 +42128,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] License Files.
+        ///   Looks up a localized string similar to {0} License Files.
         /// </summary>
         public static string XS_LICENSE_FILES {
             get {
@@ -42411,7 +42137,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix VM Tools] DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
+        ///   Looks up a localized string similar to {0} DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
         ///
         ///You will need to navigate to the Console on each of the selected VMs to complete the installation..
         /// </summary>
@@ -42422,9 +42148,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want [XenCenter] to insert the [Citrix VM Tools] DVD into your VM&apos;s DVD drive and take you to the VM&apos;s console?
+        ///   Looks up a localized string similar to Do you want {0} to insert the {1} DVD into your VM&apos;s DVD drive and take you to the VM&apos;s console?
         ///
-        ///Any disk in your VM&apos;s DVD drive will be ejected when installing [Citrix VM Tools]..
+        ///Any disk in your VM&apos;s DVD drive will be ejected when installing {1}..
         /// </summary>
         public static string XS_TOOLS_MESSAGE_ONE_VM {
             get {
@@ -42433,20 +42159,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The [Citrix VM Tools] SR could not be found..
+        ///   Looks up a localized string similar to The {0} SR could not be found..
         /// </summary>
         public static string XS_TOOLS_SR_NOT_FOUND {
             get {
                 return ResourceManager.GetString("XS_TOOLS_SR_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Update Files ({0})|{0}|All files ({1})|{1}.
-        /// </summary>
-        public static string XSUPDATE {
-            get {
-                return ResourceManager.GetString("XSUPDATE", resourceCulture);
             }
         }
         

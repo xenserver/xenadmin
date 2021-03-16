@@ -187,13 +187,13 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="saveStateLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 30</value>
+    <value>443, 30</value>
   </data>
   <data name="saveStateLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="saveStateLabel.Text" xml:space="preserve">
-    <value>[XenCenter] can remember login credentials for your managed servers and use them to automatically restore the connection state of your servers when you start a session.</value>
+    <value>{0} can remember login credentials for your managed servers and use them to automatically restore the connection state of your servers when you start a session.</value>
   </data>
   <data name="&gt;&gt;saveStateLabel.Name" xml:space="preserve">
     <value>saveStateLabel</value>

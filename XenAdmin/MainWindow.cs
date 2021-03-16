@@ -242,6 +242,13 @@ namespace XenAdmin
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
+            xenSourceOnTheWebToolStripMenuItem.Text = string.Format(xenSourceOnTheWebToolStripMenuItem.Text,
+                BrandManager.ProductBrand);
+            viewApplicationLogToolStripMenuItem.Text = string.Format(viewApplicationLogToolStripMenuItem.Text, BrandManager.BrandConsole);
+            xenCenterPluginsOnlineToolStripMenuItem.Text = string.Format(xenCenterPluginsOnlineToolStripMenuItem.Text, BrandManager.BrandConsole);
+            aboutXenSourceAdminToolStripMenuItem.Text = string.Format(aboutXenSourceAdminToolStripMenuItem.Text, BrandManager.BrandConsole);
+            templatesToolStripMenuItem1.Text = string.Format(templatesToolStripMenuItem1.Text, BrandManager.ProductBrand);
+
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
 
@@ -330,6 +337,7 @@ namespace XenAdmin
 
             History.EnableHistoryButtons();
             History.NewHistoryItem(new XenModelObjectHistoryItem(null, TabPageHome));
+            Text = BrandManager.BrandConsole;
 
             /*
              * Resume window size and location
@@ -914,7 +922,7 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), Messages.XENCENTER, BrandManager.ProductVersionText, Program.Version);
+                master.BuildNumberRaw(), BrandManager.BrandConsole, BrandManager.ProductVersionText, Program.Version);
 
             // Check the PRODUCT_BRAND
             if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
@@ -924,9 +932,10 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, delegate
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                    new ActionBase(title, "", false, true, Messages.INCOMPATIBLE_PRODUCTS);
+                    new ActionBase(title, "", false, true, string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole));
 
-                    using (var dlog = new ErrorDialog(Messages.INCOMPATIBLE_PRODUCTS) {WindowTitle = title})
+                    using (var dlog = new ErrorDialog(string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole))
+                        {WindowTitle = title})
                         dlog.ShowDialog(this);
                 });
                 return;
@@ -947,10 +956,12 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                    new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
+                    var msg = string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductBrand, BrandManager.ProductVersion70, BrandManager.BrandConsole);
+                    
+                    new ActionBase(title, "", false, true, msg);
 
-                    using (var dlg = new ErrorDialog(string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70),
-                        ThreeButtonDialog.ButtonOK){WindowTitle = Messages.CONNECT_TO_SERVER})
+                    using (var dlg = new ErrorDialog(msg, ThreeButtonDialog.ButtonOK)
+                        {WindowTitle = Messages.CONNECT_TO_SERVER})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -981,7 +992,7 @@ namespace XenAdmin
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
+                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, BrandManager.BrandConsole, Helpers.GetName(master));
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                         var error = $"{msg}\n{url}";
@@ -1008,7 +1019,7 @@ namespace XenAdmin
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, Helpers.GetName(master), BrandManager.LegacyConsole);
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, Helpers.GetName(master), BrandManager.LegacyConsole);
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                         var error = $"{msg}\n{url}";
@@ -1781,7 +1792,8 @@ namespace XenAdmin
                     dialog.Title = Messages.SELECT_LICENSE_KEY;
                     dialog.CheckFileExists = true;
                     dialog.CheckPathExists = true;
-                    dialog.Filter = string.Format("{0} (*.xslic)|*.xslic|{1} (*.*)|*.*", Messages.XS_LICENSE_FILES, Messages.ALL_FILES);
+                    dialog.Filter = string.Format("{0} (*.xslic)|*.xslic|{1} (*.*)|*.*",
+                        string.Format(Messages.XS_LICENSE_FILES, BrandManager.ProductBrand), Messages.ALL_FILES);
                     dialog.ShowHelp = true;
                     dialog.HelpRequest += dialog_HelpRequest;
                     result = dialog.ShowDialog(this);
@@ -2790,7 +2802,7 @@ namespace XenAdmin
             }
             else
             {
-                TitleLabel.Text = Messages.XENCENTER;
+                TitleLabel.Text = BrandManager.BrandConsole;
                 TitleIcon.Image = Images.StaticImages.Logo;
                 loggedInLabel1.Connection = null;
             }
@@ -3119,7 +3131,7 @@ namespace XenAdmin
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                dialog.Filter = Messages.XENCENTER_CONFIG_FILTER;
+                dialog.Filter = string.Format(Messages.XENCENTER_CONFIG_FILTER, BrandManager.BrandConsole);
                 if (dialog.ShowDialog(this) != DialogResult.Cancel)
                 {
                     try
@@ -3171,7 +3183,7 @@ namespace XenAdmin
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dialog.Filter = Messages.XENCENTER_CONFIG_FILTER;
+                dialog.Filter = string.Format(Messages.XENCENTER_CONFIG_FILTER, BrandManager.BrandConsole);
                 dialog.Title = Messages.ACTION_SAVE_CHANGES_IN_PROGRESS;
                 dialog.CheckPathExists = true;
                 if (dialog.ShowDialog(this) != DialogResult.Cancel)

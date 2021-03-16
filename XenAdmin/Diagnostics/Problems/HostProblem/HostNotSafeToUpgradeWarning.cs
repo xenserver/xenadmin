@@ -61,10 +61,12 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 switch (reason)
                 {
                     case HostNotSafeToUpgradeReason.NotEnoughSpace :
-                        return string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG, BrandManager.ProductVersion70);
+                        return string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG,
+                            BrandManager.ProductBrand, BrandManager.ProductVersion70);
                     
                     default:
-                        return string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG, BrandManager.ProductVersion70);
+                        return string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG,
+                            BrandManager.ProductBrand, BrandManager.ProductVersion70);
                 }
             }
         }

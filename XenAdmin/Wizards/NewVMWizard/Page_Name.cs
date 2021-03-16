@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         public Page_Name()
         {
             InitializeComponent();
-            NameTextBox.TextChanged += new EventHandler(NameTextBox_TextChanged);
+            label3.Text = string.Format(label3.Text, BrandManager.BrandConsole);
         }
 
         void NameTextBox_TextChanged(object sender, EventArgs e)
@@ -53,20 +53,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             OnPageUpdated();
         }
 
-        public override string Text
-        {
-            get { return Messages.NEWVMWIZARD_NAMEPAGE_NAME; }
-        }
+        public override string Text => Messages.NEWVMWIZARD_NAMEPAGE_NAME;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_NAMEPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_NAMEPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "Name"; }
-        }
+        public override string HelpID => "Name";
 
         public override bool EnableNext()
         {
@@ -90,21 +81,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public VM SelectedTemplate { private get; set; }
 
-        public string SelectedName
-        {
-            get
-            {
-                return NameTextBox.Text.Trim();
-            }
-        }
+        public string SelectedName => NameTextBox.Text.Trim();
 
-        public string SelectedDescription
-        {
-            get
-            {
-                return DescriptionTextBox.Text.Trim();
-            }
-        }
+        public string SelectedDescription => DescriptionTextBox.Text.Trim();
 
         public override List<KeyValuePair<string, string>> PageSummary
         {

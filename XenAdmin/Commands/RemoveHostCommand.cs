@@ -32,6 +32,7 @@
 using System.Collections.Generic;
 using XenAPI;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Commands
@@ -89,12 +90,6 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<Host>(CanExecute);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_REMOVE_HOST;
-            }
-        }
+        public override string MenuText => string.Format(Messages.MAINWINDOW_REMOVE_HOST, BrandManager.BrandConsole);
     }
 }

@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using XenAdmin.Core;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 
@@ -101,7 +102,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string BlurbText()
         {
-            return string.Format(Messages.PATCHINGWIZARD_SINGLEUPDATE_TITLE, GetUpdateName());
+            return string.Format(Messages.PATCHINGWIZARD_SINGLEUPDATE_TITLE, BrandManager.BrandConsole, GetUpdateName());
         }
 
         protected override string SuccessMessageOnCompletion(bool multiplePools)

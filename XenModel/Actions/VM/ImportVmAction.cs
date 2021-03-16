@@ -136,7 +136,7 @@ namespace XenAdmin.Actions
                 var otherConfig = VM.get_other_config(Session, vmRef);
                 if (!otherConfig.ContainsKey(IMPORT_TASK) || otherConfig[IMPORT_TASK] != RelatedTask.opaque_ref)
                 {
-                    throw new Exception(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS);
+                    throw new Exception(string.Format(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS, BrandManager.ProductBrand));
                 }
             }
 

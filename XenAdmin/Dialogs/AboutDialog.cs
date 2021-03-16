@@ -31,8 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using System.Linq;
@@ -50,19 +48,28 @@ namespace XenAdmin.Dialogs
 
             var revision = Program.Version.Revision;
             string buildText = Helpers.CommonCriteriaCertificationRelease
-                                   ? string.Format("{0}: {1}", revision, Messages.COMMON_CRITERIA_TEXT)
-                                   : revision.ToString();
+                ? string.Format(Messages.COMMON_CRITERIA_TEXT, revision, BrandManager.ProductBrand)
+                : revision.ToString();
 
-            VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.ProductVersionText,
-                BrandManager.XenCenterVersion, buildText, IntPtr.Size * 8);
+            VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.BrandConsole,
+                BrandManager.ProductVersionText, BrandManager.XenCenterVersion, buildText, IntPtr.Size * 8);
             label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.CompanyNameLegal);
             label2.Visible = !HiddenFeatures.CopyrightHidden;
+
+            licenseDetailsLabel.Text = string.Format(licenseDetailsLabel.Text, BrandManager.ProductBrand);
+            showAgainCheckBox.Text = string.Format(showAgainCheckBox.Text, BrandManager.BrandConsole);
 
             showAgainCheckBox.Checked = Properties.Settings.Default.ShowAboutDialog;
             var showLicenseNag = HiddenFeatures.LicenseNagVisible;
             LicenseDetailsTextBox.Text = showLicenseNag ? GetLicenseDetails() : "";
             licenseDetailsLabel.Visible = LicenseDetailsTextBox.Visible = showLicenseNag;
             showAgainCheckBox.Visible = showLicenseNag;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = string.Format(Text, BrandManager.BrandConsole);
         }
 
         private void OkButton_Click(object sender, EventArgs e)

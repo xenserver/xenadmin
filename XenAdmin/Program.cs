@@ -563,7 +563,7 @@ namespace XenAdmin
                     string filepath = GetLogFile() ?? Messages.MESSAGEBOX_LOGFILE_MISSING;
 
                     using (var d = new ErrorDialog(String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath))
-                        {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
+                        {WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole)})
                     {
                         // CA-44733
                         if (IsInvokable(MainWindow) && !MainWindow.InvokeRequired)
@@ -719,7 +719,8 @@ namespace XenAdmin
             }
             else
             {
-                using (var dlg = new ErrorDialog(msg) {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
+                using (var dlg = new ErrorDialog(msg)
+                    {WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole)})
                     dlg.ShowDialog();
             }
         }

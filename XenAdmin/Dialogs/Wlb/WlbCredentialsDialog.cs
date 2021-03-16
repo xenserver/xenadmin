@@ -30,34 +30,33 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Actions.Wlb;
-using XenCenterLib;
+using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAPI;
+using XenCenterLib;
 
 namespace XenAdmin.Dialogs.Wlb
 {
-    public partial class WlbCredentialsDialog : XenAdmin.Dialogs.XenDialogBase
+    public partial class WlbCredentialsDialog : XenDialogBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Pool _pool;
 
-        //private WlbServerState _serverStatus;
-
         public WlbCredentialsDialog(Pool pool)
         {
             InitializeComponent();
+            checkboxUseCurrentXSCredentials.Text = string.Format(checkboxUseCurrentXSCredentials.Text, BrandManager.BrandConsole);
+            LabelWLBServerNameBlurb.Text = string.Format(LabelWLBServerNameBlurb.Text, BrandManager.ProductBrand);
+            LabelWLBServerCredsBlurb.Text = string.Format(LabelWLBServerCredsBlurb.Text, BrandManager.ProductBrand);
+            LabelXenServerCredsBlurb.Text = string.Format(LabelXenServerCredsBlurb.Text, BrandManager.ProductBrand);
+            decentGroupBoxXSCredentials.Text = string.Format(decentGroupBoxXSCredentials.Text, BrandManager.ProductBrand);
 
             _pool = pool;
-            //_serverStatus = new WlbServerState(_pool);
-
             PopulateControls();
-
             SetControlState();
         }
 

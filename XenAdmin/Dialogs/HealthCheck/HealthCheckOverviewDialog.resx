@@ -126,7 +126,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 40</value>
   </data>
   <data name="PoolNameColumn.HeaderText" xml:space="preserve">
     <value>Pool</value>
@@ -154,7 +154,7 @@
     <value>0, 0</value>
   </data>
   <data name="poolsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 356</value>
+    <value>495, 371</value>
   </data>
   <data name="poolsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1072,7 +1072,7 @@
     <value>2</value>
   </data>
   <data name="poolDetailsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 326</value>
+    <value>280, 341</value>
   </data>
   <data name="poolDetailsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1105,7 +1105,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 356</value>
+    <value>288, 371</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1144,7 +1144,7 @@
     <value>220</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>787, 356</value>
+    <value>787, 371</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>495</value>
@@ -1213,7 +1213,7 @@
     <value>NoControl</value>
   </data>
   <data name="PolicyStatementLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 34</value>
+    <value>0, 19</value>
   </data>
   <data name="PolicyStatementLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 3</value>
@@ -1261,13 +1261,13 @@
     <value>0, 0, 0, 4</value>
   </data>
   <data name="rubricLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>790, 34</value>
+    <value>790, 19</value>
   </data>
   <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>Health Check will automatically upload a server status report to [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pools.</value>
+    <value>Health Check will automatically upload a server status report to {0}, based on a predefined schedule configured on your {1} pools.</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>

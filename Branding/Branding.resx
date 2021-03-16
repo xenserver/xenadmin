@@ -122,6 +122,9 @@
   <data name="BRAND_CONSOLE" xml:space="preserve">
     <value>[XenCenter]</value>
   </data>
+  <data name="CIS" xml:space="preserve">
+    <value>Citrix Insight Services</value>
+  </data>
   <data name="COMPANY_NAME_LEGAL" xml:space="preserve">
     <value>[BRANDING_COMPANY_NAME_LEGAL]</value>
   </data>
@@ -151,9 +154,6 @@
   </data>
   <data name="PRODUCT_BRAND_WITH_COMPANY" xml:space="preserve">
     <value>[Citrix XenServer]</value>
-  </data>
-  <data name="PRODUCT_SERVER" xml:space="preserve">
-    <value>[XenServer]</value>
   </data>
   <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
     <value>5.6</value>
@@ -189,10 +189,13 @@
     <value>[Citrix VM Tools]</value>
   </data>
   <data name="XENCENTER_VERSION" xml:space="preserve">
-    <value>[BRANDING_PRODUCT_VERSION]</value>
+    <value>0.0.0</value>
   </data>
 
 
+  <data name="Label-host.XenMemory" xml:space="preserve">
+    <value>[Citrix XenServer] Host</value>
+  </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix XenServer] Basic Edition</value>
   </data>
@@ -272,5 +275,11 @@
     <value>[XenServer product] for [Citrix] Virtual Desktops</value>
   </data>
 
+  <data name="SR.name_description-xenserver-tools" xml:space="preserve">
+    <value>[Citrix VM Tools] ISOs</value>
+  </data>
+  <data name="SR.name_label-xenserver-tools" xml:space="preserve">
+    <value>[Citrix VM Tools]</value>
+  </data>
 
 </root>

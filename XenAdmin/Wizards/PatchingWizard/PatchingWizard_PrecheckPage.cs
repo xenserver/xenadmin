@@ -506,7 +506,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
             {
                 // add XenCenter version check as the first group
-                groups.Insert(0, new CheckGroup(Messages.CHECKING_XENCENTER_VERSION,
+                groups.Insert(0, new CheckGroup(string.Format(Messages.CHECKING_XENCENTER_VERSION, BrandManager.BrandConsole),
                     new List<Check> { new XenCenterVersionCheck(highestNewVersion ?? UpdateAlert.NewServerVersion) }));
             }
 

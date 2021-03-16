@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using XenAdmin.Core;
 using XenAdmin.Plugins;
 
 
@@ -47,7 +48,9 @@ namespace XenAdmin.Dialogs.OptionsPages
             InitializeComponent();
             m_tlpScanning.Visible = false;
             labelNoPlugins.Visible = false;
-            this.linkLabel1.Visible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
+            labelIntro.Text = string.Format(labelIntro.Text, BrandManager.BrandConsole);
+            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.BrandConsole);
+            linkLabel1.Visible = !HiddenFeatures.LinkLabelHidden;
         }
 
         public void Build()

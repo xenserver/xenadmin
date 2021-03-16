@@ -1298,7 +1298,7 @@ namespace XenAdmin.TabPages
                             (sender, args) => cmd.Execute());
 
                         s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText()),
+                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, master.ProductVersionText()),
                             new[] {runRpuWizard},
                             cmd);
                     }
@@ -1442,9 +1442,9 @@ namespace XenAdmin.TabPages
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 }
 
-                                var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null,
+                                var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), null,
                                     (sender, args) => GoToHelp());
-                                s.AddEntryLink(string.Empty, Messages.INSTALLTOOLS_READ_MORE, new[] {toolsItem}, GoToHelp);
+                                s.AddEntryLink(string.Empty, string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), new[] {toolsItem}, GoToHelp);
                             }
                             else
                             {
@@ -1472,15 +1472,15 @@ namespace XenAdmin.TabPages
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 }
 
-                                var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null, (sender, args) => GoToHelp());
+                                var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), null, (sender, args) => GoToHelp());
 
                                 s.AddEntry(FriendlyName("VM.VirtualizationState"), statusString);
-                                s.AddEntryLink("", Messages.INSTALLTOOLS_READ_MORE, new[] {toolsItem}, GoToHelp);
+                                s.AddEntryLink("", string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), new[] {toolsItem}, GoToHelp);
                             }
                             else
                             {
                                 var cmd = new InstallToolsCommand(Program.MainWindow, vm);
-                                var toolsItem = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS, null,
+                                var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALL_XENSERVER_TOOLS, BrandManager.VmTools), null,
                                     (sender, args) => cmd.Execute());
 
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), statusString,

@@ -117,7 +117,8 @@ namespace XenAdmin.Commands
             {
                 log.ErrorFormat("Failed to import search from '{0}'", filename);
 
-                using (var dlg = new ErrorDialog(String.Format(Messages.UNABLE_TO_IMPORT_SEARCH, filename, BrandManager.ExtensionSearch)))
+                using (var dlg = new ErrorDialog(String.Format(Messages.UNABLE_TO_IMPORT_SEARCH,
+                    BrandManager.BrandConsole, filename, BrandManager.ExtensionSearch)))
                 {
                     dlg.ShowDialog(Parent);
                 }

@@ -30,10 +30,9 @@
  */
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -197,8 +196,8 @@ namespace XenAdmin.Dialogs
 
         protected override void OnShown(EventArgs e)
         {
-            if (action != null)
-                action.RunAsync();
+            Text = BrandManager.BrandConsole;
+            action?.RunAsync();
             base.OnShown(e);
         }
 

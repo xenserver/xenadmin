@@ -55,7 +55,8 @@ namespace XenAdmin.Wizards
                 {
                     Multiselect = false,
                     ShowReadOnly = false,
-                    Filter = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT, BrandManager.ExtensionUpdate),
+                    Filter = string.Format(Messages.PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT,
+                        BrandManager.ProductBrand, BrandManager.ExtensionUpdate),
                     FilterIndex = 0,
                     CheckFileExists = true,
                     CheckPathExists = true,

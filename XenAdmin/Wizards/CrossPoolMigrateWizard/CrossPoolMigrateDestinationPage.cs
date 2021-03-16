@@ -35,7 +35,7 @@ using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 using System.Linq;
-using XenAdmin.Controls;
+using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
@@ -71,17 +71,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "DestinationCopyMode" : "Destination"; } }
+        public override string HelpID => wizardMode == WizardMode.Copy ? "DestinationCopyMode" : "Destination";
 
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
-        public override string PageTitle { get { return Messages.CPM_WIZARD_DESTINATION_TITLE; } }
+        public override string PageTitle => Messages.CPM_WIZARD_DESTINATION_TITLE;
 
         /// <summary>
         /// Gets the page's label in the (left hand side) wizard progress panel
         /// </summary>
-        public override string Text { get { return Messages.CPM_WIZARD_DESTINATION_TAB_TITLE; } }
+        public override string Text => Messages.CPM_WIZARD_DESTINATION_TAB_TITLE;
 
         private bool TemplatesOnly { get { return selectedVMs != null && selectedVMs.All(vm => vm.is_a_template); } }
 
@@ -125,9 +125,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
         }
 
-        protected override string TargetServerText { get { return Messages.CPM_WIZARD_DESTINATION_DESTINATION; } }
+        protected override string TargetServerText => Messages.CPM_WIZARD_DESTINATION_DESTINATION;
 
-        protected override string TargetServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
+        protected override string TargetServerSelectionIntroText => Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO;
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
@@ -169,27 +169,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (selectedVMs == null || selectedVMs.Count == 0 || Connection == null
                 || selectedVMs.Any(vm => Connection.Resolve(new XenRef<VM>(vm)) == null))
             {
-                CrossPoolMigrateWizard.ShowWarningMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
+                CrossPoolMigrateWizard.ShowWarningMessageBox(string.Format(Messages.CPM_WIZARD_VM_MISSING_ERROR, BrandManager.BrandConsole));
                 return false;
             }
 
             return true;
         }
 
-        protected override string VmColumnHeaderText
-        {
-            get
-            {
-                return TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
-            }
-        }
+        protected override string VmColumnHeaderText => TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
 
-        protected override string TargetColumnHeaderText
-        {
-            get
-            {
-                return Messages.TARGET_SERVER;
-            }
-        }
+        protected override string TargetColumnHeaderText => Messages.TARGET_SERVER;
     }
 }

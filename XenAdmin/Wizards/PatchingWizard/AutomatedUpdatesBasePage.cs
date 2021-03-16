@@ -544,7 +544,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             using (var dlg = new WarningDialog(string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {WindowTitle = ParentForm != null ? ParentForm.Text : Messages.XENCENTER})
+                {WindowTitle = ParentForm != null ? ParentForm.Text : BrandManager.BrandConsole})
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;

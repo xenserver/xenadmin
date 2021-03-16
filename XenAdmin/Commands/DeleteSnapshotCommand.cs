@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -110,12 +111,6 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return Messages.XENCENTER;
-            }
-        }
+        protected override string ConfirmationDialogTitle => BrandManager.BrandConsole;
     }
 }

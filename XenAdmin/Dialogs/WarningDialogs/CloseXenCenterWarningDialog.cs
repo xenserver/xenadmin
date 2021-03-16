@@ -49,6 +49,10 @@ namespace XenAdmin.Dialogs.WarningDialogs
         {
             InitializeComponent();
 
+            label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
+            label2.Text = string.Format(label2.Text, BrandManager.BrandConsole);
+            ExitButton.Text = string.Format(ExitButton.Text, BrandManager.BrandConsole);
+
             if (connection != null)
             {
                 label2.Text = String.Format(Messages.DISCONNECT_WARNING, Helpers.GetName(connection).Ellipsise(50));
@@ -58,6 +62,12 @@ namespace XenAdmin.Dialogs.WarningDialogs
 
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             BuildList();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = BrandManager.BrandConsole;
         }
 
         internal override string HelpName => connection == null ? Name : "DisconnectServerWarningDialog";
@@ -257,7 +267,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             private DataGridViewTextBoxCell locationCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell dateCell = new DataGridViewTextBoxCell();
 
-            public ActionBase Action { get; private set; }
+            public ActionBase Action { get; }
             public bool Expanded { get; set; }
 
             public DataGridViewActionRow(ActionBase action)

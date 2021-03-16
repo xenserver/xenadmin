@@ -155,7 +155,7 @@ namespace XenAdmin.Wizards.PatchingWizard
        
         protected override string BlurbText()
         {
-            return Messages.PATCHINGWIZARD_SINGLEUPLOAD_TITLE;
+            return string.Format(Messages.PATCHINGWIZARD_SINGLEUPLOAD_TITLE, BrandManager.BrandConsole);
         }
 
         protected override string SuccessMessageOnCompletion(bool multiplePools)

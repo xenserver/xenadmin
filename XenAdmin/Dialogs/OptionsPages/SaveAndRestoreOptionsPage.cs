@@ -51,6 +51,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         public SaveAndRestoreOptionsPage() 
         {
             InitializeComponent();
+            saveStateLabel.Text = string.Format(saveStateLabel.Text, BrandManager.BrandConsole);
         }
 
         // all prompts for old password should have been made
@@ -86,8 +87,9 @@ namespace XenAdmin.Dialogs.OptionsPages
                 if (Program.MasterPassword != TemporaryMasterPassword) 
                 {
                     Program.MasterPassword = TemporaryMasterPassword;
-                    new ActionBase(Messages.CHANGED_MASTER_PASSWORD,
-                        Messages.CHANGED_MASTER_PASSWORD_LONG, false, true);
+                    new ActionBase(string.Format(Messages.CHANGED_MASTER_PASSWORD, BrandManager.BrandConsole),
+                        string.Format(Messages.CHANGED_MASTER_PASSWORD_LONG, BrandManager.BrandConsole),
+                        false, true);
                 }
             }
             if (SaveAllAfter)
