@@ -275,7 +275,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             var action = new HealthCheckAuthenticationAction(textBoxMyCitrixUsername.Text.Trim(), textBoxMyCitrixPassword.Text.Trim(),
                 Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName, Registry.HealthCheckUploadTokenDomainName,
-                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 0, true);
+                Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 0, true, true);
             action.Completed += action_Completed;
 
             okButton.Enabled = false;
