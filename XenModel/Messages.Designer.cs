@@ -17938,7 +17938,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to This version of [XenCenter] can only connect to [XenServer] 8.2 and greater versions. It cannot connect to {0}.
         ///
-        ///You can get a compatible version of [XenCenter] from the following location:.
+        ///You can get a compatible version of {1} from the following location:.
         /// </summary>
         public static string GUI_NOT_COMPATIBLE {
             get {
@@ -40107,7 +40107,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} or upgrade {1} using the Rolling Pool Upgrade wizard..
+        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead..
         /// </summary>
         public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
             get {

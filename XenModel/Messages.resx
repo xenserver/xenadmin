@@ -6259,7 +6259,7 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
     <value>This version of [XenCenter] can only connect to [XenServer] 8.2 and greater versions. It cannot connect to {0}.
 
-You can get a compatible version of [XenCenter] from the following location:</value>
+You can get a compatible version of {1} from the following location:</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>This version of [XenCenter] is out of date and cannot connect to {0}.
@@ -13840,7 +13840,7 @@ Schedule:
     <value>The Health Check service has been removed in {0}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} or upgrade {1} using the Rolling Pool Upgrade wizard.</value>
+    <value>{0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>
