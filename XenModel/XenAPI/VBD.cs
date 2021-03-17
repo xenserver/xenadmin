@@ -1390,7 +1390,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _currently_attached = false;
+        private bool _currently_attached;
 
         /// <summary>
         /// error/success code associated with last attach-operation (erased on reboot)
