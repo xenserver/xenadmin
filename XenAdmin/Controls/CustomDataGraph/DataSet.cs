@@ -132,14 +132,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             if (settype.StartsWith("latency") || settype.EndsWith("latency"))
             {
-                if (settype.StartsWith("latency"))
+                if (settype.StartsWith("latency_") || settype.StartsWith("read_latency_") ||
+                    settype.StartsWith("write_latency_") || settype.StartsWith("vbd"))
                 {
-                    //if it's storage latency xapi units are in milliseconds
-                    dataSet.MultiplyingFactor = 1000000;
-                }
-                else if (settype.StartsWith("vbd"))
-                {
-                    //if it's vbd latency xapi units are in microseconds
+                    //if it's storage or vbd latency xapi units are in microseconds
                     dataSet.MultiplyingFactor = 1000;
                 }
                 else
