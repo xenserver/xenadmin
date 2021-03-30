@@ -715,7 +715,7 @@
     <value>850, 500</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Manage Conversions</value>
+    <value>Conversion Manager</value>
   </data>
   <data name="&gt;&gt;ColumnVm.Name" xml:space="preserve">
     <value>ColumnVm</value>
