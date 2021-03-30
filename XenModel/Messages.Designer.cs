@@ -9486,7 +9486,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Conversions - {0}.
+        ///   Looks up a localized string similar to Conversion Manager - {0}.
         /// </summary>
         public static string CONVERSION_MANAGER_TITLE {
             get {
