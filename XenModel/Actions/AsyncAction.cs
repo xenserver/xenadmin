@@ -369,14 +369,22 @@ namespace XenAdmin.Actions
                     log.InfoFormat("Task {0} finished successfully", RelatedTask.opaque_ref);
                     if (task.result != "") // Work around CA-6597
                     {
-                        var doc = new XmlDocument();
-                        doc.LoadXml(task.result);
-                        var nodes = doc.GetElementsByTagName("value");
-
-                        foreach (XmlNode node in nodes)
+                        try
                         {
-                            Result = node.InnerText;
-                            break;
+                            var doc = new XmlDocument();
+                            doc.LoadXml(task.result);
+                            var nodes = doc.GetElementsByTagName("value");
+
+                            foreach (XmlNode node in nodes)
+                            {
+                                Result = node.InnerText;
+                                break;
+                            }
+                        }
+                        catch //CA-352946
+                        {
+                            log.WarnFormat("Task {0} result is not valid xml", RelatedTask.opaque_ref);
+                            Result = task.result;
                         }
                     }
                     return true;
