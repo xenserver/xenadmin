@@ -3426,7 +3426,7 @@
     <value>正在将转换日志保存到 {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>管理转换 - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>映射要转换为目标池或独立服务器中的网络的 VMware VM 的虚拟以太网适配器。</value>

@@ -3417,7 +3417,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Saving conversion log to {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>Manage Conversions - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>Map the virtual ethernet adapters for the VMware VM(s) you are converting to networks in the destination pool or standalone server.</value>
