@@ -3430,7 +3430,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>変換ログを {0} に保存しています</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>変換の管理 - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>変換する VMware VM の仮想イーサネット アダプターを、変換先のプールまたはスタンドアロン サーバーのネットワークにマップします。</value>
