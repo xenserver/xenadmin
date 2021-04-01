@@ -33,7 +33,7 @@
 
 def XENADMIN_BRANDING_TAG = 'v3.0'
 
-@Library(['PacmanSharedLibrary', 'xencenter-pipeline@v3.1'])
+@Library(['PacmanSharedLibrary', 'xencenter-pipeline@v3.2'])
 import com.citrix.pipeline.xencenter.*
 
 properties([
@@ -62,6 +62,6 @@ node(globals.buildNodeLabel) {
         currentBuild.result = 'FAILURE'
         throw ex
     } finally {
-        buildComplete()
+        buildComplete(builder)
     }
 }
