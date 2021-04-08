@@ -211,6 +211,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridViewDetails.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewDetails.TabStop = false;
             // 
             // columnKey
             // 
@@ -302,6 +303,7 @@
             this.toolStripButtonExport,
             this.toolStripLabelFiltersOnOff});
             this.toolStripTop.Name = "toolStripTop";
+            this.toolStripTop.TabStop = true;
             // 
             // toolStripButtonNew
             // 
@@ -430,7 +432,6 @@
             this.statusLinkLabel});
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.ShowItemToolTips = true;
-            this.statusStrip1.TabStop = true;
             // 
             // statusLabel
             // 
