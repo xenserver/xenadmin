@@ -3569,7 +3569,7 @@
     <value>正在取消暂停 Conversion Manager 虚拟设备...</value>
   </data>
   <data name="CONVERSION_WIZARD_TEXT" xml:space="preserve">
-    <value>新转换</value>
+    <value>新建转换</value>
   </data>
   <data name="CONVERT" xml:space="preserve">
     <value>转换(&amp;C)</value>
