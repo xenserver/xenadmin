@@ -74,29 +74,28 @@ cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #sign files only if all parameters are set and non-empty
 SIGN_BAT="${REPO}/scripts/sign.bat"
-SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}"
 
 if [ -f "${SIGN_BAT}" ] ; then
   for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe CommandLib.dll MSTSCLib.dll CoreUtilsLib.dll XenModel.dll XenOvf.dll
   do
-    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
   done
 
   for locale in ja zh-CN
   do
     for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
     do
-      cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+      cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
     done
   done
 
-  cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe "${SIGN_DESCR}"
-  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${SIGN_DESCR}"
-  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${SIGN_DESCR}"
+  cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe "${BRANDING_BRAND_CONSOLE}"
+  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${BRANDING_BRAND_CONSOLE}"
+  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${BRANDING_BRAND_CONSOLE}"
 
   for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll Microsoft.ReportViewer.Common.resources.dll Microsoft.ReportViewer.WinForms.resources.dll
   do
-    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
   done
 
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} CookComputing.XmlRpcV2.dll "XML-RPC.NET"
@@ -107,7 +106,7 @@ if [ -f "${SIGN_BAT}" ] ; then
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
 
-  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${SIGN_DESCR}"
+  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${BRANDING_BRAND_CONSOLE}"
 else
   echo "Sign script does not exist; skip signing binaries"
 fi
@@ -190,7 +189,7 @@ done
 #copy and sign the combined installer
 
 if [ -f "${SIGN_BAT}" ] ; then
-  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi "${SIGN_DESCR}"
+  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi "${BRANDING_BRAND_CONSOLE}"
 else
   echo "Sign script does not exist; skip signing installer"
 fi
