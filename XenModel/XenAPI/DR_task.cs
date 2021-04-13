@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -85,24 +86,16 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given DR_task.
         /// </summary>
-        public override void UpdateFrom(DR_task update)
+        public override void UpdateFrom(DR_task record)
         {
-            uuid = update.uuid;
-            introduced_SRs = update.introduced_SRs;
+            uuid = record.uuid;
+            introduced_SRs = record.introduced_SRs;
         }
 
         internal void UpdateFrom(Proxy_DR_task proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
             introduced_SRs = proxy.introduced_SRs == null ? null : XenRef<SR>.Create(proxy.introduced_SRs);
-        }
-
-        public Proxy_DR_task ToProxy()
-        {
-            Proxy_DR_task result_ = new Proxy_DR_task();
-            result_.uuid = uuid ?? "";
-            result_.introduced_SRs = introduced_SRs == null ? new string[] {} : Helper.RefListToStringArray(introduced_SRs);
-            return result_;
         }
 
         /// <summary>
@@ -119,6 +112,14 @@ namespace XenAPI
                 introduced_SRs = Marshalling.ParseSetRef<SR>(table, "introduced_SRs");
         }
 
+        public Proxy_DR_task ToProxy()
+        {
+            Proxy_DR_task result_ = new Proxy_DR_task();
+            result_.uuid = uuid ?? "";
+            result_.introduced_SRs = introduced_SRs == null ? new string[] {} : Helper.RefListToStringArray(introduced_SRs);
+            return result_;
+        }
+
         public bool DeepEquals(DR_task other)
         {
             if (ReferenceEquals(null, other))
@@ -128,15 +129,6 @@ namespace XenAPI
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._introduced_SRs, other._introduced_SRs);
-        }
-
-        internal static List<DR_task> ProxyArrayToObjectList(Proxy_DR_task[] input)
-        {
-            var result = new List<DR_task>();
-            foreach (var item in input)
-                result.Add(new DR_task(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, DR_task server)
@@ -151,6 +143,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given DR_task.
         /// First published in XenServer 6.0.

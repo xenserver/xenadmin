@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -136,7 +137,8 @@ namespace XenAPI
             bool requires_reboot,
             string reference_label,
             domain_type domain_type,
-            Dictionary<string, string> NVRAM)
+            Dictionary<string, string> NVRAM,
+            List<update_guidances> pending_guidances)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -224,6 +226,7 @@ namespace XenAPI
             this.reference_label = reference_label;
             this.domain_type = domain_type;
             this.NVRAM = NVRAM;
+            this.pending_guidances = pending_guidances;
         }
 
         /// <summary>
@@ -253,94 +256,95 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VM.
         /// </summary>
-        public override void UpdateFrom(VM update)
+        public override void UpdateFrom(VM record)
         {
-            uuid = update.uuid;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            power_state = update.power_state;
-            user_version = update.user_version;
-            is_a_template = update.is_a_template;
-            is_default_template = update.is_default_template;
-            suspend_VDI = update.suspend_VDI;
-            resident_on = update.resident_on;
-            scheduled_to_be_resident_on = update.scheduled_to_be_resident_on;
-            affinity = update.affinity;
-            memory_overhead = update.memory_overhead;
-            memory_target = update.memory_target;
-            memory_static_max = update.memory_static_max;
-            memory_dynamic_max = update.memory_dynamic_max;
-            memory_dynamic_min = update.memory_dynamic_min;
-            memory_static_min = update.memory_static_min;
-            VCPUs_params = update.VCPUs_params;
-            VCPUs_max = update.VCPUs_max;
-            VCPUs_at_startup = update.VCPUs_at_startup;
-            actions_after_shutdown = update.actions_after_shutdown;
-            actions_after_reboot = update.actions_after_reboot;
-            actions_after_crash = update.actions_after_crash;
-            consoles = update.consoles;
-            VIFs = update.VIFs;
-            VBDs = update.VBDs;
-            VUSBs = update.VUSBs;
-            crash_dumps = update.crash_dumps;
-            VTPMs = update.VTPMs;
-            PV_bootloader = update.PV_bootloader;
-            PV_kernel = update.PV_kernel;
-            PV_ramdisk = update.PV_ramdisk;
-            PV_args = update.PV_args;
-            PV_bootloader_args = update.PV_bootloader_args;
-            PV_legacy_args = update.PV_legacy_args;
-            HVM_boot_policy = update.HVM_boot_policy;
-            HVM_boot_params = update.HVM_boot_params;
-            HVM_shadow_multiplier = update.HVM_shadow_multiplier;
-            platform = update.platform;
-            PCI_bus = update.PCI_bus;
-            other_config = update.other_config;
-            domid = update.domid;
-            domarch = update.domarch;
-            last_boot_CPU_flags = update.last_boot_CPU_flags;
-            is_control_domain = update.is_control_domain;
-            metrics = update.metrics;
-            guest_metrics = update.guest_metrics;
-            last_booted_record = update.last_booted_record;
-            recommendations = update.recommendations;
-            xenstore_data = update.xenstore_data;
-            ha_always_run = update.ha_always_run;
-            ha_restart_priority = update.ha_restart_priority;
-            is_a_snapshot = update.is_a_snapshot;
-            snapshot_of = update.snapshot_of;
-            snapshots = update.snapshots;
-            snapshot_time = update.snapshot_time;
-            transportable_snapshot_id = update.transportable_snapshot_id;
-            blobs = update.blobs;
-            tags = update.tags;
-            blocked_operations = update.blocked_operations;
-            snapshot_info = update.snapshot_info;
-            snapshot_metadata = update.snapshot_metadata;
-            parent = update.parent;
-            children = update.children;
-            bios_strings = update.bios_strings;
-            protection_policy = update.protection_policy;
-            is_snapshot_from_vmpp = update.is_snapshot_from_vmpp;
-            snapshot_schedule = update.snapshot_schedule;
-            is_vmss_snapshot = update.is_vmss_snapshot;
-            appliance = update.appliance;
-            start_delay = update.start_delay;
-            shutdown_delay = update.shutdown_delay;
-            order = update.order;
-            VGPUs = update.VGPUs;
-            attached_PCIs = update.attached_PCIs;
-            suspend_SR = update.suspend_SR;
-            version = update.version;
-            generation_id = update.generation_id;
-            hardware_platform_version = update.hardware_platform_version;
-            has_vendor_device = update.has_vendor_device;
-            requires_reboot = update.requires_reboot;
-            reference_label = update.reference_label;
-            domain_type = update.domain_type;
-            NVRAM = update.NVRAM;
+            uuid = record.uuid;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            power_state = record.power_state;
+            user_version = record.user_version;
+            is_a_template = record.is_a_template;
+            is_default_template = record.is_default_template;
+            suspend_VDI = record.suspend_VDI;
+            resident_on = record.resident_on;
+            scheduled_to_be_resident_on = record.scheduled_to_be_resident_on;
+            affinity = record.affinity;
+            memory_overhead = record.memory_overhead;
+            memory_target = record.memory_target;
+            memory_static_max = record.memory_static_max;
+            memory_dynamic_max = record.memory_dynamic_max;
+            memory_dynamic_min = record.memory_dynamic_min;
+            memory_static_min = record.memory_static_min;
+            VCPUs_params = record.VCPUs_params;
+            VCPUs_max = record.VCPUs_max;
+            VCPUs_at_startup = record.VCPUs_at_startup;
+            actions_after_shutdown = record.actions_after_shutdown;
+            actions_after_reboot = record.actions_after_reboot;
+            actions_after_crash = record.actions_after_crash;
+            consoles = record.consoles;
+            VIFs = record.VIFs;
+            VBDs = record.VBDs;
+            VUSBs = record.VUSBs;
+            crash_dumps = record.crash_dumps;
+            VTPMs = record.VTPMs;
+            PV_bootloader = record.PV_bootloader;
+            PV_kernel = record.PV_kernel;
+            PV_ramdisk = record.PV_ramdisk;
+            PV_args = record.PV_args;
+            PV_bootloader_args = record.PV_bootloader_args;
+            PV_legacy_args = record.PV_legacy_args;
+            HVM_boot_policy = record.HVM_boot_policy;
+            HVM_boot_params = record.HVM_boot_params;
+            HVM_shadow_multiplier = record.HVM_shadow_multiplier;
+            platform = record.platform;
+            PCI_bus = record.PCI_bus;
+            other_config = record.other_config;
+            domid = record.domid;
+            domarch = record.domarch;
+            last_boot_CPU_flags = record.last_boot_CPU_flags;
+            is_control_domain = record.is_control_domain;
+            metrics = record.metrics;
+            guest_metrics = record.guest_metrics;
+            last_booted_record = record.last_booted_record;
+            recommendations = record.recommendations;
+            xenstore_data = record.xenstore_data;
+            ha_always_run = record.ha_always_run;
+            ha_restart_priority = record.ha_restart_priority;
+            is_a_snapshot = record.is_a_snapshot;
+            snapshot_of = record.snapshot_of;
+            snapshots = record.snapshots;
+            snapshot_time = record.snapshot_time;
+            transportable_snapshot_id = record.transportable_snapshot_id;
+            blobs = record.blobs;
+            tags = record.tags;
+            blocked_operations = record.blocked_operations;
+            snapshot_info = record.snapshot_info;
+            snapshot_metadata = record.snapshot_metadata;
+            parent = record.parent;
+            children = record.children;
+            bios_strings = record.bios_strings;
+            protection_policy = record.protection_policy;
+            is_snapshot_from_vmpp = record.is_snapshot_from_vmpp;
+            snapshot_schedule = record.snapshot_schedule;
+            is_vmss_snapshot = record.is_vmss_snapshot;
+            appliance = record.appliance;
+            start_delay = record.start_delay;
+            shutdown_delay = record.shutdown_delay;
+            order = record.order;
+            VGPUs = record.VGPUs;
+            attached_PCIs = record.attached_PCIs;
+            suspend_SR = record.suspend_SR;
+            version = record.version;
+            generation_id = record.generation_id;
+            hardware_platform_version = record.hardware_platform_version;
+            has_vendor_device = record.has_vendor_device;
+            requires_reboot = record.requires_reboot;
+            reference_label = record.reference_label;
+            domain_type = record.domain_type;
+            NVRAM = record.NVRAM;
+            pending_guidances = record.pending_guidances;
         }
 
         internal void UpdateFrom(Proxy_VM proxy)
@@ -431,98 +435,7 @@ namespace XenAPI
             reference_label = proxy.reference_label == null ? null : proxy.reference_label;
             domain_type = proxy.domain_type == null ? (domain_type) 0 : (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)proxy.domain_type);
             NVRAM = proxy.NVRAM == null ? null : Maps.convert_from_proxy_string_string(proxy.NVRAM);
-        }
-
-        public Proxy_VM ToProxy()
-        {
-            Proxy_VM result_ = new Proxy_VM();
-            result_.uuid = uuid ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vm_operations(current_operations);
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.power_state = vm_power_state_helper.ToString(power_state);
-            result_.user_version = user_version.ToString();
-            result_.is_a_template = is_a_template;
-            result_.is_default_template = is_default_template;
-            result_.suspend_VDI = suspend_VDI ?? "";
-            result_.resident_on = resident_on ?? "";
-            result_.scheduled_to_be_resident_on = scheduled_to_be_resident_on ?? "";
-            result_.affinity = affinity ?? "";
-            result_.memory_overhead = memory_overhead.ToString();
-            result_.memory_target = memory_target.ToString();
-            result_.memory_static_max = memory_static_max.ToString();
-            result_.memory_dynamic_max = memory_dynamic_max.ToString();
-            result_.memory_dynamic_min = memory_dynamic_min.ToString();
-            result_.memory_static_min = memory_static_min.ToString();
-            result_.VCPUs_params = Maps.convert_to_proxy_string_string(VCPUs_params);
-            result_.VCPUs_max = VCPUs_max.ToString();
-            result_.VCPUs_at_startup = VCPUs_at_startup.ToString();
-            result_.actions_after_shutdown = on_normal_exit_helper.ToString(actions_after_shutdown);
-            result_.actions_after_reboot = on_normal_exit_helper.ToString(actions_after_reboot);
-            result_.actions_after_crash = on_crash_behaviour_helper.ToString(actions_after_crash);
-            result_.consoles = consoles == null ? new string[] {} : Helper.RefListToStringArray(consoles);
-            result_.VIFs = VIFs == null ? new string[] {} : Helper.RefListToStringArray(VIFs);
-            result_.VBDs = VBDs == null ? new string[] {} : Helper.RefListToStringArray(VBDs);
-            result_.VUSBs = VUSBs == null ? new string[] {} : Helper.RefListToStringArray(VUSBs);
-            result_.crash_dumps = crash_dumps == null ? new string[] {} : Helper.RefListToStringArray(crash_dumps);
-            result_.VTPMs = VTPMs == null ? new string[] {} : Helper.RefListToStringArray(VTPMs);
-            result_.PV_bootloader = PV_bootloader ?? "";
-            result_.PV_kernel = PV_kernel ?? "";
-            result_.PV_ramdisk = PV_ramdisk ?? "";
-            result_.PV_args = PV_args ?? "";
-            result_.PV_bootloader_args = PV_bootloader_args ?? "";
-            result_.PV_legacy_args = PV_legacy_args ?? "";
-            result_.HVM_boot_policy = HVM_boot_policy ?? "";
-            result_.HVM_boot_params = Maps.convert_to_proxy_string_string(HVM_boot_params);
-            result_.HVM_shadow_multiplier = HVM_shadow_multiplier;
-            result_.platform = Maps.convert_to_proxy_string_string(platform);
-            result_.PCI_bus = PCI_bus ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.domid = domid.ToString();
-            result_.domarch = domarch ?? "";
-            result_.last_boot_CPU_flags = Maps.convert_to_proxy_string_string(last_boot_CPU_flags);
-            result_.is_control_domain = is_control_domain;
-            result_.metrics = metrics ?? "";
-            result_.guest_metrics = guest_metrics ?? "";
-            result_.last_booted_record = last_booted_record ?? "";
-            result_.recommendations = recommendations ?? "";
-            result_.xenstore_data = Maps.convert_to_proxy_string_string(xenstore_data);
-            result_.ha_always_run = ha_always_run;
-            result_.ha_restart_priority = ha_restart_priority ?? "";
-            result_.is_a_snapshot = is_a_snapshot;
-            result_.snapshot_of = snapshot_of ?? "";
-            result_.snapshots = snapshots == null ? new string[] {} : Helper.RefListToStringArray(snapshots);
-            result_.snapshot_time = snapshot_time;
-            result_.transportable_snapshot_id = transportable_snapshot_id ?? "";
-            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
-            result_.tags = tags;
-            result_.blocked_operations = Maps.convert_to_proxy_vm_operations_string(blocked_operations);
-            result_.snapshot_info = Maps.convert_to_proxy_string_string(snapshot_info);
-            result_.snapshot_metadata = snapshot_metadata ?? "";
-            result_.parent = parent ?? "";
-            result_.children = children == null ? new string[] {} : Helper.RefListToStringArray(children);
-            result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
-            result_.protection_policy = protection_policy ?? "";
-            result_.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
-            result_.snapshot_schedule = snapshot_schedule ?? "";
-            result_.is_vmss_snapshot = is_vmss_snapshot;
-            result_.appliance = appliance ?? "";
-            result_.start_delay = start_delay.ToString();
-            result_.shutdown_delay = shutdown_delay.ToString();
-            result_.order = order.ToString();
-            result_.VGPUs = VGPUs == null ? new string[] {} : Helper.RefListToStringArray(VGPUs);
-            result_.attached_PCIs = attached_PCIs == null ? new string[] {} : Helper.RefListToStringArray(attached_PCIs);
-            result_.suspend_SR = suspend_SR ?? "";
-            result_.version = version.ToString();
-            result_.generation_id = generation_id ?? "";
-            result_.hardware_platform_version = hardware_platform_version.ToString();
-            result_.has_vendor_device = has_vendor_device;
-            result_.requires_reboot = requires_reboot;
-            result_.reference_label = reference_label ?? "";
-            result_.domain_type = domain_type_helper.ToString(domain_type);
-            result_.NVRAM = Maps.convert_to_proxy_string_string(NVRAM);
-            return result_;
+            pending_guidances = proxy.pending_guidances == null ? null : Helper.StringArrayToEnumList<update_guidances>(proxy.pending_guidances);
         }
 
         /// <summary>
@@ -705,6 +618,101 @@ namespace XenAPI
                 domain_type = (domain_type)Helper.EnumParseDefault(typeof(domain_type), Marshalling.ParseString(table, "domain_type"));
             if (table.ContainsKey("NVRAM"))
                 NVRAM = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "NVRAM"));
+            if (table.ContainsKey("pending_guidances"))
+                pending_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "pending_guidances"));
+        }
+
+        public Proxy_VM ToProxy()
+        {
+            Proxy_VM result_ = new Proxy_VM();
+            result_.uuid = uuid ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_vm_operations(current_operations);
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.power_state = vm_power_state_helper.ToString(power_state);
+            result_.user_version = user_version.ToString();
+            result_.is_a_template = is_a_template;
+            result_.is_default_template = is_default_template;
+            result_.suspend_VDI = suspend_VDI ?? "";
+            result_.resident_on = resident_on ?? "";
+            result_.scheduled_to_be_resident_on = scheduled_to_be_resident_on ?? "";
+            result_.affinity = affinity ?? "";
+            result_.memory_overhead = memory_overhead.ToString();
+            result_.memory_target = memory_target.ToString();
+            result_.memory_static_max = memory_static_max.ToString();
+            result_.memory_dynamic_max = memory_dynamic_max.ToString();
+            result_.memory_dynamic_min = memory_dynamic_min.ToString();
+            result_.memory_static_min = memory_static_min.ToString();
+            result_.VCPUs_params = Maps.convert_to_proxy_string_string(VCPUs_params);
+            result_.VCPUs_max = VCPUs_max.ToString();
+            result_.VCPUs_at_startup = VCPUs_at_startup.ToString();
+            result_.actions_after_shutdown = on_normal_exit_helper.ToString(actions_after_shutdown);
+            result_.actions_after_reboot = on_normal_exit_helper.ToString(actions_after_reboot);
+            result_.actions_after_crash = on_crash_behaviour_helper.ToString(actions_after_crash);
+            result_.consoles = consoles == null ? new string[] {} : Helper.RefListToStringArray(consoles);
+            result_.VIFs = VIFs == null ? new string[] {} : Helper.RefListToStringArray(VIFs);
+            result_.VBDs = VBDs == null ? new string[] {} : Helper.RefListToStringArray(VBDs);
+            result_.VUSBs = VUSBs == null ? new string[] {} : Helper.RefListToStringArray(VUSBs);
+            result_.crash_dumps = crash_dumps == null ? new string[] {} : Helper.RefListToStringArray(crash_dumps);
+            result_.VTPMs = VTPMs == null ? new string[] {} : Helper.RefListToStringArray(VTPMs);
+            result_.PV_bootloader = PV_bootloader ?? "";
+            result_.PV_kernel = PV_kernel ?? "";
+            result_.PV_ramdisk = PV_ramdisk ?? "";
+            result_.PV_args = PV_args ?? "";
+            result_.PV_bootloader_args = PV_bootloader_args ?? "";
+            result_.PV_legacy_args = PV_legacy_args ?? "";
+            result_.HVM_boot_policy = HVM_boot_policy ?? "";
+            result_.HVM_boot_params = Maps.convert_to_proxy_string_string(HVM_boot_params);
+            result_.HVM_shadow_multiplier = HVM_shadow_multiplier;
+            result_.platform = Maps.convert_to_proxy_string_string(platform);
+            result_.PCI_bus = PCI_bus ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.domid = domid.ToString();
+            result_.domarch = domarch ?? "";
+            result_.last_boot_CPU_flags = Maps.convert_to_proxy_string_string(last_boot_CPU_flags);
+            result_.is_control_domain = is_control_domain;
+            result_.metrics = metrics ?? "";
+            result_.guest_metrics = guest_metrics ?? "";
+            result_.last_booted_record = last_booted_record ?? "";
+            result_.recommendations = recommendations ?? "";
+            result_.xenstore_data = Maps.convert_to_proxy_string_string(xenstore_data);
+            result_.ha_always_run = ha_always_run;
+            result_.ha_restart_priority = ha_restart_priority ?? "";
+            result_.is_a_snapshot = is_a_snapshot;
+            result_.snapshot_of = snapshot_of ?? "";
+            result_.snapshots = snapshots == null ? new string[] {} : Helper.RefListToStringArray(snapshots);
+            result_.snapshot_time = snapshot_time;
+            result_.transportable_snapshot_id = transportable_snapshot_id ?? "";
+            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
+            result_.tags = tags;
+            result_.blocked_operations = Maps.convert_to_proxy_vm_operations_string(blocked_operations);
+            result_.snapshot_info = Maps.convert_to_proxy_string_string(snapshot_info);
+            result_.snapshot_metadata = snapshot_metadata ?? "";
+            result_.parent = parent ?? "";
+            result_.children = children == null ? new string[] {} : Helper.RefListToStringArray(children);
+            result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
+            result_.protection_policy = protection_policy ?? "";
+            result_.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
+            result_.snapshot_schedule = snapshot_schedule ?? "";
+            result_.is_vmss_snapshot = is_vmss_snapshot;
+            result_.appliance = appliance ?? "";
+            result_.start_delay = start_delay.ToString();
+            result_.shutdown_delay = shutdown_delay.ToString();
+            result_.order = order.ToString();
+            result_.VGPUs = VGPUs == null ? new string[] {} : Helper.RefListToStringArray(VGPUs);
+            result_.attached_PCIs = attached_PCIs == null ? new string[] {} : Helper.RefListToStringArray(attached_PCIs);
+            result_.suspend_SR = suspend_SR ?? "";
+            result_.version = version.ToString();
+            result_.generation_id = generation_id ?? "";
+            result_.hardware_platform_version = hardware_platform_version.ToString();
+            result_.has_vendor_device = has_vendor_device;
+            result_.requires_reboot = requires_reboot;
+            result_.reference_label = reference_label ?? "";
+            result_.domain_type = domain_type_helper.ToString(domain_type);
+            result_.NVRAM = Maps.convert_to_proxy_string_string(NVRAM);
+            result_.pending_guidances = pending_guidances == null ? new string[] {} : Helper.ObjectListToStringArray(pending_guidances);
+            return result_;
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -801,16 +809,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
                 Helper.AreEqual2(this._reference_label, other._reference_label) &&
                 Helper.AreEqual2(this._domain_type, other._domain_type) &&
-                Helper.AreEqual2(this._NVRAM, other._NVRAM);
-        }
-
-        internal static List<VM> ProxyArrayToObjectList(Proxy_VM[] input)
-        {
-            var result = new List<VM>();
-            foreach (var item in input)
-                result.Add(new VM(item));
-
-            return result;
+                Helper.AreEqual2(this._NVRAM, other._NVRAM) &&
+                Helper.AreEqual2(this._pending_guidances, other._pending_guidances);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1006,6 +1006,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VM.
         /// First published in XenServer 4.0.
@@ -2318,6 +2319,20 @@ namespace XenAPI
                 return session.JsonRpcClient.vm_get_nvram(session.opaque_ref, _vm);
             else
                 return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vm_get_nvram(session.opaque_ref, _vm ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the pending_guidances field of the given VM.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static List<update_guidances> get_pending_guidances(Session session, string _vm)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pending_guidances(session.opaque_ref, _vm);
+            else
+                return Helper.StringArrayToEnumList<update_guidances>(session.XmlRpcProxy.vm_get_pending_guidances(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4328,7 +4343,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_get_data_sources(session.opaque_ref, _vm);
             else
-                return Data_source.ProxyArrayToObjectList(session.XmlRpcProxy.vm_get_data_sources(session.opaque_ref, _vm ?? "").parse());
+                return session.XmlRpcProxy.vm_get_data_sources(session.opaque_ref, _vm ?? "").parse().Select(p => new Data_source(p)).ToList();
         }
 
         /// <summary>
@@ -6081,7 +6096,7 @@ namespace XenAPI
         private XenRef<VM_guest_metrics> _guest_metrics = new XenRef<VM_guest_metrics>(Helper.NullOpaqueRef);
 
         /// <summary>
-        /// marshalled value containing VM record at time of last boot, updated dynamically to reflect the runtime state of the domain
+        /// marshalled value containing VM record at time of last boot
         /// First published in XenServer 4.1.
         /// </summary>
         public virtual string last_booted_record
@@ -6760,5 +6775,23 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _NVRAM = new Dictionary<string, string>() {};
+
+        /// <summary>
+        /// The set of pending guidances after applying updates
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual List<update_guidances> pending_guidances
+        {
+            get { return _pending_guidances; }
+            set
+            {
+                if (!Helper.AreEqual(value, _pending_guidances))
+                {
+                    _pending_guidances = value;
+                    NotifyPropertyChanged("pending_guidances");
+                }
+            }
+        }
+        private List<update_guidances> _pending_guidances = new List<update_guidances>() {};
     }
 }

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -101,18 +102,18 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Host_patch.
         /// </summary>
-        public override void UpdateFrom(Host_patch update)
+        public override void UpdateFrom(Host_patch record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            version = update.version;
-            host = update.host;
-            applied = update.applied;
-            timestamp_applied = update.timestamp_applied;
-            size = update.size;
-            pool_patch = update.pool_patch;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            version = record.version;
+            host = record.host;
+            applied = record.applied;
+            timestamp_applied = record.timestamp_applied;
+            size = record.size;
+            pool_patch = record.pool_patch;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Host_patch proxy)
@@ -127,22 +128,6 @@ namespace XenAPI
             size = proxy.size == null ? 0 : long.Parse(proxy.size);
             pool_patch = proxy.pool_patch == null ? null : XenRef<Pool_patch>.Create(proxy.pool_patch);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Host_patch ToProxy()
-        {
-            Proxy_Host_patch result_ = new Proxy_Host_patch();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.version = version ?? "";
-            result_.host = host ?? "";
-            result_.applied = applied;
-            result_.timestamp_applied = timestamp_applied;
-            result_.size = size.ToString();
-            result_.pool_patch = pool_patch ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -175,6 +160,22 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Host_patch ToProxy()
+        {
+            Proxy_Host_patch result_ = new Proxy_Host_patch();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.version = version ?? "";
+            result_.host = host ?? "";
+            result_.applied = applied;
+            result_.timestamp_applied = timestamp_applied;
+            result_.size = size.ToString();
+            result_.pool_patch = pool_patch ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Host_patch other)
         {
             if (ReferenceEquals(null, other))
@@ -194,15 +195,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
-        internal static List<Host_patch> ProxyArrayToObjectList(Proxy_Host_patch[] input)
-        {
-            var result = new List<Host_patch>();
-            foreach (var item in input)
-                result.Add(new Host_patch(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Host_patch server)
         {
             if (opaqueRef == null)
@@ -220,6 +212,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given host_patch.
         /// First published in XenServer 4.0.

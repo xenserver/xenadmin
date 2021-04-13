@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -125,30 +126,30 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VBD.
         /// </summary>
-        public override void UpdateFrom(VBD update)
+        public override void UpdateFrom(VBD record)
         {
-            uuid = update.uuid;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            VM = update.VM;
-            VDI = update.VDI;
-            device = update.device;
-            userdevice = update.userdevice;
-            bootable = update.bootable;
-            mode = update.mode;
-            type = update.type;
-            unpluggable = update.unpluggable;
-            storage_lock = update.storage_lock;
-            empty = update.empty;
-            other_config = update.other_config;
-            currently_attached = update.currently_attached;
-            status_code = update.status_code;
-            status_detail = update.status_detail;
-            runtime_properties = update.runtime_properties;
-            qos_algorithm_type = update.qos_algorithm_type;
-            qos_algorithm_params = update.qos_algorithm_params;
-            qos_supported_algorithms = update.qos_supported_algorithms;
-            metrics = update.metrics;
+            uuid = record.uuid;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            VM = record.VM;
+            VDI = record.VDI;
+            device = record.device;
+            userdevice = record.userdevice;
+            bootable = record.bootable;
+            mode = record.mode;
+            type = record.type;
+            unpluggable = record.unpluggable;
+            storage_lock = record.storage_lock;
+            empty = record.empty;
+            other_config = record.other_config;
+            currently_attached = record.currently_attached;
+            status_code = record.status_code;
+            status_detail = record.status_detail;
+            runtime_properties = record.runtime_properties;
+            qos_algorithm_type = record.qos_algorithm_type;
+            qos_algorithm_params = record.qos_algorithm_params;
+            qos_supported_algorithms = record.qos_supported_algorithms;
+            metrics = record.metrics;
         }
 
         internal void UpdateFrom(Proxy_VBD proxy)
@@ -175,34 +176,6 @@ namespace XenAPI
             qos_algorithm_params = proxy.qos_algorithm_params == null ? null : Maps.convert_from_proxy_string_string(proxy.qos_algorithm_params);
             qos_supported_algorithms = proxy.qos_supported_algorithms == null ? new string[] {} : (string [])proxy.qos_supported_algorithms;
             metrics = proxy.metrics == null ? null : XenRef<VBD_metrics>.Create(proxy.metrics);
-        }
-
-        public Proxy_VBD ToProxy()
-        {
-            Proxy_VBD result_ = new Proxy_VBD();
-            result_.uuid = uuid ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vbd_operations(current_operations);
-            result_.VM = VM ?? "";
-            result_.VDI = VDI ?? "";
-            result_.device = device ?? "";
-            result_.userdevice = userdevice ?? "";
-            result_.bootable = bootable;
-            result_.mode = vbd_mode_helper.ToString(mode);
-            result_.type = vbd_type_helper.ToString(type);
-            result_.unpluggable = unpluggable;
-            result_.storage_lock = storage_lock;
-            result_.empty = empty;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.currently_attached = currently_attached;
-            result_.status_code = status_code.ToString();
-            result_.status_detail = status_detail ?? "";
-            result_.runtime_properties = Maps.convert_to_proxy_string_string(runtime_properties);
-            result_.qos_algorithm_type = qos_algorithm_type ?? "";
-            result_.qos_algorithm_params = Maps.convert_to_proxy_string_string(qos_algorithm_params);
-            result_.qos_supported_algorithms = qos_supported_algorithms;
-            result_.metrics = metrics ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -259,6 +232,34 @@ namespace XenAPI
                 metrics = Marshalling.ParseRef<VBD_metrics>(table, "metrics");
         }
 
+        public Proxy_VBD ToProxy()
+        {
+            Proxy_VBD result_ = new Proxy_VBD();
+            result_.uuid = uuid ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_vbd_operations(current_operations);
+            result_.VM = VM ?? "";
+            result_.VDI = VDI ?? "";
+            result_.device = device ?? "";
+            result_.userdevice = userdevice ?? "";
+            result_.bootable = bootable;
+            result_.mode = vbd_mode_helper.ToString(mode);
+            result_.type = vbd_type_helper.ToString(type);
+            result_.unpluggable = unpluggable;
+            result_.storage_lock = storage_lock;
+            result_.empty = empty;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.currently_attached = currently_attached;
+            result_.status_code = status_code.ToString();
+            result_.status_detail = status_detail ?? "";
+            result_.runtime_properties = Maps.convert_to_proxy_string_string(runtime_properties);
+            result_.qos_algorithm_type = qos_algorithm_type ?? "";
+            result_.qos_algorithm_params = Maps.convert_to_proxy_string_string(qos_algorithm_params);
+            result_.qos_supported_algorithms = qos_supported_algorithms;
+            result_.metrics = metrics ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(VBD other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -290,15 +291,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._qos_algorithm_params, other._qos_algorithm_params) &&
                 Helper.AreEqual2(this._qos_supported_algorithms, other._qos_supported_algorithms) &&
                 Helper.AreEqual2(this._metrics, other._metrics);
-        }
-
-        internal static List<VBD> ProxyArrayToObjectList(Proxy_VBD[] input)
-        {
-            var result = new List<VBD>();
-            foreach (var item in input)
-                result.Add(new VBD(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VBD server)
@@ -346,6 +338,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VBD.
         /// First published in XenServer 4.0.

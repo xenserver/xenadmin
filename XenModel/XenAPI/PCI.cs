@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -103,19 +104,19 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PCI.
         /// </summary>
-        public override void UpdateFrom(PCI update)
+        public override void UpdateFrom(PCI record)
         {
-            uuid = update.uuid;
-            class_name = update.class_name;
-            vendor_name = update.vendor_name;
-            device_name = update.device_name;
-            host = update.host;
-            pci_id = update.pci_id;
-            dependencies = update.dependencies;
-            other_config = update.other_config;
-            subsystem_vendor_name = update.subsystem_vendor_name;
-            subsystem_device_name = update.subsystem_device_name;
-            driver_name = update.driver_name;
+            uuid = record.uuid;
+            class_name = record.class_name;
+            vendor_name = record.vendor_name;
+            device_name = record.device_name;
+            host = record.host;
+            pci_id = record.pci_id;
+            dependencies = record.dependencies;
+            other_config = record.other_config;
+            subsystem_vendor_name = record.subsystem_vendor_name;
+            subsystem_device_name = record.subsystem_device_name;
+            driver_name = record.driver_name;
         }
 
         internal void UpdateFrom(Proxy_PCI proxy)
@@ -131,23 +132,6 @@ namespace XenAPI
             subsystem_vendor_name = proxy.subsystem_vendor_name == null ? null : proxy.subsystem_vendor_name;
             subsystem_device_name = proxy.subsystem_device_name == null ? null : proxy.subsystem_device_name;
             driver_name = proxy.driver_name == null ? null : proxy.driver_name;
-        }
-
-        public Proxy_PCI ToProxy()
-        {
-            Proxy_PCI result_ = new Proxy_PCI();
-            result_.uuid = uuid ?? "";
-            result_.class_name = class_name ?? "";
-            result_.vendor_name = vendor_name ?? "";
-            result_.device_name = device_name ?? "";
-            result_.host = host ?? "";
-            result_.pci_id = pci_id ?? "";
-            result_.dependencies = dependencies == null ? new string[] {} : Helper.RefListToStringArray(dependencies);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.subsystem_vendor_name = subsystem_vendor_name ?? "";
-            result_.subsystem_device_name = subsystem_device_name ?? "";
-            result_.driver_name = driver_name ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -182,6 +166,23 @@ namespace XenAPI
                 driver_name = Marshalling.ParseString(table, "driver_name");
         }
 
+        public Proxy_PCI ToProxy()
+        {
+            Proxy_PCI result_ = new Proxy_PCI();
+            result_.uuid = uuid ?? "";
+            result_.class_name = class_name ?? "";
+            result_.vendor_name = vendor_name ?? "";
+            result_.device_name = device_name ?? "";
+            result_.host = host ?? "";
+            result_.pci_id = pci_id ?? "";
+            result_.dependencies = dependencies == null ? new string[] {} : Helper.RefListToStringArray(dependencies);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.subsystem_vendor_name = subsystem_vendor_name ?? "";
+            result_.subsystem_device_name = subsystem_device_name ?? "";
+            result_.driver_name = driver_name ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(PCI other)
         {
             if (ReferenceEquals(null, other))
@@ -202,15 +203,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._driver_name, other._driver_name);
         }
 
-        internal static List<PCI> ProxyArrayToObjectList(Proxy_PCI[] input)
-        {
-            var result = new List<PCI>();
-            foreach (var item in input)
-                result.Add(new PCI(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PCI server)
         {
             if (opaqueRef == null)
@@ -228,6 +220,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PCI.
         /// First published in XenServer 6.0.

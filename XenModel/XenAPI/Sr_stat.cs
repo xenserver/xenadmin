@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -94,15 +95,15 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Sr_stat.
         /// </summary>
-        public override void UpdateFrom(Sr_stat update)
+        public override void UpdateFrom(Sr_stat record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            free_space = update.free_space;
-            total_space = update.total_space;
-            clustered = update.clustered;
-            health = update.health;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            free_space = record.free_space;
+            total_space = record.total_space;
+            clustered = record.clustered;
+            health = record.health;
         }
 
         internal void UpdateFrom(Proxy_Sr_stat proxy)
@@ -114,19 +115,6 @@ namespace XenAPI
             total_space = proxy.total_space == null ? 0 : long.Parse(proxy.total_space);
             clustered = (bool)proxy.clustered;
             health = proxy.health == null ? (sr_health) 0 : (sr_health)Helper.EnumParseDefault(typeof(sr_health), (string)proxy.health);
-        }
-
-        public Proxy_Sr_stat ToProxy()
-        {
-            Proxy_Sr_stat result_ = new Proxy_Sr_stat();
-            result_.uuid = uuid;
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.free_space = free_space.ToString();
-            result_.total_space = total_space.ToString();
-            result_.clustered = clustered;
-            result_.health = sr_health_helper.ToString(health);
-            return result_;
         }
 
         /// <summary>
@@ -153,6 +141,19 @@ namespace XenAPI
                 health = (sr_health)Helper.EnumParseDefault(typeof(sr_health), Marshalling.ParseString(table, "health"));
         }
 
+        public Proxy_Sr_stat ToProxy()
+        {
+            Proxy_Sr_stat result_ = new Proxy_Sr_stat();
+            result_.uuid = uuid;
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.free_space = free_space.ToString();
+            result_.total_space = total_space.ToString();
+            result_.clustered = clustered;
+            result_.health = sr_health_helper.ToString(health);
+            return result_;
+        }
+
         public bool DeepEquals(Sr_stat other)
         {
             if (ReferenceEquals(null, other))
@@ -169,15 +170,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._health, other._health);
         }
 
-        internal static List<Sr_stat> ProxyArrayToObjectList(Proxy_Sr_stat[] input)
-        {
-            var result = new List<Sr_stat>();
-            foreach (var item in input)
-                result.Add(new Sr_stat(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Sr_stat server)
         {
             if (opaqueRef == null)
@@ -190,6 +182,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Uuid that uniquely identifies this SR, if one is available.
         /// Experimental. First published in XenServer 7.5.

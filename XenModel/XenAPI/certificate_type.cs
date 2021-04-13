@@ -28,54 +28,60 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 
 namespace XenAPI
 {
-    public abstract partial class XenObject<S> : IXenObject where S : XenObject<S>
+    [JsonConverter(typeof(certificate_typeConverter))]
+    public enum certificate_type
     {
         /// <summary>
-        /// Copies properties from 'update' into this object. It uses property setters so that
-        /// event handlers are triggered if the value is changing.
+        /// Certificate that is trusted by the whole pool
         /// </summary>
-        public abstract void UpdateFrom(S update);
-
+        ca,
         /// <summary>
-        /// Save any changed fields to the server.
-        /// This method is usually invoked on a thread pool thread.
+        /// Certificate that identifies a single host to entities outside the pool
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="serverOpaqueRef"/>
-        /// <param name="serverObject">Changes are sent to the server if the field in "this"
-        /// is different from serverObject. Can be the object in the cache, or another reference
-        /// object that we want to save changes to.</param>
-        public abstract string SaveChanges(Session session, string serverOpaqueRef, S serverObject);
+        host,
+        /// <summary>
+        /// Certificate that identifies a single host to other pool members
+        /// </summary>
+        host_internal,
+        unknown
+    }
 
-        public string opaque_ref { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(String info)
+    public static class certificate_type_helper
+    {
+        public static string ToString(certificate_type x)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
-
-        public void ClearEventListeners()
-        {
-            PropertyChanged = null;
-        }
-
-        public JObject ToJObject()
-        {
-            return JObject.FromObject(this);
+            return x.StringOf();
         }
     }
-}
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this certificate_type x)
+        {
+            switch (x)
+            {
+                case certificate_type.ca:
+                    return "ca";
+                case certificate_type.host:
+                    return "host";
+                case certificate_type.host_internal:
+                    return "host_internal";
+                default:
+                    return "unknown";
+            }
+        }
+    }
+
+    internal class certificate_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((certificate_type)value).StringOf());
+        }
+    }
+}

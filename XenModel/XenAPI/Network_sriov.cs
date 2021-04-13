@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Network_sriov.
         /// </summary>
-        public override void UpdateFrom(Network_sriov update)
+        public override void UpdateFrom(Network_sriov record)
         {
-            uuid = update.uuid;
-            physical_PIF = update.physical_PIF;
-            logical_PIF = update.logical_PIF;
-            requires_reboot = update.requires_reboot;
-            configuration_mode = update.configuration_mode;
+            uuid = record.uuid;
+            physical_PIF = record.physical_PIF;
+            logical_PIF = record.logical_PIF;
+            requires_reboot = record.requires_reboot;
+            configuration_mode = record.configuration_mode;
         }
 
         internal void UpdateFrom(Proxy_Network_sriov proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             logical_PIF = proxy.logical_PIF == null ? null : XenRef<PIF>.Create(proxy.logical_PIF);
             requires_reboot = (bool)proxy.requires_reboot;
             configuration_mode = proxy.configuration_mode == null ? (sriov_configuration_mode) 0 : (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), (string)proxy.configuration_mode);
-        }
-
-        public Proxy_Network_sriov ToProxy()
-        {
-            Proxy_Network_sriov result_ = new Proxy_Network_sriov();
-            result_.uuid = uuid ?? "";
-            result_.physical_PIF = physical_PIF ?? "";
-            result_.logical_PIF = logical_PIF ?? "";
-            result_.requires_reboot = requires_reboot;
-            result_.configuration_mode = sriov_configuration_mode_helper.ToString(configuration_mode);
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 configuration_mode = (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), Marshalling.ParseString(table, "configuration_mode"));
         }
 
+        public Proxy_Network_sriov ToProxy()
+        {
+            Proxy_Network_sriov result_ = new Proxy_Network_sriov();
+            result_.uuid = uuid ?? "";
+            result_.physical_PIF = physical_PIF ?? "";
+            result_.logical_PIF = logical_PIF ?? "";
+            result_.requires_reboot = requires_reboot;
+            result_.configuration_mode = sriov_configuration_mode_helper.ToString(configuration_mode);
+            return result_;
+        }
+
         public bool DeepEquals(Network_sriov other)
         {
             if (ReferenceEquals(null, other))
@@ -154,15 +155,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._configuration_mode, other._configuration_mode);
         }
 
-        internal static List<Network_sriov> ProxyArrayToObjectList(Proxy_Network_sriov[] input)
-        {
-            var result = new List<Network_sriov>();
-            foreach (var item in input)
-                result.Add(new Network_sriov(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Network_sriov server)
         {
             if (opaqueRef == null)
@@ -175,6 +167,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given network_sriov.
         /// First published in XenServer 7.5.

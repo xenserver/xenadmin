@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -113,24 +114,24 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VGPU_type.
         /// </summary>
-        public override void UpdateFrom(VGPU_type update)
+        public override void UpdateFrom(VGPU_type record)
         {
-            uuid = update.uuid;
-            vendor_name = update.vendor_name;
-            model_name = update.model_name;
-            framebuffer_size = update.framebuffer_size;
-            max_heads = update.max_heads;
-            max_resolution_x = update.max_resolution_x;
-            max_resolution_y = update.max_resolution_y;
-            supported_on_PGPUs = update.supported_on_PGPUs;
-            enabled_on_PGPUs = update.enabled_on_PGPUs;
-            VGPUs = update.VGPUs;
-            supported_on_GPU_groups = update.supported_on_GPU_groups;
-            enabled_on_GPU_groups = update.enabled_on_GPU_groups;
-            implementation = update.implementation;
-            identifier = update.identifier;
-            experimental = update.experimental;
-            compatible_types_in_vm = update.compatible_types_in_vm;
+            uuid = record.uuid;
+            vendor_name = record.vendor_name;
+            model_name = record.model_name;
+            framebuffer_size = record.framebuffer_size;
+            max_heads = record.max_heads;
+            max_resolution_x = record.max_resolution_x;
+            max_resolution_y = record.max_resolution_y;
+            supported_on_PGPUs = record.supported_on_PGPUs;
+            enabled_on_PGPUs = record.enabled_on_PGPUs;
+            VGPUs = record.VGPUs;
+            supported_on_GPU_groups = record.supported_on_GPU_groups;
+            enabled_on_GPU_groups = record.enabled_on_GPU_groups;
+            implementation = record.implementation;
+            identifier = record.identifier;
+            experimental = record.experimental;
+            compatible_types_in_vm = record.compatible_types_in_vm;
         }
 
         internal void UpdateFrom(Proxy_VGPU_type proxy)
@@ -151,28 +152,6 @@ namespace XenAPI
             identifier = proxy.identifier == null ? null : proxy.identifier;
             experimental = (bool)proxy.experimental;
             compatible_types_in_vm = proxy.compatible_types_in_vm == null ? null : XenRef<VGPU_type>.Create(proxy.compatible_types_in_vm);
-        }
-
-        public Proxy_VGPU_type ToProxy()
-        {
-            Proxy_VGPU_type result_ = new Proxy_VGPU_type();
-            result_.uuid = uuid ?? "";
-            result_.vendor_name = vendor_name ?? "";
-            result_.model_name = model_name ?? "";
-            result_.framebuffer_size = framebuffer_size.ToString();
-            result_.max_heads = max_heads.ToString();
-            result_.max_resolution_x = max_resolution_x.ToString();
-            result_.max_resolution_y = max_resolution_y.ToString();
-            result_.supported_on_PGPUs = supported_on_PGPUs == null ? new string[] {} : Helper.RefListToStringArray(supported_on_PGPUs);
-            result_.enabled_on_PGPUs = enabled_on_PGPUs == null ? new string[] {} : Helper.RefListToStringArray(enabled_on_PGPUs);
-            result_.VGPUs = VGPUs == null ? new string[] {} : Helper.RefListToStringArray(VGPUs);
-            result_.supported_on_GPU_groups = supported_on_GPU_groups == null ? new string[] {} : Helper.RefListToStringArray(supported_on_GPU_groups);
-            result_.enabled_on_GPU_groups = enabled_on_GPU_groups == null ? new string[] {} : Helper.RefListToStringArray(enabled_on_GPU_groups);
-            result_.implementation = vgpu_type_implementation_helper.ToString(implementation);
-            result_.identifier = identifier ?? "";
-            result_.experimental = experimental;
-            result_.compatible_types_in_vm = compatible_types_in_vm == null ? new string[] {} : Helper.RefListToStringArray(compatible_types_in_vm);
-            return result_;
         }
 
         /// <summary>
@@ -217,6 +196,28 @@ namespace XenAPI
                 compatible_types_in_vm = Marshalling.ParseSetRef<VGPU_type>(table, "compatible_types_in_vm");
         }
 
+        public Proxy_VGPU_type ToProxy()
+        {
+            Proxy_VGPU_type result_ = new Proxy_VGPU_type();
+            result_.uuid = uuid ?? "";
+            result_.vendor_name = vendor_name ?? "";
+            result_.model_name = model_name ?? "";
+            result_.framebuffer_size = framebuffer_size.ToString();
+            result_.max_heads = max_heads.ToString();
+            result_.max_resolution_x = max_resolution_x.ToString();
+            result_.max_resolution_y = max_resolution_y.ToString();
+            result_.supported_on_PGPUs = supported_on_PGPUs == null ? new string[] {} : Helper.RefListToStringArray(supported_on_PGPUs);
+            result_.enabled_on_PGPUs = enabled_on_PGPUs == null ? new string[] {} : Helper.RefListToStringArray(enabled_on_PGPUs);
+            result_.VGPUs = VGPUs == null ? new string[] {} : Helper.RefListToStringArray(VGPUs);
+            result_.supported_on_GPU_groups = supported_on_GPU_groups == null ? new string[] {} : Helper.RefListToStringArray(supported_on_GPU_groups);
+            result_.enabled_on_GPU_groups = enabled_on_GPU_groups == null ? new string[] {} : Helper.RefListToStringArray(enabled_on_GPU_groups);
+            result_.implementation = vgpu_type_implementation_helper.ToString(implementation);
+            result_.identifier = identifier ?? "";
+            result_.experimental = experimental;
+            result_.compatible_types_in_vm = compatible_types_in_vm == null ? new string[] {} : Helper.RefListToStringArray(compatible_types_in_vm);
+            return result_;
+        }
+
         public bool DeepEquals(VGPU_type other)
         {
             if (ReferenceEquals(null, other))
@@ -242,15 +243,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._compatible_types_in_vm, other._compatible_types_in_vm);
         }
 
-        internal static List<VGPU_type> ProxyArrayToObjectList(Proxy_VGPU_type[] input)
-        {
-            var result = new List<VGPU_type>();
-            foreach (var item in input)
-                result.Add(new VGPU_type(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, VGPU_type server)
         {
             if (opaqueRef == null)
@@ -263,6 +255,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VGPU_type.
         /// First published in XenServer 6.2 SP1 Tech-Preview.

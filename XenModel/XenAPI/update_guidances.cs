@@ -28,54 +28,60 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 
 namespace XenAPI
 {
-    public abstract partial class XenObject<S> : IXenObject where S : XenObject<S>
+    [JsonConverter(typeof(update_guidancesConverter))]
+    public enum update_guidances
     {
         /// <summary>
-        /// Copies properties from 'update' into this object. It uses property setters so that
-        /// event handlers are triggered if the value is changing.
+        /// Indicates the updated host should reboot as soon as possible
         /// </summary>
-        public abstract void UpdateFrom(S update);
-
+        reboot_host,
         /// <summary>
-        /// Save any changed fields to the server.
-        /// This method is usually invoked on a thread pool thread.
+        /// Indicates the Toolstack running on the updated host should restart as soon as possible
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="serverOpaqueRef"/>
-        /// <param name="serverObject">Changes are sent to the server if the field in "this"
-        /// is different from serverObject. Can be the object in the cache, or another reference
-        /// object that we want to save changes to.</param>
-        public abstract string SaveChanges(Session session, string serverOpaqueRef, S serverObject);
+        restart_toolstack,
+        /// <summary>
+        /// Indicates the device model of a running VM should restart as soon as possible
+        /// </summary>
+        restart_device_model,
+        unknown
+    }
 
-        public string opaque_ref { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(String info)
+    public static class update_guidances_helper
+    {
+        public static string ToString(update_guidances x)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
-
-        public void ClearEventListeners()
-        {
-            PropertyChanged = null;
-        }
-
-        public JObject ToJObject()
-        {
-            return JObject.FromObject(this);
+            return x.StringOf();
         }
     }
-}
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this update_guidances x)
+        {
+            switch (x)
+            {
+                case update_guidances.reboot_host:
+                    return "reboot_host";
+                case update_guidances.restart_toolstack:
+                    return "restart_toolstack";
+                case update_guidances.restart_device_model:
+                    return "restart_device_model";
+                default:
+                    return "unknown";
+            }
+        }
+    }
+
+    internal class update_guidancesConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((update_guidances)value).StringOf());
+        }
+    }
+}

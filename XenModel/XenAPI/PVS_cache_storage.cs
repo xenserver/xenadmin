@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -93,14 +94,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PVS_cache_storage.
         /// </summary>
-        public override void UpdateFrom(PVS_cache_storage update)
+        public override void UpdateFrom(PVS_cache_storage record)
         {
-            uuid = update.uuid;
-            host = update.host;
-            SR = update.SR;
-            site = update.site;
-            size = update.size;
-            VDI = update.VDI;
+            uuid = record.uuid;
+            host = record.host;
+            SR = record.SR;
+            site = record.site;
+            size = record.size;
+            VDI = record.VDI;
         }
 
         internal void UpdateFrom(Proxy_PVS_cache_storage proxy)
@@ -111,18 +112,6 @@ namespace XenAPI
             site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
             size = proxy.size == null ? 0 : long.Parse(proxy.size);
             VDI = proxy.VDI == null ? null : XenRef<VDI>.Create(proxy.VDI);
-        }
-
-        public Proxy_PVS_cache_storage ToProxy()
-        {
-            Proxy_PVS_cache_storage result_ = new Proxy_PVS_cache_storage();
-            result_.uuid = uuid ?? "";
-            result_.host = host ?? "";
-            result_.SR = SR ?? "";
-            result_.site = site ?? "";
-            result_.size = size.ToString();
-            result_.VDI = VDI ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -147,6 +136,18 @@ namespace XenAPI
                 VDI = Marshalling.ParseRef<VDI>(table, "VDI");
         }
 
+        public Proxy_PVS_cache_storage ToProxy()
+        {
+            Proxy_PVS_cache_storage result_ = new Proxy_PVS_cache_storage();
+            result_.uuid = uuid ?? "";
+            result_.host = host ?? "";
+            result_.SR = SR ?? "";
+            result_.site = site ?? "";
+            result_.size = size.ToString();
+            result_.VDI = VDI ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(PVS_cache_storage other)
         {
             if (ReferenceEquals(null, other))
@@ -162,15 +163,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._VDI, other._VDI);
         }
 
-        internal static List<PVS_cache_storage> ProxyArrayToObjectList(Proxy_PVS_cache_storage[] input)
-        {
-            var result = new List<PVS_cache_storage>();
-            foreach (var item in input)
-                result.Add(new PVS_cache_storage(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PVS_cache_storage server)
         {
             if (opaqueRef == null)
@@ -183,6 +175,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PVS_cache_storage.
         /// First published in XenServer 7.1.

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -109,22 +110,22 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PUSB.
         /// </summary>
-        public override void UpdateFrom(PUSB update)
+        public override void UpdateFrom(PUSB record)
         {
-            uuid = update.uuid;
-            USB_group = update.USB_group;
-            host = update.host;
-            path = update.path;
-            vendor_id = update.vendor_id;
-            vendor_desc = update.vendor_desc;
-            product_id = update.product_id;
-            product_desc = update.product_desc;
-            serial = update.serial;
-            version = update.version;
-            description = update.description;
-            passthrough_enabled = update.passthrough_enabled;
-            other_config = update.other_config;
-            speed = update.speed;
+            uuid = record.uuid;
+            USB_group = record.USB_group;
+            host = record.host;
+            path = record.path;
+            vendor_id = record.vendor_id;
+            vendor_desc = record.vendor_desc;
+            product_id = record.product_id;
+            product_desc = record.product_desc;
+            serial = record.serial;
+            version = record.version;
+            description = record.description;
+            passthrough_enabled = record.passthrough_enabled;
+            other_config = record.other_config;
+            speed = record.speed;
         }
 
         internal void UpdateFrom(Proxy_PUSB proxy)
@@ -143,26 +144,6 @@ namespace XenAPI
             passthrough_enabled = (bool)proxy.passthrough_enabled;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             speed = Convert.ToDouble(proxy.speed);
-        }
-
-        public Proxy_PUSB ToProxy()
-        {
-            Proxy_PUSB result_ = new Proxy_PUSB();
-            result_.uuid = uuid ?? "";
-            result_.USB_group = USB_group ?? "";
-            result_.host = host ?? "";
-            result_.path = path ?? "";
-            result_.vendor_id = vendor_id ?? "";
-            result_.vendor_desc = vendor_desc ?? "";
-            result_.product_id = product_id ?? "";
-            result_.product_desc = product_desc ?? "";
-            result_.serial = serial ?? "";
-            result_.version = version ?? "";
-            result_.description = description ?? "";
-            result_.passthrough_enabled = passthrough_enabled;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.speed = speed;
-            return result_;
         }
 
         /// <summary>
@@ -203,6 +184,26 @@ namespace XenAPI
                 speed = Marshalling.ParseDouble(table, "speed");
         }
 
+        public Proxy_PUSB ToProxy()
+        {
+            Proxy_PUSB result_ = new Proxy_PUSB();
+            result_.uuid = uuid ?? "";
+            result_.USB_group = USB_group ?? "";
+            result_.host = host ?? "";
+            result_.path = path ?? "";
+            result_.vendor_id = vendor_id ?? "";
+            result_.vendor_desc = vendor_desc ?? "";
+            result_.product_id = product_id ?? "";
+            result_.product_desc = product_desc ?? "";
+            result_.serial = serial ?? "";
+            result_.version = version ?? "";
+            result_.description = description ?? "";
+            result_.passthrough_enabled = passthrough_enabled;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.speed = speed;
+            return result_;
+        }
+
         public bool DeepEquals(PUSB other)
         {
             if (ReferenceEquals(null, other))
@@ -226,15 +227,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._speed, other._speed);
         }
 
-        internal static List<PUSB> ProxyArrayToObjectList(Proxy_PUSB[] input)
-        {
-            var result = new List<PUSB>();
-            foreach (var item in input)
-                result.Add(new PUSB(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PUSB server)
         {
             if (opaqueRef == null)
@@ -252,6 +244,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PUSB.
         /// First published in XenServer 7.3.

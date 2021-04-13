@@ -28,54 +28,60 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 
 namespace XenAPI
 {
-    public abstract partial class XenObject<S> : IXenObject where S : XenObject<S>
+    [JsonConverter(typeof(host_sched_granConverter))]
+    public enum host_sched_gran
     {
         /// <summary>
-        /// Copies properties from 'update' into this object. It uses property setters so that
-        /// event handlers are triggered if the value is changing.
+        /// core scheduling
         /// </summary>
-        public abstract void UpdateFrom(S update);
-
+        core,
         /// <summary>
-        /// Save any changed fields to the server.
-        /// This method is usually invoked on a thread pool thread.
+        /// CPU scheduling
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="serverOpaqueRef"/>
-        /// <param name="serverObject">Changes are sent to the server if the field in "this"
-        /// is different from serverObject. Can be the object in the cache, or another reference
-        /// object that we want to save changes to.</param>
-        public abstract string SaveChanges(Session session, string serverOpaqueRef, S serverObject);
+        cpu,
+        /// <summary>
+        /// socket scheduling
+        /// </summary>
+        socket,
+        unknown
+    }
 
-        public string opaque_ref { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(String info)
+    public static class host_sched_gran_helper
+    {
+        public static string ToString(host_sched_gran x)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
-
-        public void ClearEventListeners()
-        {
-            PropertyChanged = null;
-        }
-
-        public JObject ToJObject()
-        {
-            return JObject.FromObject(this);
+            return x.StringOf();
         }
     }
-}
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this host_sched_gran x)
+        {
+            switch (x)
+            {
+                case host_sched_gran.core:
+                    return "core";
+                case host_sched_gran.cpu:
+                    return "cpu";
+                case host_sched_gran.socket:
+                    return "socket";
+                default:
+                    return "unknown";
+            }
+        }
+    }
+
+    internal class host_sched_granConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((host_sched_gran)value).StringOf());
+        }
+    }
+}

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PVS_server.
         /// </summary>
-        public override void UpdateFrom(PVS_server update)
+        public override void UpdateFrom(PVS_server record)
         {
-            uuid = update.uuid;
-            addresses = update.addresses;
-            first_port = update.first_port;
-            last_port = update.last_port;
-            site = update.site;
+            uuid = record.uuid;
+            addresses = record.addresses;
+            first_port = record.first_port;
+            last_port = record.last_port;
+            site = record.site;
         }
 
         internal void UpdateFrom(Proxy_PVS_server proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             first_port = proxy.first_port == null ? 0 : long.Parse(proxy.first_port);
             last_port = proxy.last_port == null ? 0 : long.Parse(proxy.last_port);
             site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
-        }
-
-        public Proxy_PVS_server ToProxy()
-        {
-            Proxy_PVS_server result_ = new Proxy_PVS_server();
-            result_.uuid = uuid ?? "";
-            result_.addresses = addresses;
-            result_.first_port = first_port.ToString();
-            result_.last_port = last_port.ToString();
-            result_.site = site ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 site = Marshalling.ParseRef<PVS_site>(table, "site");
         }
 
+        public Proxy_PVS_server ToProxy()
+        {
+            Proxy_PVS_server result_ = new Proxy_PVS_server();
+            result_.uuid = uuid ?? "";
+            result_.addresses = addresses;
+            result_.first_port = first_port.ToString();
+            result_.last_port = last_port.ToString();
+            result_.site = site ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(PVS_server other)
         {
             if (ReferenceEquals(null, other))
@@ -154,15 +155,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._site, other._site);
         }
 
-        internal static List<PVS_server> ProxyArrayToObjectList(Proxy_PVS_server[] input)
-        {
-            var result = new List<PVS_server>();
-            foreach (var item in input)
-                result.Add(new PVS_server(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PVS_server server)
         {
             if (opaqueRef == null)
@@ -175,6 +167,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PVS_server.
         /// First published in XenServer 7.1.

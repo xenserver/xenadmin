@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -107,21 +108,21 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PIF_metrics.
         /// </summary>
-        public override void UpdateFrom(PIF_metrics update)
+        public override void UpdateFrom(PIF_metrics record)
         {
-            uuid = update.uuid;
-            io_read_kbs = update.io_read_kbs;
-            io_write_kbs = update.io_write_kbs;
-            carrier = update.carrier;
-            vendor_id = update.vendor_id;
-            vendor_name = update.vendor_name;
-            device_id = update.device_id;
-            device_name = update.device_name;
-            speed = update.speed;
-            duplex = update.duplex;
-            pci_bus_path = update.pci_bus_path;
-            last_updated = update.last_updated;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            io_read_kbs = record.io_read_kbs;
+            io_write_kbs = record.io_write_kbs;
+            carrier = record.carrier;
+            vendor_id = record.vendor_id;
+            vendor_name = record.vendor_name;
+            device_id = record.device_id;
+            device_name = record.device_name;
+            speed = record.speed;
+            duplex = record.duplex;
+            pci_bus_path = record.pci_bus_path;
+            last_updated = record.last_updated;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_PIF_metrics proxy)
@@ -139,25 +140,6 @@ namespace XenAPI
             pci_bus_path = proxy.pci_bus_path == null ? null : proxy.pci_bus_path;
             last_updated = proxy.last_updated;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_PIF_metrics ToProxy()
-        {
-            Proxy_PIF_metrics result_ = new Proxy_PIF_metrics();
-            result_.uuid = uuid ?? "";
-            result_.io_read_kbs = io_read_kbs;
-            result_.io_write_kbs = io_write_kbs;
-            result_.carrier = carrier;
-            result_.vendor_id = vendor_id ?? "";
-            result_.vendor_name = vendor_name ?? "";
-            result_.device_id = device_id ?? "";
-            result_.device_name = device_name ?? "";
-            result_.speed = speed.ToString();
-            result_.duplex = duplex;
-            result_.pci_bus_path = pci_bus_path ?? "";
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -196,6 +178,25 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_PIF_metrics ToProxy()
+        {
+            Proxy_PIF_metrics result_ = new Proxy_PIF_metrics();
+            result_.uuid = uuid ?? "";
+            result_.io_read_kbs = io_read_kbs;
+            result_.io_write_kbs = io_write_kbs;
+            result_.carrier = carrier;
+            result_.vendor_id = vendor_id ?? "";
+            result_.vendor_name = vendor_name ?? "";
+            result_.device_id = device_id ?? "";
+            result_.device_name = device_name ?? "";
+            result_.speed = speed.ToString();
+            result_.duplex = duplex;
+            result_.pci_bus_path = pci_bus_path ?? "";
+            result_.last_updated = last_updated;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(PIF_metrics other)
         {
             if (ReferenceEquals(null, other))
@@ -218,15 +219,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
-        internal static List<PIF_metrics> ProxyArrayToObjectList(Proxy_PIF_metrics[] input)
-        {
-            var result = new List<PIF_metrics>();
-            foreach (var item in input)
-                result.Add(new PIF_metrics(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PIF_metrics server)
         {
             if (opaqueRef == null)
@@ -244,6 +236,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PIF_metrics.
         /// First published in XenServer 4.0.

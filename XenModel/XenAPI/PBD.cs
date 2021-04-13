@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -93,14 +94,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PBD.
         /// </summary>
-        public override void UpdateFrom(PBD update)
+        public override void UpdateFrom(PBD record)
         {
-            uuid = update.uuid;
-            host = update.host;
-            SR = update.SR;
-            device_config = update.device_config;
-            currently_attached = update.currently_attached;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            host = record.host;
+            SR = record.SR;
+            device_config = record.device_config;
+            currently_attached = record.currently_attached;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_PBD proxy)
@@ -111,18 +112,6 @@ namespace XenAPI
             device_config = proxy.device_config == null ? null : Maps.convert_from_proxy_string_string(proxy.device_config);
             currently_attached = (bool)proxy.currently_attached;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_PBD ToProxy()
-        {
-            Proxy_PBD result_ = new Proxy_PBD();
-            result_.uuid = uuid ?? "";
-            result_.host = host ?? "";
-            result_.SR = SR ?? "";
-            result_.device_config = Maps.convert_to_proxy_string_string(device_config);
-            result_.currently_attached = currently_attached;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -147,6 +136,18 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_PBD ToProxy()
+        {
+            Proxy_PBD result_ = new Proxy_PBD();
+            result_.uuid = uuid ?? "";
+            result_.host = host ?? "";
+            result_.SR = SR ?? "";
+            result_.device_config = Maps.convert_to_proxy_string_string(device_config);
+            result_.currently_attached = currently_attached;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(PBD other)
         {
             if (ReferenceEquals(null, other))
@@ -160,15 +161,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._device_config, other._device_config) &&
                 Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<PBD> ProxyArrayToObjectList(Proxy_PBD[] input)
-        {
-            var result = new List<PBD>();
-            foreach (var item in input)
-                result.Add(new PBD(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PBD server)
@@ -192,6 +184,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PBD.
         /// First published in XenServer 4.0.

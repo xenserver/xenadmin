@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -89,12 +90,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given User.
         /// </summary>
-        public override void UpdateFrom(User update)
+        public override void UpdateFrom(User record)
         {
-            uuid = update.uuid;
-            short_name = update.short_name;
-            fullname = update.fullname;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            short_name = record.short_name;
+            fullname = record.fullname;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_User proxy)
@@ -103,16 +104,6 @@ namespace XenAPI
             short_name = proxy.short_name == null ? null : proxy.short_name;
             fullname = proxy.fullname == null ? null : proxy.fullname;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_User ToProxy()
-        {
-            Proxy_User result_ = new Proxy_User();
-            result_.uuid = uuid ?? "";
-            result_.short_name = short_name ?? "";
-            result_.fullname = fullname ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -133,6 +124,16 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_User ToProxy()
+        {
+            Proxy_User result_ = new Proxy_User();
+            result_.uuid = uuid ?? "";
+            result_.short_name = short_name ?? "";
+            result_.fullname = fullname ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(User other)
         {
             if (ReferenceEquals(null, other))
@@ -144,15 +145,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._short_name, other._short_name) &&
                 Helper.AreEqual2(this._fullname, other._fullname) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<User> ProxyArrayToObjectList(Proxy_User[] input)
-        {
-            var result = new List<User>();
-            foreach (var item in input)
-                result.Add(new User(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, User server)
@@ -176,6 +168,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given user.
         /// First published in XenServer 4.0.

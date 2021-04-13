@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -98,17 +99,17 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Cluster_host.
         /// </summary>
-        public override void UpdateFrom(Cluster_host update)
+        public override void UpdateFrom(Cluster_host record)
         {
-            uuid = update.uuid;
-            cluster = update.cluster;
-            host = update.host;
-            enabled = update.enabled;
-            PIF = update.PIF;
-            joined = update.joined;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            cluster = record.cluster;
+            host = record.host;
+            enabled = record.enabled;
+            PIF = record.PIF;
+            joined = record.joined;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Cluster_host proxy)
@@ -122,21 +123,6 @@ namespace XenAPI
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_host_operation>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_cluster_host_operation(proxy.current_operations);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Cluster_host ToProxy()
-        {
-            Proxy_Cluster_host result_ = new Proxy_Cluster_host();
-            result_.uuid = uuid ?? "";
-            result_.cluster = cluster ?? "";
-            result_.host = host ?? "";
-            result_.enabled = enabled;
-            result_.PIF = PIF ?? "";
-            result_.joined = joined;
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_cluster_host_operation(current_operations);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -167,6 +153,21 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Cluster_host ToProxy()
+        {
+            Proxy_Cluster_host result_ = new Proxy_Cluster_host();
+            result_.uuid = uuid ?? "";
+            result_.cluster = cluster ?? "";
+            result_.host = host ?? "";
+            result_.enabled = enabled;
+            result_.PIF = PIF ?? "";
+            result_.joined = joined;
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_cluster_host_operation(current_operations);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Cluster_host other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -187,15 +188,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
-        internal static List<Cluster_host> ProxyArrayToObjectList(Proxy_Cluster_host[] input)
-        {
-            var result = new List<Cluster_host>();
-            foreach (var item in input)
-                result.Add(new Cluster_host(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Cluster_host server)
         {
             if (opaqueRef == null)
@@ -208,6 +200,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given Cluster_host.
         /// Experimental. First published in XenServer 7.5.

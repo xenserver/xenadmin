@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VLAN.
         /// </summary>
-        public override void UpdateFrom(VLAN update)
+        public override void UpdateFrom(VLAN record)
         {
-            uuid = update.uuid;
-            tagged_PIF = update.tagged_PIF;
-            untagged_PIF = update.untagged_PIF;
-            tag = update.tag;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            tagged_PIF = record.tagged_PIF;
+            untagged_PIF = record.untagged_PIF;
+            tag = record.tag;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_VLAN proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             untagged_PIF = proxy.untagged_PIF == null ? null : XenRef<PIF>.Create(proxy.untagged_PIF);
             tag = proxy.tag == null ? 0 : long.Parse(proxy.tag);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_VLAN ToProxy()
-        {
-            Proxy_VLAN result_ = new Proxy_VLAN();
-            result_.uuid = uuid ?? "";
-            result_.tagged_PIF = tagged_PIF ?? "";
-            result_.untagged_PIF = untagged_PIF ?? "";
-            result_.tag = tag.ToString();
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_VLAN ToProxy()
+        {
+            Proxy_VLAN result_ = new Proxy_VLAN();
+            result_.uuid = uuid ?? "";
+            result_.tagged_PIF = tagged_PIF ?? "";
+            result_.untagged_PIF = untagged_PIF ?? "";
+            result_.tag = tag.ToString();
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(VLAN other)
         {
             if (ReferenceEquals(null, other))
@@ -152,15 +153,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._untagged_PIF, other._untagged_PIF) &&
                 Helper.AreEqual2(this._tag, other._tag) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<VLAN> ProxyArrayToObjectList(Proxy_VLAN[] input)
-        {
-            var result = new List<VLAN>();
-            foreach (var item in input)
-                result.Add(new VLAN(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VLAN server)
@@ -180,6 +172,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VLAN.
         /// First published in XenServer 4.1.

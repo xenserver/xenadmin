@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -87,11 +88,11 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Secret.
         /// </summary>
-        public override void UpdateFrom(Secret update)
+        public override void UpdateFrom(Secret record)
         {
-            uuid = update.uuid;
-            value = update.value;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            value = record.value;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Secret proxy)
@@ -99,15 +100,6 @@ namespace XenAPI
             uuid = proxy.uuid == null ? null : proxy.uuid;
             value = proxy.value == null ? null : proxy.value;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Secret ToProxy()
-        {
-            Proxy_Secret result_ = new Proxy_Secret();
-            result_.uuid = uuid ?? "";
-            result_.value = value ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -126,6 +118,15 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Secret ToProxy()
+        {
+            Proxy_Secret result_ = new Proxy_Secret();
+            result_.uuid = uuid ?? "";
+            result_.value = value ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Secret other)
         {
             if (ReferenceEquals(null, other))
@@ -136,15 +137,6 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._value, other._value) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<Secret> ProxyArrayToObjectList(Proxy_Secret[] input)
-        {
-            var result = new List<Secret>();
-            foreach (var item in input)
-                result.Add(new Secret(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Secret server)
@@ -168,6 +160,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given secret.
         /// First published in XenServer 5.6.

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -93,14 +94,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Host_metrics.
         /// </summary>
-        public override void UpdateFrom(Host_metrics update)
+        public override void UpdateFrom(Host_metrics record)
         {
-            uuid = update.uuid;
-            memory_total = update.memory_total;
-            memory_free = update.memory_free;
-            live = update.live;
-            last_updated = update.last_updated;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            memory_total = record.memory_total;
+            memory_free = record.memory_free;
+            live = record.live;
+            last_updated = record.last_updated;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Host_metrics proxy)
@@ -111,18 +112,6 @@ namespace XenAPI
             live = (bool)proxy.live;
             last_updated = proxy.last_updated;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Host_metrics ToProxy()
-        {
-            Proxy_Host_metrics result_ = new Proxy_Host_metrics();
-            result_.uuid = uuid ?? "";
-            result_.memory_total = memory_total.ToString();
-            result_.memory_free = memory_free.ToString();
-            result_.live = live;
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -147,6 +136,18 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Host_metrics ToProxy()
+        {
+            Proxy_Host_metrics result_ = new Proxy_Host_metrics();
+            result_.uuid = uuid ?? "";
+            result_.memory_total = memory_total.ToString();
+            result_.memory_free = memory_free.ToString();
+            result_.live = live;
+            result_.last_updated = last_updated;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Host_metrics other)
         {
             if (ReferenceEquals(null, other))
@@ -160,15 +161,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._live, other._live) &&
                 Helper.AreEqual2(this._last_updated, other._last_updated) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<Host_metrics> ProxyArrayToObjectList(Proxy_Host_metrics[] input)
-        {
-            var result = new List<Host_metrics>();
-            foreach (var item in input)
-                result.Add(new Host_metrics(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host_metrics server)
@@ -188,6 +180,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given host_metrics.
         /// First published in XenServer 4.0.
