@@ -462,6 +462,12 @@
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabling PVS-Accelerator for selected VMs</value>
   </data>
+  <data name="ACTION_ENABLING_TLS_VERIFICATION" xml:space="preserve">
+    <value>Enabling certificate verification...</value>
+  </data>
+  <data name="ACTION_ENABLING_TLS_VERIFICATION_ON" xml:space="preserve">
+    <value>Enabling certificate verification on {0}...</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
   </data>
@@ -2577,6 +2583,9 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
     <value>Valid from {0} to {1}</value>
   </data>
+  <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
+    <value>Certificate Verification</value>
+  </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Ability to download updates</value>
   </data>
@@ -2832,6 +2841,9 @@ Do you want to continue?</value>
     <value>Changing the static maximum memory of this VM will cause it to be rebooted.
 
 Do you want to continue?</value>
+  </data>
+  <data name="CONFIRM_CONTINUE" xml:space="preserve">
+    <value>Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DELETE" xml:space="preserve">
     <value>Are you sure you want to delete the selected {0}?</value>
@@ -5253,6 +5265,29 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
     <value>Choose the PVS site from which the selected VM is streamed.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_CLUSTERING" xml:space="preserve">
+    <value>You cannot enable certificate verification while the pool is in the process of creating a cluster.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_DISABLING" xml:space="preserve">
+    <value>You cannot enable certificate verification while HA is being disabled on the pool.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_ENABLED" xml:space="preserve">
+    <value>You cannot enable certificate verification when HA is on.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_ENABLING" xml:space="preserve">
+    <value>You cannot enable certificate verification while HA is being enabled on the pool.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_MENU" xml:space="preserve">
+    <value>Enable Certificate Veri&amp;fication</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_NEW_MASTER" xml:space="preserve">
+    <value>You cannot enable certificate verification while a new master is being nominated in the pool.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to enable certificate verification. Please login using an account with one of the following roles:
+
+{1}</value>
   </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Res&amp;ume</value>
@@ -8348,6 +8383,15 @@ Are you sure you want to detach this storage repository?</value>
   </data>
   <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>Detach Multiple Virtual Disks</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB" xml:space="preserve">
+    <value>Certificate verification is not enabled on '{0}'. Would you like to enable it now?</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING" xml:space="preserve">
+    <value>Before enabling certificate verification ensure that there are no operations running in the pool, otherwise they will be interrupted.</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON" xml:space="preserve">
+    <value>&amp;Yes, Enable certificate verification</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
     <value>Unable to connect to server '{0}'.

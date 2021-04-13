@@ -312,6 +312,11 @@ namespace XenAPI
             return BoolKeyPreferTrue(h.license_params, "restrict_pool_secret_rotation");
         }
 
+        public static bool RestrictCertificateVerification(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_certificate_verification");
+        }
+
         public static bool RestrictAlerts(Host h)
         {
             return BoolKeyPreferTrue(h.license_params, "restrict_email_alerting");
