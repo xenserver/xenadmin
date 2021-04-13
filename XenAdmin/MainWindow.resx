@@ -1981,13 +1981,13 @@
     <value>274, 6</value>
   </data>
   <data name="toolStripMenuItemHaConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="toolStripMenuItemHaConfigure.Text" xml:space="preserve">
     <value>&amp;Configure HA...</value>
   </data>
   <data name="toolStripMenuItemHaDisable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="toolStripMenuItemHaDisable.Text" xml:space="preserve">
     <value>&amp;Disable HA</value>
@@ -2057,6 +2057,12 @@
   </data>
   <data name="toolStripMenuItemRotateSecret.Text" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>
+  </data>
+  <data name="toolStripMenuItemEnableTls.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnableTls.Text" xml:space="preserve">
+    <value>Enable Certificate Veri&amp;fication</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
@@ -4033,18 +4039,24 @@
     <value>toolStripMenuItemRotateSecret</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
     <value>toolStripMenuItemHaConfigure</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
     <value>toolStripMenuItemHaDisable</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Name" xml:space="preserve">
+    <value>toolStripMenuItemEnableTls</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

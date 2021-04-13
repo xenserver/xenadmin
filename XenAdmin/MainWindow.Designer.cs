@@ -279,6 +279,7 @@ namespace XenAdmin
             this.toolStripMenuItemRotateSecret = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItemHaConfigure = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItemHaDisable = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemEnableTls = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -924,6 +925,7 @@ namespace XenAdmin
             this.toolStripSeparator9,
             this.changePoolPasswordToolStripMenuItem,
             this.toolStripMenuItemRotateSecret,
+            this.toolStripMenuItemEnableTls,
             this.toolStripMenuItem1,
             this.deleteToolStripMenuItem,
             this.toolStripSeparator26,
@@ -1965,6 +1967,12 @@ namespace XenAdmin
             this.toolStripMenuItemHaDisable.Command = new XenAdmin.Commands.HADisableCommand();
             resources.ApplyResources(this.toolStripMenuItemHaDisable, "toolStripMenuItemHaDisable");
             // 
+            // toolStripMenuItemEnableTls
+            // 
+            this.toolStripMenuItemEnableTls.Name = "toolStripMenuItemEnableTls";
+            this.toolStripMenuItemEnableTls.Command = new XenAdmin.Commands.EnableTlsVerificationCommand();
+            resources.ApplyResources(this.toolStripMenuItemEnableTls, "toolStripMenuItemEnableTls");
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2243,6 +2251,7 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemRotateSecret;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaConfigure;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaDisable;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemEnableTls;
     }
 
 }

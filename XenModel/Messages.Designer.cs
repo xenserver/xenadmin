@@ -1096,6 +1096,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabling certificate verification....
+        /// </summary>
+        public static string ACTION_ENABLING_TLS_VERIFICATION {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_TLS_VERIFICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling certificate verification on {0}....
+        /// </summary>
+        public static string ACTION_ENABLING_TLS_VERIFICATION_ON {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_TLS_VERIFICATION_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export failed due to a block checksum mismatch.  Please retry the export..
         /// </summary>
         public static string ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED {
@@ -7117,6 +7135,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certificate Verification.
+        /// </summary>
+        public static string CERTIFICATE_VERIFICATION_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VERIFICATION_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ability to download updates.
         /// </summary>
         public static string CFU_STATUS_CHECK_DESCRIPTION {
@@ -7819,6 +7846,15 @@ namespace XenAdmin {
         public static string CONFIRM_CHANGE_STATIC_MAX_SINGULAR {
             get {
                 return ResourceManager.GetString("CONFIRM_CHANGE_STATIC_MAX_SINGULAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to continue?.
+        /// </summary>
+        public static string CONFIRM_CONTINUE {
+            get {
+                return ResourceManager.GetString("CONFIRM_CONTINUE", resourceCulture);
             }
         }
         
@@ -14905,6 +14941,71 @@ namespace XenAdmin {
         public static string ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE {
             get {
                 return ResourceManager.GetString("ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while the pool is in the process of creating a cluster..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_CLUSTERING {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_CLUSTERING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while HA is being disabled on the pool..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_HA_DISABLING {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_HA_DISABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification when HA is on..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_HA_ENABLED {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_HA_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while HA is being enabled on the pool..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_HA_ENABLING {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_HA_ENABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Certificate Veri&amp;fication.
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_MENU {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while a new master is being nominated in the pool..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_NEW_MASTER {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_NEW_MASTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to enable certificate verification. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION", resourceCulture);
             }
         }
         
@@ -24064,6 +24165,33 @@ namespace XenAdmin {
         public static string MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is not enabled on &apos;{0}&apos;. Would you like to enable it now?.
+        /// </summary>
+        public static string MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Enable certificate verification.
+        /// </summary>
+        public static string MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Before enabling certificate verification ensure that there are no operations running in the pool, otherwise they will be interrupted..
+        /// </summary>
+        public static string MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING", resourceCulture);
             }
         }
         

@@ -414,32 +414,32 @@ namespace XenAdmin.TabPages
            
             if (xenObject is Host && (xenObject.Connection == null || !xenObject.Connection.IsConnected))
             {
-                generateDisconnectedHostBox();
+                GenerateDisconnectedHostBox();
             }
             else if (xenObject is DockerContainer)
             {
-                generateDockerContainerGeneralBox();
+                GenerateDockerContainerGeneralBox();
             }
             else
             {
-                generateGeneralBox();
+                GenerateGeneralBox();
                 GenerateCertificateBox();
-                generateCustomFieldsBox();
-                generateInterfaceBox();
-                generateMemoryBox();
-                generateVersionBox();
-                generateLicenseBox();
-                generateCPUBox();
-                generateHostPatchesBox();
-                generateBootBox();
-                generateHABox();
-                generateStatusBox();
-                generateMultipathBox();
-                generatePoolPatchesBox();
-                generateMultipathBootBox();
-                generateVCPUsBox();
-                generateDockerInfoBox();
-                generateReadCachingBox();
+                GenerateCustomFieldsBox();
+                GenerateInterfaceBox();
+                GenerateMemoryBox();
+                GenerateVersionBox();
+                GenerateLicenseBox();
+                GenerateCPUBox();
+                GenerateHostPatchesBox();
+                GenerateBootBox();
+                GenerateHABox();
+                GenerateStatusBox();
+                GenerateMultipathBox();
+                GeneratePoolPatchesBox();
+                GenerateMultipathBootBox();
+                GenerateVCPUsBox();
+                GenerateDockerInfoBox();
+                GenerateReadCachingBox();
             }
 
             // hide all the sections which haven't been populated, those that have make sure are visible
@@ -461,7 +461,7 @@ namespace XenAdmin.TabPages
             UpdateButtons();
         }
 
-        private void generateInterfaceBox()
+        private void GenerateInterfaceBox()
         {
             Host Host = xenObject as Host;
             Pool Pool = xenObject as Pool;
@@ -529,7 +529,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateCustomFieldsBox()
+        private void GenerateCustomFieldsBox()
         {
             List<CustomField> customFields = CustomFieldsManager.CustomFieldValues(xenObject);
             if (customFields.Count <= 0)
@@ -556,7 +556,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generatePoolPatchesBox()
+        private void GeneratePoolPatchesBox()
         {
             Pool pool = xenObject as Pool;
             if (pool == null)
@@ -593,7 +593,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateHostPatchesBox()
+        private void GenerateHostPatchesBox()
         {
             Host host = xenObject as Host;
             if (host == null)
@@ -647,7 +647,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateHABox()
+        private void GenerateHABox()
         {
             VM vm = xenObject as VM;
             if (vm == null)
@@ -663,7 +663,7 @@ namespace XenAdmin.TabPages
                 new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow, xenObject)));
         }
 
-        private void generateStatusBox()
+        private void GenerateStatusBox()
         {
             SR sr = xenObject as SR;
             if (sr == null)
@@ -734,7 +734,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateMultipathBox()
+        private void GenerateMultipathBox()
         {
             SR sr = xenObject as SR;
             if (sr == null)
@@ -863,7 +863,7 @@ namespace XenAdmin.TabPages
                 s.AddEntry(title, row);
         }
 
-        private void generateMultipathBootBox()
+        private void GenerateMultipathBootBox()
         {
             Host host = xenObject as Host;
             if (host == null)
@@ -882,7 +882,7 @@ namespace XenAdmin.TabPages
                 s.AddEntry(Messages.STATUS, text);
         }
 
-        private void generateBootBox()
+        private void GenerateBootBox()
         {
             VM vm = xenObject as VM;
             if (vm == null)
@@ -904,7 +904,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateLicenseBox()
+        private void GenerateLicenseBox()
         {
             Host host = xenObject as Host;
             if (host == null)
@@ -1000,7 +1000,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateVersionBox()
+        private void GenerateVersionBox()
         {
             Host host = xenObject as Host;
 
@@ -1025,7 +1025,7 @@ namespace XenAdmin.TabPages
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
         }
 
-        private void generateCPUBox()
+        private void GenerateCPUBox()
         {
             Host host = xenObject as Host;
             if (host == null)
@@ -1053,7 +1053,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateVCPUsBox()
+        private void GenerateVCPUsBox()
         {
             VM vm = xenObject as VM;
             if (vm == null)
@@ -1067,7 +1067,7 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("VM.Topology"), vm.Topology());
         }
 
-        private void generateDisconnectedHostBox()
+        private void GenerateDisconnectedHostBox()
         {
             IXenConnection conn = xenObject.Connection;
 
@@ -1103,7 +1103,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateGeneralBox()
+        private void GenerateGeneralBox()
         {
             PDSection s = pdSectionGeneral;
 
@@ -1122,7 +1122,9 @@ namespace XenAdmin.TabPages
 
             if (xenObject is Host host)
             {
-                if (Helpers.GetPool(xenObject.Connection) != null)
+                var isStandAloneHost = Helpers.GetPool(xenObject.Connection) == null;
+
+                if (!isStandAloneHost)
                     s.AddEntry(Messages.POOL_MASTER, host.IsMaster() ? Messages.YES : Messages.NO);
 
                 if (!host.IsLive())
@@ -1131,12 +1133,9 @@ namespace XenAdmin.TabPages
                 }
                 else if (!host.enabled)
                 {
-                    var item = new ToolStripMenuItem(Messages.EXIT_MAINTENANCE_MODE);
-                    item.Click += delegate
-                        {
-                            new HostMaintenanceModeCommand(Program.MainWindow, host,
-                                                           HostMaintenanceModeCommandParameter.Exit).Execute();
-                        };
+                    var item = new CommandToolStripMenuItem(new HostMaintenanceModeCommand(
+                        Program.MainWindow, host, HostMaintenanceModeCommandParameter.Exit));
+
                     s.AddEntry(FriendlyName("host.enabled"),
                                host.MaintenanceMode() ? Messages.HOST_IN_MAINTENANCE_MODE : Messages.DISABLED,
                                new[] { item },
@@ -1144,13 +1143,23 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    var item = new ToolStripMenuItem(Messages.ENTER_MAINTENANCE_MODE);
-                    item.Click += delegate
-                        {
-                            new HostMaintenanceModeCommand(Program.MainWindow, host,
-                                HostMaintenanceModeCommandParameter.Enter).Execute();
-                        };
+                    var item = new CommandToolStripMenuItem(new HostMaintenanceModeCommand(
+                        Program.MainWindow, host, HostMaintenanceModeCommandParameter.Enter));
+
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
+                }
+
+                if (isStandAloneHost && Helpers.PostStockholm(host))
+                {
+                    var pool = Helpers.GetPoolOfOne(xenObject.Connection);
+
+                    if (pool != null && pool.tls_verification_enabled)
+                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                    else
+                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
+                            Messages.DISABLED,
+                            new[] {new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool))},
+                            Color.Red);
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
@@ -1232,8 +1241,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            SR sr = xenObject as SR;
-            if (sr != null)
+            if (xenObject is SR sr)
             {
                 s.AddEntry(Messages.TYPE, sr.FriendlyTypeName());
 
@@ -1265,8 +1273,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            Pool p = xenObject as Pool;
-            if (p != null)
+            if (xenObject is Pool p)
             {
                 var additionalString = PoolAdditionalLicenseString();
                 s.AddEntry(Messages.POOL_LICENSE,
@@ -1274,6 +1281,17 @@ namespace XenAdmin.TabPages
                         ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, Helpers.GetFriendlyLicenseName(p), additionalString)
                         : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
+
+                if (Helpers.PostStockholm(p.Connection))
+                {
+                    if (p.tls_verification_enabled)
+                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                    else
+                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
+                            Messages.DISABLED,
+                            new[] {new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p))},
+                            Color.Red);
+                }
 
                 var master = p.Connection.Resolve(p.master);
                 if (master != null)
@@ -1303,8 +1321,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            VDI vdi = xenObject as VDI;
-            if (vdi != null)
+            if (xenObject is VDI vdi)
             {
                 s.AddEntry(Messages.SIZE, vdi.SizeText(),
                     new PropertiesToolStripMenuItem(new VdiEditSizeLocationCommand(Program.MainWindow, xenObject)));
@@ -1498,7 +1515,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateDockerContainerGeneralBox()
+        private void GenerateDockerContainerGeneralBox()
         {
             var dockerContainer = xenObject as DockerContainer;
             if (dockerContainer != null)
@@ -1527,7 +1544,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateReadCachingBox()
+        private void GenerateReadCachingBox()
         {
             VM vm = xenObject as VM;
             if (vm == null || !vm.IsRunning())
@@ -1614,7 +1631,7 @@ namespace XenAdmin.TabPages
                 );
         }
 
-        private void generateMemoryBox()
+        private void GenerateMemoryBox()
         {
             Host host = xenObject as Host;
             if (host == null)
@@ -1634,7 +1651,7 @@ namespace XenAdmin.TabPages
             s.AddEntry(key, string.IsNullOrEmpty(value) ? Messages.NONE : value);
         }
 
-        private void generateDockerInfoBox()
+        private void GenerateDockerInfoBox()
         {
             VM vm = xenObject as VM;
             if (vm == null)
