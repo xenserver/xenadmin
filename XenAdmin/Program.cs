@@ -292,7 +292,7 @@ namespace XenAdmin
             ServicePointManager.DefaultConnectionLimit = 20;
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-            Session.UserAgent = $"XenCenter/{Version}";
+            Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
             RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
 
