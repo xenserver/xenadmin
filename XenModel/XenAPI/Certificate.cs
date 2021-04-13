@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -52,12 +53,16 @@ namespace XenAPI
         }
 
         public Certificate(string uuid,
+            string name,
+            certificate_type type,
             XenRef<Host> host,
             DateTime not_before,
             DateTime not_after,
             string fingerprint)
         {
             this.uuid = uuid;
+            this.name = name;
+            this.type = type;
             this.host = host;
             this.not_before = not_before;
             this.not_after = not_after;
@@ -91,33 +96,26 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Certificate.
         /// </summary>
-        public override void UpdateFrom(Certificate update)
+        public override void UpdateFrom(Certificate record)
         {
-            uuid = update.uuid;
-            host = update.host;
-            not_before = update.not_before;
-            not_after = update.not_after;
-            fingerprint = update.fingerprint;
+            uuid = record.uuid;
+            name = record.name;
+            type = record.type;
+            host = record.host;
+            not_before = record.not_before;
+            not_after = record.not_after;
+            fingerprint = record.fingerprint;
         }
 
         internal void UpdateFrom(Proxy_Certificate proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
+            name = proxy.name == null ? null : proxy.name;
+            type = proxy.type == null ? (certificate_type) 0 : (certificate_type)Helper.EnumParseDefault(typeof(certificate_type), (string)proxy.type);
             host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
             not_before = proxy.not_before;
             not_after = proxy.not_after;
             fingerprint = proxy.fingerprint == null ? null : proxy.fingerprint;
-        }
-
-        public Proxy_Certificate ToProxy()
-        {
-            Proxy_Certificate result_ = new Proxy_Certificate();
-            result_.uuid = uuid ?? "";
-            result_.host = host ?? "";
-            result_.not_before = not_before;
-            result_.not_after = not_after;
-            result_.fingerprint = fingerprint ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -130,6 +128,10 @@ namespace XenAPI
         {
             if (table.ContainsKey("uuid"))
                 uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("name"))
+                name = Marshalling.ParseString(table, "name");
+            if (table.ContainsKey("type"))
+                type = (certificate_type)Helper.EnumParseDefault(typeof(certificate_type), Marshalling.ParseString(table, "type"));
             if (table.ContainsKey("host"))
                 host = Marshalling.ParseRef<Host>(table, "host");
             if (table.ContainsKey("not_before"))
@@ -140,6 +142,19 @@ namespace XenAPI
                 fingerprint = Marshalling.ParseString(table, "fingerprint");
         }
 
+        public Proxy_Certificate ToProxy()
+        {
+            Proxy_Certificate result_ = new Proxy_Certificate();
+            result_.uuid = uuid ?? "";
+            result_.name = name ?? "";
+            result_.type = certificate_type_helper.ToString(type);
+            result_.host = host ?? "";
+            result_.not_before = not_before;
+            result_.not_after = not_after;
+            result_.fingerprint = fingerprint ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(Certificate other)
         {
             if (ReferenceEquals(null, other))
@@ -148,19 +163,12 @@ namespace XenAPI
                 return true;
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
+                Helper.AreEqual2(this._name, other._name) &&
+                Helper.AreEqual2(this._type, other._type) &&
                 Helper.AreEqual2(this._host, other._host) &&
                 Helper.AreEqual2(this._not_before, other._not_before) &&
                 Helper.AreEqual2(this._not_after, other._not_after) &&
                 Helper.AreEqual2(this._fingerprint, other._fingerprint);
-        }
-
-        internal static List<Certificate> ProxyArrayToObjectList(Proxy_Certificate[] input)
-        {
-            var result = new List<Certificate>();
-            foreach (var item in input)
-                result.Add(new Certificate(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Certificate server)
@@ -175,6 +183,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given Certificate.
         /// First published in Citrix Hypervisor 8.2.
@@ -215,6 +224,34 @@ namespace XenAPI
                 return session.JsonRpcClient.certificate_get_uuid(session.opaque_ref, _certificate);
             else
                 return session.XmlRpcProxy.certificate_get_uuid(session.opaque_ref, _certificate ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the name field of the given Certificate.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_certificate">The opaque_ref of the given certificate</param>
+        public static string get_name(Session session, string _certificate)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.certificate_get_name(session.opaque_ref, _certificate);
+            else
+                return session.XmlRpcProxy.certificate_get_name(session.opaque_ref, _certificate ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the type field of the given Certificate.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_certificate">The opaque_ref of the given certificate</param>
+        public static certificate_type get_type(Session session, string _certificate)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.certificate_get_type(session.opaque_ref, _certificate);
+            else
+                return (certificate_type)Helper.EnumParseDefault(typeof(certificate_type), (string)session.XmlRpcProxy.certificate_get_type(session.opaque_ref, _certificate ?? "").parse());
         }
 
         /// <summary>
@@ -315,6 +352,43 @@ namespace XenAPI
             }
         }
         private string _uuid = "";
+
+        /// <summary>
+        /// The name of the certificate, only present on certificates of type 'ca'
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string name
+        {
+            get { return _name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name))
+                {
+                    _name = value;
+                    NotifyPropertyChanged("name");
+                }
+            }
+        }
+        private string _name = "";
+
+        /// <summary>
+        /// The type of the certificate, either 'ca', 'host' or 'host_internal'
+        /// First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(certificate_typeConverter))]
+        public virtual certificate_type type
+        {
+            get { return _type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _type))
+                {
+                    _type = value;
+                    NotifyPropertyChanged("type");
+                }
+            }
+        }
+        private certificate_type _type = certificate_type.host;
 
         /// <summary>
         /// The host where the certificate is installed

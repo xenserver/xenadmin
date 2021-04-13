@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -95,15 +96,15 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PVS_site.
         /// </summary>
-        public override void UpdateFrom(PVS_site update)
+        public override void UpdateFrom(PVS_site record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            PVS_uuid = update.PVS_uuid;
-            cache_storage = update.cache_storage;
-            servers = update.servers;
-            proxies = update.proxies;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            PVS_uuid = record.PVS_uuid;
+            cache_storage = record.cache_storage;
+            servers = record.servers;
+            proxies = record.proxies;
         }
 
         internal void UpdateFrom(Proxy_PVS_site proxy)
@@ -115,19 +116,6 @@ namespace XenAPI
             cache_storage = proxy.cache_storage == null ? null : XenRef<PVS_cache_storage>.Create(proxy.cache_storage);
             servers = proxy.servers == null ? null : XenRef<PVS_server>.Create(proxy.servers);
             proxies = proxy.proxies == null ? null : XenRef<PVS_proxy>.Create(proxy.proxies);
-        }
-
-        public Proxy_PVS_site ToProxy()
-        {
-            Proxy_PVS_site result_ = new Proxy_PVS_site();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.PVS_uuid = PVS_uuid ?? "";
-            result_.cache_storage = cache_storage == null ? new string[] {} : Helper.RefListToStringArray(cache_storage);
-            result_.servers = servers == null ? new string[] {} : Helper.RefListToStringArray(servers);
-            result_.proxies = proxies == null ? new string[] {} : Helper.RefListToStringArray(proxies);
-            return result_;
         }
 
         /// <summary>
@@ -154,6 +142,19 @@ namespace XenAPI
                 proxies = Marshalling.ParseSetRef<PVS_proxy>(table, "proxies");
         }
 
+        public Proxy_PVS_site ToProxy()
+        {
+            Proxy_PVS_site result_ = new Proxy_PVS_site();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.PVS_uuid = PVS_uuid ?? "";
+            result_.cache_storage = cache_storage == null ? new string[] {} : Helper.RefListToStringArray(cache_storage);
+            result_.servers = servers == null ? new string[] {} : Helper.RefListToStringArray(servers);
+            result_.proxies = proxies == null ? new string[] {} : Helper.RefListToStringArray(proxies);
+            return result_;
+        }
+
         public bool DeepEquals(PVS_site other)
         {
             if (ReferenceEquals(null, other))
@@ -168,15 +169,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._cache_storage, other._cache_storage) &&
                 Helper.AreEqual2(this._servers, other._servers) &&
                 Helper.AreEqual2(this._proxies, other._proxies);
-        }
-
-        internal static List<PVS_site> ProxyArrayToObjectList(Proxy_PVS_site[] input)
-        {
-            var result = new List<PVS_site>();
-            foreach (var item in input)
-                result.Add(new PVS_site(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PVS_site server)
@@ -204,6 +196,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PVS_site.
         /// First published in XenServer 7.1.

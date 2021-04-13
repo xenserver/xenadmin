@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -88,12 +89,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Probe_result.
         /// </summary>
-        public override void UpdateFrom(Probe_result update)
+        public override void UpdateFrom(Probe_result record)
         {
-            configuration = update.configuration;
-            complete = update.complete;
-            sr = update.sr;
-            extra_info = update.extra_info;
+            configuration = record.configuration;
+            complete = record.complete;
+            sr = record.sr;
+            extra_info = record.extra_info;
         }
 
         internal void UpdateFrom(Proxy_Probe_result proxy)
@@ -102,16 +103,6 @@ namespace XenAPI
             complete = (bool)proxy.complete;
             sr = proxy.sr == null ? null : new Sr_stat(proxy.sr);
             extra_info = proxy.extra_info == null ? null : Maps.convert_from_proxy_string_string(proxy.extra_info);
-        }
-
-        public Proxy_Probe_result ToProxy()
-        {
-            Proxy_Probe_result result_ = new Proxy_Probe_result();
-            result_.configuration = Maps.convert_to_proxy_string_string(configuration);
-            result_.complete = complete;
-            result_.sr = sr == null ? null : sr.ToProxy();
-            result_.extra_info = Maps.convert_to_proxy_string_string(extra_info);
-            return result_;
         }
 
         /// <summary>
@@ -132,6 +123,16 @@ namespace XenAPI
                 extra_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "extra_info"));
         }
 
+        public Proxy_Probe_result ToProxy()
+        {
+            Proxy_Probe_result result_ = new Proxy_Probe_result();
+            result_.configuration = Maps.convert_to_proxy_string_string(configuration);
+            result_.complete = complete;
+            result_.sr = sr == null ? null : sr.ToProxy();
+            result_.extra_info = Maps.convert_to_proxy_string_string(extra_info);
+            return result_;
+        }
+
         public bool DeepEquals(Probe_result other)
         {
             if (ReferenceEquals(null, other))
@@ -143,15 +144,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._complete, other._complete) &&
                 Helper.AreEqual2(this._sr, other._sr) &&
                 Helper.AreEqual2(this._extra_info, other._extra_info);
-        }
-
-        internal static List<Probe_result> ProxyArrayToObjectList(Proxy_Probe_result[] input)
-        {
-            var result = new List<Probe_result>();
-            foreach (var item in input)
-                result.Add(new Probe_result(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Probe_result server)
@@ -166,6 +158,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Plugin-specific configuration which describes where and how to locate the storage repository. This may include the physical block device name, a remote NFS server and path or an RBD storage pool.
         /// Experimental. First published in XenServer 7.5.

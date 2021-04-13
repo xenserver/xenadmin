@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -121,28 +122,28 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VMPP.
         /// </summary>
-        public override void UpdateFrom(VMPP update)
+        public override void UpdateFrom(VMPP record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            is_policy_enabled = update.is_policy_enabled;
-            backup_type = update.backup_type;
-            backup_retention_value = update.backup_retention_value;
-            backup_frequency = update.backup_frequency;
-            backup_schedule = update.backup_schedule;
-            is_backup_running = update.is_backup_running;
-            backup_last_run_time = update.backup_last_run_time;
-            archive_target_type = update.archive_target_type;
-            archive_target_config = update.archive_target_config;
-            archive_frequency = update.archive_frequency;
-            archive_schedule = update.archive_schedule;
-            is_archive_running = update.is_archive_running;
-            archive_last_run_time = update.archive_last_run_time;
-            VMs = update.VMs;
-            is_alarm_enabled = update.is_alarm_enabled;
-            alarm_config = update.alarm_config;
-            recent_alerts = update.recent_alerts;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            is_policy_enabled = record.is_policy_enabled;
+            backup_type = record.backup_type;
+            backup_retention_value = record.backup_retention_value;
+            backup_frequency = record.backup_frequency;
+            backup_schedule = record.backup_schedule;
+            is_backup_running = record.is_backup_running;
+            backup_last_run_time = record.backup_last_run_time;
+            archive_target_type = record.archive_target_type;
+            archive_target_config = record.archive_target_config;
+            archive_frequency = record.archive_frequency;
+            archive_schedule = record.archive_schedule;
+            is_archive_running = record.is_archive_running;
+            archive_last_run_time = record.archive_last_run_time;
+            VMs = record.VMs;
+            is_alarm_enabled = record.is_alarm_enabled;
+            alarm_config = record.alarm_config;
+            recent_alerts = record.recent_alerts;
         }
 
         internal void UpdateFrom(Proxy_VMPP proxy)
@@ -167,32 +168,6 @@ namespace XenAPI
             is_alarm_enabled = (bool)proxy.is_alarm_enabled;
             alarm_config = proxy.alarm_config == null ? null : Maps.convert_from_proxy_string_string(proxy.alarm_config);
             recent_alerts = proxy.recent_alerts == null ? new string[] {} : (string [])proxy.recent_alerts;
-        }
-
-        public Proxy_VMPP ToProxy()
-        {
-            Proxy_VMPP result_ = new Proxy_VMPP();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.is_policy_enabled = is_policy_enabled;
-            result_.backup_type = vmpp_backup_type_helper.ToString(backup_type);
-            result_.backup_retention_value = backup_retention_value.ToString();
-            result_.backup_frequency = vmpp_backup_frequency_helper.ToString(backup_frequency);
-            result_.backup_schedule = Maps.convert_to_proxy_string_string(backup_schedule);
-            result_.is_backup_running = is_backup_running;
-            result_.backup_last_run_time = backup_last_run_time;
-            result_.archive_target_type = vmpp_archive_target_type_helper.ToString(archive_target_type);
-            result_.archive_target_config = Maps.convert_to_proxy_string_string(archive_target_config);
-            result_.archive_frequency = vmpp_archive_frequency_helper.ToString(archive_frequency);
-            result_.archive_schedule = Maps.convert_to_proxy_string_string(archive_schedule);
-            result_.is_archive_running = is_archive_running;
-            result_.archive_last_run_time = archive_last_run_time;
-            result_.VMs = VMs == null ? new string[] {} : Helper.RefListToStringArray(VMs);
-            result_.is_alarm_enabled = is_alarm_enabled;
-            result_.alarm_config = Maps.convert_to_proxy_string_string(alarm_config);
-            result_.recent_alerts = recent_alerts;
-            return result_;
         }
 
         /// <summary>
@@ -245,6 +220,32 @@ namespace XenAPI
                 recent_alerts = Marshalling.ParseStringArray(table, "recent_alerts");
         }
 
+        public Proxy_VMPP ToProxy()
+        {
+            Proxy_VMPP result_ = new Proxy_VMPP();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.is_policy_enabled = is_policy_enabled;
+            result_.backup_type = vmpp_backup_type_helper.ToString(backup_type);
+            result_.backup_retention_value = backup_retention_value.ToString();
+            result_.backup_frequency = vmpp_backup_frequency_helper.ToString(backup_frequency);
+            result_.backup_schedule = Maps.convert_to_proxy_string_string(backup_schedule);
+            result_.is_backup_running = is_backup_running;
+            result_.backup_last_run_time = backup_last_run_time;
+            result_.archive_target_type = vmpp_archive_target_type_helper.ToString(archive_target_type);
+            result_.archive_target_config = Maps.convert_to_proxy_string_string(archive_target_config);
+            result_.archive_frequency = vmpp_archive_frequency_helper.ToString(archive_frequency);
+            result_.archive_schedule = Maps.convert_to_proxy_string_string(archive_schedule);
+            result_.is_archive_running = is_archive_running;
+            result_.archive_last_run_time = archive_last_run_time;
+            result_.VMs = VMs == null ? new string[] {} : Helper.RefListToStringArray(VMs);
+            result_.is_alarm_enabled = is_alarm_enabled;
+            result_.alarm_config = Maps.convert_to_proxy_string_string(alarm_config);
+            result_.recent_alerts = recent_alerts;
+            return result_;
+        }
+
         public bool DeepEquals(VMPP other)
         {
             if (ReferenceEquals(null, other))
@@ -272,15 +273,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._is_alarm_enabled, other._is_alarm_enabled) &&
                 Helper.AreEqual2(this._alarm_config, other._alarm_config) &&
                 Helper.AreEqual2(this._recent_alerts, other._recent_alerts);
-        }
-
-        internal static List<VMPP> ProxyArrayToObjectList(Proxy_VMPP[] input)
-        {
-            var result = new List<VMPP>();
-            foreach (var item in input)
-                result.Add(new VMPP(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VMPP server)
@@ -348,6 +340,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VMPP.
         /// First published in XenServer 5.6 FP1.

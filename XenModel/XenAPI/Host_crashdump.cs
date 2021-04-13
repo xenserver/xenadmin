@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Host_crashdump.
         /// </summary>
-        public override void UpdateFrom(Host_crashdump update)
+        public override void UpdateFrom(Host_crashdump record)
         {
-            uuid = update.uuid;
-            host = update.host;
-            timestamp = update.timestamp;
-            size = update.size;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            host = record.host;
+            timestamp = record.timestamp;
+            size = record.size;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Host_crashdump proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             timestamp = proxy.timestamp;
             size = proxy.size == null ? 0 : long.Parse(proxy.size);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Host_crashdump ToProxy()
-        {
-            Proxy_Host_crashdump result_ = new Proxy_Host_crashdump();
-            result_.uuid = uuid ?? "";
-            result_.host = host ?? "";
-            result_.timestamp = timestamp;
-            result_.size = size.ToString();
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Host_crashdump ToProxy()
+        {
+            Proxy_Host_crashdump result_ = new Proxy_Host_crashdump();
+            result_.uuid = uuid ?? "";
+            result_.host = host ?? "";
+            result_.timestamp = timestamp;
+            result_.size = size.ToString();
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Host_crashdump other)
         {
             if (ReferenceEquals(null, other))
@@ -152,15 +153,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._timestamp, other._timestamp) &&
                 Helper.AreEqual2(this._size, other._size) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<Host_crashdump> ProxyArrayToObjectList(Proxy_Host_crashdump[] input)
-        {
-            var result = new List<Host_crashdump>();
-            foreach (var item in input)
-                result.Add(new Host_crashdump(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host_crashdump server)
@@ -180,6 +172,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given host_crashdump.
         /// First published in XenServer 4.0.

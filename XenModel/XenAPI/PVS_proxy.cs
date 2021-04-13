@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PVS_proxy.
         /// </summary>
-        public override void UpdateFrom(PVS_proxy update)
+        public override void UpdateFrom(PVS_proxy record)
         {
-            uuid = update.uuid;
-            site = update.site;
-            VIF = update.VIF;
-            currently_attached = update.currently_attached;
-            status = update.status;
+            uuid = record.uuid;
+            site = record.site;
+            VIF = record.VIF;
+            currently_attached = record.currently_attached;
+            status = record.status;
         }
 
         internal void UpdateFrom(Proxy_PVS_proxy proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             VIF = proxy.VIF == null ? null : XenRef<VIF>.Create(proxy.VIF);
             currently_attached = (bool)proxy.currently_attached;
             status = proxy.status == null ? (pvs_proxy_status) 0 : (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)proxy.status);
-        }
-
-        public Proxy_PVS_proxy ToProxy()
-        {
-            Proxy_PVS_proxy result_ = new Proxy_PVS_proxy();
-            result_.uuid = uuid ?? "";
-            result_.site = site ?? "";
-            result_.VIF = VIF ?? "";
-            result_.currently_attached = currently_attached;
-            result_.status = pvs_proxy_status_helper.ToString(status);
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 status = (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), Marshalling.ParseString(table, "status"));
         }
 
+        public Proxy_PVS_proxy ToProxy()
+        {
+            Proxy_PVS_proxy result_ = new Proxy_PVS_proxy();
+            result_.uuid = uuid ?? "";
+            result_.site = site ?? "";
+            result_.VIF = VIF ?? "";
+            result_.currently_attached = currently_attached;
+            result_.status = pvs_proxy_status_helper.ToString(status);
+            return result_;
+        }
+
         public bool DeepEquals(PVS_proxy other)
         {
             if (ReferenceEquals(null, other))
@@ -154,15 +155,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._status, other._status);
         }
 
-        internal static List<PVS_proxy> ProxyArrayToObjectList(Proxy_PVS_proxy[] input)
-        {
-            var result = new List<PVS_proxy>();
-            foreach (var item in input)
-                result.Add(new PVS_proxy(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PVS_proxy server)
         {
             if (opaqueRef == null)
@@ -175,6 +167,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PVS_proxy.
         /// First published in XenServer 7.1.

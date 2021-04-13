@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -83,21 +84,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given LVHD.
         /// </summary>
-        public override void UpdateFrom(LVHD update)
+        public override void UpdateFrom(LVHD record)
         {
-            uuid = update.uuid;
+            uuid = record.uuid;
         }
 
         internal void UpdateFrom(Proxy_LVHD proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
-        }
-
-        public Proxy_LVHD ToProxy()
-        {
-            Proxy_LVHD result_ = new Proxy_LVHD();
-            result_.uuid = uuid ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -112,6 +106,13 @@ namespace XenAPI
                 uuid = Marshalling.ParseString(table, "uuid");
         }
 
+        public Proxy_LVHD ToProxy()
+        {
+            Proxy_LVHD result_ = new Proxy_LVHD();
+            result_.uuid = uuid ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(LVHD other)
         {
             if (ReferenceEquals(null, other))
@@ -120,15 +121,6 @@ namespace XenAPI
                 return true;
 
             return Helper.AreEqual2(this._uuid, other._uuid);
-        }
-
-        internal static List<LVHD> ProxyArrayToObjectList(Proxy_LVHD[] input)
-        {
-            var result = new List<LVHD>();
-            foreach (var item in input)
-                result.Add(new LVHD(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, LVHD server)
@@ -143,6 +135,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given LVHD.
         /// First published in XenServer 7.0.

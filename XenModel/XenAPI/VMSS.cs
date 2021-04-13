@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -101,18 +102,18 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VMSS.
         /// </summary>
-        public override void UpdateFrom(VMSS update)
+        public override void UpdateFrom(VMSS record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            enabled = update.enabled;
-            type = update.type;
-            retained_snapshots = update.retained_snapshots;
-            frequency = update.frequency;
-            schedule = update.schedule;
-            last_run_time = update.last_run_time;
-            VMs = update.VMs;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            enabled = record.enabled;
+            type = record.type;
+            retained_snapshots = record.retained_snapshots;
+            frequency = record.frequency;
+            schedule = record.schedule;
+            last_run_time = record.last_run_time;
+            VMs = record.VMs;
         }
 
         internal void UpdateFrom(Proxy_VMSS proxy)
@@ -127,22 +128,6 @@ namespace XenAPI
             schedule = proxy.schedule == null ? null : Maps.convert_from_proxy_string_string(proxy.schedule);
             last_run_time = proxy.last_run_time;
             VMs = proxy.VMs == null ? null : XenRef<VM>.Create(proxy.VMs);
-        }
-
-        public Proxy_VMSS ToProxy()
-        {
-            Proxy_VMSS result_ = new Proxy_VMSS();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.enabled = enabled;
-            result_.type = vmss_type_helper.ToString(type);
-            result_.retained_snapshots = retained_snapshots.ToString();
-            result_.frequency = vmss_frequency_helper.ToString(frequency);
-            result_.schedule = Maps.convert_to_proxy_string_string(schedule);
-            result_.last_run_time = last_run_time;
-            result_.VMs = VMs == null ? new string[] {} : Helper.RefListToStringArray(VMs);
-            return result_;
         }
 
         /// <summary>
@@ -175,6 +160,22 @@ namespace XenAPI
                 VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
         }
 
+        public Proxy_VMSS ToProxy()
+        {
+            Proxy_VMSS result_ = new Proxy_VMSS();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.enabled = enabled;
+            result_.type = vmss_type_helper.ToString(type);
+            result_.retained_snapshots = retained_snapshots.ToString();
+            result_.frequency = vmss_frequency_helper.ToString(frequency);
+            result_.schedule = Maps.convert_to_proxy_string_string(schedule);
+            result_.last_run_time = last_run_time;
+            result_.VMs = VMs == null ? new string[] {} : Helper.RefListToStringArray(VMs);
+            return result_;
+        }
+
         public bool DeepEquals(VMSS other)
         {
             if (ReferenceEquals(null, other))
@@ -192,15 +193,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._schedule, other._schedule) &&
                 Helper.AreEqual2(this._last_run_time, other._last_run_time) &&
                 Helper.AreEqual2(this._VMs, other._VMs);
-        }
-
-        internal static List<VMSS> ProxyArrayToObjectList(Proxy_VMSS[] input)
-        {
-            var result = new List<VMSS>();
-            foreach (var item in input)
-                result.Add(new VMSS(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VMSS server)
@@ -244,6 +236,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VMSS.
         /// First published in XenServer 7.2.

@@ -52,6 +52,26 @@ namespace XenAPI
         /// Indicates this pool is in the process of changing master
         /// </summary>
         designate_new_master,
+        /// <summary>
+        /// Indicates this pool is in the process of enabling TLS verification
+        /// </summary>
+        tls_verification_enable,
+        /// <summary>
+        /// Indicates this pool is in the process of configuring repositories
+        /// </summary>
+        configure_repositories,
+        /// <summary>
+        /// Indicates this pool is in the process of syncing updates
+        /// </summary>
+        sync_updates,
+        /// <summary>
+        /// Indicates this pool is in the process of getting updates
+        /// </summary>
+        get_updates,
+        /// <summary>
+        /// Indicates this pool is in the process of applying updates
+        /// </summary>
+        apply_updates,
         unknown
     }
 
@@ -77,6 +97,16 @@ namespace XenAPI
                     return "cluster_create";
                 case pool_allowed_operations.designate_new_master:
                     return "designate_new_master";
+                case pool_allowed_operations.tls_verification_enable:
+                    return "tls_verification_enable";
+                case pool_allowed_operations.configure_repositories:
+                    return "configure_repositories";
+                case pool_allowed_operations.sync_updates:
+                    return "sync_updates";
+                case pool_allowed_operations.get_updates:
+                    return "get_updates";
+                case pool_allowed_operations.apply_updates:
+                    return "apply_updates";
                 default:
                     return "unknown";
             }

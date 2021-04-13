@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -104,20 +105,20 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Cluster.
         /// </summary>
-        public override void UpdateFrom(Cluster update)
+        public override void UpdateFrom(Cluster record)
         {
-            uuid = update.uuid;
-            cluster_hosts = update.cluster_hosts;
-            pending_forget = update.pending_forget;
-            cluster_token = update.cluster_token;
-            cluster_stack = update.cluster_stack;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            pool_auto_join = update.pool_auto_join;
-            token_timeout = update.token_timeout;
-            token_timeout_coefficient = update.token_timeout_coefficient;
-            cluster_config = update.cluster_config;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            cluster_hosts = record.cluster_hosts;
+            pending_forget = record.pending_forget;
+            cluster_token = record.cluster_token;
+            cluster_stack = record.cluster_stack;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            pool_auto_join = record.pool_auto_join;
+            token_timeout = record.token_timeout;
+            token_timeout_coefficient = record.token_timeout_coefficient;
+            cluster_config = record.cluster_config;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Cluster proxy)
@@ -134,24 +135,6 @@ namespace XenAPI
             token_timeout_coefficient = Convert.ToDouble(proxy.token_timeout_coefficient);
             cluster_config = proxy.cluster_config == null ? null : Maps.convert_from_proxy_string_string(proxy.cluster_config);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Cluster ToProxy()
-        {
-            Proxy_Cluster result_ = new Proxy_Cluster();
-            result_.uuid = uuid ?? "";
-            result_.cluster_hosts = cluster_hosts == null ? new string[] {} : Helper.RefListToStringArray(cluster_hosts);
-            result_.pending_forget = pending_forget;
-            result_.cluster_token = cluster_token ?? "";
-            result_.cluster_stack = cluster_stack ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_cluster_operation(current_operations);
-            result_.pool_auto_join = pool_auto_join;
-            result_.token_timeout = token_timeout;
-            result_.token_timeout_coefficient = token_timeout_coefficient;
-            result_.cluster_config = Maps.convert_to_proxy_string_string(cluster_config);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -188,6 +171,24 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Cluster ToProxy()
+        {
+            Proxy_Cluster result_ = new Proxy_Cluster();
+            result_.uuid = uuid ?? "";
+            result_.cluster_hosts = cluster_hosts == null ? new string[] {} : Helper.RefListToStringArray(cluster_hosts);
+            result_.pending_forget = pending_forget;
+            result_.cluster_token = cluster_token ?? "";
+            result_.cluster_stack = cluster_stack ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_cluster_operation(current_operations);
+            result_.pool_auto_join = pool_auto_join;
+            result_.token_timeout = token_timeout;
+            result_.token_timeout_coefficient = token_timeout_coefficient;
+            result_.cluster_config = Maps.convert_to_proxy_string_string(cluster_config);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Cluster other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -211,15 +212,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
-        internal static List<Cluster> ProxyArrayToObjectList(Proxy_Cluster[] input)
-        {
-            var result = new List<Cluster>();
-            foreach (var item in input)
-                result.Add(new Cluster(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Cluster server)
         {
             if (opaqueRef == null)
@@ -237,6 +229,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given Cluster.
         /// Experimental. First published in XenServer 7.5.

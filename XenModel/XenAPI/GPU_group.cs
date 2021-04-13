@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -101,18 +102,18 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given GPU_group.
         /// </summary>
-        public override void UpdateFrom(GPU_group update)
+        public override void UpdateFrom(GPU_group record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            PGPUs = update.PGPUs;
-            VGPUs = update.VGPUs;
-            GPU_types = update.GPU_types;
-            other_config = update.other_config;
-            allocation_algorithm = update.allocation_algorithm;
-            supported_VGPU_types = update.supported_VGPU_types;
-            enabled_VGPU_types = update.enabled_VGPU_types;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            PGPUs = record.PGPUs;
+            VGPUs = record.VGPUs;
+            GPU_types = record.GPU_types;
+            other_config = record.other_config;
+            allocation_algorithm = record.allocation_algorithm;
+            supported_VGPU_types = record.supported_VGPU_types;
+            enabled_VGPU_types = record.enabled_VGPU_types;
         }
 
         internal void UpdateFrom(Proxy_GPU_group proxy)
@@ -127,22 +128,6 @@ namespace XenAPI
             allocation_algorithm = proxy.allocation_algorithm == null ? (allocation_algorithm) 0 : (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)proxy.allocation_algorithm);
             supported_VGPU_types = proxy.supported_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.supported_VGPU_types);
             enabled_VGPU_types = proxy.enabled_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.enabled_VGPU_types);
-        }
-
-        public Proxy_GPU_group ToProxy()
-        {
-            Proxy_GPU_group result_ = new Proxy_GPU_group();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.PGPUs = PGPUs == null ? new string[] {} : Helper.RefListToStringArray(PGPUs);
-            result_.VGPUs = VGPUs == null ? new string[] {} : Helper.RefListToStringArray(VGPUs);
-            result_.GPU_types = GPU_types;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.allocation_algorithm = allocation_algorithm_helper.ToString(allocation_algorithm);
-            result_.supported_VGPU_types = supported_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(supported_VGPU_types);
-            result_.enabled_VGPU_types = enabled_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(enabled_VGPU_types);
-            return result_;
         }
 
         /// <summary>
@@ -175,6 +160,22 @@ namespace XenAPI
                 enabled_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "enabled_VGPU_types");
         }
 
+        public Proxy_GPU_group ToProxy()
+        {
+            Proxy_GPU_group result_ = new Proxy_GPU_group();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.PGPUs = PGPUs == null ? new string[] {} : Helper.RefListToStringArray(PGPUs);
+            result_.VGPUs = VGPUs == null ? new string[] {} : Helper.RefListToStringArray(VGPUs);
+            result_.GPU_types = GPU_types;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.allocation_algorithm = allocation_algorithm_helper.ToString(allocation_algorithm);
+            result_.supported_VGPU_types = supported_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(supported_VGPU_types);
+            result_.enabled_VGPU_types = enabled_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(enabled_VGPU_types);
+            return result_;
+        }
+
         public bool DeepEquals(GPU_group other)
         {
             if (ReferenceEquals(null, other))
@@ -192,15 +193,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._allocation_algorithm, other._allocation_algorithm) &&
                 Helper.AreEqual2(this._supported_VGPU_types, other._supported_VGPU_types) &&
                 Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types);
-        }
-
-        internal static List<GPU_group> ProxyArrayToObjectList(Proxy_GPU_group[] input)
-        {
-            var result = new List<GPU_group>();
-            foreach (var item in input)
-                result.Add(new GPU_group(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, GPU_group server)
@@ -232,6 +224,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given GPU_group.
         /// First published in XenServer 6.0.

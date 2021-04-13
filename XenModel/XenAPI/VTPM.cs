@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -87,11 +88,11 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VTPM.
         /// </summary>
-        public override void UpdateFrom(VTPM update)
+        public override void UpdateFrom(VTPM record)
         {
-            uuid = update.uuid;
-            VM = update.VM;
-            backend = update.backend;
+            uuid = record.uuid;
+            VM = record.VM;
+            backend = record.backend;
         }
 
         internal void UpdateFrom(Proxy_VTPM proxy)
@@ -99,15 +100,6 @@ namespace XenAPI
             uuid = proxy.uuid == null ? null : proxy.uuid;
             VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
             backend = proxy.backend == null ? null : XenRef<VM>.Create(proxy.backend);
-        }
-
-        public Proxy_VTPM ToProxy()
-        {
-            Proxy_VTPM result_ = new Proxy_VTPM();
-            result_.uuid = uuid ?? "";
-            result_.VM = VM ?? "";
-            result_.backend = backend ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -126,6 +118,15 @@ namespace XenAPI
                 backend = Marshalling.ParseRef<VM>(table, "backend");
         }
 
+        public Proxy_VTPM ToProxy()
+        {
+            Proxy_VTPM result_ = new Proxy_VTPM();
+            result_.uuid = uuid ?? "";
+            result_.VM = VM ?? "";
+            result_.backend = backend ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(VTPM other)
         {
             if (ReferenceEquals(null, other))
@@ -136,15 +137,6 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._VM, other._VM) &&
                 Helper.AreEqual2(this._backend, other._backend);
-        }
-
-        internal static List<VTPM> ProxyArrayToObjectList(Proxy_VTPM[] input)
-        {
-            var result = new List<VTPM>();
-            foreach (var item in input)
-                result.Add(new VTPM(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VTPM server)
@@ -159,6 +151,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VTPM.
         /// First published in XenServer 4.0.

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -113,24 +114,24 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VM_metrics.
         /// </summary>
-        public override void UpdateFrom(VM_metrics update)
+        public override void UpdateFrom(VM_metrics record)
         {
-            uuid = update.uuid;
-            memory_actual = update.memory_actual;
-            VCPUs_number = update.VCPUs_number;
-            VCPUs_utilisation = update.VCPUs_utilisation;
-            VCPUs_CPU = update.VCPUs_CPU;
-            VCPUs_params = update.VCPUs_params;
-            VCPUs_flags = update.VCPUs_flags;
-            state = update.state;
-            start_time = update.start_time;
-            install_time = update.install_time;
-            last_updated = update.last_updated;
-            other_config = update.other_config;
-            hvm = update.hvm;
-            nested_virt = update.nested_virt;
-            nomigrate = update.nomigrate;
-            current_domain_type = update.current_domain_type;
+            uuid = record.uuid;
+            memory_actual = record.memory_actual;
+            VCPUs_number = record.VCPUs_number;
+            VCPUs_utilisation = record.VCPUs_utilisation;
+            VCPUs_CPU = record.VCPUs_CPU;
+            VCPUs_params = record.VCPUs_params;
+            VCPUs_flags = record.VCPUs_flags;
+            state = record.state;
+            start_time = record.start_time;
+            install_time = record.install_time;
+            last_updated = record.last_updated;
+            other_config = record.other_config;
+            hvm = record.hvm;
+            nested_virt = record.nested_virt;
+            nomigrate = record.nomigrate;
+            current_domain_type = record.current_domain_type;
         }
 
         internal void UpdateFrom(Proxy_VM_metrics proxy)
@@ -151,28 +152,6 @@ namespace XenAPI
             nested_virt = (bool)proxy.nested_virt;
             nomigrate = (bool)proxy.nomigrate;
             current_domain_type = proxy.current_domain_type == null ? (domain_type) 0 : (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)proxy.current_domain_type);
-        }
-
-        public Proxy_VM_metrics ToProxy()
-        {
-            Proxy_VM_metrics result_ = new Proxy_VM_metrics();
-            result_.uuid = uuid ?? "";
-            result_.memory_actual = memory_actual.ToString();
-            result_.VCPUs_number = VCPUs_number.ToString();
-            result_.VCPUs_utilisation = Maps.convert_to_proxy_long_double(VCPUs_utilisation);
-            result_.VCPUs_CPU = Maps.convert_to_proxy_long_long(VCPUs_CPU);
-            result_.VCPUs_params = Maps.convert_to_proxy_string_string(VCPUs_params);
-            result_.VCPUs_flags = Maps.convert_to_proxy_long_string_array(VCPUs_flags);
-            result_.state = state;
-            result_.start_time = start_time;
-            result_.install_time = install_time;
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.hvm = hvm;
-            result_.nested_virt = nested_virt;
-            result_.nomigrate = nomigrate;
-            result_.current_domain_type = domain_type_helper.ToString(current_domain_type);
-            return result_;
         }
 
         /// <summary>
@@ -217,6 +196,28 @@ namespace XenAPI
                 current_domain_type = (domain_type)Helper.EnumParseDefault(typeof(domain_type), Marshalling.ParseString(table, "current_domain_type"));
         }
 
+        public Proxy_VM_metrics ToProxy()
+        {
+            Proxy_VM_metrics result_ = new Proxy_VM_metrics();
+            result_.uuid = uuid ?? "";
+            result_.memory_actual = memory_actual.ToString();
+            result_.VCPUs_number = VCPUs_number.ToString();
+            result_.VCPUs_utilisation = Maps.convert_to_proxy_long_double(VCPUs_utilisation);
+            result_.VCPUs_CPU = Maps.convert_to_proxy_long_long(VCPUs_CPU);
+            result_.VCPUs_params = Maps.convert_to_proxy_string_string(VCPUs_params);
+            result_.VCPUs_flags = Maps.convert_to_proxy_long_string_array(VCPUs_flags);
+            result_.state = state;
+            result_.start_time = start_time;
+            result_.install_time = install_time;
+            result_.last_updated = last_updated;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.hvm = hvm;
+            result_.nested_virt = nested_virt;
+            result_.nomigrate = nomigrate;
+            result_.current_domain_type = domain_type_helper.ToString(current_domain_type);
+            return result_;
+        }
+
         public bool DeepEquals(VM_metrics other)
         {
             if (ReferenceEquals(null, other))
@@ -242,15 +243,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._current_domain_type, other._current_domain_type);
         }
 
-        internal static List<VM_metrics> ProxyArrayToObjectList(Proxy_VM_metrics[] input)
-        {
-            var result = new List<VM_metrics>();
-            foreach (var item in input)
-                result.Add(new VM_metrics(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, VM_metrics server)
         {
             if (opaqueRef == null)
@@ -268,6 +260,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VM_metrics.
         /// First published in XenServer 4.0.

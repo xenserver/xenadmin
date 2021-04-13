@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -101,18 +102,18 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Pool_patch.
         /// </summary>
-        public override void UpdateFrom(Pool_patch update)
+        public override void UpdateFrom(Pool_patch record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            version = update.version;
-            size = update.size;
-            pool_applied = update.pool_applied;
-            host_patches = update.host_patches;
-            after_apply_guidance = update.after_apply_guidance;
-            pool_update = update.pool_update;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            version = record.version;
+            size = record.size;
+            pool_applied = record.pool_applied;
+            host_patches = record.host_patches;
+            after_apply_guidance = record.after_apply_guidance;
+            pool_update = record.pool_update;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Pool_patch proxy)
@@ -127,22 +128,6 @@ namespace XenAPI
             after_apply_guidance = proxy.after_apply_guidance == null ? null : Helper.StringArrayToEnumList<after_apply_guidance>(proxy.after_apply_guidance);
             pool_update = proxy.pool_update == null ? null : XenRef<Pool_update>.Create(proxy.pool_update);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Pool_patch ToProxy()
-        {
-            Proxy_Pool_patch result_ = new Proxy_Pool_patch();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.version = version ?? "";
-            result_.size = size.ToString();
-            result_.pool_applied = pool_applied;
-            result_.host_patches = host_patches == null ? new string[] {} : Helper.RefListToStringArray(host_patches);
-            result_.after_apply_guidance = after_apply_guidance == null ? new string[] {} : Helper.ObjectListToStringArray(after_apply_guidance);
-            result_.pool_update = pool_update ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -175,6 +160,22 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Pool_patch ToProxy()
+        {
+            Proxy_Pool_patch result_ = new Proxy_Pool_patch();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.version = version ?? "";
+            result_.size = size.ToString();
+            result_.pool_applied = pool_applied;
+            result_.host_patches = host_patches == null ? new string[] {} : Helper.RefListToStringArray(host_patches);
+            result_.after_apply_guidance = after_apply_guidance == null ? new string[] {} : Helper.ObjectListToStringArray(after_apply_guidance);
+            result_.pool_update = pool_update ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Pool_patch other)
         {
             if (ReferenceEquals(null, other))
@@ -194,15 +195,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
-        internal static List<Pool_patch> ProxyArrayToObjectList(Proxy_Pool_patch[] input)
-        {
-            var result = new List<Pool_patch>();
-            foreach (var item in input)
-                result.Add(new Pool_patch(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Pool_patch server)
         {
             if (opaqueRef == null)
@@ -220,6 +212,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given pool_patch.
         /// First published in XenServer 4.1.

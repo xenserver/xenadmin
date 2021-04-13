@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -95,15 +96,15 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Blob.
         /// </summary>
-        public override void UpdateFrom(Blob update)
+        public override void UpdateFrom(Blob record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            size = update.size;
-            pubblic = update.pubblic;
-            last_updated = update.last_updated;
-            mime_type = update.mime_type;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            size = record.size;
+            pubblic = record.pubblic;
+            last_updated = record.last_updated;
+            mime_type = record.mime_type;
         }
 
         internal void UpdateFrom(Proxy_Blob proxy)
@@ -115,19 +116,6 @@ namespace XenAPI
             pubblic = (bool)proxy.pubblic;
             last_updated = proxy.last_updated;
             mime_type = proxy.mime_type == null ? null : proxy.mime_type;
-        }
-
-        public Proxy_Blob ToProxy()
-        {
-            Proxy_Blob result_ = new Proxy_Blob();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.size = size.ToString();
-            result_.pubblic = pubblic;
-            result_.last_updated = last_updated;
-            result_.mime_type = mime_type ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -154,6 +142,19 @@ namespace XenAPI
                 mime_type = Marshalling.ParseString(table, "mime_type");
         }
 
+        public Proxy_Blob ToProxy()
+        {
+            Proxy_Blob result_ = new Proxy_Blob();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.size = size.ToString();
+            result_.pubblic = pubblic;
+            result_.last_updated = last_updated;
+            result_.mime_type = mime_type ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(Blob other)
         {
             if (ReferenceEquals(null, other))
@@ -168,15 +169,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._pubblic, other._pubblic) &&
                 Helper.AreEqual2(this._last_updated, other._last_updated) &&
                 Helper.AreEqual2(this._mime_type, other._mime_type);
-        }
-
-        internal static List<Blob> ProxyArrayToObjectList(Proxy_Blob[] input)
-        {
-            var result = new List<Blob>();
-            foreach (var item in input)
-                result.Add(new Blob(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Blob server)
@@ -200,6 +192,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given blob.
         /// First published in XenServer 5.0.

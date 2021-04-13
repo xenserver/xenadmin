@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -78,18 +79,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Auth.
         /// </summary>
-        public override void UpdateFrom(Auth update)
+        public override void UpdateFrom(Auth record)
         {
         }
 
         internal void UpdateFrom(Proxy_Auth proxy)
         {
-        }
-
-        public Proxy_Auth ToProxy()
-        {
-            Proxy_Auth result_ = new Proxy_Auth();
-            return result_;
         }
 
         /// <summary>
@@ -102,6 +97,12 @@ namespace XenAPI
         {
         }
 
+        public Proxy_Auth ToProxy()
+        {
+            Proxy_Auth result_ = new Proxy_Auth();
+            return result_;
+        }
+
         public bool DeepEquals(Auth other)
         {
             if (ReferenceEquals(null, other))
@@ -110,15 +111,6 @@ namespace XenAPI
                 return true;
 
             return false;
-        }
-
-        internal static List<Auth> ProxyArrayToObjectList(Proxy_Auth[] input)
-        {
-            var result = new List<Auth>();
-            foreach (var item in input)
-                result.Add(new Auth(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Auth server)
@@ -133,6 +125,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// This call queries the external directory service to obtain the subject_identifier as a string from the human-readable subject_name
         /// First published in XenServer 5.5.

@@ -37,33 +37,60 @@ namespace XenAPI
 {
     public enum API_Version
     {
-        API_1_1 = 1, //XenServer 4.0 (rio)
-        API_1_2 = 2, //XenServer 4.1 (miami)
-        API_1_3 = 3, //XenServer 5.0 (orlando)
-        API_1_4 = 4, //Unreleased ()
-        API_1_5 = 5, //XenServer 5.0 update 3 ()
-        API_1_6 = 6, //XenServer 5.5 (george)
-        API_1_7 = 7, //XenServer 5.6 (midnight-ride)
-        API_1_8 = 8, //XenServer 5.6 FP1 (cowley)
-        API_1_9 = 9, //XenServer 6.0 (boston)
-        API_1_10 = 10, //XenServer 6.1 (tampa)
-        API_2_0 = 11, //XenServer 6.2 (clearwater)
-        API_2_1 = 12, //XenServer 6.2 SP1 (vgpu-productisation)
-        API_2_2 = 13, //XenServer 6.2 SP1 Hotfix 4 (clearwater-felton)
-        API_2_3 = 14, //XenServer 6.5 (creedence)
-        API_2_4 = 15, //XenServer 6.5 SP1 (cream)
-        API_2_5 = 16, //XenServer 7.0 (dundee)
-        API_2_6 = 17, //XenServer 7.1 (ely)
-        API_2_7 = 18, //XenServer 7.2 (falcon)
-        API_2_8 = 19, //XenServer 7.3 (inverness)
-        API_2_9 = 20, //XenServer 7.4 (jura)
-        API_2_10 = 21, //XenServer 7.5 (kolkata)
-        API_2_11 = 22, //XenServer 7.6 (lima)
-        API_2_12 = 23, //Citrix Hypervisor 8.0 (naples)
-        API_2_13 = 24, //Unreleased (oslo)
-        API_2_14 = 25, //Citrix Hypervisor 8.1 (quebec)
-        API_2_15 = 26, //Citrix Hypervisor 8.2 (stockholm)
-        API_2_16 = 27, //Unreleased (next)
+        /// <summary>XenServer 4.0 (rio)</summary>
+        API_1_1 = 1,
+        /// <summary>XenServer 4.1 (miami)</summary>
+        API_1_2 = 2,
+        /// <summary>XenServer 5.0 (orlando)</summary>
+        API_1_3 = 3,
+        /// <summary>Unreleased ()</summary>
+        API_1_4 = 4,
+        /// <summary>XenServer 5.0 update 3 ()</summary>
+        API_1_5 = 5,
+        /// <summary>XenServer 5.5 (george)</summary>
+        API_1_6 = 6,
+        /// <summary>XenServer 5.6 (midnight-ride)</summary>
+        API_1_7 = 7,
+        /// <summary>XenServer 5.6 FP1 (cowley)</summary>
+        API_1_8 = 8,
+        /// <summary>XenServer 6.0 (boston)</summary>
+        API_1_9 = 9,
+        /// <summary>XenServer 6.1 (tampa)</summary>
+        API_1_10 = 10,
+        /// <summary>XenServer 6.2 (clearwater)</summary>
+        API_2_0 = 11,
+        /// <summary>XenServer 6.2 SP1 (vgpu-productisation)</summary>
+        API_2_1 = 12,
+        /// <summary>XenServer 6.2 SP1 Hotfix 4 (clearwater-felton)</summary>
+        API_2_2 = 13,
+        /// <summary>XenServer 6.5 (creedence)</summary>
+        API_2_3 = 14,
+        /// <summary>XenServer 6.5 SP1 (cream)</summary>
+        API_2_4 = 15,
+        /// <summary>XenServer 7.0 (dundee)</summary>
+        API_2_5 = 16,
+        /// <summary>XenServer 7.1 (ely)</summary>
+        API_2_6 = 17,
+        /// <summary>XenServer 7.2 (falcon)</summary>
+        API_2_7 = 18,
+        /// <summary>XenServer 7.3 (inverness)</summary>
+        API_2_8 = 19,
+        /// <summary>XenServer 7.4 (jura)</summary>
+        API_2_9 = 20,
+        /// <summary>XenServer 7.5 (kolkata)</summary>
+        API_2_10 = 21,
+        /// <summary>XenServer 7.6 (lima)</summary>
+        API_2_11 = 22,
+        /// <summary>Citrix Hypervisor 8.0 (naples)</summary>
+        API_2_12 = 23,
+        /// <summary>Unreleased (oslo)</summary>
+        API_2_13 = 24,
+        /// <summary>Citrix Hypervisor 8.1 (quebec)</summary>
+        API_2_14 = 25,
+        /// <summary>Citrix Hypervisor 8.2 (stockholm)</summary>
+        API_2_15 = 26,
+        /// <summary>Unreleased (next)</summary>
+        API_2_16 = 27,
         LATEST = 27,
         UNKNOWN = 99
     }

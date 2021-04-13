@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -109,22 +110,22 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VM_guest_metrics.
         /// </summary>
-        public override void UpdateFrom(VM_guest_metrics update)
+        public override void UpdateFrom(VM_guest_metrics record)
         {
-            uuid = update.uuid;
-            os_version = update.os_version;
-            PV_drivers_version = update.PV_drivers_version;
-            PV_drivers_up_to_date = update.PV_drivers_up_to_date;
-            memory = update.memory;
-            disks = update.disks;
-            networks = update.networks;
-            other = update.other;
-            last_updated = update.last_updated;
-            other_config = update.other_config;
-            live = update.live;
-            can_use_hotplug_vbd = update.can_use_hotplug_vbd;
-            can_use_hotplug_vif = update.can_use_hotplug_vif;
-            PV_drivers_detected = update.PV_drivers_detected;
+            uuid = record.uuid;
+            os_version = record.os_version;
+            PV_drivers_version = record.PV_drivers_version;
+            PV_drivers_up_to_date = record.PV_drivers_up_to_date;
+            memory = record.memory;
+            disks = record.disks;
+            networks = record.networks;
+            other = record.other;
+            last_updated = record.last_updated;
+            other_config = record.other_config;
+            live = record.live;
+            can_use_hotplug_vbd = record.can_use_hotplug_vbd;
+            can_use_hotplug_vif = record.can_use_hotplug_vif;
+            PV_drivers_detected = record.PV_drivers_detected;
         }
 
         internal void UpdateFrom(Proxy_VM_guest_metrics proxy)
@@ -143,26 +144,6 @@ namespace XenAPI
             can_use_hotplug_vbd = proxy.can_use_hotplug_vbd == null ? (tristate_type) 0 : (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)proxy.can_use_hotplug_vbd);
             can_use_hotplug_vif = proxy.can_use_hotplug_vif == null ? (tristate_type) 0 : (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)proxy.can_use_hotplug_vif);
             PV_drivers_detected = (bool)proxy.PV_drivers_detected;
-        }
-
-        public Proxy_VM_guest_metrics ToProxy()
-        {
-            Proxy_VM_guest_metrics result_ = new Proxy_VM_guest_metrics();
-            result_.uuid = uuid ?? "";
-            result_.os_version = Maps.convert_to_proxy_string_string(os_version);
-            result_.PV_drivers_version = Maps.convert_to_proxy_string_string(PV_drivers_version);
-            result_.PV_drivers_up_to_date = PV_drivers_up_to_date;
-            result_.memory = Maps.convert_to_proxy_string_string(memory);
-            result_.disks = Maps.convert_to_proxy_string_string(disks);
-            result_.networks = Maps.convert_to_proxy_string_string(networks);
-            result_.other = Maps.convert_to_proxy_string_string(other);
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.live = live;
-            result_.can_use_hotplug_vbd = tristate_type_helper.ToString(can_use_hotplug_vbd);
-            result_.can_use_hotplug_vif = tristate_type_helper.ToString(can_use_hotplug_vif);
-            result_.PV_drivers_detected = PV_drivers_detected;
-            return result_;
         }
 
         /// <summary>
@@ -203,6 +184,26 @@ namespace XenAPI
                 PV_drivers_detected = Marshalling.ParseBool(table, "PV_drivers_detected");
         }
 
+        public Proxy_VM_guest_metrics ToProxy()
+        {
+            Proxy_VM_guest_metrics result_ = new Proxy_VM_guest_metrics();
+            result_.uuid = uuid ?? "";
+            result_.os_version = Maps.convert_to_proxy_string_string(os_version);
+            result_.PV_drivers_version = Maps.convert_to_proxy_string_string(PV_drivers_version);
+            result_.PV_drivers_up_to_date = PV_drivers_up_to_date;
+            result_.memory = Maps.convert_to_proxy_string_string(memory);
+            result_.disks = Maps.convert_to_proxy_string_string(disks);
+            result_.networks = Maps.convert_to_proxy_string_string(networks);
+            result_.other = Maps.convert_to_proxy_string_string(other);
+            result_.last_updated = last_updated;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.live = live;
+            result_.can_use_hotplug_vbd = tristate_type_helper.ToString(can_use_hotplug_vbd);
+            result_.can_use_hotplug_vif = tristate_type_helper.ToString(can_use_hotplug_vif);
+            result_.PV_drivers_detected = PV_drivers_detected;
+            return result_;
+        }
+
         public bool DeepEquals(VM_guest_metrics other)
         {
             if (ReferenceEquals(null, other))
@@ -226,15 +227,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._PV_drivers_detected, other._PV_drivers_detected);
         }
 
-        internal static List<VM_guest_metrics> ProxyArrayToObjectList(Proxy_VM_guest_metrics[] input)
-        {
-            var result = new List<VM_guest_metrics>();
-            foreach (var item in input)
-                result.Add(new VM_guest_metrics(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, VM_guest_metrics server)
         {
             if (opaqueRef == null)
@@ -252,6 +244,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VM_guest_metrics.
         /// First published in XenServer 4.0.

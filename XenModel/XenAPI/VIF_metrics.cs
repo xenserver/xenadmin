@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VIF_metrics.
         /// </summary>
-        public override void UpdateFrom(VIF_metrics update)
+        public override void UpdateFrom(VIF_metrics record)
         {
-            uuid = update.uuid;
-            io_read_kbs = update.io_read_kbs;
-            io_write_kbs = update.io_write_kbs;
-            last_updated = update.last_updated;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            io_read_kbs = record.io_read_kbs;
+            io_write_kbs = record.io_write_kbs;
+            last_updated = record.last_updated;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_VIF_metrics proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             io_write_kbs = Convert.ToDouble(proxy.io_write_kbs);
             last_updated = proxy.last_updated;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_VIF_metrics ToProxy()
-        {
-            Proxy_VIF_metrics result_ = new Proxy_VIF_metrics();
-            result_.uuid = uuid ?? "";
-            result_.io_read_kbs = io_read_kbs;
-            result_.io_write_kbs = io_write_kbs;
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_VIF_metrics ToProxy()
+        {
+            Proxy_VIF_metrics result_ = new Proxy_VIF_metrics();
+            result_.uuid = uuid ?? "";
+            result_.io_read_kbs = io_read_kbs;
+            result_.io_write_kbs = io_write_kbs;
+            result_.last_updated = last_updated;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(VIF_metrics other)
         {
             if (ReferenceEquals(null, other))
@@ -152,15 +153,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._io_write_kbs, other._io_write_kbs) &&
                 Helper.AreEqual2(this._last_updated, other._last_updated) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<VIF_metrics> ProxyArrayToObjectList(Proxy_VIF_metrics[] input)
-        {
-            var result = new List<VIF_metrics>();
-            foreach (var item in input)
-                result.Add(new VIF_metrics(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VIF_metrics server)
@@ -180,6 +172,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VIF_metrics.
         /// First published in XenServer 4.0.

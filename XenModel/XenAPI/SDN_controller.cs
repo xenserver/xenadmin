@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -89,12 +90,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given SDN_controller.
         /// </summary>
-        public override void UpdateFrom(SDN_controller update)
+        public override void UpdateFrom(SDN_controller record)
         {
-            uuid = update.uuid;
-            protocol = update.protocol;
-            address = update.address;
-            port = update.port;
+            uuid = record.uuid;
+            protocol = record.protocol;
+            address = record.address;
+            port = record.port;
         }
 
         internal void UpdateFrom(Proxy_SDN_controller proxy)
@@ -103,16 +104,6 @@ namespace XenAPI
             protocol = proxy.protocol == null ? (sdn_controller_protocol) 0 : (sdn_controller_protocol)Helper.EnumParseDefault(typeof(sdn_controller_protocol), (string)proxy.protocol);
             address = proxy.address == null ? null : proxy.address;
             port = proxy.port == null ? 0 : long.Parse(proxy.port);
-        }
-
-        public Proxy_SDN_controller ToProxy()
-        {
-            Proxy_SDN_controller result_ = new Proxy_SDN_controller();
-            result_.uuid = uuid ?? "";
-            result_.protocol = sdn_controller_protocol_helper.ToString(protocol);
-            result_.address = address ?? "";
-            result_.port = port.ToString();
-            return result_;
         }
 
         /// <summary>
@@ -133,6 +124,16 @@ namespace XenAPI
                 port = Marshalling.ParseLong(table, "port");
         }
 
+        public Proxy_SDN_controller ToProxy()
+        {
+            Proxy_SDN_controller result_ = new Proxy_SDN_controller();
+            result_.uuid = uuid ?? "";
+            result_.protocol = sdn_controller_protocol_helper.ToString(protocol);
+            result_.address = address ?? "";
+            result_.port = port.ToString();
+            return result_;
+        }
+
         public bool DeepEquals(SDN_controller other)
         {
             if (ReferenceEquals(null, other))
@@ -144,15 +145,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._protocol, other._protocol) &&
                 Helper.AreEqual2(this._address, other._address) &&
                 Helper.AreEqual2(this._port, other._port);
-        }
-
-        internal static List<SDN_controller> ProxyArrayToObjectList(Proxy_SDN_controller[] input)
-        {
-            var result = new List<SDN_controller>();
-            foreach (var item in input)
-                result.Add(new SDN_controller(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SDN_controller server)
@@ -167,6 +159,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given SDN_controller.
         /// First published in XenServer 7.2.

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -99,17 +100,17 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Bond.
         /// </summary>
-        public override void UpdateFrom(Bond update)
+        public override void UpdateFrom(Bond record)
         {
-            uuid = update.uuid;
-            master = update.master;
-            slaves = update.slaves;
-            other_config = update.other_config;
-            primary_slave = update.primary_slave;
-            mode = update.mode;
-            properties = update.properties;
-            links_up = update.links_up;
-            auto_update_mac = update.auto_update_mac;
+            uuid = record.uuid;
+            master = record.master;
+            slaves = record.slaves;
+            other_config = record.other_config;
+            primary_slave = record.primary_slave;
+            mode = record.mode;
+            properties = record.properties;
+            links_up = record.links_up;
+            auto_update_mac = record.auto_update_mac;
         }
 
         internal void UpdateFrom(Proxy_Bond proxy)
@@ -123,21 +124,6 @@ namespace XenAPI
             properties = proxy.properties == null ? null : Maps.convert_from_proxy_string_string(proxy.properties);
             links_up = proxy.links_up == null ? 0 : long.Parse(proxy.links_up);
             auto_update_mac = (bool)proxy.auto_update_mac;
-        }
-
-        public Proxy_Bond ToProxy()
-        {
-            Proxy_Bond result_ = new Proxy_Bond();
-            result_.uuid = uuid ?? "";
-            result_.master = master ?? "";
-            result_.slaves = slaves == null ? new string[] {} : Helper.RefListToStringArray(slaves);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.primary_slave = primary_slave ?? "";
-            result_.mode = bond_mode_helper.ToString(mode);
-            result_.properties = Maps.convert_to_proxy_string_string(properties);
-            result_.links_up = links_up.ToString();
-            result_.auto_update_mac = auto_update_mac;
-            return result_;
         }
 
         /// <summary>
@@ -168,6 +154,21 @@ namespace XenAPI
                 auto_update_mac = Marshalling.ParseBool(table, "auto_update_mac");
         }
 
+        public Proxy_Bond ToProxy()
+        {
+            Proxy_Bond result_ = new Proxy_Bond();
+            result_.uuid = uuid ?? "";
+            result_.master = master ?? "";
+            result_.slaves = slaves == null ? new string[] {} : Helper.RefListToStringArray(slaves);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.primary_slave = primary_slave ?? "";
+            result_.mode = bond_mode_helper.ToString(mode);
+            result_.properties = Maps.convert_to_proxy_string_string(properties);
+            result_.links_up = links_up.ToString();
+            result_.auto_update_mac = auto_update_mac;
+            return result_;
+        }
+
         public bool DeepEquals(Bond other)
         {
             if (ReferenceEquals(null, other))
@@ -184,15 +185,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._properties, other._properties) &&
                 Helper.AreEqual2(this._links_up, other._links_up) &&
                 Helper.AreEqual2(this._auto_update_mac, other._auto_update_mac);
-        }
-
-        internal static List<Bond> ProxyArrayToObjectList(Proxy_Bond[] input)
-        {
-            var result = new List<Bond>();
-            foreach (var item in input)
-                result.Add(new Bond(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Bond server)
@@ -212,6 +204,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given Bond.
         /// First published in XenServer 4.1.

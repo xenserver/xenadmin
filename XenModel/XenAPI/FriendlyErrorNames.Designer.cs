@@ -2982,7 +2982,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided intermediate certificates are not in a pem-encoded X509..
+        ///   Looks up a localized string similar to The provided intermediate certificates are not in a PEM-encoded X509..
         /// </summary>
         public static string SERVER_CERTIFICATE_CHAIN_INVALID {
             get {
@@ -3000,7 +3000,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided certificate is not in a pem-encoded X509..
+        ///   Looks up a localized string similar to The provided certificate is not in a PEM-encoded X509..
         /// </summary>
         public static string SERVER_CERTIFICATE_INVALID {
             get {
@@ -3018,7 +3018,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided key is not in a pem-encoded PKCS#8 format..
+        ///   Looks up a localized string similar to The provided key is not in a PEM-encoded PKCS#8 format..
         /// </summary>
         public static string SERVER_CERTIFICATE_KEY_INVALID {
             get {
@@ -3077,6 +3077,15 @@ namespace XenAPI {
         public static string SESSION_AUTHENTICATION_FAILED {
             get {
                 return ResourceManager.GetString("SESSION_AUTHENTICATION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The credentials given by the user are correct, but the user could not be authorized, so access has been denied, and you have not been issued a session handle..
+        /// </summary>
+        public static string SESSION_AUTHORIZATION_FAILED {
+            get {
+                return ResourceManager.GetString("SESSION_AUTHORIZATION_FAILED", resourceCulture);
             }
         }
         
@@ -5466,6 +5475,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VCPUs_max must be a multiple of cores-per-socket.
+        /// </summary>
+        public static string VCPU_MAX_NOT_CORES_PER_SOCKET_MULTIPLE {
+            get {
+                return ResourceManager.GetString("VCPU_MAX_NOT_CORES_PER_SOCKET_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have reached the maximum number of virtual CPUs allowed for this virtual machine..
         /// </summary>
         public static string VCPUS_MAX_ALLOWED {
@@ -5687,6 +5705,15 @@ namespace XenAPI {
         public static string VGPU_GUEST_DRIVER_LIMIT {
             get {
                 return ResourceManager.GetString("VGPU_GUEST_DRIVER_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VGPU configuration does not support suspension..
+        /// </summary>
+        public static string VGPU_SUSPENSION_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("VGPU_SUSPENSION_NOT_SUPPORTED", resourceCulture);
             }
         }
         
@@ -6231,7 +6258,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to run a VM on a host which doesn&apos;t have a GPU available in the GPU group needed by the VM. The VM has a virtual GPU attached to this GPU group..
+        ///   Looks up a localized string similar to You attempted to run a VM on a host which does not have a GPU available in the GPU group needed by the VM..
         /// </summary>
         public static string VM_REQUIRES_GPU {
             get {
@@ -6303,7 +6330,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM cannot start because no GPU is available.
+        ///   Looks up a localized string similar to The VM cannot start because the virtual GPU required by it cannot be allocated on any GPU in the GPU group needed by the VM..
         /// </summary>
         public static string VM_REQUIRES_VGPU {
             get {
