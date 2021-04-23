@@ -33,10 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using System.Text.RegularExpressions;
 
 namespace XenAdmin.Actions
 {

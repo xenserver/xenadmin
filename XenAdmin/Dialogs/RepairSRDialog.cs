@@ -32,21 +32,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-
 using XenAPI;
-
-using XenAdmin;
-using XenAdmin.Core;
 using XenAdmin.Actions;
-using XenAdmin.Network;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 
 namespace XenAdmin.Dialogs

@@ -29,9 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
 using XenAdmin.Controls;
-using XenAdmin.Properties;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {

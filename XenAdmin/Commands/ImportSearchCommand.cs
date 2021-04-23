@@ -31,11 +31,8 @@
 
 using System;
 using System.Windows.Forms;
-using XenAdmin.Actions;
-using XenAPI;
 using System.IO;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using XenAdmin.Core;
 
 

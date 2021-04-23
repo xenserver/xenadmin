@@ -498,9 +498,6 @@
   <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
     <value>Exporting pool resource list from '{0}'</value>
   </data>
-  <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>Exporting {0} to backup file</value>
-  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>Exporting {0}</value>
   </data>
@@ -1322,12 +1319,6 @@
   </data>
   <data name="ACTION_WLB_REPORT_SUCCESSFUL" xml:space="preserve">
     <value>Downloaded</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>Downloading WLB report {0}</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
-    <value>Downloading WLB report {0}</value>
   </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>A&amp;ctivate</value>
@@ -3426,7 +3417,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Saving conversion log to {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>Manage Conversions - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>Map the virtual ethernet adapters for the VMware VM(s) you are converting to networks in the destination pool or standalone server.</value>
@@ -8587,9 +8578,6 @@ To ensure system stability, it is strongly recommended that you use multipathing
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="NAME_WITH_LOCATION" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>Select the SR to reattach or create a new SR</value>
   </data>
@@ -9345,9 +9333,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_VDINAME" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
     <value>[XenCenter] has selected a different SR for you.</value>
   </data>
@@ -9671,11 +9656,17 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>Events</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
-    <value>Events: {0} errors</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
+    <value>Events: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
-    <value>Events: 1 error</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} in progress</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
+    <value>{0} errors</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 error</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>Events ({0} errors)</value>
@@ -11819,9 +11810,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SIZE_IS" xml:space="preserve">
     <value>size is</value>
   </data>
-  <data name="SIZE_LOCATION_SUB" xml:space="preserve">
-    <value>{0}, {1}</value>
-  </data>
   <data name="SIZE_NEGLIGIBLE" xml:space="preserve">
     <value>Negligible</value>
   </data>
@@ -12276,6 +12264,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> and </value>
+  </data>
+  <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
+    <value>{0}, {1}</value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>

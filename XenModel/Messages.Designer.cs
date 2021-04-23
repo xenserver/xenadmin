@@ -1204,15 +1204,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporting {0} to backup file.
-        /// </summary>
-        public static string ACTION_EXPORT_TASK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_EXPORT_TASK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Exporting {0}.
         /// </summary>
         public static string ACTION_EXPORT_TASK_NAME {
@@ -3675,24 +3666,6 @@ namespace XenAdmin {
         public static string ACTION_WLB_REPORT_SUCCESSFUL {
             get {
                 return ResourceManager.GetString("ACTION_WLB_REPORT_SUCCESSFUL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading WLB report {0}.
-        /// </summary>
-        public static string ACTION_WLB_REPORT_TASK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_WLB_REPORT_TASK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading WLB report {0}.
-        /// </summary>
-        public static string ACTION_WLB_REPORT_TASK_NAME {
-            get {
-                return ResourceManager.GetString("ACTION_WLB_REPORT_TASK_NAME", resourceCulture);
             }
         }
         
@@ -9513,7 +9486,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Conversions - {0}.
+        ///   Looks up a localized string similar to Conversion Manager - {0}.
         /// </summary>
         public static string CONVERSION_MANAGER_TITLE {
             get {
@@ -24723,15 +24696,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1}.
-        /// </summary>
-        public static string NAME_WITH_LOCATION {
-            get {
-                return ResourceManager.GetString("NAME_WITH_LOCATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the SR to reattach or create a new SR.
         /// </summary>
         public static string NETAPP_EQUAL_PAGE_TITLE {
@@ -27391,15 +27355,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1}.
-        /// </summary>
-        public static string NEWVMWIZARD_STORAGEPAGE_VDINAME {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_VDINAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] has selected a different SR for you..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_XC_SELECTION {
@@ -28363,20 +28318,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events: {0} errors.
+        ///   Looks up a localized string similar to Events: {0}.
         /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY {
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS {
             get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY", resourceCulture);
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events: 1 error.
+        ///   Looks up a localized string similar to 1 error.
         /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE {
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR {
             get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE", resourceCulture);
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} errors.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} in progress.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -34145,15 +34118,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}, {1}.
-        /// </summary>
-        public static string SIZE_LOCATION_SUB {
-            get {
-                return ResourceManager.GetString("SIZE_LOCATION_SUB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Negligible.
         /// </summary>
         public static string SIZE_NEGLIGIBLE {
@@ -35481,6 +35445,15 @@ namespace XenAdmin {
         public static string STORAGEVOLUMES {
             get {
                 return ResourceManager.GetString("STORAGEVOLUMES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, {1}.
+        /// </summary>
+        public static string STRING_COMMA_SPACE_STRING {
+            get {
+                return ResourceManager.GetString("STRING_COMMA_SPACE_STRING", resourceCulture);
             }
         }
         

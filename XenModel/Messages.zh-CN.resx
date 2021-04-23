@@ -498,9 +498,6 @@
   <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
     <value>正在从“{0}”中导出池资源列表</value>
   </data>
-  <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>将 {0} 导出到备份文件</value>
-  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>导出 {0}</value>
   </data>
@@ -1322,12 +1319,6 @@
   </data>
   <data name="ACTION_WLB_REPORT_SUCCESSFUL" xml:space="preserve">
     <value>已下载</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>下载 WLB 报告 {0}</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
-    <value>下载 WLB 报告 {0}</value>
   </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>激活(&amp;C)</value>
@@ -3249,9 +3240,6 @@
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>此服务器不可用。</value>
   </data>
-  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
-    <value>{0} Nutanix CVM 控制台</value>
-  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>此 VM 当前已关闭。</value>
   </data>
@@ -3269,6 +3257,9 @@
   </data>
   <data name="CONSOLE_POWER_STATE_SUSPENDED_RESUME" xml:space="preserve">
     <value>此 VM 当前已挂起。请单击此处恢复。</value>
+  </data>
+  <data name="CONSOLE_SR_DRIVER_DOMAIN" xml:space="preserve">
+    <value>SR“{0}”驱动程序域控制台</value>
   </data>
   <data name="CONTAINED_IN" xml:space="preserve">
     <value>包含于</value>
@@ -3426,7 +3417,7 @@
     <value>正在将转换日志保存到 {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>管理转换 - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>映射要转换为目标池或独立服务器中的网络的 VMware VM 的虚拟以太网适配器。</value>
@@ -8586,9 +8577,6 @@ SCSI ID: {2}
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>常规</value>
   </data>
-  <data name="NAME_WITH_LOCATION" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>选择要重新连接的 SR 或创建一个新 SR</value>
   </data>
@@ -9344,9 +9332,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>为新 VM 配置存储</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_VDINAME" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
     <value>[XenCenter] 为您选择了不同的 SR。</value>
   </data>
@@ -9670,11 +9655,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>事件</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
-    <value>事件: {0} 个错误</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
+    <value>事件: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
-    <value>事件: 1 个错误</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} 正在进行中</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
+    <value>{0} 个错误</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 个错误</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>事件({0} 个错误)</value>
@@ -11790,9 +11781,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SIZE_IS" xml:space="preserve">
     <value>大小为</value>
   </data>
-  <data name="SIZE_LOCATION_SUB" xml:space="preserve">
-    <value>{0}, {1}</value>
-  </data>
   <data name="SIZE_NEGLIGIBLE" xml:space="preserve">
     <value>可以忽略</value>
   </data>
@@ -12247,6 +12235,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> 和 </value>
+  </data>
+  <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
+    <value>{0}, {1}</value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>

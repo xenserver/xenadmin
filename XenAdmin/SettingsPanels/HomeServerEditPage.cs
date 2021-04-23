@@ -29,19 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-
-using XenAdmin.Core;
-using XenAdmin.Network;
-
 using XenAPI;
-using XenAdmin.Properties;
 using XenAdmin.Actions;
 
 

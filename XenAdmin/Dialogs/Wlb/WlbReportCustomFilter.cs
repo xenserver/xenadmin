@@ -31,18 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Globalization;
-using System.Drawing.Drawing2D;
-
-using XenAdmin.Wlb;
 using XenAdmin.Model;
 using XenAdmin.Network;
-using XenAdmin.Core;
 using XenAPI;
 
 

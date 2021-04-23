@@ -60,6 +60,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            Description = string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(host));
             Status = ReportStatus.compiling;
 
             string hostname = Helpers.GetName(host);

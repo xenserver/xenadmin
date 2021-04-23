@@ -31,8 +31,6 @@
 
 using XenAPI;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
 using XenAdmin.Core;

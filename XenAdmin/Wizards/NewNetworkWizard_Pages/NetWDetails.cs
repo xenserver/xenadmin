@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Wizards.NewNetworkWizard_Pages

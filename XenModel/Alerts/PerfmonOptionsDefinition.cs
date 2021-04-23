@@ -31,14 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Core;
-using System.Collections;
-using System.Xml;
-
-using System.Diagnostics;
 
 namespace XenAdmin.Alerts
 {

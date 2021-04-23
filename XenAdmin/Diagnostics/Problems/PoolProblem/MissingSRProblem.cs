@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Wizards;

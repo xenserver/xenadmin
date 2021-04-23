@@ -31,11 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using XenAPI;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace XenAdmin.Commands
 {

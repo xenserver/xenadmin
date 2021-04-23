@@ -30,9 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Net;
 using System.IO;
 
 namespace CommandLib

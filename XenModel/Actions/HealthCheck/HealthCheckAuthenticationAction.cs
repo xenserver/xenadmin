@@ -61,6 +61,8 @@ namespace XenAdmin.Actions
 
         private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
+        private readonly bool diagnosticTokenRequired;
+
         public HealthCheckAuthenticationAction(string username, string password, long tokenExpiration, bool suppressHistory)
             : base(null, Messages.ACTION_HEALTHCHECK_AUTHENTICATION, Messages.ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS, suppressHistory)
         {
@@ -72,7 +74,7 @@ namespace XenAdmin.Actions
 
         public HealthCheckAuthenticationAction(string username, string password,
             string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, string diagnosticTokenDomainName, 
-            string productKey, long tokenExpiration, bool suppressHistory)
+            string productKey, long tokenExpiration, bool diagnosticTokenRequired, bool suppressHistory)
             : this(username, password, tokenExpiration, suppressHistory)
         {
             if (!string.IsNullOrEmpty(identityTokenDomainName))
@@ -85,6 +87,7 @@ namespace XenAdmin.Actions
                 this.diagnosticTokenDomainName = diagnosticTokenDomainName;
             if (!string.IsNullOrEmpty(productKey))
                 this.productKey = productKey;
+            this.diagnosticTokenRequired = diagnosticTokenRequired;
         }
 
         protected override void Run()
@@ -94,7 +97,8 @@ namespace XenAdmin.Actions
                 string identityToken = GetIdentityToken();
                 string uploadGrantToken = GetUploadGrantToken(identityToken);
                 uploadToken = GetUploadToken(uploadGrantToken);
-                diagnosticToken = GetDiagnosticToken(identityToken);
+                if (diagnosticTokenRequired) 
+                    diagnosticToken = GetDiagnosticToken(identityToken);
             }
             catch (HealthCheckAuthenticationException)
             {

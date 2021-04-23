@@ -29,11 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-
 namespace XenAdmin.SettingsPanels
 {
 	internal class BootDevice

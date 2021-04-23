@@ -30,13 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
-using XenAdmin.Actions;
-using XenAPI;
 
 
 namespace XenAdmin.Alerts

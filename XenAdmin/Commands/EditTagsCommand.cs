@@ -29,16 +29,13 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Model;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Actions;
 using System.Windows.Forms;
 using System.Drawing;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Commands

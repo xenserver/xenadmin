@@ -498,9 +498,6 @@
   <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
     <value>'{0}' からプール リソース一覧をエクスポートしています</value>
   </data>
-  <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>{0} のバックアップ ファイルへのエクスポート</value>
-  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>{0} のエクスポート</value>
   </data>
@@ -1322,12 +1319,6 @@
   </data>
   <data name="ACTION_WLB_REPORT_SUCCESSFUL" xml:space="preserve">
     <value>ダウンロードしました</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>WLB レポート {0} のダウンロード</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
-    <value>WLB レポート {0} のダウンロード</value>
   </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>アクティブ化(&amp;C)</value>
@@ -3253,9 +3244,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>このサーバーは使用できません。</value>
   </data>
-  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
-    <value>{0} Nutanix CVM コンソール</value>
-  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>この VM は現在シャットダウン状態です。</value>
   </data>
@@ -3273,6 +3261,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CONSOLE_POWER_STATE_SUSPENDED_RESUME" xml:space="preserve">
     <value>この VM は現在一時停止状態です。再開するには、ここをクリックしてください。</value>
+  </data>
+  <data name="CONSOLE_SR_DRIVER_DOMAIN" xml:space="preserve">
+    <value>SR '{0}' ドライバー ドメイン コンソール</value>
   </data>
   <data name="CONTAINED_IN" xml:space="preserve">
     <value>以下に含まれる</value>
@@ -3430,7 +3421,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>変換ログを {0} に保存しています</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>変換の管理 - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>変換する VMware VM の仮想イーサネット アダプターを、変換先のプールまたはスタンドアロン サーバーのネットワークにマップします。</value>
@@ -8592,9 +8583,6 @@ SCSI ID: {2}
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>全般</value>
   </data>
-  <data name="NAME_WITH_LOCATION" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>再接続する SR を選択するか、新規 SR を作成してください</value>
   </data>
@@ -9346,9 +9334,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>新規 VM のストレージを構成してください</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_VDINAME" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
     <value>[XenCenter] は別の SR を選択しました。</value>
   </data>
@@ -9672,11 +9657,17 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>イベント</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
-    <value>イベント: {0} 個のエラー</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
+    <value>イベント: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
-    <value>イベント: 1 個のエラー</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} 進行中</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
+    <value>{0} エラー</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 個のエラー</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>イベント ({0} 個のエラー)</value>
@@ -11792,9 +11783,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SIZE_IS" xml:space="preserve">
     <value>サイズ</value>
   </data>
-  <data name="SIZE_LOCATION_SUB" xml:space="preserve">
-    <value>{0}, {1}</value>
-  </data>
   <data name="SIZE_NEGLIGIBLE" xml:space="preserve">
     <value>ほぼなし</value>
   </data>
@@ -12249,6 +12237,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> および </value>
+  </data>
+  <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
+    <value>{0}, {1}</value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>

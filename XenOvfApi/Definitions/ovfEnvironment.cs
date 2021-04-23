@@ -42,12 +42,7 @@
 // ------------------------------------------------------------------------------
 namespace XenOvf.Definitions
 {
-    using System;
-    using System.Diagnostics;
     using System.Xml.Serialization;
-    using System.Collections;
-    using System.Xml.Schema;
-    using System.ComponentModel;
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Xsd2Code", "1.0.3177.19956")]

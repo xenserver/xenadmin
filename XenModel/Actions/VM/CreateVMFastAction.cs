@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;

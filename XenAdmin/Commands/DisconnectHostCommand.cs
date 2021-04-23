@@ -29,17 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using XenAdmin.Network;
-using XenAdmin.Actions;
-using System.Windows.Forms;
-using XenAdmin.Dialogs;
-using System.Threading;
-using XenAdmin.Core;
-using System.Collections.ObjectModel;
 
 
 namespace XenAdmin.Commands

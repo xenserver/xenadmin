@@ -31,8 +31,6 @@
 
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Properties;
-using System.Drawing;
 using XenAdmin.Wizards.RollingUpgradeWizard;
 
 namespace XenAdmin.Commands

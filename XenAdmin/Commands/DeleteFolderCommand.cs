@@ -31,11 +31,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Model;
 using XenAPI;
-using System.Windows.Forms;
-using System.Collections.ObjectModel;
 using XenAdmin.Actions;
 
 

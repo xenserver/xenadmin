@@ -35,7 +35,6 @@ using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 using System.Linq;
-using XenAdmin.Controls;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {

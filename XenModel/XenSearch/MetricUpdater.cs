@@ -35,10 +35,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using System.Xml;
-
-using XenCenterLib;
 using XenAPI;
-
 using XenAdmin.Core;
 using System.Threading.Tasks;
 using System.Linq;

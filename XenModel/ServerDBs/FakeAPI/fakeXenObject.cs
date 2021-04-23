@@ -31,11 +31,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using System.Collections;
-using System.Reflection;
-using XenAdmin.Core;
 
 namespace XenAdmin.ServerDBs.FakeAPI
 {

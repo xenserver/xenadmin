@@ -30,14 +30,10 @@
  */
 
 using System;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Commands;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAdmin.SettingsPanels;
 using XenAPI;
 

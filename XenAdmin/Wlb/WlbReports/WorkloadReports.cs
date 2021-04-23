@@ -32,20 +32,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Web;
-using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Help;
 using XenAdmin.Controls.Wlb;
 // Report viewer control dependencies
 using Microsoft.Reporting.WinForms;

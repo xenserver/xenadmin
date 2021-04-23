@@ -29,10 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
 using XenAdmin.Controls;
 
 namespace XenAdmin.Wizards.HAWizard_Pages

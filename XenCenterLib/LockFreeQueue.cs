@@ -29,9 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 // Copied from http://www.boyet.com/Articles/LockfreeQueue.html

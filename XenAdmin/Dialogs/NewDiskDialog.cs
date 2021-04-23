@@ -38,7 +38,6 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
-using System.Drawing;
 
 
 namespace XenAdmin.Dialogs

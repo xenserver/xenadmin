@@ -29,17 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Diagnostics.Hotfixing;
-using XenAdmin.Properties;
 using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem

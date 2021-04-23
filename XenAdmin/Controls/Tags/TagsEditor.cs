@@ -33,10 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Actions;
-using XenAdmin.Model;
-using XenAdmin.Network;
-using XenAPI;
 
 namespace XenAdmin.Controls
 {

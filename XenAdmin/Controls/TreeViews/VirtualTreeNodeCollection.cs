@@ -30,8 +30,6 @@
  */
 
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 

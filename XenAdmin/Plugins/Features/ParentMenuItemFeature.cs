@@ -29,11 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
-using System.Windows.Forms;
 using XenAdmin.Core;
 using System.Resources;
 using System.Collections.ObjectModel;

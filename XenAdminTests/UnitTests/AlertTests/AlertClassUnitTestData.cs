@@ -29,10 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Drawing;
-using XenAdmin;
-
 namespace XenAdminTests.UnitTests.AlertTests
 {
     internal struct AlertClassUnitTestData

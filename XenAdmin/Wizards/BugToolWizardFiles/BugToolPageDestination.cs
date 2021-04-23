@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -263,7 +262,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             var action = new HealthCheckAuthenticationAction(usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
                 Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName,
                 Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
-                TokenExpiration, false);
+                TokenExpiration, false, false);
 
             using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
                 dlg.ShowDialog(Parent);

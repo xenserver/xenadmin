@@ -36,7 +36,6 @@ using XenAPI;
 using XenAdmin.Core;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using XenAdmin.Actions.VMActions;
 
 

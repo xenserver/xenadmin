@@ -31,15 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
 using XenAPI;
-using System.Drawing;
 using XenAdmin.Actions.VMActions;
 
 using XenAdmin.Actions.HostActions;

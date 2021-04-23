@@ -44,7 +44,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.Model;
 using XenAPI;
 using System.Diagnostics;
-using XenAdmin.Properties;
 using XenAdmin.Core;
 using XenAdmin.Commands;
 

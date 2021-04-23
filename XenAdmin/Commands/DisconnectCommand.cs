@@ -30,12 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 using XenAdmin.Actions.GUIActions;
 using XenAdmin.Network;
-using System.Collections.ObjectModel;
 using XenAdmin.Actions;
 using System.Windows.Forms;
 using XenAPI;

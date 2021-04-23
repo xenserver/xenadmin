@@ -29,9 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAPI;
-using XenAdmin.Actions.VMActions;
 
 
 namespace XenAdmin.Actions
