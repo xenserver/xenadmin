@@ -3663,6 +3663,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>Destination:</value>
   </data>
+  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
+    <value>Home Server:</value>
+  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>Template:</value>
   </data>
@@ -3674,9 +3677,6 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>Storage:</value>
-  </data>
-  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
-    <value>Target Server:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>Migration Network:</value>
@@ -3724,7 +3724,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Select the pool or standalone server where you want to move the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Specify a &amp;target server in the destination pool (optional):</value>
+    <value>Optionally, assign the VMs a &amp;home server in the destination pool:</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE" xml:space="preserve">
+    <value>Optionally, assign the VM a &amp;home server in the destination pool:</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
@@ -4687,7 +4690,7 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
     <value>does not use</value>
   </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
-    <value>Don't select a target server</value>
+    <value>Don't assign a home server</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
@@ -12313,9 +12316,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="TARGET" xml:space="preserve">
     <value>Target</value>
-  </data>
-  <data name="TARGET_SERVER" xml:space="preserve">
-    <value>Target Server</value>
   </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>

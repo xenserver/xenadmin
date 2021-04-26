@@ -70,17 +70,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
         /// </summary>
-        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "DestinationCopyMode" : "Destination"; } }
+        public override string HelpID => wizardMode == WizardMode.Copy ? "DestinationCopyMode" : "Destination";
 
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
-        public override string PageTitle { get { return Messages.CPM_WIZARD_DESTINATION_TITLE; } }
+        public override string PageTitle => Messages.CPM_WIZARD_DESTINATION_TITLE;
 
         /// <summary>
         /// Gets the page's label in the (left hand side) wizard progress panel
         /// </summary>
-        public override string Text { get { return Messages.CPM_WIZARD_DESTINATION_TAB_TITLE; } }
+        public override string Text => Messages.CPM_WIZARD_DESTINATION_TAB_TITLE;
 
         private bool TemplatesOnly { get { return selectedVMs != null && selectedVMs.All(vm => vm.is_a_template); } }
 
@@ -124,9 +124,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
         }
 
-        protected override string TargetServerText { get { return Messages.CPM_WIZARD_DESTINATION_DESTINATION; } }
+        protected override string TargetServerText => Messages.CPM_WIZARD_DESTINATION_DESTINATION;
 
-        protected override string TargetServerSelectionIntroText { get { return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO; } }
+        protected override string TargetServerSelectionIntroText =>
+            selectedVMs != null && selectedVMs.Count == 1
+                ? Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE
+                : Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO;
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
@@ -175,20 +178,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return true;
         }
 
-        protected override string VmColumnHeaderText
-        {
-            get
-            {
-                return TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
-            }
-        }
+        protected override string VmColumnHeaderText => TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
 
-        protected override string TargetColumnHeaderText
-        {
-            get
-            {
-                return Messages.TARGET_SERVER;
-            }
-        }
+        protected override string TargetColumnHeaderText => Messages.HOME_SERVER;
     }
 }
