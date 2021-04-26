@@ -184,7 +184,7 @@ namespace XenAdmin.Wizards.GenericPages
             get
             {
                 List<SummaryDetails> decoratedSummary = summary.Details;
-                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_TARGET_SERVER, ResolveLabel()));
+                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_HOME_SERVER, ResolveLabel()));
                 return decoratedSummary;
             }
         }

@@ -10219,6 +10219,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home Server:.
+        /// </summary>
+        public static string CPM_SUMMARY_KEY_HOME_SERVER {
+            get {
+                return ResourceManager.GetString("CPM_SUMMARY_KEY_HOME_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_MIGRATE_TEMPLATE {
@@ -10251,15 +10260,6 @@ namespace XenAdmin {
         public static string CPM_SUMMARY_KEY_STORAGE {
             get {
                 return ResourceManager.GetString("CPM_SUMMARY_KEY_STORAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target Server:.
-        /// </summary>
-        public static string CPM_SUMMARY_KEY_TARGET_SERVER {
-            get {
-                return ResourceManager.GetString("CPM_SUMMARY_KEY_TARGET_SERVER", resourceCulture);
             }
         }
         
@@ -10408,11 +10408,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify a &amp;target server in the destination pool (optional):.
+        ///   Looks up a localized string similar to Optionally, assign the VMs a &amp;home server in the destination pool:.
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_TABLE_INTRO {
             get {
                 return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optionally, assign the VM a &amp;home server in the destination pool:.
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE", resourceCulture);
             }
         }
         
@@ -13267,7 +13276,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t select a target server.
+        ///   Looks up a localized string similar to Don&apos;t assign a home server.
         /// </summary>
         public static string DONT_SELECT_TARGET_SERVER {
             get {
@@ -35590,15 +35599,6 @@ namespace XenAdmin {
         public static string TARGET {
             get {
                 return ResourceManager.GetString("TARGET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target Server.
-        /// </summary>
-        public static string TARGET_SERVER {
-            get {
-                return ResourceManager.GetString("TARGET_SERVER", resourceCulture);
             }
         }
         

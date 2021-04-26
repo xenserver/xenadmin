@@ -58,6 +58,8 @@ namespace XenAdmin.Wizards.GenericPages
         protected List<IXenConnection> ignoredConnections = new List<IXenConnection>();
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
 
+        #region Nested classes
+
         /// <summary>
         /// Combobox item that can execute a command but also be an IEnableableComboBoxItem
         /// </summary>
@@ -78,6 +80,27 @@ namespace XenAdmin.Wizards.GenericPages
                 get { return true; }
             }
         }
+
+        private class NoTargetServerPoolItem : IEnableableXenObjectComboBoxItem
+        {
+            private readonly Pool _pool;
+
+            public NoTargetServerPoolItem(Pool pool)
+            {
+                _pool = pool;
+            }
+
+            public IXenObject Item => _pool;
+
+            public bool Enabled => true;
+
+            public override string ToString()
+            {
+                return Messages.DONT_SELECT_TARGET_SERVER;
+            }
+        }
+
+        #endregion
 
 	    protected SelectMultipleVMDestinationPage()
 		{
