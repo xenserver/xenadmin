@@ -12529,11 +12529,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable HA if you want to configure the management interfaces.
+        ///   Looks up a localized string similar to Disable HA if you want to configure IP addresses..
         /// </summary>
-        public static string DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES {
+        public static string DISABLE_HA_CONFIGURE_IP_ADDRESSES {
             get {
-                return ResourceManager.GetString("DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES", resourceCulture);
+                return ResourceManager.GetString("DISABLE_HA_CONFIGURE_IP_ADDRESSES", resourceCulture);
             }
         }
         

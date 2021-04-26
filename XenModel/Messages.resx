@@ -4452,8 +4452,8 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DISABLE_HA" xml:space="preserve">
     <value>Disable HA</value>
   </data>
-  <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
-    <value>Disable HA if you want to configure the management interfaces</value>
+  <data name="DISABLE_HA_CONFIGURE_IP_ADDRESSES" xml:space="preserve">
+    <value>Disable HA if you want to configure IP addresses.</value>
   </data>
   <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
     <value>&amp;Disable HA</value>

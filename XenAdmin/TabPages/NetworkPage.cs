@@ -89,7 +89,7 @@ namespace XenAdmin.TabPages
                 if (_xenObject != null && Helpers.HAEnabled(_xenObject.Connection))
                 {
                     button1.Enabled = false;
-                    toolTipContainerConfigureButton.SetToolTip(Messages.DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES);
+                    toolTipContainerConfigureButton.SetToolTip(Messages.DISABLE_HA_CONFIGURE_IP_ADDRESSES);
                 }
                 else
                 {
