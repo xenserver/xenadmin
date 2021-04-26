@@ -39,6 +39,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
+            label5.Text = string.Format(label5.Text, BrandManager.ProductBrand, BrandManager.ProductVersion82);
+            label3.Text = string.Format(label3.Text, BrandManager.LegacyConsole, BrandManager.ProductVersion82);
             label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
         }
 

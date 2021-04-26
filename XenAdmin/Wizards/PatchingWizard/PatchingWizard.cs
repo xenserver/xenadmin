@@ -104,16 +104,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
 
             //set the pages before landing on them so they are populated correctly
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWeb = alert;
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected +=page_UpdateAlertFromWebSelected;
             PatchingWizard_SelectServers.SelectedServers = hosts;
             NextStep(); //FirstPage -> SelectPatchPage
-        }
-
-        private void page_UpdateAlertFromWebSelected()
-        {
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected -= page_UpdateAlertFromWebSelected;
-            NextStep(); //SelectPatchPage -> SelectServers
         }
 
         protected override void UpdateWizardContent(XenTabPage senderPage)
@@ -122,18 +114,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (prevPageType == typeof(PatchingWizard_SelectPatchPage))
             {
-                var wizardMode = PatchingWizard_SelectPatchPage.WizardMode;
-                var wizardIsInAutomatedUpdatesMode = wizardMode == WizardMode.AutomatedUpdates;
+                var updateType = PatchingWizard_SelectPatchPage.SelectedUpdateType;
+                var selectedPatchFilePath = PatchingWizard_SelectPatchPage.SelectedPatchFilePath;
+                var alertFromFileOnDisk = PatchingWizard_SelectPatchPage.AlertFromFileOnDisk;
+                var fileFromDiskHasUpdateXml = PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
 
-                var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.Legacy : PatchingWizard_SelectPatchPage.SelectedUpdateType;
-                var selectedPatchFilePath = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedPatchFilePath;
-                var alertFromWeb = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.UpdateAlertFromWeb;
-                var alertFromFileOnDisk = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.AlertFromFileOnDisk;
-                var fileFromDiskHasUpdateXml = !wizardIsInAutomatedUpdatesMode && PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
-
-                PatchingWizard_SelectServers.WizardMode = wizardMode;
+                PatchingWizard_SelectServers.WizardMode = WizardMode.SingleUpdate;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
-                PatchingWizard_SelectServers.UpdateAlertFromWeb = alertFromWeb;
                 PatchingWizard_SelectServers.AlertFromFileOnDisk = alertFromFileOnDisk;
                 PatchingWizard_SelectServers.FileFromDiskHasUpdateXml = fileFromDiskHasUpdateXml;
 
@@ -141,30 +128,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RemovePage(PatchingWizard_ModePage);
                 RemovePage(PatchingWizard_PatchingPage);
                 RemovePage(PatchingWizard_AutomatedUpdatesPage);
-                if (wizardMode == WizardMode.SingleUpdate)
-                {
-                    AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
-                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
-                    AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
-                }
-                else // AutomatedUpdates or NewVersion
-                {
-                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_AutomatedUpdatesPage);
-                }
+
+                AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
+                AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
+                AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedPatchFilePath = selectedPatchFilePath;
-                PatchingWizard_UploadPage.SelectedUpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
+                PatchingWizard_UploadPage.SelectedUpdateAlert = alertFromFileOnDisk;
                 PatchingWizard_UploadPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_ModePage.SelectedUpdateType = updateType;
 
-                PatchingWizard_PrecheckPage.WizardMode = wizardMode;
+                PatchingWizard_PrecheckPage.WizardMode = WizardMode.SingleUpdate;
                 PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
-                PatchingWizard_PrecheckPage.UpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
+                PatchingWizard_PrecheckPage.UpdateAlert = alertFromFileOnDisk;
 
-                PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
-                PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
+                PatchingWizard_AutomatedUpdatesPage.WizardMode = WizardMode.SingleUpdate;
+                PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertFromFileOnDisk;
                 PatchingWizard_AutomatedUpdatesPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_PatchingPage.SelectedUpdateType = updateType;

@@ -266,6 +266,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool CanEnableRowNonAutomated(Host host, out string tooltipText)
         {
             tooltipText = null;
+
+            if (!Helpers.PostStockholm(host))
+            {
+                tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED, BrandManager.ProductVersionPost82);
+                return false;
+            }
             
             if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
             {

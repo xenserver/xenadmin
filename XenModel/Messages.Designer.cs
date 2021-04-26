@@ -29470,6 +29470,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update application is only supported for {0} version and above.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY {

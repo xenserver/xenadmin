@@ -1013,7 +1013,7 @@ namespace XenAdmin
 
                 // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
                 //
-                if ((int)API_Version.LATEST >= (int)API_Version.API_2_16 && !Helpers.StockholmOrGreater(master))
+                if (!Helpers.StockholmOrGreater(master))
                 {
                     connection.EndConnect();
 

@@ -631,8 +631,7 @@ namespace XenAdmin.TabPages
         /// </summary>
         private void ToggleTopWarningVisibility()
         {
-            bool visible = !Properties.Settings.Default.AllowPatchesUpdates ||
-                           !Properties.Settings.Default.AllowXenCenterUpdates ||
+            bool visible = !Properties.Settings.Default.AllowXenCenterUpdates ||
                            !Properties.Settings.Default.AllowXenServerUpdates;
 
             pictureBox1.Visible = visible;
@@ -721,7 +720,7 @@ namespace XenAdmin.TabPages
             else
             {
                 var connectionList = ConnectionsManager.XenConnectionsCopy;
-                toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = connectionList.Any(xenConnection => xenConnection.IsConnected);
+                toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = connectionList.Any(xenConnection => xenConnection.IsConnected && Helpers.PostStockholm(xenConnection));
             }
         }
 

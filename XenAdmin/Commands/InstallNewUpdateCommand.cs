@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected);
+            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected && Helpers.PostStockholm(xenConnection));
         }
 
         public override Image ContextMenuImage

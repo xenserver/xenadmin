@@ -2017,7 +2017,7 @@ namespace XenAdmin.TabPages
 
         private void SetupDeprecationBanner()
         {
-            if (Helpers.PostStockholm(xenObject.Connection) || (int)API_Version.LATEST < (int)API_Version.API_2_16)
+            if (Helpers.PostStockholm(xenObject.Connection))
             {
                 Banner.Visible = false;
             }
