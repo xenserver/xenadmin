@@ -233,7 +233,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.CanCreateVmOn() && sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
+                if (sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull() &&
+                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
                 {
                     if (suggestedSr != null || defaultSr != null)
                     {

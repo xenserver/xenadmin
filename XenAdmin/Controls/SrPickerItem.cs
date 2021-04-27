@@ -139,21 +139,16 @@ namespace XenAdmin.Controls
     }
 
 
-    public class SrPickerMoveCopyItem : SrPickerItem
+    public class SrPickerCopyItem : SrPickerItem
     {
-        public SrPickerMoveCopyItem(SR sr, Host aff, VDI[] vdis)
+        public SrPickerCopyItem(SR sr, Host aff, VDI[] vdis)
             : base(sr, aff, vdis)
         {
         }
 
-        protected override bool CanBeEnabled
-        {
-            get
-            {
-                return !TheSR.IsDetached() && TheSR.SupportsVdiCreate() && !ExistingVDILocation() &&
-                       TheSR.VdiCreationCanProceed(DiskSize);
-            }
-        }
+        protected override bool CanBeEnabled =>
+            !TheSR.IsDetached() && TheSR.SupportsVdiCreate() &&
+            TheSR.VdiCreationCanProceed(DiskSize);
 
         protected override string DisabledReason
         {   
@@ -161,12 +156,35 @@ namespace XenAdmin.Controls
 	        {
                 if (TheSR.IsDetached())
                     return Messages.SR_DETACHED;
-                if (ExistingVDILocation())
-                    return Messages.CURRENT_LOCATION;
-	            return base.DisabledReason;
+                
+                return base.DisabledReason;
 	        }
         }
-                        
+    }
+
+    
+    public class SrPickerMoveItem : SrPickerItem
+    {
+        public SrPickerMoveItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
+        {
+        }
+
+        protected override bool CanBeEnabled =>
+            !TheSR.IsDetached() && !ExistingVDILocation() &&
+            TheSR.SupportsVdiCreate() && TheSR.VdiCreationCanProceed(DiskSize);
+
+        protected override string DisabledReason
+        {   
+            get
+            {
+                if (TheSR.IsDetached())
+                    return Messages.SR_DETACHED;
+                if (ExistingVDILocation())
+                    return Messages.CURRENT_LOCATION;
+                return base.DisabledReason;
+            }
+        }
     }
 
 
@@ -177,10 +195,8 @@ namespace XenAdmin.Controls
         {
         }
 
-        protected override bool CanBeEnabled
-        {
-            get { return TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize); }
-        }
+        protected override bool CanBeEnabled =>
+            TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize);
 
         protected override string DisabledReason
         {
@@ -194,7 +210,6 @@ namespace XenAdmin.Controls
     }
 
 
-
     public class SrPickerVmItem : SrPickerItem
     {
         public SrPickerVmItem(SR sr, Host aff, VDI[] vdis)
@@ -202,10 +217,10 @@ namespace XenAdmin.Controls
         {
         }
 
-        protected override bool CanBeEnabled
-        {
-            get { return TheSR.CanBeSeenFrom(Affinity) && TheSR.CanCreateVmOn() && TheSR.VdiCreationCanProceed(DiskSize); }
-        }
+        protected override bool CanBeEnabled =>
+            TheSR.CanBeSeenFrom(Affinity) &&
+            TheSR.SupportsVdiCreate() && !TheSR.IsBroken(false) && !TheSR.IsFull() &&
+            TheSR.VdiCreationCanProceed(DiskSize);
 
         protected override string DisabledReason
         {
@@ -241,14 +256,6 @@ namespace XenAdmin.Controls
             Update();
         }
 
-        private bool ShowHiddenVDIs
-        {
-            get
-            {
-                return TheSR.ShowInVDISRList(Properties.Settings.Default.ShowHiddenVMs);
-            }
-        }
-
         protected virtual bool UnsupportedSR => TheSR.HBALunPerVDI();
 
         protected abstract bool CanBeEnabled { get; }
@@ -269,17 +276,18 @@ namespace XenAdmin.Controls
             Text = TheSR.Name();
             SetImage();
 
-            if (UnsupportedSR)
+            if (UnsupportedSR || !TheSR.SupportsVdiCreate() ||
+                !TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
                 return;
 
-            if (ShowHiddenVDIs && !ExistingVDILocation() && CanBeEnabled)
+            if (CanBeEnabled)
             {
                 Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace(), 2),
                     Util.DiskSizeString(TheSR.physical_size, 2));
                 Enabled = true;
                 Show = true;
             }
-            else if (TheSR.PBDs.Count > 0 && TheSR.SupportsVdiCreate())
+            else
             {
                 Description = DisabledReason;
                 Enabled = false;
@@ -339,8 +347,10 @@ namespace XenAdmin.Controls
             {
                 case SrPicker.SRPickerType.Migrate:
                     return new SrPickerMigrateItem(sr, aff, vdis);
-                case SrPicker.SRPickerType.MoveOrCopy:
-                    return new SrPickerMoveCopyItem(sr, aff, vdis);
+                case SrPicker.SRPickerType.Copy:
+                    return new SrPickerCopyItem(sr, aff, vdis);
+                case SrPicker.SRPickerType.Move:
+                    return new SrPickerMoveItem(sr, aff, vdis);
                 case SrPicker.SRPickerType.InstallFromTemplate:
                     return new SrPickerInstallFromTemplateItem(sr, aff, vdis);
                 case SrPicker.SRPickerType.VM:
