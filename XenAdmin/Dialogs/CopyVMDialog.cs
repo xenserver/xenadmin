@@ -99,7 +99,7 @@ namespace XenAdmin.Dialogs
                 where vdi != null
                 select vdi).ToArray();
 
-            srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, _vm.Connection,
+            srPicker1.PopulateAsync(SrPicker.SRPickerType.Copy, _vm.Connection,
                 _vm.Home(), null, vdis);
         }
 

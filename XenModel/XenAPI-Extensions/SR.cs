@@ -357,14 +357,6 @@ namespace XenAPI
             return physical_size - physical_utilisation;
         }
 
-        public virtual bool ShowInVDISRList(bool showHiddenVMs)
-        {
-            if (content_type == Content_Type_ISO)
-                return false;
-            return Show(showHiddenVMs);
-
-        }
-
         public bool IsDetached()
         {
             // SR is detached when it has no PBDs or when all its PBDs are unplugged
@@ -451,18 +443,6 @@ namespace XenAPI
             Pool pool = Helpers.GetPoolOfOne(sr.Connection);
             return pool != null && pool.default_SR != null && pool.default_SR.opaque_ref == sr.opaque_ref;
         }
-
-        /// <summary>
-        /// Returns true if a new VM may be created on this SR: the SR supports VDI_CREATE, has the right number of PBDs, and is not full.
-        /// </summary>
-        /// <returns></returns>
-        public bool CanCreateVmOn()
-        {
-            System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
-
-            return SupportsVdiCreate() && !IsBroken(false) && !IsFull();
-        }
-
 
         /// <summary>
         /// Whether the underlying SR backend supports VDI_CREATE. Will return true even if the SR is full.

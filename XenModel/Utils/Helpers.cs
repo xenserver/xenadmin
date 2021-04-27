@@ -292,7 +292,7 @@ namespace XenAdmin.Core
         {
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.content_type != XenAPI.SR.Content_Type_ISO && sr.shared && sr.CanCreateVmOn())
+                if (sr.shared && sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull())
                     return true;
             }
             return false;
