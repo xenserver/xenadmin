@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Core;
 
@@ -44,7 +43,6 @@ namespace XenAdmin.Controls.Ballooning
     public partial class ShinyBar : UserControl
     {
         private static readonly Font font = new Font("Segoe UI", 9);
-        //private static readonly Font font = FormFontFixer.DefaultFont;
         private const int radius = 5;
         private const int pad = 2;
         private const int TEXT_PAD = 3;
@@ -59,6 +57,19 @@ namespace XenAdmin.Controls.Ballooning
         private Point toolTipLocation;
         private string toolTipText;
         private bool ignoreNextOnMouseMove;
+
+        //palette
+        protected Color VMShinyBar_Used = Color.ForestGreen;
+        protected Color HostShinyBar_Xen = Color.DarkGray;
+        protected Color HostShinyBar_ControlDomain = Color.DimGray; 
+        protected Color[] HostShinyBar_VMs = { Color.MidnightBlue, Color.SteelBlue };
+        protected Color[] GpuShinyBar_VMs = { Color.FromArgb(83, 39, 139), Color.FromArgb(157, 115, 215) };
+        protected Color ShinyBar_Unused = Color.Black;
+        protected Color ShinyBar_Text = Color.White;
+        protected Color Grid = Color.DarkGray;
+        protected Color SliderLimits = Color.LightGray;
+        private readonly Func<Color, Color> _colorTransformer = ControlPaint.LightLight;
+
 
         public ShinyBar()
         {
@@ -90,7 +101,7 @@ namespace XenAdmin.Controls.Ballooning
                 // Outer rounded rectangle
                 {
                     Color topColor = color;
-                    Color bottomColor = ControlPaint.LightLight(color);
+                    Color bottomColor = _colorTransformer(color);
                     using (LinearGradientBrush outerBrush = new LinearGradientBrush(barBounds, topColor, bottomColor, LinearGradientMode.Vertical))
                     {
                         g.FillPath(outerBrush, outerPath);
@@ -210,7 +221,7 @@ namespace XenAdmin.Controls.Ballooning
             return path;
         }
 
-        protected static void DrawGrid(Graphics g, Rectangle barArea, double bytesPerPixel, double max)
+        protected void DrawGrid(Graphics g, Rectangle barArea, double bytesPerPixel, double max)
         {
             const int min_gap = 40;  // min gap between consecutive labels (which are on alternate ticks)
             const int line_height = 12;
@@ -231,7 +242,7 @@ namespace XenAdmin.Controls.Ballooning
                 incr *= 2;
 
             // Draw the grid
-            using (Pen pen = new Pen(BallooningColors.Grid))
+            using (Pen pen = new Pen(Grid))
             {
                 bool withLabel = true;
                 for (long x = 0; x <= max; x += incr)
@@ -249,7 +260,7 @@ namespace XenAdmin.Controls.Ballooning
 
                         if (LabelShouldBeShown(max, label, x))
                         {
-                            Drawing.DrawText(g, label, Program.DefaultFont, rect, BallooningColors.Grid, Color.Transparent);
+                            Drawing.DrawText(g, label, Program.DefaultFont, rect, Grid, Color.Transparent);
                         }
                     }
                     withLabel = !withLabel;
