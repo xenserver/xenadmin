@@ -596,9 +596,6 @@
     <Compile Include="SettingsPanels\PerfmonAlertOptionsPage.Designer.cs">
       <DependentUpon>PerfmonAlertOptionsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlueBorderPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\CustomDataGraph\ArchiveMaintainer.cs">
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataArchive.cs" />

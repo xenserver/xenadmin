@@ -59,8 +59,6 @@ namespace XenAdmin.Dialogs
 
             TabTitle.ForeColor = Program.HeaderGradientForeColor;
             TabTitle.Font = Program.TabbedDialogHeaderFont;
-            if (!Application.RenderWithVisualStyles)
-                blueBorder.BackColor = SystemColors.Control;
         }
 
         public VerticalTabs.IVerticalTab[] Tabs

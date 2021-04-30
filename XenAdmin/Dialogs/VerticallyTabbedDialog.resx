@@ -259,7 +259,7 @@
     <value>TopPanel</value>
   </data>
   <data name="&gt;&gt;TopPanel.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.GradientPanel.HorizontalGradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TopPanel.Parent" xml:space="preserve">
     <value>blueBorder</value>
@@ -325,7 +325,7 @@
     <value>blueBorder</value>
   </data>
   <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
     <value>splitContainer.Panel2</value>
