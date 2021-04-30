@@ -204,7 +204,7 @@ namespace XenAdmin.Dialogs.Wlb
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._112_RightArrowLong_Blue_24x24_72;
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.RightArrow;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
@@ -240,7 +240,7 @@ namespace XenAdmin.Dialogs.Wlb
             // pictureBox6
             // 
             resources.ApplyResources(this.pictureBox6, "pictureBox6");
-            this.pictureBox6.Image = global::XenAdmin.Properties.Resources._112_LeftArrowLong_Blue_24x24_72;
+            this.pictureBox6.Image = global::XenAdmin.Properties.Resources.LeftArrow;
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.TabStop = false;
             // 

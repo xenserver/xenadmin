@@ -4398,7 +4398,9 @@
     <None Include="Images\000_Tick_h32bit_24.png" />
     <None Include="Images\000_WarningAlert_h32bit_32.png" />
     <None Include="Images\112_LeftArrowLong_Blue_24x24_72.png" />
-    <None Include="Images\WLB.png" />
+    <None Include="..\Branding\Images\WLB.png">
+      <Link>Images\WLB.png</Link>
+    </None>
     <None Include="..\Branding\Images\XS.png">
       <Link>Images\XS.png</Link>
     </None>
@@ -4477,12 +4479,18 @@
     <None Include="Images\linx_16x.png" />
     <None Include="Images\yinhekylin_16x.png" />
     <None Include="Images\pool_32.png" />
+    <None Include="..\Branding\Images\LeftArrow.png">
+      <Link>Images\LeftArrow.png</Link>
+    </None>
     <Content Include="Images\queued.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <None Include="..\Branding\Images\RightArrow.png">
+      <Link>Images\RightArrow.png</Link>
+    </None>
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />
     <None Include="Images\server_up_32.png" />
@@ -6777,7 +6785,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)AddManifest.targets"/>
+  <Import Project="$(SolutionDir)AddManifest.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
