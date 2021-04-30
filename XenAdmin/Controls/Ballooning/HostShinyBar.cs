@@ -29,12 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAPI;
@@ -82,10 +78,10 @@ namespace XenAdmin.Controls.Ballooning
 
             // A bar for Xen memory
             double left = (double)barArea.Left;
-            DrawSegment(g, xen_memory - dom0_memory, bytesPerPixel, BrandManager.ProductBrand, null, BallooningColors.HostShinyBar_Xen, ref left);
+            DrawSegment(g, xen_memory - dom0_memory, bytesPerPixel, BrandManager.ProductBrand, null, HostShinyBar_Xen, ref left);
 
             // A bar for Dom0 memory
-            DrawSegment(g, dom0_memory, bytesPerPixel, string.Format(Messages.CONTROL_DOM_ON_HOST, host.Name()), null, BallooningColors.HostShinyBar_ControlDomain, ref left);
+            DrawSegment(g, dom0_memory, bytesPerPixel, string.Format(Messages.CONTROL_DOM_ON_HOST, host.Name()), null, HostShinyBar_ControlDomain, ref left);
 
             // A bar for each VM
             int i = 0;
@@ -99,14 +95,14 @@ namespace XenAdmin.Controls.Ballooning
                 if (metrics != null)
                 {
                     DrawSegment(g, metrics.memory_actual, bytesPerPixel, vm.Name(), vm,
-                        BallooningColors.HostShinyBar_VMs[i++ % BallooningColors.HostShinyBar_VMs.Length],
+                        HostShinyBar_VMs[i++ % HostShinyBar_VMs.Length],
                         ref left);
                 }
             }
 
             // One final bar for free space
             Rectangle rectFree = new Rectangle((int)left, barArea.Top, barArea.Right - (int)left, barArea.Height);
-            DrawToTarget(g, barArea, rectFree, BallooningColors.HostShinyBar_Unused);
+            DrawToTarget(g, barArea, rectFree, ShinyBar_Unused);
         }
 
         private void DrawSegment(Graphics g, long mem, double bytesPerPixel, string name, VM vm, Color color, ref double left)
@@ -136,16 +132,10 @@ namespace XenAdmin.Controls.Ballooning
                                              Messages.DYNAMIC_MAX, Util.MemorySizeStringSuitableUnits(vm.memory_dynamic_max, true),
                                              Messages.STATIC_MAX, Util.MemorySizeStringSuitableUnits(vm.memory_static_max, true));
             }
-            DrawToTarget(g, barArea, rect, color, caption, BallooningColors.HostShinyBar_Text, HorizontalAlignment.Center, toolTip);
+            DrawToTarget(g, barArea, rect, color, caption, ShinyBar_Text, HorizontalAlignment.Center, toolTip);
             left += width;
         }
 
-        protected override int barHeight
-        {
-            get
-            {
-                return 40;
-            }
-        }
+        protected override int barHeight => 40;
     }
 }

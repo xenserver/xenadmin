@@ -211,7 +211,7 @@
         private System.Windows.Forms.Button clearAllButton;
         private System.Windows.Forms.Button selectAllButton;
         private PanelWithBorder panelWithBorder;
-        protected System.Windows.Forms.Panel multipleSelectionPanel;
+        private System.Windows.Forms.Panel multipleSelectionPanel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button editButton;
     }

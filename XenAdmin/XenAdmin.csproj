@@ -141,7 +141,6 @@
     <Compile Include="Controls\AffinityPicker.Designer.cs">
       <DependentUpon>AffinityPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ballooning\BallooningColors.cs" />
     <Compile Include="Controls\Ballooning\MemorySpinner.cs">
       <SubType>UserControl</SubType>
     </Compile>
