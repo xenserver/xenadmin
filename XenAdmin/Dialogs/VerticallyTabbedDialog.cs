@@ -30,17 +30,19 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Network;
 
 namespace XenAdmin.Dialogs
 {
     public partial class VerticallyTabbedDialog : XenDialogBase
     {
+        private Font titleFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1.75f, FontStyle.Bold);
+
         // Void constructor for the designer
         public VerticallyTabbedDialog()
         {
@@ -57,19 +59,15 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
 
-            TabTitle.ForeColor = Program.HeaderGradientForeColor;
-            TabTitle.Font = Program.TabbedDialogHeaderFont;
+            TabTitle.ForeColor = HorizontalGradientPanel.TextColor;
+            TabTitle.Font = titleFont;
         }
 
-        public VerticalTabs.IVerticalTab[] Tabs
-        {
-            get { return verticalTabs.Items.Cast<VerticalTabs.IVerticalTab>().ToArray(); }
-        }
+        public VerticalTabs.IVerticalTab[] Tabs =>
+            verticalTabs.Items.Cast<VerticalTabs.IVerticalTab>().ToArray();
 
-        public VerticalTabs.IVerticalTab SelectedTab
-        {
-            get { return verticalTabs.SelectedItem as VerticalTabs.IVerticalTab; }
-        }
+        public VerticalTabs.IVerticalTab SelectedTab =>
+            verticalTabs.SelectedItem as VerticalTabs.IVerticalTab;
 
         protected void SelectPage(VerticalTabs.IVerticalTab page)
         {

@@ -97,7 +97,7 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             InitializeComponent();
 
-            panel1.BackColor = Program.TitleBarBorderColor;
+            panel1.BackColor = ProfessionalColors.OverflowButtonGradientEnd;
 
             treeView.ImageList = Images.ImageList16;
             if (treeView.ItemHeight < 18)

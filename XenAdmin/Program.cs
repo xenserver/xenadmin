@@ -91,20 +91,6 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        // Set in Main() AFTER we call EnableVisualStyles().
-        // We set them here only so something decent shows up in the Designer.
-        // We must not request ProfessionalColors before we have called Application.EnableVisualStyles
-        // as it may prevent the program from displayed as expected.
-        public static Color TitleBarStartColor;
-        public static Color TitleBarEndColor;
-        public static Color TitleBarBorderColor;
-        public static Color TitleBarForeColor;
-        public static Color HeaderGradientForeColor;
-        public static Font HeaderGradientFont;
-        public static Font TabbedDialogHeaderFont;
-        public static Color TabPageRowBorder;
-        public static Color TabPageRowHeader;
-
         public static MainWindow MainWindow = null;
 
 
@@ -225,7 +211,11 @@ namespace XenAdmin
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
             Application.ThreadException += Application_ThreadException;
+
+            // We must NEVER request ProfessionalColors before we have called Application.EnableVisualStyles
+            // as it may prevent the program from displayed as expected.
             Application.EnableVisualStyles();
+
             Application.SetCompatibleTextRenderingDefault(false);
 
             try
@@ -237,50 +227,6 @@ namespace XenAdmin
             {
                 // Leave TransparentUsually == Color.Transparent.  This is an old platform
                 // without FontSmoothingType support.
-            }
-
-            switch (Environment.OSVersion.Version.Major)
-            {
-                case 6: // Vista, 2K8, Win7.
-                    if (Application.RenderWithVisualStyles)
-                    {
-                        // Vista, Win7 with styles.
-                        TitleBarStartColor = Color.FromArgb(242, 242, 242);
-                        TitleBarEndColor = Color.FromArgb(207, 207, 207);
-                        TitleBarBorderColor = Color.FromArgb(160, 160, 160);
-                        TitleBarForeColor = Color.FromArgb(60, 60, 60);
-                        HeaderGradientForeColor = Color.White;
-                        HeaderGradientFont = new Font(DefaultFont.FontFamily, 11.25f);
-                        TabbedDialogHeaderFont = HeaderGradientFont;
-                        TabPageRowBorder = Color.Gainsboro;
-                        TabPageRowHeader = Color.WhiteSmoke;
-                    }
-                    else
-                    {
-                        // 2K8 and Vista, Win7 without styles.
-                        TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
-                        TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
-                        TitleBarBorderColor = TitleBarEndColor;
-                        TitleBarForeColor = SystemColors.ControlText;
-                        HeaderGradientForeColor = SystemColors.ControlText;
-                        HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
-                        TabbedDialogHeaderFont = HeaderGradientFont;
-                        TabPageRowBorder = Color.DarkGray;
-                        TabPageRowHeader = Color.Silver;
-                    }
-                    break;
-
-                default:
-                    TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
-                    TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
-                    TitleBarBorderColor = TitleBarEndColor;
-                    TitleBarForeColor = SystemColors.ControlText;
-                    HeaderGradientForeColor = Application.RenderWithVisualStyles ? Color.White : SystemColors.ControlText;
-                    HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
-                    TabbedDialogHeaderFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1.75f, FontStyle.Bold);
-                    TabPageRowBorder = Color.DarkGray;
-                    TabPageRowHeader = Color.Silver;
-                    break;
             }
 
             // Force the current culture, to make the layout the same whatever the culture of the underlying OS (CA-46983).

@@ -56,6 +56,9 @@ namespace XenAdmin.Controls.GradientPanel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected abstract Color GradientEndColor { get; }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected abstract Color BorderColor { get; }
+
         #endregion
 
         protected void PaintPanel(Graphics g, bool drawBorder = false)
@@ -80,7 +83,7 @@ namespace XenAdmin.Controls.GradientPanel
 
             if (drawBorder)
             {
-                using (var p = new Pen(Program.TitleBarBorderColor))
+                using (var p = new Pen(BorderColor))
                     g.DrawRectangle(p, new Rectangle(bounds.Left, bounds.Top, bounds.Width - 1, bounds.Height - 1));
             }
         }
@@ -98,16 +101,24 @@ namespace XenAdmin.Controls.GradientPanel
 
     public class HorizontalGradientPanel : GradientPanel
     {
+        public static Color TextColor =>
+            Application.RenderWithVisualStyles ? Color.White : SystemColors.ControlText;
+
         protected override LinearGradientMode GradientMode => LinearGradientMode.Horizontal;
         protected override Color GradientStartColor => Color.FromArgb(57, 109, 140);
         protected override Color GradientEndColor => Color.FromArgb(63, 139, 137);
+        protected override Color BorderColor => ProfessionalColors.OverflowButtonGradientEnd;
     }
 
     public class VerticalGradientPanel : GradientPanel
     {
+        public static Color TextColor =>
+            Application.RenderWithVisualStyles ? Color.FromArgb(60, 60, 60) : SystemColors.ControlText;
+
         protected override LinearGradientMode GradientMode => LinearGradientMode.Vertical;
-        protected override Color GradientStartColor => Program.TitleBarStartColor;
-        protected override Color GradientEndColor => Program.TitleBarEndColor;
+        protected override Color GradientStartColor => ProfessionalColors.OverflowButtonGradientBegin;
+        protected override Color GradientEndColor => ProfessionalColors.OverflowButtonGradientEnd;
+        protected override Color BorderColor => ProfessionalColors.OverflowButtonGradientEnd;
 
         protected override void OnPaint(PaintEventArgs e)
         {
