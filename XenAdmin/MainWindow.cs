@@ -60,6 +60,7 @@ using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
+using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
 using XenAdmin.Wizards;
 
@@ -231,8 +232,8 @@ namespace XenAdmin
             DockerContainers.InitDockerContainers();
 
             // Fix colour of text on gradient panels
-            TitleLabel.ForeColor = Program.TitleBarForeColor;
-            loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
+            TitleLabel.ForeColor = VerticalGradientPanel.TextColor;
+            loggedInLabel1.SetTextColor(VerticalGradientPanel.TextColor);
 
             statusProgressBar.Visible = false;
 
@@ -2777,7 +2778,7 @@ namespace XenAdmin
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
 
-            var licenseColor = Program.TitleBarForeColor;
+            var licenseColor = VerticalGradientPanel.TextColor;
             var licenseText = string.Empty;
 
             if (SearchMode && SearchPage.Search != null)
@@ -2814,7 +2815,7 @@ namespace XenAdmin
 
         private string GetLicenseStatusText(IXenObject xenObject, out Color foreColor)
         {
-            foreColor = Program.TitleBarForeColor;
+            foreColor = VerticalGradientPanel.TextColor;
 
             var pool = xenObject as Pool;
             if (pool != null && pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)

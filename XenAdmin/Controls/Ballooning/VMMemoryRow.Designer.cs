@@ -53,7 +53,7 @@ namespace XenAdmin.Controls.Ballooning
             // panelLabel
             // 
             resources.ApplyResources(this.panelLabel, "panelLabel");
-            this.panelLabel.BackColor = System.Drawing.Color.Transparent;
+            this.panelLabel.BackColor = System.Drawing.Color.Silver;
             this.panelLabel.Controls.Add(this.memoryRowLabel);
             this.panelLabel.Name = "panelLabel";
             // 

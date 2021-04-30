@@ -42,21 +42,6 @@ namespace XenAdmin.Core
 {
     class Drawing
     {
-        /// <summary>
-        /// The color of URLs.
-        /// </summary>
-        // Feel free to improve this definition if you can think of a nicer way
-        // (it doesn't seem to be one of the SystemColors, nor helpfully provided in LinkLabel)
-        public static readonly Color LinkColor = Color.Blue;
-
-        /// <summary>
-        /// The color of tooltip backgrounds in XP.
-        /// </summary>
-        public static readonly Color ToolTipColor = Color.FromArgb(255, 255, 225);
-
-        public static readonly Color XPBorderColor = Color.FromArgb(123, 158, 189);
-        public static readonly Pen XPBorderPen = new Pen(XPBorderColor, 1);
-
         private static readonly ColorMatrix GreyScaleColorMatrix = new ColorMatrix(new float[][]
               {
                  new float[] {0.2125f, 0.2125f, 0.2125f, 0, 0},

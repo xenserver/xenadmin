@@ -29,45 +29,25 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace XenAdmin.Controls
 {
-    // A panel with a one-pixel rectangular border round it.
-    // By default, the border is a suitable OS-dependent colour
-    // for using on the tab pages.
-
+    /// <summary>
+    /// A panel with a one-pixel rectangular border round it. By default,
+    /// the border is a suitable OS-dependent colour for using on the tab pages.
+    /// </summary>
     class PanelWithBorder : Panel
     {
-        private Color _borderColor = SystemColors.Control;
         [Browsable(false)]
-        public Color BorderColor
-        {
-            get { return _borderColor; }
-            private set { _borderColor = value; }
-        }
-
-        public static Color DefaultBorderColor
-        {
-            get { return Program.TabPageRowBorder; }
-        }
-
-        public PanelWithBorder(Color borderColor)
-        {
-            BorderColor = borderColor;
-
-            SetStyle(ControlStyles.DoubleBuffer |
-                ControlStyles.Opaque, true);
-        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Color BorderColor { get; set; } = Color.DarkGray;
 
         public PanelWithBorder()
-            : this(DefaultBorderColor)
         {
+            SetStyle(ControlStyles.DoubleBuffer | ControlStyles.Opaque, true);
         }
 
         protected override void OnPaint(PaintEventArgs e)

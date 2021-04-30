@@ -34,6 +34,7 @@ using System.ComponentModel.Design;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
 
 namespace XenAdmin.TabPages
@@ -45,21 +46,23 @@ namespace XenAdmin.TabPages
         internal const int ITEM_SPACING = 4;
 
         internal static readonly Color HeaderBorderColor = Color.FromArgb(128, 163, 189);
-        internal static readonly Color HeaderBackColor = Color.Transparent;//Color.FromArgb(248, 249, 254);
+        internal static readonly Color HeaderBackColor = Color.Transparent;
         internal static readonly Color HeaderForeColor = SystemColors.ControlText;
 
-        internal static readonly Color ItemBackColor = Color.Transparent;//Color.FromArgb(248, 249, 254);
+        internal static readonly Color ItemBackColor = Color.Transparent;
         internal static readonly Color ItemLabelForeColor = SystemColors.HotTrack;
         internal static readonly Color ItemValueForeColor = SystemColors.ControlText;
         internal static readonly Font ItemLabelFont = Program.DefaultFontBold;
         internal static readonly Font ItemValueFont = Program.DefaultFont;
         internal static readonly Font ItemValueFontBold = Program.DefaultFontBold;
 
+        private Font titleLabelFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
+
         public BaseTabPage()
         {
             InitializeComponent();
-            titleLabel.Font = Program.HeaderGradientFont;
-            titleLabel.ForeColor = Program.HeaderGradientForeColor;
+            titleLabel.Font = titleLabelFont;
+            titleLabel.ForeColor = HorizontalGradientPanel.TextColor;
         }
 
         public override string Text

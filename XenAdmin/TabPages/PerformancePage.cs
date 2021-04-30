@@ -39,6 +39,7 @@ using XenAdmin.Core;
 using XenAdmin.Controls.CustomDataGraph;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
+using XenAdmin.Controls.GradientPanel;
 
 
 namespace XenAdmin.TabPages
@@ -64,7 +65,7 @@ namespace XenAdmin.TabPages
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             //set text colour for gradient bar
-            EventsLabel.ForeColor = Program.TitleBarForeColor;
+            EventsLabel.ForeColor = VerticalGradientPanel.TextColor;
             base.Text = Messages.PERFORMANCE_TAB_TITLE;
             UpdateMoveButtons();
         }
