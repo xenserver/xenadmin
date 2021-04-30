@@ -42,8 +42,8 @@ namespace XenAdmin.SettingsPanels
             this.lblDescrReadOnly = new System.Windows.Forms.Label();
             this.txtDescrReadOnly = new System.Windows.Forms.Label();
             this.labelTitle = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.folderPanel = new XenAdmin.Controls.BlueBorderPanel();
-            this.tagsPanel = new XenAdmin.Controls.BlueBorderPanel();
+            this.folderPanel = new System.Windows.Forms.Panel();
+            this.tagsPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,7 +135,6 @@ namespace XenAdmin.SettingsPanels
             // folderPanel
             // 
             this.folderPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.folderPanel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(158)))), ((int)(((byte)(189)))));
             this.folderPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.folderPanel, "folderPanel");
             this.folderPanel.Name = "folderPanel";
@@ -144,7 +143,6 @@ namespace XenAdmin.SettingsPanels
             // tagsPanel
             // 
             this.tagsPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.tagsPanel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(158)))), ((int)(((byte)(189)))));
             this.tagsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.tagsPanel, "tagsPanel");
             this.tagsPanel.Name = "tagsPanel";
@@ -175,8 +173,8 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtIQN;
-        private XenAdmin.Controls.BlueBorderPanel tagsPanel;
-        private XenAdmin.Controls.BlueBorderPanel folderPanel;
+        private System.Windows.Forms.Panel tagsPanel;
+        private System.Windows.Forms.Panel folderPanel;
         private XenAdmin.Controls.Common.AutoHeightLabel labelTitle;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblDescrReadOnly;
