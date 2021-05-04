@@ -9758,25 +9758,53 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>Not in any folder</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>VMs on local disk will prevent disk repartitioning.
-
-A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
-
-However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to [XenServer] {0} or above, VMs must be moved from local storage first.</value>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT" xml:space="preserve">
+    <value>Disk repartitioning is not possible.</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
-    <value>{0}: VMs on local disk will prevent disk repartitioning.</value>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM" xml:space="preserve">
+    <value>However, the new partitioning scheme cannot be applied on your server. This could be because there are VMs on local storage, the partition table type is DOS or there is a utility partition present. To upgrade to {0}, you must identify and resolve the issue first.</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
-    <value>The disk size of the local storage prevents repartitioning.
-
-A new disk partitioning scheme is available in [XenServer] {0} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
-
-However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained.</value>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING" xml:space="preserve">
+    <value>However, the new partitioning scheme cannot be applied on your server. This could be because there are VMs on local storage, the partition table type is DOS or there is a utility partition present. To upgrade to {0} or above, or to benefit from repartitioning on upgrade to a version older than {0}, you must identify and resolve the issue first.</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT" xml:space="preserve">
-    <value>{0}: The disk size of the local storage prevents repartitioning.</value>
+  <data name="NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE" xml:space="preserve">
+    <value>The partition table type prevents repartitioning.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM" xml:space="preserve">
+    <value>However, the partition table type on your server is DOS, which prevents repartitioning. The current partitioning scheme cannot be retained. Therefore the server cannot be upgraded to {0}.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING" xml:space="preserve">
+    <value>However, the partition table type on your server is DOS, which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so an upgrade to {0} or above is not possible. </value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO" xml:space="preserve">
+    <value>As of {0} the current partitioning scheme is no longer supported. A new disk partitioning scheme is available that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>The disk size of the local storage prevents repartitioning.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM" xml:space="preserve">
+    <value>However, there is not enough space to perform the repartitioning. To upgrade to {0}, the size of the local storage needs to be increased first.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING" xml:space="preserve">
+    <value>However, there is not enough space to perform the repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the size of the local storage needs to be increased first.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION" xml:space="preserve">
+    <value>A utility partition prevents repartitioning.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM" xml:space="preserve">
+    <value>However, there is a utility partition present which prevents repartitioning. To upgrade to {0}, the utility partition must be removed.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING" xml:space="preserve">
+    <value>However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the existing utility partition must be removed first.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT" xml:space="preserve">
+    <value>VMs on local disk will prevent disk repartitioning.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM" xml:space="preserve">
+    <value>However, there are VMs on local storage, so the new disk partitioning can not be applied. To upgrade to {0} or above, VMs must be moved from local storage first.</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING" xml:space="preserve">
+    <value>However, there are VMs on local storage, so the new partitioning scheme cannot be applied.  To upgrade to {0} or above, or to benefit from repartitioning on upgrade to a version older than {0}, VMs must be moved from local storage first.</value>
   </data>
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>not trusted</value>

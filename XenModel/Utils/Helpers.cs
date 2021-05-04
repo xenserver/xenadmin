@@ -494,6 +494,22 @@ namespace XenAdmin.Core
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.1.50") >= 0;
         }
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool PostStockholm(IXenConnection conn)
+        {
+            return conn == null || PostStockholm(Helpers.GetMaster(conn));
+        }
+
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool PostStockholm(Host host)
+        {
+            return host == null || PostStockholm(HostPlatformVersion(host));
+        }
+
+        public static bool PostStockholm(string platformVersion)
+        {
+            return platformVersion != null && productVersionCompare(platformVersion, "3.2.50") >= 0;
+        }
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
