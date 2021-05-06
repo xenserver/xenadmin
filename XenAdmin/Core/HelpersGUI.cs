@@ -520,16 +520,21 @@ namespace XenAdmin.Core
                 }
             }
 
-            string msg3 = string.Format(hostsWithMoreFeatures.Count == 1
-                    ? Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE
-                    : Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE,
-                string.Join("\n", hostsWithMoreFeatures.Select(h => h.Name())));
-
-            using (var dlg = new WarningDialog(msg3, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {HelpNameSetter = "PoolJoinCpuMasking"})
+            if (hostsWithMoreFeatures.Count > 0)
             {
-                return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
+                string msg3 = string.Format(hostsWithMoreFeatures.Count == 1
+                        ? Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE
+                        : Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE,
+                    string.Join("\n", hostsWithMoreFeatures.Select(h => h.Name())));
+
+                using (var dlg = new WarningDialog(msg3, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {HelpNameSetter = "PoolJoinCpuMasking"})
+                {
+                    return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
+                }
             }
+
+            return true;
         }
     }
 }
