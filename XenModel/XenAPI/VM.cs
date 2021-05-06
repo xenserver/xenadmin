@@ -918,10 +918,6 @@ namespace XenAPI
                 {
                     VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
                 }
-                if (!Helper.AreEqual2(_suspend_VDI, server._suspend_VDI))
-                {
-                    VM.set_suspend_VDI(session, opaqueRef, _suspend_VDI);
-                }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
                     VM.set_memory_static_max(session, opaqueRef, _memory_static_max);
@@ -5325,7 +5321,7 @@ namespace XenAPI
                 }
             }
         }
-        private vm_power_state _power_state = vm_power_state.Halted;
+        private vm_power_state _power_state;
 
         /// <summary>
         /// Creators of VMs and templates may store version information here.
@@ -5395,7 +5391,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VDI> _suspend_VDI = new XenRef<VDI>("OpaqueRef:NULL");
+        private XenRef<VDI> _suspend_VDI = new XenRef<VDI>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// the host the VM is currently resident on
