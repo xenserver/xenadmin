@@ -127,10 +127,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
-
             var minimalPatches = WizardMode == WizardMode.NewVersion
-                ? Updates.GetMinimalPatches(UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                ? Updates.GetMinimalPatches(UpdateAlert, false)
                 : Updates.GetMinimalPatches(pool.Connection);
 
             if (minimalPatches == null)

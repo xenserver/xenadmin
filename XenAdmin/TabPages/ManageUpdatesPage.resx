@@ -460,7 +460,7 @@
     <value>toolStrip1</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolStripEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolStripEx, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
+    <value>25, 40</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 15</value>
@@ -550,7 +550,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 40</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -580,7 +580,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkForUpdatesNowLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 3</value>
+    <value>426, 40</value>
   </data>
   <data name="checkForUpdatesNowLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 15</value>
@@ -763,7 +763,7 @@
     <value>spinner</value>
   </data>
   <data name="&gt;&gt;spinner.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SpinnerIcon, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.SpinnerIcon, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;spinner.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -931,7 +931,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dataGridViewHosts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 348</value>
+    <value>776, 311</value>
   </data>
   <data name="dataGridViewHosts.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -943,7 +943,7 @@
     <value>dataGridViewHosts</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.ManageUpdatesPage+UpdatePageByHostDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.ManageUpdatesPage+UpdatePageByHostDataGridView, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1015,7 +1015,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dataGridViewUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 348</value>
+    <value>776, 311</value>
   </data>
   <data name="dataGridViewUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1024,7 +1024,7 @@
     <value>dataGridViewUpdates</value>
   </data>
   <data name="&gt;&gt;dataGridViewUpdates.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewUpdates.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1036,13 +1036,13 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 22</value>
+    <value>0, 59</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 348</value>
+    <value>776, 311</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1059,6 +1059,45 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="labelLegacyUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="labelLegacyUpdates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLegacyUpdates.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="labelLegacyUpdates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 0</value>
+  </data>
+  <data name="labelLegacyUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 10, 10</value>
+  </data>
+  <data name="labelLegacyUpdates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="labelLegacyUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>524, 27</value>
+  </data>
+  <data name="labelLegacyUpdates.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelLegacyUpdates.Text" xml:space="preserve">
+    <value>{0} does not check for {1} updates any longer. To install updates on {1} {2} use {3} {2} instead.</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.Name" xml:space="preserve">
+    <value>labelLegacyUpdates</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.Parent" xml:space="preserve">
+    <value>tableLayouPanel5</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tableLayouPanel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 51</value>
   </data>
@@ -1066,7 +1105,7 @@
     <value>0, 6, 0, 12</value>
   </data>
   <data name="tableLayouPanel5.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="tableLayouPanel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>776, 370</value>
@@ -1087,7 +1126,7 @@
     <value>2</value>
   </data>
   <data name="tableLayouPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="checkForUpdatesNowLink" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="AutoCheckForUpdatesDisabledLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="4" Column="3" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="checkForUpdatesNowLink" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="AutoCheckForUpdatesDisabledLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelLegacyUpdates" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1135,13 +1174,13 @@
     <value>toolStripDropDownButtonServerFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
     <value>toolStripDropDownButtonDateFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
@@ -1285,6 +1324,6 @@
     <value>ManageUpdatesPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.NotificationsBasePage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.NotificationsBasePage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

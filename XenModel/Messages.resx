@@ -1879,7 +1879,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>Allowed MTU value: {0}</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for {1} updates and new versions of {0}?</value>
+    <value>Would you like {0} to periodically check the internet for new versions of {0} and {1}?</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_CHECKBOX" xml:space="preserve">
     <value>&amp;Show internet proxy settings</value>
@@ -7345,6 +7345,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>Install pending &amp;updates...</value>
   </data>
+  <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
+    <value>{0} cannot be used for installing updates on servers running {1} {2}. Please use {3} {2} instead.</value>
+  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
   </data>
@@ -10162,7 +10165,7 @@ Servers where this update cannot be applied appear disabled in this list.</value
     <value>Select the servers you want to update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED" xml:space="preserve">
-    <value>Update application is only supported for {0} version and above</value>
+    <value>{0} cannot install updates or supplemental packs on this server.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
     <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
@@ -11254,12 +11257,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
-    <value>Apply all released &amp;updates on the new version</value>
-  </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
-    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
-  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>S&amp;top</value>
   </data>
@@ -11296,7 +11293,7 @@ This will cancel the rolling pool upgrade process and may leave your system in a
     <value>Upgrade Options</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>Optionally, apply updates or supplemental packs</value>
+    <value>Optionally, apply supplemental packs</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>

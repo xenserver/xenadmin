@@ -30,9 +30,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdatesOptionsPage));
             this.UpdatesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.UpdatesBlurb = new System.Windows.Forms.Label();
-            this.AllowXenCenterUpdatesCheckBox = new System.Windows.Forms.CheckBox();
             this.AllowXenServerUpdatesCheckBox = new System.Windows.Forms.CheckBox();
+            this.AllowXenCenterUpdatesCheckBox = new System.Windows.Forms.CheckBox();
+            this.UpdatesBlurb = new System.Windows.Forms.Label();
             this.UpdatesTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,15 +40,16 @@ namespace XenAdmin.Dialogs.OptionsPages
             // 
             resources.ApplyResources(this.UpdatesTableLayoutPanel, "UpdatesTableLayoutPanel");
             this.UpdatesTableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.UpdatesTableLayoutPanel.Controls.Add(this.AllowXenServerUpdatesCheckBox, 0, 3);
-            this.UpdatesTableLayoutPanel.Controls.Add(this.AllowXenCenterUpdatesCheckBox, 0, 3);
             this.UpdatesTableLayoutPanel.Controls.Add(this.UpdatesBlurb, 0, 0);
+            this.UpdatesTableLayoutPanel.Controls.Add(this.AllowXenCenterUpdatesCheckBox, 0, 1);
+            this.UpdatesTableLayoutPanel.Controls.Add(this.AllowXenServerUpdatesCheckBox, 0, 2);
             this.UpdatesTableLayoutPanel.Name = "UpdatesTableLayoutPanel";
             // 
-            // UpdatesBlurb
+            // AllowXenServerUpdatesCheckBox
             // 
-            resources.ApplyResources(this.UpdatesBlurb, "UpdatesBlurb");
-            this.UpdatesBlurb.Name = "UpdatesBlurb";
+            resources.ApplyResources(this.AllowXenServerUpdatesCheckBox, "AllowXenServerUpdatesCheckBox");
+            this.AllowXenServerUpdatesCheckBox.Name = "AllowXenServerUpdatesCheckBox";
+            this.AllowXenServerUpdatesCheckBox.UseVisualStyleBackColor = true;
             // 
             // AllowXenCenterUpdatesCheckBox
             // 
@@ -56,11 +57,10 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.AllowXenCenterUpdatesCheckBox.Name = "AllowXenCenterUpdatesCheckBox";
             this.AllowXenCenterUpdatesCheckBox.UseVisualStyleBackColor = true;
             // 
-            // AllowXenServerUpdatesCheckBox
+            // UpdatesBlurb
             // 
-            resources.ApplyResources(this.AllowXenServerUpdatesCheckBox, "AllowXenServerUpdatesCheckBox");
-            this.AllowXenServerUpdatesCheckBox.Name = "AllowXenServerUpdatesCheckBox";
-            this.AllowXenServerUpdatesCheckBox.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.UpdatesBlurb, "UpdatesBlurb");
+            this.UpdatesBlurb.Name = "UpdatesBlurb";
             // 
             // UpdatesOptionsPage
             // 

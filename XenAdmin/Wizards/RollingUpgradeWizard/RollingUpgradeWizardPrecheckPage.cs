@@ -156,9 +156,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var poolHostsToUpgrade = pool.HostsToUpgrade();
                 hostsToUpgrade.AddRange(poolHostsToUpgrade);
-                hostsToUpgradeOrUpdate.AddRange(ApplyUpdatesToNewVersion
-                    ? HostsToUpgradeOrUpdate(pool)
-                    : poolHostsToUpgrade);
+                hostsToUpgradeOrUpdate.AddRange(poolHostsToUpgrade);
             }
 
             //XenCenter version check (if any of the selected server version is not the latest)
@@ -282,18 +280,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (gfs2Checks.Count > 0)
             {
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
-            }
-
-            //Checking automated updates are possible if apply updates checkbox is ticked
-            if (ApplyUpdatesToNewVersion)
-            {
-                var automatedUpdateChecks = (from Host server in SelectedMasters
-                    select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
-
-                automatedUpdateChecks.Add(new CfuAvailabilityCheck());
-
-                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_POSSIBLE,
-                    automatedUpdateChecks));
             }
 
             return groups;

@@ -31,33 +31,26 @@ namespace XenAdmin.Wizards.PatchingWizard
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatchingWizard_SelectPatchPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelOnlySelectFromDisk = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.fileNameTextBox = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelOnlySelectFromDisk, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.fileNameTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelOnlySelectFromDisk
             // 
             resources.ApplyResources(this.labelOnlySelectFromDisk, "labelOnlySelectFromDisk");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelOnlySelectFromDisk, 3);
             this.labelOnlySelectFromDisk.Name = "labelOnlySelectFromDisk";
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.fileNameTextBox, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.BrowseButton, 2, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // label2
             // 
@@ -85,8 +78,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.Name = "PatchingWizard_SelectPatchPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -94,7 +85,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelOnlySelectFromDisk;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox fileNameTextBox;
         private System.Windows.Forms.Button BrowseButton;

@@ -68,23 +68,23 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected && Helpers.PostStockholm(xenConnection));
+            return ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && Helpers.PostStockholm(c));
         }
 
-        public override Image ContextMenuImage
+        protected override string GetCantExecuteReasonCore(IXenObject item)
         {
-            get
-            {
-                return Images.StaticImages._000_HostUnpatched_h32bit_16;
-            }
+            var connected = ConnectionsManager.XenConnectionsCopy.Where(c => c.IsConnected).ToList();
+
+            if (connected.Count > 0 && connected.All(c => !Helpers.PostStockholm(c)))
+                return string.Format(Messages.INSTALL_PENDING_UPDATES_DISABLED_REASON,
+                    BrandManager.BrandConsole, BrandManager.ProductBrand,
+                    BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+
+            return base.GetCantExecuteReasonCore(item);
         }
 
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.INSTALL_PENDING_UPDATES;
-            }
-        }
+        public override Image ContextMenuImage => Images.StaticImages._000_HostUnpatched_h32bit_16;
+
+        public override string ContextMenuText => Messages.INSTALL_PENDING_UPDATES;
     }
 }

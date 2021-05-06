@@ -38,12 +38,10 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class UpdatesOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public UpdatesOptionsPage()
         {
             InitializeComponent();
-            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole, BrandManager.BrandConsole, BrandManager.ProductBrand);
+            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
             AllowXenServerUpdatesCheckBox.Text = string.Format(AllowXenServerUpdatesCheckBox.Text, BrandManager.ProductBrand);
             AllowXenCenterUpdatesCheckBox.Text = string.Format(AllowXenCenterUpdatesCheckBox.Text, BrandManager.BrandConsole);
         }

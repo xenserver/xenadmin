@@ -99,14 +99,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                             return;
                         }
                     }
-                        
+
                     if (!UnzippedUpdateFiles.Contains(unzippedUpdateFilePath))
                         UnzippedUpdateFiles.Add(unzippedUpdateFilePath);
 
                     SelectedPatchFilePath = unzippedUpdateFilePath;
                 }
                 else
-                    unzippedUpdateFilePath = null;                  
+                    unzippedUpdateFilePath = null;
 
                 if (SelectedPatchFilePath.EndsWith("." + BrandManager.ExtensionUpdate))
                     SelectedUpdateType = UpdateType.Legacy;
@@ -214,6 +214,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public UpdateType SelectedUpdateType { get; private set; }
 
         public string SelectedPatchFilePath { get; private set; }
+
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {

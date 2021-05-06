@@ -96,12 +96,11 @@ namespace XenAdmin.Core
 
             if (Properties.Settings.Default.AllowXenCenterUpdates ||
                 Properties.Settings.Default.AllowXenServerUpdates ||
-                Properties.Settings.Default.AllowPatchesUpdates || force || forceRefresh)
+                force || forceRefresh)
             {
                 var action = CreateDownloadUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
-                    Properties.Settings.Default.AllowXenServerUpdates || force,
-                    Properties.Settings.Default.AllowPatchesUpdates || force);
+                    Properties.Settings.Default.AllowXenServerUpdates || force);
 
                 action.Completed += actionCompleted;
 

@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;
@@ -46,7 +45,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeExtrasPage()
         {
             InitializeComponent();
-            applyUpdatesLabel.Text = string.Format(applyUpdatesLabel.Text, BrandManager.BrandConsole);
             label4.Text = string.Format(label4.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
         }
 
@@ -70,36 +68,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return true;
         }
 
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            var licensedPoolCount = 0;
-            var poolCount = 0;
-            foreach (Host master in SelectedMasters)
-            {
-                var hosts = master.Connection.Cache.Hosts;
-
-                if (hosts.Length == 0)
-                    continue;
-
-                poolCount++;
-                var automatedUpdatesRestricted = hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates
-                if (!automatedUpdatesRestricted)
-                    licensedPoolCount++;
-            }
-
-            if (licensedPoolCount > 0) // at least one pool licensed for automated updates 
-            {
-                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = true;
-                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
-                    ? Messages.ROLLING_UPGRADE_APPLY_UPDATES
-                    : Messages.ROLLING_UPGRADE_APPLY_UPDATES_MIXED;
-            }
-            else  // all pools unlicensed
-            {
-                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = false;
-            }
-        }
-
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
@@ -109,17 +77,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         }
         #endregion
 
-        public IEnumerable<Host> SelectedMasters { private get; set; }
-
         private string FilePath
         {
-            get { return fileNameTextBox.Text; }
-            set { fileNameTextBox.Text = value; }
+            get => fileNameTextBox.Text;
+            set => fileNameTextBox.Text = value;
         }
 
         public bool ApplySuppPackAfterUpgrade => checkBoxInstallSuppPack.Checked;
-
-        public bool ApplyUpdatesToNewVersion => applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {

@@ -5215,7 +5215,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for {1} updates and new versions of {0}?.
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of {0} and {1}?.
         /// </summary>
         public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
             get {
@@ -21088,6 +21088,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1} {2}. Please use {3} {2} instead..
+        /// </summary>
+        public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
+            get {
+                return ResourceManager.GetString("INSTALL_PENDING_UPDATES_DISABLED_REASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install certificate....
         /// </summary>
         public static string INSTALL_SERVER_CERTIFICATE_ACTION_LINK {
@@ -29470,7 +29479,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update application is only supported for {0} version and above.
+        ///   Looks up a localized string similar to {0} cannot install updates or supplemental packs on this server..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED {
             get {
@@ -32465,24 +32474,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version.
-        /// </summary>
-        public static string ROLLING_UPGRADE_APPLY_UPDATES {
-            get {
-                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version (only on pools licensed for automated updates).
-        /// </summary>
-        public static string ROLLING_UPGRADE_APPLY_UPDATES_MIXED {
-            get {
-                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES_MIXED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to S&amp;top.
         /// </summary>
         public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
@@ -32584,7 +32575,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, apply updates or supplemental packs.
+        ///   Looks up a localized string similar to Optionally, apply supplemental packs.
         /// </summary>
         public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
             get {

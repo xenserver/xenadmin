@@ -128,41 +128,44 @@
   <data name="UpdatesTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="UpdatesBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="UpdatesBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="AllowXenServerUpdatesCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="UpdatesBlurb.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="UpdatesBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 64</value>
+  <data name="UpdatesBlurb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 8, 0, 4</value>
+  <data name="UpdatesBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 12</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 23</value>
+  <data name="UpdatesBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>441, 26</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="UpdatesBlurb.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
-    <value>Check for new &amp;versions of {0}</value>
+  <data name="UpdatesBlurb.Text" xml:space="preserve">
+    <value>You can configure {0} to periodically check for available updates and prompt you when a new version of {0} or {1} is available for download.</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
-    <value>AllowXenServerUpdatesCheckBox</value>
+  <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
+    <value>UpdatesBlurb</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;UpdatesBlurb.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;UpdatesBlurb.Parent" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;UpdatesBlurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -175,16 +178,16 @@
     <value>NoControl</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 95</value>
+    <value>3, 41</value>
   </data>
-  <data name="AllowXenCenterUpdatesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 4, 0, 4</value>
+  <data name="AllowXenCenterUpdatesCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 23</value>
+    <value>173, 17</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="AllowXenCenterUpdatesCheckBox.Text" xml:space="preserve">
     <value>Check for &amp;new versions of {0}</value>
@@ -201,40 +204,40 @@
   <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="UpdatesBlurb.AutoSize" type="System.Boolean, mscorlib">
+  <data name="AllowXenServerUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="UpdatesBlurb.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="AllowXenServerUpdatesCheckBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name="UpdatesBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="AllowXenServerUpdatesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="UpdatesBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="AllowXenServerUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 64</value>
   </data>
-  <data name="UpdatesBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 18</value>
+  <data name="AllowXenServerUpdatesCheckBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
   </data>
-  <data name="UpdatesBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 38</value>
+  <data name="AllowXenServerUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 17</value>
   </data>
-  <data name="UpdatesBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="AllowXenServerUpdatesCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="UpdatesBlurb.Text" xml:space="preserve">
-    <value>You can configure {0} to periodically check for available updates and prompt you when new {1} version or new {2} version is available for download.</value>
+  <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
+    <value>Check for new &amp;versions of {0}</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
-    <value>UpdatesBlurb</value>
+  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
+    <value>AllowXenServerUpdatesCheckBox</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Parent" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="UpdatesTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -246,17 +249,14 @@
   <data name="UpdatesTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="UpdatesTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="UpdatesTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="UpdatesTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 338</value>
+    <value>447, 225</value>
   </data>
   <data name="UpdatesTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;UpdatesTableLayoutPanel.Name" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
@@ -271,19 +271,16 @@
     <value>0</value>
   </data>
   <data name="UpdatesTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="AllowXenServerUpdatesCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AllowXenCenterUpdatesCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AllowXenCenterUpdatesCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AllowXenServerUpdatesCheckBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>144, 144</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 338</value>
+    <value>447, 225</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UpdatesOptionsPage</value>
