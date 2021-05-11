@@ -84,9 +84,7 @@
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
                             <File Id="XvaIcon" Source="$(env.RepoRoot)\Branding\Images\file_vm.ico" />
-                            <File Id="XslicIcon" Source="$(env.RepoRoot)\Branding\Images\file_license.ico" />
                             <File Id="XkbIcon" Source="$(env.RepoRoot)\Branding\Images\file_backup.ico" />
-                            <File Id="XsupdateIcon" Source="$(env.RepoRoot)\Branding\Images\file_updates.ico" />
                             <!-- Define file extensions -->
                             <ProgId Id="XenCenter.xva" Description="!(loc.XVA_File)" Icon="XvaIcon">
                                 <Extension Id="xva" ContentType="application/xva">
@@ -113,24 +111,9 @@
                                     <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
-                            <ProgId Id="XenCenter.xslic" Description="$(var.BrandProduct) !(loc.XenServer_License_File)" Icon="XslicIcon">
-                                <Extension Id="xslic" ContentType="application/xslic">
-                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
-                                </Extension>
-                            </ProgId>
                             <ProgId Id="XenCenter.$(var.FileExtBackup)" Description="$(var.BrandProduct) !(loc.XenServer_Backup_File)" Icon="XkbIcon">
                                 <Extension Id="$(var.FileExtBackup)" ContentType="application/$(var.FileExtBackup)">
                                     <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
-                                </Extension>
-                            </ProgId>
-                            <ProgId Id="XenCenter.$(var.FileExtUpdate)" Description="$(var.BrandProduct) !(loc.XenServer_Update_File)" Icon="XsupdateIcon">
-                                <Extension Id="$(var.FileExtUpdate)" ContentType="application/$(var.FileExtUpdate)">
-                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
-                                </Extension>
-                            </ProgId>
-                            <ProgId Id="XenCenter.xsoem" Description="$(var.BrandProduct) !(loc.XenServer_OEM_Update_File)" Icon="XsupdateIcon">
-                                <Extension Id="xsoem" ContentType="application/xsoem">
-                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <ProgId Id="XenCenter.$(var.FileExtSearch)" Description="$(var.BrandConsole) !(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
