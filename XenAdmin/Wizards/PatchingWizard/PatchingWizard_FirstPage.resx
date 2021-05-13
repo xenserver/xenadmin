@@ -123,20 +123,20 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 0</value>
+    <value>3, 0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 20</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 13</value>
+    <value>445, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>You can use this wizard to install supplemental packs to your servers.
+    <value>You can use this wizard to install driver disk updates and supplemental packs to your servers.
 </value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
@@ -155,7 +155,7 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 101</value>
+    <value>3, 101</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 20</value>
@@ -200,7 +200,7 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 33</value>
+    <value>3, 33</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 30</value>
@@ -233,7 +233,7 @@
     <value>Top</value>
   </data>
   <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 139</value>
+    <value>3, 139</value>
   </data>
   <data name="pictureBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 3</value>
@@ -260,7 +260,7 @@
     <value>True</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 134</value>
+    <value>13, 134</value>
   </data>
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 20</value>
@@ -290,7 +290,7 @@
     <value>Top</value>
   </data>
   <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 172</value>
+    <value>3, 172</value>
   </data>
   <data name="pictureBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 3</value>
@@ -317,7 +317,7 @@
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 167</value>
+    <value>13, 167</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 20</value>
@@ -347,7 +347,7 @@
     <value>Top</value>
   </data>
   <data name="pictureBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 205</value>
+    <value>3, 205</value>
   </data>
   <data name="pictureBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 3</value>
@@ -374,7 +374,7 @@
     <value>True</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 200</value>
+    <value>13, 200</value>
   </data>
   <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 20</value>
@@ -428,7 +428,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox4" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox5" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,15,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="pictureBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox4" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox5" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

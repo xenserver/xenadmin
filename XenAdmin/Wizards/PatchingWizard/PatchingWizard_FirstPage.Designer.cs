@@ -48,19 +48,21 @@ namespace XenAdmin.Wizards.PatchingWizard
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
             this.label1.Name = "label1";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
+            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.Name = "label2";
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox4, 0, 4);
@@ -74,6 +76,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             resources.ApplyResources(this.label5, "label5");
             this.label5.BackColor = System.Drawing.Color.LemonChiffon;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
             this.label5.Name = "label5";
             // 
             // pictureBox3

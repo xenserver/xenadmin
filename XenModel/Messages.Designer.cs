@@ -29285,7 +29285,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose an existing update to install or upload a new one.
+        ///   Looks up a localized string similar to Choose an update to upload and install.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_TITLE {
             get {
@@ -29294,7 +29294,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Updates and Supplemental Packs (*.{1}, *.iso,*.zip)|*.{1};*.iso;*.zip.
+        ///   Looks up a localized string similar to {0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {

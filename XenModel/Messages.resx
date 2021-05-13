@@ -10098,10 +10098,10 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Select Update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>Choose an existing update to install or upload a new one</value>
+    <value>Choose an update to upload and install</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>{0} Updates and Supplemental Packs (*.{1}, *.iso,*.zip)|*.{1};*.iso;*.zip</value>
+    <value>{0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES" xml:space="preserve">
     <value>Also apply all released &amp;updates on the new version</value>

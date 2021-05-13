@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="labelOnlySelectFromDisk.Text" xml:space="preserve">
-    <value>Browse your computer for a supplemental pack file.</value>
+    <value>Browse your computer for a driver disk update or supplemental pack file.</value>
   </data>
   <data name="&gt;&gt;labelOnlySelectFromDisk.Name" xml:space="preserve">
     <value>labelOnlySelectFromDisk</value>
