@@ -179,7 +179,9 @@ namespace XenAdmin.Controls
             }
         }
 
-        public bool Empty { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool Empty { get; set; } = true;
 
         private void AddSR(ToStringWrapper<SR> srWrapper)
         {

@@ -88,7 +88,6 @@ namespace XenAdmin.Controls
             this.cdChanger1.Drive = null;
             this.cdChanger1.DropDownHeight = 500;
             this.cdChanger1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cdChanger1.Empty = true;
             this.cdChanger1.FormattingEnabled = true;
             this.cdChanger1.Name = "cdChanger1";
             this.cdChanger1.SelectedCD = null;

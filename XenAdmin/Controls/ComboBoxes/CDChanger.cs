@@ -38,11 +38,6 @@ namespace XenAdmin.Controls
 {
     public class CDChanger : ISODropDownBox
     {
-        public CDChanger()
-        {
-            Empty = true;
-        }
-
         public VBD Drive
         {
             get

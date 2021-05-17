@@ -55,6 +55,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         public Page_InstallationMedia()
         {
             InitializeComponent();
+            CdDropDownBox.Empty = false;
         }
 
         bool defaultTemplate, userTemplate, hvm, eli, installMethods, installCd, installUrl, cds, installed;

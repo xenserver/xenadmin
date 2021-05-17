@@ -101,7 +101,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.CdDropDownBox.connection = null;
             this.CdDropDownBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.CdDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CdDropDownBox.Empty = false;
             this.CdDropDownBox.FormattingEnabled = true;
             this.CdDropDownBox.Name = "CdDropDownBox";
             this.CdDropDownBox.SelectedCD = null;
