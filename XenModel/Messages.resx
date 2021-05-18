@@ -10630,7 +10630,7 @@ If this value does not correspond to a server within the selected resource pool 
     <value>Probing for LUNs on {0}</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
-    <value>{0}: The Health Check service has been removed in {1}.</value>
+    <value>{0}: The Health Check service has been removed in {1} {2}.</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
     <value>Disable Health Check</value>
@@ -13757,7 +13757,7 @@ Schedule:
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
   </data>
   <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
-    <value>The Health Check service has been removed in {0}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
+    <value>The Health Check service has been removed in {0} {1}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
     <value>{0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead.</value>
