@@ -43,22 +43,23 @@ namespace XenAdmin.Controls
 {
     public class ISODropDownBox : NonSelectableComboBox
     {
-        public VM vm;
-        protected VBD cdrom;
-        protected bool refreshOnClose;
+        protected VM vm;
+        private bool refreshOnClose;
         protected bool changing = false;
         private IXenConnection _connection;
-
+        private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
         private VDI selectedCD;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public VDI SelectedCD
         {
-            get
+            get => (SelectedItem as ToStringWrapper<VDI>)?.item;
+            set
             {
-                var selectedVdi = SelectedItem as ToStringWrapper<VDI>;
-                return selectedVdi == null ? null : selectedVdi.item;
+                selectedCD = value;
+                SelectCD();
             }
-            set { selectedCD = value; }
         }
 
         public ISODropDownBox()
@@ -134,7 +135,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        public virtual void SelectCD()
+        protected void SelectCD()
         {
             if (selectedCD == null)
             {
@@ -148,12 +149,8 @@ namespace XenAdmin.Controls
 
             foreach (object o in Items)
             {
-                ToStringWrapper<VDI> vdiNameWrapper = o as ToStringWrapper<VDI>;
+                VDI iso = (o as ToStringWrapper<VDI>)?.item;
 
-                if (vdiNameWrapper == null)
-                    continue;
-
-                VDI iso = vdiNameWrapper.item;
                 if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
                     continue;
 
@@ -168,6 +165,27 @@ namespace XenAdmin.Controls
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Empty { get; set; } = true;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public VM VM
+        {
+            set
+            {
+                if (vm != null)
+                    vm.PropertyChanged -= vm_PropertyChanged;
+
+                vm = value;
+
+                if (vm != null)
+                    vm.PropertyChanged += vm_PropertyChanged;
+
+                connection = vm?.Connection;
+
+                //do not call RefreshAll() here as it is called within the connection setter
+            }
+            get => vm;
+        }
 
         private void AddSR(ToStringWrapper<SR> srWrapper)
         {
@@ -255,12 +273,14 @@ namespace XenAdmin.Controls
 
         internal virtual void DeregisterEvents()
         {
+            if (vm != null)
+                vm.PropertyChanged -= vm_PropertyChanged;
+
             if (connection == null)
                 return;
 
-            // deregister collection listener
             connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
-            // Remove SR listeners
+
             foreach (SR sr in connection.Cache.SRs)
             {
                 sr.PropertyChanged -= sr_PropertyChanged;
@@ -271,7 +291,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected void RegisterEvents()
+        private void RegisterEvents()
         {
             if (connection == null)
                 return;
@@ -292,8 +312,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke = null;
-        protected void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
 
@@ -306,10 +325,10 @@ namespace XenAdmin.Controls
                 sr.PropertyChanged += sr_PropertyChanged;
             }
 
-            Program.Invoke(this, RefreshAll);
+            RefreshAll();
         }
 
-        public void RefreshAll()
+        private void RefreshAll()
         {
             if (!DroppedDown)
             {
@@ -350,15 +369,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected void cdrom_PropertyChanged(object sender1, PropertyChangedEventArgs e)
-        {
-            if ((e.PropertyName == "empty" || e.PropertyName == "vdi") && !changing)
-            {
-                SelectCD();
-            }
-        }
-
-        protected void vm_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        private void vm_PropertyChanged(object sender1, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "VBDs" || e.PropertyName == "resident_on" || e.PropertyName == "affinity")
             {
@@ -370,8 +381,7 @@ namespace XenAdmin.Controls
         {
             base.OnSelectionChangeCommitted(e);
 
-            var selectedVdi = SelectedItem as ToStringWrapper<VDI>;
-            if (selectedVdi != null)
+            if (SelectedItem is ToStringWrapper<VDI> selectedVdi)
                 selectedCD = selectedVdi.item;
         }
 

@@ -85,13 +85,10 @@ namespace XenAdmin.Controls
             this.cdChanger1.connection = null;
             resources.ApplyResources(this.cdChanger1, "cdChanger1");
             this.cdChanger1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cdChanger1.Drive = null;
             this.cdChanger1.DropDownHeight = 500;
             this.cdChanger1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cdChanger1.FormattingEnabled = true;
             this.cdChanger1.Name = "cdChanger1";
-            this.cdChanger1.SelectedCD = null;
-            this.cdChanger1.TheVM = null;
             // 
             // linkLabel1
             // 

@@ -171,9 +171,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void LoadCdBox()
         {
-            CdDropDownBox.vm = m_template;
-
-            CdDropDownBox.RefreshAll();
+            CdDropDownBox.VM = m_template;
 
             RegisterBespokeEventsAgainstCdDropDownBox();
 
@@ -191,7 +189,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 return; // select default whatever that is
 
             CdDropDownBox.SelectedCD = cd;
-            CdDropDownBox.SelectCD();
         }
 
         public VDI GetAffinityDvdDrive()
