@@ -103,6 +103,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.CdDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CdDropDownBox.FormattingEnabled = true;
             this.CdDropDownBox.Name = "CdDropDownBox";
+            this.CdDropDownBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CdDropDownBox_DrawItem);
+            this.CdDropDownBox.DropDownClosed += new System.EventHandler(this.CdDropDownBox_DropDownClosed);
             // 
             // UrlTextBox
             // 

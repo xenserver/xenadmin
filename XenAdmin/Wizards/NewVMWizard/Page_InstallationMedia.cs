@@ -173,8 +173,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             CdDropDownBox.VM = m_template;
 
-            RegisterBespokeEventsAgainstCdDropDownBox();
-
             VBD cddrive = m_template.FindVMCDROM();
 
             VDI cd = cddrive != null && !cddrive.empty 
@@ -341,25 +339,22 @@ namespace XenAdmin.Wizards.NewVMWizard
             CdDropDownBox.connection = Connection;
         }
 
-        private void RegisterBespokeEventsAgainstCdDropDownBox()
-        {
-            CdDropDownBox.DrawMode = DrawMode.OwnerDrawFixed;
-            CdDropDownBox.DrawItem += AddToolTipToCdDropDownBox_DrawItemEvent;
-            CdDropDownBox.DropDownClosed += HideToolTipOnCdDropDownBox_DropDownClosedEvent;
-        }
-
-        private void HideToolTipOnCdDropDownBox_DropDownClosedEvent(object sender, EventArgs e)
+        private void CdDropDownBox_DropDownClosed(object sender, EventArgs e)
         {
             comboBoxToolTip.Hide(CdDropDownBox);
         }
 
-        private void AddToolTipToCdDropDownBox_DrawItemEvent(object sender, DrawItemEventArgs e)
+        private void CdDropDownBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            string selectedText = "";
-            if (e.Index != -1)
-                selectedText = CdDropDownBox.GetItemText(CdDropDownBox.Items[e.Index]);
+            if (e.Index < 0 || e.Index > CdDropDownBox.Items.Count - 1)
+            {
+                comboBoxToolTip.Hide(CdDropDownBox);
+                return;
+            }
 
-            Font font = (e.Index != -1 && CdDropDownBox.Items[e.Index] is ToStringWrapper<SR>) ? Program.DefaultFontBold : Program.DefaultFont;
+            string selectedText = CdDropDownBox.GetItemText(CdDropDownBox.Items[e.Index]);
+
+            Font font = CdDropDownBox.Items[e.Index] is ToStringWrapper<SR> ? Program.DefaultFontBold : Program.DefaultFont;
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected &&
                 CdDropDownBox.DroppedDown &&
@@ -369,7 +364,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             else
             {
-                HideToolTipOnCdDropDownBox_DropDownClosedEvent(sender, e);
+                comboBoxToolTip.Hide(CdDropDownBox);
             }
         }
 
