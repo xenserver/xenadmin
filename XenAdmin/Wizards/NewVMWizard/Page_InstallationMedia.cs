@@ -173,7 +173,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             CdDropDownBox.vm = m_template;
 
-            CdDropDownBox.refreshAll();
+            CdDropDownBox.RefreshAll();
 
             RegisterBespokeEventsAgainstCdDropDownBox();
 

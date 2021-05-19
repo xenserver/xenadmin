@@ -75,21 +75,7 @@ namespace XenAdmin.Controls
             base.Dispose(disposing);
         }
 
-        private void RefreshSRs_()
-        {
-            BeginUpdate();
-            try
-            {
-                Items.Clear();
-                RefreshSRs();
-            }
-            finally
-            {
-                EndUpdate();
-            }
-        }
-
-        protected virtual void RefreshSRs()
+        private void RefreshSRs()
         {
             Program.AssertOnEventThread();
 
@@ -251,7 +237,7 @@ namespace XenAdmin.Controls
                 if (connection != null)
                 {
                     RegisterEvents();
-                    refreshAll();
+                    RefreshAll();
                 }
             }
             get
@@ -320,14 +306,25 @@ namespace XenAdmin.Controls
                 sr.PropertyChanged += sr_PropertyChanged;
             }
 
-            Program.Invoke(this, refreshAll);
+            Program.Invoke(this, RefreshAll);
         }
 
-        public virtual void refreshAll()
+        public void RefreshAll()
         {
             if (!DroppedDown)
             {
-                RefreshSRs_();
+                BeginUpdate();
+
+                try
+                {
+                    Items.Clear();
+                    RefreshSRs();
+                }
+                finally
+                {
+                    EndUpdate();
+                }
+
                 SelectCD();
                 refreshOnClose = false;
             }
@@ -341,7 +338,7 @@ namespace XenAdmin.Controls
         {
             if (e.PropertyName == "VDIs" || e.PropertyName == "PBDs")
             {
-                refreshAll();
+                RefreshAll();
             }
         }
 
@@ -349,7 +346,7 @@ namespace XenAdmin.Controls
         {
             if (e.PropertyName == "currently_attached")
             {
-                refreshAll();
+                RefreshAll();
             }
         }
 
@@ -365,7 +362,7 @@ namespace XenAdmin.Controls
         {
             if (e.PropertyName == "VBDs" || e.PropertyName == "resident_on" || e.PropertyName == "affinity")
             {
-                refreshAll();
+                RefreshAll();
             }
         }
         
@@ -411,7 +408,7 @@ namespace XenAdmin.Controls
             base.OnDropDownClosed(e);
 
             if (refreshOnClose)
-                refreshAll();
+                RefreshAll();
         }
 
         protected override bool IsItemNonSelectable(object o)

@@ -54,7 +54,7 @@ namespace XenAdmin.Controls
                 if (cdrom != null)
                     cdrom.PropertyChanged += cdrom_PropertyChanged;
 
-                refreshAll();
+                RefreshAll();
             }
         }
 
@@ -78,20 +78,6 @@ namespace XenAdmin.Controls
             }
         }
         
-        protected override void RefreshSRs()
-        {
-            BeginUpdate();
-            try
-            {
-                Items.Clear();
-                base.RefreshSRs();
-            }
-            finally
-            {
-                EndUpdate();
-            }
-        }
-
         public override void SelectCD()
         {
             if (cdrom == null || cdrom.empty || cdrom.VDI == null)
@@ -102,20 +88,6 @@ namespace XenAdmin.Controls
 
             SelectedCD = connection.Resolve(cdrom.VDI);
             base.SelectCD();
-        }
-
-        public override void refreshAll()
-        {
-            if (!DroppedDown)
-            {
-                RefreshSRs();
-                SelectCD();
-                refreshOnClose = false;
-            }
-            else
-            {
-                refreshOnClose = true;
-            }
         }
 
         protected override void OnSelectionChangeCommitted(EventArgs e)
