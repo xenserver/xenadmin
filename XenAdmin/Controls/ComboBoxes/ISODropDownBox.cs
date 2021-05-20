@@ -43,6 +43,8 @@ namespace XenAdmin.Controls
 {
     public class ISODropDownBox : NonSelectableComboBox
     {
+        public event Action SrsRefreshed;
+
         protected VM vm;
         private bool refreshOnClose;
         protected bool changing = false;
@@ -80,8 +82,8 @@ namespace XenAdmin.Controls
         {
             Program.AssertOnEventThread();
 
-            if (Empty)
-                Items.Add(new ToStringWrapper<VDI>(null, Messages.EMPTY)); //Create a special VDIWrapper for the empty dropdown item
+            //Create a special VDIWrapper for the empty dropdown item
+            Items.Add(new ToStringWrapper<VDI>(null, Messages.EMPTY));
 
             if (connection == null)
                 return;
@@ -137,34 +139,28 @@ namespace XenAdmin.Controls
 
         protected void SelectCD()
         {
-            if (selectedCD == null)
+            if (selectedCD != null)
             {
-                if (Items.Count > 0)
-                    SelectedIndex = 0;
-                else
-                    SelectedIndex = -1;
-
-                return;
-            }
-
-            foreach (object o in Items)
-            {
-                VDI iso = (o as ToStringWrapper<VDI>)?.item;
-
-                if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
-                    continue;
-
-                if (iso == selectedCD)
+                foreach (object o in Items)
                 {
-                    SelectedItem = o;
-                    break;
+                    VDI iso = (o as ToStringWrapper<VDI>)?.item;
+
+                    if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
+                        continue;
+
+                    if (iso == selectedCD)
+                    {
+                        SelectedItem = o;
+                        return;
+                    }
                 }
             }
-        }
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool Empty { get; set; } = true;
+            if (Items.Count > 0)
+                SelectedIndex = 0;
+            else
+                SelectedIndex = -1;
+        }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -346,6 +342,7 @@ namespace XenAdmin.Controls
 
                 SelectCD();
                 refreshOnClose = false;
+                SrsRefreshed?.Invoke();
             }
             else
             {

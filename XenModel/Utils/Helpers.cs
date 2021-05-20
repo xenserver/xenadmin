@@ -1596,23 +1596,6 @@ namespace XenAdmin.Core
             } while (true);
         }
 
-        public static bool CDsExist(IXenConnection connection)
-        {
-            if (connection == null)
-                return false;
-
-            foreach (SR sr in connection.Cache.SRs)
-            {
-                if (sr.content_type != SR.Content_Type_ISO)
-                    continue;
-
-                if (sr.VDIs.Count > 0)
-                    return true;
-            }
-
-            return false;
-        }
-
         public static bool CompareLists<T>(List<T> l1, List<T> l2)
         {
             if (l1 == l2)
