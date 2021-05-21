@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 
@@ -39,7 +40,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
+            label5.Text = string.Format(label5.Text, BrandManager.ProductBrand,
+                BrandManager.ProductVersion82, BrandManager.LegacyConsole);
             label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
+            label5.Visible = ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.PostStockholm(c));
         }
 
         public override string Text => Messages.BEFORE_YOU_START;

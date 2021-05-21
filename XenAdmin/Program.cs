@@ -313,9 +313,6 @@ namespace XenAdmin
                 case "restore":
                     firstArgType = ArgType.Restore;
                     break;
-                case "update":
-                    firstArgType = ArgType.Update;
-                    break;
                 case "search":
                     firstArgType = ArgType.XenSearch;
                     break;
@@ -1001,5 +998,5 @@ namespace XenAdmin
         public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
     }
 
-    public enum ArgType { Import, License, Restore, Update, None, XenSearch, Passwords, Connect }
+    public enum ArgType { Import, License, Restore, None, XenSearch, Passwords, Connect }
 }

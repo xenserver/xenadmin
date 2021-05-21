@@ -637,7 +637,6 @@ namespace XenAdmin
                         var result = dlg.ShowDialog(this) == DialogResult.Yes;
 
                         Properties.Settings.Default.AllowXenCenterUpdates = result;
-                        Properties.Settings.Default.AllowPatchesUpdates = result;
                         Properties.Settings.Default.AllowXenServerUpdates = result;
                         Properties.Settings.Default.SeenAllowUpdatesDialog = true;
 
@@ -746,10 +745,6 @@ namespace XenAdmin
                 case ArgType.Restore:
                     log.DebugFormat("Restoring host backup from {0}", args[0]);
                     new RestoreHostFromBackupCommand(this, null, args[0]).Execute();
-                    break;
-                case ArgType.Update:
-                    log.DebugFormat("Installing server update from {0}", args[0]);
-                    InstallUpdate(args[0]);
                     break;
                 case ArgType.XenSearch:
                     log.DebugFormat("Importing saved XenSearch from '{0}'", args[0]);
@@ -1014,7 +1009,7 @@ namespace XenAdmin
 
                 // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
                 //
-                if ((int)API_Version.LATEST >= (int)API_Version.API_2_16 && !Helpers.StockholmOrGreater(master))
+                if (!Helpers.StockholmOrGreater(master))
                 {
                     connection.EndConnect();
 
@@ -2685,20 +2680,6 @@ namespace XenAdmin
             HelpersGUI.BringFormToFront(this);
             Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
             new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
-        }
-
-        private void InstallUpdate(string path)
-        {
-            if (WizardHelpers.IsValidFile(path, out var failureReason))
-            {
-                var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
-                wizard.PrepareToInstallUpdate(path);
-            }
-            else
-            {
-                using (var popup = new ErrorDialog(failureReason) {WindowTitle = Messages.UPDATES})
-                    popup.ShowDialog();
-            }
         }
 
         #region XenSearch

@@ -75,7 +75,6 @@ namespace XenAdmin.Core
         internal struct CFU
         {
             public bool AllowXenCenterUpdates;
-            public bool AllowPatchesUpdates;
             public bool AllowXenServerUpdates;
         }
 
@@ -134,7 +133,6 @@ namespace XenAdmin.Core
                     CFU = new CFU
                     {
                         AllowXenCenterUpdates = Properties.Settings.Default.AllowXenCenterUpdates,
-                        AllowPatchesUpdates = Properties.Settings.Default.AllowPatchesUpdates,
                         AllowXenServerUpdates = Properties.Settings.Default.AllowXenServerUpdates
                     },
                     Proxy = new Proxy

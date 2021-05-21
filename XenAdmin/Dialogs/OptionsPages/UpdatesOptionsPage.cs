@@ -38,15 +38,10 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class UpdatesOptionsPage : UserControl, IOptionsPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public UpdatesOptionsPage()
         {
             InitializeComponent();
             UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
-            XenServerGroupBox.Text = string.Format(XenServerGroupBox.Text, BrandManager.ProductBrand);
-            XenCenterGroupBox.Text = string.Format(XenCenterGroupBox.Text, BrandManager.BrandConsole);
-            AllowXenServerPatchesCheckBox.Text = string.Format(AllowXenServerPatchesCheckBox.Text, BrandManager.ProductBrand);
             AllowXenServerUpdatesCheckBox.Text = string.Format(AllowXenServerUpdatesCheckBox.Text, BrandManager.ProductBrand);
             AllowXenCenterUpdatesCheckBox.Text = string.Format(AllowXenCenterUpdatesCheckBox.Text, BrandManager.BrandConsole);
         }
@@ -59,7 +54,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             AllowXenCenterUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
 
             // XenServer updates
-            AllowXenServerPatchesCheckBox.Checked = Properties.Settings.Default.AllowPatchesUpdates;
             AllowXenServerUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenServerUpdates;
         }
 
@@ -75,19 +69,15 @@ namespace XenAdmin.Dialogs.OptionsPages
         public void Save()
         {
             bool checkXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
-            bool checkPatchUpdates = AllowXenServerPatchesCheckBox.Checked != Properties.Settings.Default.AllowPatchesUpdates;
             bool checkVersionUpdates = AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates;
 
             if (checkXenCenterUpdates)
                 Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
 
-            if (checkPatchUpdates)
-                Properties.Settings.Default.AllowPatchesUpdates = AllowXenServerPatchesCheckBox.Checked;
-
             if (checkVersionUpdates)
                 Properties.Settings.Default.AllowXenServerUpdates = AllowXenServerUpdatesCheckBox.Checked;
 
-            if(checkXenCenterUpdates || checkPatchUpdates || checkVersionUpdates)
+            if(checkXenCenterUpdates || checkVersionUpdates)
                 Updates.CheckForUpdates(false, true);
         }
 
