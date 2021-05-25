@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Alerts;
 using XenAdmin.Core;
 
 namespace CFUValidator.Validators

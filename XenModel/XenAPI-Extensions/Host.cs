@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using XenCenterLib;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -1063,15 +1062,6 @@ namespace XenAPI
 
             var vms = Connection.ResolveAll(resident_VMs);
             return vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
-        }
-
-        public bool HasManyControlDomains()
-        {
-            if (Connection == null)
-                return false;
-
-            var vms = Connection.ResolveAll(resident_VMs);
-            return vms.FindAll(v => v.is_control_domain).Count > 1;
         }
 
         public IEnumerable<VM> OtherControlDomains()

@@ -30,12 +30,13 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
-using System.Linq;
-using XenAdmin.Core;
+
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
@@ -127,7 +128,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override string TargetServerText => Messages.CPM_WIZARD_DESTINATION_DESTINATION;
 
-        protected override string TargetServerSelectionIntroText => Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO;
+        protected override string TargetServerSelectionIntroText =>
+            selectedVMs != null && selectedVMs.Count == 1
+                ? Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE
+                : Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO;
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
@@ -178,6 +182,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override string VmColumnHeaderText => TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
 
-        protected override string TargetColumnHeaderText => Messages.TARGET_SERVER;
+        protected override string TargetColumnHeaderText => Messages.HOME_SERVER;
     }
 }

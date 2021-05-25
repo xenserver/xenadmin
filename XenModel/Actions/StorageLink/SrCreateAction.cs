@@ -31,10 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections;
-using System.Text;
-
-using XenAdmin;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -66,7 +62,7 @@ namespace XenAdmin.Actions
             string srDescription, SR.SRTypes srType, string srContentType,
             Dictionary<string, string> dconf, Dictionary<string, string> smconf)
             : base(connection, string.Format(Messages.ACTION_SR_CREATING_TITLE,
-            XenAPI.SR.getFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
+            XenAPI.SR.GetFriendlyTypeName(srType), srName, Helpers.GetName(connection)))
         {
             Host = host;
             Pool = Helpers.GetPool(connection);

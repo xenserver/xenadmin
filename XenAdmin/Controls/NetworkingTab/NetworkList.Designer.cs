@@ -89,8 +89,8 @@ namespace XenAdmin.Controls.NetworkingTab
             // 
             // EditButtonContainer
             // 
-            this.EditButtonContainer.Controls.Add(this.EditNetworkButton);
             resources.ApplyResources(this.EditButtonContainer, "EditButtonContainer");
+            this.EditButtonContainer.Controls.Add(this.EditNetworkButton);
             this.EditButtonContainer.Name = "EditButtonContainer";
             // 
             // EditNetworkButton
@@ -121,8 +121,8 @@ namespace XenAdmin.Controls.NetworkingTab
             // 
             // toolTipContainerActivateToggle
             // 
-            this.toolTipContainerActivateToggle.Controls.Add(this.buttonActivateToggle);
             resources.ApplyResources(this.toolTipContainerActivateToggle, "toolTipContainerActivateToggle");
+            this.toolTipContainerActivateToggle.Controls.Add(this.buttonActivateToggle);
             this.toolTipContainerActivateToggle.Name = "toolTipContainerActivateToggle";
             // 
             // buttonActivateToggle
@@ -289,9 +289,13 @@ namespace XenAdmin.Controls.NetworkingTab
             this.Controls.Add(this.NetworksGridView);
             this.Name = "NetworkList";
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.EditButtonContainer.ResumeLayout(false);
+            this.EditButtonContainer.PerformLayout();
             this.RemoveButtonContainer.ResumeLayout(false);
+            this.RemoveButtonContainer.PerformLayout();
             this.toolTipContainerActivateToggle.ResumeLayout(false);
+            this.toolTipContainerActivateToggle.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NetworksGridView)).EndInit();
             this.ResumeLayout(false);

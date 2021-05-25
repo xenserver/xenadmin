@@ -30,7 +30,6 @@
  */
 
 using System;
-using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
 using XenAdmin.Core;
 using XenAdmin.Wlb;

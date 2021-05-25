@@ -35,8 +35,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
-using XenAdmin.Model;
-using XenAPI;
 
 
 namespace XenAdmin.Controls

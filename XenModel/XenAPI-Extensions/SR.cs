@@ -120,13 +120,25 @@ namespace XenAPI
 
         public string FriendlyTypeName()
         {
-            return getFriendlyTypeName(GetSRType(false));
+            var srType = GetSRType(false);
+
+            if (srType == SRTypes.unknown)
+            {
+                var sm = SM.GetByType(Connection, type);
+
+                if (sm != null &&
+                    Version.TryParse(sm.required_api_version, out var smapiVersion) &&
+                    smapiVersion.CompareTo(new Version(3, 0)) >= 0)
+                    return !string.IsNullOrEmpty(sm.name_label) ? sm.name_label : type;
+            }
+
+            return GetFriendlyTypeName(srType);
         }
 
         /// <summary>
         /// A friendly (internationalized) name for the SR type.
         /// </summary>
-        public static string getFriendlyTypeName(SRTypes srType)
+        public static string GetFriendlyTypeName(SRTypes srType)
         {
             return FriendlyNameManager.GetFriendlyName(string.Format("Label-SR.SRTypes-{0}", srType.ToString()));
         }
@@ -286,6 +298,23 @@ namespace XenAPI
             return false;
         }
 
+        public bool HasDriverDomain(out VM vm)
+        {
+            foreach (var pbdRef in PBDs)
+            {
+                var pbd = Connection.Resolve(pbdRef);
+                if (pbd != null && pbd.other_config.TryGetValue("storage_driver_domain", out string vmRef))
+                {
+                    vm = Connection.Resolve(new XenRef<VM>(vmRef));
+                    if (vm != null && !vm.IsControlDomainZero(out _))
+                        return true;
+                }
+            }
+
+            vm = null;
+            return false;
+        }
+
         /// <summary>
         /// If host is non-null, return whether this storage can be seen from the given host.
         /// If host is null, return whether the storage is shared, with a PBD for each host and at least one PBD plugged.
@@ -326,14 +355,6 @@ namespace XenAPI
         public virtual long FreeSpace()
         {
             return physical_size - physical_utilisation;
-        }
-
-        public virtual bool ShowInVDISRList(bool showHiddenVMs)
-        {
-            if (content_type == Content_Type_ISO)
-                return false;
-            return Show(showHiddenVMs);
-
         }
 
         public bool IsDetached()
@@ -424,18 +445,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns true if a new VM may be created on this SR: the SR supports VDI_CREATE, has the right number of PBDs, and is not full.
-        /// </summary>
-        /// <returns></returns>
-        public bool CanCreateVmOn()
-        {
-            System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
-
-            return SupportsVdiCreate() && !IsBroken(false) && !IsFull();
-        }
-
-
-        /// <summary>
         /// Whether the underlying SR backend supports VDI_CREATE. Will return true even if the SR is full.
         /// </summary>
         public virtual bool SupportsVdiCreate()
@@ -508,16 +517,6 @@ namespace XenAPI
             List<SRInfo> results = new List<SRInfo>();
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-
-            // If we've got this from an async task result, then it will be wrapped
-            // in a <value> element.  Parse the contents instead.
-            foreach (XmlNode node in doc.GetElementsByTagName("value"))
-            {
-                xml = node.InnerText;
-                doc = new XmlDocument();
-                doc.LoadXml(xml);
-                break;
-            }
 
             foreach (XmlNode node in doc.GetElementsByTagName("SR"))
             {

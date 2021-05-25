@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using NUnit.Framework;
-using XenAPI;
 using XenOvf;
 
 namespace XenAdminTests.XenOvf

@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Actions;
 using XenAPI;
 using XenAdmin.Model;

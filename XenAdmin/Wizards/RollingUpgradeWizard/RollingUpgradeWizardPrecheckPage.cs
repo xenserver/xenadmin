@@ -187,15 +187,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //SafeToUpgrade- and PrepareToUpgrade- checks - in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
             {
-                var prepareToUpgradeChecks = new List<Check>();
-                foreach (var host in hostsToUpgrade)
-                    prepareToUpgradeChecks.Add(new PrepareToUpgradeCheck(host, InstallMethodConfig));
-                groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
+                var safeToUpgradeChecks = (from Host host in hostsToUpgrade
+                    let check = new SafeToUpgradeCheck(host, InstallMethodConfig)
+                    where check.CanRun()
+                    select check as Check).ToList();
 
-                var safeToUpgradeChecks = new List<Check>();
-                foreach (var host in hostsToUpgrade)
-                    safeToUpgradeChecks.Add(new SafeToUpgradeCheck(host));
-                groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
+                if (safeToUpgradeChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
+
+                var prepareToUpgradeChecks = (from Host host in hostsToUpgrade
+                    select new PrepareToUpgradeCheck(host, InstallMethodConfig) as Check).ToList();
+
+                if (prepareToUpgradeChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
             }
 
             //vSwitch controller check - for each pool
@@ -246,41 +250,39 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //HA checks - for each pool
             var haChecks = (from Host server in SelectedMasters
                 select new HAOffCheck(server) as Check).ToList();
-            groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
+
+            if (haChecks.Count > 0) 
+                groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //Checking can evacuate host - for hosts that will be upgraded or updated
-            var evacuateChecks = new List<Check>();
-            foreach (Host host in hostsToUpgradeOrUpdate)
-                evacuateChecks.Add(new AssertCanEvacuateUpgradeCheck(host));
-            groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
+            var evacuateChecks = (from Host host in hostsToUpgradeOrUpdate
+                select new AssertCanEvacuateUpgradeCheck(host) as Check).ToList();
+
+            if (evacuateChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
 
             //PBDsPluggedCheck -  for hosts that will be upgraded or updated
-            var pbdChecks = new List<Check>();
-            foreach (Host host in hostsToUpgradeOrUpdate)
-                pbdChecks.Add(new PBDsPluggedCheck(host));
-            groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
+            var pbdChecks = (from Host host in hostsToUpgradeOrUpdate
+                select new PBDsPluggedCheck(host) as Check).ToList();
+
+            if(pbdChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
 
             //HostMemoryPostUpgradeCheck - for hosts that will be upgraded
-            var mostMemoryPostUpgradeChecks = new List<Check>();
-            foreach (var host in hostsToUpgrade)
-            {
-                mostMemoryPostUpgradeChecks.Add(new HostMemoryPostUpgradeCheck(host, InstallMethodConfig));
-            }
+            var mostMemoryPostUpgradeChecks = (from Host host in hostsToUpgrade
+                select new HostMemoryPostUpgradeCheck(host, InstallMethodConfig) as Check).ToList();
+
             if (mostMemoryPostUpgradeChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_HOST_MEMORY_POST_UPGRADE, mostMemoryPostUpgradeChecks));
-          
-            var gfs2Checks = new List<Check>();
-            foreach (Pool pool in SelectedPools.Where(p =>
-                Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))
-            {
-                Host host = pool.Connection.Resolve(pool.master);
-                gfs2Checks.Add(new PoolHasGFS2SR(host));
-            }
 
-            if (gfs2Checks.Count > 0)
-            {
+            //PoolHasGFS2SR checks 
+            var gfs2Checks = (from Host host in SelectedMasters
+                let check = new PoolHasGFS2SR(host)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (gfs2Checks.Count > 0) 
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
-            }
 
             return groups;
         }

@@ -106,6 +106,7 @@ namespace XenAdmin.Dialogs.VMAppliances
             this.toolStripButtonImport,
             this.toolStripButtonExport});
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.TabStop = true;
             // 
             // toolStripButtonNew
             // 
@@ -199,6 +200,7 @@ namespace XenAdmin.Dialogs.VMAppliances
             this.listViewVMs.MultiSelect = false;
             this.listViewVMs.Name = "listViewVMs";
             this.listViewVMs.ShowItemToolTips = true;
+            this.listViewVMs.TabStop = false;
             this.listViewVMs.UseCompatibleStateImageBehavior = false;
             this.listViewVMs.View = System.Windows.Forms.View.SmallIcon;
             // 

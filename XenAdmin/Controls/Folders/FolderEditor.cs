@@ -32,12 +32,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Model;
-using XenAPI;
-using System.Collections.Generic;
-using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdmin.Actions;
 
 namespace XenAdmin.Controls
 {

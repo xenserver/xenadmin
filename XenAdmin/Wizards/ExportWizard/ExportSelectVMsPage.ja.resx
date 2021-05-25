@@ -371,7 +371,7 @@
     <value>True</value>
   </metadata>
   <data name="columnSize.HeaderText" xml:space="preserve">
-    <value>サイズ</value>
+    <value>ディスク サイズ</value>
   </data>
   <metadata name="columnVapp.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

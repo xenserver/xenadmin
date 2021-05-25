@@ -62,6 +62,6 @@ node(globals.buildNodeLabel) {
         currentBuild.result = 'FAILURE'
         throw ex
     } finally {
-        buildComplete()
+        buildComplete(builder)
     }
 }

@@ -30,7 +30,6 @@
  */
 
 using XenAdmin.Wizards.GenericPages;
-using XenOvf;
 using XenOvf.Definitions;
 
 namespace XenAdmin.Wizards.ImportWizard

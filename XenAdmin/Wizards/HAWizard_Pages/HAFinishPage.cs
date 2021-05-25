@@ -29,12 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using XenAdmin.Controls;
-using XenAPI;
 
 namespace XenAdmin.Wizards.HAWizard_Pages
 {

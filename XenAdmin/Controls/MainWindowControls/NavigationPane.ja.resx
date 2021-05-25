@@ -277,7 +277,7 @@
     <value>213, 28</value>
   </data>
   <data name="buttonOrganizationBig.Text" xml:space="preserve">
-    <value>組織ビュー</value>
+    <value>属性ビュー</value>
   </data>
   <data name="buttonOrganizationBig.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -430,7 +430,7 @@
     <value>29, 22</value>
   </data>
   <data name="buttonOrganizationSmall.Text" xml:space="preserve">
-    <value>組織ビュー</value>
+    <value>属性ビュー</value>
   </data>
   <data name="buttonObjectsSmall.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>

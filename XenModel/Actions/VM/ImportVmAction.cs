@@ -96,29 +96,12 @@ namespace XenAdmin.Actions
 			#endregion
 		}
 
-    	private string GetVmRef(string result)
-        {
-            if (string.IsNullOrEmpty(result))
-                return null;
-
-            string head = "<value><array><data><value>";
-            string tail = "</value></data></array></value>";
-
-            if (!result.StartsWith(head) || !result.EndsWith(tail))
-                return null;
-
-            int start = head.Length;
-            int length = result.IndexOf(tail) - start;
-
-            return result.Substring(start, length);
-        }
-
         protected override void Run()
         {
             SafeToExit = false;
         	bool isTemplate;
 
-            string vmRef = GetVmRef(applyFile());
+            string vmRef = applyFile();
             if (string.IsNullOrEmpty(vmRef))
                 return;
 

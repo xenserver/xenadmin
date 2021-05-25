@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;

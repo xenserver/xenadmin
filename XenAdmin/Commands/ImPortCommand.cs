@@ -30,7 +30,6 @@
  */
 
 using System.Collections.Generic;
-using XenAdmin.Core;
 using XenAdmin.Wizards.ImportWizard;
 using XenAPI;
 

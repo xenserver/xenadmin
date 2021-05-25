@@ -498,9 +498,6 @@
   <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
     <value>正在从“{0}”中导出池资源列表</value>
   </data>
-  <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>将 {0} 导出到备份文件</value>
-  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>导出 {0}</value>
   </data>
@@ -1323,12 +1320,6 @@
   <data name="ACTION_WLB_REPORT_SUCCESSFUL" xml:space="preserve">
     <value>已下载</value>
   </data>
-  <data name="ACTION_WLB_REPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>下载 WLB 报告 {0}</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
-    <value>下载 WLB 报告 {0}</value>
-  </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>激活(&amp;C)</value>
   </data>
@@ -2084,7 +2075,7 @@
     <value>正在备份服务器“{0}”</value>
   </data>
   <data name="BACKINGUP_HOST_WITH_DATA" xml:space="preserve">
-    <value>正在备份服务器“{0}”，收到 {1}... </value>
+    <value>正在备份服务器“{0}”(已收到 {1})... </value>
   </data>
   <data name="BACKUP_HOST" xml:space="preserve">
     <value>正在备份服务器...</value>
@@ -2522,6 +2513,9 @@
   </data>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>{0} 上的 DVD 驱动器</value>
+  </data>
+  <data name="CD_DVD_DEVICE_ATTACHED" xml:space="preserve">
+    <value>已附加 CD/DVD 驱动器。</value>
   </data>
   <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>服务器“{0}”的 TLS 证书已于 {1} 过期。</value>
@@ -3246,9 +3240,6 @@
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>此服务器不可用。</value>
   </data>
-  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
-    <value>{0} Nutanix CVM 控制台</value>
-  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>此 VM 当前已关闭。</value>
   </data>
@@ -3266,6 +3257,9 @@
   </data>
   <data name="CONSOLE_POWER_STATE_SUSPENDED_RESUME" xml:space="preserve">
     <value>此 VM 当前已挂起。请单击此处恢复。</value>
+  </data>
+  <data name="CONSOLE_SR_DRIVER_DOMAIN" xml:space="preserve">
+    <value>SR“{0}”驱动程序域控制台</value>
   </data>
   <data name="CONTAINED_IN" xml:space="preserve">
     <value>包含于</value>
@@ -3423,7 +3417,7 @@
     <value>正在将转换日志保存到 {0}</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>管理转换 - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>映射要转换为目标池或独立服务器中的网络的 VMware VM 的虚拟以太网适配器。</value>
@@ -3954,11 +3948,11 @@
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>正在创建磁盘</value>
   </data>
-  <data name="CREATING_FILE" xml:space="preserve">
-    <value>正在将设备文件存档到单个软件包文件 {0} 中...</value>
-  </data>
   <data name="CREATING_MANIFEST" xml:space="preserve">
     <value>正在创建清单文件...</value>
+  </data>
+  <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
+    <value>正在计算文件“{0}”的校验和...</value>
   </data>
   <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
     <value>正在创建带有主服务器“{1}”的新池“{0}”</value>
@@ -3968,6 +3962,9 @@
   </data>
   <data name="CREATING_NEW_FOLDERS" xml:space="preserve">
     <value>正在创建新文件夹...</value>
+  </data>
+  <data name="CREATING_OVA_FILE" xml:space="preserve">
+    <value>正在将设备文件存档到单个软件包文件“{0}”中...</value>
   </data>
   <data name="CREATING_VMSS" xml:space="preserve">
     <value>正在创建快照计划“{0}”...</value>
@@ -4139,6 +4136,9 @@
   </data>
   <data name="DEFAULT" xml:space="preserve">
     <value>默认值</value>
+  </data>
+  <data name="DEFAULT_IMPORT_DESCRIPTION" xml:space="preserve">
+    <value>已从 OVF/OVA 包导入。</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
     <value>默认安装 {0}</value>
@@ -4692,7 +4692,7 @@
     <value>{0} 当前可用</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>正在从 {0} 下载更新...</value>
+    <value>正在从“{0}”下载更新(第 {1} 个，共 {2} 个)...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>正在下载更新 {0}</value>
@@ -5313,6 +5313,9 @@
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
     <value>[XenCenter] 在连接到此服务器时遇到问题。</value>
   </data>
+  <data name="ERROR_COULD_NOT_FIND_SR" xml:space="preserve">
+    <value>未找到该存储库，并且未分配默认存储库。</value>
+  </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>无法停用以下虚拟磁盘:</value>
   </data>
@@ -5454,11 +5457,17 @@
   <data name="ERROR_DIALOG_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>挂起 VM 时出错</value>
   </data>
+  <data name="ERROR_FILE_NAME_NULL" xml:space="preserve">
+    <value>未提供要导入的文件。</value>
+  </data>
   <data name="ERROR_FILE_NOT_FOUND" xml:space="preserve">
     <value>未找到文件 {0}</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
     <value>服务器仍在启动中。</value>
+  </data>
+  <data name="ERROR_IMPORTING_SERVER_LIST" xml:space="preserve">
+    <value>导入服务器列表时出错。请检查文件中的 xml 格式是否正确。</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>网关无效。</value>
@@ -5474,6 +5483,9 @@
   </data>
   <data name="ERROR_NOT_FOUND" xml:space="preserve">
     <value>找不到服务器“{0}”。</value>
+  </data>
+  <data name="ERROR_NO_PASSWORD" xml:space="preserve">
+    <value>未提供密码来解密 OVF 包。</value>
   </data>
   <data name="ERROR_NO_PERMISSION" xml:space="preserve">
     <value>您无权访问该服务器。</value>
@@ -5496,8 +5508,8 @@
   <data name="ERROR_UNSUPPORTED_FILE_TYPE" xml:space="preserve">
     <value>未知文件类型。</value>
   </data>
-  <data name="ERRO_IMPORTING_SERVER_LIST" xml:space="preserve">
-    <value>导入服务器列表时出错。请检查文件中的 xml 格式是否正确。</value>
+  <data name="ERROR_VM_NOT_HALTED" xml:space="preserve">
+    <value>请先关闭或暂停 VM“{0}”，然后再导出。</value>
   </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>
@@ -5587,14 +5599,20 @@
   <data name="EXPORTING_UPDATES" xml:space="preserve">
     <value>正在将更新导出到 {0}...</value>
   </data>
-  <data name="EXPORTING_VMS" xml:space="preserve">
-    <value>正在导出 VM...</value>
+  <data name="EXPORTING_VDI" xml:space="preserve">
+    <value>正在将磁盘“{0}”导出到“{1}”(第 {2} 个，共 {3} 个)...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION" xml:space="preserve">
+    <value>正在验证磁盘“{0}”...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION_FAILURE" xml:space="preserve">
+    <value>磁盘“{0}”的验证失败。有关详细信息，请参阅日志。</value>
+  </data>
+  <data name="EXPORTING_VM_PREPARE" xml:space="preserve">
+    <value>正在准备导出 VM“{0}”...</value>
   </data>
   <data name="EXPORTVM_COULD_NOT_SHOW" xml:space="preserve">
     <value>无法显示文件打开对话框 - {0}</value>
-  </data>
-  <data name="EXPORTVM_NOT_HAPPEN" xml:space="preserve">
-    <value>不应发生</value>
   </data>
   <data name="EXPORT_ALL" xml:space="preserve">
     <value>全部导出</value>
@@ -5880,21 +5898,6 @@
   </data>
   <data name="FINISH_PAGE_TITLE_IMPORT" xml:space="preserve">
     <value>查看导入设置</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_DHCP" xml:space="preserve">
-    <value>通过 DHCP 自动获取</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_GATEWAY" xml:space="preserve">
-    <value>传输 VM 的网关:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_IP" xml:space="preserve">
-    <value>传输 VM 的 IP 地址:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_MASK" xml:space="preserve">
-    <value>传输 VM 的子网掩码:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_NETWORK" xml:space="preserve">
-    <value>传输 VM 的网络接口:</value>
   </data>
   <data name="FINISH_PAGE_VERIFY_MANIFEST" xml:space="preserve">
     <value>验证清单文件内容:</value>
@@ -6942,9 +6945,6 @@
   <data name="IMPORTING_DISK_IMAGE" xml:space="preserve">
     <value>正在导入磁盘映像...</value>
   </data>
-  <data name="IMPORTING_VMS" xml:space="preserve">
-    <value>正在导入 VM...</value>
-  </data>
   <data name="IMPORTVM_DESCRIP" xml:space="preserve">
     <value>正在从备份文件导入 VM</value>
   </data>
@@ -6956,9 +6956,6 @@
   </data>
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>正在准备导入 VM</value>
-  </data>
-  <data name="IMPORTVM_STARTING" xml:space="preserve">
-    <value>正在启动 VM...</value>
   </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
     <value>将 VM 从“{0}”导入到“{1}”</value>
@@ -6974,6 +6971,15 @@
   </data>
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
     <value>将设备“{0}”导入到“{1}”</value>
+  </data>
+  <data name="IMPORT_APPLIANCE_PREPARING" xml:space="preserve">
+    <value>正在准备导入设备“{0}”...</value>
+  </data>
+  <data name="IMPORT_CREATING_APPLIANCE" xml:space="preserve">
+    <value>正在创建设备“{0}”...</value>
+  </data>
+  <data name="IMPORT_CREATING_VM" xml:space="preserve">
+    <value>正在创建 VM“{0}”...</value>
   </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>将 VM“{0}”从磁盘映像导入到“{1}”</value>
@@ -7096,8 +7102,7 @@
     <value>只有 OVF/OVA 包可以作为 vApp 导入。</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES" xml:space="preserve">
-    <value>所有导入选项
-(*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|虚拟硬盘图像(*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA 文件(*.xva;*.xva.gz)|*.xva;*.xva.gz</value>
+    <value>所有导入选项(*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz)|*.ovf;*.ova;*.ova.gz;*.vhd;*.vmdk;*.xva;*.xva.gz|OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz|虚拟硬盘映像(*.vhd;*.vmdk;)|*.vhd;*.vmdk;|XVA 文件(*.xva;*.xva.gz)|*.xva;*.xva.gz</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_FILETYPES_OVF_ONLY" xml:space="preserve">
     <value>OVF/OVA 包文件(*.ovf;*.ova;*.ova.gz)|*.ovf;*.ova*;*.ova.gz</value>
@@ -7158,6 +7163,12 @@
   </data>
   <data name="IMPORT_URI_NO_DESTINATION" xml:space="preserve">
     <value>导入使用 URI，但未定义目标路径。</value>
+  </data>
+  <data name="IMPORT_VDI" xml:space="preserve">
+    <value>正在导入“{0}”(第 {1} 个，共 {2} 个)...</value>
+  </data>
+  <data name="IMPORT_VDI_PREPARE" xml:space="preserve">
+    <value>正在为“{0}”准备 VDI...</value>
   </data>
   <data name="IMPORT_VM_CONFIGURE_STORAGE" xml:space="preserve">
     <value>为新 VM 配置存储</value>
@@ -7298,7 +7309,7 @@
     <value>在所选 VM 上找不到 CD 驱动器。</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>找不到 [Citrix VM Tools] 安装光盘。</value>
+    <value>找不到 [Citrix VM Tools] 安装磁盘。</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
     <value>已启动 [Citrix VM Tools] 安装。</value>
@@ -8566,9 +8577,6 @@ SCSI ID: {2}
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>常规</value>
   </data>
-  <data name="NAME_WITH_LOCATION" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>选择要重新连接的 SR 或创建一个新 SR</value>
   </data>
@@ -9324,9 +9332,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>为新 VM 配置存储</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_VDINAME" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
     <value>[XenCenter] 为您选择了不同的 SR。</value>
   </data>
@@ -9650,11 +9655,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>事件</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
-    <value>事件: {0} 个错误</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
+    <value>事件: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
-    <value>事件: 1 个错误</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} 正在进行中</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
+    <value>{0} 个错误</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 个错误</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>事件({0} 个错误)</value>
@@ -11770,9 +11781,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SIZE_IS" xml:space="preserve">
     <value>大小为</value>
   </data>
-  <data name="SIZE_LOCATION_SUB" xml:space="preserve">
-    <value>{0}, {1}</value>
-  </data>
   <data name="SIZE_NEGLIGIBLE" xml:space="preserve">
     <value>可以忽略</value>
   </data>
@@ -12016,6 +12024,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>磁盘大小({0})超过 SR 大小({1})</value>
   </data>
+  <data name="SR_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>SR“{0}”的可用空间不足 {1}，无法导入虚拟磁盘 {2}。</value>
+  </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>所需空间为 {0}，而可用空间仅有 {1}</value>
   </data>
@@ -12049,7 +12060,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0} 已用空间，总计 {1} (已分配 {2})</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
-    <value>由于 SR 已分离，因此无法回收释放的空间。</value>
+    <value>由于 SR 已分离，因此无法回收已释放的空间。</value>
   </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>无法连接到 iSCSI 目标</value>
@@ -12087,6 +12098,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="STARTS_WITH" xml:space="preserve">
     <value>开头</value>
   </data>
+  <data name="START_FILE_DECRYPTION" xml:space="preserve">
+    <value>正在解密 {0}... </value>
+  </data>
+  <data name="START_FILE_EXPANSION" xml:space="preserve">
+    <value>正在展开 {0}... </value>
+  </data>
   <data name="START_HOST" xml:space="preserve">
     <value>启动主机</value>
   </data>
@@ -12095,6 +12112,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="START_ON" xml:space="preserve">
     <value>启动于</value>
+  </data>
+  <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
+    <value>正在为服务器配置 VM... </value>
   </data>
   <data name="START_SHUTDOWN_VMS" xml:space="preserve">
     <value>启动关闭的 VM</value>
@@ -12215,6 +12235,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> 和 </value>
+  </data>
+  <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
+    <value>{0}, {1}</value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>
@@ -12483,7 +12506,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>无法删除该网络，因为它是物理设备</value>
   </data>
   <data name="TOOLTIP_SR_TRIM_UNSUPPORTED" xml:space="preserve">
-    <value>不支持在此 SR 上回收释放的空间</value>
+    <value>不支持在此 SR 上回收已释放的空间</value>
   </data>
   <data name="TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE" xml:space="preserve">
     <value>不支持在这些 SR 上回收已释放的空间</value>
@@ -12505,18 +12528,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>关闭高可用性功能</value>
-  </data>
-  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
-    <value>选择用于执行导出操作的临时 VM (传输 VM)运行时所在的网络。</value>
-  </data>
-  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
-    <value>选择用于执行导入操作的临时 VM (传输 VM)运行时所在的网络。</value>
-  </data>
-  <data name="TVM_PAGE_TEXT" xml:space="preserve">
-    <value>传输 VM 设置</value>
-  </data>
-  <data name="TVM_PAGE_TITLE" xml:space="preserve">
-    <value>配置传输 VM 的网络连接选项</value>
   </data>
   <data name="TXT_DESCRIPTION" xml:space="preserve">
     <value>文本文件</value>
@@ -12553,6 +12564,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>[XenCenter] 将文件解压到“{0}”。 解压后，将删除原始文件“{1}”。是否继续?</value>
   </data>
+  <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
+    <value>导入的 VM</value>
+  </data>
   <data name="UNINSTALL" xml:space="preserve">
     <value>删除</value>
   </data>
@@ -12570,6 +12584,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UNRECOGNISED_PLUGIN_VERSION" xml:space="preserve">
     <value>无法识别的插件版本“{0}”</value>
+  </data>
+  <data name="UNSUPPORTED_FILE_TYPE" xml:space="preserve">
+    <value>文件类型 {0} 不受支持。</value>
   </data>
   <data name="UNSUPPORTED_SR_TYPE" xml:space="preserve">
     <value>不支持的 SR 类型</value>
@@ -13259,6 +13276,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VDI_COPYING" xml:space="preserve">
     <value>正在将磁盘“{0}”从 SR“{1}”复制到 SR“{2}”</value>
+  </data>
+  <data name="VDI_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>导入虚拟磁盘 {1} 需要大小为 {0} 的 VDI。</value>
   </data>
   <data name="VDI_ON_SR_TITLE" xml:space="preserve">
     <value>“{1}”{2} 上的 {0}</value>

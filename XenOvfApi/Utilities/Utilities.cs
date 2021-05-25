@@ -37,7 +37,6 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 using XenOvf.Definitions;
 

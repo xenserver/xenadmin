@@ -29,15 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Network;
-using XenAdmin.Wizards.PatchingWizard;
-using XenAdmin.Properties;
 using System.Drawing;
 using System.Linq;
 using XenAdmin.Core;
+using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
 
 

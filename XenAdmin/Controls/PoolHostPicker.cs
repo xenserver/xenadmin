@@ -447,7 +447,7 @@ namespace XenAdmin.Controls
             {
                 foreach (SR sr in TheHost.Connection.Cache.SRs)
                 {
-                    if (sr.CanBeSeenFrom(TheHost) && sr.CanCreateVmOn())
+                    if (sr.CanBeSeenFrom(TheHost) && sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull())
                         return true;
                 }
             }

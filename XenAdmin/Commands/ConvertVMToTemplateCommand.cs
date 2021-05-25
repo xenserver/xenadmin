@@ -30,9 +30,7 @@
  */
 
 using System.Collections.Generic;
-using System.Drawing;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Actions.VMActions;

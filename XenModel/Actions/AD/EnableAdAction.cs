@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 

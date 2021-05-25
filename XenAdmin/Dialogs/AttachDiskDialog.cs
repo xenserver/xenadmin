@@ -31,7 +31,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAPI;

@@ -498,9 +498,6 @@
   <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
     <value>'{0}' からプール リソース一覧をエクスポートしています</value>
   </data>
-  <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>{0} のバックアップ ファイルへのエクスポート</value>
-  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>{0} のエクスポート</value>
   </data>
@@ -1323,12 +1320,6 @@
   <data name="ACTION_WLB_REPORT_SUCCESSFUL" xml:space="preserve">
     <value>ダウンロードしました</value>
   </data>
-  <data name="ACTION_WLB_REPORT_TASK_DESCRIPTION" xml:space="preserve">
-    <value>WLB レポート {0} のダウンロード</value>
-  </data>
-  <data name="ACTION_WLB_REPORT_TASK_NAME" xml:space="preserve">
-    <value>WLB レポート {0} のダウンロード</value>
-  </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>アクティブ化(&amp;C)</value>
   </data>
@@ -2088,7 +2079,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>サーバー '{0}' をバックアップしています</value>
   </data>
   <data name="BACKINGUP_HOST_WITH_DATA" xml:space="preserve">
-    <value>サーバー '{0}' をバックアップしています。{1} 受信済み... </value>
+    <value>サーバー '{0}' をバックアップしています ({1} 受信済み)... </value>
   </data>
   <data name="BACKUP_HOST" xml:space="preserve">
     <value>サーバーのバックアップ...</value>
@@ -2526,6 +2517,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CD_DRIVE" xml:space="preserve">
     <value>{0} の DVD ドライブ</value>
+  </data>
+  <data name="CD_DVD_DEVICE_ATTACHED" xml:space="preserve">
+    <value>CD/DVD ドライブが接続されています。</value>
   </data>
   <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>サーバー '{0}' の TLS 証明書は、{1} に有効期限が切れました。</value>
@@ -3250,9 +3244,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONSOLE_HOST_DEAD" xml:space="preserve">
     <value>このサーバーは使用できません。</value>
   </data>
-  <data name="CONSOLE_HOST_NUTANIX" xml:space="preserve">
-    <value>{0} Nutanix CVM コンソール</value>
-  </data>
   <data name="CONSOLE_POWER_STATE_HALTED" xml:space="preserve">
     <value>この VM は現在シャットダウン状態です。</value>
   </data>
@@ -3270,6 +3261,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CONSOLE_POWER_STATE_SUSPENDED_RESUME" xml:space="preserve">
     <value>この VM は現在一時停止状態です。再開するには、ここをクリックしてください。</value>
+  </data>
+  <data name="CONSOLE_SR_DRIVER_DOMAIN" xml:space="preserve">
+    <value>SR '{0}' ドライバー ドメイン コンソール</value>
   </data>
   <data name="CONTAINED_IN" xml:space="preserve">
     <value>以下に含まれる</value>
@@ -3427,7 +3421,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>変換ログを {0} に保存しています</value>
   </data>
   <data name="CONVERSION_MANAGER_TITLE" xml:space="preserve">
-    <value>変換の管理 - {0}</value>
+    <value>Conversion Manager - {0}</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_BLURB" xml:space="preserve">
     <value>変換する VMware VM の仮想イーサネット アダプターを、変換先のプールまたはスタンドアロン サーバーのネットワークにマップします。</value>
@@ -3959,11 +3953,11 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>ディスクを作成しています</value>
   </data>
-  <data name="CREATING_FILE" xml:space="preserve">
-    <value>アプライアンス ファイルを単一パッケージ ファイル {0} にアーカイブしています...</value>
-  </data>
   <data name="CREATING_MANIFEST" xml:space="preserve">
     <value>マニフェスト ファイルを作成しています...</value>
+  </data>
+  <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
+    <value>ファイル '{0}' のチェックサムを計算しています...</value>
   </data>
   <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
     <value>マスター '{1}' の新規プール '{0}' の作成</value>
@@ -3973,6 +3967,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="CREATING_NEW_FOLDERS" xml:space="preserve">
     <value>新規フォルダを作成しています...</value>
+  </data>
+  <data name="CREATING_OVA_FILE" xml:space="preserve">
+    <value>アプライアンス ファイルを単一のパッケージ ファイル '{0}' にアーカイブしています'...</value>
   </data>
   <data name="CREATING_VMSS" xml:space="preserve">
     <value>スナップショット スケジュール '{0}' を作成しています...</value>
@@ -4144,6 +4141,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="DEFAULT" xml:space="preserve">
     <value>デフォルト</value>
+  </data>
+  <data name="DEFAULT_IMPORT_DESCRIPTION" xml:space="preserve">
+    <value>OVF/OVA パッケージからインポートされました。</value>
   </data>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
     <value>{0} のデフォルト インストール</value>
@@ -4698,7 +4698,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>{0} がリリースされています</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>'{0}' からアップデートをダウンロードしています...</value>
+    <value>’{0}’ からダウンロードしています ({1}/{2})...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>アップデート {0} をダウンロードしています</value>
@@ -5319,6 +5319,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
     <value>[XenCenter] でこのサーバーに接続するときに問題が発生しました。</value>
   </data>
+  <data name="ERROR_COULD_NOT_FIND_SR" xml:space="preserve">
+    <value>ストレージ リポジトリが見つかりません。デフォルトが割り当てられていません。</value>
+  </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
     <value>以下の仮想ディスクを非アクティブにできません。</value>
   </data>
@@ -5460,11 +5463,17 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ERROR_DIALOG_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>VM の一時停止エラー</value>
   </data>
+  <data name="ERROR_FILE_NAME_NULL" xml:space="preserve">
+    <value>インポートするファイルが指定されませんでした。</value>
+  </data>
   <data name="ERROR_FILE_NOT_FOUND" xml:space="preserve">
     <value>ファイル {0} が見つかりません</value>
   </data>
   <data name="ERROR_HOST_STILL_BOOTING" xml:space="preserve">
     <value>サーバーは起動中です。</value>
+  </data>
+  <data name="ERROR_IMPORTING_SERVER_LIST" xml:space="preserve">
+    <value>サーバー一覧のインポート エラーです。ファイルの XML 書式を確認してください。</value>
   </data>
   <data name="ERROR_INVALID_GATEWAY" xml:space="preserve">
     <value>ゲートウェイが無効です。</value>
@@ -5480,6 +5489,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="ERROR_NOT_FOUND" xml:space="preserve">
     <value>サーバー '{0}' が見つかりません。</value>
+  </data>
+  <data name="ERROR_NO_PASSWORD" xml:space="preserve">
+    <value>OVF パッケージの暗号化を解除するためのパスワードが指定されていません。</value>
   </data>
   <data name="ERROR_NO_PERMISSION" xml:space="preserve">
     <value>このサーバーへのアクセスが許可されていません。</value>
@@ -5500,10 +5512,10 @@ CD をイジェクトしてから再試行してください。</value>
     <value>不明なエラーが発生しました。</value>
   </data>
   <data name="ERROR_UNSUPPORTED_FILE_TYPE" xml:space="preserve">
-    <value>不明なファイル タイプです。</value>
+    <value>不明なファイルの種類です。</value>
   </data>
-  <data name="ERRO_IMPORTING_SERVER_LIST" xml:space="preserve">
-    <value>サーバー一覧のインポート エラーです。ファイルの XML 書式を確認してください。</value>
+  <data name="ERROR_VM_NOT_HALTED" xml:space="preserve">
+    <value>エクスポートする前に VM '{0}' をシャット ダウンするか一時停止してください。</value>
   </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>
@@ -5593,14 +5605,20 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXPORTING_UPDATES" xml:space="preserve">
     <value>アップデートを '{0}' にエクスポートしています...</value>
   </data>
-  <data name="EXPORTING_VMS" xml:space="preserve">
-    <value>VM をエクスポートしています...</value>
+  <data name="EXPORTING_VDI" xml:space="preserve">
+    <value>ディスク '{0}' を '{1}' にエクスポートしています ({2}/{3})...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION" xml:space="preserve">
+    <value>ディスク '{0}' を検証しています...</value>
+  </data>
+  <data name="EXPORTING_VDI_VERIFICATION_FAILURE" xml:space="preserve">
+    <value>ディスク '{0}' の検証に失敗しました。詳しくはログを参照してください。</value>
+  </data>
+  <data name="EXPORTING_VM_PREPARE" xml:space="preserve">
+    <value>VM '{0}' をエクスポートするための準備をしています...</value>
   </data>
   <data name="EXPORTVM_COULD_NOT_SHOW" xml:space="preserve">
     <value>ファイルを開くためのダイアログを表示できません - {0}</value>
-  </data>
-  <data name="EXPORTVM_NOT_HAPPEN" xml:space="preserve">
-    <value>許可されません</value>
   </data>
   <data name="EXPORT_ALL" xml:space="preserve">
     <value>すべてをエクスポート</value>
@@ -5886,21 +5904,6 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="FINISH_PAGE_TITLE_IMPORT" xml:space="preserve">
     <value>インポート設定の確認</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_DHCP" xml:space="preserve">
-    <value>DHCP で自動取得</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_GATEWAY" xml:space="preserve">
-    <value>Transfer VM のゲートウェイ:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_IP" xml:space="preserve">
-    <value>Transfer VM の IP アドレス:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_MASK" xml:space="preserve">
-    <value>Transfer VM のサブネット マスク:</value>
-  </data>
-  <data name="FINISH_PAGE_TVM_NETWORK" xml:space="preserve">
-    <value>Transfer VM のネットワーク インターフェイス:</value>
   </data>
   <data name="FINISH_PAGE_VERIFY_MANIFEST" xml:space="preserve">
     <value>マニフェストの検証:</value>
@@ -6948,9 +6951,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORTING_DISK_IMAGE" xml:space="preserve">
     <value>ディスク イメージをインポートしています...</value>
   </data>
-  <data name="IMPORTING_VMS" xml:space="preserve">
-    <value>VM をインポートしています...</value>
-  </data>
   <data name="IMPORTVM_DESCRIP" xml:space="preserve">
     <value>バックアップ ファイルからの VM のインポート</value>
   </data>
@@ -6962,9 +6962,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>VM のインポート準備</value>
-  </data>
-  <data name="IMPORTVM_STARTING" xml:space="preserve">
-    <value>VM を起動しています...</value>
   </data>
   <data name="IMPORTVM_TITLE" xml:space="preserve">
     <value>'{0}' から '{1}' に仮想マシンをインポート</value>
@@ -6980,6 +6977,15 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_APPLIANCE" xml:space="preserve">
     <value>アプライアンス '{0}' を '{1}' にインポート</value>
+  </data>
+  <data name="IMPORT_APPLIANCE_PREPARING" xml:space="preserve">
+    <value>アプライアンス '{0}' をインポートするための準備をしています...</value>
+  </data>
+  <data name="IMPORT_CREATING_APPLIANCE" xml:space="preserve">
+    <value>アプライアンス '{0}' を作成しています...</value>
+  </data>
+  <data name="IMPORT_CREATING_VM" xml:space="preserve">
+    <value>VM '{0}' を作成しています...</value>
   </data>
   <data name="IMPORT_DISK_IMAGE" xml:space="preserve">
     <value>ディスク イメージから仮想マシン '{0}' を '{1}' にインポート</value>
@@ -7163,6 +7169,12 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_URI_NO_DESTINATION" xml:space="preserve">
     <value>インポートの URI でパスが定義されていません。</value>
+  </data>
+  <data name="IMPORT_VDI" xml:space="preserve">
+    <value>'{0}' をインポートしています ({1}/{2})...</value>
+  </data>
+  <data name="IMPORT_VDI_PREPARE" xml:space="preserve">
+    <value>'{0}' の VDI を準備しています...</value>
   </data>
   <data name="IMPORT_VM_CONFIGURE_STORAGE" xml:space="preserve">
     <value>新規 VM のストレージを構成してください</value>
@@ -8571,9 +8583,6 @@ SCSI ID: {2}
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>全般</value>
   </data>
-  <data name="NAME_WITH_LOCATION" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>再接続する SR を選択するか、新規 SR を作成してください</value>
   </data>
@@ -9325,9 +9334,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>新規 VM のストレージを構成してください</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_VDINAME" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
     <value>[XenCenter] は別の SR を選択しました。</value>
   </data>
@@ -9651,11 +9657,17 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>イベント</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY" xml:space="preserve">
-    <value>イベント: {0} 個のエラー</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
+    <value>イベント: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE" xml:space="preserve">
-    <value>イベント: 1 個のエラー</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} 進行中</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
+    <value>{0} エラー</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 個のエラー</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>イベント ({0} 個のエラー)</value>
@@ -11771,9 +11783,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SIZE_IS" xml:space="preserve">
     <value>サイズ</value>
   </data>
-  <data name="SIZE_LOCATION_SUB" xml:space="preserve">
-    <value>{0}, {1}</value>
-  </data>
   <data name="SIZE_NEGLIGIBLE" xml:space="preserve">
     <value>ほぼなし</value>
   </data>
@@ -12017,6 +12026,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
     <value>ディスク サイズ ({0}) が SR サイズ ({1}) を超過しています</value>
   </data>
+  <data name="SR_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>SR {0} に {1} の空き領域がないため、仮想ディスク {2} をインポートできません。</value>
+  </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} 必要ですが {1} しか使用できません</value>
   </data>
@@ -12050,7 +12062,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0} 使用 / {1} 合計 ({2} 割り当て済み)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
-    <value>SR が検出されたため空き領域を解放できません</value>
+    <value>SR が検出されたため空き領域を解放できません。</value>
   </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>iSCSI ターゲットに接続できません。</value>
@@ -12088,6 +12100,12 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="STARTS_WITH" xml:space="preserve">
     <value>以下の文字で始まる</value>
   </data>
+  <data name="START_FILE_DECRYPTION" xml:space="preserve">
+    <value>{0} の暗号化を解除しています... </value>
+  </data>
+  <data name="START_FILE_EXPANSION" xml:space="preserve">
+    <value>{0} を展開しています... </value>
+  </data>
   <data name="START_HOST" xml:space="preserve">
     <value>ホストの起動</value>
   </data>
@@ -12096,6 +12114,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="START_ON" xml:space="preserve">
     <value>起動</value>
+  </data>
+  <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
+    <value>サーバーの VM を構成しています... </value>
   </data>
   <data name="START_SHUTDOWN_VMS" xml:space="preserve">
     <value>シャットダウンした VM を起動します</value>
@@ -12216,6 +12237,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> および </value>
+  </data>
+  <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
+    <value>{0}, {1}</value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>
@@ -12507,18 +12531,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>高可用性の無効化</value>
   </data>
-  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
-    <value>一時的な VM (Transfer VM) を実行するネットワークを選択します。この VM はエクスポート処理で使用されます。</value>
-  </data>
-  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
-    <value>一時的な VM (Transfer VM) を実行するネットワークを選択します。この VM はインポート処理で使用されます。</value>
-  </data>
-  <data name="TVM_PAGE_TEXT" xml:space="preserve">
-    <value>Transfer VM の設定</value>
-  </data>
-  <data name="TVM_PAGE_TITLE" xml:space="preserve">
-    <value>Transfer VM のネットワーク オプションの構成</value>
-  </data>
   <data name="TXT_DESCRIPTION" xml:space="preserve">
     <value>テキスト ファイル</value>
   </data>
@@ -12554,6 +12566,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
     <value>ファイルが '{0}' に圧縮解除されます。元のファイル '{1}' は削除されます。続行しますか?</value>
   </data>
+  <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
+    <value>インポートされた VM</value>
+  </data>
   <data name="UNINSTALL" xml:space="preserve">
     <value>削除</value>
   </data>
@@ -12571,6 +12586,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UNRECOGNISED_PLUGIN_VERSION" xml:space="preserve">
     <value>認識できないプラグインのバージョン '{0}'</value>
+  </data>
+  <data name="UNSUPPORTED_FILE_TYPE" xml:space="preserve">
+    <value>ファイルの種類 {0} はサポートされていません。</value>
   </data>
   <data name="UNSUPPORTED_SR_TYPE" xml:space="preserve">
     <value>SR の種類がサポートされていません</value>
@@ -13263,6 +13281,9 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   </data>
   <data name="VDI_COPYING" xml:space="preserve">
     <value>SR '{1}' から SR '{2}' へのディスク '{0}' のコピー</value>
+  </data>
+  <data name="VDI_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>仮想ディスク {1} をインポートするには、サイズが {0} の VDI が必要です。</value>
   </data>
   <data name="VDI_ON_SR_TITLE" xml:space="preserve">
     <value>'{1}' {2} の {0}</value>

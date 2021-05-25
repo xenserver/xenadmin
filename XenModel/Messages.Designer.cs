@@ -1204,15 +1204,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporting {0} to backup file.
-        /// </summary>
-        public static string ACTION_EXPORT_TASK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_EXPORT_TASK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Exporting {0}.
         /// </summary>
         public static string ACTION_EXPORT_TASK_NAME {
@@ -3675,24 +3666,6 @@ namespace XenAdmin {
         public static string ACTION_WLB_REPORT_SUCCESSFUL {
             get {
                 return ResourceManager.GetString("ACTION_WLB_REPORT_SUCCESSFUL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading WLB report {0}.
-        /// </summary>
-        public static string ACTION_WLB_REPORT_TASK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("ACTION_WLB_REPORT_TASK_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading WLB report {0}.
-        /// </summary>
-        public static string ACTION_WLB_REPORT_TASK_NAME {
-            get {
-                return ResourceManager.GetString("ACTION_WLB_REPORT_TASK_NAME", resourceCulture);
             }
         }
         
@@ -8993,15 +8966,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Nutanix CVM console.
-        /// </summary>
-        public static string CONSOLE_HOST_NUTANIX {
-            get {
-                return ResourceManager.GetString("CONSOLE_HOST_NUTANIX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM is currently shut down..
         /// </summary>
         public static string CONSOLE_POWER_STATE_HALTED {
@@ -9052,6 +9016,15 @@ namespace XenAdmin {
         public static string CONSOLE_POWER_STATE_SUSPENDED_RESUME {
             get {
                 return ResourceManager.GetString("CONSOLE_POWER_STATE_SUSPENDED_RESUME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR &apos;{0}&apos; Driver Domain Console.
+        /// </summary>
+        public static string CONSOLE_SR_DRIVER_DOMAIN {
+            get {
+                return ResourceManager.GetString("CONSOLE_SR_DRIVER_DOMAIN", resourceCulture);
             }
         }
         
@@ -9517,7 +9490,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Conversions - {0}.
+        ///   Looks up a localized string similar to Conversion Manager - {0}.
         /// </summary>
         public static string CONVERSION_MANAGER_TITLE {
             get {
@@ -10250,6 +10223,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home Server:.
+        /// </summary>
+        public static string CPM_SUMMARY_KEY_HOME_SERVER {
+            get {
+                return ResourceManager.GetString("CPM_SUMMARY_KEY_HOME_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_MIGRATE_TEMPLATE {
@@ -10282,15 +10264,6 @@ namespace XenAdmin {
         public static string CPM_SUMMARY_KEY_STORAGE {
             get {
                 return ResourceManager.GetString("CPM_SUMMARY_KEY_STORAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target Server:.
-        /// </summary>
-        public static string CPM_SUMMARY_KEY_TARGET_SERVER {
-            get {
-                return ResourceManager.GetString("CPM_SUMMARY_KEY_TARGET_SERVER", resourceCulture);
             }
         }
         
@@ -10439,11 +10412,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify a &amp;target server in the destination pool (optional):.
+        ///   Looks up a localized string similar to Optionally, assign the VMs a &amp;home server in the destination pool:.
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_TABLE_INTRO {
             get {
                 return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optionally, assign the VM a &amp;home server in the destination pool:.
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE", resourceCulture);
             }
         }
         
@@ -12560,11 +12542,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable HA if you want to configure the management interfaces.
+        ///   Looks up a localized string similar to Disable HA if you want to configure IP addresses..
         /// </summary>
-        public static string DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES {
+        public static string DISABLE_HA_CONFIGURE_IP_ADDRESSES {
             get {
-                return ResourceManager.GetString("DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES", resourceCulture);
+                return ResourceManager.GetString("DISABLE_HA_CONFIGURE_IP_ADDRESSES", resourceCulture);
             }
         }
         
@@ -13298,7 +13280,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t select a target server.
+        ///   Looks up a localized string similar to Don&apos;t assign a home server.
         /// </summary>
         public static string DONT_SELECT_TARGET_SERVER {
             get {
@@ -24657,15 +24639,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1}.
-        /// </summary>
-        public static string NAME_WITH_LOCATION {
-            get {
-                return ResourceManager.GetString("NAME_WITH_LOCATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the SR to reattach or create a new SR.
         /// </summary>
         public static string NETAPP_EQUAL_PAGE_TITLE {
@@ -27316,15 +27289,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1}.
-        /// </summary>
-        public static string NEWVMWIZARD_STORAGEPAGE_VDINAME {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_VDINAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} has selected a different SR for you..
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_XC_SELECTION {
@@ -28045,46 +28009,146 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning.
-        ///
-        ///A new disk partitioning scheme is available in {0} {1} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
-        ///
-        ///However, there are VMs on local storage, so the current partitioning scheme will be retained. To benefit from repartitioning on upgrade to {0} {1} or above, VMs must be moved from local storage first..
+        ///   Looks up a localized string similar to Disk repartitioning is not possible..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: VMs on local disk will prevent disk repartitioning..
+        ///   Looks up a localized string similar to However, the new partitioning scheme cannot be applied on your server. This could be because there are VMs on local storage, the partition table type is DOS or there is a utility partition present. To upgrade to {0}, you must identify and resolve the issue first..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning.
-        ///
-        ///A new disk partitioning scheme is available in {0} {1} and above that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI.
-        ///
-        ///However, there is not enough space to perform the repartitioning, so the current partitioning scheme will be retained..
+        ///   Looks up a localized string similar to However, the new partitioning scheme cannot be applied on your server. This could be because there are VMs on local storage, the partition table type is DOS or there is a utility partition present. To upgrade to {0} or above, or to benefit from repartitioning on upgrade to a version older than {0}, you must identify and resolve the issue first..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG {
+        public static string NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: The disk size of the local storage prevents repartitioning..
+        ///   Looks up a localized string similar to The partition table type prevents repartitioning..
         /// </summary>
-        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT {
+        public static string NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE {
             get {
-                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT", resourceCulture);
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, the partition table type on your server is DOS, which prevents repartitioning. The current partitioning scheme cannot be retained. Therefore the server cannot be upgraded to {0}..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, the partition table type on your server is DOS, which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so an upgrade to {0} or above is not possible. .
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As of {0} the current partitioning scheme is no longer supported. A new disk partitioning scheme is available that includes larger dom0 and backup partitions, and dedicated partitions for logging, swap and UEFI..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The disk size of the local storage prevents repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is not enough space to perform the repartitioning. To upgrade to {0}, the size of the local storage needs to be increased first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is not enough space to perform the repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the size of the local storage needs to be increased first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A utility partition prevents repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is a utility partition present which prevents repartitioning. To upgrade to {0}, the utility partition must be removed..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there is a utility partition present which prevents repartitioning. The current partitioning scheme cannot be retained if you upgrade to {0} or above, so the existing utility partition must be removed first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMs on local disk will prevent disk repartitioning..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_VDI_PRESENT {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_VDI_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there are VMs on local storage, so the new disk partitioning can not be applied. To upgrade to {0} or above, VMs must be moved from local storage first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, there are VMs on local storage, so the new partitioning scheme cannot be applied.  To upgrade to {0} or above, or to benefit from repartitioning on upgrade to a version older than {0}, VMs must be moved from local storage first..
+        /// </summary>
+        public static string NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING {
+            get {
+                return ResourceManager.GetString("NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING", resourceCulture);
             }
         }
         
@@ -28179,20 +28243,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events: {0} errors.
+        ///   Looks up a localized string similar to Events: {0}.
         /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY {
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS {
             get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY", resourceCulture);
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events: 1 error.
+        ///   Looks up a localized string similar to 1 error.
         /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE {
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR {
             get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE", resourceCulture);
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} errors.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} in progress.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -33935,15 +34017,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}, {1}.
-        /// </summary>
-        public static string SIZE_LOCATION_SUB {
-            get {
-                return ResourceManager.GetString("SIZE_LOCATION_SUB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Negligible.
         /// </summary>
         public static string SIZE_NEGLIGIBLE {
@@ -35275,6 +35348,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}, {1}.
+        /// </summary>
+        public static string STRING_COMMA_SPACE_STRING {
+            get {
+                return ResourceManager.GetString("STRING_COMMA_SPACE_STRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} {1}.
         /// </summary>
         public static string STRING_SPACE_STRING {
@@ -35507,15 +35589,6 @@ namespace XenAdmin {
         public static string TARGET {
             get {
                 return ResourceManager.GetString("TARGET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target Server.
-        /// </summary>
-        public static string TARGET_SERVER {
-            get {
-                return ResourceManager.GetString("TARGET_SERVER", resourceCulture);
             }
         }
         

@@ -134,7 +134,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 where vdi != null
                 select vdi).ToArray();
 
-            srPicker1.PopulateAsync(SrPicker.SRPickerType.MoveOrCopy, TheVM.Connection,
+            srPicker1.PopulateAsync(SrPicker.SRPickerType.Copy, TheVM.Connection,
                 TheVM.Home(), null, vdis);
         }
 

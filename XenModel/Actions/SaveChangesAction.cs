@@ -30,11 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using System.Reflection;

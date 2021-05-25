@@ -32,10 +32,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Dialogs;
-using XenAdmin.Properties;
 using XenAPI;
 
 namespace XenAdmin.Commands

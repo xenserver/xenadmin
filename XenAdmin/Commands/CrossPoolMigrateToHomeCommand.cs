@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using System.Drawing;
-using XenAdmin.Properties;
 using XenAPI;
 
 

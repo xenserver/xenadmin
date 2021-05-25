@@ -30,16 +30,13 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Properties;
 using System.Linq;
 using XenAPI;
 using XenAdmin.Dialogs;

@@ -417,84 +417,60 @@ namespace XenAdmin
             TabPage.Controls.Add(contents);
         }
 
-        void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             if (Program.Exiting)
                 return;
 
-            Program.BeginInvoke(Program.MainWindow, () =>
+            switch (e.Action)
             {
-                ActionBase action = e.Element as ActionBase;
-                
-                switch (e.Action)
-                {
-                    case CollectionChangeAction.Add:
+                case CollectionChangeAction.Add:
+                    if (e.Element is ActionBase action)
+                    {
+                        if (!(action is MeddlingAction))
                         {
-                            if (action == null)
-                                return;
-
-                            var meddlingAction = action as MeddlingAction;
-                            if (meddlingAction == null)
+                            Program.Invoke(this, () =>
                             {
                                 SetStatusBar(null, null);
-                                if (statusBarAction != null)
-                                {
-                                    statusBarAction.Changed -= actionChanged;
-                                    statusBarAction.Completed -= actionCompleted;
-                                }
                                 statusBarAction = action;
-                            }
-                            action.Changed += actionChanged;
-                            action.Completed += actionCompleted;
-                            actionChanged(action);
-                            break;
+                            });
                         }
-                    case CollectionChangeAction.Remove:
+
+                        action.Changed += actionChanged;
+                        action.Completed += actionCompleted;
+                        actionChanged(action);
+                    }
+                    break;
+
+                case CollectionChangeAction.Remove:
+                    if (e.Element is ActionBase actionB)
+                    {
+                        actionB.Changed -= actionChanged;
+                        actionB.Completed -= actionCompleted;
+                    }
+                    else if (e.Element is List<ActionBase> range)
+                    {
+                        foreach (var a in range)
                         {
-                            if (action != null)
-                            {
-                                action.Changed -= actionChanged;
-                                action.Completed -= actionCompleted;
-                            }
-                            else
-                            {
-                                var range = e.Element as List<ActionBase>;
-                                if (range != null)
-                                {
-                                    foreach (var a in range)
-                                    {
-                                        a.Changed -= actionChanged;
-                                        a.Completed -= actionCompleted;
-                                    }
-                                }
-                                else
-                                {
-                                    return;
-                                }
-                            }
-
-                            int errorCount = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
-                            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
-
-                            statusLabelErrors.Text = errorCount == 1
-                                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE
-                                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY, errorCount);
-                            statusLabelErrors.Visible = errorCount > 0;
-
-                            if (eventsPage.Visible)
-                            {
-                                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errorCount);
-                                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errorCount);
-                            }
-                            break;
+                            a.Changed -= actionChanged;
+                            a.Completed -= actionCompleted;
                         }
-                }
-            });
+                    }
+                    else
+                        return;
+
+                    UpdateErrorStatusLabel();
+                    break;
+            }
         }
 
         private void actionCompleted(ActionBase action)
         {
+            action.Changed -= actionChanged;
+            action.Completed -= actionCompleted;
+
             actionChanged(action);
+
             if (action is SrAction)
                 Program.Invoke(this, UpdateToolbars);
         }
@@ -504,55 +480,70 @@ namespace XenAdmin
             if (Program.Exiting)
                 return;
 
-            Program.Invoke(this, () => actionChanged_(action));
+            Program.Invoke(this, () =>
+            {
+                UpdateStatusProgressBar(action);
+                UpdateErrorStatusLabel();
+            });
         }
 
-        private void actionChanged_(ActionBase action)
+        private void UpdateStatusProgressBar(ActionBase action)
         {
-            // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
-            if (action.SuppressProgressReport)
+            if (statusBarAction != action)
                 return;
+
+            statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
 
             var percentage = action.PercentComplete;
             Debug.Assert(0 <= percentage && percentage <= 100,
                 "PercentComplete is out of range, the reporting action needs to be fixed."); //CA-8517
 
-            var meddlingAction = action as MeddlingAction;
-            if (meddlingAction == null)
+            if (percentage < 0)
+                percentage = 0;
+            else if (percentage > 100)
+                percentage = 100;
+            statusProgressBar.Value = percentage;
+
+            // Don't show cancelled exception
+            if (action.Exception != null && !(action.Exception is CancelledException))
             {
-                statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
-
-                if (percentage < 0)
-                    percentage = 0;
-                else if (percentage > 100)
-                    percentage = 100;
-                statusProgressBar.Value = percentage;
-
-                // Don't show cancelled exception
-                if (action.Exception != null && !(action.Exception is CancelledException))
-                {
-                    SetStatusBar(Images.StaticImages._000_error_h32bit_16, action.Exception.Message);
-                }
-                else
-                {
-                    SetStatusBar(null, action.IsCompleted
-                        ? null
-                        : !string.IsNullOrEmpty(action.Description)
-                            ? action.Description
-                            : !string.IsNullOrEmpty(action.Title)
-                                ? action.Title
-                                : null);
-                }
+                SetStatusBar(Images.StaticImages._000_error_h32bit_16, action.Exception.Message);
             }
+            else
+            {
+                SetStatusBar(null, action.IsCompleted
+                    ? null
+                    : !string.IsNullOrEmpty(action.Description)
+                        ? action.Description
+                        : !string.IsNullOrEmpty(action.Title)
+                            ? action.Title
+                            : null);
+            }
+        }
 
-            int errorCount = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded && !(a is CancellingAction && ((CancellingAction)a).Cancelled));
+        private void UpdateErrorStatusLabel()
+        {
+            int errorCount = ConnectionsManager.History.Count(a =>
+                a.IsCompleted && !a.Succeeded && !(a is CancellingAction ca && ca.Cancelled));
 
             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
 
-            statusLabelErrors.Text = errorCount == 1
-                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ONE
-                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_MANY, errorCount);
-            statusLabelErrors.Visible = errorCount > 0;
+            var errorText = errorCount == 1
+                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR
+                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS, errorCount);
+
+            int progressCount = ConnectionsManager.History.Count(a => !a.IsCompleted);
+            var progressText = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS, progressCount);
+
+            if (errorCount > 0 && progressCount > 0)
+                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS,
+                    string.Format(Messages.STRING_COMMA_SPACE_STRING, errorText, progressText));
+            else if (errorCount > 0)
+                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS, errorText);
+            else if (progressCount > 0)
+                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS, progressText);
+
+            statusLabelErrors.Visible = errorCount > 0 || progressCount > 0;
 
             if (eventsPage.Visible)
             {
@@ -1454,13 +1445,13 @@ namespace XenAdmin
             bool isPoolSelected = SelectionManager.Selection.FirstIs<Pool>();
             bool isVMSelected = SelectionManager.Selection.FirstIs<VM>();
             bool isHostSelected = SelectionManager.Selection.FirstIs<Host>();
-            bool isSRSelected = SelectionManager.Selection.FirstIs<SR>();
+            SR selectedSr = SelectionManager.Selection.First as SR;
+            bool isSRSelected = selectedSr != null;
             bool isVdiSelected = SelectionManager.Selection.FirstIs<VDI>();
             bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
             bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
             bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
-            bool hasManyControlDomains = isHostSelected && ((Host)SelectionManager.Selection.First).HasManyControlDomains();
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML();
 
@@ -1517,8 +1508,8 @@ namespace XenAdmin
 
             if (consoleFeatures.Count == 0 && !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
                 newTabs.Add(TabPageConsole);
-            
-            if (consoleFeatures.Count == 0 && !multi && !SearchMode && isHostLive && hasManyControlDomains)
+
+            if (consoleFeatures.Count == 0 && !multi && !SearchMode && isSRSelected && selectedSr.HasDriverDomain(out _))
                 newTabs.Add(TabPageCvmConsole);
 
             if (!multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)))
@@ -1887,9 +1878,9 @@ namespace XenAdmin
             }
             else if (t == TabPageCvmConsole)
             {
-                if (SelectionManager.Selection.FirstIs<Host>())
+                if (SelectionManager.Selection.First is SR sr && sr.HasDriverDomain(out var vm))
                 {
-                    CvmConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    CvmConsolePanel.setCurrentSource(vm);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
             }

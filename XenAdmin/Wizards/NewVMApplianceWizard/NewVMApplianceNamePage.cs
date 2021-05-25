@@ -33,7 +33,6 @@ using System;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Properties;
 using XenAdmin.SettingsPanels;
 using XenAPI;
 

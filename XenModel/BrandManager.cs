@@ -78,6 +78,8 @@ namespace XenAdmin.Core
 
         public static readonly string ProductVersion82 = Get("PRODUCT_VERSION_8_2");
 
+        public static readonly string ProductVersionPost82 = Get("PRODUCT_VERSION_POST_8_2");
+
         public static readonly string ProductVersionText = Get("PRODUCT_VERSION_TEXT");
 
         public static readonly string UpdatesUrl = Get("UPDATES_URL");

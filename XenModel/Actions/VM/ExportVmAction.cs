@@ -98,9 +98,7 @@ namespace XenAdmin.Actions
             SafeToExit = false;
             Description = Messages.ACTION_EXPORT_DESCRIPTION_IN_PROGRESS;
 
-            RelatedTask = XenAPI.Task.create(Session,
-                string.Format(Messages.ACTION_EXPORT_TASK_NAME, VM.Name()),
-                string.Format(Messages.ACTION_EXPORT_TASK_DESCRIPTION, VM.Name()));
+            RelatedTask = Task.create(Session, "export", $"Exporting {VM.Name()} to backup file");
 
             UriBuilder uriBuilder = new UriBuilder(this.Session.Url);
             uriBuilder.Path = "export";

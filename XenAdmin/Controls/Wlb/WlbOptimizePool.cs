@@ -33,23 +33,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-
-using XenAdmin;
-using XenAdmin.Controls;
-using XenAdmin.Controls.CustomGridView;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
-using XenAdmin.Network;
-using XenAdmin.XenSearch;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Dialogs;
-using System.Drawing.Drawing2D;
 using XenAdmin.Commands;
 
 

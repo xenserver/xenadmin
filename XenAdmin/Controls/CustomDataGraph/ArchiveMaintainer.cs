@@ -36,8 +36,6 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Xml;
-
-using XenCenterLib;
 using XenAPI;
 using XenAdmin.Core;
 

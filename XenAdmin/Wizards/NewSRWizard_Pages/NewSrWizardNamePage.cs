@@ -30,9 +30,7 @@
  */
 
 using System;
-using System.Text.RegularExpressions;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages

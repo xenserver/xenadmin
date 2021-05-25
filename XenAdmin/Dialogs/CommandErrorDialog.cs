@@ -33,11 +33,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Dialogs;
 using XenAPI;
-using XenAdmin.Commands;
 
 namespace XenAdmin.Dialogs
 {
