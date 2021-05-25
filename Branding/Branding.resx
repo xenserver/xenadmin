@@ -177,7 +177,7 @@
     <value>8.2</value>
   </data>
   <data name="PRODUCT_VERSION_POST_8_2" xml:space="preserve">
-    <value>Citrix Hypervisor 8.2.50</value>
+    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
   </data>
   <data name="PRODUCT_VERSION_TEXT" xml:space="preserve">
     <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>

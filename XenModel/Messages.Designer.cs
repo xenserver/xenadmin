@@ -38456,7 +38456,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} version {1} (build {2}.{3}) {4}-bit.
+        ///   Looks up a localized string similar to {0} version {1} (build {2}) {3}-bit.
         /// </summary>
         public static string VERSION_NUMBER {
             get {

@@ -13274,7 +13274,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Version</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>{0} version {1} (build {2}.{3}) {4}-bit</value>
+    <value>{0} version {1} (build {2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU)</value>

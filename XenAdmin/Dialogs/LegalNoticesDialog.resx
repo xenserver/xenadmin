@@ -303,7 +303,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>{0}, {1}, {2}, {3}, Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of {4} in the United States and other countries.</value>
+    <value>{0}, {1}, {2}, {3}, {4}, Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of {5} in the United States and other countries.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

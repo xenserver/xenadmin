@@ -907,9 +907,9 @@ namespace XenAdmin
             if (master == null)
                 return;
 
-            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6})",
+            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5}",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), BrandManager.BrandConsole, BrandManager.ProductVersionText, Program.Version);
+                master.BuildNumberRaw(), BrandManager.BrandConsole, Program.Version);
 
             // Check the PRODUCT_BRAND
             if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
