@@ -47,20 +47,17 @@ using Microsoft.Reporting.WinForms;
 
 namespace XenAdmin.Dialogs.Wlb
 {
-    public delegate void CustomRefreshEventHandler(object sender, System.EventArgs e);
-
     public partial class WorkloadReports : XenDialogBase
     {
         #region Private Variables
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private IEnumerable<Host> _hosts;
         private Pool _pool;
         private WlbReportSubscriptionCollection _subscriptionCollection;
-        private string _reportFile;
+        private readonly string _reportFile = string.Empty;
         private bool _runReport;
         private bool _isCreedenceOrLater;
+        private XmlNodeList _currentNodes;
 
         #endregion
 
@@ -91,75 +88,72 @@ namespace XenAdmin.Dialogs.Wlb
 
         #region Constructor
 
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public WorkloadReports() : this(string.Empty, false) {}
+        public WorkloadReports()
+        {
+            InitializeComponent();
+
+            splitContainerLeftPane.Panel2Collapsed = true;
+            lblSubscriptions.Visible = false;
+            treeViewSubscriptionList.Visible = false;
+            wlbReportView1.ButtonSubscribeVisible = false;
+            wlbReportView1.ButtonLaterReportVisible = false;
+            wlbReportView1.Visible = false;
+            subscriptionView1.Visible = false;
+        }
 
         /// <summary>
         /// Overloaded constructor provides access to a specific report upon load
         /// </summary>
         public WorkloadReports(string reportFile, bool run)
+            : this()
         {
-            InitializeComponent();
             _reportFile = reportFile;
             _runReport = run;
         }
 
         #endregion
 
-        internal override string HelpName
-        {
-            get { return "WLBReports"; }
-        }
+        internal override string HelpName => "WLBReports";
 
         #region Private Methods
 
         /// <summary>
         /// Populates the treeview with ReportInfo and SubscriptionInfo nodes
         /// </summary>
-        private void SetTreeViewReportList()
+        private void PopulateTreeViewReportList()
         {
-            bool errorLoading = false;
-
-            // Prep treeview for population
             treeViewReportList.BeginUpdate();
-            treeViewReportList.Nodes.Clear();
-
-            // Set up the image list for the tree
-            this.treeViewReportList.ImageList = CreateReportImageList();
-
-            //_subscriptionCollection = null;
 
             try
             {
-                // retrieve subscription
-                SetSubscriptionCollection();
+                treeViewReportList.Nodes.Clear();
+                treeViewReportList.ImageList = CreateReportImageList();
 
-                wlbReportView1.ButtonSubscribeVisible = false;
-                wlbReportView1.ButtonLaterReportVisible = false;
-                wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
-                PopulateTreeView();
-            }
-            catch (XenAdmin.CancelledException xc)
-            {
-                // User cancelled entering credentials when prompted by action
-                log.Debug(xc);
-                errorLoading = true;
-            }
-            catch (Exception ex)
-            {
-                log.Debug(ex, ex);
-                using (var dlg = new ErrorDialog(Messages.WLBREPORT_REPORT_CONFIG_ERROR))
-                    dlg.ShowDialog(this);
-                errorLoading = true;
+                if (_currentNodes == null || _currentNodes.Count == 0)
+                    return;
+
+                TreeNode nodeToSelect = null;
+                
+                for (int i = 0; i < _currentNodes.Count; i++)
+                {
+                    TreeNode currentReportTreeNode = GetReportTreeNode(_currentNodes[i]);
+                    treeViewReportList.Nodes.Add(currentReportTreeNode);
+
+                    if (nodeToSelect != null)
+                        continue;
+
+                    string currentReportFile = ((WlbReportInfo)currentReportTreeNode.Tag).ReportFile.Split('.')[0];
+                        
+                    if (string.Compare(currentReportFile, _reportFile, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
+                        nodeToSelect = currentReportTreeNode;
+                }
+
+                treeViewReportList.Sort();
+                treeViewReportList.SelectedNode = nodeToSelect ?? treeViewReportList.Nodes[0];
             }
             finally
             {
-                if ((treeViewReportList != null) && (!errorLoading))
-                    treeViewReportList.EndUpdate();
-                else
-                    this.Close();
+                treeViewReportList.EndUpdate();
             }
         }
 
@@ -167,29 +161,33 @@ namespace XenAdmin.Dialogs.Wlb
         /// <summary>
         /// Populates the subscription list with items of type WlbReportSubscription
         /// </summary>
-        private void SetTreeViewSubscriptionList()
+        private void PopulateTreeViewSubscriptionList()
         {
-            // Prep treeview for population
             treeViewSubscriptionList.BeginUpdate();
-            treeViewSubscriptionList.Nodes.Clear();
 
-            treeViewSubscriptionList.ImageList = CreateReportImageList();
-
-            if (_subscriptionCollection != null)
+            try
             {
-                this.lblSubscriptions.Visible = true;
-                this.treeViewSubscriptionList.Visible = true;
-                foreach (string key in _subscriptionCollection.Keys)
+                treeViewSubscriptionList.Nodes.Clear();
+                treeViewSubscriptionList.ImageList = CreateReportImageList();
+
+                if (_subscriptionCollection != null)
                 {
-                    treeViewSubscriptionList.Nodes.Add(GetReportSubscriptionTreeNode(_subscriptionCollection[key]));
+                    lblSubscriptions.Visible = true;
+                    treeViewSubscriptionList.Visible = true;
+
+                    foreach (string key in _subscriptionCollection.Keys)
+                        treeViewSubscriptionList.Nodes.Add(GetReportSubscriptionTreeNode(_subscriptionCollection[key]));
+                }
+                else
+                {
+                    lblSubscriptions.Visible = false;
+                    treeViewSubscriptionList.Visible = false;
                 }
             }
-            else
+            finally
             {
-                this.lblSubscriptions.Visible = false;
-                this.treeViewSubscriptionList.Visible = false;
+                treeViewSubscriptionList.EndUpdate();
             }
-            treeViewSubscriptionList.EndUpdate();
         }
 
 
@@ -374,110 +372,38 @@ namespace XenAdmin.Dialogs.Wlb
         /// <summary>
         /// Retrieve subscriptions and set _subscriptionCollection
         /// </summary>
-        private void SetSubscriptionCollection()
+        private void RetrieveSubscriptionCollection()
         {
             _subscriptionCollection = null;
 
-            WlbPoolConfiguration poolConfiguration;
             RetrieveWlbConfigurationAction action = new RetrieveWlbConfigurationAction(_pool);
-            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-            {
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(this);    
-            }
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks) {ShowCancel = true})
+                dialog.ShowDialog(this);
 
             if (action.Succeeded)
             {
-                poolConfiguration = new WlbPoolConfiguration(action.WlbConfiguration);
-
+                var poolConfiguration = new WlbPoolConfiguration(action.WlbConfiguration);
                 _isCreedenceOrLater = poolConfiguration.IsCreedenceOrLater;
-
-                this.splitContainerLeftPane.Panel2Collapsed = true;
-                this.wlbReportView1.ButtonSubscribeVisible = false;
             }
             else
             {
-                throw (action.Exception);
+                Close();
             }
         }
 
 
         /// <summary>
-        /// Populate report treeView on initial load report window
-        /// </summary>
-        private void PopulateTreeView()
-        {
-
-            XmlNodeList currentNodes;
-            XmlDocument xmlReportDoc = new XmlDocument();
-
-            // Attempt to get the latest set of reports from the WLB server.  WLB version 2.0
-            // and beyond will respond to this.
-            xmlReportDoc = GetServerReportsConfig();
-
-            // No report definitons on WLB server, obtain them locally (the old way)
-            if ((!xmlReportDoc.HasChildNodes) || (!xmlReportDoc.DocumentElement.HasChildNodes))
-                xmlReportDoc = GetLocalReportsConfig();
-
-            // Get each of the reports from the config and load them into combo box
-            currentNodes = xmlReportDoc.SelectNodes(@"Reports/Report");
-
-            // pupulate treeNode
-            for (int i = 0; i < currentNodes.Count; i++)
-            {
-                // Adds the report node
-                TreeNode currentReportTreeNode = GetReportTreeNode(currentNodes[i]);
-                treeViewReportList.Nodes.Add(currentReportTreeNode);
-
-                // Force to highlight the proper report treeNode if WLBReportWindow is called from WLB tab
-                if (!String.IsNullOrEmpty(_reportFile))
-                {
-                    string currentReportFile = ((WlbReportInfo)currentReportTreeNode.Tag).ReportFile.Split('.')[0];
-                    if (String.Compare(currentReportFile, _reportFile, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
-                    {
-                        treeViewReportList.SelectedNode = currentReportTreeNode;
-                        _reportFile = String.Empty;
-                    }
-                }
-
-            }
-
-            treeViewReportList.Sort();
-        }
-
-
-        /// <summary>
-        /// Obtains report configuration from local report.xml definition
-        /// This method is only utilized when WLB server is version 1.0 and 1.1.  
-        /// Subsequent versions utilize GetReportConfig(XmlDocument)
-        /// </summary>
-        /// <returns></returns>
-        private XmlDocument GetLocalReportsConfig()
-        {
-            XmlDocument xmlReportsDoc = new XmlDocument();
-
-            // Load up report info from XML file
-            xmlReportsDoc.Load(String.Format(@"{0}\{1}", Application.StartupPath.ToString(), "reports.xml"));
-
-            return xmlReportsDoc;
-
-        }
-
-
-        /// <summary>
-        /// Invokes and executes a call to the Kirkwood database via Xapi 
+        /// Attempts to get the latest set of reports from the WLB server version 2.0
+        /// and beyond (it invokes and executes a call to the Kirkwood database via Xapi 
         /// to obtain report configuration data including the actual
-        /// rdlc report definitions
+        /// rdlc report definitions).
+        /// If there are no report definitions on WLB server, it obtains them
+        /// from local XML file (the old way).
         /// </summary>
-        /// <returns>Report definition list XML document</returns>
-        private XmlDocument GetServerReportsConfig()
+        private XmlNodeList GetReportsConfig()
         {
-
-            string returnValue;
-            XmlDocument xmlReportsDoc = new XmlDocument();
             string reportName = "get_report_definitions";
 
-            // Parameters
             Dictionary<string, string> parms = new Dictionary<string, string>();
             parms.Add("LocaleCode", Program.CurrentLanguage);
             if (_isCreedenceOrLater)
@@ -496,30 +422,35 @@ namespace XenAdmin.Dialogs.Wlb
             using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dlg.ShowDialog();
 
-            returnValue = action.Result;
+            string returnValue = action.Result;
+            XmlDocument xmlReportsDoc = new XmlDocument();
 
-            if ((action.Succeeded) && (!String.IsNullOrEmpty(returnValue)))
+            if (action.Succeeded && !string.IsNullOrEmpty(returnValue))
             {
                 try
                 {
                     xmlReportsDoc.LoadXml(returnValue);
-
-                    string rdlcText;
-
-                    foreach (XmlNode currentRdlc in xmlReportsDoc.SelectNodes(@"Reports/Report/Rdlc"))
-                    {
-                        rdlcText = currentRdlc.InnerText;
-                        currentRdlc.InnerText = String.Empty;
-                        currentRdlc.InnerText = rdlcText;
-                    }
                 }
-                catch (Exception)
+                catch
                 {
-                    xmlReportsDoc = null;
+                    //ignore
                 }
             }
 
-            return xmlReportsDoc;
+            if (!xmlReportsDoc.HasChildNodes || xmlReportsDoc.DocumentElement == null ||
+                !xmlReportsDoc.DocumentElement.HasChildNodes)
+            {
+                try
+                {
+                    xmlReportsDoc.Load($@"{Application.StartupPath}\{"reports.xml"}");
+                }
+                catch
+                {
+                    //ignore
+                }
+            }
+
+            return xmlReportsDoc.SelectNodes(@"Reports/Report");
         }
 
         // To enhance pool audit trail report, WLB server updates RDLC and would send user and object lists.
@@ -609,113 +540,62 @@ namespace XenAdmin.Dialogs.Wlb
         /// <returns></returns>
         private TreeNode GetReportTreeNode(XmlNode currentNode)
         {
-            string nodeFileName;
-            string nodeNameLabel;
-            string nodeReportDefinition;
-            bool nodeDisplayHosts;
-            bool nodeDisplayFilter;
-            bool nodeDisplayUsers;
-            bool nodeDisplayAuditObjects;
-            OrderedDictionary nodeParamDict;
-            WlbReportInfo reportInfo;
-            TreeNode reportTreeNode;
-
-            nodeFileName = currentNode.Attributes["File"].Value;
-
-            XmlElement queryParametersXmlElement = GetCustomXmlElement(currentNode, "Creedence", "QueryParameters");
-
             // If the report definition node doesn't exist (old WLB version), load the definition from the 
-            // local file system.  Otherwise, the definition is present in the config from the WLB server
-            if (currentNode.SelectSingleNode(@"Rdlc") == null)
+            // local file system. Otherwise, the definition is present in the config from the WLB server
+
+            string nodeReportDefinition;
+            var rdlc = currentNode.SelectSingleNode(@"Rdlc");
+            var nodeFileName = currentNode.Attributes?["File"].Value;
+
+            if (rdlc == null)
             {
                 XmlDocument xmlReportDefinition = new XmlDocument();
-                xmlReportDefinition.Load(String.Format(@"{0}\{1}", Application.StartupPath.ToString(), nodeFileName));
-                nodeReportDefinition = xmlReportDefinition.OuterXml.ToString();
+                xmlReportDefinition.Load($@"{Application.StartupPath}\{nodeFileName}");
+                nodeReportDefinition = xmlReportDefinition.OuterXml;
             }
             else
             {
-                nodeReportDefinition = currentNode.SelectSingleNode(@"Rdlc").InnerText;
+                nodeReportDefinition = rdlc.InnerText;
             }
 
+            string nodeNameLabel = string.Empty;
 
-            // If the report definition was obtained from the WLB server, use the localized name provided.
-            // Otherwise, get the label locally.  If all else fails, just use NameLabel attribute from 
-            // xml config 
-            if (currentNode.Attributes["Name"] != null)
-            {
+            if (currentNode.Attributes?["Name"] != null)
                 nodeNameLabel = currentNode.Attributes["Name"].Value;
-            }
-            else if (Messages.ResourceManager.GetObject(currentNode.Attributes["NameLabel"].Value) != null)
+            else if (currentNode.Attributes?["NameLabel"].Value != null)
             {
-                nodeNameLabel = Messages.ResourceManager.GetObject(currentNode.Attributes["NameLabel"].Value).ToString();
-            }
-            else
-            {
-                nodeNameLabel = currentNode.Attributes["NameLabel"].Value;
+                var obj = Messages.ResourceManager.GetObject(currentNode.Attributes?["NameLabel"].Value);
+                if (obj != null)
+                    nodeNameLabel = obj.ToString();
             }
 
+            var nodeDisplayFilter = currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='Filter']") != null;
 
-            // Boolean variuable to determine the display the Filter drop down menu?
-            if (currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='Filter']") == null)
+            var nodeDisplayHosts = currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='HostID']") != null;
+
+            var nodeDisplayUsers = currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='AuditUser']") != null;
+
+            var nodeDisplayAuditObjects = currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='AuditObject']") != null;
+
+            XmlElement queryParametersXmlElement = GetCustomXmlElement(currentNode, "Creedence", "QueryParameters");
+            var nodeParamDict = GetSQLQueryParamNames(currentNode, queryParametersXmlElement);
+
+            var reportInfo = new WlbReportInfo(nodeNameLabel,
+                nodeFileName,
+                nodeReportDefinition,
+                nodeDisplayHosts,
+                nodeDisplayFilter,
+                nodeDisplayUsers,
+                nodeDisplayAuditObjects,
+                nodeParamDict);
+
+            return new TreeNode
             {
-                nodeDisplayFilter = false;
-            }
-            else
-            {
-                nodeDisplayFilter = true;
-            }
-
-
-            // Boolean variuable to determine the display the Host drop down menu?
-            if (currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='HostID']") == null)
-            {
-                nodeDisplayHosts = false;
-            }
-            else
-            {
-                nodeDisplayHosts = true;
-            }
-
-            // Boolean variable to determine the display of the User drop down menu
-            if (currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='AuditUser']") == null)
-            {
-                nodeDisplayUsers = false;
-            }
-            else
-            {
-                nodeDisplayUsers = true;
-            }
-
-            // Boolean variable to determine the display of the Object drop down menu
-            if (currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='AuditObject']") == null)
-            {
-                nodeDisplayAuditObjects = false;
-            }
-            else
-            {
-                nodeDisplayAuditObjects = true;
-            }
-
-            // Get a list of query params
-            nodeParamDict = GetSQLQueryParamNames(currentNode, queryParametersXmlElement);
-
-            // Create a report node and add it to the treeview for the current report
-            reportInfo = new WlbReportInfo(nodeNameLabel,
-                                           nodeFileName,
-                                           nodeReportDefinition,
-                                           nodeDisplayHosts,
-                                           nodeDisplayFilter,
-                                           nodeDisplayUsers,
-                                           nodeDisplayAuditObjects,
-                                           nodeParamDict);
-
-            reportTreeNode = new TreeNode();
-            reportTreeNode.Tag = reportInfo;
-            reportTreeNode.Text = nodeNameLabel;
-            reportTreeNode.ImageIndex = 0;
-            reportTreeNode.SelectedImageIndex = 0;
-
-            return reportTreeNode;
+                Tag = reportInfo,
+                Text = nodeNameLabel,
+                ImageIndex = 0,
+                SelectedImageIndex = 0
+            };
         }
 
 
@@ -821,11 +701,13 @@ namespace XenAdmin.Dialogs.Wlb
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ReportForm_Load(object sender, EventArgs e)
+        private void WorkloadReports_Load(object sender, EventArgs e)
         {
-            // Add event handlers for creating/editing/deleting subscription
-            this.subscriptionView1.OnChangeOK += new CustomRefreshEventHandler(OnChangeOK_Refresh);
-            this.wlbReportView1.OnChangeOK += new CustomRefreshEventHandler(OnChangeOK_Refresh);
+            subscriptionView1.OnChangeOK += OnChangeOK_Refresh;
+            wlbReportView1.OnChangeOK += OnChangeOK_Refresh;
+
+            RetrieveSubscriptionCollection();
+            _currentNodes = GetReportsConfig();
         }
 
 
@@ -835,17 +717,18 @@ namespace XenAdmin.Dialogs.Wlb
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void WlbReportWindow_Shown(object sender, EventArgs e)
+        private void WorkloadReports_Shown(object sender, EventArgs e)
         {
-            wlbReportView1.Pool = _pool;
             subscriptionView1.Pool = _pool;
+            wlbReportView1.Pool = _pool;
             wlbReportView1.Hosts = _hosts;
+            wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
 
             // Populate report treeview with report and subscription on the top of left panel
-            SetTreeViewReportList();
+            PopulateTreeViewReportList();
 
             // Populate subscription treeview with subscription on the bottom of the left panel
-            SetTreeViewSubscriptionList();
+            PopulateTreeViewSubscriptionList();
         }
 
 
@@ -856,99 +739,56 @@ namespace XenAdmin.Dialogs.Wlb
         /// <param name="e"></param>
         private void OnChangeOK_Refresh(object sender, EventArgs e)
         {
-            try
+            RetrieveSubscriptionCollection();
+
+            if (_subscriptionCollection != null)
             {
-                // set _subscriptionCollection
-                SetSubscriptionCollection();
+                // Update subscription treeView must be before updating report treeView
+                UpdateSubscriptionTreeView();
+                UpdateReportTreeView();
 
-                // Start update treeViews
-                if (_subscriptionCollection != null)
-                {
-                    // Update subscription treeView must be before updating report treeView
-                    this.UpdateSubscriptionTreeView();
-
-                    // Update report treeView
-                    this.UpdateReportTreeView();
-
-                    // Rebuild panel if ReportSubscriptionView is visible
-                    if (sender is WlbReportSubscriptionView)
-                    {
-                        this.subscriptionView1.BuildPanel();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Debug(ex, ex);
-                using (var dlg = new ErrorDialog(Messages.WLBREPORT_REPORT_CONFIG_ERROR))
-                    dlg.ShowDialog(this);
-                this.Close();
+                if (sender is WlbReportSubscriptionView)
+                    subscriptionView1.RefreshSubscriptionView();
             }
         }
 
 
-        /// <summary>
-        /// Event handler addresses various UI nuances depending on the type the node selected in the tree:
-        ///     - Hides/displays the ReportView control
-        ///     - Hides/displays host dropdown menu in ReportView control (and it's label)
-        ///     - Disables/enables Run Report button in ReportView control
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void treeViewReportList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (this.treeViewReportList.SelectedNode.Tag != null)
+            if (treeViewReportList.SelectedNode.Tag is WlbReportInfo report)
             {
-                // Display report view if a report node gets selected
-                if (this.treeViewReportList.SelectedNode.Tag.GetType() == typeof(WlbReportInfo))
+                subscriptionView1.Visible = false;
+                wlbReportView1.RefreshReportViewer(report);
+                wlbReportView1.Visible = true;
+
+                if (_runReport)
                 {
-                    // Reset reportView and disable subscriptionView
-                    this.subscriptionView1.Visible = false;
-                    this.wlbReportView1.SynchReportViewer((WlbReportInfo)treeViewReportList.SelectedNode.Tag);
-
-                    // Run report if necessary
-                    if (_runReport)
-                    {
-                        this.wlbReportView1.ExecuteReport();
-
-                        // Reset _runReport flag back to false
-                        _runReport = false;
-                    }
+                    wlbReportView1.ExecuteReport();
+                    _runReport = false;
                 }
-                else
-                {
-                    // Display the subscription view if it's that type of node
-                    if (this.treeViewReportList.SelectedNode.Tag.GetType() == typeof(WlbReportSubscription))
-                    {
-                        // Reset subscriptionView and disable reportView
-                        this.wlbReportView1.Visible = false;
-                        this.subscriptionView1.ResetSubscriptionView((WlbReportSubscription)treeViewReportList.SelectedNode.Tag);
-                    }
-                }
-
-                // Deselect treeViewsubscriptionList
-                this.treeViewSubscriptionList.SelectedNode = null;
             }
+            else if (treeViewReportList.SelectedNode.Tag is WlbReportSubscription subscription)
+            {
+                wlbReportView1.Visible = false;
+                subscriptionView1.RefreshSubscriptionView(subscription);
+                subscriptionView1.Visible = true;
+            }
+            else
+                return;
+
+            treeViewSubscriptionList.SelectedNode = null;
         }
 
 
-        /// <summary>
-        /// Event handler for the the Subscriptions list box. Displays/Hides the Report View control 
-        /// and the Subscription View control
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void treeViewSubscriptionList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // Display the subscription view if it's that type of node
-            if (treeViewSubscriptionList.SelectedNode.Tag != null)
+            if (treeViewSubscriptionList.SelectedNode.Tag is WlbReportSubscription subscription)
             {
-                // Reset the reportview control and hide it (if it isn't already)
-                this.wlbReportView1.Visible = false;
-                this.subscriptionView1.ResetSubscriptionView((WlbReportSubscription)treeViewSubscriptionList.SelectedNode.Tag);
+                wlbReportView1.Visible = false;
+                subscriptionView1.RefreshSubscriptionView(subscription);
+                subscriptionView1.Visible = true;
 
-                // Deselect treeViewReportList
-                this.treeViewReportList.SelectedNode = null;
+                treeViewReportList.SelectedNode = null;
             }
         }
 

@@ -45,7 +45,7 @@ namespace XenAdmin.Controls.Wlb
     {
         #region Variables
 
-        public event CustomRefreshEventHandler OnChangeOK;
+        public event EventHandler OnChangeOK;
         public event EventHandler Close;
         public event EventHandler PoolConnectionLost;
 
@@ -76,7 +76,7 @@ namespace XenAdmin.Controls.Wlb
 
         #region Public Methods
 
-        public void BuildPanel()
+        private void BuildPanel()
         {
             // Subscription section
             if (_subscription != null)
@@ -158,11 +158,11 @@ namespace XenAdmin.Controls.Wlb
             return range;
         }
 
-        public void ResetSubscriptionView(WlbReportSubscription subscription)
+        public void RefreshSubscriptionView(WlbReportSubscription subscription = null)
         {
-            this.ReportSubscription = subscription;
-            this.BuildPanel();
-            this.Visible = true;
+            if (subscription != null)
+                ReportSubscription = subscription;
+            BuildPanel();
         }
         
         #endregion

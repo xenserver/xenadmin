@@ -13904,9 +13904,6 @@ Schedule:
   <data name="WLBREPORT_POOL_HEALTH_HISTORY" xml:space="preserve">
     <value>Pool Health History</value>
   </data>
-  <data name="WLBREPORT_REPORT_CONFIG_ERROR" xml:space="preserve">
-    <value>An error occurred when attempting to open the Workload Balancing report window.  Please check the report configuration file.</value>
-  </data>
   <data name="WLBREPORT_VM_MOTION_HISTORY" xml:space="preserve">
     <value>Virtual Machine Motion History</value>
   </data>

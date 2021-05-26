@@ -113,7 +113,6 @@
             // 
             resources.ApplyResources(this.wlbReportView1, "wlbReportView1");
             this.wlbReportView1.Hosts = null;
-            this.wlbReportView1.MinimumSize = new System.Drawing.Size(350, 350);
             this.wlbReportView1.IsCreedenceOrLater = false;
             this.wlbReportView1.Name = "wlbReportView1";
             this.wlbReportView1.Pool = null;
@@ -128,7 +127,6 @@
             // 
             resources.ApplyResources(this.subscriptionView1, "subscriptionView1");
             this.subscriptionView1.BackColor = System.Drawing.SystemColors.Control;
-            this.subscriptionView1.MinimumSize = new System.Drawing.Size(671, 278);
             this.subscriptionView1.Name = "subscriptionView1";
             this.subscriptionView1.Pool = null;
             this.subscriptionView1.Close += new System.EventHandler(this.wlbReportView1_Close);
@@ -152,10 +150,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.HelpButton = true;
             this.Name = "WorkloadReports";
-            this.Load += new System.EventHandler(this.ReportForm_Load);
-            this.Shown += new System.EventHandler(this.WlbReportWindow_Shown);
+            this.Load += new System.EventHandler(this.WorkloadReports_Load);
+            this.Shown += new System.EventHandler(this.WorkloadReports_Shown);
             this.splitContainerLeftPane.Panel1.ResumeLayout(false);
             this.splitContainerLeftPane.Panel1.PerformLayout();
             this.splitContainerLeftPane.Panel2.ResumeLayout(false);
