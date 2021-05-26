@@ -34,6 +34,7 @@ using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.Wlb;
 using XenAdmin.Wlb;
 
 namespace XenAdmin.Commands

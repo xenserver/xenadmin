@@ -1,4 +1,4 @@
-﻿namespace XenAdmin
+﻿namespace XenAdmin.Dialogs.Wlb
 {
     partial class WorkloadReports
     {

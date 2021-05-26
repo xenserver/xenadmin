@@ -199,7 +199,7 @@ namespace XenAdmin.Controls.Wlb
                     //DateTime localExecuteTime;
                     //WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
                     WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
-                    string toolTipText = string.Format("Change to {0} mode at {1} on {2}", WlbScheduledTask.GetTaskOptMode(task), WlbScheduledTask.GetTaskExecuteTime(localExecuteTime), WlbScheduledTask.DaysOfWeekL10N(localDaysOfWeek));
+                    string toolTipText = string.Format("Change to {0} mode at {1} on {2}", WlbScheduledTask.GetTaskOptMode(task), GetTaskExecuteTime(localExecuteTime), WlbScheduledTask.DaysOfWeekL10N(localDaysOfWeek));
                     
                     TriggerPoint triggerPoint = new TriggerPoint();
                     triggerPoint.Day = WlbScheduledTask.ConvertFromWlbTaskDayOfWeek(localDaysOfWeek);
@@ -496,9 +496,9 @@ namespace XenAdmin.Controls.Wlb
             return returnStr;
         }
 
-        private static string GetTaskExecuteTime(DateTime TaskExecuteTime)
+        public static string GetTaskExecuteTime(DateTime time)
         {
-            return HelpersGUI.DateTimeToString(TaskExecuteTime, Messages.DATEFORMAT_HM, true);
+            return HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true);
         }
 
 

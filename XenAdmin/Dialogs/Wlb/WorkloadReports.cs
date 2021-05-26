@@ -38,7 +38,6 @@ using System.Web;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
-using XenAdmin.Dialogs;
 using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
 using XenAdmin.Controls.Wlb;
@@ -46,7 +45,7 @@ using XenAdmin.Controls.Wlb;
 using Microsoft.Reporting.WinForms;
 
 
-namespace XenAdmin
+namespace XenAdmin.Dialogs.Wlb
 {
     public delegate void CustomRefreshEventHandler(object sender, System.EventArgs e);
 
