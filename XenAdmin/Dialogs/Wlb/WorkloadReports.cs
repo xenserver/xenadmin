@@ -62,12 +62,6 @@ namespace XenAdmin.Dialogs.Wlb
         private bool _runReport;
         private bool _isCreedenceOrLater;
 
-        private List<string> _midnightRideReports = new List<string>(new [] 
-                                                                    { 
-                                                                        Messages.WLBREPORT_POOL_AUDIT_HISTORY,
-                                                                        Messages.WLBREPORT_POOL_OPTIMIZATION_HISTORY
-                                                                    });
-
         #endregion
 
 
@@ -562,13 +556,6 @@ namespace XenAdmin.Dialogs.Wlb
                     return null;
                 }
             }
-        }
-
-        private static XmlElement GetCustomXmlElement(XmlNode root)
-        {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml("<root>" + root.InnerXml + "</root>");
-            return GetCustomXmlElement(xmlDoc.DocumentElement);
         }
 
         private static XmlElement GetCustomXmlElement(XmlElement root, string version)
