@@ -34,7 +34,7 @@ using System.Xml;
 using XenAdmin.XenSearch;
 using XenAPI;
 
-namespace XenAdmin.TestResources
+namespace XenAdminTests.SearchTests
 {
     public class XenSearchQueryTest
     {

@@ -4115,7 +4115,6 @@
       <DependentUpon>WlbPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TestResources\TestResource.cs" />
-    <Compile Include="TestResources\XenSearchQueryTest.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="UpdateManager.DelayCalculator.cs">
       <SubType>Code</SubType>
@@ -5943,9 +5942,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.zh-CN.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TestResources\api-version.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BallooningWizard.ja.resx">
       <DependentUpon>BallooningWizard.cs</DependentUpon>
