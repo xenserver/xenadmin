@@ -217,7 +217,7 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPAC
 
 cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.zip *.pdb
 
-sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi.checksum
-sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip.checksum
+sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi.checksum
+sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip.checksum
 
 set +u
