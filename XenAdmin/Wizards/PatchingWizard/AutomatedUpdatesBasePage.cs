@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using XenAdmin.Controls;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;

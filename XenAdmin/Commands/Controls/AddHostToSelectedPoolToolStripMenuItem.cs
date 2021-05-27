@@ -36,7 +36,6 @@ using XenAdmin.Network;
 using XenAdmin.Core;
 using System.Windows.Forms;
 using XenAPI;
-using XenAdmin.Properties;
 
 
 namespace XenAdmin.Commands

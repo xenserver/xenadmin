@@ -74,7 +74,7 @@ namespace XenAdmin.Dialogs
 
         protected SR SelectedSR => srPicker1.SR;
 
-        protected virtual SrPicker.SRPickerType SrPickerType => SrPicker.SRPickerType.MoveOrCopy;
+        protected virtual SrPicker.SRPickerType SrPickerType => SrPicker.SRPickerType.Move;
 
         private void UpdateButtons()
         {

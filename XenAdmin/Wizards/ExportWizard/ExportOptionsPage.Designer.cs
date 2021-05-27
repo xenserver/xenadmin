@@ -32,17 +32,6 @@
             this.m_checkBoxEncrypt = new System.Windows.Forms.CheckBox();
             this.m_checkBoxManifest = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.m_checkBoxCompressFiles = new System.Windows.Forms.CheckBox();
-            this.m_checkBoxCreateOVA = new System.Windows.Forms.CheckBox();
-            this.sectionHeaderLabel3 = new XenAdmin.Controls.SectionHeaderLabel();
-            this.m_tableLayoutPanelEncryption = new System.Windows.Forms.TableLayoutPanel();
-            this.m_labelPwd = new System.Windows.Forms.Label();
-            this.m_textBoxPwd = new System.Windows.Forms.TextBox();
-            this.m_textBoxReEnterPwd = new System.Windows.Forms.TextBox();
-            this.m_labelReEnterPwd = new System.Windows.Forms.Label();
-            this.m_pictureBoxTick = new System.Windows.Forms.PictureBox();
-            this.m_labelStrength = new System.Windows.Forms.Label();
-            this.sectionHeaderLabel2 = new XenAdmin.Controls.SectionHeaderLabel();
             this.sectionHeaderLabel1 = new XenAdmin.Controls.SectionHeaderLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.m_tableLayoutPanelManifest = new System.Windows.Forms.TableLayoutPanel();
@@ -55,12 +44,25 @@
             this.m_ctrlErrorCert = new XenAdmin.Controls.Common.PasswordFailure();
             this.m_buttonValidate = new System.Windows.Forms.Button();
             this.m_pictureBoxTickValidate = new System.Windows.Forms.PictureBox();
+            this.sectionHeaderLabel2 = new XenAdmin.Controls.SectionHeaderLabel();
+            this.m_tableLayoutPanelEncryption = new System.Windows.Forms.TableLayoutPanel();
+            this.m_labelPwd = new System.Windows.Forms.Label();
+            this.m_textBoxPwd = new System.Windows.Forms.TextBox();
+            this.m_textBoxReEnterPwd = new System.Windows.Forms.TextBox();
+            this.m_labelReEnterPwd = new System.Windows.Forms.Label();
+            this.m_pictureBoxTick = new System.Windows.Forms.PictureBox();
+            this.m_labelStrength = new System.Windows.Forms.Label();
+            this.sectionHeaderLabel3 = new XenAdmin.Controls.SectionHeaderLabel();
+            this.m_checkBoxCreateOVA = new System.Windows.Forms.CheckBox();
+            this.m_checkBoxCompressFiles = new System.Windows.Forms.CheckBox();
+            this.labelGzipOva = new System.Windows.Forms.Label();
+            this.labelGzipOvfDisks = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
-            this.m_tableLayoutPanelEncryption.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.m_pictureBoxTick)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.m_tableLayoutPanelManifest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_pictureBoxTickValidate)).BeginInit();
+            this.m_tableLayoutPanelEncryption.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.m_pictureBoxTick)).BeginInit();
             this.SuspendLayout();
             // 
             // m_checkBoxEncrypt
@@ -81,90 +83,16 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.m_checkBoxCompressFiles, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.m_checkBoxCreateOVA, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabel3, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.m_tableLayoutPanelEncryption, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabel2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m_tableLayoutPanelEncryption, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabel3, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.m_checkBoxCreateOVA, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.m_checkBoxCompressFiles, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelGzipOva, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelGzipOvfDisks, 0, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // m_checkBoxCompressFiles
-            // 
-            resources.ApplyResources(this.m_checkBoxCompressFiles, "m_checkBoxCompressFiles");
-            this.m_checkBoxCompressFiles.Name = "m_checkBoxCompressFiles";
-            this.m_checkBoxCompressFiles.UseVisualStyleBackColor = true;
-            this.m_checkBoxCompressFiles.CheckedChanged += new System.EventHandler(this.m_checkBoxCompressFiles_CheckedChanged);
-            // 
-            // m_checkBoxCreateOVA
-            // 
-            resources.ApplyResources(this.m_checkBoxCreateOVA, "m_checkBoxCreateOVA");
-            this.m_checkBoxCreateOVA.Name = "m_checkBoxCreateOVA";
-            this.m_checkBoxCreateOVA.UseVisualStyleBackColor = true;
-            this.m_checkBoxCreateOVA.CheckedChanged += new System.EventHandler(this.m_checkBoxCreateOVA_CheckedChanged);
-            // 
-            // sectionHeaderLabel3
-            // 
-            resources.ApplyResources(this.sectionHeaderLabel3, "sectionHeaderLabel3");
-            this.sectionHeaderLabel3.LineColor = System.Drawing.SystemColors.Window;
-            this.sectionHeaderLabel3.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionHeaderLabel3.Name = "sectionHeaderLabel3";
-            // 
-            // m_tableLayoutPanelEncryption
-            // 
-            resources.ApplyResources(this.m_tableLayoutPanelEncryption, "m_tableLayoutPanelEncryption");
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_labelPwd, 1, 1);
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_textBoxPwd, 2, 1);
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_textBoxReEnterPwd, 2, 2);
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_labelReEnterPwd, 1, 2);
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_pictureBoxTick, 3, 2);
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_labelStrength, 3, 1);
-            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_checkBoxEncrypt, 0, 0);
-            this.m_tableLayoutPanelEncryption.Name = "m_tableLayoutPanelEncryption";
-            // 
-            // m_labelPwd
-            // 
-            resources.ApplyResources(this.m_labelPwd, "m_labelPwd");
-            this.m_labelPwd.Name = "m_labelPwd";
-            // 
-            // m_textBoxPwd
-            // 
-            resources.ApplyResources(this.m_textBoxPwd, "m_textBoxPwd");
-            this.m_textBoxPwd.Name = "m_textBoxPwd";
-            this.m_textBoxPwd.UseSystemPasswordChar = true;
-            this.m_textBoxPwd.TextChanged += new System.EventHandler(this.m_textBoxPwd_TextChanged);
-            // 
-            // m_textBoxReEnterPwd
-            // 
-            resources.ApplyResources(this.m_textBoxReEnterPwd, "m_textBoxReEnterPwd");
-            this.m_textBoxReEnterPwd.Name = "m_textBoxReEnterPwd";
-            this.m_textBoxReEnterPwd.UseSystemPasswordChar = true;
-            this.m_textBoxReEnterPwd.TextChanged += new System.EventHandler(this.m_textBoxReEnterPwd_TextChanged);
-            // 
-            // m_labelReEnterPwd
-            // 
-            resources.ApplyResources(this.m_labelReEnterPwd, "m_labelReEnterPwd");
-            this.m_labelReEnterPwd.Name = "m_labelReEnterPwd";
-            // 
-            // m_pictureBoxTick
-            // 
-            resources.ApplyResources(this.m_pictureBoxTick, "m_pictureBoxTick");
-            this.m_pictureBoxTick.Image = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
-            this.m_pictureBoxTick.Name = "m_pictureBoxTick";
-            this.m_pictureBoxTick.TabStop = false;
-            // 
-            // m_labelStrength
-            // 
-            resources.ApplyResources(this.m_labelStrength, "m_labelStrength");
-            this.m_labelStrength.Name = "m_labelStrength";
-            // 
-            // sectionHeaderLabel2
-            // 
-            resources.ApplyResources(this.sectionHeaderLabel2, "sectionHeaderLabel2");
-            this.sectionHeaderLabel2.LineColor = System.Drawing.SystemColors.Window;
-            this.sectionHeaderLabel2.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
-            this.sectionHeaderLabel2.Name = "sectionHeaderLabel2";
             // 
             // sectionHeaderLabel1
             // 
@@ -183,15 +111,15 @@
             // m_tableLayoutPanelManifest
             // 
             resources.ApplyResources(this.m_tableLayoutPanelManifest, "m_tableLayoutPanelManifest");
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_labelCertificate, 2, 1);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_labelPrivateKeyPwd, 2, 2);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_checkBoxSign, 1, 0);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonBrowseCert, 4, 1);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_textBoxPrivateKeyPwd, 3, 2);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_labelCertificate, 2, 1);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_textBoxCertificate, 3, 1);
-            this.m_tableLayoutPanelManifest.Controls.Add(this.m_ctrlErrorCert, 3, 3);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonBrowseCert, 4, 1);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_labelPrivateKeyPwd, 2, 2);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_textBoxPrivateKeyPwd, 3, 2);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_buttonValidate, 4, 2);
             this.m_tableLayoutPanelManifest.Controls.Add(this.m_pictureBoxTickValidate, 5, 2);
+            this.m_tableLayoutPanelManifest.Controls.Add(this.m_ctrlErrorCert, 3, 3);
             this.m_tableLayoutPanelManifest.Name = "m_tableLayoutPanelManifest";
             // 
             // m_labelCertificate
@@ -251,6 +179,92 @@
             this.m_pictureBoxTickValidate.Name = "m_pictureBoxTickValidate";
             this.m_pictureBoxTickValidate.TabStop = false;
             // 
+            // sectionHeaderLabel2
+            // 
+            resources.ApplyResources(this.sectionHeaderLabel2, "sectionHeaderLabel2");
+            this.sectionHeaderLabel2.LineColor = System.Drawing.SystemColors.Window;
+            this.sectionHeaderLabel2.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
+            this.sectionHeaderLabel2.Name = "sectionHeaderLabel2";
+            // 
+            // m_tableLayoutPanelEncryption
+            // 
+            resources.ApplyResources(this.m_tableLayoutPanelEncryption, "m_tableLayoutPanelEncryption");
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_checkBoxEncrypt, 0, 0);
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_labelPwd, 1, 1);
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_textBoxPwd, 2, 1);
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_labelStrength, 3, 1);
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_labelReEnterPwd, 1, 2);
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_textBoxReEnterPwd, 2, 2);
+            this.m_tableLayoutPanelEncryption.Controls.Add(this.m_pictureBoxTick, 3, 2);
+            this.m_tableLayoutPanelEncryption.Name = "m_tableLayoutPanelEncryption";
+            // 
+            // m_labelPwd
+            // 
+            resources.ApplyResources(this.m_labelPwd, "m_labelPwd");
+            this.m_labelPwd.Name = "m_labelPwd";
+            // 
+            // m_textBoxPwd
+            // 
+            resources.ApplyResources(this.m_textBoxPwd, "m_textBoxPwd");
+            this.m_textBoxPwd.Name = "m_textBoxPwd";
+            this.m_textBoxPwd.UseSystemPasswordChar = true;
+            this.m_textBoxPwd.TextChanged += new System.EventHandler(this.m_textBoxPwd_TextChanged);
+            // 
+            // m_textBoxReEnterPwd
+            // 
+            resources.ApplyResources(this.m_textBoxReEnterPwd, "m_textBoxReEnterPwd");
+            this.m_textBoxReEnterPwd.Name = "m_textBoxReEnterPwd";
+            this.m_textBoxReEnterPwd.UseSystemPasswordChar = true;
+            this.m_textBoxReEnterPwd.TextChanged += new System.EventHandler(this.m_textBoxReEnterPwd_TextChanged);
+            // 
+            // m_labelReEnterPwd
+            // 
+            resources.ApplyResources(this.m_labelReEnterPwd, "m_labelReEnterPwd");
+            this.m_labelReEnterPwd.Name = "m_labelReEnterPwd";
+            // 
+            // m_pictureBoxTick
+            // 
+            resources.ApplyResources(this.m_pictureBoxTick, "m_pictureBoxTick");
+            this.m_pictureBoxTick.Image = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
+            this.m_pictureBoxTick.Name = "m_pictureBoxTick";
+            this.m_pictureBoxTick.TabStop = false;
+            // 
+            // m_labelStrength
+            // 
+            resources.ApplyResources(this.m_labelStrength, "m_labelStrength");
+            this.m_labelStrength.Name = "m_labelStrength";
+            // 
+            // sectionHeaderLabel3
+            // 
+            resources.ApplyResources(this.sectionHeaderLabel3, "sectionHeaderLabel3");
+            this.sectionHeaderLabel3.LineColor = System.Drawing.SystemColors.Window;
+            this.sectionHeaderLabel3.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
+            this.sectionHeaderLabel3.Name = "sectionHeaderLabel3";
+            // 
+            // m_checkBoxCreateOVA
+            // 
+            resources.ApplyResources(this.m_checkBoxCreateOVA, "m_checkBoxCreateOVA");
+            this.m_checkBoxCreateOVA.Name = "m_checkBoxCreateOVA";
+            this.m_checkBoxCreateOVA.UseVisualStyleBackColor = true;
+            this.m_checkBoxCreateOVA.CheckedChanged += new System.EventHandler(this.m_checkBoxCreateOVA_CheckedChanged);
+            // 
+            // m_checkBoxCompressFiles
+            // 
+            resources.ApplyResources(this.m_checkBoxCompressFiles, "m_checkBoxCompressFiles");
+            this.m_checkBoxCompressFiles.Name = "m_checkBoxCompressFiles";
+            this.m_checkBoxCompressFiles.UseVisualStyleBackColor = true;
+            this.m_checkBoxCompressFiles.CheckedChanged += new System.EventHandler(this.m_checkBoxCompressFiles_CheckedChanged);
+            // 
+            // labelGzipOva
+            // 
+            resources.ApplyResources(this.labelGzipOva, "labelGzipOva");
+            this.labelGzipOva.Name = "labelGzipOva";
+            // 
+            // labelGzipOvfDisks
+            // 
+            resources.ApplyResources(this.labelGzipOvfDisks, "labelGzipOvfDisks");
+            this.labelGzipOvfDisks.Name = "labelGzipOvfDisks";
+            // 
             // ExportOptionsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -259,14 +273,14 @@
             this.Name = "ExportOptionsPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.m_tableLayoutPanelEncryption.ResumeLayout(false);
-            this.m_tableLayoutPanelEncryption.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.m_pictureBoxTick)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.m_tableLayoutPanelManifest.ResumeLayout(false);
             this.m_tableLayoutPanelManifest.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_pictureBoxTickValidate)).EndInit();
+            this.m_tableLayoutPanelEncryption.ResumeLayout(false);
+            this.m_tableLayoutPanelEncryption.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.m_pictureBoxTick)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -299,5 +313,7 @@
 		private XenAdmin.Controls.SectionHeaderLabel sectionHeaderLabel3;
 		private System.Windows.Forms.CheckBox m_checkBoxCreateOVA;
 		private System.Windows.Forms.CheckBox m_checkBoxCompressFiles;
+        private System.Windows.Forms.Label labelGzipOva;
+        private System.Windows.Forms.Label labelGzipOvfDisks;
     }
 }

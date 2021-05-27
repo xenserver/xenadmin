@@ -40,7 +40,6 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.Properties;
 using XenAPI;
 
 

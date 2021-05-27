@@ -29,11 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
-
 using XenOvf.Definitions.XDIGSIG;
 
 namespace XenOvf.Definitions.XENC

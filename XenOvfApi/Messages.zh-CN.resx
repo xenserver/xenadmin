@@ -123,14 +123,8 @@
   <data name="CERTIFICATE_IS_INVALID" xml:space="preserve">
     <value>证书无效。</value>
   </data>
-  <data name="COMPRESS_FAILED" xml:space="preserve">
-    <value>无法压缩 {0}。</value>
-  </data>
   <data name="COMPRESS_INVALID_METHOD" xml:space="preserve">
     <value>不支持压缩方法 {0}。</value>
-  </data>
-  <data name="CONVERSION_FAILED" xml:space="preserve">
-    <value>无法将 OVF 转换为 OVA。</value>
   </data>
   <data name="CONVERSION_NO_DATA" xml:space="preserve">
     <value>无法转换 HyperV 配置文件。</value>

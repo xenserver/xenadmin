@@ -29,13 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
-using XenAdmin.Properties;
 using XenAPI;
-using System.ComponentModel;
 
 namespace XenAdmin.Controls.DataGridViewEx
 {

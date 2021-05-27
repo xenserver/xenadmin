@@ -197,7 +197,7 @@ namespace XenAdmin.Controls
                 return false;
             }
 
-            string roleList = source.IsControlDomainZero() ? "http/connect_console/host_console" : "http/connect_console";
+            string roleList = source.IsControlDomainZero(out _) ? "http/connect_console/host_console" : "http/connect_console";
             List<Role> validRoles = Role.ValidRoleList(roleList, source.Connection);
             allowedRoles = validRoles;
             return session.Roles.Find(r => validRoles.Contains(r)) == null;

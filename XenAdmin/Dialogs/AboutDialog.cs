@@ -52,7 +52,7 @@ namespace XenAdmin.Dialogs
                 : revision.ToString();
 
             VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.BrandConsole,
-                BrandManager.ProductVersionText, BrandManager.XenCenterVersion, buildText, IntPtr.Size * 8);
+                BrandManager.XenCenterVersion, buildText, IntPtr.Size * 8);
             label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.CompanyNameLegal);
             label2.Visible = !HiddenFeatures.CopyrightHidden;
 

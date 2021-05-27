@@ -29,12 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using System.Drawing;
-using System.Linq;
 
 namespace XenAdmin.Controls
 {

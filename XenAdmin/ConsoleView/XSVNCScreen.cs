@@ -728,12 +728,12 @@ namespace XenAdmin.ConsoleView
                 if (Source == null)
                     return null;
 
-                if (Source.IsControlDomainZero())
-                    return string.Format(Messages.CONSOLE_HOST, Source.AffinityServerString());
-                
-                if (Source.is_control_domain)
-                    return string.Format(Messages.CONSOLE_HOST_NUTANIX, Source.AffinityServerString());
-                
+                if (Source.IsControlDomainZero(out Host host))
+                    return string.Format(Messages.CONSOLE_HOST, host.Name());
+
+                if (Source.IsSrDriverDomain(out SR sr))
+                    return string.Format(Messages.CONSOLE_SR_DRIVER_DOMAIN, sr.Name());
+
                 return Source.Name();
             }
         }
@@ -766,7 +766,7 @@ namespace XenAdmin.ConsoleView
                 }
 
                 //Start the polling again
-                if (Source != null && !Source.IsControlDomainZero())
+                if (Source != null && !Source.IsControlDomainZero(out _))
                 {
                     if (!Source.IsHVM())
                     {

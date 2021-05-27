@@ -35,7 +35,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Xml;
-using XenCenterLib;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -56,7 +55,7 @@ namespace XenAPI
         // or different XenServer versions.
         private const int DEFAULT_NUM_VCPUS_ALLOWED = 16;
         private const int DEFAULT_NUM_VIFS_ALLOWED = 7;
-        private const int DEFAULT_NUM_VBDS_ALLOWED = 16;
+        private const int DEFAULT_NUM_VBDS_ALLOWED = 255;
         public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
@@ -67,39 +66,22 @@ namespace XenAPI
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return DEFAULT_NUM_VCPUS_ALLOWED;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
+            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
 
-            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
-
-            try
-            {
-                return Convert.ToInt32(xn.Attributes["max"].Value);
-            }
-            catch
-            {
-                return DEFAULT_NUM_VCPUS_ALLOWED;
-            }
+            return DEFAULT_NUM_VCPUS_ALLOWED;
         }
+
         public int MinVCPUs()
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return 1;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
+            if (int.TryParse(xn?.Attributes?["min"]?.Value, out var result))
+                return result;
 
-            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='vcpus-min']");
-            if (xn == null || xn.Attributes == null)
-                return 1;
-
-            try
-            {
-                return Convert.ToInt32(xn.Attributes["min"].Value);
-            }
-            catch
-            {
-                return 1;
-            }
+            return 1;
         }
 
         public bool IsRunning()
@@ -197,57 +179,33 @@ namespace XenAPI
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return DEFAULT_MEM_ALLOWED;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
+            if (long.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
 
-            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
-
-            try
-            {
-                return Convert.ToInt64(xn.Attributes["max"].Value);
-            }
-            catch
-            {
-                return DEFAULT_MEM_ALLOWED;
-            }
+            return DEFAULT_MEM_ALLOWED;
         }
 
         public int MaxVIFsAllowed()
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return DEFAULT_NUM_VIFS_ALLOWED;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
+            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
 
-            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
-
-            try
-            {
-                return Convert.ToInt32(xn.Attributes["max"].Value);
-            }
-            catch
-            {
-                return DEFAULT_NUM_VIFS_ALLOWED;
-            }
+            return DEFAULT_NUM_VIFS_ALLOWED;
         }
 
         public int MaxVBDsAllowed()
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return DEFAULT_NUM_VBDS_ALLOWED;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
+            if (int.TryParse(xn?.Attributes?["max"]?.Value, out var result))
+                return result;
 
-            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
-
-            try
-            {
-                return Convert.ToInt32(xn.Attributes["max"].Value);
-            }
-            catch
-            {
-                return DEFAULT_NUM_VBDS_ALLOWED;
-            }
+            return DEFAULT_NUM_VBDS_ALLOWED;
         }
 
         private XmlDocument GetRecommendations()
@@ -424,67 +382,34 @@ namespace XenAPI
 
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return true;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
+            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result != 0;
 
-            try
-            {
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
-                if (xn == null)
-                    return true;
-
-                return
-                    Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-            }
-            catch
-            {
-                return true;
-            }
+            return true;
         }
 
         public bool HasSriovRecommendation()
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return false;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
+            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result != 0;
 
-            try
-            {
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
-                if (xn == null || xn.Attributes == null)
-                    return false;
-
-                return
-                   Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-            }
-            catch
-            {
-                return false;
-            }
-
+            return false;
         }
 
         public bool HasVendorDeviceRecommendation()
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return false;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
+            if (bool.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result;
 
-            try
-            {
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
-                if (xn == null || xn.Attributes == null)
-                    return false;
-
-                return bool.Parse(xn.Attributes["value"].Value);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error parsing has-vendor-device on the template.", ex);
-                return false;
-            }
+            log.Error("Error parsing has-vendor-device on the template.");
+            return false;
         }
 
         /// <summary>Returns true if
@@ -499,22 +424,11 @@ namespace XenAPI
 
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return true;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
+            if (int.TryParse(xn?.Attributes?["value"]?.Value, out var result))
+                return result != 0;
 
-            try
-            {
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
-                if (xn == null || xn.Attributes == null)
-                    return true;
-
-                return
-                    Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-            }
-            catch
-            {
-                return true;
-            }
+            return true;
         }
 
         #region Supported Boot Mode Recommendations
@@ -533,21 +447,9 @@ namespace XenAPI
         {
             XmlDocument xd = GetRecommendations();
 
-            if (xd == null)
-                return string.Empty;
+            XmlNode xn = xd?.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
 
-            try
-            {
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='" + fieldName + "']");
-                if (xn == null || xn.Attributes == null || xn.Attributes["value"] == null)
-                    return string.Empty;
-
-                return xn.Attributes["value"].Value;
-            }
-            catch
-            {
-                return string.Empty;
-            }
+            return xn?.Attributes?["value"]?.Value ?? string.Empty;
         }
 
         #endregion
@@ -1370,12 +1272,13 @@ namespace XenAPI
         /// <summary>
         /// Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
         /// </summary>
-        public bool IsControlDomainZero()
+        public bool IsControlDomainZero(out Host host)
         {
+            host = null;
             if (!is_control_domain)
                 return false;
 
-            var host = Connection.Resolve(resident_on);
+            host = Connection.Resolve(resident_on);
             if (host == null)
                 return false;
 
@@ -1385,6 +1288,28 @@ namespace XenAPI
             var vms = Connection.ResolveAll(host.resident_VMs);
             var first = vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
             return first != null && first.opaque_ref == opaque_ref;
+        }
+
+        public bool IsSrDriverDomain(out SR sr)
+        {
+            sr = null;
+
+            if (!is_control_domain || IsControlDomainZero(out _))
+                return false;
+
+            foreach (var pbd in Connection.Cache.PBDs)
+            {
+                if (pbd != null &&
+                    pbd.other_config.TryGetValue("storage_driver_domain", out string vmRef) &&
+                    vmRef == opaque_ref)
+                {
+                    sr = Connection.Resolve(pbd.SR);
+                    if (sr != null)
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         public bool is_a_real_vm()

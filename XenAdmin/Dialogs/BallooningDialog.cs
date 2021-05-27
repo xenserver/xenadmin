@@ -31,12 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using XenAdmin.Actions;
-using XenAdmin.Commands;
 using XenAdmin.Controls.Ballooning;
-using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Dialogs

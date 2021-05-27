@@ -124,7 +124,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                     var disk = new VDI
                     {
-                        name_label = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_VDINAME, SelectedName, device.userdevice),
+                        name_label = string.Format(Messages.STRING_SPACE_STRING, SelectedName, device.userdevice),
                         name_description = Messages.NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION,
                         virtual_size = diskSize,
                         type = (vdi_type)Enum.Parse(typeof(vdi_type), diskNode.Attributes["type"].Value),
@@ -233,7 +233,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.CanCreateVmOn() && sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
+                if (sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull() &&
+                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
                 {
                     if (suggestedSr != null || defaultSr != null)
                     {

@@ -35,7 +35,6 @@ using System.Xml;
 using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAPI;
-using XenCenterLib;
 
 
 namespace XenAdmin.Alerts

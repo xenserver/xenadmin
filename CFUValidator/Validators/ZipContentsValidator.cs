@@ -37,7 +37,6 @@ using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
-using XenCenterLib.Archive;
 
 namespace CFUValidator.Validators
 {

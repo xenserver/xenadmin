@@ -30,18 +30,13 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.Actions;
 using XenAdmin.Core;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Drawing;
-using XenAdmin.Properties;
 
 namespace XenAdmin.Commands
 {

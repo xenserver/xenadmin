@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -140,7 +141,7 @@ namespace XenAdmin.Actions
         /// <summary>
         /// Prepare the action's task for exit by removing the XenCenterUUID.
         /// A call here just before exit will mean that the task will get picked 
-        /// up as a meddling action on restart of xencenter, and thus reappear in the log.
+        /// up as a meddling action on restart of xencenter, and thus reappear in the EventsTab.
         /// </summary>
         public void PrepareForLogReloadAfterRestart()
         {
@@ -268,6 +269,9 @@ namespace XenAdmin.Actions
 
         public void PollToCompletion(double start = 0, double finish = 100, bool suppressFailures = false)
         {
+            if (RelatedTask == null)
+                return;
+
             try
             {
                 DateTime startTime = DateTime.Now;
@@ -341,8 +345,7 @@ namespace XenAdmin.Actions
                 Session = session;
             }
 
-            Tick((int)(start + task.progress * (finish - start)),
-                task.Description() == "" ? Description : task.Description());
+            PercentComplete = (int)(start + task.progress * (finish - start));
 
             switch (task.status)
             {
@@ -366,9 +369,23 @@ namespace XenAdmin.Actions
                     log.InfoFormat("Task {0} finished successfully", RelatedTask.opaque_ref);
                     if (task.result != "") // Work around CA-6597
                     {
-                        Match m = Regex.Match(Result, "<value>(.*)</value>");
-                        if (m.Success)
-                            Result = m.Groups[1].Value;
+                        try
+                        {
+                            var doc = new XmlDocument();
+                            doc.LoadXml(task.result);
+                            var nodes = doc.GetElementsByTagName("value");
+
+                            foreach (XmlNode node in nodes)
+                            {
+                                Result = node.InnerText;
+                                break;
+                            }
+                        }
+                        catch //CA-352946
+                        {
+                            log.WarnFormat("Task {0} result is not valid xml", RelatedTask.opaque_ref);
+                            Result = task.result;
+                        }
                     }
                     return true;
 

@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Properties;
 
 namespace XenAdmin.Commands
 {

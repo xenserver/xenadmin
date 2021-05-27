@@ -35,7 +35,6 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
-using XenAdmin.Controls.Common;
 using XenCenterLib;
 using XenOvf;
 using XenAdmin.Controls;
@@ -64,8 +63,10 @@ namespace XenAdmin.Wizards.ExportWizard
 			m_labelStrength.Visible = false;
 			m_pictureBoxTick.Visible = false;
 			m_pictureBoxTickValidate.Visible = false;
+            labelGzipOva.Visible = false;
+            labelGzipOvfDisks.Visible = false;
 
-			//CA-59159: encryption is not supported for Boston
+			//CA-59159: encryption is not supported yet
 			sectionHeaderLabel2.Visible = false;
 			m_tableLayoutPanelEncryption.Visible = false;
 		}
@@ -98,12 +99,12 @@ namespace XenAdmin.Wizards.ExportWizard
 		public string EncryptPassword => m_textBoxPwd.Text;
 
 		/// <summary>
-		/// Gets a value indicating whether the appliance will be exproted as a single OVA file
+		/// Gets a value indicating whether the appliance will be exported as a single OVA file
 		/// </summary>
 		public bool CreateOVA => m_checkBoxCreateOVA.Checked;
 
 		/// <summary>
-		/// Gets a value indicating whether the OVF files should be compressed
+		/// Gets a value indicating whether the package should be compressed
 		/// </summary>
 		public bool CompressOVFfiles => m_checkBoxCompressFiles.Checked;
 
@@ -341,6 +342,12 @@ namespace XenAdmin.Wizards.ExportWizard
             return false;
         }
 
+        private void UpdateLabels()
+        {
+            labelGzipOva.Visible = m_checkBoxCreateOVA.Checked && m_checkBoxCompressFiles.Checked;
+            labelGzipOvfDisks.Visible = !m_checkBoxCreateOVA.Checked && m_checkBoxCompressFiles.Checked;
+        }
+
 		#endregion
 
 		#region Control event handlers
@@ -428,14 +435,16 @@ namespace XenAdmin.Wizards.ExportWizard
 			//no need to notify IsDirty here, this is only for data validation
 		}
 
-		private void m_checkBoxCreateOVA_CheckedChanged(object sender, System.EventArgs e)
+		private void m_checkBoxCreateOVA_CheckedChanged(object sender, EventArgs e)
 		{
 			IsDirty = true;
+            UpdateLabels();
 		}
 
-		private void m_checkBoxCompressFiles_CheckedChanged(object sender, System.EventArgs e)
+		private void m_checkBoxCompressFiles_CheckedChanged(object sender, EventArgs e)
 		{
 			IsDirty = true;
+            UpdateLabels();
 		}
 
 		#endregion

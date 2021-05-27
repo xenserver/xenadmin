@@ -31,12 +31,9 @@
 
 using System;
 using System.Collections;
-using System.Reflection;
 using System.Xml;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using XenAdmin.Core;
-using XenAPI;
 
 namespace XenAdmin.ServerDBs
 {

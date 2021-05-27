@@ -31,13 +31,8 @@
 
 namespace XenOvf.Definitions
 {
-    using System;
-    using System.Collections;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Xml.Schema;
 
     #region XenServer 5.0 OVA.XML Parser
     [XmlRoot("value")]

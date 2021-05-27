@@ -32,11 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using XenAPI;
 using XenAdmin.Core;
-using XenAdmin.Model;
 using XenAdmin.Network;
 
 

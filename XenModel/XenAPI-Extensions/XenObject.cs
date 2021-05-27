@@ -308,7 +308,7 @@ namespace XenAPI
 
         public virtual string NameWithLocation()
         {
-            return string.Format(Messages.NAME_WITH_LOCATION, Name(), LocationString());
+            return string.Format(Messages.STRING_SPACE_STRING, Name(), LocationString());
         }
 
         internal virtual string LocationString()

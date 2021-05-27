@@ -34,7 +34,6 @@ using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using System.Diagnostics;
 
 

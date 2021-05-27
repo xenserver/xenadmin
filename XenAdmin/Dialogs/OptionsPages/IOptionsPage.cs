@@ -29,9 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAdmin.Controls;
 
 namespace XenAdmin.Dialogs.OptionsPages

@@ -42,7 +42,6 @@ using XenAdmin.Network;
 using System.Xml;
 using System.IO;
 using System.Security.Principal;
-using System.Drawing;
 
 
 namespace XenAdmin

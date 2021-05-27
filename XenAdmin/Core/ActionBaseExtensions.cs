@@ -36,7 +36,6 @@ using System.Linq;
 using System.Text;
 
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Network;
 
 using XenAPI;

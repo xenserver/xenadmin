@@ -33,7 +33,6 @@ using System;
 using NUnit.Framework;
 using XenAdmin.Controls;
 using XenAdmin.Model;
-using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
 

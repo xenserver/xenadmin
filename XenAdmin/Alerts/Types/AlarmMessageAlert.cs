@@ -31,12 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
-using XenAdmin.TabPages;
 using XenAdmin.Dialogs;
 using System.Xml;
-using System.Text.RegularExpressions;
 using XenAdmin.Core;
 using System.Globalization;
 
@@ -257,29 +254,23 @@ namespace XenAdmin.Alerts
             get
             {
                 return () =>
+                {
+                    IXenObject xenObject = null;
+
+                    if (XenObject is Host) //sr is only set when it's AlarmType.Storage 
+                        xenObject = sr ?? XenObject;
+                    else if (XenObject is VM vm)
+                        xenObject = vm.IsControlDomainZero(out Host host) ? host : XenObject;
+
+                    if (xenObject == null)
+                        return;
+
+                    using (var dialog = new PropertiesDialog(xenObject) {TopMost = true})
                     {
-                        IXenObject xenObject = null;
-
-                        if (XenObject is Host)
-                        {
-                            //sr is only set when it's AlarmType.Storage 
-                            xenObject = sr ?? XenObject;
-                        }
-                        else if (XenObject is VM)
-                        {
-                            VM vm = (VM)XenObject;
-                            xenObject = vm.IsControlDomainZero() ? XenObject.Connection.Resolve(vm.resident_on) : XenObject;
-                        }
-
-                        if (xenObject == null)
-                            return;
-
-                        using (var dialog = new PropertiesDialog(xenObject) { TopMost = true })
-                        {
-                            dialog.SelectPerfmonAlertEditPage();
-                            dialog.ShowDialog(Program.MainWindow);
-                        }
-                    };
+                        dialog.SelectPerfmonAlertEditPage();
+                        dialog.ShowDialog(Program.MainWindow);
+                    }
+                };
             }
         }
 

@@ -31,7 +31,6 @@
 
 using System;
 using CFUValidator.CommandLineOptions;
-using XenAdmin.Actions;
 
 namespace CFUValidator.Updates
 {

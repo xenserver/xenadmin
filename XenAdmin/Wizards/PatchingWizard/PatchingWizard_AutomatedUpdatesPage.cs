@@ -32,7 +32,6 @@
 using System.Collections.Generic;
 using XenAPI;
 using System.Linq;
-using System.Text;
 using XenAdmin.Core;
 using XenAdmin.Alerts;
 

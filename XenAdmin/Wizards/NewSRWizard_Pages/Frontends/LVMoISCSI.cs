@@ -38,7 +38,6 @@ using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
-using System.Drawing;
 using System.Linq;
 using XenAdmin.Dialogs.WarningDialogs;
 using XenCenterLib;

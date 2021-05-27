@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -45,7 +44,7 @@ namespace XenAdmin.Controls
     public class SrPicker : CustomTreeView
     {
         // Migrate is the live VDI move operation
-        public enum SRPickerType { VM, InstallFromTemplate, MoveOrCopy, Migrate, LunPerVDI }
+        public enum SRPickerType { VM, InstallFromTemplate, Move, Copy, Migrate, LunPerVDI }
 
         #region Private fields
 

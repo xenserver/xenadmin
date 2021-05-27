@@ -292,7 +292,7 @@ namespace XenAdmin.Core
         {
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.content_type != XenAPI.SR.Content_Type_ISO && sr.shared && sr.CanCreateVmOn())
+                if (sr.shared && sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull())
                     return true;
             }
             return false;
@@ -1316,13 +1316,12 @@ namespace XenAdmin.Core
             if (XenObject is Host)
                 return string.Format(Messages.SERVER_X, GetName(XenObject));
 
-            VM vm = XenObject as VM;
-            if (vm != null)
+            if (XenObject is VM vm)
             {
-                if (vm.IsControlDomainZero())
-                    return string.Format(Messages.SERVER_X, GetName(XenObject.Connection.Resolve(vm.resident_on)));
-                else
-                    return string.Format(Messages.VM_X, GetName(XenObject));
+                if (vm.IsControlDomainZero(out var host))
+                    return string.Format(Messages.SERVER_X, GetName(host));
+                
+                return string.Format(Messages.VM_X, GetName(XenObject));
             }
 
             if (XenObject is SR)

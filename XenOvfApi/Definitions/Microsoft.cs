@@ -31,14 +31,9 @@
 
 namespace XenOvf.Definitions.VMC
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Xml.Schema;
 
     #region VPC/VMC
     [XmlRoot("preferences")]

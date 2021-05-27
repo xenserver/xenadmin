@@ -29,17 +29,12 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using XenAPI;
 using System.Drawing;
 using XenAdmin.Core;
 using XenAdmin.Actions;
-using XenAdmin.Network;
-using XenAdmin.Properties;
-using System.Collections.ObjectModel;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions.VMActions;
 

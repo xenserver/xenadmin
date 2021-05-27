@@ -32,14 +32,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.XCM;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAdmin.Mappings;
 using Tuple = System.Collections.Generic.KeyValuePair<string, string>;
 

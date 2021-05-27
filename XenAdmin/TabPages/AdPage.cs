@@ -42,7 +42,6 @@ using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Network;
-using XenAdmin.Properties;
 using XenCenterLib;
 
 namespace XenAdmin.TabPages

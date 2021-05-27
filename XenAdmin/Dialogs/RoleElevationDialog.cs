@@ -47,8 +47,6 @@ namespace XenAdmin.Dialogs
         public Session elevatedSession;
         public string elevatedPassword;
         public string elevatedUsername;
-        public string originalUsername;
-        public string originalPassword;
 
         private List<Role> authorizedRoles;
 
@@ -71,8 +69,6 @@ namespace XenAdmin.Dialogs
             labelRequiredRoleValue.Text = Role.FriendlyCSVRoleList(authorizedRoles);
             labelServerValue.Text = Helpers.GetName(connection);
             labelServer.Text = Helpers.IsPool(connection) ? Messages.POOL_COLON : Messages.SERVER_COLON;
-            originalUsername = session.Connection.Username;
-            originalPassword = session.Connection.Password;
 
             if (string.IsNullOrEmpty(actionTitle))
             {

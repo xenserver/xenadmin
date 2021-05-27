@@ -34,17 +34,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.StorageLinkAPI;
 using XenAPI;
-using System.Threading;
-using System.Diagnostics;
 using System.Drawing;
-using XenAdmin.Properties;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {

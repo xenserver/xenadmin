@@ -364,11 +364,9 @@ namespace XenAdmin
                 if (m == null || RunInAutomatedTestMode)
                     return;
 
-                Invoke(m, delegate
-                {
-                    var bits = e.Message.Split(' ').Where(ar => ar != "--wait").ToArray();
+                var bits = e.Message.Split(' ').Where(ar => ar != "--wait").ToArray();
 
-                    var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
+                var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
 
                     if (firstArgType == ArgType.Passwords)
                     {
@@ -383,15 +381,30 @@ namespace XenAdmin
                     if (firstArgType == ArgType.None)
                         return;
 
-                    // The C++ splash screen passes its command line as a literal string.
-                    // This means we will get an e.Message like
-                    //      open "C:\Documents and Settings\foo.xva"
-                    // INCLUDING the double quotes, thus we need to trim them
+                // The C++ splash screen passes its command line as a literal string.
+                // This means we will get an e.Message like
+                //      open "C:\Documents and Settings\foo.xva"
+                // INCLUDING the double quotes, thus we need to trim them
 
+                var argument = tailArgs[0];
+
+                if (argument.StartsWith("\""))
+                {
+                    var count = tailArgs.TakeWhile(t => !t.EndsWith("\"")).Count();
+                    if (count < tailArgs.Length)
+                        count++;
+                    argument = string.Join(" ", tailArgs.Take(count).ToArray());
+                }
+
+                argument = argument.Trim('"');
+
+                Invoke(m, delegate
+                {
                     m.WindowState = FormWindowState.Normal;
-                    m.ProcessCommand(firstArgType, tailArgs[0].Trim('"'));
+                    m.ProcessCommand(firstArgType, argument);
                 });
             };
+
             pipe.BeginRead();
             // We created the pipe successfully - i.e. nobody was listening, so go ahead and start XenCenter
         }

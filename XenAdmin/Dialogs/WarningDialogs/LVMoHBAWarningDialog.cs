@@ -117,7 +117,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
         private void PopulateControls()
         {
             labelHeader.Text = foundExistingSR
-                ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR, SR.getFriendlyTypeName(existingSrType))
+                ? string.Format(Messages.LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR, SR.GetFriendlyTypeName(existingSrType))
                 : Messages.LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS;
 
             checkBoxRepeat.Text = foundExistingSR
@@ -140,7 +140,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
                     labelReattachInfo.Text = Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
                 else
                     labelReattachInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_REATTACH_INFO,
-                        SR.getFriendlyTypeName(existingSrType));
+                        SR.GetFriendlyTypeName(existingSrType));
             }
             else
             {
@@ -148,7 +148,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             }
 
             labelFormatInfo.Text = string.Format(Messages.LVMOHBA_WARNING_DIALOG_FORMAT_INFO,
-                SR.getFriendlyTypeName(requestedSrType));
+                SR.GetFriendlyTypeName(requestedSrType));
 
             panelReattach.Enabled = foundExistingSR && (!isGfs2 || clusteringEnabled && !restrictGfs2);
             if (!panelReattach.Enabled)

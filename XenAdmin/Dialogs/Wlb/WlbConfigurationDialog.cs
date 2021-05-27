@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.SettingsPanels;

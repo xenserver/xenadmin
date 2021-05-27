@@ -11,7 +11,7 @@
       "flat": "true"
     },
     {
-      "pattern": "builds/xs/hotfixes/trunk/RPU005/1.0/RPU005.iso",
+      "pattern": "builds/xs/hotfixes/trunk/RPU005/2.0/RPU005.iso",
       "target": "xenadmin.git/Branding/Hotfixes/RPU005.iso",
       "flat": "true"
     }

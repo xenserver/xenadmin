@@ -202,20 +202,15 @@ namespace XenAdmin.ConsoleView
             UpdateRDPResolution();
         }
 
-        private string UndockedWindowTitle(VM source)
+        private string UndockedWindowTitle(VM vm)
         {
-            if (source.is_control_domain)
-            {
-                Host host = source.Connection.Resolve(source.resident_on);
-                if (host == null)
-                    return source.Name();
+            if (vm.IsControlDomainZero(out Host host))
+                return string.Format(Messages.CONSOLE_HOST, host.Name());
 
-                return string.Format(source.IsControlDomainZero() ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name());
-            }
-            else
-            {
-                return source.Name();
-            }
+            if (vm.IsSrDriverDomain(out SR sr))
+                return string.Format(Messages.CONSOLE_SR_DRIVER_DOMAIN, sr.Name());
+
+            return vm.Name();
         }
 
         private void undockedForm_HelpButtonClicked(object sender, CancelEventArgs e)

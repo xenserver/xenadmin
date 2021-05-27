@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using XenAdmin;
-using XenAdmin.Core;
 using XenAdmin.Network;
 
 
