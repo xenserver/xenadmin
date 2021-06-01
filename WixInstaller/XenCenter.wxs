@@ -123,8 +123,6 @@
                             </ProgId>
                         </Component>
                         <Component Id="UpdateFiles" Guid="$(var.UpdateFilesGuid)">
-                            <File Id="hotfixDundee" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU003.$(var.FileExtUpdate)" />
-                            <File Id="hotfixEly" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU004.iso" />
                             <File Id="hotfixStockholm" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU005.iso" />
                         </Component>
                         <Directory Id="ja" Name="ja">
