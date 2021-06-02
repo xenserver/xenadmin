@@ -278,12 +278,6 @@ namespace XenAdmin
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
 
-            //set the help version before launching the main window;
-            //the call starts a different thread so it won't delay the main window launch;
-            //in most cases it is expected to have returned by the time the users request help;
-            //if they do before it has returned, the thread requesting help will wait for it
-            HelpManager.SetHelpVersion();
-
             MainWindow mainWindow = new MainWindow(firstArgType, tailArgs);
             Application.Run(mainWindow);
 

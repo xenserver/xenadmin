@@ -70,11 +70,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/xencenter/.
+        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/.
         /// </summary>
-        public static string HELP_URL {
+        public static string DOCS_URL {
             get {
-                return ResourceManager.GetString("HELP_URL", resourceCulture);
+                return ResourceManager.GetString("DOCS_URL", resourceCulture);
             }
         }
         

@@ -54,6 +54,8 @@ namespace XenAdmin.Core
 
         public static readonly string ExtensionUpdate = Get("EXTENSION_UPDATE");
 
+        public static readonly string HelpPath = Get("HELP_PATH");
+
         public static readonly string LegacyProduct = Get("LEGACY_PRODUCT");
 
         public static readonly string LegacyConsole = Get("LEGACY_CONSOLE");
