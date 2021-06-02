@@ -59,6 +59,7 @@ rebranding_global()
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
         -e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
+        -e "s#xencenter\/current-release\/#${BRANDING_HELP_PATH}#g" \
         $1
 }
 
