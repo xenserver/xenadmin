@@ -260,6 +260,11 @@ namespace XenAPI
             return new HealthCheckSettings(health_check_config);
         }
 
+        public HealthCheckStatus HealthCheckStatus()
+        {
+            return XenAdmin.Model.HealthCheckSettings.GetHealthCheckStatus(health_check_config);
+        }
+
         #endregion
 
         #region IEquatable<Pool> Members

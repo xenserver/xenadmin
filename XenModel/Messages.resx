@@ -2641,7 +2641,7 @@ Do you want to assign it to the schedule '{2}' instead?</value>
     <value>Checking HA and WLB status</value>
   </data>
   <data name="CHECKING_HEALTH_CHECK_SERVICE" xml:space="preserve">
-    <value>Checking pool enrollment to the Health Check service</value>
+    <value>Checking pool enrollment to Health Check</value>
   </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
@@ -10658,7 +10658,7 @@ If this value does not correspond to a server within the selected resource pool 
     <value>Probing for LUNs on {0}</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
-    <value>{0}: The Health Check service has been removed in {1} {2}.</value>
+    <value>{0}: Health Check has been removed in {1} {2}.</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
     <value>Disable Health Check</value>
@@ -13776,7 +13776,7 @@ Schedule:
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
   </data>
   <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
-    <value>The Health Check service has been removed in {0} {1}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
+    <value>Health Check has been removed in {0} {1}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
     <value>{0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead.</value>

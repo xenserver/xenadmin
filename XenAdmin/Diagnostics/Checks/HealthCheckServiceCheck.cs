@@ -55,10 +55,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (Helpers.PostStockholm(Pool.Connection))
                 return false;
 
-            if (Pool.HealthCheckSettings().Status != HealthCheckStatus.Enabled)
-                return false;
-
-            return true;
+            return Pool.HealthCheckStatus() == HealthCheckStatus.Enabled;
         }
 
         protected override Problem RunCheck()

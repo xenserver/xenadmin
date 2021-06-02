@@ -53,9 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            var healthCheckSettings = _pool.HealthCheckSettings();
-            healthCheckSettings.Status = HealthCheckStatus.Disabled;
-            return new SaveHealthCheckSettingsAction(_pool, healthCheckSettings, null, null, null, null, false);
+            return DisableHealthCheckAction.Create(_pool);
         }
 
         public override string Description =>
@@ -92,11 +90,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
                 {
                     if (dlg.ShowDialog() == DialogResult.Yes)
-                    {
-                        var healthCheckSettings = pool.HealthCheckSettings();
-                        healthCheckSettings.Status = HealthCheckStatus.Disabled;
-                        action = new SaveHealthCheckSettingsAction(pool, healthCheckSettings, null, null, null, null, false);
-                    }
+                        action = DisableHealthCheckAction.Create(pool);
                 }
             });
             cancelled = action == null;
