@@ -126,5 +126,26 @@ namespace XenAdmin.Actions
             }
         }
     }
+
+    public class DisableHealthCheckAction : SaveHealthCheckSettingsAction
+    {
+        private DisableHealthCheckAction(Pool pool, HealthCheckSettings healthCheckSettings)
+            : base(pool, healthCheckSettings, null, null, null, null, false)
+        {
+        }
+
+        public static DisableHealthCheckAction Create(Pool pool)
+        {
+            var healthCheckSettings = pool.HealthCheckSettings();
+            healthCheckSettings.Status = HealthCheckStatus.Disabled;
+            return new DisableHealthCheckAction(pool, healthCheckSettings);
+        }
+
+        protected override void Run()
+        {
+            base.Run();
+            Connection.WaitFor(() => Pool.HealthCheckStatus() == HealthCheckStatus.Disabled, null);
+        }
+    }
 }
 
