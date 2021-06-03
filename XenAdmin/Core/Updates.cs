@@ -251,9 +251,12 @@ namespace XenAdmin.Core
             if (toUse == null)
                 return false;
 
+            if (!toUse.Name.Contains(BrandManager.BrandConsole))
+                return false;
+
             return toUse.Version > currentProgramVersion ||
-                   (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
-                    !FriendlyNameManager.IsCultureLoaded(Program.CurrentCulture));
+                   toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
+                   !FriendlyNameManager.IsCultureLoaded(Program.CurrentCulture);
         }
 
         public static List<XenServerPatchAlert> NewXenServerPatchAlerts(List<XenServerVersion> xenServerVersions,
