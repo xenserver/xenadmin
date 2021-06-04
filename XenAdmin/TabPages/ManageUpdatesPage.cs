@@ -809,14 +809,14 @@ namespace XenAdmin.TabPages
             }
 
             if (alert is XenServerPatchAlert patchAlert && patchAlert.CanApply &&
-                !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredXenCenterVersion == null)
+                !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredClientVersion == null)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownload_Click;
                 items.Add(download);
             }
 
-            if (alert is XenServerUpdateAlert updateAlert && updateAlert.RequiredXenCenterVersion != null)
+            if (alert is XenServerUpdateAlert updateAlert && updateAlert.RequiredClientVersion != null)
             {
                 var downloadNewXenCenter = new ToolStripMenuItem(string.Format(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER, BrandManager.BrandConsole));
                 downloadNewXenCenter.Click += ToolStripMenuItemDownloadNewXenCenter_Click;
@@ -1056,10 +1056,10 @@ namespace XenAdmin.TabPages
 
             XenServerUpdateAlert updateAlert = (XenServerUpdateAlert)clickedRow.Tag;
 
-            if (updateAlert == null || updateAlert.RequiredXenCenterVersion == null)
+            if (updateAlert == null || updateAlert.RequiredClientVersion == null)
                 return;
 
-            string xenCenterUrl = updateAlert.RequiredXenCenterVersion.Url;
+            string xenCenterUrl = updateAlert.RequiredClientVersion.Url;
             if (string.IsNullOrEmpty(xenCenterUrl))
                 return;
 

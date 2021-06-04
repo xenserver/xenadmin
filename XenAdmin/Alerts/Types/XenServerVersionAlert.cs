@@ -47,7 +47,7 @@ namespace XenAdmin.Alerts
         public XenServerVersionAlert(XenServerVersion version)
         {
             Version = version;
-            RequiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(Version);
+            RequiredClientVersion = Updates.GetRequiredClientVersion(Version);
             _timestamp = version.TimeStamp;
         }
 

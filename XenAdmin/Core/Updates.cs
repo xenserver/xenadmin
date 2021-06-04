@@ -57,7 +57,7 @@ namespace XenAdmin.Core
         private static readonly object downloadedUpdatesLock = new object();
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
-        private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
+        private static List<ClientVersion> ClientVersions = new List<ClientVersion>();
         public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly object updateAlertsLock = new object();
@@ -162,7 +162,7 @@ namespace XenAdmin.Core
             {
                 lock (downloadedUpdatesLock)
                 {
-                    XenCenterVersions = action.XenCenterVersions;
+                    ClientVersions = action.ClientVersions;
                     XenServerVersionsForAutoCheck = action.XenServerVersionsForAutoCheck;
                     XenServerVersions = action.XenServerVersions;
                     XenServerPatches = action.XenServerPatches;
@@ -195,8 +195,8 @@ namespace XenAdmin.Core
 
                 if (succeeded)
                 {
-                    var xenCenterAlerts = NewXenCenterUpdateAlerts(XenCenterVersions, Program.Version);
-                    updateAlerts.AddRange(xenCenterAlerts.Where(a => !a.IsDismissed()));
+                    var clientUpdateAlerts = NewClientUpdateAlerts(ClientVersions, Program.Version);
+                    updateAlerts.AddRange(clientUpdateAlerts.Where(a => !a.IsDismissed()));
 
                     var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
                     updateAlerts.AddRange(xenServerUpdateAlerts.Where(a => !a.CanIgnore));
@@ -211,30 +211,30 @@ namespace XenAdmin.Core
             CheckForUpdatesCompleted?.Invoke(succeeded, errorMessage);
         }
 
-        public static List<XenCenterUpdateAlert> NewXenCenterUpdateAlerts(List<XenCenterVersion> xenCenterVersions,
+        public static List<ClientUpdateAlert> NewClientUpdateAlerts(List<ClientVersion> clientVersions,
             Version currentProgramVersion)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
-                return new List<XenCenterUpdateAlert>();
+                return new List<ClientUpdateAlert>();
 
-            var alerts = new List<XenCenterUpdateAlert>();
-            XenCenterVersion latest = null, latestCr = null;
+            var alerts = new List<ClientUpdateAlert>();
+            ClientVersion latest = null, latestCr = null;
 
-            if (xenCenterVersions.Count != 0 && currentProgramVersion != new Version(0, 0, 0, 0))
+            if (clientVersions.Count != 0 && currentProgramVersion != new Version(0, 0, 0, 0))
             {
-                var latestVersions = from v in xenCenterVersions where v.Latest select v;
+                var latestVersions = from v in clientVersions where v.Latest select v;
                 latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
                          latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
 
-                if (IsSuitableForXenCenterAlert(latest, currentProgramVersion))
-                    alerts.Add(new XenCenterUpdateAlert(latest));
+                if (IsSuitableForClientUpdateAlert(latest, currentProgramVersion))
+                    alerts.Add(new ClientUpdateAlert(latest));
 
-                var latestCrVersions = from v in xenCenterVersions where v.LatestCr select v;
+                var latestCrVersions = from v in clientVersions where v.LatestCr select v;
                 latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
                            latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
 
-                if (latestCr != latest && IsSuitableForXenCenterAlert(latestCr, currentProgramVersion))
-                    alerts.Add(new XenCenterUpdateAlert(latestCr));
+                if (latestCr != latest && IsSuitableForClientUpdateAlert(latestCr, currentProgramVersion))
+                    alerts.Add(new ClientUpdateAlert(latestCr));
             }
 
             if (alerts.Count == 0)
@@ -246,7 +246,7 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        private static bool IsSuitableForXenCenterAlert(XenCenterVersion toUse, Version currentProgramVersion)
+        private static bool IsSuitableForClientUpdateAlert(ClientVersion toUse, Version currentProgramVersion)
         {
             if (toUse == null)
                 return false;
@@ -381,9 +381,9 @@ namespace XenAdmin.Core
         /// If parameter is not null, it returns the minimum XenCenter version if it is greater than the current XC version,
         /// or null, if the minimum XC version couldn't be found or the current XC version is enough.
         /// </summary>
-        public static XenCenterVersion GetRequiredXenCenterVersion(XenServerVersion serverVersion)
+        public static ClientVersion GetRequiredClientVersion(XenServerVersion serverVersion)
         {
-            if (XenCenterVersions.Count == 0)
+            if (ClientVersions.Count == 0)
                 return null;
 
             var currentProgramVersion = Program.Version;
@@ -391,13 +391,13 @@ namespace XenAdmin.Core
                 return null;
 
             if (serverVersion == null)
-                return XenCenterVersions.FirstOrDefault(xcv => xcv.LatestCr && xcv.Version > currentProgramVersion);
+                return ClientVersions.FirstOrDefault(xcv => xcv.LatestCr && xcv.Version > currentProgramVersion);
 
             var minXcVersion = serverVersion.MinimumXcVersion;
             if (minXcVersion == null)
                 return null;
 
-            var minimumXcVersion = XenCenterVersions.FirstOrDefault(xcv => xcv.Version == minXcVersion);
+            var minimumXcVersion = ClientVersions.FirstOrDefault(xcv => xcv.Version == minXcVersion);
             return minimumXcVersion != null && minimumXcVersion.Version > currentProgramVersion
                 ? minimumXcVersion
                 : null;

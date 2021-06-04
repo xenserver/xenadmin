@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
 {
     public class DownloadUpdatesXmlAction : AsyncAction
     {
-        private const string XenCenterVersionsNode = "chcversions";
+        private const string ClientVersionsNode = "chcversions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
         private const string ConflictingPatchesNode = "conflictingpatches";
@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
         private const string RequiredPatchNode = "requiredpatch";
 
 
-        public List<XenCenterVersion> XenCenterVersions { get; } = new List<XenCenterVersion>();
+        public List<ClientVersion> ClientVersions { get; } = new List<ClientVersion>();
         public List<XenServerVersion> XenServerVersions { get; } = new List<XenServerVersion>();
         public List<XenServerPatch> XenServerPatches { get; } = new List<XenServerPatch>();
 
@@ -100,7 +100,7 @@ namespace XenAdmin.Actions
             if (!_checkForXenCenter)
                 return;
 
-            foreach (XmlNode versions in xdoc.GetElementsByTagName(XenCenterVersionsNode))
+            foreach (XmlNode versions in xdoc.GetElementsByTagName(ClientVersionsNode))
             {
                 foreach (XmlNode version in versions.ChildNodes)
                 {
@@ -127,7 +127,7 @@ namespace XenAdmin.Actions
                             timestamp = attrib.Value;
                     }
 
-                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, latest, latest_cr, url, timestamp));
+                    ClientVersions.Add(new ClientVersion(version_lang, name, latest, latest_cr, url, timestamp));
                 }
             }
         }

@@ -43,7 +43,7 @@ namespace XenAdmin.Alerts
         private readonly List<IXenConnection> connections = new List<IXenConnection>();
         private readonly List<Host> hosts = new List<Host>();
 
-        public XenCenterVersion RequiredXenCenterVersion;
+        public ClientVersion RequiredClientVersion;
 
         private readonly object connectionsLock = new object();
         private readonly object hostsLock = new object();

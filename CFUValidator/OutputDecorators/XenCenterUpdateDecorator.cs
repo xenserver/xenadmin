@@ -38,11 +38,11 @@ namespace CFUValidator.OutputDecorators
 {
     class XenCenterUpdateDecorator: Decorator
     {
-        private readonly List<XenCenterUpdateAlert> alerts;
+        private readonly List<ClientUpdateAlert> alerts;
         private const string header = "XenCenter updates required:";
         private const string updateNotFound = "XenCenter update could not be found";
 
-        public XenCenterUpdateDecorator(OuputComponent ouputComponent, List<XenCenterUpdateAlert> alerts)
+        public XenCenterUpdateDecorator(OuputComponent ouputComponent, List<ClientUpdateAlert> alerts)
         {
             SetComponent(ouputComponent);
             this.alerts = alerts;
@@ -52,7 +52,7 @@ namespace CFUValidator.OutputDecorators
         {
             StringBuilder sb = base.Generate();
             sb.AppendLine(header);
-            foreach (XenCenterUpdateAlert alert in alerts)
+            foreach (ClientUpdateAlert alert in alerts)
             {
                 sb.AppendLine(alert == null ? updateNotFound : alert.NewVersion.VersionAndLang);
             }

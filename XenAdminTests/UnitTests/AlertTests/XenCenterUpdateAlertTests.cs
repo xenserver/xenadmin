@@ -43,10 +43,10 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test]
         public void VerifyStoredDataWithDefaultConstructor()
         {
-            var version = new XenCenterVersion("6.0.2", "xc", true, false, "http://url",
+            var version = new ClientVersion("6.0.2", "xc", true, false, "http://url",
                 new DateTime(2011, 12, 09).ToString());
 
-            ClassVerifiers.VerifyGetters(new XenCenterUpdateAlert(version),
+            ClassVerifiers.VerifyGetters(new ClientUpdateAlert(version),
                 new AlertClassUnitTestData
                 {
                     AppliesTo = BrandManager.BrandConsole,
