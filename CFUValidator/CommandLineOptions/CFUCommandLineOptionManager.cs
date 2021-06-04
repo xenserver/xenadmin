@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,94 +37,64 @@ namespace CFUValidator.CommandLineOptions
 {
     internal class CFUCommandLineOptionManager
     {
-        private readonly List<CommandLineArgument> clas;
-        public CFUCommandLineOptionManager(List<CommandLineArgument> clas)
+        public CFUCommandLineOptionManager(CommandLineArgument[] args)
         {
-            this.clas = clas;
-        }
+            if (args.First(c => c.Usage == OptionUsage.Help).IsActiveOption ||
+                args.All(c => !c.IsActiveOption))
+                throw new CFUValidationException(GetHelp(args));
 
-        //Not to be called from inside this class to keep IoC
-        public static List<CommandLineArgument> EmptyArguments
-        {
-            get
+            CommandLineArgument urlArg = args.First(c => c.Usage == OptionUsage.Url);
+            CommandLineArgument fileArg = args.First(c => c.Usage == OptionUsage.File);
+
+            if (urlArg.IsActiveOption && fileArg.IsActiveOption)
+                throw new CFUValidationException($"Switches '-{fileArg.Switch}' and '-{urlArg.Switch}' cannot be used at the same time");
+
+            if (!urlArg.IsActiveOption && !fileArg.IsActiveOption)
+                throw new CFUValidationException($"You must provide either option '-{fileArg.Switch}' or '-{urlArg.Switch}'");
+
+            if (fileArg.IsActiveOption)
             {
-                return new List<CommandLineArgument>
-                       {
-                           new CommandLineArgument( OptionUsage.Help, 'h', "Display this help" ),
-                           new CommandLineArgument( OptionUsage.CheckZipContents, 'c', "Optionally check the zip contents of the hotfixes" ),
-                           new CommandLineArgument( OptionUsage.Url, 'u', "<URL to extract XML from> Cannot be used with -f flag"),
-                           new CommandLineArgument( OptionUsage.File, 'f', "<File name to extract XML from> Cannot be used with -u flag" ),
-                           new CommandLineArgument( OptionUsage.ServerVersion, 's', "<Server version to test> eg. 6.0.2" ),
-                           new CommandLineArgument( OptionUsage.Hotfix, 'p', "<List of patches/hotfixes that server has> eg. XS602E001 (space delimited)" )
-                       };
+                XmlLocation = fileArg.Options.First();
+                XmlLocationType = fileArg.Usage;
             }
+            else
+            {
+                XmlLocation = urlArg.Options.First();
+                XmlLocationType = urlArg.Usage;
+            }
+
+            CheckHotfixContents = args.First(c => c.Usage == OptionUsage.CheckZipContents).IsActiveOption;
+
+            var serverArg = args.First(c => c.Usage == OptionUsage.ServerVersion);
+            ServerVersion = serverArg.IsActiveOption ? serverArg.Options.First() : AllVersions;
+
+            var hotfixArg = args.First(c => c.Usage == OptionUsage.Hotfix);
+            InstalledHotfixes = hotfixArg.IsActiveOption ? hotfixArg.Options : new List<string>();
         }
 
         public static string AllVersions = "999.999.999";
 
-        public string XmlLocation { get { return GetFileUsageCLA().Options.First(); } }
+        public string XmlLocation { get; }
 
-        public bool CheckHotfixContents { get { return clas.First(c => c.Usage == OptionUsage.CheckZipContents).IsActiveOption; } }
+        public bool CheckHotfixContents { get; }
 
-        private CommandLineArgument GetFileUsageCLA()
+        public OptionUsage XmlLocationType { get; }
+
+        public string ServerVersion { get; }
+
+        public List<string> InstalledHotfixes { get; }
+
+        private static string GetHelp(CommandLineArgument[] args)
         {
-            CommandLineArgument claForUrl = clas.First(c => c.Usage == OptionUsage.Url);
-            CommandLineArgument claForFle = clas.First(c => c.Usage == OptionUsage.File);
-            if (claForUrl.IsActiveOption && claForFle.IsActiveOption)
-                throw new CFUValidationException(String.Format("Switches '-{0}' and '-{1}' cannot be used at the same time", claForFle.Switch, claForUrl.Switch));
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("\nUsage:");
+            sb.AppendLine("\n    CFUValidator.exe [options]");
+            sb.AppendLine("\nOptions:");
 
-            if (!claForUrl.IsActiveOption && !claForFle.IsActiveOption)
-                throw new CFUValidationException(String.Format("You must provide either option '-{0}' or '-{1}'", claForFle.Switch, claForUrl.Switch));
-
-            if (claForFle.IsActiveOption)
-                return claForFle;
-
-            return claForUrl;
+            var orderedArgs = args.OrderBy(c => c.Switch);
+            foreach (CommandLineArgument cla in orderedArgs)
+                sb.AppendLine($"    -{cla.Switch}    {cla.Description}");
+            return sb.ToString();
         }
-
-        public OptionUsage FileSource { get {return GetFileUsageCLA().Usage; } }
-
-        public string ServerVersion 
-        { 
-            get
-            {
-                CommandLineArgument cla = clas.First(c => c.Usage == OptionUsage.ServerVersion);
-                return !cla.IsActiveOption ? AllVersions : cla.Options.First();
-            }
-        }
-
-        public List<string> InstalledHotfixes
-        { 
-            get
-            {
-                CommandLineArgument cla = clas.First(c => c.Usage == OptionUsage.Hotfix);
-                if (!cla.IsActiveOption)
-                    return new List<string>();
-                return cla.Options;
-            }
-        }
-
-
-        public bool IsHelpRequired
-        {
-            get
-            {
-                return clas.First(c => c.Usage == OptionUsage.Help).IsActiveOption;
-            }
-        }
-
-        public string Help
-        {
-            get
-            {
-                StringBuilder sb = new StringBuilder("Execute the command with the following command line options\n\nOptions:\n");
-                foreach (CommandLineArgument cla in clas.OrderBy(c => c.Switch))
-                {
-                    sb.AppendLine(String.Format("-{0} {1}", cla.Switch, cla.Description));
-                }
-                return sb.ToString();
-            }
-        }
-
     }
 }

@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -40,12 +39,19 @@ namespace CFUValidator.CommandLineOptions
     {
         private readonly string[] args;
 
-        public List<CommandLineArgument> ParsedArguments { get; private set; }
+        public CommandLineArgument[] ParsedArguments { get; } =
+        {
+            new CommandLineArgument(OptionUsage.Help, 'h', "Display this help."),
+            new CommandLineArgument(OptionUsage.CheckZipContents, 'c', "Optionally check the zip contents of the hotfixes."),
+            new CommandLineArgument(OptionUsage.Url, 'u', "URL of CFU XML. Cannot be used with -f flag."),
+            new CommandLineArgument(OptionUsage.File, 'f', "Path to CFU XML file. Cannot be used with -u flag."),
+            new CommandLineArgument(OptionUsage.ServerVersion, 's', "Server version to test, eg. 6.0.2."),
+            new CommandLineArgument(OptionUsage.Hotfix, 'p', "Space delimited list of patches/hotfixes to test, e.g. XS602E001.")
+        };
 
-        public CommandLineParser(string[] args, List<CommandLineArgument> argsToParse)
+        public CommandLineParser(string[] args)
         {
             this.args = args;
-            ParsedArguments = argsToParse;
         }
 
         public void Parse()
@@ -53,7 +59,7 @@ namespace CFUValidator.CommandLineOptions
             string[] recastArgs = Regex.Split(string.Join(" ", args).Trim(), @"(?=[-])(?<=[ ])");
             foreach (string arg in recastArgs)
             {
-                if(String.IsNullOrEmpty(arg))
+                if (String.IsNullOrEmpty(arg))
                     continue;
 
                 string optionSwitch = Regex.Match(arg, "[-]{1}[a-z]{1}").Value.Trim();
@@ -63,7 +69,7 @@ namespace CFUValidator.CommandLineOptions
                 CommandLineArgument cla = ParsedArguments.FirstOrDefault(c => c.Switch == switchChar);
                 if (cla != null)
                 {
-                    cla.Options = splitArgs.Where(s=>!String.IsNullOrEmpty(s)).ToList();
+                    cla.Options = splitArgs.Where(s => !String.IsNullOrEmpty(s)).ToList();
                     cla.IsActiveOption = true;
                 }
             }
