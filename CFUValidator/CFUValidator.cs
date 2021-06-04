@@ -81,7 +81,7 @@ namespace CFUValidator
         {
             List<XenServerPatch> xenServerPatches; 
             List<XenServerVersion> xenServerVersions;
-            List<XenCenterVersion> xenCenterVersions;
+            List<ClientVersion> xenCenterVersions;
            
             Status = "Getting check for updates XML from " + XmlLocation + "...";
             ReadCheckForUpdatesXML(out xenServerPatches, out xenServerVersions, out xenCenterVersions);
@@ -107,7 +107,7 @@ namespace CFUValidator
 
         private void RunTestsForGivenServerVersion(List<XenServerVersion> xenServerVersions, 
                                                    List<XenServerPatch> xenServerPatches,
-                                                   List<XenCenterVersion> xenCenterVersions)
+                                                   List<ClientVersion> xenCenterVersions)
         {
             CheckProvidedVersionNumber(xenServerVersions);
             
@@ -115,7 +115,7 @@ namespace CFUValidator
             SetupMocks(xenServerPatches, xenServerVersions);
 
             Status = "Determining XenCenter update required...";
-            var xcupdateAlerts = XenAdmin.Core.Updates.NewXenCenterUpdateAlerts(xenCenterVersions, new Version(ServerVersion));
+            var xcupdateAlerts = XenAdmin.Core.Updates.NewClientUpdateAlerts(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
             var updateAlerts = XenAdmin.Core.Updates.NewXenServerVersionAlerts(xenServerVersions).Where(alert => !alert.CanIgnore).ToList();
@@ -206,7 +206,7 @@ namespace CFUValidator
         }
 
         private void GeneratePatchSummary(List<XenServerPatchAlert> alerts, List<AlertFeatureValidator> validators, HfxEligibilityValidator hfxEligibilityValidator,
-                                          List<XenServerVersionAlert> updateAlerts, List<XenCenterUpdateAlert> xcupdateAlerts)
+                                          List<XenServerVersionAlert> updateAlerts, List<ClientUpdateAlert> xcupdateAlerts)
         {
             OuputComponent oc = new OutputTextOuputComponent(XmlLocation, ServerVersion);
             XenCenterUpdateDecorator xcud = new XenCenterUpdateDecorator(oc, xcupdateAlerts);
@@ -230,7 +230,7 @@ namespace CFUValidator
 
         }
 
-        private void ReadCheckForUpdatesXML(out List<XenServerPatch> patches, out List<XenServerVersion> versions, out List<XenCenterVersion> xcVersions)
+        private void ReadCheckForUpdatesXML(out List<XenServerPatch> patches, out List<XenServerVersion> versions, out List<ClientVersion> xcVersions)
         {
             ICheckForUpdatesXMLSource checkForUpdates = xmlFactory.GetAction(UrlOrFile, XmlLocation);
             checkForUpdates.RunAsync();
@@ -246,7 +246,7 @@ namespace CFUValidator
 
             patches = checkForUpdates.XenServerPatches;
             versions = checkForUpdates.XenServerVersions;
-            xcVersions = checkForUpdates.XenCenterVersions;
+            xcVersions = checkForUpdates.ClientVersions;
         }
 
         private void SetupMocks(List<XenServerPatch> xenServerPatches, List<XenServerVersion> xenServerVersions)

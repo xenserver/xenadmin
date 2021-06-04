@@ -34,7 +34,7 @@ using System.Collections.Generic;
 
 namespace XenAdmin.Core
 {
-    public class XenCenterVersion
+    public class ClientVersion
     {
         public Version Version;
         public string Name;
@@ -44,7 +44,7 @@ namespace XenAdmin.Core
         public string Lang;
         public DateTime TimeStamp;
 
-        public XenCenterVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
+        public ClientVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
         {
             ParseVersion(version_lang);
             Name = name;

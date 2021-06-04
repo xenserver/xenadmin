@@ -36,11 +36,11 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Alerts
 {
-    public class XenCenterUpdateAlert : Alert
+    public class ClientUpdateAlert : Alert
     {
-        public readonly XenCenterVersion NewVersion;
+        public readonly ClientVersion NewVersion;
 
-        public XenCenterUpdateAlert(XenCenterVersion version)
+        public ClientUpdateAlert(ClientVersion version)
         {
             NewVersion = version;
             _timestamp = NewVersion.TimeStamp;
@@ -91,8 +91,8 @@ namespace XenAdmin.Alerts
 
         public override bool Equals(Alert other)
         {
-            if (other is XenCenterUpdateAlert xenCenterAlert)
-                return NewVersion.VersionAndLang == xenCenterAlert.NewVersion.VersionAndLang;
+            if (other is ClientUpdateAlert clientAlert)
+                return NewVersion.VersionAndLang == clientAlert.NewVersion.VersionAndLang;
 
             return base.Equals(other);
         }

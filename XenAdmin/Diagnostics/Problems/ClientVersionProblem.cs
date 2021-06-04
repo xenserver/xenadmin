@@ -35,11 +35,11 @@ using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Diagnostics.Problems
 {
-    public class XenCenterVersionProblem : ProblemWithInformationUrl
+    public class ClientVersionProblem : ProblemWithInformationUrl
     {
-        private XenCenterVersion _requiredXenCenterVersion;
+        private ClientVersion _requiredXenCenterVersion;
 
-        public XenCenterVersionProblem(Check check, XenCenterVersion requiredXenCenterVersion)
+        public ClientVersionProblem(Check check, ClientVersion requiredXenCenterVersion)
             : base(check)
         {
             _requiredXenCenterVersion = requiredXenCenterVersion;
@@ -56,11 +56,11 @@ namespace XenAdmin.Diagnostics.Problems
         public override Uri UriToLaunch => new Uri(_requiredXenCenterVersion.Url);
     }
 
-    public class XenCenterVersionWarning : WarningWithInformationUrl
+    public class ClientVersionWarning : WarningWithInformationUrl
     {
-        private XenCenterVersion _requiredXenCenterVersion;
+        private ClientVersion _requiredXenCenterVersion;
 
-        public XenCenterVersionWarning(Check check, XenCenterVersion requiredXenCenterVersion)
+        public ClientVersionWarning(Check check, ClientVersion requiredXenCenterVersion)
             : base(check)
         {
             _requiredXenCenterVersion = requiredXenCenterVersion;

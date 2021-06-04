@@ -244,7 +244,7 @@
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
-    <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\ClientVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
@@ -278,7 +278,7 @@
     <Compile Include="Dialogs\AttachUsbDialog.Designer.cs">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
+    <Compile Include="Diagnostics\Problems\ClientVersionProblem.cs" />
     <Compile Include="Dialogs\ConversionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1048,7 +1048,7 @@
     <Compile Include="TabPages\HAPage.Designer.cs">
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
+    <Compile Include="Alerts\Types\ClientUpdateAlert.cs" />
     <Compile Include="Wizards\PatchingWizard\AutomatedUpdatesBasePage.cs">
       <SubType>UserControl</SubType>
     </Compile>

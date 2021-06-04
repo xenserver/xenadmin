@@ -35,24 +35,24 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class XenCenterVersionCheck : Check
+    public class ClientVersionCheck : Check
     {
         private XenServerVersion _newServerVersion;
 
-        public XenCenterVersionCheck(XenServerVersion newServerVersion)
+        public ClientVersionCheck(XenServerVersion newServerVersion)
         {
             _newServerVersion = newServerVersion;
         }
         
         protected override Problem RunCheck()
         {
-            var requiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(_newServerVersion);
-            if (requiredXenCenterVersion == null) 
+            var requiredClientVersion = Updates.GetRequiredClientVersion(_newServerVersion);
+            if (requiredClientVersion == null) 
                 return null;
             if (_newServerVersion != null) 
-                return new XenCenterVersionProblem(this, requiredXenCenterVersion);
+                return new ClientVersionProblem(this, requiredClientVersion);
             else
-                return new XenCenterVersionWarning(this, requiredXenCenterVersion);
+                return new ClientVersionWarning(this, requiredClientVersion);
         }
 
         public override string Description => string.Format(Messages.XENCENTER_VERSION_CHECK_DESCRIPTION, BrandManager.BrandConsole);
