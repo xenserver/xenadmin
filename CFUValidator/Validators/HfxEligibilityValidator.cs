@@ -35,37 +35,37 @@ using XenAdmin.Core;
 
 namespace CFUValidator.Validators
 {
-    class HfxEligibilityValidator
+    class HfxEligibilityValidator : Validator
     {
         private List<XenServerVersion> xsversions;
-        public List<string> Results { get; set; }
 
         public HfxEligibilityValidator(List<XenServerVersion> xsversions)
         {
             this.xsversions = xsversions;
-            Results = new List<string>();
         }
 
-        public void Validate()
+        protected override string Header => "Running hotfix eligibility check...";
+
+        protected override string Footer => "Hotfix Eligibility check completed.";
+
+        protected override string SummaryTitle => "Hotfix eligibility check:";
+
+        protected override void ValidateCore(Action<string> statusReporter)
         {
             foreach (XenServerVersion version in xsversions)
-            {
                 DateSanityCheck(version);
-            }
         }
 
         private void DateSanityCheck(XenServerVersion version)
         {
             if (version.HotfixEligibility == hotfix_eligibility.none && version.EolDate == DateTime.MinValue)
-                Results.Add("Missing or wrong eol-date field on: " + version.Name);
+                Errors.Add("Missing or wrong eol-date field on: " + version.Name);
             if (version.HotfixEligibility == hotfix_eligibility.premium && version.HotfixEligibilityPremiumDate == DateTime.MinValue)
-                Results.Add("Missing or wrong hotfix-eligibility-premium-date field on: " + version.Name);
+                Errors.Add("Missing or wrong hotfix-eligibility-premium-date field on: " + version.Name);
             if (version.HotfixEligibility == hotfix_eligibility.cu && version.HotfixEligibilityNoneDate == DateTime.MinValue)
-                Results.Add("Missing or wrong hotfix-eligibility-none-date field on: " + version.Name);
+                Errors.Add("Missing or wrong hotfix-eligibility-none-date field on: " + version.Name);
             if (version.HotfixEligibility == hotfix_eligibility.cu && version.HotfixEligibilityPremiumDate == DateTime.MinValue)
-                Results.Add("Missing or wrong hotfix-eligibility-premium-date field on: " + version.Name);
+                Errors.Add("Missing or wrong hotfix-eligibility-premium-date field on: " + version.Name);
         }
-
-        public bool ErrorsFound { get { return Results.Count > 0; } }
     }
 }
