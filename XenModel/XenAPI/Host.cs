@@ -2522,7 +2522,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_network">Optional preferred network for migration First published in Unreleased.</param>
-        public static void evacuate(Session session, string _host, string _network)
+        public static void evacuate(Session session, string _host, string _network = null)
         {
             if (session.JsonRpcClient != null)
                 session.JsonRpcClient.host_evacuate(session.opaque_ref, _host, _network);
@@ -2537,7 +2537,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_network">Optional preferred network for migration First published in Unreleased.</param>
-        public static XenRef<Task> async_evacuate(Session session, string _host, string _network)
+        public static XenRef<Task> async_evacuate(Session session, string _host, string _network = null)
         {
           if (session.JsonRpcClient != null)
               return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host, _network);
