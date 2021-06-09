@@ -7315,20 +7315,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thumbprint.
+        ///   Looks up a localized string similar to Thumbprint: {0}.
         /// </summary>
-        public static string CERTIFICATE_THUMBPRINT_KEY {
+        public static string CERTIFICATE_THUMBPRINT_VALUE {
             get {
-                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_KEY", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_VALUE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validity period.
+        ///   Looks up a localized string similar to Trusted CA certificate.
         /// </summary>
-        public static string CERTIFICATE_VALIDITY_PERIOD_KEY {
+        public static string CERTIFICATE_TYPE_CA {
             get {
-                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_KEY", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_TYPE_CA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate.
+        /// </summary>
+        public static string CERTIFICATE_TYPE_HOST {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_TYPE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate.
+        /// </summary>
+        public static string CERTIFICATE_TYPE_HOST_INTERNAL {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_TYPE_HOST_INTERNAL", resourceCulture);
             }
         }
         

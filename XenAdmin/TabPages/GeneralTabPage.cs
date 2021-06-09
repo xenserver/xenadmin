@@ -1083,23 +1083,60 @@ namespace XenAdmin.TabPages
 
         }
 
+        private string GetCertificateType(certificate_type typ)
+        {
+            switch (typ)
+            {
+                case certificate_type.ca:
+                    return Messages.CERTIFICATE_TYPE_CA;
+                case certificate_type.host:
+                    return Messages.CERTIFICATE_TYPE_HOST;
+                case certificate_type.host_internal:
+                    return Messages.CERTIFICATE_TYPE_HOST_INTERNAL;
+                case certificate_type.unknown:
+                default:
+                    return Messages.UNKNOWN;
+            }
+        }
+
         private void GenerateCertificateBox()
         {
-            if (xenObject is Host host && Helpers.StockholmOrGreater(host) && host.certificates != null && host.certificates.Count > 0)
+            if (xenObject is Host host && Helpers.StockholmOrGreater(host) && host.certificates != null)
             {
-                var certificate = host.Connection.Resolve(host.certificates[0]);
-                if (certificate == null)
-                    return;
+                var certificates = host.certificates.Select(c => host.Connection.Resolve(c)).Where(c => c != null).ToList();
 
-                var cmdItem = new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true);
-
-                pdSectionCertificate.AddEntry(Messages.CERTIFICATE_VALIDITY_PERIOD_KEY,
-                    string.Format(Messages.CERTIFICATE_VALIDITY_PERIOD_VALUE,
+                foreach (var certificate in certificates)
+                {
+                    var validity = string.Format(Messages.CERTIFICATE_VALIDITY_PERIOD_VALUE,
                         HelpersGUI.DateTimeToString(certificate.not_before.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true),
-                        HelpersGUI.DateTimeToString(certificate.not_after.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true)),
-                    new[] {cmdItem});
+                        HelpersGUI.DateTimeToString(certificate.not_after.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true));
 
-                pdSectionCertificate.AddEntry(Messages.CERTIFICATE_THUMBPRINT_KEY, certificate.fingerprint);
+                    var thumbprint = string.Format(Messages.CERTIFICATE_THUMBPRINT_VALUE, certificate.fingerprint);
+
+                    var items = !Helpers.PostStockholm(host) || certificate.type == certificate_type.host
+                        ? new[] {new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true)}
+                        : new CommandToolStripMenuItem[] { };
+
+                    pdSectionCertificate.AddEntry(GetCertificateType(certificate.type),
+                        $"{validity}\n{thumbprint}", items);
+                }
+            }
+
+            if (xenObject is Pool pool && Helpers.PostStockholm(pool.Connection))
+            {
+                var certificates = pool.Connection.Cache.Certificates.Where(c => c != null && c.type == certificate_type.ca).ToList();
+
+                foreach (var certificate in certificates)
+                {
+                    var validity = string.Format(Messages.CERTIFICATE_VALIDITY_PERIOD_VALUE,
+                        HelpersGUI.DateTimeToString(certificate.not_before.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true),
+                        HelpersGUI.DateTimeToString(certificate.not_after.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true));
+
+                    var thumbprint = string.Format(Messages.CERTIFICATE_THUMBPRINT_VALUE, certificate.fingerprint);
+
+                    pdSectionCertificate.AddEntry(certificate.name,
+                        $"{GetCertificateType(certificate.type)}\n{validity}\n{thumbprint}");
+                }
             }
         }
 
