@@ -2643,11 +2643,17 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_SELECT_KEY_TITLE" xml:space="preserve">
     <value>Select TLS Key File</value>
   </data>
-  <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
-    <value>Thumbprint</value>
+  <data name="CERTIFICATE_THUMBPRINT_VALUE" xml:space="preserve">
+    <value>Thumbprint: {0}</value>
   </data>
-  <data name="CERTIFICATE_VALIDITY_PERIOD_KEY" xml:space="preserve">
-    <value>Validity period</value>
+  <data name="CERTIFICATE_TYPE_CA" xml:space="preserve">
+    <value>Trusted CA certificate</value>
+  </data>
+  <data name="CERTIFICATE_TYPE_HOST" xml:space="preserve">
+    <value>Server identity certificate</value>
+  </data>
+  <data name="CERTIFICATE_TYPE_HOST_INTERNAL" xml:space="preserve">
+    <value>Server internal identity certificate</value>
   </data>
   <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
     <value>Valid from {0} to {1}</value>
