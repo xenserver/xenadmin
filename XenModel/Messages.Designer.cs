@@ -40702,6 +40702,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Workload &amp;Balancing.
+        /// </summary>
+        public static string WLB_COMMAND_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("WLB_COMMAND_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workload Balancing Configuration for {0}.
         /// </summary>
         public static string WLB_CONFIGURATION_DIALOG {
@@ -40792,6 +40801,15 @@ namespace XenAdmin {
         public static string WLB_DISABLED {
             get {
                 return ResourceManager.GetString("WLB_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Disconnect WLB server....
+        /// </summary>
+        public static string WLB_DISCONNECT_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("WLB_DISCONNECT_MENU_ITEM", resourceCulture);
             }
         }
         
@@ -42082,6 +42100,15 @@ namespace XenAdmin {
         public static string WLB_REPORT_VIEW_CUSTOM {
             get {
                 return ResourceManager.GetString("WLB_REPORT_VIEW_CUSTOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Workload &amp;Reports....
+        /// </summary>
+        public static string WLB_REPORT_VIEW_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("WLB_REPORT_VIEW_MENU_ITEM", resourceCulture);
             }
         }
         

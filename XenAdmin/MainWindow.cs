@@ -2629,6 +2629,7 @@ namespace XenAdmin
             if (Program.Exiting)
                 return;
 
+            sender.Completed -= action_Completed;
             RequestRefreshTreeView();
         }
 

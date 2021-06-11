@@ -14068,6 +14068,9 @@ Schedule:
   <data name="WLB_AUTO_OPT" xml:space="preserve">
     <value>Automated optimizations</value>
   </data>
+  <data name="WLB_COMMAND_MENU_ITEM" xml:space="preserve">
+    <value>Workload &amp;Balancing</value>
+  </data>
   <data name="WLB_CONFIGURATION_DIALOG" xml:space="preserve">
     <value>Workload Balancing Configuration for {0}</value>
   </data>
@@ -14101,6 +14104,9 @@ A {0} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>Are you sure you want to disable Workload Balancing for pool '{0}'?</value>
+  </data>
+  <data name="WLB_DISCONNECT_MENU_ITEM" xml:space="preserve">
+    <value>&amp;Disconnect WLB server...</value>
   </data>
   <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
     <value>Are you sure you want to disconnect the Workload Balancing server from this pool?
@@ -14542,6 +14548,9 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
   </data>
   <data name="WLB_REPORT_VIEW_CUSTOM" xml:space="preserve">
     <value>Custom View</value>
+  </data>
+  <data name="WLB_REPORT_VIEW_MENU_ITEM" xml:space="preserve">
+    <value>View Workload &amp;Reports...</value>
   </data>
   <data name="WLB_REPORT_VIEW_TAG_COLUMN_HEADER" xml:space="preserve">
     <value>Filter Item</value>

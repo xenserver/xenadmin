@@ -2025,6 +2025,12 @@
   <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
+  <data name="toolStripMenuItemWlb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="toolStripMenuItemWlb.Text" xml:space="preserve">
+    <value>Workload &amp;Balancing</value>
+  </data>
   <data name="wlbReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
@@ -2844,11 +2850,11 @@
   <data name="statusLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
-  <data name="statusLabelAlerts.Text" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
+  <data name="statusLabelErrors.Text" xml:space="preserve">
+    <value>toolStripStatusLabel3</value>
   </data>
   <data name="statusLabelUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
@@ -2856,11 +2862,11 @@
   <data name="statusLabelUpdates.Text" xml:space="preserve">
     <value>toolStripStatusLabel2</value>
   </data>
-  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
-  <data name="statusLabelErrors.Text" xml:space="preserve">
-    <value>toolStripStatusLabel3</value>
+  <data name="statusLabelAlerts.Text" xml:space="preserve">
+    <value>toolStripStatusLabel1</value>
   </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 703</value>
@@ -3219,6 +3225,18 @@
   <data name="&gt;&gt;highAvailabilityToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
+    <value>toolStripMenuItemHaConfigure</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
+    <value>toolStripMenuItemHaDisable</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;disasterRecoveryToolStripMenuItem.Name" xml:space="preserve">
     <value>disasterRecoveryToolStripMenuItem</value>
   </data>
@@ -3277,6 +3295,18 @@
     <value>changePoolPasswordToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;changePoolPasswordToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
+    <value>toolStripMenuItemRotateSecret</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Name" xml:space="preserve">
+    <value>toolStripMenuItemEnableTls</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
@@ -4017,10 +4047,10 @@
   <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
-    <value>statusLabelAlerts</value>
+  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
+    <value>statusLabelErrors</value>
   </data>
-  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusLabelUpdates.Name" xml:space="preserve">
@@ -4029,34 +4059,16 @@
   <data name="&gt;&gt;statusLabelUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
-    <value>statusLabelErrors</value>
+  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
+    <value>statusLabelAlerts</value>
   </data>
-  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
-    <value>toolStripMenuItemRotateSecret</value>
+  <data name="&gt;&gt;toolStripMenuItemWlb.Name" xml:space="preserve">
+    <value>toolStripMenuItemWlb</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
-    <value>toolStripMenuItemHaConfigure</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
-    <value>toolStripMenuItemHaDisable</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemEnableTls.Name" xml:space="preserve">
-    <value>toolStripMenuItemEnableTls</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemEnableTls.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemWlb.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -137,6 +137,8 @@ namespace XenAdmin
             this.virtualAppliancesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
             this.highAvailabilityToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemHaConfigure = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemHaDisable = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disasterRecoveryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.drConfigureToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.DrWizardToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -147,6 +149,8 @@ namespace XenAdmin
             this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.changePoolPasswordToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemRotateSecret = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemEnableTls = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
@@ -273,13 +277,10 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripMenuItemRotateSecret = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.toolStripMenuItemHaConfigure = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.toolStripMenuItemHaDisable = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.toolStripMenuItemEnableTls = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripMenuItemWlb = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -919,8 +920,7 @@ namespace XenAdmin
             this.disasterRecoveryToolStripMenuItem,
             this.VMSnapshotScheduleToolStripMenuItem,
             this.exportResourceReportPoolToolStripMenuItem,
-            this.wlbReportsToolStripMenuItem,
-            this.wlbDisconnectToolStripMenuItem,
+            this.toolStripMenuItemWlb,
             this.conversionToolStripMenuItem,
             this.toolStripSeparator9,
             this.changePoolPasswordToolStripMenuItem,
@@ -993,6 +993,18 @@ namespace XenAdmin
             this.highAvailabilityToolStripMenuItem.Name = "highAvailabilityToolStripMenuItem";
             resources.ApplyResources(this.highAvailabilityToolStripMenuItem, "highAvailabilityToolStripMenuItem");
             // 
+            // toolStripMenuItemHaConfigure
+            // 
+            this.toolStripMenuItemHaConfigure.Command = new XenAdmin.Commands.HAConfigureCommand();
+            this.toolStripMenuItemHaConfigure.Name = "toolStripMenuItemHaConfigure";
+            resources.ApplyResources(this.toolStripMenuItemHaConfigure, "toolStripMenuItemHaConfigure");
+            // 
+            // toolStripMenuItemHaDisable
+            // 
+            this.toolStripMenuItemHaDisable.Command = new XenAdmin.Commands.HADisableCommand();
+            this.toolStripMenuItemHaDisable.Name = "toolStripMenuItemHaDisable";
+            resources.ApplyResources(this.toolStripMenuItemHaDisable, "toolStripMenuItemHaDisable");
+            // 
             // disasterRecoveryToolStripMenuItem
             // 
             this.disasterRecoveryToolStripMenuItem.Command = new XenAdmin.Commands.DRCommand();
@@ -1054,6 +1066,18 @@ namespace XenAdmin
             this.changePoolPasswordToolStripMenuItem.Command = new XenAdmin.Commands.ChangeHostPasswordCommand();
             this.changePoolPasswordToolStripMenuItem.Name = "changePoolPasswordToolStripMenuItem";
             resources.ApplyResources(this.changePoolPasswordToolStripMenuItem, "changePoolPasswordToolStripMenuItem");
+            // 
+            // toolStripMenuItemRotateSecret
+            // 
+            this.toolStripMenuItemRotateSecret.Command = new XenAdmin.Commands.RotatePoolSecretCommand();
+            this.toolStripMenuItemRotateSecret.Name = "toolStripMenuItemRotateSecret";
+            resources.ApplyResources(this.toolStripMenuItemRotateSecret, "toolStripMenuItemRotateSecret");
+            // 
+            // toolStripMenuItemEnableTls
+            // 
+            this.toolStripMenuItemEnableTls.Command = new XenAdmin.Commands.EnableTlsVerificationCommand();
+            this.toolStripMenuItemEnableTls.Name = "toolStripMenuItemEnableTls";
+            resources.ApplyResources(this.toolStripMenuItemEnableTls, "toolStripMenuItemEnableTls");
             // 
             // toolStripMenuItem1
             // 
@@ -1913,17 +1937,17 @@ namespace XenAdmin
             this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.statusLabel.Spring = true;
             // 
-            // statusLabelAlerts
+            // statusLabelErrors
             // 
-            this.statusLabelAlerts.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.IsLink = true;
-            this.statusLabelAlerts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.statusLabelAlerts.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.Name = "statusLabelAlerts";
-            resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
-            this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
+            this.statusLabelErrors.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.IsLink = true;
+            this.statusLabelErrors.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.statusLabelErrors.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.Name = "statusLabelErrors";
+            resources.ApplyResources(this.statusLabelErrors, "statusLabelErrors");
+            this.statusLabelErrors.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelErrors.Click += new System.EventHandler(this.statusLabelErrors_Click);
             // 
             // statusLabelUpdates
             // 
@@ -1937,41 +1961,26 @@ namespace XenAdmin
             this.statusLabelUpdates.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelUpdates.Click += new System.EventHandler(this.statusLabelUpdates_Click);
             // 
-            // statusLabelErrors
+            // statusLabelAlerts
             // 
-            this.statusLabelErrors.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.IsLink = true;
-            this.statusLabelErrors.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.statusLabelErrors.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.Name = "statusLabelErrors";
-            resources.ApplyResources(this.statusLabelErrors, "statusLabelErrors");
-            this.statusLabelErrors.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.Click += new System.EventHandler(this.statusLabelErrors_Click);
+            this.statusLabelAlerts.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.IsLink = true;
+            this.statusLabelAlerts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.statusLabelAlerts.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.Name = "statusLabelAlerts";
+            resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
+            this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
             // 
-            // toolStripMenuItemRotateSecret
+            // toolStripMenuItemWlb
             // 
-            this.toolStripMenuItemRotateSecret.Name = "toolStripMenuItemRotateSecret";
-            this.toolStripMenuItemRotateSecret.Command = new XenAdmin.Commands.RotatePoolSecretCommand();
-            resources.ApplyResources(this.toolStripMenuItemRotateSecret, "toolStripMenuItemRotateSecret");
-            // 
-            // toolStripMenuItemHaConfigure
-            // 
-            this.toolStripMenuItemHaConfigure.Name = "toolStripMenuItemHaConfigure";
-            this.toolStripMenuItemHaConfigure.Command = new XenAdmin.Commands.HAConfigureCommand();
-            resources.ApplyResources(this.toolStripMenuItemHaConfigure, "toolStripMenuItemHaConfigure");
-            // 
-            // toolStripMenuItemHaDisable
-            // 
-            this.toolStripMenuItemHaDisable.Name = "toolStripMenuItemHaDisable";
-            this.toolStripMenuItemHaDisable.Command = new XenAdmin.Commands.HADisableCommand();
-            resources.ApplyResources(this.toolStripMenuItemHaDisable, "toolStripMenuItemHaDisable");
-            // 
-            // toolStripMenuItemEnableTls
-            // 
-            this.toolStripMenuItemEnableTls.Name = "toolStripMenuItemEnableTls";
-            this.toolStripMenuItemEnableTls.Command = new XenAdmin.Commands.EnableTlsVerificationCommand();
-            resources.ApplyResources(this.toolStripMenuItemEnableTls, "toolStripMenuItemEnableTls");
+            this.toolStripMenuItemWlb.Command = new XenAdmin.Commands.WlbCommand();
+            this.toolStripMenuItemWlb.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.wlbReportsToolStripMenuItem,
+                this.wlbDisconnectToolStripMenuItem});
+            this.toolStripMenuItemWlb.Name = "toolStripMenuItemWlb";
+            resources.ApplyResources(this.toolStripMenuItemWlb, "toolStripMenuItemWlb");
             // 
             // MainWindow
             // 
@@ -2252,6 +2261,7 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaConfigure;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaDisable;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemEnableTls;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemWlb;
     }
 
 }
