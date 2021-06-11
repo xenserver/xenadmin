@@ -2865,7 +2865,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\DisasterRecoveryCommand.cs" />
-    <Compile Include="Commands\DisconnectWlbServerCommand.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\CreateVMFromTemplateCommand.cs" />
     <Compile Include="Commands\DRConfigureCommand.cs" />
@@ -3474,7 +3473,7 @@
     </Compile>
     <Compile Include="Commands\SuspendVMCommand.cs" />
     <Compile Include="Commands\TakeSnapshotCommand.cs" />
-    <Compile Include="Commands\ViewWorkloadReportsCommand.cs">
+    <Compile Include="Commands\WlbCommand.cs">
     </Compile>
     <Compile Include="Commands\VirtualDiskCommand.cs" />
     <Compile Include="Commands\VMOperationHomeServerCommand.cs" />
