@@ -549,10 +549,9 @@ namespace XenAdmin.TabPages
                         }
                     };
 
-                var menuItems = new[] { editValue };
                 CustomFieldWrapper cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
 
-                s.AddEntry(customField.Definition.Name.Ellipsise(30), cfWrapper.ToString(), menuItems, customField.Definition.Name);
+                s.AddEntry(customField.Definition.Name.Ellipsise(30), cfWrapper.ToString(), customField.Definition.Name, editValue);
             }
         }
 
@@ -585,11 +584,9 @@ namespace XenAdmin.TabPages
             var poolPartPatches = poolPartialPatches();
             if (!string.IsNullOrEmpty(poolPartPatches))
             {
-                CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
-                    new InstallNewUpdateCommand(Program.MainWindow), true);
-                var menuItems = new[] { applypatch };
 
-                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, menuItems, Color.Red);
+                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, Color.Red,
+                    new CommandToolStripMenuItem(new InstallNewUpdateCommand(Program.MainWindow), true));
             }
         }
 
@@ -674,20 +671,18 @@ namespace XenAdmin.TabPages
             bool broken = sr.IsBroken() || !sr.MultipathAOK();
             bool detached = !sr.HasPBDs();
 
-            var repair = new ToolStripMenuItem
+            var repairItem = new ToolStripMenuItem
                 {
                     Text = Messages.GENERAL_SR_CONTEXT_REPAIR,
                     Image = Images.StaticImages._000_StorageBroken_h32bit_16
                 };
-            repair.Click += delegate
+            repairItem.Click += delegate
                 {
                     Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
                 };
 
-            var menuItems = new[] { repair };
-
             if (broken && !detached)
-                s.AddEntry(FriendlyName("SR.state"), sr.StatusString(), menuItems);
+                s.AddEntry(FriendlyName("SR.state"), sr.StatusString(), repairItem);
             else
                 s.AddEntry(FriendlyName("SR.state"), sr.StatusString());
 
@@ -709,7 +704,7 @@ namespace XenAdmin.TabPages
 
                     if (!detached)
                         s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
-                            Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, menuItems, Color.Red);
+                            Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red, repairItem);
                     else
                         s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
                             Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red);
@@ -717,13 +712,13 @@ namespace XenAdmin.TabPages
                     continue;
                 }
 
-                pbdToSR.PropertyChanged -= new PropertyChangedEventHandler(PropertyChanged);
-                pbdToSR.PropertyChanged += new PropertyChangedEventHandler(PropertyChanged);
+                pbdToSR.PropertyChanged -= PropertyChanged;
+                pbdToSR.PropertyChanged += PropertyChanged;
 
                 if (!pbdToSR.currently_attached)
                 {
                     if (!detached)
-                        s.AddEntry(Helpers.GetName(host).Ellipsise(30), pbdToSR.StatusString(), menuItems, Color.Red);
+                        s.AddEntry(Helpers.GetName(host).Ellipsise(30), pbdToSR.StatusString(), Color.Red, repairItem);
                     else
                         s.AddEntry(Helpers.GetName(host).Ellipsise(30), pbdToSR.StatusString(), Color.Red);
                 }
@@ -944,7 +939,8 @@ namespace XenAdmin.TabPages
                         licenseStatus.Updated ? ss.ExpiryStatus : Messages.GENERAL_LICENSE_QUERYING, editItem);
                     s.AddEntry(FriendlyName("host.license_params-expiry"),
                         licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
-                        editItem, ss.ShowExpiryDate);
+                        ss.ShowExpiryDate,
+                        editItem);
                 }
 
                 info.Remove("expiry");
@@ -971,9 +967,9 @@ namespace XenAdmin.TabPages
 
                     var openUrl = new ToolStripMenuItem(Messages.LICENSE_SERVER_WEB_CONSOLE_GOTO, null,
                         (sender, e) => OpenWebConsole());
-                    
+
                     s.AddEntryLink(FriendlyName("host.license_server-address"), host.license_server["address"],
-                                   new[] {openUrl}, OpenWebConsole);
+                        OpenWebConsole, openUrl);
                 }
             }
             if (host.license_server.ContainsKey("port"))
@@ -1113,12 +1109,11 @@ namespace XenAdmin.TabPages
 
                     var thumbprint = string.Format(Messages.CERTIFICATE_THUMBPRINT_VALUE, certificate.fingerprint);
 
-                    var items = !Helpers.PostStockholm(host) || certificate.type == certificate_type.host
-                        ? new[] {new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true)}
-                        : new CommandToolStripMenuItem[] { };
-
-                    pdSectionCertificate.AddEntry(GetCertificateType(certificate.type),
-                        $"{validity}\n{thumbprint}", items);
+                    if (!Helpers.PostStockholm(host) || certificate.type == certificate_type.host)
+                        pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}",
+                            new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true));
+                    else
+                        pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}");
                 }
             }
 
@@ -1170,13 +1165,11 @@ namespace XenAdmin.TabPages
                 }
                 else if (!host.enabled)
                 {
-                    var item = new CommandToolStripMenuItem(new HostMaintenanceModeCommand(
-                        Program.MainWindow, host, HostMaintenanceModeCommandParameter.Exit));
-
                     s.AddEntry(FriendlyName("host.enabled"),
                                host.MaintenanceMode() ? Messages.HOST_IN_MAINTENANCE_MODE : Messages.DISABLED,
-                               new[] { item },
-                               Color.Red);
+                               Color.Red,
+                               new CommandToolStripMenuItem(new HostMaintenanceModeCommand(
+                                   Program.MainWindow, host, HostMaintenanceModeCommandParameter.Exit)));
                 }
                 else
                 {
@@ -1195,8 +1188,8 @@ namespace XenAdmin.TabPages
                     else
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.DISABLED,
-                            new[] {new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool))},
-                            Color.Red);
+                            Color.Red,
+                            new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
@@ -1244,7 +1237,7 @@ namespace XenAdmin.TabPages
                         var applProperties = new ToolStripMenuItem(Messages.VM_APPLIANCE_PROPERTIES, null,
                             (sender, e) => LaunchProperties());
 
-                        s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name(), new[] {applProperties}, LaunchProperties);
+                        s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name(), LaunchProperties, applProperties);
                     }
 				}
 
@@ -1326,8 +1319,8 @@ namespace XenAdmin.TabPages
                     else
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.DISABLED,
-                            new[] {new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p))},
-                            Color.Red);
+                            Color.Red,
+                            new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p)));
                 }
 
                 var master = p.Connection.Resolve(p.master);
@@ -1352,8 +1345,7 @@ namespace XenAdmin.TabPages
 
                         s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
                             string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText()),
-                            new[] {runRpuWizard},
-                            cmd);
+                            cmd, runRpuWizard);
                     }
                 }
             }
@@ -1496,13 +1488,13 @@ namespace XenAdmin.TabPages
 
                                 var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null,
                                     (sender, args) => GoToHelp());
-                                s.AddEntryLink(string.Empty, Messages.INSTALLTOOLS_READ_MORE, new[] {toolsItem}, GoToHelp);
+                                s.AddEntryLink(string.Empty, Messages.INSTALLTOOLS_READ_MORE, GoToHelp, toolsItem);
                             }
                             else
                             {
                                 var cmd = new InstallToolsCommand(Program.MainWindow, vm);
                                 var toolsItem = new ToolStripMenuItem(installMessage, null, (sender, args) => cmd.Execute());
-                                s.AddEntryLink(string.Empty, installMessage, new[] {toolsItem}, cmd);
+                                s.AddEntryLink(string.Empty, installMessage, cmd, toolsItem);
                             }
                         }
                     }
@@ -1527,7 +1519,7 @@ namespace XenAdmin.TabPages
                                 var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null, (sender, args) => GoToHelp());
 
                                 s.AddEntry(FriendlyName("VM.VirtualizationState"), statusString);
-                                s.AddEntryLink("", Messages.INSTALLTOOLS_READ_MORE, new[] {toolsItem}, GoToHelp);
+                                s.AddEntryLink("", Messages.INSTALLTOOLS_READ_MORE, GoToHelp, toolsItem);
                             }
                             else
                             {
@@ -1536,7 +1528,7 @@ namespace XenAdmin.TabPages
                                     (sender, args) => cmd.Execute());
 
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), statusString,
-                                    new[] {toolsItem}, cmd);
+                                    cmd, toolsItem);
                             }
                         }
                         else
@@ -1653,19 +1645,19 @@ namespace XenAdmin.TabPages
 
         private void GenFolderRow(PDSection s)
         {
-            List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-            if (xenObject.Path != "")
+            var folderValue = new FolderListItem(xenObject.Path, FolderListItem.AllowSearch.None, false);
+            var propertiesItem = new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject));
+
+            if (xenObject.Path == "")
             {
-                var item = new ToolStripMenuItem(Messages.VIEW_FOLDER_MENU_OPTION);
-                item.Click += delegate { Program.MainWindow.SearchForFolder(xenObject.Path); };
-                menuItems.Add(item);
+                s.AddEntry(Messages.FOLDER, folderValue, propertiesItem);
             }
-            menuItems.Add(new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject)));
-            s.AddEntry(
-                Messages.FOLDER,
-                new FolderListItem(xenObject.Path, FolderListItem.AllowSearch.None, false),
-                menuItems
-                );
+            else
+            {
+                var folderItem = new ToolStripMenuItem(Messages.VIEW_FOLDER_MENU_OPTION);
+                folderItem.Click += (sender, args) => Program.MainWindow.SearchForFolder(xenObject.Path);
+                s.AddEntry(Messages.FOLDER, folderValue, folderItem, propertiesItem);
+            }
         }
 
         private void GenerateMemoryBox()
