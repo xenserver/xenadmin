@@ -211,11 +211,10 @@ namespace XenAdmin.Controls
             contextMenuStrip1.Items.Clear();
             contextMenuStrip1.Items.Add(copyToolStripMenuItem);
 
-            var menuItems = row.Tag as IEnumerable<ToolStripMenuItem>;
-            if (menuItems != null)
+            if (row.Tag is ToolStripMenuItem[] menuItems && menuItems.Length > 0)
             {
                 contextMenuStrip1.Items.Add(new ToolStripSeparator());
-                contextMenuStrip1.Items.AddRange(menuItems.ToArray());
+                contextMenuStrip1.Items.AddRange(menuItems.Cast<ToolStripItem>().ToArray());
             }
             contextMenuStrip1.Show(dataGridViewEx1, dataGridViewEx1.PointToClient(MousePosition));
         }
@@ -370,25 +369,16 @@ namespace XenAdmin.Controls
             r.Cells[1].Value = Value;
             return r;
         }
-        public void AddEntry(string Key, string Value)
-        {
-            var r = CreateRow(Key, Value);
-            AddRow(r);
-        }
 
-        public void AddEntry(string Key, string Value, ToolStripMenuItem contextMenuItem)
-        {
-            AddEntry(Key, Value, new[] { contextMenuItem });
-        }
 
-        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems)
+        public void AddEntry(string Key, string Value, params ToolStripMenuItem[] contextMenuItems)
         {
             var r = CreateRow(Key, Value);
             r.Tag = contextMenuItems;
             AddRow(r);
         }
-        
-        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, string toolTipText)
+
+        public void AddEntry(string Key, string Value, string toolTipText, params ToolStripMenuItem[] contextMenuItems)
         {
             AddEntry(Key, Value, contextMenuItems);
             if (toolTipText != Key)
@@ -403,7 +393,7 @@ namespace XenAdmin.Controls
             dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
         }
 
-        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Color fontColor)
+        public void AddEntry(string Key, string Value, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
         {
             var r = CreateRow(Key, Value);
             r.Cells[1].Style.ForeColor = fontColor;
@@ -412,7 +402,7 @@ namespace XenAdmin.Controls
             dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
         }
 
-        public void AddEntry(string Key, FolderListItem Value, IEnumerable<ToolStripMenuItem> contextMenuItems)
+        public void AddEntry(string Key, FolderListItem Value, params ToolStripMenuItem[] contextMenuItems)
         {
             // Special case for folders: CA-33311
 
@@ -426,7 +416,16 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        internal void AddEntryLink(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Command command)
+        public void AddEntry(string Key, string Value, bool visible, params ToolStripMenuItem[] contextMenuItems)
+        {
+            var r = CreateRow(Key, Value);
+            r.Tag = contextMenuItems;
+            r.Visible = visible;
+            AddRow(r);
+        }
+
+
+        internal void AddEntryLink(string Key, string Value, Command command, params ToolStripMenuItem[] contextMenuItems)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
@@ -440,7 +439,7 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        internal void AddEntryLink(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Action action)
+        internal void AddEntryLink(string Key, string Value, Action action, params ToolStripMenuItem[] contextMenuItems)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
@@ -454,18 +453,6 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        public void AddEntry(string Key, string Value, ToolStripMenuItem contextMenuItem, bool visible)
-        {
-            AddEntry(Key, Value, new[] { contextMenuItem }, visible);
-        }
-
-        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, bool visible)
-        {
-            var r = CreateRow(Key, Value);
-            r.Tag = contextMenuItems;
-            r.Visible = visible;
-            AddRow(r);
-        }
 
         public void UpdateEntryValueWithKey(string Key, string newValue, bool visible)
         {
