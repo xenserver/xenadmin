@@ -21399,15 +21399,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install certi&amp;ficate....
-        /// </summary>
-        public static string INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Installing server certificate....
         /// </summary>
         public static string INSTALL_SERVER_CERTIFICATE_DESCRIPTION {
@@ -22912,6 +22903,24 @@ namespace XenAdmin {
         public static string MAINWINDOW_ADD_HOST {
             get {
                 return ResourceManager.GetString("MAINWINDOW_ADD_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certi&amp;ficate.
+        /// </summary>
+        public static string MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cert&amp;ificate.
+        /// </summary>
+        public static string MAINWINDOW_CERTIFICATE_MENU_TEXT {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_CERTIFICATE_MENU_TEXT", resourceCulture);
             }
         }
         
@@ -32727,6 +32736,42 @@ namespace XenAdmin {
         public static string REQUIRED_UPDATES {
             get {
                 return ResourceManager.GetString("REQUIRED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetting certificate....
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Reset certificate....
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_MENU {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetting certificate on server {0}....
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The server&apos;s identity certificate will be replaced by a self-signed certificate. Do you want to continue?.
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_WARNING {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_WARNING", resourceCulture);
             }
         }
         
