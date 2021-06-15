@@ -119,7 +119,7 @@
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\EnableTlsVerificationCommand.cs" />
     <Compile Include="Commands\RotatePoolSecretCommand.cs" />
-    <Compile Include="Commands\InstallCertificateCommand.cs" />
+    <Compile Include="Commands\CertificateCommand.cs" />
     <Compile Include="Commands\LaunchConversionManagerCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DisableChangedBlockTrackingCommand.cs" />

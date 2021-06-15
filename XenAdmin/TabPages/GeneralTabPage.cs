@@ -1111,7 +1111,8 @@ namespace XenAdmin.TabPages
 
                     if (!Helpers.PostStockholm(host) || certificate.type == certificate_type.host)
                         pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}",
-                            new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true));
+                            new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true),
+                            new CommandToolStripMenuItem(new ResetCertificateCommand(Program.MainWindow, host), true));
                     else
                         pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}");
                 }

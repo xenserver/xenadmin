@@ -144,6 +144,7 @@ namespace XenAdmin
             this.DrWizardToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.VMSnapshotScheduleToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.exportResourceReportPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemWlb = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbReportsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbDisconnectToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.conversionToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -177,6 +178,7 @@ namespace XenAdmin
             this.backupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.restoreFromBackupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripMenuItemInstallCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.maintenanceModeToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.controlDomainMemoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -280,7 +282,7 @@ namespace XenAdmin
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripMenuItemWlb = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripMenuItemResetCertificate = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1038,6 +1040,15 @@ namespace XenAdmin
             this.exportResourceReportPoolToolStripMenuItem.Name = "exportResourceReportPoolToolStripMenuItem";
             resources.ApplyResources(this.exportResourceReportPoolToolStripMenuItem, "exportResourceReportPoolToolStripMenuItem");
             // 
+            // toolStripMenuItemWlb
+            // 
+            this.toolStripMenuItemWlb.Command = new XenAdmin.Commands.WlbCommand();
+            this.toolStripMenuItemWlb.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wlbReportsToolStripMenuItem,
+            this.wlbDisconnectToolStripMenuItem});
+            this.toolStripMenuItemWlb.Name = "toolStripMenuItemWlb";
+            resources.ApplyResources(this.toolStripMenuItemWlb, "toolStripMenuItemWlb");
+            // 
             // wlbReportsToolStripMenuItem
             // 
             this.wlbReportsToolStripMenuItem.Command = new XenAdmin.Commands.ViewWorkloadReportsCommand();
@@ -1124,7 +1135,7 @@ namespace XenAdmin
             this.backupToolStripMenuItem,
             this.restoreFromBackupToolStripMenuItem,
             this.toolStripSeparator23,
-            this.toolStripMenuItemInstallCertificate,
+            this.toolStripMenuItemCertificate,
             this.maintenanceModeToolStripMenuItem1,
             this.controlDomainMemoryToolStripMenuItem,
             this.RemoveCrashdumpsToolStripMenuItem,
@@ -1259,6 +1270,15 @@ namespace XenAdmin
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
             resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
+            // 
+            // toolStripMenuItemCertificate
+            // 
+            this.toolStripMenuItemCertificate.Command = new XenAdmin.Commands.CertificateCommand();
+            this.toolStripMenuItemCertificate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemInstallCertificate,
+            this.toolStripMenuItemResetCertificate});
+            this.toolStripMenuItemCertificate.Name = "toolStripMenuItemCertificate";
+            resources.ApplyResources(this.toolStripMenuItemCertificate, "toolStripMenuItemCertificate");
             // 
             // toolStripMenuItemInstallCertificate
             // 
@@ -1973,14 +1993,11 @@ namespace XenAdmin
             this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
             // 
-            // toolStripMenuItemWlb
+            // toolStripMenuItemResetCertificate
             // 
-            this.toolStripMenuItemWlb.Command = new XenAdmin.Commands.WlbCommand();
-            this.toolStripMenuItemWlb.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.wlbReportsToolStripMenuItem,
-                this.wlbDisconnectToolStripMenuItem});
-            this.toolStripMenuItemWlb.Name = "toolStripMenuItemWlb";
-            resources.ApplyResources(this.toolStripMenuItemWlb, "toolStripMenuItemWlb");
+            this.toolStripMenuItemResetCertificate.Command = new XenAdmin.Commands.ResetCertificateCommand();
+            this.toolStripMenuItemResetCertificate.Name = "toolStripMenuItemResetCertificate";
+            resources.ApplyResources(this.toolStripMenuItemResetCertificate, "toolStripMenuItemResetCertificate");
             // 
             // MainWindow
             // 
@@ -2262,6 +2279,8 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaDisable;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemEnableTls;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemWlb;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemCertificate;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemResetCertificate;
     }
 
 }

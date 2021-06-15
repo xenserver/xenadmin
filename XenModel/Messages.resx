@@ -7452,9 +7452,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
   </data>
-  <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
-    <value>Install certi&amp;ficate...</value>
-  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
     <value>Installing server certificate...</value>
   </data>
@@ -7955,6 +7952,12 @@ Size: {3}</value>
   </data>
   <data name="MAINWINDOW_ADD_HOST" xml:space="preserve">
     <value>&amp;Add...</value>
+  </data>
+  <data name="MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT" xml:space="preserve">
+    <value>Certi&amp;ficate</value>
+  </data>
+  <data name="MAINWINDOW_CERTIFICATE_MENU_TEXT" xml:space="preserve">
+    <value>Cert&amp;ificate</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_MIGRATE" xml:space="preserve">
     <value>Do you want to migrate the VM {0} to the server {1}?</value>
@@ -11337,6 +11340,18 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>Required Updates</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
+    <value>Resetting certificate...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_MENU" xml:space="preserve">
+    <value>&amp;Reset certificate...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>Resetting certificate on server {0}...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_WARNING" xml:space="preserve">
+    <value>The server's identity certificate will be replaced by a self-signed certificate. Do you want to continue?</value>
   </data>
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
