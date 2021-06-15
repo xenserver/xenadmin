@@ -162,6 +162,7 @@
     <Compile Include="Actions\VM\VMCrossPoolMigrateAction.cs" />
     <Compile Include="Actions\VM\VMSnapshotCreateAction.cs" />
     <Compile Include="Actions\VM\VMStartAction.cs" />
+    <Compile Include="Actions\WLB\WlbEvacuateRecommendationsAction.cs" />
     <Compile Include="Actions\WLB\WlbRetrieveVmRecommendationsAction.cs" />
     <Compile Include="Actions\XCM\ActivateConversionVpxAction.cs" />
     <Compile Include="Actions\ZipStatusReportAction.cs" />
@@ -327,7 +328,7 @@
     <Compile Include="Actions\WLB\EnableWLBAction.cs" />
     <Compile Include="Actions\WLB\InitializeWLBAction.cs" />
     <Compile Include="Actions\WLB\SendWlbConfigurationAction.cs" />
-    <Compile Include="Actions\WLB\WlbRetrieveRecommendationAction.cs" />
+    <Compile Include="Actions\WLB\WlbRetrieveRecommendationsAction.cs" />
     <Compile Include="Alerts\PerfmonDefinition.cs" />
     <Compile Include="Alerts\PerfmonOptionsDefinition.cs" />
     <Compile Include="InvisibleMessages.Designer.cs">
