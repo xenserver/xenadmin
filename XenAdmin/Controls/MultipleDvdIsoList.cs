@@ -52,23 +52,21 @@ namespace XenAdmin.Controls
             InitializeComponent();
         }
 
-        private VM vm = null;
+        private VM vm;
         public VM VM
         {
             set
             {
                 DeregisterEvents();
-                cdChanger1.vm = value;
+                cdChanger1.VM = value;
                 vm = value;
                 if (vm != null)
-                {
-                    vm.PropertyChanged += new PropertyChangedEventHandler(vm_PropertyChanged);
-                }
+                    vm.PropertyChanged += vm_PropertyChanged;
                 refreshDrives();
             }
             get 
             {
-                return cdChanger1.vm;
+                return cdChanger1.VM;
             }
         }
 
@@ -250,7 +248,7 @@ namespace XenAdmin.Controls
             if (inRefresh)
                 return;
 
-            cdChanger1.Drive = comboBoxDrive.SelectedItem != null ? ((VbdCombiItem)comboBoxDrive.SelectedItem).vbd : null;
+            cdChanger1.Drive = (comboBoxDrive.SelectedItem as VbdCombiItem)?.vbd;
         }
 
 

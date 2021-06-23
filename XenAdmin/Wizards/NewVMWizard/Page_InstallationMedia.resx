@@ -142,7 +142,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="bootModesControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 149</value>
+    <value>542, 192</value>
   </data>
   <data name="bootModesControl1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -250,7 +250,7 @@
     <value>524, 70</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -307,7 +307,7 @@
     <value>149, 17</value>
   </data>
   <data name="CdRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="CdRadioButton.Text" xml:space="preserve">
     <value>Install from this &amp;DVD drive:</value>
@@ -340,7 +340,7 @@
     <value>122, 17</value>
   </data>
   <data name="UrlRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="UrlRadioButton.Text" xml:space="preserve">
     <value>Install from this &amp;URL:</value>
@@ -358,7 +358,7 @@
     <value>3</value>
   </data>
   <data name="CdDropDownBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="CdDropDownBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 69</value>
@@ -370,7 +370,7 @@
     <value>381, 21</value>
   </data>
   <data name="CdDropDownBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;CdDropDownBox.Name" xml:space="preserve">
     <value>CdDropDownBox</value>
@@ -385,7 +385,7 @@
     <value>5</value>
   </data>
   <data name="UrlTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="UrlTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 128</value>
@@ -397,7 +397,7 @@
     <value>381, 20</value>
   </data>
   <data name="UrlTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;UrlTextBox.Name" xml:space="preserve">
     <value>UrlTextBox</value>
@@ -411,32 +411,26 @@
   <data name="&gt;&gt;UrlTextBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="linkLabelAttachNewIsoStore.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="linkLabelAttachNewIsoStore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="linkLabelAttachNewIsoStore.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 66</value>
-  </data>
-  <data name="linkLabelAttachNewIsoStore.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 0, 3, 0</value>
+    <value>410, 73</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 27</value>
+    <value>89, 13</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.Text" xml:space="preserve">
     <value>New ISO library...</value>
-  </data>
-  <data name="linkLabelAttachNewIsoStore.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;linkLabelAttachNewIsoStore.Name" xml:space="preserve">
     <value>linkLabelAttachNewIsoStore</value>
@@ -463,10 +457,10 @@
     <value>8</value>
   </data>
   <data name="panelInstallationMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 418</value>
+    <value>548, 464</value>
   </data>
   <data name="panelInstallationMethod.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;panelInstallationMethod.Name" xml:space="preserve">
     <value>panelInstallationMethod</value>
@@ -520,7 +514,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 418</value>
+    <value>548, 464</value>
   </data>
   <data name="&gt;&gt;comboBoxToolTip.Name" xml:space="preserve">
     <value>comboBoxToolTip</value>

@@ -239,14 +239,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                         page_4_HomeServer.DisableStep = false;
                 }
 
-                // if custom template has no cd drive (must have been removed via cli) don't add one
-                var noInstallMedia = Helpers.CustomWithNoDVD(selectedTemplate);
-
-                if (selectedTemplate != null && selectedTemplate.DefaultTemplate() && string.IsNullOrEmpty(selectedTemplate.InstallMethods()))
-                    noInstallMedia = true;
-
-                page_3_InstallationMedia.ShowInstallationMedia = !noInstallMedia;
-
                 // The user cannot set their own affinity, use the one off the template
                 if (BlockAffinitySelection)
                     m_affinity = xenConnection.Resolve(selectedTemplate.affinity);
