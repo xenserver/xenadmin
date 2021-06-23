@@ -183,11 +183,6 @@ namespace XenAdmin.Wlb
             return mode;
         }
 
-        public static string GetTaskExecuteTime(DateTime TaskExecuteTime)
-        {
-            return HelpersGUI.DateTimeToString(TaskExecuteTime, Messages.DATEFORMAT_HM, true);
-        }
-
 
         /// <summary>
         /// Returns the offset minutes between Utc and local time

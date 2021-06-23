@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
@@ -55,57 +54,34 @@ namespace XenAdmin.Actions.Wlb
             try
             {
                 log.Debug("Retrieving Workload Balancing configuration for pool " + Pool.Name());
-                this.WlbConfiguration = XenAPI.Pool.retrieve_wlb_configuration(this.Session);
+                WlbConfiguration = Pool.retrieve_wlb_configuration(this.Session);
 
-                if (this.WlbConfiguration.Count == 0)
+                if (WlbConfiguration.Count == 0)
                 {
-                    //We didn;t get a configuration, so there is somethign wrong
                     log.Debug("Failure retrieving Workload Balancing configuration on pool " + Pool.Name());
-                    this.Description = Messages.FAILED;
-                    Failure f = new Failure(FriendlyErrorNames.WLB_NOT_INITIALIZED);
-                    throw f;
-
+                    Description = Messages.FAILED;
+                    throw new Failure(FriendlyErrorNames.WLB_NOT_INITIALIZED);
                 }
-                else
-                {
 
+                log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name());
+                Description = Messages.COMPLETED;
 
-                    log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name());
-                    this.Description = Messages.COMPLETED;
-
-                    //Retrieving the configuration was successful, so update the WlbServerState to report the current state
-                    //  This is here in case there was a previous communication error which has been fixed.
-                    if (Helpers.WlbEnabled(Pool.Connection))
-                    {
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.Enabled);
-                    }
-                    else
-                    {
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.Disabled);
-                    }
-                }
+                //Retrieving the configuration was successful, so update the WlbServerState to report the current state
+                //This is here in case there was a previous communication error which has been fixed.
+                var state = Helpers.WlbEnabled(Pool.Connection) ? WlbServerState.ServerState.Enabled : WlbServerState.ServerState.Disabled;
+                WlbServerState.SetState(Pool, state);
             }
-            catch(Exception ex)
+            catch (Failure ex)
             {
-                if (ex is Failure)
-                {
-                    // Retrieving the configuration error could also because WLB is not initialized
-                    if (((Failure)ex).Message == FriendlyErrorNames.WLB_NOT_INITIALIZED)
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.NotConfigured);
+                if (ex.Message == FriendlyErrorNames.WLB_NOT_INITIALIZED)
+                    WlbServerState.SetState(Pool, WlbServerState.ServerState.NotConfigured);
+                else
+                    WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, ex);
 
-                    else
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
-
-                    if (((Failure)ex).Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
-                    {
-                        Failure f = new Failure(new string[] { Messages.ResourceManager.GetString("WLB_ERROR_" + ((Failure)ex).ErrorDescription[1]) });
-                        throw (f);
-                    }
-                    else
-                    {
-                        throw (ex);
-                    }
-                }
+                if (ex.Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
+                    throw new Failure(Messages.ResourceManager.GetString("WLB_ERROR_" + ex.ErrorDescription[1]));
+                
+                throw;
             }
         }
     }

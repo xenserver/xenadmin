@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using XenAdmin.Controls.Wlb;
 using XenAdmin.Wlb;
 
 
@@ -134,7 +135,7 @@ namespace XenAdminTests.UnitTests.WlbTests
         public void TaskExecutionTime()
         {
             const string expectedTime = "11:34 AM";
-            string executionTime = WlbScheduledTask.GetTaskExecuteTime(new DateTime(2011, 11, 20, 11, 34, 01));
+            string executionTime = WlbOptModeScheduler.GetTaskExecuteTime(new DateTime(2011, 11, 20, 11, 34, 01));
             Assert.AreEqual(expectedTime, executionTime);
         }
 

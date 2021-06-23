@@ -58,7 +58,7 @@ namespace XenAdmin.Controls.Wlb
        
         #region Variables
 
-        public event CustomRefreshEventHandler OnChangeOK;
+        public event EventHandler OnChangeOK;
         public event DrillthroughEventHandler ReportDrilledThrough;
         public event EventHandler Close;
         public event EventHandler PoolConnectionLost;
@@ -497,7 +497,7 @@ namespace XenAdmin.Controls.Wlb
         /// Reset reportViewer after reportInfo is changed
         /// </summary>
         /// <param name="reportInfo">ReportInfo instance</param>
-        public void SynchReportViewer(WlbReportInfo reportInfo)
+        public void RefreshReportViewer(WlbReportInfo reportInfo)
         {
             if(reportInfo.ReportFile.StartsWith("pool_audit_history"))
             {
@@ -620,9 +620,6 @@ namespace XenAdmin.Controls.Wlb
                 // Objects dropdown does not need to be displayed
                 this.panelObjects.Visible = false;
             }
-
-
-            this.Visible = true;
         }
         #endregion
 
@@ -1200,10 +1197,6 @@ namespace XenAdmin.Controls.Wlb
         /// <param name="e"></param>
         private void ReportView_Load(object sender, EventArgs e)
         {
-            this.btnRunReport.Enabled = false;
-            this.btnLaterReport.Enabled = false;
-            this.btnSubscribe.Enabled = false;
-
             this.hostComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             // Hide the toolbar until a report is executed
