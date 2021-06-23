@@ -1099,7 +1099,7 @@ namespace XenAdmin.TabPages
         {
             if (xenObject is Host host && Helpers.StockholmOrGreater(host) && host.certificates != null)
             {
-                var certificates = host.certificates.Select(c => host.Connection.Resolve(c)).Where(c => c != null).ToList();
+                var certificates = host.certificates.Select(c => host.Connection.Resolve(c)).Where(c => c != null).OrderBy(c => c.type).ToList();
 
                 foreach (var certificate in certificates)
                 {
@@ -1120,7 +1120,7 @@ namespace XenAdmin.TabPages
 
             if (xenObject is Pool pool && Helpers.PostStockholm(pool.Connection))
             {
-                var certificates = pool.Connection.Cache.Certificates.Where(c => c != null && c.type == certificate_type.ca).ToList();
+                var certificates = pool.Connection.Cache.Certificates.Where(c => c != null && c.type == certificate_type.ca).OrderBy(c => c.name).ToList();
 
                 foreach (var certificate in certificates)
                 {
