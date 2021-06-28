@@ -29,27 +29,24 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAPI;
 
+
 namespace XenAdmin.Actions.Wlb
 {
-    public class WlbRetrieveRecommendationAction : AsyncAction
+    public class WlbRetrieveRecommendationsAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public Dictionary<XenRef<VM>, string[]> WLBOptPoolRecommendations = new Dictionary<XenRef<VM>, string[]>();
+        public Dictionary<XenRef<VM>, string[]> Recommendations { get; private set; } = new Dictionary<XenRef<VM>, string[]>();
 
-        public WlbRetrieveRecommendationAction(Pool pool)
+        public WlbRetrieveRecommendationsAction(Pool pool)
             : base(pool.Connection, string.Format(Messages.WLB_RETRIEVING_RECOMMENDATIONS, pool.Name()), true)
         {
-            if (pool == null)
-                throw new ArgumentNullException("pool");
-
-            this.Pool = pool;
+            Pool = pool;
 
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add("pool.retrieve_wlb_recommendations");
@@ -61,33 +58,26 @@ namespace XenAdmin.Actions.Wlb
             try
             {
                 log.DebugFormat("Retrieving recommendations for pool {0}", Pool.Name());
-                this.WLBOptPoolRecommendations = Pool.retrieve_wlb_recommendations(Session);
+                Recommendations = Pool.retrieve_wlb_recommendations(Session);
                 log.DebugFormat("Success retrieving recommendations for pool {0}", Pool.Name());
 
                 //Retrieving the recommendations was successful, so update the WlbServerState to report the current state
-                //  This is here in case there was a previous communication error which has been fixed.
-                if (WlbServerState.GetState(Pool) == WlbServerState.ServerState.ConnectionError || WlbServerState.GetState(Pool) == WlbServerState.ServerState.Unknown)
+                //This is here in case there was a previous communication error which has been fixed.
+
+                var state = WlbServerState.GetState(Pool);
+
+                if (state == WlbServerState.ServerState.ConnectionError || state == WlbServerState.ServerState.Unknown)
                 {
-                    if (Helpers.WlbEnabled(Pool.Connection))
-                    {
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.Enabled);
-                    }
-                    else
-                    {
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.Disabled);
-                    }
+                    var newState = Helpers.WlbEnabled(Pool.Connection)
+                        ? WlbServerState.ServerState.Enabled
+                        : WlbServerState.ServerState.Disabled;
+                    WlbServerState.SetState(Pool, newState);
                 }
             }
-            catch (Exception ex)
+            catch (Failure f)
             {
-                if (ex is Failure)
-                {
-                    WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
-                }
-                log.Error(ex, ex);
+                WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, f);
             }
         }
-
-
     }
 }

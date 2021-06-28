@@ -41,6 +41,7 @@ using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Commands;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.Actions.Wlb;
 using XenCenterLib;
 
 namespace XenAdmin.Dialogs
@@ -52,7 +53,7 @@ namespace XenAdmin.Dialogs
 
         private readonly Host _host;
         private readonly Pool _pool;
-        private DelegatedAsyncAction vmErrorsAction;
+        private WlbEvacuateRecommendationsAction vmErrorsAction;
         private EvacuateHostAction hostAction;
         private ToStringWrapper<Host> hostSelection;
         private Dictionary<string, AsyncAction> solveActionsByVmUuid;
@@ -151,65 +152,14 @@ namespace XenAdmin.Dialogs
             
             saveVMsAction.RunAsync(GetSudoElevationResult());
 
-            vmErrorsAction = new DelegatedAsyncAction(connection, Messages.MAINTENANCE_MODE,
-                Messages.SCANNING_VMS, Messages.COMPLETED, delegate(Session session)
-                {
-                    var cantEvacuateReasons = new Dictionary<XenRef<VM>, string[]>();
-
-                    if (Helpers.WlbEnabled(_host.Connection))
-                    {
-                        try
-                        {
-                            cantEvacuateReasons = Host.retrieve_wlb_evacuate_recommendations(session, _host.opaque_ref);
-                        }
-                        catch (Exception ex)
-                        {
-                            log.Debug(ex.Message, ex);
-                        }
-                    }
-
-                    if (cantEvacuateReasons.Count == 0 || !ValidRecommendation(cantEvacuateReasons))
-                        cantEvacuateReasons = Host.get_vms_which_prevent_evacuation(session, _host.opaque_ref);
-
-                    return cantEvacuateReasons;
-                }, true);
-
+            vmErrorsAction = new WlbEvacuateRecommendationsAction(_host);
             vmErrorsAction.Completed += VmErrorsAction_Completed;
             vmErrorsAction.RunAsync(GetSudoElevationResult());
         }
 
-        private bool ValidRecommendation(Dictionary<XenRef<VM>, String[]> reasons)
-        {
-            bool valid = true;
-            List<Host> controlDomain = new List<Host>();
-
-            foreach (KeyValuePair<XenRef<VM>, String[]> kvp in reasons)
-            {
-                if ((this.connection.Resolve(kvp.Key)).is_control_domain)
-                {
-                    controlDomain.Add(this.connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]));
-                }
-            }
-
-            foreach (KeyValuePair<XenRef<VM>, String[]> kvp in reasons)
-            {
-                if (string.Compare(kvp.Value[0].Trim(), "wlb", true) == 0)
-                {
-                    Host toHost = this.connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]);
-                    if (!(this.connection.Resolve(kvp.Key)).is_control_domain && !toHost.IsLive() && !controlDomain.Contains(toHost))
-                    {
-                        valid = false;
-                        break;
-                    }
-                }
-            }
-
-            return valid;
-        }
-
         private void VmErrorsAction_Completed(ActionBase obj)
         {
-            if (!(obj is DelegatedAsyncAction action))
+            if (!(obj is WlbEvacuateRecommendationsAction action))
                 return;
 
             try
@@ -218,9 +168,7 @@ namespace XenAdmin.Dialogs
                 {
                     if (action.Succeeded)
                     {
-                        if (action.ResultObject is Dictionary<XenRef<VM>, string[]> cantEvacuateReasons)
-                            reasons = cantEvacuateReasons;
-
+                        reasons = action.CantEvacuateReasons;
                         tableLayoutPanelSpinner.Visible = false;
                         spinnerIcon1.StopSpinning();
                         PopulateVMs();

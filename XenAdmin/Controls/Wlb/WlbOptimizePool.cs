@@ -580,11 +580,11 @@ namespace XenAdmin.Controls.Wlb
                             this.applyButton.Text = Messages.WLB_OPT_OPTIMIZING;
                             EnableControls(false, false);
                         }
-                        else if (action == null || (action != null && action.GetType() != typeof(WlbRetrieveRecommendationAction)))
+                        else if (action as WlbRetrieveRecommendationsAction == null)
                         {
                             this.applyButton.Text = Messages.WLB_OPT_APPLY_RECOMMENDATIONS;
                             // retrieve recommendations, and load optimize pool listview properly
-                            WlbRetrieveRecommendationAction optAction = new WlbRetrieveRecommendationAction(_pool);
+                            var optAction = new WlbRetrieveRecommendationsAction(_pool);
                             optAction.Completed += this.OptRecRetrieveAction_Completed;
                             optAction.RunAsync();
                         }
@@ -623,10 +623,10 @@ namespace XenAdmin.Controls.Wlb
             {
                 action.Completed -= OptRecRetrieveAction_Completed;
 
-                if (action is WlbRetrieveRecommendationAction)
+                if (action is WlbRetrieveRecommendationsAction thisAction)
                 {
-                    WlbRetrieveRecommendationAction thisAction = (WlbRetrieveRecommendationAction)action;
-                    _recommendations = thisAction.WLBOptPoolRecommendations;
+                    _recommendations = thisAction.Recommendations;
+                    
                     if (_recommendations != null && IsGoodRecommendation(_recommendations) && _xenObject.Connection == action.Connection)
                     {
                         Program.Invoke(this, delegate()

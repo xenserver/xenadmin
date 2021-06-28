@@ -37,6 +37,7 @@ using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
+using XenAdmin.Actions.Wlb;
 using XenAdmin.Network;
 
 

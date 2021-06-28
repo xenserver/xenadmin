@@ -7840,9 +7840,6 @@ Size: {3}</value>
   <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
     <value>Japanese (Japan)</value>
   </data>
-  <data name="MAINTENANCE_MODE" xml:space="preserve">
-    <value>Maintenance Mode</value>
-  </data>
   <data name="MAINWINDOW_ADD_HOST" xml:space="preserve">
     <value>&amp;Add...</value>
   </data>
@@ -14439,11 +14436,14 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
   <data name="WLB_RETRIEVING_CONFIGURATION" xml:space="preserve">
     <value>Retrieving WLB Configuration</value>
   </data>
+  <data name="WLB_RETRIEVING_EVACUATE_RECOMMENDATIONS" xml:space="preserve">
+    <value>Retrieving WLB recommendations on VMs to migrate from server {0}</value>
+  </data>
   <data name="WLB_RETRIEVING_RECOMMENDATIONS" xml:space="preserve">
     <value>Retrieving WLB recommendations for pool {0}</value>
   </data>
   <data name="WLB_RETRIEVING_VM_RECOMMENDATIONS" xml:space="preserve">
-    <value>Retrieving WLB recommendations </value>
+    <value>Retrieving WLB recommendations</value>
   </data>
   <data name="WLB_SAVING_SETTINGS" xml:space="preserve">
     <value>Saving Workload Balancing settings</value>
