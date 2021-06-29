@@ -273,21 +273,6 @@ namespace XenAdmin.Core
             return o == null ? "" : o.Name();
         }
 
-        public static bool IsConnected(IXenConnection connection)
-        {
-            return (connection != null && connection.IsConnected);
-        }
-
-        public static bool IsConnected(Pool pool)
-        {
-            return (pool != null && IsConnected(pool.Connection));
-        }
-
-        public static bool IsConnected(Host host)
-        {
-            return (host != null && IsConnected(host.Connection));
-        }
-
         public static bool HasFullyConnectedSharedStorage(IXenConnection connection)
         {
             foreach (SR sr in connection.Cache.SRs)

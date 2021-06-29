@@ -30911,6 +30911,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on master, but not on this server. To create the pool, first enable certificate verification on the server..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on this server, but not on master. To create the pool, first enable certificate verification on master..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER_JOINER {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER_JOINER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on the pool, but not on this server. To add the server to the pool, first enable certificate verification on the server..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on this server, but not on the pool. To add the server to the pool, first enable certificate verification on the pool..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HA is enabled on the pool.
         /// </summary>
         public static string POOL_JOIN_FORBIDDEN_BY_HA {

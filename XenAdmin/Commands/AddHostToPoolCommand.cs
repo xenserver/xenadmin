@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
                 }
             }
 
-            if (!Helpers.IsConnected(_pool))
+            if (_pool == null || _pool.Connection == null || !_pool.Connection.IsConnected)
             {
                 string message = _hosts.Count == 1
                                      ? string.Format(Messages.ADD_HOST_TO_POOL_DISCONNECTED_POOL,
