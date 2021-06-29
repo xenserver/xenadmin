@@ -75,6 +75,10 @@ namespace XenAdmin.Core
             WrongNumberOfIpsCluster,
             WrongNumberOfIpsBond,
             NotConnected,
+            TlsVerificationOnlyOnPool,
+            TlsVerificationOnlyOnPoolJoiner,
+            TlsVerificationOnlyOnMaster,
+            TlsVerificationOnlyOnMasterJoiner
         }
 
         // The order of if's in CanJoinPool() determines which reason we display if there is more than one.
@@ -92,11 +96,11 @@ namespace XenAdmin.Core
         /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
         public static Reason CanJoinPool(IXenConnection slaveConnection, IXenConnection masterConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSlaveAdConfig, int poolSizeIncrement = 1)
         {
-            if (!Helpers.IsConnected(slaveConnection))  // also implies slaveConnection != null
+            if (slaveConnection == null || !slaveConnection.IsConnected)
                 return Reason.NotConnected;
 
             Host slaveHost = Helpers.GetMaster(slaveConnection);
-            if (Connecting(slaveHost))  // also implies slaveHost != null
+            if (slaveHost == null)
                 return Reason.Connecting;
 
             if (LicenseRestriction(slaveHost))
@@ -105,11 +109,12 @@ namespace XenAdmin.Core
             if (IsAPool(slaveConnection))
                 return Reason.IsAPool;
 
-            if (!Helpers.IsConnected(masterConnection))  // also implies masterConnection != null
+            if (masterConnection == null || !masterConnection.IsConnected)
                 return Reason.MasterNotConnected;
 
             Host masterHost = Helpers.GetMaster(masterConnection);
-            if (Connecting(masterHost))  // also implies masterHost != null
+            
+            if (masterHost == null)
                 return Reason.MasterConnecting;
 
             if (WillBeMaster(slaveConnection, masterConnection))
@@ -173,7 +178,17 @@ namespace XenAdmin.Core
                 return Reason.HasClusteringEnabled;
 
             if (!HasIpForClusterNetwork(masterConnection, slaveHost, out var clusterHostInBond))
-                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;    
+                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;
+
+            var masterPool = Helpers.GetPool(masterConnection);
+            var masterPoolOfOne = Helpers.GetPoolOfOne(masterConnection);
+            var slavePoolOfOne = Helpers.GetPoolOfOne(slaveConnection);
+
+            if (masterPoolOfOne.tls_verification_enabled && !slavePoolOfOne.tls_verification_enabled)
+                return masterPool == null ? Reason.TlsVerificationOnlyOnMaster : Reason.TlsVerificationOnlyOnPool;
+            
+            if (!masterPoolOfOne.tls_verification_enabled && slavePoolOfOne.tls_verification_enabled)
+                return masterPool == null ? Reason.TlsVerificationOnlyOnMasterJoiner : Reason.TlsVerificationOnlyOnPoolJoiner;
 
             return Reason.Allowed;
         }
@@ -242,6 +257,14 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_IP_COUNT_CLUSTER;
                 case Reason.WrongNumberOfIpsBond:
                     return Messages.NEWPOOL_IP_COUNT_BOND;
+                case Reason.TlsVerificationOnlyOnPool:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL;
+                case Reason.TlsVerificationOnlyOnPoolJoiner:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER;
+                case Reason.TlsVerificationOnlyOnMaster:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER;
+                case Reason.TlsVerificationOnlyOnMasterJoiner:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER_JOINER;
                 default:
                     System.Diagnostics.Trace.Assert(false, "Unknown reason");
                     return "";
@@ -273,11 +296,6 @@ namespace XenAdmin.Core
                     return true;
             }
             return false;
-        }
-
-        private static bool Connecting(Host host)
-        {
-            return host == null;
         }
 
         private static bool IsAPool(IXenConnection connection)
