@@ -53,7 +53,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public bool Selected;
         public List<DataPoint> CurrentlyDisplayed = new List<DataPoint>();
         public IXenObject XenObject;
-        public string Uuid;
+        public readonly string Id;
         private bool _hide;
         private bool _deselected;
 
@@ -110,20 +110,20 @@ namespace XenAdmin.Controls.CustomDataGraph
         
         public DataRange CustomYRange;
 
-        private DataSet(string uuid, IXenObject xo, bool show, string settype)
+        private DataSet(string id, IXenObject xo, bool show, string settype)
         {
             XenObject = xo;
             _hide = !show;
-            Uuid = uuid;
+            Id = id;
             TypeString = settype;
             Name = Helpers.GetFriendlyDataSourceName(settype, XenObject);
         }
 
         #region Static methods
 
-        public static DataSet Create(string uuid, IXenObject xo, bool show, string settype)
+        public static DataSet Create(string id, IXenObject xo, bool show, string settype)
         {
-            var dataSet = new DataSet(uuid, xo, show, settype);
+            var dataSet = new DataSet(id, xo, show, settype);
             if(settype == "xapi_open_fds" || settype == "pool_task_count" || settype == "pool_session_count")
             {
                 dataSet.NeverShow = true;
@@ -684,14 +684,14 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             DataSet other = (DataSet)obj;
 
-            return Uuid == other.Uuid;
+            return Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            if (string.IsNullOrEmpty(Uuid))
+            if (string.IsNullOrEmpty(Id))
                 return base.GetHashCode();
-            return Uuid.GetHashCode();
+            return Id.GetHashCode();
         }
 
         internal void InsertPointCollection(List<DataPoint> list)
@@ -791,7 +791,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public int CompareTo(DataSet other)
         {
-            if (Uuid == other.Uuid)
+            if (Id == other.Id)
                 return 0;
 
             int comp = DisplayArea.CompareTo(other.DisplayArea);

@@ -80,7 +80,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             
             lock (Palette.PaletteLock)
             {
-                using (var thickPen = Palette.CreatePen(item.Sets[ArchiveInterval.FiveSecond].Uuid, Palette.PEN_THICKNESS_THICK))
+                using (var thickPen = Palette.CreatePen(item.Sets[ArchiveInterval.FiveSecond].Id, Palette.PEN_THICKNESS_THICK))
                 {
                     e.Graphics.DrawLine(thickPen,
                         new Point(e.Bounds.Left + 2, e.Bounds.Top + e.Bounds.Height / 2),
@@ -116,7 +116,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 var wrapper = new DataSetCollectionWrapper();
 
-                if (!DataSourceUUIDsToShow.Contains(fivesecond.Uuid))
+                if (!DataSourceUUIDsToShow.Contains(fivesecond.Id))
                     continue;
 
                 wrapper.Sets.Add(ArchiveInterval.FiveSecond, fivesecond);
@@ -124,7 +124,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 foreach (var interval in intervals)
                 {
-                    var found = archives[interval].Sets.FirstOrDefault(s => s.Uuid == fivesecond.Uuid);
+                    var found = archives[interval].Sets.FirstOrDefault(s => s.Id == fivesecond.Id);
                     if (found != null)
                         wrapper.Sets.Add(interval, found);
                 }
@@ -263,15 +263,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public void SelectDataSet(DataSet set)
         {
-            SelectedItem = SelectWrapperFromUuid(set.Uuid);
-        }
-
-        public DataSetCollectionWrapper SelectWrapperFromUuid(string uuid)
-        {
-            return CurrentKeys.Find(new Predicate<DataSetCollectionWrapper>(delegate(DataSetCollectionWrapper item)
-            {
-                return item.Uuid == uuid;
-            }));
+            SelectedItem = CurrentKeys.Find(item => item.Id == set.Id);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -346,14 +338,14 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         }
 
-        public string Uuid
+        public string Id
         {
             get
             {
                 if (!Sets.ContainsKey(ArchiveInterval.FiveSecond))
                     return base.ToString();
 
-                return Sets[ArchiveInterval.FiveSecond].Uuid;
+                return Sets[ArchiveInterval.FiveSecond].Id;
             }
         }
 
@@ -367,7 +359,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public bool Equals(DataSetCollectionWrapper other)
         {
-            return Uuid.Equals(other.Uuid);
+            return Id.Equals(other?.Id);
         }
 
         public int CompareTo(DataSetCollectionWrapper other)

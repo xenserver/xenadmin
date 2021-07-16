@@ -479,7 +479,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             foreach (DataSet set in ScrollWideArchive.Sets.ToArray())
             {
-                if (!set.Draw || !DisplayedUuids.Contains(set.Uuid))
+                if (!set.Draw || !DisplayedUuids.Contains(set.Id))
                     continue;
 
                 List<DataPoint> todraw;
@@ -520,12 +520,12 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             foreach (DataSet set in ScrollWideArchive.Sets.ToArray())
             {
-                if (!set.Draw || !DisplayedUuids.Contains(set.Uuid))
+                if (!set.Draw || !DisplayedUuids.Contains(set.Id))
                     continue;
 
                 lock (Palette.PaletteLock)
                 {
-                    using (var normalPen = Palette.CreatePen(set.Uuid, Palette.PEN_THICKNESS_NORMAL))
+                    using (var normalPen = Palette.CreatePen(set.Id, Palette.PEN_THICKNESS_NORMAL))
                     {
                         LineRenderer.Render(paintEventArgs.Graphics, ScrollViewRectangle, everything, set.CustomYRange, normalPen, null, set.CurrentlyDisplayed, false);
                     }

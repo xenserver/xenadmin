@@ -151,7 +151,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (!int.TryParse(gui_config[key], out argb))
                 return;
 
-            SetCustomColor(set.Uuid, Color.FromArgb(argb));
+            SetCustomColor(set.Id, Color.FromArgb(argb));
         }
 
         public static string GetColorKey(string ds_name, IXenObject xo)

@@ -280,7 +280,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             // Refresh all sets
             foreach (DataSet set in DataPlotNav.CurrentArchive.Sets.ToArray())
             {
-                if (!set.Draw || !DataKey.DataSourceUUIDsToShow.Contains(set.Uuid))
+                if (!set.Draw || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
                     continue;
 
                 List<DataPoint> todraw;
@@ -363,16 +363,16 @@ namespace XenAdmin.Controls.CustomDataGraph
             Array.Reverse(sets_to_show);
             foreach (DataSet set in sets_to_show)
             {
-                if (!set.Draw || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Uuid))
+                if (!set.Draw || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
                     continue;
 
                 lock (Palette.PaletteLock)
                 {
-                    using (var thickPen = Palette.CreatePen(set.Uuid, Palette.PEN_THICKNESS_THICK))
+                    using (var thickPen = Palette.CreatePen(set.Id, Palette.PEN_THICKNESS_THICK))
                     {
-                        using (var normalPen = Palette.CreatePen(set.Uuid, Palette.PEN_THICKNESS_NORMAL))
+                        using (var normalPen = Palette.CreatePen(set.Id, Palette.PEN_THICKNESS_NORMAL))
                         {
-                            using (var shadowBrush = Palette.CreateBrush(set.Uuid))
+                            using (var shadowBrush = Palette.CreateBrush(set.Id))
                             {
                                 LineRenderer.Render(paintEventArgs.Graphics, SlightlySmaller, DataPlotNav.XRange, set.CustomYRange ?? SelectedYRange, set.Selected ? thickPen : normalPen, shadowBrush, set.CurrentlyDisplayed, true);
                             }
@@ -533,7 +533,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 foreach (DataSet set in DataPlotNav.CurrentArchive.Sets.ToArray())
                 {
-                    if (!set.Draw || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Uuid))
+                    if (!set.Draw || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
                         continue;
                     if (set.OnMouseClick(new MouseActionArgs(e.Location, GraphRectangle(), DataPlotNav.XRange, SelectedYRange)))
                     {

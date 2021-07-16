@@ -68,7 +68,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             set.Points.Sort();
 
-            var other = Sets.FirstOrDefault(s => s.Uuid == set.Uuid);
+            var other = Sets.FirstOrDefault(s => s.Id == set.Id);
 
             if (other == null)
             {
@@ -110,7 +110,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             foreach (DataSet set in SetsAdded)
             {
                 Palette.LoadSetColor(set);
-                DataSet copy = DataSet.Create(set.Uuid, set.XenObject, set.Show, set.TypeString);
+                DataSet copy = DataSet.Create(set.Id, set.XenObject, set.Show, set.TypeString);
                 foreach (DataPoint p in set.Points)
                     copy.AddPoint(new DataPoint(p.X,p.Y));
 
